@@ -6,7 +6,7 @@ struct test_def {
     void (*fn)(void);
     void (*fn_tear_down)(void);
     char *parent;
-    int is_simple;
+    int is_explicit;
 };
 typedef struct test_def test_def_t;
 
@@ -14,7 +14,7 @@ typedef struct test_test test_test_t;
 struct test_test {
     int id;
     const char *name;
-    int is_simple;
+    int is_explicit;
     void (*test_fn)(void);
     void (*test_fn_tear_down)(void);
 
@@ -32,7 +32,7 @@ extern const char *TEST_TASK;
     void test_##NAME(void)
 #define TEST_TEAR_DOWN(NAME) \
     void test_tear_down_##NAME(void)
-#define TEST_SIMPLE(NAME) \
+#define TEST_EXPLICIT(NAME) \
     void test_##NAME(void)
 
 #endif /* __CPDDL_TEST_H__ */

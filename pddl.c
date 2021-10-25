@@ -83,3 +83,4 @@ TEST(pddl_noce_clone, pddl_noce)
     pddlPrintDebug(&pddl, stdout);
     pddlFree(&pddl);
 }
+

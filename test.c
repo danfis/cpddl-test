@@ -204,7 +204,7 @@ static void runTask(const task_t *task)
     TEST_TASK = task->task;
     if (!task->found_run){
         for (int i = 0; i < tests_size; ++i){
-            if (tests[i].parent == NULL && !tests[i].is_simple)
+            if (tests[i].parent == NULL && !tests[i].is_explicit)
                 runTestTree(tests + i, 0, task->test_ignore);
         }
 
@@ -245,7 +245,7 @@ static void buildTestTree(void)
     for (int ti = 0; ti < test_set_size; ++ti){
         tests[ti].id = ti;
         tests[ti].name = test_set[ti].name;
-        tests[ti].is_simple = test_set[ti].is_simple;
+        tests[ti].is_explicit = test_set[ti].is_explicit;
         tests[ti].test_fn = test_set[ti].fn;
         tests[ti].test_fn_tear_down = test_set[ti].fn_tear_down;
         tests[ti].child = malloc(sizeof(test_test_t *) * tests_size);
@@ -271,18 +271,6 @@ static void freeTestTree(void)
 
 static void readTasks(void)
 {
-    tasks_alloc = 8;
-    tasks = malloc(sizeof(task_t) * tasks_alloc);
-    task_t *task = tasks + tasks_size++;
-    task->task = strdup("_");
-    task->test_run = calloc(tests_size, sizeof(int));
-    task->test_ignore = calloc(tests_size, sizeof(int));
-    task->found_run = 1;
-    for (int i = 0; i < tests_size; ++i){
-        if (tests[i].is_simple && tests[i].parent == NULL)
-            task->test_run[i] = 1;
-    }
-
     size_t linesize = 0;
     char *line = NULL;
     ssize_t nread;
@@ -303,16 +291,23 @@ static void readTasks(void)
         task->test_run = calloc(tests_size, sizeof(int));
         task->test_ignore = calloc(tests_size, sizeof(int));
         task->found_run = 0;
+        for (int i = 0; i < tests_size; ++i){
+            if (tests[i].is_explicit && tests[i].parent == NULL)
+                task->test_ignore[i] = 1;
+        }
         char *cur;
         while ((cur = strsep(&next, " \n\t,;")) != NULL){
             if (cur[0] == '!'){
                 for (int i = 0; i < tests_size; ++i){
-                    if (strcmp(cur + 1, tests[i].name) == 0)
+                    if (strcmp(cur + 1, tests[i].name) == 0){
                         task->test_ignore[i] = 1;
+                        task->test_run[i] = 0;
+                    }
                 }
             }else{
                 for (int i = 0; i < tests_size; ++i){
                     if (strcmp(cur, tests[i].name) == 0){
+                        task->test_ignore[i] = 0;
                         task->test_run[i] = 1;
                         task->found_run = 1;
                     }

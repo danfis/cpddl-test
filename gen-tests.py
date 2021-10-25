@@ -8,7 +8,7 @@ Test = {}
 
 pat_test = re.compile(r'^.*TEST\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+)\).*$')
 pat_test_tear_down = re.compile(r'^.*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
-pat_test_simple = re.compile(r'^.*TEST_SIMPLE\(([a-zA-Z0-9_]+) *\).*$')
+pat_test_explicit = re.compile(r'^.*TEST_EXPLICIT\(([a-zA-Z0-9_]+) *\).*$')
 def parseFile(filename):
     global Test
     with open(filename, 'r') as fin:
@@ -19,7 +19,7 @@ def parseFile(filename):
                 if name not in Test:
                     Test[name] = { 'dep' : None,
                                    'tear-down' : False,
-                                   'simple' : False }
+                                   'explicit' : False }
                 Test[name]['dep'] = match.group(2)
 
             match = pat_test_tear_down.match(line)
@@ -28,17 +28,17 @@ def parseFile(filename):
                 if name not in Test:
                     Test[name] = { 'dep' : None,
                                    'tear-down' : False,
-                                   'simple' : False }
+                                   'explicit' : False }
                 Test[name]['tear-down'] = True
 
-            match = pat_test_simple.match(line)
+            match = pat_test_explicit.match(line)
             if match is not None:
                 name = match.group(1)
                 if name not in Test:
                     Test[name] = { 'dep' : None,
                                    'tear-down' : False,
-                                   'simple' : False }
-                Test[name]['simple'] = True
+                                   'explicit' : False }
+                Test[name]['explicit'] = True
 
 
 
@@ -65,7 +65,7 @@ def genDefs():
         else:
             print(', "_"', end = '')
 
-        if Test[key]['simple']:
+        if Test[key]['explicit']:
             print(', 1', end = '')
         else:
             print(', 0', end = '')
