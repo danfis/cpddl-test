@@ -30,6 +30,7 @@ TESTS += pddl
 #TESTS += strips_ground
 #TESTS += strips_ground_factored
 TESTS += lifted_mgroup
+TESTS += strips
 #TESTS += lifted_mgroup_monotonicity
 #TESTS += strips_ground_lifted_mgroup
 #TESTS += irrelevance
