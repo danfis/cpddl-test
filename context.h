@@ -4,12 +4,13 @@
 #include <pddl/pddl.h>
 
 struct context {
+    bor_err_t err;
     pddl_files_t files;
     pddl_t pddl;
     pddl_strips_t strips;
 };
 typedef struct context context_t;
 
-extern context_t context;
+extern context_t C;
 
 #endif /* __TEST_CONTEXT_H__ */

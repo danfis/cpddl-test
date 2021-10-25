@@ -2,13 +2,13 @@
 #include "test.h"
 #include "context.h"
 
-context_t context = { 0 };
+context_t C = { 0 };
 
 TEST(root, _)
 {
-    bor_err_t err = BOR_ERR_INIT;
-    if (pddlFiles(&context.files, "../test/pddl-data/", TEST_TASK, &err) != 0){
-        borErrPrint(&err, 1, stderr);
+    borErrInit(&C.err);
+    if (pddlFiles(&C.files, "../test/pddl-data/", TEST_TASK, &C.err) != 0){
+        borErrPrint(&C.err, 1, stderr);
         assert(0);
     }
 }

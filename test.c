@@ -133,9 +133,9 @@ static void runTestTree(test_test_t *root,
         }
 
         for (int i = 0; i < root->child_size; ++i){
-            if (test_ignore[i])
-                continue;
             test_test_t *next = root->child[i];
+            if (test_ignore[next->id])
+                continue;
             runTestTree(next, depth + 1, test_ignore);
         }
 
