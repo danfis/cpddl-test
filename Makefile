@@ -67,8 +67,8 @@ main.c: $(OBJS)
 
 test: test.c test.in.c ../libpddl.a $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $< $(OBJS) $(LDFLAGS)
-test.in.c: gen-tests.sh $(TESTS_C)
-	bash gen-tests.sh $(TESTS_C) >$@
+test.in.c: gen-tests.py $(TESTS_C)
+	python3 gen-tests.py $(TESTS_C) >$@
 test-pddl: test-pddl.c cu/libcu.a ../libpddl.a
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 test-strips: test-strips.c cu/libcu.a ../libpddl.a

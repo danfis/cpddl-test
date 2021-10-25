@@ -67,10 +67,6 @@ TEST(pddl_no_normalize, root)
     pddlFree(&pddl);
 }
 
-TEST_TEAR_DOWN(pddl_no_normalize)
-{
-}
-
 
 TEST(pddl_clone, pddl)
 {
@@ -80,18 +76,10 @@ TEST(pddl_clone, pddl)
     pddlFree(&pddl);
 }
 
-TEST_TEAR_DOWN(pddl_clone)
-{
-}
-
 TEST(pddl_noce_clone, pddl_noce)
 {
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
     pddlPrintDebug(&pddl, stdout);
     pddlFree(&pddl);
-}
-
-TEST_TEAR_DOWN(pddl_noce_clone)
-{
 }
