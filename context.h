@@ -11,6 +11,7 @@ struct context {
     pddl_strips_t strips;
     pddl_mgroups_t mg;
     pddl_strips_sym_t strips_sym;
+    pddl_mutex_pairs_t mutex;
 };
 typedef struct context context_t;
 
