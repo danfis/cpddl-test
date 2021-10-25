@@ -7,6 +7,7 @@ struct context {
     bor_err_t err;
     pddl_files_t files;
     pddl_t pddl;
+    pddl_lifted_mgroups_t lmg;
     pddl_strips_t strips;
 };
 typedef struct context context_t;
