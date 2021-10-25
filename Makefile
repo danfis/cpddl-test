@@ -48,7 +48,7 @@ TESTS += pddl
 #TESTS += fdr_app_op
 #TESTS += admissible
 #TESTS += tnf
-#TESTS += clique
+TESTS += clique
 #TESTS += trans_system
 #TESTS += op_mutex_infer
 #ifeq '$(USE_CUDD)' 'yes'
