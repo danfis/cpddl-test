@@ -46,12 +46,12 @@ TEST_EXPLICIT(clique_rand)
         pddlSetISetInit(&sset2);
         pddlCliqueFindMaximalCliquer(&g, addClique, &sset2);
         int size2 = pddlSetISetSize(&sset2);
-        assertTrue(size == size2);
+        assert(size == size2);
         for (int i = 0; i < size && i < size2; ++i){
             const bor_iset_t *clique = pddlSetISetGet(&sset, i);
             const bor_iset_t *clique2 = pddlSetISetGet(&sset2, i);
-            assertTrue(pddlSetISetFind(&sset2, clique) >= 0);
-            assertTrue(pddlSetISetFind(&sset, clique2) >= 0);
+            assert(pddlSetISetFind(&sset2, clique) >= 0);
+            assert(pddlSetISetFind(&sset, clique2) >= 0);
         }
 
         pddlSetISetFree(&sset2);
