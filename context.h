@@ -9,6 +9,8 @@ struct context {
     pddl_t pddl;
     pddl_lifted_mgroups_t lmg;
     pddl_strips_t strips;
+    pddl_mgroups_t mg;
+    pddl_strips_sym_t strips_sym;
 };
 typedef struct context context_t;
 
