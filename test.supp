@@ -1,0 +1,50 @@
+{
+   t1
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:readTasks
+   fun:main
+}
+{
+   t2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:readTasks
+   fun:main
+}
+{
+   t3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:readTasks
+   fun:main
+}
+{
+   t4
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:buildTestTree
+   fun:main
+}
+{
+   t5
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:buildTestTree
+   fun:main
+}
+{
+   t6
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:realloc
+   fun:readTasks
+   fun:main
+}
