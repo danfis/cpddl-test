@@ -12,6 +12,9 @@ struct context {
     pddl_mgroups_t mg;
     pddl_strips_sym_t strips_sym;
     pddl_mutex_pairs_t mutex;
+    bor_iset_t mutex_unreachable_op;
+    bor_iset_t mutex_unreachable_fact;
+    pddl_mutex_pairs_t mutex3;
 };
 typedef struct context context_t;
 

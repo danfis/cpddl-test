@@ -4,12 +4,13 @@
 
 TEST(h2, strips_noce)
 {
-    BOR_ISET(unreachable_fact);
-    BOR_ISET(unreachable_op);
     pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+    borISetInit(&C.mutex_unreachable_op);
+    borISetInit(&C.mutex_unreachable_fact);
 
     //borErrInfoEnable(&err, stdout);
-    int ret = pddlH2(&C.strips, &C.mutex, &unreachable_fact, &unreachable_op,
+    int ret = pddlH2(&C.strips, &C.mutex,
+                     &C.mutex_unreachable_fact, &C.mutex_unreachable_op,
                      0., &C.err);
     assert(ret == 0);
 
@@ -17,28 +18,28 @@ TEST(h2, strips_noce)
         fprintf(stdout, "Mutex pairs: %lu\n",
                 (unsigned long)C.mutex.num_mutex_pairs);
 
-    if (borISetSize(&unreachable_fact) > 0){
+    if (borISetSize(&C.mutex_unreachable_fact) > 0){
         fprintf(stdout, "Unreachable facts [%d/%d]:\n",
-                borISetSize(&unreachable_fact), C.strips.fact.fact_size);
+                borISetSize(&C.mutex_unreachable_fact), C.strips.fact.fact_size);
         int fact;
-        BOR_ISET_FOR_EACH(&unreachable_fact, fact){
+        BOR_ISET_FOR_EACH(&C.mutex_unreachable_fact, fact){
             fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
         }
     }
-    if (borISetSize(&unreachable_op) > 0){
+    if (borISetSize(&C.mutex_unreachable_op) > 0){
         fprintf(stdout, "Unreachable ops [%d/%d]:\n",
-                borISetSize(&unreachable_op), C.strips.op.op_size);
+                borISetSize(&C.mutex_unreachable_op), C.strips.op.op_size);
         int op;
-        BOR_ISET_FOR_EACH(&unreachable_op, op)
+        BOR_ISET_FOR_EACH(&C.mutex_unreachable_op, op)
             fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
     }
-    borISetFree(&unreachable_fact);
-    borISetFree(&unreachable_op);
 }
 
 TEST_TEAR_DOWN(h2)
 {
     pddlMutexPairsFree(&C.mutex);
+    borISetFree(&C.mutex_unreachable_op);
+    borISetFree(&C.mutex_unreachable_fact);
 }
 
 TEST(h2mgroup, h2)
