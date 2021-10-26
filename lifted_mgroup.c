@@ -35,7 +35,7 @@ static int actionHasAddEff(const pddl_action_t *a, int pred)
     return 0;
 }
 
-TEST(lifted_mgroup_tests_prove_transport, lifted_mgroup_tests)
+TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
 {
     const char *domain_fn = "pddl-data/ipc-2014/seq-opt/transport/domain.pddl";
     const char *problem_fn = "pddl-data/ipc-2014/seq-opt/transport/p01.pddl";
@@ -160,7 +160,7 @@ TEST(lifted_mgroup_tests_prove_transport, lifted_mgroup_tests)
     pddlFree(&pddl);
 }
 
-TEST(lifted_mgroup_tests_prove_tidybot, lifted_mgroup_tests)
+TEST(lifted_mgroup_tests_tidybot, lifted_mgroup_tests)
 {
     const char *domain_fn = "pddl-data/ipc-2014/seq-opt/tidybot/domain.pddl";
     const char *problem_fn = "pddl-data/ipc-2014/seq-opt/tidybot/p01.pddl";
@@ -270,7 +270,7 @@ TEST(lifted_mgroup_tests_prove_tidybot, lifted_mgroup_tests)
     pddlFree(&pddl);
 }
 
-TEST(lifted_mgroup_tests_prove_citycar, lifted_mgroup_tests)
+TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
 {
     const char *domain_fn = "pddl-data/ipc-2014/seq-opt/citycar/domain.pddl";
     const char *problem_fn = "pddl-data/ipc-2014/seq-opt/citycar/p2-2-2-2-1.pddl";
@@ -355,7 +355,7 @@ TEST(lifted_mgroup_tests_prove_citycar, lifted_mgroup_tests)
     pddlFree(&pddl);
 }
 
-TEST(lifted_mgroup_tests_prove_organic_synthesis, lifted_mgroup_tests)
+TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
 {
     const char *domain_fn
             = "pddl-data/ipc-2018/seq-opt/organic-synthesis/domain-p01.pddl";
@@ -453,7 +453,7 @@ TEST(lifted_mgroup_tests_prove_organic_synthesis, lifted_mgroup_tests)
     pddlFree(&pddl);
 }
 
-TEST(lifted_mgroup_tests_prove_barman, lifted_mgroup_tests)
+TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
 {
     pddl_files_t files;
     bor_err_t err = BOR_ERR_INIT;

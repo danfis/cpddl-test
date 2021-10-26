@@ -10,22 +10,6 @@ struct test_def {
 };
 typedef struct test_def test_def_t;
 
-typedef struct test_test test_test_t;
-struct test_test {
-    int id;
-    const char *name;
-    int is_explicit;
-    void (*test_fn)(void);
-    void (*test_fn_tear_down)(void);
-
-    test_test_t *parent;
-    test_test_t **child;
-    int child_size;
-
-    int num_failed;
-    int num_succeeded;
-};
-
 extern const char *TEST_TASK;
 
 #define TEST(NAME, PARENT) \

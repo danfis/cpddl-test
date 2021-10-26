@@ -11,6 +11,23 @@
 
 const char *TEST_TASK = NULL;
 
+typedef struct test_test test_test_t;
+struct test_test {
+    int id;
+    const char *name;
+    int is_explicit;
+    void (*test_fn)(void);
+    void (*test_fn_tear_down)(void);
+
+    test_test_t *parent;
+    test_test_t **child;
+    int child_size;
+
+    int num_failed;
+    int num_succeeded;
+    float time_sum;
+};
+
 struct task {
     char *task;
     int found_run;
@@ -26,6 +43,7 @@ static int tasks_alloc = 0;
 static test_test_t *tests;
 static int tests_size;
 static int *tests_stats;
+static float *tests_time_sum;
 static int num_tasks_succeeded = 0;
 static int num_tasks_failed = 0;
 
@@ -125,8 +143,10 @@ static void runTestTree(test_test_t *root,
             clock_gettime(CLOCK_MONOTONIC, &time_end);
             for (int i = 0; i < depth; ++i)
                 fprintf(stdout, "  ");
-            fprintf(stdout, "%s DONE [%.2fs]\n",
-                    root->name, timeDiffSeconds(&time_start, &time_end));
+            float elapsed = timeDiffSeconds(&time_start, &time_end);
+            tests_time_sum[root->id] += elapsed;
+            fprintf(stdout, "%s DONE [%.2fs / %.2fs]\n",
+                    root->name, elapsed, tests_time_sum[root->id]);
             fflush(stdout);
         }
 
@@ -223,6 +243,7 @@ static void runTask(const task_t *task)
         }else if (tests_stats[i] > 0){
             tests[i].num_succeeded += 1;
         }
+        tests[i].time_sum = tests_time_sum[i];
     }
     if (failed){
         num_tasks_failed += 1;
@@ -331,10 +352,10 @@ static void freeTasks(void)
         free(tasks);
 }
 
-static void printReportTestTree(test_test_t *t,
-                                int name_len,
-                                int succ_len,
-                                int fail_len)
+static void printReportTest(test_test_t *t,
+                            int name_len,
+                            int succ_len,
+                            int fail_len)
 {
     printf("%s", t->name);
     for (int i = strlen(t->name); i < name_len; ++i)
@@ -346,9 +367,10 @@ static void printReportTestTree(test_test_t *t,
     printf(" | ");
     printf("%*i", fail_len, t->num_failed);
 
+    printf(" | ");
+    printf("%7.2fs", t->time_sum);
+
     printf("\n");
-    for (int i = 0; i < t->child_size; ++i)
-        printReportTestTree(t->child[i], name_len, succ_len, fail_len);
 }
 
 static void printReport(void)
@@ -394,19 +416,18 @@ static void printReport(void)
     printf("\n");
     for (int i = 0; i < name_len; ++i)
         printf(" ");
-    printf(" | succ | fail\n");
+    printf(" | succ | fail | time\n");
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
         printf("-");
-    printf("-------\n");
+    printf("------------------\n");
 
     for (int i = 0; i < tests_size; ++i){
-        if (tests[i].parent == NULL)
-            printReportTestTree(tests + i, name_len, succ_len, fail_len);
+        printReportTest(tests + i, name_len, succ_len, fail_len);
     }
 
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
         printf("-");
-    printf("-------\n");
+    printf("------------------\n");
     printf("tasks");
     for (int i = 5; i < name_len; ++i)
         printf(" ");
@@ -416,6 +437,7 @@ static void printReport(void)
 
     printf(" | ");
     printf("%*i", fail_len, num_tasks_failed);
+    printf(" | ");
     printf("\n");
 }
 
@@ -425,9 +447,11 @@ int main(int argc, char *argv[])
     readTasks();
 
     size_t shared_size = sizeof(int) * tests_size;
+    shared_size += sizeof(float) * tests_size;
     void *shared_mem = mmap(NULL, shared_size, PROT_WRITE | PROT_READ,
                             MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     tests_stats = shared_mem;
+    tests_time_sum = (float *)(tests_stats + tests_size);
 
     for (int i = 0; i < tasks_size; ++i)
         runTask(tasks + i);
