@@ -33,6 +33,7 @@ TESTS += sym
 TESTS += disambiguation
 TESTS += h1
 TESTS += h2
+TESTS += h3
 #TESTS += strips_ground
 #TESTS += strips_ground_factored
 #TESTS += lifted_mgroup_monotonicity

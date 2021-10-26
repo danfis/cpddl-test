@@ -46,6 +46,7 @@ static int *tests_stats;
 static float *tests_time_sum;
 static int num_tasks_succeeded = 0;
 static int num_tasks_failed = 0;
+static struct timespec g_time_start, g_time_end;
 
 static void freeTasks(void);
 static void freeTestTree(void);
@@ -174,6 +175,15 @@ static void runTestTree(test_test_t *root,
     }else{ // pid > 0
         int status;
         wait(&status);
+
+        char ret_fn[256];
+        fmtOutputFilename(TEST_TASK, root->name, "ret", ret_fn);
+        FILE *retout = fopen(ret_fn, "w");
+        if (retout == NULL){
+            perror("Opening .ret file failed");
+            exit(-1);
+        }
+
         if (!WIFEXITED(status)){ /* if child process ends up abnormaly */
             if (WIFSIGNALED(status)){
                 for (int i = 0; i < depth; ++i)
@@ -193,6 +203,7 @@ static void runTestTree(test_test_t *root,
             }
 
             tests_stats[root->id] = -1;
+            fprintf(retout, "1\n");
 
         }else{
             int exit_status = WEXITSTATUS(status);
@@ -209,7 +220,10 @@ static void runTestTree(test_test_t *root,
                 if (tests_stats[root->id] == 0)
                     tests_stats[root->id] = 1;
             }
+            fprintf(retout, "%d\n", exit_status);
         }
+
+        fclose(retout);
     }
 }
 
@@ -437,7 +451,7 @@ static void printReport(void)
 
     printf(" | ");
     printf("%*i", fail_len, num_tasks_failed);
-    printf(" | ");
+    printf(" | %7.2fs", timeDiffSeconds(&g_time_start, &g_time_end));
     printf("\n");
 }
 
@@ -453,8 +467,10 @@ int main(int argc, char *argv[])
     tests_stats = shared_mem;
     tests_time_sum = (float *)(tests_stats + tests_size);
 
+    clock_gettime(CLOCK_MONOTONIC, &g_time_start);
     for (int i = 0; i < tasks_size; ++i)
         runTask(tasks + i);
+    clock_gettime(CLOCK_MONOTONIC, &g_time_end);
 
     munmap(shared_mem, shared_size);
 
