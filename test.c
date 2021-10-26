@@ -424,6 +424,8 @@ static void printReport(void)
 {
     int name_len = 5;
     for (int i = 0; i < tests_size; ++i){
+        if (tests[i].num_succeeded == 0 && tests[i].num_failed == 0)
+            continue;
         if (strlen(tests[i].name) > name_len)
             name_len = strlen(tests[i].name);
     }
@@ -452,6 +454,8 @@ static void printReport(void)
     if (s > fail_len)
         fail_len = s;
     for (int i = 0; i < tests_size; ++i){
+        if (tests[i].num_succeeded == 0 && tests[i].num_failed == 0)
+            continue;
         int n = tests[i].num_failed;
         int s = 1;
         while ((n = n / 10))
@@ -469,6 +473,8 @@ static void printReport(void)
     printf("------------------\n");
 
     for (int i = 0; i < tests_size; ++i){
+        if (tests[i].num_succeeded == 0 && tests[i].num_failed == 0)
+            continue;
         printReportTest(tests + i, name_len, succ_len, fail_len);
     }
 
