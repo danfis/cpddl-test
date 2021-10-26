@@ -97,3 +97,29 @@ TEST_TEAR_DOWN(strips_sql)
 {
     pddlStripsFree(&C.strips);
 }
+
+TEST(strips_h2fwbw_pruned, h2fwbw)
+{
+    BOR_ISET(changed_op);
+    pddlStripsReduce(&C.strips, &C.mutex_unreachable_fact,
+                     &C.mutex_unreachable_op);
+    pddlMGroupsReduce(&C.mg, &C.mutex_unreachable_fact);
+    pddlMutexPairsReduce(&C.mutex, &C.mutex_unreachable_fact);
+    pddlStripsRemoveUselessDelEffs(&C.strips, &C.mutex, &changed_op, &C.err);
+
+    int op;
+    BOR_ISET_FOR_EACH(&changed_op, op)
+        printf("(%s)\n", C.strips.op.op[op]->name);
+    borISetFree(&changed_op);
+}
+
+TEST(mg_strips, strips_h2fwbw_pruned)
+{
+    pddl_mg_strips_t mg_strips;
+    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
+    //pddlStripsPrintDebug(&mg_strips.strips, stdout);
+    //fprintf(stdout, "\n");
+    pddlMGroupsPrint(&C.pddl, &mg_strips.strips, &mg_strips.mg, stdout);
+
+    pddlMGStripsFree(&mg_strips);
+}

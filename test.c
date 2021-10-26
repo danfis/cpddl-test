@@ -18,6 +18,7 @@ struct test_test {
     int is_explicit;
     void (*test_fn)(void);
     void (*test_fn_tear_down)(void);
+    int enabled;
 
     test_test_t *parent;
     test_test_t **child;
@@ -30,6 +31,7 @@ struct test_test {
 
 struct task {
     char *task;
+    int disabled;
     int found_run;
     int *test_run;
     int *test_ignore;
@@ -44,6 +46,7 @@ static test_test_t *tests;
 static int tests_size;
 static int *tests_stats;
 static float *tests_time_sum;
+static int tests_enabled = 0;
 static int num_tasks_succeeded = 0;
 static int num_tasks_failed = 0;
 static struct timespec g_time_start, g_time_end;
@@ -76,23 +79,21 @@ static void fmtOutputFilename(const char *task,
                               const char *suff,
                               char *filename)
 {
-    int size = sprintf(filename, "reg/tmp.%s.%s", task, test_name);
+    sprintf(filename, "reg/tmp.%s.%s.%s", task, test_name, suff);
     char *c = filename + 8;
     for (; *c != 0x0; ++c){
-        if ((*c < '0' || *c > '9')
-                && (*c < 'a' || *c > 'z')
-                && (*c < 'A' || *c > 'Z')
-                && *c != '.'){
-            *c = '_';
+        if (*c == '/'){
+            *c = '-';
         }
     }
-    sprintf(filename + size, ".%s", suff);
 }
 
 static void runTestTree(test_test_t *root,
                         int depth,
                         const int *test_ignore)
 {
+    if (tests_enabled && !root->enabled)
+        return;
 
     int pid = fork();
     if (pid < 0){
@@ -304,6 +305,22 @@ static void freeTestTree(void)
     free(tests);
 }
 
+static void enableTest(test_test_t *t)
+{
+    t->enabled = 1;
+    if (t->parent != NULL)
+        enableTest(t->parent);
+}
+
+static void filterTests(const char *name)
+{
+    tests_enabled = 1;
+    for (int i = 0; i < tests_size; ++i){
+        if (strcmp(tests[i].name, name) == 0)
+            enableTest(tests + i);
+    }
+}
+
 static void readTasks(void)
 {
     size_t linesize = 0;
@@ -364,6 +381,22 @@ static void freeTasks(void)
     }
     if (tasks != NULL)
         free(tasks);
+}
+
+static void filterTasksSubstr(const char *s)
+{
+    for (int i = 0; i < tasks_size; ++i){
+        if (strstr(tasks[i].task, s) == NULL)
+            tasks[i].disabled = 1;
+    }
+}
+
+static void filterTasks(const char *s)
+{
+    for (int i = 0; i < tasks_size; ++i){
+        if (strcmp(tasks[i].task, s) != 0)
+            tasks[i].disabled = 1;
+    }
 }
 
 static void printReportTest(test_test_t *t,
@@ -455,10 +488,36 @@ static void printReport(void)
     printf("\n");
 }
 
+static void usage(char *p)
+{
+    fprintf(stderr, "Usage: %s [-T task_substr] [-t test_name]\n", p);
+    exit(-1);
+}
+
 int main(int argc, char *argv[])
 {
     buildTestTree();
     readTasks();
+
+    int opt;
+    while ((opt = getopt(argc, argv, "T:S:t:")) != -1) {
+        switch (opt) {
+            case 'T':
+                filterTasksSubstr(optarg);
+                break;
+            case 'S':
+                filterTasks(optarg);
+                break;
+            case 't':
+                filterTests(optarg);
+                break;
+            default: /* '?' */
+                usage(argv[0]);
+        }
+    }
+    if (optind != argc)
+        usage(argv[0]);
+
 
     size_t shared_size = sizeof(int) * tests_size;
     shared_size += sizeof(float) * tests_size;
@@ -468,8 +527,10 @@ int main(int argc, char *argv[])
     tests_time_sum = (float *)(tests_stats + tests_size);
 
     clock_gettime(CLOCK_MONOTONIC, &g_time_start);
-    for (int i = 0; i < tasks_size; ++i)
-        runTask(tasks + i);
+    for (int i = 0; i < tasks_size; ++i){
+        if (!tasks[i].disabled)
+            runTask(tasks + i);
+    }
     clock_gettime(CLOCK_MONOTONIC, &g_time_end);
 
     munmap(shared_mem, shared_size);

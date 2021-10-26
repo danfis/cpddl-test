@@ -63,50 +63,49 @@ TEST(h2fwbw, ground_lifted_mgroup_noce)
     pddlH2(&C.strips, &mutex_fw, &unreachable_fact_fw, &unreachable_op_fw,
            0., &C.err);
 
-    pddl_mutex_pairs_t mutex;
-    pddlMutexPairsInitStrips(&mutex, &C.strips);
-
-    BOR_ISET(unreachable_fact);
-    BOR_ISET(unreachable_op);
+    pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+    borISetInit(&C.mutex_unreachable_fact);
+    borISetInit(&C.mutex_unreachable_op);
 
     //borErrInfoEnable(&err, stdout);
-    int ret = pddlH2FwBw(&C.strips, &C.mg, &mutex,
-                         &unreachable_fact, &unreachable_op, 0., &C.err);
+    int ret = pddlH2FwBw(&C.strips, &C.mg, &C.mutex,
+                         &C.mutex_unreachable_fact, &C.mutex_unreachable_op,
+                         0., &C.err);
     assert(ret == 0);
 
-    assert(borISetIsSubset(&unreachable_fact_fw, &unreachable_fact));
-    assert(borISetIsSubset(&unreachable_op_fw, &unreachable_op));
+    assert(borISetIsSubset(&unreachable_fact_fw, &C.mutex_unreachable_fact));
+    assert(borISetIsSubset(&unreachable_op_fw, &C.mutex_unreachable_op));
 
-    if (mutex.num_mutex_pairs - mutex_fw.num_mutex_pairs > 0){
+    if (C.mutex.num_mutex_pairs - mutex_fw.num_mutex_pairs > 0){
         unsigned long num_fw = 0;
         unsigned long num_bw = 0;
         unsigned long num = 0;
-        PDDL_MUTEX_PAIRS_FOR_EACH(&mutex, f1, f2){
+        PDDL_MUTEX_PAIRS_FOR_EACH(&C.mutex, f1, f2){
             if (f1 == f2)
                 continue;
             ++num;
-            if (pddlMutexPairsIsFwMutex(&mutex, f1, f2))
+            if (pddlMutexPairsIsFwMutex(&C.mutex, f1, f2))
                 ++num_fw;
-            if (pddlMutexPairsIsBwMutex(&mutex, f1, f2))
+            if (pddlMutexPairsIsBwMutex(&C.mutex, f1, f2))
                 ++num_bw;
         }
-        assert(num == mutex.num_mutex_pairs);
+        assert(num == C.mutex.num_mutex_pairs);
         fprintf(stdout, "Mutex pairs: %lu -> %lu, fw: %lu, bw: %lu\n",
                 (unsigned long)mutex_fw.num_mutex_pairs,
-                (unsigned long)mutex.num_mutex_pairs,
+                (unsigned long)C.mutex.num_mutex_pairs,
                 num_fw,
                 num_bw);
-        assert(num_fw + num_bw == mutex.num_mutex_pairs);
+        assert(num_fw + num_bw == C.mutex.num_mutex_pairs);
     }
 
-    PDDL_MUTEX_PAIRS_FOR_EACH(&mutex, f1, f2){
+    PDDL_MUTEX_PAIRS_FOR_EACH(&C.mutex, f1, f2){
         if (f1 == f2){
-            assert(borISetIn(f1, &unreachable_fact));
+            assert(borISetIn(f1, &C.mutex_unreachable_fact));
         }
     }
 
     BOR_ISET(rm);
-    borISetMinus2(&rm, &unreachable_fact, &unreachable_fact_fw);
+    borISetMinus2(&rm, &C.mutex_unreachable_fact, &unreachable_fact_fw);
     if (borISetSize(&rm) > 0){
         fprintf(stdout, "Unreachable facts [%d + %d/%d]:\n",
                 borISetSize(&unreachable_fact_fw),
@@ -117,7 +116,7 @@ TEST(h2fwbw, ground_lifted_mgroup_noce)
         }
     }
 
-    borISetMinus2(&rm, &unreachable_op, &unreachable_op_fw);
+    borISetMinus2(&rm, &C.mutex_unreachable_op, &unreachable_op_fw);
     if (borISetSize(&rm) > 0){
         fprintf(stdout, "Unreachable ops [%d + %d/%d]:\n",
                 borISetSize(&unreachable_op_fw),
@@ -129,32 +128,32 @@ TEST(h2fwbw, ground_lifted_mgroup_noce)
     borISetFree(&rm);
 
     pddl_mutex_pairs_t mutex2;
-    pddlMutexPairsInitCopy(&mutex2, &mutex);
-    PDDL_MUTEX_PAIRS_FOR_EACH(&mutex, f1, f2){
+    pddlMutexPairsInitCopy(&mutex2, &C.mutex);
+    PDDL_MUTEX_PAIRS_FOR_EACH(&C.mutex, f1, f2){
         assert(pddlMutexPairsIsMutex(&mutex2, f1, f2));
-        if (pddlMutexPairsIsFwMutex(&mutex, f1, f2)){
+        if (pddlMutexPairsIsFwMutex(&C.mutex, f1, f2)){
             assert(pddlMutexPairsIsFwMutex(&mutex2, f1, f2));
         }
-        if (pddlMutexPairsIsBwMutex(&mutex, f1, f2)){
+        if (pddlMutexPairsIsBwMutex(&C.mutex, f1, f2)){
             assert(pddlMutexPairsIsBwMutex(&mutex2, f1, f2));
         }
     }
 
-    if (borISetSize(&unreachable_fact) > 0){
+    if (borISetSize(&C.mutex_unreachable_fact) > 0){
         int *remap = BOR_CALLOC_ARR(int, C.strips.fact.fact_size);
         int new_size = pddlFactsDelFactsGenRemap(C.strips.fact.fact_size,
-                                                 &unreachable_fact, remap);
+                                                 &C.mutex_unreachable_fact, remap);
         pddlMutexPairsRemapFacts(&mutex2, new_size, remap);
-        PDDL_MUTEX_PAIRS_FOR_EACH(&mutex, f1, f2){
+        PDDL_MUTEX_PAIRS_FOR_EACH(&C.mutex, f1, f2){
             if (remap[f1] < 0 || remap[f2] < 0)
                 continue;
-            if (pddlMutexPairsIsMutex(&mutex, f1, f2)){
+            if (pddlMutexPairsIsMutex(&C.mutex, f1, f2)){
                 assert(pddlMutexPairsIsMutex(&mutex2, remap[f1], remap[f2]));
             }
-            if (pddlMutexPairsIsFwMutex(&mutex, f1, f2)){
+            if (pddlMutexPairsIsFwMutex(&C.mutex, f1, f2)){
                 assert(pddlMutexPairsIsFwMutex(&mutex2, remap[f1], remap[f2]));
             }
-            if (pddlMutexPairsIsBwMutex(&mutex, f1, f2)){
+            if (pddlMutexPairsIsBwMutex(&C.mutex, f1, f2)){
                 assert(pddlMutexPairsIsBwMutex(&mutex2, remap[f1], remap[f2]));
             }
         }
@@ -163,10 +162,14 @@ TEST(h2fwbw, ground_lifted_mgroup_noce)
     pddlMutexPairsFree(&mutex2);
     
 
-    pddlMutexPairsFree(&mutex);
-    borISetFree(&unreachable_fact);
-    borISetFree(&unreachable_op);
     pddlMutexPairsFree(&mutex_fw);
     borISetFree(&unreachable_fact_fw);
     borISetFree(&unreachable_op_fw);
+}
+
+TEST_TEAR_DOWN(h2fwbw)
+{
+    pddlMutexPairsFree(&C.mutex);
+    borISetFree(&C.mutex_unreachable_op);
+    borISetFree(&C.mutex_unreachable_fact);
 }
