@@ -34,7 +34,9 @@ TESTS += disambiguation
 TESTS += h1
 TESTS += h2
 TESTS += h3
-#TESTS += irrelevance
+TESTS += irrelevance
+TESTS += invertible
+TESTS += trans_system
 #TESTS += hff
 #TESTS += fdr
 #TESTS += fdr_fd
@@ -45,12 +47,10 @@ TESTS += h3
 #TESTS += admissible
 #TESTS += tnf
 TESTS += clique
-#TESTS += trans_system
 #TESTS += op_mutex_infer
 #ifeq '$(USE_CUDD)' 'yes'
 #TESTS += symbolic
 #endif
-#TESTS += invertibility
 #TESTS += datalog
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)

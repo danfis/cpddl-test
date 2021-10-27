@@ -5,9 +5,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <dirent.h>
 #include "test.h"
 
 #include "test.in.c"
+
+static const char *FAIL_FILENAME = "reg/tmp.failed";
 
 const char *TEST_TASK = NULL;
 
@@ -74,17 +77,101 @@ static float timeDiffSeconds(const struct timespec *start,
     return sec;
 }
 
+static int fmtFilename(const char *task,
+                       const char *test_name,
+                       char *filename)
+{
+    int ret = sprintf(filename, "%s.%s", task, test_name);
+    char *c = filename;
+    for (; *c != 0x0; ++c){
+        if (*c == '/'){
+            *c = '-';
+        }
+    }
+    return ret;
+}
+
+static void fmtBaseFilename(const char *task,
+                            const char *test_name,
+                            const char *suff,
+                            char *filename)
+{
+    sprintf(filename, "reg/");
+    int siz = fmtFilename(task, test_name, filename + 4);
+    sprintf(filename + 4 + siz, ".%s", suff);
+}
+
 static void fmtOutputFilename(const char *task,
                               const char *test_name,
                               const char *suff,
                               char *filename)
 {
-    sprintf(filename, "reg/tmp.%s.%s.%s", task, test_name, suff);
-    char *c = filename + 8;
-    for (; *c != 0x0; ++c){
-        if (*c == '/'){
-            *c = '-';
+    sprintf(filename, "reg/tmp.");
+    int siz = fmtFilename(task, test_name, filename + 8);
+    sprintf(filename + 8 + siz, ".%s", suff);
+}
+
+static size_t filesize(const char *fn)
+{
+    FILE *fp = fopen(fn, "r");
+    if (fp == NULL)
+        return 0;
+    fseek(fp, 0L, SEEK_END);
+    size_t sz = ftell(fp);
+    fclose(fp);
+    return sz;
+}
+
+static void addFailure(const test_test_t *t, int status)
+{
+    FILE *failout = fopen(FAIL_FILENAME, "a");
+    if (failout == NULL){
+        perror("Opening file for failures failed");
+        exit(-1);
+    }
+    fprintf(failout, "%s %s --> %d", TEST_TASK, t->name, WEXITSTATUS(status));
+    if (!WIFEXITED(status)){
+        if (WIFSIGNALED(status)){
+            fprintf(failout, " | signal %d (%s)",
+                    WTERMSIG(status), strsignal(WTERMSIG(status)));
+        }else{
+            fprintf(failout, " | terminated abnormaly");
         }
+    }
+
+    char fn[512];
+    fmtOutputFilename(TEST_TASK, t->name, "out", fn);
+    fprintf(failout, " | %s", fn);
+    fprintf(failout, "\n");
+    fflush(failout);
+    fclose(failout);
+
+    char base[512];
+    fmtBaseFilename(TEST_TASK, t->name, "out", base);
+    if (access(base, F_OK) == 0){
+        char cmd[2048];
+        sprintf(cmd, "diff -y -W %s %s | head -15 | awk '{print \"  >OUT>\", $0}' >>%s",
+                base, fn, FAIL_FILENAME);
+        system(cmd);
+    }else if (filesize(fn) > 0){
+        char cmd[2048];
+        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >OUT>\", substr($0, 0, 100)}'>>%s",
+                fn, FAIL_FILENAME);
+        system(cmd);
+    }
+
+    fmtOutputFilename(TEST_TASK, t->name, "err", fn);
+    fmtBaseFilename(TEST_TASK, t->name, "err", base);
+    if (access(base, F_OK) == 0){
+        char cmd[2048];
+        sprintf(cmd, "diff -y -W %s %s | head -15 | awk '{print \"  >ERR>\", $0}' >>%s",
+                base, fn, FAIL_FILENAME);
+        system(cmd);
+    }else if (filesize(fn) > 0){
+        char cmd[2048];
+        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >ERR>\", substr($0, 0, 100)}'>>%s",
+                fn, FAIL_FILENAME);
+        system(cmd);
     }
 }
 
@@ -185,6 +272,7 @@ static void runTestTree(test_test_t *root,
             exit(-1);
         }
 
+        int failed = 0;
         if (!WIFEXITED(status)){ /* if child process ends up abnormaly */
             if (WIFSIGNALED(status)){
                 for (int i = 0; i < depth; ++i)
@@ -205,6 +293,7 @@ static void runTestTree(test_test_t *root,
 
             tests_stats[root->id] = -1;
             fprintf(retout, "1\n");
+            failed = 1;
 
         }else{
             int exit_status = WEXITSTATUS(status);
@@ -217,6 +306,7 @@ static void runTestTree(test_test_t *root,
                     fprintf(stdout, "  ");
                 fprintf(stdout, "%s FAILED\n", root->name);
                 tests_stats[root->id] = -1;
+                failed = 1;
             }else{
                 if (tests_stats[root->id] == 0)
                     tests_stats[root->id] = 1;
@@ -225,6 +315,9 @@ static void runTestTree(test_test_t *root,
         }
 
         fclose(retout);
+
+        if (failed)
+            addFailure(root, status);
     }
 }
 
@@ -300,8 +393,9 @@ static void buildTestTree(void)
 
 static void freeTestTree(void)
 {
-    for (int i = 0; i < tests_size; ++i)
+    for (int i = 0; i < tests_size; ++i){
         free(tests[i].child);
+    }
     free(tests);
 }
 
@@ -399,6 +493,24 @@ static void filterTasks(const char *s)
     }
 }
 
+static void printReportFailures(void)
+{
+    if (num_tasks_failed == 0)
+        return;
+
+    FILE *fin = fopen(FAIL_FILENAME, "r");
+    if (fin == NULL)
+        return;
+
+    printf("\n");
+
+    char buf[512];
+    size_t r;
+    while ((r = fread(buf, sizeof(char), 512, fin)) > 0)
+        fwrite(buf, sizeof(char), r, stdout);
+    fclose(fin);
+}
+
 static void printReportTest(test_test_t *t,
                             int name_len,
                             int succ_len,
@@ -492,6 +604,26 @@ static void printReport(void)
     printf("%*i", fail_len, num_tasks_failed);
     printf(" | %7.2fs", timeDiffSeconds(&g_time_start, &g_time_end));
     printf("\n");
+
+    printReportFailures();
+}
+
+static void cleanRegDir(void)
+{
+    DIR *dp;
+    struct dirent *ep;     
+    dp = opendir ("reg/");
+
+    if (dp != NULL){
+        while ((ep = readdir(dp)) != NULL){
+            if (strncmp(ep->d_name, "tmp.", 4) == 0){
+                char f[512];
+                sprintf(f, "reg/%s", ep->d_name);
+                unlink(f);
+            }
+        }
+        closedir(dp);
+    }
 }
 
 static void usage(char *p)
@@ -502,6 +634,7 @@ static void usage(char *p)
 
 int main(int argc, char *argv[])
 {
+    cleanRegDir();
     buildTestTree();
     readTasks();
 

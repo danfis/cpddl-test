@@ -115,11 +115,13 @@ TEST(strips_h2fwbw_pruned, h2fwbw)
 
 TEST(mg_strips, strips_h2fwbw_pruned)
 {
-    pddl_mg_strips_t mg_strips;
-    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
+    pddlMGStripsInit(&C.mg_strips, &C.strips, &C.mg);
     //pddlStripsPrintDebug(&mg_strips.strips, stdout);
     //fprintf(stdout, "\n");
-    pddlMGroupsPrint(&C.pddl, &mg_strips.strips, &mg_strips.mg, stdout);
+    pddlMGroupsPrint(&C.pddl, &C.mg_strips.strips, &C.mg_strips.mg, stdout);
+}
 
-    pddlMGStripsFree(&mg_strips);
+TEST_TEAR_DOWN(mg_strips)
+{
+    pddlMGStripsFree(&C.mg_strips);
 }

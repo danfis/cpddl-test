@@ -15,6 +15,8 @@ struct context {
     bor_iset_t mutex_unreachable_op;
     bor_iset_t mutex_unreachable_fact;
     pddl_mutex_pairs_t mutex3;
+    pddl_mg_strips_t mg_strips;
+    pddl_trans_systems_t trans_systems;
 };
 typedef struct context context_t;
 
