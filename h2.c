@@ -5,6 +5,7 @@
 TEST(h2, strips_noce)
 {
     pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+    C.mutex_set = 1;
     borISetInit(&C.mutex_unreachable_op);
     borISetInit(&C.mutex_unreachable_fact);
 
@@ -35,13 +36,6 @@ TEST(h2, strips_noce)
     }
 }
 
-TEST_TEAR_DOWN(h2)
-{
-    pddlMutexPairsFree(&C.mutex);
-    borISetFree(&C.mutex_unreachable_op);
-    borISetFree(&C.mutex_unreachable_fact);
-}
-
 TEST(h2mgroup, h2)
 {
     pddl_mgroups_t mgs;
@@ -64,6 +58,7 @@ TEST(h2fwbw, ground_lifted_mgroup_noce)
            0., &C.err);
 
     pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+    C.mutex_set = 1;
     borISetInit(&C.mutex_unreachable_fact);
     borISetInit(&C.mutex_unreachable_op);
 
@@ -165,11 +160,4 @@ TEST(h2fwbw, ground_lifted_mgroup_noce)
     pddlMutexPairsFree(&mutex_fw);
     borISetFree(&unreachable_fact_fw);
     borISetFree(&unreachable_op_fw);
-}
-
-TEST_TEAR_DOWN(h2fwbw)
-{
-    pddlMutexPairsFree(&C.mutex);
-    borISetFree(&C.mutex_unreachable_op);
-    borISetFree(&C.mutex_unreachable_fact);
 }

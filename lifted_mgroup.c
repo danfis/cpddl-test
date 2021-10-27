@@ -604,6 +604,7 @@ TEST(lifted_mgroup, pddl)
     pddl_lifted_mgroups_infer_limits_t infer_limit
                 = PDDL_LIFTED_MGROUPS_INFER_LIMITS_INIT;
     pddlLiftedMGroupsInit(&C.lmg);
+    C.lmg_set = 1;
     pddlLiftedMGroupsInferFAMGroups(&C.pddl, &infer_limit, &C.lmg, &C.err);
     pddlLiftedMGroupsSetExactlyOne(&C.pddl, &C.lmg, &C.err);
     pddlLiftedMGroupsSetStatic(&C.pddl, &C.lmg, &C.err);
@@ -645,9 +646,4 @@ TEST(lifted_mgroup, pddl)
     pddlLiftedMGroupsFree(&goal);
     pddlLiftedMGroupsFree(&invs);
     pddlLiftedMGroupsFree(&mgs);
-}
-
-TEST_TEAR_DOWN(lifted_mgroup)
-{
-    pddlLiftedMGroupsFree(&C.lmg);
 }

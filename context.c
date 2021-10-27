@@ -16,3 +16,27 @@ TEST(root, _)
 TEST_TEAR_DOWN(root)
 {
 }
+
+TEST_GLOBAL_TEAR_DOWN()
+{
+    if (C.trans_systems_set)
+        pddlTransSystemsFree(&C.trans_systems);
+    if (C.mg_strips_set)
+        pddlMGStripsFree(&C.mg_strips);
+    if (C.mutex3_set)
+        pddlMutexPairsFree(&C.mutex3);
+    borISetFree(&C.mutex_unreachable_fact);
+    borISetFree(&C.mutex_unreachable_op);
+    if (C.mutex_set)
+        pddlMutexPairsFree(&C.mutex);
+    if (C.strips_sym_set)
+        pddlStripsSymFree(&C.strips_sym);
+    if (C.mg_set)
+        pddlMGroupsFree(&C.mg);
+    if (C.strips_set)
+        pddlStripsFree(&C.strips);
+    if (C.lmg_set)
+        pddlLiftedMGroupsFree(&C.lmg);
+    if (C.pddl_set)
+        pddlFree(&C.pddl);
+}

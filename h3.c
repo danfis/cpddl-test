@@ -11,7 +11,8 @@ TEST(h3, h2)
     pddlMutexPairsInitStrips(&C.mutex3, &C.strips);
 
     int ret = pddlH3(&C.strips, &C.mutex3, &unreachable_fact, &unreachable_op,
-                     10., 0, &C.err);
+                     -1., 0, &C.err);
+    C.mutex3_set = 1;
     assert(ret == 0);
 
     assert(borISetIsSubset(&C.mutex_unreachable_fact, &unreachable_fact));
@@ -42,11 +43,6 @@ TEST(h3, h2)
 
     borISetFree(&unreachable_fact);
     borISetFree(&unreachable_op);
-}
-
-TEST_TEAR_DOWN(h3)
-{
-    pddlMutexPairsFree(&C.mutex3);
 }
 
 TEST(h3mgroup, h3)

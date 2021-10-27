@@ -12,6 +12,7 @@ TEST(pddl, root)
     if (ret != 0)
         borErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
+    C.pddl_set = 1;
 
     pddlCheckSizeTypes(&C.pddl);
 
@@ -20,11 +21,6 @@ TEST(pddl, root)
     pddlPrintDebug(&C.pddl, stdout);
     printf("---- Domain: %s | %s END ----\n",
            C.files.domain_pddl, C.files.problem_pddl);
-}
-
-TEST_TEAR_DOWN(pddl)
-{
-    pddlFree(&C.pddl);
 }
 
 TEST(pddl_noce, root)
@@ -37,16 +33,12 @@ TEST(pddl_noce, root)
     if (ret != 0)
         borErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
+    C.pddl_set = 1;
 
     pddlCheckSizeTypes(&C.pddl);
     pddlCompileAwayNonStaticCondEff(&C.pddl);
 
     pddlPrintDebug(&C.pddl, stdout);
-}
-
-TEST_TEAR_DOWN(pddl_noce)
-{
-    pddlFree(&C.pddl);
 }
 
 TEST(pddl_no_normalize, root)
@@ -60,6 +52,7 @@ TEST(pddl_no_normalize, root)
     if (ret != 0)
         borErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
+    C.pddl_set = 1;
 
     pddlCheckSizeTypes(&pddl);
 

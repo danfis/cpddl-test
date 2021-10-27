@@ -18,5 +18,7 @@ extern const char *TEST_TASK;
     void test_tear_down_##NAME(void)
 #define TEST_EXPLICIT(NAME) \
     void test_##NAME(void)
+#define TEST_GLOBAL_TEAR_DOWN() \
+    void __test_global_tear_down(void)
 
 #endif /* __CPDDL_TEST_H__ */

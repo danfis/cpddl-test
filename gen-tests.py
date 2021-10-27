@@ -5,10 +5,20 @@ import re
 from pprint import pprint
 
 Test = {}
+GlobalTearDown = False
 
 pat_test = re.compile(r'^.*TEST\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+)\).*$')
 pat_test_tear_down = re.compile(r'^.*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
 pat_test_explicit = re.compile(r'^.*TEST_EXPLICIT\(([a-zA-Z0-9_]+) *\).*$')
+pat_global_tear_down = re.compile(r'^.*TEST_GLOBAL_TEAR_DOWN.*$')
+
+def addTest(name):
+    global Test
+    if name not in Test:
+        Test[name] = { 'dep' : None,
+                       'tear-down' : False,
+                       'explicit' : False }
+
 def parseFile(filename):
     global Test
     with open(filename, 'r') as fin:
@@ -16,29 +26,25 @@ def parseFile(filename):
             match = pat_test.match(line)
             if match is not None:
                 name = match.group(1)
-                if name not in Test:
-                    Test[name] = { 'dep' : None,
-                                   'tear-down' : False,
-                                   'explicit' : False }
+                addTest(name)
                 Test[name]['dep'] = match.group(2)
 
             match = pat_test_tear_down.match(line)
             if match is not None:
                 name = match.group(1)
-                if name not in Test:
-                    Test[name] = { 'dep' : None,
-                                   'tear-down' : False,
-                                   'explicit' : False }
+                addTest(name)
                 Test[name]['tear-down'] = True
 
             match = pat_test_explicit.match(line)
             if match is not None:
                 name = match.group(1)
-                if name not in Test:
-                    Test[name] = { 'dep' : None,
-                                   'tear-down' : False,
-                                   'explicit' : False }
+                addTest(name)
                 Test[name]['explicit'] = True
+
+            match = pat_global_tear_down.match(line)
+            if match is not None:
+                global GlobalTearDown
+                GlobalTearDown = True
 
 
 
@@ -72,6 +78,10 @@ def genDefs():
         print('},')
     print('};')
     print('size_t test_set_size = sizeof(test_set) / sizeof(test_def_t);')
+
+    if GlobalTearDown:
+        print('#define USE_GLOBAL_TEAR_DOWN')
+        print('void __test_global_tear_down(void);')
 
 def main():
     for filename in sys.argv[1:]:

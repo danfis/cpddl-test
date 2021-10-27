@@ -7,12 +7,8 @@ TEST(strips, lifted_mgroup)
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     int ret = pddlStripsGround(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+    C.strips_set = 1;
     pddlStripsPrintDebug(&C.strips, stdout);
-}
-
-TEST_TEAR_DOWN(strips)
-{
-    pddlStripsFree(&C.strips);
 }
 
 TEST(strips_noce, lifted_mgroup)
@@ -20,13 +16,9 @@ TEST(strips_noce, lifted_mgroup)
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     int ret = pddlStripsGround(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+    C.strips_set = 1;
     pddlStripsCompileAwayCondEff(&C.strips);
     pddlStripsPrintDebug(&C.strips, stdout);
-}
-
-TEST_TEAR_DOWN(strips_noce)
-{
-    pddlStripsFree(&C.strips);
 }
 
 TEST(strips_prune, lifted_mgroup)
@@ -37,6 +29,7 @@ TEST(strips_prune, lifted_mgroup)
     ground_cfg.prune_op_dead_end = 1;
     int ret = pddlStripsGround(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+    C.strips_set = 1;
 
     /*
     char fn[128];
@@ -67,22 +60,13 @@ TEST(strips_prune, lifted_mgroup)
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
-TEST_TEAR_DOWN(strips_prune)
-{
-    pddlStripsFree(&C.strips);
-}
-
 TEST(strips_dl, lifted_mgroup)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+    C.strips_set = 1;
     pddlStripsPrintDebug(&C.strips, stdout);
-}
-
-TEST_TEAR_DOWN(strips_dl)
-{
-    pddlStripsFree(&C.strips);
 }
 
 TEST(strips_sql, lifted_mgroup)
@@ -90,12 +74,8 @@ TEST(strips_sql, lifted_mgroup)
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+    C.strips_set = 1;
     pddlStripsPrintDebug(&C.strips, stdout);
-}
-
-TEST_TEAR_DOWN(strips_sql)
-{
-    pddlStripsFree(&C.strips);
 }
 
 TEST(strips_h2fwbw_pruned, h2fwbw)
@@ -116,12 +96,8 @@ TEST(strips_h2fwbw_pruned, h2fwbw)
 TEST(mg_strips, strips_h2fwbw_pruned)
 {
     pddlMGStripsInit(&C.mg_strips, &C.strips, &C.mg);
+    C.mg_strips_set = 1;
     //pddlStripsPrintDebug(&mg_strips.strips, stdout);
     //fprintf(stdout, "\n");
     pddlMGroupsPrint(&C.pddl, &C.mg_strips.strips, &C.mg_strips.mg, stdout);
-}
-
-TEST_TEAR_DOWN(mg_strips)
-{
-    pddlMGStripsFree(&C.mg_strips);
 }

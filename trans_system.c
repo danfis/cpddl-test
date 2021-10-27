@@ -235,15 +235,11 @@ TEST(trans_system, mg_strips)
 {
     pddlTransSystemsInit(&C.trans_systems, &C.mg_strips, &C.mutex);
     assert(C.trans_systems.ts_size > 0);
+    C.trans_systems_set = 1;
 
     pddlTransSystemsCollectDeadLabelsFromAll(&C.trans_systems);
     pddlTransSystemsRemoveDeadLabelsFromAll(&C.trans_systems);
 
-}
-
-TEST_TEAR_DOWN(trans_system)
-{
-    pddlTransSystemsFree(&C.trans_systems);
 }
 
 TEST(trans_system_init, trans_system)

@@ -36,7 +36,8 @@ TESTS += h2
 TESTS += h3
 TESTS += irrelevance
 TESTS += invertible
-TESTS += trans_system
+#TESTS += trans_system
+
 #TESTS += hff
 #TESTS += fdr
 #TESTS += fdr_fd
@@ -58,17 +59,10 @@ TESTS_C := $(foreach test,$(TESTS),$(test).c)
 
 all: $(TARGETS)
 
-main.c: $(OBJS)
-	bash gen-main.sh $(TESTS) >$@
-
 test: test.c test.in.c ../libpddl.a $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $< $(OBJS) $(LDFLAGS)
 test.in.c: gen-tests.py $(TESTS_C)
 	python3 gen-tests.py $(TESTS_C) >$@
-test-pddl: test-pddl.c cu/libcu.a ../libpddl.a
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-test-strips: test-strips.c cu/libcu.a ../libpddl.a
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 .objs/%.o: %.c %.h %_prob.h
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -78,45 +72,7 @@ test-strips: test-strips.c cu/libcu.a ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 check: all submodule
-	./test $(CHECK_TS); \
-        T=$$?; \
-        $(PYTHON2) $(CHECK_REG) reg; \
-        exit $$(($$T + $$?))
-check-noreg: all submodule
-	./test $(CHECK_TS)
-
-check-ci: all submodule
-	./test $(CHECK_TS); \
-        T=$$?; \
-        $(PYTHON2) $(CHECK_REG) --no-progress reg; \
-        exit $$(($$T + $$?))
-
-test-strips-mem: test-strips
-	@./test-strips-mem.sh pddl-data/test-seq/test/{domain,pfile}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/barman/{domain,p433.1}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/barman/{domain,p638.1}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/cavediving/{domain,testing01}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/cavediving/{domain,testing20A_easy}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/childsnack/{domain,child-snack_pfile10}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/citycar/{domain,p3-3-3-3-2}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/floortile/{domain,p03-6-5-2}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/ged/{domain,d-8-9}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/hiking/{domain,ptesting-2-4-7}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/maintenance/{domain,maintenance.1.3.025.100.2-002}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/openstacks/{domain_,}p50_3.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/parking/{domain,p_20_11-04}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/tetris/{domain,p01-4}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/tetris/{domain,p03-6}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/tetris/{domain,p04-10}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/transport/{domain,p01}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/transport/{domain,p10}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/transport/{domain,p20}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/visitall/{domain,p-1-5}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/visitall/{domain,p-1-18}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2014/seq-opt/visitall/{domain,p-05-10}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2011/seq-opt/scanalyzer/{domain,p01}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2011/seq-opt/scanalyzer/{domain,p10}.pddl
-	@./test-strips-mem.sh pddl-data/ipc-2011/seq-opt/scanalyzer/{domain,p20}.pddl
+	./test $(T) <tasks.txt
 
 submodule: pddl-data/test-seq/test/domain.pddl
 pddl-data/test-seq/test/domain.pddl:
@@ -126,34 +82,25 @@ pddl-data/test-seq/test/domain.pddl:
 check-valgrind: all
 	valgrind --leak-check=full --show-reachable=yes --trace-children=yes \
              --error-limit=no \
-             ./test $(CHECK_TS)
+             ./test $(T) <tasks.txt
 
 check-segfault: all
 	valgrind -q --trace-children=yes \
              --error-limit=no \
-             ./test $(CHECK_TS)
+             ./test $(T) <tasks.txt
 
 check-valgrind-gen-suppressions: all
 	valgrind -q --leak-check=full --show-reachable=yes --trace-children=yes \
              --gen-suppressions=all --log-file=out --error-limit=no \
-             ./test $(CHECK_TS)
-
-cu: cu/libcu.a
-cu/libcu.a:
-	$(MAKE) ENABLE_TIMER=yes -C cu/
-
-clean-reg:
-	rm -f reg/tmp.*
-	rm -f reg/temp.*
+             ./test $(T) <tasks.txt
 
 clean:
-	rm -f main.c
+	rm -f test.in.c
 	rm -f *.o
 	rm -f .objs/*.o
 	rm -f $(TARGETS)
 	rm -f tmp.*
 	rm -f reg/tmp.*
 	rm -f reg/temp.*
-	$(MAKE) -C cu clean
 
-.PHONY: all clean clean-reg check check-valgrind cu submodule test-strips-mem
+.PHONY: all clean check check-valgrind submodule test-strips-mem

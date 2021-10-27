@@ -50,6 +50,12 @@ static int tests_size;
 static int *tests_stats;
 static float *tests_time_sum;
 static int tests_enabled = 0;
+
+#ifdef USE_GLOBAL_TEAR_DOWN
+static void (*global_tear_down)(void) = __test_global_tear_down;
+#else /* USE_GLOBAL_TEAR_DOWN */
+static void (*global_tear_down)(void) = NULL;
+#endif /* USE_GLOBAL_TEAR_DOWN */
 static int num_tasks_succeeded = 0;
 static int num_tasks_failed = 0;
 static struct timespec g_time_start, g_time_end;
@@ -155,7 +161,7 @@ static void addFailure(const test_test_t *t, int status)
         system(cmd);
     }else if (filesize(fn) > 0){
         char cmd[2048];
-        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >OUT>\", substr($0, 0, 100)}'>>%s",
+        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >OUT>\", substr($0, 0, 150)}'>>%s",
                 fn, FAIL_FILENAME);
         system(cmd);
     }
@@ -169,7 +175,7 @@ static void addFailure(const test_test_t *t, int status)
         system(cmd);
     }else if (filesize(fn) > 0){
         char cmd[2048];
-        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >ERR>\", substr($0, 0, 100)}'>>%s",
+        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >ERR>\", substr($0, 0, 150)}'>>%s",
                 fn, FAIL_FILENAME);
         system(cmd);
     }
@@ -248,6 +254,8 @@ static void runTestTree(test_test_t *root,
 
         if (root->test_fn_tear_down != NULL)
             root->test_fn_tear_down();
+        if (global_tear_down != NULL)
+            global_tear_down();
 
         clock_gettime(CLOCK_MONOTONIC, &time_end);
         for (int i = 0; i < depth; ++i)
@@ -315,6 +323,8 @@ static void runTestTree(test_test_t *root,
         }
 
         fclose(retout);
+
+        // TODO: diff -q
 
         if (failed)
             addFailure(root, status);
@@ -639,12 +649,12 @@ int main(int argc, char *argv[])
     readTasks();
 
     int opt;
-    while ((opt = getopt(argc, argv, "T:S:t:")) != -1) {
+    while ((opt = getopt(argc, argv, "S:T:t:")) != -1) {
         switch (opt) {
-            case 'T':
+            case 'S':
                 filterTasksSubstr(optarg);
                 break;
-            case 'S':
+            case 'T':
                 filterTasks(optarg);
                 break;
             case 't':

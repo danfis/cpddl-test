@@ -7,6 +7,7 @@ TEST(symmetry, ground_lifted_mgroup_noce)
     int *fact_used = BOR_CALLOC_ARR(int, C.strips.fact.fact_size);
     int *op_used = BOR_CALLOC_ARR(int, C.strips.op.op_size);
     pddlStripsSymInitPDG(&C.strips_sym, &C.strips);
+    C.strips_sym_set = 1;
 
     fprintf(stdout, "Symmetric facts:\n");
     for (int fact_id = 0; fact_id < C.strips.fact.fact_size; ++fact_id){
@@ -76,9 +77,4 @@ TEST(symmetry, ground_lifted_mgroup_noce)
         BOR_FREE(fact_used);
     if (op_used != NULL)
         BOR_FREE(op_used);
-}
-
-TEST_TEAR_DOWN(symmetry)
-{
-    pddlStripsSymFree(&C.strips_sym);
 }
