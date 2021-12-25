@@ -2,102 +2,128 @@
 #include "test.h"
 #include "context.h"
 
-TEST(strips, lifted_mgroup)
+TEST(strips, lmg)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
-    int ret = pddlStripsGround(&C.strips, &C.pddl, &ground_cfg, &C.err);
+    int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
     C.strips_set = 1;
+
+    if (C.strips.has_cond_eff)
+        pddlStripsCompileAwayCondEff(&C.strips);
+    assert(!C.strips.has_cond_eff);
+
+    pddlMGroupsGround(&C.mg, &C.pddl, &C.lmg, &C.strips);
+    C.mg_set = 1;
+    pddlMGroupsSetExactlyOne(&C.mg, &C.strips);
+    pddlMGroupsSetGoal(&C.mg, &C.strips);
+    //pddlMGroupsPrint(&C.pddl, &C.strips, &C.mg, stdout);
+
+    BOR_ISET(rm_fact);
+    BOR_ISET(rm_op);
+    if (pddlIrrelevanceAnalysis(&C.strips, &rm_fact, &rm_op, NULL, &C.err) != 0){
+        BOR_INFO2(&C.err, "Irrelevance analysis failed.");
+        fprintf(stderr, "Error: ");
+        borErrPrint(&C.err, 1, stderr);
+        return;
+    }
+    if (borISetSize(&rm_fact) > 0 || borISetSize(&rm_op) > 0){
+        pddlStripsReduce(&C.strips, &rm_fact, &rm_op);
+        if (borISetSize(&rm_fact) > 0){
+            pddlMGroupsReduce(&C.mg, &rm_fact);
+            pddlMGroupsSetExactlyOne(&C.mg, &C.strips);
+            pddlMGroupsSetGoal(&C.mg, &C.strips);
+            //fprintf(stdout, "---\n");
+            //pddlMGroupsPrint(&C.pddl, &C.strips, &C.mg, stdout);
+        }
+    }
+    borISetFree(&rm_fact);
+    borISetFree(&rm_op);
+
+    if (C.strips.op.op_size == 0){
+        pddlStripsMakeUnsolvable(&C.strips);
+        pddlMutexPairsFree(&C.mutex);
+        pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+        pddlMGroupsFree(&C.mg);
+        pddlMGroupsInitEmpty(&C.mg);
+    }
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
-TEST(strips_noce, lifted_mgroup)
+TEST(strips_pruned, strips)
 {
-    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
-    int ret = pddlStripsGround(&C.strips, &C.pddl, &ground_cfg, &C.err);
+    pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+    C.mutex_set = 1;
+
+    BOR_ISET(rm_fact);
+    BOR_ISET(rm_op);
+    int ret = pddlH2FwBw(&C.strips, &C.mg, &C.mutex, &rm_fact, &rm_op, 0., &C.err);
     assert(ret == 0);
-    C.strips_set = 1;
-    pddlStripsCompileAwayCondEff(&C.strips);
+
+    if (borISetSize(&rm_fact) > 0 || borISetSize(&rm_op) > 0){
+        pddlStripsReduce(&C.strips, &rm_fact, &rm_op);
+        if (borISetSize(&rm_fact) > 0){
+            pddlMGroupsReduce(&C.mg, &rm_fact);
+            pddlMGroupsSetExactlyOne(&C.mg, &C.strips);
+            pddlMGroupsSetGoal(&C.mg, &C.strips);
+            pddlMutexPairsReduce(&C.mutex, &rm_fact);
+        }
+    }
+    borISetFree(&rm_fact);
+    borISetFree(&rm_op);
+
+    pddlStripsRemoveUselessDelEffs(&C.strips, &C.mutex, NULL, &C.err);
+
+    if (C.strips.op.op_size == 0){
+        pddlStripsMakeUnsolvable(&C.strips);
+        pddlMutexPairsFree(&C.mutex);
+        pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+        pddlMGroupsFree(&C.mg);
+        pddlMGroupsInitEmpty(&C.mg);
+    }
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
-TEST(strips_prune, lifted_mgroup)
+TEST(strips_ground_prune, lmg)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.lifted_mgroups = &C.lmg;
     ground_cfg.prune_op_pre_mutex = 1;
     ground_cfg.prune_op_dead_end = 1;
-    int ret = pddlStripsGround(&C.strips, &C.pddl, &ground_cfg, &C.err);
+    pddl_strips_t strips;
+    int ret = pddlStripsGround(&strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
-    C.strips_set = 1;
-
-    /*
-    char fn[128];
-    FILE *fout;
-
-    sprintf(fn, "reg/tmp.TSStripsGround.testStripsGround_%s."
-                "useless_del_effs.out", outfn);
-    fout = fopen(fn, "w");
-    if (fout != NULL){
-        pddl_strips_t strips2;
-        pddlStripsInitCopy(&strips2, &strips);
-        BOR_ISET(changed_ops);
-        ret = pddlStripsRemoveUselessDelEffs(&strips2, NULL,
-                                             &changed_ops, &err);
-        assertEquals(ret, borISetSize(&changed_ops));
-
-        int op_id;
-        BOR_ISET_FOR_EACH(&changed_ops, op_id){
-            pddlStripsOpPrintDebug(strips.op.op[op_id], &strips.fact, fout);
-            pddlStripsOpPrintDebug(strips2.op.op[op_id], &strips2.fact, fout);
-            fprintf(fout, "----\n");
-        }
-        borISetFree(&changed_ops);
-        pddlStripsFree(&strips2);
-        fclose(fout);
-    }
-    */
-    pddlStripsPrintDebug(&C.strips, stdout);
+    pddlStripsPrintDebug(&strips, stdout);
+    pddlStripsFree(&strips);
 }
 
-TEST(strips_dl, lifted_mgroup)
-{
-    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
-    int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    C.strips_set = 1;
-    pddlStripsPrintDebug(&C.strips, stdout);
-}
 
-TEST(strips_sql, lifted_mgroup)
+TEST(strips_useless_del_effs, strips)
 {
-    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
-    int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    C.strips_set = 1;
-    pddlStripsPrintDebug(&C.strips, stdout);
-}
+    pddl_strips_t strips;
+    pddlStripsInitCopy(&strips, &C.strips);
 
-TEST(strips_h2fwbw_pruned, h2fwbw)
-{
+    pddl_mutex_pairs_t mutex;
+    pddlMutexPairsInitStrips(&mutex, &strips);
+
+    BOR_ISET(rm_fact);
+    BOR_ISET(rm_op);
+    int ret = pddlH2FwBw(&strips, &C.mg, &mutex, &rm_fact, &rm_op, 0., &C.err);
+    assert(ret == 0);
+
+    if (borISetSize(&rm_fact) > 0 || borISetSize(&rm_op) > 0)
+        pddlStripsReduce(&strips, &rm_fact, &rm_op);
+    borISetFree(&rm_fact);
+    borISetFree(&rm_op);
+
     BOR_ISET(changed_op);
-    pddlStripsReduce(&C.strips, &C.mutex_unreachable_fact,
-                     &C.mutex_unreachable_op);
-    pddlMGroupsReduce(&C.mg, &C.mutex_unreachable_fact);
-    pddlMutexPairsReduce(&C.mutex, &C.mutex_unreachable_fact);
-    pddlStripsRemoveUselessDelEffs(&C.strips, &C.mutex, &changed_op, &C.err);
+    pddlStripsRemoveUselessDelEffs(&strips, &mutex, NULL, &C.err);
 
     int op;
     BOR_ISET_FOR_EACH(&changed_op, op)
-        printf("(%s)\n", C.strips.op.op[op]->name);
+        printf("(%s)\n", strips.op.op[op]->name);
     borISetFree(&changed_op);
-}
 
-TEST(mg_strips, strips_h2fwbw_pruned)
-{
-    pddlMGStripsInit(&C.mg_strips, &C.strips, &C.mg);
-    C.mg_strips_set = 1;
-    //pddlStripsPrintDebug(&mg_strips.strips, stdout);
-    //fprintf(stdout, "\n");
-    pddlMGroupsPrint(&C.pddl, &C.mg_strips.strips, &C.mg_strips.mg, stdout);
+    pddlMutexPairsFree(&mutex);
+    pddlStripsFree(&strips);
 }

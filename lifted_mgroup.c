@@ -599,15 +599,16 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
 }
 
 
-TEST(lifted_mgroup, pddl)
+TEST(lmg_fam, pddl)
 {
     pddl_lifted_mgroups_infer_limits_t infer_limit
                 = PDDL_LIFTED_MGROUPS_INFER_LIMITS_INIT;
     pddlLiftedMGroupsInit(&C.lmg);
-    C.lmg_set = 1;
     pddlLiftedMGroupsInferFAMGroups(&C.pddl, &infer_limit, &C.lmg, &C.err);
     pddlLiftedMGroupsSetExactlyOne(&C.pddl, &C.lmg, &C.err);
     pddlLiftedMGroupsSetStatic(&C.pddl, &C.lmg, &C.err);
+    C.lmg_set = 1;
+
     pddlLiftedMGroupsPrint(&C.pddl, &C.lmg, stdout);
     fflush(stdout);
 
@@ -622,20 +623,29 @@ TEST(lifted_mgroup, pddl)
         fflush(stdout);
     }
     pddlLiftedMGroupsFree(&goal);
+}
 
-    pddl_lifted_mgroups_t invs;
-    pddl_lifted_mgroups_t mgs;
-    pddlLiftedMGroupsInit(&invs);
-    pddlLiftedMGroupsInit(&mgs);
-    pddlLiftedMGroupsInferMonotonicity(&C.pddl, &infer_limit, &invs, &mgs, &C.err);
+TEST(lmg_fd, lmg_fam)
+{
+    pddl_lifted_mgroups_infer_limits_t infer_limit
+                = PDDL_LIFTED_MGROUPS_INFER_LIMITS_INIT;
+    pddlLiftedMGroupsInit(&C.lmg_fd);
+    pddlLiftedMGroupsInferMonotonicity(&C.pddl, &infer_limit,
+                                       &C.lmg_mono, &C.lmg_fd, &C.err);
+    pddlLiftedMGroupsSetExactlyOne(&C.pddl, &C.lmg_fd, &C.err);
+    pddlLiftedMGroupsSetStatic(&C.pddl, &C.lmg_fd, &C.err);
+    C.lmg_fd_set = 1;
+    C.lmg_mono_set = 1;
+
     fprintf(stdout, "Monotonicity invariants:\n");
-    pddlLiftedMGroupsPrint(&C.pddl, &invs, stdout);
+    pddlLiftedMGroupsPrint(&C.pddl, &C.lmg_mono, stdout);
     fprintf(stdout, "FD Mutex Groups:\n");
-    pddlLiftedMGroupsPrint(&C.pddl, &mgs, stdout);
+    pddlLiftedMGroupsPrint(&C.pddl, &C.lmg_fd, stdout);
     fflush(stdout);
 
+    pddl_lifted_mgroups_t goal;
     pddlLiftedMGroupsInit(&goal);
-    pddlLiftedMGroupsExtractGoalAware(&goal, &mgs, &C.pddl);
+    pddlLiftedMGroupsExtractGoalAware(&goal, &C.lmg_fd, &C.pddl);
     if (goal.mgroup_size > 0){
         fprintf(stdout, "FD Goal aware:\n");
         pddlLiftedMGroupsPrint(&C.pddl, &goal, stdout);
@@ -644,6 +654,8 @@ TEST(lifted_mgroup, pddl)
         fflush(stdout);
     }
     pddlLiftedMGroupsFree(&goal);
-    pddlLiftedMGroupsFree(&invs);
-    pddlLiftedMGroupsFree(&mgs);
+}
+
+TEST(lmg, lmg_fd)
+{
 }

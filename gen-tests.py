@@ -8,16 +8,34 @@ Test = {}
 GlobalTearDown = False
 
 pat_test = re.compile(r'^.*TEST\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+)\).*$')
+pat_test_cond = re.compile(r'^.*TEST_COND\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+), *([a-zA-Z0-9_ ]+)\).*$')
 pat_test_tear_down = re.compile(r'^.*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
 pat_test_explicit = re.compile(r'^.*TEST_EXPLICIT\(([a-zA-Z0-9_]+) *\).*$')
 pat_global_tear_down = re.compile(r'^.*TEST_GLOBAL_TEAR_DOWN.*$')
+pat_define = re.compile(r'^ *# *define +PDDL_([A-Z_0-9]+).*$')
 
-def addTest(name):
+CONFIG = []
+def parseConfig(fn):
+    global CONFIG
+    with open(fn, 'r') as fin:
+        for line in fin:
+            m = pat_define.match(line)
+            if m is not None:
+                CONFIG += [m.group(1)]
+    CONFIG = sorted(CONFIG)
+
+def addTest(name, tags):
+    global CONFIG
+    for tag in tags:
+        if tag not in CONFIG:
+            return False
+
     global Test
     if name not in Test:
         Test[name] = { 'dep' : None,
                        'tear-down' : False,
                        'explicit' : False }
+    return True
 
 def parseFile(filename):
     global Test
@@ -26,20 +44,27 @@ def parseFile(filename):
             match = pat_test.match(line)
             if match is not None:
                 name = match.group(1)
-                addTest(name)
-                Test[name]['dep'] = match.group(2)
+                if addTest(name, []):
+                    Test[name]['dep'] = match.group(2)
+
+            match = pat_test_cond.match(line)
+            if match is not None:
+                name = match.group(1)
+                tags = [x for x in match.group(3).split() if len(x) > 0]
+                if addTest(name, tags):
+                    Test[name]['dep'] = match.group(2)
 
             match = pat_test_tear_down.match(line)
             if match is not None:
                 name = match.group(1)
-                addTest(name)
-                Test[name]['tear-down'] = True
+                if addTest(name, []):
+                    Test[name]['tear-down'] = True
 
             match = pat_test_explicit.match(line)
             if match is not None:
                 name = match.group(1)
-                addTest(name)
-                Test[name]['explicit'] = True
+                if addTest(name, []):
+                    Test[name]['explicit'] = True
 
             match = pat_global_tear_down.match(line)
             if match is not None:
@@ -84,6 +109,7 @@ def genDefs():
         print('void __test_global_tear_down(void);')
 
 def main():
+    parseConfig('../pddl/config.h')
     for filename in sys.argv[1:]:
         parseFile(filename)
     #pprint(Test)

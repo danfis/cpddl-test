@@ -199,6 +199,7 @@ static void runTestTree(test_test_t *root,
 
         if (root->test_fn != NULL){
 
+            fprintf(stdout, "%s ", TEST_TASK);
             for (int i = 0; i < depth; ++i)
                 fprintf(stdout, "  ");
             fprintf(stdout, "%s ...\n", root->name);
@@ -236,6 +237,7 @@ static void runTestTree(test_test_t *root,
             clearerr(stderr);
 
             clock_gettime(CLOCK_MONOTONIC, &time_end);
+            fprintf(stdout, "%s ", TEST_TASK);
             for (int i = 0; i < depth; ++i)
                 fprintf(stdout, "  ");
             float elapsed = timeDiffSeconds(&time_start, &time_end);
@@ -258,6 +260,7 @@ static void runTestTree(test_test_t *root,
             global_tear_down();
 
         clock_gettime(CLOCK_MONOTONIC, &time_end);
+        fprintf(stdout, "%s ", TEST_TASK);
         for (int i = 0; i < depth; ++i)
             fprintf(stdout, "  ");
         fprintf(stdout, "%s TearDown [%.2fs]\n",
@@ -414,6 +417,15 @@ static void enableTest(test_test_t *t)
     t->enabled = 1;
     if (t->parent != NULL)
         enableTest(t->parent);
+}
+
+static void filterTestsSubstr(const char *name)
+{
+    tests_enabled = 1;
+    for (int i = 0; i < tests_size; ++i){
+        if (strstr(tests[i].name, name) != NULL)
+            enableTest(tests + i);
+    }
 }
 
 static void filterTests(const char *name)
@@ -649,13 +661,16 @@ int main(int argc, char *argv[])
     readTasks();
 
     int opt;
-    while ((opt = getopt(argc, argv, "S:T:t:")) != -1) {
+    while ((opt = getopt(argc, argv, "S:T:s:t:")) != -1) {
         switch (opt) {
             case 'S':
                 filterTasksSubstr(optarg);
                 break;
             case 'T':
                 filterTasks(optarg);
+                break;
+            case 's':
+                filterTestsSubstr(optarg);
                 break;
             case 't':
                 filterTests(optarg);

@@ -14,6 +14,8 @@ extern const char *TEST_TASK;
 
 #define TEST(NAME, PARENT) \
     void test_##NAME(void)
+#define TEST_COND(NAME, PARENT, COND) \
+    void test_##NAME(void)
 #define TEST_TEAR_DOWN(NAME) \
     void test_tear_down_##NAME(void)
 #define TEST_EXPLICIT(NAME) \

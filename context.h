@@ -6,26 +6,29 @@
 struct context {
     bor_err_t err;
     pddl_files_t files;
+    int optimal_cost;
+
     pddl_t pddl;
     int pddl_set;
+
     pddl_lifted_mgroups_t lmg;
     int lmg_set;
+    pddl_lifted_mgroups_t lmg_fd;
+    int lmg_fd_set;
+    pddl_lifted_mgroups_t lmg_mono;
+    int lmg_mono_set;
+
     pddl_strips_t strips;
     int strips_set;
     pddl_mgroups_t mg;
     int mg_set;
-    pddl_strips_sym_t strips_sym;
-    int strips_sym_set;
     pddl_mutex_pairs_t mutex;
     int mutex_set;
-    bor_iset_t mutex_unreachable_op;
-    bor_iset_t mutex_unreachable_fact;
-    pddl_mutex_pairs_t mutex3;
-    int mutex3_set;
-    pddl_mg_strips_t mg_strips;
-    int mg_strips_set;
-    pddl_trans_systems_t trans_systems;
-    int trans_systems_set;
+
+    pddl_fdr_t fdr;
+    int fdr_set;
+    pddl_fdr_app_op_t fdr_app_op;
+    int fdr_app_op_set;
 };
 typedef struct context context_t;
 
