@@ -2,12 +2,12 @@
 #include "test.h"
 #include "context.h"
 
-TEST(symmetry, ground_lifted_mgroup_noce)
+TEST_COND(symmetry, strips_pruned, BLISS)
 {
     int *fact_used = BOR_CALLOC_ARR(int, C.strips.fact.fact_size);
     int *op_used = BOR_CALLOC_ARR(int, C.strips.op.op_size);
-    pddlStripsSymInitPDG(&C.strips_sym, &C.strips);
-    C.strips_sym_set = 1;
+    pddl_strips_sym_t sym;
+    pddlStripsSymInitPDG(&sym, &C.strips);
 
     fprintf(stdout, "Symmetric facts:\n");
     for (int fact_id = 0; fact_id < C.strips.fact.fact_size; ++fact_id){
@@ -19,7 +19,7 @@ TEST(symmetry, ground_lifted_mgroup_noce)
         pddl_set_iset_t fset;
         pddlSetISetInit(&fset);
         pddlSetISetAdd(&fset, &set);
-        pddlStripsSymAllFactSetSymmetries(&C.strips_sym, &fset);
+        pddlStripsSymAllFactSetSymmetries(&sym, &fset);
 
         BOR_ISET(sym_set);
         const bor_iset_t *s;
@@ -51,7 +51,7 @@ TEST(symmetry, ground_lifted_mgroup_noce)
         pddl_set_iset_t fset;
         pddlSetISetInit(&fset);
         pddlSetISetAdd(&fset, &set);
-        pddlStripsSymAllOpSetSymmetries(&C.strips_sym, &fset);
+        pddlStripsSymAllOpSetSymmetries(&sym, &fset);
 
         BOR_ISET(sym_set);
         const bor_iset_t *s;
@@ -73,6 +73,7 @@ TEST(symmetry, ground_lifted_mgroup_noce)
         borISetFree(&set);
     }
 
+    pddlStripsSymFree(&sym);
     if (fact_used != NULL)
         BOR_FREE(fact_used);
     if (op_used != NULL)

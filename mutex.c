@@ -210,3 +210,58 @@ TEST_TEAR_DOWN(h3)
 {
     freeMem();
 }
+
+static int disamb(pddl_disambiguate_t *dis,
+                  const pddl_strips_t *strips,
+                  const bor_iset_t *s1,
+                  bor_iset_t *s2,
+                  const char *header)
+{
+    int ret = pddlDisambiguateSet(dis, s2);
+    if (ret > 0){
+        fprintf(stdout, "%s\n", header);
+        fprintf(stdout, "  ");
+        pddlFactsPrintSet(s1, &strips->fact, " ", "", stdout);
+        fprintf(stdout, "\n");
+        fprintf(stdout, "   +");
+        BOR_ISET(add);
+        borISetMinus2(&add, s2, s1);
+        pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
+        fprintf(stdout, "\n");
+        borISetFree(&add);
+    }
+
+    return ret;
+}
+
+TEST(disambiguation, h2)
+{
+    pddl_strips_t strips2;
+
+    pddlStripsInitCopy(&strips2, &C.strips);
+
+    pddl_disambiguate_t dis;
+    pddlDisambiguateInit(&dis, C.strips.fact.fact_size, &h2, &C.mg);
+    if (disamb(&dis, &C.strips, &C.strips.goal, &strips2.goal, "Goal:") < 0){
+        fprintf(stdout, "Unsolvable\n");
+    }else{
+        for (int op_id = 0; op_id < C.strips.op.op_size && op_id < 500; ++op_id){
+            const pddl_strips_op_t *op = C.strips.op.op[op_id];
+            pddl_strips_op_t *op2 = strips2.op.op[op_id];
+            char header[128];
+            snprintf(header, 128, "(%s)", op->name);
+            header[127] = 0;
+            int ret = disamb(&dis, &C.strips, &op->pre, &op2->pre, header);
+            if (ret < 0)
+                fprintf(stdout, "Unreachable: (%s)\n", op->name);
+        }
+    }
+    pddlDisambiguateFree(&dis);
+
+    pddlStripsFree(&strips2);
+}
+
+TEST_TEAR_DOWN(disambiguation)
+{
+    freeMem();
+}
