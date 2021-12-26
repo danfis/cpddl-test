@@ -29,19 +29,18 @@ TARGETS = test
 TESTS  = context
 TESTS += pddl
 TESTS += lifted_mgroup
-
 TESTS += strips
 TESTS += mgroup
 TESTS += mutex
 TESTS += h1
 TESTS += sym
-#TESTS += irrelevance
+TESTS += irrelevance
+
 #TESTS += invertible
 ##TESTS += trans_system
 #
 #TESTS += hff
 #TESTS += fdr
-#TESTS += famgroup
 ##TESTS += pot
 ##TESTS += admissible
 ##TESTS += tnf

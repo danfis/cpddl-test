@@ -2,7 +2,7 @@
 #include "test.h"
 #include "context.h"
 
-TEST(irrelevance, strips_noce)
+TEST(irrelevance, strips_pruned)
 {
     BOR_ISET(irr_fact);
     BOR_ISET(irr_op);
