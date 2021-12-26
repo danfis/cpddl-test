@@ -35,12 +35,12 @@ TESTS += mutex
 TESTS += h1
 TESTS += sym
 TESTS += irrelevance
+TESTS += invertible
+TESTS += fdr
 
-#TESTS += invertible
 ##TESTS += trans_system
 #
 #TESTS += hff
-#TESTS += fdr
 ##TESTS += pot
 ##TESTS += admissible
 ##TESTS += tnf

@@ -11,7 +11,7 @@ static int isInMGroup(int fact, const pddl_mgroups_t *mgroups)
     return 0;
 }
 
-TEST(rse_invertible, strips_h2fwbw_pruned)
+TEST(rse_invertible, strips_pruned)
 {
     BOR_ISET(invertible);
     pddlRSEInvertibleFacts(&C.strips, &C.mg, &invertible, &C.err);

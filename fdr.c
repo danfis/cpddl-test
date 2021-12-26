@@ -1,5 +1,269 @@
 #include <assert.h>
+#include <boruvka/rand.h>
 #include "test.h"
 #include "context.h"
 
 
+static void _test_fdr(unsigned fdr_var_flag, unsigned fdr_flag)
+{
+    pddl_mutex_pairs_t mutex;
+    pddlMutexPairsInit(&mutex, C.strips.fact.fact_size);
+    pddlMutexPairsAddMGroups(&mutex, &C.mg);
+
+
+    int ret = pddlFDRInitFromStrips(&C.fdr, &C.strips, &C.mg, &mutex,
+                                    fdr_var_flag, fdr_flag, &C.err);
+    assert(ret == 0);
+    C.fdr_set = 1;
+    pddlFDRPrintFD(&C.fdr, &C.mg, 0, stdout);
+    pddlMutexPairsFree(&mutex);
+}
+
+TEST(fdr_largest, strips_pruned)
+{
+    _test_fdr(PDDL_FDR_VARS_LARGEST_FIRST, 0u);
+}
+
+TEST(fdr_essential, strips_pruned)
+{
+    _test_fdr(PDDL_FDR_VARS_ESSENTIAL_FIRST, 0u);
+}
+
+TEST(fdr_largest_multi, strips_pruned)
+{
+    _test_fdr(PDDL_FDR_VARS_LARGEST_FIRST_MULTI, 0u);
+}
+
+TEST(fdr_h2, strips_pruned)
+{
+    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddlFDRInitFromStrips(&C.fdr, &C.strips, &C.mg, &C.mutex,
+                          var_flag, 0u, &C.err);
+    C.fdr_set = 1;
+
+    BOR_ISET(unreach_op);
+    BOR_ISET(unreach_fact);
+    assert(C.mutex_set);
+    pddl_mg_strips_t mg_strips;
+    pddlMGStripsInitFDR(&mg_strips, &C.fdr);
+    pddlMutexPairsFree(&C.mutex);
+    pddlMutexPairsInitStrips(&C.mutex, &mg_strips.strips);
+    pddlMutexPairsAddMGroups(&C.mutex, &mg_strips.mg);
+    pddlH2(&mg_strips.strips, &C.mutex, &unreach_fact, &unreach_op, 0., &C.err);
+    pddlMGStripsFree(&mg_strips);
+
+    pddlFDRReduce(&C.fdr, NULL, &unreach_fact, &unreach_op);
+    if (borISetSize(&unreach_fact) > 0){
+        pddl_mg_strips_t mg_strips;
+        pddlMGStripsInitFDR(&mg_strips, &C.fdr);
+        pddlMutexPairsFree(&C.mutex);
+        pddlMutexPairsInitStrips(&C.mutex, &mg_strips.strips);
+        pddlMutexPairsAddMGroups(&C.mutex, &mg_strips.mg);
+        pddlH2(&mg_strips.strips, &C.mutex, NULL, NULL, 0., &C.err);
+        pddlMGStripsFree(&mg_strips);
+    }
+
+    borISetFree(&unreach_fact);
+    borISetFree(&unreach_op);
+}
+
+
+static void findOps(const pddl_fdr_app_op_t *app_op,
+                    const pddl_fdr_ops_t *ops,
+                    const int *state,
+                    int depth)
+{
+    BOR_ISET(app);
+    int ret = pddlFDRAppOpFind(app_op, state, &app);
+    assert(ret == borISetSize(&app));
+
+    /*
+    printf("Init: %d:", ret);
+    int op_id;
+    BOR_ISET_FOR_EACH(&app, op_id)
+        printf(" %d", op_id);
+    printf("\n");
+    */
+
+    BOR_ISET(app2);
+    for (int op_id = 0; op_id < ops->op_size; ++op_id){
+        const pddl_fdr_op_t *op = ops->op[op_id];
+        int applicable = 1;
+        for (int fi = 0; fi < op->pre.fact_size; ++fi){
+            const pddl_fdr_fact_t *fact = op->pre.fact + fi;
+            if (state[fact->var] != fact->val){
+                applicable = 0;
+                break;
+            }
+        }
+
+        if (applicable)
+            borISetAdd(&app2, op_id);
+    }
+
+    assert(borISetEq(&app, &app2));
+
+    if (depth > 0){
+        int *next_state = BOR_ALLOC_ARR(int, app_op->var_size);
+        int op_id;
+        BOR_ISET_FOR_EACH(&app, op_id){
+            memcpy(next_state, state, sizeof(int) * app_op->var_size);
+
+            const pddl_fdr_op_t *op = ops->op[op_id];
+            for (int fi = 0; fi < op->eff.fact_size; ++fi)
+                next_state[op->eff.fact[fi].var] = op->eff.fact[fi].val;
+            findOps(app_op, ops, next_state, depth - 1);
+        }
+        BOR_FREE(next_state);
+    }
+
+    borISetFree(&app2);
+    borISetFree(&app);
+}
+
+static void findOpsRand(const pddl_fdr_app_op_t *app_op,
+                        const pddl_fdr_vars_t *vars,
+                        const pddl_fdr_ops_t *ops,
+                        int num_samples)
+{
+    bor_rand_t rnd;
+    borRandInit(&rnd);
+
+    int *state = BOR_ALLOC_ARR(int, vars->var_size);
+    for (int sample = 0; sample < num_samples; ++sample){
+        for (int var = 0; var < vars->var_size; ++var){
+            int val = borRand(&rnd, 0, vars->var[var].val_size);
+            val = BOR_MIN(val, vars->var[var].val_size - 1);
+            state[var] = val;
+        }
+        findOps(app_op, ops, state, 0);
+    }
+    BOR_FREE(state);
+}
+
+TEST(fdr_app_op, fdr_largest)
+{
+    pddlFDRAppOpInit(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
+    C.fdr_app_op_set = 1;
+}
+
+TEST(fdr_app_op_search, fdr_app_op)
+{
+    findOps(&C.fdr_app_op, &C.fdr.op, C.fdr.init, 2);
+}
+
+TEST(fdr_app_op_rand, fdr_app_op)
+{
+    findOpsRand(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, 5000);
+}
+
+TEST(fdr, fdr_app_op)
+{
+}
+
+TEST(fdr_app_op_essential, fdr_essential)
+{
+    pddlFDRAppOpInit(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
+    C.fdr_app_op_set = 1;
+}
+
+TEST(fdr_app_op_search_essential, fdr_app_op_essential)
+{
+    findOps(&C.fdr_app_op, &C.fdr.op, C.fdr.init, 2);
+}
+
+TEST(fdr_app_op_rand_essential, fdr_app_op_essential)
+{
+    findOpsRand(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, 5000);
+}
+
+
+static void _tnf_flow_eq(const pddl_fdr_t *fdr, const pddl_fdr_t *tnf)
+{
+    pddl_hflow_t fdr_flow;
+    pddlHFlowInit(&fdr_flow, fdr, 0);
+
+    pddl_hflow_t tnf_flow;
+    pddlHFlowInit(&tnf_flow, tnf, 0);
+
+    int fdr_cost = pddlHFlow(&fdr_flow, fdr->init, NULL);
+    int tnf_cost = pddlHFlow(&tnf_flow, tnf->init, NULL);
+    assert(fdr_cost == tnf_cost);
+    if (fdr_cost != tnf_cost)
+        fprintf(stderr, "Flow failed. fdr: %d tnf: %d\n", fdr_cost, tnf_cost);
+
+    pddlHFlowFree(&fdr_flow);
+    pddlHFlowFree(&tnf_flow);
+}
+
+static void _tnf_flow_lt(const pddl_fdr_t *fdr, const pddl_fdr_t *tnf)
+{
+    pddl_hflow_t fdr_flow;
+    pddlHFlowInit(&fdr_flow, fdr, 0);
+
+    pddl_hflow_t tnf_flow;
+    pddlHFlowInit(&tnf_flow, tnf, 0);
+
+    int fdr_cost = pddlHFlow(&fdr_flow, fdr->init, NULL);
+    int tnf_cost = pddlHFlow(&tnf_flow, tnf->init, NULL);
+    assert(fdr_cost <= tnf_cost);
+    if (fdr_cost > tnf_cost)
+        fprintf(stderr, "Flow failed. fdr: %d tnf: %d\n", fdr_cost, tnf_cost);
+
+    pddlHFlowFree(&fdr_flow);
+    pddlHFlowFree(&tnf_flow);
+}
+
+static pddl_fdr_t tnf;
+static int tnf_set = 0;
+
+static void freeMem(void)
+{
+    if (tnf_set)
+        pddlFDRFree(&tnf);
+}
+
+TEST(tnf, fdr)
+{
+    pddlFDRInitTransitionNormalForm(&tnf, &C.fdr, NULL, 0, &C.err);
+    pddlFDRPrintFD(&tnf, &C.mg, 0, stdout);
+    tnf_set = 1;
+}
+
+TEST_TEAR_DOWN(tnf)
+{
+    freeMem();
+}
+
+TEST_COND(tnf_heur, tnf, LP)
+{
+    _tnf_flow_eq(&C.fdr, &tnf);
+}
+
+TEST_TEAR_DOWN(tnf_heur)
+{
+    freeMem();
+}
+
+TEST(mtnf, fdr)
+{
+    unsigned flag = PDDL_FDR_TNF_MULTIPLY_OPS;
+    pddlFDRInitTransitionNormalForm(&tnf, &C.fdr, NULL, flag, &C.err);
+    pddlFDRPrintFD(&tnf, &C.mg, 0, stdout);
+    tnf_set = 1;
+}
+
+TEST_TEAR_DOWN(mtnf)
+{
+    freeMem();
+}
+
+TEST_COND(mtnf_heur, mtnf, LP)
+{
+    _tnf_flow_lt(&C.fdr, &tnf);
+}
+
+TEST_TEAR_DOWN(mtnf_heur)
+{
+    freeMem();
+}

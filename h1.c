@@ -2,7 +2,7 @@
 #include "test.h"
 #include "context.h"
 
-TEST(h1, strips_noce)
+TEST(h1, strips_pruned)
 {
     pddl_strips_t strips;
     pddlStripsInitCopy(&strips, &C.strips);

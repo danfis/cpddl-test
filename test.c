@@ -181,6 +181,15 @@ static void addFailure(const test_test_t *t, int status)
     }
 }
 
+static void printNameTree(const test_test_t *t)
+{
+    if (t->parent != NULL)
+        printNameTree(t->parent);
+    if (t->parent != NULL)
+        fprintf(stdout, ".");
+    fprintf(stdout, "%s", t->name);
+}
+
 static void runTestTree(test_test_t *root,
                         int depth,
                         const int *test_ignore)
@@ -200,9 +209,8 @@ static void runTestTree(test_test_t *root,
         if (root->test_fn != NULL){
 
             fprintf(stdout, "%s ", TEST_TASK);
-            for (int i = 0; i < depth; ++i)
-                fprintf(stdout, "  ");
-            fprintf(stdout, "%s ...\n", root->name);
+            printNameTree(root);
+            fprintf(stdout, " ...\n");
             fflush(stdout);
 
             char stdout_fn[256];
@@ -238,12 +246,11 @@ static void runTestTree(test_test_t *root,
 
             clock_gettime(CLOCK_MONOTONIC, &time_end);
             fprintf(stdout, "%s ", TEST_TASK);
-            for (int i = 0; i < depth; ++i)
-                fprintf(stdout, "  ");
+            printNameTree(root);
             float elapsed = timeDiffSeconds(&time_start, &time_end);
             tests_time_sum[root->id] += elapsed;
-            fprintf(stdout, "%s DONE [%.2fs / %.2fs]\n",
-                    root->name, elapsed, tests_time_sum[root->id]);
+            fprintf(stdout, " DONE [%.2fs / %.2fs]\n",
+                    elapsed, tests_time_sum[root->id]);
             fflush(stdout);
         }
 
@@ -261,10 +268,9 @@ static void runTestTree(test_test_t *root,
 
         clock_gettime(CLOCK_MONOTONIC, &time_end);
         fprintf(stdout, "%s ", TEST_TASK);
-        for (int i = 0; i < depth; ++i)
-            fprintf(stdout, "  ");
-        fprintf(stdout, "%s TearDown [%.2fs]\n",
-                root->name, timeDiffSeconds(&time_start, &time_end));
+        printNameTree(root);
+        fprintf(stdout, " TearDown [%.2fs]\n",
+                timeDiffSeconds(&time_start, &time_end));
         fflush(stdout);
 
         freeTasks();
