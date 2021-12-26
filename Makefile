@@ -37,10 +37,10 @@ TESTS += sym
 TESTS += irrelevance
 TESTS += invertible
 TESTS += fdr
+TESTS += hff
 
 ##TESTS += trans_system
 #
-#TESTS += hff
 ##TESTS += pot
 ##TESTS += admissible
 ##TESTS += tnf
