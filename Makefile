@@ -22,10 +22,8 @@ LDFLAGS += $(SQLITE_LDFLAGS)
 CHECK_REG=cu/cu-check-regressions
 CHECK_TS ?=
 
-#TARGETS = test test-pddl test-strips
 TARGETS = test
 
-#TESTS  = lisp_file
 TESTS  = context
 TESTS += pddl
 TESTS += lifted_mgroup
@@ -45,8 +43,6 @@ TESTS += clique
 TESTS += symbolic
 TESTS += datalog
 
-##TESTS += trans_system
-##TESTS += op_mutex_infer
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
 TESTS_C := $(foreach test,$(TESTS),$(test).c)
