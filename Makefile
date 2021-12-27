@@ -41,14 +41,12 @@ TESTS += hff
 TESTS += pot
 TESTS += lmc
 TESTS += flow
+TESTS += clique
+TESTS += symbolic
+TESTS += datalog
 
 ##TESTS += trans_system
-#
-##TESTS += admissible
-TESTS += clique
 ##TESTS += op_mutex_infer
-TESTS += symbolic
-##TESTS += datalog
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
 TESTS_C := $(foreach test,$(TESTS),$(test).c)
