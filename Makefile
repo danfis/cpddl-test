@@ -39,6 +39,8 @@ TESTS += invertible
 TESTS += fdr
 TESTS += hff
 TESTS += pot
+TESTS += lmc
+TESTS += flow
 
 ##TESTS += trans_system
 #
