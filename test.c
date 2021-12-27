@@ -40,9 +40,15 @@ struct task {
     int *test_ignore;
 };
 typedef struct task task_t;
-static task_t *tasks = NULL;
-static int tasks_size = 0;
-static int tasks_alloc = 0;
+
+struct tasks {
+    task_t *tasks;
+    int size;
+    int alloc;
+};
+typedef struct tasks tasks_t;
+
+static tasks_t *tasks = NULL;
 
 
 static test_test_t *tests;
@@ -443,81 +449,88 @@ static void filterTests(const char *name)
     }
 }
 
-static void readTasks(void)
+static task_t *addTask(tasks_t *tasks, const char *name)
 {
-    size_t linesize = 0;
-    char *line = NULL;
-    ssize_t nread;
-    while ((nread = getline(&line, &linesize, stdin)) >= 0){
-        char *next = line;
-        char *name = strsep(&next, " \n\t,;");
-        if (strlen(name) == 0 || name[0] == '#')
-            continue;
-
-        if (tasks_size == tasks_alloc){
-            if (tasks_alloc == 0)
-                tasks_alloc = 8;
-            tasks_alloc *= 2;
-            tasks = realloc(tasks, sizeof(task_t) * tasks_alloc);
-        }
-        task_t *task = tasks + tasks_size++;
-        task->task = strdup(name);
-        task->test_run = calloc(tests_size, sizeof(int));
-        task->test_ignore = calloc(tests_size, sizeof(int));
-        task->found_run = 0;
-        for (int i = 0; i < tests_size; ++i){
-            if (tests[i].is_explicit && tests[i].parent == NULL)
-                task->test_ignore[i] = 1;
-        }
-        char *cur;
-        while ((cur = strsep(&next, " \n\t,;")) != NULL){
-            if (cur[0] == '!'){
-                for (int i = 0; i < tests_size; ++i){
-                    if (strcmp(cur + 1, tests[i].name) == 0){
-                        task->test_ignore[i] = 1;
-                        task->test_run[i] = 0;
-                    }
-                }
-            }else{
-                for (int i = 0; i < tests_size; ++i){
-                    if (strcmp(cur, tests[i].name) == 0){
-                        task->test_ignore[i] = 0;
-                        task->test_run[i] = 1;
-                        task->found_run = 1;
-                    }
-                }
-            }
-        }
+    if (tasks->size == tasks->alloc){
+        if (tasks->alloc == 0)
+            tasks->alloc = 8;
+        tasks->alloc *= 2;
+        tasks->tasks = realloc(tasks->tasks, sizeof(task_t) * tasks->alloc);
     }
 
-    if (line != NULL)
-        free(line);
+    task_t *task = tasks->tasks + tasks->size++;
+    task->task = strdup(name);
+    task->test_run = calloc(tests_size, sizeof(int));
+    task->test_ignore = calloc(tests_size, sizeof(int));
+    task->found_run = 0;
+    for (int i = 0; i < tests_size; ++i){
+        if (tests[i].is_explicit && tests[i].parent == NULL)
+            task->test_ignore[i] = 1;
+    }
+    return task;
 }
+
+static void disableTaskTest(task_t *task, const char *test_name)
+{
+    for (int i = 0; i < tests_size; ++i){
+        if (strcmp(test_name, tests[i].name) == 0){
+            task->test_ignore[i] = 1;
+            task->test_run[i] = 0;
+        }
+    }
+}
+
+static void enableTaskTest(task_t *task, const char *test_name)
+{
+    for (int i = 0; i < tests_size; ++i){
+        if (strcmp(test_name, tests[i].name) == 0){
+            task->test_ignore[i] = 0;
+            task->test_run[i] = 1;
+            task->found_run = 1;
+        }
+    }
+}
+
+static void _freeTasks(tasks_t *tasks)
+{
+    for (int i = 0; i < tasks->size; ++i){
+        free(tasks->tasks[i].task);
+        free(tasks->tasks[i].test_run);
+        free(tasks->tasks[i].test_ignore);
+    }
+    if (tasks->tasks != NULL)
+        free(tasks->tasks);
+}
+
+#include "test.tasks.base.in.c"
+#include "test.tasks.noce.in.c"
+
+static void setUpTasks(void)
+{
+    tasks = &tasks_base;
+    addTasks_base();
+    addTasks_noce();
+}
+
 
 static void freeTasks(void)
 {
-    for (int i = 0; i < tasks_size; ++i){
-        free(tasks[i].task);
-        free(tasks[i].test_run);
-        free(tasks[i].test_ignore);
-    }
-    if (tasks != NULL)
-        free(tasks);
+    _freeTasks(&tasks_base);
 }
 
 static void filterTasksSubstr(const char *s)
 {
-    for (int i = 0; i < tasks_size; ++i){
-        if (strstr(tasks[i].task, s) == NULL)
-            tasks[i].disabled = 1;
+    for (int i = 0; i < tasks->size; ++i){
+        if (strstr(tasks->tasks[i].task, s) == NULL)
+            tasks->tasks[i].disabled = 1;
     }
 }
 
 static void filterTasks(const char *s)
 {
-    for (int i = 0; i < tasks_size; ++i){
-        if (strcmp(tasks[i].task, s) != 0)
-            tasks[i].disabled = 1;
+    for (int i = 0; i < tasks->size; ++i){
+        if (strcmp(tasks->tasks[i].task, s) != 0)
+            tasks->tasks[i].disabled = 1;
     }
 }
 
@@ -664,7 +677,7 @@ int main(int argc, char *argv[])
 {
     cleanRegDir();
     buildTestTree();
-    readTasks();
+    setUpTasks();
 
     int opt;
     while ((opt = getopt(argc, argv, "S:T:s:t:")) != -1) {
@@ -697,9 +710,9 @@ int main(int argc, char *argv[])
     tests_time_sum = (float *)(tests_stats + tests_size);
 
     clock_gettime(CLOCK_MONOTONIC, &g_time_start);
-    for (int i = 0; i < tasks_size; ++i){
-        if (!tasks[i].disabled)
-            runTask(tasks + i);
+    for (int i = 0; i < tasks->size; ++i){
+        if (!tasks->tasks[i].disabled)
+            runTask(tasks->tasks + i);
     }
     clock_gettime(CLOCK_MONOTONIC, &g_time_end);
 

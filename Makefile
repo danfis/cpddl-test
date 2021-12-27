@@ -46,18 +46,26 @@ TESTS += hff
 ##TESTS += tnf
 #TESTS += clique
 ##TESTS += op_mutex_infer
-##TESTS += symbolic
+TESTS += symbolic
 ##TESTS += datalog
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
 TESTS_C := $(foreach test,$(TESTS),$(test).c)
 
+C_IN  = test.in.c
+C_IN += test.tasks.base.in.c
+C_IN += test.tasks.noce.in.c
+
 all: $(TARGETS)
 
-test: test.c test.in.c ../libpddl.a $(OBJS)
+test: test.c $(C_IN) ../libpddl.a $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $< $(OBJS) $(LDFLAGS)
 test.in.c: gen-tests.py $(TESTS_C)
 	python3 gen-tests.py $(TESTS_C) >$@
+test.tasks.base.in.c: tasks-base.txt gen-tasks.py
+	python3 gen-tasks.py base <$< >$@
+test.tasks.noce.in.c: tasks-noce.txt gen-tasks.py
+	python3 gen-tasks.py noce <$< >$@
 
 .objs/%.o: %.c %.h %_prob.h
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -67,7 +75,7 @@ test.in.c: gen-tests.py $(TESTS_C)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 check: all submodule
-	./test $(T) <tasks-base.txt 2>&1 | tee check.log
+	./test $(T) 2>&1 | tee check.log
 
 submodule: pddl-data/test-seq/test/domain.pddl
 pddl-data/test-seq/test/domain.pddl:
