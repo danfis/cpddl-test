@@ -38,13 +38,12 @@ TESTS += irrelevance
 TESTS += invertible
 TESTS += fdr
 TESTS += hff
+TESTS += pot
 
 ##TESTS += trans_system
 #
-##TESTS += pot
 ##TESTS += admissible
-##TESTS += tnf
-#TESTS += clique
+TESTS += clique
 ##TESTS += op_mutex_infer
 TESTS += symbolic
 ##TESTS += datalog
