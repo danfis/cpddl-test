@@ -49,7 +49,7 @@ TESTS_C := $(foreach test,$(TESTS),$(test).c)
 
 C_IN  = test.in.c
 C_IN += test.tasks.base.in.c
-C_IN += test.tasks.noce.in.c
+C_IN += test.tasks.all.in.c
 
 all: $(TARGETS)
 
@@ -59,8 +59,8 @@ test.in.c: gen-tests.py $(TESTS_C)
 	python3 gen-tests.py $(TESTS_C) >$@
 test.tasks.base.in.c: tasks-base.txt gen-tasks.py
 	python3 gen-tasks.py base <$< >$@
-test.tasks.noce.in.c: tasks-noce.txt gen-tasks.py
-	python3 gen-tasks.py noce <$< >$@
+test.tasks.all.in.c: tasks-base.txt tasks-noce.txt gen-tasks.py
+	cat tasks-base.txt tasks-noce.txt | python3 gen-tasks.py all >$@
 
 .objs/%.o: %.c %.h %_prob.h
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -96,6 +96,7 @@ clean:
 	rm -f test.in.c
 	rm -f *.o
 	rm -f .objs/*.o
+	rm -f *.in.c
 	rm -f $(TARGETS)
 	rm -f tmp.*
 	rm -f reg/tmp.*

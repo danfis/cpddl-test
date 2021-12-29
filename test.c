@@ -1,5 +1,8 @@
+#include <sys/time.h>
+#include <sys/resource.h>
 #include <sys/wait.h>
 #include <sys/mman.h>
+#include <pthread.h>
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
@@ -9,6 +12,8 @@
 #include "test.h"
 
 #include "test.in.c"
+
+#define TIMEOUT 0
 
 static const char *FAIL_FILENAME = "reg/tmp.failed";
 
@@ -196,6 +201,13 @@ static void printNameTree(const test_test_t *t)
     fprintf(stdout, "%s", t->name);
 }
 
+static void *thTimeout(void *_)
+{
+    sleep(TIMEOUT);
+    kill(getpid(), SIGTERM);
+    return NULL;
+}
+
 static void runTestTree(test_test_t *root,
                         int depth,
                         const int *test_ignore)
@@ -237,7 +249,12 @@ static void runTestTree(test_test_t *root,
                 exit(-1);
             }
 
+            pthread_t thtimeout;
+            if (TIMEOUT > 0)
+                pthread_create(&thtimeout, NULL, thTimeout, NULL);
             root->test_fn();
+            if (TIMEOUT > 0)
+                pthread_cancel(thtimeout);
 
             fflush(stdout);
             dup2(fd_stdout, fileno(stdout));
@@ -267,6 +284,7 @@ static void runTestTree(test_test_t *root,
             runTestTree(next, depth + 1, test_ignore);
         }
 
+
         if (root->test_fn_tear_down != NULL)
             root->test_fn_tear_down();
         if (global_tear_down != NULL)
@@ -281,6 +299,7 @@ static void runTestTree(test_test_t *root,
 
         freeTasks();
         freeTestTree();
+
         exit(0);
 
     }else{ // pid > 0
@@ -298,19 +317,11 @@ static void runTestTree(test_test_t *root,
         int failed = 0;
         if (!WIFEXITED(status)){ /* if child process ends up abnormaly */
             if (WIFSIGNALED(status)){
-                for (int i = 0; i < depth; ++i)
-                    fprintf(stdout, "  ");
                 fprintf(stdout, "%s was terminated by signal %d (%s).\n",
                         root->name, WTERMSIG(status), strsignal(WTERMSIG(status)));
-                for (int i = 0; i < depth; ++i)
-                    fprintf(stdout, "  ");
                 fprintf(stdout, "%s FAILED\n", root->name);
             }else{
-                for (int i = 0; i < depth; ++i)
-                    fprintf(stdout, "  ");
                 fprintf(stdout, "%s terminated abnormaly!\n", root->name);
-                for (int i = 0; i < depth; ++i)
-                    fprintf(stdout, "  ");
                 fprintf(stdout, "%s FAILED\n", root->name);
             }
 
@@ -321,12 +332,8 @@ static void runTestTree(test_test_t *root,
         }else{
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0){
-                for (int i = 0; i < depth; ++i)
-                    fprintf(stdout, "  ");
                 fprintf(stdout, "%s terminated with exit status %d.\n",
                         root->name, exit_status);
-                for (int i = 0; i < depth; ++i)
-                    fprintf(stdout, "  ");
                 fprintf(stdout, "%s FAILED\n", root->name);
                 tests_stats[root->id] = -1;
                 failed = 1;
@@ -459,6 +466,7 @@ static task_t *addTask(tasks_t *tasks, const char *name)
     }
 
     task_t *task = tasks->tasks + tasks->size++;
+    bzero(task, sizeof(*task));
     task->task = strdup(name);
     task->test_run = calloc(tests_size, sizeof(int));
     task->test_ignore = calloc(tests_size, sizeof(int));
@@ -503,13 +511,13 @@ static void _freeTasks(tasks_t *tasks)
 }
 
 #include "test.tasks.base.in.c"
-#include "test.tasks.noce.in.c"
+#include "test.tasks.all.in.c"
 
 static void setUpTasks(void)
 {
     tasks = &tasks_base;
     addTasks_base();
-    addTasks_noce();
+    addTasks_all();
 }
 
 
@@ -669,19 +677,28 @@ static void cleanRegDir(void)
 
 static void usage(char *p)
 {
-    fprintf(stderr, "Usage: %s [-T task_substr] [-t test_name]\n", p);
+    fprintf(stderr, "Usage: %s [-a]"
+                    " [-S task_substr] [-T task_name]"
+                    " [-s test_substr] [-t test_name]\n", p);
     exit(-1);
 }
 
 int main(int argc, char *argv[])
 {
+    struct rlimit mem_limit;
+    mem_limit.rlim_cur = mem_limit.rlim_max = 4096ul * 1024ul * 1024ul;
+    setrlimit(RLIMIT_AS, &mem_limit);
+
     cleanRegDir();
     buildTestTree();
     setUpTasks();
 
     int opt;
-    while ((opt = getopt(argc, argv, "S:T:s:t:")) != -1) {
+    while ((opt = getopt(argc, argv, "aS:T:s:t:")) != -1) {
         switch (opt) {
+            case 'a':
+                tasks = &tasks_all;
+                break;
             case 'S':
                 filterTasksSubstr(optarg);
                 break;

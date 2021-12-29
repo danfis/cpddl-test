@@ -59,7 +59,7 @@ static void checkPlan(const pddl_strips_t *strips, const bor_iarr_t *plan)
     assert(borISetIsSubset(&strips->goal, &state));
     borISetFree(&state);
 
-    if (C.optimal_cost >= 0)
+    if (C.optimal_cost < PDDL_COST_MAX)
         assert(C.optimal_cost == plan_cost);
 }
 
@@ -70,6 +70,9 @@ TEST_COND(symbolic, fdr, CUDD)
 
 TEST(symbolic_fw, symbolic)
 {
+    if (C.fdr.goal_is_unreachable)
+        return;
+
     pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
     symb_cfg.fw.enabled = 1;
     symb_cfg.bw.enabled = 0;
@@ -87,6 +90,9 @@ TEST(symbolic_fw, symbolic)
 
 TEST(symbolic_fwbw, symbolic)
 {
+    if (C.fdr.goal_is_unreachable)
+        return;
+
     pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
     symb_cfg.fw.enabled = 1;
     symb_cfg.bw.enabled = 1;
@@ -105,6 +111,9 @@ TEST(symbolic_fwbw, symbolic)
 
 TEST(symbolic_bw, symbolic)
 {
+    if (C.fdr.goal_is_unreachable)
+        return;
+
     pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
     symb_cfg.fw.enabled = 0;
     symb_cfg.bw.enabled = 1;

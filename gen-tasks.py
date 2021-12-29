@@ -4,6 +4,9 @@ import sys
 import re
 from pprint import pprint
 
+LARGE_TESTS = ['h3', 'h3mgroup', 'symbolic']
+VERY_LARGE_TESTS = LARGE_TESTS \
+    + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential']
 Task = {}
 
 def parseFile():
@@ -13,9 +16,21 @@ def parseFile():
         task = s[0]
         if s[0] in Task:
             raise Exception('{0} already defined'.format(s[0]))
+        disabled = []
+        enabled = []
+        large = False
+        for x in s[1:]:
+            if x == '~L':
+                disabled += LARGE_TESTS
+            if x == '~LL':
+                disabled += VERY_LARGE_TESTS
+            elif x.startswith('!'):
+                disabled += [x[1:]]
+            else:
+                enabled += [x]
         d = {
-            'disabled' : sorted([x[1:] for x in s[1:] if x.startswith('!')]),
-            'enabled' : sorted([x for x in s[1:] if not x.startswith('!')]),
+            'disabled' : sorted(list(set(disabled))),
+            'enabled' : sorted(list(set(enabled))),
         }
         Task[s[0]] = d
 
@@ -29,7 +44,7 @@ def genDeclarations():
             print('void test_tear_down_{0}(void);'.format(key))
 
 def genDefs(dname):
-    print('static tasks_t tasks_{0};'.format(dname))
+    print('static tasks_t tasks_{0} = {{0}};'.format(dname))
     print('static void addTasks_{0}(void)'.format(dname))
     print('{')
     for name in sorted(Task.keys()):
