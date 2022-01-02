@@ -167,7 +167,7 @@ static void addFailure(const test_test_t *t, int status)
     fmtBaseFilename(TEST_TASK, t->name, "out", base);
     if (access(base, F_OK) == 0){
         char cmd[2048];
-        sprintf(cmd, "diff -y -W %s %s | head -15 | awk '{print \"  >OUT>\", $0}' >>%s",
+        sprintf(cmd, "diff -y -W150 %s %s | head -15 | awk '{print \"  >OUT>\", $0}' >>%s",
                 base, fn, FAIL_FILENAME);
         system(cmd);
     }else if (filesize(fn) > 0){
@@ -181,7 +181,7 @@ static void addFailure(const test_test_t *t, int status)
     fmtBaseFilename(TEST_TASK, t->name, "err", base);
     if (access(base, F_OK) == 0){
         char cmd[2048];
-        sprintf(cmd, "diff -y -W %s %s | head -15 | awk '{print \"  >ERR>\", $0}' >>%s",
+        sprintf(cmd, "diff -y -W150 %s %s | head -15 | awk '{print \"  >ERR>\", $0}' >>%s",
                 base, fn, FAIL_FILENAME);
         system(cmd);
     }else if (filesize(fn) > 0){
@@ -353,7 +353,24 @@ static void runTestTree(test_test_t *root,
 
         fclose(retout);
 
-        // TODO: diff -q
+        char fn[512];
+        fmtOutputFilename(TEST_TASK, root->name, "out", fn);
+
+        char base[512];
+        fmtBaseFilename(TEST_TASK, root->name, "out", base);
+        if (access(base, F_OK) == 0){
+            char cmd[2048];
+            sprintf(cmd, "diff -q %s %s", base, fn);
+            int ret = system(cmd);
+            if (ret > 0){
+                tests_stats[root->id] = -1;
+                failed = 1;
+            }
+            fprintf(stdout, "diff -q: %d\n", ret);
+        }else if (filesize(fn) > 0){
+            tests_stats[root->id] = -1;
+            failed = 1;
+        }
 
         if (failed)
             addFailure(root, status);
