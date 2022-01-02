@@ -1,0 +1,47 @@
+Fact[14]:
+  (counter-at-zero 0-0-0)
+  (none-of-those 0-1-1)
+  (have-cheese 1-0-2)
+  (none-of-those 1-1-3)
+  (have-chips 2-0-4)
+  (none-of-those 2-1-5)
+  (have-crackers 3-0-6)
+  (none-of-those 3-1-7)
+  (have-dip 4-0-8)
+  (none-of-those 4-1-9)
+  (have-pop 5-0-10)
+  (none-of-those 5-1-11)
+  (movie-rewound 6-0-12)
+  (none-of-those 6-1-13)
+Op[7]:
+  (get-cheese z1), cost: 1
+    pre:
+    add: (have-cheese 1-0-2)
+    del: (none-of-those 1-1-3)
+  (get-chips c1), cost: 1
+    pre:
+    add: (have-chips 2-0-4)
+    del: (none-of-those 2-1-5)
+  (get-crackers k1), cost: 1
+    pre:
+    add: (have-crackers 3-0-6)
+    del: (none-of-those 3-1-7)
+  (get-dip d1), cost: 1
+    pre:
+    add: (have-dip 4-0-8)
+    del: (none-of-those 4-1-9)
+  (get-pop p1), cost: 1
+    pre:
+    add: (have-pop 5-0-10)
+    del: (none-of-those 5-1-11)
+  (reset-counter), cost: 1
+    pre:
+    add: (counter-at-zero 0-0-0)
+    del: (none-of-those 0-1-1)
+  (rewind-movie), cost: 1
+    pre:
+    add: (none-of-those 0-1-1) (movie-rewound 6-0-12)
+    del: (counter-at-zero 0-0-0) (none-of-those 6-1-13)
+Init State: (none-of-those 0-1-1) (none-of-those 1-1-3) (none-of-those 2-1-5) (none-of-those 3-1-7) (none-of-those 4-1-9) (none-of-those 5-1-11) (none-of-those 6-1-13)
+Goal: (counter-at-zero 0-0-0) (have-cheese 1-0-2) (have-chips 2-0-4) (have-crackers 3-0-6) (have-dip 4-0-8) (have-pop 5-0-10) (movie-rewound 6-0-12)
+Value: 7

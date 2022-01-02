@@ -1,0 +1,1187 @@
+Fact[86]:
+  (clean shot4 0-0-0)
+  (contains shot4 cocktail1 0-1-1)
+  (contains shot4 cocktail2 0-2-2)
+  (contains shot4 cocktail3 0-3-3)
+  (used shot4 ingredient1 0-4-4)
+  (used shot4 ingredient2 0-5-5)
+  (used shot4 ingredient3 0-6-6)
+  (none-of-those 0-7-7)
+  (handempty left 1-0-8)
+  (holding left shaker1 1-1-9)
+  (holding left shot1 1-2-10)
+  (holding left shot2 1-3-11)
+  (holding left shot3 1-4-12)
+  (holding left shot4 1-5-13)
+  (handempty right 2-0-14)
+  (holding right shaker1 2-1-15)
+  (holding right shot1 2-2-16)
+  (holding right shot2 2-3-17)
+  (holding right shot3 2-4-18)
+  (holding right shot4 2-5-19)
+  (clean shot1 3-0-20)
+  (contains shot1 cocktail3 3-1-21)
+  (used shot1 ingredient1 3-2-22)
+  (used shot1 ingredient2 3-3-23)
+  (used shot1 ingredient3 3-4-24)
+  (none-of-those 3-5-25)
+  (clean shot2 4-0-26)
+  (contains shot2 cocktail1 4-1-27)
+  (used shot2 ingredient1 4-2-28)
+  (used shot2 ingredient2 4-3-29)
+  (used shot2 ingredient3 4-4-30)
+  (none-of-those 4-5-31)
+  (clean shot3 5-0-32)
+  (contains shot3 cocktail2 5-1-33)
+  (used shot3 ingredient1 5-2-34)
+  (used shot3 ingredient2 5-3-35)
+  (used shot3 ingredient3 5-4-36)
+  (none-of-those 5-5-37)
+  (contains shaker1 cocktail1 6-0-38)
+  (contains shaker1 cocktail2 6-1-39)
+  (contains shaker1 cocktail3 6-2-40)
+  (empty shaker1 6-3-41)
+  (unshaked shaker1 6-4-42)
+  (contains shot1 ingredient1 7-0-43)
+  (contains shot1 ingredient2 7-1-44)
+  (contains shot1 ingredient3 7-2-45)
+  (empty shot1 7-3-46)
+  (none-of-those 7-4-47)
+  (contains shot2 ingredient1 8-0-48)
+  (contains shot2 ingredient2 8-1-49)
+  (contains shot2 ingredient3 8-2-50)
+  (empty shot2 8-3-51)
+  (none-of-those 8-4-52)
+  (contains shot3 ingredient1 9-0-53)
+  (contains shot3 ingredient2 9-1-54)
+  (contains shot3 ingredient3 9-2-55)
+  (empty shot3 9-3-56)
+  (none-of-those 9-4-57)
+  (contains shot4 ingredient1 10-0-58)
+  (contains shot4 ingredient2 10-1-59)
+  (contains shot4 ingredient3 10-2-60)
+  (empty shot4 10-3-61)
+  (none-of-those 10-4-62)
+  (shaker-level shaker1 l0 11-0-63)
+  (shaker-level shaker1 l1 11-1-64)
+  (shaker-level shaker1 l2 11-2-65)
+  (ontable shaker1 12-0-66)
+  (none-of-those 12-1-67)
+  (ontable shot1 13-0-68)
+  (none-of-those 13-1-69)
+  (ontable shot2 14-0-70)
+  (none-of-those 14-1-71)
+  (ontable shot3 15-0-72)
+  (none-of-those 15-1-73)
+  (ontable shot4 16-0-74)
+  (none-of-those 16-1-75)
+  (shaked shaker1 17-0-76)
+  (none-of-those 17-1-77)
+  (clean shaker1 18-0-78)
+  (none-of-those 18-1-79)
+  (contains shaker1 ingredient1 19-0-80)
+  (none-of-those 19-1-81)
+  (contains shaker1 ingredient2 20-0-82)
+  (none-of-those 20-1-83)
+  (contains shaker1 ingredient3 21-0-84)
+  (none-of-those 21-1-85)
+Op[274]:
+  (clean-shaker left right shaker1), cost: 1
+    pre: (holding left shaker1 1-1-9) (handempty right 2-0-14) (empty shaker1 6-3-41)
+    add: (clean shaker1 18-0-78)
+    del: (none-of-those 18-1-79)
+  (clean-shaker right left shaker1), cost: 1
+    pre: (handempty left 1-0-8) (holding right shaker1 2-1-15) (empty shaker1 6-3-41)
+    add: (clean shaker1 18-0-78)
+    del: (none-of-those 18-1-79)
+  (clean-shot shot1 ingredient1 left right), cost: 1
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (used shot1 ingredient1 3-2-22) (empty shot1 7-3-46)
+    add: (clean shot1 3-0-20)
+    del: (used shot1 ingredient1 3-2-22)
+  (clean-shot shot1 ingredient1 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (used shot1 ingredient1 3-2-22) (empty shot1 7-3-46)
+    add: (clean shot1 3-0-20)
+    del: (used shot1 ingredient1 3-2-22)
+  (clean-shot shot1 ingredient2 left right), cost: 1
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (used shot1 ingredient2 3-3-23) (empty shot1 7-3-46)
+    add: (clean shot1 3-0-20)
+    del: (used shot1 ingredient2 3-3-23)
+  (clean-shot shot1 ingredient2 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (used shot1 ingredient2 3-3-23) (empty shot1 7-3-46)
+    add: (clean shot1 3-0-20)
+    del: (used shot1 ingredient2 3-3-23)
+  (clean-shot shot1 ingredient3 left right), cost: 1
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (used shot1 ingredient3 3-4-24) (empty shot1 7-3-46)
+    add: (clean shot1 3-0-20)
+    del: (used shot1 ingredient3 3-4-24)
+  (clean-shot shot1 ingredient3 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (used shot1 ingredient3 3-4-24) (empty shot1 7-3-46)
+    add: (clean shot1 3-0-20)
+    del: (used shot1 ingredient3 3-4-24)
+  (clean-shot shot2 ingredient1 left right), cost: 1
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (used shot2 ingredient1 4-2-28) (empty shot2 8-3-51)
+    add: (clean shot2 4-0-26)
+    del: (used shot2 ingredient1 4-2-28)
+  (clean-shot shot2 ingredient1 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (used shot2 ingredient1 4-2-28) (empty shot2 8-3-51)
+    add: (clean shot2 4-0-26)
+    del: (used shot2 ingredient1 4-2-28)
+  (clean-shot shot2 ingredient2 left right), cost: 1
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (used shot2 ingredient2 4-3-29) (empty shot2 8-3-51)
+    add: (clean shot2 4-0-26)
+    del: (used shot2 ingredient2 4-3-29)
+  (clean-shot shot2 ingredient2 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (used shot2 ingredient2 4-3-29) (empty shot2 8-3-51)
+    add: (clean shot2 4-0-26)
+    del: (used shot2 ingredient2 4-3-29)
+  (clean-shot shot2 ingredient3 left right), cost: 1
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (used shot2 ingredient3 4-4-30) (empty shot2 8-3-51)
+    add: (clean shot2 4-0-26)
+    del: (used shot2 ingredient3 4-4-30)
+  (clean-shot shot2 ingredient3 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (used shot2 ingredient3 4-4-30) (empty shot2 8-3-51)
+    add: (clean shot2 4-0-26)
+    del: (used shot2 ingredient3 4-4-30)
+  (clean-shot shot3 ingredient1 left right), cost: 1
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (used shot3 ingredient1 5-2-34) (empty shot3 9-3-56)
+    add: (clean shot3 5-0-32)
+    del: (used shot3 ingredient1 5-2-34)
+  (clean-shot shot3 ingredient1 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (used shot3 ingredient1 5-2-34) (empty shot3 9-3-56)
+    add: (clean shot3 5-0-32)
+    del: (used shot3 ingredient1 5-2-34)
+  (clean-shot shot3 ingredient2 left right), cost: 1
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (used shot3 ingredient2 5-3-35) (empty shot3 9-3-56)
+    add: (clean shot3 5-0-32)
+    del: (used shot3 ingredient2 5-3-35)
+  (clean-shot shot3 ingredient2 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (used shot3 ingredient2 5-3-35) (empty shot3 9-3-56)
+    add: (clean shot3 5-0-32)
+    del: (used shot3 ingredient2 5-3-35)
+  (clean-shot shot3 ingredient3 left right), cost: 1
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (used shot3 ingredient3 5-4-36) (empty shot3 9-3-56)
+    add: (clean shot3 5-0-32)
+    del: (used shot3 ingredient3 5-4-36)
+  (clean-shot shot3 ingredient3 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (used shot3 ingredient3 5-4-36) (empty shot3 9-3-56)
+    add: (clean shot3 5-0-32)
+    del: (used shot3 ingredient3 5-4-36)
+  (clean-shot shot4 ingredient1 left right), cost: 1
+    pre: (used shot4 ingredient1 0-4-4) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (clean shot4 0-0-0)
+    del: (used shot4 ingredient1 0-4-4)
+  (clean-shot shot4 ingredient1 right left), cost: 1
+    pre: (used shot4 ingredient1 0-4-4) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (clean shot4 0-0-0)
+    del: (used shot4 ingredient1 0-4-4)
+  (clean-shot shot4 ingredient2 left right), cost: 1
+    pre: (used shot4 ingredient2 0-5-5) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (clean shot4 0-0-0)
+    del: (used shot4 ingredient2 0-5-5)
+  (clean-shot shot4 ingredient2 right left), cost: 1
+    pre: (used shot4 ingredient2 0-5-5) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (clean shot4 0-0-0)
+    del: (used shot4 ingredient2 0-5-5)
+  (clean-shot shot4 ingredient3 left right), cost: 1
+    pre: (used shot4 ingredient3 0-6-6) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (clean shot4 0-0-0)
+    del: (used shot4 ingredient3 0-6-6)
+  (clean-shot shot4 ingredient3 right left), cost: 1
+    pre: (used shot4 ingredient3 0-6-6) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (clean shot4 0-0-0)
+    del: (used shot4 ingredient3 0-6-6)
+  (empty-shaker left shaker1 cocktail1 l0 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l0 11-0-63) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail1 6-0-38) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail1 l2 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail2 l0 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l0 11-0-63) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail2 6-1-39) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail2 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail2 l2 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail3 l0 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l0 11-0-63) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail3 6-2-40) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail3 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+  (empty-shaker left shaker1 cocktail3 l2 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail1 l0 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l0 11-0-63) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail1 6-0-38) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail1 l2 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail1 6-0-38) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail2 l0 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l0 11-0-63) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail2 6-1-39) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail2 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail2 l2 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail2 6-1-39) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail3 l0 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l0 11-0-63) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail3 6-2-40) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail3 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+  (empty-shaker right shaker1 cocktail3 l2 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (empty shaker1 6-3-41) (shaker-level shaker1 l0 11-0-63) (none-of-those 17-1-77)
+    del: (contains shaker1 cocktail3 6-2-40) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+  (empty-shot left shot1 cocktail3), cost: 1
+    pre: (holding left shot1 1-2-10) (contains shot1 cocktail3 3-1-21)
+    add: (none-of-those 3-5-25) (empty shot1 7-3-46)
+    del: (contains shot1 cocktail3 3-1-21) (contains shot1 ingredient1 7-0-43) (contains shot1 ingredient2 7-1-44) (contains shot1 ingredient3 7-2-45) (none-of-those 7-4-47)
+  (empty-shot left shot1 ingredient1), cost: 1
+    pre: (holding left shot1 1-2-10) (contains shot1 ingredient1 7-0-43)
+    add: (empty shot1 7-3-46)
+    del: (contains shot1 ingredient1 7-0-43)
+  (empty-shot left shot1 ingredient2), cost: 1
+    pre: (holding left shot1 1-2-10) (contains shot1 ingredient2 7-1-44)
+    add: (empty shot1 7-3-46)
+    del: (contains shot1 ingredient2 7-1-44)
+  (empty-shot left shot1 ingredient3), cost: 1
+    pre: (holding left shot1 1-2-10) (contains shot1 ingredient3 7-2-45)
+    add: (empty shot1 7-3-46)
+    del: (contains shot1 ingredient3 7-2-45)
+  (empty-shot left shot2 cocktail1), cost: 1
+    pre: (holding left shot2 1-3-11) (contains shot2 cocktail1 4-1-27)
+    add: (none-of-those 4-5-31) (empty shot2 8-3-51)
+    del: (contains shot2 cocktail1 4-1-27) (contains shot2 ingredient1 8-0-48) (contains shot2 ingredient2 8-1-49) (contains shot2 ingredient3 8-2-50) (none-of-those 8-4-52)
+  (empty-shot left shot2 ingredient1), cost: 1
+    pre: (holding left shot2 1-3-11) (contains shot2 ingredient1 8-0-48)
+    add: (empty shot2 8-3-51)
+    del: (contains shot2 ingredient1 8-0-48)
+  (empty-shot left shot2 ingredient2), cost: 1
+    pre: (holding left shot2 1-3-11) (contains shot2 ingredient2 8-1-49)
+    add: (empty shot2 8-3-51)
+    del: (contains shot2 ingredient2 8-1-49)
+  (empty-shot left shot2 ingredient3), cost: 1
+    pre: (holding left shot2 1-3-11) (contains shot2 ingredient3 8-2-50)
+    add: (empty shot2 8-3-51)
+    del: (contains shot2 ingredient3 8-2-50)
+  (empty-shot left shot3 cocktail2), cost: 1
+    pre: (holding left shot3 1-4-12) (contains shot3 cocktail2 5-1-33)
+    add: (none-of-those 5-5-37) (empty shot3 9-3-56)
+    del: (contains shot3 cocktail2 5-1-33) (contains shot3 ingredient1 9-0-53) (contains shot3 ingredient2 9-1-54) (contains shot3 ingredient3 9-2-55) (none-of-those 9-4-57)
+  (empty-shot left shot3 ingredient1), cost: 1
+    pre: (holding left shot3 1-4-12) (contains shot3 ingredient1 9-0-53)
+    add: (empty shot3 9-3-56)
+    del: (contains shot3 ingredient1 9-0-53)
+  (empty-shot left shot3 ingredient2), cost: 1
+    pre: (holding left shot3 1-4-12) (contains shot3 ingredient2 9-1-54)
+    add: (empty shot3 9-3-56)
+    del: (contains shot3 ingredient2 9-1-54)
+  (empty-shot left shot3 ingredient3), cost: 1
+    pre: (holding left shot3 1-4-12) (contains shot3 ingredient3 9-2-55)
+    add: (empty shot3 9-3-56)
+    del: (contains shot3 ingredient3 9-2-55)
+  (empty-shot left shot4 cocktail1), cost: 1
+    pre: (contains shot4 cocktail1 0-1-1) (holding left shot4 1-5-13)
+    add: (none-of-those 0-7-7) (empty shot4 10-3-61)
+    del: (contains shot4 cocktail1 0-1-1) (contains shot4 ingredient1 10-0-58) (contains shot4 ingredient2 10-1-59) (contains shot4 ingredient3 10-2-60) (none-of-those 10-4-62)
+  (empty-shot left shot4 cocktail2), cost: 1
+    pre: (contains shot4 cocktail2 0-2-2) (holding left shot4 1-5-13)
+    add: (none-of-those 0-7-7) (empty shot4 10-3-61)
+    del: (contains shot4 cocktail2 0-2-2) (contains shot4 ingredient1 10-0-58) (contains shot4 ingredient2 10-1-59) (contains shot4 ingredient3 10-2-60) (none-of-those 10-4-62)
+  (empty-shot left shot4 cocktail3), cost: 1
+    pre: (contains shot4 cocktail3 0-3-3) (holding left shot4 1-5-13)
+    add: (none-of-those 0-7-7) (empty shot4 10-3-61)
+    del: (contains shot4 cocktail3 0-3-3) (contains shot4 ingredient1 10-0-58) (contains shot4 ingredient2 10-1-59) (contains shot4 ingredient3 10-2-60) (none-of-those 10-4-62)
+  (empty-shot left shot4 ingredient1), cost: 1
+    pre: (holding left shot4 1-5-13) (contains shot4 ingredient1 10-0-58)
+    add: (empty shot4 10-3-61)
+    del: (contains shot4 ingredient1 10-0-58)
+  (empty-shot left shot4 ingredient2), cost: 1
+    pre: (holding left shot4 1-5-13) (contains shot4 ingredient2 10-1-59)
+    add: (empty shot4 10-3-61)
+    del: (contains shot4 ingredient2 10-1-59)
+  (empty-shot left shot4 ingredient3), cost: 1
+    pre: (holding left shot4 1-5-13) (contains shot4 ingredient3 10-2-60)
+    add: (empty shot4 10-3-61)
+    del: (contains shot4 ingredient3 10-2-60)
+  (empty-shot right shot1 cocktail3), cost: 1
+    pre: (holding right shot1 2-2-16) (contains shot1 cocktail3 3-1-21)
+    add: (none-of-those 3-5-25) (empty shot1 7-3-46)
+    del: (contains shot1 cocktail3 3-1-21) (contains shot1 ingredient1 7-0-43) (contains shot1 ingredient2 7-1-44) (contains shot1 ingredient3 7-2-45) (none-of-those 7-4-47)
+  (empty-shot right shot1 ingredient1), cost: 1
+    pre: (holding right shot1 2-2-16) (contains shot1 ingredient1 7-0-43)
+    add: (empty shot1 7-3-46)
+    del: (contains shot1 ingredient1 7-0-43)
+  (empty-shot right shot1 ingredient2), cost: 1
+    pre: (holding right shot1 2-2-16) (contains shot1 ingredient2 7-1-44)
+    add: (empty shot1 7-3-46)
+    del: (contains shot1 ingredient2 7-1-44)
+  (empty-shot right shot1 ingredient3), cost: 1
+    pre: (holding right shot1 2-2-16) (contains shot1 ingredient3 7-2-45)
+    add: (empty shot1 7-3-46)
+    del: (contains shot1 ingredient3 7-2-45)
+  (empty-shot right shot2 cocktail1), cost: 1
+    pre: (holding right shot2 2-3-17) (contains shot2 cocktail1 4-1-27)
+    add: (none-of-those 4-5-31) (empty shot2 8-3-51)
+    del: (contains shot2 cocktail1 4-1-27) (contains shot2 ingredient1 8-0-48) (contains shot2 ingredient2 8-1-49) (contains shot2 ingredient3 8-2-50) (none-of-those 8-4-52)
+  (empty-shot right shot2 ingredient1), cost: 1
+    pre: (holding right shot2 2-3-17) (contains shot2 ingredient1 8-0-48)
+    add: (empty shot2 8-3-51)
+    del: (contains shot2 ingredient1 8-0-48)
+  (empty-shot right shot2 ingredient2), cost: 1
+    pre: (holding right shot2 2-3-17) (contains shot2 ingredient2 8-1-49)
+    add: (empty shot2 8-3-51)
+    del: (contains shot2 ingredient2 8-1-49)
+  (empty-shot right shot2 ingredient3), cost: 1
+    pre: (holding right shot2 2-3-17) (contains shot2 ingredient3 8-2-50)
+    add: (empty shot2 8-3-51)
+    del: (contains shot2 ingredient3 8-2-50)
+  (empty-shot right shot3 cocktail2), cost: 1
+    pre: (holding right shot3 2-4-18) (contains shot3 cocktail2 5-1-33)
+    add: (none-of-those 5-5-37) (empty shot3 9-3-56)
+    del: (contains shot3 cocktail2 5-1-33) (contains shot3 ingredient1 9-0-53) (contains shot3 ingredient2 9-1-54) (contains shot3 ingredient3 9-2-55) (none-of-those 9-4-57)
+  (empty-shot right shot3 ingredient1), cost: 1
+    pre: (holding right shot3 2-4-18) (contains shot3 ingredient1 9-0-53)
+    add: (empty shot3 9-3-56)
+    del: (contains shot3 ingredient1 9-0-53)
+  (empty-shot right shot3 ingredient2), cost: 1
+    pre: (holding right shot3 2-4-18) (contains shot3 ingredient2 9-1-54)
+    add: (empty shot3 9-3-56)
+    del: (contains shot3 ingredient2 9-1-54)
+  (empty-shot right shot3 ingredient3), cost: 1
+    pre: (holding right shot3 2-4-18) (contains shot3 ingredient3 9-2-55)
+    add: (empty shot3 9-3-56)
+    del: (contains shot3 ingredient3 9-2-55)
+  (empty-shot right shot4 cocktail1), cost: 1
+    pre: (contains shot4 cocktail1 0-1-1) (holding right shot4 2-5-19)
+    add: (none-of-those 0-7-7) (empty shot4 10-3-61)
+    del: (contains shot4 cocktail1 0-1-1) (contains shot4 ingredient1 10-0-58) (contains shot4 ingredient2 10-1-59) (contains shot4 ingredient3 10-2-60) (none-of-those 10-4-62)
+  (empty-shot right shot4 cocktail2), cost: 1
+    pre: (contains shot4 cocktail2 0-2-2) (holding right shot4 2-5-19)
+    add: (none-of-those 0-7-7) (empty shot4 10-3-61)
+    del: (contains shot4 cocktail2 0-2-2) (contains shot4 ingredient1 10-0-58) (contains shot4 ingredient2 10-1-59) (contains shot4 ingredient3 10-2-60) (none-of-those 10-4-62)
+  (empty-shot right shot4 cocktail3), cost: 1
+    pre: (contains shot4 cocktail3 0-3-3) (holding right shot4 2-5-19)
+    add: (none-of-those 0-7-7) (empty shot4 10-3-61)
+    del: (contains shot4 cocktail3 0-3-3) (contains shot4 ingredient1 10-0-58) (contains shot4 ingredient2 10-1-59) (contains shot4 ingredient3 10-2-60) (none-of-those 10-4-62)
+  (empty-shot right shot4 ingredient1), cost: 1
+    pre: (holding right shot4 2-5-19) (contains shot4 ingredient1 10-0-58)
+    add: (empty shot4 10-3-61)
+    del: (contains shot4 ingredient1 10-0-58)
+  (empty-shot right shot4 ingredient2), cost: 1
+    pre: (holding right shot4 2-5-19) (contains shot4 ingredient2 10-1-59)
+    add: (empty shot4 10-3-61)
+    del: (contains shot4 ingredient2 10-1-59)
+  (empty-shot right shot4 ingredient3), cost: 1
+    pre: (holding right shot4 2-5-19) (contains shot4 ingredient3 10-2-60)
+    add: (empty shot4 10-3-61)
+    del: (contains shot4 ingredient3 10-2-60)
+  (fill-shot shot1 ingredient1 left right dispenser1), cost: 10
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (clean shot1 3-0-20) (empty shot1 7-3-46)
+    add: (used shot1 ingredient1 3-2-22) (contains shot1 ingredient1 7-0-43)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46)
+  (fill-shot shot1 ingredient1 right left dispenser1), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (clean shot1 3-0-20) (empty shot1 7-3-46)
+    add: (used shot1 ingredient1 3-2-22) (contains shot1 ingredient1 7-0-43)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46)
+  (fill-shot shot1 ingredient2 left right dispenser2), cost: 10
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (clean shot1 3-0-20) (empty shot1 7-3-46)
+    add: (used shot1 ingredient2 3-3-23) (contains shot1 ingredient2 7-1-44)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46)
+  (fill-shot shot1 ingredient2 right left dispenser2), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (clean shot1 3-0-20) (empty shot1 7-3-46)
+    add: (used shot1 ingredient2 3-3-23) (contains shot1 ingredient2 7-1-44)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46)
+  (fill-shot shot1 ingredient3 left right dispenser3), cost: 10
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (clean shot1 3-0-20) (empty shot1 7-3-46)
+    add: (used shot1 ingredient3 3-4-24) (contains shot1 ingredient3 7-2-45)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46)
+  (fill-shot shot1 ingredient3 right left dispenser3), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (clean shot1 3-0-20) (empty shot1 7-3-46)
+    add: (used shot1 ingredient3 3-4-24) (contains shot1 ingredient3 7-2-45)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46)
+  (fill-shot shot2 ingredient1 left right dispenser1), cost: 10
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (clean shot2 4-0-26) (empty shot2 8-3-51)
+    add: (used shot2 ingredient1 4-2-28) (contains shot2 ingredient1 8-0-48)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51)
+  (fill-shot shot2 ingredient1 right left dispenser1), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (clean shot2 4-0-26) (empty shot2 8-3-51)
+    add: (used shot2 ingredient1 4-2-28) (contains shot2 ingredient1 8-0-48)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51)
+  (fill-shot shot2 ingredient2 left right dispenser2), cost: 10
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (clean shot2 4-0-26) (empty shot2 8-3-51)
+    add: (used shot2 ingredient2 4-3-29) (contains shot2 ingredient2 8-1-49)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51)
+  (fill-shot shot2 ingredient2 right left dispenser2), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (clean shot2 4-0-26) (empty shot2 8-3-51)
+    add: (used shot2 ingredient2 4-3-29) (contains shot2 ingredient2 8-1-49)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51)
+  (fill-shot shot2 ingredient3 left right dispenser3), cost: 10
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (clean shot2 4-0-26) (empty shot2 8-3-51)
+    add: (used shot2 ingredient3 4-4-30) (contains shot2 ingredient3 8-2-50)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51)
+  (fill-shot shot2 ingredient3 right left dispenser3), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (clean shot2 4-0-26) (empty shot2 8-3-51)
+    add: (used shot2 ingredient3 4-4-30) (contains shot2 ingredient3 8-2-50)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51)
+  (fill-shot shot3 ingredient1 left right dispenser1), cost: 10
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (clean shot3 5-0-32) (empty shot3 9-3-56)
+    add: (used shot3 ingredient1 5-2-34) (contains shot3 ingredient1 9-0-53)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56)
+  (fill-shot shot3 ingredient1 right left dispenser1), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (clean shot3 5-0-32) (empty shot3 9-3-56)
+    add: (used shot3 ingredient1 5-2-34) (contains shot3 ingredient1 9-0-53)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56)
+  (fill-shot shot3 ingredient2 left right dispenser2), cost: 10
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (clean shot3 5-0-32) (empty shot3 9-3-56)
+    add: (used shot3 ingredient2 5-3-35) (contains shot3 ingredient2 9-1-54)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56)
+  (fill-shot shot3 ingredient2 right left dispenser2), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (clean shot3 5-0-32) (empty shot3 9-3-56)
+    add: (used shot3 ingredient2 5-3-35) (contains shot3 ingredient2 9-1-54)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56)
+  (fill-shot shot3 ingredient3 left right dispenser3), cost: 10
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (clean shot3 5-0-32) (empty shot3 9-3-56)
+    add: (used shot3 ingredient3 5-4-36) (contains shot3 ingredient3 9-2-55)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56)
+  (fill-shot shot3 ingredient3 right left dispenser3), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (clean shot3 5-0-32) (empty shot3 9-3-56)
+    add: (used shot3 ingredient3 5-4-36) (contains shot3 ingredient3 9-2-55)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56)
+  (fill-shot shot4 ingredient1 left right dispenser1), cost: 10
+    pre: (clean shot4 0-0-0) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (used shot4 ingredient1 0-4-4) (contains shot4 ingredient1 10-0-58)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61)
+  (fill-shot shot4 ingredient1 right left dispenser1), cost: 10
+    pre: (clean shot4 0-0-0) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (used shot4 ingredient1 0-4-4) (contains shot4 ingredient1 10-0-58)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61)
+  (fill-shot shot4 ingredient2 left right dispenser2), cost: 10
+    pre: (clean shot4 0-0-0) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (used shot4 ingredient2 0-5-5) (contains shot4 ingredient2 10-1-59)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61)
+  (fill-shot shot4 ingredient2 right left dispenser2), cost: 10
+    pre: (clean shot4 0-0-0) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (used shot4 ingredient2 0-5-5) (contains shot4 ingredient2 10-1-59)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61)
+  (fill-shot shot4 ingredient3 left right dispenser3), cost: 10
+    pre: (clean shot4 0-0-0) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (used shot4 ingredient3 0-6-6) (contains shot4 ingredient3 10-2-60)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61)
+  (fill-shot shot4 ingredient3 right left dispenser3), cost: 10
+    pre: (clean shot4 0-0-0) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (used shot4 ingredient3 0-6-6) (contains shot4 ingredient3 10-2-60)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61)
+  (grasp left shaker1), cost: 1
+    pre: (handempty left 1-0-8) (ontable shaker1 12-0-66)
+    add: (holding left shaker1 1-1-9) (none-of-those 12-1-67)
+    del: (handempty left 1-0-8) (ontable shaker1 12-0-66)
+  (grasp left shot1), cost: 1
+    pre: (handempty left 1-0-8) (ontable shot1 13-0-68)
+    add: (holding left shot1 1-2-10) (none-of-those 13-1-69)
+    del: (handempty left 1-0-8) (ontable shot1 13-0-68)
+  (grasp left shot2), cost: 1
+    pre: (handempty left 1-0-8) (ontable shot2 14-0-70)
+    add: (holding left shot2 1-3-11) (none-of-those 14-1-71)
+    del: (handempty left 1-0-8) (ontable shot2 14-0-70)
+  (grasp left shot3), cost: 1
+    pre: (handempty left 1-0-8) (ontable shot3 15-0-72)
+    add: (holding left shot3 1-4-12) (none-of-those 15-1-73)
+    del: (handempty left 1-0-8) (ontable shot3 15-0-72)
+  (grasp left shot4), cost: 1
+    pre: (handempty left 1-0-8) (ontable shot4 16-0-74)
+    add: (holding left shot4 1-5-13) (none-of-those 16-1-75)
+    del: (handempty left 1-0-8) (ontable shot4 16-0-74)
+  (grasp right shaker1), cost: 1
+    pre: (handempty right 2-0-14) (ontable shaker1 12-0-66)
+    add: (holding right shaker1 2-1-15) (none-of-those 12-1-67)
+    del: (handempty right 2-0-14) (ontable shaker1 12-0-66)
+  (grasp right shot1), cost: 1
+    pre: (handempty right 2-0-14) (ontable shot1 13-0-68)
+    add: (holding right shot1 2-2-16) (none-of-those 13-1-69)
+    del: (handempty right 2-0-14) (ontable shot1 13-0-68)
+  (grasp right shot2), cost: 1
+    pre: (handempty right 2-0-14) (ontable shot2 14-0-70)
+    add: (holding right shot2 2-3-17) (none-of-those 14-1-71)
+    del: (handempty right 2-0-14) (ontable shot2 14-0-70)
+  (grasp right shot3), cost: 1
+    pre: (handempty right 2-0-14) (ontable shot3 15-0-72)
+    add: (holding right shot3 2-4-18) (none-of-those 15-1-73)
+    del: (handempty right 2-0-14) (ontable shot3 15-0-72)
+  (grasp right shot4), cost: 1
+    pre: (handempty right 2-0-14) (ontable shot4 16-0-74)
+    add: (holding right shot4 2-5-19) (none-of-those 16-1-75)
+    del: (handempty right 2-0-14) (ontable shot4 16-0-74)
+  (leave left shaker1), cost: 1
+    pre: (holding left shaker1 1-1-9)
+    add: (handempty left 1-0-8) (ontable shaker1 12-0-66)
+    del: (holding left shaker1 1-1-9) (none-of-those 12-1-67)
+  (leave left shot1), cost: 1
+    pre: (holding left shot1 1-2-10)
+    add: (handempty left 1-0-8) (ontable shot1 13-0-68)
+    del: (holding left shot1 1-2-10) (none-of-those 13-1-69)
+  (leave left shot2), cost: 1
+    pre: (holding left shot2 1-3-11)
+    add: (handempty left 1-0-8) (ontable shot2 14-0-70)
+    del: (holding left shot2 1-3-11) (none-of-those 14-1-71)
+  (leave left shot3), cost: 1
+    pre: (holding left shot3 1-4-12)
+    add: (handempty left 1-0-8) (ontable shot3 15-0-72)
+    del: (holding left shot3 1-4-12) (none-of-those 15-1-73)
+  (leave left shot4), cost: 1
+    pre: (holding left shot4 1-5-13)
+    add: (handempty left 1-0-8) (ontable shot4 16-0-74)
+    del: (holding left shot4 1-5-13) (none-of-those 16-1-75)
+  (leave right shaker1), cost: 1
+    pre: (holding right shaker1 2-1-15)
+    add: (handempty right 2-0-14) (ontable shaker1 12-0-66)
+    del: (holding right shaker1 2-1-15) (none-of-those 12-1-67)
+  (leave right shot1), cost: 1
+    pre: (holding right shot1 2-2-16)
+    add: (handempty right 2-0-14) (ontable shot1 13-0-68)
+    del: (holding right shot1 2-2-16) (none-of-those 13-1-69)
+  (leave right shot2), cost: 1
+    pre: (holding right shot2 2-3-17)
+    add: (handempty right 2-0-14) (ontable shot2 14-0-70)
+    del: (holding right shot2 2-3-17) (none-of-those 14-1-71)
+  (leave right shot3), cost: 1
+    pre: (holding right shot3 2-4-18)
+    add: (handempty right 2-0-14) (ontable shot3 15-0-72)
+    del: (holding right shot3 2-4-18) (none-of-those 15-1-73)
+  (leave right shot4), cost: 1
+    pre: (holding right shot4 2-5-19)
+    add: (handempty right 2-0-14) (ontable shot4 16-0-74)
+    del: (holding right shot4 2-5-19) (none-of-those 16-1-75)
+  (pour-shaker-to-shot cocktail1 shot2 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (contains shaker1 cocktail1 6-0-38) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot2 cocktail1 4-1-27) (none-of-those 8-4-52) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail1 shot2 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (contains shaker1 cocktail1 6-0-38) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot2 cocktail1 4-1-27) (none-of-those 8-4-52) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail1 shot2 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (contains shaker1 cocktail1 6-0-38) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot2 cocktail1 4-1-27) (none-of-those 8-4-52) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail1 shot2 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (contains shaker1 cocktail1 6-0-38) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot2 cocktail1 4-1-27) (none-of-those 8-4-52) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail1 shot4 left shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (contains shaker1 cocktail1 6-0-38) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail1 0-1-1) (none-of-those 10-4-62) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail1 shot4 left shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (contains shaker1 cocktail1 6-0-38) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail1 0-1-1) (none-of-those 10-4-62) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail1 shot4 right shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (contains shaker1 cocktail1 6-0-38) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail1 0-1-1) (none-of-those 10-4-62) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail1 shot4 right shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (contains shaker1 cocktail1 6-0-38) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail1 0-1-1) (none-of-those 10-4-62) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail2 shot3 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (contains shaker1 cocktail2 6-1-39) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot3 cocktail2 5-1-33) (none-of-those 9-4-57) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail2 shot3 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (contains shaker1 cocktail2 6-1-39) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot3 cocktail2 5-1-33) (none-of-those 9-4-57) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail2 shot3 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (contains shaker1 cocktail2 6-1-39) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot3 cocktail2 5-1-33) (none-of-those 9-4-57) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail2 shot3 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (contains shaker1 cocktail2 6-1-39) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot3 cocktail2 5-1-33) (none-of-those 9-4-57) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail2 shot4 left shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (contains shaker1 cocktail2 6-1-39) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail2 0-2-2) (none-of-those 10-4-62) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail2 shot4 left shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (contains shaker1 cocktail2 6-1-39) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail2 0-2-2) (none-of-those 10-4-62) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail2 shot4 right shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (contains shaker1 cocktail2 6-1-39) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail2 0-2-2) (none-of-those 10-4-62) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail2 shot4 right shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (contains shaker1 cocktail2 6-1-39) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail2 0-2-2) (none-of-those 10-4-62) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail3 shot1 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (contains shaker1 cocktail3 6-2-40) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot1 cocktail3 3-1-21) (none-of-those 7-4-47) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail3 shot1 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (contains shaker1 cocktail3 6-2-40) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot1 cocktail3 3-1-21) (none-of-those 7-4-47) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail3 shot1 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (contains shaker1 cocktail3 6-2-40) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot1 cocktail3 3-1-21) (none-of-those 7-4-47) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail3 shot1 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (contains shaker1 cocktail3 6-2-40) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot1 cocktail3 3-1-21) (none-of-those 7-4-47) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail3 shot4 left shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (contains shaker1 cocktail3 6-2-40) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail3 0-3-3) (none-of-those 10-4-62) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail3 shot4 left shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (contains shaker1 cocktail3 6-2-40) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail3 0-3-3) (none-of-those 10-4-62) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot cocktail3 shot4 right shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (contains shaker1 cocktail3 6-2-40) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail3 0-3-3) (none-of-those 10-4-62) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot cocktail3 shot4 right shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (contains shaker1 cocktail3 6-2-40) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76)
+    add: (contains shot4 cocktail3 0-3-3) (none-of-those 10-4-62) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot1 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot1 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot1 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot1 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot2 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot2 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot2 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot2 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot3 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot3 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot3 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot3 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot4 left shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot4 left shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient1 shot4 right shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient1 shot4 right shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient1 19-0-80)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot1 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot1 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot1 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot1 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot2 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot2 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot2 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot2 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot3 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot3 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot3 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot3 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot4 left shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot4 left shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient2 shot4 right shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient2 shot4 right shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient2 20-0-82)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot1 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot1 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot1 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot1 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 3-5-25) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot1 3-0-20) (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot2 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot2 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot2 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot2 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 4-5-31) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot2 4-0-26) (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot3 left shaker1 l1 l0), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot3 left shaker1 l2 l1), cost: 1
+    pre: (holding left shaker1 1-1-9) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot3 right shaker1 l1 l0), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot3 right shaker1 l2 l1), cost: 1
+    pre: (holding right shaker1 2-1-15) (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 5-5-37) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot3 5-0-32) (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot4 left shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot4 left shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding left shaker1 1-1-9) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shaker-to-shot ingredient3 shot4 right shaker1 l1 l0), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l0 11-0-63)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64)
+  (pour-shaker-to-shot ingredient3 shot4 right shaker1 l2 l1), cost: 1
+    pre: (clean shot4 0-0-0) (holding right shaker1 2-1-15) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (shaked shaker1 17-0-76) (contains shaker1 ingredient3 21-0-84)
+    add: (none-of-those 0-7-7) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l1 11-1-64)
+    del: (clean shot4 0-0-0) (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65)
+  (pour-shot-to-clean-shaker shot1 ingredient1 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot1 1-2-10) (empty shaker1 6-3-41) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot1 ingredient1 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot1 2-2-16) (empty shaker1 6-3-41) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot1 ingredient2 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot1 1-2-10) (empty shaker1 6-3-41) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot1 ingredient2 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot1 2-2-16) (empty shaker1 6-3-41) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot1 ingredient3 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot1 1-2-10) (empty shaker1 6-3-41) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot1 ingredient3 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot1 2-2-16) (empty shaker1 6-3-41) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot1 7-3-46) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot2 ingredient1 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot2 1-3-11) (empty shaker1 6-3-41) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot2 ingredient1 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot2 2-3-17) (empty shaker1 6-3-41) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot2 ingredient2 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot2 1-3-11) (empty shaker1 6-3-41) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot2 ingredient2 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot2 2-3-17) (empty shaker1 6-3-41) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot2 ingredient3 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot2 1-3-11) (empty shaker1 6-3-41) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot2 ingredient3 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot2 2-3-17) (empty shaker1 6-3-41) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot2 8-3-51) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot3 ingredient1 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot3 1-4-12) (empty shaker1 6-3-41) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot3 ingredient1 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot3 2-4-18) (empty shaker1 6-3-41) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot3 ingredient2 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot3 1-4-12) (empty shaker1 6-3-41) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot3 ingredient2 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot3 2-4-18) (empty shaker1 6-3-41) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot3 ingredient3 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot3 1-4-12) (empty shaker1 6-3-41) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot3 ingredient3 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot3 2-4-18) (empty shaker1 6-3-41) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot3 9-3-56) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot4 ingredient1 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot4 1-5-13) (empty shaker1 6-3-41) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot4 ingredient1 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot4 2-5-19) (empty shaker1 6-3-41) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient1 19-0-80)
+    del: (empty shaker1 6-3-41) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 19-1-81)
+  (pour-shot-to-clean-shaker shot4 ingredient2 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot4 1-5-13) (empty shaker1 6-3-41) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot4 ingredient2 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot4 2-5-19) (empty shaker1 6-3-41) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient2 20-0-82)
+    del: (empty shaker1 6-3-41) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 20-1-83)
+  (pour-shot-to-clean-shaker shot4 ingredient3 shaker1 left l0 l1), cost: 1
+    pre: (holding left shot4 1-5-13) (empty shaker1 6-3-41) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-clean-shaker shot4 ingredient3 shaker1 right l0 l1), cost: 1
+    pre: (holding right shot4 2-5-19) (empty shaker1 6-3-41) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78)
+    add: (unshaked shaker1 6-4-42) (empty shot4 10-3-61) (shaker-level shaker1 l1 11-1-64) (none-of-those 18-1-79) (contains shaker1 ingredient3 21-0-84)
+    del: (empty shaker1 6-3-41) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l0 11-0-63) (clean shaker1 18-0-78) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot1 ingredient1 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot1 1-2-10) (unshaked shaker1 6-4-42) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot1 ingredient1 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot1 2-2-16) (unshaked shaker1 6-4-42) (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot1 ingredient1 7-0-43) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot1 ingredient2 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot1 1-2-10) (unshaked shaker1 6-4-42) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot1 ingredient2 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot1 2-2-16) (unshaked shaker1 6-4-42) (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot1 ingredient2 7-1-44) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot1 ingredient3 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot1 1-2-10) (unshaked shaker1 6-4-42) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot1 ingredient3 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot1 2-2-16) (unshaked shaker1 6-4-42) (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot1 7-3-46) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot1 ingredient3 7-2-45) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot2 ingredient1 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot2 1-3-11) (unshaked shaker1 6-4-42) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot2 ingredient1 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot2 2-3-17) (unshaked shaker1 6-4-42) (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot2 ingredient1 8-0-48) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot2 ingredient2 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot2 1-3-11) (unshaked shaker1 6-4-42) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot2 ingredient2 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot2 2-3-17) (unshaked shaker1 6-4-42) (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot2 ingredient2 8-1-49) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot2 ingredient3 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot2 1-3-11) (unshaked shaker1 6-4-42) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot2 ingredient3 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot2 2-3-17) (unshaked shaker1 6-4-42) (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot2 8-3-51) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot2 ingredient3 8-2-50) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot3 ingredient1 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot3 1-4-12) (unshaked shaker1 6-4-42) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot3 ingredient1 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot3 2-4-18) (unshaked shaker1 6-4-42) (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot3 ingredient1 9-0-53) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot3 ingredient2 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot3 1-4-12) (unshaked shaker1 6-4-42) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot3 ingredient2 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot3 2-4-18) (unshaked shaker1 6-4-42) (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot3 ingredient2 9-1-54) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot3 ingredient3 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot3 1-4-12) (unshaked shaker1 6-4-42) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot3 ingredient3 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot3 2-4-18) (unshaked shaker1 6-4-42) (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot3 9-3-56) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot3 ingredient3 9-2-55) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot4 ingredient1 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot4 1-5-13) (unshaked shaker1 6-4-42) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot4 ingredient1 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot4 2-5-19) (unshaked shaker1 6-4-42) (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient1 19-0-80)
+    del: (contains shot4 ingredient1 10-0-58) (shaker-level shaker1 l1 11-1-64) (none-of-those 19-1-81)
+  (pour-shot-to-used-shaker shot4 ingredient2 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot4 1-5-13) (unshaked shaker1 6-4-42) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot4 ingredient2 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot4 2-5-19) (unshaked shaker1 6-4-42) (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient2 20-0-82)
+    del: (contains shot4 ingredient2 10-1-59) (shaker-level shaker1 l1 11-1-64) (none-of-those 20-1-83)
+  (pour-shot-to-used-shaker shot4 ingredient3 shaker1 left l1 l2), cost: 1
+    pre: (holding left shot4 1-5-13) (unshaked shaker1 6-4-42) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (pour-shot-to-used-shaker shot4 ingredient3 shaker1 right l1 l2), cost: 1
+    pre: (holding right shot4 2-5-19) (unshaked shaker1 6-4-42) (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l1 11-1-64)
+    add: (empty shot4 10-3-61) (shaker-level shaker1 l2 11-2-65) (contains shaker1 ingredient3 21-0-84)
+    del: (contains shot4 ingredient3 10-2-60) (shaker-level shaker1 l1 11-1-64) (none-of-those 21-1-85)
+  (refill-shot shot1 ingredient1 left right dispenser1), cost: 10
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (used shot1 ingredient1 3-2-22) (empty shot1 7-3-46)
+    add: (contains shot1 ingredient1 7-0-43)
+    del: (empty shot1 7-3-46)
+  (refill-shot shot1 ingredient1 right left dispenser1), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (used shot1 ingredient1 3-2-22) (empty shot1 7-3-46)
+    add: (contains shot1 ingredient1 7-0-43)
+    del: (empty shot1 7-3-46)
+  (refill-shot shot1 ingredient2 left right dispenser2), cost: 10
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (used shot1 ingredient2 3-3-23) (empty shot1 7-3-46)
+    add: (contains shot1 ingredient2 7-1-44)
+    del: (empty shot1 7-3-46)
+  (refill-shot shot1 ingredient2 right left dispenser2), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (used shot1 ingredient2 3-3-23) (empty shot1 7-3-46)
+    add: (contains shot1 ingredient2 7-1-44)
+    del: (empty shot1 7-3-46)
+  (refill-shot shot1 ingredient3 left right dispenser3), cost: 10
+    pre: (holding left shot1 1-2-10) (handempty right 2-0-14) (used shot1 ingredient3 3-4-24) (empty shot1 7-3-46)
+    add: (contains shot1 ingredient3 7-2-45)
+    del: (empty shot1 7-3-46)
+  (refill-shot shot1 ingredient3 right left dispenser3), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot1 2-2-16) (used shot1 ingredient3 3-4-24) (empty shot1 7-3-46)
+    add: (contains shot1 ingredient3 7-2-45)
+    del: (empty shot1 7-3-46)
+  (refill-shot shot2 ingredient1 left right dispenser1), cost: 10
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (used shot2 ingredient1 4-2-28) (empty shot2 8-3-51)
+    add: (contains shot2 ingredient1 8-0-48)
+    del: (empty shot2 8-3-51)
+  (refill-shot shot2 ingredient1 right left dispenser1), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (used shot2 ingredient1 4-2-28) (empty shot2 8-3-51)
+    add: (contains shot2 ingredient1 8-0-48)
+    del: (empty shot2 8-3-51)
+  (refill-shot shot2 ingredient2 left right dispenser2), cost: 10
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (used shot2 ingredient2 4-3-29) (empty shot2 8-3-51)
+    add: (contains shot2 ingredient2 8-1-49)
+    del: (empty shot2 8-3-51)
+  (refill-shot shot2 ingredient2 right left dispenser2), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (used shot2 ingredient2 4-3-29) (empty shot2 8-3-51)
+    add: (contains shot2 ingredient2 8-1-49)
+    del: (empty shot2 8-3-51)
+  (refill-shot shot2 ingredient3 left right dispenser3), cost: 10
+    pre: (holding left shot2 1-3-11) (handempty right 2-0-14) (used shot2 ingredient3 4-4-30) (empty shot2 8-3-51)
+    add: (contains shot2 ingredient3 8-2-50)
+    del: (empty shot2 8-3-51)
+  (refill-shot shot2 ingredient3 right left dispenser3), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot2 2-3-17) (used shot2 ingredient3 4-4-30) (empty shot2 8-3-51)
+    add: (contains shot2 ingredient3 8-2-50)
+    del: (empty shot2 8-3-51)
+  (refill-shot shot3 ingredient1 left right dispenser1), cost: 10
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (used shot3 ingredient1 5-2-34) (empty shot3 9-3-56)
+    add: (contains shot3 ingredient1 9-0-53)
+    del: (empty shot3 9-3-56)
+  (refill-shot shot3 ingredient1 right left dispenser1), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (used shot3 ingredient1 5-2-34) (empty shot3 9-3-56)
+    add: (contains shot3 ingredient1 9-0-53)
+    del: (empty shot3 9-3-56)
+  (refill-shot shot3 ingredient2 left right dispenser2), cost: 10
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (used shot3 ingredient2 5-3-35) (empty shot3 9-3-56)
+    add: (contains shot3 ingredient2 9-1-54)
+    del: (empty shot3 9-3-56)
+  (refill-shot shot3 ingredient2 right left dispenser2), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (used shot3 ingredient2 5-3-35) (empty shot3 9-3-56)
+    add: (contains shot3 ingredient2 9-1-54)
+    del: (empty shot3 9-3-56)
+  (refill-shot shot3 ingredient3 left right dispenser3), cost: 10
+    pre: (holding left shot3 1-4-12) (handempty right 2-0-14) (used shot3 ingredient3 5-4-36) (empty shot3 9-3-56)
+    add: (contains shot3 ingredient3 9-2-55)
+    del: (empty shot3 9-3-56)
+  (refill-shot shot3 ingredient3 right left dispenser3), cost: 10
+    pre: (handempty left 1-0-8) (holding right shot3 2-4-18) (used shot3 ingredient3 5-4-36) (empty shot3 9-3-56)
+    add: (contains shot3 ingredient3 9-2-55)
+    del: (empty shot3 9-3-56)
+  (refill-shot shot4 ingredient1 left right dispenser1), cost: 10
+    pre: (used shot4 ingredient1 0-4-4) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (contains shot4 ingredient1 10-0-58)
+    del: (empty shot4 10-3-61)
+  (refill-shot shot4 ingredient1 right left dispenser1), cost: 10
+    pre: (used shot4 ingredient1 0-4-4) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (contains shot4 ingredient1 10-0-58)
+    del: (empty shot4 10-3-61)
+  (refill-shot shot4 ingredient2 left right dispenser2), cost: 10
+    pre: (used shot4 ingredient2 0-5-5) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (contains shot4 ingredient2 10-1-59)
+    del: (empty shot4 10-3-61)
+  (refill-shot shot4 ingredient2 right left dispenser2), cost: 10
+    pre: (used shot4 ingredient2 0-5-5) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (contains shot4 ingredient2 10-1-59)
+    del: (empty shot4 10-3-61)
+  (refill-shot shot4 ingredient3 left right dispenser3), cost: 10
+    pre: (used shot4 ingredient3 0-6-6) (holding left shot4 1-5-13) (handempty right 2-0-14) (empty shot4 10-3-61)
+    add: (contains shot4 ingredient3 10-2-60)
+    del: (empty shot4 10-3-61)
+  (refill-shot shot4 ingredient3 right left dispenser3), cost: 10
+    pre: (used shot4 ingredient3 0-6-6) (handempty left 1-0-8) (holding right shot4 2-5-19) (empty shot4 10-3-61)
+    add: (contains shot4 ingredient3 10-2-60)
+    del: (empty shot4 10-3-61)
+  (shake cocktail1 ingredient3 ingredient1 shaker1 left right), cost: 1
+    pre: (holding left shaker1 1-1-9) (handempty right 2-0-14) (unshaked shaker1 6-4-42) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient3 21-0-84)
+    add: (contains shaker1 cocktail1 6-0-38) (shaked shaker1 17-0-76) (none-of-those 19-1-81) (none-of-those 21-1-85)
+    del: (unshaked shaker1 6-4-42) (none-of-those 17-1-77) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient3 21-0-84)
+  (shake cocktail1 ingredient3 ingredient1 shaker1 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shaker1 2-1-15) (unshaked shaker1 6-4-42) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient3 21-0-84)
+    add: (contains shaker1 cocktail1 6-0-38) (shaked shaker1 17-0-76) (none-of-those 19-1-81) (none-of-those 21-1-85)
+    del: (unshaked shaker1 6-4-42) (none-of-those 17-1-77) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient3 21-0-84)
+  (shake cocktail2 ingredient2 ingredient3 shaker1 left right), cost: 1
+    pre: (holding left shaker1 1-1-9) (handempty right 2-0-14) (unshaked shaker1 6-4-42) (contains shaker1 ingredient2 20-0-82) (contains shaker1 ingredient3 21-0-84)
+    add: (contains shaker1 cocktail2 6-1-39) (shaked shaker1 17-0-76) (none-of-those 20-1-83) (none-of-those 21-1-85)
+    del: (unshaked shaker1 6-4-42) (none-of-those 17-1-77) (contains shaker1 ingredient2 20-0-82) (contains shaker1 ingredient3 21-0-84)
+  (shake cocktail2 ingredient2 ingredient3 shaker1 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shaker1 2-1-15) (unshaked shaker1 6-4-42) (contains shaker1 ingredient2 20-0-82) (contains shaker1 ingredient3 21-0-84)
+    add: (contains shaker1 cocktail2 6-1-39) (shaked shaker1 17-0-76) (none-of-those 20-1-83) (none-of-those 21-1-85)
+    del: (unshaked shaker1 6-4-42) (none-of-those 17-1-77) (contains shaker1 ingredient2 20-0-82) (contains shaker1 ingredient3 21-0-84)
+  (shake cocktail3 ingredient1 ingredient2 shaker1 left right), cost: 1
+    pre: (holding left shaker1 1-1-9) (handempty right 2-0-14) (unshaked shaker1 6-4-42) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient2 20-0-82)
+    add: (contains shaker1 cocktail3 6-2-40) (shaked shaker1 17-0-76) (none-of-those 19-1-81) (none-of-those 20-1-83)
+    del: (unshaked shaker1 6-4-42) (none-of-those 17-1-77) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient2 20-0-82)
+  (shake cocktail3 ingredient1 ingredient2 shaker1 right left), cost: 1
+    pre: (handempty left 1-0-8) (holding right shaker1 2-1-15) (unshaked shaker1 6-4-42) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient2 20-0-82)
+    add: (contains shaker1 cocktail3 6-2-40) (shaked shaker1 17-0-76) (none-of-those 19-1-81) (none-of-those 20-1-83)
+    del: (unshaked shaker1 6-4-42) (none-of-those 17-1-77) (contains shaker1 ingredient1 19-0-80) (contains shaker1 ingredient2 20-0-82)
+Init State: (clean shot4 0-0-0) (handempty left 1-0-8) (handempty right 2-0-14) (clean shot1 3-0-20) (clean shot2 4-0-26) (clean shot3 5-0-32) (empty shaker1 6-3-41) (empty shot1 7-3-46) (empty shot2 8-3-51) (empty shot3 9-3-56) (empty shot4 10-3-61) (shaker-level shaker1 l0 11-0-63) (ontable shaker1 12-0-66) (ontable shot1 13-0-68) (ontable shot2 14-0-70) (ontable shot3 15-0-72) (ontable shot4 16-0-74) (none-of-those 17-1-77) (clean shaker1 18-0-78) (none-of-those 19-1-81) (none-of-those 20-1-83) (none-of-those 21-1-85)
+Goal: (contains shot1 cocktail3 3-1-21) (contains shot2 cocktail1 4-1-27) (contains shot3 cocktail2 5-1-33)
+Value: 36

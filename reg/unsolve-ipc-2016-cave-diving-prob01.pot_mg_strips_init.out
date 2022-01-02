@@ -1,0 +1,1788 @@
+Fact[103]:
+  (at-diver d0 l0 0-0-0)
+  (at-diver d0 l1 0-1-1)
+  (at-diver d0 l2 0-2-2)
+  (at-surface d0 0-3-3)
+  (available d0 0-4-4)
+  (decompressing d0 0-5-5)
+  (at-diver d1 l0 1-0-6)
+  (at-diver d1 l1 1-1-7)
+  (at-diver d1 l2 1-2-8)
+  (at-surface d1 1-3-9)
+  (available d1 1-4-10)
+  (decompressing d1 1-5-11)
+  (in-storage t0 2-0-12)
+  (in-storage t1 2-1-13)
+  (in-storage t2 2-2-14)
+  (in-storage t3 2-3-15)
+  (in-storage t4 2-4-16)
+  (in-storage t5 2-5-17)
+  (none-of-those 2-6-18)
+  (capacity d0 four 3-0-19)
+  (capacity d0 one 3-1-20)
+  (capacity d0 three 3-2-21)
+  (capacity d0 two 3-3-22)
+  (capacity d0 zero 3-4-23)
+  (capacity d1 four 4-0-24)
+  (capacity d1 one 4-1-25)
+  (capacity d1 three 4-2-26)
+  (capacity d1 two 4-3-27)
+  (capacity d1 zero 4-4-28)
+  (at-tank t0 l0 5-0-29)
+  (none-of-those 5-1-30)
+  (at-tank t0 l1 6-0-31)
+  (none-of-those 6-1-32)
+  (at-tank t0 l2 7-0-33)
+  (none-of-those 7-1-34)
+  (at-tank t1 l0 8-0-35)
+  (none-of-those 8-1-36)
+  (at-tank t1 l1 9-0-37)
+  (none-of-those 9-1-38)
+  (at-tank t1 l2 10-0-39)
+  (none-of-those 10-1-40)
+  (at-tank t2 l0 11-0-41)
+  (none-of-those 11-1-42)
+  (at-tank t2 l1 12-0-43)
+  (none-of-those 12-1-44)
+  (at-tank t2 l2 13-0-45)
+  (none-of-those 13-1-46)
+  (at-tank t3 l0 14-0-47)
+  (none-of-those 14-1-48)
+  (at-tank t3 l1 15-0-49)
+  (none-of-those 15-1-50)
+  (at-tank t3 l2 16-0-51)
+  (none-of-those 16-1-52)
+  (at-tank t4 l0 17-0-53)
+  (none-of-those 17-1-54)
+  (at-tank t4 l1 18-0-55)
+  (none-of-those 18-1-56)
+  (at-tank t4 l2 19-0-57)
+  (none-of-those 19-1-58)
+  (at-tank t5 l0 20-0-59)
+  (none-of-those 20-1-60)
+  (at-tank t5 l1 21-0-61)
+  (none-of-those 21-1-62)
+  (at-tank t5 l2 22-0-63)
+  (none-of-those 22-1-64)
+  (full t0 23-0-65)
+  (none-of-those 23-1-66)
+  (full t1 24-0-67)
+  (none-of-those 24-1-68)
+  (full t2 25-0-69)
+  (none-of-those 25-1-70)
+  (full t3 26-0-71)
+  (none-of-those 26-1-72)
+  (full t4 27-0-73)
+  (none-of-those 27-1-74)
+  (full t5 28-0-75)
+  (none-of-those 28-1-76)
+  (have-photo l2 29-0-77)
+  (none-of-those 29-1-78)
+  (holding d0 t0 30-0-79)
+  (none-of-those 30-1-80)
+  (holding d0 t1 31-0-81)
+  (none-of-those 31-1-82)
+  (holding d0 t2 32-0-83)
+  (none-of-those 32-1-84)
+  (holding d0 t3 33-0-85)
+  (none-of-those 33-1-86)
+  (holding d0 t4 34-0-87)
+  (none-of-those 34-1-88)
+  (holding d0 t5 35-0-89)
+  (none-of-those 35-1-90)
+  (holding d1 t0 36-0-91)
+  (none-of-those 36-1-92)
+  (holding d1 t1 37-0-93)
+  (none-of-those 37-1-94)
+  (holding d1 t2 38-0-95)
+  (none-of-those 38-1-96)
+  (holding d1 t3 39-0-97)
+  (none-of-those 39-1-98)
+  (holding d1 t4 40-0-99)
+  (none-of-those 40-1-100)
+  (holding d1 t5 41-0-101)
+  (none-of-those 41-1-102)
+Op[420]:
+  (decompress d0 l0), cost: 1
+    pre: (at-diver d0 l0 0-0-0)
+    add: (decompressing d0 0-5-5)
+    del: (at-diver d0 l0 0-0-0)
+  (decompress d1 l0), cost: 1
+    pre: (at-diver d1 l0 1-0-6)
+    add: (decompressing d1 1-5-11)
+    del: (at-diver d1 l0 1-0-6)
+  (drop-tank d0 t0 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (holding d0 t0 30-0-79)
+    add: (capacity d0 two 3-3-22) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+    del: (capacity d0 one 3-1-20) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (holding d0 t0 30-0-79)
+    add: (capacity d0 four 3-0-19) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+    del: (capacity d0 three 3-2-21) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (holding d0 t0 30-0-79)
+    add: (capacity d0 three 3-2-21) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+    del: (capacity d0 two 3-3-22) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 zero 3-4-23) (holding d0 t0 30-0-79)
+    add: (capacity d0 one 3-1-20) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+    del: (capacity d0 zero 3-4-23) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (holding d0 t0 30-0-79)
+    add: (capacity d0 two 3-3-22) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+    del: (capacity d0 one 3-1-20) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (holding d0 t0 30-0-79)
+    add: (capacity d0 four 3-0-19) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+    del: (capacity d0 three 3-2-21) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (holding d0 t0 30-0-79)
+    add: (capacity d0 three 3-2-21) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+    del: (capacity d0 two 3-3-22) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 zero 3-4-23) (holding d0 t0 30-0-79)
+    add: (capacity d0 one 3-1-20) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+    del: (capacity d0 zero 3-4-23) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (holding d0 t0 30-0-79)
+    add: (capacity d0 two 3-3-22) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+    del: (capacity d0 one 3-1-20) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (holding d0 t0 30-0-79)
+    add: (capacity d0 four 3-0-19) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+    del: (capacity d0 three 3-2-21) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (holding d0 t0 30-0-79)
+    add: (capacity d0 three 3-2-21) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+    del: (capacity d0 two 3-3-22) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+  (drop-tank d0 t0 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 zero 3-4-23) (holding d0 t0 30-0-79)
+    add: (capacity d0 one 3-1-20) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+    del: (capacity d0 zero 3-4-23) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+  (drop-tank d0 t1 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (holding d0 t1 31-0-81)
+    add: (capacity d0 two 3-3-22) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+    del: (capacity d0 one 3-1-20) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (holding d0 t1 31-0-81)
+    add: (capacity d0 four 3-0-19) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+    del: (capacity d0 three 3-2-21) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (holding d0 t1 31-0-81)
+    add: (capacity d0 three 3-2-21) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+    del: (capacity d0 two 3-3-22) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 zero 3-4-23) (holding d0 t1 31-0-81)
+    add: (capacity d0 one 3-1-20) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+    del: (capacity d0 zero 3-4-23) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (holding d0 t1 31-0-81)
+    add: (capacity d0 two 3-3-22) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+    del: (capacity d0 one 3-1-20) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (holding d0 t1 31-0-81)
+    add: (capacity d0 four 3-0-19) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+    del: (capacity d0 three 3-2-21) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (holding d0 t1 31-0-81)
+    add: (capacity d0 three 3-2-21) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+    del: (capacity d0 two 3-3-22) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 zero 3-4-23) (holding d0 t1 31-0-81)
+    add: (capacity d0 one 3-1-20) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+    del: (capacity d0 zero 3-4-23) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (holding d0 t1 31-0-81)
+    add: (capacity d0 two 3-3-22) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+    del: (capacity d0 one 3-1-20) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (holding d0 t1 31-0-81)
+    add: (capacity d0 four 3-0-19) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+    del: (capacity d0 three 3-2-21) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (holding d0 t1 31-0-81)
+    add: (capacity d0 three 3-2-21) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+    del: (capacity d0 two 3-3-22) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+  (drop-tank d0 t1 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 zero 3-4-23) (holding d0 t1 31-0-81)
+    add: (capacity d0 one 3-1-20) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+    del: (capacity d0 zero 3-4-23) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+  (drop-tank d0 t2 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (holding d0 t2 32-0-83)
+    add: (capacity d0 two 3-3-22) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+    del: (capacity d0 one 3-1-20) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (holding d0 t2 32-0-83)
+    add: (capacity d0 four 3-0-19) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+    del: (capacity d0 three 3-2-21) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (holding d0 t2 32-0-83)
+    add: (capacity d0 three 3-2-21) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+    del: (capacity d0 two 3-3-22) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 zero 3-4-23) (holding d0 t2 32-0-83)
+    add: (capacity d0 one 3-1-20) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+    del: (capacity d0 zero 3-4-23) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (holding d0 t2 32-0-83)
+    add: (capacity d0 two 3-3-22) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+    del: (capacity d0 one 3-1-20) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (holding d0 t2 32-0-83)
+    add: (capacity d0 four 3-0-19) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+    del: (capacity d0 three 3-2-21) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (holding d0 t2 32-0-83)
+    add: (capacity d0 three 3-2-21) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+    del: (capacity d0 two 3-3-22) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 zero 3-4-23) (holding d0 t2 32-0-83)
+    add: (capacity d0 one 3-1-20) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+    del: (capacity d0 zero 3-4-23) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (holding d0 t2 32-0-83)
+    add: (capacity d0 two 3-3-22) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+    del: (capacity d0 one 3-1-20) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (holding d0 t2 32-0-83)
+    add: (capacity d0 four 3-0-19) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+    del: (capacity d0 three 3-2-21) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (holding d0 t2 32-0-83)
+    add: (capacity d0 three 3-2-21) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+    del: (capacity d0 two 3-3-22) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+  (drop-tank d0 t2 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 zero 3-4-23) (holding d0 t2 32-0-83)
+    add: (capacity d0 one 3-1-20) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+    del: (capacity d0 zero 3-4-23) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+  (drop-tank d0 t3 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (holding d0 t3 33-0-85)
+    add: (capacity d0 two 3-3-22) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+    del: (capacity d0 one 3-1-20) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (holding d0 t3 33-0-85)
+    add: (capacity d0 four 3-0-19) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+    del: (capacity d0 three 3-2-21) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (holding d0 t3 33-0-85)
+    add: (capacity d0 three 3-2-21) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+    del: (capacity d0 two 3-3-22) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 zero 3-4-23) (holding d0 t3 33-0-85)
+    add: (capacity d0 one 3-1-20) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+    del: (capacity d0 zero 3-4-23) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (holding d0 t3 33-0-85)
+    add: (capacity d0 two 3-3-22) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+    del: (capacity d0 one 3-1-20) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (holding d0 t3 33-0-85)
+    add: (capacity d0 four 3-0-19) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+    del: (capacity d0 three 3-2-21) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (holding d0 t3 33-0-85)
+    add: (capacity d0 three 3-2-21) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+    del: (capacity d0 two 3-3-22) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 zero 3-4-23) (holding d0 t3 33-0-85)
+    add: (capacity d0 one 3-1-20) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+    del: (capacity d0 zero 3-4-23) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (holding d0 t3 33-0-85)
+    add: (capacity d0 two 3-3-22) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+    del: (capacity d0 one 3-1-20) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (holding d0 t3 33-0-85)
+    add: (capacity d0 four 3-0-19) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+    del: (capacity d0 three 3-2-21) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (holding d0 t3 33-0-85)
+    add: (capacity d0 three 3-2-21) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+    del: (capacity d0 two 3-3-22) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+  (drop-tank d0 t3 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 zero 3-4-23) (holding d0 t3 33-0-85)
+    add: (capacity d0 one 3-1-20) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+    del: (capacity d0 zero 3-4-23) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+  (drop-tank d0 t4 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (holding d0 t4 34-0-87)
+    add: (capacity d0 two 3-3-22) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+    del: (capacity d0 one 3-1-20) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (holding d0 t4 34-0-87)
+    add: (capacity d0 four 3-0-19) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+    del: (capacity d0 three 3-2-21) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (holding d0 t4 34-0-87)
+    add: (capacity d0 three 3-2-21) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+    del: (capacity d0 two 3-3-22) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 zero 3-4-23) (holding d0 t4 34-0-87)
+    add: (capacity d0 one 3-1-20) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+    del: (capacity d0 zero 3-4-23) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (holding d0 t4 34-0-87)
+    add: (capacity d0 two 3-3-22) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+    del: (capacity d0 one 3-1-20) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (holding d0 t4 34-0-87)
+    add: (capacity d0 four 3-0-19) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+    del: (capacity d0 three 3-2-21) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (holding d0 t4 34-0-87)
+    add: (capacity d0 three 3-2-21) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+    del: (capacity d0 two 3-3-22) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 zero 3-4-23) (holding d0 t4 34-0-87)
+    add: (capacity d0 one 3-1-20) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+    del: (capacity d0 zero 3-4-23) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (holding d0 t4 34-0-87)
+    add: (capacity d0 two 3-3-22) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+    del: (capacity d0 one 3-1-20) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (holding d0 t4 34-0-87)
+    add: (capacity d0 four 3-0-19) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+    del: (capacity d0 three 3-2-21) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (holding d0 t4 34-0-87)
+    add: (capacity d0 three 3-2-21) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+    del: (capacity d0 two 3-3-22) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+  (drop-tank d0 t4 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 zero 3-4-23) (holding d0 t4 34-0-87)
+    add: (capacity d0 one 3-1-20) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+    del: (capacity d0 zero 3-4-23) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+  (drop-tank d0 t5 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (holding d0 t5 35-0-89)
+    add: (capacity d0 two 3-3-22) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+    del: (capacity d0 one 3-1-20) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (holding d0 t5 35-0-89)
+    add: (capacity d0 four 3-0-19) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+    del: (capacity d0 three 3-2-21) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (holding d0 t5 35-0-89)
+    add: (capacity d0 three 3-2-21) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+    del: (capacity d0 two 3-3-22) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 zero 3-4-23) (holding d0 t5 35-0-89)
+    add: (capacity d0 one 3-1-20) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+    del: (capacity d0 zero 3-4-23) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (holding d0 t5 35-0-89)
+    add: (capacity d0 two 3-3-22) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+    del: (capacity d0 one 3-1-20) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (holding d0 t5 35-0-89)
+    add: (capacity d0 four 3-0-19) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+    del: (capacity d0 three 3-2-21) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (holding d0 t5 35-0-89)
+    add: (capacity d0 three 3-2-21) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+    del: (capacity d0 two 3-3-22) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 zero 3-4-23) (holding d0 t5 35-0-89)
+    add: (capacity d0 one 3-1-20) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+    del: (capacity d0 zero 3-4-23) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (holding d0 t5 35-0-89)
+    add: (capacity d0 two 3-3-22) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+    del: (capacity d0 one 3-1-20) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (holding d0 t5 35-0-89)
+    add: (capacity d0 four 3-0-19) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+    del: (capacity d0 three 3-2-21) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (holding d0 t5 35-0-89)
+    add: (capacity d0 three 3-2-21) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+    del: (capacity d0 two 3-3-22) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+  (drop-tank d0 t5 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 zero 3-4-23) (holding d0 t5 35-0-89)
+    add: (capacity d0 one 3-1-20) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+    del: (capacity d0 zero 3-4-23) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+  (drop-tank d1 t0 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (holding d1 t0 36-0-91)
+    add: (capacity d1 two 4-3-27) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+    del: (capacity d1 one 4-1-25) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (holding d1 t0 36-0-91)
+    add: (capacity d1 four 4-0-24) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+    del: (capacity d1 three 4-2-26) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (holding d1 t0 36-0-91)
+    add: (capacity d1 three 4-2-26) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+    del: (capacity d1 two 4-3-27) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 zero 4-4-28) (holding d1 t0 36-0-91)
+    add: (capacity d1 one 4-1-25) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+    del: (capacity d1 zero 4-4-28) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (holding d1 t0 36-0-91)
+    add: (capacity d1 two 4-3-27) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+    del: (capacity d1 one 4-1-25) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (holding d1 t0 36-0-91)
+    add: (capacity d1 four 4-0-24) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+    del: (capacity d1 three 4-2-26) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (holding d1 t0 36-0-91)
+    add: (capacity d1 three 4-2-26) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+    del: (capacity d1 two 4-3-27) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 zero 4-4-28) (holding d1 t0 36-0-91)
+    add: (capacity d1 one 4-1-25) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+    del: (capacity d1 zero 4-4-28) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (holding d1 t0 36-0-91)
+    add: (capacity d1 two 4-3-27) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+    del: (capacity d1 one 4-1-25) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (holding d1 t0 36-0-91)
+    add: (capacity d1 four 4-0-24) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+    del: (capacity d1 three 4-2-26) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (holding d1 t0 36-0-91)
+    add: (capacity d1 three 4-2-26) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+    del: (capacity d1 two 4-3-27) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+  (drop-tank d1 t0 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 zero 4-4-28) (holding d1 t0 36-0-91)
+    add: (capacity d1 one 4-1-25) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+    del: (capacity d1 zero 4-4-28) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+  (drop-tank d1 t1 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (holding d1 t1 37-0-93)
+    add: (capacity d1 two 4-3-27) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+    del: (capacity d1 one 4-1-25) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (holding d1 t1 37-0-93)
+    add: (capacity d1 four 4-0-24) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+    del: (capacity d1 three 4-2-26) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (holding d1 t1 37-0-93)
+    add: (capacity d1 three 4-2-26) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+    del: (capacity d1 two 4-3-27) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 zero 4-4-28) (holding d1 t1 37-0-93)
+    add: (capacity d1 one 4-1-25) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+    del: (capacity d1 zero 4-4-28) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (holding d1 t1 37-0-93)
+    add: (capacity d1 two 4-3-27) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+    del: (capacity d1 one 4-1-25) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (holding d1 t1 37-0-93)
+    add: (capacity d1 four 4-0-24) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+    del: (capacity d1 three 4-2-26) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (holding d1 t1 37-0-93)
+    add: (capacity d1 three 4-2-26) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+    del: (capacity d1 two 4-3-27) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 zero 4-4-28) (holding d1 t1 37-0-93)
+    add: (capacity d1 one 4-1-25) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+    del: (capacity d1 zero 4-4-28) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (holding d1 t1 37-0-93)
+    add: (capacity d1 two 4-3-27) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+    del: (capacity d1 one 4-1-25) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (holding d1 t1 37-0-93)
+    add: (capacity d1 four 4-0-24) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+    del: (capacity d1 three 4-2-26) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (holding d1 t1 37-0-93)
+    add: (capacity d1 three 4-2-26) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+    del: (capacity d1 two 4-3-27) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+  (drop-tank d1 t1 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 zero 4-4-28) (holding d1 t1 37-0-93)
+    add: (capacity d1 one 4-1-25) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+    del: (capacity d1 zero 4-4-28) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+  (drop-tank d1 t2 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (holding d1 t2 38-0-95)
+    add: (capacity d1 two 4-3-27) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+    del: (capacity d1 one 4-1-25) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (holding d1 t2 38-0-95)
+    add: (capacity d1 four 4-0-24) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+    del: (capacity d1 three 4-2-26) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (holding d1 t2 38-0-95)
+    add: (capacity d1 three 4-2-26) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+    del: (capacity d1 two 4-3-27) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 zero 4-4-28) (holding d1 t2 38-0-95)
+    add: (capacity d1 one 4-1-25) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+    del: (capacity d1 zero 4-4-28) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (holding d1 t2 38-0-95)
+    add: (capacity d1 two 4-3-27) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+    del: (capacity d1 one 4-1-25) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (holding d1 t2 38-0-95)
+    add: (capacity d1 four 4-0-24) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+    del: (capacity d1 three 4-2-26) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (holding d1 t2 38-0-95)
+    add: (capacity d1 three 4-2-26) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+    del: (capacity d1 two 4-3-27) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 zero 4-4-28) (holding d1 t2 38-0-95)
+    add: (capacity d1 one 4-1-25) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+    del: (capacity d1 zero 4-4-28) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (holding d1 t2 38-0-95)
+    add: (capacity d1 two 4-3-27) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+    del: (capacity d1 one 4-1-25) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (holding d1 t2 38-0-95)
+    add: (capacity d1 four 4-0-24) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+    del: (capacity d1 three 4-2-26) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (holding d1 t2 38-0-95)
+    add: (capacity d1 three 4-2-26) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+    del: (capacity d1 two 4-3-27) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+  (drop-tank d1 t2 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 zero 4-4-28) (holding d1 t2 38-0-95)
+    add: (capacity d1 one 4-1-25) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+    del: (capacity d1 zero 4-4-28) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+  (drop-tank d1 t3 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (holding d1 t3 39-0-97)
+    add: (capacity d1 two 4-3-27) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+    del: (capacity d1 one 4-1-25) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (holding d1 t3 39-0-97)
+    add: (capacity d1 four 4-0-24) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+    del: (capacity d1 three 4-2-26) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (holding d1 t3 39-0-97)
+    add: (capacity d1 three 4-2-26) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+    del: (capacity d1 two 4-3-27) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 zero 4-4-28) (holding d1 t3 39-0-97)
+    add: (capacity d1 one 4-1-25) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+    del: (capacity d1 zero 4-4-28) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (holding d1 t3 39-0-97)
+    add: (capacity d1 two 4-3-27) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+    del: (capacity d1 one 4-1-25) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (holding d1 t3 39-0-97)
+    add: (capacity d1 four 4-0-24) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+    del: (capacity d1 three 4-2-26) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (holding d1 t3 39-0-97)
+    add: (capacity d1 three 4-2-26) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+    del: (capacity d1 two 4-3-27) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 zero 4-4-28) (holding d1 t3 39-0-97)
+    add: (capacity d1 one 4-1-25) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+    del: (capacity d1 zero 4-4-28) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (holding d1 t3 39-0-97)
+    add: (capacity d1 two 4-3-27) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+    del: (capacity d1 one 4-1-25) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (holding d1 t3 39-0-97)
+    add: (capacity d1 four 4-0-24) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+    del: (capacity d1 three 4-2-26) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (holding d1 t3 39-0-97)
+    add: (capacity d1 three 4-2-26) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+    del: (capacity d1 two 4-3-27) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+  (drop-tank d1 t3 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 zero 4-4-28) (holding d1 t3 39-0-97)
+    add: (capacity d1 one 4-1-25) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+    del: (capacity d1 zero 4-4-28) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+  (drop-tank d1 t4 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (holding d1 t4 40-0-99)
+    add: (capacity d1 two 4-3-27) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+    del: (capacity d1 one 4-1-25) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (holding d1 t4 40-0-99)
+    add: (capacity d1 four 4-0-24) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+    del: (capacity d1 three 4-2-26) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (holding d1 t4 40-0-99)
+    add: (capacity d1 three 4-2-26) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+    del: (capacity d1 two 4-3-27) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 zero 4-4-28) (holding d1 t4 40-0-99)
+    add: (capacity d1 one 4-1-25) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+    del: (capacity d1 zero 4-4-28) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (holding d1 t4 40-0-99)
+    add: (capacity d1 two 4-3-27) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+    del: (capacity d1 one 4-1-25) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (holding d1 t4 40-0-99)
+    add: (capacity d1 four 4-0-24) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+    del: (capacity d1 three 4-2-26) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (holding d1 t4 40-0-99)
+    add: (capacity d1 three 4-2-26) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+    del: (capacity d1 two 4-3-27) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 zero 4-4-28) (holding d1 t4 40-0-99)
+    add: (capacity d1 one 4-1-25) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+    del: (capacity d1 zero 4-4-28) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (holding d1 t4 40-0-99)
+    add: (capacity d1 two 4-3-27) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+    del: (capacity d1 one 4-1-25) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (holding d1 t4 40-0-99)
+    add: (capacity d1 four 4-0-24) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+    del: (capacity d1 three 4-2-26) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (holding d1 t4 40-0-99)
+    add: (capacity d1 three 4-2-26) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+    del: (capacity d1 two 4-3-27) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+  (drop-tank d1 t4 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 zero 4-4-28) (holding d1 t4 40-0-99)
+    add: (capacity d1 one 4-1-25) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+    del: (capacity d1 zero 4-4-28) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+  (drop-tank d1 t5 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (holding d1 t5 41-0-101)
+    add: (capacity d1 two 4-3-27) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+    del: (capacity d1 one 4-1-25) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (holding d1 t5 41-0-101)
+    add: (capacity d1 four 4-0-24) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+    del: (capacity d1 three 4-2-26) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (holding d1 t5 41-0-101)
+    add: (capacity d1 three 4-2-26) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+    del: (capacity d1 two 4-3-27) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 zero 4-4-28) (holding d1 t5 41-0-101)
+    add: (capacity d1 one 4-1-25) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+    del: (capacity d1 zero 4-4-28) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (holding d1 t5 41-0-101)
+    add: (capacity d1 two 4-3-27) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+    del: (capacity d1 one 4-1-25) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (holding d1 t5 41-0-101)
+    add: (capacity d1 four 4-0-24) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+    del: (capacity d1 three 4-2-26) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (holding d1 t5 41-0-101)
+    add: (capacity d1 three 4-2-26) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+    del: (capacity d1 two 4-3-27) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 zero 4-4-28) (holding d1 t5 41-0-101)
+    add: (capacity d1 one 4-1-25) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+    del: (capacity d1 zero 4-4-28) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (holding d1 t5 41-0-101)
+    add: (capacity d1 two 4-3-27) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+    del: (capacity d1 one 4-1-25) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (holding d1 t5 41-0-101)
+    add: (capacity d1 four 4-0-24) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+    del: (capacity d1 three 4-2-26) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (holding d1 t5 41-0-101)
+    add: (capacity d1 three 4-2-26) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+    del: (capacity d1 two 4-3-27) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+  (drop-tank d1 t5 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 zero 4-4-28) (holding d1 t5 41-0-101)
+    add: (capacity d1 one 4-1-25) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+    del: (capacity d1 zero 4-4-28) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+  (enter-water d0 l0), cost: 1
+    pre: (at-surface d0 0-3-3)
+    add: (at-diver d0 l0 0-0-0)
+    del: (at-surface d0 0-3-3)
+  (enter-water d1 l0), cost: 1
+    pre: (at-surface d1 1-3-9)
+    add: (at-diver d1 l0 1-0-6)
+    del: (at-surface d1 1-3-9)
+  (hire-diver-d0), cost: 1
+    pre: (available d0 0-4-4)
+    add: (at-surface d0 0-3-3)
+    del: (available d0 0-4-4)
+  (hire-diver-d1), cost: 1
+    pre: (available d1 1-4-10)
+    add: (at-surface d1 1-3-9)
+    del: (available d1 1-4-10)
+  (photograph d0 l0 t0), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (none-of-those 23-1-66)
+    del: (full t0 23-0-65)
+  (photograph d0 l0 t1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (none-of-those 24-1-68)
+    del: (full t1 24-0-67)
+  (photograph d0 l0 t2), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (none-of-those 25-1-70)
+    del: (full t2 25-0-69)
+  (photograph d0 l0 t3), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (none-of-those 26-1-72)
+    del: (full t3 26-0-71)
+  (photograph d0 l0 t4), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (none-of-those 27-1-74)
+    del: (full t4 27-0-73)
+  (photograph d0 l0 t5), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (none-of-those 28-1-76)
+    del: (full t5 28-0-75)
+  (photograph d0 l1 t0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (none-of-those 23-1-66)
+    del: (full t0 23-0-65)
+  (photograph d0 l1 t1), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (none-of-those 24-1-68)
+    del: (full t1 24-0-67)
+  (photograph d0 l1 t2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (none-of-those 25-1-70)
+    del: (full t2 25-0-69)
+  (photograph d0 l1 t3), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (none-of-those 26-1-72)
+    del: (full t3 26-0-71)
+  (photograph d0 l1 t4), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (none-of-those 27-1-74)
+    del: (full t4 27-0-73)
+  (photograph d0 l1 t5), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (none-of-those 28-1-76)
+    del: (full t5 28-0-75)
+  (photograph d0 l2 t0), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (none-of-those 23-1-66) (have-photo l2 29-0-77)
+    del: (full t0 23-0-65) (none-of-those 29-1-78)
+  (photograph d0 l2 t1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (none-of-those 24-1-68) (have-photo l2 29-0-77)
+    del: (full t1 24-0-67) (none-of-those 29-1-78)
+  (photograph d0 l2 t2), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (none-of-those 25-1-70) (have-photo l2 29-0-77)
+    del: (full t2 25-0-69) (none-of-those 29-1-78)
+  (photograph d0 l2 t3), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (none-of-those 26-1-72) (have-photo l2 29-0-77)
+    del: (full t3 26-0-71) (none-of-those 29-1-78)
+  (photograph d0 l2 t4), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (none-of-those 27-1-74) (have-photo l2 29-0-77)
+    del: (full t4 27-0-73) (none-of-those 29-1-78)
+  (photograph d0 l2 t5), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (none-of-those 28-1-76) (have-photo l2 29-0-77)
+    del: (full t5 28-0-75) (none-of-those 29-1-78)
+  (photograph d1 l0 t0), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (none-of-those 23-1-66)
+    del: (full t0 23-0-65)
+  (photograph d1 l0 t1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (none-of-those 24-1-68)
+    del: (full t1 24-0-67)
+  (photograph d1 l0 t2), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (none-of-those 25-1-70)
+    del: (full t2 25-0-69)
+  (photograph d1 l0 t3), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (none-of-those 26-1-72)
+    del: (full t3 26-0-71)
+  (photograph d1 l0 t4), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (none-of-those 27-1-74)
+    del: (full t4 27-0-73)
+  (photograph d1 l0 t5), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (none-of-those 28-1-76)
+    del: (full t5 28-0-75)
+  (photograph d1 l1 t0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (none-of-those 23-1-66)
+    del: (full t0 23-0-65)
+  (photograph d1 l1 t1), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (none-of-those 24-1-68)
+    del: (full t1 24-0-67)
+  (photograph d1 l1 t2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (none-of-those 25-1-70)
+    del: (full t2 25-0-69)
+  (photograph d1 l1 t3), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (none-of-those 26-1-72)
+    del: (full t3 26-0-71)
+  (photograph d1 l1 t4), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (none-of-those 27-1-74)
+    del: (full t4 27-0-73)
+  (photograph d1 l1 t5), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (none-of-those 28-1-76)
+    del: (full t5 28-0-75)
+  (photograph d1 l2 t0), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (none-of-those 23-1-66) (have-photo l2 29-0-77)
+    del: (full t0 23-0-65) (none-of-those 29-1-78)
+  (photograph d1 l2 t1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (none-of-those 24-1-68) (have-photo l2 29-0-77)
+    del: (full t1 24-0-67) (none-of-those 29-1-78)
+  (photograph d1 l2 t2), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (none-of-those 25-1-70) (have-photo l2 29-0-77)
+    del: (full t2 25-0-69) (none-of-those 29-1-78)
+  (photograph d1 l2 t3), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (none-of-those 26-1-72) (have-photo l2 29-0-77)
+    del: (full t3 26-0-71) (none-of-those 29-1-78)
+  (photograph d1 l2 t4), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (none-of-those 27-1-74) (have-photo l2 29-0-77)
+    del: (full t4 27-0-73) (none-of-those 29-1-78)
+  (photograph d1 l2 t5), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (none-of-those 28-1-76) (have-photo l2 29-0-77)
+    del: (full t5 28-0-75) (none-of-those 29-1-78)
+  (pickup-tank d0 t0 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (at-tank t0 l0 5-0-29)
+    add: (capacity d0 one 3-1-20) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+    del: (capacity d0 two 3-3-22) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 four 3-0-19) (at-tank t0 l0 5-0-29)
+    add: (capacity d0 three 3-2-21) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+    del: (capacity d0 four 3-0-19) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (at-tank t0 l0 5-0-29)
+    add: (capacity d0 two 3-3-22) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+    del: (capacity d0 three 3-2-21) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (at-tank t0 l0 5-0-29)
+    add: (capacity d0 zero 3-4-23) (none-of-those 5-1-30) (holding d0 t0 30-0-79)
+    del: (capacity d0 one 3-1-20) (at-tank t0 l0 5-0-29) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (at-tank t0 l1 6-0-31)
+    add: (capacity d0 one 3-1-20) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+    del: (capacity d0 two 3-3-22) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 four 3-0-19) (at-tank t0 l1 6-0-31)
+    add: (capacity d0 three 3-2-21) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+    del: (capacity d0 four 3-0-19) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (at-tank t0 l1 6-0-31)
+    add: (capacity d0 two 3-3-22) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+    del: (capacity d0 three 3-2-21) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (at-tank t0 l1 6-0-31)
+    add: (capacity d0 zero 3-4-23) (none-of-those 6-1-32) (holding d0 t0 30-0-79)
+    del: (capacity d0 one 3-1-20) (at-tank t0 l1 6-0-31) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (at-tank t0 l2 7-0-33)
+    add: (capacity d0 one 3-1-20) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+    del: (capacity d0 two 3-3-22) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 four 3-0-19) (at-tank t0 l2 7-0-33)
+    add: (capacity d0 three 3-2-21) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+    del: (capacity d0 four 3-0-19) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (at-tank t0 l2 7-0-33)
+    add: (capacity d0 two 3-3-22) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+    del: (capacity d0 three 3-2-21) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+  (pickup-tank d0 t0 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (at-tank t0 l2 7-0-33)
+    add: (capacity d0 zero 3-4-23) (none-of-those 7-1-34) (holding d0 t0 30-0-79)
+    del: (capacity d0 one 3-1-20) (at-tank t0 l2 7-0-33) (none-of-those 30-1-80)
+  (pickup-tank d0 t1 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (at-tank t1 l0 8-0-35)
+    add: (capacity d0 one 3-1-20) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+    del: (capacity d0 two 3-3-22) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 four 3-0-19) (at-tank t1 l0 8-0-35)
+    add: (capacity d0 three 3-2-21) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+    del: (capacity d0 four 3-0-19) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (at-tank t1 l0 8-0-35)
+    add: (capacity d0 two 3-3-22) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+    del: (capacity d0 three 3-2-21) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (at-tank t1 l0 8-0-35)
+    add: (capacity d0 zero 3-4-23) (none-of-those 8-1-36) (holding d0 t1 31-0-81)
+    del: (capacity d0 one 3-1-20) (at-tank t1 l0 8-0-35) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (at-tank t1 l1 9-0-37)
+    add: (capacity d0 one 3-1-20) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+    del: (capacity d0 two 3-3-22) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 four 3-0-19) (at-tank t1 l1 9-0-37)
+    add: (capacity d0 three 3-2-21) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+    del: (capacity d0 four 3-0-19) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (at-tank t1 l1 9-0-37)
+    add: (capacity d0 two 3-3-22) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+    del: (capacity d0 three 3-2-21) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (at-tank t1 l1 9-0-37)
+    add: (capacity d0 zero 3-4-23) (none-of-those 9-1-38) (holding d0 t1 31-0-81)
+    del: (capacity d0 one 3-1-20) (at-tank t1 l1 9-0-37) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (at-tank t1 l2 10-0-39)
+    add: (capacity d0 one 3-1-20) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+    del: (capacity d0 two 3-3-22) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 four 3-0-19) (at-tank t1 l2 10-0-39)
+    add: (capacity d0 three 3-2-21) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+    del: (capacity d0 four 3-0-19) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (at-tank t1 l2 10-0-39)
+    add: (capacity d0 two 3-3-22) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+    del: (capacity d0 three 3-2-21) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+  (pickup-tank d0 t1 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (at-tank t1 l2 10-0-39)
+    add: (capacity d0 zero 3-4-23) (none-of-those 10-1-40) (holding d0 t1 31-0-81)
+    del: (capacity d0 one 3-1-20) (at-tank t1 l2 10-0-39) (none-of-those 31-1-82)
+  (pickup-tank d0 t2 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (at-tank t2 l0 11-0-41)
+    add: (capacity d0 one 3-1-20) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+    del: (capacity d0 two 3-3-22) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 four 3-0-19) (at-tank t2 l0 11-0-41)
+    add: (capacity d0 three 3-2-21) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+    del: (capacity d0 four 3-0-19) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (at-tank t2 l0 11-0-41)
+    add: (capacity d0 two 3-3-22) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+    del: (capacity d0 three 3-2-21) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (at-tank t2 l0 11-0-41)
+    add: (capacity d0 zero 3-4-23) (none-of-those 11-1-42) (holding d0 t2 32-0-83)
+    del: (capacity d0 one 3-1-20) (at-tank t2 l0 11-0-41) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (at-tank t2 l1 12-0-43)
+    add: (capacity d0 one 3-1-20) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+    del: (capacity d0 two 3-3-22) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 four 3-0-19) (at-tank t2 l1 12-0-43)
+    add: (capacity d0 three 3-2-21) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+    del: (capacity d0 four 3-0-19) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (at-tank t2 l1 12-0-43)
+    add: (capacity d0 two 3-3-22) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+    del: (capacity d0 three 3-2-21) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (at-tank t2 l1 12-0-43)
+    add: (capacity d0 zero 3-4-23) (none-of-those 12-1-44) (holding d0 t2 32-0-83)
+    del: (capacity d0 one 3-1-20) (at-tank t2 l1 12-0-43) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (at-tank t2 l2 13-0-45)
+    add: (capacity d0 one 3-1-20) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+    del: (capacity d0 two 3-3-22) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 four 3-0-19) (at-tank t2 l2 13-0-45)
+    add: (capacity d0 three 3-2-21) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+    del: (capacity d0 four 3-0-19) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (at-tank t2 l2 13-0-45)
+    add: (capacity d0 two 3-3-22) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+    del: (capacity d0 three 3-2-21) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+  (pickup-tank d0 t2 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (at-tank t2 l2 13-0-45)
+    add: (capacity d0 zero 3-4-23) (none-of-those 13-1-46) (holding d0 t2 32-0-83)
+    del: (capacity d0 one 3-1-20) (at-tank t2 l2 13-0-45) (none-of-those 32-1-84)
+  (pickup-tank d0 t3 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (at-tank t3 l0 14-0-47)
+    add: (capacity d0 one 3-1-20) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+    del: (capacity d0 two 3-3-22) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 four 3-0-19) (at-tank t3 l0 14-0-47)
+    add: (capacity d0 three 3-2-21) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+    del: (capacity d0 four 3-0-19) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (at-tank t3 l0 14-0-47)
+    add: (capacity d0 two 3-3-22) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+    del: (capacity d0 three 3-2-21) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (at-tank t3 l0 14-0-47)
+    add: (capacity d0 zero 3-4-23) (none-of-those 14-1-48) (holding d0 t3 33-0-85)
+    del: (capacity d0 one 3-1-20) (at-tank t3 l0 14-0-47) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (at-tank t3 l1 15-0-49)
+    add: (capacity d0 one 3-1-20) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+    del: (capacity d0 two 3-3-22) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 four 3-0-19) (at-tank t3 l1 15-0-49)
+    add: (capacity d0 three 3-2-21) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+    del: (capacity d0 four 3-0-19) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (at-tank t3 l1 15-0-49)
+    add: (capacity d0 two 3-3-22) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+    del: (capacity d0 three 3-2-21) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (at-tank t3 l1 15-0-49)
+    add: (capacity d0 zero 3-4-23) (none-of-those 15-1-50) (holding d0 t3 33-0-85)
+    del: (capacity d0 one 3-1-20) (at-tank t3 l1 15-0-49) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (at-tank t3 l2 16-0-51)
+    add: (capacity d0 one 3-1-20) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+    del: (capacity d0 two 3-3-22) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 four 3-0-19) (at-tank t3 l2 16-0-51)
+    add: (capacity d0 three 3-2-21) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+    del: (capacity d0 four 3-0-19) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (at-tank t3 l2 16-0-51)
+    add: (capacity d0 two 3-3-22) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+    del: (capacity d0 three 3-2-21) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+  (pickup-tank d0 t3 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (at-tank t3 l2 16-0-51)
+    add: (capacity d0 zero 3-4-23) (none-of-those 16-1-52) (holding d0 t3 33-0-85)
+    del: (capacity d0 one 3-1-20) (at-tank t3 l2 16-0-51) (none-of-those 33-1-86)
+  (pickup-tank d0 t4 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (at-tank t4 l0 17-0-53)
+    add: (capacity d0 one 3-1-20) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+    del: (capacity d0 two 3-3-22) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 four 3-0-19) (at-tank t4 l0 17-0-53)
+    add: (capacity d0 three 3-2-21) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+    del: (capacity d0 four 3-0-19) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (at-tank t4 l0 17-0-53)
+    add: (capacity d0 two 3-3-22) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+    del: (capacity d0 three 3-2-21) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (at-tank t4 l0 17-0-53)
+    add: (capacity d0 zero 3-4-23) (none-of-those 17-1-54) (holding d0 t4 34-0-87)
+    del: (capacity d0 one 3-1-20) (at-tank t4 l0 17-0-53) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (at-tank t4 l1 18-0-55)
+    add: (capacity d0 one 3-1-20) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+    del: (capacity d0 two 3-3-22) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 four 3-0-19) (at-tank t4 l1 18-0-55)
+    add: (capacity d0 three 3-2-21) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+    del: (capacity d0 four 3-0-19) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (at-tank t4 l1 18-0-55)
+    add: (capacity d0 two 3-3-22) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+    del: (capacity d0 three 3-2-21) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (at-tank t4 l1 18-0-55)
+    add: (capacity d0 zero 3-4-23) (none-of-those 18-1-56) (holding d0 t4 34-0-87)
+    del: (capacity d0 one 3-1-20) (at-tank t4 l1 18-0-55) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (at-tank t4 l2 19-0-57)
+    add: (capacity d0 one 3-1-20) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+    del: (capacity d0 two 3-3-22) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 four 3-0-19) (at-tank t4 l2 19-0-57)
+    add: (capacity d0 three 3-2-21) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+    del: (capacity d0 four 3-0-19) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (at-tank t4 l2 19-0-57)
+    add: (capacity d0 two 3-3-22) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+    del: (capacity d0 three 3-2-21) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+  (pickup-tank d0 t4 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (at-tank t4 l2 19-0-57)
+    add: (capacity d0 zero 3-4-23) (none-of-those 19-1-58) (holding d0 t4 34-0-87)
+    del: (capacity d0 one 3-1-20) (at-tank t4 l2 19-0-57) (none-of-those 34-1-88)
+  (pickup-tank d0 t5 l0 one two), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 two 3-3-22) (at-tank t5 l0 20-0-59)
+    add: (capacity d0 one 3-1-20) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+    del: (capacity d0 two 3-3-22) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l0 three four), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 four 3-0-19) (at-tank t5 l0 20-0-59)
+    add: (capacity d0 three 3-2-21) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+    del: (capacity d0 four 3-0-19) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l0 two three), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 three 3-2-21) (at-tank t5 l0 20-0-59)
+    add: (capacity d0 two 3-3-22) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+    del: (capacity d0 three 3-2-21) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l0 zero one), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (capacity d0 one 3-1-20) (at-tank t5 l0 20-0-59)
+    add: (capacity d0 zero 3-4-23) (none-of-those 20-1-60) (holding d0 t5 35-0-89)
+    del: (capacity d0 one 3-1-20) (at-tank t5 l0 20-0-59) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l1 one two), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 two 3-3-22) (at-tank t5 l1 21-0-61)
+    add: (capacity d0 one 3-1-20) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+    del: (capacity d0 two 3-3-22) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l1 three four), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 four 3-0-19) (at-tank t5 l1 21-0-61)
+    add: (capacity d0 three 3-2-21) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+    del: (capacity d0 four 3-0-19) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l1 two three), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 three 3-2-21) (at-tank t5 l1 21-0-61)
+    add: (capacity d0 two 3-3-22) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+    del: (capacity d0 three 3-2-21) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l1 zero one), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (capacity d0 one 3-1-20) (at-tank t5 l1 21-0-61)
+    add: (capacity d0 zero 3-4-23) (none-of-those 21-1-62) (holding d0 t5 35-0-89)
+    del: (capacity d0 one 3-1-20) (at-tank t5 l1 21-0-61) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l2 one two), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 two 3-3-22) (at-tank t5 l2 22-0-63)
+    add: (capacity d0 one 3-1-20) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+    del: (capacity d0 two 3-3-22) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l2 three four), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 four 3-0-19) (at-tank t5 l2 22-0-63)
+    add: (capacity d0 three 3-2-21) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+    del: (capacity d0 four 3-0-19) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l2 two three), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 three 3-2-21) (at-tank t5 l2 22-0-63)
+    add: (capacity d0 two 3-3-22) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+    del: (capacity d0 three 3-2-21) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+  (pickup-tank d0 t5 l2 zero one), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (capacity d0 one 3-1-20) (at-tank t5 l2 22-0-63)
+    add: (capacity d0 zero 3-4-23) (none-of-those 22-1-64) (holding d0 t5 35-0-89)
+    del: (capacity d0 one 3-1-20) (at-tank t5 l2 22-0-63) (none-of-those 35-1-90)
+  (pickup-tank d1 t0 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (at-tank t0 l0 5-0-29)
+    add: (capacity d1 one 4-1-25) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+    del: (capacity d1 two 4-3-27) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 four 4-0-24) (at-tank t0 l0 5-0-29)
+    add: (capacity d1 three 4-2-26) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+    del: (capacity d1 four 4-0-24) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (at-tank t0 l0 5-0-29)
+    add: (capacity d1 two 4-3-27) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+    del: (capacity d1 three 4-2-26) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (at-tank t0 l0 5-0-29)
+    add: (capacity d1 zero 4-4-28) (none-of-those 5-1-30) (holding d1 t0 36-0-91)
+    del: (capacity d1 one 4-1-25) (at-tank t0 l0 5-0-29) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (at-tank t0 l1 6-0-31)
+    add: (capacity d1 one 4-1-25) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+    del: (capacity d1 two 4-3-27) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 four 4-0-24) (at-tank t0 l1 6-0-31)
+    add: (capacity d1 three 4-2-26) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+    del: (capacity d1 four 4-0-24) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (at-tank t0 l1 6-0-31)
+    add: (capacity d1 two 4-3-27) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+    del: (capacity d1 three 4-2-26) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (at-tank t0 l1 6-0-31)
+    add: (capacity d1 zero 4-4-28) (none-of-those 6-1-32) (holding d1 t0 36-0-91)
+    del: (capacity d1 one 4-1-25) (at-tank t0 l1 6-0-31) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (at-tank t0 l2 7-0-33)
+    add: (capacity d1 one 4-1-25) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+    del: (capacity d1 two 4-3-27) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 four 4-0-24) (at-tank t0 l2 7-0-33)
+    add: (capacity d1 three 4-2-26) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+    del: (capacity d1 four 4-0-24) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (at-tank t0 l2 7-0-33)
+    add: (capacity d1 two 4-3-27) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+    del: (capacity d1 three 4-2-26) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+  (pickup-tank d1 t0 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (at-tank t0 l2 7-0-33)
+    add: (capacity d1 zero 4-4-28) (none-of-those 7-1-34) (holding d1 t0 36-0-91)
+    del: (capacity d1 one 4-1-25) (at-tank t0 l2 7-0-33) (none-of-those 36-1-92)
+  (pickup-tank d1 t1 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (at-tank t1 l0 8-0-35)
+    add: (capacity d1 one 4-1-25) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+    del: (capacity d1 two 4-3-27) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 four 4-0-24) (at-tank t1 l0 8-0-35)
+    add: (capacity d1 three 4-2-26) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+    del: (capacity d1 four 4-0-24) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (at-tank t1 l0 8-0-35)
+    add: (capacity d1 two 4-3-27) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+    del: (capacity d1 three 4-2-26) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (at-tank t1 l0 8-0-35)
+    add: (capacity d1 zero 4-4-28) (none-of-those 8-1-36) (holding d1 t1 37-0-93)
+    del: (capacity d1 one 4-1-25) (at-tank t1 l0 8-0-35) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (at-tank t1 l1 9-0-37)
+    add: (capacity d1 one 4-1-25) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+    del: (capacity d1 two 4-3-27) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 four 4-0-24) (at-tank t1 l1 9-0-37)
+    add: (capacity d1 three 4-2-26) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+    del: (capacity d1 four 4-0-24) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (at-tank t1 l1 9-0-37)
+    add: (capacity d1 two 4-3-27) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+    del: (capacity d1 three 4-2-26) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (at-tank t1 l1 9-0-37)
+    add: (capacity d1 zero 4-4-28) (none-of-those 9-1-38) (holding d1 t1 37-0-93)
+    del: (capacity d1 one 4-1-25) (at-tank t1 l1 9-0-37) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (at-tank t1 l2 10-0-39)
+    add: (capacity d1 one 4-1-25) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+    del: (capacity d1 two 4-3-27) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 four 4-0-24) (at-tank t1 l2 10-0-39)
+    add: (capacity d1 three 4-2-26) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+    del: (capacity d1 four 4-0-24) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (at-tank t1 l2 10-0-39)
+    add: (capacity d1 two 4-3-27) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+    del: (capacity d1 three 4-2-26) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+  (pickup-tank d1 t1 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (at-tank t1 l2 10-0-39)
+    add: (capacity d1 zero 4-4-28) (none-of-those 10-1-40) (holding d1 t1 37-0-93)
+    del: (capacity d1 one 4-1-25) (at-tank t1 l2 10-0-39) (none-of-those 37-1-94)
+  (pickup-tank d1 t2 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (at-tank t2 l0 11-0-41)
+    add: (capacity d1 one 4-1-25) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+    del: (capacity d1 two 4-3-27) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 four 4-0-24) (at-tank t2 l0 11-0-41)
+    add: (capacity d1 three 4-2-26) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+    del: (capacity d1 four 4-0-24) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (at-tank t2 l0 11-0-41)
+    add: (capacity d1 two 4-3-27) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+    del: (capacity d1 three 4-2-26) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (at-tank t2 l0 11-0-41)
+    add: (capacity d1 zero 4-4-28) (none-of-those 11-1-42) (holding d1 t2 38-0-95)
+    del: (capacity d1 one 4-1-25) (at-tank t2 l0 11-0-41) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (at-tank t2 l1 12-0-43)
+    add: (capacity d1 one 4-1-25) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+    del: (capacity d1 two 4-3-27) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 four 4-0-24) (at-tank t2 l1 12-0-43)
+    add: (capacity d1 three 4-2-26) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+    del: (capacity d1 four 4-0-24) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (at-tank t2 l1 12-0-43)
+    add: (capacity d1 two 4-3-27) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+    del: (capacity d1 three 4-2-26) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (at-tank t2 l1 12-0-43)
+    add: (capacity d1 zero 4-4-28) (none-of-those 12-1-44) (holding d1 t2 38-0-95)
+    del: (capacity d1 one 4-1-25) (at-tank t2 l1 12-0-43) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (at-tank t2 l2 13-0-45)
+    add: (capacity d1 one 4-1-25) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+    del: (capacity d1 two 4-3-27) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 four 4-0-24) (at-tank t2 l2 13-0-45)
+    add: (capacity d1 three 4-2-26) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+    del: (capacity d1 four 4-0-24) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (at-tank t2 l2 13-0-45)
+    add: (capacity d1 two 4-3-27) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+    del: (capacity d1 three 4-2-26) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+  (pickup-tank d1 t2 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (at-tank t2 l2 13-0-45)
+    add: (capacity d1 zero 4-4-28) (none-of-those 13-1-46) (holding d1 t2 38-0-95)
+    del: (capacity d1 one 4-1-25) (at-tank t2 l2 13-0-45) (none-of-those 38-1-96)
+  (pickup-tank d1 t3 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (at-tank t3 l0 14-0-47)
+    add: (capacity d1 one 4-1-25) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+    del: (capacity d1 two 4-3-27) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 four 4-0-24) (at-tank t3 l0 14-0-47)
+    add: (capacity d1 three 4-2-26) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+    del: (capacity d1 four 4-0-24) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (at-tank t3 l0 14-0-47)
+    add: (capacity d1 two 4-3-27) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+    del: (capacity d1 three 4-2-26) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (at-tank t3 l0 14-0-47)
+    add: (capacity d1 zero 4-4-28) (none-of-those 14-1-48) (holding d1 t3 39-0-97)
+    del: (capacity d1 one 4-1-25) (at-tank t3 l0 14-0-47) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (at-tank t3 l1 15-0-49)
+    add: (capacity d1 one 4-1-25) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+    del: (capacity d1 two 4-3-27) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 four 4-0-24) (at-tank t3 l1 15-0-49)
+    add: (capacity d1 three 4-2-26) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+    del: (capacity d1 four 4-0-24) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (at-tank t3 l1 15-0-49)
+    add: (capacity d1 two 4-3-27) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+    del: (capacity d1 three 4-2-26) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (at-tank t3 l1 15-0-49)
+    add: (capacity d1 zero 4-4-28) (none-of-those 15-1-50) (holding d1 t3 39-0-97)
+    del: (capacity d1 one 4-1-25) (at-tank t3 l1 15-0-49) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (at-tank t3 l2 16-0-51)
+    add: (capacity d1 one 4-1-25) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+    del: (capacity d1 two 4-3-27) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 four 4-0-24) (at-tank t3 l2 16-0-51)
+    add: (capacity d1 three 4-2-26) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+    del: (capacity d1 four 4-0-24) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (at-tank t3 l2 16-0-51)
+    add: (capacity d1 two 4-3-27) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+    del: (capacity d1 three 4-2-26) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+  (pickup-tank d1 t3 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (at-tank t3 l2 16-0-51)
+    add: (capacity d1 zero 4-4-28) (none-of-those 16-1-52) (holding d1 t3 39-0-97)
+    del: (capacity d1 one 4-1-25) (at-tank t3 l2 16-0-51) (none-of-those 39-1-98)
+  (pickup-tank d1 t4 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (at-tank t4 l0 17-0-53)
+    add: (capacity d1 one 4-1-25) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+    del: (capacity d1 two 4-3-27) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 four 4-0-24) (at-tank t4 l0 17-0-53)
+    add: (capacity d1 three 4-2-26) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+    del: (capacity d1 four 4-0-24) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (at-tank t4 l0 17-0-53)
+    add: (capacity d1 two 4-3-27) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+    del: (capacity d1 three 4-2-26) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (at-tank t4 l0 17-0-53)
+    add: (capacity d1 zero 4-4-28) (none-of-those 17-1-54) (holding d1 t4 40-0-99)
+    del: (capacity d1 one 4-1-25) (at-tank t4 l0 17-0-53) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (at-tank t4 l1 18-0-55)
+    add: (capacity d1 one 4-1-25) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+    del: (capacity d1 two 4-3-27) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 four 4-0-24) (at-tank t4 l1 18-0-55)
+    add: (capacity d1 three 4-2-26) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+    del: (capacity d1 four 4-0-24) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (at-tank t4 l1 18-0-55)
+    add: (capacity d1 two 4-3-27) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+    del: (capacity d1 three 4-2-26) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (at-tank t4 l1 18-0-55)
+    add: (capacity d1 zero 4-4-28) (none-of-those 18-1-56) (holding d1 t4 40-0-99)
+    del: (capacity d1 one 4-1-25) (at-tank t4 l1 18-0-55) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (at-tank t4 l2 19-0-57)
+    add: (capacity d1 one 4-1-25) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+    del: (capacity d1 two 4-3-27) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 four 4-0-24) (at-tank t4 l2 19-0-57)
+    add: (capacity d1 three 4-2-26) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+    del: (capacity d1 four 4-0-24) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (at-tank t4 l2 19-0-57)
+    add: (capacity d1 two 4-3-27) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+    del: (capacity d1 three 4-2-26) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+  (pickup-tank d1 t4 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (at-tank t4 l2 19-0-57)
+    add: (capacity d1 zero 4-4-28) (none-of-those 19-1-58) (holding d1 t4 40-0-99)
+    del: (capacity d1 one 4-1-25) (at-tank t4 l2 19-0-57) (none-of-those 40-1-100)
+  (pickup-tank d1 t5 l0 one two), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 two 4-3-27) (at-tank t5 l0 20-0-59)
+    add: (capacity d1 one 4-1-25) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+    del: (capacity d1 two 4-3-27) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l0 three four), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 four 4-0-24) (at-tank t5 l0 20-0-59)
+    add: (capacity d1 three 4-2-26) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+    del: (capacity d1 four 4-0-24) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l0 two three), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 three 4-2-26) (at-tank t5 l0 20-0-59)
+    add: (capacity d1 two 4-3-27) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+    del: (capacity d1 three 4-2-26) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l0 zero one), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (capacity d1 one 4-1-25) (at-tank t5 l0 20-0-59)
+    add: (capacity d1 zero 4-4-28) (none-of-those 20-1-60) (holding d1 t5 41-0-101)
+    del: (capacity d1 one 4-1-25) (at-tank t5 l0 20-0-59) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l1 one two), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 two 4-3-27) (at-tank t5 l1 21-0-61)
+    add: (capacity d1 one 4-1-25) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+    del: (capacity d1 two 4-3-27) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l1 three four), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 four 4-0-24) (at-tank t5 l1 21-0-61)
+    add: (capacity d1 three 4-2-26) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+    del: (capacity d1 four 4-0-24) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l1 two three), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 three 4-2-26) (at-tank t5 l1 21-0-61)
+    add: (capacity d1 two 4-3-27) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+    del: (capacity d1 three 4-2-26) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l1 zero one), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (capacity d1 one 4-1-25) (at-tank t5 l1 21-0-61)
+    add: (capacity d1 zero 4-4-28) (none-of-those 21-1-62) (holding d1 t5 41-0-101)
+    del: (capacity d1 one 4-1-25) (at-tank t5 l1 21-0-61) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l2 one two), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 two 4-3-27) (at-tank t5 l2 22-0-63)
+    add: (capacity d1 one 4-1-25) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+    del: (capacity d1 two 4-3-27) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l2 three four), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 four 4-0-24) (at-tank t5 l2 22-0-63)
+    add: (capacity d1 three 4-2-26) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+    del: (capacity d1 four 4-0-24) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l2 two three), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 three 4-2-26) (at-tank t5 l2 22-0-63)
+    add: (capacity d1 two 4-3-27) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+    del: (capacity d1 three 4-2-26) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+  (pickup-tank d1 t5 l2 zero one), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (capacity d1 one 4-1-25) (at-tank t5 l2 22-0-63)
+    add: (capacity d1 zero 4-4-28) (none-of-those 22-1-64) (holding d1 t5 41-0-101)
+    del: (capacity d1 one 4-1-25) (at-tank t5 l2 22-0-63) (none-of-those 41-1-102)
+  (prepare-tank d0 t0 t1 three four), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t0 2-0-12) (capacity d0 four 3-0-19)
+    add: (in-storage t1 2-1-13) (capacity d0 three 3-2-21) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    del: (in-storage t0 2-0-12) (capacity d0 four 3-0-19) (none-of-those 23-1-66) (none-of-those 30-1-80)
+  (prepare-tank d0 t1 t2 one two), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t1 2-1-13) (capacity d0 two 3-3-22)
+    add: (in-storage t2 2-2-14) (capacity d0 one 3-1-20) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    del: (in-storage t1 2-1-13) (capacity d0 two 3-3-22) (none-of-those 24-1-68) (none-of-those 31-1-82)
+  (prepare-tank d0 t1 t2 three four), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t1 2-1-13) (capacity d0 four 3-0-19)
+    add: (in-storage t2 2-2-14) (capacity d0 three 3-2-21) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    del: (in-storage t1 2-1-13) (capacity d0 four 3-0-19) (none-of-those 24-1-68) (none-of-those 31-1-82)
+  (prepare-tank d0 t1 t2 two three), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t1 2-1-13) (capacity d0 three 3-2-21)
+    add: (in-storage t2 2-2-14) (capacity d0 two 3-3-22) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    del: (in-storage t1 2-1-13) (capacity d0 three 3-2-21) (none-of-those 24-1-68) (none-of-those 31-1-82)
+  (prepare-tank d0 t1 t2 zero one), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t1 2-1-13) (capacity d0 one 3-1-20)
+    add: (in-storage t2 2-2-14) (capacity d0 zero 3-4-23) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    del: (in-storage t1 2-1-13) (capacity d0 one 3-1-20) (none-of-those 24-1-68) (none-of-those 31-1-82)
+  (prepare-tank d0 t2 t3 one two), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t2 2-2-14) (capacity d0 two 3-3-22)
+    add: (in-storage t3 2-3-15) (capacity d0 one 3-1-20) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    del: (in-storage t2 2-2-14) (capacity d0 two 3-3-22) (none-of-those 25-1-70) (none-of-those 32-1-84)
+  (prepare-tank d0 t2 t3 three four), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t2 2-2-14) (capacity d0 four 3-0-19)
+    add: (in-storage t3 2-3-15) (capacity d0 three 3-2-21) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    del: (in-storage t2 2-2-14) (capacity d0 four 3-0-19) (none-of-those 25-1-70) (none-of-those 32-1-84)
+  (prepare-tank d0 t2 t3 two three), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t2 2-2-14) (capacity d0 three 3-2-21)
+    add: (in-storage t3 2-3-15) (capacity d0 two 3-3-22) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    del: (in-storage t2 2-2-14) (capacity d0 three 3-2-21) (none-of-those 25-1-70) (none-of-those 32-1-84)
+  (prepare-tank d0 t2 t3 zero one), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t2 2-2-14) (capacity d0 one 3-1-20)
+    add: (in-storage t3 2-3-15) (capacity d0 zero 3-4-23) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    del: (in-storage t2 2-2-14) (capacity d0 one 3-1-20) (none-of-those 25-1-70) (none-of-those 32-1-84)
+  (prepare-tank d0 t3 t4 one two), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t3 2-3-15) (capacity d0 two 3-3-22)
+    add: (in-storage t4 2-4-16) (capacity d0 one 3-1-20) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    del: (in-storage t3 2-3-15) (capacity d0 two 3-3-22) (none-of-those 26-1-72) (none-of-those 33-1-86)
+  (prepare-tank d0 t3 t4 three four), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t3 2-3-15) (capacity d0 four 3-0-19)
+    add: (in-storage t4 2-4-16) (capacity d0 three 3-2-21) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    del: (in-storage t3 2-3-15) (capacity d0 four 3-0-19) (none-of-those 26-1-72) (none-of-those 33-1-86)
+  (prepare-tank d0 t3 t4 two three), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t3 2-3-15) (capacity d0 three 3-2-21)
+    add: (in-storage t4 2-4-16) (capacity d0 two 3-3-22) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    del: (in-storage t3 2-3-15) (capacity d0 three 3-2-21) (none-of-those 26-1-72) (none-of-those 33-1-86)
+  (prepare-tank d0 t3 t4 zero one), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t3 2-3-15) (capacity d0 one 3-1-20)
+    add: (in-storage t4 2-4-16) (capacity d0 zero 3-4-23) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    del: (in-storage t3 2-3-15) (capacity d0 one 3-1-20) (none-of-those 26-1-72) (none-of-those 33-1-86)
+  (prepare-tank d0 t4 t5 one two), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t4 2-4-16) (capacity d0 two 3-3-22)
+    add: (in-storage t5 2-5-17) (capacity d0 one 3-1-20) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    del: (in-storage t4 2-4-16) (capacity d0 two 3-3-22) (none-of-those 27-1-74) (none-of-those 34-1-88)
+  (prepare-tank d0 t4 t5 three four), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t4 2-4-16) (capacity d0 four 3-0-19)
+    add: (in-storage t5 2-5-17) (capacity d0 three 3-2-21) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    del: (in-storage t4 2-4-16) (capacity d0 four 3-0-19) (none-of-those 27-1-74) (none-of-those 34-1-88)
+  (prepare-tank d0 t4 t5 two three), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t4 2-4-16) (capacity d0 three 3-2-21)
+    add: (in-storage t5 2-5-17) (capacity d0 two 3-3-22) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    del: (in-storage t4 2-4-16) (capacity d0 three 3-2-21) (none-of-those 27-1-74) (none-of-those 34-1-88)
+  (prepare-tank d0 t4 t5 zero one), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t4 2-4-16) (capacity d0 one 3-1-20)
+    add: (in-storage t5 2-5-17) (capacity d0 zero 3-4-23) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    del: (in-storage t4 2-4-16) (capacity d0 one 3-1-20) (none-of-those 27-1-74) (none-of-those 34-1-88)
+  (prepare-tank d0 t5 dummy one two), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t5 2-5-17) (capacity d0 two 3-3-22)
+    add: (none-of-those 2-6-18) (capacity d0 one 3-1-20) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    del: (in-storage t5 2-5-17) (capacity d0 two 3-3-22) (none-of-those 28-1-76) (none-of-those 35-1-90)
+  (prepare-tank d0 t5 dummy three four), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t5 2-5-17) (capacity d0 four 3-0-19)
+    add: (none-of-those 2-6-18) (capacity d0 three 3-2-21) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    del: (in-storage t5 2-5-17) (capacity d0 four 3-0-19) (none-of-those 28-1-76) (none-of-those 35-1-90)
+  (prepare-tank d0 t5 dummy two three), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t5 2-5-17) (capacity d0 three 3-2-21)
+    add: (none-of-those 2-6-18) (capacity d0 two 3-3-22) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    del: (in-storage t5 2-5-17) (capacity d0 three 3-2-21) (none-of-those 28-1-76) (none-of-those 35-1-90)
+  (prepare-tank d0 t5 dummy zero one), cost: 1
+    pre: (at-surface d0 0-3-3) (in-storage t5 2-5-17) (capacity d0 one 3-1-20)
+    add: (none-of-those 2-6-18) (capacity d0 zero 3-4-23) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    del: (in-storage t5 2-5-17) (capacity d0 one 3-1-20) (none-of-those 28-1-76) (none-of-those 35-1-90)
+  (prepare-tank d1 t0 t1 three four), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t0 2-0-12) (capacity d1 four 4-0-24)
+    add: (in-storage t1 2-1-13) (capacity d1 three 4-2-26) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    del: (in-storage t0 2-0-12) (capacity d1 four 4-0-24) (none-of-those 23-1-66) (none-of-those 36-1-92)
+  (prepare-tank d1 t1 t2 one two), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t1 2-1-13) (capacity d1 two 4-3-27)
+    add: (in-storage t2 2-2-14) (capacity d1 one 4-1-25) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    del: (in-storage t1 2-1-13) (capacity d1 two 4-3-27) (none-of-those 24-1-68) (none-of-those 37-1-94)
+  (prepare-tank d1 t1 t2 three four), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t1 2-1-13) (capacity d1 four 4-0-24)
+    add: (in-storage t2 2-2-14) (capacity d1 three 4-2-26) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    del: (in-storage t1 2-1-13) (capacity d1 four 4-0-24) (none-of-those 24-1-68) (none-of-those 37-1-94)
+  (prepare-tank d1 t1 t2 two three), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t1 2-1-13) (capacity d1 three 4-2-26)
+    add: (in-storage t2 2-2-14) (capacity d1 two 4-3-27) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    del: (in-storage t1 2-1-13) (capacity d1 three 4-2-26) (none-of-those 24-1-68) (none-of-those 37-1-94)
+  (prepare-tank d1 t1 t2 zero one), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t1 2-1-13) (capacity d1 one 4-1-25)
+    add: (in-storage t2 2-2-14) (capacity d1 zero 4-4-28) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    del: (in-storage t1 2-1-13) (capacity d1 one 4-1-25) (none-of-those 24-1-68) (none-of-those 37-1-94)
+  (prepare-tank d1 t2 t3 one two), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t2 2-2-14) (capacity d1 two 4-3-27)
+    add: (in-storage t3 2-3-15) (capacity d1 one 4-1-25) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    del: (in-storage t2 2-2-14) (capacity d1 two 4-3-27) (none-of-those 25-1-70) (none-of-those 38-1-96)
+  (prepare-tank d1 t2 t3 three four), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t2 2-2-14) (capacity d1 four 4-0-24)
+    add: (in-storage t3 2-3-15) (capacity d1 three 4-2-26) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    del: (in-storage t2 2-2-14) (capacity d1 four 4-0-24) (none-of-those 25-1-70) (none-of-those 38-1-96)
+  (prepare-tank d1 t2 t3 two three), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t2 2-2-14) (capacity d1 three 4-2-26)
+    add: (in-storage t3 2-3-15) (capacity d1 two 4-3-27) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    del: (in-storage t2 2-2-14) (capacity d1 three 4-2-26) (none-of-those 25-1-70) (none-of-those 38-1-96)
+  (prepare-tank d1 t2 t3 zero one), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t2 2-2-14) (capacity d1 one 4-1-25)
+    add: (in-storage t3 2-3-15) (capacity d1 zero 4-4-28) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    del: (in-storage t2 2-2-14) (capacity d1 one 4-1-25) (none-of-those 25-1-70) (none-of-those 38-1-96)
+  (prepare-tank d1 t3 t4 one two), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t3 2-3-15) (capacity d1 two 4-3-27)
+    add: (in-storage t4 2-4-16) (capacity d1 one 4-1-25) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    del: (in-storage t3 2-3-15) (capacity d1 two 4-3-27) (none-of-those 26-1-72) (none-of-those 39-1-98)
+  (prepare-tank d1 t3 t4 three four), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t3 2-3-15) (capacity d1 four 4-0-24)
+    add: (in-storage t4 2-4-16) (capacity d1 three 4-2-26) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    del: (in-storage t3 2-3-15) (capacity d1 four 4-0-24) (none-of-those 26-1-72) (none-of-those 39-1-98)
+  (prepare-tank d1 t3 t4 two three), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t3 2-3-15) (capacity d1 three 4-2-26)
+    add: (in-storage t4 2-4-16) (capacity d1 two 4-3-27) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    del: (in-storage t3 2-3-15) (capacity d1 three 4-2-26) (none-of-those 26-1-72) (none-of-those 39-1-98)
+  (prepare-tank d1 t3 t4 zero one), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t3 2-3-15) (capacity d1 one 4-1-25)
+    add: (in-storage t4 2-4-16) (capacity d1 zero 4-4-28) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    del: (in-storage t3 2-3-15) (capacity d1 one 4-1-25) (none-of-those 26-1-72) (none-of-those 39-1-98)
+  (prepare-tank d1 t4 t5 one two), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t4 2-4-16) (capacity d1 two 4-3-27)
+    add: (in-storage t5 2-5-17) (capacity d1 one 4-1-25) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    del: (in-storage t4 2-4-16) (capacity d1 two 4-3-27) (none-of-those 27-1-74) (none-of-those 40-1-100)
+  (prepare-tank d1 t4 t5 three four), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t4 2-4-16) (capacity d1 four 4-0-24)
+    add: (in-storage t5 2-5-17) (capacity d1 three 4-2-26) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    del: (in-storage t4 2-4-16) (capacity d1 four 4-0-24) (none-of-those 27-1-74) (none-of-those 40-1-100)
+  (prepare-tank d1 t4 t5 two three), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t4 2-4-16) (capacity d1 three 4-2-26)
+    add: (in-storage t5 2-5-17) (capacity d1 two 4-3-27) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    del: (in-storage t4 2-4-16) (capacity d1 three 4-2-26) (none-of-those 27-1-74) (none-of-those 40-1-100)
+  (prepare-tank d1 t4 t5 zero one), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t4 2-4-16) (capacity d1 one 4-1-25)
+    add: (in-storage t5 2-5-17) (capacity d1 zero 4-4-28) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    del: (in-storage t4 2-4-16) (capacity d1 one 4-1-25) (none-of-those 27-1-74) (none-of-those 40-1-100)
+  (prepare-tank d1 t5 dummy one two), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t5 2-5-17) (capacity d1 two 4-3-27)
+    add: (none-of-those 2-6-18) (capacity d1 one 4-1-25) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    del: (in-storage t5 2-5-17) (capacity d1 two 4-3-27) (none-of-those 28-1-76) (none-of-those 41-1-102)
+  (prepare-tank d1 t5 dummy three four), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t5 2-5-17) (capacity d1 four 4-0-24)
+    add: (none-of-those 2-6-18) (capacity d1 three 4-2-26) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    del: (in-storage t5 2-5-17) (capacity d1 four 4-0-24) (none-of-those 28-1-76) (none-of-those 41-1-102)
+  (prepare-tank d1 t5 dummy two three), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t5 2-5-17) (capacity d1 three 4-2-26)
+    add: (none-of-those 2-6-18) (capacity d1 two 4-3-27) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    del: (in-storage t5 2-5-17) (capacity d1 three 4-2-26) (none-of-those 28-1-76) (none-of-those 41-1-102)
+  (prepare-tank d1 t5 dummy zero one), cost: 1
+    pre: (at-surface d1 1-3-9) (in-storage t5 2-5-17) (capacity d1 one 4-1-25)
+    add: (none-of-those 2-6-18) (capacity d1 zero 4-4-28) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    del: (in-storage t5 2-5-17) (capacity d1 one 4-1-25) (none-of-those 28-1-76) (none-of-those 41-1-102)
+  (swim d0 t0 l0 l1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 23-1-66)
+    del: (at-diver d0 l0 0-0-0) (full t0 23-0-65)
+  (swim d0 t0 l1 l0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (at-diver d0 l0 0-0-0) (none-of-those 23-1-66)
+    del: (at-diver d0 l1 0-1-1) (full t0 23-0-65)
+  (swim d0 t0 l1 l2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (at-diver d0 l2 0-2-2) (none-of-those 23-1-66)
+    del: (at-diver d0 l1 0-1-1) (full t0 23-0-65)
+  (swim d0 t0 l2 l1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t0 23-0-65) (holding d0 t0 30-0-79)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 23-1-66)
+    del: (at-diver d0 l2 0-2-2) (full t0 23-0-65)
+  (swim d0 t1 l0 l1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 24-1-68)
+    del: (at-diver d0 l0 0-0-0) (full t1 24-0-67)
+  (swim d0 t1 l1 l0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (at-diver d0 l0 0-0-0) (none-of-those 24-1-68)
+    del: (at-diver d0 l1 0-1-1) (full t1 24-0-67)
+  (swim d0 t1 l1 l2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (at-diver d0 l2 0-2-2) (none-of-those 24-1-68)
+    del: (at-diver d0 l1 0-1-1) (full t1 24-0-67)
+  (swim d0 t1 l2 l1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t1 24-0-67) (holding d0 t1 31-0-81)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 24-1-68)
+    del: (at-diver d0 l2 0-2-2) (full t1 24-0-67)
+  (swim d0 t2 l0 l1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 25-1-70)
+    del: (at-diver d0 l0 0-0-0) (full t2 25-0-69)
+  (swim d0 t2 l1 l0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (at-diver d0 l0 0-0-0) (none-of-those 25-1-70)
+    del: (at-diver d0 l1 0-1-1) (full t2 25-0-69)
+  (swim d0 t2 l1 l2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (at-diver d0 l2 0-2-2) (none-of-those 25-1-70)
+    del: (at-diver d0 l1 0-1-1) (full t2 25-0-69)
+  (swim d0 t2 l2 l1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t2 25-0-69) (holding d0 t2 32-0-83)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 25-1-70)
+    del: (at-diver d0 l2 0-2-2) (full t2 25-0-69)
+  (swim d0 t3 l0 l1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 26-1-72)
+    del: (at-diver d0 l0 0-0-0) (full t3 26-0-71)
+  (swim d0 t3 l1 l0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (at-diver d0 l0 0-0-0) (none-of-those 26-1-72)
+    del: (at-diver d0 l1 0-1-1) (full t3 26-0-71)
+  (swim d0 t3 l1 l2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (at-diver d0 l2 0-2-2) (none-of-those 26-1-72)
+    del: (at-diver d0 l1 0-1-1) (full t3 26-0-71)
+  (swim d0 t3 l2 l1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t3 26-0-71) (holding d0 t3 33-0-85)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 26-1-72)
+    del: (at-diver d0 l2 0-2-2) (full t3 26-0-71)
+  (swim d0 t4 l0 l1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 27-1-74)
+    del: (at-diver d0 l0 0-0-0) (full t4 27-0-73)
+  (swim d0 t4 l1 l0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (at-diver d0 l0 0-0-0) (none-of-those 27-1-74)
+    del: (at-diver d0 l1 0-1-1) (full t4 27-0-73)
+  (swim d0 t4 l1 l2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (at-diver d0 l2 0-2-2) (none-of-those 27-1-74)
+    del: (at-diver d0 l1 0-1-1) (full t4 27-0-73)
+  (swim d0 t4 l2 l1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t4 27-0-73) (holding d0 t4 34-0-87)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 27-1-74)
+    del: (at-diver d0 l2 0-2-2) (full t4 27-0-73)
+  (swim d0 t5 l0 l1), cost: 1
+    pre: (at-diver d0 l0 0-0-0) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 28-1-76)
+    del: (at-diver d0 l0 0-0-0) (full t5 28-0-75)
+  (swim d0 t5 l1 l0), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (at-diver d0 l0 0-0-0) (none-of-those 28-1-76)
+    del: (at-diver d0 l1 0-1-1) (full t5 28-0-75)
+  (swim d0 t5 l1 l2), cost: 1
+    pre: (at-diver d0 l1 0-1-1) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (at-diver d0 l2 0-2-2) (none-of-those 28-1-76)
+    del: (at-diver d0 l1 0-1-1) (full t5 28-0-75)
+  (swim d0 t5 l2 l1), cost: 1
+    pre: (at-diver d0 l2 0-2-2) (full t5 28-0-75) (holding d0 t5 35-0-89)
+    add: (at-diver d0 l1 0-1-1) (none-of-those 28-1-76)
+    del: (at-diver d0 l2 0-2-2) (full t5 28-0-75)
+  (swim d1 t0 l0 l1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 23-1-66)
+    del: (at-diver d1 l0 1-0-6) (full t0 23-0-65)
+  (swim d1 t0 l1 l0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (at-diver d1 l0 1-0-6) (none-of-those 23-1-66)
+    del: (at-diver d1 l1 1-1-7) (full t0 23-0-65)
+  (swim d1 t0 l1 l2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (at-diver d1 l2 1-2-8) (none-of-those 23-1-66)
+    del: (at-diver d1 l1 1-1-7) (full t0 23-0-65)
+  (swim d1 t0 l2 l1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t0 23-0-65) (holding d1 t0 36-0-91)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 23-1-66)
+    del: (at-diver d1 l2 1-2-8) (full t0 23-0-65)
+  (swim d1 t1 l0 l1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 24-1-68)
+    del: (at-diver d1 l0 1-0-6) (full t1 24-0-67)
+  (swim d1 t1 l1 l0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (at-diver d1 l0 1-0-6) (none-of-those 24-1-68)
+    del: (at-diver d1 l1 1-1-7) (full t1 24-0-67)
+  (swim d1 t1 l1 l2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (at-diver d1 l2 1-2-8) (none-of-those 24-1-68)
+    del: (at-diver d1 l1 1-1-7) (full t1 24-0-67)
+  (swim d1 t1 l2 l1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t1 24-0-67) (holding d1 t1 37-0-93)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 24-1-68)
+    del: (at-diver d1 l2 1-2-8) (full t1 24-0-67)
+  (swim d1 t2 l0 l1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 25-1-70)
+    del: (at-diver d1 l0 1-0-6) (full t2 25-0-69)
+  (swim d1 t2 l1 l0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (at-diver d1 l0 1-0-6) (none-of-those 25-1-70)
+    del: (at-diver d1 l1 1-1-7) (full t2 25-0-69)
+  (swim d1 t2 l1 l2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (at-diver d1 l2 1-2-8) (none-of-those 25-1-70)
+    del: (at-diver d1 l1 1-1-7) (full t2 25-0-69)
+  (swim d1 t2 l2 l1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t2 25-0-69) (holding d1 t2 38-0-95)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 25-1-70)
+    del: (at-diver d1 l2 1-2-8) (full t2 25-0-69)
+  (swim d1 t3 l0 l1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 26-1-72)
+    del: (at-diver d1 l0 1-0-6) (full t3 26-0-71)
+  (swim d1 t3 l1 l0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (at-diver d1 l0 1-0-6) (none-of-those 26-1-72)
+    del: (at-diver d1 l1 1-1-7) (full t3 26-0-71)
+  (swim d1 t3 l1 l2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (at-diver d1 l2 1-2-8) (none-of-those 26-1-72)
+    del: (at-diver d1 l1 1-1-7) (full t3 26-0-71)
+  (swim d1 t3 l2 l1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t3 26-0-71) (holding d1 t3 39-0-97)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 26-1-72)
+    del: (at-diver d1 l2 1-2-8) (full t3 26-0-71)
+  (swim d1 t4 l0 l1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 27-1-74)
+    del: (at-diver d1 l0 1-0-6) (full t4 27-0-73)
+  (swim d1 t4 l1 l0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (at-diver d1 l0 1-0-6) (none-of-those 27-1-74)
+    del: (at-diver d1 l1 1-1-7) (full t4 27-0-73)
+  (swim d1 t4 l1 l2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (at-diver d1 l2 1-2-8) (none-of-those 27-1-74)
+    del: (at-diver d1 l1 1-1-7) (full t4 27-0-73)
+  (swim d1 t4 l2 l1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t4 27-0-73) (holding d1 t4 40-0-99)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 27-1-74)
+    del: (at-diver d1 l2 1-2-8) (full t4 27-0-73)
+  (swim d1 t5 l0 l1), cost: 1
+    pre: (at-diver d1 l0 1-0-6) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 28-1-76)
+    del: (at-diver d1 l0 1-0-6) (full t5 28-0-75)
+  (swim d1 t5 l1 l0), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (at-diver d1 l0 1-0-6) (none-of-those 28-1-76)
+    del: (at-diver d1 l1 1-1-7) (full t5 28-0-75)
+  (swim d1 t5 l1 l2), cost: 1
+    pre: (at-diver d1 l1 1-1-7) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (at-diver d1 l2 1-2-8) (none-of-those 28-1-76)
+    del: (at-diver d1 l1 1-1-7) (full t5 28-0-75)
+  (swim d1 t5 l2 l1), cost: 1
+    pre: (at-diver d1 l2 1-2-8) (full t5 28-0-75) (holding d1 t5 41-0-101)
+    add: (at-diver d1 l1 1-1-7) (none-of-those 28-1-76)
+    del: (at-diver d1 l2 1-2-8) (full t5 28-0-75)
+Init State: (available d0 0-4-4) (available d1 1-4-10) (in-storage t0 2-0-12) (capacity d0 four 3-0-19) (capacity d1 four 4-0-24) (none-of-those 5-1-30) (none-of-those 6-1-32) (none-of-those 7-1-34) (none-of-those 8-1-36) (none-of-those 9-1-38) (none-of-those 10-1-40) (none-of-those 11-1-42) (none-of-those 12-1-44) (none-of-those 13-1-46) (none-of-those 14-1-48) (none-of-those 15-1-50) (none-of-those 16-1-52) (none-of-those 17-1-54) (none-of-those 18-1-56) (none-of-those 19-1-58) (none-of-those 20-1-60) (none-of-those 21-1-62) (none-of-those 22-1-64) (none-of-those 23-1-66) (none-of-those 24-1-68) (none-of-those 25-1-70) (none-of-those 26-1-72) (none-of-those 27-1-74) (none-of-those 28-1-76) (none-of-those 29-1-78) (none-of-those 30-1-80) (none-of-those 31-1-82) (none-of-those 32-1-84) (none-of-those 33-1-86) (none-of-those 34-1-88) (none-of-those 35-1-90) (none-of-those 36-1-92) (none-of-those 37-1-94) (none-of-those 38-1-96) (none-of-those 39-1-98) (none-of-those 40-1-100) (none-of-those 41-1-102)
+Goal: (decompressing d0 0-5-5) (decompressing d1 1-5-11) (have-photo l2 29-0-77)
+Value: 8

@@ -1,0 +1,293 @@
+Fact[48]:
+  (in crate0 truck0 0-0-0)
+  (in crate0 truck1 0-1-1)
+  (lifting hoist0 crate0 0-2-2)
+  (lifting hoist1 crate0 0-3-3)
+  (lifting hoist2 crate0 0-4-4)
+  (on crate0 crate1 0-5-5)
+  (on crate0 pallet0 0-6-6)
+  (on crate0 pallet1 0-7-7)
+  (on crate0 pallet2 0-8-8)
+  (in crate1 truck0 1-0-9)
+  (in crate1 truck1 1-1-10)
+  (lifting hoist0 crate1 1-2-11)
+  (lifting hoist1 crate1 1-3-12)
+  (lifting hoist2 crate1 1-4-13)
+  (on crate1 crate0 1-5-14)
+  (on crate1 pallet0 1-6-15)
+  (on crate1 pallet1 1-7-16)
+  (on crate1 pallet2 1-8-17)
+  (at crate0 depot0 2-0-18)
+  (at crate0 distributor0 2-1-19)
+  (at crate0 distributor1 2-2-20)
+  (none-of-those 2-3-21)
+  (at crate1 depot0 3-0-22)
+  (at crate1 distributor0 3-1-23)
+  (at crate1 distributor1 3-2-24)
+  (none-of-those 3-3-25)
+  (at truck0 depot0 4-0-26)
+  (at truck0 distributor0 4-1-27)
+  (at truck0 distributor1 4-2-28)
+  (at truck1 depot0 5-0-29)
+  (at truck1 distributor0 5-1-30)
+  (at truck1 distributor1 5-2-31)
+  (available hoist0 6-0-32)
+  (none-of-those 6-1-33)
+  (available hoist1 7-0-34)
+  (none-of-those 7-1-35)
+  (available hoist2 8-0-36)
+  (none-of-those 8-1-37)
+  (clear crate0 9-0-38)
+  (none-of-those 9-1-39)
+  (clear crate1 10-0-40)
+  (none-of-those 10-1-41)
+  (clear pallet0 11-0-42)
+  (none-of-those 11-1-43)
+  (clear pallet1 12-0-44)
+  (none-of-those 12-1-45)
+  (clear pallet2 13-0-46)
+  (none-of-those 13-1-47)
+Op[60]:
+  (drive truck0 depot0 distributor0), cost: 1
+    pre: (at truck0 depot0 4-0-26)
+    add: (at truck0 distributor0 4-1-27)
+    del: (at truck0 depot0 4-0-26)
+  (drive truck0 depot0 distributor1), cost: 1
+    pre: (at truck0 depot0 4-0-26)
+    add: (at truck0 distributor1 4-2-28)
+    del: (at truck0 depot0 4-0-26)
+  (drive truck0 distributor0 depot0), cost: 1
+    pre: (at truck0 distributor0 4-1-27)
+    add: (at truck0 depot0 4-0-26)
+    del: (at truck0 distributor0 4-1-27)
+  (drive truck0 distributor0 distributor1), cost: 1
+    pre: (at truck0 distributor0 4-1-27)
+    add: (at truck0 distributor1 4-2-28)
+    del: (at truck0 distributor0 4-1-27)
+  (drive truck0 distributor1 depot0), cost: 1
+    pre: (at truck0 distributor1 4-2-28)
+    add: (at truck0 depot0 4-0-26)
+    del: (at truck0 distributor1 4-2-28)
+  (drive truck0 distributor1 distributor0), cost: 1
+    pre: (at truck0 distributor1 4-2-28)
+    add: (at truck0 distributor0 4-1-27)
+    del: (at truck0 distributor1 4-2-28)
+  (drive truck1 depot0 distributor0), cost: 1
+    pre: (at truck1 depot0 5-0-29)
+    add: (at truck1 distributor0 5-1-30)
+    del: (at truck1 depot0 5-0-29)
+  (drive truck1 depot0 distributor1), cost: 1
+    pre: (at truck1 depot0 5-0-29)
+    add: (at truck1 distributor1 5-2-31)
+    del: (at truck1 depot0 5-0-29)
+  (drive truck1 distributor0 depot0), cost: 1
+    pre: (at truck1 distributor0 5-1-30)
+    add: (at truck1 depot0 5-0-29)
+    del: (at truck1 distributor0 5-1-30)
+  (drive truck1 distributor0 distributor1), cost: 1
+    pre: (at truck1 distributor0 5-1-30)
+    add: (at truck1 distributor1 5-2-31)
+    del: (at truck1 distributor0 5-1-30)
+  (drive truck1 distributor1 depot0), cost: 1
+    pre: (at truck1 distributor1 5-2-31)
+    add: (at truck1 depot0 5-0-29)
+    del: (at truck1 distributor1 5-2-31)
+  (drive truck1 distributor1 distributor0), cost: 1
+    pre: (at truck1 distributor1 5-2-31)
+    add: (at truck1 distributor0 5-1-30)
+    del: (at truck1 distributor1 5-2-31)
+  (drop hoist0 crate0 crate1 depot0), cost: 1
+    pre: (lifting hoist0 crate0 0-2-2) (at crate1 depot0 3-0-22) (clear crate1 10-0-40)
+    add: (on crate0 crate1 0-5-5) (at crate0 depot0 2-0-18) (available hoist0 6-0-32) (clear crate0 9-0-38) (none-of-those 10-1-41)
+    del: (lifting hoist0 crate0 0-2-2) (at crate0 distributor0 2-1-19) (at crate0 distributor1 2-2-20) (none-of-those 2-3-21) (none-of-those 6-1-33) (none-of-those 9-1-39) (clear crate1 10-0-40)
+  (drop hoist0 crate0 pallet0 depot0), cost: 1
+    pre: (lifting hoist0 crate0 0-2-2) (clear pallet0 11-0-42)
+    add: (on crate0 pallet0 0-6-6) (at crate0 depot0 2-0-18) (available hoist0 6-0-32) (clear crate0 9-0-38) (none-of-those 11-1-43)
+    del: (lifting hoist0 crate0 0-2-2) (at crate0 distributor0 2-1-19) (at crate0 distributor1 2-2-20) (none-of-those 2-3-21) (none-of-those 6-1-33) (none-of-those 9-1-39) (clear pallet0 11-0-42)
+  (drop hoist0 crate1 crate0 depot0), cost: 1
+    pre: (lifting hoist0 crate1 1-2-11) (at crate0 depot0 2-0-18) (clear crate0 9-0-38)
+    add: (on crate1 crate0 1-5-14) (at crate1 depot0 3-0-22) (available hoist0 6-0-32) (none-of-those 9-1-39) (clear crate1 10-0-40)
+    del: (lifting hoist0 crate1 1-2-11) (at crate1 distributor0 3-1-23) (at crate1 distributor1 3-2-24) (none-of-those 3-3-25) (none-of-those 6-1-33) (clear crate0 9-0-38) (none-of-those 10-1-41)
+  (drop hoist0 crate1 pallet0 depot0), cost: 1
+    pre: (lifting hoist0 crate1 1-2-11) (clear pallet0 11-0-42)
+    add: (on crate1 pallet0 1-6-15) (at crate1 depot0 3-0-22) (available hoist0 6-0-32) (clear crate1 10-0-40) (none-of-those 11-1-43)
+    del: (lifting hoist0 crate1 1-2-11) (at crate1 distributor0 3-1-23) (at crate1 distributor1 3-2-24) (none-of-those 3-3-25) (none-of-those 6-1-33) (none-of-those 10-1-41) (clear pallet0 11-0-42)
+  (drop hoist1 crate0 crate1 distributor0), cost: 1
+    pre: (lifting hoist1 crate0 0-3-3) (at crate1 distributor0 3-1-23) (clear crate1 10-0-40)
+    add: (on crate0 crate1 0-5-5) (at crate0 distributor0 2-1-19) (available hoist1 7-0-34) (clear crate0 9-0-38) (none-of-those 10-1-41)
+    del: (lifting hoist1 crate0 0-3-3) (at crate0 depot0 2-0-18) (at crate0 distributor1 2-2-20) (none-of-those 2-3-21) (none-of-those 7-1-35) (none-of-those 9-1-39) (clear crate1 10-0-40)
+  (drop hoist1 crate0 pallet1 distributor0), cost: 1
+    pre: (lifting hoist1 crate0 0-3-3) (clear pallet1 12-0-44)
+    add: (on crate0 pallet1 0-7-7) (at crate0 distributor0 2-1-19) (available hoist1 7-0-34) (clear crate0 9-0-38) (none-of-those 12-1-45)
+    del: (lifting hoist1 crate0 0-3-3) (at crate0 depot0 2-0-18) (at crate0 distributor1 2-2-20) (none-of-those 2-3-21) (none-of-those 7-1-35) (none-of-those 9-1-39) (clear pallet1 12-0-44)
+  (drop hoist1 crate1 crate0 distributor0), cost: 1
+    pre: (lifting hoist1 crate1 1-3-12) (at crate0 distributor0 2-1-19) (clear crate0 9-0-38)
+    add: (on crate1 crate0 1-5-14) (at crate1 distributor0 3-1-23) (available hoist1 7-0-34) (none-of-those 9-1-39) (clear crate1 10-0-40)
+    del: (lifting hoist1 crate1 1-3-12) (at crate1 depot0 3-0-22) (at crate1 distributor1 3-2-24) (none-of-those 3-3-25) (none-of-those 7-1-35) (clear crate0 9-0-38) (none-of-those 10-1-41)
+  (drop hoist1 crate1 pallet1 distributor0), cost: 1
+    pre: (lifting hoist1 crate1 1-3-12) (clear pallet1 12-0-44)
+    add: (on crate1 pallet1 1-7-16) (at crate1 distributor0 3-1-23) (available hoist1 7-0-34) (clear crate1 10-0-40) (none-of-those 12-1-45)
+    del: (lifting hoist1 crate1 1-3-12) (at crate1 depot0 3-0-22) (at crate1 distributor1 3-2-24) (none-of-those 3-3-25) (none-of-those 7-1-35) (none-of-those 10-1-41) (clear pallet1 12-0-44)
+  (drop hoist2 crate0 crate1 distributor1), cost: 1
+    pre: (lifting hoist2 crate0 0-4-4) (at crate1 distributor1 3-2-24) (clear crate1 10-0-40)
+    add: (on crate0 crate1 0-5-5) (at crate0 distributor1 2-2-20) (available hoist2 8-0-36) (clear crate0 9-0-38) (none-of-those 10-1-41)
+    del: (lifting hoist2 crate0 0-4-4) (at crate0 depot0 2-0-18) (at crate0 distributor0 2-1-19) (none-of-those 2-3-21) (none-of-those 8-1-37) (none-of-those 9-1-39) (clear crate1 10-0-40)
+  (drop hoist2 crate0 pallet2 distributor1), cost: 1
+    pre: (lifting hoist2 crate0 0-4-4) (clear pallet2 13-0-46)
+    add: (on crate0 pallet2 0-8-8) (at crate0 distributor1 2-2-20) (available hoist2 8-0-36) (clear crate0 9-0-38) (none-of-those 13-1-47)
+    del: (lifting hoist2 crate0 0-4-4) (at crate0 depot0 2-0-18) (at crate0 distributor0 2-1-19) (none-of-those 2-3-21) (none-of-those 8-1-37) (none-of-those 9-1-39) (clear pallet2 13-0-46)
+  (drop hoist2 crate1 crate0 distributor1), cost: 1
+    pre: (lifting hoist2 crate1 1-4-13) (at crate0 distributor1 2-2-20) (clear crate0 9-0-38)
+    add: (on crate1 crate0 1-5-14) (at crate1 distributor1 3-2-24) (available hoist2 8-0-36) (none-of-those 9-1-39) (clear crate1 10-0-40)
+    del: (lifting hoist2 crate1 1-4-13) (at crate1 depot0 3-0-22) (at crate1 distributor0 3-1-23) (none-of-those 3-3-25) (none-of-those 8-1-37) (clear crate0 9-0-38) (none-of-those 10-1-41)
+  (drop hoist2 crate1 pallet2 distributor1), cost: 1
+    pre: (lifting hoist2 crate1 1-4-13) (clear pallet2 13-0-46)
+    add: (on crate1 pallet2 1-8-17) (at crate1 distributor1 3-2-24) (available hoist2 8-0-36) (clear crate1 10-0-40) (none-of-those 13-1-47)
+    del: (lifting hoist2 crate1 1-4-13) (at crate1 depot0 3-0-22) (at crate1 distributor0 3-1-23) (none-of-those 3-3-25) (none-of-those 8-1-37) (none-of-those 10-1-41) (clear pallet2 13-0-46)
+  (lift hoist0 crate0 crate1 depot0), cost: 1
+    pre: (on crate0 crate1 0-5-5) (at crate0 depot0 2-0-18) (available hoist0 6-0-32) (clear crate0 9-0-38)
+    add: (lifting hoist0 crate0 0-2-2) (none-of-those 2-3-21) (none-of-those 6-1-33) (none-of-those 9-1-39) (clear crate1 10-0-40)
+    del: (on crate0 crate1 0-5-5) (at crate0 depot0 2-0-18) (available hoist0 6-0-32) (clear crate0 9-0-38) (none-of-those 10-1-41)
+  (lift hoist0 crate0 pallet0 depot0), cost: 1
+    pre: (on crate0 pallet0 0-6-6) (at crate0 depot0 2-0-18) (available hoist0 6-0-32) (clear crate0 9-0-38)
+    add: (lifting hoist0 crate0 0-2-2) (none-of-those 2-3-21) (none-of-those 6-1-33) (none-of-those 9-1-39) (clear pallet0 11-0-42)
+    del: (on crate0 pallet0 0-6-6) (at crate0 depot0 2-0-18) (available hoist0 6-0-32) (clear crate0 9-0-38) (none-of-those 11-1-43)
+  (lift hoist0 crate1 crate0 depot0), cost: 1
+    pre: (on crate1 crate0 1-5-14) (at crate1 depot0 3-0-22) (available hoist0 6-0-32) (clear crate1 10-0-40)
+    add: (lifting hoist0 crate1 1-2-11) (none-of-those 3-3-25) (none-of-those 6-1-33) (clear crate0 9-0-38) (none-of-those 10-1-41)
+    del: (on crate1 crate0 1-5-14) (at crate1 depot0 3-0-22) (available hoist0 6-0-32) (none-of-those 9-1-39) (clear crate1 10-0-40)
+  (lift hoist0 crate1 pallet0 depot0), cost: 1
+    pre: (on crate1 pallet0 1-6-15) (at crate1 depot0 3-0-22) (available hoist0 6-0-32) (clear crate1 10-0-40)
+    add: (lifting hoist0 crate1 1-2-11) (none-of-those 3-3-25) (none-of-those 6-1-33) (none-of-those 10-1-41) (clear pallet0 11-0-42)
+    del: (on crate1 pallet0 1-6-15) (at crate1 depot0 3-0-22) (available hoist0 6-0-32) (clear crate1 10-0-40) (none-of-those 11-1-43)
+  (lift hoist1 crate0 crate1 distributor0), cost: 1
+    pre: (on crate0 crate1 0-5-5) (at crate0 distributor0 2-1-19) (available hoist1 7-0-34) (clear crate0 9-0-38)
+    add: (lifting hoist1 crate0 0-3-3) (none-of-those 2-3-21) (none-of-those 7-1-35) (none-of-those 9-1-39) (clear crate1 10-0-40)
+    del: (on crate0 crate1 0-5-5) (at crate0 distributor0 2-1-19) (available hoist1 7-0-34) (clear crate0 9-0-38) (none-of-those 10-1-41)
+  (lift hoist1 crate0 pallet1 distributor0), cost: 1
+    pre: (on crate0 pallet1 0-7-7) (at crate0 distributor0 2-1-19) (available hoist1 7-0-34) (clear crate0 9-0-38)
+    add: (lifting hoist1 crate0 0-3-3) (none-of-those 2-3-21) (none-of-those 7-1-35) (none-of-those 9-1-39) (clear pallet1 12-0-44)
+    del: (on crate0 pallet1 0-7-7) (at crate0 distributor0 2-1-19) (available hoist1 7-0-34) (clear crate0 9-0-38) (none-of-those 12-1-45)
+  (lift hoist1 crate1 crate0 distributor0), cost: 1
+    pre: (on crate1 crate0 1-5-14) (at crate1 distributor0 3-1-23) (available hoist1 7-0-34) (clear crate1 10-0-40)
+    add: (lifting hoist1 crate1 1-3-12) (none-of-those 3-3-25) (none-of-those 7-1-35) (clear crate0 9-0-38) (none-of-those 10-1-41)
+    del: (on crate1 crate0 1-5-14) (at crate1 distributor0 3-1-23) (available hoist1 7-0-34) (none-of-those 9-1-39) (clear crate1 10-0-40)
+  (lift hoist1 crate1 pallet1 distributor0), cost: 1
+    pre: (on crate1 pallet1 1-7-16) (at crate1 distributor0 3-1-23) (available hoist1 7-0-34) (clear crate1 10-0-40)
+    add: (lifting hoist1 crate1 1-3-12) (none-of-those 3-3-25) (none-of-those 7-1-35) (none-of-those 10-1-41) (clear pallet1 12-0-44)
+    del: (on crate1 pallet1 1-7-16) (at crate1 distributor0 3-1-23) (available hoist1 7-0-34) (clear crate1 10-0-40) (none-of-those 12-1-45)
+  (lift hoist2 crate0 crate1 distributor1), cost: 1
+    pre: (on crate0 crate1 0-5-5) (at crate0 distributor1 2-2-20) (available hoist2 8-0-36) (clear crate0 9-0-38)
+    add: (lifting hoist2 crate0 0-4-4) (none-of-those 2-3-21) (none-of-those 8-1-37) (none-of-those 9-1-39) (clear crate1 10-0-40)
+    del: (on crate0 crate1 0-5-5) (at crate0 distributor1 2-2-20) (available hoist2 8-0-36) (clear crate0 9-0-38) (none-of-those 10-1-41)
+  (lift hoist2 crate0 pallet2 distributor1), cost: 1
+    pre: (on crate0 pallet2 0-8-8) (at crate0 distributor1 2-2-20) (available hoist2 8-0-36) (clear crate0 9-0-38)
+    add: (lifting hoist2 crate0 0-4-4) (none-of-those 2-3-21) (none-of-those 8-1-37) (none-of-those 9-1-39) (clear pallet2 13-0-46)
+    del: (on crate0 pallet2 0-8-8) (at crate0 distributor1 2-2-20) (available hoist2 8-0-36) (clear crate0 9-0-38) (none-of-those 13-1-47)
+  (lift hoist2 crate1 crate0 distributor1), cost: 1
+    pre: (on crate1 crate0 1-5-14) (at crate1 distributor1 3-2-24) (available hoist2 8-0-36) (clear crate1 10-0-40)
+    add: (lifting hoist2 crate1 1-4-13) (none-of-those 3-3-25) (none-of-those 8-1-37) (clear crate0 9-0-38) (none-of-those 10-1-41)
+    del: (on crate1 crate0 1-5-14) (at crate1 distributor1 3-2-24) (available hoist2 8-0-36) (none-of-those 9-1-39) (clear crate1 10-0-40)
+  (lift hoist2 crate1 pallet2 distributor1), cost: 1
+    pre: (on crate1 pallet2 1-8-17) (at crate1 distributor1 3-2-24) (available hoist2 8-0-36) (clear crate1 10-0-40)
+    add: (lifting hoist2 crate1 1-4-13) (none-of-those 3-3-25) (none-of-those 8-1-37) (none-of-those 10-1-41) (clear pallet2 13-0-46)
+    del: (on crate1 pallet2 1-8-17) (at crate1 distributor1 3-2-24) (available hoist2 8-0-36) (clear crate1 10-0-40) (none-of-those 13-1-47)
+  (load hoist0 crate0 truck0 depot0), cost: 1
+    pre: (lifting hoist0 crate0 0-2-2) (at truck0 depot0 4-0-26)
+    add: (in crate0 truck0 0-0-0) (available hoist0 6-0-32)
+    del: (lifting hoist0 crate0 0-2-2) (none-of-those 6-1-33)
+  (load hoist0 crate0 truck1 depot0), cost: 1
+    pre: (lifting hoist0 crate0 0-2-2) (at truck1 depot0 5-0-29)
+    add: (in crate0 truck1 0-1-1) (available hoist0 6-0-32)
+    del: (lifting hoist0 crate0 0-2-2) (none-of-those 6-1-33)
+  (load hoist0 crate1 truck0 depot0), cost: 1
+    pre: (lifting hoist0 crate1 1-2-11) (at truck0 depot0 4-0-26)
+    add: (in crate1 truck0 1-0-9) (available hoist0 6-0-32)
+    del: (lifting hoist0 crate1 1-2-11) (none-of-those 6-1-33)
+  (load hoist0 crate1 truck1 depot0), cost: 1
+    pre: (lifting hoist0 crate1 1-2-11) (at truck1 depot0 5-0-29)
+    add: (in crate1 truck1 1-1-10) (available hoist0 6-0-32)
+    del: (lifting hoist0 crate1 1-2-11) (none-of-those 6-1-33)
+  (load hoist1 crate0 truck0 distributor0), cost: 1
+    pre: (lifting hoist1 crate0 0-3-3) (at truck0 distributor0 4-1-27)
+    add: (in crate0 truck0 0-0-0) (available hoist1 7-0-34)
+    del: (lifting hoist1 crate0 0-3-3) (none-of-those 7-1-35)
+  (load hoist1 crate0 truck1 distributor0), cost: 1
+    pre: (lifting hoist1 crate0 0-3-3) (at truck1 distributor0 5-1-30)
+    add: (in crate0 truck1 0-1-1) (available hoist1 7-0-34)
+    del: (lifting hoist1 crate0 0-3-3) (none-of-those 7-1-35)
+  (load hoist1 crate1 truck0 distributor0), cost: 1
+    pre: (lifting hoist1 crate1 1-3-12) (at truck0 distributor0 4-1-27)
+    add: (in crate1 truck0 1-0-9) (available hoist1 7-0-34)
+    del: (lifting hoist1 crate1 1-3-12) (none-of-those 7-1-35)
+  (load hoist1 crate1 truck1 distributor0), cost: 1
+    pre: (lifting hoist1 crate1 1-3-12) (at truck1 distributor0 5-1-30)
+    add: (in crate1 truck1 1-1-10) (available hoist1 7-0-34)
+    del: (lifting hoist1 crate1 1-3-12) (none-of-those 7-1-35)
+  (load hoist2 crate0 truck0 distributor1), cost: 1
+    pre: (lifting hoist2 crate0 0-4-4) (at truck0 distributor1 4-2-28)
+    add: (in crate0 truck0 0-0-0) (available hoist2 8-0-36)
+    del: (lifting hoist2 crate0 0-4-4) (none-of-those 8-1-37)
+  (load hoist2 crate0 truck1 distributor1), cost: 1
+    pre: (lifting hoist2 crate0 0-4-4) (at truck1 distributor1 5-2-31)
+    add: (in crate0 truck1 0-1-1) (available hoist2 8-0-36)
+    del: (lifting hoist2 crate0 0-4-4) (none-of-those 8-1-37)
+  (load hoist2 crate1 truck0 distributor1), cost: 1
+    pre: (lifting hoist2 crate1 1-4-13) (at truck0 distributor1 4-2-28)
+    add: (in crate1 truck0 1-0-9) (available hoist2 8-0-36)
+    del: (lifting hoist2 crate1 1-4-13) (none-of-those 8-1-37)
+  (load hoist2 crate1 truck1 distributor1), cost: 1
+    pre: (lifting hoist2 crate1 1-4-13) (at truck1 distributor1 5-2-31)
+    add: (in crate1 truck1 1-1-10) (available hoist2 8-0-36)
+    del: (lifting hoist2 crate1 1-4-13) (none-of-those 8-1-37)
+  (unload hoist0 crate0 truck0 depot0), cost: 1
+    pre: (in crate0 truck0 0-0-0) (at truck0 depot0 4-0-26) (available hoist0 6-0-32)
+    add: (lifting hoist0 crate0 0-2-2) (none-of-those 6-1-33)
+    del: (in crate0 truck0 0-0-0) (available hoist0 6-0-32)
+  (unload hoist0 crate0 truck1 depot0), cost: 1
+    pre: (in crate0 truck1 0-1-1) (at truck1 depot0 5-0-29) (available hoist0 6-0-32)
+    add: (lifting hoist0 crate0 0-2-2) (none-of-those 6-1-33)
+    del: (in crate0 truck1 0-1-1) (available hoist0 6-0-32)
+  (unload hoist0 crate1 truck0 depot0), cost: 1
+    pre: (in crate1 truck0 1-0-9) (at truck0 depot0 4-0-26) (available hoist0 6-0-32)
+    add: (lifting hoist0 crate1 1-2-11) (none-of-those 6-1-33)
+    del: (in crate1 truck0 1-0-9) (available hoist0 6-0-32)
+  (unload hoist0 crate1 truck1 depot0), cost: 1
+    pre: (in crate1 truck1 1-1-10) (at truck1 depot0 5-0-29) (available hoist0 6-0-32)
+    add: (lifting hoist0 crate1 1-2-11) (none-of-those 6-1-33)
+    del: (in crate1 truck1 1-1-10) (available hoist0 6-0-32)
+  (unload hoist1 crate0 truck0 distributor0), cost: 1
+    pre: (in crate0 truck0 0-0-0) (at truck0 distributor0 4-1-27) (available hoist1 7-0-34)
+    add: (lifting hoist1 crate0 0-3-3) (none-of-those 7-1-35)
+    del: (in crate0 truck0 0-0-0) (available hoist1 7-0-34)
+  (unload hoist1 crate0 truck1 distributor0), cost: 1
+    pre: (in crate0 truck1 0-1-1) (at truck1 distributor0 5-1-30) (available hoist1 7-0-34)
+    add: (lifting hoist1 crate0 0-3-3) (none-of-those 7-1-35)
+    del: (in crate0 truck1 0-1-1) (available hoist1 7-0-34)
+  (unload hoist1 crate1 truck0 distributor0), cost: 1
+    pre: (in crate1 truck0 1-0-9) (at truck0 distributor0 4-1-27) (available hoist1 7-0-34)
+    add: (lifting hoist1 crate1 1-3-12) (none-of-those 7-1-35)
+    del: (in crate1 truck0 1-0-9) (available hoist1 7-0-34)
+  (unload hoist1 crate1 truck1 distributor0), cost: 1
+    pre: (in crate1 truck1 1-1-10) (at truck1 distributor0 5-1-30) (available hoist1 7-0-34)
+    add: (lifting hoist1 crate1 1-3-12) (none-of-those 7-1-35)
+    del: (in crate1 truck1 1-1-10) (available hoist1 7-0-34)
+  (unload hoist2 crate0 truck0 distributor1), cost: 1
+    pre: (in crate0 truck0 0-0-0) (at truck0 distributor1 4-2-28) (available hoist2 8-0-36)
+    add: (lifting hoist2 crate0 0-4-4) (none-of-those 8-1-37)
+    del: (in crate0 truck0 0-0-0) (available hoist2 8-0-36)
+  (unload hoist2 crate0 truck1 distributor1), cost: 1
+    pre: (in crate0 truck1 0-1-1) (at truck1 distributor1 5-2-31) (available hoist2 8-0-36)
+    add: (lifting hoist2 crate0 0-4-4) (none-of-those 8-1-37)
+    del: (in crate0 truck1 0-1-1) (available hoist2 8-0-36)
+  (unload hoist2 crate1 truck0 distributor1), cost: 1
+    pre: (in crate1 truck0 1-0-9) (at truck0 distributor1 4-2-28) (available hoist2 8-0-36)
+    add: (lifting hoist2 crate1 1-4-13) (none-of-those 8-1-37)
+    del: (in crate1 truck0 1-0-9) (available hoist2 8-0-36)
+  (unload hoist2 crate1 truck1 distributor1), cost: 1
+    pre: (in crate1 truck1 1-1-10) (at truck1 distributor1 5-2-31) (available hoist2 8-0-36)
+    add: (lifting hoist2 crate1 1-4-13) (none-of-those 8-1-37)
+    del: (in crate1 truck1 1-1-10) (available hoist2 8-0-36)
+Init State: (on crate0 pallet1 0-7-7) (on crate1 pallet0 1-6-15) (at crate0 distributor0 2-1-19) (at crate1 depot0 3-0-22) (at truck0 distributor1 4-2-28) (at truck1 depot0 5-0-29) (available hoist0 6-0-32) (available hoist1 7-0-34) (available hoist2 8-0-36) (clear crate0 9-0-38) (clear crate1 10-0-40) (none-of-those 11-1-43) (none-of-those 12-1-45) (clear pallet2 13-0-46)
+Goal: (on crate0 pallet2 0-8-8) (on crate1 pallet1 1-7-16)
+Value: 8

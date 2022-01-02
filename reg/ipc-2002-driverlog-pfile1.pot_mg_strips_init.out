@@ -1,0 +1,391 @@
+Fact[34]:
+  (at driver1 p1-0 0-0-0)
+  (at driver1 p1-2 0-1-1)
+  (at driver1 s0 0-2-2)
+  (at driver1 s1 0-3-3)
+  (at driver1 s2 0-4-4)
+  (driving driver1 truck1 0-5-5)
+  (driving driver1 truck2 0-6-6)
+  (at driver2 p1-0 1-0-7)
+  (at driver2 p1-2 1-1-8)
+  (at driver2 s0 1-2-9)
+  (at driver2 s1 1-3-10)
+  (at driver2 s2 1-4-11)
+  (driving driver2 truck1 1-5-12)
+  (driving driver2 truck2 1-6-13)
+  (at package1 s0 2-0-14)
+  (at package1 s1 2-1-15)
+  (at package1 s2 2-2-16)
+  (in package1 truck1 2-3-17)
+  (in package1 truck2 2-4-18)
+  (at package2 s0 3-0-19)
+  (at package2 s1 3-1-20)
+  (at package2 s2 3-2-21)
+  (in package2 truck1 3-3-22)
+  (in package2 truck2 3-4-23)
+  (at truck1 s0 4-0-24)
+  (at truck1 s1 4-1-25)
+  (at truck1 s2 4-2-26)
+  (at truck2 s0 5-0-27)
+  (at truck2 s1 5-1-28)
+  (at truck2 s2 5-2-29)
+  (empty truck1 6-0-30)
+  (none-of-those 6-1-31)
+  (empty truck2 7-0-32)
+  (none-of-those 7-1-33)
+Op[88]:
+  (board-truck driver1 truck1 s0), cost: 1
+    pre: (at driver1 s0 0-2-2) (at truck1 s0 4-0-24) (empty truck1 6-0-30)
+    add: (driving driver1 truck1 0-5-5) (none-of-those 6-1-31)
+    del: (at driver1 s0 0-2-2) (empty truck1 6-0-30)
+  (board-truck driver1 truck1 s1), cost: 1
+    pre: (at driver1 s1 0-3-3) (at truck1 s1 4-1-25) (empty truck1 6-0-30)
+    add: (driving driver1 truck1 0-5-5) (none-of-those 6-1-31)
+    del: (at driver1 s1 0-3-3) (empty truck1 6-0-30)
+  (board-truck driver1 truck1 s2), cost: 1
+    pre: (at driver1 s2 0-4-4) (at truck1 s2 4-2-26) (empty truck1 6-0-30)
+    add: (driving driver1 truck1 0-5-5) (none-of-those 6-1-31)
+    del: (at driver1 s2 0-4-4) (empty truck1 6-0-30)
+  (board-truck driver1 truck2 s0), cost: 1
+    pre: (at driver1 s0 0-2-2) (at truck2 s0 5-0-27) (empty truck2 7-0-32)
+    add: (driving driver1 truck2 0-6-6) (none-of-those 7-1-33)
+    del: (at driver1 s0 0-2-2) (empty truck2 7-0-32)
+  (board-truck driver1 truck2 s1), cost: 1
+    pre: (at driver1 s1 0-3-3) (at truck2 s1 5-1-28) (empty truck2 7-0-32)
+    add: (driving driver1 truck2 0-6-6) (none-of-those 7-1-33)
+    del: (at driver1 s1 0-3-3) (empty truck2 7-0-32)
+  (board-truck driver1 truck2 s2), cost: 1
+    pre: (at driver1 s2 0-4-4) (at truck2 s2 5-2-29) (empty truck2 7-0-32)
+    add: (driving driver1 truck2 0-6-6) (none-of-those 7-1-33)
+    del: (at driver1 s2 0-4-4) (empty truck2 7-0-32)
+  (board-truck driver2 truck1 s0), cost: 1
+    pre: (at driver2 s0 1-2-9) (at truck1 s0 4-0-24) (empty truck1 6-0-30)
+    add: (driving driver2 truck1 1-5-12) (none-of-those 6-1-31)
+    del: (at driver2 s0 1-2-9) (empty truck1 6-0-30)
+  (board-truck driver2 truck1 s1), cost: 1
+    pre: (at driver2 s1 1-3-10) (at truck1 s1 4-1-25) (empty truck1 6-0-30)
+    add: (driving driver2 truck1 1-5-12) (none-of-those 6-1-31)
+    del: (at driver2 s1 1-3-10) (empty truck1 6-0-30)
+  (board-truck driver2 truck1 s2), cost: 1
+    pre: (at driver2 s2 1-4-11) (at truck1 s2 4-2-26) (empty truck1 6-0-30)
+    add: (driving driver2 truck1 1-5-12) (none-of-those 6-1-31)
+    del: (at driver2 s2 1-4-11) (empty truck1 6-0-30)
+  (board-truck driver2 truck2 s0), cost: 1
+    pre: (at driver2 s0 1-2-9) (at truck2 s0 5-0-27) (empty truck2 7-0-32)
+    add: (driving driver2 truck2 1-6-13) (none-of-those 7-1-33)
+    del: (at driver2 s0 1-2-9) (empty truck2 7-0-32)
+  (board-truck driver2 truck2 s1), cost: 1
+    pre: (at driver2 s1 1-3-10) (at truck2 s1 5-1-28) (empty truck2 7-0-32)
+    add: (driving driver2 truck2 1-6-13) (none-of-those 7-1-33)
+    del: (at driver2 s1 1-3-10) (empty truck2 7-0-32)
+  (board-truck driver2 truck2 s2), cost: 1
+    pre: (at driver2 s2 1-4-11) (at truck2 s2 5-2-29) (empty truck2 7-0-32)
+    add: (driving driver2 truck2 1-6-13) (none-of-those 7-1-33)
+    del: (at driver2 s2 1-4-11) (empty truck2 7-0-32)
+  (disembark-truck driver1 truck1 s0), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s0 4-0-24)
+    add: (at driver1 s0 0-2-2) (empty truck1 6-0-30)
+    del: (driving driver1 truck1 0-5-5) (none-of-those 6-1-31)
+  (disembark-truck driver1 truck1 s1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s1 4-1-25)
+    add: (at driver1 s1 0-3-3) (empty truck1 6-0-30)
+    del: (driving driver1 truck1 0-5-5) (none-of-those 6-1-31)
+  (disembark-truck driver1 truck1 s2), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s2 4-2-26)
+    add: (at driver1 s2 0-4-4) (empty truck1 6-0-30)
+    del: (driving driver1 truck1 0-5-5) (none-of-those 6-1-31)
+  (disembark-truck driver1 truck2 s0), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s0 5-0-27)
+    add: (at driver1 s0 0-2-2) (empty truck2 7-0-32)
+    del: (driving driver1 truck2 0-6-6) (none-of-those 7-1-33)
+  (disembark-truck driver1 truck2 s1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s1 5-1-28)
+    add: (at driver1 s1 0-3-3) (empty truck2 7-0-32)
+    del: (driving driver1 truck2 0-6-6) (none-of-those 7-1-33)
+  (disembark-truck driver1 truck2 s2), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s2 5-2-29)
+    add: (at driver1 s2 0-4-4) (empty truck2 7-0-32)
+    del: (driving driver1 truck2 0-6-6) (none-of-those 7-1-33)
+  (disembark-truck driver2 truck1 s0), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s0 4-0-24)
+    add: (at driver2 s0 1-2-9) (empty truck1 6-0-30)
+    del: (driving driver2 truck1 1-5-12) (none-of-those 6-1-31)
+  (disembark-truck driver2 truck1 s1), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s1 4-1-25)
+    add: (at driver2 s1 1-3-10) (empty truck1 6-0-30)
+    del: (driving driver2 truck1 1-5-12) (none-of-those 6-1-31)
+  (disembark-truck driver2 truck1 s2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s2 4-2-26)
+    add: (at driver2 s2 1-4-11) (empty truck1 6-0-30)
+    del: (driving driver2 truck1 1-5-12) (none-of-those 6-1-31)
+  (disembark-truck driver2 truck2 s0), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s0 5-0-27)
+    add: (at driver2 s0 1-2-9) (empty truck2 7-0-32)
+    del: (driving driver2 truck2 1-6-13) (none-of-those 7-1-33)
+  (disembark-truck driver2 truck2 s1), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s1 5-1-28)
+    add: (at driver2 s1 1-3-10) (empty truck2 7-0-32)
+    del: (driving driver2 truck2 1-6-13) (none-of-those 7-1-33)
+  (disembark-truck driver2 truck2 s2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s2 5-2-29)
+    add: (at driver2 s2 1-4-11) (empty truck2 7-0-32)
+    del: (driving driver2 truck2 1-6-13) (none-of-those 7-1-33)
+  (drive-truck truck1 s0 s1 driver1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s0 4-0-24)
+    add: (at truck1 s1 4-1-25)
+    del: (at truck1 s0 4-0-24)
+  (drive-truck truck1 s0 s1 driver2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s0 4-0-24)
+    add: (at truck1 s1 4-1-25)
+    del: (at truck1 s0 4-0-24)
+  (drive-truck truck1 s0 s2 driver1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s0 4-0-24)
+    add: (at truck1 s2 4-2-26)
+    del: (at truck1 s0 4-0-24)
+  (drive-truck truck1 s0 s2 driver2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s0 4-0-24)
+    add: (at truck1 s2 4-2-26)
+    del: (at truck1 s0 4-0-24)
+  (drive-truck truck1 s1 s0 driver1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s1 4-1-25)
+    add: (at truck1 s0 4-0-24)
+    del: (at truck1 s1 4-1-25)
+  (drive-truck truck1 s1 s0 driver2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s1 4-1-25)
+    add: (at truck1 s0 4-0-24)
+    del: (at truck1 s1 4-1-25)
+  (drive-truck truck1 s1 s2 driver1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s1 4-1-25)
+    add: (at truck1 s2 4-2-26)
+    del: (at truck1 s1 4-1-25)
+  (drive-truck truck1 s1 s2 driver2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s1 4-1-25)
+    add: (at truck1 s2 4-2-26)
+    del: (at truck1 s1 4-1-25)
+  (drive-truck truck1 s2 s0 driver1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s2 4-2-26)
+    add: (at truck1 s0 4-0-24)
+    del: (at truck1 s2 4-2-26)
+  (drive-truck truck1 s2 s0 driver2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s2 4-2-26)
+    add: (at truck1 s0 4-0-24)
+    del: (at truck1 s2 4-2-26)
+  (drive-truck truck1 s2 s1 driver1), cost: 1
+    pre: (driving driver1 truck1 0-5-5) (at truck1 s2 4-2-26)
+    add: (at truck1 s1 4-1-25)
+    del: (at truck1 s2 4-2-26)
+  (drive-truck truck1 s2 s1 driver2), cost: 1
+    pre: (driving driver2 truck1 1-5-12) (at truck1 s2 4-2-26)
+    add: (at truck1 s1 4-1-25)
+    del: (at truck1 s2 4-2-26)
+  (drive-truck truck2 s0 s1 driver1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s0 5-0-27)
+    add: (at truck2 s1 5-1-28)
+    del: (at truck2 s0 5-0-27)
+  (drive-truck truck2 s0 s1 driver2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s0 5-0-27)
+    add: (at truck2 s1 5-1-28)
+    del: (at truck2 s0 5-0-27)
+  (drive-truck truck2 s0 s2 driver1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s0 5-0-27)
+    add: (at truck2 s2 5-2-29)
+    del: (at truck2 s0 5-0-27)
+  (drive-truck truck2 s0 s2 driver2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s0 5-0-27)
+    add: (at truck2 s2 5-2-29)
+    del: (at truck2 s0 5-0-27)
+  (drive-truck truck2 s1 s0 driver1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s1 5-1-28)
+    add: (at truck2 s0 5-0-27)
+    del: (at truck2 s1 5-1-28)
+  (drive-truck truck2 s1 s0 driver2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s1 5-1-28)
+    add: (at truck2 s0 5-0-27)
+    del: (at truck2 s1 5-1-28)
+  (drive-truck truck2 s1 s2 driver1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s1 5-1-28)
+    add: (at truck2 s2 5-2-29)
+    del: (at truck2 s1 5-1-28)
+  (drive-truck truck2 s1 s2 driver2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s1 5-1-28)
+    add: (at truck2 s2 5-2-29)
+    del: (at truck2 s1 5-1-28)
+  (drive-truck truck2 s2 s0 driver1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s2 5-2-29)
+    add: (at truck2 s0 5-0-27)
+    del: (at truck2 s2 5-2-29)
+  (drive-truck truck2 s2 s0 driver2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s2 5-2-29)
+    add: (at truck2 s0 5-0-27)
+    del: (at truck2 s2 5-2-29)
+  (drive-truck truck2 s2 s1 driver1), cost: 1
+    pre: (driving driver1 truck2 0-6-6) (at truck2 s2 5-2-29)
+    add: (at truck2 s1 5-1-28)
+    del: (at truck2 s2 5-2-29)
+  (drive-truck truck2 s2 s1 driver2), cost: 1
+    pre: (driving driver2 truck2 1-6-13) (at truck2 s2 5-2-29)
+    add: (at truck2 s1 5-1-28)
+    del: (at truck2 s2 5-2-29)
+  (load-truck package1 truck1 s0), cost: 1
+    pre: (at package1 s0 2-0-14) (at truck1 s0 4-0-24)
+    add: (in package1 truck1 2-3-17)
+    del: (at package1 s0 2-0-14)
+  (load-truck package1 truck1 s1), cost: 1
+    pre: (at package1 s1 2-1-15) (at truck1 s1 4-1-25)
+    add: (in package1 truck1 2-3-17)
+    del: (at package1 s1 2-1-15)
+  (load-truck package1 truck1 s2), cost: 1
+    pre: (at package1 s2 2-2-16) (at truck1 s2 4-2-26)
+    add: (in package1 truck1 2-3-17)
+    del: (at package1 s2 2-2-16)
+  (load-truck package1 truck2 s0), cost: 1
+    pre: (at package1 s0 2-0-14) (at truck2 s0 5-0-27)
+    add: (in package1 truck2 2-4-18)
+    del: (at package1 s0 2-0-14)
+  (load-truck package1 truck2 s1), cost: 1
+    pre: (at package1 s1 2-1-15) (at truck2 s1 5-1-28)
+    add: (in package1 truck2 2-4-18)
+    del: (at package1 s1 2-1-15)
+  (load-truck package1 truck2 s2), cost: 1
+    pre: (at package1 s2 2-2-16) (at truck2 s2 5-2-29)
+    add: (in package1 truck2 2-4-18)
+    del: (at package1 s2 2-2-16)
+  (load-truck package2 truck1 s0), cost: 1
+    pre: (at package2 s0 3-0-19) (at truck1 s0 4-0-24)
+    add: (in package2 truck1 3-3-22)
+    del: (at package2 s0 3-0-19)
+  (load-truck package2 truck1 s1), cost: 1
+    pre: (at package2 s1 3-1-20) (at truck1 s1 4-1-25)
+    add: (in package2 truck1 3-3-22)
+    del: (at package2 s1 3-1-20)
+  (load-truck package2 truck1 s2), cost: 1
+    pre: (at package2 s2 3-2-21) (at truck1 s2 4-2-26)
+    add: (in package2 truck1 3-3-22)
+    del: (at package2 s2 3-2-21)
+  (load-truck package2 truck2 s0), cost: 1
+    pre: (at package2 s0 3-0-19) (at truck2 s0 5-0-27)
+    add: (in package2 truck2 3-4-23)
+    del: (at package2 s0 3-0-19)
+  (load-truck package2 truck2 s1), cost: 1
+    pre: (at package2 s1 3-1-20) (at truck2 s1 5-1-28)
+    add: (in package2 truck2 3-4-23)
+    del: (at package2 s1 3-1-20)
+  (load-truck package2 truck2 s2), cost: 1
+    pre: (at package2 s2 3-2-21) (at truck2 s2 5-2-29)
+    add: (in package2 truck2 3-4-23)
+    del: (at package2 s2 3-2-21)
+  (unload-truck package1 truck1 s0), cost: 1
+    pre: (in package1 truck1 2-3-17) (at truck1 s0 4-0-24)
+    add: (at package1 s0 2-0-14)
+    del: (in package1 truck1 2-3-17)
+  (unload-truck package1 truck1 s1), cost: 1
+    pre: (in package1 truck1 2-3-17) (at truck1 s1 4-1-25)
+    add: (at package1 s1 2-1-15)
+    del: (in package1 truck1 2-3-17)
+  (unload-truck package1 truck1 s2), cost: 1
+    pre: (in package1 truck1 2-3-17) (at truck1 s2 4-2-26)
+    add: (at package1 s2 2-2-16)
+    del: (in package1 truck1 2-3-17)
+  (unload-truck package1 truck2 s0), cost: 1
+    pre: (in package1 truck2 2-4-18) (at truck2 s0 5-0-27)
+    add: (at package1 s0 2-0-14)
+    del: (in package1 truck2 2-4-18)
+  (unload-truck package1 truck2 s1), cost: 1
+    pre: (in package1 truck2 2-4-18) (at truck2 s1 5-1-28)
+    add: (at package1 s1 2-1-15)
+    del: (in package1 truck2 2-4-18)
+  (unload-truck package1 truck2 s2), cost: 1
+    pre: (in package1 truck2 2-4-18) (at truck2 s2 5-2-29)
+    add: (at package1 s2 2-2-16)
+    del: (in package1 truck2 2-4-18)
+  (unload-truck package2 truck1 s0), cost: 1
+    pre: (in package2 truck1 3-3-22) (at truck1 s0 4-0-24)
+    add: (at package2 s0 3-0-19)
+    del: (in package2 truck1 3-3-22)
+  (unload-truck package2 truck1 s1), cost: 1
+    pre: (in package2 truck1 3-3-22) (at truck1 s1 4-1-25)
+    add: (at package2 s1 3-1-20)
+    del: (in package2 truck1 3-3-22)
+  (unload-truck package2 truck1 s2), cost: 1
+    pre: (in package2 truck1 3-3-22) (at truck1 s2 4-2-26)
+    add: (at package2 s2 3-2-21)
+    del: (in package2 truck1 3-3-22)
+  (unload-truck package2 truck2 s0), cost: 1
+    pre: (in package2 truck2 3-4-23) (at truck2 s0 5-0-27)
+    add: (at package2 s0 3-0-19)
+    del: (in package2 truck2 3-4-23)
+  (unload-truck package2 truck2 s1), cost: 1
+    pre: (in package2 truck2 3-4-23) (at truck2 s1 5-1-28)
+    add: (at package2 s1 3-1-20)
+    del: (in package2 truck2 3-4-23)
+  (unload-truck package2 truck2 s2), cost: 1
+    pre: (in package2 truck2 3-4-23) (at truck2 s2 5-2-29)
+    add: (at package2 s2 3-2-21)
+    del: (in package2 truck2 3-4-23)
+  (walk driver1 p1-0 s0), cost: 1
+    pre: (at driver1 p1-0 0-0-0)
+    add: (at driver1 s0 0-2-2)
+    del: (at driver1 p1-0 0-0-0)
+  (walk driver1 p1-0 s1), cost: 1
+    pre: (at driver1 p1-0 0-0-0)
+    add: (at driver1 s1 0-3-3)
+    del: (at driver1 p1-0 0-0-0)
+  (walk driver1 p1-2 s1), cost: 1
+    pre: (at driver1 p1-2 0-1-1)
+    add: (at driver1 s1 0-3-3)
+    del: (at driver1 p1-2 0-1-1)
+  (walk driver1 p1-2 s2), cost: 1
+    pre: (at driver1 p1-2 0-1-1)
+    add: (at driver1 s2 0-4-4)
+    del: (at driver1 p1-2 0-1-1)
+  (walk driver1 s0 p1-0), cost: 1
+    pre: (at driver1 s0 0-2-2)
+    add: (at driver1 p1-0 0-0-0)
+    del: (at driver1 s0 0-2-2)
+  (walk driver1 s1 p1-0), cost: 1
+    pre: (at driver1 s1 0-3-3)
+    add: (at driver1 p1-0 0-0-0)
+    del: (at driver1 s1 0-3-3)
+  (walk driver1 s1 p1-2), cost: 1
+    pre: (at driver1 s1 0-3-3)
+    add: (at driver1 p1-2 0-1-1)
+    del: (at driver1 s1 0-3-3)
+  (walk driver1 s2 p1-2), cost: 1
+    pre: (at driver1 s2 0-4-4)
+    add: (at driver1 p1-2 0-1-1)
+    del: (at driver1 s2 0-4-4)
+  (walk driver2 p1-0 s0), cost: 1
+    pre: (at driver2 p1-0 1-0-7)
+    add: (at driver2 s0 1-2-9)
+    del: (at driver2 p1-0 1-0-7)
+  (walk driver2 p1-0 s1), cost: 1
+    pre: (at driver2 p1-0 1-0-7)
+    add: (at driver2 s1 1-3-10)
+    del: (at driver2 p1-0 1-0-7)
+  (walk driver2 p1-2 s1), cost: 1
+    pre: (at driver2 p1-2 1-1-8)
+    add: (at driver2 s1 1-3-10)
+    del: (at driver2 p1-2 1-1-8)
+  (walk driver2 p1-2 s2), cost: 1
+    pre: (at driver2 p1-2 1-1-8)
+    add: (at driver2 s2 1-4-11)
+    del: (at driver2 p1-2 1-1-8)
+  (walk driver2 s0 p1-0), cost: 1
+    pre: (at driver2 s0 1-2-9)
+    add: (at driver2 p1-0 1-0-7)
+    del: (at driver2 s0 1-2-9)
+  (walk driver2 s1 p1-0), cost: 1
+    pre: (at driver2 s1 1-3-10)
+    add: (at driver2 p1-0 1-0-7)
+    del: (at driver2 s1 1-3-10)
+  (walk driver2 s1 p1-2), cost: 1
+    pre: (at driver2 s1 1-3-10)
+    add: (at driver2 p1-2 1-1-8)
+    del: (at driver2 s1 1-3-10)
+  (walk driver2 s2 p1-2), cost: 1
+    pre: (at driver2 s2 1-4-11)
+    add: (at driver2 p1-2 1-1-8)
+    del: (at driver2 s2 1-4-11)
+Init State: (at driver1 s2 0-4-4) (at driver2 s2 1-4-11) (at package1 s0 2-0-14) (at package2 s0 3-0-19) (at truck1 s0 4-0-24) (at truck2 s0 5-0-27) (empty truck1 6-0-30) (empty truck2 7-0-32)
+Goal: (at driver1 s1 0-3-3) (at package1 s0 2-0-14) (at package2 s0 3-0-19) (at truck1 s1 4-1-25)
+Value: 3

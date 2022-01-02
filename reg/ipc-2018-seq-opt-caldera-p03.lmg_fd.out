@@ -1,0 +1,100 @@
+Monotonicity invariants:
+< {NOT-created V0:object_type}
+, {NOT-created C0:object_type}
+, {created V0:object_type, NOT-created V0:object_type}
+, {created V0:object_type, NOT-created C1:object_type}
+, {created C0:object_type, NOT-created C1:object_type}
+, {prop_src_host V0:observedshare V1:observedhost, NOT-created V0:observedshare}
+, {prop_src_host V0:observedshare C1:observedhost, NOT-created V0:observedshare}
+, {prop_src_host V0:observedshare V1:observedhost, NOT-created C2:object_type}
+, {prop_src_host V0:observedshare C1:observedhost, NOT-created C2:object_type}
+, {prop_src_host C1:observedshare V0:observedhost, NOT-created C2:object_type}
+, {prop_share_name V0:observedshare V1:string, NOT-created V0:observedshare}
+, {prop_share_name V0:observedshare C1:string, NOT-created V0:observedshare}
+, {prop_share_name V0:observedshare V1:string, NOT-created C2:object_type}
+, {prop_share_name V0:observedshare C1:string, NOT-created C2:object_type}
+, {prop_share_name C1:observedshare V0:string, NOT-created C2:object_type}
+, {prop_executable V0:observedrat V1:string, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat C1:string, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat V1:string, NOT-created C2:object_type}
+, {prop_executable V0:observedrat C1:string, NOT-created C2:object_type}
+, {prop_executable C1:observedrat V0:string, NOT-created C2:object_type}
+, {prop_share_path V0:observedshare V1:string, NOT-created V0:observedshare}
+, {prop_share_path V0:observedshare C1:string, NOT-created V0:observedshare}
+, {prop_share_path V0:observedshare V1:string, NOT-created C2:object_type}
+, {prop_share_path V0:observedshare C1:string, NOT-created C2:object_type}
+, {prop_share_path C1:observedshare V0:string, NOT-created C2:object_type}
+, {prop_dest_host V0:observedshare V1:observedhost, NOT-created V0:observedshare}
+, {prop_dest_host V0:observedshare C1:observedhost, NOT-created V0:observedshare}
+, {prop_dest_host V0:observedshare V1:observedhost, NOT-created C2:object_type}
+, {prop_dest_host V0:observedshare C1:observedhost, NOT-created C2:object_type}
+, {prop_dest_host C1:observedshare V0:observedhost, NOT-created C2:object_type}
+, {prop_elevated V0:observedrat V1:boolean, NOT-created V0:observedrat}
+, {prop_elevated V0:observedrat C1:boolean, NOT-created V0:observedrat}
+, {prop_elevated V0:observedrat V1:boolean, NOT-created C2:object_type}
+, {prop_elevated V0:observedrat C1:boolean, NOT-created C2:object_type}
+, {prop_elevated C1:observedrat V0:boolean, NOT-created C2:object_type}
+, {prop_path V0:observedfile V1:string, NOT-created V0:observedfile}
+, {prop_path V0:observedfile C1:string, NOT-created V0:observedfile}
+, {prop_path V0:observedfile V1:string, NOT-created C2:object_type}
+, {prop_path V0:observedfile C1:string, NOT-created C2:object_type}
+, {prop_path C1:observedfile V0:string, NOT-created C2:object_type}
+>
+FD Mutex Groups:
+< {NOT-created V0:object_type}
+, {created V0:object_type, NOT-created V0:object_type}:=1
+, {prop_src_host V0:observedshare V1:observedhost, NOT-created V0:observedshare}
+, {prop_src_host V0:observedshare C1:observedhost, NOT-created V0:observedshare}:=1
+, {prop_share_name V0:observedshare V1:string, NOT-created V0:observedshare}
+, {prop_share_name V0:observedshare C1:string, NOT-created V0:observedshare}:=1
+, {prop_executable id_bbrat V0:string, NOT-created id_bbrat}
+, {prop_executable id_bbrat C0:string, NOT-created id_bbrat}:=1
+, {prop_executable id_barat V0:string, NOT-created id_barat}
+, {prop_executable id_barat C0:string, NOT-created id_barat}:=1
+, {prop_executable id_yrat c__dollar__, NOT-created id_yrat}
+, {prop_executable id_yrat whatever, NOT-created id_yrat}
+, {prop_executable id_yrat somepath, NOT-created id_yrat}
+, {prop_executable id_yrat str__q, NOT-created id_yrat}
+, {prop_executable id_yrat str__j, NOT-created id_yrat}
+, {prop_executable id_yrat str__e, NOT-created id_yrat}
+, {prop_executable id_yrat str__alpha, NOT-created id_yrat}
+, {prop_executable id_yrat str__mary, NOT-created id_yrat}
+, {prop_executable id_yrat str__i, NOT-created id_yrat}
+, {prop_executable id_yrat str__james, NOT-created id_yrat}
+, {prop_executable id_yrat str__x, NOT-created id_yrat}
+, {prop_executable id_yrat str__p, NOT-created id_yrat}
+, {prop_executable id_yrat str__b, NOT-created id_yrat}
+, {prop_executable id_yrat str__f, NOT-created id_yrat}
+, {prop_executable id_yrat str__o, NOT-created id_yrat}
+, {prop_executable id_yrat str__w, NOT-created id_yrat}
+, {prop_executable id_yrat str__v, NOT-created id_yrat}
+, {prop_executable V0:observedrat c__dollar__, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat whatever, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat somepath, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__q, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__j, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__e, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__alpha, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__mary, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__i, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__james, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__x, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__p, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__b, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__f, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__o, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__w, NOT-created V0:observedrat}
+, {prop_executable V0:observedrat str__v, NOT-created V0:observedrat}
+, {prop_share_path V0:observedshare V1:string, NOT-created V0:observedshare}
+, {prop_share_path V0:observedshare C1:string, NOT-created V0:observedshare}:=1
+, {prop_dest_host V0:observedshare V1:observedhost, NOT-created V0:observedshare}
+, {prop_dest_host V0:observedshare C1:observedhost, NOT-created V0:observedshare}:=1
+, {prop_elevated id_bbrat V0:boolean, NOT-created id_bbrat}
+, {prop_elevated id_bbrat C0:boolean, NOT-created id_bbrat}:=1
+, {prop_elevated id_barat V0:boolean, NOT-created id_barat}
+, {prop_elevated id_barat C0:boolean, NOT-created id_barat}:=1
+, {prop_elevated id_yrat no, NOT-created id_yrat}
+, {prop_elevated V0:observedrat no, NOT-created V0:observedrat}
+, {prop_path V0:observedfile V1:string, NOT-created V0:observedfile}
+, {prop_path V0:observedfile C1:string, NOT-created V0:observedfile}:=1
+>

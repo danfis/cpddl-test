@@ -1,0 +1,51 @@
+Fact[14]:
+  (at hoist0 container-0-0 0-0-0)
+  (at hoist0 depot0-1-1 0-1-1)
+  (at hoist0 loadarea 0-2-2)
+  (lifting hoist0 crate0 1-0-3)
+  (on crate0 container-0-0 1-1-4)
+  (on crate0 depot0-1-1 1-2-5)
+  (available hoist0 2-0-6)
+  (none-of-those 2-1-7)
+  (clear container-0-0 3-0-8)
+  (none-of-those 3-1-9)
+  (clear depot0-1-1 4-0-10)
+  (none-of-those 4-1-11)
+  (in crate0 depot0 5-0-12)
+  (none-of-those 5-1-13)
+Op[8]:
+  (drop hoist0 crate0 container-0-0 loadarea container0), cost: 1
+    pre: (at hoist0 loadarea 0-2-2) (lifting hoist0 crate0 1-0-3) (clear container-0-0 3-0-8)
+    add: (on crate0 container-0-0 1-1-4) (available hoist0 2-0-6) (none-of-those 3-1-9)
+    del: (lifting hoist0 crate0 1-0-3) (none-of-those 2-1-7) (clear container-0-0 3-0-8)
+  (drop hoist0 crate0 depot0-1-1 loadarea depot0), cost: 1
+    pre: (at hoist0 loadarea 0-2-2) (lifting hoist0 crate0 1-0-3) (clear depot0-1-1 4-0-10)
+    add: (on crate0 depot0-1-1 1-2-5) (available hoist0 2-0-6) (none-of-those 4-1-11) (in crate0 depot0 5-0-12)
+    del: (lifting hoist0 crate0 1-0-3) (none-of-those 2-1-7) (clear depot0-1-1 4-0-10) (none-of-those 5-1-13)
+  (go-in hoist0 loadarea container-0-0), cost: 1
+    pre: (at hoist0 loadarea 0-2-2) (clear container-0-0 3-0-8)
+    add: (at hoist0 container-0-0 0-0-0) (none-of-those 3-1-9)
+    del: (at hoist0 loadarea 0-2-2) (clear container-0-0 3-0-8)
+  (go-in hoist0 loadarea depot0-1-1), cost: 1
+    pre: (at hoist0 loadarea 0-2-2) (clear depot0-1-1 4-0-10)
+    add: (at hoist0 depot0-1-1 0-1-1) (none-of-those 4-1-11)
+    del: (at hoist0 loadarea 0-2-2) (clear depot0-1-1 4-0-10)
+  (go-out hoist0 container-0-0 loadarea), cost: 1
+    pre: (at hoist0 container-0-0 0-0-0)
+    add: (at hoist0 loadarea 0-2-2) (clear container-0-0 3-0-8)
+    del: (at hoist0 container-0-0 0-0-0) (none-of-those 3-1-9)
+  (go-out hoist0 depot0-1-1 loadarea), cost: 1
+    pre: (at hoist0 depot0-1-1 0-1-1)
+    add: (at hoist0 loadarea 0-2-2) (clear depot0-1-1 4-0-10)
+    del: (at hoist0 depot0-1-1 0-1-1) (none-of-those 4-1-11)
+  (lift hoist0 crate0 container-0-0 loadarea container0), cost: 1
+    pre: (at hoist0 loadarea 0-2-2) (on crate0 container-0-0 1-1-4) (available hoist0 2-0-6)
+    add: (lifting hoist0 crate0 1-0-3) (none-of-those 2-1-7) (clear container-0-0 3-0-8)
+    del: (on crate0 container-0-0 1-1-4) (available hoist0 2-0-6) (none-of-those 3-1-9)
+  (lift hoist0 crate0 depot0-1-1 loadarea depot0), cost: 1
+    pre: (at hoist0 loadarea 0-2-2) (on crate0 depot0-1-1 1-2-5) (available hoist0 2-0-6)
+    add: (lifting hoist0 crate0 1-0-3) (none-of-those 2-1-7) (clear depot0-1-1 4-0-10) (none-of-those 5-1-13)
+    del: (on crate0 depot0-1-1 1-2-5) (available hoist0 2-0-6) (none-of-those 4-1-11) (in crate0 depot0 5-0-12)
+Init State: (at hoist0 depot0-1-1 0-1-1) (on crate0 container-0-0 1-1-4) (available hoist0 2-0-6) (none-of-those 3-1-9) (none-of-those 4-1-11) (none-of-those 5-1-13)
+Goal: (in crate0 depot0 5-0-12)
+Value: 2

@@ -1,0 +1,88 @@
+Domain: driverlog
+Problem: dlog-2-2-2
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10
+Obj[11]:
+    [0]: driver1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: driver2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: truck2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: package1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: package2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: s0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: s1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: s2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: p1-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: p1-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[11]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    obj: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    truck: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    location: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    driver: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    driving: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    link: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    path: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    empty: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[0]:
+Action[6]:
+    load-truck: ?obj:0 ?truck:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:at ?obj ?loc))
+        eff: (and (N:RW:at ?obj ?loc) (RW:in ?obj ?truck))
+    unload-truck: ?obj:0 ?truck:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:in ?obj ?truck))
+        eff: (and (N:RW:in ?obj ?truck) (RW:at ?obj ?loc))
+    board-truck: ?driver:0 ?truck:0 ?loc:0
+        pre: (and (R:driver ?driver) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:at ?driver ?loc) (RW:empty ?truck))
+        eff: (and (N:RW:at ?driver ?loc) (RW:driving ?driver ?truck) (N:RW:empty ?truck))
+    disembark-truck: ?driver:0 ?truck:0 ?loc:0
+        pre: (and (R:driver ?driver) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:driving ?driver ?truck))
+        eff: (and (N:RW:driving ?driver ?truck) (RW:at ?driver ?loc) (RW:empty ?truck))
+    drive-truck: ?truck:0 ?loc-from:0 ?loc-to:0 ?driver:0
+        pre: (and (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (RW:at ?truck ?loc-from) (RW:driving ?driver ?truck) (R:link ?loc-from ?loc-to))
+        eff: (and (N:RW:at ?truck ?loc-from) (RW:at ?truck ?loc-to))
+    walk: ?driver:0 ?loc-from:0 ?loc-to:0
+        pre: (and (R:driver ?driver) (R:location ?loc-from) (R:location ?loc-to) (RW:at ?driver ?loc-from) (R:path ?loc-from ?loc-to))
+        eff: (and (N:RW:at ?driver ?loc-from) (RW:at ?driver ?loc-to))
+Init[33]:
+  (at driver1 s2)
+  S:(driver driver1)
+  (at driver2 s2)
+  S:(driver driver2)
+  (at truck1 s0)
+  (empty truck1)
+  S:(truck truck1)
+  (at truck2 s0)
+  (empty truck2)
+  S:(truck truck2)
+  (at package1 s0)
+  S:(obj package1)
+  (at package2 s0)
+  S:(obj package2)
+  S:(location s0)
+  S:(location s1)
+  S:(location s2)
+  S:(location p1-0)
+  S:(location p1-2)
+  S:(path s1 p1-0)
+  S:(path p1-0 s1)
+  S:(path s0 p1-0)
+  S:(path p1-0 s0)
+  S:(path s1 p1-2)
+  S:(path p1-2 s1)
+  S:(path s2 p1-2)
+  S:(path p1-2 s2)
+  S:(link s0 s1)
+  S:(link s1 s0)
+  S:(link s0 s2)
+  S:(link s2 s0)
+  S:(link s2 s1)
+  S:(link s1 s2)
+Init[0]:
+Goal: (and (RW:at driver1 s1) (RW:at truck1 s1) (RW:at package1 s0) (RW:at package2 s0))
+Metric: 0

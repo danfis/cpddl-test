@@ -1,0 +1,305 @@
+Fact[56]:
+  (num-subs l0 0-0-0)
+  (num-subs l1 0-1-1)
+  (num-subs l2 0-2-2)
+  (none-of-those 0-3-3)
+  (NOT-chosen ap2 1-0-4)
+  (chosen ap2 1-1-5)
+  (NOT-chosen cdk46p3-cycd 2-0-6)
+  (chosen cdk46p3-cycd 2-1-7)
+  (NOT-chosen cdk46p3-cycdp1 3-0-8)
+  (chosen cdk46p3-cycdp1 3-1-9)
+  (NOT-chosen p300 4-0-10)
+  (chosen p300 4-1-11)
+  (NOT-chosen pcaf 5-0-12)
+  (chosen pcaf 5-1-13)
+  (NOT-chosen prbp2 6-0-14)
+  (chosen prbp2 6-1-15)
+  (NOT-chosen cdc25c 7-0-16)
+  (none-of-those 7-1-17)
+  (NOT-chosen cdk7 8-0-18)
+  (none-of-those 8-1-19)
+  (NOT-chosen chk1 9-0-20)
+  (none-of-those 9-1-21)
+  (NOT-chosen dmp1 10-0-22)
+  (none-of-those 10-1-23)
+  (NOT-chosen e2f13 11-0-24)
+  (none-of-those 11-1-25)
+  (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+  (none-of-those 12-1-27)
+  (NOT-chosen p16 13-0-28)
+  (none-of-those 13-1-29)
+  (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+  (none-of-those 14-1-31)
+  (NOT-chosen raf1 15-0-32)
+  (none-of-those 15-1-33)
+  (NOT-chosen sp1 16-0-34)
+  (none-of-those 16-1-35)
+  (available ap2 17-0-36)
+  (none-of-those 17-1-37)
+  (available cdk46p3-cycd 18-0-38)
+  (none-of-those 18-1-39)
+  (available cdk46p3-cycdp1 19-0-40)
+  (none-of-those 19-1-41)
+  (available p300 20-0-42)
+  (none-of-those 20-1-43)
+  (available pcaf 21-0-44)
+  (none-of-those 21-1-45)
+  (available pcaf-p300 22-0-46)
+  (none-of-those 22-1-47)
+  (available prbp1p2 23-0-48)
+  (none-of-those 23-1-49)
+  (available prbp1p2-ap2 24-0-50)
+  (none-of-those 24-1-51)
+  (available prbp2 25-0-52)
+  (none-of-those 25-1-53)
+  (goal1 26-0-54)
+  (none-of-those 26-1-55)
+Op[61]:
+  (associate pcaf p300 pcaf-p300), cost: 1
+    pre: (available p300 20-0-42) (available pcaf 21-0-44)
+    add: (none-of-those 20-1-43) (none-of-those 21-1-45) (available pcaf-p300 22-0-46)
+    del: (available p300 20-0-42) (available pcaf 21-0-44) (none-of-those 22-1-47)
+  (associate prbp1p2 ap2 prbp1p2-ap2), cost: 1
+    pre: (available ap2 17-0-36) (available prbp1p2 23-0-48)
+    add: (none-of-those 17-1-37) (none-of-those 23-1-49) (available prbp1p2-ap2 24-0-50)
+    del: (available ap2 17-0-36) (available prbp1p2 23-0-48) (none-of-those 24-1-51)
+  (associate prbp2 ap2 prbp2-ap2), cost: 1
+    pre: (available ap2 17-0-36) (available prbp2 25-0-52)
+    add: (none-of-those 17-1-37) (none-of-those 25-1-53)
+    del: (available ap2 17-0-36) (available prbp2 25-0-52)
+  (associate-with-catalyze prbp2 cdk46p3-cycd prbp1p2), cost: 1
+    pre: (available cdk46p3-cycd 18-0-38) (available prbp2 25-0-52)
+    add: (available prbp1p2 23-0-48) (none-of-those 25-1-53)
+    del: (none-of-those 23-1-49) (available prbp2 25-0-52)
+  (associate-with-catalyze prbp2 cdk46p3-cycdp1 prbp1p2), cost: 1
+    pre: (available cdk46p3-cycdp1 19-0-40) (available prbp2 25-0-52)
+    add: (available prbp1p2 23-0-48) (none-of-those 25-1-53)
+    del: (none-of-those 23-1-49) (available prbp2 25-0-52)
+  (choose ap2 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen ap2 1-0-4)
+    add: (num-subs l1 0-1-1) (chosen ap2 1-1-5)
+    del: (num-subs l0 0-0-0) (NOT-chosen ap2 1-0-4)
+  (choose ap2 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen ap2 1-0-4)
+    add: (num-subs l2 0-2-2) (chosen ap2 1-1-5)
+    del: (num-subs l1 0-1-1) (NOT-chosen ap2 1-0-4)
+  (choose ap2 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen ap2 1-0-4)
+    add: (none-of-those 0-3-3) (chosen ap2 1-1-5)
+    del: (num-subs l2 0-2-2) (NOT-chosen ap2 1-0-4)
+  (choose cdc25c l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen cdc25c 7-0-16)
+    add: (num-subs l1 0-1-1) (none-of-those 7-1-17)
+    del: (num-subs l0 0-0-0) (NOT-chosen cdc25c 7-0-16)
+  (choose cdc25c l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen cdc25c 7-0-16)
+    add: (num-subs l2 0-2-2) (none-of-those 7-1-17)
+    del: (num-subs l1 0-1-1) (NOT-chosen cdc25c 7-0-16)
+  (choose cdc25c l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen cdc25c 7-0-16)
+    add: (none-of-those 0-3-3) (none-of-those 7-1-17)
+    del: (num-subs l2 0-2-2) (NOT-chosen cdc25c 7-0-16)
+  (choose cdk46p3-cycd l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen cdk46p3-cycd 2-0-6)
+    add: (num-subs l1 0-1-1) (chosen cdk46p3-cycd 2-1-7)
+    del: (num-subs l0 0-0-0) (NOT-chosen cdk46p3-cycd 2-0-6)
+  (choose cdk46p3-cycd l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen cdk46p3-cycd 2-0-6)
+    add: (num-subs l2 0-2-2) (chosen cdk46p3-cycd 2-1-7)
+    del: (num-subs l1 0-1-1) (NOT-chosen cdk46p3-cycd 2-0-6)
+  (choose cdk46p3-cycd l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen cdk46p3-cycd 2-0-6)
+    add: (none-of-those 0-3-3) (chosen cdk46p3-cycd 2-1-7)
+    del: (num-subs l2 0-2-2) (NOT-chosen cdk46p3-cycd 2-0-6)
+  (choose cdk46p3-cycdp1 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen cdk46p3-cycdp1 3-0-8)
+    add: (num-subs l1 0-1-1) (chosen cdk46p3-cycdp1 3-1-9)
+    del: (num-subs l0 0-0-0) (NOT-chosen cdk46p3-cycdp1 3-0-8)
+  (choose cdk46p3-cycdp1 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen cdk46p3-cycdp1 3-0-8)
+    add: (num-subs l2 0-2-2) (chosen cdk46p3-cycdp1 3-1-9)
+    del: (num-subs l1 0-1-1) (NOT-chosen cdk46p3-cycdp1 3-0-8)
+  (choose cdk46p3-cycdp1 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen cdk46p3-cycdp1 3-0-8)
+    add: (none-of-those 0-3-3) (chosen cdk46p3-cycdp1 3-1-9)
+    del: (num-subs l2 0-2-2) (NOT-chosen cdk46p3-cycdp1 3-0-8)
+  (choose cdk7 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen cdk7 8-0-18)
+    add: (num-subs l1 0-1-1) (none-of-those 8-1-19)
+    del: (num-subs l0 0-0-0) (NOT-chosen cdk7 8-0-18)
+  (choose cdk7 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen cdk7 8-0-18)
+    add: (num-subs l2 0-2-2) (none-of-those 8-1-19)
+    del: (num-subs l1 0-1-1) (NOT-chosen cdk7 8-0-18)
+  (choose cdk7 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen cdk7 8-0-18)
+    add: (none-of-those 0-3-3) (none-of-those 8-1-19)
+    del: (num-subs l2 0-2-2) (NOT-chosen cdk7 8-0-18)
+  (choose chk1 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen chk1 9-0-20)
+    add: (num-subs l1 0-1-1) (none-of-those 9-1-21)
+    del: (num-subs l0 0-0-0) (NOT-chosen chk1 9-0-20)
+  (choose chk1 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen chk1 9-0-20)
+    add: (num-subs l2 0-2-2) (none-of-those 9-1-21)
+    del: (num-subs l1 0-1-1) (NOT-chosen chk1 9-0-20)
+  (choose chk1 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen chk1 9-0-20)
+    add: (none-of-those 0-3-3) (none-of-those 9-1-21)
+    del: (num-subs l2 0-2-2) (NOT-chosen chk1 9-0-20)
+  (choose dmp1 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen dmp1 10-0-22)
+    add: (num-subs l1 0-1-1) (none-of-those 10-1-23)
+    del: (num-subs l0 0-0-0) (NOT-chosen dmp1 10-0-22)
+  (choose dmp1 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen dmp1 10-0-22)
+    add: (num-subs l2 0-2-2) (none-of-those 10-1-23)
+    del: (num-subs l1 0-1-1) (NOT-chosen dmp1 10-0-22)
+  (choose dmp1 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen dmp1 10-0-22)
+    add: (none-of-those 0-3-3) (none-of-those 10-1-23)
+    del: (num-subs l2 0-2-2) (NOT-chosen dmp1 10-0-22)
+  (choose e2f13 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen e2f13 11-0-24)
+    add: (num-subs l1 0-1-1) (none-of-those 11-1-25)
+    del: (num-subs l0 0-0-0) (NOT-chosen e2f13 11-0-24)
+  (choose e2f13 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen e2f13 11-0-24)
+    add: (num-subs l2 0-2-2) (none-of-those 11-1-25)
+    del: (num-subs l1 0-1-1) (NOT-chosen e2f13 11-0-24)
+  (choose e2f13 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen e2f13 11-0-24)
+    add: (none-of-those 0-3-3) (none-of-those 11-1-25)
+    del: (num-subs l2 0-2-2) (NOT-chosen e2f13 11-0-24)
+  (choose p130-e2f5p1-dp12 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+    add: (num-subs l1 0-1-1) (none-of-those 12-1-27)
+    del: (num-subs l0 0-0-0) (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+  (choose p130-e2f5p1-dp12 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+    add: (num-subs l2 0-2-2) (none-of-those 12-1-27)
+    del: (num-subs l1 0-1-1) (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+  (choose p130-e2f5p1-dp12 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+    add: (none-of-those 0-3-3) (none-of-those 12-1-27)
+    del: (num-subs l2 0-2-2) (NOT-chosen p130-e2f5p1-dp12 12-0-26)
+  (choose p16 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen p16 13-0-28)
+    add: (num-subs l1 0-1-1) (none-of-those 13-1-29)
+    del: (num-subs l0 0-0-0) (NOT-chosen p16 13-0-28)
+  (choose p16 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen p16 13-0-28)
+    add: (num-subs l2 0-2-2) (none-of-those 13-1-29)
+    del: (num-subs l1 0-1-1) (NOT-chosen p16 13-0-28)
+  (choose p16 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen p16 13-0-28)
+    add: (none-of-those 0-3-3) (none-of-those 13-1-29)
+    del: (num-subs l2 0-2-2) (NOT-chosen p16 13-0-28)
+  (choose p300 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen p300 4-0-10)
+    add: (num-subs l1 0-1-1) (chosen p300 4-1-11)
+    del: (num-subs l0 0-0-0) (NOT-chosen p300 4-0-10)
+  (choose p300 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen p300 4-0-10)
+    add: (num-subs l2 0-2-2) (chosen p300 4-1-11)
+    del: (num-subs l1 0-1-1) (NOT-chosen p300 4-0-10)
+  (choose p300 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen p300 4-0-10)
+    add: (none-of-those 0-3-3) (chosen p300 4-1-11)
+    del: (num-subs l2 0-2-2) (NOT-chosen p300 4-0-10)
+  (choose pcaf l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen pcaf 5-0-12)
+    add: (num-subs l1 0-1-1) (chosen pcaf 5-1-13)
+    del: (num-subs l0 0-0-0) (NOT-chosen pcaf 5-0-12)
+  (choose pcaf l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen pcaf 5-0-12)
+    add: (num-subs l2 0-2-2) (chosen pcaf 5-1-13)
+    del: (num-subs l1 0-1-1) (NOT-chosen pcaf 5-0-12)
+  (choose pcaf l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen pcaf 5-0-12)
+    add: (none-of-those 0-3-3) (chosen pcaf 5-1-13)
+    del: (num-subs l2 0-2-2) (NOT-chosen pcaf 5-0-12)
+  (choose prb-e2f4p1-dp12 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+    add: (num-subs l1 0-1-1) (none-of-those 14-1-31)
+    del: (num-subs l0 0-0-0) (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+  (choose prb-e2f4p1-dp12 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+    add: (num-subs l2 0-2-2) (none-of-those 14-1-31)
+    del: (num-subs l1 0-1-1) (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+  (choose prb-e2f4p1-dp12 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+    add: (none-of-those 0-3-3) (none-of-those 14-1-31)
+    del: (num-subs l2 0-2-2) (NOT-chosen prb-e2f4p1-dp12 14-0-30)
+  (choose prbp2 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen prbp2 6-0-14)
+    add: (num-subs l1 0-1-1) (chosen prbp2 6-1-15)
+    del: (num-subs l0 0-0-0) (NOT-chosen prbp2 6-0-14)
+  (choose prbp2 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen prbp2 6-0-14)
+    add: (num-subs l2 0-2-2) (chosen prbp2 6-1-15)
+    del: (num-subs l1 0-1-1) (NOT-chosen prbp2 6-0-14)
+  (choose prbp2 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen prbp2 6-0-14)
+    add: (none-of-those 0-3-3) (chosen prbp2 6-1-15)
+    del: (num-subs l2 0-2-2) (NOT-chosen prbp2 6-0-14)
+  (choose raf1 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen raf1 15-0-32)
+    add: (num-subs l1 0-1-1) (none-of-those 15-1-33)
+    del: (num-subs l0 0-0-0) (NOT-chosen raf1 15-0-32)
+  (choose raf1 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen raf1 15-0-32)
+    add: (num-subs l2 0-2-2) (none-of-those 15-1-33)
+    del: (num-subs l1 0-1-1) (NOT-chosen raf1 15-0-32)
+  (choose raf1 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen raf1 15-0-32)
+    add: (none-of-those 0-3-3) (none-of-those 15-1-33)
+    del: (num-subs l2 0-2-2) (NOT-chosen raf1 15-0-32)
+  (choose sp1 l1 l0), cost: 1
+    pre: (num-subs l0 0-0-0) (NOT-chosen sp1 16-0-34)
+    add: (num-subs l1 0-1-1) (none-of-those 16-1-35)
+    del: (num-subs l0 0-0-0) (NOT-chosen sp1 16-0-34)
+  (choose sp1 l2 l1), cost: 1
+    pre: (num-subs l1 0-1-1) (NOT-chosen sp1 16-0-34)
+    add: (num-subs l2 0-2-2) (none-of-those 16-1-35)
+    del: (num-subs l1 0-1-1) (NOT-chosen sp1 16-0-34)
+  (choose sp1 l3 l2), cost: 1
+    pre: (num-subs l2 0-2-2) (NOT-chosen sp1 16-0-34)
+    add: (none-of-those 0-3-3) (none-of-those 16-1-35)
+    del: (num-subs l2 0-2-2) (NOT-chosen sp1 16-0-34)
+  (dummy-action-1), cost: 1
+    pre: (available pcaf-p300 22-0-46)
+    add: (goal1 26-0-54)
+    del: (none-of-those 26-1-55)
+  (dummy-action-1), cost: 1
+    pre: (available prbp1p2-ap2 24-0-50)
+    add: (goal1 26-0-54)
+    del: (none-of-those 26-1-55)
+  (initialize ap2), cost: 1
+    pre: (chosen ap2 1-1-5)
+    add: (available ap2 17-0-36)
+    del: (none-of-those 17-1-37)
+  (initialize cdk46p3-cycd), cost: 1
+    pre: (chosen cdk46p3-cycd 2-1-7)
+    add: (available cdk46p3-cycd 18-0-38)
+    del: (none-of-those 18-1-39)
+  (initialize cdk46p3-cycdp1), cost: 1
+    pre: (chosen cdk46p3-cycdp1 3-1-9)
+    add: (available cdk46p3-cycdp1 19-0-40)
+    del: (none-of-those 19-1-41)
+  (initialize p300), cost: 1
+    pre: (chosen p300 4-1-11)
+    add: (available p300 20-0-42)
+    del: (none-of-those 20-1-43)
+  (initialize pcaf), cost: 1
+    pre: (chosen pcaf 5-1-13)
+    add: (available pcaf 21-0-44)
+    del: (none-of-those 21-1-45)
+  (initialize prbp2), cost: 1
+    pre: (chosen prbp2 6-1-15)
+    add: (available prbp2 25-0-52)
+    del: (none-of-those 25-1-53)
+Init State: (num-subs l0 0-0-0) (NOT-chosen ap2 1-0-4) (NOT-chosen cdk46p3-cycd 2-0-6) (NOT-chosen cdk46p3-cycdp1 3-0-8) (NOT-chosen p300 4-0-10) (NOT-chosen pcaf 5-0-12) (NOT-chosen prbp2 6-0-14) (NOT-chosen cdc25c 7-0-16) (NOT-chosen cdk7 8-0-18) (NOT-chosen chk1 9-0-20) (NOT-chosen dmp1 10-0-22) (NOT-chosen e2f13 11-0-24) (NOT-chosen p130-e2f5p1-dp12 12-0-26) (NOT-chosen p16 13-0-28) (NOT-chosen prb-e2f4p1-dp12 14-0-30) (NOT-chosen raf1 15-0-32) (NOT-chosen sp1 16-0-34) (none-of-those 17-1-37) (none-of-those 18-1-39) (none-of-those 19-1-41) (none-of-those 20-1-43) (none-of-those 21-1-45) (none-of-those 22-1-47) (none-of-those 23-1-49) (none-of-those 24-1-51) (none-of-those 25-1-53) (none-of-those 26-1-55)
+Goal: (goal1 26-0-54)
+Value: 1

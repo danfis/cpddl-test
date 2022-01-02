@@ -1,0 +1,47 @@
+Fact[10]:
+  (at-robot loc-x0-y0 0-0-0)
+  (at-robot loc-x0-y1 0-1-1)
+  (at-robot loc-x1-y0 0-2-2)
+  (at-robot loc-x1-y1 0-3-3)
+  (visited loc-x0-y0 1-0-4)
+  (none-of-those 1-1-5)
+  (visited loc-x0-y1 2-0-6)
+  (none-of-those 2-1-7)
+  (visited loc-x1-y0 3-0-8)
+  (none-of-those 3-1-9)
+Op[8]:
+  (move loc-x0-y0 loc-x0-y1), cost: 1
+    pre: (at-robot loc-x0-y0 0-0-0)
+    add: (at-robot loc-x0-y1 0-1-1) (visited loc-x0-y1 2-0-6)
+    del: (at-robot loc-x0-y0 0-0-0) (none-of-those 2-1-7)
+  (move loc-x0-y0 loc-x1-y0), cost: 1
+    pre: (at-robot loc-x0-y0 0-0-0)
+    add: (at-robot loc-x1-y0 0-2-2) (visited loc-x1-y0 3-0-8)
+    del: (at-robot loc-x0-y0 0-0-0) (none-of-those 3-1-9)
+  (move loc-x0-y1 loc-x0-y0), cost: 1
+    pre: (at-robot loc-x0-y1 0-1-1)
+    add: (at-robot loc-x0-y0 0-0-0) (visited loc-x0-y0 1-0-4)
+    del: (at-robot loc-x0-y1 0-1-1) (none-of-those 1-1-5)
+  (move loc-x0-y1 loc-x1-y1), cost: 1
+    pre: (at-robot loc-x0-y1 0-1-1)
+    add: (at-robot loc-x1-y1 0-3-3)
+    del: (at-robot loc-x0-y1 0-1-1)
+  (move loc-x1-y0 loc-x0-y0), cost: 1
+    pre: (at-robot loc-x1-y0 0-2-2)
+    add: (at-robot loc-x0-y0 0-0-0) (visited loc-x0-y0 1-0-4)
+    del: (at-robot loc-x1-y0 0-2-2) (none-of-those 1-1-5)
+  (move loc-x1-y0 loc-x1-y1), cost: 1
+    pre: (at-robot loc-x1-y0 0-2-2)
+    add: (at-robot loc-x1-y1 0-3-3)
+    del: (at-robot loc-x1-y0 0-2-2)
+  (move loc-x1-y1 loc-x0-y1), cost: 1
+    pre: (at-robot loc-x1-y1 0-3-3)
+    add: (at-robot loc-x0-y1 0-1-1) (visited loc-x0-y1 2-0-6)
+    del: (at-robot loc-x1-y1 0-3-3) (none-of-those 2-1-7)
+  (move loc-x1-y1 loc-x1-y0), cost: 1
+    pre: (at-robot loc-x1-y1 0-3-3)
+    add: (at-robot loc-x1-y0 0-2-2) (visited loc-x1-y0 3-0-8)
+    del: (at-robot loc-x1-y1 0-3-3) (none-of-those 3-1-9)
+Init State: (at-robot loc-x1-y1 0-3-3) (none-of-those 1-1-5) (none-of-those 2-1-7) (none-of-those 3-1-9)
+Goal: (visited loc-x0-y0 1-0-4) (visited loc-x0-y1 2-0-6) (visited loc-x1-y0 3-0-8)
+Value: 3

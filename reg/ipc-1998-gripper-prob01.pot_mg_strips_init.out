@@ -1,0 +1,165 @@
+Fact[24]:
+  (carry ball1 left 0-0-0)
+  (carry ball2 left 0-1-1)
+  (carry ball3 left 0-2-2)
+  (carry ball4 left 0-3-3)
+  (free left 0-4-4)
+  (carry ball1 right 1-0-5)
+  (carry ball2 right 1-1-6)
+  (carry ball3 right 1-2-7)
+  (carry ball4 right 1-3-8)
+  (free right 1-4-9)
+  (at ball1 rooma 2-0-10)
+  (at ball1 roomb 2-1-11)
+  (none-of-those 2-2-12)
+  (at ball2 rooma 3-0-13)
+  (at ball2 roomb 3-1-14)
+  (none-of-those 3-2-15)
+  (at ball3 rooma 4-0-16)
+  (at ball3 roomb 4-1-17)
+  (none-of-those 4-2-18)
+  (at ball4 rooma 5-0-19)
+  (at ball4 roomb 5-1-20)
+  (none-of-those 5-2-21)
+  (at-robby rooma 6-0-22)
+  (at-robby roomb 6-1-23)
+Op[34]:
+  (drop ball1 rooma left), cost: 1
+    pre: (carry ball1 left 0-0-0) (at-robby rooma 6-0-22)
+    add: (free left 0-4-4) (at ball1 rooma 2-0-10)
+    del: (carry ball1 left 0-0-0) (at ball1 roomb 2-1-11) (none-of-those 2-2-12)
+  (drop ball1 rooma right), cost: 1
+    pre: (carry ball1 right 1-0-5) (at-robby rooma 6-0-22)
+    add: (free right 1-4-9) (at ball1 rooma 2-0-10)
+    del: (carry ball1 right 1-0-5) (at ball1 roomb 2-1-11) (none-of-those 2-2-12)
+  (drop ball1 roomb left), cost: 1
+    pre: (carry ball1 left 0-0-0) (at-robby roomb 6-1-23)
+    add: (free left 0-4-4) (at ball1 roomb 2-1-11)
+    del: (carry ball1 left 0-0-0) (at ball1 rooma 2-0-10) (none-of-those 2-2-12)
+  (drop ball1 roomb right), cost: 1
+    pre: (carry ball1 right 1-0-5) (at-robby roomb 6-1-23)
+    add: (free right 1-4-9) (at ball1 roomb 2-1-11)
+    del: (carry ball1 right 1-0-5) (at ball1 rooma 2-0-10) (none-of-those 2-2-12)
+  (drop ball2 rooma left), cost: 1
+    pre: (carry ball2 left 0-1-1) (at-robby rooma 6-0-22)
+    add: (free left 0-4-4) (at ball2 rooma 3-0-13)
+    del: (carry ball2 left 0-1-1) (at ball2 roomb 3-1-14) (none-of-those 3-2-15)
+  (drop ball2 rooma right), cost: 1
+    pre: (carry ball2 right 1-1-6) (at-robby rooma 6-0-22)
+    add: (free right 1-4-9) (at ball2 rooma 3-0-13)
+    del: (carry ball2 right 1-1-6) (at ball2 roomb 3-1-14) (none-of-those 3-2-15)
+  (drop ball2 roomb left), cost: 1
+    pre: (carry ball2 left 0-1-1) (at-robby roomb 6-1-23)
+    add: (free left 0-4-4) (at ball2 roomb 3-1-14)
+    del: (carry ball2 left 0-1-1) (at ball2 rooma 3-0-13) (none-of-those 3-2-15)
+  (drop ball2 roomb right), cost: 1
+    pre: (carry ball2 right 1-1-6) (at-robby roomb 6-1-23)
+    add: (free right 1-4-9) (at ball2 roomb 3-1-14)
+    del: (carry ball2 right 1-1-6) (at ball2 rooma 3-0-13) (none-of-those 3-2-15)
+  (drop ball3 rooma left), cost: 1
+    pre: (carry ball3 left 0-2-2) (at-robby rooma 6-0-22)
+    add: (free left 0-4-4) (at ball3 rooma 4-0-16)
+    del: (carry ball3 left 0-2-2) (at ball3 roomb 4-1-17) (none-of-those 4-2-18)
+  (drop ball3 rooma right), cost: 1
+    pre: (carry ball3 right 1-2-7) (at-robby rooma 6-0-22)
+    add: (free right 1-4-9) (at ball3 rooma 4-0-16)
+    del: (carry ball3 right 1-2-7) (at ball3 roomb 4-1-17) (none-of-those 4-2-18)
+  (drop ball3 roomb left), cost: 1
+    pre: (carry ball3 left 0-2-2) (at-robby roomb 6-1-23)
+    add: (free left 0-4-4) (at ball3 roomb 4-1-17)
+    del: (carry ball3 left 0-2-2) (at ball3 rooma 4-0-16) (none-of-those 4-2-18)
+  (drop ball3 roomb right), cost: 1
+    pre: (carry ball3 right 1-2-7) (at-robby roomb 6-1-23)
+    add: (free right 1-4-9) (at ball3 roomb 4-1-17)
+    del: (carry ball3 right 1-2-7) (at ball3 rooma 4-0-16) (none-of-those 4-2-18)
+  (drop ball4 rooma left), cost: 1
+    pre: (carry ball4 left 0-3-3) (at-robby rooma 6-0-22)
+    add: (free left 0-4-4) (at ball4 rooma 5-0-19)
+    del: (carry ball4 left 0-3-3) (at ball4 roomb 5-1-20) (none-of-those 5-2-21)
+  (drop ball4 rooma right), cost: 1
+    pre: (carry ball4 right 1-3-8) (at-robby rooma 6-0-22)
+    add: (free right 1-4-9) (at ball4 rooma 5-0-19)
+    del: (carry ball4 right 1-3-8) (at ball4 roomb 5-1-20) (none-of-those 5-2-21)
+  (drop ball4 roomb left), cost: 1
+    pre: (carry ball4 left 0-3-3) (at-robby roomb 6-1-23)
+    add: (free left 0-4-4) (at ball4 roomb 5-1-20)
+    del: (carry ball4 left 0-3-3) (at ball4 rooma 5-0-19) (none-of-those 5-2-21)
+  (drop ball4 roomb right), cost: 1
+    pre: (carry ball4 right 1-3-8) (at-robby roomb 6-1-23)
+    add: (free right 1-4-9) (at ball4 roomb 5-1-20)
+    del: (carry ball4 right 1-3-8) (at ball4 rooma 5-0-19) (none-of-those 5-2-21)
+  (move rooma roomb), cost: 1
+    pre: (at-robby rooma 6-0-22)
+    add: (at-robby roomb 6-1-23)
+    del: (at-robby rooma 6-0-22)
+  (move roomb rooma), cost: 1
+    pre: (at-robby roomb 6-1-23)
+    add: (at-robby rooma 6-0-22)
+    del: (at-robby roomb 6-1-23)
+  (pick ball1 rooma left), cost: 1
+    pre: (free left 0-4-4) (at ball1 rooma 2-0-10) (at-robby rooma 6-0-22)
+    add: (carry ball1 left 0-0-0) (none-of-those 2-2-12)
+    del: (free left 0-4-4) (at ball1 rooma 2-0-10)
+  (pick ball1 rooma right), cost: 1
+    pre: (free right 1-4-9) (at ball1 rooma 2-0-10) (at-robby rooma 6-0-22)
+    add: (carry ball1 right 1-0-5) (none-of-those 2-2-12)
+    del: (free right 1-4-9) (at ball1 rooma 2-0-10)
+  (pick ball1 roomb left), cost: 1
+    pre: (free left 0-4-4) (at ball1 roomb 2-1-11) (at-robby roomb 6-1-23)
+    add: (carry ball1 left 0-0-0) (none-of-those 2-2-12)
+    del: (free left 0-4-4) (at ball1 roomb 2-1-11)
+  (pick ball1 roomb right), cost: 1
+    pre: (free right 1-4-9) (at ball1 roomb 2-1-11) (at-robby roomb 6-1-23)
+    add: (carry ball1 right 1-0-5) (none-of-those 2-2-12)
+    del: (free right 1-4-9) (at ball1 roomb 2-1-11)
+  (pick ball2 rooma left), cost: 1
+    pre: (free left 0-4-4) (at ball2 rooma 3-0-13) (at-robby rooma 6-0-22)
+    add: (carry ball2 left 0-1-1) (none-of-those 3-2-15)
+    del: (free left 0-4-4) (at ball2 rooma 3-0-13)
+  (pick ball2 rooma right), cost: 1
+    pre: (free right 1-4-9) (at ball2 rooma 3-0-13) (at-robby rooma 6-0-22)
+    add: (carry ball2 right 1-1-6) (none-of-those 3-2-15)
+    del: (free right 1-4-9) (at ball2 rooma 3-0-13)
+  (pick ball2 roomb left), cost: 1
+    pre: (free left 0-4-4) (at ball2 roomb 3-1-14) (at-robby roomb 6-1-23)
+    add: (carry ball2 left 0-1-1) (none-of-those 3-2-15)
+    del: (free left 0-4-4) (at ball2 roomb 3-1-14)
+  (pick ball2 roomb right), cost: 1
+    pre: (free right 1-4-9) (at ball2 roomb 3-1-14) (at-robby roomb 6-1-23)
+    add: (carry ball2 right 1-1-6) (none-of-those 3-2-15)
+    del: (free right 1-4-9) (at ball2 roomb 3-1-14)
+  (pick ball3 rooma left), cost: 1
+    pre: (free left 0-4-4) (at ball3 rooma 4-0-16) (at-robby rooma 6-0-22)
+    add: (carry ball3 left 0-2-2) (none-of-those 4-2-18)
+    del: (free left 0-4-4) (at ball3 rooma 4-0-16)
+  (pick ball3 rooma right), cost: 1
+    pre: (free right 1-4-9) (at ball3 rooma 4-0-16) (at-robby rooma 6-0-22)
+    add: (carry ball3 right 1-2-7) (none-of-those 4-2-18)
+    del: (free right 1-4-9) (at ball3 rooma 4-0-16)
+  (pick ball3 roomb left), cost: 1
+    pre: (free left 0-4-4) (at ball3 roomb 4-1-17) (at-robby roomb 6-1-23)
+    add: (carry ball3 left 0-2-2) (none-of-those 4-2-18)
+    del: (free left 0-4-4) (at ball3 roomb 4-1-17)
+  (pick ball3 roomb right), cost: 1
+    pre: (free right 1-4-9) (at ball3 roomb 4-1-17) (at-robby roomb 6-1-23)
+    add: (carry ball3 right 1-2-7) (none-of-those 4-2-18)
+    del: (free right 1-4-9) (at ball3 roomb 4-1-17)
+  (pick ball4 rooma left), cost: 1
+    pre: (free left 0-4-4) (at ball4 rooma 5-0-19) (at-robby rooma 6-0-22)
+    add: (carry ball4 left 0-3-3) (none-of-those 5-2-21)
+    del: (free left 0-4-4) (at ball4 rooma 5-0-19)
+  (pick ball4 rooma right), cost: 1
+    pre: (free right 1-4-9) (at ball4 rooma 5-0-19) (at-robby rooma 6-0-22)
+    add: (carry ball4 right 1-3-8) (none-of-those 5-2-21)
+    del: (free right 1-4-9) (at ball4 rooma 5-0-19)
+  (pick ball4 roomb left), cost: 1
+    pre: (free left 0-4-4) (at ball4 roomb 5-1-20) (at-robby roomb 6-1-23)
+    add: (carry ball4 left 0-3-3) (none-of-those 5-2-21)
+    del: (free left 0-4-4) (at ball4 roomb 5-1-20)
+  (pick ball4 roomb right), cost: 1
+    pre: (free right 1-4-9) (at ball4 roomb 5-1-20) (at-robby roomb 6-1-23)
+    add: (carry ball4 right 1-3-8) (none-of-those 5-2-21)
+    del: (free right 1-4-9) (at ball4 roomb 5-1-20)
+Init State: (free left 0-4-4) (free right 1-4-9) (at ball1 rooma 2-0-10) (at ball2 rooma 3-0-13) (at ball3 rooma 4-0-16) (at ball4 rooma 5-0-19) (at-robby rooma 6-0-22)
+Goal: (at ball1 roomb 2-1-11) (at ball2 roomb 3-1-14) (at ball3 roomb 4-1-17) (at ball4 roomb 5-1-20)
+Value: 8

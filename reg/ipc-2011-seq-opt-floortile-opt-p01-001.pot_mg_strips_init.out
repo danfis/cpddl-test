@@ -1,0 +1,594 @@
+Fact[61]:
+  (robot-at robot1 tile_0-1 0-0-0)
+  (robot-at robot1 tile_0-2 0-1-1)
+  (robot-at robot1 tile_0-3 0-2-2)
+  (robot-at robot1 tile_1-1 0-3-3)
+  (robot-at robot1 tile_1-2 0-4-4)
+  (robot-at robot1 tile_1-3 0-5-5)
+  (robot-at robot1 tile_2-1 0-6-6)
+  (robot-at robot1 tile_2-2 0-7-7)
+  (robot-at robot1 tile_2-3 0-8-8)
+  (robot-at robot1 tile_3-1 0-9-9)
+  (robot-at robot1 tile_3-2 0-10-10)
+  (robot-at robot1 tile_3-3 0-11-11)
+  (robot-at robot2 tile_0-1 1-0-12)
+  (robot-at robot2 tile_0-2 1-1-13)
+  (robot-at robot2 tile_0-3 1-2-14)
+  (robot-at robot2 tile_1-1 1-3-15)
+  (robot-at robot2 tile_1-2 1-4-16)
+  (robot-at robot2 tile_1-3 1-5-17)
+  (robot-at robot2 tile_2-1 1-6-18)
+  (robot-at robot2 tile_2-2 1-7-19)
+  (robot-at robot2 tile_2-3 1-8-20)
+  (robot-at robot2 tile_3-1 1-9-21)
+  (robot-at robot2 tile_3-2 1-10-22)
+  (robot-at robot2 tile_3-3 1-11-23)
+  (clear tile_1-1 2-0-24)
+  (painted tile_1-1 white 2-1-25)
+  (none-of-those 2-2-26)
+  (clear tile_1-2 3-0-27)
+  (painted tile_1-2 black 3-1-28)
+  (none-of-those 3-2-29)
+  (clear tile_1-3 4-0-30)
+  (painted tile_1-3 white 4-1-31)
+  (none-of-those 4-2-32)
+  (clear tile_2-1 5-0-33)
+  (painted tile_2-1 black 5-1-34)
+  (none-of-those 5-2-35)
+  (clear tile_2-2 6-0-36)
+  (painted tile_2-2 white 6-1-37)
+  (none-of-those 6-2-38)
+  (clear tile_2-3 7-0-39)
+  (painted tile_2-3 black 7-1-40)
+  (none-of-those 7-2-41)
+  (clear tile_3-1 8-0-42)
+  (painted tile_3-1 white 8-1-43)
+  (none-of-those 8-2-44)
+  (clear tile_3-2 9-0-45)
+  (painted tile_3-2 black 9-1-46)
+  (none-of-those 9-2-47)
+  (clear tile_3-3 10-0-48)
+  (painted tile_3-3 white 10-1-49)
+  (none-of-those 10-2-50)
+  (robot-has robot1 black 11-0-51)
+  (robot-has robot1 white 11-1-52)
+  (robot-has robot2 black 12-0-53)
+  (robot-has robot2 white 12-1-54)
+  (clear tile_0-1 13-0-55)
+  (none-of-those 13-1-56)
+  (clear tile_0-2 14-0-57)
+  (none-of-those 14-1-58)
+  (clear tile_0-3 15-0-59)
+  (none-of-those 15-1-60)
+Op[132]:
+  (change-color robot1 black white), cost: 5
+    pre: (robot-has robot1 black 11-0-51)
+    add: (robot-has robot1 white 11-1-52)
+    del: (robot-has robot1 black 11-0-51)
+  (change-color robot1 white black), cost: 5
+    pre: (robot-has robot1 white 11-1-52)
+    add: (robot-has robot1 black 11-0-51)
+    del: (robot-has robot1 white 11-1-52)
+  (change-color robot2 black white), cost: 5
+    pre: (robot-has robot2 black 12-0-53)
+    add: (robot-has robot2 white 12-1-54)
+    del: (robot-has robot2 black 12-0-53)
+  (change-color robot2 white black), cost: 5
+    pre: (robot-has robot2 white 12-1-54)
+    add: (robot-has robot2 black 12-0-53)
+    del: (robot-has robot2 white 12-1-54)
+  (down robot1 tile_1-1 tile_0-1), cost: 1
+    pre: (robot-at robot1 tile_1-1 0-3-3) (clear tile_0-1 13-0-55)
+    add: (robot-at robot1 tile_0-1 0-0-0) (clear tile_1-1 2-0-24) (none-of-those 13-1-56)
+    del: (robot-at robot1 tile_1-1 0-3-3) (painted tile_1-1 white 2-1-25) (none-of-those 2-2-26) (clear tile_0-1 13-0-55)
+  (down robot1 tile_1-2 tile_0-2), cost: 1
+    pre: (robot-at robot1 tile_1-2 0-4-4) (clear tile_0-2 14-0-57)
+    add: (robot-at robot1 tile_0-2 0-1-1) (clear tile_1-2 3-0-27) (none-of-those 14-1-58)
+    del: (robot-at robot1 tile_1-2 0-4-4) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29) (clear tile_0-2 14-0-57)
+  (down robot1 tile_1-3 tile_0-3), cost: 1
+    pre: (robot-at robot1 tile_1-3 0-5-5) (clear tile_0-3 15-0-59)
+    add: (robot-at robot1 tile_0-3 0-2-2) (clear tile_1-3 4-0-30) (none-of-those 15-1-60)
+    del: (robot-at robot1 tile_1-3 0-5-5) (painted tile_1-3 white 4-1-31) (none-of-those 4-2-32) (clear tile_0-3 15-0-59)
+  (down robot1 tile_2-1 tile_1-1), cost: 1
+    pre: (robot-at robot1 tile_2-1 0-6-6) (clear tile_1-1 2-0-24)
+    add: (robot-at robot1 tile_1-1 0-3-3) (none-of-those 2-2-26) (clear tile_2-1 5-0-33)
+    del: (robot-at robot1 tile_2-1 0-6-6) (clear tile_1-1 2-0-24) (painted tile_2-1 black 5-1-34) (none-of-those 5-2-35)
+  (down robot1 tile_2-2 tile_1-2), cost: 1
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_1-2 3-0-27)
+    add: (robot-at robot1 tile_1-2 0-4-4) (none-of-those 3-2-29) (clear tile_2-2 6-0-36)
+    del: (robot-at robot1 tile_2-2 0-7-7) (clear tile_1-2 3-0-27) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38)
+  (down robot1 tile_2-3 tile_1-3), cost: 1
+    pre: (robot-at robot1 tile_2-3 0-8-8) (clear tile_1-3 4-0-30)
+    add: (robot-at robot1 tile_1-3 0-5-5) (none-of-those 4-2-32) (clear tile_2-3 7-0-39)
+    del: (robot-at robot1 tile_2-3 0-8-8) (clear tile_1-3 4-0-30) (painted tile_2-3 black 7-1-40) (none-of-those 7-2-41)
+  (down robot1 tile_3-1 tile_2-1), cost: 1
+    pre: (robot-at robot1 tile_3-1 0-9-9) (clear tile_2-1 5-0-33)
+    add: (robot-at robot1 tile_2-1 0-6-6) (none-of-those 5-2-35) (clear tile_3-1 8-0-42)
+    del: (robot-at robot1 tile_3-1 0-9-9) (clear tile_2-1 5-0-33) (painted tile_3-1 white 8-1-43) (none-of-those 8-2-44)
+  (down robot1 tile_3-2 tile_2-2), cost: 1
+    pre: (robot-at robot1 tile_3-2 0-10-10) (clear tile_2-2 6-0-36)
+    add: (robot-at robot1 tile_2-2 0-7-7) (none-of-those 6-2-38) (clear tile_3-2 9-0-45)
+    del: (robot-at robot1 tile_3-2 0-10-10) (clear tile_2-2 6-0-36) (painted tile_3-2 black 9-1-46) (none-of-those 9-2-47)
+  (down robot1 tile_3-3 tile_2-3), cost: 1
+    pre: (robot-at robot1 tile_3-3 0-11-11) (clear tile_2-3 7-0-39)
+    add: (robot-at robot1 tile_2-3 0-8-8) (none-of-those 7-2-41) (clear tile_3-3 10-0-48)
+    del: (robot-at robot1 tile_3-3 0-11-11) (clear tile_2-3 7-0-39) (painted tile_3-3 white 10-1-49) (none-of-those 10-2-50)
+  (down robot2 tile_1-1 tile_0-1), cost: 1
+    pre: (robot-at robot2 tile_1-1 1-3-15) (clear tile_0-1 13-0-55)
+    add: (robot-at robot2 tile_0-1 1-0-12) (clear tile_1-1 2-0-24) (none-of-those 13-1-56)
+    del: (robot-at robot2 tile_1-1 1-3-15) (painted tile_1-1 white 2-1-25) (none-of-those 2-2-26) (clear tile_0-1 13-0-55)
+  (down robot2 tile_1-2 tile_0-2), cost: 1
+    pre: (robot-at robot2 tile_1-2 1-4-16) (clear tile_0-2 14-0-57)
+    add: (robot-at robot2 tile_0-2 1-1-13) (clear tile_1-2 3-0-27) (none-of-those 14-1-58)
+    del: (robot-at robot2 tile_1-2 1-4-16) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29) (clear tile_0-2 14-0-57)
+  (down robot2 tile_1-3 tile_0-3), cost: 1
+    pre: (robot-at robot2 tile_1-3 1-5-17) (clear tile_0-3 15-0-59)
+    add: (robot-at robot2 tile_0-3 1-2-14) (clear tile_1-3 4-0-30) (none-of-those 15-1-60)
+    del: (robot-at robot2 tile_1-3 1-5-17) (painted tile_1-3 white 4-1-31) (none-of-those 4-2-32) (clear tile_0-3 15-0-59)
+  (down robot2 tile_2-1 tile_1-1), cost: 1
+    pre: (robot-at robot2 tile_2-1 1-6-18) (clear tile_1-1 2-0-24)
+    add: (robot-at robot2 tile_1-1 1-3-15) (none-of-those 2-2-26) (clear tile_2-1 5-0-33)
+    del: (robot-at robot2 tile_2-1 1-6-18) (clear tile_1-1 2-0-24) (painted tile_2-1 black 5-1-34) (none-of-those 5-2-35)
+  (down robot2 tile_2-2 tile_1-2), cost: 1
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_1-2 3-0-27)
+    add: (robot-at robot2 tile_1-2 1-4-16) (none-of-those 3-2-29) (clear tile_2-2 6-0-36)
+    del: (robot-at robot2 tile_2-2 1-7-19) (clear tile_1-2 3-0-27) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38)
+  (down robot2 tile_2-3 tile_1-3), cost: 1
+    pre: (robot-at robot2 tile_2-3 1-8-20) (clear tile_1-3 4-0-30)
+    add: (robot-at robot2 tile_1-3 1-5-17) (none-of-those 4-2-32) (clear tile_2-3 7-0-39)
+    del: (robot-at robot2 tile_2-3 1-8-20) (clear tile_1-3 4-0-30) (painted tile_2-3 black 7-1-40) (none-of-those 7-2-41)
+  (down robot2 tile_3-1 tile_2-1), cost: 1
+    pre: (robot-at robot2 tile_3-1 1-9-21) (clear tile_2-1 5-0-33)
+    add: (robot-at robot2 tile_2-1 1-6-18) (none-of-those 5-2-35) (clear tile_3-1 8-0-42)
+    del: (robot-at robot2 tile_3-1 1-9-21) (clear tile_2-1 5-0-33) (painted tile_3-1 white 8-1-43) (none-of-those 8-2-44)
+  (down robot2 tile_3-2 tile_2-2), cost: 1
+    pre: (robot-at robot2 tile_3-2 1-10-22) (clear tile_2-2 6-0-36)
+    add: (robot-at robot2 tile_2-2 1-7-19) (none-of-those 6-2-38) (clear tile_3-2 9-0-45)
+    del: (robot-at robot2 tile_3-2 1-10-22) (clear tile_2-2 6-0-36) (painted tile_3-2 black 9-1-46) (none-of-those 9-2-47)
+  (down robot2 tile_3-3 tile_2-3), cost: 1
+    pre: (robot-at robot2 tile_3-3 1-11-23) (clear tile_2-3 7-0-39)
+    add: (robot-at robot2 tile_2-3 1-8-20) (none-of-those 7-2-41) (clear tile_3-3 10-0-48)
+    del: (robot-at robot2 tile_3-3 1-11-23) (clear tile_2-3 7-0-39) (painted tile_3-3 white 10-1-49) (none-of-those 10-2-50)
+  (left robot1 tile_0-2 tile_0-1), cost: 1
+    pre: (robot-at robot1 tile_0-2 0-1-1) (clear tile_0-1 13-0-55)
+    add: (robot-at robot1 tile_0-1 0-0-0) (none-of-those 13-1-56) (clear tile_0-2 14-0-57)
+    del: (robot-at robot1 tile_0-2 0-1-1) (clear tile_0-1 13-0-55) (none-of-those 14-1-58)
+  (left robot1 tile_0-3 tile_0-2), cost: 1
+    pre: (robot-at robot1 tile_0-3 0-2-2) (clear tile_0-2 14-0-57)
+    add: (robot-at robot1 tile_0-2 0-1-1) (none-of-those 14-1-58) (clear tile_0-3 15-0-59)
+    del: (robot-at robot1 tile_0-3 0-2-2) (clear tile_0-2 14-0-57) (none-of-those 15-1-60)
+  (left robot1 tile_1-2 tile_1-1), cost: 1
+    pre: (robot-at robot1 tile_1-2 0-4-4) (clear tile_1-1 2-0-24)
+    add: (robot-at robot1 tile_1-1 0-3-3) (none-of-those 2-2-26) (clear tile_1-2 3-0-27)
+    del: (robot-at robot1 tile_1-2 0-4-4) (clear tile_1-1 2-0-24) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29)
+  (left robot1 tile_1-3 tile_1-2), cost: 1
+    pre: (robot-at robot1 tile_1-3 0-5-5) (clear tile_1-2 3-0-27)
+    add: (robot-at robot1 tile_1-2 0-4-4) (none-of-those 3-2-29) (clear tile_1-3 4-0-30)
+    del: (robot-at robot1 tile_1-3 0-5-5) (clear tile_1-2 3-0-27) (painted tile_1-3 white 4-1-31) (none-of-those 4-2-32)
+  (left robot1 tile_2-2 tile_2-1), cost: 1
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_2-1 5-0-33)
+    add: (robot-at robot1 tile_2-1 0-6-6) (none-of-those 5-2-35) (clear tile_2-2 6-0-36)
+    del: (robot-at robot1 tile_2-2 0-7-7) (clear tile_2-1 5-0-33) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38)
+  (left robot1 tile_2-3 tile_2-2), cost: 1
+    pre: (robot-at robot1 tile_2-3 0-8-8) (clear tile_2-2 6-0-36)
+    add: (robot-at robot1 tile_2-2 0-7-7) (none-of-those 6-2-38) (clear tile_2-3 7-0-39)
+    del: (robot-at robot1 tile_2-3 0-8-8) (clear tile_2-2 6-0-36) (painted tile_2-3 black 7-1-40) (none-of-those 7-2-41)
+  (left robot1 tile_3-2 tile_3-1), cost: 1
+    pre: (robot-at robot1 tile_3-2 0-10-10) (clear tile_3-1 8-0-42)
+    add: (robot-at robot1 tile_3-1 0-9-9) (none-of-those 8-2-44) (clear tile_3-2 9-0-45)
+    del: (robot-at robot1 tile_3-2 0-10-10) (clear tile_3-1 8-0-42) (painted tile_3-2 black 9-1-46) (none-of-those 9-2-47)
+  (left robot1 tile_3-3 tile_3-2), cost: 1
+    pre: (robot-at robot1 tile_3-3 0-11-11) (clear tile_3-2 9-0-45)
+    add: (robot-at robot1 tile_3-2 0-10-10) (none-of-those 9-2-47) (clear tile_3-3 10-0-48)
+    del: (robot-at robot1 tile_3-3 0-11-11) (clear tile_3-2 9-0-45) (painted tile_3-3 white 10-1-49) (none-of-those 10-2-50)
+  (left robot2 tile_0-2 tile_0-1), cost: 1
+    pre: (robot-at robot2 tile_0-2 1-1-13) (clear tile_0-1 13-0-55)
+    add: (robot-at robot2 tile_0-1 1-0-12) (none-of-those 13-1-56) (clear tile_0-2 14-0-57)
+    del: (robot-at robot2 tile_0-2 1-1-13) (clear tile_0-1 13-0-55) (none-of-those 14-1-58)
+  (left robot2 tile_0-3 tile_0-2), cost: 1
+    pre: (robot-at robot2 tile_0-3 1-2-14) (clear tile_0-2 14-0-57)
+    add: (robot-at robot2 tile_0-2 1-1-13) (none-of-those 14-1-58) (clear tile_0-3 15-0-59)
+    del: (robot-at robot2 tile_0-3 1-2-14) (clear tile_0-2 14-0-57) (none-of-those 15-1-60)
+  (left robot2 tile_1-2 tile_1-1), cost: 1
+    pre: (robot-at robot2 tile_1-2 1-4-16) (clear tile_1-1 2-0-24)
+    add: (robot-at robot2 tile_1-1 1-3-15) (none-of-those 2-2-26) (clear tile_1-2 3-0-27)
+    del: (robot-at robot2 tile_1-2 1-4-16) (clear tile_1-1 2-0-24) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29)
+  (left robot2 tile_1-3 tile_1-2), cost: 1
+    pre: (robot-at robot2 tile_1-3 1-5-17) (clear tile_1-2 3-0-27)
+    add: (robot-at robot2 tile_1-2 1-4-16) (none-of-those 3-2-29) (clear tile_1-3 4-0-30)
+    del: (robot-at robot2 tile_1-3 1-5-17) (clear tile_1-2 3-0-27) (painted tile_1-3 white 4-1-31) (none-of-those 4-2-32)
+  (left robot2 tile_2-2 tile_2-1), cost: 1
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_2-1 5-0-33)
+    add: (robot-at robot2 tile_2-1 1-6-18) (none-of-those 5-2-35) (clear tile_2-2 6-0-36)
+    del: (robot-at robot2 tile_2-2 1-7-19) (clear tile_2-1 5-0-33) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38)
+  (left robot2 tile_2-3 tile_2-2), cost: 1
+    pre: (robot-at robot2 tile_2-3 1-8-20) (clear tile_2-2 6-0-36)
+    add: (robot-at robot2 tile_2-2 1-7-19) (none-of-those 6-2-38) (clear tile_2-3 7-0-39)
+    del: (robot-at robot2 tile_2-3 1-8-20) (clear tile_2-2 6-0-36) (painted tile_2-3 black 7-1-40) (none-of-those 7-2-41)
+  (left robot2 tile_3-2 tile_3-1), cost: 1
+    pre: (robot-at robot2 tile_3-2 1-10-22) (clear tile_3-1 8-0-42)
+    add: (robot-at robot2 tile_3-1 1-9-21) (none-of-those 8-2-44) (clear tile_3-2 9-0-45)
+    del: (robot-at robot2 tile_3-2 1-10-22) (clear tile_3-1 8-0-42) (painted tile_3-2 black 9-1-46) (none-of-those 9-2-47)
+  (left robot2 tile_3-3 tile_3-2), cost: 1
+    pre: (robot-at robot2 tile_3-3 1-11-23) (clear tile_3-2 9-0-45)
+    add: (robot-at robot2 tile_3-2 1-10-22) (none-of-those 9-2-47) (clear tile_3-3 10-0-48)
+    del: (robot-at robot2 tile_3-3 1-11-23) (clear tile_3-2 9-0-45) (painted tile_3-3 white 10-1-49) (none-of-those 10-2-50)
+  (paint-down robot1 tile_0-1 tile_1-1 black), cost: 2
+    pre: (robot-at robot1 tile_1-1 0-3-3) (robot-has robot1 black 11-0-51) (clear tile_0-1 13-0-55)
+    add: (none-of-those 13-1-56)
+    del: (clear tile_0-1 13-0-55)
+  (paint-down robot1 tile_0-1 tile_1-1 white), cost: 2
+    pre: (robot-at robot1 tile_1-1 0-3-3) (robot-has robot1 white 11-1-52) (clear tile_0-1 13-0-55)
+    add: (none-of-those 13-1-56)
+    del: (clear tile_0-1 13-0-55)
+  (paint-down robot1 tile_0-2 tile_1-2 black), cost: 2
+    pre: (robot-at robot1 tile_1-2 0-4-4) (robot-has robot1 black 11-0-51) (clear tile_0-2 14-0-57)
+    add: (none-of-those 14-1-58)
+    del: (clear tile_0-2 14-0-57)
+  (paint-down robot1 tile_0-2 tile_1-2 white), cost: 2
+    pre: (robot-at robot1 tile_1-2 0-4-4) (robot-has robot1 white 11-1-52) (clear tile_0-2 14-0-57)
+    add: (none-of-those 14-1-58)
+    del: (clear tile_0-2 14-0-57)
+  (paint-down robot1 tile_0-3 tile_1-3 black), cost: 2
+    pre: (robot-at robot1 tile_1-3 0-5-5) (robot-has robot1 black 11-0-51) (clear tile_0-3 15-0-59)
+    add: (none-of-those 15-1-60)
+    del: (clear tile_0-3 15-0-59)
+  (paint-down robot1 tile_0-3 tile_1-3 white), cost: 2
+    pre: (robot-at robot1 tile_1-3 0-5-5) (robot-has robot1 white 11-1-52) (clear tile_0-3 15-0-59)
+    add: (none-of-those 15-1-60)
+    del: (clear tile_0-3 15-0-59)
+  (paint-down robot1 tile_1-1 tile_2-1 black), cost: 2
+    pre: (robot-at robot1 tile_2-1 0-6-6) (clear tile_1-1 2-0-24) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 2-2-26)
+    del: (clear tile_1-1 2-0-24)
+  (paint-down robot1 tile_1-2 tile_2-2 white), cost: 2
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_1-2 3-0-27) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 3-2-29)
+    del: (clear tile_1-2 3-0-27)
+  (paint-down robot1 tile_1-3 tile_2-3 black), cost: 2
+    pre: (robot-at robot1 tile_2-3 0-8-8) (clear tile_1-3 4-0-30) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 4-2-32)
+    del: (clear tile_1-3 4-0-30)
+  (paint-down robot1 tile_2-1 tile_3-1 white), cost: 2
+    pre: (robot-at robot1 tile_3-1 0-9-9) (clear tile_2-1 5-0-33) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 5-2-35)
+    del: (clear tile_2-1 5-0-33)
+  (paint-down robot1 tile_2-2 tile_3-2 black), cost: 2
+    pre: (robot-at robot1 tile_3-2 0-10-10) (clear tile_2-2 6-0-36) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 6-2-38)
+    del: (clear tile_2-2 6-0-36)
+  (paint-down robot1 tile_2-3 tile_3-3 white), cost: 2
+    pre: (robot-at robot1 tile_3-3 0-11-11) (clear tile_2-3 7-0-39) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 7-2-41)
+    del: (clear tile_2-3 7-0-39)
+  (paint-down robot2 tile_0-1 tile_1-1 black), cost: 2
+    pre: (robot-at robot2 tile_1-1 1-3-15) (robot-has robot2 black 12-0-53) (clear tile_0-1 13-0-55)
+    add: (none-of-those 13-1-56)
+    del: (clear tile_0-1 13-0-55)
+  (paint-down robot2 tile_0-1 tile_1-1 white), cost: 2
+    pre: (robot-at robot2 tile_1-1 1-3-15) (robot-has robot2 white 12-1-54) (clear tile_0-1 13-0-55)
+    add: (none-of-those 13-1-56)
+    del: (clear tile_0-1 13-0-55)
+  (paint-down robot2 tile_0-2 tile_1-2 black), cost: 2
+    pre: (robot-at robot2 tile_1-2 1-4-16) (robot-has robot2 black 12-0-53) (clear tile_0-2 14-0-57)
+    add: (none-of-those 14-1-58)
+    del: (clear tile_0-2 14-0-57)
+  (paint-down robot2 tile_0-2 tile_1-2 white), cost: 2
+    pre: (robot-at robot2 tile_1-2 1-4-16) (robot-has robot2 white 12-1-54) (clear tile_0-2 14-0-57)
+    add: (none-of-those 14-1-58)
+    del: (clear tile_0-2 14-0-57)
+  (paint-down robot2 tile_0-3 tile_1-3 black), cost: 2
+    pre: (robot-at robot2 tile_1-3 1-5-17) (robot-has robot2 black 12-0-53) (clear tile_0-3 15-0-59)
+    add: (none-of-those 15-1-60)
+    del: (clear tile_0-3 15-0-59)
+  (paint-down robot2 tile_0-3 tile_1-3 white), cost: 2
+    pre: (robot-at robot2 tile_1-3 1-5-17) (robot-has robot2 white 12-1-54) (clear tile_0-3 15-0-59)
+    add: (none-of-those 15-1-60)
+    del: (clear tile_0-3 15-0-59)
+  (paint-down robot2 tile_1-1 tile_2-1 black), cost: 2
+    pre: (robot-at robot2 tile_2-1 1-6-18) (clear tile_1-1 2-0-24) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 2-2-26)
+    del: (clear tile_1-1 2-0-24)
+  (paint-down robot2 tile_1-2 tile_2-2 white), cost: 2
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_1-2 3-0-27) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 3-2-29)
+    del: (clear tile_1-2 3-0-27)
+  (paint-down robot2 tile_1-3 tile_2-3 black), cost: 2
+    pre: (robot-at robot2 tile_2-3 1-8-20) (clear tile_1-3 4-0-30) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 4-2-32)
+    del: (clear tile_1-3 4-0-30)
+  (paint-down robot2 tile_2-1 tile_3-1 white), cost: 2
+    pre: (robot-at robot2 tile_3-1 1-9-21) (clear tile_2-1 5-0-33) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 5-2-35)
+    del: (clear tile_2-1 5-0-33)
+  (paint-down robot2 tile_2-2 tile_3-2 black), cost: 2
+    pre: (robot-at robot2 tile_3-2 1-10-22) (clear tile_2-2 6-0-36) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 6-2-38)
+    del: (clear tile_2-2 6-0-36)
+  (paint-down robot2 tile_2-3 tile_3-3 white), cost: 2
+    pre: (robot-at robot2 tile_3-3 1-11-23) (clear tile_2-3 7-0-39) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 7-2-41)
+    del: (clear tile_2-3 7-0-39)
+  (paint-up robot1 tile_1-1 tile_0-1 black), cost: 2
+    pre: (robot-at robot1 tile_0-1 0-0-0) (clear tile_1-1 2-0-24) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 2-2-26)
+    del: (clear tile_1-1 2-0-24)
+  (paint-up robot1 tile_1-1 tile_0-1 white), cost: 2
+    pre: (robot-at robot1 tile_0-1 0-0-0) (clear tile_1-1 2-0-24) (robot-has robot1 white 11-1-52)
+    add: (painted tile_1-1 white 2-1-25)
+    del: (clear tile_1-1 2-0-24)
+  (paint-up robot1 tile_1-2 tile_0-2 black), cost: 2
+    pre: (robot-at robot1 tile_0-2 0-1-1) (clear tile_1-2 3-0-27) (robot-has robot1 black 11-0-51)
+    add: (painted tile_1-2 black 3-1-28)
+    del: (clear tile_1-2 3-0-27)
+  (paint-up robot1 tile_1-2 tile_0-2 white), cost: 2
+    pre: (robot-at robot1 tile_0-2 0-1-1) (clear tile_1-2 3-0-27) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 3-2-29)
+    del: (clear tile_1-2 3-0-27)
+  (paint-up robot1 tile_1-3 tile_0-3 black), cost: 2
+    pre: (robot-at robot1 tile_0-3 0-2-2) (clear tile_1-3 4-0-30) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 4-2-32)
+    del: (clear tile_1-3 4-0-30)
+  (paint-up robot1 tile_1-3 tile_0-3 white), cost: 2
+    pre: (robot-at robot1 tile_0-3 0-2-2) (clear tile_1-3 4-0-30) (robot-has robot1 white 11-1-52)
+    add: (painted tile_1-3 white 4-1-31)
+    del: (clear tile_1-3 4-0-30)
+  (paint-up robot1 tile_2-1 tile_1-1 black), cost: 2
+    pre: (robot-at robot1 tile_1-1 0-3-3) (clear tile_2-1 5-0-33) (robot-has robot1 black 11-0-51)
+    add: (painted tile_2-1 black 5-1-34)
+    del: (clear tile_2-1 5-0-33)
+  (paint-up robot1 tile_2-1 tile_1-1 white), cost: 2
+    pre: (robot-at robot1 tile_1-1 0-3-3) (clear tile_2-1 5-0-33) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 5-2-35)
+    del: (clear tile_2-1 5-0-33)
+  (paint-up robot1 tile_2-2 tile_1-2 black), cost: 2
+    pre: (robot-at robot1 tile_1-2 0-4-4) (clear tile_2-2 6-0-36) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 6-2-38)
+    del: (clear tile_2-2 6-0-36)
+  (paint-up robot1 tile_2-2 tile_1-2 white), cost: 2
+    pre: (robot-at robot1 tile_1-2 0-4-4) (clear tile_2-2 6-0-36) (robot-has robot1 white 11-1-52)
+    add: (painted tile_2-2 white 6-1-37)
+    del: (clear tile_2-2 6-0-36)
+  (paint-up robot1 tile_2-3 tile_1-3 black), cost: 2
+    pre: (robot-at robot1 tile_1-3 0-5-5) (clear tile_2-3 7-0-39) (robot-has robot1 black 11-0-51)
+    add: (painted tile_2-3 black 7-1-40)
+    del: (clear tile_2-3 7-0-39)
+  (paint-up robot1 tile_2-3 tile_1-3 white), cost: 2
+    pre: (robot-at robot1 tile_1-3 0-5-5) (clear tile_2-3 7-0-39) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 7-2-41)
+    del: (clear tile_2-3 7-0-39)
+  (paint-up robot1 tile_3-1 tile_2-1 black), cost: 2
+    pre: (robot-at robot1 tile_2-1 0-6-6) (clear tile_3-1 8-0-42) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 8-2-44)
+    del: (clear tile_3-1 8-0-42)
+  (paint-up robot1 tile_3-1 tile_2-1 white), cost: 2
+    pre: (robot-at robot1 tile_2-1 0-6-6) (clear tile_3-1 8-0-42) (robot-has robot1 white 11-1-52)
+    add: (painted tile_3-1 white 8-1-43)
+    del: (clear tile_3-1 8-0-42)
+  (paint-up robot1 tile_3-2 tile_2-2 black), cost: 2
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_3-2 9-0-45) (robot-has robot1 black 11-0-51)
+    add: (painted tile_3-2 black 9-1-46)
+    del: (clear tile_3-2 9-0-45)
+  (paint-up robot1 tile_3-2 tile_2-2 white), cost: 2
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_3-2 9-0-45) (robot-has robot1 white 11-1-52)
+    add: (none-of-those 9-2-47)
+    del: (clear tile_3-2 9-0-45)
+  (paint-up robot1 tile_3-3 tile_2-3 black), cost: 2
+    pre: (robot-at robot1 tile_2-3 0-8-8) (clear tile_3-3 10-0-48) (robot-has robot1 black 11-0-51)
+    add: (none-of-those 10-2-50)
+    del: (clear tile_3-3 10-0-48)
+  (paint-up robot1 tile_3-3 tile_2-3 white), cost: 2
+    pre: (robot-at robot1 tile_2-3 0-8-8) (clear tile_3-3 10-0-48) (robot-has robot1 white 11-1-52)
+    add: (painted tile_3-3 white 10-1-49)
+    del: (clear tile_3-3 10-0-48)
+  (paint-up robot2 tile_1-1 tile_0-1 black), cost: 2
+    pre: (robot-at robot2 tile_0-1 1-0-12) (clear tile_1-1 2-0-24) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 2-2-26)
+    del: (clear tile_1-1 2-0-24)
+  (paint-up robot2 tile_1-1 tile_0-1 white), cost: 2
+    pre: (robot-at robot2 tile_0-1 1-0-12) (clear tile_1-1 2-0-24) (robot-has robot2 white 12-1-54)
+    add: (painted tile_1-1 white 2-1-25)
+    del: (clear tile_1-1 2-0-24)
+  (paint-up robot2 tile_1-2 tile_0-2 black), cost: 2
+    pre: (robot-at robot2 tile_0-2 1-1-13) (clear tile_1-2 3-0-27) (robot-has robot2 black 12-0-53)
+    add: (painted tile_1-2 black 3-1-28)
+    del: (clear tile_1-2 3-0-27)
+  (paint-up robot2 tile_1-2 tile_0-2 white), cost: 2
+    pre: (robot-at robot2 tile_0-2 1-1-13) (clear tile_1-2 3-0-27) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 3-2-29)
+    del: (clear tile_1-2 3-0-27)
+  (paint-up robot2 tile_1-3 tile_0-3 black), cost: 2
+    pre: (robot-at robot2 tile_0-3 1-2-14) (clear tile_1-3 4-0-30) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 4-2-32)
+    del: (clear tile_1-3 4-0-30)
+  (paint-up robot2 tile_1-3 tile_0-3 white), cost: 2
+    pre: (robot-at robot2 tile_0-3 1-2-14) (clear tile_1-3 4-0-30) (robot-has robot2 white 12-1-54)
+    add: (painted tile_1-3 white 4-1-31)
+    del: (clear tile_1-3 4-0-30)
+  (paint-up robot2 tile_2-1 tile_1-1 black), cost: 2
+    pre: (robot-at robot2 tile_1-1 1-3-15) (clear tile_2-1 5-0-33) (robot-has robot2 black 12-0-53)
+    add: (painted tile_2-1 black 5-1-34)
+    del: (clear tile_2-1 5-0-33)
+  (paint-up robot2 tile_2-1 tile_1-1 white), cost: 2
+    pre: (robot-at robot2 tile_1-1 1-3-15) (clear tile_2-1 5-0-33) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 5-2-35)
+    del: (clear tile_2-1 5-0-33)
+  (paint-up robot2 tile_2-2 tile_1-2 black), cost: 2
+    pre: (robot-at robot2 tile_1-2 1-4-16) (clear tile_2-2 6-0-36) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 6-2-38)
+    del: (clear tile_2-2 6-0-36)
+  (paint-up robot2 tile_2-2 tile_1-2 white), cost: 2
+    pre: (robot-at robot2 tile_1-2 1-4-16) (clear tile_2-2 6-0-36) (robot-has robot2 white 12-1-54)
+    add: (painted tile_2-2 white 6-1-37)
+    del: (clear tile_2-2 6-0-36)
+  (paint-up robot2 tile_2-3 tile_1-3 black), cost: 2
+    pre: (robot-at robot2 tile_1-3 1-5-17) (clear tile_2-3 7-0-39) (robot-has robot2 black 12-0-53)
+    add: (painted tile_2-3 black 7-1-40)
+    del: (clear tile_2-3 7-0-39)
+  (paint-up robot2 tile_2-3 tile_1-3 white), cost: 2
+    pre: (robot-at robot2 tile_1-3 1-5-17) (clear tile_2-3 7-0-39) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 7-2-41)
+    del: (clear tile_2-3 7-0-39)
+  (paint-up robot2 tile_3-1 tile_2-1 black), cost: 2
+    pre: (robot-at robot2 tile_2-1 1-6-18) (clear tile_3-1 8-0-42) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 8-2-44)
+    del: (clear tile_3-1 8-0-42)
+  (paint-up robot2 tile_3-1 tile_2-1 white), cost: 2
+    pre: (robot-at robot2 tile_2-1 1-6-18) (clear tile_3-1 8-0-42) (robot-has robot2 white 12-1-54)
+    add: (painted tile_3-1 white 8-1-43)
+    del: (clear tile_3-1 8-0-42)
+  (paint-up robot2 tile_3-2 tile_2-2 black), cost: 2
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_3-2 9-0-45) (robot-has robot2 black 12-0-53)
+    add: (painted tile_3-2 black 9-1-46)
+    del: (clear tile_3-2 9-0-45)
+  (paint-up robot2 tile_3-2 tile_2-2 white), cost: 2
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_3-2 9-0-45) (robot-has robot2 white 12-1-54)
+    add: (none-of-those 9-2-47)
+    del: (clear tile_3-2 9-0-45)
+  (paint-up robot2 tile_3-3 tile_2-3 black), cost: 2
+    pre: (robot-at robot2 tile_2-3 1-8-20) (clear tile_3-3 10-0-48) (robot-has robot2 black 12-0-53)
+    add: (none-of-those 10-2-50)
+    del: (clear tile_3-3 10-0-48)
+  (paint-up robot2 tile_3-3 tile_2-3 white), cost: 2
+    pre: (robot-at robot2 tile_2-3 1-8-20) (clear tile_3-3 10-0-48) (robot-has robot2 white 12-1-54)
+    add: (painted tile_3-3 white 10-1-49)
+    del: (clear tile_3-3 10-0-48)
+  (right robot1 tile_0-1 tile_0-2), cost: 1
+    pre: (robot-at robot1 tile_0-1 0-0-0) (clear tile_0-2 14-0-57)
+    add: (robot-at robot1 tile_0-2 0-1-1) (clear tile_0-1 13-0-55) (none-of-those 14-1-58)
+    del: (robot-at robot1 tile_0-1 0-0-0) (none-of-those 13-1-56) (clear tile_0-2 14-0-57)
+  (right robot1 tile_0-2 tile_0-3), cost: 1
+    pre: (robot-at robot1 tile_0-2 0-1-1) (clear tile_0-3 15-0-59)
+    add: (robot-at robot1 tile_0-3 0-2-2) (clear tile_0-2 14-0-57) (none-of-those 15-1-60)
+    del: (robot-at robot1 tile_0-2 0-1-1) (none-of-those 14-1-58) (clear tile_0-3 15-0-59)
+  (right robot1 tile_1-1 tile_1-2), cost: 1
+    pre: (robot-at robot1 tile_1-1 0-3-3) (clear tile_1-2 3-0-27)
+    add: (robot-at robot1 tile_1-2 0-4-4) (clear tile_1-1 2-0-24) (none-of-those 3-2-29)
+    del: (robot-at robot1 tile_1-1 0-3-3) (painted tile_1-1 white 2-1-25) (none-of-those 2-2-26) (clear tile_1-2 3-0-27)
+  (right robot1 tile_1-2 tile_1-3), cost: 1
+    pre: (robot-at robot1 tile_1-2 0-4-4) (clear tile_1-3 4-0-30)
+    add: (robot-at robot1 tile_1-3 0-5-5) (clear tile_1-2 3-0-27) (none-of-those 4-2-32)
+    del: (robot-at robot1 tile_1-2 0-4-4) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29) (clear tile_1-3 4-0-30)
+  (right robot1 tile_2-1 tile_2-2), cost: 1
+    pre: (robot-at robot1 tile_2-1 0-6-6) (clear tile_2-2 6-0-36)
+    add: (robot-at robot1 tile_2-2 0-7-7) (clear tile_2-1 5-0-33) (none-of-those 6-2-38)
+    del: (robot-at robot1 tile_2-1 0-6-6) (painted tile_2-1 black 5-1-34) (none-of-those 5-2-35) (clear tile_2-2 6-0-36)
+  (right robot1 tile_2-2 tile_2-3), cost: 1
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_2-3 7-0-39)
+    add: (robot-at robot1 tile_2-3 0-8-8) (clear tile_2-2 6-0-36) (none-of-those 7-2-41)
+    del: (robot-at robot1 tile_2-2 0-7-7) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38) (clear tile_2-3 7-0-39)
+  (right robot1 tile_3-1 tile_3-2), cost: 1
+    pre: (robot-at robot1 tile_3-1 0-9-9) (clear tile_3-2 9-0-45)
+    add: (robot-at robot1 tile_3-2 0-10-10) (clear tile_3-1 8-0-42) (none-of-those 9-2-47)
+    del: (robot-at robot1 tile_3-1 0-9-9) (painted tile_3-1 white 8-1-43) (none-of-those 8-2-44) (clear tile_3-2 9-0-45)
+  (right robot1 tile_3-2 tile_3-3), cost: 1
+    pre: (robot-at robot1 tile_3-2 0-10-10) (clear tile_3-3 10-0-48)
+    add: (robot-at robot1 tile_3-3 0-11-11) (clear tile_3-2 9-0-45) (none-of-those 10-2-50)
+    del: (robot-at robot1 tile_3-2 0-10-10) (painted tile_3-2 black 9-1-46) (none-of-those 9-2-47) (clear tile_3-3 10-0-48)
+  (right robot2 tile_0-1 tile_0-2), cost: 1
+    pre: (robot-at robot2 tile_0-1 1-0-12) (clear tile_0-2 14-0-57)
+    add: (robot-at robot2 tile_0-2 1-1-13) (clear tile_0-1 13-0-55) (none-of-those 14-1-58)
+    del: (robot-at robot2 tile_0-1 1-0-12) (none-of-those 13-1-56) (clear tile_0-2 14-0-57)
+  (right robot2 tile_0-2 tile_0-3), cost: 1
+    pre: (robot-at robot2 tile_0-2 1-1-13) (clear tile_0-3 15-0-59)
+    add: (robot-at robot2 tile_0-3 1-2-14) (clear tile_0-2 14-0-57) (none-of-those 15-1-60)
+    del: (robot-at robot2 tile_0-2 1-1-13) (none-of-those 14-1-58) (clear tile_0-3 15-0-59)
+  (right robot2 tile_1-1 tile_1-2), cost: 1
+    pre: (robot-at robot2 tile_1-1 1-3-15) (clear tile_1-2 3-0-27)
+    add: (robot-at robot2 tile_1-2 1-4-16) (clear tile_1-1 2-0-24) (none-of-those 3-2-29)
+    del: (robot-at robot2 tile_1-1 1-3-15) (painted tile_1-1 white 2-1-25) (none-of-those 2-2-26) (clear tile_1-2 3-0-27)
+  (right robot2 tile_1-2 tile_1-3), cost: 1
+    pre: (robot-at robot2 tile_1-2 1-4-16) (clear tile_1-3 4-0-30)
+    add: (robot-at robot2 tile_1-3 1-5-17) (clear tile_1-2 3-0-27) (none-of-those 4-2-32)
+    del: (robot-at robot2 tile_1-2 1-4-16) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29) (clear tile_1-3 4-0-30)
+  (right robot2 tile_2-1 tile_2-2), cost: 1
+    pre: (robot-at robot2 tile_2-1 1-6-18) (clear tile_2-2 6-0-36)
+    add: (robot-at robot2 tile_2-2 1-7-19) (clear tile_2-1 5-0-33) (none-of-those 6-2-38)
+    del: (robot-at robot2 tile_2-1 1-6-18) (painted tile_2-1 black 5-1-34) (none-of-those 5-2-35) (clear tile_2-2 6-0-36)
+  (right robot2 tile_2-2 tile_2-3), cost: 1
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_2-3 7-0-39)
+    add: (robot-at robot2 tile_2-3 1-8-20) (clear tile_2-2 6-0-36) (none-of-those 7-2-41)
+    del: (robot-at robot2 tile_2-2 1-7-19) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38) (clear tile_2-3 7-0-39)
+  (right robot2 tile_3-1 tile_3-2), cost: 1
+    pre: (robot-at robot2 tile_3-1 1-9-21) (clear tile_3-2 9-0-45)
+    add: (robot-at robot2 tile_3-2 1-10-22) (clear tile_3-1 8-0-42) (none-of-those 9-2-47)
+    del: (robot-at robot2 tile_3-1 1-9-21) (painted tile_3-1 white 8-1-43) (none-of-those 8-2-44) (clear tile_3-2 9-0-45)
+  (right robot2 tile_3-2 tile_3-3), cost: 1
+    pre: (robot-at robot2 tile_3-2 1-10-22) (clear tile_3-3 10-0-48)
+    add: (robot-at robot2 tile_3-3 1-11-23) (clear tile_3-2 9-0-45) (none-of-those 10-2-50)
+    del: (robot-at robot2 tile_3-2 1-10-22) (painted tile_3-2 black 9-1-46) (none-of-those 9-2-47) (clear tile_3-3 10-0-48)
+  (up robot1 tile_0-1 tile_1-1), cost: 3
+    pre: (robot-at robot1 tile_0-1 0-0-0) (clear tile_1-1 2-0-24)
+    add: (robot-at robot1 tile_1-1 0-3-3) (none-of-those 2-2-26) (clear tile_0-1 13-0-55)
+    del: (robot-at robot1 tile_0-1 0-0-0) (clear tile_1-1 2-0-24) (none-of-those 13-1-56)
+  (up robot1 tile_0-2 tile_1-2), cost: 3
+    pre: (robot-at robot1 tile_0-2 0-1-1) (clear tile_1-2 3-0-27)
+    add: (robot-at robot1 tile_1-2 0-4-4) (none-of-those 3-2-29) (clear tile_0-2 14-0-57)
+    del: (robot-at robot1 tile_0-2 0-1-1) (clear tile_1-2 3-0-27) (none-of-those 14-1-58)
+  (up robot1 tile_0-3 tile_1-3), cost: 3
+    pre: (robot-at robot1 tile_0-3 0-2-2) (clear tile_1-3 4-0-30)
+    add: (robot-at robot1 tile_1-3 0-5-5) (none-of-those 4-2-32) (clear tile_0-3 15-0-59)
+    del: (robot-at robot1 tile_0-3 0-2-2) (clear tile_1-3 4-0-30) (none-of-those 15-1-60)
+  (up robot1 tile_1-1 tile_2-1), cost: 3
+    pre: (robot-at robot1 tile_1-1 0-3-3) (clear tile_2-1 5-0-33)
+    add: (robot-at robot1 tile_2-1 0-6-6) (clear tile_1-1 2-0-24) (none-of-those 5-2-35)
+    del: (robot-at robot1 tile_1-1 0-3-3) (painted tile_1-1 white 2-1-25) (none-of-those 2-2-26) (clear tile_2-1 5-0-33)
+  (up robot1 tile_1-2 tile_2-2), cost: 3
+    pre: (robot-at robot1 tile_1-2 0-4-4) (clear tile_2-2 6-0-36)
+    add: (robot-at robot1 tile_2-2 0-7-7) (clear tile_1-2 3-0-27) (none-of-those 6-2-38)
+    del: (robot-at robot1 tile_1-2 0-4-4) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29) (clear tile_2-2 6-0-36)
+  (up robot1 tile_1-3 tile_2-3), cost: 3
+    pre: (robot-at robot1 tile_1-3 0-5-5) (clear tile_2-3 7-0-39)
+    add: (robot-at robot1 tile_2-3 0-8-8) (clear tile_1-3 4-0-30) (none-of-those 7-2-41)
+    del: (robot-at robot1 tile_1-3 0-5-5) (painted tile_1-3 white 4-1-31) (none-of-those 4-2-32) (clear tile_2-3 7-0-39)
+  (up robot1 tile_2-1 tile_3-1), cost: 3
+    pre: (robot-at robot1 tile_2-1 0-6-6) (clear tile_3-1 8-0-42)
+    add: (robot-at robot1 tile_3-1 0-9-9) (clear tile_2-1 5-0-33) (none-of-those 8-2-44)
+    del: (robot-at robot1 tile_2-1 0-6-6) (painted tile_2-1 black 5-1-34) (none-of-those 5-2-35) (clear tile_3-1 8-0-42)
+  (up robot1 tile_2-2 tile_3-2), cost: 3
+    pre: (robot-at robot1 tile_2-2 0-7-7) (clear tile_3-2 9-0-45)
+    add: (robot-at robot1 tile_3-2 0-10-10) (clear tile_2-2 6-0-36) (none-of-those 9-2-47)
+    del: (robot-at robot1 tile_2-2 0-7-7) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38) (clear tile_3-2 9-0-45)
+  (up robot1 tile_2-3 tile_3-3), cost: 3
+    pre: (robot-at robot1 tile_2-3 0-8-8) (clear tile_3-3 10-0-48)
+    add: (robot-at robot1 tile_3-3 0-11-11) (clear tile_2-3 7-0-39) (none-of-those 10-2-50)
+    del: (robot-at robot1 tile_2-3 0-8-8) (painted tile_2-3 black 7-1-40) (none-of-those 7-2-41) (clear tile_3-3 10-0-48)
+  (up robot2 tile_0-1 tile_1-1), cost: 3
+    pre: (robot-at robot2 tile_0-1 1-0-12) (clear tile_1-1 2-0-24)
+    add: (robot-at robot2 tile_1-1 1-3-15) (none-of-those 2-2-26) (clear tile_0-1 13-0-55)
+    del: (robot-at robot2 tile_0-1 1-0-12) (clear tile_1-1 2-0-24) (none-of-those 13-1-56)
+  (up robot2 tile_0-2 tile_1-2), cost: 3
+    pre: (robot-at robot2 tile_0-2 1-1-13) (clear tile_1-2 3-0-27)
+    add: (robot-at robot2 tile_1-2 1-4-16) (none-of-those 3-2-29) (clear tile_0-2 14-0-57)
+    del: (robot-at robot2 tile_0-2 1-1-13) (clear tile_1-2 3-0-27) (none-of-those 14-1-58)
+  (up robot2 tile_0-3 tile_1-3), cost: 3
+    pre: (robot-at robot2 tile_0-3 1-2-14) (clear tile_1-3 4-0-30)
+    add: (robot-at robot2 tile_1-3 1-5-17) (none-of-those 4-2-32) (clear tile_0-3 15-0-59)
+    del: (robot-at robot2 tile_0-3 1-2-14) (clear tile_1-3 4-0-30) (none-of-those 15-1-60)
+  (up robot2 tile_1-1 tile_2-1), cost: 3
+    pre: (robot-at robot2 tile_1-1 1-3-15) (clear tile_2-1 5-0-33)
+    add: (robot-at robot2 tile_2-1 1-6-18) (clear tile_1-1 2-0-24) (none-of-those 5-2-35)
+    del: (robot-at robot2 tile_1-1 1-3-15) (painted tile_1-1 white 2-1-25) (none-of-those 2-2-26) (clear tile_2-1 5-0-33)
+  (up robot2 tile_1-2 tile_2-2), cost: 3
+    pre: (robot-at robot2 tile_1-2 1-4-16) (clear tile_2-2 6-0-36)
+    add: (robot-at robot2 tile_2-2 1-7-19) (clear tile_1-2 3-0-27) (none-of-those 6-2-38)
+    del: (robot-at robot2 tile_1-2 1-4-16) (painted tile_1-2 black 3-1-28) (none-of-those 3-2-29) (clear tile_2-2 6-0-36)
+  (up robot2 tile_1-3 tile_2-3), cost: 3
+    pre: (robot-at robot2 tile_1-3 1-5-17) (clear tile_2-3 7-0-39)
+    add: (robot-at robot2 tile_2-3 1-8-20) (clear tile_1-3 4-0-30) (none-of-those 7-2-41)
+    del: (robot-at robot2 tile_1-3 1-5-17) (painted tile_1-3 white 4-1-31) (none-of-those 4-2-32) (clear tile_2-3 7-0-39)
+  (up robot2 tile_2-1 tile_3-1), cost: 3
+    pre: (robot-at robot2 tile_2-1 1-6-18) (clear tile_3-1 8-0-42)
+    add: (robot-at robot2 tile_3-1 1-9-21) (clear tile_2-1 5-0-33) (none-of-those 8-2-44)
+    del: (robot-at robot2 tile_2-1 1-6-18) (painted tile_2-1 black 5-1-34) (none-of-those 5-2-35) (clear tile_3-1 8-0-42)
+  (up robot2 tile_2-2 tile_3-2), cost: 3
+    pre: (robot-at robot2 tile_2-2 1-7-19) (clear tile_3-2 9-0-45)
+    add: (robot-at robot2 tile_3-2 1-10-22) (clear tile_2-2 6-0-36) (none-of-those 9-2-47)
+    del: (robot-at robot2 tile_2-2 1-7-19) (painted tile_2-2 white 6-1-37) (none-of-those 6-2-38) (clear tile_3-2 9-0-45)
+  (up robot2 tile_2-3 tile_3-3), cost: 3
+    pre: (robot-at robot2 tile_2-3 1-8-20) (clear tile_3-3 10-0-48)
+    add: (robot-at robot2 tile_3-3 1-11-23) (clear tile_2-3 7-0-39) (none-of-those 10-2-50)
+    del: (robot-at robot2 tile_2-3 1-8-20) (painted tile_2-3 black 7-1-40) (none-of-those 7-2-41) (clear tile_3-3 10-0-48)
+Init State: (robot-at robot1 tile_0-1 0-0-0) (robot-at robot2 tile_2-2 1-7-19) (clear tile_1-1 2-0-24) (clear tile_1-2 3-0-27) (clear tile_1-3 4-0-30) (clear tile_2-1 5-0-33) (none-of-those 6-2-38) (clear tile_2-3 7-0-39) (clear tile_3-1 8-0-42) (clear tile_3-2 9-0-45) (clear tile_3-3 10-0-48) (robot-has robot1 white 11-1-52) (robot-has robot2 black 12-0-53) (none-of-those 13-1-56) (clear tile_0-2 14-0-57) (clear tile_0-3 15-0-59)
+Goal: (painted tile_1-1 white 2-1-25) (painted tile_1-2 black 3-1-28) (painted tile_1-3 white 4-1-31) (painted tile_2-1 black 5-1-34) (painted tile_2-2 white 6-1-37) (painted tile_2-3 black 7-1-40) (painted tile_3-1 white 8-1-43) (painted tile_3-2 black 9-1-46) (painted tile_3-3 white 10-1-49)
+Value: 20

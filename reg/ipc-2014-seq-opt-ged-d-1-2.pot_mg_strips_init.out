@@ -1,0 +1,619 @@
+Fact[62]:
+  (cut-point-1 sub1 0-0-0)
+  (cut-point-1 sub2 0-1-1)
+  (cut-point-1 sub3 0-2-2)
+  (finished 0-3-3)
+  (have-cut 0-4-4)
+  (idle 0-5-5)
+  (inverse-splice-next sub1 0-6-6)
+  (inverse-splice-next sub2 0-7-7)
+  (inverse-splice-next sub3 0-8-8)
+  (inverse-splicing 0-9-9)
+  (inverse-splicing-last 0-10-10)
+  (splice-next sub1 0-11-11)
+  (splice-next sub2 0-12-12)
+  (splice-next sub3 0-13-13)
+  (splicing 0-14-14)
+  (splicing-last 0-15-15)
+  (cut-point-2 sub1 1-0-16)
+  (cw sub1 sub1 1-1-17)
+  (cw sub2 sub1 1-2-18)
+  (cw sub3 sub1 1-3-19)
+  (s-first sub1 1-4-20)
+  (s-next sub2 sub1 1-5-21)
+  (s-next sub3 sub1 1-6-22)
+  (splice-point-2 sub1 1-7-23)
+  (none-of-those 1-8-24)
+  (cut-point-2 sub2 2-0-25)
+  (cw sub1 sub2 2-1-26)
+  (cw sub2 sub2 2-2-27)
+  (cw sub3 sub2 2-3-28)
+  (s-first sub2 2-4-29)
+  (s-next sub1 sub2 2-5-30)
+  (s-next sub3 sub2 2-6-31)
+  (splice-point-2 sub2 2-7-32)
+  (none-of-those 2-8-33)
+  (cut-point-2 sub3 3-0-34)
+  (cw sub1 sub3 3-1-35)
+  (cw sub2 sub3 3-2-36)
+  (cw sub3 sub3 3-3-37)
+  (s-first sub3 3-4-38)
+  (s-next sub1 sub3 3-5-39)
+  (s-next sub2 sub3 3-6-40)
+  (splice-point-2 sub3 3-7-41)
+  (none-of-those 3-8-42)
+  (cutting 4-0-43)
+  (splice-point-1 sub1 4-1-44)
+  (splice-point-1 sub2 4-2-45)
+  (splice-point-1 sub3 4-3-46)
+  (none-of-those 4-4-47)
+  (last-cut-point sub1 5-0-48)
+  (last-cut-point sub2 5-1-49)
+  (last-cut-point sub3 5-2-50)
+  (none-of-those 5-3-51)
+  (s-last sub1 6-0-52)
+  (s-last sub2 6-1-53)
+  (s-last sub3 6-2-54)
+  (none-of-those 6-3-55)
+  (inverted sub1 7-0-56)
+  (normal sub1 7-1-57)
+  (inverted sub2 8-0-58)
+  (normal sub2 8-1-59)
+  (inverted sub3 9-0-60)
+  (normal sub3 9-1-61)
+Op[138]:
+  (begin-cut sub1 sub2), cost: 0
+    pre: (idle 0-5-5) (cw sub1 sub2 2-1-26)
+    add: (cut-point-1 sub1 0-0-0) (s-first sub2 2-4-29) (cutting 4-0-43) (last-cut-point sub1 5-0-48) (s-last sub2 6-1-53)
+    del: (idle 0-5-5) (cw sub1 sub2 2-1-26) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47) (last-cut-point sub2 5-1-49) (last-cut-point sub3 5-2-50) (none-of-those 5-3-51) (s-last sub1 6-0-52) (s-last sub3 6-2-54) (none-of-those 6-3-55)
+  (begin-cut sub1 sub3), cost: 0
+    pre: (idle 0-5-5) (cw sub1 sub3 3-1-35)
+    add: (cut-point-1 sub1 0-0-0) (s-first sub3 3-4-38) (cutting 4-0-43) (last-cut-point sub1 5-0-48) (s-last sub3 6-2-54)
+    del: (idle 0-5-5) (cw sub1 sub3 3-1-35) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47) (last-cut-point sub2 5-1-49) (last-cut-point sub3 5-2-50) (none-of-those 5-3-51) (s-last sub1 6-0-52) (s-last sub2 6-1-53) (none-of-those 6-3-55)
+  (begin-cut sub2 sub1), cost: 0
+    pre: (idle 0-5-5) (cw sub2 sub1 1-2-18)
+    add: (cut-point-1 sub2 0-1-1) (s-first sub1 1-4-20) (cutting 4-0-43) (last-cut-point sub2 5-1-49) (s-last sub1 6-0-52)
+    del: (idle 0-5-5) (cw sub2 sub1 1-2-18) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47) (last-cut-point sub1 5-0-48) (last-cut-point sub3 5-2-50) (none-of-those 5-3-51) (s-last sub2 6-1-53) (s-last sub3 6-2-54) (none-of-those 6-3-55)
+  (begin-cut sub2 sub3), cost: 0
+    pre: (idle 0-5-5) (cw sub2 sub3 3-2-36)
+    add: (cut-point-1 sub2 0-1-1) (s-first sub3 3-4-38) (cutting 4-0-43) (last-cut-point sub2 5-1-49) (s-last sub3 6-2-54)
+    del: (idle 0-5-5) (cw sub2 sub3 3-2-36) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47) (last-cut-point sub1 5-0-48) (last-cut-point sub3 5-2-50) (none-of-those 5-3-51) (s-last sub1 6-0-52) (s-last sub2 6-1-53) (none-of-those 6-3-55)
+  (begin-cut sub3 sub1), cost: 0
+    pre: (idle 0-5-5) (cw sub3 sub1 1-3-19)
+    add: (cut-point-1 sub3 0-2-2) (s-first sub1 1-4-20) (cutting 4-0-43) (last-cut-point sub3 5-2-50) (s-last sub1 6-0-52)
+    del: (idle 0-5-5) (cw sub3 sub1 1-3-19) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47) (last-cut-point sub1 5-0-48) (last-cut-point sub2 5-1-49) (none-of-those 5-3-51) (s-last sub2 6-1-53) (s-last sub3 6-2-54) (none-of-those 6-3-55)
+  (begin-cut sub3 sub2), cost: 0
+    pre: (idle 0-5-5) (cw sub3 sub2 2-3-28)
+    add: (cut-point-1 sub3 0-2-2) (s-first sub2 2-4-29) (cutting 4-0-43) (last-cut-point sub3 5-2-50) (s-last sub2 6-1-53)
+    del: (idle 0-5-5) (cw sub3 sub2 2-3-28) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47) (last-cut-point sub1 5-0-48) (last-cut-point sub2 5-1-49) (none-of-those 5-3-51) (s-last sub1 6-0-52) (s-last sub3 6-2-54) (none-of-those 6-3-55)
+  (begin-inverse-splice sub1 sub2), cost: 1
+    pre: (have-cut 0-4-4) (cw sub1 sub2 2-1-26) (last-cut-point sub1 5-0-48)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub2 2-1-26) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-inverse-splice sub1 sub3), cost: 1
+    pre: (have-cut 0-4-4) (cw sub1 sub3 3-1-35) (last-cut-point sub1 5-0-48)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub3 3-1-35) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-inverse-splice sub2 sub1), cost: 1
+    pre: (have-cut 0-4-4) (cw sub2 sub1 1-2-18) (last-cut-point sub2 5-1-49)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub1 1-2-18) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-inverse-splice sub2 sub3), cost: 1
+    pre: (have-cut 0-4-4) (cw sub2 sub3 3-2-36) (last-cut-point sub2 5-1-49)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub3 3-2-36) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-inverse-splice sub3 sub1), cost: 1
+    pre: (have-cut 0-4-4) (cw sub3 sub1 1-3-19) (last-cut-point sub3 5-2-50)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub1 1-3-19) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (begin-inverse-splice sub3 sub2), cost: 1
+    pre: (have-cut 0-4-4) (cw sub3 sub2 2-3-28) (last-cut-point sub3 5-2-50)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub2 2-3-28) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (begin-inverse-splice-special-case sub1), cost: 1
+    pre: (have-cut 0-4-4) (cw sub1 sub1 1-1-17) (last-cut-point sub1 5-0-48)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub1 1-7-23) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub1 1-1-17) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-inverse-splice-special-case sub2), cost: 1
+    pre: (have-cut 0-4-4) (cw sub2 sub2 2-2-27) (last-cut-point sub2 5-1-49)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub2 2-7-32) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub2 2-2-27) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-inverse-splice-special-case sub3), cost: 1
+    pre: (have-cut 0-4-4) (cw sub3 sub3 3-3-37) (last-cut-point sub3 5-2-50)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub3 3-7-41) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub3 3-3-37) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (begin-transpose-splice sub1 sub2), cost: 2
+    pre: (have-cut 0-4-4) (cw sub1 sub2 2-1-26)
+    add: (splicing 0-14-14) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub2 2-1-26) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transpose-splice sub1 sub3), cost: 2
+    pre: (have-cut 0-4-4) (cw sub1 sub3 3-1-35)
+    add: (splicing 0-14-14) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub3 3-1-35) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transpose-splice sub2 sub1), cost: 2
+    pre: (have-cut 0-4-4) (cw sub2 sub1 1-2-18)
+    add: (splicing 0-14-14) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub1 1-2-18) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transpose-splice sub2 sub3), cost: 2
+    pre: (have-cut 0-4-4) (cw sub2 sub3 3-2-36)
+    add: (splicing 0-14-14) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub3 3-2-36) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transpose-splice sub3 sub1), cost: 2
+    pre: (have-cut 0-4-4) (cw sub3 sub1 1-3-19)
+    add: (splicing 0-14-14) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub1 1-3-19) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (begin-transpose-splice sub3 sub2), cost: 2
+    pre: (have-cut 0-4-4) (cw sub3 sub2 2-3-28)
+    add: (splicing 0-14-14) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub2 2-3-28) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (begin-transverse-splice sub1 sub2), cost: 2
+    pre: (have-cut 0-4-4) (cw sub1 sub2 2-1-26)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub2 2-1-26) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transverse-splice sub1 sub3), cost: 2
+    pre: (have-cut 0-4-4) (cw sub1 sub3 3-1-35)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+    del: (have-cut 0-4-4) (cw sub1 sub3 3-1-35) (cutting 4-0-43) (splice-point-1 sub2 4-2-45) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transverse-splice sub2 sub1), cost: 2
+    pre: (have-cut 0-4-4) (cw sub2 sub1 1-2-18)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub1 1-2-18) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transverse-splice sub2 sub3), cost: 2
+    pre: (have-cut 0-4-4) (cw sub2 sub3 3-2-36)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+    del: (have-cut 0-4-4) (cw sub2 sub3 3-2-36) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub3 4-3-46) (none-of-those 4-4-47)
+  (begin-transverse-splice sub3 sub1), cost: 2
+    pre: (have-cut 0-4-4) (cw sub3 sub1 1-3-19)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub1 1-3-19) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (begin-transverse-splice sub3 sub2), cost: 2
+    pre: (have-cut 0-4-4) (cw sub3 sub2 2-3-28)
+    add: (inverse-splicing 0-9-9) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+    del: (have-cut 0-4-4) (cw sub3 sub2 2-3-28) (cutting 4-0-43) (splice-point-1 sub1 4-1-44) (splice-point-1 sub2 4-2-45) (none-of-those 4-4-47)
+  (continue-cut sub1 sub2), cost: 0
+    pre: (cw sub1 sub2 2-1-26) (cutting 4-0-43) (s-last sub1 6-0-52)
+    add: (s-next sub1 sub2 2-5-30) (s-last sub2 6-1-53)
+    del: (cw sub1 sub2 2-1-26) (s-last sub1 6-0-52)
+  (continue-cut sub1 sub3), cost: 0
+    pre: (cw sub1 sub3 3-1-35) (cutting 4-0-43) (s-last sub1 6-0-52)
+    add: (s-next sub1 sub3 3-5-39) (s-last sub3 6-2-54)
+    del: (cw sub1 sub3 3-1-35) (s-last sub1 6-0-52)
+  (continue-cut sub2 sub1), cost: 0
+    pre: (cw sub2 sub1 1-2-18) (cutting 4-0-43) (s-last sub2 6-1-53)
+    add: (s-next sub2 sub1 1-5-21) (s-last sub1 6-0-52)
+    del: (cw sub2 sub1 1-2-18) (s-last sub2 6-1-53)
+  (continue-cut sub2 sub3), cost: 0
+    pre: (cw sub2 sub3 3-2-36) (cutting 4-0-43) (s-last sub2 6-1-53)
+    add: (s-next sub2 sub3 3-6-40) (s-last sub3 6-2-54)
+    del: (cw sub2 sub3 3-2-36) (s-last sub2 6-1-53)
+  (continue-cut sub3 sub1), cost: 0
+    pre: (cw sub3 sub1 1-3-19) (cutting 4-0-43) (s-last sub3 6-2-54)
+    add: (s-next sub3 sub1 1-6-22) (s-last sub1 6-0-52)
+    del: (cw sub3 sub1 1-3-19) (s-last sub3 6-2-54)
+  (continue-cut sub3 sub2), cost: 0
+    pre: (cw sub3 sub2 2-3-28) (cutting 4-0-43) (s-last sub3 6-2-54)
+    add: (s-next sub3 sub2 2-6-31) (s-last sub2 6-1-53)
+    del: (cw sub3 sub2 2-3-28) (s-last sub3 6-2-54)
+  (continue-inverse-splice-1a sub1 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub2 sub1 1-5-21) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+    add: (inverse-splice-next sub1 0-6-6) (none-of-those 1-8-24) (s-last sub2 6-1-53) (inverted sub1 7-0-56)
+    del: (inverse-splicing 0-9-9) (s-next sub2 sub1 1-5-21) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+  (continue-inverse-splice-1a sub1 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub3 sub1 1-6-22) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+    add: (inverse-splice-next sub1 0-6-6) (none-of-those 1-8-24) (s-last sub3 6-2-54) (inverted sub1 7-0-56)
+    del: (inverse-splicing 0-9-9) (s-next sub3 sub1 1-6-22) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+  (continue-inverse-splice-1a sub2 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub1 sub2 2-5-30) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+    add: (inverse-splice-next sub2 0-7-7) (none-of-those 2-8-33) (s-last sub1 6-0-52) (inverted sub2 8-0-58)
+    del: (inverse-splicing 0-9-9) (s-next sub1 sub2 2-5-30) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+  (continue-inverse-splice-1a sub2 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub3 sub2 2-6-31) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+    add: (inverse-splice-next sub2 0-7-7) (none-of-those 2-8-33) (s-last sub3 6-2-54) (inverted sub2 8-0-58)
+    del: (inverse-splicing 0-9-9) (s-next sub3 sub2 2-6-31) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+  (continue-inverse-splice-1a sub3 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub1 sub3 3-5-39) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+    add: (inverse-splice-next sub3 0-8-8) (none-of-those 3-8-42) (s-last sub1 6-0-52) (inverted sub3 9-0-60)
+    del: (inverse-splicing 0-9-9) (s-next sub1 sub3 3-5-39) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+  (continue-inverse-splice-1a sub3 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub2 sub3 3-6-40) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+    add: (inverse-splice-next sub3 0-8-8) (none-of-those 3-8-42) (s-last sub2 6-1-53) (inverted sub3 9-0-60)
+    del: (inverse-splicing 0-9-9) (s-next sub2 sub3 3-6-40) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+  (continue-inverse-splice-1b sub1 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub2 sub1 1-5-21) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+    add: (inverse-splice-next sub1 0-6-6) (none-of-those 1-8-24) (s-last sub2 6-1-53) (normal sub1 7-1-57)
+    del: (inverse-splicing 0-9-9) (s-next sub2 sub1 1-5-21) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+  (continue-inverse-splice-1b sub1 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub3 sub1 1-6-22) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+    add: (inverse-splice-next sub1 0-6-6) (none-of-those 1-8-24) (s-last sub3 6-2-54) (normal sub1 7-1-57)
+    del: (inverse-splicing 0-9-9) (s-next sub3 sub1 1-6-22) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+  (continue-inverse-splice-1b sub2 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub1 sub2 2-5-30) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+    add: (inverse-splice-next sub2 0-7-7) (none-of-those 2-8-33) (s-last sub1 6-0-52) (normal sub2 8-1-59)
+    del: (inverse-splicing 0-9-9) (s-next sub1 sub2 2-5-30) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+  (continue-inverse-splice-1b sub2 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub3 sub2 2-6-31) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+    add: (inverse-splice-next sub2 0-7-7) (none-of-those 2-8-33) (s-last sub3 6-2-54) (normal sub2 8-1-59)
+    del: (inverse-splicing 0-9-9) (s-next sub3 sub2 2-6-31) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+  (continue-inverse-splice-1b sub3 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub1 sub3 3-5-39) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+    add: (inverse-splice-next sub3 0-8-8) (none-of-those 3-8-42) (s-last sub1 6-0-52) (normal sub3 9-1-61)
+    del: (inverse-splicing 0-9-9) (s-next sub1 sub3 3-5-39) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+  (continue-inverse-splice-1b sub3 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-next sub2 sub3 3-6-40) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+    add: (inverse-splice-next sub3 0-8-8) (none-of-those 3-8-42) (s-last sub2 6-1-53) (normal sub3 9-1-61)
+    del: (inverse-splicing 0-9-9) (s-next sub2 sub3 3-6-40) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+  (continue-inverse-splice-2 sub1 sub1), cost: 0
+    pre: (inverse-splice-next sub1 0-6-6) (splice-point-1 sub1 4-1-44)
+    add: (inverse-splicing 0-9-9) (cw sub1 sub1 1-1-17)
+    del: (inverse-splice-next sub1 0-6-6) (cut-point-2 sub1 1-0-16) (cw sub2 sub1 1-2-18) (cw sub3 sub1 1-3-19) (s-first sub1 1-4-20) (s-next sub2 sub1 1-5-21) (s-next sub3 sub1 1-6-22) (splice-point-2 sub1 1-7-23) (none-of-those 1-8-24)
+  (continue-inverse-splice-2 sub1 sub2), cost: 0
+    pre: (inverse-splice-next sub1 0-6-6) (splice-point-1 sub2 4-2-45)
+    add: (inverse-splicing 0-9-9) (cw sub2 sub1 1-2-18) (splice-point-1 sub1 4-1-44)
+    del: (inverse-splice-next sub1 0-6-6) (cut-point-2 sub1 1-0-16) (cw sub1 sub1 1-1-17) (cw sub3 sub1 1-3-19) (s-first sub1 1-4-20) (s-next sub2 sub1 1-5-21) (s-next sub3 sub1 1-6-22) (splice-point-2 sub1 1-7-23) (none-of-those 1-8-24) (splice-point-1 sub2 4-2-45)
+  (continue-inverse-splice-2 sub1 sub3), cost: 0
+    pre: (inverse-splice-next sub1 0-6-6) (splice-point-1 sub3 4-3-46)
+    add: (inverse-splicing 0-9-9) (cw sub3 sub1 1-3-19) (splice-point-1 sub1 4-1-44)
+    del: (inverse-splice-next sub1 0-6-6) (cut-point-2 sub1 1-0-16) (cw sub1 sub1 1-1-17) (cw sub2 sub1 1-2-18) (s-first sub1 1-4-20) (s-next sub2 sub1 1-5-21) (s-next sub3 sub1 1-6-22) (splice-point-2 sub1 1-7-23) (none-of-those 1-8-24) (splice-point-1 sub3 4-3-46)
+  (continue-inverse-splice-2 sub2 sub1), cost: 0
+    pre: (inverse-splice-next sub2 0-7-7) (splice-point-1 sub1 4-1-44)
+    add: (inverse-splicing 0-9-9) (cw sub1 sub2 2-1-26) (splice-point-1 sub2 4-2-45)
+    del: (inverse-splice-next sub2 0-7-7) (cut-point-2 sub2 2-0-25) (cw sub2 sub2 2-2-27) (cw sub3 sub2 2-3-28) (s-first sub2 2-4-29) (s-next sub1 sub2 2-5-30) (s-next sub3 sub2 2-6-31) (splice-point-2 sub2 2-7-32) (none-of-those 2-8-33) (splice-point-1 sub1 4-1-44)
+  (continue-inverse-splice-2 sub2 sub2), cost: 0
+    pre: (inverse-splice-next sub2 0-7-7) (splice-point-1 sub2 4-2-45)
+    add: (inverse-splicing 0-9-9) (cw sub2 sub2 2-2-27)
+    del: (inverse-splice-next sub2 0-7-7) (cut-point-2 sub2 2-0-25) (cw sub1 sub2 2-1-26) (cw sub3 sub2 2-3-28) (s-first sub2 2-4-29) (s-next sub1 sub2 2-5-30) (s-next sub3 sub2 2-6-31) (splice-point-2 sub2 2-7-32) (none-of-those 2-8-33)
+  (continue-inverse-splice-2 sub2 sub3), cost: 0
+    pre: (inverse-splice-next sub2 0-7-7) (splice-point-1 sub3 4-3-46)
+    add: (inverse-splicing 0-9-9) (cw sub3 sub2 2-3-28) (splice-point-1 sub2 4-2-45)
+    del: (inverse-splice-next sub2 0-7-7) (cut-point-2 sub2 2-0-25) (cw sub1 sub2 2-1-26) (cw sub2 sub2 2-2-27) (s-first sub2 2-4-29) (s-next sub1 sub2 2-5-30) (s-next sub3 sub2 2-6-31) (splice-point-2 sub2 2-7-32) (none-of-those 2-8-33) (splice-point-1 sub3 4-3-46)
+  (continue-inverse-splice-2 sub3 sub1), cost: 0
+    pre: (inverse-splice-next sub3 0-8-8) (splice-point-1 sub1 4-1-44)
+    add: (inverse-splicing 0-9-9) (cw sub1 sub3 3-1-35) (splice-point-1 sub3 4-3-46)
+    del: (inverse-splice-next sub3 0-8-8) (cut-point-2 sub3 3-0-34) (cw sub2 sub3 3-2-36) (cw sub3 sub3 3-3-37) (s-first sub3 3-4-38) (s-next sub1 sub3 3-5-39) (s-next sub2 sub3 3-6-40) (splice-point-2 sub3 3-7-41) (none-of-those 3-8-42) (splice-point-1 sub1 4-1-44)
+  (continue-inverse-splice-2 sub3 sub2), cost: 0
+    pre: (inverse-splice-next sub3 0-8-8) (splice-point-1 sub2 4-2-45)
+    add: (inverse-splicing 0-9-9) (cw sub2 sub3 3-2-36) (splice-point-1 sub3 4-3-46)
+    del: (inverse-splice-next sub3 0-8-8) (cut-point-2 sub3 3-0-34) (cw sub1 sub3 3-1-35) (cw sub3 sub3 3-3-37) (s-first sub3 3-4-38) (s-next sub1 sub3 3-5-39) (s-next sub2 sub3 3-6-40) (splice-point-2 sub3 3-7-41) (none-of-those 3-8-42) (splice-point-1 sub2 4-2-45)
+  (continue-inverse-splice-2 sub3 sub3), cost: 0
+    pre: (inverse-splice-next sub3 0-8-8) (splice-point-1 sub3 4-3-46)
+    add: (inverse-splicing 0-9-9) (cw sub3 sub3 3-3-37)
+    del: (inverse-splice-next sub3 0-8-8) (cut-point-2 sub3 3-0-34) (cw sub1 sub3 3-1-35) (cw sub2 sub3 3-2-36) (s-first sub3 3-4-38) (s-next sub1 sub3 3-5-39) (s-next sub2 sub3 3-6-40) (splice-point-2 sub3 3-7-41) (none-of-those 3-8-42)
+  (continue-splice-1 sub1 sub2), cost: 0
+    pre: (splicing 0-14-14) (s-first sub1 1-4-20) (s-next sub1 sub2 2-5-30)
+    add: (splice-next sub1 0-11-11) (none-of-those 1-8-24) (s-first sub2 2-4-29)
+    del: (splicing 0-14-14) (s-first sub1 1-4-20) (s-next sub1 sub2 2-5-30)
+  (continue-splice-1 sub1 sub3), cost: 0
+    pre: (splicing 0-14-14) (s-first sub1 1-4-20) (s-next sub1 sub3 3-5-39)
+    add: (splice-next sub1 0-11-11) (none-of-those 1-8-24) (s-first sub3 3-4-38)
+    del: (splicing 0-14-14) (s-first sub1 1-4-20) (s-next sub1 sub3 3-5-39)
+  (continue-splice-1 sub2 sub1), cost: 0
+    pre: (splicing 0-14-14) (s-next sub2 sub1 1-5-21) (s-first sub2 2-4-29)
+    add: (splice-next sub2 0-12-12) (s-first sub1 1-4-20) (none-of-those 2-8-33)
+    del: (splicing 0-14-14) (s-next sub2 sub1 1-5-21) (s-first sub2 2-4-29)
+  (continue-splice-1 sub2 sub3), cost: 0
+    pre: (splicing 0-14-14) (s-first sub2 2-4-29) (s-next sub2 sub3 3-6-40)
+    add: (splice-next sub2 0-12-12) (none-of-those 2-8-33) (s-first sub3 3-4-38)
+    del: (splicing 0-14-14) (s-first sub2 2-4-29) (s-next sub2 sub3 3-6-40)
+  (continue-splice-1 sub3 sub1), cost: 0
+    pre: (splicing 0-14-14) (s-next sub3 sub1 1-6-22) (s-first sub3 3-4-38)
+    add: (splice-next sub3 0-13-13) (s-first sub1 1-4-20) (none-of-those 3-8-42)
+    del: (splicing 0-14-14) (s-next sub3 sub1 1-6-22) (s-first sub3 3-4-38)
+  (continue-splice-1 sub3 sub2), cost: 0
+    pre: (splicing 0-14-14) (s-next sub3 sub2 2-6-31) (s-first sub3 3-4-38)
+    add: (splice-next sub3 0-13-13) (s-first sub2 2-4-29) (none-of-those 3-8-42)
+    del: (splicing 0-14-14) (s-next sub3 sub2 2-6-31) (s-first sub3 3-4-38)
+  (continue-splice-2 sub1 sub1), cost: 0
+    pre: (splice-next sub1 0-11-11) (splice-point-1 sub1 4-1-44)
+    add: (splicing 0-14-14) (cw sub1 sub1 1-1-17)
+    del: (splice-next sub1 0-11-11) (cut-point-2 sub1 1-0-16) (cw sub2 sub1 1-2-18) (cw sub3 sub1 1-3-19) (s-first sub1 1-4-20) (s-next sub2 sub1 1-5-21) (s-next sub3 sub1 1-6-22) (splice-point-2 sub1 1-7-23) (none-of-those 1-8-24)
+  (continue-splice-2 sub1 sub2), cost: 0
+    pre: (splice-next sub1 0-11-11) (splice-point-1 sub2 4-2-45)
+    add: (splicing 0-14-14) (cw sub2 sub1 1-2-18) (splice-point-1 sub1 4-1-44)
+    del: (splice-next sub1 0-11-11) (cut-point-2 sub1 1-0-16) (cw sub1 sub1 1-1-17) (cw sub3 sub1 1-3-19) (s-first sub1 1-4-20) (s-next sub2 sub1 1-5-21) (s-next sub3 sub1 1-6-22) (splice-point-2 sub1 1-7-23) (none-of-those 1-8-24) (splice-point-1 sub2 4-2-45)
+  (continue-splice-2 sub1 sub3), cost: 0
+    pre: (splice-next sub1 0-11-11) (splice-point-1 sub3 4-3-46)
+    add: (splicing 0-14-14) (cw sub3 sub1 1-3-19) (splice-point-1 sub1 4-1-44)
+    del: (splice-next sub1 0-11-11) (cut-point-2 sub1 1-0-16) (cw sub1 sub1 1-1-17) (cw sub2 sub1 1-2-18) (s-first sub1 1-4-20) (s-next sub2 sub1 1-5-21) (s-next sub3 sub1 1-6-22) (splice-point-2 sub1 1-7-23) (none-of-those 1-8-24) (splice-point-1 sub3 4-3-46)
+  (continue-splice-2 sub2 sub1), cost: 0
+    pre: (splice-next sub2 0-12-12) (splice-point-1 sub1 4-1-44)
+    add: (splicing 0-14-14) (cw sub1 sub2 2-1-26) (splice-point-1 sub2 4-2-45)
+    del: (splice-next sub2 0-12-12) (cut-point-2 sub2 2-0-25) (cw sub2 sub2 2-2-27) (cw sub3 sub2 2-3-28) (s-first sub2 2-4-29) (s-next sub1 sub2 2-5-30) (s-next sub3 sub2 2-6-31) (splice-point-2 sub2 2-7-32) (none-of-those 2-8-33) (splice-point-1 sub1 4-1-44)
+  (continue-splice-2 sub2 sub2), cost: 0
+    pre: (splice-next sub2 0-12-12) (splice-point-1 sub2 4-2-45)
+    add: (splicing 0-14-14) (cw sub2 sub2 2-2-27)
+    del: (splice-next sub2 0-12-12) (cut-point-2 sub2 2-0-25) (cw sub1 sub2 2-1-26) (cw sub3 sub2 2-3-28) (s-first sub2 2-4-29) (s-next sub1 sub2 2-5-30) (s-next sub3 sub2 2-6-31) (splice-point-2 sub2 2-7-32) (none-of-those 2-8-33)
+  (continue-splice-2 sub2 sub3), cost: 0
+    pre: (splice-next sub2 0-12-12) (splice-point-1 sub3 4-3-46)
+    add: (splicing 0-14-14) (cw sub3 sub2 2-3-28) (splice-point-1 sub2 4-2-45)
+    del: (splice-next sub2 0-12-12) (cut-point-2 sub2 2-0-25) (cw sub1 sub2 2-1-26) (cw sub2 sub2 2-2-27) (s-first sub2 2-4-29) (s-next sub1 sub2 2-5-30) (s-next sub3 sub2 2-6-31) (splice-point-2 sub2 2-7-32) (none-of-those 2-8-33) (splice-point-1 sub3 4-3-46)
+  (continue-splice-2 sub3 sub1), cost: 0
+    pre: (splice-next sub3 0-13-13) (splice-point-1 sub1 4-1-44)
+    add: (splicing 0-14-14) (cw sub1 sub3 3-1-35) (splice-point-1 sub3 4-3-46)
+    del: (splice-next sub3 0-13-13) (cut-point-2 sub3 3-0-34) (cw sub2 sub3 3-2-36) (cw sub3 sub3 3-3-37) (s-first sub3 3-4-38) (s-next sub1 sub3 3-5-39) (s-next sub2 sub3 3-6-40) (splice-point-2 sub3 3-7-41) (none-of-those 3-8-42) (splice-point-1 sub1 4-1-44)
+  (continue-splice-2 sub3 sub2), cost: 0
+    pre: (splice-next sub3 0-13-13) (splice-point-1 sub2 4-2-45)
+    add: (splicing 0-14-14) (cw sub2 sub3 3-2-36) (splice-point-1 sub3 4-3-46)
+    del: (splice-next sub3 0-13-13) (cut-point-2 sub3 3-0-34) (cw sub1 sub3 3-1-35) (cw sub3 sub3 3-3-37) (s-first sub3 3-4-38) (s-next sub1 sub3 3-5-39) (s-next sub2 sub3 3-6-40) (splice-point-2 sub3 3-7-41) (none-of-those 3-8-42) (splice-point-1 sub2 4-2-45)
+  (continue-splice-2 sub3 sub3), cost: 0
+    pre: (splice-next sub3 0-13-13) (splice-point-1 sub3 4-3-46)
+    add: (splicing 0-14-14) (cw sub3 sub3 3-3-37)
+    del: (splice-next sub3 0-13-13) (cut-point-2 sub3 3-0-34) (cw sub1 sub3 3-1-35) (cw sub2 sub3 3-2-36) (s-first sub3 3-4-38) (s-next sub1 sub3 3-5-39) (s-next sub2 sub3 3-6-40) (splice-point-2 sub3 3-7-41) (none-of-those 3-8-42)
+  (end-cut-1 sub1 sub2), cost: 0
+    pre: (cw sub1 sub2 2-1-26) (cutting 4-0-43) (s-last sub1 6-0-52)
+    add: (cut-point-2 sub2 2-0-25)
+    del: (cw sub1 sub2 2-1-26)
+  (end-cut-1 sub1 sub3), cost: 0
+    pre: (cw sub1 sub3 3-1-35) (cutting 4-0-43) (s-last sub1 6-0-52)
+    add: (cut-point-2 sub3 3-0-34)
+    del: (cw sub1 sub3 3-1-35)
+  (end-cut-1 sub2 sub1), cost: 0
+    pre: (cw sub2 sub1 1-2-18) (cutting 4-0-43) (s-last sub2 6-1-53)
+    add: (cut-point-2 sub1 1-0-16)
+    del: (cw sub2 sub1 1-2-18)
+  (end-cut-1 sub2 sub3), cost: 0
+    pre: (cw sub2 sub3 3-2-36) (cutting 4-0-43) (s-last sub2 6-1-53)
+    add: (cut-point-2 sub3 3-0-34)
+    del: (cw sub2 sub3 3-2-36)
+  (end-cut-1 sub3 sub1), cost: 0
+    pre: (cw sub3 sub1 1-3-19) (cutting 4-0-43) (s-last sub3 6-2-54)
+    add: (cut-point-2 sub1 1-0-16)
+    del: (cw sub3 sub1 1-3-19)
+  (end-cut-1 sub3 sub2), cost: 0
+    pre: (cw sub3 sub2 2-3-28) (cutting 4-0-43) (s-last sub3 6-2-54)
+    add: (cut-point-2 sub2 2-0-25)
+    del: (cw sub3 sub2 2-3-28)
+  (end-cut-2 sub1 sub1), cost: 0
+    pre: (cut-point-1 sub1 0-0-0) (cut-point-2 sub1 1-0-16) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub1 sub1 1-1-17) (none-of-those 4-4-47)
+    del: (cut-point-1 sub1 0-0-0) (cut-point-2 sub1 1-0-16) (cutting 4-0-43)
+  (end-cut-2 sub1 sub2), cost: 0
+    pre: (cut-point-1 sub1 0-0-0) (cut-point-2 sub2 2-0-25) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub1 sub2 2-1-26) (none-of-those 4-4-47)
+    del: (cut-point-1 sub1 0-0-0) (cut-point-2 sub2 2-0-25) (cutting 4-0-43)
+  (end-cut-2 sub1 sub3), cost: 0
+    pre: (cut-point-1 sub1 0-0-0) (cut-point-2 sub3 3-0-34) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub1 sub3 3-1-35) (none-of-those 4-4-47)
+    del: (cut-point-1 sub1 0-0-0) (cut-point-2 sub3 3-0-34) (cutting 4-0-43)
+  (end-cut-2 sub2 sub1), cost: 0
+    pre: (cut-point-1 sub2 0-1-1) (cut-point-2 sub1 1-0-16) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub2 sub1 1-2-18) (none-of-those 4-4-47)
+    del: (cut-point-1 sub2 0-1-1) (cut-point-2 sub1 1-0-16) (cutting 4-0-43)
+  (end-cut-2 sub2 sub2), cost: 0
+    pre: (cut-point-1 sub2 0-1-1) (cut-point-2 sub2 2-0-25) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub2 sub2 2-2-27) (none-of-those 4-4-47)
+    del: (cut-point-1 sub2 0-1-1) (cut-point-2 sub2 2-0-25) (cutting 4-0-43)
+  (end-cut-2 sub2 sub3), cost: 0
+    pre: (cut-point-1 sub2 0-1-1) (cut-point-2 sub3 3-0-34) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub2 sub3 3-2-36) (none-of-those 4-4-47)
+    del: (cut-point-1 sub2 0-1-1) (cut-point-2 sub3 3-0-34) (cutting 4-0-43)
+  (end-cut-2 sub3 sub1), cost: 0
+    pre: (cut-point-1 sub3 0-2-2) (cut-point-2 sub1 1-0-16) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub3 sub1 1-3-19) (none-of-those 4-4-47)
+    del: (cut-point-1 sub3 0-2-2) (cut-point-2 sub1 1-0-16) (cutting 4-0-43)
+  (end-cut-2 sub3 sub2), cost: 0
+    pre: (cut-point-1 sub3 0-2-2) (cut-point-2 sub2 2-0-25) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub3 sub2 2-3-28) (none-of-those 4-4-47)
+    del: (cut-point-1 sub3 0-2-2) (cut-point-2 sub2 2-0-25) (cutting 4-0-43)
+  (end-cut-2 sub3 sub3), cost: 0
+    pre: (cut-point-1 sub3 0-2-2) (cut-point-2 sub3 3-0-34) (cutting 4-0-43)
+    add: (have-cut 0-4-4) (cw sub3 sub3 3-3-37) (none-of-those 4-4-47)
+    del: (cut-point-1 sub3 0-2-2) (cut-point-2 sub3 3-0-34) (cutting 4-0-43)
+  (end-inverse-splice-1a sub1 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub1 4-1-44) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+    add: (inverse-splicing-last 0-10-10) (cw sub1 sub1 1-1-17) (none-of-those 6-3-55) (inverted sub1 7-0-56)
+    del: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+  (end-inverse-splice-1a sub1 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub2 4-2-45) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+    add: (inverse-splicing-last 0-10-10) (cw sub2 sub1 1-2-18) (splice-point-1 sub1 4-1-44) (none-of-those 6-3-55) (inverted sub1 7-0-56)
+    del: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub2 4-2-45) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+  (end-inverse-splice-1a sub1 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub3 4-3-46) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+    add: (inverse-splicing-last 0-10-10) (cw sub3 sub1 1-3-19) (splice-point-1 sub1 4-1-44) (none-of-those 6-3-55) (inverted sub1 7-0-56)
+    del: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub3 4-3-46) (s-last sub1 6-0-52) (normal sub1 7-1-57)
+  (end-inverse-splice-1a sub2 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub1 4-1-44) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+    add: (inverse-splicing-last 0-10-10) (cw sub1 sub2 2-1-26) (splice-point-1 sub2 4-2-45) (none-of-those 6-3-55) (inverted sub2 8-0-58)
+    del: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub1 4-1-44) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+  (end-inverse-splice-1a sub2 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub2 4-2-45) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+    add: (inverse-splicing-last 0-10-10) (cw sub2 sub2 2-2-27) (none-of-those 6-3-55) (inverted sub2 8-0-58)
+    del: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+  (end-inverse-splice-1a sub2 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub3 4-3-46) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+    add: (inverse-splicing-last 0-10-10) (cw sub3 sub2 2-3-28) (splice-point-1 sub2 4-2-45) (none-of-those 6-3-55) (inverted sub2 8-0-58)
+    del: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub3 4-3-46) (s-last sub2 6-1-53) (normal sub2 8-1-59)
+  (end-inverse-splice-1a sub3 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub1 4-1-44) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+    add: (inverse-splicing-last 0-10-10) (cw sub1 sub3 3-1-35) (splice-point-1 sub3 4-3-46) (none-of-those 6-3-55) (inverted sub3 9-0-60)
+    del: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub1 4-1-44) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+  (end-inverse-splice-1a sub3 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub2 4-2-45) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+    add: (inverse-splicing-last 0-10-10) (cw sub2 sub3 3-2-36) (splice-point-1 sub3 4-3-46) (none-of-those 6-3-55) (inverted sub3 9-0-60)
+    del: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub2 4-2-45) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+  (end-inverse-splice-1a sub3 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub3 4-3-46) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+    add: (inverse-splicing-last 0-10-10) (cw sub3 sub3 3-3-37) (none-of-those 6-3-55) (inverted sub3 9-0-60)
+    del: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (s-last sub3 6-2-54) (normal sub3 9-1-61)
+  (end-inverse-splice-1b sub1 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub1 4-1-44) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+    add: (inverse-splicing-last 0-10-10) (cw sub1 sub1 1-1-17) (none-of-those 6-3-55) (normal sub1 7-1-57)
+    del: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+  (end-inverse-splice-1b sub1 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub2 4-2-45) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+    add: (inverse-splicing-last 0-10-10) (cw sub2 sub1 1-2-18) (splice-point-1 sub1 4-1-44) (none-of-those 6-3-55) (normal sub1 7-1-57)
+    del: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub2 4-2-45) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+  (end-inverse-splice-1b sub1 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub3 4-3-46) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+    add: (inverse-splicing-last 0-10-10) (cw sub3 sub1 1-3-19) (splice-point-1 sub1 4-1-44) (none-of-those 6-3-55) (normal sub1 7-1-57)
+    del: (inverse-splicing 0-9-9) (s-first sub1 1-4-20) (splice-point-1 sub3 4-3-46) (s-last sub1 6-0-52) (inverted sub1 7-0-56)
+  (end-inverse-splice-1b sub2 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub1 4-1-44) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+    add: (inverse-splicing-last 0-10-10) (cw sub1 sub2 2-1-26) (splice-point-1 sub2 4-2-45) (none-of-those 6-3-55) (normal sub2 8-1-59)
+    del: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub1 4-1-44) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+  (end-inverse-splice-1b sub2 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub2 4-2-45) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+    add: (inverse-splicing-last 0-10-10) (cw sub2 sub2 2-2-27) (none-of-those 6-3-55) (normal sub2 8-1-59)
+    del: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+  (end-inverse-splice-1b sub2 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub3 4-3-46) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+    add: (inverse-splicing-last 0-10-10) (cw sub3 sub2 2-3-28) (splice-point-1 sub2 4-2-45) (none-of-those 6-3-55) (normal sub2 8-1-59)
+    del: (inverse-splicing 0-9-9) (s-first sub2 2-4-29) (splice-point-1 sub3 4-3-46) (s-last sub2 6-1-53) (inverted sub2 8-0-58)
+  (end-inverse-splice-1b sub3 sub1), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub1 4-1-44) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+    add: (inverse-splicing-last 0-10-10) (cw sub1 sub3 3-1-35) (splice-point-1 sub3 4-3-46) (none-of-those 6-3-55) (normal sub3 9-1-61)
+    del: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub1 4-1-44) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+  (end-inverse-splice-1b sub3 sub2), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub2 4-2-45) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+    add: (inverse-splicing-last 0-10-10) (cw sub2 sub3 3-2-36) (splice-point-1 sub3 4-3-46) (none-of-those 6-3-55) (normal sub3 9-1-61)
+    del: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub2 4-2-45) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+  (end-inverse-splice-1b sub3 sub3), cost: 0
+    pre: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (splice-point-1 sub3 4-3-46) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+    add: (inverse-splicing-last 0-10-10) (cw sub3 sub3 3-3-37) (none-of-those 6-3-55) (normal sub3 9-1-61)
+    del: (inverse-splicing 0-9-9) (s-first sub3 3-4-38) (s-last sub3 6-2-54) (inverted sub3 9-0-60)
+  (end-inverse-splice-2 sub1 sub1), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub1 1-7-23) (splice-point-1 sub1 4-1-44)
+    add: (finished 0-3-3) (cw sub1 sub1 1-1-17) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub1 1-7-23) (splice-point-1 sub1 4-1-44)
+  (end-inverse-splice-2 sub1 sub2), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+    add: (finished 0-3-3) (cw sub1 sub2 2-1-26) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+  (end-inverse-splice-2 sub1 sub3), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+    add: (finished 0-3-3) (cw sub1 sub3 3-1-35) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+  (end-inverse-splice-2 sub2 sub1), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+    add: (finished 0-3-3) (cw sub2 sub1 1-2-18) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+  (end-inverse-splice-2 sub2 sub2), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub2 2-7-32) (splice-point-1 sub2 4-2-45)
+    add: (finished 0-3-3) (cw sub2 sub2 2-2-27) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub2 2-7-32) (splice-point-1 sub2 4-2-45)
+  (end-inverse-splice-2 sub2 sub3), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+    add: (finished 0-3-3) (cw sub2 sub3 3-2-36) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+  (end-inverse-splice-2 sub3 sub1), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+    add: (finished 0-3-3) (cw sub3 sub1 1-3-19) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+  (end-inverse-splice-2 sub3 sub2), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+    add: (finished 0-3-3) (cw sub3 sub2 2-3-28) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+  (end-inverse-splice-2 sub3 sub3), cost: 0
+    pre: (inverse-splicing-last 0-10-10) (splice-point-2 sub3 3-7-41) (splice-point-1 sub3 4-3-46)
+    add: (finished 0-3-3) (cw sub3 sub3 3-3-37) (none-of-those 4-4-47)
+    del: (inverse-splicing-last 0-10-10) (splice-point-2 sub3 3-7-41) (splice-point-1 sub3 4-3-46)
+  (end-splice-1 sub1 sub1), cost: 0
+    pre: (splicing 0-14-14) (s-first sub1 1-4-20) (splice-point-1 sub1 4-1-44) (s-last sub1 6-0-52)
+    add: (splicing-last 0-15-15) (cw sub1 sub1 1-1-17) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub1 1-4-20) (s-last sub1 6-0-52)
+  (end-splice-1 sub1 sub2), cost: 0
+    pre: (splicing 0-14-14) (s-first sub1 1-4-20) (splice-point-1 sub2 4-2-45) (s-last sub1 6-0-52)
+    add: (splicing-last 0-15-15) (cw sub2 sub1 1-2-18) (splice-point-1 sub1 4-1-44) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub1 1-4-20) (splice-point-1 sub2 4-2-45) (s-last sub1 6-0-52)
+  (end-splice-1 sub1 sub3), cost: 0
+    pre: (splicing 0-14-14) (s-first sub1 1-4-20) (splice-point-1 sub3 4-3-46) (s-last sub1 6-0-52)
+    add: (splicing-last 0-15-15) (cw sub3 sub1 1-3-19) (splice-point-1 sub1 4-1-44) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub1 1-4-20) (splice-point-1 sub3 4-3-46) (s-last sub1 6-0-52)
+  (end-splice-1 sub2 sub1), cost: 0
+    pre: (splicing 0-14-14) (s-first sub2 2-4-29) (splice-point-1 sub1 4-1-44) (s-last sub2 6-1-53)
+    add: (splicing-last 0-15-15) (cw sub1 sub2 2-1-26) (splice-point-1 sub2 4-2-45) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub2 2-4-29) (splice-point-1 sub1 4-1-44) (s-last sub2 6-1-53)
+  (end-splice-1 sub2 sub2), cost: 0
+    pre: (splicing 0-14-14) (s-first sub2 2-4-29) (splice-point-1 sub2 4-2-45) (s-last sub2 6-1-53)
+    add: (splicing-last 0-15-15) (cw sub2 sub2 2-2-27) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub2 2-4-29) (s-last sub2 6-1-53)
+  (end-splice-1 sub2 sub3), cost: 0
+    pre: (splicing 0-14-14) (s-first sub2 2-4-29) (splice-point-1 sub3 4-3-46) (s-last sub2 6-1-53)
+    add: (splicing-last 0-15-15) (cw sub3 sub2 2-3-28) (splice-point-1 sub2 4-2-45) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub2 2-4-29) (splice-point-1 sub3 4-3-46) (s-last sub2 6-1-53)
+  (end-splice-1 sub3 sub1), cost: 0
+    pre: (splicing 0-14-14) (s-first sub3 3-4-38) (splice-point-1 sub1 4-1-44) (s-last sub3 6-2-54)
+    add: (splicing-last 0-15-15) (cw sub1 sub3 3-1-35) (splice-point-1 sub3 4-3-46) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub3 3-4-38) (splice-point-1 sub1 4-1-44) (s-last sub3 6-2-54)
+  (end-splice-1 sub3 sub2), cost: 0
+    pre: (splicing 0-14-14) (s-first sub3 3-4-38) (splice-point-1 sub2 4-2-45) (s-last sub3 6-2-54)
+    add: (splicing-last 0-15-15) (cw sub2 sub3 3-2-36) (splice-point-1 sub3 4-3-46) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub3 3-4-38) (splice-point-1 sub2 4-2-45) (s-last sub3 6-2-54)
+  (end-splice-1 sub3 sub3), cost: 0
+    pre: (splicing 0-14-14) (s-first sub3 3-4-38) (splice-point-1 sub3 4-3-46) (s-last sub3 6-2-54)
+    add: (splicing-last 0-15-15) (cw sub3 sub3 3-3-37) (none-of-those 6-3-55)
+    del: (splicing 0-14-14) (s-first sub3 3-4-38) (s-last sub3 6-2-54)
+  (end-splice-2 sub1 sub1), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub1 1-7-23) (splice-point-1 sub1 4-1-44)
+    add: (finished 0-3-3) (cw sub1 sub1 1-1-17) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub1 1-7-23) (splice-point-1 sub1 4-1-44)
+  (end-splice-2 sub1 sub2), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+    add: (finished 0-3-3) (cw sub1 sub2 2-1-26) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub2 2-7-32) (splice-point-1 sub1 4-1-44)
+  (end-splice-2 sub1 sub3), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+    add: (finished 0-3-3) (cw sub1 sub3 3-1-35) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub3 3-7-41) (splice-point-1 sub1 4-1-44)
+  (end-splice-2 sub2 sub1), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+    add: (finished 0-3-3) (cw sub2 sub1 1-2-18) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub1 1-7-23) (splice-point-1 sub2 4-2-45)
+  (end-splice-2 sub2 sub2), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub2 2-7-32) (splice-point-1 sub2 4-2-45)
+    add: (finished 0-3-3) (cw sub2 sub2 2-2-27) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub2 2-7-32) (splice-point-1 sub2 4-2-45)
+  (end-splice-2 sub2 sub3), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+    add: (finished 0-3-3) (cw sub2 sub3 3-2-36) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub3 3-7-41) (splice-point-1 sub2 4-2-45)
+  (end-splice-2 sub3 sub1), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+    add: (finished 0-3-3) (cw sub3 sub1 1-3-19) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub1 1-7-23) (splice-point-1 sub3 4-3-46)
+  (end-splice-2 sub3 sub2), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+    add: (finished 0-3-3) (cw sub3 sub2 2-3-28) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub2 2-7-32) (splice-point-1 sub3 4-3-46)
+  (end-splice-2 sub3 sub3), cost: 0
+    pre: (splicing-last 0-15-15) (splice-point-2 sub3 3-7-41) (splice-point-1 sub3 4-3-46)
+    add: (finished 0-3-3) (cw sub3 sub3 3-3-37) (none-of-those 4-4-47)
+    del: (splicing-last 0-15-15) (splice-point-2 sub3 3-7-41) (splice-point-1 sub3 4-3-46)
+  (invert-single-gene-a sub1), cost: 1
+    pre: (idle 0-5-5) (normal sub1 7-1-57)
+    add: (inverted sub1 7-0-56)
+    del: (normal sub1 7-1-57)
+  (invert-single-gene-a sub2), cost: 1
+    pre: (idle 0-5-5) (normal sub2 8-1-59)
+    add: (inverted sub2 8-0-58)
+    del: (normal sub2 8-1-59)
+  (invert-single-gene-a sub3), cost: 1
+    pre: (idle 0-5-5) (normal sub3 9-1-61)
+    add: (inverted sub3 9-0-60)
+    del: (normal sub3 9-1-61)
+  (invert-single-gene-b sub1), cost: 1
+    pre: (idle 0-5-5) (inverted sub1 7-0-56)
+    add: (normal sub1 7-1-57)
+    del: (inverted sub1 7-0-56)
+  (invert-single-gene-b sub2), cost: 1
+    pre: (idle 0-5-5) (inverted sub2 8-0-58)
+    add: (normal sub2 8-1-59)
+    del: (inverted sub2 8-0-58)
+  (invert-single-gene-b sub3), cost: 1
+    pre: (idle 0-5-5) (inverted sub3 9-0-60)
+    add: (normal sub3 9-1-61)
+    del: (inverted sub3 9-0-60)
+  (reset-1 sub1), cost: 0
+    pre: (finished 0-3-3) (last-cut-point sub1 5-0-48)
+    add: (idle 0-5-5) (none-of-those 5-3-51)
+    del: (finished 0-3-3) (last-cut-point sub1 5-0-48)
+  (reset-1 sub2), cost: 0
+    pre: (finished 0-3-3) (last-cut-point sub2 5-1-49)
+    add: (idle 0-5-5) (none-of-those 5-3-51)
+    del: (finished 0-3-3) (last-cut-point sub2 5-1-49)
+  (reset-1 sub3), cost: 0
+    pre: (finished 0-3-3) (last-cut-point sub3 5-2-50)
+    add: (idle 0-5-5) (none-of-those 5-3-51)
+    del: (finished 0-3-3) (last-cut-point sub3 5-2-50)
+Init State: (idle 0-5-5) (cw sub3 sub1 1-3-19) (cw sub1 sub2 2-1-26) (cw sub2 sub3 3-2-36) (none-of-those 4-4-47) (none-of-those 5-3-51) (none-of-those 6-3-55) (normal sub1 7-1-57) (normal sub2 8-1-59) (normal sub3 9-1-61)
+Goal: (cw sub3 sub1 1-3-19) (cw sub1 sub2 2-1-26) (cw sub2 sub3 3-2-36) (normal sub1 7-1-57) (normal sub2 8-1-59) (inverted sub3 9-0-60)
+Value: 0

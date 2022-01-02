@@ -1,0 +1,115 @@
+Domain: mystery-prime-strips
+Problem: strips-mprime-x-1
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Obj[21]:
+    [0]: rice, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: pear, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: flounder, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: okra, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: pork, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: lamb, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: rest, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: hangover, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: depression, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: abrasion, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: kentucky, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: bosnia, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: surrey, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: pennsylvania, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: alsace, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: quebec, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: guanabara, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: mars, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: earth, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: uranus, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: venus, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[13]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    province: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    planet: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    food: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pleasure: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pain: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    eats: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    craves: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    fears: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    locale: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    harmony: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    attacks: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    orbits: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[4]:
+    overcome: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
+        pre: (and (R:pain ?c) (R:pleasure ?v) (RW:craves ?c ?n) (RW:craves ?v ?n) (R:food ?n) (RW:harmony ?v ?s2) (R:planet ?s2) (R:orbits ?s1 ?s2) (R:planet ?s1))
+        eff: (and (N:RW:craves ?c ?n) (RW:fears ?c ?v) (N:RW:harmony ?v ?s2) (RW:harmony ?v ?s1))
+    feast: ?v:0 ?n1:0 ?n2:0 ?l1:0 ?l2:0
+        pre: (and (RW:craves ?v ?n1) (R:food ?n1) (R:pleasure ?v) (R:eats ?n1 ?n2) (R:food ?n2) (RW:locale ?n1 ?l2) (R:attacks ?l1 ?l2))
+        eff: (and (N:RW:craves ?v ?n1) (RW:craves ?v ?n2) (N:RW:locale ?n1 ?l2) (RW:locale ?n1 ?l1))
+    succumb: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
+        pre: (and (RW:fears ?c ?v) (R:pain ?c) (R:pleasure ?v) (RW:craves ?v ?n) (R:food ?n) (RW:harmony ?v ?s1) (R:orbits ?s1 ?s2))
+        eff: (and (N:RW:fears ?c ?v) (RW:craves ?c ?n) (N:RW:harmony ?v ?s1) (RW:harmony ?v ?s2))
+    drink: ?n1:0 ?n2:0 ?l11:0 ?l12:0 ?l13:0 ?l21:0 ?l22:0
+        pre: (and (N:R:= ?n1 ?n2) (RW:locale ?n1 ?l11) (R:attacks ?l12 ?l11) (R:attacks ?l13 ?l12) (RW:locale ?n2 ?l21) (R:attacks ?l21 ?l22))
+        eff: (and (N:RW:locale ?n1 ?l11) (RW:locale ?n1 ?l12) (N:RW:locale ?n2 ?l21) (RW:locale ?n2 ?l22))
+Init[54]:
+  S:(food rice)
+  S:(food pear)
+  S:(food flounder)
+  S:(food okra)
+  S:(food pork)
+  S:(food lamb)
+  S:(pleasure rest)
+  S:(pain hangover)
+  S:(pain depression)
+  S:(pain abrasion)
+  S:(province kentucky)
+  S:(province bosnia)
+  S:(province surrey)
+  S:(province pennsylvania)
+  S:(province alsace)
+  S:(province quebec)
+  S:(province guanabara)
+  S:(planet mars)
+  S:(planet earth)
+  S:(planet uranus)
+  S:(planet venus)
+  S:(eats lamb pork)
+  S:(eats pork okra)
+  (locale okra guanabara)
+  (locale pork quebec)
+  S:(eats pork lamb)
+  (harmony rest venus)
+  S:(eats lamb flounder)
+  (craves depression flounder)
+  S:(eats okra pear)
+  S:(eats rice rice)
+  S:(eats rice flounder)
+  S:(attacks kentucky bosnia)
+  S:(attacks pennsylvania alsace)
+  S:(attacks alsace quebec)
+  (craves abrasion pork)
+  (locale rice bosnia)
+  S:(orbits mars earth)
+  S:(eats flounder lamb)
+  (craves rest pork)
+  S:(orbits earth uranus)
+  (locale pear surrey)
+  (craves hangover rice)
+  S:(attacks bosnia surrey)
+  S:(attacks surrey pennsylvania)
+  (locale lamb pennsylvania)
+  S:(eats flounder rice)
+  S:(eats rice pear)
+  S:(attacks quebec guanabara)
+  S:(eats pear okra)
+  S:(eats pear rice)
+  S:(eats okra pork)
+  S:(orbits uranus venus)
+  (locale flounder alsace)
+Init[0]:
+Goal: (and (RW:craves abrasion rice))
+Metric: 0

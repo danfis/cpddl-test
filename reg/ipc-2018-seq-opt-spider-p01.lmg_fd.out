@@ -1,0 +1,36 @@
+Monotonicity invariants:
+< {on V0:card C1:cardposition}
+, {current-deal C0:deal}
+, {currently-dealing, NOT-currently-dealing}
+, {currently-collecting-deck, NOT-currently-collecting-deck}
+, {collect-card C0:cardposition, NOT-currently-collecting-deck}
+, {currently-updating-unmovable, NOT-currently-updating-unmovable}
+, {make-unmovable C0:card, NOT-currently-updating-unmovable}
+, {currently-updating-movable, NOT-currently-updating-movable}
+, {make-movable C0:cardposition, NOT-currently-updating-movable}
+>
+FD Mutex Groups:
+< {on V0:card C1:cardposition}:=1
+, {current-deal C0:deal}:=1
+, {currently-dealing, NOT-currently-dealing}:=1
+, {currently-collecting-deck, NOT-currently-collecting-deck}:=1
+, {collect-card C0:cardposition, NOT-currently-collecting-deck}:=1
+, {currently-updating-unmovable, NOT-currently-updating-unmovable}:=1
+, {make-unmovable C0:card, NOT-currently-updating-unmovable}:=1
+, {currently-updating-movable, NOT-currently-updating-movable}:=1
+, {make-movable C0:cardposition, NOT-currently-updating-movable}:=1
+>
+FD Goal aware:
+< {on card-d0-s0-v0 C0:cardposition}:=1
+, {on card-d0-s0-v1 C0:cardposition}:=1
+, {on card-d0-s0-v2 C0:cardposition}:=1
+, {on card-d0-s1-v0 C0:cardposition}:=1
+, {on card-d0-s1-v1 C0:cardposition}:=1
+, {on card-d0-s1-v2 C0:cardposition}:=1
+, {on card-d0-s2-v0 C0:cardposition}:=1
+, {on card-d0-s2-v1 C0:cardposition}:=1
+, {on card-d0-s2-v2 C0:cardposition}:=1
+, {on card-d0-s3-v0 C0:cardposition}:=1
+, {on card-d0-s3-v1 C0:cardposition}:=1
+, {on card-d0-s3-v2 C0:cardposition}:=1
+>

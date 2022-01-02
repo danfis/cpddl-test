@@ -1,0 +1,405 @@
+Fact[64]:
+  (first b0 s12 0-0-0)
+  (first b1 s12 0-1-1)
+  (first b2 s12 0-2-2)
+  (first b3 s12 0-3-3)
+  (first b4 s12 0-4-4)
+  (first b5 s12 0-5-5)
+  (first b0 s13 1-0-6)
+  (first b1 s13 1-1-7)
+  (first b2 s13 1-2-8)
+  (first b3 s13 1-3-9)
+  (first b4 s13 1-4-10)
+  (first b5 s13 1-5-11)
+  (on b0 a1 2-0-12)
+  (on b0 a2 2-1-13)
+  (on b0 a3 2-2-14)
+  (none-of-those 2-3-15)
+  (on b2 a1 3-0-16)
+  (on b2 a2 3-1-17)
+  (on b2 a3 3-2-18)
+  (none-of-those 3-3-19)
+  (on b3 a1 4-0-20)
+  (on b3 a2 4-1-21)
+  (on b3 a3 4-2-22)
+  (none-of-those 4-3-23)
+  (on b5 a1 5-0-24)
+  (on b5 a2 5-1-25)
+  (on b5 a3 5-2-26)
+  (none-of-those 5-3-27)
+  (not-occupied ta1-1-gasoleo 6-0-28)
+  (occupied ta1-1-gasoleo 6-1-29)
+  (not-occupied ta1-1-lco 7-0-30)
+  (occupied ta1-1-lco 7-1-31)
+  (not-occupied ta1-1-oc1b 8-0-32)
+  (occupied ta1-1-oc1b 8-1-33)
+  (not-occupied ta1-1-oca1 9-0-34)
+  (occupied ta1-1-oca1 9-1-35)
+  (not-occupied ta1-1-rat-a 10-0-36)
+  (occupied ta1-1-rat-a 10-1-37)
+  (not-occupied ta2-1-gasoleo 11-0-38)
+  (occupied ta2-1-gasoleo 11-1-39)
+  (not-occupied ta2-1-lco 12-0-40)
+  (occupied ta2-1-lco 12-1-41)
+  (not-occupied ta2-1-oc1b 13-0-42)
+  (occupied ta2-1-oc1b 13-1-43)
+  (not-occupied ta2-1-oca1 14-0-44)
+  (occupied ta2-1-oca1 14-1-45)
+  (not-occupied ta2-1-rat-a 15-0-46)
+  (occupied ta2-1-rat-a 15-1-47)
+  (not-occupied ta3-1-gasoleo 16-0-48)
+  (occupied ta3-1-gasoleo 16-1-49)
+  (not-occupied ta3-1-lco 17-0-50)
+  (occupied ta3-1-lco 17-1-51)
+  (not-occupied ta3-1-oc1b 18-0-52)
+  (occupied ta3-1-oc1b 18-1-53)
+  (not-occupied ta3-1-oca1 19-0-54)
+  (occupied ta3-1-oca1 19-1-55)
+  (not-occupied ta3-1-rat-a 20-0-56)
+  (occupied ta3-1-rat-a 20-1-57)
+  (on b1 a1 21-0-58)
+  (on b1 a3 21-1-59)
+  (none-of-those 21-2-60)
+  (on b4 a1 22-0-61)
+  (on b4 a2 22-1-62)
+  (none-of-those 22-2-63)
+Op[84]:
+  (pop-unitarypipe s12 b0 a1 a2 b1 oc1b lco ta1-1-lco ta2-1-oc1b), cost: 1
+    pre: (first b1 s12 0-1-1) (on b0 a2 2-1-13) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oc1b 13-1-43)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oc1b 13-0-42) (on b1 a1 21-0-58)
+    del: (first b1 s12 0-1-1) (on b0 a2 2-1-13) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oc1b 13-1-43) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo ta1-1-gasoleo ta2-1-oc1b), cost: 1
+    pre: (first b2 s12 0-2-2) (on b0 a2 2-1-13) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-oc1b 13-1-43)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-oc1b 13-0-42)
+    del: (first b2 s12 0-2-2) (on b0 a2 2-1-13) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-oc1b 13-1-43)
+  (pop-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-lco ta2-1-oc1b), cost: 1
+    pre: (first b4 s12 0-4-4) (on b0 a2 2-1-13) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oc1b 13-1-43)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oc1b 13-0-42) (on b4 a1 22-0-61)
+    del: (first b4 s12 0-4-4) (on b0 a2 2-1-13) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oc1b 13-1-43) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s12 b0 a1 a2 b5 oc1b oca1 ta1-1-oca1 ta2-1-oc1b), cost: 1
+    pre: (first b5 s12 0-5-5) (on b0 a2 2-1-13) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-oc1b 13-1-43)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-oc1b 13-0-42)
+    del: (first b5 s12 0-5-5) (on b0 a2 2-1-13) (on b5 a2 5-1-25) (on b5 a3 5-2-26) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-oc1b 13-1-43)
+  (pop-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-oc1b ta2-1-gasoleo), cost: 1
+    pre: (first b0 s12 0-0-0) (on b2 a2 3-1-17) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-gasoleo 11-1-39)
+    add: (first b2 s12 0-2-2) (on b0 a1 2-0-12) (none-of-those 3-3-19) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-gasoleo 11-0-38)
+    del: (first b0 s12 0-0-0) (on b0 a2 2-1-13) (on b0 a3 2-2-14) (none-of-those 2-3-15) (on b2 a2 3-1-17) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-gasoleo 11-1-39)
+  (pop-unitarypipe s12 b2 a1 a2 b1 gasoleo lco ta1-1-lco ta2-1-gasoleo), cost: 1
+    pre: (first b1 s12 0-1-1) (on b2 a2 3-1-17) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-gasoleo 11-1-39)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-gasoleo 11-0-38) (on b1 a1 21-0-58)
+    del: (first b1 s12 0-1-1) (on b2 a2 3-1-17) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-gasoleo 11-1-39) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s12 b2 a1 a2 b3 gasoleo rat-a ta1-1-rat-a ta2-1-gasoleo), cost: 1
+    pre: (first b3 s12 0-3-3) (on b2 a2 3-1-17) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta2-1-gasoleo 11-1-39)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-gasoleo 11-0-38)
+    del: (first b3 s12 0-3-3) (on b2 a2 3-1-17) (on b3 a2 4-1-21) (on b3 a3 4-2-22) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta2-1-gasoleo 11-1-39)
+  (pop-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-lco ta2-1-gasoleo), cost: 1
+    pre: (first b4 s12 0-4-4) (on b2 a2 3-1-17) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-gasoleo 11-1-39)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-gasoleo 11-0-38) (on b4 a1 22-0-61)
+    del: (first b4 s12 0-4-4) (on b2 a2 3-1-17) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-gasoleo 11-1-39) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s12 b2 a1 a2 b5 gasoleo oca1 ta1-1-oca1 ta2-1-gasoleo), cost: 1
+    pre: (first b5 s12 0-5-5) (on b2 a2 3-1-17) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-gasoleo 11-1-39)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-gasoleo 11-0-38)
+    del: (first b5 s12 0-5-5) (on b2 a2 3-1-17) (on b5 a2 5-1-25) (on b5 a3 5-2-26) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-gasoleo 11-1-39)
+  (pop-unitarypipe s12 b3 a1 a2 b1 rat-a lco ta1-1-lco ta2-1-rat-a), cost: 1
+    pre: (first b1 s12 0-1-1) (on b3 a2 4-1-21) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-rat-a 15-1-47)
+    add: (first b3 s12 0-3-3) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-rat-a 15-0-46) (on b1 a1 21-0-58)
+    del: (first b1 s12 0-1-1) (on b3 a2 4-1-21) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-rat-a 15-1-47) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s12 b3 a1 a2 b2 rat-a gasoleo ta1-1-gasoleo ta2-1-rat-a), cost: 1
+    pre: (first b2 s12 0-2-2) (on b3 a2 4-1-21) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-rat-a 15-1-47)
+    add: (first b3 s12 0-3-3) (on b2 a1 3-0-16) (none-of-those 4-3-23) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-rat-a 15-0-46)
+    del: (first b2 s12 0-2-2) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (on b3 a2 4-1-21) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-rat-a 15-1-47)
+  (pop-unitarypipe s12 b3 a1 a2 b4 rat-a lco ta1-1-lco ta2-1-rat-a), cost: 1
+    pre: (first b4 s12 0-4-4) (on b3 a2 4-1-21) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-rat-a 15-1-47)
+    add: (first b3 s12 0-3-3) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-rat-a 15-0-46) (on b4 a1 22-0-61)
+    del: (first b4 s12 0-4-4) (on b3 a2 4-1-21) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-rat-a 15-1-47) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco), cost: 1
+    pre: (first b0 s12 0-0-0) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    add: (first b4 s12 0-4-4) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-lco 12-0-40) (none-of-those 22-2-63)
+    del: (first b0 s12 0-0-0) (on b0 a2 2-1-13) (on b0 a3 2-2-14) (none-of-those 2-3-15) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+  (pop-unitarypipe s12 b4 a1 a2 b1 lco lco ta1-1-lco ta2-1-lco), cost: 1
+    pre: (first b1 s12 0-1-1) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    add: (first b4 s12 0-4-4) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-lco 12-0-40) (on b1 a1 21-0-58) (none-of-those 22-2-63)
+    del: (first b1 s12 0-1-1) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-lco 12-1-41) (on b1 a3 21-1-59) (none-of-those 21-2-60) (on b4 a2 22-1-62)
+  (pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo ta1-1-gasoleo ta2-1-lco), cost: 1
+    pre: (first b2 s12 0-2-2) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    add: (first b4 s12 0-4-4) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-lco 12-0-40) (none-of-those 22-2-63)
+    del: (first b2 s12 0-2-2) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+  (pop-unitarypipe s12 b4 a1 a2 b3 lco rat-a ta1-1-rat-a ta2-1-lco), cost: 1
+    pre: (first b3 s12 0-3-3) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    add: (first b4 s12 0-4-4) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-lco 12-0-40) (none-of-those 22-2-63)
+    del: (first b3 s12 0-3-3) (on b3 a2 4-1-21) (on b3 a3 4-2-22) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+  (pop-unitarypipe s12 b4 a1 a2 b5 lco oca1 ta1-1-oca1 ta2-1-lco), cost: 1
+    pre: (first b5 s12 0-5-5) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    add: (first b4 s12 0-4-4) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-lco 12-0-40) (none-of-those 22-2-63)
+    del: (first b5 s12 0-5-5) (on b5 a2 5-1-25) (on b5 a3 5-2-26) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+  (pop-unitarypipe s12 b5 a1 a2 b0 oca1 oc1b ta1-1-oc1b ta2-1-oca1), cost: 1
+    pre: (first b0 s12 0-0-0) (on b5 a2 5-1-25) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-oca1 14-1-45)
+    add: (first b5 s12 0-5-5) (on b0 a1 2-0-12) (none-of-those 5-3-27) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-oca1 14-0-44)
+    del: (first b0 s12 0-0-0) (on b0 a2 2-1-13) (on b0 a3 2-2-14) (none-of-those 2-3-15) (on b5 a2 5-1-25) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-oca1 14-1-45)
+  (pop-unitarypipe s12 b5 a1 a2 b1 oca1 lco ta1-1-lco ta2-1-oca1), cost: 1
+    pre: (first b1 s12 0-1-1) (on b5 a2 5-1-25) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oca1 14-1-45)
+    add: (first b5 s12 0-5-5) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oca1 14-0-44) (on b1 a1 21-0-58)
+    del: (first b1 s12 0-1-1) (on b5 a2 5-1-25) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oca1 14-1-45) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s12 b5 a1 a2 b2 oca1 gasoleo ta1-1-gasoleo ta2-1-oca1), cost: 1
+    pre: (first b2 s12 0-2-2) (on b5 a2 5-1-25) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-oca1 14-1-45)
+    add: (first b5 s12 0-5-5) (on b2 a1 3-0-16) (none-of-those 5-3-27) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-oca1 14-0-44)
+    del: (first b2 s12 0-2-2) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (on b5 a2 5-1-25) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-oca1 14-1-45)
+  (pop-unitarypipe s12 b5 a1 a2 b4 oca1 lco ta1-1-lco ta2-1-oca1), cost: 1
+    pre: (first b4 s12 0-4-4) (on b5 a2 5-1-25) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oca1 14-1-45)
+    add: (first b5 s12 0-5-5) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oca1 14-0-44) (on b4 a1 22-0-61)
+    del: (first b4 s12 0-4-4) (on b5 a2 5-1-25) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oca1 14-1-45) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s13 b0 a1 a3 b1 oc1b lco ta1-1-lco ta3-1-oc1b), cost: 1
+    pre: (first b1 s13 1-1-7) (on b0 a3 2-2-14) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oc1b 18-1-53)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oc1b 18-0-52) (on b1 a1 21-0-58)
+    del: (first b1 s13 1-1-7) (on b0 a3 2-2-14) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oc1b 18-1-53) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s13 b0 a1 a3 b2 oc1b gasoleo ta1-1-gasoleo ta3-1-oc1b), cost: 1
+    pre: (first b2 s13 1-2-8) (on b0 a3 2-2-14) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-oc1b 18-1-53)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-oc1b 18-0-52)
+    del: (first b2 s13 1-2-8) (on b0 a3 2-2-14) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-oc1b 18-1-53)
+  (pop-unitarypipe s13 b0 a1 a3 b4 oc1b lco ta1-1-lco ta3-1-oc1b), cost: 1
+    pre: (first b4 s13 1-4-10) (on b0 a3 2-2-14) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oc1b 18-1-53)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oc1b 18-0-52) (on b4 a1 22-0-61)
+    del: (first b4 s13 1-4-10) (on b0 a3 2-2-14) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oc1b 18-1-53) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s13 b0 a1 a3 b5 oc1b oca1 ta1-1-oca1 ta3-1-oc1b), cost: 1
+    pre: (first b5 s13 1-5-11) (on b0 a3 2-2-14) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-oc1b 18-1-53)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-oc1b 18-0-52)
+    del: (first b5 s13 1-5-11) (on b0 a3 2-2-14) (on b5 a2 5-1-25) (on b5 a3 5-2-26) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-oc1b 18-1-53)
+  (pop-unitarypipe s13 b1 a1 a3 b0 lco oc1b ta1-1-oc1b ta3-1-lco), cost: 1
+    pre: (first b0 s13 1-0-6) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    add: (first b1 s13 1-1-7) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-lco 17-0-50) (none-of-those 21-2-60)
+    del: (first b0 s13 1-0-6) (on b0 a2 2-1-13) (on b0 a3 2-2-14) (none-of-those 2-3-15) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+  (pop-unitarypipe s13 b1 a1 a3 b2 lco gasoleo ta1-1-gasoleo ta3-1-lco), cost: 1
+    pre: (first b2 s13 1-2-8) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    add: (first b1 s13 1-1-7) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-lco 17-0-50) (none-of-those 21-2-60)
+    del: (first b2 s13 1-2-8) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+  (pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a ta1-1-rat-a ta3-1-lco), cost: 1
+    pre: (first b3 s13 1-3-9) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    add: (first b1 s13 1-1-7) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta3-1-lco 17-0-50) (none-of-those 21-2-60)
+    del: (first b3 s13 1-3-9) (on b3 a2 4-1-21) (on b3 a3 4-2-22) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+  (pop-unitarypipe s13 b1 a1 a3 b4 lco lco ta1-1-lco ta3-1-lco), cost: 1
+    pre: (first b4 s13 1-4-10) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    add: (first b1 s13 1-1-7) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-lco 17-0-50) (none-of-those 21-2-60) (on b4 a1 22-0-61)
+    del: (first b4 s13 1-4-10) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 ta1-1-oca1 ta3-1-lco), cost: 1
+    pre: (first b5 s13 1-5-11) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    add: (first b1 s13 1-1-7) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-lco 17-0-50) (none-of-those 21-2-60)
+    del: (first b5 s13 1-5-11) (on b5 a2 5-1-25) (on b5 a3 5-2-26) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+  (pop-unitarypipe s13 b2 a1 a3 b0 gasoleo oc1b ta1-1-oc1b ta3-1-gasoleo), cost: 1
+    pre: (first b0 s13 1-0-6) (on b2 a3 3-2-18) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-gasoleo 16-1-49)
+    add: (first b2 s13 1-2-8) (on b0 a1 2-0-12) (none-of-those 3-3-19) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-gasoleo 16-0-48)
+    del: (first b0 s13 1-0-6) (on b0 a2 2-1-13) (on b0 a3 2-2-14) (none-of-those 2-3-15) (on b2 a3 3-2-18) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-gasoleo 16-1-49)
+  (pop-unitarypipe s13 b2 a1 a3 b1 gasoleo lco ta1-1-lco ta3-1-gasoleo), cost: 1
+    pre: (first b1 s13 1-1-7) (on b2 a3 3-2-18) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-gasoleo 16-1-49)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-gasoleo 16-0-48) (on b1 a1 21-0-58)
+    del: (first b1 s13 1-1-7) (on b2 a3 3-2-18) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-gasoleo 16-1-49) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s13 b2 a1 a3 b3 gasoleo rat-a ta1-1-rat-a ta3-1-gasoleo), cost: 1
+    pre: (first b3 s13 1-3-9) (on b2 a3 3-2-18) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta3-1-gasoleo 16-1-49)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta3-1-gasoleo 16-0-48)
+    del: (first b3 s13 1-3-9) (on b2 a3 3-2-18) (on b3 a2 4-1-21) (on b3 a3 4-2-22) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta3-1-gasoleo 16-1-49)
+  (pop-unitarypipe s13 b2 a1 a3 b4 gasoleo lco ta1-1-lco ta3-1-gasoleo), cost: 1
+    pre: (first b4 s13 1-4-10) (on b2 a3 3-2-18) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-gasoleo 16-1-49)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-gasoleo 16-0-48) (on b4 a1 22-0-61)
+    del: (first b4 s13 1-4-10) (on b2 a3 3-2-18) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-gasoleo 16-1-49) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 ta1-1-oca1 ta3-1-gasoleo), cost: 1
+    pre: (first b5 s13 1-5-11) (on b2 a3 3-2-18) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-gasoleo 16-1-49)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-gasoleo 16-0-48)
+    del: (first b5 s13 1-5-11) (on b2 a3 3-2-18) (on b5 a2 5-1-25) (on b5 a3 5-2-26) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-gasoleo 16-1-49)
+  (pop-unitarypipe s13 b3 a1 a3 b1 rat-a lco ta1-1-lco ta3-1-rat-a), cost: 1
+    pre: (first b1 s13 1-1-7) (on b3 a3 4-2-22) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-rat-a 20-1-57)
+    add: (first b3 s13 1-3-9) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-rat-a 20-0-56) (on b1 a1 21-0-58)
+    del: (first b1 s13 1-1-7) (on b3 a3 4-2-22) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-rat-a 20-1-57) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s13 b3 a1 a3 b2 rat-a gasoleo ta1-1-gasoleo ta3-1-rat-a), cost: 1
+    pre: (first b2 s13 1-2-8) (on b3 a3 4-2-22) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-rat-a 20-1-57)
+    add: (first b3 s13 1-3-9) (on b2 a1 3-0-16) (none-of-those 4-3-23) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-rat-a 20-0-56)
+    del: (first b2 s13 1-2-8) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (on b3 a3 4-2-22) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-rat-a 20-1-57)
+  (pop-unitarypipe s13 b3 a1 a3 b4 rat-a lco ta1-1-lco ta3-1-rat-a), cost: 1
+    pre: (first b4 s13 1-4-10) (on b3 a3 4-2-22) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-rat-a 20-1-57)
+    add: (first b3 s13 1-3-9) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-rat-a 20-0-56) (on b4 a1 22-0-61)
+    del: (first b4 s13 1-4-10) (on b3 a3 4-2-22) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-rat-a 20-1-57) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (pop-unitarypipe s13 b5 a1 a3 b0 oca1 oc1b ta1-1-oc1b ta3-1-oca1), cost: 1
+    pre: (first b0 s13 1-0-6) (on b5 a3 5-2-26) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-oca1 19-1-55)
+    add: (first b5 s13 1-5-11) (on b0 a1 2-0-12) (none-of-those 5-3-27) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-oca1 19-0-54)
+    del: (first b0 s13 1-0-6) (on b0 a2 2-1-13) (on b0 a3 2-2-14) (none-of-those 2-3-15) (on b5 a3 5-2-26) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-oca1 19-1-55)
+  (pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-lco ta3-1-oca1), cost: 1
+    pre: (first b1 s13 1-1-7) (on b5 a3 5-2-26) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oca1 19-1-55)
+    add: (first b5 s13 1-5-11) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oca1 19-0-54) (on b1 a1 21-0-58)
+    del: (first b1 s13 1-1-7) (on b5 a3 5-2-26) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oca1 19-1-55) (on b1 a3 21-1-59) (none-of-those 21-2-60)
+  (pop-unitarypipe s13 b5 a1 a3 b2 oca1 gasoleo ta1-1-gasoleo ta3-1-oca1), cost: 1
+    pre: (first b2 s13 1-2-8) (on b5 a3 5-2-26) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-oca1 19-1-55)
+    add: (first b5 s13 1-5-11) (on b2 a1 3-0-16) (none-of-those 5-3-27) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-oca1 19-0-54)
+    del: (first b2 s13 1-2-8) (on b2 a2 3-1-17) (on b2 a3 3-2-18) (none-of-those 3-3-19) (on b5 a3 5-2-26) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-oca1 19-1-55)
+  (pop-unitarypipe s13 b5 a1 a3 b4 oca1 lco ta1-1-lco ta3-1-oca1), cost: 1
+    pre: (first b4 s13 1-4-10) (on b5 a3 5-2-26) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oca1 19-1-55)
+    add: (first b5 s13 1-5-11) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oca1 19-0-54) (on b4 a1 22-0-61)
+    del: (first b4 s13 1-4-10) (on b5 a3 5-2-26) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oca1 19-1-55) (on b4 a2 22-1-62) (none-of-those 22-2-63)
+  (push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo ta1-1-oc1b ta2-1-gasoleo), cost: 1
+    pre: (first b2 s12 0-2-2) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-gasoleo 11-0-38)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (on b2 a2 3-1-17) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-gasoleo 11-1-39)
+    del: (first b2 s12 0-2-2) (on b0 a1 2-0-12) (on b2 a1 3-0-16) (on b2 a3 3-2-18) (none-of-those 3-3-19) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-gasoleo 11-0-38)
+  (push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco), cost: 1
+    pre: (first b4 s12 0-4-4) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-lco 12-0-40)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    del: (first b4 s12 0-4-4) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-lco 12-0-40) (on b4 a1 22-0-61) (none-of-those 22-2-63)
+  (push-unitarypipe s12 b0 a1 a2 b5 oc1b oca1 ta1-1-oc1b ta2-1-oca1), cost: 1
+    pre: (first b5 s12 0-5-5) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-oca1 14-0-44)
+    add: (first b0 s12 0-0-0) (none-of-those 2-3-15) (on b5 a2 5-1-25) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta2-1-oca1 14-1-45)
+    del: (first b5 s12 0-5-5) (on b0 a1 2-0-12) (on b5 a1 5-0-24) (on b5 a3 5-2-26) (none-of-those 5-3-27) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta2-1-oca1 14-0-44)
+  (push-unitarypipe s12 b1 a1 a2 b0 lco oc1b ta1-1-lco ta2-1-oc1b), cost: 1
+    pre: (first b0 s12 0-0-0) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oc1b 13-0-42) (on b1 a1 21-0-58)
+    add: (first b1 s12 0-1-1) (on b0 a2 2-1-13) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oc1b 13-1-43) (none-of-those 21-2-60)
+    del: (first b0 s12 0-0-0) (on b0 a1 2-0-12) (on b0 a3 2-2-14) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oc1b 13-0-42) (on b1 a1 21-0-58)
+  (push-unitarypipe s12 b1 a1 a2 b2 lco gasoleo ta1-1-lco ta2-1-gasoleo), cost: 1
+    pre: (first b2 s12 0-2-2) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-gasoleo 11-0-38) (on b1 a1 21-0-58)
+    add: (first b1 s12 0-1-1) (on b2 a2 3-1-17) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-gasoleo 11-1-39) (none-of-those 21-2-60)
+    del: (first b2 s12 0-2-2) (on b2 a1 3-0-16) (on b2 a3 3-2-18) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-gasoleo 11-0-38) (on b1 a1 21-0-58)
+  (push-unitarypipe s12 b1 a1 a2 b3 lco rat-a ta1-1-lco ta2-1-rat-a), cost: 1
+    pre: (first b3 s12 0-3-3) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-rat-a 15-0-46) (on b1 a1 21-0-58)
+    add: (first b1 s12 0-1-1) (on b3 a2 4-1-21) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-rat-a 15-1-47) (none-of-those 21-2-60)
+    del: (first b3 s12 0-3-3) (on b3 a1 4-0-20) (on b3 a3 4-2-22) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-rat-a 15-0-46) (on b1 a1 21-0-58)
+  (push-unitarypipe s12 b1 a1 a2 b4 lco lco ta1-1-lco ta2-1-lco), cost: 1
+    pre: (first b4 s12 0-4-4) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-lco 12-0-40) (on b1 a1 21-0-58)
+    add: (first b1 s12 0-1-1) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-lco 12-1-41) (none-of-those 21-2-60) (on b4 a2 22-1-62)
+    del: (first b4 s12 0-4-4) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-lco 12-0-40) (on b1 a1 21-0-58) (on b4 a1 22-0-61) (none-of-those 22-2-63)
+  (push-unitarypipe s12 b1 a1 a2 b5 lco oca1 ta1-1-lco ta2-1-oca1), cost: 1
+    pre: (first b5 s12 0-5-5) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oca1 14-0-44) (on b1 a1 21-0-58)
+    add: (first b1 s12 0-1-1) (on b5 a2 5-1-25) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oca1 14-1-45) (none-of-those 21-2-60)
+    del: (first b5 s12 0-5-5) (on b5 a1 5-0-24) (on b5 a3 5-2-26) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oca1 14-0-44) (on b1 a1 21-0-58)
+  (push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-gasoleo ta2-1-oc1b), cost: 1
+    pre: (first b0 s12 0-0-0) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-oc1b 13-0-42)
+    add: (first b2 s12 0-2-2) (on b0 a2 2-1-13) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-oc1b 13-1-43)
+    del: (first b0 s12 0-0-0) (on b0 a1 2-0-12) (on b0 a3 2-2-14) (none-of-those 2-3-15) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-oc1b 13-0-42)
+  (push-unitarypipe s12 b2 a1 a2 b3 gasoleo rat-a ta1-1-gasoleo ta2-1-rat-a), cost: 1
+    pre: (first b3 s12 0-3-3) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-rat-a 15-0-46)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (on b3 a2 4-1-21) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-rat-a 15-1-47)
+    del: (first b3 s12 0-3-3) (on b2 a1 3-0-16) (on b3 a1 4-0-20) (on b3 a3 4-2-22) (none-of-those 4-3-23) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-rat-a 15-0-46)
+  (push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-gasoleo ta2-1-lco), cost: 1
+    pre: (first b4 s12 0-4-4) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-lco 12-0-40)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    del: (first b4 s12 0-4-4) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-lco 12-0-40) (on b4 a1 22-0-61) (none-of-those 22-2-63)
+  (push-unitarypipe s12 b2 a1 a2 b5 gasoleo oca1 ta1-1-gasoleo ta2-1-oca1), cost: 1
+    pre: (first b5 s12 0-5-5) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-oca1 14-0-44)
+    add: (first b2 s12 0-2-2) (none-of-those 3-3-19) (on b5 a2 5-1-25) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta2-1-oca1 14-1-45)
+    del: (first b5 s12 0-5-5) (on b2 a1 3-0-16) (on b5 a1 5-0-24) (on b5 a3 5-2-26) (none-of-those 5-3-27) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta2-1-oca1 14-0-44)
+  (push-unitarypipe s12 b3 a1 a2 b2 rat-a gasoleo ta1-1-rat-a ta2-1-gasoleo), cost: 1
+    pre: (first b2 s12 0-2-2) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-gasoleo 11-0-38)
+    add: (first b3 s12 0-3-3) (on b2 a2 3-1-17) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta2-1-gasoleo 11-1-39)
+    del: (first b2 s12 0-2-2) (on b2 a1 3-0-16) (on b2 a3 3-2-18) (none-of-those 3-3-19) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-gasoleo 11-0-38)
+  (push-unitarypipe s12 b3 a1 a2 b4 rat-a lco ta1-1-rat-a ta2-1-lco), cost: 1
+    pre: (first b4 s12 0-4-4) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-lco 12-0-40)
+    add: (first b3 s12 0-3-3) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    del: (first b4 s12 0-4-4) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-lco 12-0-40) (on b4 a1 22-0-61) (none-of-those 22-2-63)
+  (push-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-lco ta2-1-oc1b), cost: 1
+    pre: (first b0 s12 0-0-0) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oc1b 13-0-42) (on b4 a1 22-0-61)
+    add: (first b4 s12 0-4-4) (on b0 a2 2-1-13) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oc1b 13-1-43) (none-of-those 22-2-63)
+    del: (first b0 s12 0-0-0) (on b0 a1 2-0-12) (on b0 a3 2-2-14) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oc1b 13-0-42) (on b4 a1 22-0-61)
+  (push-unitarypipe s12 b4 a1 a2 b2 lco gasoleo ta1-1-lco ta2-1-gasoleo), cost: 1
+    pre: (first b2 s12 0-2-2) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-gasoleo 11-0-38) (on b4 a1 22-0-61)
+    add: (first b4 s12 0-4-4) (on b2 a2 3-1-17) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-gasoleo 11-1-39) (none-of-those 22-2-63)
+    del: (first b2 s12 0-2-2) (on b2 a1 3-0-16) (on b2 a3 3-2-18) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-gasoleo 11-0-38) (on b4 a1 22-0-61)
+  (push-unitarypipe s12 b4 a1 a2 b3 lco rat-a ta1-1-lco ta2-1-rat-a), cost: 1
+    pre: (first b3 s12 0-3-3) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-rat-a 15-0-46) (on b4 a1 22-0-61)
+    add: (first b4 s12 0-4-4) (on b3 a2 4-1-21) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-rat-a 15-1-47) (none-of-those 22-2-63)
+    del: (first b3 s12 0-3-3) (on b3 a1 4-0-20) (on b3 a3 4-2-22) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-rat-a 15-0-46) (on b4 a1 22-0-61)
+  (push-unitarypipe s12 b4 a1 a2 b5 lco oca1 ta1-1-lco ta2-1-oca1), cost: 1
+    pre: (first b5 s12 0-5-5) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oca1 14-0-44) (on b4 a1 22-0-61)
+    add: (first b4 s12 0-4-4) (on b5 a2 5-1-25) (not-occupied ta1-1-lco 7-0-30) (occupied ta2-1-oca1 14-1-45) (none-of-those 22-2-63)
+    del: (first b5 s12 0-5-5) (on b5 a1 5-0-24) (on b5 a3 5-2-26) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta2-1-oca1 14-0-44) (on b4 a1 22-0-61)
+  (push-unitarypipe s12 b5 a1 a2 b0 oca1 oc1b ta1-1-oca1 ta2-1-oc1b), cost: 1
+    pre: (first b0 s12 0-0-0) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-oc1b 13-0-42)
+    add: (first b5 s12 0-5-5) (on b0 a2 2-1-13) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-oc1b 13-1-43)
+    del: (first b0 s12 0-0-0) (on b0 a1 2-0-12) (on b0 a3 2-2-14) (none-of-those 2-3-15) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-oc1b 13-0-42)
+  (push-unitarypipe s12 b5 a1 a2 b2 oca1 gasoleo ta1-1-oca1 ta2-1-gasoleo), cost: 1
+    pre: (first b2 s12 0-2-2) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-gasoleo 11-0-38)
+    add: (first b5 s12 0-5-5) (on b2 a2 3-1-17) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-gasoleo 11-1-39)
+    del: (first b2 s12 0-2-2) (on b2 a1 3-0-16) (on b2 a3 3-2-18) (none-of-those 3-3-19) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-gasoleo 11-0-38)
+  (push-unitarypipe s12 b5 a1 a2 b4 oca1 lco ta1-1-oca1 ta2-1-lco), cost: 1
+    pre: (first b4 s12 0-4-4) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-lco 12-0-40)
+    add: (first b5 s12 0-5-5) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta2-1-lco 12-1-41) (on b4 a2 22-1-62)
+    del: (first b4 s12 0-4-4) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta2-1-lco 12-0-40) (on b4 a1 22-0-61) (none-of-those 22-2-63)
+  (push-unitarypipe s13 b0 a1 a3 b1 oc1b lco ta1-1-oc1b ta3-1-lco), cost: 1
+    pre: (first b1 s13 1-1-7) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-lco 17-0-50)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    del: (first b1 s13 1-1-7) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-lco 17-0-50) (on b1 a1 21-0-58) (none-of-those 21-2-60)
+  (push-unitarypipe s13 b0 a1 a3 b2 oc1b gasoleo ta1-1-oc1b ta3-1-gasoleo), cost: 1
+    pre: (first b2 s13 1-2-8) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-gasoleo 16-0-48)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (on b2 a3 3-2-18) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-gasoleo 16-1-49)
+    del: (first b2 s13 1-2-8) (on b0 a1 2-0-12) (on b2 a1 3-0-16) (on b2 a2 3-1-17) (none-of-those 3-3-19) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-gasoleo 16-0-48)
+  (push-unitarypipe s13 b0 a1 a3 b5 oc1b oca1 ta1-1-oc1b ta3-1-oca1), cost: 1
+    pre: (first b5 s13 1-5-11) (on b0 a1 2-0-12) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-oca1 19-0-54)
+    add: (first b0 s13 1-0-6) (none-of-those 2-3-15) (on b5 a3 5-2-26) (not-occupied ta1-1-oc1b 8-0-32) (occupied ta3-1-oca1 19-1-55)
+    del: (first b5 s13 1-5-11) (on b0 a1 2-0-12) (on b5 a1 5-0-24) (on b5 a2 5-1-25) (none-of-those 5-3-27) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta3-1-oca1 19-0-54)
+  (push-unitarypipe s13 b1 a1 a3 b0 lco oc1b ta1-1-lco ta3-1-oc1b), cost: 1
+    pre: (first b0 s13 1-0-6) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oc1b 18-0-52) (on b1 a1 21-0-58)
+    add: (first b1 s13 1-1-7) (on b0 a3 2-2-14) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oc1b 18-1-53) (none-of-those 21-2-60)
+    del: (first b0 s13 1-0-6) (on b0 a1 2-0-12) (on b0 a2 2-1-13) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oc1b 18-0-52) (on b1 a1 21-0-58)
+  (push-unitarypipe s13 b1 a1 a3 b2 lco gasoleo ta1-1-lco ta3-1-gasoleo), cost: 1
+    pre: (first b2 s13 1-2-8) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-gasoleo 16-0-48) (on b1 a1 21-0-58)
+    add: (first b1 s13 1-1-7) (on b2 a3 3-2-18) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-gasoleo 16-1-49) (none-of-those 21-2-60)
+    del: (first b2 s13 1-2-8) (on b2 a1 3-0-16) (on b2 a2 3-1-17) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-gasoleo 16-0-48) (on b1 a1 21-0-58)
+  (push-unitarypipe s13 b1 a1 a3 b3 lco rat-a ta1-1-lco ta3-1-rat-a), cost: 1
+    pre: (first b3 s13 1-3-9) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-rat-a 20-0-56) (on b1 a1 21-0-58)
+    add: (first b1 s13 1-1-7) (on b3 a3 4-2-22) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-rat-a 20-1-57) (none-of-those 21-2-60)
+    del: (first b3 s13 1-3-9) (on b3 a1 4-0-20) (on b3 a2 4-1-21) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-rat-a 20-0-56) (on b1 a1 21-0-58)
+  (push-unitarypipe s13 b1 a1 a3 b5 lco oca1 ta1-1-lco ta3-1-oca1), cost: 1
+    pre: (first b5 s13 1-5-11) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oca1 19-0-54) (on b1 a1 21-0-58)
+    add: (first b1 s13 1-1-7) (on b5 a3 5-2-26) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oca1 19-1-55) (none-of-those 21-2-60)
+    del: (first b5 s13 1-5-11) (on b5 a1 5-0-24) (on b5 a2 5-1-25) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oca1 19-0-54) (on b1 a1 21-0-58)
+  (push-unitarypipe s13 b2 a1 a3 b0 gasoleo oc1b ta1-1-gasoleo ta3-1-oc1b), cost: 1
+    pre: (first b0 s13 1-0-6) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-oc1b 18-0-52)
+    add: (first b2 s13 1-2-8) (on b0 a3 2-2-14) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-oc1b 18-1-53)
+    del: (first b0 s13 1-0-6) (on b0 a1 2-0-12) (on b0 a2 2-1-13) (none-of-those 2-3-15) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-oc1b 18-0-52)
+  (push-unitarypipe s13 b2 a1 a3 b1 gasoleo lco ta1-1-gasoleo ta3-1-lco), cost: 1
+    pre: (first b1 s13 1-1-7) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-lco 17-0-50)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    del: (first b1 s13 1-1-7) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-lco 17-0-50) (on b1 a1 21-0-58) (none-of-those 21-2-60)
+  (push-unitarypipe s13 b2 a1 a3 b3 gasoleo rat-a ta1-1-gasoleo ta3-1-rat-a), cost: 1
+    pre: (first b3 s13 1-3-9) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-rat-a 20-0-56)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (on b3 a3 4-2-22) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-rat-a 20-1-57)
+    del: (first b3 s13 1-3-9) (on b2 a1 3-0-16) (on b3 a1 4-0-20) (on b3 a2 4-1-21) (none-of-those 4-3-23) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-rat-a 20-0-56)
+  (push-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 ta1-1-gasoleo ta3-1-oca1), cost: 1
+    pre: (first b5 s13 1-5-11) (on b2 a1 3-0-16) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-oca1 19-0-54)
+    add: (first b2 s13 1-2-8) (none-of-those 3-3-19) (on b5 a3 5-2-26) (not-occupied ta1-1-gasoleo 6-0-28) (occupied ta3-1-oca1 19-1-55)
+    del: (first b5 s13 1-5-11) (on b2 a1 3-0-16) (on b5 a1 5-0-24) (on b5 a2 5-1-25) (none-of-those 5-3-27) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta3-1-oca1 19-0-54)
+  (push-unitarypipe s13 b3 a1 a3 b1 rat-a lco ta1-1-rat-a ta3-1-lco), cost: 1
+    pre: (first b1 s13 1-1-7) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta3-1-lco 17-0-50)
+    add: (first b3 s13 1-3-9) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    del: (first b1 s13 1-1-7) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta3-1-lco 17-0-50) (on b1 a1 21-0-58) (none-of-those 21-2-60)
+  (push-unitarypipe s13 b3 a1 a3 b2 rat-a gasoleo ta1-1-rat-a ta3-1-gasoleo), cost: 1
+    pre: (first b2 s13 1-2-8) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta3-1-gasoleo 16-0-48)
+    add: (first b3 s13 1-3-9) (on b2 a3 3-2-18) (none-of-those 4-3-23) (not-occupied ta1-1-rat-a 10-0-36) (occupied ta3-1-gasoleo 16-1-49)
+    del: (first b2 s13 1-2-8) (on b2 a1 3-0-16) (on b2 a2 3-1-17) (none-of-those 3-3-19) (on b3 a1 4-0-20) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta3-1-gasoleo 16-0-48)
+  (push-unitarypipe s13 b4 a1 a3 b0 lco oc1b ta1-1-lco ta3-1-oc1b), cost: 1
+    pre: (first b0 s13 1-0-6) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oc1b 18-0-52) (on b4 a1 22-0-61)
+    add: (first b4 s13 1-4-10) (on b0 a3 2-2-14) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oc1b 18-1-53) (none-of-those 22-2-63)
+    del: (first b0 s13 1-0-6) (on b0 a1 2-0-12) (on b0 a2 2-1-13) (none-of-those 2-3-15) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oc1b 18-0-52) (on b4 a1 22-0-61)
+  (push-unitarypipe s13 b4 a1 a3 b1 lco lco ta1-1-lco ta3-1-lco), cost: 1
+    pre: (first b1 s13 1-1-7) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-lco 17-0-50) (on b4 a1 22-0-61)
+    add: (first b4 s13 1-4-10) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59) (none-of-those 22-2-63)
+    del: (first b1 s13 1-1-7) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-lco 17-0-50) (on b1 a1 21-0-58) (none-of-those 21-2-60) (on b4 a1 22-0-61)
+  (push-unitarypipe s13 b4 a1 a3 b2 lco gasoleo ta1-1-lco ta3-1-gasoleo), cost: 1
+    pre: (first b2 s13 1-2-8) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-gasoleo 16-0-48) (on b4 a1 22-0-61)
+    add: (first b4 s13 1-4-10) (on b2 a3 3-2-18) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-gasoleo 16-1-49) (none-of-those 22-2-63)
+    del: (first b2 s13 1-2-8) (on b2 a1 3-0-16) (on b2 a2 3-1-17) (none-of-those 3-3-19) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-gasoleo 16-0-48) (on b4 a1 22-0-61)
+  (push-unitarypipe s13 b4 a1 a3 b3 lco rat-a ta1-1-lco ta3-1-rat-a), cost: 1
+    pre: (first b3 s13 1-3-9) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-rat-a 20-0-56) (on b4 a1 22-0-61)
+    add: (first b4 s13 1-4-10) (on b3 a3 4-2-22) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-rat-a 20-1-57) (none-of-those 22-2-63)
+    del: (first b3 s13 1-3-9) (on b3 a1 4-0-20) (on b3 a2 4-1-21) (none-of-those 4-3-23) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-rat-a 20-0-56) (on b4 a1 22-0-61)
+  (push-unitarypipe s13 b4 a1 a3 b5 lco oca1 ta1-1-lco ta3-1-oca1), cost: 1
+    pre: (first b5 s13 1-5-11) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oca1 19-0-54) (on b4 a1 22-0-61)
+    add: (first b4 s13 1-4-10) (on b5 a3 5-2-26) (not-occupied ta1-1-lco 7-0-30) (occupied ta3-1-oca1 19-1-55) (none-of-those 22-2-63)
+    del: (first b5 s13 1-5-11) (on b5 a1 5-0-24) (on b5 a2 5-1-25) (none-of-those 5-3-27) (occupied ta1-1-lco 7-1-31) (not-occupied ta3-1-oca1 19-0-54) (on b4 a1 22-0-61)
+  (push-unitarypipe s13 b5 a1 a3 b0 oca1 oc1b ta1-1-oca1 ta3-1-oc1b), cost: 1
+    pre: (first b0 s13 1-0-6) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-oc1b 18-0-52)
+    add: (first b5 s13 1-5-11) (on b0 a3 2-2-14) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-oc1b 18-1-53)
+    del: (first b0 s13 1-0-6) (on b0 a1 2-0-12) (on b0 a2 2-1-13) (none-of-those 2-3-15) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-oc1b 18-0-52)
+  (push-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-oca1 ta3-1-lco), cost: 1
+    pre: (first b1 s13 1-1-7) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-lco 17-0-50)
+    add: (first b5 s13 1-5-11) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-lco 17-1-51) (on b1 a3 21-1-59)
+    del: (first b1 s13 1-1-7) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-lco 17-0-50) (on b1 a1 21-0-58) (none-of-those 21-2-60)
+  (push-unitarypipe s13 b5 a1 a3 b2 oca1 gasoleo ta1-1-oca1 ta3-1-gasoleo), cost: 1
+    pre: (first b2 s13 1-2-8) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-gasoleo 16-0-48)
+    add: (first b5 s13 1-5-11) (on b2 a3 3-2-18) (none-of-those 5-3-27) (not-occupied ta1-1-oca1 9-0-34) (occupied ta3-1-gasoleo 16-1-49)
+    del: (first b2 s13 1-2-8) (on b2 a1 3-0-16) (on b2 a2 3-1-17) (none-of-those 3-3-19) (on b5 a1 5-0-24) (occupied ta1-1-oca1 9-1-35) (not-occupied ta3-1-gasoleo 16-0-48)
+Init State: (first b4 s12 0-4-4) (first b5 s13 1-5-11) (on b0 a1 2-0-12) (on b2 a1 3-0-16) (on b3 a1 4-0-20) (none-of-those 5-3-27) (occupied ta1-1-gasoleo 6-1-29) (not-occupied ta1-1-lco 7-0-30) (occupied ta1-1-oc1b 8-1-33) (not-occupied ta1-1-oca1 9-0-34) (occupied ta1-1-rat-a 10-1-37) (not-occupied ta2-1-gasoleo 11-0-38) (not-occupied ta2-1-lco 12-0-40) (not-occupied ta2-1-oc1b 13-0-42) (not-occupied ta2-1-oca1 14-0-44) (not-occupied ta2-1-rat-a 15-0-46) (not-occupied ta3-1-gasoleo 16-0-48) (occupied ta3-1-lco 17-1-51) (not-occupied ta3-1-oc1b 18-0-52) (not-occupied ta3-1-oca1 19-0-54) (not-occupied ta3-1-rat-a 20-0-56) (on b1 a3 21-1-59) (none-of-those 22-2-63)
+Goal: (on b2 a3 3-2-18) (on b5 a2 5-1-25)
+Value: 5

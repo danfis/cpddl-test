@@ -1,0 +1,2095 @@
+Fact[74]:
+  (bottomcol diamonda 0-0-0)
+  (home diamonda 0-1-1)
+  (incell diamonda 0-2-2)
+  (on diamonda club2 0-3-3)
+  (on diamonda hearta 0-4-4)
+  (on diamonda spade2 0-5-5)
+  (none-of-those 0-6-6)
+  (bottomcol spadea 1-0-7)
+  (home spadea 1-1-8)
+  (incell spadea 1-2-9)
+  (on spadea diamond2 1-3-10)
+  (on spadea heart2 1-4-11)
+  (on spadea spade2 1-5-12)
+  (none-of-those 1-6-13)
+  (bottomcol cluba 2-0-14)
+  (home cluba 2-1-15)
+  (incell cluba 2-2-16)
+  (on cluba diamond2 2-3-17)
+  (on cluba heart2 2-4-18)
+  (none-of-those 2-5-19)
+  (bottomcol hearta 3-0-20)
+  (home hearta 3-1-21)
+  (incell hearta 3-2-22)
+  (on hearta club2 3-3-23)
+  (on hearta spade2 3-4-24)
+  (none-of-those 3-5-25)
+  (cellspace n0 4-0-26)
+  (cellspace n1 4-1-27)
+  (cellspace n2 4-2-28)
+  (cellspace n3 4-3-29)
+  (cellspace n4 4-4-30)
+  (colspace n0 5-0-31)
+  (colspace n1 5-1-32)
+  (colspace n2 5-2-33)
+  (colspace n3 5-3-34)
+  (colspace n4 5-4-35)
+  (bottomcol club2 6-0-36)
+  (home club2 6-1-37)
+  (incell club2 6-2-38)
+  (on club2 diamond2 6-3-39)
+  (bottomcol heart2 7-0-40)
+  (home heart2 7-1-41)
+  (incell heart2 7-2-42)
+  (on heart2 cluba 7-3-43)
+  (bottomcol diamond2 8-0-44)
+  (home diamond2 8-1-45)
+  (incell diamond2 8-2-46)
+  (bottomcol spade2 9-0-47)
+  (home spade2 9-1-48)
+  (incell spade2 9-2-49)
+  (clear club2 10-0-50)
+  (none-of-those 10-1-51)
+  (clear cluba 11-0-52)
+  (none-of-those 11-1-53)
+  (clear diamond2 12-0-54)
+  (none-of-those 12-1-55)
+  (clear diamonda 13-0-56)
+  (none-of-those 13-1-57)
+  (clear heart2 14-0-58)
+  (none-of-those 14-1-59)
+  (clear hearta 15-0-60)
+  (none-of-those 15-1-61)
+  (clear spade2 16-0-62)
+  (none-of-those 16-1-63)
+  (clear spadea 17-0-64)
+  (none-of-those 17-1-65)
+  (home club0 18-0-66)
+  (none-of-those 18-1-67)
+  (home diamond0 19-0-68)
+  (none-of-those 19-1-69)
+  (home heart0 20-0-70)
+  (none-of-those 20-1-71)
+  (home spade0 21-0-72)
+  (none-of-those 21-1-73)
+Op[504]:
+  (colfromfreecell cluba diamond2 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (cellspace n1 4-1-27) (clear cluba 11-0-52) (none-of-those 12-1-55)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+  (colfromfreecell cluba diamond2 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (cellspace n2 4-2-28) (clear cluba 11-0-52) (none-of-those 12-1-55)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+  (colfromfreecell cluba diamond2 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (cellspace n3 4-3-29) (clear cluba 11-0-52) (none-of-those 12-1-55)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+  (colfromfreecell cluba diamond2 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (cellspace n4 4-4-30) (clear cluba 11-0-52) (none-of-those 12-1-55)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+  (colfromfreecell cluba heart2 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (cellspace n1 4-1-27) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (colfromfreecell cluba heart2 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (cellspace n2 4-2-28) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (colfromfreecell cluba heart2 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (cellspace n3 4-3-29) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (colfromfreecell cluba heart2 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (cellspace n4 4-4-30) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (colfromfreecell diamonda club2 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (clear club2 10-0-50)
+    add: (on diamonda club2 0-3-3) (cellspace n1 4-1-27) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (clear club2 10-0-50) (none-of-those 13-1-57)
+  (colfromfreecell diamonda club2 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (clear club2 10-0-50)
+    add: (on diamonda club2 0-3-3) (cellspace n2 4-2-28) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (clear club2 10-0-50) (none-of-those 13-1-57)
+  (colfromfreecell diamonda club2 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (clear club2 10-0-50)
+    add: (on diamonda club2 0-3-3) (cellspace n3 4-3-29) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (clear club2 10-0-50) (none-of-those 13-1-57)
+  (colfromfreecell diamonda club2 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (clear club2 10-0-50)
+    add: (on diamonda club2 0-3-3) (cellspace n4 4-4-30) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (clear club2 10-0-50) (none-of-those 13-1-57)
+  (colfromfreecell diamonda spade2 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (cellspace n1 4-1-27) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (none-of-those 13-1-57) (clear spade2 16-0-62)
+  (colfromfreecell diamonda spade2 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (cellspace n2 4-2-28) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (none-of-those 13-1-57) (clear spade2 16-0-62)
+  (colfromfreecell diamonda spade2 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (cellspace n3 4-3-29) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (none-of-those 13-1-57) (clear spade2 16-0-62)
+  (colfromfreecell diamonda spade2 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (cellspace n4 4-4-30) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (none-of-those 13-1-57) (clear spade2 16-0-62)
+  (colfromfreecell hearta club2 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (clear club2 10-0-50)
+    add: (on hearta club2 3-3-23) (cellspace n1 4-1-27) (none-of-those 10-1-51) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (clear club2 10-0-50) (none-of-those 15-1-61)
+  (colfromfreecell hearta club2 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (clear club2 10-0-50)
+    add: (on hearta club2 3-3-23) (cellspace n2 4-2-28) (none-of-those 10-1-51) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (clear club2 10-0-50) (none-of-those 15-1-61)
+  (colfromfreecell hearta club2 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (clear club2 10-0-50)
+    add: (on hearta club2 3-3-23) (cellspace n3 4-3-29) (none-of-those 10-1-51) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (clear club2 10-0-50) (none-of-those 15-1-61)
+  (colfromfreecell hearta club2 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (clear club2 10-0-50)
+    add: (on hearta club2 3-3-23) (cellspace n4 4-4-30) (none-of-those 10-1-51) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (clear club2 10-0-50) (none-of-those 15-1-61)
+  (colfromfreecell hearta spade2 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (cellspace n1 4-1-27) (clear hearta 15-0-60) (none-of-those 16-1-63)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (none-of-those 15-1-61) (clear spade2 16-0-62)
+  (colfromfreecell hearta spade2 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (cellspace n2 4-2-28) (clear hearta 15-0-60) (none-of-those 16-1-63)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (none-of-those 15-1-61) (clear spade2 16-0-62)
+  (colfromfreecell hearta spade2 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (cellspace n3 4-3-29) (clear hearta 15-0-60) (none-of-those 16-1-63)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (none-of-those 15-1-61) (clear spade2 16-0-62)
+  (colfromfreecell hearta spade2 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (cellspace n4 4-4-30) (clear hearta 15-0-60) (none-of-those 16-1-63)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (none-of-those 15-1-61) (clear spade2 16-0-62)
+  (colfromfreecell spadea diamond2 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear diamond2 12-0-54)
+    add: (on spadea diamond2 1-3-10) (cellspace n1 4-1-27) (none-of-those 12-1-55) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+  (colfromfreecell spadea diamond2 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear diamond2 12-0-54)
+    add: (on spadea diamond2 1-3-10) (cellspace n2 4-2-28) (none-of-those 12-1-55) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+  (colfromfreecell spadea diamond2 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear diamond2 12-0-54)
+    add: (on spadea diamond2 1-3-10) (cellspace n3 4-3-29) (none-of-those 12-1-55) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+  (colfromfreecell spadea diamond2 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear diamond2 12-0-54)
+    add: (on spadea diamond2 1-3-10) (cellspace n4 4-4-30) (none-of-those 12-1-55) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+  (colfromfreecell spadea heart2 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear heart2 14-0-58)
+    add: (on spadea heart2 1-4-11) (cellspace n1 4-1-27) (none-of-those 14-1-59) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear heart2 14-0-58) (none-of-those 17-1-65)
+  (colfromfreecell spadea heart2 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear heart2 14-0-58)
+    add: (on spadea heart2 1-4-11) (cellspace n2 4-2-28) (none-of-those 14-1-59) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear heart2 14-0-58) (none-of-those 17-1-65)
+  (colfromfreecell spadea heart2 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear heart2 14-0-58)
+    add: (on spadea heart2 1-4-11) (cellspace n3 4-3-29) (none-of-those 14-1-59) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear heart2 14-0-58) (none-of-those 17-1-65)
+  (colfromfreecell spadea heart2 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear heart2 14-0-58)
+    add: (on spadea heart2 1-4-11) (cellspace n4 4-4-30) (none-of-those 14-1-59) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear heart2 14-0-58) (none-of-those 17-1-65)
+  (homefromfreecell club2 club n2 cluba n1 n0 n1), cost: 1
+    pre: (home cluba 2-1-15) (cellspace n0 4-0-26) (incell club2 6-2-38)
+    add: (none-of-those 2-5-19) (cellspace n1 4-1-27) (home club2 6-1-37)
+    del: (home cluba 2-1-15) (cellspace n0 4-0-26) (incell club2 6-2-38)
+  (homefromfreecell club2 club n2 cluba n1 n1 n2), cost: 1
+    pre: (home cluba 2-1-15) (cellspace n1 4-1-27) (incell club2 6-2-38)
+    add: (none-of-those 2-5-19) (cellspace n2 4-2-28) (home club2 6-1-37)
+    del: (home cluba 2-1-15) (cellspace n1 4-1-27) (incell club2 6-2-38)
+  (homefromfreecell club2 club n2 cluba n1 n2 n3), cost: 1
+    pre: (home cluba 2-1-15) (cellspace n2 4-2-28) (incell club2 6-2-38)
+    add: (none-of-those 2-5-19) (cellspace n3 4-3-29) (home club2 6-1-37)
+    del: (home cluba 2-1-15) (cellspace n2 4-2-28) (incell club2 6-2-38)
+  (homefromfreecell club2 club n2 cluba n1 n3 n4), cost: 1
+    pre: (home cluba 2-1-15) (cellspace n3 4-3-29) (incell club2 6-2-38)
+    add: (none-of-those 2-5-19) (cellspace n4 4-4-30) (home club2 6-1-37)
+    del: (home cluba 2-1-15) (cellspace n3 4-3-29) (incell club2 6-2-38)
+  (homefromfreecell cluba club n1 club0 n0 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (cellspace n1 4-1-27) (none-of-those 18-1-67)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (home club0 18-0-66)
+  (homefromfreecell cluba club n1 club0 n0 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (cellspace n2 4-2-28) (none-of-those 18-1-67)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (home club0 18-0-66)
+  (homefromfreecell cluba club n1 club0 n0 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (cellspace n3 4-3-29) (none-of-those 18-1-67)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (home club0 18-0-66)
+  (homefromfreecell cluba club n1 club0 n0 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (cellspace n4 4-4-30) (none-of-those 18-1-67)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (home club0 18-0-66)
+  (homefromfreecell diamond2 diamond n2 diamonda n1 n0 n1), cost: 1
+    pre: (home diamonda 0-1-1) (cellspace n0 4-0-26) (incell diamond2 8-2-46)
+    add: (none-of-those 0-6-6) (cellspace n1 4-1-27) (home diamond2 8-1-45)
+    del: (home diamonda 0-1-1) (cellspace n0 4-0-26) (incell diamond2 8-2-46)
+  (homefromfreecell diamond2 diamond n2 diamonda n1 n1 n2), cost: 1
+    pre: (home diamonda 0-1-1) (cellspace n1 4-1-27) (incell diamond2 8-2-46)
+    add: (none-of-those 0-6-6) (cellspace n2 4-2-28) (home diamond2 8-1-45)
+    del: (home diamonda 0-1-1) (cellspace n1 4-1-27) (incell diamond2 8-2-46)
+  (homefromfreecell diamond2 diamond n2 diamonda n1 n2 n3), cost: 1
+    pre: (home diamonda 0-1-1) (cellspace n2 4-2-28) (incell diamond2 8-2-46)
+    add: (none-of-those 0-6-6) (cellspace n3 4-3-29) (home diamond2 8-1-45)
+    del: (home diamonda 0-1-1) (cellspace n2 4-2-28) (incell diamond2 8-2-46)
+  (homefromfreecell diamond2 diamond n2 diamonda n1 n3 n4), cost: 1
+    pre: (home diamonda 0-1-1) (cellspace n3 4-3-29) (incell diamond2 8-2-46)
+    add: (none-of-those 0-6-6) (cellspace n4 4-4-30) (home diamond2 8-1-45)
+    del: (home diamonda 0-1-1) (cellspace n3 4-3-29) (incell diamond2 8-2-46)
+  (homefromfreecell diamonda diamond n1 diamond0 n0 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (cellspace n1 4-1-27) (none-of-those 19-1-69)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (home diamond0 19-0-68)
+  (homefromfreecell diamonda diamond n1 diamond0 n0 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (cellspace n2 4-2-28) (none-of-those 19-1-69)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (home diamond0 19-0-68)
+  (homefromfreecell diamonda diamond n1 diamond0 n0 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (cellspace n3 4-3-29) (none-of-those 19-1-69)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (home diamond0 19-0-68)
+  (homefromfreecell diamonda diamond n1 diamond0 n0 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (cellspace n4 4-4-30) (none-of-those 19-1-69)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (home diamond0 19-0-68)
+  (homefromfreecell heart2 heart n2 hearta n1 n0 n1), cost: 1
+    pre: (home hearta 3-1-21) (cellspace n0 4-0-26) (incell heart2 7-2-42)
+    add: (none-of-those 3-5-25) (cellspace n1 4-1-27) (home heart2 7-1-41)
+    del: (home hearta 3-1-21) (cellspace n0 4-0-26) (incell heart2 7-2-42)
+  (homefromfreecell heart2 heart n2 hearta n1 n1 n2), cost: 1
+    pre: (home hearta 3-1-21) (cellspace n1 4-1-27) (incell heart2 7-2-42)
+    add: (none-of-those 3-5-25) (cellspace n2 4-2-28) (home heart2 7-1-41)
+    del: (home hearta 3-1-21) (cellspace n1 4-1-27) (incell heart2 7-2-42)
+  (homefromfreecell heart2 heart n2 hearta n1 n2 n3), cost: 1
+    pre: (home hearta 3-1-21) (cellspace n2 4-2-28) (incell heart2 7-2-42)
+    add: (none-of-those 3-5-25) (cellspace n3 4-3-29) (home heart2 7-1-41)
+    del: (home hearta 3-1-21) (cellspace n2 4-2-28) (incell heart2 7-2-42)
+  (homefromfreecell heart2 heart n2 hearta n1 n3 n4), cost: 1
+    pre: (home hearta 3-1-21) (cellspace n3 4-3-29) (incell heart2 7-2-42)
+    add: (none-of-those 3-5-25) (cellspace n4 4-4-30) (home heart2 7-1-41)
+    del: (home hearta 3-1-21) (cellspace n3 4-3-29) (incell heart2 7-2-42)
+  (homefromfreecell hearta heart n1 heart0 n0 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (cellspace n1 4-1-27) (none-of-those 20-1-71)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (home heart0 20-0-70)
+  (homefromfreecell hearta heart n1 heart0 n0 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (cellspace n2 4-2-28) (none-of-those 20-1-71)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (home heart0 20-0-70)
+  (homefromfreecell hearta heart n1 heart0 n0 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (cellspace n3 4-3-29) (none-of-those 20-1-71)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (home heart0 20-0-70)
+  (homefromfreecell hearta heart n1 heart0 n0 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (cellspace n4 4-4-30) (none-of-those 20-1-71)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (home heart0 20-0-70)
+  (homefromfreecell spade2 spade n2 spadea n1 n0 n1), cost: 1
+    pre: (home spadea 1-1-8) (cellspace n0 4-0-26) (incell spade2 9-2-49)
+    add: (none-of-those 1-6-13) (cellspace n1 4-1-27) (home spade2 9-1-48)
+    del: (home spadea 1-1-8) (cellspace n0 4-0-26) (incell spade2 9-2-49)
+  (homefromfreecell spade2 spade n2 spadea n1 n1 n2), cost: 1
+    pre: (home spadea 1-1-8) (cellspace n1 4-1-27) (incell spade2 9-2-49)
+    add: (none-of-those 1-6-13) (cellspace n2 4-2-28) (home spade2 9-1-48)
+    del: (home spadea 1-1-8) (cellspace n1 4-1-27) (incell spade2 9-2-49)
+  (homefromfreecell spade2 spade n2 spadea n1 n2 n3), cost: 1
+    pre: (home spadea 1-1-8) (cellspace n2 4-2-28) (incell spade2 9-2-49)
+    add: (none-of-those 1-6-13) (cellspace n3 4-3-29) (home spade2 9-1-48)
+    del: (home spadea 1-1-8) (cellspace n2 4-2-28) (incell spade2 9-2-49)
+  (homefromfreecell spade2 spade n2 spadea n1 n3 n4), cost: 1
+    pre: (home spadea 1-1-8) (cellspace n3 4-3-29) (incell spade2 9-2-49)
+    add: (none-of-those 1-6-13) (cellspace n4 4-4-30) (home spade2 9-1-48)
+    del: (home spadea 1-1-8) (cellspace n3 4-3-29) (incell spade2 9-2-49)
+  (homefromfreecell spadea spade n1 spade0 n0 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (cellspace n1 4-1-27) (none-of-those 21-1-73)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (home spade0 21-0-72)
+  (homefromfreecell spadea spade n1 spade0 n0 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (cellspace n2 4-2-28) (none-of-those 21-1-73)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (home spade0 21-0-72)
+  (homefromfreecell spadea spade n1 spade0 n0 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (cellspace n3 4-3-29) (none-of-those 21-1-73)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (home spade0 21-0-72)
+  (homefromfreecell spadea spade n1 spade0 n0 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (cellspace n4 4-4-30) (none-of-those 21-1-73)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (home spade0 21-0-72)
+  (move cluba diamond2 heart2), cost: 1
+    pre: (on cluba diamond2 2-3-17) (clear cluba 11-0-52) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (clear diamond2 12-0-54) (none-of-those 14-1-59)
+    del: (on cluba diamond2 2-3-17) (none-of-those 12-1-55) (clear heart2 14-0-58)
+  (move cluba heart2 diamond2), cost: 1
+    pre: (on cluba heart2 2-4-18) (clear cluba 11-0-52) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (none-of-those 12-1-55) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (clear diamond2 12-0-54) (none-of-those 14-1-59)
+  (move diamonda club2 spade2), cost: 1
+    pre: (on diamonda club2 0-3-3) (clear diamonda 13-0-56) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (clear club2 10-0-50) (none-of-those 16-1-63)
+    del: (on diamonda club2 0-3-3) (none-of-those 10-1-51) (clear spade2 16-0-62)
+  (move diamonda hearta club2), cost: 1
+    pre: (on diamonda hearta 0-4-4) (clear club2 10-0-50) (clear diamonda 13-0-56)
+    add: (on diamonda club2 0-3-3) (none-of-those 10-1-51) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (clear club2 10-0-50) (none-of-those 15-1-61)
+  (move diamonda hearta spade2), cost: 1
+    pre: (on diamonda hearta 0-4-4) (clear diamonda 13-0-56) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (clear hearta 15-0-60) (none-of-those 16-1-63)
+    del: (on diamonda hearta 0-4-4) (none-of-those 15-1-61) (clear spade2 16-0-62)
+  (move diamonda spade2 club2), cost: 1
+    pre: (on diamonda spade2 0-5-5) (clear club2 10-0-50) (clear diamonda 13-0-56)
+    add: (on diamonda club2 0-3-3) (none-of-those 10-1-51) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (clear club2 10-0-50) (none-of-those 16-1-63)
+  (move hearta club2 spade2), cost: 1
+    pre: (on hearta club2 3-3-23) (clear hearta 15-0-60) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (clear club2 10-0-50) (none-of-those 16-1-63)
+    del: (on hearta club2 3-3-23) (none-of-those 10-1-51) (clear spade2 16-0-62)
+  (move hearta spade2 club2), cost: 1
+    pre: (on hearta spade2 3-4-24) (clear club2 10-0-50) (clear hearta 15-0-60)
+    add: (on hearta club2 3-3-23) (none-of-those 10-1-51) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (clear club2 10-0-50) (none-of-those 16-1-63)
+  (move spadea diamond2 heart2), cost: 1
+    pre: (on spadea diamond2 1-3-10) (clear heart2 14-0-58) (clear spadea 17-0-64)
+    add: (on spadea heart2 1-4-11) (clear diamond2 12-0-54) (none-of-those 14-1-59)
+    del: (on spadea diamond2 1-3-10) (none-of-those 12-1-55) (clear heart2 14-0-58)
+  (move spadea heart2 diamond2), cost: 1
+    pre: (on spadea heart2 1-4-11) (clear diamond2 12-0-54) (clear spadea 17-0-64)
+    add: (on spadea diamond2 1-3-10) (none-of-those 12-1-55) (clear heart2 14-0-58)
+    del: (on spadea heart2 1-4-11) (clear diamond2 12-0-54) (none-of-those 14-1-59)
+  (move spadea spade2 diamond2), cost: 1
+    pre: (on spadea spade2 1-5-12) (clear diamond2 12-0-54) (clear spadea 17-0-64)
+    add: (on spadea diamond2 1-3-10) (none-of-those 12-1-55) (clear spade2 16-0-62)
+    del: (on spadea spade2 1-5-12) (clear diamond2 12-0-54) (none-of-those 16-1-63)
+  (move spadea spade2 heart2), cost: 1
+    pre: (on spadea spade2 1-5-12) (clear heart2 14-0-58) (clear spadea 17-0-64)
+    add: (on spadea heart2 1-4-11) (none-of-those 14-1-59) (clear spade2 16-0-62)
+    del: (on spadea spade2 1-5-12) (clear heart2 14-0-58) (none-of-those 16-1-63)
+  (move-b cluba diamond2 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear cluba 11-0-52) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (colspace n1 5-1-32) (none-of-those 12-1-55)
+    del: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear diamond2 12-0-54)
+  (move-b cluba diamond2 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear cluba 11-0-52) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (colspace n2 5-2-33) (none-of-those 12-1-55)
+    del: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear diamond2 12-0-54)
+  (move-b cluba diamond2 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear cluba 11-0-52) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (colspace n3 5-3-34) (none-of-those 12-1-55)
+    del: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear diamond2 12-0-54)
+  (move-b cluba diamond2 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear cluba 11-0-52) (clear diamond2 12-0-54)
+    add: (on cluba diamond2 2-3-17) (colspace n4 5-4-35) (none-of-those 12-1-55)
+    del: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear diamond2 12-0-54)
+  (move-b cluba heart2 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear cluba 11-0-52) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (colspace n1 5-1-32) (none-of-those 14-1-59)
+    del: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear heart2 14-0-58)
+  (move-b cluba heart2 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear cluba 11-0-52) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (colspace n2 5-2-33) (none-of-those 14-1-59)
+    del: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear heart2 14-0-58)
+  (move-b cluba heart2 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear cluba 11-0-52) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (colspace n3 5-3-34) (none-of-those 14-1-59)
+    del: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear heart2 14-0-58)
+  (move-b cluba heart2 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear cluba 11-0-52) (clear heart2 14-0-58)
+    add: (on cluba heart2 2-4-18) (colspace n4 5-4-35) (none-of-those 14-1-59)
+    del: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear heart2 14-0-58)
+  (move-b diamonda club2 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear club2 10-0-50) (clear diamonda 13-0-56)
+    add: (on diamonda club2 0-3-3) (colspace n1 5-1-32) (none-of-those 10-1-51)
+    del: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear club2 10-0-50)
+  (move-b diamonda club2 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear club2 10-0-50) (clear diamonda 13-0-56)
+    add: (on diamonda club2 0-3-3) (colspace n2 5-2-33) (none-of-those 10-1-51)
+    del: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear club2 10-0-50)
+  (move-b diamonda club2 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear club2 10-0-50) (clear diamonda 13-0-56)
+    add: (on diamonda club2 0-3-3) (colspace n3 5-3-34) (none-of-those 10-1-51)
+    del: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear club2 10-0-50)
+  (move-b diamonda club2 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear club2 10-0-50) (clear diamonda 13-0-56)
+    add: (on diamonda club2 0-3-3) (colspace n4 5-4-35) (none-of-those 10-1-51)
+    del: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear club2 10-0-50)
+  (move-b diamonda spade2 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear diamonda 13-0-56) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (colspace n1 5-1-32) (none-of-those 16-1-63)
+    del: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear spade2 16-0-62)
+  (move-b diamonda spade2 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear diamonda 13-0-56) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (colspace n2 5-2-33) (none-of-those 16-1-63)
+    del: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear spade2 16-0-62)
+  (move-b diamonda spade2 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear diamonda 13-0-56) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (colspace n3 5-3-34) (none-of-those 16-1-63)
+    del: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear spade2 16-0-62)
+  (move-b diamonda spade2 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear diamonda 13-0-56) (clear spade2 16-0-62)
+    add: (on diamonda spade2 0-5-5) (colspace n4 5-4-35) (none-of-those 16-1-63)
+    del: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear spade2 16-0-62)
+  (move-b hearta club2 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear club2 10-0-50) (clear hearta 15-0-60)
+    add: (on hearta club2 3-3-23) (colspace n1 5-1-32) (none-of-those 10-1-51)
+    del: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear club2 10-0-50)
+  (move-b hearta club2 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear club2 10-0-50) (clear hearta 15-0-60)
+    add: (on hearta club2 3-3-23) (colspace n2 5-2-33) (none-of-those 10-1-51)
+    del: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear club2 10-0-50)
+  (move-b hearta club2 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear club2 10-0-50) (clear hearta 15-0-60)
+    add: (on hearta club2 3-3-23) (colspace n3 5-3-34) (none-of-those 10-1-51)
+    del: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear club2 10-0-50)
+  (move-b hearta club2 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear club2 10-0-50) (clear hearta 15-0-60)
+    add: (on hearta club2 3-3-23) (colspace n4 5-4-35) (none-of-those 10-1-51)
+    del: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear club2 10-0-50)
+  (move-b hearta spade2 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear hearta 15-0-60) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (colspace n1 5-1-32) (none-of-those 16-1-63)
+    del: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear spade2 16-0-62)
+  (move-b hearta spade2 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear hearta 15-0-60) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (colspace n2 5-2-33) (none-of-those 16-1-63)
+    del: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear spade2 16-0-62)
+  (move-b hearta spade2 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear hearta 15-0-60) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (colspace n3 5-3-34) (none-of-those 16-1-63)
+    del: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear spade2 16-0-62)
+  (move-b hearta spade2 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear hearta 15-0-60) (clear spade2 16-0-62)
+    add: (on hearta spade2 3-4-24) (colspace n4 5-4-35) (none-of-those 16-1-63)
+    del: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear spade2 16-0-62)
+  (move-b spadea diamond2 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear diamond2 12-0-54) (clear spadea 17-0-64)
+    add: (on spadea diamond2 1-3-10) (colspace n1 5-1-32) (none-of-those 12-1-55)
+    del: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear diamond2 12-0-54)
+  (move-b spadea diamond2 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear diamond2 12-0-54) (clear spadea 17-0-64)
+    add: (on spadea diamond2 1-3-10) (colspace n2 5-2-33) (none-of-those 12-1-55)
+    del: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear diamond2 12-0-54)
+  (move-b spadea diamond2 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear diamond2 12-0-54) (clear spadea 17-0-64)
+    add: (on spadea diamond2 1-3-10) (colspace n3 5-3-34) (none-of-those 12-1-55)
+    del: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear diamond2 12-0-54)
+  (move-b spadea diamond2 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear diamond2 12-0-54) (clear spadea 17-0-64)
+    add: (on spadea diamond2 1-3-10) (colspace n4 5-4-35) (none-of-those 12-1-55)
+    del: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear diamond2 12-0-54)
+  (move-b spadea heart2 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear heart2 14-0-58) (clear spadea 17-0-64)
+    add: (on spadea heart2 1-4-11) (colspace n1 5-1-32) (none-of-those 14-1-59)
+    del: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear heart2 14-0-58)
+  (move-b spadea heart2 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear heart2 14-0-58) (clear spadea 17-0-64)
+    add: (on spadea heart2 1-4-11) (colspace n2 5-2-33) (none-of-those 14-1-59)
+    del: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear heart2 14-0-58)
+  (move-b spadea heart2 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear heart2 14-0-58) (clear spadea 17-0-64)
+    add: (on spadea heart2 1-4-11) (colspace n3 5-3-34) (none-of-those 14-1-59)
+    del: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear heart2 14-0-58)
+  (move-b spadea heart2 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear heart2 14-0-58) (clear spadea 17-0-64)
+    add: (on spadea heart2 1-4-11) (colspace n4 5-4-35) (none-of-those 14-1-59)
+    del: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear heart2 14-0-58)
+  (newcolfromfreecell club2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell club2 6-2-38)
+    add: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell club2 6-2-38)
+    add: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell club2 6-2-38)
+    add: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell club2 6-2-38)
+    add: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell club2 6-2-38)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell club2 6-2-38)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell club2 6-2-38)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell club2 6-2-38)
+    add: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell club2 6-2-38)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell club2 6-2-38)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell club2 6-2-38)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell club2 6-2-38)
+    add: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell club2 6-2-38)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell club2 6-2-38)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell club2 6-2-38)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell club2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell club2 6-2-38)
+    add: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    del: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+  (newcolfromfreecell cluba n1 n0 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n1 5-1-32)
+    add: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n1 n0 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n1 5-1-32)
+    add: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n1 n0 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n1 5-1-32)
+    add: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n1 n0 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n1 5-1-32)
+    add: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n2 n1 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n2 5-2-33)
+    add: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n2 n1 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n2 5-2-33)
+    add: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n2 n1 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n2 5-2-33)
+    add: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n2 n1 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n2 5-2-33)
+    add: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n3 n2 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n3 5-3-34)
+    add: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n3 n2 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n3 5-3-34)
+    add: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n3 n2 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n3 5-3-34)
+    add: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n3 n2 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n3 5-3-34)
+    add: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n4 n3 n0 n1), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n4 5-4-35)
+    add: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n4 n3 n1 n2), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n4 5-4-35)
+    add: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n4 n3 n2 n3), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n4 5-4-35)
+    add: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 11-1-53)
+  (newcolfromfreecell cluba n4 n3 n3 n4), cost: 1
+    pre: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n4 5-4-35)
+    add: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    del: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 11-1-53)
+  (newcolfromfreecell diamond2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell diamond2 8-2-46)
+    add: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell diamond2 8-2-46)
+    add: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell diamond2 8-2-46)
+    add: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell diamond2 8-2-46)
+    add: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell diamond2 8-2-46)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell diamond2 8-2-46)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell diamond2 8-2-46)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell diamond2 8-2-46)
+    add: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell diamond2 8-2-46)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell diamond2 8-2-46)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell diamond2 8-2-46)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell diamond2 8-2-46)
+    add: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell diamond2 8-2-46)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell diamond2 8-2-46)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell diamond2 8-2-46)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamond2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell diamond2 8-2-46)
+    add: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    del: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+  (newcolfromfreecell diamonda n1 n0 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n1 5-1-32)
+    add: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n1 n0 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n1 5-1-32)
+    add: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n1 n0 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n1 5-1-32)
+    add: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n1 n0 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n1 5-1-32)
+    add: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n2 n1 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n2 5-2-33)
+    add: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n2 n1 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n2 5-2-33)
+    add: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n2 n1 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n2 5-2-33)
+    add: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n2 n1 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n2 5-2-33)
+    add: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n3 n2 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n3 5-3-34)
+    add: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n3 n2 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n3 5-3-34)
+    add: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n3 n2 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n3 5-3-34)
+    add: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n3 n2 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n3 5-3-34)
+    add: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n4 n3 n0 n1), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n4 5-4-35)
+    add: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n4 n3 n1 n2), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n4 5-4-35)
+    add: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n4 n3 n2 n3), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n4 5-4-35)
+    add: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 13-1-57)
+  (newcolfromfreecell diamonda n4 n3 n3 n4), cost: 1
+    pre: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n4 5-4-35)
+    add: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    del: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 13-1-57)
+  (newcolfromfreecell heart2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell heart2 7-2-42)
+    add: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell heart2 7-2-42)
+    add: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell heart2 7-2-42)
+    add: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell heart2 7-2-42)
+    add: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell heart2 7-2-42)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell heart2 7-2-42)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell heart2 7-2-42)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell heart2 7-2-42)
+    add: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell heart2 7-2-42)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell heart2 7-2-42)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell heart2 7-2-42)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell heart2 7-2-42)
+    add: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell heart2 7-2-42)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell heart2 7-2-42)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell heart2 7-2-42)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell heart2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell heart2 7-2-42)
+    add: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    del: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+  (newcolfromfreecell hearta n1 n0 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n1 5-1-32)
+    add: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n1 n0 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n1 5-1-32)
+    add: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n1 n0 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n1 5-1-32)
+    add: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n1 n0 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n1 5-1-32)
+    add: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n2 n1 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n2 5-2-33)
+    add: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n2 n1 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n2 5-2-33)
+    add: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n2 n1 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n2 5-2-33)
+    add: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n2 n1 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n2 5-2-33)
+    add: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n3 n2 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n3 5-3-34)
+    add: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n3 n2 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n3 5-3-34)
+    add: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n3 n2 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n3 5-3-34)
+    add: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n3 n2 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n3 5-3-34)
+    add: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n4 n3 n0 n1), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n4 5-4-35)
+    add: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n4 n3 n1 n2), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n4 5-4-35)
+    add: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n4 n3 n2 n3), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n4 5-4-35)
+    add: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 15-1-61)
+  (newcolfromfreecell hearta n4 n3 n3 n4), cost: 1
+    pre: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n4 5-4-35)
+    add: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    del: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 15-1-61)
+  (newcolfromfreecell spade2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell spade2 9-2-49)
+    add: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell spade2 9-2-49)
+    add: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell spade2 9-2-49)
+    add: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell spade2 9-2-49)
+    add: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell spade2 9-2-49)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell spade2 9-2-49)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell spade2 9-2-49)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell spade2 9-2-49)
+    add: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell spade2 9-2-49)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell spade2 9-2-49)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell spade2 9-2-49)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell spade2 9-2-49)
+    add: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell spade2 9-2-49)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell spade2 9-2-49)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell spade2 9-2-49)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spade2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell spade2 9-2-49)
+    add: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    del: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+  (newcolfromfreecell spadea n1 n0 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n1 5-1-32)
+    add: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n1 n0 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n1 5-1-32)
+    add: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n1 n0 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n1 5-1-32)
+    add: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n1 n0 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n1 5-1-32)
+    add: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n2 n1 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n2 5-2-33)
+    add: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n2 n1 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n2 5-2-33)
+    add: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n2 n1 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n2 5-2-33)
+    add: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n2 n1 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n2 5-2-33)
+    add: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n3 n2 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n3 5-3-34)
+    add: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n3 n2 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n3 5-3-34)
+    add: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n3 n2 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n3 5-3-34)
+    add: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n3 n2 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n3 5-3-34)
+    add: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n4 n3 n0 n1), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n4 5-4-35)
+    add: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n4 n3 n1 n2), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n4 5-4-35)
+    add: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n4 n3 n2 n3), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n4 5-4-35)
+    add: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 17-1-65)
+  (newcolfromfreecell spadea n4 n3 n3 n4), cost: 1
+    pre: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n4 5-4-35)
+    add: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    del: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 17-1-65)
+  (sendtofree club2 diamond2 n1 n0), cost: 1
+    pre: (cellspace n1 4-1-27) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (cellspace n0 4-0-26) (incell club2 6-2-38) (none-of-those 10-1-51) (clear diamond2 12-0-54)
+    del: (cellspace n1 4-1-27) (on club2 diamond2 6-3-39) (clear club2 10-0-50) (none-of-those 12-1-55)
+  (sendtofree club2 diamond2 n2 n1), cost: 1
+    pre: (cellspace n2 4-2-28) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (cellspace n1 4-1-27) (incell club2 6-2-38) (none-of-those 10-1-51) (clear diamond2 12-0-54)
+    del: (cellspace n2 4-2-28) (on club2 diamond2 6-3-39) (clear club2 10-0-50) (none-of-those 12-1-55)
+  (sendtofree club2 diamond2 n3 n2), cost: 1
+    pre: (cellspace n3 4-3-29) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (cellspace n2 4-2-28) (incell club2 6-2-38) (none-of-those 10-1-51) (clear diamond2 12-0-54)
+    del: (cellspace n3 4-3-29) (on club2 diamond2 6-3-39) (clear club2 10-0-50) (none-of-those 12-1-55)
+  (sendtofree club2 diamond2 n4 n3), cost: 1
+    pre: (cellspace n4 4-4-30) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (cellspace n3 4-3-29) (incell club2 6-2-38) (none-of-those 10-1-51) (clear diamond2 12-0-54)
+    del: (cellspace n4 4-4-30) (on club2 diamond2 6-3-39) (clear club2 10-0-50) (none-of-those 12-1-55)
+  (sendtofree cluba diamond2 n1 n0), cost: 1
+    pre: (on cluba diamond2 2-3-17) (cellspace n1 4-1-27) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n0 4-0-26) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (cellspace n1 4-1-27) (clear cluba 11-0-52) (none-of-those 12-1-55)
+  (sendtofree cluba diamond2 n2 n1), cost: 1
+    pre: (on cluba diamond2 2-3-17) (cellspace n2 4-2-28) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n1 4-1-27) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (cellspace n2 4-2-28) (clear cluba 11-0-52) (none-of-those 12-1-55)
+  (sendtofree cluba diamond2 n3 n2), cost: 1
+    pre: (on cluba diamond2 2-3-17) (cellspace n3 4-3-29) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n2 4-2-28) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (cellspace n3 4-3-29) (clear cluba 11-0-52) (none-of-those 12-1-55)
+  (sendtofree cluba diamond2 n4 n3), cost: 1
+    pre: (on cluba diamond2 2-3-17) (cellspace n4 4-4-30) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n3 4-3-29) (none-of-those 11-1-53) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (cellspace n4 4-4-30) (clear cluba 11-0-52) (none-of-those 12-1-55)
+  (sendtofree cluba heart2 n1 n0), cost: 1
+    pre: (on cluba heart2 2-4-18) (cellspace n1 4-1-27) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n0 4-0-26) (none-of-those 11-1-53) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (cellspace n1 4-1-27) (clear cluba 11-0-52) (none-of-those 14-1-59)
+  (sendtofree cluba heart2 n2 n1), cost: 1
+    pre: (on cluba heart2 2-4-18) (cellspace n2 4-2-28) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n1 4-1-27) (none-of-those 11-1-53) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (cellspace n2 4-2-28) (clear cluba 11-0-52) (none-of-those 14-1-59)
+  (sendtofree cluba heart2 n3 n2), cost: 1
+    pre: (on cluba heart2 2-4-18) (cellspace n3 4-3-29) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n2 4-2-28) (none-of-those 11-1-53) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (cellspace n3 4-3-29) (clear cluba 11-0-52) (none-of-those 14-1-59)
+  (sendtofree cluba heart2 n4 n3), cost: 1
+    pre: (on cluba heart2 2-4-18) (cellspace n4 4-4-30) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n3 4-3-29) (none-of-those 11-1-53) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (cellspace n4 4-4-30) (clear cluba 11-0-52) (none-of-those 14-1-59)
+  (sendtofree diamonda club2 n1 n0), cost: 1
+    pre: (on diamonda club2 0-3-3) (cellspace n1 4-1-27) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (clear club2 10-0-50) (none-of-those 13-1-57)
+    del: (on diamonda club2 0-3-3) (cellspace n1 4-1-27) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+  (sendtofree diamonda club2 n2 n1), cost: 1
+    pre: (on diamonda club2 0-3-3) (cellspace n2 4-2-28) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (clear club2 10-0-50) (none-of-those 13-1-57)
+    del: (on diamonda club2 0-3-3) (cellspace n2 4-2-28) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+  (sendtofree diamonda club2 n3 n2), cost: 1
+    pre: (on diamonda club2 0-3-3) (cellspace n3 4-3-29) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (clear club2 10-0-50) (none-of-those 13-1-57)
+    del: (on diamonda club2 0-3-3) (cellspace n3 4-3-29) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+  (sendtofree diamonda club2 n4 n3), cost: 1
+    pre: (on diamonda club2 0-3-3) (cellspace n4 4-4-30) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (clear club2 10-0-50) (none-of-those 13-1-57)
+    del: (on diamonda club2 0-3-3) (cellspace n4 4-4-30) (none-of-those 10-1-51) (clear diamonda 13-0-56)
+  (sendtofree diamonda hearta n1 n0), cost: 1
+    pre: (on diamonda hearta 0-4-4) (cellspace n1 4-1-27) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (none-of-those 13-1-57) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (cellspace n1 4-1-27) (clear diamonda 13-0-56) (none-of-those 15-1-61)
+  (sendtofree diamonda hearta n2 n1), cost: 1
+    pre: (on diamonda hearta 0-4-4) (cellspace n2 4-2-28) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (none-of-those 13-1-57) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (cellspace n2 4-2-28) (clear diamonda 13-0-56) (none-of-those 15-1-61)
+  (sendtofree diamonda hearta n3 n2), cost: 1
+    pre: (on diamonda hearta 0-4-4) (cellspace n3 4-3-29) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (none-of-those 13-1-57) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (cellspace n3 4-3-29) (clear diamonda 13-0-56) (none-of-those 15-1-61)
+  (sendtofree diamonda hearta n4 n3), cost: 1
+    pre: (on diamonda hearta 0-4-4) (cellspace n4 4-4-30) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (none-of-those 13-1-57) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (cellspace n4 4-4-30) (clear diamonda 13-0-56) (none-of-those 15-1-61)
+  (sendtofree diamonda spade2 n1 n0), cost: 1
+    pre: (on diamonda spade2 0-5-5) (cellspace n1 4-1-27) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (none-of-those 13-1-57) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (cellspace n1 4-1-27) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+  (sendtofree diamonda spade2 n2 n1), cost: 1
+    pre: (on diamonda spade2 0-5-5) (cellspace n2 4-2-28) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (none-of-those 13-1-57) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (cellspace n2 4-2-28) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+  (sendtofree diamonda spade2 n3 n2), cost: 1
+    pre: (on diamonda spade2 0-5-5) (cellspace n3 4-3-29) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (none-of-those 13-1-57) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (cellspace n3 4-3-29) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+  (sendtofree diamonda spade2 n4 n3), cost: 1
+    pre: (on diamonda spade2 0-5-5) (cellspace n4 4-4-30) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (none-of-those 13-1-57) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (cellspace n4 4-4-30) (clear diamonda 13-0-56) (none-of-those 16-1-63)
+  (sendtofree heart2 cluba n1 n0), cost: 1
+    pre: (cellspace n1 4-1-27) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (cellspace n0 4-0-26) (incell heart2 7-2-42) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (cellspace n1 4-1-27) (on heart2 cluba 7-3-43) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (sendtofree heart2 cluba n2 n1), cost: 1
+    pre: (cellspace n2 4-2-28) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (cellspace n1 4-1-27) (incell heart2 7-2-42) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (cellspace n2 4-2-28) (on heart2 cluba 7-3-43) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (sendtofree heart2 cluba n3 n2), cost: 1
+    pre: (cellspace n3 4-3-29) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (cellspace n2 4-2-28) (incell heart2 7-2-42) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (cellspace n3 4-3-29) (on heart2 cluba 7-3-43) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (sendtofree heart2 cluba n4 n3), cost: 1
+    pre: (cellspace n4 4-4-30) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (cellspace n3 4-3-29) (incell heart2 7-2-42) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (cellspace n4 4-4-30) (on heart2 cluba 7-3-43) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (sendtofree hearta club2 n1 n0), cost: 1
+    pre: (on hearta club2 3-3-23) (cellspace n1 4-1-27) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n0 4-0-26) (clear club2 10-0-50) (none-of-those 15-1-61)
+    del: (on hearta club2 3-3-23) (cellspace n1 4-1-27) (none-of-those 10-1-51) (clear hearta 15-0-60)
+  (sendtofree hearta club2 n2 n1), cost: 1
+    pre: (on hearta club2 3-3-23) (cellspace n2 4-2-28) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n1 4-1-27) (clear club2 10-0-50) (none-of-those 15-1-61)
+    del: (on hearta club2 3-3-23) (cellspace n2 4-2-28) (none-of-those 10-1-51) (clear hearta 15-0-60)
+  (sendtofree hearta club2 n3 n2), cost: 1
+    pre: (on hearta club2 3-3-23) (cellspace n3 4-3-29) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n2 4-2-28) (clear club2 10-0-50) (none-of-those 15-1-61)
+    del: (on hearta club2 3-3-23) (cellspace n3 4-3-29) (none-of-those 10-1-51) (clear hearta 15-0-60)
+  (sendtofree hearta club2 n4 n3), cost: 1
+    pre: (on hearta club2 3-3-23) (cellspace n4 4-4-30) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n3 4-3-29) (clear club2 10-0-50) (none-of-those 15-1-61)
+    del: (on hearta club2 3-3-23) (cellspace n4 4-4-30) (none-of-those 10-1-51) (clear hearta 15-0-60)
+  (sendtofree hearta spade2 n1 n0), cost: 1
+    pre: (on hearta spade2 3-4-24) (cellspace n1 4-1-27) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n0 4-0-26) (none-of-those 15-1-61) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (cellspace n1 4-1-27) (clear hearta 15-0-60) (none-of-those 16-1-63)
+  (sendtofree hearta spade2 n2 n1), cost: 1
+    pre: (on hearta spade2 3-4-24) (cellspace n2 4-2-28) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n1 4-1-27) (none-of-those 15-1-61) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (cellspace n2 4-2-28) (clear hearta 15-0-60) (none-of-those 16-1-63)
+  (sendtofree hearta spade2 n3 n2), cost: 1
+    pre: (on hearta spade2 3-4-24) (cellspace n3 4-3-29) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n2 4-2-28) (none-of-those 15-1-61) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (cellspace n3 4-3-29) (clear hearta 15-0-60) (none-of-those 16-1-63)
+  (sendtofree hearta spade2 n4 n3), cost: 1
+    pre: (on hearta spade2 3-4-24) (cellspace n4 4-4-30) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n3 4-3-29) (none-of-those 15-1-61) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (cellspace n4 4-4-30) (clear hearta 15-0-60) (none-of-those 16-1-63)
+  (sendtofree spadea diamond2 n1 n0), cost: 1
+    pre: (on spadea diamond2 1-3-10) (cellspace n1 4-1-27) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+    del: (on spadea diamond2 1-3-10) (cellspace n1 4-1-27) (none-of-those 12-1-55) (clear spadea 17-0-64)
+  (sendtofree spadea diamond2 n2 n1), cost: 1
+    pre: (on spadea diamond2 1-3-10) (cellspace n2 4-2-28) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+    del: (on spadea diamond2 1-3-10) (cellspace n2 4-2-28) (none-of-those 12-1-55) (clear spadea 17-0-64)
+  (sendtofree spadea diamond2 n3 n2), cost: 1
+    pre: (on spadea diamond2 1-3-10) (cellspace n3 4-3-29) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+    del: (on spadea diamond2 1-3-10) (cellspace n3 4-3-29) (none-of-those 12-1-55) (clear spadea 17-0-64)
+  (sendtofree spadea diamond2 n4 n3), cost: 1
+    pre: (on spadea diamond2 1-3-10) (cellspace n4 4-4-30) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear diamond2 12-0-54) (none-of-those 17-1-65)
+    del: (on spadea diamond2 1-3-10) (cellspace n4 4-4-30) (none-of-those 12-1-55) (clear spadea 17-0-64)
+  (sendtofree spadea heart2 n1 n0), cost: 1
+    pre: (on spadea heart2 1-4-11) (cellspace n1 4-1-27) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear heart2 14-0-58) (none-of-those 17-1-65)
+    del: (on spadea heart2 1-4-11) (cellspace n1 4-1-27) (none-of-those 14-1-59) (clear spadea 17-0-64)
+  (sendtofree spadea heart2 n2 n1), cost: 1
+    pre: (on spadea heart2 1-4-11) (cellspace n2 4-2-28) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear heart2 14-0-58) (none-of-those 17-1-65)
+    del: (on spadea heart2 1-4-11) (cellspace n2 4-2-28) (none-of-those 14-1-59) (clear spadea 17-0-64)
+  (sendtofree spadea heart2 n3 n2), cost: 1
+    pre: (on spadea heart2 1-4-11) (cellspace n3 4-3-29) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear heart2 14-0-58) (none-of-those 17-1-65)
+    del: (on spadea heart2 1-4-11) (cellspace n3 4-3-29) (none-of-those 14-1-59) (clear spadea 17-0-64)
+  (sendtofree spadea heart2 n4 n3), cost: 1
+    pre: (on spadea heart2 1-4-11) (cellspace n4 4-4-30) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear heart2 14-0-58) (none-of-those 17-1-65)
+    del: (on spadea heart2 1-4-11) (cellspace n4 4-4-30) (none-of-those 14-1-59) (clear spadea 17-0-64)
+  (sendtofree spadea spade2 n1 n0), cost: 1
+    pre: (on spadea spade2 1-5-12) (cellspace n1 4-1-27) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (clear spade2 16-0-62) (none-of-those 17-1-65)
+    del: (on spadea spade2 1-5-12) (cellspace n1 4-1-27) (none-of-those 16-1-63) (clear spadea 17-0-64)
+  (sendtofree spadea spade2 n2 n1), cost: 1
+    pre: (on spadea spade2 1-5-12) (cellspace n2 4-2-28) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (clear spade2 16-0-62) (none-of-those 17-1-65)
+    del: (on spadea spade2 1-5-12) (cellspace n2 4-2-28) (none-of-those 16-1-63) (clear spadea 17-0-64)
+  (sendtofree spadea spade2 n3 n2), cost: 1
+    pre: (on spadea spade2 1-5-12) (cellspace n3 4-3-29) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (clear spade2 16-0-62) (none-of-those 17-1-65)
+    del: (on spadea spade2 1-5-12) (cellspace n3 4-3-29) (none-of-those 16-1-63) (clear spadea 17-0-64)
+  (sendtofree spadea spade2 n4 n3), cost: 1
+    pre: (on spadea spade2 1-5-12) (cellspace n4 4-4-30) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (clear spade2 16-0-62) (none-of-those 17-1-65)
+    del: (on spadea spade2 1-5-12) (cellspace n4 4-4-30) (none-of-those 16-1-63) (clear spadea 17-0-64)
+  (sendtofree-b club2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b club2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell club2 6-2-38) (none-of-those 10-1-51)
+    del: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtofree-b cluba n1 n0 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear cluba 11-0-52)
+  (sendtofree-b cluba n1 n0 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear cluba 11-0-52)
+  (sendtofree-b cluba n1 n0 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear cluba 11-0-52)
+  (sendtofree-b cluba n1 n0 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear cluba 11-0-52)
+  (sendtofree-b cluba n2 n1 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear cluba 11-0-52)
+  (sendtofree-b cluba n2 n1 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear cluba 11-0-52)
+  (sendtofree-b cluba n2 n1 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear cluba 11-0-52)
+  (sendtofree-b cluba n2 n1 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear cluba 11-0-52)
+  (sendtofree-b cluba n3 n2 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear cluba 11-0-52)
+  (sendtofree-b cluba n3 n2 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear cluba 11-0-52)
+  (sendtofree-b cluba n3 n2 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear cluba 11-0-52)
+  (sendtofree-b cluba n3 n2 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear cluba 11-0-52)
+  (sendtofree-b cluba n4 n3 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear cluba 11-0-52)
+  (sendtofree-b cluba n4 n3 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear cluba 11-0-52)
+  (sendtofree-b cluba n4 n3 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear cluba 11-0-52)
+  (sendtofree-b cluba n4 n3 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    add: (incell cluba 2-2-16) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 11-1-53)
+    del: (bottomcol cluba 2-0-14) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear cluba 11-0-52)
+  (sendtofree-b diamond2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamond2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell diamond2 8-2-46) (none-of-those 12-1-55)
+    del: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtofree-b diamonda n1 n0 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n1 n0 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n1 n0 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n1 n0 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n2 n1 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n2 n1 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n2 n1 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n2 n1 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n3 n2 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n3 n2 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n3 n2 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n3 n2 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n4 n3 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n4 n3 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n4 n3 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+  (sendtofree-b diamonda n4 n3 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (incell diamonda 0-2-2) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 13-1-57)
+    del: (bottomcol diamonda 0-0-0) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+  (sendtofree-b heart2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b heart2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell heart2 7-2-42) (none-of-those 14-1-59)
+    del: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtofree-b hearta n1 n0 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear hearta 15-0-60)
+  (sendtofree-b hearta n1 n0 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear hearta 15-0-60)
+  (sendtofree-b hearta n1 n0 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear hearta 15-0-60)
+  (sendtofree-b hearta n1 n0 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear hearta 15-0-60)
+  (sendtofree-b hearta n2 n1 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear hearta 15-0-60)
+  (sendtofree-b hearta n2 n1 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear hearta 15-0-60)
+  (sendtofree-b hearta n2 n1 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear hearta 15-0-60)
+  (sendtofree-b hearta n2 n1 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear hearta 15-0-60)
+  (sendtofree-b hearta n3 n2 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear hearta 15-0-60)
+  (sendtofree-b hearta n3 n2 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear hearta 15-0-60)
+  (sendtofree-b hearta n3 n2 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear hearta 15-0-60)
+  (sendtofree-b hearta n3 n2 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear hearta 15-0-60)
+  (sendtofree-b hearta n4 n3 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear hearta 15-0-60)
+  (sendtofree-b hearta n4 n3 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear hearta 15-0-60)
+  (sendtofree-b hearta n4 n3 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear hearta 15-0-60)
+  (sendtofree-b hearta n4 n3 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    add: (incell hearta 3-2-22) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 15-1-61)
+    del: (bottomcol hearta 3-0-20) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear hearta 15-0-60)
+  (sendtofree-b spade2 n1 n0 n0 n1), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n0 4-0-26) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n1 4-1-27) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n1 n0 n1 n2), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n0 4-0-26) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n1 4-1-27) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n1 n0 n2 n3), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n0 4-0-26) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n1 4-1-27) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n1 n0 n3 n4), cost: 1
+    pre: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n0 4-0-26) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n1 4-1-27) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n2 n1 n0 n1), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n1 4-1-27) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n2 4-2-28) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n2 n1 n1 n2), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n1 4-1-27) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n2 4-2-28) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n2 n1 n2 n3), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n1 4-1-27) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n2 4-2-28) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n2 n1 n3 n4), cost: 1
+    pre: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n1 4-1-27) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n2 4-2-28) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n3 n2 n0 n1), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n2 4-2-28) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n3 4-3-29) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n3 n2 n1 n2), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n2 4-2-28) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n3 4-3-29) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n3 n2 n2 n3), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n2 4-2-28) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n3 4-3-29) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n3 n2 n3 n4), cost: 1
+    pre: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n2 4-2-28) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n3 4-3-29) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n4 n3 n0 n1), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n3 4-3-29) (colspace n1 5-1-32) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n4 4-4-30) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n4 n3 n1 n2), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n3 4-3-29) (colspace n2 5-2-33) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n4 4-4-30) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n4 n3 n2 n3), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n3 4-3-29) (colspace n3 5-3-34) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n4 4-4-30) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spade2 n4 n3 n3 n4), cost: 1
+    pre: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (cellspace n3 4-3-29) (colspace n4 5-4-35) (incell spade2 9-2-49) (none-of-those 16-1-63)
+    del: (cellspace n4 4-4-30) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtofree-b spadea n1 n0 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n1 5-1-32) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n0 5-0-31) (clear spadea 17-0-64)
+  (sendtofree-b spadea n1 n0 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n2 5-2-33) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n1 5-1-32) (clear spadea 17-0-64)
+  (sendtofree-b spadea n1 n0 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n3 5-3-34) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n2 5-2-33) (clear spadea 17-0-64)
+  (sendtofree-b spadea n1 n0 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n0 4-0-26) (colspace n4 5-4-35) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n1 4-1-27) (colspace n3 5-3-34) (clear spadea 17-0-64)
+  (sendtofree-b spadea n2 n1 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n1 5-1-32) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n0 5-0-31) (clear spadea 17-0-64)
+  (sendtofree-b spadea n2 n1 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n2 5-2-33) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n1 5-1-32) (clear spadea 17-0-64)
+  (sendtofree-b spadea n2 n1 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n3 5-3-34) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n2 5-2-33) (clear spadea 17-0-64)
+  (sendtofree-b spadea n2 n1 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n1 4-1-27) (colspace n4 5-4-35) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n2 4-2-28) (colspace n3 5-3-34) (clear spadea 17-0-64)
+  (sendtofree-b spadea n3 n2 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n1 5-1-32) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n0 5-0-31) (clear spadea 17-0-64)
+  (sendtofree-b spadea n3 n2 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n2 5-2-33) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n1 5-1-32) (clear spadea 17-0-64)
+  (sendtofree-b spadea n3 n2 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n3 5-3-34) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n2 5-2-33) (clear spadea 17-0-64)
+  (sendtofree-b spadea n3 n2 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n2 4-2-28) (colspace n4 5-4-35) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n3 4-3-29) (colspace n3 5-3-34) (clear spadea 17-0-64)
+  (sendtofree-b spadea n4 n3 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n1 5-1-32) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n0 5-0-31) (clear spadea 17-0-64)
+  (sendtofree-b spadea n4 n3 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n2 5-2-33) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n1 5-1-32) (clear spadea 17-0-64)
+  (sendtofree-b spadea n4 n3 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n3 5-3-34) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n2 5-2-33) (clear spadea 17-0-64)
+  (sendtofree-b spadea n4 n3 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (incell spadea 1-2-9) (cellspace n3 4-3-29) (colspace n4 5-4-35) (none-of-those 17-1-65)
+    del: (bottomcol spadea 1-0-7) (cellspace n4 4-4-30) (colspace n3 5-3-34) (clear spadea 17-0-64)
+  (sendtohome club2 diamond2 club n2 cluba n1), cost: 1
+    pre: (home cluba 2-1-15) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (none-of-those 2-5-19) (home club2 6-1-37) (none-of-those 10-1-51) (clear diamond2 12-0-54)
+    del: (home cluba 2-1-15) (on club2 diamond2 6-3-39) (clear club2 10-0-50) (none-of-those 12-1-55)
+  (sendtohome cluba diamond2 club n1 club0 n0), cost: 1
+    pre: (on cluba diamond2 2-3-17) (clear cluba 11-0-52) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (none-of-those 11-1-53) (clear diamond2 12-0-54) (none-of-those 18-1-67)
+    del: (on cluba diamond2 2-3-17) (clear cluba 11-0-52) (none-of-those 12-1-55) (home club0 18-0-66)
+  (sendtohome cluba heart2 club n1 club0 n0), cost: 1
+    pre: (on cluba heart2 2-4-18) (clear cluba 11-0-52) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (none-of-those 11-1-53) (clear heart2 14-0-58) (none-of-those 18-1-67)
+    del: (on cluba heart2 2-4-18) (clear cluba 11-0-52) (none-of-those 14-1-59) (home club0 18-0-66)
+  (sendtohome diamonda club2 diamond n1 diamond0 n0), cost: 1
+    pre: (on diamonda club2 0-3-3) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (clear club2 10-0-50) (none-of-those 13-1-57) (none-of-those 19-1-69)
+    del: (on diamonda club2 0-3-3) (none-of-those 10-1-51) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+  (sendtohome diamonda hearta diamond n1 diamond0 n0), cost: 1
+    pre: (on diamonda hearta 0-4-4) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (none-of-those 13-1-57) (clear hearta 15-0-60) (none-of-those 19-1-69)
+    del: (on diamonda hearta 0-4-4) (clear diamonda 13-0-56) (none-of-those 15-1-61) (home diamond0 19-0-68)
+  (sendtohome diamonda spade2 diamond n1 diamond0 n0), cost: 1
+    pre: (on diamonda spade2 0-5-5) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (none-of-those 13-1-57) (clear spade2 16-0-62) (none-of-those 19-1-69)
+    del: (on diamonda spade2 0-5-5) (clear diamonda 13-0-56) (none-of-those 16-1-63) (home diamond0 19-0-68)
+  (sendtohome heart2 cluba heart n2 hearta n1), cost: 1
+    pre: (home hearta 3-1-21) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (none-of-those 3-5-25) (home heart2 7-1-41) (clear cluba 11-0-52) (none-of-those 14-1-59)
+    del: (home hearta 3-1-21) (on heart2 cluba 7-3-43) (none-of-those 11-1-53) (clear heart2 14-0-58)
+  (sendtohome hearta club2 heart n1 heart0 n0), cost: 1
+    pre: (on hearta club2 3-3-23) (clear hearta 15-0-60) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (clear club2 10-0-50) (none-of-those 15-1-61) (none-of-those 20-1-71)
+    del: (on hearta club2 3-3-23) (none-of-those 10-1-51) (clear hearta 15-0-60) (home heart0 20-0-70)
+  (sendtohome hearta spade2 heart n1 heart0 n0), cost: 1
+    pre: (on hearta spade2 3-4-24) (clear hearta 15-0-60) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (none-of-those 15-1-61) (clear spade2 16-0-62) (none-of-those 20-1-71)
+    del: (on hearta spade2 3-4-24) (clear hearta 15-0-60) (none-of-those 16-1-63) (home heart0 20-0-70)
+  (sendtohome spadea diamond2 spade n1 spade0 n0), cost: 1
+    pre: (on spadea diamond2 1-3-10) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (clear diamond2 12-0-54) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (on spadea diamond2 1-3-10) (none-of-those 12-1-55) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtohome spadea heart2 spade n1 spade0 n0), cost: 1
+    pre: (on spadea heart2 1-4-11) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (clear heart2 14-0-58) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (on spadea heart2 1-4-11) (none-of-those 14-1-59) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtohome spadea spade2 spade n1 spade0 n0), cost: 1
+    pre: (on spadea spade2 1-5-12) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (clear spade2 16-0-62) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (on spadea spade2 1-5-12) (none-of-those 16-1-63) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtohome-b club2 club n2 cluba n1 n0 n1), cost: 1
+    pre: (home cluba 2-1-15) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (none-of-those 2-5-19) (colspace n1 5-1-32) (home club2 6-1-37) (none-of-those 10-1-51)
+    del: (home cluba 2-1-15) (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtohome-b club2 club n2 cluba n1 n1 n2), cost: 1
+    pre: (home cluba 2-1-15) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (none-of-those 2-5-19) (colspace n2 5-2-33) (home club2 6-1-37) (none-of-those 10-1-51)
+    del: (home cluba 2-1-15) (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtohome-b club2 club n2 cluba n1 n2 n3), cost: 1
+    pre: (home cluba 2-1-15) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (none-of-those 2-5-19) (colspace n3 5-3-34) (home club2 6-1-37) (none-of-those 10-1-51)
+    del: (home cluba 2-1-15) (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtohome-b club2 club n2 cluba n1 n3 n4), cost: 1
+    pre: (home cluba 2-1-15) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+    add: (none-of-those 2-5-19) (colspace n4 5-4-35) (home club2 6-1-37) (none-of-those 10-1-51)
+    del: (home cluba 2-1-15) (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear club2 10-0-50)
+  (sendtohome-b cluba club n1 club0 n0 n0 n1), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear cluba 11-0-52) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (colspace n1 5-1-32) (none-of-those 11-1-53) (none-of-those 18-1-67)
+    del: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear cluba 11-0-52) (home club0 18-0-66)
+  (sendtohome-b cluba club n1 club0 n0 n1 n2), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear cluba 11-0-52) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (colspace n2 5-2-33) (none-of-those 11-1-53) (none-of-those 18-1-67)
+    del: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear cluba 11-0-52) (home club0 18-0-66)
+  (sendtohome-b cluba club n1 club0 n0 n2 n3), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear cluba 11-0-52) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (colspace n3 5-3-34) (none-of-those 11-1-53) (none-of-those 18-1-67)
+    del: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear cluba 11-0-52) (home club0 18-0-66)
+  (sendtohome-b cluba club n1 club0 n0 n3 n4), cost: 1
+    pre: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear cluba 11-0-52) (home club0 18-0-66)
+    add: (home cluba 2-1-15) (colspace n4 5-4-35) (none-of-those 11-1-53) (none-of-those 18-1-67)
+    del: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear cluba 11-0-52) (home club0 18-0-66)
+  (sendtohome-b diamond2 diamond n2 diamonda n1 n0 n1), cost: 1
+    pre: (home diamonda 0-1-1) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (none-of-those 0-6-6) (colspace n1 5-1-32) (home diamond2 8-1-45) (none-of-those 12-1-55)
+    del: (home diamonda 0-1-1) (colspace n0 5-0-31) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtohome-b diamond2 diamond n2 diamonda n1 n1 n2), cost: 1
+    pre: (home diamonda 0-1-1) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (none-of-those 0-6-6) (colspace n2 5-2-33) (home diamond2 8-1-45) (none-of-those 12-1-55)
+    del: (home diamonda 0-1-1) (colspace n1 5-1-32) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtohome-b diamond2 diamond n2 diamonda n1 n2 n3), cost: 1
+    pre: (home diamonda 0-1-1) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (none-of-those 0-6-6) (colspace n3 5-3-34) (home diamond2 8-1-45) (none-of-those 12-1-55)
+    del: (home diamonda 0-1-1) (colspace n2 5-2-33) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtohome-b diamond2 diamond n2 diamonda n1 n3 n4), cost: 1
+    pre: (home diamonda 0-1-1) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+    add: (none-of-those 0-6-6) (colspace n4 5-4-35) (home diamond2 8-1-45) (none-of-those 12-1-55)
+    del: (home diamonda 0-1-1) (colspace n3 5-3-34) (bottomcol diamond2 8-0-44) (clear diamond2 12-0-54)
+  (sendtohome-b diamonda diamond n1 diamond0 n0 n0 n1), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (colspace n1 5-1-32) (none-of-those 13-1-57) (none-of-those 19-1-69)
+    del: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+  (sendtohome-b diamonda diamond n1 diamond0 n0 n1 n2), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (colspace n2 5-2-33) (none-of-those 13-1-57) (none-of-those 19-1-69)
+    del: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+  (sendtohome-b diamonda diamond n1 diamond0 n0 n2 n3), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (colspace n3 5-3-34) (none-of-those 13-1-57) (none-of-those 19-1-69)
+    del: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+  (sendtohome-b diamonda diamond n1 diamond0 n0 n3 n4), cost: 1
+    pre: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+    add: (home diamonda 0-1-1) (colspace n4 5-4-35) (none-of-those 13-1-57) (none-of-those 19-1-69)
+    del: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear diamonda 13-0-56) (home diamond0 19-0-68)
+  (sendtohome-b heart2 heart n2 hearta n1 n0 n1), cost: 1
+    pre: (home hearta 3-1-21) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (none-of-those 3-5-25) (colspace n1 5-1-32) (home heart2 7-1-41) (none-of-those 14-1-59)
+    del: (home hearta 3-1-21) (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtohome-b heart2 heart n2 hearta n1 n1 n2), cost: 1
+    pre: (home hearta 3-1-21) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (none-of-those 3-5-25) (colspace n2 5-2-33) (home heart2 7-1-41) (none-of-those 14-1-59)
+    del: (home hearta 3-1-21) (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtohome-b heart2 heart n2 hearta n1 n2 n3), cost: 1
+    pre: (home hearta 3-1-21) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (none-of-those 3-5-25) (colspace n3 5-3-34) (home heart2 7-1-41) (none-of-those 14-1-59)
+    del: (home hearta 3-1-21) (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtohome-b heart2 heart n2 hearta n1 n3 n4), cost: 1
+    pre: (home hearta 3-1-21) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+    add: (none-of-those 3-5-25) (colspace n4 5-4-35) (home heart2 7-1-41) (none-of-those 14-1-59)
+    del: (home hearta 3-1-21) (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear heart2 14-0-58)
+  (sendtohome-b hearta heart n1 heart0 n0 n0 n1), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear hearta 15-0-60) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (colspace n1 5-1-32) (none-of-those 15-1-61) (none-of-those 20-1-71)
+    del: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear hearta 15-0-60) (home heart0 20-0-70)
+  (sendtohome-b hearta heart n1 heart0 n0 n1 n2), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear hearta 15-0-60) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (colspace n2 5-2-33) (none-of-those 15-1-61) (none-of-those 20-1-71)
+    del: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear hearta 15-0-60) (home heart0 20-0-70)
+  (sendtohome-b hearta heart n1 heart0 n0 n2 n3), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear hearta 15-0-60) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (colspace n3 5-3-34) (none-of-those 15-1-61) (none-of-those 20-1-71)
+    del: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear hearta 15-0-60) (home heart0 20-0-70)
+  (sendtohome-b hearta heart n1 heart0 n0 n3 n4), cost: 1
+    pre: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear hearta 15-0-60) (home heart0 20-0-70)
+    add: (home hearta 3-1-21) (colspace n4 5-4-35) (none-of-those 15-1-61) (none-of-those 20-1-71)
+    del: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear hearta 15-0-60) (home heart0 20-0-70)
+  (sendtohome-b spade2 spade n2 spadea n1 n0 n1), cost: 1
+    pre: (home spadea 1-1-8) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (none-of-those 1-6-13) (colspace n1 5-1-32) (home spade2 9-1-48) (none-of-those 16-1-63)
+    del: (home spadea 1-1-8) (colspace n0 5-0-31) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtohome-b spade2 spade n2 spadea n1 n1 n2), cost: 1
+    pre: (home spadea 1-1-8) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (none-of-those 1-6-13) (colspace n2 5-2-33) (home spade2 9-1-48) (none-of-those 16-1-63)
+    del: (home spadea 1-1-8) (colspace n1 5-1-32) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtohome-b spade2 spade n2 spadea n1 n2 n3), cost: 1
+    pre: (home spadea 1-1-8) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (none-of-those 1-6-13) (colspace n3 5-3-34) (home spade2 9-1-48) (none-of-those 16-1-63)
+    del: (home spadea 1-1-8) (colspace n2 5-2-33) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtohome-b spade2 spade n2 spadea n1 n3 n4), cost: 1
+    pre: (home spadea 1-1-8) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+    add: (none-of-those 1-6-13) (colspace n4 5-4-35) (home spade2 9-1-48) (none-of-those 16-1-63)
+    del: (home spadea 1-1-8) (colspace n3 5-3-34) (bottomcol spade2 9-0-47) (clear spade2 16-0-62)
+  (sendtohome-b spadea spade n1 spade0 n0 n0 n1), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (colspace n1 5-1-32) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtohome-b spadea spade n1 spade0 n0 n1 n2), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (colspace n2 5-2-33) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtohome-b spadea spade n1 spade0 n0 n2 n3), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (colspace n3 5-3-34) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtohome-b spadea spade n1 spade0 n0 n3 n4), cost: 1
+    pre: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear spadea 17-0-64) (home spade0 21-0-72)
+    add: (home spadea 1-1-8) (colspace n4 5-4-35) (none-of-those 17-1-65) (none-of-those 21-1-73)
+    del: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear spadea 17-0-64) (home spade0 21-0-72)
+  (sendtonewcol club2 diamond2 n1 n0), cost: 1
+    pre: (colspace n1 5-1-32) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (colspace n0 5-0-31) (bottomcol club2 6-0-36) (clear diamond2 12-0-54)
+    del: (colspace n1 5-1-32) (on club2 diamond2 6-3-39) (none-of-those 12-1-55)
+  (sendtonewcol club2 diamond2 n2 n1), cost: 1
+    pre: (colspace n2 5-2-33) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (colspace n1 5-1-32) (bottomcol club2 6-0-36) (clear diamond2 12-0-54)
+    del: (colspace n2 5-2-33) (on club2 diamond2 6-3-39) (none-of-those 12-1-55)
+  (sendtonewcol club2 diamond2 n3 n2), cost: 1
+    pre: (colspace n3 5-3-34) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (colspace n2 5-2-33) (bottomcol club2 6-0-36) (clear diamond2 12-0-54)
+    del: (colspace n3 5-3-34) (on club2 diamond2 6-3-39) (none-of-those 12-1-55)
+  (sendtonewcol club2 diamond2 n4 n3), cost: 1
+    pre: (colspace n4 5-4-35) (on club2 diamond2 6-3-39) (clear club2 10-0-50)
+    add: (colspace n3 5-3-34) (bottomcol club2 6-0-36) (clear diamond2 12-0-54)
+    del: (colspace n4 5-4-35) (on club2 diamond2 6-3-39) (none-of-those 12-1-55)
+  (sendtonewcol cluba diamond2 n1 n0), cost: 1
+    pre: (on cluba diamond2 2-3-17) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (colspace n1 5-1-32) (none-of-those 12-1-55)
+  (sendtonewcol cluba diamond2 n2 n1), cost: 1
+    pre: (on cluba diamond2 2-3-17) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (colspace n2 5-2-33) (none-of-those 12-1-55)
+  (sendtonewcol cluba diamond2 n3 n2), cost: 1
+    pre: (on cluba diamond2 2-3-17) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (colspace n3 5-3-34) (none-of-those 12-1-55)
+  (sendtonewcol cluba diamond2 n4 n3), cost: 1
+    pre: (on cluba diamond2 2-3-17) (colspace n4 5-4-35) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear diamond2 12-0-54)
+    del: (on cluba diamond2 2-3-17) (colspace n4 5-4-35) (none-of-those 12-1-55)
+  (sendtonewcol cluba heart2 n1 n0), cost: 1
+    pre: (on cluba heart2 2-4-18) (colspace n1 5-1-32) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n0 5-0-31) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (colspace n1 5-1-32) (none-of-those 14-1-59)
+  (sendtonewcol cluba heart2 n2 n1), cost: 1
+    pre: (on cluba heart2 2-4-18) (colspace n2 5-2-33) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n1 5-1-32) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (colspace n2 5-2-33) (none-of-those 14-1-59)
+  (sendtonewcol cluba heart2 n3 n2), cost: 1
+    pre: (on cluba heart2 2-4-18) (colspace n3 5-3-34) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n2 5-2-33) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (colspace n3 5-3-34) (none-of-those 14-1-59)
+  (sendtonewcol cluba heart2 n4 n3), cost: 1
+    pre: (on cluba heart2 2-4-18) (colspace n4 5-4-35) (clear cluba 11-0-52)
+    add: (bottomcol cluba 2-0-14) (colspace n3 5-3-34) (clear heart2 14-0-58)
+    del: (on cluba heart2 2-4-18) (colspace n4 5-4-35) (none-of-those 14-1-59)
+  (sendtonewcol diamonda club2 n1 n0), cost: 1
+    pre: (on diamonda club2 0-3-3) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear club2 10-0-50)
+    del: (on diamonda club2 0-3-3) (colspace n1 5-1-32) (none-of-those 10-1-51)
+  (sendtonewcol diamonda club2 n2 n1), cost: 1
+    pre: (on diamonda club2 0-3-3) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear club2 10-0-50)
+    del: (on diamonda club2 0-3-3) (colspace n2 5-2-33) (none-of-those 10-1-51)
+  (sendtonewcol diamonda club2 n3 n2), cost: 1
+    pre: (on diamonda club2 0-3-3) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear club2 10-0-50)
+    del: (on diamonda club2 0-3-3) (colspace n3 5-3-34) (none-of-those 10-1-51)
+  (sendtonewcol diamonda club2 n4 n3), cost: 1
+    pre: (on diamonda club2 0-3-3) (colspace n4 5-4-35) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear club2 10-0-50)
+    del: (on diamonda club2 0-3-3) (colspace n4 5-4-35) (none-of-those 10-1-51)
+  (sendtonewcol diamonda hearta n1 n0), cost: 1
+    pre: (on diamonda hearta 0-4-4) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (colspace n1 5-1-32) (none-of-those 15-1-61)
+  (sendtonewcol diamonda hearta n2 n1), cost: 1
+    pre: (on diamonda hearta 0-4-4) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (colspace n2 5-2-33) (none-of-those 15-1-61)
+  (sendtonewcol diamonda hearta n3 n2), cost: 1
+    pre: (on diamonda hearta 0-4-4) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (colspace n3 5-3-34) (none-of-those 15-1-61)
+  (sendtonewcol diamonda hearta n4 n3), cost: 1
+    pre: (on diamonda hearta 0-4-4) (colspace n4 5-4-35) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    del: (on diamonda hearta 0-4-4) (colspace n4 5-4-35) (none-of-those 15-1-61)
+  (sendtonewcol diamonda spade2 n1 n0), cost: 1
+    pre: (on diamonda spade2 0-5-5) (colspace n1 5-1-32) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n0 5-0-31) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (colspace n1 5-1-32) (none-of-those 16-1-63)
+  (sendtonewcol diamonda spade2 n2 n1), cost: 1
+    pre: (on diamonda spade2 0-5-5) (colspace n2 5-2-33) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n1 5-1-32) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (colspace n2 5-2-33) (none-of-those 16-1-63)
+  (sendtonewcol diamonda spade2 n3 n2), cost: 1
+    pre: (on diamonda spade2 0-5-5) (colspace n3 5-3-34) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n2 5-2-33) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (colspace n3 5-3-34) (none-of-those 16-1-63)
+  (sendtonewcol diamonda spade2 n4 n3), cost: 1
+    pre: (on diamonda spade2 0-5-5) (colspace n4 5-4-35) (clear diamonda 13-0-56)
+    add: (bottomcol diamonda 0-0-0) (colspace n3 5-3-34) (clear spade2 16-0-62)
+    del: (on diamonda spade2 0-5-5) (colspace n4 5-4-35) (none-of-those 16-1-63)
+  (sendtonewcol heart2 cluba n1 n0), cost: 1
+    pre: (colspace n1 5-1-32) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (colspace n0 5-0-31) (bottomcol heart2 7-0-40) (clear cluba 11-0-52)
+    del: (colspace n1 5-1-32) (on heart2 cluba 7-3-43) (none-of-those 11-1-53)
+  (sendtonewcol heart2 cluba n2 n1), cost: 1
+    pre: (colspace n2 5-2-33) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (colspace n1 5-1-32) (bottomcol heart2 7-0-40) (clear cluba 11-0-52)
+    del: (colspace n2 5-2-33) (on heart2 cluba 7-3-43) (none-of-those 11-1-53)
+  (sendtonewcol heart2 cluba n3 n2), cost: 1
+    pre: (colspace n3 5-3-34) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (colspace n2 5-2-33) (bottomcol heart2 7-0-40) (clear cluba 11-0-52)
+    del: (colspace n3 5-3-34) (on heart2 cluba 7-3-43) (none-of-those 11-1-53)
+  (sendtonewcol heart2 cluba n4 n3), cost: 1
+    pre: (colspace n4 5-4-35) (on heart2 cluba 7-3-43) (clear heart2 14-0-58)
+    add: (colspace n3 5-3-34) (bottomcol heart2 7-0-40) (clear cluba 11-0-52)
+    del: (colspace n4 5-4-35) (on heart2 cluba 7-3-43) (none-of-those 11-1-53)
+  (sendtonewcol hearta club2 n1 n0), cost: 1
+    pre: (on hearta club2 3-3-23) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear club2 10-0-50)
+    del: (on hearta club2 3-3-23) (colspace n1 5-1-32) (none-of-those 10-1-51)
+  (sendtonewcol hearta club2 n2 n1), cost: 1
+    pre: (on hearta club2 3-3-23) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear club2 10-0-50)
+    del: (on hearta club2 3-3-23) (colspace n2 5-2-33) (none-of-those 10-1-51)
+  (sendtonewcol hearta club2 n3 n2), cost: 1
+    pre: (on hearta club2 3-3-23) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear club2 10-0-50)
+    del: (on hearta club2 3-3-23) (colspace n3 5-3-34) (none-of-those 10-1-51)
+  (sendtonewcol hearta club2 n4 n3), cost: 1
+    pre: (on hearta club2 3-3-23) (colspace n4 5-4-35) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear club2 10-0-50)
+    del: (on hearta club2 3-3-23) (colspace n4 5-4-35) (none-of-those 10-1-51)
+  (sendtonewcol hearta spade2 n1 n0), cost: 1
+    pre: (on hearta spade2 3-4-24) (colspace n1 5-1-32) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n0 5-0-31) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (colspace n1 5-1-32) (none-of-those 16-1-63)
+  (sendtonewcol hearta spade2 n2 n1), cost: 1
+    pre: (on hearta spade2 3-4-24) (colspace n2 5-2-33) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n1 5-1-32) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (colspace n2 5-2-33) (none-of-those 16-1-63)
+  (sendtonewcol hearta spade2 n3 n2), cost: 1
+    pre: (on hearta spade2 3-4-24) (colspace n3 5-3-34) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n2 5-2-33) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (colspace n3 5-3-34) (none-of-those 16-1-63)
+  (sendtonewcol hearta spade2 n4 n3), cost: 1
+    pre: (on hearta spade2 3-4-24) (colspace n4 5-4-35) (clear hearta 15-0-60)
+    add: (bottomcol hearta 3-0-20) (colspace n3 5-3-34) (clear spade2 16-0-62)
+    del: (on hearta spade2 3-4-24) (colspace n4 5-4-35) (none-of-those 16-1-63)
+  (sendtonewcol spadea diamond2 n1 n0), cost: 1
+    pre: (on spadea diamond2 1-3-10) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear diamond2 12-0-54)
+    del: (on spadea diamond2 1-3-10) (colspace n1 5-1-32) (none-of-those 12-1-55)
+  (sendtonewcol spadea diamond2 n2 n1), cost: 1
+    pre: (on spadea diamond2 1-3-10) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear diamond2 12-0-54)
+    del: (on spadea diamond2 1-3-10) (colspace n2 5-2-33) (none-of-those 12-1-55)
+  (sendtonewcol spadea diamond2 n3 n2), cost: 1
+    pre: (on spadea diamond2 1-3-10) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear diamond2 12-0-54)
+    del: (on spadea diamond2 1-3-10) (colspace n3 5-3-34) (none-of-those 12-1-55)
+  (sendtonewcol spadea diamond2 n4 n3), cost: 1
+    pre: (on spadea diamond2 1-3-10) (colspace n4 5-4-35) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear diamond2 12-0-54)
+    del: (on spadea diamond2 1-3-10) (colspace n4 5-4-35) (none-of-those 12-1-55)
+  (sendtonewcol spadea heart2 n1 n0), cost: 1
+    pre: (on spadea heart2 1-4-11) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear heart2 14-0-58)
+    del: (on spadea heart2 1-4-11) (colspace n1 5-1-32) (none-of-those 14-1-59)
+  (sendtonewcol spadea heart2 n2 n1), cost: 1
+    pre: (on spadea heart2 1-4-11) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear heart2 14-0-58)
+    del: (on spadea heart2 1-4-11) (colspace n2 5-2-33) (none-of-those 14-1-59)
+  (sendtonewcol spadea heart2 n3 n2), cost: 1
+    pre: (on spadea heart2 1-4-11) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear heart2 14-0-58)
+    del: (on spadea heart2 1-4-11) (colspace n3 5-3-34) (none-of-those 14-1-59)
+  (sendtonewcol spadea heart2 n4 n3), cost: 1
+    pre: (on spadea heart2 1-4-11) (colspace n4 5-4-35) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear heart2 14-0-58)
+    del: (on spadea heart2 1-4-11) (colspace n4 5-4-35) (none-of-those 14-1-59)
+  (sendtonewcol spadea spade2 n1 n0), cost: 1
+    pre: (on spadea spade2 1-5-12) (colspace n1 5-1-32) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n0 5-0-31) (clear spade2 16-0-62)
+    del: (on spadea spade2 1-5-12) (colspace n1 5-1-32) (none-of-those 16-1-63)
+  (sendtonewcol spadea spade2 n2 n1), cost: 1
+    pre: (on spadea spade2 1-5-12) (colspace n2 5-2-33) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n1 5-1-32) (clear spade2 16-0-62)
+    del: (on spadea spade2 1-5-12) (colspace n2 5-2-33) (none-of-those 16-1-63)
+  (sendtonewcol spadea spade2 n3 n2), cost: 1
+    pre: (on spadea spade2 1-5-12) (colspace n3 5-3-34) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n2 5-2-33) (clear spade2 16-0-62)
+    del: (on spadea spade2 1-5-12) (colspace n3 5-3-34) (none-of-those 16-1-63)
+  (sendtonewcol spadea spade2 n4 n3), cost: 1
+    pre: (on spadea spade2 1-5-12) (colspace n4 5-4-35) (clear spadea 17-0-64)
+    add: (bottomcol spadea 1-0-7) (colspace n3 5-3-34) (clear spade2 16-0-62)
+    del: (on spadea spade2 1-5-12) (colspace n4 5-4-35) (none-of-those 16-1-63)
+Init State: (on diamonda hearta 0-4-4) (on spadea spade2 1-5-12) (bottomcol cluba 2-0-14) (bottomcol hearta 3-0-20) (cellspace n2 4-2-28) (colspace n0 5-0-31) (on club2 diamond2 6-3-39) (on heart2 cluba 7-3-43) (bottomcol diamond2 8-0-44) (bottomcol spade2 9-0-47) (clear club2 10-0-50) (none-of-those 11-1-53) (none-of-those 12-1-55) (clear diamonda 13-0-56) (clear heart2 14-0-58) (none-of-those 15-1-61) (none-of-those 16-1-63) (clear spadea 17-0-64) (home club0 18-0-66) (home diamond0 19-0-68) (home heart0 20-0-70) (home spade0 21-0-72)
+Goal: (home club2 6-1-37) (home heart2 7-1-41) (home diamond2 8-1-45) (home spade2 9-1-48)
+Value: 8

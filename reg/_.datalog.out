@@ -1,0 +1,12 @@
+P(1, 2).
+Q(2, 1).
+Q(X, Y) :- P(X, Y).
+R(2, 1, 1).
+R(X, Y, W) :- P(X, Y), Q(Y, Z), S(Z, W).
+Normalized:
+P(1, 2).
+Q(2, 1).
+Q(X, Y) :- P(X, Y).
+R(2, 1, 1).
+R(X, Y, W) :- P(X, Y), _p4(Y, W).
+_p4(Y, W) :- Q(Y, Z), S(Z, W).

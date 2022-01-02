@@ -1,0 +1,201 @@
+Fact[52]:
+  (base-pos pr2 x0 y0 0-0-0)
+  (base-pos pr2 x1 y0 0-1-1)
+  (base-pos pr2 x2 y0 0-2-2)
+  (base-pos pr2 x3 y0 0-3-3)
+  (base-pos pr2 x4 y0 0-4-4)
+  (gripper-rel pr2 xrel-1 yrel0 1-0-5)
+  (gripper-rel pr2 xrel-1 yrel1 1-1-6)
+  (gripper-rel pr2 xrel0 yrel0 1-2-7)
+  (gripper-rel pr2 xrel0 yrel1 1-3-8)
+  (gripper-rel pr2 xrel1 yrel0 1-4-9)
+  (NOT-object-done object0 2-0-10)
+  (object-done object0 2-1-11)
+  (NOT-object-done object1 3-0-12)
+  (object-done object1 3-1-13)
+  (NOT-object-done object2 4-0-14)
+  (object-done object2 4-1-15)
+  (NOT-object-done object3 5-0-16)
+  (object-done object3 5-1-17)
+  (NOT-parked pr2 6-0-18)
+  (parked pr2 6-1-19)
+  (not-pushed cart 7-0-20)
+  (pushing pr2 cart 7-1-21)
+  (gripper-empty pr2 8-0-22)
+  (none-of-those 8-1-23)
+  (not-pushing pr2 9-0-24)
+  (none-of-those 9-1-25)
+  (object-pos object0 x2 y2 10-0-26)
+  (none-of-those 10-1-27)
+  (object-pos object2 x3 y2 11-0-28)
+  (none-of-those 11-1-29)
+  (NOT-base-obstacle x0 y0 12-0-30)
+  (none-of-those 12-1-31)
+  (NOT-base-obstacle x1 y0 13-0-32)
+  (none-of-those 13-1-33)
+  (NOT-base-obstacle x2 y0 14-0-34)
+  (none-of-those 14-1-35)
+  (NOT-base-obstacle x3 y0 15-0-36)
+  (none-of-those 15-1-37)
+  (NOT-base-obstacle x4 y0 16-0-38)
+  (none-of-those 16-1-39)
+  (NOT-gripper-obstacle x0 y0 17-0-40)
+  (none-of-those 17-1-41)
+  (NOT-gripper-obstacle x0 y1 18-0-42)
+  (none-of-those 18-1-43)
+  (NOT-gripper-obstacle x1 y0 19-0-44)
+  (none-of-those 19-1-45)
+  (NOT-gripper-obstacle x2 y0 20-0-46)
+  (none-of-those 20-1-47)
+  (NOT-gripper-obstacle x3 y0 21-0-48)
+  (none-of-those 21-1-49)
+  (NOT-gripper-obstacle x4 y0 22-0-50)
+  (none-of-those 22-1-51)
+Op[36]:
+  (base-left pr2 x1 x0 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x0 y0 12-0-30)
+    add: (base-pos pr2 x0 y0 0-0-0) (none-of-those 12-1-31) (NOT-base-obstacle x1 y0 13-0-32)
+    del: (base-pos pr2 x1 y0 0-1-1) (NOT-base-obstacle x0 y0 12-0-30) (none-of-those 13-1-33)
+  (base-left pr2 x2 x1 y0), cost: 1
+    pre: (base-pos pr2 x2 y0 0-2-2) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x1 y0 13-0-32)
+    add: (base-pos pr2 x1 y0 0-1-1) (none-of-those 13-1-33) (NOT-base-obstacle x2 y0 14-0-34)
+    del: (base-pos pr2 x2 y0 0-2-2) (NOT-base-obstacle x1 y0 13-0-32) (none-of-those 14-1-35)
+  (base-left pr2 x3 x2 y0), cost: 1
+    pre: (base-pos pr2 x3 y0 0-3-3) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x2 y0 14-0-34)
+    add: (base-pos pr2 x2 y0 0-2-2) (none-of-those 14-1-35) (NOT-base-obstacle x3 y0 15-0-36)
+    del: (base-pos pr2 x3 y0 0-3-3) (NOT-base-obstacle x2 y0 14-0-34) (none-of-those 15-1-37)
+  (base-left pr2 x4 x3 y0), cost: 1
+    pre: (base-pos pr2 x4 y0 0-4-4) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x3 y0 15-0-36)
+    add: (base-pos pr2 x3 y0 0-3-3) (none-of-those 15-1-37) (NOT-base-obstacle x4 y0 16-0-38)
+    del: (base-pos pr2 x4 y0 0-4-4) (NOT-base-obstacle x3 y0 15-0-36) (none-of-those 16-1-39)
+  (base-right pr2 x0 x1 y0), cost: 1
+    pre: (base-pos pr2 x0 y0 0-0-0) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x1 y0 13-0-32)
+    add: (base-pos pr2 x1 y0 0-1-1) (NOT-base-obstacle x0 y0 12-0-30) (none-of-those 13-1-33)
+    del: (base-pos pr2 x0 y0 0-0-0) (none-of-those 12-1-31) (NOT-base-obstacle x1 y0 13-0-32)
+  (base-right pr2 x1 x2 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x2 y0 14-0-34)
+    add: (base-pos pr2 x2 y0 0-2-2) (NOT-base-obstacle x1 y0 13-0-32) (none-of-those 14-1-35)
+    del: (base-pos pr2 x1 y0 0-1-1) (none-of-those 13-1-33) (NOT-base-obstacle x2 y0 14-0-34)
+  (base-right pr2 x2 x3 y0), cost: 1
+    pre: (base-pos pr2 x2 y0 0-2-2) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x3 y0 15-0-36)
+    add: (base-pos pr2 x3 y0 0-3-3) (NOT-base-obstacle x2 y0 14-0-34) (none-of-those 15-1-37)
+    del: (base-pos pr2 x2 y0 0-2-2) (none-of-those 14-1-35) (NOT-base-obstacle x3 y0 15-0-36)
+  (base-right pr2 x3 x4 y0), cost: 1
+    pre: (base-pos pr2 x3 y0 0-3-3) (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24) (NOT-base-obstacle x4 y0 16-0-38)
+    add: (base-pos pr2 x4 y0 0-4-4) (NOT-base-obstacle x3 y0 15-0-36) (none-of-those 16-1-39)
+    del: (base-pos pr2 x3 y0 0-3-3) (none-of-those 15-1-37) (NOT-base-obstacle x4 y0 16-0-38)
+  (finish-object object0 x2 y2), cost: 1
+    pre: (NOT-object-done object0 2-0-10) (object-pos object0 x2 y2 10-0-26)
+    add: (object-done object0 2-1-11)
+    del: (NOT-object-done object0 2-0-10)
+  (finish-object object1 x2 y3), cost: 1
+    pre: (NOT-object-done object1 3-0-12)
+    add: (object-done object1 3-1-13)
+    del: (NOT-object-done object1 3-0-12)
+  (finish-object object2 x3 y2), cost: 1
+    pre: (NOT-object-done object2 4-0-14) (object-pos object2 x3 y2 11-0-28)
+    add: (object-done object2 4-1-15)
+    del: (NOT-object-done object2 4-0-14)
+  (finish-object object3 x3 y3), cost: 1
+    pre: (NOT-object-done object3 5-0-16)
+    add: (object-done object3 5-1-17)
+    del: (NOT-object-done object3 5-0-16)
+  (grasp-cart-below pr2 cart x0 y0 y1), cost: 1
+    pre: (base-pos pr2 x0 y0 0-0-0) (NOT-parked pr2 6-0-18) (not-pushed cart 7-0-20) (not-pushing pr2 9-0-24)
+    add: (pushing pr2 cart 7-1-21) (none-of-those 9-1-25)
+    del: (not-pushed cart 7-0-20) (not-pushing pr2 9-0-24)
+  (gripper-down pr2 x0 y0 xrel0 x0 yrel0 yrel1 y0 y1), cost: 1
+    pre: (base-pos pr2 x0 y0 0-0-0) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x0 y1 18-0-42)
+    add: (gripper-rel pr2 xrel0 yrel1 1-3-8) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 18-1-43)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 17-1-41) (NOT-gripper-obstacle x0 y1 18-0-42)
+  (gripper-down pr2 x1 y0 xrel-1 x0 yrel0 yrel1 y0 y1), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (gripper-rel pr2 xrel-1 yrel0 1-0-5) (parked pr2 6-1-19) (NOT-gripper-obstacle x0 y1 18-0-42)
+    add: (gripper-rel pr2 xrel-1 yrel1 1-1-6) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 18-1-43)
+    del: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 17-1-41) (NOT-gripper-obstacle x0 y1 18-0-42)
+  (gripper-left pr2 x0 y0 xrel1 xrel0 x1 x0 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x0 y0 0-0-0) (gripper-rel pr2 xrel1 yrel0 1-4-9) (parked pr2 6-1-19) (NOT-gripper-obstacle x0 y0 17-0-40)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 17-1-41) (NOT-gripper-obstacle x1 y0 19-0-44)
+    del: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 19-1-45)
+  (gripper-left pr2 x1 y0 xrel0 xrel-1 x1 x0 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x0 y0 17-0-40)
+    add: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 17-1-41) (NOT-gripper-obstacle x1 y0 19-0-44)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 19-1-45)
+  (gripper-left pr2 x1 y0 xrel1 xrel0 x2 x1 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (gripper-rel pr2 xrel1 yrel0 1-4-9) (parked pr2 6-1-19) (NOT-gripper-obstacle x1 y0 19-0-44)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 19-1-45) (NOT-gripper-obstacle x2 y0 20-0-46)
+    del: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x1 y0 19-0-44) (none-of-those 20-1-47)
+  (gripper-left pr2 x2 y0 xrel0 xrel-1 x2 x1 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x2 y0 0-2-2) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x1 y0 19-0-44)
+    add: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 19-1-45) (NOT-gripper-obstacle x2 y0 20-0-46)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x1 y0 19-0-44) (none-of-those 20-1-47)
+  (gripper-left pr2 x2 y0 xrel1 xrel0 x3 x2 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x2 y0 0-2-2) (gripper-rel pr2 xrel1 yrel0 1-4-9) (parked pr2 6-1-19) (NOT-gripper-obstacle x2 y0 20-0-46)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 20-1-47) (NOT-gripper-obstacle x3 y0 21-0-48)
+    del: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x2 y0 20-0-46) (none-of-those 21-1-49)
+  (gripper-left pr2 x3 y0 xrel0 xrel-1 x3 x2 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x3 y0 0-3-3) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x2 y0 20-0-46)
+    add: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 20-1-47) (NOT-gripper-obstacle x3 y0 21-0-48)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x2 y0 20-0-46) (none-of-those 21-1-49)
+  (gripper-left pr2 x3 y0 xrel1 xrel0 x4 x3 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x3 y0 0-3-3) (gripper-rel pr2 xrel1 yrel0 1-4-9) (parked pr2 6-1-19) (NOT-gripper-obstacle x3 y0 21-0-48)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 21-1-49) (NOT-gripper-obstacle x4 y0 22-0-50)
+    del: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x3 y0 21-0-48) (none-of-those 22-1-51)
+  (gripper-left pr2 x4 y0 xrel0 xrel-1 x4 x3 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x4 y0 0-4-4) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x3 y0 21-0-48)
+    add: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 21-1-49) (NOT-gripper-obstacle x4 y0 22-0-50)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x3 y0 21-0-48) (none-of-those 22-1-51)
+  (gripper-right pr2 x0 y0 xrel0 xrel1 x0 x1 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x0 y0 0-0-0) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x1 y0 19-0-44)
+    add: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 19-1-45)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 17-1-41) (NOT-gripper-obstacle x1 y0 19-0-44)
+  (gripper-right pr2 x1 y0 xrel-1 xrel0 x0 x1 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (gripper-rel pr2 xrel-1 yrel0 1-0-5) (parked pr2 6-1-19) (NOT-gripper-obstacle x1 y0 19-0-44)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 19-1-45)
+    del: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 17-1-41) (NOT-gripper-obstacle x1 y0 19-0-44)
+  (gripper-right pr2 x1 y0 xrel0 xrel1 x1 x2 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x2 y0 20-0-46)
+    add: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x1 y0 19-0-44) (none-of-those 20-1-47)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 19-1-45) (NOT-gripper-obstacle x2 y0 20-0-46)
+  (gripper-right pr2 x2 y0 xrel-1 xrel0 x1 x2 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x2 y0 0-2-2) (gripper-rel pr2 xrel-1 yrel0 1-0-5) (parked pr2 6-1-19) (NOT-gripper-obstacle x2 y0 20-0-46)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x1 y0 19-0-44) (none-of-those 20-1-47)
+    del: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 19-1-45) (NOT-gripper-obstacle x2 y0 20-0-46)
+  (gripper-right pr2 x2 y0 xrel0 xrel1 x2 x3 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x2 y0 0-2-2) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x3 y0 21-0-48)
+    add: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x2 y0 20-0-46) (none-of-those 21-1-49)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 20-1-47) (NOT-gripper-obstacle x3 y0 21-0-48)
+  (gripper-right pr2 x3 y0 xrel-1 xrel0 x2 x3 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x3 y0 0-3-3) (gripper-rel pr2 xrel-1 yrel0 1-0-5) (parked pr2 6-1-19) (NOT-gripper-obstacle x3 y0 21-0-48)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x2 y0 20-0-46) (none-of-those 21-1-49)
+    del: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 20-1-47) (NOT-gripper-obstacle x3 y0 21-0-48)
+  (gripper-right pr2 x3 y0 xrel0 xrel1 x3 x4 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x3 y0 0-3-3) (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19) (NOT-gripper-obstacle x4 y0 22-0-50)
+    add: (gripper-rel pr2 xrel1 yrel0 1-4-9) (NOT-gripper-obstacle x3 y0 21-0-48) (none-of-those 22-1-51)
+    del: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 21-1-49) (NOT-gripper-obstacle x4 y0 22-0-50)
+  (gripper-right pr2 x4 y0 xrel-1 xrel0 x3 x4 yrel0 y0), cost: 1
+    pre: (base-pos pr2 x4 y0 0-4-4) (gripper-rel pr2 xrel-1 yrel0 1-0-5) (parked pr2 6-1-19) (NOT-gripper-obstacle x4 y0 22-0-50)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-gripper-obstacle x3 y0 21-0-48) (none-of-those 22-1-51)
+    del: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 21-1-49) (NOT-gripper-obstacle x4 y0 22-0-50)
+  (gripper-up pr2 x0 y0 xrel0 x0 yrel1 yrel0 y1 y0), cost: 1
+    pre: (base-pos pr2 x0 y0 0-0-0) (gripper-rel pr2 xrel0 yrel1 1-3-8) (parked pr2 6-1-19) (NOT-gripper-obstacle x0 y0 17-0-40)
+    add: (gripper-rel pr2 xrel0 yrel0 1-2-7) (none-of-those 17-1-41) (NOT-gripper-obstacle x0 y1 18-0-42)
+    del: (gripper-rel pr2 xrel0 yrel1 1-3-8) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 18-1-43)
+  (gripper-up pr2 x1 y0 xrel-1 x0 yrel1 yrel0 y1 y0), cost: 1
+    pre: (base-pos pr2 x1 y0 0-1-1) (gripper-rel pr2 xrel-1 yrel1 1-1-6) (parked pr2 6-1-19) (NOT-gripper-obstacle x0 y0 17-0-40)
+    add: (gripper-rel pr2 xrel-1 yrel0 1-0-5) (none-of-those 17-1-41) (NOT-gripper-obstacle x0 y1 18-0-42)
+    del: (gripper-rel pr2 xrel-1 yrel1 1-1-6) (NOT-gripper-obstacle x0 y0 17-0-40) (none-of-those 18-1-43)
+  (park pr2), cost: 1
+    pre: (NOT-parked pr2 6-0-18) (not-pushing pr2 9-0-24)
+    add: (parked pr2 6-1-19)
+    del: (NOT-parked pr2 6-0-18)
+  (ungrasp-cart pr2 cart), cost: 1
+    pre: (pushing pr2 cart 7-1-21)
+    add: (not-pushed cart 7-0-20) (not-pushing pr2 9-0-24)
+    del: (pushing pr2 cart 7-1-21) (none-of-those 9-1-25)
+  (unpark pr2 xrel0 yrel0), cost: 1
+    pre: (gripper-rel pr2 xrel0 yrel0 1-2-7) (parked pr2 6-1-19)
+    add: (NOT-parked pr2 6-0-18)
+    del: (parked pr2 6-1-19)
+Init State: (base-pos pr2 x0 y0 0-0-0) (gripper-rel pr2 xrel0 yrel0 1-2-7) (NOT-object-done object0 2-0-10) (NOT-object-done object1 3-0-12) (NOT-object-done object2 4-0-14) (NOT-object-done object3 5-0-16) (parked pr2 6-1-19) (not-pushed cart 7-0-20) (gripper-empty pr2 8-0-22) (not-pushing pr2 9-0-24) (object-pos object0 x2 y2 10-0-26) (object-pos object2 x3 y2 11-0-28) (none-of-those 12-1-31) (NOT-base-obstacle x1 y0 13-0-32) (NOT-base-obstacle x2 y0 14-0-34) (NOT-base-obstacle x3 y0 15-0-36) (NOT-base-obstacle x4 y0 16-0-38) (NOT-gripper-obstacle x0 y0 17-0-40) (NOT-gripper-obstacle x0 y1 18-0-42) (NOT-gripper-obstacle x1 y0 19-0-44) (NOT-gripper-obstacle x2 y0 20-0-46) (NOT-gripper-obstacle x3 y0 21-0-48) (NOT-gripper-obstacle x4 y0 22-0-50)
+Goal: (object-done object0 2-1-11) (object-done object1 3-1-13) (object-done object2 4-1-15) (object-done object3 5-1-17)
+Value: 4

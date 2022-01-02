@@ -1,0 +1,132 @@
+Domain: freecell
+Problem: freecell2-4
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Obj[21]:
+    [0]: diamond, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: club, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: heart, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: spade, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: n0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: n1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: n2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: n3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: n4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: spadea, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: diamonda, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: club2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: heart2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: spade2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: hearta, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: diamond2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: cluba, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: diamond0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: club0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: heart0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: spade0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[12]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    on: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    incell: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    clear: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    cellspace: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    colspace: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    home: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    bottomcol: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    canstack: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    suit: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    value: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    successor: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[10]:
+    move: ?card:0 ?oldcard:0 ?newcard:0
+        pre: (and (RW:clear ?card) (RW:clear ?newcard) (R:canstack ?card ?newcard) (RW:on ?card ?oldcard))
+        eff: (and (RW:on ?card ?newcard) (RW:clear ?oldcard) (N:RW:on ?card ?oldcard) (N:RW:clear ?newcard))
+    move-b: ?card:0 ?newcard:0 ?cols:0 ?ncols:0
+        pre: (and (RW:clear ?card) (RW:bottomcol ?card) (RW:clear ?newcard) (R:canstack ?card ?newcard) (RW:colspace ?cols) (R:successor ?ncols ?cols))
+        eff: (and (RW:on ?card ?newcard) (RW:colspace ?ncols) (N:RW:bottomcol ?card) (N:RW:clear ?newcard) (N:RW:colspace ?cols))
+    sendtofree: ?card:0 ?oldcard:0 ?cells:0 ?ncells:0
+        pre: (and (RW:clear ?card) (RW:on ?card ?oldcard) (RW:cellspace ?cells) (R:successor ?cells ?ncells))
+        eff: (and (RW:incell ?card) (RW:clear ?oldcard) (RW:cellspace ?ncells) (N:RW:on ?card ?oldcard) (N:RW:clear ?card) (N:RW:cellspace ?cells))
+    sendtofree-b: ?card:0 ?cells:0 ?ncells:0 ?cols:0 ?ncols:0
+        pre: (and (RW:clear ?card) (RW:bottomcol ?card) (RW:cellspace ?cells) (R:successor ?cells ?ncells) (RW:colspace ?cols) (R:successor ?ncols ?cols))
+        eff: (and (RW:incell ?card) (RW:colspace ?ncols) (RW:cellspace ?ncells) (N:RW:bottomcol ?card) (N:RW:clear ?card) (N:RW:colspace ?cols) (N:RW:cellspace ?cells))
+    sendtonewcol: ?card:0 ?oldcard:0 ?cols:0 ?ncols:0
+        pre: (and (RW:clear ?card) (RW:colspace ?cols) (R:successor ?cols ?ncols) (RW:on ?card ?oldcard))
+        eff: (and (RW:bottomcol ?card) (RW:clear ?oldcard) (RW:colspace ?ncols) (N:RW:on ?card ?oldcard) (N:RW:colspace ?cols))
+    sendtohome: ?card:0 ?oldcard:0 ?suit:0 ?vcard:0 ?homecard:0 ?vhomecard:0
+        pre: (and (RW:clear ?card) (RW:on ?card ?oldcard) (RW:home ?homecard) (R:suit ?card ?suit) (R:suit ?homecard ?suit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard))
+        eff: (and (RW:home ?card) (RW:clear ?oldcard) (N:RW:on ?card ?oldcard) (N:RW:home ?homecard) (N:RW:clear ?card))
+    sendtohome-b: ?card:0 ?suit:0 ?vcard:0 ?homecard:0 ?vhomecard:0 ?cols:0 ?ncols:0
+        pre: (and (RW:clear ?card) (RW:bottomcol ?card) (RW:home ?homecard) (R:suit ?card ?suit) (R:suit ?homecard ?suit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard) (RW:colspace ?cols) (R:successor ?ncols ?cols))
+        eff: (and (RW:home ?card) (RW:colspace ?ncols) (N:RW:home ?homecard) (N:RW:clear ?card) (N:RW:bottomcol ?card) (N:RW:colspace ?cols))
+    homefromfreecell: ?card:0 ?suit:0 ?vcard:0 ?homecard:0 ?vhomecard:0 ?cells:0 ?ncells:0
+        pre: (and (RW:incell ?card) (RW:home ?homecard) (R:suit ?card ?suit) (R:suit ?homecard ?suit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard) (RW:cellspace ?cells) (R:successor ?ncells ?cells))
+        eff: (and (RW:home ?card) (RW:cellspace ?ncells) (N:RW:incell ?card) (N:RW:cellspace ?cells) (N:RW:home ?homecard))
+    colfromfreecell: ?card:0 ?newcard:0 ?cells:0 ?ncells:0
+        pre: (and (RW:incell ?card) (RW:clear ?newcard) (R:canstack ?card ?newcard) (RW:cellspace ?cells) (R:successor ?ncells ?cells))
+        eff: (and (RW:cellspace ?ncells) (RW:clear ?card) (RW:on ?card ?newcard) (N:RW:incell ?card) (N:RW:cellspace ?cells) (N:RW:clear ?newcard))
+    newcolfromfreecell: ?card:0 ?cols:0 ?ncols:0 ?cells:0 ?ncells:0
+        pre: (and (RW:incell ?card) (RW:colspace ?cols) (RW:cellspace ?cells) (R:successor ?cols ?ncols) (R:successor ?ncells ?cells))
+        eff: (and (RW:bottomcol ?card) (RW:clear ?card) (RW:colspace ?ncols) (RW:cellspace ?ncells) (N:RW:incell ?card) (N:RW:colspace ?cols) (N:RW:cellspace ?cells))
+Init[54]:
+  S:(successor n1 n0)
+  S:(successor n2 n1)
+  S:(successor n3 n2)
+  S:(successor n4 n3)
+  (cellspace n2)
+  (clear spadea)
+  (on spadea spade2)
+  (bottomcol spade2)
+  (clear diamonda)
+  (on diamonda hearta)
+  (bottomcol hearta)
+  (clear club2)
+  (on club2 diamond2)
+  (bottomcol diamond2)
+  (clear heart2)
+  (on heart2 cluba)
+  (bottomcol cluba)
+  (colspace n0)
+  S:(value spadea n1)
+  S:(suit spadea spade)
+  S:(canstack spadea diamond2)
+  S:(canstack spadea heart2)
+  S:(value diamonda n1)
+  S:(suit diamonda diamond)
+  S:(canstack diamonda club2)
+  S:(canstack diamonda spade2)
+  S:(value club2 n2)
+  S:(suit club2 club)
+  S:(value heart2 n2)
+  S:(suit heart2 heart)
+  S:(value spade2 n2)
+  S:(suit spade2 spade)
+  S:(value hearta n1)
+  S:(suit hearta heart)
+  S:(canstack hearta club2)
+  S:(canstack hearta spade2)
+  S:(value diamond2 n2)
+  S:(suit diamond2 diamond)
+  S:(value cluba n1)
+  S:(suit cluba club)
+  S:(canstack cluba diamond2)
+  S:(canstack cluba heart2)
+  (home diamond0)
+  S:(value diamond0 n0)
+  S:(suit diamond0 diamond)
+  (home club0)
+  S:(value club0 n0)
+  S:(suit club0 club)
+  (home heart0)
+  S:(value heart0 n0)
+  S:(suit heart0 heart)
+  (home spade0)
+  S:(value spade0 n0)
+  S:(suit spade0 spade)
+Init[0]:
+Goal: (and (RW:home diamond2) (RW:home club2) (RW:home heart2) (RW:home spade2))
+Metric: 0

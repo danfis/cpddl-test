@@ -1,0 +1,946 @@
+Fact[61]:
+  (stacks-avail n0 0-0-0)
+  (stacks-avail n1 0-1-1)
+  (stacks-avail n10 0-2-2)
+  (stacks-avail n2 0-3-3)
+  (stacks-avail n3 0-4-4)
+  (stacks-avail n4 0-5-5)
+  (stacks-avail n5 0-6-6)
+  (stacks-avail n6 0-7-7)
+  (stacks-avail n7 0-8-8)
+  (stacks-avail n8 0-9-9)
+  (stacks-avail n9 0-10-10)
+  (shipped o1 1-0-11)
+  (started o1 1-1-12)
+  (waiting o1 1-2-13)
+  (shipped o10 2-0-14)
+  (started o10 2-1-15)
+  (waiting o10 2-2-16)
+  (shipped o2 3-0-17)
+  (started o2 3-1-18)
+  (waiting o2 3-2-19)
+  (shipped o3 4-0-20)
+  (started o3 4-1-21)
+  (waiting o3 4-2-22)
+  (shipped o4 5-0-23)
+  (started o4 5-1-24)
+  (waiting o4 5-2-25)
+  (shipped o5 6-0-26)
+  (started o5 6-1-27)
+  (waiting o5 6-2-28)
+  (shipped o6 7-0-29)
+  (started o6 7-1-30)
+  (waiting o6 7-2-31)
+  (shipped o7 8-0-32)
+  (started o7 8-1-33)
+  (waiting o7 8-2-34)
+  (shipped o8 9-0-35)
+  (started o8 9-1-36)
+  (waiting o8 9-2-37)
+  (shipped o9 10-0-38)
+  (started o9 10-1-39)
+  (waiting o9 10-2-40)
+  (made p1 11-0-41)
+  (not-made p1 11-1-42)
+  (made p10 12-0-43)
+  (not-made p10 12-1-44)
+  (made p2 13-0-45)
+  (not-made p2 13-1-46)
+  (made p3 14-0-47)
+  (not-made p3 14-1-48)
+  (made p4 15-0-49)
+  (not-made p4 15-1-50)
+  (made p5 16-0-51)
+  (not-made p5 16-1-52)
+  (made p6 17-0-53)
+  (not-made p6 17-1-54)
+  (made p7 18-0-55)
+  (not-made p7 18-1-56)
+  (made p8 19-0-57)
+  (not-made p8 19-1-58)
+  (made p9 20-0-59)
+  (not-made p9 20-1-60)
+Op[220]:
+  (make-product-p1), cost: 0
+    pre: (started o3 4-1-21) (started o9 10-1-39) (not-made p1 11-1-42)
+    add: (made p1 11-0-41)
+    del: (not-made p1 11-1-42)
+  (make-product-p10), cost: 0
+    pre: (started o1 1-1-12) (started o2 3-1-18) (not-made p10 12-1-44)
+    add: (made p10 12-0-43)
+    del: (not-made p10 12-1-44)
+  (make-product-p2), cost: 0
+    pre: (started o2 3-1-18) (not-made p2 13-1-46)
+    add: (made p2 13-0-45)
+    del: (not-made p2 13-1-46)
+  (make-product-p3), cost: 0
+    pre: (started o5 6-1-27) (started o8 9-1-36) (not-made p3 14-1-48)
+    add: (made p3 14-0-47)
+    del: (not-made p3 14-1-48)
+  (make-product-p4), cost: 0
+    pre: (started o4 5-1-24) (not-made p4 15-1-50)
+    add: (made p4 15-0-49)
+    del: (not-made p4 15-1-50)
+  (make-product-p5), cost: 0
+    pre: (started o6 7-1-30) (started o7 8-1-33) (not-made p5 16-1-52)
+    add: (made p5 16-0-51)
+    del: (not-made p5 16-1-52)
+  (make-product-p6), cost: 0
+    pre: (started o1 1-1-12) (not-made p6 17-1-54)
+    add: (made p6 17-0-53)
+    del: (not-made p6 17-1-54)
+  (make-product-p7), cost: 0
+    pre: (started o3 4-1-21) (not-made p7 18-1-56)
+    add: (made p7 18-0-55)
+    del: (not-made p7 18-1-56)
+  (make-product-p8), cost: 0
+    pre: (started o3 4-1-21) (not-made p8 19-1-58)
+    add: (made p8 19-0-57)
+    del: (not-made p8 19-1-58)
+  (make-product-p9), cost: 0
+    pre: (started o1 1-1-12) (started o10 2-1-15) (not-made p9 20-1-60)
+    add: (made p9 20-0-59)
+    del: (not-made p9 20-1-60)
+  (open-new-stack n0 n1), cost: 1
+    pre: (stacks-avail n0 0-0-0)
+    add: (stacks-avail n1 0-1-1)
+    del: (stacks-avail n0 0-0-0)
+  (open-new-stack n1 n2), cost: 1
+    pre: (stacks-avail n1 0-1-1)
+    add: (stacks-avail n2 0-3-3)
+    del: (stacks-avail n1 0-1-1)
+  (open-new-stack n2 n3), cost: 1
+    pre: (stacks-avail n2 0-3-3)
+    add: (stacks-avail n3 0-4-4)
+    del: (stacks-avail n2 0-3-3)
+  (open-new-stack n3 n4), cost: 1
+    pre: (stacks-avail n3 0-4-4)
+    add: (stacks-avail n4 0-5-5)
+    del: (stacks-avail n3 0-4-4)
+  (open-new-stack n4 n5), cost: 1
+    pre: (stacks-avail n4 0-5-5)
+    add: (stacks-avail n5 0-6-6)
+    del: (stacks-avail n4 0-5-5)
+  (open-new-stack n5 n6), cost: 1
+    pre: (stacks-avail n5 0-6-6)
+    add: (stacks-avail n6 0-7-7)
+    del: (stacks-avail n5 0-6-6)
+  (open-new-stack n6 n7), cost: 1
+    pre: (stacks-avail n6 0-7-7)
+    add: (stacks-avail n7 0-8-8)
+    del: (stacks-avail n6 0-7-7)
+  (open-new-stack n7 n8), cost: 1
+    pre: (stacks-avail n7 0-8-8)
+    add: (stacks-avail n8 0-9-9)
+    del: (stacks-avail n7 0-8-8)
+  (open-new-stack n8 n9), cost: 1
+    pre: (stacks-avail n8 0-9-9)
+    add: (stacks-avail n9 0-10-10)
+    del: (stacks-avail n8 0-9-9)
+  (open-new-stack n9 n10), cost: 1
+    pre: (stacks-avail n9 0-10-10)
+    add: (stacks-avail n10 0-2-2)
+    del: (stacks-avail n9 0-10-10)
+  (ship-order-o1 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n1 0-1-1) (shipped o1 1-0-11)
+    del: (stacks-avail n0 0-0-0) (started o1 1-1-12)
+  (ship-order-o1 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n2 0-3-3) (shipped o1 1-0-11)
+    del: (stacks-avail n1 0-1-1) (started o1 1-1-12)
+  (ship-order-o1 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n3 0-4-4) (shipped o1 1-0-11)
+    del: (stacks-avail n2 0-3-3) (started o1 1-1-12)
+  (ship-order-o1 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n4 0-5-5) (shipped o1 1-0-11)
+    del: (stacks-avail n3 0-4-4) (started o1 1-1-12)
+  (ship-order-o1 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n5 0-6-6) (shipped o1 1-0-11)
+    del: (stacks-avail n4 0-5-5) (started o1 1-1-12)
+  (ship-order-o1 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n6 0-7-7) (shipped o1 1-0-11)
+    del: (stacks-avail n5 0-6-6) (started o1 1-1-12)
+  (ship-order-o1 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n7 0-8-8) (shipped o1 1-0-11)
+    del: (stacks-avail n6 0-7-7) (started o1 1-1-12)
+  (ship-order-o1 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n8 0-9-9) (shipped o1 1-0-11)
+    del: (stacks-avail n7 0-8-8) (started o1 1-1-12)
+  (ship-order-o1 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n9 0-10-10) (shipped o1 1-0-11)
+    del: (stacks-avail n8 0-9-9) (started o1 1-1-12)
+  (ship-order-o1 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o1 1-1-12) (made p10 12-0-43) (made p6 17-0-53) (made p9 20-0-59)
+    add: (stacks-avail n10 0-2-2) (shipped o1 1-0-11)
+    del: (stacks-avail n9 0-10-10) (started o1 1-1-12)
+  (ship-order-o10 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n1 0-1-1) (shipped o10 2-0-14)
+    del: (stacks-avail n0 0-0-0) (started o10 2-1-15)
+  (ship-order-o10 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n2 0-3-3) (shipped o10 2-0-14)
+    del: (stacks-avail n1 0-1-1) (started o10 2-1-15)
+  (ship-order-o10 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n3 0-4-4) (shipped o10 2-0-14)
+    del: (stacks-avail n2 0-3-3) (started o10 2-1-15)
+  (ship-order-o10 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n4 0-5-5) (shipped o10 2-0-14)
+    del: (stacks-avail n3 0-4-4) (started o10 2-1-15)
+  (ship-order-o10 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n5 0-6-6) (shipped o10 2-0-14)
+    del: (stacks-avail n4 0-5-5) (started o10 2-1-15)
+  (ship-order-o10 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n6 0-7-7) (shipped o10 2-0-14)
+    del: (stacks-avail n5 0-6-6) (started o10 2-1-15)
+  (ship-order-o10 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n7 0-8-8) (shipped o10 2-0-14)
+    del: (stacks-avail n6 0-7-7) (started o10 2-1-15)
+  (ship-order-o10 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n8 0-9-9) (shipped o10 2-0-14)
+    del: (stacks-avail n7 0-8-8) (started o10 2-1-15)
+  (ship-order-o10 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n9 0-10-10) (shipped o10 2-0-14)
+    del: (stacks-avail n8 0-9-9) (started o10 2-1-15)
+  (ship-order-o10 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o10 2-1-15) (made p9 20-0-59)
+    add: (stacks-avail n10 0-2-2) (shipped o10 2-0-14)
+    del: (stacks-avail n9 0-10-10) (started o10 2-1-15)
+  (ship-order-o2 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n1 0-1-1) (shipped o2 3-0-17)
+    del: (stacks-avail n0 0-0-0) (started o2 3-1-18)
+  (ship-order-o2 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n2 0-3-3) (shipped o2 3-0-17)
+    del: (stacks-avail n1 0-1-1) (started o2 3-1-18)
+  (ship-order-o2 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n3 0-4-4) (shipped o2 3-0-17)
+    del: (stacks-avail n2 0-3-3) (started o2 3-1-18)
+  (ship-order-o2 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n4 0-5-5) (shipped o2 3-0-17)
+    del: (stacks-avail n3 0-4-4) (started o2 3-1-18)
+  (ship-order-o2 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n5 0-6-6) (shipped o2 3-0-17)
+    del: (stacks-avail n4 0-5-5) (started o2 3-1-18)
+  (ship-order-o2 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n6 0-7-7) (shipped o2 3-0-17)
+    del: (stacks-avail n5 0-6-6) (started o2 3-1-18)
+  (ship-order-o2 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n7 0-8-8) (shipped o2 3-0-17)
+    del: (stacks-avail n6 0-7-7) (started o2 3-1-18)
+  (ship-order-o2 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n8 0-9-9) (shipped o2 3-0-17)
+    del: (stacks-avail n7 0-8-8) (started o2 3-1-18)
+  (ship-order-o2 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n9 0-10-10) (shipped o2 3-0-17)
+    del: (stacks-avail n8 0-9-9) (started o2 3-1-18)
+  (ship-order-o2 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o2 3-1-18) (made p10 12-0-43) (made p2 13-0-45)
+    add: (stacks-avail n10 0-2-2) (shipped o2 3-0-17)
+    del: (stacks-avail n9 0-10-10) (started o2 3-1-18)
+  (ship-order-o3 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n1 0-1-1) (shipped o3 4-0-20)
+    del: (stacks-avail n0 0-0-0) (started o3 4-1-21)
+  (ship-order-o3 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n2 0-3-3) (shipped o3 4-0-20)
+    del: (stacks-avail n1 0-1-1) (started o3 4-1-21)
+  (ship-order-o3 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n3 0-4-4) (shipped o3 4-0-20)
+    del: (stacks-avail n2 0-3-3) (started o3 4-1-21)
+  (ship-order-o3 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n4 0-5-5) (shipped o3 4-0-20)
+    del: (stacks-avail n3 0-4-4) (started o3 4-1-21)
+  (ship-order-o3 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n5 0-6-6) (shipped o3 4-0-20)
+    del: (stacks-avail n4 0-5-5) (started o3 4-1-21)
+  (ship-order-o3 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n6 0-7-7) (shipped o3 4-0-20)
+    del: (stacks-avail n5 0-6-6) (started o3 4-1-21)
+  (ship-order-o3 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n7 0-8-8) (shipped o3 4-0-20)
+    del: (stacks-avail n6 0-7-7) (started o3 4-1-21)
+  (ship-order-o3 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n8 0-9-9) (shipped o3 4-0-20)
+    del: (stacks-avail n7 0-8-8) (started o3 4-1-21)
+  (ship-order-o3 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n9 0-10-10) (shipped o3 4-0-20)
+    del: (stacks-avail n8 0-9-9) (started o3 4-1-21)
+  (ship-order-o3 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o3 4-1-21) (made p1 11-0-41) (made p7 18-0-55) (made p8 19-0-57)
+    add: (stacks-avail n10 0-2-2) (shipped o3 4-0-20)
+    del: (stacks-avail n9 0-10-10) (started o3 4-1-21)
+  (ship-order-o4 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n1 0-1-1) (shipped o4 5-0-23)
+    del: (stacks-avail n0 0-0-0) (started o4 5-1-24)
+  (ship-order-o4 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n2 0-3-3) (shipped o4 5-0-23)
+    del: (stacks-avail n1 0-1-1) (started o4 5-1-24)
+  (ship-order-o4 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n3 0-4-4) (shipped o4 5-0-23)
+    del: (stacks-avail n2 0-3-3) (started o4 5-1-24)
+  (ship-order-o4 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n4 0-5-5) (shipped o4 5-0-23)
+    del: (stacks-avail n3 0-4-4) (started o4 5-1-24)
+  (ship-order-o4 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n5 0-6-6) (shipped o4 5-0-23)
+    del: (stacks-avail n4 0-5-5) (started o4 5-1-24)
+  (ship-order-o4 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n6 0-7-7) (shipped o4 5-0-23)
+    del: (stacks-avail n5 0-6-6) (started o4 5-1-24)
+  (ship-order-o4 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n7 0-8-8) (shipped o4 5-0-23)
+    del: (stacks-avail n6 0-7-7) (started o4 5-1-24)
+  (ship-order-o4 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n8 0-9-9) (shipped o4 5-0-23)
+    del: (stacks-avail n7 0-8-8) (started o4 5-1-24)
+  (ship-order-o4 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n9 0-10-10) (shipped o4 5-0-23)
+    del: (stacks-avail n8 0-9-9) (started o4 5-1-24)
+  (ship-order-o4 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o4 5-1-24) (made p4 15-0-49)
+    add: (stacks-avail n10 0-2-2) (shipped o4 5-0-23)
+    del: (stacks-avail n9 0-10-10) (started o4 5-1-24)
+  (ship-order-o5 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n1 0-1-1) (shipped o5 6-0-26)
+    del: (stacks-avail n0 0-0-0) (started o5 6-1-27)
+  (ship-order-o5 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n2 0-3-3) (shipped o5 6-0-26)
+    del: (stacks-avail n1 0-1-1) (started o5 6-1-27)
+  (ship-order-o5 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n3 0-4-4) (shipped o5 6-0-26)
+    del: (stacks-avail n2 0-3-3) (started o5 6-1-27)
+  (ship-order-o5 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n4 0-5-5) (shipped o5 6-0-26)
+    del: (stacks-avail n3 0-4-4) (started o5 6-1-27)
+  (ship-order-o5 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n5 0-6-6) (shipped o5 6-0-26)
+    del: (stacks-avail n4 0-5-5) (started o5 6-1-27)
+  (ship-order-o5 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n6 0-7-7) (shipped o5 6-0-26)
+    del: (stacks-avail n5 0-6-6) (started o5 6-1-27)
+  (ship-order-o5 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n7 0-8-8) (shipped o5 6-0-26)
+    del: (stacks-avail n6 0-7-7) (started o5 6-1-27)
+  (ship-order-o5 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n8 0-9-9) (shipped o5 6-0-26)
+    del: (stacks-avail n7 0-8-8) (started o5 6-1-27)
+  (ship-order-o5 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n9 0-10-10) (shipped o5 6-0-26)
+    del: (stacks-avail n8 0-9-9) (started o5 6-1-27)
+  (ship-order-o5 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o5 6-1-27) (made p3 14-0-47)
+    add: (stacks-avail n10 0-2-2) (shipped o5 6-0-26)
+    del: (stacks-avail n9 0-10-10) (started o5 6-1-27)
+  (ship-order-o6 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n1 0-1-1) (shipped o6 7-0-29)
+    del: (stacks-avail n0 0-0-0) (started o6 7-1-30)
+  (ship-order-o6 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n2 0-3-3) (shipped o6 7-0-29)
+    del: (stacks-avail n1 0-1-1) (started o6 7-1-30)
+  (ship-order-o6 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n3 0-4-4) (shipped o6 7-0-29)
+    del: (stacks-avail n2 0-3-3) (started o6 7-1-30)
+  (ship-order-o6 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n4 0-5-5) (shipped o6 7-0-29)
+    del: (stacks-avail n3 0-4-4) (started o6 7-1-30)
+  (ship-order-o6 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n5 0-6-6) (shipped o6 7-0-29)
+    del: (stacks-avail n4 0-5-5) (started o6 7-1-30)
+  (ship-order-o6 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n6 0-7-7) (shipped o6 7-0-29)
+    del: (stacks-avail n5 0-6-6) (started o6 7-1-30)
+  (ship-order-o6 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n7 0-8-8) (shipped o6 7-0-29)
+    del: (stacks-avail n6 0-7-7) (started o6 7-1-30)
+  (ship-order-o6 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n8 0-9-9) (shipped o6 7-0-29)
+    del: (stacks-avail n7 0-8-8) (started o6 7-1-30)
+  (ship-order-o6 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n9 0-10-10) (shipped o6 7-0-29)
+    del: (stacks-avail n8 0-9-9) (started o6 7-1-30)
+  (ship-order-o6 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o6 7-1-30) (made p5 16-0-51)
+    add: (stacks-avail n10 0-2-2) (shipped o6 7-0-29)
+    del: (stacks-avail n9 0-10-10) (started o6 7-1-30)
+  (ship-order-o7 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n1 0-1-1) (shipped o7 8-0-32)
+    del: (stacks-avail n0 0-0-0) (started o7 8-1-33)
+  (ship-order-o7 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n2 0-3-3) (shipped o7 8-0-32)
+    del: (stacks-avail n1 0-1-1) (started o7 8-1-33)
+  (ship-order-o7 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n3 0-4-4) (shipped o7 8-0-32)
+    del: (stacks-avail n2 0-3-3) (started o7 8-1-33)
+  (ship-order-o7 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n4 0-5-5) (shipped o7 8-0-32)
+    del: (stacks-avail n3 0-4-4) (started o7 8-1-33)
+  (ship-order-o7 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n5 0-6-6) (shipped o7 8-0-32)
+    del: (stacks-avail n4 0-5-5) (started o7 8-1-33)
+  (ship-order-o7 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n6 0-7-7) (shipped o7 8-0-32)
+    del: (stacks-avail n5 0-6-6) (started o7 8-1-33)
+  (ship-order-o7 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n7 0-8-8) (shipped o7 8-0-32)
+    del: (stacks-avail n6 0-7-7) (started o7 8-1-33)
+  (ship-order-o7 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n8 0-9-9) (shipped o7 8-0-32)
+    del: (stacks-avail n7 0-8-8) (started o7 8-1-33)
+  (ship-order-o7 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n9 0-10-10) (shipped o7 8-0-32)
+    del: (stacks-avail n8 0-9-9) (started o7 8-1-33)
+  (ship-order-o7 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o7 8-1-33) (made p5 16-0-51)
+    add: (stacks-avail n10 0-2-2) (shipped o7 8-0-32)
+    del: (stacks-avail n9 0-10-10) (started o7 8-1-33)
+  (ship-order-o8 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n1 0-1-1) (shipped o8 9-0-35)
+    del: (stacks-avail n0 0-0-0) (started o8 9-1-36)
+  (ship-order-o8 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n2 0-3-3) (shipped o8 9-0-35)
+    del: (stacks-avail n1 0-1-1) (started o8 9-1-36)
+  (ship-order-o8 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n3 0-4-4) (shipped o8 9-0-35)
+    del: (stacks-avail n2 0-3-3) (started o8 9-1-36)
+  (ship-order-o8 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n4 0-5-5) (shipped o8 9-0-35)
+    del: (stacks-avail n3 0-4-4) (started o8 9-1-36)
+  (ship-order-o8 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n5 0-6-6) (shipped o8 9-0-35)
+    del: (stacks-avail n4 0-5-5) (started o8 9-1-36)
+  (ship-order-o8 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n6 0-7-7) (shipped o8 9-0-35)
+    del: (stacks-avail n5 0-6-6) (started o8 9-1-36)
+  (ship-order-o8 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n7 0-8-8) (shipped o8 9-0-35)
+    del: (stacks-avail n6 0-7-7) (started o8 9-1-36)
+  (ship-order-o8 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n8 0-9-9) (shipped o8 9-0-35)
+    del: (stacks-avail n7 0-8-8) (started o8 9-1-36)
+  (ship-order-o8 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n9 0-10-10) (shipped o8 9-0-35)
+    del: (stacks-avail n8 0-9-9) (started o8 9-1-36)
+  (ship-order-o8 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o8 9-1-36) (made p3 14-0-47)
+    add: (stacks-avail n10 0-2-2) (shipped o8 9-0-35)
+    del: (stacks-avail n9 0-10-10) (started o8 9-1-36)
+  (ship-order-o9 n0 n1), cost: 0
+    pre: (stacks-avail n0 0-0-0) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n1 0-1-1) (shipped o9 10-0-38)
+    del: (stacks-avail n0 0-0-0) (started o9 10-1-39)
+  (ship-order-o9 n1 n2), cost: 0
+    pre: (stacks-avail n1 0-1-1) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n2 0-3-3) (shipped o9 10-0-38)
+    del: (stacks-avail n1 0-1-1) (started o9 10-1-39)
+  (ship-order-o9 n2 n3), cost: 0
+    pre: (stacks-avail n2 0-3-3) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n3 0-4-4) (shipped o9 10-0-38)
+    del: (stacks-avail n2 0-3-3) (started o9 10-1-39)
+  (ship-order-o9 n3 n4), cost: 0
+    pre: (stacks-avail n3 0-4-4) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n4 0-5-5) (shipped o9 10-0-38)
+    del: (stacks-avail n3 0-4-4) (started o9 10-1-39)
+  (ship-order-o9 n4 n5), cost: 0
+    pre: (stacks-avail n4 0-5-5) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n5 0-6-6) (shipped o9 10-0-38)
+    del: (stacks-avail n4 0-5-5) (started o9 10-1-39)
+  (ship-order-o9 n5 n6), cost: 0
+    pre: (stacks-avail n5 0-6-6) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n6 0-7-7) (shipped o9 10-0-38)
+    del: (stacks-avail n5 0-6-6) (started o9 10-1-39)
+  (ship-order-o9 n6 n7), cost: 0
+    pre: (stacks-avail n6 0-7-7) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n7 0-8-8) (shipped o9 10-0-38)
+    del: (stacks-avail n6 0-7-7) (started o9 10-1-39)
+  (ship-order-o9 n7 n8), cost: 0
+    pre: (stacks-avail n7 0-8-8) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n8 0-9-9) (shipped o9 10-0-38)
+    del: (stacks-avail n7 0-8-8) (started o9 10-1-39)
+  (ship-order-o9 n8 n9), cost: 0
+    pre: (stacks-avail n8 0-9-9) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n9 0-10-10) (shipped o9 10-0-38)
+    del: (stacks-avail n8 0-9-9) (started o9 10-1-39)
+  (ship-order-o9 n9 n10), cost: 0
+    pre: (stacks-avail n9 0-10-10) (started o9 10-1-39) (made p1 11-0-41)
+    add: (stacks-avail n10 0-2-2) (shipped o9 10-0-38)
+    del: (stacks-avail n9 0-10-10) (started o9 10-1-39)
+  (start-order o1 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o1 1-2-13)
+    add: (stacks-avail n0 0-0-0) (started o1 1-1-12)
+    del: (stacks-avail n1 0-1-1) (waiting o1 1-2-13)
+  (start-order o1 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o1 1-2-13)
+    add: (stacks-avail n9 0-10-10) (started o1 1-1-12)
+    del: (stacks-avail n10 0-2-2) (waiting o1 1-2-13)
+  (start-order o1 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o1 1-2-13)
+    add: (stacks-avail n1 0-1-1) (started o1 1-1-12)
+    del: (stacks-avail n2 0-3-3) (waiting o1 1-2-13)
+  (start-order o1 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o1 1-2-13)
+    add: (stacks-avail n2 0-3-3) (started o1 1-1-12)
+    del: (stacks-avail n3 0-4-4) (waiting o1 1-2-13)
+  (start-order o1 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o1 1-2-13)
+    add: (stacks-avail n3 0-4-4) (started o1 1-1-12)
+    del: (stacks-avail n4 0-5-5) (waiting o1 1-2-13)
+  (start-order o1 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o1 1-2-13)
+    add: (stacks-avail n4 0-5-5) (started o1 1-1-12)
+    del: (stacks-avail n5 0-6-6) (waiting o1 1-2-13)
+  (start-order o1 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o1 1-2-13)
+    add: (stacks-avail n5 0-6-6) (started o1 1-1-12)
+    del: (stacks-avail n6 0-7-7) (waiting o1 1-2-13)
+  (start-order o1 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o1 1-2-13)
+    add: (stacks-avail n6 0-7-7) (started o1 1-1-12)
+    del: (stacks-avail n7 0-8-8) (waiting o1 1-2-13)
+  (start-order o1 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o1 1-2-13)
+    add: (stacks-avail n7 0-8-8) (started o1 1-1-12)
+    del: (stacks-avail n8 0-9-9) (waiting o1 1-2-13)
+  (start-order o1 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o1 1-2-13)
+    add: (stacks-avail n8 0-9-9) (started o1 1-1-12)
+    del: (stacks-avail n9 0-10-10) (waiting o1 1-2-13)
+  (start-order o10 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o10 2-2-16)
+    add: (stacks-avail n0 0-0-0) (started o10 2-1-15)
+    del: (stacks-avail n1 0-1-1) (waiting o10 2-2-16)
+  (start-order o10 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o10 2-2-16)
+    add: (stacks-avail n9 0-10-10) (started o10 2-1-15)
+    del: (stacks-avail n10 0-2-2) (waiting o10 2-2-16)
+  (start-order o10 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o10 2-2-16)
+    add: (stacks-avail n1 0-1-1) (started o10 2-1-15)
+    del: (stacks-avail n2 0-3-3) (waiting o10 2-2-16)
+  (start-order o10 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o10 2-2-16)
+    add: (stacks-avail n2 0-3-3) (started o10 2-1-15)
+    del: (stacks-avail n3 0-4-4) (waiting o10 2-2-16)
+  (start-order o10 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o10 2-2-16)
+    add: (stacks-avail n3 0-4-4) (started o10 2-1-15)
+    del: (stacks-avail n4 0-5-5) (waiting o10 2-2-16)
+  (start-order o10 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o10 2-2-16)
+    add: (stacks-avail n4 0-5-5) (started o10 2-1-15)
+    del: (stacks-avail n5 0-6-6) (waiting o10 2-2-16)
+  (start-order o10 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o10 2-2-16)
+    add: (stacks-avail n5 0-6-6) (started o10 2-1-15)
+    del: (stacks-avail n6 0-7-7) (waiting o10 2-2-16)
+  (start-order o10 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o10 2-2-16)
+    add: (stacks-avail n6 0-7-7) (started o10 2-1-15)
+    del: (stacks-avail n7 0-8-8) (waiting o10 2-2-16)
+  (start-order o10 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o10 2-2-16)
+    add: (stacks-avail n7 0-8-8) (started o10 2-1-15)
+    del: (stacks-avail n8 0-9-9) (waiting o10 2-2-16)
+  (start-order o10 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o10 2-2-16)
+    add: (stacks-avail n8 0-9-9) (started o10 2-1-15)
+    del: (stacks-avail n9 0-10-10) (waiting o10 2-2-16)
+  (start-order o2 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o2 3-2-19)
+    add: (stacks-avail n0 0-0-0) (started o2 3-1-18)
+    del: (stacks-avail n1 0-1-1) (waiting o2 3-2-19)
+  (start-order o2 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o2 3-2-19)
+    add: (stacks-avail n9 0-10-10) (started o2 3-1-18)
+    del: (stacks-avail n10 0-2-2) (waiting o2 3-2-19)
+  (start-order o2 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o2 3-2-19)
+    add: (stacks-avail n1 0-1-1) (started o2 3-1-18)
+    del: (stacks-avail n2 0-3-3) (waiting o2 3-2-19)
+  (start-order o2 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o2 3-2-19)
+    add: (stacks-avail n2 0-3-3) (started o2 3-1-18)
+    del: (stacks-avail n3 0-4-4) (waiting o2 3-2-19)
+  (start-order o2 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o2 3-2-19)
+    add: (stacks-avail n3 0-4-4) (started o2 3-1-18)
+    del: (stacks-avail n4 0-5-5) (waiting o2 3-2-19)
+  (start-order o2 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o2 3-2-19)
+    add: (stacks-avail n4 0-5-5) (started o2 3-1-18)
+    del: (stacks-avail n5 0-6-6) (waiting o2 3-2-19)
+  (start-order o2 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o2 3-2-19)
+    add: (stacks-avail n5 0-6-6) (started o2 3-1-18)
+    del: (stacks-avail n6 0-7-7) (waiting o2 3-2-19)
+  (start-order o2 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o2 3-2-19)
+    add: (stacks-avail n6 0-7-7) (started o2 3-1-18)
+    del: (stacks-avail n7 0-8-8) (waiting o2 3-2-19)
+  (start-order o2 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o2 3-2-19)
+    add: (stacks-avail n7 0-8-8) (started o2 3-1-18)
+    del: (stacks-avail n8 0-9-9) (waiting o2 3-2-19)
+  (start-order o2 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o2 3-2-19)
+    add: (stacks-avail n8 0-9-9) (started o2 3-1-18)
+    del: (stacks-avail n9 0-10-10) (waiting o2 3-2-19)
+  (start-order o3 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o3 4-2-22)
+    add: (stacks-avail n0 0-0-0) (started o3 4-1-21)
+    del: (stacks-avail n1 0-1-1) (waiting o3 4-2-22)
+  (start-order o3 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o3 4-2-22)
+    add: (stacks-avail n9 0-10-10) (started o3 4-1-21)
+    del: (stacks-avail n10 0-2-2) (waiting o3 4-2-22)
+  (start-order o3 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o3 4-2-22)
+    add: (stacks-avail n1 0-1-1) (started o3 4-1-21)
+    del: (stacks-avail n2 0-3-3) (waiting o3 4-2-22)
+  (start-order o3 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o3 4-2-22)
+    add: (stacks-avail n2 0-3-3) (started o3 4-1-21)
+    del: (stacks-avail n3 0-4-4) (waiting o3 4-2-22)
+  (start-order o3 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o3 4-2-22)
+    add: (stacks-avail n3 0-4-4) (started o3 4-1-21)
+    del: (stacks-avail n4 0-5-5) (waiting o3 4-2-22)
+  (start-order o3 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o3 4-2-22)
+    add: (stacks-avail n4 0-5-5) (started o3 4-1-21)
+    del: (stacks-avail n5 0-6-6) (waiting o3 4-2-22)
+  (start-order o3 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o3 4-2-22)
+    add: (stacks-avail n5 0-6-6) (started o3 4-1-21)
+    del: (stacks-avail n6 0-7-7) (waiting o3 4-2-22)
+  (start-order o3 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o3 4-2-22)
+    add: (stacks-avail n6 0-7-7) (started o3 4-1-21)
+    del: (stacks-avail n7 0-8-8) (waiting o3 4-2-22)
+  (start-order o3 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o3 4-2-22)
+    add: (stacks-avail n7 0-8-8) (started o3 4-1-21)
+    del: (stacks-avail n8 0-9-9) (waiting o3 4-2-22)
+  (start-order o3 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o3 4-2-22)
+    add: (stacks-avail n8 0-9-9) (started o3 4-1-21)
+    del: (stacks-avail n9 0-10-10) (waiting o3 4-2-22)
+  (start-order o4 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o4 5-2-25)
+    add: (stacks-avail n0 0-0-0) (started o4 5-1-24)
+    del: (stacks-avail n1 0-1-1) (waiting o4 5-2-25)
+  (start-order o4 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o4 5-2-25)
+    add: (stacks-avail n9 0-10-10) (started o4 5-1-24)
+    del: (stacks-avail n10 0-2-2) (waiting o4 5-2-25)
+  (start-order o4 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o4 5-2-25)
+    add: (stacks-avail n1 0-1-1) (started o4 5-1-24)
+    del: (stacks-avail n2 0-3-3) (waiting o4 5-2-25)
+  (start-order o4 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o4 5-2-25)
+    add: (stacks-avail n2 0-3-3) (started o4 5-1-24)
+    del: (stacks-avail n3 0-4-4) (waiting o4 5-2-25)
+  (start-order o4 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o4 5-2-25)
+    add: (stacks-avail n3 0-4-4) (started o4 5-1-24)
+    del: (stacks-avail n4 0-5-5) (waiting o4 5-2-25)
+  (start-order o4 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o4 5-2-25)
+    add: (stacks-avail n4 0-5-5) (started o4 5-1-24)
+    del: (stacks-avail n5 0-6-6) (waiting o4 5-2-25)
+  (start-order o4 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o4 5-2-25)
+    add: (stacks-avail n5 0-6-6) (started o4 5-1-24)
+    del: (stacks-avail n6 0-7-7) (waiting o4 5-2-25)
+  (start-order o4 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o4 5-2-25)
+    add: (stacks-avail n6 0-7-7) (started o4 5-1-24)
+    del: (stacks-avail n7 0-8-8) (waiting o4 5-2-25)
+  (start-order o4 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o4 5-2-25)
+    add: (stacks-avail n7 0-8-8) (started o4 5-1-24)
+    del: (stacks-avail n8 0-9-9) (waiting o4 5-2-25)
+  (start-order o4 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o4 5-2-25)
+    add: (stacks-avail n8 0-9-9) (started o4 5-1-24)
+    del: (stacks-avail n9 0-10-10) (waiting o4 5-2-25)
+  (start-order o5 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o5 6-2-28)
+    add: (stacks-avail n0 0-0-0) (started o5 6-1-27)
+    del: (stacks-avail n1 0-1-1) (waiting o5 6-2-28)
+  (start-order o5 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o5 6-2-28)
+    add: (stacks-avail n9 0-10-10) (started o5 6-1-27)
+    del: (stacks-avail n10 0-2-2) (waiting o5 6-2-28)
+  (start-order o5 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o5 6-2-28)
+    add: (stacks-avail n1 0-1-1) (started o5 6-1-27)
+    del: (stacks-avail n2 0-3-3) (waiting o5 6-2-28)
+  (start-order o5 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o5 6-2-28)
+    add: (stacks-avail n2 0-3-3) (started o5 6-1-27)
+    del: (stacks-avail n3 0-4-4) (waiting o5 6-2-28)
+  (start-order o5 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o5 6-2-28)
+    add: (stacks-avail n3 0-4-4) (started o5 6-1-27)
+    del: (stacks-avail n4 0-5-5) (waiting o5 6-2-28)
+  (start-order o5 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o5 6-2-28)
+    add: (stacks-avail n4 0-5-5) (started o5 6-1-27)
+    del: (stacks-avail n5 0-6-6) (waiting o5 6-2-28)
+  (start-order o5 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o5 6-2-28)
+    add: (stacks-avail n5 0-6-6) (started o5 6-1-27)
+    del: (stacks-avail n6 0-7-7) (waiting o5 6-2-28)
+  (start-order o5 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o5 6-2-28)
+    add: (stacks-avail n6 0-7-7) (started o5 6-1-27)
+    del: (stacks-avail n7 0-8-8) (waiting o5 6-2-28)
+  (start-order o5 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o5 6-2-28)
+    add: (stacks-avail n7 0-8-8) (started o5 6-1-27)
+    del: (stacks-avail n8 0-9-9) (waiting o5 6-2-28)
+  (start-order o5 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o5 6-2-28)
+    add: (stacks-avail n8 0-9-9) (started o5 6-1-27)
+    del: (stacks-avail n9 0-10-10) (waiting o5 6-2-28)
+  (start-order o6 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o6 7-2-31)
+    add: (stacks-avail n0 0-0-0) (started o6 7-1-30)
+    del: (stacks-avail n1 0-1-1) (waiting o6 7-2-31)
+  (start-order o6 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o6 7-2-31)
+    add: (stacks-avail n9 0-10-10) (started o6 7-1-30)
+    del: (stacks-avail n10 0-2-2) (waiting o6 7-2-31)
+  (start-order o6 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o6 7-2-31)
+    add: (stacks-avail n1 0-1-1) (started o6 7-1-30)
+    del: (stacks-avail n2 0-3-3) (waiting o6 7-2-31)
+  (start-order o6 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o6 7-2-31)
+    add: (stacks-avail n2 0-3-3) (started o6 7-1-30)
+    del: (stacks-avail n3 0-4-4) (waiting o6 7-2-31)
+  (start-order o6 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o6 7-2-31)
+    add: (stacks-avail n3 0-4-4) (started o6 7-1-30)
+    del: (stacks-avail n4 0-5-5) (waiting o6 7-2-31)
+  (start-order o6 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o6 7-2-31)
+    add: (stacks-avail n4 0-5-5) (started o6 7-1-30)
+    del: (stacks-avail n5 0-6-6) (waiting o6 7-2-31)
+  (start-order o6 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o6 7-2-31)
+    add: (stacks-avail n5 0-6-6) (started o6 7-1-30)
+    del: (stacks-avail n6 0-7-7) (waiting o6 7-2-31)
+  (start-order o6 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o6 7-2-31)
+    add: (stacks-avail n6 0-7-7) (started o6 7-1-30)
+    del: (stacks-avail n7 0-8-8) (waiting o6 7-2-31)
+  (start-order o6 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o6 7-2-31)
+    add: (stacks-avail n7 0-8-8) (started o6 7-1-30)
+    del: (stacks-avail n8 0-9-9) (waiting o6 7-2-31)
+  (start-order o6 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o6 7-2-31)
+    add: (stacks-avail n8 0-9-9) (started o6 7-1-30)
+    del: (stacks-avail n9 0-10-10) (waiting o6 7-2-31)
+  (start-order o7 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o7 8-2-34)
+    add: (stacks-avail n0 0-0-0) (started o7 8-1-33)
+    del: (stacks-avail n1 0-1-1) (waiting o7 8-2-34)
+  (start-order o7 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o7 8-2-34)
+    add: (stacks-avail n9 0-10-10) (started o7 8-1-33)
+    del: (stacks-avail n10 0-2-2) (waiting o7 8-2-34)
+  (start-order o7 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o7 8-2-34)
+    add: (stacks-avail n1 0-1-1) (started o7 8-1-33)
+    del: (stacks-avail n2 0-3-3) (waiting o7 8-2-34)
+  (start-order o7 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o7 8-2-34)
+    add: (stacks-avail n2 0-3-3) (started o7 8-1-33)
+    del: (stacks-avail n3 0-4-4) (waiting o7 8-2-34)
+  (start-order o7 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o7 8-2-34)
+    add: (stacks-avail n3 0-4-4) (started o7 8-1-33)
+    del: (stacks-avail n4 0-5-5) (waiting o7 8-2-34)
+  (start-order o7 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o7 8-2-34)
+    add: (stacks-avail n4 0-5-5) (started o7 8-1-33)
+    del: (stacks-avail n5 0-6-6) (waiting o7 8-2-34)
+  (start-order o7 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o7 8-2-34)
+    add: (stacks-avail n5 0-6-6) (started o7 8-1-33)
+    del: (stacks-avail n6 0-7-7) (waiting o7 8-2-34)
+  (start-order o7 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o7 8-2-34)
+    add: (stacks-avail n6 0-7-7) (started o7 8-1-33)
+    del: (stacks-avail n7 0-8-8) (waiting o7 8-2-34)
+  (start-order o7 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o7 8-2-34)
+    add: (stacks-avail n7 0-8-8) (started o7 8-1-33)
+    del: (stacks-avail n8 0-9-9) (waiting o7 8-2-34)
+  (start-order o7 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o7 8-2-34)
+    add: (stacks-avail n8 0-9-9) (started o7 8-1-33)
+    del: (stacks-avail n9 0-10-10) (waiting o7 8-2-34)
+  (start-order o8 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o8 9-2-37)
+    add: (stacks-avail n0 0-0-0) (started o8 9-1-36)
+    del: (stacks-avail n1 0-1-1) (waiting o8 9-2-37)
+  (start-order o8 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o8 9-2-37)
+    add: (stacks-avail n9 0-10-10) (started o8 9-1-36)
+    del: (stacks-avail n10 0-2-2) (waiting o8 9-2-37)
+  (start-order o8 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o8 9-2-37)
+    add: (stacks-avail n1 0-1-1) (started o8 9-1-36)
+    del: (stacks-avail n2 0-3-3) (waiting o8 9-2-37)
+  (start-order o8 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o8 9-2-37)
+    add: (stacks-avail n2 0-3-3) (started o8 9-1-36)
+    del: (stacks-avail n3 0-4-4) (waiting o8 9-2-37)
+  (start-order o8 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o8 9-2-37)
+    add: (stacks-avail n3 0-4-4) (started o8 9-1-36)
+    del: (stacks-avail n4 0-5-5) (waiting o8 9-2-37)
+  (start-order o8 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o8 9-2-37)
+    add: (stacks-avail n4 0-5-5) (started o8 9-1-36)
+    del: (stacks-avail n5 0-6-6) (waiting o8 9-2-37)
+  (start-order o8 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o8 9-2-37)
+    add: (stacks-avail n5 0-6-6) (started o8 9-1-36)
+    del: (stacks-avail n6 0-7-7) (waiting o8 9-2-37)
+  (start-order o8 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o8 9-2-37)
+    add: (stacks-avail n6 0-7-7) (started o8 9-1-36)
+    del: (stacks-avail n7 0-8-8) (waiting o8 9-2-37)
+  (start-order o8 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o8 9-2-37)
+    add: (stacks-avail n7 0-8-8) (started o8 9-1-36)
+    del: (stacks-avail n8 0-9-9) (waiting o8 9-2-37)
+  (start-order o8 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o8 9-2-37)
+    add: (stacks-avail n8 0-9-9) (started o8 9-1-36)
+    del: (stacks-avail n9 0-10-10) (waiting o8 9-2-37)
+  (start-order o9 n1 n0), cost: 0
+    pre: (stacks-avail n1 0-1-1) (waiting o9 10-2-40)
+    add: (stacks-avail n0 0-0-0) (started o9 10-1-39)
+    del: (stacks-avail n1 0-1-1) (waiting o9 10-2-40)
+  (start-order o9 n10 n9), cost: 0
+    pre: (stacks-avail n10 0-2-2) (waiting o9 10-2-40)
+    add: (stacks-avail n9 0-10-10) (started o9 10-1-39)
+    del: (stacks-avail n10 0-2-2) (waiting o9 10-2-40)
+  (start-order o9 n2 n1), cost: 0
+    pre: (stacks-avail n2 0-3-3) (waiting o9 10-2-40)
+    add: (stacks-avail n1 0-1-1) (started o9 10-1-39)
+    del: (stacks-avail n2 0-3-3) (waiting o9 10-2-40)
+  (start-order o9 n3 n2), cost: 0
+    pre: (stacks-avail n3 0-4-4) (waiting o9 10-2-40)
+    add: (stacks-avail n2 0-3-3) (started o9 10-1-39)
+    del: (stacks-avail n3 0-4-4) (waiting o9 10-2-40)
+  (start-order o9 n4 n3), cost: 0
+    pre: (stacks-avail n4 0-5-5) (waiting o9 10-2-40)
+    add: (stacks-avail n3 0-4-4) (started o9 10-1-39)
+    del: (stacks-avail n4 0-5-5) (waiting o9 10-2-40)
+  (start-order o9 n5 n4), cost: 0
+    pre: (stacks-avail n5 0-6-6) (waiting o9 10-2-40)
+    add: (stacks-avail n4 0-5-5) (started o9 10-1-39)
+    del: (stacks-avail n5 0-6-6) (waiting o9 10-2-40)
+  (start-order o9 n6 n5), cost: 0
+    pre: (stacks-avail n6 0-7-7) (waiting o9 10-2-40)
+    add: (stacks-avail n5 0-6-6) (started o9 10-1-39)
+    del: (stacks-avail n6 0-7-7) (waiting o9 10-2-40)
+  (start-order o9 n7 n6), cost: 0
+    pre: (stacks-avail n7 0-8-8) (waiting o9 10-2-40)
+    add: (stacks-avail n6 0-7-7) (started o9 10-1-39)
+    del: (stacks-avail n7 0-8-8) (waiting o9 10-2-40)
+  (start-order o9 n8 n7), cost: 0
+    pre: (stacks-avail n8 0-9-9) (waiting o9 10-2-40)
+    add: (stacks-avail n7 0-8-8) (started o9 10-1-39)
+    del: (stacks-avail n8 0-9-9) (waiting o9 10-2-40)
+  (start-order o9 n9 n8), cost: 0
+    pre: (stacks-avail n9 0-10-10) (waiting o9 10-2-40)
+    add: (stacks-avail n8 0-9-9) (started o9 10-1-39)
+    del: (stacks-avail n9 0-10-10) (waiting o9 10-2-40)
+Init State: (stacks-avail n0 0-0-0) (waiting o1 1-2-13) (waiting o10 2-2-16) (waiting o2 3-2-19) (waiting o3 4-2-22) (waiting o4 5-2-25) (waiting o5 6-2-28) (waiting o6 7-2-31) (waiting o7 8-2-34) (waiting o8 9-2-37) (waiting o9 10-2-40) (not-made p1 11-1-42) (not-made p10 12-1-44) (not-made p2 13-1-46) (not-made p3 14-1-48) (not-made p4 15-1-50) (not-made p5 16-1-52) (not-made p6 17-1-54) (not-made p7 18-1-56) (not-made p8 19-1-58) (not-made p9 20-1-60)
+Goal: (shipped o1 1-0-11) (shipped o10 2-0-14) (shipped o2 3-0-17) (shipped o3 4-0-20) (shipped o4 5-0-23) (shipped o5 6-0-26) (shipped o6 7-0-29) (shipped o7 8-0-32) (shipped o8 9-0-35) (shipped o9 10-0-38)
+Value: 0

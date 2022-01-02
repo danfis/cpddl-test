@@ -1,0 +1,1146 @@
+Fact[61]:
+  (boarded p0 fast0 0-0-0)
+  (boarded p0 slow0-0 0-1-1)
+  (boarded p0 slow1-0 0-2-2)
+  (passenger-at p0 n0 0-3-3)
+  (passenger-at p0 n1 0-4-4)
+  (passenger-at p0 n2 0-5-5)
+  (passenger-at p0 n3 0-6-6)
+  (passenger-at p0 n4 0-7-7)
+  (passenger-at p0 n5 0-8-8)
+  (passenger-at p0 n6 0-9-9)
+  (passenger-at p0 n7 0-10-10)
+  (passenger-at p0 n8 0-11-11)
+  (boarded p1 fast0 1-0-12)
+  (boarded p1 slow0-0 1-1-13)
+  (boarded p1 slow1-0 1-2-14)
+  (passenger-at p1 n0 1-3-15)
+  (passenger-at p1 n1 1-4-16)
+  (passenger-at p1 n2 1-5-17)
+  (passenger-at p1 n3 1-6-18)
+  (passenger-at p1 n4 1-7-19)
+  (passenger-at p1 n5 1-8-20)
+  (passenger-at p1 n6 1-9-21)
+  (passenger-at p1 n7 1-10-22)
+  (passenger-at p1 n8 1-11-23)
+  (boarded p2 fast0 2-0-24)
+  (boarded p2 slow0-0 2-1-25)
+  (boarded p2 slow1-0 2-2-26)
+  (passenger-at p2 n0 2-3-27)
+  (passenger-at p2 n1 2-4-28)
+  (passenger-at p2 n2 2-5-29)
+  (passenger-at p2 n3 2-6-30)
+  (passenger-at p2 n4 2-7-31)
+  (passenger-at p2 n5 2-8-32)
+  (passenger-at p2 n6 2-9-33)
+  (passenger-at p2 n7 2-10-34)
+  (passenger-at p2 n8 2-11-35)
+  (lift-at fast0 n0 3-0-36)
+  (lift-at fast0 n2 3-1-37)
+  (lift-at fast0 n4 3-2-38)
+  (lift-at fast0 n6 3-3-39)
+  (lift-at fast0 n8 3-4-40)
+  (lift-at slow0-0 n0 4-0-41)
+  (lift-at slow0-0 n1 4-1-42)
+  (lift-at slow0-0 n2 4-2-43)
+  (lift-at slow0-0 n3 4-3-44)
+  (lift-at slow0-0 n4 4-4-45)
+  (lift-at slow1-0 n4 5-0-46)
+  (lift-at slow1-0 n5 5-1-47)
+  (lift-at slow1-0 n6 5-2-48)
+  (lift-at slow1-0 n7 5-3-49)
+  (lift-at slow1-0 n8 5-4-50)
+  (passengers fast0 n0 6-0-51)
+  (passengers fast0 n1 6-1-52)
+  (passengers fast0 n2 6-2-53)
+  (passengers fast0 n3 6-3-54)
+  (passengers slow0-0 n0 7-0-55)
+  (passengers slow0-0 n1 7-1-56)
+  (passengers slow0-0 n2 7-2-57)
+  (passengers slow1-0 n0 8-0-58)
+  (passengers slow1-0 n1 8-1-59)
+  (passengers slow1-0 n2 8-2-60)
+Op[270]:
+  (board p0 fast0 n0 n0 n1), cost: 0
+    pre: (passenger-at p0 n0 0-3-3) (lift-at fast0 n0 3-0-36) (passengers fast0 n0 6-0-51)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p0 n0 0-3-3) (passengers fast0 n0 6-0-51)
+  (board p0 fast0 n0 n1 n2), cost: 0
+    pre: (passenger-at p0 n0 0-3-3) (lift-at fast0 n0 3-0-36) (passengers fast0 n1 6-1-52)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p0 n0 0-3-3) (passengers fast0 n1 6-1-52)
+  (board p0 fast0 n0 n2 n3), cost: 0
+    pre: (passenger-at p0 n0 0-3-3) (lift-at fast0 n0 3-0-36) (passengers fast0 n2 6-2-53)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p0 n0 0-3-3) (passengers fast0 n2 6-2-53)
+  (board p0 fast0 n2 n0 n1), cost: 0
+    pre: (passenger-at p0 n2 0-5-5) (lift-at fast0 n2 3-1-37) (passengers fast0 n0 6-0-51)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p0 n2 0-5-5) (passengers fast0 n0 6-0-51)
+  (board p0 fast0 n2 n1 n2), cost: 0
+    pre: (passenger-at p0 n2 0-5-5) (lift-at fast0 n2 3-1-37) (passengers fast0 n1 6-1-52)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p0 n2 0-5-5) (passengers fast0 n1 6-1-52)
+  (board p0 fast0 n2 n2 n3), cost: 0
+    pre: (passenger-at p0 n2 0-5-5) (lift-at fast0 n2 3-1-37) (passengers fast0 n2 6-2-53)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p0 n2 0-5-5) (passengers fast0 n2 6-2-53)
+  (board p0 fast0 n4 n0 n1), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at fast0 n4 3-2-38) (passengers fast0 n0 6-0-51)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p0 n4 0-7-7) (passengers fast0 n0 6-0-51)
+  (board p0 fast0 n4 n1 n2), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at fast0 n4 3-2-38) (passengers fast0 n1 6-1-52)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p0 n4 0-7-7) (passengers fast0 n1 6-1-52)
+  (board p0 fast0 n4 n2 n3), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at fast0 n4 3-2-38) (passengers fast0 n2 6-2-53)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p0 n4 0-7-7) (passengers fast0 n2 6-2-53)
+  (board p0 fast0 n6 n0 n1), cost: 0
+    pre: (passenger-at p0 n6 0-9-9) (lift-at fast0 n6 3-3-39) (passengers fast0 n0 6-0-51)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p0 n6 0-9-9) (passengers fast0 n0 6-0-51)
+  (board p0 fast0 n6 n1 n2), cost: 0
+    pre: (passenger-at p0 n6 0-9-9) (lift-at fast0 n6 3-3-39) (passengers fast0 n1 6-1-52)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p0 n6 0-9-9) (passengers fast0 n1 6-1-52)
+  (board p0 fast0 n6 n2 n3), cost: 0
+    pre: (passenger-at p0 n6 0-9-9) (lift-at fast0 n6 3-3-39) (passengers fast0 n2 6-2-53)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p0 n6 0-9-9) (passengers fast0 n2 6-2-53)
+  (board p0 fast0 n8 n0 n1), cost: 0
+    pre: (passenger-at p0 n8 0-11-11) (lift-at fast0 n8 3-4-40) (passengers fast0 n0 6-0-51)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p0 n8 0-11-11) (passengers fast0 n0 6-0-51)
+  (board p0 fast0 n8 n1 n2), cost: 0
+    pre: (passenger-at p0 n8 0-11-11) (lift-at fast0 n8 3-4-40) (passengers fast0 n1 6-1-52)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p0 n8 0-11-11) (passengers fast0 n1 6-1-52)
+  (board p0 fast0 n8 n2 n3), cost: 0
+    pre: (passenger-at p0 n8 0-11-11) (lift-at fast0 n8 3-4-40) (passengers fast0 n2 6-2-53)
+    add: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p0 n8 0-11-11) (passengers fast0 n2 6-2-53)
+  (board p0 slow0-0 n0 n0 n1), cost: 0
+    pre: (passenger-at p0 n0 0-3-3) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p0 n0 0-3-3) (passengers slow0-0 n0 7-0-55)
+  (board p0 slow0-0 n0 n1 n2), cost: 0
+    pre: (passenger-at p0 n0 0-3-3) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p0 n0 0-3-3) (passengers slow0-0 n1 7-1-56)
+  (board p0 slow0-0 n1 n0 n1), cost: 0
+    pre: (passenger-at p0 n1 0-4-4) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p0 n1 0-4-4) (passengers slow0-0 n0 7-0-55)
+  (board p0 slow0-0 n1 n1 n2), cost: 0
+    pre: (passenger-at p0 n1 0-4-4) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p0 n1 0-4-4) (passengers slow0-0 n1 7-1-56)
+  (board p0 slow0-0 n2 n0 n1), cost: 0
+    pre: (passenger-at p0 n2 0-5-5) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p0 n2 0-5-5) (passengers slow0-0 n0 7-0-55)
+  (board p0 slow0-0 n2 n1 n2), cost: 0
+    pre: (passenger-at p0 n2 0-5-5) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p0 n2 0-5-5) (passengers slow0-0 n1 7-1-56)
+  (board p0 slow0-0 n3 n0 n1), cost: 0
+    pre: (passenger-at p0 n3 0-6-6) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p0 n3 0-6-6) (passengers slow0-0 n0 7-0-55)
+  (board p0 slow0-0 n3 n1 n2), cost: 0
+    pre: (passenger-at p0 n3 0-6-6) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p0 n3 0-6-6) (passengers slow0-0 n1 7-1-56)
+  (board p0 slow0-0 n4 n0 n1), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p0 n4 0-7-7) (passengers slow0-0 n0 7-0-55)
+  (board p0 slow0-0 n4 n1 n2), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p0 n4 0-7-7) (passengers slow0-0 n1 7-1-56)
+  (board p0 slow1-0 n4 n0 n1), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p0 n4 0-7-7) (passengers slow1-0 n0 8-0-58)
+  (board p0 slow1-0 n4 n1 n2), cost: 0
+    pre: (passenger-at p0 n4 0-7-7) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p0 n4 0-7-7) (passengers slow1-0 n1 8-1-59)
+  (board p0 slow1-0 n5 n0 n1), cost: 0
+    pre: (passenger-at p0 n5 0-8-8) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p0 n5 0-8-8) (passengers slow1-0 n0 8-0-58)
+  (board p0 slow1-0 n5 n1 n2), cost: 0
+    pre: (passenger-at p0 n5 0-8-8) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p0 n5 0-8-8) (passengers slow1-0 n1 8-1-59)
+  (board p0 slow1-0 n6 n0 n1), cost: 0
+    pre: (passenger-at p0 n6 0-9-9) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p0 n6 0-9-9) (passengers slow1-0 n0 8-0-58)
+  (board p0 slow1-0 n6 n1 n2), cost: 0
+    pre: (passenger-at p0 n6 0-9-9) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p0 n6 0-9-9) (passengers slow1-0 n1 8-1-59)
+  (board p0 slow1-0 n7 n0 n1), cost: 0
+    pre: (passenger-at p0 n7 0-10-10) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p0 n7 0-10-10) (passengers slow1-0 n0 8-0-58)
+  (board p0 slow1-0 n7 n1 n2), cost: 0
+    pre: (passenger-at p0 n7 0-10-10) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p0 n7 0-10-10) (passengers slow1-0 n1 8-1-59)
+  (board p0 slow1-0 n8 n0 n1), cost: 0
+    pre: (passenger-at p0 n8 0-11-11) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p0 n8 0-11-11) (passengers slow1-0 n0 8-0-58)
+  (board p0 slow1-0 n8 n1 n2), cost: 0
+    pre: (passenger-at p0 n8 0-11-11) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p0 n8 0-11-11) (passengers slow1-0 n1 8-1-59)
+  (board p1 fast0 n0 n0 n1), cost: 0
+    pre: (passenger-at p1 n0 1-3-15) (lift-at fast0 n0 3-0-36) (passengers fast0 n0 6-0-51)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p1 n0 1-3-15) (passengers fast0 n0 6-0-51)
+  (board p1 fast0 n0 n1 n2), cost: 0
+    pre: (passenger-at p1 n0 1-3-15) (lift-at fast0 n0 3-0-36) (passengers fast0 n1 6-1-52)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p1 n0 1-3-15) (passengers fast0 n1 6-1-52)
+  (board p1 fast0 n0 n2 n3), cost: 0
+    pre: (passenger-at p1 n0 1-3-15) (lift-at fast0 n0 3-0-36) (passengers fast0 n2 6-2-53)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p1 n0 1-3-15) (passengers fast0 n2 6-2-53)
+  (board p1 fast0 n2 n0 n1), cost: 0
+    pre: (passenger-at p1 n2 1-5-17) (lift-at fast0 n2 3-1-37) (passengers fast0 n0 6-0-51)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p1 n2 1-5-17) (passengers fast0 n0 6-0-51)
+  (board p1 fast0 n2 n1 n2), cost: 0
+    pre: (passenger-at p1 n2 1-5-17) (lift-at fast0 n2 3-1-37) (passengers fast0 n1 6-1-52)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p1 n2 1-5-17) (passengers fast0 n1 6-1-52)
+  (board p1 fast0 n2 n2 n3), cost: 0
+    pre: (passenger-at p1 n2 1-5-17) (lift-at fast0 n2 3-1-37) (passengers fast0 n2 6-2-53)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p1 n2 1-5-17) (passengers fast0 n2 6-2-53)
+  (board p1 fast0 n4 n0 n1), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at fast0 n4 3-2-38) (passengers fast0 n0 6-0-51)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p1 n4 1-7-19) (passengers fast0 n0 6-0-51)
+  (board p1 fast0 n4 n1 n2), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at fast0 n4 3-2-38) (passengers fast0 n1 6-1-52)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p1 n4 1-7-19) (passengers fast0 n1 6-1-52)
+  (board p1 fast0 n4 n2 n3), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at fast0 n4 3-2-38) (passengers fast0 n2 6-2-53)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p1 n4 1-7-19) (passengers fast0 n2 6-2-53)
+  (board p1 fast0 n6 n0 n1), cost: 0
+    pre: (passenger-at p1 n6 1-9-21) (lift-at fast0 n6 3-3-39) (passengers fast0 n0 6-0-51)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p1 n6 1-9-21) (passengers fast0 n0 6-0-51)
+  (board p1 fast0 n6 n1 n2), cost: 0
+    pre: (passenger-at p1 n6 1-9-21) (lift-at fast0 n6 3-3-39) (passengers fast0 n1 6-1-52)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p1 n6 1-9-21) (passengers fast0 n1 6-1-52)
+  (board p1 fast0 n6 n2 n3), cost: 0
+    pre: (passenger-at p1 n6 1-9-21) (lift-at fast0 n6 3-3-39) (passengers fast0 n2 6-2-53)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p1 n6 1-9-21) (passengers fast0 n2 6-2-53)
+  (board p1 fast0 n8 n0 n1), cost: 0
+    pre: (passenger-at p1 n8 1-11-23) (lift-at fast0 n8 3-4-40) (passengers fast0 n0 6-0-51)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p1 n8 1-11-23) (passengers fast0 n0 6-0-51)
+  (board p1 fast0 n8 n1 n2), cost: 0
+    pre: (passenger-at p1 n8 1-11-23) (lift-at fast0 n8 3-4-40) (passengers fast0 n1 6-1-52)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p1 n8 1-11-23) (passengers fast0 n1 6-1-52)
+  (board p1 fast0 n8 n2 n3), cost: 0
+    pre: (passenger-at p1 n8 1-11-23) (lift-at fast0 n8 3-4-40) (passengers fast0 n2 6-2-53)
+    add: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p1 n8 1-11-23) (passengers fast0 n2 6-2-53)
+  (board p1 slow0-0 n0 n0 n1), cost: 0
+    pre: (passenger-at p1 n0 1-3-15) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p1 n0 1-3-15) (passengers slow0-0 n0 7-0-55)
+  (board p1 slow0-0 n0 n1 n2), cost: 0
+    pre: (passenger-at p1 n0 1-3-15) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p1 n0 1-3-15) (passengers slow0-0 n1 7-1-56)
+  (board p1 slow0-0 n1 n0 n1), cost: 0
+    pre: (passenger-at p1 n1 1-4-16) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p1 n1 1-4-16) (passengers slow0-0 n0 7-0-55)
+  (board p1 slow0-0 n1 n1 n2), cost: 0
+    pre: (passenger-at p1 n1 1-4-16) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p1 n1 1-4-16) (passengers slow0-0 n1 7-1-56)
+  (board p1 slow0-0 n2 n0 n1), cost: 0
+    pre: (passenger-at p1 n2 1-5-17) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p1 n2 1-5-17) (passengers slow0-0 n0 7-0-55)
+  (board p1 slow0-0 n2 n1 n2), cost: 0
+    pre: (passenger-at p1 n2 1-5-17) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p1 n2 1-5-17) (passengers slow0-0 n1 7-1-56)
+  (board p1 slow0-0 n3 n0 n1), cost: 0
+    pre: (passenger-at p1 n3 1-6-18) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p1 n3 1-6-18) (passengers slow0-0 n0 7-0-55)
+  (board p1 slow0-0 n3 n1 n2), cost: 0
+    pre: (passenger-at p1 n3 1-6-18) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p1 n3 1-6-18) (passengers slow0-0 n1 7-1-56)
+  (board p1 slow0-0 n4 n0 n1), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p1 n4 1-7-19) (passengers slow0-0 n0 7-0-55)
+  (board p1 slow0-0 n4 n1 n2), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p1 n4 1-7-19) (passengers slow0-0 n1 7-1-56)
+  (board p1 slow1-0 n4 n0 n1), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p1 n4 1-7-19) (passengers slow1-0 n0 8-0-58)
+  (board p1 slow1-0 n4 n1 n2), cost: 0
+    pre: (passenger-at p1 n4 1-7-19) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p1 n4 1-7-19) (passengers slow1-0 n1 8-1-59)
+  (board p1 slow1-0 n5 n0 n1), cost: 0
+    pre: (passenger-at p1 n5 1-8-20) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p1 n5 1-8-20) (passengers slow1-0 n0 8-0-58)
+  (board p1 slow1-0 n5 n1 n2), cost: 0
+    pre: (passenger-at p1 n5 1-8-20) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p1 n5 1-8-20) (passengers slow1-0 n1 8-1-59)
+  (board p1 slow1-0 n6 n0 n1), cost: 0
+    pre: (passenger-at p1 n6 1-9-21) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p1 n6 1-9-21) (passengers slow1-0 n0 8-0-58)
+  (board p1 slow1-0 n6 n1 n2), cost: 0
+    pre: (passenger-at p1 n6 1-9-21) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p1 n6 1-9-21) (passengers slow1-0 n1 8-1-59)
+  (board p1 slow1-0 n7 n0 n1), cost: 0
+    pre: (passenger-at p1 n7 1-10-22) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p1 n7 1-10-22) (passengers slow1-0 n0 8-0-58)
+  (board p1 slow1-0 n7 n1 n2), cost: 0
+    pre: (passenger-at p1 n7 1-10-22) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p1 n7 1-10-22) (passengers slow1-0 n1 8-1-59)
+  (board p1 slow1-0 n8 n0 n1), cost: 0
+    pre: (passenger-at p1 n8 1-11-23) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p1 n8 1-11-23) (passengers slow1-0 n0 8-0-58)
+  (board p1 slow1-0 n8 n1 n2), cost: 0
+    pre: (passenger-at p1 n8 1-11-23) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p1 n8 1-11-23) (passengers slow1-0 n1 8-1-59)
+  (board p2 fast0 n0 n0 n1), cost: 0
+    pre: (passenger-at p2 n0 2-3-27) (lift-at fast0 n0 3-0-36) (passengers fast0 n0 6-0-51)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p2 n0 2-3-27) (passengers fast0 n0 6-0-51)
+  (board p2 fast0 n0 n1 n2), cost: 0
+    pre: (passenger-at p2 n0 2-3-27) (lift-at fast0 n0 3-0-36) (passengers fast0 n1 6-1-52)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p2 n0 2-3-27) (passengers fast0 n1 6-1-52)
+  (board p2 fast0 n0 n2 n3), cost: 0
+    pre: (passenger-at p2 n0 2-3-27) (lift-at fast0 n0 3-0-36) (passengers fast0 n2 6-2-53)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p2 n0 2-3-27) (passengers fast0 n2 6-2-53)
+  (board p2 fast0 n2 n0 n1), cost: 0
+    pre: (passenger-at p2 n2 2-5-29) (lift-at fast0 n2 3-1-37) (passengers fast0 n0 6-0-51)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p2 n2 2-5-29) (passengers fast0 n0 6-0-51)
+  (board p2 fast0 n2 n1 n2), cost: 0
+    pre: (passenger-at p2 n2 2-5-29) (lift-at fast0 n2 3-1-37) (passengers fast0 n1 6-1-52)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p2 n2 2-5-29) (passengers fast0 n1 6-1-52)
+  (board p2 fast0 n2 n2 n3), cost: 0
+    pre: (passenger-at p2 n2 2-5-29) (lift-at fast0 n2 3-1-37) (passengers fast0 n2 6-2-53)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p2 n2 2-5-29) (passengers fast0 n2 6-2-53)
+  (board p2 fast0 n4 n0 n1), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at fast0 n4 3-2-38) (passengers fast0 n0 6-0-51)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p2 n4 2-7-31) (passengers fast0 n0 6-0-51)
+  (board p2 fast0 n4 n1 n2), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at fast0 n4 3-2-38) (passengers fast0 n1 6-1-52)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p2 n4 2-7-31) (passengers fast0 n1 6-1-52)
+  (board p2 fast0 n4 n2 n3), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at fast0 n4 3-2-38) (passengers fast0 n2 6-2-53)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p2 n4 2-7-31) (passengers fast0 n2 6-2-53)
+  (board p2 fast0 n6 n0 n1), cost: 0
+    pre: (passenger-at p2 n6 2-9-33) (lift-at fast0 n6 3-3-39) (passengers fast0 n0 6-0-51)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p2 n6 2-9-33) (passengers fast0 n0 6-0-51)
+  (board p2 fast0 n6 n1 n2), cost: 0
+    pre: (passenger-at p2 n6 2-9-33) (lift-at fast0 n6 3-3-39) (passengers fast0 n1 6-1-52)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p2 n6 2-9-33) (passengers fast0 n1 6-1-52)
+  (board p2 fast0 n6 n2 n3), cost: 0
+    pre: (passenger-at p2 n6 2-9-33) (lift-at fast0 n6 3-3-39) (passengers fast0 n2 6-2-53)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p2 n6 2-9-33) (passengers fast0 n2 6-2-53)
+  (board p2 fast0 n8 n0 n1), cost: 0
+    pre: (passenger-at p2 n8 2-11-35) (lift-at fast0 n8 3-4-40) (passengers fast0 n0 6-0-51)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+    del: (passenger-at p2 n8 2-11-35) (passengers fast0 n0 6-0-51)
+  (board p2 fast0 n8 n1 n2), cost: 0
+    pre: (passenger-at p2 n8 2-11-35) (lift-at fast0 n8 3-4-40) (passengers fast0 n1 6-1-52)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+    del: (passenger-at p2 n8 2-11-35) (passengers fast0 n1 6-1-52)
+  (board p2 fast0 n8 n2 n3), cost: 0
+    pre: (passenger-at p2 n8 2-11-35) (lift-at fast0 n8 3-4-40) (passengers fast0 n2 6-2-53)
+    add: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+    del: (passenger-at p2 n8 2-11-35) (passengers fast0 n2 6-2-53)
+  (board p2 slow0-0 n0 n0 n1), cost: 0
+    pre: (passenger-at p2 n0 2-3-27) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p2 n0 2-3-27) (passengers slow0-0 n0 7-0-55)
+  (board p2 slow0-0 n0 n1 n2), cost: 0
+    pre: (passenger-at p2 n0 2-3-27) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p2 n0 2-3-27) (passengers slow0-0 n1 7-1-56)
+  (board p2 slow0-0 n1 n0 n1), cost: 0
+    pre: (passenger-at p2 n1 2-4-28) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p2 n1 2-4-28) (passengers slow0-0 n0 7-0-55)
+  (board p2 slow0-0 n1 n1 n2), cost: 0
+    pre: (passenger-at p2 n1 2-4-28) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p2 n1 2-4-28) (passengers slow0-0 n1 7-1-56)
+  (board p2 slow0-0 n2 n0 n1), cost: 0
+    pre: (passenger-at p2 n2 2-5-29) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p2 n2 2-5-29) (passengers slow0-0 n0 7-0-55)
+  (board p2 slow0-0 n2 n1 n2), cost: 0
+    pre: (passenger-at p2 n2 2-5-29) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p2 n2 2-5-29) (passengers slow0-0 n1 7-1-56)
+  (board p2 slow0-0 n3 n0 n1), cost: 0
+    pre: (passenger-at p2 n3 2-6-30) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p2 n3 2-6-30) (passengers slow0-0 n0 7-0-55)
+  (board p2 slow0-0 n3 n1 n2), cost: 0
+    pre: (passenger-at p2 n3 2-6-30) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p2 n3 2-6-30) (passengers slow0-0 n1 7-1-56)
+  (board p2 slow0-0 n4 n0 n1), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n0 7-0-55)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+    del: (passenger-at p2 n4 2-7-31) (passengers slow0-0 n0 7-0-55)
+  (board p2 slow0-0 n4 n1 n2), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n1 7-1-56)
+    add: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+    del: (passenger-at p2 n4 2-7-31) (passengers slow0-0 n1 7-1-56)
+  (board p2 slow1-0 n4 n0 n1), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p2 n4 2-7-31) (passengers slow1-0 n0 8-0-58)
+  (board p2 slow1-0 n4 n1 n2), cost: 0
+    pre: (passenger-at p2 n4 2-7-31) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p2 n4 2-7-31) (passengers slow1-0 n1 8-1-59)
+  (board p2 slow1-0 n5 n0 n1), cost: 0
+    pre: (passenger-at p2 n5 2-8-32) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p2 n5 2-8-32) (passengers slow1-0 n0 8-0-58)
+  (board p2 slow1-0 n5 n1 n2), cost: 0
+    pre: (passenger-at p2 n5 2-8-32) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p2 n5 2-8-32) (passengers slow1-0 n1 8-1-59)
+  (board p2 slow1-0 n6 n0 n1), cost: 0
+    pre: (passenger-at p2 n6 2-9-33) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p2 n6 2-9-33) (passengers slow1-0 n0 8-0-58)
+  (board p2 slow1-0 n6 n1 n2), cost: 0
+    pre: (passenger-at p2 n6 2-9-33) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p2 n6 2-9-33) (passengers slow1-0 n1 8-1-59)
+  (board p2 slow1-0 n7 n0 n1), cost: 0
+    pre: (passenger-at p2 n7 2-10-34) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p2 n7 2-10-34) (passengers slow1-0 n0 8-0-58)
+  (board p2 slow1-0 n7 n1 n2), cost: 0
+    pre: (passenger-at p2 n7 2-10-34) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p2 n7 2-10-34) (passengers slow1-0 n1 8-1-59)
+  (board p2 slow1-0 n8 n0 n1), cost: 0
+    pre: (passenger-at p2 n8 2-11-35) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n0 8-0-58)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+    del: (passenger-at p2 n8 2-11-35) (passengers slow1-0 n0 8-0-58)
+  (board p2 slow1-0 n8 n1 n2), cost: 0
+    pre: (passenger-at p2 n8 2-11-35) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n1 8-1-59)
+    add: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+    del: (passenger-at p2 n8 2-11-35) (passengers slow1-0 n1 8-1-59)
+  (leave p0 fast0 n0 n1 n0), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n0 3-0-36) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p0 n0 0-3-3) (passengers fast0 n0 6-0-51)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+  (leave p0 fast0 n0 n2 n1), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n0 3-0-36) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p0 n0 0-3-3) (passengers fast0 n1 6-1-52)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+  (leave p0 fast0 n0 n3 n2), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n0 3-0-36) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p0 n0 0-3-3) (passengers fast0 n2 6-2-53)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+  (leave p0 fast0 n2 n1 n0), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n2 3-1-37) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p0 n2 0-5-5) (passengers fast0 n0 6-0-51)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+  (leave p0 fast0 n2 n2 n1), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n2 3-1-37) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p0 n2 0-5-5) (passengers fast0 n1 6-1-52)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+  (leave p0 fast0 n2 n3 n2), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n2 3-1-37) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p0 n2 0-5-5) (passengers fast0 n2 6-2-53)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+  (leave p0 fast0 n4 n1 n0), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n4 3-2-38) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p0 n4 0-7-7) (passengers fast0 n0 6-0-51)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+  (leave p0 fast0 n4 n2 n1), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n4 3-2-38) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p0 n4 0-7-7) (passengers fast0 n1 6-1-52)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+  (leave p0 fast0 n4 n3 n2), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n4 3-2-38) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p0 n4 0-7-7) (passengers fast0 n2 6-2-53)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+  (leave p0 fast0 n6 n1 n0), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n6 3-3-39) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p0 n6 0-9-9) (passengers fast0 n0 6-0-51)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+  (leave p0 fast0 n6 n2 n1), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n6 3-3-39) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p0 n6 0-9-9) (passengers fast0 n1 6-1-52)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+  (leave p0 fast0 n6 n3 n2), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n6 3-3-39) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p0 n6 0-9-9) (passengers fast0 n2 6-2-53)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+  (leave p0 fast0 n8 n1 n0), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n8 3-4-40) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p0 n8 0-11-11) (passengers fast0 n0 6-0-51)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n1 6-1-52)
+  (leave p0 fast0 n8 n2 n1), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n8 3-4-40) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p0 n8 0-11-11) (passengers fast0 n1 6-1-52)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n2 6-2-53)
+  (leave p0 fast0 n8 n3 n2), cost: 0
+    pre: (boarded p0 fast0 0-0-0) (lift-at fast0 n8 3-4-40) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p0 n8 0-11-11) (passengers fast0 n2 6-2-53)
+    del: (boarded p0 fast0 0-0-0) (passengers fast0 n3 6-3-54)
+  (leave p0 slow0-0 n0 n1 n0), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p0 n0 0-3-3) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+  (leave p0 slow0-0 n0 n2 n1), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p0 n0 0-3-3) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+  (leave p0 slow0-0 n1 n1 n0), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p0 n1 0-4-4) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+  (leave p0 slow0-0 n1 n2 n1), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p0 n1 0-4-4) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+  (leave p0 slow0-0 n2 n1 n0), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p0 n2 0-5-5) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+  (leave p0 slow0-0 n2 n2 n1), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p0 n2 0-5-5) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+  (leave p0 slow0-0 n3 n1 n0), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p0 n3 0-6-6) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+  (leave p0 slow0-0 n3 n2 n1), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p0 n3 0-6-6) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+  (leave p0 slow0-0 n4 n1 n0), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p0 n4 0-7-7) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n1 7-1-56)
+  (leave p0 slow0-0 n4 n2 n1), cost: 0
+    pre: (boarded p0 slow0-0 0-1-1) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p0 n4 0-7-7) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p0 slow0-0 0-1-1) (passengers slow0-0 n2 7-2-57)
+  (leave p0 slow1-0 n4 n1 n0), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p0 n4 0-7-7) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+  (leave p0 slow1-0 n4 n2 n1), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p0 n4 0-7-7) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+  (leave p0 slow1-0 n5 n1 n0), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p0 n5 0-8-8) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+  (leave p0 slow1-0 n5 n2 n1), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p0 n5 0-8-8) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+  (leave p0 slow1-0 n6 n1 n0), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p0 n6 0-9-9) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+  (leave p0 slow1-0 n6 n2 n1), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p0 n6 0-9-9) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+  (leave p0 slow1-0 n7 n1 n0), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p0 n7 0-10-10) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+  (leave p0 slow1-0 n7 n2 n1), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p0 n7 0-10-10) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+  (leave p0 slow1-0 n8 n1 n0), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p0 n8 0-11-11) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n1 8-1-59)
+  (leave p0 slow1-0 n8 n2 n1), cost: 0
+    pre: (boarded p0 slow1-0 0-2-2) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p0 n8 0-11-11) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p0 slow1-0 0-2-2) (passengers slow1-0 n2 8-2-60)
+  (leave p1 fast0 n0 n1 n0), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n0 3-0-36) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p1 n0 1-3-15) (passengers fast0 n0 6-0-51)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+  (leave p1 fast0 n0 n2 n1), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n0 3-0-36) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p1 n0 1-3-15) (passengers fast0 n1 6-1-52)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+  (leave p1 fast0 n0 n3 n2), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n0 3-0-36) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p1 n0 1-3-15) (passengers fast0 n2 6-2-53)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+  (leave p1 fast0 n2 n1 n0), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n2 3-1-37) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p1 n2 1-5-17) (passengers fast0 n0 6-0-51)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+  (leave p1 fast0 n2 n2 n1), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n2 3-1-37) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p1 n2 1-5-17) (passengers fast0 n1 6-1-52)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+  (leave p1 fast0 n2 n3 n2), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n2 3-1-37) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p1 n2 1-5-17) (passengers fast0 n2 6-2-53)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+  (leave p1 fast0 n4 n1 n0), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n4 3-2-38) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p1 n4 1-7-19) (passengers fast0 n0 6-0-51)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+  (leave p1 fast0 n4 n2 n1), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n4 3-2-38) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p1 n4 1-7-19) (passengers fast0 n1 6-1-52)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+  (leave p1 fast0 n4 n3 n2), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n4 3-2-38) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p1 n4 1-7-19) (passengers fast0 n2 6-2-53)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+  (leave p1 fast0 n6 n1 n0), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n6 3-3-39) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p1 n6 1-9-21) (passengers fast0 n0 6-0-51)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+  (leave p1 fast0 n6 n2 n1), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n6 3-3-39) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p1 n6 1-9-21) (passengers fast0 n1 6-1-52)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+  (leave p1 fast0 n6 n3 n2), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n6 3-3-39) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p1 n6 1-9-21) (passengers fast0 n2 6-2-53)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+  (leave p1 fast0 n8 n1 n0), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n8 3-4-40) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p1 n8 1-11-23) (passengers fast0 n0 6-0-51)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n1 6-1-52)
+  (leave p1 fast0 n8 n2 n1), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n8 3-4-40) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p1 n8 1-11-23) (passengers fast0 n1 6-1-52)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n2 6-2-53)
+  (leave p1 fast0 n8 n3 n2), cost: 0
+    pre: (boarded p1 fast0 1-0-12) (lift-at fast0 n8 3-4-40) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p1 n8 1-11-23) (passengers fast0 n2 6-2-53)
+    del: (boarded p1 fast0 1-0-12) (passengers fast0 n3 6-3-54)
+  (leave p1 slow0-0 n0 n1 n0), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p1 n0 1-3-15) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+  (leave p1 slow0-0 n0 n2 n1), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p1 n0 1-3-15) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+  (leave p1 slow0-0 n1 n1 n0), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p1 n1 1-4-16) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+  (leave p1 slow0-0 n1 n2 n1), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p1 n1 1-4-16) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+  (leave p1 slow0-0 n2 n1 n0), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p1 n2 1-5-17) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+  (leave p1 slow0-0 n2 n2 n1), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p1 n2 1-5-17) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+  (leave p1 slow0-0 n3 n1 n0), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p1 n3 1-6-18) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+  (leave p1 slow0-0 n3 n2 n1), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p1 n3 1-6-18) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+  (leave p1 slow0-0 n4 n1 n0), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p1 n4 1-7-19) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n1 7-1-56)
+  (leave p1 slow0-0 n4 n2 n1), cost: 0
+    pre: (boarded p1 slow0-0 1-1-13) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p1 n4 1-7-19) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p1 slow0-0 1-1-13) (passengers slow0-0 n2 7-2-57)
+  (leave p1 slow1-0 n4 n1 n0), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p1 n4 1-7-19) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+  (leave p1 slow1-0 n4 n2 n1), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p1 n4 1-7-19) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+  (leave p1 slow1-0 n5 n1 n0), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p1 n5 1-8-20) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+  (leave p1 slow1-0 n5 n2 n1), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p1 n5 1-8-20) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+  (leave p1 slow1-0 n6 n1 n0), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p1 n6 1-9-21) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+  (leave p1 slow1-0 n6 n2 n1), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p1 n6 1-9-21) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+  (leave p1 slow1-0 n7 n1 n0), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p1 n7 1-10-22) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+  (leave p1 slow1-0 n7 n2 n1), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p1 n7 1-10-22) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+  (leave p1 slow1-0 n8 n1 n0), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p1 n8 1-11-23) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n1 8-1-59)
+  (leave p1 slow1-0 n8 n2 n1), cost: 0
+    pre: (boarded p1 slow1-0 1-2-14) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p1 n8 1-11-23) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p1 slow1-0 1-2-14) (passengers slow1-0 n2 8-2-60)
+  (leave p2 fast0 n0 n1 n0), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n0 3-0-36) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p2 n0 2-3-27) (passengers fast0 n0 6-0-51)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+  (leave p2 fast0 n0 n2 n1), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n0 3-0-36) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p2 n0 2-3-27) (passengers fast0 n1 6-1-52)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+  (leave p2 fast0 n0 n3 n2), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n0 3-0-36) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p2 n0 2-3-27) (passengers fast0 n2 6-2-53)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+  (leave p2 fast0 n2 n1 n0), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n2 3-1-37) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p2 n2 2-5-29) (passengers fast0 n0 6-0-51)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+  (leave p2 fast0 n2 n2 n1), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n2 3-1-37) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p2 n2 2-5-29) (passengers fast0 n1 6-1-52)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+  (leave p2 fast0 n2 n3 n2), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n2 3-1-37) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p2 n2 2-5-29) (passengers fast0 n2 6-2-53)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+  (leave p2 fast0 n4 n1 n0), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n4 3-2-38) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p2 n4 2-7-31) (passengers fast0 n0 6-0-51)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+  (leave p2 fast0 n4 n2 n1), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n4 3-2-38) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p2 n4 2-7-31) (passengers fast0 n1 6-1-52)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+  (leave p2 fast0 n4 n3 n2), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n4 3-2-38) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p2 n4 2-7-31) (passengers fast0 n2 6-2-53)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+  (leave p2 fast0 n6 n1 n0), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n6 3-3-39) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p2 n6 2-9-33) (passengers fast0 n0 6-0-51)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+  (leave p2 fast0 n6 n2 n1), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n6 3-3-39) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p2 n6 2-9-33) (passengers fast0 n1 6-1-52)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+  (leave p2 fast0 n6 n3 n2), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n6 3-3-39) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p2 n6 2-9-33) (passengers fast0 n2 6-2-53)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+  (leave p2 fast0 n8 n1 n0), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n8 3-4-40) (passengers fast0 n1 6-1-52)
+    add: (passenger-at p2 n8 2-11-35) (passengers fast0 n0 6-0-51)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n1 6-1-52)
+  (leave p2 fast0 n8 n2 n1), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n8 3-4-40) (passengers fast0 n2 6-2-53)
+    add: (passenger-at p2 n8 2-11-35) (passengers fast0 n1 6-1-52)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n2 6-2-53)
+  (leave p2 fast0 n8 n3 n2), cost: 0
+    pre: (boarded p2 fast0 2-0-24) (lift-at fast0 n8 3-4-40) (passengers fast0 n3 6-3-54)
+    add: (passenger-at p2 n8 2-11-35) (passengers fast0 n2 6-2-53)
+    del: (boarded p2 fast0 2-0-24) (passengers fast0 n3 6-3-54)
+  (leave p2 slow0-0 n0 n1 n0), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p2 n0 2-3-27) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+  (leave p2 slow0-0 n0 n2 n1), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n0 4-0-41) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p2 n0 2-3-27) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+  (leave p2 slow0-0 n1 n1 n0), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p2 n1 2-4-28) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+  (leave p2 slow0-0 n1 n2 n1), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n1 4-1-42) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p2 n1 2-4-28) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+  (leave p2 slow0-0 n2 n1 n0), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p2 n2 2-5-29) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+  (leave p2 slow0-0 n2 n2 n1), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n2 4-2-43) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p2 n2 2-5-29) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+  (leave p2 slow0-0 n3 n1 n0), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p2 n3 2-6-30) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+  (leave p2 slow0-0 n3 n2 n1), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n3 4-3-44) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p2 n3 2-6-30) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+  (leave p2 slow0-0 n4 n1 n0), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n1 7-1-56)
+    add: (passenger-at p2 n4 2-7-31) (passengers slow0-0 n0 7-0-55)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n1 7-1-56)
+  (leave p2 slow0-0 n4 n2 n1), cost: 0
+    pre: (boarded p2 slow0-0 2-1-25) (lift-at slow0-0 n4 4-4-45) (passengers slow0-0 n2 7-2-57)
+    add: (passenger-at p2 n4 2-7-31) (passengers slow0-0 n1 7-1-56)
+    del: (boarded p2 slow0-0 2-1-25) (passengers slow0-0 n2 7-2-57)
+  (leave p2 slow1-0 n4 n1 n0), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p2 n4 2-7-31) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+  (leave p2 slow1-0 n4 n2 n1), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n4 5-0-46) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p2 n4 2-7-31) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+  (leave p2 slow1-0 n5 n1 n0), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p2 n5 2-8-32) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+  (leave p2 slow1-0 n5 n2 n1), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n5 5-1-47) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p2 n5 2-8-32) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+  (leave p2 slow1-0 n6 n1 n0), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p2 n6 2-9-33) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+  (leave p2 slow1-0 n6 n2 n1), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n6 5-2-48) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p2 n6 2-9-33) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+  (leave p2 slow1-0 n7 n1 n0), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p2 n7 2-10-34) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+  (leave p2 slow1-0 n7 n2 n1), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n7 5-3-49) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p2 n7 2-10-34) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+  (leave p2 slow1-0 n8 n1 n0), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n1 8-1-59)
+    add: (passenger-at p2 n8 2-11-35) (passengers slow1-0 n0 8-0-58)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n1 8-1-59)
+  (leave p2 slow1-0 n8 n2 n1), cost: 0
+    pre: (boarded p2 slow1-0 2-2-26) (lift-at slow1-0 n8 5-4-50) (passengers slow1-0 n2 8-2-60)
+    add: (passenger-at p2 n8 2-11-35) (passengers slow1-0 n1 8-1-59)
+    del: (boarded p2 slow1-0 2-2-26) (passengers slow1-0 n2 8-2-60)
+  (move-down-fast fast0 n2 n0), cost: 7
+    pre: (lift-at fast0 n2 3-1-37)
+    add: (lift-at fast0 n0 3-0-36)
+    del: (lift-at fast0 n2 3-1-37)
+  (move-down-fast fast0 n4 n0), cost: 13
+    pre: (lift-at fast0 n4 3-2-38)
+    add: (lift-at fast0 n0 3-0-36)
+    del: (lift-at fast0 n4 3-2-38)
+  (move-down-fast fast0 n4 n2), cost: 7
+    pre: (lift-at fast0 n4 3-2-38)
+    add: (lift-at fast0 n2 3-1-37)
+    del: (lift-at fast0 n4 3-2-38)
+  (move-down-fast fast0 n6 n0), cost: 19
+    pre: (lift-at fast0 n6 3-3-39)
+    add: (lift-at fast0 n0 3-0-36)
+    del: (lift-at fast0 n6 3-3-39)
+  (move-down-fast fast0 n6 n2), cost: 13
+    pre: (lift-at fast0 n6 3-3-39)
+    add: (lift-at fast0 n2 3-1-37)
+    del: (lift-at fast0 n6 3-3-39)
+  (move-down-fast fast0 n6 n4), cost: 7
+    pre: (lift-at fast0 n6 3-3-39)
+    add: (lift-at fast0 n4 3-2-38)
+    del: (lift-at fast0 n6 3-3-39)
+  (move-down-fast fast0 n8 n0), cost: 25
+    pre: (lift-at fast0 n8 3-4-40)
+    add: (lift-at fast0 n0 3-0-36)
+    del: (lift-at fast0 n8 3-4-40)
+  (move-down-fast fast0 n8 n2), cost: 19
+    pre: (lift-at fast0 n8 3-4-40)
+    add: (lift-at fast0 n2 3-1-37)
+    del: (lift-at fast0 n8 3-4-40)
+  (move-down-fast fast0 n8 n4), cost: 13
+    pre: (lift-at fast0 n8 3-4-40)
+    add: (lift-at fast0 n4 3-2-38)
+    del: (lift-at fast0 n8 3-4-40)
+  (move-down-fast fast0 n8 n6), cost: 7
+    pre: (lift-at fast0 n8 3-4-40)
+    add: (lift-at fast0 n6 3-3-39)
+    del: (lift-at fast0 n8 3-4-40)
+  (move-down-slow slow0-0 n1 n0), cost: 6
+    pre: (lift-at slow0-0 n1 4-1-42)
+    add: (lift-at slow0-0 n0 4-0-41)
+    del: (lift-at slow0-0 n1 4-1-42)
+  (move-down-slow slow0-0 n2 n0), cost: 7
+    pre: (lift-at slow0-0 n2 4-2-43)
+    add: (lift-at slow0-0 n0 4-0-41)
+    del: (lift-at slow0-0 n2 4-2-43)
+  (move-down-slow slow0-0 n2 n1), cost: 6
+    pre: (lift-at slow0-0 n2 4-2-43)
+    add: (lift-at slow0-0 n1 4-1-42)
+    del: (lift-at slow0-0 n2 4-2-43)
+  (move-down-slow slow0-0 n3 n0), cost: 8
+    pre: (lift-at slow0-0 n3 4-3-44)
+    add: (lift-at slow0-0 n0 4-0-41)
+    del: (lift-at slow0-0 n3 4-3-44)
+  (move-down-slow slow0-0 n3 n1), cost: 7
+    pre: (lift-at slow0-0 n3 4-3-44)
+    add: (lift-at slow0-0 n1 4-1-42)
+    del: (lift-at slow0-0 n3 4-3-44)
+  (move-down-slow slow0-0 n3 n2), cost: 6
+    pre: (lift-at slow0-0 n3 4-3-44)
+    add: (lift-at slow0-0 n2 4-2-43)
+    del: (lift-at slow0-0 n3 4-3-44)
+  (move-down-slow slow0-0 n4 n0), cost: 9
+    pre: (lift-at slow0-0 n4 4-4-45)
+    add: (lift-at slow0-0 n0 4-0-41)
+    del: (lift-at slow0-0 n4 4-4-45)
+  (move-down-slow slow0-0 n4 n1), cost: 8
+    pre: (lift-at slow0-0 n4 4-4-45)
+    add: (lift-at slow0-0 n1 4-1-42)
+    del: (lift-at slow0-0 n4 4-4-45)
+  (move-down-slow slow0-0 n4 n2), cost: 7
+    pre: (lift-at slow0-0 n4 4-4-45)
+    add: (lift-at slow0-0 n2 4-2-43)
+    del: (lift-at slow0-0 n4 4-4-45)
+  (move-down-slow slow0-0 n4 n3), cost: 6
+    pre: (lift-at slow0-0 n4 4-4-45)
+    add: (lift-at slow0-0 n3 4-3-44)
+    del: (lift-at slow0-0 n4 4-4-45)
+  (move-down-slow slow1-0 n5 n4), cost: 6
+    pre: (lift-at slow1-0 n5 5-1-47)
+    add: (lift-at slow1-0 n4 5-0-46)
+    del: (lift-at slow1-0 n5 5-1-47)
+  (move-down-slow slow1-0 n6 n4), cost: 7
+    pre: (lift-at slow1-0 n6 5-2-48)
+    add: (lift-at slow1-0 n4 5-0-46)
+    del: (lift-at slow1-0 n6 5-2-48)
+  (move-down-slow slow1-0 n6 n5), cost: 6
+    pre: (lift-at slow1-0 n6 5-2-48)
+    add: (lift-at slow1-0 n5 5-1-47)
+    del: (lift-at slow1-0 n6 5-2-48)
+  (move-down-slow slow1-0 n7 n4), cost: 8
+    pre: (lift-at slow1-0 n7 5-3-49)
+    add: (lift-at slow1-0 n4 5-0-46)
+    del: (lift-at slow1-0 n7 5-3-49)
+  (move-down-slow slow1-0 n7 n5), cost: 7
+    pre: (lift-at slow1-0 n7 5-3-49)
+    add: (lift-at slow1-0 n5 5-1-47)
+    del: (lift-at slow1-0 n7 5-3-49)
+  (move-down-slow slow1-0 n7 n6), cost: 6
+    pre: (lift-at slow1-0 n7 5-3-49)
+    add: (lift-at slow1-0 n6 5-2-48)
+    del: (lift-at slow1-0 n7 5-3-49)
+  (move-down-slow slow1-0 n8 n4), cost: 9
+    pre: (lift-at slow1-0 n8 5-4-50)
+    add: (lift-at slow1-0 n4 5-0-46)
+    del: (lift-at slow1-0 n8 5-4-50)
+  (move-down-slow slow1-0 n8 n5), cost: 8
+    pre: (lift-at slow1-0 n8 5-4-50)
+    add: (lift-at slow1-0 n5 5-1-47)
+    del: (lift-at slow1-0 n8 5-4-50)
+  (move-down-slow slow1-0 n8 n6), cost: 7
+    pre: (lift-at slow1-0 n8 5-4-50)
+    add: (lift-at slow1-0 n6 5-2-48)
+    del: (lift-at slow1-0 n8 5-4-50)
+  (move-down-slow slow1-0 n8 n7), cost: 6
+    pre: (lift-at slow1-0 n8 5-4-50)
+    add: (lift-at slow1-0 n7 5-3-49)
+    del: (lift-at slow1-0 n8 5-4-50)
+  (move-up-fast fast0 n0 n2), cost: 7
+    pre: (lift-at fast0 n0 3-0-36)
+    add: (lift-at fast0 n2 3-1-37)
+    del: (lift-at fast0 n0 3-0-36)
+  (move-up-fast fast0 n0 n4), cost: 13
+    pre: (lift-at fast0 n0 3-0-36)
+    add: (lift-at fast0 n4 3-2-38)
+    del: (lift-at fast0 n0 3-0-36)
+  (move-up-fast fast0 n0 n6), cost: 19
+    pre: (lift-at fast0 n0 3-0-36)
+    add: (lift-at fast0 n6 3-3-39)
+    del: (lift-at fast0 n0 3-0-36)
+  (move-up-fast fast0 n0 n8), cost: 25
+    pre: (lift-at fast0 n0 3-0-36)
+    add: (lift-at fast0 n8 3-4-40)
+    del: (lift-at fast0 n0 3-0-36)
+  (move-up-fast fast0 n2 n4), cost: 7
+    pre: (lift-at fast0 n2 3-1-37)
+    add: (lift-at fast0 n4 3-2-38)
+    del: (lift-at fast0 n2 3-1-37)
+  (move-up-fast fast0 n2 n6), cost: 13
+    pre: (lift-at fast0 n2 3-1-37)
+    add: (lift-at fast0 n6 3-3-39)
+    del: (lift-at fast0 n2 3-1-37)
+  (move-up-fast fast0 n2 n8), cost: 19
+    pre: (lift-at fast0 n2 3-1-37)
+    add: (lift-at fast0 n8 3-4-40)
+    del: (lift-at fast0 n2 3-1-37)
+  (move-up-fast fast0 n4 n6), cost: 7
+    pre: (lift-at fast0 n4 3-2-38)
+    add: (lift-at fast0 n6 3-3-39)
+    del: (lift-at fast0 n4 3-2-38)
+  (move-up-fast fast0 n4 n8), cost: 13
+    pre: (lift-at fast0 n4 3-2-38)
+    add: (lift-at fast0 n8 3-4-40)
+    del: (lift-at fast0 n4 3-2-38)
+  (move-up-fast fast0 n6 n8), cost: 7
+    pre: (lift-at fast0 n6 3-3-39)
+    add: (lift-at fast0 n8 3-4-40)
+    del: (lift-at fast0 n6 3-3-39)
+  (move-up-slow slow0-0 n0 n1), cost: 6
+    pre: (lift-at slow0-0 n0 4-0-41)
+    add: (lift-at slow0-0 n1 4-1-42)
+    del: (lift-at slow0-0 n0 4-0-41)
+  (move-up-slow slow0-0 n0 n2), cost: 7
+    pre: (lift-at slow0-0 n0 4-0-41)
+    add: (lift-at slow0-0 n2 4-2-43)
+    del: (lift-at slow0-0 n0 4-0-41)
+  (move-up-slow slow0-0 n0 n3), cost: 8
+    pre: (lift-at slow0-0 n0 4-0-41)
+    add: (lift-at slow0-0 n3 4-3-44)
+    del: (lift-at slow0-0 n0 4-0-41)
+  (move-up-slow slow0-0 n0 n4), cost: 9
+    pre: (lift-at slow0-0 n0 4-0-41)
+    add: (lift-at slow0-0 n4 4-4-45)
+    del: (lift-at slow0-0 n0 4-0-41)
+  (move-up-slow slow0-0 n1 n2), cost: 6
+    pre: (lift-at slow0-0 n1 4-1-42)
+    add: (lift-at slow0-0 n2 4-2-43)
+    del: (lift-at slow0-0 n1 4-1-42)
+  (move-up-slow slow0-0 n1 n3), cost: 7
+    pre: (lift-at slow0-0 n1 4-1-42)
+    add: (lift-at slow0-0 n3 4-3-44)
+    del: (lift-at slow0-0 n1 4-1-42)
+  (move-up-slow slow0-0 n1 n4), cost: 8
+    pre: (lift-at slow0-0 n1 4-1-42)
+    add: (lift-at slow0-0 n4 4-4-45)
+    del: (lift-at slow0-0 n1 4-1-42)
+  (move-up-slow slow0-0 n2 n3), cost: 6
+    pre: (lift-at slow0-0 n2 4-2-43)
+    add: (lift-at slow0-0 n3 4-3-44)
+    del: (lift-at slow0-0 n2 4-2-43)
+  (move-up-slow slow0-0 n2 n4), cost: 7
+    pre: (lift-at slow0-0 n2 4-2-43)
+    add: (lift-at slow0-0 n4 4-4-45)
+    del: (lift-at slow0-0 n2 4-2-43)
+  (move-up-slow slow0-0 n3 n4), cost: 6
+    pre: (lift-at slow0-0 n3 4-3-44)
+    add: (lift-at slow0-0 n4 4-4-45)
+    del: (lift-at slow0-0 n3 4-3-44)
+  (move-up-slow slow1-0 n4 n5), cost: 6
+    pre: (lift-at slow1-0 n4 5-0-46)
+    add: (lift-at slow1-0 n5 5-1-47)
+    del: (lift-at slow1-0 n4 5-0-46)
+  (move-up-slow slow1-0 n4 n6), cost: 7
+    pre: (lift-at slow1-0 n4 5-0-46)
+    add: (lift-at slow1-0 n6 5-2-48)
+    del: (lift-at slow1-0 n4 5-0-46)
+  (move-up-slow slow1-0 n4 n7), cost: 8
+    pre: (lift-at slow1-0 n4 5-0-46)
+    add: (lift-at slow1-0 n7 5-3-49)
+    del: (lift-at slow1-0 n4 5-0-46)
+  (move-up-slow slow1-0 n4 n8), cost: 9
+    pre: (lift-at slow1-0 n4 5-0-46)
+    add: (lift-at slow1-0 n8 5-4-50)
+    del: (lift-at slow1-0 n4 5-0-46)
+  (move-up-slow slow1-0 n5 n6), cost: 6
+    pre: (lift-at slow1-0 n5 5-1-47)
+    add: (lift-at slow1-0 n6 5-2-48)
+    del: (lift-at slow1-0 n5 5-1-47)
+  (move-up-slow slow1-0 n5 n7), cost: 7
+    pre: (lift-at slow1-0 n5 5-1-47)
+    add: (lift-at slow1-0 n7 5-3-49)
+    del: (lift-at slow1-0 n5 5-1-47)
+  (move-up-slow slow1-0 n5 n8), cost: 8
+    pre: (lift-at slow1-0 n5 5-1-47)
+    add: (lift-at slow1-0 n8 5-4-50)
+    del: (lift-at slow1-0 n5 5-1-47)
+  (move-up-slow slow1-0 n6 n7), cost: 6
+    pre: (lift-at slow1-0 n6 5-2-48)
+    add: (lift-at slow1-0 n7 5-3-49)
+    del: (lift-at slow1-0 n6 5-2-48)
+  (move-up-slow slow1-0 n6 n8), cost: 7
+    pre: (lift-at slow1-0 n6 5-2-48)
+    add: (lift-at slow1-0 n8 5-4-50)
+    del: (lift-at slow1-0 n6 5-2-48)
+  (move-up-slow slow1-0 n7 n8), cost: 6
+    pre: (lift-at slow1-0 n7 5-3-49)
+    add: (lift-at slow1-0 n8 5-4-50)
+    del: (lift-at slow1-0 n7 5-3-49)
+Init State: (passenger-at p0 n8 0-11-11) (passenger-at p1 n3 1-6-18) (passenger-at p2 n2 2-5-29) (lift-at fast0 n0 3-0-36) (lift-at slow0-0 n2 4-2-43) (lift-at slow1-0 n4 5-0-46) (passengers fast0 n0 6-0-51) (passengers slow0-0 n0 7-0-55) (passengers slow1-0 n0 8-0-58)
+Goal: (passenger-at p0 n4 0-7-7) (passenger-at p1 n6 1-9-21) (passenger-at p2 n1 2-4-28)
+Value: 0

@@ -1,0 +1,14 @@
+Monotonicity invariants:
+< {fuel V0:truck C1:fuellevel}
+, {at V0:package C1:location, in V0:package C2:truck}
+, {at V0:package C2:location, in V0:package V1:truck}
+>
+FD Mutex Groups:
+< {fuel t0 C0:fuellevel}:=1
+, {at V0:package C1:location, in V0:package t0}:=1
+>
+FD Goal aware:
+< {at p0 C0:location, in p0 t0}:=1
+, {at p1 C0:location, in p1 t0}:=1
+, {at p2 C0:location, in p2 t0}:=1
+>

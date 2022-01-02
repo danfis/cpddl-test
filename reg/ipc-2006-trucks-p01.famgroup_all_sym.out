@@ -1,0 +1,17 @@
+ (time-now t0):fam
+ (time-now t0) (time-now t1):fam
+ (at truck1 l1) (at truck1 l2) (at truck1 l3):=1:fam
+ (time-now t0) (time-now t1) (time-now t2):fam
+ (free a1 truck1) (in package1 truck1 a1) (in package2 truck1 a1) (in package3 truck1 a1):=1:fam
+ (free a2 truck1) (in package1 truck1 a2) (in package2 truck1 a2) (in package3 truck1 a2):=1:fam
+ (time-now t0) (time-now t1) (time-now t2) (time-now t3):fam
+ (at package1 l1) (at package1 l2) (at package1 l3) (in package1 truck1 a1) (in package1 truck1 a2):fam
+ (at package2 l1) (at package2 l2) (at package2 l3) (in package2 truck1 a1) (in package2 truck1 a2):fam
+ (at package3 l1) (at package3 l2) (at package3 l3) (in package3 truck1 a1) (in package3 truck1 a2):fam
+ (time-now t0) (time-now t1) (time-now t2) (time-now t3) (time-now t4):fam
+ (at package1 l1) (at package1 l2) (at package1 l3) (delivered package1 l3 t3) (in package1 truck1 a1) (in package1 truck1 a2):fam:G
+ (at package2 l1) (at package2 l2) (at package2 l3) (at-destination package2 l1) (in package2 truck1 a1) (in package2 truck1 a2):fam:G
+ (at package3 l1) (at package3 l2) (at package3 l3) (delivered package3 l1 t6) (in package3 truck1 a1) (in package3 truck1 a2):fam:G
+ (time-now t0) (time-now t1) (time-now t2) (time-now t3) (time-now t4) (time-now t5):fam
+ (time-now t0) (time-now t1) (time-now t2) (time-now t3) (time-now t4) (time-now t5) (time-now t6):=1:fam
+

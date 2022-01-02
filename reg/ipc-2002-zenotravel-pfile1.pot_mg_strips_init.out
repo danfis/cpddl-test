@@ -1,0 +1,539 @@
+Fact[18]:
+  (fuel-level plane1 fl0 0-0-0)
+  (fuel-level plane1 fl1 0-1-1)
+  (fuel-level plane1 fl2 0-2-2)
+  (fuel-level plane1 fl3 0-3-3)
+  (fuel-level plane1 fl4 0-4-4)
+  (fuel-level plane1 fl5 0-5-5)
+  (fuel-level plane1 fl6 0-6-6)
+  (at person1 city0 1-0-7)
+  (at person1 city1 1-1-8)
+  (at person1 city2 1-2-9)
+  (in person1 plane1 1-3-10)
+  (at person2 city0 2-0-11)
+  (at person2 city1 2-1-12)
+  (at person2 city2 2-2-13)
+  (in person2 plane1 2-3-14)
+  (at plane1 city0 3-0-15)
+  (at plane1 city1 3-1-16)
+  (at plane1 city2 3-2-17)
+Op[129]:
+  (board person1 plane1 city0), cost: 1
+    pre: (at person1 city0 1-0-7) (at plane1 city0 3-0-15)
+    add: (in person1 plane1 1-3-10)
+    del: (at person1 city0 1-0-7)
+  (board person1 plane1 city1), cost: 1
+    pre: (at person1 city1 1-1-8) (at plane1 city1 3-1-16)
+    add: (in person1 plane1 1-3-10)
+    del: (at person1 city1 1-1-8)
+  (board person1 plane1 city2), cost: 1
+    pre: (at person1 city2 1-2-9) (at plane1 city2 3-2-17)
+    add: (in person1 plane1 1-3-10)
+    del: (at person1 city2 1-2-9)
+  (board person2 plane1 city0), cost: 1
+    pre: (at person2 city0 2-0-11) (at plane1 city0 3-0-15)
+    add: (in person2 plane1 2-3-14)
+    del: (at person2 city0 2-0-11)
+  (board person2 plane1 city1), cost: 1
+    pre: (at person2 city1 2-1-12) (at plane1 city1 3-1-16)
+    add: (in person2 plane1 2-3-14)
+    del: (at person2 city1 2-1-12)
+  (board person2 plane1 city2), cost: 1
+    pre: (at person2 city2 2-2-13) (at plane1 city2 3-2-17)
+    add: (in person2 plane1 2-3-14)
+    del: (at person2 city2 2-2-13)
+  (debark person1 plane1 city0), cost: 1
+    pre: (in person1 plane1 1-3-10) (at plane1 city0 3-0-15)
+    add: (at person1 city0 1-0-7)
+    del: (in person1 plane1 1-3-10)
+  (debark person1 plane1 city1), cost: 1
+    pre: (in person1 plane1 1-3-10) (at plane1 city1 3-1-16)
+    add: (at person1 city1 1-1-8)
+    del: (in person1 plane1 1-3-10)
+  (debark person1 plane1 city2), cost: 1
+    pre: (in person1 plane1 1-3-10) (at plane1 city2 3-2-17)
+    add: (at person1 city2 1-2-9)
+    del: (in person1 plane1 1-3-10)
+  (debark person2 plane1 city0), cost: 1
+    pre: (in person2 plane1 2-3-14) (at plane1 city0 3-0-15)
+    add: (at person2 city0 2-0-11)
+    del: (in person2 plane1 2-3-14)
+  (debark person2 plane1 city1), cost: 1
+    pre: (in person2 plane1 2-3-14) (at plane1 city1 3-1-16)
+    add: (at person2 city1 2-1-12)
+    del: (in person2 plane1 2-3-14)
+  (debark person2 plane1 city2), cost: 1
+    pre: (in person2 plane1 2-3-14) (at plane1 city2 3-2-17)
+    add: (at person2 city2 2-2-13)
+    del: (in person2 plane1 2-3-14)
+  (fly plane1 city0 city0 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl0 0-0-0)
+    del: (fuel-level plane1 fl1 0-1-1)
+  (fly plane1 city0 city0 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (fly plane1 city0 city0 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (fly plane1 city0 city0 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (fly plane1 city0 city0 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (fly plane1 city0 city0 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl5 0-5-5)
+    del: (fuel-level plane1 fl6 0-6-6)
+  (fly plane1 city0 city1 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city1 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city1 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city1 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city1 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city1 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city2 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city2 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city2 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city2 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+  (fly plane1 city0 city2 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+  (fly plane1 city1 city0 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city0 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city0 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city0 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city0 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city0 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city1 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl0 0-0-0)
+    del: (fuel-level plane1 fl1 0-1-1)
+  (fly plane1 city1 city1 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (fly plane1 city1 city1 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (fly plane1 city1 city1 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (fly plane1 city1 city1 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (fly plane1 city1 city1 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl5 0-5-5)
+    del: (fuel-level plane1 fl6 0-6-6)
+  (fly plane1 city1 city2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city2 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city2 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city2 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city2 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+  (fly plane1 city1 city2 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+  (fly plane1 city2 city0 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city0 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city0 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city0 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city0 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city0 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city1 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city1 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city1 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city1 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city1 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city1 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+  (fly plane1 city2 city2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl0 0-0-0)
+    del: (fuel-level plane1 fl1 0-1-1)
+  (fly plane1 city2 city2 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (fly plane1 city2 city2 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (fly plane1 city2 city2 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (fly plane1 city2 city2 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (fly plane1 city2 city2 fl6 fl5), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl5 0-5-5)
+    del: (fuel-level plane1 fl6 0-6-6)
+  (refuel plane1 city0 fl0 fl1), cost: 1
+    pre: (fuel-level plane1 fl0 0-0-0) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl0 0-0-0)
+  (refuel plane1 city0 fl1 fl2), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl1 0-1-1)
+  (refuel plane1 city0 fl2 fl3), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (refuel plane1 city0 fl3 fl4), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (refuel plane1 city0 fl4 fl5), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl5 0-5-5)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (refuel plane1 city0 fl5 fl6), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl6 0-6-6)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (refuel plane1 city1 fl0 fl1), cost: 1
+    pre: (fuel-level plane1 fl0 0-0-0) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl0 0-0-0)
+  (refuel plane1 city1 fl1 fl2), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl1 0-1-1)
+  (refuel plane1 city1 fl2 fl3), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (refuel plane1 city1 fl3 fl4), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (refuel plane1 city1 fl4 fl5), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl5 0-5-5)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (refuel plane1 city1 fl5 fl6), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl6 0-6-6)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (refuel plane1 city2 fl0 fl1), cost: 1
+    pre: (fuel-level plane1 fl0 0-0-0) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl0 0-0-0)
+  (refuel plane1 city2 fl1 fl2), cost: 1
+    pre: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl1 0-1-1)
+  (refuel plane1 city2 fl2 fl3), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (refuel plane1 city2 fl3 fl4), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (refuel plane1 city2 fl4 fl5), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl5 0-5-5)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (refuel plane1 city2 fl5 fl6), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl6 0-6-6)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (zoom plane1 city0 city0 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl0 0-0-0)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (zoom plane1 city0 city0 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (zoom plane1 city0 city0 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (zoom plane1 city0 city0 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (zoom plane1 city0 city0 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl6 0-6-6)
+  (zoom plane1 city0 city1 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city1 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city1 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city1 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city1 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city2 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city2 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city2 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city2 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city0 3-0-15)
+  (zoom plane1 city0 city2 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city0 3-0-15)
+  (zoom plane1 city1 city0 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city0 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city0 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city0 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city0 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city1 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl0 0-0-0)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (zoom plane1 city1 city1 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (zoom plane1 city1 city1 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (zoom plane1 city1 city1 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (zoom plane1 city1 city1 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl6 0-6-6)
+  (zoom plane1 city1 city2 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city2 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city2 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city2 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city1 3-1-16)
+  (zoom plane1 city1 city2 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city1 3-1-16)
+  (zoom plane1 city2 city0 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city0 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city0 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city0 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city0 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city0 3-0-15)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city1 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl0 0-0-0) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city1 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city1 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city1 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city1 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4) (at plane1 city1 3-1-16)
+    del: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+  (zoom plane1 city2 city2 fl2 fl1 fl0), cost: 1
+    pre: (fuel-level plane1 fl2 0-2-2) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl0 0-0-0)
+    del: (fuel-level plane1 fl2 0-2-2)
+  (zoom plane1 city2 city2 fl3 fl2 fl1), cost: 1
+    pre: (fuel-level plane1 fl3 0-3-3) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl1 0-1-1)
+    del: (fuel-level plane1 fl3 0-3-3)
+  (zoom plane1 city2 city2 fl4 fl3 fl2), cost: 1
+    pre: (fuel-level plane1 fl4 0-4-4) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl2 0-2-2)
+    del: (fuel-level plane1 fl4 0-4-4)
+  (zoom plane1 city2 city2 fl5 fl4 fl3), cost: 1
+    pre: (fuel-level plane1 fl5 0-5-5) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl3 0-3-3)
+    del: (fuel-level plane1 fl5 0-5-5)
+  (zoom plane1 city2 city2 fl6 fl5 fl4), cost: 1
+    pre: (fuel-level plane1 fl6 0-6-6) (at plane1 city2 3-2-17)
+    add: (fuel-level plane1 fl4 0-4-4)
+    del: (fuel-level plane1 fl6 0-6-6)
+Init State: (fuel-level plane1 fl1 0-1-1) (at person1 city0 1-0-7) (at person2 city2 2-2-13) (at plane1 city0 3-0-15)
+Goal: (at person1 city0 1-0-7) (at person2 city2 2-2-13) (at plane1 city1 3-1-16)
+Value: 1

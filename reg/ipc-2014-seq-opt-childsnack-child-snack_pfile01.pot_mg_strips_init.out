@@ -1,0 +1,1929 @@
+Fact[100]:
+  (at tray1 kitchen 0-0-0)
+  (at tray1 table1 0-1-1)
+  (at tray1 table2 0-2-2)
+  (at tray1 table3 0-3-3)
+  (at tray2 kitchen 1-0-4)
+  (at tray2 table1 1-1-5)
+  (at tray2 table2 1-2-6)
+  (at tray2 table3 1-3-7)
+  (at_kitchen_sandwich sandw1 2-0-8)
+  (notexist sandw1 2-1-9)
+  (ontray sandw1 tray1 2-2-10)
+  (ontray sandw1 tray2 2-3-11)
+  (none-of-those 2-4-12)
+  (at_kitchen_sandwich sandw2 3-0-13)
+  (notexist sandw2 3-1-14)
+  (ontray sandw2 tray1 3-2-15)
+  (ontray sandw2 tray2 3-3-16)
+  (none-of-those 3-4-17)
+  (at_kitchen_sandwich sandw3 4-0-18)
+  (notexist sandw3 4-1-19)
+  (ontray sandw3 tray1 4-2-20)
+  (ontray sandw3 tray2 4-3-21)
+  (none-of-those 4-4-22)
+  (at_kitchen_sandwich sandw4 5-0-23)
+  (notexist sandw4 5-1-24)
+  (ontray sandw4 tray1 5-2-25)
+  (ontray sandw4 tray2 5-3-26)
+  (none-of-those 5-4-27)
+  (at_kitchen_sandwich sandw5 6-0-28)
+  (notexist sandw5 6-1-29)
+  (ontray sandw5 tray1 6-2-30)
+  (ontray sandw5 tray2 6-3-31)
+  (none-of-those 6-4-32)
+  (at_kitchen_sandwich sandw6 7-0-33)
+  (notexist sandw6 7-1-34)
+  (ontray sandw6 tray1 7-2-35)
+  (ontray sandw6 tray2 7-3-36)
+  (none-of-those 7-4-37)
+  (at_kitchen_sandwich sandw7 8-0-38)
+  (notexist sandw7 8-1-39)
+  (ontray sandw7 tray1 8-2-40)
+  (ontray sandw7 tray2 8-3-41)
+  (none-of-those 8-4-42)
+  (at_kitchen_sandwich sandw8 9-0-43)
+  (notexist sandw8 9-1-44)
+  (ontray sandw8 tray1 9-2-45)
+  (ontray sandw8 tray2 9-3-46)
+  (none-of-those 9-4-47)
+  (at_kitchen_bread bread1 10-0-48)
+  (none-of-those 10-1-49)
+  (at_kitchen_bread bread2 11-0-50)
+  (none-of-those 11-1-51)
+  (at_kitchen_bread bread3 12-0-52)
+  (none-of-those 12-1-53)
+  (at_kitchen_bread bread4 13-0-54)
+  (none-of-those 13-1-55)
+  (at_kitchen_bread bread5 14-0-56)
+  (none-of-those 14-1-57)
+  (at_kitchen_bread bread6 15-0-58)
+  (none-of-those 15-1-59)
+  (at_kitchen_content content1 16-0-60)
+  (none-of-those 16-1-61)
+  (at_kitchen_content content2 17-0-62)
+  (none-of-those 17-1-63)
+  (at_kitchen_content content3 18-0-64)
+  (none-of-those 18-1-65)
+  (at_kitchen_content content4 19-0-66)
+  (none-of-those 19-1-67)
+  (at_kitchen_content content5 20-0-68)
+  (none-of-those 20-1-69)
+  (at_kitchen_content content6 21-0-70)
+  (none-of-those 21-1-71)
+  (no_gluten_sandwich sandw1 22-0-72)
+  (none-of-those 22-1-73)
+  (no_gluten_sandwich sandw2 23-0-74)
+  (none-of-those 23-1-75)
+  (no_gluten_sandwich sandw3 24-0-76)
+  (none-of-those 24-1-77)
+  (no_gluten_sandwich sandw4 25-0-78)
+  (none-of-those 25-1-79)
+  (no_gluten_sandwich sandw5 26-0-80)
+  (none-of-those 26-1-81)
+  (no_gluten_sandwich sandw6 27-0-82)
+  (none-of-those 27-1-83)
+  (no_gluten_sandwich sandw7 28-0-84)
+  (none-of-those 28-1-85)
+  (no_gluten_sandwich sandw8 29-0-86)
+  (none-of-those 29-1-87)
+  (served child1 30-0-88)
+  (none-of-those 30-1-89)
+  (served child2 31-0-90)
+  (none-of-those 31-1-91)
+  (served child3 32-0-92)
+  (none-of-those 32-1-93)
+  (served child4 33-0-94)
+  (none-of-those 33-1-95)
+  (served child5 34-0-96)
+  (none-of-those 34-1-97)
+  (served child6 35-0-98)
+  (none-of-those 35-1-99)
+Op[456]:
+  (make_sandwich sandw1 bread1 content1), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw1 bread1 content2), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw1 bread1 content3), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw1 bread1 content4), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw1 bread1 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw1 bread1 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw1 bread2 content1), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw1 bread2 content2), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw1 bread2 content3), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw1 bread2 content4), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw1 bread2 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw1 bread2 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw1 bread3 content1), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw1 bread3 content2), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw1 bread3 content3), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw1 bread3 content4), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw1 bread3 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw1 bread3 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw1 bread4 content1), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw1 bread4 content2), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw1 bread4 content3), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw1 bread4 content4), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw1 bread4 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw1 bread4 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw1 bread5 content1), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw1 bread5 content2), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw1 bread5 content3), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw1 bread5 content4), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw1 bread5 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw1 bread5 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw1 bread6 content1), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw1 bread6 content2), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw1 bread6 content3), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw1 bread6 content4), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw1 bread6 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw1 bread6 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw2 bread1 content1), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw2 bread1 content2), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw2 bread1 content3), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw2 bread1 content4), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw2 bread1 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw2 bread1 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw2 bread2 content1), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw2 bread2 content2), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw2 bread2 content3), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw2 bread2 content4), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw2 bread2 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw2 bread2 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw2 bread3 content1), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw2 bread3 content2), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw2 bread3 content3), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw2 bread3 content4), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw2 bread3 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw2 bread3 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw2 bread4 content1), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw2 bread4 content2), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw2 bread4 content3), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw2 bread4 content4), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw2 bread4 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw2 bread4 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw2 bread5 content1), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw2 bread5 content2), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw2 bread5 content3), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw2 bread5 content4), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw2 bread5 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw2 bread5 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw2 bread6 content1), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw2 bread6 content2), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw2 bread6 content3), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw2 bread6 content4), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw2 bread6 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw2 bread6 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw3 bread1 content1), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw3 bread1 content2), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw3 bread1 content3), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw3 bread1 content4), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw3 bread1 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw3 bread1 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw3 bread2 content1), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw3 bread2 content2), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw3 bread2 content3), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw3 bread2 content4), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw3 bread2 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw3 bread2 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw3 bread3 content1), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw3 bread3 content2), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw3 bread3 content3), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw3 bread3 content4), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw3 bread3 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw3 bread3 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw3 bread4 content1), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw3 bread4 content2), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw3 bread4 content3), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw3 bread4 content4), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw3 bread4 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw3 bread4 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw3 bread5 content1), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw3 bread5 content2), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw3 bread5 content3), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw3 bread5 content4), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw3 bread5 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw3 bread5 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw3 bread6 content1), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw3 bread6 content2), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw3 bread6 content3), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw3 bread6 content4), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw3 bread6 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw3 bread6 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw4 bread1 content1), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw4 bread1 content2), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw4 bread1 content3), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw4 bread1 content4), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw4 bread1 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw4 bread1 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw4 bread2 content1), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw4 bread2 content2), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw4 bread2 content3), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw4 bread2 content4), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw4 bread2 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw4 bread2 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw4 bread3 content1), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw4 bread3 content2), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw4 bread3 content3), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw4 bread3 content4), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw4 bread3 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw4 bread3 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw4 bread4 content1), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw4 bread4 content2), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw4 bread4 content3), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw4 bread4 content4), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw4 bread4 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw4 bread4 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw4 bread5 content1), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw4 bread5 content2), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw4 bread5 content3), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw4 bread5 content4), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw4 bread5 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw4 bread5 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw4 bread6 content1), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw4 bread6 content2), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw4 bread6 content3), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw4 bread6 content4), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw4 bread6 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw4 bread6 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw5 bread1 content1), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw5 bread1 content2), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw5 bread1 content3), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw5 bread1 content4), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw5 bread1 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw5 bread1 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw5 bread2 content1), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw5 bread2 content2), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw5 bread2 content3), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw5 bread2 content4), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw5 bread2 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw5 bread2 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw5 bread3 content1), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw5 bread3 content2), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw5 bread3 content3), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw5 bread3 content4), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw5 bread3 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw5 bread3 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw5 bread4 content1), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw5 bread4 content2), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw5 bread4 content3), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw5 bread4 content4), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw5 bread4 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw5 bread4 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw5 bread5 content1), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw5 bread5 content2), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw5 bread5 content3), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw5 bread5 content4), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw5 bread5 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw5 bread5 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw5 bread6 content1), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw5 bread6 content2), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw5 bread6 content3), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw5 bread6 content4), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw5 bread6 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw5 bread6 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw6 bread1 content1), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw6 bread1 content2), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw6 bread1 content3), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw6 bread1 content4), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw6 bread1 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw6 bread1 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw6 bread2 content1), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw6 bread2 content2), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw6 bread2 content3), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw6 bread2 content4), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw6 bread2 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw6 bread2 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw6 bread3 content1), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw6 bread3 content2), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw6 bread3 content3), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw6 bread3 content4), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw6 bread3 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw6 bread3 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw6 bread4 content1), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw6 bread4 content2), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw6 bread4 content3), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw6 bread4 content4), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw6 bread4 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw6 bread4 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw6 bread5 content1), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw6 bread5 content2), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw6 bread5 content3), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw6 bread5 content4), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw6 bread5 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw6 bread5 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw6 bread6 content1), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw6 bread6 content2), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw6 bread6 content3), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw6 bread6 content4), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw6 bread6 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw6 bread6 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw7 bread1 content1), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw7 bread1 content2), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw7 bread1 content3), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw7 bread1 content4), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw7 bread1 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw7 bread1 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw7 bread2 content1), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw7 bread2 content2), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw7 bread2 content3), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw7 bread2 content4), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw7 bread2 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw7 bread2 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw7 bread3 content1), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw7 bread3 content2), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw7 bread3 content3), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw7 bread3 content4), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw7 bread3 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw7 bread3 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw7 bread4 content1), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw7 bread4 content2), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw7 bread4 content3), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw7 bread4 content4), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw7 bread4 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw7 bread4 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw7 bread5 content1), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw7 bread5 content2), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw7 bread5 content3), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw7 bread5 content4), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw7 bread5 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw7 bread5 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw7 bread6 content1), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw7 bread6 content2), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw7 bread6 content3), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw7 bread6 content4), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw7 bread6 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw7 bread6 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw8 bread1 content1), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 16-1-61)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw8 bread1 content2), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 17-1-63)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw8 bread1 content3), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 18-1-65)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw8 bread1 content4), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 19-1-67)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw8 bread1 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 20-1-69)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw8 bread1 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 21-1-71)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw8 bread2 content1), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 11-1-51) (none-of-those 16-1-61)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw8 bread2 content2), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 11-1-51) (none-of-those 17-1-63)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw8 bread2 content3), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 11-1-51) (none-of-those 18-1-65)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw8 bread2 content4), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 11-1-51) (none-of-those 19-1-67)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw8 bread2 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 11-1-51) (none-of-those 20-1-69)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw8 bread2 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 11-1-51) (none-of-those 21-1-71)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread2 11-0-50) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw8 bread3 content1), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 12-1-53) (none-of-those 16-1-61)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw8 bread3 content2), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 12-1-53) (none-of-those 17-1-63)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw8 bread3 content3), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 12-1-53) (none-of-those 18-1-65)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw8 bread3 content4), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 12-1-53) (none-of-those 19-1-67)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw8 bread3 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 12-1-53) (none-of-those 20-1-69)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw8 bread3 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 12-1-53) (none-of-those 21-1-71)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread3 12-0-52) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw8 bread4 content1), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 16-1-61)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw8 bread4 content2), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 17-1-63)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw8 bread4 content3), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 18-1-65)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw8 bread4 content4), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 19-1-67)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw8 bread4 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 20-1-69)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw8 bread4 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 21-1-71)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw8 bread5 content1), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 14-1-57) (none-of-those 16-1-61)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw8 bread5 content2), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 14-1-57) (none-of-those 17-1-63)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw8 bread5 content3), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 14-1-57) (none-of-those 18-1-65)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw8 bread5 content4), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 14-1-57) (none-of-those 19-1-67)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw8 bread5 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 14-1-57) (none-of-those 20-1-69)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw8 bread5 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 14-1-57) (none-of-those 21-1-71)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread5 14-0-56) (at_kitchen_content content6 21-0-70)
+  (make_sandwich sandw8 bread6 content1), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 15-1-59) (none-of-those 16-1-61)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60)
+  (make_sandwich sandw8 bread6 content2), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 15-1-59) (none-of-those 17-1-63)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content2 17-0-62)
+  (make_sandwich sandw8 bread6 content3), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 15-1-59) (none-of-those 18-1-65)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content3 18-0-64)
+  (make_sandwich sandw8 bread6 content4), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 15-1-59) (none-of-those 19-1-67)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content4 19-0-66)
+  (make_sandwich sandw8 bread6 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 15-1-59) (none-of-those 20-1-69)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content5 20-0-68)
+  (make_sandwich sandw8 bread6 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 15-1-59) (none-of-those 21-1-71)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content6 21-0-70)
+  (make_sandwich_no_gluten sandw1 bread1 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw1 22-0-72)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 22-1-73)
+  (make_sandwich_no_gluten sandw1 bread1 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw1 22-0-72)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 22-1-73)
+  (make_sandwich_no_gluten sandw1 bread4 content5), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw1 22-0-72)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 22-1-73)
+  (make_sandwich_no_gluten sandw1 bread4 content6), cost: 1
+    pre: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw1 2-0-8) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw1 22-0-72)
+    del: (notexist sandw1 2-1-9) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 22-1-73)
+  (make_sandwich_no_gluten sandw2 bread1 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw2 23-0-74)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 23-1-75)
+  (make_sandwich_no_gluten sandw2 bread1 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw2 23-0-74)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 23-1-75)
+  (make_sandwich_no_gluten sandw2 bread4 content5), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw2 23-0-74)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 23-1-75)
+  (make_sandwich_no_gluten sandw2 bread4 content6), cost: 1
+    pre: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw2 3-0-13) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw2 23-0-74)
+    del: (notexist sandw2 3-1-14) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 23-1-75)
+  (make_sandwich_no_gluten sandw3 bread1 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw3 24-0-76)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 24-1-77)
+  (make_sandwich_no_gluten sandw3 bread1 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw3 24-0-76)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 24-1-77)
+  (make_sandwich_no_gluten sandw3 bread4 content5), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw3 24-0-76)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 24-1-77)
+  (make_sandwich_no_gluten sandw3 bread4 content6), cost: 1
+    pre: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw3 4-0-18) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw3 24-0-76)
+    del: (notexist sandw3 4-1-19) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 24-1-77)
+  (make_sandwich_no_gluten sandw4 bread1 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw4 25-0-78)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 25-1-79)
+  (make_sandwich_no_gluten sandw4 bread1 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw4 25-0-78)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 25-1-79)
+  (make_sandwich_no_gluten sandw4 bread4 content5), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw4 25-0-78)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 25-1-79)
+  (make_sandwich_no_gluten sandw4 bread4 content6), cost: 1
+    pre: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw4 5-0-23) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw4 25-0-78)
+    del: (notexist sandw4 5-1-24) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 25-1-79)
+  (make_sandwich_no_gluten sandw5 bread1 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw5 26-0-80)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 26-1-81)
+  (make_sandwich_no_gluten sandw5 bread1 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw5 26-0-80)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 26-1-81)
+  (make_sandwich_no_gluten sandw5 bread4 content5), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw5 26-0-80)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 26-1-81)
+  (make_sandwich_no_gluten sandw5 bread4 content6), cost: 1
+    pre: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw5 6-0-28) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw5 26-0-80)
+    del: (notexist sandw5 6-1-29) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 26-1-81)
+  (make_sandwich_no_gluten sandw6 bread1 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw6 27-0-82)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 27-1-83)
+  (make_sandwich_no_gluten sandw6 bread1 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw6 27-0-82)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 27-1-83)
+  (make_sandwich_no_gluten sandw6 bread4 content5), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw6 27-0-82)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 27-1-83)
+  (make_sandwich_no_gluten sandw6 bread4 content6), cost: 1
+    pre: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw6 7-0-33) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw6 27-0-82)
+    del: (notexist sandw6 7-1-34) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 27-1-83)
+  (make_sandwich_no_gluten sandw7 bread1 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw7 28-0-84)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 28-1-85)
+  (make_sandwich_no_gluten sandw7 bread1 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw7 28-0-84)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 28-1-85)
+  (make_sandwich_no_gluten sandw7 bread4 content5), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw7 28-0-84)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 28-1-85)
+  (make_sandwich_no_gluten sandw7 bread4 content6), cost: 1
+    pre: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw7 8-0-38) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw7 28-0-84)
+    del: (notexist sandw7 8-1-39) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 28-1-85)
+  (make_sandwich_no_gluten sandw8 bread1 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 20-1-69) (no_gluten_sandwich sandw8 29-0-86)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content5 20-0-68) (none-of-those 29-1-87)
+  (make_sandwich_no_gluten sandw8 bread1 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 10-1-49) (none-of-those 21-1-71) (no_gluten_sandwich sandw8 29-0-86)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_content content6 21-0-70) (none-of-those 29-1-87)
+  (make_sandwich_no_gluten sandw8 bread4 content5), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 20-1-69) (no_gluten_sandwich sandw8 29-0-86)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content5 20-0-68) (none-of-those 29-1-87)
+  (make_sandwich_no_gluten sandw8 bread4 content6), cost: 1
+    pre: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70)
+    add: (at_kitchen_sandwich sandw8 9-0-43) (none-of-those 13-1-55) (none-of-those 21-1-71) (no_gluten_sandwich sandw8 29-0-86)
+    del: (notexist sandw8 9-1-44) (at_kitchen_bread bread4 13-0-54) (at_kitchen_content content6 21-0-70) (none-of-those 29-1-87)
+  (move_tray tray1 kitchen table1), cost: 1
+    pre: (at tray1 kitchen 0-0-0)
+    add: (at tray1 table1 0-1-1)
+    del: (at tray1 kitchen 0-0-0)
+  (move_tray tray1 kitchen table2), cost: 1
+    pre: (at tray1 kitchen 0-0-0)
+    add: (at tray1 table2 0-2-2)
+    del: (at tray1 kitchen 0-0-0)
+  (move_tray tray1 kitchen table3), cost: 1
+    pre: (at tray1 kitchen 0-0-0)
+    add: (at tray1 table3 0-3-3)
+    del: (at tray1 kitchen 0-0-0)
+  (move_tray tray1 table1 kitchen), cost: 1
+    pre: (at tray1 table1 0-1-1)
+    add: (at tray1 kitchen 0-0-0)
+    del: (at tray1 table1 0-1-1)
+  (move_tray tray1 table1 table2), cost: 1
+    pre: (at tray1 table1 0-1-1)
+    add: (at tray1 table2 0-2-2)
+    del: (at tray1 table1 0-1-1)
+  (move_tray tray1 table1 table3), cost: 1
+    pre: (at tray1 table1 0-1-1)
+    add: (at tray1 table3 0-3-3)
+    del: (at tray1 table1 0-1-1)
+  (move_tray tray1 table2 kitchen), cost: 1
+    pre: (at tray1 table2 0-2-2)
+    add: (at tray1 kitchen 0-0-0)
+    del: (at tray1 table2 0-2-2)
+  (move_tray tray1 table2 table1), cost: 1
+    pre: (at tray1 table2 0-2-2)
+    add: (at tray1 table1 0-1-1)
+    del: (at tray1 table2 0-2-2)
+  (move_tray tray1 table2 table3), cost: 1
+    pre: (at tray1 table2 0-2-2)
+    add: (at tray1 table3 0-3-3)
+    del: (at tray1 table2 0-2-2)
+  (move_tray tray1 table3 kitchen), cost: 1
+    pre: (at tray1 table3 0-3-3)
+    add: (at tray1 kitchen 0-0-0)
+    del: (at tray1 table3 0-3-3)
+  (move_tray tray1 table3 table1), cost: 1
+    pre: (at tray1 table3 0-3-3)
+    add: (at tray1 table1 0-1-1)
+    del: (at tray1 table3 0-3-3)
+  (move_tray tray1 table3 table2), cost: 1
+    pre: (at tray1 table3 0-3-3)
+    add: (at tray1 table2 0-2-2)
+    del: (at tray1 table3 0-3-3)
+  (move_tray tray2 kitchen table1), cost: 1
+    pre: (at tray2 kitchen 1-0-4)
+    add: (at tray2 table1 1-1-5)
+    del: (at tray2 kitchen 1-0-4)
+  (move_tray tray2 kitchen table2), cost: 1
+    pre: (at tray2 kitchen 1-0-4)
+    add: (at tray2 table2 1-2-6)
+    del: (at tray2 kitchen 1-0-4)
+  (move_tray tray2 kitchen table3), cost: 1
+    pre: (at tray2 kitchen 1-0-4)
+    add: (at tray2 table3 1-3-7)
+    del: (at tray2 kitchen 1-0-4)
+  (move_tray tray2 table1 kitchen), cost: 1
+    pre: (at tray2 table1 1-1-5)
+    add: (at tray2 kitchen 1-0-4)
+    del: (at tray2 table1 1-1-5)
+  (move_tray tray2 table1 table2), cost: 1
+    pre: (at tray2 table1 1-1-5)
+    add: (at tray2 table2 1-2-6)
+    del: (at tray2 table1 1-1-5)
+  (move_tray tray2 table1 table3), cost: 1
+    pre: (at tray2 table1 1-1-5)
+    add: (at tray2 table3 1-3-7)
+    del: (at tray2 table1 1-1-5)
+  (move_tray tray2 table2 kitchen), cost: 1
+    pre: (at tray2 table2 1-2-6)
+    add: (at tray2 kitchen 1-0-4)
+    del: (at tray2 table2 1-2-6)
+  (move_tray tray2 table2 table1), cost: 1
+    pre: (at tray2 table2 1-2-6)
+    add: (at tray2 table1 1-1-5)
+    del: (at tray2 table2 1-2-6)
+  (move_tray tray2 table2 table3), cost: 1
+    pre: (at tray2 table2 1-2-6)
+    add: (at tray2 table3 1-3-7)
+    del: (at tray2 table2 1-2-6)
+  (move_tray tray2 table3 kitchen), cost: 1
+    pre: (at tray2 table3 1-3-7)
+    add: (at tray2 kitchen 1-0-4)
+    del: (at tray2 table3 1-3-7)
+  (move_tray tray2 table3 table1), cost: 1
+    pre: (at tray2 table3 1-3-7)
+    add: (at tray2 table1 1-1-5)
+    del: (at tray2 table3 1-3-7)
+  (move_tray tray2 table3 table2), cost: 1
+    pre: (at tray2 table3 1-3-7)
+    add: (at tray2 table2 1-2-6)
+    del: (at tray2 table3 1-3-7)
+  (put_on_tray sandw1 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw1 2-0-8)
+    add: (ontray sandw1 tray1 2-2-10)
+    del: (at_kitchen_sandwich sandw1 2-0-8)
+  (put_on_tray sandw1 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw1 2-0-8)
+    add: (ontray sandw1 tray2 2-3-11)
+    del: (at_kitchen_sandwich sandw1 2-0-8)
+  (put_on_tray sandw2 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw2 3-0-13)
+    add: (ontray sandw2 tray1 3-2-15)
+    del: (at_kitchen_sandwich sandw2 3-0-13)
+  (put_on_tray sandw2 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw2 3-0-13)
+    add: (ontray sandw2 tray2 3-3-16)
+    del: (at_kitchen_sandwich sandw2 3-0-13)
+  (put_on_tray sandw3 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw3 4-0-18)
+    add: (ontray sandw3 tray1 4-2-20)
+    del: (at_kitchen_sandwich sandw3 4-0-18)
+  (put_on_tray sandw3 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw3 4-0-18)
+    add: (ontray sandw3 tray2 4-3-21)
+    del: (at_kitchen_sandwich sandw3 4-0-18)
+  (put_on_tray sandw4 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw4 5-0-23)
+    add: (ontray sandw4 tray1 5-2-25)
+    del: (at_kitchen_sandwich sandw4 5-0-23)
+  (put_on_tray sandw4 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw4 5-0-23)
+    add: (ontray sandw4 tray2 5-3-26)
+    del: (at_kitchen_sandwich sandw4 5-0-23)
+  (put_on_tray sandw5 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw5 6-0-28)
+    add: (ontray sandw5 tray1 6-2-30)
+    del: (at_kitchen_sandwich sandw5 6-0-28)
+  (put_on_tray sandw5 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw5 6-0-28)
+    add: (ontray sandw5 tray2 6-3-31)
+    del: (at_kitchen_sandwich sandw5 6-0-28)
+  (put_on_tray sandw6 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw6 7-0-33)
+    add: (ontray sandw6 tray1 7-2-35)
+    del: (at_kitchen_sandwich sandw6 7-0-33)
+  (put_on_tray sandw6 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw6 7-0-33)
+    add: (ontray sandw6 tray2 7-3-36)
+    del: (at_kitchen_sandwich sandw6 7-0-33)
+  (put_on_tray sandw7 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw7 8-0-38)
+    add: (ontray sandw7 tray1 8-2-40)
+    del: (at_kitchen_sandwich sandw7 8-0-38)
+  (put_on_tray sandw7 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw7 8-0-38)
+    add: (ontray sandw7 tray2 8-3-41)
+    del: (at_kitchen_sandwich sandw7 8-0-38)
+  (put_on_tray sandw8 tray1), cost: 1
+    pre: (at tray1 kitchen 0-0-0) (at_kitchen_sandwich sandw8 9-0-43)
+    add: (ontray sandw8 tray1 9-2-45)
+    del: (at_kitchen_sandwich sandw8 9-0-43)
+  (put_on_tray sandw8 tray2), cost: 1
+    pre: (at tray2 kitchen 1-0-4) (at_kitchen_sandwich sandw8 9-0-43)
+    add: (ontray sandw8 tray2 9-3-46)
+    del: (at_kitchen_sandwich sandw8 9-0-43)
+  (serve_sandwich sandw1 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw1 tray1 2-2-10)
+    add: (none-of-those 2-4-12) (served child1 30-0-88)
+    del: (ontray sandw1 tray1 2-2-10) (none-of-those 30-1-89)
+  (serve_sandwich sandw1 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw1 tray2 2-3-11)
+    add: (none-of-those 2-4-12) (served child1 30-0-88)
+    del: (ontray sandw1 tray2 2-3-11) (none-of-those 30-1-89)
+  (serve_sandwich sandw1 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw1 tray1 2-2-10)
+    add: (none-of-those 2-4-12) (served child2 31-0-90)
+    del: (ontray sandw1 tray1 2-2-10) (none-of-those 31-1-91)
+  (serve_sandwich sandw1 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw1 tray2 2-3-11)
+    add: (none-of-those 2-4-12) (served child2 31-0-90)
+    del: (ontray sandw1 tray2 2-3-11) (none-of-those 31-1-91)
+  (serve_sandwich sandw1 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw1 tray1 2-2-10)
+    add: (none-of-those 2-4-12) (served child5 34-0-96)
+    del: (ontray sandw1 tray1 2-2-10) (none-of-those 34-1-97)
+  (serve_sandwich sandw1 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw1 tray2 2-3-11)
+    add: (none-of-those 2-4-12) (served child5 34-0-96)
+    del: (ontray sandw1 tray2 2-3-11) (none-of-those 34-1-97)
+  (serve_sandwich sandw1 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw1 tray1 2-2-10)
+    add: (none-of-those 2-4-12) (served child6 35-0-98)
+    del: (ontray sandw1 tray1 2-2-10) (none-of-those 35-1-99)
+  (serve_sandwich sandw1 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw1 tray2 2-3-11)
+    add: (none-of-those 2-4-12) (served child6 35-0-98)
+    del: (ontray sandw1 tray2 2-3-11) (none-of-those 35-1-99)
+  (serve_sandwich sandw2 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw2 tray1 3-2-15)
+    add: (none-of-those 3-4-17) (served child1 30-0-88)
+    del: (ontray sandw2 tray1 3-2-15) (none-of-those 30-1-89)
+  (serve_sandwich sandw2 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw2 tray2 3-3-16)
+    add: (none-of-those 3-4-17) (served child1 30-0-88)
+    del: (ontray sandw2 tray2 3-3-16) (none-of-those 30-1-89)
+  (serve_sandwich sandw2 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw2 tray1 3-2-15)
+    add: (none-of-those 3-4-17) (served child2 31-0-90)
+    del: (ontray sandw2 tray1 3-2-15) (none-of-those 31-1-91)
+  (serve_sandwich sandw2 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw2 tray2 3-3-16)
+    add: (none-of-those 3-4-17) (served child2 31-0-90)
+    del: (ontray sandw2 tray2 3-3-16) (none-of-those 31-1-91)
+  (serve_sandwich sandw2 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw2 tray1 3-2-15)
+    add: (none-of-those 3-4-17) (served child5 34-0-96)
+    del: (ontray sandw2 tray1 3-2-15) (none-of-those 34-1-97)
+  (serve_sandwich sandw2 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw2 tray2 3-3-16)
+    add: (none-of-those 3-4-17) (served child5 34-0-96)
+    del: (ontray sandw2 tray2 3-3-16) (none-of-those 34-1-97)
+  (serve_sandwich sandw2 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw2 tray1 3-2-15)
+    add: (none-of-those 3-4-17) (served child6 35-0-98)
+    del: (ontray sandw2 tray1 3-2-15) (none-of-those 35-1-99)
+  (serve_sandwich sandw2 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw2 tray2 3-3-16)
+    add: (none-of-those 3-4-17) (served child6 35-0-98)
+    del: (ontray sandw2 tray2 3-3-16) (none-of-those 35-1-99)
+  (serve_sandwich sandw3 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw3 tray1 4-2-20)
+    add: (none-of-those 4-4-22) (served child1 30-0-88)
+    del: (ontray sandw3 tray1 4-2-20) (none-of-those 30-1-89)
+  (serve_sandwich sandw3 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw3 tray2 4-3-21)
+    add: (none-of-those 4-4-22) (served child1 30-0-88)
+    del: (ontray sandw3 tray2 4-3-21) (none-of-those 30-1-89)
+  (serve_sandwich sandw3 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw3 tray1 4-2-20)
+    add: (none-of-those 4-4-22) (served child2 31-0-90)
+    del: (ontray sandw3 tray1 4-2-20) (none-of-those 31-1-91)
+  (serve_sandwich sandw3 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw3 tray2 4-3-21)
+    add: (none-of-those 4-4-22) (served child2 31-0-90)
+    del: (ontray sandw3 tray2 4-3-21) (none-of-those 31-1-91)
+  (serve_sandwich sandw3 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw3 tray1 4-2-20)
+    add: (none-of-those 4-4-22) (served child5 34-0-96)
+    del: (ontray sandw3 tray1 4-2-20) (none-of-those 34-1-97)
+  (serve_sandwich sandw3 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw3 tray2 4-3-21)
+    add: (none-of-those 4-4-22) (served child5 34-0-96)
+    del: (ontray sandw3 tray2 4-3-21) (none-of-those 34-1-97)
+  (serve_sandwich sandw3 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw3 tray1 4-2-20)
+    add: (none-of-those 4-4-22) (served child6 35-0-98)
+    del: (ontray sandw3 tray1 4-2-20) (none-of-those 35-1-99)
+  (serve_sandwich sandw3 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw3 tray2 4-3-21)
+    add: (none-of-those 4-4-22) (served child6 35-0-98)
+    del: (ontray sandw3 tray2 4-3-21) (none-of-those 35-1-99)
+  (serve_sandwich sandw4 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw4 tray1 5-2-25)
+    add: (none-of-those 5-4-27) (served child1 30-0-88)
+    del: (ontray sandw4 tray1 5-2-25) (none-of-those 30-1-89)
+  (serve_sandwich sandw4 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw4 tray2 5-3-26)
+    add: (none-of-those 5-4-27) (served child1 30-0-88)
+    del: (ontray sandw4 tray2 5-3-26) (none-of-those 30-1-89)
+  (serve_sandwich sandw4 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw4 tray1 5-2-25)
+    add: (none-of-those 5-4-27) (served child2 31-0-90)
+    del: (ontray sandw4 tray1 5-2-25) (none-of-those 31-1-91)
+  (serve_sandwich sandw4 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw4 tray2 5-3-26)
+    add: (none-of-those 5-4-27) (served child2 31-0-90)
+    del: (ontray sandw4 tray2 5-3-26) (none-of-those 31-1-91)
+  (serve_sandwich sandw4 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw4 tray1 5-2-25)
+    add: (none-of-those 5-4-27) (served child5 34-0-96)
+    del: (ontray sandw4 tray1 5-2-25) (none-of-those 34-1-97)
+  (serve_sandwich sandw4 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw4 tray2 5-3-26)
+    add: (none-of-those 5-4-27) (served child5 34-0-96)
+    del: (ontray sandw4 tray2 5-3-26) (none-of-those 34-1-97)
+  (serve_sandwich sandw4 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw4 tray1 5-2-25)
+    add: (none-of-those 5-4-27) (served child6 35-0-98)
+    del: (ontray sandw4 tray1 5-2-25) (none-of-those 35-1-99)
+  (serve_sandwich sandw4 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw4 tray2 5-3-26)
+    add: (none-of-those 5-4-27) (served child6 35-0-98)
+    del: (ontray sandw4 tray2 5-3-26) (none-of-those 35-1-99)
+  (serve_sandwich sandw5 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw5 tray1 6-2-30)
+    add: (none-of-those 6-4-32) (served child1 30-0-88)
+    del: (ontray sandw5 tray1 6-2-30) (none-of-those 30-1-89)
+  (serve_sandwich sandw5 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw5 tray2 6-3-31)
+    add: (none-of-those 6-4-32) (served child1 30-0-88)
+    del: (ontray sandw5 tray2 6-3-31) (none-of-those 30-1-89)
+  (serve_sandwich sandw5 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw5 tray1 6-2-30)
+    add: (none-of-those 6-4-32) (served child2 31-0-90)
+    del: (ontray sandw5 tray1 6-2-30) (none-of-those 31-1-91)
+  (serve_sandwich sandw5 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw5 tray2 6-3-31)
+    add: (none-of-those 6-4-32) (served child2 31-0-90)
+    del: (ontray sandw5 tray2 6-3-31) (none-of-those 31-1-91)
+  (serve_sandwich sandw5 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw5 tray1 6-2-30)
+    add: (none-of-those 6-4-32) (served child5 34-0-96)
+    del: (ontray sandw5 tray1 6-2-30) (none-of-those 34-1-97)
+  (serve_sandwich sandw5 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw5 tray2 6-3-31)
+    add: (none-of-those 6-4-32) (served child5 34-0-96)
+    del: (ontray sandw5 tray2 6-3-31) (none-of-those 34-1-97)
+  (serve_sandwich sandw5 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw5 tray1 6-2-30)
+    add: (none-of-those 6-4-32) (served child6 35-0-98)
+    del: (ontray sandw5 tray1 6-2-30) (none-of-those 35-1-99)
+  (serve_sandwich sandw5 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw5 tray2 6-3-31)
+    add: (none-of-those 6-4-32) (served child6 35-0-98)
+    del: (ontray sandw5 tray2 6-3-31) (none-of-those 35-1-99)
+  (serve_sandwich sandw6 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw6 tray1 7-2-35)
+    add: (none-of-those 7-4-37) (served child1 30-0-88)
+    del: (ontray sandw6 tray1 7-2-35) (none-of-those 30-1-89)
+  (serve_sandwich sandw6 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw6 tray2 7-3-36)
+    add: (none-of-those 7-4-37) (served child1 30-0-88)
+    del: (ontray sandw6 tray2 7-3-36) (none-of-those 30-1-89)
+  (serve_sandwich sandw6 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw6 tray1 7-2-35)
+    add: (none-of-those 7-4-37) (served child2 31-0-90)
+    del: (ontray sandw6 tray1 7-2-35) (none-of-those 31-1-91)
+  (serve_sandwich sandw6 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw6 tray2 7-3-36)
+    add: (none-of-those 7-4-37) (served child2 31-0-90)
+    del: (ontray sandw6 tray2 7-3-36) (none-of-those 31-1-91)
+  (serve_sandwich sandw6 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw6 tray1 7-2-35)
+    add: (none-of-those 7-4-37) (served child5 34-0-96)
+    del: (ontray sandw6 tray1 7-2-35) (none-of-those 34-1-97)
+  (serve_sandwich sandw6 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw6 tray2 7-3-36)
+    add: (none-of-those 7-4-37) (served child5 34-0-96)
+    del: (ontray sandw6 tray2 7-3-36) (none-of-those 34-1-97)
+  (serve_sandwich sandw6 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw6 tray1 7-2-35)
+    add: (none-of-those 7-4-37) (served child6 35-0-98)
+    del: (ontray sandw6 tray1 7-2-35) (none-of-those 35-1-99)
+  (serve_sandwich sandw6 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw6 tray2 7-3-36)
+    add: (none-of-those 7-4-37) (served child6 35-0-98)
+    del: (ontray sandw6 tray2 7-3-36) (none-of-those 35-1-99)
+  (serve_sandwich sandw7 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw7 tray1 8-2-40)
+    add: (none-of-those 8-4-42) (served child1 30-0-88)
+    del: (ontray sandw7 tray1 8-2-40) (none-of-those 30-1-89)
+  (serve_sandwich sandw7 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw7 tray2 8-3-41)
+    add: (none-of-those 8-4-42) (served child1 30-0-88)
+    del: (ontray sandw7 tray2 8-3-41) (none-of-those 30-1-89)
+  (serve_sandwich sandw7 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw7 tray1 8-2-40)
+    add: (none-of-those 8-4-42) (served child2 31-0-90)
+    del: (ontray sandw7 tray1 8-2-40) (none-of-those 31-1-91)
+  (serve_sandwich sandw7 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw7 tray2 8-3-41)
+    add: (none-of-those 8-4-42) (served child2 31-0-90)
+    del: (ontray sandw7 tray2 8-3-41) (none-of-those 31-1-91)
+  (serve_sandwich sandw7 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw7 tray1 8-2-40)
+    add: (none-of-those 8-4-42) (served child5 34-0-96)
+    del: (ontray sandw7 tray1 8-2-40) (none-of-those 34-1-97)
+  (serve_sandwich sandw7 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw7 tray2 8-3-41)
+    add: (none-of-those 8-4-42) (served child5 34-0-96)
+    del: (ontray sandw7 tray2 8-3-41) (none-of-those 34-1-97)
+  (serve_sandwich sandw7 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw7 tray1 8-2-40)
+    add: (none-of-those 8-4-42) (served child6 35-0-98)
+    del: (ontray sandw7 tray1 8-2-40) (none-of-those 35-1-99)
+  (serve_sandwich sandw7 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw7 tray2 8-3-41)
+    add: (none-of-those 8-4-42) (served child6 35-0-98)
+    del: (ontray sandw7 tray2 8-3-41) (none-of-those 35-1-99)
+  (serve_sandwich sandw8 child1 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw8 tray1 9-2-45)
+    add: (none-of-those 9-4-47) (served child1 30-0-88)
+    del: (ontray sandw8 tray1 9-2-45) (none-of-those 30-1-89)
+  (serve_sandwich sandw8 child1 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw8 tray2 9-3-46)
+    add: (none-of-those 9-4-47) (served child1 30-0-88)
+    del: (ontray sandw8 tray2 9-3-46) (none-of-those 30-1-89)
+  (serve_sandwich sandw8 child2 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw8 tray1 9-2-45)
+    add: (none-of-those 9-4-47) (served child2 31-0-90)
+    del: (ontray sandw8 tray1 9-2-45) (none-of-those 31-1-91)
+  (serve_sandwich sandw8 child2 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw8 tray2 9-3-46)
+    add: (none-of-those 9-4-47) (served child2 31-0-90)
+    del: (ontray sandw8 tray2 9-3-46) (none-of-those 31-1-91)
+  (serve_sandwich sandw8 child5 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw8 tray1 9-2-45)
+    add: (none-of-those 9-4-47) (served child5 34-0-96)
+    del: (ontray sandw8 tray1 9-2-45) (none-of-those 34-1-97)
+  (serve_sandwich sandw8 child5 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw8 tray2 9-3-46)
+    add: (none-of-those 9-4-47) (served child5 34-0-96)
+    del: (ontray sandw8 tray2 9-3-46) (none-of-those 34-1-97)
+  (serve_sandwich sandw8 child6 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw8 tray1 9-2-45)
+    add: (none-of-those 9-4-47) (served child6 35-0-98)
+    del: (ontray sandw8 tray1 9-2-45) (none-of-those 35-1-99)
+  (serve_sandwich sandw8 child6 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw8 tray2 9-3-46)
+    add: (none-of-those 9-4-47) (served child6 35-0-98)
+    del: (ontray sandw8 tray2 9-3-46) (none-of-those 35-1-99)
+  (serve_sandwich_no_gluten sandw1 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw1 tray1 2-2-10) (no_gluten_sandwich sandw1 22-0-72)
+    add: (none-of-those 2-4-12) (served child3 32-0-92)
+    del: (ontray sandw1 tray1 2-2-10) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw1 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw1 tray2 2-3-11) (no_gluten_sandwich sandw1 22-0-72)
+    add: (none-of-those 2-4-12) (served child3 32-0-92)
+    del: (ontray sandw1 tray2 2-3-11) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw1 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw1 tray1 2-2-10) (no_gluten_sandwich sandw1 22-0-72)
+    add: (none-of-those 2-4-12) (served child4 33-0-94)
+    del: (ontray sandw1 tray1 2-2-10) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw1 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw1 tray2 2-3-11) (no_gluten_sandwich sandw1 22-0-72)
+    add: (none-of-those 2-4-12) (served child4 33-0-94)
+    del: (ontray sandw1 tray2 2-3-11) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw2 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw2 tray1 3-2-15) (no_gluten_sandwich sandw2 23-0-74)
+    add: (none-of-those 3-4-17) (served child3 32-0-92)
+    del: (ontray sandw2 tray1 3-2-15) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw2 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw2 tray2 3-3-16) (no_gluten_sandwich sandw2 23-0-74)
+    add: (none-of-those 3-4-17) (served child3 32-0-92)
+    del: (ontray sandw2 tray2 3-3-16) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw2 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw2 tray1 3-2-15) (no_gluten_sandwich sandw2 23-0-74)
+    add: (none-of-those 3-4-17) (served child4 33-0-94)
+    del: (ontray sandw2 tray1 3-2-15) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw2 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw2 tray2 3-3-16) (no_gluten_sandwich sandw2 23-0-74)
+    add: (none-of-those 3-4-17) (served child4 33-0-94)
+    del: (ontray sandw2 tray2 3-3-16) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw3 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw3 tray1 4-2-20) (no_gluten_sandwich sandw3 24-0-76)
+    add: (none-of-those 4-4-22) (served child3 32-0-92)
+    del: (ontray sandw3 tray1 4-2-20) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw3 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw3 tray2 4-3-21) (no_gluten_sandwich sandw3 24-0-76)
+    add: (none-of-those 4-4-22) (served child3 32-0-92)
+    del: (ontray sandw3 tray2 4-3-21) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw3 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw3 tray1 4-2-20) (no_gluten_sandwich sandw3 24-0-76)
+    add: (none-of-those 4-4-22) (served child4 33-0-94)
+    del: (ontray sandw3 tray1 4-2-20) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw3 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw3 tray2 4-3-21) (no_gluten_sandwich sandw3 24-0-76)
+    add: (none-of-those 4-4-22) (served child4 33-0-94)
+    del: (ontray sandw3 tray2 4-3-21) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw4 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw4 tray1 5-2-25) (no_gluten_sandwich sandw4 25-0-78)
+    add: (none-of-those 5-4-27) (served child3 32-0-92)
+    del: (ontray sandw4 tray1 5-2-25) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw4 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw4 tray2 5-3-26) (no_gluten_sandwich sandw4 25-0-78)
+    add: (none-of-those 5-4-27) (served child3 32-0-92)
+    del: (ontray sandw4 tray2 5-3-26) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw4 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw4 tray1 5-2-25) (no_gluten_sandwich sandw4 25-0-78)
+    add: (none-of-those 5-4-27) (served child4 33-0-94)
+    del: (ontray sandw4 tray1 5-2-25) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw4 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw4 tray2 5-3-26) (no_gluten_sandwich sandw4 25-0-78)
+    add: (none-of-those 5-4-27) (served child4 33-0-94)
+    del: (ontray sandw4 tray2 5-3-26) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw5 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw5 tray1 6-2-30) (no_gluten_sandwich sandw5 26-0-80)
+    add: (none-of-those 6-4-32) (served child3 32-0-92)
+    del: (ontray sandw5 tray1 6-2-30) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw5 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw5 tray2 6-3-31) (no_gluten_sandwich sandw5 26-0-80)
+    add: (none-of-those 6-4-32) (served child3 32-0-92)
+    del: (ontray sandw5 tray2 6-3-31) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw5 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw5 tray1 6-2-30) (no_gluten_sandwich sandw5 26-0-80)
+    add: (none-of-those 6-4-32) (served child4 33-0-94)
+    del: (ontray sandw5 tray1 6-2-30) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw5 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw5 tray2 6-3-31) (no_gluten_sandwich sandw5 26-0-80)
+    add: (none-of-those 6-4-32) (served child4 33-0-94)
+    del: (ontray sandw5 tray2 6-3-31) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw6 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw6 tray1 7-2-35) (no_gluten_sandwich sandw6 27-0-82)
+    add: (none-of-those 7-4-37) (served child3 32-0-92)
+    del: (ontray sandw6 tray1 7-2-35) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw6 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw6 tray2 7-3-36) (no_gluten_sandwich sandw6 27-0-82)
+    add: (none-of-those 7-4-37) (served child3 32-0-92)
+    del: (ontray sandw6 tray2 7-3-36) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw6 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw6 tray1 7-2-35) (no_gluten_sandwich sandw6 27-0-82)
+    add: (none-of-those 7-4-37) (served child4 33-0-94)
+    del: (ontray sandw6 tray1 7-2-35) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw6 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw6 tray2 7-3-36) (no_gluten_sandwich sandw6 27-0-82)
+    add: (none-of-those 7-4-37) (served child4 33-0-94)
+    del: (ontray sandw6 tray2 7-3-36) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw7 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw7 tray1 8-2-40) (no_gluten_sandwich sandw7 28-0-84)
+    add: (none-of-those 8-4-42) (served child3 32-0-92)
+    del: (ontray sandw7 tray1 8-2-40) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw7 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw7 tray2 8-3-41) (no_gluten_sandwich sandw7 28-0-84)
+    add: (none-of-those 8-4-42) (served child3 32-0-92)
+    del: (ontray sandw7 tray2 8-3-41) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw7 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw7 tray1 8-2-40) (no_gluten_sandwich sandw7 28-0-84)
+    add: (none-of-those 8-4-42) (served child4 33-0-94)
+    del: (ontray sandw7 tray1 8-2-40) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw7 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw7 tray2 8-3-41) (no_gluten_sandwich sandw7 28-0-84)
+    add: (none-of-those 8-4-42) (served child4 33-0-94)
+    del: (ontray sandw7 tray2 8-3-41) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw8 child3 tray1 table1), cost: 1
+    pre: (at tray1 table1 0-1-1) (ontray sandw8 tray1 9-2-45) (no_gluten_sandwich sandw8 29-0-86)
+    add: (none-of-those 9-4-47) (served child3 32-0-92)
+    del: (ontray sandw8 tray1 9-2-45) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw8 child3 tray2 table1), cost: 1
+    pre: (at tray2 table1 1-1-5) (ontray sandw8 tray2 9-3-46) (no_gluten_sandwich sandw8 29-0-86)
+    add: (none-of-those 9-4-47) (served child3 32-0-92)
+    del: (ontray sandw8 tray2 9-3-46) (none-of-those 32-1-93)
+  (serve_sandwich_no_gluten sandw8 child4 tray1 table3), cost: 1
+    pre: (at tray1 table3 0-3-3) (ontray sandw8 tray1 9-2-45) (no_gluten_sandwich sandw8 29-0-86)
+    add: (none-of-those 9-4-47) (served child4 33-0-94)
+    del: (ontray sandw8 tray1 9-2-45) (none-of-those 33-1-95)
+  (serve_sandwich_no_gluten sandw8 child4 tray2 table3), cost: 1
+    pre: (at tray2 table3 1-3-7) (ontray sandw8 tray2 9-3-46) (no_gluten_sandwich sandw8 29-0-86)
+    add: (none-of-those 9-4-47) (served child4 33-0-94)
+    del: (ontray sandw8 tray2 9-3-46) (none-of-those 33-1-95)
+Init State: (at tray1 kitchen 0-0-0) (at tray2 kitchen 1-0-4) (notexist sandw1 2-1-9) (notexist sandw2 3-1-14) (notexist sandw3 4-1-19) (notexist sandw4 5-1-24) (notexist sandw5 6-1-29) (notexist sandw6 7-1-34) (notexist sandw7 8-1-39) (notexist sandw8 9-1-44) (at_kitchen_bread bread1 10-0-48) (at_kitchen_bread bread2 11-0-50) (at_kitchen_bread bread3 12-0-52) (at_kitchen_bread bread4 13-0-54) (at_kitchen_bread bread5 14-0-56) (at_kitchen_bread bread6 15-0-58) (at_kitchen_content content1 16-0-60) (at_kitchen_content content2 17-0-62) (at_kitchen_content content3 18-0-64) (at_kitchen_content content4 19-0-66) (at_kitchen_content content5 20-0-68) (at_kitchen_content content6 21-0-70) (none-of-those 22-1-73) (none-of-those 23-1-75) (none-of-those 24-1-77) (none-of-those 25-1-79) (none-of-those 26-1-81) (none-of-those 27-1-83) (none-of-those 28-1-85) (none-of-those 29-1-87) (none-of-those 30-1-89) (none-of-those 31-1-91) (none-of-those 32-1-93) (none-of-those 33-1-95) (none-of-those 34-1-97) (none-of-those 35-1-99)
+Goal: (served child1 30-0-88) (served child2 31-0-90) (served child3 32-0-92) (served child4 33-0-94) (served child5 34-0-96) (served child6 35-0-98)
+Value: 18

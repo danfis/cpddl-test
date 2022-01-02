@@ -1,0 +1,99 @@
+Fact[26]:
+  (cleavable e-coli-exosome 0-0-0)
+  (none-of-those 0-1-1)
+  (cleavable insulin-gene 1-0-2)
+  (none-of-those 1-1-3)
+  (cleavable junk-exosome 2-0-4)
+  (none-of-those 2-1-5)
+  (cleaved e-coli-exosome 3-0-6)
+  (none-of-those 3-1-7)
+  (cleaved insulin-gene 4-0-8)
+  (none-of-those 4-1-9)
+  (cleaved junk-exosome 5-0-10)
+  (none-of-those 5-1-11)
+  (connected-cdna-mrna insulin-gene 6-0-12)
+  (none-of-those 6-1-13)
+  (contains e-coli-exosome e-coli 7-0-14)
+  (none-of-those 7-1-15)
+  (contains insulin-gene e-coli-exosome 8-0-16)
+  (none-of-those 8-1-17)
+  (double-strand insulin-gene 9-0-18)
+  (none-of-those 9-1-19)
+  (hair-pin insulin-gene 10-0-20)
+  (none-of-those 10-1-21)
+  (pure e-coli 11-0-22)
+  (none-of-those 11-1-23)
+  (single-strand insulin-gene 12-0-24)
+  (none-of-those 12-1-25)
+Op[17]:
+  (cleave e-coli-exosome), cost: 1
+    pre: (cleavable e-coli-exosome 0-0-0)
+    add: (none-of-those 0-1-1) (cleaved e-coli-exosome 3-0-6)
+    del: (cleavable e-coli-exosome 0-0-0) (none-of-those 3-1-7)
+  (cleave insulin-gene), cost: 1
+    pre: (cleavable insulin-gene 1-0-2)
+    add: (none-of-those 1-1-3) (cleaved insulin-gene 4-0-8)
+    del: (cleavable insulin-gene 1-0-2) (none-of-those 4-1-9)
+  (cleave junk-exosome), cost: 1
+    pre: (cleavable junk-exosome 2-0-4)
+    add: (none-of-those 2-1-5) (cleaved junk-exosome 5-0-10)
+    del: (cleavable junk-exosome 2-0-4) (none-of-those 5-1-11)
+  (digest insulin-gene), cost: 1
+    pre: (hair-pin insulin-gene 10-0-20)
+    add: (double-strand insulin-gene 9-0-18) (none-of-those 10-1-21)
+    del: (none-of-those 9-1-19) (hair-pin insulin-gene 10-0-20)
+  (ligate e-coli-exosome insulin-gene), cost: 1
+    pre: (cleaved e-coli-exosome 3-0-6) (cleaved insulin-gene 4-0-8)
+    add: (cleavable insulin-gene 1-0-2) (none-of-those 3-1-7) (none-of-those 4-1-9)
+    del: (none-of-those 1-1-3) (cleaved e-coli-exosome 3-0-6) (cleaved insulin-gene 4-0-8)
+  (ligate e-coli-exosome junk-exosome), cost: 1
+    pre: (cleaved e-coli-exosome 3-0-6) (cleaved junk-exosome 5-0-10)
+    add: (cleavable junk-exosome 2-0-4) (none-of-those 3-1-7) (none-of-those 5-1-11)
+    del: (none-of-those 2-1-5) (cleaved e-coli-exosome 3-0-6) (cleaved junk-exosome 5-0-10)
+  (ligate insulin-gene e-coli-exosome), cost: 1
+    pre: (cleaved e-coli-exosome 3-0-6) (cleaved insulin-gene 4-0-8)
+    add: (cleavable e-coli-exosome 0-0-0) (none-of-those 3-1-7) (none-of-those 4-1-9) (contains insulin-gene e-coli-exosome 8-0-16)
+    del: (none-of-those 0-1-1) (cleaved e-coli-exosome 3-0-6) (cleaved insulin-gene 4-0-8) (none-of-those 8-1-17)
+  (ligate insulin-gene junk-exosome), cost: 1
+    pre: (cleaved insulin-gene 4-0-8) (cleaved junk-exosome 5-0-10)
+    add: (cleavable junk-exosome 2-0-4) (none-of-those 4-1-9) (none-of-those 5-1-11)
+    del: (none-of-those 2-1-5) (cleaved insulin-gene 4-0-8) (cleaved junk-exosome 5-0-10)
+  (ligate junk-exosome e-coli-exosome), cost: 1
+    pre: (cleaved e-coli-exosome 3-0-6) (cleaved junk-exosome 5-0-10)
+    add: (cleavable e-coli-exosome 0-0-0) (none-of-those 3-1-7) (none-of-those 5-1-11)
+    del: (none-of-those 0-1-1) (cleaved e-coli-exosome 3-0-6) (cleaved junk-exosome 5-0-10)
+  (ligate junk-exosome insulin-gene), cost: 1
+    pre: (cleaved insulin-gene 4-0-8) (cleaved junk-exosome 5-0-10)
+    add: (cleavable insulin-gene 1-0-2) (none-of-those 4-1-9) (none-of-those 5-1-11)
+    del: (none-of-those 1-1-3) (cleaved insulin-gene 4-0-8) (cleaved junk-exosome 5-0-10)
+  (ligate linker insulin-gene), cost: 1
+    pre: (double-strand insulin-gene 9-0-18)
+    add: (cleavable insulin-gene 1-0-2)
+    del: (none-of-those 1-1-3)
+  (polymerize insulin-gene), cost: 1
+    pre: (single-strand insulin-gene 12-0-24)
+    add: (hair-pin insulin-gene 10-0-20) (none-of-those 12-1-25)
+    del: (none-of-those 10-1-21) (single-strand insulin-gene 12-0-24)
+  (reverse-transcribe insulin-gene), cost: 1
+    pre:
+    add: (connected-cdna-mrna insulin-gene 6-0-12)
+    del: (none-of-those 6-1-13)
+  (screen e-coli e-coli-exosome antibiotic-1), cost: 1
+    pre: (contains e-coli-exosome e-coli 7-0-14)
+    add: (pure e-coli 11-0-22)
+    del: (none-of-those 11-1-23)
+  (separate insulin-gene), cost: 1
+    pre: (connected-cdna-mrna insulin-gene 6-0-12)
+    add: (none-of-those 6-1-13) (single-strand insulin-gene 12-0-24)
+    del: (connected-cdna-mrna insulin-gene 6-0-12) (none-of-those 12-1-25)
+  (transform e-coli-exosome e-coli), cost: 1
+    pre: (cleavable e-coli-exosome 0-0-0)
+    add: (none-of-those 0-1-1) (contains e-coli-exosome e-coli 7-0-14)
+    del: (cleavable e-coli-exosome 0-0-0) (none-of-those 7-1-15)
+  (transform junk-exosome junk), cost: 1
+    pre: (cleavable junk-exosome 2-0-4)
+    add: (none-of-those 2-1-5)
+    del: (cleavable junk-exosome 2-0-4)
+Init State: (cleavable e-coli-exosome 0-0-0) (none-of-those 1-1-3) (cleavable junk-exosome 2-0-4) (none-of-those 3-1-7) (none-of-those 4-1-9) (none-of-those 5-1-11) (none-of-those 6-1-13) (none-of-those 7-1-15) (none-of-those 8-1-17) (none-of-those 9-1-19) (none-of-those 10-1-21) (none-of-those 11-1-23) (none-of-those 12-1-25)
+Goal: (contains e-coli-exosome e-coli 7-0-14) (contains insulin-gene e-coli-exosome 8-0-16) (pure e-coli 11-0-22)
+Value: 6

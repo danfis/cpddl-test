@@ -1,0 +1,105 @@
+Domain: movie-strips
+Problem: strips-movie-x-1
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+Obj[25]:
+    [0]: c5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: c4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: c3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: c2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: c1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: d5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: d4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: d3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: d2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: d1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: p5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: p4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: p3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: p2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: p1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: z5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: z4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: z3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: z2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: z1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: k5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: k4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [22]: k3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [23]: k2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [24]: k1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[15]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    movie-rewound: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    counter-at-two-hours: :: is-private: 0, owner-param: -1, read: 1, write: 0
+    counter-at-other-than-two-hours: :: is-private: 0, owner-param: -1, read: 1, write: 0
+    counter-at-zero: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-chips: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-dip: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-pop: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-cheese: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-crackers: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    chips: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    dip: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pop: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    cheese: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    crackers: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[8]:
+    rewind-movie-2: 
+        pre: (R:counter-at-two-hours)
+        eff: (W:movie-rewound)
+    rewind-movie: 
+        pre: (R:counter-at-other-than-two-hours)
+        eff: (and (W:movie-rewound) (N:W:counter-at-zero))
+    reset-counter: 
+        pre: (and)
+        eff: (W:counter-at-zero)
+    get-chips: ?x:0
+        pre: (R:chips ?x)
+        eff: (W:have-chips)
+    get-dip: ?x:0
+        pre: (R:dip ?x)
+        eff: (W:have-dip)
+    get-pop: ?x:0
+        pre: (R:pop ?x)
+        eff: (W:have-pop)
+    get-cheese: ?x:0
+        pre: (R:cheese ?x)
+        eff: (W:have-cheese)
+    get-crackers: ?x:0
+        pre: (R:crackers ?x)
+        eff: (W:have-crackers)
+Init[26]:
+  S:(chips c5)
+  S:(chips c4)
+  S:(chips c3)
+  S:(chips c2)
+  S:(chips c1)
+  S:(dip d5)
+  S:(dip d4)
+  S:(dip d3)
+  S:(dip d2)
+  S:(dip d1)
+  S:(pop p5)
+  S:(pop p4)
+  S:(pop p3)
+  S:(pop p2)
+  S:(pop p1)
+  S:(cheese z5)
+  S:(cheese z4)
+  S:(cheese z3)
+  S:(cheese z2)
+  S:(cheese z1)
+  S:(crackers k5)
+  S:(crackers k4)
+  S:(crackers k3)
+  S:(crackers k2)
+  S:(crackers k1)
+  S:(counter-at-other-than-two-hours)
+Init[0]:
+Goal: (and (W:movie-rewound) (W:counter-at-zero) (W:have-chips) (W:have-dip) (W:have-pop) (W:have-cheese) (W:have-crackers))
+Metric: 0

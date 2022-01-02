@@ -1,0 +1,374 @@
+Fact[57]:
+  (treatment p0 colourfragments 0-0-0)
+  (treatment p0 glazed 0-1-1)
+  (treatment p0 untreated 0-2-2)
+  (treatment p0 varnished 0-3-3)
+  (unused p0 0-4-4)
+  (treatment p1 colourfragments 1-0-5)
+  (treatment p1 glazed 1-1-6)
+  (treatment p1 untreated 1-2-7)
+  (treatment p1 varnished 1-3-8)
+  (unused p1 1-4-9)
+  (treatment p2 colourfragments 2-0-10)
+  (treatment p2 glazed 2-1-11)
+  (treatment p2 untreated 2-2-12)
+  (treatment p2 varnished 2-3-13)
+  (empty highspeed-saw0 3-0-14)
+  (in-highspeed-saw b0 highspeed-saw0 3-1-15)
+  (in-highspeed-saw b1 highspeed-saw0 3-2-16)
+  (surface-condition p0 rough 4-0-17)
+  (surface-condition p0 smooth 4-1-18)
+  (surface-condition p0 verysmooth 4-2-19)
+  (none-of-those 4-3-20)
+  (surface-condition p1 rough 5-0-21)
+  (surface-condition p1 smooth 5-1-22)
+  (surface-condition p1 verysmooth 5-2-23)
+  (none-of-those 5-3-24)
+  (surface-condition p2 smooth 6-0-25)
+  (surface-condition p2 verysmooth 6-1-26)
+  (available b0 7-0-27)
+  (none-of-those 7-1-28)
+  (available b1 8-0-29)
+  (none-of-those 8-1-30)
+  (available p0 9-0-31)
+  (none-of-those 9-1-32)
+  (available p1 10-0-33)
+  (none-of-those 10-1-34)
+  (wood p0 beech 11-0-35)
+  (none-of-those 11-1-36)
+  (wood p1 cherry 12-0-37)
+  (none-of-those 12-1-38)
+  (colour p0 green 13-0-39)
+  (none-of-those 13-1-40)
+  (colour p0 mauve 14-0-41)
+  (none-of-those 14-1-42)
+  (colour p0 natural 15-0-43)
+  (none-of-those 15-1-44)
+  (colour p1 green 16-0-45)
+  (none-of-those 16-1-46)
+  (colour p1 mauve 17-0-47)
+  (none-of-those 17-1-48)
+  (colour p1 natural 18-0-49)
+  (none-of-those 18-1-50)
+  (colour p2 green 19-0-51)
+  (none-of-those 19-1-52)
+  (colour p2 mauve 20-0-53)
+  (none-of-those 20-1-54)
+  (colour p2 natural 21-0-55)
+  (none-of-those 21-1-56)
+Op[78]:
+  (cut-board-medium b0 p0 highspeed-saw0 beech rough s3 s2 s1), cost: 10
+    pre: (unused p0 0-4-4) (in-highspeed-saw b0 highspeed-saw0 3-1-15)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (wood p0 beech 11-0-35) (colour p0 natural 15-0-43)
+    del: (unused p0 0-4-4) (surface-condition p0 smooth 4-1-18) (surface-condition p0 verysmooth 4-2-19) (none-of-those 4-3-20) (none-of-those 9-1-32) (none-of-those 11-1-36) (none-of-those 15-1-44)
+  (cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1), cost: 10
+    pre: (unused p1 1-4-9) (in-highspeed-saw b0 highspeed-saw0 3-1-15)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    del: (unused p1 1-4-9) (surface-condition p1 smooth 5-1-22) (surface-condition p1 verysmooth 5-2-23) (none-of-those 5-3-24) (none-of-those 10-1-34) (none-of-those 18-1-50)
+  (cut-board-medium b1 p0 highspeed-saw0 cherry rough s3 s2 s1), cost: 10
+    pre: (unused p0 0-4-4) (in-highspeed-saw b1 highspeed-saw0 3-2-16)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    del: (unused p0 0-4-4) (surface-condition p0 smooth 4-1-18) (surface-condition p0 verysmooth 4-2-19) (none-of-those 4-3-20) (none-of-those 9-1-32) (none-of-those 15-1-44)
+  (cut-board-medium b1 p1 highspeed-saw0 cherry rough s3 s2 s1), cost: 10
+    pre: (unused p1 1-4-9) (in-highspeed-saw b1 highspeed-saw0 3-2-16)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (wood p1 cherry 12-0-37) (colour p1 natural 18-0-49)
+    del: (unused p1 1-4-9) (surface-condition p1 smooth 5-1-22) (surface-condition p1 verysmooth 5-2-23) (none-of-those 5-3-24) (none-of-those 10-1-34) (none-of-those 12-1-38) (none-of-those 18-1-50)
+  (do-glaze p0 glazer0 green), cost: 15
+    pre: (treatment p0 untreated 0-2-2) (available p0 9-0-31)
+    add: (treatment p0 glazed 0-1-1) (colour p0 green 13-0-39) (none-of-those 15-1-44)
+    del: (treatment p0 untreated 0-2-2) (none-of-those 13-1-40) (colour p0 natural 15-0-43)
+  (do-glaze p0 glazer0 mauve), cost: 15
+    pre: (treatment p0 untreated 0-2-2) (available p0 9-0-31)
+    add: (treatment p0 glazed 0-1-1) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+    del: (treatment p0 untreated 0-2-2) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+  (do-glaze p1 glazer0 green), cost: 15
+    pre: (treatment p1 untreated 1-2-7) (available p1 10-0-33)
+    add: (treatment p1 glazed 1-1-6) (colour p1 green 16-0-45) (none-of-those 18-1-50)
+    del: (treatment p1 untreated 1-2-7) (none-of-those 16-1-46) (colour p1 natural 18-0-49)
+  (do-glaze p1 glazer0 mauve), cost: 15
+    pre: (treatment p1 untreated 1-2-7) (available p1 10-0-33)
+    add: (treatment p1 glazed 1-1-6) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+    del: (treatment p1 untreated 1-2-7) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+  (do-glaze p2 glazer0 green), cost: 10
+    pre: (treatment p2 untreated 2-2-12)
+    add: (treatment p2 glazed 2-1-11) (colour p2 green 19-0-51) (none-of-those 21-1-56)
+    del: (treatment p2 untreated 2-2-12) (none-of-those 19-1-52) (colour p2 natural 21-0-55)
+  (do-glaze p2 glazer0 mauve), cost: 10
+    pre: (treatment p2 untreated 2-2-12)
+    add: (treatment p2 glazed 2-1-11) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+    del: (treatment p2 untreated 2-2-12) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+  (do-grind p0 grinder0 smooth green glazed untreated), cost: 30
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 green 13-0-39)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 verysmooth 4-2-19) (none-of-those 13-1-40) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (surface-condition p0 smooth 4-1-18) (colour p0 green 13-0-39) (none-of-those 15-1-44)
+  (do-grind p0 grinder0 smooth mauve glazed untreated), cost: 30
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 verysmooth 4-2-19) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (surface-condition p0 smooth 4-1-18) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-grind p0 grinder0 smooth mauve varnished colourfragments), cost: 30
+    pre: (treatment p0 varnished 0-3-3) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 colourfragments 0-0-0) (surface-condition p0 verysmooth 4-2-19) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 varnished 0-3-3) (surface-condition p0 smooth 4-1-18) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-grind p0 grinder0 smooth natural untreated untreated), cost: 30
+    pre: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    add: (surface-condition p0 verysmooth 4-2-19)
+    del: (surface-condition p0 smooth 4-1-18)
+  (do-grind p0 grinder0 verysmooth green glazed untreated), cost: 30
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 green 13-0-39)
+    add: (treatment p0 untreated 0-2-2) (none-of-those 13-1-40) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (colour p0 green 13-0-39) (none-of-those 15-1-44)
+  (do-grind p0 grinder0 verysmooth mauve glazed untreated), cost: 30
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-grind p0 grinder0 verysmooth mauve varnished colourfragments), cost: 30
+    pre: (treatment p0 varnished 0-3-3) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 colourfragments 0-0-0) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 varnished 0-3-3) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-grind p0 grinder0 verysmooth natural colourfragments untreated), cost: 30
+    pre: (treatment p0 colourfragments 0-0-0) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    add: (treatment p0 untreated 0-2-2)
+    del: (treatment p0 colourfragments 0-0-0)
+  (do-grind p1 grinder0 smooth green glazed untreated), cost: 30
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 green 16-0-45)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 verysmooth 5-2-23) (none-of-those 16-1-46) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (surface-condition p1 smooth 5-1-22) (colour p1 green 16-0-45) (none-of-those 18-1-50)
+  (do-grind p1 grinder0 smooth mauve glazed untreated), cost: 30
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 verysmooth 5-2-23) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (surface-condition p1 smooth 5-1-22) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-grind p1 grinder0 smooth mauve varnished colourfragments), cost: 30
+    pre: (treatment p1 varnished 1-3-8) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 colourfragments 1-0-5) (surface-condition p1 verysmooth 5-2-23) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 varnished 1-3-8) (surface-condition p1 smooth 5-1-22) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-grind p1 grinder0 smooth natural untreated untreated), cost: 30
+    pre: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    add: (surface-condition p1 verysmooth 5-2-23)
+    del: (surface-condition p1 smooth 5-1-22)
+  (do-grind p1 grinder0 verysmooth green glazed untreated), cost: 30
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 green 16-0-45)
+    add: (treatment p1 untreated 1-2-7) (none-of-those 16-1-46) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (colour p1 green 16-0-45) (none-of-those 18-1-50)
+  (do-grind p1 grinder0 verysmooth mauve glazed untreated), cost: 30
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-grind p1 grinder0 verysmooth mauve varnished colourfragments), cost: 30
+    pre: (treatment p1 varnished 1-3-8) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 colourfragments 1-0-5) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 varnished 1-3-8) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-grind p1 grinder0 verysmooth natural colourfragments untreated), cost: 30
+    pre: (treatment p1 colourfragments 1-0-5) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    add: (treatment p1 untreated 1-2-7)
+    del: (treatment p1 colourfragments 1-0-5)
+  (do-grind p2 grinder0 smooth green glazed untreated), cost: 15
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 smooth 6-0-25) (colour p2 green 19-0-51)
+    add: (treatment p2 untreated 2-2-12) (surface-condition p2 verysmooth 6-1-26) (none-of-those 19-1-52) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (surface-condition p2 smooth 6-0-25) (colour p2 green 19-0-51) (none-of-those 21-1-56)
+  (do-grind p2 grinder0 smooth mauve glazed untreated), cost: 15
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 smooth 6-0-25) (colour p2 mauve 20-0-53)
+    add: (treatment p2 untreated 2-2-12) (surface-condition p2 verysmooth 6-1-26) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (surface-condition p2 smooth 6-0-25) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-grind p2 grinder0 smooth mauve varnished colourfragments), cost: 15
+    pre: (treatment p2 varnished 2-3-13) (surface-condition p2 smooth 6-0-25) (colour p2 mauve 20-0-53)
+    add: (treatment p2 colourfragments 2-0-10) (surface-condition p2 verysmooth 6-1-26) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 varnished 2-3-13) (surface-condition p2 smooth 6-0-25) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-grind p2 grinder0 smooth natural untreated untreated), cost: 15
+    pre: (treatment p2 untreated 2-2-12) (surface-condition p2 smooth 6-0-25) (colour p2 natural 21-0-55)
+    add: (surface-condition p2 verysmooth 6-1-26)
+    del: (surface-condition p2 smooth 6-0-25)
+  (do-grind p2 grinder0 verysmooth green glazed untreated), cost: 15
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 verysmooth 6-1-26) (colour p2 green 19-0-51)
+    add: (treatment p2 untreated 2-2-12) (none-of-those 19-1-52) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (colour p2 green 19-0-51) (none-of-those 21-1-56)
+  (do-grind p2 grinder0 verysmooth mauve glazed untreated), cost: 15
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 verysmooth 6-1-26) (colour p2 mauve 20-0-53)
+    add: (treatment p2 untreated 2-2-12) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-grind p2 grinder0 verysmooth mauve varnished colourfragments), cost: 15
+    pre: (treatment p2 varnished 2-3-13) (surface-condition p2 verysmooth 6-1-26) (colour p2 mauve 20-0-53)
+    add: (treatment p2 colourfragments 2-0-10) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 varnished 2-3-13) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-grind p2 grinder0 verysmooth natural colourfragments untreated), cost: 15
+    pre: (treatment p2 colourfragments 2-0-10) (surface-condition p2 verysmooth 6-1-26) (colour p2 natural 21-0-55)
+    add: (treatment p2 untreated 2-2-12)
+    del: (treatment p2 colourfragments 2-0-10)
+  (do-immersion-varnish p0 immersion-varnisher0 mauve smooth), cost: 10
+    pre: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31)
+    add: (treatment p0 varnished 0-3-3) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+    del: (treatment p0 untreated 0-2-2) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+  (do-immersion-varnish p0 immersion-varnisher0 mauve verysmooth), cost: 10
+    pre: (treatment p0 untreated 0-2-2) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31)
+    add: (treatment p0 varnished 0-3-3) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+    del: (treatment p0 untreated 0-2-2) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+  (do-immersion-varnish p1 immersion-varnisher0 mauve smooth), cost: 10
+    pre: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33)
+    add: (treatment p1 varnished 1-3-8) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+    del: (treatment p1 untreated 1-2-7) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+  (do-immersion-varnish p1 immersion-varnisher0 mauve verysmooth), cost: 10
+    pre: (treatment p1 untreated 1-2-7) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33)
+    add: (treatment p1 varnished 1-3-8) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+    del: (treatment p1 untreated 1-2-7) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+  (do-plane p0 planer0 rough green glazed), cost: 20
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (colour p0 green 13-0-39)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (none-of-those 13-1-40) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (surface-condition p0 rough 4-0-17) (colour p0 green 13-0-39) (none-of-those 15-1-44)
+  (do-plane p0 planer0 rough mauve glazed), cost: 20
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (surface-condition p0 rough 4-0-17) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-plane p0 planer0 rough natural untreated), cost: 20
+    pre: (treatment p0 untreated 0-2-2) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    add: (surface-condition p0 smooth 4-1-18)
+    del: (surface-condition p0 rough 4-0-17)
+  (do-plane p0 planer0 smooth green glazed), cost: 20
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 green 13-0-39)
+    add: (treatment p0 untreated 0-2-2) (none-of-those 13-1-40) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (colour p0 green 13-0-39) (none-of-those 15-1-44)
+  (do-plane p0 planer0 smooth mauve glazed), cost: 20
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-plane p0 planer0 smooth mauve varnished), cost: 20
+    pre: (treatment p0 varnished 0-3-3) (surface-condition p0 smooth 4-1-18) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 varnished 0-3-3) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-plane p0 planer0 verysmooth green glazed), cost: 20
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 green 13-0-39)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (none-of-those 13-1-40) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (surface-condition p0 verysmooth 4-2-19) (colour p0 green 13-0-39) (none-of-those 15-1-44)
+  (do-plane p0 planer0 verysmooth mauve glazed), cost: 20
+    pre: (treatment p0 glazed 0-1-1) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 glazed 0-1-1) (surface-condition p0 verysmooth 4-2-19) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-plane p0 planer0 verysmooth mauve varnished), cost: 20
+    pre: (treatment p0 varnished 0-3-3) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 mauve 14-0-41)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18) (none-of-those 14-1-42) (colour p0 natural 15-0-43)
+    del: (treatment p0 varnished 0-3-3) (surface-condition p0 verysmooth 4-2-19) (colour p0 mauve 14-0-41) (none-of-those 15-1-44)
+  (do-plane p0 planer0 verysmooth natural colourfragments), cost: 20
+    pre: (treatment p0 colourfragments 0-0-0) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 smooth 4-1-18)
+    del: (treatment p0 colourfragments 0-0-0) (surface-condition p0 verysmooth 4-2-19)
+  (do-plane p0 planer0 verysmooth natural untreated), cost: 20
+    pre: (treatment p0 untreated 0-2-2) (surface-condition p0 verysmooth 4-2-19) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    add: (surface-condition p0 smooth 4-1-18)
+    del: (surface-condition p0 verysmooth 4-2-19)
+  (do-plane p1 planer0 rough green glazed), cost: 20
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (colour p1 green 16-0-45)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (none-of-those 16-1-46) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (surface-condition p1 rough 5-0-21) (colour p1 green 16-0-45) (none-of-those 18-1-50)
+  (do-plane p1 planer0 rough mauve glazed), cost: 20
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (surface-condition p1 rough 5-0-21) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-plane p1 planer0 rough natural untreated), cost: 20
+    pre: (treatment p1 untreated 1-2-7) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    add: (surface-condition p1 smooth 5-1-22)
+    del: (surface-condition p1 rough 5-0-21)
+  (do-plane p1 planer0 smooth green glazed), cost: 20
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 green 16-0-45)
+    add: (treatment p1 untreated 1-2-7) (none-of-those 16-1-46) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (colour p1 green 16-0-45) (none-of-those 18-1-50)
+  (do-plane p1 planer0 smooth mauve glazed), cost: 20
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-plane p1 planer0 smooth mauve varnished), cost: 20
+    pre: (treatment p1 varnished 1-3-8) (surface-condition p1 smooth 5-1-22) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 varnished 1-3-8) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-plane p1 planer0 verysmooth green glazed), cost: 20
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 green 16-0-45)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (none-of-those 16-1-46) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (surface-condition p1 verysmooth 5-2-23) (colour p1 green 16-0-45) (none-of-those 18-1-50)
+  (do-plane p1 planer0 verysmooth mauve glazed), cost: 20
+    pre: (treatment p1 glazed 1-1-6) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 glazed 1-1-6) (surface-condition p1 verysmooth 5-2-23) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-plane p1 planer0 verysmooth mauve varnished), cost: 20
+    pre: (treatment p1 varnished 1-3-8) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 mauve 17-0-47)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22) (none-of-those 17-1-48) (colour p1 natural 18-0-49)
+    del: (treatment p1 varnished 1-3-8) (surface-condition p1 verysmooth 5-2-23) (colour p1 mauve 17-0-47) (none-of-those 18-1-50)
+  (do-plane p1 planer0 verysmooth natural colourfragments), cost: 20
+    pre: (treatment p1 colourfragments 1-0-5) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 smooth 5-1-22)
+    del: (treatment p1 colourfragments 1-0-5) (surface-condition p1 verysmooth 5-2-23)
+  (do-plane p1 planer0 verysmooth natural untreated), cost: 20
+    pre: (treatment p1 untreated 1-2-7) (surface-condition p1 verysmooth 5-2-23) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    add: (surface-condition p1 smooth 5-1-22)
+    del: (surface-condition p1 verysmooth 5-2-23)
+  (do-plane p2 planer0 smooth green glazed), cost: 10
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 smooth 6-0-25) (colour p2 green 19-0-51)
+    add: (treatment p2 untreated 2-2-12) (none-of-those 19-1-52) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (colour p2 green 19-0-51) (none-of-those 21-1-56)
+  (do-plane p2 planer0 smooth mauve glazed), cost: 10
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 smooth 6-0-25) (colour p2 mauve 20-0-53)
+    add: (treatment p2 untreated 2-2-12) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-plane p2 planer0 smooth mauve varnished), cost: 10
+    pre: (treatment p2 varnished 2-3-13) (surface-condition p2 smooth 6-0-25) (colour p2 mauve 20-0-53)
+    add: (treatment p2 untreated 2-2-12) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 varnished 2-3-13) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-plane p2 planer0 verysmooth green glazed), cost: 10
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 verysmooth 6-1-26) (colour p2 green 19-0-51)
+    add: (treatment p2 untreated 2-2-12) (surface-condition p2 smooth 6-0-25) (none-of-those 19-1-52) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (surface-condition p2 verysmooth 6-1-26) (colour p2 green 19-0-51) (none-of-those 21-1-56)
+  (do-plane p2 planer0 verysmooth mauve glazed), cost: 10
+    pre: (treatment p2 glazed 2-1-11) (surface-condition p2 verysmooth 6-1-26) (colour p2 mauve 20-0-53)
+    add: (treatment p2 untreated 2-2-12) (surface-condition p2 smooth 6-0-25) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 glazed 2-1-11) (surface-condition p2 verysmooth 6-1-26) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-plane p2 planer0 verysmooth mauve varnished), cost: 10
+    pre: (treatment p2 varnished 2-3-13) (surface-condition p2 verysmooth 6-1-26) (colour p2 mauve 20-0-53)
+    add: (treatment p2 untreated 2-2-12) (surface-condition p2 smooth 6-0-25) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+    del: (treatment p2 varnished 2-3-13) (surface-condition p2 verysmooth 6-1-26) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+  (do-plane p2 planer0 verysmooth natural colourfragments), cost: 10
+    pre: (treatment p2 colourfragments 2-0-10) (surface-condition p2 verysmooth 6-1-26) (colour p2 natural 21-0-55)
+    add: (treatment p2 untreated 2-2-12) (surface-condition p2 smooth 6-0-25)
+    del: (treatment p2 colourfragments 2-0-10) (surface-condition p2 verysmooth 6-1-26)
+  (do-plane p2 planer0 verysmooth natural untreated), cost: 10
+    pre: (treatment p2 untreated 2-2-12) (surface-condition p2 verysmooth 6-1-26) (colour p2 natural 21-0-55)
+    add: (surface-condition p2 smooth 6-0-25)
+    del: (surface-condition p2 verysmooth 6-1-26)
+  (do-saw-medium b0 p0 saw0 beech rough s3 s2 s1), cost: 30
+    pre: (unused p0 0-4-4) (available b0 7-0-27)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (wood p0 beech 11-0-35) (colour p0 natural 15-0-43)
+    del: (unused p0 0-4-4) (surface-condition p0 smooth 4-1-18) (surface-condition p0 verysmooth 4-2-19) (none-of-those 4-3-20) (none-of-those 9-1-32) (none-of-those 11-1-36) (none-of-those 15-1-44)
+  (do-saw-medium b0 p1 saw0 beech rough s3 s2 s1), cost: 30
+    pre: (unused p1 1-4-9) (available b0 7-0-27)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (colour p1 natural 18-0-49)
+    del: (unused p1 1-4-9) (surface-condition p1 smooth 5-1-22) (surface-condition p1 verysmooth 5-2-23) (none-of-those 5-3-24) (none-of-those 10-1-34) (none-of-those 18-1-50)
+  (do-saw-medium b1 p0 saw0 cherry rough s3 s2 s1), cost: 30
+    pre: (unused p0 0-4-4) (available b1 8-0-29)
+    add: (treatment p0 untreated 0-2-2) (surface-condition p0 rough 4-0-17) (available p0 9-0-31) (colour p0 natural 15-0-43)
+    del: (unused p0 0-4-4) (surface-condition p0 smooth 4-1-18) (surface-condition p0 verysmooth 4-2-19) (none-of-those 4-3-20) (none-of-those 9-1-32) (none-of-those 15-1-44)
+  (do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1), cost: 30
+    pre: (unused p1 1-4-9) (available b1 8-0-29)
+    add: (treatment p1 untreated 1-2-7) (surface-condition p1 rough 5-0-21) (available p1 10-0-33) (wood p1 cherry 12-0-37) (colour p1 natural 18-0-49)
+    del: (unused p1 1-4-9) (surface-condition p1 smooth 5-1-22) (surface-condition p1 verysmooth 5-2-23) (none-of-those 5-3-24) (none-of-those 10-1-34) (none-of-those 12-1-38) (none-of-those 18-1-50)
+  (do-spray-varnish p2 spray-varnisher0 mauve smooth), cost: 5
+    pre: (treatment p2 untreated 2-2-12) (surface-condition p2 smooth 6-0-25)
+    add: (treatment p2 varnished 2-3-13) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+    del: (treatment p2 untreated 2-2-12) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+  (do-spray-varnish p2 spray-varnisher0 mauve verysmooth), cost: 5
+    pre: (treatment p2 untreated 2-2-12) (surface-condition p2 verysmooth 6-1-26)
+    add: (treatment p2 varnished 2-3-13) (colour p2 mauve 20-0-53) (none-of-those 21-1-56)
+    del: (treatment p2 untreated 2-2-12) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+  (load-highspeed-saw b0 highspeed-saw0), cost: 30
+    pre: (empty highspeed-saw0 3-0-14) (available b0 7-0-27)
+    add: (in-highspeed-saw b0 highspeed-saw0 3-1-15) (none-of-those 7-1-28)
+    del: (empty highspeed-saw0 3-0-14) (available b0 7-0-27)
+  (load-highspeed-saw b1 highspeed-saw0), cost: 30
+    pre: (empty highspeed-saw0 3-0-14) (available b1 8-0-29)
+    add: (in-highspeed-saw b1 highspeed-saw0 3-2-16) (none-of-those 8-1-30)
+    del: (empty highspeed-saw0 3-0-14) (available b1 8-0-29)
+  (unload-highspeed-saw b0 highspeed-saw0), cost: 10
+    pre: (in-highspeed-saw b0 highspeed-saw0 3-1-15)
+    add: (empty highspeed-saw0 3-0-14) (available b0 7-0-27)
+    del: (in-highspeed-saw b0 highspeed-saw0 3-1-15) (none-of-those 7-1-28)
+  (unload-highspeed-saw b1 highspeed-saw0), cost: 10
+    pre: (in-highspeed-saw b1 highspeed-saw0 3-2-16)
+    add: (empty highspeed-saw0 3-0-14) (available b1 8-0-29)
+    del: (in-highspeed-saw b1 highspeed-saw0 3-2-16) (none-of-those 8-1-30)
+Init State: (unused p0 0-4-4) (unused p1 1-4-9) (treatment p2 colourfragments 2-0-10) (empty highspeed-saw0 3-0-14) (none-of-those 4-3-20) (none-of-those 5-3-24) (surface-condition p2 verysmooth 6-1-26) (available b0 7-0-27) (available b1 8-0-29) (none-of-those 9-1-32) (none-of-those 10-1-34) (none-of-those 11-1-36) (none-of-those 12-1-38) (none-of-those 13-1-40) (none-of-those 14-1-42) (none-of-those 15-1-44) (none-of-those 16-1-46) (none-of-those 17-1-48) (none-of-those 18-1-50) (none-of-those 19-1-52) (none-of-those 20-1-54) (colour p2 natural 21-0-55)
+Goal: (treatment p0 varnished 0-3-3) (treatment p1 glazed 1-1-6) (surface-condition p0 verysmooth 4-2-19) (surface-condition p1 smooth 5-1-22) (available p0 9-0-31) (available p1 10-0-33) (wood p0 beech 11-0-35) (wood p1 cherry 12-0-37) (colour p0 mauve 14-0-41) (colour p1 green 16-0-45) (colour p2 mauve 20-0-53)
+Value: 130
