@@ -366,7 +366,7 @@ static void runTestTree(test_test_t *root,
                 tests_stats[root->id] = -1;
                 failed = 1;
             }
-            fprintf(stdout, "diff -q: %d\n", ret);
+
         }else if (filesize(fn) > 0){
             tests_stats[root->id] = -1;
             failed = 1;
