@@ -7,6 +7,9 @@ static void checkPlanStates(const pddl_fdr_t *fdr, pddl_symbolic_task_t *ss)
     pddl_plan_file_fdr_t planf;
     char plan_fn[256];
     sprintf(plan_fn, "%s.plan", TEST_TASK);
+    if (!pddlIsFile(plan_fn))
+        return;
+
     int res = pddlPlanFileFDRInit(&planf, fdr, plan_fn, NULL);
     if (res != 0)
         return;
@@ -81,8 +84,9 @@ TEST(symbolic_fw, symbolic)
 
     BOR_IARR(plan);
     int res = pddlSymbolicTaskSearch(task, &plan, &C.err);
-    assert(res == PDDL_SYMBOLIC_PLAN_FOUND);
-    checkPlan(&C.strips, &plan);
+    assert(res == PDDL_SYMBOLIC_PLAN_FOUND || res == PDDL_SYMBOLIC_PLAN_NOT_EXIST);
+    if (res == PDDL_SYMBOLIC_PLAN_FOUND)
+        checkPlan(&C.strips, &plan);
     borIArrFree(&plan);
 
     pddlSymbolicTaskDel(task);
@@ -101,9 +105,11 @@ TEST(symbolic_fwbw, symbolic)
 
     BOR_IARR(plan);
     int res = pddlSymbolicTaskSearch(task, &plan, &C.err);
-    assert(res == PDDL_SYMBOLIC_PLAN_FOUND);
-    checkPlan(&C.strips, &plan);
-    checkPlanStates(&C.fdr, task);
+    assert(res == PDDL_SYMBOLIC_PLAN_FOUND || res == PDDL_SYMBOLIC_PLAN_NOT_EXIST);
+    if (res == PDDL_SYMBOLIC_PLAN_FOUND){
+        checkPlan(&C.strips, &plan);
+        checkPlanStates(&C.fdr, task);
+    }
     borIArrFree(&plan);
 
     pddlSymbolicTaskDel(task);
@@ -122,8 +128,9 @@ TEST(symbolic_bw, symbolic)
 
     BOR_IARR(plan);
     int res = pddlSymbolicTaskSearch(task, &plan, &C.err);
-    assert(res == PDDL_SYMBOLIC_PLAN_FOUND);
-    checkPlan(&C.strips, &plan);
+    assert(res == PDDL_SYMBOLIC_PLAN_FOUND || res == PDDL_SYMBOLIC_PLAN_NOT_EXIST);
+    if (res == PDDL_SYMBOLIC_PLAN_FOUND)
+        checkPlan(&C.strips, &plan);
     borIArrFree(&plan);
 
     pddlSymbolicTaskDel(task);

@@ -215,24 +215,16 @@ static void _tnf_flow_lt(const pddl_fdr_t *fdr, const pddl_fdr_t *tnf)
 }
 
 static pddl_fdr_t tnf;
-static int tnf_set = 0;
-
-static void freeMem(void)
-{
-    if (tnf_set)
-        pddlFDRFree(&tnf);
-}
 
 TEST(tnf, fdr)
 {
     pddlFDRInitTransitionNormalForm(&tnf, &C.fdr, NULL, 0, &C.err);
     pddlFDRPrintFD(&tnf, &C.mg, 0, stdout);
-    tnf_set = 1;
 }
 
 TEST_TEAR_DOWN(tnf)
 {
-    freeMem();
+    pddlFDRFree(&tnf);
 }
 
 TEST_COND(tnf_heur, tnf, LP)
@@ -240,30 +232,19 @@ TEST_COND(tnf_heur, tnf, LP)
     _tnf_flow_eq(&C.fdr, &tnf);
 }
 
-TEST_TEAR_DOWN(tnf_heur)
-{
-    freeMem();
-}
-
 TEST(mtnf, fdr)
 {
     unsigned flag = PDDL_FDR_TNF_MULTIPLY_OPS;
     pddlFDRInitTransitionNormalForm(&tnf, &C.fdr, NULL, flag, &C.err);
     pddlFDRPrintFD(&tnf, &C.mg, 0, stdout);
-    tnf_set = 1;
 }
 
 TEST_TEAR_DOWN(mtnf)
 {
-    freeMem();
+    pddlFDRFree(&tnf);
 }
 
 TEST_COND(mtnf_heur, mtnf, LP)
 {
     _tnf_flow_lt(&C.fdr, &tnf);
-}
-
-TEST_TEAR_DOWN(mtnf_heur)
-{
-    freeMem();
 }

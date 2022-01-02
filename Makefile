@@ -71,6 +71,8 @@ test.tasks.all.in.c: tasks-base.txt tasks-noce.txt gen-tasks.py
 
 check: all submodule
 	./test $(T) 2>&1 | tee check.log
+check-all: all submodule
+	./test -a $(T) 2>&1 | tee check.log
 
 submodule: pddl-data/test-seq/test/domain.pddl
 pddl-data/test-seq/test/domain.pddl:
@@ -78,14 +80,29 @@ pddl-data/test-seq/test/domain.pddl:
 	git submodule update -- pddl-data
 
 check-valgrind: all
-	valgrind --leak-check=full --show-reachable=yes --trace-children=yes \
-             --error-limit=no \
-             ./test $(T) <tasks.txt 2>&1 | tee check.log
+	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
+             --trace-children=yes --error-limit=no \
+             --child-silent-after-fork=yes \
+             ./test $(T) 2>&1 | tee check.log
+check-all-valgrind: all
+	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
+             --trace-children=yes --error-limit=no \
+             --child-silent-after-fork=yes \
+             ./test -a $(T) 2>&1 | tee check.log
 
 check-segfault: all
 	valgrind -q --trace-children=yes \
              --error-limit=no \
              ./test $(T) <tasks.txt 2>&1 | tee check.log
+check-all-segfault: all
+	valgrind -q --trace-children=yes \
+             --error-limit=no \
+             ./test -a $(T) <tasks.txt 2>&1 | tee check.log
+
+check-gdb: all
+	gdb --ex 'set follow-fork-mode child' --ex run --args ./test $(T)
+check-all-gdb: all
+	gdb --ex 'set follow-fork-mode child' --ex run --args ./test -a $(T)
 
 check-valgrind-gen-suppressions: all
 	valgrind -q --leak-check=full --show-reachable=yes --trace-children=yes \

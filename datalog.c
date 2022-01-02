@@ -96,7 +96,7 @@ TEST_EXPLICIT(datalog)
     pddlDatalogPrint(dl, stdout);
 
     bor_err_t err = BOR_ERR_INIT;
-    borErrInfoEnable(&err, stderr);
+    //borErrInfoEnable(&err, stderr);
     fprintf(stdout, "Normalized:\n");
     pddlDatalogToNormalForm(dl, &err);
 

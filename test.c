@@ -201,6 +201,14 @@ static void printNameTree(const test_test_t *t)
     fprintf(stdout, "%s", t->name);
 }
 
+static void tearDown(test_test_t *t)
+{
+    if (t->test_fn_tear_down != NULL)
+        t->test_fn_tear_down();
+    if (t->parent != NULL)
+        tearDown(t->parent);
+}
+
 static void *thTimeout(void *_)
 {
     sleep(TIMEOUT);
@@ -285,8 +293,7 @@ static void runTestTree(test_test_t *root,
         }
 
 
-        if (root->test_fn_tear_down != NULL)
-            root->test_fn_tear_down();
+        tearDown(root);
         if (global_tear_down != NULL)
             global_tear_down();
 
@@ -524,6 +531,7 @@ static void setUpTasks(void)
 static void freeTasks(void)
 {
     _freeTasks(&tasks_base);
+    _freeTasks(&tasks_all);
 }
 
 static void filterTasksSubstr(const char *s)

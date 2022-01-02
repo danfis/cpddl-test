@@ -6,6 +6,9 @@ TEST_COND(flow, fdr, LP)
 {
     char plan_fn[512];
     sprintf(plan_fn, "%s.plan", TEST_TASK);
+    if (!pddlIsFile(plan_fn))
+        return;
+
     pddl_plan_file_fdr_t plan;
     int ret = pddlPlanFileFDRInit(&plan, &C.fdr, plan_fn, &C.err);
     if (ret < 0)

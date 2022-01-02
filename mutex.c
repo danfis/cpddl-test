@@ -6,13 +6,6 @@ static pddl_mutex_pairs_t h2;
 static bor_iset_t h2_unreachable_op;
 static bor_iset_t h2_unreachable_fact;
 
-static void freeMem(void)
-{
-    pddlMutexPairsFree(&h2);
-    borISetFree(&h2_unreachable_op);
-    borISetFree(&h2_unreachable_fact);
-}
-
 TEST(h2, strips_pruned)
 {
     pddlMutexPairsInitStrips(&h2, &C.strips);
@@ -46,7 +39,9 @@ TEST(h2, strips_pruned)
 
 TEST_TEAR_DOWN(h2)
 {
-    freeMem();
+    pddlMutexPairsFree(&h2);
+    borISetFree(&h2_unreachable_op);
+    borISetFree(&h2_unreachable_fact);
 }
 
 TEST(h2fwbw, h2)
@@ -158,11 +153,6 @@ TEST(h2fwbw, h2)
     borISetFree(&h2fwbw_unreachable_op);
 }
 
-TEST_TEAR_DOWN(h2fwbw)
-{
-    freeMem();
-}
-
 TEST(h3, h2)
 {
     pddl_mutex_pairs_t h3;
@@ -206,10 +196,6 @@ TEST(h3, h2)
     pddlMutexPairsFree(&h3);
 }
 
-TEST_TEAR_DOWN(h3)
-{
-    freeMem();
-}
 
 static int disamb(pddl_disambiguate_t *dis,
                   const pddl_strips_t *strips,
@@ -259,9 +245,4 @@ TEST(disambiguation, h2)
     pddlDisambiguateFree(&dis);
 
     pddlStripsFree(&strips2);
-}
-
-TEST_TEAR_DOWN(disambiguation)
-{
-    freeMem();
 }

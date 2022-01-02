@@ -54,25 +54,9 @@ static int mgsContained(const pddl_mgroups_t *mgs, const pddl_mgroups_t *c)
 
 
 static pddl_mgroups_t mg_fd;
-static int mg_fd_set = 0;
 static pddl_mgroups_t mg_max;
-static int mg_max_set = 0;
 static pddl_mgroups_t mg_all;
-static int mg_all_set = 0;
 static pddl_mgroups_t mg_h2;
-static int mg_h2_set = 0;
-
-static void freeMem(void)
-{
-    if (mg_fd_set)
-        pddlMGroupsFree(&mg_fd);
-    if (mg_max_set)
-        pddlMGroupsFree(&mg_max);
-    if (mg_all_set)
-        pddlMGroupsFree(&mg_all);
-    if (mg_h2_set)
-        pddlMGroupsFree(&mg_h2);
-}
 
 TEST(b_mgroup, strips_pruned)
 {
@@ -82,12 +66,11 @@ TEST(b_mgroup, strips_pruned)
     assert(ret == 0);
 
     pddlMGroupsGround(&mg_fd, &C.pddl, &C.lmg_fd, &C.strips);
-    mg_fd_set = 1;
 }
 
 TEST_TEAR_DOWN(b_mgroup)
 {
-    freeMem();
+    pddlMGroupsFree(&mg_fd);
 }
 
 TEST_COND(famgroup_maximal, b_mgroup, LP)
@@ -96,7 +79,6 @@ TEST_COND(famgroup_maximal, b_mgroup, LP)
     cfg.maximal = 1;
 
     pddlMGroupsInitEmpty(&mg_max);
-    mg_max_set = 1;
     int ret = pddlFAMGroupsInfer(&mg_max, &C.strips, &cfg, NULL);
     assert(ret == 0);
     pddlMGroupsSetExactlyOne(&mg_max, &C.strips);
@@ -130,7 +112,7 @@ TEST_COND(famgroup_maximal, b_mgroup, LP)
 
 TEST_TEAR_DOWN(famgroup_maximal)
 {
-    freeMem();
+    pddlMGroupsFree(&mg_max);
 }
 
 TEST_COND(famgroup_maximal_goal, famgroup_maximal, LP)
@@ -153,10 +135,6 @@ TEST_COND(famgroup_maximal_goal, famgroup_maximal, LP)
     pddlMGroupsFree(&mg);
 }
 
-TEST_TEAR_DOWN(famgroup_maximal_goal)
-{
-    freeMem();
-}
 
 TEST_COND(famgroup_all, famgroup_maximal, LP)
 {
@@ -164,7 +142,6 @@ TEST_COND(famgroup_all, famgroup_maximal, LP)
     cfg.maximal = 0;
 
     pddlMGroupsInitEmpty(&mg_all);
-    mg_all_set = 1;
     int ret = pddlFAMGroupsInfer(&mg_all, &C.strips, &cfg, NULL);
     assert(ret == 0);
     pddlMGroupsSetExactlyOne(&mg_all, &C.strips);
@@ -200,7 +177,7 @@ TEST_COND(famgroup_all, famgroup_maximal, LP)
 
 TEST_TEAR_DOWN(famgroup_all)
 {
-    freeMem();
+    pddlMGroupsFree(&mg_all);
 }
 
 TEST_COND(famgroup_maximal_sym, famgroup_maximal, LP BLISS)
@@ -227,10 +204,6 @@ TEST_COND(famgroup_maximal_sym, famgroup_maximal, LP BLISS)
     pddlStripsSymFree(&sym);
 }
 
-TEST_TEAR_DOWN(famgroup_maximal_sym)
-{
-    freeMem();
-}
 
 TEST_COND(famgroup_all_sym, famgroup_all, LP BLISS)
 {
@@ -256,11 +229,6 @@ TEST_COND(famgroup_all_sym, famgroup_all, LP BLISS)
     pddlStripsSymFree(&sym);
 }
 
-TEST_TEAR_DOWN(famgroup_all_sym)
-{
-    freeMem();
-}
-
 
 TEST(h2mgroup, famgroup_all)
 {
@@ -272,7 +240,6 @@ TEST(h2mgroup, famgroup_all)
     assert(ret == 0);
 
     pddlMGroupsInitEmpty(&mg_h2);
-    mg_h2_set = 1;
     pddlMutexPairsInferMutexGroups(&h2, &mg_h2, &C.err);
     pddlMGroupsSetExactlyOne(&mg_h2, &C.strips);
     pddlMGroupsSetGoal(&mg_h2, &C.strips);
@@ -287,7 +254,7 @@ TEST(h2mgroup, famgroup_all)
 
 TEST_TEAR_DOWN(h2mgroup)
 {
-    freeMem();
+    pddlMGroupsFree(&mg_h2);
 }
 
 TEST(h3mgroup, h2mgroup)
@@ -311,9 +278,4 @@ TEST(h3mgroup, h2mgroup)
     pddlMGroupsFree(&mgs);
 
     pddlMutexPairsFree(&h3);
-}
-
-TEST_TEAR_DOWN(h3mgroup)
-{
-    freeMem();
 }
