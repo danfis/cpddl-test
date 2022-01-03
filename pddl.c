@@ -29,6 +29,7 @@ TEST(pddl_no_normalize, r)
     pddl_t pddl;
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     cfg.normalize = 0;
+    cfg.remove_empty_types = 0;
     cfg.force_adl = 1;
     int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);

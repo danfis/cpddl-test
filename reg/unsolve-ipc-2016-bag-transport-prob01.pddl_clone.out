@@ -1,26 +1,22 @@
 Domain: transport
 Problem: transport-three-cities-sequential-3nodes-1000size-2degree-100mindistance-2trucks-4packages-2008seed
 Require: 200ff
-Type[9]:
+Type[7]:
     [0]: object, parent: -1
     [1]: location, parent: 0
-    [2]: target, parent: 0
-    [3]: locatable, parent: 0
-    [4]: capacity-number, parent: 0
-    [5]: package-property1, parent: 0
-    [6]: pnum, parent: 0
-    [7]: vehicle, parent: 3
-    [8]: package, parent: 3
+    [2]: locatable, parent: 0
+    [3]: capacity-number, parent: 0
+    [4]: pnum, parent: 0
+    [5]: vehicle, parent: 2
+    [6]: package, parent: 2
 Obj-by-Type:
     [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
     [1]: 0 1 2 3 4 5 6 7 8
-    [2]:
-    [3]: 17 18 19 20 21
-    [4]: 12 13 14 15 16
-    [5]:
-    [6]: 9 10 11
-    [7]: 17 18
-    [8]: 19 20 21
+    [2]: 17 18 19 20 21
+    [3]: 12 13 14 15 16
+    [4]: 9 10 11
+    [5]: 17 18
+    [6]: 19 20 21
 Obj[22]:
     [0]: city-1-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [1]: city-2-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
@@ -31,40 +27,40 @@ Obj[22]:
     [6]: city-1-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [7]: city-2-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [8]: city-3-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: pnum1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: pnum2, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: pnum0, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: capacity-0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: capacity-1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: capacity-2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: capacity-3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: capacity-4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: truck-1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: truck-2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: package-bag1, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: package-bag2, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: package-bag3, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: pnum1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: pnum2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: pnum0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: capacity-0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: capacity-1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: capacity-2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: capacity-3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: capacity-4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: truck-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: truck-2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: package-bag1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: package-bag2, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: package-bag3, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[9]:
     =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
     road: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    capacity: 7 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    capacity-predecessor: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at-vehicle: 7 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    package-less: 6 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    count-package: 8 0 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    package-lte-sum: 6 6 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    package-bag-size: 8 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    capacity: 5 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    capacity-predecessor: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at-vehicle: 5 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    package-less: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    count-package: 6 0 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    package-lte-sum: 4 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    package-bag-size: 6 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[2]:
     road-length: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[3]:
-    drive: ?v:7 ?l1:1 ?l2:1
+    drive: ?v:5 ?l1:1 ?l2:1
         pre: (and (RW:at-vehicle ?v ?l1) (R:road ?l1 ?l2))
         eff: (and (N:RW:at-vehicle ?v ?l1) (RW:at-vehicle ?v ?l2) (increase (total-cost) (road-length ?l1 ?l2)))
-    pick-up: ?v:7 ?l:1 ?p:8 ?s1:4 ?s2:4 ?n1:6 ?n0:6 ?n2:6 ?n3:6 ?p-size:6
+    pick-up: ?v:5 ?l:1 ?p:6 ?s1:3 ?s2:3 ?n1:4 ?n0:4 ?n2:4 ?n3:4 ?p-size:4
         pre: (and (RW:count-package ?p ?l ?n1) (R:package-less ?n0 ?n1) (RW:count-package ?p ?v ?n2) (R:package-less ?n2 ?n3) (RW:at-vehicle ?v ?l) (R:capacity-predecessor ?s1 ?s2) (RW:capacity ?v ?s2) (R:package-lte-sum ?n1 ?n2 ?p-size) (R:package-bag-size ?p ?p-size))
         eff: (and (RW:count-package ?p ?l ?n0) (N:RW:count-package ?p ?l ?n1) (RW:count-package ?p ?v ?n3) (N:RW:count-package ?p ?v ?n2) (RW:capacity ?v ?s1) (N:RW:capacity ?v ?s2) (increase (total-cost) 1))
-    drop: ?v:7 ?l:1 ?p:8 ?s1:4 ?s2:4 ?n1:6 ?n0:6 ?n2:6 ?n3:6 ?p-size:6
+    drop: ?v:5 ?l:1 ?p:6 ?s1:3 ?s2:3 ?n1:4 ?n0:4 ?n2:4 ?n3:4 ?p-size:4
         pre: (and (RW:count-package ?p ?v ?n1) (R:package-less ?n0 ?n1) (RW:count-package ?p ?l ?n2) (R:package-less ?n2 ?n3) (RW:at-vehicle ?v ?l) (R:capacity-predecessor ?s1 ?s2) (RW:capacity ?v ?s1) (R:package-lte-sum ?n1 ?n2 ?p-size) (R:package-bag-size ?p ?p-size))
         eff: (and (RW:count-package ?p ?v ?n0) (N:RW:count-package ?p ?v ?n1) (RW:count-package ?p ?l ?n3) (N:RW:count-package ?p ?l ?n2) (RW:capacity ?v ?s2) (N:RW:capacity ?v ?s1) (increase (total-cost) 1))
 Init[75]:

@@ -57,7 +57,7 @@ Action[10]:
         pre: (and (R:bacterium ?x) (R:antibiotic ?z) (N:R:= ?x ?y) (N:R:= ?y ?z) (N:R:= ?x ?z) (R:resists ?z ?y) (RW:contains ?y ?x))
         eff: (and (W:pure ?x))
     ligate: ?x:0 ?y:0
-        pre: (and (N:R:= linker ?y) (RW:double-strand ?y) (R:= ?x linker))
+        pre: (and (N:R:= ?y linker) (RW:double-strand ?y) (R:= ?x linker))
         eff: (and (RW:cleavable ?y))
     ligate: ?x:0 ?y:0
         pre: (and (N:R:= ?x ?y) (RW:NOT-double-strand ?y) (RW:cleaved ?x) (RW:cleaved ?y) (N:R:= ?x linker))
