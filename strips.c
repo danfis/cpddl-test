@@ -50,6 +50,19 @@ TEST(strips, lmg)
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
+TEST(strips_ground_unit_cost, pddl_unit_cost)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    C.strips_set = 1;
+
+    if (C.strips.has_cond_eff)
+        pddlStripsCompileAwayCondEff(&C.strips);
+    assert(!C.strips.has_cond_eff);
+    pddlStripsPrintDebug(&C.strips, stdout);
+}
+
 TEST(strips_pruned, strips)
 {
     pddlMutexPairsInitStrips(&C.mutex, &C.strips);

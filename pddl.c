@@ -18,6 +18,23 @@ TEST(pddl, r)
     pddlPrintDebug(&C.pddl, stdout);
 }
 
+TEST(pddl_unit_cost, r)
+{
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 1;
+    cfg.force_adl = 1;
+    cfg.enforce_unit_cost = 1;
+    int ret = pddlInit(&C.pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        borErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+    C.pddl_set = 1;
+
+    pddlCheckSizeTypes(&C.pddl);
+    pddlPrintDebug(&C.pddl, stdout);
+}
+
 TEST(pddl_compile_away_cond_eff, pddl)
 {
     pddlCompileAwayNonStaticCondEff(&C.pddl);
