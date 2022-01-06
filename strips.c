@@ -140,3 +140,16 @@ TEST(strips_useless_del_effs, strips)
     pddlMutexPairsFree(&mutex);
     pddlStripsFree(&strips);
 }
+
+TEST_COND(ground_layered, lmg, SQLITE)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    pddl_ground_atoms_t ga;
+    pddlGroundAtomsInit(&ga);
+    int ret = pddlStripsGroundSqlLayered(&C.pddl, &ground_cfg, 2, INT_MAX,
+                                         NULL, &ga, &C.err);
+    assert(ret == 0);
+
+    pddlGroundAtomsPrint(&ga, &C.pddl, stdout);
+    pddlGroundAtomsFree(&ga);
+}
