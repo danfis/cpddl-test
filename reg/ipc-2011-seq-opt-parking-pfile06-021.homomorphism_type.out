@@ -1,0 +1,90 @@
+Collapsing type 1:car with 18 objects
+Reduced 28 -> 11
+Domain: parking
+Problem: parking
+Require: 200ff
+Type[3]:
+    [0]: object, parent: -1
+    [1]: car, parent: 0
+    [2]: curb, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10
+    [1]: 0
+    [2]: 1 2 3 4 5 6 7 8 9 10
+Obj[11]:
+    [0]: car_00, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: curb_0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: curb_1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: curb_2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: curb_3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: curb_4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: curb_5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: curb_6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: curb_7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: curb_8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: curb_9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[6]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    at-curb: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at-curb-num: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    behind-car: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    car-clear: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    curb-clear: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[1]:
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+Action[4]:
+    move-curb-to-curb: ?car:1 ?curbsrc:2 ?curbdest:2
+        pre: (and (RW:car-clear ?car) (RW:curb-clear ?curbdest) (RW:at-curb-num ?car ?curbsrc))
+        eff: (and (N:RW:curb-clear ?curbdest) (RW:curb-clear ?curbsrc) (RW:at-curb-num ?car ?curbdest) (increase (total-cost) 1))
+    move-curb-to-car: ?car:1 ?curbsrc:2 ?cardest:1
+        pre: (and (RW:car-clear ?car) (RW:car-clear ?cardest) (RW:at-curb-num ?car ?curbsrc) (RW:at-curb ?cardest))
+        eff: (and (RW:curb-clear ?curbsrc) (RW:behind-car ?car ?cardest) (increase (total-cost) 1))
+    move-car-to-curb: ?car:1 ?carsrc:1 ?curbdest:2
+        pre: (and (RW:car-clear ?car) (RW:curb-clear ?curbdest) (RW:behind-car ?car ?carsrc))
+        eff: (and (N:RW:curb-clear ?curbdest) (RW:car-clear ?carsrc) (RW:at-curb-num ?car ?curbdest) (RW:at-curb ?car) (increase (total-cost) 1))
+    move-car-to-car: ?car:1 ?carsrc:1 ?cardest:1
+        pre: (and (RW:car-clear ?car) (RW:car-clear ?cardest) (RW:behind-car ?car ?carsrc) (RW:at-curb ?cardest))
+        eff: (and (RW:car-clear ?carsrc) (RW:behind-car ?car ?cardest) (increase (total-cost) 1))
+Init[38]:
+  (at-curb car_00)
+  (at-curb-num car_00 curb_0)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_1)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_2)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_3)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_4)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_5)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_6)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_7)
+  (behind-car car_00 car_00)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_8)
+  (car-clear car_00)
+  (at-curb car_00)
+  (at-curb-num car_00 curb_9)
+  (car-clear car_00)
+Init[1]:
+  (= (total-cost) 0)
+Goal: (and (RW:at-curb-num car_00 curb_0) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_1) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_2) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_3) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_4) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_5) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_6) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_7) (RW:behind-car car_00 car_00) (RW:at-curb-num car_00 curb_8) (RW:at-curb-num car_00 curb_9))
+Metric: 1

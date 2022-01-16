@@ -1,0 +1,62 @@
+Reduced 25 -> 4
+Domain: movie-strips
+Problem: strips-movie-x-1
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3
+Obj[4]:
+    [0]: c5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: d5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: z5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: k5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[15]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    movie-rewound: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    counter-at-two-hours: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    counter-at-other-than-two-hours: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    counter-at-zero: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-chips: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-dip: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-pop: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-cheese: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    have-crackers: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    chips: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    dip: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pop: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    cheese: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    crackers: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[7]:
+    get-crackers: ?x:0
+        pre: (and (R:crackers ?x))
+        eff: (and (W:have-crackers))
+    rewind-movie: 
+        pre: (and)
+        eff: (and (W:movie-rewound) (N:W:counter-at-zero))
+    reset-counter: 
+        pre: (and)
+        eff: (and (W:counter-at-zero))
+    get-chips: ?x:0
+        pre: (and (R:chips ?x))
+        eff: (and (W:have-chips))
+    get-dip: ?x:0
+        pre: (and (R:dip ?x))
+        eff: (and (W:have-dip))
+    get-pop: ?x:0
+        pre: (and (R:pop ?x))
+        eff: (and (W:have-pop))
+    get-cheese: ?x:0
+        pre: (and (R:cheese ?x))
+        eff: (and (W:have-cheese))
+Init[6]:
+  S:(chips c5)
+  S:(dip d5)
+  S:(pop c5)
+  S:(cheese z5)
+  S:(crackers k5)
+  S:(counter-at-other-than-two-hours)
+Init[0]:
+Goal: (and (W:movie-rewound) (W:counter-at-zero) (W:have-chips) (W:have-dip) (W:have-pop) (W:have-cheese) (W:have-crackers))
+Metric: 0

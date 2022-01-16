@@ -1,0 +1,153 @@
+Collapsing type 1:document with 33 objects
+Reduced 60 -> 28
+Domain: document
+Problem: unsolv-problem-1
+Require: ff
+Type[3]:
+    [0]: object, parent: -1
+    [1]: document, parent: 0
+    [2]: location, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+    [1]: 1
+    [2]: 0 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+Obj[28]:
+    [0]: office, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: fuel1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: office1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: office2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: office3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: office4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: office5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: office6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: office7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: office8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: office9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: office10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: office11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: office12, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: office13, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: office14, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: office15, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: office16, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: office17, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: office18, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: office19, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: office20, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [22]: office21, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [23]: office22, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [24]: office23, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [25]: office24, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [26]: office25, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [27]: depot, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[5]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    track: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in-train: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    train-at: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[0]:
+Action[3]:
+    drive: ?l1:2 ?l2:2 ?g:1
+        pre: (and (RW:train-at ?l1) (R:track ?l1 ?l2) (RW:in-train ?g))
+        eff: (and (N:RW:train-at ?l1) (RW:train-at ?l2))
+    pickup-documents: ?l:2 ?d:1
+        pre: (and (RW:train-at ?l) (RW:at ?d ?l))
+        eff: (and (RW:in-train ?d))
+    deposit-documents: ?l:2 ?d:1
+        pre: (and (RW:train-at ?l) (RW:in-train ?d))
+        eff: (and (RW:at ?d ?l))
+Init[90]:
+  (train-at office1)
+  (in-train fuel1)
+  (in-train fuel1)
+  (at fuel1 office7)
+  (at fuel1 office7)
+  (at fuel1 office7)
+  (at fuel1 office7)
+  (at fuel1 office7)
+  (at fuel1 office7)
+  (at fuel1 office11)
+  (at fuel1 office11)
+  (at fuel1 office11)
+  (at fuel1 office11)
+  (at fuel1 office11)
+  (at fuel1 office11)
+  (at fuel1 office11)
+  (at fuel1 office12)
+  (at fuel1 office12)
+  (at fuel1 office12)
+  (at fuel1 office12)
+  (at fuel1 office12)
+  (at fuel1 office14)
+  (at fuel1 office14)
+  (at fuel1 office14)
+  (at fuel1 office14)
+  (at fuel1 office14)
+  (at fuel1 office16)
+  (at fuel1 office16)
+  (at fuel1 office16)
+  (at fuel1 office25)
+  (at fuel1 office25)
+  (at fuel1 office25)
+  (at fuel1 office25)
+  (at fuel1 office25)
+  S:(track office1 office)
+  S:(track office1 office2)
+  S:(track office2 office15)
+  S:(track office2 office1)
+  S:(track office2 office3)
+  S:(track office3 office)
+  S:(track office3 office4)
+  S:(track office4 office21)
+  S:(track office4 office5)
+  S:(track office5 office8)
+  S:(track office5 office6)
+  S:(track office6 office)
+  S:(track office6 office7)
+  S:(track office7 office)
+  S:(track office7 office8)
+  S:(track office8 office5)
+  S:(track office8 office9)
+  S:(track office9 office24)
+  S:(track office9 office10)
+  S:(track office10 office)
+  S:(track office10 office11)
+  S:(track office11 office15)
+  S:(track office11 office12)
+  S:(track office12 office)
+  S:(track office12 office13)
+  S:(track office13 office)
+  S:(track office13 office14)
+  S:(track office14 office21)
+  S:(track office14 office15)
+  S:(track office15 office2)
+  S:(track office15 office7)
+  S:(track office15 office16)
+  S:(track office16 office)
+  S:(track office16 office17)
+  S:(track office17 office5)
+  S:(track office17 office18)
+  S:(track office18 office)
+  S:(track office18 office19)
+  S:(track office19 office)
+  S:(track office19 office20)
+  S:(track office20 office)
+  S:(track office20 office21)
+  S:(track office21 office6)
+  S:(track office21 office23)
+  S:(track office21 office22)
+  S:(track office22 office)
+  S:(track office22 office23)
+  S:(track office23 office8)
+  S:(track office23 office24)
+  S:(track office24 office24)
+  S:(track office24 office6)
+  S:(track office24 office25)
+  S:(track office25 office24)
+  S:(track office25 office25)
+  S:(track office25 depot)
+  S:(track depot office)
+Init[0]:
+Goal: (and (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot) (RW:at fuel1 depot))
+Metric: 0

@@ -1,0 +1,94 @@
+Reduced 17 -> 7
+Domain: cave-diving-strips
+Problem: cave-diving-strips-prob01
+Require: ff
+Type[5]:
+    [0]: object, parent: -1
+    [1]: location, parent: 0
+    [2]: diver, parent: 0
+    [3]: tank, parent: 0
+    [4]: quantity, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6
+    [1]: 1 2
+    [2]: 0
+    [3]: 3 4 5
+    [4]: 6
+Obj[7]:
+    [0]: d0, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: l0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: t0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: t3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: t4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: zero, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[16]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    at-tank: 3 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in-storage: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    full: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    next-tank: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at-diver: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    available: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at-surface: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    decompressing: 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    cave-entrance: 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    connected: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    next-quantity: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    holding: 2 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    capacity: 2 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    have-photo: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    in-water: :: is-private: 0, owner-param: -1, read: 0, write: 1
+Function[0]:
+Action[9]:
+    hire-diver-d0: 
+        pre: (and (RW:available d0))
+        eff: (and (RW:at-surface d0) (N:RW:available d0))
+    hire-diver-d1: 
+        pre: (and (RW:available d0))
+        eff: (and (RW:at-surface d0) (N:RW:available d0))
+    prepare-tank: ?d:2 ?t1:3 ?t2:3 ?q1:4 ?q2:4
+        pre: (and (RW:at-surface ?d) (RW:in-storage ?t1) (R:next-quantity ?q1 ?q2) (RW:capacity ?d ?q2) (R:next-tank ?t1 ?t2))
+        eff: (and (RW:in-storage ?t2) (RW:full ?t1) (RW:capacity ?d ?q1) (RW:holding ?d ?t1))
+    enter-water: ?d:2 ?l:1
+        pre: (and (RW:at-surface ?d) (R:cave-entrance ?l))
+        eff: (and (RW:at-diver ?d ?l))
+    pickup-tank: ?d:2 ?t:3 ?l:1 ?q1:4 ?q2:4
+        pre: (and (RW:at-diver ?d ?l) (RW:at-tank ?t ?l) (R:next-quantity ?q1 ?q2) (RW:capacity ?d ?q2))
+        eff: (and (RW:holding ?d ?t) (RW:capacity ?d ?q1))
+    drop-tank: ?d:2 ?t:3 ?l:1 ?q1:4 ?q2:4
+        pre: (and (RW:at-diver ?d ?l) (RW:holding ?d ?t) (R:next-quantity ?q1 ?q2) (RW:capacity ?d ?q1))
+        eff: (and (RW:at-tank ?t ?l) (RW:capacity ?d ?q2))
+    swim: ?d:2 ?t:3 ?l1:1 ?l2:1
+        pre: (and (RW:at-diver ?d ?l1) (RW:holding ?d ?t) (RW:full ?t) (R:connected ?l1 ?l2))
+        eff: (and (RW:at-diver ?d ?l2))
+    photograph: ?d:2 ?l:1 ?t:3
+        pre: (and (RW:at-diver ?d ?l) (RW:holding ?d ?t) (RW:full ?t))
+        eff: (and (W:have-photo ?l))
+    decompress: ?d:2 ?l:1
+        pre: (and (RW:at-diver ?d ?l) (R:cave-entrance ?l))
+        eff: (and (W:decompressing ?d) (N:W:in-water))
+Init[20]:
+  (available d0)
+  (available d0)
+  (capacity d0 zero)
+  (capacity d0 zero)
+  (in-storage t0)
+  S:(next-tank t0 t0)
+  S:(next-tank t0 t0)
+  S:(next-tank t0 t3)
+  S:(next-tank t3 t4)
+  S:(next-tank t4 t0)
+  S:(next-tank t0 t0)
+  S:(cave-entrance l0)
+  S:(connected l0 l1)
+  S:(connected l1 l0)
+  S:(connected l1 l0)
+  S:(connected l0 l1)
+  S:(next-quantity zero zero)
+  S:(next-quantity zero zero)
+  S:(next-quantity zero zero)
+  S:(next-quantity zero zero)
+Init[0]:
+Goal: (and (W:have-photo l0) (W:decompressing d0) (W:decompressing d0))
+Metric: 0

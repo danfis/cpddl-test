@@ -1,0 +1,104 @@
+Reduced 16 -> 6
+Domain: trucks
+Problem: truck-1
+Require: ff
+Type[7]:
+    [0]: object, parent: -1
+    [1]: truckarea, parent: 0
+    [2]: time, parent: 0
+    [3]: location, parent: 0
+    [4]: locatable, parent: 0
+    [5]: truck, parent: 4
+    [6]: package, parent: 4
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5
+    [1]: 5
+    [2]: 3 4
+    [3]: 2
+    [4]: 0 1
+    [5]: 0
+    [6]: 1
+Obj[6]:
+    [0]: truck1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: package1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: l1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: t0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: t2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: a1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[11]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 4 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 6 5 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    connected: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    free: 1 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    time-now: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    next: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    le: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    delivered: 6 3 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    at-destination: 6 3 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    closer: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+Function[0]:
+Action[6]:
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t))
+        eff: (and (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    unload: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:in ?p ?t a1))
+        eff: (and (RW:free a1 ?t) (RW:at ?p ?l))
+    drive: ?t:5 ?from:3 ?to:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?t ?from) (R:connected ?from ?to) (RW:time-now ?t1) (R:next ?t1 ?t2))
+        eff: (and (RW:time-now ?t2) (RW:at ?t ?to))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2))
+        eff: (and (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (RW:free a1 ?t))
+        eff: (and (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    unload: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:in ?p ?t a1) (RW:free a1 ?t))
+        eff: (and (RW:free a1 ?t) (RW:at ?p ?l))
+Init[41]:
+  (at truck1 l1)
+  (free a1 truck1)
+  (free a1 truck1)
+  S:(closer a1 a1)
+  (at package1 l1)
+  (at package1 l1)
+  (at package1 l1)
+  S:(connected l1 l1)
+  S:(connected l1 l1)
+  S:(connected l1 l1)
+  S:(connected l1 l1)
+  S:(connected l1 l1)
+  S:(connected l1 l1)
+  (time-now t0)
+  S:(le t0 t0)
+  S:(le t0 t2)
+  S:(le t0 t0)
+  S:(le t0 t2)
+  S:(le t0 t2)
+  S:(le t0 t0)
+  S:(le t2 t2)
+  S:(le t2 t0)
+  S:(le t2 t2)
+  S:(le t2 t2)
+  S:(le t2 t0)
+  S:(le t0 t0)
+  S:(le t0 t2)
+  S:(le t0 t2)
+  S:(le t0 t0)
+  S:(le t2 t2)
+  S:(le t2 t2)
+  S:(le t2 t0)
+  S:(le t2 t2)
+  S:(le t2 t0)
+  S:(le t0 t0)
+  S:(next t0 t0)
+  S:(next t0 t2)
+  S:(next t2 t0)
+  S:(next t0 t2)
+  S:(next t2 t2)
+  S:(next t2 t0)
+Init[0]:
+Goal: (and (W:delivered package1 l1 t0) (W:at-destination package1 l1) (W:delivered package1 l1 t0))
+Metric: 0

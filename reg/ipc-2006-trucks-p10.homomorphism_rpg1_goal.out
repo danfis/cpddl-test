@@ -1,0 +1,211 @@
+Reduced 30 -> 29
+Domain: trucks
+Problem: truck-10
+Require: ff
+Type[7]:
+    [0]: object, parent: -1
+    [1]: truckarea, parent: 0
+    [2]: time, parent: 0
+    [3]: location, parent: 0
+    [4]: locatable, parent: 0
+    [5]: truck, parent: 4
+    [6]: package, parent: 4
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
+    [1]: 26 27 28
+    [2]: 14 15 16 17 18 19 20 21 22 23 24 25
+    [3]: 10 11 12 13
+    [4]: 0 1 2 3 4 5 6 7 8 9
+    [5]: 0
+    [6]: 1 2 3 4 5 6 7 8 9
+Obj[29]:
+    [0]: truck1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: package1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: package2, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: package3, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: package4, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: package5, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: package6, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: package7, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: package8, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: package9, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: l1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: l2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: l3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: l4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: t0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: t2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: t3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: t4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: t5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: t6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: t7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: t8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [22]: t9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [23]: t10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [24]: t11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [25]: t12, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [26]: a1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [27]: a2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [28]: a3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[11]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 4 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 6 5 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    connected: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    free: 1 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    time-now: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    next: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    le: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    delivered: 6 3 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    at-destination: 6 3 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    closer: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+Function[0]:
+Action[8]:
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    unload: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:in ?p ?t a1))
+        eff: (and (N:RW:in ?p ?t a1) (RW:free a1 ?t) (RW:at ?p ?l))
+    drive: ?t:5 ?from:3 ?to:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?t ?from) (R:connected ?from ?to) (RW:time-now ?t1) (R:next ?t1 ?t2))
+        eff: (and (N:RW:at ?t ?from) (RW:time-now ?t2) (RW:at ?t ?to))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    unload: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:in ?p ?t a2) (RW:free a1 ?t))
+        eff: (and (N:RW:in ?p ?t a2) (RW:free a2 ?t) (RW:at ?p ?l))
+    unload: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:in ?p ?t a3) (RW:free a1 ?t) (RW:free a2 ?t))
+        eff: (and (N:RW:in ?p ?t a3) (RW:free a3 ?t) (RW:at ?p ?l))
+Init[119]:
+  (at truck1 l3)
+  (free a1 truck1)
+  (free a2 truck1)
+  (free a3 truck1)
+  S:(closer a1 a2)
+  S:(closer a1 a3)
+  S:(closer a2 a3)
+  (at package1 l2)
+  (at package2 l2)
+  (at package3 l2)
+  (at package4 l4)
+  (at package5 l4)
+  (at package6 l4)
+  (at package7 l2)
+  (at package8 l2)
+  (at package9 l2)
+  S:(connected l1 l2)
+  S:(connected l1 l3)
+  S:(connected l1 l4)
+  S:(connected l2 l1)
+  S:(connected l2 l3)
+  S:(connected l2 l4)
+  S:(connected l3 l1)
+  S:(connected l3 l2)
+  S:(connected l3 l4)
+  S:(connected l4 l1)
+  S:(connected l4 l2)
+  S:(connected l4 l3)
+  (time-now t0)
+  S:(le t0 t0)
+  S:(le t0 t2)
+  S:(le t0 t3)
+  S:(le t0 t4)
+  S:(le t0 t5)
+  S:(le t0 t6)
+  S:(le t0 t7)
+  S:(le t0 t8)
+  S:(le t0 t9)
+  S:(le t0 t10)
+  S:(le t0 t11)
+  S:(le t0 t12)
+  S:(le t2 t2)
+  S:(le t2 t3)
+  S:(le t2 t4)
+  S:(le t2 t5)
+  S:(le t2 t6)
+  S:(le t2 t7)
+  S:(le t2 t8)
+  S:(le t2 t9)
+  S:(le t2 t10)
+  S:(le t2 t11)
+  S:(le t2 t12)
+  S:(le t3 t3)
+  S:(le t3 t4)
+  S:(le t3 t5)
+  S:(le t3 t6)
+  S:(le t3 t7)
+  S:(le t3 t8)
+  S:(le t3 t9)
+  S:(le t3 t10)
+  S:(le t3 t11)
+  S:(le t3 t12)
+  S:(le t4 t4)
+  S:(le t4 t5)
+  S:(le t4 t6)
+  S:(le t4 t7)
+  S:(le t4 t8)
+  S:(le t4 t9)
+  S:(le t4 t10)
+  S:(le t4 t11)
+  S:(le t4 t12)
+  S:(le t5 t5)
+  S:(le t5 t6)
+  S:(le t5 t7)
+  S:(le t5 t8)
+  S:(le t5 t9)
+  S:(le t5 t10)
+  S:(le t5 t11)
+  S:(le t5 t12)
+  S:(le t6 t6)
+  S:(le t6 t7)
+  S:(le t6 t8)
+  S:(le t6 t9)
+  S:(le t6 t10)
+  S:(le t6 t11)
+  S:(le t6 t12)
+  S:(le t7 t7)
+  S:(le t7 t8)
+  S:(le t7 t9)
+  S:(le t7 t10)
+  S:(le t7 t11)
+  S:(le t7 t12)
+  S:(le t8 t8)
+  S:(le t8 t9)
+  S:(le t8 t10)
+  S:(le t8 t11)
+  S:(le t8 t12)
+  S:(le t9 t9)
+  S:(le t9 t10)
+  S:(le t9 t11)
+  S:(le t9 t12)
+  S:(le t10 t10)
+  S:(le t10 t11)
+  S:(le t10 t12)
+  S:(le t11 t11)
+  S:(le t11 t12)
+  S:(le t12 t12)
+  S:(next t0 t0)
+  S:(next t0 t2)
+  S:(next t2 t3)
+  S:(next t3 t4)
+  S:(next t4 t5)
+  S:(next t5 t6)
+  S:(next t6 t7)
+  S:(next t7 t8)
+  S:(next t8 t9)
+  S:(next t9 t10)
+  S:(next t10 t11)
+  S:(next t11 t12)
+Init[0]:
+Goal: (and (W:delivered package1 l4 t4) (W:delivered package2 l3 t4) (W:at-destination package3 l1) (W:at-destination package4 l1) (W:at-destination package5 l1) (W:delivered package6 l1 t8) (W:at-destination package7 l1) (W:delivered package8 l3 t12) (W:delivered package9 l3 t12))
+Metric: 0

@@ -1,0 +1,137 @@
+Reduced 13 -> 3
+Domain: rover
+Problem: roverprob1234
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2
+Obj[3]:
+    [0]: general, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: colour, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: low_res, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[33]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at_lander: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    can_traverse: 0 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    equipped_for_soil_analysis: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    equipped_for_rock_analysis: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    equipped_for_imaging: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    empty: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    have_rock_analysis: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    have_soil_analysis: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    full: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    calibrated: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    supports: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    available: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    visible: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    have_image: 0 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    communicated_soil_data: 0 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    communicated_rock_data: 0 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    communicated_image_data: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    at_soil_sample: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at_rock_sample: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    visible_from: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    store_of: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    calibration_target: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    on_board: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    channel_free: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    rover: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    waypoint: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    store: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    camera: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    mode: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    lander: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    objective: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[9]:
+    navigate: ?x:0 ?y:0 ?z:0
+        pre: (and (R:rover ?x) (R:waypoint ?y) (R:waypoint ?z) (R:can_traverse ?x ?y ?z) (RW:available ?x) (RW:at ?x ?y) (R:visible ?y ?z))
+        eff: (and (RW:at ?x ?z))
+    sample_soil: ?x:0 ?s:0 ?p:0
+        pre: (and (R:rover ?x) (R:store ?s) (R:waypoint ?p) (RW:at ?x ?p) (RW:at_soil_sample ?p) (R:equipped_for_soil_analysis ?x) (R:store_of ?s ?x) (RW:empty ?s))
+        eff: (and (RW:full ?s) (RW:have_soil_analysis ?x ?p))
+    sample_rock: ?x:0 ?s:0 ?p:0
+        pre: (and (R:rover ?x) (R:store ?s) (R:waypoint ?p) (RW:at ?x ?p) (RW:at_rock_sample ?p) (R:equipped_for_rock_analysis ?x) (R:store_of ?s ?x) (RW:empty ?s))
+        eff: (and (RW:full ?s) (RW:have_rock_analysis ?x ?p))
+    drop: ?x:0 ?y:0
+        pre: (and (R:rover ?x) (R:store ?y) (R:store_of ?y ?x) (RW:full ?y))
+        eff: (and (RW:empty ?y))
+    calibrate: ?r:0 ?i:0 ?t:0 ?w:0
+        pre: (and (R:rover ?r) (R:camera ?i) (R:objective ?t) (R:waypoint ?w) (R:equipped_for_imaging ?r) (R:calibration_target ?i ?t) (RW:at ?r ?w) (R:visible_from ?t ?w) (R:on_board ?i ?r))
+        eff: (and (RW:calibrated ?i ?r))
+    take_image: ?r:0 ?p:0 ?o:0 ?i:0 ?m:0
+        pre: (and (R:rover ?r) (R:waypoint ?p) (R:objective ?o) (R:camera ?i) (R:mode ?m) (RW:calibrated ?i ?r) (R:on_board ?i ?r) (R:equipped_for_imaging ?r) (R:supports ?i ?m) (R:visible_from ?o ?p) (RW:at ?r ?p))
+        eff: (and (RW:have_image ?r ?o ?m))
+    communicate_soil_data: ?r:0 ?l:0 ?p:0 ?x:0 ?y:0
+        pre: (and (R:rover ?r) (R:lander ?l) (R:waypoint ?p) (R:waypoint ?x) (R:waypoint ?y) (RW:at ?r ?x) (R:at_lander ?l ?y) (RW:have_soil_analysis ?r ?p) (R:visible ?x ?y) (RW:available ?r) (RW:channel_free ?l))
+        eff: (and (RW:channel_free ?l) (W:communicated_soil_data ?p) (RW:available ?r))
+    communicate_rock_data: ?r:0 ?l:0 ?p:0 ?x:0 ?y:0
+        pre: (and (R:rover ?r) (R:lander ?l) (R:waypoint ?p) (R:waypoint ?x) (R:waypoint ?y) (RW:at ?r ?x) (R:at_lander ?l ?y) (RW:have_rock_analysis ?r ?p) (R:visible ?x ?y) (RW:available ?r) (RW:channel_free ?l))
+        eff: (and (RW:channel_free ?l) (W:communicated_rock_data ?p) (RW:available ?r))
+    communicate_image_data: ?r:0 ?l:0 ?o:0 ?m:0 ?x:0 ?y:0
+        pre: (and (R:rover ?r) (R:lander ?l) (R:objective ?o) (R:mode ?m) (R:waypoint ?x) (R:waypoint ?y) (RW:at ?r ?x) (R:at_lander ?l ?y) (RW:have_image ?r ?o ?m) (R:visible ?x ?y) (RW:available ?r) (RW:channel_free ?l))
+        eff: (and (RW:channel_free ?l) (W:communicated_image_data ?o ?m) (RW:available ?r))
+Init[58]:
+  S:(visible colour general)
+  S:(visible general colour)
+  S:(visible colour general)
+  S:(visible general colour)
+  S:(visible colour colour)
+  S:(visible colour colour)
+  S:(visible colour general)
+  S:(visible general colour)
+  S:(visible colour colour)
+  S:(visible colour colour)
+  S:(visible colour colour)
+  S:(visible colour colour)
+  S:(lander general)
+  S:(mode colour)
+  S:(mode colour)
+  S:(mode low_res)
+  S:(waypoint general)
+  (at_soil_sample general)
+  S:(waypoint colour)
+  (at_rock_sample colour)
+  S:(waypoint colour)
+  (at_soil_sample colour)
+  (at_rock_sample colour)
+  S:(waypoint colour)
+  (at_soil_sample colour)
+  (at_rock_sample colour)
+  S:(at_lander general general)
+  (channel_free general)
+  S:(rover colour)
+  S:(store colour)
+  (at colour colour)
+  (available colour)
+  S:(store_of colour colour)
+  (empty colour)
+  S:(equipped_for_soil_analysis colour)
+  S:(equipped_for_rock_analysis colour)
+  S:(equipped_for_imaging colour)
+  S:(can_traverse colour colour general)
+  S:(can_traverse colour general colour)
+  S:(can_traverse colour colour colour)
+  S:(can_traverse colour colour colour)
+  S:(can_traverse colour colour colour)
+  S:(can_traverse colour colour colour)
+  S:(camera colour)
+  S:(on_board colour colour)
+  S:(calibration_target colour colour)
+  S:(supports colour colour)
+  S:(supports colour colour)
+  S:(objective colour)
+  S:(visible_from colour general)
+  S:(visible_from colour colour)
+  S:(visible_from colour colour)
+  S:(visible_from colour colour)
+  S:(objective colour)
+  S:(visible_from colour general)
+  S:(visible_from colour colour)
+  S:(visible_from colour colour)
+  S:(visible_from colour colour)
+Init[0]:
+Goal: (and (W:communicated_soil_data colour) (W:communicated_rock_data colour) (W:communicated_image_data colour colour))
+Metric: 0

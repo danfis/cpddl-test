@@ -1,0 +1,346 @@
+Reduced 28 -> 21
+Domain: barman
+Problem: prob
+Require: 200ff
+Type[16]:
+    [0]: object, parent: -1
+    [1]: hand, parent: 0
+    [2]: level, parent: 0
+    [3]: beverage, parent: 0
+    [4]: dispenser, parent: 0
+    [5]: container, parent: 0
+    [6]: hand-property1, parent: 0
+    [7]: hnum, parent: 0
+    [8]: shot-property1, parent: 0
+    [9]: shot-property2, parent: 0
+    [10]: shot-property3, parent: 0
+    [11]: snum, parent: 0
+    [12]: ingredient, parent: 3
+    [13]: cocktail, parent: 3
+    [14]: shot, parent: 5
+    [15]: shaker, parent: 5
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+    [1]: 0
+    [2]: 6
+    [3]: 3 4 5 7 8 9
+    [4]: 12
+    [5]: 10 11
+    [6]: 16
+    [7]: 17 18
+    [8]: 19
+    [9]: 1 2
+    [10]: 20
+    [11]: 13 14 15
+    [12]: 3 4 5
+    [13]: 7 8 9
+    [14]: 10
+    [15]: 11
+Obj[21]:
+    [0]: hand-bag1, type: 1, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: shot-property2-none, type: 9, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [2]: clean-shot-true, type: 9, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [3]: ingredient1, type: 12, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [4]: ingredient2, type: 12, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [5]: ingredient3, type: 12, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [6]: l0, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [7]: cocktail1, type: 13, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [8]: cocktail2, type: 13, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [9]: cocktail3, type: 13, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [10]: shot-bag1, type: 14, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [11]: shaker1, type: 15, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [12]: dispenser1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [13]: snum1, type: 11, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [14]: snum3, type: 11, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [15]: snum0, type: 11, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [16]: handempty-true, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [17]: hnum1, type: 7, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [18]: hnum2, type: 7, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [19]: ontable-true, type: 8, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [20]: empty-shot-true, type: 10, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+Predicate[25]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    ontable: 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    used: 5 3 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    dispenses: 4 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    shaker-empty-level: 15 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    shaker-level: 15 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    next: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    unshaked: 15 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    shaked: 15 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    cocktail-part1: 13 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    cocktail-part2: 13 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    empty-shaker: 15 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    contains-shaker: 15 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    clean-shaker: 15 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    shot-less: 11 11 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    count-shot: 14 0 0 0 11 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    hand-less: 7 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    count-hand: 1 0 7 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    count-shot-goal: 14 0 11 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    count-shot-goal-satisfied: 14 0 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    count-shot-goal-desired-count: 14 0 11 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    shot-lte-sum: 11 11 11 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    shot-bag-size: 14 11 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    hand-lte-sum: 7 7 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    hand-bag-size: 1 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[1]:
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+Action[26]:
+    grasp-shot: ?h:1 ?c:14 ?dc:0 ?dc2:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n6:7 ?n7:7 ?c-size:11 ?h-size:7
+        pre: (and (RW:count-shot ?c ontable-true ?dc ?dc2 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?c ?h ?dc ?dc2 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h handempty-true ?n4) (R:hand-less ?n5 ?n4) (RW:count-hand ?h ?c ?n6) (R:hand-less ?n6 ?n7) (R:shot-lte-sum ?n1 ?n2 ?c-size) (R:shot-bag-size ?c ?c-size) (R:hand-lte-sum ?n4 ?n6 ?h-size) (R:hand-bag-size ?h ?h-size))
+        eff: (and (RW:count-shot ?c ontable-true ?dc ?dc2 ?n0) (RW:count-shot ?c ?h ?dc ?dc2 ?n3) (RW:count-hand ?h handempty-true ?n5) (RW:count-hand ?h ?c ?n7) (increase (total-cost) 1))
+    grasp-shaker: ?h:1 ?c:15 ?n1:7 ?n0:7 ?n2:7 ?n3:7 ?h-size:7
+        pre: (and (RW:count-hand ?h handempty-true ?n1) (R:hand-less ?n0 ?n1) (RW:count-hand ?h ?c ?n2) (R:hand-less ?n2 ?n3) (RW:ontable ?c) (R:hand-lte-sum ?n1 ?n2 ?h-size) (R:hand-bag-size ?h ?h-size))
+        eff: (and (RW:count-hand ?h handempty-true ?n0) (RW:count-hand ?h ?c ?n3) (N:RW:ontable ?c) (increase (total-cost) 1))
+    leave-shot: ?h:1 ?c:14 ?dc:0 ?dc2:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n6:7 ?n7:7 ?c-size:11 ?h-size:7
+        pre: (and (RW:count-shot ?c ?h ?dc ?dc2 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?c ontable-true ?dc ?dc2 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?c ?n4) (R:hand-less ?n5 ?n4) (RW:count-hand ?h handempty-true ?n6) (R:hand-less ?n6 ?n7) (R:shot-lte-sum ?n1 ?n2 ?c-size) (R:shot-bag-size ?c ?c-size) (R:hand-lte-sum ?n4 ?n6 ?h-size) (R:hand-bag-size ?h ?h-size))
+        eff: (and (RW:count-shot ?c ?h ?dc ?dc2 ?n0) (RW:count-shot ?c ontable-true ?dc ?dc2 ?n3) (RW:count-hand ?h ?c ?n5) (RW:count-hand ?h handempty-true ?n7) (increase (total-cost) 1))
+    leave-shaker: ?h:1 ?c:15 ?n1:7 ?n0:7 ?n2:7 ?n3:7 ?h-size:7
+        pre: (and (RW:count-hand ?h ?c ?n1) (R:hand-less ?n0 ?n1) (RW:count-hand ?h handempty-true ?n2) (R:hand-less ?n2 ?n3) (R:hand-lte-sum ?n1 ?n2 ?h-size) (R:hand-bag-size ?h ?h-size))
+        eff: (and (RW:count-hand ?h ?c ?n0) (RW:count-hand ?h handempty-true ?n3) (RW:ontable ?c) (increase (total-cost) 1))
+    fill-shot: ?s:14 ?i:12 ?h1:1 ?h2:1 ?d:4 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n6:7 ?n7:7 ?s-size:11
+        pre: (and (RW:count-shot ?s ?h1 clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?s ?h1 ?i ?i ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h1 ?s ?n4) (R:hand-less ?n5 ?n4) (RW:count-hand ?h2 handempty-true ?n6) (R:hand-less ?n7 ?n6) (R:dispenses ?d ?i) (R:shot-lte-sum ?n1 ?n2 ?s-size) (R:shot-bag-size ?s ?s-size))
+        eff: (and (RW:count-shot ?s ?h1 clean-shot-true empty-shot-true ?n0) (RW:count-shot ?s ?h1 ?i ?i ?n3) (increase (total-cost) 10))
+    refill-shot: ?s:14 ?i:12 ?h1:1 ?h2:1 ?d:4 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n6:7 ?n7:7 ?s-size:11
+        pre: (and (RW:count-shot ?s ?h1 ?i empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?s ?h1 ?i ?i ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h1 ?s ?n4) (R:hand-less ?n5 ?n4) (RW:count-hand ?h2 handempty-true ?n6) (R:hand-less ?n7 ?n6) (R:dispenses ?d ?i) (R:shot-lte-sum ?n1 ?n2 ?s-size) (R:shot-bag-size ?s ?s-size))
+        eff: (and (RW:count-shot ?s ?h1 ?i empty-shot-true ?n0) (RW:count-shot ?s ?h1 ?i ?i ?n3) (increase (total-cost) 10))
+    clean-shot: ?s:14 ?b:3 ?h1:1 ?h2:1 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n6:7 ?n7:7 ?s-size:11
+        pre: (and (RW:count-shot ?s ?h1 ?b empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?s ?h1 clean-shot-true empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h1 ?s ?n4) (R:hand-less ?n5 ?n4) (RW:count-hand ?h2 handempty-true ?n6) (R:hand-less ?n7 ?n6) (R:shot-lte-sum ?n1 ?n2 ?s-size) (R:shot-bag-size ?s ?s-size))
+        eff: (and (RW:count-shot ?s ?h1 ?b empty-shot-true ?n0) (RW:count-shot ?s ?h1 clean-shot-true empty-shot-true ?n3) (increase (total-cost) 1))
+    pour-shot-to-clean-shaker: ?s:14 ?i:12 ?d:15 ?h1:1 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?s-size:11
+        pre: (and (RW:count-shot ?s ?h1 ?dc ?i ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?s ?h1 ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h1 ?s ?n4) (R:hand-less ?n5 ?n4) (RW:empty-shaker ?d) (RW:clean-shaker ?d) (RW:shaker-level ?d ?l) (R:next ?l ?l1) (R:shot-lte-sum ?n1 ?n2 ?s-size) (R:shot-bag-size ?s ?s-size))
+        eff: (and (RW:count-shot ?s ?h1 ?dc ?i ?n0) (RW:count-shot ?s ?h1 ?dc empty-shot-true ?n3) (RW:contains-shaker ?d ?i) (N:RW:empty-shaker ?d) (N:RW:clean-shaker ?d) (RW:unshaked ?d) (RW:shaker-level ?d ?l1) (increase (total-cost) 1))
+    pour-shot-to-used-shaker: ?s:14 ?i:12 ?d:15 ?h1:1 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?s-size:11
+        pre: (and (RW:count-shot ?s ?h1 ?dc ?i ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?s ?h1 ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h1 ?s ?n4) (R:hand-less ?n5 ?n4) (RW:unshaked ?d) (RW:shaker-level ?d ?l) (R:next ?l ?l1) (R:shot-lte-sum ?n1 ?n2 ?s-size) (R:shot-bag-size ?s ?s-size))
+        eff: (and (RW:count-shot ?s ?h1 ?dc ?i ?n0) (RW:count-shot ?s ?h1 ?dc empty-shot-true ?n3) (RW:contains-shaker ?d ?i) (RW:shaker-level ?d ?l1) (increase (total-cost) 1))
+    empty-shaker-act: ?h:1 ?s:15 ?b:13 ?l:2 ?l1:2 ?n1:7 ?n0:7
+        pre: (and (RW:count-hand ?h ?s ?n1) (R:hand-less ?n0 ?n1) (RW:contains-shaker ?s ?b) (RW:shaked ?s) (RW:shaker-level ?s ?l) (R:shaker-empty-level ?s ?l1))
+        eff: (and (N:RW:shaked ?s) (RW:shaker-level ?s ?l1) (N:RW:contains-shaker ?s ?b) (RW:empty-shaker ?s) (increase (total-cost) 1))
+    clean-shaker-act: ?h1:1 ?h2:1 ?s:15 ?n1:7 ?n0:7 ?n2:7 ?n3:7
+        pre: (and (RW:count-hand ?h1 ?s ?n1) (R:hand-less ?n0 ?n1) (RW:count-hand ?h2 handempty-true ?n2) (R:hand-less ?n3 ?n2) (RW:empty-shaker ?s))
+        eff: (and (RW:clean-shaker ?s) (increase (total-cost) 1))
+    shake: ?b:13 ?d1:12 ?d2:12 ?s:15 ?h1:1 ?h2:1 ?n1:7 ?n0:7 ?n2:7 ?n3:7
+        pre: (and (RW:count-hand ?h1 ?s ?n1) (R:hand-less ?n0 ?n1) (RW:count-hand ?h2 handempty-true ?n2) (R:hand-less ?n3 ?n2) (RW:contains-shaker ?s ?d1) (RW:contains-shaker ?s ?d2) (R:cocktail-part1 ?b ?d1) (R:cocktail-part2 ?b ?d2) (RW:unshaked ?s))
+        eff: (and (N:RW:unshaked ?s) (N:RW:contains-shaker ?s ?d1) (N:RW:contains-shaker ?s ?d2) (RW:shaked ?s) (RW:contains-shaker ?s ?b) (increase (total-cost) 1))
+    empty-shot-cocktail3-n: ?h:1 ?p:14 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n0_1:11 ?n1_1:11 ?des:11 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc cocktail3 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (R:shot-less ?n0_1 ?n1_1) (RW:count-shot-goal ?p cocktail3 ?n1_1) (R:count-shot-goal-desired-count ?p cocktail3 ?des) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc cocktail3 ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (RW:count-shot-goal ?p cocktail3 ?n0_1) (increase (total-cost) 1))
+    empty-shot-cocktail3-d: ?h:1 ?p:14 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n0_1:11 ?n1_1:11 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc cocktail3 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (R:shot-less ?n0_1 ?n1_1) (RW:count-shot-goal ?p cocktail3 ?n1_1) (R:count-shot-goal-desired-count ?p cocktail3 ?n1_1) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc cocktail3 ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (RW:count-shot-goal ?p cocktail3 ?n0_1) (N:W:count-shot-goal-satisfied ?p cocktail3) (increase (total-cost) 1))
+    empty-shot-cocktail1-n: ?h:1 ?p:14 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n0_1:11 ?n1_1:11 ?des:11 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc cocktail1 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (R:shot-less ?n0_1 ?n1_1) (RW:count-shot-goal ?p cocktail1 ?n1_1) (R:count-shot-goal-desired-count ?p cocktail1 ?des) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc cocktail1 ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (RW:count-shot-goal ?p cocktail1 ?n0_1) (increase (total-cost) 1))
+    empty-shot-cocktail1-d: ?h:1 ?p:14 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n0_1:11 ?n1_1:11 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc cocktail1 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (R:shot-less ?n0_1 ?n1_1) (RW:count-shot-goal ?p cocktail1 ?n1_1) (R:count-shot-goal-desired-count ?p cocktail1 ?n1_1) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc cocktail1 ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (RW:count-shot-goal ?p cocktail1 ?n0_1) (N:W:count-shot-goal-satisfied ?p cocktail1) (increase (total-cost) 1))
+    empty-shot-cocktail2-n: ?h:1 ?p:14 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n0_1:11 ?n1_1:11 ?des:11 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc cocktail2 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (R:shot-less ?n0_1 ?n1_1) (RW:count-shot-goal ?p cocktail2 ?n1_1) (R:count-shot-goal-desired-count ?p cocktail2 ?des) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc cocktail2 ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (RW:count-shot-goal ?p cocktail2 ?n0_1) (increase (total-cost) 1))
+    empty-shot-cocktail2-d: ?h:1 ?p:14 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n0_1:11 ?n1_1:11 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc cocktail2 ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (R:shot-less ?n0_1 ?n1_1) (RW:count-shot-goal ?p cocktail2 ?n1_1) (R:count-shot-goal-desired-count ?p cocktail2 ?n1_1) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc cocktail2 ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (RW:count-shot-goal ?p cocktail2 ?n0_1) (N:W:count-shot-goal-satisfied ?p cocktail2) (increase (total-cost) 1))
+    empty-shot: ?h:1 ?p:14 ?b:3 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?p-size:11
+        pre: (and (RW:count-shot ?p ?h ?dc ?b ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?p ?h ?dc empty-shot-true ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?p ?n4) (R:hand-less ?n5 ?n4) (N:R:= ?b cocktail3) (N:R:= ?b cocktail1) (N:R:= ?b cocktail2) (R:shot-lte-sum ?n1 ?n2 ?p-size) (R:shot-bag-size ?p ?p-size))
+        eff: (and (RW:count-shot ?p ?h ?dc ?b ?n0) (RW:count-shot ?p ?h ?dc empty-shot-true ?n3) (increase (total-cost) 1))
+    pour-shaker-to-shot-cocktail3-n: ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n2_1:11 ?n3_1:11 ?des:11 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none cocktail3 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s cocktail3) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:shot-less ?n2_1 ?n3_1) (RW:count-shot-goal ?d cocktail3 ?n2_1) (R:count-shot-goal-desired-count ?d cocktail3 ?des) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none cocktail3 ?n3) (RW:shaker-level ?s ?l1) (RW:count-shot-goal ?d cocktail3 ?n3_1) (increase (total-cost) 1))
+    pour-shaker-to-shot-cocktail3-u: ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n2_1:11 ?n3_1:11 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none cocktail3 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s cocktail3) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:shot-less ?n2_1 ?n3_1) (RW:count-shot-goal ?d cocktail3 ?n2_1) (R:count-shot-goal-desired-count ?d cocktail3 ?n3_1) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none cocktail3 ?n3) (RW:shaker-level ?s ?l1) (RW:count-shot-goal ?d cocktail3 ?n3_1) (W:count-shot-goal-satisfied ?d cocktail3) (increase (total-cost) 1))
+    pour-shaker-to-shot-cocktail1-n: ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n2_1:11 ?n3_1:11 ?des:11 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none cocktail1 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s cocktail1) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:shot-less ?n2_1 ?n3_1) (RW:count-shot-goal ?d cocktail1 ?n2_1) (R:count-shot-goal-desired-count ?d cocktail1 ?des) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none cocktail1 ?n3) (RW:shaker-level ?s ?l1) (RW:count-shot-goal ?d cocktail1 ?n3_1) (increase (total-cost) 1))
+    pour-shaker-to-shot-cocktail1-u: ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n2_1:11 ?n3_1:11 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none cocktail1 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s cocktail1) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:shot-less ?n2_1 ?n3_1) (RW:count-shot-goal ?d cocktail1 ?n2_1) (R:count-shot-goal-desired-count ?d cocktail1 ?n3_1) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none cocktail1 ?n3) (RW:shaker-level ?s ?l1) (RW:count-shot-goal ?d cocktail1 ?n3_1) (W:count-shot-goal-satisfied ?d cocktail1) (increase (total-cost) 1))
+    pour-shaker-to-shot-cocktail2-n: ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n2_1:11 ?n3_1:11 ?des:11 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none cocktail2 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s cocktail2) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:shot-less ?n2_1 ?n3_1) (RW:count-shot-goal ?d cocktail2 ?n2_1) (R:count-shot-goal-desired-count ?d cocktail2 ?des) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none cocktail2 ?n3) (RW:shaker-level ?s ?l1) (RW:count-shot-goal ?d cocktail2 ?n3_1) (increase (total-cost) 1))
+    pour-shaker-to-shot-cocktail2-u: ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n2_1:11 ?n3_1:11 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none cocktail2 ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s cocktail2) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:shot-less ?n2_1 ?n3_1) (RW:count-shot-goal ?d cocktail2 ?n2_1) (R:count-shot-goal-desired-count ?d cocktail2 ?n3_1) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none cocktail2 ?n3) (RW:shaker-level ?s ?l1) (RW:count-shot-goal ?d cocktail2 ?n3_1) (W:count-shot-goal-satisfied ?d cocktail2) (increase (total-cost) 1))
+    pour-shaker-to-shot: ?b:3 ?d:14 ?h:1 ?s:15 ?l:2 ?l1:2 ?dc:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?d-size:11
+        pre: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n1) (R:shot-less ?n0 ?n1) (RW:count-shot ?d ?dc shot-property2-none ?b ?n2) (R:shot-less ?n2 ?n3) (RW:count-hand ?h ?s ?n4) (R:hand-less ?n5 ?n4) (RW:shaked ?s) (RW:contains-shaker ?s ?b) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (N:R:= ?b cocktail3) (N:R:= ?b cocktail1) (N:R:= ?b cocktail2) (R:shot-lte-sum ?n1 ?n2 ?d-size) (R:shot-bag-size ?d ?d-size))
+        eff: (and (RW:count-shot ?d ?dc clean-shot-true empty-shot-true ?n0) (RW:count-shot ?d ?dc shot-property2-none ?b ?n3) (RW:shaker-level ?s ?l1) (increase (total-cost) 1))
+Init[174]:
+  (empty-shaker shaker1)
+  S:(dispenses dispenser1 ingredient3)
+  S:(next l0 l0)
+  S:(cocktail-part2 cocktail2 ingredient3)
+  S:(cocktail-part1 cocktail3 ingredient1)
+  (shaker-level shaker1 l0)
+  S:(dispenses dispenser1 ingredient2)
+  (clean-shaker shaker1)
+  S:(cocktail-part2 cocktail1 ingredient1)
+  S:(cocktail-part1 cocktail1 ingredient3)
+  S:(shaker-empty-level shaker1 l0)
+  S:(cocktail-part2 cocktail3 ingredient2)
+  S:(cocktail-part1 cocktail2 ingredient2)
+  (ontable shaker1)
+  S:(next l0 l0)
+  S:(dispenses dispenser1 ingredient1)
+  S:(shot-less snum1 snum1)
+  S:(shot-less snum1 snum3)
+  S:(shot-less snum3 snum1)
+  S:(hand-less hnum1 hnum2)
+  (count-shot shot-bag1 ontable-true clean-shot-true empty-shot-true snum1)
+  (count-shot-goal shot-bag1 empty-shot-true snum1)
+  (count-hand hand-bag1 handempty-true hnum2)
+  S:(count-shot-goal-desired-count shot-bag1 cocktail3 snum3)
+  S:(count-shot-goal-desired-count shot-bag1 cocktail1 snum1)
+  S:(count-shot-goal-desired-count shot-bag1 cocktail2 snum1)
+  S:(shot-less snum0 snum1)
+  S:(hand-less hnum2 hnum1)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 empty-shot-true snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 empty-shot-true snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true clean-shot-true cocktail1 snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none cocktail1 snum0)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true clean-shot-true cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 cocktail2 snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 cocktail2 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true clean-shot-true cocktail3 snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none cocktail3 snum0)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true clean-shot-true ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 ingredient1 snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 ingredient1 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true clean-shot-true ingredient2 snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none ingredient2 snum0)
+  (count-shot shot-bag1 hand-bag1 shot-property2-none ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true shot-property2-none ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true clean-shot-true ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 clean-shot-true ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail1 ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true cocktail1 ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true cocktail2 ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail2 ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 cocktail3 ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true cocktail3 ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true ingredient1 ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient1 ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient2 ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true ingredient2 ingredient3 snum0)
+  (count-shot shot-bag1 ontable-true ingredient3 ingredient3 snum0)
+  (count-shot shot-bag1 hand-bag1 ingredient3 ingredient3 snum0)
+  S:(count-shot-goal-desired-count shot-bag1 empty-shot-true snum0)
+  (count-shot-goal shot-bag1 cocktail1 snum0)
+  (count-shot-goal shot-bag1 cocktail2 snum0)
+  (count-shot-goal shot-bag1 cocktail3 snum0)
+  (count-shot-goal shot-bag1 ingredient1 snum0)
+  S:(count-shot-goal-desired-count shot-bag1 ingredient1 snum0)
+  (count-shot-goal shot-bag1 ingredient2 snum0)
+  S:(count-shot-goal-desired-count shot-bag1 ingredient2 snum0)
+  (count-shot-goal shot-bag1 ingredient3 snum0)
+  S:(count-shot-goal-desired-count shot-bag1 ingredient3 snum0)
+  (count-hand hand-bag1 shaker1 hnum2)
+  (count-hand hand-bag1 shot-bag1 hnum2)
+  S:(shot-bag-size shot-bag1 snum1)
+  S:(shot-lte-sum snum0 snum0 snum1)
+  S:(shot-lte-sum snum0 snum1 snum1)
+  S:(shot-lte-sum snum0 snum1 snum1)
+  S:(shot-lte-sum snum0 snum3 snum1)
+  S:(shot-lte-sum snum0 snum1 snum1)
+  S:(shot-lte-sum snum1 snum0 snum1)
+  S:(shot-lte-sum snum1 snum1 snum1)
+  S:(shot-lte-sum snum1 snum1 snum1)
+  S:(shot-lte-sum snum1 snum3 snum1)
+  S:(shot-lte-sum snum1 snum0 snum1)
+  S:(shot-lte-sum snum1 snum1 snum1)
+  S:(shot-lte-sum snum1 snum1 snum1)
+  S:(shot-lte-sum snum3 snum0 snum1)
+  S:(shot-lte-sum snum3 snum1 snum1)
+  S:(shot-lte-sum snum1 snum0 snum1)
+  S:(hand-bag-size hand-bag1 hnum2)
+  S:(hand-lte-sum hnum2 hnum2 hnum2)
+  S:(hand-lte-sum hnum2 hnum1 hnum2)
+  S:(hand-lte-sum hnum2 hnum2 hnum2)
+  S:(hand-lte-sum hnum1 hnum2 hnum2)
+  S:(hand-lte-sum hnum1 hnum1 hnum2)
+  S:(hand-lte-sum hnum2 hnum2 hnum2)
+Init[1]:
+  (= (total-cost) 0)
+Goal: (and (W:count-shot-goal-satisfied shot-bag1 cocktail3) (W:count-shot-goal-satisfied shot-bag1 cocktail1) (W:count-shot-goal-satisfied shot-bag1 cocktail2))
+Metric: 1

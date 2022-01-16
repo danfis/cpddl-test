@@ -1,50 +1,114 @@
 {
-   t1
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:calloc
-   fun:readTasks
-   fun:main
-}
-{
-   t2
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:calloc
-   fun:readTasks
-   fun:main
-}
-{
-   t3
+   dash
    Memcheck:Leak
    match-leak-kinds: reachable
    fun:malloc
    fun:strdup
-   fun:readTasks
-   fun:main
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   fun:(below main)
 }
 {
-   t4
+   dash2
    Memcheck:Leak
    match-leak-kinds: reachable
    fun:malloc
-   fun:buildTestTree
-   fun:main
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   fun:(below main)
 }
 {
-   t5
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:buildTestTree
-   fun:main
-}
-{
-   t6
+   dash3
    Memcheck:Leak
    match-leak-kinds: reachable
    fun:malloc
    fun:realloc
-   fun:readTasks
-   fun:main
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   fun:(below main)
+}
+{
+   dash4
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   fun:(below main)
+}
+{
+   dash5
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   obj:/usr/bin/dash
+   fun:(below main)
+}
+{
+   cplex
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znwm
+   fun:_ZN11IlcParallel4LockEv
+   fun:_ZN13IlcLaSolution20GetNewStorageClassIdEv
+   fun:_GLOBAL__I_lasolution.cpp
+   fun:__libc_csu_init
+   fun:(below main)
+}
+{
+   cplex2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znwm
+   fun:_ZN11IlcParallel4LockEv
+   fun:_ZN13IlcLaSolution20GetNewStorageClassIdEv
+   fun:_GLOBAL__I_lasolution.cpp
+   fun:__libc_csu_init
+   fun:(below main)
+}
+{
+   diff
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/bin/diff
+   obj:/usr/bin/diff
+   obj:/usr/bin/diff
+   obj:/usr/bin/diff
+   fun:(below main)
+}
+{
+   diff2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/bin/diff
+   obj:/usr/bin/diff
+   fun:(below main)
+}
+{
+   diff3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/bin/diff
+   obj:/usr/bin/diff
+   fun:(below main)
 }

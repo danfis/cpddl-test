@@ -1,0 +1,163 @@
+Reduced 26 -> 16
+Domain: driverlog
+Problem: dlog-2-3-6
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Obj[16]:
+    [0]: driver1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: driver2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: truck3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: package2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: package3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: package4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: package5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: package6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: s0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: s1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: s2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: s3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: s5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: p3-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: p3-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: p4-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[11]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    obj: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    truck: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    location: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    driver: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    driving: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    link: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    path: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    empty: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[0]:
+Action[6]:
+    load-truck: ?obj:0 ?truck:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:at ?obj ?loc))
+        eff: (and (RW:in ?obj ?truck))
+    unload-truck: ?obj:0 ?truck:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:in ?obj ?truck))
+        eff: (and (RW:at ?obj ?loc))
+    board-truck: ?driver:0 ?truck:0 ?loc:0
+        pre: (and (R:driver ?driver) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:at ?driver ?loc) (RW:empty ?truck))
+        eff: (and (RW:driving ?driver ?truck))
+    disembark-truck: ?driver:0 ?truck:0 ?loc:0
+        pre: (and (R:driver ?driver) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:driving ?driver ?truck))
+        eff: (and (RW:at ?driver ?loc) (RW:empty ?truck))
+    drive-truck: ?truck:0 ?loc-from:0 ?loc-to:0 ?driver:0
+        pre: (and (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (RW:at ?truck ?loc-from) (RW:driving ?driver ?truck) (R:link ?loc-from ?loc-to))
+        eff: (and (RW:at ?truck ?loc-to))
+    walk: ?driver:0 ?loc-from:0 ?loc-to:0
+        pre: (and (R:driver ?driver) (R:location ?loc-from) (R:location ?loc-to) (RW:at ?driver ?loc-from) (R:path ?loc-from ?loc-to))
+        eff: (and (RW:at ?driver ?loc-to))
+Init[102]:
+  (at driver1 driver1)
+  S:(driver driver1)
+  (at driver2 s0)
+  S:(driver driver2)
+  (at driver1 s0)
+  (empty driver1)
+  S:(truck driver1)
+  (at driver2 driver1)
+  (empty driver2)
+  S:(truck driver2)
+  (at truck3 s5)
+  (empty truck3)
+  S:(truck truck3)
+  (at truck3 s1)
+  S:(obj truck3)
+  (at package2 s0)
+  S:(obj package2)
+  (at package3 driver1)
+  S:(obj package3)
+  (at package4 driver1)
+  S:(obj package4)
+  (at package5 driver1)
+  S:(obj package5)
+  (at package6 s2)
+  S:(obj package6)
+  S:(location s0)
+  S:(location s1)
+  S:(location s2)
+  S:(location s3)
+  S:(location driver1)
+  S:(location s5)
+  S:(location driver2)
+  S:(location truck3)
+  S:(location package2)
+  S:(location package3)
+  S:(location package4)
+  S:(location package5)
+  S:(location p3-1)
+  S:(location p3-5)
+  S:(location p4-5)
+  S:(path s1 driver2)
+  S:(path driver2 s1)
+  S:(path s0 driver2)
+  S:(path driver2 s0)
+  S:(path s1 truck3)
+  S:(path truck3 s1)
+  S:(path driver1 truck3)
+  S:(path truck3 driver1)
+  S:(path s1 package2)
+  S:(path package2 s1)
+  S:(path s5 package2)
+  S:(path package2 s5)
+  S:(path s2 package3)
+  S:(path package3 s2)
+  S:(path s1 package3)
+  S:(path package3 s1)
+  S:(path s2 package4)
+  S:(path package4 s2)
+  S:(path s3 package4)
+  S:(path package4 s3)
+  S:(path s3 package5)
+  S:(path package5 s3)
+  S:(path s0 package5)
+  S:(path package5 s0)
+  S:(path s3 p3-1)
+  S:(path p3-1 s3)
+  S:(path s1 p3-1)
+  S:(path p3-1 s1)
+  S:(path s3 p3-5)
+  S:(path p3-5 s3)
+  S:(path s5 p3-5)
+  S:(path p3-5 s5)
+  S:(path driver1 p4-5)
+  S:(path p4-5 driver1)
+  S:(path s5 p4-5)
+  S:(path p4-5 s5)
+  S:(link s0 s5)
+  S:(link s5 s0)
+  S:(link s1 s0)
+  S:(link s0 s1)
+  S:(link s1 s2)
+  S:(link s2 s1)
+  S:(link s1 driver1)
+  S:(link driver1 s1)
+  S:(link s1 s5)
+  S:(link s5 s1)
+  S:(link s2 s0)
+  S:(link s0 s2)
+  S:(link s3 s0)
+  S:(link s0 s3)
+  S:(link s3 s1)
+  S:(link s1 s3)
+  S:(link s3 s2)
+  S:(link s2 s3)
+  S:(link s3 driver1)
+  S:(link driver1 s3)
+  S:(link driver1 s0)
+  S:(link s0 driver1)
+  S:(link s5 s3)
+  S:(link s3 s5)
+  S:(link s5 driver1)
+  S:(link driver1 s5)
+Init[0]:
+Goal: (and (RW:at driver1 s1) (RW:at driver2 s0) (RW:at truck3 s5) (RW:at package2 s1) (RW:at package3 s5) (RW:at package4 s1) (RW:at package5 s3) (RW:at package6 s2))
+Metric: 0

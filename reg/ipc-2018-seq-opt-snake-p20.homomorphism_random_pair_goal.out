@@ -1,0 +1,310 @@
+Reduced 43 -> 33
+Domain: snake
+Problem: snake-empty-6x7-1-5-9-11440
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+Obj[33]:
+    [0]: dummypoint, type: 0, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: pos0-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: pos0-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: pos0-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: pos0-3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: pos0-4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: pos0-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: pos0-6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: pos1-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: pos1-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: pos1-3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: pos1-4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: pos1-6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: pos2-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: pos2-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: pos2-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: pos2-3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: pos2-4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: pos2-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: pos3-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: pos3-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: pos3-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [22]: pos3-3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [23]: pos3-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [24]: pos3-6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [25]: pos4-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [26]: pos4-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [27]: pos4-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [28]: pos4-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [29]: pos5-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [30]: pos5-3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [31]: pos5-4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [32]: pos5-6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[11]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    isadjacent: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    tailsnake: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    headsnake: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    nextsnake: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    blocked: 0 :: is-private: 0, owner-param: -1, read: 0, write: 1, neg-of: 9
+    spawn: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    nextspawn: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    ispoint: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 10
+    NOT-blocked: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 5
+    NOT-ispoint: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 8
+Function[0]:
+Action[3]:
+    move: ?head:0 ?newhead:0 ?tail:0 ?newtail:0
+        pre: (and (RW:headsnake ?head) (R:isadjacent ?head ?newhead) (RW:tailsnake ?tail) (RW:nextsnake ?newtail ?tail) (RW:NOT-blocked ?newhead) (RW:NOT-ispoint ?newhead))
+        eff: (and (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (RW:tailsnake ?newtail) (W:blocked ?newhead) (RW:NOT-blocked ?tail))
+    move-and-eat-spawn: ?head:0 ?newhead:0 ?spawnpoint:0 ?nextspawnpoint:0
+        pre: (and (RW:headsnake ?head) (R:isadjacent ?head ?newhead) (RW:NOT-blocked ?newhead) (RW:ispoint ?newhead) (RW:spawn ?spawnpoint) (R:nextspawn ?spawnpoint ?nextspawnpoint))
+        eff: (and (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (RW:spawn ?nextspawnpoint) (W:blocked ?newhead) (RW:NOT-ispoint ?newhead) (RW:ispoint ?spawnpoint))
+    move-and-eat-no-spawn: ?head:0 ?newhead:0
+        pre: (and (RW:headsnake ?head) (R:isadjacent ?head ?newhead) (RW:NOT-blocked ?newhead) (RW:ispoint ?newhead) (RW:spawn dummypoint))
+        eff: (and (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (W:blocked ?newhead) (RW:NOT-ispoint ?newhead))
+Init[241]:
+  S:(isadjacent pos0-0 pos1-0)
+  S:(isadjacent pos0-0 pos0-1)
+  S:(isadjacent pos0-1 pos1-1)
+  S:(isadjacent pos0-1 pos0-2)
+  S:(isadjacent pos0-1 pos0-0)
+  S:(isadjacent pos0-2 pos0-2)
+  S:(isadjacent pos0-2 pos0-3)
+  S:(isadjacent pos0-2 pos0-1)
+  S:(isadjacent pos0-3 pos1-3)
+  S:(isadjacent pos0-3 pos0-4)
+  S:(isadjacent pos0-3 pos0-2)
+  S:(isadjacent pos0-4 pos1-4)
+  S:(isadjacent pos0-4 pos0-5)
+  S:(isadjacent pos0-4 pos0-3)
+  S:(isadjacent pos0-5 pos0-1)
+  S:(isadjacent pos0-5 pos0-6)
+  S:(isadjacent pos0-5 pos0-4)
+  S:(isadjacent pos0-6 pos1-6)
+  S:(isadjacent pos0-6 pos0-5)
+  S:(isadjacent pos1-0 pos2-0)
+  S:(isadjacent pos1-0 pos1-1)
+  S:(isadjacent pos1-0 pos0-0)
+  S:(isadjacent pos1-1 pos2-1)
+  S:(isadjacent pos1-1 pos0-2)
+  S:(isadjacent pos1-1 pos0-1)
+  S:(isadjacent pos1-1 pos1-0)
+  S:(isadjacent pos0-2 pos2-2)
+  S:(isadjacent pos0-2 pos1-3)
+  S:(isadjacent pos0-2 pos0-2)
+  S:(isadjacent pos0-2 pos1-1)
+  S:(isadjacent pos1-3 pos2-3)
+  S:(isadjacent pos1-3 pos1-4)
+  S:(isadjacent pos1-3 pos0-3)
+  S:(isadjacent pos1-3 pos0-2)
+  S:(isadjacent pos1-4 pos2-4)
+  S:(isadjacent pos1-4 pos0-1)
+  S:(isadjacent pos1-4 pos0-4)
+  S:(isadjacent pos1-4 pos1-3)
+  S:(isadjacent pos0-1 pos2-5)
+  S:(isadjacent pos0-1 pos1-6)
+  S:(isadjacent pos0-1 pos0-5)
+  S:(isadjacent pos0-1 pos1-4)
+  S:(isadjacent pos1-6 pos0-4)
+  S:(isadjacent pos1-6 pos0-6)
+  S:(isadjacent pos1-6 pos0-1)
+  S:(isadjacent pos2-0 pos3-0)
+  S:(isadjacent pos2-0 pos2-1)
+  S:(isadjacent pos2-0 pos1-0)
+  S:(isadjacent pos2-1 pos3-1)
+  S:(isadjacent pos2-1 pos2-2)
+  S:(isadjacent pos2-1 pos1-1)
+  S:(isadjacent pos2-1 pos2-0)
+  S:(isadjacent pos2-2 pos3-2)
+  S:(isadjacent pos2-2 pos2-3)
+  S:(isadjacent pos2-2 pos0-2)
+  S:(isadjacent pos2-2 pos2-1)
+  S:(isadjacent pos2-3 pos3-3)
+  S:(isadjacent pos2-3 pos2-4)
+  S:(isadjacent pos2-3 pos1-3)
+  S:(isadjacent pos2-3 pos2-2)
+  S:(isadjacent pos2-4 pos2-1)
+  S:(isadjacent pos2-4 pos2-5)
+  S:(isadjacent pos2-4 pos1-4)
+  S:(isadjacent pos2-4 pos2-3)
+  S:(isadjacent pos2-5 pos3-5)
+  S:(isadjacent pos2-5 pos0-4)
+  S:(isadjacent pos2-5 pos0-1)
+  S:(isadjacent pos2-5 pos2-4)
+  S:(isadjacent pos0-4 pos3-6)
+  S:(isadjacent pos0-4 pos1-6)
+  S:(isadjacent pos0-4 pos2-5)
+  S:(isadjacent pos3-0 pos4-0)
+  S:(isadjacent pos3-0 pos3-1)
+  S:(isadjacent pos3-0 pos2-0)
+  S:(isadjacent pos3-1 pos4-1)
+  S:(isadjacent pos3-1 pos3-2)
+  S:(isadjacent pos3-1 pos2-1)
+  S:(isadjacent pos3-1 pos3-0)
+  S:(isadjacent pos3-2 pos4-2)
+  S:(isadjacent pos3-2 pos3-3)
+  S:(isadjacent pos3-2 pos2-2)
+  S:(isadjacent pos3-2 pos3-1)
+  S:(isadjacent pos3-3 pos0-3)
+  S:(isadjacent pos3-3 pos2-1)
+  S:(isadjacent pos3-3 pos2-3)
+  S:(isadjacent pos3-3 pos3-2)
+  S:(isadjacent pos2-1 pos0-3)
+  S:(isadjacent pos2-1 pos3-5)
+  S:(isadjacent pos2-1 pos2-4)
+  S:(isadjacent pos2-1 pos3-3)
+  S:(isadjacent pos3-5 pos4-5)
+  S:(isadjacent pos3-5 pos3-6)
+  S:(isadjacent pos3-5 pos2-5)
+  S:(isadjacent pos3-5 pos2-1)
+  S:(isadjacent pos3-6 pos2-1)
+  S:(isadjacent pos3-6 pos0-4)
+  S:(isadjacent pos3-6 pos3-5)
+  S:(isadjacent pos4-0 pos0-2)
+  S:(isadjacent pos4-0 pos4-1)
+  S:(isadjacent pos4-0 pos3-0)
+  S:(isadjacent pos4-1 pos0-2)
+  S:(isadjacent pos4-1 pos4-2)
+  S:(isadjacent pos4-1 pos3-1)
+  S:(isadjacent pos4-1 pos4-0)
+  S:(isadjacent pos4-2 pos5-2)
+  S:(isadjacent pos4-2 pos0-3)
+  S:(isadjacent pos4-2 pos3-2)
+  S:(isadjacent pos4-2 pos4-1)
+  S:(isadjacent pos0-3 pos5-3)
+  S:(isadjacent pos0-3 pos0-3)
+  S:(isadjacent pos0-3 pos3-3)
+  S:(isadjacent pos0-3 pos4-2)
+  S:(isadjacent pos0-3 pos5-4)
+  S:(isadjacent pos0-3 pos4-5)
+  S:(isadjacent pos0-3 pos2-1)
+  S:(isadjacent pos0-3 pos0-3)
+  S:(isadjacent pos4-5 pos4-1)
+  S:(isadjacent pos4-5 pos2-1)
+  S:(isadjacent pos4-5 pos3-5)
+  S:(isadjacent pos4-5 pos0-3)
+  S:(isadjacent pos2-1 pos5-6)
+  S:(isadjacent pos2-1 pos3-6)
+  S:(isadjacent pos2-1 pos4-5)
+  S:(isadjacent pos0-2 pos0-2)
+  S:(isadjacent pos0-2 pos4-0)
+  S:(isadjacent pos0-2 pos5-2)
+  S:(isadjacent pos0-2 pos4-1)
+  S:(isadjacent pos0-2 pos0-2)
+  S:(isadjacent pos5-2 pos5-3)
+  S:(isadjacent pos5-2 pos4-2)
+  S:(isadjacent pos5-2 pos0-2)
+  S:(isadjacent pos5-3 pos5-4)
+  S:(isadjacent pos5-3 pos0-3)
+  S:(isadjacent pos5-3 pos5-2)
+  S:(isadjacent pos5-4 pos4-1)
+  S:(isadjacent pos5-4 pos0-3)
+  S:(isadjacent pos5-4 pos5-3)
+  S:(isadjacent pos4-1 pos5-6)
+  S:(isadjacent pos4-1 pos4-5)
+  S:(isadjacent pos4-1 pos5-4)
+  S:(isadjacent pos5-6 pos2-1)
+  S:(isadjacent pos5-6 pos4-1)
+  (tailsnake pos1-6)
+  (headsnake pos0-1)
+  (nextsnake pos0-1 pos1-6)
+  (blocked pos0-1)
+  (blocked pos1-6)
+  (spawn pos0-2)
+  S:(nextspawn pos4-5 dummypoint)
+  S:(nextspawn pos0-2 pos3-5)
+  S:(nextspawn pos3-5 pos4-1)
+  S:(nextspawn pos4-1 pos1-1)
+  S:(nextspawn pos1-1 pos2-1)
+  S:(nextspawn pos2-1 pos3-1)
+  S:(nextspawn pos3-1 pos0-5)
+  S:(nextspawn pos0-5 pos2-0)
+  S:(nextspawn pos2-0 pos4-5)
+  (ispoint pos0-4)
+  (ispoint pos3-2)
+  (ispoint pos5-3)
+  (ispoint pos1-3)
+  (ispoint pos2-5)
+  (NOT-blocked dummypoint)
+  (NOT-blocked pos0-0)
+  (NOT-blocked pos0-1)
+  (NOT-blocked pos0-2)
+  (NOT-blocked pos0-3)
+  (NOT-blocked pos0-4)
+  (NOT-blocked pos0-5)
+  (NOT-blocked pos0-6)
+  (NOT-blocked pos1-0)
+  (NOT-blocked pos1-1)
+  (NOT-blocked pos0-2)
+  (NOT-blocked pos1-3)
+  (NOT-blocked pos1-4)
+  (NOT-blocked pos2-0)
+  (NOT-blocked pos2-1)
+  (NOT-blocked pos2-2)
+  (NOT-blocked pos2-3)
+  (NOT-blocked pos2-4)
+  (NOT-blocked pos2-5)
+  (NOT-blocked pos0-4)
+  (NOT-blocked pos3-0)
+  (NOT-blocked pos3-1)
+  (NOT-blocked pos3-2)
+  (NOT-blocked pos3-3)
+  (NOT-blocked pos2-1)
+  (NOT-blocked pos3-5)
+  (NOT-blocked pos3-6)
+  (NOT-blocked pos4-0)
+  (NOT-blocked pos4-1)
+  (NOT-blocked pos4-2)
+  (NOT-blocked pos0-3)
+  (NOT-blocked pos0-3)
+  (NOT-blocked pos4-5)
+  (NOT-blocked pos2-1)
+  (NOT-blocked pos0-2)
+  (NOT-blocked pos0-2)
+  (NOT-blocked pos5-2)
+  (NOT-blocked pos5-3)
+  (NOT-blocked pos5-4)
+  (NOT-blocked pos4-1)
+  (NOT-blocked pos5-6)
+  (NOT-ispoint dummypoint)
+  (NOT-ispoint pos0-0)
+  (NOT-ispoint pos0-1)
+  (NOT-ispoint pos0-2)
+  (NOT-ispoint pos0-3)
+  (NOT-ispoint pos0-4)
+  (NOT-ispoint pos0-5)
+  (NOT-ispoint pos0-6)
+  (NOT-ispoint pos1-0)
+  (NOT-ispoint pos1-1)
+  (NOT-ispoint pos0-2)
+  (NOT-ispoint pos1-4)
+  (NOT-ispoint pos0-1)
+  (NOT-ispoint pos1-6)
+  (NOT-ispoint pos2-0)
+  (NOT-ispoint pos2-1)
+  (NOT-ispoint pos2-2)
+  (NOT-ispoint pos2-3)
+  (NOT-ispoint pos2-4)
+  (NOT-ispoint pos3-0)
+  (NOT-ispoint pos3-1)
+  (NOT-ispoint pos3-3)
+  (NOT-ispoint pos2-1)
+  (NOT-ispoint pos3-5)
+  (NOT-ispoint pos3-6)
+  (NOT-ispoint pos4-0)
+  (NOT-ispoint pos4-1)
+  (NOT-ispoint pos4-2)
+  (NOT-ispoint pos0-3)
+  (NOT-ispoint pos0-3)
+  (NOT-ispoint pos4-5)
+  (NOT-ispoint pos2-1)
+  (NOT-ispoint pos0-2)
+  (NOT-ispoint pos0-2)
+  (NOT-ispoint pos5-2)
+  (NOT-ispoint pos5-4)
+  (NOT-ispoint pos4-1)
+  (NOT-ispoint pos5-6)
+Init[0]:
+Goal: (and (RW:NOT-ispoint pos0-4) (RW:NOT-ispoint pos3-2) (RW:NOT-ispoint pos5-3) (RW:NOT-ispoint pos1-3) (RW:NOT-ispoint pos2-5) (RW:NOT-ispoint pos0-2) (RW:NOT-ispoint pos3-5) (RW:NOT-ispoint pos4-1) (RW:NOT-ispoint pos1-1) (RW:NOT-ispoint pos2-1) (RW:NOT-ispoint pos3-1) (RW:NOT-ispoint pos0-5) (RW:NOT-ispoint pos2-0) (RW:NOT-ispoint pos4-5))
+Metric: 0

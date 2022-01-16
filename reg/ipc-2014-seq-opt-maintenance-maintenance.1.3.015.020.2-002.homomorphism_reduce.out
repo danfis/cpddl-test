@@ -1,0 +1,102 @@
+Reduced 39 -> 22
+Domain: maintenance-scheduling-domain
+Problem: maintenance-scheduling-1-3-15-20-2-2
+Require: ff
+Type[4]:
+    [0]: object, parent: -1
+    [1]: plane, parent: 0
+    [2]: day, parent: 0
+    [3]: airport, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+    [1]: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+    [2]: 0
+    [3]: 1
+Obj[22]:
+    [0]: d1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: fra, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: ap1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: ap2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: ap3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: ap4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: ap5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: ap6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: ap7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: ap8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: ap9, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: ap10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: ap11, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: ap12, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: ap13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: ap14, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: ap15, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: ap16, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: ap17, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: ap18, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: ap19, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: ap20, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[5]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    done: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    today: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 1 2 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    next: 2 2 :: is-private: 0, owner-param: -1, read: 0, write: 0
+Function[0]:
+Action[1]:
+    workat: ?day:2 ?airport:3
+        pre: (and (R:today ?day))
+        eff: (and (when (R:at ap1 ?day ?airport) (W:done ap1)) (when (R:at ap2 ?day ?airport) (W:done ap2)) (when (R:at ap3 ?day ?airport) (W:done ap3)) (when (R:at ap4 ?day ?airport) (W:done ap4)) (when (R:at ap5 ?day ?airport) (W:done ap5)) (when (R:at ap6 ?day ?airport) (W:done ap6)) (when (R:at ap7 ?day ?airport) (W:done ap7)) (when (R:at ap8 ?day ?airport) (W:done ap8)) (when (R:at ap9 ?day ?airport) (W:done ap9)) (when (R:at ap10 ?day ?airport) (W:done ap10)) (when (R:at ap11 ?day ?airport) (W:done ap11)) (when (R:at ap12 ?day ?airport) (W:done ap12)) (when (R:at ap13 ?day ?airport) (W:done ap13)) (when (R:at ap14 ?day ?airport) (W:done ap14)) (when (R:at ap15 ?day ?airport) (W:done ap15)) (when (R:at ap16 ?day ?airport) (W:done ap16)) (when (R:at ap17 ?day ?airport) (W:done ap17)) (when (R:at ap18 ?day ?airport) (W:done ap18)) (when (R:at ap19 ?day ?airport) (W:done ap19)) (when (R:at ap20 ?day ?airport) (W:done ap20)))
+Init[50]:
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(today d1)
+  S:(at ap1 d1 fra)
+  S:(at ap1 d1 fra)
+  S:(at ap2 d1 fra)
+  S:(at ap2 d1 fra)
+  S:(at ap3 d1 fra)
+  S:(at ap3 d1 fra)
+  S:(at ap4 d1 fra)
+  S:(at ap4 d1 fra)
+  S:(at ap5 d1 fra)
+  S:(at ap5 d1 fra)
+  S:(at ap6 d1 fra)
+  S:(at ap6 d1 fra)
+  S:(at ap7 d1 fra)
+  S:(at ap7 d1 fra)
+  S:(at ap8 d1 fra)
+  S:(at ap8 d1 fra)
+  S:(at ap9 d1 fra)
+  S:(at ap9 d1 fra)
+  S:(at ap10 d1 fra)
+  S:(at ap11 d1 fra)
+  S:(at ap11 d1 fra)
+  S:(at ap12 d1 fra)
+  S:(at ap12 d1 fra)
+  S:(at ap13 d1 fra)
+  S:(at ap13 d1 fra)
+  S:(at ap14 d1 fra)
+  S:(at ap14 d1 fra)
+  S:(at ap15 d1 fra)
+  S:(at ap15 d1 fra)
+  S:(at ap16 d1 fra)
+  S:(at ap16 d1 fra)
+  S:(at ap17 d1 fra)
+  S:(at ap17 d1 fra)
+  S:(at ap18 d1 fra)
+  S:(at ap18 d1 fra)
+  S:(at ap19 d1 fra)
+  S:(at ap19 d1 fra)
+  S:(at ap20 d1 fra)
+  S:(at ap20 d1 fra)
+Init[0]:
+Goal: (and (W:done ap1) (W:done ap2) (W:done ap3) (W:done ap4) (W:done ap5) (W:done ap6) (W:done ap7) (W:done ap8) (W:done ap9) (W:done ap10) (W:done ap11) (W:done ap12) (W:done ap13) (W:done ap14) (W:done ap15) (W:done ap16) (W:done ap17) (W:done ap18) (W:done ap19) (W:done ap20))
+Metric: 0

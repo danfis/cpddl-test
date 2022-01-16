@@ -1,0 +1,219 @@
+Reduced 39 -> 19
+Domain: thoughtful-typed
+Problem: thoughtful-s5-t4
+Require: ff
+Type[5]:
+    [0]: object, parent: -1
+    [1]: card, parent: 0
+    [2]: colnum, parent: 0
+    [3]: num, parent: 0
+    [4]: suittype, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+    [1]: 0 1 2 3 4 5 6 7 8 9 10 11 12
+    [2]: 13
+    [3]: 14 15 16
+    [4]: 17 18
+Obj[19]:
+    [0]: ca, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: c2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: c0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: c4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: c5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: da, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: d4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: h0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: ha, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: h4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: h5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: sa, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: s5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: coln0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: n0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: n2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: n4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: c, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: d, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[19]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    on: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    ace: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    king: 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    clear: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    colspace: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    bottomtalon: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    toptalon: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    ontalon: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    talonplayable: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    instack: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    home: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    faceup: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    bottomcol: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    suit: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    value: 1 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    successor: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    canstack: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    colsuccessor: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[21]:
+    move-col-to-col: ?card:1 ?oldcard:1 ?newcard:1
+        pre: (and (RW:faceup ?card) (RW:clear ?newcard) (R:canstack ?card ?newcard) (RW:on ?card ?oldcard))
+        eff: (and (RW:on ?card ?newcard) (RW:clear ?oldcard) (RW:faceup ?oldcard))
+    move-col-to-col-b: ?card:1 ?newcard:1 ?cols:2 ?ncols:2
+        pre: (and (RW:faceup ?card) (RW:bottomcol ?card) (RW:clear ?newcard) (R:canstack ?card ?newcard) (RW:colspace ?cols) (R:colsuccessor ?ncols ?cols))
+        eff: (and (RW:on ?card ?newcard) (RW:colspace ?ncols))
+    move-col-to-col-c: ?card:1 ?oldcard:1 ?cols:2 ?ncols:2
+        pre: (and (RW:faceup ?card) (R:king ?card) (RW:colspace ?cols) (R:colsuccessor ?cols ?ncols) (RW:on ?card ?oldcard))
+        eff: (and (RW:bottomcol ?card) (RW:clear ?oldcard) (RW:faceup ?oldcard) (RW:colspace ?ncols))
+    col-to-home: ?card:1 ?oldcard:1 ?suit:4 ?vcard:3 ?homecard:1 ?vhomecard:3
+        pre: (and (RW:clear ?card) (RW:on ?card ?oldcard) (RW:home ?homecard) (R:suit ?card ?suit) (R:suit ?homecard ?suit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard))
+        eff: (and (RW:home ?card) (RW:clear ?oldcard) (RW:faceup ?oldcard) (RW:on ?card ?homecard))
+    col-to-home-b: ?card:1 ?homecard:1 ?suit:4 ?vcard:3 ?vhomecard:3 ?cols:2 ?ncols:2
+        pre: (and (RW:clear ?card) (RW:bottomcol ?card) (RW:home ?homecard) (R:suit ?card ?suit) (R:suit ?homecard ?suit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard) (RW:colspace ?cols) (R:colsuccessor ?ncols ?cols))
+        eff: (and (RW:home ?card) (RW:colspace ?ncols))
+    tal-to-col: ?card:1 ?oldcard:1 ?newcard:1 ?cardabove:1
+        pre: (and (RW:clear ?newcard) (RW:ontalon ?card ?oldcard) (RW:ontalon ?cardabove ?card) (RW:talonplayable ?card) (R:canstack ?card ?newcard))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:talonplayable ?oldcard) (RW:on ?card ?newcard) (RW:ontalon ?cardabove ?oldcard))
+    tal-to-col-b: ?card:1 ?newcard:1 ?cardabove:1
+        pre: (and (RW:clear ?newcard) (RW:ontalon ?cardabove ?card) (RW:talonplayable ?card) (RW:bottomtalon ?card) (R:canstack ?card ?newcard))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:on ?card ?newcard) (RW:bottomtalon ?cardabove) (RW:talonplayable ?cardabove))
+    tal-to-col-c: ?card:1 ?newcard:1 ?oldcard:1
+        pre: (and (RW:clear ?newcard) (RW:ontalon ?card ?oldcard) (R:canstack ?card ?newcard) (RW:talonplayable ?card) (RW:toptalon ?card))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:on ?card ?newcard) (RW:toptalon ?oldcard) (RW:talonplayable ?oldcard))
+    tal-to-col-d: ?card:1 ?newcard:1
+        pre: (and (RW:clear ?newcard) (R:canstack ?card ?newcard) (RW:bottomtalon ?card) (RW:toptalon ?card) (RW:talonplayable ?card))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:on ?card ?newcard))
+    tal-to-col-e: ?card:1 ?oldcard:1 ?cardabove:1 ?cols:2 ?ncols:2
+        pre: (and (R:king ?card) (RW:ontalon ?card ?oldcard) (RW:ontalon ?cardabove ?card) (RW:talonplayable ?card) (RW:colspace ?cols) (R:colsuccessor ?cols ?ncols))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:talonplayable ?oldcard) (RW:ontalon ?cardabove ?oldcard) (RW:bottomcol ?card) (RW:colspace ?ncols))
+    tal-to-col-f: ?card:1 ?cardabove:1 ?cols:2 ?ncols:2
+        pre: (and (R:king ?card) (RW:ontalon ?cardabove ?card) (RW:talonplayable ?card) (RW:bottomtalon ?card) (RW:colspace ?cols) (R:colsuccessor ?cols ?ncols))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:bottomtalon ?cardabove) (RW:talonplayable ?cardabove) (RW:bottomcol ?card) (RW:colspace ?ncols))
+    tal-to-col-g: ?card:1 ?oldcard:1 ?cols:2 ?ncols:2
+        pre: (and (R:king ?card) (RW:ontalon ?card ?oldcard) (RW:talonplayable ?card) (RW:colspace ?cols) (R:colsuccessor ?cols ?ncols) (RW:toptalon ?card))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:toptalon ?oldcard) (RW:talonplayable ?oldcard) (RW:bottomcol ?card) (RW:colspace ?ncols))
+    tal-to-col-h: ?card:1 ?cols:2 ?ncols:2
+        pre: (and (R:king ?card) (RW:bottomtalon ?card) (RW:toptalon ?card) (RW:colspace ?cols) (R:colsuccessor ?cols ?ncols) (RW:talonplayable ?card))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:bottomcol ?card) (RW:colspace ?ncols))
+    tal-to-home: ?card:1 ?cardabove:1 ?cardbelow:1 ?homecard:1 ?cardsuit:4 ?vcard:3 ?vhomecard:3
+        pre: (and (RW:talonplayable ?card) (RW:ontalon ?cardabove ?card) (RW:ontalon ?card ?cardbelow) (R:suit ?card ?cardsuit) (R:suit ?homecard ?cardsuit) (RW:home ?homecard) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard))
+        eff: (and (RW:talonplayable ?cardbelow) (RW:ontalon ?cardabove ?cardbelow) (RW:home ?card))
+    tal-to-home-b: ?card:1 ?cardabove:1 ?homecard:1 ?cardsuit:4 ?vcard:3 ?vhomecard:3
+        pre: (and (RW:talonplayable ?card) (RW:ontalon ?cardabove ?card) (RW:bottomtalon ?card) (RW:home ?homecard) (R:suit ?card ?cardsuit) (R:suit ?homecard ?cardsuit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard))
+        eff: (and (RW:bottomtalon ?cardabove) (RW:talonplayable ?cardabove) (RW:home ?card))
+    tal-to-home-c: ?card:1 ?cardbelow:1 ?homecard:1 ?cardsuit:4 ?vcard:3 ?vhomecard:3
+        pre: (and (RW:ontalon ?card ?cardbelow) (RW:talonplayable ?card) (RW:toptalon ?card) (RW:home ?homecard) (R:suit ?card ?cardsuit) (R:suit ?homecard ?cardsuit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard))
+        eff: (and (RW:toptalon ?cardbelow) (RW:talonplayable ?cardbelow) (RW:home ?card))
+    tal-to-home-d: ?card:1 ?homecard:1 ?cardsuit:4 ?vcard:3 ?vhomecard:3
+        pre: (and (RW:bottomtalon ?card) (RW:toptalon ?card) (RW:talonplayable ?card) (RW:home ?homecard) (R:suit ?card ?cardsuit) (R:suit ?homecard ?cardsuit) (R:value ?card ?vcard) (R:value ?homecard ?vhomecard) (R:successor ?vcard ?vhomecard))
+        eff: (and (RW:home ?card))
+    home-to-col: ?card:1 ?cardbelow:1 ?newcard:1 ?cardsuit:4 ?vcard:3 ?vcardbelow:3
+        pre: (and (RW:home ?card) (R:suit ?card ?cardsuit) (R:suit ?cardbelow ?cardsuit) (R:value ?card ?vcard) (R:value ?cardbelow ?vcardbelow) (R:successor ?vcard ?vcardbelow) (R:canstack ?card ?newcard) (RW:clear ?newcard))
+        eff: (and (RW:clear ?card) (RW:faceup ?card) (RW:home ?cardbelow) (RW:on ?card ?newcard))
+    home-to-col-a: ?card:1 ?cardbelow:1 ?cardsuit:4 ?vcard:3 ?vcardbelow:3 ?cols:2 ?ncols:2
+        pre: (and (RW:home ?card) (R:king ?card) (R:suit ?card ?cardsuit) (R:suit ?cardbelow ?cardsuit) (R:value ?card ?vcard) (R:value ?cardbelow ?vcardbelow) (R:successor ?vcard ?vcardbelow) (RW:colspace ?cols) (R:colsuccessor ?cols ?ncols))
+        eff: (and (RW:home ?cardbelow) (RW:bottomcol ?card) (RW:clear ?card) (RW:faceup ?card) (RW:colspace ?ncols))
+    turn-deck: ?card:1 ?c1:1
+        pre: (and (RW:talonplayable ?card) (RW:ontalon ?c1 ?card))
+        eff: (and (RW:talonplayable ?c1))
+    turn-deck-a: ?card:1 ?c1:1
+        pre: (and (RW:talonplayable ?card) (RW:toptalon ?card) (RW:bottomtalon ?c1))
+        eff: (and (RW:talonplayable ?c1))
+Init[94]:
+  S:(value c0 n0)
+  S:(value h0 n0)
+  S:(value ca n0)
+  S:(value da n0)
+  S:(value ha n0)
+  S:(value sa n0)
+  S:(value c2 n2)
+  S:(value c0 n2)
+  S:(value d4 n2)
+  S:(value c4 n4)
+  S:(value d4 n4)
+  S:(value h4 n4)
+  S:(value sa n4)
+  S:(value c5 n4)
+  S:(value da n4)
+  S:(value h5 n4)
+  S:(value s5 n4)
+  S:(colsuccessor coln0 coln0)
+  S:(successor n0 n0)
+  S:(successor n2 n0)
+  S:(successor n2 n2)
+  S:(successor n4 n2)
+  S:(successor n4 n4)
+  S:(suit c0 c)
+  S:(suit c0 d)
+  S:(suit h0 c)
+  S:(suit ca c)
+  S:(suit da d)
+  S:(suit ha c)
+  S:(suit sa c)
+  S:(suit c2 c)
+  S:(suit c2 d)
+  S:(suit c2 c)
+  S:(suit d4 c)
+  S:(suit c4 c)
+  S:(suit d4 d)
+  S:(suit h4 c)
+  S:(suit c5 c)
+  S:(suit h5 c)
+  S:(suit s5 c)
+  S:(king c5)
+  S:(king da)
+  S:(king h5)
+  S:(king s5)
+  S:(canstack c2 c2)
+  S:(canstack c2 c0)
+  S:(canstack c2 d4)
+  S:(canstack c0 d4)
+  S:(canstack c0 h4)
+  S:(canstack d4 d4)
+  S:(canstack d4 h4)
+  S:(canstack c2 c4)
+  S:(canstack c2 sa)
+  S:(canstack c4 da)
+  S:(canstack c4 h5)
+  S:(canstack sa da)
+  S:(canstack sa h5)
+  S:(canstack d4 c5)
+  S:(canstack d4 s5)
+  S:(canstack h4 c5)
+  S:(canstack h4 s5)
+  (colspace coln0)
+  (bottomcol ha)
+  (clear ha)
+  (faceup ha)
+  (bottomcol h5)
+  (on c4 h5)
+  (clear c4)
+  (faceup c4)
+  (bottomcol c2)
+  (on c2 c2)
+  (on s5 c2)
+  (clear s5)
+  (faceup s5)
+  (bottomcol d4)
+  (on c0 d4)
+  (on sa c0)
+  (on ca sa)
+  (clear ca)
+  (faceup ca)
+  (bottomtalon d4)
+  (ontalon c2 d4)
+  (ontalon da c2)
+  (ontalon h4 da)
+  (ontalon c2 h4)
+  (ontalon sa c2)
+  (ontalon da sa)
+  (ontalon c5 da)
+  (ontalon c2 c5)
+  (ontalon c2 c2)
+  (toptalon c2)
+  (talonplayable da)
+  (home c0)
+  (home h0)
+Init[0]:
+Goal: (and (RW:home c5) (RW:home da) (RW:home h5) (RW:home s5))
+Metric: 0

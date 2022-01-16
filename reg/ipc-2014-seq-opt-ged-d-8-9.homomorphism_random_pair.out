@@ -1,0 +1,137 @@
+Reduced 9 -> 1
+Domain: genome-edit-distance
+Problem: wahlenbergia-to-merciera
+Require: 200ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0
+Obj[1]:
+    [0]: sub7, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[27]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    duplicate: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    swappable: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    cw: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    free: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    gone: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    present: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    normal: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    inverted: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    idle: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    cutting: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    have-cut: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    splicing: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    splice-next: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    splicing-last: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    inverse-splicing: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    inverse-splice-next: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    inverse-splicing-last: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    finished: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    cut-point-1: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    cut-point-2: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    last-cut-point: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    splice-point-1: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    splice-point-2: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    s-first: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    s-next: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    s-last: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[1]:
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+Action[21]:
+    begin-cut: ?x:0 ?y:0
+        pre: (and (RW:idle) (RW:cw ?x ?y))
+        eff: (and (N:RW:idle) (RW:cutting) (RW:cut-point-1 ?x) (RW:last-cut-point ?x) (RW:s-first ?y) (RW:s-last ?y))
+    continue-cut: ?x:0 ?y:0
+        pre: (and (RW:cutting) (RW:s-last ?x) (RW:cw ?x ?y))
+        eff: (and (RW:s-next ?x ?y) (RW:s-last ?y))
+    end-cut-1: ?x:0 ?y:0
+        pre: (and (RW:cutting) (RW:s-last ?x) (RW:cw ?x ?y))
+        eff: (and (RW:cut-point-2 ?y))
+    end-cut-2: ?x:0 ?y:0
+        pre: (and (RW:cutting) (RW:cut-point-1 ?x) (RW:cut-point-2 ?y))
+        eff: (and (N:RW:cutting) (RW:have-cut) (RW:cw ?x ?y))
+    begin-transpose-splice: ?x:0 ?y:0
+        pre: (and (RW:have-cut) (RW:cw ?x ?y))
+        eff: (and (N:RW:have-cut) (RW:splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y) (increase (total-cost) 2))
+    continue-splice-1: ?x:0 ?y:0
+        pre: (and (RW:splicing) (RW:s-first ?x) (RW:s-next ?x ?y))
+        eff: (and (N:RW:splicing) (RW:s-first ?y) (RW:splice-next ?x))
+    continue-splice-2: ?x:0 ?y:0
+        pre: (and (RW:splice-next ?x) (RW:splice-point-1 ?y))
+        eff: (and (RW:cw ?y ?x) (RW:splice-point-1 ?x) (RW:splicing))
+    end-splice-1: ?x:0 ?y:0
+        pre: (and (RW:splicing) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
+        eff: (and (N:RW:splicing) (RW:splicing-last) (RW:cw ?y ?x) (RW:splice-point-1 ?x))
+    end-splice-2: ?x:0 ?y:0
+        pre: (and (RW:splicing-last) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
+        eff: (and (N:RW:splicing-last) (RW:finished) (RW:cw ?x ?y))
+    begin-transverse-splice: ?x:0 ?y:0
+        pre: (and (RW:have-cut) (RW:cw ?x ?y))
+        eff: (and (N:RW:have-cut) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y) (increase (total-cost) 2))
+    begin-inverse-splice: ?x:0 ?y:0
+        pre: (and (RW:have-cut) (RW:cw ?x ?y) (RW:last-cut-point ?x))
+        eff: (and (N:RW:have-cut) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y) (increase (total-cost) 1))
+    begin-inverse-splice-special-case: ?x:0
+        pre: (and (RW:have-cut) (RW:cw ?x ?x) (RW:last-cut-point ?x))
+        eff: (and (N:RW:have-cut) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?x) (increase (total-cost) 1))
+    continue-inverse-splice-1a: ?x:0 ?y:0
+        pre: (and (RW:inverse-splicing) (RW:normal ?x) (RW:s-last ?x) (RW:s-next ?y ?x))
+        eff: (and (RW:s-last ?y) (N:RW:inverse-splicing) (RW:inverse-splice-next ?x) (RW:inverted ?x))
+    continue-inverse-splice-1b: ?x:0 ?y:0
+        pre: (and (RW:inverse-splicing) (RW:inverted ?x) (RW:s-last ?x) (RW:s-next ?y ?x))
+        eff: (and (RW:s-last ?y) (N:RW:inverse-splicing) (RW:inverse-splice-next ?x) (RW:normal ?x))
+    continue-inverse-splice-2: ?x:0 ?y:0
+        pre: (and (RW:inverse-splice-next ?x) (RW:splice-point-1 ?y))
+        eff: (and (RW:inverse-splicing) (RW:cw ?y ?x) (RW:splice-point-1 ?x))
+    end-inverse-splice-1a: ?x:0 ?y:0
+        pre: (and (RW:inverse-splicing) (RW:normal ?x) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
+        eff: (and (N:RW:inverse-splicing) (RW:inverse-splicing-last) (RW:cw ?y ?x) (RW:splice-point-1 ?x) (RW:inverted ?x))
+    end-inverse-splice-1b: ?x:0 ?y:0
+        pre: (and (RW:inverse-splicing) (RW:inverted ?x) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
+        eff: (and (N:RW:inverse-splicing) (RW:inverse-splicing-last) (RW:cw ?y ?x) (RW:splice-point-1 ?x) (RW:normal ?x))
+    end-inverse-splice-2: ?x:0 ?y:0
+        pre: (and (RW:inverse-splicing-last) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
+        eff: (and (N:RW:inverse-splicing-last) (RW:finished) (RW:cw ?x ?y))
+    invert-single-gene-a: ?x:0
+        pre: (and (RW:idle) (RW:normal ?x))
+        eff: (and (RW:inverted ?x) (increase (total-cost) 1))
+    invert-single-gene-b: ?x:0
+        pre: (and (RW:idle) (RW:inverted ?x))
+        eff: (and (RW:normal ?x) (increase (total-cost) 1))
+    reset-1: ?x:0
+        pre: (and (RW:finished) (RW:last-cut-point ?x))
+        eff: (and (N:RW:finished) (RW:idle))
+Init[28]:
+  (normal sub7)
+  (normal sub7)
+  (normal sub7)
+  (normal sub7)
+  (normal sub7)
+  (normal sub7)
+  (inverted sub7)
+  (normal sub7)
+  (normal sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  S:(present sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (cw sub7 sub7)
+  (idle)
+Init[1]:
+  (= (total-cost) 0)
+Goal: (and (RW:normal sub7) (RW:inverted sub7) (RW:inverted sub7) (RW:normal sub7) (RW:normal sub7) (RW:normal sub7) (RW:normal sub7) (RW:normal sub7) (RW:normal sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7) (RW:cw sub7 sub7))
+Metric: 1

@@ -1,0 +1,147 @@
+Reduced 31 -> 14
+Domain: etipp
+Problem: printjob
+Require: 200ff
+Type[8]:
+    [0]: object, parent: -1
+    [1]: size_t, parent: 0
+    [2]: location_t, parent: 0
+    [3]: side_t, parent: 0
+    [4]: color_t, parent: 0
+    [5]: image_t, parent: 0
+    [6]: resource_t, parent: 0
+    [7]: sheet_t, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13
+    [1]: 0
+    [2]: 5 6 7
+    [3]: 3 4
+    [4]: 1 2
+    [5]: 12 13
+    [6]: 8
+    [7]: 9 10 11
+Obj[14]:
+    [0]: letter, type: 1, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: black, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [2]: color, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [3]: front, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [4]: back, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [5]: some_feeder_tray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [6]: some_finisher_tray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [7]: sys_outputtray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [8]: fe1-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [9]: dummy-sheet, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: sheet1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: sheet2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: image-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: image-2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[12]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    sheetsize: 7 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    location: 7 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    hasimage: 7 3 5 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    sideup: 7 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    stackedin: 7 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    imagecolor: 5 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    notprintedwith: 7 3 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    oppositeside: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    available: 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    prevsheet: 7 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    uninitialized: :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[1]:
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+Action[23]:
+    initialize: 
+        pre: (and (RW:uninitialized))
+        eff: (and (N:RW:uninitialized) (RW:available fe1-rsrc))
+    fe1-feedmsi-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet back) (RW:available fe1-rsrc) (increase (total-cost) 125))
+    fe1-feed-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet back) (RW:available fe1-rsrc) (increase (total-cost) 224))
+    hw1-leftentrytotopleftexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 1499))
+    hw1-leftentrytobottomleftexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 1499))
+    hw1-toprightentrytotopleftexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 8999))
+    hw1-toprightentrytobottomleftexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 8999))
+    hw1-bottomrightentrytotopleftexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 8999))
+    hw1-bottomrightentrytobottomleftexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 8999))
+    hw1-toprightentrytorightexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 1499))
+    hw1-bottomrightentrytorightexit-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 1499))
+    uc1-toime-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 2999))
+    uc1-inverttoime-letter: ?sheet:7 ?face:3 ?otherface:3
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?face))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?otherface) (N:RW:sideup ?sheet ?face) (RW:available fe1-rsrc) (increase (total-cost) 8000))
+    uc1-fromime-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 2999))
+    uc1-invertfromime-letter: ?sheet:7 ?face:3 ?otherface:3
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?face))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?otherface) (N:RW:sideup ?sheet ?face) (RW:available fe1-rsrc) (increase (total-cost) 8000))
+    uime-simplex-letter: ?sheet:7 ?face:3 ?image:5
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet some_feeder_tray) (RW:notprintedwith ?sheet ?face black))
+        eff: (and (RW:location ?sheet some_feeder_tray) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available fe1-rsrc) (increase (total-cost) 127790))
+    lc1-toime-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 4999))
+    lc1-inverttoime-letter: ?sheet:7 ?face:3 ?otherface:3
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?face))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?otherface) (N:RW:sideup ?sheet ?face) (RW:available fe1-rsrc) (increase (total-cost) 9999))
+    lc1-fromime-letter: ?sheet:7
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 4999))
+    lc1-invertfromime-letter: ?sheet:7 ?face:3 ?otherface:3
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?face))
+        eff: (and (RW:location ?sheet some_feeder_tray) (RW:sideup ?sheet ?otherface) (N:RW:sideup ?sheet ?face) (RW:available fe1-rsrc) (increase (total-cost) 9999))
+    lime-simplex-letter: ?sheet:7 ?face:3 ?image:5
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet some_feeder_tray) (RW:notprintedwith ?sheet ?face color))
+        eff: (and (RW:location ?sheet some_feeder_tray) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available fe1-rsrc) (increase (total-cost) 212790))
+    lime-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
+        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet some_feeder_tray) (RW:notprintedwith ?sheet ?face black))
+        eff: (and (RW:location ?sheet some_feeder_tray) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available fe1-rsrc) (increase (total-cost) 212790))
+    sys-stack-letter: ?sheet:7 ?prevsheet:7
+        pre: (and (RW:available fe1-rsrc) (R:prevsheet ?sheet ?prevsheet) (RW:location ?prevsheet some_finisher_tray) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
+        eff: (and (RW:location ?sheet some_finisher_tray) (W:stackedin ?sheet sys_outputtray) (N:RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 1499))
+Init[20]:
+  (uninitialized)
+  S:(oppositeside front back)
+  S:(oppositeside back front)
+  (location dummy-sheet some_finisher_tray)
+  S:(prevsheet sheet1 dummy-sheet)
+  S:(prevsheet sheet2 sheet1)
+  S:(sheetsize sheet1 letter)
+  S:(sheetsize sheet2 letter)
+  (location sheet1 some_feeder_tray)
+  (location sheet2 some_feeder_tray)
+  S:(imagecolor image-1 color)
+  S:(imagecolor image-2 black)
+  (notprintedwith sheet1 front black)
+  (notprintedwith sheet1 back black)
+  (notprintedwith sheet1 front color)
+  (notprintedwith sheet1 back color)
+  (notprintedwith sheet2 front black)
+  (notprintedwith sheet2 back black)
+  (notprintedwith sheet2 front color)
+  (notprintedwith sheet2 back color)
+Init[1]:
+  (= (total-cost) 0)
+Goal: (and (W:hasimage sheet1 front image-1) (RW:notprintedwith sheet1 front black) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (W:hasimage sheet2 front image-2) (RW:notprintedwith sheet2 front color) (RW:notprintedwith sheet2 back black) (RW:notprintedwith sheet2 back color) (RW:sideup sheet1 front) (RW:sideup sheet2 front) (W:stackedin sheet1 sys_outputtray) (W:stackedin sheet2 sys_outputtray))
+Metric: 1

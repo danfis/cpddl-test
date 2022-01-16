@@ -1,0 +1,64 @@
+Reduced 11 -> 1
+Domain: strips-sliding-tile
+Problem: p3-3-puzzle-problem-100-1390833173323132671
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0
+Obj[1]:
+    [0]: t1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    tile: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    xposition: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    yposition: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 0 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    blank: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    inc: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    dec: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[4]:
+    move-up: ?t:0 ?px:0 ?py:0 ?by:0
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
+        eff: (and (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+    move-down: ?t:0 ?px:0 ?py:0 ?by:0
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
+        eff: (and (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+    move-left: ?t:0 ?px:0 ?py:0 ?bx:0
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:dec ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
+        eff: (and (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+    move-right: ?t:0 ?px:0 ?py:0 ?bx:0
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:inc ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
+        eff: (and (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+Init[27]:
+  S:(tile t1)
+  S:(tile t1)
+  S:(tile t1)
+  S:(tile t1)
+  S:(tile t1)
+  S:(tile t1)
+  S:(tile t1)
+  S:(tile t1)
+  S:(xposition t1)
+  S:(xposition t1)
+  S:(xposition t1)
+  S:(yposition t1)
+  S:(yposition t1)
+  S:(yposition t1)
+  S:(inc t1 t1)
+  S:(inc t1 t1)
+  S:(dec t1 t1)
+  S:(dec t1 t1)
+  (at t1 t1 t1)
+  (blank t1 t1)
+  (at t1 t1 t1)
+  (at t1 t1 t1)
+  (at t1 t1 t1)
+  (at t1 t1 t1)
+  (at t1 t1 t1)
+  (at t1 t1 t1)
+  (at t1 t1 t1)
+Init[0]:
+Goal: (and (RW:at t1 t1 t1) (RW:at t1 t1 t1) (RW:at t1 t1 t1) (RW:at t1 t1 t1) (RW:at t1 t1 t1) (RW:at t1 t1 t1) (RW:at t1 t1 t1) (RW:at t1 t1 t1))
+Metric: 0

@@ -1,0 +1,64 @@
+Reduced 6 -> 6
+Domain: tpp-propositional
+Problem: tpp
+Require: ff
+Type[8]:
+    [0]: object, parent: -1
+    [1]: place, parent: 0
+    [2]: locatable, parent: 0
+    [3]: level, parent: 0
+    [4]: depot, parent: 1
+    [5]: market, parent: 1
+    [6]: truck, parent: 2
+    [7]: goods, parent: 2
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5
+    [1]: 2 3
+    [2]: 0 1
+    [3]: 4 5
+    [4]: 3
+    [5]: 2
+    [6]: 1
+    [7]: 0
+Obj[6]:
+    [0]: goods1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: truck1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: market1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: depot1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: level0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: level1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    loaded: 7 6 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    ready-to-load: 7 5 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    stored: 7 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    on-sale: 7 5 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    next: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 6 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    connected: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[4]:
+    drive: ?t:6 ?from:1 ?to:1
+        pre: (and (RW:at ?t ?from) (R:connected ?from ?to))
+        eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to))
+    load: ?g:7 ?t:6 ?m:5 ?l1:3 ?l2:3 ?l3:3 ?l4:3
+        pre: (and (RW:at ?t ?m) (RW:loaded ?g ?t ?l3) (RW:ready-to-load ?g ?m ?l2) (R:next ?l2 ?l1) (R:next ?l4 ?l3))
+        eff: (and (RW:loaded ?g ?t ?l4) (N:RW:loaded ?g ?t ?l3) (RW:ready-to-load ?g ?m ?l1) (N:RW:ready-to-load ?g ?m ?l2))
+    unload: ?g:7 ?t:6 ?d:4 ?l1:3 ?l2:3 ?l3:3 ?l4:3
+        pre: (and (RW:at ?t ?d) (RW:loaded ?g ?t ?l2) (RW:stored ?g ?l3) (R:next ?l2 ?l1) (R:next ?l4 ?l3))
+        eff: (and (RW:loaded ?g ?t ?l1) (N:RW:loaded ?g ?t ?l2) (RW:stored ?g ?l4) (N:RW:stored ?g ?l3))
+    buy: ?t:6 ?g:7 ?m:5 ?l1:3 ?l2:3 ?l3:3 ?l4:3
+        pre: (and (RW:at ?t ?m) (RW:on-sale ?g ?m ?l2) (RW:ready-to-load ?g ?m ?l3) (R:next ?l2 ?l1) (R:next ?l4 ?l3))
+        eff: (and (RW:on-sale ?g ?m ?l1) (N:RW:on-sale ?g ?m ?l2) (RW:ready-to-load ?g ?m ?l4) (N:RW:ready-to-load ?g ?m ?l3))
+Init[8]:
+  S:(next level1 level0)
+  (ready-to-load goods1 market1 level0)
+  (stored goods1 level0)
+  (loaded goods1 truck1 level0)
+  S:(connected depot1 market1)
+  S:(connected market1 depot1)
+  (on-sale goods1 market1 level1)
+  (at truck1 depot1)
+Init[0]:
+Goal: (RW:stored goods1 level1)
+Metric: 0

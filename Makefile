@@ -13,6 +13,7 @@ CFLAGS += $(BORUVKA_CFLAGS)
 CFLAGS += $(LP_CFLAGS)
 LDFLAGS += -lrt -lm -L$(TOPDIR) -lpddl -pthread
 LDFLAGS += $(BORUVKA_LDFLAGS)
+LDFLAGS += $(CPOPTIMIZER_LDFLAGS)
 LDFLAGS += $(LP_LDFLAGS)
 LDFLAGS += $(BLISS_LDFLAGS)
 LDFLAGS += $(CLIQUER_LDFLAGS)
@@ -42,6 +43,7 @@ TESTS += flow
 TESTS += clique
 TESTS += symbolic
 TESTS += datalog
+TESTS += homomorphism
 
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
@@ -83,21 +85,25 @@ check-valgrind: all
 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
              --trace-children=yes --error-limit=no \
              --child-silent-after-fork=yes \
-             ./test $(T) 2>&1 | tee check.log
+             --suppressions=test.supp \
+             ./test $(T) 2>&1 | tee check.log | bash filter-valgrind.sh
 check-all-valgrind: all
 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
              --trace-children=yes --error-limit=no \
              --child-silent-after-fork=yes \
-             ./test -a $(T) 2>&1 | tee check.log
+             --suppressions=test.supp \
+             ./test -a $(T) 2>&1 | tee check.log | bash filter-valgrind.sh
 
 check-segfault: all
 	valgrind -q --trace-children=yes \
              --error-limit=no \
-             ./test $(T) <tasks.txt 2>&1 | tee check.log
+             --suppressions=test.supp \
+             ./test $(T) 2>&1 | tee check.log
 check-all-segfault: all
 	valgrind -q --trace-children=yes \
              --error-limit=no \
-             ./test -a $(T) <tasks.txt 2>&1 | tee check.log
+             --suppressions=test.supp \
+             ./test -a $(T) 2>&1 | tee check.log
 
 check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test $(T)
@@ -106,7 +112,8 @@ check-all-gdb: all
 
 check-valgrind-gen-suppressions: all
 	valgrind -q --leak-check=full --show-reachable=yes --trace-children=yes \
-             --gen-suppressions=all --log-file=out --error-limit=no \
+             --gen-suppressions=all --log-file=supp.out --error-limit=no \
+             --suppressions=test.supp \
              ./test $(T) <tasks.txt
 
 clean:

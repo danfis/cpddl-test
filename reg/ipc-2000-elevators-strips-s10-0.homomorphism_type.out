@@ -1,0 +1,274 @@
+Collapsing type 1:passenger with 10 objects
+Reduced 30 -> 21
+Domain: miconic
+Problem: mixed-f20-p10-u0-v0-g0-a0-n0-a0-b0-n0-f0-r0
+Require: ff
+Type[3]:
+    [0]: object, parent: -1
+    [1]: passenger, parent: 0
+    [2]: floor, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+    [1]: 0
+    [2]: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Obj[21]:
+    [0]: p0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: f0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: f1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: f2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: f3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: f4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: f5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: f6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: f7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: f8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: f9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: f10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: f11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: f12, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: f13, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: f14, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: f15, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: f16, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: f17, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: f18, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: f19, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[9]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    origin: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    destin: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    above: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    boarded: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    not-boarded: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    served: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    not-served: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    lift-at: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[0]:
+Action[4]:
+    board: ?f:2 ?p:1
+        pre: (and (RW:lift-at ?f) (R:origin ?p ?f))
+        eff: (and (RW:boarded ?p))
+    depart: ?f:2 ?p:1
+        pre: (and (RW:lift-at ?f) (R:destin ?p ?f) (RW:boarded ?p))
+        eff: (and (W:served ?p))
+    up: ?f1:2 ?f2:2
+        pre: (and (RW:lift-at ?f1) (R:above ?f1 ?f2))
+        eff: (and (RW:lift-at ?f2) (N:RW:lift-at ?f1))
+    down: ?f1:2 ?f2:2
+        pre: (and (RW:lift-at ?f1) (R:above ?f2 ?f1))
+        eff: (and (RW:lift-at ?f2) (N:RW:lift-at ?f1))
+Init[211]:
+  S:(above f0 f1)
+  S:(above f0 f2)
+  S:(above f0 f3)
+  S:(above f0 f4)
+  S:(above f0 f5)
+  S:(above f0 f6)
+  S:(above f0 f7)
+  S:(above f0 f8)
+  S:(above f0 f9)
+  S:(above f0 f10)
+  S:(above f0 f11)
+  S:(above f0 f12)
+  S:(above f0 f13)
+  S:(above f0 f14)
+  S:(above f0 f15)
+  S:(above f0 f16)
+  S:(above f0 f17)
+  S:(above f0 f18)
+  S:(above f0 f19)
+  S:(above f1 f2)
+  S:(above f1 f3)
+  S:(above f1 f4)
+  S:(above f1 f5)
+  S:(above f1 f6)
+  S:(above f1 f7)
+  S:(above f1 f8)
+  S:(above f1 f9)
+  S:(above f1 f10)
+  S:(above f1 f11)
+  S:(above f1 f12)
+  S:(above f1 f13)
+  S:(above f1 f14)
+  S:(above f1 f15)
+  S:(above f1 f16)
+  S:(above f1 f17)
+  S:(above f1 f18)
+  S:(above f1 f19)
+  S:(above f2 f3)
+  S:(above f2 f4)
+  S:(above f2 f5)
+  S:(above f2 f6)
+  S:(above f2 f7)
+  S:(above f2 f8)
+  S:(above f2 f9)
+  S:(above f2 f10)
+  S:(above f2 f11)
+  S:(above f2 f12)
+  S:(above f2 f13)
+  S:(above f2 f14)
+  S:(above f2 f15)
+  S:(above f2 f16)
+  S:(above f2 f17)
+  S:(above f2 f18)
+  S:(above f2 f19)
+  S:(above f3 f4)
+  S:(above f3 f5)
+  S:(above f3 f6)
+  S:(above f3 f7)
+  S:(above f3 f8)
+  S:(above f3 f9)
+  S:(above f3 f10)
+  S:(above f3 f11)
+  S:(above f3 f12)
+  S:(above f3 f13)
+  S:(above f3 f14)
+  S:(above f3 f15)
+  S:(above f3 f16)
+  S:(above f3 f17)
+  S:(above f3 f18)
+  S:(above f3 f19)
+  S:(above f4 f5)
+  S:(above f4 f6)
+  S:(above f4 f7)
+  S:(above f4 f8)
+  S:(above f4 f9)
+  S:(above f4 f10)
+  S:(above f4 f11)
+  S:(above f4 f12)
+  S:(above f4 f13)
+  S:(above f4 f14)
+  S:(above f4 f15)
+  S:(above f4 f16)
+  S:(above f4 f17)
+  S:(above f4 f18)
+  S:(above f4 f19)
+  S:(above f5 f6)
+  S:(above f5 f7)
+  S:(above f5 f8)
+  S:(above f5 f9)
+  S:(above f5 f10)
+  S:(above f5 f11)
+  S:(above f5 f12)
+  S:(above f5 f13)
+  S:(above f5 f14)
+  S:(above f5 f15)
+  S:(above f5 f16)
+  S:(above f5 f17)
+  S:(above f5 f18)
+  S:(above f5 f19)
+  S:(above f6 f7)
+  S:(above f6 f8)
+  S:(above f6 f9)
+  S:(above f6 f10)
+  S:(above f6 f11)
+  S:(above f6 f12)
+  S:(above f6 f13)
+  S:(above f6 f14)
+  S:(above f6 f15)
+  S:(above f6 f16)
+  S:(above f6 f17)
+  S:(above f6 f18)
+  S:(above f6 f19)
+  S:(above f7 f8)
+  S:(above f7 f9)
+  S:(above f7 f10)
+  S:(above f7 f11)
+  S:(above f7 f12)
+  S:(above f7 f13)
+  S:(above f7 f14)
+  S:(above f7 f15)
+  S:(above f7 f16)
+  S:(above f7 f17)
+  S:(above f7 f18)
+  S:(above f7 f19)
+  S:(above f8 f9)
+  S:(above f8 f10)
+  S:(above f8 f11)
+  S:(above f8 f12)
+  S:(above f8 f13)
+  S:(above f8 f14)
+  S:(above f8 f15)
+  S:(above f8 f16)
+  S:(above f8 f17)
+  S:(above f8 f18)
+  S:(above f8 f19)
+  S:(above f9 f10)
+  S:(above f9 f11)
+  S:(above f9 f12)
+  S:(above f9 f13)
+  S:(above f9 f14)
+  S:(above f9 f15)
+  S:(above f9 f16)
+  S:(above f9 f17)
+  S:(above f9 f18)
+  S:(above f9 f19)
+  S:(above f10 f11)
+  S:(above f10 f12)
+  S:(above f10 f13)
+  S:(above f10 f14)
+  S:(above f10 f15)
+  S:(above f10 f16)
+  S:(above f10 f17)
+  S:(above f10 f18)
+  S:(above f10 f19)
+  S:(above f11 f12)
+  S:(above f11 f13)
+  S:(above f11 f14)
+  S:(above f11 f15)
+  S:(above f11 f16)
+  S:(above f11 f17)
+  S:(above f11 f18)
+  S:(above f11 f19)
+  S:(above f12 f13)
+  S:(above f12 f14)
+  S:(above f12 f15)
+  S:(above f12 f16)
+  S:(above f12 f17)
+  S:(above f12 f18)
+  S:(above f12 f19)
+  S:(above f13 f14)
+  S:(above f13 f15)
+  S:(above f13 f16)
+  S:(above f13 f17)
+  S:(above f13 f18)
+  S:(above f13 f19)
+  S:(above f14 f15)
+  S:(above f14 f16)
+  S:(above f14 f17)
+  S:(above f14 f18)
+  S:(above f14 f19)
+  S:(above f15 f16)
+  S:(above f15 f17)
+  S:(above f15 f18)
+  S:(above f15 f19)
+  S:(above f16 f17)
+  S:(above f16 f18)
+  S:(above f16 f19)
+  S:(above f17 f18)
+  S:(above f17 f19)
+  S:(above f18 f19)
+  S:(origin p0 f3)
+  S:(destin p0 f6)
+  S:(origin p0 f17)
+  S:(destin p0 f15)
+  S:(origin p0 f13)
+  S:(destin p0 f15)
+  S:(origin p0 f6)
+  S:(destin p0 f12)
+  S:(origin p0 f9)
+  S:(destin p0 f1)
+  S:(origin p0 f2)
+  S:(destin p0 f7)
+  S:(origin p0 f10)
+  S:(destin p0 f19)
+  S:(origin p0 f3)
+  S:(destin p0 f6)
+  S:(origin p0 f0)
+  S:(destin p0 f6)
+  S:(origin p0 f12)
+  S:(destin p0 f16)
+  (lift-at f0)
+Init[0]:
+Goal: (and (W:served p0) (W:served p0) (W:served p0) (W:served p0) (W:served p0) (W:served p0) (W:served p0) (W:served p0) (W:served p0) (W:served p0))
+Metric: 0

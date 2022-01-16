@@ -1,0 +1,106 @@
+Reduced 26 -> 22
+Domain: gripper-strips
+Problem: strips-gripper-x-10
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+Obj[22]:
+    [0]: rooma, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: roomb, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: ball20, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: ball19, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: ball18, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: ball17, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: ball16, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: ball15, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: ball14, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: ball13, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: ball12, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: ball11, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: ball10, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: ball9, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: ball8, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: ball7, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: ball6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: ball5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: ball4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: ball3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: ball2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: ball1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    room: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    ball: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    gripper: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at-robby: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    free: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    carry: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[0]:
+Action[3]:
+    move: ?from:0 ?to:0
+        pre: (and (R:room ?from) (R:room ?to) (RW:at-robby ?from))
+        eff: (and (RW:at-robby ?to))
+    pick: ?obj:0 ?room:0 ?gripper:0
+        pre: (and (R:ball ?obj) (R:room ?room) (R:gripper ?gripper) (RW:at ?obj ?room) (RW:at-robby ?room) (RW:free ?gripper))
+        eff: (and (RW:carry ?obj ?gripper))
+    drop: ?obj:0 ?room:0 ?gripper:0
+        pre: (and (R:ball ?obj) (R:room ?room) (R:gripper ?gripper) (RW:carry ?obj ?gripper) (RW:at-robby ?room))
+        eff: (and (RW:at ?obj ?room) (RW:free ?gripper))
+Init[51]:
+  S:(room rooma)
+  S:(room roomb)
+  S:(ball rooma)
+  S:(ball roomb)
+  S:(ball ball20)
+  S:(ball ball19)
+  S:(ball ball18)
+  S:(ball ball17)
+  S:(ball ball16)
+  S:(ball ball15)
+  S:(ball ball14)
+  S:(ball ball13)
+  S:(ball ball12)
+  S:(ball ball11)
+  S:(ball ball10)
+  S:(ball ball9)
+  S:(ball ball8)
+  S:(ball ball7)
+  S:(ball ball6)
+  S:(ball ball5)
+  S:(ball ball4)
+  S:(ball ball3)
+  S:(ball ball2)
+  S:(ball ball1)
+  (at-robby rooma)
+  (free rooma)
+  (free roomb)
+  (at rooma rooma)
+  (at roomb rooma)
+  (at ball20 rooma)
+  (at ball19 rooma)
+  (at ball18 rooma)
+  (at ball17 rooma)
+  (at ball16 rooma)
+  (at ball15 rooma)
+  (at ball14 rooma)
+  (at ball13 rooma)
+  (at ball12 rooma)
+  (at ball11 rooma)
+  (at ball10 rooma)
+  (at ball9 rooma)
+  (at ball8 rooma)
+  (at ball7 rooma)
+  (at ball6 rooma)
+  (at ball5 rooma)
+  (at ball4 rooma)
+  (at ball3 rooma)
+  (at ball2 rooma)
+  (at ball1 rooma)
+  S:(gripper rooma)
+  S:(gripper roomb)
+Init[0]:
+Goal: (and (RW:at rooma roomb) (RW:at roomb roomb) (RW:at ball20 roomb) (RW:at ball19 roomb) (RW:at ball18 roomb) (RW:at ball17 roomb) (RW:at ball16 roomb) (RW:at ball15 roomb) (RW:at ball14 roomb) (RW:at ball13 roomb) (RW:at ball12 roomb) (RW:at ball11 roomb) (RW:at ball10 roomb) (RW:at ball9 roomb) (RW:at ball8 roomb) (RW:at ball7 roomb) (RW:at ball6 roomb) (RW:at ball5 roomb) (RW:at ball4 roomb) (RW:at ball3 roomb) (RW:at ball2 roomb) (RW:at ball1 roomb))
+Metric: 0

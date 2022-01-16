@@ -1,0 +1,87 @@
+Reduced 13 -> 4
+Domain: depot
+Problem: depotprob1818
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3
+Obj[4]:
+    [0]: depot0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: pallet0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: crate0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[16]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    on: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    lifting: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    available: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    clear: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    place: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    locatable: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    depot: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    distributor: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    truck: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    hoist: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    surface: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pallet: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    crate: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[5]:
+    drive: ?x:0 ?y:0 ?z:0
+        pre: (and (R:truck ?x) (R:place ?y) (R:place ?z) (RW:at ?x ?y))
+        eff: (and (RW:at ?x ?z))
+    lift: ?x:0 ?y:0 ?z:0 ?p:0
+        pre: (and (R:hoist ?x) (R:crate ?y) (R:surface ?z) (R:place ?p) (RW:at ?x ?p) (RW:available ?x) (RW:at ?y ?p) (RW:on ?y ?z) (RW:clear ?y))
+        eff: (and (RW:lifting ?x ?y) (RW:clear ?z))
+    drop: ?x:0 ?y:0 ?z:0 ?p:0
+        pre: (and (R:hoist ?x) (R:crate ?y) (R:surface ?z) (R:place ?p) (RW:at ?x ?p) (RW:at ?z ?p) (RW:clear ?z) (RW:lifting ?x ?y))
+        eff: (and (RW:available ?x) (RW:at ?y ?p) (RW:clear ?y) (RW:on ?y ?z))
+    load: ?x:0 ?y:0 ?z:0 ?p:0
+        pre: (and (R:hoist ?x) (R:crate ?y) (R:truck ?z) (R:place ?p) (RW:at ?x ?p) (RW:at ?z ?p) (RW:lifting ?x ?y))
+        eff: (and (RW:in ?y ?z) (RW:available ?x))
+    unload: ?x:0 ?y:0 ?z:0 ?p:0
+        pre: (and (R:hoist ?x) (R:crate ?y) (R:truck ?z) (R:place ?p) (RW:at ?x ?p) (RW:at ?z ?p) (RW:available ?x) (RW:in ?y ?z))
+        eff: (and (RW:lifting ?x ?y))
+Init[36]:
+  S:(pallet pallet0)
+  S:(surface pallet0)
+  (at pallet0 depot0)
+  (clear pallet0)
+  S:(pallet depot0)
+  S:(surface depot0)
+  (at depot0 depot0)
+  (clear crate0)
+  S:(pallet truck1)
+  S:(surface truck1)
+  (at truck1 depot0)
+  (clear truck1)
+  S:(truck depot0)
+  (at depot0 depot0)
+  S:(truck truck1)
+  (at truck1 depot0)
+  S:(hoist pallet0)
+  (at pallet0 depot0)
+  (available pallet0)
+  S:(hoist pallet0)
+  (at pallet0 depot0)
+  (available pallet0)
+  S:(hoist crate0)
+  (at crate0 depot0)
+  (available crate0)
+  S:(crate crate0)
+  S:(surface crate0)
+  (at crate0 depot0)
+  (on crate0 depot0)
+  S:(crate pallet0)
+  S:(surface pallet0)
+  (at pallet0 depot0)
+  (on pallet0 pallet0)
+  S:(place depot0)
+  S:(place depot0)
+  S:(place depot0)
+Init[0]:
+Goal: (and (RW:on crate0 truck1) (RW:on pallet0 depot0))
+Metric: 0

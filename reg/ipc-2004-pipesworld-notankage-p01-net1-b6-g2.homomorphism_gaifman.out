@@ -1,0 +1,90 @@
+Reduced 16 -> 6
+Domain: pipesworld_strips
+Problem: network1new_all_6_2_instance
+Require: ff
+Type[5]:
+    [0]: object, parent: -1
+    [1]: pipe, parent: 0
+    [2]: area, parent: 0
+    [3]: product, parent: 0
+    [4]: batch-atom, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5
+    [1]: 4 5
+    [2]: 3
+    [3]: 0
+    [4]: 1 2
+Obj[6]:
+    [0]: lco, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: b0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: b5, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: a1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: s12, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: s13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[13]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    connect: 2 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    unitary: 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    not-unitary: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    last: 4 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    first: 4 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    follow: 4 4 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    is-product: 4 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    on: 4 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    may-interface: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    normal: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    push-updating: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    pop-updating: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+Function[0]:
+Action[2]:
+    pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?last-batch-atom:4 ?product-batch-atom-in:3 ?product-last-batch:3
+        pre: (and (RW:last ?last-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?to-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?last-batch-atom ?product-last-batch) (R:may-interface ?product-batch-atom-in ?product-last-batch))
+        eff: (and (RW:last ?batch-atom-in ?pipe) (RW:first ?batch-atom-in ?pipe) (RW:on ?last-batch-atom ?from-area))
+    push-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3
+        pre: (and (RW:first ?first-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?from-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch))
+        eff: (and (RW:first ?batch-atom-in ?pipe) (RW:last ?batch-atom-in ?pipe) (RW:on ?first-batch-atom ?to-area))
+Init[41]:
+  S:(normal s12)
+  S:(normal s13)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(may-interface lco lco)
+  S:(connect a1 a1 s12)
+  S:(connect a1 a1 s13)
+  S:(is-product b0 lco)
+  S:(is-product b0 lco)
+  S:(is-product b0 lco)
+  S:(is-product b0 lco)
+  S:(is-product b0 lco)
+  S:(is-product b5 lco)
+  (on b0 a1)
+  (on b0 a1)
+  (on b0 a1)
+  (on b0 a1)
+  (first b0 s12)
+  (last b0 s12)
+  (first b5 s13)
+  (last b5 s13)
+  S:(unitary s12)
+  S:(unitary s13)
+Init[0]:
+Goal: (and (RW:on b0 a1) (RW:on b5 a1))
+Metric: 0

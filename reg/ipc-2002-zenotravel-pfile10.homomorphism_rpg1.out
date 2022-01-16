@@ -1,0 +1,96 @@
+Reduced 23 -> 13
+Domain: zeno-travel
+Problem: ztravel-3-8
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12
+Obj[13]:
+    [0]: plane1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: plane2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: plane3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: person4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: person5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: person6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: person7, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: person8, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: city4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: fl3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: fl4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: fl5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: fl6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[9]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    fuel-level: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    next: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    aircraft: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    person: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    city: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    flevel: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[5]:
+    board: ?p:0 ?a:0 ?c:0
+        pre: (and (R:person ?p) (R:aircraft ?a) (R:city ?c) (RW:at ?p ?c) (RW:at ?a ?c))
+        eff: (and (RW:in ?p ?a))
+    debark: ?p:0 ?a:0 ?c:0
+        pre: (and (R:person ?p) (R:aircraft ?a) (R:city ?c) (RW:in ?p ?a) (RW:at ?a ?c))
+        eff: (and (RW:at ?p ?c))
+    fly: ?a:0 ?c1:0 ?c2:0 ?l1:0 ?l2:0
+        pre: (and (R:aircraft ?a) (R:city ?c1) (R:city ?c2) (R:flevel ?l1) (R:flevel ?l2) (RW:at ?a ?c1) (RW:fuel-level ?a ?l1) (R:next ?l2 ?l1))
+        eff: (and (RW:at ?a ?c2) (RW:fuel-level ?a ?l2))
+    zoom: ?a:0 ?c1:0 ?c2:0 ?l1:0 ?l2:0 ?l3:0
+        pre: (and (R:aircraft ?a) (R:city ?c1) (R:city ?c2) (R:flevel ?l1) (R:flevel ?l2) (R:flevel ?l3) (RW:at ?a ?c1) (RW:fuel-level ?a ?l1) (R:next ?l2 ?l1) (R:next ?l3 ?l2))
+        eff: (and (RW:at ?a ?c2) (RW:fuel-level ?a ?l3))
+    refuel: ?a:0 ?c:0 ?l:0 ?l1:0
+        pre: (and (R:aircraft ?a) (R:city ?c) (R:flevel ?l) (R:flevel ?l1) (RW:fuel-level ?a ?l) (R:next ?l ?l1) (RW:at ?a ?c))
+        eff: (and (RW:fuel-level ?a ?l1))
+Init[43]:
+  (at plane1 plane1)
+  S:(aircraft plane1)
+  (fuel-level plane1 plane3)
+  (at plane2 city4)
+  S:(aircraft plane2)
+  (fuel-level plane2 fl5)
+  (at plane3 plane3)
+  S:(aircraft plane3)
+  (fuel-level plane3 plane3)
+  (at plane1 person4)
+  S:(person plane1)
+  (at plane2 person4)
+  S:(person plane2)
+  (at plane3 city4)
+  S:(person plane3)
+  (at person4 city4)
+  S:(person person4)
+  (at person5 plane2)
+  S:(person person5)
+  (at person6 plane1)
+  S:(person person6)
+  (at person7 plane2)
+  S:(person person7)
+  (at person8 plane1)
+  S:(person person8)
+  S:(city plane1)
+  S:(city plane2)
+  S:(city plane3)
+  S:(city person4)
+  S:(city city4)
+  S:(next plane1 plane2)
+  S:(next plane2 plane3)
+  S:(next plane3 fl3)
+  S:(next fl3 fl4)
+  S:(next fl4 fl5)
+  S:(next fl5 fl6)
+  S:(flevel plane1)
+  S:(flevel plane2)
+  S:(flevel plane3)
+  S:(flevel fl3)
+  S:(flevel fl4)
+  S:(flevel fl5)
+  S:(flevel fl6)
+Init[0]:
+Goal: (and (RW:at plane1 plane3) (RW:at plane1 plane2) (RW:at plane2 plane3) (RW:at plane3 person4) (RW:at person4 plane2) (RW:at person5 plane1) (RW:at person6 person4) (RW:at person7 city4) (RW:at person8 person4))
+Metric: 0

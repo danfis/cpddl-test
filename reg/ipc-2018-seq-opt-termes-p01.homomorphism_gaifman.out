@@ -1,0 +1,107 @@
+Reduced 16 -> 6
+Domain: termes
+Problem: termes-00038-0036-4x3x3-random_towers_4x3_3_1_3
+Require: ff
+Type[3]:
+    [0]: object, parent: -1
+    [1]: numb, parent: 0
+    [2]: position, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5
+    [1]: 0
+    [2]: 1 2 3 4 5
+Obj[6]:
+    [0]: n0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: pos-0-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: pos-2-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: pos-3-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: pos-3-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: pos-3-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    height: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    has-block: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 7
+    succ: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    neighbor: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    is-depot: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    NOT-has-block: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 3
+Function[0]:
+Action[7]:
+    move: ?from:2 ?to:2 ?h:1
+        pre: (and (RW:at ?from) (R:neighbor ?from ?to) (RW:height ?from ?h) (RW:height ?to ?h))
+        eff: (and (RW:at ?to))
+    move-up: ?from:2 ?hfrom:1 ?to:2 ?hto:1
+        pre: (and (RW:at ?from) (R:neighbor ?from ?to) (RW:height ?from ?hfrom) (RW:height ?to ?hto) (R:succ ?hto ?hfrom))
+        eff: (and (RW:at ?to))
+    move-down: ?from:2 ?hfrom:1 ?to:2 ?hto:1
+        pre: (and (RW:at ?from) (R:neighbor ?from ?to) (RW:height ?from ?hfrom) (RW:height ?to ?hto) (R:succ ?hfrom ?hto))
+        eff: (and (RW:at ?to))
+    place-block: ?rpos:2 ?bpos:2 ?hbefore:1 ?hafter:1
+        pre: (and (RW:at ?rpos) (R:neighbor ?rpos ?bpos) (RW:height ?rpos ?hbefore) (RW:height ?bpos ?hbefore) (R:succ ?hafter ?hbefore) (RW:has-block))
+        eff: (and (RW:height ?bpos ?hafter) (N:RW:has-block) (RW:NOT-has-block))
+    remove-block: ?rpos:2 ?bpos:2 ?hbefore:1 ?hafter:1
+        pre: (and (RW:at ?rpos) (R:neighbor ?rpos ?bpos) (RW:height ?rpos ?hafter) (RW:height ?bpos ?hbefore) (R:succ ?hbefore ?hafter) (RW:NOT-has-block))
+        eff: (and (RW:height ?bpos ?hafter) (RW:has-block) (N:RW:NOT-has-block))
+    create-block: ?p:2
+        pre: (and (RW:at ?p) (RW:NOT-has-block) (R:is-depot ?p))
+        eff: (and (RW:has-block) (N:RW:NOT-has-block))
+    destroy-block: ?p:2
+        pre: (and (RW:at ?p) (RW:has-block) (R:is-depot ?p))
+        eff: (and (N:RW:has-block) (RW:NOT-has-block))
+Init[52]:
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-0-0 n0)
+  (height pos-2-2 n0)
+  (height pos-3-0 n0)
+  (height pos-3-1 n0)
+  (height pos-3-2 n0)
+  (at pos-0-0)
+  S:(succ n0 n0)
+  S:(succ n0 n0)
+  S:(succ n0 n0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-2-2)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-3-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-3-1)
+  S:(neighbor pos-0-0 pos-0-0)
+  S:(neighbor pos-0-0 pos-2-2)
+  S:(neighbor pos-2-2 pos-0-0)
+  S:(neighbor pos-2-2 pos-3-2)
+  S:(neighbor pos-2-2 pos-0-0)
+  S:(neighbor pos-3-0 pos-0-0)
+  S:(neighbor pos-3-0 pos-3-1)
+  S:(neighbor pos-3-1 pos-0-0)
+  S:(neighbor pos-3-1 pos-3-0)
+  S:(neighbor pos-3-1 pos-3-2)
+  S:(neighbor pos-3-2 pos-2-2)
+  S:(neighbor pos-3-2 pos-3-1)
+  S:(is-depot pos-0-0)
+  (NOT-has-block)
+Init[0]:
+Goal: (and (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-0-0 n0) (RW:height pos-2-2 n0) (RW:height pos-3-0 n0) (RW:height pos-3-1 n0) (RW:height pos-3-2 n0) (RW:NOT-has-block))
+Metric: 0

@@ -1,0 +1,109 @@
+Collapsing type 6:hydrogen with 16 objects
+Reduced 25 -> 10
+Domain: organic-synthesis
+Problem: alkene_p07
+Require: ff
+Type[8]:
+    [0]: object, parent: -1
+    [1]: chemical_atom, parent: 0
+    [2]: r_group, parent: 1
+    [3]: hcno, parent: 2
+    [4]: hc, parent: 3
+    [5]: oxygen, parent: 3
+    [6]: hydrogen, parent: 4
+    [7]: carbon, parent: 4
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9
+    [1]: 0 1 2 3 4 5 6 7 8 9
+    [2]: 0 1 2 3 4 5 6 7 8 9
+    [3]: 0 1 2 3 4 5 6 7 8 9
+    [4]: 0 1 2 3 4 5 6 7 8
+    [5]: 9
+    [6]: 8
+    [7]: 0 1 2 3 4 5 6 7
+Obj[10]:
+    [0]: c016, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: c032, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: c033, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: c034, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: c035, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: c036, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: c037, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: c038, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: h061, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: o066, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[5]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    bond: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    doublebond: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    triplebond: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    aromaticbond: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+Function[0]:
+Action[5]:
+    additionofrohacrossgemdisubstitutedalkene: ?c_1:7 ?c_2:7 ?h_5:6 ?o_6:5 ?r1_8:7 ?h_4:6 ?r0_7:4 ?h_3:6 ?r2_9:4
+        pre: (and (N:R:= ?c_1 ?c_2) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_1 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 ?h_5) (RW:bond ?r2_9 ?o_6))
+        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2))
+    additionofrohacrossmonosubstitutedalkene: ?c_1:7 ?h_6:6 ?o_7:5 ?c_2:7 ?r0_8:4 ?h_4:6 ?h_5:6 ?h_3:6 ?r1_9:4
+        pre: (and (N:R:= ?c_1 ?c_2) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_5) (RW:bond ?c_2 ?h_4) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_8 ?c_1) (RW:bond ?o_7 ?h_6) (RW:bond ?r1_9 ?o_7))
+        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_7) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 ?h_6) (RW:bond ?h_6 ?c_2))
+    additionofrohacrosstetrasubstitutedalkene: ?c_1:7 ?o_4:5 ?c_2:7 ?h_3:6 ?r1_6:7 ?r2_7:7 ?r3_8:7 ?r0_5:7 ?r4_9:4
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (RW:bond ?c_2 ?r3_8) (RW:bond ?c_1 ?r1_6) (RW:bond ?c_2 ?r2_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_5 ?c_1) (RW:bond ?o_4 ?h_3) (RW:bond ?r4_9 ?o_4))
+        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_4) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 ?h_3) (RW:bond ?h_3 ?c_2))
+    additionofrohacrosstrisubstitutedalkene: ?c_1:7 ?o_5:5 ?h_4:6 ?c_2:7 ?r2_8:7 ?h_3:6 ?r0_6:7 ?r1_7:7 ?r3_9:4
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r2_8 ?r1_7) (RW:bond ?r0_6 ?c_1) (RW:bond ?c_1 ?r1_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?r2_8) (RW:bond ?r3_9 ?o_5) (RW:bond ?o_5 ?h_4))
+        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_5) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 ?h_4) (RW:bond ?h_4 ?c_2))
+    additionofrohacrossvicdisubstitutedalkene: ?c_1:7 ?c_2:7 ?h_5:6 ?o_6:5 ?r1_8:7 ?h_4:6 ?r0_7:7 ?h_3:6 ?r2_9:4
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r1_8 ?r0_7) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 ?h_5) (RW:bond ?r2_9 ?o_6))
+        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2))
+Init[48]:
+  (bond c016 o066)
+  (bond o066 c016)
+  (bond c016 h061)
+  (bond h061 c016)
+  (bond c016 h061)
+  (bond h061 c016)
+  (bond c016 h061)
+  (bond h061 c016)
+  (doublebond c032 c033)
+  (doublebond c033 c032)
+  (bond c032 h061)
+  (bond h061 c032)
+  (bond c032 h061)
+  (bond h061 c032)
+  (bond c033 c038)
+  (bond c038 c033)
+  (bond c033 c034)
+  (bond c034 c033)
+  (bond c034 h061)
+  (bond h061 c034)
+  (bond c034 h061)
+  (bond h061 c034)
+  (bond c034 c035)
+  (bond c035 c034)
+  (bond c035 h061)
+  (bond h061 c035)
+  (bond c035 h061)
+  (bond h061 c035)
+  (bond c035 c036)
+  (bond c036 c035)
+  (bond c036 h061)
+  (bond h061 c036)
+  (bond c036 h061)
+  (bond h061 c036)
+  (bond c036 c037)
+  (bond c037 c036)
+  (bond c037 h061)
+  (bond h061 c037)
+  (bond c037 h061)
+  (bond h061 c037)
+  (bond c037 c038)
+  (bond c038 c037)
+  (bond c038 h061)
+  (bond h061 c038)
+  (bond c038 h061)
+  (bond h061 c038)
+  (bond h061 o066)
+  (bond o066 h061)
+Init[0]:
+Goal: (and (RW:bond c016 o066) (RW:bond o066 c016) (RW:bond c016 h061) (RW:bond h061 c016) (RW:bond c016 h061) (RW:bond h061 c016) (RW:bond c016 h061) (RW:bond h061 c016) (RW:bond c032 c033) (RW:bond c033 c032) (RW:bond c032 h061) (RW:bond h061 c032) (RW:bond c032 h061) (RW:bond h061 c032) (RW:bond c032 h061) (RW:bond h061 c032) (RW:bond c033 c034) (RW:bond c034 c033) (RW:bond c033 c038) (RW:bond c038 c033) (RW:bond c033 o066) (RW:bond o066 c033) (RW:bond c034 c035) (RW:bond c035 c034) (RW:bond c034 h061) (RW:bond h061 c034) (RW:bond c034 h061) (RW:bond h061 c034) (RW:bond c035 c036) (RW:bond c036 c035) (RW:bond c035 h061) (RW:bond h061 c035) (RW:bond c035 h061) (RW:bond h061 c035) (RW:bond c036 c037) (RW:bond c037 c036) (RW:bond c036 h061) (RW:bond h061 c036) (RW:bond c036 h061) (RW:bond h061 c036) (RW:bond c037 c038) (RW:bond c038 c037) (RW:bond c037 h061) (RW:bond h061 c037) (RW:bond c037 h061) (RW:bond h061 c037) (RW:bond c038 h061) (RW:bond h061 c038) (RW:bond c038 h061) (RW:bond h061 c038))
+Metric: 0

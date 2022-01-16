@@ -1,0 +1,96 @@
+Reduced 28 -> 18
+Domain: parking
+Problem: parking
+Require: 200ff
+Type[3]:
+    [0]: object, parent: -1
+    [1]: car, parent: 0
+    [2]: curb, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+    [1]: 0 1 2 3 4 5 6 7 8 9 10 11 12
+    [2]: 13 14 15 16 17
+Obj[18]:
+    [0]: car_00, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: car_01, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: car_02, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: car_03, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: car_04, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: car_05, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: car_09, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: car_10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: car_11, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: car_13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: car_14, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: car_15, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: car_16, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: curb_0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: curb_1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: curb_2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: curb_4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: curb_5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[6]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    at-curb: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at-curb-num: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    behind-car: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    car-clear: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    curb-clear: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+Function[1]:
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+Action[4]:
+    move-curb-to-curb: ?car:1 ?curbsrc:2 ?curbdest:2
+        pre: (and (RW:car-clear ?car) (RW:curb-clear ?curbdest) (RW:at-curb-num ?car ?curbsrc))
+        eff: (and (RW:curb-clear ?curbsrc) (RW:at-curb-num ?car ?curbdest) (increase (total-cost) 1))
+    move-curb-to-car: ?car:1 ?curbsrc:2 ?cardest:1
+        pre: (and (RW:car-clear ?car) (RW:car-clear ?cardest) (RW:at-curb-num ?car ?curbsrc) (RW:at-curb ?cardest))
+        eff: (and (RW:curb-clear ?curbsrc) (RW:behind-car ?car ?cardest) (increase (total-cost) 1))
+    move-car-to-curb: ?car:1 ?carsrc:1 ?curbdest:2
+        pre: (and (RW:car-clear ?car) (RW:curb-clear ?curbdest) (RW:behind-car ?car ?carsrc))
+        eff: (and (RW:car-clear ?carsrc) (RW:at-curb-num ?car ?curbdest) (RW:at-curb ?car) (increase (total-cost) 1))
+    move-car-to-car: ?car:1 ?carsrc:1 ?cardest:1
+        pre: (and (RW:car-clear ?car) (RW:car-clear ?cardest) (RW:behind-car ?car ?carsrc) (RW:at-curb ?cardest))
+        eff: (and (RW:car-clear ?carsrc) (RW:behind-car ?car ?cardest) (increase (total-cost) 1))
+Init[38]:
+  (at-curb car_04)
+  (at-curb-num car_04 curb_0)
+  (behind-car car_13 car_04)
+  (car-clear car_13)
+  (at-curb car_02)
+  (at-curb-num car_02 curb_1)
+  (behind-car car_09 car_02)
+  (car-clear car_09)
+  (at-curb car_03)
+  (at-curb-num car_03 curb_2)
+  (behind-car car_00 car_03)
+  (car-clear car_00)
+  (at-curb car_14)
+  (at-curb-num car_14 curb_0)
+  (behind-car car_11 car_14)
+  (car-clear car_11)
+  (at-curb car_10)
+  (at-curb-num car_10 curb_4)
+  (behind-car car_14 car_10)
+  (car-clear car_14)
+  (at-curb car_05)
+  (at-curb-num car_05 curb_5)
+  (behind-car car_05 car_05)
+  (car-clear car_05)
+  (at-curb car_16)
+  (at-curb-num car_16 curb_0)
+  (behind-car car_02 car_16)
+  (car-clear car_02)
+  (at-curb car_15)
+  (at-curb-num car_15 curb_4)
+  (behind-car car_10 car_15)
+  (car-clear car_10)
+  (at-curb car_02)
+  (at-curb-num car_02 curb_0)
+  (car-clear car_02)
+  (at-curb car_01)
+  (at-curb-num car_01 curb_1)
+  (car-clear car_01)
+Init[1]:
+  (= (total-cost) 0)
+Goal: (and (RW:at-curb-num car_00 curb_0) (RW:behind-car car_10 car_00) (RW:at-curb-num car_01 curb_1) (RW:behind-car car_11 car_01) (RW:at-curb-num car_02 curb_2) (RW:behind-car car_10 car_02) (RW:at-curb-num car_03 curb_0) (RW:behind-car car_13 car_03) (RW:at-curb-num car_04 curb_4) (RW:behind-car car_14 car_04) (RW:at-curb-num car_05 curb_5) (RW:behind-car car_15 car_05) (RW:at-curb-num car_02 curb_0) (RW:behind-car car_16 car_02) (RW:at-curb-num car_02 curb_4) (RW:behind-car car_14 car_02) (RW:at-curb-num car_05 curb_0) (RW:at-curb-num car_09 curb_1))
+Metric: 1

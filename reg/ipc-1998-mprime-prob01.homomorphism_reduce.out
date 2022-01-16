@@ -1,0 +1,82 @@
+Reduced 21 -> 9
+Domain: mystery-prime-strips
+Problem: strips-mprime-x-1
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8
+Obj[9]:
+    [0]: rice, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: pear, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: pork, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: okra, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: rest, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: hangover, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: depression, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: abrasion, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: surrey, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[13]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    province: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    planet: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    food: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pleasure: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    pain: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    eats: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    craves: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    fears: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    locale: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    harmony: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    attacks: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    orbits: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[4]:
+    overcome: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
+        pre: (and (R:pain ?c) (R:pleasure ?v) (RW:craves ?c ?n) (RW:craves ?v ?n) (R:food ?n) (RW:harmony ?v ?s2) (R:planet ?s2) (R:orbits ?s1 ?s2) (R:planet ?s1))
+        eff: (and (RW:fears ?c ?v) (RW:harmony ?v ?s1))
+    feast: ?v:0 ?n1:0 ?n2:0 ?l1:0 ?l2:0
+        pre: (and (RW:craves ?v ?n1) (R:food ?n1) (R:pleasure ?v) (R:eats ?n1 ?n2) (R:food ?n2) (RW:locale ?n1 ?l2) (R:attacks ?l1 ?l2))
+        eff: (and (RW:craves ?v ?n2) (RW:locale ?n1 ?l1))
+    succumb: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
+        pre: (and (RW:fears ?c ?v) (R:pain ?c) (R:pleasure ?v) (RW:craves ?v ?n) (R:food ?n) (RW:harmony ?v ?s1) (R:orbits ?s1 ?s2))
+        eff: (and (RW:craves ?c ?n) (RW:harmony ?v ?s2))
+    drink: ?n1:0 ?n2:0 ?l11:0 ?l12:0 ?l13:0 ?l21:0 ?l22:0
+        pre: (and (RW:locale ?n1 ?l11) (R:attacks ?l12 ?l11) (R:attacks ?l13 ?l12) (RW:locale ?n2 ?l21) (R:attacks ?l21 ?l22))
+        eff: (and (RW:locale ?n1 ?l12) (RW:locale ?n2 ?l22))
+Init[32]:
+  S:(food rice)
+  S:(food pear)
+  S:(food okra)
+  S:(food pork)
+  S:(pleasure rest)
+  S:(pain hangover)
+  S:(pain depression)
+  S:(pain abrasion)
+  S:(province pork)
+  S:(province hangover)
+  S:(province surrey)
+  S:(planet surrey)
+  S:(eats okra pork)
+  S:(eats pork okra)
+  (locale okra surrey)
+  (locale pork surrey)
+  (harmony rest surrey)
+  S:(eats okra pear)
+  (craves depression pear)
+  S:(eats rice rice)
+  S:(eats rice pear)
+  S:(attacks pork hangover)
+  S:(attacks surrey surrey)
+  (craves abrasion pork)
+  (locale rice hangover)
+  S:(orbits surrey surrey)
+  S:(eats pear okra)
+  (craves rest pork)
+  (locale pear surrey)
+  (craves hangover rice)
+  S:(attacks hangover surrey)
+  S:(eats pear rice)
+Init[0]:
+Goal: (RW:craves abrasion rice)
+Metric: 0
