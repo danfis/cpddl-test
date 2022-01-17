@@ -24,6 +24,9 @@ for tmp in $(find reg/ -name tmp.*.out); do
                 vimdiff $f $tmp
             elif [ "$answ" = "f" ]; then
                 cp $tmp $f
+                if [ "$(wc -l $f | cut -f1 -d' ')" = "0" ]; then
+                    rm $f
+                fi
                 break
             else
                 break

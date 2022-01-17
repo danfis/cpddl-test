@@ -6,7 +6,10 @@ from pprint import pprint
 
 LARGE_TESTS = ['h3', 'h3mgroup', 'symbolic']
 VERY_LARGE_TESTS = LARGE_TESTS \
-    + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential']
+    + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential',
+       'homomorphism_reduce', 'homomorphism_endomorph',
+       'homomorphism_endomorph_nocost',
+      ]
 Task = {}
 
 def parseFile():

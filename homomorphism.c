@@ -30,7 +30,10 @@ TEST(homomorphism_type, homomorphism)
         printf("Collapsing type %d:%s with %d objects\n",
                type, C.pddl.type.type[type].name,
                pddlTypeNumObjs(&C.pddl.type, type));
-        pddlHomomorphicTaskCollapseType(&h, type, &C.err);
+        if (pddlHomomorphicTaskCollapseType(&h, type, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
         int after = h.task.obj.obj_size;
         assert(after < before);
         printf("Reduced %d -> %d\n", before, after);
@@ -43,7 +46,10 @@ TEST(homomorphism_random_pair, homomorphism)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
-        pddlHomomorphicTaskCollapseRandomPair(&h, 0, &C.err);
+        if (pddlHomomorphicTaskCollapseRandomPair(&h, 0, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
@@ -54,7 +60,10 @@ TEST(homomorphism_random_pair_goal, homomorphism)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
-        pddlHomomorphicTaskCollapseRandomPair(&h, 1, &C.err);
+        if (pddlHomomorphicTaskCollapseRandomPair(&h, 1, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
@@ -65,7 +74,10 @@ TEST(homomorphism_gaifman, homomorphism)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
-        pddlHomomorphicTaskCollapseGaifman(&h, 0, &C.err);
+        if (pddlHomomorphicTaskCollapseGaifman(&h, 0, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
@@ -76,7 +88,10 @@ TEST(homomorphism_gaifman_goal, homomorphism)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
-        pddlHomomorphicTaskCollapseGaifman(&h, 1, &C.err);
+        if (pddlHomomorphicTaskCollapseGaifman(&h, 1, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
@@ -87,7 +102,10 @@ TEST(homomorphism_rpg1, homomorphism)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
-        pddlHomomorphicTaskCollapseRPG(&h, 0, 1, &C.err);
+        if (pddlHomomorphicTaskCollapseRPG(&h, 0, 1, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
@@ -98,7 +116,10 @@ TEST(homomorphism_rpg1_goal, homomorphism)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
-        pddlHomomorphicTaskCollapseRPG(&h, 1, 1, &C.err);
+        if (pddlHomomorphicTaskCollapseRPG(&h, 1, 1, &C.err) < 0){
+            borErrPrint(&C.err, 1, stderr);
+            return;
+        }
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
@@ -110,7 +131,10 @@ TEST_COND(homomorphism_endomorph, homomorphism, CPOPTIMIZER)
 {
     int before = h.task.obj.obj_size;
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
-    pddlHomomorphicTaskApplyRelaxedEndomorphism(&h, &cfg, &C.err);
+    if (pddlHomomorphicTaskApplyRelaxedEndomorphism(&h, &cfg, &C.err) < 0){
+        borErrPrint(&C.err, 1, stderr);
+        return;
+    }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
     pddlPrintDebug(&h.task, stdout);
@@ -121,7 +145,10 @@ TEST_COND(homomorphism_endomorph_nocost, homomorphism, CPOPTIMIZER)
     int before = h.task.obj.obj_size;
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
     cfg.ignore_costs = 1;
-    pddlHomomorphicTaskApplyRelaxedEndomorphism(&h, &cfg, &C.err);
+    if (pddlHomomorphicTaskApplyRelaxedEndomorphism(&h, &cfg, &C.err) < 0){
+        borErrPrint(&C.err, 1, stderr);
+        return;
+    }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
     pddlPrintDebug(&h.task, stdout);
@@ -141,7 +168,10 @@ TEST_COND(homomorphism_reduce, homomorphism, CPOPTIMIZER)
     pddlHomomorphicTaskReduceAddRandomPair(&r, 1);
     pddlHomomorphicTaskReduceAddGaifman(&r, 1);
     pddlHomomorphicTaskReduceAddRelaxedEndomorphism(&r, &cfg);
-    pddlHomomorphicTaskReduce(&r, &h, &C.err);
+    if (pddlHomomorphicTaskReduce(&r, &h, &C.err) < 0){
+        borErrPrint(&C.err, 1, stderr);
+        return;
+    }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
     pddlPrintDebug(&h.task, stdout);
