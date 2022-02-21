@@ -1,0 +1,7 @@
+< {starting V0:car C1:garage, starting V0:car C2:garage}
+, {road_connect V0:road C1:junction C2:junction, NOT-in_place V0:road, road_connect V0:road C3:junction C4:junction}:=1
+, {in_place V0:road, NOT-in_place V0:road}:=1
+, {at_car_jun V0:car C1:junction, at_car_road V0:car C2:road, starting V0:car C3:garage, at_car_jun V0:car C4:junction, at_car_road V0:car C5:road, starting V0:car C6:garage}
+, {at_car_jun V0:car C1:junction, at_car_road V0:car C2:road, starting V0:car C3:garage, arrived V0:car C4:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage, arrived V0:car C8:junction}:=1
+, {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}
+>

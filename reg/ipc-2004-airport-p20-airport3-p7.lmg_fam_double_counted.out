@@ -1,0 +1,16 @@
+< {at-segment V0:airplane C1:segment, at-segment V0:airplane C2:segment}
+, {facing V0:airplane C1:direction, facing V0:airplane C2:direction}:=1
+, {is-pushing V0:airplane}
+, {at-segment V0:airplane C1:segment, airborne V0:airplane C2:segment, at-segment V0:airplane C3:segment, airborne V0:airplane C4:segment}:=1
+, {at-segment V0:airplane C2:segment, airborne V0:airplane V1:segment, at-segment V0:airplane C3:segment}
+, {at-segment C1:airplane V0:segment, not_occupied V0:segment, at-segment C2:airplane V0:segment}:=1
+, {is-moving V0:airplane, is-pushing V0:airplane}
+, {airborne V0:airplane V1:segment, is-moving V0:airplane, is-pushing V0:airplane}
+, {airborne V0:airplane C1:segment, is-moving V0:airplane, is-pushing V0:airplane, airborne V0:airplane C2:segment}
+, {is-moving V0:airplane, is-pushing V0:airplane, is-parked V0:airplane V1:segment}
+, {is-moving V0:airplane, is-pushing V0:airplane, is-parked V0:airplane C1:segment, is-parked V0:airplane C2:segment}
+, {airborne V0:airplane V1:segment, is-moving V0:airplane, is-pushing V0:airplane, is-parked V0:airplane V2:segment}
+, {airborne V0:airplane V1:segment, is-moving V0:airplane, is-pushing V0:airplane, is-parked V0:airplane C2:segment, is-parked V0:airplane C3:segment}
+, {airborne V0:airplane C1:segment, is-moving V0:airplane, is-pushing V0:airplane, is-parked V0:airplane C2:segment, airborne V0:airplane C3:segment, is-parked V0:airplane C4:segment}:=1
+, {airborne V0:airplane C2:segment, is-moving V0:airplane, is-pushing V0:airplane, is-parked V0:airplane V1:segment, airborne V0:airplane C3:segment}
+>

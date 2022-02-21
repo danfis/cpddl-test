@@ -167,7 +167,8 @@ static void addFailure(const test_test_t *t, int status)
     fmtBaseFilename(TEST_TASK, t->name, "out", base);
     if (access(base, F_OK) == 0){
         char cmd[2048];
-        sprintf(cmd, "diff -y -W150 %s %s | head -15 | awk '{print \"  >OUT>\", $0}' >>%s",
+        sprintf(cmd, "diff -y --suppress-common-lines -W150 %s %s"
+                     " | head -15 | awk '{print \"  >OUT>\", $0}' >>%s",
                 base, fn, FAIL_FILENAME);
         system(cmd);
     }else if (filesize(fn) > 0){
@@ -181,7 +182,8 @@ static void addFailure(const test_test_t *t, int status)
     fmtBaseFilename(TEST_TASK, t->name, "err", base);
     if (access(base, F_OK) == 0){
         char cmd[2048];
-        sprintf(cmd, "diff -y -W150 %s %s | head -15 | awk '{print \"  >ERR>\", $0}' >>%s",
+        sprintf(cmd, "diff -y --suppress-common-lines -W150 %s %s"
+                     " | head -15 | awk '{print \"  >ERR>\", $0}' >>%s",
                 base, fn, FAIL_FILENAME);
         system(cmd);
     }else if (filesize(fn) > 0){

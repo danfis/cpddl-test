@@ -625,6 +625,16 @@ TEST(lmg_fam, pddl)
     pddlLiftedMGroupsFree(&goal);
 }
 
+TEST(lmg_fam_double_counted, lmg_fam)
+{
+    pddl_lifted_mgroups_t lmgs;
+    pddlLiftedMGroupsInitCopy(&lmgs, &C.lmg);
+    pddlLiftedMGroupsDoubleCounted(&lmgs);
+    pddlLiftedMGroupsPrint(&C.pddl, &lmgs, stdout);
+    fflush(stdout);
+    pddlLiftedMGroupsFree(&lmgs);
+}
+
 TEST(lmg_fd, lmg_fam)
 {
     pddl_lifted_mgroups_infer_limits_t infer_limit

@@ -1,0 +1,39 @@
+< {on V0:card C1:cardposition, on V0:card C2:cardposition}:=1
+, {on V0:card C1:deal, on V0:card C2:deal}
+, {on C1:card V0:deal, on C2:card V0:deal}
+, {current-deal C0:deal, current-deal C1:deal}:=1
+, {part-of-tableau V0:tableau C1:tableau, part-of-tableau V0:tableau C2:tableau}:=1:S
+, {part-of-tableau C1:tableau V0:tableau, part-of-tableau C2:tableau V0:tableau}:=1:S
+, {on V0:card C2:cardposition, part-of-tableau V1:deal C3:tableau, on V0:card C4:cardposition, part-of-tableau V1:deal C5:tableau}:=1
+, {on V0:card C2:deal, part-of-tableau V1:deal C3:tableau, on V0:card C4:deal, part-of-tableau V1:deal C5:tableau}
+, {on V0:card C3:cardposition, part-of-tableau V1:deal V2:tableau, on V0:card C4:cardposition}:=1
+, {on C1:card V0:card_or_tableau, clear V0:card_or_tableau, on C2:card V0:card_or_tableau}:=1
+, {on C1:card V0:tableau, clear V0:tableau, on C2:card V0:tableau}:=1
+, {on C1:card V0:deal, clear V0:deal, on C2:card V0:deal}:=1
+, {on C2:card V0:deal, part-of-tableau V1:deal C3:tableau, on C4:card V0:deal, part-of-tableau V1:deal C5:tableau}
+, {currently-dealing, NOT-currently-dealing}:=1
+, {currently-collecting-deck, NOT-currently-collecting-deck}:=1
+, {collect-card C0:cardposition, NOT-currently-collecting-deck, collect-card C1:cardposition}:=1
+, {currently-updating-unmovable, NOT-currently-updating-unmovable}:=1
+, {make-unmovable C0:card, NOT-currently-updating-unmovable, make-unmovable C1:card}:=1
+, {currently-updating-movable, NOT-currently-updating-movable}:=1
+, {make-movable C0:cardposition, NOT-currently-updating-movable, make-movable C1:cardposition}:=1
+, {on C1:card V0:card_or_tableau, clear V0:card_or_tableau, part-of-tableau C2:deal C3:tableau, on C4:card V0:card_or_tableau, part-of-tableau C5:deal C6:tableau}:=1
+, {on C1:card V0:tableau, clear V0:tableau, part-of-tableau C2:deal C3:tableau, on C4:card V0:tableau, part-of-tableau C5:deal C6:tableau}:=1
+, {on C1:card V0:deal, clear V0:deal, part-of-tableau C2:deal C3:tableau, on C4:card V0:deal, part-of-tableau C5:deal C6:tableau}:=1
+, {on C2:card V0:card_or_tableau, clear V0:card_or_tableau, part-of-tableau V1:deal C3:tableau, on C4:card V0:card_or_tableau, part-of-tableau V1:deal C5:tableau}:=1
+, {on C2:card V0:tableau, clear V0:tableau, part-of-tableau V1:deal C3:tableau, on C4:card V0:tableau, part-of-tableau V1:deal C5:tableau}:=1
+, {on C2:card V0:deal, clear V0:deal, part-of-tableau V1:deal C3:tableau, on C4:card V0:deal, part-of-tableau V1:deal C5:tableau}:=1
+, {on C2:card V0:card_or_tableau, clear V0:card_or_tableau, part-of-tableau C3:deal V1:tableau, on C4:card V0:card_or_tableau, part-of-tableau C5:deal V1:tableau}:=1
+, {on C2:card V0:tableau, clear V0:tableau, part-of-tableau C3:deal V1:tableau, on C4:card V0:tableau, part-of-tableau C5:deal V1:tableau}:=1
+, {on C2:card V0:deal, clear V0:deal, part-of-tableau C3:deal V1:tableau, on C4:card V0:deal, part-of-tableau C5:deal V1:tableau}:=1
+, {on C3:card V0:card_or_tableau, clear V0:card_or_tableau, part-of-tableau V1:deal V2:tableau, on C4:card V0:card_or_tableau}:=1
+, {on C3:card V0:tableau, clear V0:tableau, part-of-tableau V1:deal V2:tableau, on C4:card V0:tableau}:=1
+, {on C3:card V0:deal, clear V0:deal, part-of-tableau V1:deal V2:tableau, on C4:card V0:deal}:=1
+, {currently-collecting-deck, part-of-tableau V0:deal C1:tableau, NOT-currently-collecting-deck, part-of-tableau V0:deal C2:tableau}:=1
+, {currently-collecting-deck, part-of-tableau C0:deal C1:tableau, NOT-currently-collecting-deck, part-of-tableau C2:deal C3:tableau}:=1
+, {collect-card C0:cardposition, part-of-tableau C1:deal C2:tableau, NOT-currently-collecting-deck, collect-card C3:cardposition, part-of-tableau C4:deal C5:tableau}:=1
+, {collect-card C1:cardposition, part-of-tableau V0:deal C2:tableau, NOT-currently-collecting-deck, collect-card C3:cardposition, part-of-tableau V0:deal C4:tableau}:=1
+, {part-of-tableau V0:deal C1:tableau, currently-updating-unmovable, NOT-currently-updating-unmovable, part-of-tableau V0:deal C2:tableau}:=1
+, {part-of-tableau V0:deal C1:tableau, make-unmovable C2:card, NOT-currently-updating-unmovable, part-of-tableau V0:deal C3:tableau, make-unmovable C4:card}:=1
+>
