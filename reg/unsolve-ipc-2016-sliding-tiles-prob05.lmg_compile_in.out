@@ -1,0 +1,83 @@
+Compile-in LMG: actions: 4, lifted mgroups: 3
+Compile-in LMG: Found mutex condition for action 'move-up': (= ?py ?by)
+Compile-in LMG: Precondition of action 'move-up' extended with (not (= ?py ?by))
+Compile-in LMG: Found mutex condition for action 'move-down': (= ?py ?by)
+Compile-in LMG: Precondition of action 'move-down' extended with (not (= ?py ?by))
+Compile-in LMG: Found mutex condition for action 'move-left': (= ?px ?bx)
+Compile-in LMG: Precondition of action 'move-left' extended with (not (= ?px ?bx))
+Compile-in LMG: Found mutex condition for action 'move-right': (= ?px ?bx)
+Compile-in LMG: Precondition of action 'move-right' extended with (not (= ?px ?bx))
+Compile-in LMG: DONE. actions: 4, lifted mgroups: 3
+Domain: strips-sliding-tile
+Problem: p3-3-puzzle-problem-100-1390833173323132671
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10
+Obj[11]:
+    [0]: t1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: t2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: t3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: t4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: t5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: t6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: t7, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: t8, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: p1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: p2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: p3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    tile: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    xposition: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    yposition: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 0 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    blank: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    inc: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    dec: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[4]:
+    move-up: ?t:0 ?px:0 ?py:0 ?by:0
+        pre: (and (N:R:= ?py ?by) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
+        eff: (and (N:RW:blank ?px ?by) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+    move-down: ?t:0 ?px:0 ?py:0 ?by:0
+        pre: (and (N:R:= ?py ?by) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
+        eff: (and (N:RW:blank ?px ?by) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+    move-left: ?t:0 ?px:0 ?py:0 ?bx:0
+        pre: (and (N:R:= ?px ?bx) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:dec ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
+        eff: (and (N:RW:blank ?bx ?py) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+    move-right: ?t:0 ?px:0 ?py:0 ?bx:0
+        pre: (and (N:R:= ?px ?bx) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:inc ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
+        eff: (and (N:RW:blank ?bx ?py) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+Init[27]:
+  S:(tile t1)
+  S:(tile t2)
+  S:(tile t3)
+  S:(tile t4)
+  S:(tile t5)
+  S:(tile t6)
+  S:(tile t7)
+  S:(tile t8)
+  S:(xposition p1)
+  S:(xposition p2)
+  S:(xposition p3)
+  S:(yposition p1)
+  S:(yposition p2)
+  S:(yposition p3)
+  S:(inc p1 p2)
+  S:(inc p2 p3)
+  S:(dec p2 p1)
+  S:(dec p3 p2)
+  (at t2 p1 p1)
+  (blank p2 p1)
+  (at t7 p3 p1)
+  (at t6 p1 p2)
+  (at t3 p2 p2)
+  (at t8 p3 p2)
+  (at t5 p1 p3)
+  (at t4 p2 p3)
+  (at t1 p3 p3)
+Init[0]:
+Goal: (and (RW:at t1 p2 p1) (RW:at t2 p3 p1) (RW:at t3 p1 p2) (RW:at t4 p2 p2) (RW:at t5 p3 p2) (RW:at t6 p1 p3) (RW:at t7 p2 p3) (RW:at t8 p3 p3))
+Metric: 0

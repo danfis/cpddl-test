@@ -669,3 +669,15 @@ TEST(lmg_fd, lmg_fam)
 TEST(lmg, lmg_fd)
 {
 }
+
+TEST(lmg_compile_in, lmg)
+{
+    pddl_t pddl;
+    pddlInitCopy(&pddl, &C.pddl);
+    borErrInfoDisablePrintResources(&C.err, 1);
+    borErrInfoEnable(&C.err, stdout);
+    if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &C.err))
+        pddlPrintDebug(&pddl, stdout);
+    borErrInfoEnable(&C.err, NULL);
+    pddlFree(&pddl);
+}
