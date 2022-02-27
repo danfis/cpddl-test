@@ -1,10 +1,10 @@
 Compile-in LMG: actions: 4, lifted mgroups: 3
-Compile-in LMG: Found mutex condition for action 'move-curb-to-curb': (= ?curbsrc ?curbdest)
+Compile-in LMG: Found mutex condition for action 'move-curb-to-curb' and mgroup {at-curb-num C1:car V0:curb, curb-clear V0:curb, at-curb-num C2:car V0:curb}:=1: (= ?curbsrc ?curbdest)
 Compile-in LMG: Precondition of action 'move-curb-to-curb' extended with (not (= ?curbsrc ?curbdest))
-Compile-in LMG: Found mutex condition for action 'move-car-to-curb': (= ?car ?carsrc)
+Compile-in LMG: Found mutex condition for action 'move-car-to-curb' and mgroup {behind-car C1:car V0:car, car-clear V0:car, behind-car C2:car V0:car}:=1: (= ?car ?carsrc)
 Compile-in LMG: Precondition of action 'move-car-to-curb' extended with (not (= ?car ?carsrc))
-Compile-in LMG: Found mutex condition for action 'move-car-to-car': (= ?car ?carsrc)
-Compile-in LMG: Found mutex condition for action 'move-car-to-car': (= ?carsrc ?cardest)
+Compile-in LMG: Found mutex condition for action 'move-car-to-car' and mgroup {behind-car C1:car V0:car, car-clear V0:car, behind-car C2:car V0:car}:=1: (= ?car ?carsrc)
+Compile-in LMG: Found mutex condition for action 'move-car-to-car' and mgroup {behind-car C1:car V0:car, car-clear V0:car, behind-car C2:car V0:car}:=1: (= ?carsrc ?cardest)
 Compile-in LMG: Precondition of action 'move-car-to-car' extended with (and (not (= ?car ?carsrc)) (not (= ?carsrc ?cardest)))
 Compile-in LMG: DONE. actions: 4
 Domain: parking

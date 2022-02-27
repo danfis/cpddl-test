@@ -1,9 +1,9 @@
 Compile-in LMG: actions: 5, lifted mgroups: 10
-Compile-in LMG: Found mutex condition for action 'lift': (and (= ?a1 ?a2) (= ?h hoist0) (= ?c crate0) (or (= ?a2 depot0-1-1) (= ?a2 container-0-0)))
+Compile-in LMG: Found mutex condition for action 'lift' and mgroup {clear V0:storearea, at hoist0 V0:storearea, on crate0 V0:storearea}:=1: (and (= ?a1 ?a2) (= ?h hoist0) (= ?c crate0) (or (= ?a2 depot0-1-1) (= ?a2 container-0-0)))
 Compile-in LMG: Precondition of action 'lift' extended with (or (not (= ?a1 ?a2)) (not (= ?h hoist0)) (not (= ?c crate0)) (and (not (= ?a2 depot0-1-1)) (not (= ?a2 container-0-0))))
-Compile-in LMG: Found mutex condition for action 'drop': (and (= ?a1 ?a2) (= ?h hoist0) (or (= ?a2 depot0-1-1) (= ?a2 container-0-0)))
+Compile-in LMG: Found mutex condition for action 'drop' and mgroup {clear V0:storearea, at hoist0 V0:storearea, on crate0 V0:storearea}:=1: (and (= ?a1 ?a2) (= ?h hoist0) (or (= ?a2 depot0-1-1) (= ?a2 container-0-0)))
 Compile-in LMG: Precondition of action 'drop' extended with (or (not (= ?a1 ?a2)) (not (= ?h hoist0)) (and (not (= ?a2 depot0-1-1)) (not (= ?a2 container-0-0))))
-Compile-in LMG: Found mutex condition for action 'move': (and (= ?from ?to) (= ?h hoist0))
+Compile-in LMG: Found mutex condition for action 'move' and mgroup {clear V0:storearea, at hoist0 V0:storearea, on crate0 V0:storearea}:=1: (and (= ?from ?to) (= ?h hoist0))
 Compile-in LMG: Precondition of action 'move' extended with (or (not (= ?from ?to)) (not (= ?h hoist0)))
 Compile-in LMG: DONE. actions: 7
 Domain: storage-propositional

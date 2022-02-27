@@ -1,9 +1,9 @@
 Compile-in LMG: actions: 2, lifted mgroups: 3
-Compile-in LMG: Found mutex condition for action 'pop-unitarypipe': (= ?batch-atom-in ?first-batch-atom)
-Compile-in LMG: Found mutex condition for action 'pop-unitarypipe': (= ?from-tank-slot ?to-tank-slot)
+Compile-in LMG: Found mutex condition for action 'pop-unitarypipe' and mgroup {first V0:batch-atom C1:pipe, on V0:batch-atom C2:area, first V0:batch-atom C3:pipe, on V0:batch-atom C4:area}:=1: (= ?batch-atom-in ?first-batch-atom)
+Compile-in LMG: Found mutex condition for action 'pop-unitarypipe' and mgroup {occupied V0:tank-slot, not-occupied V0:tank-slot}:=1: (= ?from-tank-slot ?to-tank-slot)
 Compile-in LMG: Precondition of action 'pop-unitarypipe' extended with (and (not (= ?batch-atom-in ?first-batch-atom)) (not (= ?from-tank-slot ?to-tank-slot)))
-Compile-in LMG: Found mutex condition for action 'push-unitarypipe': (= ?batch-atom-in ?first-batch-atom)
-Compile-in LMG: Found mutex condition for action 'push-unitarypipe': (= ?from-tank-slot ?to-tank-slot)
+Compile-in LMG: Found mutex condition for action 'push-unitarypipe' and mgroup {first V0:batch-atom C1:pipe, on V0:batch-atom C2:area, first V0:batch-atom C3:pipe, on V0:batch-atom C4:area}:=1: (= ?batch-atom-in ?first-batch-atom)
+Compile-in LMG: Found mutex condition for action 'push-unitarypipe' and mgroup {occupied V0:tank-slot, not-occupied V0:tank-slot}:=1: (= ?from-tank-slot ?to-tank-slot)
 Compile-in LMG: Precondition of action 'push-unitarypipe' extended with (and (not (= ?batch-atom-in ?first-batch-atom)) (not (= ?from-tank-slot ?to-tank-slot)))
 Compile-in LMG: DONE. actions: 2
 Domain: pipesworld_strips

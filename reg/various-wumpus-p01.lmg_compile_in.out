@@ -1,8 +1,8 @@
 Compile-in LMG: actions: 3, lifted mgroups: 2153
-Compile-in LMG: Found mutex condition for action 'take': (and (= ?who agent-1) (= ?what arrow-1))
-Compile-in LMG: Found mutex condition for action 'take': (= ?what arrow-1)
-Compile-in LMG: Found mutex condition for action 'take': (and (= ?who agent-1) (or (= ?what s-1-1) (= ?what s-1-2) (= ?what s-1-3) (= ?what s-2-1) (= ?what s-2-2) (= ?what s-2-3)))
-Compile-in LMG: Found mutex condition for action 'take': (or (= ?what s-1-1) (= ?what s-1-2) (= ?what s-1-3) (= ?what s-2-1) (= ?what s-2-2) (= ?what s-2-3))
+Compile-in LMG: Found mutex condition for action 'take' and mgroup {at arrow-1 V0:object, alive agent-1}: (and (= ?who agent-1) (= ?what arrow-1))
+Compile-in LMG: Found mutex condition for action 'take' and mgroup {at arrow-1 V0:object, alive V1:object}: (= ?what arrow-1)
+Compile-in LMG: Found mutex condition for action 'take' and mgroup {at V0:square V1:object, alive agent-1}: (and (= ?who agent-1) (or (= ?what s-1-1) (= ?what s-1-2) (= ?what s-1-3) (= ?what s-2-1) (= ?what s-2-2) (= ?what s-2-3)))
+Compile-in LMG: Found mutex condition for action 'take' and mgroup {at V0:square V1:object, alive V2:object}: (or (= ?what s-1-1) (= ?what s-1-2) (= ?what s-1-3) (= ?what s-2-1) (= ?what s-2-2) (= ?what s-2-3))
 Compile-in LMG: Precondition of action 'take' extended with (and (not (= ?what arrow-1)) (not (= ?what s-1-1)) (not (= ?what s-1-2)) (not (= ?what s-1-3)) (not (= ?what s-2-1)) (not (= ?what s-2-2)) (not (= ?what s-2-3)))
 Compile-in LMG: DONE. actions: 3
 Domain: wumpus-adl
