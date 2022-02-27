@@ -3,13 +3,35 @@ Compile-in LMG: Found mutex condition for action 'fill-shot' and mgroup {holding
 Compile-in LMG: Precondition of action 'fill-shot' extended with (not (= ?h1 ?h2))
 Compile-in LMG: Found mutex condition for action 'refill-shot' and mgroup {holding V0:hand C1:container, handempty V0:hand, holding V0:hand C2:container}:=1: (= ?h1 ?h2)
 Compile-in LMG: Precondition of action 'refill-shot' extended with (not (= ?h1 ?h2))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (= ?p shot1) (= ?b cocktail1))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (= ?p shot2) (= ?b cocktail5))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (= ?p shot3) (= ?b cocktail4))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (= ?p shot4) (= ?b cocktail2))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (= ?p shot5) (= ?b cocktail3))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?p shot1) (or (= ?b cocktail1) (= ?b cocktail2) (= ?b cocktail3) (= ?b cocktail4) (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?p shot2) (or (= ?b cocktail1) (= ?b cocktail2) (= ?b cocktail3) (= ?b cocktail4) (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?p shot3) (or (= ?b cocktail1) (= ?b cocktail2) (= ?b cocktail3) (= ?b cocktail4) (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?p shot4) (or (= ?b cocktail1) (= ?b cocktail2) (= ?b cocktail3) (= ?b cocktail4) (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'empty-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?p shot5) (or (= ?b cocktail1) (= ?b cocktail2) (= ?b cocktail3) (= ?b cocktail4) (= ?b cocktail5)))
+Compile-in LMG: Precondition of action 'empty-shot' extended with (or (and (not (= ?p shot1)) (not (= ?p shot2)) (not (= ?p shot3)) (not (= ?p shot4)) (not (= ?p shot5))) (and (not (= ?b cocktail1)) (not (= ?b cocktail5)) (not (= ?b cocktail4)) (not (= ?b cocktail2)) (not (= ?b cocktail3))))
 Compile-in LMG: Found mutex condition for action 'clean-shot' and mgroup {holding V0:hand C1:container, handempty V0:hand, holding V0:hand C2:container}:=1: (= ?h1 ?h2)
 Compile-in LMG: Precondition of action 'clean-shot' extended with (not (= ?h1 ?h2))
 Compile-in LMG: Found mutex condition for action 'clean-shaker' and mgroup {holding V0:hand C1:container, handempty V0:hand, holding V0:hand C2:container}:=1: (= ?h1 ?h2)
 Compile-in LMG: Precondition of action 'clean-shaker' extended with (not (= ?h1 ?h2))
 Compile-in LMG: Found mutex condition for action 'shake' and mgroup {holding V0:hand C1:container, handempty V0:hand, holding V0:hand C2:container}:=1: (= ?h1 ?h2)
 Compile-in LMG: Precondition of action 'shake' extended with (not (= ?h1 ?h2))
-Compile-in LMG: DONE. actions: 12
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (not (= ?b cocktail1)) (= ?d shot1))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (not (= ?b cocktail5)) (= ?d shot2))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (not (= ?b cocktail4)) (= ?d shot3))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (not (= ?b cocktail2)) (= ?d shot4))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot V1:cocktail, clean V0:shot, used V0:shot C2:beverage, used V0:shot C3:beverage}: (and (not (= ?b cocktail3)) (= ?d shot5))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot1) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot2) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot3) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot4) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)))
+Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot5) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)))
+Compile-in LMG: Precondition of action 'pour-shaker-to-shot' extended with (or (and (not (= ?d shot1)) (not (= ?d shot2)) (not (= ?d shot3)) (not (= ?d shot4)) (not (= ?d shot5))) (= ?b cocktail1) (= ?b cocktail2) (= ?b cocktail3) (= ?b cocktail4) (= ?b cocktail5))
+Compile-in LMG: DONE. actions: 18
 Domain: barman
 Problem: prob
 Require: 200ff
@@ -78,7 +100,7 @@ Predicate[16]:
     cocktail-part2: 7 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-Action[12]:
+Action[18]:
     grasp: ?h:1 ?c:5
         pre: (and (RW:ontable ?c) (RW:handempty ?h))
         eff: (and (N:RW:ontable ?c) (N:RW:handempty ?h) (RW:holding ?h ?c) (increase (total-cost) 1))
@@ -92,7 +114,7 @@ Action[12]:
         pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (R:dispenses ?d ?i) (RW:empty ?s) (RW:used ?s ?i))
         eff: (and (N:RW:empty ?s) (RW:contains ?s ?i) (increase (total-cost) 10))
     empty-shot: ?h:1 ?p:8 ?b:3
-        pre: (and (RW:holding ?h ?p) (RW:contains ?p ?b))
+        pre: (and (RW:holding ?h ?p) (RW:contains ?p ?b) (N:R:= ?p shot1) (N:R:= ?p shot2) (N:R:= ?p shot3) (N:R:= ?p shot4) (N:R:= ?p shot5))
         eff: (and (N:RW:contains ?p ?b) (RW:empty ?p) (increase (total-cost) 1))
     clean-shot: ?s:8 ?b:3 ?h1:1 ?h2:1
         pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:empty ?s) (RW:used ?s ?b))
@@ -113,8 +135,26 @@ Action[12]:
         pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:contains ?s ?d1) (RW:contains ?s ?d2) (R:cocktail-part1 ?b ?d1) (R:cocktail-part2 ?b ?d2) (RW:unshaked ?s))
         eff: (and (N:RW:unshaked ?s) (N:RW:contains ?s ?d1) (N:RW:contains ?s ?d2) (RW:shaked ?s) (RW:contains ?s ?b) (increase (total-cost) 1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s ?b) (RW:shaker-level ?s ?l) (R:next ?l1 ?l))
+        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s ?b) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5))
         eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d ?b) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l) (increase (total-cost) 1))
+    empty-shot: ?h:1 ?p:8 ?b:3
+        pre: (and (RW:holding ?h ?p) (RW:contains ?p ?b) (N:R:= ?b cocktail1) (N:R:= ?b cocktail5) (N:R:= ?b cocktail4) (N:R:= ?b cocktail2) (N:R:= ?b cocktail3))
+        eff: (and (N:RW:contains ?p ?b) (RW:empty ?p) (increase (total-cost) 1))
+    pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
+        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail1) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail1))
+        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail1) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l) (increase (total-cost) 1))
+    pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
+        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail2) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail2))
+        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail2) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l) (increase (total-cost) 1))
+    pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
+        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail3) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail3))
+        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail3) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l) (increase (total-cost) 1))
+    pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
+        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail4) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail4))
+        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail4) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l) (increase (total-cost) 1))
+    pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
+        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail5) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail5))
+        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail5) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l) (increase (total-cost) 1))
 Init[40]:
   (ontable shaker1)
   (ontable shot1)

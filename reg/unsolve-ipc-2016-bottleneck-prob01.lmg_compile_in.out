@@ -1,7 +1,19 @@
 Compile-in LMG: actions: 1, lifted mgroups: 4
 Compile-in LMG: Found mutex condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (= ?l1 ?l2)
-Compile-in LMG: Precondition of action 'move' extended with (not (= ?l1 ?l2))
-Compile-in LMG: DONE. actions: 1
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (= ?p p0) (= ?l1 loc-3-0))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (not (= ?p p0)) (= ?l2 loc-3-0))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (= ?p p1) (= ?l1 loc-3-1))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (not (= ?p p1)) (= ?l2 loc-3-1))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (= ?p p2) (= ?l1 loc-3-2))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (not (= ?p p2)) (= ?l2 loc-3-2))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (= ?p p3) (= ?l1 loc-3-3))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at V0:object V1:object, active V1:object}: (and (not (= ?p p3)) (= ?l2 loc-3-3))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at C1:object V0:object, active V0:object, person-at C2:object V0:object}: (and (not (= ?l2 loc-3-0)) (= ?l1 loc-3-0))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at C1:object V0:object, active V0:object, person-at C2:object V0:object}: (and (not (= ?l2 loc-3-1)) (= ?l1 loc-3-1))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at C1:object V0:object, active V0:object, person-at C2:object V0:object}: (and (not (= ?l2 loc-3-2)) (= ?l1 loc-3-2))
+Compile-in LMG: Found dead-end condition for action 'move' and mgroup {person-at C1:object V0:object, active V0:object, person-at C2:object V0:object}: (and (not (= ?l2 loc-3-3)) (= ?l1 loc-3-3))
+Compile-in LMG: Precondition of action 'move' extended with (or (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (= ?p p0) (not (= ?l1 loc-3-1)) (not (= ?l1 loc-3-2)) (not (= ?l1 loc-3-3)) (= ?l2 loc-3-0)) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (= ?p p0) (not (= ?l1 loc-3-1)) (not (= ?l2 loc-3-1)) (not (= ?l1 loc-3-2)) (not (= ?l2 loc-3-2)) (not (= ?l1 loc-3-3)) (not (= ?l2 loc-3-3))) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l1 loc-3-1)) (= ?p p1) (not (= ?l1 loc-3-2)) (not (= ?l1 loc-3-3)) (= ?l2 loc-3-1)) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l2 loc-3-0)) (not (= ?l1 loc-3-1)) (= ?p p1) (not (= ?l1 loc-3-2)) (not (= ?l2 loc-3-2)) (not (= ?l1 loc-3-3)) (not (= ?l2 loc-3-3))) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l1 loc-3-1)) (not (= ?l1 loc-3-2)) (= ?p p2) (not (= ?l1 loc-3-3)) (= ?l2 loc-3-2)) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l2 loc-3-0)) (not (= ?l1 loc-3-1)) (not (= ?l2 loc-3-1)) (not (= ?l1 loc-3-2)) (= ?p p2) (not (= ?l1 loc-3-3)) (not (= ?l2 loc-3-3))) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l1 loc-3-1)) (not (= ?l1 loc-3-2)) (not (= ?l1 loc-3-3)) (= ?p p3) (= ?l2 loc-3-3)) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l2 loc-3-0)) (not (= ?l1 loc-3-1)) (not (= ?l2 loc-3-1)) (not (= ?l1 loc-3-2)) (not (= ?l2 loc-3-2)) (not (= ?l1 loc-3-3)) (= ?p p3)) (and (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l2 loc-3-0)) (not (= ?l1 loc-3-1)) (not (= ?l2 loc-3-1)) (not (= ?l1 loc-3-2)) (not (= ?l2 loc-3-2)) (not (= ?l1 loc-3-3)) (not (= ?l2 loc-3-3))))
+Compile-in LMG: DONE. actions: 9
 Domain: resources
 Problem: grid-prob-4-1
 Require: ff
@@ -35,9 +47,33 @@ Predicate[6]:
     connected: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
     active: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
 Function[0]:
-Action[1]:
+Action[9]:
     move: ?p:0 ?l1:0 ?l2:0
-        pre: (and (N:R:= ?l1 ?l2) (R:person ?p) (RW:person-at ?p ?l1) (R:location ?l1) (R:location ?l2) (R:connected ?l1 ?l2) (RW:active ?l2))
+        pre: (and (R:person p0) (RW:person-at p0 ?l1) (R:location ?l1) (R:location loc-3-0) (R:connected ?l1 loc-3-0) (RW:active loc-3-0) (N:R:= ?l1 loc-3-0) (R:= ?p p0) (N:R:= ?l1 loc-3-1) (N:R:= ?l1 loc-3-2) (N:R:= ?l1 loc-3-3) (R:= ?l2 loc-3-0))
+        eff: (and (RW:person-at p0 loc-3-0) (N:RW:person-at p0 ?l1) (N:RW:active loc-3-0))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p0) (RW:person-at p0 ?l1) (R:location ?l1) (R:location ?l2) (R:connected ?l1 ?l2) (RW:active ?l2) (N:R:= ?l1 ?l2) (N:R:= ?l1 loc-3-0) (R:= ?p p0) (N:R:= ?l1 loc-3-1) (N:R:= ?l2 loc-3-1) (N:R:= ?l1 loc-3-2) (N:R:= ?l2 loc-3-2) (N:R:= ?l1 loc-3-3) (N:R:= ?l2 loc-3-3))
+        eff: (and (RW:person-at p0 ?l2) (N:RW:person-at p0 ?l1) (N:RW:active ?l2))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p1) (RW:person-at p1 ?l1) (R:location ?l1) (R:location loc-3-1) (R:connected ?l1 loc-3-1) (RW:active loc-3-1) (N:R:= ?l1 loc-3-1) (N:R:= ?l1 loc-3-0) (R:= ?p p1) (N:R:= ?l1 loc-3-2) (N:R:= ?l1 loc-3-3) (R:= ?l2 loc-3-1))
+        eff: (and (RW:person-at p1 loc-3-1) (N:RW:person-at p1 ?l1) (N:RW:active loc-3-1))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p1) (RW:person-at p1 ?l1) (R:location ?l1) (R:location ?l2) (R:connected ?l1 ?l2) (RW:active ?l2) (N:R:= ?l1 ?l2) (N:R:= ?l1 loc-3-0) (N:R:= ?l2 loc-3-0) (N:R:= ?l1 loc-3-1) (R:= ?p p1) (N:R:= ?l1 loc-3-2) (N:R:= ?l2 loc-3-2) (N:R:= ?l1 loc-3-3) (N:R:= ?l2 loc-3-3))
+        eff: (and (RW:person-at p1 ?l2) (N:RW:person-at p1 ?l1) (N:RW:active ?l2))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p2) (RW:person-at p2 ?l1) (R:location ?l1) (R:location loc-3-2) (R:connected ?l1 loc-3-2) (RW:active loc-3-2) (N:R:= ?l1 loc-3-2) (N:R:= ?l1 loc-3-0) (N:R:= ?l1 loc-3-1) (R:= ?p p2) (N:R:= ?l1 loc-3-3) (R:= ?l2 loc-3-2))
+        eff: (and (RW:person-at p2 loc-3-2) (N:RW:person-at p2 ?l1) (N:RW:active loc-3-2))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p2) (RW:person-at p2 ?l1) (R:location ?l1) (R:location ?l2) (R:connected ?l1 ?l2) (RW:active ?l2) (N:R:= ?l1 ?l2) (N:R:= ?l1 loc-3-0) (N:R:= ?l2 loc-3-0) (N:R:= ?l1 loc-3-1) (N:R:= ?l2 loc-3-1) (N:R:= ?l1 loc-3-2) (R:= ?p p2) (N:R:= ?l1 loc-3-3) (N:R:= ?l2 loc-3-3))
+        eff: (and (RW:person-at p2 ?l2) (N:RW:person-at p2 ?l1) (N:RW:active ?l2))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p3) (RW:person-at p3 ?l1) (R:location ?l1) (R:location loc-3-3) (R:connected ?l1 loc-3-3) (RW:active loc-3-3) (N:R:= ?l1 loc-3-3) (N:R:= ?l1 loc-3-0) (N:R:= ?l1 loc-3-1) (N:R:= ?l1 loc-3-2) (R:= ?p p3) (R:= ?l2 loc-3-3))
+        eff: (and (RW:person-at p3 loc-3-3) (N:RW:person-at p3 ?l1) (N:RW:active loc-3-3))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person p3) (RW:person-at p3 ?l1) (R:location ?l1) (R:location ?l2) (R:connected ?l1 ?l2) (RW:active ?l2) (N:R:= ?l1 ?l2) (N:R:= ?l1 loc-3-0) (N:R:= ?l2 loc-3-0) (N:R:= ?l1 loc-3-1) (N:R:= ?l2 loc-3-1) (N:R:= ?l1 loc-3-2) (N:R:= ?l2 loc-3-2) (N:R:= ?l1 loc-3-3) (R:= ?p p3))
+        eff: (and (RW:person-at p3 ?l2) (N:RW:person-at p3 ?l1) (N:RW:active ?l2))
+    move: ?p:0 ?l1:0 ?l2:0
+        pre: (and (R:person ?p) (RW:person-at ?p ?l1) (R:location ?l1) (R:location ?l2) (R:connected ?l1 ?l2) (RW:active ?l2) (N:R:= ?l1 ?l2) (N:R:= ?l1 loc-3-0) (N:R:= ?l2 loc-3-0) (N:R:= ?l1 loc-3-1) (N:R:= ?l2 loc-3-1) (N:R:= ?l1 loc-3-2) (N:R:= ?l2 loc-3-2) (N:R:= ?l1 loc-3-3) (N:R:= ?l2 loc-3-3))
         eff: (and (RW:person-at ?p ?l2) (N:RW:person-at ?p ?l1) (N:RW:active ?l2))
 Init[60]:
   S:(person p0)
