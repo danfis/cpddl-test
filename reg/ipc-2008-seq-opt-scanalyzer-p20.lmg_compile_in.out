@@ -1,11 +1,11 @@
 Compile-in LMG: actions: 2, lifted mgroups: 2
 Compile-in LMG: Found mutex condition for action 'analyze-2' and mgroup {on V0:car C1:segment, on V0:car C2:segment}:=1: (and (= ?c1 ?c2) (not (= ?s1 ?s2)))
 Compile-in LMG: Found mutex condition for action 'analyze-2' and mgroup {on C1:car V0:segment, on C2:car V0:segment}:=1: (and (= ?s1 ?s2) (not (= ?c1 ?c2)))
-Compile-in LMG: Precondition of action 'analyze-2' extended with (or (and (not (= ?c1 ?c2)) (not (= ?s1 ?s2))) (and (= ?s1 ?s2) (= ?c1 ?c2)))
+Compile-in LMG: Precondition of action 'analyze-2' extended with (TRUE)
 Compile-in LMG: Found mutex condition for action 'rotate-2' and mgroup {on V0:car C1:segment, on V0:car C2:segment}:=1: (and (= ?c1 ?c2) (not (= ?s1 ?s2)))
 Compile-in LMG: Found mutex condition for action 'rotate-2' and mgroup {on C1:car V0:segment, on C2:car V0:segment}:=1: (and (= ?s1 ?s2) (not (= ?c1 ?c2)))
-Compile-in LMG: Precondition of action 'rotate-2' extended with (or (and (not (= ?c1 ?c2)) (not (= ?s1 ?s2))) (and (= ?s1 ?s2) (= ?c1 ?c2)))
-Compile-in LMG: DONE. actions: 4
+Compile-in LMG: Precondition of action 'rotate-2' extended with (TRUE)
+Compile-in LMG: DONE. actions: 2
 Domain: scanalyzer3d
 Problem: scanalyzer3d-42
 Require: 200ff
@@ -55,7 +55,7 @@ Obj[36]:
     [34]: seg-out-8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [35]: seg-out-9, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[7]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
     on: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
     analyzed: 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
     cycle-2: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
@@ -64,18 +64,12 @@ Predicate[7]:
     cycle-4-with-analysis: 1 1 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-Action[4]:
+Action[2]:
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (N:R:= ?c1 ?c2) (N:R:= ?s1 ?s2))
+        pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
         eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (W:analyzed ?c1) (increase (total-cost) 3))
     rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (N:R:= ?c1 ?c2) (N:R:= ?s1 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (increase (total-cost) 1))
-    analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (R:= ?s1 ?s2) (R:= ?c1 ?c2))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (W:analyzed ?c1) (increase (total-cost) 3))
-    rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (R:= ?s1 ?s2) (R:= ?c1 ?c2))
+        pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
         eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (increase (total-cost) 1))
 Init[108]:
   S:(cycle-2 seg-in-1 seg-out-1)

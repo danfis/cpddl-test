@@ -8,7 +8,7 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package4))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package5))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package7))
-Compile-in LMG: Precondition of action 'load' extended with (or (= ?t truck1) (and (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))))
+Compile-in LMG: Precondition of action 'load' extended with (or (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (= ?t truck1) (not (= ?p package7)))
 Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:package C2:location, in V0:package truck1 C3:truckarea, delivered V0:package V1:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package V1:location C7:time}: (and (not (= ?l l4)) (= ?p package1))
 Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:package C2:location, in V0:package truck1 C3:truckarea, delivered V0:package V1:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package V1:location C7:time}: (and (not (= ?l l3)) (= ?p package2))
 Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:package C2:location, in V0:package truck1 C3:truckarea, delivered V0:package V1:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package V1:location C7:time}: (and (not (= ?l l1)) (= ?p package6))
@@ -28,7 +28,7 @@ Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:
 Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:package C3:location, in V0:package truck1 C4:truckarea, delivered V0:package V1:location V2:time, at V0:package C5:location, in V0:package truck1 C6:truckarea}: (and (or (not (= ?l l1)) (not (= ?t2 t8))) (= ?p package6))
 Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:package C3:location, in V0:package truck1 C4:truckarea, delivered V0:package V1:location V2:time, at V0:package C5:location, in V0:package truck1 C6:truckarea}: (and (or (not (= ?l l3)) (not (= ?t2 t12))) (= ?p package8))
 Compile-in LMG: Found dead-end condition for action 'deliver' and mgroup {at V0:package C3:location, in V0:package truck1 C4:truckarea, delivered V0:package V1:location V2:time, at V0:package C5:location, in V0:package truck1 C6:truckarea}: (and (or (not (= ?l l3)) (not (= ?t2 t12))) (= ?p package9))
-Compile-in LMG: Precondition of action 'deliver' extended with (or (and (= ?l l4) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (= ?t2 t4) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))) (and (not (= ?p package1)) (= ?l l3) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (= ?t2 t4) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))) (and (not (= ?p package1)) (not (= ?p package2)) (= ?l l1) (not (= ?p package8)) (not (= ?p package9)) (= ?t2 t8)) (and (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (= ?l l3) (= ?t2 t12) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))) (and (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (= ?l l1)) (and (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))))
+Compile-in LMG: Precondition of action 'deliver' extended with (or (= ?l l4) (= ?l l3) (= ?t2 t4) (= ?t2 t8) (= ?t2 t12) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (= ?l l1) (not (= ?p package7)) (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package1))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package2))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package6))
@@ -38,7 +38,7 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package4))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package5))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package7))
-Compile-in LMG: Precondition of action 'load' extended with (or (= ?t truck1) (and (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))))
+Compile-in LMG: Precondition of action 'load' extended with (or (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (= ?t truck1) (not (= ?p package7)))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package1))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package2))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package6))
@@ -48,8 +48,8 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package4))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package5))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package7))
-Compile-in LMG: Precondition of action 'load' extended with (or (= ?t truck1) (and (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package7))))
-Compile-in LMG: DONE. actions: 16
+Compile-in LMG: Precondition of action 'load' extended with (or (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package6)) (not (= ?p package8)) (not (= ?p package9)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (= ?t truck1) (not (= ?p package7)))
+Compile-in LMG: DONE. actions: 49
 Domain: trucks
 Problem: truck-10
 Require: ff
@@ -113,10 +113,10 @@ Predicate[11]:
     at-destination: 6 3 :: is-private: 0, owner-param: -1, read: 0, write: 1
     closer: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
 Function[0]:
-Action[16]:
+Action[49]:
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a1) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a1 truck1) (R:= ?t truck1))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 truck1) (RW:in ?p truck1 a1))
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package1))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
     unload: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:in ?p ?t a1))
         eff: (and (N:RW:in ?p ?t a1) (RW:free a1 ?t) (RW:at ?p ?l))
@@ -124,14 +124,14 @@ Action[16]:
         pre: (and (RW:at ?t ?from) (R:connected ?from ?to) (RW:time-now ?t1) (R:next ?t1 ?t2))
         eff: (and (N:RW:at ?t ?from) (N:RW:time-now ?t1) (RW:time-now ?t2) (RW:at ?t ?to))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l4) (RW:time-now ?t1) (R:le ?t1 t4) (R:= ?l l4) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?t2 t4) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
-        eff: (and (N:RW:at ?p l4) (W:delivered ?p l4 t4) (W:at-destination ?p l4))
+        pre: (and (RW:at ?p l4) (RW:time-now ?t1) (R:le ?t1 ?t2) (R:= ?l l4))
+        eff: (and (N:RW:at ?p l4) (W:delivered ?p l4 ?t2) (W:at-destination ?p l4))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a2) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a2 truck1) (RW:free a1 truck1) (R:= ?t truck1))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 truck1) (RW:in ?p truck1 a2))
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package1))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a3) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a3 truck1) (RW:free a1 truck1) (RW:free a2 truck1) (R:= ?t truck1))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 truck1) (RW:in ?p truck1 a3))
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package1))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
     unload: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:in ?p ?t a2) (RW:free a1 ?t))
         eff: (and (N:RW:in ?p ?t a2) (RW:free a2 ?t) (RW:at ?p ?l))
@@ -139,28 +139,127 @@ Action[16]:
         pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:in ?p ?t a3) (RW:free a1 ?t) (RW:free a2 ?t))
         eff: (and (N:RW:in ?p ?t a3) (RW:free a3 ?t) (RW:at ?p ?l))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package2))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package6))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package8))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package9))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package3))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package4))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package5))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a1 truck1) (R:= ?t truck1))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 truck1) (RW:in ?p truck1 a1))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package7))
         eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l3) (RW:time-now ?t1) (R:le ?t1 t4) (N:R:= ?p package1) (R:= ?l l3) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?t2 t4) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
-        eff: (and (N:RW:at ?p l3) (W:delivered ?p l3 t4) (W:at-destination ?p l3))
+        pre: (and (RW:at ?p l3) (RW:time-now ?t1) (R:le ?t1 ?t2) (R:= ?l l3))
+        eff: (and (N:RW:at ?p l3) (W:delivered ?p l3 ?t2) (W:at-destination ?p l3))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l1) (RW:time-now ?t1) (R:le ?t1 t8) (N:R:= ?p package1) (N:R:= ?p package2) (R:= ?l l1) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?t2 t8))
-        eff: (and (N:RW:at ?p l1) (W:delivered ?p l1 t8) (W:at-destination ?p l1))
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 t4) (R:= ?t2 t4))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l t4) (W:at-destination ?p ?l))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l3) (RW:time-now ?t1) (R:le ?t1 t12) (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (R:= ?l l3) (R:= ?t2 t12) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
-        eff: (and (N:RW:at ?p l3) (W:delivered ?p l3 t12) (W:at-destination ?p l3))
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 t8) (R:= ?t2 t8))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l t8) (W:at-destination ?p ?l))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l1) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?l l1))
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 t12) (R:= ?t2 t12))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l t12) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package3))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package4))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package5))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p l1) (RW:time-now ?t1) (R:le ?t1 ?t2) (R:= ?l l1))
         eff: (and (N:RW:at ?p l1) (W:delivered ?p l1 ?t2) (W:at-destination ?p l1))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package7))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package1))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package2))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package6))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package8))
+        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+    deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
+        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package9))
         eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package2))
         eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package7))
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package6))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package8))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package9))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package3))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package4))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package5))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a2 truck1) (RW:free a1 truck1) (R:= ?t truck1))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 truck1) (RW:in ?p truck1 a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package7))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package2))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package6))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package8))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package9))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package3))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package4))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package5))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a3 truck1) (RW:free a1 truck1) (RW:free a2 truck1) (R:= ?t truck1))
+        eff: (and (N:RW:at ?p ?l) (N:RW:free a3 truck1) (RW:in ?p truck1 a3))
+    load: ?p:6 ?t:5 ?a1:1 ?l:3
+        pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a3 ?t) (RW:free a1 ?t) (RW:free a2 ?t) (N:R:= ?p package7))
         eff: (and (N:RW:at ?p ?l) (N:RW:free a3 ?t) (RW:in ?p ?t a3))
 Init[119]:
   (at truck1 l3)
