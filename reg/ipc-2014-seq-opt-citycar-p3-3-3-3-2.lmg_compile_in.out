@@ -2,8 +2,8 @@ Compile-in LMG: actions: 7, lifted mgroups: 6
 Compile-in LMG: Found dead-end condition for action 'car_arrived' and mgroup {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}: (and (not (= ?xy_final junction2-1)) (= ?machine car0))
 Compile-in LMG: Found dead-end condition for action 'car_arrived' and mgroup {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}: (and (not (= ?xy_final junction2-0)) (= ?machine car1))
 Compile-in LMG: Found dead-end condition for action 'car_arrived' and mgroup {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}: (and (not (= ?xy_final junction2-0)) (= ?machine car2))
-Compile-in LMG: Precondition of action 'car_arrived' extended with (or (= ?xy_final junction2-1) (not (= ?machine car0)) (not (= ?machine car1)) (= ?xy_final junction2-0) (not (= ?machine car2)))
-Compile-in LMG: DONE. actions: 11
+Compile-in LMG: Precondition of action 'car_arrived' extended with (or (and (not (= ?machine car2)) (= ?xy_final junction2-1) (not (= ?machine car1))) (and (= ?xy_final junction2-0) (not (= ?machine car0))) (and (not (= ?machine car2)) (not (= ?machine car0)) (not (= ?machine car1))))
+Compile-in LMG: DONE. actions: 9
 Domain: citycar
 Problem: citycar-3-3-3
 Require: 200ff
@@ -55,7 +55,7 @@ Predicate[12]:
     NOT-in_place: 4 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 9
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-Action[11]:
+Action[9]:
     move_car_in_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
         pre: (and (RW:at_car_jun ?machine ?xy_initial) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
         eff: (and (RW:clear ?xy_initial) (RW:at_car_road ?machine ?r1) (N:RW:at_car_jun ?machine ?xy_initial) (increase (total-cost) 1))
@@ -63,7 +63,7 @@ Action[11]:
         pre: (and (RW:at_car_road ?machine ?r1) (RW:clear ?xy_final) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
         eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:clear ?xy_final) (N:RW:at_car_road ?machine ?r1) (increase (total-cost) 1))
     car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine junction2-1) (R:= ?xy_final junction2-1))
+        pre: (and (RW:at_car_jun ?machine junction2-1) (N:R:= ?machine car2) (R:= ?xy_final junction2-1) (N:R:= ?machine car1))
         eff: (and (RW:clear junction2-1) (W:arrived ?machine junction2-1) (N:RW:at_car_jun ?machine junction2-1))
     car_start: ?xy_final:2 ?machine:1 ?g:3
         pre: (and (R:at_garage ?g ?xy_final) (RW:starting ?machine ?g) (RW:clear ?xy_final))
@@ -78,16 +78,10 @@ Action[11]:
         pre: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
         eff: (and (N:RW:road_connect ?r1 ?xy_initial ?xy_final) (increase (total-cost) 10) (when (RW:at_car_road car0 ?r1) (and (N:RW:at_car_road car0 ?r1) (RW:at_car_jun car0 ?xy_initial))) (when (RW:at_car_road car1 ?r1) (and (N:RW:at_car_road car1 ?r1) (RW:at_car_jun car1 ?xy_initial))) (when (RW:at_car_road car2 ?r1) (and (N:RW:at_car_road car2 ?r1) (RW:at_car_jun car2 ?xy_initial))) (N:RW:in_place ?r1) (RW:NOT-in_place ?r1))
     car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine ?xy_final) (N:R:= ?machine car0))
-        eff: (and (RW:clear ?xy_final) (W:arrived ?machine ?xy_final) (N:RW:at_car_jun ?machine ?xy_final))
-    car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine ?xy_final) (N:R:= ?machine car1))
-        eff: (and (RW:clear ?xy_final) (W:arrived ?machine ?xy_final) (N:RW:at_car_jun ?machine ?xy_final))
-    car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine junction2-0) (R:= ?xy_final junction2-0))
+        pre: (and (RW:at_car_jun ?machine junction2-0) (R:= ?xy_final junction2-0) (N:R:= ?machine car0))
         eff: (and (RW:clear junction2-0) (W:arrived ?machine junction2-0) (N:RW:at_car_jun ?machine junction2-0))
     car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine ?xy_final) (N:R:= ?machine car2))
+        pre: (and (RW:at_car_jun ?machine ?xy_final) (N:R:= ?machine car2) (N:R:= ?machine car0) (N:R:= ?machine car1))
         eff: (and (RW:clear ?xy_final) (W:arrived ?machine ?xy_final) (N:RW:at_car_jun ?machine ?xy_final))
 Init[60]:
   S:(same_line junction0-0 junction0-1)

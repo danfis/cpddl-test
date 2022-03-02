@@ -670,7 +670,53 @@ TEST(lmg, lmg_fd)
 {
 }
 
-TEST(lmg_compile_in, lmg)
+static void lmgCompileInCheckPruning(const pddl_t *pddl,
+                                     const pddl_strips_t *strips_ref,
+                                     int (*ground)(pddl_strips_t *,
+                                                   const pddl_t *pddl,
+                                                   const pddl_ground_config_t *cfg,
+                                                   bor_err_t *err))
+{
+    pddl_strips_t strips;
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.lifted_mgroups = NULL;
+    ground_cfg.prune_op_pre_mutex = 0;
+    ground_cfg.prune_op_dead_end = 0;
+    int ret = ground(&strips, pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    for (int j = 0; j < strips.op.op_size; ++j){
+        int found = 0;
+        for (int i = 0; i < strips_ref->op.op_size; ++i){
+            if (strcmp(strips.op.op[j]->name, strips_ref->op.op[i]->name) == 0){
+                found = 1;
+                break;
+            }
+        }
+        if (!found)
+            fprintf(stderr, "(%s)\n", strips.op.op[j]->name);
+        assert(found);
+    }
+
+    for (int j = 0; j < strips.fact.fact_size; ++j){
+        int found = 0;
+        for (int i = 0; i < strips_ref->fact.fact_size; ++i){
+            if (strcmp(strips.fact.fact[j]->name, strips_ref->fact.fact[i]->name) == 0){
+                found = 1;
+                break;
+            }
+        }
+        if (!found)
+            fprintf(stderr, "(%s)\n", strips.fact.fact[j]->name);
+        assert(found);
+    }
+
+    assert(strips.op.op_size == strips_ref->op.op_size);
+    assert(strips.fact.fact_size == strips_ref->fact.fact_size);
+    pddlStripsFree(&strips);
+}
+
+TEST_COND(lmg_compile_in, lmg, SQLITE)
 {
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
@@ -679,5 +725,21 @@ TEST(lmg_compile_in, lmg)
     if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &C.err))
         pddlPrintDebug(&pddl, stdout);
     borErrInfoEnable(&C.err, NULL);
+    fflush(stdout);
+
+    pddl_strips_t strips_ref;
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.lifted_mgroups = &C.lmg;
+    ground_cfg.prune_op_pre_mutex = 1;
+    ground_cfg.prune_op_dead_end = 1;
+    int ret = pddlStripsGround(&strips_ref, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGround);
+    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundDatalog);
+    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundSql);
+
+    pddlStripsFree(&strips_ref);
+
     pddlFree(&pddl);
 }

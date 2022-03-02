@@ -8,8 +8,8 @@ Compile-in LMG: Found mutex condition for action 'take' and mgroup {at V0:square
 Compile-in LMG: Found dead-end condition for action 'take' and mgroup {at V0:square V1:object, alive agent-1}: (or (= ?what s-1-1) (= ?what s-1-2) (= ?what s-1-3) (= ?what s-2-1) (= ?what s-2-2) (= ?what s-2-3))
 Compile-in LMG: Found dead-end condition for action 'take' and mgroup {at agent-1 C0:object, have agent-1 agent-1, alive gold-1, at agent-1 C1:object}:=1: (and (not (= ?who agent-1)) (= ?what agent-1))
 Compile-in LMG: Found dead-end condition for action 'take' and mgroup {at V0:square C1:object, have agent-1 V0:square, alive agent-1, at V0:square C2:object}: (and (or (not (= ?who agent-1)) (and (not (= ?what s-1-1)) (not (= ?what s-1-2)) (not (= ?what s-1-3)) (not (= ?what s-2-1)) (not (= ?what s-2-2)) (not (= ?what s-2-3)))) (or (= ?what s-1-1) (= ?what s-1-2) (= ?what s-1-3) (= ?what s-2-1) (= ?what s-2-2) (= ?what s-2-3)))
-Compile-in LMG: Precondition of action 'take' extended with (or (and (not (= ?what s-1-1)) (not (= ?what s-1-2)) (not (= ?what s-1-3)) (not (= ?what s-2-1)) (not (= ?what s-2-2)) (not (= ?what s-2-3))) (and (= ?who agent-1) (= ?what s-1-1)) (and (= ?who agent-1) (= ?what s-1-2)) (and (= ?who agent-1) (= ?what s-1-3)) (and (= ?who agent-1) (= ?what s-2-1)) (and (= ?who agent-1) (= ?what s-2-2)) (and (= ?who agent-1) (= ?what s-2-3)))
-Compile-in LMG: DONE. actions: 9
+Compile-in LMG: Precondition of action 'take' extended with (or (and (not (= ?what s-1-1)) (not (= ?what s-1-2)) (not (= ?what s-1-3)) (not (= ?what s-2-1)) (not (= ?what s-2-2)) (not (= ?what s-2-3)) (not (= ?what arrow-1)) (not (= ?what agent-1)) (= ?who agent-1)) (and (not (= ?what s-1-1)) (not (= ?what s-1-2)) (not (= ?what s-1-3)) (not (= ?what s-2-1)) (not (= ?what s-2-2)) (not (= ?what s-2-3)) (not (= ?what arrow-1)) (not (= ?what agent-1)) (not (= ?what gold-1))))
+Compile-in LMG: DONE. actions: 4
 Domain: wumpus-adl
 Problem: wumpus-adl-1
 Require: ff
@@ -46,34 +46,19 @@ Predicate[6]:
     have: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
     alive: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
 Function[0]:
-Action[9]:
+Action[4]:
     move: ?who:1 ?from:5 ?to:5
         pre: (and (RW:alive ?who) (RW:at ?who ?from) (R:adj ?from ?to))
         eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (when (R:pit ?to) (N:RW:alive ?who)) (when (and (RW:at wumpus-1 ?to) (RW:alive wumpus-1)) (N:RW:alive ?who)))
     take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive ?who) (RW:at ?who ?where) (RW:at ?what ?where) (N:R:= ?what s-1-1) (N:R:= ?what s-1-2) (N:R:= ?what s-1-3) (N:R:= ?what s-2-1) (N:R:= ?what s-2-2) (N:R:= ?what s-2-3))
-        eff: (and (RW:have ?who ?what) (N:RW:at ?what ?where))
+        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at ?what ?where) (N:R:= ?what s-1-1) (N:R:= ?what s-1-2) (N:R:= ?what s-1-3) (N:R:= ?what s-2-1) (N:R:= ?what s-2-2) (N:R:= ?what s-2-3) (N:R:= ?what arrow-1) (N:R:= ?what agent-1) (R:= ?who agent-1))
+        eff: (and (RW:have agent-1 ?what) (N:RW:at ?what ?where))
     shoot: ?who:1 ?where:5 ?with-arrow:4 ?victim:2 ?where-victim:5
         pre: (and (RW:alive ?who) (RW:have ?who ?with-arrow) (RW:at ?who ?where) (RW:alive ?victim) (RW:at ?victim ?where-victim) (R:adj ?where ?where-victim))
         eff: (and (N:RW:alive ?victim) (N:RW:at ?victim ?where-victim) (N:RW:have ?who ?with-arrow))
     take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at s-1-1 ?where) (R:= ?who agent-1) (R:= ?what s-1-1))
-        eff: (and (RW:have agent-1 s-1-1) (N:RW:at s-1-1 ?where))
-    take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at s-1-2 ?where) (R:= ?who agent-1) (R:= ?what s-1-2))
-        eff: (and (RW:have agent-1 s-1-2) (N:RW:at s-1-2 ?where))
-    take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at s-1-3 ?where) (R:= ?who agent-1) (R:= ?what s-1-3))
-        eff: (and (RW:have agent-1 s-1-3) (N:RW:at s-1-3 ?where))
-    take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at s-2-1 ?where) (R:= ?who agent-1) (R:= ?what s-2-1))
-        eff: (and (RW:have agent-1 s-2-1) (N:RW:at s-2-1 ?where))
-    take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at s-2-2 ?where) (R:= ?who agent-1) (R:= ?what s-2-2))
-        eff: (and (RW:have agent-1 s-2-2) (N:RW:at s-2-2 ?where))
-    take: ?who:1 ?where:5 ?what:0
-        pre: (and (RW:alive agent-1) (RW:at agent-1 ?where) (RW:at s-2-3 ?where) (R:= ?who agent-1) (R:= ?what s-2-3))
-        eff: (and (RW:have agent-1 s-2-3) (N:RW:at s-2-3 ?where))
+        pre: (and (RW:alive ?who) (RW:at ?who ?where) (RW:at ?what ?where) (N:R:= ?what s-1-1) (N:R:= ?what s-1-2) (N:R:= ?what s-1-3) (N:R:= ?what s-2-1) (N:R:= ?what s-2-2) (N:R:= ?what s-2-3) (N:R:= ?what arrow-1) (N:R:= ?what agent-1) (N:R:= ?what gold-1))
+        eff: (and (RW:have ?who ?what) (N:RW:at ?what ?where))
 Init[21]:
   S:(adj s-1-1 s-1-2)
   S:(adj s-1-2 s-1-1)

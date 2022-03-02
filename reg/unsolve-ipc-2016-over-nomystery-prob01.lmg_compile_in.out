@@ -7,8 +7,8 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p5))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p6))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p7))
-Compile-in LMG: Precondition of action 'load' extended with (or (not (= ?p p0)) (not (= ?p p1)) (not (= ?p p2)) (not (= ?p p3)) (not (= ?p p4)) (not (= ?p p5)) (not (= ?p p6)) (= ?t t0) (not (= ?p p7)))
-Compile-in LMG: DONE. actions: 11
+Compile-in LMG: Precondition of action 'load' extended with (or (= ?t t0) (and (not (= ?p p7)) (not (= ?p p6)) (not (= ?p p5)) (not (= ?p p4)) (not (= ?p p3)) (not (= ?p p2)) (not (= ?p p0)) (not (= ?p p1))))
+Compile-in LMG: DONE. actions: 4
 Domain: transport-strips
 Problem: transport-l8-t1-p8---int100n150-m25---int100c40---s131026---e0
 Require: 200ff
@@ -95,10 +95,10 @@ Predicate[7]:
     sum: 4 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-Action[11]:
+Action[4]:
     load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p0))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
+        pre: (and (RW:at t0 ?l) (RW:at ?p ?l) (R:= ?t t0))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p t0) (increase (total-cost) 1))
     unload: ?p:1 ?t:2 ?l:3
         pre: (and (RW:at ?t ?l) (RW:in ?p ?t))
         eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t) (increase (total-cost) 1))
@@ -106,28 +106,7 @@ Action[11]:
         pre: (and (R:connected ?l1 ?l2) (R:fuelcost ?fueldelta ?l1 ?l2) (RW:fuel ?t ?fuelpre) (R:sum ?fuelpost ?fueldelta ?fuelpre) (RW:at ?t ?l1))
         eff: (and (N:RW:at ?t ?l1) (RW:at ?t ?l2) (N:RW:fuel ?t ?fuelpre) (RW:fuel ?t ?fuelpost) (increase (total-cost) 1))
     load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p1))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p2))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p3))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p4))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p5))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p6))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at t0 ?l) (RW:at ?p ?l) (R:= ?t t0))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p t0) (increase (total-cost) 1))
-    load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p7))
+        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p7) (N:R:= ?p p6) (N:R:= ?p p5) (N:R:= ?p p4) (N:R:= ?p p3) (N:R:= ?p p2) (N:R:= ?p p0) (N:R:= ?p p1))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
 Init[1004]:
   S:(sum level0 level0 level0)

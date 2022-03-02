@@ -2,8 +2,8 @@ Compile-in LMG: actions: 3, lifted mgroups: 3
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p0))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p1))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p2))
-Compile-in LMG: Precondition of action 'load' extended with (or (not (= ?p p0)) (not (= ?p p1)) (= ?t t0) (not (= ?p p2)))
-Compile-in LMG: DONE. actions: 6
+Compile-in LMG: Precondition of action 'load' extended with (or (= ?t t0) (and (not (= ?p p2)) (not (= ?p p0)) (not (= ?p p1))))
+Compile-in LMG: DONE. actions: 4
 Domain: transport-strips
 Problem: transport-l4-t1-p3---int100n150-m25---int100c150---s1---e0
 Require: 200ff
@@ -77,10 +77,10 @@ Predicate[7]:
     sum: 2 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-Action[6]:
+Action[4]:
     load: ?p:4 ?t:5 ?l:1
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p0))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
+        pre: (and (RW:at t0 ?l) (RW:at ?p ?l) (R:= ?t t0))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p t0) (increase (total-cost) 1))
     unload: ?p:4 ?t:5 ?l:1
         pre: (and (RW:at ?t ?l) (RW:in ?p ?t))
         eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t) (increase (total-cost) 1))
@@ -88,13 +88,7 @@ Action[6]:
         pre: (and (R:connected ?l1 ?l2) (R:fuelcost ?fueldelta ?l1 ?l2) (RW:fuel ?t ?fuelpre) (R:sum ?fuelpost ?fueldelta ?fuelpre) (RW:at ?t ?l1))
         eff: (and (N:RW:at ?t ?l1) (RW:at ?t ?l2) (N:RW:fuel ?t ?fuelpre) (RW:fuel ?t ?fuelpost) (increase (total-cost) 1))
     load: ?p:4 ?t:5 ?l:1
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p1))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
-    load: ?p:4 ?t:5 ?l:1
-        pre: (and (RW:at t0 ?l) (RW:at ?p ?l) (R:= ?t t0))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p t0) (increase (total-cost) 1))
-    load: ?p:4 ?t:5 ?l:1
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p2))
+        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p2) (N:R:= ?p p0) (N:R:= ?p p1))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
 Init[732]:
   S:(sum level0 level0 level0)

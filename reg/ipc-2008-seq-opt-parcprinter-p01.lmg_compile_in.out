@@ -3,21 +3,21 @@ Compile-in LMG: Found dead-end condition for action 'colorprinter-simplex-letter
 Compile-in LMG: Found dead-end condition for action 'colorprinter-simplex-letter' and mgroup {notprintedwith V0:sheet_t V1:side_t V2:color_t}: (and (= ?sheet sheet1) (= ?face back))
 Compile-in LMG: Found dead-end condition for action 'colorprinter-simplex-letter' and mgroup {notprintedwith C2:sheet_t V0:side_t V1:color_t, notprintedwith C3:sheet_t V0:side_t V1:color_t}: (= ?face front)
 Compile-in LMG: Found dead-end condition for action 'colorprinter-simplex-letter' and mgroup {notprintedwith C2:sheet_t V0:side_t V1:color_t, notprintedwith C3:sheet_t V0:side_t V1:color_t}: (= ?face back)
-Compile-in LMG: Precondition of action 'colorprinter-simplex-letter' extended with (or (not (= ?sheet sheet1)) (not (= ?face front)) (not (= ?face back)))
+Compile-in LMG: Precondition of action 'colorprinter-simplex-letter' extended with (and (not (= ?face back)) (not (= ?face front)))
 Compile-in LMG: Found dead-end condition for action 'colorprinter-simplexmono-letter' and mgroup {notprintedwith V0:sheet_t V1:side_t V2:color_t}: (and (= ?sheet sheet1) (= ?face back))
 Compile-in LMG: Found dead-end condition for action 'colorprinter-simplexmono-letter' and mgroup {notprintedwith C2:sheet_t V0:side_t V1:color_t, notprintedwith C3:sheet_t V0:side_t V1:color_t}: (= ?face back)
-Compile-in LMG: Precondition of action 'colorprinter-simplexmono-letter' extended with (or (not (= ?sheet sheet1)) (not (= ?face back)))
+Compile-in LMG: Precondition of action 'colorprinter-simplexmono-letter' extended with (not (= ?face back))
 Compile-in LMG: Found dead-end condition for action 'blackprinter-simplex-letter' and mgroup {notprintedwith V0:sheet_t V1:side_t V2:color_t}: (and (= ?sheet sheet1) (= ?face back))
 Compile-in LMG: Found dead-end condition for action 'blackprinter-simplex-letter' and mgroup {notprintedwith C2:sheet_t V0:side_t V1:color_t, notprintedwith C3:sheet_t V0:side_t V1:color_t}: (= ?face back)
-Compile-in LMG: Precondition of action 'blackprinter-simplex-letter' extended with (or (not (= ?sheet sheet1)) (not (= ?face back)))
+Compile-in LMG: Precondition of action 'blackprinter-simplex-letter' extended with (not (= ?face back))
 Compile-in LMG: Found dead-end condition for action 'blackprinter-simplexandinvert-letter' and mgroup {notprintedwith V0:sheet_t V1:side_t V2:color_t}: (and (= ?sheet sheet1) (= ?face back))
 Compile-in LMG: Found dead-end condition for action 'blackprinter-simplexandinvert-letter' and mgroup {notprintedwith C2:sheet_t V0:side_t V1:color_t, notprintedwith C3:sheet_t V0:side_t V1:color_t}: (= ?face back)
-Compile-in LMG: Precondition of action 'blackprinter-simplexandinvert-letter' extended with (or (not (= ?sheet sheet1)) (not (= ?face back)))
+Compile-in LMG: Precondition of action 'blackprinter-simplexandinvert-letter' extended with (not (= ?face back))
 Compile-in LMG: Found mutex condition for action 'finisher1-stack-letter' and mgroup {location V0:sheet_t C1:location_t, location V0:sheet_t C2:location_t}:=1: (= ?sheet ?prevsheet)
 Compile-in LMG: Precondition of action 'finisher1-stack-letter' extended with (not (= ?sheet ?prevsheet))
 Compile-in LMG: Found mutex condition for action 'finisher2-stack-letter' and mgroup {location V0:sheet_t C1:location_t, location V0:sheet_t C2:location_t}:=1: (= ?sheet ?prevsheet)
 Compile-in LMG: Precondition of action 'finisher2-stack-letter' extended with (not (= ?sheet ?prevsheet))
-Compile-in LMG: DONE. actions: 28
+Compile-in LMG: DONE. actions: 23
 Domain: upp
 Problem: printjob
 Require: 200ff
@@ -96,7 +96,7 @@ Predicate[12]:
     uninitialized: :: is-private: 0, owner-param: -1, read: 1, write: 1
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-Action[28]:
+Action[23]:
     initialize: 
         pre: (and (RW:uninitialized))
         eff: (and (N:RW:uninitialized) (RW:available endcap-rsrc) (RW:available htmoverblack-rsrc) (RW:available colorcontainer-rsrc) (RW:available colorprinter-rsrc) (RW:available colorfeeder-rsrc) (RW:available blackfeeder-rsrc) (RW:available down-rsrc) (RW:available htmovercolor-rsrc) (RW:available blackcontainer-rsrc) (RW:available blackprinter-rsrc) (RW:available up-rsrc) (RW:available finisher1-rsrc) (RW:available finisher2-rsrc))
@@ -113,10 +113,10 @@ Action[28]:
         pre: (and (RW:available colorcontainer-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime))
         eff: (and (RW:location ?sheet colorcontainer_exit-up_bottomentry) (N:RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (RW:available colorcontainer-rsrc) (increase (total-cost) 8000))
     colorprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face color) (N:R:= ?sheet sheet1))
+        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face color) (N:R:= ?face back) (N:R:= ?face front))
         eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face color) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
     colorprinter-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?sheet sheet1))
+        pre: (and (N:R:= ?face back) (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face black))
         eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
     colorfeeder-feed-letter: ?sheet:7
         pre: (and (RW:available colorfeeder-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
@@ -143,10 +143,10 @@ Action[28]:
         pre: (and (RW:available blackcontainer-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime))
         eff: (and (RW:location ?sheet endcap_entry-blackcontainer_exit) (N:RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (RW:available blackcontainer-rsrc) (increase (total-cost) 2000))
     blackprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?sheet sheet1))
+        pre: (and (N:R:= ?face back) (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black))
         eff: (and (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc) (increase (total-cost) 113013))
     blackprinter-simplexandinvert-letter: ?sheet:7 ?face:3 ?otherface:3 ?image:5
-        pre: (and (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black) (RW:sideup ?sheet ?face) (N:R:= ?sheet sheet1))
+        pre: (and (N:R:= ?face back) (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black) (RW:sideup ?sheet ?face))
         eff: (and (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (RW:sideup ?sheet ?otherface) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (N:RW:sideup ?sheet ?face) (RW:available blackprinter-rsrc) (increase (total-cost) 123013))
     up-movetop-letter: ?sheet:7
         pre: (and (RW:available up-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet htmovercolor_exit-up_topentry))
@@ -166,21 +166,6 @@ Action[28]:
     finisher2-stack-letter: ?sheet:7 ?prevsheet:7
         pre: (and (N:R:= ?sheet ?prevsheet) (RW:available finisher2-rsrc) (R:prevsheet ?sheet ?prevsheet) (RW:location ?prevsheet some_finisher_tray) (R:sheetsize ?sheet letter) (RW:location ?sheet finisher2_entry-finisher1_exit))
         eff: (and (RW:location ?sheet some_finisher_tray) (W:stackedin ?sheet finisher2_tray) (N:RW:location ?sheet finisher2_entry-finisher1_exit) (RW:available finisher2-rsrc) (increase (total-cost) 8000))
-    colorprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face color) (N:R:= ?face front))
-        eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face color) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
-    colorprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face color) (N:R:= ?face back))
-        eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face color) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
-    colorprinter-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?face back))
-        eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
-    blackprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?face back))
-        eff: (and (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc) (increase (total-cost) 113013))
-    blackprinter-simplexandinvert-letter: ?sheet:7 ?face:3 ?otherface:3 ?image:5
-        pre: (and (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black) (RW:sideup ?sheet ?face) (N:R:= ?face back))
-        eff: (and (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (RW:sideup ?sheet ?otherface) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (N:RW:sideup ?sheet ?face) (RW:available blackprinter-rsrc) (increase (total-cost) 123013))
 Init[12]:
   (uninitialized)
   S:(oppositeside front back)
