@@ -4,7 +4,7 @@
 #include <pddl/pddl.h>
 
 struct context {
-    bor_err_t err;
+    pddl_err_t err;
     pddl_files_t files;
     int optimal_cost;
 

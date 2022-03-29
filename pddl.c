@@ -10,7 +10,7 @@ TEST(pddl, r)
     int ret = pddlInit(&C.pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
     if (ret != 0)
-        borErrPrint(&C.err, 1, stderr);
+        pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
     C.pddl_set = 1;
 
@@ -27,7 +27,7 @@ TEST(pddl_unit_cost, r)
     int ret = pddlInit(&C.pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
     if (ret != 0)
-        borErrPrint(&C.err, 1, stderr);
+        pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
     C.pddl_set = 1;
 
@@ -51,7 +51,7 @@ TEST(pddl_no_normalize, r)
     int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
     if (ret != 0)
-        borErrPrint(&C.err, 1, stderr);
+        pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
 
     pddlCheckSizeTypes(&pddl);

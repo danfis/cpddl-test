@@ -6,7 +6,7 @@ static int mgIsSubset(const pddl_mgroups_t *mgs,
                       const pddl_mgroup_t *m)
 {
     for (int i = 0; i < mgs->mgroup_size; ++i){
-        if (borISetIsSubset(&m->mgroup, &mgs->mgroup[i].mgroup))
+        if (pddlISetIsSubset(&m->mgroup, &mgs->mgroup[i].mgroup))
             return 1;
     }
     return 0;
@@ -26,7 +26,7 @@ static int mgsCovered2(const pddl_mgroups_t *mgs,
                        const pddl_mgroups_t *c)
 {
     for (int i = 0; i < c->mgroup_size; ++i){
-        if (borISetSize(&c->mgroup[i].mgroup) <= 1)
+        if (pddlISetSize(&c->mgroup[i].mgroup) <= 1)
             continue;
         if (!mgIsSubset(mgs, &c->mgroup[i]))
             return 0;
@@ -37,7 +37,7 @@ static int mgsCovered2(const pddl_mgroups_t *mgs,
 static int mgIsIn(const pddl_mgroups_t *mgs, const pddl_mgroup_t *m)
 {
     for (int i = 0; i < mgs->mgroup_size; ++i){
-        if (borISetEq(&m->mgroup, &mgs->mgroup[i].mgroup))
+        if (pddlISetEq(&m->mgroup, &mgs->mgroup[i].mgroup))
             return 1;
     }
     return 0;
@@ -85,18 +85,18 @@ TEST_COND(famgroup_maximal, b_mgroup, LP)
     pddlMGroupsSetGoal(&mg_max, &C.strips);
     pddlMGroupsSortUniq(&mg_max);
 
-    BOR_ISET(facts);
+    PDDL_ISET(facts);
     for (int mi = 0; mi < mg_max.mgroup_size; ++mi){
         const pddl_mgroup_t *m = mg_max.mgroup + mi;
         assert(pddlStripsIsFAMGroup(&C.strips, &m->mgroup));
-        borISetUnion(&facts, &m->mgroup);
+        pddlISetUnion(&facts, &m->mgroup);
     }
 
     int cover_num = pddlMGroupsCoverNumber(&mg_max, C.strips.fact.fact_size);
     assert(cover_num >= 0);
-    assert(cover_num - (C.strips.fact.fact_size - borISetSize(&facts)) >= 0);
+    assert(cover_num - (C.strips.fact.fact_size - pddlISetSize(&facts)) >= 0);
     assert(cover_num <= C.strips.fact.fact_size);
-    assert(cover_num - (C.strips.fact.fact_size - borISetSize(&facts))
+    assert(cover_num - (C.strips.fact.fact_size - pddlISetSize(&facts))
                     <= mg_max.mgroup_size);
 
     fprintf(stdout, "Maximal %d:\n", mg_max.mgroup_size);
@@ -104,7 +104,7 @@ TEST_COND(famgroup_maximal, b_mgroup, LP)
     fprintf(stdout, "\n");
     fprintf(stdout, "Mutex Group Cover Number: %d\n", cover_num);
     fflush(stdout);
-    borISetFree(&facts);
+    pddlISetFree(&facts);
 
     assert(mgsCovered(&mg_max, &C.mg));
     assert(mgsCovered(&mg_max, &mg_fd));
@@ -148,18 +148,18 @@ TEST_COND(famgroup_all, famgroup_maximal, LP)
     pddlMGroupsSetGoal(&mg_all, &C.strips);
     pddlMGroupsSortUniq(&mg_all);
 
-    BOR_ISET(facts);
+    PDDL_ISET(facts);
     for (int mi = 0; mi < mg_all.mgroup_size; ++mi){
         const pddl_mgroup_t *m = mg_all.mgroup + mi;
         assert(pddlStripsIsFAMGroup(&C.strips, &m->mgroup));
-        borISetUnion(&facts, &m->mgroup);
+        pddlISetUnion(&facts, &m->mgroup);
     }
 
     int cover_num = pddlMGroupsCoverNumber(&mg_all, C.strips.fact.fact_size);
     assert(cover_num >= 0);
-    assert(cover_num - (C.strips.fact.fact_size - borISetSize(&facts)) >= 0);
+    assert(cover_num - (C.strips.fact.fact_size - pddlISetSize(&facts)) >= 0);
     assert(cover_num <= C.strips.fact.fact_size);
-    assert(cover_num - (C.strips.fact.fact_size - borISetSize(&facts))
+    assert(cover_num - (C.strips.fact.fact_size - pddlISetSize(&facts))
                     <= mg_all.mgroup_size);
 
     fprintf(stdout, "Non-Maximal %d:\n", mg_all.mgroup_size);
@@ -167,7 +167,7 @@ TEST_COND(famgroup_all, famgroup_maximal, LP)
     fprintf(stdout, "\n");
     fprintf(stdout, "Mutex Group Cover Number: %d\n", cover_num);
     fflush(stdout);
-    borISetFree(&facts);
+    pddlISetFree(&facts);
 
     assert(mgsContained(&mg_all, &mg_max));
     assert(mgsCovered(&mg_max, &mg_all));
@@ -235,7 +235,7 @@ TEST(h2mgroup, famgroup_all)
     pddl_mutex_pairs_t h2;
     pddlMutexPairsInitStrips(&h2, &C.strips);
 
-    //borErrInfoEnable(&err, stdout);
+    //pddlErrInfoEnable(&err, stdout);
     int ret = pddlH2(&C.strips, &h2, NULL, NULL, 0., &C.err);
     assert(ret == 0);
 
@@ -262,7 +262,7 @@ TEST(h3mgroup, h2mgroup)
     pddl_mutex_pairs_t h3;
     pddlMutexPairsInitStrips(&h3, &C.strips);
 
-    //borErrInfoEnable(&err, stdout);
+    //pddlErrInfoEnable(&err, stdout);
     int ret = pddlH3(&C.strips, &h3, NULL, NULL, -1., 0., &C.err);
     assert(ret == 0);
 

@@ -8,13 +8,13 @@ static int optimalCost(const char *problem_fn)
 {
     int cost = -1;
     int fnlen = strlen(problem_fn);
-    char *fn = BOR_ALLOC_ARR(char, fnlen + 2);
+    char *fn = PDDL_ALLOC_ARR(char, fnlen + 2);
     strcpy(fn, problem_fn);
     strcpy(fn + fnlen - 4, "plan");
 
     FILE *fin = fopen(fn, "r");
     if (fin == NULL){
-        BOR_FREE(fn);
+        PDDL_FREE(fn);
         return PDDL_COST_MAX;
     }
 
@@ -39,17 +39,17 @@ static int optimalCost(const char *problem_fn)
     if (line != NULL)
         free(line);
 
-    BOR_FREE(fn);
+    PDDL_FREE(fn);
     return cost;
 }
 
 TEST(r, _)
 {
-    borErrInit(&C.err);
-    //borErrWarnEnable(&C.err, stderr);
-    //borErrInfoEnable(&C.err, stderr);
+    pddlErrInit(&C.err);
+    //pddlErrWarnEnable(&C.err, stderr);
+    //pddlErrInfoEnable(&C.err, stderr);
     if (pddlFiles(&C.files, "pddl-data/", TEST_TASK, &C.err) != 0){
-        borErrPrint(&C.err, 1, stderr);
+        pddlErrPrint(&C.err, 1, stderr);
         assert(0);
     }
     C.optimal_cost = optimalCost(C.files.problem_pddl);

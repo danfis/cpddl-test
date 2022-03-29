@@ -4,8 +4,8 @@
 
 static int disamb(pddl_disambiguate_t *dis,
                   const pddl_strips_t *strips,
-                  const bor_iset_t *s1,
-                  bor_iset_t *s2,
+                  const pddl_iset_t *s1,
+                  pddl_iset_t *s2,
                   const char *header)
 {
     int ret = pddlDisambiguateSet(dis, s2);
@@ -15,11 +15,11 @@ static int disamb(pddl_disambiguate_t *dis,
         pddlFactsPrintSet(s1, &strips->fact, " ", "", stdout);
         fprintf(stdout, "\n");
         fprintf(stdout, "   +");
-        BOR_ISET(add);
-        borISetMinus2(&add, s2, s1);
+        PDDL_ISET(add);
+        pddlISetMinus2(&add, s2, s1);
         pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
         fprintf(stdout, "\n");
-        borISetFree(&add);
+        pddlISetFree(&add);
     }
 
     return ret;
@@ -31,13 +31,13 @@ TEST(disambiguation, ground_lifted_mgroup)
     pddlMutexPairsInitStrips(&mutex, &C.strips);
     pddlMutexPairsAddMGroups(&mutex, &C.mg);
 
-    //borErrInfoEnable(&err, stdout);
-    BOR_ISET(irr_op2);
+    //pddlErrInfoEnable(&err, stdout);
+    PDDL_ISET(irr_op2);
     int ret = pddlH2(&C.strips, &mutex, NULL, &irr_op2, 0., &C.err);
 
     if (C.strips.has_cond_eff){
         assert(ret == -1);
-        borErrPrint(&C.err, 0, stdout);
+        pddlErrPrint(&C.err, 0, stdout);
     }else{
         assert(ret == 0);
     }
@@ -61,7 +61,7 @@ TEST(disambiguation, ground_lifted_mgroup)
         fprintf(stdout, "Unsolvable\n");
     }else{
         for (int op_id = 0; op_id < C.strips.op.op_size && op_id < 500; ++op_id){
-            if (borISetIn(op_id, &irr_op2))
+            if (pddlISetIn(op_id, &irr_op2))
                 continue;
             const pddl_strips_op_t *op = C.strips.op.op[op_id];
             pddl_strips_op_t *op2 = strips2.op.op[op_id];
@@ -75,7 +75,7 @@ TEST(disambiguation, ground_lifted_mgroup)
     }
     pddlDisambiguateFree(&dis);
 
-    borISetFree(&irr_op2);
+    pddlISetFree(&irr_op2);
 
     pddlStripsFree(&strips2);
     pddlMutexPairsFree(&mutex);

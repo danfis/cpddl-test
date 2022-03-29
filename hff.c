@@ -4,7 +4,7 @@
 
 TEST(hff_strips, fdr)
 {
-    BOR_IARR(plan);
+    PDDL_IARR(plan);
     pddl_hff_t hff;
     pddlHFFInitStrips(&hff, &C.strips);
     int heur = pddlHFFStripsPlan(&hff, &C.strips.init, &plan);
@@ -14,7 +14,7 @@ TEST(hff_strips, fdr)
         //assertTrue(pddlFDRIsRelaxedPlan(&fdr, fdr.init, &plan, &err));
     }
     pddlHFFFree(&hff);
-    borIArrFree(&plan);
+    pddlIArrFree(&plan);
 
     pddl_hmax_t hmax;
     pddlHMaxInit(&hmax, &C.fdr);
@@ -34,7 +34,7 @@ TEST(hff_strips, fdr)
 
 TEST(hff_fdr, fdr)
 {
-    BOR_IARR(plan);
+    PDDL_IARR(plan);
     pddl_hff_t hff;
     pddlHFFInit(&hff, &C.fdr);
     int heur = pddlHFFPlan(&hff, C.fdr.init, &C.fdr.var, &plan);
@@ -43,7 +43,7 @@ TEST(hff_fdr, fdr)
         assert(pddlFDRIsRelaxedPlan(&C.fdr, C.fdr.init, &plan, &C.err));
     }
     pddlHFFFree(&hff);
-    borIArrFree(&plan);
+    pddlIArrFree(&plan);
 
     pddl_hmax_t hmax;
     pddlHMaxInit(&hmax, &C.fdr);

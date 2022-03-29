@@ -1,27 +1,25 @@
-#include <boruvka/rand.h>
-#include <boruvka/timer.h>
 #include "pddl/pddl.h"
 #include <assert.h>
 #include "test.h"
 #include "context.h"
 
-static void genRandGraph(bor_rand_t *rnd,
+static void genRandGraph(pddl_rand_t *rnd,
                          pddl_graph_simple_t *g,
                          int max_nodes,
                          float p)
 {
-    int nodes = borRand(rnd, 3, max_nodes);
+    int nodes = pddlRand(rnd, 3, max_nodes);
     pddlGraphSimpleInit(g, nodes);
     for (int i = 0; i < nodes; ++i){
         for (int j = i + 1; j < nodes; ++j){
-            if (borRand(rnd, 0, 1.) >= p){
+            if (pddlRand(rnd, 0, 1.) >= p){
                 pddlGraphSimpleAddEdge(g, i, j);
             }
         }
     }
 }
 
-static void addClique(const bor_iset_t *clique, void *ud)
+static void addClique(const pddl_iset_t *clique, void *ud)
 {
     pddl_set_iset_t *sset = ud;
     assert(pddlSetISetFind(sset, clique) == -1);
@@ -30,8 +28,8 @@ static void addClique(const bor_iset_t *clique, void *ud)
 
 TEST_EXPLICIT(clique_rand)
 {
-    bor_rand_t rnd;
-    borRandInit(&rnd);
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd);
 
     for (int _i = 0; _i < 100; ++_i){
         pddl_graph_simple_t g;
@@ -48,8 +46,8 @@ TEST_EXPLICIT(clique_rand)
         int size2 = pddlSetISetSize(&sset2);
         assert(size == size2);
         for (int i = 0; i < size && i < size2; ++i){
-            const bor_iset_t *clique = pddlSetISetGet(&sset, i);
-            const bor_iset_t *clique2 = pddlSetISetGet(&sset2, i);
+            const pddl_iset_t *clique = pddlSetISetGet(&sset, i);
+            const pddl_iset_t *clique2 = pddlSetISetGet(&sset2, i);
             assert(pddlSetISetFind(&sset2, clique) >= 0);
             assert(pddlSetISetFind(&sset, clique2) >= 0);
         }
@@ -58,26 +56,26 @@ TEST_EXPLICIT(clique_rand)
 #endif
         //printf(":: %d %d\n", _i, size);
         for (int i = 0; i < size; ++i){
-            const bor_iset_t *clique = pddlSetISetGet(&sset, i);
+            const pddl_iset_t *clique = pddlSetISetGet(&sset, i);
 
             // Check that clique is indeed a clique
-            int csize = borISetSize(clique);
+            int csize = pddlISetSize(clique);
             for (int ci = 0; ci < csize; ++ci){
-                int n1 = borISetGet(clique, ci);
+                int n1 = pddlISetGet(clique, ci);
                 for (int cj = ci + 1; cj < csize; ++cj){
-                    int n2 = borISetGet(clique, cj);
-                    assert(borISetIn(n2, &g.node[n1]));
+                    int n2 = pddlISetGet(clique, cj);
+                    assert(pddlISetIn(n2, &g.node[n1]));
                 }
             }
         }
 
         // Check that there are not any subsets
         for (int i = 0; i < size; ++i){
-            const bor_iset_t *clique = pddlSetISetGet(&sset, i);
+            const pddl_iset_t *clique = pddlSetISetGet(&sset, i);
             for (int j = i + 1; j < size; ++j){
-                const bor_iset_t *clique2 = pddlSetISetGet(&sset, j);
-                assert(!borISetIsSubset(clique, clique2));
-                assert(!borISetIsSubset(clique2, clique));
+                const pddl_iset_t *clique2 = pddlSetISetGet(&sset, j);
+                assert(!pddlISetIsSubset(clique, clique2));
+                assert(!pddlISetIsSubset(clique2, clique));
             }
         }
         pddlSetISetFree(&sset);
@@ -86,36 +84,36 @@ TEST_EXPLICIT(clique_rand)
     }
 }
 
-static void addBiclique(const bor_iset_t *left,
-                        const bor_iset_t *right,
+static void addBiclique(const pddl_iset_t *left,
+                        const pddl_iset_t *right,
                         void *ud)
 {
     pddl_set_iset_t *sset = ud;
-    assert(borISetIsDisjunct(left, right));
-    BOR_ISET(biclique);
-    //if (borISetCmp(left, right) < 0){
-        borISetUnion(&biclique, left);
+    assert(pddlISetIsDisjunct(left, right));
+    PDDL_ISET(biclique);
+    //if (pddlISetCmp(left, right) < 0){
+        pddlISetUnion(&biclique, left);
         int n;
-        BOR_ISET_FOR_EACH(right, n)
-            borISetAdd(&biclique, 1000 + n);
+        PDDL_ISET_FOR_EACH(right, n)
+            pddlISetAdd(&biclique, 1000 + n);
         /*
     }else{
-        borISetUnion(&biclique, right);
+        pddlISetUnion(&biclique, right);
         int n;
-        BOR_ISET_FOR_EACH(left, n)
-            borISetAdd(&biclique, 1000 + n);
+        PDDL_ISET_FOR_EACH(left, n)
+            pddlISetAdd(&biclique, 1000 + n);
     }
     */
     //assertEquals(pddlSetISetFind(sset, &biclique), -1);
     pddlSetISetAdd(sset, &biclique);
-    borISetFree(&biclique);
+    pddlISetFree(&biclique);
 }
 
 TEST_EXPLICIT(clique_biclique_rand)
 {
-    bor_rand_t rnd;
-    borRandInit(&rnd);
-    //borRandInitSeed(&rnd, 0);
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd);
+    //pddlRandInitSeed(&rnd, 0);
 
     for (int _i = 0; _i < 100; ++_i){
         pddl_graph_simple_t g;
@@ -132,8 +130,8 @@ TEST_EXPLICIT(clique_biclique_rand)
         int size2 = pddlSetISetSize(&sset2);
         assert(size == size2);
         for (int i = 0; i < size && i < size2; ++i){
-            const bor_iset_t *c1 = pddlSetISetGet(&sset, i);
-            const bor_iset_t *c2 = pddlSetISetGet(&sset2, i);
+            const pddl_iset_t *c1 = pddlSetISetGet(&sset, i);
+            const pddl_iset_t *c2 = pddlSetISetGet(&sset2, i);
             assert(pddlSetISetFind(&sset, c2) >= 0);
             assert(pddlSetISetFind(&sset2, c1) >= 0);
         }
@@ -141,32 +139,32 @@ TEST_EXPLICIT(clique_biclique_rand)
         pddlSetISetFree(&sset2);
 
         for (int k = 0; k < size; ++k){
-            const bor_iset_t *biclique = pddlSetISetGet(&sset, k);
+            const pddl_iset_t *biclique = pddlSetISetGet(&sset, k);
 
             // Check that biclique is indeed a non-induced biclique
-            int csize = borISetSize(biclique);
+            int csize = pddlISetSize(biclique);
             for (int ci = 0; ci < csize; ++ci){
-                int n1 = borISetGet(biclique, ci);
+                int n1 = pddlISetGet(biclique, ci);
                 if (n1 >= 1000)
                     break;
 
                 for (int cj = ci + 1; cj < csize; ++cj){
-                    int n2 = borISetGet(biclique, cj);
+                    int n2 = pddlISetGet(biclique, cj);
                     if (n2 < 1000)
                         continue;
                     n2 -= 1000;
-                    assert(borISetIn(n2, &g.node[n1]));
+                    assert(pddlISetIn(n2, &g.node[n1]));
                 }
             }
         }
 
         // Check that there are not any subsets
         for (int i = 0; i < size; ++i){
-            const bor_iset_t *biclique = pddlSetISetGet(&sset, i);
+            const pddl_iset_t *biclique = pddlSetISetGet(&sset, i);
             for (int j = i + 1; j < size; ++j){
-                const bor_iset_t *biclique2 = pddlSetISetGet(&sset, j);
-                assert(!borISetIsSubset(biclique, biclique2));
-                assert(!borISetIsSubset(biclique2, biclique));
+                const pddl_iset_t *biclique2 = pddlSetISetGet(&sset, j);
+                assert(!pddlISetIsSubset(biclique, biclique2));
+                assert(!pddlISetIsSubset(biclique2, biclique));
             }
         }
 

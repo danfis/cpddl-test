@@ -1,25 +1,24 @@
 #include <assert.h>
-#include <boruvka/rand.h>
 #include "test.h"
 #include "context.h"
 
-static int selectRandomApplicableOp(bor_rand_t *rnd,
+static int selectRandomApplicableOp(pddl_rand_t *rnd,
                                     const pddl_strips_t *strips,
-                                    const bor_iset_t *state)
+                                    const pddl_iset_t *state)
 {
-    BOR_ISET(app);
+    PDDL_ISET(app);
     for (int op_id = 0; op_id < strips->op.op_size; ++op_id){
         const pddl_strips_op_t *op = strips->op.op[op_id];
-        if (borISetIsSubset(&op->pre, state))
-            borISetAdd(&app, op_id);
+        if (pddlISetIsSubset(&op->pre, state))
+            pddlISetAdd(&app, op_id);
     }
 
     int op = -1;
-    if (borISetSize(&app) > 0){
-        int idx = borRand(rnd, 0, borISetSize(&app));
-        op = borISetGet(&app, idx);
+    if (pddlISetSize(&app) > 0){
+        int idx = pddlRand(rnd, 0, pddlISetSize(&app));
+        op = pddlISetGet(&app, idx);
     }
-    borISetFree(&app);
+    pddlISetFree(&app);
     return op;
 }
 
@@ -35,7 +34,7 @@ static void checkTransition(const pddl_trans_systems_t *tss,
         const pddl_transitions_t *trs = &ts->trans.trans[ltri].trans;
         for (int tri = 0; tri < trs->trans_size; ++tri){
             if (from == trs->trans[tri].from && to == trs->trans[tri].to){
-                assert(borISetIn(label, &lbl->label));
+                assert(pddlISetIn(label, &lbl->label));
                 return;
             }
         }
@@ -45,7 +44,7 @@ static void checkTransition(const pddl_trans_systems_t *tss,
     assert(0);
 }
 
-static void testRandomWalk(bor_rand_t *rnd,
+static void testRandomWalk(pddl_rand_t *rnd,
                            const pddl_strips_t *strips,
                            pddl_lm_cut_t *lmc,
                            const pddl_trans_systems_t *tss,
@@ -53,19 +52,19 @@ static void testRandomWalk(bor_rand_t *rnd,
                            int length)
 {
     //fprintf(stderr, "Random Walk for %d\n", ts_id);
-    BOR_ISET(state);
-    borISetUnion(&state, &strips->init);
+    PDDL_ISET(state);
+    pddlISetUnion(&state, &strips->init);
 
     int state_id = pddlTransSystemsStripsState(tss, ts_id, &state);
     assert(state_id == tss->ts[ts_id]->init_state);
 
     //fprintf(stderr, "init-id: %d\n", state_id);
     int op_id = selectRandomApplicableOp(rnd, strips, &state);
-    assert(!borISetIn(op_id, &tss->dead_labels));
+    assert(!pddlISetIn(op_id, &tss->dead_labels));
     for (int i = 0; i < length && op_id >= 0; ++i){
         const pddl_strips_op_t *op = strips->op.op[op_id];
-        borISetMinus(&state, &op->del_eff);
-        borISetUnion(&state, &op->add_eff);
+        pddlISetMinus(&state, &op->del_eff);
+        pddlISetUnion(&state, &op->add_eff);
         int next_id = pddlTransSystemsStripsState(tss, ts_id, &state);
         //fprintf(stderr, "step %d: %d->%d [%d:(%s)]\n", i, state_id, next_id,
         //                op_id, op->name);
@@ -76,22 +75,22 @@ static void testRandomWalk(bor_rand_t *rnd,
                 if (!is_dead){
                     fprintf(stderr, "Unverified dead-end:");
                     int fact;
-                    BOR_ISET_FOR_EACH(&state, fact)
+                    PDDL_ISET_FOR_EACH(&state, fact)
                         fprintf(stderr, " %d", fact);
                     fprintf(stderr, "\n");
                 }
             }
 
-            borISetFree(&state);
+            pddlISetFree(&state);
             return;
         }
         checkTransition(tss, ts_id, state_id, next_id, op_id);
 
         op_id = selectRandomApplicableOp(rnd, strips, &state);
-        assert(!borISetIn(op_id, &tss->dead_labels));
+        assert(!pddlISetIn(op_id, &tss->dead_labels));
         state_id = next_id;
     }
-    borISetFree(&state);
+    pddlISetFree(&state);
 }
 
 static void testAbstrMap(pddl_trans_systems_t *tss, int ts_id)
@@ -102,7 +101,7 @@ static void testAbstrMap(pddl_trans_systems_t *tss, int ts_id)
     assert(ts->num_states == map.num_states);
     assert(map.map_num_states < 0);
 
-    int *dist = BOR_ALLOC_ARR(int, ts->num_states);
+    int *dist = PDDL_ALLOC_ARR(int, ts->num_states);
     pddl_trans_system_graph_t graph;
 
     pddlTransSystemGraphInit(&graph, ts);
@@ -123,8 +122,8 @@ static void testAbstrMap(pddl_trans_systems_t *tss, int ts_id)
 
 
     for (int ci = 0; ci < pddlSetISetSize(&comp); ++ci){
-        const bor_iset_t *c = pddlSetISetGet(&comp, ci);
-        if (borISetSize(c) > 1)
+        const pddl_iset_t *c = pddlSetISetGet(&comp, ci);
+        if (pddlISetSize(c) > 1)
             pddlTransSystemAbstrMapCondense(&map, c);
     }
     pddlSetISetFree(&comp);
@@ -156,7 +155,7 @@ static void testAbstrMap(pddl_trans_systems_t *tss, int ts_id)
             pddl_trans_system_graph_t graph;
             pddlTransSystemGraphInit(&graph, ats);
 
-            bor_iset_t *reach = BOR_CALLOC_ARR(bor_iset_t, graph.num_states);
+            pddl_iset_t *reach = PDDL_CALLOC_ARR(pddl_iset_t, graph.num_states);
             pddlTransSystemGraphFwReachability(&graph, reach, 0);
             fprintf(stdout, "    Reachable:");
             for (int i = 0; i < graph.num_states; ++i){
@@ -166,15 +165,15 @@ static void testAbstrMap(pddl_trans_systems_t *tss, int ts_id)
             }
             fprintf(stdout, "\n");
             for (int i = 0; i < graph.num_states; ++i)
-                borISetFree(reach + i);
-            BOR_FREE(reach);
+                pddlISetFree(reach + i);
+            PDDL_FREE(reach);
             pddlTransSystemGraphFree(&graph);
         }
     }
 
     pddlTransSystemAbstrMapFree(&map);
     pddlTransSystemGraphFree(&graph);
-    BOR_FREE(dist);
+    PDDL_FREE(dist);
 }
 
 static void printTS(const pddl_trans_systems_t *tss,
@@ -187,7 +186,7 @@ static void printTS(const pddl_trans_systems_t *tss,
 
     pddlTransSystemPrintDebug2(tss, tsi, stdout);
 
-    int *dist = BOR_ALLOC_ARR(int, ts->num_states);
+    int *dist = PDDL_ALLOC_ARR(int, ts->num_states);
     pddl_trans_system_graph_t graph;
     pddlTransSystemGraphInit(&graph, ts);
     pddlTransSystemGraphFwDist(&graph, dist);
@@ -207,7 +206,7 @@ static void printTS(const pddl_trans_systems_t *tss,
     pddlTransSystemGraphFwSCC(&graph, &comp);
     fprintf(stdout, "    fw-scc:");
     for (int ci = 0; ci < pddlSetISetSize(&comp); ++ci){
-        const bor_iset_t *c = pddlSetISetGet(&comp, ci);
+        const pddl_iset_t *c = pddlSetISetGet(&comp, ci);
         fprintf(stdout, " [");
         pddlISetPrintCompressed(c, stdout);
         fprintf(stdout, "]");
@@ -219,7 +218,7 @@ static void printTS(const pddl_trans_systems_t *tss,
     pddlTransSystemGraphBwSCC(&graph, &comp);
     fprintf(stdout, "    bw-scc:");
     for (int ci = 0; ci < pddlSetISetSize(&comp); ++ci){
-        const bor_iset_t *c = pddlSetISetGet(&comp, ci);
+        const pddl_iset_t *c = pddlSetISetGet(&comp, ci);
         fprintf(stdout, " [");
         pddlISetPrintCompressed(c, stdout);
         fprintf(stdout, "]");
@@ -228,7 +227,7 @@ static void printTS(const pddl_trans_systems_t *tss,
     pddlSetISetFree(&comp);
 
     pddlTransSystemGraphFree(&graph);
-    BOR_FREE(dist);
+    PDDL_FREE(dist);
 }
 
 TEST(trans_system, mg_strips)
@@ -260,10 +259,10 @@ TEST(trans_system_init, trans_system)
     pddl_lm_cut_t lmc;
     pddlLMCutInitStrips(&lmc, &C.mg_strips.strips, 0, 0);
 
-    bor_rand_t rnd;
-    //borRandInitSeed(&rnd, 123);
-    borRandInit(&rnd);
-    ts_size = BOR_MIN(C.trans_systems.ts_size, 30);
+    pddl_rand_t rnd;
+    //pddlRandInitSeed(&rnd, 123);
+    pddlRandInit(&rnd);
+    ts_size = PDDL_MIN(C.trans_systems.ts_size, 30);
     for (int tsi = 0; tsi < ts_size; ++tsi){
         for (int i = 0; i < 30; ++i)
             testRandomWalk(&rnd, &C.mg_strips.strips, &lmc, &C.trans_systems, tsi, 100);
@@ -275,7 +274,7 @@ TEST(trans_system_init, trans_system)
 TEST(trans_system_merge, trans_system)
 {
     int merge_tsi_first = C.trans_systems.ts_size;
-    int max_ts_size = BOR_MIN(C.trans_systems.ts_size, 3);
+    int max_ts_size = PDDL_MIN(C.trans_systems.ts_size, 3);
     for (int i1 = 0; i1 < max_ts_size; ++i1){
         for (int i2 = i1 + 1; i2 < max_ts_size; ++i2){
             pddlTransSystemsMerge(&C.trans_systems, i1, i2);
@@ -296,9 +295,9 @@ TEST(trans_system_merge, trans_system)
     pddl_lm_cut_t lmc;
     pddlLMCutInitStrips(&lmc, &C.mg_strips.strips, 0, 0);
 
-    bor_rand_t rnd;
-    //borRandInitSeed(&rnd, 123);
-    borRandInit(&rnd);
+    pddl_rand_t rnd;
+    //pddlRandInitSeed(&rnd, 123);
+    pddlRandInit(&rnd);
     for (int tsi = merge_tsi_first; tsi < C.trans_systems.ts_size; ++tsi){
         for (int i = 0; i < 30; ++i)
             testRandomWalk(&rnd, &C.mg_strips.strips, &lmc, &C.trans_systems, tsi, 100);

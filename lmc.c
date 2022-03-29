@@ -24,8 +24,8 @@ TEST(lmc, fdr)
             return;
         }
         assert(c <= cost);
-        if (i < borIArrSize(&plan.op))
-            cost -= C.fdr.op.op[borIArrGet(&plan.op, i)]->cost;
+        if (i < pddlIArrSize(&plan.op))
+            cost -= C.fdr.op.op[pddlIArrGet(&plan.op, i)]->cost;
     }
     pddlLMCutFree(&lmc);
     pddlPlanFileFDRFree(&plan);

@@ -8,7 +8,7 @@ TEST_EXPLICIT(lifted_mgroup_tests)
 
 static int actionHasAddEff(const pddl_action_t *a, int pred)
 {
-    bor_list_t *item;
+    pddl_list_t *item;
     const pddl_cond_t *c;
     const pddl_cond_part_t *and;
     const pddl_cond_atom_t *atom;
@@ -22,8 +22,8 @@ static int actionHasAddEff(const pddl_action_t *a, int pred)
 
     if (a->eff->type == PDDL_COND_AND){
         and = PDDL_COND_CAST(a->eff, part);
-        BOR_LIST_FOR_EACH(&and->part, item){
-            c = BOR_LIST_ENTRY(item, pddl_cond_t, conn);
+        PDDL_LIST_FOR_EACH(&and->part, item){
+            c = PDDL_LIST_ENTRY(item, pddl_cond_t, conn);
             if (c->type != PDDL_COND_ATOM)
                 continue;
             atom = PDDL_COND_CAST(c, atom);
@@ -41,12 +41,12 @@ TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
     const char *problem_fn = "pddl-data/ipc-2014/seq-opt/transport/p01.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
-    bor_err_t err = BOR_ERR_INIT;
+    pddl_err_t err = PDDL_ERR_INIT;
 
     cfg.force_adl = 1;
     if (pddlInit(&pddl, domain_fn, problem_fn, &cfg, &err) != 0){
         printf("Could not parse!\n");
-        borErrPrint(&err, 1, stderr);
+        pddlErrPrint(&err, 1, stderr);
         return;
     }
     pddlNormalize(&pddl);
@@ -166,12 +166,12 @@ TEST(lifted_mgroup_tests_tidybot, lifted_mgroup_tests)
     const char *problem_fn = "pddl-data/ipc-2014/seq-opt/tidybot/p01.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
-    bor_err_t err = BOR_ERR_INIT;
+    pddl_err_t err = PDDL_ERR_INIT;
 
     cfg.force_adl = 1;
     if (pddlInit(&pddl, domain_fn, problem_fn, &cfg, &err) != 0){
         printf("Could not parse!\n");
-        borErrPrint(&err, 1, stderr);
+        pddlErrPrint(&err, 1, stderr);
         return;
     }
     pddlNormalize(&pddl);
@@ -276,13 +276,13 @@ TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
     const char *problem_fn = "pddl-data/ipc-2014/seq-opt/citycar/p2-2-2-2-1.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
-    bor_err_t err = BOR_ERR_INIT;
+    pddl_err_t err = PDDL_ERR_INIT;
     int too_heavy;
 
     cfg.force_adl = 1;
     if (pddlInit(&pddl, domain_fn, problem_fn, &cfg, &err) != 0){
         printf("Could not parse!\n");
-        borErrPrint(&err, 1, stderr);
+        pddlErrPrint(&err, 1, stderr);
         return;
     }
     pddlNormalize(&pddl);
@@ -363,12 +363,12 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
             = "pddl-data/ipc-2018/seq-opt/organic-synthesis/p01.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
-    bor_err_t err = BOR_ERR_INIT;
+    pddl_err_t err = PDDL_ERR_INIT;
 
     cfg.force_adl = 1;
     if (pddlInit(&pddl, domain_fn, problem_fn, &cfg, &err) != 0){
         printf("Could not parse!\n");
-        borErrPrint(&err, 1, stderr);
+        pddlErrPrint(&err, 1, stderr);
         return;
     }
     pddlNormalize(&pddl);
@@ -394,7 +394,7 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
         if (actionHasAddEff(a, pred_bond)){
             ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
             if (strcmp(a->name, "etherformationbysulfonatedisplacement") == 0
-                    || strcmp(a->name, "oxidationofborane") == 0
+                    || strcmp(a->name, "oxidationofpddlane") == 0
                     || strcmp(a->name, "sulfonylationofalcohol") == 0){
                 assert(ret);
             }else{
@@ -418,7 +418,7 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
         if (actionHasAddEff(a, pred_bond)){
             ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
             if (strcmp(a->name, "etherformationbysulfonatedisplacement") == 0
-                    || strcmp(a->name, "oxidationofborane") == 0
+                    || strcmp(a->name, "oxidationofpddlane") == 0
                     || strcmp(a->name, "sulfonylationofalcohol") == 0){
                 assert(ret);
             }else{
@@ -439,7 +439,7 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
         if (actionHasAddEff(a, pred_bond)){
             ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
             if (strcmp(a->name, "etherformationbysulfonatedisplacement") == 0
-                    || strcmp(a->name, "oxidationofborane") == 0
+                    || strcmp(a->name, "oxidationofpddlane") == 0
                     || strcmp(a->name, "sulfonylationofalcohol") == 0){
                 assert(ret);
             }else{
@@ -456,11 +456,11 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
 TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
 {
     pddl_files_t files;
-    bor_err_t err = BOR_ERR_INIT;
+    pddl_err_t err = PDDL_ERR_INIT;
 
     if (pddlFiles1(&files, "pddl-data/ipc-2014/seq-opt/barman/p435.1",
                    &err) != 0){
-        borErrPrint(&err, 1, stderr);
+        pddlErrPrint(&err, 1, stderr);
         return;
     }
 
@@ -469,7 +469,7 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
     cfg.force_adl = 1;
     if (pddlInit(&pddl, files.domain_pddl, files.problem_pddl, &cfg, &err) != 0){
         printf("Could not parse!\n");
-        borErrPrint(&err, 1, stderr);
+        pddlErrPrint(&err, 1, stderr);
         return;
     }
     pddlNormalize(&pddl);
@@ -675,7 +675,7 @@ static void lmgCompileInCheckPruning(const pddl_t *pddl,
                                      int (*ground)(pddl_strips_t *,
                                                    const pddl_t *pddl,
                                                    const pddl_ground_config_t *cfg,
-                                                   bor_err_t *err))
+                                                   pddl_err_t *err))
 {
     pddl_strips_t strips;
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
@@ -720,11 +720,11 @@ TEST_COND(lmg_compile_in, lmg, SQLITE)
 {
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
-    borErrInfoDisablePrintResources(&C.err, 1);
-    borErrInfoEnable(&C.err, stdout);
+    pddlErrInfoDisablePrintResources(&C.err, 1);
+    pddlErrInfoEnable(&C.err, stdout);
     if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &C.err))
         pddlPrintDebug(&pddl, stdout);
-    borErrInfoEnable(&C.err, NULL);
+    pddlErrInfoEnable(&C.err, NULL);
     fflush(stdout);
 
     pddl_strips_t strips_ref;

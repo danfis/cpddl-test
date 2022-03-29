@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <boruvka/rand.h>
 #include "test.h"
 #include "context.h"
 
@@ -41,8 +40,8 @@ TEST(fdr_h2, strips_pruned)
                           var_flag, 0u, &C.err);
     C.fdr_set = 1;
 
-    BOR_ISET(unreach_op);
-    BOR_ISET(unreach_fact);
+    PDDL_ISET(unreach_op);
+    PDDL_ISET(unreach_fact);
     assert(C.mutex_set);
     pddl_mg_strips_t mg_strips;
     pddlMGStripsInitFDR(&mg_strips, &C.fdr);
@@ -53,7 +52,7 @@ TEST(fdr_h2, strips_pruned)
     pddlMGStripsFree(&mg_strips);
 
     pddlFDRReduce(&C.fdr, NULL, &unreach_fact, &unreach_op);
-    if (borISetSize(&unreach_fact) > 0){
+    if (pddlISetSize(&unreach_fact) > 0){
         pddl_mg_strips_t mg_strips;
         pddlMGStripsInitFDR(&mg_strips, &C.fdr);
         pddlMutexPairsFree(&C.mutex);
@@ -63,8 +62,8 @@ TEST(fdr_h2, strips_pruned)
         pddlMGStripsFree(&mg_strips);
     }
 
-    borISetFree(&unreach_fact);
-    borISetFree(&unreach_op);
+    pddlISetFree(&unreach_fact);
+    pddlISetFree(&unreach_op);
 }
 
 
@@ -73,19 +72,19 @@ static void findOps(const pddl_fdr_app_op_t *app_op,
                     const int *state,
                     int depth)
 {
-    BOR_ISET(app);
+    PDDL_ISET(app);
     int ret = pddlFDRAppOpFind(app_op, state, &app);
-    assert(ret == borISetSize(&app));
+    assert(ret == pddlISetSize(&app));
 
     /*
     printf("Init: %d:", ret);
     int op_id;
-    BOR_ISET_FOR_EACH(&app, op_id)
+    PDDL_ISET_FOR_EACH(&app, op_id)
         printf(" %d", op_id);
     printf("\n");
     */
 
-    BOR_ISET(app2);
+    PDDL_ISET(app2);
     for (int op_id = 0; op_id < ops->op_size; ++op_id){
         const pddl_fdr_op_t *op = ops->op[op_id];
         int applicable = 1;
@@ -98,15 +97,15 @@ static void findOps(const pddl_fdr_app_op_t *app_op,
         }
 
         if (applicable)
-            borISetAdd(&app2, op_id);
+            pddlISetAdd(&app2, op_id);
     }
 
-    assert(borISetEq(&app, &app2));
+    assert(pddlISetEq(&app, &app2));
 
     if (depth > 0){
-        int *next_state = BOR_ALLOC_ARR(int, app_op->var_size);
+        int *next_state = PDDL_ALLOC_ARR(int, app_op->var_size);
         int op_id;
-        BOR_ISET_FOR_EACH(&app, op_id){
+        PDDL_ISET_FOR_EACH(&app, op_id){
             memcpy(next_state, state, sizeof(int) * app_op->var_size);
 
             const pddl_fdr_op_t *op = ops->op[op_id];
@@ -114,11 +113,11 @@ static void findOps(const pddl_fdr_app_op_t *app_op,
                 next_state[op->eff.fact[fi].var] = op->eff.fact[fi].val;
             findOps(app_op, ops, next_state, depth - 1);
         }
-        BOR_FREE(next_state);
+        PDDL_FREE(next_state);
     }
 
-    borISetFree(&app2);
-    borISetFree(&app);
+    pddlISetFree(&app2);
+    pddlISetFree(&app);
 }
 
 static void findOpsRand(const pddl_fdr_app_op_t *app_op,
@@ -126,19 +125,19 @@ static void findOpsRand(const pddl_fdr_app_op_t *app_op,
                         const pddl_fdr_ops_t *ops,
                         int num_samples)
 {
-    bor_rand_t rnd;
-    borRandInit(&rnd);
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd);
 
-    int *state = BOR_ALLOC_ARR(int, vars->var_size);
+    int *state = PDDL_ALLOC_ARR(int, vars->var_size);
     for (int sample = 0; sample < num_samples; ++sample){
         for (int var = 0; var < vars->var_size; ++var){
-            int val = borRand(&rnd, 0, vars->var[var].val_size);
-            val = BOR_MIN(val, vars->var[var].val_size - 1);
+            int val = pddlRand(&rnd, 0, vars->var[var].val_size);
+            val = PDDL_MIN(val, vars->var[var].val_size - 1);
             state[var] = val;
         }
         findOps(app_op, ops, state, 0);
     }
-    BOR_FREE(state);
+    PDDL_FREE(state);
 }
 
 TEST(fdr_app_op, fdr_largest)
