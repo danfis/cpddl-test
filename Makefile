@@ -64,11 +64,9 @@ test.tasks.base.in.c: tasks-base.txt gen-tasks.py
 test.tasks.all.in.c: tasks-base.txt tasks-noce.txt gen-tasks.py
 	cat tasks-base.txt tasks-noce.txt | python3 gen-tasks.py all >$@
 
-.objs/%.o: %.c %.h %_prob.h
+.objs/%.o: %.c %.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
-.objs/%.o: %.c %.h
-	$(CC) $(CFLAGS) -c -o $@ $<
-.objs/%.o: %.c
+.objs/%.o: %.c ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 check: all submodule

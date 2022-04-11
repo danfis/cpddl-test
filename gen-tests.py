@@ -57,7 +57,7 @@ def parseFile(filename):
             match = pat_test_tear_down.match(line)
             if match is not None:
                 name = match.group(1)
-                if addTest(name, []):
+                if name in Test:
                     Test[name]['tear-down'] = True
 
             match = pat_test_explicit.match(line)
