@@ -40,6 +40,7 @@ TESTS += clique
 TESTS += symbolic
 TESTS += datalog
 TESTS += homomorphism
+TESTS += lifted_heur
 
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
