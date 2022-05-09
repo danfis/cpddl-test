@@ -31,8 +31,10 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     pddlISetUnion(&state, &strips.init);
     pddl_cost_t lc = pddlLiftedHAdd(&h, &state, &gatoms);
     int c = pddlHAddStrips(&hadd, &state);
+    //fprintf(stderr, "lc: %d:%d , c: %d\n", lc.cost, lc.zero_cost, c);
     assert(lc.cost == c);
-    for (int i = 0; i < 10; ++i){
+    int num_tested_states = 0;
+    for (int i = 0; i < 10 && num_tested_states < 200; ++i){
 
         PDDL_ISET(app_ops);
         pddlStripsApplicableOps(&strips, &state, &app_ops);
@@ -46,6 +48,9 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
             pddl_cost_t lc = pddlLiftedHAdd(&h, &next_state, &gatoms);
             int c = pddlHAddStrips(&hadd, &next_state);
             assert(lc.cost == c);
+            num_tested_states++;
+            if (num_tested_states >= 200)
+                break;
         }
         pddlISetEmpty(&state);
         pddlISetUnion(&state, &next_state);
@@ -90,7 +95,8 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddl_cost_t lc = pddlLiftedHMax(&h, &state, &gatoms);
     int c = pddlHMaxStrips(&hmax, &state);
     assert(lc.cost == c);
-    for (int i = 0; i < 10; ++i){
+    int num_tested_states = 0;
+    for (int i = 0; i < 10 && num_tested_states < 200; ++i){
 
         PDDL_ISET(app_ops);
         pddlStripsApplicableOps(&strips, &state, &app_ops);
@@ -104,6 +110,9 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
             pddl_cost_t lc = pddlLiftedHMax(&h, &next_state, &gatoms);
             int c = pddlHMaxStrips(&hmax, &next_state);
             assert(lc.cost == c);
+            num_tested_states++;
+            if (num_tested_states >= 200)
+                break;
         }
         pddlISetEmpty(&state);
         pddlISetUnion(&state, &next_state);
