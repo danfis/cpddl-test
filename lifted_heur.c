@@ -9,15 +9,12 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     pddl_strips_t strips;
     int ret = pddlStripsGroundDatalog(&strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
-    if (strips.has_cond_eff){
-        pddlStripsFree(&strips);
-        return;
-    }
 
     pddl_ground_atoms_t gatoms;
     pddlGroundAtomsInit(&gatoms);
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
+        assert(ga != NULL);
         pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
     }
 
@@ -47,6 +44,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
             pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);
             pddl_cost_t lc = pddlLiftedHAdd(&h, &next_state, &gatoms);
             int c = pddlHAddStrips(&hadd, &next_state);
+            //fprintf(stderr, "lc: %d:%d , c: %d\n", lc.cost, lc.zero_cost, c);
             assert(lc.cost == c);
             num_tested_states++;
             if (num_tested_states >= 200)
@@ -72,10 +70,6 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddl_strips_t strips;
     int ret = pddlStripsGroundDatalog(&strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
-    if (strips.has_cond_eff){
-        pddlStripsFree(&strips);
-        return;
-    }
 
     pddl_ground_atoms_t gatoms;
     pddlGroundAtomsInit(&gatoms);
