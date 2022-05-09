@@ -50,6 +50,7 @@ TEST(strips, lmg)
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
+
 TEST(strips_ground_unit_cost, pddl_unit_cost)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
@@ -60,6 +61,29 @@ TEST(strips_ground_unit_cost, pddl_unit_cost)
     if (C.strips.has_cond_eff)
         pddlStripsCompileAwayCondEff(&C.strips);
     assert(!C.strips.has_cond_eff);
+    pddlStripsPrintDebug(&C.strips, stdout);
+}
+
+TEST(strips_ce, lmg)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    C.strips_set = 1;
+
+    pddlMGroupsGround(&C.mg, &C.pddl, &C.lmg, &C.strips);
+    C.mg_set = 1;
+    pddlMGroupsSetExactlyOne(&C.mg, &C.strips);
+    pddlMGroupsSetGoal(&C.mg, &C.strips);
+    //pddlMGroupsPrint(&C.pddl, &C.strips, &C.mg, stdout);
+
+    if (C.strips.op.op_size == 0){
+        pddlStripsMakeUnsolvable(&C.strips);
+        pddlMutexPairsFree(&C.mutex);
+        pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+        pddlMGroupsFree(&C.mg);
+        pddlMGroupsInitEmpty(&C.mg);
+    }
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
