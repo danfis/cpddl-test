@@ -22,7 +22,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     pddlHAddInitStrips(&hadd, &strips);
 
     pddl_lifted_hadd_t h;
-    pddlLiftedHAddInit(&h, &C.pddl, &C.err);
+    pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
@@ -82,7 +82,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddlHMaxInitStrips(&hmax, &strips);
 
     pddl_lifted_hmax_t h;
-    pddlLiftedHMaxInit(&h, &C.pddl, &C.err);
+    pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);

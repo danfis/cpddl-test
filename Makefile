@@ -8,7 +8,7 @@ TOPDIR ?= ..
 -include $(TOPDIR)/Makefile.local
 include $(TOPDIR)/Makefile.include
 
-CFLAGS += -I./ -I$(TOPDIR)
+CFLAGS += -I./ -I$(TOPDIR) -Werror
 LDFLAGS += -lrt -lm -L$(TOPDIR) -lpddl -pthread
 LDFLAGS += $(CPOPTIMIZER_LDFLAGS)
 LDFLAGS += $(LP_LDFLAGS)
