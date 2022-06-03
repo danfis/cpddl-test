@@ -29,7 +29,7 @@ static void addClique(const pddl_iset_t *clique, void *ud)
 TEST_EXPLICIT(clique_rand)
 {
     pddl_rand_t rnd;
-    pddlRandInit(&rnd);
+    pddlRandInitAuto(&rnd);
 
     for (int _i = 0; _i < 100; ++_i){
         pddl_graph_simple_t g;
@@ -112,7 +112,7 @@ static void addBiclique(const pddl_iset_t *left,
 TEST_EXPLICIT(clique_biclique_rand)
 {
     pddl_rand_t rnd;
-    pddlRandInit(&rnd);
+    pddlRandInitAuto(&rnd);
     //pddlRandInitSeed(&rnd, 0);
 
     for (int _i = 0; _i < 100; ++_i){

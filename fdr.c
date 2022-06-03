@@ -126,7 +126,7 @@ static void findOpsRand(const pddl_fdr_app_op_t *app_op,
                         int num_samples)
 {
     pddl_rand_t rnd;
-    pddlRandInit(&rnd);
+    pddlRandInitAuto(&rnd);
 
     int *state = PDDL_ALLOC_ARR(int, vars->var_size);
     for (int sample = 0; sample < num_samples; ++sample){
