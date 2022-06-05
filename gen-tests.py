@@ -71,6 +71,17 @@ def parseFile(filename):
                 global GlobalTearDown
                 GlobalTearDown = True
 
+def removeUnreachable():
+    change = True
+    while change:
+        change = False
+        for k in Test.keys():
+            dep = Test[k]['dep']
+            if dep is not None and dep != '_' and dep not in Test:
+                change = True
+                del Test[k]
+                break
+
 
 
 def genDeclarations():
@@ -112,6 +123,7 @@ def main():
     parseConfig('../pddl/config.h')
     for filename in sys.argv[1:]:
         parseFile(filename)
+    removeUnreachable()
     #pprint(Test)
     genDeclarations()
     genDefs()
