@@ -40,6 +40,7 @@ TESTS += clique
 TESTS += symbolic
 TESTS += datalog
 TESTS += homomorphism
+TESTS += endomorphism
 TESTS += lifted_heur
 
 
