@@ -42,6 +42,7 @@ TESTS += datalog
 TESTS += homomorphism
 TESTS += endomorphism
 TESTS += lifted_heur
+TESTS += subprocess
 
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
