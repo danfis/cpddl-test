@@ -11,7 +11,7 @@ TEST_COND(endomorphism_lifted, lmg, CPOPTIMIZER)
     pddl_obj_id_t *map = PDDL_CALLOC_ARR(pddl_obj_id_t, C.pddl.obj.obj_size);
     int ret = pddlEndomorphismLifted(&C.pddl, &C.lmg, &cfg,
                                      &redundant, map, &C.err);
-    assert(ret == 0);
+    //assert(ret == 0);
     if (pddlISetSize(&redundant) == 0){
         for (int i = 0; i < C.pddl.obj.obj_size; ++i)
             assert(map[i] == i);
@@ -55,8 +55,15 @@ TEST_COND(endomorphism_lifted, lmg, CPOPTIMIZER)
     PDDL_FREE(map);
 }
 
+TEST_COND(endomorphism_lifted_minizinc, lmg, MINIZINC)
+{
+    pddlCPSetDefaultSolver(PDDL_CP_SOLVER_MINIZINC);
+    test_endomorphism_lifted();
+}
+
 TEST_COND(endomorphism_relaxed_lifted, lmg, CPOPTIMIZER)
 {
+    //pddlErrInfoEnable(&C.err, stderr);
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
 
     PDDL_ISET(redundant);
@@ -105,4 +112,10 @@ TEST_COND(endomorphism_relaxed_lifted, lmg, CPOPTIMIZER)
 
     pddlISetFree(&redundant);
     PDDL_FREE(map);
+}
+
+TEST_COND(endomorphism_relaxed_lifted_minizinc, lmg, MINIZINC)
+{
+    pddlCPSetDefaultSolver(PDDL_CP_SOLVER_MINIZINC);
+    test_endomorphism_relaxed_lifted();
 }
