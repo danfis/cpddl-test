@@ -127,12 +127,14 @@ TEST_COND(endomorphism_fdr, fdr, CPOPTIMIZER)
     pddlErrInfoEnable(&C.err, stderr);
     pddlISetInit(&redundant);
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
-
-    int ret = pddlEndomorphismFDRRedundantOps(&C.fdr, &cfg, &redundant, &C.err);
-    assert(ret >= 0);
-    if (pddlISetSize(&redundant) > 0 && ret == 0){
-        printf("num redundant objects: %d\n", pddlISetSize(&redundant));
+    cfg.run_in_subprocess = 1;
+    pddl_endomorphism_sol_t sol;
+    int ret = pddlEndomorphismFDR(&C.fdr, &cfg, &sol, &C.err);
+    assert(ret == 0);
+    if (pddlISetSize(&sol.redundant_ops) > 0 && sol.is_optimal){
+        printf("num redundant objects: %d\n", pddlISetSize(&sol.redundant_ops));
     }
+    pddlEndomorphismSolFree(&sol);
 }
 
 TEST_TEAR_DOWN(endomorphism_fdr)
