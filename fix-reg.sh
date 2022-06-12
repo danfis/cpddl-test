@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for tmp in $(find reg/ -name tmp.*.out -size +0); do
+for tmp in $(find reg/ -name 'tmp.*.out' -size +0); do
     f=reg/${tmp##reg/tmp.}
     if [ ! -f $f ]; then
         echo Copy: $tmp $f
