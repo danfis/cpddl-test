@@ -5,12 +5,14 @@ import re
 from pprint import pprint
 
 LARGE_TESTS = ['h3', 'h3mgroup', 'symbolic',
-               'endomorphism_tss', 'endomorphism_tss_minizinc']
+               'endomorphism_tss', 'endomorphism_tss_minizinc',
+               'endomorphism_tss_nocost']
 VERY_LARGE_TESTS = LARGE_TESTS \
     + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential',
        'homomorphism_reduce', 'homomorphism_endomorph',
        'homomorphism_endomorph_nocost',
        'endomorphism_fdr', 'endomorphism_fdr_minizinc',
+       'endomorphism_fdr_nocost'
       ]
 Task = {}
 
