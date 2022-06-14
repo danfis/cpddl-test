@@ -82,6 +82,11 @@ TEST_COND(endomorphism_lifted_minizinc, lmg, MINIZINC)
     tEndomorphismLifted(0, 0);
 }
 
+TEST_COND(endomorphism_lifted_nocost, lmg, CPOPTIMIZER)
+{
+    tEndomorphismLifted(0, 1);
+}
+
 TEST_COND(endomorphism_relaxed_lifted, lmg, CPOPTIMIZER)
 {
     tEndomorphismLifted(1, 0);
@@ -91,6 +96,11 @@ TEST_COND(endomorphism_relaxed_lifted_minizinc, lmg, MINIZINC)
 {
     pddlCPSetDefaultSolver(PDDL_CP_SOLVER_MINIZINC);
     tEndomorphismLifted(1, 0);
+}
+
+TEST_COND(endomorphism_relaxed_lifted_nocost, lmg, CPOPTIMIZER)
+{
+    tEndomorphismLifted(1, 1);
 }
 
 static pddl_iset_t redundant;
