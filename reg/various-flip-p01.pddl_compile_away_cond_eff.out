@@ -22,54 +22,54 @@ Predicate[3]:
     NOT-white: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 1
 Function[0]:
 Action[16]:
-    flip_column: ?c:2
-        pre: (and (RW:NOT-white r3 ?c) (RW:white r2 ?c) (RW:white r1 ?c))
-        eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
-    flip_row: ?r:1
-        pre: (and (RW:NOT-white ?r c3) (RW:white ?r c2) (RW:white ?r c1))
-        eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
-    flip_row: ?r:1
-        pre: (and (RW:NOT-white ?r c3) (RW:white ?r c2) (RW:NOT-white ?r c1))
-        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
-    flip_column: ?c:2
-        pre: (and (RW:NOT-white r3 ?c) (RW:white r2 ?c) (RW:NOT-white r1 ?c))
-        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
-    flip_column: ?c:2
-        pre: (and (RW:NOT-white r3 ?c) (RW:NOT-white r2 ?c) (RW:NOT-white r1 ?c))
-        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
-    flip_row: ?r:1
-        pre: (and (RW:NOT-white ?r c3) (RW:NOT-white ?r c2) (RW:NOT-white ?r c1))
-        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
-    flip_row: ?r:1
-        pre: (and (RW:NOT-white ?r c3) (RW:NOT-white ?r c2) (RW:white ?r c1))
-        eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
-    flip_column: ?c:2
-        pre: (and (RW:NOT-white r3 ?c) (RW:NOT-white r2 ?c) (RW:white r1 ?c))
-        eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
-    flip_column: ?c:2
-        pre: (and (RW:white r3 ?c) (RW:NOT-white r2 ?c) (RW:white r1 ?c))
-        eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
-    flip_row: ?r:1
-        pre: (and (RW:white ?r c3) (RW:NOT-white ?r c2) (RW:white ?r c1))
-        eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
-    flip_row: ?r:1
-        pre: (and (RW:white ?r c3) (RW:NOT-white ?r c2) (RW:NOT-white ?r c1))
-        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
-    flip_column: ?c:2
-        pre: (and (RW:white r3 ?c) (RW:NOT-white r2 ?c) (RW:NOT-white r1 ?c))
-        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
-    flip_column: ?c:2
-        pre: (and (RW:white r3 ?c) (RW:white r2 ?c) (RW:NOT-white r1 ?c))
-        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
-    flip_row: ?r:1
-        pre: (and (RW:white ?r c3) (RW:white ?r c2) (RW:NOT-white ?r c1))
-        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
     flip_row: ?r:1
         pre: (and (RW:white ?r c3) (RW:white ?r c2) (RW:white ?r c1))
         eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
     flip_column: ?c:2
         pre: (and (RW:white r3 ?c) (RW:white r2 ?c) (RW:white r1 ?c))
         eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:white ?r c3) (RW:white ?r c2) (RW:NOT-white ?r c1))
+        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:white r3 ?c) (RW:white r2 ?c) (RW:NOT-white r1 ?c))
+        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:white ?r c3) (RW:NOT-white ?r c2) (RW:white ?r c1))
+        eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:white r3 ?c) (RW:NOT-white r2 ?c) (RW:white r1 ?c))
+        eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:white ?r c3) (RW:NOT-white ?r c2) (RW:NOT-white ?r c1))
+        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (N:RW:white ?r c3) (RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:white r3 ?c) (RW:NOT-white r2 ?c) (RW:NOT-white r1 ?c))
+        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (N:RW:white r3 ?c) (RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:NOT-white ?r c3) (RW:white ?r c2) (RW:white ?r c1))
+        eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:NOT-white r3 ?c) (RW:white r2 ?c) (RW:white r1 ?c))
+        eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:NOT-white ?r c3) (RW:white ?r c2) (RW:NOT-white ?r c1))
+        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (N:RW:white ?r c2) (RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:NOT-white r3 ?c) (RW:white r2 ?c) (RW:NOT-white r1 ?c))
+        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (N:RW:white r2 ?c) (RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:NOT-white ?r c3) (RW:NOT-white ?r c2) (RW:white ?r c1))
+        eff: (and (N:RW:white ?r c1) (RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:NOT-white r3 ?c) (RW:NOT-white r2 ?c) (RW:white r1 ?c))
+        eff: (and (N:RW:white r1 ?c) (RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
+    flip_row: ?r:1
+        pre: (and (RW:NOT-white ?r c3) (RW:NOT-white ?r c2) (RW:NOT-white ?r c1))
+        eff: (and (RW:white ?r c1) (N:RW:NOT-white ?r c1) (RW:white ?r c2) (N:RW:NOT-white ?r c2) (RW:white ?r c3) (N:RW:NOT-white ?r c3))
+    flip_column: ?c:2
+        pre: (and (RW:NOT-white r3 ?c) (RW:NOT-white r2 ?c) (RW:NOT-white r1 ?c))
+        eff: (and (RW:white r1 ?c) (N:RW:NOT-white r1 ?c) (RW:white r2 ?c) (N:RW:NOT-white r2 ?c) (RW:white r3 ?c) (N:RW:NOT-white r3 ?c))
 Init[9]:
   (white r2 c1)
   (NOT-white r1 c1)

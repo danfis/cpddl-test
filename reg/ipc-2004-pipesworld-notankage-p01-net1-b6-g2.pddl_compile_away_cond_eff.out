@@ -46,12 +46,12 @@ Predicate[13]:
     pop-updating: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
 Function[0]:
 Action[2]:
-    pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?last-batch-atom:4 ?product-batch-atom-in:3 ?product-last-batch:3
-        pre: (and (RW:last ?last-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?to-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?last-batch-atom ?product-last-batch) (R:may-interface ?product-batch-atom-in ?product-last-batch))
-        eff: (and (RW:last ?batch-atom-in ?pipe) (N:RW:last ?last-batch-atom ?pipe) (RW:first ?batch-atom-in ?pipe) (N:RW:first ?last-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?to-area) (RW:on ?last-batch-atom ?from-area))
     push-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3
         pre: (and (RW:first ?first-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?from-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch))
         eff: (and (RW:first ?batch-atom-in ?pipe) (N:RW:first ?first-batch-atom ?pipe) (RW:last ?batch-atom-in ?pipe) (N:RW:last ?first-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?from-area) (RW:on ?first-batch-atom ?to-area))
+    pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?last-batch-atom:4 ?product-batch-atom-in:3 ?product-last-batch:3
+        pre: (and (RW:last ?last-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?to-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?last-batch-atom ?product-last-batch) (R:may-interface ?product-batch-atom-in ?product-last-batch))
+        eff: (and (RW:last ?batch-atom-in ?pipe) (N:RW:last ?last-batch-atom ?pipe) (RW:first ?batch-atom-in ?pipe) (N:RW:first ?last-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?to-area) (RW:on ?last-batch-atom ?from-area))
 Init[41]:
   S:(normal s12)
   S:(normal s13)

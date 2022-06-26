@@ -44,9 +44,6 @@ Action[10]:
     digest: ?x:0
         pre: (and (RW:hair-pin ?x))
         eff: (and (N:RW:hair-pin ?x) (RW:double-strand ?x) (N:RW:NOT-double-strand ?x))
-    ligate: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (N:R:= ?x linker) (RW:cleaved ?x) (RW:cleaved ?y))
-        eff: (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (N:RW:cleaved ?y))
     cleave: ?x:0
         pre: (and (RW:cleavable ?x))
         eff: (and (RW:cleaved ?x) (N:RW:cleavable ?x))
@@ -61,6 +58,9 @@ Action[10]:
         eff: (and (RW:cleavable ?y))
     ligate: ?x:0 ?y:0
         pre: (and (N:R:= ?x ?y) (RW:NOT-double-strand ?y) (RW:cleaved ?x) (RW:cleaved ?y) (N:R:= ?x linker))
+        eff: (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (N:RW:cleaved ?y))
+    ligate: ?x:0 ?y:0
+        pre: (and (N:R:= ?x ?y) (N:R:= ?x linker) (RW:cleaved ?x) (RW:cleaved ?y))
         eff: (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (N:RW:cleaved ?y))
 Init[20]:
   S:(molecule insulin-gene)
