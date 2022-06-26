@@ -49,9 +49,6 @@ Predicate[15]:
     crackers: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[0]:
 Action[7]:
-    get-crackers: ?x:0
-        pre: (and (R:crackers ?x))
-        eff: (and (W:have-crackers))
     rewind-movie: 
         pre: (and)
         eff: (and (W:movie-rewound) (N:W:counter-at-zero))
@@ -70,6 +67,9 @@ Action[7]:
     get-cheese: ?x:0
         pre: (and (R:cheese ?x))
         eff: (and (W:have-cheese))
+    get-crackers: ?x:0
+        pre: (and (R:crackers ?x))
+        eff: (and (W:have-crackers))
 Init[26]:
   S:(chips c5)
   S:(chips c4)
