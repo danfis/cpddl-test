@@ -18,7 +18,7 @@ TEST(lmc, fdr)
     pddlLMCutInit(&lmc, &C.fdr, 0, 0);
     int cost = plan.cost;
     for (int i = 0; i < plan.state_size; ++i){
-        int c = pddlLMCut(&lmc, plan.state[i], NULL, NULL);
+        int c = pddlLMCut(&lmc, plan.state[i], &C.fdr.var, NULL, NULL);
         if (c > cost){
             fprintf(stderr, "!!!ERR %d\n", i);
             return;
