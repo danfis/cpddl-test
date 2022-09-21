@@ -12,7 +12,9 @@ VERY_LARGE_TESTS = LARGE_TESTS \
        'homomorphism_reduce', 'homomorphism_endomorph',
        'homomorphism_endomorph_nocost',
        'endomorphism_fdr', 'endomorphism_fdr_minizinc',
-       'endomorphism_fdr_nocost'
+       'endomorphism_fdr_nocost',
+       'hpot_op_pot',
+       'hpot_ensemble_mutex1', 'hpot_ensemble_mutex_rand',
       ]
 Task = {}
 

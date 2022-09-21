@@ -156,3 +156,258 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddlMutexPairsFree(&mutex);
     pddlMGStripsFree(&mg_strips);
 }
+
+static void _test_hpot(int op_pot)
+{
+    pddlErrInfoEnable(&C.err, stderr);
+    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
+    cfg.disambiguation = 1;
+    cfg.weak_disambiguation = 0;
+    cfg.op_pot = op_pot;
+
+    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
+    cfg_init.fdr_state = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_init);
+
+    pddl_hpot_config_opt_all_syntactic_states_t cfg_all
+            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_all);
+
+    pddl_hpot_config_opt_all_syntactic_states_t cfg_all_cinit
+            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
+    cfg_all_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_all_cinit);
+
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex1
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex1.mutex_size = 1;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_mutex1);
+
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex1_cinit
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex1_cinit.mutex_size = 1;
+    cfg_mutex1_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_mutex1_cinit);
+
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex2
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex2.mutex_size = 2;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_mutex2);
+
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex2_cinit
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex2_cinit.mutex_size = 2;
+    cfg_mutex2_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_mutex2_cinit);
+
+    pddl_hpot_config_opt_sampled_states_t cfg_sstates
+            = PDDL_HPOT_CONFIG_OPT_SAMPLED_STATES_INIT;
+    cfg_sstates.num_samples = 1000;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_sstates);
+
+    pddl_hpot_config_opt_sampled_states_t cfg_sstates_cinit
+            = PDDL_HPOT_CONFIG_OPT_SAMPLED_STATES_INIT;
+    cfg_sstates_cinit.num_samples = 1000;
+    cfg_sstates_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_sstates_cinit);
+
+    int ret = pddlHPot(&sols, task, &cfg, &C.err);
+    if (ret < 0){
+        fprintf(stdout, "ret: %d\n", ret);
+        pddlPotSolutionsFree(&sols);
+        pddlTaskDel(task);
+        return;
+    }
+    assert(ret == 0);
+    assert(sols.sol_size == 9);
+
+    const pddl_pot_solution_t *sol = sols.sol + 0;
+    fprintf(stdout, "init objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 1;
+    fprintf(stdout, "all objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 2;
+    fprintf(stdout, "all+cinit objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 3;
+    fprintf(stdout, "mutex=1 objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 4;
+    fprintf(stdout, "mutex=1+cinit objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 5;
+    fprintf(stdout, "mutex=2 objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 6;
+    fprintf(stdout, "mutex=2+cinit objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 7;
+    fprintf(stdout, "samples=1000 objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+    sol = sols.sol + 8;
+    fprintf(stdout, "samples=1000+cinit objval: %.0f\n", round(sol->objval));
+    if (op_pot)
+        assert(sol->op_pot_size > 0);
+
+    pddlPotSolutionsFree(&sols);
+    pddlTaskDel(task);
+}
+
+TEST(hpot, fdr)
+{
+    _test_hpot(0);
+}
+
+TEST(hpot_op_pot, hpot)
+{
+    _test_hpot(1);
+}
+
+TEST(hpot_ensemble_sampled_states, hpot)
+{
+    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
+    cfg.disambiguation = 1;
+    cfg.weak_disambiguation = 0;
+
+    pddl_hpot_config_opt_ensemble_sampled_states_t cfg_opt
+            = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_SAMPLED_STATES_INIT;
+    cfg_opt.num_samples = 10;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_opt);
+
+    int ret = pddlHPot(&sols, task, &cfg, &C.err);
+    if (ret < 0){
+        fprintf(stdout, "ret: %d\n", ret);
+        pddlPotSolutionsFree(&sols);
+        pddlTaskDel(task);
+        return;
+    }
+    assert(ret == 0);
+
+    for (int i = 0; i < sols.sol_size; ++i){
+        const pddl_pot_solution_t *sol = sols.sol + i;
+        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+    }
+
+    pddlPotSolutionsFree(&sols);
+    pddlTaskDel(task);
+}
+
+TEST(hpot_ensemble_diversification, hpot)
+{
+    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
+    cfg.disambiguation = 1;
+    cfg.weak_disambiguation = 0;
+
+    pddl_hpot_config_opt_ensemble_diversification_t cfg_opt
+            = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_DIVERSIFICATION_INIT;
+    cfg_opt.num_samples = 10;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_opt);
+
+    int ret = pddlHPot(&sols, task, &cfg, &C.err);
+    if (ret < 0){
+        fprintf(stdout, "ret: %d\n", ret);
+        pddlPotSolutionsFree(&sols);
+        pddlTaskDel(task);
+        return;
+    }
+    assert(ret == 0);
+
+    for (int i = 0; i < sols.sol_size; ++i){
+        const pddl_pot_solution_t *sol = sols.sol + i;
+        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+    }
+
+    pddlPotSolutionsFree(&sols);
+    pddlTaskDel(task);
+}
+
+TEST(hpot_ensemble_mutex_rand, hpot)
+{
+    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
+    cfg.disambiguation = 1;
+    cfg.weak_disambiguation = 0;
+
+    pddl_hpot_config_opt_ensemble_all_states_mutex_t cfg_opt
+            = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_ALL_STATES_MUTEX_INIT;
+    cfg_opt.cond_size = 1;
+    cfg_opt.mutex_size = 1;
+    cfg_opt.num_rand_samples = 10;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_opt);
+
+    int ret = pddlHPot(&sols, task, &cfg, &C.err);
+    if (ret < 0){
+        fprintf(stdout, "ret: %d\n", ret);
+        pddlPotSolutionsFree(&sols);
+        pddlTaskDel(task);
+        return;
+    }
+    assert(ret == 0);
+
+    for (int i = 0; i < sols.sol_size; ++i){
+        const pddl_pot_solution_t *sol = sols.sol + i;
+        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+    }
+
+    pddlPotSolutionsFree(&sols);
+    pddlTaskDel(task);
+}
+
+TEST(hpot_ensemble_mutex1, hpot)
+{
+    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
+    cfg.disambiguation = 1;
+    cfg.weak_disambiguation = 0;
+
+    pddl_hpot_config_opt_ensemble_all_states_mutex_t cfg_opt
+            = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_ALL_STATES_MUTEX_INIT;
+    cfg_opt.cond_size = 1;
+    cfg_opt.mutex_size = 1;
+    cfg_opt.num_rand_samples = 0;
+    PDDL_HPOT_CONFIG_ADD(&cfg, &cfg_opt);
+
+    int ret = pddlHPot(&sols, task, &cfg, &C.err);
+    if (ret < 0){
+        fprintf(stdout, "ret: %d\n", ret);
+        pddlPotSolutionsFree(&sols);
+        pddlTaskDel(task);
+        return;
+    }
+    assert(ret == 0);
+
+    for (int i = 0; i < sols.sol_size; ++i){
+        const pddl_pot_solution_t *sol = sols.sol + i;
+        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+    }
+
+    pddlPotSolutionsFree(&sols);
+    pddlTaskDel(task);
+}
