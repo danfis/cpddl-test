@@ -39,8 +39,18 @@ def addTest(name, tags):
 
 def parseFile(filename):
     global Test
+    disabled = False
     with open(filename, 'r') as fin:
         for line in fin:
+            if disabled and line.startswith('#endif'):
+                disabled = False
+                continue
+            if disabled:
+                continue
+            if line.startswith('#if 0'):
+                disabled = True
+                continue
+
             match = pat_test.match(line)
             if match is not None:
                 name = match.group(1)

@@ -71,6 +71,8 @@ static int num_tasks_succeeded = 0;
 static int num_tasks_failed = 0;
 static struct timespec g_time_start, g_time_end;
 
+static int verbose = 0;
+
 static void freeTasks(void);
 static void freeTestTree(void);
 
@@ -236,10 +238,12 @@ static void runTestTree(test_test_t *root,
 
         if (root->test_fn != NULL){
 
-            fprintf(stdout, "%s ", TEST_TASK);
-            printNameTree(root);
-            fprintf(stdout, " ...\n");
-            fflush(stdout);
+            if (verbose){
+                fprintf(stdout, "%s ", TEST_TASK);
+                printNameTree(root);
+                fprintf(stdout, " ...\n");
+                fflush(stdout);
+            }
 
             char stdout_fn[256];
             fmtOutputFilename(TEST_TASK, root->name, "out", stdout_fn);
@@ -278,13 +282,15 @@ static void runTestTree(test_test_t *root,
             clearerr(stderr);
 
             clock_gettime(CLOCK_MONOTONIC, &time_end);
-            fprintf(stdout, "%s ", TEST_TASK);
-            printNameTree(root);
             float elapsed = timeDiffSeconds(&time_start, &time_end);
             tests_time_sum[root->id] += elapsed;
-            fprintf(stdout, " DONE [%.2fs / %.2fs]\n",
-                    elapsed, tests_time_sum[root->id]);
-            fflush(stdout);
+            if (verbose){
+                fprintf(stdout, "%s ", TEST_TASK);
+                printNameTree(root);
+                fprintf(stdout, " DONE [%.2fs / %.2fs]\n",
+                        elapsed, tests_time_sum[root->id]);
+                fflush(stdout);
+            }
         }
 
         for (int i = 0; i < root->child_size; ++i){
@@ -300,11 +306,13 @@ static void runTestTree(test_test_t *root,
             global_tear_down();
 
         clock_gettime(CLOCK_MONOTONIC, &time_end);
-        fprintf(stdout, "%s ", TEST_TASK);
-        printNameTree(root);
-        fprintf(stdout, " TearDown [%.2fs]\n",
-                timeDiffSeconds(&time_start, &time_end));
-        fflush(stdout);
+        if (verbose){
+            fprintf(stdout, "%s ", TEST_TASK);
+            printNameTree(root);
+            fprintf(stdout, " TearDown [%.2fs]\n",
+                    timeDiffSeconds(&time_start, &time_end));
+            fflush(stdout);
+        }
 
         freeTasks();
         freeTestTree();
@@ -704,7 +712,7 @@ static void cleanRegDir(void)
 
 static void usage(char *p)
 {
-    fprintf(stderr, "Usage: %s [-a]"
+    fprintf(stderr, "Usage: %s [-a] [-v]"
                     " [-S task_substr] [-T task_name]"
                     " [-s test_substr] [-t test_name]\n", p);
     exit(-1);
@@ -721,7 +729,7 @@ int main(int argc, char *argv[])
     setUpTasks();
 
     int opt;
-    while ((opt = getopt(argc, argv, "aS:T:s:t:")) != -1) {
+    while ((opt = getopt(argc, argv, "avS:T:s:t:")) != -1) {
         switch (opt) {
             case 'a':
                 tasks = &tasks_all;
@@ -737,6 +745,9 @@ int main(int argc, char *argv[])
                 break;
             case 't':
                 filterTests(optarg);
+                break;
+            case 'v':
+                verbose = 1;
                 break;
             default: /* '?' */
                 usage(argv[0]);

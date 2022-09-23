@@ -1,6 +1,7 @@
 #include <assert.h>
 #include "test.h"
 #include "context.h"
+#include "pddl/hpot_old.h"
 
 static void checkOpChangeState(const pddl_fdr_t *fdr,
                                const int *state,
@@ -157,10 +158,160 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddlMGStripsFree(&mg_strips);
 }
 
-static void _test_hpot(int op_pot)
+static double roundFlt(double v)
 {
-    pddlErrInfoEnable(&C.err, stderr);
-    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
+    v = ceil(v - 0.1);
+    if (v == -0.)
+        v = 0.;
+    return v;
+}
+
+static pddl_hpot_config_t hcfg = PDDL_HPOT_CONFIG_INIT;
+static pddl_task_t *task = NULL;
+
+static void _test_hpot1(const pddl_hpot_config_t *cfg, pddl_task_t *task)
+{
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    int ret = pddlHPot(&sols, task, cfg, &C.err);
+    if (ret < 0){
+        fprintf(stdout, "ret: %d\n", ret);
+        pddlPotSolutionsFree(&sols);
+        return;
+    }
+    assert(ret == 0);
+
+    for (int i = 0; i < sols.sol_size; ++i){
+        const pddl_pot_solution_t *sol = sols.sol + i;
+        fprintf(stdout, "objval[%d]: %.0f\n", i, roundFlt(sol->objval));
+        if (cfg->op_pot)
+            assert(sol->op_pot_size > 0);
+    }
+
+    /*
+    pddl_hpot_old_config_t oldcfg = PDDL_HPOT_OLD_CONFIG_INIT;
+    //oldcfg.obj = PDDL_HPOT_OBJ_INIT;
+    oldcfg.obj = PDDL_HPOT_OBJ_ALL_STATES;
+    oldcfg.add_init_constr = 0;
+    oldcfg.op_pot = 0;
+
+    pddl_pot_solutions_t oldsols;
+    int oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
+    assert(ret == oldret);
+    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[0].objval));
+    pddlPotSolutionsFree(&oldsols);
+    */
+
+    pddlPotSolutionsFree(&sols);
+}
+
+TEST(hpot, fdr)
+{
+    //pddlErrInfoEnable(&C.err, stderr);
+    //pddlLPSetDefault(PDDL_LP_GUROBI, NULL);
+    hcfg.disambiguation = 1;
+    hcfg.weak_disambiguation = 0;
+    hcfg.op_pot = 0;
+    hcfg.op_pot_real = 0;
+
+    task = pddlTaskNewFDR(&C.fdr, &C.err);
+    pddlTaskHmMutex(task, 2, -1., -1);
+}
+
+TEST_TEAR_DOWN(hpot)
+{
+    pddlTaskDel(task);
+    task = NULL;
+}
+
+TEST(hpot_init, hpot)
+{
+    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
+    cfg_init.fdr_state = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_init);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_all_states, hpot)
+{
+    pddl_hpot_config_opt_all_syntactic_states_t cfg_all
+            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_all_states_cinit, hpot)
+{
+    pddl_hpot_config_opt_all_syntactic_states_t cfg_all_cinit
+            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
+    cfg_all_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all_cinit);
+    _test_hpot1(&hcfg, task);
+}
+
+
+#if 0
+// It's hard to make the following tests work across different LP solvers...
+TEST(hpot_mutex1, hpot)
+{
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex1
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex1.mutex_size = 1;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_mutex1);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_mutex1_cinit, hpot)
+{
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex1_cinit
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex1_cinit.mutex_size = 1;
+    cfg_mutex1_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_mutex1_cinit);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_mutex2, hpot)
+{
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex2
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex2.mutex_size = 2;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_mutex2);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_mutex2_cinit, hpot)
+{
+    pddl_hpot_config_opt_all_states_mutex_t cfg_mutex2_cinit
+            = PDDL_HPOT_CONFIG_OPT_ALL_STATES_MUTEX_INIT;
+    cfg_mutex2_cinit.mutex_size = 2;
+    cfg_mutex2_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_mutex2_cinit);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_sampled_states, hpot)
+{
+    pddl_hpot_config_opt_sampled_states_t cfg_sstates
+            = PDDL_HPOT_CONFIG_OPT_SAMPLED_STATES_INIT;
+    cfg_sstates.num_samples = 1000;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_sstates);
+    _test_hpot1(&hcfg, task);
+}
+
+TEST(hpot_all_sampled_states_cinit, hpot)
+{
+    pddl_hpot_config_opt_sampled_states_t cfg_sstates_cinit
+            = PDDL_HPOT_CONFIG_OPT_SAMPLED_STATES_INIT;
+    cfg_sstates_cinit.num_samples = 1000;
+    cfg_sstates_cinit.add_fdr_state_constr = C.fdr.init;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_sstates_cinit);
+    _test_hpot1(&hcfg, task);
+}
+
+static void _test_hpot(int op_pot, pddl_task_t *task)
+{
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
@@ -219,66 +370,87 @@ static void _test_hpot(int op_pot)
     if (ret < 0){
         fprintf(stdout, "ret: %d\n", ret);
         pddlPotSolutionsFree(&sols);
-        pddlTaskDel(task);
         return;
     }
     assert(ret == 0);
     assert(sols.sol_size == 9);
 
     const pddl_pot_solution_t *sol = sols.sol + 0;
-    fprintf(stdout, "init objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "init objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 1;
-    fprintf(stdout, "all objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "all objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 2;
-    fprintf(stdout, "all+cinit objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "all+cinit objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 3;
-    fprintf(stdout, "mutex=1 objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "mutex=1 objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 4;
-    fprintf(stdout, "mutex=1+cinit objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "mutex=1+cinit objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 5;
-    fprintf(stdout, "mutex=2 objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "mutex=2 objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 6;
-    fprintf(stdout, "mutex=2+cinit objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "mutex=2+cinit objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 7;
-    fprintf(stdout, "samples=1000 objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "samples=1000 objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
     sol = sols.sol + 8;
-    fprintf(stdout, "samples=1000+cinit objval: %.0f\n", round(sol->objval));
+    fprintf(stdout, "samples=1000+cinit objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
 
+    pddl_hpot_old_config_t oldcfg = PDDL_HPOT_OLD_CONFIG_INIT;
+    oldcfg.obj = PDDL_HPOT_OBJ_INIT;
+    oldcfg.add_init_constr = 0;
+    oldcfg.op_pot = op_pot;
+
+    pddl_pot_solutions_t oldsols;
+    int oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
+    assert(ret == oldret);
+    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[0].objval));
+    pddlPotSolutionsFree(&oldsols);
+
+    oldcfg.obj = PDDL_HPOT_OBJ_ALL_STATES;
+    oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
+    assert(ret == oldret);
+    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[1].objval));
+    pddlPotSolutionsFree(&oldsols);
+
+    oldcfg.obj = PDDL_HPOT_OBJ_ALL_STATES;
+    oldcfg.add_init_constr = 1;
+    oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
+    assert(ret == oldret);
+    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[2].objval));
+    pddlPotSolutionsFree(&oldsols);
+
     pddlPotSolutionsFree(&sols);
-    pddlTaskDel(task);
 }
 
-TEST(hpot, fdr)
+TEST(hpot_all, hpot)
 {
-    _test_hpot(0);
+    _test_hpot(0, task);
 }
 
-TEST(hpot_op_pot, hpot)
+TEST(hpot_all_op_pot, hpot_all)
 {
-    _test_hpot(1);
+    _test_hpot(1, task);
 }
 
-TEST(hpot_ensemble_sampled_states, hpot)
+TEST(hpot_ensemble_sampled_states, hpot_all)
 {
-    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
@@ -295,23 +467,20 @@ TEST(hpot_ensemble_sampled_states, hpot)
     if (ret < 0){
         fprintf(stdout, "ret: %d\n", ret);
         pddlPotSolutionsFree(&sols);
-        pddlTaskDel(task);
         return;
     }
     assert(ret == 0);
 
     for (int i = 0; i < sols.sol_size; ++i){
         const pddl_pot_solution_t *sol = sols.sol + i;
-        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+        fprintf(stdout, "objval[%d]: %.0f\n", i, roundFlt(sol->objval));
     }
 
     pddlPotSolutionsFree(&sols);
-    pddlTaskDel(task);
 }
 
-TEST(hpot_ensemble_diversification, hpot)
+TEST(hpot_ensemble_diversification, hpot_all)
 {
-    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
@@ -328,23 +497,20 @@ TEST(hpot_ensemble_diversification, hpot)
     if (ret < 0){
         fprintf(stdout, "ret: %d\n", ret);
         pddlPotSolutionsFree(&sols);
-        pddlTaskDel(task);
         return;
     }
     assert(ret == 0);
 
     for (int i = 0; i < sols.sol_size; ++i){
         const pddl_pot_solution_t *sol = sols.sol + i;
-        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+        fprintf(stdout, "objval[%d]: %.0f\n", i, roundFlt(sol->objval));
     }
 
     pddlPotSolutionsFree(&sols);
-    pddlTaskDel(task);
 }
 
-TEST(hpot_ensemble_mutex_rand, hpot)
+TEST(hpot_ensemble_mutex_rand, hpot_all)
 {
-    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
@@ -363,23 +529,20 @@ TEST(hpot_ensemble_mutex_rand, hpot)
     if (ret < 0){
         fprintf(stdout, "ret: %d\n", ret);
         pddlPotSolutionsFree(&sols);
-        pddlTaskDel(task);
         return;
     }
     assert(ret == 0);
 
     for (int i = 0; i < sols.sol_size; ++i){
         const pddl_pot_solution_t *sol = sols.sol + i;
-        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+        fprintf(stdout, "objval[%d]: %.0f\n", i, roundFlt(sol->objval));
     }
 
     pddlPotSolutionsFree(&sols);
-    pddlTaskDel(task);
 }
 
-TEST(hpot_ensemble_mutex1, hpot)
+TEST(hpot_ensemble_mutex1, hpot_all)
 {
-    pddl_task_t *task = pddlTaskNewFDR(&C.fdr, &C.err);
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
@@ -398,16 +561,15 @@ TEST(hpot_ensemble_mutex1, hpot)
     if (ret < 0){
         fprintf(stdout, "ret: %d\n", ret);
         pddlPotSolutionsFree(&sols);
-        pddlTaskDel(task);
         return;
     }
     assert(ret == 0);
 
     for (int i = 0; i < sols.sol_size; ++i){
         const pddl_pot_solution_t *sol = sols.sol + i;
-        fprintf(stdout, "objval[%d]: %.0f\n", i, round(sol->objval));
+        fprintf(stdout, "objval[%d]: %.0f\n", i, roundFlt(sol->objval));
     }
 
     pddlPotSolutionsFree(&sols);
-    pddlTaskDel(task);
 }
+#endif
