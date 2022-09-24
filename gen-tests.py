@@ -101,29 +101,63 @@ def genDeclarations():
         if Test[key]['tear-down']:
             print('void test_tear_down_{0}(void);'.format(key))
 
+def constructTree():
+    keys = sorted(Test.keys())
+    for idx, key in enumerate(keys):
+        Test[key]['id'] = idx
+        Test[key]['child'] = []
+        Test[key]['is_root'] = False
+
+    for idx, key in enumerate(keys):
+        if Test[key]['dep'] is None or Test[key]['dep'] == '_':
+            Test[key]['is_root'] = True
+        else:
+            Test[Test[key]['dep']]['child'] += [idx]
+
+def genChildArrays():
+    keys = sorted(Test.keys())
+    for idx, key in enumerate(keys):
+        if len(Test[key]['child']) == 0:
+            continue
+        ch = Test[key]['child']
+        print('static int _test_{0}__child[{1}] = {{{2}}};' \
+                .format(key, len(ch), ', '.join([str(x) for x in ch])))
+
+def genTestDef(idx, name, test):
+    print('    {{{0}'.format(idx), end = '')
+    print(', "{0}", test_{0}'.format(name), end = '')
+
+    if test['tear-down']:
+        print(', test_tear_down_{0}'.format(name), end = '')
+    else:
+        print(', NULL', end = '')
+
+    if test['dep'] is not None and test['dep'] != '_':
+        print(', {0}'.format(Test[test['dep']]['id']), end = '')
+    else:
+        print(', -1', end = '')
+
+    if len(test['child']) > 0:
+        print(', _test_{0}__child, {1}'.format(name, len(test['child'])), end = '')
+    else:
+        print(', NULL, 0', end = '')
+
+    if test['explicit']:
+        print(', 1', end = '')
+    else:
+        print(', 0', end = '')
+    print('},')
+
 def genDefs():
+    constructTree()
+    genChildArrays()
+
     keys = sorted(Test.keys())
     print('static test_def_t test_set[] = {')
-    for key in keys:
-        print('    {{"{0}", test_{0}'.format(key), end = '')
-
-        if Test[key]['tear-down']:
-            print(', test_tear_down_{0}'.format(key), end = '')
-        else:
-            print(', NULL', end = '')
-
-        if Test[key]['dep'] is not None:
-            print(', "{0}"'.format(Test[key]['dep']), end = '')
-        else:
-            print(', "_"', end = '')
-
-        if Test[key]['explicit']:
-            print(', 1', end = '')
-        else:
-            print(', 0', end = '')
-        print('},')
+    for idx, key in enumerate(keys):
+        genTestDef(idx, key, Test[key])
     print('};')
-    print('size_t test_set_size = sizeof(test_set) / sizeof(test_def_t);')
+    print('#define test_set_size {0}'.format(len(keys)))
 
     if GlobalTearDown:
         print('#define USE_GLOBAL_TEAR_DOWN')

@@ -51,17 +51,18 @@ TESTS_C := $(foreach test,$(TESTS),$(test).c)
 C_IN  = test.in.c
 C_IN += test.tasks.base.in.c
 C_IN += test.tasks.all.in.c
+C_IN += tasks_tests.c
 
 all: $(TARGETS)
 
 test: test.c $(C_IN) ../libpddl.a $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $< $(OBJS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $< tasks_tests.c $(OBJS) $(LDFLAGS)
 test.in.c: gen-tests.py $(TESTS_C)
 	python3 gen-tests.py $(TESTS_C) >$@
 test.tasks.base.in.c: tasks-base.txt gen-tasks.py
 	python3 gen-tasks.py base <$< >$@
-test.tasks.all.in.c: tasks-base.txt tasks-noce.txt gen-tasks.py
-	cat tasks-base.txt tasks-noce.txt | python3 gen-tasks.py all >$@
+test.tasks.all.in.c: tasks-base.txt tasks-all.txt gen-tasks.py
+	cat tasks-base.txt tasks-all.txt | python3 gen-tasks.py all >$@
 
 .objs/%.o: %.c %.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -111,10 +112,9 @@ check-valgrind-gen-suppressions: all
 	valgrind -q --leak-check=full --show-reachable=yes --trace-children=yes \
              --gen-suppressions=all --log-file=supp.out --error-limit=no \
              --suppressions=test.supp \
-             ./test $(T) <tasks.txt
+             ./test $(T)
 
 clean:
-	rm -f test.in.c
 	rm -f *.o
 	rm -f .objs/*.o
 	rm -f *.in.c

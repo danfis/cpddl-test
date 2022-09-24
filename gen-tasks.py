@@ -30,7 +30,7 @@ def parseFile():
         for x in s[1:]:
             if x == '~L':
                 disabled += LARGE_TESTS
-            if x == '~LL':
+            elif x == '~LL':
                 disabled += VERY_LARGE_TESTS
             elif x.startswith('!'):
                 disabled += [x[1:]]
@@ -52,22 +52,26 @@ def genDeclarations():
             print('void test_tear_down_{0}(void);'.format(key))
 
 def genDefs(dname):
-    print('static tasks_t tasks_{0} = {{0}};'.format(dname))
-    print('static void addTasks_{0}(void)'.format(dname))
-    print('{')
+    print('static const char *tasks_{0}[] = {{'.format(dname))
     for name in sorted(Task.keys()):
         task = Task[name]
-        if len(task['disabled']) > 0 or len(task['enabled']) > 0:
-            print('    {');
-            print('    task_t *task = addTask(&tasks_{0}, "{1}");' \
-                            .format(dname, name))
-            for d in task['disabled']:
-                print('    disableTaskTest(task, "{0}");'.format(d))
-            for d in task['enabled']:
-                print('    enableTaskTest(task, "{0}");'.format(d))
-            print('    }');
-        else:
-            print('    addTask(&tasks_{0}, "{1}");'.format(dname, name))
+        print('    "{0}",'.format(name))
+    print(r'};')
+    print('#define tasks_{0}_size {1}'.format(dname, len(Task)))
+
+    print('static int task_test_map_{0}[tasks_{0}_size * test_set_size] = {{0}};' \
+                .format(dname, len(Task)))
+    print('static void setTaskTestMap_{0}(void)'.format(dname))
+    print('{')
+    print('    initTaskTestMap(tasks_{0}, task_test_map_{0}, tasks_{0}_size);'.format(dname))
+    for idx, name in enumerate(sorted(Task.keys())):
+        task = Task[name]
+        for d in task['disabled']:
+            print('    disableTaskTest(task_test_map_{0}, tasks_{0}_size,' \
+                  ' {1}, testIdFromName("{2}"));'.format(dname, idx, d))
+        for d in task['enabled']:
+            print('    enableTaskTest(task_test_map_{0}, tasks_{0}_size,' \
+                  ' {1}, testIdFromName("{2}"));'.format(dname, idx, d))
     print('}')
 
 def main():
