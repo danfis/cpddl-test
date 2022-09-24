@@ -8,11 +8,14 @@
 #include <stdio.h>
 #include <semaphore.h>
 #include <dirent.h>
+#include <pthread.h>
 #include <assert.h>
 #include "pddl/pddl.h"
 #include "tasks_tests.h"
 
 #define MAX_PROGRESS_STEPS 30
+#define DEFAULT_PARALLEL 6
+#define DEFAULT_TIMEOUT 60
 
 const char *TEST_TASK = NULL;
 
@@ -41,7 +44,9 @@ static test_stat_t *test_stat = NULL;
 static worker_t *worker;
 
 static int verbose = 0;
-static int parallel = 1;
+static int parallel = DEFAULT_PARALLEL;
+static int timeout_s = DEFAULT_TIMEOUT;
+static int supress_fail = 0;
 
 static void setMemLimit(void)
 {
@@ -54,15 +59,29 @@ static void usage(const char *progname)
 {
     fprintf(stderr, "Usage: %s [-a] [-v]"
                     " [-S task_substr] [-T task_name]"
-                    " [-s test_substr] [-t test_name] [-p num-threads]\n",
+                    " [-s test_substr] [-t test_name]"
+                    " [-D] [-p num-parallel] [-m timeout-sec]"
+                    " [-f]\n",
                     progname);
+    fprintf(stderr, "  -a       Use all tasks\n");
+    fprintf(stderr, "  -v       Increase logging\n");
+    fprintf(stderr, "  -S  str  Restrict tasks to those containing str\n");
+    fprintf(stderr, "  -T  str  Restrict tasks to exactly str\n");
+    fprintf(stderr, "  -s  str  Restrict tests to those containing str\n");
+    fprintf(stderr, "  -t  str  Restrict tests to exactly str\n");
+    fprintf(stderr, "  -D       Print tree of tasks and tests\n");
+    fprintf(stderr, "  -p  int  Run specified number of tasks in parallel"
+            " (default: %d)\n", DEFAULT_PARALLEL);
+    fprintf(stderr, "  -m  int  Timeout in seconds (default: %d)\n",
+            DEFAULT_TIMEOUT);
+    fprintf(stderr, "  -f       Suppress printing failures\n");
     exit(-1);
 }
 
 static void parseOptions(int argc, char *argv[])
 {
     int opt;
-    while ((opt = getopt(argc, argv, "avS:T:s:t:p:D")) != -1) {
+    while ((opt = getopt(argc, argv, "havS:T:s:t:p:Dm:f")) != -1) {
         switch (opt) {
             case 'a':
                 tasksTestsSelectAll();
@@ -88,6 +107,12 @@ static void parseOptions(int argc, char *argv[])
             case 'D':
                 tasksTestsPrintPlan();
                 break;
+            case 'm':
+                timeout_s = atoi(optarg);
+                break;
+            case 'f':
+                supress_fail = 1;
+                break;
             default:
                 usage(argv[0]);
         }
@@ -96,7 +121,9 @@ static void parseOptions(int argc, char *argv[])
         usage(argv[0]);
 
     if (parallel < 1)
-        parallel = 1;
+        parallel = DEFAULT_PARALLEL;
+    if (timeout_s < 1)
+        timeout_s = DEFAULT_TIMEOUT;
 }
 
 static void updateTestStatRun(int test_id)
@@ -147,10 +174,9 @@ static void reportSignal(const char *task_name,
                          int status)
 {
     sem_wait(lock);
-    fprintf(stdout, "%s / %s was terminated by signal %d (%s).\n",
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated by signal %d (%s).\n",
             task_name, test_name,
             WTERMSIG(status), strsignal(WTERMSIG(status)));
-    fprintf(stdout, "%s / %s FAILED\n", task_name, test_name);
     fflush(stdout);
     sem_post(lock);
 }
@@ -158,8 +184,7 @@ static void reportSignal(const char *task_name,
 static void reportAbnormal(const char *task_name, const char *test_name)
 {
     sem_wait(lock);
-    fprintf(stdout, "%s / %s terminated abnormaly!\n", task_name, test_name);
-    fprintf(stdout, "%s / %s FAILED\n", task_name, test_name);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated abnormaly!\n", task_name, test_name);
     fflush(stdout);
     sem_post(lock);
 }
@@ -168,9 +193,8 @@ static void reportExitStatus(const char *task_name, const char *test_name,
                              int exit_status)
 {
     sem_wait(lock);
-    fprintf(stdout, "%s / %s terminated with exit status %d.\n",
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated with exit status %d.\n",
             task_name, test_name, exit_status);
-    fprintf(stdout, "%s / %s FAILED\n", task_name, test_name);
     fflush(stdout);
     sem_post(lock);
 }
@@ -178,8 +202,7 @@ static void reportExitStatus(const char *task_name, const char *test_name,
 static void reportNonEmptyOut(const char *task_name, const char *test_name)
 {
     sem_wait(lock);
-    fprintf(stdout, "%s / %s non-empty tmp.*.out file.\n", task_name, test_name);
-    fprintf(stdout, "%s / %s FAILED\n", task_name, test_name);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: non-empty tmp.*.out file.\n", task_name, test_name);
     fflush(stdout);
     sem_post(lock);
 }
@@ -187,8 +210,8 @@ static void reportNonEmptyOut(const char *task_name, const char *test_name)
 static void reportDiffOut(const char *task_name, const char *test_name)
 {
     sem_wait(lock);
-    fprintf(stdout, "%s / %s diff on .out files.\n", task_name, test_name);
-    fprintf(stdout, "%s / %s FAILED\n", task_name, test_name);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: diff on .out files.\n", task_name, test_name);
+    fflush(stdout);
     sem_post(lock);
 }
 
@@ -345,6 +368,13 @@ static void tearDown(const test_def_t *t)
         tearDown(tasksTestsGetTest(t->parent));
 }
 
+static void *thTimeout(void *_)
+{
+    sleep(timeout_s);
+    kill(getpid(), SIGALRM);
+    return NULL;
+}
+
 static void runTest(int task_id, const test_def_t *test)
 {
     progress();
@@ -365,7 +395,15 @@ static void runTest(int task_id, const test_def_t *test)
         pddl_timer_t timer;
         pddlTimerStart(&timer);
         updateTestStatRun(test->id);
+
+        pthread_t thtimeout;
+        pthread_create(&thtimeout, NULL, thTimeout, NULL);
+
         test->fn();
+
+        pthread_cancel(thtimeout);
+        pthread_join(thtimeout, NULL);
+
         pddlTimerStop(&timer);
         updateTestStatTime(test->id, pddlTimerElapsedInSF(&timer));
 
@@ -616,8 +654,8 @@ static void printReport(void)
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
         printf("-");
     printf("------------------\n");
-    printf("tasks");
-    for (int i = 5; i < name_len; ++i)
+    printf("sum");
+    for (int i = 3; i < name_len; ++i)
         printf(" ");
 
     printf(" | ");
@@ -628,7 +666,11 @@ static void printReport(void)
     printf(" | %7.2fs", time);
     printf("\n");
 
-    printReportFailures();
+    fflush(stdout);
+    fflush(stderr);
+
+    if (!supress_fail)
+        printReportFailures();
 }
 
 static void cleanRegDir(void)
