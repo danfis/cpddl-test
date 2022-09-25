@@ -115,6 +115,7 @@ check-valgrind-gen-suppressions: all
              ./test $(T)
 
 clean:
+	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o
 	rm -f *.in.c
