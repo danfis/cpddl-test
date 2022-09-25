@@ -15,7 +15,7 @@
 
 #define MAX_PROGRESS_STEPS 30
 #define DEFAULT_PARALLEL 6
-#define DEFAULT_TIMEOUT 60
+#define DEFAULT_TIMEOUT 120
 
 const char *TEST_TASK = NULL;
 
@@ -203,7 +203,8 @@ static void reportExitStatus(const char *task_name, const char *test_name,
 static void reportNonEmptyOut(const char *task_name, const char *test_name)
 {
     sem_wait(lock);
-    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: non-empty tmp.*.out file.\n", task_name, test_name);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: non-empty *.out.tmp file.\n",
+            task_name, test_name);
     fflush(stdout);
     sem_post(lock);
 }
@@ -216,17 +217,19 @@ static void reportDiffOut(const char *task_name, const char *test_name)
     sem_post(lock);
 }
 
-static int fmtFilename(const char *task,
+static int fmtFilename(const char *task_name,
                        const char *test_name,
                        char *filename)
 {
-    int ret = sprintf(filename, "%s.%s", task, test_name);
+    int ret = sprintf(filename, "%s/%s", task_name, test_name);
+    /*
     char *c = filename;
     for (; *c != 0x0; ++c){
         if (*c == '/'){
             *c = '-';
         }
     }
+    */
     return ret;
 }
 
@@ -235,9 +238,9 @@ static void fmtBaseFilename(const char *task,
                             const char *suff,
                             char *filename)
 {
-    sprintf(filename, "reg/");
-    int siz = fmtFilename(task, test_name, filename + 4);
-    sprintf(filename + 4 + siz, ".%s", suff);
+    int siz = sprintf(filename, "reg/");
+    siz += fmtFilename(task, test_name, filename + siz);
+    sprintf(filename + siz, ".%s", suff);
 }
 
 static void fmtOutputFilename(const char *task,
@@ -245,9 +248,9 @@ static void fmtOutputFilename(const char *task,
                               const char *suff,
                               char *filename)
 {
-    sprintf(filename, "reg/tmp.");
-    int siz = fmtFilename(task, test_name, filename + 8);
-    sprintf(filename + 8 + siz, ".%s", suff);
+    int siz = sprintf(filename, "reg/");
+    siz += fmtFilename(task, test_name, filename + siz);
+    sprintf(filename + siz, ".%s.tmp", suff);
 }
 
 static size_t filesize(const char *fn)
@@ -271,6 +274,8 @@ static void redirectStdOutErr(const char *task_name,
     fflush(stdout);
     *fd_stdout = dup(fileno(stdout));
     if (freopen(stdout_fn, "w", stdout) == NULL){
+        fprintf(stderr, "F: %s\n", stdout_fn);
+        fflush(stderr);
         perror("Redirecting of stdout failed");
         exit(-1);
     }
@@ -340,6 +345,7 @@ static void addFail(const char *task_name, const char *test_name, int status)
     fclose(failout);
 
     char base[512];
+    fmtOutputFilename(task_name, test_name, "out", fn);
     fmtBaseFilename(task_name, test_name, "out", base);
     if (access(base, F_OK) == 0){
         char cmd[2048];
@@ -547,37 +553,7 @@ static int waitForWorker(worker_t *worker)
 
 static void printReportFailures(void)
 {
-    system("find reg/ -name '*.fail' | sort | xargs -n1 cat");
-    /*
-    DIR *dp;
-    struct dirent *ep;     
-    dp = opendir ("reg/");
-
-    if (dp != NULL){
-        while ((ep = readdir(dp)) != NULL){
-            if (strncmp(ep->d_name, "tmp.", 4) == 0){
-                int len = strlen(ep->d_name);
-                if (strncmp(ep->d_name + len - 5, ".fail", 5) == 0){
-                    char f[512];
-                    sprintf(f, "reg/%s", ep->d_name);
-                    char buf[512];
-                    FILE *fin = fopen(f, "r");
-                    if (fin == NULL){
-                        perror("Could not open fail file!");
-                        exit(-1);
-                    }
-                    size_t r = fread(buf, 1, 512, fin);
-                    while (r > 0){
-                        fwrite(buf, 1, r, stdout);
-                        r = fread(buf, 1, 512, fin);
-                    }
-                    fclose(fin);
-                }
-            }
-        }
-        closedir(dp);
-    }
-    */
+    system("find reg/ -name '*.fail.tmp' | sort | xargs -n1 cat");
 }
 
 static void printReportTest(const char *test_name,
@@ -674,20 +650,7 @@ static void printReport(void)
 
 static void cleanRegDir(void)
 {
-    DIR *dp;
-    struct dirent *ep;     
-    dp = opendir ("reg/");
-
-    if (dp != NULL){
-        while ((ep = readdir(dp)) != NULL){
-            if (strncmp(ep->d_name, "tmp.", 4) == 0){
-                char f[512];
-                sprintf(f, "reg/%s", ep->d_name);
-                unlink(f);
-            }
-        }
-        closedir(dp);
-    }
+    system("find reg/ -name '*.tmp' -exec rm '{}' ';'");
 }
 
 int main(int argc, char *argv[])

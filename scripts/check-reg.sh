@@ -1,7 +1,7 @@
 #!/bin/bash
 
-for tmp in $(find reg/ -name tmp.*.out); do
-    f=reg/${tmp##reg/tmp.}
+for tmp in $(find reg/ -name *.out.tmp); do
+    f=${tmp%%.tmp}
     if [ "$(stat -c%s $tmp)" = "0" ] && [ ! -f $f ]; then
         continue
     fi

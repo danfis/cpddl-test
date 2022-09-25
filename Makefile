@@ -119,7 +119,6 @@ clean:
 	rm -f .objs/*.o
 	rm -f *.in.c
 	rm -f $(TARGETS)
-	find reg/ -name 'tmp.*' -exec rm '{}' ';'
-	find reg/ -name 'temp.*' -exec rm '{}' ';'
+	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
 .PHONY: all clean check check-valgrind submodule test-strips-mem
