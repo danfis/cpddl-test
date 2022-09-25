@@ -26,6 +26,7 @@ int tasksTestsNumTests(void);
 const test_def_t *tasksTestsGetTest(int test_id);
 const char *tasksTestsGetTaskName(int task_id);
 int tasksTestsIsEnabled(int task_id, int test_id);
+int tasksTestsNumActiveTasks(void);
 
 void (*tasksTestsGlobalTearDown(void))(void);
 #endif /* TASKS_TESTS_H */

@@ -37,6 +37,7 @@ typedef struct worker worker_t;
 static void (*global_tear_down)(void) = NULL;
 
 static int num_tasks;
+static int num_tests;
 static int *progress_step;
 static int *tasks_processed;
 static sem_t *lock;
@@ -482,7 +483,6 @@ static int _runWorker(worker_t *worker, int task_id)
         exit(-1);
 
     }else if (pid == 0){
-        int num_tests = tasksTestsNumTests();
         for (int ti = 0; ti < num_tests; ++ti){
             const test_def_t *test = tasksTestsGetTest(ti);
             assert(test->id == ti);
@@ -604,12 +604,11 @@ static void printReportTest(const char *test_name,
 
 static void printReport(void)
 {
-    int tests_size = tasksTestsNumTests();
     int name_len = 5;
     int num_succeeded = 0;
     int num_failed = 0;
     float time = 0;
-    for (int i = 0; i < tests_size; ++i){
+    for (int i = 0; i < num_tests; ++i){
         const test_def_t *test = tasksTestsGetTest(i);
         if (!test_stat[i].run)
             continue;
@@ -644,7 +643,7 @@ static void printReport(void)
         printf("-");
     printf("------------------\n");
 
-    for (int i = 0; i < tests_size; ++i){
+    for (int i = 0; i < num_tests; ++i){
         if (!test_stat[i].run)
             continue;
         const test_def_t *test = tasksTestsGetTest(i);
@@ -701,7 +700,12 @@ int main(int argc, char *argv[])
     global_tear_down = tasksTestsGlobalTearDown();
 
     num_tasks = tasksTestsNumTasks();
-    int num_tests = tasksTestsNumTests();
+    num_tests = tasksTestsNumTests();
+
+    printf("tasks: %d/%d, tests: %d, parallel: %d, timeout: %ds\n",
+           tasksTestsNumActiveTasks(), num_tasks, num_tests,
+           parallel, timeout_s);
+    fflush(stdout);
 
     size_t shared_size = 0;
     shared_size += sizeof(int);

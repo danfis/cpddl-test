@@ -212,6 +212,14 @@ int tasksTestsIsEnabled(int task_id, int test_id)
     return task_test_map[task_id * test_set_size + test_id];
 }
 
+int tasksTestsNumActiveTasks(void)
+{
+    int num = 0;
+    for (int i = 0; i < task_size; ++i)
+        num += tasksTestsIsEnabled(i, -1);
+    return num;
+}
+
 void (*tasksTestsGlobalTearDown(void))(void)
 {
 #ifdef USE_GLOBAL_TEAR_DOWN
