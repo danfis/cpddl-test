@@ -1,7 +1,6 @@
 #include <assert.h>
 #include "test.h"
 #include "context.h"
-#include "pddl/hpot_old.h"
 
 static void checkOpChangeState(const pddl_fdr_t *fdr,
                                const int *state,
@@ -189,26 +188,12 @@ static void _test_hpot1(const pddl_hpot_config_t *cfg, pddl_task_t *task)
             assert(sol->op_pot_size > 0);
     }
 
-    /*
-    pddl_hpot_old_config_t oldcfg = PDDL_HPOT_OLD_CONFIG_INIT;
-    //oldcfg.obj = PDDL_HPOT_OBJ_INIT;
-    oldcfg.obj = PDDL_HPOT_OBJ_ALL_STATES;
-    oldcfg.add_init_constr = 0;
-    oldcfg.op_pot = 0;
-
-    pddl_pot_solutions_t oldsols;
-    int oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
-    assert(ret == oldret);
-    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[0].objval));
-    pddlPotSolutionsFree(&oldsols);
-    */
-
     pddlPotSolutionsFree(&sols);
 }
 
 TEST(hpot, fdr)
 {
-    //pddlErrInfoEnable(&C.err, stderr);
+    pddlErrInfoEnable(&C.err, stderr);
     //pddlLPSetDefault(PDDL_LP_GUROBI, NULL);
     hcfg.disambiguation = 1;
     hcfg.weak_disambiguation = 0;
@@ -411,30 +396,6 @@ static void _test_hpot(int op_pot, pddl_task_t *task)
     fprintf(stdout, "samples=1000+cinit objval: %.0f\n", roundFlt(sol->objval));
     if (op_pot)
         assert(sol->op_pot_size > 0);
-
-    pddl_hpot_old_config_t oldcfg = PDDL_HPOT_OLD_CONFIG_INIT;
-    oldcfg.obj = PDDL_HPOT_OBJ_INIT;
-    oldcfg.add_init_constr = 0;
-    oldcfg.op_pot = op_pot;
-
-    pddl_pot_solutions_t oldsols;
-    int oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
-    assert(ret == oldret);
-    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[0].objval));
-    pddlPotSolutionsFree(&oldsols);
-
-    oldcfg.obj = PDDL_HPOT_OBJ_ALL_STATES;
-    oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
-    assert(ret == oldret);
-    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[1].objval));
-    pddlPotSolutionsFree(&oldsols);
-
-    oldcfg.obj = PDDL_HPOT_OBJ_ALL_STATES;
-    oldcfg.add_init_constr = 1;
-    oldret = pddlHPotOld(&oldsols, &C.fdr, &oldcfg, &C.err);
-    assert(ret == oldret);
-    assert(roundFlt(oldsols.sol[0].objval) == roundFlt(sols.sol[2].objval));
-    pddlPotSolutionsFree(&oldsols);
 
     pddlPotSolutionsFree(&sols);
 }
