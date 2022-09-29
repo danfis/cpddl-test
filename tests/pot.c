@@ -173,13 +173,17 @@ static void _test_hpot1(const pddl_hpot_config_t *cfg, pddl_task_t *task)
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
-    int ret = pddlHPot(&sols, task, cfg, &C.err);
+    int ret = pddlHPot(&sols, cfg, &C.err);
     if (ret < 0){
-        fprintf(stdout, "ret: %d\n", ret);
+        pddlErrPrint(&C.err, 1, stderr);
+        pddlPotSolutionsFree(&sols);
+    }
+    assert(ret == 0);
+    if (sols.unsolvable){
+        fprintf(stdout, "unsolvable\n");
         pddlPotSolutionsFree(&sols);
         return;
     }
-    assert(ret == 0);
 
     for (int i = 0; i < sols.sol_size; ++i){
         const pddl_pot_solution_t *sol = sols.sol + i;
@@ -191,23 +195,29 @@ static void _test_hpot1(const pddl_hpot_config_t *cfg, pddl_task_t *task)
     pddlPotSolutionsFree(&sols);
 }
 
+static pddl_mg_strips_t mg_strips;
+static pddl_mutex_pairs_t mutex;
 TEST(hpot, fdr)
 {
+    pddlMGStripsInitFDR(&mg_strips, &C.fdr);
+    pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
+    pddlH2(&mg_strips.strips, &mutex, NULL, NULL, -1, &C.err);
+
     pddlErrInfoEnable(&C.err, stderr);
     //pddlLPSetDefault(PDDL_LP_GUROBI, NULL);
+    hcfg.fdr = &C.fdr;
+    hcfg.mg_strips = &mg_strips;
+    hcfg.mutex = &mutex;
     hcfg.disambiguation = 1;
     hcfg.weak_disambiguation = 0;
     hcfg.op_pot = 0;
     hcfg.op_pot_real = 0;
-
-    task = pddlTaskNewFDR(&C.fdr, &C.err);
-    pddlTaskHmMutex(task, 2, -1., -1);
 }
 
 TEST_TEAR_DOWN(hpot)
 {
-    pddlTaskDel(task);
-    task = NULL;
+    pddlMutexPairsFree(&mutex);
+    pddlMGStripsFree(&mg_strips);
 }
 
 TEST(hpot_init, hpot)
