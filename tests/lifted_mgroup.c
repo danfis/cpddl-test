@@ -55,7 +55,7 @@ TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
     int pred_at = pddlPredsGet(&pddl.pred, "at");
     int pred_capacity = pddlPredsGet(&pddl.pred, "capacity");
 
-    //pddlFmPrint(&pddl, &pddl.init->cls, NULL, stderr);
+    //pddlFmPrint(&pddl, &pddl.init->fm, NULL, stderr);
 
     pddl_lifted_mgroup_t mg;
 
@@ -179,7 +179,7 @@ TEST(lifted_mgroup_tests_tidybot, lifted_mgroup_tests)
     int pred_base_obs = pddlPredsGet(&pddl.pred, "base-obstacle");
     int pred_gripper_empty = pddlPredsGet(&pddl.pred, "gripper-empty");
 
-    //pddlFmPrint(&pddl, &pddl.init->cls, NULL, stderr);
+    //pddlFmPrint(&pddl, &pddl.init->fm, NULL, stderr);
 
     pddl_lifted_mgroup_t mg;
 
@@ -291,7 +291,7 @@ TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
 
     int pred_at_car_jun = pddlPredsGet(&pddl.pred, "at_car_jun");
 
-    //pddlFmPrint(&pddl, &pddl.init->cls, NULL, stderr);
+    //pddlFmPrint(&pddl, &pddl.init->fm, NULL, stderr);
 
     pddl_lifted_mgroup_t mg;
 
@@ -376,7 +376,7 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
 
     int pred_bond = pddlPredsGet(&pddl.pred, "bond");
 
-    //pddlFmPrint(&pddl, &pddl.init->cls, stderr);
+    //pddlFmPrint(&pddl, &pddl.init->fm, stderr);
 
     pddl_lifted_mgroup_t mg;
 
@@ -492,19 +492,19 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
     atom = pddlFmNewEmptyAtom(1);
     atom->pred = pddlPredsGet(&pddl.pred, "clean");
     atom->arg[0].param = 0;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     atom = pddlFmNewEmptyAtom(2);
     atom->pred = pddlPredsGet(&pddl.pred, "contains");
     atom->arg[0].param = 0;
     atom->arg[1].param = 1;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     atom = pddlFmNewEmptyAtom(2);
     atom->pred = pddlPredsGet(&pddl.pred, "used");
     atom->arg[0].param = 0;
     atom->arg[1].param = 2;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     //pddlLiftedMGroupPrint(&pddl, &mg, stdout);
     assert(!pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
@@ -534,13 +534,13 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
     atom = pddlFmNewEmptyAtom(1);
     atom->pred = pddlPredsGet(&pddl.pred, "empty");
     atom->arg[0].param = 0;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     atom = pddlFmNewEmptyAtom(2);
     atom->pred = pddlPredsGet(&pddl.pred, "contains");
     atom->arg[0].param = 0;
     atom->arg[1].param = 1;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     //pddlLiftedMGroupPrint(&pddl, &mg, stdout);
     assert(!pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
@@ -571,12 +571,12 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
     atom->pred = pddlPredsGet(&pddl.pred, "holding");
     atom->arg[0].param = 1;
     atom->arg[1].param = 0;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     atom = pddlFmNewEmptyAtom(1);
     atom->pred = pddlPredsGet(&pddl.pred, "ontable");
     atom->arg[0].param = 0;
-    pddlFmArrAdd(&mg.cond, &atom->cls);
+    pddlFmArrAdd(&mg.cond, &atom->fm);
 
     //pddlLiftedMGroupPrint(&pddl, &mg, stdout);
     assert(!pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
