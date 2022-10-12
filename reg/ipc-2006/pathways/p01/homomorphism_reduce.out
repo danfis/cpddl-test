@@ -19,10 +19,10 @@ Obj[12]:
     [1]: sp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [2]: prbp2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [3]: chk1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: p300, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: pcaf-p300, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [4]: ap2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: prbp2-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [6]: dmp1p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: p16-cdk7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: pcaf-p300, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
     [8]: l0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [9]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [10]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
@@ -62,20 +62,20 @@ Action[6]:
 Init[16]:
   S:(possible sp1)
   S:(possible prbp2)
-  S:(possible p300)
   S:(possible chk1)
+  S:(possible ap2)
   S:(catalyzed-association-reaction prbp2 chk1 dmp1p1)
-  S:(association-reaction sp1 sp1 p16-cdk7)
-  S:(association-reaction prbp2 p300 pcaf-p300)
-  S:(association-reaction dmp1p1 p300 prbp1p2-ap2)
+  S:(association-reaction sp1 sp1 pcaf-p300)
+  S:(association-reaction dmp1p1 ap2 prbp1p2-ap2)
+  S:(association-reaction prbp2 ap2 prbp2-ap2)
   (num-subs l0)
   S:(next l1 l0)
   S:(next l2 l1)
   S:(next l3 l2)
   S:(NOT-chosen sp1)
   S:(NOT-chosen prbp2)
-  S:(NOT-chosen p300)
   S:(NOT-chosen chk1)
+  S:(NOT-chosen ap2)
 Init[0]:
 Goal: (W:goal1)
 Metric: 0

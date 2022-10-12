@@ -15,7 +15,7 @@
 
 #define MAX_PROGRESS_STEPS 30
 #define DEFAULT_PARALLEL 6
-#define DEFAULT_TIMEOUT 120
+#define DEFAULT_TIMEOUT 180
 
 const char *TEST_TASK = NULL;
 
