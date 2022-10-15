@@ -47,26 +47,27 @@ TESTS += asnets
 
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
-TESTS_C := $(foreach test,$(TESTS),$(test).c)
+TESTS_C := $(foreach test,$(TESTS),tests/$(test).c)
 
 C_IN  = test.in.c
 C_IN += test.tasks.base.in.c
 C_IN += test.tasks.all.in.c
+C_IN += tasks_tests.c
 
 all: $(TARGETS)
 
 test: test.c $(C_IN) ../libpddl.a $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $< $(OBJS) $(LDFLAGS)
-test.in.c: gen-tests.py $(TESTS_C)
-	python3 gen-tests.py $(TESTS_C) >$@
-test.tasks.base.in.c: tasks-base.txt gen-tasks.py
-	python3 gen-tasks.py base <$< >$@
-test.tasks.all.in.c: tasks-base.txt tasks-noce.txt gen-tasks.py
-	cat tasks-base.txt tasks-noce.txt | python3 gen-tasks.py all >$@
+	$(CC) $(CFLAGS) -o $@ $< tasks_tests.c $(OBJS) $(LDFLAGS)
+test.in.c: scripts/gen-tests.py $(TESTS_C)
+	python3 scripts/gen-tests.py $(TESTS_C) >$@
+test.tasks.base.in.c: tasks-base.txt scripts/gen-tasks.py
+	python3 scripts/gen-tasks.py base <$< >$@
+test.tasks.all.in.c: tasks-base.txt tasks-all.txt scripts/gen-tasks.py
+	cat tasks-base.txt tasks-all.txt | python3 scripts/gen-tasks.py all >$@
 
-.objs/%.o: %.c %.h ../libpddl.a
+.objs/%.o: tests/%.c tests/%.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
-.objs/%.o: %.c ../libpddl.a
+.objs/%.o: tests/%.c ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 check: all submodule
@@ -84,13 +85,13 @@ check-valgrind: all
              --trace-children=yes --error-limit=no \
              --child-silent-after-fork=yes \
              --suppressions=test.supp \
-             ./test $(T) 2>&1 | tee check.log | bash filter-valgrind.sh
+             ./test $(T) 2>&1 | tee check.log | bash scripts/filter-valgrind.sh
 check-all-valgrind: all
 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
              --trace-children=yes --error-limit=no \
              --child-silent-after-fork=yes \
              --suppressions=test.supp \
-             ./test -a $(T) 2>&1 | tee check.log | bash filter-valgrind.sh
+             ./test -a $(T) 2>&1 | tee check.log | bash scripts/filter-valgrind.sh
 
 check-segfault: all
 	valgrind -q --trace-children=yes \
@@ -112,15 +113,14 @@ check-valgrind-gen-suppressions: all
 	valgrind -q --leak-check=full --show-reachable=yes --trace-children=yes \
              --gen-suppressions=all --log-file=supp.out --error-limit=no \
              --suppressions=test.supp \
-             ./test $(T) <tasks.txt
+             ./test $(T)
 
 clean:
-	rm -f test.in.c
+	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o
 	rm -f *.in.c
 	rm -f $(TARGETS)
-	find reg/ -name 'tmp.*' -exec rm '{}' ';'
-	find reg/ -name 'temp.*' -exec rm '{}' ';'
+	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
 .PHONY: all clean check check-valgrind submodule test-strips-mem

@@ -1,110 +1,235 @@
-#include <sys/time.h>
 #include <sys/resource.h>
-#include <sys/wait.h>
 #include <sys/mman.h>
-#include <pthread.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
-#include <time.h>
-#include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <semaphore.h>
 #include <dirent.h>
-#include "test.h"
+#include <pthread.h>
+#include <assert.h>
+#include "pddl/pddl.h"
+#include "tasks_tests.h"
 
-#include "test.in.c"
-
-#define TIMEOUT 0
-
-static const char *FAIL_FILENAME = "reg/tmp.failed";
+#define MAX_PROGRESS_STEPS 30
+#define DEFAULT_PARALLEL 6
+#define DEFAULT_TIMEOUT 180
 
 const char *TEST_TASK = NULL;
 
-typedef struct test_test test_test_t;
-struct test_test {
+struct test_stat {
+    int run;
+    int succeeded;
+    int failed;
+    float time;
+};
+typedef struct test_stat test_stat_t;
+
+struct worker {
     int id;
-    const char *name;
-    int is_explicit;
-    void (*test_fn)(void);
-    void (*test_fn_tear_down)(void);
-    int enabled;
-
-    test_test_t *parent;
-    test_test_t **child;
-    int child_size;
-
-    int num_failed;
-    int num_succeeded;
-    float time_sum;
+    pid_t pid;
+    int task_id;
 };
+typedef struct worker worker_t;
 
-struct task {
-    char *task;
-    int disabled;
-    int found_run;
-    int *test_run;
-    int *test_ignore;
-};
-typedef struct task task_t;
-
-struct tasks {
-    task_t *tasks;
-    int size;
-    int alloc;
-};
-typedef struct tasks tasks_t;
-
-static tasks_t *tasks = NULL;
-
-
-static test_test_t *tests;
-static int tests_size;
-static int *tests_stats;
-static float *tests_time_sum;
-static int tests_enabled = 0;
-
-#ifdef USE_GLOBAL_TEAR_DOWN
-static void (*global_tear_down)(void) = __test_global_tear_down;
-#else /* USE_GLOBAL_TEAR_DOWN */
 static void (*global_tear_down)(void) = NULL;
-#endif /* USE_GLOBAL_TEAR_DOWN */
-static int num_tasks_succeeded = 0;
-static int num_tasks_failed = 0;
-static struct timespec g_time_start, g_time_end;
 
-static void freeTasks(void);
-static void freeTestTree(void);
+static int num_tasks;
+static int num_tests;
+static int *progress_step;
+static int *tasks_processed;
+static sem_t *lock;
+static test_stat_t *test_stat = NULL;
+static worker_t *worker;
 
-static float timeDiffSeconds(const struct timespec *start,
-                             const struct timespec *end)
+static int verbose = 0;
+static int parallel = DEFAULT_PARALLEL;
+static int timeout_s = DEFAULT_TIMEOUT;
+static int supress_fail = 0;
+
+static void setMemLimit(void)
 {
-    struct timespec diff;
-    float sec;
-
-    /* store into t difference between time_start and time_end */
-    if (end->tv_nsec > start->tv_nsec){
-        diff.tv_nsec = end->tv_nsec - start->tv_nsec;
-        diff.tv_sec = end->tv_sec - start->tv_sec;
-    }else{
-        diff.tv_nsec = end->tv_nsec + 1000000000L - start->tv_nsec;
-        diff.tv_sec = end->tv_sec - 1 - start->tv_sec;
-    }
-
-    sec  = diff.tv_nsec / 1000000000.f;
-    sec += diff.tv_sec;
-    return sec;
+    struct rlimit mem_limit;
+    mem_limit.rlim_cur = mem_limit.rlim_max = 4096ul * 1024ul * 1024ul;
+    setrlimit(RLIMIT_AS, &mem_limit);
 }
 
-static int fmtFilename(const char *task,
+static void usage(const char *progname)
+{
+    fprintf(stderr, "Usage: %s [-a] [-v]"
+                    " [-S task_substr] [-T task_name]"
+                    " [-s test_substr] [-t test_name]"
+                    " [-D] [-p num-parallel] [-m timeout-sec]"
+                    " [-f]\n",
+                    progname);
+    fprintf(stderr, "  -a       Use all tasks\n");
+    fprintf(stderr, "  -v       Increase logging\n");
+    fprintf(stderr, "  -S  str  Restrict tasks to those containing str\n");
+    fprintf(stderr, "  -T  str  Restrict tasks to exactly str\n");
+    fprintf(stderr, "  -s  str  Restrict tests to those containing str\n");
+    fprintf(stderr, "  -t  str  Restrict tests to exactly str\n");
+    fprintf(stderr, "  -D       Print tree of tasks and tests\n");
+    fprintf(stderr, "  -p  int  Run specified number of tasks in parallel"
+            " (default: %d)\n", DEFAULT_PARALLEL);
+    fprintf(stderr, "  -m  int  Timeout in seconds (default: %d)\n",
+            DEFAULT_TIMEOUT);
+    fprintf(stderr, "  -f       Suppress printing failures\n");
+    exit(-1);
+}
+
+static void parseOptions(int argc, char *argv[])
+{
+    int opt;
+    while ((opt = getopt(argc, argv, "havS:T:s:t:p:Dm:f")) != -1) {
+        switch (opt) {
+            case 'a':
+                tasksTestsSelectAll();
+                break;
+            case 'S':
+                tasksTestsSelectTasksMatch(optarg);
+                break;
+            case 'T':
+                tasksTestsSelectTask(optarg);
+                break;
+            case 's':
+                tasksTestsSelectTestsMatch(optarg);
+                break;
+            case 't':
+                tasksTestsSelectTest(optarg);
+                break;
+            case 'v':
+                verbose++;
+                break;
+            case 'p':
+                parallel = atoi(optarg);
+                break;
+            case 'D':
+                tasksTestsPrintPlan();
+                break;
+            case 'm':
+                timeout_s = atoi(optarg);
+                break;
+            case 'f':
+                supress_fail = 1;
+                break;
+            default:
+                usage(argv[0]);
+        }
+    }
+    if (optind != argc)
+        usage(argv[0]);
+
+    if (parallel < 1)
+        parallel = DEFAULT_PARALLEL;
+    if (timeout_s < 1)
+        timeout_s = DEFAULT_TIMEOUT;
+}
+
+static void updateTestStatRun(int test_id)
+{
+    sem_wait(lock);
+    test_stat[test_id].run = 1;
+    sem_post(lock);
+}
+
+static void updateTestStatTime(int test_id, float time)
+{
+    sem_wait(lock);
+    test_stat[test_id].time += time;
+    sem_post(lock);
+}
+
+static void updateTestStatFailed(int test_id)
+{
+    sem_wait(lock);
+    test_stat[test_id].failed += 1;
+    sem_post(lock);
+}
+
+static void updateTestStatSucceeded(int test_id)
+{
+    sem_wait(lock);
+    test_stat[test_id].succeeded += 1;
+    sem_post(lock);
+}
+
+static void progress(void)
+{
+    sem_wait(lock);
+    int i;
+    fprintf(stdout, "%d/%d", *tasks_processed, num_tasks);
+    for (i = 0; i < *progress_step; ++i)
+        fprintf(stdout, "*");
+    for (; i < MAX_PROGRESS_STEPS; ++i)
+        fprintf(stdout, " ");
+    fprintf(stdout, "\r");
+    fflush(stdout);
+    (*progress_step) = ((*progress_step) + 1) % MAX_PROGRESS_STEPS;
+    sem_post(lock);
+}
+
+static void reportSignal(const char *task_name,
+                         const char *test_name,
+                         int status)
+{
+    sem_wait(lock);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated by signal %d (%s).\n",
+            task_name, test_name,
+            WTERMSIG(status), strsignal(WTERMSIG(status)));
+    fflush(stdout);
+    sem_post(lock);
+}
+
+static void reportAbnormal(const char *task_name, const char *test_name)
+{
+    sem_wait(lock);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated abnormaly!\n", task_name, test_name);
+    fflush(stdout);
+    sem_post(lock);
+}
+
+static void reportExitStatus(const char *task_name, const char *test_name,
+                             int exit_status)
+{
+    sem_wait(lock);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated with exit status %d.\n",
+            task_name, test_name, exit_status);
+    fflush(stdout);
+    sem_post(lock);
+}
+
+static void reportNonEmptyOut(const char *task_name, const char *test_name)
+{
+    sem_wait(lock);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: non-empty *.out.tmp file.\n",
+            task_name, test_name);
+    fflush(stdout);
+    sem_post(lock);
+}
+
+static void reportDiffOut(const char *task_name, const char *test_name)
+{
+    sem_wait(lock);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: diff on .out files.\n", task_name, test_name);
+    fflush(stdout);
+    sem_post(lock);
+}
+
+static int fmtFilename(const char *task_name,
                        const char *test_name,
                        char *filename)
 {
-    int ret = sprintf(filename, "%s.%s", task, test_name);
+    int ret = sprintf(filename, "%s/%s", task_name, test_name);
+    /*
     char *c = filename;
     for (; *c != 0x0; ++c){
         if (*c == '/'){
             *c = '-';
         }
     }
+    */
     return ret;
 }
 
@@ -113,9 +238,9 @@ static void fmtBaseFilename(const char *task,
                             const char *suff,
                             char *filename)
 {
-    sprintf(filename, "reg/");
-    int siz = fmtFilename(task, test_name, filename + 4);
-    sprintf(filename + 4 + siz, ".%s", suff);
+    int siz = sprintf(filename, "reg/");
+    siz += fmtFilename(task, test_name, filename + siz);
+    sprintf(filename + siz, ".%s", suff);
 }
 
 static void fmtOutputFilename(const char *task,
@@ -123,9 +248,9 @@ static void fmtOutputFilename(const char *task,
                               const char *suff,
                               char *filename)
 {
-    sprintf(filename, "reg/tmp.");
-    int siz = fmtFilename(task, test_name, filename + 8);
-    sprintf(filename + 8 + siz, ".%s", suff);
+    int siz = sprintf(filename, "reg/");
+    siz += fmtFilename(task, test_name, filename + siz);
+    sprintf(filename + siz, ".%s.tmp", suff);
 }
 
 static size_t filesize(const char *fn)
@@ -139,14 +264,68 @@ static size_t filesize(const char *fn)
     return sz;
 }
 
-static void addFailure(const test_test_t *t, int status)
+static void redirectStdOutErr(const char *task_name,
+                              const char *test_name,
+                              int *fd_stdout,
+                              int *fd_stderr)
 {
-    FILE *failout = fopen(FAIL_FILENAME, "a");
+    char stdout_fn[256];
+    fmtOutputFilename(task_name, test_name, "out", stdout_fn);
+    fflush(stdout);
+    *fd_stdout = dup(fileno(stdout));
+    if (freopen(stdout_fn, "w", stdout) == NULL){
+        fprintf(stderr, "F: %s\n", stdout_fn);
+        fflush(stderr);
+        perror("Redirecting of stdout failed");
+        exit(-1);
+    }
+
+    char stderr_fn[256];
+    fmtOutputFilename(task_name, test_name, "err", stderr_fn);
+    fflush(stderr);
+    *fd_stderr = dup(fileno(stderr));
+    if (freopen(stderr_fn, "w", stderr) == NULL){
+        perror("Redirecting of stderr failed");
+        exit(-1);
+    }
+}
+
+static void restoreStdOutErr(int fd_stdout, int fd_stderr)
+{
+    fflush(stdout);
+    dup2(fd_stdout, fileno(stdout));
+    close(fd_stdout);
+    clearerr(stdout);
+
+    fflush(stderr);
+    dup2(fd_stderr, fileno(stderr));
+    close(fd_stderr);
+    clearerr(stderr);
+}
+
+static void writeRet(const char *task_name, const char *test_name, int ret)
+{
+    char ret_fn[256];
+    fmtOutputFilename(task_name, test_name, "ret", ret_fn);
+    FILE *retout = fopen(ret_fn, "w");
+    if (retout == NULL){
+        perror("Opening .ret file failed");
+        exit(-1);
+    }
+    fprintf(retout, "%d", ret);
+    fclose(retout);
+}
+
+static void addFail(const char *task_name, const char *test_name, int status)
+{
+    char fail_fn[256];
+    fmtOutputFilename(task_name, test_name, "fail", fail_fn);
+    FILE *failout = fopen(fail_fn, "w");
     if (failout == NULL){
         perror("Opening file for failures failed");
         exit(-1);
     }
-    fprintf(failout, "%s %s --> %d", TEST_TASK, t->name, WEXITSTATUS(status));
+    fprintf(failout, "%s %s --> %d", task_name, test_name, WEXITSTATUS(status));
     if (!WIFEXITED(status)){
         if (WIFSIGNALED(status)){
             fprintf(failout, " | signal %d (%s)",
@@ -157,453 +336,244 @@ static void addFailure(const test_test_t *t, int status)
     }
 
     char fn[512];
-    fmtOutputFilename(TEST_TASK, t->name, "out", fn);
+    fmtOutputFilename(task_name, test_name, "out", fn);
+    fprintf(failout, " | %s", fn);
+    fmtOutputFilename(task_name, test_name, "err", fn);
     fprintf(failout, " | %s", fn);
     fprintf(failout, "\n");
     fflush(failout);
     fclose(failout);
 
     char base[512];
-    fmtBaseFilename(TEST_TASK, t->name, "out", base);
+    fmtOutputFilename(task_name, test_name, "out", fn);
+    fmtBaseFilename(task_name, test_name, "out", base);
     if (access(base, F_OK) == 0){
         char cmd[2048];
         sprintf(cmd, "diff -y --suppress-common-lines -W150 %s %s"
                      " | head -15 | awk '{print \"  >OUT>\", $0}' >>%s",
-                base, fn, FAIL_FILENAME);
+                base, fn, fail_fn);
         system(cmd);
     }else if (filesize(fn) > 0){
         char cmd[2048];
         sprintf(cmd, "cat %s | head -15 | awk '{print \"  >OUT>\", substr($0, 0, 150)}'>>%s",
-                fn, FAIL_FILENAME);
+                fn, fail_fn);
         system(cmd);
     }
 
-    fmtOutputFilename(TEST_TASK, t->name, "err", fn);
-    fmtBaseFilename(TEST_TASK, t->name, "err", base);
-    if (access(base, F_OK) == 0){
-        char cmd[2048];
-        sprintf(cmd, "diff -y --suppress-common-lines -W150 %s %s"
-                     " | head -15 | awk '{print \"  >ERR>\", $0}' >>%s",
-                base, fn, FAIL_FILENAME);
-        system(cmd);
-    }else if (filesize(fn) > 0){
-        char cmd[2048];
-        sprintf(cmd, "cat %s | head -15 | awk '{print \"  >ERR>\", substr($0, 0, 150)}'>>%s",
-                fn, FAIL_FILENAME);
-        system(cmd);
-    }
+    fmtOutputFilename(task_name, test_name, "err", fn);
+    char cmd[2048];
+    sprintf(cmd, "cat %s | head -15 | awk '{print \"  >ERR>\", substr($0, 0, 150)}'>>%s",
+            fn, fail_fn);
+    system(cmd);
 }
 
-static void printNameTree(const test_test_t *t)
+static void tearDown(const test_def_t *t)
 {
-    if (t->parent != NULL)
-        printNameTree(t->parent);
-    if (t->parent != NULL)
-        fprintf(stdout, ".");
-    fprintf(stdout, "%s", t->name);
-}
-
-static void tearDown(test_test_t *t)
-{
-    if (t->test_fn_tear_down != NULL)
-        t->test_fn_tear_down();
-    if (t->parent != NULL)
-        tearDown(t->parent);
+    if (t->fn_tear_down != NULL)
+        t->fn_tear_down();
+    if (t->parent >= 0)
+        tearDown(tasksTestsGetTest(t->parent));
 }
 
 static void *thTimeout(void *_)
 {
-    sleep(TIMEOUT);
-    kill(getpid(), SIGTERM);
+    sleep(timeout_s);
+    kill(getpid(), SIGALRM);
     return NULL;
 }
 
-static void runTestTree(test_test_t *root,
-                        int depth,
-                        const int *test_ignore)
+static void runTest(int task_id, const test_def_t *test)
 {
-    if (tests_enabled && !root->enabled)
-        return;
-
+    progress();
+    fflush(stdout);
+    fflush(stderr);
     int pid = fork();
     if (pid < 0){
         perror("Fork error");
         exit(-1);
 
     }else if (pid == 0){
-        struct timespec time_start, time_end;
-        clock_gettime(CLOCK_MONOTONIC, &time_start);
+        TEST_TASK = tasksTestsGetTaskName(task_id);
 
-        if (root->test_fn != NULL){
+        int fd_stdout, fd_stderr;
+        redirectStdOutErr(tasksTestsGetTaskName(task_id), test->name,
+                          &fd_stdout, &fd_stderr);
 
-            fprintf(stdout, "%s ", TEST_TASK);
-            printNameTree(root);
-            fprintf(stdout, " ...\n");
-            fflush(stdout);
+        pddl_timer_t timer;
+        pddlTimerStart(&timer);
+        updateTestStatRun(test->id);
 
-            char stdout_fn[256];
-            fmtOutputFilename(TEST_TASK, root->name, "out", stdout_fn);
-            fflush(stdout);
-            int fd_stdout = dup(fileno(stdout));
-            if (freopen(stdout_fn, "w", stdout) == NULL){
-                perror("Redirecting of stdout failed");
-                exit(-1);
-            }
+        pthread_t thtimeout;
+        pthread_create(&thtimeout, NULL, thTimeout, NULL);
 
-            char stderr_fn[256];
-            fmtOutputFilename(TEST_TASK, root->name, "err", stderr_fn);
-            fflush(stderr);
-            int fd_stderr = dup(fileno(stderr));
-            if (freopen(stderr_fn, "w", stderr) == NULL){
-                perror("Redirecting of stderr failed");
-                exit(-1);
-            }
+        test->fn();
 
-            pthread_t thtimeout;
-            if (TIMEOUT > 0)
-                pthread_create(&thtimeout, NULL, thTimeout, NULL);
-            root->test_fn();
-            if (TIMEOUT > 0)
-                pthread_cancel(thtimeout);
+        pthread_cancel(thtimeout);
+        pthread_join(thtimeout, NULL);
 
-            fflush(stdout);
-            dup2(fd_stdout, fileno(stdout));
-            close(fd_stdout);
-            clearerr(stdout);
+        pddlTimerStop(&timer);
+        updateTestStatTime(test->id, pddlTimerElapsedInSF(&timer));
 
+        restoreStdOutErr(fd_stdout, fd_stderr);
 
-            fflush(stderr);
-            dup2(fd_stderr, fileno(stderr));
-            close(fd_stderr);
-            clearerr(stderr);
-
-            clock_gettime(CLOCK_MONOTONIC, &time_end);
-            fprintf(stdout, "%s ", TEST_TASK);
-            printNameTree(root);
-            float elapsed = timeDiffSeconds(&time_start, &time_end);
-            tests_time_sum[root->id] += elapsed;
-            fprintf(stdout, " DONE [%.2fs / %.2fs]\n",
-                    elapsed, tests_time_sum[root->id]);
-            fflush(stdout);
-        }
-
-        for (int i = 0; i < root->child_size; ++i){
-            test_test_t *next = root->child[i];
-            if (test_ignore[next->id])
+        for (int i = 0; i < test->children_size; ++i){
+            if (!tasksTestsIsEnabled(task_id, test->children[i]))
                 continue;
-            runTestTree(next, depth + 1, test_ignore);
+            runTest(task_id, tasksTestsGetTest(test->children[i]));
         }
 
-
-        tearDown(root);
+        tearDown(test);
         if (global_tear_down != NULL)
             global_tear_down();
-
-        clock_gettime(CLOCK_MONOTONIC, &time_end);
-        fprintf(stdout, "%s ", TEST_TASK);
-        printNameTree(root);
-        fprintf(stdout, " TearDown [%.2fs]\n",
-                timeDiffSeconds(&time_start, &time_end));
-        fflush(stdout);
-
-        freeTasks();
-        freeTestTree();
-
         exit(0);
 
-    }else{ // pid > 0
+    }else{
         int status;
         wait(&status);
 
-        char ret_fn[256];
-        fmtOutputFilename(TEST_TASK, root->name, "ret", ret_fn);
-        FILE *retout = fopen(ret_fn, "w");
-        if (retout == NULL){
-            perror("Opening .ret file failed");
-            exit(-1);
-        }
-
+        const char *task_name = tasksTestsGetTaskName(task_id);
         int failed = 0;
         if (!WIFEXITED(status)){ /* if child process ends up abnormaly */
             if (WIFSIGNALED(status)){
-                fprintf(stdout, "%s was terminated by signal %d (%s).\n",
-                        root->name, WTERMSIG(status), strsignal(WTERMSIG(status)));
-                fprintf(stdout, "%s FAILED\n", root->name);
+                reportSignal(task_name, test->name, status);
             }else{
-                fprintf(stdout, "%s terminated abnormaly!\n", root->name);
-                fprintf(stdout, "%s FAILED\n", root->name);
+                reportAbnormal(task_name, test->name);
             }
-
-            tests_stats[root->id] = -1;
-            fprintf(retout, "1\n");
+            writeRet(task_name, test->name, 1);
             failed = 1;
 
         }else{
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0){
-                fprintf(stdout, "%s terminated with exit status %d.\n",
-                        root->name, exit_status);
-                fprintf(stdout, "%s FAILED\n", root->name);
-                tests_stats[root->id] = -1;
+                reportExitStatus(task_name, test->name, exit_status);
                 failed = 1;
-            }else{
-                if (tests_stats[root->id] == 0)
-                    tests_stats[root->id] = 1;
             }
-            fprintf(retout, "%d\n", exit_status);
+            writeRet(task_name, test->name, exit_status);
         }
 
-        fclose(retout);
-
         char fn[512];
-        fmtOutputFilename(TEST_TASK, root->name, "out", fn);
+        fmtOutputFilename(task_name, test->name, "out", fn);
 
         char base[512];
-        fmtBaseFilename(TEST_TASK, root->name, "out", base);
+        fmtBaseFilename(task_name, test->name, "out", base);
         if (access(base, F_OK) == 0){
             char cmd[2048];
             sprintf(cmd, "diff -q %s %s", base, fn);
             int ret = system(cmd);
             if (ret > 0){
-                tests_stats[root->id] = -1;
+                reportDiffOut(task_name, test->name);
                 failed = 1;
             }
 
         }else if (filesize(fn) > 0){
-            tests_stats[root->id] = -1;
+            reportNonEmptyOut(task_name, test->name);
             failed = 1;
         }
 
-        if (failed)
-            addFailure(root, status);
+        if (failed){
+            addFail(task_name, test->name, status);
+            updateTestStatFailed(test->id);
+        }else{
+            updateTestStatSucceeded(test->id);
+        }
     }
 }
 
-static void runTask(const task_t *task)
+static int _runWorker(worker_t *worker, int task_id)
 {
-    struct timespec time_start, time_end;
-    clock_gettime(CLOCK_MONOTONIC, &time_start);
-    fprintf(stdout, "Task %s ...\n", task->task);
-    fflush(stdout);
+    worker->task_id = task_id;
+    pid_t pid = fork();
 
-    bzero(tests_stats, sizeof(int) * tests_size);
-    TEST_TASK = task->task;
-    if (!task->found_run){
-        for (int i = 0; i < tests_size; ++i){
-            if (tests[i].parent == NULL && !tests[i].is_explicit)
-                runTestTree(tests + i, 0, task->test_ignore);
-        }
+    if (pid < 0){
+        perror("Fork error");
+        exit(-1);
 
-    }else{
-        for (int i = 0; i < tests_size; ++i){
-            if (task->test_run[i])
-                runTestTree(tests + i, 0, task->test_ignore);
-        }
-    }
-
-    int failed = 0;
-    for (int i = 0; i < tests_size; ++i){
-        if (tests_stats[i] < 0){
-            tests[i].num_failed += 1;
-            failed = 1;
-        }else if (tests_stats[i] > 0){
-            tests[i].num_succeeded += 1;
-        }
-        tests[i].time_sum = tests_time_sum[i];
-    }
-    if (failed){
-        num_tasks_failed += 1;
-    }else{
-        num_tasks_succeeded += 1;
-    }
-
-
-    clock_gettime(CLOCK_MONOTONIC, &time_end);
-    fprintf(stdout, "Task %s DONE [%.2fs]\n",
-            task->task, timeDiffSeconds(&time_start, &time_end));
-    fflush(stdout);
-}
-
-static void buildTestTree(void)
-{
-    tests_size = test_set_size;
-    tests = malloc(sizeof(test_test_t) * tests_size);
-    bzero(tests, sizeof(test_test_t) * tests_size);
-    for (int ti = 0; ti < test_set_size; ++ti){
-        tests[ti].id = ti;
-        tests[ti].name = test_set[ti].name;
-        tests[ti].is_explicit = test_set[ti].is_explicit;
-        tests[ti].test_fn = test_set[ti].fn;
-        tests[ti].test_fn_tear_down = test_set[ti].fn_tear_down;
-        tests[ti].child = malloc(sizeof(test_test_t *) * tests_size);
-    }
-
-    for (int ti = 0; ti < test_set_size; ++ti){
-        for (int i = 0; i < tests_size; ++i){
-            if (strcmp(test_set[ti].parent, tests[i].name) == 0){
-                tests[ti].parent = tests + i;
-                tests[i].child[tests[i].child_size++] = tests + ti;
-                break;
+    }else if (pid == 0){
+        for (int ti = 0; ti < num_tests; ++ti){
+            const test_def_t *test = tasksTestsGetTest(ti);
+            assert(test->id == ti);
+            if (test->parent < 0 && tasksTestsIsEnabled(task_id, ti)){
+                runTest(task_id, test);
             }
         }
+
+        exit(0);
+
+    }else{ // pid > 0
+        if (verbose >= 1){
+            sem_wait(lock);
+            printf("Task %s | worker: %d, pid: %d\n",
+                   tasksTestsGetTaskName(task_id), worker->id, (int)pid);
+            fflush(stdout);
+            sem_post(lock);
+        }
+        worker->pid = pid;
+        return 1;
     }
 }
 
-static void freeTestTree(void)
+static int runWorker(worker_t *worker, int task_id)
 {
-    for (int i = 0; i < tests_size; ++i){
-        free(tests[i].child);
+    for (int i = 0; i < parallel; ++i){
+        if (worker[i].pid == -1)
+            return _runWorker(worker + i, task_id);
     }
-    free(tests);
+    assert(0);
 }
 
-static void enableTest(test_test_t *t)
+static int _waitForWorker(worker_t *worker, int status)
 {
-    t->enabled = 1;
-    if (t->parent != NULL)
-        enableTest(t->parent);
+    assert(worker->task_id >= 0);
+    assert(worker->pid >= 0);
+    if (verbose >= 1){
+        sem_wait(lock);
+        printf("Task %s | worker: %d, pid: %d | DONE\n",
+               tasksTestsGetTaskName(worker->task_id), worker->id,
+               (int)worker->pid);
+        fflush(stdout);
+        sem_post(lock);
+    }
+    worker->pid = -1;
+    worker->task_id = -1;
+    return 0;
 }
 
-static void filterTestsSubstr(const char *name)
+static int waitForWorker(worker_t *worker)
 {
-    tests_enabled = 1;
-    for (int i = 0; i < tests_size; ++i){
-        if (strstr(tests[i].name, name) != NULL)
-            enableTest(tests + i);
-    }
-}
-
-static void filterTests(const char *name)
-{
-    tests_enabled = 1;
-    for (int i = 0; i < tests_size; ++i){
-        if (strcmp(tests[i].name, name) == 0)
-            enableTest(tests + i);
-    }
-}
-
-static task_t *addTask(tasks_t *tasks, const char *name)
-{
-    if (tasks->size == tasks->alloc){
-        if (tasks->alloc == 0)
-            tasks->alloc = 8;
-        tasks->alloc *= 2;
-        tasks->tasks = realloc(tasks->tasks, sizeof(task_t) * tasks->alloc);
-    }
-
-    task_t *task = tasks->tasks + tasks->size++;
-    bzero(task, sizeof(*task));
-    task->task = strdup(name);
-    task->test_run = calloc(tests_size, sizeof(int));
-    task->test_ignore = calloc(tests_size, sizeof(int));
-    task->found_run = 0;
-    for (int i = 0; i < tests_size; ++i){
-        if (tests[i].is_explicit && tests[i].parent == NULL)
-            task->test_ignore[i] = 1;
-    }
-    return task;
-}
-
-static void disableTaskTest(task_t *task, const char *test_name)
-{
-    for (int i = 0; i < tests_size; ++i){
-        if (strcmp(test_name, tests[i].name) == 0){
-            task->test_ignore[i] = 1;
-            task->test_run[i] = 0;
+    int status;
+    pid_t pid = wait(&status);
+    for (int i = 0; i < parallel; ++i){
+        if (worker[i].pid == pid){
+            return _waitForWorker(worker + i, status);
         }
     }
-}
-
-static void enableTaskTest(task_t *task, const char *test_name)
-{
-    for (int i = 0; i < tests_size; ++i){
-        if (strcmp(test_name, tests[i].name) == 0){
-            task->test_ignore[i] = 0;
-            task->test_run[i] = 1;
-            task->found_run = 1;
-        }
-    }
-}
-
-static void _freeTasks(tasks_t *tasks)
-{
-    for (int i = 0; i < tasks->size; ++i){
-        free(tasks->tasks[i].task);
-        free(tasks->tasks[i].test_run);
-        free(tasks->tasks[i].test_ignore);
-    }
-    if (tasks->tasks != NULL)
-        free(tasks->tasks);
-}
-
-#include "test.tasks.base.in.c"
-#include "test.tasks.all.in.c"
-
-static void setUpTasks(void)
-{
-    tasks = &tasks_base;
-    addTasks_base();
-    addTasks_all();
-}
-
-
-static void freeTasks(void)
-{
-    _freeTasks(&tasks_base);
-    _freeTasks(&tasks_all);
-}
-
-static void filterTasksSubstr(const char *s)
-{
-    for (int i = 0; i < tasks->size; ++i){
-        if (strstr(tasks->tasks[i].task, s) == NULL)
-            tasks->tasks[i].disabled = 1;
-    }
-}
-
-static void filterTasks(const char *s)
-{
-    for (int i = 0; i < tasks->size; ++i){
-        if (strcmp(tasks->tasks[i].task, s) != 0)
-            tasks->tasks[i].disabled = 1;
-    }
+    assert(0);
+    return 0;
 }
 
 static void printReportFailures(void)
 {
-    if (num_tasks_failed == 0)
-        return;
-
-    FILE *fin = fopen(FAIL_FILENAME, "r");
-    if (fin == NULL)
-        return;
-
-    printf("\n");
-
-    char buf[512];
-    size_t r;
-    while ((r = fread(buf, sizeof(char), 512, fin)) > 0)
-        fwrite(buf, sizeof(char), r, stdout);
-    fclose(fin);
+    system("find reg/ -name '*.fail.tmp' | sort | xargs -n1 cat");
 }
 
-static void printReportTest(test_test_t *t,
+static void printReportTest(const char *test_name,
+                            const test_stat_t *stat,
                             int name_len,
                             int succ_len,
                             int fail_len)
 {
-    printf("%s", t->name);
-    for (int i = strlen(t->name); i < name_len; ++i)
+    printf("%s", test_name);
+    for (int i = strlen(test_name); i < name_len; ++i)
         printf(" ");
 
     printf(" | ");
-    printf("%*i", succ_len, t->num_succeeded);
+    printf("%*i", succ_len, stat->succeeded);
 
     printf(" | ");
-    printf("%*i", fail_len, t->num_failed);
+    printf("%*i", fail_len, stat->failed);
 
     printf(" | ");
-    printf("%7.2fs", t->time_sum);
+    printf("%7.2fs", stat->time);
 
     printf("\n");
 }
@@ -611,46 +581,35 @@ static void printReportTest(test_test_t *t,
 static void printReport(void)
 {
     int name_len = 5;
-    for (int i = 0; i < tests_size; ++i){
-        if (tests[i].num_succeeded == 0 && tests[i].num_failed == 0)
+    int num_succeeded = 0;
+    int num_failed = 0;
+    float time = 0;
+    for (int i = 0; i < num_tests; ++i){
+        const test_def_t *test = tasksTestsGetTest(i);
+        if (!test_stat[i].run)
             continue;
-        if (strlen(tests[i].name) > name_len)
-            name_len = strlen(tests[i].name);
+        if (strlen(test->name) > name_len)
+            name_len = strlen(test->name);
+        num_succeeded += test_stat[i].succeeded;
+        num_failed += test_stat[i].failed;
+        time += test_stat[i].time;
     }
 
     int succ_len = 4;
-    int n = num_tasks_succeeded;
+    int n = num_succeeded;
     int s = 1;
     while ((n = n / 10))
         ++s;
     if (s > succ_len)
         succ_len = s;
-    for (int i = 0; i < tests_size; ++i){
-        int n = tests[i].num_succeeded;
-        int s = 1;
-        while ((n = n / 10))
-            ++s;
-        if (s > succ_len)
-            succ_len = s;
-    }
 
     int fail_len = 4;
-    n = num_tasks_failed;
+    n = num_failed;
     s = 1;
     while ((n = n / 10))
         ++s;
     if (s > fail_len)
         fail_len = s;
-    for (int i = 0; i < tests_size; ++i){
-        if (tests[i].num_succeeded == 0 && tests[i].num_failed == 0)
-            continue;
-        int n = tests[i].num_failed;
-        int s = 1;
-        while ((n = n / 10))
-            ++s;
-        if (s > fail_len)
-            fail_len = s;
-    }
 
     printf("\n");
     for (int i = 0; i < name_len; ++i)
@@ -660,114 +619,107 @@ static void printReport(void)
         printf("-");
     printf("------------------\n");
 
-    for (int i = 0; i < tests_size; ++i){
-        if (tests[i].num_succeeded == 0 && tests[i].num_failed == 0)
+    for (int i = 0; i < num_tests; ++i){
+        if (!test_stat[i].run)
             continue;
-        printReportTest(tests + i, name_len, succ_len, fail_len);
+        const test_def_t *test = tasksTestsGetTest(i);
+        printReportTest(test->name, test_stat + i, name_len, succ_len, fail_len);
     }
 
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
         printf("-");
     printf("------------------\n");
-    printf("tasks");
-    for (int i = 5; i < name_len; ++i)
+    printf("sum");
+    for (int i = 3; i < name_len; ++i)
         printf(" ");
 
     printf(" | ");
-    printf("%*i", succ_len, num_tasks_succeeded);
+    printf("%*i", succ_len, num_succeeded);
 
     printf(" | ");
-    printf("%*i", fail_len, num_tasks_failed);
-    printf(" | %7.2fs", timeDiffSeconds(&g_time_start, &g_time_end));
+    printf("%*i", fail_len, num_failed);
+    printf(" | %7.2fs", time);
     printf("\n");
 
-    printReportFailures();
+    fflush(stdout);
+    fflush(stderr);
+
+    if (!supress_fail)
+        printReportFailures();
 }
 
 static void cleanRegDir(void)
 {
-    DIR *dp;
-    struct dirent *ep;     
-    dp = opendir ("reg/");
-
-    if (dp != NULL){
-        while ((ep = readdir(dp)) != NULL){
-            if (strncmp(ep->d_name, "tmp.", 4) == 0){
-                char f[512];
-                sprintf(f, "reg/%s", ep->d_name);
-                unlink(f);
-            }
-        }
-        closedir(dp);
-    }
-}
-
-static void usage(char *p)
-{
-    fprintf(stderr, "Usage: %s [-a]"
-                    " [-S task_substr] [-T task_name]"
-                    " [-s test_substr] [-t test_name]\n", p);
-    exit(-1);
+    system("find reg/ -name '*.tmp' -exec rm '{}' ';'");
 }
 
 int main(int argc, char *argv[])
 {
-    struct rlimit mem_limit;
-    mem_limit.rlim_cur = mem_limit.rlim_max = 4096ul * 1024ul * 1024ul;
-    setrlimit(RLIMIT_AS, &mem_limit);
+    tasksTestsInit();
+    setMemLimit();
+    parseOptions(argc, argv);
 
     cleanRegDir();
-    buildTestTree();
-    setUpTasks();
+    global_tear_down = tasksTestsGlobalTearDown();
 
-    int opt;
-    while ((opt = getopt(argc, argv, "aS:T:s:t:")) != -1) {
-        switch (opt) {
-            case 'a':
-                tasks = &tasks_all;
-                break;
-            case 'S':
-                filterTasksSubstr(optarg);
-                break;
-            case 'T':
-                filterTasks(optarg);
-                break;
-            case 's':
-                filterTestsSubstr(optarg);
-                break;
-            case 't':
-                filterTests(optarg);
-                break;
-            default: /* '?' */
-                usage(argv[0]);
-        }
-    }
-    if (optind != argc)
-        usage(argv[0]);
+    num_tasks = tasksTestsNumTasks();
+    num_tests = tasksTestsNumTests();
 
+    printf("tasks: %d/%d, tests: %d, parallel: %d, timeout: %ds\n",
+           tasksTestsNumActiveTasks(), num_tasks, num_tests,
+           parallel, timeout_s);
+    fflush(stdout);
 
-    size_t shared_size = sizeof(int) * tests_size;
-    shared_size += sizeof(float) * tests_size;
+    size_t shared_size = 0;
+    shared_size += sizeof(int);
+    shared_size += sizeof(int);
+    shared_size += sizeof(sem_t);
+    shared_size += sizeof(test_stat_t) * num_tests;
     void *shared_mem = mmap(NULL, shared_size, PROT_WRITE | PROT_READ,
                             MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-    tests_stats = shared_mem;
-    tests_time_sum = (float *)(tests_stats + tests_size);
+    assert(shared_mem != NULL);
+    bzero(shared_mem, shared_size);
+    progress_step = shared_mem;
+    tasks_processed = (int *)(progress_step + 1);
+    lock = (sem_t *)(tasks_processed + 1);
+    test_stat = (test_stat_t *)(lock + 1);
 
-    clock_gettime(CLOCK_MONOTONIC, &g_time_start);
-    for (int i = 0; i < tasks->size; ++i){
-        if (!tasks->tasks[i].disabled)
-            runTask(tasks->tasks + i);
+    int ret;
+    ret = sem_init(lock, 1, 1);
+    assert(ret == 0);
+
+    worker = alloca(sizeof(worker_t) * parallel);
+    for (int w = 0; w < parallel; ++w){
+        worker[w].id = w;
+        worker[w].pid = -1;
     }
-    clock_gettime(CLOCK_MONOTONIC, &g_time_end);
 
-    munmap(shared_mem, shared_size);
+    int num_active_workers = 0;
+    for (int task_id = 0; task_id < num_tasks; ++task_id){
+        sem_wait(lock);
+        *tasks_processed += 1;
+        sem_post(lock);
+        if (!tasksTestsIsEnabled(task_id, -1))
+            continue;
+
+        if (num_active_workers == parallel){
+            waitForWorker(worker);
+            --num_active_workers;
+        }
+        num_active_workers += runWorker(worker, task_id);
+    }
+
+    while (num_active_workers > 0){
+        waitForWorker(worker);
+        --num_active_workers;
+    }
 
     printReport();
-    int ret = (num_tasks_failed == 0);
 
-    freeTasks();
-    freeTestTree();
-    if (ret)
-        return 0;
-    return 1;
+    ret = sem_destroy(lock);
+    assert(ret == 0);
+    ret = munmap(shared_mem, shared_size);
+    assert(ret == 0);
+
+    return 0;
 }
