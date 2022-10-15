@@ -78,12 +78,12 @@ Predicate[16]:
     not-occupied: 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
 Function[0]:
 Action[2]:
-    pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3 ?from-tank-slot:5 ?to-tank-slot:5
-        pre: (and (RW:first ?first-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?to-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch) (R:tank-slot-product-location ?to-tank-slot ?product-batch-atom-in ?to-area) (RW:occupied ?to-tank-slot) (R:tank-slot-product-location ?from-tank-slot ?product-first-batch ?from-area) (RW:not-occupied ?from-tank-slot))
-        eff: (and (W:last ?batch-atom-in ?pipe) (RW:first ?batch-atom-in ?pipe) (RW:not-occupied ?to-tank-slot) (RW:on ?first-batch-atom ?from-area) (RW:occupied ?from-tank-slot))
     push-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3 ?from-tank-slot:5 ?to-tank-slot:5
         pre: (and (RW:first ?first-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?from-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch) (R:tank-slot-product-location ?from-tank-slot ?product-batch-atom-in ?from-area) (RW:occupied ?from-tank-slot) (R:tank-slot-product-location ?to-tank-slot ?product-first-batch ?to-area) (RW:not-occupied ?to-tank-slot))
         eff: (and (RW:first ?batch-atom-in ?pipe) (W:last ?batch-atom-in ?pipe) (RW:not-occupied ?from-tank-slot) (RW:on ?first-batch-atom ?to-area) (RW:occupied ?to-tank-slot))
+    pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3 ?from-tank-slot:5 ?to-tank-slot:5
+        pre: (and (RW:first ?first-batch-atom ?pipe) (R:connect ?from-area ?to-area ?pipe) (RW:on ?batch-atom-in ?to-area) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch) (R:tank-slot-product-location ?to-tank-slot ?product-batch-atom-in ?to-area) (RW:occupied ?to-tank-slot) (R:tank-slot-product-location ?from-tank-slot ?product-first-batch ?from-area) (RW:not-occupied ?from-tank-slot))
+        eff: (and (W:last ?batch-atom-in ?pipe) (RW:first ?batch-atom-in ?pipe) (RW:not-occupied ?to-tank-slot) (RW:on ?first-batch-atom ?from-area) (RW:occupied ?from-tank-slot))
 Init[105]:
   S:(normal s12)
   S:(normal s13)

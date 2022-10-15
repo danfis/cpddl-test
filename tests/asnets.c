@@ -18,6 +18,8 @@ TEST(asnets_task, asnets)
     for (int oi = 0; oi < task.strips.op.op_size; ++oi){
         assert(strcmp(task.strips.op.op[oi]->name,
                       task.fdr.op.op[oi]->name) == 0);
+        fprintf(stderr, "X %s\n", task.strips.op.op[oi]->name);
+        fflush(stderr);
         PDDL_ISET(pos);
         for (int reli = 0; reli < task.relatedness.rel_size; ++reli){
             const pddl_asnets_task_relate_t *rel;

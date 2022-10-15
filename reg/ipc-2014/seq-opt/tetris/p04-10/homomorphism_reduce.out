@@ -48,9 +48,6 @@ Predicate[5]:
 Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[5]:
-    move_l_down: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?element:3
-        pre: (and (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (R:connected ?xy_initial2 ?xy_final) (R:connected ?xy_initial3 ?xy_final2) (R:connected ?xy_final2 ?xy_final))
-        eff: (and (RW:clear ?xy_initial3) (RW:clear ?xy_initial1) (RW:at_right_l ?element ?xy_initial2 ?xy_final ?xy_final2) (increase (total-cost) 3))
     move_two: ?xy_initial1:4 ?xy_initial2:4 ?xy_final:4 ?element:2
         pre: (and (RW:clear ?xy_final) (RW:at_two ?element ?xy_initial1 ?xy_initial2) (R:connected ?xy_initial2 ?xy_final))
         eff: (and (RW:clear ?xy_initial1) (RW:at_two ?element ?xy_initial2 ?xy_final) (increase (total-cost) 2))
@@ -63,6 +60,9 @@ Action[5]:
     move_l_up: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?xy_between_final:4 ?element:3
         pre: (and (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (R:connected ?xy_initial1 ?xy_final) (R:connected ?xy_initial3 ?xy_final2) (R:connected ?xy_initial1 ?xy_final2) (R:connected ?xy_final ?xy_between_final) (R:connected ?xy_final2 ?xy_between_final))
         eff: (and (RW:clear ?xy_initial2) (RW:clear ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_initial1 ?xy_final2) (increase (total-cost) 3))
+    move_l_down: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?element:3
+        pre: (and (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (R:connected ?xy_initial2 ?xy_final) (R:connected ?xy_initial3 ?xy_final2) (R:connected ?xy_final2 ?xy_final))
+        eff: (and (RW:clear ?xy_initial3) (RW:clear ?xy_initial1) (RW:at_right_l ?element ?xy_initial2 ?xy_final ?xy_final2) (increase (total-cost) 3))
 Init[97]:
   S:(connected f0-0f f0-1f)
   S:(connected f0-1f f0-0f)
