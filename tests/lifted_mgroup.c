@@ -718,11 +718,15 @@ static void lmgCompileInCheckPruning(const pddl_t *pddl,
 
 TEST_COND(lmg_compile_in, lmg, SQLITE)
 {
+    pddl_compile_in_lmg_config_t cfg = PDDL_COMPILE_IN_LMG_CONFIG_INIT;
+    cfg.prune_mutex = 1;
+    cfg.prune_dead_end = 1;
+
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
     pddlErrInfoDisablePrintResources(&C.err, 1);
     pddlErrInfoEnable(&C.err, stdout);
-    if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &C.err))
+    if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &cfg, &C.err))
         pddlPrintDebug(&pddl, stdout);
     pddlErrInfoEnable(&C.err, NULL);
     fflush(stdout);
