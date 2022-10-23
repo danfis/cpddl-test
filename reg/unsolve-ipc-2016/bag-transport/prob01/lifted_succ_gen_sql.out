@@ -1,0 +1,182 @@
+Step 0 (at-vehicle truck-2 city-3-loc-1) (capacity truck-2 capacity-3) (at-vehicle truck-1 city-1-loc-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0)
+size: 6
+drive truck-1 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-1 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-1 city-1-loc-2)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-2 city-3-loc-1 city-1-loc-1 :: cost: 186
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-3-loc-1)
+drive truck-2 city-3-loc-1 city-3-loc-2 :: cost: 41
+    add: (at-vehicle truck-2 city-3-loc-2)
+    del: (at-vehicle truck-2 city-3-loc-1)
+drive truck-2 city-3-loc-1 city-3-loc-3 :: cost: 53
+    add: (at-vehicle truck-2 city-3-loc-3)
+    del: (at-vehicle truck-2 city-3-loc-1)
+pick-up truck-2 city-3-loc-1 package-bag2 capacity-2 capacity-3 pnum1 pnum0 pnum0 pnum1 pnum1 :: cost: 1
+    add: (count-package package-bag2 city-3-loc-1 pnum0) (count-package package-bag2 truck-2 pnum1) (capacity truck-2 capacity-2)
+    del: (capacity truck-2 capacity-3) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag2 truck-2 pnum0)
+Step 1 (at-vehicle truck-2 city-3-loc-1) (capacity truck-2 capacity-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-1 city-1-loc-1)
+size: 7
+drive truck-1 city-1-loc-1 city-3-loc-1 :: cost: 186
+    add: (at-vehicle truck-1 city-3-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-1 city-1-loc-1 city-1-loc-3 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-3)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-1 city-1-loc-1 city-2-loc-3 :: cost: 139
+    add: (at-vehicle truck-1 city-2-loc-3)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-2 city-3-loc-1 city-1-loc-1 :: cost: 186
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-3-loc-1)
+drive truck-2 city-3-loc-1 city-3-loc-2 :: cost: 41
+    add: (at-vehicle truck-2 city-3-loc-2)
+    del: (at-vehicle truck-2 city-3-loc-1)
+drive truck-2 city-3-loc-1 city-3-loc-3 :: cost: 53
+    add: (at-vehicle truck-2 city-3-loc-3)
+    del: (at-vehicle truck-2 city-3-loc-1)
+pick-up truck-2 city-3-loc-1 package-bag2 capacity-2 capacity-3 pnum1 pnum0 pnum0 pnum1 pnum1 :: cost: 1
+    add: (count-package package-bag2 city-3-loc-1 pnum0) (count-package package-bag2 truck-2 pnum1) (capacity truck-2 capacity-2)
+    del: (capacity truck-2 capacity-3) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag2 truck-2 pnum0)
+Step 2 (at-vehicle truck-2 city-3-loc-1) (capacity truck-2 capacity-3) (at-vehicle truck-1 city-1-loc-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0)
+size: 6
+drive truck-1 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-1 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-1 city-1-loc-2)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-2 city-3-loc-1 city-1-loc-1 :: cost: 186
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-3-loc-1)
+drive truck-2 city-3-loc-1 city-3-loc-2 :: cost: 41
+    add: (at-vehicle truck-2 city-3-loc-2)
+    del: (at-vehicle truck-2 city-3-loc-1)
+drive truck-2 city-3-loc-1 city-3-loc-3 :: cost: 53
+    add: (at-vehicle truck-2 city-3-loc-3)
+    del: (at-vehicle truck-2 city-3-loc-1)
+pick-up truck-2 city-3-loc-1 package-bag2 capacity-2 capacity-3 pnum1 pnum0 pnum0 pnum1 pnum1 :: cost: 1
+    add: (count-package package-bag2 city-3-loc-1 pnum0) (count-package package-bag2 truck-2 pnum1) (capacity truck-2 capacity-2)
+    del: (capacity truck-2 capacity-3) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag2 truck-2 pnum0)
+Step 3 (capacity truck-2 capacity-3) (at-vehicle truck-1 city-1-loc-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-2 city-1-loc-1)
+size: 5
+drive truck-1 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-1 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-1 city-1-loc-2)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-2 city-1-loc-1 city-3-loc-1 :: cost: 186
+    add: (at-vehicle truck-2 city-3-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-1)
+drive truck-2 city-1-loc-1 city-1-loc-3 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-3)
+    del: (at-vehicle truck-2 city-1-loc-1)
+drive truck-2 city-1-loc-1 city-2-loc-3 :: cost: 139
+    add: (at-vehicle truck-2 city-2-loc-3)
+    del: (at-vehicle truck-2 city-1-loc-1)
+Step 4 (capacity truck-2 capacity-3) (at-vehicle truck-1 city-1-loc-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-2 city-1-loc-3)
+size: 4
+drive truck-1 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-1 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-1 city-1-loc-2)
+    del: (at-vehicle truck-1 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-2 city-1-loc-2)
+    del: (at-vehicle truck-2 city-1-loc-3)
+Step 5 (capacity truck-2 capacity-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-1 city-1-loc-1) (at-vehicle truck-2 city-1-loc-3)
+size: 5
+drive truck-1 city-1-loc-1 city-3-loc-1 :: cost: 186
+    add: (at-vehicle truck-1 city-3-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-1 city-1-loc-1 city-1-loc-3 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-3)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-1 city-1-loc-1 city-2-loc-3 :: cost: 139
+    add: (at-vehicle truck-1 city-2-loc-3)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-2 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-2 city-1-loc-2)
+    del: (at-vehicle truck-2 city-1-loc-3)
+Step 6 (capacity truck-2 capacity-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-1 city-3-loc-1) (at-vehicle truck-2 city-1-loc-3)
+size: 6
+drive truck-1 city-3-loc-1 city-1-loc-1 :: cost: 186
+    add: (at-vehicle truck-1 city-1-loc-1)
+    del: (at-vehicle truck-1 city-3-loc-1)
+drive truck-1 city-3-loc-1 city-3-loc-2 :: cost: 41
+    add: (at-vehicle truck-1 city-3-loc-2)
+    del: (at-vehicle truck-1 city-3-loc-1)
+drive truck-1 city-3-loc-1 city-3-loc-3 :: cost: 53
+    add: (at-vehicle truck-1 city-3-loc-3)
+    del: (at-vehicle truck-1 city-3-loc-1)
+drive truck-2 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-2 city-1-loc-2)
+    del: (at-vehicle truck-2 city-1-loc-3)
+pick-up truck-1 city-3-loc-1 package-bag2 capacity-2 capacity-3 pnum1 pnum0 pnum0 pnum1 pnum1 :: cost: 1
+    add: (count-package package-bag2 city-3-loc-1 pnum0) (count-package package-bag2 truck-1 pnum1) (capacity truck-1 capacity-2)
+    del: (capacity truck-1 capacity-3) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag2 truck-1 pnum0)
+Step 7 (capacity truck-2 capacity-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-1 city-1-loc-1) (at-vehicle truck-2 city-1-loc-3)
+size: 5
+drive truck-1 city-1-loc-1 city-3-loc-1 :: cost: 186
+    add: (at-vehicle truck-1 city-3-loc-1)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-1 city-1-loc-1 city-1-loc-3 :: cost: 22
+    add: (at-vehicle truck-1 city-1-loc-3)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-1 city-1-loc-1 city-2-loc-3 :: cost: 139
+    add: (at-vehicle truck-1 city-2-loc-3)
+    del: (at-vehicle truck-1 city-1-loc-1)
+drive truck-2 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-2 city-1-loc-2)
+    del: (at-vehicle truck-2 city-1-loc-3)
+Step 8 (capacity truck-2 capacity-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-1 city-2-loc-3) (at-vehicle truck-2 city-1-loc-3)
+size: 6
+drive truck-1 city-2-loc-3 city-1-loc-1 :: cost: 139
+    add: (at-vehicle truck-1 city-1-loc-1)
+    del: (at-vehicle truck-1 city-2-loc-3)
+drive truck-1 city-2-loc-3 city-2-loc-1 :: cost: 49
+    add: (at-vehicle truck-1 city-2-loc-1)
+    del: (at-vehicle truck-1 city-2-loc-3)
+drive truck-1 city-2-loc-3 city-2-loc-2 :: cost: 47
+    add: (at-vehicle truck-1 city-2-loc-2)
+    del: (at-vehicle truck-1 city-2-loc-3)
+drive truck-1 city-2-loc-3 city-3-loc-2 :: cost: 186
+    add: (at-vehicle truck-1 city-3-loc-2)
+    del: (at-vehicle truck-1 city-2-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-2 city-1-loc-2)
+    del: (at-vehicle truck-2 city-1-loc-3)
+Step 9 (capacity truck-2 capacity-3) (capacity truck-1 capacity-3) (count-package package-bag1 city-3-loc-3 pnum0) (count-package package-bag1 city-1-loc-2 pnum1) (count-package package-bag2 city-3-loc-1 pnum1) (count-package package-bag3 city-1-loc-2 pnum1) (count-package package-bag1 truck-1 pnum0) (count-package package-bag1 truck-2 pnum0) (count-package package-bag1 city-1-loc-1 pnum0) (count-package package-bag1 city-2-loc-1 pnum0) (count-package package-bag1 city-3-loc-1 pnum0) (count-package package-bag1 city-2-loc-2 pnum0) (count-package package-bag1 city-3-loc-2 pnum0) (count-package package-bag1 city-1-loc-3 pnum0) (count-package package-bag1 city-2-loc-3 pnum0) (count-package package-bag2 truck-1 pnum0) (count-package package-bag2 truck-2 pnum0) (count-package package-bag2 city-1-loc-1 pnum0) (count-package package-bag2 city-2-loc-1 pnum0) (count-package package-bag2 city-1-loc-2 pnum0) (count-package package-bag2 city-2-loc-2 pnum0) (count-package package-bag2 city-3-loc-2 pnum0) (count-package package-bag2 city-1-loc-3 pnum0) (count-package package-bag2 city-2-loc-3 pnum0) (count-package package-bag2 city-3-loc-3 pnum0) (count-package package-bag3 truck-1 pnum0) (count-package package-bag3 truck-2 pnum0) (count-package package-bag3 city-1-loc-1 pnum0) (count-package package-bag3 city-2-loc-1 pnum0) (count-package package-bag3 city-3-loc-1 pnum0) (count-package package-bag3 city-2-loc-2 pnum0) (count-package package-bag3 city-3-loc-2 pnum0) (count-package package-bag3 city-1-loc-3 pnum0) (count-package package-bag3 city-2-loc-3 pnum0) (count-package package-bag3 city-3-loc-3 pnum0) (at-vehicle truck-2 city-1-loc-3) (at-vehicle truck-1 city-2-loc-2)
+size: 4
+drive truck-1 city-2-loc-2 city-2-loc-1 :: cost: 30
+    add: (at-vehicle truck-1 city-2-loc-1)
+    del: (at-vehicle truck-1 city-2-loc-2)
+drive truck-1 city-2-loc-2 city-2-loc-3 :: cost: 47
+    add: (at-vehicle truck-1 city-2-loc-3)
+    del: (at-vehicle truck-1 city-2-loc-2)
+drive truck-2 city-1-loc-3 city-1-loc-1 :: cost: 22
+    add: (at-vehicle truck-2 city-1-loc-1)
+    del: (at-vehicle truck-2 city-1-loc-3)
+drive truck-2 city-1-loc-3 city-1-loc-2 :: cost: 50
+    add: (at-vehicle truck-2 city-1-loc-2)
+    del: (at-vehicle truck-2 city-1-loc-3)

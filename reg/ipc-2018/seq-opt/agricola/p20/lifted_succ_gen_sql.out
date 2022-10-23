@@ -1,0 +1,191 @@
+Step 0 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (current_worker worker2) (max_worker worker2) (current_round round1) (current_stage stage1) (harvest_phase stage1 harvest_init) (num_food num3) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields)
+size: 11
+take_food worker2 worker1 worker2 round1 num3 num4 :: cost: 60
+    add: (current_worker worker1) (num_food num4)
+    del: (available_action act_labor) (current_worker worker2) (num_food num3)
+plow_field worker2 worker1 worker2 round1 :: cost: 60
+    add: (current_worker worker1) (plowed_fields)
+    del: (available_action act_plow) (current_worker worker2) (NOT-plowed_fields)
+take_grain worker2 worker1 worker2 round1 grain :: cost: 60
+    add: (current_worker worker1) (stored_veg grain)
+    del: (available_action act_grain) (current_worker worker2)
+take_grain worker2 worker1 worker2 round1 carrot :: cost: 60
+    add: (current_worker worker1) (stored_veg carrot)
+    del: (available_action act_grain) (current_worker worker2)
+build_fences sheep worker2 worker1 worker2 round1 :: cost: 60
+    add: (current_worker worker1) (fences_for sheep)
+    del: (available_action act_fences) (current_worker worker2)
+build_fences boar worker2 worker1 worker2 round1 :: cost: 60
+    add: (current_worker worker1) (fences_for boar)
+    del: (available_action act_fences) (current_worker worker2)
+build_fences cattle worker2 worker1 worker2 round1 :: cost: 60
+    add: (current_worker worker1) (fences_for cattle)
+    del: (available_action act_fences) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round1 act_wood wood :: cost: 60
+    add: (current_worker worker1) (stored_resource wood)
+    del: (available_action act_wood) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round1 act_clay clay :: cost: 60
+    add: (current_worker worker1) (stored_resource clay)
+    del: (available_action act_clay) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round1 act_reed reed :: cost: 60
+    add: (current_worker worker1) (stored_resource reed)
+    del: (available_action act_reed) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round1 act_stone stone :: cost: 60
+    add: (current_worker worker1) (stored_resource stone)
+    del: (available_action act_stone) (current_worker worker2)
+Step 1 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (max_worker worker2) (current_round round1) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (current_worker worker1) (num_food num4)
+size: 10
+plow_field worker1 noworker worker2 round1 :: cost: 60
+    add: (plowed_fields) (current_worker noworker)
+    del: (available_action act_plow) (NOT-plowed_fields) (current_worker worker1)
+take_grain worker1 noworker worker2 round1 grain :: cost: 60
+    add: (stored_veg grain) (current_worker noworker)
+    del: (available_action act_grain) (current_worker worker1)
+take_grain worker1 noworker worker2 round1 carrot :: cost: 60
+    add: (stored_veg carrot) (current_worker noworker)
+    del: (available_action act_grain) (current_worker worker1)
+build_fences sheep worker1 noworker worker2 round1 :: cost: 60
+    add: (fences_for sheep) (current_worker noworker)
+    del: (available_action act_fences) (current_worker worker1)
+build_fences boar worker1 noworker worker2 round1 :: cost: 60
+    add: (fences_for boar) (current_worker noworker)
+    del: (available_action act_fences) (current_worker worker1)
+build_fences cattle worker1 noworker worker2 round1 :: cost: 60
+    add: (fences_for cattle) (current_worker noworker)
+    del: (available_action act_fences) (current_worker worker1)
+collect_resource worker1 noworker worker2 round1 act_wood wood :: cost: 60
+    add: (stored_resource wood) (current_worker noworker)
+    del: (available_action act_wood) (current_worker worker1)
+collect_resource worker1 noworker worker2 round1 act_clay clay :: cost: 60
+    add: (stored_resource clay) (current_worker noworker)
+    del: (available_action act_clay) (current_worker worker1)
+collect_resource worker1 noworker worker2 round1 act_reed reed :: cost: 60
+    add: (stored_resource reed) (current_worker noworker)
+    del: (available_action act_reed) (current_worker worker1)
+collect_resource worker1 noworker worker2 round1 act_stone stone :: cost: 60
+    add: (stored_resource stone) (current_worker noworker)
+    del: (available_action act_stone) (current_worker worker1)
+Step 2 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (max_worker worker2) (current_round round1) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (current_worker noworker)
+size: 1
+ag__finish_round_backhome round1 worker2 :: cost: 1
+    add: (current_worker worker2) (hold_round round1 backhome)
+    del: (current_round round1) (current_worker noworker)
+Step 3 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (current_worker worker2) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (hold_round round1 backhome)
+size: 6
+ag__finish_round_renew round1 noworker :: cost: 1
+    add: (available_action act_labor) (available_action act_grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+    del: (hold_round round1 backhome)
+ag__finish_round_renew round1 worker1 :: cost: 1
+    add: (available_action act_labor) (available_action act_grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+    del: (hold_round round1 backhome)
+ag__finish_round_renew round1 worker2 :: cost: 1
+    add: (available_action act_labor) (available_action act_grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+    del: (hold_round round1 backhome)
+ag__finish_round_renew round1 worker3 :: cost: 1
+    add: (available_action act_labor) (available_action act_grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+    del: (hold_round round1 backhome)
+ag__finish_round_renew round1 worker4 :: cost: 1
+    add: (available_action act_labor) (available_action act_grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+    del: (hold_round round1 backhome)
+ag__finish_round_renew round1 worker5 :: cost: 1
+    add: (available_action act_labor) (available_action act_grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+    del: (hold_round round1 backhome)
+Step 4 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (current_worker worker2) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (hold_round round1 roundend) (available_action act_rest) (can_harvest grain) (can_harvest carrot)
+size: 1
+ag__advance_round_normal round1 round2 act_sheep :: cost: 1
+    add: (current_round round2) (open_action act_sheep)
+    del: (hold_round round1 roundend)
+Step 5 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (current_worker worker2) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (available_action act_rest) (can_harvest grain) (can_harvest carrot) (current_round round2) (open_action act_sheep)
+size: 11
+take_food worker2 worker1 worker2 round2 num4 num5 :: cost: 60
+    add: (current_worker worker1) (num_food num5)
+    del: (available_action act_labor) (current_worker worker2) (num_food num4)
+plow_field worker2 worker1 worker2 round2 :: cost: 60
+    add: (current_worker worker1) (plowed_fields)
+    del: (available_action act_plow) (current_worker worker2) (NOT-plowed_fields)
+take_grain worker2 worker1 worker2 round2 grain :: cost: 60
+    add: (current_worker worker1)
+    del: (available_action act_grain) (current_worker worker2)
+take_grain worker2 worker1 worker2 round2 carrot :: cost: 60
+    add: (current_worker worker1) (stored_veg carrot)
+    del: (available_action act_grain) (current_worker worker2)
+build_fences sheep worker2 worker1 worker2 round2 :: cost: 60
+    add: (current_worker worker1) (fences_for sheep)
+    del: (available_action act_fences) (current_worker worker2)
+build_fences boar worker2 worker1 worker2 round2 :: cost: 60
+    add: (current_worker worker1) (fences_for boar)
+    del: (available_action act_fences) (current_worker worker2)
+build_fences cattle worker2 worker1 worker2 round2 :: cost: 60
+    add: (current_worker worker1) (fences_for cattle)
+    del: (available_action act_fences) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round2 act_wood wood :: cost: 60
+    add: (current_worker worker1) (stored_resource wood)
+    del: (available_action act_wood) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round2 act_clay clay :: cost: 60
+    add: (current_worker worker1) (stored_resource clay)
+    del: (available_action act_clay) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round2 act_reed reed :: cost: 60
+    add: (current_worker worker1) (stored_resource reed)
+    del: (available_action act_reed) (current_worker worker2)
+collect_resource worker2 worker1 worker2 round2 act_stone stone :: cost: 60
+    add: (current_worker worker1) (stored_resource stone)
+    del: (available_action act_stone) (current_worker worker2)
+Step 6 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (current_worker worker1) (num_food num4) (stored_veg grain) (fences_for boar) (available_action act_rest) (can_harvest grain) (can_harvest carrot) (current_round round2) (open_action act_sheep)
+size: 9
+take_food worker1 noworker worker2 round2 num4 num5 :: cost: 60
+    add: (current_worker noworker) (num_food num5)
+    del: (available_action act_labor) (current_worker worker1) (num_food num4)
+plow_field worker1 noworker worker2 round2 :: cost: 60
+    add: (plowed_fields) (current_worker noworker)
+    del: (available_action act_plow) (NOT-plowed_fields) (current_worker worker1)
+take_grain worker1 noworker worker2 round2 grain :: cost: 60
+    add: (current_worker noworker)
+    del: (available_action act_grain) (current_worker worker1)
+take_grain worker1 noworker worker2 round2 carrot :: cost: 60
+    add: (stored_veg carrot) (current_worker noworker)
+    del: (available_action act_grain) (current_worker worker1)
+collect_animal boar act_sheep worker1 noworker worker2 round2 :: cost: 60
+    add: (current_worker noworker) (owned_animals boar)
+    del: (available_action act_sheep) (current_worker worker1)
+collect_resource worker1 noworker worker2 round2 act_wood wood :: cost: 60
+    add: (stored_resource wood) (current_worker noworker)
+    del: (available_action act_wood) (current_worker worker1)
+collect_resource worker1 noworker worker2 round2 act_clay clay :: cost: 60
+    add: (stored_resource clay) (current_worker noworker)
+    del: (available_action act_clay) (current_worker worker1)
+collect_resource worker1 noworker worker2 round2 act_reed reed :: cost: 60
+    add: (stored_resource reed) (current_worker noworker)
+    del: (available_action act_reed) (current_worker worker1)
+collect_resource worker1 noworker worker2 round2 act_stone stone :: cost: 60
+    add: (stored_resource stone) (current_worker noworker)
+    del: (available_action act_stone) (current_worker worker1)
+Step 7 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (fences_for boar) (stored_resource clay) (current_worker noworker) (available_action act_rest) (can_harvest grain) (can_harvest carrot) (current_round round2) (open_action act_sheep)
+size: 1
+ag__finish_round_backhome round2 worker2 :: cost: 1
+    add: (current_worker worker2) (hold_round round2 backhome)
+    del: (current_worker noworker) (current_round round2)
+Step 8 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (current_worker worker2) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (fences_for boar) (stored_resource clay) (available_action act_rest) (can_harvest grain) (can_harvest carrot) (open_action act_sheep) (hold_round round2 backhome)
+size: 6
+ag__finish_round_renew round2 noworker :: cost: 1
+    add: (available_action act_clay) (available_action act_fences) (hold_round round2 roundend)
+    del: (hold_round round2 backhome)
+ag__finish_round_renew round2 worker1 :: cost: 1
+    add: (available_action act_clay) (available_action act_fences) (hold_round round2 roundend)
+    del: (hold_round round2 backhome)
+ag__finish_round_renew round2 worker2 :: cost: 1
+    add: (available_action act_clay) (available_action act_fences) (hold_round round2 roundend)
+    del: (hold_round round2 backhome)
+ag__finish_round_renew round2 worker3 :: cost: 1
+    add: (available_action act_clay) (available_action act_fences) (hold_round round2 roundend)
+    del: (hold_round round2 backhome)
+ag__finish_round_renew round2 worker4 :: cost: 1
+    add: (available_action act_clay) (available_action act_fences) (hold_round round2 roundend)
+    del: (hold_round round2 backhome)
+ag__finish_round_renew round2 worker5 :: cost: 1
+    add: (available_action act_clay) (available_action act_fences) (hold_round round2 roundend)
+    del: (hold_round round2 backhome)
+Step 9 (open_action act_labor) (open_action act_wood) (open_action act_clay) (open_action act_reed) (open_action act_build) (open_action act_plow) (open_action act_grain) (open_action act_stone) (open_action act_fences) (available_action act_labor) (available_action act_wood) (available_action act_clay) (available_action act_reed) (available_action act_build) (available_action act_plow) (available_action act_grain) (available_action act_stone) (available_action act_fences) (available_action act_sheep) (available_action act_sow) (available_action act_family) (available_action act_improve) (available_action act_carrot) (available_action act_boar) (available_action act_cattle) (current_worker worker2) (max_worker worker2) (current_stage stage1) (harvest_phase stage1 harvest_init) (built_rooms room1 worker1) (built_rooms room2 worker2) (space_rooms room3) (space_rooms room4) (space_rooms room5) (NOT-newborn) (NOT-plowed_fields) (num_food num4) (stored_veg grain) (fences_for boar) (stored_resource clay) (available_action act_rest) (can_harvest grain) (can_harvest carrot) (open_action act_sheep) (hold_round round2 roundend)
+size: 1
+ag__advance_round_normal round2 round3 act_sow :: cost: 1
+    add: (current_round round3) (open_action act_sow)
+    del: (hold_round round2 roundend)

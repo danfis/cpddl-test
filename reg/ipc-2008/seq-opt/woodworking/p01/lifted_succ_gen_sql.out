@@ -1,0 +1,314 @@
+Step 0 (empty highspeed-saw0) (unused p0) (unused p1) (available p2) (colour p2 natural) (wood p2 beech) (surface-condition p2 verysmooth) (treatment p2 colourfragments) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (available b0) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1)
+size: 8
+do-grind p2 grinder0 verysmooth natural colourfragments untreated :: cost: 15
+    add: (treatment p2 untreated)
+    del: (treatment p2 colourfragments)
+do-plane p2 planer0 verysmooth natural colourfragments :: cost: 10
+    add: (treatment p2 untreated) (surface-condition p2 smooth)
+    del: (surface-condition p2 verysmooth) (treatment p2 colourfragments)
+load-highspeed-saw b0 highspeed-saw0 :: cost: 30
+    add: (in-highspeed-saw b0 highspeed-saw0)
+    del: (empty highspeed-saw0) (available b0)
+load-highspeed-saw b1 highspeed-saw0 :: cost: 30
+    add: (in-highspeed-saw b1 highspeed-saw0)
+    del: (empty highspeed-saw0) (available b1)
+do-saw-medium b0 p0 saw0 beech rough s3 s2 s1 :: cost: 30
+    add: (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1)
+    del: (unused p0)
+do-saw-medium b0 p1 saw0 beech rough s3 s2 s1 :: cost: 30
+    add: (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p0 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p0) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (wood p0 cherry) (boardsize b1 s1)
+    del: (unused p0)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 1 (empty highspeed-saw0) (unused p0) (unused p1) (available p2) (colour p2 natural) (wood p2 beech) (surface-condition p2 verysmooth) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (available b0) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (treatment p2 untreated)
+size: 12
+do-immersion-varnish p2 immersion-varnisher0 mauve verysmooth :: cost: 10
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-spray-varnish p2 spray-varnisher0 mauve verysmooth :: cost: 5
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p2 glazer0 green :: cost: 10
+    add: (treatment p2 glazed) (colour p2 green)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p2 glazer0 mauve :: cost: 10
+    add: (colour p2 mauve) (treatment p2 glazed)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-grind p2 grinder0 verysmooth natural untreated untreated :: cost: 15
+    add:
+    del:
+do-plane p2 planer0 verysmooth natural untreated :: cost: 10
+    add: (surface-condition p2 smooth)
+    del: (surface-condition p2 verysmooth)
+load-highspeed-saw b0 highspeed-saw0 :: cost: 30
+    add: (in-highspeed-saw b0 highspeed-saw0)
+    del: (empty highspeed-saw0) (available b0)
+load-highspeed-saw b1 highspeed-saw0 :: cost: 30
+    add: (in-highspeed-saw b1 highspeed-saw0)
+    del: (empty highspeed-saw0) (available b1)
+do-saw-medium b0 p0 saw0 beech rough s3 s2 s1 :: cost: 30
+    add: (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1)
+    del: (unused p0)
+do-saw-medium b0 p1 saw0 beech rough s3 s2 s1 :: cost: 30
+    add: (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p0 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p0) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (wood p0 cherry) (boardsize b1 s1)
+    del: (unused p0)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 2 (empty highspeed-saw0) (unused p0) (unused p1) (available p2) (wood p2 beech) (surface-condition p2 verysmooth) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (available b0) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (treatment p2 varnished) (colour p2 mauve)
+size: 8
+do-grind p2 grinder0 verysmooth mauve varnished colourfragments :: cost: 15
+    add: (colour p2 natural) (treatment p2 colourfragments)
+    del: (treatment p2 varnished) (colour p2 mauve)
+do-plane p2 planer0 verysmooth mauve varnished :: cost: 10
+    add: (colour p2 natural) (treatment p2 untreated) (surface-condition p2 smooth)
+    del: (surface-condition p2 verysmooth) (treatment p2 varnished) (colour p2 mauve)
+load-highspeed-saw b0 highspeed-saw0 :: cost: 30
+    add: (in-highspeed-saw b0 highspeed-saw0)
+    del: (empty highspeed-saw0) (available b0)
+load-highspeed-saw b1 highspeed-saw0 :: cost: 30
+    add: (in-highspeed-saw b1 highspeed-saw0)
+    del: (empty highspeed-saw0) (available b1)
+do-saw-medium b0 p0 saw0 beech rough s3 s2 s1 :: cost: 30
+    add: (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1)
+    del: (unused p0)
+do-saw-medium b0 p1 saw0 beech rough s3 s2 s1 :: cost: 30
+    add: (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p0 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p0) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (wood p0 cherry) (boardsize b1 s1)
+    del: (unused p0)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 3 (unused p0) (unused p1) (available p2) (wood p2 beech) (surface-condition p2 verysmooth) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (in-highspeed-saw b0 highspeed-saw0) (treatment p2 varnished) (colour p2 mauve)
+size: 7
+do-grind p2 grinder0 verysmooth mauve varnished colourfragments :: cost: 15
+    add: (colour p2 natural) (treatment p2 colourfragments)
+    del: (treatment p2 varnished) (colour p2 mauve)
+do-plane p2 planer0 verysmooth mauve varnished :: cost: 10
+    add: (colour p2 natural) (treatment p2 untreated) (surface-condition p2 smooth)
+    del: (surface-condition p2 verysmooth) (treatment p2 varnished) (colour p2 mauve)
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)
+cut-board-medium b0 p0 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
+    add: (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1)
+    del: (unused p0)
+cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
+    add: (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p0 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p0) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (wood p0 cherry) (boardsize b1 s1)
+    del: (unused p0)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 4 (unused p1) (available p2) (wood p2 beech) (surface-condition p2 verysmooth) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (in-highspeed-saw b0 highspeed-saw0) (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1) (treatment p2 varnished) (colour p2 mauve)
+size: 8
+do-glaze p0 glazer0 green :: cost: 15
+    add: (treatment p0 glazed) (colour p0 green)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p0 glazer0 mauve :: cost: 15
+    add: (treatment p0 glazed) (colour p0 mauve)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-grind p2 grinder0 verysmooth mauve varnished colourfragments :: cost: 15
+    add: (colour p2 natural) (treatment p2 colourfragments)
+    del: (treatment p2 varnished) (colour p2 mauve)
+do-plane p0 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p0 smooth)
+    del: (surface-condition p0 rough)
+do-plane p2 planer0 verysmooth mauve varnished :: cost: 10
+    add: (colour p2 natural) (treatment p2 untreated) (surface-condition p2 smooth)
+    del: (surface-condition p2 verysmooth) (treatment p2 varnished) (colour p2 mauve)
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)
+cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
+    add: (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 5 (unused p1) (available p2) (colour p2 natural) (wood p2 beech) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (treatment p2 untreated) (surface-condition p2 smooth) (in-highspeed-saw b0 highspeed-saw0) (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1)
+size: 12
+do-immersion-varnish p2 immersion-varnisher0 mauve smooth :: cost: 10
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-spray-varnish p2 spray-varnisher0 mauve smooth :: cost: 5
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p0 glazer0 green :: cost: 15
+    add: (treatment p0 glazed) (colour p0 green)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p0 glazer0 mauve :: cost: 15
+    add: (treatment p0 glazed) (colour p0 mauve)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p2 glazer0 green :: cost: 10
+    add: (treatment p2 glazed) (colour p2 green)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p2 glazer0 mauve :: cost: 10
+    add: (colour p2 mauve) (treatment p2 glazed)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-grind p2 grinder0 smooth natural untreated untreated :: cost: 15
+    add: (surface-condition p2 verysmooth)
+    del: (surface-condition p2 smooth)
+do-plane p0 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p0 smooth)
+    del: (surface-condition p0 rough)
+do-plane p2 planer0 smooth natural untreated :: cost: 10
+    add:
+    del:
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)
+cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
+    add: (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 6 (unused p1) (available p2) (wood p2 beech) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (surface-condition p2 smooth) (in-highspeed-saw b0 highspeed-saw0) (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1) (colour p2 mauve) (treatment p2 glazed)
+size: 8
+do-glaze p0 glazer0 green :: cost: 15
+    add: (treatment p0 glazed) (colour p0 green)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p0 glazer0 mauve :: cost: 15
+    add: (treatment p0 glazed) (colour p0 mauve)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-grind p2 grinder0 smooth mauve glazed untreated :: cost: 15
+    add: (colour p2 natural) (surface-condition p2 verysmooth) (treatment p2 untreated)
+    del: (surface-condition p2 smooth) (colour p2 mauve) (treatment p2 glazed)
+do-plane p0 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p0 smooth)
+    del: (surface-condition p0 rough)
+do-plane p2 planer0 smooth mauve glazed :: cost: 10
+    add: (colour p2 natural) (treatment p2 untreated)
+    del: (colour p2 mauve) (treatment p2 glazed)
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)
+cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
+    add: (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+    del: (unused p1)
+do-saw-medium b1 p1 saw0 cherry rough s3 s2 s1 :: cost: 30
+    add: (available p1) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (boardsize b1 s1) (wood p1 cherry)
+    del: (unused p1)
+Step 7 (available p2) (wood p2 beech) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (surface-condition p2 smooth) (in-highspeed-saw b0 highspeed-saw0) (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated) (colour p2 mauve) (treatment p2 glazed)
+size: 9
+do-glaze p0 glazer0 green :: cost: 15
+    add: (treatment p0 glazed) (colour p0 green)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p0 glazer0 mauve :: cost: 15
+    add: (treatment p0 glazed) (colour p0 mauve)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p1 glazer0 green :: cost: 15
+    add: (treatment p1 glazed) (colour p1 green)
+    del: (colour p1 natural) (treatment p1 untreated)
+do-glaze p1 glazer0 mauve :: cost: 15
+    add: (treatment p1 glazed) (colour p1 mauve)
+    del: (colour p1 natural) (treatment p1 untreated)
+do-grind p2 grinder0 smooth mauve glazed untreated :: cost: 15
+    add: (colour p2 natural) (surface-condition p2 verysmooth) (treatment p2 untreated)
+    del: (surface-condition p2 smooth) (colour p2 mauve) (treatment p2 glazed)
+do-plane p0 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p0 smooth)
+    del: (surface-condition p0 rough)
+do-plane p1 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p1 smooth)
+    del: (surface-condition p1 rough)
+do-plane p2 planer0 smooth mauve glazed :: cost: 10
+    add: (colour p2 natural) (treatment p2 untreated)
+    del: (colour p2 mauve) (treatment p2 glazed)
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)
+Step 8 (available p2) (colour p2 natural) (wood p2 beech) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (treatment p2 untreated) (surface-condition p2 smooth) (in-highspeed-saw b0 highspeed-saw0) (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+size: 13
+do-immersion-varnish p2 immersion-varnisher0 mauve smooth :: cost: 10
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-spray-varnish p2 spray-varnisher0 mauve smooth :: cost: 5
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p0 glazer0 green :: cost: 15
+    add: (treatment p0 glazed) (colour p0 green)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p0 glazer0 mauve :: cost: 15
+    add: (treatment p0 glazed) (colour p0 mauve)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p1 glazer0 green :: cost: 15
+    add: (treatment p1 glazed) (colour p1 green)
+    del: (colour p1 natural) (treatment p1 untreated)
+do-glaze p1 glazer0 mauve :: cost: 15
+    add: (treatment p1 glazed) (colour p1 mauve)
+    del: (colour p1 natural) (treatment p1 untreated)
+do-glaze p2 glazer0 green :: cost: 10
+    add: (treatment p2 glazed) (colour p2 green)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p2 glazer0 mauve :: cost: 10
+    add: (colour p2 mauve) (treatment p2 glazed)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-grind p2 grinder0 smooth natural untreated untreated :: cost: 15
+    add: (surface-condition p2 verysmooth)
+    del: (surface-condition p2 smooth)
+do-plane p0 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p0 smooth)
+    del: (surface-condition p0 rough)
+do-plane p1 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p1 smooth)
+    del: (surface-condition p1 rough)
+do-plane p2 planer0 smooth natural untreated :: cost: 10
+    add:
+    del:
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)
+Step 9 (available p2) (colour p2 natural) (wood p2 beech) (surface-condition p2 verysmooth) (boardsize b0 s3) (wood b0 beech) (surface-condition b0 rough) (boardsize b1 s3) (wood b1 cherry) (surface-condition b1 rough) (available b1) (treatment p2 untreated) (in-highspeed-saw b0 highspeed-saw0) (available p0) (wood p0 beech) (surface-condition p0 rough) (colour p0 natural) (treatment p0 untreated) (boardsize b0 s1) (available p1) (wood p1 beech) (surface-condition p1 rough) (colour p1 natural) (treatment p1 untreated)
+size: 13
+do-immersion-varnish p2 immersion-varnisher0 mauve verysmooth :: cost: 10
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-spray-varnish p2 spray-varnisher0 mauve verysmooth :: cost: 5
+    add: (treatment p2 varnished) (colour p2 mauve)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p0 glazer0 green :: cost: 15
+    add: (treatment p0 glazed) (colour p0 green)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p0 glazer0 mauve :: cost: 15
+    add: (treatment p0 glazed) (colour p0 mauve)
+    del: (colour p0 natural) (treatment p0 untreated)
+do-glaze p1 glazer0 green :: cost: 15
+    add: (treatment p1 glazed) (colour p1 green)
+    del: (colour p1 natural) (treatment p1 untreated)
+do-glaze p1 glazer0 mauve :: cost: 15
+    add: (treatment p1 glazed) (colour p1 mauve)
+    del: (colour p1 natural) (treatment p1 untreated)
+do-glaze p2 glazer0 green :: cost: 10
+    add: (treatment p2 glazed) (colour p2 green)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-glaze p2 glazer0 mauve :: cost: 10
+    add: (colour p2 mauve) (treatment p2 glazed)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-grind p2 grinder0 verysmooth natural untreated untreated :: cost: 15
+    add:
+    del:
+do-plane p0 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p0 smooth)
+    del: (surface-condition p0 rough)
+do-plane p1 planer0 rough natural untreated :: cost: 20
+    add: (surface-condition p1 smooth)
+    del: (surface-condition p1 rough)
+do-plane p2 planer0 verysmooth natural untreated :: cost: 10
+    add: (surface-condition p2 smooth)
+    del: (surface-condition p2 verysmooth)
+unload-highspeed-saw b0 highspeed-saw0 :: cost: 10
+    add: (empty highspeed-saw0) (available b0)
+    del: (in-highspeed-saw b0 highspeed-saw0)

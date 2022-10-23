@@ -1,0 +1,170 @@
+Step 0 (at_soil_sample waypoint0) (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (at rover0 waypoint3) (available rover0) (empty rover0store)
+size: 5
+navigate rover0 waypoint3 waypoint0 :: cost: 1
+    add: (at rover0 waypoint0)
+    del: (at rover0 waypoint3)
+navigate rover0 waypoint3 waypoint1 :: cost: 1
+    add: (at rover0 waypoint1)
+    del: (at rover0 waypoint3)
+sample_soil rover0 rover0store waypoint3 :: cost: 1
+    add: (full rover0store) (have_soil_analysis rover0 waypoint3)
+    del: (at_soil_sample waypoint3) (empty rover0store)
+sample_rock rover0 rover0store waypoint3 :: cost: 1
+    add: (full rover0store) (have_rock_analysis rover0 waypoint3)
+    del: (at_rock_sample waypoint3) (empty rover0store)
+calibrate rover0 camera0 objective1 waypoint3 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:
+Step 1 (at_soil_sample waypoint0) (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (empty rover0store) (at rover0 waypoint0)
+size: 3
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+sample_soil rover0 rover0store waypoint0 :: cost: 1
+    add: (full rover0store) (have_soil_analysis rover0 waypoint0)
+    del: (at_soil_sample waypoint0) (empty rover0store)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:
+Step 2 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (at rover0 waypoint0) (full rover0store) (have_soil_analysis rover0 waypoint0)
+size: 3
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+drop rover0 rover0store :: cost: 1
+    add: (empty rover0store)
+    del: (full rover0store)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:
+Step 3 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (at rover0 waypoint0) (full rover0store) (calibrated camera0 rover0) (have_soil_analysis rover0 waypoint0)
+size: 7
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+drop rover0 rover0store :: cost: 1
+    add: (empty rover0store)
+    del: (full rover0store)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add:
+    del:
+take_image rover0 waypoint0 objective0 camera0 colour :: cost: 1
+    add: (have_image rover0 objective0 colour)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint0 objective0 camera0 high_res :: cost: 1
+    add: (have_image rover0 objective0 high_res)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint0 objective1 camera0 colour :: cost: 1
+    add: (have_image rover0 objective1 colour)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint0 objective1 camera0 high_res :: cost: 1
+    add: (have_image rover0 objective1 high_res)
+    del: (calibrated camera0 rover0)
+Step 4 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (at rover0 waypoint0) (full rover0store) (have_soil_analysis rover0 waypoint0) (have_image rover0 objective0 colour)
+size: 3
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+drop rover0 rover0store :: cost: 1
+    add: (empty rover0store)
+    del: (full rover0store)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:
+Step 5 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (empty rover0store) (at rover0 waypoint0) (have_soil_analysis rover0 waypoint0) (have_image rover0 objective0 colour)
+size: 2
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:
+Step 6 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (empty rover0store) (at rover0 waypoint0) (calibrated camera0 rover0) (have_soil_analysis rover0 waypoint0) (have_image rover0 objective0 colour)
+size: 6
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add:
+    del:
+take_image rover0 waypoint0 objective0 camera0 colour :: cost: 1
+    add:
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint0 objective0 camera0 high_res :: cost: 1
+    add: (have_image rover0 objective0 high_res)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint0 objective1 camera0 colour :: cost: 1
+    add: (have_image rover0 objective1 colour)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint0 objective1 camera0 high_res :: cost: 1
+    add: (have_image rover0 objective1 high_res)
+    del: (calibrated camera0 rover0)
+Step 7 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (at rover0 waypoint3) (available rover0) (empty rover0store) (calibrated camera0 rover0) (have_soil_analysis rover0 waypoint0) (have_image rover0 objective0 colour)
+size: 11
+navigate rover0 waypoint3 waypoint0 :: cost: 1
+    add: (at rover0 waypoint0)
+    del: (at rover0 waypoint3)
+navigate rover0 waypoint3 waypoint1 :: cost: 1
+    add: (at rover0 waypoint1)
+    del: (at rover0 waypoint3)
+sample_soil rover0 rover0store waypoint3 :: cost: 1
+    add: (full rover0store) (have_soil_analysis rover0 waypoint3)
+    del: (at_soil_sample waypoint3) (empty rover0store)
+sample_rock rover0 rover0store waypoint3 :: cost: 1
+    add: (full rover0store) (have_rock_analysis rover0 waypoint3)
+    del: (at_rock_sample waypoint3) (empty rover0store)
+calibrate rover0 camera0 objective1 waypoint3 :: cost: 1
+    add:
+    del:
+take_image rover0 waypoint3 objective0 camera0 colour :: cost: 1
+    add:
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint3 objective0 camera0 high_res :: cost: 1
+    add: (have_image rover0 objective0 high_res)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint3 objective1 camera0 colour :: cost: 1
+    add: (have_image rover0 objective1 colour)
+    del: (calibrated camera0 rover0)
+take_image rover0 waypoint3 objective1 camera0 high_res :: cost: 1
+    add: (have_image rover0 objective1 high_res)
+    del: (calibrated camera0 rover0)
+communicate_soil_data rover0 general waypoint0 waypoint3 waypoint0 :: cost: 1
+    add: (communicated_soil_data waypoint0)
+    del:
+communicate_image_data rover0 general objective0 colour waypoint3 waypoint0 :: cost: 1
+    add: (communicated_image_data objective0 colour)
+    del:
+Step 8 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (at rover0 waypoint3) (available rover0) (empty rover0store) (have_soil_analysis rover0 waypoint0) (have_image rover0 objective0 colour) (have_image rover0 objective1 colour)
+size: 8
+navigate rover0 waypoint3 waypoint0 :: cost: 1
+    add: (at rover0 waypoint0)
+    del: (at rover0 waypoint3)
+navigate rover0 waypoint3 waypoint1 :: cost: 1
+    add: (at rover0 waypoint1)
+    del: (at rover0 waypoint3)
+sample_soil rover0 rover0store waypoint3 :: cost: 1
+    add: (full rover0store) (have_soil_analysis rover0 waypoint3)
+    del: (at_soil_sample waypoint3) (empty rover0store)
+sample_rock rover0 rover0store waypoint3 :: cost: 1
+    add: (full rover0store) (have_rock_analysis rover0 waypoint3)
+    del: (at_rock_sample waypoint3) (empty rover0store)
+calibrate rover0 camera0 objective1 waypoint3 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:
+communicate_soil_data rover0 general waypoint0 waypoint3 waypoint0 :: cost: 1
+    add: (communicated_soil_data waypoint0)
+    del:
+communicate_image_data rover0 general objective0 colour waypoint3 waypoint0 :: cost: 1
+    add: (communicated_image_data objective0 colour)
+    del:
+communicate_image_data rover0 general objective1 colour waypoint3 waypoint0 :: cost: 1
+    add: (communicated_image_data objective1 colour)
+    del:
+Step 9 (at_rock_sample waypoint1) (at_soil_sample waypoint2) (at_rock_sample waypoint2) (at_soil_sample waypoint3) (at_rock_sample waypoint3) (channel_free general) (available rover0) (empty rover0store) (at rover0 waypoint0) (have_soil_analysis rover0 waypoint0) (have_image rover0 objective0 colour) (have_image rover0 objective1 colour)
+size: 2
+navigate rover0 waypoint0 waypoint3 :: cost: 1
+    add: (at rover0 waypoint3)
+    del: (at rover0 waypoint0)
+calibrate rover0 camera0 objective1 waypoint0 :: cost: 1
+    add: (calibrated camera0 rover0)
+    del:

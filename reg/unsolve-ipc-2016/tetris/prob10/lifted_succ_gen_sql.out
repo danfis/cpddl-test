@@ -1,0 +1,311 @@
+Step 0 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-0f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-1f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight0 f0-1f f1-1f) (at_two straight1 f1-3f f2-3f) (at_square square0 f5-0f) (at_square square1 f2-0f)
+size: 10
+move_square f2-0f f1-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f1-0f)
+    del: (clear f1-0f) (at_square square1 f2-0f)
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f5-0f f4-0f square0 :: cost: 1
+    add: (clear f5-0f) (at_square square0 f4-0f)
+    del: (clear f4-0f) (at_square square0 f5-0f)
+move_square f5-0f f5-1f square0 :: cost: 1
+    add: (clear f5-0f) (at_square square0 f5-1f)
+    del: (clear f5-1f) (at_square square0 f5-0f)
+move_two f0-1f f1-1f f1-0f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-0f)
+    del: (clear f1-0f) (at_two straight0 f0-1f f1-1f)
+move_two f0-1f f1-1f f1-2f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-2f)
+    del: (clear f1-2f) (at_two straight0 f0-1f f1-1f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 1 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-1f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight0 f0-1f f1-1f) (at_two straight1 f1-3f f2-3f) (at_square square0 f5-0f) (clear f2-0f) (at_square square1 f1-0f)
+size: 10
+move_square f1-0f f0-0f square1 :: cost: 1
+    add: (clear f1-0f) (at_square square1 f0-0f)
+    del: (clear f0-0f) (at_square square1 f1-0f)
+move_square f1-0f f2-0f square1 :: cost: 1
+    add: (clear f1-0f) (at_square square1 f2-0f)
+    del: (clear f2-0f) (at_square square1 f1-0f)
+move_square f5-0f f4-0f square0 :: cost: 1
+    add: (clear f5-0f) (at_square square0 f4-0f)
+    del: (clear f4-0f) (at_square square0 f5-0f)
+move_square f5-0f f5-1f square0 :: cost: 1
+    add: (clear f5-0f) (at_square square0 f5-1f)
+    del: (clear f5-1f) (at_square square0 f5-0f)
+move_two f0-1f f1-1f f1-2f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-2f)
+    del: (clear f1-2f) (at_two straight0 f0-1f f1-1f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+move_l_left f2-1f f3-1f f3-2f f2-0f f3-0f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f2-0f f3-0f f3-1f)
+    del: (clear f3-0f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (clear f2-0f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 2 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-0f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-1f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight0 f0-1f f1-1f) (at_two straight1 f1-3f f2-3f) (at_square square0 f5-0f) (at_square square1 f2-0f)
+size: 10
+move_square f2-0f f1-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f1-0f)
+    del: (clear f1-0f) (at_square square1 f2-0f)
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f5-0f f4-0f square0 :: cost: 1
+    add: (clear f5-0f) (at_square square0 f4-0f)
+    del: (clear f4-0f) (at_square square0 f5-0f)
+move_square f5-0f f5-1f square0 :: cost: 1
+    add: (clear f5-0f) (at_square square0 f5-1f)
+    del: (clear f5-1f) (at_square square0 f5-0f)
+move_two f0-1f f1-1f f1-0f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-0f)
+    del: (clear f1-0f) (at_two straight0 f0-1f f1-1f)
+move_two f0-1f f1-1f f1-2f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-2f)
+    del: (clear f1-2f) (at_two straight0 f0-1f f1-1f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 3 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-0f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-1f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight0 f0-1f f1-1f) (at_two straight1 f1-3f f2-3f) (at_square square1 f2-0f) (clear f5-0f) (at_square square0 f4-0f)
+size: 11
+move_square f2-0f f1-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f1-0f)
+    del: (clear f1-0f) (at_square square1 f2-0f)
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f4-0f f3-0f square0 :: cost: 1
+    add: (clear f4-0f) (at_square square0 f3-0f)
+    del: (clear f3-0f) (at_square square0 f4-0f)
+move_square f4-0f f4-1f square0 :: cost: 1
+    add: (clear f4-0f) (at_square square0 f4-1f)
+    del: (clear f4-1f) (at_square square0 f4-0f)
+move_square f4-0f f5-0f square0 :: cost: 1
+    add: (clear f4-0f) (at_square square0 f5-0f)
+    del: (clear f5-0f) (at_square square0 f4-0f)
+move_two f0-1f f1-1f f1-0f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-0f)
+    del: (clear f1-0f) (at_two straight0 f0-1f f1-1f)
+move_two f0-1f f1-1f f1-2f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-2f)
+    del: (clear f1-2f) (at_two straight0 f0-1f f1-1f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 4 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-0f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-0f) (clear f4-2f) (clear f4-3f) (clear f5-1f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight0 f0-1f f1-1f) (at_two straight1 f1-3f f2-3f) (at_square square1 f2-0f) (clear f5-0f) (at_square square0 f4-1f)
+size: 10
+move_square f2-0f f1-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f1-0f)
+    del: (clear f1-0f) (at_square square1 f2-0f)
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f4-1f f4-0f square0 :: cost: 1
+    add: (clear f4-1f) (at_square square0 f4-0f)
+    del: (clear f4-0f) (at_square square0 f4-1f)
+move_square f4-1f f4-2f square0 :: cost: 1
+    add: (clear f4-1f) (at_square square0 f4-2f)
+    del: (clear f4-2f) (at_square square0 f4-1f)
+move_square f4-1f f5-1f square0 :: cost: 1
+    add: (clear f4-1f) (at_square square0 f5-1f)
+    del: (clear f5-1f) (at_square square0 f4-1f)
+move_two f0-1f f1-1f f1-0f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-0f)
+    del: (clear f1-0f) (at_two straight0 f0-1f f1-1f)
+move_two f0-1f f1-1f f1-2f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-2f)
+    del: (clear f1-2f) (at_two straight0 f0-1f f1-1f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 5 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-0f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight0 f0-1f f1-1f) (at_two straight1 f1-3f f2-3f) (at_square square1 f2-0f) (clear f5-0f) (at_square square0 f5-1f)
+size: 11
+move_square f2-0f f1-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f1-0f)
+    del: (clear f1-0f) (at_square square1 f2-0f)
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f5-1f f4-1f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f4-1f)
+    del: (clear f4-1f) (at_square square0 f5-1f)
+move_square f5-1f f5-0f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-0f)
+    del: (clear f5-0f) (at_square square0 f5-1f)
+move_square f5-1f f5-2f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-2f)
+    del: (clear f5-2f) (at_square square0 f5-1f)
+move_two f0-1f f1-1f f1-0f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-0f)
+    del: (clear f1-0f) (at_two straight0 f0-1f f1-1f)
+move_two f0-1f f1-1f f1-2f straight0 :: cost: 1
+    add: (clear f0-1f) (at_two straight0 f1-1f f1-2f)
+    del: (clear f1-2f) (at_two straight0 f0-1f f1-1f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 6 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f3-3f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_two straight1 f1-3f f2-3f) (at_square square1 f2-0f) (clear f5-0f) (at_square square0 f5-1f) (clear f0-1f) (at_two straight0 f1-1f f1-0f)
+size: 9
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f5-1f f4-1f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f4-1f)
+    del: (clear f4-1f) (at_square square0 f5-1f)
+move_square f5-1f f5-0f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-0f)
+    del: (clear f5-0f) (at_square square0 f5-1f)
+move_square f5-1f f5-2f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-2f)
+    del: (clear f5-2f) (at_square square0 f5-1f)
+move_two f1-1f f1-0f f0-0f straight0 :: cost: 1
+    add: (clear f1-1f) (at_two straight0 f1-0f f0-0f)
+    del: (clear f0-0f) (at_two straight0 f1-1f f1-0f)
+move_two f1-3f f2-3f f2-2f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f2-2f)
+    del: (clear f2-2f) (at_two straight1 f1-3f f2-3f)
+move_two f1-3f f2-3f f3-3f straight1 :: cost: 1
+    add: (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+    del: (clear f3-3f) (at_two straight1 f1-3f f2-3f)
+move_l_right f2-1f f3-1f f3-2f f2-2f f3-3f f2-3f rightl0 :: cost: 1
+    add: (clear f3-1f) (clear f2-1f) (at_right_l rightl0 f2-2f f3-2f f3-3f)
+    del: (clear f2-2f) (clear f3-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 7 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-2f) (clear f2-2f) (clear f3-0f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (at_square square1 f2-0f) (clear f5-0f) (at_square square0 f5-1f) (clear f0-1f) (at_two straight0 f1-1f f1-0f) (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+size: 7
+move_square f2-0f f3-0f square1 :: cost: 1
+    add: (clear f2-0f) (at_square square1 f3-0f)
+    del: (clear f3-0f) (at_square square1 f2-0f)
+move_square f5-1f f4-1f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f4-1f)
+    del: (clear f4-1f) (at_square square0 f5-1f)
+move_square f5-1f f5-0f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-0f)
+    del: (clear f5-0f) (at_square square0 f5-1f)
+move_square f5-1f f5-2f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-2f)
+    del: (clear f5-2f) (at_square square0 f5-1f)
+move_two f1-1f f1-0f f0-0f straight0 :: cost: 1
+    add: (clear f1-1f) (at_two straight0 f1-0f f0-0f)
+    del: (clear f0-0f) (at_two straight0 f1-1f f1-0f)
+move_two f2-3f f3-3f f4-3f straight1 :: cost: 1
+    add: (clear f2-3f) (at_two straight1 f3-3f f4-3f)
+    del: (clear f4-3f) (at_two straight1 f2-3f f3-3f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 8 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-2f) (clear f2-2f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-2f) (clear f5-3f) (at_right_l rightl0 f2-1f f3-1f f3-2f) (clear f2-0f) (at_square square1 f3-0f) (clear f5-0f) (at_square square0 f5-1f) (clear f0-1f) (at_two straight0 f1-1f f1-0f) (clear f1-3f) (at_two straight1 f2-3f f3-3f)
+size: 9
+move_square f3-0f f2-0f square1 :: cost: 1
+    add: (clear f3-0f) (at_square square1 f2-0f)
+    del: (clear f2-0f) (at_square square1 f3-0f)
+move_square f3-0f f4-0f square1 :: cost: 1
+    add: (clear f3-0f) (at_square square1 f4-0f)
+    del: (clear f4-0f) (at_square square1 f3-0f)
+move_square f5-1f f4-1f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f4-1f)
+    del: (clear f4-1f) (at_square square0 f5-1f)
+move_square f5-1f f5-0f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-0f)
+    del: (clear f5-0f) (at_square square0 f5-1f)
+move_square f5-1f f5-2f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-2f)
+    del: (clear f5-2f) (at_square square0 f5-1f)
+move_two f1-1f f1-0f f0-0f straight0 :: cost: 1
+    add: (clear f1-1f) (at_two straight0 f1-0f f0-0f)
+    del: (clear f0-0f) (at_two straight0 f1-1f f1-0f)
+move_two f1-1f f1-0f f2-0f straight0 :: cost: 1
+    add: (clear f1-1f) (at_two straight0 f1-0f f2-0f)
+    del: (clear f2-0f) (at_two straight0 f1-1f f1-0f)
+move_two f2-3f f3-3f f4-3f straight1 :: cost: 1
+    add: (clear f2-3f) (at_two straight1 f3-3f f4-3f)
+    del: (clear f4-3f) (at_two straight1 f2-3f f3-3f)
+move_l_down f2-1f f3-1f f3-2f f4-1f f4-2f rightl0 :: cost: 1
+    add: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+    del: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+Step 9 (clear f0-0f) (clear f0-2f) (clear f0-3f) (clear f1-2f) (clear f2-2f) (clear f4-0f) (clear f4-3f) (clear f5-2f) (clear f5-3f) (clear f2-0f) (at_square square1 f3-0f) (clear f5-0f) (at_square square0 f5-1f) (clear f0-1f) (at_two straight0 f1-1f f1-0f) (clear f1-3f) (at_two straight1 f2-3f f3-3f) (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+size: 10
+move_square f3-0f f2-0f square1 :: cost: 1
+    add: (clear f3-0f) (at_square square1 f2-0f)
+    del: (clear f2-0f) (at_square square1 f3-0f)
+move_square f3-0f f4-0f square1 :: cost: 1
+    add: (clear f3-0f) (at_square square1 f4-0f)
+    del: (clear f4-0f) (at_square square1 f3-0f)
+move_square f5-1f f5-0f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-0f)
+    del: (clear f5-0f) (at_square square0 f5-1f)
+move_square f5-1f f5-2f square0 :: cost: 1
+    add: (clear f5-1f) (at_square square0 f5-2f)
+    del: (clear f5-2f) (at_square square0 f5-1f)
+move_two f1-1f f1-0f f0-0f straight0 :: cost: 1
+    add: (clear f1-1f) (at_two straight0 f1-0f f0-0f)
+    del: (clear f0-0f) (at_two straight0 f1-1f f1-0f)
+move_two f1-1f f1-0f f2-0f straight0 :: cost: 1
+    add: (clear f1-1f) (at_two straight0 f1-0f f2-0f)
+    del: (clear f2-0f) (at_two straight0 f1-1f f1-0f)
+move_two f2-3f f3-3f f3-2f straight1 :: cost: 1
+    add: (clear f2-3f) (at_two straight1 f3-3f f3-2f)
+    del: (at_two straight1 f2-3f f3-3f) (clear f3-2f)
+move_two f2-3f f3-3f f4-3f straight1 :: cost: 1
+    add: (clear f2-3f) (at_two straight1 f3-3f f4-3f)
+    del: (clear f4-3f) (at_two straight1 f2-3f f3-3f)
+move_l_right f3-1f f4-1f f4-2f f3-2f f4-3f f3-3f rightl0 :: cost: 1
+    add: (clear f4-1f) (clear f3-1f) (at_right_l rightl0 f3-2f f4-2f f4-3f)
+    del: (clear f4-3f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)
+move_l_up f3-1f f4-1f f4-2f f2-1f f3-2f f2-2f rightl0 :: cost: 1
+    add: (clear f4-1f) (clear f4-2f) (at_right_l rightl0 f2-1f f3-1f f3-2f)
+    del: (clear f2-1f) (clear f3-2f) (at_right_l rightl0 f3-1f f4-1f f4-2f)

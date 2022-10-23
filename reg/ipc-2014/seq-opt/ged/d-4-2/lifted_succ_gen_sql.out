@@ -1,0 +1,137 @@
+Step 0 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub3 sub1) (cw sub4 sub3) (cw sub2 sub4) (idle)
+size: 8
+begin-cut sub4 sub3 :: cost: 0
+    add: (cutting) (cut-point-1 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3)
+    del: (cw sub4 sub3) (idle)
+begin-cut sub3 sub1 :: cost: 0
+    add: (cutting) (cut-point-1 sub3) (last-cut-point sub3) (s-first sub1) (s-last sub1)
+    del: (cw sub3 sub1) (idle)
+begin-cut sub2 sub4 :: cost: 0
+    add: (cutting) (cut-point-1 sub2) (last-cut-point sub2) (s-first sub4) (s-last sub4)
+    del: (cw sub2 sub4) (idle)
+begin-cut sub1 sub2 :: cost: 0
+    add: (cutting) (cut-point-1 sub1) (last-cut-point sub1) (s-first sub2) (s-last sub2)
+    del: (cw sub1 sub2) (idle)
+invert-single-gene-a sub4 :: cost: 1
+    add: (inverted sub4)
+    del: (normal sub4)
+invert-single-gene-a sub3 :: cost: 1
+    add: (inverted sub3)
+    del: (normal sub3)
+invert-single-gene-a sub2 :: cost: 1
+    add: (inverted sub2)
+    del: (normal sub2)
+invert-single-gene-a sub1 :: cost: 1
+    add: (inverted sub1)
+    del: (normal sub1)
+Step 1 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub3 sub1) (cw sub2 sub4) (cutting) (cut-point-1 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3)
+size: 2
+continue-cut sub3 sub1 :: cost: 0
+    add: (s-last sub1) (s-next sub3 sub1)
+    del: (cw sub3 sub1) (s-last sub3)
+end-cut-1 sub3 sub1 :: cost: 0
+    add: (cut-point-2 sub1)
+    del: (cw sub3 sub1)
+Step 2 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub2 sub4) (cutting) (cut-point-1 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3) (cut-point-2 sub1)
+size: 1
+end-cut-2 sub4 sub1 :: cost: 0
+    add: (have-cut) (cw sub4 sub1)
+    del: (cutting) (cut-point-1 sub4) (cut-point-2 sub1)
+Step 3 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub2 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3) (have-cut) (cw sub4 sub1)
+size: 7
+begin-transpose-splice sub4 sub1 :: cost: 2
+    add: (splicing) (splice-point-1 sub4) (splice-point-2 sub1)
+    del: (have-cut) (cw sub4 sub1)
+begin-transpose-splice sub2 sub4 :: cost: 2
+    add: (splicing) (splice-point-1 sub2) (splice-point-2 sub4)
+    del: (cw sub2 sub4) (have-cut)
+begin-transpose-splice sub1 sub2 :: cost: 2
+    add: (splicing) (splice-point-1 sub1) (splice-point-2 sub2)
+    del: (cw sub1 sub2) (have-cut)
+begin-transverse-splice sub4 sub1 :: cost: 2
+    add: (splice-point-1 sub4) (splice-point-2 sub1) (inverse-splicing)
+    del: (have-cut) (cw sub4 sub1)
+begin-transverse-splice sub2 sub4 :: cost: 2
+    add: (splice-point-1 sub2) (splice-point-2 sub4) (inverse-splicing)
+    del: (cw sub2 sub4) (have-cut)
+begin-transverse-splice sub1 sub2 :: cost: 2
+    add: (splice-point-1 sub1) (splice-point-2 sub2) (inverse-splicing)
+    del: (cw sub1 sub2) (have-cut)
+begin-inverse-splice sub4 sub1 :: cost: 1
+    add: (splice-point-1 sub4) (splice-point-2 sub1) (inverse-splicing)
+    del: (have-cut) (cw sub4 sub1)
+Step 4 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub2 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3) (splice-point-1 sub4) (splice-point-2 sub1) (inverse-splicing)
+size: 1
+end-inverse-splice-1a sub3 sub4 :: cost: 0
+    add: (cw sub4 sub3) (inverted sub3) (inverse-splicing-last) (splice-point-1 sub3)
+    del: (normal sub3) (s-first sub3) (s-last sub3) (splice-point-1 sub4) (inverse-splicing)
+Step 5 (normal sub2) (normal sub4) (normal sub1) (cw sub1 sub2) (cw sub4 sub3) (cw sub2 sub4) (last-cut-point sub4) (inverted sub3) (splice-point-2 sub1) (inverse-splicing-last) (splice-point-1 sub3)
+size: 1
+end-inverse-splice-2 sub3 sub1 :: cost: 0
+    add: (cw sub3 sub1) (finished)
+    del: (splice-point-2 sub1) (inverse-splicing-last) (splice-point-1 sub3)
+Step 6 (normal sub2) (normal sub4) (normal sub1) (cw sub1 sub2) (cw sub3 sub1) (cw sub4 sub3) (cw sub2 sub4) (last-cut-point sub4) (inverted sub3) (finished)
+size: 1
+reset-1 sub4 :: cost: 0
+    add: (idle)
+    del: (last-cut-point sub4) (finished)
+Step 7 (normal sub2) (normal sub4) (normal sub1) (cw sub1 sub2) (cw sub3 sub1) (cw sub4 sub3) (cw sub2 sub4) (idle) (inverted sub3)
+size: 8
+begin-cut sub4 sub3 :: cost: 0
+    add: (cutting) (cut-point-1 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3)
+    del: (cw sub4 sub3) (idle)
+begin-cut sub3 sub1 :: cost: 0
+    add: (cutting) (cut-point-1 sub3) (last-cut-point sub3) (s-first sub1) (s-last sub1)
+    del: (cw sub3 sub1) (idle)
+begin-cut sub2 sub4 :: cost: 0
+    add: (cutting) (cut-point-1 sub2) (last-cut-point sub2) (s-first sub4) (s-last sub4)
+    del: (cw sub2 sub4) (idle)
+begin-cut sub1 sub2 :: cost: 0
+    add: (cutting) (cut-point-1 sub1) (last-cut-point sub1) (s-first sub2) (s-last sub2)
+    del: (cw sub1 sub2) (idle)
+invert-single-gene-a sub4 :: cost: 1
+    add: (inverted sub4)
+    del: (normal sub4)
+invert-single-gene-a sub2 :: cost: 1
+    add: (inverted sub2)
+    del: (normal sub2)
+invert-single-gene-a sub1 :: cost: 1
+    add: (inverted sub1)
+    del: (normal sub1)
+invert-single-gene-b sub3 :: cost: 1
+    add: (normal sub3)
+    del: (inverted sub3)
+Step 8 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub3 sub1) (cw sub4 sub3) (cw sub2 sub4) (idle)
+size: 8
+begin-cut sub4 sub3 :: cost: 0
+    add: (cutting) (cut-point-1 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3)
+    del: (cw sub4 sub3) (idle)
+begin-cut sub3 sub1 :: cost: 0
+    add: (cutting) (cut-point-1 sub3) (last-cut-point sub3) (s-first sub1) (s-last sub1)
+    del: (cw sub3 sub1) (idle)
+begin-cut sub2 sub4 :: cost: 0
+    add: (cutting) (cut-point-1 sub2) (last-cut-point sub2) (s-first sub4) (s-last sub4)
+    del: (cw sub2 sub4) (idle)
+begin-cut sub1 sub2 :: cost: 0
+    add: (cutting) (cut-point-1 sub1) (last-cut-point sub1) (s-first sub2) (s-last sub2)
+    del: (cw sub1 sub2) (idle)
+invert-single-gene-a sub4 :: cost: 1
+    add: (inverted sub4)
+    del: (normal sub4)
+invert-single-gene-a sub3 :: cost: 1
+    add: (inverted sub3)
+    del: (normal sub3)
+invert-single-gene-a sub2 :: cost: 1
+    add: (inverted sub2)
+    del: (normal sub2)
+invert-single-gene-a sub1 :: cost: 1
+    add: (inverted sub1)
+    del: (normal sub1)
+Step 9 (normal sub2) (normal sub4) (normal sub3) (normal sub1) (cw sub1 sub2) (cw sub3 sub1) (cw sub2 sub4) (cutting) (cut-point-1 sub4) (last-cut-point sub4) (s-first sub3) (s-last sub3)
+size: 2
+continue-cut sub3 sub1 :: cost: 0
+    add: (s-last sub1) (s-next sub3 sub1)
+    del: (cw sub3 sub1) (s-last sub3)
+end-cut-1 sub3 sub1 :: cost: 0
+    add: (cut-point-2 sub1)
+    del: (cw sub3 sub1)

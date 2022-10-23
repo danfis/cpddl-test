@@ -1,0 +1,131 @@
+Step 0 (stacks-avail n0) (waiting o1) (waiting o2) (waiting o3) (waiting o4) (waiting o5) (NOT-made p1) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5)
+size: 1
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+Step 1 (waiting o1) (waiting o2) (waiting o3) (waiting o4) (waiting o5) (NOT-made p1) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (stacks-avail n1)
+size: 6
+start-order o1 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o1)
+    del: (waiting o1) (stacks-avail n1)
+start-order o2 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o2)
+    del: (waiting o2) (stacks-avail n1)
+start-order o3 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o3)
+    del: (waiting o3) (stacks-avail n1)
+start-order o4 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o4)
+    del: (waiting o4) (stacks-avail n1)
+start-order o5 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o5)
+    del: (waiting o5) (stacks-avail n1)
+open-new-stack n1 n2 :: cost: 1
+    add: (stacks-avail n2)
+    del: (stacks-avail n1)
+Step 2 (stacks-avail n0) (waiting o1) (waiting o3) (waiting o4) (waiting o5) (NOT-made p1) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (started o2)
+size: 2
+make-product p1 :: cost: 0
+    add: (made p1)
+    del: (NOT-made p1)
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+Step 3 (stacks-avail n0) (waiting o1) (waiting o3) (waiting o4) (waiting o5) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (started o2) (made p1)
+size: 1
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+Step 4 (waiting o1) (waiting o3) (waiting o4) (waiting o5) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (stacks-avail n1) (started o2) (made p1)
+size: 5
+start-order o1 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o1)
+    del: (waiting o1) (stacks-avail n1)
+start-order o3 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o3)
+    del: (waiting o3) (stacks-avail n1)
+start-order o4 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o4)
+    del: (waiting o4) (stacks-avail n1)
+start-order o5 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o5)
+    del: (waiting o5) (stacks-avail n1)
+open-new-stack n1 n2 :: cost: 1
+    add: (stacks-avail n2)
+    del: (stacks-avail n1)
+Step 5 (waiting o1) (waiting o3) (waiting o4) (waiting o5) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (started o2) (stacks-avail n2) (made p1)
+size: 5
+start-order o1 n2 n1 :: cost: 0
+    add: (stacks-avail n1) (started o1)
+    del: (waiting o1) (stacks-avail n2)
+start-order o3 n2 n1 :: cost: 0
+    add: (stacks-avail n1) (started o3)
+    del: (waiting o3) (stacks-avail n2)
+start-order o4 n2 n1 :: cost: 0
+    add: (stacks-avail n1) (started o4)
+    del: (waiting o4) (stacks-avail n2)
+start-order o5 n2 n1 :: cost: 0
+    add: (stacks-avail n1) (started o5)
+    del: (waiting o5) (stacks-avail n2)
+open-new-stack n2 n3 :: cost: 1
+    add: (stacks-avail n3)
+    del: (stacks-avail n2)
+Step 6 (waiting o3) (waiting o4) (waiting o5) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (stacks-avail n1) (started o1) (started o2) (made p1)
+size: 5
+start-order o3 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o3)
+    del: (waiting o3) (stacks-avail n1)
+start-order o4 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o4)
+    del: (waiting o4) (stacks-avail n1)
+start-order o5 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o5)
+    del: (waiting o5) (stacks-avail n1)
+open-new-stack n1 n2 :: cost: 1
+    add: (stacks-avail n2)
+    del: (stacks-avail n1)
+make-product p2 :: cost: 0
+    add: (made p2)
+    del: (NOT-made p2)
+Step 7 (stacks-avail n0) (waiting o3) (waiting o5) (NOT-made p2) (NOT-made p3) (NOT-made p4) (NOT-made p5) (started o1) (started o2) (started o4) (made p1)
+size: 3
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+make-product p2 :: cost: 0
+    add: (made p2)
+    del: (NOT-made p2)
+make-product p4 :: cost: 0
+    add: (made p4)
+    del: (NOT-made p4)
+Step 8 (stacks-avail n0) (waiting o3) (waiting o5) (NOT-made p3) (NOT-made p4) (NOT-made p5) (started o1) (started o2) (started o4) (made p1) (made p2)
+size: 4
+ship-order o1 n0 n1 :: cost: 0
+    add: (stacks-avail n1) (shipped o1)
+    del: (stacks-avail n0) (started o1)
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+make-product p4 :: cost: 0
+    add: (made p4)
+    del: (NOT-made p4)
+ship-order o2 n0 n1 :: cost: 0
+    add: (stacks-avail n1) (shipped o2)
+    del: (stacks-avail n0) (started o2)
+Step 9 (waiting o3) (waiting o5) (NOT-made p3) (NOT-made p4) (NOT-made p5) (stacks-avail n1) (started o2) (started o4) (made p1) (made p2) (shipped o1)
+size: 5
+start-order o3 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o3)
+    del: (waiting o3) (stacks-avail n1)
+start-order o5 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o5)
+    del: (waiting o5) (stacks-avail n1)
+open-new-stack n1 n2 :: cost: 1
+    add: (stacks-avail n2)
+    del: (stacks-avail n1)
+make-product p4 :: cost: 0
+    add: (made p4)
+    del: (NOT-made p4)
+ship-order o2 n1 n2 :: cost: 0
+    add: (stacks-avail n2) (shipped o2)
+    del: (stacks-avail n1) (started o2)

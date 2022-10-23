@@ -1,0 +1,149 @@
+Step 0 (at plane1 city0) (fuel-level plane1 fl1) (at person1 city0) (at person2 city2)
+size: 5
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+fly plane1 city0 city0 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city0 city1 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city1)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+fly plane1 city0 city2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+refuel plane1 city0 fl1 fl2 :: cost: 1
+    add: (fuel-level plane1 fl2)
+    del: (fuel-level plane1 fl1)
+Step 1 (at plane1 city0) (fuel-level plane1 fl1) (at person2 city2) (in person1 plane1)
+size: 5
+debark person1 plane1 city0 :: cost: 1
+    add: (at person1 city0)
+    del: (in person1 plane1)
+fly plane1 city0 city0 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city0 city1 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city1)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+fly plane1 city0 city2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+refuel plane1 city0 fl1 fl2 :: cost: 1
+    add: (fuel-level plane1 fl2)
+    del: (fuel-level plane1 fl1)
+Step 2 (at plane1 city0) (at person2 city2) (in person1 plane1) (fuel-level plane1 fl0)
+size: 2
+debark person1 plane1 city0 :: cost: 1
+    add: (at person1 city0)
+    del: (in person1 plane1)
+refuel plane1 city0 fl0 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl0)
+Step 3 (at plane1 city0) (at person1 city0) (at person2 city2) (fuel-level plane1 fl0)
+size: 2
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+refuel plane1 city0 fl0 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl0)
+Step 4 (at plane1 city0) (fuel-level plane1 fl1) (at person1 city0) (at person2 city2)
+size: 5
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+fly plane1 city0 city0 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city0 city1 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city1)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+fly plane1 city0 city2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+refuel plane1 city0 fl1 fl2 :: cost: 1
+    add: (fuel-level plane1 fl2)
+    del: (fuel-level plane1 fl1)
+Step 5 (at plane1 city0) (at person1 city0) (at person2 city2) (fuel-level plane1 fl2)
+size: 8
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+fly plane1 city0 city0 fl2 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl2)
+fly plane1 city0 city1 fl2 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1) (at plane1 city1)
+    del: (at plane1 city0) (fuel-level plane1 fl2)
+fly plane1 city0 city2 fl2 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1) (at plane1 city2)
+    del: (at plane1 city0) (fuel-level plane1 fl2)
+zoom plane1 city0 city0 fl2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl2)
+zoom plane1 city0 city1 fl2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city1)
+    del: (at plane1 city0) (fuel-level plane1 fl2)
+zoom plane1 city0 city2 fl2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (at plane1 city0) (fuel-level plane1 fl2)
+refuel plane1 city0 fl2 fl3 :: cost: 1
+    add: (fuel-level plane1 fl3)
+    del: (fuel-level plane1 fl2)
+Step 6 (at person1 city0) (at person2 city2) (fuel-level plane1 fl0) (at plane1 city1)
+size: 1
+refuel plane1 city1 fl0 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl0)
+Step 7 (fuel-level plane1 fl1) (at person1 city0) (at person2 city2) (at plane1 city1)
+size: 4
+fly plane1 city1 city0 fl1 fl0 :: cost: 1
+    add: (at plane1 city0) (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1) (at plane1 city1)
+fly plane1 city1 city1 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city1 city2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (fuel-level plane1 fl1) (at plane1 city1)
+refuel plane1 city1 fl1 fl2 :: cost: 1
+    add: (fuel-level plane1 fl2)
+    del: (fuel-level plane1 fl1)
+Step 8 (at person1 city0) (at person2 city2) (at plane1 city1) (fuel-level plane1 fl2)
+size: 7
+fly plane1 city1 city0 fl2 fl1 :: cost: 1
+    add: (at plane1 city0) (fuel-level plane1 fl1)
+    del: (at plane1 city1) (fuel-level plane1 fl2)
+fly plane1 city1 city1 fl2 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl2)
+fly plane1 city1 city2 fl2 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1) (at plane1 city2)
+    del: (at plane1 city1) (fuel-level plane1 fl2)
+zoom plane1 city1 city0 fl2 fl1 fl0 :: cost: 1
+    add: (at plane1 city0) (fuel-level plane1 fl0)
+    del: (at plane1 city1) (fuel-level plane1 fl2)
+zoom plane1 city1 city1 fl2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl2)
+zoom plane1 city1 city2 fl2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (at plane1 city1) (fuel-level plane1 fl2)
+refuel plane1 city1 fl2 fl3 :: cost: 1
+    add: (fuel-level plane1 fl3)
+    del: (fuel-level plane1 fl2)
+Step 9 (fuel-level plane1 fl1) (at person1 city0) (at person2 city2) (at plane1 city1)
+size: 4
+fly plane1 city1 city0 fl1 fl0 :: cost: 1
+    add: (at plane1 city0) (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1) (at plane1 city1)
+fly plane1 city1 city1 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city1 city2 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0) (at plane1 city2)
+    del: (fuel-level plane1 fl1) (at plane1 city1)
+refuel plane1 city1 fl1 fl2 :: cost: 1
+    add: (fuel-level plane1 fl2)
+    del: (fuel-level plane1 fl1)

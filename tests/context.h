@@ -34,4 +34,6 @@ typedef struct context context_t;
 
 extern context_t C;
 
+int validateLiftedPlan(const pddl_lifted_plan_t *plan);
+
 #endif /* __TEST_CONTEXT_H__ */

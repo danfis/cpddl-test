@@ -43,6 +43,28 @@ static int optimalCost(const char *problem_fn)
     return cost;
 }
 
+int validateLiftedPlan(const pddl_lifted_plan_t *plan)
+{
+    char fn[128];
+    sprintf(fn, "validate-%d-XXXXXX", (int)getpid());
+    int fd = mkstemp(fn);
+    FILE *fplan = fdopen(fd, "w");
+    assert(fplan != NULL);
+    for (int i = 0; i < plan->plan_len; ++i){
+        fprintf(fplan, "(%s)\n", plan->plan[i]);
+    }
+    fflush(fplan);
+    fclose(fplan);
+
+    char cmd[256];
+    sprintf(cmd, "val/validate %s %s %s >/dev/null 2>&1",
+            C.files.domain_pddl, C.files.problem_pddl, fn);
+    int sret = system(cmd);
+
+    unlink(fn);
+    return sret;
+}
+
 TEST(r, _)
 {
     pddlErrInit(&C.err);

@@ -1,0 +1,452 @@
+Step 0 (robot-at robot1 tile_4-4) (robot-has robot1 white) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-4) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-4) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5)
+size: 16
+change-color robot1 white white :: cost: 5
+    add:
+    del:
+change-color robot1 white black :: cost: 5
+    add: (robot-has robot1 black)
+    del: (robot-has robot1 white)
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot1 tile_5-4 tile_4-4 white :: cost: 2
+    add: (painted tile_5-4 white)
+    del: (clear tile_5-4)
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-4 tile_4-4 white :: cost: 2
+    add: (painted tile_3-4 white)
+    del: (clear tile_3-4)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot1 tile_4-4 tile_5-4 :: cost: 3
+    add: (robot-at robot1 tile_5-4) (clear tile_4-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_5-4)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-4 tile_3-4 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_3-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_3-4)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 1 (robot-at robot1 tile_4-4) (robot-has robot1 white) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-4) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-4) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5)
+size: 16
+change-color robot1 white white :: cost: 5
+    add:
+    del:
+change-color robot1 white black :: cost: 5
+    add: (robot-has robot1 black)
+    del: (robot-has robot1 white)
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot1 tile_5-4 tile_4-4 white :: cost: 2
+    add: (painted tile_5-4 white)
+    del: (clear tile_5-4)
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-4 tile_4-4 white :: cost: 2
+    add: (painted tile_3-4 white)
+    del: (clear tile_3-4)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot1 tile_4-4 tile_5-4 :: cost: 3
+    add: (robot-at robot1 tile_5-4) (clear tile_4-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_5-4)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-4 tile_3-4 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_3-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_3-4)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 2 (robot-at robot1 tile_4-4) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-4) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-4) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black)
+size: 16
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot1 tile_5-4 tile_4-4 black :: cost: 2
+    add: (painted tile_5-4 black)
+    del: (clear tile_5-4)
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-4 tile_4-4 black :: cost: 2
+    add: (painted tile_3-4 black)
+    del: (clear tile_3-4)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot1 tile_4-4 tile_5-4 :: cost: 3
+    add: (robot-at robot1 tile_5-4) (clear tile_4-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_5-4)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-4 tile_3-4 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_3-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_3-4)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 3 (robot-at robot1 tile_4-4) (robot-at robot2 tile_2-3) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-4) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-4) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black) (robot-has robot2 white)
+size: 16
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 white white :: cost: 5
+    add:
+    del:
+change-color robot2 white black :: cost: 5
+    add: (robot-has robot2 black)
+    del: (robot-has robot2 white)
+paint-up robot1 tile_5-4 tile_4-4 black :: cost: 2
+    add: (painted tile_5-4 black)
+    del: (clear tile_5-4)
+paint-up robot2 tile_3-3 tile_2-3 white :: cost: 2
+    add: (painted tile_3-3 white)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-4 tile_4-4 black :: cost: 2
+    add: (painted tile_3-4 black)
+    del: (clear tile_3-4)
+paint-down robot2 tile_1-3 tile_2-3 white :: cost: 2
+    add: (painted tile_1-3 white)
+    del: (clear tile_1-3)
+up robot1 tile_4-4 tile_5-4 :: cost: 3
+    add: (robot-at robot1 tile_5-4) (clear tile_4-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_5-4)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-4 tile_3-4 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_3-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_3-4)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 4 (robot-at robot1 tile_4-4) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-4) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-4) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black)
+size: 16
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot1 tile_5-4 tile_4-4 black :: cost: 2
+    add: (painted tile_5-4 black)
+    del: (clear tile_5-4)
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-4 tile_4-4 black :: cost: 2
+    add: (painted tile_3-4 black)
+    del: (clear tile_3-4)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot1 tile_4-4 tile_5-4 :: cost: 3
+    add: (robot-at robot1 tile_5-4) (clear tile_4-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_5-4)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-4 tile_3-4 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_3-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_3-4)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 5 (robot-at robot1 tile_4-4) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-4) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black) (painted tile_5-4 black)
+size: 14
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-4 tile_4-4 black :: cost: 2
+    add: (painted tile_3-4 black)
+    del: (clear tile_3-4)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-4 tile_3-4 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_3-4)
+    del: (robot-at robot1 tile_4-4) (clear tile_3-4)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 6 (robot-at robot1 tile_4-4) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black) (painted tile_5-4 black) (painted tile_3-4 black)
+size: 12
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 7 (robot-at robot1 tile_4-4) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black) (robot-at robot2 tile_3-3) (clear tile_2-3) (painted tile_5-4 black) (painted tile_3-4 black)
+size: 11
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot2 tile_4-3 tile_3-3 black :: cost: 2
+    add: (painted tile_4-3 black)
+    del: (clear tile_4-3)
+paint-down robot2 tile_2-3 tile_3-3 black :: cost: 2
+    add: (painted tile_2-3 black)
+    del: (clear tile_2-3)
+up robot2 tile_3-3 tile_4-3 :: cost: 3
+    add: (clear tile_3-3) (robot-at robot2 tile_4-3)
+    del: (clear tile_4-3) (robot-at robot2 tile_3-3)
+down robot2 tile_3-3 tile_2-3 :: cost: 1
+    add: (robot-at robot2 tile_2-3) (clear tile_3-3)
+    del: (robot-at robot2 tile_3-3) (clear tile_2-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_3-3 tile_3-2 :: cost: 1
+    add: (clear tile_3-3) (robot-at robot2 tile_3-2)
+    del: (clear tile_3-2) (robot-at robot2 tile_3-3)
+Step 8 (robot-at robot1 tile_4-4) (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_4-5) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black) (painted tile_5-4 black) (painted tile_3-4 black)
+size: 12
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot1 tile_4-4 tile_4-5 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-5)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-5)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-4 tile_4-3 :: cost: 1
+    add: (clear tile_4-4) (robot-at robot1 tile_4-3)
+    del: (robot-at robot1 tile_4-4) (clear tile_4-3)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)
+Step 9 (robot-at robot2 tile_2-3) (robot-has robot2 black) (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (clear tile_0-4) (clear tile_0-5) (clear tile_1-1) (clear tile_1-2) (clear tile_1-3) (clear tile_1-4) (clear tile_1-5) (clear tile_2-1) (clear tile_2-2) (clear tile_2-4) (clear tile_2-5) (clear tile_3-1) (clear tile_3-2) (clear tile_3-3) (clear tile_3-5) (clear tile_4-1) (clear tile_4-2) (clear tile_4-3) (clear tile_5-1) (clear tile_5-2) (clear tile_5-3) (clear tile_5-5) (clear tile_6-1) (clear tile_6-2) (clear tile_6-3) (clear tile_6-4) (clear tile_6-5) (robot-has robot1 black) (clear tile_4-4) (robot-at robot1 tile_4-5) (painted tile_5-4 black) (painted tile_3-4 black)
+size: 15
+change-color robot1 black white :: cost: 5
+    add: (robot-has robot1 white)
+    del: (robot-has robot1 black)
+change-color robot1 black black :: cost: 5
+    add:
+    del:
+change-color robot2 black white :: cost: 5
+    add: (robot-has robot2 white)
+    del: (robot-has robot2 black)
+change-color robot2 black black :: cost: 5
+    add:
+    del:
+paint-up robot1 tile_5-5 tile_4-5 black :: cost: 2
+    add: (painted tile_5-5 black)
+    del: (clear tile_5-5)
+paint-up robot2 tile_3-3 tile_2-3 black :: cost: 2
+    add: (painted tile_3-3 black)
+    del: (clear tile_3-3)
+paint-down robot1 tile_3-5 tile_4-5 black :: cost: 2
+    add: (painted tile_3-5 black)
+    del: (clear tile_3-5)
+paint-down robot2 tile_1-3 tile_2-3 black :: cost: 2
+    add: (painted tile_1-3 black)
+    del: (clear tile_1-3)
+up robot1 tile_4-5 tile_5-5 :: cost: 3
+    add: (clear tile_4-5) (robot-at robot1 tile_5-5)
+    del: (clear tile_5-5) (robot-at robot1 tile_4-5)
+up robot2 tile_2-3 tile_3-3 :: cost: 3
+    add: (robot-at robot2 tile_3-3) (clear tile_2-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_3-3)
+down robot1 tile_4-5 tile_3-5 :: cost: 1
+    add: (clear tile_4-5) (robot-at robot1 tile_3-5)
+    del: (clear tile_3-5) (robot-at robot1 tile_4-5)
+down robot2 tile_2-3 tile_1-3 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_1-3)
+    del: (robot-at robot2 tile_2-3) (clear tile_1-3)
+right robot2 tile_2-3 tile_2-4 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-4)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-4)
+left robot1 tile_4-5 tile_4-4 :: cost: 1
+    add: (robot-at robot1 tile_4-4) (clear tile_4-5)
+    del: (clear tile_4-4) (robot-at robot1 tile_4-5)
+left robot2 tile_2-3 tile_2-2 :: cost: 1
+    add: (clear tile_2-3) (robot-at robot2 tile_2-2)
+    del: (robot-at robot2 tile_2-3) (clear tile_2-2)

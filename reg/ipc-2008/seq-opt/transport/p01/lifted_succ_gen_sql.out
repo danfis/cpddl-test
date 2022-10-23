@@ -1,0 +1,173 @@
+Step 0 (at package-1 city-loc-3) (at package-2 city-loc-3) (at truck-1 city-loc-3) (capacity truck-1 capacity-4) (at truck-2 city-loc-1) (capacity truck-2 capacity-3)
+size: 5
+drive truck-1 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-1 city-loc-1)
+    del: (at truck-1 city-loc-3)
+drive truck-1 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-1 city-loc-2)
+    del: (at truck-1 city-loc-3)
+drive truck-2 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-2 city-loc-3)
+    del: (at truck-2 city-loc-1)
+pick-up truck-1 city-loc-3 package-1 capacity-3 capacity-4 :: cost: 1
+    add: (in package-1 truck-1) (capacity truck-1 capacity-3)
+    del: (at package-1 city-loc-3) (capacity truck-1 capacity-4)
+pick-up truck-1 city-loc-3 package-2 capacity-3 capacity-4 :: cost: 1
+    add: (capacity truck-1 capacity-3) (in package-2 truck-1)
+    del: (at package-2 city-loc-3) (capacity truck-1 capacity-4)
+Step 1 (at package-1 city-loc-3) (at package-2 city-loc-3) (capacity truck-1 capacity-4) (at truck-2 city-loc-1) (capacity truck-2 capacity-3) (at truck-1 city-loc-1)
+size: 2
+drive truck-1 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-1 city-loc-3)
+    del: (at truck-1 city-loc-1)
+drive truck-2 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-2 city-loc-3)
+    del: (at truck-2 city-loc-1)
+Step 2 (at package-1 city-loc-3) (at package-2 city-loc-3) (capacity truck-1 capacity-4) (capacity truck-2 capacity-3) (at truck-1 city-loc-1) (at truck-2 city-loc-3)
+size: 5
+drive truck-1 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-1 city-loc-3)
+    del: (at truck-1 city-loc-1)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-2 city-loc-3 package-1 capacity-2 capacity-3 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-2)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-3)
+pick-up truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (capacity truck-2 capacity-2) (in package-2 truck-2)
+    del: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+Step 3 (at package-1 city-loc-3) (at package-2 city-loc-3) (capacity truck-1 capacity-4) (capacity truck-2 capacity-3) (at truck-1 city-loc-1) (at truck-2 city-loc-2)
+size: 2
+drive truck-1 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-1 city-loc-3)
+    del: (at truck-1 city-loc-1)
+drive truck-2 city-loc-2 city-loc-3 :: cost: 50
+    add: (at truck-2 city-loc-3)
+    del: (at truck-2 city-loc-2)
+Step 4 (at package-1 city-loc-3) (at package-2 city-loc-3) (capacity truck-1 capacity-4) (capacity truck-2 capacity-3) (at truck-1 city-loc-1) (at truck-2 city-loc-3)
+size: 5
+drive truck-1 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-1 city-loc-3)
+    del: (at truck-1 city-loc-1)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-2 city-loc-3 package-1 capacity-2 capacity-3 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-2)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-3)
+pick-up truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (capacity truck-2 capacity-2) (in package-2 truck-2)
+    del: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+Step 5 (at package-1 city-loc-3) (capacity truck-1 capacity-4) (at truck-1 city-loc-1) (at truck-2 city-loc-3) (capacity truck-2 capacity-2) (in package-2 truck-2)
+size: 5
+drive truck-1 city-loc-1 city-loc-3 :: cost: 22
+    add: (at truck-1 city-loc-3)
+    del: (at truck-1 city-loc-1)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-2 city-loc-3 package-1 capacity-1 capacity-2 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-1)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-2)
+drop truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+    del: (capacity truck-2 capacity-2) (in package-2 truck-2)
+Step 6 (at package-1 city-loc-3) (at truck-1 city-loc-3) (capacity truck-1 capacity-4) (at truck-2 city-loc-3) (capacity truck-2 capacity-2) (in package-2 truck-2)
+size: 7
+drive truck-1 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-1 city-loc-1)
+    del: (at truck-1 city-loc-3)
+drive truck-1 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-1 city-loc-2)
+    del: (at truck-1 city-loc-3)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-1 city-loc-3 package-1 capacity-3 capacity-4 :: cost: 1
+    add: (in package-1 truck-1) (capacity truck-1 capacity-3)
+    del: (at package-1 city-loc-3) (capacity truck-1 capacity-4)
+pick-up truck-2 city-loc-3 package-1 capacity-1 capacity-2 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-1)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-2)
+drop truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+    del: (capacity truck-2 capacity-2) (in package-2 truck-2)
+Step 7 (at package-1 city-loc-3) (at package-2 city-loc-3) (at truck-1 city-loc-3) (capacity truck-1 capacity-4) (capacity truck-2 capacity-3) (at truck-2 city-loc-3)
+size: 8
+drive truck-1 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-1 city-loc-1)
+    del: (at truck-1 city-loc-3)
+drive truck-1 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-1 city-loc-2)
+    del: (at truck-1 city-loc-3)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-1 city-loc-3 package-1 capacity-3 capacity-4 :: cost: 1
+    add: (in package-1 truck-1) (capacity truck-1 capacity-3)
+    del: (at package-1 city-loc-3) (capacity truck-1 capacity-4)
+pick-up truck-1 city-loc-3 package-2 capacity-3 capacity-4 :: cost: 1
+    add: (capacity truck-1 capacity-3) (in package-2 truck-1)
+    del: (at package-2 city-loc-3) (capacity truck-1 capacity-4)
+pick-up truck-2 city-loc-3 package-1 capacity-2 capacity-3 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-2)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-3)
+pick-up truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (capacity truck-2 capacity-2) (in package-2 truck-2)
+    del: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+Step 8 (at package-1 city-loc-3) (at truck-1 city-loc-3) (capacity truck-1 capacity-4) (at truck-2 city-loc-3) (capacity truck-2 capacity-2) (in package-2 truck-2)
+size: 7
+drive truck-1 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-1 city-loc-1)
+    del: (at truck-1 city-loc-3)
+drive truck-1 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-1 city-loc-2)
+    del: (at truck-1 city-loc-3)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-1 city-loc-3 package-1 capacity-3 capacity-4 :: cost: 1
+    add: (in package-1 truck-1) (capacity truck-1 capacity-3)
+    del: (at package-1 city-loc-3) (capacity truck-1 capacity-4)
+pick-up truck-2 city-loc-3 package-1 capacity-1 capacity-2 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-1)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-2)
+drop truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+    del: (capacity truck-2 capacity-2) (in package-2 truck-2)
+Step 9 (at package-1 city-loc-3) (capacity truck-1 capacity-4) (at truck-1 city-loc-2) (at truck-2 city-loc-3) (capacity truck-2 capacity-2) (in package-2 truck-2)
+size: 5
+drive truck-1 city-loc-2 city-loc-3 :: cost: 50
+    add: (at truck-1 city-loc-3)
+    del: (at truck-1 city-loc-2)
+drive truck-2 city-loc-3 city-loc-1 :: cost: 22
+    add: (at truck-2 city-loc-1)
+    del: (at truck-2 city-loc-3)
+drive truck-2 city-loc-3 city-loc-2 :: cost: 50
+    add: (at truck-2 city-loc-2)
+    del: (at truck-2 city-loc-3)
+pick-up truck-2 city-loc-3 package-1 capacity-1 capacity-2 :: cost: 1
+    add: (in package-1 truck-2) (capacity truck-2 capacity-1)
+    del: (at package-1 city-loc-3) (capacity truck-2 capacity-2)
+drop truck-2 city-loc-3 package-2 capacity-2 capacity-3 :: cost: 1
+    add: (at package-2 city-loc-3) (capacity truck-2 capacity-3)
+    del: (capacity truck-2 capacity-2) (in package-2 truck-2)

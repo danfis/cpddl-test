@@ -43,6 +43,7 @@ TESTS += homomorphism
 TESTS += endomorphism
 TESTS += lifted_heur
 TESTS += subprocess
+TESTS += lifted_search
 #TESTS += asnets
 
 
@@ -56,7 +57,7 @@ C_IN += tasks_tests.c
 
 all: $(TARGETS)
 
-test: test.c $(C_IN) ../libpddl.a $(OBJS)
+test: test.c $(C_IN) ../libpddl.a $(OBJS) val/validate
 	$(CC) $(CFLAGS) -o $@ $< tasks_tests.c $(OBJS) $(LDFLAGS)
 test.in.c: scripts/gen-tests.py $(TESTS_C)
 	python3 scripts/gen-tests.py $(TESTS_C) >$@
@@ -69,6 +70,9 @@ test.tasks.all.in.c: tasks-base.txt tasks-all.txt scripts/gen-tasks.py
 	$(CC) $(CFLAGS) -c -o $@ $<
 .objs/%.o: tests/%.c ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+val/validate: val/Makefile val/src/*.cpp
+	$(MAKE) -C val
 
 check: all submodule
 	./test $(T) 2>&1 | tee check.log
@@ -116,6 +120,7 @@ check-valgrind-gen-suppressions: all
              ./test $(T)
 
 clean:
+	$(MAKE) -C val clean
 	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o

@@ -1,0 +1,128 @@
+Step 0 (uninitialized) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color)
+size: 1
+initialize :: cost: 0
+    add: (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc)
+    del: (uninitialized)
+Step 1 (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc)
+size: 4
+fe1-feedmsi-letter sheet1 :: cost: 125
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+fe1-feedmsi-letter sheet2 :: cost: 125
+    add: (location sheet2 fe1_exit-hw1_leftentry) (sideup sheet2 back)
+    del: (location sheet2 some_feeder_tray)
+fe1-feed-letter sheet1 :: cost: 224
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+fe1-feed-letter sheet2 :: cost: 224
+    add: (location sheet2 fe1_exit-hw1_leftentry) (sideup sheet2 back)
+    del: (location sheet2 some_feeder_tray)
+Step 2 (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (location sheet2 fe1_exit-hw1_leftentry) (sideup sheet2 back)
+size: 4
+fe1-feedmsi-letter sheet1 :: cost: 125
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+fe1-feed-letter sheet1 :: cost: 224
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+hw1-leftentrytotopleftexit-letter sheet2 :: cost: 1499
+    add: (location sheet2 uc1_entry-hw1_topleftexit)
+    del: (location sheet2 fe1_exit-hw1_leftentry)
+hw1-leftentrytobottomleftexit-letter sheet2 :: cost: 1499
+    add: (location sheet2 lc1_entry-hw1_bottomleftexit)
+    del: (location sheet2 fe1_exit-hw1_leftentry)
+Step 3 (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (sideup sheet2 back) (location sheet2 uc1_entry-hw1_topleftexit)
+size: 4
+fe1-feedmsi-letter sheet1 :: cost: 125
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+fe1-feed-letter sheet1 :: cost: 224
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+uc1-toime-letter sheet2 :: cost: 2999
+    add: (location sheet2 uc1_exittoime-uime_entry)
+    del: (location sheet2 uc1_entry-hw1_topleftexit)
+uc1-inverttoime-letter sheet2 back front :: cost: 8000
+    add: (location sheet2 uc1_exittoime-uime_entry) (sideup sheet2 front)
+    del: (sideup sheet2 back) (location sheet2 uc1_entry-hw1_topleftexit)
+Step 4 (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (location sheet2 uc1_exittoime-uime_entry) (sideup sheet2 front)
+size: 3
+fe1-feedmsi-letter sheet1 :: cost: 125
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+fe1-feed-letter sheet1 :: cost: 224
+    add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
+    del: (location sheet1 some_feeder_tray)
+uime-simplex-letter sheet2 front image-2 :: cost: 127790
+    add: (location sheet2 uime_exit-uc1_entryfromime) (hasimage sheet2 front image-2)
+    del: (notprintedwith sheet2 front black) (location sheet2 uc1_exittoime-uime_entry)
+Step 5 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back) (location sheet2 uc1_exittoime-uime_entry) (sideup sheet2 front)
+size: 3
+hw1-leftentrytotopleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 uc1_entry-hw1_topleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+hw1-leftentrytobottomleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 lc1_entry-hw1_bottomleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+uime-simplex-letter sheet2 front image-2 :: cost: 127790
+    add: (location sheet2 uime_exit-uc1_entryfromime) (hasimage sheet2 front image-2)
+    del: (notprintedwith sheet2 front black) (location sheet2 uc1_exittoime-uime_entry)
+Step 6 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back) (sideup sheet2 front) (location sheet2 uime_exit-uc1_entryfromime) (hasimage sheet2 front image-2)
+size: 4
+hw1-leftentrytotopleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 uc1_entry-hw1_topleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+hw1-leftentrytobottomleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 lc1_entry-hw1_bottomleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+uc1-fromime-letter sheet2 :: cost: 2999
+    add: (location sheet2 hw1_toprightentry-uc1_exit)
+    del: (location sheet2 uime_exit-uc1_entryfromime)
+uc1-invertfromime-letter sheet2 front back :: cost: 8000
+    add: (sideup sheet2 back) (location sheet2 hw1_toprightentry-uc1_exit)
+    del: (sideup sheet2 front) (location sheet2 uime_exit-uc1_entryfromime)
+Step 7 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back) (sideup sheet2 front) (hasimage sheet2 front image-2) (location sheet2 hw1_toprightentry-uc1_exit)
+size: 5
+hw1-leftentrytotopleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 uc1_entry-hw1_topleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+hw1-leftentrytobottomleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 lc1_entry-hw1_bottomleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+hw1-toprightentrytotopleftexit-letter sheet2 :: cost: 8999
+    add: (location sheet2 uc1_entry-hw1_topleftexit)
+    del: (location sheet2 hw1_toprightentry-uc1_exit)
+hw1-toprightentrytobottomleftexit-letter sheet2 :: cost: 8999
+    add: (location sheet2 lc1_entry-hw1_bottomleftexit)
+    del: (location sheet2 hw1_toprightentry-uc1_exit)
+hw1-toprightentrytorightexit-letter sheet2 :: cost: 1499
+    add: (location sheet2 hw1_rightexit-sys_entry)
+    del: (location sheet2 hw1_toprightentry-uc1_exit)
+Step 8 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back) (location sheet2 uc1_entry-hw1_topleftexit) (sideup sheet2 front) (hasimage sheet2 front image-2)
+size: 4
+hw1-leftentrytotopleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 uc1_entry-hw1_topleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+hw1-leftentrytobottomleftexit-letter sheet1 :: cost: 1499
+    add: (location sheet1 lc1_entry-hw1_bottomleftexit)
+    del: (location sheet1 fe1_exit-hw1_leftentry)
+uc1-toime-letter sheet2 :: cost: 2999
+    add: (location sheet2 uc1_exittoime-uime_entry)
+    del: (location sheet2 uc1_entry-hw1_topleftexit)
+uc1-inverttoime-letter sheet2 front back :: cost: 8000
+    add: (sideup sheet2 back) (location sheet2 uc1_exittoime-uime_entry)
+    del: (location sheet2 uc1_entry-hw1_topleftexit) (sideup sheet2 front)
+Step 9 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (notprintedwith sheet2 back black) (notprintedwith sheet2 front color) (notprintedwith sheet2 back color) (available fe1-rsrc) (available hw1-rsrc) (available uc1-rsrc) (available uime-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (sideup sheet1 back) (location sheet2 uc1_entry-hw1_topleftexit) (sideup sheet2 front) (hasimage sheet2 front image-2) (location sheet1 uc1_entry-hw1_topleftexit)
+size: 4
+uc1-toime-letter sheet1 :: cost: 2999
+    add: (location sheet1 uc1_exittoime-uime_entry)
+    del: (location sheet1 uc1_entry-hw1_topleftexit)
+uc1-toime-letter sheet2 :: cost: 2999
+    add: (location sheet2 uc1_exittoime-uime_entry)
+    del: (location sheet2 uc1_entry-hw1_topleftexit)
+uc1-inverttoime-letter sheet1 back front :: cost: 8000
+    add: (location sheet1 uc1_exittoime-uime_entry) (sideup sheet1 front)
+    del: (sideup sheet1 back) (location sheet1 uc1_entry-hw1_topleftexit)
+uc1-inverttoime-letter sheet2 front back :: cost: 8000
+    add: (sideup sheet2 back) (location sheet2 uc1_exittoime-uime_entry)
+    del: (location sheet2 uc1_entry-hw1_topleftexit) (sideup sheet2 front)

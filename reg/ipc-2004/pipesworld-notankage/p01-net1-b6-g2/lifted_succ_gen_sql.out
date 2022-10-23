@@ -1,0 +1,155 @@
+Step 0 (on b0 a1) (on b3 a1) (on b1 a3) (on b2 a1) (first b4 s12) (last b4 s12) (first b5 s13) (last b5 s13)
+size: 6
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco :: cost: 1
+    add: (first b0 s12) (last b0 s12) (on b4 a2)
+    del: (on b0 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b3 a1 a2 b4 rat-a lco :: cost: 1
+    add: (on b4 a2) (first b3 s12) (last b3 s12)
+    del: (on b3 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco :: cost: 1
+    add: (on b4 a2) (first b2 s12) (last b2 s12)
+    del: (on b2 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s13 b0 a1 a3 b5 oc1b oca1 :: cost: 1
+    add: (first b0 s13) (last b0 s13) (on b5 a3)
+    del: (on b0 a1) (first b5 s13) (last b5 s13)
+push-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 :: cost: 1
+    add: (on b5 a3) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (first b5 s13) (last b5 s13)
+pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 :: cost: 1
+    add: (last b1 s13) (first b1 s13) (on b5 a1)
+    del: (on b1 a3) (first b5 s13) (last b5 s13)
+Step 1 (on b3 a1) (on b1 a3) (on b2 a1) (first b5 s13) (last b5 s13) (first b0 s12) (last b0 s12) (on b4 a2)
+size: 4
+push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b :: cost: 1
+    add: (first b2 s12) (last b2 s12) (on b0 a2)
+    del: (on b2 a1) (first b0 s12) (last b0 s12)
+push-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 :: cost: 1
+    add: (on b5 a3) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (first b5 s13) (last b5 s13)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b :: cost: 1
+    add: (on b0 a1) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (on b4 a2)
+pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 :: cost: 1
+    add: (last b1 s13) (first b1 s13) (on b5 a1)
+    del: (on b1 a3) (first b5 s13) (last b5 s13)
+Step 2 (on b3 a1) (on b1 a3) (first b0 s12) (last b0 s12) (on b4 a2) (on b5 a3) (first b2 s13) (last b2 s13)
+size: 4
+push-unitarypipe s13 b3 a1 a3 b2 rat-a gasoleo :: cost: 1
+    add: (first b3 s13) (last b3 s13) (on b2 a3)
+    del: (on b3 a1) (first b2 s13) (last b2 s13)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b :: cost: 1
+    add: (on b0 a1) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (on b4 a2)
+pop-unitarypipe s13 b1 a1 a3 b2 lco gasoleo :: cost: 1
+    add: (on b2 a1) (last b1 s13) (first b1 s13)
+    del: (on b1 a3) (first b2 s13) (last b2 s13)
+pop-unitarypipe s13 b5 a1 a3 b2 oca1 gasoleo :: cost: 1
+    add: (on b2 a1) (first b5 s13) (last b5 s13)
+    del: (on b5 a3) (first b2 s13) (last b2 s13)
+Step 3 (on b3 a1) (on b2 a1) (first b0 s12) (last b0 s12) (on b4 a2) (on b5 a3) (last b1 s13) (first b1 s13)
+size: 5
+push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b :: cost: 1
+    add: (first b2 s12) (last b2 s12) (on b0 a2)
+    del: (on b2 a1) (first b0 s12) (last b0 s12)
+push-unitarypipe s13 b3 a1 a3 b1 rat-a lco :: cost: 1
+    add: (on b1 a3) (first b3 s13) (last b3 s13)
+    del: (on b3 a1) (last b1 s13) (first b1 s13)
+push-unitarypipe s13 b2 a1 a3 b1 gasoleo lco :: cost: 1
+    add: (on b1 a3) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (last b1 s13) (first b1 s13)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b :: cost: 1
+    add: (on b0 a1) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (on b4 a2)
+pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco :: cost: 1
+    add: (first b5 s13) (last b5 s13) (on b1 a1)
+    del: (on b5 a3) (last b1 s13) (first b1 s13)
+Step 4 (on b0 a1) (on b3 a1) (on b2 a1) (first b4 s12) (last b4 s12) (on b5 a3) (last b1 s13) (first b1 s13)
+size: 7
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco :: cost: 1
+    add: (first b0 s12) (last b0 s12) (on b4 a2)
+    del: (on b0 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b3 a1 a2 b4 rat-a lco :: cost: 1
+    add: (on b4 a2) (first b3 s12) (last b3 s12)
+    del: (on b3 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco :: cost: 1
+    add: (on b4 a2) (first b2 s12) (last b2 s12)
+    del: (on b2 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s13 b0 a1 a3 b1 oc1b lco :: cost: 1
+    add: (on b1 a3) (first b0 s13) (last b0 s13)
+    del: (on b0 a1) (last b1 s13) (first b1 s13)
+push-unitarypipe s13 b3 a1 a3 b1 rat-a lco :: cost: 1
+    add: (on b1 a3) (first b3 s13) (last b3 s13)
+    del: (on b3 a1) (last b1 s13) (first b1 s13)
+push-unitarypipe s13 b2 a1 a3 b1 gasoleo lco :: cost: 1
+    add: (on b1 a3) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (last b1 s13) (first b1 s13)
+pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco :: cost: 1
+    add: (first b5 s13) (last b5 s13) (on b1 a1)
+    del: (on b5 a3) (last b1 s13) (first b1 s13)
+Step 5 (on b0 a1) (on b1 a3) (on b2 a1) (first b4 s12) (last b4 s12) (on b5 a3) (first b3 s13) (last b3 s13)
+size: 4
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco :: cost: 1
+    add: (first b0 s12) (last b0 s12) (on b4 a2)
+    del: (on b0 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco :: cost: 1
+    add: (on b4 a2) (first b2 s12) (last b2 s12)
+    del: (on b2 a1) (first b4 s12) (last b4 s12)
+push-unitarypipe s13 b2 a1 a3 b3 gasoleo rat-a :: cost: 1
+    add: (first b2 s13) (last b2 s13) (on b3 a3)
+    del: (on b2 a1) (first b3 s13) (last b3 s13)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a :: cost: 1
+    add: (on b3 a1) (last b1 s13) (first b1 s13)
+    del: (on b1 a3) (first b3 s13) (last b3 s13)
+Step 6 (on b0 a1) (on b1 a3) (on b4 a2) (first b2 s12) (last b2 s12) (on b5 a3) (first b3 s13) (last b3 s13)
+size: 3
+push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo :: cost: 1
+    add: (first b0 s12) (last b0 s12) (on b2 a2)
+    del: (on b0 a1) (first b2 s12) (last b2 s12)
+pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo :: cost: 1
+    add: (on b2 a1) (first b4 s12) (last b4 s12)
+    del: (on b4 a2) (first b2 s12) (last b2 s12)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a :: cost: 1
+    add: (on b3 a1) (last b1 s13) (first b1 s13)
+    del: (on b1 a3) (first b3 s13) (last b3 s13)
+Step 7 (on b1 a3) (first b0 s12) (last b0 s12) (on b4 a2) (on b5 a3) (first b3 s13) (last b3 s13) (on b2 a2)
+size: 3
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b :: cost: 1
+    add: (on b0 a1) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (on b4 a2)
+pop-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b :: cost: 1
+    add: (on b0 a1) (first b2 s12) (last b2 s12)
+    del: (first b0 s12) (last b0 s12) (on b2 a2)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a :: cost: 1
+    add: (on b3 a1) (last b1 s13) (first b1 s13)
+    del: (on b1 a3) (first b3 s13) (last b3 s13)
+Step 8 (on b0 a1) (on b1 a3) (on b4 a2) (first b2 s12) (last b2 s12) (on b5 a3) (first b3 s13) (last b3 s13)
+size: 3
+push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo :: cost: 1
+    add: (first b0 s12) (last b0 s12) (on b2 a2)
+    del: (on b0 a1) (first b2 s12) (last b2 s12)
+pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo :: cost: 1
+    add: (on b2 a1) (first b4 s12) (last b4 s12)
+    del: (on b4 a2) (first b2 s12) (last b2 s12)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a :: cost: 1
+    add: (on b3 a1) (last b1 s13) (first b1 s13)
+    del: (on b1 a3) (first b3 s13) (last b3 s13)
+Step 9 (on b0 a1) (on b3 a1) (on b4 a2) (first b2 s12) (last b2 s12) (on b5 a3) (last b1 s13) (first b1 s13)
+size: 6
+push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo :: cost: 1
+    add: (first b0 s12) (last b0 s12) (on b2 a2)
+    del: (on b0 a1) (first b2 s12) (last b2 s12)
+push-unitarypipe s12 b3 a1 a2 b2 rat-a gasoleo :: cost: 1
+    add: (first b3 s12) (last b3 s12) (on b2 a2)
+    del: (on b3 a1) (first b2 s12) (last b2 s12)
+push-unitarypipe s13 b0 a1 a3 b1 oc1b lco :: cost: 1
+    add: (on b1 a3) (first b0 s13) (last b0 s13)
+    del: (on b0 a1) (last b1 s13) (first b1 s13)
+push-unitarypipe s13 b3 a1 a3 b1 rat-a lco :: cost: 1
+    add: (on b1 a3) (first b3 s13) (last b3 s13)
+    del: (on b3 a1) (last b1 s13) (first b1 s13)
+pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo :: cost: 1
+    add: (on b2 a1) (first b4 s12) (last b4 s12)
+    del: (on b4 a2) (first b2 s12) (last b2 s12)
+pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco :: cost: 1
+    add: (first b5 s13) (last b5 s13) (on b1 a1)
+    del: (on b5 a3) (last b1 s13) (first b1 s13)

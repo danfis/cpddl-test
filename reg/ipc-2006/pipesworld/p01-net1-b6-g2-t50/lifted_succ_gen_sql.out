@@ -1,0 +1,155 @@
+Step 0 (on b0 a1) (occupied ta1-1-oc1b) (on b3 a1) (occupied ta1-1-rat-a) (on b1 a3) (occupied ta3-1-lco) (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-lco) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oca1) (not-occupied ta3-1-oc1b) (first b4 s12) (last b4 s12) (first b5 s13) (last b5 s13)
+size: 6
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b3 a1 a2 b4 rat-a lco ta1-1-rat-a ta2-1-lco :: cost: 1
+    add: (on b4 a2) (occupied ta2-1-lco) (first b3 s12) (last b3 s12) (not-occupied ta1-1-rat-a)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-gasoleo ta2-1-lco :: cost: 1
+    add: (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s13 b0 a1 a3 b5 oc1b oca1 ta1-1-oc1b ta3-1-oca1 :: cost: 1
+    add: (not-occupied ta1-1-oc1b) (first b0 s13) (last b0 s13) (on b5 a3) (occupied ta3-1-oca1)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13)
+push-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 ta1-1-gasoleo ta3-1-oca1 :: cost: 1
+    add: (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13)
+pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 ta1-1-oca1 ta3-1-lco :: cost: 1
+    add: (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco) (on b5 a1) (occupied ta1-1-oca1)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-oca1) (first b5 s13) (last b5 s13)
+Step 1 (on b3 a1) (occupied ta1-1-rat-a) (on b1 a3) (occupied ta3-1-lco) (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oca1) (not-occupied ta3-1-oc1b) (first b5 s13) (last b5 s13) (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+size: 4
+push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-gasoleo ta2-1-oc1b :: cost: 1
+    add: (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo) (on b0 a2) (occupied ta2-1-oc1b)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-oc1b) (first b0 s12) (last b0 s12)
+push-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 ta1-1-gasoleo ta3-1-oca1 :: cost: 1
+    add: (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 ta1-1-oca1 ta3-1-lco :: cost: 1
+    add: (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco) (on b5 a1) (occupied ta1-1-oca1)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-oca1) (first b5 s13) (last b5 s13)
+Step 2 (on b3 a1) (occupied ta1-1-rat-a) (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco) (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b2 s13) (last b2 s13)
+size: 4
+push-unitarypipe s13 b3 a1 a3 b2 rat-a gasoleo ta1-1-rat-a ta3-1-gasoleo :: cost: 1
+    add: (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13) (on b2 a3) (occupied ta3-1-gasoleo)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (not-occupied ta3-1-gasoleo) (first b2 s13) (last b2 s13)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+pop-unitarypipe s13 b1 a1 a3 b2 lco gasoleo ta1-1-gasoleo ta3-1-lco :: cost: 1
+    add: (on b2 a1) (occupied ta1-1-gasoleo) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-gasoleo) (first b2 s13) (last b2 s13)
+pop-unitarypipe s13 b5 a1 a3 b2 oca1 gasoleo ta1-1-gasoleo ta3-1-oca1 :: cost: 1
+    add: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13)
+    del: (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b2 s13) (last b2 s13)
+Step 3 (on b3 a1) (occupied ta1-1-rat-a) (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco) (on b5 a3) (occupied ta3-1-oca1) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+size: 5
+push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-gasoleo ta2-1-oc1b :: cost: 1
+    add: (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo) (on b0 a2) (occupied ta2-1-oc1b)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-oc1b) (first b0 s12) (last b0 s12)
+push-unitarypipe s13 b3 a1 a3 b1 rat-a lco ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+push-unitarypipe s13 b2 a1 a3 b1 gasoleo lco ta1-1-gasoleo ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-gasoleo) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-lco ta3-1-oca1 :: cost: 1
+    add: (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13) (on b1 a1) (occupied ta1-1-lco)
+    del: (not-occupied ta1-1-lco) (on b5 a3) (occupied ta3-1-oca1) (last b1 s13) (first b1 s13)
+Step 4 (on b0 a1) (occupied ta1-1-oc1b) (on b3 a1) (occupied ta1-1-rat-a) (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-lco) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (first b4 s12) (last b4 s12) (on b5 a3) (occupied ta3-1-oca1) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+size: 7
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b3 a1 a2 b4 rat-a lco ta1-1-rat-a ta2-1-lco :: cost: 1
+    add: (on b4 a2) (occupied ta2-1-lco) (first b3 s12) (last b3 s12) (not-occupied ta1-1-rat-a)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-gasoleo ta2-1-lco :: cost: 1
+    add: (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s13 b0 a1 a3 b1 oc1b lco ta1-1-oc1b ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-oc1b) (first b0 s13) (last b0 s13)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+push-unitarypipe s13 b3 a1 a3 b1 rat-a lco ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+push-unitarypipe s13 b2 a1 a3 b1 gasoleo lco ta1-1-gasoleo ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-gasoleo) (first b2 s13) (last b2 s13)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-lco ta3-1-oca1 :: cost: 1
+    add: (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13) (on b1 a1) (occupied ta1-1-lco)
+    del: (not-occupied ta1-1-lco) (on b5 a3) (occupied ta3-1-oca1) (last b1 s13) (first b1 s13)
+Step 5 (on b0 a1) (occupied ta1-1-oc1b) (on b1 a3) (occupied ta3-1-lco) (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-lco) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (first b4 s12) (last b4 s12) (not-occupied ta1-1-rat-a) (on b5 a3) (occupied ta3-1-oca1) (first b3 s13) (last b3 s13)
+size: 4
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-gasoleo ta2-1-lco :: cost: 1
+    add: (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+push-unitarypipe s13 b2 a1 a3 b3 gasoleo rat-a ta1-1-gasoleo ta3-1-rat-a :: cost: 1
+    add: (not-occupied ta1-1-gasoleo) (first b2 s13) (last b2 s13) (on b3 a3) (occupied ta3-1-rat-a)
+    del: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta3-1-rat-a) (first b3 s13) (last b3 s13)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+Step 6 (on b0 a1) (occupied ta1-1-oc1b) (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (on b4 a2) (occupied ta2-1-lco) (not-occupied ta1-1-rat-a) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b3 s13) (last b3 s13)
+size: 3
+push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo ta1-1-oc1b ta2-1-gasoleo :: cost: 1
+    add: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b2 a2) (occupied ta2-1-gasoleo)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-gasoleo) (first b2 s12) (last b2 s12)
+pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo ta1-1-gasoleo ta2-1-lco :: cost: 1
+    add: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+Step 7 (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco) (not-occupied ta1-1-rat-a) (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b3 s13) (last b3 s13) (on b2 a2) (occupied ta2-1-gasoleo)
+size: 3
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
+    add: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b4 a2) (occupied ta2-1-lco)
+pop-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-oc1b ta2-1-gasoleo :: cost: 1
+    add: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-gasoleo) (first b2 s12) (last b2 s12)
+    del: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b2 a2) (occupied ta2-1-gasoleo)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+Step 8 (on b0 a1) (occupied ta1-1-oc1b) (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (on b4 a2) (occupied ta2-1-lco) (not-occupied ta1-1-rat-a) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (first b3 s13) (last b3 s13)
+size: 3
+push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo ta1-1-oc1b ta2-1-gasoleo :: cost: 1
+    add: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b2 a2) (occupied ta2-1-gasoleo)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-gasoleo) (first b2 s12) (last b2 s12)
+pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo ta1-1-gasoleo ta2-1-lco :: cost: 1
+    add: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo)
+pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+    del: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+Step 9 (on b0 a1) (occupied ta1-1-oc1b) (on b3 a1) (occupied ta1-1-rat-a) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-rat-a) (not-occupied ta2-1-oca1) (not-occupied ta2-1-oc1b) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-rat-a) (not-occupied ta3-1-oc1b) (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo) (on b5 a3) (occupied ta3-1-oca1) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+size: 6
+push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo ta1-1-oc1b ta2-1-gasoleo :: cost: 1
+    add: (first b0 s12) (last b0 s12) (not-occupied ta1-1-oc1b) (on b2 a2) (occupied ta2-1-gasoleo)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (not-occupied ta2-1-gasoleo) (first b2 s12) (last b2 s12)
+push-unitarypipe s12 b3 a1 a2 b2 rat-a gasoleo ta1-1-rat-a ta2-1-gasoleo :: cost: 1
+    add: (first b3 s12) (last b3 s12) (not-occupied ta1-1-rat-a) (on b2 a2) (occupied ta2-1-gasoleo)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (not-occupied ta2-1-gasoleo) (first b2 s12) (last b2 s12)
+push-unitarypipe s13 b0 a1 a3 b1 oc1b lco ta1-1-oc1b ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-oc1b) (first b0 s13) (last b0 s13)
+    del: (on b0 a1) (occupied ta1-1-oc1b) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+push-unitarypipe s13 b3 a1 a3 b1 rat-a lco ta1-1-rat-a ta3-1-lco :: cost: 1
+    add: (on b1 a3) (occupied ta3-1-lco) (not-occupied ta1-1-rat-a) (first b3 s13) (last b3 s13)
+    del: (on b3 a1) (occupied ta1-1-rat-a) (last b1 s13) (first b1 s13) (not-occupied ta3-1-lco)
+pop-unitarypipe s12 b4 a1 a2 b2 lco gasoleo ta1-1-gasoleo ta2-1-lco :: cost: 1
+    add: (on b2 a1) (occupied ta1-1-gasoleo) (not-occupied ta2-1-lco) (first b4 s12) (last b4 s12)
+    del: (on b4 a2) (occupied ta2-1-lco) (first b2 s12) (last b2 s12) (not-occupied ta1-1-gasoleo)
+pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-lco ta3-1-oca1 :: cost: 1
+    add: (not-occupied ta3-1-oca1) (first b5 s13) (last b5 s13) (on b1 a1) (occupied ta1-1-lco)
+    del: (not-occupied ta1-1-lco) (on b5 a3) (occupied ta3-1-oca1) (last b1 s13) (first b1 s13)

@@ -1,0 +1,239 @@
+Step 0 (cellspace n2) (clear spadea) (on spadea spade2) (bottomcol spade2) (clear diamonda) (on diamonda hearta) (bottomcol hearta) (clear club2) (on club2 diamond2) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (home spade0)
+size: 8
+move spadea spade2 heart2 :: cost: 1
+    add: (on spadea heart2) (clear spade2)
+    del: (on spadea spade2) (clear heart2)
+move diamonda hearta club2 :: cost: 1
+    add: (on diamonda club2) (clear hearta)
+    del: (on diamonda hearta) (clear club2)
+sendtofree spadea spade2 n2 n1 :: cost: 1
+    add: (clear spade2) (incell spadea) (cellspace n1)
+    del: (cellspace n2) (clear spadea) (on spadea spade2)
+sendtofree diamonda hearta n2 n1 :: cost: 1
+    add: (clear hearta) (cellspace n1) (incell diamonda)
+    del: (cellspace n2) (clear diamonda) (on diamonda hearta)
+sendtofree club2 diamond2 n2 n1 :: cost: 1
+    add: (cellspace n1) (incell club2) (clear diamond2)
+    del: (cellspace n2) (clear club2) (on club2 diamond2)
+sendtofree heart2 cluba n2 n1 :: cost: 1
+    add: (cellspace n1) (incell heart2) (clear cluba)
+    del: (cellspace n2) (clear heart2) (on heart2 cluba)
+sendtohome spadea spade2 spade n1 spade0 n0 :: cost: 1
+    add: (clear spade2) (home spadea)
+    del: (clear spadea) (on spadea spade2) (home spade0)
+sendtohome diamonda hearta diamond n1 diamond0 n0 :: cost: 1
+    add: (clear hearta) (home diamonda)
+    del: (clear diamonda) (on diamonda hearta) (home diamond0)
+Step 1 (cellspace n2) (clear spadea) (bottomcol spade2) (clear diamonda) (on diamonda hearta) (bottomcol hearta) (clear club2) (on club2 diamond2) (bottomcol diamond2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (home spade0) (on spadea heart2) (clear spade2)
+size: 8
+move diamonda hearta club2 :: cost: 1
+    add: (on diamonda club2) (clear hearta)
+    del: (on diamonda hearta) (clear club2)
+move diamonda hearta spade2 :: cost: 1
+    add: (clear hearta) (on diamonda spade2)
+    del: (on diamonda hearta) (clear spade2)
+sendtofree spadea heart2 n2 n1 :: cost: 1
+    add: (clear heart2) (incell spadea) (cellspace n1)
+    del: (cellspace n2) (clear spadea) (on spadea heart2)
+sendtofree diamonda hearta n2 n1 :: cost: 1
+    add: (clear hearta) (cellspace n1) (incell diamonda)
+    del: (cellspace n2) (clear diamonda) (on diamonda hearta)
+sendtofree club2 diamond2 n2 n1 :: cost: 1
+    add: (cellspace n1) (incell club2) (clear diamond2)
+    del: (cellspace n2) (clear club2) (on club2 diamond2)
+sendtofree-b spade2 n2 n1 n0 n1 :: cost: 1
+    add: (cellspace n1) (incell spade2) (colspace n1)
+    del: (cellspace n2) (bottomcol spade2) (colspace n0) (clear spade2)
+sendtohome spadea heart2 spade n1 spade0 n0 :: cost: 1
+    add: (clear heart2) (home spadea)
+    del: (clear spadea) (home spade0) (on spadea heart2)
+sendtohome diamonda hearta diamond n1 diamond0 n0 :: cost: 1
+    add: (clear hearta) (home diamonda)
+    del: (clear diamonda) (on diamonda hearta) (home diamond0)
+Step 2 (cellspace n2) (clear spadea) (bottomcol spade2) (clear diamonda) (bottomcol hearta) (clear club2) (on club2 diamond2) (bottomcol diamond2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (home spade0) (on spadea heart2) (clear hearta) (on diamonda spade2)
+size: 9
+move diamonda spade2 club2 :: cost: 1
+    add: (clear spade2) (on diamonda club2)
+    del: (clear club2) (on diamonda spade2)
+move-b hearta club2 n0 n1 :: cost: 1
+    add: (colspace n1) (on hearta club2)
+    del: (bottomcol hearta) (clear club2) (colspace n0)
+sendtofree spadea heart2 n2 n1 :: cost: 1
+    add: (clear heart2) (incell spadea) (cellspace n1)
+    del: (cellspace n2) (clear spadea) (on spadea heart2)
+sendtofree diamonda spade2 n2 n1 :: cost: 1
+    add: (clear spade2) (cellspace n1) (incell diamonda)
+    del: (cellspace n2) (clear diamonda) (on diamonda spade2)
+sendtofree club2 diamond2 n2 n1 :: cost: 1
+    add: (cellspace n1) (incell club2) (clear diamond2)
+    del: (cellspace n2) (clear club2) (on club2 diamond2)
+sendtofree-b hearta n2 n1 n0 n1 :: cost: 1
+    add: (cellspace n1) (colspace n1) (incell hearta)
+    del: (cellspace n2) (bottomcol hearta) (colspace n0) (clear hearta)
+sendtohome spadea heart2 spade n1 spade0 n0 :: cost: 1
+    add: (clear heart2) (home spadea)
+    del: (clear spadea) (home spade0) (on spadea heart2)
+sendtohome diamonda spade2 diamond n1 diamond0 n0 :: cost: 1
+    add: (clear spade2) (home diamonda)
+    del: (clear diamonda) (home diamond0) (on diamonda spade2)
+sendtohome-b hearta heart n1 heart0 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (home hearta)
+    del: (bottomcol hearta) (colspace n0) (home heart0) (clear hearta)
+Step 3 (bottomcol spade2) (clear diamonda) (bottomcol hearta) (clear club2) (on club2 diamond2) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (home spade0) (clear hearta) (incell spadea) (cellspace n1) (on diamonda spade2)
+size: 10
+move diamonda spade2 club2 :: cost: 1
+    add: (clear spade2) (on diamonda club2)
+    del: (clear club2) (on diamonda spade2)
+move-b hearta club2 n0 n1 :: cost: 1
+    add: (colspace n1) (on hearta club2)
+    del: (bottomcol hearta) (clear club2) (colspace n0)
+sendtofree diamonda spade2 n1 n0 :: cost: 1
+    add: (clear spade2) (incell diamonda) (cellspace n0)
+    del: (clear diamonda) (cellspace n1) (on diamonda spade2)
+sendtofree club2 diamond2 n1 n0 :: cost: 1
+    add: (incell club2) (clear diamond2) (cellspace n0)
+    del: (clear club2) (on club2 diamond2) (cellspace n1)
+sendtofree heart2 cluba n1 n0 :: cost: 1
+    add: (incell heart2) (clear cluba) (cellspace n0)
+    del: (clear heart2) (on heart2 cluba) (cellspace n1)
+sendtofree-b hearta n1 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (incell hearta) (cellspace n0)
+    del: (bottomcol hearta) (colspace n0) (clear hearta) (cellspace n1)
+sendtohome diamonda spade2 diamond n1 diamond0 n0 :: cost: 1
+    add: (clear spade2) (home diamonda)
+    del: (clear diamonda) (home diamond0) (on diamonda spade2)
+sendtohome-b hearta heart n1 heart0 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (home hearta)
+    del: (bottomcol hearta) (colspace n0) (home heart0) (clear hearta)
+homefromfreecell spadea spade n1 spade0 n0 n1 n2 :: cost: 1
+    add: (cellspace n2) (home spadea)
+    del: (home spade0) (incell spadea) (cellspace n1)
+colfromfreecell spadea heart2 n1 n2 :: cost: 1
+    add: (cellspace n2) (clear spadea) (on spadea heart2)
+    del: (clear heart2) (incell spadea) (cellspace n1)
+Step 4 (bottomcol spade2) (clear diamonda) (bottomcol hearta) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (home spade0) (clear hearta) (incell spadea) (incell club2) (clear diamond2) (on diamonda spade2) (cellspace n0)
+size: 5
+sendtohome diamonda spade2 diamond n1 diamond0 n0 :: cost: 1
+    add: (clear spade2) (home diamonda)
+    del: (clear diamonda) (home diamond0) (on diamonda spade2)
+sendtohome-b hearta heart n1 heart0 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (home hearta)
+    del: (bottomcol hearta) (colspace n0) (home heart0) (clear hearta)
+homefromfreecell spadea spade n1 spade0 n0 n0 n1 :: cost: 1
+    add: (cellspace n1) (home spadea)
+    del: (home spade0) (incell spadea) (cellspace n0)
+colfromfreecell spadea heart2 n0 n1 :: cost: 1
+    add: (clear spadea) (on spadea heart2) (cellspace n1)
+    del: (clear heart2) (incell spadea) (cellspace n0)
+colfromfreecell spadea diamond2 n0 n1 :: cost: 1
+    add: (clear spadea) (cellspace n1) (on spadea diamond2)
+    del: (incell spadea) (clear diamond2) (cellspace n0)
+Step 5 (clear spadea) (bottomcol spade2) (clear diamonda) (bottomcol hearta) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (home spade0) (clear hearta) (cellspace n1) (incell club2) (on diamonda spade2) (on spadea diamond2)
+size: 8
+move spadea diamond2 heart2 :: cost: 1
+    add: (on spadea heart2) (clear diamond2)
+    del: (clear heart2) (on spadea diamond2)
+sendtofree spadea diamond2 n1 n0 :: cost: 1
+    add: (incell spadea) (clear diamond2) (cellspace n0)
+    del: (clear spadea) (cellspace n1) (on spadea diamond2)
+sendtofree diamonda spade2 n1 n0 :: cost: 1
+    add: (clear spade2) (incell diamonda) (cellspace n0)
+    del: (clear diamonda) (cellspace n1) (on diamonda spade2)
+sendtofree heart2 cluba n1 n0 :: cost: 1
+    add: (incell heart2) (clear cluba) (cellspace n0)
+    del: (clear heart2) (on heart2 cluba) (cellspace n1)
+sendtofree-b hearta n1 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (incell hearta) (cellspace n0)
+    del: (bottomcol hearta) (colspace n0) (clear hearta) (cellspace n1)
+sendtohome spadea diamond2 spade n1 spade0 n0 :: cost: 1
+    add: (clear diamond2) (home spadea)
+    del: (clear spadea) (home spade0) (on spadea diamond2)
+sendtohome diamonda spade2 diamond n1 diamond0 n0 :: cost: 1
+    add: (clear spade2) (home diamonda)
+    del: (clear diamonda) (home diamond0) (on diamonda spade2)
+sendtohome-b hearta heart n1 heart0 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (home hearta)
+    del: (bottomcol hearta) (colspace n0) (home heart0) (clear hearta)
+Step 6 (bottomcol spade2) (clear diamonda) (bottomcol hearta) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (clear hearta) (cellspace n1) (incell club2) (clear diamond2) (home spadea) (on diamonda spade2)
+size: 6
+sendtofree diamonda spade2 n1 n0 :: cost: 1
+    add: (clear spade2) (incell diamonda) (cellspace n0)
+    del: (clear diamonda) (cellspace n1) (on diamonda spade2)
+sendtofree heart2 cluba n1 n0 :: cost: 1
+    add: (incell heart2) (clear cluba) (cellspace n0)
+    del: (clear heart2) (on heart2 cluba) (cellspace n1)
+sendtofree-b hearta n1 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (incell hearta) (cellspace n0)
+    del: (bottomcol hearta) (colspace n0) (clear hearta) (cellspace n1)
+sendtofree-b diamond2 n1 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (cellspace n0) (incell diamond2)
+    del: (bottomcol diamond2) (colspace n0) (cellspace n1) (clear diamond2)
+sendtohome diamonda spade2 diamond n1 diamond0 n0 :: cost: 1
+    add: (clear spade2) (home diamonda)
+    del: (clear diamonda) (home diamond0) (on diamonda spade2)
+sendtohome-b hearta heart n1 heart0 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (home hearta)
+    del: (bottomcol hearta) (colspace n0) (home heart0) (clear hearta)
+Step 7 (bottomcol spade2) (bottomcol hearta) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (colspace n0) (home diamond0) (home club0) (home heart0) (clear spade2) (clear hearta) (incell diamonda) (incell club2) (clear diamond2) (home spadea) (cellspace n0)
+size: 5
+move-b hearta spade2 n0 n1 :: cost: 1
+    add: (colspace n1) (on hearta spade2)
+    del: (bottomcol hearta) (colspace n0) (clear spade2)
+sendtohome-b spade2 spade n2 spadea n1 n0 n1 :: cost: 1
+    add: (colspace n1) (home spade2)
+    del: (bottomcol spade2) (colspace n0) (clear spade2) (home spadea)
+sendtohome-b hearta heart n1 heart0 n0 n0 n1 :: cost: 1
+    add: (colspace n1) (home hearta)
+    del: (bottomcol hearta) (colspace n0) (home heart0) (clear hearta)
+homefromfreecell diamonda diamond n1 diamond0 n0 n0 n1 :: cost: 1
+    add: (cellspace n1) (home diamonda)
+    del: (home diamond0) (incell diamonda) (cellspace n0)
+colfromfreecell diamonda spade2 n0 n1 :: cost: 1
+    add: (clear diamonda) (cellspace n1) (on diamonda spade2)
+    del: (clear spade2) (incell diamonda) (cellspace n0)
+Step 8 (bottomcol spade2) (bottomcol diamond2) (clear heart2) (on heart2 cluba) (bottomcol cluba) (home diamond0) (home club0) (clear spade2) (incell diamonda) (incell club2) (clear diamond2) (home spadea) (colspace n1) (home hearta) (cellspace n0)
+size: 7
+sendtonewcol heart2 cluba n1 n0 :: cost: 1
+    add: (colspace n0) (clear cluba) (bottomcol heart2)
+    del: (on heart2 cluba) (colspace n1)
+sendtohome heart2 cluba heart n2 hearta n1 :: cost: 1
+    add: (clear cluba) (home heart2)
+    del: (clear heart2) (on heart2 cluba) (home hearta)
+sendtohome-b spade2 spade n2 spadea n1 n1 n2 :: cost: 1
+    add: (home spade2) (colspace n2)
+    del: (bottomcol spade2) (clear spade2) (home spadea) (colspace n1)
+homefromfreecell diamonda diamond n1 diamond0 n0 n0 n1 :: cost: 1
+    add: (cellspace n1) (home diamonda)
+    del: (home diamond0) (incell diamonda) (cellspace n0)
+colfromfreecell diamonda spade2 n0 n1 :: cost: 1
+    add: (clear diamonda) (cellspace n1) (on diamonda spade2)
+    del: (clear spade2) (incell diamonda) (cellspace n0)
+newcolfromfreecell diamonda n1 n0 n0 n1 :: cost: 1
+    add: (clear diamonda) (colspace n0) (cellspace n1) (bottomcol diamonda)
+    del: (incell diamonda) (colspace n1) (cellspace n0)
+newcolfromfreecell club2 n1 n0 n0 n1 :: cost: 1
+    add: (clear club2) (colspace n0) (cellspace n1) (bottomcol club2)
+    del: (incell club2) (colspace n1) (cellspace n0)
+Step 9 (bottomcol spade2) (bottomcol diamond2) (bottomcol cluba) (home diamond0) (home club0) (clear spade2) (incell diamonda) (incell club2) (clear diamond2) (clear cluba) (home spadea) (colspace n1) (cellspace n0) (home heart2)
+size: 7
+move-b cluba diamond2 n1 n2 :: cost: 1
+    add: (colspace n2) (on cluba diamond2)
+    del: (bottomcol cluba) (clear diamond2) (colspace n1)
+sendtohome-b spade2 spade n2 spadea n1 n1 n2 :: cost: 1
+    add: (home spade2) (colspace n2)
+    del: (bottomcol spade2) (clear spade2) (home spadea) (colspace n1)
+sendtohome-b cluba club n1 club0 n0 n1 n2 :: cost: 1
+    add: (colspace n2) (home cluba)
+    del: (bottomcol cluba) (home club0) (clear cluba) (colspace n1)
+homefromfreecell diamonda diamond n1 diamond0 n0 n0 n1 :: cost: 1
+    add: (cellspace n1) (home diamonda)
+    del: (home diamond0) (incell diamonda) (cellspace n0)
+colfromfreecell diamonda spade2 n0 n1 :: cost: 1
+    add: (clear diamonda) (cellspace n1) (on diamonda spade2)
+    del: (clear spade2) (incell diamonda) (cellspace n0)
+newcolfromfreecell diamonda n1 n0 n0 n1 :: cost: 1
+    add: (clear diamonda) (colspace n0) (cellspace n1) (bottomcol diamonda)
+    del: (incell diamonda) (colspace n1) (cellspace n0)
+newcolfromfreecell club2 n1 n0 n0 n1 :: cost: 1
+    add: (clear club2) (colspace n0) (cellspace n1) (bottomcol club2)
+    del: (incell club2) (colspace n1) (cellspace n0)

@@ -1,0 +1,59 @@
+Step 0 (uninitialized) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color)
+size: 1
+initialize :: cost: 0
+    add: (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc)
+    del: (uninitialized)
+Step 1 (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc)
+size: 2
+colorfeeder-feed-letter sheet1 :: cost: 8000
+    add: (location sheet1 down_bottomentry-colorfeeder_exit) (sideup sheet1 front)
+    del: (location sheet1 some_feeder_tray)
+blackfeeder-feed-letter sheet1 :: cost: 8000
+    add: (sideup sheet1 front) (location sheet1 blackcontainer_entry-blackfeeder_exit)
+    del: (location sheet1 some_feeder_tray)
+Step 2 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (sideup sheet1 front) (location sheet1 blackcontainer_entry-blackfeeder_exit)
+size: 1
+blackcontainer-toime-letter sheet1 :: cost: 2000
+    add: (location sheet1 blackcontainer_exittoime-blackprinter_entry)
+    del: (location sheet1 blackcontainer_entry-blackfeeder_exit)
+Step 3 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 front black) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (sideup sheet1 front) (location sheet1 blackcontainer_exittoime-blackprinter_entry)
+size: 2
+blackprinter-simplex-letter sheet1 front image-1 :: cost: 113013
+    add: (location sheet1 blackprinter_exit-blackcontainer_entryfromime) (hasimage sheet1 front image-1)
+    del: (notprintedwith sheet1 front black) (location sheet1 blackcontainer_exittoime-blackprinter_entry)
+blackprinter-simplexandinvert-letter sheet1 front back image-1 :: cost: 123013
+    add: (location sheet1 blackprinter_exit-blackcontainer_entryfromime) (hasimage sheet1 front image-1) (sideup sheet1 back)
+    del: (notprintedwith sheet1 front black) (sideup sheet1 front) (location sheet1 blackcontainer_exittoime-blackprinter_entry)
+Step 4 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (location sheet1 blackprinter_exit-blackcontainer_entryfromime) (hasimage sheet1 front image-1) (sideup sheet1 back)
+size: 1
+blackcontainer-fromime-letter sheet1 :: cost: 2000
+    add: (location sheet1 endcap_entry-blackcontainer_exit)
+    del: (location sheet1 blackprinter_exit-blackcontainer_entryfromime)
+Step 5 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (hasimage sheet1 front image-1) (sideup sheet1 back) (location sheet1 endcap_entry-blackcontainer_exit)
+size: 1
+endcap-move-letter sheet1 :: cost: 2000
+    add: (location sheet1 htmoverblack_entry-endcap_exit)
+    del: (location sheet1 endcap_entry-blackcontainer_exit)
+Step 6 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (hasimage sheet1 front image-1) (sideup sheet1 back) (location sheet1 htmoverblack_entry-endcap_exit)
+size: 1
+htmoverblack-move-letter sheet1 :: cost: 17999
+    add: (location sheet1 htmoverblack_exit-down_topentry)
+    del: (location sheet1 htmoverblack_entry-endcap_exit)
+Step 7 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (hasimage sheet1 front image-1) (sideup sheet1 back) (location sheet1 htmoverblack_exit-down_topentry)
+size: 2
+down-movetop-letter sheet1 :: cost: 2999
+    add: (location sheet1 down_topexit-htmovercolor_entry)
+    del: (location sheet1 htmoverblack_exit-down_topentry)
+down-movedown-letter sheet1 :: cost: 9999
+    add: (location sheet1 colorcontainer_entry-down_bottomexit)
+    del: (location sheet1 htmoverblack_exit-down_topentry)
+Step 8 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (hasimage sheet1 front image-1) (sideup sheet1 back) (location sheet1 colorcontainer_entry-down_bottomexit)
+size: 1
+colorcontainer-toime-letter sheet1 :: cost: 8000
+    add: (location sheet1 colorcontainer_exittoime-colorprinter_entry)
+    del: (location sheet1 colorcontainer_entry-down_bottomexit)
+Step 9 (location dummy-sheet some_finisher_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 front color) (notprintedwith sheet1 back color) (available endcap-rsrc) (available htmoverblack-rsrc) (available colorcontainer-rsrc) (available colorprinter-rsrc) (available colorfeeder-rsrc) (available blackfeeder-rsrc) (available down-rsrc) (available htmovercolor-rsrc) (available blackcontainer-rsrc) (available blackprinter-rsrc) (available up-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (hasimage sheet1 front image-1) (sideup sheet1 back) (location sheet1 colorcontainer_exittoime-colorprinter_entry)
+size: 1
+colorprinter-simplexmono-letter sheet1 back image-1 :: cost: 224040
+    add: (location sheet1 colorprinter_exit-colorcontainer_entryfromime) (hasimage sheet1 back image-1)
+    del: (notprintedwith sheet1 back black) (location sheet1 colorcontainer_exittoime-colorprinter_entry)

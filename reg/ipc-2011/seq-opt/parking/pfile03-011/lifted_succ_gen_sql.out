@@ -1,0 +1,533 @@
+Step 0 (at-curb car_01) (at-curb-num car_01 curb_0) (behind-car car_05 car_01) (car-clear car_05) (at-curb car_08) (at-curb-num car_08 curb_1) (behind-car car_04 car_08) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (at-curb car_11) (at-curb-num car_11 curb_5) (car-clear car_11) (at-curb car_06) (at-curb-num car_06 curb_6) (car-clear car_06)
+size: 14
+move-curb-to-car car_06 curb_6 car_06 :: cost: 1
+    add: (curb-clear curb_6) (behind-car car_06 car_06)
+    del: (at-curb car_06) (at-curb-num car_06 curb_6) (car-clear car_06)
+move-curb-to-car car_06 curb_6 car_11 :: cost: 1
+    add: (curb-clear curb_6) (behind-car car_06 car_11)
+    del: (car-clear car_11) (at-curb car_06) (at-curb-num car_06 curb_6)
+move-curb-to-car car_11 curb_5 car_06 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_11 car_06)
+    del: (at-curb car_11) (at-curb-num car_11 curb_5) (car-clear car_06)
+move-curb-to-car car_11 curb_5 car_11 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_11 car_11)
+    del: (at-curb car_11) (at-curb-num car_11 curb_5) (car-clear car_11)
+move-car-to-car car_02 car_09 car_06 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_06)
+    del: (behind-car car_02 car_09) (car-clear car_06)
+move-car-to-car car_02 car_09 car_11 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_11)
+    del: (behind-car car_02 car_09) (car-clear car_11)
+move-car-to-car car_04 car_08 car_06 :: cost: 1
+    add: (car-clear car_08) (behind-car car_04 car_06)
+    del: (behind-car car_04 car_08) (car-clear car_06)
+move-car-to-car car_04 car_08 car_11 :: cost: 1
+    add: (car-clear car_08) (behind-car car_04 car_11)
+    del: (behind-car car_04 car_08) (car-clear car_11)
+move-car-to-car car_05 car_01 car_06 :: cost: 1
+    add: (car-clear car_01) (behind-car car_05 car_06)
+    del: (behind-car car_05 car_01) (car-clear car_06)
+move-car-to-car car_05 car_01 car_11 :: cost: 1
+    add: (car-clear car_01) (behind-car car_05 car_11)
+    del: (behind-car car_05 car_01) (car-clear car_11)
+move-car-to-car car_07 car_00 car_06 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_06)
+    del: (behind-car car_07 car_00) (car-clear car_06)
+move-car-to-car car_07 car_00 car_11 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_11)
+    del: (behind-car car_07 car_00) (car-clear car_11)
+move-car-to-car car_10 car_03 car_06 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_06)
+    del: (behind-car car_10 car_03) (car-clear car_06)
+move-car-to-car car_10 car_03 car_11 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_11)
+    del: (behind-car car_10 car_03) (car-clear car_11)
+Step 1 (at-curb car_01) (at-curb-num car_01 curb_0) (behind-car car_05 car_01) (car-clear car_05) (at-curb car_08) (at-curb-num car_08 curb_1) (behind-car car_04 car_08) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (at-curb car_11) (at-curb-num car_11 curb_5) (car-clear car_11) (curb-clear curb_6) (behind-car car_06 car_06)
+size: 12
+move-curb-to-curb car_11 curb_5 curb_6 :: cost: 1
+    add: (curb-clear curb_5) (at-curb-num car_11 curb_6)
+    del: (at-curb-num car_11 curb_5) (curb-clear curb_6)
+move-curb-to-car car_11 curb_5 car_11 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_11 car_11)
+    del: (at-curb car_11) (at-curb-num car_11 curb_5) (car-clear car_11)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_04 car_08 curb_6 :: cost: 1
+    add: (car-clear car_08) (at-curb-num car_04 curb_6) (at-curb car_04)
+    del: (behind-car car_04 car_08) (curb-clear curb_6)
+move-car-to-curb car_05 car_01 curb_6 :: cost: 1
+    add: (car-clear car_01) (at-curb-num car_05 curb_6) (at-curb car_05)
+    del: (behind-car car_05 car_01) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+move-car-to-car car_02 car_09 car_11 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_11)
+    del: (behind-car car_02 car_09) (car-clear car_11)
+move-car-to-car car_04 car_08 car_11 :: cost: 1
+    add: (car-clear car_08) (behind-car car_04 car_11)
+    del: (behind-car car_04 car_08) (car-clear car_11)
+move-car-to-car car_05 car_01 car_11 :: cost: 1
+    add: (car-clear car_01) (behind-car car_05 car_11)
+    del: (behind-car car_05 car_01) (car-clear car_11)
+move-car-to-car car_07 car_00 car_11 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_11)
+    del: (behind-car car_07 car_00) (car-clear car_11)
+move-car-to-car car_10 car_03 car_11 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_11)
+    del: (behind-car car_10 car_03) (car-clear car_11)
+Step 2 (at-curb car_01) (at-curb-num car_01 curb_0) (behind-car car_05 car_01) (car-clear car_05) (at-curb car_08) (at-curb-num car_08 curb_1) (behind-car car_04 car_08) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (curb-clear curb_5) (behind-car car_11 car_11)
+size: 10
+move-car-to-curb car_02 car_09 curb_5 :: cost: 1
+    add: (car-clear car_09) (at-curb car_02) (at-curb-num car_02 curb_5)
+    del: (behind-car car_02 car_09) (curb-clear curb_5)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_04 car_08 curb_5 :: cost: 1
+    add: (car-clear car_08) (at-curb car_04) (at-curb-num car_04 curb_5)
+    del: (behind-car car_04 car_08) (curb-clear curb_5)
+move-car-to-curb car_04 car_08 curb_6 :: cost: 1
+    add: (car-clear car_08) (at-curb-num car_04 curb_6) (at-curb car_04)
+    del: (behind-car car_04 car_08) (curb-clear curb_6)
+move-car-to-curb car_05 car_01 curb_5 :: cost: 1
+    add: (car-clear car_01) (at-curb car_05) (at-curb-num car_05 curb_5)
+    del: (behind-car car_05 car_01) (curb-clear curb_5)
+move-car-to-curb car_05 car_01 curb_6 :: cost: 1
+    add: (car-clear car_01) (at-curb-num car_05 curb_6) (at-curb car_05)
+    del: (behind-car car_05 car_01) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_5 :: cost: 1
+    add: (car-clear car_00) (at-curb car_07) (at-curb-num car_07 curb_5)
+    del: (behind-car car_07 car_00) (curb-clear curb_5)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_5 :: cost: 1
+    add: (car-clear car_03) (at-curb car_10) (at-curb-num car_10 curb_5)
+    del: (behind-car car_10 car_03) (curb-clear curb_5)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+Step 3 (at-curb car_01) (at-curb-num car_01 curb_0) (behind-car car_05 car_01) (car-clear car_05) (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (behind-car car_11 car_11) (car-clear car_08) (at-curb car_04) (at-curb-num car_04 curb_5)
+size: 18
+move-curb-to-curb car_04 curb_5 curb_6 :: cost: 1
+    add: (curb-clear curb_5) (at-curb-num car_04 curb_6)
+    del: (curb-clear curb_6) (at-curb-num car_04 curb_5)
+move-curb-to-curb car_08 curb_1 curb_6 :: cost: 1
+    add: (curb-clear curb_1) (at-curb-num car_08 curb_6)
+    del: (at-curb-num car_08 curb_1) (curb-clear curb_6)
+move-curb-to-car car_04 curb_5 car_04 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_04 car_04)
+    del: (car-clear car_04) (at-curb car_04) (at-curb-num car_04 curb_5)
+move-curb-to-car car_04 curb_5 car_08 :: cost: 1
+    add: (behind-car car_04 car_08) (curb-clear curb_5)
+    del: (car-clear car_08) (at-curb car_04) (at-curb-num car_04 curb_5)
+move-curb-to-car car_08 curb_1 car_04 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_04)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_04)
+move-curb-to-car car_08 curb_1 car_08 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_08)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_08)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_05 car_01 curb_6 :: cost: 1
+    add: (car-clear car_01) (at-curb-num car_05 curb_6) (at-curb car_05)
+    del: (behind-car car_05 car_01) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+move-car-to-car car_02 car_09 car_04 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_04)
+    del: (car-clear car_04) (behind-car car_02 car_09)
+move-car-to-car car_02 car_09 car_08 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_08)
+    del: (behind-car car_02 car_09) (car-clear car_08)
+move-car-to-car car_05 car_01 car_04 :: cost: 1
+    add: (car-clear car_01) (behind-car car_05 car_04)
+    del: (behind-car car_05 car_01) (car-clear car_04)
+move-car-to-car car_05 car_01 car_08 :: cost: 1
+    add: (car-clear car_01) (behind-car car_05 car_08)
+    del: (behind-car car_05 car_01) (car-clear car_08)
+move-car-to-car car_07 car_00 car_04 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_04)
+    del: (car-clear car_04) (behind-car car_07 car_00)
+move-car-to-car car_07 car_00 car_08 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_08)
+    del: (behind-car car_07 car_00) (car-clear car_08)
+move-car-to-car car_10 car_03 car_04 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_04)
+    del: (car-clear car_04) (behind-car car_10 car_03)
+move-car-to-car car_10 car_03 car_08 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_08)
+    del: (behind-car car_10 car_03) (car-clear car_08)
+Step 4 (at-curb car_01) (at-curb-num car_01 curb_0) (behind-car car_05 car_01) (car-clear car_05) (at-curb car_08) (at-curb-num car_08 curb_1) (behind-car car_04 car_08) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (curb-clear curb_5) (behind-car car_11 car_11)
+size: 10
+move-car-to-curb car_02 car_09 curb_5 :: cost: 1
+    add: (car-clear car_09) (at-curb car_02) (at-curb-num car_02 curb_5)
+    del: (behind-car car_02 car_09) (curb-clear curb_5)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_04 car_08 curb_5 :: cost: 1
+    add: (car-clear car_08) (at-curb car_04) (at-curb-num car_04 curb_5)
+    del: (behind-car car_04 car_08) (curb-clear curb_5)
+move-car-to-curb car_04 car_08 curb_6 :: cost: 1
+    add: (car-clear car_08) (at-curb-num car_04 curb_6) (at-curb car_04)
+    del: (behind-car car_04 car_08) (curb-clear curb_6)
+move-car-to-curb car_05 car_01 curb_5 :: cost: 1
+    add: (car-clear car_01) (at-curb car_05) (at-curb-num car_05 curb_5)
+    del: (behind-car car_05 car_01) (curb-clear curb_5)
+move-car-to-curb car_05 car_01 curb_6 :: cost: 1
+    add: (car-clear car_01) (at-curb-num car_05 curb_6) (at-curb car_05)
+    del: (behind-car car_05 car_01) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_5 :: cost: 1
+    add: (car-clear car_00) (at-curb car_07) (at-curb-num car_07 curb_5)
+    del: (behind-car car_07 car_00) (curb-clear curb_5)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_5 :: cost: 1
+    add: (car-clear car_03) (at-curb car_10) (at-curb-num car_10 curb_5)
+    del: (behind-car car_10 car_03) (curb-clear curb_5)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+Step 5 (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_05) (at-curb car_08) (at-curb-num car_08 curb_1) (behind-car car_04 car_08) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (behind-car car_11 car_11) (car-clear car_01) (at-curb car_05) (at-curb-num car_05 curb_5)
+size: 18
+move-curb-to-curb car_01 curb_0 curb_6 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_6)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_6)
+move-curb-to-curb car_05 curb_5 curb_6 :: cost: 1
+    add: (curb-clear curb_5) (at-curb-num car_05 curb_6)
+    del: (curb-clear curb_6) (at-curb-num car_05 curb_5)
+move-curb-to-car car_01 curb_0 car_01 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_01)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_01)
+move-curb-to-car car_01 curb_0 car_05 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_05)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_05)
+move-curb-to-car car_05 curb_5 car_01 :: cost: 1
+    add: (behind-car car_05 car_01) (curb-clear curb_5)
+    del: (car-clear car_01) (at-curb car_05) (at-curb-num car_05 curb_5)
+move-curb-to-car car_05 curb_5 car_05 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_05 car_05)
+    del: (car-clear car_05) (at-curb car_05) (at-curb-num car_05 curb_5)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_04 car_08 curb_6 :: cost: 1
+    add: (car-clear car_08) (at-curb-num car_04 curb_6) (at-curb car_04)
+    del: (behind-car car_04 car_08) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+move-car-to-car car_02 car_09 car_01 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_01)
+    del: (behind-car car_02 car_09) (car-clear car_01)
+move-car-to-car car_02 car_09 car_05 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_05)
+    del: (car-clear car_05) (behind-car car_02 car_09)
+move-car-to-car car_04 car_08 car_01 :: cost: 1
+    add: (car-clear car_08) (behind-car car_04 car_01)
+    del: (behind-car car_04 car_08) (car-clear car_01)
+move-car-to-car car_04 car_08 car_05 :: cost: 1
+    add: (car-clear car_08) (behind-car car_04 car_05)
+    del: (car-clear car_05) (behind-car car_04 car_08)
+move-car-to-car car_07 car_00 car_01 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_01)
+    del: (behind-car car_07 car_00) (car-clear car_01)
+move-car-to-car car_07 car_00 car_05 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_05)
+    del: (car-clear car_05) (behind-car car_07 car_00)
+move-car-to-car car_10 car_03 car_01 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_01)
+    del: (behind-car car_10 car_03) (car-clear car_01)
+move-car-to-car car_10 car_03 car_05 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_05)
+    del: (car-clear car_05) (behind-car car_10 car_03)
+Step 6 (at-curb car_01) (at-curb-num car_01 curb_0) (at-curb car_08) (at-curb-num car_08 curb_1) (behind-car car_04 car_08) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (curb-clear curb_5) (behind-car car_11 car_11) (car-clear car_01) (behind-car car_05 car_05)
+size: 15
+move-curb-to-curb car_01 curb_0 curb_5 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_5)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_5)
+move-curb-to-curb car_01 curb_0 curb_6 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_6)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_6)
+move-curb-to-car car_01 curb_0 car_01 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_01)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_01)
+move-car-to-curb car_02 car_09 curb_5 :: cost: 1
+    add: (car-clear car_09) (at-curb car_02) (at-curb-num car_02 curb_5)
+    del: (behind-car car_02 car_09) (curb-clear curb_5)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_04 car_08 curb_5 :: cost: 1
+    add: (car-clear car_08) (at-curb car_04) (at-curb-num car_04 curb_5)
+    del: (behind-car car_04 car_08) (curb-clear curb_5)
+move-car-to-curb car_04 car_08 curb_6 :: cost: 1
+    add: (car-clear car_08) (at-curb-num car_04 curb_6) (at-curb car_04)
+    del: (behind-car car_04 car_08) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_5 :: cost: 1
+    add: (car-clear car_00) (at-curb car_07) (at-curb-num car_07 curb_5)
+    del: (behind-car car_07 car_00) (curb-clear curb_5)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_5 :: cost: 1
+    add: (car-clear car_03) (at-curb car_10) (at-curb-num car_10 curb_5)
+    del: (behind-car car_10 car_03) (curb-clear curb_5)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+move-car-to-car car_02 car_09 car_01 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_01)
+    del: (behind-car car_02 car_09) (car-clear car_01)
+move-car-to-car car_04 car_08 car_01 :: cost: 1
+    add: (car-clear car_08) (behind-car car_04 car_01)
+    del: (behind-car car_04 car_08) (car-clear car_01)
+move-car-to-car car_07 car_00 car_01 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_01)
+    del: (behind-car car_07 car_00) (car-clear car_01)
+move-car-to-car car_10 car_03 car_01 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_01)
+    del: (behind-car car_10 car_03) (car-clear car_01)
+Step 7 (at-curb car_01) (at-curb-num car_01 curb_0) (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_04) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (behind-car car_06 car_06) (curb-clear curb_5) (behind-car car_11 car_11) (car-clear car_08) (car-clear car_01) (at-curb-num car_04 curb_6) (at-curb car_04) (behind-car car_05 car_05)
+size: 24
+move-curb-to-curb car_01 curb_0 curb_5 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_5)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_5)
+move-curb-to-curb car_04 curb_6 curb_5 :: cost: 1
+    add: (curb-clear curb_6) (at-curb-num car_04 curb_5)
+    del: (curb-clear curb_5) (at-curb-num car_04 curb_6)
+move-curb-to-curb car_08 curb_1 curb_5 :: cost: 1
+    add: (curb-clear curb_1) (at-curb-num car_08 curb_5)
+    del: (at-curb-num car_08 curb_1) (curb-clear curb_5)
+move-curb-to-car car_01 curb_0 car_01 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_01)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_01)
+move-curb-to-car car_01 curb_0 car_04 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_04)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_04)
+move-curb-to-car car_01 curb_0 car_08 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_08)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_08)
+move-curb-to-car car_04 curb_6 car_01 :: cost: 1
+    add: (curb-clear curb_6) (behind-car car_04 car_01)
+    del: (car-clear car_01) (at-curb-num car_04 curb_6) (at-curb car_04)
+move-curb-to-car car_04 curb_6 car_04 :: cost: 1
+    add: (curb-clear curb_6) (behind-car car_04 car_04)
+    del: (car-clear car_04) (at-curb-num car_04 curb_6) (at-curb car_04)
+move-curb-to-car car_04 curb_6 car_08 :: cost: 1
+    add: (behind-car car_04 car_08) (curb-clear curb_6)
+    del: (car-clear car_08) (at-curb-num car_04 curb_6) (at-curb car_04)
+move-curb-to-car car_08 curb_1 car_01 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_01)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_01)
+move-curb-to-car car_08 curb_1 car_04 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_04)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_04)
+move-curb-to-car car_08 curb_1 car_08 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_08)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_08)
+move-car-to-curb car_02 car_09 curb_5 :: cost: 1
+    add: (car-clear car_09) (at-curb car_02) (at-curb-num car_02 curb_5)
+    del: (behind-car car_02 car_09) (curb-clear curb_5)
+move-car-to-curb car_07 car_00 curb_5 :: cost: 1
+    add: (car-clear car_00) (at-curb car_07) (at-curb-num car_07 curb_5)
+    del: (behind-car car_07 car_00) (curb-clear curb_5)
+move-car-to-curb car_10 car_03 curb_5 :: cost: 1
+    add: (car-clear car_03) (at-curb car_10) (at-curb-num car_10 curb_5)
+    del: (behind-car car_10 car_03) (curb-clear curb_5)
+move-car-to-car car_02 car_09 car_01 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_01)
+    del: (behind-car car_02 car_09) (car-clear car_01)
+move-car-to-car car_02 car_09 car_04 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_04)
+    del: (car-clear car_04) (behind-car car_02 car_09)
+move-car-to-car car_02 car_09 car_08 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_08)
+    del: (behind-car car_02 car_09) (car-clear car_08)
+move-car-to-car car_07 car_00 car_01 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_01)
+    del: (behind-car car_07 car_00) (car-clear car_01)
+move-car-to-car car_07 car_00 car_04 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_04)
+    del: (car-clear car_04) (behind-car car_07 car_00)
+move-car-to-car car_07 car_00 car_08 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_08)
+    del: (behind-car car_07 car_00) (car-clear car_08)
+move-car-to-car car_10 car_03 car_01 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_01)
+    del: (behind-car car_10 car_03) (car-clear car_01)
+move-car-to-car car_10 car_03 car_04 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_04)
+    del: (car-clear car_04) (behind-car car_10 car_03)
+move-car-to-car car_10 car_03 car_08 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_08)
+    del: (behind-car car_10 car_03) (car-clear car_08)
+Step 8 (at-curb car_01) (at-curb-num car_01 curb_0) (at-curb car_08) (at-curb-num car_08 curb_1) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (behind-car car_02 car_09) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (curb-clear curb_5) (behind-car car_11 car_11) (car-clear car_08) (car-clear car_01) (behind-car car_04 car_04) (behind-car car_05 car_05)
+size: 20
+move-curb-to-curb car_01 curb_0 curb_5 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_5)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_5)
+move-curb-to-curb car_01 curb_0 curb_6 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_6)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_6)
+move-curb-to-curb car_08 curb_1 curb_5 :: cost: 1
+    add: (curb-clear curb_1) (at-curb-num car_08 curb_5)
+    del: (at-curb-num car_08 curb_1) (curb-clear curb_5)
+move-curb-to-curb car_08 curb_1 curb_6 :: cost: 1
+    add: (curb-clear curb_1) (at-curb-num car_08 curb_6)
+    del: (at-curb-num car_08 curb_1) (curb-clear curb_6)
+move-curb-to-car car_01 curb_0 car_01 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_01)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_01)
+move-curb-to-car car_01 curb_0 car_08 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_08)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_08)
+move-curb-to-car car_08 curb_1 car_01 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_01)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_01)
+move-curb-to-car car_08 curb_1 car_08 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_08)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_08)
+move-car-to-curb car_02 car_09 curb_5 :: cost: 1
+    add: (car-clear car_09) (at-curb car_02) (at-curb-num car_02 curb_5)
+    del: (behind-car car_02 car_09) (curb-clear curb_5)
+move-car-to-curb car_02 car_09 curb_6 :: cost: 1
+    add: (car-clear car_09) (at-curb-num car_02 curb_6) (at-curb car_02)
+    del: (behind-car car_02 car_09) (curb-clear curb_6)
+move-car-to-curb car_07 car_00 curb_5 :: cost: 1
+    add: (car-clear car_00) (at-curb car_07) (at-curb-num car_07 curb_5)
+    del: (behind-car car_07 car_00) (curb-clear curb_5)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_5 :: cost: 1
+    add: (car-clear car_03) (at-curb car_10) (at-curb-num car_10 curb_5)
+    del: (behind-car car_10 car_03) (curb-clear curb_5)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+move-car-to-car car_02 car_09 car_01 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_01)
+    del: (behind-car car_02 car_09) (car-clear car_01)
+move-car-to-car car_02 car_09 car_08 :: cost: 1
+    add: (car-clear car_09) (behind-car car_02 car_08)
+    del: (behind-car car_02 car_09) (car-clear car_08)
+move-car-to-car car_07 car_00 car_01 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_01)
+    del: (behind-car car_07 car_00) (car-clear car_01)
+move-car-to-car car_07 car_00 car_08 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_08)
+    del: (behind-car car_07 car_00) (car-clear car_08)
+move-car-to-car car_10 car_03 car_01 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_01)
+    del: (behind-car car_10 car_03) (car-clear car_01)
+move-car-to-car car_10 car_03 car_08 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_08)
+    del: (behind-car car_10 car_03) (car-clear car_08)
+Step 9 (at-curb car_01) (at-curb-num car_01 curb_0) (at-curb car_08) (at-curb-num car_08 curb_1) (at-curb car_00) (at-curb-num car_00 curb_2) (behind-car car_07 car_00) (car-clear car_07) (at-curb car_03) (at-curb-num car_03 curb_3) (behind-car car_10 car_03) (car-clear car_10) (at-curb car_09) (at-curb-num car_09 curb_4) (car-clear car_02) (curb-clear curb_6) (behind-car car_06 car_06) (behind-car car_11 car_11) (car-clear car_09) (car-clear car_08) (car-clear car_01) (at-curb car_02) (at-curb-num car_02 curb_5) (behind-car car_04 car_04) (behind-car car_05 car_05)
+size: 30
+move-curb-to-curb car_01 curb_0 curb_6 :: cost: 1
+    add: (curb-clear curb_0) (at-curb-num car_01 curb_6)
+    del: (at-curb-num car_01 curb_0) (curb-clear curb_6)
+move-curb-to-curb car_02 curb_5 curb_6 :: cost: 1
+    add: (curb-clear curb_5) (at-curb-num car_02 curb_6)
+    del: (curb-clear curb_6) (at-curb-num car_02 curb_5)
+move-curb-to-curb car_08 curb_1 curb_6 :: cost: 1
+    add: (curb-clear curb_1) (at-curb-num car_08 curb_6)
+    del: (at-curb-num car_08 curb_1) (curb-clear curb_6)
+move-curb-to-curb car_09 curb_4 curb_6 :: cost: 1
+    add: (curb-clear curb_4) (at-curb-num car_09 curb_6)
+    del: (at-curb-num car_09 curb_4) (curb-clear curb_6)
+move-curb-to-car car_01 curb_0 car_01 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_01)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_01)
+move-curb-to-car car_01 curb_0 car_02 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_02)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_02)
+move-curb-to-car car_01 curb_0 car_08 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_08)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_08)
+move-curb-to-car car_01 curb_0 car_09 :: cost: 1
+    add: (curb-clear curb_0) (behind-car car_01 car_09)
+    del: (at-curb car_01) (at-curb-num car_01 curb_0) (car-clear car_09)
+move-curb-to-car car_02 curb_5 car_01 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_02 car_01)
+    del: (car-clear car_01) (at-curb car_02) (at-curb-num car_02 curb_5)
+move-curb-to-car car_02 curb_5 car_02 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_02 car_02)
+    del: (car-clear car_02) (at-curb car_02) (at-curb-num car_02 curb_5)
+move-curb-to-car car_02 curb_5 car_08 :: cost: 1
+    add: (curb-clear curb_5) (behind-car car_02 car_08)
+    del: (car-clear car_08) (at-curb car_02) (at-curb-num car_02 curb_5)
+move-curb-to-car car_02 curb_5 car_09 :: cost: 1
+    add: (behind-car car_02 car_09) (curb-clear curb_5)
+    del: (car-clear car_09) (at-curb car_02) (at-curb-num car_02 curb_5)
+move-curb-to-car car_08 curb_1 car_01 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_01)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_01)
+move-curb-to-car car_08 curb_1 car_02 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_02)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_02)
+move-curb-to-car car_08 curb_1 car_08 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_08)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_08)
+move-curb-to-car car_08 curb_1 car_09 :: cost: 1
+    add: (curb-clear curb_1) (behind-car car_08 car_09)
+    del: (at-curb car_08) (at-curb-num car_08 curb_1) (car-clear car_09)
+move-curb-to-car car_09 curb_4 car_01 :: cost: 1
+    add: (curb-clear curb_4) (behind-car car_09 car_01)
+    del: (at-curb car_09) (at-curb-num car_09 curb_4) (car-clear car_01)
+move-curb-to-car car_09 curb_4 car_02 :: cost: 1
+    add: (curb-clear curb_4) (behind-car car_09 car_02)
+    del: (at-curb car_09) (at-curb-num car_09 curb_4) (car-clear car_02)
+move-curb-to-car car_09 curb_4 car_08 :: cost: 1
+    add: (curb-clear curb_4) (behind-car car_09 car_08)
+    del: (at-curb car_09) (at-curb-num car_09 curb_4) (car-clear car_08)
+move-curb-to-car car_09 curb_4 car_09 :: cost: 1
+    add: (curb-clear curb_4) (behind-car car_09 car_09)
+    del: (at-curb car_09) (at-curb-num car_09 curb_4) (car-clear car_09)
+move-car-to-curb car_07 car_00 curb_6 :: cost: 1
+    add: (car-clear car_00) (at-curb-num car_07 curb_6) (at-curb car_07)
+    del: (behind-car car_07 car_00) (curb-clear curb_6)
+move-car-to-curb car_10 car_03 curb_6 :: cost: 1
+    add: (car-clear car_03) (at-curb-num car_10 curb_6) (at-curb car_10)
+    del: (behind-car car_10 car_03) (curb-clear curb_6)
+move-car-to-car car_07 car_00 car_01 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_01)
+    del: (behind-car car_07 car_00) (car-clear car_01)
+move-car-to-car car_07 car_00 car_02 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_02)
+    del: (behind-car car_07 car_00) (car-clear car_02)
+move-car-to-car car_07 car_00 car_08 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_08)
+    del: (behind-car car_07 car_00) (car-clear car_08)
+move-car-to-car car_07 car_00 car_09 :: cost: 1
+    add: (car-clear car_00) (behind-car car_07 car_09)
+    del: (behind-car car_07 car_00) (car-clear car_09)
+move-car-to-car car_10 car_03 car_01 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_01)
+    del: (behind-car car_10 car_03) (car-clear car_01)
+move-car-to-car car_10 car_03 car_02 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_02)
+    del: (behind-car car_10 car_03) (car-clear car_02)
+move-car-to-car car_10 car_03 car_08 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_08)
+    del: (behind-car car_10 car_03) (car-clear car_08)
+move-car-to-car car_10 car_03 car_09 :: cost: 1
+    add: (car-clear car_03) (behind-car car_10 car_09)
+    del: (behind-car car_10 car_03) (car-clear car_09)

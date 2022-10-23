@@ -1,0 +1,33 @@
+Step 0 (train-at office1) (in-train fuel1) (in-train fuel2) (at document1 office3) (at document2 office3) (at document3 office4) (at document4 office4) (at document5 office4) (at document6 office4) (at document7 office8) (at document8 office8)
+size: 6
+drive office1 office1 fuel1 :: cost: 1
+    add:
+    del: (in-train fuel1)
+drive office1 office1 fuel2 :: cost: 1
+    add:
+    del: (in-train fuel2)
+drive office1 office2 fuel1 :: cost: 1
+    add: (train-at office2)
+    del: (train-at office1) (in-train fuel1)
+drive office1 office2 fuel2 :: cost: 1
+    add: (train-at office2)
+    del: (train-at office1) (in-train fuel2)
+deposit-documents office1 fuel1 :: cost: 1
+    add: (at fuel1 office1)
+    del: (in-train fuel1)
+deposit-documents office1 fuel2 :: cost: 1
+    add: (at fuel2 office1)
+    del: (in-train fuel2)
+Step 1 (train-at office1) (in-train fuel2) (at document1 office3) (at document2 office3) (at document3 office4) (at document4 office4) (at document5 office4) (at document6 office4) (at document7 office8) (at document8 office8)
+size: 3
+drive office1 office1 fuel2 :: cost: 1
+    add:
+    del: (in-train fuel2)
+drive office1 office2 fuel2 :: cost: 1
+    add: (train-at office2)
+    del: (train-at office1) (in-train fuel2)
+deposit-documents office1 fuel2 :: cost: 1
+    add: (at fuel2 office1)
+    del: (in-train fuel2)
+Step 2 (at document1 office3) (at document2 office3) (at document3 office4) (at document4 office4) (at document5 office4) (at document6 office4) (at document7 office8) (at document8 office8) (train-at office2)
+size: 0

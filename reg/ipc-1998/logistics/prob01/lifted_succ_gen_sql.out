@@ -1,0 +1,914 @@
+Step 0 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package6 city3-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1)
+size: 30
+load-truck package6 truck3 city3-1 :: cost: 1
+    add: (in package6 truck3)
+    del: (at package6 city3-1)
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 1 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1) (in package6 truck3)
+size: 30
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+unload-truck package6 truck3 city3-1 :: cost: 1
+    add: (at package6 city3-1)
+    del: (in package6 truck3)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 2 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package5 city4-2) (at package4 city1-1) (at package2 city1-2) (at package1 city2-1) (in package6 truck3) (in package3 truck1)
+size: 30
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+unload-truck package6 truck3 city3-1 :: cost: 1
+    add: (at package6 city3-1)
+    del: (in package6 truck3)
+unload-truck package3 truck1 city1-1 :: cost: 1
+    add: (at package3 city1-1)
+    del: (in package3 truck1)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 3 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package4 city1-1) (at package2 city1-2) (at package1 city2-1) (in package6 truck3) (in package3 truck1) (in package5 plane2)
+size: 29
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+unload-truck package6 truck3 city3-1 :: cost: 1
+    add: (at package6 city3-1)
+    del: (in package6 truck3)
+unload-truck package3 truck1 city1-1 :: cost: 1
+    add: (at package3 city1-1)
+    del: (in package3 truck1)
+unload-airplane package5 plane2 city4-2 :: cost: 1
+    add: (at package5 city4-2)
+    del: (in package5 plane2)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 4 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1) (in package6 truck3) (in package5 plane2)
+size: 29
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+unload-truck package6 truck3 city3-1 :: cost: 1
+    add: (at package6 city3-1)
+    del: (in package6 truck3)
+unload-airplane package5 plane2 city4-2 :: cost: 1
+    add: (at package5 city4-2)
+    del: (in package5 plane2)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 5 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1) (in package6 truck3)
+size: 30
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+unload-truck package6 truck3 city3-1 :: cost: 1
+    add: (at package6 city3-1)
+    del: (in package6 truck3)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 6 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package6 city3-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1)
+size: 30
+load-truck package6 truck3 city3-1 :: cost: 1
+    add: (in package6 truck3)
+    del: (at package6 city3-1)
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 7 (at plane2 city4-2) (at plane1 city4-2) (at truck6 city6-1) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package6 city3-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1)
+size: 30
+load-truck package6 truck3 city3-1 :: cost: 1
+    add: (in package6 truck3)
+    del: (at package6 city3-1)
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+drive-truck truck6 city6-1 city6-1 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck6 city6-1 city6-2 city6 :: cost: 1
+    add: (at truck6 city6-2)
+    del: (at truck6 city6-1)
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 8 (at plane2 city4-2) (at plane1 city4-2) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package6 city3-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1) (at truck6 city6-2)
+size: 30
+load-truck package6 truck3 city3-1 :: cost: 1
+    add: (in package6 truck3)
+    del: (at package6 city3-1)
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+drive-truck truck6 city6-2 city6-1 city6 :: cost: 1
+    add: (at truck6 city6-1)
+    del: (at truck6 city6-2)
+drive-truck truck6 city6-2 city6-2 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)
+Step 9 (at plane2 city4-2) (at plane1 city4-2) (at truck5 city5-1) (at truck4 city4-1) (at truck3 city3-1) (at truck2 city2-1) (at truck1 city1-1) (at package6 city3-1) (at package5 city4-2) (at package4 city1-1) (at package3 city1-1) (at package2 city1-2) (at package1 city2-1) (at truck6 city6-2)
+size: 30
+load-truck package6 truck3 city3-1 :: cost: 1
+    add: (in package6 truck3)
+    del: (at package6 city3-1)
+load-truck package4 truck1 city1-1 :: cost: 1
+    add: (in package4 truck1)
+    del: (at package4 city1-1)
+load-truck package3 truck1 city1-1 :: cost: 1
+    add: (in package3 truck1)
+    del: (at package3 city1-1)
+load-truck package1 truck2 city2-1 :: cost: 1
+    add: (in package1 truck2)
+    del: (at package1 city2-1)
+load-airplane package5 plane2 city4-2 :: cost: 1
+    add: (in package5 plane2)
+    del: (at package5 city4-2)
+load-airplane package5 plane1 city4-2 :: cost: 1
+    add: (in package5 plane1)
+    del: (at package5 city4-2)
+drive-truck truck6 city6-2 city6-1 city6 :: cost: 1
+    add: (at truck6 city6-1)
+    del: (at truck6 city6-2)
+drive-truck truck6 city6-2 city6-2 city6 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-1 city5 :: cost: 1
+    add:
+    del:
+drive-truck truck5 city5-1 city5-2 city5 :: cost: 1
+    add: (at truck5 city5-2)
+    del: (at truck5 city5-1)
+drive-truck truck4 city4-1 city4-1 city4 :: cost: 1
+    add:
+    del:
+drive-truck truck4 city4-1 city4-2 city4 :: cost: 1
+    add: (at truck4 city4-2)
+    del: (at truck4 city4-1)
+drive-truck truck3 city3-1 city3-1 city3 :: cost: 1
+    add:
+    del:
+drive-truck truck3 city3-1 city3-2 city3 :: cost: 1
+    add: (at truck3 city3-2)
+    del: (at truck3 city3-1)
+drive-truck truck2 city2-1 city2-1 city2 :: cost: 1
+    add:
+    del:
+drive-truck truck2 city2-1 city2-2 city2 :: cost: 1
+    add: (at truck2 city2-2)
+    del: (at truck2 city2-1)
+drive-truck truck1 city1-1 city1-1 city1 :: cost: 1
+    add:
+    del:
+drive-truck truck1 city1-1 city1-2 city1 :: cost: 1
+    add: (at truck1 city1-2)
+    del: (at truck1 city1-1)
+fly-airplane plane2 city4-2 city6-2 :: cost: 1
+    add: (at plane2 city6-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city5-2 :: cost: 1
+    add: (at plane2 city5-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane2 city4-2 city3-2 :: cost: 1
+    add: (at plane2 city3-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city2-2 :: cost: 1
+    add: (at plane2 city2-2)
+    del: (at plane2 city4-2)
+fly-airplane plane2 city4-2 city1-2 :: cost: 1
+    add: (at plane2 city1-2)
+    del: (at plane2 city4-2)
+fly-airplane plane1 city4-2 city6-2 :: cost: 1
+    add: (at plane1 city6-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city5-2 :: cost: 1
+    add: (at plane1 city5-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city4-2 :: cost: 1
+    add:
+    del:
+fly-airplane plane1 city4-2 city3-2 :: cost: 1
+    add: (at plane1 city3-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city2-2 :: cost: 1
+    add: (at plane1 city2-2)
+    del: (at plane1 city4-2)
+fly-airplane plane1 city4-2 city1-2 :: cost: 1
+    add: (at plane1 city1-2)
+    del: (at plane1 city4-2)

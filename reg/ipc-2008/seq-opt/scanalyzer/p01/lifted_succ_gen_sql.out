@@ -1,0 +1,560 @@
+Step 0 (on car-in-1 seg-in-1) (on car-in-2 seg-in-2) (on car-in-3 seg-in-3) (on car-out-1 seg-out-1) (on car-out-2 seg-out-2) (on car-out-3 seg-out-3)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-in-1 car-out-1 :: cost: 3
+    add: (on car-in-1 seg-out-1) (on car-out-1 seg-in-1) (analyzed car-in-1)
+    del: (on car-in-1 seg-in-1) (on car-out-1 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-in-1 car-out-2 :: cost: 3
+    add: (analyzed car-in-1) (on car-in-1 seg-out-2) (on car-out-2 seg-in-1)
+    del: (on car-in-1 seg-in-1) (on car-out-2 seg-out-2)
+analyze-2 seg-in-1 seg-out-3 car-in-1 car-out-3 :: cost: 3
+    add: (analyzed car-in-1) (on car-in-1 seg-out-3) (on car-out-3 seg-in-1)
+    del: (on car-in-1 seg-in-1) (on car-out-3 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-in-2 car-out-1 :: cost: 3
+    add: (on car-in-2 seg-out-1) (on car-out-1 seg-in-2) (analyzed car-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-1 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-in-2 car-out-2 :: cost: 3
+    add: (analyzed car-in-2) (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+analyze-2 seg-in-2 seg-out-3 car-in-2 car-out-3 :: cost: 3
+    add: (analyzed car-in-2) (on car-in-2 seg-out-3) (on car-out-3 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-3 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-out-1 :: cost: 3
+    add: (on car-in-3 seg-out-1) (on car-out-1 seg-in-3) (analyzed car-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-out-2 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-2) (on car-out-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-3 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-3) (on car-out-3 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-3 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-in-1 car-out-1 :: cost: 1
+    add: (on car-in-1 seg-out-1) (on car-out-1 seg-in-1)
+    del: (on car-in-1 seg-in-1) (on car-out-1 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-in-1 car-out-2 :: cost: 1
+    add: (on car-in-1 seg-out-2) (on car-out-2 seg-in-1)
+    del: (on car-in-1 seg-in-1) (on car-out-2 seg-out-2)
+rotate-2 seg-in-1 seg-out-3 car-in-1 car-out-3 :: cost: 1
+    add: (on car-in-1 seg-out-3) (on car-out-3 seg-in-1)
+    del: (on car-in-1 seg-in-1) (on car-out-3 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-in-2 car-out-1 :: cost: 1
+    add: (on car-in-2 seg-out-1) (on car-out-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-1 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-in-2 car-out-2 :: cost: 1
+    add: (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+rotate-2 seg-in-2 seg-out-3 car-in-2 car-out-3 :: cost: 1
+    add: (on car-in-2 seg-out-3) (on car-out-3 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-3 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-out-1 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-out-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-out-2 :: cost: 1
+    add: (on car-in-3 seg-out-2) (on car-out-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-3 :: cost: 1
+    add: (on car-in-3 seg-out-3) (on car-out-3 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-3 seg-out-3)
+Step 1 (on car-in-2 seg-in-2) (on car-in-3 seg-in-3) (on car-out-2 seg-out-2) (on car-out-3 seg-out-3) (on car-in-1 seg-out-1) (on car-out-1 seg-in-1) (analyzed car-in-1)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-1 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (on car-out-1 seg-out-1) (analyzed car-out-1)
+    del: (on car-in-1 seg-out-1) (on car-out-1 seg-in-1)
+analyze-2 seg-in-1 seg-out-2 car-out-1 car-out-2 :: cost: 3
+    add: (on car-out-2 seg-in-1) (analyzed car-out-1) (on car-out-1 seg-out-2)
+    del: (on car-out-2 seg-out-2) (on car-out-1 seg-in-1)
+analyze-2 seg-in-1 seg-out-3 car-out-1 car-out-3 :: cost: 3
+    add: (on car-out-3 seg-in-1) (analyzed car-out-1) (on car-out-1 seg-out-3)
+    del: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1)
+analyze-2 seg-in-2 seg-out-1 car-in-2 car-in-1 :: cost: 3
+    add: (on car-in-2 seg-out-1) (analyzed car-in-2) (on car-in-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-in-2 car-out-2 :: cost: 3
+    add: (analyzed car-in-2) (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+analyze-2 seg-in-2 seg-out-3 car-in-2 car-out-3 :: cost: 3
+    add: (analyzed car-in-2) (on car-in-2 seg-out-3) (on car-out-3 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-3 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-in-1 :: cost: 3
+    add: (on car-in-3 seg-out-1) (analyzed car-in-3) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-out-2 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-2) (on car-out-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-3 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-3) (on car-out-3 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-3 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-out-1 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-1 seg-out-1)
+    del: (on car-in-1 seg-out-1) (on car-out-1 seg-in-1)
+rotate-2 seg-in-1 seg-out-2 car-out-1 car-out-2 :: cost: 1
+    add: (on car-out-2 seg-in-1) (on car-out-1 seg-out-2)
+    del: (on car-out-2 seg-out-2) (on car-out-1 seg-in-1)
+rotate-2 seg-in-1 seg-out-3 car-out-1 car-out-3 :: cost: 1
+    add: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+    del: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1)
+rotate-2 seg-in-2 seg-out-1 car-in-2 car-in-1 :: cost: 1
+    add: (on car-in-2 seg-out-1) (on car-in-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-in-2 car-out-2 :: cost: 1
+    add: (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+rotate-2 seg-in-2 seg-out-3 car-in-2 car-out-3 :: cost: 1
+    add: (on car-in-2 seg-out-3) (on car-out-3 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-3 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-in-1 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-out-2 :: cost: 1
+    add: (on car-in-3 seg-out-2) (on car-out-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-3 :: cost: 1
+    add: (on car-in-3 seg-out-3) (on car-out-3 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-3 seg-out-3)
+Step 2 (on car-in-2 seg-in-2) (on car-in-3 seg-in-3) (on car-out-3 seg-out-3) (on car-in-1 seg-out-1) (analyzed car-in-1) (on car-out-2 seg-in-1) (analyzed car-out-1) (on car-out-1 seg-out-2)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-2 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (on car-out-2 seg-out-1) (analyzed car-out-2)
+    del: (on car-in-1 seg-out-1) (on car-out-2 seg-in-1)
+analyze-2 seg-in-1 seg-out-2 car-out-2 car-out-1 :: cost: 3
+    add: (on car-out-2 seg-out-2) (on car-out-1 seg-in-1) (analyzed car-out-2)
+    del: (on car-out-2 seg-in-1) (on car-out-1 seg-out-2)
+analyze-2 seg-in-1 seg-out-3 car-out-2 car-out-3 :: cost: 3
+    add: (on car-out-3 seg-in-1) (analyzed car-out-2) (on car-out-2 seg-out-3)
+    del: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1)
+analyze-2 seg-in-2 seg-out-1 car-in-2 car-in-1 :: cost: 3
+    add: (on car-in-2 seg-out-1) (analyzed car-in-2) (on car-in-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-in-2 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-2) (analyzed car-in-2) (on car-in-2 seg-out-2)
+    del: (on car-in-2 seg-in-2) (on car-out-1 seg-out-2)
+analyze-2 seg-in-2 seg-out-3 car-in-2 car-out-3 :: cost: 3
+    add: (analyzed car-in-2) (on car-in-2 seg-out-3) (on car-out-3 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-3 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-in-1 :: cost: 3
+    add: (on car-in-3 seg-out-1) (analyzed car-in-3) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-3) (analyzed car-in-3) (on car-in-3 seg-out-2)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-3 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-3) (on car-out-3 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-3 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-out-2 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-2 seg-out-1)
+    del: (on car-in-1 seg-out-1) (on car-out-2 seg-in-1)
+rotate-2 seg-in-1 seg-out-2 car-out-2 car-out-1 :: cost: 1
+    add: (on car-out-2 seg-out-2) (on car-out-1 seg-in-1)
+    del: (on car-out-2 seg-in-1) (on car-out-1 seg-out-2)
+rotate-2 seg-in-1 seg-out-3 car-out-2 car-out-3 :: cost: 1
+    add: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+    del: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1)
+rotate-2 seg-in-2 seg-out-1 car-in-2 car-in-1 :: cost: 1
+    add: (on car-in-2 seg-out-1) (on car-in-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-in-2 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-2) (on car-in-2 seg-out-2)
+    del: (on car-in-2 seg-in-2) (on car-out-1 seg-out-2)
+rotate-2 seg-in-2 seg-out-3 car-in-2 car-out-3 :: cost: 1
+    add: (on car-in-2 seg-out-3) (on car-out-3 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-out-3 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-in-1 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-3) (on car-in-3 seg-out-2)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-3 :: cost: 1
+    add: (on car-in-3 seg-out-3) (on car-out-3 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-out-3 seg-out-3)
+Step 3 (on car-in-2 seg-in-2) (on car-in-3 seg-in-3) (on car-in-1 seg-out-1) (analyzed car-in-1) (on car-out-3 seg-in-1) (analyzed car-out-1) (on car-out-1 seg-out-2) (analyzed car-out-2) (on car-out-2 seg-out-3)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-1) (analyzed car-out-3)
+    del: (on car-in-1 seg-out-1) (on car-out-3 seg-in-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-1) (analyzed car-out-3) (on car-out-3 seg-out-2)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-2)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-out-2 :: cost: 3
+    add: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1) (analyzed car-out-3)
+    del: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-in-2 car-in-1 :: cost: 3
+    add: (on car-in-2 seg-out-1) (analyzed car-in-2) (on car-in-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-in-2 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-2) (analyzed car-in-2) (on car-in-2 seg-out-2)
+    del: (on car-in-2 seg-in-2) (on car-out-1 seg-out-2)
+analyze-2 seg-in-2 seg-out-3 car-in-2 car-out-2 :: cost: 3
+    add: (analyzed car-in-2) (on car-out-2 seg-in-2) (on car-in-2 seg-out-3)
+    del: (on car-in-2 seg-in-2) (on car-out-2 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-in-1 :: cost: 3
+    add: (on car-in-3 seg-out-1) (analyzed car-in-3) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-3) (analyzed car-in-3) (on car-in-3 seg-out-2)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-2 :: cost: 3
+    add: (analyzed car-in-3) (on car-out-2 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-1)
+    del: (on car-in-1 seg-out-1) (on car-out-3 seg-in-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-1) (on car-out-3 seg-out-2)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-2)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-out-2 :: cost: 1
+    add: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-in-2 car-in-1 :: cost: 1
+    add: (on car-in-2 seg-out-1) (on car-in-1 seg-in-2)
+    del: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-in-2 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-2) (on car-in-2 seg-out-2)
+    del: (on car-in-2 seg-in-2) (on car-out-1 seg-out-2)
+rotate-2 seg-in-2 seg-out-3 car-in-2 car-out-2 :: cost: 1
+    add: (on car-out-2 seg-in-2) (on car-in-2 seg-out-3)
+    del: (on car-in-2 seg-in-2) (on car-out-2 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-in-1 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-3) (on car-in-3 seg-out-2)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-2 :: cost: 1
+    add: (on car-out-2 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-3)
+Step 4 (on car-in-3 seg-in-3) (analyzed car-in-1) (on car-out-3 seg-in-1) (on car-in-2 seg-out-1) (analyzed car-in-2) (analyzed car-out-1) (on car-out-1 seg-out-2) (on car-in-1 seg-in-2) (analyzed car-out-2) (on car-out-2 seg-out-3)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-2 :: cost: 3
+    add: (on car-out-3 seg-out-1) (analyzed car-out-3) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-1) (analyzed car-out-3) (on car-out-3 seg-out-2)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-2)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-out-2 :: cost: 3
+    add: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1) (analyzed car-out-3)
+    del: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-in-1 car-in-2 :: cost: 3
+    add: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+    del: (on car-in-2 seg-out-1) (on car-in-1 seg-in-2)
+analyze-2 seg-in-2 seg-out-2 car-in-1 car-out-1 :: cost: 3
+    add: (on car-in-1 seg-out-2) (on car-out-1 seg-in-2)
+    del: (on car-out-1 seg-out-2) (on car-in-1 seg-in-2)
+analyze-2 seg-in-2 seg-out-3 car-in-1 car-out-2 :: cost: 3
+    add: (on car-in-1 seg-out-3) (on car-out-2 seg-in-2)
+    del: (on car-in-1 seg-in-2) (on car-out-2 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-in-2 :: cost: 3
+    add: (on car-in-3 seg-out-1) (analyzed car-in-3) (on car-in-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-3) (analyzed car-in-3) (on car-in-3 seg-out-2)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-2 :: cost: 3
+    add: (analyzed car-in-3) (on car-out-2 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-2 :: cost: 1
+    add: (on car-out-3 seg-out-1) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-1) (on car-out-3 seg-out-2)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-2)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-out-2 :: cost: 1
+    add: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-in-1 car-in-2 :: cost: 1
+    add: (on car-in-2 seg-in-2) (on car-in-1 seg-out-1)
+    del: (on car-in-2 seg-out-1) (on car-in-1 seg-in-2)
+rotate-2 seg-in-2 seg-out-2 car-in-1 car-out-1 :: cost: 1
+    add: (on car-in-1 seg-out-2) (on car-out-1 seg-in-2)
+    del: (on car-out-1 seg-out-2) (on car-in-1 seg-in-2)
+rotate-2 seg-in-2 seg-out-3 car-in-1 car-out-2 :: cost: 1
+    add: (on car-in-1 seg-out-3) (on car-out-2 seg-in-2)
+    del: (on car-in-1 seg-in-2) (on car-out-2 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-in-2 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-in-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-3) (on car-in-3 seg-out-2)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-2 :: cost: 1
+    add: (on car-out-2 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-3)
+Step 5 (on car-in-3 seg-in-3) (analyzed car-in-1) (on car-in-1 seg-out-2) (on car-out-3 seg-in-1) (on car-in-2 seg-out-1) (on car-out-1 seg-in-2) (analyzed car-in-2) (analyzed car-out-1) (analyzed car-out-2) (on car-out-2 seg-out-3)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-2 :: cost: 3
+    add: (on car-out-3 seg-out-1) (analyzed car-out-3) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (analyzed car-out-3) (on car-out-3 seg-out-2)
+    del: (on car-in-1 seg-out-2) (on car-out-3 seg-in-1)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-out-2 :: cost: 3
+    add: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1) (analyzed car-out-3)
+    del: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-out-1 car-in-2 :: cost: 3
+    add: (on car-in-2 seg-in-2) (on car-out-1 seg-out-1)
+    del: (on car-in-2 seg-out-1) (on car-out-1 seg-in-2)
+analyze-2 seg-in-2 seg-out-2 car-out-1 car-in-1 :: cost: 3
+    add: (on car-out-1 seg-out-2) (on car-in-1 seg-in-2)
+    del: (on car-in-1 seg-out-2) (on car-out-1 seg-in-2)
+analyze-2 seg-in-2 seg-out-3 car-out-1 car-out-2 :: cost: 3
+    add: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+    del: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-in-2 :: cost: 3
+    add: (on car-in-3 seg-out-1) (analyzed car-in-3) (on car-in-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-in-1 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-2) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-2 :: cost: 3
+    add: (analyzed car-in-3) (on car-out-2 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-2 :: cost: 1
+    add: (on car-out-3 seg-out-1) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-2)
+    del: (on car-in-1 seg-out-2) (on car-out-3 seg-in-1)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-out-2 :: cost: 1
+    add: (on car-out-3 seg-out-3) (on car-out-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-out-2 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-out-1 car-in-2 :: cost: 1
+    add: (on car-in-2 seg-in-2) (on car-out-1 seg-out-1)
+    del: (on car-in-2 seg-out-1) (on car-out-1 seg-in-2)
+rotate-2 seg-in-2 seg-out-2 car-out-1 car-in-1 :: cost: 1
+    add: (on car-out-1 seg-out-2) (on car-in-1 seg-in-2)
+    del: (on car-in-1 seg-out-2) (on car-out-1 seg-in-2)
+rotate-2 seg-in-2 seg-out-3 car-out-1 car-out-2 :: cost: 1
+    add: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+    del: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-in-2 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-in-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-in-1 :: cost: 1
+    add: (on car-in-3 seg-out-2) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-2 :: cost: 1
+    add: (on car-out-2 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-2 seg-out-3)
+Step 6 (on car-in-3 seg-in-3) (analyzed car-in-1) (on car-in-1 seg-out-2) (on car-out-3 seg-in-1) (on car-in-2 seg-out-1) (analyzed car-in-2) (on car-out-2 seg-in-2) (analyzed car-out-1) (on car-out-1 seg-out-3) (analyzed car-out-2)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-2 :: cost: 3
+    add: (on car-out-3 seg-out-1) (analyzed car-out-3) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (analyzed car-out-3) (on car-out-3 seg-out-2)
+    del: (on car-in-1 seg-out-2) (on car-out-3 seg-in-1)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-out-1 :: cost: 3
+    add: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1) (analyzed car-out-3)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-out-2 car-in-2 :: cost: 3
+    add: (on car-in-2 seg-in-2) (on car-out-2 seg-out-1)
+    del: (on car-in-2 seg-out-1) (on car-out-2 seg-in-2)
+analyze-2 seg-in-2 seg-out-2 car-out-2 car-in-1 :: cost: 3
+    add: (on car-out-2 seg-out-2) (on car-in-1 seg-in-2)
+    del: (on car-in-1 seg-out-2) (on car-out-2 seg-in-2)
+analyze-2 seg-in-2 seg-out-3 car-out-2 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-3 car-in-2 :: cost: 3
+    add: (on car-in-3 seg-out-1) (analyzed car-in-3) (on car-in-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+analyze-2 seg-in-3 seg-out-2 car-in-3 car-in-1 :: cost: 3
+    add: (analyzed car-in-3) (on car-in-3 seg-out-2) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-2)
+analyze-2 seg-in-3 seg-out-3 car-in-3 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-3) (analyzed car-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-2 :: cost: 1
+    add: (on car-out-3 seg-out-1) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-2)
+    del: (on car-in-1 seg-out-2) (on car-out-3 seg-in-1)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-out-1 :: cost: 1
+    add: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-out-2 car-in-2 :: cost: 1
+    add: (on car-in-2 seg-in-2) (on car-out-2 seg-out-1)
+    del: (on car-in-2 seg-out-1) (on car-out-2 seg-in-2)
+rotate-2 seg-in-2 seg-out-2 car-out-2 car-in-1 :: cost: 1
+    add: (on car-out-2 seg-out-2) (on car-in-1 seg-in-2)
+    del: (on car-in-1 seg-out-2) (on car-out-2 seg-in-2)
+rotate-2 seg-in-2 seg-out-3 car-out-2 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-3 car-in-2 :: cost: 1
+    add: (on car-in-3 seg-out-1) (on car-in-2 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+rotate-2 seg-in-3 seg-out-2 car-in-3 car-in-1 :: cost: 1
+    add: (on car-in-3 seg-out-2) (on car-in-1 seg-in-3)
+    del: (on car-in-3 seg-in-3) (on car-in-1 seg-out-2)
+rotate-2 seg-in-3 seg-out-3 car-in-3 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-3) (on car-in-3 seg-out-3)
+    del: (on car-in-3 seg-in-3) (on car-out-1 seg-out-3)
+Step 7 (analyzed car-in-1) (on car-in-1 seg-out-2) (on car-out-3 seg-in-1) (analyzed car-in-2) (on car-out-2 seg-in-2) (on car-in-3 seg-out-1) (analyzed car-in-3) (analyzed car-out-1) (on car-out-1 seg-out-3) (analyzed car-out-2) (on car-in-2 seg-in-3)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-3 :: cost: 3
+    add: (on car-out-3 seg-out-1) (analyzed car-out-3) (on car-in-3 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-3 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (analyzed car-out-3) (on car-out-3 seg-out-2)
+    del: (on car-in-1 seg-out-2) (on car-out-3 seg-in-1)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-out-1 :: cost: 3
+    add: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1) (analyzed car-out-3)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-out-2 car-in-3 :: cost: 3
+    add: (on car-out-2 seg-out-1) (on car-in-3 seg-in-2)
+    del: (on car-out-2 seg-in-2) (on car-in-3 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-out-2 car-in-1 :: cost: 3
+    add: (on car-out-2 seg-out-2) (on car-in-1 seg-in-2)
+    del: (on car-in-1 seg-out-2) (on car-out-2 seg-in-2)
+analyze-2 seg-in-2 seg-out-3 car-out-2 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-2 car-in-3 :: cost: 3
+    add: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+    del: (on car-in-3 seg-out-1) (on car-in-2 seg-in-3)
+analyze-2 seg-in-3 seg-out-2 car-in-2 car-in-1 :: cost: 3
+    add: (on car-in-2 seg-out-2) (on car-in-1 seg-in-3)
+    del: (on car-in-1 seg-out-2) (on car-in-2 seg-in-3)
+analyze-2 seg-in-3 seg-out-3 car-in-2 car-out-1 :: cost: 3
+    add: (on car-in-2 seg-out-3) (on car-out-1 seg-in-3)
+    del: (on car-out-1 seg-out-3) (on car-in-2 seg-in-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-3 :: cost: 1
+    add: (on car-out-3 seg-out-1) (on car-in-3 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-3 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-2)
+    del: (on car-in-1 seg-out-2) (on car-out-3 seg-in-1)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-out-1 :: cost: 1
+    add: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-out-2 car-in-3 :: cost: 1
+    add: (on car-out-2 seg-out-1) (on car-in-3 seg-in-2)
+    del: (on car-out-2 seg-in-2) (on car-in-3 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-out-2 car-in-1 :: cost: 1
+    add: (on car-out-2 seg-out-2) (on car-in-1 seg-in-2)
+    del: (on car-in-1 seg-out-2) (on car-out-2 seg-in-2)
+rotate-2 seg-in-2 seg-out-3 car-out-2 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-2 car-in-3 :: cost: 1
+    add: (on car-in-3 seg-in-3) (on car-in-2 seg-out-1)
+    del: (on car-in-3 seg-out-1) (on car-in-2 seg-in-3)
+rotate-2 seg-in-3 seg-out-2 car-in-2 car-in-1 :: cost: 1
+    add: (on car-in-2 seg-out-2) (on car-in-1 seg-in-3)
+    del: (on car-in-1 seg-out-2) (on car-in-2 seg-in-3)
+rotate-2 seg-in-3 seg-out-3 car-in-2 car-out-1 :: cost: 1
+    add: (on car-in-2 seg-out-3) (on car-out-1 seg-in-3)
+    del: (on car-out-1 seg-out-3) (on car-in-2 seg-in-3)
+Step 8 (analyzed car-in-1) (on car-out-3 seg-in-1) (analyzed car-in-2) (on car-in-2 seg-out-2) (on car-out-2 seg-in-2) (on car-in-3 seg-out-1) (analyzed car-in-3) (analyzed car-out-1) (on car-out-1 seg-out-3) (on car-in-1 seg-in-3) (analyzed car-out-2)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-3 :: cost: 3
+    add: (on car-out-3 seg-out-1) (analyzed car-out-3) (on car-in-3 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-3 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-in-2 :: cost: 3
+    add: (analyzed car-out-3) (on car-out-3 seg-out-2) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-2)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-out-1 :: cost: 3
+    add: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1) (analyzed car-out-3)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+analyze-2 seg-in-2 seg-out-1 car-out-2 car-in-3 :: cost: 3
+    add: (on car-out-2 seg-out-1) (on car-in-3 seg-in-2)
+    del: (on car-out-2 seg-in-2) (on car-in-3 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-out-2 car-in-2 :: cost: 3
+    add: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+    del: (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+analyze-2 seg-in-2 seg-out-3 car-out-2 car-out-1 :: cost: 3
+    add: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+analyze-2 seg-in-3 seg-out-1 car-in-1 car-in-3 :: cost: 3
+    add: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+    del: (on car-in-3 seg-out-1) (on car-in-1 seg-in-3)
+analyze-2 seg-in-3 seg-out-2 car-in-1 car-in-2 :: cost: 3
+    add: (on car-in-1 seg-out-2) (on car-in-2 seg-in-3)
+    del: (on car-in-2 seg-out-2) (on car-in-1 seg-in-3)
+analyze-2 seg-in-3 seg-out-3 car-in-1 car-out-1 :: cost: 3
+    add: (on car-in-1 seg-out-3) (on car-out-1 seg-in-3)
+    del: (on car-out-1 seg-out-3) (on car-in-1 seg-in-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-3 :: cost: 1
+    add: (on car-out-3 seg-out-1) (on car-in-3 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-3 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-in-2 :: cost: 1
+    add: (on car-out-3 seg-out-2) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-2)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-out-1 :: cost: 1
+    add: (on car-out-3 seg-out-3) (on car-out-1 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-out-1 seg-out-3)
+rotate-2 seg-in-2 seg-out-1 car-out-2 car-in-3 :: cost: 1
+    add: (on car-out-2 seg-out-1) (on car-in-3 seg-in-2)
+    del: (on car-out-2 seg-in-2) (on car-in-3 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-out-2 car-in-2 :: cost: 1
+    add: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+    del: (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+rotate-2 seg-in-2 seg-out-3 car-out-2 car-out-1 :: cost: 1
+    add: (on car-out-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-out-2 seg-in-2) (on car-out-1 seg-out-3)
+rotate-2 seg-in-3 seg-out-1 car-in-1 car-in-3 :: cost: 1
+    add: (on car-in-3 seg-in-3) (on car-in-1 seg-out-1)
+    del: (on car-in-3 seg-out-1) (on car-in-1 seg-in-3)
+rotate-2 seg-in-3 seg-out-2 car-in-1 car-in-2 :: cost: 1
+    add: (on car-in-1 seg-out-2) (on car-in-2 seg-in-3)
+    del: (on car-in-2 seg-out-2) (on car-in-1 seg-in-3)
+rotate-2 seg-in-3 seg-out-3 car-in-1 car-out-1 :: cost: 1
+    add: (on car-in-1 seg-out-3) (on car-out-1 seg-in-3)
+    del: (on car-out-1 seg-out-3) (on car-in-1 seg-in-3)
+Step 9 (analyzed car-in-1) (on car-in-1 seg-out-3) (on car-out-3 seg-in-1) (analyzed car-in-2) (on car-in-2 seg-out-2) (on car-out-2 seg-in-2) (on car-in-3 seg-out-1) (on car-out-1 seg-in-3) (analyzed car-in-3) (analyzed car-out-1) (analyzed car-out-2)
+size: 18
+analyze-2 seg-in-1 seg-out-1 car-out-3 car-in-3 :: cost: 3
+    add: (on car-out-3 seg-out-1) (analyzed car-out-3) (on car-in-3 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-3 seg-out-1)
+analyze-2 seg-in-1 seg-out-2 car-out-3 car-in-2 :: cost: 3
+    add: (analyzed car-out-3) (on car-out-3 seg-out-2) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-2)
+analyze-2 seg-in-1 seg-out-3 car-out-3 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-3) (analyzed car-out-3)
+    del: (on car-in-1 seg-out-3) (on car-out-3 seg-in-1)
+analyze-2 seg-in-2 seg-out-1 car-out-2 car-in-3 :: cost: 3
+    add: (on car-out-2 seg-out-1) (on car-in-3 seg-in-2)
+    del: (on car-out-2 seg-in-2) (on car-in-3 seg-out-1)
+analyze-2 seg-in-2 seg-out-2 car-out-2 car-in-2 :: cost: 3
+    add: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+    del: (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+analyze-2 seg-in-2 seg-out-3 car-out-2 car-in-1 :: cost: 3
+    add: (on car-in-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-in-1 seg-out-3) (on car-out-2 seg-in-2)
+analyze-2 seg-in-3 seg-out-1 car-out-1 car-in-3 :: cost: 3
+    add: (on car-in-3 seg-in-3) (on car-out-1 seg-out-1)
+    del: (on car-in-3 seg-out-1) (on car-out-1 seg-in-3)
+analyze-2 seg-in-3 seg-out-2 car-out-1 car-in-2 :: cost: 3
+    add: (on car-out-1 seg-out-2) (on car-in-2 seg-in-3)
+    del: (on car-in-2 seg-out-2) (on car-out-1 seg-in-3)
+analyze-2 seg-in-3 seg-out-3 car-out-1 car-in-1 :: cost: 3
+    add: (on car-out-1 seg-out-3) (on car-in-1 seg-in-3)
+    del: (on car-in-1 seg-out-3) (on car-out-1 seg-in-3)
+rotate-2 seg-in-1 seg-out-1 car-out-3 car-in-3 :: cost: 1
+    add: (on car-out-3 seg-out-1) (on car-in-3 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-3 seg-out-1)
+rotate-2 seg-in-1 seg-out-2 car-out-3 car-in-2 :: cost: 1
+    add: (on car-out-3 seg-out-2) (on car-in-2 seg-in-1)
+    del: (on car-out-3 seg-in-1) (on car-in-2 seg-out-2)
+rotate-2 seg-in-1 seg-out-3 car-out-3 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-1) (on car-out-3 seg-out-3)
+    del: (on car-in-1 seg-out-3) (on car-out-3 seg-in-1)
+rotate-2 seg-in-2 seg-out-1 car-out-2 car-in-3 :: cost: 1
+    add: (on car-out-2 seg-out-1) (on car-in-3 seg-in-2)
+    del: (on car-out-2 seg-in-2) (on car-in-3 seg-out-1)
+rotate-2 seg-in-2 seg-out-2 car-out-2 car-in-2 :: cost: 1
+    add: (on car-in-2 seg-in-2) (on car-out-2 seg-out-2)
+    del: (on car-in-2 seg-out-2) (on car-out-2 seg-in-2)
+rotate-2 seg-in-2 seg-out-3 car-out-2 car-in-1 :: cost: 1
+    add: (on car-in-1 seg-in-2) (on car-out-2 seg-out-3)
+    del: (on car-in-1 seg-out-3) (on car-out-2 seg-in-2)
+rotate-2 seg-in-3 seg-out-1 car-out-1 car-in-3 :: cost: 1
+    add: (on car-in-3 seg-in-3) (on car-out-1 seg-out-1)
+    del: (on car-in-3 seg-out-1) (on car-out-1 seg-in-3)
+rotate-2 seg-in-3 seg-out-2 car-out-1 car-in-2 :: cost: 1
+    add: (on car-out-1 seg-out-2) (on car-in-2 seg-in-3)
+    del: (on car-in-2 seg-out-2) (on car-out-1 seg-in-3)
+rotate-2 seg-in-3 seg-out-3 car-out-1 car-in-1 :: cost: 1
+    add: (on car-out-1 seg-out-3) (on car-in-1 seg-in-3)
+    del: (on car-in-1 seg-out-3) (on car-out-1 seg-in-3)

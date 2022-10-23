@@ -1,0 +1,128 @@
+Step 0 (colspace coln0) (bottomcol ha) (clear ha) (faceup ha) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (on sa c3) (on ca sa) (clear ca) (faceup ca) (bottomtalon s3) (ontalon d3 s3) (ontalon d5 d3) (ontalon h4 d5) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (talonplayable d5) (home c0) (home d0) (home h0) (home s0)
+size: 3
+col-to-home ca sa c n1 c0 n0 :: cost: 1
+    add: (home ca) (clear sa) (faceup sa) (on ca c0)
+    del: (on ca sa) (clear ca) (faceup ca) (home c0)
+col-to-home-b ha h0 h n1 n0 coln0 coln1 :: cost: 1
+    add: (home ha) (colspace coln1)
+    del: (colspace coln0) (bottomcol ha) (clear ha) (faceup ha) (home h0)
+turn-deck d5 h4 :: cost: 1
+    add: (talonplayable h4)
+    del: (talonplayable d5)
+Step 1 (colspace coln0) (bottomcol ha) (clear ha) (faceup ha) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (on sa c3) (bottomtalon s3) (ontalon d3 s3) (ontalon d5 d3) (ontalon h4 d5) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (talonplayable d5) (home d0) (home h0) (home s0) (home ca) (clear sa) (faceup sa) (on ca c0)
+size: 3
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (home sa) (clear c3) (faceup c3) (on sa s0)
+    del: (on sa c3) (home s0) (clear sa) (faceup sa)
+col-to-home-b ha h0 h n1 n0 coln0 coln1 :: cost: 1
+    add: (home ha) (colspace coln1)
+    del: (colspace coln0) (bottomcol ha) (clear ha) (faceup ha) (home h0)
+turn-deck d5 h4 :: cost: 1
+    add: (talonplayable h4)
+    del: (talonplayable d5)
+Step 2 (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (on sa c3) (bottomtalon s3) (ontalon d3 s3) (ontalon d5 d3) (ontalon h4 d5) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (talonplayable d5) (home d0) (home s0) (home ca) (clear sa) (faceup sa) (on ca c0) (home ha) (colspace coln1)
+size: 4
+move-col-to-col-c s5 h3 coln1 coln0 :: cost: 1
+    add: (colspace coln0) (bottomcol s5) (clear h3) (faceup h3)
+    del: (on s5 h3) (colspace coln1)
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (home sa) (clear c3) (faceup c3) (on sa s0)
+    del: (on sa c3) (home s0) (clear sa) (faceup sa)
+tal-to-col-e d5 d3 h4 coln1 coln0 :: cost: 1
+    add: (colspace coln0) (clear d5) (faceup d5) (talonplayable d3) (ontalon h4 d3) (bottomcol d5)
+    del: (ontalon d5 d3) (ontalon h4 d5) (talonplayable d5) (colspace coln1)
+turn-deck d5 h4 :: cost: 1
+    add: (talonplayable h4)
+    del: (talonplayable d5)
+Step 3 (colspace coln0) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (on sa c3) (bottomtalon s3) (ontalon d3 s3) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home s0) (home ca) (clear sa) (faceup sa) (on ca c0) (home ha) (clear d5) (faceup d5) (talonplayable d3) (ontalon h4 d3) (bottomcol d5)
+size: 4
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (on c4 d5) (clear h5) (faceup h5)
+    del: (on c4 h5) (clear d5)
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (home sa) (clear c3) (faceup c3) (on sa s0)
+    del: (on sa c3) (home s0) (clear sa) (faceup sa)
+tal-to-col d3 s3 c4 h4 :: cost: 1
+    add: (clear d3) (faceup d3) (talonplayable s3) (on d3 c4) (ontalon h4 s3)
+    del: (clear c4) (ontalon d3 s3) (talonplayable d3) (ontalon h4 d3)
+turn-deck d3 h4 :: cost: 1
+    add: (talonplayable h4)
+    del: (talonplayable d3)
+Step 4 (colspace coln0) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (on sa c3) (bottomtalon s3) (ontalon d3 s3) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home s0) (home ca) (clear sa) (faceup sa) (on ca c0) (home ha) (talonplayable h4) (clear d5) (faceup d5) (ontalon h4 d3) (bottomcol d5)
+size: 4
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (on c4 d5) (clear h5) (faceup h5)
+    del: (on c4 h5) (clear d5)
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (home sa) (clear c3) (faceup c3) (on sa s0)
+    del: (on sa c3) (home s0) (clear sa) (faceup sa)
+tal-to-col h4 d3 s5 c2 :: cost: 1
+    add: (talonplayable d3) (clear h4) (faceup h4) (on h4 s5) (ontalon c2 d3)
+    del: (clear s5) (ontalon c2 h4) (talonplayable h4) (ontalon h4 d3)
+turn-deck h4 c2 :: cost: 1
+    add: (talonplayable c2)
+    del: (talonplayable h4)
+Step 5 (colspace coln0) (bottomcol h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (on sa c3) (bottomtalon s3) (ontalon d3 s3) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home s0) (home ca) (clear sa) (faceup sa) (on ca c0) (home ha) (talonplayable h4) (faceup d5) (ontalon h4 d3) (bottomcol d5) (on c4 d5) (clear h5) (faceup h5)
+size: 4
+move-col-to-col c4 d5 h5 :: cost: 1
+    add: (on c4 h5) (clear d5)
+    del: (on c4 d5) (clear h5)
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (home sa) (clear c3) (faceup c3) (on sa s0)
+    del: (on sa c3) (home s0) (clear sa) (faceup sa)
+tal-to-col h4 d3 s5 c2 :: cost: 1
+    add: (talonplayable d3) (clear h4) (faceup h4) (on h4 s5) (ontalon c2 d3)
+    del: (clear s5) (ontalon c2 h4) (talonplayable h4) (ontalon h4 d3)
+turn-deck h4 c2 :: cost: 1
+    add: (talonplayable c2)
+    del: (talonplayable h4)
+Step 6 (colspace coln0) (bottomcol h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (bottomtalon s3) (ontalon d3 s3) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home ca) (on ca c0) (home ha) (talonplayable h4) (home sa) (clear c3) (faceup c3) (on sa s0) (faceup d5) (ontalon h4 d3) (bottomcol d5) (on c4 d5) (clear h5) (faceup h5)
+size: 3
+move-col-to-col c4 d5 h5 :: cost: 1
+    add: (on c4 h5) (clear d5)
+    del: (on c4 d5) (clear h5)
+tal-to-col h4 d3 s5 c2 :: cost: 1
+    add: (talonplayable d3) (clear h4) (faceup h4) (on h4 s5) (ontalon c2 d3)
+    del: (clear s5) (ontalon c2 h4) (talonplayable h4) (ontalon h4 d3)
+turn-deck h4 c2 :: cost: 1
+    add: (talonplayable c2)
+    del: (talonplayable h4)
+Step 7 (colspace coln0) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (clear s5) (faceup s5) (bottomcol d4) (on c3 d4) (bottomtalon s3) (ontalon d3 s3) (ontalon c2 h4) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home ca) (on ca c0) (home ha) (talonplayable h4) (home sa) (clear c3) (faceup c3) (on sa s0) (clear d5) (faceup d5) (ontalon h4 d3) (bottomcol d5) (faceup h5)
+size: 3
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (on c4 d5) (clear h5)
+    del: (on c4 h5) (clear d5)
+tal-to-col h4 d3 s5 c2 :: cost: 1
+    add: (talonplayable d3) (clear h4) (faceup h4) (on h4 s5) (ontalon c2 d3)
+    del: (clear s5) (ontalon c2 h4) (talonplayable h4) (ontalon h4 d3)
+turn-deck h4 c2 :: cost: 1
+    add: (talonplayable c2)
+    del: (talonplayable h4)
+Step 8 (colspace coln0) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (faceup s5) (bottomcol d4) (on c3 d4) (bottomtalon s3) (ontalon d3 s3) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home ca) (on ca c0) (home ha) (home sa) (clear c3) (faceup c3) (on sa s0) (clear d5) (faceup d5) (talonplayable d3) (bottomcol d5) (faceup h5) (clear h4) (faceup h4) (on h4 s5) (ontalon c2 d3)
+size: 4
+move-col-to-col c3 d4 h4 :: cost: 1
+    add: (on c3 h4) (clear d4) (faceup d4)
+    del: (on c3 d4) (clear h4)
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (on c4 d5) (clear h5)
+    del: (on c4 h5) (clear d5)
+tal-to-col d3 s3 c4 c2 :: cost: 1
+    add: (clear d3) (faceup d3) (talonplayable s3) (on d3 c4) (ontalon c2 s3)
+    del: (clear c4) (ontalon d3 s3) (talonplayable d3) (ontalon c2 d3)
+turn-deck d3 c2 :: cost: 1
+    add: (talonplayable c2)
+    del: (talonplayable d3)
+Step 9 (colspace coln0) (bottomcol h5) (on c4 h5) (clear c4) (faceup c4) (bottomcol d2) (on h3 d2) (on s5 h3) (faceup s5) (bottomcol d4) (bottomtalon s3) (ontalon d3 s3) (ontalon s4 c2) (ontalon da s4) (ontalon c5 da) (ontalon s2 c5) (ontalon h2 s2) (toptalon h2) (home d0) (home ca) (on ca c0) (home ha) (home sa) (clear c3) (faceup c3) (on sa s0) (clear d5) (faceup d5) (talonplayable d3) (bottomcol d5) (faceup h5) (faceup h4) (on h4 s5) (ontalon c2 d3) (on c3 h4) (clear d4) (faceup d4)
+size: 4
+move-col-to-col c3 h4 d4 :: cost: 1
+    add: (on c3 d4) (clear h4)
+    del: (on c3 h4) (clear d4)
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (on c4 d5) (clear h5)
+    del: (on c4 h5) (clear d5)
+tal-to-col d3 s3 c4 c2 :: cost: 1
+    add: (clear d3) (faceup d3) (talonplayable s3) (on d3 c4) (ontalon c2 s3)
+    del: (clear c4) (ontalon d3 s3) (talonplayable d3) (ontalon c2 d3)
+turn-deck d3 c2 :: cost: 1
+    add: (talonplayable c2)
+    del: (talonplayable d3)

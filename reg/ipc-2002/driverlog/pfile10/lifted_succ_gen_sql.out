@@ -1,0 +1,311 @@
+Step 0 (at driver1 s4) (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2)
+size: 10
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+board-truck driver1 truck2 s4 :: cost: 1
+    add: (driving driver1 truck2)
+    del: (at driver1 s4) (empty truck2)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 s4 p1-4 :: cost: 1
+    add: (at driver1 p1-4)
+    del: (at driver1 s4)
+walk driver1 s4 p4-5 :: cost: 1
+    add: (at driver1 p4-5)
+    del: (at driver1 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 1 (at driver1 s4) (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (in package2 truck1)
+size: 10
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+unload-truck package2 truck1 s0 :: cost: 1
+    add: (at package2 s0)
+    del: (in package2 truck1)
+board-truck driver1 truck2 s4 :: cost: 1
+    add: (driving driver1 truck2)
+    del: (at driver1 s4) (empty truck2)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 s4 p1-4 :: cost: 1
+    add: (at driver1 p1-4)
+    del: (at driver1 s4)
+walk driver1 s4 p4-5 :: cost: 1
+    add: (at driver1 p4-5)
+    del: (at driver1 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 2 (at driver1 s4) (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package3 s4) (at package5 s4) (at package6 s2) (in package2 truck1) (in package4 truck2)
+size: 10
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+unload-truck package2 truck1 s0 :: cost: 1
+    add: (at package2 s0)
+    del: (in package2 truck1)
+unload-truck package4 truck2 s4 :: cost: 1
+    add: (at package4 s4)
+    del: (in package4 truck2)
+board-truck driver1 truck2 s4 :: cost: 1
+    add: (driving driver1 truck2)
+    del: (at driver1 s4) (empty truck2)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 s4 p1-4 :: cost: 1
+    add: (at driver1 p1-4)
+    del: (at driver1 s4)
+walk driver1 s4 p4-5 :: cost: 1
+    add: (at driver1 p4-5)
+    del: (at driver1 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 3 (at driver1 s4) (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package5 s4) (at package6 s2) (in package4 truck2)
+size: 10
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+unload-truck package4 truck2 s4 :: cost: 1
+    add: (at package4 s4)
+    del: (in package4 truck2)
+board-truck driver1 truck2 s4 :: cost: 1
+    add: (driving driver1 truck2)
+    del: (at driver1 s4) (empty truck2)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 s4 p1-4 :: cost: 1
+    add: (at driver1 p1-4)
+    del: (at driver1 s4)
+walk driver1 s4 p4-5 :: cost: 1
+    add: (at driver1 p4-5)
+    del: (at driver1 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 4 (at driver1 s4) (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2)
+size: 10
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+board-truck driver1 truck2 s4 :: cost: 1
+    add: (driving driver1 truck2)
+    del: (at driver1 s4) (empty truck2)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 s4 p1-4 :: cost: 1
+    add: (at driver1 p1-4)
+    del: (at driver1 s4)
+walk driver1 s4 p4-5 :: cost: 1
+    add: (at driver1 p4-5)
+    del: (at driver1 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 5 (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (driving driver1 truck2)
+size: 12
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+disembark-truck driver1 truck2 s4 :: cost: 1
+    add: (at driver1 s4) (empty truck2)
+    del: (driving driver1 truck2)
+drive-truck truck2 s4 s0 driver1 :: cost: 1
+    add: (at truck2 s0)
+    del: (at truck2 s4)
+drive-truck truck2 s4 s1 driver1 :: cost: 1
+    add: (at truck2 s1)
+    del: (at truck2 s4)
+drive-truck truck2 s4 s3 driver1 :: cost: 1
+    add: (at truck2 s3)
+    del: (at truck2 s4)
+drive-truck truck2 s4 s5 driver1 :: cost: 1
+    add: (at truck2 s5)
+    del: (at truck2 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 6 (at driver1 s4) (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2)
+size: 10
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+board-truck driver1 truck2 s4 :: cost: 1
+    add: (driving driver1 truck2)
+    del: (at driver1 s4) (empty truck2)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 s4 p1-4 :: cost: 1
+    add: (at driver1 p1-4)
+    del: (at driver1 s4)
+walk driver1 s4 p4-5 :: cost: 1
+    add: (at driver1 p4-5)
+    del: (at driver1 s4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 7 (at driver2 s0) (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (at driver1 p1-4)
+size: 9
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+board-truck driver2 truck1 s0 :: cost: 1
+    add: (driving driver2 truck1)
+    del: (at driver2 s0) (empty truck1)
+walk driver1 p1-4 s1 :: cost: 1
+    add: (at driver1 s1)
+    del: (at driver1 p1-4)
+walk driver1 p1-4 s4 :: cost: 1
+    add: (at driver1 s4)
+    del: (at driver1 p1-4)
+walk driver2 s0 p1-0 :: cost: 1
+    add: (at driver2 p1-0)
+    del: (at driver2 s0)
+walk driver2 s0 p3-0 :: cost: 1
+    add: (at driver2 p3-0)
+    del: (at driver2 s0)
+Step 8 (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (at driver1 p1-4) (at driver2 p1-0)
+size: 8
+load-truck package2 truck1 s0 :: cost: 1
+    add: (in package2 truck1)
+    del: (at package2 s0)
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+walk driver1 p1-4 s1 :: cost: 1
+    add: (at driver1 s1)
+    del: (at driver1 p1-4)
+walk driver1 p1-4 s4 :: cost: 1
+    add: (at driver1 s4)
+    del: (at driver1 p1-4)
+walk driver2 p1-0 s0 :: cost: 1
+    add: (at driver2 s0)
+    del: (at driver2 p1-0)
+walk driver2 p1-0 s1 :: cost: 1
+    add: (at driver2 s1)
+    del: (at driver2 p1-0)
+Step 9 (at truck1 s0) (empty truck1) (at truck2 s4) (empty truck2) (at truck3 s5) (empty truck3) (at package1 s1) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (in package2 truck1) (at driver1 p1-4) (at driver2 p1-0)
+size: 8
+load-truck package3 truck2 s4 :: cost: 1
+    add: (in package3 truck2)
+    del: (at package3 s4)
+load-truck package4 truck2 s4 :: cost: 1
+    add: (in package4 truck2)
+    del: (at package4 s4)
+load-truck package5 truck2 s4 :: cost: 1
+    add: (in package5 truck2)
+    del: (at package5 s4)
+unload-truck package2 truck1 s0 :: cost: 1
+    add: (at package2 s0)
+    del: (in package2 truck1)
+walk driver1 p1-4 s1 :: cost: 1
+    add: (at driver1 s1)
+    del: (at driver1 p1-4)
+walk driver1 p1-4 s4 :: cost: 1
+    add: (at driver1 s4)
+    del: (at driver1 p1-4)
+walk driver2 p1-0 s0 :: cost: 1
+    add: (at driver2 s0)
+    del: (at driver2 p1-0)
+walk driver2 p1-0 s1 :: cost: 1
+    add: (at driver2 s1)
+    del: (at driver2 p1-0)

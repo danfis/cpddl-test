@@ -1,0 +1,197 @@
+Step 0 (ontable shaker1) (ontable shot1) (ontable shot2) (ontable shot3) (ontable shot4) (clean shaker1) (clean shot1) (clean shot2) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (handempty left) (handempty right) (shaker-level shaker1 l0)
+size: 10
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (ontable shaker1) (handempty left)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (ontable shot1) (handempty left)
+grasp left shot2 :: cost: 1
+    add: (holding left shot2)
+    del: (ontable shot2) (handempty left)
+grasp left shot3 :: cost: 1
+    add: (holding left shot3)
+    del: (ontable shot3) (handempty left)
+grasp left shot4 :: cost: 1
+    add: (holding left shot4)
+    del: (ontable shot4) (handempty left)
+grasp right shaker1 :: cost: 1
+    add: (holding right shaker1)
+    del: (ontable shaker1) (handempty right)
+grasp right shot1 :: cost: 1
+    add: (holding right shot1)
+    del: (ontable shot1) (handempty right)
+grasp right shot2 :: cost: 1
+    add: (holding right shot2)
+    del: (ontable shot2) (handempty right)
+grasp right shot3 :: cost: 1
+    add: (holding right shot3)
+    del: (ontable shot3) (handempty right)
+grasp right shot4 :: cost: 1
+    add: (holding right shot4)
+    del: (ontable shot4) (handempty right)
+Step 1 (ontable shot1) (ontable shot2) (ontable shot3) (ontable shot4) (clean shaker1) (clean shot1) (clean shot2) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (handempty right) (shaker-level shaker1 l0) (holding left shaker1)
+size: 6
+grasp right shot1 :: cost: 1
+    add: (holding right shot1)
+    del: (ontable shot1) (handempty right)
+grasp right shot2 :: cost: 1
+    add: (holding right shot2)
+    del: (ontable shot2) (handempty right)
+grasp right shot3 :: cost: 1
+    add: (holding right shot3)
+    del: (ontable shot3) (handempty right)
+grasp right shot4 :: cost: 1
+    add: (holding right shot4)
+    del: (ontable shot4) (handempty right)
+leave left shaker1 :: cost: 1
+    add: (ontable shaker1) (handempty left)
+    del: (holding left shaker1)
+clean-shaker left right shaker1 :: cost: 1
+    add:
+    del:
+Step 2 (ontable shot1) (ontable shot3) (ontable shot4) (clean shaker1) (clean shot1) (clean shot2) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (shaker-level shaker1 l0) (holding left shaker1) (holding right shot2)
+size: 2
+leave left shaker1 :: cost: 1
+    add: (ontable shaker1) (handempty left)
+    del: (holding left shaker1)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+Step 3 (ontable shaker1) (ontable shot1) (ontable shot3) (ontable shot4) (clean shaker1) (clean shot1) (clean shot2) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (handempty left) (shaker-level shaker1 l0) (holding right shot2)
+size: 8
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (ontable shaker1) (handempty left)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (ontable shot1) (handempty left)
+grasp left shot3 :: cost: 1
+    add: (holding left shot3)
+    del: (ontable shot3) (handempty left)
+grasp left shot4 :: cost: 1
+    add: (holding left shot4)
+    del: (ontable shot4) (handempty left)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+fill-shot shot2 ingredient1 right left dispenser1 :: cost: 10
+    add: (contains shot2 ingredient1) (used shot2 ingredient1)
+    del: (clean shot2) (empty shot2)
+fill-shot shot2 ingredient2 right left dispenser2 :: cost: 10
+    add: (contains shot2 ingredient2) (used shot2 ingredient2)
+    del: (clean shot2) (empty shot2)
+fill-shot shot2 ingredient3 right left dispenser3 :: cost: 10
+    add: (contains shot2 ingredient3) (used shot2 ingredient3)
+    del: (clean shot2) (empty shot2)
+Step 4 (ontable shaker1) (ontable shot1) (ontable shot3) (clean shaker1) (clean shot1) (clean shot2) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (shaker-level shaker1 l0) (holding left shot4) (holding right shot2)
+size: 2
+leave left shot4 :: cost: 1
+    add: (ontable shot4) (handempty left)
+    del: (holding left shot4)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+Step 5 (ontable shaker1) (ontable shot1) (ontable shot3) (ontable shot4) (clean shaker1) (clean shot1) (clean shot2) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (handempty left) (shaker-level shaker1 l0) (holding right shot2)
+size: 8
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (ontable shaker1) (handempty left)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (ontable shot1) (handempty left)
+grasp left shot3 :: cost: 1
+    add: (holding left shot3)
+    del: (ontable shot3) (handempty left)
+grasp left shot4 :: cost: 1
+    add: (holding left shot4)
+    del: (ontable shot4) (handempty left)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+fill-shot shot2 ingredient1 right left dispenser1 :: cost: 10
+    add: (contains shot2 ingredient1) (used shot2 ingredient1)
+    del: (clean shot2) (empty shot2)
+fill-shot shot2 ingredient2 right left dispenser2 :: cost: 10
+    add: (contains shot2 ingredient2) (used shot2 ingredient2)
+    del: (clean shot2) (empty shot2)
+fill-shot shot2 ingredient3 right left dispenser3 :: cost: 10
+    add: (contains shot2 ingredient3) (used shot2 ingredient3)
+    del: (clean shot2) (empty shot2)
+Step 6 (ontable shaker1) (ontable shot1) (ontable shot3) (ontable shot4) (clean shaker1) (clean shot1) (clean shot3) (clean shot4) (empty shaker1) (empty shot1) (empty shot3) (empty shot4) (handempty left) (shaker-level shaker1 l0) (holding right shot2) (contains shot2 ingredient1) (used shot2 ingredient1)
+size: 7
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (ontable shaker1) (handempty left)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (ontable shot1) (handempty left)
+grasp left shot3 :: cost: 1
+    add: (holding left shot3)
+    del: (ontable shot3) (handempty left)
+grasp left shot4 :: cost: 1
+    add: (holding left shot4)
+    del: (ontable shot4) (handempty left)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+empty-shot right shot2 ingredient1 :: cost: 1
+    add: (empty shot2)
+    del: (contains shot2 ingredient1)
+pour-shot-to-clean-shaker shot2 ingredient1 shaker1 right l0 l1 :: cost: 1
+    add: (empty shot2) (contains shaker1 ingredient1) (unshaked shaker1) (shaker-level shaker1 l1)
+    del: (clean shaker1) (empty shaker1) (shaker-level shaker1 l0) (contains shot2 ingredient1)
+Step 7 (ontable shaker1) (ontable shot1) (ontable shot3) (ontable shot4) (clean shot1) (clean shot3) (clean shot4) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (handempty left) (holding right shot2) (used shot2 ingredient1) (contains shaker1 ingredient1) (unshaked shaker1) (shaker-level shaker1 l1)
+size: 7
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (ontable shaker1) (handempty left)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (ontable shot1) (handempty left)
+grasp left shot3 :: cost: 1
+    add: (holding left shot3)
+    del: (ontable shot3) (handempty left)
+grasp left shot4 :: cost: 1
+    add: (holding left shot4)
+    del: (ontable shot4) (handempty left)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+refill-shot shot2 ingredient1 right left dispenser1 :: cost: 10
+    add: (contains shot2 ingredient1)
+    del: (empty shot2)
+clean-shot shot2 ingredient1 right left :: cost: 1
+    add: (clean shot2)
+    del: (used shot2 ingredient1)
+Step 8 (ontable shot1) (ontable shot3) (ontable shot4) (clean shot1) (clean shot3) (clean shot4) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (holding left shaker1) (holding right shot2) (used shot2 ingredient1) (contains shaker1 ingredient1) (unshaked shaker1) (shaker-level shaker1 l1)
+size: 2
+leave left shaker1 :: cost: 1
+    add: (ontable shaker1) (handempty left)
+    del: (holding left shaker1)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+Step 9 (ontable shaker1) (ontable shot1) (ontable shot3) (ontable shot4) (clean shot1) (clean shot3) (clean shot4) (empty shot1) (empty shot2) (empty shot3) (empty shot4) (handempty left) (holding right shot2) (used shot2 ingredient1) (contains shaker1 ingredient1) (unshaked shaker1) (shaker-level shaker1 l1)
+size: 7
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (ontable shaker1) (handempty left)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (ontable shot1) (handempty left)
+grasp left shot3 :: cost: 1
+    add: (holding left shot3)
+    del: (ontable shot3) (handempty left)
+grasp left shot4 :: cost: 1
+    add: (holding left shot4)
+    del: (ontable shot4) (handempty left)
+leave right shot2 :: cost: 1
+    add: (ontable shot2) (handempty right)
+    del: (holding right shot2)
+refill-shot shot2 ingredient1 right left dispenser1 :: cost: 10
+    add: (contains shot2 ingredient1)
+    del: (empty shot2)
+clean-shot shot2 ingredient1 right left :: cost: 1
+    add: (clean shot2)
+    del: (used shot2 ingredient1)

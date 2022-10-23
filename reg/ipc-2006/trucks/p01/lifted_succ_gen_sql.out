@@ -1,0 +1,218 @@
+Step 0 (at truck1 l3) (free a1 truck1) (free a2 truck1) (at package1 l2) (at package2 l2) (at package3 l2) (time-now t0)
+size: 2
+drive truck1 l3 l1 t0 t1 :: cost: 1
+    add: (time-now t1) (at truck1 l1)
+    del: (at truck1 l3) (time-now t0)
+drive truck1 l3 l2 t0 t1 :: cost: 1
+    add: (time-now t1) (at truck1 l2)
+    del: (at truck1 l3) (time-now t0)
+Step 1 (free a1 truck1) (free a2 truck1) (at package1 l2) (at package2 l2) (at package3 l2) (time-now t1) (at truck1 l1)
+size: 20
+drive truck1 l1 l2 t1 t2 :: cost: 1
+    add: (at truck1 l2) (time-now t2)
+    del: (time-now t1) (at truck1 l1)
+drive truck1 l1 l3 t1 t2 :: cost: 1
+    add: (at truck1 l3) (time-now t2)
+    del: (time-now t1) (at truck1 l1)
+deliver package1 l2 t1 t1 :: cost: 1
+    add: (delivered package1 l2 t1) (at-destination package1 l2)
+    del: (at package1 l2)
+deliver package1 l2 t1 t2 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t2)
+    del: (at package1 l2)
+deliver package1 l2 t1 t3 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t3)
+    del: (at package1 l2)
+deliver package1 l2 t1 t4 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t4)
+    del: (at package1 l2)
+deliver package1 l2 t1 t5 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t5)
+    del: (at package1 l2)
+deliver package1 l2 t1 t6 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t6)
+    del: (at package1 l2)
+deliver package2 l2 t1 t1 :: cost: 1
+    add: (delivered package2 l2 t1) (at-destination package2 l2)
+    del: (at package2 l2)
+deliver package2 l2 t1 t2 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t2)
+    del: (at package2 l2)
+deliver package2 l2 t1 t3 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t3)
+    del: (at package2 l2)
+deliver package2 l2 t1 t4 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t4)
+    del: (at package2 l2)
+deliver package2 l2 t1 t5 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t5)
+    del: (at package2 l2)
+deliver package2 l2 t1 t6 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t6)
+    del: (at package2 l2)
+deliver package3 l2 t1 t1 :: cost: 1
+    add: (delivered package3 l2 t1) (at-destination package3 l2)
+    del: (at package3 l2)
+deliver package3 l2 t1 t2 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t2)
+    del: (at package3 l2)
+deliver package3 l2 t1 t3 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t3)
+    del: (at package3 l2)
+deliver package3 l2 t1 t4 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t4)
+    del: (at package3 l2)
+deliver package3 l2 t1 t5 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t5)
+    del: (at package3 l2)
+deliver package3 l2 t1 t6 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t6)
+    del: (at package3 l2)
+Step 2 (at truck1 l3) (free a1 truck1) (free a2 truck1) (at package1 l2) (at package2 l2) (at package3 l2) (time-now t2)
+size: 17
+drive truck1 l3 l1 t2 t3 :: cost: 1
+    add: (at truck1 l1) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+drive truck1 l3 l2 t2 t3 :: cost: 1
+    add: (at truck1 l2) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+deliver package1 l2 t2 t2 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t2)
+    del: (at package1 l2)
+deliver package1 l2 t2 t3 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t3)
+    del: (at package1 l2)
+deliver package1 l2 t2 t4 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t4)
+    del: (at package1 l2)
+deliver package1 l2 t2 t5 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t5)
+    del: (at package1 l2)
+deliver package1 l2 t2 t6 :: cost: 1
+    add: (at-destination package1 l2) (delivered package1 l2 t6)
+    del: (at package1 l2)
+deliver package2 l2 t2 t2 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t2)
+    del: (at package2 l2)
+deliver package2 l2 t2 t3 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t3)
+    del: (at package2 l2)
+deliver package2 l2 t2 t4 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t4)
+    del: (at package2 l2)
+deliver package2 l2 t2 t5 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t5)
+    del: (at package2 l2)
+deliver package2 l2 t2 t6 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t6)
+    del: (at package2 l2)
+deliver package3 l2 t2 t2 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t2)
+    del: (at package3 l2)
+deliver package3 l2 t2 t3 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t3)
+    del: (at package3 l2)
+deliver package3 l2 t2 t4 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t4)
+    del: (at package3 l2)
+deliver package3 l2 t2 t5 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t5)
+    del: (at package3 l2)
+deliver package3 l2 t2 t6 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t6)
+    del: (at package3 l2)
+Step 3 (at truck1 l3) (free a1 truck1) (free a2 truck1) (at package2 l2) (at package3 l2) (time-now t2) (at-destination package1 l2) (delivered package1 l2 t2)
+size: 12
+drive truck1 l3 l1 t2 t3 :: cost: 1
+    add: (at truck1 l1) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+drive truck1 l3 l2 t2 t3 :: cost: 1
+    add: (at truck1 l2) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+deliver package2 l2 t2 t2 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t2)
+    del: (at package2 l2)
+deliver package2 l2 t2 t3 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t3)
+    del: (at package2 l2)
+deliver package2 l2 t2 t4 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t4)
+    del: (at package2 l2)
+deliver package2 l2 t2 t5 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t5)
+    del: (at package2 l2)
+deliver package2 l2 t2 t6 :: cost: 1
+    add: (at-destination package2 l2) (delivered package2 l2 t6)
+    del: (at package2 l2)
+deliver package3 l2 t2 t2 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t2)
+    del: (at package3 l2)
+deliver package3 l2 t2 t3 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t3)
+    del: (at package3 l2)
+deliver package3 l2 t2 t4 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t4)
+    del: (at package3 l2)
+deliver package3 l2 t2 t5 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t5)
+    del: (at package3 l2)
+deliver package3 l2 t2 t6 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t6)
+    del: (at package3 l2)
+Step 4 (at truck1 l3) (free a1 truck1) (free a2 truck1) (at package3 l2) (time-now t2) (at-destination package1 l2) (delivered package1 l2 t2) (at-destination package2 l2) (delivered package2 l2 t3)
+size: 7
+drive truck1 l3 l1 t2 t3 :: cost: 1
+    add: (at truck1 l1) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+drive truck1 l3 l2 t2 t3 :: cost: 1
+    add: (at truck1 l2) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+deliver package3 l2 t2 t2 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t2)
+    del: (at package3 l2)
+deliver package3 l2 t2 t3 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t3)
+    del: (at package3 l2)
+deliver package3 l2 t2 t4 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t4)
+    del: (at package3 l2)
+deliver package3 l2 t2 t5 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t5)
+    del: (at package3 l2)
+deliver package3 l2 t2 t6 :: cost: 1
+    add: (at-destination package3 l2) (delivered package3 l2 t6)
+    del: (at package3 l2)
+Step 5 (at truck1 l3) (free a1 truck1) (free a2 truck1) (time-now t2) (at-destination package1 l2) (delivered package1 l2 t2) (at-destination package2 l2) (delivered package2 l2 t3) (at-destination package3 l2) (delivered package3 l2 t4)
+size: 2
+drive truck1 l3 l1 t2 t3 :: cost: 1
+    add: (at truck1 l1) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+drive truck1 l3 l2 t2 t3 :: cost: 1
+    add: (at truck1 l2) (time-now t3)
+    del: (at truck1 l3) (time-now t2)
+Step 6 (free a1 truck1) (free a2 truck1) (at truck1 l2) (at-destination package1 l2) (delivered package1 l2 t2) (at-destination package2 l2) (delivered package2 l2 t3) (at-destination package3 l2) (delivered package3 l2 t4) (time-now t3)
+size: 2
+drive truck1 l2 l1 t3 t4 :: cost: 1
+    add: (at truck1 l1) (time-now t4)
+    del: (at truck1 l2) (time-now t3)
+drive truck1 l2 l3 t3 t4 :: cost: 1
+    add: (at truck1 l3) (time-now t4)
+    del: (at truck1 l2) (time-now t3)
+Step 7 (free a1 truck1) (free a2 truck1) (at truck1 l1) (at-destination package1 l2) (delivered package1 l2 t2) (at-destination package2 l2) (delivered package2 l2 t3) (at-destination package3 l2) (delivered package3 l2 t4) (time-now t4)
+size: 2
+drive truck1 l1 l2 t4 t5 :: cost: 1
+    add: (at truck1 l2) (time-now t5)
+    del: (at truck1 l1) (time-now t4)
+drive truck1 l1 l3 t4 t5 :: cost: 1
+    add: (at truck1 l3) (time-now t5)
+    del: (at truck1 l1) (time-now t4)
+Step 8 (at truck1 l3) (free a1 truck1) (free a2 truck1) (at-destination package1 l2) (delivered package1 l2 t2) (at-destination package2 l2) (delivered package2 l2 t3) (at-destination package3 l2) (delivered package3 l2 t4) (time-now t5)
+size: 2
+drive truck1 l3 l1 t5 t6 :: cost: 1
+    add: (at truck1 l1) (time-now t6)
+    del: (at truck1 l3) (time-now t5)
+drive truck1 l3 l2 t5 t6 :: cost: 1
+    add: (at truck1 l2) (time-now t6)
+    del: (at truck1 l3) (time-now t5)
+Step 9 (free a1 truck1) (free a2 truck1) (at truck1 l1) (at-destination package1 l2) (delivered package1 l2 t2) (at-destination package2 l2) (delivered package2 l2 t3) (at-destination package3 l2) (delivered package3 l2 t4) (time-now t6)
+size: 0
