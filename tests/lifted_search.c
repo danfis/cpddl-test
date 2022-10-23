@@ -120,15 +120,15 @@ TEST(lifted_search, pddl)
 TEST(lifted_blind_search_sql, lifted_search)
 {
     pddl_lifted_heur_t *heur = pddlLiftedHeurBlind();
-    pddl_search_lifted_t *search;
-    search = pddlSearchLiftedAStar(&C.pddl, heur, &C.err);
-    int ret = pddlSearchLiftedInitStep(search);
-    assert(ret != PDDL_SEARCH_ABORT);
-    while (ret == PDDL_SEARCH_CONT){
-        ret = pddlSearchLiftedStep(search);
+    pddl_lifted_search_t *search;
+    search = pddlLiftedSearchAStar(&C.pddl, heur, &C.err);
+    int ret = pddlLiftedSearchInitStep(search);
+    assert(ret != PDDL_LIFTED_SEARCH_ABORT);
+    while (ret == PDDL_LIFTED_SEARCH_CONT){
+        ret = pddlLiftedSearchStep(search);
     }
-    if (ret == PDDL_SEARCH_FOUND){
-        const pddl_lifted_plan_t *plan = pddlSearchLiftedPlan(search);
+    if (ret == PDDL_LIFTED_SEARCH_FOUND){
+        const pddl_lifted_plan_t *plan = pddlLiftedSearchPlan(search);
         printf("Cost: %d\n", plan->plan_cost);
         fflush(stdout);
         int val = validateLiftedPlan(plan);
@@ -140,6 +140,6 @@ TEST(lifted_blind_search_sql, lifted_search)
         assert(C.optimal_cost < 0);
         printf("Unsolvable\n");
     }
-    pddlSearchLiftedDel(search);
+    pddlLiftedSearchDel(search);
     pddlLiftedHeurDel(heur);
 }
