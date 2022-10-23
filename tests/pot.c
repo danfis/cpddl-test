@@ -61,7 +61,7 @@ TEST(pot_init, pot)
 
     int val = pddlPotSolutionEvalFDRState(&sol, &C.fdr.var, C.fdr.init);
     pot_value_init = val;
-    if (C.optimal_cost < PDDL_COST_MAX)
+    if (C.optimal_cost >= 0)
         assert(val <= C.optimal_cost);
     fprintf(stdout, "Value: %d\n", val);
     pddlPotSolutionFree(&sol);
@@ -86,7 +86,7 @@ TEST(pot_all_states, pot_init)
 
     int val = pddlPotSolutionEvalFDRState(&sol, &C.fdr.var, C.fdr.init);
     assert(val <= pot_value_init);
-    if (C.optimal_cost < PDDL_COST_MAX)
+    if (C.optimal_cost >= 0)
         assert(val <= C.optimal_cost);
     pddlPotSolutionFree(&sol);
     pddlPotFree(&pot);
@@ -115,7 +115,7 @@ TEST(pot_mg_strips_init, pot_init)
     pddlPotSolve(&pot, &sol, &C.err);
     int val = pddlPotSolutionEvalStripsState(&sol, &mg_strips.strips.init);
     assert(val >= pot_value_init);
-    if (C.optimal_cost < PDDL_COST_MAX)
+    if (C.optimal_cost >= 0)
         assert(val <= C.optimal_cost);
     pot_value_mg_strips_init = val;
     fprintf(stdout, "Value: %d\n", val);
@@ -148,7 +148,7 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     int val = pddlPotSolutionEvalStripsState(&sol, &mg_strips.strips.init);
     assert(val >= pot_value_init);
     assert(val >= pot_value_mg_strips_init);
-    if (C.optimal_cost < PDDL_COST_MAX)
+    if (C.optimal_cost >= 0)
         assert(val <= C.optimal_cost);
     fprintf(stdout, "Value: %d\n", val);
     pddlPotSolutionFree(&sol);

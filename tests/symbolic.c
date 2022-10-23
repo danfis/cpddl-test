@@ -62,7 +62,7 @@ static void checkPlan(const pddl_strips_t *strips, const pddl_iarr_t *plan)
     assert(pddlISetIsSubset(&strips->goal, &state));
     pddlISetFree(&state);
 
-    if (C.optimal_cost < PDDL_COST_MAX)
+    if (C.optimal_cost >= 0)
         assert(C.optimal_cost == plan_cost);
 }
 

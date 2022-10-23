@@ -15,7 +15,7 @@ static int optimalCost(const char *problem_fn)
     FILE *fin = fopen(fn, "r");
     if (fin == NULL){
         PDDL_FREE(fn);
-        return PDDL_COST_MAX;
+        return -1;
     }
 
     size_t len = 0;
@@ -57,7 +57,7 @@ int validateLiftedPlan(const pddl_lifted_plan_t *plan)
     fclose(fplan);
 
     char cmd[256];
-    sprintf(cmd, "val/validate %s %s %s >/dev/null 2>&1",
+    sprintf(cmd, "val/validate -v %s %s %s >/dev/null 2>&1",
             C.files.domain_pddl, C.files.problem_pddl, fn);
     int sret = system(cmd);
 

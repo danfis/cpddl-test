@@ -130,12 +130,14 @@ TEST(lifted_blind_search_sql, lifted_search)
     if (ret == PDDL_SEARCH_FOUND){
         const pddl_lifted_plan_t *plan = pddlSearchLiftedPlan(search);
         printf("Cost: %d\n", plan->plan_cost);
-        if (C.optimal_cost >= 0)
-            assert(plan->plan_cost == C.optimal_cost);
+        fflush(stdout);
         int val = validateLiftedPlan(plan);
         assert(val == 0);
+        if (C.optimal_cost >= 0)
+            assert(plan->plan_cost == C.optimal_cost);
 
     }else{
+        assert(C.optimal_cost < 0);
         printf("Unsolvable\n");
     }
     pddlSearchLiftedDel(search);
