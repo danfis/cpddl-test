@@ -175,3 +175,27 @@ TEST(lifted_blind_search_dl, lifted_search)
     testOptimalSearch(&cfg);
     pddlLiftedHeurDel(heur);
 }
+
+TEST(lifted_search_astar_hmax_sql, lifted_search)
+{
+    pddl_lifted_heur_t *heur = pddlLiftedHeurHMax(&C.pddl, &C.err);
+    pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
+    cfg.pddl = &C.pddl;
+    cfg.alg = PDDL_LIFTED_SEARCH_ASTAR;
+    cfg.heur = heur;
+    cfg.succ_gen = PDDL_LIFTED_APP_ACTION_SQL;
+    testOptimalSearch(&cfg);
+    pddlLiftedHeurDel(heur);
+}
+
+TEST(lifted_search_astar_hmax_dl, lifted_search)
+{
+    pddl_lifted_heur_t *heur = pddlLiftedHeurHMax(&C.pddl, &C.err);
+    pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
+    cfg.pddl = &C.pddl;
+    cfg.alg = PDDL_LIFTED_SEARCH_ASTAR;
+    cfg.heur = heur;
+    cfg.succ_gen = PDDL_LIFTED_APP_ACTION_DL;
+    testOptimalSearch(&cfg);
+    pddlLiftedHeurDel(heur);
+}
