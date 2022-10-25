@@ -7,7 +7,7 @@ from pprint import pprint
 LARGE_TESTS = ['h3', 'h3mgroup', 'symbolic',
                'endomorphism_tss', 'endomorphism_tss_minizinc',
                'endomorphism_tss_nocost',
-               'lifted_blind_search_sql']
+               'lifted_search']
 VERY_LARGE_TESTS = LARGE_TESTS \
     + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential',
        'homomorphism_reduce', 'homomorphism_endomorph',
