@@ -177,3 +177,67 @@ TEST_COND(ground_layered, lmg, SQLITE)
     pddlGroundAtomsPrint(&ga, &C.pddl, stdout);
     pddlGroundAtomsFree(&ga);
 }
+
+static void testCompileInLMG(int mutex, int dead_end)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.lifted_mgroups = &C.lmg;
+    ground_cfg.prune_op_pre_mutex = mutex;
+    ground_cfg.prune_op_dead_end = dead_end;
+    pddl_strips_t base;
+    int ret = pddlStripsGround(&base, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    ground_cfg.lifted_mgroups = NULL;
+    ground_cfg.prune_op_pre_mutex = 0;
+    ground_cfg.prune_op_dead_end = 0;
+
+    pddl_t pddl;
+    pddlInitCopy(&pddl, &C.pddl);
+
+    pddl_compile_in_lmg_config_t lmg_cfg = PDDL_COMPILE_IN_LMG_CONFIG_INIT;
+    lmg_cfg.prune_mutex = mutex;
+    lmg_cfg.prune_dead_end = dead_end;
+    pddlCompileInLiftedMGroups(&pddl, &C.lmg, &lmg_cfg, &C.err);
+
+    pddl_strips_t strips;
+    ret = pddlStripsGroundDatalog(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+
+    ret = pddlStripsGroundSql(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+
+    ret = pddlStripsGround(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+
+    pddlFree(&pddl);
+    pddlStripsFree(&base);
+}
+
+TEST(strips_compile_in_lmg, lmg)
+{
+    testCompileInLMG(1, 1);
+    testCompileInLMG(1, 0);
+    testCompileInLMG(0, 1);
+}
