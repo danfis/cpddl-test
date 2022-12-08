@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 {

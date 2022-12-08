@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static pddl_mutex_pairs_t h2;
 static pddl_iset_t h2_unreachable_op;

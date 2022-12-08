@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 TEST(hff_strips, fdr)
 {

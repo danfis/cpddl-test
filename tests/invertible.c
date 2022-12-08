@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static int isInMGroup(int fact, const pddl_mgroups_t *mgroups)
 {

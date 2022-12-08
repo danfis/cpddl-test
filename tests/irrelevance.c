@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 TEST(irrelevance, strips_pruned)
 {

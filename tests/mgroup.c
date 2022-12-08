@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static int mgIsSubset(const pddl_mgroups_t *mgs,
                       const pddl_mgroup_t *m)

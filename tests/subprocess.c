@@ -1,7 +1,7 @@
 #include "pddl/pddl.h"
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 TEST_EXPLICIT(subprocess_execvp)
 {

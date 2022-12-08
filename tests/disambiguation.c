@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static int disamb(pddl_disambiguate_t *dis,
                   const pddl_strips_t *strips,

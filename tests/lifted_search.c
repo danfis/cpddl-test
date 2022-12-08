@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static void printState(const char *prefix,
                        const pddl_iset_t *state,

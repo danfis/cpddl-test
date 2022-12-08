@@ -1,3 +1,4 @@
+#define _DEFAULT_SOURCE
 #include <sys/resource.h>
 #include <sys/mman.h>
 #include <sys/types.h>

@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static void checkOpChangeState(const pddl_fdr_t *fdr,
                                const int *state,

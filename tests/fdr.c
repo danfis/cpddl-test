@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 
 static void _test_fdr(unsigned fdr_var_flag, unsigned fdr_flag)

@@ -1,7 +1,7 @@
 #include "pddl/pddl.h"
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static void genRandGraph(pddl_rand_t *rnd,
                          pddl_graph_simple_t *g,

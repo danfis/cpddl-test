@@ -1,6 +1,6 @@
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static void checkPlanStates(const pddl_fdr_t *fdr, pddl_symbolic_task_t *ss)
 {

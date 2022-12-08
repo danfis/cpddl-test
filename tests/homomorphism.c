@@ -1,7 +1,7 @@
 #include "pddl/pddl.h"
-#include <assert.h>
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 static pddl_homomorphic_task_t h;
 
