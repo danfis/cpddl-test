@@ -127,7 +127,12 @@ TEST(lifted_search, pddl)
 {
 }
 
-static void testOptimalSearch(const pddl_lifted_search_config_t *cfg)
+TEST(lifted_search_unit_cost, pddl_unit_cost)
+{
+}
+
+static void testOptimalSearch(const pddl_lifted_search_config_t *cfg,
+                              int compare_to_optimal_cost)
 {
     pddl_lifted_search_t *search;
     search = pddlLiftedSearchNew(cfg, &C.err);
@@ -142,7 +147,7 @@ static void testOptimalSearch(const pddl_lifted_search_config_t *cfg)
         fflush(stdout);
         int val = validateLiftedPlan(plan);
         assert(val == 0);
-        if (C.optimal_cost >= 0)
+        if (compare_to_optimal_cost && C.optimal_cost >= 0)
             assert(plan->plan_cost == C.optimal_cost);
 
     }else{
@@ -152,50 +157,72 @@ static void testOptimalSearch(const pddl_lifted_search_config_t *cfg)
     pddlLiftedSearchDel(search);
 }
 
-TEST(lifted_blind_search_sql, lifted_search)
+static void _lifted_search(pddl_lifted_heur_t *heur,
+                           pddl_lifted_search_alg_t search,
+                           pddl_lifted_app_action_backend_t app_action,
+                           int compare_to_optimal_cost)
 {
-    pddl_lifted_heur_t *heur = pddlLiftedHeurBlind();
     pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
     cfg.pddl = &C.pddl;
-    cfg.alg = PDDL_LIFTED_SEARCH_ASTAR;
+    cfg.alg = search;
     cfg.heur = heur;
-    cfg.succ_gen = PDDL_LIFTED_APP_ACTION_SQL;
-    testOptimalSearch(&cfg);
+    cfg.succ_gen = app_action;
+    testOptimalSearch(&cfg, compare_to_optimal_cost);
     pddlLiftedHeurDel(heur);
+}
+
+TEST(lifted_blind_search_sql, lifted_search)
+{
+    _lifted_search(pddlLiftedHeurBlind(),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_SQL, 1);
 }
 
 TEST(lifted_blind_search_dl, lifted_search)
 {
-    pddl_lifted_heur_t *heur = pddlLiftedHeurBlind();
-    pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
-    cfg.pddl = &C.pddl;
-    cfg.alg = PDDL_LIFTED_SEARCH_ASTAR;
-    cfg.heur = heur;
-    cfg.succ_gen = PDDL_LIFTED_APP_ACTION_DL;
-    testOptimalSearch(&cfg);
-    pddlLiftedHeurDel(heur);
+    _lifted_search(pddlLiftedHeurBlind(),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_DL, 1);
 }
 
 TEST(lifted_search_astar_hmax_sql, lifted_search)
 {
-    pddl_lifted_heur_t *heur = pddlLiftedHeurHMax(&C.pddl, &C.err);
-    pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
-    cfg.pddl = &C.pddl;
-    cfg.alg = PDDL_LIFTED_SEARCH_ASTAR;
-    cfg.heur = heur;
-    cfg.succ_gen = PDDL_LIFTED_APP_ACTION_SQL;
-    testOptimalSearch(&cfg);
-    pddlLiftedHeurDel(heur);
+    _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_SQL, 1);
 }
 
 TEST(lifted_search_astar_hmax_dl, lifted_search)
 {
-    pddl_lifted_heur_t *heur = pddlLiftedHeurHMax(&C.pddl, &C.err);
-    pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
-    cfg.pddl = &C.pddl;
-    cfg.alg = PDDL_LIFTED_SEARCH_ASTAR;
-    cfg.heur = heur;
-    cfg.succ_gen = PDDL_LIFTED_APP_ACTION_DL;
-    testOptimalSearch(&cfg);
-    pddlLiftedHeurDel(heur);
+    _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_DL, 1);
+}
+
+TEST(lifted_blind_search_unit_cost_sql, lifted_search_unit_cost)
+{
+    _lifted_search(pddlLiftedHeurBlind(),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_SQL, 0);
+}
+
+TEST(lifted_blind_search_unit_cost_dl, lifted_search_unit_cost)
+{
+    _lifted_search(pddlLiftedHeurBlind(),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_DL, 0);
+}
+
+TEST(lifted_search_astar_unit_cost_hmax_sql, lifted_search_unit_cost)
+{
+    _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_SQL, 0);
+}
+
+TEST(lifted_search_astar_unit_cost_hmax_dl, lifted_search_unit_cost)
+{
+    _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_DL, 0);
 }
