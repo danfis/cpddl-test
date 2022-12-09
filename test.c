@@ -651,6 +651,8 @@ static void printReport(void)
 
 static void cleanRegDir(void)
 {
+    printf("Cleaning reg/ directory...\n");
+    fflush(stdout);
     system("find reg/ -name '*.tmp' -exec rm '{}' ';'");
 }
 
