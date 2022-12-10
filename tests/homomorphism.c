@@ -37,7 +37,7 @@ TEST(homomorphism_type, homomorphism)
         int after = h.task.obj.obj_size;
         assert(after < before);
         printf("Reduced %d -> %d\n", before, after);
-        pddlPrintDebug(&h.task, stdout);
+        //pddlPrintDebug(&h.task, stdout);
         break;
     }
 }
@@ -53,7 +53,7 @@ TEST(homomorphism_random_pair, homomorphism)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST(homomorphism_random_pair_goal, homomorphism)
@@ -67,7 +67,7 @@ TEST(homomorphism_random_pair_goal, homomorphism)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST(homomorphism_gaifman, homomorphism)
@@ -81,7 +81,7 @@ TEST(homomorphism_gaifman, homomorphism)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST(homomorphism_gaifman_goal, homomorphism)
@@ -95,7 +95,7 @@ TEST(homomorphism_gaifman_goal, homomorphism)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST(homomorphism_rpg1, homomorphism)
@@ -109,7 +109,7 @@ TEST(homomorphism_rpg1, homomorphism)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST(homomorphism_rpg1_goal, homomorphism)
@@ -123,7 +123,7 @@ TEST(homomorphism_rpg1_goal, homomorphism)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 
@@ -137,7 +137,7 @@ TEST_COND(homomorphism_endomorph, homomorphism, CPOPTIMIZER)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST_COND(homomorphism_endomorph_nocost, homomorphism, CPOPTIMIZER)
@@ -151,7 +151,7 @@ TEST_COND(homomorphism_endomorph_nocost, homomorphism, CPOPTIMIZER)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
 }
 
 TEST_COND(homomorphism_reduce, homomorphism, CPOPTIMIZER)
@@ -174,6 +174,6 @@ TEST_COND(homomorphism_reduce, homomorphism, CPOPTIMIZER)
     }
     int after = h.task.obj.obj_size;
     printf("Reduced %d -> %d\n", before, after);
-    pddlPrintDebug(&h.task, stdout);
+    //pddlPrintDebug(&h.task, stdout);
     pddlHomomorphicTaskReduceFree(&r);
 }
