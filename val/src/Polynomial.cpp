@@ -133,33 +133,29 @@ void Intervals::write(ostream & o) const
 
 void Intervals::writeOffset(double t) const
 {
-	if(intervals.size()==0)
+    if(intervals.size()==0)
 
-	{
-		*report << "the empty set";
-	}
-	else
-	{
-      if(LaTeX) *report << "$";
-		for(vector< pair<intervalEnd,intervalEnd> >::const_iterator i = intervals.begin(); i != intervals.end();)
-		{
+    {
+        *report << "the empty set";
+    }
+    else
+    {
+        if(LaTeX) *report << "$";
+        for(vector< pair<intervalEnd,intervalEnd> >::const_iterator i = intervals.begin(); i != intervals.end();)
+        {
 
-			if(i->first.second) *report << "[ "; else *report << "( ";
+            if(i->first.second) *report << "[ "; else *report << "( ";
 
-			*report << t + i->first.first << " , " << t + i->second.first;
+            *report << t + i->first.first << " , " << t + i->second.first;
 
-			if(i->second.second) *report << " ]"; else cout << " )";
-
-
-			if(++i != intervals.end()) {if(LaTeX) *report << "\\cup"; else cout << " U ";};
-
-		};
-       if(LaTeX) *report << "$";
-	};
+            if(i->second.second) *report << " ]"; else cout << " )";
 
 
+            if(++i != intervals.end()) {if(LaTeX) *report << "\\cup"; else cout << " U ";};
 
-
+        };
+        if(LaTeX) *report << "$";
+    };
 };
 
 ostream & operator << (ostream & o,const CtsFunction & cf)

@@ -1101,7 +1101,7 @@ void Validator::displayPlan() const
 		else
 			cout << "Plan to validate:\n\n" << theplan << "\n";
 	}
-	catch(BadAccessError)
+	catch(BadAccessError&)
 	{
 		//ok here just listing the actions....!
 	}
@@ -3213,9 +3213,11 @@ pair<const plan_step *,pair<bool,bool> > PlanRepair::repairPlanOneAction(const p
 
 
             if(planRepairValidator->getErrorLog().getConditions().size() == 0)
-	      {  if(planRepairValidator->checkGoal(theGoal)) //goalSatisfied = true;
-                    //cout << "Satisfied "<< actionName << " at time "<<actionTime<<"\n";
-               actionFixed = true; planRepaired = true; break;
+            {
+                // TODO: Not sure what is happenning here
+                //if(planRepairValidator->checkGoal(theGoal)) //goalSatisfied = true;
+                //cout << "Satisfied "<< actionName << " at time "<<actionTime<<"\n";
+                actionFixed = true; planRepaired = true; break;
             };
 
 
