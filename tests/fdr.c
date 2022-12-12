@@ -205,9 +205,9 @@ static void _tnf_flow_lt(const pddl_fdr_t *fdr, const pddl_fdr_t *tnf)
 
     int fdr_cost = pddlHFlow(&fdr_flow, fdr->init, NULL);
     int tnf_cost = pddlHFlow(&tnf_flow, tnf->init, NULL);
-    assert(fdr_cost <= tnf_cost);
     if (fdr_cost > tnf_cost)
         fprintf(stderr, "Flow failed. fdr: %d tnf: %d\n", fdr_cost, tnf_cost);
+    assert(fdr_cost <= tnf_cost);
 
     pddlHFlowFree(&fdr_flow);
     pddlHFlowFree(&tnf_flow);

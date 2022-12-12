@@ -652,6 +652,7 @@ static void printReport(void)
 static void cleanRegDir(void)
 {
     system("find reg/ -name '*.tmp' -printf 'Cleaning reg/: %-100p\r' -exec rm '{}' ';'");
+    printf("\n");
 }
 
 int main(int argc, char *argv[])
