@@ -22,7 +22,7 @@ TEST(strips, lmg)
     PDDL_ISET(rm_fact);
     PDDL_ISET(rm_op);
     if (pddlIrrelevanceAnalysis(&C.strips, &rm_fact, &rm_op, NULL, &C.err) != 0){
-        PDDL_INFO2(&C.err, "Irrelevance analysis failed.");
+        PDDL_INFO(&C.err, "Irrelevance analysis failed.");
         fprintf(stderr, "Error: ");
         pddlErrPrint(&C.err, 1, stderr);
         return;
@@ -240,4 +240,67 @@ TEST(strips_compile_in_lmg, lmg)
     testCompileInLMG(1, 1);
     testCompileInLMG(1, 0);
     testCompileInLMG(0, 1);
+}
+
+static pddl_strips_conj_t stripsc;
+TEST(strips_conj, strips)
+{
+    if (C.strips.fact.fact_size <= 4)
+        return;
+
+    pddl_strips_conj_config_t cfg;
+    pddlStripsConjConfigInit(&cfg);
+    PDDL_ISET(set);
+    pddlISetAdd(&set, 0);
+    pddlISetAdd(&set, 1);
+    pddlStripsConjConfigAddConj(&cfg, &set);
+
+    pddlISetEmpty(&set);
+    pddlISetAdd(&set, 0);
+    pddlISetAdd(&set, 2);
+    pddlStripsConjConfigAddConj(&cfg, &set);
+
+    pddlISetEmpty(&set);
+    pddlISetAdd(&set, 0);
+    pddlISetAdd(&set, 1);
+    pddlISetAdd(&set, 2);
+    pddlStripsConjConfigAddConj(&cfg, &set);
+
+    pddlISetEmpty(&set);
+    pddlISetAdd(&set, 1);
+    pddlISetAdd(&set, 3);
+    pddlStripsConjConfigAddConj(&cfg, &set);
+    pddlISetFree(&set);
+
+    pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+    pddlStripsPrintDebug(&stripsc.strips, stdout);
+    pddlStripsConjConfigFree(&cfg);
+}
+
+TEST_TEAR_DOWN(strips_conj)
+{
+    pddlStripsConjFree(&stripsc);
+}
+
+TEST(strips_conj_hmax, strips_conj)
+{
+    pddl_hmax_t hmax, hmaxc;
+    pddlHMaxInitStrips(&hmax, &C.strips);
+    pddlHMaxInitStrips(&hmaxc, &stripsc.strips);
+    assert(pddlHMaxStrips(&hmax, &C.strips.init)
+           <= pddlHMaxStrips(&hmaxc, &stripsc.strips.init));
+    pddlHMaxFree(&hmax);
+    pddlHMaxFree(&hmaxc);
+}
+
+
+TEST(strips_conj_hadd, strips_conj)
+{
+    pddl_hadd_t hadd, haddc;
+    pddlHAddInitStrips(&hadd, &C.strips);
+    pddlHAddInitStrips(&haddc, &stripsc.strips);
+    assert(pddlHAddStrips(&hadd, &C.strips.init)
+           <= pddlHAddStrips(&haddc, &stripsc.strips.init));
+    pddlHAddFree(&hadd);
+    pddlHAddFree(&haddc);
 }
