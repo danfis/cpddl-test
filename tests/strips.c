@@ -243,9 +243,10 @@ TEST(strips_compile_in_lmg, lmg)
 }
 
 static pddl_strips_conj_t stripsc;
-TEST(strips_conj, strips)
+static int stripsc_set = 0;
+TEST(strips_conj, strips_pruned)
 {
-    if (C.strips.fact.fact_size <= 4)
+    if (C.strips.fact.fact_size <= 4 || C.strips.goal_is_unreachable)
         return;
 
     pddl_strips_conj_config_t cfg;
@@ -254,41 +255,71 @@ TEST(strips_conj, strips)
     pddlISetAdd(&set, 0);
     pddlISetAdd(&set, 1);
     pddlStripsConjConfigAddConj(&cfg, &set);
+    if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
+        fprintf(stderr, "mutex (%s) (%s)\n",
+                C.strips.fact.fact[0]->name,
+                C.strips.fact.fact[1]->name);
 
     pddlISetEmpty(&set);
     pddlISetAdd(&set, 0);
     pddlISetAdd(&set, 2);
     pddlStripsConjConfigAddConj(&cfg, &set);
+    if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
+        fprintf(stderr, "mutex (%s) (%s)\n",
+                C.strips.fact.fact[0]->name,
+                C.strips.fact.fact[2]->name);
 
     pddlISetEmpty(&set);
     pddlISetAdd(&set, 0);
     pddlISetAdd(&set, 1);
     pddlISetAdd(&set, 2);
     pddlStripsConjConfigAddConj(&cfg, &set);
+    if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
+        fprintf(stderr, "mutex (%s) (%s) (%s)\n",
+                C.strips.fact.fact[0]->name,
+                C.strips.fact.fact[1]->name,
+                C.strips.fact.fact[2]->name);
 
     pddlISetEmpty(&set);
     pddlISetAdd(&set, 1);
     pddlISetAdd(&set, 3);
     pddlStripsConjConfigAddConj(&cfg, &set);
+    if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
+        fprintf(stderr, "mutex (%s) (%s)\n",
+                C.strips.fact.fact[1]->name,
+                C.strips.fact.fact[3]->name);
     pddlISetFree(&set);
 
+    cfg.mutex = &C.mutex;
     pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
-    pddlStripsPrintDebug(&stripsc.strips, stdout);
+    stripsc_set = 1;
+    //pddlStripsPrintDebug(&stripsc.strips, stdout);
+    //pddlStripsPrintDebug(&C.strips, stdout);
     pddlStripsConjConfigFree(&cfg);
 }
 
 TEST_TEAR_DOWN(strips_conj)
 {
-    pddlStripsConjFree(&stripsc);
+    if (stripsc_set)
+        pddlStripsConjFree(&stripsc);
 }
 
 TEST(strips_conj_hmax, strips_conj)
 {
+    if (!stripsc_set)
+        return;
+
     pddl_hmax_t hmax, hmaxc;
     pddlHMaxInitStrips(&hmax, &C.strips);
     pddlHMaxInitStrips(&hmaxc, &stripsc.strips);
-    assert(pddlHMaxStrips(&hmax, &C.strips.init)
-           <= pddlHMaxStrips(&hmaxc, &stripsc.strips.init));
+    int h = pddlHMaxStrips(&hmax, &C.strips.init);
+    int hc = pddlHMaxStrips(&hmaxc, &stripsc.strips.init);
+    assert(h <= hc);
+    if (C.optimal_cost >= 0){
+        if (hc > C.optimal_cost)
+            fprintf(stderr, "%d > %d\n", hc, C.optimal_cost);
+        assert(hc <= C.optimal_cost);
+    }
     pddlHMaxFree(&hmax);
     pddlHMaxFree(&hmaxc);
 }
@@ -296,11 +327,98 @@ TEST(strips_conj_hmax, strips_conj)
 
 TEST(strips_conj_hadd, strips_conj)
 {
+    if (!stripsc_set)
+        return;
+
     pddl_hadd_t hadd, haddc;
     pddlHAddInitStrips(&hadd, &C.strips);
     pddlHAddInitStrips(&haddc, &stripsc.strips);
-    assert(pddlHAddStrips(&hadd, &C.strips.init)
-           <= pddlHAddStrips(&haddc, &stripsc.strips.init));
+    int h = pddlHAddStrips(&hadd, &C.strips.init);
+    int hc = pddlHAddStrips(&haddc, &stripsc.strips.init);
+    assert(h <= hc);
     pddlHAddFree(&hadd);
     pddlHAddFree(&haddc);
+}
+
+TEST_COND(strips_conj_hflow, strips_conj, LP)
+{
+    if (!stripsc_set)
+        return;
+
+    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddl_fdr_t fdr, fdrc;
+    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex,
+                          var_flag, 0u, &C.err);
+
+    pddl_mutex_pairs_t mutexc;
+    pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
+    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc,
+                          var_flag, 0u, &C.err);
+    pddlMutexPairsFree(&mutexc);
+
+    pddl_hflow_t hflow, hflowc;
+    pddlHFlowInit(&hflow, &fdr, 0);
+    pddlHFlowInit(&hflowc, &fdrc, 0);
+    int h = pddlHFlow(&hflow, fdr.init, NULL);
+    int hc = pddlHFlow(&hflowc, fdrc.init, NULL);
+    assert(h <= hc);
+    if (C.optimal_cost >= 0){
+        if (hc > C.optimal_cost)
+            fprintf(stderr, "%d > %d\n", hc, C.optimal_cost);
+        assert(hc <= C.optimal_cost);
+    }
+    pddlHFlowFree(&hflow);
+    pddlHFlowFree(&hflowc);
+
+    pddlFDRFree(&fdr);
+    pddlFDRFree(&fdrc);
+}
+
+TEST_COND(strips_conj_hpot, strips_conj, LP)
+{
+    if (!stripsc_set)
+        return;
+
+    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddl_fdr_t fdr, fdrc;
+    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex,
+                          var_flag, 0u, &C.err);
+
+    pddl_mutex_pairs_t mutexc;
+    pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
+    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc,
+                          var_flag, 0u, &C.err);
+
+    pddl_hpot_config_t cfg;
+    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
+    pddlHPotConfigInit(&cfg);
+    pddlHPotConfigAdd(&cfg, &cfg_init.cfg);
+
+    pddl_pot_solutions_t sol, solc;
+    pddlPotSolutionsInit(&sol);
+    pddlPotSolutionsInit(&solc);
+
+    cfg.fdr = &fdr;
+    cfg.mutex = &C.mutex;
+    pddlHPot(&sol, &cfg, &C.err);
+
+    cfg.fdr = &fdrc;
+    cfg.mutex = &mutexc;
+    pddlHPot(&solc, &cfg, &C.err);
+    pddlHPotConfigFree(&cfg);
+    pddlMutexPairsFree(&mutexc);
+
+    int h = pddlPotSolutionsEvalMaxFDRState(&sol, &fdr.var, fdr.init);
+    int hc = pddlPotSolutionsEvalMaxFDRState(&solc, &fdrc.var, fdrc.init);
+    assert(h <= hc);
+    if (C.optimal_cost >= 0){
+        if (hc > C.optimal_cost)
+            fprintf(stderr, "%d > %d\n", hc, C.optimal_cost);
+        assert(hc <= C.optimal_cost);
+    }
+
+    pddlPotSolutionsFree(&sol);
+    pddlPotSolutionsFree(&solc);
+    pddlFDRFree(&fdr);
+    pddlFDRFree(&fdrc);
 }

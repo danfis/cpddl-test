@@ -84,25 +84,25 @@ pddl-data/test-seq/test/domain.pddl:
 	git submodule init -- pddl-data
 	git submodule update -- pddl-data
 
-check-valgrind: all
+check-valgrind: all clean-reg
 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
              --trace-children=yes --error-limit=no \
              --child-silent-after-fork=yes \
              --suppressions=test.supp \
              ./test $(T) 2>&1 | tee check.log | bash scripts/filter-valgrind.sh
-check-all-valgrind: all
+check-all-valgrind: all clean-reg
 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
              --trace-children=yes --error-limit=no \
              --child-silent-after-fork=yes \
              --suppressions=test.supp \
              ./test -a $(T) 2>&1 | tee check.log | bash scripts/filter-valgrind.sh
 
-check-segfault: all
+check-segfault: all clean-reg
 	valgrind -q --trace-children=yes \
              --error-limit=no \
              --suppressions=test.supp \
              ./test $(T) 2>&1 | tee check.log
-check-all-segfault: all
+check-all-segfault: all clean-reg
 	valgrind -q --trace-children=yes \
              --error-limit=no \
              --suppressions=test.supp \
@@ -126,6 +126,9 @@ clean:
 	rm -f .objs/*.o
 	rm -f *.in.c
 	rm -f $(TARGETS)
+	find reg/ -name '*.tmp' -exec rm '{}' ';'
+
+clean-reg:
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
 .PHONY: all clean check check-valgrind submodule test-strips-mem
