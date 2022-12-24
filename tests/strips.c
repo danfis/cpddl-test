@@ -304,16 +304,13 @@ TEST_TEAR_DOWN(strips_conj)
         pddlStripsConjFree(&stripsc);
 }
 
-TEST(strips_conj_hmax, strips_conj)
+static void testStripsConjHMax(const pddl_strips_conj_t *stripsc)
 {
-    if (!stripsc_set)
-        return;
-
     pddl_hmax_t hmax, hmaxc;
     pddlHMaxInitStrips(&hmax, &C.strips);
-    pddlHMaxInitStrips(&hmaxc, &stripsc.strips);
+    pddlHMaxInitStrips(&hmaxc, &stripsc->strips);
     int h = pddlHMaxStrips(&hmax, &C.strips.init);
-    int hc = pddlHMaxStrips(&hmaxc, &stripsc.strips.init);
+    int hc = pddlHMaxStrips(&hmaxc, &stripsc->strips.init);
     assert(h <= hc);
     if (C.optimal_cost >= 0){
         if (hc > C.optimal_cost)
@@ -322,6 +319,81 @@ TEST(strips_conj_hmax, strips_conj)
     }
     pddlHMaxFree(&hmax);
     pddlHMaxFree(&hmaxc);
+}
+
+TEST(strips_conj_hmax, strips_conj)
+{
+    if (!stripsc_set)
+        return;
+
+    testStripsConjHMax(&stripsc);
+}
+
+TEST(strips_conj_hmax_rand, strips_pruned)
+{
+    if (C.strips.fact.fact_size <= 10 || C.strips.goal_is_unreachable)
+        return;
+
+    pddl_rand_t rnd;
+    pddlRandInitAuto(&rnd);
+    for (int _ = 0; _ < 20; ++_){
+        int f1 = pddlRand(&rnd, 0, C.strips.fact.fact_size);
+        int f2 = pddlRand(&rnd, 0, C.strips.fact.fact_size);
+        assert(f1 >= 0 && f1 < C.strips.fact.fact_size);
+        assert(f2 >= 0 && f2 < C.strips.fact.fact_size);
+        if (f1 == f2)
+            continue;
+        if (pddlMutexPairsIsMutex(&C.mutex, f1, f2))
+            continue;
+
+        pddl_strips_conj_config_t cfg;
+        pddlStripsConjConfigInit(&cfg);
+        PDDL_ISET(set);
+        pddlISetAdd(&set, f1);
+        pddlISetAdd(&set, f2);
+        pddlStripsConjConfigAddConj(&cfg, &set);
+        pddlISetFree(&set);
+
+        pddl_strips_conj_t stripsc;
+        cfg.mutex = &C.mutex;
+        pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+        testStripsConjHMax(&stripsc);
+        pddlStripsConjFree(&stripsc);
+        pddlStripsConjConfigFree(&cfg);
+
+        for (int __ = 0; __ < 10; ++__){
+            int f3 = pddlRand(&rnd, 0, C.strips.fact.fact_size);
+            int f4 = pddlRand(&rnd, 0, C.strips.fact.fact_size);
+            int f5 = pddlRand(&rnd, 0, C.strips.fact.fact_size);
+            if (f3 == f4 || f3 == f5 || f4 == f5)
+                continue;
+            if (pddlMutexPairsIsMutex(&C.mutex, f3, f4)
+                    || pddlMutexPairsIsMutex(&C.mutex, f3, f5)
+                    || pddlMutexPairsIsMutex(&C.mutex, f4, f5)){
+                continue;
+            }
+            pddl_strips_conj_config_t cfg;
+            pddlStripsConjConfigInit(&cfg);
+            PDDL_ISET(set);
+            pddlISetAdd(&set, f1);
+            pddlISetAdd(&set, f2);
+            pddlStripsConjConfigAddConj(&cfg, &set);
+
+            pddlISetEmpty(&set);
+            pddlISetAdd(&set, f3);
+            pddlISetAdd(&set, f4);
+            pddlISetAdd(&set, f5);
+            pddlStripsConjConfigAddConj(&cfg, &set);
+            pddlISetFree(&set);
+
+            pddl_strips_conj_t stripsc;
+            cfg.mutex = &C.mutex;
+            pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+            testStripsConjHMax(&stripsc);
+            pddlStripsConjFree(&stripsc);
+            pddlStripsConjConfigFree(&cfg);
+        }
+    }
 }
 
 
