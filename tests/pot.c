@@ -197,7 +197,7 @@ static void _test_hpot1(const pddl_hpot_config_t *cfg, pddl_task_t *task)
 
 static pddl_mg_strips_t mg_strips;
 static pddl_mutex_pairs_t mutex;
-TEST(hpot, fdr)
+TEST_COND(hpot, fdr, LP)
 {
     pddlMGStripsInitFDR(&mg_strips, &C.fdr);
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
