@@ -56,8 +56,8 @@ int validateLiftedPlan(const pddl_lifted_plan_t *plan)
     fflush(fplan);
     fclose(fplan);
 
-    char cmd[256];
-    sprintf(cmd, "val/validate -v %s %s %s >/dev/null 2>&1",
+    char cmd[1024];
+    sprintf(cmd, "val/validate -v %.256s %.256s %.256s >/dev/null 2>&1",
             C.files.domain_pddl, C.files.problem_pddl, fn);
     int sret = system(cmd);
 
