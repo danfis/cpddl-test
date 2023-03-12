@@ -5,7 +5,7 @@ endif
 
 TOPDIR ?= ..
 
--include $(TOPDIR)/Makefile.local
+-include $(TOPDIR)/Makefile.config
 include $(TOPDIR)/Makefile.include
 
 CFLAGS += -I./ -I$(TOPDIR) -Werror
