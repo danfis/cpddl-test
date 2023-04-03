@@ -8,13 +8,7 @@ TOPDIR ?= ..
 -include $(TOPDIR)/Makefile.config
 include $(TOPDIR)/Makefile.include
 
-CFLAGS += -I./ -I$(TOPDIR) -Werror
-LDFLAGS += -lrt -lm -L$(TOPDIR) -lpddl -pthread
-LDFLAGS += $(CPOPTIMIZER_LDFLAGS)
-LDFLAGS += $(LP_LDFLAGS)
-LDFLAGS += $(BLISS_LDFLAGS)
-LDFLAGS += $(CLIQUER_LDFLAGS)
-LDFLAGS += $(CUDD_LDFLAGS)
+CFLAGS += -I./
 
 CHECK_REG=cu/cu-check-regressions
 CHECK_TS ?=
