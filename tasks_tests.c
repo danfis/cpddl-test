@@ -38,6 +38,8 @@ static void initTaskTestMap(const char **tasks, int *map, int task_size)
 
 static void disableTaskTest(int *map, int task_size, int task_id, int test_id)
 {
+    if (test_id < 0)
+        return;
     map[task_id * test_set_size + test_id] = 0;
     for (int i = 0; i < test_set[test_id].children_size; ++i)
         disableTaskTest(map, task_size, task_id, test_set[test_id].children[i]);
