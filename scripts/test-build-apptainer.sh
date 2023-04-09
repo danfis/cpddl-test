@@ -110,6 +110,9 @@ if ! echo "$@" | grep -q -- --cplex; then
     run_test $@ --no-cudd --no-bliss --highs --werror alpine
     run_test $@ --no-cudd --no-bliss --werror alpine
     run_test $@ --highs --werror alpine
+
+    run_test $@ --werror --clang alpine
+    run_test $@ --no-cudd --no-bliss --werror --clang alpine
 fi
 
 run_test $@ --werror photon
@@ -118,14 +121,23 @@ run_test $@ --highs --werror photon
 run_test $@ --minizinc --highs --werror photon
 
 run_test $@ --werror debian-bullseye
+run_test $@ --werror --clang debian-bullseye
+run_test $@ --werror --clang-ver 16 debian-bullseye
 run_test $@ --highs --werror debian-bullseye
 run_test $@ --highs --minizinc --werror debian-bullseye
 
 run_test $@ --werror debian-buster
 run_test $@ --werror debian-stretch
+run_test $@ --werror ubuntu-kinetic
+run_test $@ --highs --werror ubuntu-kinetic
 run_test $@ --werror ubuntu-jammy
 run_test $@ --highs --werror ubuntu-jammy
 run_test $@ --werror ubuntu-focal
 run_test $@ --werror ubuntu-bionic
 run_test $@ --werror fedora
 run_test $@ --highs --werror fedora
+
+run_test $@ --werror gcc-11
+run_test $@ --highs --werror gcc-11
+run_test $@ --werror gcc-12
+run_test $@ --highs --werror gcc-12
