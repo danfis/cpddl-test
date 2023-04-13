@@ -16,7 +16,7 @@ static int actionHasAddEff(const pddl_action_t *a, int pred)
     if (a->eff == NULL)
         return 0;
     if (a->eff->type == PDDL_FM_ATOM){
-        atom = PDDL_FM_CAST(a->eff, atom);
+        atom = pddlFmToAtomConst(a->eff);
         return atom->pred == pred;
     }
 
@@ -26,7 +26,7 @@ static int actionHasAddEff(const pddl_action_t *a, int pred)
             c = PDDL_LIST_ENTRY(item, pddl_fm_t, conn);
             if (c->type != PDDL_FM_ATOM)
                 continue;
-            atom = PDDL_FM_CAST(c, atom);
+            atom = pddlFmToAtomConst(c);
             if (!atom->neg && atom->pred == pred)
                 return 1;
         }
