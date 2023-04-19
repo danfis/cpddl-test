@@ -4,16 +4,18 @@
 
 TEST(gaifman, pddl_compile_away_cond_eff)
 {
-    pddl_bool_t has_disconnected_action = pddl_false;
+    int max_diameter = 0;
     for (int ai = 0; ai < C.pddl.action.action_size; ++ai){
         const pddl_action_t *a = C.pddl.action.action + ai;
         int diameter = pddlGaifmanActionPreDiameter(a);
         if (diameter < 0){
             printf("Diameter for %s: inf\n", a->name);
-            has_disconnected_action = pddl_true;
+            max_diameter = -1;
         }else{
             printf("Diameter for %s: %d\n", a->name, diameter);
         }
+        if (max_diameter >= 0)
+            max_diameter = PDDL_MAX(max_diameter, diameter);
     }
 
     pddl_gaifman_t ginit;
@@ -52,6 +54,10 @@ TEST(gaifman, pddl_compile_away_cond_eff)
                        dinit - dgoal);
                 if (dgoal2 != dgoal)
                     printf(", w/ static: %d", dinit - dgoal2);
+                if (max_diameter >= 0){
+                    printf(", length bound: %d",
+                           (int)ceil((dinit - dgoal2) / (float)max_diameter));
+                }
                 printf("\n");
                 if (C.optimal_cost >= 0)
                     assert(dinit - dgoal <= C.optimal_cost);
@@ -62,7 +68,7 @@ TEST(gaifman, pddl_compile_away_cond_eff)
                        C.pddl.obj.obj[oi2].name);
                 fflush(stdout);
                 if (C.optimal_cost >= 0)
-                    assert(has_disconnected_action);
+                    assert(max_diameter < 0);
             }
         }
     }
