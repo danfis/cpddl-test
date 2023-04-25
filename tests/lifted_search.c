@@ -75,7 +75,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
         for (int i = 0; i < size; ++i){
             int aid = pddlLiftedAppActionId(aa, i);
             const pddl_action_t *action = C.pddl.action.action + aid;
-            const pddl_obj_id_t *args = pddlLiftedAppActionArgs(aa, i);
+            const int *args = pddlLiftedAppActionArgs(aa, i);
 
             PDDL_ISET(add_eff);
             PDDL_ISET(del_eff);

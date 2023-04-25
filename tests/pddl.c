@@ -14,7 +14,6 @@ TEST(pddl, r)
     assert(ret == 0);
     C.pddl_set = 1;
 
-    pddlCheckSizeTypes(&C.pddl);
     pddlPrintDebug(&C.pddl, stdout);
 }
 
@@ -31,7 +30,6 @@ TEST(pddl_unit_cost, r)
     assert(ret == 0);
     C.pddl_set = 1;
 
-    pddlCheckSizeTypes(&C.pddl);
     pddlPrintDebug(&C.pddl, stdout);
 }
 
@@ -53,8 +51,6 @@ TEST(pddl_no_normalize, r)
     if (ret != 0)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
-
-    pddlCheckSizeTypes(&pddl);
 
     pddlPrintDebug(&pddl, stdout);
     pddlFree(&pddl);
