@@ -49,7 +49,7 @@ TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
 
     int pred_at = pddlPredsGet(&pddl.pred, "at");
@@ -174,7 +174,7 @@ TEST(lifted_mgroup_tests_tidybot, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
     int pred_base_obs = pddlPredsGet(&pddl.pred, "base-obstacle");
     int pred_gripper_empty = pddlPredsGet(&pddl.pred, "gripper-empty");
@@ -285,7 +285,7 @@ TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
     pddlCompileAwayCondEff(&pddl);
 
 
@@ -371,7 +371,7 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
 
     int pred_bond = pddlPredsGet(&pddl.pred, "bond");
@@ -472,7 +472,7 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
     pddl_lifted_mgroup_t mg;
     pddl_fm_atom_t *atom;
