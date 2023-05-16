@@ -74,6 +74,7 @@ Action[8]:
         pre: (R:crackers ?x)
         eff: (W:have-crackers)
 Init[26]:
+  S:(counter-at-other-than-two-hours)
   S:(chips c5)
   S:(chips c4)
   S:(chips c3)
@@ -99,7 +100,6 @@ Init[26]:
   S:(crackers k3)
   S:(crackers k2)
   S:(crackers k1)
-  S:(counter-at-other-than-two-hours)
 Init[0]:
 Goal: (and (W:movie-rewound) (W:counter-at-zero) (W:have-chips) (W:have-dip) (W:have-pop) (W:have-cheese) (W:have-crackers))
 Metric: 0

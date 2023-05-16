@@ -65,47 +65,38 @@ Function[0]:
 Action[11]:
     hire-diver-d2: 
         pre: (and (RW:available d2))
-        eff: (and (RW:at-surface d2) (N:RW:available d2))
+        eff: (and (N:RW:available d2) (RW:at-surface d2))
     hire-diver-d3: 
         pre: (and (RW:available d3))
-        eff: (and (RW:at-surface d3) (N:RW:available d3))
+        eff: (and (N:RW:available d3) (RW:at-surface d3))
     hire-diver-d1: 
         pre: (and (RW:available d1))
-        eff: (and (RW:at-surface d1) (N:RW:available d1))
+        eff: (and (N:RW:available d1) (RW:at-surface d1))
     hire-diver-d0: 
         pre: (and (RW:available d0))
-        eff: (and (RW:at-surface d0) (N:RW:available d0))
+        eff: (and (N:RW:available d0) (RW:at-surface d0))
     prepare-tank: ?d:2 ?t1:3 ?t2:3 ?q1:4 ?q2:4
-        pre: (and (RW:at-surface ?d) (RW:in-storage ?t1) (R:next-quantity ?q1 ?q2) (RW:capacity ?d ?q2) (R:next-tank ?t1 ?t2))
-        eff: (and (N:RW:in-storage ?t1) (N:RW:capacity ?d ?q2) (RW:in-storage ?t2) (RW:full ?t1) (RW:capacity ?d ?q1) (RW:holding ?d ?t1))
+        pre: (and (R:next-tank ?t1 ?t2) (R:next-quantity ?q1 ?q2) (RW:in-storage ?t1) (RW:at-surface ?d) (RW:capacity ?d ?q2))
+        eff: (and (N:RW:in-storage ?t1) (RW:in-storage ?t2) (RW:full ?t1) (RW:holding ?d ?t1) (RW:capacity ?d ?q1) (N:RW:capacity ?d ?q2))
     enter-water: ?d:2 ?l:1
-        pre: (and (RW:at-surface ?d) (R:cave-entrance ?l))
-        eff: (and (N:RW:at-surface ?d) (RW:at-diver ?d ?l))
+        pre: (and (R:cave-entrance ?l) (RW:at-surface ?d))
+        eff: (and (RW:at-diver ?d ?l) (N:RW:at-surface ?d))
     pickup-tank: ?d:2 ?t:3 ?l:1 ?q1:4 ?q2:4
-        pre: (and (RW:at-diver ?d ?l) (RW:at-tank ?t ?l) (R:next-quantity ?q1 ?q2) (RW:capacity ?d ?q2))
-        eff: (and (N:RW:at-tank ?t ?l) (N:RW:capacity ?d ?q2) (RW:holding ?d ?t) (RW:capacity ?d ?q1))
+        pre: (and (R:next-quantity ?q1 ?q2) (RW:at-tank ?t ?l) (RW:at-diver ?d ?l) (RW:capacity ?d ?q2))
+        eff: (and (N:RW:at-tank ?t ?l) (RW:holding ?d ?t) (RW:capacity ?d ?q1) (N:RW:capacity ?d ?q2))
     drop-tank: ?d:2 ?t:3 ?l:1 ?q1:4 ?q2:4
-        pre: (and (RW:at-diver ?d ?l) (RW:holding ?d ?t) (R:next-quantity ?q1 ?q2) (RW:capacity ?d ?q1))
-        eff: (and (N:RW:holding ?d ?t) (N:RW:capacity ?d ?q1) (RW:at-tank ?t ?l) (RW:capacity ?d ?q2))
+        pre: (and (R:next-quantity ?q1 ?q2) (RW:at-diver ?d ?l) (RW:holding ?d ?t) (RW:capacity ?d ?q1))
+        eff: (and (RW:at-tank ?t ?l) (N:RW:holding ?d ?t) (N:RW:capacity ?d ?q1) (RW:capacity ?d ?q2))
     swim: ?d:2 ?t:3 ?l1:1 ?l2:1
-        pre: (and (RW:at-diver ?d ?l1) (RW:holding ?d ?t) (RW:full ?t) (R:connected ?l1 ?l2))
-        eff: (and (N:RW:at-diver ?d ?l1) (N:RW:full ?t) (RW:at-diver ?d ?l2))
+        pre: (and (R:connected ?l1 ?l2) (RW:full ?t) (RW:at-diver ?d ?l1) (RW:holding ?d ?t))
+        eff: (and (N:RW:full ?t) (N:RW:at-diver ?d ?l1) (RW:at-diver ?d ?l2))
     photograph: ?d:2 ?l:1 ?t:3
-        pre: (and (RW:at-diver ?d ?l) (RW:holding ?d ?t) (RW:full ?t))
+        pre: (and (RW:full ?t) (RW:at-diver ?d ?l) (RW:holding ?d ?t))
         eff: (and (N:RW:full ?t) (W:have-photo ?l))
     decompress: ?d:2 ?l:1
-        pre: (and (RW:at-diver ?d ?l) (R:cave-entrance ?l))
+        pre: (and (R:cave-entrance ?l) (RW:at-diver ?d ?l))
         eff: (and (N:RW:at-diver ?d ?l) (W:decompressing ?d) (N:W:in-water))
 Init[37]:
-  (available d0)
-  (available d1)
-  (available d2)
-  (available d3)
-  (capacity d0 four)
-  (capacity d1 four)
-  (capacity d2 four)
-  (capacity d3 four)
-  (in-storage t0)
   S:(next-tank t0 t1)
   S:(next-tank t1 t2)
   S:(next-tank t2 t3)
@@ -123,10 +114,10 @@ Init[37]:
   S:(next-tank t14 dummy)
   S:(cave-entrance l0)
   S:(connected l0 l1)
+  S:(connected l0 l3)
   S:(connected l1 l0)
   S:(connected l1 l2)
   S:(connected l2 l1)
-  S:(connected l0 l3)
   S:(connected l3 l0)
   S:(connected l3 l4)
   S:(connected l4 l3)
@@ -134,6 +125,15 @@ Init[37]:
   S:(next-quantity one two)
   S:(next-quantity two three)
   S:(next-quantity three four)
+  (in-storage t0)
+  (available d0)
+  (available d1)
+  (available d2)
+  (available d3)
+  (capacity d0 four)
+  (capacity d1 four)
+  (capacity d2 four)
+  (capacity d3 four)
 Init[0]:
-Goal: (and (W:have-photo l2) (W:have-photo l4) (W:decompressing d2) (W:decompressing d3) (W:decompressing d1) (W:decompressing d0))
+Goal: (and (W:decompressing d0) (W:decompressing d1) (W:decompressing d2) (W:decompressing d3) (W:have-photo l2) (W:have-photo l4))
 Metric: 0

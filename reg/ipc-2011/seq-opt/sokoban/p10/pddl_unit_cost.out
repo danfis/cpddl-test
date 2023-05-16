@@ -105,14 +105,14 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[3]:
     move: ?p:4 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?from) (RW:clear ?to) (R:move-dir ?from ?to ?dir))
-        eff: (and (N:RW:at ?p ?from) (N:RW:clear ?to) (RW:at ?p ?to) (RW:clear ?from))
+        pre: (and (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?from))
+        eff: (and (RW:clear ?from) (N:RW:clear ?to) (N:RW:at ?p ?from) (RW:at ?p ?to))
     push-to-nongoal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?ppos) (RW:at ?s ?from) (RW:clear ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (R:is-nongoal ?to))
-        eff: (and (N:RW:at ?p ?ppos) (N:RW:at ?s ?from) (N:RW:clear ?to) (RW:at ?p ?from) (RW:at ?s ?to) (RW:clear ?ppos) (N:W:at-goal ?s))
+        pre: (and (R:is-nongoal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (N:W:at-goal ?s))
     push-to-goal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?ppos) (RW:at ?s ?from) (RW:clear ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (R:is-goal ?to))
-        eff: (and (N:RW:at ?p ?ppos) (N:RW:at ?s ?from) (N:RW:clear ?to) (RW:at ?p ?from) (RW:at ?s ?to) (RW:clear ?ppos) (W:at-goal ?s))
+        pre: (and (R:is-goal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (W:at-goal ?s))
 Init[220]:
   S:(is-goal pos-3-3)
   S:(is-goal pos-3-6)
@@ -298,15 +298,6 @@ Init[220]:
   S:(move-dir pos-7-6 pos-7-7 dir-down)
   S:(move-dir pos-7-7 pos-6-7 dir-left)
   S:(move-dir pos-7-7 pos-7-6 dir-up)
-  (at player-01 pos-2-2)
-  (at stone-01 pos-4-3)
-  (at stone-02 pos-5-3)
-  (at stone-03 pos-3-4)
-  (at stone-04 pos-6-4)
-  (at stone-05 pos-3-5)
-  (at stone-06 pos-6-5)
-  (at stone-07 pos-4-6)
-  (at stone-08 pos-5-6)
   (clear pos-2-3)
   (clear pos-2-4)
   (clear pos-2-5)
@@ -334,6 +325,15 @@ Init[220]:
   (clear pos-7-5)
   (clear pos-7-6)
   (clear pos-7-7)
+  (at player-01 pos-2-2)
+  (at stone-01 pos-4-3)
+  (at stone-02 pos-5-3)
+  (at stone-03 pos-3-4)
+  (at stone-04 pos-6-4)
+  (at stone-05 pos-3-5)
+  (at stone-06 pos-6-5)
+  (at stone-07 pos-4-6)
+  (at stone-08 pos-5-6)
 Init[0]:
 Goal: (and (W:at-goal stone-01) (W:at-goal stone-02) (W:at-goal stone-03) (W:at-goal stone-04) (W:at-goal stone-05) (W:at-goal stone-06) (W:at-goal stone-07) (W:at-goal stone-08))
 Metric: 0

@@ -46,31 +46,31 @@ Predicate[9]:
 Function[0]:
 Action[5]:
     lift: ?h:1 ?c:9 ?a1:7 ?a2:4 ?p:3
-        pre: (and (R:connected ?a1 ?a2) (RW:at ?h ?a2) (RW:available ?h) (RW:on ?c ?a1) (RW:in ?a1 ?p))
-        eff: (and (N:RW:on ?c ?a1) (RW:clear ?a1) (N:RW:available ?h) (RW:lifting ?h ?c) (N:RW:in ?c ?p))
+        pre: (and (R:connected ?a1 ?a2) (RW:in ?a1 ?p) (RW:available ?h) (RW:at ?h ?a2) (RW:on ?c ?a1))
+        eff: (and (RW:clear ?a1) (N:RW:in ?c ?p) (N:RW:available ?h) (RW:lifting ?h ?c) (N:RW:on ?c ?a1))
     drop: ?h:1 ?c:9 ?a1:7 ?a2:4 ?p:3
-        pre: (and (R:connected ?a1 ?a2) (RW:at ?h ?a2) (RW:lifting ?h ?c) (RW:clear ?a1) (RW:in ?a1 ?p))
-        eff: (and (N:RW:lifting ?h ?c) (RW:available ?h) (N:RW:clear ?a1) (RW:on ?c ?a1) (RW:in ?c ?p))
+        pre: (and (R:connected ?a1 ?a2) (RW:clear ?a1) (RW:in ?a1 ?p) (RW:lifting ?h ?c) (RW:at ?h ?a2))
+        eff: (and (N:RW:clear ?a1) (RW:in ?c ?p) (RW:available ?h) (N:RW:lifting ?h ?c) (RW:on ?c ?a1))
     move: ?h:1 ?from:7 ?to:7
-        pre: (and (RW:at ?h ?from) (RW:clear ?to) (R:connected ?from ?to))
-        eff: (and (N:RW:at ?h ?from) (RW:at ?h ?to) (N:RW:clear ?to) (RW:clear ?from))
+        pre: (and (R:connected ?from ?to) (RW:clear ?to) (RW:at ?h ?from))
+        eff: (and (RW:clear ?from) (N:RW:clear ?to) (N:RW:at ?h ?from) (RW:at ?h ?to))
     go-out: ?h:1 ?from:7 ?to:8
-        pre: (and (RW:at ?h ?from) (R:connected ?from ?to))
-        eff: (and (N:RW:at ?h ?from) (RW:at ?h ?to) (RW:clear ?from))
+        pre: (and (R:connected ?from ?to) (RW:at ?h ?from))
+        eff: (and (RW:clear ?from) (N:RW:at ?h ?from) (RW:at ?h ?to))
     go-in: ?h:1 ?from:8 ?to:7
-        pre: (and (RW:at ?h ?from) (R:connected ?from ?to) (RW:clear ?to))
-        eff: (and (N:RW:at ?h ?from) (RW:at ?h ?to) (N:RW:clear ?to))
+        pre: (and (R:connected ?from ?to) (RW:clear ?to) (RW:at ?h ?from))
+        eff: (and (N:RW:clear ?to) (N:RW:at ?h ?from) (RW:at ?h ?to))
 Init[10]:
-  (in depot0-1-1 depot0)
-  (on crate0 container-0-0)
-  (in crate0 container0)
-  (in container-0-0 container0)
-  S:(connected loadarea container-0-0)
-  S:(connected container-0-0 loadarea)
   S:(connected depot0-1-1 loadarea)
+  S:(connected container-0-0 loadarea)
   S:(connected loadarea depot0-1-1)
-  (at hoist0 depot0-1-1)
+  S:(connected loadarea container-0-0)
+  (in depot0-1-1 depot0)
+  (in container-0-0 container0)
+  (in crate0 container0)
   (available hoist0)
+  (at hoist0 depot0-1-1)
+  (on crate0 container-0-0)
 Init[0]:
 Goal: (RW:in crate0 depot0)
 Metric: 0

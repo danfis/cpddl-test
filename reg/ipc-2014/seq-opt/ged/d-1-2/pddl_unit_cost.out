@@ -41,79 +41,79 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[21]:
     begin-cut: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (RW:idle) (RW:cw ?x ?y))
-        eff: (and (N:RW:idle) (RW:cutting) (N:RW:cw ?x ?y) (RW:cut-point-1 ?x) (RW:last-cut-point ?x) (RW:s-first ?y) (RW:s-last ?y))
+        pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:idle))
+        eff: (and (N:RW:cw ?x ?y) (N:RW:idle) (RW:cutting) (RW:cut-point-1 ?x) (RW:last-cut-point ?x) (RW:s-first ?y) (RW:s-last ?y))
     continue-cut: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (RW:cutting) (RW:s-last ?x) (RW:cw ?x ?y))
-        eff: (and (N:RW:cw ?x ?y) (N:RW:s-last ?x) (RW:s-next ?x ?y) (RW:s-last ?y))
+        pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:cutting) (RW:s-last ?x))
+        eff: (and (N:RW:cw ?x ?y) (RW:s-next ?x ?y) (N:RW:s-last ?x) (RW:s-last ?y))
     end-cut-1: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (RW:cutting) (RW:s-last ?x) (RW:cw ?x ?y))
+        pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:cutting) (RW:s-last ?x))
         eff: (and (N:RW:cw ?x ?y) (RW:cut-point-2 ?y))
     end-cut-2: ?x:0 ?y:0
         pre: (and (RW:cutting) (RW:cut-point-1 ?x) (RW:cut-point-2 ?y))
-        eff: (and (N:RW:cutting) (N:RW:cut-point-1 ?x) (N:RW:cut-point-2 ?y) (RW:have-cut) (RW:cw ?x ?y))
+        eff: (and (RW:cw ?x ?y) (N:RW:cutting) (RW:have-cut) (N:RW:cut-point-1 ?x) (N:RW:cut-point-2 ?y))
     begin-transpose-splice: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (RW:have-cut) (RW:cw ?x ?y))
-        eff: (and (N:RW:have-cut) (N:RW:cw ?x ?y) (RW:splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
+        pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:have-cut))
+        eff: (and (N:RW:cw ?x ?y) (N:RW:have-cut) (RW:splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
     continue-splice-1: ?x:0 ?y:0
         pre: (and (RW:splicing) (RW:s-first ?x) (RW:s-next ?x ?y))
-        eff: (and (N:RW:s-first ?x) (N:RW:s-next ?x ?y) (N:RW:splicing) (RW:s-first ?y) (RW:splice-next ?x))
+        eff: (and (N:RW:splicing) (RW:splice-next ?x) (N:RW:s-first ?x) (RW:s-first ?y) (N:RW:s-next ?x ?y))
     continue-splice-2: ?x:0 ?y:0
         pre: (and (RW:splice-next ?x) (RW:splice-point-1 ?y))
-        eff: (and (N:RW:splice-point-1 ?y) (N:RW:splice-next ?x) (RW:cw ?y ?x) (RW:splice-point-1 ?x) (RW:splicing))
+        eff: (and (RW:cw ?y ?x) (RW:splicing) (N:RW:splice-next ?x) (RW:splice-point-1 ?x) (N:RW:splice-point-1 ?y))
     end-splice-1: ?x:0 ?y:0
         pre: (and (RW:splicing) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
-        eff: (and (N:RW:splicing) (N:RW:s-first ?x) (N:RW:s-last ?x) (N:RW:splice-point-1 ?y) (RW:splicing-last) (RW:cw ?y ?x) (RW:splice-point-1 ?x))
+        eff: (and (RW:cw ?y ?x) (N:RW:splicing) (RW:splicing-last) (RW:splice-point-1 ?x) (N:RW:splice-point-1 ?y) (N:RW:s-first ?x) (N:RW:s-last ?x))
     end-splice-2: ?x:0 ?y:0
         pre: (and (RW:splicing-last) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
-        eff: (and (N:RW:splicing-last) (N:RW:splice-point-1 ?x) (N:RW:splice-point-2 ?y) (RW:finished) (RW:cw ?x ?y))
+        eff: (and (RW:cw ?x ?y) (N:RW:splicing-last) (RW:finished) (N:RW:splice-point-1 ?x) (N:RW:splice-point-2 ?y))
     begin-transverse-splice: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (RW:have-cut) (RW:cw ?x ?y))
-        eff: (and (N:RW:have-cut) (N:RW:cw ?x ?y) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
+        pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:have-cut))
+        eff: (and (N:RW:cw ?x ?y) (N:RW:have-cut) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
     begin-inverse-splice: ?x:0 ?y:0
-        pre: (and (N:R:= ?x ?y) (RW:have-cut) (RW:cw ?x ?y) (RW:last-cut-point ?x))
-        eff: (and (N:RW:have-cut) (N:RW:cw ?x ?y) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
+        pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:have-cut) (RW:last-cut-point ?x))
+        eff: (and (N:RW:cw ?x ?y) (N:RW:have-cut) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
     begin-inverse-splice-special-case: ?x:0
-        pre: (and (RW:have-cut) (RW:cw ?x ?x) (RW:last-cut-point ?x))
-        eff: (and (N:RW:have-cut) (N:RW:cw ?x ?x) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?x))
+        pre: (and (RW:cw ?x ?x) (RW:have-cut) (RW:last-cut-point ?x))
+        eff: (and (N:RW:cw ?x ?x) (N:RW:have-cut) (RW:inverse-splicing) (RW:splice-point-1 ?x) (RW:splice-point-2 ?x))
     continue-inverse-splice-1a: ?x:0 ?y:0
-        pre: (and (RW:inverse-splicing) (RW:normal ?x) (RW:s-last ?x) (RW:s-next ?y ?x))
-        eff: (and (N:RW:s-last ?x) (N:RW:s-next ?y ?x) (N:RW:normal ?x) (RW:s-last ?y) (N:RW:inverse-splicing) (RW:inverse-splice-next ?x) (RW:inverted ?x))
+        pre: (and (RW:normal ?x) (RW:inverse-splicing) (RW:s-next ?y ?x) (RW:s-last ?x))
+        eff: (and (N:RW:normal ?x) (RW:inverted ?x) (N:RW:inverse-splicing) (RW:inverse-splice-next ?x) (N:RW:s-next ?y ?x) (N:RW:s-last ?x) (RW:s-last ?y))
     continue-inverse-splice-1b: ?x:0 ?y:0
-        pre: (and (RW:inverse-splicing) (RW:inverted ?x) (RW:s-last ?x) (RW:s-next ?y ?x))
-        eff: (and (N:RW:s-last ?x) (N:RW:s-next ?y ?x) (N:RW:inverted ?x) (RW:s-last ?y) (N:RW:inverse-splicing) (RW:inverse-splice-next ?x) (RW:normal ?x))
+        pre: (and (RW:inverted ?x) (RW:inverse-splicing) (RW:s-next ?y ?x) (RW:s-last ?x))
+        eff: (and (RW:normal ?x) (N:RW:inverted ?x) (N:RW:inverse-splicing) (RW:inverse-splice-next ?x) (N:RW:s-next ?y ?x) (N:RW:s-last ?x) (RW:s-last ?y))
     continue-inverse-splice-2: ?x:0 ?y:0
         pre: (and (RW:inverse-splice-next ?x) (RW:splice-point-1 ?y))
-        eff: (and (N:RW:inverse-splice-next ?x) (N:RW:splice-point-1 ?y) (RW:inverse-splicing) (RW:cw ?y ?x) (RW:splice-point-1 ?x))
+        eff: (and (RW:cw ?y ?x) (RW:inverse-splicing) (N:RW:inverse-splice-next ?x) (RW:splice-point-1 ?x) (N:RW:splice-point-1 ?y))
     end-inverse-splice-1a: ?x:0 ?y:0
-        pre: (and (RW:inverse-splicing) (RW:normal ?x) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
-        eff: (and (N:RW:inverse-splicing) (RW:inverse-splicing-last) (N:RW:splice-point-1 ?y) (N:RW:s-first ?x) (N:RW:s-last ?x) (N:RW:normal ?x) (RW:cw ?y ?x) (RW:splice-point-1 ?x) (RW:inverted ?x))
+        pre: (and (RW:normal ?x) (RW:inverse-splicing) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
+        eff: (and (RW:cw ?y ?x) (N:RW:normal ?x) (RW:inverted ?x) (N:RW:inverse-splicing) (RW:inverse-splicing-last) (RW:splice-point-1 ?x) (N:RW:splice-point-1 ?y) (N:RW:s-first ?x) (N:RW:s-last ?x))
     end-inverse-splice-1b: ?x:0 ?y:0
-        pre: (and (RW:inverse-splicing) (RW:inverted ?x) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
-        eff: (and (N:RW:inverse-splicing) (RW:inverse-splicing-last) (N:RW:splice-point-1 ?y) (N:RW:s-first ?x) (N:RW:s-last ?x) (N:RW:inverted ?x) (RW:cw ?y ?x) (RW:splice-point-1 ?x) (RW:normal ?x))
+        pre: (and (RW:inverted ?x) (RW:inverse-splicing) (RW:splice-point-1 ?y) (RW:s-first ?x) (RW:s-last ?x))
+        eff: (and (RW:cw ?y ?x) (RW:normal ?x) (N:RW:inverted ?x) (N:RW:inverse-splicing) (RW:inverse-splicing-last) (RW:splice-point-1 ?x) (N:RW:splice-point-1 ?y) (N:RW:s-first ?x) (N:RW:s-last ?x))
     end-inverse-splice-2: ?x:0 ?y:0
         pre: (and (RW:inverse-splicing-last) (RW:splice-point-1 ?x) (RW:splice-point-2 ?y))
-        eff: (and (N:RW:inverse-splicing-last) (N:RW:splice-point-1 ?x) (N:RW:splice-point-2 ?y) (RW:finished) (RW:cw ?x ?y))
+        eff: (and (RW:cw ?x ?y) (N:RW:inverse-splicing-last) (RW:finished) (N:RW:splice-point-1 ?x) (N:RW:splice-point-2 ?y))
     invert-single-gene-a: ?x:0
-        pre: (and (RW:idle) (RW:normal ?x))
+        pre: (and (RW:normal ?x) (RW:idle))
         eff: (and (N:RW:normal ?x) (RW:inverted ?x))
     invert-single-gene-b: ?x:0
-        pre: (and (RW:idle) (RW:inverted ?x))
-        eff: (and (N:RW:inverted ?x) (RW:normal ?x))
+        pre: (and (RW:inverted ?x) (RW:idle))
+        eff: (and (RW:normal ?x) (N:RW:inverted ?x))
     reset-1: ?x:0
         pre: (and (RW:finished) (RW:last-cut-point ?x))
-        eff: (and (N:RW:last-cut-point ?x) (N:RW:finished) (RW:idle))
+        eff: (and (RW:idle) (N:RW:finished) (N:RW:last-cut-point ?x))
 Init[10]:
-  (normal sub2)
-  (normal sub3)
-  (normal sub1)
-  S:(present sub2)
   S:(present sub3)
+  S:(present sub2)
   S:(present sub1)
-  (cw sub1 sub2)
   (cw sub3 sub1)
   (cw sub2 sub3)
+  (cw sub1 sub2)
+  (normal sub3)
+  (normal sub2)
+  (normal sub1)
   (idle)
 Init[0]:
-Goal: (and (RW:normal sub2) (RW:inverted sub3) (RW:normal sub1) (RW:cw sub1 sub2) (RW:cw sub3 sub1) (RW:cw sub2 sub3))
+Goal: (and (RW:cw sub3 sub1) (RW:cw sub2 sub3) (RW:cw sub1 sub2) (RW:normal sub2) (RW:normal sub1) (RW:inverted sub3))
 Metric: 0

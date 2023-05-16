@@ -38,24 +38,24 @@ Predicate[8]:
 Function[0]:
 Action[4]:
     drive: ?t:6 ?from:1 ?to:1
-        pre: (and (RW:at ?t ?from) (R:connected ?from ?to))
+        pre: (and (R:connected ?from ?to) (RW:at ?t ?from))
         eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to))
     load: ?g:7 ?t:6 ?m:5 ?l1:3 ?l2:3 ?l3:3 ?l4:3
-        pre: (and (RW:at ?t ?m) (RW:loaded ?g ?t ?l3) (RW:ready-to-load ?g ?m ?l2) (R:next ?l2 ?l1) (R:next ?l4 ?l3))
-        eff: (and (RW:loaded ?g ?t ?l4) (N:RW:loaded ?g ?t ?l3) (RW:ready-to-load ?g ?m ?l1) (N:RW:ready-to-load ?g ?m ?l2))
+        pre: (and (R:next ?l2 ?l1) (R:next ?l4 ?l3) (RW:loaded ?g ?t ?l3) (RW:ready-to-load ?g ?m ?l2) (RW:at ?t ?m))
+        eff: (and (N:RW:loaded ?g ?t ?l3) (RW:loaded ?g ?t ?l4) (RW:ready-to-load ?g ?m ?l1) (N:RW:ready-to-load ?g ?m ?l2))
     unload: ?g:7 ?t:6 ?d:4 ?l1:3 ?l2:3 ?l3:3 ?l4:3
-        pre: (and (RW:at ?t ?d) (RW:loaded ?g ?t ?l2) (RW:stored ?g ?l3) (R:next ?l2 ?l1) (R:next ?l4 ?l3))
-        eff: (and (RW:loaded ?g ?t ?l1) (N:RW:loaded ?g ?t ?l2) (RW:stored ?g ?l4) (N:RW:stored ?g ?l3))
+        pre: (and (R:next ?l2 ?l1) (R:next ?l4 ?l3) (RW:loaded ?g ?t ?l2) (RW:stored ?g ?l3) (RW:at ?t ?d))
+        eff: (and (RW:loaded ?g ?t ?l1) (N:RW:loaded ?g ?t ?l2) (N:RW:stored ?g ?l3) (RW:stored ?g ?l4))
     buy: ?t:6 ?g:7 ?m:5 ?l1:3 ?l2:3 ?l3:3 ?l4:3
-        pre: (and (RW:at ?t ?m) (RW:on-sale ?g ?m ?l2) (RW:ready-to-load ?g ?m ?l3) (R:next ?l2 ?l1) (R:next ?l4 ?l3))
-        eff: (and (RW:on-sale ?g ?m ?l1) (N:RW:on-sale ?g ?m ?l2) (RW:ready-to-load ?g ?m ?l4) (N:RW:ready-to-load ?g ?m ?l3))
+        pre: (and (R:next ?l2 ?l1) (R:next ?l4 ?l3) (RW:ready-to-load ?g ?m ?l3) (RW:on-sale ?g ?m ?l2) (RW:at ?t ?m))
+        eff: (and (N:RW:ready-to-load ?g ?m ?l3) (RW:ready-to-load ?g ?m ?l4) (RW:on-sale ?g ?m ?l1) (N:RW:on-sale ?g ?m ?l2))
 Init[8]:
   S:(next level1 level0)
+  S:(connected market1 depot1)
+  S:(connected depot1 market1)
+  (loaded goods1 truck1 level0)
   (ready-to-load goods1 market1 level0)
   (stored goods1 level0)
-  (loaded goods1 truck1 level0)
-  S:(connected depot1 market1)
-  S:(connected market1 depot1)
   (on-sale goods1 market1 level1)
   (at truck1 depot1)
 Init[0]:

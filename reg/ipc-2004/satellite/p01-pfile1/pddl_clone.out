@@ -38,28 +38,22 @@ Action[5]:
         pre: (and (R:satellite ?s) (R:direction ?d_new) (R:direction ?d_prev) (RW:pointing ?s ?d_prev))
         eff: (and (RW:pointing ?s ?d_new) (N:RW:pointing ?s ?d_prev))
     switch_on: ?i:0 ?s:0
-        pre: (and (R:instrument ?i) (R:satellite ?s) (R:on_board ?i ?s) (RW:power_avail ?s))
-        eff: (and (RW:power_on ?i) (N:RW:calibrated ?i) (N:RW:power_avail ?s))
+        pre: (and (R:on_board ?i ?s) (R:satellite ?s) (R:instrument ?i) (RW:power_avail ?s))
+        eff: (and (N:RW:power_avail ?s) (RW:power_on ?i) (N:RW:calibrated ?i))
     switch_off: ?i:0 ?s:0
-        pre: (and (R:instrument ?i) (R:satellite ?s) (R:on_board ?i ?s) (RW:power_on ?i))
+        pre: (and (R:on_board ?i ?s) (R:satellite ?s) (R:instrument ?i) (RW:power_on ?i))
         eff: (and (RW:power_avail ?s) (N:RW:power_on ?i))
     calibrate: ?s:0 ?i:0 ?d:0
-        pre: (and (R:satellite ?s) (R:instrument ?i) (R:direction ?d) (R:on_board ?i ?s) (R:calibration_target ?i ?d) (RW:pointing ?s ?d) (RW:power_on ?i))
+        pre: (and (R:on_board ?i ?s) (R:calibration_target ?i ?d) (R:satellite ?s) (R:direction ?d) (R:instrument ?i) (RW:pointing ?s ?d) (RW:power_on ?i))
         eff: (and (RW:calibrated ?i))
     take_image: ?s:0 ?d:0 ?i:0 ?m:0
-        pre: (and (R:satellite ?s) (R:direction ?d) (R:instrument ?i) (R:mode ?m) (RW:calibrated ?i) (R:on_board ?i ?s) (R:supports ?i ?m) (RW:power_on ?i) (RW:pointing ?s ?d))
+        pre: (and (R:on_board ?i ?s) (R:supports ?i ?m) (R:satellite ?s) (R:direction ?d) (R:instrument ?i) (R:mode ?m) (RW:pointing ?s ?d) (RW:power_on ?i) (RW:calibrated ?i))
         eff: (and (W:have_image ?d ?m))
 Init[17]:
-  S:(satellite satellite0)
-  S:(instrument instrument0)
+  S:(on_board instrument0 satellite0)
   S:(supports instrument0 thermograph0)
   S:(calibration_target instrument0 groundstation2)
-  S:(on_board instrument0 satellite0)
-  (power_avail satellite0)
-  (pointing satellite0 phenomenon6)
-  S:(mode image1)
-  S:(mode spectrograph2)
-  S:(mode thermograph0)
+  S:(satellite satellite0)
   S:(direction star0)
   S:(direction groundstation1)
   S:(direction groundstation2)
@@ -67,6 +61,12 @@ Init[17]:
   S:(direction phenomenon4)
   S:(direction star5)
   S:(direction phenomenon6)
+  S:(instrument instrument0)
+  S:(mode image1)
+  S:(mode spectrograph2)
+  S:(mode thermograph0)
+  (pointing satellite0 phenomenon6)
+  (power_avail satellite0)
 Init[0]:
 Goal: (and (W:have_image phenomenon4 thermograph0) (W:have_image star5 thermograph0) (W:have_image phenomenon6 thermograph0))
 Metric: 0

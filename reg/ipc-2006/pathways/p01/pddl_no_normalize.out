@@ -58,8 +58,8 @@ Predicate[10]:
 Function[0]:
 Action[6]:
     choose: ?x:3 ?l1:1 ?l2:1
-        pre: (and (R:possible ?x) (N:RW:chosen ?x) (RW:num-subs ?l2) (R:next ?l1 ?l2))
-        eff: (and (RW:chosen ?x) (N:RW:num-subs ?l2) (RW:num-subs ?l1))
+        pre: (and (R:possible ?x) (R:next ?l1 ?l2) (N:RW:chosen ?x) (RW:num-subs ?l2))
+        eff: (and (RW:chosen ?x) (RW:num-subs ?l1) (N:RW:num-subs ?l2))
     initialize: ?x:3
         pre: (and (RW:chosen ?x))
         eff: (and (RW:available ?x))
@@ -73,9 +73,21 @@ Action[6]:
         pre: (and (R:synthesis-reaction ?x1 ?x2) (RW:available ?x1))
         eff: (and (RW:available ?x2))
     dummy-action-1: 
-        pre: (or (RW:available prbp1p2-ap2) (RW:available pcaf-p300))
+        pre: (or (RW:available pcaf-p300) (RW:available prbp1p2-ap2))
         eff: (and (W:goal1))
 Init[32]:
+  S:(association-reaction sp1 e2f13 sp1-e2f13)
+  S:(association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
+  S:(association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12)
+  S:(association-reaction prbp2 ap2 prbp2-ap2)
+  S:(association-reaction pcaf p300 pcaf-p300)
+  S:(association-reaction p16 cdk7 p16-cdk7)
+  S:(association-reaction prbp1p2 ap2 prbp1p2-ap2)
+  S:(catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
+  S:(catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2)
+  S:(catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1)
+  S:(catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1)
+  S:(catalyzed-association-reaction cdc25c chk1 cdc25cp2)
   S:(possible sp1)
   S:(possible raf1)
   S:(possible prbp2)
@@ -92,22 +104,10 @@ Init[32]:
   S:(possible cdk46p3-cycd)
   S:(possible cdc25c)
   S:(possible ap2)
-  S:(catalyzed-association-reaction cdc25c chk1 cdc25cp2)
-  S:(catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1)
-  S:(catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1)
-  S:(association-reaction p16 cdk7 p16-cdk7)
-  S:(association-reaction pcaf p300 pcaf-p300)
-  S:(association-reaction prbp1p2 ap2 prbp1p2-ap2)
-  S:(association-reaction prbp2 ap2 prbp2-ap2)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2)
-  S:(association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12)
-  S:(association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
-  S:(association-reaction sp1 e2f13 sp1-e2f13)
-  (num-subs l0)
   S:(next l1 l0)
   S:(next l2 l1)
   S:(next l3 l2)
+  (num-subs l0)
 Init[0]:
 Goal: (and (W:goal1))
 Metric: 0

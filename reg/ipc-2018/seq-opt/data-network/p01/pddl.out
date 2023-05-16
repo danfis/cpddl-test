@@ -69,19 +69,19 @@ Function[4]:
 Action[5]:
     release: ?d:1 ?s:3 ?size:4 ?before:4 ?after:4
         pre: (and (R:data-size ?d ?size) (R:sum ?after ?size ?before) (RW:cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) 0) (N:RW:cached ?d ?s) (RW:NOT-cached ?d ?s))
+        eff: (and (N:RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (RW:NOT-cached ?d ?s) (increase (total-cost) 0))
     save: ?d:1 ?size:4 ?s:3
         pre: (and (R:data-size ?d ?size) (RW:cached ?d ?s))
         eff: (and (RW:saved ?d ?s) (increase (total-cost) (io-cost ?s ?size)))
     load: ?d:1 ?s:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:data-size ?d ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:saved ?d ?s) (RW:NOT-cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) (io-cost ?s ?size)) (RW:cached ?d ?s) (N:RW:NOT-cached ?d ?s))
+        pre: (and (R:data-size ?d ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:saved ?d ?s) (RW:usage ?s ?before) (RW:NOT-cached ?d ?s))
+        eff: (and (RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (N:RW:NOT-cached ?d ?s) (increase (total-cost) (io-cost ?s ?size)))
     send: ?d:1 ?from:3 ?to:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:connected ?from ?to) (R:data-size ?d ?size) (R:capacity ?to ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?d ?from) (RW:NOT-cached ?d ?to) (RW:usage ?to ?before))
-        eff: (and (N:RW:usage ?to ?before) (RW:usage ?to ?after) (increase (total-cost) (send-cost ?from ?to ?size)) (RW:cached ?d ?to) (N:RW:NOT-cached ?d ?to))
+        pre: (and (R:connected ?from ?to) (R:data-size ?d ?size) (R:capacity ?to ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?d ?from) (RW:usage ?to ?before) (RW:NOT-cached ?d ?to))
+        eff: (and (RW:cached ?d ?to) (N:RW:usage ?to ?before) (RW:usage ?to ?after) (N:RW:NOT-cached ?d ?to) (increase (total-cost) (send-cost ?from ?to ?size)))
     process: ?in1:1 ?in2:1 ?out:1 ?sc:2 ?s:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:script-io ?sc ?in1 ?in2 ?out) (R:data-size ?out ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?in1 ?s) (RW:cached ?in2 ?s) (RW:NOT-cached ?out ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) (process-cost ?sc ?s)) (RW:cached ?out ?s) (N:RW:NOT-cached ?out ?s))
+        pre: (and (R:script-io ?sc ?in1 ?in2 ?out) (R:data-size ?out ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?in1 ?s) (RW:cached ?in2 ?s) (RW:usage ?s ?before) (RW:NOT-cached ?out ?s))
+        eff: (and (RW:cached ?out ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (N:RW:NOT-cached ?out ?s) (increase (total-cost) (process-cost ?sc ?s)))
 Init[107]:
   S:(script-io script1 data-0-3 data-0-5 data-1-4)
   S:(script-io script2 data-0-5 data-0-3 data-1-2)
@@ -94,8 +94,8 @@ Init[107]:
   S:(script-io script9 data-0-3 data-0-5 data-1-4)
   S:(script-io script10 data-1-2 data-1-4 data-2-1)
   S:(connected server1 server2)
-  S:(connected server2 server1)
   S:(connected server1 server3)
+  S:(connected server2 server1)
   S:(connected server3 server1)
   S:(data-size data-0-3 number4)
   S:(data-size data-0-5 number5)
