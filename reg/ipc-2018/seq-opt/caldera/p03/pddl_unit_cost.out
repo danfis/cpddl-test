@@ -175,7 +175,7 @@ Action[8]:
     wmic: ?v00:15 ?v01:11 ?v02:11 ?v03:9 ?v04:5 ?v06:14 ?v07:13 ?v08:8 ?v09:5 ?v10:5 ?v11:15
         pre: (and (N:R:= ?v01 ?v02) (R:prop_password ?v06 ?v10) (R:prop_user ?v06 ?v07) (R:prop_windows_domain ?v08 ?v09) (R:prop_domain ?v07 ?v08) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02) (RW:knows ?v03) (RW:knows ?v06) (RW:knows ?v07) (RW:knows ?v08) (RW:knows_property ?v00 phost) (RW:knows_property ?v02 pdomain_user_admins) (RW:knows_property ?v03 ppath) (RW:knows_property ?v03 phost) (RW:knows_property ?v06 puser) (RW:knows_property ?v06 ppassword) (RW:knows_property ?v07 pdomain) (RW:knows_property ?v08 pwindows_domain) (RW:prop_host ?v00 ?v01) (RW:prop_host ?v03 ?v02) (RW:prop_path ?v03 ?v04) (RW:NOT-created ?v11))
         eff: (and (when (R:mem_domain_user_admins ?v02 ?v07) (and (RW:knows ?v11) (RW:knows_property ?v11 phost) (RW:prop_host ?v11 ?v02) (RW:knows_property ?v11 pelevated) (RW:prop_elevated ?v11 yes) (RW:knows_property ?v11 pexecutable) (RW:prop_executable ?v11 ?v04) (W:created ?v11) (N:RW:NOT-created ?v11))))
-Init[72]:
+Init[61]:
   S:(prop_timedelta id_khost id_ltimedelta)
   S:(prop_timedelta id_rhost id_stimedelta)
   S:(prop_dns_domain_name id_khost str__p)
@@ -230,11 +230,6 @@ Init[72]:
   (mem_hosts id_adomain id_khost)
   (mem_hosts id_adomain id_rhost)
   (prop_elevated id_yrat yes)
-  (NOT-created id_adomain)
-  (NOT-created id_hdomaincredential)
-  (NOT-created id_ddomaincredential)
-  (NOT-created id_khost)
-  (NOT-created id_rhost)
   (NOT-created id_bffile)
   (NOT-created id_befile)
   (NOT-created id_bhshare)
@@ -242,12 +237,6 @@ Init[72]:
   (NOT-created id_bbrat)
   (NOT-created id_barat)
   (NOT-created id_yrat)
-  (NOT-created id_bcschtask)
-  (NOT-created id_bdschtask)
-  (NOT-created id_ltimedelta)
-  (NOT-created id_stimedelta)
-  (NOT-created id_cdomainuser)
-  (NOT-created id_gdomainuser)
 Init[0]:
 Goal: (RW:prop_host id_bbrat id_rhost)
 Metric: 0

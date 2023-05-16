@@ -273,7 +273,7 @@ Action[40]:
     creds: ?v00:15 ?v01:11 ?v08:8
         pre: (and (R:mem_cached_domain_creds ?v01 id_hdomaincredential) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v08) (RW:knows_property ?v00 phost) (RW:prop_host ?v00 ?v01) (RW:prop_cred id_cdomainuser id_hdomaincredential) (RW:prop_elevated ?v00 yes) (RW:NOT-prop_cred id_cdomainuser id_ddomaincredential) (RW:NOT-prop_cred id_gdomainuser id_hdomaincredential) (RW:NOT-prop_cred id_gdomainuser id_ddomaincredential))
         eff: (and (RW:knows id_hdomaincredential) (RW:knows id_cdomainuser) (RW:knows ?v08) (RW:knows_property id_hdomaincredential puser) (RW:knows_property id_hdomaincredential ppassword) (RW:knows_property id_cdomainuser pis_group) (RW:knows_property id_cdomainuser pdomain) (RW:knows_property id_cdomainuser pcred) (RW:knows_property id_cdomainuser pusername) (RW:knows_property ?v08 pwindows_domain) (RW:prop_cred id_cdomainuser id_hdomaincredential) (N:RW:NOT-prop_cred id_cdomainuser id_hdomaincredential))
-Init[79]:
+Init[65]:
   S:(prop_timedelta id_khost id_ltimedelta)
   S:(prop_timedelta id_rhost id_stimedelta)
   S:(prop_dns_domain_name id_khost str__p)
@@ -328,11 +328,6 @@ Init[79]:
   (mem_hosts id_adomain id_khost)
   (mem_hosts id_adomain id_rhost)
   (prop_elevated id_yrat yes)
-  (NOT-created id_adomain)
-  (NOT-created id_hdomaincredential)
-  (NOT-created id_ddomaincredential)
-  (NOT-created id_khost)
-  (NOT-created id_rhost)
   (NOT-created id_bffile)
   (NOT-created id_befile)
   (NOT-created id_bhshare)
@@ -340,19 +335,10 @@ Init[79]:
   (NOT-created id_bbrat)
   (NOT-created id_barat)
   (NOT-created id_yrat)
-  (NOT-created id_bcschtask)
-  (NOT-created id_bdschtask)
-  (NOT-created id_ltimedelta)
-  (NOT-created id_stimedelta)
-  (NOT-created id_cdomainuser)
-  (NOT-created id_gdomainuser)
   (NOT-prop_cred id_cdomainuser id_hdomaincredential)
   (NOT-prop_cred id_gdomainuser id_ddomaincredential)
   (NOT-prop_elevated id_bbrat yes)
-  (NOT-prop_elevated id_bbrat no)
   (NOT-prop_elevated id_barat yes)
-  (NOT-prop_elevated id_barat no)
-  (NOT-prop_elevated id_yrat no)
 Init[0]:
 Goal: (RW:prop_host id_bbrat id_rhost)
 Metric: 0

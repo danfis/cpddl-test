@@ -72,7 +72,7 @@ Action[3]:
     move-and-eat-no-spawn: ?head:0 ?newhead:0
         pre: (and (R:isadjacent ?head ?newhead) (RW:headsnake ?head) (RW:spawn dummypoint) (RW:ispoint ?newhead) (RW:NOT-blocked ?newhead))
         eff: (and (N:RW:headsnake ?head) (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (W:blocked ?newhead) (N:RW:ispoint ?newhead) (N:RW:NOT-blocked ?newhead) (RW:NOT-ispoint ?newhead))
-Init[241]:
+Init[239]:
   S:(isadjacent pos0-0 pos0-1)
   S:(isadjacent pos0-0 pos1-0)
   S:(isadjacent pos0-1 pos0-0)
@@ -235,7 +235,6 @@ Init[241]:
   (ispoint pos2-6)
   (ispoint pos3-2)
   (ispoint pos5-3)
-  (NOT-blocked dummypoint)
   (NOT-blocked pos0-0)
   (NOT-blocked pos0-1)
   (NOT-blocked pos0-2)
@@ -276,7 +275,6 @@ Init[241]:
   (NOT-blocked pos5-4)
   (NOT-blocked pos5-5)
   (NOT-blocked pos5-6)
-  (NOT-ispoint dummypoint)
   (NOT-ispoint pos0-0)
   (NOT-ispoint pos0-1)
   (NOT-ispoint pos0-2)
