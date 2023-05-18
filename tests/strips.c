@@ -128,7 +128,7 @@ TEST(strips_ground_prune, lmg)
     ground_cfg.prune_op_pre_mutex = 1;
     ground_cfg.prune_op_dead_end = 1;
     pddl_strips_t strips;
-    int ret = pddlStripsGround(&strips, &C.pddl, &ground_cfg, &C.err);
+    int ret = pddlStripsGroundTrie(&strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
     pddlStripsPrintDebug(&strips, stdout);
     pddlStripsFree(&strips);
@@ -185,7 +185,7 @@ static void testCompileInLMG(int mutex, int dead_end)
     ground_cfg.prune_op_pre_mutex = mutex;
     ground_cfg.prune_op_dead_end = dead_end;
     pddl_strips_t base;
-    int ret = pddlStripsGround(&base, &C.pddl, &ground_cfg, &C.err);
+    int ret = pddlStripsGroundTrie(&base, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
 
     ground_cfg.lifted_mgroups = NULL;
@@ -221,7 +221,7 @@ static void testCompileInLMG(int mutex, int dead_end)
         assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
     pddlStripsFree(&strips);
 
-    ret = pddlStripsGround(&strips, &pddl, &ground_cfg, &C.err);
+    ret = pddlStripsGroundTrie(&strips, &pddl, &ground_cfg, &C.err);
     assert(ret == 0);
     assert(strips.op.op_size == base.op.op_size);
     for (int i = 0; i < strips.op.op_size; ++i)

@@ -736,10 +736,10 @@ TEST_COND(lmg_compile_in, lmg, SQLITE)
     ground_cfg.lifted_mgroups = &C.lmg;
     ground_cfg.prune_op_pre_mutex = 1;
     ground_cfg.prune_op_dead_end = 1;
-    int ret = pddlStripsGround(&strips_ref, &C.pddl, &ground_cfg, &C.err);
+    int ret = pddlStripsGroundTrie(&strips_ref, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
 
-    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGround);
+    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundTrie);
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundDatalog);
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundSql);
 
