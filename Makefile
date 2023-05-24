@@ -114,9 +114,9 @@ check-valgrind-gen-suppressions: all
              ./test $(T)
 
 
-check-bin:
+check-bin: val/validate
 	$(SH) bin-tests/run.sh
-check-bin-all:
+check-bin-all: val/validate
 	$(SH) bin-tests/run.sh --all
 
 clean:
