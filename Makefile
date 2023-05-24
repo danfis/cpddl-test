@@ -114,24 +114,10 @@ check-valgrind-gen-suppressions: all
              ./test $(T)
 
 
-check-bin: check-bin-search-sat check-bin-search-opt
-check-bin-search-sat:
-	cat bin-tests/tasks-search-lazy-ff.txt \
-        | $(SH) scripts/test-search.sh ../bin/pddl -G dl --gplan lazy --gplan-h ff
-	cat bin-tests/tasks-search-lazy-ff.txt \
-        | $(SH) scripts/test-search.sh ../bin/pddl -G sql --gplan lazy --gplan-h ff
-	cat bin-tests/tasks-search-lazy-add.txt \
-        | $(SH) scripts/test-search.sh ../bin/pddl -G dl --gplan lazy --gplan-h add
-	cat bin-tests/tasks-search-lazy-add.txt \
-        | $(SH) scripts/test-search.sh ../bin/pddl -G sql --gplan lazy --gplan-h add
-
-check-bin-search-opt:
-	cat bin-tests/tasks-search-astar-blind.txt \
-        | $(SH) scripts/test-search.sh --optimal ../bin/pddl --gplan astar
-	cat bin-tests/tasks-search-astar-max.txt \
-        | $(SH) scripts/test-search.sh --optimal ../bin/pddl --gplan astar --gplan-h max
-	cat bin-tests/tasks-search-astar-lmc.txt \
-        | $(SH) scripts/test-search.sh --optimal ../bin/pddl --gplan astar --gplan-h lmc
+check-bin:
+	$(SH) bin-tests/run.sh
+check-bin-all:
+	$(SH) bin-tests/run.sh --all
 
 clean:
 	$(MAKE) -C val clean
