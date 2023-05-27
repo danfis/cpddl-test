@@ -33,15 +33,10 @@ VAL=${TOP}/cpddl/t/val/validate
 [ ! -f "$PDDL" ] && echo "Cannot find pddl program" && exit -1
 [ ! -f "$VAL" ] && echo "Cannot find validate program" && exit -1
 
-rm -rf data
-mkdir data
-ln -s ${PDDL_DATA}/bench/htg data/htg
-ln -s ${PDDL_DATA}/bench/ipc-opt data/ipc-opt
-ln -s ${PDDL_DATA}/bench/ipc-sat data/ipc-sat
-
 MAX_MEM=3072
 MAX_TIME=120
 CLUSTER=fai0
+BENCH=${PDDL_DATA}/bench/all
 
 function gen(){
     local name="$1"
@@ -59,7 +54,7 @@ if [ -f plan.out ] && [ -f $VAL ]; then
 #    fi
 fi
 EOF
-    $EXP --no-systemd --max-time ${MAX_TIME} --max-mem ${MAX_MEM} -B data -t ${CLUSTER} gen $name run-${name}.sh
+    $EXP --no-systemd --max-time ${MAX_TIME} --max-mem ${MAX_MEM} -B ${BENCH} -t ${CLUSTER} gen $name run-${name}.sh
 }
 
 gen gplan-lazy-ff "-G dl --gplan lazy --gplan-h ff --gplan-out plan.out"
