@@ -10,23 +10,33 @@ struct test_def {
     const int *children;
     int children_size;
     int is_explicit;
+    int enabled;
 };
 typedef struct test_def test_def_t;
 
 
 void tasksTestsInit(void);
-void tasksTestsSelectAll(void);
-void tasksTestsSelectTasksMatch(const char *pat);
-void tasksTestsSelectTask(const char *task_name);
-void tasksTestsSelectTestsMatch(const char *pat);
-void tasksTestsSelectTest(const char *name);
+void tasksTestsEnableTestMatch(const char *pat);
+void tasksTestsEnableTestEq(const char *pat);
+void tasksTestsEnableTaskMatch(const char *pat);
+void tasksTestsEnableTaskEq(const char *pat);
+void tasksTestsEnableAllTasks(int only_base);
+void tasksTestsEnableAllTests(void);
+
+
 void tasksTestsPrintPlan(void);
+void tasksTestsPrintTasks(void);
+void tasksTestsPrintTests(void);
+int tasksTestsNumEnabledTasks(void);
+int tasksTestsNumEnabledTests(void);
+int tasksTestsNumEnabledJobs(void);
+
 int tasksTestsNumTasks(void);
 int tasksTestsNumTests(void);
 const test_def_t *tasksTestsGetTest(int test_id);
 const char *tasksTestsGetTaskName(int task_id);
+int tasksTestsTaskIsEnabled(int task_id);
 int tasksTestsIsEnabled(int task_id, int test_id);
-int tasksTestsNumActiveTasks(void);
 
 void (*tasksTestsGlobalTearDown(void))(void);
 #endif /* TASKS_TESTS_H */

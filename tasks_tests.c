@@ -4,9 +4,6 @@
 #include <assert.h>
 #include "tasks_tests.h"
 
-static const char **task_set = NULL;
-static int *task_test_map = NULL;
-static int task_size = 0;
 
 #include "test.in.c"
 
@@ -19,144 +16,148 @@ static int testIdFromName(const char *name)
     return -1;
 }
 
-static void initTaskTestMap(const char **tasks, int *map, int task_size)
-{
-    for (int task_id = 0; task_id < task_size; ++task_id){
-        int enabled = 1;
-        if (strcmp(tasks[task_id], "_") == 0)
-            enabled = 0;
+#include "tasks.in.c"
 
-        for (int test_id = 0; test_id < test_set_size; ++test_id){
-            if (test_set[test_id].is_explicit){
-                map[task_id * test_set_size + test_id] = 0;
-            }else{
-                map[task_id * test_set_size + test_id] = enabled;
-            }
+static void taskEnableTestAndChildren(int task_id, int test_id, int force)
+{
+    if (!force && tasks[task_id].default_disabled_tests[test_id])
+        return;
+    tasks[task_id].enabled_tests[test_id] = 1;
+
+    const test_def_t *test = tasksTestsGetTest(test_id);
+    for (int i = 0; i < test->children_size; ++i)
+        taskEnableTestAndChildren(task_id, test->children[i], 0);
+}
+
+static void taskEnableTestAndParents(int task_id, int test_id, int force)
+{
+    if (!force && tasks[task_id].default_disabled_tests[test_id])
+        return;
+
+    test_set[test_id].enabled = 1;
+    tasks[task_id].enabled_tests[test_id] = 1;
+
+    const test_def_t *test = tasksTestsGetTest(test_id);
+    if (test->parent >= 0)
+        taskEnableTestAndParents(task_id, test->parent, 0);
+}
+
+static void tasksEnableTask(int task_id)
+{
+    tasks[task_id].enabled = 1;
+}
+
+static void tasksEnableTestAndParents(int test_id, int force)
+{
+    for (int taski = 0; taski < tasks_size; ++taski)
+        taskEnableTestAndParents(taski, test_id, force);
+}
+
+static int cmpEq(const char *a, const char *b)
+{
+    return strcmp(a, b) == 0;
+}
+
+static int cmpMatch(const char *a, const char *b)
+{
+    return strstr(a, b) != NULL;
+}
+
+static void _tasksTestsEnableTest(const char *pat,
+                                  int (*cmp)(const char *, const char *),
+                                  int force)
+{
+    for (int testi = 0; testi < test_set_size; ++testi){
+        if (cmp(test_set[testi].name, pat)){
+            test_set[testi].enabled = 1;
+            tasksEnableTestAndParents(testi, force);
         }
     }
 }
 
-static void disableTaskTest(int *map, int task_size, int task_id, int test_id)
+void tasksTestsEnableTestMatch(const char *pat)
 {
-    if (test_id < 0)
-        return;
-    map[task_id * test_set_size + test_id] = 0;
-    for (int i = 0; i < test_set[test_id].children_size; ++i)
-        disableTaskTest(map, task_size, task_id, test_set[test_id].children[i]);
+    _tasksTestsEnableTest(pat, cmpMatch, 1);
 }
 
-static void enableTaskTest(int *map, int task_size, int task_id, int test_id)
+void tasksTestsEnableTestEq(const char *pat)
 {
-    assert(test_set[test_id].parent < 0);
-    map[task_id * test_set_size + test_id] = 1;
+    _tasksTestsEnableTest(pat, cmpEq, 1);
 }
 
-#include "test.tasks.base.in.c"
-#include "test.tasks.all.in.c"
+static void _tasksTestsEnableTask(const char *pat,
+                                  int (*cmp)(const char *, const char *))
+{
+    for (int taski = 0; taski < tasks_size; ++taski){
+        if (cmp(tasks[taski].name, pat))
+            tasks[taski].enabled = 1;
+    }
+}
+
+void tasksTestsEnableTaskMatch(const char *pat)
+{
+    _tasksTestsEnableTask(pat, cmpMatch);
+}
+
+void tasksTestsEnableTaskEq(const char *pat)
+{
+    _tasksTestsEnableTask(pat, cmpEq);
+}
+
+void tasksTestsEnableAllTasks(int only_base)
+{
+    for (int taski = 0; taski < tasks_size; ++taski){
+        if (only_base && !tasks[taski].is_base)
+            continue;
+        tasksEnableTask(taski);
+    }
+}
+
+void tasksTestsEnableAllTests(void)
+{
+    for (int testi = 0; testi < test_set_size; ++testi)
+        test_set[testi].enabled = 1;
+
+    for (int taski = 0; taski < tasks_size; ++taski){
+        for (int testi = 0; testi < test_set_size; ++testi){
+            if (tasks[taski].default_disabled_tests[testi])
+                continue;
+
+            const test_def_t *test = tasksTestsGetTest(testi);
+            if (tasks[taski].default_enabled_tests[testi]){
+                tasks[taski].enabled_tests[testi] = 1;
+
+            }else if (!test->is_explicit && test->parent < 0){
+                taskEnableTestAndChildren(taski, testi, 0);
+
+            }else if (test->is_explicit
+                        && test->parent < 0
+                        && tasks[taski].default_enabled_tests[testi]){
+                taskEnableTestAndChildren(taski, testi, 0);
+            }
+        }
+    }
+}
 
 void tasksTestsInit(void)
 {
-    setTaskTestMap_base();
-    setTaskTestMap_all();
-    task_set = tasks_base;
-    task_test_map = task_test_map_base;
-    task_size = tasks_base_size;
-}
+    tasksInit();
 
-void tasksTestsSelectAll(void)
-{
-    task_set = tasks_all;
-    task_test_map = task_test_map_all;
-    task_size = tasks_all_size;
-}
-
-void tasksTestsSelectTasksMatch(const char *pat)
-{
-    for (int task_id = 0; task_id < task_size; ++task_id){
-        if (strstr(task_set[task_id], pat) == NULL){
-            for (int test_id = 0; test_id < test_set_size; ++test_id){
-                task_test_map[task_id * test_set_size + test_id] = 0;
+    for (int taski = 0; taski < tasks_size; ++taski){
+        if (strncmp(tasks[taski].name, "_", 1) == 0){
+            for (int testi = 0; testi < test_set_size; ++testi){
+                if (!tasks[taski].default_enabled_tests[testi]){
+                    tasks[taski].default_disabled_tests[testi] = 1;
+                }
             }
         }
     }
-}
 
-void tasksTestsSelectTask(const char *task_name)
-{
-    for (int task_id = 0; task_id < task_size; ++task_id){
-        if (strcmp(task_set[task_id], task_name) != 0){
-            for (int test_id = 0; test_id < test_set_size; ++test_id){
-                task_test_map[task_id * test_set_size + test_id] = 0;
-            }
-        }
-    }
-}
-
-static int selectTestMatch(int task_id, int test_id, const char *pat)
-{
-    if (!task_test_map[task_id * test_set_size + test_id])
-        return 0;
-
-    int enable = 0;
-    for (int i = 0; i < test_set[test_id].children_size; ++i){
-        int chid = test_set[test_id].children[i];
-        enable |= selectTestMatch(task_id, chid, pat);
-    }
-
-    if (enable || strstr(test_set[test_id].name, pat) != NULL){
-        return 1;
-    }else{
-        task_test_map[task_id * test_set_size + test_id] = 0;
-        return 0;
-    }
-}
-
-static int selectTest(int task_id, int test_id, const char *name)
-{
-    if (!task_test_map[task_id * test_set_size + test_id])
-        return 0;
-
-    int enable = 0;
-    for (int i = 0; i < test_set[test_id].children_size; ++i){
-        int chid = test_set[test_id].children[i];
-        enable |= selectTest(task_id, chid, name);
-    }
-
-    if (enable || strcmp(test_set[test_id].name, name) == 0){
-        return 1;
-    }else{
-        task_test_map[task_id * test_set_size + test_id] = 0;
-        return 0;
-    }
-}
-
-void tasksTestsSelectTestsMatch(const char *pat)
-{
-    for (int task_id = 0; task_id < task_size; ++task_id){
-        for (int test_id = 0; test_id < test_set_size; ++test_id){
-            if (test_set[test_id].parent < 0
-                    && task_test_map[task_id * test_set_size + test_id]){
-                selectTestMatch(task_id, test_id, pat);
-            }
-        }
-    }
-}
-
-void tasksTestsSelectTest(const char *name)
-{
-    for (int task_id = 0; task_id < task_size; ++task_id){
-        for (int test_id = 0; test_id < test_set_size; ++test_id){
-            if (test_set[test_id].parent < 0
-                    && task_test_map[task_id * test_set_size + test_id]){
-                selectTest(task_id, test_id, name);
-            }
-        }
-    }
 }
 
 static void printPlan(int task_id, int test_id, int depth)
 {
-    if (!task_test_map[task_id * test_set_size + test_id])
+    if (!tasks[task_id].enabled_tests[test_id])
         return;
 
     for (int i = 0; i < depth - 1; ++i)
@@ -167,22 +168,57 @@ static void printPlan(int task_id, int test_id, int depth)
         printPlan(task_id, test_set[test_id].children[i], depth + 1);
 
 }
+
 void tasksTestsPrintPlan(void)
 {
-    for (int task_id = 0; task_id < task_size; ++task_id){
+    for (int task_id = 0; task_id < tasks_size; ++task_id){
+        if (!tasks[task_id].enabled)
+            continue;
+
         for (int test_id = 0; test_id < test_set_size; ++test_id){
+            if (!test_set[test_id].enabled)
+                continue;
+
             if (test_set[test_id].parent < 0
-                    && task_test_map[task_id * test_set_size + test_id]){
-                printf("Task %s:\n", task_set[task_id]);
+                    && tasks[task_id].enabled_tests[test_id]){
+                printf("Task %s:\n", tasks[task_id].name);
                 printPlan(task_id, test_id, 1);
             }
         }
     }
 }
 
+void tasksTestsPrintTasks(void)
+{
+    for (int task_id = 0; task_id < tasks_size; ++task_id){
+        printf("%s", tasks[task_id].name);
+        for (int i = strlen(tasks[task_id].name); i < 50; ++i)
+            printf(" ");
+        if (tasks[task_id].enabled){
+            printf(" enabled\n");
+        }else{
+            printf(" disabled\n");
+        }
+    }
+}
+
+void tasksTestsPrintTests(void)
+{
+    for (int test_id = 0; test_id < test_set_size; ++test_id){
+        printf("%s", test_set[test_id].name);
+        for (int i = strlen(test_set[test_id].name); i < 50; ++i)
+            printf(" ");
+        if (test_set[test_id].enabled){
+            printf(" enabled\n");
+        }else{
+            printf(" disabled\n");
+        }
+    }
+}
+
 int tasksTestsNumTasks(void)
 {
-    return task_size;
+    return tasks_size;
 }
 
 int tasksTestsNumTests(void)
@@ -197,28 +233,55 @@ const test_def_t *tasksTestsGetTest(int id)
 
 const char *tasksTestsGetTaskName(int task_id)
 {
-    return task_set[task_id];
+    return tasks[task_id].name;
+}
+
+int tasksTestsTaskIsEnabled(int task_id)
+{
+    return tasks[task_id].enabled;
 }
 
 int tasksTestsIsEnabled(int task_id, int test_id)
 {
-    if (test_id < 0){
-        for (int test_id = 0; test_id < test_set_size; ++test_id){
-            if (test_set[test_id].parent < 0
-                    && task_test_map[task_id * test_set_size + test_id])
-                return 1;
-        }
-        return 0;
-    }
-
-    return task_test_map[task_id * test_set_size + test_id];
+    return tasks[task_id].enabled
+                && test_set[test_id].enabled
+                && tasks[task_id].enabled_tests[test_id];
 }
 
-int tasksTestsNumActiveTasks(void)
+
+int tasksTestsNumEnabledTasks(void)
 {
     int num = 0;
-    for (int i = 0; i < task_size; ++i)
-        num += tasksTestsIsEnabled(i, -1);
+    for (int i = 0; i < tasks_size; ++i){
+        if (tasks[i].enabled)
+            ++num;
+    }
+    return num;
+}
+
+int tasksTestsNumEnabledTests(void)
+{
+    int num = 0;
+    for (int i = 0; i < test_set_size; ++i){
+        if (test_set[i].enabled)
+            ++num;
+    }
+    return num;
+}
+
+int tasksTestsNumEnabledJobs(void)
+{
+    int num = 0;
+    for (int taski = 0; taski < tasks_size; ++taski){
+        if (!tasks[taski].enabled)
+            continue;
+        for (int testi = 0; testi < tasks_size; ++testi){
+            if (!test_set[testi].enabled)
+                continue;
+            if (tasks[taski].enabled_tests[testi])
+                ++num;
+        }
+    }
     return num;
 }
 

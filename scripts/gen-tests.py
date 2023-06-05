@@ -7,11 +7,11 @@ from pprint import pprint
 Test = {}
 GlobalTearDown = False
 
-pat_test = re.compile(r'^.*TEST\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+)\).*$')
-pat_test_cond = re.compile(r'^.*TEST_COND\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+), *([a-zA-Z0-9_ ]+)\).*$')
-pat_test_tear_down = re.compile(r'^.*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
-pat_test_explicit = re.compile(r'^.*TEST_EXPLICIT\(([a-zA-Z0-9_]+) *\).*$')
-pat_global_tear_down = re.compile(r'^.*TEST_GLOBAL_TEAR_DOWN.*$')
+pat_test = re.compile(r'^\s*TEST\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+)\).*$')
+pat_test_cond = re.compile(r'^\s*TEST_COND\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+), *([a-zA-Z0-9_ ]+)\).*$')
+pat_test_tear_down = re.compile(r'^\s*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
+pat_test_explicit = re.compile(r'^\s*TEST_EXPLICIT\(([a-zA-Z0-9_]+) *\).*$')
+pat_global_tear_down = re.compile(r'^\s*TEST_GLOBAL_TEAR_DOWN.*$')
 pat_define = re.compile(r'^ *# *define +PDDL_([A-Z_0-9]+).*$')
 
 CONFIG = []
@@ -124,28 +124,40 @@ def genChildArrays():
                 .format(key, len(ch), ', '.join([str(x) for x in ch])))
 
 def genTestDef(idx, name, test):
-    print('    {{{0}'.format(idx), end = '')
+    print('    {', end = '')
+
+    # .id
+    print('{0}'.format(idx), end = '')
+
+    # .name and .fn
     print(', "{0}", test_{0}'.format(name), end = '')
 
+    # .fn_tear_down
     if test['tear-down']:
         print(', test_tear_down_{0}'.format(name), end = '')
     else:
         print(', NULL', end = '')
 
+    # .parent
     if test['dep'] is not None and test['dep'] != '_':
         print(', {0}'.format(Test[test['dep']]['id']), end = '')
     else:
         print(', -1', end = '')
 
+    # .children and .children_size
     if len(test['child']) > 0:
         print(', _test_{0}__child, {1}'.format(name, len(test['child'])), end = '')
     else:
         print(', NULL, 0', end = '')
 
+    # .is_explicit
     if test['explicit']:
         print(', 1', end = '')
     else:
         print(', 0', end = '')
+
+    # .enabled
+    print(', 0', end = '');
     print('},')
 
 def genDefs():

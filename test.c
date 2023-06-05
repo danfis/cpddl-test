@@ -65,13 +65,17 @@ static void usage(const char *progname)
                     " [-D] [-p num-parallel] [-m timeout-sec]"
                     " [-f]\n",
                     progname);
-    fprintf(stderr, "  -a       Use all tasks\n");
+    fprintf(stderr, "  -a       Enable all tests\n");
+    fprintf(stderr, "  -B       Enable base tasks\n");
+    fprintf(stderr, "  -A       Enable all tasks\n");
     fprintf(stderr, "  -v       Increase logging\n");
-    fprintf(stderr, "  -S  str  Restrict tasks to those containing str\n");
-    fprintf(stderr, "  -T  str  Restrict tasks to exactly str\n");
-    fprintf(stderr, "  -s  str  Restrict tests to those containing str\n");
-    fprintf(stderr, "  -t  str  Restrict tests to exactly str\n");
+    fprintf(stderr, "  -S  str  Enable tasks containing str\n");
+    fprintf(stderr, "  -T  str  Enable tasks exactly equal to str\n");
+    fprintf(stderr, "  -s  str  Enable tests containing str\n");
+    fprintf(stderr, "  -t  str  Enable tests exactly equal to str\n");
     fprintf(stderr, "  -D       Print tree of tasks and tests\n");
+    fprintf(stderr, "  -L       Print tasks\n");
+    fprintf(stderr, "  -K       Print tests\n");
     fprintf(stderr, "  -p  int  Run specified number of tasks in parallel"
             " (default: %d)\n", DEFAULT_PARALLEL);
     fprintf(stderr, "  -m  int  Timeout in seconds (default: %d)\n",
@@ -82,23 +86,32 @@ static void usage(const char *progname)
 
 static void parseOptions(int argc, char *argv[])
 {
+    int print_plan = 0;
+    int print_tasks = 0;
+    int print_tests = 0;
     int opt;
-    while ((opt = getopt(argc, argv, "havS:T:s:t:p:Dm:f")) != -1) {
+    while ((opt = getopt(argc, argv, "haBAvS:T:s:t:p:DLKm:f")) != -1) {
         switch (opt) {
             case 'a':
-                tasksTestsSelectAll();
+                tasksTestsEnableAllTests();
+                break;
+            case 'B':
+                tasksTestsEnableAllTasks(1);
+                break;
+            case 'A':
+                tasksTestsEnableAllTasks(0);
                 break;
             case 'S':
-                tasksTestsSelectTasksMatch(optarg);
+                tasksTestsEnableTaskMatch(optarg);
                 break;
             case 'T':
-                tasksTestsSelectTask(optarg);
+                tasksTestsEnableTaskEq(optarg);
                 break;
             case 's':
-                tasksTestsSelectTestsMatch(optarg);
+                tasksTestsEnableTestMatch(optarg);
                 break;
             case 't':
-                tasksTestsSelectTest(optarg);
+                tasksTestsEnableTestEq(optarg);
                 break;
             case 'v':
                 verbose++;
@@ -107,7 +120,13 @@ static void parseOptions(int argc, char *argv[])
                 parallel = atoi(optarg);
                 break;
             case 'D':
-                tasksTestsPrintPlan();
+                print_plan = 1;
+                break;
+            case 'L':
+                print_tasks = 1;
+                break;
+            case 'K':
+                print_tests = 1;
                 break;
             case 'm':
                 timeout_s = atoi(optarg);
@@ -121,6 +140,28 @@ static void parseOptions(int argc, char *argv[])
     }
     if (optind != argc)
         usage(argv[0]);
+
+    if (print_plan){
+        printf("Enabled Tasks: %d / %d\n",
+               tasksTestsNumEnabledTasks(),
+               tasksTestsNumTasks());
+        printf("Enabled Tests: %d / %d\n",
+               tasksTestsNumEnabledTests(),
+               tasksTestsNumTests());
+        printf("Num jobs: %d\n", tasksTestsNumEnabledJobs());
+        tasksTestsPrintPlan();
+        exit(0);
+    }
+
+    if (print_tasks){
+        tasksTestsPrintTasks();
+        exit(0);
+    }
+
+    if (print_tests){
+        tasksTestsPrintTests();
+        exit(0);
+    }
 
     if (parallel < 1)
         parallel = DEFAULT_PARALLEL;
@@ -385,7 +426,8 @@ static void *thTimeout(void *_)
 
 static void runTest(int task_id, const test_def_t *test)
 {
-    progress();
+    if (verbose == 0)
+        progress();
     fflush(stdout);
     fflush(stderr);
     int pid = fork();
@@ -423,12 +465,29 @@ static void runTest(int task_id, const test_def_t *test)
             runTest(task_id, tasksTestsGetTest(test->children[i]));
         }
 
+        if (verbose > 3){
+            sem_wait(lock);
+            fprintf(stderr, "Tear-Down of test %s on task %s running in"
+                    " process %d (global tear down: %s)\n",
+                    test->name, TEST_TASK, (int)getpid(),
+                    (global_tear_down != NULL ? "yes" : "no"));
+            fflush(stderr);
+            sem_post(lock);
+        }
         tearDown(test);
         if (global_tear_down != NULL)
             global_tear_down();
         exit(0);
 
     }else{
+        if (verbose > 2){
+            sem_wait(lock);
+            fprintf(stderr, "Test %s on task %s running in process %d\n",
+                    test->name, TEST_TASK, (int)pid);
+            fflush(stderr);
+            sem_post(lock);
+        }
+
         int status;
         wait(&status);
 
@@ -667,8 +726,12 @@ int main(int argc, char *argv[])
     num_tasks = tasksTestsNumTasks();
     num_tests = tasksTestsNumTests();
 
-    printf("tasks: %d/%d, tests: %d, parallel: %d, timeout: %ds\n",
-           tasksTestsNumActiveTasks(), num_tasks, num_tests,
+    printf("tasks: %d/%d, tests: %d/%d, jobs: %d, parallel: %d, timeout: %ds\n",
+           tasksTestsNumEnabledTasks(),
+           tasksTestsNumTasks(),
+           tasksTestsNumEnabledTests(),
+           tasksTestsNumTests(),
+           tasksTestsNumEnabledJobs(),
            parallel, timeout_s);
     fflush(stdout);
 
@@ -701,7 +764,7 @@ int main(int argc, char *argv[])
         sem_wait(lock);
         *tasks_processed += 1;
         sem_post(lock);
-        if (!tasksTestsIsEnabled(task_id, -1))
+        if (!tasksTestsTaskIsEnabled(task_id))
             continue;
 
         if (num_active_workers == parallel){
