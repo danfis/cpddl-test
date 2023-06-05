@@ -8,6 +8,19 @@ TOPDIR ?= ..
 -include $(TOPDIR)/Makefile.config
 include $(TOPDIR)/Makefile.include
 
+VALGRIND ?= valgrind
+VALGRIND_MEMLEAK_OPTS  = --quiet
+VALGRIND_MEMLEAK_OPTS += --leak-check=full --show-reachable=yes --show-leak-kinds=all
+VALGRIND_MEMLEAK_OPTS += --trace-children=yes --error-limit=no
+VALGRIND_MEMLEAK_OPTS += --trace-children-skip-by-arg=find*,diff*,cat*,head*,*validate*
+VALGRIND_MEMLEAK_OPTS += --trace-children-skip=*minizinc*,/usr/bin/ls
+VALGRIND_MEMLEAK_OPTS += --suppressions=test.supp
+#VALGRIND_MEMLEAK_OPTS += --gen-suppressions=yes
+
+VALGRIND_SEGFAULT_OPTS  = --quiet
+VALGRIND_SEGFAULT_OPTS += --trace-children=yes --error-limit=no
+VALGRIND_SEGFAULT_OPTS += --suppressions=test.supp
+
 CFLAGS += -I./
 
 CHECK_REG=cu/cu-check-regressions
@@ -79,28 +92,14 @@ pddl-data/test-seq/test/domain.pddl:
 	git submodule update -- pddl-data
 
 check-valgrind: all clean-reg
-	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
-             --trace-children=yes --error-limit=no \
-             --child-silent-after-fork=yes \
-             --suppressions=test.supp \
-             ./test $(T) 2>&1 | tee check.log | bash scripts/filter-valgrind.sh
+	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
 check-all-valgrind: all clean-reg
-	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all \
-             --trace-children=yes --error-limit=no \
-             --child-silent-after-fork=yes \
-             --suppressions=test.supp \
-             ./test -a $(T) 2>&1 | tee check.log | bash scripts/filter-valgrind.sh
+	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test -a $(T) -vvv -p 1 2>&1 | tee check.log
 
 check-segfault: all clean-reg
-	valgrind -q --trace-children=yes \
-             --error-limit=no \
-             --suppressions=test.supp \
-             ./test $(T) 2>&1 | tee check.log
+	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
 check-all-segfault: all clean-reg
-	valgrind -q --trace-children=yes \
-             --error-limit=no \
-             --suppressions=test.supp \
-             ./test -a $(T) 2>&1 | tee check.log
+	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test -a $(T) -vvv -p 1 2>&1 | tee check.log
 
 check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test $(T)
