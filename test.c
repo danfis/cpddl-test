@@ -48,6 +48,7 @@ struct progress_info {
     char task[PROGRESS_STR_MAX_SIZE + 1];
     char test[PROGRESS_STR_MAX_SIZE + 1];
     pddl_timer_t timer;
+    int in_progress;
 };
 typedef struct progress_info progress_info_t;
 
@@ -230,7 +231,8 @@ static void progress(void)
         printf(" ");
     printf("\n");
     for (int i = 0; i < parallel; ++i){
-        pddlTimerStop(&progress_info[i].timer);
+        if (progress_info[i].in_progress)
+            pddlTimerStop(&progress_info[i].timer);
         cnt = printf("%d: %-50s :: %-50s :: %.2fs", i, progress_info[i].task,
                      progress_info[i].test,
                      pddlTimerElapsedInSF(&progress_info[i].timer));
@@ -484,6 +486,7 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         strncpy(progress_info[worker->id].task, TEST_TASK, PROGRESS_STR_MAX_SIZE);
         strncpy(progress_info[worker->id].test, test->name, PROGRESS_STR_MAX_SIZE);
         pddlTimerStart(&progress_info[worker->id].timer);
+        progress_info[worker->id].in_progress = 1;
         sem_post(&shared->lock);
         test->fn();
 
@@ -497,6 +500,8 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
 
         sem_wait(&shared->lock);
         shared->jobs_done += 1;
+        pddlTimerStop(&progress_info[worker->id].timer);
+        progress_info[worker->id].in_progress = 0;
         sem_post(&shared->lock);
 
         for (int i = 0; i < test->children_size; ++i){
