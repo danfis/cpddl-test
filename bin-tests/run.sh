@@ -42,6 +42,34 @@ cat tasks-lplan-lazy-add-sql.txt | shuf | $select \
         || exit_status=1
 
 
+
+cat tasks-gplan-gbfs-ff.txt | shuf | $select \
+    | bash ./test-search.sh ${PDDL} -G dl --gplan gbfs --gplan-h ff \
+        || exit_status=1
+
+cat tasks-gplan-gbfs-ff-sql.txt | shuf | $select \
+    | bash ./test-search.sh ${PDDL} -G sql --gplan gbfs --gplan-h ff \
+        || exit_status=1
+
+cat tasks-gplan-gbfs-add.txt | shuf | $select \
+    | bash ./test-search.sh ${PDDL} -G dl --gplan gbfs --gplan-h add \
+        || exit_status=1
+
+cat tasks-gplan-gbfs-add-sql.txt | shuf | $select \
+    | bash ./test-search.sh ${PDDL} -G sql --gplan gbfs --gplan-h add \
+        || exit_status=1
+
+cat tasks-lplan-gbfs-add.txt | shuf | $select \
+    | bash ./test-search.sh ${PDDL} --lplan gbfs --lplan-h hadd \
+        || exit_status=1
+
+cat tasks-lplan-gbfs-add-sql.txt | shuf | $select \
+    | bash ./test-search.sh ${PDDL} --lplan gbfs --lplan-h hadd \
+        --lplan-succ-gen sql \
+        || exit_status=1
+
+
+
 cat tasks-gplan-astar-blind.txt | shuf | $select \
     | bash ./test-search.sh --optimal ${PDDL} --gplan astar \
         || exit_status=1
