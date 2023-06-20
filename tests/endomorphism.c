@@ -107,7 +107,7 @@ static pddl_iset_t redundant;
 
 static void tEndomorphismFDR(int ignore_costs)
 {
-    pddlErrInfoEnable(&C.err, stderr);
+    pddlErrLogEnable(&C.err, stderr);
     pddlISetInit(&redundant);
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
     cfg.ignore_costs = ignore_costs;

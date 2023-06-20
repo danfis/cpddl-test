@@ -6,7 +6,7 @@
 TEST_EXPLICIT(subprocess_execvp)
 {
     pddl_err_t err = PDDL_ERR_INIT;
-    pddlErrInfoEnable(&err, stderr);
+    pddlErrLogEnable(&err, stderr);
 
     char *const argv[] = {
         "cat",

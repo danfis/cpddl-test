@@ -724,11 +724,11 @@ TEST_COND(lmg_compile_in, lmg, SQLITE)
 
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
-    pddlErrInfoDisablePrintResources(&C.err, 1);
-    pddlErrInfoEnable(&C.err, stdout);
+    pddlErrLogDisablePrintResources(&C.err, 1);
+    pddlErrLogEnable(&C.err, stdout);
     if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &cfg, &C.err))
         pddlPrintDebug(&pddl, stdout);
-    pddlErrInfoEnable(&C.err, NULL);
+    pddlErrLogEnable(&C.err, NULL);
     fflush(stdout);
 
     pddl_strips_t strips_ref;

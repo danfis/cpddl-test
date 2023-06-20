@@ -22,7 +22,7 @@ TEST(strips, lmg)
     PDDL_ISET(rm_fact);
     PDDL_ISET(rm_op);
     if (pddlIrrelevanceAnalysis(&C.strips, &rm_fact, &rm_op, NULL, &C.err) != 0){
-        PDDL_INFO(&C.err, "Irrelevance analysis failed.");
+        PDDL_LOG(&C.err, "Irrelevance analysis failed.");
         fprintf(stderr, "Error: ");
         pddlErrPrint(&C.err, 1, stderr);
         return;

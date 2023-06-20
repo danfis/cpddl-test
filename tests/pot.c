@@ -203,7 +203,7 @@ TEST_COND(hpot, fdr, LP)
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
     pddlH2(&mg_strips.strips, &mutex, NULL, NULL, -1, &C.err);
 
-    pddlErrInfoEnable(&C.err, stderr);
+    pddlErrLogEnable(&C.err, stderr);
     //pddlLPSetDefault(PDDL_LP_GUROBI, NULL);
     hcfg.fdr = &C.fdr;
     hcfg.mg_strips = &mg_strips;
