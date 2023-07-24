@@ -31,10 +31,10 @@ Function[1]:
 Action[2]:
     analyze-4: ?s1:1 ?s2:1 ?s3:1 ?s4:1 ?c1:2 ?c2:2 ?c3:2 ?c4:2
         pre: (and (R:cycle-4-with-analysis ?s1 ?s2 ?s3 ?s4) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (RW:on ?c3 ?s3) (RW:on ?c4 ?s4))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (N:RW:on ?c3 ?s3) (N:RW:on ?c4 ?s4) (RW:on ?c1 ?s4) (RW:on ?c2 ?s1) (RW:on ?c3 ?s2) (RW:on ?c4 ?s3) (W:analyzed ?c1) (increase (total-cost) 3))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s4) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c3 ?s2) (N:RW:on ?c3 ?s3) (RW:on ?c4 ?s3) (N:RW:on ?c4 ?s4) (W:analyzed ?c1) (increase (total-cost) 3))
     rotate-4: ?s1:1 ?s2:1 ?s3:1 ?s4:1 ?c1:2 ?c2:2 ?c3:2 ?c4:2
         pre: (and (R:cycle-4 ?s1 ?s2 ?s3 ?s4) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (RW:on ?c3 ?s3) (RW:on ?c4 ?s4))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (N:RW:on ?c3 ?s3) (N:RW:on ?c4 ?s4) (RW:on ?c1 ?s4) (RW:on ?c2 ?s1) (RW:on ?c3 ?s2) (RW:on ?c4 ?s3) (increase (total-cost) 1))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s4) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c3 ?s2) (N:RW:on ?c3 ?s3) (RW:on ?c4 ?s3) (N:RW:on ?c4 ?s4) (increase (total-cost) 1))
 Init[6]:
   S:(cycle-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b)
   S:(cycle-4-with-analysis seg-in-1a seg-in-1b seg-out-1a seg-out-1b)
@@ -44,5 +44,5 @@ Init[6]:
   (on car-out-1b seg-out-1b)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:analyzed car-in-1a) (W:analyzed car-in-1b) (W:analyzed car-out-1a) (W:analyzed car-out-1b) (RW:on car-in-1a seg-out-1b) (RW:on car-in-1b seg-in-1a) (RW:on car-out-1a seg-in-1b) (RW:on car-out-1b seg-out-1a))
+Goal: (and (RW:on car-in-1a seg-out-1b) (RW:on car-in-1b seg-in-1a) (RW:on car-out-1a seg-in-1b) (RW:on car-out-1b seg-out-1a) (W:analyzed car-in-1a) (W:analyzed car-in-1b) (W:analyzed car-out-1a) (W:analyzed car-out-1b))
 Metric: 1

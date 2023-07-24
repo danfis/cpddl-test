@@ -33,17 +33,17 @@ Predicate[8]:
 Function[0]:
 Action[4]:
     move-up: ?t:0 ?px:0 ?py:0 ?by:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?px ?by) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (RW:at ?t ?px ?py) (RW:blank ?px ?by))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?px ?by) (RW:blank ?px ?py) (N:RW:blank ?px ?by))
     move-down: ?t:0 ?px:0 ?py:0 ?by:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?px ?by) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (RW:at ?t ?px ?py) (RW:blank ?px ?by))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?px ?by) (RW:blank ?px ?py) (N:RW:blank ?px ?by))
     move-left: ?t:0 ?px:0 ?py:0 ?bx:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:dec ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?bx ?py) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:xposition ?bx) (R:yposition ?py) (R:dec ?bx ?px) (RW:at ?t ?px ?py) (RW:blank ?bx ?py))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?bx ?py) (RW:blank ?px ?py) (N:RW:blank ?bx ?py))
     move-right: ?t:0 ?px:0 ?py:0 ?bx:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:inc ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?bx ?py) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+        pre: (and (R:tile ?t) (R:xposition ?px) (R:xposition ?bx) (R:yposition ?py) (R:inc ?bx ?px) (RW:at ?t ?px ?py) (RW:blank ?bx ?py))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?bx ?py) (RW:blank ?px ?py) (N:RW:blank ?bx ?py))
 Init[36]:
   S:(tile t1)
   S:(tile t2)
@@ -70,17 +70,17 @@ Init[36]:
   S:(dec p3 p2)
   S:(dec p4 p3)
   (at t1 p1 p1)
-  (at t7 p2 p1)
-  (at t3 p3 p1)
-  (at t10 p1 p2)
-  (at t4 p2 p2)
-  (at t6 p3 p2)
-  (at t11 p1 p3)
-  (at t9 p2 p3)
-  (blank p3 p3)
-  (at t8 p1 p4)
   (at t2 p2 p4)
+  (at t3 p3 p1)
+  (at t4 p2 p2)
   (at t5 p3 p4)
+  (at t6 p3 p2)
+  (at t7 p2 p1)
+  (at t8 p1 p4)
+  (at t9 p2 p3)
+  (at t10 p1 p2)
+  (at t11 p1 p3)
+  (blank p3 p3)
 Init[0]:
 Goal: (and (RW:at t1 p2 p1) (RW:at t2 p3 p1) (RW:at t3 p1 p2) (RW:at t4 p2 p2) (RW:at t5 p3 p2) (RW:at t6 p1 p3) (RW:at t7 p2 p3) (RW:at t8 p3 p3) (RW:at t9 p1 p4) (RW:at t10 p2 p4) (RW:at t11 p3 p4))
 Metric: 0

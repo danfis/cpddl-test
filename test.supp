@@ -84,6 +84,15 @@
    fun:(below main)
 }
 {
+   cplex3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znwm
+   fun:_Z31IlcThreadGetOrCreateGlobalMutexv
+   fun:__libc_csu_init
+   fun:(below main)
+}
+{
    diff
    Memcheck:Leak
    match-leak-kinds: reachable

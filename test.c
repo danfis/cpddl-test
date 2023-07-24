@@ -14,9 +14,10 @@
 #include "pddl/pddl.h"
 #include "tasks_tests.h"
 
-#define MAX_PROGRESS_STEPS 30
 #define DEFAULT_PARALLEL 6
 #define DEFAULT_TIMEOUT 180
+#define PROGRESS_COLUMNS 180
+#define PROGRESS_STR_MAX_SIZE 50
 
 const char *TEST_TASK = NULL;
 
@@ -35,17 +36,35 @@ struct worker {
 };
 typedef struct worker worker_t;
 
+struct shared {
+    int jobs_done;
+    int jobs_tear_down_done;
+    int tasks_done;
+    sem_t lock;
+};
+typedef struct shared shared_t;
+
+struct progress_info {
+    char task[PROGRESS_STR_MAX_SIZE + 1];
+    char test[PROGRESS_STR_MAX_SIZE + 1];
+    pddl_timer_t timer;
+    int in_progress;
+};
+typedef struct progress_info progress_info_t;
+
 static void (*global_tear_down)(void) = NULL;
 
 static int num_tasks;
 static int num_tests;
-static int *progress_step;
-static int *tasks_processed;
-static sem_t *lock;
+static int num_enabled_tasks;
+static int num_enabled_jobs;
+static shared_t *shared = NULL;
+static progress_info_t *progress_info = NULL;
 static test_stat_t *test_stat = NULL;
 static worker_t *worker;
 
 static int verbose = 0;
+static int no_progress = 0;
 static int parallel = DEFAULT_PARALLEL;
 static int timeout_s = DEFAULT_TIMEOUT;
 static int supress_fail = 0;
@@ -65,13 +84,18 @@ static void usage(const char *progname)
                     " [-D] [-p num-parallel] [-m timeout-sec]"
                     " [-f]\n",
                     progname);
-    fprintf(stderr, "  -a       Use all tasks\n");
-    fprintf(stderr, "  -v       Increase logging\n");
-    fprintf(stderr, "  -S  str  Restrict tasks to those containing str\n");
-    fprintf(stderr, "  -T  str  Restrict tasks to exactly str\n");
-    fprintf(stderr, "  -s  str  Restrict tests to those containing str\n");
-    fprintf(stderr, "  -t  str  Restrict tests to exactly str\n");
+    fprintf(stderr, "  -a       Enable all tests\n");
+    fprintf(stderr, "  -B       Enable base tasks\n");
+    fprintf(stderr, "  -A       Enable all tasks\n");
+    fprintf(stderr, "  -v       Increase logging (e.g., -vvv)\n");
+    fprintf(stderr, "  -x       Turn off progress\n");
+    fprintf(stderr, "  -S  str  Enable tasks containing str\n");
+    fprintf(stderr, "  -T  str  Enable tasks exactly equal to str\n");
+    fprintf(stderr, "  -s  str  Enable tests containing str\n");
+    fprintf(stderr, "  -t  str  Enable tests exactly equal to str\n");
     fprintf(stderr, "  -D       Print tree of tasks and tests\n");
+    fprintf(stderr, "  -L       Print tasks\n");
+    fprintf(stderr, "  -K       Print tests\n");
     fprintf(stderr, "  -p  int  Run specified number of tasks in parallel"
             " (default: %d)\n", DEFAULT_PARALLEL);
     fprintf(stderr, "  -m  int  Timeout in seconds (default: %d)\n",
@@ -82,32 +106,50 @@ static void usage(const char *progname)
 
 static void parseOptions(int argc, char *argv[])
 {
+    int print_plan = 0;
+    int print_tasks = 0;
+    int print_tests = 0;
     int opt;
-    while ((opt = getopt(argc, argv, "havS:T:s:t:p:Dm:f")) != -1) {
+    while ((opt = getopt(argc, argv, "haBAvxS:T:s:t:p:DLKm:f")) != -1) {
         switch (opt) {
             case 'a':
-                tasksTestsSelectAll();
+                tasksTestsEnableAllTests();
+                break;
+            case 'B':
+                tasksTestsEnableAllTasks(1);
+                break;
+            case 'A':
+                tasksTestsEnableAllTasks(0);
                 break;
             case 'S':
-                tasksTestsSelectTasksMatch(optarg);
+                tasksTestsEnableTaskMatch(optarg);
                 break;
             case 'T':
-                tasksTestsSelectTask(optarg);
+                tasksTestsEnableTaskEq(optarg);
                 break;
             case 's':
-                tasksTestsSelectTestsMatch(optarg);
+                tasksTestsEnableTestMatch(optarg);
                 break;
             case 't':
-                tasksTestsSelectTest(optarg);
+                tasksTestsEnableTestEq(optarg);
                 break;
             case 'v':
                 verbose++;
+                break;
+            case 'x':
+                no_progress = 1;
                 break;
             case 'p':
                 parallel = atoi(optarg);
                 break;
             case 'D':
-                tasksTestsPrintPlan();
+                print_plan = 1;
+                break;
+            case 'L':
+                print_tasks = 1;
+                break;
+            case 'K':
+                print_tests = 1;
                 break;
             case 'm':
                 timeout_s = atoi(optarg);
@@ -122,6 +164,28 @@ static void parseOptions(int argc, char *argv[])
     if (optind != argc)
         usage(argv[0]);
 
+    if (print_plan){
+        printf("Enabled Tasks: %d / %d\n",
+               tasksTestsNumEnabledTasks(),
+               tasksTestsNumTasks());
+        printf("Enabled Tests: %d / %d\n",
+               tasksTestsNumEnabledTests(),
+               tasksTestsNumTests());
+        printf("Num jobs: %d\n", tasksTestsNumEnabledJobs());
+        tasksTestsPrintPlan();
+        exit(0);
+    }
+
+    if (print_tasks){
+        tasksTestsPrintTasks();
+        exit(0);
+    }
+
+    if (print_tests){
+        tasksTestsPrintTests();
+        exit(0);
+    }
+
     if (parallel < 1)
         parallel = DEFAULT_PARALLEL;
     if (timeout_s < 1)
@@ -130,92 +194,102 @@ static void parseOptions(int argc, char *argv[])
 
 static void updateTestStatRun(int test_id)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     test_stat[test_id].run = 1;
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void updateTestStatTime(int test_id, float time)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     test_stat[test_id].time += time;
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void updateTestStatFailed(int test_id)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     test_stat[test_id].failed += 1;
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void updateTestStatSucceeded(int test_id)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     test_stat[test_id].succeeded += 1;
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void progress(void)
 {
-    sem_wait(lock);
-    int i;
-    fprintf(stdout, "%d/%d", *tasks_processed, num_tasks);
-    for (i = 0; i < *progress_step; ++i)
-        fprintf(stdout, "*");
-    for (; i < MAX_PROGRESS_STEPS; ++i)
-        fprintf(stdout, " ");
-    fprintf(stdout, "\r");
+    sem_wait(&shared->lock);
+    int cnt = printf("Done: tasks %d / %d, jobs %d / %d, tear-down: %d / %d",
+                     shared->tasks_done, num_enabled_tasks,
+                     shared->jobs_done, num_enabled_jobs,
+                     shared->jobs_tear_down_done, num_enabled_jobs);
+    for (; cnt < PROGRESS_COLUMNS; ++cnt)
+        printf(" ");
+    printf("\n");
+    for (int i = 0; i < parallel; ++i){
+        if (progress_info[i].in_progress)
+            pddlTimerStop(&progress_info[i].timer);
+        cnt = printf("%d: %-50s :: %-50s :: %.2fs", i, progress_info[i].task,
+                     progress_info[i].test,
+                     pddlTimerElapsedInSF(&progress_info[i].timer));
+        for (; cnt < PROGRESS_COLUMNS; ++cnt)
+            printf(" ");
+        printf("\n");
+    }
+    printf("\033[%dA", parallel + 1);
     fflush(stdout);
-    (*progress_step) = ((*progress_step) + 1) % MAX_PROGRESS_STEPS;
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void reportSignal(const char *task_name,
                          const char *test_name,
                          int status)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated by signal %d (%s).\n",
             task_name, test_name,
             WTERMSIG(status), strsignal(WTERMSIG(status)));
     fflush(stdout);
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void reportAbnormal(const char *task_name, const char *test_name)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated abnormaly!\n", task_name, test_name);
     fflush(stdout);
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void reportExitStatus(const char *task_name, const char *test_name,
                              int exit_status)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated with exit status %d.\n",
             task_name, test_name, exit_status);
     fflush(stdout);
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void reportNonEmptyOut(const char *task_name, const char *test_name)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: non-empty *.out.tmp file.\n",
             task_name, test_name);
     fflush(stdout);
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static void reportDiffOut(const char *task_name, const char *test_name)
 {
-    sem_wait(lock);
+    sem_wait(&shared->lock);
     fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: diff on .out files.\n", task_name, test_name);
     fflush(stdout);
-    sem_post(lock);
+    sem_post(&shared->lock);
 }
 
 static int fmtFilename(const char *task_name,
@@ -383,9 +457,10 @@ static void *thTimeout(void *_)
     return NULL;
 }
 
-static void runTest(int task_id, const test_def_t *test)
+static void runTest(worker_t *worker, int task_id, const test_def_t *test)
 {
-    progress();
+    if (verbose == 0 && !no_progress)
+        progress();
     fflush(stdout);
     fflush(stderr);
     int pid = fork();
@@ -407,6 +482,12 @@ static void runTest(int task_id, const test_def_t *test)
         pthread_t thtimeout;
         pthread_create(&thtimeout, NULL, thTimeout, NULL);
 
+        sem_wait(&shared->lock);
+        strncpy(progress_info[worker->id].task, TEST_TASK, PROGRESS_STR_MAX_SIZE);
+        strncpy(progress_info[worker->id].test, test->name, PROGRESS_STR_MAX_SIZE);
+        pddlTimerStart(&progress_info[worker->id].timer);
+        progress_info[worker->id].in_progress = 1;
+        sem_post(&shared->lock);
         test->fn();
 
         pthread_cancel(thtimeout);
@@ -417,18 +498,45 @@ static void runTest(int task_id, const test_def_t *test)
 
         restoreStdOutErr(fd_stdout, fd_stderr);
 
+        sem_wait(&shared->lock);
+        shared->jobs_done += 1;
+        pddlTimerStop(&progress_info[worker->id].timer);
+        progress_info[worker->id].in_progress = 0;
+        sem_post(&shared->lock);
+
         for (int i = 0; i < test->children_size; ++i){
             if (!tasksTestsIsEnabled(task_id, test->children[i]))
                 continue;
-            runTest(task_id, tasksTestsGetTest(test->children[i]));
+            runTest(worker, task_id, tasksTestsGetTest(test->children[i]));
         }
 
+        if (verbose > 3){
+            sem_wait(&shared->lock);
+            fprintf(stderr, "Tear-Down of test %s on task %s running in"
+                    " process %d (global tear down: %s)\n",
+                    test->name, TEST_TASK, (int)getpid(),
+                    (global_tear_down != NULL ? "yes" : "no"));
+            fflush(stderr);
+            sem_post(&shared->lock);
+        }
         tearDown(test);
         if (global_tear_down != NULL)
             global_tear_down();
+
+        sem_wait(&shared->lock);
+        shared->jobs_tear_down_done += 1;
+        sem_post(&shared->lock);
         exit(0);
 
     }else{
+        if (verbose > 2){
+            sem_wait(&shared->lock);
+            fprintf(stderr, "Test %s on task %s running in process %d\n",
+                    test->name, TEST_TASK, (int)pid);
+            fflush(stderr);
+            sem_post(&shared->lock);
+        }
+
         int status;
         wait(&status);
 
@@ -494,7 +602,7 @@ static int _runWorker(worker_t *worker, int task_id)
             const test_def_t *test = tasksTestsGetTest(ti);
             assert(test->id == ti);
             if (test->parent < 0 && tasksTestsIsEnabled(task_id, ti)){
-                runTest(task_id, test);
+                runTest(worker, task_id, test);
             }
         }
 
@@ -502,11 +610,11 @@ static int _runWorker(worker_t *worker, int task_id)
 
     }else{ // pid > 0
         if (verbose >= 1){
-            sem_wait(lock);
+            sem_wait(&shared->lock);
             printf("Task %s | worker: %d, pid: %d\n",
                    tasksTestsGetTaskName(task_id), worker->id, (int)pid);
             fflush(stdout);
-            sem_post(lock);
+            sem_post(&shared->lock);
         }
         worker->pid = pid;
         return 1;
@@ -527,12 +635,12 @@ static int _waitForWorker(worker_t *worker, int status)
     assert(worker->task_id >= 0);
     assert(worker->pid >= 0);
     if (verbose >= 1){
-        sem_wait(lock);
+        sem_wait(&shared->lock);
         printf("Task %s | worker: %d, pid: %d | DONE\n",
                tasksTestsGetTaskName(worker->task_id), worker->id,
                (int)worker->pid);
         fflush(stdout);
-        sem_post(lock);
+        sem_post(&shared->lock);
     }
     worker->pid = -1;
     worker->task_id = -1;
@@ -666,28 +774,32 @@ int main(int argc, char *argv[])
 
     num_tasks = tasksTestsNumTasks();
     num_tests = tasksTestsNumTests();
+    num_enabled_tasks = tasksTestsNumEnabledTasks();
+    num_enabled_jobs = tasksTestsNumEnabledJobs();
 
-    printf("tasks: %d/%d, tests: %d, parallel: %d, timeout: %ds\n",
-           tasksTestsNumActiveTasks(), num_tasks, num_tests,
+    printf("tasks: %d/%d, tests: %d/%d, jobs: %d, parallel: %d, timeout: %ds\n",
+           tasksTestsNumEnabledTasks(),
+           tasksTestsNumTasks(),
+           tasksTestsNumEnabledTests(),
+           tasksTestsNumTests(),
+           tasksTestsNumEnabledJobs(),
            parallel, timeout_s);
     fflush(stdout);
 
     size_t shared_size = 0;
-    shared_size += sizeof(int);
-    shared_size += sizeof(int);
-    shared_size += sizeof(sem_t);
+    shared_size += sizeof(shared_t);
+    shared_size += sizeof(progress_info_t) * parallel;
     shared_size += sizeof(test_stat_t) * num_tests;
     void *shared_mem = mmap(NULL, shared_size, PROT_WRITE | PROT_READ,
                             MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     assert(shared_mem != NULL);
     bzero(shared_mem, shared_size);
-    progress_step = shared_mem;
-    tasks_processed = (int *)(progress_step + 1);
-    lock = (sem_t *)(tasks_processed + 1);
-    test_stat = (test_stat_t *)(lock + 1);
+    shared = shared_mem;
+    progress_info = (progress_info_t *)(shared + 1);
+    test_stat = (test_stat_t *)(progress_info + parallel);
 
     int ret;
-    ret = sem_init(lock, 1, 1);
+    ret = sem_init(&shared->lock, 1, 1);
     assert(ret == 0);
 
     worker = alloca(sizeof(worker_t) * parallel);
@@ -698,10 +810,7 @@ int main(int argc, char *argv[])
 
     int num_active_workers = 0;
     for (int task_id = 0; task_id < num_tasks; ++task_id){
-        sem_wait(lock);
-        *tasks_processed += 1;
-        sem_post(lock);
-        if (!tasksTestsIsEnabled(task_id, -1))
+        if (!tasksTestsTaskIsEnabled(task_id))
             continue;
 
         if (num_active_workers == parallel){
@@ -709,6 +818,10 @@ int main(int argc, char *argv[])
             --num_active_workers;
         }
         num_active_workers += runWorker(worker, task_id);
+
+        sem_wait(&shared->lock);
+        shared->tasks_done += 1;
+        sem_post(&shared->lock);
     }
 
     while (num_active_workers > 0){
@@ -718,7 +831,7 @@ int main(int argc, char *argv[])
 
     printReport();
 
-    ret = sem_destroy(lock);
+    ret = sem_destroy(&shared->lock);
     assert(ret == 0);
     ret = munmap(shared_mem, shared_size);
     assert(ret == 0);

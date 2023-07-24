@@ -23,4 +23,6 @@ extern const char *TEST_TASK;
 #define TEST_GLOBAL_TEAR_DOWN() \
     void __test_global_tear_down(void)
 
+#define XTEST(NAME, PARENT) \
+    void __disabled_test_##NAME(void)
 #endif /* __CPDDL_TEST_H__ */

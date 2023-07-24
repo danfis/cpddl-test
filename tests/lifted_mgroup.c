@@ -49,7 +49,7 @@ TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
 
     int pred_at = pddlPredsGet(&pddl.pred, "at");
@@ -174,7 +174,7 @@ TEST(lifted_mgroup_tests_tidybot, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
     int pred_base_obs = pddlPredsGet(&pddl.pred, "base-obstacle");
     int pred_gripper_empty = pddlPredsGet(&pddl.pred, "gripper-empty");
@@ -285,7 +285,7 @@ TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
     pddlCompileAwayCondEff(&pddl);
 
 
@@ -371,7 +371,7 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
 
     int pred_bond = pddlPredsGet(&pddl.pred, "bond");
@@ -472,7 +472,7 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl);
+    pddlNormalize(&pddl, &C.err);
 
     pddl_lifted_mgroup_t mg;
     pddl_fm_atom_t *atom;
@@ -724,11 +724,11 @@ TEST_COND(lmg_compile_in, lmg, SQLITE)
 
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
-    pddlErrInfoDisablePrintResources(&C.err, 1);
-    pddlErrInfoEnable(&C.err, stdout);
+    pddlErrLogDisablePrintResources(&C.err, 1);
+    pddlErrLogEnable(&C.err, stdout);
     if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &cfg, &C.err))
         pddlPrintDebug(&pddl, stdout);
-    pddlErrInfoEnable(&C.err, NULL);
+    pddlErrLogEnable(&C.err, NULL);
     fflush(stdout);
 
     pddl_strips_t strips_ref;
@@ -736,10 +736,10 @@ TEST_COND(lmg_compile_in, lmg, SQLITE)
     ground_cfg.lifted_mgroups = &C.lmg;
     ground_cfg.prune_op_pre_mutex = 1;
     ground_cfg.prune_op_dead_end = 1;
-    int ret = pddlStripsGround(&strips_ref, &C.pddl, &ground_cfg, &C.err);
+    int ret = pddlStripsGroundTrie(&strips_ref, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
 
-    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGround);
+    lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundTrie);
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundDatalog);
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundSql);
 

@@ -1,35 +1,18 @@
-< {NOT-created id_adomain}:=1:S
-, {NOT-created V0:object_type}
-, {NOT-created V0:observedschtask}:=1:S
-, {NOT-created V0:observedfile}
-, {NOT-created V0:observedtimedelta}:=1:S
-, {NOT-created V0:observedhost}:=1:S
+< {NOT-created V0:object_type}
 , {NOT-created V0:observedshare}
-, {NOT-created V0:observeddomainuser}:=1:S
-, {NOT-created V0:observeddomaincredential}:=1:S
 , {NOT-created V0:observedrat}
-, {knows V0:observedschtask, NOT-created V0:observedschtask}:=1:S
 , {knows V0:observedfile, NOT-created V0:observedfile}:=1
 , {knows V0:observedshare, NOT-created V0:observedshare}:=1
 , {knows V0:observedschtask, NOT-created V1:object_type}
-, {knows V0:observedschtask, NOT-created V1:observedschtask}:=1:S
-, {knows V0:observedschtask, NOT-created V1:observedfile}
-, {knows V0:observedschtask, NOT-created V1:observedtimedelta}:=1:S
-, {knows V0:observedschtask, NOT-created V1:observedhost}:=1:S
 , {knows V0:observedschtask, NOT-created V1:observedshare}
-, {knows V0:observedschtask, NOT-created V1:observeddomainuser}:=1:S
-, {knows V0:observedschtask, NOT-created V1:observeddomaincredential}:=1:S
 , {knows V0:observedschtask, NOT-created V1:observedrat}
 , {knows C1:observedschtask, NOT-created V0:object_type, knows C2:observedschtask}
-, {knows C1:observedschtask, NOT-created V0:observedfile, knows C2:observedschtask}
 , {knows C1:observedschtask, NOT-created V0:observedshare, knows C2:observedschtask}
 , {knows C1:observedschtask, NOT-created V0:observedrat, knows C2:observedschtask}
 , {created id_adomain, NOT-created V0:object_type}
-, {created id_adomain, NOT-created V0:observedfile}
 , {created id_adomain, NOT-created V0:observedshare}
 , {created id_adomain, NOT-created V0:observedrat}
 , {created V0:object_type, NOT-created V0:object_type}:=1
-, {created V0:observedfile, NOT-created V0:observedfile}:=1
 , {created V0:observedshare, NOT-created V0:observedshare}:=1
 , {created V0:observedrat, NOT-created V0:observedrat}:=1
 , {created C1:observedschtask, NOT-created V0:object_type, created C2:observedschtask}
@@ -37,11 +20,6 @@
 , {created C1:observedhost, NOT-created V0:object_type, created C2:observedhost}
 , {created C1:observeddomainuser, NOT-created V0:object_type, created C2:observeddomainuser}
 , {created C1:observeddomaincredential, NOT-created V0:object_type, created C2:observeddomaincredential}
-, {created C1:observedschtask, NOT-created V0:observedfile, created C2:observedschtask}
-, {created C1:observedtimedelta, NOT-created V0:observedfile, created C2:observedtimedelta}
-, {created C1:observedhost, NOT-created V0:observedfile, created C2:observedhost}
-, {created C1:observeddomainuser, NOT-created V0:observedfile, created C2:observeddomainuser}
-, {created C1:observeddomaincredential, NOT-created V0:observedfile, created C2:observeddomaincredential}
 , {created C1:observedschtask, NOT-created V0:observedshare, created C2:observedschtask}
 , {created C1:observedtimedelta, NOT-created V0:observedshare, created C2:observedtimedelta}
 , {created C1:observedhost, NOT-created V0:observedshare, created C2:observedhost}
@@ -52,108 +30,30 @@
 , {created C1:observedhost, NOT-created V0:observedrat, created C2:observedhost}
 , {created C1:observeddomainuser, NOT-created V0:observedrat, created C2:observeddomainuser}
 , {created C1:observeddomaincredential, NOT-created V0:observedrat, created C2:observeddomaincredential}
-, {knows_property V0:observedschtask C1:property, NOT-created V0:observedschtask, knows_property V0:observedschtask C2:property}:=1:S
 , {knows_property V0:observedfile V1:property, NOT-created V0:observedfile}
 , {knows_property V0:observedshare V1:property, NOT-created V0:observedshare}
 , {knows_property V0:observedschtask C2:property, NOT-created V1:object_type, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, NOT-created V1:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, NOT-created V1:observedfile, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, NOT-created V1:observedtimedelta, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, NOT-created V1:observedhost, knows_property V0:observedschtask C3:property}:=1:S
 , {knows_property V0:observedschtask C2:property, NOT-created V1:observedshare, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, NOT-created V1:observeddomainuser, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, NOT-created V1:observeddomaincredential, knows_property V0:observedschtask C3:property}:=1:S
 , {knows_property V0:observedschtask C2:property, NOT-created V1:observedrat, knows_property V0:observedschtask C3:property}
 , {knows_property C1:observedschtask C2:property, NOT-created V0:object_type, knows_property C3:observedschtask C4:property}
-, {knows_property C1:observedschtask C2:property, NOT-created V0:observedfile, knows_property C3:observedschtask C4:property}
 , {knows_property C1:observedschtask C2:property, NOT-created V0:observedshare, knows_property C3:observedschtask C4:property}
 , {knows_property C1:observedschtask C2:property, NOT-created V0:observedrat, knows_property C3:observedschtask C4:property}
 , {knows_property C2:observedschtask V0:property, NOT-created V1:object_type, knows_property C3:observedschtask V0:property}
-, {knows_property C2:observedschtask V0:property, NOT-created V1:observedschtask, knows_property C3:observedschtask V0:property}:=1:S
-, {knows_property C2:observedschtask V0:property, NOT-created V1:observedfile, knows_property C3:observedschtask V0:property}
-, {knows_property C2:observedschtask V0:property, NOT-created V1:observedtimedelta, knows_property C3:observedschtask V0:property}:=1:S
-, {knows_property C2:observedschtask V0:property, NOT-created V1:observedhost, knows_property C3:observedschtask V0:property}:=1:S
 , {knows_property C2:observedschtask V0:property, NOT-created V1:observedshare, knows_property C3:observedschtask V0:property}
-, {knows_property C2:observedschtask V0:property, NOT-created V1:observeddomainuser, knows_property C3:observedschtask V0:property}:=1:S
-, {knows_property C2:observedschtask V0:property, NOT-created V1:observeddomaincredential, knows_property C3:observedschtask V0:property}:=1:S
 , {knows_property C2:observedschtask V0:property, NOT-created V1:observedrat, knows_property C3:observedschtask V0:property}
 , {prop_src_host V0:observedshare C1:observedhost, NOT-created V0:observedshare, prop_src_host V0:observedshare C2:observedhost}:=1
-, {prop_host id_adomain V0:object_type, NOT-created id_adomain}:=1:S
-, {prop_host id_adomain C0:object_type, NOT-created id_adomain, prop_host id_adomain C1:object_type}:=1:S
 , {prop_host id_adomain V0:object_type, NOT-created V1:object_type}
-, {prop_host id_adomain V0:object_type, NOT-created V1:observedfile}
 , {prop_host id_adomain V0:object_type, NOT-created V1:observedrat}
 , {prop_host id_adomain C1:object_type, NOT-created V0:object_type, prop_host id_adomain C2:object_type}
-, {prop_host id_adomain C1:object_type, NOT-created V0:observedschtask, prop_host id_adomain C2:object_type}:=1:S
-, {prop_host id_adomain C1:object_type, NOT-created V0:observedfile, prop_host id_adomain C2:object_type}
-, {prop_host id_adomain C1:object_type, NOT-created V0:observedtimedelta, prop_host id_adomain C2:object_type}:=1:S
-, {prop_host id_adomain C1:object_type, NOT-created V0:observedhost, prop_host id_adomain C2:object_type}:=1:S
 , {prop_host id_adomain C1:object_type, NOT-created V0:observedshare, prop_host id_adomain C2:object_type}
-, {prop_host id_adomain C1:object_type, NOT-created V0:observeddomainuser, prop_host id_adomain C2:object_type}:=1:S
-, {prop_host id_adomain C1:object_type, NOT-created V0:observeddomaincredential, prop_host id_adomain C2:object_type}:=1:S
 , {prop_host id_adomain C1:object_type, NOT-created V0:observedrat, prop_host id_adomain C2:object_type}
-, {prop_host V0:object_type id_adomain, NOT-created id_adomain}:=1:S
-, {prop_host V0:observedfile id_adomain, NOT-created id_adomain}:=1:S
-, {prop_host V0:observedrat id_adomain, NOT-created id_adomain}:=1:S
-, {prop_host C0:observedrat id_adomain, NOT-created id_adomain, prop_host C1:observedrat id_adomain}:=1:S
 , {prop_host V0:object_type id_adomain, NOT-created V0:object_type}
 , {prop_host V0:observedrat id_adomain, NOT-created V0:observedrat}
 , {prop_host V0:object_type id_adomain, NOT-created V1:object_type}
-, {prop_host V0:object_type id_adomain, NOT-created V1:observedschtask}:=1:S
-, {prop_host V0:object_type id_adomain, NOT-created V1:observedfile}
-, {prop_host V0:object_type id_adomain, NOT-created V1:observedtimedelta}:=1:S
-, {prop_host V0:object_type id_adomain, NOT-created V1:observedhost}:=1:S
 , {prop_host V0:object_type id_adomain, NOT-created V1:observedshare}
-, {prop_host V0:object_type id_adomain, NOT-created V1:observeddomainuser}:=1:S
-, {prop_host V0:object_type id_adomain, NOT-created V1:observeddomaincredential}:=1:S
 , {prop_host V0:object_type id_adomain, NOT-created V1:observedrat}
 , {prop_host V0:observedfile id_adomain, NOT-created V1:object_type}
 , {prop_host V0:observedrat id_adomain, NOT-created V1:object_type}
-, {prop_host V0:object_type V1:observedschtask, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type V1:observedfile, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type V1:observedtimedelta, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type V1:observedshare, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type V1:observeddomainuser, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type V1:observeddomaincredential, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type V1:observedrat, NOT-created id_adomain}:=1:S
-, {prop_host V0:object_type C1:observedschtask, NOT-created id_adomain, prop_host V0:object_type C2:observedschtask}:=1:S
-, {prop_host V0:object_type C1:observedfile, NOT-created id_adomain, prop_host V0:object_type C2:observedfile}:=1:S
-, {prop_host V0:object_type C1:observedtimedelta, NOT-created id_adomain, prop_host V0:object_type C2:observedtimedelta}:=1:S
-, {prop_host V0:object_type C1:observedshare, NOT-created id_adomain, prop_host V0:object_type C2:observedshare}:=1:S
-, {prop_host V0:object_type C1:observeddomainuser, NOT-created id_adomain, prop_host V0:object_type C2:observeddomainuser}:=1:S
-, {prop_host V0:object_type C1:observeddomaincredential, NOT-created id_adomain, prop_host V0:object_type C2:observeddomaincredential}:=1:S
-, {prop_host V0:object_type C1:observedrat, NOT-created id_adomain, prop_host V0:object_type C2:observedrat}:=1:S
-, {prop_host V0:observedschtask V1:object_type, NOT-created id_adomain}:=1:S
-, {prop_host V0:observedschtask C1:object_type, NOT-created id_adomain, prop_host V0:observedschtask C2:object_type}:=1:S
-, {prop_host V0:observedfile C1:observedschtask, NOT-created id_adomain, prop_host V0:observedfile C2:observedschtask}:=1:S
-, {prop_host V0:observedfile C1:observedfile, NOT-created id_adomain, prop_host V0:observedfile C2:observedfile}:=1:S
-, {prop_host V0:observedfile C1:observedtimedelta, NOT-created id_adomain, prop_host V0:observedfile C2:observedtimedelta}:=1:S
-, {prop_host V0:observedfile C1:observedshare, NOT-created id_adomain, prop_host V0:observedfile C2:observedshare}:=1:S
-, {prop_host V0:observedfile C1:observeddomainuser, NOT-created id_adomain, prop_host V0:observedfile C2:observeddomainuser}:=1:S
-, {prop_host V0:observedfile C1:observeddomaincredential, NOT-created id_adomain, prop_host V0:observedfile C2:observeddomaincredential}:=1:S
-, {prop_host V0:observedfile C1:observedrat, NOT-created id_adomain, prop_host V0:observedfile C2:observedrat}:=1:S
-, {prop_host V0:observedhost V1:object_type, NOT-created id_adomain}:=1:S
-, {prop_host V0:observedhost C1:object_type, NOT-created id_adomain, prop_host V0:observedhost C2:object_type}:=1:S
-, {prop_host V0:observedshare V1:object_type, NOT-created id_adomain}:=1:S
-, {prop_host V0:observedshare C1:object_type, NOT-created id_adomain, prop_host V0:observedshare C2:object_type}:=1:S
-, {prop_host V0:observeddomainuser V1:object_type, NOT-created id_adomain}:=1:S
-, {prop_host V0:observeddomainuser C1:object_type, NOT-created id_adomain, prop_host V0:observeddomainuser C2:object_type}:=1:S
-, {prop_host V0:observeddomaincredential V1:object_type, NOT-created id_adomain}:=1:S
-, {prop_host V0:observeddomaincredential C1:object_type, NOT-created id_adomain, prop_host V0:observeddomaincredential C2:object_type}:=1:S
-, {prop_host V0:observedrat C1:observedschtask, NOT-created id_adomain, prop_host V0:observedrat C2:observedschtask}:=1:S
-, {prop_host V0:observedrat C1:observedfile, NOT-created id_adomain, prop_host V0:observedrat C2:observedfile}:=1:S
-, {prop_host V0:observedrat C1:observedtimedelta, NOT-created id_adomain, prop_host V0:observedrat C2:observedtimedelta}:=1:S
-, {prop_host V0:observedrat C1:observedshare, NOT-created id_adomain, prop_host V0:observedrat C2:observedshare}:=1:S
-, {prop_host V0:observedrat C1:observeddomainuser, NOT-created id_adomain, prop_host V0:observedrat C2:observeddomainuser}:=1:S
-, {prop_host V0:observedrat C1:observeddomaincredential, NOT-created id_adomain, prop_host V0:observedrat C2:observeddomaincredential}:=1:S
-, {prop_host V0:observedrat C1:observedrat, NOT-created id_adomain, prop_host V0:observedrat C2:observedrat}:=1:S
-, {prop_host C0:observedrat C1:observedschtask, NOT-created id_adomain, prop_host C2:observedrat C3:observedschtask}:=1:S
-, {prop_host C0:observedrat C1:observedfile, NOT-created id_adomain, prop_host C2:observedrat C3:observedfile}:=1:S
-, {prop_host C0:observedrat C1:observedtimedelta, NOT-created id_adomain, prop_host C2:observedrat C3:observedtimedelta}:=1:S
-, {prop_host C0:observedrat C1:observedshare, NOT-created id_adomain, prop_host C2:observedrat C3:observedshare}:=1:S
-, {prop_host C0:observedrat C1:observeddomainuser, NOT-created id_adomain, prop_host C2:observedrat C3:observeddomainuser}:=1:S
-, {prop_host C0:observedrat C1:observeddomaincredential, NOT-created id_adomain, prop_host C2:observedrat C3:observeddomaincredential}:=1:S
-, {prop_host C0:observedrat C1:observedrat, NOT-created id_adomain, prop_host C2:observedrat C3:observedrat}:=1:S
 , {prop_host V0:object_type V1:observedschtask, NOT-created V0:object_type}
 , {prop_host V0:object_type V1:observedfile, NOT-created V0:object_type}
 , {prop_host V0:object_type V1:observedtimedelta, NOT-created V0:object_type}
@@ -168,18 +68,10 @@
 , {prop_host V0:object_type C1:observeddomainuser, NOT-created V0:object_type, prop_host V0:object_type C2:observeddomainuser}
 , {prop_host V0:object_type C1:observeddomaincredential, NOT-created V0:object_type, prop_host V0:object_type C2:observeddomaincredential}
 , {prop_host V0:object_type C1:observedrat, NOT-created V0:object_type, prop_host V0:object_type C2:observedrat}
-, {prop_host V0:observedschtask V1:object_type, NOT-created V0:observedschtask}:=1:S
-, {prop_host V0:observedschtask C1:object_type, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:object_type}:=1:S
 , {prop_host V0:observedfile V1:object_type, NOT-created V0:observedfile}
 , {prop_host V0:observedfile C1:object_type, NOT-created V0:observedfile, prop_host V0:observedfile C2:object_type}:=1
-, {prop_host V0:observedhost V1:object_type, NOT-created V0:observedhost}:=1:S
-, {prop_host V0:observedhost C1:object_type, NOT-created V0:observedhost, prop_host V0:observedhost C2:object_type}:=1:S
 , {prop_host V0:observedshare V1:object_type, NOT-created V0:observedshare}
 , {prop_host V0:observedshare C1:object_type, NOT-created V0:observedshare, prop_host V0:observedshare C2:object_type}
-, {prop_host V0:observeddomainuser V1:object_type, NOT-created V0:observeddomainuser}:=1:S
-, {prop_host V0:observeddomainuser C1:object_type, NOT-created V0:observeddomainuser, prop_host V0:observeddomainuser C2:object_type}:=1:S
-, {prop_host V0:observeddomaincredential V1:object_type, NOT-created V0:observeddomaincredential}:=1:S
-, {prop_host V0:observeddomaincredential C1:object_type, NOT-created V0:observeddomaincredential, prop_host V0:observeddomaincredential C2:object_type}:=1:S
 , {prop_host V0:observedrat V1:observedschtask, NOT-created V0:observedrat}
 , {prop_host V0:observedrat V1:observedfile, NOT-created V0:observedrat}
 , {prop_host V0:observedrat V1:observedtimedelta, NOT-created V0:observedrat}
@@ -213,34 +105,6 @@
 , {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:object_type, prop_host V0:object_type C3:observeddomainuser}
 , {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:object_type, prop_host V0:object_type C3:observeddomaincredential}
 , {prop_host V0:object_type C2:observedrat, NOT-created V1:object_type, prop_host V0:object_type C3:observedrat}
-, {prop_host V0:object_type C2:observedschtask, NOT-created V1:observedschtask, prop_host V0:object_type C3:observedschtask}:=1:S
-, {prop_host V0:object_type C2:observedfile, NOT-created V1:observedschtask, prop_host V0:object_type C3:observedfile}:=1:S
-, {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observedschtask, prop_host V0:object_type C3:observedtimedelta}:=1:S
-, {prop_host V0:object_type C2:observedshare, NOT-created V1:observedschtask, prop_host V0:object_type C3:observedshare}:=1:S
-, {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observedschtask, prop_host V0:object_type C3:observeddomainuser}:=1:S
-, {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observedschtask, prop_host V0:object_type C3:observeddomaincredential}:=1:S
-, {prop_host V0:object_type C2:observedrat, NOT-created V1:observedschtask, prop_host V0:object_type C3:observedrat}:=1:S
-, {prop_host V0:object_type C2:observedschtask, NOT-created V1:observedfile, prop_host V0:object_type C3:observedschtask}
-, {prop_host V0:object_type C2:observedfile, NOT-created V1:observedfile, prop_host V0:object_type C3:observedfile}
-, {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observedfile, prop_host V0:object_type C3:observedtimedelta}
-, {prop_host V0:object_type C2:observedshare, NOT-created V1:observedfile, prop_host V0:object_type C3:observedshare}
-, {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observedfile, prop_host V0:object_type C3:observeddomainuser}
-, {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observedfile, prop_host V0:object_type C3:observeddomaincredential}
-, {prop_host V0:object_type C2:observedrat, NOT-created V1:observedfile, prop_host V0:object_type C3:observedrat}
-, {prop_host V0:object_type C2:observedschtask, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observedschtask}:=1:S
-, {prop_host V0:object_type C2:observedfile, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observedfile}:=1:S
-, {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observedtimedelta}:=1:S
-, {prop_host V0:object_type C2:observedshare, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observedshare}:=1:S
-, {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observeddomainuser}:=1:S
-, {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observeddomaincredential}:=1:S
-, {prop_host V0:object_type C2:observedrat, NOT-created V1:observedtimedelta, prop_host V0:object_type C3:observedrat}:=1:S
-, {prop_host V0:object_type C2:observedschtask, NOT-created V1:observedhost, prop_host V0:object_type C3:observedschtask}:=1:S
-, {prop_host V0:object_type C2:observedfile, NOT-created V1:observedhost, prop_host V0:object_type C3:observedfile}:=1:S
-, {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observedhost, prop_host V0:object_type C3:observedtimedelta}:=1:S
-, {prop_host V0:object_type C2:observedshare, NOT-created V1:observedhost, prop_host V0:object_type C3:observedshare}:=1:S
-, {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observedhost, prop_host V0:object_type C3:observeddomainuser}:=1:S
-, {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observedhost, prop_host V0:object_type C3:observeddomaincredential}:=1:S
-, {prop_host V0:object_type C2:observedrat, NOT-created V1:observedhost, prop_host V0:object_type C3:observedrat}:=1:S
 , {prop_host V0:object_type C2:observedschtask, NOT-created V1:observedshare, prop_host V0:object_type C3:observedschtask}
 , {prop_host V0:object_type C2:observedfile, NOT-created V1:observedshare, prop_host V0:object_type C3:observedfile}
 , {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observedshare, prop_host V0:object_type C3:observedtimedelta}
@@ -248,20 +112,6 @@
 , {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observedshare, prop_host V0:object_type C3:observeddomainuser}
 , {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observedshare, prop_host V0:object_type C3:observeddomaincredential}
 , {prop_host V0:object_type C2:observedrat, NOT-created V1:observedshare, prop_host V0:object_type C3:observedrat}
-, {prop_host V0:object_type C2:observedschtask, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observedschtask}:=1:S
-, {prop_host V0:object_type C2:observedfile, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observedfile}:=1:S
-, {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observedtimedelta}:=1:S
-, {prop_host V0:object_type C2:observedshare, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observedshare}:=1:S
-, {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observeddomainuser}:=1:S
-, {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observeddomaincredential}:=1:S
-, {prop_host V0:object_type C2:observedrat, NOT-created V1:observeddomainuser, prop_host V0:object_type C3:observedrat}:=1:S
-, {prop_host V0:object_type C2:observedschtask, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observedschtask}:=1:S
-, {prop_host V0:object_type C2:observedfile, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observedfile}:=1:S
-, {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observedtimedelta}:=1:S
-, {prop_host V0:object_type C2:observedshare, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observedshare}:=1:S
-, {prop_host V0:object_type C2:observeddomainuser, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observeddomainuser}:=1:S
-, {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observeddomaincredential}:=1:S
-, {prop_host V0:object_type C2:observedrat, NOT-created V1:observeddomaincredential, prop_host V0:object_type C3:observedrat}:=1:S
 , {prop_host V0:object_type C2:observedschtask, NOT-created V1:observedrat, prop_host V0:object_type C3:observedschtask}
 , {prop_host V0:object_type C2:observedfile, NOT-created V1:observedrat, prop_host V0:object_type C3:observedfile}
 , {prop_host V0:object_type C2:observedtimedelta, NOT-created V1:observedrat, prop_host V0:object_type C3:observedtimedelta}
@@ -270,13 +120,7 @@
 , {prop_host V0:object_type C2:observeddomaincredential, NOT-created V1:observedrat, prop_host V0:object_type C3:observeddomaincredential}
 , {prop_host V0:object_type C2:observedrat, NOT-created V1:observedrat, prop_host V0:object_type C3:observedrat}
 , {prop_host V0:observedschtask C2:object_type, NOT-created V1:object_type, prop_host V0:observedschtask C3:object_type}
-, {prop_host V0:observedschtask C2:object_type, NOT-created V1:observedschtask, prop_host V0:observedschtask C3:object_type}:=1:S
-, {prop_host V0:observedschtask C2:object_type, NOT-created V1:observedfile, prop_host V0:observedschtask C3:object_type}
-, {prop_host V0:observedschtask C2:object_type, NOT-created V1:observedtimedelta, prop_host V0:observedschtask C3:object_type}:=1:S
-, {prop_host V0:observedschtask C2:object_type, NOT-created V1:observedhost, prop_host V0:observedschtask C3:object_type}:=1:S
 , {prop_host V0:observedschtask C2:object_type, NOT-created V1:observedshare, prop_host V0:observedschtask C3:object_type}
-, {prop_host V0:observedschtask C2:object_type, NOT-created V1:observeddomainuser, prop_host V0:observedschtask C3:object_type}:=1:S
-, {prop_host V0:observedschtask C2:object_type, NOT-created V1:observeddomaincredential, prop_host V0:observedschtask C3:object_type}:=1:S
 , {prop_host V0:observedschtask C2:object_type, NOT-created V1:observedrat, prop_host V0:observedschtask C3:object_type}
 , {prop_host V0:observedfile C2:observedschtask, NOT-created V1:object_type, prop_host V0:observedfile C3:observedschtask}
 , {prop_host V0:observedfile C2:observedfile, NOT-created V1:object_type, prop_host V0:observedfile C3:observedfile}
@@ -286,40 +130,16 @@
 , {prop_host V0:observedfile C2:observeddomaincredential, NOT-created V1:object_type, prop_host V0:observedfile C3:observeddomaincredential}
 , {prop_host V0:observedfile C2:observedrat, NOT-created V1:object_type, prop_host V0:observedfile C3:observedrat}
 , {prop_host V0:observedhost C2:object_type, NOT-created V1:object_type, prop_host V0:observedhost C3:object_type}
-, {prop_host V0:observedhost C2:object_type, NOT-created V1:observedschtask, prop_host V0:observedhost C3:object_type}:=1:S
-, {prop_host V0:observedhost C2:object_type, NOT-created V1:observedfile, prop_host V0:observedhost C3:object_type}
-, {prop_host V0:observedhost C2:object_type, NOT-created V1:observedtimedelta, prop_host V0:observedhost C3:object_type}:=1:S
-, {prop_host V0:observedhost C2:object_type, NOT-created V1:observedhost, prop_host V0:observedhost C3:object_type}:=1:S
 , {prop_host V0:observedhost C2:object_type, NOT-created V1:observedshare, prop_host V0:observedhost C3:object_type}
-, {prop_host V0:observedhost C2:object_type, NOT-created V1:observeddomainuser, prop_host V0:observedhost C3:object_type}:=1:S
-, {prop_host V0:observedhost C2:object_type, NOT-created V1:observeddomaincredential, prop_host V0:observedhost C3:object_type}:=1:S
 , {prop_host V0:observedhost C2:object_type, NOT-created V1:observedrat, prop_host V0:observedhost C3:object_type}
 , {prop_host V0:observedshare C2:object_type, NOT-created V1:object_type, prop_host V0:observedshare C3:object_type}
-, {prop_host V0:observedshare C2:object_type, NOT-created V1:observedschtask, prop_host V0:observedshare C3:object_type}:=1:S
-, {prop_host V0:observedshare C2:object_type, NOT-created V1:observedfile, prop_host V0:observedshare C3:object_type}
-, {prop_host V0:observedshare C2:object_type, NOT-created V1:observedtimedelta, prop_host V0:observedshare C3:object_type}:=1:S
-, {prop_host V0:observedshare C2:object_type, NOT-created V1:observedhost, prop_host V0:observedshare C3:object_type}:=1:S
 , {prop_host V0:observedshare C2:object_type, NOT-created V1:observedshare, prop_host V0:observedshare C3:object_type}
-, {prop_host V0:observedshare C2:object_type, NOT-created V1:observeddomainuser, prop_host V0:observedshare C3:object_type}:=1:S
-, {prop_host V0:observedshare C2:object_type, NOT-created V1:observeddomaincredential, prop_host V0:observedshare C3:object_type}:=1:S
 , {prop_host V0:observedshare C2:object_type, NOT-created V1:observedrat, prop_host V0:observedshare C3:object_type}
 , {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:object_type, prop_host V0:observeddomainuser C3:object_type}
-, {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observedschtask, prop_host V0:observeddomainuser C3:object_type}:=1:S
-, {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observedfile, prop_host V0:observeddomainuser C3:object_type}
-, {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observedtimedelta, prop_host V0:observeddomainuser C3:object_type}:=1:S
-, {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observedhost, prop_host V0:observeddomainuser C3:object_type}:=1:S
 , {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observedshare, prop_host V0:observeddomainuser C3:object_type}
-, {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observeddomainuser, prop_host V0:observeddomainuser C3:object_type}:=1:S
-, {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observeddomaincredential, prop_host V0:observeddomainuser C3:object_type}:=1:S
 , {prop_host V0:observeddomainuser C2:object_type, NOT-created V1:observedrat, prop_host V0:observeddomainuser C3:object_type}
 , {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:object_type, prop_host V0:observeddomaincredential C3:object_type}
-, {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observedschtask, prop_host V0:observeddomaincredential C3:object_type}:=1:S
-, {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observedfile, prop_host V0:observeddomaincredential C3:object_type}
-, {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observedtimedelta, prop_host V0:observeddomaincredential C3:object_type}:=1:S
-, {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observedhost, prop_host V0:observeddomaincredential C3:object_type}:=1:S
 , {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observedshare, prop_host V0:observeddomaincredential C3:object_type}
-, {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observeddomainuser, prop_host V0:observeddomaincredential C3:object_type}:=1:S
-, {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observeddomaincredential, prop_host V0:observeddomaincredential C3:object_type}:=1:S
 , {prop_host V0:observeddomaincredential C2:object_type, NOT-created V1:observedrat, prop_host V0:observeddomaincredential C3:object_type}
 , {prop_host V0:observedrat C2:observedschtask, NOT-created V1:object_type, prop_host V0:observedrat C3:observedschtask}
 , {prop_host V0:observedrat C2:observedfile, NOT-created V1:object_type, prop_host V0:observedrat C3:observedfile}
@@ -332,25 +152,10 @@
 , {prop_host C1:observedfile id_adomain, NOT-created V0:object_type, prop_host C2:observedfile id_adomain}
 , {prop_host C1:observedtimedelta id_adomain, NOT-created V0:object_type, prop_host C2:observedtimedelta id_adomain}
 , {prop_host C1:observedrat id_adomain, NOT-created V0:object_type, prop_host C2:observedrat id_adomain}
-, {prop_host C1:observedrat id_adomain, NOT-created V0:observedschtask, prop_host C2:observedrat id_adomain}:=1:S
-, {prop_host C1:object_type id_adomain, NOT-created V0:observedfile, prop_host C2:object_type id_adomain}
-, {prop_host C1:observedfile id_adomain, NOT-created V0:observedfile, prop_host C2:observedfile id_adomain}
-, {prop_host C1:observedrat id_adomain, NOT-created V0:observedfile, prop_host C2:observedrat id_adomain}
-, {prop_host C1:observedrat id_adomain, NOT-created V0:observedtimedelta, prop_host C2:observedrat id_adomain}:=1:S
-, {prop_host C1:observedrat id_adomain, NOT-created V0:observedhost, prop_host C2:observedrat id_adomain}:=1:S
 , {prop_host C1:observedrat id_adomain, NOT-created V0:observedshare, prop_host C2:observedrat id_adomain}
-, {prop_host C1:observedrat id_adomain, NOT-created V0:observeddomainuser, prop_host C2:observedrat id_adomain}:=1:S
-, {prop_host C1:observedrat id_adomain, NOT-created V0:observeddomaincredential, prop_host C2:observedrat id_adomain}:=1:S
 , {prop_host C1:object_type id_adomain, NOT-created V0:observedrat, prop_host C2:object_type id_adomain}
 , {prop_host C1:observedfile id_adomain, NOT-created V0:observedrat, prop_host C2:observedfile id_adomain}
 , {prop_host C1:observedrat id_adomain, NOT-created V0:observedrat, prop_host C2:observedrat id_adomain}
-, {prop_host C1:observedrat V0:observedschtask, NOT-created id_adomain, prop_host C2:observedrat V0:observedschtask}:=1:S
-, {prop_host C1:observedrat V0:observedfile, NOT-created id_adomain, prop_host C2:observedrat V0:observedfile}:=1:S
-, {prop_host C1:observedrat V0:observedtimedelta, NOT-created id_adomain, prop_host C2:observedrat V0:observedtimedelta}:=1:S
-, {prop_host C1:observedrat V0:observedshare, NOT-created id_adomain, prop_host C2:observedrat V0:observedshare}:=1:S
-, {prop_host C1:observedrat V0:observeddomainuser, NOT-created id_adomain, prop_host C2:observedrat V0:observeddomainuser}:=1:S
-, {prop_host C1:observedrat V0:observeddomaincredential, NOT-created id_adomain, prop_host C2:observedrat V0:observeddomaincredential}:=1:S
-, {prop_host C1:observedrat V0:observedrat, NOT-created id_adomain, prop_host C2:observedrat V0:observedrat}:=1:S
 , {prop_host C1:object_type C2:observedschtask, NOT-created V0:object_type, prop_host C3:object_type C4:observedschtask}
 , {prop_host C1:object_type C2:observedfile, NOT-created V0:object_type, prop_host C3:object_type C4:observedfile}
 , {prop_host C1:object_type C2:observedtimedelta, NOT-created V0:object_type, prop_host C3:object_type C4:observedtimedelta}
@@ -377,53 +182,6 @@
 , {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:object_type, prop_host C3:observedrat C4:observeddomainuser}
 , {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:object_type, prop_host C3:observedrat C4:observeddomaincredential}
 , {prop_host C1:observedrat C2:observedrat, NOT-created V0:object_type, prop_host C3:observedrat C4:observedrat}
-, {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedschtask}:=1:S
-, {prop_host C1:observedrat C2:observedfile, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedfile}:=1:S
-, {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedtimedelta}:=1:S
-, {prop_host C1:observedrat C2:observedshare, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedshare}:=1:S
-, {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observeddomainuser}:=1:S
-, {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observeddomaincredential}:=1:S
-, {prop_host C1:observedrat C2:observedrat, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedrat}:=1:S
-, {prop_host C1:object_type C2:observedschtask, NOT-created V0:observedfile, prop_host C3:object_type C4:observedschtask}
-, {prop_host C1:object_type C2:observedfile, NOT-created V0:observedfile, prop_host C3:object_type C4:observedfile}
-, {prop_host C1:object_type C2:observedtimedelta, NOT-created V0:observedfile, prop_host C3:object_type C4:observedtimedelta}
-, {prop_host C1:object_type C2:observedshare, NOT-created V0:observedfile, prop_host C3:object_type C4:observedshare}
-, {prop_host C1:object_type C2:observeddomainuser, NOT-created V0:observedfile, prop_host C3:object_type C4:observeddomainuser}
-, {prop_host C1:object_type C2:observeddomaincredential, NOT-created V0:observedfile, prop_host C3:object_type C4:observeddomaincredential}
-, {prop_host C1:object_type C2:observedrat, NOT-created V0:observedfile, prop_host C3:object_type C4:observedrat}
-, {prop_host C1:observedschtask C2:object_type, NOT-created V0:observedfile, prop_host C3:observedschtask C4:object_type}
-, {prop_host C1:observedfile C2:observedschtask, NOT-created V0:observedfile, prop_host C3:observedfile C4:observedschtask}
-, {prop_host C1:observedfile C2:observedfile, NOT-created V0:observedfile, prop_host C3:observedfile C4:observedfile}
-, {prop_host C1:observedfile C2:observedtimedelta, NOT-created V0:observedfile, prop_host C3:observedfile C4:observedtimedelta}
-, {prop_host C1:observedfile C2:observedshare, NOT-created V0:observedfile, prop_host C3:observedfile C4:observedshare}
-, {prop_host C1:observedfile C2:observeddomainuser, NOT-created V0:observedfile, prop_host C3:observedfile C4:observeddomainuser}
-, {prop_host C1:observedfile C2:observeddomaincredential, NOT-created V0:observedfile, prop_host C3:observedfile C4:observeddomaincredential}
-, {prop_host C1:observedfile C2:observedrat, NOT-created V0:observedfile, prop_host C3:observedfile C4:observedrat}
-, {prop_host C1:observedhost C2:object_type, NOT-created V0:observedfile, prop_host C3:observedhost C4:object_type}
-, {prop_host C1:observedshare C2:object_type, NOT-created V0:observedfile, prop_host C3:observedshare C4:object_type}
-, {prop_host C1:observeddomainuser C2:object_type, NOT-created V0:observedfile, prop_host C3:observeddomainuser C4:object_type}
-, {prop_host C1:observeddomaincredential C2:object_type, NOT-created V0:observedfile, prop_host C3:observeddomaincredential C4:object_type}
-, {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observedfile, prop_host C3:observedrat C4:observedschtask}
-, {prop_host C1:observedrat C2:observedfile, NOT-created V0:observedfile, prop_host C3:observedrat C4:observedfile}
-, {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observedfile, prop_host C3:observedrat C4:observedtimedelta}
-, {prop_host C1:observedrat C2:observedshare, NOT-created V0:observedfile, prop_host C3:observedrat C4:observedshare}
-, {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observedfile, prop_host C3:observedrat C4:observeddomainuser}
-, {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observedfile, prop_host C3:observedrat C4:observeddomaincredential}
-, {prop_host C1:observedrat C2:observedrat, NOT-created V0:observedfile, prop_host C3:observedrat C4:observedrat}
-, {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observedschtask}:=1:S
-, {prop_host C1:observedrat C2:observedfile, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observedfile}:=1:S
-, {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observedtimedelta}:=1:S
-, {prop_host C1:observedrat C2:observedshare, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observedshare}:=1:S
-, {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observeddomainuser}:=1:S
-, {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observeddomaincredential}:=1:S
-, {prop_host C1:observedrat C2:observedrat, NOT-created V0:observedtimedelta, prop_host C3:observedrat C4:observedrat}:=1:S
-, {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observedhost, prop_host C3:observedrat C4:observedschtask}:=1:S
-, {prop_host C1:observedrat C2:observedfile, NOT-created V0:observedhost, prop_host C3:observedrat C4:observedfile}:=1:S
-, {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observedhost, prop_host C3:observedrat C4:observedtimedelta}:=1:S
-, {prop_host C1:observedrat C2:observedshare, NOT-created V0:observedhost, prop_host C3:observedrat C4:observedshare}:=1:S
-, {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observedhost, prop_host C3:observedrat C4:observeddomainuser}:=1:S
-, {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observedhost, prop_host C3:observedrat C4:observeddomaincredential}:=1:S
-, {prop_host C1:observedrat C2:observedrat, NOT-created V0:observedhost, prop_host C3:observedrat C4:observedrat}:=1:S
 , {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observedshare, prop_host C3:observedrat C4:observedschtask}
 , {prop_host C1:observedrat C2:observedfile, NOT-created V0:observedshare, prop_host C3:observedrat C4:observedfile}
 , {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observedshare, prop_host C3:observedrat C4:observedtimedelta}
@@ -431,20 +189,6 @@
 , {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observedshare, prop_host C3:observedrat C4:observeddomainuser}
 , {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observedshare, prop_host C3:observedrat C4:observeddomaincredential}
 , {prop_host C1:observedrat C2:observedrat, NOT-created V0:observedshare, prop_host C3:observedrat C4:observedrat}
-, {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observedschtask}:=1:S
-, {prop_host C1:observedrat C2:observedfile, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observedfile}:=1:S
-, {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observedtimedelta}:=1:S
-, {prop_host C1:observedrat C2:observedshare, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observedshare}:=1:S
-, {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observeddomainuser}:=1:S
-, {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observeddomaincredential}:=1:S
-, {prop_host C1:observedrat C2:observedrat, NOT-created V0:observeddomainuser, prop_host C3:observedrat C4:observedrat}:=1:S
-, {prop_host C1:observedrat C2:observedschtask, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observedschtask}:=1:S
-, {prop_host C1:observedrat C2:observedfile, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observedfile}:=1:S
-, {prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observedtimedelta}:=1:S
-, {prop_host C1:observedrat C2:observedshare, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observedshare}:=1:S
-, {prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observeddomainuser}:=1:S
-, {prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observeddomaincredential}:=1:S
-, {prop_host C1:observedrat C2:observedrat, NOT-created V0:observeddomaincredential, prop_host C3:observedrat C4:observedrat}:=1:S
 , {prop_host C1:object_type C2:observedschtask, NOT-created V0:observedrat, prop_host C3:object_type C4:observedschtask}
 , {prop_host C1:object_type C2:observedfile, NOT-created V0:observedrat, prop_host C3:object_type C4:observedfile}
 , {prop_host C1:object_type C2:observedtimedelta, NOT-created V0:observedrat, prop_host C3:object_type C4:observedtimedelta}
@@ -476,11 +220,6 @@
 , {prop_host C2:observedshare V0:object_type, NOT-created V1:object_type, prop_host C3:observedshare V0:object_type}
 , {prop_host C2:observeddomainuser V0:object_type, NOT-created V1:object_type, prop_host C3:observeddomainuser V0:object_type}
 , {prop_host C2:observeddomaincredential V0:object_type, NOT-created V1:object_type, prop_host C3:observeddomaincredential V0:object_type}
-, {prop_host C2:observedschtask V0:object_type, NOT-created V1:observedfile, prop_host C3:observedschtask V0:object_type}
-, {prop_host C2:observedhost V0:object_type, NOT-created V1:observedfile, prop_host C3:observedhost V0:object_type}
-, {prop_host C2:observedshare V0:object_type, NOT-created V1:observedfile, prop_host C3:observedshare V0:object_type}
-, {prop_host C2:observeddomainuser V0:object_type, NOT-created V1:observedfile, prop_host C3:observeddomainuser V0:object_type}
-, {prop_host C2:observeddomaincredential V0:object_type, NOT-created V1:observedfile, prop_host C3:observeddomaincredential V0:object_type}
 , {prop_host C2:observedschtask V0:object_type, NOT-created V1:observedrat, prop_host C3:observedschtask V0:object_type}
 , {prop_host C2:observedhost V0:object_type, NOT-created V1:observedrat, prop_host C3:observedhost V0:object_type}
 , {prop_host C2:observedshare V0:object_type, NOT-created V1:observedrat, prop_host C3:observedshare V0:object_type}
@@ -490,72 +229,48 @@
 , {prop_host C2:observedfile V0:observedschtask, NOT-created V1:object_type, prop_host C3:observedfile V0:observedschtask}
 , {prop_host C2:observedtimedelta V0:observedschtask, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observedschtask}
 , {prop_host C2:observedrat V0:observedschtask, NOT-created V1:object_type, prop_host C3:observedrat V0:observedschtask}
-, {prop_host C2:object_type V0:observedschtask, NOT-created V1:observedfile, prop_host C3:object_type V0:observedschtask}
 , {prop_host C2:object_type V0:observedschtask, NOT-created V1:observedrat, prop_host C3:object_type V0:observedschtask}
 , {prop_host C2:object_type V0:observedfile, NOT-created V1:object_type, prop_host C3:object_type V0:observedfile}
 , {prop_host C2:observedfile V0:observedfile, NOT-created V1:object_type, prop_host C3:observedfile V0:observedfile}
 , {prop_host C2:observedtimedelta V0:observedfile, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observedfile}
 , {prop_host C2:observedrat V0:observedfile, NOT-created V1:object_type, prop_host C3:observedrat V0:observedfile}
-, {prop_host C2:object_type V0:observedfile, NOT-created V1:observedfile, prop_host C3:object_type V0:observedfile}
 , {prop_host C2:object_type V0:observedfile, NOT-created V1:observedrat, prop_host C3:object_type V0:observedfile}
 , {prop_host C2:object_type V0:observedtimedelta, NOT-created V1:object_type, prop_host C3:object_type V0:observedtimedelta}
 , {prop_host C2:observedfile V0:observedtimedelta, NOT-created V1:object_type, prop_host C3:observedfile V0:observedtimedelta}
 , {prop_host C2:observedtimedelta V0:observedtimedelta, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observedtimedelta}
 , {prop_host C2:observedrat V0:observedtimedelta, NOT-created V1:object_type, prop_host C3:observedrat V0:observedtimedelta}
-, {prop_host C2:object_type V0:observedtimedelta, NOT-created V1:observedfile, prop_host C3:object_type V0:observedtimedelta}
 , {prop_host C2:object_type V0:observedtimedelta, NOT-created V1:observedrat, prop_host C3:object_type V0:observedtimedelta}
 , {prop_host C2:object_type V0:observedshare, NOT-created V1:object_type, prop_host C3:object_type V0:observedshare}
 , {prop_host C2:observedfile V0:observedshare, NOT-created V1:object_type, prop_host C3:observedfile V0:observedshare}
 , {prop_host C2:observedtimedelta V0:observedshare, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observedshare}
 , {prop_host C2:observedrat V0:observedshare, NOT-created V1:object_type, prop_host C3:observedrat V0:observedshare}
-, {prop_host C2:object_type V0:observedshare, NOT-created V1:observedfile, prop_host C3:object_type V0:observedshare}
 , {prop_host C2:object_type V0:observedshare, NOT-created V1:observedrat, prop_host C3:object_type V0:observedshare}
 , {prop_host C2:object_type V0:observeddomainuser, NOT-created V1:object_type, prop_host C3:object_type V0:observeddomainuser}
 , {prop_host C2:observedfile V0:observeddomainuser, NOT-created V1:object_type, prop_host C3:observedfile V0:observeddomainuser}
 , {prop_host C2:observedtimedelta V0:observeddomainuser, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observeddomainuser}
 , {prop_host C2:observedrat V0:observeddomainuser, NOT-created V1:object_type, prop_host C3:observedrat V0:observeddomainuser}
-, {prop_host C2:object_type V0:observeddomainuser, NOT-created V1:observedfile, prop_host C3:object_type V0:observeddomainuser}
 , {prop_host C2:object_type V0:observeddomainuser, NOT-created V1:observedrat, prop_host C3:object_type V0:observeddomainuser}
 , {prop_host C2:object_type V0:observeddomaincredential, NOT-created V1:object_type, prop_host C3:object_type V0:observeddomaincredential}
 , {prop_host C2:observedfile V0:observeddomaincredential, NOT-created V1:object_type, prop_host C3:observedfile V0:observeddomaincredential}
 , {prop_host C2:observedtimedelta V0:observeddomaincredential, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observeddomaincredential}
 , {prop_host C2:observedrat V0:observeddomaincredential, NOT-created V1:object_type, prop_host C3:observedrat V0:observeddomaincredential}
-, {prop_host C2:object_type V0:observeddomaincredential, NOT-created V1:observedfile, prop_host C3:object_type V0:observeddomaincredential}
 , {prop_host C2:object_type V0:observeddomaincredential, NOT-created V1:observedrat, prop_host C3:object_type V0:observeddomaincredential}
 , {prop_host C2:object_type V0:observedrat, NOT-created V1:object_type, prop_host C3:object_type V0:observedrat}
 , {prop_host C2:observedfile V0:observedrat, NOT-created V1:object_type, prop_host C3:observedfile V0:observedrat}
 , {prop_host C2:observedtimedelta V0:observedrat, NOT-created V1:object_type, prop_host C3:observedtimedelta V0:observedrat}
 , {prop_host C2:observedrat V0:observedrat, NOT-created V1:object_type, prop_host C3:observedrat V0:observedrat}
-, {prop_host C2:object_type V0:observedrat, NOT-created V1:observedfile, prop_host C3:object_type V0:observedrat}
 , {prop_host C2:object_type V0:observedrat, NOT-created V1:observedrat, prop_host C3:object_type V0:observedrat}
 , {prop_share_name V0:observedshare C1:string, NOT-created V0:observedshare, prop_share_name V0:observedshare C2:string}:=1
 , {prop_share_path V0:observedshare C1:string, NOT-created V0:observedshare, prop_share_path V0:observedshare C2:string}:=1
 , {prop_dest_host V0:observedshare C1:observedhost, NOT-created V0:observedshare, prop_dest_host V0:observedshare C2:observedhost}:=1
 , {prop_path V0:observedfile C1:string, NOT-created V0:observedfile, prop_path V0:observedfile C2:string}:=1
-, {knows V0:observedschtask, prop_host id_adomain V1:object_type, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host id_adomain C1:object_type, NOT-created V0:observedschtask, prop_host id_adomain C2:object_type}:=1:S
 , {knows V0:observedfile, prop_host id_adomain V1:object_type, NOT-created V0:observedfile}:=1
 , {knows V0:observedfile, prop_host id_adomain C1:object_type, NOT-created V0:observedfile, prop_host id_adomain C2:object_type}:=1
 , {knows V0:observedshare, prop_host id_adomain V1:object_type, NOT-created V0:observedshare}:=1
 , {knows V0:observedshare, prop_host id_adomain C1:object_type, NOT-created V0:observedshare, prop_host id_adomain C2:object_type}:=1
 , {knows V0:observedschtask, prop_host id_adomain C2:object_type, NOT-created V1:object_type, prop_host id_adomain C3:object_type}
-, {knows V0:observedschtask, prop_host V0:observedschtask id_adomain, NOT-created V0:observedschtask}:=1:S
 , {knows V0:observedfile, prop_host V0:observedfile id_adomain, NOT-created V0:observedfile}:=1
 , {knows V0:observedshare, prop_host V0:observedshare id_adomain, NOT-created V0:observedshare}:=1
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observedschtask, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observedfile, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observedtimedelta, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observedshare, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observeddomainuser, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observeddomaincredential, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask V1:observedrat, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observedschtask, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observedfile, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observedtimedelta, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observedshare, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observeddomainuser, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observeddomaincredential, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observeddomaincredential}:=1:S
-, {knows V0:observedschtask, prop_host V0:observedschtask C1:observedrat, NOT-created V0:observedschtask, prop_host V0:observedschtask C2:observedrat}:=1:S
 , {knows V0:observedfile, prop_host V0:observedfile V1:observedschtask, NOT-created V0:observedfile}:=1
 , {knows V0:observedfile, prop_host V0:observedfile V1:observedfile, NOT-created V0:observedfile}:=1
 , {knows V0:observedfile, prop_host V0:observedfile V1:observedtimedelta, NOT-created V0:observedfile}:=1
@@ -586,10 +301,6 @@
 , {knows V0:observedshare, prop_host V0:observedshare C1:observeddomainuser, NOT-created V0:observedshare, prop_host V0:observedshare C2:observeddomainuser}:=1
 , {knows V0:observedshare, prop_host V0:observedshare C1:observeddomaincredential, NOT-created V0:observedshare, prop_host V0:observedshare C2:observeddomaincredential}:=1
 , {knows V0:observedshare, prop_host V0:observedshare C1:observedrat, NOT-created V0:observedshare, prop_host V0:observedshare C2:observedrat}:=1
-, {knows V0:observedschtask, prop_host V1:object_type id_adomain, NOT-created V0:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type id_adomain, NOT-created V0:observedschtask, prop_host C2:object_type id_adomain}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile id_adomain, NOT-created V0:observedschtask, prop_host C2:observedfile id_adomain}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat id_adomain, NOT-created V0:observedschtask, prop_host C2:observedrat id_adomain}:=1:S
 , {knows V0:observedfile, prop_host V1:object_type id_adomain, NOT-created V0:observedfile}:=1
 , {knows V0:observedfile, prop_host C1:object_type id_adomain, NOT-created V0:observedfile, prop_host C2:object_type id_adomain}:=1
 , {knows V0:observedfile, prop_host C1:observedfile id_adomain, NOT-created V0:observedfile, prop_host C2:observedfile id_adomain}:=1
@@ -599,52 +310,8 @@
 , {knows V0:observedshare, prop_host C1:observedfile id_adomain, NOT-created V0:observedshare, prop_host C2:observedfile id_adomain}:=1
 , {knows V0:observedshare, prop_host C1:observedrat id_adomain, NOT-created V0:observedshare, prop_host C2:observedrat id_adomain}:=1
 , {knows V0:observedschtask, prop_host V1:object_type id_adomain, NOT-created V1:object_type}
-, {knows V0:observedschtask, prop_host V1:observedschtask id_adomain, NOT-created V1:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedfile id_adomain, NOT-created V1:observedfile}
-, {knows V0:observedschtask, prop_host V1:observedtimedelta id_adomain, NOT-created V1:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost id_adomain, NOT-created V1:observedhost}:=1:S
 , {knows V0:observedschtask, prop_host V1:observedshare id_adomain, NOT-created V1:observedshare}
-, {knows V0:observedschtask, prop_host V1:observeddomainuser id_adomain, NOT-created V1:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential id_adomain, NOT-created V1:observeddomaincredential}:=1:S
 , {knows V0:observedschtask, prop_host V1:observedrat id_adomain, NOT-created V1:observedrat}
-, {knows V0:observedschtask, prop_host V1:object_type C2:observedschtask, NOT-created V0:observedschtask, prop_host V1:object_type C3:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:object_type C2:observedfile, NOT-created V0:observedschtask, prop_host V1:object_type C3:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V1:object_type C2:observedtimedelta, NOT-created V0:observedschtask, prop_host V1:object_type C3:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:object_type C2:observedshare, NOT-created V0:observedschtask, prop_host V1:object_type C3:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V1:object_type C2:observeddomainuser, NOT-created V0:observedschtask, prop_host V1:object_type C3:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host V1:object_type C2:observeddomaincredential, NOT-created V0:observedschtask, prop_host V1:object_type C3:observeddomaincredential}:=1:S
-, {knows V0:observedschtask, prop_host V1:object_type C2:observedrat, NOT-created V0:observedschtask, prop_host V1:object_type C3:observedrat}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedschtask C2:object_type, NOT-created V0:observedschtask, prop_host V1:observedschtask C3:object_type}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost C2:object_type, NOT-created V0:observedschtask, prop_host V1:observedhost C3:object_type}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedshare C2:object_type, NOT-created V0:observedschtask, prop_host V1:observedshare C3:object_type}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomainuser C2:object_type, NOT-created V0:observedschtask, prop_host V1:observeddomainuser C3:object_type}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential C2:object_type, NOT-created V0:observedschtask, prop_host V1:observeddomaincredential C3:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observedschtask, NOT-created V0:observedschtask, prop_host C3:object_type C4:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observedfile, NOT-created V0:observedschtask, prop_host C3:object_type C4:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observedtimedelta, NOT-created V0:observedschtask, prop_host C3:object_type C4:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observedshare, NOT-created V0:observedschtask, prop_host C3:object_type C4:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observeddomainuser, NOT-created V0:observedschtask, prop_host C3:object_type C4:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observeddomaincredential, NOT-created V0:observedschtask, prop_host C3:object_type C4:observeddomaincredential}:=1:S
-, {knows V0:observedschtask, prop_host C1:object_type C2:observedrat, NOT-created V0:observedschtask, prop_host C3:object_type C4:observedrat}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedschtask C2:object_type, NOT-created V0:observedschtask, prop_host C3:observedschtask C4:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observedschtask, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observedfile, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observedtimedelta, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observedshare, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observeddomainuser, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observeddomaincredential, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observeddomaincredential}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedfile C2:observedrat, NOT-created V0:observedschtask, prop_host C3:observedfile C4:observedrat}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedhost C2:object_type, NOT-created V0:observedschtask, prop_host C3:observedhost C4:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedshare C2:object_type, NOT-created V0:observedschtask, prop_host C3:observedshare C4:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C1:observeddomainuser C2:object_type, NOT-created V0:observedschtask, prop_host C3:observeddomainuser C4:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C1:observeddomaincredential C2:object_type, NOT-created V0:observedschtask, prop_host C3:observeddomaincredential C4:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observedschtask, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observedfile, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observedtimedelta, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observedshare, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observeddomainuser, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observeddomaincredential, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observeddomaincredential}:=1:S
-, {knows V0:observedschtask, prop_host C1:observedrat C2:observedrat, NOT-created V0:observedschtask, prop_host C3:observedrat C4:observedrat}:=1:S
 , {knows V0:observedfile, prop_host V1:object_type C2:observedschtask, NOT-created V0:observedfile, prop_host V1:object_type C3:observedschtask}:=1
 , {knows V0:observedfile, prop_host V1:object_type C2:observedfile, NOT-created V0:observedfile, prop_host V1:object_type C3:observedfile}:=1
 , {knows V0:observedfile, prop_host V1:object_type C2:observedtimedelta, NOT-created V0:observedfile, prop_host V1:object_type C3:observedtimedelta}:=1
@@ -728,61 +395,17 @@
 , {knows V0:observedschtask, prop_host V1:object_type C2:observeddomainuser, NOT-created V1:object_type, prop_host V1:object_type C3:observeddomainuser}
 , {knows V0:observedschtask, prop_host V1:object_type C2:observeddomaincredential, NOT-created V1:object_type, prop_host V1:object_type C3:observeddomaincredential}
 , {knows V0:observedschtask, prop_host V1:object_type C2:observedrat, NOT-created V1:object_type, prop_host V1:object_type C3:observedrat}
-, {knows V0:observedschtask, prop_host V1:observedschtask C2:observedschtask, NOT-created V1:observedschtask, prop_host V1:observedschtask C3:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedschtask C2:observedfile, NOT-created V1:observedschtask, prop_host V1:observedschtask C3:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedschtask C2:observedtimedelta, NOT-created V1:observedschtask, prop_host V1:observedschtask C3:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedschtask C2:observedshare, NOT-created V1:observedschtask, prop_host V1:observedschtask C3:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedschtask C2:observeddomainuser, NOT-created V1:observedschtask, prop_host V1:observedschtask C3:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedfile C2:observedschtask, NOT-created V1:observedfile, prop_host V1:observedfile C3:observedschtask}
-, {knows V0:observedschtask, prop_host V1:observedfile C2:observedfile, NOT-created V1:observedfile, prop_host V1:observedfile C3:observedfile}
-, {knows V0:observedschtask, prop_host V1:observedfile C2:observedtimedelta, NOT-created V1:observedfile, prop_host V1:observedfile C3:observedtimedelta}
-, {knows V0:observedschtask, prop_host V1:observedfile C2:observedshare, NOT-created V1:observedfile, prop_host V1:observedfile C3:observedshare}
-, {knows V0:observedschtask, prop_host V1:observedfile C2:observeddomainuser, NOT-created V1:observedfile, prop_host V1:observedfile C3:observeddomainuser}
-, {knows V0:observedschtask, prop_host V1:observedtimedelta C2:observedschtask, NOT-created V1:observedtimedelta, prop_host V1:observedtimedelta C3:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedtimedelta C2:observedfile, NOT-created V1:observedtimedelta, prop_host V1:observedtimedelta C3:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedtimedelta C2:observedtimedelta, NOT-created V1:observedtimedelta, prop_host V1:observedtimedelta C3:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedtimedelta C2:observedshare, NOT-created V1:observedtimedelta, prop_host V1:observedtimedelta C3:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedtimedelta C2:observeddomainuser, NOT-created V1:observedtimedelta, prop_host V1:observedtimedelta C3:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost C2:observedschtask, NOT-created V1:observedhost, prop_host V1:observedhost C3:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost C2:observedfile, NOT-created V1:observedhost, prop_host V1:observedhost C3:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost C2:observedtimedelta, NOT-created V1:observedhost, prop_host V1:observedhost C3:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost C2:observedshare, NOT-created V1:observedhost, prop_host V1:observedhost C3:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V1:observedhost C2:observeddomainuser, NOT-created V1:observedhost, prop_host V1:observedhost C3:observeddomainuser}:=1:S
 , {knows V0:observedschtask, prop_host V1:observedshare C2:object_type, NOT-created V1:observedshare, prop_host V1:observedshare C3:object_type}
 , {knows V0:observedschtask, prop_host V1:observedshare C2:observedschtask, NOT-created V1:observedshare, prop_host V1:observedshare C3:observedschtask}
 , {knows V0:observedschtask, prop_host V1:observedshare C2:observedfile, NOT-created V1:observedshare, prop_host V1:observedshare C3:observedfile}
 , {knows V0:observedschtask, prop_host V1:observedshare C2:observedtimedelta, NOT-created V1:observedshare, prop_host V1:observedshare C3:observedtimedelta}
 , {knows V0:observedschtask, prop_host V1:observedshare C2:observedshare, NOT-created V1:observedshare, prop_host V1:observedshare C3:observedshare}
-, {knows V0:observedschtask, prop_host V1:observedshare C2:observeddomainuser, NOT-created V1:observedshare, prop_host V1:observedshare C3:observeddomainuser}
-, {knows V0:observedschtask, prop_host V1:observeddomainuser C2:observedschtask, NOT-created V1:observeddomainuser, prop_host V1:observeddomainuser C3:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomainuser C2:observedfile, NOT-created V1:observeddomainuser, prop_host V1:observeddomainuser C3:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomainuser C2:observedtimedelta, NOT-created V1:observeddomainuser, prop_host V1:observeddomainuser C3:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomainuser C2:observedshare, NOT-created V1:observeddomainuser, prop_host V1:observeddomainuser C3:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomainuser C2:observeddomainuser, NOT-created V1:observeddomainuser, prop_host V1:observeddomainuser C3:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential C2:observedschtask, NOT-created V1:observeddomaincredential, prop_host V1:observeddomaincredential C3:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential C2:observedfile, NOT-created V1:observeddomaincredential, prop_host V1:observeddomaincredential C3:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential C2:observedtimedelta, NOT-created V1:observeddomaincredential, prop_host V1:observeddomaincredential C3:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential C2:observedshare, NOT-created V1:observeddomaincredential, prop_host V1:observeddomaincredential C3:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host V1:observeddomaincredential C2:observeddomainuser, NOT-created V1:observeddomaincredential, prop_host V1:observeddomaincredential C3:observeddomainuser}:=1:S
 , {knows V0:observedschtask, prop_host V1:observedrat C2:observedschtask, NOT-created V1:observedrat, prop_host V1:observedrat C3:observedschtask}
 , {knows V0:observedschtask, prop_host V1:observedrat C2:observedfile, NOT-created V1:observedrat, prop_host V1:observedrat C3:observedfile}
 , {knows V0:observedschtask, prop_host V1:observedrat C2:observedtimedelta, NOT-created V1:observedrat, prop_host V1:observedrat C3:observedtimedelta}
 , {knows V0:observedschtask, prop_host V1:observedrat C2:observedshare, NOT-created V1:observedrat, prop_host V1:observedrat C3:observedshare}
-, {knows V0:observedschtask, prop_host V1:observedrat C2:observeddomainuser, NOT-created V1:observedrat, prop_host V1:observedrat C3:observeddomainuser}
 , {knows V0:observedschtask, prop_host C2:object_type id_adomain, NOT-created V1:object_type, prop_host C3:object_type id_adomain}
 , {knows V0:observedschtask, prop_host C2:observedrat id_adomain, NOT-created V1:object_type, prop_host C3:observedrat id_adomain}
-, {knows V0:observedschtask, prop_host C2:observedschtask V1:object_type, NOT-created V0:observedschtask, prop_host C3:observedschtask V1:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C2:observedhost V1:object_type, NOT-created V0:observedschtask, prop_host C3:observedhost V1:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C2:observedshare V1:object_type, NOT-created V0:observedschtask, prop_host C3:observedshare V1:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C2:observeddomainuser V1:object_type, NOT-created V0:observedschtask, prop_host C3:observeddomainuser V1:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C2:observeddomaincredential V1:object_type, NOT-created V0:observedschtask, prop_host C3:observeddomaincredential V1:object_type}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observedschtask, NOT-created V0:observedschtask, prop_host C3:object_type V1:observedschtask}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observedfile, NOT-created V0:observedschtask, prop_host C3:object_type V1:observedfile}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observedtimedelta, NOT-created V0:observedschtask, prop_host C3:object_type V1:observedtimedelta}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observedshare, NOT-created V0:observedschtask, prop_host C3:object_type V1:observedshare}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observeddomainuser, NOT-created V0:observedschtask, prop_host C3:object_type V1:observeddomainuser}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observeddomaincredential, NOT-created V0:observedschtask, prop_host C3:object_type V1:observeddomaincredential}:=1:S
-, {knows V0:observedschtask, prop_host C2:object_type V1:observedrat, NOT-created V0:observedschtask, prop_host C3:object_type V1:observedrat}:=1:S
 , {knows V0:observedfile, prop_host C2:observedschtask V1:object_type, NOT-created V0:observedfile, prop_host C3:observedschtask V1:object_type}:=1
 , {knows V0:observedfile, prop_host C2:observedhost V1:object_type, NOT-created V0:observedfile, prop_host C3:observedhost V1:object_type}:=1
 , {knows V0:observedfile, prop_host C2:observedshare V1:object_type, NOT-created V0:observedfile, prop_host C3:observedshare V1:object_type}:=1
@@ -1474,19 +1097,10 @@
 , {created C2:observedhost, prop_host C3:object_type V0:observedrat, NOT-created V1:object_type, created C4:observedhost, prop_host C5:object_type V0:observedrat}
 , {created C2:observeddomainuser, prop_host C3:object_type V0:observedrat, NOT-created V1:object_type, created C4:observeddomainuser, prop_host C5:object_type V0:observedrat}
 , {created C2:observeddomaincredential, prop_host C3:object_type V0:observedrat, NOT-created V1:object_type, created C4:observeddomaincredential, prop_host C5:object_type V0:observedrat}
-, {knows_property V0:observedschtask C1:property, prop_host id_adomain C2:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host id_adomain C4:object_type}:=1:S
 , {knows_property V0:observedfile V1:property, prop_host id_adomain C2:object_type, NOT-created V0:observedfile, prop_host id_adomain C3:object_type}
 , {knows_property V0:observedshare V1:property, prop_host id_adomain C2:object_type, NOT-created V0:observedshare, prop_host id_adomain C3:object_type}
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask id_adomain, NOT-created V0:observedschtask, knows_property V0:observedschtask C2:property}:=1:S
 , {knows_property V0:observedfile V1:property, prop_host V0:observedfile id_adomain, NOT-created V0:observedfile}
 , {knows_property V0:observedshare V1:property, prop_host V0:observedshare id_adomain, NOT-created V0:observedshare}
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observedschtask}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observedfile}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observedshare}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observeddomaincredential}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host V0:observedschtask C2:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host V0:observedschtask C4:observedrat}:=1:S
 , {knows_property V0:observedfile V1:property, prop_host V0:observedfile C2:observedschtask, NOT-created V0:observedfile, prop_host V0:observedfile C3:observedschtask}
 , {knows_property V0:observedfile V1:property, prop_host V0:observedfile C2:observedfile, NOT-created V0:observedfile, prop_host V0:observedfile C3:observedfile}
 , {knows_property V0:observedfile V1:property, prop_host V0:observedfile C2:observedtimedelta, NOT-created V0:observedfile, prop_host V0:observedfile C3:observedtimedelta}
@@ -1503,39 +1117,10 @@
 , {knows_property V0:observedshare V1:property, prop_host V0:observedshare C2:observeddomainuser, NOT-created V0:observedshare, prop_host V0:observedshare C3:observeddomainuser}
 , {knows_property V0:observedshare V1:property, prop_host V0:observedshare C2:observeddomaincredential, NOT-created V0:observedshare, prop_host V0:observedshare C3:observeddomaincredential}
 , {knows_property V0:observedshare V1:property, prop_host V0:observedshare C2:observedrat, NOT-created V0:observedshare, prop_host V0:observedshare C3:observedrat}
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type id_adomain, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host C4:object_type id_adomain}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile id_adomain, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host C4:observedfile id_adomain}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat id_adomain, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property, prop_host C4:observedrat id_adomain}:=1:S
 , {knows_property V0:observedfile V1:property, prop_host C2:object_type id_adomain, NOT-created V0:observedfile, prop_host C3:object_type id_adomain}
 , {knows_property V0:observedfile V1:property, prop_host C2:observedrat id_adomain, NOT-created V0:observedfile, prop_host C3:observedrat id_adomain}
 , {knows_property V0:observedshare V1:property, prop_host C2:object_type id_adomain, NOT-created V0:observedshare, prop_host C3:object_type id_adomain}
 , {knows_property V0:observedshare V1:property, prop_host C2:observedrat id_adomain, NOT-created V0:observedshare, prop_host C3:observedrat id_adomain}
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observedschtask}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observedfile}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observedshare}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observeddomaincredential}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:object_type C3:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type C6:observedrat}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedschtask C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedschtask C6:object_type}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observedschtask}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observedfile}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observedshare}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observeddomaincredential}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedfile C3:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedfile C6:observedrat}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedhost C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedhost C6:object_type}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedshare C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedshare C6:object_type}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observeddomainuser C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observeddomainuser C6:object_type}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observeddomaincredential C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observeddomaincredential C6:object_type}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observedschtask}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observedfile}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observedshare}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observeddomaincredential}:=1:S
-, {knows_property V0:observedschtask C1:property, prop_host C2:observedrat C3:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedrat C6:observedrat}:=1:S
 , {knows_property V0:observedfile V1:property, prop_host C2:object_type C3:observedschtask, NOT-created V0:observedfile, prop_host C4:object_type C5:observedschtask}
 , {knows_property V0:observedfile V1:property, prop_host C2:object_type C3:observedfile, NOT-created V0:observedfile, prop_host C4:object_type C5:observedfile}
 , {knows_property V0:observedfile V1:property, prop_host C2:object_type C3:observedtimedelta, NOT-created V0:observedfile, prop_host C4:object_type C5:observedtimedelta}
@@ -1574,37 +1159,10 @@
 , {knows_property V0:observedshare V1:property, prop_host C2:observedrat C3:observeddomainuser, NOT-created V0:observedshare, prop_host C4:observedrat C5:observeddomainuser}
 , {knows_property V0:observedshare V1:property, prop_host C2:observedrat C3:observeddomaincredential, NOT-created V0:observedshare, prop_host C4:observedrat C5:observeddomaincredential}
 , {knows_property V0:observedshare V1:property, prop_host C2:observedrat C3:observedrat, NOT-created V0:observedshare, prop_host C4:observedrat C5:observedrat}
-, {knows_property V0:observedschtask C2:property, prop_host id_adomain V1:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host id_adomain C3:object_type, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host id_adomain C5:object_type}
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V0:observedschtask V1:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type id_adomain, NOT-created V0:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type id_adomain, NOT-created V1:object_type, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask id_adomain, NOT-created V1:observedschtask, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedfile id_adomain, NOT-created V1:observedfile, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedtimedelta id_adomain, NOT-created V1:observedtimedelta, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedhost id_adomain, NOT-created V1:observedhost, knows_property V0:observedschtask C3:property}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedshare id_adomain, NOT-created V1:observedshare, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomainuser id_adomain, NOT-created V1:observeddomainuser, knows_property V0:observedschtask C3:property}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomaincredential id_adomain, NOT-created V1:observeddomaincredential, knows_property V0:observedschtask C3:property}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedrat id_adomain, NOT-created V1:observedrat, knows_property V0:observedschtask C3:property}
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedshare}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observeddomaincredential}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedrat}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedschtask C5:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedhost C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedhost C5:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedshare C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedshare C5:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomainuser C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observeddomainuser C5:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomaincredential C3:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observeddomaincredential C5:object_type}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedschtask, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedschtask}
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedfile, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedfile}
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedtimedelta, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedtimedelta}
@@ -1612,55 +1170,17 @@
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observeddomainuser, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observeddomainuser}
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observeddomaincredential, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observeddomaincredential}
 , {knows_property V0:observedschtask C2:property, prop_host V1:object_type C3:observedrat, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host V1:object_type C5:observedrat}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask C3:observedschtask, NOT-created V1:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedschtask C5:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask C3:observedfile, NOT-created V1:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedschtask C5:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask C3:observedtimedelta, NOT-created V1:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedschtask C5:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask C3:observedshare, NOT-created V1:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedschtask C5:observedshare}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedschtask C3:observeddomainuser, NOT-created V1:observedschtask, knows_property V0:observedschtask C4:property, prop_host V1:observedschtask C5:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedfile C3:observedschtask, NOT-created V1:observedfile, knows_property V0:observedschtask C4:property, prop_host V1:observedfile C5:observedschtask}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedfile C3:observedfile, NOT-created V1:observedfile, knows_property V0:observedschtask C4:property, prop_host V1:observedfile C5:observedfile}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedfile C3:observedtimedelta, NOT-created V1:observedfile, knows_property V0:observedschtask C4:property, prop_host V1:observedfile C5:observedtimedelta}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedfile C3:observedshare, NOT-created V1:observedfile, knows_property V0:observedschtask C4:property, prop_host V1:observedfile C5:observedshare}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedfile C3:observeddomainuser, NOT-created V1:observedfile, knows_property V0:observedschtask C4:property, prop_host V1:observedfile C5:observeddomainuser}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedtimedelta C3:observedschtask, NOT-created V1:observedtimedelta, knows_property V0:observedschtask C4:property, prop_host V1:observedtimedelta C5:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedtimedelta C3:observedfile, NOT-created V1:observedtimedelta, knows_property V0:observedschtask C4:property, prop_host V1:observedtimedelta C5:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedtimedelta C3:observedtimedelta, NOT-created V1:observedtimedelta, knows_property V0:observedschtask C4:property, prop_host V1:observedtimedelta C5:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedtimedelta C3:observedshare, NOT-created V1:observedtimedelta, knows_property V0:observedschtask C4:property, prop_host V1:observedtimedelta C5:observedshare}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedhost C3:observedschtask, NOT-created V1:observedhost, knows_property V0:observedschtask C4:property, prop_host V1:observedhost C5:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedhost C3:observedfile, NOT-created V1:observedhost, knows_property V0:observedschtask C4:property, prop_host V1:observedhost C5:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedhost C3:observedtimedelta, NOT-created V1:observedhost, knows_property V0:observedschtask C4:property, prop_host V1:observedhost C5:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observedhost C3:observedshare, NOT-created V1:observedhost, knows_property V0:observedschtask C4:property, prop_host V1:observedhost C5:observedshare}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedshare C3:object_type, NOT-created V1:observedshare, knows_property V0:observedschtask C4:property, prop_host V1:observedshare C5:object_type}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedshare C3:observedschtask, NOT-created V1:observedshare, knows_property V0:observedschtask C4:property, prop_host V1:observedshare C5:observedschtask}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedshare C3:observedfile, NOT-created V1:observedshare, knows_property V0:observedschtask C4:property, prop_host V1:observedshare C5:observedfile}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedshare C3:observedtimedelta, NOT-created V1:observedshare, knows_property V0:observedschtask C4:property, prop_host V1:observedshare C5:observedtimedelta}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedshare C3:observedshare, NOT-created V1:observedshare, knows_property V0:observedschtask C4:property, prop_host V1:observedshare C5:observedshare}
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomainuser C3:observedschtask, NOT-created V1:observeddomainuser, knows_property V0:observedschtask C4:property, prop_host V1:observeddomainuser C5:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomainuser C3:observedfile, NOT-created V1:observeddomainuser, knows_property V0:observedschtask C4:property, prop_host V1:observeddomainuser C5:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomainuser C3:observedtimedelta, NOT-created V1:observeddomainuser, knows_property V0:observedschtask C4:property, prop_host V1:observeddomainuser C5:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomainuser C3:observedshare, NOT-created V1:observeddomainuser, knows_property V0:observedschtask C4:property, prop_host V1:observeddomainuser C5:observedshare}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomaincredential C3:observedschtask, NOT-created V1:observeddomaincredential, knows_property V0:observedschtask C4:property, prop_host V1:observeddomaincredential C5:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomaincredential C3:observedfile, NOT-created V1:observeddomaincredential, knows_property V0:observedschtask C4:property, prop_host V1:observeddomaincredential C5:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomaincredential C3:observedtimedelta, NOT-created V1:observeddomaincredential, knows_property V0:observedschtask C4:property, prop_host V1:observeddomaincredential C5:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host V1:observeddomaincredential C3:observedshare, NOT-created V1:observeddomaincredential, knows_property V0:observedschtask C4:property, prop_host V1:observeddomaincredential C5:observedshare}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedrat C3:observedschtask, NOT-created V1:observedrat, knows_property V0:observedschtask C4:property, prop_host V1:observedrat C5:observedschtask}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedrat C3:observedfile, NOT-created V1:observedrat, knows_property V0:observedschtask C4:property, prop_host V1:observedrat C5:observedfile}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedrat C3:observedtimedelta, NOT-created V1:observedrat, knows_property V0:observedschtask C4:property, prop_host V1:observedrat C5:observedtimedelta}
 , {knows_property V0:observedschtask C2:property, prop_host V1:observedrat C3:observedshare, NOT-created V1:observedrat, knows_property V0:observedschtask C4:property, prop_host V1:observedrat C5:observedshare}
 , {knows_property V0:observedschtask C2:property, prop_host C3:object_type id_adomain, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host C5:object_type id_adomain}
 , {knows_property V0:observedschtask C2:property, prop_host C3:observedrat id_adomain, NOT-created V1:object_type, knows_property V0:observedschtask C4:property, prop_host C5:observedrat id_adomain}
-, {knows_property V0:observedschtask C2:property, prop_host C3:observedschtask V1:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedschtask V1:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:observedhost V1:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedhost V1:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:observedshare V1:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observedshare V1:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:observeddomainuser V1:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observeddomainuser V1:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:observeddomaincredential V1:object_type, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:observeddomaincredential V1:object_type}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observedschtask, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observedschtask}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observedfile, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observedfile}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observedtimedelta, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observedtimedelta}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observedshare, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observedshare}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observeddomainuser, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observeddomainuser}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observeddomaincredential, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observeddomaincredential}:=1:S
-, {knows_property V0:observedschtask C2:property, prop_host C3:object_type V1:observedrat, NOT-created V0:observedschtask, knows_property V0:observedschtask C4:property, prop_host C5:object_type V1:observedrat}:=1:S
 , {knows_property V0:observedschtask C2:property, prop_host C3:object_type C4:observedschtask, NOT-created V1:object_type, knows_property V0:observedschtask C5:property, prop_host C6:object_type C7:observedschtask}
 , {knows_property V0:observedschtask C2:property, prop_host C3:object_type C4:observedfile, NOT-created V1:object_type, knows_property V0:observedschtask C5:property, prop_host C6:object_type C7:observedfile}
 , {knows_property V0:observedschtask C2:property, prop_host C3:object_type C4:observedtimedelta, NOT-created V1:object_type, knows_property V0:observedschtask C5:property, prop_host C6:object_type C7:observedtimedelta}
@@ -1729,13 +1249,7 @@
 , {knows_property C1:observedschtask C2:property, prop_host C3:observedrat C4:observedrat, NOT-created V0:observedshare, knows_property C5:observedschtask C6:property, prop_host C7:observedrat C8:observedrat}
 , {knows_property C2:observedschtask V0:property, prop_host id_adomain C3:object_type, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host id_adomain C5:object_type}
 , {knows_property C2:observedschtask V0:property, prop_host V1:object_type id_adomain, NOT-created V1:object_type, knows_property C3:observedschtask V0:property}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedschtask id_adomain, NOT-created V1:observedschtask, knows_property C3:observedschtask V0:property}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedfile id_adomain, NOT-created V1:observedfile, knows_property C3:observedschtask V0:property}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedtimedelta id_adomain, NOT-created V1:observedtimedelta, knows_property C3:observedschtask V0:property}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedhost id_adomain, NOT-created V1:observedhost, knows_property C3:observedschtask V0:property}:=1:S
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedshare id_adomain, NOT-created V1:observedshare, knows_property C3:observedschtask V0:property}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomainuser id_adomain, NOT-created V1:observeddomainuser, knows_property C3:observedschtask V0:property}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomaincredential id_adomain, NOT-created V1:observeddomaincredential, knows_property C3:observedschtask V0:property}:=1:S
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedrat id_adomain, NOT-created V1:observedrat, knows_property C3:observedschtask V0:property}
 , {knows_property C2:observedschtask V0:property, prop_host V1:object_type C3:observedschtask, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host V1:object_type C5:observedschtask}
 , {knows_property C2:observedschtask V0:property, prop_host V1:object_type C3:observedfile, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host V1:object_type C5:observedfile}
@@ -1744,39 +1258,13 @@
 , {knows_property C2:observedschtask V0:property, prop_host V1:object_type C3:observeddomainuser, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host V1:object_type C5:observeddomainuser}
 , {knows_property C2:observedschtask V0:property, prop_host V1:object_type C3:observeddomaincredential, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host V1:object_type C5:observeddomaincredential}
 , {knows_property C2:observedschtask V0:property, prop_host V1:object_type C3:observedrat, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host V1:object_type C5:observedrat}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedschtask C3:observedschtask, NOT-created V1:observedschtask, knows_property C4:observedschtask V0:property, prop_host V1:observedschtask C5:observedschtask}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedschtask C3:observedfile, NOT-created V1:observedschtask, knows_property C4:observedschtask V0:property, prop_host V1:observedschtask C5:observedfile}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedschtask C3:observedtimedelta, NOT-created V1:observedschtask, knows_property C4:observedschtask V0:property, prop_host V1:observedschtask C5:observedtimedelta}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedschtask C3:observedshare, NOT-created V1:observedschtask, knows_property C4:observedschtask V0:property, prop_host V1:observedschtask C5:observedshare}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedfile C3:observedschtask, NOT-created V1:observedfile, knows_property C4:observedschtask V0:property, prop_host V1:observedfile C5:observedschtask}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedfile C3:observedfile, NOT-created V1:observedfile, knows_property C4:observedschtask V0:property, prop_host V1:observedfile C5:observedfile}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedfile C3:observedtimedelta, NOT-created V1:observedfile, knows_property C4:observedschtask V0:property, prop_host V1:observedfile C5:observedtimedelta}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedfile C3:observedshare, NOT-created V1:observedfile, knows_property C4:observedschtask V0:property, prop_host V1:observedfile C5:observedshare}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedtimedelta C3:observedschtask, NOT-created V1:observedtimedelta, knows_property C4:observedschtask V0:property, prop_host V1:observedtimedelta C5:observedschtask}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedtimedelta C3:observedfile, NOT-created V1:observedtimedelta, knows_property C4:observedschtask V0:property, prop_host V1:observedtimedelta C5:observedfile}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedtimedelta C3:observedtimedelta, NOT-created V1:observedtimedelta, knows_property C4:observedschtask V0:property, prop_host V1:observedtimedelta C5:observedtimedelta}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedtimedelta C3:observedshare, NOT-created V1:observedtimedelta, knows_property C4:observedschtask V0:property, prop_host V1:observedtimedelta C5:observedshare}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedhost C3:observedschtask, NOT-created V1:observedhost, knows_property C4:observedschtask V0:property, prop_host V1:observedhost C5:observedschtask}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedhost C3:observedfile, NOT-created V1:observedhost, knows_property C4:observedschtask V0:property, prop_host V1:observedhost C5:observedfile}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedhost C3:observedtimedelta, NOT-created V1:observedhost, knows_property C4:observedschtask V0:property, prop_host V1:observedhost C5:observedtimedelta}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedhost C3:observedshare, NOT-created V1:observedhost, knows_property C4:observedschtask V0:property, prop_host V1:observedhost C5:observedshare}:=1:S
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedshare C3:object_type, NOT-created V1:observedshare, knows_property C4:observedschtask V0:property, prop_host V1:observedshare C5:object_type}
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedshare C3:observedschtask, NOT-created V1:observedshare, knows_property C4:observedschtask V0:property, prop_host V1:observedshare C5:observedschtask}
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedshare C3:observedfile, NOT-created V1:observedshare, knows_property C4:observedschtask V0:property, prop_host V1:observedshare C5:observedfile}
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedshare C3:observedtimedelta, NOT-created V1:observedshare, knows_property C4:observedschtask V0:property, prop_host V1:observedshare C5:observedtimedelta}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedshare C3:observedshare, NOT-created V1:observedshare, knows_property C4:observedschtask V0:property, prop_host V1:observedshare C5:observedshare}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomainuser C3:observedschtask, NOT-created V1:observeddomainuser, knows_property C4:observedschtask V0:property, prop_host V1:observeddomainuser C5:observedschtask}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomainuser C3:observedfile, NOT-created V1:observeddomainuser, knows_property C4:observedschtask V0:property, prop_host V1:observeddomainuser C5:observedfile}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomainuser C3:observedtimedelta, NOT-created V1:observeddomainuser, knows_property C4:observedschtask V0:property, prop_host V1:observeddomainuser C5:observedtimedelta}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomainuser C3:observedshare, NOT-created V1:observeddomainuser, knows_property C4:observedschtask V0:property, prop_host V1:observeddomainuser C5:observedshare}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomaincredential C3:observedschtask, NOT-created V1:observeddomaincredential, knows_property C4:observedschtask V0:property, prop_host V1:observeddomaincredential C5:observedschtask}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomaincredential C3:observedfile, NOT-created V1:observeddomaincredential, knows_property C4:observedschtask V0:property, prop_host V1:observeddomaincredential C5:observedfile}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomaincredential C3:observedtimedelta, NOT-created V1:observeddomaincredential, knows_property C4:observedschtask V0:property, prop_host V1:observeddomaincredential C5:observedtimedelta}:=1:S
-, {knows_property C2:observedschtask V0:property, prop_host V1:observeddomaincredential C3:observedshare, NOT-created V1:observeddomaincredential, knows_property C4:observedschtask V0:property, prop_host V1:observeddomaincredential C5:observedshare}:=1:S
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedrat C3:observedschtask, NOT-created V1:observedrat, knows_property C4:observedschtask V0:property, prop_host V1:observedrat C5:observedschtask}
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedrat C3:observedfile, NOT-created V1:observedrat, knows_property C4:observedschtask V0:property, prop_host V1:observedrat C5:observedfile}
 , {knows_property C2:observedschtask V0:property, prop_host V1:observedrat C3:observedtimedelta, NOT-created V1:observedrat, knows_property C4:observedschtask V0:property, prop_host V1:observedrat C5:observedtimedelta}
-, {knows_property C2:observedschtask V0:property, prop_host V1:observedrat C3:observedshare, NOT-created V1:observedrat, knows_property C4:observedschtask V0:property, prop_host V1:observedrat C5:observedshare}
 , {knows_property C2:observedschtask V0:property, prop_host C3:object_type id_adomain, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host C5:object_type id_adomain}
 , {knows_property C2:observedschtask V0:property, prop_host C3:observedrat id_adomain, NOT-created V1:object_type, knows_property C4:observedschtask V0:property, prop_host C5:observedrat id_adomain}
 , {knows_property C2:observedschtask V0:property, prop_host C3:object_type C4:observedschtask, NOT-created V1:object_type, knows_property C5:observedschtask V0:property, prop_host C6:object_type C7:observedschtask}

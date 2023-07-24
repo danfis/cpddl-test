@@ -42,60 +42,60 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[12]:
     make-product: ?p:2
-        pre: (and (R:= ?p p1) (RW:NOT-made p1) (RW:started o2))
+        pre: (and (R:= ?p p1) (RW:started o2) (RW:NOT-made p1))
         eff: (and (RW:made p1) (N:RW:NOT-made p1))
     start-order: ?o:1 ?avail:3 ?new-avail:3
-        pre: (and (RW:waiting ?o) (RW:stacks-avail ?avail) (R:next-count ?new-avail ?avail))
+        pre: (and (R:next-count ?new-avail ?avail) (RW:waiting ?o) (RW:stacks-avail ?avail))
         eff: (and (N:RW:waiting ?o) (RW:started ?o) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
     ship-order: ?o:1 ?avail:3 ?new-avail:3
-        pre: (and (R:= ?o o1) (RW:started o1) (RW:made p2) (RW:stacks-avail ?avail) (R:next-count ?avail ?new-avail))
+        pre: (and (R:= ?o o1) (R:next-count ?avail ?new-avail) (RW:started o1) (RW:made p2) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o1) (W:shipped o1) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
     open-new-stack: ?open:3 ?new-open:3
-        pre: (and (RW:stacks-avail ?open) (R:next-count ?open ?new-open))
+        pre: (and (R:next-count ?open ?new-open) (RW:stacks-avail ?open))
         eff: (and (N:RW:stacks-avail ?open) (RW:stacks-avail ?new-open) (increase (total-cost) 1))
     make-product: ?p:2
-        pre: (and (R:= ?p p2) (RW:NOT-made p2) (RW:started o1) (RW:started o2))
+        pre: (and (R:= ?p p2) (RW:started o1) (RW:started o2) (RW:NOT-made p2))
         eff: (and (RW:made p2) (N:RW:NOT-made p2))
     make-product: ?p:2
-        pre: (and (R:= ?p p3) (RW:NOT-made p3) (RW:started o3) (RW:started o4))
+        pre: (and (R:= ?p p3) (RW:started o3) (RW:started o4) (RW:NOT-made p3))
         eff: (and (RW:made p3) (N:RW:NOT-made p3))
     make-product: ?p:2
-        pre: (and (R:= ?p p4) (RW:NOT-made p4) (RW:started o4))
+        pre: (and (R:= ?p p4) (RW:started o4) (RW:NOT-made p4))
         eff: (and (RW:made p4) (N:RW:NOT-made p4))
     make-product: ?p:2
-        pre: (and (R:= ?p p5) (RW:NOT-made p5) (RW:started o5))
+        pre: (and (R:= ?p p5) (RW:started o5) (RW:NOT-made p5))
         eff: (and (RW:made p5) (N:RW:NOT-made p5))
     ship-order: ?o:1 ?avail:3 ?new-avail:3
-        pre: (and (R:= ?o o2) (RW:started o2) (RW:stacks-avail ?avail) (R:next-count ?avail ?new-avail) (RW:made p1) (RW:made p2))
+        pre: (and (R:= ?o o2) (R:next-count ?avail ?new-avail) (RW:started o2) (RW:made p1) (RW:made p2) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o2) (W:shipped o2) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
     ship-order: ?o:1 ?avail:3 ?new-avail:3
-        pre: (and (R:= ?o o3) (RW:started o3) (RW:made p3) (RW:stacks-avail ?avail) (R:next-count ?avail ?new-avail))
+        pre: (and (R:= ?o o3) (R:next-count ?avail ?new-avail) (RW:started o3) (RW:made p3) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o3) (W:shipped o3) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
     ship-order: ?o:1 ?avail:3 ?new-avail:3
-        pre: (and (R:= ?o o4) (RW:started o4) (RW:stacks-avail ?avail) (R:next-count ?avail ?new-avail) (RW:made p3) (RW:made p4))
+        pre: (and (R:= ?o o4) (R:next-count ?avail ?new-avail) (RW:started o4) (RW:made p3) (RW:made p4) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o4) (W:shipped o4) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
     ship-order: ?o:1 ?avail:3 ?new-avail:3
-        pre: (and (R:= ?o o5) (RW:started o5) (RW:made p5) (RW:stacks-avail ?avail) (R:next-count ?avail ?new-avail))
+        pre: (and (R:= ?o o5) (R:next-count ?avail ?new-avail) (RW:started o5) (RW:made p5) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o5) (W:shipped o5) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
 Init[23]:
+  S:(includes o1 p2)
+  S:(includes o2 p1)
+  S:(includes o2 p2)
+  S:(includes o3 p3)
+  S:(includes o4 p3)
+  S:(includes o4 p4)
+  S:(includes o5 p5)
   S:(next-count n0 n1)
   S:(next-count n1 n2)
   S:(next-count n2 n3)
   S:(next-count n3 n4)
   S:(next-count n4 n5)
-  (stacks-avail n0)
   (waiting o1)
-  S:(includes o1 p2)
   (waiting o2)
-  S:(includes o2 p1)
-  S:(includes o2 p2)
   (waiting o3)
-  S:(includes o3 p3)
   (waiting o4)
-  S:(includes o4 p3)
-  S:(includes o4 p4)
   (waiting o5)
-  S:(includes o5 p5)
+  (stacks-avail n0)
   (NOT-made p1)
   (NOT-made p2)
   (NOT-made p3)

@@ -79,87 +79,87 @@ Function[1]:
 Action[23]:
     initialize: 
         pre: (and (RW:uninitialized))
-        eff: (and (N:RW:uninitialized) (RW:available endcap-rsrc) (RW:available htmoverblack-rsrc) (RW:available colorcontainer-rsrc) (RW:available colorprinter-rsrc) (RW:available colorfeeder-rsrc) (RW:available blackfeeder-rsrc) (RW:available down-rsrc) (RW:available htmovercolor-rsrc) (RW:available blackcontainer-rsrc) (RW:available blackprinter-rsrc) (RW:available up-rsrc) (RW:available finisher1-rsrc) (RW:available finisher2-rsrc))
+        eff: (and (RW:available endcap-rsrc) (RW:available htmoverblack-rsrc) (RW:available colorcontainer-rsrc) (RW:available colorprinter-rsrc) (RW:available colorfeeder-rsrc) (RW:available blackfeeder-rsrc) (RW:available down-rsrc) (RW:available htmovercolor-rsrc) (RW:available blackcontainer-rsrc) (RW:available blackprinter-rsrc) (RW:available up-rsrc) (RW:available finisher1-rsrc) (RW:available finisher2-rsrc) (N:RW:uninitialized))
     endcap-move-letter: ?sheet:7
-        pre: (and (RW:available endcap-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet endcap_entry-blackcontainer_exit))
-        eff: (and (RW:location ?sheet htmoverblack_entry-endcap_exit) (N:RW:location ?sheet endcap_entry-blackcontainer_exit) (RW:available endcap-rsrc) (increase (total-cost) 2000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet endcap_entry-blackcontainer_exit) (RW:available endcap-rsrc))
+        eff: (and (N:RW:location ?sheet endcap_entry-blackcontainer_exit) (RW:location ?sheet htmoverblack_entry-endcap_exit) (RW:available endcap-rsrc) (increase (total-cost) 2000))
     htmoverblack-move-letter: ?sheet:7
-        pre: (and (RW:available htmoverblack-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet htmoverblack_entry-endcap_exit))
-        eff: (and (RW:location ?sheet htmoverblack_exit-down_topentry) (N:RW:location ?sheet htmoverblack_entry-endcap_exit) (RW:available htmoverblack-rsrc) (increase (total-cost) 17999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet htmoverblack_entry-endcap_exit) (RW:available htmoverblack-rsrc))
+        eff: (and (N:RW:location ?sheet htmoverblack_entry-endcap_exit) (RW:location ?sheet htmoverblack_exit-down_topentry) (RW:available htmoverblack-rsrc) (increase (total-cost) 17999))
     colorcontainer-toime-letter: ?sheet:7
-        pre: (and (RW:available colorcontainer-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet colorcontainer_entry-down_bottomexit))
-        eff: (and (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:location ?sheet colorcontainer_entry-down_bottomexit) (RW:available colorcontainer-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet colorcontainer_entry-down_bottomexit) (RW:available colorcontainer-rsrc))
+        eff: (and (N:RW:location ?sheet colorcontainer_entry-down_bottomexit) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:available colorcontainer-rsrc) (increase (total-cost) 8000))
     colorcontainer-fromime-letter: ?sheet:7
-        pre: (and (RW:available colorcontainer-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime))
-        eff: (and (RW:location ?sheet colorcontainer_exit-up_bottomentry) (N:RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (RW:available colorcontainer-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (RW:available colorcontainer-rsrc))
+        eff: (and (N:RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (RW:location ?sheet colorcontainer_exit-up_bottomentry) (RW:available colorcontainer-rsrc) (increase (total-cost) 8000))
     colorprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face color))
-        eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face color) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
+        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image color) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face color) (RW:available colorprinter-rsrc))
+        eff: (and (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
     colorprinter-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available colorprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:notprintedwith ?sheet ?face black))
-        eff: (and (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
+        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available colorprinter-rsrc))
+        eff: (and (N:RW:location ?sheet colorcontainer_exittoime-colorprinter_entry) (RW:location ?sheet colorprinter_exit-colorcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available colorprinter-rsrc) (increase (total-cost) 224040))
     colorfeeder-feed-letter: ?sheet:7
-        pre: (and (RW:available colorfeeder-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
-        eff: (and (RW:location ?sheet down_bottomentry-colorfeeder_exit) (RW:sideup ?sheet front) (N:RW:location ?sheet some_feeder_tray) (RW:available colorfeeder-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray) (RW:available colorfeeder-rsrc))
+        eff: (and (N:RW:location ?sheet some_feeder_tray) (RW:location ?sheet down_bottomentry-colorfeeder_exit) (RW:sideup ?sheet front) (RW:available colorfeeder-rsrc) (increase (total-cost) 8000))
     blackfeeder-feed-letter: ?sheet:7
-        pre: (and (RW:available blackfeeder-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
-        eff: (and (RW:location ?sheet blackcontainer_entry-blackfeeder_exit) (RW:sideup ?sheet front) (N:RW:location ?sheet some_feeder_tray) (RW:available blackfeeder-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray) (RW:available blackfeeder-rsrc))
+        eff: (and (N:RW:location ?sheet some_feeder_tray) (RW:location ?sheet blackcontainer_entry-blackfeeder_exit) (RW:sideup ?sheet front) (RW:available blackfeeder-rsrc) (increase (total-cost) 8000))
     down-movetop-letter: ?sheet:7
-        pre: (and (RW:available down-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet htmoverblack_exit-down_topentry))
-        eff: (and (RW:location ?sheet down_topexit-htmovercolor_entry) (N:RW:location ?sheet htmoverblack_exit-down_topentry) (RW:available down-rsrc) (increase (total-cost) 2999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet htmoverblack_exit-down_topentry) (RW:available down-rsrc))
+        eff: (and (N:RW:location ?sheet htmoverblack_exit-down_topentry) (RW:location ?sheet down_topexit-htmovercolor_entry) (RW:available down-rsrc) (increase (total-cost) 2999))
     down-movebottom-letter: ?sheet:7
-        pre: (and (RW:available down-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet down_bottomentry-colorfeeder_exit))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet down_bottomentry-colorfeeder_exit) (RW:available down-rsrc))
         eff: (and (RW:location ?sheet colorcontainer_entry-down_bottomexit) (N:RW:location ?sheet down_bottomentry-colorfeeder_exit) (RW:available down-rsrc) (increase (total-cost) 2999))
     down-movedown-letter: ?sheet:7
-        pre: (and (RW:available down-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet htmoverblack_exit-down_topentry))
-        eff: (and (RW:location ?sheet colorcontainer_entry-down_bottomexit) (N:RW:location ?sheet htmoverblack_exit-down_topentry) (RW:available down-rsrc) (increase (total-cost) 9999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet htmoverblack_exit-down_topentry) (RW:available down-rsrc))
+        eff: (and (N:RW:location ?sheet htmoverblack_exit-down_topentry) (RW:location ?sheet colorcontainer_entry-down_bottomexit) (RW:available down-rsrc) (increase (total-cost) 9999))
     htmovercolor-move-letter: ?sheet:7
-        pre: (and (RW:available htmovercolor-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet down_topexit-htmovercolor_entry))
-        eff: (and (RW:location ?sheet htmovercolor_exit-up_topentry) (N:RW:location ?sheet down_topexit-htmovercolor_entry) (RW:available htmovercolor-rsrc) (increase (total-cost) 9999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet down_topexit-htmovercolor_entry) (RW:available htmovercolor-rsrc))
+        eff: (and (N:RW:location ?sheet down_topexit-htmovercolor_entry) (RW:location ?sheet htmovercolor_exit-up_topentry) (RW:available htmovercolor-rsrc) (increase (total-cost) 9999))
     blackcontainer-toime-letter: ?sheet:7
-        pre: (and (RW:available blackcontainer-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet blackcontainer_entry-blackfeeder_exit))
-        eff: (and (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:location ?sheet blackcontainer_entry-blackfeeder_exit) (RW:available blackcontainer-rsrc) (increase (total-cost) 2000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet blackcontainer_entry-blackfeeder_exit) (RW:available blackcontainer-rsrc))
+        eff: (and (N:RW:location ?sheet blackcontainer_entry-blackfeeder_exit) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:available blackcontainer-rsrc) (increase (total-cost) 2000))
     blackcontainer-fromime-letter: ?sheet:7
-        pre: (and (RW:available blackcontainer-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (RW:available blackcontainer-rsrc))
         eff: (and (RW:location ?sheet endcap_entry-blackcontainer_exit) (N:RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (RW:available blackcontainer-rsrc) (increase (total-cost) 2000))
     blackprinter-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black))
-        eff: (and (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc) (increase (total-cost) 113013))
+        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc))
+        eff: (and (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc) (increase (total-cost) 113013))
     blackprinter-simplexandinvert-letter: ?sheet:7 ?face:3 ?otherface:3 ?image:5
-        pre: (and (RW:available blackprinter-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (R:imagecolor ?image black) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:notprintedwith ?sheet ?face black) (RW:sideup ?sheet ?face))
-        eff: (and (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (RW:sideup ?sheet ?otherface) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (N:RW:notprintedwith ?sheet ?face black) (N:RW:sideup ?sheet ?face) (RW:available blackprinter-rsrc) (increase (total-cost) 123013))
+        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (R:oppositeside ?face ?otherface) (RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc))
+        eff: (and (N:RW:location ?sheet blackcontainer_exittoime-blackprinter_entry) (RW:location ?sheet blackprinter_exit-blackcontainer_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (N:RW:notprintedwith ?sheet ?face black) (RW:available blackprinter-rsrc) (increase (total-cost) 123013))
     up-movetop-letter: ?sheet:7
-        pre: (and (RW:available up-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet htmovercolor_exit-up_topentry))
-        eff: (and (RW:location ?sheet finisher1_entry-up_topexit) (N:RW:location ?sheet htmovercolor_exit-up_topentry) (RW:available up-rsrc) (increase (total-cost) 2999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet htmovercolor_exit-up_topentry) (RW:available up-rsrc))
+        eff: (and (N:RW:location ?sheet htmovercolor_exit-up_topentry) (RW:location ?sheet finisher1_entry-up_topexit) (RW:available up-rsrc) (increase (total-cost) 2999))
     up-moveup-letter: ?sheet:7
-        pre: (and (RW:available up-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet colorcontainer_exit-up_bottomentry))
-        eff: (and (RW:location ?sheet finisher1_entry-up_topexit) (N:RW:location ?sheet colorcontainer_exit-up_bottomentry) (RW:available up-rsrc) (increase (total-cost) 9999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet colorcontainer_exit-up_bottomentry) (RW:available up-rsrc))
+        eff: (and (N:RW:location ?sheet colorcontainer_exit-up_bottomentry) (RW:location ?sheet finisher1_entry-up_topexit) (RW:available up-rsrc) (increase (total-cost) 9999))
     finisher1-passthrough-letter: ?sheet:7
-        pre: (and (RW:available finisher1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet finisher1_entry-up_topexit))
-        eff: (and (RW:location ?sheet finisher2_entry-finisher1_exit) (N:RW:location ?sheet finisher1_entry-up_topexit) (RW:available finisher1-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet finisher1_entry-up_topexit) (RW:available finisher1-rsrc))
+        eff: (and (N:RW:location ?sheet finisher1_entry-up_topexit) (RW:location ?sheet finisher2_entry-finisher1_exit) (RW:available finisher1-rsrc) (increase (total-cost) 8000))
     finisher1-stack-letter: ?sheet:7 ?prevsheet:7
-        pre: (and (RW:available finisher1-rsrc) (R:prevsheet ?sheet ?prevsheet) (RW:location ?prevsheet some_finisher_tray) (R:sheetsize ?sheet letter) (RW:location ?sheet finisher1_entry-up_topexit))
-        eff: (and (RW:location ?sheet some_finisher_tray) (W:stackedin ?sheet finisher1_tray) (N:RW:location ?sheet finisher1_entry-up_topexit) (RW:available finisher1-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (R:prevsheet ?sheet ?prevsheet) (RW:location ?sheet finisher1_entry-up_topexit) (RW:location ?prevsheet some_finisher_tray) (RW:available finisher1-rsrc))
+        eff: (and (RW:location ?sheet some_finisher_tray) (N:RW:location ?sheet finisher1_entry-up_topexit) (W:stackedin ?sheet finisher1_tray) (RW:available finisher1-rsrc) (increase (total-cost) 8000))
     finisher2-passthrough-letter: ?sheet:7
-        pre: (and (RW:available finisher2-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet finisher2_entry-finisher1_exit))
-        eff: (and (RW:location ?sheet finisher2_exit) (N:RW:location ?sheet finisher2_entry-finisher1_exit) (RW:available finisher2-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet finisher2_entry-finisher1_exit) (RW:available finisher2-rsrc))
+        eff: (and (N:RW:location ?sheet finisher2_entry-finisher1_exit) (RW:location ?sheet finisher2_exit) (RW:available finisher2-rsrc) (increase (total-cost) 8000))
     finisher2-stack-letter: ?sheet:7 ?prevsheet:7
-        pre: (and (RW:available finisher2-rsrc) (R:prevsheet ?sheet ?prevsheet) (RW:location ?prevsheet some_finisher_tray) (R:sheetsize ?sheet letter) (RW:location ?sheet finisher2_entry-finisher1_exit))
-        eff: (and (RW:location ?sheet some_finisher_tray) (W:stackedin ?sheet finisher2_tray) (N:RW:location ?sheet finisher2_entry-finisher1_exit) (RW:available finisher2-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (R:prevsheet ?sheet ?prevsheet) (RW:location ?sheet finisher2_entry-finisher1_exit) (RW:location ?prevsheet some_finisher_tray) (RW:available finisher2-rsrc))
+        eff: (and (RW:location ?sheet some_finisher_tray) (N:RW:location ?sheet finisher2_entry-finisher1_exit) (W:stackedin ?sheet finisher2_tray) (RW:available finisher2-rsrc) (increase (total-cost) 8000))
 Init[12]:
-  (uninitialized)
+  S:(sheetsize sheet1 letter)
+  S:(imagecolor image-1 black)
   S:(oppositeside front back)
   S:(oppositeside back front)
-  (location dummy-sheet some_finisher_tray)
   S:(prevsheet sheet1 dummy-sheet)
-  S:(sheetsize sheet1 letter)
+  (location dummy-sheet some_finisher_tray)
   (location sheet1 some_feeder_tray)
-  S:(imagecolor image-1 black)
   (notprintedwith sheet1 front black)
-  (notprintedwith sheet1 back black)
   (notprintedwith sheet1 front color)
+  (notprintedwith sheet1 back black)
   (notprintedwith sheet1 back color)
+  (uninitialized)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:hasimage sheet1 front image-1) (RW:notprintedwith sheet1 front color) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (RW:sideup sheet1 front) (W:stackedin sheet1 finisher1_tray))
+Goal: (and (W:hasimage sheet1 front image-1) (RW:sideup sheet1 front) (W:stackedin sheet1 finisher1_tray) (RW:notprintedwith sheet1 front color) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color))
 Metric: 1

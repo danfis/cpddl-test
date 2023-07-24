@@ -43,7 +43,7 @@ Function[0]:
 Action[1]:
     move: ?from:1 ?xsucc:1 ?ysucc:1
         pre: (and (R:x-succ ?from ?xsucc) (R:y-succ ?from ?ysucc) (RW:occupied ?from) (RW:free ?xsucc) (RW:free ?ysucc))
-        eff: (and (N:RW:occupied ?from) (N:RW:free ?xsucc) (N:RW:free ?ysucc) (RW:free ?from) (RW:occupied ?xsucc) (RW:occupied ?ysucc))
+        eff: (and (N:RW:occupied ?from) (RW:occupied ?xsucc) (RW:occupied ?ysucc) (RW:free ?from) (N:RW:free ?xsucc) (N:RW:free ?ysucc))
 Init[65]:
   S:(x-succ pos-0-0 pos-1-0)
   S:(x-succ pos-1-0 pos-2-0)
@@ -85,6 +85,9 @@ Init[65]:
   S:(y-succ pos-2-3 pos-2-4)
   S:(y-succ pos-3-3 pos-3-4)
   S:(y-succ pos-4-3 pos-4-4)
+  (occupied pos-0-0)
+  (occupied pos-1-0)
+  (occupied pos-0-1)
   (free pos-2-0)
   (free pos-3-0)
   (free pos-4-0)
@@ -107,9 +110,6 @@ Init[65]:
   (free pos-2-4)
   (free pos-3-4)
   (free pos-4-4)
-  (occupied pos-0-0)
-  (occupied pos-1-0)
-  (occupied pos-0-1)
 Init[0]:
 Goal: (and (RW:free pos-0-0) (RW:free pos-1-0) (RW:free pos-0-1))
 Metric: 0

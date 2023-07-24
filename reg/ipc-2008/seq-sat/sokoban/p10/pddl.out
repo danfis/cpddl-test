@@ -527,14 +527,14 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[3]:
     move: ?p:4 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?from) (RW:clear ?to) (R:move-dir ?from ?to ?dir))
-        eff: (and (N:RW:at ?p ?from) (N:RW:clear ?to) (RW:at ?p ?to) (RW:clear ?from))
+        pre: (and (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?from))
+        eff: (and (RW:clear ?from) (N:RW:clear ?to) (N:RW:at ?p ?from) (RW:at ?p ?to))
     push-to-nongoal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?ppos) (RW:at ?s ?from) (RW:clear ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (R:is-nongoal ?to))
-        eff: (and (N:RW:at ?p ?ppos) (N:RW:at ?s ?from) (N:RW:clear ?to) (RW:at ?p ?from) (RW:at ?s ?to) (RW:clear ?ppos) (N:W:at-goal ?s) (increase (total-cost) 1))
+        pre: (and (R:is-nongoal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (N:W:at-goal ?s) (increase (total-cost) 1))
     push-to-goal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?ppos) (RW:at ?s ?from) (RW:clear ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (R:is-goal ?to))
-        eff: (and (N:RW:at ?p ?ppos) (N:RW:at ?s ?from) (N:RW:clear ?to) (RW:at ?p ?from) (RW:at ?s ?to) (RW:clear ?ppos) (W:at-goal ?s) (increase (total-cost) 1))
+        pre: (and (R:is-goal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (W:at-goal ?s) (increase (total-cost) 1))
 Init[1184]:
   S:(is-goal pos-02-16)
   S:(is-nongoal pos-01-01)
@@ -1489,8 +1489,6 @@ Init[1184]:
   S:(move-dir pos-28-15 pos-28-16 dir-down)
   S:(move-dir pos-28-16 pos-27-16 dir-left)
   S:(move-dir pos-28-16 pos-28-15 dir-up)
-  (at player-01 pos-04-16)
-  (at stone-01 pos-03-15)
   (clear pos-01-01)
   (clear pos-01-02)
   (clear pos-01-03)
@@ -1720,6 +1718,8 @@ Init[1184]:
   (clear pos-28-14)
   (clear pos-28-15)
   (clear pos-28-16)
+  (at player-01 pos-04-16)
+  (at stone-01 pos-03-15)
 Init[1]:
   (= (total-cost) 0)
 Goal: (W:at-goal stone-01)

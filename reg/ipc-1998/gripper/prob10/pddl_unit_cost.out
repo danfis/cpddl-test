@@ -45,12 +45,12 @@ Function[0]:
 Action[3]:
     move: ?from:0 ?to:0
         pre: (and (R:room ?from) (R:room ?to) (RW:at-robby ?from))
-        eff: (and (RW:at-robby ?to) (N:RW:at-robby ?from))
+        eff: (and (N:RW:at-robby ?from) (RW:at-robby ?to))
     pick: ?obj:0 ?room:0 ?gripper:0
-        pre: (and (R:ball ?obj) (R:room ?room) (R:gripper ?gripper) (RW:at ?obj ?room) (RW:at-robby ?room) (RW:free ?gripper))
-        eff: (and (RW:carry ?obj ?gripper) (N:RW:at ?obj ?room) (N:RW:free ?gripper))
+        pre: (and (R:room ?room) (R:ball ?obj) (R:gripper ?gripper) (RW:at-robby ?room) (RW:at ?obj ?room) (RW:free ?gripper))
+        eff: (and (N:RW:at ?obj ?room) (N:RW:free ?gripper) (RW:carry ?obj ?gripper))
     drop: ?obj:0 ?room:0 ?gripper:0
-        pre: (and (R:ball ?obj) (R:room ?room) (R:gripper ?gripper) (RW:carry ?obj ?gripper) (RW:at-robby ?room))
+        pre: (and (R:room ?room) (R:ball ?obj) (R:gripper ?gripper) (RW:at-robby ?room) (RW:carry ?obj ?gripper))
         eff: (and (RW:at ?obj ?room) (RW:free ?gripper) (N:RW:carry ?obj ?gripper))
 Init[51]:
   S:(room rooma)
@@ -77,9 +77,9 @@ Init[51]:
   S:(ball ball3)
   S:(ball ball2)
   S:(ball ball1)
+  S:(gripper left)
+  S:(gripper right)
   (at-robby rooma)
-  (free left)
-  (free right)
   (at ball22 rooma)
   (at ball21 rooma)
   (at ball20 rooma)
@@ -102,8 +102,8 @@ Init[51]:
   (at ball3 rooma)
   (at ball2 rooma)
   (at ball1 rooma)
-  S:(gripper left)
-  S:(gripper right)
+  (free left)
+  (free right)
 Init[0]:
 Goal: (and (RW:at ball22 roomb) (RW:at ball21 roomb) (RW:at ball20 roomb) (RW:at ball19 roomb) (RW:at ball18 roomb) (RW:at ball17 roomb) (RW:at ball16 roomb) (RW:at ball15 roomb) (RW:at ball14 roomb) (RW:at ball13 roomb) (RW:at ball12 roomb) (RW:at ball11 roomb) (RW:at ball10 roomb) (RW:at ball9 roomb) (RW:at ball8 roomb) (RW:at ball7 roomb) (RW:at ball6 roomb) (RW:at ball5 roomb) (RW:at ball4 roomb) (RW:at ball3 roomb) (RW:at ball2 roomb) (RW:at ball1 roomb))
 Metric: 0
