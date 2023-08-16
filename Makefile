@@ -53,6 +53,7 @@ TESTS += endomorphism
 TESTS += lifted_heur
 TESTS += subprocess
 TESTS += lifted_search
+TESTS += search
 #TESTS += asnets
 
 
@@ -68,8 +69,8 @@ test: test.c tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
 	$(CC) $(CFLAGS) -o $@ $< tasks_tests.c $(OBJS) $(LDFLAGS)
 test.in.c: scripts/gen-tests.py $(TESTS_C)
 	python3 scripts/gen-tests.py $(TESTS_C) >$@
-tasks.in.c: tasks-base.txt tasks-all.txt scripts/gen-tasks.py
-	python3 scripts/gen-tasks.py tasks-base.txt tasks-all.txt >$@
+tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
+	python3 scripts/gen-tasks.py tasks-disable.txt tasks-base.txt tasks-all.txt >$@
 
 .objs/%.o: tests/%.c tests/%.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<

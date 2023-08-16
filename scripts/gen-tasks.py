@@ -7,7 +7,8 @@ from pprint import pprint
 LARGE_TESTS = ['h3', 'h3mgroup', 'symbolic',
                'endomorphism_tss', 'endomorphism_tss_minizinc',
                'endomorphism_tss_nocost',
-               'lifted_search', 'lifted_search_unit_cost']
+               'lifted_search', 'lifted_search_unit_cost',
+               'search']
 VERY_LARGE_TESTS = LARGE_TESTS \
     + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential',
        'homomorphism_reduce', 'homomorphism_endomorph',
@@ -35,15 +36,27 @@ typedef struct task_def task_def_t;
 
 
 Task = {}
+Disabled = {}
+
+def parseDisabled(fin = sys.stdin):
+    global Disabled
+    for line in fin:
+        task, test = [x for x in line.strip().split() if len(x) > 0]
+        if task not in Disabled:
+            Disabled[task] = {}
+        Disabled[task][test] = True
 
 def parseFile(fin = sys.stdin, is_base = False):
     global Task
+    global Disabled
     for line in fin:
         s = [x for x in line.strip().split() if len(x) > 0]
         task = s[0]
-        if s[0] in Task:
+        if task in Task:
             raise Exception('{0} already defined'.format(s[0]))
         disabled = []
+        if task in Disabled:
+            disabled += list(Disabled[task].keys())
         enabled = []
         large = False
         for x in s[1:]:
@@ -51,8 +64,6 @@ def parseFile(fin = sys.stdin, is_base = False):
                 disabled += LARGE_TESTS
             elif x == '~LL':
                 disabled += VERY_LARGE_TESTS
-            elif x.startswith('!'):
-                disabled += [x[1:]]
             else:
                 enabled += [x]
         d = {
@@ -60,7 +71,7 @@ def parseFile(fin = sys.stdin, is_base = False):
             'enabled' : sorted(list(set(enabled))),
             'is-base' : is_base,
         }
-        Task[s[0]] = d
+        Task[task] = d
 
 
 
@@ -99,22 +110,34 @@ def genDefs():
     for id, name in enumerate(task_names):
         task = Task[name]
         for d in task['disabled']:
-            print(f'    tasks[{id}].default_disabled_tests[testIdFromName("{d}")] = 1;')
+            print(f'''    {{
+        int test_id = testIdFromName("{d}");
+        if (test_id >= 0){{
+            tasks[{id}].default_disabled_tests[test_id] = 1;
+        }}
+    }}''')
         for d in task['enabled']:
-            print(f'    tasks[{id}].default_enabled_tests[testIdFromName("{d}")] = 1;')
+            print(f'''    {{
+        int test_id = testIdFromName("{d}");
+        if (test_id >= 0){{
+            tasks[{id}].default_enabled_tests[test_id] = 1;
+        }}
+    }}''')
     print('}')
     pass
 
 def main():
-    if len(sys.argv) == 3:
+    if len(sys.argv) == 4:
         with open(sys.argv[1], 'r') as fin:
-            parseFile(fin, True)
+            parseDisabled(fin)
         with open(sys.argv[2], 'r') as fin:
+            parseFile(fin, True)
+        with open(sys.argv[3], 'r') as fin:
             parseFile(fin, False)
         genDefs()
         sys.exit(0)
     else:
-        print('Usage: {0} tasks-base.txt tasks-all.txt >tasks.in.c')
+        print('Usage: {0} tasks-disable.txt tasks-base.txt tasks-all.txt >tasks.in.c')
         sys.exit(-1)
 
 if __name__ == '__main__':
