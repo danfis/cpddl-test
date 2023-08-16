@@ -166,10 +166,13 @@ static void testGreedySearch(const pddl_lifted_search_config_t *cfg)
     while (ret == PDDL_LIFTED_SEARCH_CONT){
         ret = pddlLiftedSearchStep(search);
     }
+    pddl_lifted_search_stat_t stat;
+    pddlLiftedSearchStat(search, &stat);
+    printf("Expanded: %lu\n", (unsigned long)stat.expanded);
+
     if (ret == PDDL_LIFTED_SEARCH_FOUND){
         const pddl_lifted_plan_t *plan = pddlLiftedSearchPlan(search);
         //printf("Cost: %d\n", plan->plan_cost);
-        //fflush(stdout);
         int val = validateLiftedPlan(plan);
         assert(val == 0);
         if (C.optimal_cost >= 0)
@@ -180,6 +183,7 @@ static void testGreedySearch(const pddl_lifted_search_config_t *cfg)
         printf("Unsolvable\n");
     }
     pddlLiftedSearchDel(search);
+    fflush(stdout);
 }
 
 static void _lifted_search(pddl_lifted_heur_t *heur,
