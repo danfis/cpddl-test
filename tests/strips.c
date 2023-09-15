@@ -417,15 +417,15 @@ TEST_COND(strips_conj_hflow, strips_conj, LP)
     if (!stripsc_set)
         return;
 
-    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddl_fdr_config_t cfg = PDDL_FDR_CONFIG_INIT;
+    cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST;
+
     pddl_fdr_t fdr, fdrc;
-    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex, &cfg, &C.err);
 
     pddl_mutex_pairs_t mutexc;
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
-    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &cfg, &C.err);
     pddlMutexPairsFree(&mutexc);
 
     pddl_hflow_t hflow, hflowc;
@@ -451,15 +451,15 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     if (!stripsc_set)
         return;
 
-    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddl_fdr_config_t fdr_cfg = PDDL_FDR_CONFIG_INIT;
+    fdr_cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST;
+
     pddl_fdr_t fdr, fdrc;
-    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex, &fdr_cfg, &C.err);
 
     pddl_mutex_pairs_t mutexc;
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
-    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &fdr_cfg, &C.err);
 
     pddl_hpot_config_t cfg;
     pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;

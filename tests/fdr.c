@@ -3,15 +3,14 @@
 #include <assert.h>
 
 
-static void _test_fdr(unsigned fdr_var_flag, unsigned fdr_flag)
+static void _test_fdr(const pddl_fdr_config_t *cfg)
 {
     pddl_mutex_pairs_t mutex;
     pddlMutexPairsInit(&mutex, C.strips.fact.fact_size);
     pddlMutexPairsAddMGroups(&mutex, &C.mg);
 
-
     int ret = pddlFDRInitFromStrips(&C.fdr, &C.strips, &C.mg, &mutex,
-                                    fdr_var_flag, fdr_flag, &C.err);
+                                    cfg, &C.err);
     assert(ret == 0);
     C.fdr_set = 1;
     pddlFDRPrintFD(&C.fdr, &C.mg, 0, stdout);
@@ -20,24 +19,31 @@ static void _test_fdr(unsigned fdr_var_flag, unsigned fdr_flag)
 
 TEST(fdr_largest, strips_pruned)
 {
-    _test_fdr(PDDL_FDR_VARS_LARGEST_FIRST, 0u);
+    pddl_fdr_config_t cfg = PDDL_FDR_CONFIG_INIT;
+    cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST;
+    _test_fdr(&cfg);
 }
 
 TEST(fdr_essential, strips_pruned)
 {
-    _test_fdr(PDDL_FDR_VARS_ESSENTIAL_FIRST, 0u);
+    pddl_fdr_config_t cfg = PDDL_FDR_CONFIG_INIT;
+    cfg.var.alg = PDDL_FDR_VARS_ALG_ESSENTIAL_FIRST;
+    _test_fdr(&cfg);
 }
 
 TEST(fdr_largest_multi, strips_pruned)
 {
-    _test_fdr(PDDL_FDR_VARS_LARGEST_FIRST_MULTI, 0u);
+    pddl_fdr_config_t cfg = PDDL_FDR_CONFIG_INIT;
+    cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST_MULTI;
+    _test_fdr(&cfg);
 }
 
 TEST(fdr_h2, strips_pruned)
 {
-    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
-    pddlFDRInitFromStrips(&C.fdr, &C.strips, &C.mg, &C.mutex,
-                          var_flag, 0u, &C.err);
+    pddl_fdr_config_t cfg = PDDL_FDR_CONFIG_INIT;
+    cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST;
+
+    pddlFDRInitFromStrips(&C.fdr, &C.strips, &C.mg, &C.mutex, &cfg, &C.err);
     C.fdr_set = 1;
 
     PDDL_ISET(unreach_op);
