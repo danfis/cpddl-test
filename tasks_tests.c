@@ -18,20 +18,20 @@ static int testIdFromName(const char *name)
 
 #include "tasks.in.c"
 
-static void taskEnableTestAndChildren(int task_id, int test_id, int force)
+static void taskEnableTestAndChildren(int task_id, int test_id)
 {
-    if (!force && tasks[task_id].default_disabled_tests[test_id])
+    if (tasks[task_id].default_disabled_tests[test_id])
         return;
     tasks[task_id].enabled_tests[test_id] = 1;
 
     const test_def_t *test = tasksTestsGetTest(test_id);
     for (int i = 0; i < test->children_size; ++i)
-        taskEnableTestAndChildren(task_id, test->children[i], 0);
+        taskEnableTestAndChildren(task_id, test->children[i]);
 }
 
-static void taskEnableTestAndParents(int task_id, int test_id, int force)
+static void taskEnableTestAndParents(int task_id, int test_id)
 {
-    if (!force && tasks[task_id].default_disabled_tests[test_id])
+    if (tasks[task_id].default_disabled_tests[test_id])
         return;
 
     test_set[test_id].enabled = 1;
@@ -39,7 +39,7 @@ static void taskEnableTestAndParents(int task_id, int test_id, int force)
 
     const test_def_t *test = tasksTestsGetTest(test_id);
     if (test->parent >= 0)
-        taskEnableTestAndParents(task_id, test->parent, 0);
+        taskEnableTestAndParents(task_id, test->parent);
 }
 
 static void tasksEnableTask(int task_id)
@@ -47,10 +47,10 @@ static void tasksEnableTask(int task_id)
     tasks[task_id].enabled = 1;
 }
 
-static void tasksEnableTestAndParents(int test_id, int force)
+static void tasksEnableTestAndParents(int test_id)
 {
     for (int taski = 0; taski < tasks_size; ++taski)
-        taskEnableTestAndParents(taski, test_id, force);
+        taskEnableTestAndParents(taski, test_id);
 }
 
 static int cmpEq(const char *a, const char *b)
@@ -64,25 +64,24 @@ static int cmpMatch(const char *a, const char *b)
 }
 
 static void _tasksTestsEnableTest(const char *pat,
-                                  int (*cmp)(const char *, const char *),
-                                  int force)
+                                  int (*cmp)(const char *, const char *))
 {
     for (int testi = 0; testi < test_set_size; ++testi){
         if (cmp(test_set[testi].name, pat)){
             test_set[testi].enabled = 1;
-            tasksEnableTestAndParents(testi, force);
+            tasksEnableTestAndParents(testi);
         }
     }
 }
 
 void tasksTestsEnableTestMatch(const char *pat)
 {
-    _tasksTestsEnableTest(pat, cmpMatch, 1);
+    _tasksTestsEnableTest(pat, cmpMatch);
 }
 
 void tasksTestsEnableTestEq(const char *pat)
 {
-    _tasksTestsEnableTest(pat, cmpEq, 1);
+    _tasksTestsEnableTest(pat, cmpEq);
 }
 
 static void _tasksTestsEnableTask(const char *pat,
@@ -128,14 +127,22 @@ void tasksTestsEnableAllTests(void)
                 tasks[taski].enabled_tests[testi] = 1;
 
             }else if (!test->is_explicit && test->parent < 0){
-                taskEnableTestAndChildren(taski, testi, 0);
+                taskEnableTestAndChildren(taski, testi);
 
             }else if (test->is_explicit
                         && test->parent < 0
                         && tasks[taski].default_enabled_tests[testi]){
-                taskEnableTestAndChildren(taski, testi, 0);
+                taskEnableTestAndChildren(taski, testi);
             }
         }
+    }
+}
+
+static void disableTestForTask(int test_id, int *disable_map)
+{
+    disable_map[test_id] = 1;
+    for (int i = 0; i < test_set[test_id].children_size; ++i){
+        disableTestForTask(test_set[test_id].children[i], disable_map);
     }
 }
 
@@ -151,6 +158,11 @@ void tasksTestsInit(void)
                 }
             }
         }
+
+        for (int testi = 0; testi < test_set_size; ++testi){
+            if (tasks[taski].default_disabled_tests[testi])
+                disableTestForTask(testi, tasks[taski].default_disabled_tests);
+        }
     }
 
 }
@@ -163,7 +175,9 @@ static void printPlan(int task_id, int test_id, int depth)
     for (int i = 0; i < depth - 1; ++i)
         printf("| ");
     printf("|-");
-    printf("%s\n", test_set[test_id].name);
+    printf("%s D:%d E:%d\n", test_set[test_id].name,
+           tasks[task_id].default_disabled_tests[test_id],
+           tasks[task_id].default_enabled_tests[test_id]);
     for (int i = 0; i < test_set[test_id].children_size; ++i)
         printPlan(task_id, test_set[test_id].children[i], depth + 1);
 
