@@ -201,7 +201,11 @@ TEST_COND(hpot, fdr, LP)
 {
     pddlMGStripsInitFDR(&mg_strips, &C.fdr);
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
+    pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
     pddlH2(&mg_strips.strips, &mutex, NULL, NULL, -1, &C.err);
+    pddlStripsDisambiguatePres(&mg_strips.strips, &mutex, &mg_strips.mg,
+                               NULL, NULL, &C.err);
+    pddlStripsRemoveUselessDelEffs(&mg_strips.strips, &mutex, NULL, &C.err);
 
     pddlErrLogEnable(&C.err, stderr);
     //pddlLPSetDefault(PDDL_LP_GUROBI, NULL);
@@ -243,6 +247,107 @@ TEST(hpot_all_states_cinit, hpot)
     cfg_all_cinit.add_fdr_state_constr = C.fdr.init;
     PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all_cinit);
     _test_hpot1(&hcfg, task);
+}
+
+static pddl_set_iset_t conjs;
+static int conjs_best_h_value;
+TEST(pot_conj, hpot)
+{
+    pddlSetISetInit(&conjs);
+
+    if (C.fdr.goal_is_unreachable)
+        return;
+
+    pddl_pot_conj_find_config_t cfg = PDDL_POT_CONJ_FIND_CONFIG_INIT;
+    cfg.time_limit = 100000.;
+    cfg.random_seed = 1;
+    cfg.max_conj_dim = 3;
+    cfg.max_num_conjs = 500;
+    if (strstr(TEST_TASK, "agricola") != NULL)
+        cfg.max_num_conjs = 50;
+
+    int ret = pddlPotConjFind(&conjs, &conjs_best_h_value,
+                              &hcfg.mg_strips->strips, hcfg.mutex,
+                              &hcfg.mg_strips->mg, &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    for (int f1 = 0; f1 < C.fdr.var.global_id_size; ++f1){
+        if (pddlSetISetSize(&conjs) > 0)
+            break;
+
+        for (int f2 = f1 + 1; f2 < C.fdr.var.global_id_size; ++f2){
+            if (!pddlMutexPairsIsMutex(&mutex, f1, f2)){
+                PDDL_ISET(c);
+                PDDL_ISET_SET(&c, f1, f2);
+                pddlSetISetAdd(&conjs, &c);
+                pddlISetFree(&c);
+                break;
+            }
+        }
+    }
+
+    assert(pddlSetISetSize(&conjs) > 0);
+    printf("conjs: %d\n", pddlSetISetSize(&conjs));
+    for (int i = 0; i < pddlSetISetSize(&conjs); ++i){
+        const pddl_iset_t *c = pddlSetISetGet(&conjs, i);
+        int fact;
+        printf("Conj %d:", i);
+        PDDL_ISET_FOR_EACH(c, fact){
+            printf(" (%s)", C.fdr.var.global_id_to_val[fact]->name);
+        }
+        printf("\n");
+    }
+}
+
+TEST_TEAR_DOWN(pot_conj)
+{
+    pddlSetISetFree(&conjs);
+}
+
+TEST(pot_conj_init, pot_conj)
+{
+    if (pddlSetISetSize(&conjs) == 0)
+        return;
+
+    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_init);
+
+    pddl_pot_conj_t pot;
+    int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    int hvalue = pddlPotConjEvalMaxFDRState(&pot, &C.fdr.var, C.fdr.init);
+    printf("h-value for init: %d\n", hvalue);
+    fflush(stdout);
+    assert(hvalue == conjs_best_h_value);
+    pddlPotConjFree(&pot);
+}
+
+TEST(pot_conj_all, pot_conj)
+{
+    if (pddlSetISetSize(&conjs) == 0)
+        return;
+
+    pddl_hpot_config_opt_all_syntactic_states_t cfg
+                = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
+    cfg.add_init_state_constr = pddl_true;
+    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg);
+
+    pddl_pot_conj_t pot;
+    int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    int hvalue = pddlPotConjEvalMaxFDRState(&pot, &C.fdr.var, C.fdr.init);
+    printf("h-value for init: %d\n", hvalue);
+    fflush(stdout);
+    assert(hvalue == conjs_best_h_value);
+    pddlPotConjFree(&pot);
 }
 
 
