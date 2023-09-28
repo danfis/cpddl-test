@@ -1,0 +1,71 @@
+Fact[15]:
+  (at hoist0 container-0-0)
+  (at hoist0 depot0-1-1)
+  (at hoist0 loadarea)
+  (available hoist0)
+  (clear container-0-0)
+  (clear depot0-1-1)
+  (in crate0 depot0)
+  (lifting hoist0 crate0)
+  (on crate0 container-0-0)
+  (on crate0 depot0-1-1)
+  (at hoist0 container-0-0+available hoist0)
+  (at hoist0 container-0-0+on crate0 depot0-1-1)
+  (at hoist0 container-0-0+available hoist0+on crate0 depot0-1-1)
+  (at hoist0 depot0-1-1+available hoist0)
+  (at hoist0 container-0-0+at hoist0 depot0-1-1+available hoist0+on crate0 depot0-1-1)
+Op[13]:
+  (drop hoist0 crate0 container-0-0 loadarea container0), cost: 1
+    pre: (at hoist0 loadarea) (clear container-0-0) (lifting hoist0 crate0)
+    add: (available hoist0) (on crate0 container-0-0)
+    del: (clear container-0-0) (lifting hoist0 crate0)
+  (drop hoist0 crate0 depot0-1-1 loadarea depot0), cost: 1
+    pre: (at hoist0 loadarea) (clear depot0-1-1) (lifting hoist0 crate0)
+    add: (available hoist0) (in crate0 depot0) (on crate0 depot0-1-1)
+    del: (clear depot0-1-1) (lifting hoist0 crate0)
+  (go-in hoist0 loadarea container-0-0), cost: 1
+    pre: (at hoist0 loadarea) (clear container-0-0)
+    add: (at hoist0 container-0-0)
+    del: (at hoist0 loadarea) (clear container-0-0)
+  (go-in hoist0 loadarea container-0-0), cost: 1
+    pre: (at hoist0 loadarea) (available hoist0) (clear container-0-0)
+    add: (at hoist0 container-0-0) (at hoist0 container-0-0+available hoist0)
+    del: (at hoist0 loadarea) (clear container-0-0)
+  (go-in hoist0 loadarea container-0-0), cost: 1
+    pre: (at hoist0 loadarea) (clear container-0-0) (on crate0 depot0-1-1)
+    add: (at hoist0 container-0-0) (at hoist0 container-0-0+on crate0 depot0-1-1)
+    del: (at hoist0 loadarea) (clear container-0-0)
+  (go-in hoist0 loadarea container-0-0), cost: 1
+    pre: (at hoist0 loadarea) (available hoist0) (clear container-0-0) (on crate0 depot0-1-1)
+    add: (at hoist0 container-0-0) (at hoist0 container-0-0+available hoist0) (at hoist0 container-0-0+on crate0 depot0-1-1)
+    del: (at hoist0 loadarea) (clear container-0-0)
+  (go-in hoist0 loadarea container-0-0), cost: 1
+    pre: (at hoist0 loadarea) (available hoist0) (clear container-0-0) (on crate0 depot0-1-1)
+    add: (at hoist0 container-0-0) (at hoist0 container-0-0+available hoist0) (at hoist0 container-0-0+on crate0 depot0-1-1) (at hoist0 container-0-0+available hoist0+on crate0 depot0-1-1)
+    del: (at hoist0 loadarea) (clear container-0-0)
+  (go-in hoist0 loadarea depot0-1-1), cost: 1
+    pre: (at hoist0 loadarea) (clear depot0-1-1)
+    add: (at hoist0 depot0-1-1)
+    del: (at hoist0 loadarea) (clear depot0-1-1)
+  (go-in hoist0 loadarea depot0-1-1), cost: 1
+    pre: (at hoist0 loadarea) (available hoist0) (clear depot0-1-1)
+    add: (at hoist0 depot0-1-1) (at hoist0 depot0-1-1+available hoist0)
+    del: (at hoist0 loadarea) (clear depot0-1-1)
+  (go-out hoist0 container-0-0 loadarea), cost: 1
+    pre: (at hoist0 container-0-0)
+    add: (at hoist0 loadarea) (clear container-0-0)
+    del: (at hoist0 container-0-0) (at hoist0 container-0-0+available hoist0) (at hoist0 container-0-0+on crate0 depot0-1-1) (at hoist0 container-0-0+available hoist0+on crate0 depot0-1-1) (at hoist0 container-0-0+at hoist0 depot0-1-1+available hoist0+on crate0 depot0-1-1)
+  (go-out hoist0 depot0-1-1 loadarea), cost: 1
+    pre: (at hoist0 depot0-1-1)
+    add: (at hoist0 loadarea) (clear depot0-1-1)
+    del: (at hoist0 depot0-1-1) (at hoist0 depot0-1-1+available hoist0) (at hoist0 container-0-0+at hoist0 depot0-1-1+available hoist0+on crate0 depot0-1-1)
+  (lift hoist0 crate0 container-0-0 loadarea container0), cost: 1
+    pre: (at hoist0 loadarea) (available hoist0) (on crate0 container-0-0)
+    add: (clear container-0-0) (lifting hoist0 crate0)
+    del: (available hoist0) (on crate0 container-0-0) (at hoist0 container-0-0+available hoist0) (at hoist0 container-0-0+available hoist0+on crate0 depot0-1-1) (at hoist0 depot0-1-1+available hoist0) (at hoist0 container-0-0+at hoist0 depot0-1-1+available hoist0+on crate0 depot0-1-1)
+  (lift hoist0 crate0 depot0-1-1 loadarea depot0), cost: 1
+    pre: (at hoist0 loadarea) (available hoist0) (on crate0 depot0-1-1)
+    add: (clear depot0-1-1) (lifting hoist0 crate0)
+    del: (available hoist0) (in crate0 depot0) (on crate0 depot0-1-1) (at hoist0 container-0-0+available hoist0) (at hoist0 container-0-0+on crate0 depot0-1-1) (at hoist0 container-0-0+available hoist0+on crate0 depot0-1-1) (at hoist0 depot0-1-1+available hoist0) (at hoist0 container-0-0+at hoist0 depot0-1-1+available hoist0+on crate0 depot0-1-1)
+Init State: (at hoist0 depot0-1-1) (available hoist0) (on crate0 container-0-0) (at hoist0 depot0-1-1+available hoist0)
+Goal: (in crate0 depot0)
