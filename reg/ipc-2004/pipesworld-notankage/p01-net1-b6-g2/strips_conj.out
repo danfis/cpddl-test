@@ -240,7 +240,7 @@ Op[159]:
     add: (first b1 s13) (last b1 s13) (on b2 a1) (first b0 s12+first b1 s13)
     del: (first b2 s13) (last b2 s13) (on b1 a3)
   (pop-unitarypipe s13 b1 a1 a3 b2 lco gasoleo), cost: 1
-    pre: (first b0 s12) (last b2 s13) (on b1 a3) (on b5 a3)
+    pre: (first b0 s12) (last b2 s13) (on b1 a3) (on b5 a3) (first b0 s12+on b5 a3)
     add: (first b1 s13) (last b1 s13) (on b2 a1) (first b0 s12+first b1 s13) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b2 s13) (last b2 s13) (on b1 a3)
   (pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a), cost: 1
@@ -256,7 +256,7 @@ Op[159]:
     add: (first b1 s13) (last b1 s13) (on b3 a1) (first b1 s13+first b2 s12)
     del: (first b3 s13) (last b3 s13) (on b1 a3)
   (pop-unitarypipe s13 b1 a1 a3 b3 lco rat-a), cost: 1
-    pre: (first b0 s12) (last b3 s13) (on b1 a3) (on b5 a3)
+    pre: (first b0 s12) (last b3 s13) (on b1 a3) (on b5 a3) (first b0 s12+on b5 a3)
     add: (first b1 s13) (last b1 s13) (on b3 a1) (first b0 s12+first b1 s13) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b3 s13) (last b3 s13) (on b1 a3)
   (pop-unitarypipe s13 b1 a1 a3 b4 lco lco), cost: 1
@@ -272,7 +272,7 @@ Op[159]:
     add: (first b1 s13) (last b1 s13) (on b4 a1) (first b1 s13+first b2 s12)
     del: (first b4 s13) (last b4 s13) (on b1 a3)
   (pop-unitarypipe s13 b1 a1 a3 b4 lco lco), cost: 1
-    pre: (first b0 s12) (last b4 s13) (on b1 a3) (on b5 a3)
+    pre: (first b0 s12) (last b4 s13) (on b1 a3) (on b5 a3) (first b0 s12+on b5 a3)
     add: (first b1 s13) (last b1 s13) (on b4 a1) (first b0 s12+first b1 s13) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b4 s13) (last b4 s13) (on b1 a3)
   (pop-unitarypipe s13 b1 a1 a3 b5 lco oca1), cost: 1
@@ -368,11 +368,11 @@ Op[159]:
     add: (first b0 s12) (last b0 s12) (on b2 a2)
     del: (first b2 s12) (last b2 s12) (on b0 a1) (first b1 s13+first b2 s12) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo), cost: 1
-    pre: (first b1 s13) (first b2 s12) (on b0 a1) (on b5 a3)
+    pre: (first b1 s13) (first b2 s12) (on b0 a1) (on b5 a3) (first b1 s13+first b2 s12)
     add: (first b0 s12) (last b0 s12) (on b2 a2) (first b0 s12+first b1 s13) (first b0 s12+on b5 a3) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b2 s12) (last b2 s12) (on b0 a1) (first b1 s13+first b2 s12) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo), cost: 1
-    pre: (first b1 s13) (first b2 s12) (on b0 a1)
+    pre: (first b1 s13) (first b2 s12) (on b0 a1) (first b1 s13+first b2 s12)
     add: (first b0 s12) (last b0 s12) (on b2 a2) (first b0 s12+first b1 s13)
     del: (first b2 s12) (last b2 s12) (on b0 a1) (first b1 s13+first b2 s12) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo), cost: 1
@@ -380,7 +380,7 @@ Op[159]:
     add: (first b0 s12) (last b0 s12) (on b2 a2) (first b0 s12+on b5 a3)
     del: (first b2 s12) (last b2 s12) (on b0 a1) (first b1 s13+first b2 s12) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b0 a1 a2 b2 oc1b gasoleo), cost: 1
-    pre: (first b1 s13) (first b2 s12) (on b0 a1) (on b5 a3)
+    pre: (first b1 s13) (first b2 s12) (on b0 a1) (on b5 a3) (first b1 s13+first b2 s12)
     add: (first b0 s12) (last b0 s12) (on b2 a2) (first b0 s12+first b1 s13) (first b0 s12+on b5 a3)
     del: (first b2 s12) (last b2 s12) (on b0 a1) (first b1 s13+first b2 s12) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b0 a1 a2 b4 oc1b lco), cost: 1
@@ -436,7 +436,7 @@ Op[159]:
     add: (first b2 s12) (last b2 s12) (on b0 a2)
     del: (first b0 s12) (last b0 s12) (on b2 a1) (first b0 s12+first b1 s13) (first b0 s12+on b5 a3) (first b0 s12+first b1 s13+on b5 a3) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b), cost: 1
-    pre: (first b0 s12) (first b1 s13) (on b2 a1)
+    pre: (first b0 s12) (first b1 s13) (on b2 a1) (first b0 s12+first b1 s13)
     add: (first b2 s12) (last b2 s12) (on b0 a2) (first b1 s13+first b2 s12)
     del: (first b0 s12) (last b0 s12) (on b2 a1) (first b0 s12+first b1 s13) (first b0 s12+on b5 a3) (first b0 s12+first b1 s13+on b5 a3) (first b0 s12+first b1 s13+first b2 s12+on b5 a3)
   (push-unitarypipe s12 b2 a1 a2 b1 gasoleo lco), cost: 1
@@ -548,7 +548,7 @@ Op[159]:
     add: (first b1 s13) (last b1 s13) (on b2 a3) (first b0 s12+first b1 s13)
     del: (first b2 s13) (last b2 s13) (on b1 a1)
   (push-unitarypipe s13 b1 a1 a3 b2 lco gasoleo), cost: 1
-    pre: (first b0 s12) (first b2 s13) (on b1 a1) (on b5 a3)
+    pre: (first b0 s12) (first b2 s13) (on b1 a1) (on b5 a3) (first b0 s12+on b5 a3)
     add: (first b1 s13) (last b1 s13) (on b2 a3) (first b0 s12+first b1 s13) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b2 s13) (last b2 s13) (on b1 a1)
   (push-unitarypipe s13 b1 a1 a3 b3 lco rat-a), cost: 1
@@ -564,7 +564,7 @@ Op[159]:
     add: (first b1 s13) (last b1 s13) (on b3 a3) (first b1 s13+first b2 s12)
     del: (first b3 s13) (last b3 s13) (on b1 a1)
   (push-unitarypipe s13 b1 a1 a3 b3 lco rat-a), cost: 1
-    pre: (first b0 s12) (first b3 s13) (on b1 a1) (on b5 a3)
+    pre: (first b0 s12) (first b3 s13) (on b1 a1) (on b5 a3) (first b0 s12+on b5 a3)
     add: (first b1 s13) (last b1 s13) (on b3 a3) (first b0 s12+first b1 s13) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b3 s13) (last b3 s13) (on b1 a1)
   (push-unitarypipe s13 b1 a1 a3 b4 lco lco), cost: 1
@@ -580,7 +580,7 @@ Op[159]:
     add: (first b1 s13) (last b1 s13) (on b4 a3) (first b1 s13+first b2 s12)
     del: (first b4 s13) (last b4 s13) (on b1 a1)
   (push-unitarypipe s13 b1 a1 a3 b4 lco lco), cost: 1
-    pre: (first b0 s12) (first b4 s13) (on b1 a1) (on b5 a3)
+    pre: (first b0 s12) (first b4 s13) (on b1 a1) (on b5 a3) (first b0 s12+on b5 a3)
     add: (first b1 s13) (last b1 s13) (on b4 a3) (first b0 s12+first b1 s13) (first b0 s12+first b1 s13+on b5 a3)
     del: (first b4 s13) (last b4 s13) (on b1 a1)
   (push-unitarypipe s13 b1 a1 a3 b5 lco oca1), cost: 1

@@ -1014,7 +1014,7 @@ Op[374]:
     add: (in package6 truck6) (at package1 city1-1+in package6 truck6)
     del: (at package6 city6-1)
   (load-truck package6 truck6 city6-1), cost: 1
-    pre: (at package1 city1-1) (at package2 city1-1) (at package6 city6-1) (at truck6 city6-1)
+    pre: (at package1 city1-1) (at package2 city1-1) (at package6 city6-1) (at truck6 city6-1) (at package1 city1-1+at package2 city1-1)
     add: (in package6 truck6) (at package1 city1-1+in package6 truck6) (at package1 city1-1+at package2 city1-1+in package6 truck6)
     del: (at package6 city6-1)
   (load-truck package6 truck6 city6-2), cost: 1
@@ -1026,7 +1026,7 @@ Op[374]:
     add: (in package6 truck6) (at package1 city1-1+in package6 truck6)
     del: (at package6 city6-2)
   (load-truck package6 truck6 city6-2), cost: 1
-    pre: (at package1 city1-1) (at package2 city1-1) (at package6 city6-2) (at truck6 city6-2)
+    pre: (at package1 city1-1) (at package2 city1-1) (at package6 city6-2) (at truck6 city6-2) (at package1 city1-1+at package2 city1-1)
     add: (in package6 truck6) (at package1 city1-1+in package6 truck6) (at package1 city1-1+at package2 city1-1+in package6 truck6)
     del: (at package6 city6-2)
   (unload-airplane package1 plane1 city1-2), cost: 1
@@ -1406,7 +1406,7 @@ Op[374]:
     add: (at package2 city1-1) (at package1 city1-2+at package2 city1-1)
     del: (in package2 truck1)
   (unload-truck package2 truck1 city1-1), cost: 1
-    pre: (at package1 city1-1) (at truck1 city1-1) (in package2 truck1) (in package6 truck6)
+    pre: (at package1 city1-1) (at truck1 city1-1) (in package2 truck1) (in package6 truck6) (at package1 city1-1+in package6 truck6)
     add: (at package2 city1-1) (at package1 city1-1+at package2 city1-1) (at package1 city1-1+at package2 city1-1+in package6 truck6)
     del: (in package2 truck1)
   (unload-truck package2 truck1 city1-2), cost: 1

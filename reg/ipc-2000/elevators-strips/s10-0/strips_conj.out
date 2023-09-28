@@ -62,7 +62,7 @@ Op[416]:
     add: (boarded p2)
     del:
   (board f13 p2), cost: 1
-    pre: (boarded p0) (boarded p1) (lift-at f13) (served p9)
+    pre: (boarded p0) (boarded p1) (lift-at f13) (served p9) (boarded p0+boarded p1) (boarded p0+served p9) (boarded p0+boarded p1+served p9)
     add: (boarded p2) (boarded p1+boarded p2) (boarded p0+boarded p1+boarded p2+served p9)
     del:
   (board f13 p2), cost: 1
@@ -74,7 +74,7 @@ Op[416]:
     add: (boarded p1)
     del:
   (board f17 p1), cost: 1
-    pre: (boarded p0) (boarded p2) (lift-at f17) (served p9)
+    pre: (boarded p0) (boarded p2) (lift-at f17) (served p9) (boarded p0+served p9)
     add: (boarded p1) (boarded p0+boarded p1) (boarded p0+boarded p1+served p9) (boarded p1+boarded p2) (boarded p0+boarded p1+boarded p2+served p9)
     del:
   (board f17 p1), cost: 1
@@ -86,7 +86,7 @@ Op[416]:
     add: (boarded p1) (boarded p1+boarded p2)
     del:
   (board f17 p1), cost: 1
-    pre: (boarded p0) (lift-at f17) (served p9)
+    pre: (boarded p0) (lift-at f17) (served p9) (boarded p0+served p9)
     add: (boarded p1) (boarded p0+boarded p1) (boarded p0+boarded p1+served p9)
     del:
   (board f17 p1), cost: 1
@@ -94,7 +94,7 @@ Op[416]:
     add: (boarded p1) (boarded p0+boarded p1) (boarded p1+boarded p2)
     del:
   (board f17 p1), cost: 1
-    pre: (boarded p0) (boarded p2) (lift-at f17) (served p9)
+    pre: (boarded p0) (boarded p2) (lift-at f17) (served p9) (boarded p0+served p9)
     add: (boarded p1) (boarded p0+boarded p1) (boarded p0+boarded p1+served p9) (boarded p1+boarded p2)
     del:
   (board f2 p5), cost: 1
@@ -106,7 +106,7 @@ Op[416]:
     add: (boarded p0)
     del:
   (board f3 p0), cost: 1
-    pre: (boarded p1) (boarded p2) (lift-at f3) (served p9)
+    pre: (boarded p1) (boarded p2) (lift-at f3) (served p9) (boarded p1+boarded p2)
     add: (boarded p0) (boarded p0+boarded p1) (boarded p0+served p9) (boarded p0+boarded p1+served p9) (boarded p0+boarded p1+boarded p2+served p9)
     del:
   (board f3 p0), cost: 1
@@ -158,7 +158,7 @@ Op[416]:
     add: (served p9)
     del: (boarded p9)
   (depart f16 p9), cost: 1
-    pre: (boarded p0) (boarded p1) (boarded p2) (boarded p9) (lift-at f16)
+    pre: (boarded p0) (boarded p1) (boarded p2) (boarded p9) (lift-at f16) (boarded p0+boarded p1) (boarded p1+boarded p2)
     add: (served p9) (boarded p0+served p9) (boarded p0+boarded p1+served p9) (boarded p0+boarded p1+boarded p2+served p9)
     del: (boarded p9)
   (depart f16 p9), cost: 1
@@ -166,7 +166,7 @@ Op[416]:
     add: (served p9) (boarded p0+served p9)
     del: (boarded p9)
   (depart f16 p9), cost: 1
-    pre: (boarded p0) (boarded p1) (boarded p9) (lift-at f16)
+    pre: (boarded p0) (boarded p1) (boarded p9) (lift-at f16) (boarded p0+boarded p1)
     add: (served p9) (boarded p0+served p9) (boarded p0+boarded p1+served p9)
     del: (boarded p9)
   (depart f19 p6), cost: 1

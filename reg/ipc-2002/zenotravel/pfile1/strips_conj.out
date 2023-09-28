@@ -40,7 +40,7 @@ Op[137]:
     add: (in person2 plane1)
     del: (at person2 city0) (at person1 city0+at person2 city0) (at person1 city0+at person2 city0+in person2 plane1) (at person1 city1+at person2 city0) (at person1 city0+at person1 city1+at person2 city0+in person2 plane1)
   (board person2 plane1 city0), cost: 1
-    pre: (at person1 city0) (at person2 city0) (at plane1 city0)
+    pre: (at person1 city0) (at person2 city0) (at plane1 city0) (at person1 city0+at person2 city0)
     add: (in person2 plane1) (at person1 city0+in person2 plane1)
     del: (at person2 city0) (at person1 city0+at person2 city0) (at person1 city0+at person2 city0+in person2 plane1) (at person1 city1+at person2 city0) (at person1 city0+at person1 city1+at person2 city0+in person2 plane1)
   (board person2 plane1 city1), cost: 1
@@ -88,7 +88,7 @@ Op[137]:
     add: (at person2 city0)
     del: (in person2 plane1) (at person1 city0+in person2 plane1) (at person1 city0+at person2 city0+in person2 plane1) (at person1 city0+at person1 city1+at person2 city0+in person2 plane1)
   (debark person2 plane1 city0), cost: 1
-    pre: (at person1 city0) (at plane1 city0) (in person2 plane1)
+    pre: (at person1 city0) (at plane1 city0) (in person2 plane1) (at person1 city0+in person2 plane1)
     add: (at person2 city0) (at person1 city0+at person2 city0)
     del: (in person2 plane1) (at person1 city0+in person2 plane1) (at person1 city0+at person2 city0+in person2 plane1) (at person1 city0+at person1 city1+at person2 city0+in person2 plane1)
   (debark person2 plane1 city0), cost: 1

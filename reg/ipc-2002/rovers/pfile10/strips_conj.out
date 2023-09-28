@@ -702,7 +702,7 @@ Op[278]:
     add: (at rover1 waypoint0) (at rover0 waypoint1+at rover1 waypoint0)
     del: (at rover1 waypoint1)
   (navigate rover1 waypoint1 waypoint0), cost: 1
-    pre: (at rover0 waypoint0) (at rover1 waypoint1) (have_soil_analysis rover3 waypoint6)
+    pre: (at rover0 waypoint0) (at rover1 waypoint1) (have_soil_analysis rover3 waypoint6) (at rover0 waypoint0+have_soil_analysis rover3 waypoint6)
     add: (at rover1 waypoint0) (at rover0 waypoint0+at rover1 waypoint0) (at rover0 waypoint0+at rover1 waypoint0+have_soil_analysis rover3 waypoint6)
     del: (at rover1 waypoint1)
   (navigate rover1 waypoint2 waypoint0), cost: 1
@@ -718,7 +718,7 @@ Op[278]:
     add: (at rover1 waypoint0) (at rover0 waypoint1+at rover1 waypoint0)
     del: (at rover1 waypoint2)
   (navigate rover1 waypoint2 waypoint0), cost: 1
-    pre: (at rover0 waypoint0) (at rover1 waypoint2) (have_soil_analysis rover3 waypoint6)
+    pre: (at rover0 waypoint0) (at rover1 waypoint2) (have_soil_analysis rover3 waypoint6) (at rover0 waypoint0+have_soil_analysis rover3 waypoint6)
     add: (at rover1 waypoint0) (at rover0 waypoint0+at rover1 waypoint0) (at rover0 waypoint0+at rover1 waypoint0+have_soil_analysis rover3 waypoint6)
     del: (at rover1 waypoint2)
   (navigate rover1 waypoint6 waypoint0), cost: 1
@@ -734,7 +734,7 @@ Op[278]:
     add: (at rover1 waypoint0) (at rover0 waypoint1+at rover1 waypoint0)
     del: (at rover1 waypoint6)
   (navigate rover1 waypoint6 waypoint0), cost: 1
-    pre: (at rover0 waypoint0) (at rover1 waypoint6) (have_soil_analysis rover3 waypoint6)
+    pre: (at rover0 waypoint0) (at rover1 waypoint6) (have_soil_analysis rover3 waypoint6) (at rover0 waypoint0+have_soil_analysis rover3 waypoint6)
     add: (at rover1 waypoint0) (at rover0 waypoint0+at rover1 waypoint0) (at rover0 waypoint0+at rover1 waypoint0+have_soil_analysis rover3 waypoint6)
     del: (at rover1 waypoint6)
   (navigate rover2 waypoint0 waypoint4), cost: 1
@@ -926,7 +926,7 @@ Op[278]:
     add: (full rover3store) (have_soil_analysis rover3 waypoint6) (at rover0 waypoint0+have_soil_analysis rover3 waypoint6)
     del: (at_soil_sample waypoint6) (empty rover3store)
   (sample_soil rover3 rover3store waypoint6), cost: 1
-    pre: (at rover0 waypoint0) (at rover1 waypoint0) (at rover3 waypoint6) (at_soil_sample waypoint6) (empty rover3store)
+    pre: (at rover0 waypoint0) (at rover1 waypoint0) (at rover3 waypoint6) (at_soil_sample waypoint6) (empty rover3store) (at rover0 waypoint0+at rover1 waypoint0)
     add: (full rover3store) (have_soil_analysis rover3 waypoint6) (at rover0 waypoint0+have_soil_analysis rover3 waypoint6) (at rover0 waypoint0+at rover1 waypoint0+have_soil_analysis rover3 waypoint6)
     del: (at_soil_sample waypoint6) (empty rover3store)
   (take_image rover1 waypoint0 objective0 camera0 low_res), cost: 1

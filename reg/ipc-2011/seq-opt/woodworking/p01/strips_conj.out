@@ -489,11 +489,11 @@ Op[148]:
     add: (available p0) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated)
     del: (unused p0)
   (do-saw-medium b0 p0 saw0 teak rough s2 s1 s0), cost: 30
-    pre: (available b0) (available b1) (boardsize b0 s2) (unused p0) (wood p4 teak)
+    pre: (available b0) (available b1) (boardsize b0 s2) (unused p0) (wood p4 teak) (available b0+available b1) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     add: (available p0) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p0)
   (do-saw-medium b0 p0 saw0 teak rough s2 s1 s0), cost: 30
-    pre: (available b0) (available b1) (boardsize b0 s2) (unused p0)
+    pre: (available b0) (available b1) (boardsize b0 s2) (unused p0) (available b0+available b1)
     add: (available p0) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0)
     del: (unused p0)
   (do-saw-medium b0 p0 saw0 teak rough s3 s2 s1), cost: 30
@@ -501,11 +501,11 @@ Op[148]:
     add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated)
     del: (unused p0)
   (do-saw-medium b0 p0 saw0 teak rough s3 s2 s1), cost: 30
-    pre: (available b0) (available b1) (unused p0) (wood p4 teak)
+    pre: (available b0) (available b1) (unused p0) (wood p4 teak) (available b0+available b1) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p0)
   (do-saw-medium b0 p0 saw0 teak rough s3 s2 s1), cost: 30
-    pre: (available b0) (available b1) (unused p0)
+    pre: (available b0) (available b1) (unused p0) (available b0+available b1)
     add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0)
     del: (unused p0)
   (do-saw-medium b0 p4 saw0 teak rough s2 s1 s0), cost: 30
@@ -513,11 +513,11 @@ Op[148]:
     add: (available p4) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak) (available b0+wood p4 teak)
     del: (unused p4)
   (do-saw-medium b0 p4 saw0 teak rough s2 s1 s0), cost: 30
-    pre: (available b0) (available b1) (available p0) (boardsize b0 s2) (unused p4)
+    pre: (available b0) (available b1) (available p0) (boardsize b0 s2) (unused p4) (available b0+available b1) (available b1+available p0)
     add: (available p4) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p4)
   (do-saw-medium b0 p4 saw0 teak rough s2 s1 s0), cost: 30
-    pre: (available b0) (available b1) (boardsize b0 s2) (unused p4)
+    pre: (available b0) (available b1) (boardsize b0 s2) (unused p4) (available b0+available b1)
     add: (available p4) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     del: (unused p4)
   (do-saw-medium b0 p4 saw0 teak rough s3 s2 s1), cost: 30
@@ -525,11 +525,11 @@ Op[148]:
     add: (available p4) (boardsize b0 s1) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak) (available b0+wood p4 teak)
     del: (unused p4)
   (do-saw-medium b0 p4 saw0 teak rough s3 s2 s1), cost: 30
-    pre: (available b0) (available b1) (available p0) (unused p4)
+    pre: (available b0) (available b1) (available p0) (unused p4) (available b0+available b1) (available b1+available p0)
     add: (available p4) (boardsize b0 s1) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p4)
   (do-saw-medium b0 p4 saw0 teak rough s3 s2 s1), cost: 30
-    pre: (available b0) (available b1) (unused p4)
+    pre: (available b0) (available b1) (unused p4) (available b0+available b1)
     add: (available p4) (boardsize b0 s1) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     del: (unused p4)
   (do-saw-medium b1 p0 saw0 mahogany rough s2 s1 s0), cost: 30
@@ -537,7 +537,7 @@ Op[148]:
     add: (available p0) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0)
     del: (unused p0)
   (do-saw-medium b1 p0 saw0 mahogany rough s2 s1 s0), cost: 30
-    pre: (available b0) (available b1) (boardsize b1 s2) (unused p0) (wood p4 teak)
+    pre: (available b0) (available b1) (boardsize b1 s2) (unused p0) (wood p4 teak) (available b0+available b1) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     add: (available p0) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p0)
   (do-saw-medium b1 p0 saw0 mahogany rough s3 s2 s1), cost: 30
@@ -545,7 +545,7 @@ Op[148]:
     add: (available p0) (boardsize b1 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0)
     del: (unused p0)
   (do-saw-medium b1 p0 saw0 mahogany rough s3 s2 s1), cost: 30
-    pre: (available b0) (available b1) (boardsize b1 s3) (unused p0) (wood p4 teak)
+    pre: (available b0) (available b1) (boardsize b1 s3) (unused p0) (wood p4 teak) (available b0+available b1) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     add: (available p0) (boardsize b1 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p0)
   (do-saw-medium b1 p0 saw0 mahogany rough s5 s4 s3), cost: 30
@@ -553,7 +553,7 @@ Op[148]:
     add: (available p0) (boardsize b1 s3) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0)
     del: (unused p0)
   (do-saw-medium b1 p0 saw0 mahogany rough s5 s4 s3), cost: 30
-    pre: (available b0) (available b1) (unused p0) (wood p4 teak)
+    pre: (available b0) (available b1) (unused p0) (wood p4 teak) (available b0+available b1) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak)
     add: (available p0) (boardsize b1 s3) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (available b1+available p0) (available b0+available b1+available p0+wood p4 teak)
     del: (unused p0)
   (do-saw-medium b1 p4 saw0 mahogany rough s2 s1 s0), cost: 30
@@ -617,7 +617,7 @@ Op[148]:
     add: (available b0) (empty highspeed-saw0)
     del: (in-highspeed-saw b0 highspeed-saw0)
   (unload-highspeed-saw b0 highspeed-saw0), cost: 10
-    pre: (available b1) (available p0) (in-highspeed-saw b0 highspeed-saw0) (wood p4 teak)
+    pre: (available b1) (available p0) (in-highspeed-saw b0 highspeed-saw0) (wood p4 teak) (available b1+available p0)
     add: (available b0) (empty highspeed-saw0) (available b0+available b1) (available b0+wood p4 teak) (available b0+available b1+wood p4 teak) (available b0+available b1+available p0+wood p4 teak)
     del: (in-highspeed-saw b0 highspeed-saw0)
   (unload-highspeed-saw b0 highspeed-saw0), cost: 10
@@ -641,7 +641,7 @@ Op[148]:
     add: (available b1) (empty highspeed-saw0)
     del: (in-highspeed-saw b1 highspeed-saw0)
   (unload-highspeed-saw b1 highspeed-saw0), cost: 10
-    pre: (available b0) (available p0) (in-highspeed-saw b1 highspeed-saw0) (wood p4 teak)
+    pre: (available b0) (available p0) (in-highspeed-saw b1 highspeed-saw0) (wood p4 teak) (available b0+wood p4 teak)
     add: (available b1) (empty highspeed-saw0) (available b0+available b1) (available b0+available b1+wood p4 teak) (available b1+available p0) (available b0+available b1+available p0+wood p4 teak)
     del: (in-highspeed-saw b1 highspeed-saw0)
   (unload-highspeed-saw b1 highspeed-saw0), cost: 10
@@ -653,7 +653,7 @@ Op[148]:
     add: (available b1) (empty highspeed-saw0) (available b1+available p0)
     del: (in-highspeed-saw b1 highspeed-saw0)
   (unload-highspeed-saw b1 highspeed-saw0), cost: 10
-    pre: (available b0) (in-highspeed-saw b1 highspeed-saw0) (wood p4 teak)
+    pre: (available b0) (in-highspeed-saw b1 highspeed-saw0) (wood p4 teak) (available b0+wood p4 teak)
     add: (available b1) (empty highspeed-saw0) (available b0+available b1) (available b0+available b1+wood p4 teak)
     del: (in-highspeed-saw b1 highspeed-saw0)
   (unload-highspeed-saw b1 highspeed-saw0), cost: 10
@@ -661,7 +661,7 @@ Op[148]:
     add: (available b1) (empty highspeed-saw0) (available b0+available b1) (available b1+available p0)
     del: (in-highspeed-saw b1 highspeed-saw0)
   (unload-highspeed-saw b1 highspeed-saw0), cost: 10
-    pre: (available b0) (available p0) (in-highspeed-saw b1 highspeed-saw0) (wood p4 teak)
+    pre: (available b0) (available p0) (in-highspeed-saw b1 highspeed-saw0) (wood p4 teak) (available b0+wood p4 teak)
     add: (available b1) (empty highspeed-saw0) (available b0+available b1) (available b0+available b1+wood p4 teak) (available b1+available p0)
     del: (in-highspeed-saw b1 highspeed-saw0)
 Init State: (available b0) (available b1) (colour p2 black) (empty highspeed-saw0) (surface-condition p2 rough) (treatment p2 colourfragments) (unused p0) (unused p1) (unused p3) (unused p4) (available b0+available b1)

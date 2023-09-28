@@ -21067,7 +21067,7 @@ Op[6300]:
     add: (at tray1 table1)
     del: (at tray1 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 kitchen table1), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen)
     add: (at tray1 table1) (at tray1 table1+at tray2 kitchen)
     del: (at tray1 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 kitchen table2), cost: 1
@@ -21083,11 +21083,11 @@ Op[6300]:
     add: (at tray1 kitchen)
     del: (at tray1 table1) (at tray1 table1+at tray2 kitchen) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 table1 kitchen), cost: 1
-    pre: (at tray1 table1) (at tray2 kitchen) (served child9)
+    pre: (at tray1 table1) (at tray2 kitchen) (served child9) (at tray1 table1+at tray2 kitchen)
     add: (at tray1 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (at tray1 table1) (at tray1 table1+at tray2 kitchen) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 table1 kitchen), cost: 1
-    pre: (at tray1 table1) (at tray2 kitchen)
+    pre: (at tray1 table1) (at tray2 kitchen) (at tray1 table1+at tray2 kitchen)
     add: (at tray1 kitchen) (at tray1 kitchen+at tray2 kitchen)
     del: (at tray1 table1) (at tray1 table1+at tray2 kitchen) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 table1 kitchen), cost: 1
@@ -21095,7 +21095,7 @@ Op[6300]:
     add: (at tray1 kitchen) (at tray1 kitchen+served child9)
     del: (at tray1 table1) (at tray1 table1+at tray2 kitchen) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 table1 kitchen), cost: 1
-    pre: (at tray1 table1) (at tray2 kitchen) (served child9)
+    pre: (at tray1 table1) (at tray2 kitchen) (served child9) (at tray1 table1+at tray2 kitchen)
     add: (at tray1 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+served child9)
     del: (at tray1 table1) (at tray1 table1+at tray2 kitchen) (at tray1 kitchen+at tray1 table1+at tray2 kitchen+served child9)
   (move_tray tray1 table1 table2), cost: 1
@@ -21195,7 +21195,7 @@ Op[6300]:
     add: (at tray2 kitchen) (at tray1 table1+at tray2 kitchen)
     del: (at tray2 table1)
   (move_tray tray2 table1 kitchen), cost: 1
-    pre: (at tray1 kitchen) (at tray2 table1) (served child9)
+    pre: (at tray1 kitchen) (at tray2 table1) (served child9) (at tray1 kitchen+served child9)
     add: (at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (at tray2 table1)
   (move_tray tray2 table1 table2), cost: 1
@@ -21219,7 +21219,7 @@ Op[6300]:
     add: (at tray2 kitchen) (at tray1 table1+at tray2 kitchen)
     del: (at tray2 table2)
   (move_tray tray2 table2 kitchen), cost: 1
-    pre: (at tray1 kitchen) (at tray2 table2) (served child9)
+    pre: (at tray1 kitchen) (at tray2 table2) (served child9) (at tray1 kitchen+served child9)
     add: (at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (at tray2 table2)
   (move_tray tray2 table2 table1), cost: 1
@@ -21243,7 +21243,7 @@ Op[6300]:
     add: (at tray2 kitchen) (at tray1 table1+at tray2 kitchen)
     del: (at tray2 table3)
   (move_tray tray2 table3 kitchen), cost: 1
-    pre: (at tray1 kitchen) (at tray2 table3) (served child9)
+    pre: (at tray1 kitchen) (at tray2 table3) (served child9) (at tray1 kitchen+served child9)
     add: (at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (at tray2 table3)
   (move_tray tray2 table3 table1), cost: 1
@@ -21659,7 +21659,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw1 tray3)
   (serve_sandwich sandw1 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw1 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw1 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw1 tray3)
   (serve_sandwich sandw10 child1 tray1 table1), cost: 1
@@ -21779,7 +21779,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw10 tray3)
   (serve_sandwich sandw10 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw10 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw10 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw10 tray3)
   (serve_sandwich sandw11 child1 tray1 table1), cost: 1
@@ -21899,7 +21899,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw11 tray3)
   (serve_sandwich sandw11 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw11 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw11 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw11 tray3)
   (serve_sandwich sandw12 child1 tray1 table1), cost: 1
@@ -22019,7 +22019,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw12 tray3)
   (serve_sandwich sandw12 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw12 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw12 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw12 tray3)
   (serve_sandwich sandw13 child1 tray1 table1), cost: 1
@@ -22139,7 +22139,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw13 tray3)
   (serve_sandwich sandw13 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw13 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw13 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw13 tray3)
   (serve_sandwich sandw14 child1 tray1 table1), cost: 1
@@ -22259,7 +22259,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw14 tray3)
   (serve_sandwich sandw14 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw14 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw14 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw14 tray3)
   (serve_sandwich sandw15 child1 tray1 table1), cost: 1
@@ -22379,7 +22379,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw15 tray3)
   (serve_sandwich sandw15 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw15 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw15 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw15 tray3)
   (serve_sandwich sandw16 child1 tray1 table1), cost: 1
@@ -22499,7 +22499,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw16 tray3)
   (serve_sandwich sandw16 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw16 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw16 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw16 tray3)
   (serve_sandwich sandw17 child1 tray1 table1), cost: 1
@@ -22619,7 +22619,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw17 tray3)
   (serve_sandwich sandw17 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw17 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw17 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw17 tray3)
   (serve_sandwich sandw18 child1 tray1 table1), cost: 1
@@ -22739,7 +22739,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw18 tray3)
   (serve_sandwich sandw18 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw18 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw18 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw18 tray3)
   (serve_sandwich sandw19 child1 tray1 table1), cost: 1
@@ -22859,7 +22859,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw19 tray3)
   (serve_sandwich sandw19 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw19 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw19 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw19 tray3)
   (serve_sandwich sandw2 child1 tray1 table1), cost: 1
@@ -22979,7 +22979,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw2 tray3)
   (serve_sandwich sandw2 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw2 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw2 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw2 tray3)
   (serve_sandwich sandw20 child1 tray1 table1), cost: 1
@@ -23099,7 +23099,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw20 tray3)
   (serve_sandwich sandw20 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw20 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw20 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw20 tray3)
   (serve_sandwich sandw3 child1 tray1 table1), cost: 1
@@ -23219,7 +23219,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw3 tray3)
   (serve_sandwich sandw3 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw3 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw3 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw3 tray3)
   (serve_sandwich sandw4 child1 tray1 table1), cost: 1
@@ -23339,7 +23339,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw4 tray3)
   (serve_sandwich sandw4 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw4 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw4 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw4 tray3)
   (serve_sandwich sandw5 child1 tray1 table1), cost: 1
@@ -23459,7 +23459,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw5 tray3)
   (serve_sandwich sandw5 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw5 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw5 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw5 tray3)
   (serve_sandwich sandw6 child1 tray1 table1), cost: 1
@@ -23579,7 +23579,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw6 tray3)
   (serve_sandwich sandw6 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw6 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw6 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw6 tray3)
   (serve_sandwich sandw7 child1 tray1 table1), cost: 1
@@ -23699,7 +23699,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw7 tray3)
   (serve_sandwich sandw7 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw7 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw7 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw7 tray3)
   (serve_sandwich sandw8 child1 tray1 table1), cost: 1
@@ -23819,7 +23819,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw8 tray3)
   (serve_sandwich sandw8 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw8 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw8 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw8 tray3)
   (serve_sandwich sandw9 child1 tray1 table1), cost: 1
@@ -23939,7 +23939,7 @@ Op[6300]:
     add: (served child9) (at tray1 kitchen+served child9)
     del: (ontray sandw9 tray3)
   (serve_sandwich sandw9 child9 tray3 table3), cost: 1
-    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw9 tray3)
+    pre: (at tray1 kitchen) (at tray2 kitchen) (at tray3 table3) (ontray sandw9 tray3) (at tray1 kitchen+at tray2 kitchen)
     add: (served child9) (at tray1 kitchen+served child9) (at tray1 kitchen+at tray2 kitchen+served child9)
     del: (ontray sandw9 tray3)
   (serve_sandwich_no_gluten sandw1 child10 tray1 table2), cost: 1

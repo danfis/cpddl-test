@@ -129,7 +129,7 @@ Op[40]:
     add: (at rover0 waypoint1) (at rover0 waypoint1+at_rock_sample waypoint1)
     del: (at rover0 waypoint3)
   (sample_rock rover0 rover0store waypoint1), cost: 1
-    pre: (at rover0 waypoint1) (at_rock_sample waypoint1) (empty rover0store)
+    pre: (at rover0 waypoint1) (at_rock_sample waypoint1) (empty rover0store) (at rover0 waypoint1+at_rock_sample waypoint1)
     add: (full rover0store)
     del: (at_rock_sample waypoint1) (empty rover0store) (at rover0 waypoint0+at_rock_sample waypoint1) (at rover0 waypoint0+at_rock_sample waypoint1+have_soil_analysis rover0 waypoint2) (at rover0 waypoint1+at_rock_sample waypoint1) (at rover0 waypoint0+at rover0 waypoint1+at_rock_sample waypoint1+have_soil_analysis rover0 waypoint2)
   (sample_rock rover0 rover0store waypoint2), cost: 1

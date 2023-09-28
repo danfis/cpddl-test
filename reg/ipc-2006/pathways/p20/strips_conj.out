@@ -1522,7 +1522,7 @@ Op[1664]:
     add: (chosen ap2) (num-subs l1)
     del: (NOT-chosen ap2) (num-subs l0) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
   (choose ap2 l10 l9), cost: 1
-    pre: (NOT-chosen ap2) (num-subs l9)
+    pre: (NOT-chosen ap2) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     add: (chosen ap2) (num-subs l10)
     del: (NOT-chosen ap2) (num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
   (choose ap2 l11 l10), cost: 1
@@ -1686,7 +1686,7 @@ Op[1664]:
     add: (chosen c-abl) (num-subs l9)
     del: (NOT-chosen c-abl) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen c-abl+NOT-chosen c-tak1) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
   (choose c-abl l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen c-abl) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen c-abl) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen c-abl+NOT-chosen c-tak1) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
   (choose c-tak1 l1 l0), cost: 1
@@ -1774,7 +1774,7 @@ Op[1664]:
     add: (chosen c-tak1) (num-subs l9)
     del: (NOT-chosen c-tak1) (num-subs l8) (NOT-chosen c-abl+NOT-chosen c-tak1) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
   (choose c-tak1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen c-tak1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen c-tak1) (num-subs l8) (NOT-chosen c-abl+NOT-chosen c-tak1) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
   (choose c-tak1 l9 l8), cost: 1
@@ -1866,7 +1866,7 @@ Op[1664]:
     add: (chosen cdc25c) (num-subs l9)
     del: (NOT-chosen cdc25c) (num-subs l8)
   (choose cdc25c l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdc25c) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdc25c) (num-subs l8)
   (choose cdc25c l9 l8), cost: 1
@@ -1874,7 +1874,7 @@ Op[1664]:
     add: (chosen cdc25c) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdc25c) (num-subs l8)
   (choose cdc25c l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdc25c) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdc25c) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdc25c) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdc25c) (num-subs l8)
   (choose cdk1p1p2 l1 l0), cost: 1
@@ -1962,7 +1962,7 @@ Op[1664]:
     add: (chosen cdk1p1p2) (num-subs l9)
     del: (NOT-chosen cdk1p1p2) (num-subs l8)
   (choose cdk1p1p2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk1p1p2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk1p1p2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdk1p1p2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk1p1p2) (num-subs l8)
   (choose cdk1p1p2 l9 l8), cost: 1
@@ -1970,7 +1970,7 @@ Op[1664]:
     add: (chosen cdk1p1p2) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk1p1p2) (num-subs l8)
   (choose cdk1p1p2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk1p1p2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk1p1p2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdk1p1p2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk1p1p2) (num-subs l8)
   (choose cdk2 l1 l0), cost: 1
@@ -2058,7 +2058,7 @@ Op[1664]:
     add: (chosen cdk2) (num-subs l9)
     del: (NOT-chosen cdk2) (num-subs l8)
   (choose cdk2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdk2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk2) (num-subs l8)
   (choose cdk2 l9 l8), cost: 1
@@ -2066,7 +2066,7 @@ Op[1664]:
     add: (chosen cdk2) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk2) (num-subs l8)
   (choose cdk2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdk2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk2) (num-subs l8)
   (choose cdk2-cycb l1 l0), cost: 1
@@ -2154,7 +2154,7 @@ Op[1664]:
     add: (num-subs l9)
     del: (NOT-chosen cdk2-cycb) (num-subs l8)
   (choose cdk2-cycb l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk2-cycb) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk2-cycb) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk2-cycb) (num-subs l8)
   (choose cdk2-cycb l9 l8), cost: 1
@@ -2162,7 +2162,7 @@ Op[1664]:
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk2-cycb) (num-subs l8)
   (choose cdk2-cycb l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk2-cycb) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk2-cycb) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk2-cycb) (num-subs l8)
   (choose cdk2p1 l1 l0), cost: 1
@@ -2250,7 +2250,7 @@ Op[1664]:
     add: (chosen cdk2p1) (num-subs l9)
     del: (NOT-chosen cdk2p1) (num-subs l8)
   (choose cdk2p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk2p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk2p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdk2p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk2p1) (num-subs l8)
   (choose cdk2p1 l9 l8), cost: 1
@@ -2258,7 +2258,7 @@ Op[1664]:
     add: (chosen cdk2p1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk2p1) (num-subs l8)
   (choose cdk2p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk2p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk2p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdk2p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk2p1) (num-subs l8)
   (choose cdk46p1 l1 l0), cost: 1
@@ -2346,7 +2346,7 @@ Op[1664]:
     add: (chosen cdk46p1) (num-subs l9)
     del: (NOT-chosen cdk46p1) (num-subs l8)
   (choose cdk46p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk46p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk46p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdk46p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk46p1) (num-subs l8)
   (choose cdk46p1 l9 l8), cost: 1
@@ -2354,7 +2354,7 @@ Op[1664]:
     add: (chosen cdk46p1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk46p1) (num-subs l8)
   (choose cdk46p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk46p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk46p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdk46p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk46p1) (num-subs l8)
   (choose cdk46p3-cycdp1 l1 l0), cost: 1
@@ -2442,7 +2442,7 @@ Op[1664]:
     add: (chosen cdk46p3-cycdp1) (num-subs l9)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l8)
   (choose cdk46p3-cycdp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk46p3-cycdp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk46p3-cycdp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdk46p3-cycdp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l8)
   (choose cdk46p3-cycdp1 l9 l8), cost: 1
@@ -2450,7 +2450,7 @@ Op[1664]:
     add: (chosen cdk46p3-cycdp1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l8)
   (choose cdk46p3-cycdp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk46p3-cycdp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk46p3-cycdp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdk46p3-cycdp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l8)
   (choose cdk7 l1 l0), cost: 1
@@ -2538,7 +2538,7 @@ Op[1664]:
     add: (chosen cdk7) (num-subs l9)
     del: (NOT-chosen cdk7) (num-subs l8)
   (choose cdk7 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk7) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdk7) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cdk7) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cdk7) (num-subs l8)
   (choose cdk7 l9 l8), cost: 1
@@ -2546,7 +2546,7 @@ Op[1664]:
     add: (chosen cdk7) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cdk7) (num-subs l8)
   (choose cdk7 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk7) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cdk7) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cdk7) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cdk7) (num-subs l8)
   (choose cebp l1 l0), cost: 1
@@ -2634,7 +2634,7 @@ Op[1664]:
     add: (chosen cebp) (num-subs l9)
     del: (NOT-chosen cebp) (num-subs l8)
   (choose cebp l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cebp) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cebp) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cebp) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cebp) (num-subs l8)
   (choose cebp l9 l8), cost: 1
@@ -2642,7 +2642,7 @@ Op[1664]:
     add: (chosen cebp) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cebp) (num-subs l8)
   (choose cebp l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cebp) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cebp) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cebp) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cebp) (num-subs l8)
   (choose chk1 l1 l0), cost: 1
@@ -2730,7 +2730,7 @@ Op[1664]:
     add: (chosen chk1) (num-subs l9)
     del: (NOT-chosen chk1) (num-subs l8)
   (choose chk1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen chk1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen chk1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen chk1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen chk1) (num-subs l8)
   (choose chk1 l9 l8), cost: 1
@@ -2738,7 +2738,7 @@ Op[1664]:
     add: (chosen chk1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen chk1) (num-subs l8)
   (choose chk1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen chk1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen chk1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen chk1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen chk1) (num-subs l8)
   (choose cks1 l1 l0), cost: 1
@@ -2826,7 +2826,7 @@ Op[1664]:
     add: (chosen cks1) (num-subs l9)
     del: (NOT-chosen cks1) (num-subs l8)
   (choose cks1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cks1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cks1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cks1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cks1) (num-subs l8)
   (choose cks1 l9 l8), cost: 1
@@ -2834,7 +2834,7 @@ Op[1664]:
     add: (chosen cks1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cks1) (num-subs l8)
   (choose cks1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cks1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cks1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cks1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cks1) (num-subs l8)
   (choose cycb l1 l0), cost: 1
@@ -2922,7 +2922,7 @@ Op[1664]:
     add: (chosen cycb) (num-subs l9)
     del: (NOT-chosen cycb) (num-subs l8)
   (choose cycb l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cycb) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cycb) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cycb) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cycb) (num-subs l8)
   (choose cycb l9 l8), cost: 1
@@ -2930,7 +2930,7 @@ Op[1664]:
     add: (chosen cycb) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cycb) (num-subs l8)
   (choose cycb l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cycb) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cycb) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cycb) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cycb) (num-subs l8)
   (choose cych l1 l0), cost: 1
@@ -3018,7 +3018,7 @@ Op[1664]:
     add: (chosen cych) (num-subs l9)
     del: (NOT-chosen cych) (num-subs l8)
   (choose cych l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cych) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cych) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen cych) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen cych) (num-subs l8)
   (choose cych l9 l8), cost: 1
@@ -3026,7 +3026,7 @@ Op[1664]:
     add: (chosen cych) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen cych) (num-subs l8)
   (choose cych l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cych) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen cych) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen cych) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen cych) (num-subs l8)
   (choose dp12 l1 l0), cost: 1
@@ -3114,7 +3114,7 @@ Op[1664]:
     add: (chosen dp12) (num-subs l9)
     del: (NOT-chosen dp12) (num-subs l8)
   (choose dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen dp12) (num-subs l8)
   (choose dp12 l9 l8), cost: 1
@@ -3122,7 +3122,7 @@ Op[1664]:
     add: (chosen dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen dp12) (num-subs l8)
   (choose dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen dp12) (num-subs l8)
   (choose e2f1 l1 l0), cost: 1
@@ -3210,7 +3210,7 @@ Op[1664]:
     add: (chosen e2f1) (num-subs l9)
     del: (NOT-chosen e2f1) (num-subs l8)
   (choose e2f1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f1) (num-subs l8)
   (choose e2f1 l9 l8), cost: 1
@@ -3218,7 +3218,7 @@ Op[1664]:
     add: (chosen e2f1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f1) (num-subs l8)
   (choose e2f1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f1) (num-subs l8)
   (choose e2f13 l1 l0), cost: 1
@@ -3306,7 +3306,7 @@ Op[1664]:
     add: (chosen e2f13) (num-subs l9)
     del: (NOT-chosen e2f13) (num-subs l8)
   (choose e2f13 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f13) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f13) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f13) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f13) (num-subs l8)
   (choose e2f13 l9 l8), cost: 1
@@ -3314,7 +3314,7 @@ Op[1664]:
     add: (chosen e2f13) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f13) (num-subs l8)
   (choose e2f13 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f13) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f13) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f13) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f13) (num-subs l8)
   (choose e2f13-dp12 l1 l0), cost: 1
@@ -3402,7 +3402,7 @@ Op[1664]:
     add: (chosen e2f13-dp12) (num-subs l9)
     del: (NOT-chosen e2f13-dp12) (num-subs l8)
   (choose e2f13-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f13-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f13-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f13-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f13-dp12) (num-subs l8)
   (choose e2f13-dp12 l9 l8), cost: 1
@@ -3410,7 +3410,7 @@ Op[1664]:
     add: (chosen e2f13-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f13-dp12) (num-subs l8)
   (choose e2f13-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f13-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f13-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f13-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f13-dp12) (num-subs l8)
   (choose e2f13p1-dp12p1 l1 l0), cost: 1
@@ -3498,7 +3498,7 @@ Op[1664]:
     add: (chosen e2f13p1-dp12p1) (num-subs l9)
     del: (NOT-chosen e2f13p1-dp12p1) (num-subs l8)
   (choose e2f13p1-dp12p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f13p1-dp12p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f13p1-dp12p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f13p1-dp12p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f13p1-dp12p1) (num-subs l8)
   (choose e2f13p1-dp12p1 l9 l8), cost: 1
@@ -3506,7 +3506,7 @@ Op[1664]:
     add: (chosen e2f13p1-dp12p1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f13p1-dp12p1) (num-subs l8)
   (choose e2f13p1-dp12p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f13p1-dp12p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f13p1-dp12p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f13p1-dp12p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f13p1-dp12p1) (num-subs l8)
   (choose e2f3 l1 l0), cost: 1
@@ -3594,7 +3594,7 @@ Op[1664]:
     add: (chosen e2f3) (num-subs l9)
     del: (NOT-chosen e2f3) (num-subs l8)
   (choose e2f3 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f3) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f3) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f3) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f3) (num-subs l8)
   (choose e2f3 l9 l8), cost: 1
@@ -3602,7 +3602,7 @@ Op[1664]:
     add: (chosen e2f3) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f3) (num-subs l8)
   (choose e2f3 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f3) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f3) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f3) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f3) (num-subs l8)
   (choose e2f4 l1 l0), cost: 1
@@ -3690,7 +3690,7 @@ Op[1664]:
     add: (chosen e2f4) (num-subs l9)
     del: (NOT-chosen e2f4) (num-subs l8)
   (choose e2f4 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f4) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f4) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f4) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f4) (num-subs l8)
   (choose e2f4 l9 l8), cost: 1
@@ -3698,7 +3698,7 @@ Op[1664]:
     add: (chosen e2f4) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f4) (num-subs l8)
   (choose e2f4 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f4) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f4) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f4) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f4) (num-subs l8)
   (choose e2f4-dp12p1 l1 l0), cost: 1
@@ -3786,7 +3786,7 @@ Op[1664]:
     add: (chosen e2f4-dp12p1) (num-subs l9)
     del: (NOT-chosen e2f4-dp12p1) (num-subs l8)
   (choose e2f4-dp12p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f4-dp12p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f4-dp12p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f4-dp12p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f4-dp12p1) (num-subs l8)
   (choose e2f4-dp12p1 l9 l8), cost: 1
@@ -3794,7 +3794,7 @@ Op[1664]:
     add: (chosen e2f4-dp12p1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f4-dp12p1) (num-subs l8)
   (choose e2f4-dp12p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f4-dp12p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f4-dp12p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f4-dp12p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f4-dp12p1) (num-subs l8)
   (choose e2f6 l1 l0), cost: 1
@@ -3882,7 +3882,7 @@ Op[1664]:
     add: (chosen e2f6) (num-subs l9)
     del: (NOT-chosen e2f6) (num-subs l8)
   (choose e2f6 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f6) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen e2f6) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen e2f6) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen e2f6) (num-subs l8)
   (choose e2f6 l9 l8), cost: 1
@@ -3890,7 +3890,7 @@ Op[1664]:
     add: (chosen e2f6) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen e2f6) (num-subs l8)
   (choose e2f6 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f6) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen e2f6) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen e2f6) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen e2f6) (num-subs l8)
   (choose ge-c l1 l0), cost: 1
@@ -3978,7 +3978,7 @@ Op[1664]:
     add: (chosen ge-c) (num-subs l9)
     del: (NOT-chosen ge-c) (num-subs l8)
   (choose ge-c l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen ge-c) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen ge-c) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen ge-c) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen ge-c) (num-subs l8)
   (choose ge-c l9 l8), cost: 1
@@ -3986,7 +3986,7 @@ Op[1664]:
     add: (chosen ge-c) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen ge-c) (num-subs l8)
   (choose ge-c l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen ge-c) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen ge-c) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen ge-c) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen ge-c) (num-subs l8)
   (choose ge2 l1 l0), cost: 1
@@ -4074,7 +4074,7 @@ Op[1664]:
     add: (chosen ge2) (num-subs l9)
     del: (NOT-chosen ge2) (num-subs l8)
   (choose ge2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen ge2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen ge2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen ge2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen ge2) (num-subs l8)
   (choose ge2 l9 l8), cost: 1
@@ -4082,7 +4082,7 @@ Op[1664]:
     add: (chosen ge2) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen ge2) (num-subs l8)
   (choose ge2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen ge2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen ge2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen ge2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen ge2) (num-subs l8)
   (choose hbp1 l1 l0), cost: 1
@@ -4170,7 +4170,7 @@ Op[1664]:
     add: (chosen hbp1) (num-subs l9)
     del: (NOT-chosen hbp1) (num-subs l8)
   (choose hbp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hbp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hbp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen hbp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen hbp1) (num-subs l8)
   (choose hbp1 l9 l8), cost: 1
@@ -4178,7 +4178,7 @@ Op[1664]:
     add: (chosen hbp1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen hbp1) (num-subs l8)
   (choose hbp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hbp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hbp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen hbp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen hbp1) (num-subs l8)
   (choose hdac1-p107-e2f4p1-dp12 l1 l0), cost: 1
@@ -4266,7 +4266,7 @@ Op[1664]:
     add: (chosen hdac1-p107-e2f4p1-dp12) (num-subs l9)
     del: (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p107-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen hdac1-p107-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p107-e2f4p1-dp12 l9 l8), cost: 1
@@ -4274,7 +4274,7 @@ Op[1664]:
     add: (chosen hdac1-p107-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p107-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen hdac1-p107-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen hdac1-p107-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p130-e2f4p1-dp12 l1 l0), cost: 1
@@ -4362,7 +4362,7 @@ Op[1664]:
     add: (chosen hdac1-p130-e2f4p1-dp12) (num-subs l9)
     del: (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p130-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen hdac1-p130-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p130-e2f4p1-dp12 l9 l8), cost: 1
@@ -4370,7 +4370,7 @@ Op[1664]:
     add: (chosen hdac1-p130-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-p130-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen hdac1-p130-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen hdac1-p130-e2f4p1-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f13p1-dp12 l1 l0), cost: 1
@@ -4458,7 +4458,7 @@ Op[1664]:
     add: (chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f13p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f13p1-dp12 l9 l8), cost: 1
@@ -4466,7 +4466,7 @@ Op[1664]:
     add: (chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f13p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f4-dp12 l1 l0), cost: 1
@@ -4554,7 +4554,7 @@ Op[1664]:
     add: (chosen hdac1-prbp1-e2f4-dp12) (num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f4-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen hdac1-prbp1-e2f4-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f4-dp12 l9 l8), cost: 1
@@ -4562,7 +4562,7 @@ Op[1664]:
     add: (chosen hdac1-prbp1-e2f4-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8)
   (choose hdac1-prbp1-e2f4-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen hdac1-prbp1-e2f4-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen hdac1-prbp1-e2f4-dp12) (num-subs l8)
   (choose m1433 l1 l0), cost: 1
@@ -4650,7 +4650,7 @@ Op[1664]:
     add: (chosen m1433) (num-subs l9)
     del: (NOT-chosen m1433) (num-subs l8)
   (choose m1433 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen m1433) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen m1433) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen m1433) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen m1433) (num-subs l8)
   (choose m1433 l9 l8), cost: 1
@@ -4658,7 +4658,7 @@ Op[1664]:
     add: (chosen m1433) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen m1433) (num-subs l8)
   (choose m1433 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen m1433) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen m1433) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen m1433) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen m1433) (num-subs l8)
   (choose p130 l1 l0), cost: 1
@@ -4746,7 +4746,7 @@ Op[1664]:
     add: (chosen p130) (num-subs l9)
     del: (NOT-chosen p130) (num-subs l8)
   (choose p130 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p130) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p130) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p130) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p130) (num-subs l8)
   (choose p130 l9 l8), cost: 1
@@ -4754,7 +4754,7 @@ Op[1664]:
     add: (chosen p130) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p130) (num-subs l8)
   (choose p130 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p130) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p130) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p130) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p130) (num-subs l8)
   (choose p16 l1 l0), cost: 1
@@ -4842,7 +4842,7 @@ Op[1664]:
     add: (chosen p16) (num-subs l9)
     del: (NOT-chosen p16) (num-subs l8)
   (choose p16 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p16) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p16) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p16) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p16) (num-subs l8)
   (choose p16 l9 l8), cost: 1
@@ -4850,7 +4850,7 @@ Op[1664]:
     add: (chosen p16) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p16) (num-subs l8)
   (choose p16 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p16) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p16) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p16) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p16) (num-subs l8)
   (choose p27 l1 l0), cost: 1
@@ -4938,7 +4938,7 @@ Op[1664]:
     add: (chosen p27) (num-subs l9)
     del: (NOT-chosen p27) (num-subs l8)
   (choose p27 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p27) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p27) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p27) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p27) (num-subs l8)
   (choose p27 l9 l8), cost: 1
@@ -4946,7 +4946,7 @@ Op[1664]:
     add: (chosen p27) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p27) (num-subs l8)
   (choose p27 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p27) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p27) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p27) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p27) (num-subs l8)
   (choose p300 l1 l0), cost: 1
@@ -5034,7 +5034,7 @@ Op[1664]:
     add: (num-subs l9)
     del: (NOT-chosen p300) (num-subs l8)
   (choose p300 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p300) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p300) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p300) (num-subs l8)
   (choose p300 l9 l8), cost: 1
@@ -5042,7 +5042,7 @@ Op[1664]:
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p300) (num-subs l8)
   (choose p300 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p300) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p300) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p300) (num-subs l8)
   (choose p53 l1 l0), cost: 1
@@ -5130,7 +5130,7 @@ Op[1664]:
     add: (chosen p53) (num-subs l9)
     del: (NOT-chosen p53) (num-subs l8)
   (choose p53 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p53) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p53) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p53) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p53) (num-subs l8)
   (choose p53 l9 l8), cost: 1
@@ -5138,7 +5138,7 @@ Op[1664]:
     add: (chosen p53) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p53) (num-subs l8)
   (choose p53 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p53) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p53) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p53) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p53) (num-subs l8)
   (choose p53p1 l1 l0), cost: 1
@@ -5226,7 +5226,7 @@ Op[1664]:
     add: (chosen p53p1) (num-subs l9)
     del: (NOT-chosen p53p1) (num-subs l8)
   (choose p53p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p53p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p53p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p53p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p53p1) (num-subs l8)
   (choose p53p1 l9 l8), cost: 1
@@ -5234,7 +5234,7 @@ Op[1664]:
     add: (chosen p53p1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p53p1) (num-subs l8)
   (choose p53p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p53p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p53p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p53p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p53p1) (num-subs l8)
   (choose p57 l1 l0), cost: 1
@@ -5322,7 +5322,7 @@ Op[1664]:
     add: (chosen p57) (num-subs l9)
     del: (NOT-chosen p57) (num-subs l8)
   (choose p57 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p57) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p57) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p57) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p57) (num-subs l8)
   (choose p57 l9 l8), cost: 1
@@ -5330,7 +5330,7 @@ Op[1664]:
     add: (chosen p57) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p57) (num-subs l8)
   (choose p57 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p57) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p57) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p57) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p57) (num-subs l8)
   (choose p57p1 l1 l0), cost: 1
@@ -5418,7 +5418,7 @@ Op[1664]:
     add: (chosen p57p1) (num-subs l9)
     del: (NOT-chosen p57p1) (num-subs l8)
   (choose p57p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p57p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen p57p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen p57p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen p57p1) (num-subs l8)
   (choose p57p1 l9 l8), cost: 1
@@ -5426,7 +5426,7 @@ Op[1664]:
     add: (chosen p57p1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen p57p1) (num-subs l8)
   (choose p57p1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p57p1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen p57p1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen p57p1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen p57p1) (num-subs l8)
   (choose pcaf l1 l0), cost: 1
@@ -5514,7 +5514,7 @@ Op[1664]:
     add: (num-subs l9)
     del: (NOT-chosen pcaf) (num-subs l8)
   (choose pcaf l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen pcaf) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen pcaf) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen pcaf) (num-subs l8)
   (choose pcaf l9 l8), cost: 1
@@ -5522,7 +5522,7 @@ Op[1664]:
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen pcaf) (num-subs l8)
   (choose pcaf l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen pcaf) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen pcaf) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen pcaf) (num-subs l8)
   (choose plk1 l1 l0), cost: 1
@@ -5610,7 +5610,7 @@ Op[1664]:
     add: (chosen plk1) (num-subs l9)
     del: (NOT-chosen plk1) (num-subs l8)
   (choose plk1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen plk1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen plk1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen plk1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen plk1) (num-subs l8)
   (choose plk1 l9 l8), cost: 1
@@ -5618,7 +5618,7 @@ Op[1664]:
     add: (chosen plk1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen plk1) (num-subs l8)
   (choose plk1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen plk1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen plk1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen plk1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen plk1) (num-subs l8)
   (choose prb l1 l0), cost: 1
@@ -5706,7 +5706,7 @@ Op[1664]:
     add: (chosen prb) (num-subs l9)
     del: (NOT-chosen prb) (num-subs l8)
   (choose prb l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prb) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prb) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen prb) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen prb) (num-subs l8)
   (choose prb l9 l8), cost: 1
@@ -5714,7 +5714,7 @@ Op[1664]:
     add: (chosen prb) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen prb) (num-subs l8)
   (choose prb l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prb) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prb) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen prb) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen prb) (num-subs l8)
   (choose prb-e2f4p1-dp12 l1 l0), cost: 1
@@ -5802,7 +5802,7 @@ Op[1664]:
     add: (chosen prb-e2f4p1-dp12) (num-subs l9)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l8)
   (choose prb-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prb-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prb-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen prb-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l8)
   (choose prb-e2f4p1-dp12 l9 l8), cost: 1
@@ -5810,7 +5810,7 @@ Op[1664]:
     add: (chosen prb-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l8)
   (choose prb-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prb-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prb-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen prb-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l8)
   (choose prbp1-e2f4p1-dp12 l1 l0), cost: 1
@@ -5898,7 +5898,7 @@ Op[1664]:
     add: (chosen prbp1-e2f4p1-dp12) (num-subs l9)
     del: (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8)
   (choose prbp1-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen prbp1-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8)
   (choose prbp1-e2f4p1-dp12 l9 l8), cost: 1
@@ -5906,7 +5906,7 @@ Op[1664]:
     add: (chosen prbp1-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8)
   (choose prbp1-e2f4p1-dp12 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen prbp1-e2f4p1-dp12) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen prbp1-e2f4p1-dp12) (num-subs l8)
   (choose prbp2 l1 l0), cost: 1
@@ -5994,7 +5994,7 @@ Op[1664]:
     add: (chosen prbp2) (num-subs l9)
     del: (NOT-chosen prbp2) (num-subs l8)
   (choose prbp2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prbp2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen prbp2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen prbp2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen prbp2) (num-subs l8)
   (choose prbp2 l9 l8), cost: 1
@@ -6002,7 +6002,7 @@ Op[1664]:
     add: (chosen prbp2) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen prbp2) (num-subs l8)
   (choose prbp2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prbp2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen prbp2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen prbp2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen prbp2) (num-subs l8)
   (choose rpa l1 l0), cost: 1
@@ -6090,7 +6090,7 @@ Op[1664]:
     add: (chosen rpa) (num-subs l9)
     del: (NOT-chosen rpa) (num-subs l8)
   (choose rpa l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen rpa) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen rpa) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen rpa) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen rpa) (num-subs l8)
   (choose rpa l9 l8), cost: 1
@@ -6098,7 +6098,7 @@ Op[1664]:
     add: (chosen rpa) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen rpa) (num-subs l8)
   (choose rpa l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen rpa) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen rpa) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen rpa) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen rpa) (num-subs l8)
   (choose skp1 l1 l0), cost: 1
@@ -6186,7 +6186,7 @@ Op[1664]:
     add: (chosen skp1) (num-subs l9)
     del: (NOT-chosen skp1) (num-subs l8)
   (choose skp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen skp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen skp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen skp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen skp1) (num-subs l8)
   (choose skp1 l9 l8), cost: 1
@@ -6194,7 +6194,7 @@ Op[1664]:
     add: (chosen skp1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen skp1) (num-subs l8)
   (choose skp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen skp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen skp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen skp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen skp1) (num-subs l8)
   (choose skp2 l1 l0), cost: 1
@@ -6282,7 +6282,7 @@ Op[1664]:
     add: (chosen skp2) (num-subs l9)
     del: (NOT-chosen skp2) (num-subs l8)
   (choose skp2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen skp2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen skp2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen skp2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen skp2) (num-subs l8)
   (choose skp2 l9 l8), cost: 1
@@ -6290,7 +6290,7 @@ Op[1664]:
     add: (chosen skp2) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen skp2) (num-subs l8)
   (choose skp2 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen skp2) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen skp2) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen skp2) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen skp2) (num-subs l8)
   (choose sp1 l1 l0), cost: 1
@@ -6378,7 +6378,7 @@ Op[1664]:
     add: (chosen sp1) (num-subs l9)
     del: (NOT-chosen sp1) (num-subs l8)
   (choose sp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen sp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen sp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen sp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen sp1) (num-subs l8)
   (choose sp1 l9 l8), cost: 1
@@ -6386,7 +6386,7 @@ Op[1664]:
     add: (chosen sp1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen sp1) (num-subs l8)
   (choose sp1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen sp1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen sp1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen sp1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen sp1) (num-subs l8)
   (choose wee1 l1 l0), cost: 1
@@ -6474,7 +6474,7 @@ Op[1664]:
     add: (chosen wee1) (num-subs l9)
     del: (NOT-chosen wee1) (num-subs l8)
   (choose wee1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen wee1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen wee1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl) (NOT-chosen c-abl+NOT-chosen c-tak1)
     add: (chosen wee1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+NOT-chosen c-tak1+num-subs l9)
     del: (NOT-chosen wee1) (num-subs l8)
   (choose wee1 l9 l8), cost: 1
@@ -6482,7 +6482,7 @@ Op[1664]:
     add: (chosen wee1) (num-subs l9) (NOT-chosen ap2+num-subs l9)
     del: (NOT-chosen wee1) (num-subs l8)
   (choose wee1 l9 l8), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen wee1) (num-subs l8)
+    pre: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen wee1) (num-subs l8) (NOT-chosen ap2+NOT-chosen c-abl)
     add: (chosen wee1) (num-subs l9) (NOT-chosen ap2+num-subs l9) (NOT-chosen ap2+NOT-chosen c-abl+num-subs l9)
     del: (NOT-chosen wee1) (num-subs l8)
   (dummy-action-1), cost: 1

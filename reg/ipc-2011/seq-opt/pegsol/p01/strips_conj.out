@@ -388,7 +388,7 @@ Op[163]:
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4)
   (jump-continue-move pos-4-4 pos-5-4 pos-6-4), cost: 0
-    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4) (free pos-0-2+free pos-0-3) (free pos-0-3+free pos-0-4)
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4) (free pos-0-2+free pos-0-3+free pos-0-4+occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4)
   (jump-continue-move pos-4-4 pos-5-4 pos-6-4), cost: 0
@@ -396,7 +396,7 @@ Op[163]:
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4)
   (jump-continue-move pos-4-4 pos-5-4 pos-6-4), cost: 0
-    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4) (free pos-0-2+free pos-0-3)
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-4-4) (occupied pos-4-4) (occupied pos-5-4)
   (jump-continue-move pos-4-6 pos-3-6 pos-2-6), cost: 0
@@ -424,7 +424,7 @@ Op[163]:
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3)
   (jump-continue-move pos-6-2 pos-6-3 pos-6-4), cost: 0
-    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3) (free pos-0-2+free pos-0-3) (free pos-0-3+free pos-0-4)
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4) (free pos-0-2+free pos-0-3+free pos-0-4+occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3)
   (jump-continue-move pos-6-2 pos-6-3 pos-6-4), cost: 0
@@ -432,7 +432,7 @@ Op[163]:
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3)
   (jump-continue-move pos-6-2 pos-6-3 pos-6-4), cost: 0
-    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3) (free pos-0-2+free pos-0-3)
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4)
     del: (free pos-6-4) (last-visited pos-6-2) (occupied pos-6-2) (occupied pos-6-3)
   (jump-continue-move pos-6-4 pos-5-4 pos-4-4), cost: 0
@@ -460,7 +460,7 @@ Op[163]:
     add: (free pos-0-3) (free pos-1-3) (last-visited pos-2-3) (occupied pos-2-3)
     del: (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3)
   (jump-new-move pos-0-3 pos-1-3 pos-2-3), cost: 1
-    pre: (free pos-0-2) (free pos-0-4) (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3) (occupied pos-6-4)
+    pre: (free pos-0-2) (free pos-0-4) (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     add: (free pos-0-3) (free pos-1-3) (last-visited pos-2-3) (occupied pos-2-3) (free pos-0-2+free pos-0-3) (free pos-0-2+free pos-0-3+occupied pos-6-4) (free pos-0-3+free pos-0-4) (free pos-0-2+free pos-0-3+free pos-0-4+occupied pos-6-4)
     del: (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3)
   (jump-new-move pos-0-3 pos-1-3 pos-2-3), cost: 1
@@ -472,7 +472,7 @@ Op[163]:
     add: (free pos-0-3) (free pos-1-3) (last-visited pos-2-3) (occupied pos-2-3) (free pos-0-3+free pos-0-4)
     del: (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3)
   (jump-new-move pos-0-3 pos-1-3 pos-2-3), cost: 1
-    pre: (free pos-0-2) (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3) (occupied pos-6-4)
+    pre: (free pos-0-2) (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     add: (free pos-0-3) (free pos-1-3) (last-visited pos-2-3) (occupied pos-2-3) (free pos-0-2+free pos-0-3) (free pos-0-2+free pos-0-3+occupied pos-6-4)
     del: (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3)
   (jump-new-move pos-0-3 pos-1-3 pos-2-3), cost: 1
@@ -480,7 +480,7 @@ Op[163]:
     add: (free pos-0-3) (free pos-1-3) (last-visited pos-2-3) (occupied pos-2-3) (free pos-0-2+free pos-0-3) (free pos-0-3+free pos-0-4)
     del: (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3)
   (jump-new-move pos-0-3 pos-1-3 pos-2-3), cost: 1
-    pre: (free pos-0-2) (free pos-0-4) (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3) (occupied pos-6-4)
+    pre: (free pos-0-2) (free pos-0-4) (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     add: (free pos-0-3) (free pos-1-3) (last-visited pos-2-3) (occupied pos-2-3) (free pos-0-2+free pos-0-3) (free pos-0-2+free pos-0-3+occupied pos-6-4) (free pos-0-3+free pos-0-4)
     del: (free pos-2-3) (move-ended) (occupied pos-0-3) (occupied pos-1-3)
   (jump-new-move pos-0-4 pos-0-3 pos-0-2), cost: 1
@@ -676,7 +676,7 @@ Op[163]:
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4)
   (jump-new-move pos-4-4 pos-5-4 pos-6-4), cost: 1
-    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4) (free pos-0-2+free pos-0-3) (free pos-0-3+free pos-0-4)
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4) (free pos-0-2+free pos-0-3+free pos-0-4+occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4)
   (jump-new-move pos-4-4 pos-5-4 pos-6-4), cost: 1
@@ -684,7 +684,7 @@ Op[163]:
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4)
   (jump-new-move pos-4-4 pos-5-4 pos-6-4), cost: 1
-    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4) (free pos-0-2+free pos-0-3)
     add: (free pos-4-4) (free pos-5-4) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-4-4) (occupied pos-5-4)
   (jump-new-move pos-4-5 pos-3-5 pos-2-5), cost: 1
@@ -732,7 +732,7 @@ Op[163]:
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3)
   (jump-new-move pos-6-2 pos-6-3 pos-6-4), cost: 1
-    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-0-4) (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3) (free pos-0-2+free pos-0-3) (free pos-0-3+free pos-0-4)
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4) (free pos-0-2+free pos-0-3+free pos-0-4+occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3)
   (jump-new-move pos-6-2 pos-6-3 pos-6-4), cost: 1
@@ -740,7 +740,7 @@ Op[163]:
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3)
   (jump-new-move pos-6-2 pos-6-3 pos-6-4), cost: 1
-    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3)
+    pre: (free pos-0-2) (free pos-0-3) (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3) (free pos-0-2+free pos-0-3)
     add: (free pos-6-2) (free pos-6-3) (last-visited pos-6-4) (occupied pos-6-4) (free pos-0-2+occupied pos-6-4) (free pos-0-2+free pos-0-3+occupied pos-6-4)
     del: (free pos-6-4) (move-ended) (occupied pos-6-2) (occupied pos-6-3)
   (jump-new-move pos-6-3 pos-5-3 pos-4-3), cost: 1

@@ -86,7 +86,7 @@ Op[59]:
     add: (at ball2 rooma) (free left) (at ball1 roomb+at ball2 rooma)
     del: (carry ball2 left)
   (drop ball2 rooma left), cost: 1
-    pre: (at ball1 rooma) (at-robby rooma) (carry ball2 left) (free right)
+    pre: (at ball1 rooma) (at-robby rooma) (carry ball2 left) (free right) (at ball1 rooma+free right)
     add: (at ball2 rooma) (free left) (at ball1 rooma+at ball2 rooma) (at ball1 rooma+at ball2 rooma+free right)
     del: (carry ball2 left)
   (drop ball2 rooma right), cost: 1
@@ -138,7 +138,7 @@ Op[59]:
     add: (at ball3 rooma) (free right) (at ball1 rooma+free right)
     del: (carry ball3 right)
   (drop ball3 rooma right), cost: 1
-    pre: (at ball1 rooma) (at ball2 rooma) (at-robby rooma) (carry ball3 right)
+    pre: (at ball1 rooma) (at ball2 rooma) (at-robby rooma) (carry ball3 right) (at ball1 rooma+at ball2 rooma)
     add: (at ball3 rooma) (free right) (at ball1 rooma+free right) (at ball1 rooma+at ball2 rooma+free right)
     del: (carry ball3 right)
   (drop ball3 roomb left), cost: 1
@@ -154,7 +154,7 @@ Op[59]:
     add: (at ball3 roomb) (free right) (at ball1 rooma+free right)
     del: (carry ball3 right)
   (drop ball3 roomb right), cost: 1
-    pre: (at ball1 rooma) (at ball2 rooma) (at-robby roomb) (carry ball3 right)
+    pre: (at ball1 rooma) (at ball2 rooma) (at-robby roomb) (carry ball3 right) (at ball1 rooma+at ball2 rooma)
     add: (at ball3 roomb) (free right) (at ball1 rooma+free right) (at ball1 rooma+at ball2 rooma+free right)
     del: (carry ball3 right)
   (drop ball4 rooma left), cost: 1
@@ -170,7 +170,7 @@ Op[59]:
     add: (at ball4 rooma) (free right) (at ball1 rooma+free right)
     del: (carry ball4 right)
   (drop ball4 rooma right), cost: 1
-    pre: (at ball1 rooma) (at ball2 rooma) (at-robby rooma) (carry ball4 right)
+    pre: (at ball1 rooma) (at ball2 rooma) (at-robby rooma) (carry ball4 right) (at ball1 rooma+at ball2 rooma)
     add: (at ball4 rooma) (free right) (at ball1 rooma+free right) (at ball1 rooma+at ball2 rooma+free right)
     del: (carry ball4 right)
   (drop ball4 roomb left), cost: 1
@@ -186,7 +186,7 @@ Op[59]:
     add: (at ball4 roomb) (free right) (at ball1 rooma+free right)
     del: (carry ball4 right)
   (drop ball4 roomb right), cost: 1
-    pre: (at ball1 rooma) (at ball2 rooma) (at-robby roomb) (carry ball4 right)
+    pre: (at ball1 rooma) (at ball2 rooma) (at-robby roomb) (carry ball4 right) (at ball1 rooma+at ball2 rooma)
     add: (at ball4 roomb) (free right) (at ball1 rooma+free right) (at ball1 rooma+at ball2 rooma+free right)
     del: (carry ball4 right)
   (move rooma roomb), cost: 1
@@ -202,7 +202,7 @@ Op[59]:
     add: (carry ball1 left)
     del: (at ball1 rooma) (free left) (at ball1 rooma+at ball2 rooma) (at ball1 rooma+free right) (at ball1 rooma+at ball2 rooma+free right) (at ball1 rooma+at ball1 roomb+at ball2 rooma+free right)
   (pick ball1 rooma right), cost: 1
-    pre: (at ball1 rooma) (at-robby rooma) (free right)
+    pre: (at ball1 rooma) (at-robby rooma) (free right) (at ball1 rooma+free right)
     add: (carry ball1 right)
     del: (at ball1 rooma) (free right) (at ball1 rooma+at ball2 rooma) (at ball1 rooma+free right) (at ball1 rooma+at ball2 rooma+free right) (at ball1 rooma+at ball1 roomb+at ball2 rooma+free right)
   (pick ball1 roomb left), cost: 1

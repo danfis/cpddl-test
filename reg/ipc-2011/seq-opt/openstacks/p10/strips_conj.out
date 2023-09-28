@@ -167,7 +167,7 @@ Op[1417]:
     add: (made p1)
     del: (not-made p1)
   (make-product-p1), cost: 0
-    pre: (made p10) (made p11) (not-made p1) (started o7) (waiting o9)
+    pre: (made p10) (made p11) (not-made p1) (started o7) (waiting o9) (made p10+made p11)
     add: (made p1) (made p1+made p10) (made p1+waiting o9) (made p1+made p10+waiting o9) (made p1+made p10+made p11+waiting o9)
     del: (not-made p1)
   (make-product-p1), cost: 0
@@ -191,7 +191,7 @@ Op[1417]:
     add: (made p10)
     del: (not-made p10)
   (make-product-p10), cost: 0
-    pre: (made p1) (made p11) (not-made p10) (started o5) (waiting o9)
+    pre: (made p1) (made p11) (not-made p10) (started o5) (waiting o9) (made p1+waiting o9)
     add: (made p10) (made p1+made p10) (made p1+made p10+waiting o9) (made p10+made p11) (made p1+made p10+made p11+waiting o9)
     del: (not-made p10)
   (make-product-p10), cost: 0
@@ -203,7 +203,7 @@ Op[1417]:
     add: (made p10) (made p10+made p11)
     del: (not-made p10)
   (make-product-p10), cost: 0
-    pre: (made p1) (not-made p10) (started o5) (waiting o9)
+    pre: (made p1) (not-made p10) (started o5) (waiting o9) (made p1+waiting o9)
     add: (made p10) (made p1+made p10) (made p1+made p10+waiting o9)
     del: (not-made p10)
   (make-product-p10), cost: 0
@@ -211,7 +211,7 @@ Op[1417]:
     add: (made p10) (made p1+made p10) (made p10+made p11)
     del: (not-made p10)
   (make-product-p10), cost: 0
-    pre: (made p1) (made p11) (not-made p10) (started o5) (waiting o9)
+    pre: (made p1) (made p11) (not-made p10) (started o5) (waiting o9) (made p1+waiting o9)
     add: (made p10) (made p1+made p10) (made p1+made p10+waiting o9) (made p10+made p11)
     del: (not-made p10)
   (make-product-p11), cost: 0
@@ -219,7 +219,7 @@ Op[1417]:
     add: (made p11)
     del: (not-made p11)
   (make-product-p11), cost: 0
-    pre: (made p1) (made p10) (not-made p11) (started o1) (waiting o9)
+    pre: (made p1) (made p10) (not-made p11) (started o1) (waiting o9) (made p1+made p10) (made p1+waiting o9) (made p1+made p10+waiting o9)
     add: (made p11) (made p10+made p11) (made p1+made p10+made p11+waiting o9)
     del: (not-made p11)
   (make-product-p11), cost: 0

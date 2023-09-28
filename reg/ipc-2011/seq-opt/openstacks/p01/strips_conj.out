@@ -71,7 +71,7 @@ Op[233]:
     add: (made p1)
     del: (not-made p1)
   (make-product-p1), cost: 0
-    pre: (made p10) (made p2) (not-made p1) (started o3) (started o9) (waiting o8)
+    pre: (made p10) (made p2) (not-made p1) (started o3) (started o9) (waiting o8) (made p10+made p2)
     add: (made p1) (made p1+made p10) (made p1+waiting o8) (made p1+made p10+waiting o8) (made p1+made p10+made p2+waiting o8)
     del: (not-made p1)
   (make-product-p1), cost: 0
@@ -95,7 +95,7 @@ Op[233]:
     add: (made p10)
     del: (not-made p10)
   (make-product-p10), cost: 0
-    pre: (made p1) (made p2) (not-made p10) (started o1) (started o2) (waiting o8)
+    pre: (made p1) (made p2) (not-made p10) (started o1) (started o2) (waiting o8) (made p1+waiting o8)
     add: (made p10) (made p1+made p10) (made p1+made p10+waiting o8) (made p10+made p2) (made p1+made p10+made p2+waiting o8)
     del: (not-made p10)
   (make-product-p10), cost: 0
@@ -107,7 +107,7 @@ Op[233]:
     add: (made p10) (made p10+made p2)
     del: (not-made p10)
   (make-product-p10), cost: 0
-    pre: (made p1) (not-made p10) (started o1) (started o2) (waiting o8)
+    pre: (made p1) (not-made p10) (started o1) (started o2) (waiting o8) (made p1+waiting o8)
     add: (made p10) (made p1+made p10) (made p1+made p10+waiting o8)
     del: (not-made p10)
   (make-product-p10), cost: 0
@@ -115,7 +115,7 @@ Op[233]:
     add: (made p10) (made p1+made p10) (made p10+made p2)
     del: (not-made p10)
   (make-product-p10), cost: 0
-    pre: (made p1) (made p2) (not-made p10) (started o1) (started o2) (waiting o8)
+    pre: (made p1) (made p2) (not-made p10) (started o1) (started o2) (waiting o8) (made p1+waiting o8)
     add: (made p10) (made p1+made p10) (made p1+made p10+waiting o8) (made p10+made p2)
     del: (not-made p10)
   (make-product-p2), cost: 0
@@ -123,7 +123,7 @@ Op[233]:
     add: (made p2)
     del: (not-made p2)
   (make-product-p2), cost: 0
-    pre: (made p1) (made p10) (not-made p2) (started o2) (waiting o8)
+    pre: (made p1) (made p10) (not-made p2) (started o2) (waiting o8) (made p1+made p10) (made p1+waiting o8) (made p1+made p10+waiting o8)
     add: (made p2) (made p10+made p2) (made p1+made p10+made p2+waiting o8)
     del: (not-made p2)
   (make-product-p2), cost: 0
@@ -279,43 +279,43 @@ Op[233]:
     add: (shipped o10) (stacks-avail n10)
     del: (stacks-avail n9) (started o10)
   (ship-order-o2 n0 n1), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n0) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n0) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n1)
     del: (stacks-avail n0) (started o2)
   (ship-order-o2 n1 n2), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n1) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n1) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n2)
     del: (stacks-avail n1) (started o2)
   (ship-order-o2 n2 n3), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n2) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n2) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n3)
     del: (stacks-avail n2) (started o2)
   (ship-order-o2 n3 n4), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n3) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n3) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n4)
     del: (stacks-avail n3) (started o2)
   (ship-order-o2 n4 n5), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n4) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n4) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n5)
     del: (stacks-avail n4) (started o2)
   (ship-order-o2 n5 n6), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n5) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n5) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n6)
     del: (stacks-avail n5) (started o2)
   (ship-order-o2 n6 n7), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n6) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n6) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n7)
     del: (stacks-avail n6) (started o2)
   (ship-order-o2 n7 n8), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n7) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n7) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n8)
     del: (stacks-avail n7) (started o2)
   (ship-order-o2 n8 n9), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n8) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n8) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n9)
     del: (stacks-avail n8) (started o2)
   (ship-order-o2 n9 n10), cost: 0
-    pre: (made p10) (made p2) (stacks-avail n9) (started o2)
+    pre: (made p10) (made p2) (stacks-avail n9) (started o2) (made p10+made p2)
     add: (shipped o2) (stacks-avail n10)
     del: (stacks-avail n9) (started o2)
   (ship-order-o3 n0 n1), cost: 0

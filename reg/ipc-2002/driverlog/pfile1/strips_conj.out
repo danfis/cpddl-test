@@ -274,7 +274,7 @@ Op[110]:
     add: (in package2 truck2) (at driver1 p1-0+in package2 truck2)
     del: (at package2 s0)
   (load-truck package2 truck2 s0), cost: 1
-    pre: (at driver1 p1-0) (at driver2 p1-0) (at package2 s0) (at truck2 s0)
+    pre: (at driver1 p1-0) (at driver2 p1-0) (at package2 s0) (at truck2 s0) (at driver1 p1-0+at driver2 p1-0)
     add: (in package2 truck2) (at driver1 p1-0+in package2 truck2) (at driver1 p1-0+at driver2 p1-0+in package2 truck2)
     del: (at package2 s0)
   (load-truck package2 truck2 s1), cost: 1
@@ -286,7 +286,7 @@ Op[110]:
     add: (in package2 truck2) (at driver1 p1-0+in package2 truck2)
     del: (at package2 s1)
   (load-truck package2 truck2 s1), cost: 1
-    pre: (at driver1 p1-0) (at driver2 p1-0) (at package2 s1) (at truck2 s1)
+    pre: (at driver1 p1-0) (at driver2 p1-0) (at package2 s1) (at truck2 s1) (at driver1 p1-0+at driver2 p1-0)
     add: (in package2 truck2) (at driver1 p1-0+in package2 truck2) (at driver1 p1-0+at driver2 p1-0+in package2 truck2)
     del: (at package2 s1)
   (load-truck package2 truck2 s2), cost: 1
@@ -298,7 +298,7 @@ Op[110]:
     add: (in package2 truck2) (at driver1 p1-0+in package2 truck2)
     del: (at package2 s2)
   (load-truck package2 truck2 s2), cost: 1
-    pre: (at driver1 p1-0) (at driver2 p1-0) (at package2 s2) (at truck2 s2)
+    pre: (at driver1 p1-0) (at driver2 p1-0) (at package2 s2) (at truck2 s2) (at driver1 p1-0+at driver2 p1-0)
     add: (in package2 truck2) (at driver1 p1-0+in package2 truck2) (at driver1 p1-0+at driver2 p1-0+in package2 truck2)
     del: (at package2 s2)
   (unload-truck package1 truck1 s0), cost: 1
@@ -450,7 +450,7 @@ Op[110]:
     add: (at driver2 p1-0) (at driver1 p1-2+at driver2 p1-0)
     del: (at driver2 s0)
   (walk driver2 s0 p1-0), cost: 1
-    pre: (at driver1 p1-0) (at driver2 s0) (in package2 truck2)
+    pre: (at driver1 p1-0) (at driver2 s0) (in package2 truck2) (at driver1 p1-0+in package2 truck2)
     add: (at driver2 p1-0) (at driver1 p1-0+at driver2 p1-0) (at driver1 p1-0+at driver2 p1-0+in package2 truck2)
     del: (at driver2 s0)
   (walk driver2 s1 p1-0), cost: 1
@@ -466,7 +466,7 @@ Op[110]:
     add: (at driver2 p1-0) (at driver1 p1-2+at driver2 p1-0)
     del: (at driver2 s1)
   (walk driver2 s1 p1-0), cost: 1
-    pre: (at driver1 p1-0) (at driver2 s1) (in package2 truck2)
+    pre: (at driver1 p1-0) (at driver2 s1) (in package2 truck2) (at driver1 p1-0+in package2 truck2)
     add: (at driver2 p1-0) (at driver1 p1-0+at driver2 p1-0) (at driver1 p1-0+at driver2 p1-0+in package2 truck2)
     del: (at driver2 s1)
   (walk driver2 s1 p1-2), cost: 1

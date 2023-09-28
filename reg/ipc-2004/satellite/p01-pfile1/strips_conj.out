@@ -23,7 +23,7 @@ Op[55]:
     add: (calibrated instrument0) (calibrated instrument0+power_on instrument0)
     del:
   (calibrate satellite0 instrument0 groundstation2), cost: 1
-    pre: (have_image phenomenon4 thermograph0) (have_image phenomenon6 thermograph0) (pointing satellite0 groundstation2) (power_on instrument0)
+    pre: (have_image phenomenon4 thermograph0) (have_image phenomenon6 thermograph0) (pointing satellite0 groundstation2) (power_on instrument0) (have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0)
     add: (calibrated instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0+power_on instrument0)
     del:
   (calibrate satellite0 instrument0 groundstation2), cost: 1
@@ -43,31 +43,31 @@ Op[55]:
     add: (power_on instrument0)
     del: (calibrated instrument0) (power_avail satellite0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0+power_on instrument0)
   (take_image satellite0 phenomenon4 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (pointing satellite0 phenomenon4) (power_on instrument0)
+    pre: (calibrated instrument0) (pointing satellite0 phenomenon4) (power_on instrument0) (calibrated instrument0+power_on instrument0)
     add: (have_image phenomenon4 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0)
     del:
   (take_image satellite0 phenomenon4 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (have_image phenomenon6 thermograph0) (pointing satellite0 phenomenon4) (power_on instrument0)
+    pre: (calibrated instrument0) (have_image phenomenon6 thermograph0) (pointing satellite0 phenomenon4) (power_on instrument0) (calibrated instrument0+power_on instrument0)
     add: (have_image phenomenon4 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0) (have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0+power_on instrument0)
     del:
   (take_image satellite0 phenomenon4 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (have_image phenomenon6 thermograph0) (pointing satellite0 phenomenon4) (power_on instrument0)
+    pre: (calibrated instrument0) (have_image phenomenon6 thermograph0) (pointing satellite0 phenomenon4) (power_on instrument0) (calibrated instrument0+power_on instrument0)
     add: (have_image phenomenon4 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0) (have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0)
     del:
   (take_image satellite0 phenomenon6 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (pointing satellite0 phenomenon6) (power_on instrument0)
+    pre: (calibrated instrument0) (pointing satellite0 phenomenon6) (power_on instrument0) (calibrated instrument0+power_on instrument0)
     add: (have_image phenomenon6 thermograph0)
     del:
   (take_image satellite0 phenomenon6 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (have_image phenomenon4 thermograph0) (pointing satellite0 phenomenon6) (power_on instrument0)
+    pre: (calibrated instrument0) (have_image phenomenon4 thermograph0) (pointing satellite0 phenomenon6) (power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0)
     add: (have_image phenomenon6 thermograph0) (have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0) (calibrated instrument0+have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0+power_on instrument0)
     del:
   (take_image satellite0 phenomenon6 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (have_image phenomenon4 thermograph0) (pointing satellite0 phenomenon6) (power_on instrument0)
+    pre: (calibrated instrument0) (have_image phenomenon4 thermograph0) (pointing satellite0 phenomenon6) (power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0) (calibrated instrument0+power_on instrument0) (calibrated instrument0+have_image phenomenon4 thermograph0+power_on instrument0)
     add: (have_image phenomenon6 thermograph0) (have_image phenomenon4 thermograph0+have_image phenomenon6 thermograph0)
     del:
   (take_image satellite0 star5 instrument0 thermograph0), cost: 1
-    pre: (calibrated instrument0) (pointing satellite0 star5) (power_on instrument0)
+    pre: (calibrated instrument0) (pointing satellite0 star5) (power_on instrument0) (calibrated instrument0+power_on instrument0)
     add: (have_image star5 thermograph0)
     del:
   (turn_to satellite0 groundstation1 groundstation2), cost: 1

@@ -67,7 +67,7 @@ Op[169]:
     add: (robot-has robot2 white)
     del: (robot-has robot2 black)
   (change-color robot2 black white), cost: 5
-    pre: (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (robot-has robot2 black)
+    pre: (clear tile_0-1) (clear tile_0-2) (clear tile_0-3) (robot-has robot2 black) (clear tile_0-1+clear tile_0-2) (clear tile_0-2+clear tile_0-3)
     add: (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (robot-has robot2 black)
   (change-color robot2 black white), cost: 5
@@ -75,7 +75,7 @@ Op[169]:
     add: (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     del: (robot-has robot2 black)
   (change-color robot2 black white), cost: 5
-    pre: (clear tile_0-1) (clear tile_0-2) (robot-has robot2 black)
+    pre: (clear tile_0-1) (clear tile_0-2) (robot-has robot2 black) (clear tile_0-1+clear tile_0-2)
     add: (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     del: (robot-has robot2 black)
   (change-color robot2 white black), cost: 5
@@ -279,7 +279,7 @@ Op[169]:
     add:
     del: (clear tile_0-1) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
   (paint-down robot2 tile_0-1 tile_1-1 white), cost: 2
-    pre: (clear tile_0-1) (robot-at robot2 tile_1-1) (robot-has robot2 white)
+    pre: (clear tile_0-1) (robot-at robot2 tile_1-1) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add:
     del: (clear tile_0-1) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
   (paint-down robot2 tile_0-2 tile_1-2 black), cost: 2
@@ -479,7 +479,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot1 tile_0-3)
     del: (clear tile_0-3) (robot-at robot1 tile_0-2) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
   (right robot1 tile_0-2 tile_0-3), cost: 1
-    pre: (clear tile_0-1) (clear tile_0-3) (robot-at robot1 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-3) (robot-at robot1 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot1 tile_0-3) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     del: (clear tile_0-3) (robot-at robot1 tile_0-2) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
   (right robot1 tile_0-2 tile_0-3), cost: 1
@@ -523,7 +523,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot2 tile_0-3)
     del: (clear tile_0-3) (robot-at robot2 tile_0-2) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
   (right robot2 tile_0-2 tile_0-3), cost: 1
-    pre: (clear tile_0-1) (clear tile_0-3) (robot-at robot2 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-3) (robot-at robot2 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot2 tile_0-3) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     del: (clear tile_0-3) (robot-at robot2 tile_0-2) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
   (right robot2 tile_0-2 tile_0-3), cost: 1
@@ -559,7 +559,7 @@ Op[169]:
     add: (clear tile_0-1) (robot-at robot1 tile_1-1)
     del: (clear tile_1-1) (robot-at robot1 tile_0-1)
   (up robot1 tile_0-1 tile_1-1), cost: 3
-    pre: (clear tile_0-2) (clear tile_0-3) (clear tile_1-1) (robot-at robot1 tile_0-1) (robot-has robot2 white)
+    pre: (clear tile_0-2) (clear tile_0-3) (clear tile_1-1) (robot-at robot1 tile_0-1) (robot-has robot2 white) (clear tile_0-2+clear tile_0-3)
     add: (clear tile_0-1) (robot-at robot1 tile_1-1) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (clear tile_1-1) (robot-at robot1 tile_0-1)
   (up robot1 tile_0-1 tile_1-1), cost: 3
@@ -583,7 +583,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot1 tile_1-2)
     del: (clear tile_1-2) (robot-at robot1 tile_0-2)
   (up robot1 tile_0-2 tile_1-2), cost: 3
-    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot1 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot1 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot1 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (clear tile_1-2) (robot-at robot1 tile_0-2)
   (up robot1 tile_0-2 tile_1-2), cost: 3
@@ -595,7 +595,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot1 tile_1-2) (clear tile_0-2+clear tile_0-3)
     del: (clear tile_1-2) (robot-at robot1 tile_0-2)
   (up robot1 tile_0-2 tile_1-2), cost: 3
-    pre: (clear tile_0-1) (clear tile_1-2) (robot-at robot1 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_1-2) (robot-at robot1 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot1 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     del: (clear tile_1-2) (robot-at robot1 tile_0-2)
   (up robot1 tile_0-2 tile_1-2), cost: 3
@@ -603,7 +603,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot1 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-2+clear tile_0-3)
     del: (clear tile_1-2) (robot-at robot1 tile_0-2)
   (up robot1 tile_0-2 tile_1-2), cost: 3
-    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot1 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot1 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot1 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-2+clear tile_0-3)
     del: (clear tile_1-2) (robot-at robot1 tile_0-2)
   (up robot1 tile_0-3 tile_1-3), cost: 3
@@ -611,7 +611,7 @@ Op[169]:
     add: (clear tile_0-3) (robot-at robot1 tile_1-3)
     del: (clear tile_1-3) (robot-at robot1 tile_0-3)
   (up robot1 tile_0-3 tile_1-3), cost: 3
-    pre: (clear tile_0-1) (clear tile_0-2) (clear tile_1-3) (robot-at robot1 tile_0-3) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-2) (clear tile_1-3) (robot-at robot1 tile_0-3) (robot-has robot2 white) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     add: (clear tile_0-3) (robot-at robot1 tile_1-3) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (clear tile_1-3) (robot-at robot1 tile_0-3)
   (up robot1 tile_0-3 tile_1-3), cost: 3
@@ -647,7 +647,7 @@ Op[169]:
     add: (clear tile_0-1) (robot-at robot2 tile_1-1)
     del: (clear tile_1-1) (robot-at robot2 tile_0-1)
   (up robot2 tile_0-1 tile_1-1), cost: 3
-    pre: (clear tile_0-2) (clear tile_0-3) (clear tile_1-1) (robot-at robot2 tile_0-1) (robot-has robot2 white)
+    pre: (clear tile_0-2) (clear tile_0-3) (clear tile_1-1) (robot-at robot2 tile_0-1) (robot-has robot2 white) (clear tile_0-2+clear tile_0-3)
     add: (clear tile_0-1) (robot-at robot2 tile_1-1) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (clear tile_1-1) (robot-at robot2 tile_0-1)
   (up robot2 tile_0-1 tile_1-1), cost: 3
@@ -671,7 +671,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot2 tile_1-2)
     del: (clear tile_1-2) (robot-at robot2 tile_0-2)
   (up robot2 tile_0-2 tile_1-2), cost: 3
-    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot2 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot2 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot2 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (clear tile_1-2) (robot-at robot2 tile_0-2)
   (up robot2 tile_0-2 tile_1-2), cost: 3
@@ -683,7 +683,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot2 tile_1-2) (clear tile_0-2+clear tile_0-3)
     del: (clear tile_1-2) (robot-at robot2 tile_0-2)
   (up robot2 tile_0-2 tile_1-2), cost: 3
-    pre: (clear tile_0-1) (clear tile_1-2) (robot-at robot2 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_1-2) (robot-at robot2 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot2 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     del: (clear tile_1-2) (robot-at robot2 tile_0-2)
   (up robot2 tile_0-2 tile_1-2), cost: 3
@@ -691,7 +691,7 @@ Op[169]:
     add: (clear tile_0-2) (robot-at robot2 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-2+clear tile_0-3)
     del: (clear tile_1-2) (robot-at robot2 tile_0-2)
   (up robot2 tile_0-2 tile_1-2), cost: 3
-    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot2 tile_0-2) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-3) (clear tile_1-2) (robot-at robot2 tile_0-2) (robot-has robot2 white) (clear tile_0-1+robot-has robot2 white)
     add: (clear tile_0-2) (robot-at robot2 tile_1-2) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+clear tile_0-2+robot-has robot2 white) (clear tile_0-2+clear tile_0-3)
     del: (clear tile_1-2) (robot-at robot2 tile_0-2)
   (up robot2 tile_0-3 tile_1-3), cost: 3
@@ -699,7 +699,7 @@ Op[169]:
     add: (clear tile_0-3) (robot-at robot2 tile_1-3)
     del: (clear tile_1-3) (robot-at robot2 tile_0-3)
   (up robot2 tile_0-3 tile_1-3), cost: 3
-    pre: (clear tile_0-1) (clear tile_0-2) (clear tile_1-3) (robot-at robot2 tile_0-3) (robot-has robot2 white)
+    pre: (clear tile_0-1) (clear tile_0-2) (clear tile_1-3) (robot-at robot2 tile_0-3) (robot-has robot2 white) (clear tile_0-1+clear tile_0-2) (clear tile_0-1+robot-has robot2 white) (clear tile_0-1+clear tile_0-2+robot-has robot2 white)
     add: (clear tile_0-3) (robot-at robot2 tile_1-3) (clear tile_0-2+clear tile_0-3) (clear tile_0-1+clear tile_0-2+clear tile_0-3+robot-has robot2 white)
     del: (clear tile_1-3) (robot-at robot2 tile_0-3)
   (up robot2 tile_0-3 tile_1-3), cost: 3

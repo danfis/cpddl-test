@@ -493,7 +493,7 @@ Op[125]:
     add: (missionexec-mission-ready_heli0) (navtopoint-mode-is-ready_nav-0-0-275)
     del: (fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
   (missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1), cost: 1
-    pre: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_task-done_n0) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-running_heli0) (not_at_end_constraint0)
+    pre: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_task-done_n0) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-running_heli0) (not_at_end_constraint0) (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
     add: (autotakeoff-mode-is-done_ato-0-0-275) (missionexec-mission-over_heli0)
     del: (autotakeoff-mode-is-running_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_task-done_n0) (missionexec-mission-running_heli0)
   (missionexec-mission-done-navtopoint-fly_path_fly3d_done_2-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1), cost: 1
@@ -673,7 +673,7 @@ Op[125]:
     add: (achieved_constraint0) (achieved_constraint0+observed_obs9)
     del: (not_at_end_constraint0)
   (set_goal_0_constraint0), cost: 1
-    pre: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (dominates-3_hyp1_lost_heli0_fcl-event-finished) (not_at_end_constraint0) (observed_obs0) (observed_obs1) (observed_obs10) (observed_obs11) (observed_obs12) (observed_obs13) (observed_obs14) (observed_obs2) (observed_obs3) (observed_obs4) (observed_obs5) (observed_obs6) (observed_obs7) (observed_obs8) (observed_obs9)
+    pre: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (dominates-3_hyp1_lost_heli0_fcl-event-finished) (not_at_end_constraint0) (observed_obs0) (observed_obs1) (observed_obs10) (observed_obs11) (observed_obs12) (observed_obs13) (observed_obs14) (observed_obs2) (observed_obs3) (observed_obs4) (observed_obs5) (observed_obs6) (observed_obs7) (observed_obs8) (observed_obs9) (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
     add: (achieved_constraint0) (achieved_constraint0+autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (achieved_constraint0+observed_obs9) (achieved_constraint0+autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+observed_obs9) (achieved_constraint0+autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275+observed_obs9)
     del: (not_at_end_constraint0)
   (set_goal_0_constraint0), cost: 1

@@ -51,7 +51,7 @@ Op[31]:
     add: (done ap10)
     del: (today d2)
   (workat d2 ber), cost: 1
-    pre: (done ap1) (done ap2) (today d2) (today d8)
+    pre: (done ap1) (done ap2) (today d2) (today d8) (done ap1+today d8)
     add: (done ap10) (done ap1+done ap10) (done ap1+done ap10+today d8) (done ap10+done ap2) (done ap1+done ap10+done ap2+today d8)
     del: (today d2)
   (workat d2 ber), cost: 1
@@ -63,7 +63,7 @@ Op[31]:
     add: (done ap10) (done ap10+done ap2)
     del: (today d2)
   (workat d2 ber), cost: 1
-    pre: (done ap1) (today d2) (today d8)
+    pre: (done ap1) (today d2) (today d8) (done ap1+today d8)
     add: (done ap10) (done ap1+done ap10) (done ap1+done ap10+today d8)
     del: (today d2)
   (workat d2 ber), cost: 1
@@ -71,7 +71,7 @@ Op[31]:
     add: (done ap10) (done ap1+done ap10) (done ap10+done ap2)
     del: (today d2)
   (workat d2 ber), cost: 1
-    pre: (done ap1) (done ap2) (today d2) (today d8)
+    pre: (done ap1) (done ap2) (today d2) (today d8) (done ap1+today d8)
     add: (done ap10) (done ap1+done ap10) (done ap1+done ap10+today d8) (done ap10+done ap2)
     del: (today d2)
   (workat d2 fra), cost: 1
@@ -123,7 +123,7 @@ Op[31]:
     add: (done ap2)
     del: (today d7)
   (workat d7 fra), cost: 1
-    pre: (done ap1) (done ap10) (today d7) (today d8)
+    pre: (done ap1) (done ap10) (today d7) (today d8) (done ap1+done ap10) (done ap1+today d8) (done ap1+done ap10+today d8)
     add: (done ap2) (done ap10+done ap2) (done ap1+done ap10+done ap2+today d8)
     del: (today d7)
   (workat d7 fra), cost: 1

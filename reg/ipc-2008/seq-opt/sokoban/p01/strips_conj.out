@@ -81,7 +81,7 @@ Op[121]:
     add: (at player-01 pos-2-3) (clear pos-2-2)
     del: (at player-01 pos-2-2) (clear pos-2-3) (at player-01 pos-2-2+at stone-01 pos-3-2) (at player-01 pos-2-2+clear pos-8-7) (at player-01 pos-2-2+at stone-01 pos-3-2+clear pos-8-7) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-2 pos-2-3 dir-down), cost: 0
-    pre: (at player-01 pos-2-2) (at stone-01 pos-3-2) (clear pos-2-3)
+    pre: (at player-01 pos-2-2) (at stone-01 pos-3-2) (clear pos-2-3) (at player-01 pos-2-2+at stone-01 pos-3-2)
     add: (at player-01 pos-2-3) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2)
     del: (at player-01 pos-2-2) (clear pos-2-3) (at player-01 pos-2-2+at stone-01 pos-3-2) (at player-01 pos-2-2+clear pos-8-7) (at player-01 pos-2-2+at stone-01 pos-3-2+clear pos-8-7) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-2 pos-3-2 dir-right), cost: 0
@@ -93,11 +93,11 @@ Op[121]:
     add: (at player-01 pos-2-2) (clear pos-2-3)
     del: (at player-01 pos-2-3) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-3 pos-2-2 dir-up), cost: 0
-    pre: (at player-01 pos-2-3) (at stone-01 pos-3-2) (clear pos-2-2) (clear pos-8-7)
+    pre: (at player-01 pos-2-3) (at stone-01 pos-3-2) (clear pos-2-2) (clear pos-8-7) (at player-01 pos-2-3+at stone-01 pos-3-2)
     add: (at player-01 pos-2-2) (clear pos-2-3) (at player-01 pos-2-2+at stone-01 pos-3-2) (at player-01 pos-2-2+clear pos-8-7) (at player-01 pos-2-2+at stone-01 pos-3-2+clear pos-8-7)
     del: (at player-01 pos-2-3) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-3 pos-2-2 dir-up), cost: 0
-    pre: (at player-01 pos-2-3) (at stone-01 pos-3-2) (clear pos-2-2)
+    pre: (at player-01 pos-2-3) (at stone-01 pos-3-2) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2)
     add: (at player-01 pos-2-2) (clear pos-2-3) (at player-01 pos-2-2+at stone-01 pos-3-2)
     del: (at player-01 pos-2-3) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-3 pos-2-2 dir-up), cost: 0
@@ -105,7 +105,7 @@ Op[121]:
     add: (at player-01 pos-2-2) (clear pos-2-3) (at player-01 pos-2-2+clear pos-8-7)
     del: (at player-01 pos-2-3) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-3 pos-2-2 dir-up), cost: 0
-    pre: (at player-01 pos-2-3) (at stone-01 pos-3-2) (clear pos-2-2) (clear pos-8-7)
+    pre: (at player-01 pos-2-3) (at stone-01 pos-3-2) (clear pos-2-2) (clear pos-8-7) (at player-01 pos-2-3+at stone-01 pos-3-2)
     add: (at player-01 pos-2-2) (clear pos-2-3) (at player-01 pos-2-2+at stone-01 pos-3-2) (at player-01 pos-2-2+clear pos-8-7)
     del: (at player-01 pos-2-3) (clear pos-2-2) (at player-01 pos-2-3+at stone-01 pos-3-2) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (move player-01 pos-2-3 pos-3-3 dir-right), cost: 0
@@ -369,7 +369,7 @@ Op[121]:
     add: (at player-01 pos-7-5) (at stone-02 pos-6-5) (at-goal stone-02) (clear pos-8-5)
     del: (at player-01 pos-8-5) (at stone-02 pos-7-5) (clear pos-6-5)
   (push-to-nongoal player-01 stone-01 pos-2-2 pos-3-2 pos-4-2 dir-right), cost: 1
-    pre: (at player-01 pos-2-2) (at stone-01 pos-3-2) (clear pos-4-2)
+    pre: (at player-01 pos-2-2) (at stone-01 pos-3-2) (clear pos-4-2) (at player-01 pos-2-2+at stone-01 pos-3-2)
     add: (at player-01 pos-3-2) (clear pos-2-2)
     del: (at player-01 pos-2-2) (at stone-01 pos-3-2) (clear pos-4-2) (at player-01 pos-2-2+at stone-01 pos-3-2) (at player-01 pos-2-2+clear pos-8-7) (at player-01 pos-2-2+at stone-01 pos-3-2+clear pos-8-7) (at player-01 pos-2-3+at stone-01 pos-3-2) (at player-01 pos-2-2+at player-01 pos-2-3+at stone-01 pos-3-2+clear pos-8-7)
   (push-to-nongoal player-01 stone-01 pos-2-3 pos-3-3 pos-4-3 dir-right), cost: 1

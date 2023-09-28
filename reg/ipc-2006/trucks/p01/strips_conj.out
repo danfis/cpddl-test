@@ -56,7 +56,7 @@ Op[152]:
     add:
     del: (at package1 l1) (at package1 l1+at package2 l1) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6) (at package1 l1+at package1 l2+at package2 l1+time-now t6)
   (deliver package1 l1 t6 t6), cost: 1
-    pre: (at package1 l1) (time-now t6)
+    pre: (at package1 l1) (time-now t6) (at package1 l1+time-now t6)
     add:
     del: (at package1 l1) (at package1 l1+at package2 l1) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6) (at package1 l1+at package1 l2+at package2 l1+time-now t6)
   (deliver package1 l2 t1 t1), cost: 1
@@ -292,7 +292,7 @@ Op[152]:
     add: (at truck1 l2) (time-now t6) (at package1 l1+time-now t6)
     del: (at truck1 l1) (time-now t5)
   (drive truck1 l1 l2 t5 t6), cost: 1
-    pre: (at package1 l1) (at package2 l1) (at truck1 l1) (time-now t5)
+    pre: (at package1 l1) (at package2 l1) (at truck1 l1) (time-now t5) (at package1 l1+at package2 l1)
     add: (at truck1 l2) (time-now t6) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6)
     del: (at truck1 l1) (time-now t5)
   (drive truck1 l1 l3 t1 t2), cost: 1
@@ -320,7 +320,7 @@ Op[152]:
     add: (at truck1 l3) (time-now t6) (at package1 l1+time-now t6)
     del: (at truck1 l1) (time-now t5)
   (drive truck1 l1 l3 t5 t6), cost: 1
-    pre: (at package1 l1) (at package2 l1) (at truck1 l1) (time-now t5)
+    pre: (at package1 l1) (at package2 l1) (at truck1 l1) (time-now t5) (at package1 l1+at package2 l1)
     add: (at truck1 l3) (time-now t6) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6)
     del: (at truck1 l1) (time-now t5)
   (drive truck1 l2 l1 t1 t2), cost: 1
@@ -348,7 +348,7 @@ Op[152]:
     add: (at truck1 l1) (time-now t6) (at package1 l1+time-now t6)
     del: (at truck1 l2) (time-now t5)
   (drive truck1 l2 l1 t5 t6), cost: 1
-    pre: (at package1 l1) (at package2 l1) (at truck1 l2) (time-now t5)
+    pre: (at package1 l1) (at package2 l1) (at truck1 l2) (time-now t5) (at package1 l1+at package2 l1)
     add: (at truck1 l1) (time-now t6) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6)
     del: (at truck1 l2) (time-now t5)
   (drive truck1 l2 l3 t1 t2), cost: 1
@@ -376,7 +376,7 @@ Op[152]:
     add: (at truck1 l3) (time-now t6) (at package1 l1+time-now t6)
     del: (at truck1 l2) (time-now t5)
   (drive truck1 l2 l3 t5 t6), cost: 1
-    pre: (at package1 l1) (at package2 l1) (at truck1 l2) (time-now t5)
+    pre: (at package1 l1) (at package2 l1) (at truck1 l2) (time-now t5) (at package1 l1+at package2 l1)
     add: (at truck1 l3) (time-now t6) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6)
     del: (at truck1 l2) (time-now t5)
   (drive truck1 l3 l1 t0 t1), cost: 1
@@ -404,7 +404,7 @@ Op[152]:
     add: (at truck1 l1) (time-now t6) (at package1 l1+time-now t6)
     del: (at truck1 l3) (time-now t5)
   (drive truck1 l3 l1 t5 t6), cost: 1
-    pre: (at package1 l1) (at package2 l1) (at truck1 l3) (time-now t5)
+    pre: (at package1 l1) (at package2 l1) (at truck1 l3) (time-now t5) (at package1 l1+at package2 l1)
     add: (at truck1 l1) (time-now t6) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6)
     del: (at truck1 l3) (time-now t5)
   (drive truck1 l3 l2 t0 t1), cost: 1
@@ -432,7 +432,7 @@ Op[152]:
     add: (at truck1 l2) (time-now t6) (at package1 l1+time-now t6)
     del: (at truck1 l3) (time-now t5)
   (drive truck1 l3 l2 t5 t6), cost: 1
-    pre: (at package1 l1) (at package2 l1) (at truck1 l3) (time-now t5)
+    pre: (at package1 l1) (at package2 l1) (at truck1 l3) (time-now t5) (at package1 l1+at package2 l1)
     add: (at truck1 l2) (time-now t6) (at package1 l1+time-now t6) (at package1 l1+at package2 l1+time-now t6)
     del: (at truck1 l3) (time-now t5)
   (load package1 truck1 a1 l1), cost: 1
@@ -584,7 +584,7 @@ Op[152]:
     add: (at package2 l1) (free a1 truck1) (at package1 l2+at package2 l1)
     del: (in package2 truck1 a1)
   (unload package2 truck1 a1 l1), cost: 1
-    pre: (at package1 l1) (at truck1 l1) (in package2 truck1 a1) (time-now t6)
+    pre: (at package1 l1) (at truck1 l1) (in package2 truck1 a1) (time-now t6) (at package1 l1+time-now t6)
     add: (at package2 l1) (free a1 truck1) (at package1 l1+at package2 l1) (at package1 l1+at package2 l1+time-now t6)
     del: (in package2 truck1 a1)
   (unload package2 truck1 a1 l2), cost: 1
@@ -608,7 +608,7 @@ Op[152]:
     add: (at package2 l1) (free a2 truck1) (at package1 l2+at package2 l1)
     del: (in package2 truck1 a2)
   (unload package2 truck1 a2 l1), cost: 1
-    pre: (at package1 l1) (at truck1 l1) (free a1 truck1) (in package2 truck1 a2) (time-now t6)
+    pre: (at package1 l1) (at truck1 l1) (free a1 truck1) (in package2 truck1 a2) (time-now t6) (at package1 l1+time-now t6)
     add: (at package2 l1) (free a2 truck1) (at package1 l1+at package2 l1) (at package1 l1+at package2 l1+time-now t6)
     del: (in package2 truck1 a2)
   (unload package2 truck1 a2 l2), cost: 1

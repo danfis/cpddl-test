@@ -580,7 +580,7 @@ Op[3103]:
     add: (communicated_soil_data waypoint6)
     del:
   (communicate_soil_data rover0 general waypoint7 waypoint0 waypoint2), cost: 1
-    pre: (at rover0 waypoint0) (have_soil_analysis rover0 waypoint7)
+    pre: (at rover0 waypoint0) (have_soil_analysis rover0 waypoint7) (at rover0 waypoint0+have_soil_analysis rover0 waypoint7)
     add: (communicated_soil_data waypoint7)
     del:
   (communicate_soil_data rover0 general waypoint7 waypoint1 waypoint2), cost: 1

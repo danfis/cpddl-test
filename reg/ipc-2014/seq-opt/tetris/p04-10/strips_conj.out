@@ -659,7 +659,7 @@ Op[1582]:
     add: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f)
     del: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_down f0-0f f1-0f f1-1f f2-0f f2-1f rightl0), cost: 3
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f2-0f) (clear f2-1f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     del: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_down f0-0f f1-0f f1-1f f2-0f f2-1f rightl1), cost: 3
@@ -1179,7 +1179,7 @@ Op[1582]:
     add: (at_right_l rightl2 f8-1f f9-1f f9-2f) (clear f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f8-1f) (clear f9-1f)
   (move_l_left f8-2f f9-2f f9-3f f8-1f f9-1f rightl2), cost: 3
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f8-1f) (clear f9-1f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f8-1f) (clear f9-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_right_l rightl2 f8-1f f9-1f f9-2f) (clear f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f8-1f) (clear f9-1f)
   (move_l_right f0-0f f1-0f f1-1f f0-1f f1-2f f0-2f rightl0), cost: 3
@@ -1407,11 +1407,11 @@ Op[1582]:
     add: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f)
     del: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_up f1-0f f2-0f f2-1f f0-0f f1-1f f0-1f rightl0), cost: 3
-    pre: (at_right_l rightl0 f1-0f f2-0f f2-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f0-0f) (clear f1-1f) (clear f9-3f)
+    pre: (at_right_l rightl0 f1-0f f2-0f f2-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f0-0f) (clear f1-1f) (clear f9-3f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_up f1-0f f2-0f f2-1f f0-0f f1-1f f0-1f rightl0), cost: 3
-    pre: (at_right_l rightl0 f1-0f f2-0f f2-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f0-0f) (clear f1-1f)
+    pre: (at_right_l rightl0 f1-0f f2-0f f2-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     del: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_up f1-0f f2-0f f2-1f f0-0f f1-1f f0-1f rightl0), cost: 3
@@ -1419,7 +1419,7 @@ Op[1582]:
     add: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_up f1-0f f2-0f f2-1f f0-0f f1-1f f0-1f rightl0), cost: 3
-    pre: (at_right_l rightl0 f1-0f f2-0f f2-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f0-0f) (clear f1-1f) (clear f9-3f)
+    pre: (at_right_l rightl0 f1-0f f2-0f f2-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f0-0f) (clear f1-1f) (clear f9-3f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_right_l rightl0 f0-0f f1-0f f1-1f) (clear f2-0f) (clear f2-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_right_l rightl0 f1-0f f2-0f f2-1f) (clear f0-0f) (clear f1-1f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
   (move_l_up f1-0f f2-0f f2-1f f0-0f f1-1f f0-1f rightl1), cost: 3
@@ -1459,7 +1459,7 @@ Op[1582]:
     add: (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f2-2f) (clear f2-3f) (at_right_l rightl0 f1-0f f2-0f f2-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     del: (at_right_l rightl1 f1-2f f2-2f f2-3f) (clear f0-2f) (clear f1-3f)
   (move_l_up f1-2f f2-2f f2-3f f0-2f f1-3f f0-3f rightl1), cost: 3
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f1-2f f2-2f f2-3f) (clear f0-2f) (clear f1-3f) (clear f9-3f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f1-2f f2-2f f2-3f) (clear f0-2f) (clear f1-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     add: (at_right_l rightl1 f0-2f f1-2f f1-3f) (clear f2-2f) (clear f2-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_right_l rightl1 f1-2f f2-2f f2-3f) (clear f0-2f) (clear f1-3f)
   (move_l_up f1-2f f2-2f f2-3f f0-2f f1-3f f0-3f rightl2), cost: 3
@@ -1731,7 +1731,7 @@ Op[1582]:
     add: (at_right_l rightl2 f7-2f f8-2f f8-3f) (clear f9-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f7-2f) (clear f8-3f)
   (move_l_up f8-2f f9-2f f9-3f f7-2f f8-3f f7-3f rightl2), cost: 3
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f7-2f) (clear f8-3f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f7-2f) (clear f8-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_right_l rightl2 f7-2f f8-2f f8-3f) (clear f9-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_right_l rightl2 f8-2f f9-2f f9-3f) (clear f7-2f) (clear f8-3f)
   (move_two f0-0f f0-1f f0-2f straight0), cost: 2
@@ -6799,7 +6799,7 @@ Op[1582]:
     add: (at_two straight0 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight0 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight0), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f8-3f) (clear f7-3f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f8-3f) (clear f7-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight0 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight0 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight1), cost: 2
@@ -6811,7 +6811,7 @@ Op[1582]:
     add: (at_two straight1 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight1 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight1), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f8-3f) (clear f7-3f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f8-3f) (clear f7-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight1 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight1 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight2), cost: 2
@@ -6823,7 +6823,7 @@ Op[1582]:
     add: (at_two straight2 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight2 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight2), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f8-3f) (clear f7-3f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f8-3f) (clear f7-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight2 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight2 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight3), cost: 2
@@ -6835,7 +6835,7 @@ Op[1582]:
     add: (at_two straight3 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight3 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f7-3f straight3), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f8-3f) (clear f7-3f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f8-3f) (clear f7-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight3 f8-3f f7-3f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight3 f9-3f f8-3f) (clear f7-3f)
   (move_two f9-3f f8-3f f8-2f straight0), cost: 2
@@ -6847,7 +6847,7 @@ Op[1582]:
     add: (at_two straight0 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight0 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight0), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f8-3f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f8-3f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight0 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight0 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight1), cost: 2
@@ -6859,7 +6859,7 @@ Op[1582]:
     add: (at_two straight1 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight1 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight1), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f8-3f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f8-3f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight1 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight1 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight2), cost: 2
@@ -6871,7 +6871,7 @@ Op[1582]:
     add: (at_two straight2 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight2 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight2), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f8-3f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f8-3f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight2 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight2 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight3), cost: 2
@@ -6883,7 +6883,7 @@ Op[1582]:
     add: (at_two straight3 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight3 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f8-3f f8-2f straight3), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f8-3f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f8-3f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight3 f8-3f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight3 f9-3f f8-3f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight0), cost: 2
@@ -6895,7 +6895,7 @@ Op[1582]:
     add: (at_two straight0 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight0 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight0), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f9-2f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f9-2f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight0 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight0 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight1), cost: 2
@@ -6907,7 +6907,7 @@ Op[1582]:
     add: (at_two straight1 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight1 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight1), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f9-2f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f9-2f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight1 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight1 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight2), cost: 2
@@ -6919,7 +6919,7 @@ Op[1582]:
     add: (at_two straight2 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight2 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight2), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f9-2f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f9-2f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight2 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight2 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight3), cost: 2
@@ -6931,7 +6931,7 @@ Op[1582]:
     add: (at_two straight3 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight3 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f8-2f straight3), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f9-2f) (clear f8-2f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f9-2f) (clear f8-2f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight3 f9-2f f8-2f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight3 f9-3f f9-2f) (clear f8-2f)
   (move_two f9-3f f9-2f f9-1f straight0), cost: 2
@@ -6943,7 +6943,7 @@ Op[1582]:
     add: (at_two straight0 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight0 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight0), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f9-2f) (clear f9-1f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight0 f9-3f f9-2f) (clear f9-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight0 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight0 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight1), cost: 2
@@ -6955,7 +6955,7 @@ Op[1582]:
     add: (at_two straight1 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight1 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight1), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f9-2f) (clear f9-1f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight1 f9-3f f9-2f) (clear f9-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight1 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight1 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight2), cost: 2
@@ -6967,7 +6967,7 @@ Op[1582]:
     add: (at_two straight2 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight2 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight2), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f9-2f) (clear f9-1f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight2 f9-3f f9-2f) (clear f9-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight2 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight2 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight3), cost: 2
@@ -6979,7 +6979,7 @@ Op[1582]:
     add: (at_two straight3 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f)
     del: (at_two straight3 f9-3f f9-2f) (clear f9-1f)
   (move_two f9-3f f9-2f f9-1f straight3), cost: 2
-    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f9-2f) (clear f9-1f)
+    pre: (at_right_l rightl0 f0-0f f1-0f f1-1f) (at_right_l rightl1 f0-2f f1-2f f1-3f) (at_two straight3 f9-3f f9-2f) (clear f9-1f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f)
     add: (at_two straight3 f9-2f f9-1f) (clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+clear f9-3f) (at_right_l rightl0 f0-0f f1-0f f1-1f+at_right_l rightl1 f0-2f f1-2f f1-3f+clear f9-3f)
     del: (at_two straight3 f9-3f f9-2f) (clear f9-1f)
 Init State: (at_right_l rightl0 f4-0f f5-0f f5-1f) (at_right_l rightl1 f4-2f f5-2f f5-3f) (at_right_l rightl2 f0-1f f1-1f f1-2f) (at_two straight0 f0-0f f1-0f) (at_two straight1 f2-0f f3-0f) (at_two straight2 f2-1f f3-1f) (at_two straight3 f2-2f f3-2f) (clear f0-2f) (clear f0-3f) (clear f1-3f) (clear f2-3f) (clear f3-3f) (clear f4-1f) (clear f4-3f) (clear f6-0f) (clear f6-1f) (clear f6-2f) (clear f6-3f) (clear f7-0f) (clear f7-1f) (clear f7-2f) (clear f7-3f) (clear f8-0f) (clear f8-1f) (clear f8-2f) (clear f8-3f) (clear f9-0f) (clear f9-1f) (clear f9-2f) (clear f9-3f)

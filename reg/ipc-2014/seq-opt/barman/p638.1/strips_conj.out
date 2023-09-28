@@ -137,7 +137,7 @@ Op[642]:
     add: (clean shaker1)
     del:
   (clean-shaker left right shaker1), cost: 1
-    pre: (clean shot1) (clean shot2) (empty shaker1) (handempty right) (holding left shaker1) (used shot8 ingredient3)
+    pre: (clean shot1) (clean shot2) (empty shaker1) (handempty right) (holding left shaker1) (used shot8 ingredient3) (clean shot1+clean shot2)
     add: (clean shaker1) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del:
   (clean-shaker left right shaker1), cost: 1
@@ -161,7 +161,7 @@ Op[642]:
     add: (clean shaker1)
     del:
   (clean-shaker right left shaker1), cost: 1
-    pre: (clean shot1) (clean shot2) (empty shaker1) (handempty left) (holding right shaker1) (used shot8 ingredient3)
+    pre: (clean shot1) (clean shot2) (empty shaker1) (handempty left) (holding right shaker1) (used shot8 ingredient3) (clean shot1+clean shot2)
     add: (clean shaker1) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del:
   (clean-shaker right left shaker1), cost: 1
@@ -185,7 +185,7 @@ Op[642]:
     add: (clean shot1)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 left right), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient1) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 left right), cost: 1
@@ -197,7 +197,7 @@ Op[642]:
     add: (clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 left right), cost: 1
-    pre: (clean shaker1) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient1) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 left right), cost: 1
@@ -205,7 +205,7 @@ Op[642]:
     add: (clean shot1) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 left right), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient1) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 right left), cost: 1
@@ -213,7 +213,7 @@ Op[642]:
     add: (clean shot1)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 right left), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient1) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 right left), cost: 1
@@ -225,7 +225,7 @@ Op[642]:
     add: (clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 right left), cost: 1
-    pre: (clean shaker1) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient1) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 right left), cost: 1
@@ -233,7 +233,7 @@ Op[642]:
     add: (clean shot1) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient1 right left), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient1) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2)
     del: (used shot1 ingredient1)
   (clean-shot shot1 ingredient2 left right), cost: 1
@@ -241,7 +241,7 @@ Op[642]:
     add: (clean shot1)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 left right), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient2) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 left right), cost: 1
@@ -253,7 +253,7 @@ Op[642]:
     add: (clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 left right), cost: 1
-    pre: (clean shaker1) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient2) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 left right), cost: 1
@@ -261,7 +261,7 @@ Op[642]:
     add: (clean shot1) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 left right), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient2) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 right left), cost: 1
@@ -269,7 +269,7 @@ Op[642]:
     add: (clean shot1)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 right left), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient2) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 right left), cost: 1
@@ -281,7 +281,7 @@ Op[642]:
     add: (clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 right left), cost: 1
-    pre: (clean shaker1) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient2) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 right left), cost: 1
@@ -289,7 +289,7 @@ Op[642]:
     add: (clean shot1) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient2 right left), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient2) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2)
     del: (used shot1 ingredient2)
   (clean-shot shot1 ingredient3 left right), cost: 1
@@ -297,7 +297,7 @@ Op[642]:
     add: (clean shot1)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 left right), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 left right), cost: 1
@@ -309,7 +309,7 @@ Op[642]:
     add: (clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 left right), cost: 1
-    pre: (clean shaker1) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 left right), cost: 1
@@ -317,7 +317,7 @@ Op[642]:
     add: (clean shot1) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 left right), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty right) (holding left shot1) (used shot1 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 right left), cost: 1
@@ -325,7 +325,7 @@ Op[642]:
     add: (clean shot1)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 right left), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 right left), cost: 1
@@ -337,7 +337,7 @@ Op[642]:
     add: (clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 right left), cost: 1
-    pre: (clean shaker1) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 right left), cost: 1
@@ -345,7 +345,7 @@ Op[642]:
     add: (clean shot1) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     del: (used shot1 ingredient3)
   (clean-shot shot1 ingredient3 right left), cost: 1
-    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot2) (empty shot1) (handempty left) (holding right shot1) (used shot1 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     add: (clean shot1) (clean shaker1+clean shot1) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shot1+clean shot2)
     del: (used shot1 ingredient3)
   (clean-shot shot2 ingredient1 left right), cost: 1
@@ -353,7 +353,7 @@ Op[642]:
     add: (clean shot2)
     del: (used shot2 ingredient1)
   (clean-shot shot2 ingredient1 left right), cost: 1
-    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty right) (holding left shot2) (used shot2 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty right) (holding left shot2) (used shot2 ingredient1) (used shot8 ingredient3) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     add: (clean shot2) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot2 ingredient1)
   (clean-shot shot2 ingredient1 left right), cost: 1
@@ -365,7 +365,7 @@ Op[642]:
     add: (clean shot2)
     del: (used shot2 ingredient1)
   (clean-shot shot2 ingredient1 right left), cost: 1
-    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty left) (holding right shot2) (used shot2 ingredient1) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty left) (holding right shot2) (used shot2 ingredient1) (used shot8 ingredient3) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     add: (clean shot2) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot2 ingredient1)
   (clean-shot shot2 ingredient1 right left), cost: 1
@@ -377,7 +377,7 @@ Op[642]:
     add: (clean shot2)
     del: (used shot2 ingredient2)
   (clean-shot shot2 ingredient2 left right), cost: 1
-    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty right) (holding left shot2) (used shot2 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty right) (holding left shot2) (used shot2 ingredient2) (used shot8 ingredient3) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     add: (clean shot2) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot2 ingredient2)
   (clean-shot shot2 ingredient2 left right), cost: 1
@@ -389,7 +389,7 @@ Op[642]:
     add: (clean shot2)
     del: (used shot2 ingredient2)
   (clean-shot shot2 ingredient2 right left), cost: 1
-    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty left) (holding right shot2) (used shot2 ingredient2) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty left) (holding right shot2) (used shot2 ingredient2) (used shot8 ingredient3) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     add: (clean shot2) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot2 ingredient2)
   (clean-shot shot2 ingredient2 right left), cost: 1
@@ -401,7 +401,7 @@ Op[642]:
     add: (clean shot2)
     del: (used shot2 ingredient3)
   (clean-shot shot2 ingredient3 left right), cost: 1
-    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty right) (holding left shot2) (used shot2 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty right) (holding left shot2) (used shot2 ingredient3) (used shot8 ingredient3) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     add: (clean shot2) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot2 ingredient3)
   (clean-shot shot2 ingredient3 left right), cost: 1
@@ -413,7 +413,7 @@ Op[642]:
     add: (clean shot2)
     del: (used shot2 ingredient3)
   (clean-shot shot2 ingredient3 right left), cost: 1
-    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty left) (holding right shot2) (used shot2 ingredient3) (used shot8 ingredient3)
+    pre: (clean shaker1) (clean shot1) (empty shot2) (handempty left) (holding right shot2) (used shot2 ingredient3) (used shot8 ingredient3) (clean shaker1+clean shot1) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     add: (clean shot2) (clean shot1+clean shot2) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (used shot2 ingredient3)
   (clean-shot shot2 ingredient3 right left), cost: 1
@@ -1233,7 +1233,7 @@ Op[642]:
     add: (contains shot8 ingredient3) (used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 left right dispenser3), cost: 1
-    pre: (clean shaker1) (clean shot1) (clean shot2) (clean shot8) (empty shot8) (handempty right) (holding left shot8)
+    pre: (clean shaker1) (clean shot1) (clean shot2) (clean shot8) (empty shot8) (handempty right) (holding left shot8) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     add: (contains shot8 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 left right dispenser3), cost: 1
@@ -1241,7 +1241,7 @@ Op[642]:
     add: (contains shot8 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 left right dispenser3), cost: 1
-    pre: (clean shaker1) (clean shot1) (clean shot8) (empty shot8) (handempty right) (holding left shot8)
+    pre: (clean shaker1) (clean shot1) (clean shot8) (empty shot8) (handempty right) (holding left shot8) (clean shaker1+clean shot1)
     add: (contains shot8 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 right left dispenser3), cost: 1
@@ -1249,7 +1249,7 @@ Op[642]:
     add: (contains shot8 ingredient3) (used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 right left dispenser3), cost: 1
-    pre: (clean shaker1) (clean shot1) (clean shot2) (clean shot8) (empty shot8) (handempty left) (holding right shot8)
+    pre: (clean shaker1) (clean shot1) (clean shot2) (clean shot8) (empty shot8) (handempty left) (holding right shot8) (clean shaker1+clean shot1) (clean shot1+clean shot2)
     add: (contains shot8 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3) (clean shaker1+clean shot1+clean shot2+used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 right left dispenser3), cost: 1
@@ -1257,7 +1257,7 @@ Op[642]:
     add: (contains shot8 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (fill-shot shot8 ingredient3 right left dispenser3), cost: 1
-    pre: (clean shaker1) (clean shot1) (clean shot8) (empty shot8) (handempty left) (holding right shot8)
+    pre: (clean shaker1) (clean shot1) (clean shot8) (empty shot8) (handempty left) (holding right shot8) (clean shaker1+clean shot1)
     add: (contains shot8 ingredient3) (used shot8 ingredient3) (clean shaker1+used shot8 ingredient3) (clean shaker1+clean shot1+used shot8 ingredient3)
     del: (clean shot8) (empty shot8)
   (grasp left shaker1), cost: 1

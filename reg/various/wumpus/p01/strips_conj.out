@@ -27,7 +27,7 @@ Op[30]:
     add: (at agent-1 s-2-3)
     del: (at agent-1 s-1-3)
   (move agent-1 s-1-3 s-2-3), cost: 1
-    pre: (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-1-3)
+    pre: (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-1-3) (NOT-at wumpus-1 s-2-3+alive agent-1)
     add: (at agent-1 s-2-3)
     del: (at agent-1 s-1-3)
   (move agent-1 s-1-3 s-2-3), cost: 1
@@ -51,7 +51,7 @@ Op[30]:
     add: (at agent-1 s-2-3)
     del: (at agent-1 s-2-2)
   (move agent-1 s-2-2 s-2-3), cost: 1
-    pre: (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-2-2)
+    pre: (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-2-2) (NOT-at wumpus-1 s-2-3+alive agent-1)
     add: (at agent-1 s-2-3)
     del: (at agent-1 s-2-2)
   (move agent-1 s-2-2 s-2-3), cost: 1
@@ -111,7 +111,7 @@ Op[30]:
     add: (have agent-1 gold-1)
     del: (at gold-1 s-1-3)
   (take agent-1 s-1-3 gold-1), cost: 1
-    pre: (NOT-alive wumpus-1) (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-1-3) (at gold-1 s-1-3)
+    pre: (NOT-alive wumpus-1) (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-1-3) (at gold-1 s-1-3) (NOT-alive wumpus-1+NOT-at wumpus-1 s-2-3) (NOT-at wumpus-1 s-2-3+alive agent-1)
     add: (have agent-1 gold-1) (NOT-alive wumpus-1+have agent-1 gold-1) (NOT-alive wumpus-1+NOT-at wumpus-1 s-2-3+have agent-1 gold-1) (NOT-alive wumpus-1+NOT-at wumpus-1 s-2-3+alive agent-1+have agent-1 gold-1)
     del: (at gold-1 s-1-3)
   (take agent-1 s-1-3 gold-1), cost: 1
@@ -119,7 +119,7 @@ Op[30]:
     add: (have agent-1 gold-1) (NOT-alive wumpus-1+have agent-1 gold-1)
     del: (at gold-1 s-1-3)
   (take agent-1 s-1-3 gold-1), cost: 1
-    pre: (NOT-alive wumpus-1) (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-1-3) (at gold-1 s-1-3)
+    pre: (NOT-alive wumpus-1) (NOT-at wumpus-1 s-2-3) (alive agent-1) (at agent-1 s-1-3) (at gold-1 s-1-3) (NOT-alive wumpus-1+NOT-at wumpus-1 s-2-3) (NOT-at wumpus-1 s-2-3+alive agent-1)
     add: (have agent-1 gold-1) (NOT-alive wumpus-1+have agent-1 gold-1) (NOT-alive wumpus-1+NOT-at wumpus-1 s-2-3+have agent-1 gold-1)
     del: (at gold-1 s-1-3)
   (take agent-1 s-2-1 agent-1), cost: 1

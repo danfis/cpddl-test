@@ -656,7 +656,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n0) (passengers fast0 n0)
   (board p1 fast0 n0 n0 n1), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n0) (passenger-at p1 n0) (passengers fast0 n0) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n0) (passenger-at p1 n0) (passengers fast0 n0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n0) (passengers fast0 n0)
   (board p1 fast0 n0 n1 n2), cost: 0
@@ -672,7 +672,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n0) (passengers fast0 n1)
   (board p1 fast0 n0 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n0) (passenger-at p1 n0) (passengers fast0 n1) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n0) (passenger-at p1 n0) (passengers fast0 n1) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n0) (passengers fast0 n1)
   (board p1 fast0 n0 n2 n3), cost: 0
@@ -688,7 +688,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n0) (passengers fast0 n2)
   (board p1 fast0 n0 n2 n3), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n0) (passenger-at p1 n0) (passengers fast0 n2) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n0) (passenger-at p1 n0) (passengers fast0 n2) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n0) (passengers fast0 n2)
   (board p1 fast0 n12 n0 n1), cost: 0
@@ -704,7 +704,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n12) (passengers fast0 n0)
   (board p1 fast0 n12 n0 n1), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n12) (passenger-at p1 n12) (passengers fast0 n0) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n12) (passenger-at p1 n12) (passengers fast0 n0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n12) (passengers fast0 n0)
   (board p1 fast0 n12 n1 n2), cost: 0
@@ -720,7 +720,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n12) (passengers fast0 n1)
   (board p1 fast0 n12 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n12) (passenger-at p1 n12) (passengers fast0 n1) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n12) (passenger-at p1 n12) (passengers fast0 n1) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n12) (passengers fast0 n1)
   (board p1 fast0 n12 n2 n3), cost: 0
@@ -736,7 +736,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n12) (passengers fast0 n2)
   (board p1 fast0 n12 n2 n3), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n12) (passenger-at p1 n12) (passengers fast0 n2) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n12) (passenger-at p1 n12) (passengers fast0 n2) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n12) (passengers fast0 n2)
   (board p1 fast0 n3 n0 n1), cost: 0
@@ -752,7 +752,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n3) (passengers fast0 n0)
   (board p1 fast0 n3 n0 n1), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n3) (passenger-at p1 n3) (passengers fast0 n0) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n3) (passenger-at p1 n3) (passengers fast0 n0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n3) (passengers fast0 n0)
   (board p1 fast0 n3 n1 n2), cost: 0
@@ -768,7 +768,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n3) (passengers fast0 n1)
   (board p1 fast0 n3 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n3) (passenger-at p1 n3) (passengers fast0 n1) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n3) (passenger-at p1 n3) (passengers fast0 n1) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n3) (passengers fast0 n1)
   (board p1 fast0 n3 n2 n3), cost: 0
@@ -784,7 +784,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n3) (passengers fast0 n2)
   (board p1 fast0 n3 n2 n3), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n3) (passenger-at p1 n3) (passengers fast0 n2) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n3) (passenger-at p1 n3) (passengers fast0 n2) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n3) (passengers fast0 n2)
   (board p1 fast0 n6 n0 n1), cost: 0
@@ -800,7 +800,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n6) (passengers fast0 n0)
   (board p1 fast0 n6 n0 n1), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n6) (passenger-at p1 n6) (passengers fast0 n0) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n6) (passenger-at p1 n6) (passengers fast0 n0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n6) (passengers fast0 n0)
   (board p1 fast0 n6 n1 n2), cost: 0
@@ -816,7 +816,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n6) (passengers fast0 n1)
   (board p1 fast0 n6 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n6) (passenger-at p1 n6) (passengers fast0 n1) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n6) (passenger-at p1 n6) (passengers fast0 n1) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n6) (passengers fast0 n1)
   (board p1 fast0 n6 n2 n3), cost: 0
@@ -832,7 +832,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n6) (passengers fast0 n2)
   (board p1 fast0 n6 n2 n3), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n6) (passenger-at p1 n6) (passengers fast0 n2) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n6) (passenger-at p1 n6) (passengers fast0 n2) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n6) (passengers fast0 n2)
   (board p1 fast0 n9 n0 n1), cost: 0
@@ -848,7 +848,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n9) (passengers fast0 n0)
   (board p1 fast0 n9 n0 n1), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n9) (passenger-at p1 n9) (passengers fast0 n0) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n9) (passenger-at p1 n9) (passengers fast0 n0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n1) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n9) (passengers fast0 n0)
   (board p1 fast0 n9 n1 n2), cost: 0
@@ -864,7 +864,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n9) (passengers fast0 n1)
   (board p1 fast0 n9 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n9) (passenger-at p1 n9) (passengers fast0 n1) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n9) (passenger-at p1 n9) (passengers fast0 n1) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n2) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n9) (passengers fast0 n1)
   (board p1 fast0 n9 n2 n3), cost: 0
@@ -880,7 +880,7 @@ Op[743]:
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast1+boarded p1 fast0)
     del: (passenger-at p1 n9) (passengers fast0 n2)
   (board p1 fast0 n9 n2 n3), cost: 0
-    pre: (boarded p0 fast0) (lift-at fast0 n9) (passenger-at p1 n9) (passengers fast0 n2) (passengers slow1-0 n2)
+    pre: (boarded p0 fast0) (lift-at fast0 n9) (passenger-at p1 n9) (passengers fast0 n2) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     add: (boarded p1 fast0) (passengers fast0 n3) (boarded p0 fast0+boarded p1 fast0) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p1 n9) (passengers fast0 n2)
   (board p1 fast1 n0 n0 n1), cost: 0
@@ -1272,7 +1272,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n10) (passengers slow1-0 n1)
   (board p2 slow1-0 n10 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n10) (passenger-at p2 n10) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n10) (passenger-at p2 n10) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n10) (passengers slow1-0 n1)
   (board p2 slow1-0 n11 n0 n1), cost: 0
@@ -1288,7 +1288,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n11) (passengers slow1-0 n1)
   (board p2 slow1-0 n11 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n11) (passenger-at p2 n11) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n11) (passenger-at p2 n11) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n11) (passengers slow1-0 n1)
   (board p2 slow1-0 n12 n0 n1), cost: 0
@@ -1304,7 +1304,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n12) (passengers slow1-0 n1)
   (board p2 slow1-0 n12 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n12) (passenger-at p2 n12) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n12) (passenger-at p2 n12) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n12) (passengers slow1-0 n1)
   (board p2 slow1-0 n6 n0 n1), cost: 0
@@ -1320,7 +1320,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n6) (passengers slow1-0 n1)
   (board p2 slow1-0 n6 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n6) (passenger-at p2 n6) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n6) (passenger-at p2 n6) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n6) (passengers slow1-0 n1)
   (board p2 slow1-0 n7 n0 n1), cost: 0
@@ -1336,7 +1336,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n7) (passengers slow1-0 n1)
   (board p2 slow1-0 n7 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n7) (passenger-at p2 n7) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n7) (passenger-at p2 n7) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n7) (passengers slow1-0 n1)
   (board p2 slow1-0 n8 n0 n1), cost: 0
@@ -1352,7 +1352,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n8) (passengers slow1-0 n1)
   (board p2 slow1-0 n8 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n8) (passenger-at p2 n8) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n8) (passenger-at p2 n8) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n8) (passengers slow1-0 n1)
   (board p2 slow1-0 n9 n0 n1), cost: 0
@@ -1368,7 +1368,7 @@ Op[743]:
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n9) (passengers slow1-0 n1)
   (board p2 slow1-0 n9 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n9) (passenger-at p2 n9) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n9) (passenger-at p2 n9) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p2 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p2 n9) (passengers slow1-0 n1)
   (board p3 fast0 n0 n0 n1), cost: 0
@@ -1560,7 +1560,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n10) (passengers slow1-0 n1)
   (board p3 slow1-0 n10 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n10) (passenger-at p3 n10) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n10) (passenger-at p3 n10) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n10) (passengers slow1-0 n1)
   (board p3 slow1-0 n11 n0 n1), cost: 0
@@ -1576,7 +1576,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n11) (passengers slow1-0 n1)
   (board p3 slow1-0 n11 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n11) (passenger-at p3 n11) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n11) (passenger-at p3 n11) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n11) (passengers slow1-0 n1)
   (board p3 slow1-0 n12 n0 n1), cost: 0
@@ -1592,7 +1592,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n12) (passengers slow1-0 n1)
   (board p3 slow1-0 n12 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n12) (passenger-at p3 n12) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n12) (passenger-at p3 n12) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n12) (passengers slow1-0 n1)
   (board p3 slow1-0 n6 n0 n1), cost: 0
@@ -1608,7 +1608,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n6) (passengers slow1-0 n1)
   (board p3 slow1-0 n6 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n6) (passenger-at p3 n6) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n6) (passenger-at p3 n6) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n6) (passengers slow1-0 n1)
   (board p3 slow1-0 n7 n0 n1), cost: 0
@@ -1624,7 +1624,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n7) (passengers slow1-0 n1)
   (board p3 slow1-0 n7 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n7) (passenger-at p3 n7) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n7) (passenger-at p3 n7) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n7) (passengers slow1-0 n1)
   (board p3 slow1-0 n8 n0 n1), cost: 0
@@ -1640,7 +1640,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n8) (passengers slow1-0 n1)
   (board p3 slow1-0 n8 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n8) (passenger-at p3 n8) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n8) (passenger-at p3 n8) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n8) (passengers slow1-0 n1)
   (board p3 slow1-0 n9 n0 n1), cost: 0
@@ -1656,7 +1656,7 @@ Op[743]:
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n9) (passengers slow1-0 n1)
   (board p3 slow1-0 n9 n1 n2), cost: 0
-    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n9) (passenger-at p3 n9) (passengers slow1-0 n1)
+    pre: (boarded p0 fast0) (boarded p1 fast0) (lift-at slow1-0 n9) (passenger-at p3 n9) (passengers slow1-0 n1) (boarded p0 fast0+boarded p1 fast0)
     add: (boarded p3 slow1-0) (passengers slow1-0 n2) (boarded p0 fast0+passengers slow1-0 n2) (boarded p0 fast0+boarded p1 fast0+passengers slow1-0 n2)
     del: (passenger-at p3 n9) (passengers slow1-0 n1)
   (leave p0 fast0 n0 n1 n0), cost: 0

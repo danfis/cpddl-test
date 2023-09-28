@@ -23,7 +23,7 @@ Op[10]:
     add: (at truck1 market1)
     del: (at truck1 depot1) (at truck1 depot1+loaded goods1 truck1 level0) (at truck1 depot1+stored goods1 level1) (at truck1 depot1+loaded goods1 truck1 level0+stored goods1 level1) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (drive truck1 depot1 market1), cost: 1
-    pre: (at truck1 depot1) (loaded goods1 truck1 level0)
+    pre: (at truck1 depot1) (loaded goods1 truck1 level0) (at truck1 depot1+loaded goods1 truck1 level0)
     add: (at truck1 market1) (at truck1 market1+loaded goods1 truck1 level0)
     del: (at truck1 depot1) (at truck1 depot1+loaded goods1 truck1 level0) (at truck1 depot1+stored goods1 level1) (at truck1 depot1+loaded goods1 truck1 level0+stored goods1 level1) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (drive truck1 market1 depot1), cost: 1
@@ -31,11 +31,11 @@ Op[10]:
     add: (at truck1 depot1)
     del: (at truck1 market1) (at truck1 market1+loaded goods1 truck1 level0) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (drive truck1 market1 depot1), cost: 1
-    pre: (at truck1 market1) (loaded goods1 truck1 level0) (stored goods1 level1)
+    pre: (at truck1 market1) (loaded goods1 truck1 level0) (stored goods1 level1) (at truck1 market1+loaded goods1 truck1 level0)
     add: (at truck1 depot1) (at truck1 depot1+loaded goods1 truck1 level0) (at truck1 depot1+stored goods1 level1) (at truck1 depot1+loaded goods1 truck1 level0+stored goods1 level1)
     del: (at truck1 market1) (at truck1 market1+loaded goods1 truck1 level0) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (drive truck1 market1 depot1), cost: 1
-    pre: (at truck1 market1) (loaded goods1 truck1 level0)
+    pre: (at truck1 market1) (loaded goods1 truck1 level0) (at truck1 market1+loaded goods1 truck1 level0)
     add: (at truck1 depot1) (at truck1 depot1+loaded goods1 truck1 level0)
     del: (at truck1 market1) (at truck1 market1+loaded goods1 truck1 level0) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (drive truck1 market1 depot1), cost: 1
@@ -43,11 +43,11 @@ Op[10]:
     add: (at truck1 depot1) (at truck1 depot1+stored goods1 level1)
     del: (at truck1 market1) (at truck1 market1+loaded goods1 truck1 level0) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (drive truck1 market1 depot1), cost: 1
-    pre: (at truck1 market1) (loaded goods1 truck1 level0) (stored goods1 level1)
+    pre: (at truck1 market1) (loaded goods1 truck1 level0) (stored goods1 level1) (at truck1 market1+loaded goods1 truck1 level0)
     add: (at truck1 depot1) (at truck1 depot1+loaded goods1 truck1 level0) (at truck1 depot1+stored goods1 level1)
     del: (at truck1 market1) (at truck1 market1+loaded goods1 truck1 level0) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (load goods1 truck1 market1 level0 level1 level0 level1), cost: 1
-    pre: (at truck1 market1) (loaded goods1 truck1 level0) (ready-to-load goods1 market1 level1)
+    pre: (at truck1 market1) (loaded goods1 truck1 level0) (ready-to-load goods1 market1 level1) (at truck1 market1+loaded goods1 truck1 level0)
     add: (loaded goods1 truck1 level1) (ready-to-load goods1 market1 level0)
     del: (loaded goods1 truck1 level0) (ready-to-load goods1 market1 level1) (at truck1 depot1+loaded goods1 truck1 level0) (at truck1 depot1+loaded goods1 truck1 level0+stored goods1 level1) (at truck1 market1+loaded goods1 truck1 level0) (at truck1 depot1+at truck1 market1+loaded goods1 truck1 level0+stored goods1 level1)
   (unload goods1 truck1 depot1 level0 level1 level0 level1), cost: 1

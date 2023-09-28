@@ -69,7 +69,7 @@ Op[103]:
     add: (chosen ap2) (num-subs l2)
     del: (NOT-chosen ap2) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
   (choose ap2 l3 l2), cost: 1
-    pre: (NOT-chosen ap2) (num-subs l2)
+    pre: (NOT-chosen ap2) (num-subs l2) (NOT-chosen ap2+num-subs l2)
     add: (chosen ap2)
     del: (NOT-chosen ap2) (num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
   (choose cdc25c l1 l0), cost: 1
@@ -81,7 +81,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen cdc25c) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
   (choose cdc25c l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen cdc25c) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
   (choose cdc25c l3 l2), cost: 1
@@ -97,7 +97,7 @@ Op[103]:
     add: (chosen cdk46p3-cycd) (num-subs l2)
     del: (NOT-chosen cdk46p3-cycd) (num-subs l1) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
   (choose cdk46p3-cycd l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (chosen cdk46p3-cycd) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen cdk46p3-cycd) (num-subs l1) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
   (choose cdk46p3-cycd l2 l1), cost: 1
@@ -117,7 +117,7 @@ Op[103]:
     add: (chosen cdk46p3-cycdp1) (num-subs l2)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l1)
   (choose cdk46p3-cycdp1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen cdk46p3-cycdp1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen cdk46p3-cycdp1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (chosen cdk46p3-cycdp1) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l1)
   (choose cdk46p3-cycdp1 l2 l1), cost: 1
@@ -125,7 +125,7 @@ Op[103]:
     add: (chosen cdk46p3-cycdp1) (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l1)
   (choose cdk46p3-cycdp1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycdp1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycdp1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (chosen cdk46p3-cycdp1) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen cdk46p3-cycdp1) (num-subs l1)
   (choose cdk46p3-cycdp1 l3 l2), cost: 1
@@ -141,7 +141,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen cdk7) (num-subs l1)
   (choose cdk7 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen cdk7) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen cdk7) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen cdk7) (num-subs l1)
   (choose cdk7 l2 l1), cost: 1
@@ -149,7 +149,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen cdk7) (num-subs l1)
   (choose cdk7 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk7) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk7) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen cdk7) (num-subs l1)
   (choose cdk7 l3 l2), cost: 1
@@ -165,7 +165,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen chk1) (num-subs l1)
   (choose chk1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen chk1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen chk1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen chk1) (num-subs l1)
   (choose chk1 l2 l1), cost: 1
@@ -173,7 +173,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen chk1) (num-subs l1)
   (choose chk1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen chk1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen chk1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen chk1) (num-subs l1)
   (choose chk1 l3 l2), cost: 1
@@ -189,7 +189,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen dmp1) (num-subs l1)
   (choose dmp1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen dmp1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen dmp1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen dmp1) (num-subs l1)
   (choose dmp1 l2 l1), cost: 1
@@ -197,7 +197,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen dmp1) (num-subs l1)
   (choose dmp1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen dmp1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen dmp1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen dmp1) (num-subs l1)
   (choose dmp1 l3 l2), cost: 1
@@ -213,7 +213,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen e2f13) (num-subs l1)
   (choose e2f13 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen e2f13) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen e2f13) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen e2f13) (num-subs l1)
   (choose e2f13 l2 l1), cost: 1
@@ -221,7 +221,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen e2f13) (num-subs l1)
   (choose e2f13 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen e2f13) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen e2f13) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen e2f13) (num-subs l1)
   (choose e2f13 l3 l2), cost: 1
@@ -237,7 +237,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen p130-e2f5p1-dp12) (num-subs l1)
   (choose p130-e2f5p1-dp12 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen p130-e2f5p1-dp12) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen p130-e2f5p1-dp12) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen p130-e2f5p1-dp12) (num-subs l1)
   (choose p130-e2f5p1-dp12 l2 l1), cost: 1
@@ -245,7 +245,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen p130-e2f5p1-dp12) (num-subs l1)
   (choose p130-e2f5p1-dp12 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen p130-e2f5p1-dp12) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen p130-e2f5p1-dp12) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen p130-e2f5p1-dp12) (num-subs l1)
   (choose p130-e2f5p1-dp12 l3 l2), cost: 1
@@ -261,7 +261,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen p16) (num-subs l1)
   (choose p16 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen p16) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen p16) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen p16) (num-subs l1)
   (choose p16 l2 l1), cost: 1
@@ -269,7 +269,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen p16) (num-subs l1)
   (choose p16 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen p16) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen p16) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen p16) (num-subs l1)
   (choose p16 l3 l2), cost: 1
@@ -285,7 +285,7 @@ Op[103]:
     add: (chosen p300) (num-subs l2)
     del: (NOT-chosen p300) (num-subs l1)
   (choose p300 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen p300) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen p300) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (chosen p300) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen p300) (num-subs l1)
   (choose p300 l2 l1), cost: 1
@@ -293,7 +293,7 @@ Op[103]:
     add: (chosen p300) (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen p300) (num-subs l1)
   (choose p300 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen p300) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen p300) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (chosen p300) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen p300) (num-subs l1)
   (choose p300 l3 l2), cost: 1
@@ -309,7 +309,7 @@ Op[103]:
     add: (chosen pcaf) (num-subs l2)
     del: (NOT-chosen pcaf) (num-subs l1)
   (choose pcaf l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen pcaf) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen pcaf) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (chosen pcaf) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen pcaf) (num-subs l1)
   (choose pcaf l2 l1), cost: 1
@@ -317,7 +317,7 @@ Op[103]:
     add: (chosen pcaf) (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen pcaf) (num-subs l1)
   (choose pcaf l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen pcaf) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen pcaf) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (chosen pcaf) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen pcaf) (num-subs l1)
   (choose pcaf l3 l2), cost: 1
@@ -333,7 +333,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l1)
   (choose prb-e2f4p1-dp12 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen prb-e2f4p1-dp12) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen prb-e2f4p1-dp12) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l1)
   (choose prb-e2f4p1-dp12 l2 l1), cost: 1
@@ -341,7 +341,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l1)
   (choose prb-e2f4p1-dp12 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen prb-e2f4p1-dp12) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen prb-e2f4p1-dp12) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen prb-e2f4p1-dp12) (num-subs l1)
   (choose prb-e2f4p1-dp12 l3 l2), cost: 1
@@ -357,7 +357,7 @@ Op[103]:
     add: (chosen prbp2) (num-subs l2)
     del: (NOT-chosen prbp2) (num-subs l1)
   (choose prbp2 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen prbp2) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen prbp2) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (chosen prbp2) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen prbp2) (num-subs l1)
   (choose prbp2 l2 l1), cost: 1
@@ -365,7 +365,7 @@ Op[103]:
     add: (chosen prbp2) (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen prbp2) (num-subs l1)
   (choose prbp2 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen prbp2) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen prbp2) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (chosen prbp2) (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen prbp2) (num-subs l1)
   (choose prbp2 l3 l2), cost: 1
@@ -381,7 +381,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen raf1) (num-subs l1)
   (choose raf1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen raf1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen raf1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen raf1) (num-subs l1)
   (choose raf1 l2 l1), cost: 1
@@ -389,7 +389,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen raf1) (num-subs l1)
   (choose raf1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen raf1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen raf1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen raf1) (num-subs l1)
   (choose raf1 l3 l2), cost: 1
@@ -405,7 +405,7 @@ Op[103]:
     add: (num-subs l2)
     del: (NOT-chosen sp1) (num-subs l1)
   (choose sp1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen sp1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen cdk46p3-cycd) (NOT-chosen sp1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c) (NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+NOT-chosen cdk46p3-cycd+num-subs l2)
     del: (NOT-chosen sp1) (num-subs l1)
   (choose sp1 l2 l1), cost: 1
@@ -413,7 +413,7 @@ Op[103]:
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2)
     del: (NOT-chosen sp1) (num-subs l1)
   (choose sp1 l2 l1), cost: 1
-    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen sp1) (num-subs l1)
+    pre: (NOT-chosen ap2) (NOT-chosen cdc25c) (NOT-chosen sp1) (num-subs l1) (NOT-chosen ap2+NOT-chosen cdc25c)
     add: (num-subs l2) (NOT-chosen ap2+num-subs l2) (NOT-chosen ap2+NOT-chosen cdc25c+num-subs l2)
     del: (NOT-chosen sp1) (num-subs l1)
   (choose sp1 l3 l2), cost: 1

@@ -210,7 +210,7 @@ Op[148]:
     add: (s-last sub2) (s-next sub3 sub2) (cut-point-1 sub1+s-next sub3 sub2)
     del: (cw sub3 sub2) (s-last sub3)
   (continue-cut sub3 sub2), cost: 0
-    pre: (cut-point-1 sub1) (cut-point-2 sub1) (cutting) (cw sub3 sub2) (s-last sub3)
+    pre: (cut-point-1 sub1) (cut-point-2 sub1) (cutting) (cw sub3 sub2) (s-last sub3) (cut-point-1 sub1+cut-point-2 sub1)
     add: (s-last sub2) (s-next sub3 sub2) (cut-point-1 sub1+s-next sub3 sub2) (cut-point-1 sub1+cut-point-2 sub1+s-next sub3 sub2)
     del: (cw sub3 sub2) (s-last sub3)
   (continue-inverse-splice-1a sub1 sub2), cost: 0
@@ -378,7 +378,7 @@ Op[148]:
     add: (cut-point-2 sub1) (cut-point-1 sub2+cut-point-2 sub1)
     del: (cw sub2 sub1)
   (end-cut-1 sub2 sub1), cost: 0
-    pre: (cut-point-1 sub1) (cutting) (cw sub2 sub1) (s-last sub2) (s-next sub3 sub2)
+    pre: (cut-point-1 sub1) (cutting) (cw sub2 sub1) (s-last sub2) (s-next sub3 sub2) (cut-point-1 sub1+s-next sub3 sub2)
     add: (cut-point-2 sub1) (cut-point-1 sub1+cut-point-2 sub1) (cut-point-1 sub1+cut-point-2 sub1+s-next sub3 sub2)
     del: (cw sub2 sub1)
   (end-cut-1 sub2 sub3), cost: 0
@@ -402,7 +402,7 @@ Op[148]:
     add: (cut-point-2 sub2)
     del: (cw sub3 sub2)
   (end-cut-2 sub1 sub1), cost: 0
-    pre: (cut-point-1 sub1) (cut-point-2 sub1) (cutting)
+    pre: (cut-point-1 sub1) (cut-point-2 sub1) (cutting) (cut-point-1 sub1+cut-point-2 sub1)
     add: (cw sub1 sub1) (have-cut)
     del: (cut-point-1 sub1) (cut-point-2 sub1) (cutting) (cut-point-1 sub1+cut-point-2 sub1) (cut-point-1 sub1+s-next sub3 sub2) (cut-point-1 sub1+cut-point-2 sub1+s-next sub3 sub2) (cut-point-1 sub2+cut-point-2 sub1) (cut-point-1 sub1+cut-point-1 sub2+cut-point-2 sub1+s-next sub3 sub2)
   (end-cut-2 sub1 sub2), cost: 0
@@ -414,7 +414,7 @@ Op[148]:
     add: (cw sub1 sub3) (have-cut)
     del: (cut-point-1 sub1) (cut-point-2 sub3) (cutting) (cut-point-1 sub1+cut-point-2 sub1) (cut-point-1 sub1+s-next sub3 sub2) (cut-point-1 sub1+cut-point-2 sub1+s-next sub3 sub2) (cut-point-1 sub1+cut-point-1 sub2+cut-point-2 sub1+s-next sub3 sub2)
   (end-cut-2 sub2 sub1), cost: 0
-    pre: (cut-point-1 sub2) (cut-point-2 sub1) (cutting)
+    pre: (cut-point-1 sub2) (cut-point-2 sub1) (cutting) (cut-point-1 sub2+cut-point-2 sub1)
     add: (cw sub2 sub1) (have-cut)
     del: (cut-point-1 sub2) (cut-point-2 sub1) (cutting) (cut-point-1 sub1+cut-point-2 sub1) (cut-point-1 sub1+cut-point-2 sub1+s-next sub3 sub2) (cut-point-1 sub2+cut-point-2 sub1) (cut-point-1 sub1+cut-point-1 sub2+cut-point-2 sub1+s-next sub3 sub2)
   (end-cut-2 sub2 sub2), cost: 0

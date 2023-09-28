@@ -191,7 +191,7 @@ Op[42]:
     add: (parked pr2)
     del: (NOT-parked pr2)
   (park pr2), cost: 1
-    pre: (NOT-base-obstacle x0 y0) (NOT-base-obstacle x1 y0) (NOT-base-obstacle x2 y0) (NOT-parked pr2) (not-pushing pr2)
+    pre: (NOT-base-obstacle x0 y0) (NOT-base-obstacle x1 y0) (NOT-base-obstacle x2 y0) (NOT-parked pr2) (not-pushing pr2) (NOT-base-obstacle x0 y0+NOT-base-obstacle x1 y0) (NOT-base-obstacle x1 y0+NOT-base-obstacle x2 y0)
     add: (parked pr2) (NOT-base-obstacle x0 y0+parked pr2) (NOT-base-obstacle x0 y0+NOT-base-obstacle x1 y0+parked pr2) (NOT-base-obstacle x0 y0+NOT-base-obstacle x1 y0+NOT-base-obstacle x2 y0+parked pr2)
     del: (NOT-parked pr2)
   (park pr2), cost: 1
@@ -199,7 +199,7 @@ Op[42]:
     add: (parked pr2) (NOT-base-obstacle x0 y0+parked pr2)
     del: (NOT-parked pr2)
   (park pr2), cost: 1
-    pre: (NOT-base-obstacle x0 y0) (NOT-base-obstacle x1 y0) (NOT-parked pr2) (not-pushing pr2)
+    pre: (NOT-base-obstacle x0 y0) (NOT-base-obstacle x1 y0) (NOT-parked pr2) (not-pushing pr2) (NOT-base-obstacle x0 y0+NOT-base-obstacle x1 y0)
     add: (parked pr2) (NOT-base-obstacle x0 y0+parked pr2) (NOT-base-obstacle x0 y0+NOT-base-obstacle x1 y0+parked pr2)
     del: (NOT-parked pr2)
   (ungrasp-cart pr2 cart), cost: 1

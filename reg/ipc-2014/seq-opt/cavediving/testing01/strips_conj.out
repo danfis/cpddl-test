@@ -249,11 +249,11 @@ Op[4111]:
     add: (NOT-in-water) (decompressing d0)
     del: (at-diver d0 l0) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (decompress d0 l0), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0) (in-storage t9)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (in-storage t9) (at-diver d0 l0+at-tank t0 l0)
     add: (NOT-in-water) (decompressing d0) (NOT-in-water+at-tank t0 l0) (NOT-in-water+in-storage t9) (NOT-in-water+at-tank t0 l0+in-storage t9)
     del: (at-diver d0 l0) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (decompress d0 l0), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (at-diver d0 l0+at-tank t0 l0)
     add: (NOT-in-water) (decompressing d0) (NOT-in-water+at-tank t0 l0)
     del: (at-diver d0 l0) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (decompress d0 l0), cost: 1
@@ -261,7 +261,7 @@ Op[4111]:
     add: (NOT-in-water) (decompressing d0) (NOT-in-water+in-storage t9)
     del: (at-diver d0 l0) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (decompress d0 l0), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0) (in-storage t9)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (in-storage t9) (at-diver d0 l0+at-tank t0 l0)
     add: (NOT-in-water) (decompressing d0) (NOT-in-water+at-tank t0 l0) (NOT-in-water+in-storage t9)
     del: (at-diver d0 l0) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (decompress d1 l0), cost: 1
@@ -7561,19 +7561,19 @@ Op[4111]:
     add: (have-photo l5)
     del: (full t9)
   (pickup-tank d0 t0 l0 one two), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 two)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 two) (at-diver d0 l0+at-tank t0 l0)
     add: (capacity d0 one) (holding d0 t0)
     del: (at-tank t0 l0) (capacity d0 two) (NOT-in-water+at-tank t0 l0) (NOT-in-water+at-tank t0 l0+in-storage t9) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (pickup-tank d0 t0 l0 three four), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 four)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 four) (at-diver d0 l0+at-tank t0 l0)
     add: (capacity d0 three) (holding d0 t0)
     del: (at-tank t0 l0) (capacity d0 four) (NOT-in-water+at-tank t0 l0) (NOT-in-water+at-tank t0 l0+in-storage t9) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (pickup-tank d0 t0 l0 two three), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 three)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 three) (at-diver d0 l0+at-tank t0 l0)
     add: (capacity d0 two) (holding d0 t0)
     del: (at-tank t0 l0) (capacity d0 three) (NOT-in-water+at-tank t0 l0) (NOT-in-water+at-tank t0 l0+in-storage t9) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (pickup-tank d0 t0 l0 zero one), cost: 1
-    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 one)
+    pre: (at-diver d0 l0) (at-tank t0 l0) (capacity d0 one) (at-diver d0 l0+at-tank t0 l0)
     add: (capacity d0 zero) (holding d0 t0)
     del: (at-tank t0 l0) (capacity d0 one) (NOT-in-water+at-tank t0 l0) (NOT-in-water+at-tank t0 l0+in-storage t9) (at-diver d0 l0+at-tank t0 l0) (NOT-in-water+at-diver d0 l0+at-tank t0 l0+in-storage t9)
   (pickup-tank d0 t0 l1 one two), cost: 1

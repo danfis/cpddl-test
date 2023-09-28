@@ -1878,7 +1878,7 @@ Op[1390]:
     add: (s-last sub6) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     del: (cw sub7 sub6) (s-last sub7)
   (continue-cut sub7 sub6), cost: 0
-    pre: (cut-point-1 g11) (cut-point-2 g11) (cutting) (cw sub7 sub6) (s-last sub7)
+    pre: (cut-point-1 g11) (cut-point-2 g11) (cutting) (cw sub7 sub6) (s-last sub7) (cut-point-1 g11+cut-point-2 g11)
     add: (s-last sub6) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub7 sub6) (s-last sub7)
   (continue-inverse-splice-1a g11 g84), cost: 0
@@ -3438,7 +3438,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw g84 g11)
   (end-cut-1 g84 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw g84 g11) (s-last g84) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw g84 g11) (s-last g84) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw g84 g11)
   (end-cut-1 g84 sub1), cost: 0
@@ -3482,7 +3482,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw sub1 g11)
   (end-cut-1 sub1 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw sub1 g11) (s-last sub1) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw sub1 g11) (s-last sub1) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub1 g11)
   (end-cut-1 sub1 g84), cost: 0
@@ -3526,7 +3526,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw sub2 g11)
   (end-cut-1 sub2 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw sub2 g11) (s-last sub2) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw sub2 g11) (s-last sub2) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub2 g11)
   (end-cut-1 sub2 g84), cost: 0
@@ -3570,7 +3570,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw sub3 g11)
   (end-cut-1 sub3 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw sub3 g11) (s-last sub3) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw sub3 g11) (s-last sub3) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub3 g11)
   (end-cut-1 sub3 g84), cost: 0
@@ -3614,7 +3614,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw sub4 g11)
   (end-cut-1 sub4 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw sub4 g11) (s-last sub4) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw sub4 g11) (s-last sub4) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub4 g11)
   (end-cut-1 sub4 g84), cost: 0
@@ -3658,7 +3658,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw sub5 g11)
   (end-cut-1 sub5 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw sub5 g11) (s-last sub5) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw sub5 g11) (s-last sub5) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub5 g11)
   (end-cut-1 sub5 g84), cost: 0
@@ -3702,7 +3702,7 @@ Op[1390]:
     add: (cut-point-2 g11) (cut-point-1 g84+cut-point-2 g11)
     del: (cw sub6 g11)
   (end-cut-1 sub6 g11), cost: 0
-    pre: (cut-point-1 g11) (cutting) (cw sub6 g11) (s-last sub6) (s-next sub7 sub6)
+    pre: (cut-point-1 g11) (cutting) (cw sub6 g11) (s-last sub6) (s-next sub7 sub6) (cut-point-1 g11+s-next sub7 sub6)
     add: (cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6)
     del: (cw sub6 g11)
   (end-cut-1 sub6 g84), cost: 0
@@ -3774,7 +3774,7 @@ Op[1390]:
     add: (cut-point-2 sub6)
     del: (cw sub7 sub6)
   (end-cut-2 g11 g11), cost: 0
-    pre: (cut-point-1 g11) (cut-point-2 g11) (cutting)
+    pre: (cut-point-1 g11) (cut-point-2 g11) (cutting) (cut-point-1 g11+cut-point-2 g11)
     add: (cw g11 g11) (have-cut)
     del: (cut-point-1 g11) (cut-point-2 g11) (cutting) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+s-next sub7 sub6) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6) (cut-point-1 g84+cut-point-2 g11) (cut-point-1 g11+cut-point-1 g84+cut-point-2 g11+s-next sub7 sub6)
   (end-cut-2 g11 g84), cost: 0
@@ -3810,7 +3810,7 @@ Op[1390]:
     add: (cw g11 sub7) (have-cut)
     del: (cut-point-1 g11) (cut-point-2 sub7) (cutting) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+s-next sub7 sub6) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6) (cut-point-1 g11+cut-point-1 g84+cut-point-2 g11+s-next sub7 sub6)
   (end-cut-2 g84 g11), cost: 0
-    pre: (cut-point-1 g84) (cut-point-2 g11) (cutting)
+    pre: (cut-point-1 g84) (cut-point-2 g11) (cutting) (cut-point-1 g84+cut-point-2 g11)
     add: (cw g84 g11) (have-cut)
     del: (cut-point-1 g84) (cut-point-2 g11) (cutting) (cut-point-1 g11+cut-point-2 g11) (cut-point-1 g11+cut-point-2 g11+s-next sub7 sub6) (cut-point-1 g84+cut-point-2 g11) (cut-point-1 g11+cut-point-1 g84+cut-point-2 g11+s-next sub7 sub6)
   (end-cut-2 g84 g84), cost: 0

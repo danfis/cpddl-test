@@ -95,7 +95,7 @@ Op[22]:
     add: (stackedin sheet1 finisher1_tray)
     del: (location sheet1 finisher1_entry-up_topexit)
   (finisher1-stack-letter sheet1 dummy-sheet), cost: 8000
-    pre: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available finisher1-rsrc) (location sheet1 finisher1_entry-up_topexit)
+    pre: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available finisher1-rsrc) (location sheet1 finisher1_entry-up_topexit) (available blackcontainer-rsrc+available blackfeeder-rsrc) (available blackfeeder-rsrc+available blackprinter-rsrc)
     add: (stackedin sheet1 finisher1_tray) (available blackcontainer-rsrc+stackedin sheet1 finisher1_tray) (available blackcontainer-rsrc+available blackfeeder-rsrc+stackedin sheet1 finisher1_tray) (available blackcontainer-rsrc+available blackfeeder-rsrc+available blackprinter-rsrc+stackedin sheet1 finisher1_tray)
     del: (location sheet1 finisher1_entry-up_topexit)
   (finisher1-stack-letter sheet1 dummy-sheet), cost: 8000
@@ -103,7 +103,7 @@ Op[22]:
     add: (stackedin sheet1 finisher1_tray) (available blackcontainer-rsrc+stackedin sheet1 finisher1_tray)
     del: (location sheet1 finisher1_entry-up_topexit)
   (finisher1-stack-letter sheet1 dummy-sheet), cost: 8000
-    pre: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available finisher1-rsrc) (location sheet1 finisher1_entry-up_topexit)
+    pre: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available finisher1-rsrc) (location sheet1 finisher1_entry-up_topexit) (available blackcontainer-rsrc+available blackfeeder-rsrc)
     add: (stackedin sheet1 finisher1_tray) (available blackcontainer-rsrc+stackedin sheet1 finisher1_tray) (available blackcontainer-rsrc+available blackfeeder-rsrc+stackedin sheet1 finisher1_tray)
     del: (location sheet1 finisher1_entry-up_topexit)
   (htmoverblack-move-letter sheet1), cost: 17999
