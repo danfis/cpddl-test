@@ -57,6 +57,10 @@ TEST(pot_init, pot)
     pddlPotSolutionInit(&sol);
     int ret = pddlPotSolve(&pot, &sol, &C.err);
     assert(ret == 0);
+    assert(sol.found);
+    assert(!sol.suboptimal);
+    assert(!sol.timed_out);
+    assert(!sol.error);
     checkOpChange(&C.fdr, &sol);
 
     int val = pddlPotSolutionEvalFDRState(&sol, &C.fdr.var, C.fdr.init);
