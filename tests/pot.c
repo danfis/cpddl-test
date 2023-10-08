@@ -86,6 +86,10 @@ TEST(pot_all_states, pot_init)
     pddlPotSolutionInit(&sol);
     int ret = pddlPotSolve(&pot, &sol, &C.err);
     assert(ret == 0);
+    assert(sol.found);
+    assert(!sol.suboptimal);
+    assert(!sol.timed_out);
+    assert(!sol.error);
     checkOpChange(&C.fdr, &sol);
 
     int val = pddlPotSolutionEvalFDRState(&sol, &C.fdr.var, C.fdr.init);
@@ -117,6 +121,10 @@ TEST(pot_mg_strips_init, pot_init)
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
     pddlPotSolve(&pot, &sol, &C.err);
+    assert(sol.found);
+    assert(!sol.suboptimal);
+    assert(!sol.timed_out);
+    assert(!sol.error);
     int val = pddlPotSolutionEvalStripsState(&sol, &mg_strips.strips.init);
     assert(val >= pot_value_init);
     if (C.optimal_cost >= 0)
@@ -149,6 +157,10 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
     pddlPotSolve(&pot, &sol, &C.err);
+    assert(sol.found);
+    assert(!sol.suboptimal);
+    assert(!sol.timed_out);
+    assert(!sol.error);
     int val = pddlPotSolutionEvalStripsState(&sol, &mg_strips.strips.init);
     assert(val >= pot_value_init);
     assert(val >= pot_value_mg_strips_init);
