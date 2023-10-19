@@ -50,6 +50,70 @@ TEST(strips, lmg)
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
+TEST(strips_ground_only_facts, lmg)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.remove_static_facts = pddl_false;
+    ground_cfg.keep_all_static_facts = pddl_false;
+    ground_cfg.ground_only_facts = pddl_false;
+
+    pddl_strips_t strips_ops;
+    int ret = pddlStripsGroundDatalog(&strips_ops, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    pddl_strips_t strips_facts;
+    ground_cfg.ground_only_facts = pddl_true;
+    ret = pddlStripsGroundDatalog(&strips_facts, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    assert(strips_ops.fact.fact_size == strips_facts.fact.fact_size);
+    assert(strips_facts.op.op_size == 0);
+
+    int remap[strips_ops.fact.fact_size];
+    pddlFactsSort(&strips_ops.fact, remap);
+    pddlFactsSort(&strips_facts.fact, remap);
+
+    for (int i = 0; i < strips_ops.fact.fact_size; ++i){
+        assert(strcmp(strips_ops.fact.fact[i]->name,
+                      strips_facts.fact.fact[i]->name) == 0);
+    }
+
+    pddlStripsFree(&strips_facts);
+    pddlStripsFree(&strips_ops);
+}
+
+TEST(strips_ground_only_facts_with_static, lmg)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.remove_static_facts = pddl_false;
+    ground_cfg.keep_all_static_facts = pddl_true;
+    ground_cfg.ground_only_facts = pddl_false;
+
+    pddl_strips_t strips_ops;
+    int ret = pddlStripsGroundDatalog(&strips_ops, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    pddl_strips_t strips_facts;
+    ground_cfg.ground_only_facts = pddl_true;
+    ret = pddlStripsGroundDatalog(&strips_facts, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    assert(strips_ops.fact.fact_size == strips_facts.fact.fact_size);
+    assert(strips_facts.op.op_size == 0);
+
+    int remap[strips_ops.fact.fact_size];
+    pddlFactsSort(&strips_ops.fact, remap);
+    pddlFactsSort(&strips_facts.fact, remap);
+
+    for (int i = 0; i < strips_ops.fact.fact_size; ++i){
+        assert(strcmp(strips_ops.fact.fact[i]->name,
+                      strips_facts.fact.fact[i]->name) == 0);
+    }
+
+    pddlStripsFree(&strips_facts);
+    pddlStripsFree(&strips_ops);
+}
+
 
 TEST(strips_ground_unit_cost, pddl_unit_cost)
 {
