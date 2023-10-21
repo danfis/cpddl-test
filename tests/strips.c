@@ -295,6 +295,18 @@ static void testCompileInLMG(int mutex, int dead_end)
         assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
     pddlStripsFree(&strips);
 
+#ifdef PDDL_CLINGO
+    ret = pddlStripsGroundGringo(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+#endif /* PDDL_CLINGO */
+
     pddlFree(&pddl);
     pddlStripsFree(&base);
 }
@@ -304,6 +316,62 @@ TEST(strips_compile_in_lmg, lmg)
     testCompileInLMG(1, 1);
     testCompileInLMG(1, 0);
     testCompileInLMG(0, 1);
+}
+
+TEST(strips_grounding, pddl)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.lifted_mgroups = NULL;
+    ground_cfg.prune_op_pre_mutex = 0;
+    ground_cfg.prune_op_dead_end = 0;
+    pddl_strips_t base;
+    int ret = pddlStripsGroundTrie(&base, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    pddl_strips_t strips;
+    ret = pddlStripsGroundDatalog(&strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+
+    ret = pddlStripsGroundSql(&strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+
+    ret = pddlStripsGroundTrie(&strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+
+#ifdef PDDL_CLINGO
+    ret = pddlStripsGroundGringo(&strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    assert(strips.op.op_size == base.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i)
+        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
+    assert(strips.fact.fact_size == base.fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+#endif /* PDDL_CLINGO */
+
+    pddlStripsFree(&base);
 }
 
 static pddl_strips_conj_t stripsc;
