@@ -242,6 +242,30 @@ TEST_COND(ground_layered, lmg, SQLITE)
     pddlGroundAtomsFree(&ga);
 }
 
+static void checkGroundingEqual(int (*ground)(pddl_strips_t *strips,
+                                              const pddl_t *pddl,
+                                              const pddl_ground_config_t *cfg,
+                                              pddl_err_t *err),
+                                const pddl_t *pddl,
+                                const pddl_ground_config_t *ground_cfg,
+                                const pddl_strips_t *base)
+{
+    pddl_strips_t strips;
+    int ret = ground(&strips, pddl, ground_cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+    assert(strips.op.op_size == base->op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i){
+        assert(strcmp(strips.op.op[i]->name, base->op.op[i]->name) == 0);
+        assert(strips.op.op[i]->cost == base->op.op[i]->cost);
+    }
+    assert(strips.fact.fact_size == base->fact.fact_size);
+    for (int i = 0; i < strips.fact.fact_size; ++i)
+        assert(strcmp(strips.fact.fact[i]->name, base->fact.fact[i]->name) == 0);
+    pddlStripsFree(&strips);
+}
+
 static void testCompileInLMG(int mutex, int dead_end)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
@@ -264,47 +288,19 @@ static void testCompileInLMG(int mutex, int dead_end)
     lmg_cfg.prune_dead_end = dead_end;
     pddlCompileInLiftedMGroups(&pddl, &C.lmg, &lmg_cfg, &C.err);
 
-    pddl_strips_t strips;
-    ret = pddlStripsGroundDatalog(&strips, &pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
-
-    ret = pddlStripsGroundSql(&strips, &pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
-
-    ret = pddlStripsGroundTrie(&strips, &pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
+    checkGroundingEqual(pddlStripsGroundDatalog, &pddl, &ground_cfg, &base);
+    checkGroundingEqual(pddlStripsGroundSql, &pddl, &ground_cfg, &base);
+    checkGroundingEqual(pddlStripsGroundTrie, &pddl, &ground_cfg, &base);
 
 #ifdef PDDL_CLINGO
-    ret = pddlStripsGroundGringo(&strips, &pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
+    checkGroundingEqual(pddlStripsGroundGringo, &pddl, &ground_cfg, &base);
+    // Skip these tasks because clingo tends to run out of memory there
+    if (strcmp(TEST_TASK, "ipc-2006/pathways/p20") != 0
+            && strcmp(TEST_TASK, "unsolve-ipc-2016/pegsol-row5/satprob05") != 0
+            && strcmp(TEST_TASK, "ipc-2008/seq-sat/sokoban/p10") != 0
+            && strcmp(TEST_TASK, "unsolve-ipc-2016/bottleneck/prob01") != 0){
+        checkGroundingEqual(pddlStripsGroundClingo, &pddl, &ground_cfg, &base);
+    }
 #endif /* PDDL_CLINGO */
 
     pddlFree(&pddl);
@@ -328,47 +324,18 @@ TEST(strips_grounding, pddl)
     int ret = pddlStripsGroundTrie(&base, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
 
-    pddl_strips_t strips;
-    ret = pddlStripsGroundDatalog(&strips, &C.pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
-
-    ret = pddlStripsGroundSql(&strips, &C.pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
-
-    ret = pddlStripsGroundTrie(&strips, &C.pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
+    checkGroundingEqual(pddlStripsGroundDatalog, &C.pddl, &ground_cfg, &base);
+    checkGroundingEqual(pddlStripsGroundSql, &C.pddl, &ground_cfg, &base);
+    checkGroundingEqual(pddlStripsGroundTrie, &C.pddl, &ground_cfg, &base);
 
 #ifdef PDDL_CLINGO
-    ret = pddlStripsGroundGringo(&strips, &C.pddl, &ground_cfg, &C.err);
-    assert(ret == 0);
-    assert(strips.op.op_size == base.op.op_size);
-    for (int i = 0; i < strips.op.op_size; ++i)
-        assert(strcmp(strips.op.op[i]->name, base.op.op[i]->name) == 0);
-    assert(strips.fact.fact_size == base.fact.fact_size);
-    for (int i = 0; i < strips.fact.fact_size; ++i)
-        assert(strcmp(strips.fact.fact[i]->name, base.fact.fact[i]->name) == 0);
-    pddlStripsFree(&strips);
+    checkGroundingEqual(pddlStripsGroundGringo, &C.pddl, &ground_cfg, &base);
+    // Skip these tasks because clingo tends to run out of memory there
+    if (strcmp(TEST_TASK, "ipc-2006/pathways/p20") != 0
+            && strcmp(TEST_TASK, "ipc-2008/seq-sat/sokoban/p10") != 0
+            && strcmp(TEST_TASK, "unsolve-ipc-2016/pegsol-row5/satprob05") != 0){
+        checkGroundingEqual(pddlStripsGroundClingo, &C.pddl, &ground_cfg, &base);
+    }
 #endif /* PDDL_CLINGO */
 
     pddlStripsFree(&base);
