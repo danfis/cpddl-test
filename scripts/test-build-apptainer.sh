@@ -109,7 +109,9 @@ function run_test(){
 if ! echo "$@" | grep -q -- --cplex; then
     run_test $@ --werror alpine
     run_test $@ --no-cudd --no-bliss --highs --werror alpine
+    run_test $@ --no-cudd --no-bliss --highs --clingo --werror alpine
     run_test $@ --no-cudd --no-bliss --werror alpine
+    run_test $@ --no-cudd --no-bliss --werror --clingo alpine
     run_test $@ --highs --werror alpine
 
     run_test $@ --werror --clang alpine
@@ -120,12 +122,14 @@ run_test $@ --werror photon
 run_test $@ --no-cudd --no-bliss --werror photon
 run_test $@ --highs --werror photon
 run_test $@ --minizinc --highs --werror photon
+run_test $@ --minizinc --highs --clingo --werror photon
 
 run_test $@ --werror debian-bullseye
 run_test $@ --werror --clang debian-bullseye
 run_test $@ --werror --clang-ver 16 debian-bullseye
 run_test $@ --highs --werror debian-bullseye
 run_test $@ --highs --minizinc --werror debian-bullseye
+run_test $@ --highs --minizinc --clingo --werror debian-bullseye
 run_test $@ --coin-or --werror debian-bullseye
 
 run_test $@ --werror debian-buster
@@ -138,6 +142,7 @@ run_test $@ --werror ubuntu-focal
 run_test $@ --werror ubuntu-bionic
 run_test $@ --werror fedora
 run_test $@ --highs --werror fedora
+run_test $@ --highs --clingo --werror fedora
 
 run_test $@ --werror gcc-11
 run_test $@ --highs --werror gcc-11
