@@ -836,5 +836,9 @@ int main(int argc, char *argv[])
     ret = munmap(shared_mem, shared_size);
     assert(ret == 0);
 
+    for (int i = 0; i < num_tests; ++i){
+        if (test_stat[i].failed)
+            return 1;
+    }
     return 0;
 }

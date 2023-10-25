@@ -82,9 +82,9 @@ val/validate: val/Makefile val/src/*.cpp
 	$(MAKE) -C val
 
 check: all submodule
-	./test $(T) 2>&1 | tee check.log
+	./test $(T)
 check-all: all submodule
-	./test -A $(T) 2>&1 | tee check.log
+	./test -A $(T)
 
 submodule: pddl-data/test-seq/test/domain.pddl
 pddl-data/test-seq/test/domain.pddl:
