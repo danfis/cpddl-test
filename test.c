@@ -831,14 +831,18 @@ int main(int argc, char *argv[])
 
     printReport();
 
+    int exit_code = 0;
+    for (int i = 0; i < num_tests; ++i){
+        if (test_stat[i].failed){
+            exit_code = 1;
+            break;
+        }
+    }
+
     ret = sem_destroy(&shared->lock);
     assert(ret == 0);
     ret = munmap(shared_mem, shared_size);
     assert(ret == 0);
 
-    for (int i = 0; i < num_tests; ++i){
-        if (test_stat[i].failed)
-            return 1;
-    }
-    return 0;
+    return exit_code;
 }
