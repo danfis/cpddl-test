@@ -25,8 +25,10 @@ function run_test(){
     [ "$have_lp" = "yes" ] && lp="--mg fam"
     [ "$have_minizinc" = "yes" ] && cp="--P-endo fdr"
 
-    set -x
-    bash scripts/build-apptainer.sh --output apptainer.img $apptainer_args
+    set -ex
+    python3 scripts/build-apptainer.py --output apptainer.img "$@"
+    [ ! -f apptainer.img ] && exit -1
+
     ./apptainer.img --lplan astar --lplan-h blind --lplan-o test_output.plan \
             t/pddl-data/ipc-1998/gripper/prob01 
     cost=$(cat test_output.plan | grep ';; Cost:' | grep -o '[0-9]\+$')
@@ -107,39 +109,40 @@ function run_test(){
 }
 
 if ! echo "$@" | grep -q -- --cplex; then
-    run_test $@ --werror alpine
-    run_test $@ --no-cudd --no-bliss --highs --werror alpine
-    run_test $@ --no-cudd --no-bliss --werror alpine
-    run_test $@ --highs --werror alpine
+    run_test "$@" --werror alpine
+    run_test "$@" --no-cudd --no-bliss --highs --werror alpine
+    run_test "$@" --no-cudd --no-bliss --werror alpine
+    run_test "$@" --highs --werror alpine
 
-    run_test $@ --werror --clang alpine
-    run_test $@ --no-cudd --no-bliss --werror --clang alpine
+    run_test "$@" --werror --clang alpine
+    run_test "$@" --no-cudd --no-bliss --werror --clang alpine
 fi
 
-run_test $@ --werror photon
-run_test $@ --no-cudd --no-bliss --werror photon
-run_test $@ --highs --werror photon
-run_test $@ --minizinc --highs --werror photon
+run_test "$@" --werror photon
+run_test "$@" --no-cudd --no-bliss --werror photon
+run_test "$@" --highs --werror photon
 
-run_test $@ --werror debian-bullseye
-run_test $@ --werror --clang debian-bullseye
-run_test $@ --werror --clang-ver 16 debian-bullseye
-run_test $@ --highs --werror debian-bullseye
-run_test $@ --highs --minizinc --werror debian-bullseye
-run_test $@ --coin-or --werror debian-bullseye
+run_test "$@" --werror debian-bookworm
+run_test "$@" --werror --clang debian-bookworm
+run_test "$@" --werror --clang-ver 16 debian-bookworm
+run_test "$@" --highs --werror debian-bookworm
+run_test "$@" --highs --minizinc --werror debian-bookworm
+run_test "$@" --coin-or --werror debian-bookworm
 
-run_test $@ --werror debian-buster
-run_test $@ --werror ubuntu-kinetic
-run_test $@ --highs --werror ubuntu-kinetic
-run_test $@ --coin-or --werror ubuntu-kinetic
-run_test $@ --werror ubuntu-jammy
-run_test $@ --highs --werror ubuntu-jammy
-run_test $@ --werror ubuntu-focal
-run_test $@ --werror ubuntu-bionic
-run_test $@ --werror fedora
-run_test $@ --highs --werror fedora
+run_test "$@" --highs --minizinc --werror debian-bullseye
+run_test "$@" --coin-or --werror debian-bullseye
 
-run_test $@ --werror gcc-11
-run_test $@ --highs --werror gcc-11
-run_test $@ --werror gcc-12
-run_test $@ --highs --werror gcc-12
+run_test "$@" --werror debian-buster
+run_test "$@" --werror ubuntu-jammy
+run_test "$@" --highs --werror ubuntu-jammy
+run_test "$@" --highs --werror ubuntu-mantic
+run_test "$@" --werror ubuntu-focal
+run_test "$@" --werror ubuntu-bionic
+run_test "$@" --werror fedora
+run_test "$@" --highs --werror fedora
+run_test "$@" --highs --werror --minizinc fedora
+
+run_test "$@" --werror gcc-11
+run_test "$@" --highs --werror gcc-11
+run_test "$@" --werror gcc-12
+run_test "$@" --highs --werror gcc-12
