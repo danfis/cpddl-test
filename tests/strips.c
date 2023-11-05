@@ -334,6 +334,16 @@ TEST(strips_conj, strips_pruned)
     cfg.mutex = &C.mutex;
     pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
     stripsc_set = 1;
+
+    for (int fact_id = 0; fact_id < stripsc.strips.fact.fact_size; ++fact_id){
+        if (fact_id < stripsc.num_singletons){
+            //assert(!stripsc.strips.fact.fact[fact_id]->is_conjunction);
+        }else{
+            //assert(stripsc.strips.fact.fact[fact_id]->is_conjunction);
+            assert(pddlISetSize(stripsc.fact_to_conj + fact_id) >= 2);
+        }
+    }
+
     pddlStripsPrintDebug(&stripsc.strips, stdout);
     //pddlStripsPrintDebug(&C.strips, stdout);
     pddlStripsConjConfigFree(&cfg);
