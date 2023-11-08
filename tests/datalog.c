@@ -118,10 +118,10 @@ TEST_EXPLICIT(datalog)
     pddlDatalogDel(dl);
 }
 
-static int annotation(pddl_datalog_t *dl,
-                      int head_fact_id,
-                      const pddl_iset_t *body_fact_ids,
-                      void *userdata)
+static void annotation(pddl_datalog_t *dl,
+                       int head_fact_id,
+                       const pddl_iset_t *body_fact_ids,
+                       void *userdata)
 {
     int pred;
     int arity;
@@ -148,7 +148,6 @@ static int annotation(pddl_datalog_t *dl,
     }
 
     printf(".\n");
-    return 0;
 }
 
 TEST_EXPLICIT(datalog_annotated)
