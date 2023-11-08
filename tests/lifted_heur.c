@@ -120,3 +120,62 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddlGroundAtomsFree(&gatoms);
     pddlStripsFree(&strips);
 }
+
+TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ground_cfg.remove_static_facts = 0;
+    pddl_strips_t strips;
+    int ret = pddlStripsGroundDatalog(&strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+
+    pddl_ground_atoms_t gatoms;
+    pddlGroundAtomsInit(&gatoms);
+    for (int fact = 0; fact < strips.fact.fact_size; ++fact){
+        const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
+        assert(ga != NULL);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+    }
+
+    pddl_lifted_hff_add_t h;
+    pddlLiftedHFFAddInit(&h, &C.pddl, &C.err);
+
+    PDDL_ISET(state);
+    pddlISetUnion(&state, &strips.init);
+    pddlLiftedHFFAdd(&h, &state, &gatoms);
+    int num_tested_states = 0;
+    for (int i = 0; i < 10 && num_tested_states < 200; ++i){
+
+        PDDL_ISET(app_ops);
+        pddlStripsApplicableOps(&strips, &state, &app_ops);
+        if (pddlISetSize(&app_ops) == 0)
+            break;
+
+        int op_id;
+        PDDL_ISET(next_state);
+        PDDL_ISET_FOR_EACH(&app_ops, op_id){
+            pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);
+            /*
+            int fact_id;
+            printf("State:");
+            PDDL_ISET_FOR_EACH(&next_state, fact_id){
+                printf(" (%s)", strips.fact.fact[fact_id]->name);
+            }
+            printf("\n");
+            */
+            pddlLiftedHAdd(&h, &next_state, &gatoms);
+            num_tested_states++;
+            if (num_tested_states >= 200)
+                break;
+        }
+        pddlISetEmpty(&state);
+        pddlISetUnion(&state, &next_state);
+        pddlISetFree(&next_state);
+        pddlISetFree(&app_ops);
+    }
+
+    pddlISetFree(&state);
+    pddlLiftedHFFAddFree(&h);
+    pddlGroundAtomsFree(&gatoms);
+    pddlStripsFree(&strips);
+}

@@ -239,9 +239,30 @@ TEST(lifted_search_gbfs_hadd_dl, lifted_search)
                    PDDL_LIFTED_APP_ACTION_DL, 1);
 }
 
+TEST(lifted_search_gbfs_hff_add_dl, lifted_search)
+{
+    _lifted_search(pddlLiftedHeurHFFAdd(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_GBFS,
+                   PDDL_LIFTED_APP_ACTION_DL, 1);
+}
+
+TEST(lifted_search_gbfs_hff_max_dl, lifted_search)
+{
+    _lifted_search(pddlLiftedHeurHFFMax(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_GBFS,
+                   PDDL_LIFTED_APP_ACTION_DL, 1);
+}
+
 TEST(lifted_search_lazy_hadd_dl, lifted_search)
 {
     _lifted_search(pddlLiftedHeurHAdd(&C.pddl, &C.err),
+                   PDDL_LIFTED_SEARCH_LAZY,
+                   PDDL_LIFTED_APP_ACTION_DL, 1);
+}
+
+TEST(lifted_search_lazy_hff_add_dl, lifted_search)
+{
+    _lifted_search(pddlLiftedHeurHFFAdd(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_LAZY,
                    PDDL_LIFTED_APP_ACTION_DL, 1);
 }
