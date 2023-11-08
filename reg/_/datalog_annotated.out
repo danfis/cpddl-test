@@ -1,0 +1,25 @@
+P(1, 2).
+Q(2, 1).
+S(1, 2).
+Q(X, Y) :- P(X, Y).; ann_size = 1
+R(2, 1, 1).; ann_size = 1
+R(X, Y, W) :- P(X, Y), Q(Y, Z), S(Z, W).; ann_size = 1
+G() :- R(1, 2, 2).; ann_size = 1
+Normalized:
+P(1, 2).
+Q(2, 1).
+S(1, 2).
+Q(X, Y) :- P(X, Y).; ann_size = 1
+R(2, 1, 1).; ann_size = 1
+R(X, Y, Z) :- P(X, Y), _p5(Y, Z).; ann_size = 1
+G() :- R(1, 2, 2).; ann_size = 1
+_p5(X, Z) :- Q(X, Y), S(Y, Z).
+(P 1 2)
+(Q 2 1)
+(Q 1 2)
+(R 2 1 1)
+(R 1 2 2)
+(S 1 2)
+(G)
+ann: R(X,Y,W) | (R 1 2 2) :- (P 1 2) (Q 2 1) (S 1 2).
+ann: G | (G) :- (R 1 2 2).
