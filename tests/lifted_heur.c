@@ -21,12 +21,12 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     pddl_hadd_t hadd;
     pddlHAddInitStrips(&hadd, &strips);
 
-    pddl_lifted_hadd_t h;
+    pddl_lifted_heur_relaxed_t h;
     pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
-    pddl_cost_t lc = pddlLiftedHAdd(&h, &state, &gatoms);
+    pddl_cost_t lc = pddlLiftedHeurRelaxedEvalState(&h, &state, &gatoms);
     int c = pddlHAddStrips(&hadd, &state);
     //fprintf(stderr, "lc: %d:%d , c: %d\n", lc.cost, lc.zero_cost, c);
     assert(lc.cost == c);
@@ -42,7 +42,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
         PDDL_ISET(next_state);
         PDDL_ISET_FOR_EACH(&app_ops, op_id){
             pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);
-            pddl_cost_t lc = pddlLiftedHAdd(&h, &next_state, &gatoms);
+            pddl_cost_t lc = pddlLiftedHeurRelaxedEvalState(&h, &next_state, &gatoms);
             int c = pddlHAddStrips(&hadd, &next_state);
             //fprintf(stderr, "lc: %d:%d , c: %d\n", lc.cost, lc.zero_cost, c);
             assert(lc.cost == c);
@@ -57,7 +57,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     }
 
     pddlISetFree(&state);
-    pddlLiftedHAddFree(&h);
+    pddlLiftedHeurRelaxedFree(&h);
     pddlHAddFree(&hadd);
     pddlGroundAtomsFree(&gatoms);
     pddlStripsFree(&strips);
@@ -81,12 +81,12 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddl_hmax_t hmax;
     pddlHMaxInitStrips(&hmax, &strips);
 
-    pddl_lifted_hmax_t h;
+    pddl_lifted_heur_relaxed_t h;
     pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
-    pddl_cost_t lc = pddlLiftedHMax(&h, &state, &gatoms);
+    pddl_cost_t lc = pddlLiftedHeurRelaxedEvalState(&h, &state, &gatoms);
     int c = pddlHMaxStrips(&hmax, &state);
     assert(lc.cost == c);
     int num_tested_states = 0;
@@ -101,7 +101,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
         PDDL_ISET(next_state);
         PDDL_ISET_FOR_EACH(&app_ops, op_id){
             pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);
-            pddl_cost_t lc = pddlLiftedHMax(&h, &next_state, &gatoms);
+            pddl_cost_t lc = pddlLiftedHeurRelaxedEvalState(&h, &next_state, &gatoms);
             int c = pddlHMaxStrips(&hmax, &next_state);
             assert(lc.cost == c);
             num_tested_states++;
@@ -115,7 +115,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     }
 
     pddlISetFree(&state);
-    pddlLiftedHMaxFree(&h);
+    pddlLiftedHeurRelaxedFree(&h);
     pddlHMaxFree(&hmax);
     pddlGroundAtomsFree(&gatoms);
     pddlStripsFree(&strips);
@@ -137,12 +137,12 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
         pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
     }
 
-    pddl_lifted_hff_add_t h;
+    pddl_lifted_heur_relaxed_t h;
     pddlLiftedHFFAddInit(&h, &C.pddl, &C.err);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
-    pddlLiftedHFFAdd(&h, &state, &gatoms);
+    pddlLiftedHeurRelaxedEvalState(&h, &state, &gatoms);
     int num_tested_states = 0;
     for (int i = 0; i < 10 && num_tested_states < 200; ++i){
 
@@ -163,7 +163,7 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
             }
             printf("\n");
             */
-            pddlLiftedHAdd(&h, &next_state, &gatoms);
+            pddlLiftedHeurRelaxedEvalState(&h, &next_state, &gatoms);
             num_tested_states++;
             if (num_tested_states >= 200)
                 break;
@@ -175,7 +175,7 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
     }
 
     pddlISetFree(&state);
-    pddlLiftedHFFAddFree(&h);
+    pddlLiftedHeurRelaxedFree(&h);
     pddlGroundAtomsFree(&gatoms);
     pddlStripsFree(&strips);
 }
