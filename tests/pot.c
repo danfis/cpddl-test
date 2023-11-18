@@ -282,9 +282,13 @@ TEST(pot_conj, hpot)
     if (strstr(TEST_TASK, "agricola") != NULL)
         cfg.max_num_conjs = 50;
 
-    int ret = pddlPotConjFind(&conjs, &conjs_best_h_value,
+    pddl_hpot_config_t pot_cfg = PDDL_HPOT_CONFIG_INIT;
+    pddl_hpot_config_opt_state_t cfginit = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
+    PDDL_HPOT_CONFIG_ADD(&pot_cfg, &cfginit);
+
+    int ret = pddlPotConjFind(&conjs, &conjs_best_h_value, NULL,
                               &hcfg.mg_strips->strips, hcfg.mutex,
-                              &hcfg.mg_strips->mg, &cfg, &C.err);
+                              &hcfg.mg_strips->mg, &cfg, &pot_cfg, &C.err);
     if (ret != 0)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
