@@ -1,0 +1,172 @@
+Domain: logistics-strips
+Problem: strips-log-x-1
+Require: ff
+Type[1]:
+    [0]: object, parent: -1
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+Obj[32]:
+    [0]: package6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: package5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: package4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: package3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: package2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: package1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: city6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: city5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: city4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: city3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: city2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: city1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: truck6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: truck5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: truck4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: truck3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: truck2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: plane2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: plane1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: city6-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: city5-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [22]: city4-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [23]: city3-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [24]: city2-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [25]: city1-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [26]: city6-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [27]: city5-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [28]: city4-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [29]: city3-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [30]: city2-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [31]: city1-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[11]:
+    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    obj: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    truck: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    location: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    airplane: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    city: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    airport: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    in-city: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+Function[0]:
+Action[6]:
+    load-truck: ?obj:0 ?truck:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?obj ?loc) (RW:at ?truck ?loc))
+        eff: (and (N:RW:at ?obj ?loc) (RW:in ?obj ?truck))
+    load-airplane: ?obj:0 ?airplane:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:location ?loc) (R:airplane ?airplane) (RW:at ?obj ?loc) (RW:at ?airplane ?loc))
+        eff: (and (N:RW:at ?obj ?loc) (RW:in ?obj ?airplane))
+    unload-truck: ?obj:0 ?truck:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (N:R:equal ?obj ?truck) (RW:at ?truck ?loc) (RW:in ?obj ?truck))
+        eff: (and (RW:at ?obj ?loc) (N:RW:in ?obj ?truck))
+    unload-airplane: ?obj:0 ?airplane:0 ?loc:0
+        pre: (and (R:obj ?obj) (R:location ?loc) (R:airplane ?airplane) (N:R:equal ?obj ?airplane) (RW:at ?airplane ?loc) (RW:in ?obj ?airplane))
+        eff: (and (RW:at ?obj ?loc) (N:RW:in ?obj ?airplane))
+    drive-truck: ?truck:0 ?loc-from:0 ?loc-to:0 ?city:0
+        pre: (and (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:city ?city) (R:in-city ?loc-from ?city) (R:in-city ?loc-to ?city) (RW:at ?truck ?loc-from))
+        eff: (and (N:RW:at ?truck ?loc-from) (RW:at ?truck ?loc-to))
+    fly-airplane: ?airplane:0 ?loc-from:0 ?loc-to:0
+        pre: (and (R:airplane ?airplane) (R:airport ?loc-from) (R:airport ?loc-to) (RW:at ?airplane ?loc-from))
+        eff: (and (N:RW:at ?airplane ?loc-from) (RW:at ?airplane ?loc-to))
+Init[96]:
+  S:(obj package6)
+  S:(obj package5)
+  S:(obj package4)
+  S:(obj package3)
+  S:(obj package2)
+  S:(obj package1)
+  S:(truck truck6)
+  S:(truck truck5)
+  S:(truck truck4)
+  S:(truck truck3)
+  S:(truck truck2)
+  S:(truck truck1)
+  S:(location city6-1)
+  S:(location city5-1)
+  S:(location city4-1)
+  S:(location city3-1)
+  S:(location city2-1)
+  S:(location city1-1)
+  S:(location city6-2)
+  S:(location city5-2)
+  S:(location city4-2)
+  S:(location city3-2)
+  S:(location city2-2)
+  S:(location city1-2)
+  S:(airplane plane2)
+  S:(airplane plane1)
+  S:(city city6)
+  S:(city city5)
+  S:(city city4)
+  S:(city city3)
+  S:(city city2)
+  S:(city city1)
+  S:(airport city6-2)
+  S:(airport city5-2)
+  S:(airport city4-2)
+  S:(airport city3-2)
+  S:(airport city2-2)
+  S:(airport city1-2)
+  S:(in-city city6-1 city6)
+  S:(in-city city5-1 city5)
+  S:(in-city city4-1 city4)
+  S:(in-city city3-1 city3)
+  S:(in-city city2-1 city2)
+  S:(in-city city1-1 city1)
+  S:(in-city city6-2 city6)
+  S:(in-city city5-2 city5)
+  S:(in-city city4-2 city4)
+  S:(in-city city3-2 city3)
+  S:(in-city city2-2 city2)
+  S:(in-city city1-2 city1)
+  S:(equal package6 package6)
+  S:(equal package5 package5)
+  S:(equal package4 package4)
+  S:(equal package3 package3)
+  S:(equal package2 package2)
+  S:(equal package1 package1)
+  S:(equal city6 city6)
+  S:(equal city5 city5)
+  S:(equal city4 city4)
+  S:(equal city3 city3)
+  S:(equal city2 city2)
+  S:(equal city1 city1)
+  S:(equal truck6 truck6)
+  S:(equal truck5 truck5)
+  S:(equal truck4 truck4)
+  S:(equal truck3 truck3)
+  S:(equal truck2 truck2)
+  S:(equal truck1 truck1)
+  S:(equal plane2 plane2)
+  S:(equal plane1 plane1)
+  S:(equal city6-1 city6-1)
+  S:(equal city5-1 city5-1)
+  S:(equal city4-1 city4-1)
+  S:(equal city3-1 city3-1)
+  S:(equal city2-1 city2-1)
+  S:(equal city1-1 city1-1)
+  S:(equal city6-2 city6-2)
+  S:(equal city5-2 city5-2)
+  S:(equal city4-2 city4-2)
+  S:(equal city3-2 city3-2)
+  S:(equal city2-2 city2-2)
+  S:(equal city1-2 city1-2)
+  (at package6 city3-1)
+  (at package5 city4-2)
+  (at package4 city1-1)
+  (at package3 city1-1)
+  (at package2 city1-2)
+  (at package1 city2-1)
+  (at truck6 city6-1)
+  (at truck5 city5-1)
+  (at truck4 city4-1)
+  (at truck3 city3-1)
+  (at truck2 city2-1)
+  (at truck1 city1-1)
+  (at plane2 city4-2)
+  (at plane1 city4-2)
+Init[0]:
+Goal: (and (RW:at package6 city1-2) (RW:at package5 city6-2) (RW:at package4 city3-2) (RW:at package3 city6-1) (RW:at package2 city6-2) (RW:at package1 city2-1))
+Metric: 0
