@@ -350,49 +350,100 @@ TEST(strips_conj, strips_pruned)
 
     pddl_strips_conj_config_t cfg;
     pddlStripsConjConfigInit(&cfg);
+
+    int f0 = -1, f1 = -1, f2 = -1, f3 = -1;
+    for (f0 = 0; f0 < C.strips.fact.fact_size && f1 < 0; ++f0){
+        PDDL_ISET(notmutex);
+        pddlMutexPairsGetNotMutexWith(&C.mutex, f0, &notmutex);
+        if (pddlISetSize(&notmutex) >= 2){
+            f1 = pddlISetGet(&notmutex, 0);
+            f2 = pddlISetGet(&notmutex, pddlISetSize(&notmutex) - 1);
+            pddlISetFree(&notmutex);
+            break;
+        }
+        pddlISetFree(&notmutex);
+    }
+
+    for (f3 = 0; f3 < C.strips.fact.fact_size; ++f3){
+        if (f3 == f0 || f3 == f1 || f3 == f2)
+            continue;
+        if (!pddlMutexPairsIsMutex(&C.mutex, f1, f3))
+            break;
+    }
+    if (f3 >= C.strips.fact.fact_size)
+        f3 = -1;
+
+    if (f1 < 0)
+        return;
+
     PDDL_ISET(set);
-    pddlISetAdd(&set, 0);
-    pddlISetAdd(&set, 1);
+    pddlISetAdd(&set, f0);
+    pddlISetAdd(&set, f1);
     pddlStripsConjConfigAddConj(&cfg, &set);
     if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
-        fprintf(stderr, "mutex (%s) (%s)\n",
-                C.strips.fact.fact[0]->name,
-                C.strips.fact.fact[1]->name);
+        fprintf(stderr, "mutex f0, f1: (%s) (%s)\n",
+                C.strips.fact.fact[f0]->name,
+                C.strips.fact.fact[f1]->name);
 
     pddlISetEmpty(&set);
-    pddlISetAdd(&set, 0);
-    pddlISetAdd(&set, 2);
+    pddlISetAdd(&set, f0);
+    pddlISetAdd(&set, f2);
     pddlStripsConjConfigAddConj(&cfg, &set);
     if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
-        fprintf(stderr, "mutex (%s) (%s)\n",
-                C.strips.fact.fact[0]->name,
-                C.strips.fact.fact[2]->name);
+        fprintf(stderr, "mutex f0, f2: (%s) (%s)\n",
+                C.strips.fact.fact[f0]->name,
+                C.strips.fact.fact[f2]->name);
 
     pddlISetEmpty(&set);
-    pddlISetAdd(&set, 0);
-    pddlISetAdd(&set, 1);
-    pddlISetAdd(&set, 2);
+    pddlISetAdd(&set, f0);
+    pddlISetAdd(&set, f1);
+    pddlISetAdd(&set, f2);
     pddlStripsConjConfigAddConj(&cfg, &set);
     if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
-        fprintf(stderr, "mutex (%s) (%s) (%s)\n",
-                C.strips.fact.fact[0]->name,
-                C.strips.fact.fact[1]->name,
-                C.strips.fact.fact[2]->name);
+        fprintf(stderr, "mutex f0, f1, f2: (%s) (%s) (%s)\n",
+                C.strips.fact.fact[f0]->name,
+                C.strips.fact.fact[f1]->name,
+                C.strips.fact.fact[f2]->name);
 
-    pddlISetEmpty(&set);
-    pddlISetAdd(&set, 1);
-    pddlISetAdd(&set, 3);
-    pddlStripsConjConfigAddConj(&cfg, &set);
-    if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
-        fprintf(stderr, "mutex (%s) (%s)\n",
-                C.strips.fact.fact[1]->name,
-                C.strips.fact.fact[3]->name);
+    if (f3 >= 0 && f3 < C.strips.fact.fact_size){
+        pddlISetEmpty(&set);
+        pddlISetAdd(&set, f1);
+        pddlISetAdd(&set, f3);
+        pddlStripsConjConfigAddConj(&cfg, &set);
+        if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
+            fprintf(stderr, "mutex f1, f3: (%s) (%s)\n",
+                    C.strips.fact.fact[f1]->name,
+                    C.strips.fact.fact[f3]->name);
+
+        pddlISetEmpty(&set);
+        pddlISetAdd(&set, f0);
+        pddlISetAdd(&set, f1);
+        pddlISetAdd(&set, f2);
+        pddlISetAdd(&set, f3);
+        pddlStripsConjConfigAddConj(&cfg, &set);
+        if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
+            fprintf(stderr, "mutex f0-f3: (%s) (%s) (%s) (%s)\n",
+                    C.strips.fact.fact[f0]->name,
+                    C.strips.fact.fact[f1]->name,
+                    C.strips.fact.fact[f2]->name,
+                    C.strips.fact.fact[f3]->name);
+    }
     pddlISetFree(&set);
 
     cfg.mutex = &C.mutex;
     pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
     stripsc_set = 1;
-    //pddlStripsPrintDebug(&stripsc.strips, stdout);
+
+    for (int fact_id = 0; fact_id < stripsc.strips.fact.fact_size; ++fact_id){
+        if (fact_id < stripsc.num_singletons){
+            //assert(!stripsc.strips.fact.fact[fact_id]->is_conjunction);
+        }else{
+            //assert(stripsc.strips.fact.fact[fact_id]->is_conjunction);
+            assert(pddlISetSize(stripsc.fact_to_conj + fact_id) >= 2);
+        }
+    }
+
+    pddlStripsPrintDebug(&stripsc.strips, stdout);
     //pddlStripsPrintDebug(&C.strips, stdout);
     pddlStripsConjConfigFree(&cfg);
 }
@@ -516,15 +567,15 @@ TEST_COND(strips_conj_hflow, strips_conj, LP)
     if (!stripsc_set)
         return;
 
-    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddl_fdr_config_t cfg = PDDL_FDR_CONFIG_INIT;
+    cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST;
+
     pddl_fdr_t fdr, fdrc;
-    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex, &cfg, &C.err);
 
     pddl_mutex_pairs_t mutexc;
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
-    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &cfg, &C.err);
     pddlMutexPairsFree(&mutexc);
 
     pddl_hflow_t hflow, hflowc;
@@ -550,15 +601,15 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     if (!stripsc_set)
         return;
 
-    unsigned var_flag = PDDL_FDR_VARS_LARGEST_FIRST;
+    pddl_fdr_config_t fdr_cfg = PDDL_FDR_CONFIG_INIT;
+    fdr_cfg.var.alg = PDDL_FDR_VARS_ALG_LARGEST_FIRST;
+
     pddl_fdr_t fdr, fdrc;
-    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdr, &C.strips, &C.mg, &C.mutex, &fdr_cfg, &C.err);
 
     pddl_mutex_pairs_t mutexc;
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
-    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc,
-                          var_flag, 0u, &C.err);
+    pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &fdr_cfg, &C.err);
 
     pddl_hpot_config_t cfg;
     pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;

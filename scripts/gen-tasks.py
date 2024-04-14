@@ -8,7 +8,7 @@ LARGE_TESTS = ['h3', 'h3mgroup', 'symbolic',
                'endomorphism_tss', 'endomorphism_tss_minizinc',
                'endomorphism_tss_nocost',
                'lifted_search', 'lifted_search_unit_cost',
-               'search']
+               'search', 'pot_conj']
 VERY_LARGE_TESTS = LARGE_TESTS \
     + ['famgroup_maximal', 'fdr_app_op_search', 'fdr_app_op_search_essential',
        'homomorphism_reduce', 'homomorphism_endomorph',

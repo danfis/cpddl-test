@@ -1,0 +1,96 @@
+Fact[12]:
+  (counter-at-zero)
+  (have-cheese)
+  (have-chips)
+  (have-crackers)
+  (have-dip)
+  (have-pop)
+  (movie-rewound)
+  (counter-at-zero+have-cheese)
+  (counter-at-zero+movie-rewound)
+  (counter-at-zero+have-cheese+movie-rewound)
+  (have-cheese+have-chips)
+  (counter-at-zero+have-cheese+have-chips+movie-rewound)
+Op[20]:
+  (get-cheese z1), cost: 1
+    pre:
+    add: (have-cheese)
+    del:
+  (get-cheese z1), cost: 1
+    pre: (counter-at-zero) (have-chips) (movie-rewound) (counter-at-zero+movie-rewound)
+    add: (have-cheese) (counter-at-zero+have-cheese) (counter-at-zero+have-cheese+movie-rewound) (have-cheese+have-chips) (counter-at-zero+have-cheese+have-chips+movie-rewound)
+    del:
+  (get-cheese z1), cost: 1
+    pre: (counter-at-zero)
+    add: (have-cheese) (counter-at-zero+have-cheese)
+    del:
+  (get-cheese z1), cost: 1
+    pre: (have-chips)
+    add: (have-cheese) (have-cheese+have-chips)
+    del:
+  (get-cheese z1), cost: 1
+    pre: (counter-at-zero) (movie-rewound) (counter-at-zero+movie-rewound)
+    add: (have-cheese) (counter-at-zero+have-cheese) (counter-at-zero+have-cheese+movie-rewound)
+    del:
+  (get-cheese z1), cost: 1
+    pre: (counter-at-zero) (have-chips)
+    add: (have-cheese) (counter-at-zero+have-cheese) (have-cheese+have-chips)
+    del:
+  (get-cheese z1), cost: 1
+    pre: (counter-at-zero) (have-chips) (movie-rewound) (counter-at-zero+movie-rewound)
+    add: (have-cheese) (counter-at-zero+have-cheese) (counter-at-zero+have-cheese+movie-rewound) (have-cheese+have-chips)
+    del:
+  (get-chips c1), cost: 1
+    pre:
+    add: (have-chips)
+    del:
+  (get-chips c1), cost: 1
+    pre: (counter-at-zero) (have-cheese) (movie-rewound) (counter-at-zero+have-cheese) (counter-at-zero+movie-rewound) (counter-at-zero+have-cheese+movie-rewound)
+    add: (have-chips) (have-cheese+have-chips) (counter-at-zero+have-cheese+have-chips+movie-rewound)
+    del:
+  (get-chips c1), cost: 1
+    pre: (have-cheese)
+    add: (have-chips) (have-cheese+have-chips)
+    del:
+  (get-crackers k1), cost: 1
+    pre:
+    add: (have-crackers)
+    del:
+  (get-dip d1), cost: 1
+    pre:
+    add: (have-dip)
+    del:
+  (get-pop p1), cost: 1
+    pre:
+    add: (have-pop)
+    del:
+  (reset-counter), cost: 1
+    pre:
+    add: (counter-at-zero)
+    del:
+  (reset-counter), cost: 1
+    pre: (have-cheese) (have-chips) (movie-rewound) (have-cheese+have-chips)
+    add: (counter-at-zero) (counter-at-zero+have-cheese) (counter-at-zero+movie-rewound) (counter-at-zero+have-cheese+movie-rewound) (counter-at-zero+have-cheese+have-chips+movie-rewound)
+    del:
+  (reset-counter), cost: 1
+    pre: (have-cheese)
+    add: (counter-at-zero) (counter-at-zero+have-cheese)
+    del:
+  (reset-counter), cost: 1
+    pre: (movie-rewound)
+    add: (counter-at-zero) (counter-at-zero+movie-rewound)
+    del:
+  (reset-counter), cost: 1
+    pre: (have-cheese) (movie-rewound)
+    add: (counter-at-zero) (counter-at-zero+have-cheese) (counter-at-zero+movie-rewound)
+    del:
+  (reset-counter), cost: 1
+    pre: (have-cheese) (movie-rewound)
+    add: (counter-at-zero) (counter-at-zero+have-cheese) (counter-at-zero+movie-rewound) (counter-at-zero+have-cheese+movie-rewound)
+    del:
+  (rewind-movie), cost: 1
+    pre:
+    add: (movie-rewound)
+    del: (counter-at-zero) (counter-at-zero+have-cheese) (counter-at-zero+movie-rewound) (counter-at-zero+have-cheese+movie-rewound) (counter-at-zero+have-cheese+have-chips+movie-rewound)
+Init State:
+Goal: (counter-at-zero) (have-cheese) (have-chips) (have-crackers) (have-dip) (have-pop) (movie-rewound) (counter-at-zero+have-cheese) (counter-at-zero+movie-rewound) (counter-at-zero+have-cheese+movie-rewound) (have-cheese+have-chips) (counter-at-zero+have-cheese+have-chips+movie-rewound)
