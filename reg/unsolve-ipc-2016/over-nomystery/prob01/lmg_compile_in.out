@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 3, lifted mgroups: 3
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p0))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p1))
@@ -8,7 +11,35 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p6))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package t0, at V0:package C2:location}:=1: (and (not (= ?t t0)) (= ?p p7))
 Compile-in LMG: Precondition of action 'load' extended with (or (= ?t t0) (and (not (= ?p p7)) (not (= ?p p6)) (not (= ?p p5)) (not (= ?p p4)) (not (= ?p p3)) (not (= ?p p2)) (not (= ?p p0)) (not (= ?p p1))))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 5, objects: 60, predicates: 7, functions: 1, actions: 3, action-pre-size: [min: 11, max: 5, avg: 6.00, med: 2.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action unload
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drive
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 60, vars: 6, predicates: 12, rules: 1174)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 60, vars: 6, predicates: 12, rules: 1174)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 60, vars: 6, predicates: 12, rules: 1174)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 1174
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 1174, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 60, predicates: 7, functions: 1, actions: 4, action-pre-size: [min: 3, max: 10, avg: 5.00, med: 3.50]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 4
+Compile-in LMG: END
 Domain: transport-strips
 Problem: transport-l8-t1-p8---int100n150-m25---int100c40---s131026---e0
 Require: 200ff
@@ -97,18 +128,66 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[4]:
     load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at t0 ?l) (RW:at ?p ?l) (R:= ?t t0))
+        pre: (and (R:= ?t t0) (RW:at t0 ?l) (RW:at ?p ?l))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p t0) (increase (total-cost) 1))
     unload: ?p:1 ?t:2 ?l:3
         pre: (and (RW:at ?t ?l) (RW:in ?p ?t))
         eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t) (increase (total-cost) 1))
     drive: ?t:2 ?l1:3 ?l2:3 ?fuelpost:4 ?fueldelta:4 ?fuelpre:4
-        pre: (and (R:connected ?l1 ?l2) (R:fuelcost ?fueldelta ?l1 ?l2) (RW:fuel ?t ?fuelpre) (R:sum ?fuelpost ?fueldelta ?fuelpre) (RW:at ?t ?l1))
-        eff: (and (N:RW:at ?t ?l1) (RW:at ?t ?l2) (N:RW:fuel ?t ?fuelpre) (RW:fuel ?t ?fuelpost) (increase (total-cost) 1))
+        pre: (and (R:connected ?l1 ?l2) (R:fuelcost ?fueldelta ?l1 ?l2) (R:sum ?fuelpost ?fueldelta ?fuelpre) (RW:at ?t ?l1) (RW:fuel ?t ?fuelpre))
+        eff: (and (N:RW:at ?t ?l1) (RW:at ?t ?l2) (RW:fuel ?t ?fuelpost) (N:RW:fuel ?t ?fuelpre) (increase (total-cost) 1))
     load: ?p:1 ?t:2 ?l:3
-        pre: (and (RW:at ?t ?l) (RW:at ?p ?l) (N:R:= ?p p7) (N:R:= ?p p6) (N:R:= ?p p5) (N:R:= ?p p4) (N:R:= ?p p3) (N:R:= ?p p2) (N:R:= ?p p0) (N:R:= ?p p1))
+        pre: (and (N:R:= ?p p0) (N:R:= ?p p1) (N:R:= ?p p2) (N:R:= ?p p3) (N:R:= ?p p4) (N:R:= ?p p5) (N:R:= ?p p6) (N:R:= ?p p7) (RW:at ?p ?l) (RW:at ?t ?l))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
 Init[1004]:
+  S:(connected l0 l1)
+  S:(connected l0 l2)
+  S:(connected l0 l7)
+  S:(connected l1 l0)
+  S:(connected l1 l3)
+  S:(connected l1 l5)
+  S:(connected l1 l6)
+  S:(connected l1 l7)
+  S:(connected l2 l0)
+  S:(connected l2 l5)
+  S:(connected l2 l6)
+  S:(connected l3 l1)
+  S:(connected l3 l5)
+  S:(connected l4 l5)
+  S:(connected l5 l1)
+  S:(connected l5 l2)
+  S:(connected l5 l3)
+  S:(connected l5 l4)
+  S:(connected l5 l6)
+  S:(connected l6 l1)
+  S:(connected l6 l2)
+  S:(connected l6 l5)
+  S:(connected l7 l0)
+  S:(connected l7 l1)
+  S:(fuelcost level3 l0 l2)
+  S:(fuelcost level3 l2 l0)
+  S:(fuelcost level3 l5 l6)
+  S:(fuelcost level3 l6 l5)
+  S:(fuelcost level6 l2 l6)
+  S:(fuelcost level6 l6 l2)
+  S:(fuelcost level8 l2 l5)
+  S:(fuelcost level8 l5 l2)
+  S:(fuelcost level10 l4 l5)
+  S:(fuelcost level10 l5 l4)
+  S:(fuelcost level12 l1 l6)
+  S:(fuelcost level12 l6 l1)
+  S:(fuelcost level13 l0 l7)
+  S:(fuelcost level13 l1 l5)
+  S:(fuelcost level13 l5 l1)
+  S:(fuelcost level13 l7 l0)
+  S:(fuelcost level17 l1 l7)
+  S:(fuelcost level17 l7 l1)
+  S:(fuelcost level19 l0 l1)
+  S:(fuelcost level19 l1 l0)
+  S:(fuelcost level21 l3 l5)
+  S:(fuelcost level21 l5 l3)
+  S:(fuelcost level25 l1 l3)
+  S:(fuelcost level25 l3 l1)
   S:(sum level0 level0 level0)
   S:(sum level0 level1 level1)
   S:(sum level0 level2 level2)
@@ -1055,56 +1134,7 @@ Init[1004]:
   S:(sum level41 level0 level41)
   S:(sum level41 level1 level42)
   S:(sum level42 level0 level42)
-  S:(connected l0 l1)
-  S:(fuelcost level19 l0 l1)
-  S:(connected l0 l2)
-  S:(fuelcost level3 l0 l2)
-  S:(connected l0 l7)
-  S:(fuelcost level13 l0 l7)
-  S:(connected l1 l0)
-  S:(fuelcost level19 l1 l0)
-  S:(connected l1 l3)
-  S:(fuelcost level25 l1 l3)
-  S:(connected l1 l5)
-  S:(fuelcost level13 l1 l5)
-  S:(connected l1 l6)
-  S:(fuelcost level12 l1 l6)
-  S:(connected l1 l7)
-  S:(fuelcost level17 l1 l7)
-  S:(connected l2 l0)
-  S:(fuelcost level3 l2 l0)
-  S:(connected l2 l5)
-  S:(fuelcost level8 l2 l5)
-  S:(connected l2 l6)
-  S:(fuelcost level6 l2 l6)
-  S:(connected l3 l1)
-  S:(fuelcost level25 l3 l1)
-  S:(connected l3 l5)
-  S:(fuelcost level21 l3 l5)
-  S:(connected l4 l5)
-  S:(fuelcost level10 l4 l5)
-  S:(connected l5 l1)
-  S:(fuelcost level13 l5 l1)
-  S:(connected l5 l2)
-  S:(fuelcost level8 l5 l2)
-  S:(connected l5 l3)
-  S:(fuelcost level21 l5 l3)
-  S:(connected l5 l4)
-  S:(fuelcost level10 l5 l4)
-  S:(connected l5 l6)
-  S:(fuelcost level3 l5 l6)
-  S:(connected l6 l1)
-  S:(fuelcost level12 l6 l1)
-  S:(connected l6 l2)
-  S:(fuelcost level6 l6 l2)
-  S:(connected l6 l5)
-  S:(fuelcost level3 l6 l5)
-  S:(connected l7 l0)
-  S:(fuelcost level13 l7 l0)
-  S:(connected l7 l1)
-  S:(fuelcost level17 l7 l1)
   (at t0 l2)
-  (fuel t0 level42)
   (at p0 l6)
   (at p1 l5)
   (at p2 l3)
@@ -1113,6 +1143,7 @@ Init[1004]:
   (at p5 l6)
   (at p6 l5)
   (at p7 l0)
+  (fuel t0 level42)
 Init[0]:
 Goal: (and (RW:at p0 l7) (RW:at p1 l0) (RW:at p2 l1) (RW:at p3 l0) (RW:at p4 l0) (RW:at p5 l4) (RW:at p6 l2) (RW:at p7 l4))
 Metric: 0

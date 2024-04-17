@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 6, lifted mgroups: 10
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package1))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package3))
@@ -15,7 +18,42 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, delivered V0:package C3:location C4:time, at V0:package C5:location, in V0:package truck1 C6:truckarea, delivered V0:package C7:location C8:time}:=1: (and (not (= ?t truck1)) (= ?p package3))
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package2))
 Compile-in LMG: Precondition of action 'load' extended with (or (= ?t truck1) (and (not (= ?p package2)) (not (= ?p package1)) (not (= ?p package3))))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 7, objects: 16, predicates: 11, functions: 0, actions: 6, action-pre-size: [min: 8, max: 4, avg: 7.33, med: 10.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action unload
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drive
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deliver
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action unload
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deliver
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deliver
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deliver
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 16, vars: 5, predicates: 18, rules: 86)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 16, vars: 5, predicates: 18, rules: 86)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 16, vars: 5, predicates: 18, rules: 86)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 86
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 86, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 7, objects: 16, predicates: 11, functions: 0, actions: 11, action-pre-size: [min: 8, max: 5, avg: 5.64, med: 4.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 11
+Compile-in LMG: END
 Domain: trucks
 Problem: truck-1
 Require: ff
@@ -67,53 +105,51 @@ Predicate[11]:
 Function[0]:
 Action[11]:
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a1) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a1 truck1) (R:= ?t truck1))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 truck1) (RW:in ?p truck1 a1))
+        pre: (and (R:= ?t truck1) (R:= ?a1 a1) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a1 truck1))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p truck1 a1) (N:RW:free a1 truck1))
     unload: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:in ?p ?t a1))
-        eff: (and (N:RW:in ?p ?t a1) (RW:free a1 ?t) (RW:at ?p ?l))
+        eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t a1) (RW:free a1 ?t))
     drive: ?t:5 ?from:3 ?to:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?t ?from) (R:connected ?from ?to) (RW:time-now ?t1) (R:next ?t1 ?t2))
-        eff: (and (N:RW:at ?t ?from) (N:RW:time-now ?t1) (RW:time-now ?t2) (RW:at ?t ?to))
+        pre: (and (R:connected ?from ?to) (R:next ?t1 ?t2) (RW:at ?t ?from) (RW:time-now ?t1))
+        eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to) (N:RW:time-now ?t1) (RW:time-now ?t2))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l3) (RW:time-now ?t1) (R:le ?t1 t3) (N:R:= ?p package3) (N:R:= ?p package2) (R:= ?t2 t3) (R:= ?l l3))
+        pre: (and (N:R:= ?p package2) (N:R:= ?p package3) (R:= ?l l3) (R:= ?t2 t3) (R:le ?t1 t3) (RW:at ?p l3) (RW:time-now ?t1))
         eff: (and (N:RW:at ?p l3) (W:delivered ?p l3 t3) (W:at-destination ?p l3))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a2) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a2 truck1) (RW:free a1 truck1) (R:= ?t truck1))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 truck1) (RW:in ?p truck1 a2))
+        pre: (and (R:= ?t truck1) (R:= ?a1 a2) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a1 truck1) (RW:free a2 truck1))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p truck1 a2) (N:RW:free a2 truck1))
     unload: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:in ?p ?t a2) (RW:free a1 ?t))
-        eff: (and (N:RW:in ?p ?t a2) (RW:free a2 ?t) (RW:at ?p ?l))
+        eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t a2) (RW:free a2 ?t))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a1) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a1 ?t) (N:R:= ?p package2) (N:R:= ?p package1) (N:R:= ?p package3))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a1 ?t) (RW:in ?p ?t a1))
+        pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (R:= ?a1 a1) (RW:at ?p ?l) (RW:at ?t ?l) (RW:free a1 ?t))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t a1) (N:RW:free a1 ?t))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l1) (RW:time-now ?t1) (R:le ?t1 t6) (N:R:= ?p package1) (R:= ?l l1) (R:= ?t2 t6))
+        pre: (and (N:R:= ?p package1) (R:= ?l l1) (R:= ?t2 t6) (R:le ?t1 t6) (RW:at ?p l1) (RW:time-now ?t1))
         eff: (and (N:RW:at ?p l1) (W:delivered ?p l1 t6) (W:at-destination ?p l1))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p l1) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package3) (N:R:= ?p package1) (R:= ?l l1))
+        pre: (and (N:R:= ?p package1) (N:R:= ?p package3) (R:= ?l l1) (R:le ?t1 ?t2) (RW:at ?p l1) (RW:time-now ?t1))
         eff: (and (N:RW:at ?p l1) (W:delivered ?p l1 ?t2) (W:at-destination ?p l1))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
-        pre: (and (RW:at ?p ?l) (RW:time-now ?t1) (R:le ?t1 ?t2) (N:R:= ?p package3) (N:R:= ?p package1) (N:R:= ?p package2))
+        pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (R:le ?t1 ?t2) (RW:at ?p ?l) (RW:time-now ?t1))
         eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
-        pre: (and (R:= ?a1 a2) (RW:at ?t ?l) (RW:at ?p ?l) (RW:free a2 ?t) (RW:free a1 ?t) (N:R:= ?p package2) (N:R:= ?p package1) (N:R:= ?p package3))
-        eff: (and (N:RW:at ?p ?l) (N:RW:free a2 ?t) (RW:in ?p ?t a2))
+        pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (R:= ?a1 a2) (RW:at ?p ?l) (RW:at ?t ?l) (RW:free a1 ?t) (RW:free a2 ?t))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t a2) (N:RW:free a2 ?t))
 Init[41]:
-  (at truck1 l3)
-  (free a1 truck1)
-  (free a2 truck1)
-  S:(closer a1 a2)
-  (at package1 l2)
-  (at package2 l2)
-  (at package3 l2)
   S:(connected l1 l2)
   S:(connected l1 l3)
   S:(connected l2 l1)
   S:(connected l2 l3)
   S:(connected l3 l1)
   S:(connected l3 l2)
-  (time-now t0)
+  S:(next t0 t1)
+  S:(next t1 t2)
+  S:(next t2 t3)
+  S:(next t3 t4)
+  S:(next t4 t5)
+  S:(next t5 t6)
   S:(le t1 t1)
   S:(le t1 t2)
   S:(le t1 t3)
@@ -135,12 +171,14 @@ Init[41]:
   S:(le t5 t5)
   S:(le t5 t6)
   S:(le t6 t6)
-  S:(next t0 t1)
-  S:(next t1 t2)
-  S:(next t2 t3)
-  S:(next t3 t4)
-  S:(next t4 t5)
-  S:(next t5 t6)
+  S:(closer a1 a2)
+  (at truck1 l3)
+  (at package1 l2)
+  (at package2 l2)
+  (at package3 l2)
+  (free a1 truck1)
+  (free a2 truck1)
+  (time-now t0)
 Init[0]:
-Goal: (and (W:delivered package1 l3 t3) (W:at-destination package2 l1) (W:delivered package3 l1 t6))
+Goal: (and (W:delivered package1 l3 t3) (W:delivered package3 l1 t6) (W:at-destination package2 l1))
 Metric: 0

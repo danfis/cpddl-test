@@ -1,8 +1,38 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 3, lifted mgroups: 2
 Compile-in LMG: Found dead-end condition for action 'drive' and mgroup {at V0:document C1:location, in-train V0:document, at V0:document C2:location}: (= ?g document5)
 Compile-in LMG: Found dead-end condition for action 'drive' and mgroup {at V0:document C1:location, in-train V0:document, at V0:document C2:location}: (= ?g document6)
 Compile-in LMG: Precondition of action 'drive' extended with (and (not (= ?g document5)) (not (= ?g document6)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 3, objects: 23, predicates: 5, functions: 0, actions: 3, action-pre-size: [min: 5, max: 2, avg: 3.00, med: 2.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drive
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pickup-documents
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deposit-documents
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 23, vars: 3, predicates: 8, rules: 106)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 23, vars: 3, predicates: 8, rules: 106)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 23, vars: 3, predicates: 8, rules: 106)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 106
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 106, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 3, objects: 23, predicates: 5, functions: 0, actions: 3, action-pre-size: [min: 5, max: 2, avg: 3.00, med: 2.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 3
+Compile-in LMG: END
 Domain: document
 Problem: solv-problem-1
 Require: ff
@@ -47,18 +77,52 @@ Predicate[5]:
 Function[0]:
 Action[3]:
     drive: ?l1:2 ?l2:2 ?g:1
-        pre: (and (RW:train-at ?l1) (R:track ?l1 ?l2) (RW:in-train ?g) (N:R:= ?g document5) (N:R:= ?g document6))
-        eff: (and (N:RW:train-at ?l1) (RW:train-at ?l2) (N:RW:in-train ?g))
+        pre: (and (N:R:= ?g document5) (N:R:= ?g document6) (R:track ?l1 ?l2) (RW:in-train ?g) (RW:train-at ?l1))
+        eff: (and (N:RW:in-train ?g) (N:RW:train-at ?l1) (RW:train-at ?l2))
     pickup-documents: ?l:2 ?d:1
-        pre: (and (RW:train-at ?l) (RW:at ?d ?l))
+        pre: (and (RW:at ?d ?l) (RW:train-at ?l))
         eff: (and (N:RW:at ?d ?l) (RW:in-train ?d))
     deposit-documents: ?l:2 ?d:1
-        pre: (and (RW:train-at ?l) (RW:in-train ?d))
-        eff: (and (N:RW:in-train ?d) (RW:at ?d ?l))
+        pre: (and (RW:in-train ?d) (RW:train-at ?l))
+        eff: (and (RW:at ?d ?l) (N:RW:in-train ?d))
 Init[48]:
-  (train-at office1)
-  (in-train fuel1)
-  (in-train fuel2)
+  S:(track office1 office1)
+  S:(track office1 office2)
+  S:(track office2 office)
+  S:(track office2 office3)
+  S:(track office3 office1)
+  S:(track office3 office2)
+  S:(track office3 office4)
+  S:(track office4 office3)
+  S:(track office4 office5)
+  S:(track office4 office8)
+  S:(track office5 office2)
+  S:(track office5 office5)
+  S:(track office5 office6)
+  S:(track office5 office7)
+  S:(track office5 office8)
+  S:(track office6 office3)
+  S:(track office6 office4)
+  S:(track office6 office5)
+  S:(track office6 office6)
+  S:(track office6 office7)
+  S:(track office6 office8)
+  S:(track office7 office4)
+  S:(track office7 office8)
+  S:(track office8 office5)
+  S:(track office8 office8)
+  S:(track office8 office9)
+  S:(track office9 office6)
+  S:(track office9 office10)
+  S:(track office9 office11)
+  S:(track office10 office7)
+  S:(track office10 office8)
+  S:(track office10 office11)
+  S:(track office10 depot)
+  S:(track office11 office7)
+  S:(track office11 office8)
+  S:(track office11 depot)
+  S:(track depot office8)
   (at document1 office3)
   (at document2 office3)
   (at document3 office4)
@@ -67,43 +131,9 @@ Init[48]:
   (at document6 office4)
   (at document7 office8)
   (at document8 office8)
-  S:(track office1 office1)
-  S:(track office1 office2)
-  S:(track office2 office)
-  S:(track office2 office3)
-  S:(track office3 office2)
-  S:(track office3 office1)
-  S:(track office3 office4)
-  S:(track office4 office8)
-  S:(track office4 office3)
-  S:(track office4 office5)
-  S:(track office5 office8)
-  S:(track office5 office7)
-  S:(track office5 office5)
-  S:(track office5 office2)
-  S:(track office5 office6)
-  S:(track office6 office4)
-  S:(track office6 office6)
-  S:(track office6 office8)
-  S:(track office6 office3)
-  S:(track office6 office5)
-  S:(track office6 office7)
-  S:(track office7 office4)
-  S:(track office7 office8)
-  S:(track office8 office5)
-  S:(track office8 office8)
-  S:(track office8 office9)
-  S:(track office9 office11)
-  S:(track office9 office6)
-  S:(track office9 office10)
-  S:(track office10 office8)
-  S:(track office10 office7)
-  S:(track office10 depot)
-  S:(track office10 office11)
-  S:(track office11 office8)
-  S:(track office11 office7)
-  S:(track office11 depot)
-  S:(track depot office8)
+  (in-train fuel1)
+  (in-train fuel2)
+  (train-at office1)
 Init[0]:
 Goal: (and (RW:at document5 depot) (RW:at document6 depot))
 Metric: 0

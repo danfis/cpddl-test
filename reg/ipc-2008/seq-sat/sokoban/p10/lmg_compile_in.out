@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 3, lifted mgroups: 4
 Compile-in LMG: Found mutex condition for action 'move' and mgroup {clear V0:location, at C1:thing V0:location, at C2:thing V0:location}:=1: (= ?from ?to)
 Compile-in LMG: Precondition of action 'move' extended with (not (= ?from ?to))
@@ -9,7 +12,34 @@ Compile-in LMG: Found mutex condition for action 'push-to-goal' and mgroup {clea
 Compile-in LMG: Found mutex condition for action 'push-to-goal' and mgroup {clear V0:location, at C1:thing V0:location, at C2:thing V0:location}:=1: (= ?ppos ?to)
 Compile-in LMG: Found mutex condition for action 'push-to-goal' and mgroup {clear V0:location, at C1:thing V0:location, at C2:thing V0:location}:=1: (= ?from ?to)
 Compile-in LMG: Precondition of action 'push-to-goal' extended with (and (not (= ?ppos ?from)) (not (= ?ppos ?to)) (not (= ?from ?to)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 6, objects: 499, predicates: 7, functions: 1, actions: 3, action-pre-size: [min: 4, max: 9, avg: 7.33, med: 9.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action push-to-nongoal
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action push-to-goal
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 499, vars: 6, predicates: 13, rules: 2452)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 499, vars: 6, predicates: 13, rules: 2452)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 499, vars: 6, predicates: 13, rules: 2452)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 2452
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 2452, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 6, objects: 499, predicates: 7, functions: 1, actions: 3, action-pre-size: [min: 4, max: 9, avg: 7.33, med: 9.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 3
+Compile-in LMG: END
 Domain: sokoban-sequential
 Problem: p154-microban-sequential
 Require: 200ff
@@ -539,14 +569,14 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[3]:
     move: ?p:4 ?from:2 ?to:2 ?dir:3
-        pre: (and (N:R:= ?from ?to) (RW:at ?p ?from) (RW:clear ?to) (R:move-dir ?from ?to ?dir))
-        eff: (and (N:RW:at ?p ?from) (N:RW:clear ?to) (RW:at ?p ?to) (RW:clear ?from))
+        pre: (and (N:R:= ?from ?to) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?from))
+        eff: (and (RW:clear ?from) (N:RW:clear ?to) (N:RW:at ?p ?from) (RW:at ?p ?to))
     push-to-nongoal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?ppos) (RW:at ?s ?from) (RW:clear ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (R:is-nongoal ?to) (N:R:= ?ppos ?from) (N:R:= ?ppos ?to) (N:R:= ?from ?to))
-        eff: (and (N:RW:at ?p ?ppos) (N:RW:at ?s ?from) (N:RW:clear ?to) (RW:at ?p ?from) (RW:at ?s ?to) (RW:clear ?ppos) (N:W:at-goal ?s) (increase (total-cost) 1))
+        pre: (and (N:R:= ?ppos ?from) (N:R:= ?ppos ?to) (N:R:= ?from ?to) (R:is-nongoal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (N:W:at-goal ?s) (increase (total-cost) 1))
     push-to-goal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
-        pre: (and (RW:at ?p ?ppos) (RW:at ?s ?from) (RW:clear ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (R:is-goal ?to) (N:R:= ?ppos ?from) (N:R:= ?ppos ?to) (N:R:= ?from ?to))
-        eff: (and (N:RW:at ?p ?ppos) (N:RW:at ?s ?from) (N:RW:clear ?to) (RW:at ?p ?from) (RW:at ?s ?to) (RW:clear ?ppos) (W:at-goal ?s) (increase (total-cost) 1))
+        pre: (and (N:R:= ?ppos ?from) (N:R:= ?ppos ?to) (N:R:= ?from ?to) (R:is-goal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (W:at-goal ?s) (increase (total-cost) 1))
 Init[1184]:
   S:(is-goal pos-02-16)
   S:(is-nongoal pos-01-01)
@@ -1501,8 +1531,6 @@ Init[1184]:
   S:(move-dir pos-28-15 pos-28-16 dir-down)
   S:(move-dir pos-28-16 pos-27-16 dir-left)
   S:(move-dir pos-28-16 pos-28-15 dir-up)
-  (at player-01 pos-04-16)
-  (at stone-01 pos-03-15)
   (clear pos-01-01)
   (clear pos-01-02)
   (clear pos-01-03)
@@ -1732,6 +1760,8 @@ Init[1184]:
   (clear pos-28-14)
   (clear pos-28-15)
   (clear pos-28-16)
+  (at player-01 pos-04-16)
+  (at stone-01 pos-03-15)
 Init[1]:
   (= (total-cost) 0)
 Goal: (W:at-goal stone-01)

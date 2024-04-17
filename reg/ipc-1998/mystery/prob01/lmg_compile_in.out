@@ -1,7 +1,37 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 3, lifted mgroups: 3
 Compile-in LMG: Found mutex condition for action 'succumb' and mgroup {craves V0:object C1:object, fears V0:object C2:object, craves V0:object C3:object, fears V0:object C4:object}:=1: (= ?c ?v)
 Compile-in LMG: Precondition of action 'succumb' extended with (not (= ?c ?v))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 21, predicates: 13, functions: 0, actions: 3, action-pre-size: [min: 9, max: 8, avg: 8.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action overcome
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action feast
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action succumb
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 21, vars: 5, predicates: 14, rules: 85)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 21, vars: 5, predicates: 14, rules: 85)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 21, vars: 5, predicates: 14, rules: 85)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 85
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 85, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 21, predicates: 13, functions: 0, actions: 3, action-pre-size: [min: 9, max: 8, avg: 8.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 3
+Compile-in LMG: END
 Domain: mystery-strips
 Problem: strips-mysty-x-1
 Require: ff
@@ -48,25 +78,15 @@ Predicate[13]:
 Function[0]:
 Action[3]:
     overcome: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
-        pre: (and (R:pain ?c) (R:pleasure ?v) (RW:craves ?c ?n) (RW:craves ?v ?n) (R:food ?n) (RW:harmony ?v ?s2) (R:planet ?s2) (R:orbits ?s1 ?s2) (R:planet ?s1))
-        eff: (and (N:RW:craves ?c ?n) (RW:fears ?c ?v) (N:RW:harmony ?v ?s2) (RW:harmony ?v ?s1))
+        pre: (and (R:planet ?s1) (R:planet ?s2) (R:food ?n) (R:pleasure ?v) (R:pain ?c) (R:orbits ?s1 ?s2) (RW:craves ?c ?n) (RW:craves ?v ?n) (RW:harmony ?v ?s2))
+        eff: (and (N:RW:craves ?c ?n) (RW:fears ?c ?v) (RW:harmony ?v ?s1) (N:RW:harmony ?v ?s2))
     feast: ?v:0 ?n1:0 ?n2:0 ?l1:0 ?l2:0
-        pre: (and (RW:craves ?v ?n1) (R:food ?n1) (R:pleasure ?v) (R:eats ?n1 ?n2) (R:food ?n2) (RW:locale ?n1 ?l2) (R:attacks ?l1 ?l2))
-        eff: (and (N:RW:craves ?v ?n1) (RW:craves ?v ?n2) (N:RW:locale ?n1 ?l2) (RW:locale ?n1 ?l1))
+        pre: (and (R:food ?n1) (R:food ?n2) (R:pleasure ?v) (R:eats ?n1 ?n2) (R:attacks ?l1 ?l2) (RW:craves ?v ?n1) (RW:locale ?n1 ?l2))
+        eff: (and (N:RW:craves ?v ?n1) (RW:craves ?v ?n2) (RW:locale ?n1 ?l1) (N:RW:locale ?n1 ?l2))
     succumb: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
-        pre: (and (N:R:= ?c ?v) (RW:fears ?c ?v) (R:pain ?c) (R:pleasure ?v) (RW:craves ?v ?n) (R:food ?n) (RW:harmony ?v ?s1) (R:orbits ?s1 ?s2))
-        eff: (and (N:RW:fears ?c ?v) (RW:craves ?c ?n) (N:RW:harmony ?v ?s1) (RW:harmony ?v ?s2))
+        pre: (and (N:R:= ?c ?v) (R:food ?n) (R:pleasure ?v) (R:pain ?c) (R:orbits ?s1 ?s2) (RW:craves ?v ?n) (RW:fears ?c ?v) (RW:harmony ?v ?s1))
+        eff: (and (RW:craves ?c ?n) (N:RW:fears ?c ?v) (N:RW:harmony ?v ?s1) (RW:harmony ?v ?s2))
 Init[54]:
-  S:(food rice)
-  S:(food pear)
-  S:(food flounder)
-  S:(food okra)
-  S:(food pork)
-  S:(food lamb)
-  S:(pleasure rest)
-  S:(pain hangover)
-  S:(pain depression)
-  S:(pain abrasion)
   S:(province kentucky)
   S:(province bosnia)
   S:(province surrey)
@@ -78,39 +98,49 @@ Init[54]:
   S:(planet earth)
   S:(planet uranus)
   S:(planet venus)
-  S:(eats lamb pork)
-  S:(eats pork okra)
-  (locale okra guanabara)
-  (locale pork quebec)
-  S:(eats pork lamb)
-  (harmony rest venus)
-  S:(eats lamb flounder)
-  (craves depression flounder)
-  S:(eats okra pear)
+  S:(food rice)
+  S:(food pear)
+  S:(food flounder)
+  S:(food okra)
+  S:(food pork)
+  S:(food lamb)
+  S:(pleasure rest)
+  S:(pain hangover)
+  S:(pain depression)
+  S:(pain abrasion)
   S:(eats rice rice)
+  S:(eats rice pear)
   S:(eats rice flounder)
-  S:(attacks kentucky bosnia)
-  S:(attacks pennsylvania alsace)
-  S:(attacks alsace quebec)
-  (craves abrasion pork)
-  (locale rice bosnia)
-  S:(orbits mars earth)
+  S:(eats pear rice)
+  S:(eats pear okra)
+  S:(eats flounder rice)
   S:(eats flounder lamb)
-  (craves rest pork)
-  S:(orbits earth uranus)
-  (locale pear surrey)
-  (craves hangover rice)
+  S:(eats okra pear)
+  S:(eats okra pork)
+  S:(eats pork okra)
+  S:(eats pork lamb)
+  S:(eats lamb flounder)
+  S:(eats lamb pork)
+  S:(attacks kentucky bosnia)
   S:(attacks bosnia surrey)
   S:(attacks surrey pennsylvania)
-  (locale lamb pennsylvania)
-  S:(eats flounder rice)
-  S:(eats rice pear)
+  S:(attacks pennsylvania alsace)
+  S:(attacks alsace quebec)
   S:(attacks quebec guanabara)
-  S:(eats pear okra)
-  S:(eats pear rice)
-  S:(eats okra pork)
+  S:(orbits mars earth)
+  S:(orbits earth uranus)
   S:(orbits uranus venus)
+  (craves rest pork)
+  (craves hangover rice)
+  (craves depression flounder)
+  (craves abrasion pork)
+  (locale rice bosnia)
+  (locale pear surrey)
   (locale flounder alsace)
+  (locale okra guanabara)
+  (locale pork quebec)
+  (locale lamb pennsylvania)
+  (harmony rest venus)
 Init[0]:
 Goal: (RW:craves abrasion rice)
 Metric: 0

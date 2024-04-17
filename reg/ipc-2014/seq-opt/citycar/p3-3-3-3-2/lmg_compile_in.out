@@ -1,9 +1,45 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 7, lifted mgroups: 6
 Compile-in LMG: Found dead-end condition for action 'car_arrived' and mgroup {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}: (and (not (= ?xy_final junction2-1)) (= ?machine car0))
 Compile-in LMG: Found dead-end condition for action 'car_arrived' and mgroup {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}: (and (not (= ?xy_final junction2-0)) (= ?machine car1))
 Compile-in LMG: Found dead-end condition for action 'car_arrived' and mgroup {at_car_jun V0:car C2:junction, at_car_road V0:car C3:road, starting V0:car C4:garage, arrived V0:car V1:junction, at_car_jun V0:car C5:junction, at_car_road V0:car C6:road, starting V0:car C7:garage}: (and (not (= ?xy_final junction2-0)) (= ?machine car2))
 Compile-in LMG: Precondition of action 'car_arrived' extended with (or (and (not (= ?machine car2)) (= ?xy_final junction2-1) (not (= ?machine car1))) (and (= ?xy_final junction2-0) (not (= ?machine car0))) (and (not (= ?machine car2)) (not (= ?machine car0)) (not (= ?machine car1))))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 5, objects: 20, predicates: 12, functions: 1, actions: 7, action-pre-size: [min: 3, max: 2, avg: 3.86, med: 3.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move_car_in_road
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move_car_out_road
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action car_arrived
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action car_start
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action build_diagonal_oneway
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action build_straight_oneway
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action destroy_road
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action car_arrived
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action car_arrived
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 20, vars: 4, predicates: 17, rules: 103)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 20, vars: 4, predicates: 17, rules: 103)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 20, vars: 4, predicates: 17, rules: 103)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 103
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 103, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 20, predicates: 12, functions: 1, actions: 9, action-pre-size: [min: 4, max: 3, avg: 3.22, med: 3.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 9
+Compile-in LMG: END
 Domain: citycar
 Problem: citycar-3-3-3
 Require: 200ff
@@ -58,72 +94,78 @@ Function[1]:
 Action[9]:
     move_car_in_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
         pre: (and (RW:at_car_jun ?machine ?xy_initial) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (RW:clear ?xy_initial) (RW:at_car_road ?machine ?r1) (N:RW:at_car_jun ?machine ?xy_initial) (increase (total-cost) 1))
+        eff: (and (N:RW:at_car_jun ?machine ?xy_initial) (RW:at_car_road ?machine ?r1) (RW:clear ?xy_initial) (increase (total-cost) 1))
     move_car_out_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
-        pre: (and (RW:at_car_road ?machine ?r1) (RW:clear ?xy_final) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:clear ?xy_final) (N:RW:at_car_road ?machine ?r1) (increase (total-cost) 1))
+        pre: (and (RW:at_car_road ?machine ?r1) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:in_place ?r1))
+        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:at_car_road ?machine ?r1) (N:RW:clear ?xy_final) (increase (total-cost) 1))
     car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine junction2-1) (N:R:= ?machine car2) (R:= ?xy_final junction2-1) (N:R:= ?machine car1))
-        eff: (and (RW:clear junction2-1) (W:arrived ?machine junction2-1) (N:RW:at_car_jun ?machine junction2-1))
+        pre: (and (R:= ?xy_final junction2-1) (N:R:= ?machine car1) (N:R:= ?machine car2) (RW:at_car_jun ?machine junction2-1))
+        eff: (and (N:RW:at_car_jun ?machine junction2-1) (W:arrived ?machine junction2-1) (RW:clear junction2-1))
     car_start: ?xy_final:2 ?machine:1 ?g:3
         pre: (and (R:at_garage ?g ?xy_final) (RW:starting ?machine ?g) (RW:clear ?xy_final))
-        eff: (and (N:RW:clear ?xy_final) (RW:at_car_jun ?machine ?xy_final) (N:RW:starting ?machine ?g))
+        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:starting ?machine ?g) (N:RW:clear ?xy_final))
     build_diagonal_oneway: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (RW:clear ?xy_final) (RW:NOT-in_place ?r1) (R:diagonal ?xy_initial ?xy_final))
-        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (increase (total-cost) 30) (RW:in_place ?r1) (N:RW:NOT-in_place ?r1))
+        pre: (and (R:diagonal ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:NOT-in_place ?r1))
+        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1) (N:RW:NOT-in_place ?r1) (increase (total-cost) 30))
     build_straight_oneway: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (RW:clear ?xy_final) (R:same_line ?xy_initial ?xy_final) (RW:NOT-in_place ?r1))
-        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (increase (total-cost) 20) (RW:in_place ?r1) (N:RW:NOT-in_place ?r1))
+        pre: (and (R:same_line ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:NOT-in_place ?r1))
+        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1) (N:RW:NOT-in_place ?r1) (increase (total-cost) 20))
     destroy_road: ?xy_initial:2 ?xy_final:2 ?r1:4
         pre: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (N:RW:road_connect ?r1 ?xy_initial ?xy_final) (increase (total-cost) 10) (when (RW:at_car_road car0 ?r1) (and (N:RW:at_car_road car0 ?r1) (RW:at_car_jun car0 ?xy_initial))) (when (RW:at_car_road car1 ?r1) (and (N:RW:at_car_road car1 ?r1) (RW:at_car_jun car1 ?xy_initial))) (when (RW:at_car_road car2 ?r1) (and (N:RW:at_car_road car2 ?r1) (RW:at_car_jun car2 ?xy_initial))) (N:RW:in_place ?r1) (RW:NOT-in_place ?r1))
+        eff: (and (N:RW:road_connect ?r1 ?xy_initial ?xy_final) (N:RW:in_place ?r1) (RW:NOT-in_place ?r1) (increase (total-cost) 10) (when (RW:at_car_road car0 ?r1) (and (N:RW:at_car_road car0 ?r1) (RW:at_car_jun car0 ?xy_initial))) (when (RW:at_car_road car1 ?r1) (and (N:RW:at_car_road car1 ?r1) (RW:at_car_jun car1 ?xy_initial))) (when (RW:at_car_road car2 ?r1) (and (N:RW:at_car_road car2 ?r1) (RW:at_car_jun car2 ?xy_initial))))
     car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine junction2-0) (R:= ?xy_final junction2-0) (N:R:= ?machine car0))
-        eff: (and (RW:clear junction2-0) (W:arrived ?machine junction2-0) (N:RW:at_car_jun ?machine junction2-0))
+        pre: (and (R:= ?xy_final junction2-0) (N:R:= ?machine car0) (RW:at_car_jun ?machine junction2-0))
+        eff: (and (N:RW:at_car_jun ?machine junction2-0) (W:arrived ?machine junction2-0) (RW:clear junction2-0))
     car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine ?xy_final) (N:R:= ?machine car2) (N:R:= ?machine car0) (N:R:= ?machine car1))
-        eff: (and (RW:clear ?xy_final) (W:arrived ?machine ?xy_final) (N:RW:at_car_jun ?machine ?xy_final))
+        pre: (and (N:R:= ?machine car0) (N:R:= ?machine car1) (N:R:= ?machine car2) (RW:at_car_jun ?machine ?xy_final))
+        eff: (and (N:RW:at_car_jun ?machine ?xy_final) (W:arrived ?machine ?xy_final) (RW:clear ?xy_final))
 Init[60]:
   S:(same_line junction0-0 junction0-1)
+  S:(same_line junction0-0 junction1-0)
   S:(same_line junction0-1 junction0-0)
   S:(same_line junction0-1 junction0-2)
+  S:(same_line junction0-1 junction1-1)
   S:(same_line junction0-2 junction0-1)
+  S:(same_line junction0-2 junction1-2)
+  S:(same_line junction1-0 junction0-0)
   S:(same_line junction1-0 junction1-1)
+  S:(same_line junction1-0 junction2-0)
+  S:(same_line junction1-1 junction0-1)
   S:(same_line junction1-1 junction1-0)
   S:(same_line junction1-1 junction1-2)
+  S:(same_line junction1-1 junction2-1)
+  S:(same_line junction1-2 junction0-2)
   S:(same_line junction1-2 junction1-1)
+  S:(same_line junction1-2 junction2-2)
+  S:(same_line junction2-0 junction1-0)
   S:(same_line junction2-0 junction2-1)
+  S:(same_line junction2-1 junction1-1)
   S:(same_line junction2-1 junction2-0)
   S:(same_line junction2-1 junction2-2)
-  S:(same_line junction2-2 junction2-1)
-  S:(same_line junction0-0 junction1-0)
-  S:(same_line junction1-0 junction0-0)
-  S:(same_line junction1-0 junction2-0)
-  S:(same_line junction2-0 junction1-0)
-  S:(same_line junction0-1 junction1-1)
-  S:(same_line junction1-1 junction0-1)
-  S:(same_line junction1-1 junction2-1)
-  S:(same_line junction2-1 junction1-1)
-  S:(same_line junction0-2 junction1-2)
-  S:(same_line junction1-2 junction0-2)
-  S:(same_line junction1-2 junction2-2)
   S:(same_line junction2-2 junction1-2)
+  S:(same_line junction2-2 junction2-1)
   S:(diagonal junction0-0 junction1-1)
-  S:(diagonal junction1-1 junction0-0)
   S:(diagonal junction0-1 junction1-0)
-  S:(diagonal junction1-0 junction0-1)
   S:(diagonal junction0-1 junction1-2)
-  S:(diagonal junction1-2 junction0-1)
   S:(diagonal junction0-2 junction1-1)
-  S:(diagonal junction1-1 junction0-2)
+  S:(diagonal junction1-0 junction0-1)
   S:(diagonal junction1-0 junction2-1)
-  S:(diagonal junction2-1 junction1-0)
+  S:(diagonal junction1-1 junction0-0)
+  S:(diagonal junction1-1 junction0-2)
   S:(diagonal junction1-1 junction2-0)
-  S:(diagonal junction2-0 junction1-1)
   S:(diagonal junction1-1 junction2-2)
-  S:(diagonal junction2-2 junction1-1)
+  S:(diagonal junction1-2 junction0-1)
   S:(diagonal junction1-2 junction2-1)
+  S:(diagonal junction2-0 junction1-1)
+  S:(diagonal junction2-1 junction1-0)
   S:(diagonal junction2-1 junction1-2)
+  S:(diagonal junction2-2 junction1-1)
+  S:(at_garage garage0 junction0-1)
+  S:(at_garage garage1 junction0-1)
+  S:(at_garage garage2 junction0-1)
+  (starting car0 garage0)
+  (starting car1 garage0)
+  (starting car2 garage0)
   (clear junction0-0)
   (clear junction0-1)
   (clear junction0-2)
@@ -133,12 +175,6 @@ Init[60]:
   (clear junction2-0)
   (clear junction2-1)
   (clear junction2-2)
-  S:(at_garage garage0 junction0-1)
-  S:(at_garage garage1 junction0-1)
-  S:(at_garage garage2 junction0-1)
-  (starting car0 garage0)
-  (starting car1 garage0)
-  (starting car2 garage0)
   (NOT-in_place road0)
   (NOT-in_place road1)
   (NOT-in_place road2)

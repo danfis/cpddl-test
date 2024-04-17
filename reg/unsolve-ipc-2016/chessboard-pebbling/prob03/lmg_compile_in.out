@@ -1,8 +1,36 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 1, lifted mgroups: 1
 Compile-in LMG: Found mutex condition for action 'move' and mgroup {occupied V0:location, free V0:location}:=1: (= ?from ?xsucc)
 Compile-in LMG: Found mutex condition for action 'move' and mgroup {occupied V0:location, free V0:location}:=1: (= ?from ?ysucc)
 Compile-in LMG: Precondition of action 'move' extended with (and (not (= ?from ?xsucc)) (not (= ?from ?ysucc)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 2, objects: 25, predicates: 5, functions: 0, actions: 1, action-pre-size: [min: 7, max: 7, avg: 7.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 25, vars: 3, predicates: 7, rules: 115)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 25, vars: 3, predicates: 7, rules: 115)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 25, vars: 3, predicates: 7, rules: 115)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 115
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 115, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 2, objects: 25, predicates: 5, functions: 0, actions: 1, action-pre-size: [min: 7, max: 7, avg: 7.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 1
+Compile-in LMG: END
 Domain: pebbling
 Problem: pebbling-5
 Require: ff
@@ -47,8 +75,8 @@ Predicate[5]:
 Function[0]:
 Action[1]:
     move: ?from:1 ?xsucc:1 ?ysucc:1
-        pre: (and (R:x-succ ?from ?xsucc) (R:y-succ ?from ?ysucc) (RW:occupied ?from) (RW:free ?xsucc) (RW:free ?ysucc) (N:R:= ?from ?xsucc) (N:R:= ?from ?ysucc))
-        eff: (and (N:RW:occupied ?from) (N:RW:free ?xsucc) (N:RW:free ?ysucc) (RW:free ?from) (RW:occupied ?xsucc) (RW:occupied ?ysucc))
+        pre: (and (N:R:= ?from ?xsucc) (N:R:= ?from ?ysucc) (R:x-succ ?from ?xsucc) (R:y-succ ?from ?ysucc) (RW:occupied ?from) (RW:free ?xsucc) (RW:free ?ysucc))
+        eff: (and (N:RW:occupied ?from) (RW:occupied ?xsucc) (RW:occupied ?ysucc) (RW:free ?from) (N:RW:free ?xsucc) (N:RW:free ?ysucc))
 Init[65]:
   S:(x-succ pos-0-0 pos-1-0)
   S:(x-succ pos-1-0 pos-2-0)
@@ -90,6 +118,9 @@ Init[65]:
   S:(y-succ pos-2-3 pos-2-4)
   S:(y-succ pos-3-3 pos-3-4)
   S:(y-succ pos-4-3 pos-4-4)
+  (occupied pos-0-0)
+  (occupied pos-1-0)
+  (occupied pos-0-1)
   (free pos-2-0)
   (free pos-3-0)
   (free pos-4-0)
@@ -112,9 +143,6 @@ Init[65]:
   (free pos-2-4)
   (free pos-3-4)
   (free pos-4-4)
-  (occupied pos-0-0)
-  (occupied pos-1-0)
-  (occupied pos-0-1)
 Init[0]:
 Goal: (and (RW:free pos-0-0) (RW:free pos-1-0) (RW:free pos-0-1))
 Metric: 0

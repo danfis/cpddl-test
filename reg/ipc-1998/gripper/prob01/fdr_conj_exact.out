@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-12
+11
 begin_variable
 var0
 -1
@@ -68,42 +68,34 @@ begin_variable
 var7
 -1
 2
-NOT-carry ball1 left-carry ball2 right
-carry ball1 left-carry ball2 right
+NOT-0:0:0:carry ball1 left-1:1:6:carry ball2 right
+0:0:0:carry ball1 left-1:1:6:carry ball2 right
 end_variable
 begin_variable
 var8
 -1
 2
-NOT-carry ball1 left-at-robby roomb
-carry ball1 left-at-robby roomb
+NOT-0:0:0:carry ball1 left-6:1:23:at-robby roomb
+0:0:0:carry ball1 left-6:1:23:at-robby roomb
 end_variable
 begin_variable
 var9
 -1
 2
-NOT-carry ball1 left-carry ball2 right-at-robby roomb
-carry ball1 left-carry ball2 right-at-robby roomb
+NOT-0:0:0:carry ball1 left-1:1:6:carry ball2 right-6:1:23:at-robby roomb
+0:0:0:carry ball1 left-1:1:6:carry ball2 right-6:1:23:at-robby roomb
 end_variable
 begin_variable
 var10
 -1
 2
-NOT-carry ball3 left-carry ball2 right
-carry ball3 left-carry ball2 right
-end_variable
-begin_variable
-var11
--1
-2
-NOT-carry ball1 left-carry ball3 left-carry ball2 right-at-robby roomb
-carry ball1 left-carry ball3 left-carry ball2 right-at-robby roomb
+NOT-0:2:2:carry ball3 left-1:1:6:carry ball2 right
+0:2:2:carry ball3 left-1:1:6:carry ball2 right
 end_variable
 0
 begin_state
 4
 4
-0
 0
 0
 0
@@ -121,7 +113,7 @@ begin_goal
 4 1
 5 1
 end_goal
-107
+110
 begin_operator
 drop ball1 rooma left
 3
@@ -177,12 +169,11 @@ drop ball1 rooma right
 end_operator
 begin_operator
 drop ball1 roomb left
-5
+4
 1 2
 6 1
 7 0
 9 0
-11 0
 3
 0 0 0 4
 0 2 -1 1
@@ -191,12 +182,11 @@ drop ball1 roomb left
 end_operator
 begin_operator
 drop ball1 roomb left
-5
+4
 1 3
 6 1
 7 0
 9 0
-11 0
 3
 0 0 0 4
 0 2 -1 1
@@ -205,16 +195,28 @@ drop ball1 roomb left
 end_operator
 begin_operator
 drop ball1 roomb left
-5
+4
 1 4
 6 1
 7 0
 9 0
-11 0
 3
 0 0 0 4
 0 2 -1 1
 0 8 1 0
+1
+end_operator
+begin_operator
+drop ball1 roomb left
+2
+1 1
+6 1
+5
+0 0 0 4
+0 2 -1 1
+0 7 1 0
+0 8 1 0
+0 9 1 0
 1
 end_operator
 begin_operator
@@ -294,27 +296,12 @@ drop ball2 roomb left
 end_operator
 begin_operator
 drop ball2 roomb right
-6
+5
 0 3
 6 1
 7 0
 9 0
 10 0
-11 0
-2
-0 1 1 4
-0 3 -1 1
-1
-end_operator
-begin_operator
-drop ball2 roomb right
-6
-0 4
-6 1
-7 0
-9 0
-10 0
-11 0
 2
 0 1 1 4
 0 3 -1 1
@@ -323,15 +310,40 @@ end_operator
 begin_operator
 drop ball2 roomb right
 5
+0 4
+6 1
+7 0
+9 0
+10 0
+2
+0 1 1 4
+0 3 -1 1
+1
+end_operator
+begin_operator
+drop ball2 roomb right
+4
 0 2
 6 1
 7 0
 9 0
-11 0
 3
 0 1 1 4
 0 3 -1 1
 0 10 1 0
+1
+end_operator
+begin_operator
+drop ball2 roomb right
+3
+0 0
+6 1
+10 0
+4
+0 1 1 4
+0 3 -1 1
+0 7 1 0
+0 9 1 0
 1
 end_operator
 begin_operator
@@ -389,35 +401,10 @@ drop ball3 rooma right
 end_operator
 begin_operator
 drop ball3 roomb left
-4
+3
 1 0
 6 1
 10 0
-11 0
-2
-0 0 2 4
-0 4 -1 1
-1
-end_operator
-begin_operator
-drop ball3 roomb left
-4
-1 3
-6 1
-10 0
-11 0
-2
-0 0 2 4
-0 4 -1 1
-1
-end_operator
-begin_operator
-drop ball3 roomb left
-4
-1 4
-6 1
-10 0
-11 0
 2
 0 0 2 4
 0 4 -1 1
@@ -426,9 +413,30 @@ end_operator
 begin_operator
 drop ball3 roomb left
 3
+1 3
+6 1
+10 0
+2
+0 0 2 4
+0 4 -1 1
+1
+end_operator
+begin_operator
+drop ball3 roomb left
+3
+1 4
+6 1
+10 0
+2
+0 0 2 4
+0 4 -1 1
+1
+end_operator
+begin_operator
+drop ball3 roomb left
+2
 1 1
 6 1
-11 0
 3
 0 0 2 4
 0 4 -1 1
@@ -482,10 +490,9 @@ drop ball4 roomb right
 end_operator
 begin_operator
 move rooma roomb
-3
+2
 0 0
 1 1
-11 0
 3
 0 6 0 1
 0 8 0 1
@@ -494,11 +501,32 @@ move rooma roomb
 end_operator
 begin_operator
 move rooma roomb
-4
+3
 0 0
 1 2
 9 0
-11 0
+2
+0 6 0 1
+0 8 0 1
+1
+end_operator
+begin_operator
+move rooma roomb
+3
+0 0
+1 3
+9 0
+2
+0 6 0 1
+0 8 0 1
+1
+end_operator
+begin_operator
+move rooma roomb
+3
+0 0
+1 4
+9 0
 2
 0 6 0 1
 0 8 0 1
@@ -507,431 +535,197 @@ end_operator
 begin_operator
 move rooma roomb
 4
-0 0
-1 3
+0 1
+1 0
+8 0
 9 0
-11 0
-2
+1
 0 6 0 1
-0 8 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
 4
-0 0
-1 4
-9 0
-11 0
-2
-0 6 0 1
-0 8 0 1
-1
-end_operator
-begin_operator
-move rooma roomb
-5
-0 1
-1 0
-8 0
-9 0
-11 0
-1
-0 6 0 1
-1
-end_operator
-begin_operator
-move rooma roomb
-5
 0 1
 1 2
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 1
 1 3
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 1
 1 4
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 2
 1 0
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 2
 1 1
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 2
 1 3
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 2
 1 4
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 3
 1 0
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 3
 1 1
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 3
 1 2
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 3
 1 4
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 4
 1 0
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 4
 1 1
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 4
 1 2
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 4
 1 3
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move rooma roomb
-5
+4
 0 4
 1 4
 8 0
 9 0
-11 0
 1
 0 6 0 1
 1
 end_operator
 begin_operator
 move roomb rooma
-5
+4
 0 1
 1 0
 8 0
 9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 1
-1 2
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 1
-1 3
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 1
-1 4
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 2
-1 0
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 2
-1 1
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 2
-1 3
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 2
-1 4
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 3
-1 0
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 3
-1 1
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 3
-1 2
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 3
-1 4
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 4
-1 0
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 4
-1 1
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 4
-1 2
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 4
-1 3
-8 0
-9 0
-11 0
-1
-0 6 1 0
-1
-end_operator
-begin_operator
-move roomb rooma
-5
-0 4
-1 4
-8 0
-9 0
-11 0
 1
 0 6 1 0
 1
@@ -939,10 +733,185 @@ end_operator
 begin_operator
 move roomb rooma
 4
+0 1
+1 2
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 1
+1 3
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 1
+1 4
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 2
+1 0
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 2
+1 1
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 2
+1 3
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 2
+1 4
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 3
+1 0
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 3
+1 1
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 3
+1 2
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 3
+1 4
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 4
+1 0
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 4
+1 1
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 4
+1 2
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 4
+1 3
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+4
+0 4
+1 4
+8 0
+9 0
+1
+0 6 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+3
 0 0
 1 2
 9 0
-11 0
 2
 0 6 1 0
 0 8 1 0
@@ -950,11 +919,10 @@ move roomb rooma
 end_operator
 begin_operator
 move roomb rooma
-4
+3
 0 0
 1 3
 9 0
-11 0
 2
 0 6 1 0
 0 8 1 0
@@ -962,24 +930,33 @@ move roomb rooma
 end_operator
 begin_operator
 move roomb rooma
-4
+3
 0 0
 1 4
 9 0
-11 0
 2
 0 6 1 0
 0 8 1 0
+1
+end_operator
+begin_operator
+move roomb rooma
+2
+0 0
+1 1
+3
+0 6 1 0
+0 8 1 0
+0 9 1 0
 1
 end_operator
 begin_operator
 pick ball1 rooma left
-5
+4
 1 1
 6 0
 8 0
 9 0
-11 0
 3
 0 0 4 0
 0 2 0 2
@@ -988,13 +965,12 @@ pick ball1 rooma left
 end_operator
 begin_operator
 pick ball1 rooma left
-6
+5
 1 2
 6 0
 7 0
 8 0
 9 0
-11 0
 2
 0 0 4 0
 0 2 0 2
@@ -1002,13 +978,12 @@ pick ball1 rooma left
 end_operator
 begin_operator
 pick ball1 rooma left
-6
+5
 1 3
 6 0
 7 0
 8 0
 9 0
-11 0
 2
 0 0 4 0
 0 2 0 2
@@ -1016,13 +991,12 @@ pick ball1 rooma left
 end_operator
 begin_operator
 pick ball1 rooma left
-6
+5
 1 4
 6 0
 7 0
 8 0
 9 0
-11 0
 2
 0 0 4 0
 0 2 0 2
@@ -1039,10 +1013,9 @@ pick ball1 rooma right
 end_operator
 begin_operator
 pick ball1 roomb left
-3
+2
 1 1
 6 1
-11 0
 5
 0 0 4 0
 0 2 1 2
@@ -1053,12 +1026,11 @@ pick ball1 roomb left
 end_operator
 begin_operator
 pick ball1 roomb left
-5
+4
 1 2
 6 1
 7 0
 9 0
-11 0
 3
 0 0 4 0
 0 2 1 2
@@ -1067,12 +1039,11 @@ pick ball1 roomb left
 end_operator
 begin_operator
 pick ball1 roomb left
-5
+4
 1 3
 6 1
 7 0
 9 0
-11 0
 3
 0 0 4 0
 0 2 1 2
@@ -1081,12 +1052,11 @@ pick ball1 roomb left
 end_operator
 begin_operator
 pick ball1 roomb left
-5
+4
 1 4
 6 1
 7 0
 9 0
-11 0
 3
 0 0 4 0
 0 2 1 2
@@ -1113,12 +1083,11 @@ pick ball2 rooma left
 end_operator
 begin_operator
 pick ball2 rooma right
-5
+4
 0 0
 6 0
 9 0
 10 0
-11 0
 3
 0 1 4 1
 0 3 0 2
@@ -1127,12 +1096,11 @@ pick ball2 rooma right
 end_operator
 begin_operator
 pick ball2 rooma right
-5
+4
 0 2
 6 0
 7 0
 9 0
-11 0
 3
 0 1 4 1
 0 3 0 2
@@ -1141,13 +1109,12 @@ pick ball2 rooma right
 end_operator
 begin_operator
 pick ball2 rooma right
-6
+5
 0 3
 6 0
 7 0
 9 0
 10 0
-11 0
 2
 0 1 4 1
 0 3 0 2
@@ -1155,13 +1122,12 @@ pick ball2 rooma right
 end_operator
 begin_operator
 pick ball2 rooma right
-6
+5
 0 4
 6 0
 7 0
 9 0
 10 0
-11 0
 2
 0 1 4 1
 0 3 0 2
@@ -1178,11 +1144,10 @@ pick ball2 roomb left
 end_operator
 begin_operator
 pick ball2 roomb right
-4
+3
 0 0
 6 1
 10 0
-11 0
 4
 0 1 4 1
 0 3 1 2
@@ -1192,12 +1157,11 @@ pick ball2 roomb right
 end_operator
 begin_operator
 pick ball2 roomb right
-5
+4
 0 2
 6 1
 7 0
 9 0
-11 0
 3
 0 1 4 1
 0 3 1 2
@@ -1206,13 +1170,12 @@ pick ball2 roomb right
 end_operator
 begin_operator
 pick ball2 roomb right
-6
+5
 0 3
 6 1
 7 0
 9 0
 10 0
-11 0
 2
 0 1 4 1
 0 3 1 2
@@ -1220,13 +1183,12 @@ pick ball2 roomb right
 end_operator
 begin_operator
 pick ball2 roomb right
-6
+5
 0 4
 6 1
 7 0
 9 0
 10 0
-11 0
 2
 0 1 4 1
 0 3 1 2
@@ -1234,11 +1196,10 @@ pick ball2 roomb right
 end_operator
 begin_operator
 pick ball3 rooma left
-4
+3
 1 0
 6 0
 10 0
-11 0
 2
 0 0 4 2
 0 4 0 2
@@ -1246,10 +1207,9 @@ pick ball3 rooma left
 end_operator
 begin_operator
 pick ball3 rooma left
-3
+2
 1 1
 6 0
-11 0
 3
 0 0 4 2
 0 4 0 2
@@ -1258,11 +1218,10 @@ pick ball3 rooma left
 end_operator
 begin_operator
 pick ball3 rooma left
-4
+3
 1 3
 6 0
 10 0
-11 0
 2
 0 0 4 2
 0 4 0 2
@@ -1270,11 +1229,10 @@ pick ball3 rooma left
 end_operator
 begin_operator
 pick ball3 rooma left
-4
+3
 1 4
 6 0
 10 0
-11 0
 2
 0 0 4 2
 0 4 0 2
@@ -1291,11 +1249,10 @@ pick ball3 rooma right
 end_operator
 begin_operator
 pick ball3 roomb left
-4
+3
 1 0
 6 1
 10 0
-11 0
 2
 0 0 4 2
 0 4 1 2
@@ -1303,10 +1260,9 @@ pick ball3 roomb left
 end_operator
 begin_operator
 pick ball3 roomb left
-3
+2
 1 1
 6 1
-11 0
 3
 0 0 4 2
 0 4 1 2
@@ -1315,11 +1271,10 @@ pick ball3 roomb left
 end_operator
 begin_operator
 pick ball3 roomb left
-4
+3
 1 3
 6 1
 10 0
-11 0
 2
 0 0 4 2
 0 4 1 2
@@ -1327,11 +1282,10 @@ pick ball3 roomb left
 end_operator
 begin_operator
 pick ball3 roomb left
-4
+3
 1 4
 6 1
 10 0
-11 0
 2
 0 0 4 2
 0 4 1 2

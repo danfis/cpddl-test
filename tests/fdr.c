@@ -308,12 +308,8 @@ TEST(fdr_conj_exact, fdr_h2)
     pddlISetAdd(&set, f0);
     pddlISetAdd(&set, f1);
     pddlISetAdd(&set, f2);
-    pddlFDRConjExactConfigAddConj(&cfg, &set);
-    if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
-        fprintf(stderr, "mutex f0, f1, f2: (%s) (%s) (%s)\n",
-                C.fdr.var.global_id_to_val[f0]->name,
-                C.fdr.var.global_id_to_val[f1]->name,
-                C.fdr.var.global_id_to_val[f2]->name);
+    if (!pddlMutexPairsIsMutexSet(&C.mutex, &set))
+        pddlFDRConjExactConfigAddConj(&cfg, &set);
 
     if (f3 >= 0 && f3 < C.fdr.var.global_id_size){
         pddlISetEmpty(&set);
@@ -330,13 +326,8 @@ TEST(fdr_conj_exact, fdr_h2)
         pddlISetAdd(&set, f1);
         pddlISetAdd(&set, f2);
         pddlISetAdd(&set, f3);
-        pddlFDRConjExactConfigAddConj(&cfg, &set);
-        if (pddlMutexPairsIsMutexSet(&C.mutex, &set))
-            fprintf(stderr, "mutex f0-f3: (%s) (%s) (%s) (%s)\n",
-                    C.fdr.var.global_id_to_val[f0]->name,
-                    C.fdr.var.global_id_to_val[f1]->name,
-                    C.fdr.var.global_id_to_val[f2]->name,
-                    C.fdr.var.global_id_to_val[f3]->name);
+        if (!pddlMutexPairsIsMutexSet(&C.mutex, &set))
+            pddlFDRConjExactConfigAddConj(&cfg, &set);
     }
     pddlISetFree(&set);
 

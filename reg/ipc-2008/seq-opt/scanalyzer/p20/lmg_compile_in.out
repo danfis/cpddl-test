@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 2, lifted mgroups: 2
 Compile-in LMG: Found mutex condition for action 'analyze-2' and mgroup {on V0:car C1:segment, on V0:car C2:segment}:=1: (and (= ?c1 ?c2) (not (= ?s1 ?s2)))
 Compile-in LMG: Found mutex condition for action 'analyze-2' and mgroup {on C1:car V0:segment, on C2:car V0:segment}:=1: (and (= ?s1 ?s2) (not (= ?c1 ?c2)))
@@ -5,7 +8,35 @@ Compile-in LMG: Precondition of action 'analyze-2' extended with (or (and (not (
 Compile-in LMG: Found mutex condition for action 'rotate-2' and mgroup {on V0:car C1:segment, on V0:car C2:segment}:=1: (and (= ?c1 ?c2) (not (= ?s1 ?s2)))
 Compile-in LMG: Found mutex condition for action 'rotate-2' and mgroup {on C1:car V0:segment, on C2:car V0:segment}:=1: (and (= ?s1 ?s2) (not (= ?c1 ?c2)))
 Compile-in LMG: Precondition of action 'rotate-2' extended with (or (and (not (= ?c1 ?c2)) (not (= ?s1 ?s2))) (and (= ?s1 ?s2) (= ?c1 ?c2)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 3, objects: 36, predicates: 7, functions: 1, actions: 2, action-pre-size: [min: 7, max: 7, avg: 7.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action analyze-2
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-2
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action analyze-2
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-2
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 36, vars: 4, predicates: 10, rules: 198)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 36, vars: 4, predicates: 10, rules: 198)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 36, vars: 4, predicates: 10, rules: 198)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 198
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 198, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 3, objects: 36, predicates: 7, functions: 1, actions: 4, action-pre-size: [min: 5, max: 5, avg: 5.00, med: 5.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 4
+Compile-in LMG: END
 Domain: scanalyzer3d
 Problem: scanalyzer3d-42
 Require: 200ff
@@ -66,17 +97,17 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[4]:
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (N:R:= ?c1 ?c2) (N:R:= ?s1 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (W:analyzed ?c1) (increase (total-cost) 3))
+        pre: (and (N:R:= ?s1 ?s2) (N:R:= ?c1 ?c2) (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (W:analyzed ?c1) (increase (total-cost) 3))
     rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (N:R:= ?c1 ?c2) (N:R:= ?s1 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (increase (total-cost) 1))
+        pre: (and (N:R:= ?s1 ?s2) (N:R:= ?c1 ?c2) (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (increase (total-cost) 1))
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (R:= ?s1 ?s2) (R:= ?c1 ?c2))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (W:analyzed ?c1) (increase (total-cost) 3))
+        pre: (and (R:= ?s1 ?s2) (R:= ?c1 ?c2) (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (W:analyzed ?c1) (increase (total-cost) 3))
     rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2) (R:= ?s1 ?s2) (R:= ?c1 ?c2))
-        eff: (and (N:RW:on ?c1 ?s1) (N:RW:on ?c2 ?s2) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (increase (total-cost) 1))
+        pre: (and (R:= ?s1 ?s2) (R:= ?c1 ?c2) (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (increase (total-cost) 1))
 Init[108]:
   S:(cycle-2 seg-in-1 seg-out-1)
   S:(cycle-2 seg-in-1 seg-out-2)
@@ -188,5 +219,5 @@ Init[108]:
   (on car-out-9 seg-out-9)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:analyzed car-in-1) (W:analyzed car-in-2) (W:analyzed car-in-3) (W:analyzed car-in-4) (W:analyzed car-in-5) (W:analyzed car-in-6) (W:analyzed car-in-7) (W:analyzed car-in-8) (W:analyzed car-in-9) (W:analyzed car-out-1) (W:analyzed car-out-2) (W:analyzed car-out-3) (W:analyzed car-out-4) (W:analyzed car-out-5) (W:analyzed car-out-6) (W:analyzed car-out-7) (W:analyzed car-out-8) (W:analyzed car-out-9) (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-in-4 seg-in-4) (RW:on car-in-5 seg-in-5) (RW:on car-in-6 seg-in-6) (RW:on car-in-7 seg-in-7) (RW:on car-in-8 seg-in-8) (RW:on car-in-9 seg-in-9) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (RW:on car-out-4 seg-out-4) (RW:on car-out-5 seg-out-5) (RW:on car-out-6 seg-out-6) (RW:on car-out-7 seg-out-7) (RW:on car-out-8 seg-out-8) (RW:on car-out-9 seg-out-9))
+Goal: (and (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-in-4 seg-in-4) (RW:on car-in-5 seg-in-5) (RW:on car-in-6 seg-in-6) (RW:on car-in-7 seg-in-7) (RW:on car-in-8 seg-in-8) (RW:on car-in-9 seg-in-9) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (RW:on car-out-4 seg-out-4) (RW:on car-out-5 seg-out-5) (RW:on car-out-6 seg-out-6) (RW:on car-out-7 seg-out-7) (RW:on car-out-8 seg-out-8) (RW:on car-out-9 seg-out-9) (W:analyzed car-in-1) (W:analyzed car-in-2) (W:analyzed car-in-3) (W:analyzed car-in-4) (W:analyzed car-in-5) (W:analyzed car-in-6) (W:analyzed car-in-7) (W:analyzed car-in-8) (W:analyzed car-in-9) (W:analyzed car-out-1) (W:analyzed car-out-2) (W:analyzed car-out-3) (W:analyzed car-out-4) (W:analyzed car-out-5) (W:analyzed car-out-6) (W:analyzed car-out-7) (W:analyzed car-out-8) (W:analyzed car-out-9))
 Metric: 1

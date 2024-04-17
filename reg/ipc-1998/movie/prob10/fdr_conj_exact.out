@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-12
+11
 begin_variable
 var0
 -1
@@ -58,36 +58,29 @@ begin_variable
 var7
 -1
 2
-NOT-counter-at-zero-have-cheese
-counter-at-zero-have-cheese
+NOT-0:0:0:counter-at-zero-1:0:2:have-cheese
+0:0:0:counter-at-zero-1:0:2:have-cheese
 end_variable
 begin_variable
 var8
 -1
 2
-NOT-counter-at-zero-none-of-those
-counter-at-zero-none-of-those
+NOT-0:0:0:counter-at-zero-6:1:13:none-of-those
+0:0:0:counter-at-zero-6:1:13:none-of-those
 end_variable
 begin_variable
 var9
 -1
 2
-NOT-counter-at-zero-have-cheese-none-of-those
-counter-at-zero-have-cheese-none-of-those
+NOT-0:0:0:counter-at-zero-1:0:2:have-cheese-6:1:13:none-of-those
+0:0:0:counter-at-zero-1:0:2:have-cheese-6:1:13:none-of-those
 end_variable
 begin_variable
 var10
 -1
 2
-NOT-none-of-those-have-cheese
-none-of-those-have-cheese
-end_variable
-begin_variable
-var11
--1
-2
-NOT-counter-at-zero-none-of-those-have-cheese-none-of-those
-counter-at-zero-none-of-those-have-cheese-none-of-those
+NOT-0:1:1:none-of-those-1:0:2:have-cheese
+0:1:1:none-of-those-1:0:2:have-cheese
 end_variable
 0
 begin_state
@@ -98,7 +91,6 @@ begin_state
 1
 1
 1
-0
 0
 0
 0
@@ -115,15 +107,14 @@ begin_goal
 6 0
 7 1
 end_goal
-24
+27
 begin_operator
 get-cheese z1
-5
+4
 0 0
 6 0
 9 0
 10 0
-11 0
 2
 0 1 -1 0
 0 7 0 1
@@ -131,11 +122,10 @@ get-cheese z1
 end_operator
 begin_operator
 get-cheese z1
-4
+3
 0 0
 6 1
 10 0
-11 0
 3
 0 1 -1 0
 0 7 0 1
@@ -144,12 +134,11 @@ get-cheese z1
 end_operator
 begin_operator
 get-cheese z1
-5
+4
 0 1
 6 0
 7 0
 9 0
-11 0
 2
 0 1 -1 0
 0 10 0 1
@@ -157,12 +146,11 @@ get-cheese z1
 end_operator
 begin_operator
 get-cheese z1
-5
+4
 0 1
 6 1
 7 0
 9 0
-11 0
 2
 0 1 -1 0
 0 10 0 1
@@ -170,40 +158,49 @@ get-cheese z1
 end_operator
 begin_operator
 get-cheese z1
-7
+6
 0 1
 1 0
 6 0
 7 0
 9 0
 10 1
-11 0
 0
 1
 end_operator
 begin_operator
 get-cheese z1
-7
+6
 0 1
 1 0
 6 1
 7 0
 9 0
 10 1
-11 0
 0
 1
 end_operator
 begin_operator
 get-cheese z1
-7
+6
 0 0
 1 0
 6 0
 7 1
 9 0
 10 0
-11 0
+0
+1
+end_operator
+begin_operator
+get-cheese z1
+6
+0 0
+1 0
+6 1
+7 1
+9 1
+10 0
 0
 1
 end_operator
@@ -237,13 +234,12 @@ get-pop p1
 end_operator
 begin_operator
 reset-counter
-6
+5
 1 0
 6 0
 8 0
 9 0
 10 0
-11 0
 2
 0 0 -1 0
 0 7 0 1
@@ -251,77 +247,72 @@ reset-counter
 end_operator
 begin_operator
 reset-counter
-4
+3
 1 0
 6 1
 10 0
-11 0
 4
 0 0 -1 0
 0 7 0 1
 0 8 0 1
 0 9 0 1
+1
+end_operator
+begin_operator
+reset-counter
+6
+1 1
+6 0
+7 0
+8 0
+9 0
+10 0
+1
+0 0 -1 0
+1
+end_operator
+begin_operator
+reset-counter
+5
+1 1
+6 1
+7 0
+9 0
+10 0
+2
+0 0 -1 0
+0 8 0 1
+1
+end_operator
+begin_operator
+reset-counter
+4
+1 0
+6 0
+8 0
+9 0
+3
+0 0 1 0
+0 7 0 1
+0 10 1 0
+1
+end_operator
+begin_operator
+reset-counter
+2
+1 0
+6 1
+5
+0 0 1 0
+0 7 0 1
+0 8 0 1
+0 9 0 1
+0 10 1 0
 1
 end_operator
 begin_operator
 reset-counter
 7
-1 1
-6 0
-7 0
-8 0
-9 0
-10 0
-11 0
-1
-0 0 -1 0
-1
-end_operator
-begin_operator
-reset-counter
-6
-1 1
-6 1
-7 0
-9 0
-10 0
-11 0
-2
-0 0 -1 0
-0 8 0 1
-1
-end_operator
-begin_operator
-reset-counter
-5
-1 0
-6 0
-8 0
-9 0
-11 0
-3
-0 0 1 0
-0 7 0 1
-0 10 1 0
-1
-end_operator
-begin_operator
-reset-counter
-3
-1 0
-6 1
-11 0
-5
-0 0 1 0
-0 7 0 1
-0 8 0 1
-0 9 0 1
-0 10 1 0
-1
-end_operator
-begin_operator
-reset-counter
-8
 0 0
 1 1
 6 1
@@ -329,13 +320,12 @@ reset-counter
 8 1
 9 0
 10 0
-11 0
 0
 1
 end_operator
 begin_operator
 reset-counter
-8
+7
 0 0
 1 0
 6 0
@@ -343,18 +333,29 @@ reset-counter
 8 0
 9 0
 10 0
-11 0
+0
+1
+end_operator
+begin_operator
+reset-counter
+7
+0 0
+1 0
+6 1
+7 1
+8 1
+9 1
+10 0
 0
 1
 end_operator
 begin_operator
 rewind-movie
-5
+4
 1 0
 7 0
 8 0
 9 0
-11 0
 3
 0 0 -1 1
 0 6 -1 0
@@ -363,13 +364,12 @@ rewind-movie
 end_operator
 begin_operator
 rewind-movie
-6
+5
 1 1
 7 0
 8 0
 9 0
 10 0
-11 0
 2
 0 0 -1 1
 0 6 -1 0
@@ -377,26 +377,24 @@ rewind-movie
 end_operator
 begin_operator
 rewind-movie
-7
+6
 0 1
 1 0
 7 0
 8 0
 9 0
 10 1
-11 0
 1
 0 6 -1 0
 1
 end_operator
 begin_operator
 rewind-movie
-5
+4
 1 1
 7 0
 9 0
 10 0
-11 0
 3
 0 0 0 1
 0 6 1 0
@@ -405,15 +403,27 @@ rewind-movie
 end_operator
 begin_operator
 rewind-movie
-4
+3
 1 0
 8 0
 9 0
-11 0
 4
 0 0 0 1
 0 6 -1 0
 0 7 1 0
+0 10 0 1
+1
+end_operator
+begin_operator
+rewind-movie
+1
+1 0
+6
+0 0 0 1
+0 6 1 0
+0 7 1 0
+0 8 1 0
+0 9 1 0
 0 10 0 1
 1
 end_operator

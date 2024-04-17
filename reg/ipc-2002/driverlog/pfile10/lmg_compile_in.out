@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 6, lifted mgroups: 2
 Compile-in LMG: Found mutex condition for action 'unload-truck' and mgroup {at V0:object C1:object, in V0:object C2:object, driving V0:object C3:object, at V0:object C4:object, in V0:object C5:object, driving V0:object C6:object}:=1: (= ?obj ?truck)
 Compile-in LMG: Precondition of action 'unload-truck' extended with (not (= ?obj ?truck))
@@ -5,7 +8,37 @@ Compile-in LMG: Found mutex condition for action 'disembark-truck' and mgroup {a
 Compile-in LMG: Precondition of action 'disembark-truck' extended with (not (= ?driver ?truck))
 Compile-in LMG: Found mutex condition for action 'drive-truck' and mgroup {at V0:object C1:object, in V0:object C2:object, driving V0:object C3:object, at V0:object C4:object, in V0:object C5:object, driving V0:object C6:object}:=1: (= ?truck ?driver)
 Compile-in LMG: Precondition of action 'drive-truck' extended with (not (= ?truck ?driver))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 26, predicates: 11, functions: 0, actions: 6, action-pre-size: [min: 5, max: 5, avg: 6.00, med: 6.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load-truck
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action unload-truck
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action board-truck
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action disembark-truck
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drive-truck
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action walk
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 26, vars: 4, predicates: 12, rules: 140)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 26, vars: 4, predicates: 12, rules: 140)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 26, vars: 4, predicates: 12, rules: 140)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 140
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 140, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 26, predicates: 11, functions: 0, actions: 6, action-pre-size: [min: 5, max: 5, avg: 6.00, med: 6.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 6
+Compile-in LMG: END
 Domain: driverlog
 Problem: dlog-2-3-6
 Require: ff
@@ -55,49 +88,33 @@ Predicate[11]:
 Function[0]:
 Action[6]:
     load-truck: ?obj:0 ?truck:0 ?loc:0
-        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:at ?obj ?loc))
+        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?obj ?loc) (RW:at ?truck ?loc))
         eff: (and (N:RW:at ?obj ?loc) (RW:in ?obj ?truck))
     unload-truck: ?obj:0 ?truck:0 ?loc:0
         pre: (and (N:R:= ?obj ?truck) (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:in ?obj ?truck))
-        eff: (and (N:RW:in ?obj ?truck) (RW:at ?obj ?loc))
+        eff: (and (RW:at ?obj ?loc) (N:RW:in ?obj ?truck))
     board-truck: ?driver:0 ?truck:0 ?loc:0
-        pre: (and (R:driver ?driver) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:at ?driver ?loc) (RW:empty ?truck))
+        pre: (and (R:truck ?truck) (R:location ?loc) (R:driver ?driver) (RW:at ?driver ?loc) (RW:at ?truck ?loc) (RW:empty ?truck))
         eff: (and (N:RW:at ?driver ?loc) (RW:driving ?driver ?truck) (N:RW:empty ?truck))
     disembark-truck: ?driver:0 ?truck:0 ?loc:0
-        pre: (and (N:R:= ?driver ?truck) (R:driver ?driver) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:driving ?driver ?truck))
-        eff: (and (N:RW:driving ?driver ?truck) (RW:at ?driver ?loc) (RW:empty ?truck))
+        pre: (and (N:R:= ?driver ?truck) (R:truck ?truck) (R:location ?loc) (R:driver ?driver) (RW:at ?truck ?loc) (RW:driving ?driver ?truck))
+        eff: (and (RW:at ?driver ?loc) (N:RW:driving ?driver ?truck) (RW:empty ?truck))
     drive-truck: ?truck:0 ?loc-from:0 ?loc-to:0 ?driver:0
-        pre: (and (N:R:= ?truck ?driver) (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (RW:at ?truck ?loc-from) (RW:driving ?driver ?truck) (R:link ?loc-from ?loc-to))
+        pre: (and (N:R:= ?truck ?driver) (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (R:link ?loc-from ?loc-to) (RW:at ?truck ?loc-from) (RW:driving ?driver ?truck))
         eff: (and (N:RW:at ?truck ?loc-from) (RW:at ?truck ?loc-to))
     walk: ?driver:0 ?loc-from:0 ?loc-to:0
-        pre: (and (R:driver ?driver) (R:location ?loc-from) (R:location ?loc-to) (RW:at ?driver ?loc-from) (R:path ?loc-from ?loc-to))
+        pre: (and (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (R:path ?loc-from ?loc-to) (RW:at ?driver ?loc-from))
         eff: (and (N:RW:at ?driver ?loc-from) (RW:at ?driver ?loc-to))
 Init[102]:
-  (at driver1 s4)
-  S:(driver driver1)
-  (at driver2 s0)
-  S:(driver driver2)
-  (at truck1 s0)
-  (empty truck1)
-  S:(truck truck1)
-  (at truck2 s4)
-  (empty truck2)
-  S:(truck truck2)
-  (at truck3 s5)
-  (empty truck3)
-  S:(truck truck3)
-  (at package1 s1)
   S:(obj package1)
-  (at package2 s0)
   S:(obj package2)
-  (at package3 s4)
   S:(obj package3)
-  (at package4 s4)
   S:(obj package4)
-  (at package5 s4)
   S:(obj package5)
-  (at package6 s2)
   S:(obj package6)
+  S:(truck truck1)
+  S:(truck truck2)
+  S:(truck truck3)
   S:(location s0)
   S:(location s1)
   S:(location s2)
@@ -113,68 +130,84 @@ Init[102]:
   S:(location p3-1)
   S:(location p3-5)
   S:(location p4-5)
-  S:(path s1 p1-0)
-  S:(path p1-0 s1)
-  S:(path s0 p1-0)
-  S:(path p1-0 s0)
-  S:(path s1 p1-4)
-  S:(path p1-4 s1)
-  S:(path s4 p1-4)
-  S:(path p1-4 s4)
-  S:(path s1 p1-5)
-  S:(path p1-5 s1)
-  S:(path s5 p1-5)
-  S:(path p1-5 s5)
-  S:(path s2 p2-1)
-  S:(path p2-1 s2)
-  S:(path s1 p2-1)
-  S:(path p2-1 s1)
-  S:(path s2 p2-3)
-  S:(path p2-3 s2)
-  S:(path s3 p2-3)
-  S:(path p2-3 s3)
-  S:(path s3 p3-0)
-  S:(path p3-0 s3)
-  S:(path s0 p3-0)
-  S:(path p3-0 s0)
-  S:(path s3 p3-1)
-  S:(path p3-1 s3)
-  S:(path s1 p3-1)
-  S:(path p3-1 s1)
-  S:(path s3 p3-5)
-  S:(path p3-5 s3)
-  S:(path s5 p3-5)
-  S:(path p3-5 s5)
-  S:(path s4 p4-5)
-  S:(path p4-5 s4)
-  S:(path s5 p4-5)
-  S:(path p4-5 s5)
-  S:(link s0 s5)
-  S:(link s5 s0)
-  S:(link s1 s0)
+  S:(driver driver1)
+  S:(driver driver2)
   S:(link s0 s1)
-  S:(link s1 s2)
-  S:(link s2 s1)
-  S:(link s1 s4)
-  S:(link s4 s1)
-  S:(link s1 s5)
-  S:(link s5 s1)
-  S:(link s2 s0)
   S:(link s0 s2)
-  S:(link s3 s0)
   S:(link s0 s3)
-  S:(link s3 s1)
-  S:(link s1 s3)
-  S:(link s3 s2)
-  S:(link s2 s3)
-  S:(link s3 s4)
-  S:(link s4 s3)
-  S:(link s4 s0)
   S:(link s0 s4)
-  S:(link s5 s3)
+  S:(link s0 s5)
+  S:(link s1 s0)
+  S:(link s1 s2)
+  S:(link s1 s3)
+  S:(link s1 s4)
+  S:(link s1 s5)
+  S:(link s2 s0)
+  S:(link s2 s1)
+  S:(link s2 s3)
+  S:(link s3 s0)
+  S:(link s3 s1)
+  S:(link s3 s2)
+  S:(link s3 s4)
   S:(link s3 s5)
-  S:(link s5 s4)
+  S:(link s4 s0)
+  S:(link s4 s1)
+  S:(link s4 s3)
   S:(link s4 s5)
+  S:(link s5 s0)
+  S:(link s5 s1)
+  S:(link s5 s3)
+  S:(link s5 s4)
+  S:(path s0 p1-0)
+  S:(path s0 p3-0)
+  S:(path s1 p1-0)
+  S:(path s1 p1-4)
+  S:(path s1 p1-5)
+  S:(path s1 p2-1)
+  S:(path s1 p3-1)
+  S:(path s2 p2-1)
+  S:(path s2 p2-3)
+  S:(path s3 p2-3)
+  S:(path s3 p3-0)
+  S:(path s3 p3-1)
+  S:(path s3 p3-5)
+  S:(path s4 p1-4)
+  S:(path s4 p4-5)
+  S:(path s5 p1-5)
+  S:(path s5 p3-5)
+  S:(path s5 p4-5)
+  S:(path p1-0 s0)
+  S:(path p1-0 s1)
+  S:(path p1-4 s1)
+  S:(path p1-4 s4)
+  S:(path p1-5 s1)
+  S:(path p1-5 s5)
+  S:(path p2-1 s1)
+  S:(path p2-1 s2)
+  S:(path p2-3 s2)
+  S:(path p2-3 s3)
+  S:(path p3-0 s0)
+  S:(path p3-0 s3)
+  S:(path p3-1 s1)
+  S:(path p3-1 s3)
+  S:(path p3-5 s3)
+  S:(path p3-5 s5)
+  S:(path p4-5 s4)
+  S:(path p4-5 s5)
+  (at driver1 s4)
+  (at driver2 s0)
+  (at truck1 s0)
+  (at truck2 s4)
+  (at truck3 s5)
+  (at package1 s1)
+  (at package2 s0)
+  (at package3 s4)
+  (at package4 s4)
+  (at package5 s4)
+  (at package6 s2)
+  (empty truck1)
+  (empty truck2)
+  (empty truck3)
 Init[0]:
 Goal: (and (RW:at driver1 s1) (RW:at driver2 s0) (RW:at package1 s5) (RW:at package2 s1) (RW:at package3 s5) (RW:at package4 s1) (RW:at package5 s3) (RW:at package6 s2))
 Metric: 0

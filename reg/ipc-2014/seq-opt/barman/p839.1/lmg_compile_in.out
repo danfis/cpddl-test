@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 12, lifted mgroups: 11
 Compile-in LMG: Found mutex condition for action 'fill-shot' and mgroup {holding V0:hand C1:container, handempty V0:hand, holding V0:hand C2:container}:=1: (= ?h1 ?h2)
 Compile-in LMG: Precondition of action 'fill-shot' extended with (not (= ?h1 ?h2))
@@ -43,7 +46,52 @@ Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mg
 Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot7) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)) (not (= ?b cocktail6)) (not (= ?b cocktail7)) (not (= ?b cocktail8)))
 Compile-in LMG: Found dead-end condition for action 'pour-shaker-to-shot' and mgroup {contains V0:shot C1:cocktail, clean V0:shot, used V0:shot C2:beverage, contains V0:shot C3:cocktail, used V0:shot C4:beverage}: (and (= ?d shot8) (not (= ?b cocktail1)) (not (= ?b cocktail2)) (not (= ?b cocktail3)) (not (= ?b cocktail4)) (not (= ?b cocktail5)) (not (= ?b cocktail6)) (not (= ?b cocktail7)) (not (= ?b cocktail8)))
 Compile-in LMG: Precondition of action 'pour-shaker-to-shot' extended with (or (and (= ?b cocktail8) (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot2))) (and (= ?b cocktail3) (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot1))) (and (= ?b cocktail1) (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot1)) (not (= ?d shot2))) (and (= ?b cocktail5) (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot3)) (not (= ?d shot1)) (not (= ?d shot2))) (and (= ?b cocktail4) (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot1)) (not (= ?d shot2))) (and (= ?b cocktail6) (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot1)) (not (= ?d shot2))) (and (= ?b cocktail2) (not (= ?d shot8)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot1)) (not (= ?d shot2))) (and (= ?b cocktail7) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot1)) (not (= ?d shot2))) (and (not (= ?d shot8)) (not (= ?d shot7)) (not (= ?d shot6)) (not (= ?d shot5)) (not (= ?d shot4)) (not (= ?d shot3)) (not (= ?d shot2)) (not (= ?d shot1))))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 10, objects: 29, predicates: 16, functions: 0, actions: 12, action-pre-size: [min: 79, max: 2, avg: 12.08, med: 5.50]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action grasp
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action leave
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action fill-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action refill-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action empty-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action clean-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shot-to-clean-shaker
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shot-to-used-shaker
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action empty-shaker
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action clean-shaker
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action shake
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action empty-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pour-shaker-to-shot
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 29, vars: 6, predicates: 26, rules: 130)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 29, vars: 6, predicates: 26, rules: 130)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 29, vars: 6, predicates: 26, rules: 130)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 130
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 130, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 10, objects: 29, predicates: 16, functions: 0, actions: 21, action-pre-size: [min: 15, max: 2, avg: 9.67, med: 8.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 21
+Compile-in LMG: END
 Domain: barman
 Problem: prob
 Require: ff
@@ -120,68 +168,90 @@ Function[0]:
 Action[21]:
     grasp: ?h:1 ?c:5
         pre: (and (RW:ontable ?c) (RW:handempty ?h))
-        eff: (and (N:RW:ontable ?c) (N:RW:handempty ?h) (RW:holding ?h ?c))
+        eff: (and (N:RW:ontable ?c) (RW:holding ?h ?c) (N:RW:handempty ?h))
     leave: ?h:1 ?c:5
         pre: (and (RW:holding ?h ?c))
-        eff: (and (N:RW:holding ?h ?c) (RW:handempty ?h) (RW:ontable ?c))
+        eff: (and (RW:ontable ?c) (N:RW:holding ?h ?c) (RW:handempty ?h))
     fill-shot: ?s:8 ?i:6 ?h1:1 ?h2:1 ?d:4
-        pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (R:dispenses ?d ?i) (RW:empty ?s) (RW:clean ?s))
+        pre: (and (N:R:= ?h1 ?h2) (R:dispenses ?d ?i) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:empty ?s) (RW:clean ?s))
         eff: (and (N:RW:empty ?s) (RW:contains ?s ?i) (N:RW:clean ?s) (RW:used ?s ?i))
     refill-shot: ?s:8 ?i:6 ?h1:1 ?h2:1 ?d:4
-        pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (R:dispenses ?d ?i) (RW:empty ?s) (RW:used ?s ?i))
+        pre: (and (N:R:= ?h1 ?h2) (R:dispenses ?d ?i) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:empty ?s) (RW:used ?s ?i))
         eff: (and (N:RW:empty ?s) (RW:contains ?s ?i))
     empty-shot: ?h:1 ?p:8 ?b:3
-        pre: (and (RW:holding ?h ?p) (RW:contains ?p ?b) (N:R:= ?p shot8) (N:R:= ?p shot7) (N:R:= ?p shot6) (N:R:= ?p shot5) (N:R:= ?p shot4) (N:R:= ?p shot3) (N:R:= ?p shot2) (N:R:= ?p shot1))
-        eff: (and (N:RW:contains ?p ?b) (RW:empty ?p))
+        pre: (and (N:R:= ?p shot1) (N:R:= ?p shot2) (N:R:= ?p shot3) (N:R:= ?p shot4) (N:R:= ?p shot5) (N:R:= ?p shot6) (N:R:= ?p shot7) (N:R:= ?p shot8) (RW:holding ?h ?p) (RW:contains ?p ?b))
+        eff: (and (RW:empty ?p) (N:RW:contains ?p ?b))
     clean-shot: ?s:8 ?b:3 ?h1:1 ?h2:1
         pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:empty ?s) (RW:used ?s ?b))
-        eff: (and (N:RW:used ?s ?b) (RW:clean ?s))
+        eff: (and (RW:clean ?s) (N:RW:used ?s ?b))
     pour-shot-to-clean-shaker: ?s:8 ?i:6 ?d:9 ?h1:1 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h1 ?s) (RW:contains ?s ?i) (RW:empty ?d) (RW:clean ?d) (RW:shaker-level ?d ?l) (R:next ?l ?l1))
-        eff: (and (N:RW:contains ?s ?i) (RW:empty ?s) (RW:contains ?d ?i) (N:RW:empty ?d) (N:RW:clean ?d) (RW:unshaked ?d) (N:RW:shaker-level ?d ?l) (RW:shaker-level ?d ?l1))
+        pre: (and (R:next ?l ?l1) (RW:holding ?h1 ?s) (RW:empty ?d) (RW:contains ?s ?i) (RW:clean ?d) (RW:shaker-level ?d ?l))
+        eff: (and (RW:empty ?s) (N:RW:empty ?d) (N:RW:contains ?s ?i) (RW:contains ?d ?i) (N:RW:clean ?d) (N:RW:shaker-level ?d ?l) (RW:shaker-level ?d ?l1) (RW:unshaked ?d))
     pour-shot-to-used-shaker: ?s:8 ?i:6 ?d:9 ?h1:1 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h1 ?s) (RW:contains ?s ?i) (RW:unshaked ?d) (RW:shaker-level ?d ?l) (R:next ?l ?l1))
-        eff: (and (N:RW:contains ?s ?i) (RW:contains ?d ?i) (RW:empty ?s) (N:RW:shaker-level ?d ?l) (RW:shaker-level ?d ?l1))
+        pre: (and (R:next ?l ?l1) (RW:holding ?h1 ?s) (RW:contains ?s ?i) (RW:shaker-level ?d ?l) (RW:unshaked ?d))
+        eff: (and (RW:empty ?s) (N:RW:contains ?s ?i) (RW:contains ?d ?i) (N:RW:shaker-level ?d ?l) (RW:shaker-level ?d ?l1))
     empty-shaker: ?h:1 ?s:9 ?b:7 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:contains ?s ?b) (RW:shaked ?s) (RW:shaker-level ?s ?l) (R:shaker-empty-level ?s ?l1))
-        eff: (and (N:RW:shaked ?s) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1) (N:RW:contains ?s ?b) (RW:empty ?s))
+        pre: (and (R:shaker-empty-level ?s ?l1) (RW:holding ?h ?s) (RW:contains ?s ?b) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (RW:empty ?s) (N:RW:contains ?s ?b) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1) (N:RW:shaked ?s))
     clean-shaker: ?h1:1 ?h2:1 ?s:9
         pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:empty ?s))
         eff: (and (RW:clean ?s))
     shake: ?b:7 ?d1:6 ?d2:6 ?s:9 ?h1:1 ?h2:1
-        pre: (and (N:R:= ?h1 ?h2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:contains ?s ?d1) (RW:contains ?s ?d2) (R:cocktail-part1 ?b ?d1) (R:cocktail-part2 ?b ?d2) (RW:unshaked ?s))
-        eff: (and (N:RW:unshaked ?s) (N:RW:contains ?s ?d1) (N:RW:contains ?s ?d2) (RW:shaked ?s) (RW:contains ?s ?b))
+        pre: (and (N:R:= ?h1 ?h2) (R:cocktail-part1 ?b ?d1) (R:cocktail-part2 ?b ?d2) (RW:holding ?h1 ?s) (RW:handempty ?h2) (RW:contains ?s ?d1) (RW:contains ?s ?d2) (RW:unshaked ?s))
+        eff: (and (RW:contains ?s ?b) (N:RW:contains ?s ?d1) (N:RW:contains ?s ?d2) (N:RW:unshaked ?s) (RW:shaked ?s))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail8) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail8) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail8) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail8) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail8) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail8) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     empty-shot: ?h:1 ?p:8 ?b:3
-        pre: (and (RW:holding ?h ?p) (RW:contains ?p ?b) (N:R:= ?b cocktail7) (N:R:= ?b cocktail2) (N:R:= ?b cocktail6) (N:R:= ?b cocktail4) (N:R:= ?b cocktail5) (N:R:= ?b cocktail1) (N:R:= ?b cocktail8) (N:R:= ?b cocktail3))
-        eff: (and (N:RW:contains ?p ?b) (RW:empty ?p))
+        pre: (and (N:R:= ?b cocktail1) (N:R:= ?b cocktail2) (N:R:= ?b cocktail3) (N:R:= ?b cocktail4) (N:R:= ?b cocktail5) (N:R:= ?b cocktail6) (N:R:= ?b cocktail7) (N:R:= ?b cocktail8) (RW:holding ?h ?p) (RW:contains ?p ?b))
+        eff: (and (RW:empty ?p) (N:RW:contains ?p ?b))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail3) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail3) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot1))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail3) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail3) (N:R:= ?d shot1) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail3) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail3) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail1) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail1) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot1) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail1) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail1) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail1) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail1) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail5) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail5) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot3) (N:R:= ?d shot1) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail5) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail5) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail5) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail5) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail4) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail4) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot1) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail4) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail4) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot6) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail4) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail4) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail6) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail6) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot1) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail6) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail6) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail6) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail6) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail2) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail2) (N:R:= ?d shot8) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot1) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail2) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail2) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail2) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail2) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s cocktail7) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (R:= ?b cocktail7) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot1) (N:R:= ?d shot2))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d cocktail7) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (R:= ?b cocktail7) (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot7) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s cocktail7) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d cocktail7) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
     pour-shaker-to-shot: ?b:3 ?d:8 ?h:1 ?s:9 ?l:2 ?l1:2
-        pre: (and (RW:holding ?h ?s) (RW:shaked ?s) (RW:empty ?d) (RW:clean ?d) (RW:contains ?s ?b) (RW:shaker-level ?s ?l) (R:next ?l1 ?l) (N:R:= ?d shot8) (N:R:= ?d shot7) (N:R:= ?d shot6) (N:R:= ?d shot5) (N:R:= ?d shot4) (N:R:= ?d shot3) (N:R:= ?d shot2) (N:R:= ?d shot1))
-        eff: (and (N:RW:clean ?d) (N:RW:empty ?d) (RW:contains ?d ?b) (RW:shaker-level ?s ?l1) (N:RW:shaker-level ?s ?l))
+        pre: (and (N:R:= ?d shot1) (N:R:= ?d shot2) (N:R:= ?d shot3) (N:R:= ?d shot4) (N:R:= ?d shot5) (N:R:= ?d shot6) (N:R:= ?d shot7) (N:R:= ?d shot8) (R:next ?l1 ?l) (RW:holding ?h ?s) (RW:empty ?d) (RW:contains ?s ?b) (RW:clean ?d) (RW:shaker-level ?s ?l) (RW:shaked ?s))
+        eff: (and (N:RW:empty ?d) (RW:contains ?d ?b) (N:RW:clean ?d) (N:RW:shaker-level ?s ?l) (RW:shaker-level ?s ?l1))
 Init[55]:
+  S:(dispenses dispenser1 ingredient1)
+  S:(dispenses dispenser2 ingredient2)
+  S:(dispenses dispenser3 ingredient3)
+  S:(shaker-empty-level shaker1 l0)
+  S:(next l0 l1)
+  S:(next l1 l2)
+  S:(cocktail-part1 cocktail1 ingredient1)
+  S:(cocktail-part1 cocktail2 ingredient1)
+  S:(cocktail-part1 cocktail3 ingredient2)
+  S:(cocktail-part1 cocktail4 ingredient3)
+  S:(cocktail-part1 cocktail5 ingredient1)
+  S:(cocktail-part1 cocktail6 ingredient1)
+  S:(cocktail-part1 cocktail7 ingredient2)
+  S:(cocktail-part1 cocktail8 ingredient2)
+  S:(cocktail-part2 cocktail1 ingredient3)
+  S:(cocktail-part2 cocktail2 ingredient2)
+  S:(cocktail-part2 cocktail3 ingredient1)
+  S:(cocktail-part2 cocktail4 ingredient1)
+  S:(cocktail-part2 cocktail5 ingredient3)
+  S:(cocktail-part2 cocktail6 ingredient3)
+  S:(cocktail-part2 cocktail7 ingredient3)
+  S:(cocktail-part2 cocktail8 ingredient1)
   (ontable shaker1)
   (ontable shot1)
   (ontable shot2)
@@ -192,19 +262,8 @@ Init[55]:
   (ontable shot7)
   (ontable shot8)
   (ontable shot9)
-  S:(dispenses dispenser1 ingredient1)
-  S:(dispenses dispenser2 ingredient2)
-  S:(dispenses dispenser3 ingredient3)
-  (clean shaker1)
-  (clean shot1)
-  (clean shot2)
-  (clean shot3)
-  (clean shot4)
-  (clean shot5)
-  (clean shot6)
-  (clean shot7)
-  (clean shot8)
-  (clean shot9)
+  (handempty left)
+  (handempty right)
   (empty shaker1)
   (empty shot1)
   (empty shot2)
@@ -215,28 +274,17 @@ Init[55]:
   (empty shot7)
   (empty shot8)
   (empty shot9)
-  (handempty left)
-  (handempty right)
-  S:(shaker-empty-level shaker1 l0)
+  (clean shaker1)
+  (clean shot1)
+  (clean shot2)
+  (clean shot3)
+  (clean shot4)
+  (clean shot5)
+  (clean shot6)
+  (clean shot7)
+  (clean shot8)
+  (clean shot9)
   (shaker-level shaker1 l0)
-  S:(next l0 l1)
-  S:(next l1 l2)
-  S:(cocktail-part1 cocktail1 ingredient1)
-  S:(cocktail-part2 cocktail1 ingredient3)
-  S:(cocktail-part1 cocktail2 ingredient1)
-  S:(cocktail-part2 cocktail2 ingredient2)
-  S:(cocktail-part1 cocktail3 ingredient2)
-  S:(cocktail-part2 cocktail3 ingredient1)
-  S:(cocktail-part1 cocktail4 ingredient3)
-  S:(cocktail-part2 cocktail4 ingredient1)
-  S:(cocktail-part1 cocktail5 ingredient1)
-  S:(cocktail-part2 cocktail5 ingredient3)
-  S:(cocktail-part1 cocktail6 ingredient1)
-  S:(cocktail-part2 cocktail6 ingredient3)
-  S:(cocktail-part1 cocktail7 ingredient2)
-  S:(cocktail-part2 cocktail7 ingredient3)
-  S:(cocktail-part1 cocktail8 ingredient2)
-  S:(cocktail-part2 cocktail8 ingredient1)
 Init[0]:
 Goal: (and (RW:contains shot1 cocktail8) (RW:contains shot2 cocktail3) (RW:contains shot3 cocktail1) (RW:contains shot4 cocktail5) (RW:contains shot5 cocktail4) (RW:contains shot6 cocktail6) (RW:contains shot7 cocktail2) (RW:contains shot8 cocktail7))
 Metric: 0

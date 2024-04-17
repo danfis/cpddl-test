@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-14
+13
 begin_variable
 var0
 -1
@@ -72,36 +72,29 @@ begin_variable
 var9
 -1
 2
-NOT-bond h180 o178-bond c032 o178
-bond h180 o178-bond c032 o178
+NOT-0:0:0:bond h180 o178-1:1:3:bond c032 o178
+0:0:0:bond h180 o178-1:1:3:bond c032 o178
 end_variable
 begin_variable
 var10
 -1
 2
-NOT-bond h180 o178-none-of-those
-bond h180 o178-none-of-those
+NOT-0:0:0:bond h180 o178-8:1:17:none-of-those
+0:0:0:bond h180 o178-8:1:17:none-of-those
 end_variable
 begin_variable
 var11
 -1
 2
-NOT-bond h180 o178-bond c032 o178-none-of-those
-bond h180 o178-bond c032 o178-none-of-those
+NOT-0:0:0:bond h180 o178-1:1:3:bond c032 o178-8:1:17:none-of-those
+0:0:0:bond h180 o178-1:1:3:bond c032 o178-8:1:17:none-of-those
 end_variable
 begin_variable
 var12
 -1
 2
-NOT-none-of-those-bond c032 o178
-none-of-those-bond c032 o178
-end_variable
-begin_variable
-var13
--1
-2
-NOT-bond h180 o178-none-of-those-bond c032 o178-none-of-those
-bond h180 o178-none-of-those-bond c032 o178-none-of-those
+NOT-0:1:1:none-of-those-1:1:3:bond c032 o178
+0:1:1:none-of-those-1:1:3:bond c032 o178
 end_variable
 0
 begin_state
@@ -118,14 +111,13 @@ begin_state
 1
 1
 0
-0
 end_state
 begin_goal
 2
 1 0
 4 0
 end_goal
-3
+4
 begin_operator
 etherformationbysulfonatedisplacement h061 o066 c032 o178 o068 s072 h133 c021 o069 c033 h133 c016
 3
@@ -143,12 +135,11 @@ etherformationbysulfonatedisplacement h061 o066 c032 o178 o068 s072 h133 c021 o0
 end_operator
 begin_operator
 sulfonylationofalcohol h180 o178 s072 cl073 c032 o068 c021 o069
-5
+4
 1 1
 9 0
 10 0
 11 0
-13 0
 5
 0 0 -1 1
 0 3 0 1
@@ -159,17 +150,31 @@ sulfonylationofalcohol h180 o178 s072 cl073 c032 o068 c021 o069
 end_operator
 begin_operator
 sulfonylationofalcohol h180 o178 s072 cl073 c032 o068 c021 o069
-4
+3
 1 1
 10 0
 11 0
-13 0
 6
 0 0 0 1
 0 3 0 1
 0 7 0 1
 0 8 -1 0
 0 9 1 0
+0 12 0 1
+1
+end_operator
+begin_operator
+sulfonylationofalcohol h180 o178 s072 cl073 c032 o068 c021 o069
+1
+1 1
+8
+0 0 0 1
+0 3 0 1
+0 7 0 1
+0 8 1 0
+0 9 1 0
+0 10 1 0
+0 11 1 0
 0 12 0 1
 1
 end_operator

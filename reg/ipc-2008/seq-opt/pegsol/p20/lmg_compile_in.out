@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 3, lifted mgroups: 2
 Compile-in LMG: Found mutex condition for action 'jump-new-move' and mgroup {occupied V0:location, free V0:location}:=1: (= ?from ?to)
 Compile-in LMG: Found mutex condition for action 'jump-new-move' and mgroup {occupied V0:location, free V0:location}:=1: (= ?over ?to)
@@ -5,7 +8,34 @@ Compile-in LMG: Precondition of action 'jump-new-move' extended with (and (not (
 Compile-in LMG: Found mutex condition for action 'jump-continue-move' and mgroup {occupied V0:location, free V0:location}:=1: (= ?from ?to)
 Compile-in LMG: Found mutex condition for action 'jump-continue-move' and mgroup {occupied V0:location, free V0:location}:=1: (= ?over ?to)
 Compile-in LMG: Precondition of action 'jump-continue-move' extended with (and (not (= ?from ?to)) (not (= ?over ?to)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 2, objects: 33, predicates: 6, functions: 1, actions: 3, action-pre-size: [min: 7, max: 1, avg: 5.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action jump-new-move
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action jump-continue-move
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action end-move
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 33, vars: 3, predicates: 8, rules: 175)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 33, vars: 3, predicates: 8, rules: 175)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 33, vars: 3, predicates: 8, rules: 175)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 175
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 175, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 2, objects: 33, predicates: 6, functions: 1, actions: 3, action-pre-size: [min: 7, max: 1, avg: 5.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 3
+Compile-in LMG: END
 Domain: pegsolitaire-sequential
 Problem: pegsolitaire-sequential-044
 Require: 200ff
@@ -60,108 +90,91 @@ Function[1]:
     total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[3]:
     jump-new-move: ?from:1 ?over:1 ?to:1
-        pre: (and (RW:move-ended) (R:in-line ?from ?over ?to) (RW:occupied ?from) (RW:occupied ?over) (RW:free ?to) (N:R:= ?from ?to) (N:R:= ?over ?to))
-        eff: (and (N:RW:move-ended) (N:RW:occupied ?from) (N:RW:occupied ?over) (N:RW:free ?to) (RW:free ?from) (RW:free ?over) (RW:occupied ?to) (RW:last-visited ?to) (increase (total-cost) 1))
+        pre: (and (N:R:= ?from ?to) (N:R:= ?over ?to) (R:in-line ?from ?over ?to) (RW:occupied ?from) (RW:occupied ?over) (RW:free ?to) (RW:move-ended))
+        eff: (and (N:RW:occupied ?from) (N:RW:occupied ?over) (RW:occupied ?to) (RW:free ?from) (RW:free ?over) (N:RW:free ?to) (N:RW:move-ended) (RW:last-visited ?to) (increase (total-cost) 1))
     jump-continue-move: ?from:1 ?over:1 ?to:1
-        pre: (and (RW:last-visited ?from) (R:in-line ?from ?over ?to) (RW:occupied ?from) (RW:occupied ?over) (RW:free ?to) (N:R:= ?from ?to) (N:R:= ?over ?to))
-        eff: (and (N:RW:occupied ?from) (N:RW:occupied ?over) (N:RW:free ?to) (RW:free ?from) (RW:free ?over) (RW:occupied ?to) (N:RW:last-visited ?from) (RW:last-visited ?to))
+        pre: (and (N:R:= ?from ?to) (N:R:= ?over ?to) (R:in-line ?from ?over ?to) (RW:occupied ?from) (RW:occupied ?over) (RW:free ?to) (RW:last-visited ?from))
+        eff: (and (N:RW:occupied ?from) (N:RW:occupied ?over) (RW:occupied ?to) (RW:free ?from) (RW:free ?over) (N:RW:free ?to) (N:RW:last-visited ?from) (RW:last-visited ?to))
     end-move: ?loc:1
         pre: (and (RW:last-visited ?loc))
         eff: (and (RW:move-ended) (N:RW:last-visited ?loc))
 Init[110]:
-  (move-ended)
   S:(in-line pos-0-2 pos-0-3 pos-0-4)
-  S:(in-line pos-0-4 pos-0-3 pos-0-2)
   S:(in-line pos-0-2 pos-1-2 pos-2-2)
-  S:(in-line pos-2-2 pos-1-2 pos-0-2)
   S:(in-line pos-0-3 pos-1-3 pos-2-3)
-  S:(in-line pos-2-3 pos-1-3 pos-0-3)
+  S:(in-line pos-0-4 pos-0-3 pos-0-2)
   S:(in-line pos-0-4 pos-1-4 pos-2-4)
-  S:(in-line pos-2-4 pos-1-4 pos-0-4)
   S:(in-line pos-1-2 pos-1-3 pos-1-4)
-  S:(in-line pos-1-4 pos-1-3 pos-1-2)
   S:(in-line pos-1-2 pos-2-2 pos-3-2)
-  S:(in-line pos-3-2 pos-2-2 pos-1-2)
   S:(in-line pos-1-3 pos-2-3 pos-3-3)
-  S:(in-line pos-3-3 pos-2-3 pos-1-3)
+  S:(in-line pos-1-4 pos-1-3 pos-1-2)
   S:(in-line pos-1-4 pos-2-4 pos-3-4)
-  S:(in-line pos-3-4 pos-2-4 pos-1-4)
   S:(in-line pos-2-0 pos-2-1 pos-2-2)
-  S:(in-line pos-2-2 pos-2-1 pos-2-0)
   S:(in-line pos-2-0 pos-3-0 pos-4-0)
-  S:(in-line pos-4-0 pos-3-0 pos-2-0)
   S:(in-line pos-2-1 pos-2-2 pos-2-3)
-  S:(in-line pos-2-3 pos-2-2 pos-2-1)
   S:(in-line pos-2-1 pos-3-1 pos-4-1)
-  S:(in-line pos-4-1 pos-3-1 pos-2-1)
+  S:(in-line pos-2-2 pos-1-2 pos-0-2)
+  S:(in-line pos-2-2 pos-2-1 pos-2-0)
   S:(in-line pos-2-2 pos-2-3 pos-2-4)
-  S:(in-line pos-2-4 pos-2-3 pos-2-2)
   S:(in-line pos-2-2 pos-3-2 pos-4-2)
-  S:(in-line pos-4-2 pos-3-2 pos-2-2)
+  S:(in-line pos-2-3 pos-1-3 pos-0-3)
+  S:(in-line pos-2-3 pos-2-2 pos-2-1)
   S:(in-line pos-2-3 pos-2-4 pos-2-5)
-  S:(in-line pos-2-5 pos-2-4 pos-2-3)
   S:(in-line pos-2-3 pos-3-3 pos-4-3)
-  S:(in-line pos-4-3 pos-3-3 pos-2-3)
+  S:(in-line pos-2-4 pos-1-4 pos-0-4)
+  S:(in-line pos-2-4 pos-2-3 pos-2-2)
   S:(in-line pos-2-4 pos-2-5 pos-2-6)
-  S:(in-line pos-2-6 pos-2-5 pos-2-4)
   S:(in-line pos-2-4 pos-3-4 pos-4-4)
-  S:(in-line pos-4-4 pos-3-4 pos-2-4)
+  S:(in-line pos-2-5 pos-2-4 pos-2-3)
   S:(in-line pos-2-5 pos-3-5 pos-4-5)
-  S:(in-line pos-4-5 pos-3-5 pos-2-5)
+  S:(in-line pos-2-6 pos-2-5 pos-2-4)
   S:(in-line pos-2-6 pos-3-6 pos-4-6)
-  S:(in-line pos-4-6 pos-3-6 pos-2-6)
   S:(in-line pos-3-0 pos-3-1 pos-3-2)
-  S:(in-line pos-3-2 pos-3-1 pos-3-0)
   S:(in-line pos-3-1 pos-3-2 pos-3-3)
-  S:(in-line pos-3-3 pos-3-2 pos-3-1)
+  S:(in-line pos-3-2 pos-2-2 pos-1-2)
+  S:(in-line pos-3-2 pos-3-1 pos-3-0)
   S:(in-line pos-3-2 pos-3-3 pos-3-4)
-  S:(in-line pos-3-4 pos-3-3 pos-3-2)
   S:(in-line pos-3-2 pos-4-2 pos-5-2)
-  S:(in-line pos-5-2 pos-4-2 pos-3-2)
+  S:(in-line pos-3-3 pos-2-3 pos-1-3)
+  S:(in-line pos-3-3 pos-3-2 pos-3-1)
   S:(in-line pos-3-3 pos-3-4 pos-3-5)
-  S:(in-line pos-3-5 pos-3-4 pos-3-3)
   S:(in-line pos-3-3 pos-4-3 pos-5-3)
-  S:(in-line pos-5-3 pos-4-3 pos-3-3)
+  S:(in-line pos-3-4 pos-2-4 pos-1-4)
+  S:(in-line pos-3-4 pos-3-3 pos-3-2)
   S:(in-line pos-3-4 pos-3-5 pos-3-6)
-  S:(in-line pos-3-6 pos-3-5 pos-3-4)
   S:(in-line pos-3-4 pos-4-4 pos-5-4)
-  S:(in-line pos-5-4 pos-4-4 pos-3-4)
+  S:(in-line pos-3-5 pos-3-4 pos-3-3)
+  S:(in-line pos-3-6 pos-3-5 pos-3-4)
+  S:(in-line pos-4-0 pos-3-0 pos-2-0)
   S:(in-line pos-4-0 pos-4-1 pos-4-2)
-  S:(in-line pos-4-2 pos-4-1 pos-4-0)
+  S:(in-line pos-4-1 pos-3-1 pos-2-1)
   S:(in-line pos-4-1 pos-4-2 pos-4-3)
-  S:(in-line pos-4-3 pos-4-2 pos-4-1)
+  S:(in-line pos-4-2 pos-3-2 pos-2-2)
+  S:(in-line pos-4-2 pos-4-1 pos-4-0)
   S:(in-line pos-4-2 pos-4-3 pos-4-4)
-  S:(in-line pos-4-4 pos-4-3 pos-4-2)
   S:(in-line pos-4-2 pos-5-2 pos-6-2)
-  S:(in-line pos-6-2 pos-5-2 pos-4-2)
+  S:(in-line pos-4-3 pos-3-3 pos-2-3)
+  S:(in-line pos-4-3 pos-4-2 pos-4-1)
   S:(in-line pos-4-3 pos-4-4 pos-4-5)
-  S:(in-line pos-4-5 pos-4-4 pos-4-3)
   S:(in-line pos-4-3 pos-5-3 pos-6-3)
-  S:(in-line pos-6-3 pos-5-3 pos-4-3)
+  S:(in-line pos-4-4 pos-3-4 pos-2-4)
+  S:(in-line pos-4-4 pos-4-3 pos-4-2)
   S:(in-line pos-4-4 pos-4-5 pos-4-6)
-  S:(in-line pos-4-6 pos-4-5 pos-4-4)
   S:(in-line pos-4-4 pos-5-4 pos-6-4)
-  S:(in-line pos-6-4 pos-5-4 pos-4-4)
+  S:(in-line pos-4-5 pos-3-5 pos-2-5)
+  S:(in-line pos-4-5 pos-4-4 pos-4-3)
+  S:(in-line pos-4-6 pos-3-6 pos-2-6)
+  S:(in-line pos-4-6 pos-4-5 pos-4-4)
+  S:(in-line pos-5-2 pos-4-2 pos-3-2)
   S:(in-line pos-5-2 pos-5-3 pos-5-4)
+  S:(in-line pos-5-3 pos-4-3 pos-3-3)
+  S:(in-line pos-5-4 pos-4-4 pos-3-4)
   S:(in-line pos-5-4 pos-5-3 pos-5-2)
+  S:(in-line pos-6-2 pos-5-2 pos-4-2)
   S:(in-line pos-6-2 pos-6-3 pos-6-4)
+  S:(in-line pos-6-3 pos-5-3 pos-4-3)
+  S:(in-line pos-6-4 pos-5-4 pos-4-4)
   S:(in-line pos-6-4 pos-6-3 pos-6-2)
-  (free pos-0-2)
-  (free pos-0-3)
-  (free pos-1-2)
-  (free pos-1-3)
-  (free pos-2-0)
-  (free pos-2-1)
-  (free pos-2-4)
-  (free pos-2-5)
-  (free pos-2-6)
-  (free pos-3-0)
-  (free pos-4-0)
-  (free pos-4-1)
-  (free pos-4-5)
-  (free pos-4-6)
-  (free pos-6-2)
-  (free pos-6-4)
   (occupied pos-0-4)
   (occupied pos-1-4)
   (occupied pos-2-2)
@@ -179,7 +192,24 @@ Init[110]:
   (occupied pos-5-3)
   (occupied pos-5-4)
   (occupied pos-6-3)
+  (free pos-0-2)
+  (free pos-0-3)
+  (free pos-1-2)
+  (free pos-1-3)
+  (free pos-2-0)
+  (free pos-2-1)
+  (free pos-2-4)
+  (free pos-2-5)
+  (free pos-2-6)
+  (free pos-3-0)
+  (free pos-4-0)
+  (free pos-4-1)
+  (free pos-4-5)
+  (free pos-4-6)
+  (free pos-6-2)
+  (free pos-6-4)
+  (move-ended)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (RW:free pos-0-2) (RW:free pos-0-3) (RW:free pos-0-4) (RW:free pos-1-2) (RW:free pos-1-3) (RW:free pos-1-4) (RW:free pos-2-0) (RW:free pos-2-1) (RW:free pos-2-2) (RW:free pos-2-3) (RW:free pos-2-4) (RW:free pos-2-5) (RW:free pos-2-6) (RW:free pos-3-0) (RW:free pos-3-1) (RW:free pos-3-2) (RW:free pos-3-4) (RW:free pos-3-5) (RW:free pos-3-6) (RW:free pos-4-0) (RW:free pos-4-1) (RW:free pos-4-2) (RW:free pos-4-3) (RW:free pos-4-4) (RW:free pos-4-5) (RW:free pos-4-6) (RW:free pos-5-2) (RW:free pos-5-3) (RW:free pos-5-4) (RW:free pos-6-2) (RW:free pos-6-3) (RW:free pos-6-4) (RW:occupied pos-3-3))
+Goal: (and (RW:occupied pos-3-3) (RW:free pos-0-2) (RW:free pos-0-3) (RW:free pos-0-4) (RW:free pos-1-2) (RW:free pos-1-3) (RW:free pos-1-4) (RW:free pos-2-0) (RW:free pos-2-1) (RW:free pos-2-2) (RW:free pos-2-3) (RW:free pos-2-4) (RW:free pos-2-5) (RW:free pos-2-6) (RW:free pos-3-0) (RW:free pos-3-1) (RW:free pos-3-2) (RW:free pos-3-4) (RW:free pos-3-5) (RW:free pos-3-6) (RW:free pos-4-0) (RW:free pos-4-1) (RW:free pos-4-2) (RW:free pos-4-3) (RW:free pos-4-4) (RW:free pos-4-5) (RW:free pos-4-6) (RW:free pos-5-2) (RW:free pos-5-3) (RW:free pos-5-4) (RW:free pos-6-2) (RW:free pos-6-3) (RW:free pos-6-4))
 Metric: 1

@@ -1,10 +1,42 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 5, lifted mgroups: 2
 Compile-in LMG: Found mutex condition for action 'send' and mgroup {cached V0:data V1:server, NOT-cached V0:data V1:server}:=1: (= ?from ?to)
 Compile-in LMG: Precondition of action 'send' extended with (not (= ?from ?to))
 Compile-in LMG: Found mutex condition for action 'process' and mgroup {cached V0:data V1:server, NOT-cached V0:data V1:server}:=1: (= ?in1 ?out)
 Compile-in LMG: Found mutex condition for action 'process' and mgroup {cached V0:data V1:server, NOT-cached V0:data V1:server}:=1: (= ?in2 ?out)
 Compile-in LMG: Precondition of action 'process' extended with (and (not (= ?in1 ?out)) (not (= ?in2 ?out)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 5, objects: 35, predicates: 11, functions: 4, actions: 5, action-pre-size: [min: 4, max: 11, avg: 6.60, med: 7.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action release
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action save
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action send
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action process
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 35, vars: 9, predicates: 16, rules: 192)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 35, vars: 9, predicates: 16, rules: 192)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 35, vars: 9, predicates: 16, rules: 192)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 192
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 192, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 35, predicates: 11, functions: 4, actions: 5, action-pre-size: [min: 4, max: 11, avg: 6.60, med: 7.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 5
+Compile-in LMG: END
 Domain: data-network
 Problem: p5-3-10-tiny-network-0
 Require: 200ff
@@ -76,19 +108,19 @@ Function[4]:
 Action[5]:
     release: ?d:1 ?s:3 ?size:4 ?before:4 ?after:4
         pre: (and (R:data-size ?d ?size) (R:sum ?after ?size ?before) (RW:cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) 0) (N:RW:cached ?d ?s) (RW:NOT-cached ?d ?s))
+        eff: (and (N:RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (RW:NOT-cached ?d ?s) (increase (total-cost) 0))
     save: ?d:1 ?size:4 ?s:3
         pre: (and (R:data-size ?d ?size) (RW:cached ?d ?s))
         eff: (and (RW:saved ?d ?s) (increase (total-cost) (io-cost ?s ?size)))
     load: ?d:1 ?s:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:data-size ?d ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:saved ?d ?s) (RW:NOT-cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) (io-cost ?s ?size)) (RW:cached ?d ?s) (N:RW:NOT-cached ?d ?s))
+        pre: (and (R:data-size ?d ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:saved ?d ?s) (RW:usage ?s ?before) (RW:NOT-cached ?d ?s))
+        eff: (and (RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (N:RW:NOT-cached ?d ?s) (increase (total-cost) (io-cost ?s ?size)))
     send: ?d:1 ?from:3 ?to:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (N:R:= ?from ?to) (R:connected ?from ?to) (R:data-size ?d ?size) (R:capacity ?to ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?d ?from) (RW:NOT-cached ?d ?to) (RW:usage ?to ?before))
-        eff: (and (N:RW:usage ?to ?before) (RW:usage ?to ?after) (increase (total-cost) (send-cost ?from ?to ?size)) (RW:cached ?d ?to) (N:RW:NOT-cached ?d ?to))
+        pre: (and (N:R:= ?from ?to) (R:connected ?from ?to) (R:data-size ?d ?size) (R:capacity ?to ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?d ?from) (RW:usage ?to ?before) (RW:NOT-cached ?d ?to))
+        eff: (and (RW:cached ?d ?to) (N:RW:usage ?to ?before) (RW:usage ?to ?after) (N:RW:NOT-cached ?d ?to) (increase (total-cost) (send-cost ?from ?to ?size)))
     process: ?in1:1 ?in2:1 ?out:1 ?sc:2 ?s:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:script-io ?sc ?in1 ?in2 ?out) (R:data-size ?out ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?in1 ?s) (RW:cached ?in2 ?s) (RW:NOT-cached ?out ?s) (RW:usage ?s ?before) (N:R:= ?in1 ?out) (N:R:= ?in2 ?out))
-        eff: (and (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) (process-cost ?sc ?s)) (RW:cached ?out ?s) (N:RW:NOT-cached ?out ?s))
+        pre: (and (N:R:= ?in1 ?out) (N:R:= ?in2 ?out) (R:script-io ?sc ?in1 ?in2 ?out) (R:data-size ?out ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?in1 ?s) (RW:cached ?in2 ?s) (RW:usage ?s ?before) (RW:NOT-cached ?out ?s))
+        eff: (and (RW:cached ?out ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (N:RW:NOT-cached ?out ?s) (increase (total-cost) (process-cost ?sc ?s)))
 Init[107]:
   S:(script-io script1 data-0-3 data-0-5 data-1-4)
   S:(script-io script2 data-0-5 data-0-3 data-1-2)
@@ -101,8 +133,8 @@ Init[107]:
   S:(script-io script9 data-0-3 data-0-5 data-1-4)
   S:(script-io script10 data-1-2 data-1-4 data-2-1)
   S:(connected server1 server2)
-  S:(connected server2 server1)
   S:(connected server1 server3)
+  S:(connected server2 server1)
   S:(connected server3 server1)
   S:(data-size data-0-3 number4)
   S:(data-size data-0-5 number5)

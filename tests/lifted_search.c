@@ -113,7 +113,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
     pddlStripsMakerFree(&smaker);
 }
 
-TEST(lifted_succ_gen_sql, pddl)
+TEST_COND(lifted_succ_gen_sql, pddl, SQLITE)
 {
     testSuccGen(PDDL_LIFTED_APP_ACTION_SQL);
 }
@@ -204,7 +204,7 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
     pddlLiftedHeurDel(heur);
 }
 
-TEST(lifted_blind_search_sql, lifted_search)
+TEST_COND(lifted_blind_search_sql, lifted_search, SQLITE)
 {
     _lifted_search(pddlLiftedHeurBlind(),
                    PDDL_LIFTED_SEARCH_ASTAR,
@@ -218,7 +218,7 @@ TEST(lifted_blind_search_dl, lifted_search)
                    PDDL_LIFTED_APP_ACTION_DL, 1);
 }
 
-TEST(lifted_search_astar_hmax_sql, lifted_search)
+TEST_COND(lifted_search_astar_hmax_sql, lifted_search, SQLITE)
 {
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,
@@ -267,7 +267,7 @@ TEST(lifted_search_lazy_hff_add_dl, lifted_search)
                    PDDL_LIFTED_APP_ACTION_DL, 1);
 }
 
-TEST(lifted_blind_search_unit_cost_sql, lifted_search_unit_cost)
+TEST_COND(lifted_blind_search_unit_cost_sql, lifted_search_unit_cost, SQLITE)
 {
     _lifted_search(pddlLiftedHeurBlind(),
                    PDDL_LIFTED_SEARCH_ASTAR,
@@ -281,7 +281,7 @@ TEST(lifted_blind_search_unit_cost_dl, lifted_search_unit_cost)
                    PDDL_LIFTED_APP_ACTION_DL, 0);
 }
 
-TEST(lifted_search_astar_unit_cost_hmax_sql, lifted_search_unit_cost)
+TEST_COND(lifted_search_astar_unit_cost_hmax_sql, lifted_search_unit_cost, SQLITE)
 {
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,

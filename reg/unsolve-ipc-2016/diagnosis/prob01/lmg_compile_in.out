@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 216, lifted mgroups: 235
 Compile-in LMG: Found dead-end condition for action 'autotakeoff-takeoff_fcl_finished_reaction1-1_ato-0-0-275_n0_n1' and mgroup {autotakeoff-fsm_exec-is-start_ato-0-0-275, autotakeoff-fsm_state-is-takeoff_ato-0-0-275, observed_obs5, autotakeoff-mode-is-pre_init_ato-0-0-275, autotakeoff-mode-is-processing_ato-0-0-275, autotakeoff-mode-is-ready_ato-0-0-275}: (and)
 Compile-in LMG: Precondition of action 'autotakeoff-takeoff_fcl_finished_reaction1-1_ato-0-0-275_n0_n1' extended with (FALSE)
@@ -63,7 +66,18 @@ Compile-in LMG: Found dead-end condition for action 'missionexec-destroy-mission
 Compile-in LMG: Precondition of action 'missionexec-destroy-mission-autotakeoff-call_destroy_when_done-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1' extended with (FALSE)
 Compile-in LMG: Found dead-end condition for action 'missionexec-destroy-mission-autotakeoff-call_destroy_when_failed-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1' and mgroup {autotakeoff-mode-is-running_ato-0-0-275, autotakeoff-mode-is-pre_init_ato-0-0-275, autotakeoff-mode-is-processing_ato-0-0-275, autotakeoff-mode-is-ready_ato-0-0-275, autotakeoff-mode-is-failed_ato-0-0-275, autotakeoff-mode-is-done_ato-0-0-275, observed_obs8}: (and)
 Compile-in LMG: Precondition of action 'missionexec-destroy-mission-autotakeoff-call_destroy_when_failed-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1' extended with (FALSE)
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 0, predicates: 191, functions: 0, actions: 216, action-pre-size: [min: 17, max: 2, avg: 6.00, med: 9.50]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: No negative conditions.
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 0, predicates: 191, functions: 0, actions: 181, action-pre-size: [min: 17, max: 2, avg: 6.06, med: 10.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 181
+Compile-in LMG: END
 Domain: witas-dddl-compiled
 Problem: hyptest-log1-o20-m5-u
 Require: ff
@@ -268,136 +282,136 @@ Function[0]:
 Action[181]:
     flightcontrol-fcl-event-finished-0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs4) (N:RW:pending_obs4))
+        eff: (and (N:RW:pending_obs4) (RW:observed_obs4))
     flightcontrol-fcl-event-in_the_air-0_heli0_obs2: 
         pre: (and (RW:pending_obs2) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs2) (N:RW:pending_obs2))
+        eff: (and (N:RW:pending_obs2) (RW:observed_obs2))
     fly3d-start_ok_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-start_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346))
     fly3d-enter_turn_to_segment_heading_checkpoint10-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint10_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint10_n0))
+        eff: (and (N:RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint10_n0) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346))
     fly3d-enter_turn_to_segment_heading_checkpoint11-0_f3d-0-0-346_obs13: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:pending_obs13) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:observed_obs13) (N:RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (N:RW:pending_obs13))
+        eff: (and (N:RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (N:RW:pending_obs13) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:observed_obs13))
     fly3d-enter_turn_to_segment_heading_checkpoint11-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint11_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint11_n0))
+        eff: (and (N:RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint11_n0))
     fly3d-enter_send_starting_yaw_command_ok_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
     fly3d-enter_send_starting_yaw_command_checkpoint12-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0))
     fly3d-in_send_starting_yaw_command_idle_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
         eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
     fly3d-in_send_starting_yaw_command_fcl_cancel_1-flightcontrol-fcl-event-canceled-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346))
     fly3d-in_send_starting_yaw_command_fcl_cancel_2-flightcontrol-fcl-event-manual-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-manual_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-manual_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-manual_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346))
     fly3d-in_send_starting_yaw_command_fcl_error-flightcontrol-fcl-event-not_accepted-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346))
     fly3d-in_wait_for_yaw_finish_fcl_finished-flightcontrol-fcl-event-finished-0_f3d-0-0-346_heli0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs4) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:pending_obs4) (N:RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:pending_obs4) (RW:observed_obs4) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
     fly3d-in_wait_for_yaw_finish_fcl_finished-flightcontrol-fcl-event-finished-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
     fly3d-in_wait_for_yaw_finish_fcl_cancel_1-flightcontrol-fcl-event-canceled-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346))
     fly3d-in_wait_for_yaw_finish_fcl_cancel_2-flightcontrol-fcl-event-canceled-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346))
     fly3d-in_wait_for_yaw_finish_fcl_error-flightcontrol-fcl-event-not_accepted-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346))
     fly3d-enter_send_first_trajectory_checkpoint20-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346))
     fly3d-enter_send_first_trajectory_checkpoint21-0_f3d-0-0-346_obs14: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:pending_obs14) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14))
     fly3d-enter_send_first_trajectory_checkpoint21-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0))
     fly3d-enter_send_first_trajectory_checkpoint22-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint22_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint22_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint22_n0) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346))
     fly3d-enter_send_first_trajectory_checkpoint21_after22-0_f3d-0-0-346_obs14: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:pending_obs14) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346))
     fly3d-enter_send_first_trajectory_checkpoint21_after22-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346))
     fly3d-enter_send_first_trajectory_busy_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346))
     fly3d-enter_send_first_trajectory_after22_busy_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:not_at_end_constraint0))
         eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346))
     fly3d-in_send_first_trajectory_fcl_finished-flightcontrol-fcl-event-finished-0_f3d-0-0-346_heli0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs4) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (N:RW:pending_obs4) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:pending_obs4) (RW:observed_obs4) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346))
     fly3d-in_send_first_trajectory_fcl_finished-flightcontrol-fcl-event-finished-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346))
     fly3d-in_send_first_trajectory_fcl_next_trajectory-flightcontrol-fcl-event-traj3d_next_segment-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-traj3d_next_segment_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-traj3d_next_segment_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-traj3d_next_segment_n0) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
     fly3d-in_send_first_trajectory_idle_timeout_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:not_at_end_constraint0))
         eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
     fly3d-in_wait_trajectory_end_fcl_finished-flightcontrol-fcl-event-finished-0_f3d-0-0-346_heli0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs4) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (N:RW:pending_obs4) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:pending_obs4) (RW:observed_obs4) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346))
     fly3d-in_wait_trajectory_end_fcl_finished-flightcontrol-fcl-event-finished-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346))
     fly3d-in_wait_trajectory_end_fcl_finished_reaction1-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint24_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint24_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint24_n0) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346))
     fly3d-in_wait_trajectory_end_fcl_finished_reaction2a_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346))
+        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346))
     fly3d-in_wait_trajectory_end_fcl_finished_reaction2b_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346))
+        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346))
     fly3d-in_wait_trajectory_end_fcl_finished_reaction2d_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:not_at_end_constraint0))
         eff: (and (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_checkpoint30-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint30_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint30_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint30_n0) (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_yaw_wait_finish_1-flightcontrol-fcl-return-finished-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-return-finished_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-return-finished_n0) (N:RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-return-finished_n0) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_yaw_wait_finish_2-flightcontrol-fcl-return-finished-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-return-finished_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-return-finished_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-return-finished_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_yaw_wait_cancel_1-flightcontrol-fcl-return-canceled-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-return-canceled_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-return-canceled_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-return-canceled_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_yaw_wait_cancel_2-flightcontrol-fcl-return-manual-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-return-manual_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-return-manual_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-return-manual_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_yaw_wait_error-flightcontrol-fcl-return-not_accepted-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-return-not_accepted_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2-fail_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-return-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-return-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-action2-wait_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-fail_f3d-0-0-346))
     fly3d-enter_turn_to_goal_heading_checkpoint31a-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint31_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint31_n0))
+        eff: (and (N:RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint31_n0))
     fly3d-enter_turn_to_goal_heading_checkpoint31b-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint31_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint31_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint31_n0))
     fly3d-enter_goal_point_wait_checkpoint40-1_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint40_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint40_n0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint40_n0))
     fly3d-goal_point_wait_cmd_continue_1_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:not_at_end_constraint0))
         eff: (and (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346))
@@ -406,410 +420,424 @@ Action[181]:
         eff: (and (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346))
     fly3d-global_fcl_canceled-flightcontrol-fcl-event-canceled-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-canceled_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346))
     fly3d-global_fcl_manual-flightcontrol-fcl-event-manual-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-manual_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-manual_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-manual_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346))
     fly3d-global_fcl_error-flightcontrol-fcl-event-not_accepted-1_f3d-0-0-346_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-fsm_exec-is-global_reaction_error_1_f3d-0-0-346) (N:RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-not_accepted_n0) (N:RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_error_1_f3d-0-0-346))
     autotakeoff-start_ok_ato-0-0-275: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-start_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-start_ato-0-0-275))
+        eff: (and (N:RW:autotakeoff-fsm_exec-is-start_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275))
     autotakeoff-takeoff_action1-1_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (RW:fault-count-3_lost_ato-0-0-275_checkpoint1_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:fault-count-3_lost_ato-0-0-275_checkpoint1_n0) (N:W:dominates-3_hyp1_lost_ato-0-0-275_checkpoint1))
+        eff: (and (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:fault-count-3_lost_ato-0-0-275_checkpoint1_n0) (RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_checkpoint1))
     autotakeoff-takeoff_fcl_finished-flightcontrol-fcl-event-finished-0_ato-0-0-275_heli0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs4) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:pending_obs4) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275))
+        eff: (and (N:RW:pending_obs4) (RW:observed_obs4) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275))
     autotakeoff-takeoff_fcl_finished-flightcontrol-fcl-event-finished-1_ato-0-0-275_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275))
     autotakeoff-takeoff_fcl_finished_reaction1-0_ato-0-0-275_obs5: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (RW:pending_obs5) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:observed_obs5) (N:RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:pending_obs5))
-    set_goal_0_constraint0: 
-        pre: (and (RW:observed_obs4) (RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (RW:not_at_end_constraint0))
-        eff: (and (W:achieved_constraint0) (N:RW:not_at_end_constraint0))
-    advance-to-obs-1_obs14_obs13: 
-        pre: (and (RW:observed_obs13) (RW:future_obs14) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs14) (N:RW:future_obs14))
-    advance-to-obs-1_obs13_obs12: 
-        pre: (and (RW:observed_obs12) (RW:future_obs13) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs13) (N:RW:future_obs13))
-    advance-to-obs-1_obs12_obs11: 
-        pre: (and (RW:observed_obs11) (RW:future_obs12) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs12) (N:RW:future_obs12))
+        eff: (and (N:RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:pending_obs5) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:observed_obs5))
     autotakeoff-takeoff_idle-0_ato-0-0-275_obs1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:pending_obs1) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs1) (N:RW:pending_obs1))
+        eff: (and (N:RW:pending_obs1) (RW:observed_obs1))
     autotakeoff-takeoff_idle-0_ato-0-0-275_obs3: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:pending_obs3) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs3) (N:RW:pending_obs3))
-    advance-to-obs-1_obs11_obs10: 
-        pre: (and (RW:observed_obs10) (RW:future_obs11) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs11) (N:RW:future_obs11))
+        eff: (and (N:RW:pending_obs3) (RW:observed_obs3))
     autotakeoff-go_to_final_altitude_action1_climb-0_ato-0-0-275_obs6: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-in_start_call-is-no_ato-0-0-275) (RW:pending_obs6) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-action2-climb_ato-0-0-275) (RW:observed_obs6) (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:pending_obs6))
+        eff: (and (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:pending_obs6) (RW:autotakeoff-fsm_exec-is-action2-climb_ato-0-0-275) (RW:observed_obs6))
     autotakeoff-go_to_final_altitude_action1_climb-1_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-in_start_call-is-no_ato-0-0-275) (RW:fault-count-3_lost_ato-0-0-275_checkpoint5_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-action2-climb_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:fault-count-3_lost_ato-0-0-275_checkpoint5_n0))
+        eff: (and (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action2-climb_ato-0-0-275) (N:RW:fault-count-3_lost_ato-0-0-275_checkpoint5_n0))
     autotakeoff-go_to_final_altitude_climb_ok_ato-0-0-275: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-in_start_call-is-no_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action2-climb_ato-0-0-275) (RW:not_at_end_constraint0))
         eff: (and (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-action2-climb_ato-0-0-275))
     autotakeoff-go_to_final_altitude_fcl_finished-flightcontrol-fcl-event-finished-0_ato-0-0-275_heli0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:observed_obs4) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:pending_obs4) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275))
+        eff: (and (N:RW:pending_obs4) (RW:observed_obs4) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275))
     autotakeoff-go_to_final_altitude_fcl_finished-flightcontrol-fcl-event-finished-1_ato-0-0-275_heli0_heli0_n0_n1: 
         pre: (and (RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275))
+        eff: (and (N:RW:fault-count-3_lost_heli0_fcl-event-finished_n0) (N:RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275))
     autotakeoff-go_to_final_altitude_fcl_finished_reaction1-0_ato-0-0-275_obs7: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:pending_obs7) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (RW:observed_obs7) (N:RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:pending_obs7))
-    advance-to-obs-1_obs10_obs9: 
-        pre: (and (RW:observed_obs9) (RW:future_obs10) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs10) (N:RW:future_obs10))
-    advance-to-obs-1_obs9_obs8: 
-        pre: (and (RW:observed_obs8) (RW:future_obs9) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs9) (N:RW:future_obs9))
-    advance-to-obs-1_obs8_obs7: 
-        pre: (and (RW:observed_obs7) (RW:future_obs8) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs8) (N:RW:future_obs8))
-    advance-to-obs-1_obs7_obs6: 
-        pre: (and (RW:observed_obs6) (RW:future_obs7) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs7) (N:RW:future_obs7))
+        eff: (and (N:RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (N:RW:pending_obs7) (RW:autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (RW:observed_obs7))
     navtopoint-start_decouple_idle_time_out_nav-0-0-275: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-start_decouple_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (N:RW:navtopoint-fsm_state-is-start_decouple_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275))
+        eff: (and (N:RW:navtopoint-fsm_state-is-start_decouple_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275))
     navtopoint-plan_path_action1_checkpoint1-0_nav-0-0-275_obs10: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:pending_obs10) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:observed_obs10) (N:RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:pending_obs10))
+        eff: (and (N:RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:pending_obs10) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:observed_obs10))
     navtopoint-plan_path_action1_checkpoint1-1_nav-0-0-275_n0_n1: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:fault-count-3_lost_nav-0-0-275_checkpoint1_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:fault-count-3_lost_nav-0-0-275_checkpoint1_n0))
+        eff: (and (N:RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (N:RW:fault-count-3_lost_nav-0-0-275_checkpoint1_n0))
     navtopoint-plan_path_action2_checkpoint4a-0_nav-0-0-275_obs11: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:pending_obs11) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:observed_obs11) (N:RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (N:RW:pending_obs11))
-    advance-to-obs-1_obs6_obs5: 
-        pre: (and (RW:observed_obs5) (RW:future_obs6) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs6) (N:RW:future_obs6))
+        eff: (and (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (N:RW:pending_obs11) (RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:observed_obs11))
     navtopoint-plan_path_action2_checkpoint4b-0_nav-0-0-275_obs11: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:pending_obs11) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:observed_obs11) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (N:RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (N:RW:pending_obs11))
-    advance-to-obs-1_obs5_obs4: 
-        pre: (and (RW:observed_obs4) (RW:future_obs5) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs5) (N:RW:future_obs5))
+        eff: (and (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (N:RW:pending_obs11) (RW:observed_obs11) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275))
     navtopoint-wait_for_go_ok_nav-0-0-275: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275))
+        eff: (and (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275))
     navtopoint-fly_path_action1_proxy_init_ok-fly3d-call_set_args_nav-0-0-275_f3d-0-0-346_heli0_f3d-0-0-346_nav-0-0-275: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:fly3d-mode-is-pre_init_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-mode-is-processing_f3d-0-0-346) (RW:called-by_f3d-0-0-346_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:fly3d-mode-is-pre_init_f3d-0-0-346))
+        eff: (and (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (N:RW:fly3d-mode-is-pre_init_f3d-0-0-346) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-mode-is-processing_f3d-0-0-346) (RW:called-by_f3d-0-0-346_nav-0-0-275))
     navtopoint-fly_path_fly3d_ready-fly3d-init_ok-0_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_nav-0-0-275_obs12: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-mode-is-processing_f3d-0-0-346) (RW:called-by_f3d-0-0-346_nav-0-0-275) (RW:pending_obs12) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:observed_obs12) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fly3d-mode-is-processing_f3d-0-0-346) (N:RW:pending_obs12))
-    advance-to-obs-1_obs4_obs3: 
-        pre: (and (RW:observed_obs3) (RW:future_obs4) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs4) (N:RW:future_obs4))
+        eff: (and (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fly3d-mode-is-processing_f3d-0-0-346) (N:RW:pending_obs12) (RW:navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:observed_obs12))
     navtopoint-fly_path_fly3d_ready_call_start-fly3d-call_start_nav-0-0-275_f3d-0-0-346_f3d-0-0-346: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (N:RW:fly3d-mode-is-ready_f3d-0-0-346))
+        eff: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (N:RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_starting_yaw_command_ok_sync_nav-0-0-275_f3d-0-0-346_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-0_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_obs14: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:pending_obs14) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-0_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_obs14: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:pending_obs14) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:pending_obs14) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:observed_obs14) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_busy_sync_nav-0-0-275_f3d-0-0-346_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_busy_after22_sync_nav-0-0-275_f3d-0-0-346_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
         eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346))
     navtopoint-fly_path_fly3d_sync_done-fly3d-start_exit_nav-0-0-275_f3d-0-0-346_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275))
     navtopoint-fly_path_fly3d_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_async_done-fly3d-goal_point_wait_cmd_continue_exit-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_async_done-fly3d-goal_point_wait_idle_exit-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_async_done-fly3d-global_fcl_cancel_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0))
     navtopoint-fly_path_fly3d_done_1-fly3d-call_destroy_when_done-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-reaction_f3d_done_2_nav-0-0-275) (N:RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (N:RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (N:RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275))
-    advance-to-obs-1_obs3_obs2: 
-        pre: (and (RW:observed_obs2) (RW:future_obs3) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs3) (N:RW:future_obs3))
+        eff: (and (N:RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (N:RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (N:RW:navtopoint-fsm_exec-is-reaction_f3d_done_1_nav-0-0-275) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_2_nav-0-0-275))
     navtopoint-fly_path_fly3d_sync_fail-fly3d-fail_in_start_call_nav-0-0-275_f3d-0-0-346_f3d-0-0-346: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_service-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-fail_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-enter_goal_point_wait_fail_service-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0))
     navtopoint-fly_path_fly3d_async_fail-fly3d-global_fcl_error_reaction1-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_error_1_f3d-0-0-346) (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0))
     navtopoint-fly_path_fly3d_subtask_fail_1-fly3d-call_destroy_when_failed-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_n0_n1: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_2_nav-0-0-275) (N:RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (N:RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275))
+        eff: (and (N:RW:navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_2_nav-0-0-275) (N:RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275))
     missionexec-init-mission-fly3d-call_set_args_heli0_f3d-0-0-346_f3d-0-0-346_missionexecutor: 
         pre: (and (RW:fly3d-mode-is-pre_init_f3d-0-0-346) (RW:missionexec-mission-idle_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-processing_f3d-0-0-346) (W:called-by_f3d-0-0-346_missionexecutor) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-init-call_heli0) (N:RW:fly3d-mode-is-pre_init_f3d-0-0-346) (N:RW:missionexec-mission-idle_heli0))
+        eff: (and (N:RW:fly3d-mode-is-pre_init_f3d-0-0-346) (RW:fly3d-mode-is-processing_f3d-0-0-346) (W:called-by_f3d-0-0-346_missionexecutor) (N:RW:missionexec-mission-idle_heli0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-init-call_heli0))
     missionexec-init-mission-autotakeoff-call_set_args_heli0_ato-0-0-275_ato-0-0-275_missionexecutor: 
         pre: (and (RW:missionexec-mission-idle_heli0) (RW:autotakeoff-mode-is-pre_init_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-init-call_heli0) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:autotakeoff-mode-is-processing_ato-0-0-275) (RW:called-by_ato-0-0-275_missionexecutor) (N:RW:missionexec-mission-idle_heli0) (N:RW:autotakeoff-mode-is-pre_init_ato-0-0-275))
+        eff: (and (N:RW:missionexec-mission-idle_heli0) (RW:missionexec-mission-init-call_heli0) (N:RW:autotakeoff-mode-is-pre_init_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:autotakeoff-mode-is-processing_ato-0-0-275) (RW:called-by_ato-0-0-275_missionexecutor))
     missionexec-init-mission-navtopoint-call_set_args_heli0_nav-0-0-275_nav-0-0-275_missionexecutor: 
         pre: (and (RW:missionexec-mission-idle_heli0) (RW:navtopoint-mode-is-pre_init_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-init-call_heli0) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-mode-is-processing_nav-0-0-275) (RW:called-by_nav-0-0-275_missionexecutor) (N:RW:missionexec-mission-idle_heli0) (N:RW:navtopoint-mode-is-pre_init_nav-0-0-275))
-    advance-to-obs-1_obs2_obs1: 
-        pre: (and (RW:observed_obs1) (RW:future_obs2) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs2) (N:RW:future_obs2))
+        eff: (and (N:RW:missionexec-mission-idle_heli0) (RW:missionexec-mission-init-call_heli0) (N:RW:navtopoint-mode-is-pre_init_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-mode-is-processing_nav-0-0-275) (RW:called-by_nav-0-0-275_missionexecutor))
     missionexec-init-mission-ok-autotakeoff-init_ok-0_heli0_ato-0-0-275_ato-0-0-275_missionexecutor_obs0: 
         pre: (and (RW:missionexec-mission-init-call_heli0) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:autotakeoff-mode-is-processing_ato-0-0-275) (RW:called-by_ato-0-0-275_missionexecutor) (RW:pending_obs0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-ready_heli0) (RW:autotakeoff-mode-is-ready_ato-0-0-275) (RW:observed_obs0) (N:RW:missionexec-mission-init-call_heli0) (N:RW:autotakeoff-mode-is-processing_ato-0-0-275) (N:RW:pending_obs0))
-    advance-to-obs-1_obs1_obs0: 
-        pre: (and (RW:observed_obs0) (RW:future_obs1) (RW:not_at_end_constraint0))
-        eff: (and (RW:pending_obs1) (N:RW:future_obs1))
+        eff: (and (N:RW:missionexec-mission-init-call_heli0) (N:RW:autotakeoff-mode-is-processing_ato-0-0-275) (RW:missionexec-mission-ready_heli0) (N:RW:pending_obs0) (RW:autotakeoff-mode-is-ready_ato-0-0-275) (RW:observed_obs0))
     missionexec-init-mission-ok-navtopoint-init_ok-0_heli0_nav-0-0-275_nav-0-0-275_missionexecutor_obs9: 
         pre: (and (RW:missionexec-mission-init-call_heli0) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-mode-is-processing_nav-0-0-275) (RW:called-by_nav-0-0-275_missionexecutor) (RW:pending_obs9) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-ready_heli0) (RW:navtopoint-mode-is-ready_nav-0-0-275) (RW:observed_obs9) (N:RW:missionexec-mission-init-call_heli0) (N:RW:navtopoint-mode-is-processing_nav-0-0-275) (N:RW:pending_obs9))
-    missionexec-destroy-mission-navtopoint-call_destroy_when_failed-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (RW:fault-count-3_lost_nav-0-0-275_destroyed_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-idle_heli0) (N:RW:missionexec-mission-over_heli0) (N:RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:fault-count-3_lost_nav-0-0-275_destroyed_n0))
+        eff: (and (N:RW:missionexec-mission-init-call_heli0) (N:RW:navtopoint-mode-is-processing_nav-0-0-275) (RW:missionexec-mission-ready_heli0) (N:RW:pending_obs9) (RW:navtopoint-mode-is-ready_nav-0-0-275) (RW:observed_obs9))
+    missionexec-init-mission-fail-fly3d-fail_in_start_call_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-init-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:missionexec-mission-init-call_heli0) (RW:missionexec-mission-over_heli0))
+    missionexec-init-mission-fail-navtopoint-fail_in_start_call_heli0_nav-0-0-275_nav-0-0-275: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-init-call_heli0) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-init-call_heli0) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275))
+    missionexec-start-mission-fly3d-call_start_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-ready_heli0) (RW:not_at_end_constraint0))
+        eff: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (N:RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-ready_heli0) (RW:missionexec-mission-start-call_heli0))
+    missionexec-start-mission-autotakeoff-call_start_heli0_ato-0-0-275_ato-0-0-275: 
+        pre: (and (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-ready_heli0) (RW:autotakeoff-mode-is-ready_ato-0-0-275) (RW:not_at_end_constraint0))
+        eff: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-start_ato-0-0-275) (RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (N:RW:missionexec-mission-ready_heli0) (N:RW:autotakeoff-mode-is-ready_ato-0-0-275) (RW:missionexec-mission-start-call_heli0))
+    missionexec-start-mission-navtopoint-call_start_heli0_nav-0-0-275_nav-0-0-275: 
+        pre: (and (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-ready_heli0) (RW:navtopoint-mode-is-ready_nav-0-0-275) (RW:not_at_end_constraint0))
+        eff: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-ready_heli0) (N:RW:navtopoint-mode-is-ready_nav-0-0-275) (RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:navtopoint-fsm_exec-is-start_nav-0-0-275))
+    missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_ok_sync_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint20_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_busy_sync_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_busy_after22_sync_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-autotakeoff-takeoff_action2_heli0_ato-0-0-275_ato-0-0-275: 
+        pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-in_start_call-is-no_ato-0-0-275) (N:RW:missionexec-mission-start-call_heli0) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-ok-navtopoint-start_ok_heli0_nav-0-0-275_nav-0-0-275: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:navtopoint-fsm_exec-is-start_nav-0-0-275) (RW:not_at_end_constraint0))
+        eff: (and (RW:navtopoint-fsm_state-is-start_decouple_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (N:RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (N:RW:missionexec-mission-start-call_heli0) (N:RW:navtopoint-fsm_exec-is-start_nav-0-0-275) (RW:missionexec-mission-running_heli0))
+    missionexec-start-mission-done-fly3d-start_exit_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-start-call_heli0))
+    missionexec-start-mission-fail-fly3d-fail_in_start_call_heli0_f3d-0-0-346_f3d-0-0-346: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-start-call_heli0))
+    missionexec-start-mission-fail-navtopoint-fail_in_start_call_heli0_nav-0-0-275_nav-0-0-275: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-start-call_heli0))
+    missionexec-mission-done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-fly3d-enter_turn_to_goal_heading_action2-exit-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-fly3d-goal_point_wait_cmd_continue_exit-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-fly3d-goal_point_wait_idle_exit-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-fly3d-global_fcl_cancel_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1: 
+        pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_task-done))
+    missionexec-mission-done-navtopoint-wait_for_go_exit-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:navtopoint-mode-is-done_nav-0-0-275))
+    missionexec-mission-done-navtopoint-fly_path_fly3d_done_2-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_2_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:navtopoint-mode-is-done_nav-0-0-275))
+    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_221-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_222-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_223-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_send_starting_yaw_command_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_specific_220-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_action2-fail-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-fail_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-enter_goal_point_wait_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-fly3d-global_fcl_error_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_error_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
+    missionexec-mission-failed-navtopoint-plan_path_action1_fail_service-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-service_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-service_n0))
+    missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_101-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-101_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-101_n0))
+    missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_102-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-102_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-102_n0))
+    missionexec-mission-failed-navtopoint-plan_path_action2_fail_service-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-service_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-service_n0))
+    missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_402-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-402_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-402_n0))
+    missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_403-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-403_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-403_n0))
+    missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_404-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-404_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-404_n0))
+    missionexec-mission-failed-navtopoint-fly_path_action1_fail_service-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-service_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-service_n0))
+    missionexec-mission-failed-navtopoint-fly_path_action1_fail_proxy_init-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0))
+    missionexec-mission-failed-navtopoint-fly_path_subtask_fail_2-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_2_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0))
+    missionexec-destroy-mission-fly3d-call_destroy_when_done-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:missionexec-mission-idle_heli0) (N:RW:missionexec-mission-over_heli0))
+    missionexec-destroy-mission-fly3d-call_destroy_when_failed-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
+        pre: (and (RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (N:RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-idle_heli0) (N:RW:missionexec-mission-over_heli0))
+    missionexec-destroy-mission-autotakeoff-call_destroy_when_done-0_heli0_ato-0-0-275_ato-0-0-275_obs8: 
+        pre: (and (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-over_heli0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (RW:pending_obs8) (RW:not_at_end_constraint0))
+        eff: (and (RW:missionexec-mission-idle_heli0) (N:RW:missionexec-mission-over_heli0) (N:RW:autotakeoff-mode-is-done_ato-0-0-275) (N:RW:pending_obs8) (RW:observed_obs8))
     missionexec-destroy-mission-navtopoint-call_destroy_when_done-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
         pre: (and (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-done_nav-0-0-275) (RW:fault-count-3_lost_nav-0-0-275_destroyed_n0) (RW:not_at_end_constraint0))
         eff: (and (RW:missionexec-mission-idle_heli0) (N:RW:missionexec-mission-over_heli0) (N:RW:navtopoint-mode-is-done_nav-0-0-275) (N:RW:fault-count-3_lost_nav-0-0-275_destroyed_n0))
-    missionexec-init-mission-fail-fly3d-fail_in_start_call_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-init-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:missionexec-mission-init-call_heli0))
-    missionexec-destroy-mission-autotakeoff-call_destroy_when_done-0_heli0_ato-0-0-275_ato-0-0-275_obs8: 
-        pre: (and (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-over_heli0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (RW:pending_obs8) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-idle_heli0) (RW:observed_obs8) (N:RW:missionexec-mission-over_heli0) (N:RW:autotakeoff-mode-is-done_ato-0-0-275) (N:RW:pending_obs8))
-    missionexec-destroy-mission-fly3d-call_destroy_when_failed-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-idle_heli0) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (N:RW:fly3d-mode-is-failed_f3d-0-0-346) (N:RW:missionexec-mission-over_heli0))
-    missionexec-destroy-mission-fly3d-call_destroy_when_done-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-idle_heli0) (N:RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_destroyed_n0) (N:RW:missionexec-mission-over_heli0))
-    missionexec-init-mission-fail-navtopoint-fail_in_start_call_heli0_nav-0-0-275_nav-0-0-275: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-init-call_heli0) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-init-call_heli0))
-    missionexec-start-mission-fly3d-call_start_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-ready_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-ready_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (N:RW:fly3d-mode-is-ready_f3d-0-0-346) (N:RW:missionexec-mission-ready_heli0))
-    missionexec-start-mission-autotakeoff-call_start_heli0_ato-0-0-275_ato-0-0-275: 
-        pre: (and (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-ready_heli0) (RW:autotakeoff-mode-is-ready_ato-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-start_ato-0-0-275) (RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (RW:missionexec-mission-start-call_heli0) (N:RW:missionexec-mission-ready_heli0) (N:RW:autotakeoff-mode-is-ready_ato-0-0-275))
-    missionexec-start-mission-navtopoint-call_start_heli0_nav-0-0-275_nav-0-0-275: 
-        pre: (and (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-ready_heli0) (RW:navtopoint-mode-is-ready_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:navtopoint-fsm_exec-is-start_nav-0-0-275) (N:RW:missionexec-mission-ready_heli0) (N:RW:navtopoint-mode-is-ready_nav-0-0-275))
-    missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_ok_sync_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint12_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint20_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint20_n0) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (N:RW:fly3d-trajectory-not-sent_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_checkpoint21_n0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_busy_sync_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_busy_after22_sync_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-trajectory-not-sent_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (N:RW:fly3d-fsm_exec-is-action2_f3d-0-0-346) (N:RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-autotakeoff-takeoff_action2_heli0_ato-0-0-275_ato-0-0-275: 
-        pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-in_start_call-is-no_ato-0-0-275) (RW:missionexec-mission-running_heli0) (N:RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (N:RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-start-mission-ok-navtopoint-start_ok_heli0_nav-0-0-275_nav-0-0-275: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:navtopoint-fsm_exec-is-start_nav-0-0-275) (RW:not_at_end_constraint0))
-        eff: (and (RW:navtopoint-fsm_state-is-start_decouple_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-mission-running_heli0) (N:RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (N:RW:missionexec-mission-start-call_heli0) (N:RW:navtopoint-fsm_exec-is-start_nav-0-0-275))
-    missionexec-start-mission-done-fly3d-start_exit_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-start_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-mission-failed-navtopoint-fly_path_subtask_fail_2-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-reaction_f3d_fail_2_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0))
-    missionexec-start-mission-fail-fly3d-fail_in_start_call_heli0_f3d-0-0-346_f3d-0-0-346: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-in_start_call-is-yes_f3d-0-0-346) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-mission-failed-navtopoint-fly_path_action1_fail_proxy_init-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-subtask_n0))
-    missionexec-mission-failed-navtopoint-fly_path_action1_fail_service-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-service_n0))
-    missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_404-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-404_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-404_n0))
-    missionexec-start-mission-fail-navtopoint-fail_in_start_call_heli0_nav-0-0-275_nav-0-0-275: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:navtopoint-in_start_call-is-yes_nav-0-0-275) (RW:missionexec-mission-start-call_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-start-call_heli0))
-    missionexec-mission-done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_cancel_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_trajectory_end_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_2_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-done-fly3d-enter_turn_to_goal_heading_action2-exit-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-exit_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-done-fly3d-goal_point_wait_cmd_continue_exit-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-done-fly3d-goal_point_wait_idle_exit-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-nothing_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-done-fly3d-global_fcl_cancel_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_cancel_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-done_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-navtopoint-plan_path_action1_fail_service-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-service_n0))
-    missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_101-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-101_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-101_n0))
-    missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1: 
-        pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (N:W:dominates-3_hyp1_lost_ato-0-0-275_task-done))
-    missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_102-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action1_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-102_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-102_n0))
-    missionexec-mission-done-navtopoint-wait_for_go_exit-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-done_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_task-done_n0))
-    missionexec-mission-done-navtopoint-fly_path_fly3d_done_2-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-fly_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-reaction_f3d_done_2_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-done_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_task-done_n0))
-    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_221-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-221_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_222-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-222_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_223-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_segment_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-223_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_send_starting_yaw_command_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_starting_yaw_command_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-wait_for_yaw_finish_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_error_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-211_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_specific_220-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-220_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-send_first_trajectory_f3d-0-0-346) (RW:fly3d-fsm_exec-is-reaction_finished_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-213_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_action2-fail-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_state-is-turn_to_goal_heading_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action2-fail_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-214_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-enter_goal_point_wait_fail_service-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-action1_f3d-0-0-346) (RW:fly3d-in_start_call-is-no_f3d-0-0-346) (RW:fly3d-fsm_state-is-goal_point_wait_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-service_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-fly3d-global_fcl_error_reaction1-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1: 
-        pre: (and (RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-fsm_exec-is-global_reaction_error_1_f3d-0-0-346) (RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0) (RW:missionexec-active-mission_heli0_f3d-0-0-346) (RW:missionexec-mission-running_heli0) (RW:not_at_end_constraint0))
-        eff: (and (RW:fly3d-mode-is-failed_f3d-0-0-346) (RW:missionexec-mission-over_heli0) (N:RW:fly3d-mode-is-running_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_fail-specific-210_n0) (N:RW:missionexec-mission-running_heli0))
-    missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_403-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-403_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-403_n0))
-    missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_402-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-specific-402_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-specific-402_n0))
-    missionexec-mission-failed-navtopoint-plan_path_action2_fail_service-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
-        pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_state-is-plan_path_nav-0-0-275) (RW:navtopoint-fsm_exec-is-action2_nav-0-0-275) (RW:navtopoint-in_start_call-is-no_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_fail-service_n0) (RW:not_at_end_constraint0))
-        eff: (and (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:navtopoint-mode-is-running_nav-0-0-275) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_fail-service_n0))
+    missionexec-destroy-mission-navtopoint-call_destroy_when_failed-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
+        pre: (and (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-over_heli0) (RW:navtopoint-mode-is-failed_nav-0-0-275) (RW:fault-count-3_lost_nav-0-0-275_destroyed_n0) (RW:not_at_end_constraint0))
+        eff: (and (RW:missionexec-mission-idle_heli0) (N:RW:missionexec-mission-over_heli0) (N:RW:navtopoint-mode-is-failed_nav-0-0-275) (N:RW:fault-count-3_lost_nav-0-0-275_destroyed_n0))
+    advance-to-obs-1_obs1_obs0: 
+        pre: (and (RW:observed_obs0) (RW:future_obs1) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs1) (N:RW:future_obs1))
+    advance-to-obs-1_obs2_obs1: 
+        pre: (and (RW:observed_obs1) (RW:future_obs2) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs2) (N:RW:future_obs2))
+    advance-to-obs-1_obs3_obs2: 
+        pre: (and (RW:observed_obs2) (RW:future_obs3) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs3) (N:RW:future_obs3))
+    advance-to-obs-1_obs4_obs3: 
+        pre: (and (RW:observed_obs3) (RW:future_obs4) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs4) (N:RW:future_obs4))
+    advance-to-obs-1_obs5_obs4: 
+        pre: (and (RW:observed_obs4) (RW:future_obs5) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs5) (N:RW:future_obs5))
+    advance-to-obs-1_obs6_obs5: 
+        pre: (and (RW:observed_obs5) (RW:future_obs6) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs6) (N:RW:future_obs6))
+    advance-to-obs-1_obs7_obs6: 
+        pre: (and (RW:observed_obs6) (RW:future_obs7) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs7) (N:RW:future_obs7))
+    advance-to-obs-1_obs8_obs7: 
+        pre: (and (RW:observed_obs7) (RW:future_obs8) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs8) (N:RW:future_obs8))
+    advance-to-obs-1_obs9_obs8: 
+        pre: (and (RW:observed_obs8) (RW:future_obs9) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs9) (N:RW:future_obs9))
+    advance-to-obs-1_obs10_obs9: 
+        pre: (and (RW:observed_obs9) (RW:future_obs10) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs10) (N:RW:future_obs10))
+    advance-to-obs-1_obs11_obs10: 
+        pre: (and (RW:observed_obs10) (RW:future_obs11) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs11) (N:RW:future_obs11))
+    advance-to-obs-1_obs12_obs11: 
+        pre: (and (RW:observed_obs11) (RW:future_obs12) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs12) (N:RW:future_obs12))
+    advance-to-obs-1_obs13_obs12: 
+        pre: (and (RW:observed_obs12) (RW:future_obs13) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs13) (N:RW:future_obs13))
+    advance-to-obs-1_obs14_obs13: 
+        pre: (and (RW:observed_obs13) (RW:future_obs14) (RW:not_at_end_constraint0))
+        eff: (and (RW:pending_obs14) (N:RW:future_obs14))
+    set_goal_0_constraint0: 
+        pre: (and (RW:observed_obs4) (RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (RW:not_at_end_constraint0))
+        eff: (and (N:RW:not_at_end_constraint0) (W:achieved_constraint0))
 Init[80]:
+  S:(fault-count-3_lost_ato-0-0-275_checkpoint2_n0)
+  S:(fault-count-3_lost_ato-0-0-275_checkpoint7_n0)
+  S:(fault-count-3_lost_ato-0-0-275_checkpoint6_n0)
+  S:(fault-count-3_lost_nav-0-0-275_checkpoint4_n0)
+  S:(fault-count-4_lost_f3d-0-0-346_created_missionexecutor_n0)
+  S:(fault-count-4_lost_f3d-0-0-346_created_nav-0-0-275_n0)
+  S:(fault-count-4_lost_ato-0-0-275_created_missionexecutor_n0)
+  S:(fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0)
+  S:(fault-count-3_lost_ato-0-0-275_fail-specific-210_n0)
+  S:(fault-count-3_lost_ato-0-0-275_fail-service_n0)
+  S:(fault-count-3_lost_ato-0-0-275_fail-specific-101_n0)
+  S:(fault-count-3_lost_ato-0-0-275_fail-specific-102_n0)
+  S:(fault-count-3_lost_ato-0-0-275_destroyed_n0)
+  S:(static-true)
   (fault-count-3_lost_heli0_fcl-event-finished_n0)
   (dominates-3_hyp1_lost_heli0_fcl-event-finished)
   (fault-count-3_lost_heli0_fcl-event-canceled_n0)
@@ -832,15 +860,9 @@ Init[80]:
   (fault-count-3_lost_f3d-0-0-346_checkpoint40_n0)
   (fault-count-3_lost_ato-0-0-275_checkpoint1_n0)
   (dominates-3_hyp1_lost_ato-0-0-275_checkpoint1)
-  S:(fault-count-3_lost_ato-0-0-275_checkpoint2_n0)
-  S:(fault-count-3_lost_ato-0-0-275_checkpoint7_n0)
   (fault-count-3_lost_ato-0-0-275_checkpoint5_n0)
-  S:(fault-count-3_lost_ato-0-0-275_checkpoint6_n0)
   (fault-count-3_lost_nav-0-0-275_checkpoint1_n0)
-  S:(fault-count-3_lost_nav-0-0-275_checkpoint4_n0)
   (fly3d-mode-is-pre_init_f3d-0-0-346)
-  S:(fault-count-4_lost_f3d-0-0-346_created_missionexecutor_n0)
-  S:(fault-count-4_lost_f3d-0-0-346_created_nav-0-0-275_n0)
   (fault-count-3_lost_f3d-0-0-346_destroyed_n0)
   (fault-count-3_lost_f3d-0-0-346_task-done_n0)
   (fault-count-3_lost_f3d-0-0-346_fail-service_n0)
@@ -856,15 +878,9 @@ Init[80]:
   (autotakeoff-mode-is-pre_init_ato-0-0-275)
   (navtopoint-mode-is-pre_init_nav-0-0-275)
   (pending_obs0)
-  S:(fault-count-4_lost_ato-0-0-275_created_missionexecutor_n0)
-  S:(fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0)
   (fault-count-3_lost_ato-0-0-275_task-done_n0)
   (dominates-3_hyp1_lost_ato-0-0-275_task-done)
   (fault-count-3_lost_nav-0-0-275_task-done_n0)
-  S:(fault-count-3_lost_ato-0-0-275_fail-specific-210_n0)
-  S:(fault-count-3_lost_ato-0-0-275_fail-service_n0)
-  S:(fault-count-3_lost_ato-0-0-275_fail-specific-101_n0)
-  S:(fault-count-3_lost_ato-0-0-275_fail-specific-102_n0)
   (fault-count-3_lost_nav-0-0-275_fail-service_n0)
   (fault-count-3_lost_nav-0-0-275_fail-specific-101_n0)
   (fault-count-3_lost_nav-0-0-275_fail-specific-102_n0)
@@ -872,7 +888,6 @@ Init[80]:
   (fault-count-3_lost_nav-0-0-275_fail-specific-403_n0)
   (fault-count-3_lost_nav-0-0-275_fail-specific-404_n0)
   (fault-count-3_lost_nav-0-0-275_fail-subtask_n0)
-  S:(fault-count-3_lost_ato-0-0-275_destroyed_n0)
   (fault-count-3_lost_nav-0-0-275_destroyed_n0)
   (future_obs1)
   (future_obs2)
@@ -889,7 +904,6 @@ Init[80]:
   (future_obs13)
   (future_obs14)
   (not_at_end_constraint0)
-  S:(static-true)
 Init[0]:
 Goal: (and (RW:observed_obs4) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (W:achieved_constraint0))
 Metric: 0

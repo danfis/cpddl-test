@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 5, lifted mgroups: 10
 Compile-in LMG: Found mutex condition for action 'lift' and mgroup {clear V0:storearea, at hoist0 V0:storearea, on crate0 V0:storearea}:=1: (and (= ?a1 ?a2) (= ?h hoist0) (= ?c crate0) (or (= ?a2 depot0-1-1) (= ?a2 container-0-0)))
 Compile-in LMG: Precondition of action 'lift' extended with (or (not (= ?a1 ?a2)) (not (= ?h hoist0)) (not (= ?c crate0)) (and (not (= ?a2 depot0-1-1)) (not (= ?a2 container-0-0))))
@@ -5,7 +8,42 @@ Compile-in LMG: Found mutex condition for action 'drop' and mgroup {clear V0:sto
 Compile-in LMG: Precondition of action 'drop' extended with (or (not (= ?a1 ?a2)) (not (= ?h hoist0)) (and (not (= ?a2 depot0-1-1)) (not (= ?a2 container-0-0))))
 Compile-in LMG: Found mutex condition for action 'move' and mgroup {clear V0:storearea, at hoist0 V0:storearea, on crate0 V0:storearea}:=1: (and (= ?from ?to) (= ?h hoist0))
 Compile-in LMG: Precondition of action 'move' extended with (or (not (= ?from ?to)) (not (= ?h hoist0)))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 11, objects: 7, predicates: 9, functions: 0, actions: 5, action-pre-size: [min: 10, max: 3, avg: 5.80, med: 5.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lift
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drop
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action go-out
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action go-in
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lift
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lift
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lift
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drop
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drop
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 7, vars: 5, predicates: 20, rules: 37)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 7, vars: 5, predicates: 20, rules: 37)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 7, vars: 5, predicates: 20, rules: 37)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 37
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 37, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 11, objects: 7, predicates: 9, functions: 0, actions: 7, action-pre-size: [min: 2, max: 7, avg: 5.00, med: 6.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 7
+Compile-in LMG: END
 Domain: storage-propositional
 Problem: storage-1
 Require: ff
@@ -14,77 +52,77 @@ Type[11]:
     [1]: hoist, parent: 0
     [2]: surface, parent: 0
     [3]: place, parent: 0
-    [4]: area, parent: 0
-    [5]: container, parent: 3
-    [6]: depot, parent: 3
-    [7]: storearea, parent: 4
-    [8]: transitarea, parent: 4
-    [9]: crate, parent: 2
-    [10]: (either storearea crate), parent: -1
+    [4]: container, parent: 3
+    [5]: depot, parent: 3
+    [6]: area, parent: 2
+    [7]: crate, parent: 2
+    [8]: storearea, parent: 6
+    [9]: transitarea, parent: 6
+    [10]: (either crate storearea), parent: -1
 Obj-by-Type:
     [0]: 0 1 2 3 4 5 6
     [1]: 2
-    [2]: 3
+    [2]: 0 1 3 6
     [3]: 4 5
-    [4]: 0 1 6
-    [5]: 4
-    [6]: 5
-    [7]: 0 1
-    [8]: 6
-    [9]: 3
+    [4]: 4
+    [5]: 5
+    [6]: 0 1 6
+    [7]: 3
+    [8]: 0 1
+    [9]: 6
     [10]: 0 1 3
 Obj[7]:
-    [0]: depot0-1-1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: container-0-0, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [0]: depot0-1-1, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: container-0-0, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [2]: hoist0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: crate0, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: container0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: depot0, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: loadarea, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: crate0, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: container0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: depot0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: loadarea, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[9]:
     =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    clear: 7 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    clear: 8 :: is-private: 0, owner-param: -1, read: 1, write: 1
     in: 10 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
     available: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    lifting: 1 9 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    on: 9 7 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    connected: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    compatible: 9 9 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    lifting: 1 7 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    at: 1 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    on: 7 8 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    connected: 6 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    compatible: 7 7 :: is-private: 0, owner-param: -1, read: 0, write: 0
 Function[0]:
 Action[7]:
-    lift: ?h:1 ?c:9 ?a1:7 ?a2:4 ?p:3
-        pre: (and (R:connected ?a1 ?a2) (RW:at ?h ?a2) (RW:available ?h) (RW:on ?c ?a1) (RW:in ?a1 ?p) (N:R:= ?a1 ?a2))
-        eff: (and (N:RW:on ?c ?a1) (RW:clear ?a1) (N:RW:available ?h) (RW:lifting ?h ?c) (N:RW:in ?c ?p))
-    drop: ?h:1 ?c:9 ?a1:7 ?a2:4 ?p:3
-        pre: (and (R:connected ?a1 ?a2) (RW:at ?h ?a2) (RW:lifting ?h ?c) (RW:clear ?a1) (RW:in ?a1 ?p) (N:R:= ?a1 ?a2))
-        eff: (and (N:RW:lifting ?h ?c) (RW:available ?h) (N:RW:clear ?a1) (RW:on ?c ?a1) (RW:in ?c ?p))
-    move: ?h:1 ?from:7 ?to:7
-        pre: (and (RW:at ?h ?from) (RW:clear ?to) (R:connected ?from ?to) (N:R:= ?from ?to))
-        eff: (and (N:RW:at ?h ?from) (RW:at ?h ?to) (N:RW:clear ?to) (RW:clear ?from))
-    go-out: ?h:1 ?from:7 ?to:8
-        pre: (and (RW:at ?h ?from) (R:connected ?from ?to))
-        eff: (and (N:RW:at ?h ?from) (RW:at ?h ?to) (RW:clear ?from))
-    go-in: ?h:1 ?from:8 ?to:7
-        pre: (and (RW:at ?h ?from) (R:connected ?from ?to) (RW:clear ?to))
-        eff: (and (N:RW:at ?h ?from) (RW:at ?h ?to) (N:RW:clear ?to))
-    drop: ?h:1 ?c:9 ?a1:7 ?a2:4 ?p:3
-        pre: (and (R:connected ?a1 ?a2) (RW:at ?h ?a2) (RW:lifting ?h ?c) (RW:clear ?a1) (RW:in ?a1 ?p) (N:R:= ?a2 depot0-1-1) (N:R:= ?a2 container-0-0))
-        eff: (and (N:RW:lifting ?h ?c) (RW:available ?h) (N:RW:clear ?a1) (RW:on ?c ?a1) (RW:in ?c ?p))
-    lift: ?h:1 ?c:9 ?a1:7 ?a2:4 ?p:3
-        pre: (and (R:connected ?a1 ?a2) (RW:at ?h ?a2) (RW:available ?h) (RW:on ?c ?a1) (RW:in ?a1 ?p) (N:R:= ?a2 depot0-1-1) (N:R:= ?a2 container-0-0))
-        eff: (and (N:RW:on ?c ?a1) (RW:clear ?a1) (N:RW:available ?h) (RW:lifting ?h ?c) (N:RW:in ?c ?p))
+    lift: ?h:1 ?c:7 ?a1:8 ?a2:6 ?p:3
+        pre: (and (N:R:= ?a1 ?a2) (R:connected ?a1 ?a2) (RW:in ?a1 ?p) (RW:available ?h) (RW:at ?h ?a2) (RW:on ?c ?a1))
+        eff: (and (RW:clear ?a1) (N:RW:in ?c ?p) (N:RW:available ?h) (RW:lifting ?h ?c) (N:RW:on ?c ?a1))
+    drop: ?h:1 ?c:7 ?a1:8 ?a2:6 ?p:3
+        pre: (and (N:R:= ?a1 ?a2) (R:connected ?a1 ?a2) (RW:clear ?a1) (RW:in ?a1 ?p) (RW:lifting ?h ?c) (RW:at ?h ?a2))
+        eff: (and (N:RW:clear ?a1) (RW:in ?c ?p) (RW:available ?h) (N:RW:lifting ?h ?c) (RW:on ?c ?a1))
+    move: ?h:1 ?from:8 ?to:8
+        pre: (and (N:R:= ?from ?to) (R:connected ?from ?to) (RW:clear ?to) (RW:at ?h ?from))
+        eff: (and (RW:clear ?from) (N:RW:clear ?to) (N:RW:at ?h ?from) (RW:at ?h ?to))
+    go-out: ?h:1 ?from:8 ?to:9
+        pre: (and (R:connected ?from ?to) (RW:at ?h ?from))
+        eff: (and (RW:clear ?from) (N:RW:at ?h ?from) (RW:at ?h ?to))
+    go-in: ?h:1 ?from:9 ?to:8
+        pre: (and (R:connected ?from ?to) (RW:clear ?to) (RW:at ?h ?from))
+        eff: (and (N:RW:clear ?to) (N:RW:at ?h ?from) (RW:at ?h ?to))
+    lift: ?h:1 ?c:7 ?a1:8 ?a2:6 ?p:3
+        pre: (and (N:R:= ?a2 depot0-1-1) (N:R:= ?a2 container-0-0) (R:connected ?a1 ?a2) (RW:in ?a1 ?p) (RW:available ?h) (RW:at ?h ?a2) (RW:on ?c ?a1))
+        eff: (and (RW:clear ?a1) (N:RW:in ?c ?p) (N:RW:available ?h) (RW:lifting ?h ?c) (N:RW:on ?c ?a1))
+    drop: ?h:1 ?c:7 ?a1:8 ?a2:6 ?p:3
+        pre: (and (N:R:= ?a2 depot0-1-1) (N:R:= ?a2 container-0-0) (R:connected ?a1 ?a2) (RW:clear ?a1) (RW:in ?a1 ?p) (RW:lifting ?h ?c) (RW:at ?h ?a2))
+        eff: (and (N:RW:clear ?a1) (RW:in ?c ?p) (RW:available ?h) (N:RW:lifting ?h ?c) (RW:on ?c ?a1))
 Init[10]:
-  (in depot0-1-1 depot0)
-  (on crate0 container-0-0)
-  (in crate0 container0)
-  (in container-0-0 container0)
-  S:(connected loadarea container-0-0)
-  S:(connected container-0-0 loadarea)
   S:(connected depot0-1-1 loadarea)
+  S:(connected container-0-0 loadarea)
   S:(connected loadarea depot0-1-1)
-  (at hoist0 depot0-1-1)
+  S:(connected loadarea container-0-0)
+  (in depot0-1-1 depot0)
+  (in container-0-0 container0)
+  (in crate0 container0)
   (available hoist0)
+  (at hoist0 depot0-1-1)
+  (on crate0 container-0-0)
 Init[0]:
 Goal: (RW:in crate0 depot0)
 Metric: 0

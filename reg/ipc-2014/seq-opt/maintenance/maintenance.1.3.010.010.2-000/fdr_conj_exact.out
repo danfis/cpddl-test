@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-22
+21
 begin_variable
 var0
 -1
@@ -128,36 +128,29 @@ begin_variable
 var17
 -1
 2
-NOT-today d1-today d10
-today d1-today d10
+NOT-0:0:0:today d1-1:0:2:today d10
+0:0:0:today d1-1:0:2:today d10
 end_variable
 begin_variable
 var18
 -1
 2
-NOT-today d1-none-of-those
-today d1-none-of-those
+NOT-0:0:0:today d1-16:1:33:none-of-those
+0:0:0:today d1-16:1:33:none-of-those
 end_variable
 begin_variable
 var19
 -1
 2
-NOT-today d1-today d10-none-of-those
-today d1-today d10-none-of-those
+NOT-0:0:0:today d1-1:0:2:today d10-16:1:33:none-of-those
+0:0:0:today d1-1:0:2:today d10-16:1:33:none-of-those
 end_variable
 begin_variable
 var20
 -1
 2
-NOT-none-of-those-today d10
-none-of-those-today d10
-end_variable
-begin_variable
-var21
--1
-2
-NOT-today d1-none-of-those-today d10-none-of-those
-today d1-none-of-those-today d10-none-of-those
+NOT-0:1:1:none-of-those-1:0:2:today d10
+0:1:1:none-of-those-1:0:2:today d10
 end_variable
 0
 begin_state
@@ -182,7 +175,6 @@ begin_state
 1
 1
 0
-0
 end_state
 begin_goal
 10
@@ -197,17 +189,16 @@ begin_goal
 15 0
 16 0
 end_goal
-34
+41
 begin_operator
 workat d1 ber
-7
+6
 1 1
 16 0
 17 0
 18 0
 19 0
 20 0
-21 0
 2
 0 0 0 1
 0 11 -1 0
@@ -215,13 +206,12 @@ workat d1 ber
 end_operator
 begin_operator
 workat d1 ber
-6
+5
 1 1
 16 1
 17 0
 19 0
 20 0
-21 0
 3
 0 0 0 1
 0 11 -1 0
@@ -230,12 +220,11 @@ workat d1 ber
 end_operator
 begin_operator
 workat d1 ber
-5
+4
 1 0
 16 0
 18 0
 19 0
-21 0
 4
 0 0 0 1
 0 11 -1 0
@@ -244,15 +233,28 @@ workat d1 ber
 1
 end_operator
 begin_operator
+workat d1 ber
+2
+1 0
+16 1
+6
+0 0 0 1
+0 11 -1 0
+0 17 1 0
+0 18 1 0
+0 19 1 0
+0 20 0 1
+1
+end_operator
+begin_operator
 workat d1 fra
-7
+6
 1 1
 16 0
 17 0
 18 0
 19 0
 20 0
-21 0
 2
 0 0 0 1
 0 12 -1 0
@@ -260,13 +262,12 @@ workat d1 fra
 end_operator
 begin_operator
 workat d1 fra
-6
+5
 1 1
 16 1
 17 0
 19 0
 20 0
-21 0
 3
 0 0 0 1
 0 12 -1 0
@@ -275,12 +276,11 @@ workat d1 fra
 end_operator
 begin_operator
 workat d1 fra
-5
+4
 1 0
 16 0
 18 0
 19 0
-21 0
 4
 0 0 0 1
 0 12 -1 0
@@ -289,28 +289,40 @@ workat d1 fra
 1
 end_operator
 begin_operator
-workat d1 ham
-7
-1 1
-16 0
-17 0
-18 0
-19 0
-20 0
-21 0
-1
+workat d1 fra
+2
+1 0
+16 1
+6
 0 0 0 1
+0 12 -1 0
+0 17 1 0
+0 18 1 0
+0 19 1 0
+0 20 0 1
 1
 end_operator
 begin_operator
 workat d1 ham
 6
 1 1
+16 0
+17 0
+18 0
+19 0
+20 0
+1
+0 0 0 1
+1
+end_operator
+begin_operator
+workat d1 ham
+5
+1 1
 16 1
 17 0
 19 0
 20 0
-21 0
 2
 0 0 0 1
 0 18 1 0
@@ -318,12 +330,11 @@ workat d1 ham
 end_operator
 begin_operator
 workat d1 ham
-5
+4
 1 0
 16 0
 18 0
 19 0
-21 0
 3
 0 0 0 1
 0 17 1 0
@@ -331,13 +342,25 @@ workat d1 ham
 1
 end_operator
 begin_operator
-workat d10 ber
+workat d1 ham
+2
+1 0
+16 1
 5
+0 0 0 1
+0 17 1 0
+0 18 1 0
+0 19 1 0
+0 20 0 1
+1
+end_operator
+begin_operator
+workat d10 ber
+4
 0 1
 16 0
 17 0
 19 0
-21 0
 3
 0 1 0 1
 0 10 -1 0
@@ -346,12 +369,11 @@ workat d10 ber
 end_operator
 begin_operator
 workat d10 ber
-5
+4
 0 1
 16 1
 17 0
 19 0
-21 0
 3
 0 1 0 1
 0 10 -1 0
@@ -360,12 +382,11 @@ workat d10 ber
 end_operator
 begin_operator
 workat d10 ber
-5
+4
 0 0
 16 0
 19 0
 20 0
-21 0
 3
 0 1 0 1
 0 10 -1 0
@@ -373,13 +394,25 @@ workat d10 ber
 1
 end_operator
 begin_operator
+workat d10 ber
+3
+0 0
+16 1
+20 0
+4
+0 1 0 1
+0 10 -1 0
+0 17 1 0
+0 19 1 0
+1
+end_operator
+begin_operator
 workat d10 fra
-5
+4
 0 1
 17 0
 18 0
 19 0
-21 0
 4
 0 1 0 1
 0 15 -1 0
@@ -389,12 +422,11 @@ workat d10 fra
 end_operator
 begin_operator
 workat d10 fra
-5
+4
 0 0
 18 0
 19 0
 20 0
-21 0
 4
 0 1 0 1
 0 15 -1 0
@@ -403,13 +435,26 @@ workat d10 fra
 1
 end_operator
 begin_operator
+workat d10 fra
+2
+0 0
+20 0
+6
+0 1 0 1
+0 15 -1 0
+0 16 1 0
+0 17 1 0
+0 18 1 0
+0 19 1 0
+1
+end_operator
+begin_operator
 workat d10 ham
-5
+4
 0 1
 16 0
 17 0
 19 0
-21 0
 2
 0 1 0 1
 0 20 1 0
@@ -417,12 +462,11 @@ workat d10 ham
 end_operator
 begin_operator
 workat d10 ham
-5
+4
 0 1
 16 1
 17 0
 19 0
-21 0
 2
 0 1 0 1
 0 20 1 0
@@ -430,15 +474,26 @@ workat d10 ham
 end_operator
 begin_operator
 workat d10 ham
-5
+4
 0 0
 16 0
 19 0
 20 0
-21 0
 2
 0 1 0 1
 0 17 1 0
+1
+end_operator
+begin_operator
+workat d10 ham
+3
+0 0
+16 1
+20 0
+3
+0 1 0 1
+0 17 1 0
+0 19 1 0
 1
 end_operator
 begin_operator
@@ -476,51 +531,11 @@ workat d3 ber
 end_operator
 begin_operator
 workat d3 fra
-5
+4
 0 0
 1 0
 18 0
 19 0
-21 0
-2
-0 3 0 1
-0 16 -1 0
-1
-end_operator
-begin_operator
-workat d3 fra
-5
-0 0
-1 1
-18 0
-19 0
-21 0
-2
-0 3 0 1
-0 16 -1 0
-1
-end_operator
-begin_operator
-workat d3 fra
-5
-0 1
-1 0
-18 0
-19 0
-21 0
-2
-0 3 0 1
-0 16 -1 0
-1
-end_operator
-begin_operator
-workat d3 fra
-5
-0 1
-1 1
-18 0
-19 0
-21 0
 2
 0 3 0 1
 0 16 -1 0
@@ -531,12 +546,59 @@ workat d3 fra
 4
 0 0
 1 1
+18 0
 19 0
-21 0
+2
+0 3 0 1
+0 16 -1 0
+1
+end_operator
+begin_operator
+workat d3 fra
+4
+0 1
+1 0
+18 0
+19 0
+2
+0 3 0 1
+0 16 -1 0
+1
+end_operator
+begin_operator
+workat d3 fra
+4
+0 1
+1 1
+18 0
+19 0
+2
+0 3 0 1
+0 16 -1 0
+1
+end_operator
+begin_operator
+workat d3 fra
+3
+0 0
+1 1
+19 0
 3
 0 3 0 1
 0 16 1 0
 0 18 1 0
+1
+end_operator
+begin_operator
+workat d3 fra
+2
+0 0
+1 0
+4
+0 3 0 1
+0 16 1 0
+0 18 1 0
+0 19 1 0
 1
 end_operator
 begin_operator

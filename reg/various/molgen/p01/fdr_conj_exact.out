@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-18
+17
 begin_variable
 var0
 -1
@@ -100,36 +100,29 @@ begin_variable
 var13
 -1
 2
-NOT-cleavable e-coli-exosome-cleavable insulin-gene
-cleavable e-coli-exosome-cleavable insulin-gene
+NOT-0:0:0:cleavable e-coli-exosome-1:0:2:cleavable insulin-gene
+0:0:0:cleavable e-coli-exosome-1:0:2:cleavable insulin-gene
 end_variable
 begin_variable
 var14
 -1
 2
-NOT-cleavable e-coli-exosome-none-of-those
-cleavable e-coli-exosome-none-of-those
+NOT-0:0:0:cleavable e-coli-exosome-12:1:25:none-of-those
+0:0:0:cleavable e-coli-exosome-12:1:25:none-of-those
 end_variable
 begin_variable
 var15
 -1
 2
-NOT-cleavable e-coli-exosome-cleavable insulin-gene-none-of-those
-cleavable e-coli-exosome-cleavable insulin-gene-none-of-those
+NOT-0:0:0:cleavable e-coli-exosome-1:0:2:cleavable insulin-gene-12:1:25:none-of-those
+0:0:0:cleavable e-coli-exosome-1:0:2:cleavable insulin-gene-12:1:25:none-of-those
 end_variable
 begin_variable
 var16
 -1
 2
-NOT-none-of-those-cleavable insulin-gene
-none-of-those-cleavable insulin-gene
-end_variable
-begin_variable
-var17
--1
-2
-NOT-cleavable e-coli-exosome-none-of-those-cleavable insulin-gene-none-of-those
-cleavable e-coli-exosome-none-of-those-cleavable insulin-gene-none-of-those
+NOT-0:1:1:none-of-those-1:0:2:cleavable insulin-gene
+0:1:1:none-of-those-1:0:2:cleavable insulin-gene
 end_variable
 0
 begin_state
@@ -150,7 +143,6 @@ begin_state
 1
 0
 0
-0
 end_state
 begin_goal
 3
@@ -158,17 +150,16 @@ begin_goal
 8 0
 11 0
 end_goal
-55
+61
 begin_operator
 cleave e-coli-exosome
-7
+6
 1 1
 12 0
 13 0
 14 0
 15 0
 16 0
-17 0
 2
 0 0 0 1
 0 3 -1 0
@@ -176,13 +167,12 @@ cleave e-coli-exosome
 end_operator
 begin_operator
 cleave e-coli-exosome
-6
+5
 1 1
 12 1
 13 0
 15 0
 16 0
-17 0
 3
 0 0 0 1
 0 3 -1 0
@@ -191,12 +181,11 @@ cleave e-coli-exosome
 end_operator
 begin_operator
 cleave e-coli-exosome
-5
+4
 1 0
 12 0
 14 0
 15 0
-17 0
 4
 0 0 0 1
 0 3 -1 0
@@ -205,13 +194,26 @@ cleave e-coli-exosome
 1
 end_operator
 begin_operator
+cleave e-coli-exosome
+2
+1 0
+12 1
+6
+0 0 0 1
+0 3 -1 0
+0 13 1 0
+0 14 1 0
+0 15 1 0
+0 16 0 1
+1
+end_operator
+begin_operator
 cleave insulin-gene
-5
+4
 0 1
 12 0
 13 0
 15 0
-17 0
 3
 0 1 0 1
 0 4 -1 0
@@ -220,12 +222,11 @@ cleave insulin-gene
 end_operator
 begin_operator
 cleave insulin-gene
-5
+4
 0 1
 12 1
 13 0
 15 0
-17 0
 3
 0 1 0 1
 0 4 -1 0
@@ -234,16 +235,28 @@ cleave insulin-gene
 end_operator
 begin_operator
 cleave insulin-gene
-5
+4
 0 0
 12 0
 15 0
 16 0
-17 0
 3
 0 1 0 1
 0 4 -1 0
 0 13 1 0
+1
+end_operator
+begin_operator
+cleave insulin-gene
+3
+0 0
+12 1
+16 0
+4
+0 1 0 1
+0 4 -1 0
+0 13 1 0
+0 15 1 0
 1
 end_operator
 begin_operator
@@ -264,12 +277,11 @@ digest insulin-gene
 end_operator
 begin_operator
 ligate e-coli-exosome insulin-gene
-5
+4
 0 1
 12 0
 13 0
 15 0
-17 0
 4
 0 1 -1 0
 0 3 0 1
@@ -279,12 +291,11 @@ ligate e-coli-exosome insulin-gene
 end_operator
 begin_operator
 ligate e-coli-exosome insulin-gene
-5
+4
 0 1
 12 1
 13 0
 15 0
-17 0
 4
 0 1 -1 0
 0 3 0 1
@@ -294,14 +305,13 @@ ligate e-coli-exosome insulin-gene
 end_operator
 begin_operator
 ligate e-coli-exosome insulin-gene
-7
+6
 0 1
 1 0
 12 0
 13 0
 15 0
 16 1
-17 0
 2
 0 3 0 1
 0 4 0 1
@@ -309,14 +319,13 @@ ligate e-coli-exosome insulin-gene
 end_operator
 begin_operator
 ligate e-coli-exosome insulin-gene
-7
+6
 0 1
 1 0
 12 1
 13 0
 15 0
 16 1
-17 0
 2
 0 3 0 1
 0 4 0 1
@@ -333,13 +342,12 @@ ligate e-coli-exosome junk-exosome
 end_operator
 begin_operator
 ligate insulin-gene e-coli-exosome
-6
+5
 1 0
 12 0
 14 0
 15 0
 16 0
-17 0
 5
 0 0 -1 0
 0 3 0 1
@@ -350,11 +358,10 @@ ligate insulin-gene e-coli-exosome
 end_operator
 begin_operator
 ligate insulin-gene e-coli-exosome
-4
+3
 1 0
 12 1
 16 0
-17 0
 7
 0 0 -1 0
 0 3 0 1
@@ -367,14 +374,13 @@ ligate insulin-gene e-coli-exosome
 end_operator
 begin_operator
 ligate insulin-gene e-coli-exosome
-7
+6
 1 1
 12 0
 13 0
 14 0
 15 0
 16 0
-17 0
 4
 0 0 -1 0
 0 3 0 1
@@ -384,13 +390,12 @@ ligate insulin-gene e-coli-exosome
 end_operator
 begin_operator
 ligate insulin-gene e-coli-exosome
-6
+5
 1 1
 12 1
 13 0
 15 0
 16 0
-17 0
 5
 0 0 -1 0
 0 3 0 1
@@ -401,12 +406,11 @@ ligate insulin-gene e-coli-exosome
 end_operator
 begin_operator
 ligate insulin-gene e-coli-exosome
-5
+4
 1 0
 12 0
 14 0
 15 0
-17 0
 6
 0 0 1 0
 0 3 0 1
@@ -418,10 +422,9 @@ ligate insulin-gene e-coli-exosome
 end_operator
 begin_operator
 ligate insulin-gene e-coli-exosome
-3
+2
 1 0
 12 1
-17 0
 8
 0 0 1 0
 0 3 0 1
@@ -444,13 +447,12 @@ ligate insulin-gene junk-exosome
 end_operator
 begin_operator
 ligate junk-exosome e-coli-exosome
-6
+5
 1 0
 12 0
 14 0
 15 0
 16 0
-17 0
 4
 0 0 -1 0
 0 3 0 1
@@ -460,11 +462,10 @@ ligate junk-exosome e-coli-exosome
 end_operator
 begin_operator
 ligate junk-exosome e-coli-exosome
-4
+3
 1 0
 12 1
 16 0
-17 0
 6
 0 0 -1 0
 0 3 0 1
@@ -476,14 +477,13 @@ ligate junk-exosome e-coli-exosome
 end_operator
 begin_operator
 ligate junk-exosome e-coli-exosome
-7
+6
 1 1
 12 0
 13 0
 14 0
 15 0
 16 0
-17 0
 3
 0 0 -1 0
 0 3 0 1
@@ -492,13 +492,12 @@ ligate junk-exosome e-coli-exosome
 end_operator
 begin_operator
 ligate junk-exosome e-coli-exosome
-6
+5
 1 1
 12 1
 13 0
 15 0
 16 0
-17 0
 4
 0 0 -1 0
 0 3 0 1
@@ -508,12 +507,11 @@ ligate junk-exosome e-coli-exosome
 end_operator
 begin_operator
 ligate junk-exosome e-coli-exosome
-5
+4
 1 0
 12 0
 14 0
 15 0
-17 0
 5
 0 0 1 0
 0 3 0 1
@@ -524,10 +522,9 @@ ligate junk-exosome e-coli-exosome
 end_operator
 begin_operator
 ligate junk-exosome e-coli-exosome
-3
+2
 1 0
 12 1
-17 0
 7
 0 0 1 0
 0 3 0 1
@@ -540,12 +537,11 @@ ligate junk-exosome e-coli-exosome
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-5
+4
 0 0
 12 0
 15 0
 16 0
-17 0
 4
 0 1 -1 0
 0 4 0 1
@@ -555,11 +551,10 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-4
+3
 0 0
 12 1
 16 0
-17 0
 5
 0 1 -1 0
 0 4 0 1
@@ -570,12 +565,11 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-5
+4
 0 1
 12 0
 13 0
 15 0
-17 0
 4
 0 1 -1 0
 0 4 0 1
@@ -585,12 +579,11 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-5
+4
 0 1
 12 1
 13 0
 15 0
-17 0
 4
 0 1 -1 0
 0 4 0 1
@@ -600,14 +593,13 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-7
+6
 0 1
 1 0
 12 0
 13 0
 15 0
 16 1
-17 0
 2
 0 4 0 1
 0 5 0 1
@@ -615,14 +607,13 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-7
+6
 0 1
 1 0
 12 1
 13 0
 15 0
 16 1
-17 0
 2
 0 4 0 1
 0 5 0 1
@@ -630,14 +621,27 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate junk-exosome insulin-gene
-7
+6
 0 0
 1 0
 12 0
 13 1
 15 0
 16 0
-17 0
+2
+0 4 0 1
+0 5 0 1
+1
+end_operator
+begin_operator
+ligate junk-exosome insulin-gene
+6
+0 0
+1 0
+12 1
+13 1
+15 1
+16 0
 2
 0 4 0 1
 0 5 0 1
@@ -645,13 +649,12 @@ ligate junk-exosome insulin-gene
 end_operator
 begin_operator
 ligate linker insulin-gene
-6
+5
 0 0
 9 0
 12 0
 15 0
 16 0
-17 0
 2
 0 1 -1 0
 0 13 0 1
@@ -659,12 +662,11 @@ ligate linker insulin-gene
 end_operator
 begin_operator
 ligate linker insulin-gene
-5
+4
 0 0
 9 0
 12 1
 16 0
-17 0
 3
 0 1 -1 0
 0 13 0 1
@@ -673,13 +675,12 @@ ligate linker insulin-gene
 end_operator
 begin_operator
 ligate linker insulin-gene
-6
+5
 0 1
 9 0
 12 0
 13 0
 15 0
-17 0
 2
 0 1 -1 0
 0 16 0 1
@@ -687,13 +688,12 @@ ligate linker insulin-gene
 end_operator
 begin_operator
 ligate linker insulin-gene
-6
+5
 0 1
 9 0
 12 1
 13 0
 15 0
-17 0
 2
 0 1 -1 0
 0 16 0 1
@@ -701,7 +701,7 @@ ligate linker insulin-gene
 end_operator
 begin_operator
 ligate linker insulin-gene
-8
+7
 0 1
 1 0
 9 0
@@ -709,13 +709,12 @@ ligate linker insulin-gene
 13 0
 15 0
 16 1
-17 0
 0
 1
 end_operator
 begin_operator
 ligate linker insulin-gene
-8
+7
 0 1
 1 0
 9 0
@@ -723,13 +722,12 @@ ligate linker insulin-gene
 13 0
 15 0
 16 1
-17 0
 0
 1
 end_operator
 begin_operator
 ligate linker insulin-gene
-8
+7
 0 0
 1 0
 9 0
@@ -737,16 +735,27 @@ ligate linker insulin-gene
 13 1
 15 0
 16 0
-17 0
+0
+1
+end_operator
+begin_operator
+ligate linker insulin-gene
+7
+0 0
+1 0
+9 0
+12 1
+13 1
+15 1
+16 0
 0
 1
 end_operator
 begin_operator
 polymerize insulin-gene
-3
+2
 0 0
 1 0
-17 0
 4
 0 10 -1 0
 0 12 0 1
@@ -756,11 +765,10 @@ polymerize insulin-gene
 end_operator
 begin_operator
 polymerize insulin-gene
-4
+3
 0 0
 1 1
 15 0
-17 0
 3
 0 10 -1 0
 0 12 0 1
@@ -769,12 +777,11 @@ polymerize insulin-gene
 end_operator
 begin_operator
 polymerize insulin-gene
-5
+4
 0 1
 1 0
 14 0
 15 0
-17 0
 2
 0 10 -1 0
 0 12 0 1
@@ -782,12 +789,11 @@ polymerize insulin-gene
 end_operator
 begin_operator
 polymerize insulin-gene
-5
+4
 0 1
 1 1
 14 0
 15 0
-17 0
 2
 0 10 -1 0
 0 12 0 1
@@ -810,51 +816,11 @@ screen e-coli e-coli-exosome antibiotic-1
 end_operator
 begin_operator
 separate insulin-gene
-5
+4
 0 0
 1 0
 14 0
 15 0
-17 0
-2
-0 6 0 1
-0 12 -1 0
-1
-end_operator
-begin_operator
-separate insulin-gene
-5
-0 0
-1 1
-14 0
-15 0
-17 0
-2
-0 6 0 1
-0 12 -1 0
-1
-end_operator
-begin_operator
-separate insulin-gene
-5
-0 1
-1 0
-14 0
-15 0
-17 0
-2
-0 6 0 1
-0 12 -1 0
-1
-end_operator
-begin_operator
-separate insulin-gene
-5
-0 1
-1 1
-14 0
-15 0
-17 0
 2
 0 6 0 1
 0 12 -1 0
@@ -865,8 +831,43 @@ separate insulin-gene
 4
 0 0
 1 1
+14 0
 15 0
-17 0
+2
+0 6 0 1
+0 12 -1 0
+1
+end_operator
+begin_operator
+separate insulin-gene
+4
+0 1
+1 0
+14 0
+15 0
+2
+0 6 0 1
+0 12 -1 0
+1
+end_operator
+begin_operator
+separate insulin-gene
+4
+0 1
+1 1
+14 0
+15 0
+2
+0 6 0 1
+0 12 -1 0
+1
+end_operator
+begin_operator
+separate insulin-gene
+3
+0 0
+1 1
+15 0
 3
 0 6 0 1
 0 12 1 0
@@ -874,15 +875,26 @@ separate insulin-gene
 1
 end_operator
 begin_operator
+separate insulin-gene
+2
+0 0
+1 0
+4
+0 6 0 1
+0 12 1 0
+0 14 1 0
+0 15 1 0
+1
+end_operator
+begin_operator
 transform e-coli-exosome e-coli
-7
+6
 1 1
 12 0
 13 0
 14 0
 15 0
 16 0
-17 0
 2
 0 0 0 1
 0 7 -1 0
@@ -890,13 +902,12 @@ transform e-coli-exosome e-coli
 end_operator
 begin_operator
 transform e-coli-exosome e-coli
-6
+5
 1 1
 12 1
 13 0
 15 0
 16 0
-17 0
 3
 0 0 0 1
 0 7 -1 0
@@ -905,16 +916,29 @@ transform e-coli-exosome e-coli
 end_operator
 begin_operator
 transform e-coli-exosome e-coli
-5
+4
 1 0
 12 0
 14 0
 15 0
-17 0
 4
 0 0 0 1
 0 7 -1 0
 0 13 1 0
+0 16 0 1
+1
+end_operator
+begin_operator
+transform e-coli-exosome e-coli
+2
+1 0
+12 1
+6
+0 0 0 1
+0 7 -1 0
+0 13 1 0
+0 14 1 0
+0 15 1 0
 0 16 0 1
 1
 end_operator

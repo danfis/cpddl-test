@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-25
+24
 begin_variable
 var0
 -1
@@ -155,36 +155,29 @@ begin_variable
 var20
 -1
 2
-NOT-base-pos pr2 x0 y0-gripper-rel pr2 xrel0 yrel0
-base-pos pr2 x0 y0-gripper-rel pr2 xrel0 yrel0
+NOT-0:0:0:base-pos pr2 x0 y0-1:2:7:gripper-rel pr2 xrel0 yrel0
+0:0:0:base-pos pr2 x0 y0-1:2:7:gripper-rel pr2 xrel0 yrel0
 end_variable
 begin_variable
 var21
 -1
 2
-NOT-base-pos pr2 x0 y0-none-of-those
-base-pos pr2 x0 y0-none-of-those
+NOT-0:0:0:base-pos pr2 x0 y0-19:1:45:none-of-those
+0:0:0:base-pos pr2 x0 y0-19:1:45:none-of-those
 end_variable
 begin_variable
 var22
 -1
 2
-NOT-base-pos pr2 x0 y0-gripper-rel pr2 xrel0 yrel0-none-of-those
-base-pos pr2 x0 y0-gripper-rel pr2 xrel0 yrel0-none-of-those
+NOT-0:0:0:base-pos pr2 x0 y0-1:2:7:gripper-rel pr2 xrel0 yrel0-19:1:45:none-of-those
+0:0:0:base-pos pr2 x0 y0-1:2:7:gripper-rel pr2 xrel0 yrel0-19:1:45:none-of-those
 end_variable
 begin_variable
 var23
 -1
 2
-NOT-base-pos pr2 x1 y0-gripper-rel pr2 xrel0 yrel0
-base-pos pr2 x1 y0-gripper-rel pr2 xrel0 yrel0
-end_variable
-begin_variable
-var24
--1
-2
-NOT-base-pos pr2 x0 y0-base-pos pr2 x1 y0-gripper-rel pr2 xrel0 yrel0-none-of-those
-base-pos pr2 x0 y0-base-pos pr2 x1 y0-gripper-rel pr2 xrel0 yrel0-none-of-those
+NOT-0:1:1:base-pos pr2 x1 y0-1:2:7:gripper-rel pr2 xrel0 yrel0
+0:1:1:base-pos pr2 x1 y0-1:2:7:gripper-rel pr2 xrel0 yrel0
 end_variable
 0
 begin_state
@@ -212,7 +205,6 @@ begin_state
 0
 0
 0
-0
 end_state
 begin_goal
 4
@@ -221,17 +213,16 @@ begin_goal
 4 1
 5 1
 end_goal
-50
+47
 begin_operator
 base-left pr2 x1 x0 y0
-7
+6
 1 2
 6 0
 8 0
 19 0
 21 0
 22 0
-24 0
 5
 0 0 1 0
 0 9 0 1
@@ -242,12 +233,11 @@ base-left pr2 x1 x0 y0
 end_operator
 begin_operator
 base-left pr2 x1 x0 y0
-5
+4
 1 2
 6 0
 8 0
 19 1
-24 0
 7
 0 0 1 0
 0 9 0 1
@@ -260,27 +250,10 @@ base-left pr2 x1 x0 y0
 end_operator
 begin_operator
 base-left pr2 x2 x1 y0
-5
+3
 1 2
 6 0
 8 0
-19 0
-24 0
-4
-0 0 2 1
-0 10 0 1
-0 11 -1 0
-0 23 0 1
-1
-end_operator
-begin_operator
-base-left pr2 x2 x1 y0
-5
-1 2
-6 0
-8 0
-19 1
-24 0
 4
 0 0 2 1
 0 10 0 1
@@ -312,14 +285,13 @@ base-left pr2 x4 x3 y0
 end_operator
 begin_operator
 base-right pr2 x0 x1 y0
-7
+6
 1 2
 6 0
 8 0
 19 0
 21 0
 22 0
-24 0
 5
 0 0 0 1
 0 9 -1 0
@@ -329,28 +301,28 @@ base-right pr2 x0 x1 y0
 1
 end_operator
 begin_operator
-base-right pr2 x1 x2 y0
-5
-1 2
-6 0
-8 0
-19 0
-24 0
+base-right pr2 x0 x1 y0
 4
-0 0 1 2
-0 10 -1 0
-0 11 0 1
-0 23 1 0
-1
-end_operator
-begin_operator
-base-right pr2 x1 x2 y0
-5
 1 2
 6 0
 8 0
 19 1
-24 0
+7
+0 0 0 1
+0 9 -1 0
+0 10 0 1
+0 20 1 0
+0 21 1 0
+0 22 1 0
+0 23 0 1
+1
+end_operator
+begin_operator
+base-right pr2 x1 x2 y0
+3
+1 2
+6 0
+8 0
 4
 0 0 1 2
 0 10 -1 0
@@ -420,12 +392,11 @@ grasp-cart-below pr2 cart x0 y0 y1
 end_operator
 begin_operator
 gripper-down pr2 x0 y0 xrel0 x0 yrel0 yrel1 y0 y1
-5
+4
 0 0
 6 1
 19 0
 22 0
-24 0
 4
 0 1 2 3
 0 14 -1 0
@@ -435,11 +406,10 @@ gripper-down pr2 x0 y0 xrel0 x0 yrel0 yrel1 y0 y1
 end_operator
 begin_operator
 gripper-down pr2 x0 y0 xrel0 x0 yrel0 yrel1 y0 y1
-4
+3
 0 0
 6 1
 19 1
-24 0
 5
 0 1 2 3
 0 14 -1 0
@@ -461,13 +431,12 @@ gripper-down pr2 x1 y0 xrel-1 x0 yrel0 yrel1 y0 y1
 end_operator
 begin_operator
 gripper-left pr2 x0 y0 xrel1 xrel0 x1 x0 yrel0 y0
-6
+5
 0 0
 6 1
 19 0
 22 0
 23 0
-24 0
 4
 0 1 4 2
 0 14 0 1
@@ -477,12 +446,11 @@ gripper-left pr2 x0 y0 xrel1 xrel0 x1 x0 yrel0 y0
 end_operator
 begin_operator
 gripper-left pr2 x0 y0 xrel1 xrel0 x1 x0 yrel0 y0
-5
+4
 0 0
 6 1
 19 1
 23 0
-24 0
 5
 0 1 4 2
 0 14 0 1
@@ -493,25 +461,9 @@ gripper-left pr2 x0 y0 xrel1 xrel0 x1 x0 yrel0 y0
 end_operator
 begin_operator
 gripper-left pr2 x1 y0 xrel0 xrel-1 x1 x0 yrel0 y0
-4
+2
 0 1
 6 1
-19 0
-24 0
-4
-0 1 2 0
-0 14 0 1
-0 16 -1 0
-0 23 1 0
-1
-end_operator
-begin_operator
-gripper-left pr2 x1 y0 xrel0 xrel-1 x1 x0 yrel0 y0
-4
-0 1
-6 1
-19 1
-24 0
 4
 0 1 2 0
 0 14 0 1
@@ -521,13 +473,12 @@ gripper-left pr2 x1 y0 xrel0 xrel-1 x1 x0 yrel0 y0
 end_operator
 begin_operator
 gripper-left pr2 x1 y0 xrel1 xrel0 x2 x1 yrel0 y0
-6
+5
 0 1
 6 1
 19 0
 20 0
 22 0
-24 0
 4
 0 1 4 2
 0 16 0 1
@@ -537,13 +488,12 @@ gripper-left pr2 x1 y0 xrel1 xrel0 x2 x1 yrel0 y0
 end_operator
 begin_operator
 gripper-left pr2 x1 y0 xrel1 xrel0 x2 x1 yrel0 y0
-6
+5
 0 1
 6 1
 19 1
 20 0
 22 0
-24 0
 4
 0 1 4 2
 0 16 0 1
@@ -564,14 +514,13 @@ gripper-left pr2 x2 y0 xrel0 xrel-1 x2 x1 yrel0 y0
 end_operator
 begin_operator
 gripper-left pr2 x2 y0 xrel1 xrel0 x3 x2 yrel0 y0
-7
+6
 0 2
 6 1
 19 0
 20 0
 22 0
 23 0
-24 0
 3
 0 1 4 2
 0 17 0 1
@@ -580,14 +529,13 @@ gripper-left pr2 x2 y0 xrel1 xrel0 x3 x2 yrel0 y0
 end_operator
 begin_operator
 gripper-left pr2 x2 y0 xrel1 xrel0 x3 x2 yrel0 y0
-7
+6
 0 2
 6 1
 19 1
 20 0
 22 0
 23 0
-24 0
 3
 0 1 4 2
 0 17 0 1
@@ -631,12 +579,11 @@ gripper-left pr2 x4 y0 xrel0 xrel-1 x4 x3 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x0 y0 xrel0 xrel1 x0 x1 yrel0 y0
-5
+4
 0 0
 6 1
 19 0
 22 0
-24 0
 4
 0 1 2 4
 0 14 -1 0
@@ -646,11 +593,10 @@ gripper-right pr2 x0 y0 xrel0 xrel1 x0 x1 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x0 y0 xrel0 xrel1 x0 x1 yrel0 y0
-4
+3
 0 0
 6 1
 19 1
-24 0
 5
 0 1 2 4
 0 14 -1 0
@@ -661,13 +607,12 @@ gripper-right pr2 x0 y0 xrel0 xrel1 x0 x1 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x1 y0 xrel-1 xrel0 x0 x1 yrel0 y0
-6
+5
 0 1
 6 1
 19 0
 20 0
 22 0
-24 0
 4
 0 1 0 2
 0 14 -1 0
@@ -677,13 +622,12 @@ gripper-right pr2 x1 y0 xrel-1 xrel0 x0 x1 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x1 y0 xrel-1 xrel0 x0 x1 yrel0 y0
-6
+5
 0 1
 6 1
 19 1
 20 0
 22 0
-24 0
 4
 0 1 0 2
 0 14 -1 0
@@ -693,25 +637,9 @@ gripper-right pr2 x1 y0 xrel-1 xrel0 x0 x1 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x1 y0 xrel0 xrel1 x1 x2 yrel0 y0
-4
+2
 0 1
 6 1
-19 0
-24 0
-4
-0 1 2 4
-0 16 -1 0
-0 17 0 1
-0 23 1 0
-1
-end_operator
-begin_operator
-gripper-right pr2 x1 y0 xrel0 xrel1 x1 x2 yrel0 y0
-4
-0 1
-6 1
-19 1
-24 0
 4
 0 1 2 4
 0 16 -1 0
@@ -721,14 +649,13 @@ gripper-right pr2 x1 y0 xrel0 xrel1 x1 x2 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x2 y0 xrel-1 xrel0 x1 x2 yrel0 y0
-7
+6
 0 2
 6 1
 19 0
 20 0
 22 0
 23 0
-24 0
 3
 0 1 0 2
 0 16 -1 0
@@ -737,14 +664,13 @@ gripper-right pr2 x2 y0 xrel-1 xrel0 x1 x2 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x2 y0 xrel-1 xrel0 x1 x2 yrel0 y0
-7
+6
 0 2
 6 1
 19 1
 20 0
 22 0
 23 0
-24 0
 3
 0 1 0 2
 0 16 -1 0
@@ -764,14 +690,13 @@ gripper-right pr2 x2 y0 xrel0 xrel1 x2 x3 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x3 y0 xrel-1 xrel0 x2 x3 yrel0 y0
-7
+6
 0 3
 6 1
 19 0
 20 0
 22 0
 23 0
-24 0
 3
 0 1 0 2
 0 17 -1 0
@@ -780,14 +705,13 @@ gripper-right pr2 x3 y0 xrel-1 xrel0 x2 x3 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x3 y0 xrel-1 xrel0 x2 x3 yrel0 y0
-7
+6
 0 3
 6 1
 19 1
 20 0
 22 0
 23 0
-24 0
 3
 0 1 0 2
 0 17 -1 0
@@ -808,14 +732,13 @@ gripper-right pr2 x3 y0 xrel0 xrel1 x3 x4 yrel0 y0
 end_operator
 begin_operator
 gripper-right pr2 x4 y0 xrel-1 xrel0 x3 x4 yrel0 y0
-7
+6
 0 4
 6 1
 20 0
 21 0
 22 0
 23 0
-24 0
 3
 0 1 0 2
 0 18 -1 0
@@ -824,13 +747,12 @@ gripper-right pr2 x4 y0 xrel-1 xrel0 x3 x4 yrel0 y0
 end_operator
 begin_operator
 gripper-up pr2 x0 y0 xrel0 x0 yrel1 yrel0 y1 y0
-6
+5
 0 0
 6 1
 19 0
 22 0
 23 0
-24 0
 4
 0 1 3 2
 0 14 0 1
@@ -840,12 +762,11 @@ gripper-up pr2 x0 y0 xrel0 x0 yrel1 yrel0 y1 y0
 end_operator
 begin_operator
 gripper-up pr2 x0 y0 xrel0 x0 yrel1 yrel0 y1 y0
-5
+4
 0 0
 6 1
 19 1
 23 0
-24 0
 5
 0 1 3 2
 0 14 0 1

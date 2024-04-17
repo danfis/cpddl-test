@@ -289,7 +289,9 @@ static void testCompileInLMG(int mutex, int dead_end)
     pddlCompileInLiftedMGroups(&pddl, &C.lmg, &lmg_cfg, &C.err);
 
     checkGroundingEqual(pddlStripsGroundDatalog, &pddl, &ground_cfg, &base);
+#ifdef PDDL_SQL
     checkGroundingEqual(pddlStripsGroundSql, &pddl, &ground_cfg, &base);
+#endif
     checkGroundingEqual(pddlStripsGroundTrie, &pddl, &ground_cfg, &base);
 
 #ifdef PDDL_CLINGO
@@ -325,7 +327,9 @@ TEST(strips_grounding, pddl)
     assert(ret == 0);
 
     checkGroundingEqual(pddlStripsGroundDatalog, &C.pddl, &ground_cfg, &base);
+#ifdef PDDL_SQL
     checkGroundingEqual(pddlStripsGroundSql, &C.pddl, &ground_cfg, &base);
+#endif
     checkGroundingEqual(pddlStripsGroundTrie, &C.pddl, &ground_cfg, &base);
 
 #ifdef PDDL_CLINGO

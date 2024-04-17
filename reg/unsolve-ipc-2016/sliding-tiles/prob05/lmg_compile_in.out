@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 4, lifted mgroups: 3
 Compile-in LMG: Found mutex condition for action 'move-up' and mgroup {at C2:object V0:object V1:object, blank V0:object V1:object, at C3:object V0:object V1:object}:=1: (= ?py ?by)
 Compile-in LMG: Precondition of action 'move-up' extended with (not (= ?py ?by))
@@ -7,7 +10,35 @@ Compile-in LMG: Found mutex condition for action 'move-left' and mgroup {at C2:o
 Compile-in LMG: Precondition of action 'move-left' extended with (not (= ?px ?bx))
 Compile-in LMG: Found mutex condition for action 'move-right' and mgroup {at C2:object V0:object V1:object, blank V0:object V1:object, at C3:object V0:object V1:object}:=1: (= ?px ?bx)
 Compile-in LMG: Precondition of action 'move-right' extended with (not (= ?px ?bx))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 11, predicates: 8, functions: 0, actions: 4, action-pre-size: [min: 8, max: 8, avg: 8.00, med: 8.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-up
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-down
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-left
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-right
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 11, vars: 4, predicates: 9, rules: 40)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 11, vars: 4, predicates: 9, rules: 40)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 11, vars: 4, predicates: 9, rules: 40)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 40
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 40, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 11, predicates: 8, functions: 0, actions: 4, action-pre-size: [min: 8, max: 8, avg: 8.00, med: 8.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 4
+Compile-in LMG: END
 Domain: strips-sliding-tile
 Problem: p3-3-puzzle-problem-100-1390833173323132671
 Require: ff
@@ -39,17 +70,17 @@ Predicate[8]:
 Function[0]:
 Action[4]:
     move-up: ?t:0 ?px:0 ?py:0 ?by:0
-        pre: (and (N:R:= ?py ?by) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?px ?by) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+        pre: (and (N:R:= ?py ?by) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (RW:at ?t ?px ?py) (RW:blank ?px ?by))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?px ?by) (RW:blank ?px ?py) (N:RW:blank ?px ?by))
     move-down: ?t:0 ?px:0 ?py:0 ?by:0
-        pre: (and (N:R:= ?py ?by) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (RW:blank ?px ?by) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?px ?by) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?px ?by))
+        pre: (and (N:R:= ?py ?by) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (RW:at ?t ?px ?py) (RW:blank ?px ?by))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?px ?by) (RW:blank ?px ?py) (N:RW:blank ?px ?by))
     move-left: ?t:0 ?px:0 ?py:0 ?bx:0
-        pre: (and (N:R:= ?px ?bx) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:dec ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?bx ?py) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+        pre: (and (N:R:= ?px ?bx) (R:tile ?t) (R:xposition ?px) (R:xposition ?bx) (R:yposition ?py) (R:dec ?bx ?px) (RW:at ?t ?px ?py) (RW:blank ?bx ?py))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?bx ?py) (RW:blank ?px ?py) (N:RW:blank ?bx ?py))
     move-right: ?t:0 ?px:0 ?py:0 ?bx:0
-        pre: (and (N:R:= ?px ?bx) (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:xposition ?bx) (R:inc ?bx ?px) (RW:blank ?bx ?py) (RW:at ?t ?px ?py))
-        eff: (and (N:RW:blank ?bx ?py) (N:RW:at ?t ?px ?py) (RW:blank ?px ?py) (RW:at ?t ?bx ?py))
+        pre: (and (N:R:= ?px ?bx) (R:tile ?t) (R:xposition ?px) (R:xposition ?bx) (R:yposition ?py) (R:inc ?bx ?px) (RW:at ?t ?px ?py) (RW:blank ?bx ?py))
+        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?bx ?py) (RW:blank ?px ?py) (N:RW:blank ?bx ?py))
 Init[27]:
   S:(tile t1)
   S:(tile t2)
@@ -69,15 +100,15 @@ Init[27]:
   S:(inc p2 p3)
   S:(dec p2 p1)
   S:(dec p3 p2)
-  (at t2 p1 p1)
-  (blank p2 p1)
-  (at t7 p3 p1)
-  (at t6 p1 p2)
-  (at t3 p2 p2)
-  (at t8 p3 p2)
-  (at t5 p1 p3)
-  (at t4 p2 p3)
   (at t1 p3 p3)
+  (at t2 p1 p1)
+  (at t3 p2 p2)
+  (at t4 p2 p3)
+  (at t5 p1 p3)
+  (at t6 p1 p2)
+  (at t7 p3 p1)
+  (at t8 p3 p2)
+  (blank p2 p1)
 Init[0]:
 Goal: (and (RW:at t1 p2 p1) (RW:at t2 p3 p1) (RW:at t3 p1 p2) (RW:at t4 p2 p2) (RW:at t5 p3 p2) (RW:at t6 p1 p3) (RW:at t7 p2 p3) (RW:at t8 p3 p3))
 Metric: 0

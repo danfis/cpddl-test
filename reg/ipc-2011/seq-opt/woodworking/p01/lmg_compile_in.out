@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 13, lifted mgroups: 12
 Compile-in LMG: Found dead-end condition for action 'cut-board-small' and mgroup {unused V0:part, wood V0:part V1:awood}: (and (not (= ?w teak)) (= ?p p1))
 Compile-in LMG: Found dead-end condition for action 'cut-board-small' and mgroup {unused V0:part, wood V0:part V1:awood}: (and (not (= ?w mahogany)) (= ?p p3))
@@ -23,7 +26,56 @@ Compile-in LMG: Found dead-end condition for action 'do-saw-large' and mgroup {u
 Compile-in LMG: Found dead-end condition for action 'do-saw-large' and mgroup {unused V0:part, wood V0:part V1:awood}: (and (not (= ?w mahogany)) (= ?p p3))
 Compile-in LMG: Found dead-end condition for action 'do-saw-large' and mgroup {unused V0:part, wood V0:part V1:awood}: (and (not (= ?w teak)) (= ?p p4))
 Compile-in LMG: Precondition of action 'do-saw-large' extended with (or (and (= ?w teak) (not (= ?p p3))) (and (not (= ?p p4)) (not (= ?p p1)) (= ?w mahogany)) (and (not (= ?p p4)) (not (= ?p p1)) (not (= ?p p3))))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 18, objects: 37, predicates: 16, functions: 5, actions: 13, action-pre-size: [min: 17, max: 5, avg: 9.38, med: 1.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-immersion-varnish
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-spray-varnish
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-glaze
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-grind
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-plane
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load-highspeed-saw
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action unload-highspeed-saw
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-small
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-medium
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-large
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-small
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-medium
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-large
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-small
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-small
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-medium
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-medium
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-large
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action cut-board-large
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-small
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-small
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-medium
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-medium
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-large
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-large
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 37, vars: 9, predicates: 34, rules: 144)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 37, vars: 9, predicates: 34, rules: 144)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 37, vars: 9, predicates: 34, rules: 144)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 144
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 144, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 18, objects: 37, predicates: 16, functions: 5, actions: 25, action-pre-size: [min: 12, max: 5, avg: 8.72, med: 11.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 25
+Compile-in LMG: END
 Domain: woodworking
 Problem: wood-prob
 Require: 200ff
@@ -128,87 +180,86 @@ Function[5]:
     plane-cost: 17 :: is-private: 0, owner-param: -1, read: 0, write: 0
 Action[25]:
     do-immersion-varnish: ?x:17 ?m:12 ?newcolour:1 ?surface:5
-        pre: (and (RW:available ?x) (R:has-colour ?m ?newcolour) (RW:surface-condition ?x ?surface) (R:is-smooth ?surface) (RW:treatment ?x untreated))
-        eff: (and (increase (total-cost) 10) (N:RW:treatment ?x untreated) (RW:treatment ?x varnished) (N:RW:colour ?x natural) (RW:colour ?x ?newcolour))
+        pre: (and (R:has-colour ?m ?newcolour) (R:is-smooth ?surface) (RW:available ?x) (RW:surface-condition ?x ?surface) (RW:treatment ?x untreated))
+        eff: (and (RW:treatment ?x varnished) (N:RW:treatment ?x untreated) (N:RW:colour ?x natural) (RW:colour ?x ?newcolour) (increase (total-cost) 10))
     do-spray-varnish: ?x:17 ?m:15 ?newcolour:1 ?surface:5
-        pre: (and (RW:available ?x) (R:has-colour ?m ?newcolour) (RW:surface-condition ?x ?surface) (R:is-smooth ?surface) (RW:treatment ?x untreated))
-        eff: (and (increase (total-cost) (spray-varnish-cost ?x)) (N:RW:treatment ?x untreated) (RW:treatment ?x varnished) (N:RW:colour ?x natural) (RW:colour ?x ?newcolour))
+        pre: (and (R:has-colour ?m ?newcolour) (R:is-smooth ?surface) (RW:available ?x) (RW:surface-condition ?x ?surface) (RW:treatment ?x untreated))
+        eff: (and (RW:treatment ?x varnished) (N:RW:treatment ?x untreated) (N:RW:colour ?x natural) (RW:colour ?x ?newcolour) (increase (total-cost) (spray-varnish-cost ?x)))
     do-glaze: ?x:17 ?m:10 ?newcolour:1
-        pre: (and (RW:available ?x) (R:has-colour ?m ?newcolour) (RW:treatment ?x untreated))
-        eff: (and (increase (total-cost) (glaze-cost ?x)) (N:RW:treatment ?x untreated) (RW:treatment ?x glazed) (N:RW:colour ?x natural) (RW:colour ?x ?newcolour))
+        pre: (and (R:has-colour ?m ?newcolour) (RW:available ?x) (RW:treatment ?x untreated))
+        eff: (and (RW:treatment ?x glazed) (N:RW:treatment ?x untreated) (N:RW:colour ?x natural) (RW:colour ?x ?newcolour) (increase (total-cost) (glaze-cost ?x)))
     do-grind: ?x:17 ?m:11 ?oldsurface:5 ?oldcolour:1 ?oldtreatment:6 ?newtreatment:6
-        pre: (and (RW:available ?x) (RW:surface-condition ?x ?oldsurface) (R:is-smooth ?oldsurface) (RW:colour ?x ?oldcolour) (RW:treatment ?x ?oldtreatment) (R:grind-treatment-change ?oldtreatment ?newtreatment))
-        eff: (and (increase (total-cost) (grind-cost ?x)) (N:RW:surface-condition ?x ?oldsurface) (RW:surface-condition ?x verysmooth) (N:RW:treatment ?x ?oldtreatment) (RW:treatment ?x ?newtreatment) (N:RW:colour ?x ?oldcolour) (RW:colour ?x natural))
+        pre: (and (R:grind-treatment-change ?oldtreatment ?newtreatment) (R:is-smooth ?oldsurface) (RW:available ?x) (RW:surface-condition ?x ?oldsurface) (RW:treatment ?x ?oldtreatment) (RW:colour ?x ?oldcolour))
+        eff: (and (RW:surface-condition ?x verysmooth) (N:RW:surface-condition ?x ?oldsurface) (N:RW:treatment ?x ?oldtreatment) (RW:treatment ?x ?newtreatment) (RW:colour ?x natural) (N:RW:colour ?x ?oldcolour) (increase (total-cost) (grind-cost ?x)))
     do-plane: ?x:17 ?m:13 ?oldsurface:5 ?oldcolour:1 ?oldtreatment:6
         pre: (and (RW:available ?x) (RW:surface-condition ?x ?oldsurface) (RW:treatment ?x ?oldtreatment) (RW:colour ?x ?oldcolour))
-        eff: (and (increase (total-cost) (plane-cost ?x)) (N:RW:surface-condition ?x ?oldsurface) (RW:surface-condition ?x smooth) (N:RW:treatment ?x ?oldtreatment) (RW:treatment ?x untreated) (N:RW:colour ?x ?oldcolour) (RW:colour ?x natural))
+        eff: (and (RW:surface-condition ?x smooth) (N:RW:surface-condition ?x ?oldsurface) (RW:treatment ?x untreated) (N:RW:treatment ?x ?oldtreatment) (RW:colour ?x natural) (N:RW:colour ?x ?oldcolour) (increase (total-cost) (plane-cost ?x)))
     load-highspeed-saw: ?b:16 ?m:9
-        pre: (and (RW:empty ?m) (RW:available ?b))
-        eff: (and (increase (total-cost) 30) (N:RW:available ?b) (N:RW:empty ?m) (RW:in-highspeed-saw ?b ?m))
+        pre: (and (RW:available ?b) (RW:empty ?m))
+        eff: (and (N:RW:available ?b) (RW:in-highspeed-saw ?b ?m) (N:RW:empty ?m) (increase (total-cost) 30))
     unload-highspeed-saw: ?b:16 ?m:9
         pre: (and (RW:in-highspeed-saw ?b ?m))
-        eff: (and (increase (total-cost) 10) (RW:available ?b) (N:RW:in-highspeed-saw ?b ?m) (RW:empty ?m))
+        eff: (and (RW:available ?b) (N:RW:in-highspeed-saw ?b ?m) (RW:empty ?m) (increase (total-cost) 10))
     cut-board-small: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p small) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b teak) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?size_before) (R:= ?w teak) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p teak) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p3) (R:= ?w teak) (R:goalsize ?p small) (R:boardsize-successor ?size_after ?size_before) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b teak) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p teak) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-medium: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p medium) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b teak) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?size_before) (R:= ?w teak) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p teak) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p3) (R:= ?w teak) (R:goalsize ?p medium) (R:boardsize-successor ?s1 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b teak) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p teak) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-large: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?s2:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p large) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b teak) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:= ?w teak) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p teak) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p3) (R:= ?w teak) (R:goalsize ?p large) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b teak) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p teak) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     do-saw-small: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p small) (RW:available ?b) (RW:wood ?b teak) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?size_before) (R:= ?w teak) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p teak) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p3) (R:= ?w teak) (R:goalsize ?p small) (R:boardsize-successor ?size_after ?size_before) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b teak) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p teak) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-medium: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p medium) (RW:available ?b) (RW:wood ?b teak) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?size_before) (R:= ?w teak) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p teak) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p3) (R:= ?w teak) (R:goalsize ?p medium) (R:boardsize-successor ?s1 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b teak) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p teak) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-large: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?s2:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p large) (RW:available ?b) (RW:wood ?b teak) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:= ?w teak) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p teak) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p3) (R:= ?w teak) (R:goalsize ?p large) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b teak) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p teak) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     cut-board-small: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p small) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b mahogany) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (R:= ?w mahogany))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p mahogany) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p4) (R:= ?w mahogany) (R:goalsize ?p small) (R:boardsize-successor ?size_after ?size_before) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b mahogany) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p mahogany) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-small: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p small) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b ?w) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p ?w) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p3) (N:R:= ?p p4) (R:goalsize ?p small) (R:boardsize-successor ?size_after ?size_before) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b ?w) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p ?w) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-medium: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p medium) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b mahogany) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (R:= ?w mahogany))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p mahogany) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p4) (R:= ?w mahogany) (R:goalsize ?p medium) (R:boardsize-successor ?s1 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b mahogany) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p mahogany) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-medium: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p medium) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b ?w) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p ?w) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p3) (N:R:= ?p p4) (R:goalsize ?p medium) (R:boardsize-successor ?s1 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b ?w) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p ?w) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-large: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?s2:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p large) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b mahogany) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (R:= ?w mahogany))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p mahogany) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p4) (R:= ?w mahogany) (R:goalsize ?p large) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b mahogany) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p mahogany) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     cut-board-large: ?b:16 ?p:17 ?m:9 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?s2:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p large) (RW:in-highspeed-saw ?b ?m) (RW:wood ?b ?w) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 10) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p ?w) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p3) (N:R:= ?p p4) (R:goalsize ?p large) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:surface-condition ?b ?surface) (RW:wood ?b ?w) (RW:boardsize ?b ?size_before) (RW:in-highspeed-saw ?b ?m))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p ?w) (RW:boardsize ?b ?size_after) (increase (total-cost) 10))
     do-saw-small: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p small) (RW:available ?b) (RW:wood ?b mahogany) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (R:= ?w mahogany))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p mahogany) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p4) (R:= ?w mahogany) (R:goalsize ?p small) (R:boardsize-successor ?size_after ?size_before) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b mahogany) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p mahogany) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-small: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p small) (RW:available ?b) (RW:wood ?b ?w) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p ?w) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p3) (N:R:= ?p p4) (R:goalsize ?p small) (R:boardsize-successor ?size_after ?size_before) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b ?w) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p ?w) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-medium: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p medium) (RW:available ?b) (RW:wood ?b mahogany) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (R:= ?w mahogany))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p mahogany) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p4) (R:= ?w mahogany) (R:goalsize ?p medium) (R:boardsize-successor ?s1 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b mahogany) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p mahogany) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-medium: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p medium) (RW:available ?b) (RW:wood ?b ?w) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p ?w) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p3) (N:R:= ?p p4) (R:goalsize ?p medium) (R:boardsize-successor ?s1 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b ?w) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p ?w) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-large: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?s2:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p large) (RW:available ?b) (RW:wood ?b mahogany) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (R:= ?w mahogany))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p mahogany) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p4) (R:= ?w mahogany) (R:goalsize ?p large) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b mahogany) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p mahogany) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
     do-saw-large: ?b:16 ?p:17 ?m:14 ?w:2 ?surface:5 ?size_before:7 ?s1:7 ?s2:7 ?size_after:7
-        pre: (and (RW:unused ?p) (R:goalsize ?p large) (RW:available ?b) (RW:wood ?b ?w) (RW:surface-condition ?b ?surface) (RW:boardsize ?b ?size_before) (R:boardsize-successor ?size_after ?s1) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (N:R:= ?p p4) (N:R:= ?p p1) (N:R:= ?p p3))
-        eff: (and (increase (total-cost) 30) (N:RW:unused ?p) (RW:available ?p) (RW:wood ?p ?w) (RW:surface-condition ?p ?surface) (RW:colour ?p natural) (RW:treatment ?p untreated) (RW:boardsize ?b ?size_after))
+        pre: (and (N:R:= ?p p1) (N:R:= ?p p3) (N:R:= ?p p4) (R:goalsize ?p large) (R:boardsize-successor ?s1 ?s2) (R:boardsize-successor ?s2 ?size_before) (R:boardsize-successor ?size_after ?s1) (RW:unused ?p) (RW:available ?b) (RW:surface-condition ?b ?surface) (RW:wood ?b ?w) (RW:boardsize ?b ?size_before))
+        eff: (and (N:RW:unused ?p) (RW:available ?p) (RW:surface-condition ?p ?surface) (RW:treatment ?p untreated) (RW:colour ?p natural) (RW:wood ?p ?w) (RW:boardsize ?b ?size_after) (increase (total-cost) 30))
 Init[37]:
-  S:(grind-treatment-change varnished colourfragments)
-  S:(grind-treatment-change glazed untreated)
-  S:(grind-treatment-change untreated untreated)
-  S:(grind-treatment-change colourfragments untreated)
-  S:(is-smooth smooth)
-  S:(is-smooth verysmooth)
+  S:(goalsize p0 medium)
+  S:(goalsize p1 small)
+  S:(goalsize p2 small)
+  S:(goalsize p3 large)
+  S:(goalsize p4 medium)
   S:(boardsize-successor s0 s1)
   S:(boardsize-successor s1 s2)
   S:(boardsize-successor s2 s3)
@@ -216,30 +267,31 @@ Init[37]:
   S:(boardsize-successor s4 s5)
   S:(has-colour glazer0 green)
   S:(has-colour immersion-varnisher0 green)
-  (empty highspeed-saw0)
   S:(has-colour spray-varnisher0 green)
+  S:(grind-treatment-change varnished colourfragments)
+  S:(grind-treatment-change glazed untreated)
+  S:(grind-treatment-change untreated untreated)
+  S:(grind-treatment-change colourfragments untreated)
+  S:(is-smooth verysmooth)
+  S:(is-smooth smooth)
   (unused p0)
-  S:(goalsize p0 medium)
   (unused p1)
-  S:(goalsize p1 small)
+  (unused p3)
+  (unused p4)
   (available p2)
+  (available b0)
+  (available b1)
+  (surface-condition p2 rough)
+  (surface-condition b0 rough)
+  (surface-condition b1 rough)
+  (treatment p2 colourfragments)
   (colour p2 black)
   (wood p2 mahogany)
-  (surface-condition p2 rough)
-  (treatment p2 colourfragments)
-  S:(goalsize p2 small)
-  (unused p3)
-  S:(goalsize p3 large)
-  (unused p4)
-  S:(goalsize p4 medium)
-  (boardsize b0 s3)
   (wood b0 teak)
-  (surface-condition b0 rough)
-  (available b0)
-  (boardsize b1 s5)
   (wood b1 mahogany)
-  (surface-condition b1 rough)
-  (available b1)
+  (boardsize b0 s3)
+  (boardsize b1 s5)
+  (empty highspeed-saw0)
 Init[21]:
   (= (total-cost) 0)
   (= (spray-varnish-cost p0) 10)
@@ -262,5 +314,5 @@ Init[21]:
   (= (glaze-cost p4) 15)
   (= (grind-cost p4) 30)
   (= (plane-cost p4) 20)
-Goal: (and (RW:available p0) (RW:surface-condition p0 smooth) (RW:treatment p0 varnished) (RW:available p1) (RW:wood p1 teak) (RW:surface-condition p1 smooth) (RW:treatment p1 varnished) (RW:available p2) (RW:colour p2 green) (RW:surface-condition p2 smooth) (RW:available p3) (RW:wood p3 mahogany) (RW:surface-condition p3 smooth) (RW:available p4) (RW:wood p4 teak) (RW:treatment p4 glazed))
+Goal: (and (RW:available p0) (RW:available p1) (RW:available p2) (RW:available p3) (RW:available p4) (RW:surface-condition p0 smooth) (RW:surface-condition p1 smooth) (RW:surface-condition p2 smooth) (RW:surface-condition p3 smooth) (RW:treatment p0 varnished) (RW:treatment p1 varnished) (RW:treatment p4 glazed) (RW:colour p2 green) (RW:wood p1 teak) (RW:wood p3 mahogany) (RW:wood p4 teak))
 Metric: 1

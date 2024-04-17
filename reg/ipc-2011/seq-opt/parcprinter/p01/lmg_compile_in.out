@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 23, lifted mgroups: 3
 Compile-in LMG: Found dead-end condition for action 'uime-simplex-letter' and mgroup {notprintedwith V0:sheet_t V1:side_t V2:color_t}: (and (= ?sheet sheet1) (= ?face front))
 Compile-in LMG: Found dead-end condition for action 'uime-simplex-letter' and mgroup {notprintedwith V0:sheet_t V1:side_t V2:color_t}: (and (= ?sheet sheet1) (= ?face back))
@@ -13,7 +16,60 @@ Compile-in LMG: Found dead-end condition for action 'lime-simplexmono-letter' an
 Compile-in LMG: Precondition of action 'lime-simplexmono-letter' extended with (or (and (not (= ?sheet sheet1)) (not (= ?sheet sheet2))) (and (not (= ?sheet sheet1)) (not (= ?face back))) (and (not (= ?face back)) (not (= ?face front))))
 Compile-in LMG: Found mutex condition for action 'sys-stack-letter' and mgroup {location V0:sheet_t C1:location_t, location V0:sheet_t C2:location_t}:=1: (= ?sheet ?prevsheet)
 Compile-in LMG: Precondition of action 'sys-stack-letter' extended with (not (= ?sheet ?prevsheet))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 8, objects: 31, predicates: 12, functions: 1, actions: 23, action-pre-size: [min: 6, max: 1, avg: 4.57, med: 3.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action initialize
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action fe1-feedmsi-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action fe1-feed-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-leftentrytotopleftexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-leftentrytobottomleftexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-toprightentrytotopleftexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-toprightentrytobottomleftexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-bottomrightentrytotopleftexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-bottomrightentrytobottomleftexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-toprightentrytorightexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action hw1-bottomrightentrytorightexit-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uc1-toime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uc1-inverttoime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uc1-fromime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uc1-invertfromime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uime-simplex-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lc1-toime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lc1-inverttoime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lc1-fromime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lc1-invertfromime-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lime-simplex-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lime-simplexmono-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action sys-stack-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uime-simplex-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action uime-simplex-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lime-simplex-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lime-simplex-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lime-simplexmono-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action lime-simplexmono-letter
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 31, vars: 3, predicates: 20, rules: 101)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 31, vars: 3, predicates: 20, rules: 101)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 31, vars: 3, predicates: 20, rules: 101)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 101
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 101, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 8, objects: 31, predicates: 12, functions: 1, actions: 29, action-pre-size: [min: 8, max: 1, avg: 4.86, med: 5.00]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 29
+Compile-in LMG: END
 Domain: etipp
 Problem: printjob
 Require: 200ff
@@ -85,113 +141,113 @@ Function[1]:
 Action[29]:
     initialize: 
         pre: (and (RW:uninitialized))
-        eff: (and (N:RW:uninitialized) (RW:available fe1-rsrc) (RW:available hw1-rsrc) (RW:available uc1-rsrc) (RW:available uime-rsrc) (RW:available lc1-rsrc) (RW:available lime-rsrc) (RW:available sys-rsrc))
+        eff: (and (RW:available fe1-rsrc) (RW:available hw1-rsrc) (RW:available uc1-rsrc) (RW:available uime-rsrc) (RW:available lc1-rsrc) (RW:available lime-rsrc) (RW:available sys-rsrc) (N:RW:uninitialized))
     fe1-feedmsi-letter: ?sheet:7
-        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
-        eff: (and (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:sideup ?sheet back) (N:RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 125))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc))
+        eff: (and (N:RW:location ?sheet some_feeder_tray) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:sideup ?sheet back) (RW:available fe1-rsrc) (increase (total-cost) 125))
     fe1-feed-letter: ?sheet:7
-        pre: (and (RW:available fe1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray))
-        eff: (and (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:sideup ?sheet back) (N:RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc) (increase (total-cost) 224))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc))
+        eff: (and (N:RW:location ?sheet some_feeder_tray) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:sideup ?sheet back) (RW:available fe1-rsrc) (increase (total-cost) 224))
     hw1-leftentrytotopleftexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet fe1_exit-hw1_leftentry))
-        eff: (and (RW:location ?sheet uc1_entry-hw1_topleftexit) (N:RW:location ?sheet fe1_exit-hw1_leftentry) (RW:available hw1-rsrc) (increase (total-cost) 1499))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:available hw1-rsrc))
+        eff: (and (N:RW:location ?sheet fe1_exit-hw1_leftentry) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:available hw1-rsrc) (increase (total-cost) 1499))
     hw1-leftentrytobottomleftexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet fe1_exit-hw1_leftentry))
-        eff: (and (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (N:RW:location ?sheet fe1_exit-hw1_leftentry) (RW:available hw1-rsrc) (increase (total-cost) 1499))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:available hw1-rsrc))
+        eff: (and (N:RW:location ?sheet fe1_exit-hw1_leftentry) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:available hw1-rsrc) (increase (total-cost) 1499))
     hw1-toprightentrytotopleftexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
         eff: (and (RW:location ?sheet uc1_entry-hw1_topleftexit) (N:RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc) (increase (total-cost) 8999))
     hw1-toprightentrytobottomleftexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
         eff: (and (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (N:RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc) (increase (total-cost) 8999))
     hw1-bottomrightentrytotopleftexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
         eff: (and (RW:location ?sheet uc1_entry-hw1_topleftexit) (N:RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc) (increase (total-cost) 8999))
     hw1-bottomrightentrytobottomleftexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
         eff: (and (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (N:RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc) (increase (total-cost) 8999))
     hw1-toprightentrytorightexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
         eff: (and (RW:location ?sheet hw1_rightexit-sys_entry) (N:RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc) (increase (total-cost) 1499))
     hw1-bottomrightentrytorightexit-letter: ?sheet:7
-        pre: (and (RW:available hw1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
         eff: (and (RW:location ?sheet hw1_rightexit-sys_entry) (N:RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc) (increase (total-cost) 1499))
     uc1-toime-letter: ?sheet:7
-        pre: (and (RW:available uc1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet uc1_entry-hw1_topleftexit))
-        eff: (and (RW:location ?sheet uc1_exittoime-uime_entry) (N:RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:available uc1-rsrc) (increase (total-cost) 2999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:available uc1-rsrc))
+        eff: (and (N:RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:available uc1-rsrc) (increase (total-cost) 2999))
     uc1-inverttoime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (RW:available uc1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:sideup ?sheet ?face))
-        eff: (and (RW:location ?sheet uc1_exittoime-uime_entry) (RW:sideup ?sheet ?otherface) (N:RW:location ?sheet uc1_entry-hw1_topleftexit) (N:RW:sideup ?sheet ?face) (RW:available uc1-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:sideup ?sheet ?face) (RW:available uc1-rsrc))
+        eff: (and (N:RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:location ?sheet uc1_exittoime-uime_entry) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available uc1-rsrc) (increase (total-cost) 8000))
     uc1-fromime-letter: ?sheet:7
-        pre: (and (RW:available uc1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet uime_exit-uc1_entryfromime))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:available uc1-rsrc))
         eff: (and (RW:location ?sheet hw1_toprightentry-uc1_exit) (N:RW:location ?sheet uime_exit-uc1_entryfromime) (RW:available uc1-rsrc) (increase (total-cost) 2999))
     uc1-invertfromime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (RW:available uc1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:sideup ?sheet ?face))
-        eff: (and (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:sideup ?sheet ?otherface) (N:RW:location ?sheet uime_exit-uc1_entryfromime) (N:RW:sideup ?sheet ?face) (RW:available uc1-rsrc) (increase (total-cost) 8000))
+        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:sideup ?sheet ?face) (RW:available uc1-rsrc))
+        eff: (and (RW:location ?sheet hw1_toprightentry-uc1_exit) (N:RW:location ?sheet uime_exit-uc1_entryfromime) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available uc1-rsrc) (increase (total-cost) 8000))
     uime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available uime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?sheet sheet1) (N:R:= ?sheet sheet2))
-        eff: (and (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet uc1_exittoime-uime_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (increase (total-cost) 127790))
+        pre: (and (N:R:= ?sheet sheet1) (N:R:= ?sheet sheet2) (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc))
+        eff: (and (N:RW:location ?sheet uc1_exittoime-uime_entry) (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (increase (total-cost) 127790))
     lc1-toime-letter: ?sheet:7
-        pre: (and (RW:available lc1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entry-hw1_bottomleftexit))
-        eff: (and (RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:available lc1-rsrc) (increase (total-cost) 4999))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:available lc1-rsrc))
+        eff: (and (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:available lc1-rsrc) (increase (total-cost) 4999))
     lc1-inverttoime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (RW:available lc1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:sideup ?sheet ?face))
-        eff: (and (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?otherface) (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (N:RW:sideup ?sheet ?face) (RW:available lc1-rsrc) (increase (total-cost) 9999))
+        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:sideup ?sheet ?face) (RW:available lc1-rsrc))
+        eff: (and (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available lc1-rsrc) (increase (total-cost) 9999))
     lc1-fromime-letter: ?sheet:7
-        pre: (and (RW:available lc1-rsrc) (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entryfromime-lime_exit))
+        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:available lc1-rsrc))
         eff: (and (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (N:RW:location ?sheet lc1_entryfromime-lime_exit) (RW:available lc1-rsrc) (increase (total-cost) 4999))
     lc1-invertfromime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (RW:available lc1-rsrc) (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:sideup ?sheet ?face))
-        eff: (and (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:sideup ?sheet ?otherface) (N:RW:location ?sheet lc1_entryfromime-lime_exit) (N:RW:sideup ?sheet ?face) (RW:available lc1-rsrc) (increase (total-cost) 9999))
+        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:sideup ?sheet ?face) (RW:available lc1-rsrc))
+        eff: (and (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (N:RW:location ?sheet lc1_entryfromime-lime_exit) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available lc1-rsrc) (increase (total-cost) 9999))
     lime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available lime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:notprintedwith ?sheet ?face color) (N:R:= ?sheet sheet2) (N:R:= ?sheet sheet1))
-        eff: (and (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (increase (total-cost) 212790))
+        pre: (and (N:R:= ?sheet sheet1) (N:R:= ?sheet sheet2) (R:sheetsize ?sheet letter) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (increase (total-cost) 212790))
     lime-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available lime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:notprintedwith ?sheet ?face black) (N:R:= ?sheet sheet1) (N:R:= ?sheet sheet2))
-        eff: (and (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (increase (total-cost) 212790))
+        pre: (and (N:R:= ?sheet sheet1) (N:R:= ?sheet sheet2) (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (increase (total-cost) 212790))
     sys-stack-letter: ?sheet:7 ?prevsheet:7
-        pre: (and (N:R:= ?sheet ?prevsheet) (RW:available sys-rsrc) (R:prevsheet ?sheet ?prevsheet) (RW:location ?prevsheet some_finisher_tray) (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_rightexit-sys_entry))
-        eff: (and (RW:location ?sheet some_finisher_tray) (W:stackedin ?sheet sys_outputtray) (N:RW:location ?sheet hw1_rightexit-sys_entry) (RW:available sys-rsrc) (increase (total-cost) 1499))
+        pre: (and (N:R:= ?sheet ?prevsheet) (R:sheetsize ?sheet letter) (R:prevsheet ?sheet ?prevsheet) (RW:location ?sheet hw1_rightexit-sys_entry) (RW:location ?prevsheet some_finisher_tray) (RW:available sys-rsrc))
+        eff: (and (RW:location ?sheet some_finisher_tray) (N:RW:location ?sheet hw1_rightexit-sys_entry) (W:stackedin ?sheet sys_outputtray) (RW:available sys-rsrc) (increase (total-cost) 1499))
     uime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available uime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?sheet sheet1) (N:R:= ?face back))
-        eff: (and (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet uc1_exittoime-uime_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (increase (total-cost) 127790))
+        pre: (and (N:R:= ?sheet sheet1) (N:R:= ?face back) (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc))
+        eff: (and (N:RW:location ?sheet uc1_exittoime-uime_entry) (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (increase (total-cost) 127790))
     uime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available uime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:notprintedwith ?sheet ?face black) (N:R:= ?face back) (N:R:= ?face front))
-        eff: (and (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet uc1_exittoime-uime_entry) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (increase (total-cost) 127790))
+        pre: (and (N:R:= ?face front) (N:R:= ?face back) (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc))
+        eff: (and (N:RW:location ?sheet uc1_exittoime-uime_entry) (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (increase (total-cost) 127790))
     lime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available lime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:notprintedwith ?sheet ?face color) (N:R:= ?face back) (N:R:= ?sheet sheet2))
-        eff: (and (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (increase (total-cost) 212790))
+        pre: (and (N:R:= ?sheet sheet2) (N:R:= ?face back) (R:sheetsize ?sheet letter) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (increase (total-cost) 212790))
     lime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available lime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:notprintedwith ?sheet ?face color) (N:R:= ?face back) (N:R:= ?face front))
-        eff: (and (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (increase (total-cost) 212790))
+        pre: (and (N:R:= ?face front) (N:R:= ?face back) (R:sheetsize ?sheet letter) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (increase (total-cost) 212790))
     lime-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available lime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:notprintedwith ?sheet ?face black) (N:R:= ?sheet sheet1) (N:R:= ?face back))
-        eff: (and (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (increase (total-cost) 212790))
+        pre: (and (N:R:= ?sheet sheet1) (N:R:= ?face back) (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (increase (total-cost) 212790))
     lime-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (RW:available lime-rsrc) (R:sheetsize ?sheet letter) (RW:sideup ?sheet ?face) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:notprintedwith ?sheet ?face black) (N:R:= ?face back) (N:R:= ?face front))
-        eff: (and (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (increase (total-cost) 212790))
+        pre: (and (N:R:= ?face front) (N:R:= ?face back) (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (increase (total-cost) 212790))
 Init[20]:
-  (uninitialized)
-  S:(oppositeside front back)
-  S:(oppositeside back front)
-  (location dummy-sheet some_finisher_tray)
-  S:(prevsheet sheet1 dummy-sheet)
-  S:(prevsheet sheet2 sheet1)
   S:(sheetsize sheet1 letter)
   S:(sheetsize sheet2 letter)
-  (location sheet1 some_feeder_tray)
-  (location sheet2 some_feeder_tray)
   S:(imagecolor image-1 color)
   S:(imagecolor image-2 black)
+  S:(oppositeside front back)
+  S:(oppositeside back front)
+  S:(prevsheet sheet1 dummy-sheet)
+  S:(prevsheet sheet2 sheet1)
+  (location dummy-sheet some_finisher_tray)
+  (location sheet1 some_feeder_tray)
+  (location sheet2 some_feeder_tray)
   (notprintedwith sheet1 front black)
-  (notprintedwith sheet1 back black)
   (notprintedwith sheet1 front color)
+  (notprintedwith sheet1 back black)
   (notprintedwith sheet1 back color)
   (notprintedwith sheet2 front black)
-  (notprintedwith sheet2 back black)
   (notprintedwith sheet2 front color)
+  (notprintedwith sheet2 back black)
   (notprintedwith sheet2 back color)
+  (uninitialized)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:hasimage sheet1 front image-1) (RW:notprintedwith sheet1 front black) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (W:hasimage sheet2 front image-2) (RW:notprintedwith sheet2 front color) (RW:notprintedwith sheet2 back black) (RW:notprintedwith sheet2 back color) (RW:sideup sheet1 front) (RW:sideup sheet2 front) (W:stackedin sheet1 sys_outputtray) (W:stackedin sheet2 sys_outputtray))
+Goal: (and (W:hasimage sheet1 front image-1) (W:hasimage sheet2 front image-2) (RW:sideup sheet1 front) (RW:sideup sheet2 front) (W:stackedin sheet1 sys_outputtray) (W:stackedin sheet2 sys_outputtray) (RW:notprintedwith sheet1 front black) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (RW:notprintedwith sheet2 front color) (RW:notprintedwith sheet2 back black) (RW:notprintedwith sheet2 back color))
 Metric: 1

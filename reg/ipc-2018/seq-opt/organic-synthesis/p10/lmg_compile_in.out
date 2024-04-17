@@ -1,3 +1,6 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
 Compile-in LMG: actions: 7, lifted mgroups: 870
 Compile-in LMG: Found mutex condition for action 'additionofrohacrossgemdisubstitutedalkene' and mgroup {bond V0:r_group C1:oxygen, doublebond V0:r_group C2:chemical_atom, bond V0:r_group C3:oxygen, doublebond V0:r_group C4:chemical_atom}: (and (= ?c_1 ?r2_9) (or (= ?r2_9 c016) (= ?r2_9 c019) (= ?r2_9 c020) (= ?r2_9 c021) (= ?r2_9 c022) (= ?r2_9 c023) (= ?r2_9 c024) (= ?r2_9 c032) (= ?r2_9 c033) (= ?r2_9 c034) (= ?r2_9 c035) (= ?r2_9 c036) (= ?r2_9 c037) (= ?r2_9 c038)))
 Compile-in LMG: Found dead-end condition for action 'additionofrohacrossgemdisubstitutedalkene' and mgroup {bond V0:hc V1:hydrogen, doublebond C2:chemical_atom V0:hc, doublebond C3:chemical_atom V0:hc}: (and (not (= ?h_5 h107)) (= ?c_2 c016))
@@ -91,7 +94,53 @@ Compile-in LMG: Found dead-end condition for action 'additionofrohacrossvicdisub
 Compile-in LMG: Precondition of action 'additionofrohacrossvicdisubstitutedalkene' extended with (or (and (not (= ?c_2 c038)) (not (= ?c_2 c037)) (not (= ?c_2 c036)) (not (= ?c_2 c035)) (not (= ?c_2 c034)) (= ?h_5 h060) (not (= ?c_2 c032)) (not (= ?c_2 c016)) (not (= ?c_1 ?r2_9))) (and (not (= ?c_2 c038)) (not (= ?c_2 c037)) (not (= ?c_2 c036)) (not (= ?c_2 c035)) (not (= ?c_2 c034)) (not (= ?c_2 c033)) (not (= ?c_2 c032)) (not (= ?c_2 c016)) (not (= ?c_1 ?r2_9))) (and (not (= ?c_2 c038)) (not (= ?c_2 c037)) (not (= ?c_2 c036)) (not (= ?c_2 c035)) (not (= ?c_2 c034)) (= ?h_5 h060) (not (= ?c_2 c032)) (not (= ?c_2 c016)) (not (= ?r2_9 c016)) (not (= ?r2_9 c019)) (not (= ?r2_9 c020)) (not (= ?r2_9 c021)) (not (= ?r2_9 c022)) (not (= ?r2_9 c023)) (not (= ?r2_9 c024)) (not (= ?r2_9 c032)) (not (= ?r2_9 c033)) (not (= ?r2_9 c034)) (not (= ?r2_9 c035)) (not (= ?r2_9 c036)) (not (= ?r2_9 c037)) (not (= ?r2_9 c038))) (and (not (= ?c_2 c038)) (not (= ?c_2 c037)) (not (= ?c_2 c036)) (not (= ?c_2 c035)) (not (= ?c_2 c034)) (not (= ?c_2 c033)) (not (= ?c_2 c032)) (not (= ?c_2 c016)) (not (= ?r2_9 c016)) (not (= ?r2_9 c019)) (not (= ?r2_9 c020)) (not (= ?r2_9 c021)) (not (= ?r2_9 c022)) (not (= ?r2_9 c023)) (not (= ?r2_9 c024)) (not (= ?r2_9 c032)) (not (= ?r2_9 c033)) (not (= ?r2_9 c034)) (not (= ?r2_9 c035)) (not (= ?r2_9 c036)) (not (= ?r2_9 c037)) (not (= ?r2_9 c038))))
 Compile-in LMG: Found mutex condition for action 'etherformationbysulfonatedisplacement' and mgroup {bond V0:r_group C1:oxygen, doublebond V0:r_group C2:chemical_atom, bond V0:r_group C3:oxygen, doublebond V0:r_group C4:chemical_atom}: (and (= ?c_2 ?r3_12) (not (= ?o_4 ?o_3)))
 Compile-in LMG: Precondition of action 'etherformationbysulfonatedisplacement' extended with (or (not (= ?c_2 ?r3_12)) (= ?o_4 ?o_3))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 11, objects: 38, predicates: 5, functions: 0, actions: 7, action-pre-size: [min: 73, max: 7, avg: 55.57, med: 71.00]
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dymanic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossgemdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossmonosubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstetrasubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstrisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossvicdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action etherformationbysulfonatedisplacement
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action sulfonylationofalcohol
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossgemdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossgemdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossgemdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossmonosubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossmonosubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossmonosubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstetrasubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstetrasubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstetrasubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstrisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstrisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrosstrisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossvicdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossvicdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action additionofrohacrossvicdisubstitutedalkene
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 38, vars: 12, predicates: 16, rules: 258)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 38, vars: 12, predicates: 16, rules: 258)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 38, vars: 12, predicates: 16, rules: 258)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 258
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 258, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 11, objects: 38, predicates: 5, functions: 0, actions: 22, action-pre-size: [min: 32, max: 18, avg: 25.14, med: 26.50]
+Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 22
+Compile-in LMG: END
 Domain: organic-synthesis
 Problem: alkene_p18
 Require: ff
@@ -167,146 +216,146 @@ Predicate[5]:
 Function[0]:
 Action[22]:
     additionofrohacrossgemdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:6 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_4 ?h_3) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_1 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 h060) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_5 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r2_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_6 h060) (N:RW:bond h060 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r2_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (R:= ?h_5 h060) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_3) (RW:bond ?o_6 h060) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond h060 ?c_2) (N:RW:bond h060 ?o_6) (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:bond ?o_6 h060) (RW:bond ?o_6 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossmonosubstitutedalkene: ?c_1:9 ?h_6:8 ?o_7:7 ?c_2:9 ?r0_8:6 ?h_4:8 ?h_5:8 ?h_3:8 ?r1_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_5 ?h_3) (N:R:= ?h_4 ?h_3) (N:R:= ?h_4 ?h_5) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_5) (RW:bond ?c_2 ?h_4) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_8 ?c_1) (RW:bond ?o_7 h060) (RW:bond ?r1_9 ?o_7) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_6 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r1_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_7) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_7 h060) (N:RW:bond h060 ?o_7))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r1_9) (R:= ?h_6 h060) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?h_4 ?h_5) (N:R:= ?h_4 ?h_3) (N:R:= ?h_5 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?o_7 h060) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_5) (RW:bond ?r0_8 ?c_1) (RW:bond ?r1_9 ?o_7) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (N:RW:bond h060 ?o_7) (RW:bond h060 ?c_2) (RW:bond ?c_1 ?o_7) (RW:bond ?c_1 ?c_2) (N:RW:bond ?o_7 h060) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstetrasubstitutedalkene: ?c_1:9 ?o_4:7 ?c_2:9 ?h_3:8 ?r1_6:9 ?r2_7:9 ?r3_8:9 ?r0_5:9 ?r4_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (RW:bond ?c_2 ?r3_8) (RW:bond ?c_1 ?r1_6) (RW:bond ?c_2 ?r2_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_5 ?c_1) (RW:bond ?o_4 h060) (RW:bond ?r4_9 ?o_4) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_3 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r4_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_4) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_4 h060) (N:RW:bond h060 ?o_4))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r4_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (R:= ?h_3 h060) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r3_8 ?r0_5) (RW:bond ?c_1 ?r1_6) (RW:bond ?o_4 h060) (RW:bond ?c_2 ?r2_7) (RW:bond ?c_2 ?r3_8) (RW:bond ?r0_5 ?c_1) (RW:bond ?r4_9 ?o_4) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (N:RW:bond h060 ?o_4) (RW:bond h060 ?c_2) (RW:bond ?c_1 ?o_4) (RW:bond ?c_1 ?c_2) (N:RW:bond ?o_4 h060) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstrisubstitutedalkene: ?c_1:9 ?o_5:7 ?h_4:8 ?c_2:9 ?r2_8:9 ?h_3:8 ?r0_6:9 ?r1_7:9 ?r3_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r2_8 ?r1_7) (RW:bond ?r0_6 ?c_1) (RW:bond ?c_1 ?r1_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?r2_8) (RW:bond ?r3_9 ?o_5) (RW:bond ?o_5 h060) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_4 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r3_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_5) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_5 h060) (N:RW:bond h060 ?o_5))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r3_9) (R:= ?h_4 h060) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r2_8 ?r1_7) (N:R:= ?r0_6 ?r1_7) (RW:bond ?c_1 ?r1_7) (RW:bond ?o_5 h060) (RW:bond ?c_2 ?r2_8) (RW:bond ?c_2 ?h_3) (RW:bond ?r0_6 ?c_1) (RW:bond ?r3_9 ?o_5) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (N:RW:bond h060 ?o_5) (RW:bond h060 ?c_2) (RW:bond ?c_1 ?o_5) (RW:bond ?c_1 ?c_2) (N:RW:bond ?o_5 h060) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossvicdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:9 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 h060) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_5 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r2_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_6 h060) (N:RW:bond h060 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r2_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (R:= ?h_5 h060) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?o_6 h060) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond h060 ?c_2) (N:RW:bond h060 ?o_6) (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:bond ?o_6 h060) (RW:bond ?o_6 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     etherformationbysulfonatedisplacement: ?h_5:8 ?o_4:7 ?c_2:9 ?o_3:7 ?o_6:7 ?s_7:2 ?h_1:8 ?r2_11:9 ?o_8:7 ?r1_10:6 ?r0_9:6 ?r3_12:9
-        pre: (and (N:R:= ?o_4 ?o_3) (N:R:= ?o_3 ?o_6) (N:R:= ?o_6 ?o_8) (N:R:= ?r1_10 ?r0_9) (N:R:= ?o_3 ?o_8) (RW:bond ?c_2 ?h_1) (RW:doublebond ?s_7 ?o_8) (RW:doublebond ?s_7 ?o_6) (RW:bond ?s_7 ?r2_11) (RW:bond ?o_3 ?s_7) (RW:bond ?c_2 ?r0_9) (RW:bond ?c_2 ?r1_10) (RW:bond ?c_2 ?o_3) (RW:bond ?r3_12 ?o_4) (RW:bond ?h_5 ?o_4) (N:R:= ?c_2 ?r3_12))
-        eff: (and (N:RW:bond ?c_2 ?o_3) (N:RW:bond ?o_3 ?c_2) (RW:bond ?c_2 ?o_4) (RW:bond ?o_4 ?c_2) (RW:bond ?o_3 ?h_5) (RW:bond ?h_5 ?o_3) (N:RW:bond ?h_5 ?o_4) (N:RW:bond ?o_4 ?h_5))
+        pre: (and (N:R:= ?o_4 ?o_3) (N:R:= ?c_2 ?r3_12) (N:R:= ?o_3 ?o_6) (N:R:= ?o_3 ?o_8) (N:R:= ?o_6 ?o_8) (N:R:= ?r1_10 ?r0_9) (RW:bond ?h_5 ?o_4) (RW:bond ?c_2 ?o_3) (RW:bond ?c_2 ?h_1) (RW:bond ?c_2 ?r1_10) (RW:bond ?c_2 ?r0_9) (RW:bond ?o_3 ?s_7) (RW:bond ?s_7 ?r2_11) (RW:bond ?r3_12 ?o_4) (RW:doublebond ?s_7 ?o_6) (RW:doublebond ?s_7 ?o_8))
+        eff: (and (N:RW:bond ?h_5 ?o_4) (RW:bond ?h_5 ?o_3) (N:RW:bond ?o_4 ?h_5) (RW:bond ?o_4 ?c_2) (RW:bond ?c_2 ?o_4) (N:RW:bond ?c_2 ?o_3) (RW:bond ?o_3 ?h_5) (N:RW:bond ?o_3 ?c_2))
     sulfonylationofalcohol: ?h_2:8 ?o_1:7 ?s_5:2 ?cl_3:10 ?r0_7:9 ?o_4:7 ?r1_8:9 ?o_6:7
-        pre: (and (RW:bond ?r0_7 ?o_1) (RW:bond ?o_1 ?h_2) (N:R:= ?o_4 ?o_6) (RW:doublebond ?s_5 ?o_6) (RW:doublebond ?s_5 ?o_4) (RW:bond ?s_5 ?r1_8) (RW:bond ?cl_3 ?s_5))
-        eff: (and (N:RW:bond ?o_1 ?h_2) (N:RW:bond ?h_2 ?o_1) (RW:bond ?o_1 ?s_5) (RW:bond ?s_5 ?o_1) (RW:bond ?h_2 ?cl_3) (RW:bond ?cl_3 ?h_2) (N:RW:bond ?cl_3 ?s_5) (N:RW:bond ?s_5 ?cl_3))
+        pre: (and (N:R:= ?o_4 ?o_6) (RW:bond ?o_1 ?h_2) (RW:bond ?s_5 ?r1_8) (RW:bond ?cl_3 ?s_5) (RW:bond ?r0_7 ?o_1) (RW:doublebond ?s_5 ?o_4) (RW:doublebond ?s_5 ?o_6))
+        eff: (and (N:RW:bond ?h_2 ?o_1) (RW:bond ?h_2 ?cl_3) (N:RW:bond ?o_1 ?h_2) (RW:bond ?o_1 ?s_5) (RW:bond ?s_5 ?o_1) (N:RW:bond ?s_5 ?cl_3) (RW:bond ?cl_3 ?h_2) (N:RW:bond ?cl_3 ?s_5))
     additionofrohacrossgemdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:6 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_4 ?h_3) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_1 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 ?h_5) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r2_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?o_6 ?h_5) (N:RW:bond ?h_5 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r2_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_3) (RW:bond ?o_6 ?h_5) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?h_5 ?o_6) (RW:bond ?o_6 ?c_1) (N:RW:bond ?o_6 ?h_5) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossgemdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:6 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_4 ?h_3) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_1 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 h060) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_5 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_6 h060) (N:RW:bond h060 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (R:= ?h_5 h060) (N:R:= ?h_4 ?h_3) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038) (RW:bond ?c_1 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_3) (RW:bond ?o_6 h060) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond h060 ?c_2) (N:RW:bond h060 ?o_6) (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:bond ?o_6 h060) (RW:bond ?o_6 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossgemdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:6 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_4 ?h_3) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_1 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 ?h_5) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?o_6 ?h_5) (N:RW:bond ?h_5 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?h_4 ?h_3) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038) (RW:bond ?c_1 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_3) (RW:bond ?o_6 ?h_5) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?h_5 ?o_6) (RW:bond ?o_6 ?c_1) (N:RW:bond ?o_6 ?h_5) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossmonosubstitutedalkene: ?c_1:9 ?h_6:8 ?o_7:7 ?c_2:9 ?r0_8:6 ?h_4:8 ?h_5:8 ?h_3:8 ?r1_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_5 ?h_3) (N:R:= ?h_4 ?h_3) (N:R:= ?h_4 ?h_5) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_5) (RW:bond ?c_2 ?h_4) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_8 ?c_1) (RW:bond ?o_7 ?h_6) (RW:bond ?r1_9 ?o_7) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r1_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_7) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 ?h_6) (RW:bond ?h_6 ?c_2) (N:RW:bond ?o_7 ?h_6) (N:RW:bond ?h_6 ?o_7))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r1_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?h_4 ?h_5) (N:R:= ?h_4 ?h_3) (N:R:= ?h_5 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?o_7 ?h_6) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_5) (RW:bond ?r0_8 ?c_1) (RW:bond ?r1_9 ?o_7) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?o_7) (RW:bond ?c_1 ?c_2) (N:RW:bond ?h_6 ?o_7) (RW:bond ?h_6 ?c_2) (RW:bond ?o_7 ?c_1) (N:RW:bond ?o_7 ?h_6) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_6) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossmonosubstitutedalkene: ?c_1:9 ?h_6:8 ?o_7:7 ?c_2:9 ?r0_8:6 ?h_4:8 ?h_5:8 ?h_3:8 ?r1_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_5 ?h_3) (N:R:= ?h_4 ?h_3) (N:R:= ?h_4 ?h_5) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_5) (RW:bond ?c_2 ?h_4) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_8 ?c_1) (RW:bond ?o_7 h060) (RW:bond ?r1_9 ?o_7) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_6 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r1_9 c016) (N:R:= ?r1_9 c019) (N:R:= ?r1_9 c020) (N:R:= ?r1_9 c021) (N:R:= ?r1_9 c022) (N:R:= ?r1_9 c023) (N:R:= ?r1_9 c024) (N:R:= ?r1_9 c032) (N:R:= ?r1_9 c033) (N:R:= ?r1_9 c034) (N:R:= ?r1_9 c035) (N:R:= ?r1_9 c036) (N:R:= ?r1_9 c037) (N:R:= ?r1_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_7) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_7 h060) (N:RW:bond h060 ?o_7))
+        pre: (and (N:R:= ?c_1 ?c_2) (R:= ?h_6 h060) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?h_4 ?h_5) (N:R:= ?h_4 ?h_3) (N:R:= ?h_5 ?h_3) (N:R:= ?r1_9 c016) (N:R:= ?r1_9 c019) (N:R:= ?r1_9 c020) (N:R:= ?r1_9 c021) (N:R:= ?r1_9 c022) (N:R:= ?r1_9 c023) (N:R:= ?r1_9 c024) (N:R:= ?r1_9 c032) (N:R:= ?r1_9 c033) (N:R:= ?r1_9 c034) (N:R:= ?r1_9 c035) (N:R:= ?r1_9 c036) (N:R:= ?r1_9 c037) (N:R:= ?r1_9 c038) (RW:bond ?c_1 ?h_3) (RW:bond ?o_7 h060) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_5) (RW:bond ?r0_8 ?c_1) (RW:bond ?r1_9 ?o_7) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (N:RW:bond h060 ?o_7) (RW:bond h060 ?c_2) (RW:bond ?c_1 ?o_7) (RW:bond ?c_1 ?c_2) (N:RW:bond ?o_7 h060) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossmonosubstitutedalkene: ?c_1:9 ?h_6:8 ?o_7:7 ?c_2:9 ?r0_8:6 ?h_4:8 ?h_5:8 ?h_3:8 ?r1_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?h_5 ?h_3) (N:R:= ?h_4 ?h_3) (N:R:= ?h_4 ?h_5) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_5) (RW:bond ?c_2 ?h_4) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_8 ?c_1) (RW:bond ?o_7 ?h_6) (RW:bond ?r1_9 ?o_7) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r1_9 c016) (N:R:= ?r1_9 c019) (N:R:= ?r1_9 c020) (N:R:= ?r1_9 c021) (N:R:= ?r1_9 c022) (N:R:= ?r1_9 c023) (N:R:= ?r1_9 c024) (N:R:= ?r1_9 c032) (N:R:= ?r1_9 c033) (N:R:= ?r1_9 c034) (N:R:= ?r1_9 c035) (N:R:= ?r1_9 c036) (N:R:= ?r1_9 c037) (N:R:= ?r1_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_7) (RW:bond ?o_7 ?c_1) (RW:bond ?c_2 ?h_6) (RW:bond ?h_6 ?c_2) (N:RW:bond ?o_7 ?h_6) (N:RW:bond ?h_6 ?o_7))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?h_4 ?h_5) (N:R:= ?h_4 ?h_3) (N:R:= ?h_5 ?h_3) (N:R:= ?r1_9 c016) (N:R:= ?r1_9 c019) (N:R:= ?r1_9 c020) (N:R:= ?r1_9 c021) (N:R:= ?r1_9 c022) (N:R:= ?r1_9 c023) (N:R:= ?r1_9 c024) (N:R:= ?r1_9 c032) (N:R:= ?r1_9 c033) (N:R:= ?r1_9 c034) (N:R:= ?r1_9 c035) (N:R:= ?r1_9 c036) (N:R:= ?r1_9 c037) (N:R:= ?r1_9 c038) (RW:bond ?c_1 ?h_3) (RW:bond ?o_7 ?h_6) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?h_5) (RW:bond ?r0_8 ?c_1) (RW:bond ?r1_9 ?o_7) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?o_7) (RW:bond ?c_1 ?c_2) (N:RW:bond ?h_6 ?o_7) (RW:bond ?h_6 ?c_2) (RW:bond ?o_7 ?c_1) (N:RW:bond ?o_7 ?h_6) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_6) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstetrasubstitutedalkene: ?c_1:9 ?o_4:7 ?c_2:9 ?h_3:8 ?r1_6:9 ?r2_7:9 ?r3_8:9 ?r0_5:9 ?r4_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (RW:bond ?c_2 ?r3_8) (RW:bond ?c_1 ?r1_6) (RW:bond ?c_2 ?r2_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_5 ?c_1) (RW:bond ?o_4 ?h_3) (RW:bond ?r4_9 ?o_4) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r4_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_4) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 ?h_3) (RW:bond ?h_3 ?c_2) (N:RW:bond ?o_4 ?h_3) (N:RW:bond ?h_3 ?o_4))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r4_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r3_8 ?r0_5) (RW:bond ?c_1 ?r1_6) (RW:bond ?o_4 ?h_3) (RW:bond ?c_2 ?r2_7) (RW:bond ?c_2 ?r3_8) (RW:bond ?r0_5 ?c_1) (RW:bond ?r4_9 ?o_4) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?o_4) (RW:bond ?c_1 ?c_2) (RW:bond ?o_4 ?c_1) (N:RW:bond ?o_4 ?h_3) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_3) (N:RW:bond ?h_3 ?o_4) (RW:bond ?h_3 ?c_2) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstetrasubstitutedalkene: ?c_1:9 ?o_4:7 ?c_2:9 ?h_3:8 ?r1_6:9 ?r2_7:9 ?r3_8:9 ?r0_5:9 ?r4_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (RW:bond ?c_2 ?r3_8) (RW:bond ?c_1 ?r1_6) (RW:bond ?c_2 ?r2_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_5 ?c_1) (RW:bond ?o_4 h060) (RW:bond ?r4_9 ?o_4) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_3 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r4_9 c016) (N:R:= ?r4_9 c019) (N:R:= ?r4_9 c020) (N:R:= ?r4_9 c021) (N:R:= ?r4_9 c022) (N:R:= ?r4_9 c023) (N:R:= ?r4_9 c024) (N:R:= ?r4_9 c032) (N:R:= ?r4_9 c033) (N:R:= ?r4_9 c034) (N:R:= ?r4_9 c035) (N:R:= ?r4_9 c036) (N:R:= ?r4_9 c037) (N:R:= ?r4_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_4) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_4 h060) (N:RW:bond h060 ?o_4))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (R:= ?h_3 h060) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r4_9 c016) (N:R:= ?r4_9 c019) (N:R:= ?r4_9 c020) (N:R:= ?r4_9 c021) (N:R:= ?r4_9 c022) (N:R:= ?r4_9 c023) (N:R:= ?r4_9 c024) (N:R:= ?r4_9 c032) (N:R:= ?r4_9 c033) (N:R:= ?r4_9 c034) (N:R:= ?r4_9 c035) (N:R:= ?r4_9 c036) (N:R:= ?r4_9 c037) (N:R:= ?r4_9 c038) (RW:bond ?c_1 ?r1_6) (RW:bond ?o_4 h060) (RW:bond ?c_2 ?r2_7) (RW:bond ?c_2 ?r3_8) (RW:bond ?r0_5 ?c_1) (RW:bond ?r4_9 ?o_4) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (N:RW:bond h060 ?o_4) (RW:bond h060 ?c_2) (RW:bond ?c_1 ?o_4) (RW:bond ?c_1 ?c_2) (N:RW:bond ?o_4 h060) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstetrasubstitutedalkene: ?c_1:9 ?o_4:7 ?c_2:9 ?h_3:8 ?r1_6:9 ?r2_7:9 ?r3_8:9 ?r0_5:9 ?r4_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (RW:bond ?c_2 ?r3_8) (RW:bond ?c_1 ?r1_6) (RW:bond ?c_2 ?r2_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_5 ?c_1) (RW:bond ?o_4 ?h_3) (RW:bond ?r4_9 ?o_4) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r4_9 c016) (N:R:= ?r4_9 c019) (N:R:= ?r4_9 c020) (N:R:= ?r4_9 c021) (N:R:= ?r4_9 c022) (N:R:= ?r4_9 c023) (N:R:= ?r4_9 c024) (N:R:= ?r4_9 c032) (N:R:= ?r4_9 c033) (N:R:= ?r4_9 c034) (N:R:= ?r4_9 c035) (N:R:= ?r4_9 c036) (N:R:= ?r4_9 c037) (N:R:= ?r4_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_4) (RW:bond ?o_4 ?c_1) (RW:bond ?c_2 ?h_3) (RW:bond ?h_3 ?c_2) (N:RW:bond ?o_4 ?h_3) (N:RW:bond ?h_3 ?o_4))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r1_6 ?r2_7) (N:R:= ?r1_6 ?r3_8) (N:R:= ?r1_6 ?r0_5) (N:R:= ?r2_7 ?r3_8) (N:R:= ?r2_7 ?r0_5) (N:R:= ?r3_8 ?r0_5) (N:R:= ?r4_9 c016) (N:R:= ?r4_9 c019) (N:R:= ?r4_9 c020) (N:R:= ?r4_9 c021) (N:R:= ?r4_9 c022) (N:R:= ?r4_9 c023) (N:R:= ?r4_9 c024) (N:R:= ?r4_9 c032) (N:R:= ?r4_9 c033) (N:R:= ?r4_9 c034) (N:R:= ?r4_9 c035) (N:R:= ?r4_9 c036) (N:R:= ?r4_9 c037) (N:R:= ?r4_9 c038) (RW:bond ?c_1 ?r1_6) (RW:bond ?o_4 ?h_3) (RW:bond ?c_2 ?r2_7) (RW:bond ?c_2 ?r3_8) (RW:bond ?r0_5 ?c_1) (RW:bond ?r4_9 ?o_4) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?o_4) (RW:bond ?c_1 ?c_2) (RW:bond ?o_4 ?c_1) (N:RW:bond ?o_4 ?h_3) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_3) (N:RW:bond ?h_3 ?o_4) (RW:bond ?h_3 ?c_2) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstrisubstitutedalkene: ?c_1:9 ?o_5:7 ?h_4:8 ?c_2:9 ?r2_8:9 ?h_3:8 ?r0_6:9 ?r1_7:9 ?r3_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r2_8 ?r1_7) (RW:bond ?r0_6 ?c_1) (RW:bond ?c_1 ?r1_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?r2_8) (RW:bond ?r3_9 ?o_5) (RW:bond ?o_5 ?h_4) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r3_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_5) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 ?h_4) (RW:bond ?h_4 ?c_2) (N:RW:bond ?o_5 ?h_4) (N:RW:bond ?h_4 ?o_5))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r3_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r2_8 ?r1_7) (N:R:= ?r0_6 ?r1_7) (RW:bond ?c_1 ?r1_7) (RW:bond ?o_5 ?h_4) (RW:bond ?c_2 ?r2_8) (RW:bond ?c_2 ?h_3) (RW:bond ?r0_6 ?c_1) (RW:bond ?r3_9 ?o_5) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?o_5) (RW:bond ?c_1 ?c_2) (RW:bond ?o_5 ?c_1) (N:RW:bond ?o_5 ?h_4) (N:RW:bond ?h_4 ?o_5) (RW:bond ?h_4 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_4) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstrisubstitutedalkene: ?c_1:9 ?o_5:7 ?h_4:8 ?c_2:9 ?r2_8:9 ?h_3:8 ?r0_6:9 ?r1_7:9 ?r3_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r2_8 ?r1_7) (RW:bond ?r0_6 ?c_1) (RW:bond ?c_1 ?r1_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?r2_8) (RW:bond ?r3_9 ?o_5) (RW:bond ?o_5 h060) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_4 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r3_9 c016) (N:R:= ?r3_9 c019) (N:R:= ?r3_9 c020) (N:R:= ?r3_9 c021) (N:R:= ?r3_9 c022) (N:R:= ?r3_9 c023) (N:R:= ?r3_9 c024) (N:R:= ?r3_9 c032) (N:R:= ?r3_9 c033) (N:R:= ?r3_9 c034) (N:R:= ?r3_9 c035) (N:R:= ?r3_9 c036) (N:R:= ?r3_9 c037) (N:R:= ?r3_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_5) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_5 h060) (N:RW:bond h060 ?o_5))
+        pre: (and (N:R:= ?c_1 ?c_2) (R:= ?h_4 h060) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r2_8 ?r1_7) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r3_9 c016) (N:R:= ?r3_9 c019) (N:R:= ?r3_9 c020) (N:R:= ?r3_9 c021) (N:R:= ?r3_9 c022) (N:R:= ?r3_9 c023) (N:R:= ?r3_9 c024) (N:R:= ?r3_9 c032) (N:R:= ?r3_9 c033) (N:R:= ?r3_9 c034) (N:R:= ?r3_9 c035) (N:R:= ?r3_9 c036) (N:R:= ?r3_9 c037) (N:R:= ?r3_9 c038) (RW:bond ?c_1 ?r1_7) (RW:bond ?o_5 h060) (RW:bond ?c_2 ?r2_8) (RW:bond ?c_2 ?h_3) (RW:bond ?r0_6 ?c_1) (RW:bond ?r3_9 ?o_5) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (N:RW:bond h060 ?o_5) (RW:bond h060 ?c_2) (RW:bond ?c_1 ?o_5) (RW:bond ?c_1 ?c_2) (N:RW:bond ?o_5 h060) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrosstrisubstitutedalkene: ?c_1:9 ?o_5:7 ?h_4:8 ?c_2:9 ?r2_8:9 ?h_3:8 ?r0_6:9 ?r1_7:9 ?r3_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r2_8 ?r1_7) (RW:bond ?r0_6 ?c_1) (RW:bond ?c_1 ?r1_7) (RW:doublebond ?c_1 ?c_2) (RW:bond ?c_2 ?h_3) (RW:bond ?c_2 ?r2_8) (RW:bond ?r3_9 ?o_5) (RW:bond ?o_5 ?h_4) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r3_9 c016) (N:R:= ?r3_9 c019) (N:R:= ?r3_9 c020) (N:R:= ?r3_9 c021) (N:R:= ?r3_9 c022) (N:R:= ?r3_9 c023) (N:R:= ?r3_9 c024) (N:R:= ?r3_9 c032) (N:R:= ?r3_9 c033) (N:R:= ?r3_9 c034) (N:R:= ?r3_9 c035) (N:R:= ?r3_9 c036) (N:R:= ?r3_9 c037) (N:R:= ?r3_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_5) (RW:bond ?o_5 ?c_1) (RW:bond ?c_2 ?h_4) (RW:bond ?h_4 ?c_2) (N:RW:bond ?o_5 ?h_4) (N:RW:bond ?h_4 ?o_5))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r2_8 ?r0_6) (N:R:= ?r2_8 ?r1_7) (N:R:= ?r0_6 ?r1_7) (N:R:= ?r3_9 c016) (N:R:= ?r3_9 c019) (N:R:= ?r3_9 c020) (N:R:= ?r3_9 c021) (N:R:= ?r3_9 c022) (N:R:= ?r3_9 c023) (N:R:= ?r3_9 c024) (N:R:= ?r3_9 c032) (N:R:= ?r3_9 c033) (N:R:= ?r3_9 c034) (N:R:= ?r3_9 c035) (N:R:= ?r3_9 c036) (N:R:= ?r3_9 c037) (N:R:= ?r3_9 c038) (RW:bond ?c_1 ?r1_7) (RW:bond ?o_5 ?h_4) (RW:bond ?c_2 ?r2_8) (RW:bond ?c_2 ?h_3) (RW:bond ?r0_6 ?c_1) (RW:bond ?r3_9 ?o_5) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?o_5) (RW:bond ?c_1 ?c_2) (RW:bond ?o_5 ?c_1) (N:RW:bond ?o_5 ?h_4) (N:RW:bond ?h_4 ?o_5) (RW:bond ?h_4 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_4) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossvicdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:9 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 ?h_5) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?c_1 ?r2_9))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?o_6 ?h_5) (N:RW:bond ?h_5 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_1 ?r2_9) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?o_6 ?h_5) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?h_5 ?o_6) (RW:bond ?o_6 ?c_1) (N:RW:bond ?o_6 ?h_5) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossvicdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:9 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 h060) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (R:= ?h_5 h060) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 h060) (RW:bond h060 ?c_2) (N:RW:bond ?o_6 h060) (N:RW:bond h060 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (R:= ?h_5 h060) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?o_6 h060) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond h060 ?c_2) (N:RW:bond h060 ?o_6) (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 h060) (RW:bond ?c_2 ?c_1) (N:RW:bond ?o_6 h060) (RW:bond ?o_6 ?c_1) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
     additionofrohacrossvicdisubstitutedalkene: ?c_1:9 ?c_2:9 ?h_5:8 ?o_6:7 ?r1_8:9 ?h_4:8 ?r0_7:9 ?h_3:8 ?r2_9:6
-        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?h_4) (RW:bond ?c_2 ?r1_8) (RW:doublebond ?c_1 ?c_2) (RW:bond ?r0_7 ?c_1) (RW:bond ?o_6 ?h_5) (RW:bond ?r2_9 ?o_6) (N:R:= ?c_2 c038) (N:R:= ?c_2 c037) (N:R:= ?c_2 c036) (N:R:= ?c_2 c035) (N:R:= ?c_2 c034) (N:R:= ?c_2 c033) (N:R:= ?c_2 c032) (N:R:= ?c_2 c016) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038))
-        eff: (and (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1) (RW:bond ?c_1 ?c_2) (RW:bond ?c_2 ?c_1) (RW:bond ?c_1 ?o_6) (RW:bond ?o_6 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?o_6 ?h_5) (N:RW:bond ?h_5 ?o_6))
+        pre: (and (N:R:= ?c_1 ?c_2) (N:R:= ?c_2 c016) (N:R:= ?c_2 c032) (N:R:= ?c_2 c033) (N:R:= ?c_2 c034) (N:R:= ?c_2 c035) (N:R:= ?c_2 c036) (N:R:= ?c_2 c037) (N:R:= ?c_2 c038) (N:R:= ?r1_8 ?r0_7) (N:R:= ?h_4 ?h_3) (N:R:= ?r2_9 c016) (N:R:= ?r2_9 c019) (N:R:= ?r2_9 c020) (N:R:= ?r2_9 c021) (N:R:= ?r2_9 c022) (N:R:= ?r2_9 c023) (N:R:= ?r2_9 c024) (N:R:= ?r2_9 c032) (N:R:= ?r2_9 c033) (N:R:= ?r2_9 c034) (N:R:= ?r2_9 c035) (N:R:= ?r2_9 c036) (N:R:= ?r2_9 c037) (N:R:= ?r2_9 c038) (RW:bond ?c_1 ?h_3) (RW:bond ?c_2 ?r1_8) (RW:bond ?c_2 ?h_4) (RW:bond ?o_6 ?h_5) (RW:bond ?r0_7 ?c_1) (RW:bond ?r2_9 ?o_6) (RW:doublebond ?c_1 ?c_2))
+        eff: (and (RW:bond ?c_1 ?c_2) (RW:bond ?c_1 ?o_6) (RW:bond ?c_2 ?c_1) (RW:bond ?c_2 ?h_5) (RW:bond ?h_5 ?c_2) (N:RW:bond ?h_5 ?o_6) (RW:bond ?o_6 ?c_1) (N:RW:bond ?o_6 ?h_5) (N:RW:doublebond ?c_1 ?c_2) (N:RW:doublebond ?c_2 ?c_1))
 Init[74]:
-  (bond c016 h108)
-  (bond h108 c016)
-  (bond c016 h107)
-  (bond h107 c016)
   (bond c016 h106)
-  (bond h106 c016)
+  (bond c016 h107)
+  (bond c016 h108)
   (bond c016 o066)
-  (bond o066 c016)
-  (doublebond c019 c024)
-  (doublebond c024 c019)
   (bond c019 c020)
   (bond c020 c019)
-  (doublebond c020 c021)
-  (doublebond c021 c020)
-  (bond c021 s072)
-  (bond s072 c021)
   (bond c021 c022)
+  (bond c021 s072)
   (bond c022 c021)
-  (doublebond c022 c023)
-  (doublebond c023 c022)
   (bond c023 c024)
   (bond c024 c023)
-  (bond c032 o178)
-  (bond o178 c032)
   (bond c032 c033)
-  (bond c033 c032)
-  (bond c032 h134)
-  (bond h134 c032)
   (bond c032 h133)
-  (bond h133 c032)
-  (bond c033 h060)
-  (bond h060 c033)
-  (bond c033 c038)
-  (bond c038 c033)
+  (bond c032 h134)
+  (bond c032 o178)
+  (bond c033 c032)
   (bond c033 c034)
+  (bond c033 c038)
+  (bond c033 h060)
   (bond c034 c033)
-  (bond c034 h136)
-  (bond h136 c034)
-  (bond c034 h135)
-  (bond h135 c034)
   (bond c034 c035)
+  (bond c034 h135)
+  (bond c034 h136)
   (bond c035 c034)
-  (bond c035 h138)
-  (bond h138 c035)
-  (bond c035 h137)
-  (bond h137 c035)
   (bond c035 c036)
+  (bond c035 h137)
+  (bond c035 h138)
   (bond c036 c035)
   (bond c036 c037)
-  (bond c037 c036)
-  (bond c036 h140)
-  (bond h140 c036)
   (bond c036 h139)
-  (bond h139 c036)
-  (bond c037 h142)
-  (bond h142 c037)
-  (bond c037 h141)
-  (bond h141 c037)
+  (bond c036 h140)
+  (bond c037 c036)
   (bond c037 c038)
+  (bond c037 h141)
+  (bond c037 h142)
+  (bond c038 c033)
   (bond c038 c037)
-  (bond c038 h144)
-  (bond h144 c038)
   (bond c038 h143)
-  (bond h143 c038)
+  (bond c038 h144)
   (bond cl073 s072)
-  (bond s072 cl073)
+  (bond h060 c033)
   (bond h061 o066)
-  (bond o066 h061)
+  (bond h106 c016)
+  (bond h107 c016)
+  (bond h108 c016)
+  (bond h133 c032)
+  (bond h134 c032)
+  (bond h135 c034)
+  (bond h136 c034)
+  (bond h137 c035)
+  (bond h138 c035)
+  (bond h139 c036)
+  (bond h140 c036)
+  (bond h141 c037)
+  (bond h142 c037)
+  (bond h143 c038)
+  (bond h144 c038)
   (bond h180 o178)
+  (bond o066 c016)
+  (bond o066 h061)
+  (bond o178 c032)
   (bond o178 h180)
+  (bond s072 c021)
+  (bond s072 cl073)
+  (doublebond c019 c024)
+  (doublebond c020 c021)
+  (doublebond c021 c020)
+  (doublebond c022 c023)
+  (doublebond c023 c022)
+  (doublebond c024 c019)
   (doublebond o068 s072)
-  (doublebond s072 o068)
   (doublebond o069 s072)
+  (doublebond s072 o068)
   (doublebond s072 o069)
 Init[0]:
-Goal: (and (RW:bond c016 o066) (RW:bond o066 c016) (RW:bond c016 h107) (RW:bond h107 c016) (RW:bond c016 h106) (RW:bond h106 c016) (RW:bond c016 h108) (RW:bond h108 c016) (RW:bond c032 c033) (RW:bond c033 c032) (RW:bond c032 o066) (RW:bond o066 c032) (RW:bond c032 h133) (RW:bond h133 c032) (RW:bond c032 h134) (RW:bond h134 c032) (RW:bond c033 c034) (RW:bond c034 c033) (RW:bond c033 c038) (RW:bond c038 c033) (RW:bond c033 h060) (RW:bond h060 c033) (RW:bond c034 c035) (RW:bond c035 c034) (RW:bond c034 h135) (RW:bond h135 c034) (RW:bond c034 h136) (RW:bond h136 c034) (RW:bond c035 c036) (RW:bond c036 c035) (RW:bond c035 h137) (RW:bond h137 c035) (RW:bond c035 h138) (RW:bond h138 c035) (RW:bond c036 c037) (RW:bond c037 c036) (RW:bond c036 h140) (RW:bond h140 c036) (RW:bond c036 h139) (RW:bond h139 c036) (RW:bond c037 c038) (RW:bond c038 c037) (RW:bond c037 h142) (RW:bond h142 c037) (RW:bond c037 h141) (RW:bond h141 c037) (RW:bond c038 h144) (RW:bond h144 c038) (RW:bond c038 h143) (RW:bond h143 c038))
+Goal: (and (RW:bond c016 h106) (RW:bond c016 h107) (RW:bond c016 h108) (RW:bond c016 o066) (RW:bond c032 c033) (RW:bond c032 h133) (RW:bond c032 h134) (RW:bond c032 o066) (RW:bond c033 c032) (RW:bond c033 c034) (RW:bond c033 c038) (RW:bond c033 h060) (RW:bond c034 c033) (RW:bond c034 c035) (RW:bond c034 h135) (RW:bond c034 h136) (RW:bond c035 c034) (RW:bond c035 c036) (RW:bond c035 h137) (RW:bond c035 h138) (RW:bond c036 c035) (RW:bond c036 c037) (RW:bond c036 h139) (RW:bond c036 h140) (RW:bond c037 c036) (RW:bond c037 c038) (RW:bond c037 h141) (RW:bond c037 h142) (RW:bond c038 c033) (RW:bond c038 c037) (RW:bond c038 h143) (RW:bond c038 h144) (RW:bond h060 c033) (RW:bond h106 c016) (RW:bond h107 c016) (RW:bond h108 c016) (RW:bond h133 c032) (RW:bond h134 c032) (RW:bond h135 c034) (RW:bond h136 c034) (RW:bond h137 c035) (RW:bond h138 c035) (RW:bond h139 c036) (RW:bond h140 c036) (RW:bond h141 c037) (RW:bond h142 c037) (RW:bond h143 c038) (RW:bond h144 c038) (RW:bond o066 c016) (RW:bond o066 c032))
 Metric: 0

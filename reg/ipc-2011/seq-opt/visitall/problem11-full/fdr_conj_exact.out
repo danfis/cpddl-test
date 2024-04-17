@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-126
+125
 begin_variable
 var0
 -1
@@ -975,36 +975,29 @@ begin_variable
 var121
 -1
 2
-NOT-at-robot loc-x0-y0-visited loc-x0-y0
-at-robot loc-x0-y0-visited loc-x0-y0
+NOT-0:0:0:at-robot loc-x0-y0-1:0:121:visited loc-x0-y0
+0:0:0:at-robot loc-x0-y0-1:0:121:visited loc-x0-y0
 end_variable
 begin_variable
 var122
 -1
 2
-NOT-at-robot loc-x0-y0-none-of-those
-at-robot loc-x0-y0-none-of-those
+NOT-0:0:0:at-robot loc-x0-y0-120:1:360:none-of-those
+0:0:0:at-robot loc-x0-y0-120:1:360:none-of-those
 end_variable
 begin_variable
 var123
 -1
 2
-NOT-at-robot loc-x0-y0-visited loc-x0-y0-none-of-those
-at-robot loc-x0-y0-visited loc-x0-y0-none-of-those
+NOT-0:0:0:at-robot loc-x0-y0-1:0:121:visited loc-x0-y0-120:1:360:none-of-those
+0:0:0:at-robot loc-x0-y0-1:0:121:visited loc-x0-y0-120:1:360:none-of-those
 end_variable
 begin_variable
 var124
 -1
 2
-NOT-at-robot loc-x0-y1-visited loc-x0-y0
-at-robot loc-x0-y1-visited loc-x0-y0
-end_variable
-begin_variable
-var125
--1
-2
-NOT-at-robot loc-x0-y0-at-robot loc-x0-y1-visited loc-x0-y0-none-of-those
-at-robot loc-x0-y0-at-robot loc-x0-y1-visited loc-x0-y0-none-of-those
+NOT-0:1:1:at-robot loc-x0-y1-1:0:121:visited loc-x0-y0
+0:1:1:at-robot loc-x0-y1-1:0:121:visited loc-x0-y0
 end_variable
 0
 begin_state
@@ -1133,7 +1126,6 @@ begin_state
 0
 0
 0
-0
 end_state
 begin_goal
 120
@@ -1258,15 +1250,14 @@ begin_goal
 119 0
 120 0
 end_goal
-456
+450
 begin_operator
 move loc-x0-y0 loc-x0-y1
-5
+4
 1 0
 120 0
 122 0
 123 0
-125 0
 4
 0 0 0 1
 0 2 -1 0
@@ -1275,13 +1266,26 @@ move loc-x0-y0 loc-x0-y1
 1
 end_operator
 begin_operator
+move loc-x0-y0 loc-x0-y1
+2
+1 0
+120 1
+6
+0 0 0 1
+0 2 -1 0
+0 121 1 0
+0 122 1 0
+0 123 1 0
+0 124 0 1
+1
+end_operator
+begin_operator
 move loc-x0-y0 loc-x1-y0
-5
+4
 1 0
 120 0
 122 0
 123 0
-125 0
 3
 0 0 0 11
 0 12 -1 0
@@ -1289,13 +1293,25 @@ move loc-x0-y0 loc-x1-y0
 1
 end_operator
 begin_operator
-move loc-x0-y1 loc-x0-y0
+move loc-x0-y0 loc-x1-y0
+2
+1 0
+120 1
 5
+0 0 0 11
+0 12 -1 0
+0 121 1 0
+0 122 1 0
+0 123 1 0
+1
+end_operator
+begin_operator
+move loc-x0-y1 loc-x0-y0
+4
 120 0
 122 0
 123 0
 124 0
-125 0
 3
 0 0 1 0
 0 1 -1 0
@@ -1304,10 +1320,9 @@ move loc-x0-y1 loc-x0-y0
 end_operator
 begin_operator
 move loc-x0-y1 loc-x0-y0
-3
+2
 120 1
 124 0
-125 0
 5
 0 0 1 0
 0 1 -1 0
@@ -1318,39 +1333,35 @@ move loc-x0-y1 loc-x0-y0
 end_operator
 begin_operator
 move loc-x0-y1 loc-x0-y0
-6
+4
 1 0
 120 0
-121 0
 122 0
 123 0
-125 0
-2
+3
 0 0 1 0
+0 121 0 1
 0 124 1 0
 1
 end_operator
 begin_operator
 move loc-x0-y1 loc-x0-y0
+2
+1 0
+120 1
 5
-1 0
-120 1
-121 0
-123 0
-125 0
-3
 0 0 1 0
+0 121 0 1
 0 122 0 1
+0 123 0 1
 0 124 1 0
 1
 end_operator
 begin_operator
 move loc-x0-y1 loc-x0-y2
-4
+2
 1 1
-120 0
 124 0
-125 0
 2
 0 0 1 3
 0 4 -1 0
@@ -1358,34 +1369,8 @@ move loc-x0-y1 loc-x0-y2
 end_operator
 begin_operator
 move loc-x0-y1 loc-x0-y2
-4
-1 1
-120 1
-124 0
-125 0
-2
-0 0 1 3
-0 4 -1 0
 1
-end_operator
-begin_operator
-move loc-x0-y1 loc-x0-y2
-3
 1 0
-120 0
-125 0
-3
-0 0 1 3
-0 4 -1 0
-0 124 1 0
-1
-end_operator
-begin_operator
-move loc-x0-y1 loc-x0-y2
-3
-1 0
-120 1
-125 0
 3
 0 0 1 3
 0 4 -1 0
@@ -1394,11 +1379,9 @@ move loc-x0-y1 loc-x0-y2
 end_operator
 begin_operator
 move loc-x0-y1 loc-x1-y1
-4
+2
 1 1
-120 0
 124 0
-125 0
 2
 0 0 1 12
 0 13 -1 0
@@ -1406,34 +1389,8 @@ move loc-x0-y1 loc-x1-y1
 end_operator
 begin_operator
 move loc-x0-y1 loc-x1-y1
-4
-1 1
-120 1
-124 0
-125 0
-2
-0 0 1 12
-0 13 -1 0
 1
-end_operator
-begin_operator
-move loc-x0-y1 loc-x1-y1
-3
 1 0
-120 0
-125 0
-3
-0 0 1 12
-0 13 -1 0
-0 124 1 0
-1
-end_operator
-begin_operator
-move loc-x0-y1 loc-x1-y1
-3
-1 0
-120 1
-125 0
 3
 0 0 1 12
 0 13 -1 0
@@ -1458,10 +1415,8 @@ move loc-x0-y10 loc-x1-y10
 end_operator
 begin_operator
 move loc-x0-y2 loc-x0-y1
-3
+1
 1 0
-120 0
-125 0
 3
 0 0 3 1
 0 2 -1 0
@@ -1470,35 +1425,9 @@ move loc-x0-y2 loc-x0-y1
 end_operator
 begin_operator
 move loc-x0-y2 loc-x0-y1
-3
-1 0
-120 1
-125 0
-3
-0 0 3 1
-0 2 -1 0
-0 124 0 1
-1
-end_operator
-begin_operator
-move loc-x0-y2 loc-x0-y1
-4
-1 1
-120 0
-124 0
-125 0
 2
-0 0 3 1
-0 2 -1 0
-1
-end_operator
-begin_operator
-move loc-x0-y2 loc-x0-y1
-4
 1 1
-120 1
 124 0
-125 0
 2
 0 0 3 1
 0 2 -1 0
@@ -1690,11 +1619,10 @@ move loc-x0-y9 loc-x1-y9
 end_operator
 begin_operator
 move loc-x1-y0 loc-x0-y0
-4
+3
 120 0
 122 0
 123 0
-125 0
 3
 0 0 11 0
 0 1 -1 0
@@ -1703,9 +1631,8 @@ move loc-x1-y0 loc-x0-y0
 end_operator
 begin_operator
 move loc-x1-y0 loc-x0-y0
-2
+1
 120 1
-125 0
 5
 0 0 11 0
 0 1 -1 0
@@ -1732,10 +1659,8 @@ move loc-x1-y0 loc-x2-y0
 end_operator
 begin_operator
 move loc-x1-y1 loc-x0-y1
-3
+1
 1 0
-120 0
-125 0
 3
 0 0 12 1
 0 2 -1 0
@@ -1744,35 +1669,9 @@ move loc-x1-y1 loc-x0-y1
 end_operator
 begin_operator
 move loc-x1-y1 loc-x0-y1
-3
-1 0
-120 1
-125 0
-3
-0 0 12 1
-0 2 -1 0
-0 124 0 1
-1
-end_operator
-begin_operator
-move loc-x1-y1 loc-x0-y1
-4
-1 1
-120 0
-124 0
-125 0
 2
-0 0 12 1
-0 2 -1 0
-1
-end_operator
-begin_operator
-move loc-x1-y1 loc-x0-y1
-4
 1 1
-120 1
 124 0
-125 0
 2
 0 0 12 1
 0 2 -1 0

@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-23
+22
 begin_variable
 var0
 -1
@@ -149,36 +149,29 @@ begin_variable
 var18
 -1
 2
-NOT-location sheet1 blackcontainer_entry-blackfeeder_exit-notprintedwith sheet1 front black
-location sheet1 blackcontainer_entry-blackfeeder_exit-notprintedwith sheet1 front black
+NOT-0:0:0:location sheet1 blackcontainer_entry-blackfeeder_exit-1:0:16:notprintedwith sheet1 front black
+0:0:0:location sheet1 blackcontainer_entry-blackfeeder_exit-1:0:16:notprintedwith sheet1 front black
 end_variable
 begin_variable
 var19
 -1
 2
-NOT-location sheet1 blackcontainer_entry-blackfeeder_exit-none-of-those
-location sheet1 blackcontainer_entry-blackfeeder_exit-none-of-those
+NOT-0:0:0:location sheet1 blackcontainer_entry-blackfeeder_exit-17:1:49:none-of-those
+0:0:0:location sheet1 blackcontainer_entry-blackfeeder_exit-17:1:49:none-of-those
 end_variable
 begin_variable
 var20
 -1
 2
-NOT-location sheet1 blackcontainer_entry-blackfeeder_exit-notprintedwith sheet1 front black-none-of-those
-location sheet1 blackcontainer_entry-blackfeeder_exit-notprintedwith sheet1 front black-none-of-those
+NOT-0:0:0:location sheet1 blackcontainer_entry-blackfeeder_exit-1:0:16:notprintedwith sheet1 front black-17:1:49:none-of-those
+0:0:0:location sheet1 blackcontainer_entry-blackfeeder_exit-1:0:16:notprintedwith sheet1 front black-17:1:49:none-of-those
 end_variable
 begin_variable
 var21
 -1
 2
-NOT-location sheet1 blackcontainer_exittoime-blackprinter_entry-notprintedwith sheet1 front black
-location sheet1 blackcontainer_exittoime-blackprinter_entry-notprintedwith sheet1 front black
-end_variable
-begin_variable
-var22
--1
-2
-NOT-location sheet1 blackcontainer_entry-blackfeeder_exit-location sheet1 blackcontainer_exittoime-blackprinter_entry-notprintedwith sheet1 front black-none-of-those
-location sheet1 blackcontainer_entry-blackfeeder_exit-location sheet1 blackcontainer_exittoime-blackprinter_entry-notprintedwith sheet1 front black-none-of-those
+NOT-0:1:1:location sheet1 blackcontainer_exittoime-blackprinter_entry-1:0:16:notprintedwith sheet1 front black
+0:1:1:location sheet1 blackcontainer_exittoime-blackprinter_entry-1:0:16:notprintedwith sheet1 front black
 end_variable
 0
 begin_state
@@ -204,7 +197,6 @@ begin_state
 0
 0
 0
-0
 end_state
 begin_goal
 3
@@ -212,7 +204,7 @@ begin_goal
 16 0
 17 0
 end_goal
-18
+19
 begin_operator
 blackcontainer-fromime-letter sheet1
 1
@@ -222,12 +214,25 @@ blackcontainer-fromime-letter sheet1
 2000
 end_operator
 begin_operator
+blackcontainer-toime-letter sheet1
+3
+1 0
+3 0
+17 1
+5
+0 0 0 1
+0 18 1 0
+0 19 1 0
+0 20 1 0
+0 21 0 1
+2000
+end_operator
+begin_operator
 blackfeeder-feed-letter sheet1
-4
+3
 1 0
 4 0
 17 1
-22 0
 5
 0 0 14 0
 0 16 -1 0
@@ -238,11 +243,9 @@ blackfeeder-feed-letter sheet1
 end_operator
 begin_operator
 blackprinter-simplex-letter sheet1 front image-1
-4
+2
 5 0
 16 0
-17 1
-22 0
 4
 0 0 1 2
 0 1 0 1

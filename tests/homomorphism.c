@@ -98,7 +98,7 @@ TEST(homomorphism_gaifman_goal, homomorphism)
     //pddlPrintDebug(&h.task, stdout);
 }
 
-TEST(homomorphism_rpg1, homomorphism)
+TEST_COND(homomorphism_rpg1, homomorphism, SQLITE)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){
@@ -112,7 +112,7 @@ TEST(homomorphism_rpg1, homomorphism)
     //pddlPrintDebug(&h.task, stdout);
 }
 
-TEST(homomorphism_rpg1_goal, homomorphism)
+TEST_COND(homomorphism_rpg1_goal, homomorphism, SQLITE)
 {
     int before = h.task.obj.obj_size;
     for (int i = 0; i < 10; ++i){

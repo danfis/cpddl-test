@@ -716,7 +716,7 @@ static void lmgCompileInCheckPruning(const pddl_t *pddl,
     pddlStripsFree(&strips);
 }
 
-TEST_COND(lmg_compile_in, lmg, SQLITE)
+TEST(lmg_compile_in, lmg)
 {
     pddl_compile_in_lmg_config_t cfg = PDDL_COMPILE_IN_LMG_CONFIG_INIT;
     cfg.prune_mutex = 1;
@@ -741,7 +741,9 @@ TEST_COND(lmg_compile_in, lmg, SQLITE)
 
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundTrie);
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundDatalog);
+#ifdef PDDL_SQLITE
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundSql);
+#endif
 
     pddlStripsFree(&strips_ref);
 

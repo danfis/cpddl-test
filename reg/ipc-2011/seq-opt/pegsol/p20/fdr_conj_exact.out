@@ -4,7 +4,7 @@ end_version
 begin_metric
 1
 end_metric
-39
+38
 begin_variable
 var0
 -1
@@ -279,36 +279,29 @@ begin_variable
 var34
 -1
 2
-NOT-last-visited pos-0-2-occupied pos-0-2
-last-visited pos-0-2-occupied pos-0-2
+NOT-0:0:0:last-visited pos-0-2-1:1:35:occupied pos-0-2
+0:0:0:last-visited pos-0-2-1:1:35:occupied pos-0-2
 end_variable
 begin_variable
 var35
 -1
 2
-NOT-last-visited pos-0-2-occupied pos-6-4
-last-visited pos-0-2-occupied pos-6-4
+NOT-0:0:0:last-visited pos-0-2-33:1:99:occupied pos-6-4
+0:0:0:last-visited pos-0-2-33:1:99:occupied pos-6-4
 end_variable
 begin_variable
 var36
 -1
 2
-NOT-last-visited pos-0-2-occupied pos-0-2-occupied pos-6-4
-last-visited pos-0-2-occupied pos-0-2-occupied pos-6-4
+NOT-0:0:0:last-visited pos-0-2-1:1:35:occupied pos-0-2-33:1:99:occupied pos-6-4
+0:0:0:last-visited pos-0-2-1:1:35:occupied pos-0-2-33:1:99:occupied pos-6-4
 end_variable
 begin_variable
 var37
 -1
 2
-NOT-last-visited pos-0-3-occupied pos-0-2
-last-visited pos-0-3-occupied pos-0-2
-end_variable
-begin_variable
-var38
--1
-2
-NOT-last-visited pos-0-2-last-visited pos-0-3-occupied pos-0-2-occupied pos-6-4
-last-visited pos-0-2-last-visited pos-0-3-occupied pos-0-2-occupied pos-6-4
+NOT-0:1:1:last-visited pos-0-3-1:1:35:occupied pos-0-2
+0:1:1:last-visited pos-0-3-1:1:35:occupied pos-0-2
 end_variable
 0
 begin_state
@@ -350,7 +343,6 @@ begin_state
 0
 0
 0
-0
 end_state
 begin_goal
 33
@@ -388,59 +380,44 @@ begin_goal
 32 0
 33 0
 end_goal
-190
+187
 begin_operator
 end-move pos-0-2
-5
+4
 1 1
 33 0
 35 0
 36 0
-38 0
 2
 0 0 0 33
 0 34 1 0
 0
 end_operator
 begin_operator
-end-move pos-0-3
-4
-1 0
-33 0
-37 0
-38 0
-1
-0 0 1 33
-0
-end_operator
-begin_operator
-end-move pos-0-3
-4
-1 0
-33 1
-37 0
-38 0
-1
-0 0 1 33
-0
-end_operator
-begin_operator
-end-move pos-0-3
-3
-1 1
-33 0
-38 0
+end-move pos-0-2
 2
-0 0 1 33
-0 37 1 0
+1 1
+33 1
+4
+0 0 0 33
+0 34 1 0
+0 35 1 0
+0 36 1 0
 0
 end_operator
 begin_operator
 end-move pos-0-3
-3
+2
+1 0
+37 0
+1
+0 0 1 33
+0
+end_operator
+begin_operator
+end-move pos-0-3
+1
 1 1
-33 1
-38 0
 2
 0 0 1 33
 0 37 1 0
@@ -665,11 +642,10 @@ end-move pos-6-4
 end_operator
 begin_operator
 jump-continue-move pos-0-2 pos-0-3 pos-0-4
-4
+3
 33 0
 35 0
 36 0
-38 0
 5
 0 0 0 2
 0 1 1 0
@@ -679,12 +655,25 @@ jump-continue-move pos-0-2 pos-0-3 pos-0-4
 0
 end_operator
 begin_operator
+jump-continue-move pos-0-2 pos-0-3 pos-0-4
+1
+33 1
+7
+0 0 0 2
+0 1 1 0
+0 2 1 0
+0 3 0 1
+0 34 1 0
+0 35 1 0
+0 36 1 0
+0
+end_operator
+begin_operator
 jump-continue-move pos-0-2 pos-1-2 pos-2-2
-4
+3
 33 0
 35 0
 36 0
-38 0
 5
 0 0 0 8
 0 1 1 0
@@ -694,12 +683,25 @@ jump-continue-move pos-0-2 pos-1-2 pos-2-2
 0
 end_operator
 begin_operator
+jump-continue-move pos-0-2 pos-1-2 pos-2-2
+1
+33 1
+7
+0 0 0 8
+0 1 1 0
+0 4 1 0
+0 9 0 1
+0 34 1 0
+0 35 1 0
+0 36 1 0
+0
+end_operator
+begin_operator
 jump-continue-move pos-0-4 pos-0-3 pos-0-2
-4
+3
 33 0
 35 0
 36 0
-38 0
 5
 0 0 2 0
 0 1 0 1
@@ -710,9 +712,8 @@ jump-continue-move pos-0-4 pos-0-3 pos-0-2
 end_operator
 begin_operator
 jump-continue-move pos-0-4 pos-0-3 pos-0-2
-2
+1
 33 1
-38 0
 7
 0 0 2 0
 0 1 0 1
@@ -815,11 +816,10 @@ jump-continue-move pos-2-1 pos-3-1 pos-4-1
 end_operator
 begin_operator
 jump-continue-move pos-2-2 pos-1-2 pos-0-2
-4
+3
 33 0
 35 0
 36 0
-38 0
 5
 0 0 8 0
 0 1 0 1
@@ -830,9 +830,8 @@ jump-continue-move pos-2-2 pos-1-2 pos-0-2
 end_operator
 begin_operator
 jump-continue-move pos-2-2 pos-1-2 pos-0-2
-2
+1
 33 1
-38 0
 7
 0 0 8 0
 0 1 0 1
@@ -875,11 +874,9 @@ jump-continue-move pos-2-2 pos-3-2 pos-4-2
 end_operator
 begin_operator
 jump-continue-move pos-2-3 pos-1-3 pos-0-3
-4
+2
 1 0
-33 0
 37 0
-38 0
 4
 0 0 9 1
 0 2 0 1
@@ -889,38 +886,8 @@ jump-continue-move pos-2-3 pos-1-3 pos-0-3
 end_operator
 begin_operator
 jump-continue-move pos-2-3 pos-1-3 pos-0-3
-4
-1 0
-33 1
-37 0
-38 0
-4
-0 0 9 1
-0 2 0 1
-0 5 1 0
-0 10 1 0
-0
-end_operator
-begin_operator
-jump-continue-move pos-2-3 pos-1-3 pos-0-3
-3
+1
 1 1
-33 0
-38 0
-5
-0 0 9 1
-0 2 0 1
-0 5 1 0
-0 10 1 0
-0 37 0 1
-0
-end_operator
-begin_operator
-jump-continue-move pos-2-3 pos-1-3 pos-0-3
-3
-1 1
-33 1
-38 0
 5
 0 0 9 1
 0 2 0 1
@@ -1471,11 +1438,10 @@ jump-new-move pos-0-3 pos-1-3 pos-2-3
 end_operator
 begin_operator
 jump-new-move pos-0-4 pos-0-3 pos-0-2
-4
+3
 33 0
 35 0
 36 0
-38 0
 5
 0 0 33 0
 0 1 0 1
@@ -1486,9 +1452,8 @@ jump-new-move pos-0-4 pos-0-3 pos-0-2
 end_operator
 begin_operator
 jump-new-move pos-0-4 pos-0-3 pos-0-2
-2
+1
 33 1
-38 0
 7
 0 0 33 0
 0 1 0 1
@@ -1601,11 +1566,10 @@ jump-new-move pos-2-1 pos-3-1 pos-4-1
 end_operator
 begin_operator
 jump-new-move pos-2-2 pos-1-2 pos-0-2
-4
+3
 33 0
 35 0
 36 0
-38 0
 5
 0 0 33 0
 0 1 0 1
@@ -1616,9 +1580,8 @@ jump-new-move pos-2-2 pos-1-2 pos-0-2
 end_operator
 begin_operator
 jump-new-move pos-2-2 pos-1-2 pos-0-2
-2
+1
 33 1
-38 0
 7
 0 0 33 0
 0 1 0 1
@@ -1661,11 +1624,9 @@ jump-new-move pos-2-2 pos-3-2 pos-4-2
 end_operator
 begin_operator
 jump-new-move pos-2-3 pos-1-3 pos-0-3
-4
+2
 1 0
-33 0
 37 0
-38 0
 4
 0 0 33 1
 0 2 0 1
@@ -1675,38 +1636,8 @@ jump-new-move pos-2-3 pos-1-3 pos-0-3
 end_operator
 begin_operator
 jump-new-move pos-2-3 pos-1-3 pos-0-3
-4
-1 0
-33 1
-37 0
-38 0
-4
-0 0 33 1
-0 2 0 1
-0 5 1 0
-0 10 1 0
 1
-end_operator
-begin_operator
-jump-new-move pos-2-3 pos-1-3 pos-0-3
-3
 1 1
-33 0
-38 0
-5
-0 0 33 1
-0 2 0 1
-0 5 1 0
-0 10 1 0
-0 37 0 1
-1
-end_operator
-begin_operator
-jump-new-move pos-2-3 pos-1-3 pos-0-3
-3
-1 1
-33 1
-38 0
 5
 0 0 33 1
 0 2 0 1
