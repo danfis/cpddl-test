@@ -13,6 +13,7 @@ function run_test(){
     local have_bliss=no
     local have_lp=no
     local have_minizinc=no
+    local have_clingo=no
     local lp=
     local cp=
     echo "$apptainer_args" | grep -q -- '--no-cudd' || have_cudd=yes
@@ -21,6 +22,7 @@ function run_test(){
     echo "$apptainer_args" | grep -q -- '--cplex' && have_lp=yes
     echo "$apptainer_args" | grep -q -- '--coin-or' && have_lp=yes
     echo "$apptainer_args" | grep -q -- '--minizinc' && have_minizinc=yes
+    echo "$apptainer_args" | grep -q -- '--clingo' && have_clingo=yes
 
     [ "$have_lp" = "yes" ] && lp="--mg fam"
     [ "$have_minizinc" = "yes" ] && cp="--P-endo fdr"
@@ -30,7 +32,7 @@ function run_test(){
     [ ! -f apptainer.img ] && exit -1
 
     ./apptainer.img --lplan astar --lplan-h blind --lplan-o test_output.plan \
-            t/pddl-data/ipc-1998/gripper/prob01 
+            t/pddl-data/ipc-1998/gripper/prob01
     cost=$(cat test_output.plan | grep ';; Cost:' | grep -o '[0-9]\+$')
     [ "$cost" != "11" ] && echo "Test FAILED" && exit -1
     rm -f test_output.plan
@@ -57,10 +59,26 @@ function run_test(){
 
     ./apptainer.img $lp --h2 \
             --gplan astar --gplan-h blind --gplan-o test_output.plan \
-            t/pddl-data/ipc-1998/gripper/prob01 
+            t/pddl-data/ipc-1998/gripper/prob01
     cost=$(cat test_output.plan | grep ';; Cost:' | grep -o '[0-9]\+$')
     [ "$cost" != "11" ] && echo "Test FAILED" && exit -1
     rm -f test_output.plan
+
+    if [ "$have_clingo" = "yes" ]; then
+        ./apptainer.img $lp --h2 -G clingo \
+                --gplan astar --gplan-h blind --gplan-o test_output.plan \
+                t/pddl-data/ipc-1998/gripper/prob01
+        cost=$(cat test_output.plan | grep ';; Cost:' | grep -o '[0-9]\+$')
+        [ "$cost" != "11" ] && echo "Test FAILED" && exit -1
+        rm -f test_output.plan
+
+        ./apptainer.img $lp --h2 -G gringo \
+                --gplan astar --gplan-h blind --gplan-o test_output.plan \
+                t/pddl-data/ipc-1998/gripper/prob01
+        cost=$(cat test_output.plan | grep ';; Cost:' | grep -o '[0-9]\+$')
+        [ "$cost" != "11" ] && echo "Test FAILED" && exit -1
+        rm -f test_output.plan
+    fi
 
     ./apptainer.img --h2 --gplan astar --gplan-h lmc --gplan-o test_output.plan \
             t/pddl-data/ipc-2014/seq-opt/visitall/p-1-5
@@ -123,8 +141,7 @@ fi
 run_test $@ --werror photon
 run_test $@ --no-cudd --no-bliss --werror photon
 run_test $@ --highs --werror photon
-run_test $@ --minizinc --highs --werror photon
-run_test $@ --minizinc --highs --clingo --werror photon
+run_test $@ --highs --clingo --werror photon
 
 run_test $@ --werror debian-bullseye
 run_test $@ --werror --clang debian-bullseye
@@ -133,30 +150,26 @@ run_test $@ --highs --werror debian-bullseye
 run_test $@ --highs --minizinc --werror debian-bullseye
 run_test $@ --highs --minizinc --clingo --werror debian-bullseye
 run_test $@ --coin-or --werror debian-bullseye
+run_test "$@" --werror debian-buster
 
-run_test $@ --werror debian-buster
-run_test $@ --werror ubuntu-kinetic
-run_test $@ --highs --werror ubuntu-kinetic
-run_test $@ --coin-or --werror ubuntu-kinetic
+run_test $@ --werror ubuntu-mantic
+run_test $@ --highs --werror ubuntu-mantic
+run_test $@ --coin-or --werror ubuntu-mantic
 run_test $@ --werror ubuntu-jammy
 run_test $@ --highs --werror ubuntu-jammy
 run_test $@ --werror ubuntu-focal
 run_test $@ --werror ubuntu-bionic
+
 run_test $@ --werror fedora
 run_test $@ --highs --werror fedora
 run_test $@ --highs --clingo --werror fedora
 
-run_test "$@" --werror debian-buster
-run_test "$@" --werror ubuntu-jammy
-run_test "$@" --highs --werror ubuntu-jammy
-run_test "$@" --highs --werror ubuntu-mantic
-run_test "$@" --werror ubuntu-focal
-run_test "$@" --werror ubuntu-bionic
-run_test "$@" --werror fedora
-run_test "$@" --highs --werror fedora
-run_test "$@" --highs --werror --minizinc fedora
-
-run_test "$@" --werror gcc-11
-run_test "$@" --highs --werror gcc-11
-run_test "$@" --werror gcc-12
-run_test "$@" --highs --werror gcc-12
+if ! echo "$@" | grep -q -- --cplex; then
+    run_test "$@" --highs --clingo --werror gcc-13
+    run_test "$@" --werror gcc-11
+    run_test "$@" --highs --clingo --werror gcc-11
+    run_test "$@" --werror gcc-12
+    run_test "$@" --highs --clingo --werror gcc-12
+    run_test "$@" --werror gcc-10
+    run_test "$@" --werror gcc-9
+fi
