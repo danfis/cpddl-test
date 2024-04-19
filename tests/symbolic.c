@@ -167,7 +167,7 @@ TEST(symbolic_fwbw, symbolic)
     run(&symb_cfg);
 }
 
-TEST(symbolic_fwbw_pot, symbolic)
+TEST_COND(symbolic_fwbw_pot, symbolic, LP)
 {
     if (C.fdr.goal_is_unreachable)
         return;
@@ -190,7 +190,7 @@ TEST(symbolic_fwbw_pot, symbolic)
     run(&symb_cfg);
 }
 
-TEST(symbolic_fwbw_pot_pot, symbolic)
+TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
 {
     if (C.fdr.goal_is_unreachable)
         return;
@@ -241,7 +241,7 @@ TEST(symbolic_bw, symbolic)
     run(&symb_cfg);
 }
 
-TEST(symbolic_bw_pot, symbolic)
+TEST_COND(symbolic_bw_pot, symbolic, LP)
 {
     if (C.fdr.goal_is_unreachable)
         return;
