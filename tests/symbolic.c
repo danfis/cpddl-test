@@ -133,7 +133,7 @@ TEST(symbolic_fw, symbolic)
     run(&symb_cfg);
 }
 
-TEST(symbolic_fw_pot, symbolic)
+TEST_COND(symbolic_fw_pot, symbolic, LP)
 {
     if (C.fdr.goal_is_unreachable)
         return;
