@@ -23,7 +23,7 @@ run_test "$@" --run-all-tests --werror --no-cudd --no-bliss debian-bookworm
 run_test "$@" --run-all-tests --werror --no-cudd debian-bookworm
 run_test "$@" --run-all-tests --werror debian-bookworm
 run_test "$@" --run-all-tests --werror --coin-or debian-bookworm
-run_test "$@" --run-all-tests --werror --highs debian-bookworm
+run_test "$@" --run-all-tests --werror --highs --clingo debian-bookworm
 run_test "$@" --run-all-tests --werror --minizinc debian-bookworm
 run_test "$@" --run-all-tests --werror --cplex /opt/cplex/cplex_studio2211.linux_x86_64.bin debian-bookworm
 
