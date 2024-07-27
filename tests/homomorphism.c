@@ -160,7 +160,7 @@ TEST_COND(homomorphism_reduce, homomorphism, CPOPTIMIZER)
         return;
 
     //printf("target: %d\n", h.task.obj.obj_size / 2);
-    //pddlErrInfoEnable(&C.err, stdout);
+    //pddlErrLogEnable(&C.err, stdout);
     int before = h.task.obj.obj_size;
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
     pddl_homomorphic_task_reduce_t r;

@@ -26,25 +26,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
     pddlStripsMakerInit(&smaker, &C.pddl);
 
     PDDL_ISET(init);
-    pddl_list_t *item;
-    PDDL_LIST_FOR_EACH(&C.pddl.init->part, item){
-        const pddl_fm_t *c = PDDL_LIST_ENTRY(item, pddl_fm_t, conn);
-        if (c->type == PDDL_FM_ATOM){
-            const pddl_fm_atom_t *a = pddlFmToAtomConst(c);
-            const pddl_ground_atom_t *ga;
-            if (pddlPredIsStatic(&C.pddl.pred.pred[a->pred])){
-                pddlStripsMakerAddStaticAtom(&smaker, a, NULL, NULL);
-            }else{
-                ga = pddlStripsMakerAddAtom(&smaker, a, NULL, NULL);
-                pddlISetAdd(&init, ga->id);
-            }
-
-        }else if (c->type == PDDL_FM_ASSIGN){
-            const pddl_fm_func_op_t *ass = pddlFmToFuncOpConst(c);
-            pddlStripsMakerAddFunc(&smaker, ass, NULL, NULL);
-        }
-    }
-
+    pddlStripsMakerAddInitAndCollect(&smaker, &C.pddl, &init, NULL);
 
     pddl_lifted_app_action_t *aa;
     aa = pddlLiftedAppActionNew(&C.pddl, backend, &C.err);
@@ -80,8 +62,9 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             PDDL_ISET(add_eff);
             PDDL_ISET(del_eff);
             int cost;
-            pddlStripsMakerActionEffInState(&smaker, action, args, &cur_state,
-                                            &add_eff, &del_eff, &cost);
+            pddlStripsMakerActionEffInState(&smaker, &C.pddl, action, args,
+                                            &cur_state, &add_eff, &del_eff,
+                                            &cost, &C.err);
             if (!C.pddl.metric)
                 cost = 1;
 
