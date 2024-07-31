@@ -18,6 +18,17 @@ VERY_LARGE_TESTS = LARGE_TESTS \
        'hpot',
       ]
 
+NUMERIC_TESTS_ENABLED = [
+    'r',
+#    'pddl',
+#    'pddl_no_normalize',
+#    'pddl_unit_cost',
+#    'pddl_clone',
+#    'pddl_compile_away_cond_eff',
+#    'pddl_compile_away_eq_pred_no_norm',
+#    'pddl_compile_away_eq_pred_lmg',
+]
+
 
 HEADER = '''
 
@@ -59,17 +70,22 @@ def parseFile(fin = sys.stdin, is_base = False):
             disabled += list(Disabled[task].keys())
         enabled = []
         large = False
+        is_numeric = False
         for x in s[1:]:
             if x == '~L':
                 disabled += LARGE_TESTS
             elif x == '~LL':
                 disabled += VERY_LARGE_TESTS
+            elif x == '~N':
+                is_numeric = True
+                enabled = NUMERIC_TESTS_ENABLED
             else:
                 enabled += [x]
         d = {
             'disabled' : sorted(list(set(disabled))),
             'enabled' : sorted(list(set(enabled))),
             'is-base' : is_base,
+            'is-numeric' : is_numeric,
         }
         Task[task] = d
 
@@ -121,6 +137,13 @@ def genDefs():
         int test_id = testIdFromName("{d}");
         if (test_id >= 0){{
             tasks[{id}].default_enabled_tests[test_id] = 1;
+        }}
+    }}''')
+        if (task['is-numeric']):
+            print(f'''    {{
+        for (int test_id = 0; test_id < test_set_size; ++test_id){{
+            if (!tasks[{id}].default_enabled_tests[test_id])
+                tasks[{id}].default_disabled_tests[test_id] = 1;
         }}
     }}''')
     print('}')
