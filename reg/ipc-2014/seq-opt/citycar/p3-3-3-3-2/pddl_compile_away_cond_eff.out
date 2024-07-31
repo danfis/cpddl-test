@@ -49,7 +49,7 @@ Predicate[13]:
     NOT-in_place: 4 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 9
     NOT-at_car_road: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 4
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
 Action[14]:
     move_car_in_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
         pre: (and (RW:at_car_jun ?machine ?xy_initial) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))

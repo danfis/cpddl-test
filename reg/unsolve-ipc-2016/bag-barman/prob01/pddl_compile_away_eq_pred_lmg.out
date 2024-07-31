@@ -92,7 +92,7 @@ Predicate[26]:
     hand-bag-size: 1 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
     equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
 Action[26]:
     grasp-shot: ?h:1 ?c:14 ?dc:0 ?dc2:0 ?n1:11 ?n0:11 ?n2:11 ?n3:11 ?n4:7 ?n5:7 ?n6:7 ?n7:7 ?c-size:11 ?h-size:7
         pre: (and (R:shot-less ?n0 ?n1) (R:shot-less ?n2 ?n3) (R:hand-less ?n5 ?n4) (R:hand-less ?n6 ?n7) (R:shot-lte-sum ?n1 ?n2 ?c-size) (R:shot-bag-size ?c ?c-size) (R:hand-lte-sum ?n4 ?n6 ?h-size) (R:hand-bag-size ?h ?h-size) (RW:count-shot ?c ontable-true ?dc ?dc2 ?n1) (RW:count-shot ?c ?h ?dc ?dc2 ?n2) (RW:count-hand ?h handempty-true ?n4) (RW:count-hand ?h ?c ?n6))

@@ -64,9 +64,9 @@ Predicate[17]:
     have-photo: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
     in-water: :: is-private: 0, owner-param: -1, read: 1, write: 1
 Function[3]:
-    hiring-cost: 2 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    other-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    hiring-cost: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    other-cost: :: is-private: 0, owner-param: -1, read: 1, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
 Action[8]:
     hire-diver: ?d1:2
         pre: (and (RW:available ?d1) (N:RW:in-water))

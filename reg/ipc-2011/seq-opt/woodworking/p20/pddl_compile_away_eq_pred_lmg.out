@@ -111,11 +111,11 @@ Predicate[17]:
     is-smooth: 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
     equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[5]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-    spray-varnish-cost: 17 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    glaze-cost: 17 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    grind-cost: 17 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    plane-cost: 17 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    spray-varnish-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    glaze-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    grind-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    plane-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Action[25]:
     do-immersion-varnish: ?x:17 ?m:12 ?newcolour:1 ?surface:5
         pre: (and (R:has-colour ?m ?newcolour) (R:is-smooth ?surface) (RW:available ?x) (RW:surface-condition ?x ?surface) (RW:treatment ?x untreated))

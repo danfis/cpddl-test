@@ -110,8 +110,8 @@ Predicate[9]:
     package-lte-sum: 4 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
     package-bag-size: 6 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[2]:
-    road-length: 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    road-length: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
 Action[3]:
     drive: ?v:5 ?l1:1 ?l2:1
         pre: (and (R:road ?l1 ?l2) (RW:at-vehicle ?v ?l1))

@@ -50,7 +50,7 @@ Predicate[7]:
     last-visited: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
     equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
 Action[3]:
     jump-new-move: ?from:1 ?over:1 ?to:1
         pre: (and (R:in-line ?from ?over ?to) (N:R:equal ?from ?to) (N:R:equal ?over ?to) (RW:occupied ?from) (RW:occupied ?over) (RW:free ?to) (RW:move-ended))

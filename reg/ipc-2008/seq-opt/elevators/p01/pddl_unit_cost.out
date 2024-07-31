@@ -42,9 +42,9 @@ Predicate[9]:
     can-hold: 1 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
     next: 5 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Function[3]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 0
-    travel-slow: 5 5 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    travel-fast: 5 5 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    travel-slow: 5 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    travel-fast: 5 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
 Action[6]:
     move-up-slow: ?lift:2 ?f1:5 ?f2:5
         pre: (and (R:reachable-floor ?lift ?f2) (R:above ?f1 ?f2) (RW:lift-at ?lift ?f1))
