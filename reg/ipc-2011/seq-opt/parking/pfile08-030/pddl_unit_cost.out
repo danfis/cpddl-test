@@ -45,14 +45,14 @@ Obj[34]:
     [32]: curb_10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [33]: curb_11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[6]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    at-curb: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at-curb-num: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    behind-car: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    car-clear: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    curb-clear: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    at-curb: 1 :: read: 1, write: 1, in-init: 1
+    at-curb-num: 1 2 :: read: 1, write: 1, in-init: 1
+    behind-car: 1 1 :: read: 1, write: 1, in-init: 1
+    car-clear: 1 :: read: 1, write: 1, in-init: 1
+    curb-clear: 2 :: read: 1, write: 1, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[4]:
     move-curb-to-curb: ?car:1 ?curbsrc:2 ?curbdest:2
         pre: (and (RW:at-curb-num ?car ?curbsrc) (RW:car-clear ?car) (RW:curb-clear ?curbdest))

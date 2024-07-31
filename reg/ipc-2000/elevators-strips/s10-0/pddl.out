@@ -41,15 +41,15 @@ Obj[30]:
     [28]: f18, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [29]: f19, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[9]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    origin: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    destin: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    above: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    boarded: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    not-boarded: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    served: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    not-served: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    lift-at: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    origin: 1 2 :: read: 1, write: 0, in-init: 1
+    destin: 1 2 :: read: 1, write: 0, in-init: 1
+    above: 2 2 :: read: 1, write: 0, in-init: 1
+    boarded: 1 :: read: 1, write: 1, in-init: 0
+    not-boarded: 1 :: read: 0, write: 0, in-init: 0
+    served: 1 :: read: 0, write: 1, in-init: 0
+    not-served: 1 :: read: 0, write: 0, in-init: 0
+    lift-at: 2 :: read: 1, write: 1, in-init: 1
 Function[0]:
 Action[4]:
     board: ?f:2 ?p:1

@@ -123,38 +123,38 @@ Obj[80]:
     [78]: str__w, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [79]: str__v, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[32]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    knows: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    created: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    knows_property: 3 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_timedelta: 13 12 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    prop_src_host: 14 13 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_dns_domain_name: 13 5 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    prop_fqdn: 13 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_password: 16 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_host: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_share_name: 14 5 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    prop_dc: 13 4 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    mem_cached_domain_creds: 13 16 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_executable: 18 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_user: 16 15 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_cred: 15 16 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_share_path: 14 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_hostname: 13 5 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    mem_hosts: 9 13 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    prop_is_group: 15 4 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    mem_domain_user_admins: 13 15 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_seconds: 12 6 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    prop_microseconds: 12 6 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    prop_windows_domain: 9 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_domain: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_dest_host: 14 13 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_dns_domain: 9 5 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    prop_elevated: 18 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_username: 15 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    prop_path: 10 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prop_sid: 15 5 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    knows: 3 :: read: 1, write: 1, in-init: 1
+    created: 3 :: read: 1, write: 1, in-init: 0
+    knows_property: 3 2 :: read: 1, write: 1, in-init: 1
+    prop_timedelta: 13 12 :: read: 0, write: 0, in-init: 1
+    prop_src_host: 14 13 :: read: 1, write: 1, in-init: 0
+    prop_dns_domain_name: 13 5 :: read: 0, write: 0, in-init: 1
+    prop_fqdn: 13 5 :: read: 1, write: 0, in-init: 1
+    prop_password: 16 5 :: read: 1, write: 0, in-init: 1
+    prop_host: 3 3 :: read: 1, write: 1, in-init: 1
+    prop_share_name: 14 5 :: read: 0, write: 1, in-init: 0
+    prop_dc: 13 4 :: read: 0, write: 0, in-init: 1
+    mem_cached_domain_creds: 13 16 :: read: 1, write: 0, in-init: 1
+    prop_executable: 18 5 :: read: 1, write: 1, in-init: 1
+    prop_user: 16 15 :: read: 1, write: 0, in-init: 1
+    prop_cred: 15 16 :: read: 1, write: 1, in-init: 1
+    prop_share_path: 14 5 :: read: 1, write: 1, in-init: 0
+    prop_hostname: 13 5 :: read: 0, write: 0, in-init: 1
+    mem_hosts: 9 13 :: read: 0, write: 1, in-init: 1
+    prop_is_group: 15 4 :: read: 0, write: 0, in-init: 1
+    mem_domain_user_admins: 13 15 :: read: 1, write: 0, in-init: 1
+    prop_seconds: 12 6 :: read: 0, write: 0, in-init: 1
+    prop_microseconds: 12 6 :: read: 0, write: 0, in-init: 1
+    prop_windows_domain: 9 5 :: read: 1, write: 0, in-init: 1
+    prop_domain: 3 3 :: read: 1, write: 0, in-init: 1
+    prop_dest_host: 14 13 :: read: 1, write: 1, in-init: 0
+    prop_dns_domain: 9 5 :: read: 0, write: 0, in-init: 1
+    prop_elevated: 18 4 :: read: 1, write: 1, in-init: 1
+    prop_username: 15 5 :: read: 1, write: 0, in-init: 1
+    prop_path: 10 5 :: read: 1, write: 1, in-init: 0
+    prop_sid: 15 5 :: read: 0, write: 0, in-init: 1
+    equal: 0 0 :: read: 1, write: 0, in-init: 0
 Function[0]:
 Action[8]:
     get_domain: ?v00:18 ?v01:13 ?v02:5

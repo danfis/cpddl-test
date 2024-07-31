@@ -27,13 +27,13 @@ Obj[16]:
     [14]: pos-3-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: pos-3-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[7]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    height: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    has-block: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    succ: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    neighbor: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    is-depot: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    height: 2 1 :: read: 1, write: 1, in-init: 1
+    at: 2 :: read: 1, write: 1, in-init: 1
+    has-block: :: read: 1, write: 1, in-init: 0
+    succ: 1 1 :: read: 1, write: 0, in-init: 1
+    neighbor: 2 2 :: read: 1, write: 0, in-init: 1
+    is-depot: 2 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[7]:
     move: ?from:2 ?to:2 ?h:1

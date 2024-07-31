@@ -21,7 +21,7 @@ VALGRIND_SEGFAULT_OPTS  = --quiet
 VALGRIND_SEGFAULT_OPTS += --trace-children=yes --error-limit=no
 VALGRIND_SEGFAULT_OPTS += --suppressions=test.supp
 
-T ?= -a -B
+T ?= -a -B -p9
 
 CFLAGS += -I./
 

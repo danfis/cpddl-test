@@ -45,16 +45,16 @@ Obj[30]:
     [28]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [29]: l3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[10]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    association-reaction: 2 2 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    catalyzed-association-reaction: 2 2 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    synthesis-reaction: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    possible: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    available: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    chosen: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    next: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    num-subs: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    goal1: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
+    catalyzed-association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
+    synthesis-reaction: 2 2 :: read: 1, write: 0, in-init: 0
+    possible: 2 :: read: 1, write: 0, in-init: 1
+    available: 2 :: read: 1, write: 1, in-init: 0
+    chosen: 3 :: read: 1, write: 1, in-init: 0
+    next: 1 1 :: read: 1, write: 0, in-init: 1
+    num-subs: 1 :: read: 1, write: 1, in-init: 1
+    goal1: :: read: 0, write: 1, in-init: 0
 Function[0]:
 Action[6]:
     choose: ?x:3 ?l1:1 ?l2:1

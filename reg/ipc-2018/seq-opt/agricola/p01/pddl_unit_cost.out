@@ -121,44 +121,44 @@ Obj[78]:
     [76]: room3, type: 11, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [77]: room4, type: 11, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[35]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    next_stage: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    current_stage: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    harvest_phase: 3 8 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    next_round: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    hold_round: 4 9 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    current_round: 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    category_round: 4 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    next_worker: 5 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    current_worker: 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    max_worker: 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    newborn: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 33
-    plowed_fields: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 34
-    stored_veg: 18 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    sown_veg: 18 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    can_harvest: 18 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    fences_for: 17 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    owned_animals: 17 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    can_breed: 17 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    next_num: 12 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    next2_num: 12 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    num_substract: 12 12 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    food_required: 5 12 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    open_action: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    available_action: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    drawcard_round: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    num_food: 12 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    stored_resource: 10 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    supply_resource: 13 10 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    space_rooms: 11 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    built_rooms: 11 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    ok: :: is-private: 0, owner-param: -1, read: 0, write: 1
-    home_improvement: 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    NOT-newborn: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 11
-    NOT-plowed_fields: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 12
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    next_stage: 3 3 :: read: 1, write: 0, in-init: 1
+    current_stage: 3 :: read: 1, write: 1, in-init: 1
+    harvest_phase: 3 8 :: read: 1, write: 1, in-init: 1
+    next_round: 4 4 :: read: 1, write: 0, in-init: 1
+    hold_round: 4 9 :: read: 1, write: 1, in-init: 0
+    current_round: 4 :: read: 1, write: 1, in-init: 1
+    category_round: 4 7 :: read: 1, write: 0, in-init: 1
+    next_worker: 5 5 :: read: 1, write: 0, in-init: 1
+    current_worker: 5 :: read: 1, write: 1, in-init: 1
+    max_worker: 5 :: read: 1, write: 1, in-init: 1
+    newborn: :: read: 1, write: 1, in-init: 0, neg-of: NOT-newborn
+    plowed_fields: :: read: 1, write: 1, in-init: 0, neg-of: NOT-plowed_fields
+    stored_veg: 18 :: read: 1, write: 1, in-init: 0
+    sown_veg: 18 :: read: 1, write: 1, in-init: 0
+    can_harvest: 18 :: read: 1, write: 1, in-init: 0
+    fences_for: 17 :: read: 1, write: 1, in-init: 0
+    owned_animals: 17 :: read: 1, write: 1, in-init: 0
+    can_breed: 17 :: read: 1, write: 1, in-init: 0
+    next_num: 12 12 :: read: 1, write: 0, in-init: 1
+    next2_num: 12 12 :: read: 1, write: 0, in-init: 1
+    num_substract: 12 12 12 :: read: 1, write: 0, in-init: 1
+    food_required: 5 12 :: read: 1, write: 0, in-init: 1
+    open_action: 1 :: read: 1, write: 1, in-init: 1
+    available_action: 1 :: read: 1, write: 1, in-init: 1
+    drawcard_round: 1 4 :: read: 1, write: 0, in-init: 1
+    num_food: 12 :: read: 1, write: 1, in-init: 1
+    stored_resource: 10 :: read: 1, write: 1, in-init: 0
+    supply_resource: 13 10 :: read: 1, write: 0, in-init: 1
+    space_rooms: 11 :: read: 1, write: 1, in-init: 1
+    built_rooms: 11 5 :: read: 1, write: 1, in-init: 1
+    ok: :: read: 0, write: 1, in-init: 0
+    home_improvement: 6 :: read: 1, write: 1, in-init: 0
+    NOT-newborn: :: read: 1, write: 1, in-init: 1, neg-of: newborn
+    NOT-plowed_fields: :: read: 1, write: 1, in-init: 1, neg-of: plowed_fields
 Function[2]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
-    group_worker_cost: 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    total-cost: :: read: 0, write: 1, in-init: 0
+    group_worker_cost: 5 :: read: 1, write: 0, in-init: 1
 Action[22]:
     ag__harvest_collect_end: ?r:4 ?s:3
         pre: (and (R:category_round ?r tharvest) (RW:harvest_phase ?s harvest_init) (RW:hold_round ?r roundend))

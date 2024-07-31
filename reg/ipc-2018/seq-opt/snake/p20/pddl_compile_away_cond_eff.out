@@ -50,17 +50,17 @@ Obj[43]:
     [41]: pos5-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [42]: pos5-6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[11]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    isadjacent: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    tailsnake: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    headsnake: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    nextsnake: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    blocked: 0 :: is-private: 0, owner-param: -1, read: 0, write: 1, neg-of: 9
-    spawn: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    nextspawn: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    ispoint: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 10
-    NOT-blocked: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 5
-    NOT-ispoint: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 8
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    isadjacent: 0 0 :: read: 1, write: 0, in-init: 1
+    tailsnake: 0 :: read: 1, write: 1, in-init: 1
+    headsnake: 0 :: read: 1, write: 1, in-init: 1
+    nextsnake: 0 0 :: read: 1, write: 1, in-init: 1
+    blocked: 0 :: read: 0, write: 1, in-init: 1, neg-of: NOT-blocked
+    spawn: 0 :: read: 1, write: 1, in-init: 1
+    nextspawn: 0 0 :: read: 1, write: 0, in-init: 1
+    ispoint: 0 :: read: 1, write: 1, in-init: 1, neg-of: NOT-ispoint
+    NOT-blocked: 0 :: read: 1, write: 1, in-init: 1, neg-of: blocked
+    NOT-ispoint: 0 :: read: 1, write: 1, in-init: 1, neg-of: ispoint
 Function[0]:
 Action[3]:
     move: ?head:0 ?newhead:0 ?tail:0 ?newtail:0

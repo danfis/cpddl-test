@@ -34,14 +34,14 @@ Obj[19]:
     [17]: straight0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [18]: rightl0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[6]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    clear: 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    connected: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at_square: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at_two: 2 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at_right_l: 3 4 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    clear: 4 :: read: 1, write: 1, in-init: 1
+    connected: 4 4 :: read: 1, write: 0, in-init: 1
+    at_square: 1 4 :: read: 1, write: 1, in-init: 1
+    at_two: 2 4 4 :: read: 1, write: 1, in-init: 1
+    at_right_l: 3 4 4 4 :: read: 1, write: 1, in-init: 1
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 0
 Action[6]:
     move_square: ?xy_initial:4 ?xy_final:4 ?element:1
         pre: (and (R:connected ?xy_initial ?xy_final) (R:connected ?xy_final ?xy_initial) (RW:clear ?xy_final) (RW:at_square ?element ?xy_initial))

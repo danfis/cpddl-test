@@ -62,20 +62,20 @@ Obj[41]:
     [39]: image-6, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [40]: image-7, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[12]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    sheetsize: 7 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    location: 7 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    hasimage: 7 3 5 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    sideup: 7 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    stackedin: 7 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    imagecolor: 5 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    notprintedwith: 7 3 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    oppositeside: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    available: 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    prevsheet: 7 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    uninitialized: :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    sheetsize: 7 1 :: read: 1, write: 0, in-init: 1
+    location: 7 2 :: read: 1, write: 1, in-init: 1
+    hasimage: 7 3 5 :: read: 0, write: 1, in-init: 0
+    sideup: 7 3 :: read: 1, write: 1, in-init: 0
+    stackedin: 7 2 :: read: 0, write: 1, in-init: 0
+    imagecolor: 5 4 :: read: 1, write: 0, in-init: 1
+    notprintedwith: 7 3 4 :: read: 1, write: 1, in-init: 1
+    oppositeside: 3 3 :: read: 1, write: 0, in-init: 1
+    available: 6 :: read: 1, write: 1, in-init: 0
+    prevsheet: 7 7 :: read: 1, write: 0, in-init: 1
+    uninitialized: :: read: 1, write: 1, in-init: 1
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[23]:
     initialize: 
         pre: (and (RW:uninitialized))

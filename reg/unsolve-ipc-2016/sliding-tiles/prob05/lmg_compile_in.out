@@ -59,14 +59,14 @@ Obj[11]:
     [9]: p2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [10]: p3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[8]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    tile: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    xposition: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    yposition: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at: 0 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    blank: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    inc: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    dec: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    tile: 0 :: read: 1, write: 0, in-init: 1
+    xposition: 0 :: read: 1, write: 0, in-init: 1
+    yposition: 0 :: read: 1, write: 0, in-init: 1
+    at: 0 0 0 :: read: 1, write: 1, in-init: 1
+    blank: 0 0 :: read: 1, write: 1, in-init: 1
+    inc: 0 0 :: read: 1, write: 0, in-init: 1
+    dec: 0 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[4]:
     move-up: ?t:0 ?px:0 ?py:0 ?by:0

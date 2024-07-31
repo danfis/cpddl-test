@@ -35,21 +35,21 @@ Obj[20]:
     [18]: road3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [19]: road4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[13]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    same_line: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    diagonal: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at_car_jun: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at_car_road: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    starting: 1 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    arrived: 1 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    road_connect: 4 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    clear: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in_place: 4 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 11
-    at_garage: 3 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    NOT-in_place: 4 :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 9
-    equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    same_line: 2 2 :: read: 1, write: 0, in-init: 1
+    diagonal: 2 2 :: read: 1, write: 0, in-init: 1
+    at_car_jun: 1 2 :: read: 1, write: 1, in-init: 0
+    at_car_road: 1 4 :: read: 1, write: 1, in-init: 0
+    starting: 1 3 :: read: 1, write: 1, in-init: 1
+    arrived: 1 2 :: read: 0, write: 1, in-init: 0
+    road_connect: 4 2 2 :: read: 1, write: 1, in-init: 0
+    clear: 2 :: read: 1, write: 1, in-init: 1
+    in_place: 4 :: read: 1, write: 1, in-init: 0, neg-of: NOT-in_place
+    at_garage: 3 2 :: read: 1, write: 0, in-init: 1
+    NOT-in_place: 4 :: read: 1, write: 1, in-init: 1, neg-of: in_place
+    equal: 0 0 :: read: 1, write: 0, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[9]:
     move_car_in_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
         pre: (and (RW:at_car_jun ?machine ?xy_initial) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))

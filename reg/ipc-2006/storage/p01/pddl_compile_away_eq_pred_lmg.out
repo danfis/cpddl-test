@@ -34,16 +34,16 @@ Obj[7]:
     [5]: depot0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [6]: loadarea, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[10]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    clear: 8 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in: 10 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    available: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    lifting: 1 7 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at: 1 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    on: 7 8 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    connected: 6 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    compatible: 7 7 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    clear: 8 :: read: 1, write: 1, in-init: 0
+    in: 10 3 :: read: 1, write: 1, in-init: 1
+    available: 1 :: read: 1, write: 1, in-init: 1
+    lifting: 1 7 :: read: 1, write: 1, in-init: 0
+    at: 1 6 :: read: 1, write: 1, in-init: 1
+    on: 7 8 :: read: 1, write: 1, in-init: 1
+    connected: 6 6 :: read: 1, write: 0, in-init: 1
+    compatible: 7 7 :: read: 0, write: 0, in-init: 0
+    equal: 0 0 :: read: 1, write: 0, in-init: 0
 Function[0]:
 Action[7]:
     lift: ?h:1 ?c:7 ?a1:8 ?a2:6 ?p:3

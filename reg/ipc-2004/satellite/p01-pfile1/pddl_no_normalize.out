@@ -19,19 +19,19 @@ Obj[12]:
     [10]: star5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [11]: phenomenon6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[13]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    on_board: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    supports: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    pointing: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    power_avail: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    power_on: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    calibrated: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    have_image: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    calibration_target: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    satellite: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    direction: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    instrument: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    mode: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    on_board: 0 0 :: read: 1, write: 0, in-init: 1
+    supports: 0 0 :: read: 1, write: 0, in-init: 1
+    pointing: 0 0 :: read: 1, write: 1, in-init: 1
+    power_avail: 0 :: read: 1, write: 1, in-init: 1
+    power_on: 0 :: read: 1, write: 1, in-init: 0
+    calibrated: 0 :: read: 1, write: 1, in-init: 0
+    have_image: 0 0 :: read: 0, write: 1, in-init: 0
+    calibration_target: 0 0 :: read: 1, write: 0, in-init: 1
+    satellite: 0 :: read: 1, write: 0, in-init: 1
+    direction: 0 :: read: 1, write: 0, in-init: 1
+    instrument: 0 :: read: 1, write: 0, in-init: 1
+    mode: 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[5]:
     turn_to: ?s:0 ?d_new:0 ?d_prev:0

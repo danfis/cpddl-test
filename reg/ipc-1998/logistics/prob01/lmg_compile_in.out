@@ -78,16 +78,16 @@ Obj[32]:
     [30]: city2-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [31]: city1-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[10]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    obj: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    truck: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    location: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    airplane: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    city: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    airport: 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in-city: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    obj: 0 :: read: 1, write: 0, in-init: 1
+    truck: 0 :: read: 1, write: 0, in-init: 1
+    location: 0 :: read: 1, write: 0, in-init: 1
+    airplane: 0 :: read: 1, write: 0, in-init: 1
+    city: 0 :: read: 1, write: 0, in-init: 1
+    airport: 0 :: read: 1, write: 0, in-init: 1
+    at: 0 0 :: read: 1, write: 1, in-init: 1
+    in: 0 0 :: read: 1, write: 1, in-init: 0
+    in-city: 0 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[6]:
     load-truck: ?obj:0 ?truck:0 ?loc:0

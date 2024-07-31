@@ -46,28 +46,28 @@ Obj[31]:
     [29]: three, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [30]: four, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[18]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    at-tank: 3 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in-storage: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    full: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    next-tank: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at-diver: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    available: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at-surface: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    decompressing: 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    precludes: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    cave-entrance: 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    connected: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    next-quantity: 4 4 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    holding: 2 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    capacity: 2 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    have-photo: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    in-water: :: is-private: 0, owner-param: -1, read: 0, write: 1, neg-of: 17
-    NOT-in-water: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 16
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    at-tank: 3 1 :: read: 1, write: 1, in-init: 0
+    in-storage: 3 :: read: 1, write: 1, in-init: 1
+    full: 3 :: read: 1, write: 1, in-init: 0
+    next-tank: 3 3 :: read: 1, write: 0, in-init: 1
+    at-diver: 2 1 :: read: 1, write: 1, in-init: 0
+    available: 2 :: read: 1, write: 1, in-init: 1
+    at-surface: 2 :: read: 1, write: 1, in-init: 0
+    decompressing: 2 :: read: 0, write: 1, in-init: 0
+    precludes: 2 2 :: read: 1, write: 0, in-init: 1
+    cave-entrance: 1 :: read: 1, write: 0, in-init: 1
+    connected: 1 1 :: read: 1, write: 0, in-init: 1
+    next-quantity: 4 4 :: read: 1, write: 0, in-init: 1
+    holding: 2 3 :: read: 1, write: 1, in-init: 0
+    capacity: 2 4 :: read: 1, write: 1, in-init: 1
+    have-photo: 1 :: read: 0, write: 1, in-init: 0
+    in-water: :: read: 0, write: 1, in-init: 0, neg-of: NOT-in-water
+    NOT-in-water: :: read: 1, write: 1, in-init: 1, neg-of: in-water
 Function[3]:
-    hiring-cost: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    other-cost: :: is-private: 0, owner-param: -1, read: 1, write: 0
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    hiring-cost: 2 :: read: 1, write: 0, in-init: 1
+    other-cost: :: read: 1, write: 0, in-init: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[8]:
     hire-diver: ?d1:2
         pre: (and (RW:available ?d1) (RW:NOT-in-water))

@@ -174,16 +174,16 @@ Obj[157]:
     [155]: level129, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [156]: level130, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[8]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    connected: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at: 3 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in: 4 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    fuel: 5 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    fuelcost: 2 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    sum: 2 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    connected: 1 1 :: read: 1, write: 0, in-init: 1
+    at: 3 1 :: read: 1, write: 1, in-init: 1
+    in: 4 5 :: read: 1, write: 1, in-init: 0
+    fuel: 5 2 :: read: 1, write: 1, in-init: 1
+    fuelcost: 2 1 1 :: read: 1, write: 0, in-init: 1
+    sum: 2 2 2 :: read: 1, write: 0, in-init: 1
+    equal: 0 0 :: read: 1, write: 0, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[4]:
     load: ?p:4 ?t:5 ?l:1
         pre: (and (R:equal ?t t0) (RW:at t0 ?l) (RW:at ?p ?l))

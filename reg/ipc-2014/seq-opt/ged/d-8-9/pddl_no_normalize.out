@@ -16,35 +16,35 @@ Obj[9]:
     [7]: g84, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [8]: g11, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[27]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    duplicate: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    swappable: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    cw: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    free: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    gone: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    present: 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    normal: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    inverted: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    idle: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    cutting: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    have-cut: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    splicing: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    splice-next: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    splicing-last: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    inverse-splicing: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    inverse-splice-next: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    inverse-splicing-last: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    finished: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    cut-point-1: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    cut-point-2: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    last-cut-point: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    splice-point-1: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    splice-point-2: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    s-first: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    s-next: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    s-last: 0 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    duplicate: 0 0 :: read: 0, write: 0, in-init: 0
+    swappable: 0 0 :: read: 0, write: 0, in-init: 0
+    cw: 0 0 :: read: 1, write: 1, in-init: 1
+    free: 0 :: read: 0, write: 0, in-init: 0
+    gone: 0 :: read: 0, write: 0, in-init: 0
+    present: 0 :: read: 0, write: 0, in-init: 1
+    normal: 0 :: read: 1, write: 1, in-init: 1
+    inverted: 0 :: read: 1, write: 1, in-init: 1
+    idle: :: read: 1, write: 1, in-init: 1
+    cutting: :: read: 1, write: 1, in-init: 0
+    have-cut: :: read: 1, write: 1, in-init: 0
+    splicing: :: read: 1, write: 1, in-init: 0
+    splice-next: 0 :: read: 1, write: 1, in-init: 0
+    splicing-last: :: read: 1, write: 1, in-init: 0
+    inverse-splicing: :: read: 1, write: 1, in-init: 0
+    inverse-splice-next: 0 :: read: 1, write: 1, in-init: 0
+    inverse-splicing-last: :: read: 1, write: 1, in-init: 0
+    finished: :: read: 1, write: 1, in-init: 0
+    cut-point-1: 0 :: read: 1, write: 1, in-init: 0
+    cut-point-2: 0 :: read: 1, write: 1, in-init: 0
+    last-cut-point: 0 :: read: 1, write: 1, in-init: 0
+    splice-point-1: 0 :: read: 1, write: 1, in-init: 0
+    splice-point-2: 0 :: read: 1, write: 1, in-init: 0
+    s-first: 0 :: read: 1, write: 1, in-init: 0
+    s-next: 0 0 :: read: 1, write: 1, in-init: 0
+    s-last: 0 :: read: 1, write: 1, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[21]:
     begin-cut: ?x:0 ?y:0
         pre: (and (N:R:= ?x ?y) (RW:cw ?x ?y) (RW:idle))

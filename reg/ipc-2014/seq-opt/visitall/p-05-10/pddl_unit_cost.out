@@ -109,10 +109,10 @@ Obj[100]:
     [98]: loc-x9-y8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [99]: loc-x9-y9, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[4]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    connected: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    at-robot: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    visited: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    connected: 1 1 :: read: 1, write: 0, in-init: 1
+    at-robot: 1 :: read: 1, write: 1, in-init: 1
+    visited: 1 :: read: 0, write: 1, in-init: 1
 Function[0]:
 Action[1]:
     move: ?curpos:1 ?nextpos:1

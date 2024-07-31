@@ -94,15 +94,15 @@ Obj[77]:
     [75]: stone-07, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [76]: stone-08, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[7]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    clear: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at-goal: 5 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    is-goal: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    is-nongoal: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    move-dir: 2 2 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    clear: 2 :: read: 1, write: 1, in-init: 1
+    at: 1 2 :: read: 1, write: 1, in-init: 1
+    at-goal: 5 :: read: 0, write: 1, in-init: 0
+    is-goal: 2 :: read: 1, write: 0, in-init: 1
+    is-nongoal: 2 :: read: 1, write: 0, in-init: 1
+    move-dir: 2 2 3 :: read: 1, write: 0, in-init: 1
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[3]:
     move: ?p:4 ?from:2 ?to:2 ?dir:3
         pre: (and (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?from))

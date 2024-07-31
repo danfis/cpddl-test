@@ -28,15 +28,15 @@ Obj[17]:
     [15]: pos-3-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [16]: pos-3-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[9]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    height: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    at: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    has-block: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 7
-    succ: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    neighbor: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    is-depot: 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    NOT-has-block: :: is-private: 0, owner-param: -1, read: 1, write: 1, neg-of: 3
-    equal: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    height: 2 1 :: read: 1, write: 1, in-init: 1
+    at: 2 :: read: 1, write: 1, in-init: 1
+    has-block: :: read: 1, write: 1, in-init: 0, neg-of: NOT-has-block
+    succ: 1 1 :: read: 1, write: 0, in-init: 1
+    neighbor: 2 2 :: read: 1, write: 0, in-init: 1
+    is-depot: 2 :: read: 1, write: 0, in-init: 1
+    NOT-has-block: :: read: 1, write: 1, in-init: 1, neg-of: has-block
+    equal: 0 0 :: read: 1, write: 0, in-init: 0
 Function[0]:
 Action[10]:
     move: ?from:2 ?to:2 ?h:1

@@ -63,30 +63,30 @@ Obj[46]:
     [44]: deal-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [45]: deal-2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[22]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    on: 3 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    clear: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    in-play: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    current-deal: 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    can-continue-group: 3 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    can-be-placed-on: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    is-ace: 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    is-king: 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    next-deal: 5 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    to-deal: 3 4 5 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    currently-dealing: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    currently-collecting-deck: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    collect-card: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    part-of-tableau: 1 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    movable: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    currently-updating-unmovable: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    make-unmovable: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    currently-updating-movable: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    make-movable: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    currently-updating-part-of-tableau: :: is-private: 0, owner-param: -1, read: 1, write: 1
-    make-part-of-tableau: 3 4 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    on: 3 1 :: read: 1, write: 1, in-init: 1
+    clear: 1 :: read: 1, write: 1, in-init: 1
+    in-play: 3 :: read: 1, write: 1, in-init: 1
+    current-deal: 5 :: read: 1, write: 1, in-init: 1
+    can-continue-group: 3 1 :: read: 1, write: 0, in-init: 1
+    can-be-placed-on: 3 3 :: read: 1, write: 0, in-init: 1
+    is-ace: 3 :: read: 1, write: 0, in-init: 1
+    is-king: 3 :: read: 1, write: 0, in-init: 1
+    next-deal: 5 5 :: read: 1, write: 0, in-init: 1
+    to-deal: 3 4 5 1 :: read: 1, write: 0, in-init: 1
+    currently-dealing: :: read: 1, write: 1, in-init: 0
+    currently-collecting-deck: :: read: 1, write: 1, in-init: 0
+    collect-card: 1 :: read: 1, write: 1, in-init: 0
+    part-of-tableau: 1 4 :: read: 1, write: 1, in-init: 1
+    movable: 3 :: read: 1, write: 1, in-init: 1
+    currently-updating-unmovable: :: read: 1, write: 1, in-init: 0
+    make-unmovable: 3 :: read: 1, write: 1, in-init: 0
+    currently-updating-movable: :: read: 1, write: 1, in-init: 0
+    make-movable: 1 :: read: 1, write: 1, in-init: 0
+    currently-updating-part-of-tableau: :: read: 1, write: 1, in-init: 0
+    make-part-of-tableau: 3 4 :: read: 1, write: 1, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[16]:
     start-dealing: 
         pre: (and (N:RW:currently-dealing) (N:RW:currently-collecting-deck) (N:RW:currently-updating-unmovable) (N:RW:currently-updating-movable) (N:RW:currently-updating-part-of-tableau))

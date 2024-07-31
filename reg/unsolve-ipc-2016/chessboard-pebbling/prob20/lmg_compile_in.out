@@ -526,11 +526,11 @@ Obj[484]:
     [482]: pos-20-21, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [483]: pos-21-21, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[5]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    x-succ: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    y-succ: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    occupied: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    free: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    x-succ: 1 1 :: read: 1, write: 0, in-init: 1
+    y-succ: 1 1 :: read: 1, write: 0, in-init: 1
+    occupied: 1 :: read: 1, write: 1, in-init: 1
+    free: 1 :: read: 1, write: 1, in-init: 1
 Function[0]:
 Action[1]:
     move: ?from:1 ?xsucc:1 ?ysucc:1

@@ -72,28 +72,28 @@ Obj[31]:
     [29]: s2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [30]: s3, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[16]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    unused: 17 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    available: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    surface-condition: 3 5 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    treatment: 17 6 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    colour: 17 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    wood: 3 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    boardsize: 16 7 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    goalsize: 17 8 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    boardsize-successor: 7 7 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    in-highspeed-saw: 16 9 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    empty: 9 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    has-colour: 4 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    contains-part: 16 17 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    grind-treatment-change: 6 6 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    is-smooth: 5 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    unused: 17 :: read: 1, write: 1, in-init: 1
+    available: 3 :: read: 1, write: 1, in-init: 1
+    surface-condition: 3 5 :: read: 1, write: 1, in-init: 1
+    treatment: 17 6 :: read: 1, write: 1, in-init: 1
+    colour: 17 1 :: read: 1, write: 1, in-init: 1
+    wood: 3 2 :: read: 1, write: 1, in-init: 1
+    boardsize: 16 7 :: read: 1, write: 1, in-init: 1
+    goalsize: 17 8 :: read: 1, write: 0, in-init: 1
+    boardsize-successor: 7 7 :: read: 1, write: 0, in-init: 1
+    in-highspeed-saw: 16 9 :: read: 1, write: 1, in-init: 0
+    empty: 9 :: read: 1, write: 1, in-init: 1
+    has-colour: 4 1 :: read: 1, write: 0, in-init: 1
+    contains-part: 16 17 :: read: 0, write: 0, in-init: 0
+    grind-treatment-change: 6 6 :: read: 1, write: 0, in-init: 1
+    is-smooth: 5 :: read: 1, write: 0, in-init: 1
 Function[5]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
-    spray-varnish-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    glaze-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    grind-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    plane-cost: 17 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    total-cost: :: read: 0, write: 1, in-init: 1
+    spray-varnish-cost: 17 :: read: 1, write: 0, in-init: 1
+    glaze-cost: 17 :: read: 1, write: 0, in-init: 1
+    grind-cost: 17 :: read: 1, write: 0, in-init: 1
+    plane-cost: 17 :: read: 1, write: 0, in-init: 1
 Action[13]:
     do-immersion-varnish: ?x:17 ?m:12 ?newcolour:1 ?surface:5
         pre: (and (R:has-colour ?m ?newcolour) (R:is-smooth ?surface) (RW:available ?x) (RW:surface-condition ?x ?surface) (RW:treatment ?x untreated))

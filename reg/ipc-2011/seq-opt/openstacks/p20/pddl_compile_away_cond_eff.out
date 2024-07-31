@@ -101,17 +101,17 @@ Obj[88]:
     [86]: n28, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [87]: n29, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[9]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    includes: 1 2 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    waiting: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    started: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    shipped: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    made: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    not-made: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    stacks-avail: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    next-count: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    includes: 1 2 :: read: 0, write: 0, in-init: 1
+    waiting: 1 :: read: 1, write: 1, in-init: 1
+    started: 1 :: read: 1, write: 1, in-init: 0
+    shipped: 1 :: read: 0, write: 1, in-init: 0
+    made: 2 :: read: 1, write: 1, in-init: 0
+    not-made: 2 :: read: 1, write: 1, in-init: 1
+    stacks-avail: 3 :: read: 1, write: 1, in-init: 1
+    next-count: 3 3 :: read: 1, write: 0, in-init: 1
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[60]:
     open-new-stack: ?open:3 ?new-open:3
         pre: (and (R:next-count ?open ?new-open) (RW:stacks-avail ?open))

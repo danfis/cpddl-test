@@ -82,15 +82,15 @@ Obj[32]:
     [30]: seg-out-7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [31]: seg-out-8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[7]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    on: 2 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    analyzed: 2 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    cycle-2: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    cycle-4: 1 1 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    cycle-2-with-analysis: 1 1 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    cycle-4-with-analysis: 1 1 1 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    on: 2 1 :: read: 1, write: 1, in-init: 1
+    analyzed: 2 :: read: 0, write: 1, in-init: 0
+    cycle-2: 1 1 :: read: 1, write: 0, in-init: 1
+    cycle-4: 1 1 1 1 :: read: 0, write: 0, in-init: 0
+    cycle-2-with-analysis: 1 1 :: read: 1, write: 0, in-init: 1
+    cycle-4-with-analysis: 1 1 1 1 :: read: 0, write: 0, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[4]:
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (N:R:= ?s1 ?s2) (N:R:= ?c1 ?c2) (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))

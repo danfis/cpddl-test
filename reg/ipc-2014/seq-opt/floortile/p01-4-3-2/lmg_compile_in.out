@@ -108,19 +108,19 @@ Obj[19]:
     [17]: white, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [18]: black, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[11]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    robot-at: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    up: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    down: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    right: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    left: 2 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    clear: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    painted: 2 3 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    robot-has: 1 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    available-color: 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    free-color: 1 :: is-private: 0, owner-param: -1, read: 0, write: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    robot-at: 1 2 :: read: 1, write: 1, in-init: 1
+    up: 2 2 :: read: 1, write: 0, in-init: 1
+    down: 2 2 :: read: 1, write: 0, in-init: 1
+    right: 2 2 :: read: 1, write: 0, in-init: 1
+    left: 2 2 :: read: 1, write: 0, in-init: 1
+    clear: 2 :: read: 1, write: 1, in-init: 1
+    painted: 2 3 :: read: 0, write: 1, in-init: 0
+    robot-has: 1 3 :: read: 1, write: 1, in-init: 1
+    available-color: 3 :: read: 1, write: 0, in-init: 1
+    free-color: 1 :: read: 0, write: 0, in-init: 0
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[11]:
     change-color: ?r:1 ?c:3 ?c2:3
         pre: (and (R:available-color ?c2) (RW:robot-has ?r ?c))

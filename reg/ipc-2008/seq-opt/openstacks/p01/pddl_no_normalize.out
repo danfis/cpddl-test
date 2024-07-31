@@ -29,16 +29,16 @@ Obj[16]:
     [14]: p4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: p5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[8]:
-    =: 0 0 :: is-private: 0, owner-param: -1, read: 0, write: 0
-    includes: 1 2 :: is-private: 0, owner-param: -1, read: 1, write: 0
-    waiting: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    started: 1 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    shipped: 1 :: is-private: 0, owner-param: -1, read: 0, write: 1
-    made: 2 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    stacks-avail: 3 :: is-private: 0, owner-param: -1, read: 1, write: 1
-    next-count: 3 3 :: is-private: 0, owner-param: -1, read: 1, write: 0
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    includes: 1 2 :: read: 1, write: 0, in-init: 1
+    waiting: 1 :: read: 1, write: 1, in-init: 1
+    started: 1 :: read: 1, write: 1, in-init: 0
+    shipped: 1 :: read: 0, write: 1, in-init: 0
+    made: 2 :: read: 1, write: 1, in-init: 0
+    stacks-avail: 3 :: read: 1, write: 1, in-init: 1
+    next-count: 3 3 :: read: 1, write: 0, in-init: 1
 Function[1]:
-    total-cost: :: is-private: 0, owner-param: -1, read: 0, write: 1
+    total-cost: :: read: 0, write: 1, in-init: 1
 Action[4]:
     make-product: ?p:2
         pre: (and (N:RW:made ?p) (forall (?o:1 I[0]:?p:2) (imply (R:includes ?o ?p) (RW:started ?o))))
