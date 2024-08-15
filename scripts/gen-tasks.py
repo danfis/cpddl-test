@@ -20,13 +20,13 @@ VERY_LARGE_TESTS = LARGE_TESTS \
 
 NUMERIC_TESTS_ENABLED = [
     'r',
-#    'pddl',
+    'pddl',
     'pddl_no_normalize',
 #    'pddl_unit_cost',
-#    'pddl_clone',
-#    'pddl_compile_away_cond_eff',
-#    'pddl_compile_away_eq_pred_no_norm',
-#    'pddl_compile_away_eq_pred_lmg',
+    'pddl_clone',
+    'pddl_compile_away_cond_eff',
+    'pddl_compile_away_eq_pred_no_norm',
+    'pddl_compile_away_eq_pred_lmg',
 ]
 
 

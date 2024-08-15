@@ -1,0 +1,76 @@
+Domain: domain_name
+Problem: name
+Require: 1ff
+Type[2]:
+    [0]: object, parent: -1
+    [1]: location, parent: 0
+Obj-by-Type:
+    [0]: 0 1
+    [1]: 0 1
+Obj[2]:
+    [0]: x0y0z0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: x0y0z1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[2]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    visited: 1 :: read: 0, write: 1, in-init: 0
+Function[14]:
+    x: :: read: 1, write: 1, in-init: 1
+    y: :: read: 1, write: 1, in-init: 1
+    z: :: read: 1, write: 1, in-init: 1
+    xl: 1 :: read: 1, write: 0, in-init: 1
+    yl: 1 :: read: 1, write: 0, in-init: 1
+    zl: 1 :: read: 1, write: 0, in-init: 1
+    battery-level: :: read: 1, write: 1, in-init: 1
+    battery-level-full: :: read: 1, write: 0, in-init: 1
+    min_x: :: read: 1, write: 0, in-init: 1
+    max_x: :: read: 1, write: 0, in-init: 1
+    min_y: :: read: 1, write: 0, in-init: 1
+    max_y: :: read: 1, write: 0, in-init: 1
+    min_z: :: read: 1, write: 0, in-init: 1
+    max_z: :: read: 1, write: 0, in-init: 1
+Action[8]:
+    increase_x: 
+        pre: (and (>= (battery-level) 1) (<= (x) (- (max_x) 1)))
+        eff: (and (increase (x) 1) (decrease (battery-level) 1))
+    decrease_x: 
+        pre: (and (>= (battery-level) 1) (>= (x) (+ (min_x) 1)))
+        eff: (and (decrease (x) 1) (decrease (battery-level) 1))
+    increase_y: 
+        pre: (and (>= (battery-level) 1) (<= (y) (- (max_y) 1)))
+        eff: (and (increase (y) 1) (decrease (battery-level) 1))
+    decrease_y: 
+        pre: (and (>= (battery-level) 1) (>= (y) (+ (min_y) 1)))
+        eff: (and (decrease (y) 1) (decrease (battery-level) 1))
+    increase_z: 
+        pre: (and (>= (battery-level) 1) (<= (z) (- (max_z) 1)))
+        eff: (and (increase (z) 1) (decrease (battery-level) 1))
+    decrease_z: 
+        pre: (and (>= (battery-level) 1) (>= (z) (+ (min_z) 1)))
+        eff: (and (decrease (z) 1) (decrease (battery-level) 1))
+    visit: ?l:1
+        pre: (and (>= (battery-level) 1) (= (xl ?l) (x)) (= (yl ?l) (y)) (= (zl ?l) (z)))
+        eff: (and (W:visited ?l) (decrease (battery-level) 1))
+    recharge: 
+        pre: (and (= (x) 0) (= (y) 0) (= (z) 0))
+        eff: (and (assign (battery-level) (battery-level-full)))
+Init[0]:
+Init[17]:
+  (= (x) 0)
+  (= (y) 0)
+  (= (z) 0)
+  (= (min_x) 0)
+  (= (max_x) 1)
+  (= (min_y) 0)
+  (= (max_y) 1)
+  (= (min_z) 0)
+  (= (max_z) 2)
+  (= (xl x0y0z0) 0)
+  (= (yl x0y0z0) 0)
+  (= (zl x0y0z0) 0)
+  (= (xl x0y0z1) 0)
+  (= (yl x0y0z1) 0)
+  (= (zl x0y0z1) 1)
+  (= (battery-level) 9)
+  (= (battery-level-full) 9)
+Goal: (and (W:visited x0y0z0) (W:visited x0y0z1) (= (x) 0) (= (y) 0) (= (z) 0))
+Metric: 0
