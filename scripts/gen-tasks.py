@@ -21,7 +21,7 @@ VERY_LARGE_TESTS = LARGE_TESTS \
 NUMERIC_TESTS_ENABLED = [
     'r',
 #    'pddl',
-#    'pddl_no_normalize',
+    'pddl_no_normalize',
 #    'pddl_unit_cost',
 #    'pddl_clone',
 #    'pddl_compile_away_cond_eff',

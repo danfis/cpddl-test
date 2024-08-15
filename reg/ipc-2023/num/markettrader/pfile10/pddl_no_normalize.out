@@ -1,0 +1,202 @@
+Domain: trader
+Problem: marketcount3
+Require: 3ff
+Type[6]:
+    [0]: object, parent: -1
+    [1]: place, parent: 0
+    [2]: market, parent: 1
+    [3]: locatable, parent: 0
+    [4]: camel, parent: 3
+    [5]: goods, parent: 3
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+    [1]: 0 1 2
+    [2]: 0 1 2
+    [3]: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+    [4]: 3
+    [5]: 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Obj[21]:
+    [0]: simnas, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: kudirkosnaumiestis, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: gelgaudiskis, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: camel0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: food, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: expensiverugs, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: coffee, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: cattle, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: water, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: cars, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: gummybears, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: computers, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: laminatefloor, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: copper, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: footballs, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: kittens, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: minerals, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: gold, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: platinum, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: dvds, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: turingmachines, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[3]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    at: 4 1 :: read: 1, write: 1, in-init: 1
+    can-drive: 1 1 :: read: 1, write: 0, in-init: 1
+Function[7]:
+    on-sale: 5 2 :: read: 1, write: 0, in-init: 1
+    drive-cost: 1 1 :: read: 1, write: 0, in-init: 1
+    price: 5 2 :: read: 1, write: 0, in-init: 1
+    sellprice: 5 2 :: read: 0, write: 0, in-init: 0
+    bought: 5 :: read: 1, write: 1, in-init: 1
+    cash: :: read: 1, write: 1, in-init: 1
+    capacity: :: read: 1, write: 1, in-init: 1
+Action[4]:
+    travel: ?t:4 ?from:2 ?to:2
+        pre: (and (R:can-drive ?from ?to) (RW:at ?t ?from) (>= (cash) (drive-cost ?from ?to)))
+        eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to) (decrease (cash) (drive-cost ?from ?to)))
+    buy: ?t:4 ?g:5 ?m:2
+        pre: (and (RW:at ?t ?m) (<= (+ 7 (price ?g ?m)) (cash)) (>= (capacity) 1) (> (on-sale ?g ?m) 0))
+        eff: (and (decrease (capacity) 1) (increase (bought ?g) 1) (decrease (cash) (price ?g ?m)))
+    upgrade: ?t:4
+        pre: (and (>= (cash) 57))
+        eff: (and (increase (capacity) 20) (decrease (cash) 50))
+    sell: ?t:4 ?g:5 ?m:2
+        pre: (and (RW:at ?t ?m) (>= (bought ?g) 1))
+        eff: (and (increase (capacity) 1) (decrease (bought ?g) 1) (increase (cash) (price ?g ?m)))
+Init[7]:
+  S:(can-drive simnas kudirkosnaumiestis)
+  S:(can-drive simnas gelgaudiskis)
+  S:(can-drive kudirkosnaumiestis simnas)
+  S:(can-drive kudirkosnaumiestis gelgaudiskis)
+  S:(can-drive gelgaudiskis simnas)
+  S:(can-drive gelgaudiskis kudirkosnaumiestis)
+  (at camel0 gelgaudiskis)
+Init[127]:
+  (= (price food simnas) 7.600000)
+  (= (on-sale food simnas) 6)
+  (= (price expensiverugs simnas) 8.000000)
+  (= (on-sale expensiverugs simnas) 10)
+  (= (price coffee simnas) 26.000000)
+  (= (on-sale coffee simnas) 2)
+  (= (price cattle simnas) 16.000000)
+  (= (on-sale cattle simnas) 0)
+  (= (price water simnas) 33.200001)
+  (= (on-sale water simnas) 0)
+  (= (price cars simnas) 78.300003)
+  (= (on-sale cars simnas) 54)
+  (= (price gummybears simnas) 94.000000)
+  (= (on-sale gummybears simnas) 8)
+  (= (price computers simnas) 61.599998)
+  (= (on-sale computers simnas) 56)
+  (= (price laminatefloor simnas) 46.799999)
+  (= (on-sale laminatefloor simnas) 40)
+  (= (price copper simnas) 31.200001)
+  (= (on-sale copper simnas) 17)
+  (= (price footballs simnas) 49.599998)
+  (= (on-sale footballs simnas) 29)
+  (= (price kittens simnas) 70.300003)
+  (= (on-sale kittens simnas) 0)
+  (= (price minerals simnas) 12.800000)
+  (= (on-sale minerals simnas) 53)
+  (= (price gold simnas) 38.799999)
+  (= (on-sale gold simnas) 2)
+  (= (price platinum simnas) 68.300003)
+  (= (on-sale platinum simnas) 55)
+  (= (price dvds simnas) 18.000000)
+  (= (on-sale dvds simnas) 0)
+  (= (price turingmachines simnas) 21.200001)
+  (= (on-sale turingmachines simnas) 0)
+  (= (price food kudirkosnaumiestis) 5.200000)
+  (= (on-sale food kudirkosnaumiestis) 12)
+  (= (price expensiverugs kudirkosnaumiestis) 6.800000)
+  (= (on-sale expensiverugs kudirkosnaumiestis) 13)
+  (= (price coffee kudirkosnaumiestis) 22.299999)
+  (= (on-sale coffee kudirkosnaumiestis) 11)
+  (= (price cattle kudirkosnaumiestis) 10.000000)
+  (= (on-sale cattle kudirkosnaumiestis) 0)
+  (= (price water kudirkosnaumiestis) 27.200001)
+  (= (on-sale water kudirkosnaumiestis) 10)
+  (= (price cars kudirkosnaumiestis) 88.000000)
+  (= (on-sale cars kudirkosnaumiestis) 30)
+  (= (price gummybears kudirkosnaumiestis) 26.299999)
+  (= (on-sale gummybears kudirkosnaumiestis) 0)
+  (= (price computers kudirkosnaumiestis) 78.300003)
+  (= (on-sale computers kudirkosnaumiestis) 14)
+  (= (price laminatefloor kudirkosnaumiestis) 54.000000)
+  (= (on-sale laminatefloor kudirkosnaumiestis) 22)
+  (= (price copper kudirkosnaumiestis) 32.299999)
+  (= (on-sale copper kudirkosnaumiestis) 14)
+  (= (price footballs kudirkosnaumiestis) 65.199997)
+  (= (on-sale footballs kudirkosnaumiestis) 0)
+  (= (price kittens kudirkosnaumiestis) 59.599998)
+  (= (on-sale kittens kudirkosnaumiestis) 0)
+  (= (price minerals kudirkosnaumiestis) 11.600000)
+  (= (on-sale minerals kudirkosnaumiestis) 56)
+  (= (price gold kudirkosnaumiestis) 37.599998)
+  (= (on-sale gold kudirkosnaumiestis) 5)
+  (= (price platinum kudirkosnaumiestis) 66.000000)
+  (= (on-sale platinum kudirkosnaumiestis) 61)
+  (= (price dvds kudirkosnaumiestis) 16.799999)
+  (= (on-sale dvds kudirkosnaumiestis) 0)
+  (= (price turingmachines kudirkosnaumiestis) 39.200001)
+  (= (on-sale turingmachines kudirkosnaumiestis) 0)
+  (= (price food gelgaudiskis) 3.600000)
+  (= (on-sale food gelgaudiskis) 16)
+  (= (price expensiverugs gelgaudiskis) 6.000000)
+  (= (on-sale expensiverugs gelgaudiskis) 15)
+  (= (price coffee gelgaudiskis) 20.000000)
+  (= (on-sale coffee gelgaudiskis) 17)
+  (= (price cattle gelgaudiskis) 6.000000)
+  (= (on-sale cattle gelgaudiskis) 0)
+  (= (price water gelgaudiskis) 23.200001)
+  (= (on-sale water gelgaudiskis) 20)
+  (= (price cars gelgaudiskis) 94.300003)
+  (= (on-sale cars gelgaudiskis) 14)
+  (= (price gummybears gelgaudiskis) 49.599998)
+  (= (on-sale gummybears gelgaudiskis) 55)
+  (= (price computers gelgaudiskis) 89.599998)
+  (= (on-sale computers gelgaudiskis) 0)
+  (= (price laminatefloor gelgaudiskis) 58.799999)
+  (= (on-sale laminatefloor gelgaudiskis) 10)
+  (= (price copper gelgaudiskis) 33.200001)
+  (= (on-sale copper gelgaudiskis) 12)
+  (= (price footballs gelgaudiskis) 75.599998)
+  (= (on-sale footballs gelgaudiskis) 0)
+  (= (price kittens gelgaudiskis) 52.299999)
+  (= (on-sale kittens gelgaudiskis) 9)
+  (= (price minerals gelgaudiskis) 10.800000)
+  (= (on-sale minerals gelgaudiskis) 58)
+  (= (price gold gelgaudiskis) 36.799999)
+  (= (on-sale gold gelgaudiskis) 7)
+  (= (price platinum gelgaudiskis) 64.300003)
+  (= (on-sale platinum gelgaudiskis) 1)
+  (= (price dvds gelgaudiskis) 16.000000)
+  (= (on-sale dvds gelgaudiskis) 0)
+  (= (price turingmachines gelgaudiskis) 51.200001)
+  (= (on-sale turingmachines gelgaudiskis) 0)
+  (= (bought food) 0)
+  (= (bought expensiverugs) 0)
+  (= (bought coffee) 0)
+  (= (bought cattle) 0)
+  (= (bought water) 0)
+  (= (bought cars) 0)
+  (= (bought gummybears) 0)
+  (= (bought computers) 0)
+  (= (bought laminatefloor) 0)
+  (= (bought copper) 0)
+  (= (bought footballs) 0)
+  (= (bought kittens) 0)
+  (= (bought minerals) 0)
+  (= (bought gold) 0)
+  (= (bought platinum) 0)
+  (= (bought dvds) 0)
+  (= (bought turingmachines) 0)
+  (= (drive-cost simnas kudirkosnaumiestis) 3.000000)
+  (= (drive-cost kudirkosnaumiestis simnas) 3.000000)
+  (= (drive-cost simnas gelgaudiskis) 3.900000)
+  (= (drive-cost gelgaudiskis simnas) 3.900000)
+  (= (drive-cost kudirkosnaumiestis gelgaudiskis) 6.600000)
+  (= (drive-cost gelgaudiskis kudirkosnaumiestis) 6.600000)
+  (= (cash) 100)
+  (= (capacity) 20)
+Goal: (and (>= (cash) 1000))
+Metric: 0

@@ -1,0 +1,219 @@
+Domain: supply-chain
+Problem: prob1
+Require: 3ff
+Type[12]:
+    [0]: object, parent: -1
+    [1]: sugar, parent: 0
+    [2]: location, parent: 0
+    [3]: loader, parent: 0
+    [4]: brand, parent: 1
+    [5]: raw-cane, parent: 1
+    [6]: mill, parent: 2
+    [7]: depot, parent: 2
+    [8]: truck, parent: 3
+    [9]: crane, parent: 3
+    [10]: farm, parent: 0
+    [11]: field, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+    [1]: 0 1 2 3 4
+    [2]: 7 8 9 10 11
+    [3]: 5 6 12 13 14
+    [4]: 0 1 2 3
+    [5]: 4
+    [6]: 10 11
+    [7]: 7 8 9
+    [8]: 5 6
+    [9]: 12 13 14
+    [10]:
+    [11]:
+Obj[15]:
+    [0]: brand1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: brand2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: brand3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: brand4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: sugar-cane, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: truck1, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: truck2, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: depot1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: depot2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: depot3, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: mill1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: mill2, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: crane1, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: crane2, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: crane3, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[13]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    available: 6 :: read: 1, write: 1, in-init: 1
+    has-resource: 5 6 :: read: 0, write: 0, in-init: 0
+    produce: 6 4 :: read: 1, write: 0, in-init: 1
+    current-process: 6 4 :: read: 1, write: 1, in-init: 1
+    change-process: 4 4 :: read: 1, write: 0, in-init: 1
+    place-order: 5 6 :: read: 1, write: 1, in-init: 0
+    transport-to: 5 6 :: read: 0, write: 0, in-init: 0
+    at-location: 3 2 :: read: 1, write: 1, in-init: 1
+    connected: 2 2 :: read: 1, write: 0, in-init: 1
+    busy: 6 :: read: 1, write: 1, in-init: 0
+    ready-crane: 9 :: read: 1, write: 1, in-init: 1
+    service-crane: 9 :: read: 1, write: 1, in-init: 0
+Function[20]:
+    mill-cost: :: read: 0, write: 1, in-init: 1
+    cost-process: 6 :: read: 1, write: 0, in-init: 1
+    process-cost: 6 :: read: 0, write: 0, in-init: 0
+    resource-use: :: read: 0, write: 0, in-init: 0
+    unharvest-field: :: read: 1, write: 1, in-init: 1
+    truck-cap: 8 :: read: 1, write: 1, in-init: 1
+    in-truck-sugar: 4 8 :: read: 1, write: 1, in-init: 1
+    in-storage: 2 4 :: read: 1, write: 1, in-init: 1
+    total-distance: :: read: 0, write: 0, in-init: 0
+    distance: 2 2 :: read: 0, write: 0, in-init: 0
+    has-resource: 5 6 :: read: 1, write: 1, in-init: 1
+    max-changing: 6 :: read: 1, write: 1, in-init: 1
+    inventory-cost: :: read: 0, write: 1, in-init: 1
+    changing-product: :: read: 0, write: 0, in-init: 0
+    capacity: 9 :: read: 1, write: 0, in-init: 1
+    max-service-time: 9 :: read: 1, write: 0, in-init: 1
+    service-time: 9 :: read: 1, write: 1, in-init: 1
+    handling-cost: :: read: 0, write: 1, in-init: 1
+    max-produce: 6 :: read: 1, write: 0, in-init: 1
+    labour-cost: :: read: 0, write: 0, in-init: 0
+Action[13]:
+    produce_sugar: ?r:5 ?m:6 ?b:4
+        pre: (and (R:produce ?m ?b) (RW:available ?m) (RW:current-process ?m ?b) (> (has-resource ?r ?m) 0) (> (max-changing ?m) 0))
+        eff: (and (N:RW:available ?m) (RW:busy ?m) (increase (in-storage ?m ?b) 1) (decrease (has-resource ?r ?m) 1) (increase (mill-cost) (cost-process ?m)))
+    produce_sugar_max: ?r:5 ?m:6 ?b:4
+        pre: (and (R:produce ?m ?b) (RW:available ?m) (RW:current-process ?m ?b) (>= (has-resource ?r ?m) (max-produce ?m)) (> (max-changing ?m) 0))
+        eff: (and (N:RW:available ?m) (RW:busy ?m) (increase (in-storage ?m ?b) (max-produce ?m)) (decrease (has-resource ?r ?m) (max-produce ?m)) (increase (mill-cost) (* 5 (cost-process ?m))))
+    order-sugar-cane: ?r:5 ?m:6
+        pre: (and (>= (has-resource ?r ?m) 0) (<= (has-resource ?r ?m) 0))
+        eff: (and (RW:place-order ?r ?m))
+    setting-machine: ?m:6
+        pre: (and (RW:busy ?m))
+        eff: (and (RW:available ?m) (N:RW:busy ?m))
+    change-product: ?m:6 ?b1:4 ?b2:4
+        pre: (and (R:change-process ?b1 ?b2) (RW:current-process ?m ?b1))
+        eff: (and (N:RW:current-process ?m ?b1) (RW:current-process ?m ?b2) (decrease (max-changing ?m) 1))
+    sugar-cane-farm: ?r:5 ?m:6
+        pre: (and (RW:place-order ?r ?m) (> (unharvest-field) 0))
+        eff: (and (N:RW:place-order ?r ?m) (decrease (unharvest-field) 1) (increase (has-resource ?r ?m) 5) (increase (inventory-cost) 10))
+    sugar-cane-mills: ?r:5 ?m1:6 ?m2:6
+        pre: (and (RW:place-order ?r ?m1) (> (has-resource ?r ?m2) 0))
+        eff: (and (N:RW:place-order ?r ?m1) (increase (has-resource ?r ?m1) 1) (decrease (has-resource ?r ?m2) 1) (decrease (inventory-cost) 1))
+    load_truck_crane: ?b:4 ?t:8 ?l:2 ?c:9
+        pre: (and (RW:at-location ?t ?l) (RW:at-location ?c ?l) (RW:ready-crane ?c) (>= (in-storage ?l ?b) (capacity ?c)) (>= (truck-cap ?t) (capacity ?c)))
+        eff: (and (decrease (in-storage ?l ?b) (capacity ?c)) (decrease (truck-cap ?t) (capacity ?c)) (increase (in-truck-sugar ?b ?t) (capacity ?c)) (increase (handling-cost) 10))
+    check-service: ?c:9 ?l:2
+        pre: (and (RW:at-location ?c ?l) (>= (service-time ?c) 0) (<= (service-time ?c) 0))
+        eff: (and (N:RW:ready-crane ?c) (RW:service-crane ?c) (increase (service-time ?c) (max-service-time ?c)))
+    maintainence-crane: ?c:9 ?l:2
+        pre: (and (RW:at-location ?c ?l) (RW:service-crane ?c))
+        eff: (and (RW:ready-crane ?c))
+    load-truck-manual: ?b:4 ?t:8 ?l:2
+        pre: (and (RW:at-location ?t ?l) (> (in-storage ?l ?b) 0) (> (truck-cap ?t) 0))
+        eff: (and (decrease (in-storage ?l ?b) 1) (decrease (truck-cap ?t) 1) (increase (in-truck-sugar ?b ?t) 1) (increase (handling-cost) 1))
+    drive_truck: ?t:8 ?y1:2 ?y2:2
+        pre: (and (R:connected ?y1 ?y2) (RW:at-location ?t ?y1))
+        eff: (and (N:RW:at-location ?t ?y1) (RW:at-location ?t ?y2))
+    unload_truck: ?b:4 ?t:8 ?l:2
+        pre: (and (RW:at-location ?t ?l) (> (in-truck-sugar ?b ?t) 0))
+        eff: (and (increase (in-storage ?l ?b) 1) (decrease (in-truck-sugar ?b ?t) 1) (increase (truck-cap ?t) 1))
+Init[47]:
+  S:(produce mill1 brand1)
+  S:(produce mill1 brand3)
+  S:(produce mill1 brand4)
+  S:(produce mill2 brand2)
+  S:(produce mill2 brand3)
+  S:(change-process brand1 brand2)
+  S:(change-process brand1 brand3)
+  S:(change-process brand1 brand4)
+  S:(change-process brand2 brand1)
+  S:(change-process brand2 brand3)
+  S:(change-process brand2 brand4)
+  S:(change-process brand3 brand1)
+  S:(change-process brand3 brand2)
+  S:(change-process brand3 brand4)
+  S:(change-process brand4 brand1)
+  S:(change-process brand4 brand2)
+  S:(change-process brand4 brand3)
+  S:(connected depot1 depot2)
+  S:(connected depot1 depot3)
+  S:(connected depot1 mill1)
+  S:(connected depot1 mill2)
+  S:(connected depot2 depot1)
+  S:(connected depot2 depot3)
+  S:(connected depot2 mill1)
+  S:(connected depot2 mill2)
+  S:(connected depot3 depot1)
+  S:(connected depot3 depot2)
+  S:(connected depot3 mill1)
+  S:(connected depot3 mill2)
+  S:(connected mill1 depot1)
+  S:(connected mill1 depot2)
+  S:(connected mill1 depot3)
+  S:(connected mill1 mill2)
+  S:(connected mill2 depot1)
+  S:(connected mill2 depot2)
+  S:(connected mill2 depot3)
+  S:(connected mill2 mill1)
+  (available mill1)
+  (available mill2)
+  (current-process mill1 brand1)
+  (current-process mill2 brand3)
+  (at-location truck1 depot1)
+  (at-location truck2 depot2)
+  (at-location crane1 mill1)
+  (at-location crane2 mill2)
+  (ready-crane crane1)
+  (ready-crane crane2)
+Init[48]:
+  (= (unharvest-field) 3)
+  (= (mill-cost) 0)
+  (= (inventory-cost) 0)
+  (= (handling-cost) 0)
+  (= (cost-process mill1) 1)
+  (= (cost-process mill2) 3)
+  (= (has-resource sugar-cane mill1) 3)
+  (= (has-resource sugar-cane mill2) 5)
+  (= (max-changing mill1) 2)
+  (= (max-changing mill2) 2)
+  (= (max-produce mill1) 5)
+  (= (max-produce mill2) 8)
+  (= (in-storage mill1 brand1) 0)
+  (= (in-storage mill1 brand3) 0)
+  (= (in-storage mill1 brand4) 0)
+  (= (in-storage mill2 brand1) 0)
+  (= (in-storage mill2 brand2) 0)
+  (= (in-storage mill2 brand3) 0)
+  (= (truck-cap truck1) 10)
+  (= (truck-cap truck2) 6)
+  (= (capacity crane1) 3)
+  (= (capacity crane2) 5)
+  (= (service-time crane1) 10)
+  (= (service-time crane2) 15)
+  (= (service-time crane3) 10)
+  (= (max-service-time crane1) 10)
+  (= (max-service-time crane2) 15)
+  (= (max-service-time crane3) 10)
+  (= (in-truck-sugar brand1 truck1) 0)
+  (= (in-truck-sugar brand2 truck1) 0)
+  (= (in-truck-sugar brand3 truck1) 0)
+  (= (in-truck-sugar brand4 truck1) 0)
+  (= (in-truck-sugar brand1 truck2) 0)
+  (= (in-truck-sugar brand2 truck2) 0)
+  (= (in-truck-sugar brand3 truck2) 0)
+  (= (in-truck-sugar brand4 truck2) 0)
+  (= (in-storage depot1 brand1) 0)
+  (= (in-storage depot1 brand2) 0)
+  (= (in-storage depot1 brand3) 0)
+  (= (in-storage depot1 brand4) 0)
+  (= (in-storage depot2 brand1) 0)
+  (= (in-storage depot2 brand2) 0)
+  (= (in-storage depot2 brand3) 0)
+  (= (in-storage depot2 brand4) 0)
+  (= (in-storage depot3 brand1) 0)
+  (= (in-storage depot3 brand2) 0)
+  (= (in-storage depot3 brand3) 0)
+  (= (in-storage depot3 brand4) 0)
+Goal: (and (>= (in-storage depot1 brand3) 3))
+Metric: 0
