@@ -48,14 +48,16 @@ TEST(pot_init, pot)
     if (C.fdr.goal_is_unreachable)
         return;
 
+    pddl_pot_solve_config_t cfg = PDDL_POT_SOLVE_CONFIG_INIT;
+    cfg.op_pot = pddl_true;
+
     pddl_pot_t pot;
     pddlPotInitFDR(&pot, &C.fdr);
-    pddlPotEnableOpPot(&pot, 1, 0);
     pddlPotSetObjFDRState(&pot, &C.fdr.var, C.fdr.init);
 
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    int ret = pddlPotSolve(&pot, &sol, &C.err);
+    int ret = pddlPotSolve(&pot, &cfg, &sol, &C.err);
     assert(ret == 0);
     assert(sol.found);
     assert(!sol.suboptimal);
@@ -77,14 +79,16 @@ TEST(pot_all_states, pot_init)
     if (C.fdr.goal_is_unreachable)
         return;
 
+    pddl_pot_solve_config_t cfg = PDDL_POT_SOLVE_CONFIG_INIT;
+    cfg.op_pot = pddl_true;
+
     pddl_pot_t pot;
     pddlPotInitFDR(&pot, &C.fdr);
-    pddlPotEnableOpPot(&pot, 1, 0);
     pddlPotSetObjFDRAllSyntacticStates(&pot, &C.fdr.var);
 
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    int ret = pddlPotSolve(&pot, &sol, &C.err);
+    int ret = pddlPotSolve(&pot, &cfg, &sol, &C.err);
     assert(ret == 0);
     assert(sol.found);
     assert(!sol.suboptimal);
@@ -115,12 +119,13 @@ TEST(pot_mg_strips_init, pot_init)
     pddlStripsPrintDebug(&mg_strips.strips, stdout);
 
     pddl_pot_t pot;
-    pddlPotInitMGStrips(&pot, &mg_strips, &mutex);
+    pddlPotInit(&pot, &mg_strips, &mutex);
     pddlPotSetObjStripsState(&pot, &mg_strips.strips.init);
 
+    pddl_pot_solve_config_t cfg = PDDL_POT_SOLVE_CONFIG_INIT;
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    pddlPotSolve(&pot, &sol, &C.err);
+    pddlPotSolve(&pot, &cfg, &sol, &C.err);
     assert(sol.found);
     assert(!sol.suboptimal);
     assert(!sol.timed_out);
@@ -151,12 +156,13 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddlH2(&mg_strips.strips, &mutex, NULL, NULL, 0., &C.err);
 
     pddl_pot_t pot;
-    pddlPotInitMGStrips(&pot, &mg_strips, &mutex);
+    pddlPotInit(&pot, &mg_strips, &mutex);
     pddlPotSetObjStripsState(&pot, &mg_strips.strips.init);
 
+    pddl_pot_solve_config_t cfg = PDDL_POT_SOLVE_CONFIG_INIT;
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    pddlPotSolve(&pot, &sol, &C.err);
+    pddlPotSolve(&pot, &cfg, &sol, &C.err);
     assert(sol.found);
     assert(!sol.suboptimal);
     assert(!sol.timed_out);
