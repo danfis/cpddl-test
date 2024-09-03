@@ -248,26 +248,21 @@ TEST_TEAR_DOWN(hpot)
 
 TEST(hpot_init, hpot)
 {
-    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    cfg_init.fdr_state = C.fdr.init;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_init);
+    hcfg.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hcfg.opt_state.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg, task);
 }
 
 TEST(hpot_all_states, hpot)
 {
-    pddl_hpot_config_opt_all_syntactic_states_t cfg_all
-            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all);
+    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     _test_hpot1(&hcfg, task);
 }
 
 TEST(hpot_all_states_cinit, hpot)
 {
-    pddl_hpot_config_opt_all_syntactic_states_t cfg_all_cinit
-            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
-    cfg_all_cinit.add_fdr_state_constr = C.fdr.init;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all_cinit);
+    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt_all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg, task);
 }
 
@@ -289,8 +284,7 @@ TEST(pot_conj, hpot)
         cfg.max_num_conjs = 50;
 
     pddl_hpot_config_t pot_cfg = PDDL_HPOT_CONFIG_INIT;
-    pddl_hpot_config_opt_state_t cfginit = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    PDDL_HPOT_CONFIG_ADD(&pot_cfg, &cfginit);
+    pot_cfg.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     int ret = pddlPotConjFind(&conjs, &conjs_best_h_value, NULL,
                               &hcfg.mg_strips->strips, hcfg.mutex,
@@ -337,8 +331,8 @@ TEST(pot_conj_init, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_init);
+    hcfg.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hcfg.opt_state.fdr_state = NULL;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
@@ -358,10 +352,8 @@ TEST(pot_conj_all, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    pddl_hpot_config_opt_all_syntactic_states_t cfg
-                = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
-    cfg.add_init_state_constr = pddl_true;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg);
+    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);

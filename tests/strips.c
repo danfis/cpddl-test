@@ -615,10 +615,8 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
     pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &fdr_cfg, &C.err);
 
-    pddl_hpot_config_t cfg;
-    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    pddlHPotConfigInit(&cfg);
-    pddlHPotConfigAdd(&cfg, &cfg_init.cfg);
+    pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
+    cfg.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     pddl_pot_solutions_t sol, solc;
     pddlPotSolutionsInit(&sol);
@@ -631,7 +629,6 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     cfg.fdr = &fdrc;
     cfg.mutex = &mutexc;
     pddlHPot(&solc, &cfg, &C.err);
-    pddlHPotConfigFree(&cfg);
     pddlMutexPairsFree(&mutexc);
 
     int h = pddlPotSolutionsEvalMaxFDRState(&sol, &fdr.var, fdr.init);
