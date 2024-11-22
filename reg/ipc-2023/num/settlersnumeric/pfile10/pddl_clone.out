@@ -275,4 +275,4 @@ Init[67]:
   (= (available iron location7) 0)
   (= (available coal location7) 0)
 Goal: (and (RW:connected-by-rail location0 location5) (RW:connected-by-rail location5 location4) (RW:connected-by-rail location7 location5) (RW:has-coal-stack location0) (RW:has-sawmill location6) (RW:has-ironworks location6) (RW:has-ironworks location7) (>= (housing location6) 1) (>= (housing location0) 1) (>= (housing location4) 2) (>= (housing location5) 2))
-Metric: 1
+Metric: (+ (+ (* 0 (pollution)) (* 0 (resource-use))) (* 2 (labour)))
