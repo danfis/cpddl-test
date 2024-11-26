@@ -153,7 +153,7 @@ Predicate[535]:
     inst_by-mandatory_update-greg: :: read: 0, write: 1, in-init: 0
     inst_by-greg_inst-greg: :: read: 0, write: 1, in-init: 0
     mandatory_step-nobody: :: read: 0, write: 1, in-init: 0
-    mandatory_step-bob: :: read: 0, write: 1, in-init: 0
+    mandatory_step-bob: :: read: 1, write: 1, in-init: 0
     mandatory_step-adam: :: read: 0, write: 1, in-init: 0
     mandatory_step-greg: :: read: 0, write: 1, in-init: 0
     pmode-m_dms_sess: :: read: 1, write: 1, in-init: 0
@@ -543,7 +543,7 @@ Predicate[535]:
     inst_by-greg_inst-nobody: :: read: 1, write: 1, in-init: 1
     inst_by-mandatory_update-nobody: :: read: 1, write: 1, in-init: 1
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[4564]:
     dms_enter_password-bob-yeti-secret_info-dmss1: 
         pre: (and (RW:dms_session_client-dmss1-yeti) (RW:dms_session_real_user-dmss1-bob) (RW:pmode-m_dms_know) (RW:knows-bob-secret_info) (RW:not-dms_established-dmss1))
@@ -13009,7 +13009,7 @@ Action[4564]:
         eff: (and (W:mandatory_step-adam) (N:RW:not-mandatory_step-adam) (increase (total-cost) 1))
     mandatory-bob: 
         pre: (and (RW:pmode-m_free) (RW:not-mandatory_step-bob))
-        eff: (and (W:mandatory_step-bob) (N:RW:not-mandatory_step-bob) (increase (total-cost) 1))
+        eff: (and (RW:mandatory_step-bob) (N:RW:not-mandatory_step-bob) (increase (total-cost) 1))
     mandatory-nobody: 
         pre: (and (RW:pmode-m_free) (RW:not-mandatory_step-nobody))
         eff: (and (W:mandatory_step-nobody) (N:RW:not-mandatory_step-nobody) (increase (total-cost) 1))
@@ -14283,5 +14283,5 @@ Init[43]:
   (inst_by-mandatory_update-nobody)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:mandatory_step-bob) (RW:knows-bob-secret_info))
+Goal: (and (RW:mandatory_step-bob) (RW:knows-bob-secret_info))
 Metric: (total-cost)

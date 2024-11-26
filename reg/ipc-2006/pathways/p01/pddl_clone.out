@@ -54,7 +54,7 @@ Predicate[11]:
     chosen: 3 :: read: 1, write: 1, in-init: 0, neg-of: NOT-chosen
     next: 1 1 :: read: 1, write: 0, in-init: 1
     num-subs: 1 :: read: 1, write: 1, in-init: 1
-    goal1: :: read: 0, write: 1, in-init: 0
+    goal1: :: read: 1, write: 1, in-init: 0
     NOT-chosen: 3 :: read: 1, write: 1, in-init: 1, neg-of: chosen
 Function[0]:
 Action[6]:
@@ -72,10 +72,10 @@ Action[6]:
         eff: (and (N:RW:available ?x1) (RW:available ?x3))
     dummy-action-1: 
         pre: (and (RW:available prbp1p2-ap2))
-        eff: (and (W:goal1))
+        eff: (and (RW:goal1))
     dummy-action-1: 
         pre: (and (RW:available pcaf-p300))
-        eff: (and (W:goal1))
+        eff: (and (RW:goal1))
 Init[48]:
   S:(association-reaction sp1 e2f13 sp1-e2f13)
   S:(association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
@@ -126,5 +126,5 @@ Init[48]:
   (NOT-chosen cdc25c)
   (NOT-chosen ap2)
 Init[0]:
-Goal: (W:goal1)
+Goal: (RW:goal1)
 Metric: no-metric

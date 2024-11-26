@@ -49,7 +49,7 @@ Predicate[6]:
     move-ended: :: read: 1, write: 1, in-init: 1
     last-visited: 1 :: read: 1, write: 1, in-init: 0
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[3]:
     jump-new-move: ?from:1 ?over:1 ?to:1
         pre: (and (R:in-line ?from ?over ?to) (RW:occupied ?from) (RW:occupied ?over) (RW:free ?to) (RW:move-ended))

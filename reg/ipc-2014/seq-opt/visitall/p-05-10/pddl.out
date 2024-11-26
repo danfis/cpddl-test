@@ -112,12 +112,12 @@ Predicate[4]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     connected: 1 1 :: read: 1, write: 0, in-init: 1
     at-robot: 1 :: read: 1, write: 1, in-init: 1
-    visited: 1 :: read: 0, write: 1, in-init: 1
+    visited: 1 :: read: 1, write: 1, in-init: 1
 Function[0]:
 Action[1]:
     move: ?curpos:1 ?nextpos:1
         pre: (and (R:connected ?curpos ?nextpos) (RW:at-robot ?curpos))
-        eff: (and (N:RW:at-robot ?curpos) (RW:at-robot ?nextpos) (W:visited ?nextpos))
+        eff: (and (N:RW:at-robot ?curpos) (RW:at-robot ?nextpos) (RW:visited ?nextpos))
 Init[362]:
   S:(connected loc-x0-y0 loc-x0-y1)
   S:(connected loc-x0-y0 loc-x1-y0)
@@ -482,5 +482,5 @@ Init[362]:
   (at-robot loc-x5-y5)
   (visited loc-x5-y5)
 Init[0]:
-Goal: (and (W:visited loc-x0-y2) (W:visited loc-x0-y4) (W:visited loc-x0-y6) (W:visited loc-x0-y7) (W:visited loc-x0-y9) (W:visited loc-x1-y0) (W:visited loc-x1-y1) (W:visited loc-x1-y2) (W:visited loc-x1-y8) (W:visited loc-x2-y0) (W:visited loc-x2-y1) (W:visited loc-x2-y2) (W:visited loc-x2-y3) (W:visited loc-x2-y4) (W:visited loc-x2-y8) (W:visited loc-x2-y9) (W:visited loc-x3-y0) (W:visited loc-x3-y1) (W:visited loc-x3-y2) (W:visited loc-x3-y3) (W:visited loc-x3-y5) (W:visited loc-x3-y7) (W:visited loc-x4-y0) (W:visited loc-x4-y1) (W:visited loc-x4-y2) (W:visited loc-x4-y5) (W:visited loc-x4-y8) (W:visited loc-x4-y9) (W:visited loc-x5-y5) (W:visited loc-x5-y6) (W:visited loc-x5-y8) (W:visited loc-x5-y9) (W:visited loc-x6-y5) (W:visited loc-x6-y6) (W:visited loc-x6-y7) (W:visited loc-x6-y8) (W:visited loc-x6-y9) (W:visited loc-x7-y2) (W:visited loc-x7-y4) (W:visited loc-x7-y9) (W:visited loc-x8-y2) (W:visited loc-x8-y9) (W:visited loc-x9-y3) (W:visited loc-x9-y5) (W:visited loc-x9-y6) (W:visited loc-x9-y7))
+Goal: (and (RW:visited loc-x0-y2) (RW:visited loc-x0-y4) (RW:visited loc-x0-y6) (RW:visited loc-x0-y7) (RW:visited loc-x0-y9) (RW:visited loc-x1-y0) (RW:visited loc-x1-y1) (RW:visited loc-x1-y2) (RW:visited loc-x1-y8) (RW:visited loc-x2-y0) (RW:visited loc-x2-y1) (RW:visited loc-x2-y2) (RW:visited loc-x2-y3) (RW:visited loc-x2-y4) (RW:visited loc-x2-y8) (RW:visited loc-x2-y9) (RW:visited loc-x3-y0) (RW:visited loc-x3-y1) (RW:visited loc-x3-y2) (RW:visited loc-x3-y3) (RW:visited loc-x3-y5) (RW:visited loc-x3-y7) (RW:visited loc-x4-y0) (RW:visited loc-x4-y1) (RW:visited loc-x4-y2) (RW:visited loc-x4-y5) (RW:visited loc-x4-y8) (RW:visited loc-x4-y9) (RW:visited loc-x5-y5) (RW:visited loc-x5-y6) (RW:visited loc-x5-y8) (RW:visited loc-x5-y9) (RW:visited loc-x6-y5) (RW:visited loc-x6-y6) (RW:visited loc-x6-y7) (RW:visited loc-x6-y8) (RW:visited loc-x6-y9) (RW:visited loc-x7-y2) (RW:visited loc-x7-y4) (RW:visited loc-x7-y9) (RW:visited loc-x8-y2) (RW:visited loc-x8-y9) (RW:visited loc-x9-y3) (RW:visited loc-x9-y5) (RW:visited loc-x9-y6) (RW:visited loc-x9-y7))
 Metric: no-metric

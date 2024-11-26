@@ -65,7 +65,7 @@ Predicate[28]:
     NOT-currently-updating-movable: :: read: 1, write: 1, in-init: 1, neg-of: currently-updating-movable
     NOT-currently-updating-part-of-tableau: :: read: 1, write: 1, in-init: 1, neg-of: currently-updating-part-of-tableau
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[16]:
     start-dealing: 
         pre: (and (RW:NOT-currently-dealing) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))

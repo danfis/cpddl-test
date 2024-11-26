@@ -57,8 +57,8 @@ Predicate[11]:
     time-now: 2 :: read: 1, write: 1, in-init: 1
     next: 2 2 :: read: 1, write: 0, in-init: 1
     le: 2 2 :: read: 1, write: 0, in-init: 1
-    delivered: 6 3 2 :: read: 0, write: 1, in-init: 0
-    at-destination: 6 3 :: read: 0, write: 1, in-init: 0
+    delivered: 6 3 2 :: read: 1, write: 1, in-init: 0
+    at-destination: 6 3 :: read: 1, write: 1, in-init: 0
     closer: 1 1 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[4]:
@@ -73,7 +73,7 @@ Action[4]:
         eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to) (N:RW:time-now ?t1) (RW:time-now ?t2))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (R:le ?t1 ?t2) (RW:at ?p ?l) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+        eff: (and (N:RW:at ?p ?l) (RW:delivered ?p ?l ?t2) (RW:at-destination ?p ?l))
 Init[119]:
   S:(connected l1 l2)
   S:(connected l1 l3)
@@ -195,5 +195,5 @@ Init[119]:
   (free a3 truck1)
   (time-now t0)
 Init[0]:
-Goal: (and (W:delivered package1 l4 t4) (W:delivered package2 l3 t4) (W:delivered package6 l1 t8) (W:delivered package8 l3 t12) (W:delivered package9 l3 t12) (W:at-destination package3 l1) (W:at-destination package4 l1) (W:at-destination package5 l1) (W:at-destination package7 l1))
+Goal: (and (RW:delivered package1 l4 t4) (RW:delivered package2 l3 t4) (RW:delivered package6 l1 t8) (RW:delivered package8 l3 t12) (RW:delivered package9 l3 t12) (RW:at-destination package3 l1) (RW:at-destination package4 l1) (RW:at-destination package5 l1) (RW:at-destination package7 l1))
 Metric: no-metric

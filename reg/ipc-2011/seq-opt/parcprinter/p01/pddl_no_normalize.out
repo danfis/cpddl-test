@@ -55,9 +55,9 @@ Predicate[12]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     sheetsize: 7 1 :: read: 1, write: 0, in-init: 1
     location: 7 2 :: read: 1, write: 1, in-init: 1
-    hasimage: 7 3 5 :: read: 0, write: 1, in-init: 0
+    hasimage: 7 3 5 :: read: 1, write: 1, in-init: 0
     sideup: 7 3 :: read: 1, write: 1, in-init: 0
-    stackedin: 7 2 :: read: 0, write: 1, in-init: 0
+    stackedin: 7 2 :: read: 1, write: 1, in-init: 0
     imagecolor: 5 4 :: read: 1, write: 0, in-init: 1
     notprintedwith: 7 3 4 :: read: 1, write: 1, in-init: 1
     oppositeside: 3 3 :: read: 1, write: 0, in-init: 1
@@ -65,7 +65,7 @@ Predicate[12]:
     prevsheet: 7 7 :: read: 1, write: 0, in-init: 1
     uninitialized: :: read: 1, write: 1, in-init: 1
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[23]:
     initialize: 
         pre: (and (RW:uninitialized))
@@ -114,7 +114,7 @@ Action[23]:
         eff: (and (RW:location ?sheet hw1_toprightentry-uc1_exit) (N:RW:location ?sheet uime_exit-uc1_entryfromime) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available uc1-rsrc) (N:RW:available uc1-rsrc) (increase (total-cost) 8000))
     uime-simplex-letter: ?sheet:7 ?face:3 ?image:5
         pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc))
-        eff: (and (N:RW:location ?sheet uc1_exittoime-uime_entry) (RW:location ?sheet uime_exit-uc1_entryfromime) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (N:RW:available uime-rsrc) (increase (total-cost) 127790))
+        eff: (and (N:RW:location ?sheet uc1_exittoime-uime_entry) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc) (N:RW:available uime-rsrc) (increase (total-cost) 127790))
     lc1-toime-letter: ?sheet:7
         pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:available lc1-rsrc))
         eff: (and (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:available lc1-rsrc) (N:RW:available lc1-rsrc) (increase (total-cost) 4999))
@@ -129,13 +129,13 @@ Action[23]:
         eff: (and (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (N:RW:location ?sheet lc1_entryfromime-lime_exit) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available lc1-rsrc) (N:RW:available lc1-rsrc) (increase (total-cost) 9999))
     lime-simplex-letter: ?sheet:7 ?face:3 ?image:5
         pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc))
-        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (N:RW:available lime-rsrc) (increase (total-cost) 212790))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc) (N:RW:available lime-rsrc) (increase (total-cost) 212790))
     lime-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
         pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc))
-        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (W:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (N:RW:available lime-rsrc) (increase (total-cost) 212790))
+        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc) (N:RW:available lime-rsrc) (increase (total-cost) 212790))
     sys-stack-letter: ?sheet:7 ?prevsheet:7
         pre: (and (R:sheetsize ?sheet letter) (R:prevsheet ?sheet ?prevsheet) (RW:location ?sheet hw1_rightexit-sys_entry) (RW:location ?prevsheet some_finisher_tray) (RW:available sys-rsrc))
-        eff: (and (RW:location ?sheet some_finisher_tray) (N:RW:location ?sheet hw1_rightexit-sys_entry) (W:stackedin ?sheet sys_outputtray) (RW:available sys-rsrc) (N:RW:available sys-rsrc) (increase (total-cost) 1499))
+        eff: (and (RW:location ?sheet some_finisher_tray) (N:RW:location ?sheet hw1_rightexit-sys_entry) (RW:stackedin ?sheet sys_outputtray) (RW:available sys-rsrc) (N:RW:available sys-rsrc) (increase (total-cost) 1499))
 Init[20]:
   S:(sheetsize sheet1 letter)
   S:(sheetsize sheet2 letter)
@@ -159,5 +159,5 @@ Init[20]:
   (uninitialized)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:hasimage sheet1 front image-1) (W:hasimage sheet2 front image-2) (RW:sideup sheet1 front) (RW:sideup sheet2 front) (W:stackedin sheet1 sys_outputtray) (W:stackedin sheet2 sys_outputtray) (RW:notprintedwith sheet1 front black) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (RW:notprintedwith sheet2 front color) (RW:notprintedwith sheet2 back black) (RW:notprintedwith sheet2 back color))
+Goal: (and (RW:hasimage sheet1 front image-1) (RW:hasimage sheet2 front image-2) (RW:sideup sheet1 front) (RW:sideup sheet2 front) (RW:stackedin sheet1 sys_outputtray) (RW:stackedin sheet2 sys_outputtray) (RW:notprintedwith sheet1 front black) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (RW:notprintedwith sheet2 front color) (RW:notprintedwith sheet2 back black) (RW:notprintedwith sheet2 back color))
 Metric: (total-cost)

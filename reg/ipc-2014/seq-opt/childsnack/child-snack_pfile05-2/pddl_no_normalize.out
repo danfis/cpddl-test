@@ -79,7 +79,7 @@ Predicate[14]:
     no_gluten_sandwich: 4 :: read: 1, write: 1, in-init: 0
     allergic_gluten: 1 :: read: 1, write: 0, in-init: 1
     not_allergic_gluten: 1 :: read: 1, write: 0, in-init: 1
-    served: 1 :: read: 0, write: 1, in-init: 0
+    served: 1 :: read: 1, write: 1, in-init: 0
     waiting: 1 6 :: read: 1, write: 0, in-init: 1
     at: 5 6 :: read: 1, write: 1, in-init: 1
     notexist: 4 :: read: 1, write: 1, in-init: 1
@@ -96,10 +96,10 @@ Action[6]:
         eff: (and (N:RW:at_kitchen_sandwich ?s) (RW:ontray ?s ?t))
     serve_sandwich_no_gluten: ?s:4 ?c:1 ?t:5 ?p:6
         pre: (and (R:allergic_gluten ?c) (R:waiting ?c ?p) (RW:ontray ?s ?t) (RW:no_gluten_sandwich ?s) (RW:at ?t ?p))
-        eff: (and (N:RW:ontray ?s ?t) (W:served ?c))
+        eff: (and (N:RW:ontray ?s ?t) (RW:served ?c))
     serve_sandwich: ?s:4 ?c:1 ?t:5 ?p:6
         pre: (and (R:not_allergic_gluten ?c) (R:waiting ?c ?p) (RW:ontray ?s ?t) (RW:at ?t ?p))
-        eff: (and (N:RW:ontray ?s ?t) (W:served ?c))
+        eff: (and (N:RW:ontray ?s ?t) (RW:served ?c))
     move_tray: ?t:5 ?p1:6 ?p2:6
         pre: (and (RW:at ?t ?p1))
         eff: (and (N:RW:at ?t ?p1) (RW:at ?t ?p2))
@@ -169,5 +169,5 @@ Init[64]:
   (notexist sandw12)
   (notexist sandw13)
 Init[0]:
-Goal: (and (W:served child1) (W:served child2) (W:served child3) (W:served child4) (W:served child5) (W:served child6) (W:served child7) (W:served child8) (W:served child9) (W:served child10))
+Goal: (and (RW:served child1) (RW:served child2) (RW:served child3) (RW:served child4) (RW:served child5) (RW:served child6) (RW:served child7) (RW:served child8) (RW:served child9) (RW:served child10))
 Metric: no-metric

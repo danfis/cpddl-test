@@ -47,7 +47,7 @@ Predicate[9]:
     above: 2 2 :: read: 1, write: 0, in-init: 1
     boarded: 1 :: read: 1, write: 1, in-init: 0
     not-boarded: 1 :: read: 0, write: 0, in-init: 0
-    served: 1 :: read: 0, write: 1, in-init: 0
+    served: 1 :: read: 1, write: 1, in-init: 0
     not-served: 1 :: read: 0, write: 0, in-init: 0
     lift-at: 2 :: read: 1, write: 1, in-init: 1
 Function[0]:
@@ -57,7 +57,7 @@ Action[4]:
         eff: (RW:boarded ?p)
     depart: ?f:2 ?p:1
         pre: (and (R:destin ?p ?f) (RW:boarded ?p) (RW:lift-at ?f))
-        eff: (and (N:RW:boarded ?p) (W:served ?p))
+        eff: (and (N:RW:boarded ?p) (RW:served ?p))
     up: ?f1:2 ?f2:2
         pre: (and (R:above ?f1 ?f2) (RW:lift-at ?f1))
         eff: (and (N:RW:lift-at ?f1) (RW:lift-at ?f2))
@@ -277,5 +277,5 @@ Init[211]:
   S:(above f18 f19)
   (lift-at f0)
 Init[0]:
-Goal: (and (W:served p0) (W:served p1) (W:served p2) (W:served p3) (W:served p4) (W:served p5) (W:served p6) (W:served p7) (W:served p8) (W:served p9))
+Goal: (and (RW:served p0) (RW:served p1) (RW:served p2) (RW:served p3) (RW:served p4) (RW:served p5) (RW:served p6) (RW:served p7) (RW:served p8) (RW:served p9))
 Metric: no-metric

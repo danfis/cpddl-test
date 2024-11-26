@@ -27,7 +27,7 @@ Predicate[15]:
     accepts: 0 0 :: read: 1, write: 0, in-init: 1
     contains: 0 0 :: read: 1, write: 1, in-init: 0
     antibiotic: 0 :: read: 1, write: 0, in-init: 1
-    pure: 0 :: read: 0, write: 1, in-init: 0
+    pure: 0 :: read: 1, write: 1, in-init: 0
     resists: 0 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[8]:
@@ -54,7 +54,7 @@ Action[8]:
         eff: (and (N:RW:cleavable ?x) (RW:contains ?x ?y))
     screen: ?x:0 ?y:0 ?z:0
         pre: (and (N:R:= ?x ?y) (N:R:= ?x ?z) (N:R:= ?y ?z) (R:bacterium ?x) (R:antibiotic ?z) (R:resists ?z ?y) (RW:contains ?y ?x))
-        eff: (and (W:pure ?x))
+        eff: (and (RW:pure ?x))
 Init[13]:
   S:(mrna insulin-gene)
   S:(molecule linker)
@@ -70,5 +70,5 @@ Init[13]:
   (cleavable e-coli-exosome)
   (cleavable junk-exosome)
 Init[0]:
-Goal: (and (RW:contains insulin-gene e-coli-exosome) (RW:contains e-coli-exosome e-coli) (W:pure e-coli))
+Goal: (and (RW:contains insulin-gene e-coli-exosome) (RW:contains e-coli-exosome e-coli) (RW:pure e-coli))
 Metric: no-metric

@@ -78,15 +78,15 @@ Obj[70]:
     [69]: k1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[15]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    movie-rewound: :: read: 0, write: 1, in-init: 0
+    movie-rewound: :: read: 1, write: 1, in-init: 0
     counter-at-two-hours: :: read: 1, write: 0, in-init: 0
     counter-at-other-than-two-hours: :: read: 1, write: 0, in-init: 1
-    counter-at-zero: :: read: 0, write: 1, in-init: 0
-    have-chips: :: read: 0, write: 1, in-init: 0
-    have-dip: :: read: 0, write: 1, in-init: 0
-    have-pop: :: read: 0, write: 1, in-init: 0
-    have-cheese: :: read: 0, write: 1, in-init: 0
-    have-crackers: :: read: 0, write: 1, in-init: 0
+    counter-at-zero: :: read: 1, write: 1, in-init: 0
+    have-chips: :: read: 1, write: 1, in-init: 0
+    have-dip: :: read: 1, write: 1, in-init: 0
+    have-pop: :: read: 1, write: 1, in-init: 0
+    have-cheese: :: read: 1, write: 1, in-init: 0
+    have-crackers: :: read: 1, write: 1, in-init: 0
     chips: 0 :: read: 1, write: 0, in-init: 1
     dip: 0 :: read: 1, write: 0, in-init: 1
     pop: 0 :: read: 1, write: 0, in-init: 1
@@ -96,28 +96,28 @@ Function[0]:
 Action[8]:
     rewind-movie-2: 
         pre: (R:counter-at-two-hours)
-        eff: (W:movie-rewound)
+        eff: (RW:movie-rewound)
     rewind-movie: 
         pre: (R:counter-at-other-than-two-hours)
-        eff: (and (W:movie-rewound) (N:W:counter-at-zero))
+        eff: (and (RW:movie-rewound) (N:RW:counter-at-zero))
     reset-counter: 
         pre: (and)
-        eff: (W:counter-at-zero)
+        eff: (RW:counter-at-zero)
     get-chips: ?x:0
         pre: (R:chips ?x)
-        eff: (W:have-chips)
+        eff: (RW:have-chips)
     get-dip: ?x:0
         pre: (R:dip ?x)
-        eff: (W:have-dip)
+        eff: (RW:have-dip)
     get-pop: ?x:0
         pre: (R:pop ?x)
-        eff: (W:have-pop)
+        eff: (RW:have-pop)
     get-cheese: ?x:0
         pre: (R:cheese ?x)
-        eff: (W:have-cheese)
+        eff: (RW:have-cheese)
     get-crackers: ?x:0
         pre: (R:crackers ?x)
-        eff: (W:have-crackers)
+        eff: (RW:have-crackers)
 Init[71]:
   S:(counter-at-other-than-two-hours)
   S:(chips c14)
@@ -191,5 +191,5 @@ Init[71]:
   S:(crackers k2)
   S:(crackers k1)
 Init[0]:
-Goal: (and (W:movie-rewound) (W:counter-at-zero) (W:have-chips) (W:have-dip) (W:have-pop) (W:have-cheese) (W:have-crackers))
+Goal: (and (RW:movie-rewound) (RW:counter-at-zero) (RW:have-chips) (RW:have-dip) (RW:have-pop) (RW:have-cheese) (RW:have-crackers))
 Metric: no-metric

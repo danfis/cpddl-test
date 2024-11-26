@@ -36,23 +36,23 @@ Predicate[12]:
     right: 2 2 :: read: 1, write: 0, in-init: 1
     left: 2 2 :: read: 1, write: 0, in-init: 1
     clear: 2 :: read: 1, write: 1, in-init: 1
-    painted: 2 3 :: read: 0, write: 1, in-init: 0
+    painted: 2 3 :: read: 1, write: 1, in-init: 0
     robot-has: 1 3 :: read: 1, write: 1, in-init: 1
     available-color: 3 :: read: 1, write: 0, in-init: 1
     free-color: 1 :: read: 0, write: 0, in-init: 0
     equal: 0 0 :: read: 1, write: 0, in-init: 1
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[11]:
     change-color: ?r:1 ?c:3 ?c2:3
         pre: (and (R:available-color ?c2) (RW:robot-has ?r ?c))
         eff: (and (N:RW:robot-has ?r ?c) (RW:robot-has ?r ?c2) (increase (total-cost) 5))
     paint-up: ?r:1 ?y:2 ?x:2 ?c:3
         pre: (and (R:up ?y ?x) (N:R:equal ?y tile_1-2) (N:R:equal ?y tile_2-1) (N:R:equal ?y tile_2-3) (N:R:equal ?y tile_3-2) (N:R:equal ?y ?x) (R:equal ?c white) (RW:robot-at ?r ?x) (RW:clear ?y) (RW:robot-has ?r white))
-        eff: (and (N:RW:clear ?y) (W:painted ?y white) (increase (total-cost) 2))
+        eff: (and (N:RW:clear ?y) (RW:painted ?y white) (increase (total-cost) 2))
     paint-down: ?r:1 ?y:2 ?x:2 ?c:3
         pre: (and (R:down ?y ?x) (N:R:equal ?y tile_1-2) (N:R:equal ?y tile_2-1) (N:R:equal ?y tile_2-3) (N:R:equal ?y tile_3-2) (N:R:equal ?y ?x) (R:equal ?c white) (RW:robot-at ?r ?x) (RW:clear ?y) (RW:robot-has ?r white))
-        eff: (and (N:RW:clear ?y) (W:painted ?y white) (increase (total-cost) 2))
+        eff: (and (N:RW:clear ?y) (RW:painted ?y white) (increase (total-cost) 2))
     up: ?r:1 ?x:2 ?y:2
         pre: (and (R:up ?y ?x) (N:R:equal ?x ?y) (RW:robot-at ?r ?x) (RW:clear ?y))
         eff: (and (N:RW:robot-at ?r ?x) (RW:robot-at ?r ?y) (RW:clear ?x) (N:RW:clear ?y) (increase (total-cost) 3))
@@ -67,16 +67,16 @@ Action[11]:
         eff: (and (N:RW:robot-at ?r ?x) (RW:robot-at ?r ?y) (RW:clear ?x) (N:RW:clear ?y) (increase (total-cost) 1))
     paint-up: ?r:1 ?y:2 ?x:2 ?c:3
         pre: (and (R:up ?y ?x) (N:R:equal ?y tile_1-1) (N:R:equal ?y tile_1-3) (N:R:equal ?y tile_2-2) (N:R:equal ?y tile_3-1) (N:R:equal ?y tile_3-3) (N:R:equal ?y ?x) (R:equal ?c black) (RW:robot-at ?r ?x) (RW:clear ?y) (RW:robot-has ?r black))
-        eff: (and (N:RW:clear ?y) (W:painted ?y black) (increase (total-cost) 2))
+        eff: (and (N:RW:clear ?y) (RW:painted ?y black) (increase (total-cost) 2))
     paint-up: ?r:1 ?y:2 ?x:2 ?c:3
         pre: (and (R:up ?y ?x) (N:R:equal ?y tile_1-1) (N:R:equal ?y tile_1-2) (N:R:equal ?y tile_1-3) (N:R:equal ?y tile_2-1) (N:R:equal ?y tile_2-2) (N:R:equal ?y tile_2-3) (N:R:equal ?y tile_3-1) (N:R:equal ?y tile_3-2) (N:R:equal ?y tile_3-3) (N:R:equal ?y ?x) (RW:robot-at ?r ?x) (RW:clear ?y) (RW:robot-has ?r ?c))
-        eff: (and (N:RW:clear ?y) (W:painted ?y ?c) (increase (total-cost) 2))
+        eff: (and (N:RW:clear ?y) (RW:painted ?y ?c) (increase (total-cost) 2))
     paint-down: ?r:1 ?y:2 ?x:2 ?c:3
         pre: (and (R:down ?y ?x) (N:R:equal ?y tile_1-1) (N:R:equal ?y tile_1-3) (N:R:equal ?y tile_2-2) (N:R:equal ?y tile_3-1) (N:R:equal ?y tile_3-3) (N:R:equal ?y ?x) (R:equal ?c black) (RW:robot-at ?r ?x) (RW:clear ?y) (RW:robot-has ?r black))
-        eff: (and (N:RW:clear ?y) (W:painted ?y black) (increase (total-cost) 2))
+        eff: (and (N:RW:clear ?y) (RW:painted ?y black) (increase (total-cost) 2))
     paint-down: ?r:1 ?y:2 ?x:2 ?c:3
         pre: (and (R:down ?y ?x) (N:R:equal ?y tile_1-1) (N:R:equal ?y tile_1-2) (N:R:equal ?y tile_1-3) (N:R:equal ?y tile_2-1) (N:R:equal ?y tile_2-2) (N:R:equal ?y tile_2-3) (N:R:equal ?y tile_3-1) (N:R:equal ?y tile_3-2) (N:R:equal ?y tile_3-3) (N:R:equal ?y ?x) (RW:robot-at ?r ?x) (RW:clear ?y) (RW:robot-has ?r ?c))
-        eff: (and (N:RW:clear ?y) (W:painted ?y ?c) (increase (total-cost) 2))
+        eff: (and (N:RW:clear ?y) (RW:painted ?y ?c) (increase (total-cost) 2))
 Init[64]:
   S:(up tile_1-1 tile_0-1)
   S:(up tile_1-2 tile_0-2)
@@ -144,5 +144,5 @@ Init[64]:
   (robot-has robot2 black)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:painted tile_1-1 white) (W:painted tile_1-2 black) (W:painted tile_1-3 white) (W:painted tile_2-1 black) (W:painted tile_2-2 white) (W:painted tile_2-3 black) (W:painted tile_3-1 white) (W:painted tile_3-2 black) (W:painted tile_3-3 white))
+Goal: (and (RW:painted tile_1-1 white) (RW:painted tile_1-2 black) (RW:painted tile_1-3 white) (RW:painted tile_2-1 black) (RW:painted tile_2-2 white) (RW:painted tile_2-3 black) (RW:painted tile_3-1 white) (RW:painted tile_3-2 black) (RW:painted tile_3-3 white))
 Metric: (total-cost)

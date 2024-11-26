@@ -326,10 +326,10 @@ Predicate[13]:
     blocked: 2 1 :: read: 0, write: 1, in-init: 1
     not_blocked: 2 1 :: read: 1, write: 1, in-init: 1
     is-start-runway: 2 3 :: read: 0, write: 0, in-init: 0
-    airborne: 1 2 :: read: 0, write: 1, in-init: 0
+    airborne: 1 2 :: read: 1, write: 1, in-init: 0
     is-moving: 1 :: read: 1, write: 1, in-init: 1
     is-pushing: 1 :: read: 1, write: 1, in-init: 1
-    is-parked: 1 2 :: read: 0, write: 1, in-init: 0
+    is-parked: 1 2 :: read: 1, write: 1, in-init: 0
 Function[0]:
 Action[147]:
     move_seg_a01_0_100_seg_c3_c_a01_0_100_north_north_medium: ?a:1
@@ -523,10 +523,10 @@ Action[147]:
         eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_b02_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (W:occupied seg_c5_c6_0_50) (N:W:occupied seg_c5_c_b02_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (W:blocked seg_c5_c6_0_50 ?a) (N:W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a))
     takeoff_seg_27_0_150_north: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_27_0_150) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_27_0_150) (N:W:occupied seg_27_0_150) (RW:not_occupied seg_27_0_150) (N:W:blocked seg_27_0_150 ?a) (N:W:blocked seg_b_27_0_100 ?a) (RW:not_blocked seg_27_0_150 ?a) (RW:not_blocked seg_b_27_0_100 ?a) (W:airborne ?a seg_27_0_150) (N:RW:is-moving ?a))
+        eff: (and (N:RW:at-segment ?a seg_27_0_150) (N:W:occupied seg_27_0_150) (RW:not_occupied seg_27_0_150) (N:W:blocked seg_27_0_150 ?a) (N:W:blocked seg_b_27_0_100 ?a) (RW:not_blocked seg_27_0_150 ?a) (RW:not_blocked seg_b_27_0_100 ?a) (RW:airborne ?a seg_27_0_150) (N:RW:is-moving ?a))
     takeoff_seg_09_0_150_south: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_holgi) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_09_0_150) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_09_0_150) (N:W:occupied seg_09_0_150) (RW:not_occupied seg_09_0_150) (N:W:blocked seg_09_0_150 ?a) (N:W:blocked seg_a_09_0_100 ?a) (RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_a_09_0_100 ?a) (W:airborne ?a seg_09_0_150) (N:RW:is-moving ?a))
+        eff: (and (N:RW:at-segment ?a seg_09_0_150) (N:W:occupied seg_09_0_150) (RW:not_occupied seg_09_0_150) (N:W:blocked seg_09_0_150 ?a) (N:W:blocked seg_a_09_0_100 ?a) (RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_a_09_0_100 ?a) (RW:airborne ?a seg_09_0_150) (N:RW:is-moving ?a))
     startup_seg_a_09_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a_09_0_100) (RW:not_occupied seg_09help_0_100) (RW:not_occupied seg_09_0_150) (RW:is-pushing ?a))
         eff: (and (W:blocked seg_09help_0_100 ?a) (W:blocked seg_09_0_150 ?a) (N:RW:not_blocked seg_09help_0_100 ?a) (N:RW:not_blocked seg_09_0_150 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
@@ -667,10 +667,10 @@ Action[147]:
         eff: (and (W:blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_a01_0_100_north: ?a:1
         pre: (and (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_a01_0_100) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:is-moving ?a) (W:is-parked ?a seg_a01_0_100))
+        eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_a01_0_100))
     park_seg_a01_0_100_south: ?a:1
         pre: (and (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_a01_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:is-moving ?a) (W:is-parked ?a seg_a01_0_100))
+        eff: (and (N:W:blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_a01_0_100))
     startup_seg_a01_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a01_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
@@ -679,10 +679,10 @@ Action[147]:
         eff: (and (W:blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_a02_0_100_north: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_a02_0_100) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:is-moving ?a) (W:is-parked ?a seg_a02_0_100))
+        eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_a02_0_100))
     park_seg_a02_0_100_south: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_a02_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:is-moving ?a) (W:is-parked ?a seg_a02_0_100))
+        eff: (and (N:W:blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_a02_0_100))
     startup_seg_a02_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a02_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
@@ -691,10 +691,10 @@ Action[147]:
         eff: (and (W:blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_b01_0_100_north: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (RW:at-segment ?a seg_b01_0_100) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:is-moving ?a) (W:is-parked ?a seg_b01_0_100))
+        eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_b01_0_100))
     park_seg_b01_0_100_south: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_holgi) (RW:at-segment ?a seg_b01_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:is-moving ?a) (W:is-parked ?a seg_b01_0_100))
+        eff: (and (N:W:blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_b01_0_100))
     startup_seg_b01_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b01_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
@@ -703,10 +703,10 @@ Action[147]:
         eff: (and (W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_b02_0_100_north: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_b02_0_100) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:is-moving ?a) (W:is-parked ?a seg_b02_0_100))
+        eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_b02_0_100))
     park_seg_b02_0_100_south: ?a:1
         pre: (and (N:R:= ?a airplane_cfbeg) (N:R:= ?a airplane_daewh) (N:R:= ?a airplane_dfboy) (N:R:= ?a airplane_wurst) (N:R:= ?a airplane_horst) (N:R:= ?a airplane_4xekd) (RW:at-segment ?a seg_b02_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:is-moving ?a) (W:is-parked ?a seg_b02_0_100))
+        eff: (and (N:W:blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_b02_0_100))
     startup_seg_b02_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b02_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
@@ -1155,5 +1155,5 @@ Init[380]:
   (is-pushing airplane_wurst)
   (is-pushing airplane_horst)
 Init[0]:
-Goal: (and (W:airborne airplane_daewh seg_09_0_150) (W:airborne airplane_dfboy seg_09_0_150) (W:airborne airplane_wurst seg_09_0_150) (W:airborne airplane_horst seg_09_0_150) (W:is-parked airplane_cfbeg seg_a01_0_100) (W:is-parked airplane_holgi seg_b02_0_100) (W:is-parked airplane_4xekd seg_b01_0_100))
+Goal: (and (RW:airborne airplane_daewh seg_09_0_150) (RW:airborne airplane_dfboy seg_09_0_150) (RW:airborne airplane_wurst seg_09_0_150) (RW:airborne airplane_horst seg_09_0_150) (RW:is-parked airplane_cfbeg seg_a01_0_100) (RW:is-parked airplane_holgi seg_b02_0_100) (RW:is-parked airplane_4xekd seg_b01_0_100))
 Metric: no-metric

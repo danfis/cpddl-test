@@ -16,7 +16,7 @@ Function[4]:
     value: 1 :: read: 1, write: 1, in-init: 1
     rate_value: 1 :: read: 1, write: 1, in-init: 1
     max_int: :: read: 1, write: 0, in-init: 1
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[4]:
     increment: ?c:1
         pre: (and (<= (+ (value ?c) (rate_value ?c)) (max_int)))

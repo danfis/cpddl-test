@@ -34,9 +34,9 @@ Function[12]:
     x: 1 :: read: 1, write: 1, in-init: 1
     y: 1 :: read: 1, write: 1, in-init: 1
     carrying: 2 :: read: 1, write: 1, in-init: 1
-    poured: 3 :: read: 0, write: 1, in-init: 1
-    total_poured: :: read: 0, write: 1, in-init: 1
-    total_loaded: :: read: 0, write: 1, in-init: 1
+    poured: 3 :: read: 1, write: 1, in-init: 1
+    total_poured: :: read: 1, write: 1, in-init: 1
+    total_loaded: :: read: 1, write: 1, in-init: 1
 Action[10]:
     move_up: ?a:2
         pre: (and (<= (+ (y ?a) 1) (maxy)))

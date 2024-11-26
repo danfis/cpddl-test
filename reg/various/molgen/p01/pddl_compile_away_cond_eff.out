@@ -27,7 +27,7 @@ Predicate[16]:
     accepts: 0 0 :: read: 1, write: 0, in-init: 1
     contains: 0 0 :: read: 1, write: 1, in-init: 0
     antibiotic: 0 :: read: 1, write: 0, in-init: 1
-    pure: 0 :: read: 0, write: 1, in-init: 0
+    pure: 0 :: read: 1, write: 1, in-init: 0
     resists: 0 0 :: read: 1, write: 0, in-init: 1
     NOT-double-strand: 0 :: read: 1, write: 1, in-init: 1, neg-of: double-strand
 Function[0]:
@@ -52,7 +52,7 @@ Action[10]:
         eff: (and (N:RW:cleavable ?x) (RW:contains ?x ?y))
     screen: ?x:0 ?y:0 ?z:0
         pre: (and (N:R:= ?x ?y) (N:R:= ?x ?z) (N:R:= ?y ?z) (R:bacterium ?x) (R:antibiotic ?z) (R:resists ?z ?y) (RW:contains ?y ?x))
-        eff: (and (W:pure ?x))
+        eff: (and (RW:pure ?x))
     ligate: ?x:0 ?y:0
         pre: (and (R:= ?x linker) (N:R:= ?y linker) (RW:double-strand ?y))
         eff: (and (RW:cleavable ?y))
@@ -84,5 +84,5 @@ Init[20]:
   (NOT-double-strand junk)
   (NOT-double-strand antibiotic-1)
 Init[0]:
-Goal: (and (RW:contains insulin-gene e-coli-exosome) (RW:contains e-coli-exosome e-coli) (W:pure e-coli))
+Goal: (and (RW:contains insulin-gene e-coli-exosome) (RW:contains e-coli-exosome e-coli) (RW:pure e-coli))
 Metric: no-metric

@@ -168,7 +168,7 @@ Predicate[163]:
     not_at_end_constraint1: :: read: 1, write: 1, in-init: 1
     achieved_constraint1: :: read: 1, write: 1, in-init: 0
     not_at_end_constraint2: :: read: 1, write: 1, in-init: 1
-    achieved_constraint2: :: read: 0, write: 1, in-init: 0
+    achieved_constraint2: :: read: 1, write: 1, in-init: 0
     static-true: :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[94]:
@@ -450,10 +450,10 @@ Action[94]:
         eff: (and (N:RW:not_at_end_constraint1) (RW:achieved_constraint1))
     set_goal_1_constraint2: 
         pre: (and (RW:observed_obs1410) (RW:observed_obs1407) (RW:dominates-2_hyp1_count-as-fault_breaker_x17_x18) (RW:observed_obs1412) (RW:observed_obs1415) (RW:observed_obs1416) (RW:observed_obs1405) (RW:observed_obs1414) (RW:observed_obs1406) (RW:observed_obs1398) (RW:observed_obs1417) (RW:observed_obs1401) (RW:observed_obs1402) (RW:observed_obs1411) (RW:observed_obs1408) (RW:observed_obs1403) (RW:observed_obs1404) (RW:observed_obs1400) (RW:observed_obs1413) (RW:observed_obs1399) (RW:observed_obs1409) (RW:achieved_constraint0) (RW:achieved_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:not_at_end_constraint2) (W:achieved_constraint2))
+        eff: (and (N:RW:not_at_end_constraint2) (RW:achieved_constraint2))
     set_goal_5_constraint2: 
         pre: (and (RW:observed_obs1410) (RW:observed_obs1407) (RW:observed_obs1412) (RW:observed_obs1415) (RW:observed_obs1416) (RW:observed_obs1405) (RW:observed_obs1414) (RW:observed_obs1406) (RW:observed_obs1398) (RW:observed_obs1417) (RW:observed_obs1401) (RW:observed_obs1402) (RW:observed_obs1411) (RW:observed_obs1408) (RW:observed_obs1403) (RW:observed_obs1404) (RW:observed_obs1400) (RW:observed_obs1413) (RW:dominates-2_hyp1_count-as-fault_line_x13_x14) (RW:observed_obs1399) (RW:observed_obs1409) (RW:achieved_constraint0) (RW:achieved_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:not_at_end_constraint2) (W:achieved_constraint2))
+        eff: (and (N:RW:not_at_end_constraint2) (RW:achieved_constraint2))
 Init[69]:
   S:(static-true)
   (breaker-state-is-unknown_breaker_x5_x6)
@@ -525,5 +525,5 @@ Init[69]:
   (not_at_end_constraint1)
   (not_at_end_constraint2)
 Init[0]:
-Goal: (and (RW:observed_obs1410) (RW:observed_obs1407) (RW:observed_obs1412) (RW:observed_obs1415) (RW:observed_obs1416) (RW:observed_obs1405) (RW:observed_obs1414) (RW:observed_obs1406) (RW:observed_obs1398) (RW:observed_obs1417) (RW:observed_obs1401) (RW:observed_obs1402) (RW:observed_obs1411) (RW:observed_obs1408) (RW:observed_obs1403) (RW:observed_obs1404) (RW:observed_obs1400) (RW:observed_obs1413) (RW:observed_obs1399) (RW:observed_obs1409) (RW:achieved_constraint0) (RW:achieved_constraint1) (W:achieved_constraint2))
+Goal: (and (RW:observed_obs1410) (RW:observed_obs1407) (RW:observed_obs1412) (RW:observed_obs1415) (RW:observed_obs1416) (RW:observed_obs1405) (RW:observed_obs1414) (RW:observed_obs1406) (RW:observed_obs1398) (RW:observed_obs1417) (RW:observed_obs1401) (RW:observed_obs1402) (RW:observed_obs1411) (RW:observed_obs1408) (RW:observed_obs1403) (RW:observed_obs1404) (RW:observed_obs1400) (RW:observed_obs1413) (RW:observed_obs1399) (RW:observed_obs1409) (RW:achieved_constraint0) (RW:achieved_constraint1) (RW:achieved_constraint2))
 Metric: no-metric

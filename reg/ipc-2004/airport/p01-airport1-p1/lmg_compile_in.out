@@ -66,6 +66,8 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: Detected unreachable action: 15:takeoff_seg_rww_0_50_north
+Compile-in LMG: PDDL-Norm: Detected unreachable action: 16:takeoff_seg_rwe_0_50_south
 Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 23, predicates: 13, functions: 0, actions: 37, action-pre-size: [min: 3, max: 6, avg: 4.46, med: 3.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 37
@@ -122,7 +124,7 @@ Predicate[13]:
     airborne: 1 2 :: read: 0, write: 0, in-init: 0
     is-moving: 1 :: read: 1, write: 1, in-init: 1
     is-pushing: 1 :: read: 1, write: 1, in-init: 0
-    is-parked: 1 2 :: read: 0, write: 1, in-init: 0
+    is-parked: 1 2 :: read: 1, write: 1, in-init: 0
 Function[0]:
 Action[37]:
     move_seg_pp_0_60_seg_ppdoor_0_40_north_north_medium: ?a:1
@@ -172,10 +174,10 @@ Action[37]:
         eff: (and (RW:at-segment ?a seg_pp_0_60) (N:RW:at-segment ?a seg_ppdoor_0_40) (W:occupied seg_pp_0_60) (N:W:occupied seg_ppdoor_0_40) (N:RW:not_occupied seg_pp_0_60) (RW:not_occupied seg_ppdoor_0_40) (W:blocked seg_pp_0_60 ?a) (N:W:blocked seg_tww1_0_200 ?a) (N:W:blocked seg_twe1_0_200 ?a) (N:RW:not_blocked seg_pp_0_60 ?a) (RW:not_blocked seg_tww1_0_200 ?a) (RW:not_blocked seg_twe1_0_200 ?a))
     park_seg_pp_0_60_north: ?a:1
         pre: (and (RW:at-segment ?a seg_pp_0_60) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:is-moving ?a) (W:is-parked ?a seg_pp_0_60))
+        eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_pp_0_60))
     park_seg_pp_0_60_south: ?a:1
         pre: (and (RW:at-segment ?a seg_pp_0_60) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_ppdoor_0_40 ?a) (RW:not_blocked seg_ppdoor_0_40 ?a) (N:RW:is-moving ?a) (W:is-parked ?a seg_pp_0_60))
+        eff: (and (N:W:blocked seg_ppdoor_0_40 ?a) (RW:not_blocked seg_ppdoor_0_40 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_pp_0_60))
     startup_seg_pp_0_60_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_pp_0_60) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
@@ -276,5 +278,5 @@ Init[38]:
   (not_blocked seg_rwtw2_0_10 airplane_cfbeg)
   (is-moving airplane_cfbeg)
 Init[0]:
-Goal: (W:is-parked airplane_cfbeg seg_pp_0_60)
+Goal: (RW:is-parked airplane_cfbeg seg_pp_0_60)
 Metric: no-metric

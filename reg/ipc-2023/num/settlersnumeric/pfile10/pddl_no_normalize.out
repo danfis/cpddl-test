@@ -60,10 +60,10 @@ Function[7]:
     available: 4 1 :: read: 1, write: 1, in-init: 1
     space-in: 3 :: read: 1, write: 1, in-init: 0
     carts-at: 2 :: read: 1, write: 1, in-init: 1
-    labour: :: read: 0, write: 1, in-init: 1
-    resource-use: :: read: 0, write: 1, in-init: 1
-    pollution: :: read: 0, write: 1, in-init: 1
-    housing: 2 :: read: 0, write: 1, in-init: 1
+    labour: :: read: 1, write: 1, in-init: 1
+    resource-use: :: read: 1, write: 1, in-init: 1
+    pollution: :: read: 1, write: 1, in-init: 1
+    housing: 2 :: read: 1, write: 1, in-init: 1
 Action[25]:
     load: ?v:3 ?p:2 ?r:4
         pre: (and (RW:is-at ?v ?p) (> (available ?r ?p) 0) (> (space-in ?v) 0))

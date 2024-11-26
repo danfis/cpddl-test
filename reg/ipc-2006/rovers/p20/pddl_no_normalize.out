@@ -97,9 +97,9 @@ Predicate[26]:
     available: 1 :: read: 1, write: 1, in-init: 1
     visible: 2 2 :: read: 1, write: 0, in-init: 1
     have_image: 1 7 5 :: read: 1, write: 1, in-init: 0
-    communicated_soil_data: 2 :: read: 0, write: 1, in-init: 0
-    communicated_rock_data: 2 :: read: 0, write: 1, in-init: 0
-    communicated_image_data: 7 5 :: read: 0, write: 1, in-init: 0
+    communicated_soil_data: 2 :: read: 1, write: 1, in-init: 0
+    communicated_rock_data: 2 :: read: 1, write: 1, in-init: 0
+    communicated_image_data: 7 5 :: read: 1, write: 1, in-init: 0
     at_soil_sample: 2 :: read: 1, write: 1, in-init: 1
     at_rock_sample: 2 :: read: 1, write: 1, in-init: 1
     visible_from: 7 2 :: read: 1, write: 0, in-init: 1
@@ -129,13 +129,13 @@ Action[9]:
         eff: (and (N:RW:calibrated ?i ?r) (RW:have_image ?r ?o ?m))
     communicate_soil_data: ?r:1 ?l:6 ?p:2 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (RW:at ?r ?x) (RW:have_soil_analysis ?r ?p) (RW:available ?r) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (N:RW:available ?r) (W:communicated_soil_data ?p) (RW:channel_free ?l) (N:RW:channel_free ?l))
+        eff: (and (RW:available ?r) (N:RW:available ?r) (RW:communicated_soil_data ?p) (RW:channel_free ?l) (N:RW:channel_free ?l))
     communicate_rock_data: ?r:1 ?l:6 ?p:2 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (RW:at ?r ?x) (RW:have_rock_analysis ?r ?p) (RW:available ?r) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (N:RW:available ?r) (W:communicated_rock_data ?p) (RW:channel_free ?l) (N:RW:channel_free ?l))
+        eff: (and (RW:available ?r) (N:RW:available ?r) (RW:communicated_rock_data ?p) (RW:channel_free ?l) (N:RW:channel_free ?l))
     communicate_image_data: ?r:1 ?l:6 ?o:7 ?m:5 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (RW:at ?r ?x) (RW:available ?r) (RW:have_image ?r ?o ?m) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (N:RW:available ?r) (W:communicated_image_data ?o ?m) (RW:channel_free ?l) (N:RW:channel_free ?l))
+        eff: (and (RW:available ?r) (N:RW:available ?r) (RW:communicated_image_data ?o ?m) (RW:channel_free ?l) (N:RW:channel_free ?l))
 Init[817]:
   S:(at_lander general waypoint1)
   S:(can_traverse rover0 waypoint0 waypoint5)
@@ -955,5 +955,5 @@ Init[817]:
   (at_rock_sample waypoint22)
   (channel_free general)
 Init[0]:
-Goal: (and (W:communicated_soil_data waypoint7) (W:communicated_soil_data waypoint8) (W:communicated_soil_data waypoint11) (W:communicated_soil_data waypoint13) (W:communicated_soil_data waypoint20) (W:communicated_soil_data waypoint23) (W:communicated_rock_data waypoint7) (W:communicated_rock_data waypoint9) (W:communicated_rock_data waypoint10) (W:communicated_rock_data waypoint12) (W:communicated_rock_data waypoint14) (W:communicated_rock_data waypoint16) (W:communicated_rock_data waypoint18) (W:communicated_rock_data waypoint21) (W:communicated_rock_data waypoint22) (W:communicated_image_data objective0 high_res) (W:communicated_image_data objective2 high_res) (W:communicated_image_data objective3 colour) (W:communicated_image_data objective5 high_res) (W:communicated_image_data objective7 colour))
+Goal: (and (RW:communicated_soil_data waypoint7) (RW:communicated_soil_data waypoint8) (RW:communicated_soil_data waypoint11) (RW:communicated_soil_data waypoint13) (RW:communicated_soil_data waypoint20) (RW:communicated_soil_data waypoint23) (RW:communicated_rock_data waypoint7) (RW:communicated_rock_data waypoint9) (RW:communicated_rock_data waypoint10) (RW:communicated_rock_data waypoint12) (RW:communicated_rock_data waypoint14) (RW:communicated_rock_data waypoint16) (RW:communicated_rock_data waypoint18) (RW:communicated_rock_data waypoint21) (RW:communicated_rock_data waypoint22) (RW:communicated_image_data objective0 high_res) (RW:communicated_image_data objective2 high_res) (RW:communicated_image_data objective3 colour) (RW:communicated_image_data objective5 high_res) (RW:communicated_image_data objective7 colour))
 Metric: no-metric

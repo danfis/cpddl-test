@@ -519,22 +519,22 @@ Predicate[7]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     clear: 2 :: read: 1, write: 1, in-init: 1
     at: 1 2 :: read: 1, write: 1, in-init: 1
-    at-goal: 5 :: read: 0, write: 1, in-init: 0
+    at-goal: 5 :: read: 1, write: 1, in-init: 0
     is-goal: 2 :: read: 1, write: 0, in-init: 1
     is-nongoal: 2 :: read: 1, write: 0, in-init: 1
     move-dir: 2 2 3 :: read: 1, write: 0, in-init: 1
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[3]:
     move: ?p:4 ?from:2 ?to:2 ?dir:3
         pre: (and (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?from))
         eff: (and (RW:clear ?from) (N:RW:clear ?to) (N:RW:at ?p ?from) (RW:at ?p ?to))
     push-to-nongoal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
         pre: (and (R:is-nongoal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
-        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (N:W:at-goal ?s) (increase (total-cost) 1))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (N:RW:at-goal ?s) (increase (total-cost) 1))
     push-to-goal: ?p:4 ?s:5 ?ppos:2 ?from:2 ?to:2 ?dir:3
         pre: (and (R:is-goal ?to) (R:move-dir ?ppos ?from ?dir) (R:move-dir ?from ?to ?dir) (RW:clear ?to) (RW:at ?p ?ppos) (RW:at ?s ?from))
-        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (W:at-goal ?s) (increase (total-cost) 1))
+        eff: (and (RW:clear ?ppos) (N:RW:clear ?to) (N:RW:at ?p ?ppos) (RW:at ?p ?from) (N:RW:at ?s ?from) (RW:at ?s ?to) (RW:at-goal ?s) (increase (total-cost) 1))
 Init[1184]:
   S:(is-goal pos-02-16)
   S:(is-nongoal pos-01-01)
@@ -1722,5 +1722,5 @@ Init[1184]:
   (at stone-01 pos-03-15)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (W:at-goal stone-01))
+Goal: (and (RW:at-goal stone-01))
 Metric: (total-cost)

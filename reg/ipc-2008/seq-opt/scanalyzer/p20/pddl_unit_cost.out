@@ -49,17 +49,17 @@ Obj[36]:
 Predicate[7]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     on: 2 1 :: read: 1, write: 1, in-init: 1
-    analyzed: 2 :: read: 0, write: 1, in-init: 0
+    analyzed: 2 :: read: 1, write: 1, in-init: 0
     cycle-2: 1 1 :: read: 1, write: 0, in-init: 1
     cycle-4: 1 1 1 1 :: read: 0, write: 0, in-init: 0
     cycle-2-with-analysis: 1 1 :: read: 1, write: 0, in-init: 1
     cycle-4-with-analysis: 1 1 1 1 :: read: 0, write: 0, in-init: 0
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[2]:
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (W:analyzed ?c1))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (RW:analyzed ?c1))
     rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
         eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2))
@@ -173,5 +173,5 @@ Init[108]:
   (on car-out-8 seg-out-8)
   (on car-out-9 seg-out-9)
 Init[0]:
-Goal: (and (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-in-4 seg-in-4) (RW:on car-in-5 seg-in-5) (RW:on car-in-6 seg-in-6) (RW:on car-in-7 seg-in-7) (RW:on car-in-8 seg-in-8) (RW:on car-in-9 seg-in-9) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (RW:on car-out-4 seg-out-4) (RW:on car-out-5 seg-out-5) (RW:on car-out-6 seg-out-6) (RW:on car-out-7 seg-out-7) (RW:on car-out-8 seg-out-8) (RW:on car-out-9 seg-out-9) (W:analyzed car-in-1) (W:analyzed car-in-2) (W:analyzed car-in-3) (W:analyzed car-in-4) (W:analyzed car-in-5) (W:analyzed car-in-6) (W:analyzed car-in-7) (W:analyzed car-in-8) (W:analyzed car-in-9) (W:analyzed car-out-1) (W:analyzed car-out-2) (W:analyzed car-out-3) (W:analyzed car-out-4) (W:analyzed car-out-5) (W:analyzed car-out-6) (W:analyzed car-out-7) (W:analyzed car-out-8) (W:analyzed car-out-9))
+Goal: (and (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-in-4 seg-in-4) (RW:on car-in-5 seg-in-5) (RW:on car-in-6 seg-in-6) (RW:on car-in-7 seg-in-7) (RW:on car-in-8 seg-in-8) (RW:on car-in-9 seg-in-9) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (RW:on car-out-4 seg-out-4) (RW:on car-out-5 seg-out-5) (RW:on car-out-6 seg-out-6) (RW:on car-out-7 seg-out-7) (RW:on car-out-8 seg-out-8) (RW:on car-out-9 seg-out-9) (RW:analyzed car-in-1) (RW:analyzed car-in-2) (RW:analyzed car-in-3) (RW:analyzed car-in-4) (RW:analyzed car-in-5) (RW:analyzed car-in-6) (RW:analyzed car-in-7) (RW:analyzed car-in-8) (RW:analyzed car-in-9) (RW:analyzed car-out-1) (RW:analyzed car-out-2) (RW:analyzed car-out-3) (RW:analyzed car-out-4) (RW:analyzed car-out-5) (RW:analyzed car-out-6) (RW:analyzed car-out-7) (RW:analyzed car-out-8) (RW:analyzed car-out-9))
 Metric: no-metric

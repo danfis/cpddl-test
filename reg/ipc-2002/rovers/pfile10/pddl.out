@@ -52,9 +52,9 @@ Predicate[33]:
     available: 0 :: read: 1, write: 1, in-init: 1
     visible: 0 0 :: read: 1, write: 0, in-init: 1
     have_image: 0 0 0 :: read: 1, write: 1, in-init: 0
-    communicated_soil_data: 0 :: read: 0, write: 1, in-init: 0
-    communicated_rock_data: 0 :: read: 0, write: 1, in-init: 0
-    communicated_image_data: 0 0 :: read: 0, write: 1, in-init: 0
+    communicated_soil_data: 0 :: read: 1, write: 1, in-init: 0
+    communicated_rock_data: 0 :: read: 1, write: 1, in-init: 0
+    communicated_image_data: 0 0 :: read: 1, write: 1, in-init: 0
     at_soil_sample: 0 :: read: 1, write: 1, in-init: 1
     at_rock_sample: 0 :: read: 1, write: 1, in-init: 1
     visible_from: 0 0 :: read: 1, write: 0, in-init: 1
@@ -91,13 +91,13 @@ Action[9]:
         eff: (and (N:RW:calibrated ?i ?r) (RW:have_image ?r ?o ?m))
     communicate_soil_data: ?r:0 ?l:0 ?p:0 ?x:0 ?y:0
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (R:rover ?r) (R:waypoint ?p) (R:waypoint ?x) (R:waypoint ?y) (R:lander ?l) (RW:at ?r ?x) (RW:have_soil_analysis ?r ?p) (RW:available ?r) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (W:communicated_soil_data ?p) (RW:channel_free ?l))
+        eff: (and (RW:available ?r) (RW:communicated_soil_data ?p) (RW:channel_free ?l))
     communicate_rock_data: ?r:0 ?l:0 ?p:0 ?x:0 ?y:0
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (R:rover ?r) (R:waypoint ?p) (R:waypoint ?x) (R:waypoint ?y) (R:lander ?l) (RW:at ?r ?x) (RW:have_rock_analysis ?r ?p) (RW:available ?r) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (W:communicated_rock_data ?p) (RW:channel_free ?l))
+        eff: (and (RW:available ?r) (RW:communicated_rock_data ?p) (RW:channel_free ?l))
     communicate_image_data: ?r:0 ?l:0 ?o:0 ?m:0 ?x:0 ?y:0
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (R:rover ?r) (R:waypoint ?x) (R:waypoint ?y) (R:mode ?m) (R:lander ?l) (R:objective ?o) (RW:at ?r ?x) (RW:available ?r) (RW:have_image ?r ?o ?m) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (W:communicated_image_data ?o ?m) (RW:channel_free ?l))
+        eff: (and (RW:available ?r) (RW:communicated_image_data ?o ?m) (RW:channel_free ?l))
 Init[170]:
   S:(at_lander general waypoint1)
   S:(can_traverse rover0 waypoint0 waypoint4)
@@ -270,5 +270,5 @@ Init[170]:
   (at_rock_sample waypoint6)
   (channel_free general)
 Init[0]:
-Goal: (and (W:communicated_soil_data waypoint0) (W:communicated_soil_data waypoint3) (W:communicated_soil_data waypoint4) (W:communicated_soil_data waypoint6) (W:communicated_rock_data waypoint0) (W:communicated_rock_data waypoint1) (W:communicated_rock_data waypoint3) (W:communicated_rock_data waypoint4) (W:communicated_image_data objective2 colour) (W:communicated_image_data objective3 colour) (W:communicated_image_data objective3 low_res))
+Goal: (and (RW:communicated_soil_data waypoint0) (RW:communicated_soil_data waypoint3) (RW:communicated_soil_data waypoint4) (RW:communicated_soil_data waypoint6) (RW:communicated_rock_data waypoint0) (RW:communicated_rock_data waypoint1) (RW:communicated_rock_data waypoint3) (RW:communicated_rock_data waypoint4) (RW:communicated_image_data objective2 colour) (RW:communicated_image_data objective3 colour) (RW:communicated_image_data objective3 low_res))
 Metric: no-metric

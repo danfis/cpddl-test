@@ -86,7 +86,7 @@ Predicate[6]:
     car-clear: 1 :: read: 1, write: 1, in-init: 1
     curb-clear: 2 :: read: 1, write: 1, in-init: 0
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[4]:
     move-curb-to-curb: ?car:1 ?curbsrc:2 ?curbdest:2
         pre: (and (N:R:= ?curbsrc ?curbdest) (RW:at-curb-num ?car ?curbsrc) (RW:car-clear ?car) (RW:curb-clear ?curbdest))

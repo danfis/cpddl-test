@@ -196,7 +196,7 @@ Predicate[191]:
     future_obs13: :: read: 1, write: 1, in-init: 1
     future_obs14: :: read: 1, write: 1, in-init: 1
     not_at_end_constraint0: :: read: 1, write: 1, in-init: 1
-    achieved_constraint0: :: read: 0, write: 1, in-init: 0
+    achieved_constraint0: :: read: 1, write: 1, in-init: 0
     static-true: :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[216]:
@@ -847,7 +847,7 @@ Action[216]:
         eff: (and (RW:pending_obs14) (N:RW:future_obs14))
     set_goal_0_constraint0: 
         pre: (and (RW:observed_obs4) (RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (RW:not_at_end_constraint0))
-        eff: (and (N:RW:not_at_end_constraint0) (W:achieved_constraint0))
+        eff: (and (N:RW:not_at_end_constraint0) (RW:achieved_constraint0))
 Init[80]:
   S:(static-true)
   (fault-count-3_lost_heli0_fcl-event-finished_n0)
@@ -930,5 +930,5 @@ Init[80]:
   (future_obs14)
   (not_at_end_constraint0)
 Init[0]:
-Goal: (and (RW:observed_obs4) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (W:achieved_constraint0))
+Goal: (and (RW:observed_obs4) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (RW:achieved_constraint0))
 Metric: no-metric

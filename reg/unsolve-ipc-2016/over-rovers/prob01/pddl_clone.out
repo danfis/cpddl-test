@@ -95,9 +95,9 @@ Predicate[29]:
     available: 1 :: read: 1, write: 1, in-init: 1
     visible: 2 2 :: read: 1, write: 0, in-init: 1
     have_image: 1 7 5 :: read: 1, write: 1, in-init: 0
-    communicated_soil_data: 2 :: read: 0, write: 1, in-init: 0
-    communicated_rock_data: 2 :: read: 0, write: 1, in-init: 0
-    communicated_image_data: 7 5 :: read: 0, write: 1, in-init: 0
+    communicated_soil_data: 2 :: read: 1, write: 1, in-init: 0
+    communicated_rock_data: 2 :: read: 1, write: 1, in-init: 0
+    communicated_image_data: 7 5 :: read: 1, write: 1, in-init: 0
     at_soil_sample: 2 :: read: 1, write: 1, in-init: 1
     at_rock_sample: 2 :: read: 1, write: 1, in-init: 1
     visible_from: 7 2 :: read: 1, write: 0, in-init: 1
@@ -130,13 +130,13 @@ Action[9]:
         eff: (and (N:RW:calibrated ?i ?r) (RW:have_image ?r ?o ?m))
     communicate_soil_data: ?r:1 ?l:6 ?p:2 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (RW:at ?r ?x) (RW:have_soil_analysis ?r ?p) (RW:available ?r) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (W:communicated_soil_data ?p) (RW:channel_free ?l))
+        eff: (and (RW:available ?r) (RW:communicated_soil_data ?p) (RW:channel_free ?l))
     communicate_rock_data: ?r:1 ?l:6 ?p:2 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (RW:at ?r ?x) (RW:have_rock_analysis ?r ?p) (RW:available ?r) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (W:communicated_rock_data ?p) (RW:channel_free ?l))
+        eff: (and (RW:available ?r) (RW:communicated_rock_data ?p) (RW:channel_free ?l))
     communicate_image_data: ?r:1 ?l:6 ?o:7 ?m:5 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (RW:at ?r ?x) (RW:available ?r) (RW:have_image ?r ?o ?m) (RW:channel_free ?l))
-        eff: (and (RW:available ?r) (W:communicated_image_data ?o ?m) (RW:channel_free ?l))
+        eff: (and (RW:available ?r) (RW:communicated_image_data ?o ?m) (RW:channel_free ?l))
 Init[710]:
   S:(at_lander general waypoint1)
   S:(can_traverse rover0 waypoint0 waypoint1)
@@ -849,5 +849,5 @@ Init[710]:
   (channel_free general)
   (energy rover0 level33)
 Init[0]:
-Goal: (and (W:communicated_soil_data waypoint1) (W:communicated_soil_data waypoint2) (W:communicated_soil_data waypoint3) (W:communicated_soil_data waypoint4) (W:communicated_rock_data waypoint3) (W:communicated_rock_data waypoint4) (W:communicated_image_data objective1 high_res) (W:communicated_image_data objective1 low_res))
+Goal: (and (RW:communicated_soil_data waypoint1) (RW:communicated_soil_data waypoint2) (RW:communicated_soil_data waypoint3) (RW:communicated_soil_data waypoint4) (RW:communicated_rock_data waypoint3) (RW:communicated_rock_data waypoint4) (RW:communicated_image_data objective1 high_res) (RW:communicated_image_data objective1 low_res))
 Metric: no-metric

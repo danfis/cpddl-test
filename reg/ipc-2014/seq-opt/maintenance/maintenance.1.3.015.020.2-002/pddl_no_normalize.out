@@ -53,7 +53,7 @@ Obj[39]:
     [38]: ap20, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[5]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    done: 1 :: read: 0, write: 1, in-init: 0
+    done: 1 :: read: 1, write: 1, in-init: 0
     today: 2 :: read: 1, write: 1, in-init: 1
     at: 1 2 3 :: read: 1, write: 0, in-init: 1
     next: 2 2 :: read: 0, write: 0, in-init: 0
@@ -61,7 +61,7 @@ Function[0]:
 Action[1]:
     workat: ?day:2 ?airport:3
         pre: (RW:today ?day)
-        eff: (and (N:RW:today ?day) (forall (?plane:1 I[0]:?day:2 I[1]:?airport:3) (when (R:at ?plane ?day ?airport) (W:done ?plane))))
+        eff: (and (N:RW:today ?day) (forall (?plane:1 I[0]:?day:2 I[1]:?airport:3) (when (R:at ?plane ?day ?airport) (RW:done ?plane))))
 Init[55]:
   S:(at ap1 d15 ber)
   S:(at ap1 d15 ham)
@@ -119,5 +119,5 @@ Init[55]:
   (today d14)
   (today d15)
 Init[0]:
-Goal: (and (W:done ap1) (W:done ap2) (W:done ap3) (W:done ap4) (W:done ap5) (W:done ap6) (W:done ap7) (W:done ap8) (W:done ap9) (W:done ap10) (W:done ap11) (W:done ap12) (W:done ap13) (W:done ap14) (W:done ap15) (W:done ap16) (W:done ap17) (W:done ap18) (W:done ap19) (W:done ap20))
+Goal: (and (RW:done ap1) (RW:done ap2) (RW:done ap3) (RW:done ap4) (RW:done ap5) (RW:done ap6) (RW:done ap7) (RW:done ap8) (RW:done ap9) (RW:done ap10) (RW:done ap11) (RW:done ap12) (RW:done ap13) (RW:done ap14) (RW:done ap15) (RW:done ap16) (RW:done ap17) (RW:done ap18) (RW:done ap19) (RW:done ap20))
 Metric: no-metric

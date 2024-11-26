@@ -25,24 +25,24 @@ Obj[12]:
 Predicate[8]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     on: 2 1 :: read: 1, write: 1, in-init: 1
-    analyzed: 2 :: read: 0, write: 1, in-init: 0
+    analyzed: 2 :: read: 1, write: 1, in-init: 0
     cycle-2: 1 1 :: read: 1, write: 0, in-init: 1
     cycle-4: 1 1 1 1 :: read: 0, write: 0, in-init: 0
     cycle-2-with-analysis: 1 1 :: read: 1, write: 0, in-init: 1
     cycle-4-with-analysis: 1 1 1 1 :: read: 0, write: 0, in-init: 0
     equal: 0 0 :: read: 1, write: 0, in-init: 1
 Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[4]:
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (N:R:equal ?s1 ?s2) (N:R:equal ?c1 ?c2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (W:analyzed ?c1) (increase (total-cost) 3))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (RW:analyzed ?c1) (increase (total-cost) 3))
     rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (R:cycle-2 ?s1 ?s2) (N:R:equal ?s1 ?s2) (N:R:equal ?c1 ?c2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
         eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (increase (total-cost) 1))
     analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (R:equal ?s1 ?s2) (R:equal ?c1 ?c2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (W:analyzed ?c1) (increase (total-cost) 3))
+        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (RW:analyzed ?c1) (increase (total-cost) 3))
     rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
         pre: (and (R:cycle-2 ?s1 ?s2) (R:equal ?s1 ?s2) (R:equal ?c1 ?c2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
         eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (increase (total-cost) 1))
@@ -85,5 +85,5 @@ Init[36]:
   (on car-out-3 seg-out-3)
 Init[1]:
   (= (total-cost) 0)
-Goal: (and (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (W:analyzed car-in-1) (W:analyzed car-in-2) (W:analyzed car-in-3) (W:analyzed car-out-1) (W:analyzed car-out-2) (W:analyzed car-out-3))
+Goal: (and (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (RW:analyzed car-in-1) (RW:analyzed car-in-2) (RW:analyzed car-in-3) (RW:analyzed car-out-1) (RW:analyzed car-out-2) (RW:analyzed car-out-3))
 Metric: (total-cost)

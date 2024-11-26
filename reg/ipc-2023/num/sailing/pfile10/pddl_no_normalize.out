@@ -20,7 +20,7 @@ Obj[8]:
     [7]: p4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[2]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    saved: 2 :: read: 0, write: 1, in-init: 0
+    saved: 2 :: read: 1, write: 1, in-init: 0
 Function[3]:
     x: 1 :: read: 1, write: 1, in-init: 1
     y: 1 :: read: 1, write: 1, in-init: 1
@@ -49,7 +49,7 @@ Action[8]:
         eff: (and (decrease (y ?b) 2))
     save_person: ?b:1 ?t:2
         pre: (and (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)) (<= (+ (x ?b) (y ?b)) (+ (d ?t) 25)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 25)))
-        eff: (and (W:saved ?t))
+        eff: (and (RW:saved ?t))
 Init[0]:
 Init[11]:
   (= (x b0) -7)
@@ -63,5 +63,5 @@ Init[11]:
   (= (d p2) 63)
   (= (d p3) 483)
   (= (d p4) 223)
-Goal: (and (W:saved p0) (W:saved p1) (W:saved p2) (W:saved p3) (W:saved p4))
+Goal: (and (RW:saved p0) (RW:saved p1) (RW:saved p2) (RW:saved p3) (RW:saved p4))
 Metric: no-metric

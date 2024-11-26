@@ -51,9 +51,9 @@ Predicate[27]:
     available: 1 :: read: 1, write: 1, in-init: 1
     visible: 2 2 :: read: 1, write: 0, in-init: 1
     have_image: 1 7 5 :: read: 1, write: 1, in-init: 0
-    communicated_soil_data: 2 :: read: 0, write: 1, in-init: 0
-    communicated_rock_data: 2 :: read: 0, write: 1, in-init: 0
-    communicated_image_data: 7 5 :: read: 0, write: 1, in-init: 0
+    communicated_soil_data: 2 :: read: 1, write: 1, in-init: 0
+    communicated_rock_data: 2 :: read: 1, write: 1, in-init: 0
+    communicated_image_data: 7 5 :: read: 1, write: 1, in-init: 0
     at_soil_sample: 2 :: read: 1, write: 1, in-init: 1
     at_rock_sample: 2 :: read: 1, write: 1, in-init: 1
     visible_from: 7 2 :: read: 1, write: 0, in-init: 1
@@ -64,7 +64,7 @@ Predicate[27]:
     in_sun: 2 :: read: 1, write: 0, in-init: 1
 Function[2]:
     energy: 1 :: read: 1, write: 1, in-init: 1
-    recharges: :: read: 0, write: 1, in-init: 1
+    recharges: :: read: 1, write: 1, in-init: 1
 Action[10]:
     navigate: ?x:1 ?y:2 ?z:2
         pre: (and (R:can_traverse ?x ?y ?z) (R:visible ?y ?z) (RW:in ?x ?y) (RW:available ?x) (>= (energy ?x) 8))
@@ -89,13 +89,13 @@ Action[10]:
         eff: (and (N:RW:calibrated ?i ?r) (RW:have_image ?r ?o ?m) (decrease (energy ?r) 1))
     communicate_soil_data: ?r:1 ?l:6 ?p:2 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (R:channel_free ?l) (RW:in ?r ?x) (RW:have_soil_analysis ?r ?p) (RW:available ?r) (>= (energy ?r) 4))
-        eff: (and (RW:available ?r) (W:communicated_soil_data ?p) (decrease (energy ?r) 4))
+        eff: (and (RW:available ?r) (RW:communicated_soil_data ?p) (decrease (energy ?r) 4))
     communicate_rock_data: ?r:1 ?l:6 ?p:2 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (R:channel_free ?l) (RW:in ?r ?x) (RW:have_rock_analysis ?r ?p) (RW:available ?r) (>= (energy ?r) 4))
-        eff: (and (RW:available ?r) (W:communicated_rock_data ?p) (decrease (energy ?r) 4))
+        eff: (and (RW:available ?r) (RW:communicated_rock_data ?p) (decrease (energy ?r) 4))
     communicate_image_data: ?r:1 ?l:6 ?o:7 ?m:5 ?x:2 ?y:2
         pre: (and (R:at_lander ?l ?y) (R:visible ?x ?y) (R:channel_free ?l) (RW:in ?r ?x) (RW:available ?r) (RW:have_image ?r ?o ?m) (>= (energy ?r) 6))
-        eff: (and (RW:available ?r) (W:communicated_image_data ?o ?m) (decrease (energy ?r) 6))
+        eff: (and (RW:available ?r) (RW:communicated_image_data ?o ?m) (decrease (energy ?r) 6))
 Init[43]:
   S:(at_lander general waypoint1)
   S:(can_traverse rover0 waypoint0 waypoint1)
@@ -143,5 +143,5 @@ Init[43]:
 Init[2]:
   (= (recharges) 0)
   (= (energy rover0) 50)
-Goal: (and (W:communicated_soil_data waypoint0) (W:communicated_rock_data waypoint0) (W:communicated_image_data objective1 low_res))
+Goal: (and (RW:communicated_soil_data waypoint0) (RW:communicated_rock_data waypoint0) (RW:communicated_image_data objective1 low_res))
 Metric: (recharges)

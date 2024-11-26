@@ -152,8 +152,8 @@ Predicate[11]:
     time-now: 2 :: read: 1, write: 1, in-init: 1
     next: 2 2 :: read: 1, write: 0, in-init: 1
     le: 2 2 :: read: 1, write: 0, in-init: 1
-    delivered: 6 3 2 :: read: 0, write: 1, in-init: 0
-    at-destination: 6 3 :: read: 0, write: 1, in-init: 0
+    delivered: 6 3 2 :: read: 1, write: 1, in-init: 0
+    at-destination: 6 3 :: read: 1, write: 1, in-init: 0
     closer: 1 1 :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[16]:
@@ -168,7 +168,7 @@ Action[16]:
         eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to) (N:RW:time-now ?t1) (RW:time-now ?t2))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (N:R:= ?p package2) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package6) (N:R:= ?p package7) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?l l4) (R:= ?t2 t4) (R:le ?t1 t4) (RW:at ?p l4) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p l4) (W:delivered ?p l4 t4) (W:at-destination ?p l4))
+        eff: (and (N:RW:at ?p l4) (RW:delivered ?p l4 t4) (RW:at-destination ?p l4))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (R:= ?t truck1) (R:= ?a1 a2) (RW:at truck1 ?l) (RW:at ?p ?l) (RW:free a1 truck1) (RW:free a2 truck1))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p truck1 a2) (N:RW:free a2 truck1))
@@ -186,19 +186,19 @@ Action[16]:
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t a1) (N:RW:free a1 ?t))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (N:R:= ?p package1) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package6) (N:R:= ?p package7) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?l l3) (R:= ?t2 t4) (R:le ?t1 t4) (RW:at ?p l3) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p l3) (W:delivered ?p l3 t4) (W:at-destination ?p l3))
+        eff: (and (N:RW:at ?p l3) (RW:delivered ?p l3 t4) (RW:at-destination ?p l3))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package6) (N:R:= ?p package7) (R:= ?l l3) (R:= ?t2 t12) (R:le ?t1 t12) (RW:at ?p l3) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p l3) (W:delivered ?p l3 t12) (W:at-destination ?p l3))
+        eff: (and (N:RW:at ?p l3) (RW:delivered ?p l3 t12) (RW:at-destination ?p l3))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?l l1) (R:= ?t2 t8) (R:le ?t1 t8) (RW:at ?p l1) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p l1) (W:delivered ?p l1 t8) (W:at-destination ?p l1))
+        eff: (and (N:RW:at ?p l1) (RW:delivered ?p l1 t8) (RW:at-destination ?p l1))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package6) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?l l1) (R:le ?t1 ?t2) (RW:at ?p l1) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p l1) (W:delivered ?p l1 ?t2) (W:at-destination ?p l1))
+        eff: (and (N:RW:at ?p l1) (RW:delivered ?p l1 ?t2) (RW:at-destination ?p l1))
     deliver: ?p:6 ?l:3 ?t1:2 ?t2:2
         pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package6) (N:R:= ?p package7) (N:R:= ?p package8) (N:R:= ?p package9) (R:le ?t1 ?t2) (RW:at ?p ?l) (RW:time-now ?t1))
-        eff: (and (N:RW:at ?p ?l) (W:delivered ?p ?l ?t2) (W:at-destination ?p ?l))
+        eff: (and (N:RW:at ?p ?l) (RW:delivered ?p ?l ?t2) (RW:at-destination ?p ?l))
     load: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (N:R:= ?p package4) (N:R:= ?p package5) (N:R:= ?p package6) (N:R:= ?p package7) (N:R:= ?p package8) (N:R:= ?p package9) (R:= ?a1 a2) (RW:at ?p ?l) (RW:at ?t ?l) (RW:free a1 ?t) (RW:free a2 ?t))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t a2) (N:RW:free a2 ?t))
@@ -326,5 +326,5 @@ Init[119]:
   (free a3 truck1)
   (time-now t0)
 Init[0]:
-Goal: (and (W:delivered package1 l4 t4) (W:delivered package2 l3 t4) (W:delivered package6 l1 t8) (W:delivered package8 l3 t12) (W:delivered package9 l3 t12) (W:at-destination package3 l1) (W:at-destination package4 l1) (W:at-destination package5 l1) (W:at-destination package7 l1))
+Goal: (and (RW:delivered package1 l4 t4) (RW:delivered package2 l3 t4) (RW:delivered package6 l1 t8) (RW:delivered package8 l3 t12) (RW:delivered package9 l3 t12) (RW:at-destination package3 l1) (RW:at-destination package4 l1) (RW:at-destination package5 l1) (RW:at-destination package7 l1))
 Metric: no-metric

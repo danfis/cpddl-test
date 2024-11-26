@@ -74,7 +74,7 @@ Predicate[11]:
     available: 8 5 :: read: 1, write: 1, in-init: 0
     loaded: 8 7 :: read: 1, write: 1, in-init: 0
     connected: 3 3 :: read: 1, write: 0, in-init: 1
-    stored: 8 :: read: 0, write: 1, in-init: 0
+    stored: 8 :: read: 1, write: 1, in-init: 0
     drive-cost: 3 3 2 :: read: 1, write: 0, in-init: 1
     price: 8 5 2 :: read: 1, write: 0, in-init: 1
     money: 2 :: read: 1, write: 1, in-init: 1
@@ -92,7 +92,7 @@ Action[4]:
         eff: (and (N:RW:available ?g ?m) (RW:loaded ?g ?t))
     unload: ?t:7 ?g:8 ?d:4
         pre: (and (RW:at ?t ?d) (RW:loaded ?g ?t))
-        eff: (and (N:RW:loaded ?g ?t) (W:stored ?g))
+        eff: (and (N:RW:loaded ?g ?t) (RW:stored ?g))
 Init[637]:
   S:(connected market1 market4)
   S:(connected market1 market6)
@@ -732,5 +732,5 @@ Init[637]:
   (on-sale goods2 market6)
   (money level33)
 Init[0]:
-Goal: (and (W:stored goods0) (W:stored goods1) (W:stored goods2))
+Goal: (and (RW:stored goods0) (RW:stored goods1) (RW:stored goods2))
 Metric: no-metric
