@@ -158,9 +158,8 @@ Predicate[151]:
     not-mandatory_step-nobody: :: read: 1, write: 1, in-init: 1
     inst_by-greg_inst-nobody: :: read: 1, write: 1, in-init: 1
     inst_by-mandatory_update-nobody: :: read: 1, write: 1, in-init: 1
-Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[820]:
+Function[0]:
+Action[788]:
     dms_enter_password-bob-yeti-secret_info-dmss1: 
         pre: (and (RW:dms_session_client-dmss1-yeti) (RW:dms_session_real_user-dmss1-bob) (RW:pmode-m_dms_know) (RW:knows-bob-secret_info) (RW:not-dms_established-dmss1))
         eff: (and (N:RW:pmode-m_dms_know) (RW:pmode-m_dms_auth))
@@ -1064,102 +1063,6 @@ Action[820]:
     inject_code-yeti-proc_0-winbork-sherpa-proc_0-wexplorer-nobody-fb_virus: 
         pre: (and (RW:running_prog-sherpa-proc_0-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
         eff: (and (RW:running_prog-sherpa-proc_0-fb_virus))
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_3-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_3-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_2-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_2-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_1-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_1-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_0-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_3-winbork-bigfoot-proc_0-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_3-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_3-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_3-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_2-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_2-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_1-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_1-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_0-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_2-winbork-bigfoot-proc_0-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_2-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_3-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_3-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_2-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_2-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_1-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_1-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_0-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_1-winbork-bigfoot-proc_0-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_1-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_3-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_3-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_3-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_2-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_2-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_2-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_1-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_1-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_1-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_0-wexplorer-bob-fb_virus: 
-        pre: (and (RW:at_host-bob-yeti) (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free))
-        eff: (and)
-    inject_code-yeti-proc_0-winbork-bigfoot-proc_0-wexplorer-nobody-fb_virus: 
-        pre: (and (RW:running_prog-bigfoot-proc_0-wexplorer) (RW:running_prog-yeti-proc_0-winbork) (RW:pmode-m_free) (RW:at_host-nobody-yeti))
-        eff: (and)
     lock_screen-greg-sherpa-greg_uid: 
         pre: (and (RW:at_host-greg-sherpa) (RW:authenticated-greg_uid-sherpa) (RW:pmode-m_free) (RW:not-host_locked-sherpa))
         eff: (and (N:RW:not-host_locked-sherpa))

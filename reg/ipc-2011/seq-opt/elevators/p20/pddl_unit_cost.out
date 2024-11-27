@@ -48,10 +48,7 @@ Predicate[9]:
     passengers: 1 5 :: read: 1, write: 1, in-init: 1
     can-hold: 1 5 :: read: 1, write: 0, in-init: 1
     next: 5 5 :: read: 1, write: 0, in-init: 1
-Function[3]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-    travel-slow: 5 5 :: read: 1, write: 0, in-init: 1
-    travel-fast: 5 5 :: read: 1, write: 0, in-init: 1
+Function[0]:
 Action[6]:
     move-up-slow: ?lift:2 ?f1:5 ?f2:5
         pre: (and (R:reachable-floor ?lift ?f2) (R:above ?f1 ?f2) (RW:lift-at ?lift ?f1))
