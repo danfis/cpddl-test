@@ -131,6 +131,7 @@ TEST_COND(homomorphism_endomorph, homomorphism, CPOPTIMIZER)
 {
     int before = h.task.obj.obj_size;
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
+    cfg.run_in_subprocess = pddl_false;
     if (pddlHomomorphicTaskApplyRelaxedEndomorphism(&h, &cfg, &C.err) < 0){
         pddlErrPrint(&C.err, 1, stderr);
         return;
@@ -144,6 +145,7 @@ TEST_COND(homomorphism_endomorph_nocost, homomorphism, CPOPTIMIZER)
 {
     int before = h.task.obj.obj_size;
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
+    cfg.run_in_subprocess = pddl_false;
     cfg.ignore_costs = 1;
     if (pddlHomomorphicTaskApplyRelaxedEndomorphism(&h, &cfg, &C.err) < 0){
         pddlErrPrint(&C.err, 1, stderr);

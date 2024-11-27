@@ -154,6 +154,7 @@ TEST_COND(symbolic_fw_pot, symbolic, LP)
     }
     pddlHPotConfigAdd(&symb_cfg.fw.pot_heur_config, &pot_cfg.cfg);
     run(&symb_cfg);
+    pddlHPotConfigFree(&symb_cfg.fw.pot_heur_config);
 }
 
 TEST(symbolic_fwbw, symbolic)
@@ -188,6 +189,7 @@ TEST_COND(symbolic_fwbw_pot, symbolic, LP)
     }
     pddlHPotConfigAdd(&symb_cfg.fw.pot_heur_config, &pot_cfg.cfg);
     run(&symb_cfg);
+    pddlHPotConfigFree(&symb_cfg.fw.pot_heur_config);
 }
 
 TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
@@ -228,6 +230,8 @@ TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
     pddlHPotConfigAdd(&symb_cfg.bw.pot_heur_config, &pot_cfg2.cfg);
 
     run(&symb_cfg);
+    pddlHPotConfigFree(&symb_cfg.fw.pot_heur_config);
+    pddlHPotConfigFree(&symb_cfg.bw.pot_heur_config);
 }
 
 TEST(symbolic_bw, symbolic)
@@ -265,4 +269,5 @@ TEST_COND(symbolic_bw_pot, symbolic, LP)
     pddlHPotConfigAdd(&symb_cfg.bw.pot_heur_config, &pot_cfg.cfg);
 
     run(&symb_cfg);
+    pddlHPotConfigFree(&symb_cfg.bw.pot_heur_config);
 }

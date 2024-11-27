@@ -7,6 +7,7 @@ static void tEndomorphismLifted(int relaxed, int ignore_costs)
 {
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
     cfg.ignore_costs = ignore_costs;
+    cfg.run_in_subprocess = pddl_false;
 
     PDDL_ISET(redundant);
     int *map = PDDL_CALLOC_ARR(int, C.pddl.obj.obj_size);
