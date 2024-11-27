@@ -27,9 +27,8 @@ Obj[21]:
     [18]: earth, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [19]: uranus, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [20]: venus, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[14]:
+Predicate[13]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    province: 0 :: read: 0, write: 0, in-init: 1
     planet: 0 :: read: 1, write: 0, in-init: 1
     food: 0 :: read: 1, write: 0, in-init: 1
     pleasure: 0 :: read: 1, write: 0, in-init: 1
@@ -56,14 +55,7 @@ Action[4]:
     drink: ?n1:0 ?n2:0 ?l11:0 ?l12:0 ?l13:0 ?l21:0 ?l22:0
         pre: (and (R:attacks ?l12 ?l11) (R:attacks ?l13 ?l12) (R:attacks ?l21 ?l22) (N:R:equal ?n1 ?n2) (RW:locale ?n1 ?l11) (RW:locale ?n2 ?l21))
         eff: (and (N:RW:locale ?n1 ?l11) (RW:locale ?n1 ?l12) (N:RW:locale ?n2 ?l21) (RW:locale ?n2 ?l22))
-Init[75]:
-  S:(province kentucky)
-  S:(province bosnia)
-  S:(province surrey)
-  S:(province pennsylvania)
-  S:(province alsace)
-  S:(province quebec)
-  S:(province guanabara)
+Init[68]:
   S:(planet mars)
   S:(planet earth)
   S:(planet uranus)

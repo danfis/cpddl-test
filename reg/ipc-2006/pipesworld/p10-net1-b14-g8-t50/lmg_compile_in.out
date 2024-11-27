@@ -9,7 +9,7 @@ Compile-in LMG: Found mutex condition for action 'pop-unitarypipe' and mgroup {f
 Compile-in LMG: Found mutex condition for action 'pop-unitarypipe' and mgroup {occupied V0:tank-slot, not-occupied V0:tank-slot}:=1: (= ?from-tank-slot ?to-tank-slot)
 Compile-in LMG: Precondition of action 'pop-unitarypipe' extended with (and (not (= ?batch-atom-in ?first-batch-atom)) (not (= ?from-tank-slot ?to-tank-slot)))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 6, objects: 48, predicates: 16, functions: 0, actions: 2, action-pre-size: [min: 13, max: 13, avg: 13.00, med: 13.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 6, objects: 48, predicates: 10, functions: 0, actions: 2, action-pre-size: [min: 13, max: 13, avg: 13.00, med: 13.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -18,20 +18,20 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action push-unitarypipe
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action pop-unitarypipe
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 48, vars: 9, predicates: 22, rules: 209)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 48, vars: 9, predicates: 16, rules: 207)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 48, vars: 9, predicates: 22, rules: 209)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 48, vars: 9, predicates: 16, rules: 207)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 48, vars: 9, predicates: 22, rules: 209)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 209
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 209, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 48, vars: 9, predicates: 16, rules: 207)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 207
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 207, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 6, objects: 48, predicates: 16, functions: 0, actions: 2, action-pre-size: [min: 13, max: 13, avg: 13.00, med: 13.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 6, objects: 48, predicates: 10, functions: 0, actions: 2, action-pre-size: [min: 13, max: 13, avg: 13.00, med: 13.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 2
 Compile-in LMG: END
@@ -101,20 +101,14 @@ Obj[48]:
     [45]: ta3-1-rat-a, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [46]: ta3-2-oca1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [47]: ta3-1-oca1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[16]:
+Predicate[10]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     connect: 2 2 1 :: read: 1, write: 0, in-init: 1
     unitary: 1 :: read: 1, write: 0, in-init: 1
-    not-unitary: 1 :: read: 0, write: 0, in-init: 0
-    last: 4 1 :: read: 0, write: 1, in-init: 1
     first: 4 1 :: read: 1, write: 1, in-init: 1
-    follow: 4 4 :: read: 0, write: 0, in-init: 0
     is-product: 4 3 :: read: 1, write: 0, in-init: 1
     on: 4 2 :: read: 1, write: 1, in-init: 1
     may-interface: 3 3 :: read: 1, write: 0, in-init: 1
-    normal: 1 :: read: 0, write: 0, in-init: 1
-    push-updating: 1 :: read: 0, write: 0, in-init: 0
-    pop-updating: 1 :: read: 0, write: 0, in-init: 0
     tank-slot-product-location: 5 3 2 :: read: 1, write: 0, in-init: 1
     occupied: 5 :: read: 1, write: 1, in-init: 1
     not-occupied: 5 :: read: 1, write: 1, in-init: 1
@@ -122,11 +116,11 @@ Function[0]:
 Action[2]:
     push-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3 ?from-tank-slot:5 ?to-tank-slot:5
         pre: (and (N:R:= ?batch-atom-in ?first-batch-atom) (N:R:= ?from-tank-slot ?to-tank-slot) (R:connect ?from-area ?to-area ?pipe) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch) (R:tank-slot-product-location ?from-tank-slot ?product-batch-atom-in ?from-area) (R:tank-slot-product-location ?to-tank-slot ?product-first-batch ?to-area) (RW:first ?first-batch-atom ?pipe) (RW:on ?batch-atom-in ?from-area) (RW:occupied ?from-tank-slot) (RW:not-occupied ?to-tank-slot))
-        eff: (and (W:last ?batch-atom-in ?pipe) (N:W:last ?first-batch-atom ?pipe) (RW:first ?batch-atom-in ?pipe) (N:RW:first ?first-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?from-area) (RW:on ?first-batch-atom ?to-area) (N:RW:occupied ?from-tank-slot) (RW:occupied ?to-tank-slot) (RW:not-occupied ?from-tank-slot) (N:RW:not-occupied ?to-tank-slot))
+        eff: (and (RW:first ?batch-atom-in ?pipe) (N:RW:first ?first-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?from-area) (RW:on ?first-batch-atom ?to-area) (N:RW:occupied ?from-tank-slot) (RW:occupied ?to-tank-slot) (RW:not-occupied ?from-tank-slot) (N:RW:not-occupied ?to-tank-slot))
     pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3 ?from-tank-slot:5 ?to-tank-slot:5
         pre: (and (N:R:= ?batch-atom-in ?first-batch-atom) (N:R:= ?from-tank-slot ?to-tank-slot) (R:connect ?from-area ?to-area ?pipe) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?first-batch-atom ?product-first-batch) (R:may-interface ?product-batch-atom-in ?product-first-batch) (R:tank-slot-product-location ?from-tank-slot ?product-first-batch ?from-area) (R:tank-slot-product-location ?to-tank-slot ?product-batch-atom-in ?to-area) (RW:first ?first-batch-atom ?pipe) (RW:on ?batch-atom-in ?to-area) (RW:occupied ?to-tank-slot) (RW:not-occupied ?from-tank-slot))
-        eff: (and (W:last ?batch-atom-in ?pipe) (N:W:last ?first-batch-atom ?pipe) (RW:first ?batch-atom-in ?pipe) (N:RW:first ?first-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?to-area) (RW:on ?first-batch-atom ?from-area) (RW:occupied ?from-tank-slot) (N:RW:occupied ?to-tank-slot) (N:RW:not-occupied ?from-tank-slot) (RW:not-occupied ?to-tank-slot))
-Init[105]:
+        eff: (and (RW:first ?batch-atom-in ?pipe) (N:RW:first ?first-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?to-area) (RW:on ?first-batch-atom ?from-area) (RW:occupied ?from-tank-slot) (N:RW:occupied ?to-tank-slot) (N:RW:not-occupied ?from-tank-slot) (RW:not-occupied ?to-tank-slot))
+Init[101]:
   S:(connect a1 a2 s12)
   S:(connect a1 a3 s13)
   S:(unitary s12)
@@ -166,8 +160,6 @@ Init[105]:
   S:(may-interface oc1b gasoleo)
   S:(may-interface oc1b oca1)
   S:(may-interface oc1b oc1b)
-  S:(normal s12)
-  S:(normal s13)
   S:(tank-slot-product-location ta1-3-lco lco a1)
   S:(tank-slot-product-location ta1-2-lco lco a1)
   S:(tank-slot-product-location ta1-1-lco lco a1)
@@ -192,8 +184,6 @@ Init[105]:
   S:(tank-slot-product-location ta3-1-rat-a rat-a a3)
   S:(tank-slot-product-location ta3-2-oca1 oca1 a3)
   S:(tank-slot-product-location ta3-1-oca1 oca1 a3)
-  (last b7 s13)
-  (last b2 s12)
   (first b7 s13)
   (first b2 s12)
   (on b10 a2)

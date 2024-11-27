@@ -100,9 +100,8 @@ Obj[88]:
     [85]: n27, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [86]: n28, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [87]: n29, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
+Predicate[8]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    includes: 1 2 :: read: 0, write: 0, in-init: 1
     waiting: 1 :: read: 1, write: 1, in-init: 1
     started: 1 :: read: 1, write: 1, in-init: 0
     shipped: 1 :: read: 1, write: 1, in-init: 0
@@ -293,60 +292,7 @@ Action[60]:
     ship-order-o29: ?avail:3 ?new-avail:3
         pre: (and (R:next-count ?avail ?new-avail) (RW:started o29) (RW:made p18) (RW:made p24) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o29) (RW:shipped o29) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
-Init[141]:
-  S:(includes o1 p3)
-  S:(includes o2 p14)
-  S:(includes o3 p1)
-  S:(includes o3 p5)
-  S:(includes o4 p19)
-  S:(includes o4 p24)
-  S:(includes o4 p27)
-  S:(includes o5 p3)
-  S:(includes o5 p5)
-  S:(includes o5 p6)
-  S:(includes o5 p16)
-  S:(includes o6 p15)
-  S:(includes o7 p23)
-  S:(includes o8 p5)
-  S:(includes o8 p8)
-  S:(includes o9 p10)
-  S:(includes o10 p9)
-  S:(includes o11 p10)
-  S:(includes o11 p19)
-  S:(includes o11 p24)
-  S:(includes o12 p18)
-  S:(includes o12 p20)
-  S:(includes o13 p2)
-  S:(includes o13 p13)
-  S:(includes o13 p19)
-  S:(includes o14 p1)
-  S:(includes o14 p3)
-  S:(includes o14 p4)
-  S:(includes o14 p7)
-  S:(includes o15 p15)
-  S:(includes o16 p11)
-  S:(includes o16 p17)
-  S:(includes o16 p19)
-  S:(includes o17 p12)
-  S:(includes o17 p25)
-  S:(includes o18 p25)
-  S:(includes o19 p22)
-  S:(includes o20 p17)
-  S:(includes o20 p26)
-  S:(includes o21 p15)
-  S:(includes o22 p10)
-  S:(includes o23 p21)
-  S:(includes o24 p28)
-  S:(includes o25 p9)
-  S:(includes o25 p14)
-  S:(includes o25 p16)
-  S:(includes o26 p3)
-  S:(includes o27 p16)
-  S:(includes o27 p18)
-  S:(includes o27 p29)
-  S:(includes o28 p8)
-  S:(includes o29 p18)
-  S:(includes o29 p24)
+Init[88]:
   S:(next-count n0 n1)
   S:(next-count n1 n2)
   S:(next-count n2 n3)

@@ -76,11 +76,9 @@ Obj[70]:
     [67]: k3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [68]: k2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [69]: k1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[15]:
+Predicate[13]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     movie-rewound: :: read: 1, write: 1, in-init: 0
-    counter-at-two-hours: :: read: 0, write: 0, in-init: 0
-    counter-at-other-than-two-hours: :: read: 0, write: 0, in-init: 1
     counter-at-zero: :: read: 1, write: 1, in-init: 0
     have-chips: :: read: 1, write: 1, in-init: 0
     have-dip: :: read: 1, write: 1, in-init: 0
@@ -115,8 +113,7 @@ Action[7]:
     get-crackers: ?x:0
         pre: (and (R:crackers ?x))
         eff: (and (RW:have-crackers))
-Init[71]:
-  S:(counter-at-other-than-two-hours)
+Init[70]:
   S:(chips c14)
   S:(chips c13)
   S:(chips c12)

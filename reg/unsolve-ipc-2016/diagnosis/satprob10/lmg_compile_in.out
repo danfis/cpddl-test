@@ -1,22 +1,22 @@
 Compile-in LMG: BEGIN
 Compile-in LMG: Cfg: prune_mutex = true
 Compile-in LMG: Cfg: prune_dead_end = true
-Compile-in LMG: actions: 94, lifted mgroups: 186
+Compile-in LMG: actions: 94, lifted mgroups: 148
 Compile-in LMG: Found dead-end condition for action 'breaker-init-state-was-open_breaker_x17_x18' and mgroup {breaker-state-is-unknown_breaker_x17_x18, breaker-state-is-closed_breaker_x17_x18, observed_obs1407}: (and)
 Compile-in LMG: Precondition of action 'breaker-init-state-was-open_breaker_x17_x18' extended with (FALSE)
 Compile-in LMG: Found dead-end condition for action 'breaker-init-state-was-closed_breaker_x5_x6' and mgroup {breaker-state-is-unknown_breaker_x5_x6, breaker-state-is-open_breaker_x5_x6, observed_obs1415}: (and)
 Compile-in LMG: Precondition of action 'breaker-init-state-was-closed_breaker_x5_x6' extended with (FALSE)
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 0, predicates: 163, functions: 0, actions: 94, action-pre-size: [min: 24, max: 4, avg: 6.59, med: 6.50]
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: 2:breaker-init-state-was-open_breaker_x17_x18
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: 7:breaker-init-state-was-closed_breaker_x5_x6
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 0, predicates: 133, functions: 0, actions: 94, action-pre-size: [min: 24, max: 4, avg: 6.59, med: 6.50]
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: breaker-init-state-was-open_breaker_x17_x18
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: breaker-init-state-was-closed_breaker_x5_x6
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: No negative conditions.
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 0, predicates: 163, functions: 0, actions: 92, action-pre-size: [min: 24, max: 4, avg: 6.64, med: 8.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 0, predicates: 133, functions: 0, actions: 92, action-pre-size: [min: 24, max: 4, avg: 6.64, med: 8.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 92
 Compile-in LMG: END
@@ -28,7 +28,7 @@ Type[1]:
 Obj-by-Type:
     [0]:
 Obj[0]:
-Predicate[163]:
+Predicate[133]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     breaker-state-is-unknown_breaker_x5_x6: :: read: 1, write: 1, in-init: 1
     breaker-state-is-open_breaker_x5_x6: :: read: 1, write: 1, in-init: 0
@@ -48,9 +48,6 @@ Predicate[163]:
     breaker-state-is-closed_breaker_x11_x12: :: read: 1, write: 1, in-init: 0
     breaker-state-is-closed_breaker_x17_x18: :: read: 1, write: 1, in-init: 0
     breaker-state-is-closed_breaker_x19_x20: :: read: 1, write: 1, in-init: 0
-    breaker-state-is-closed_breaker_x22_x23: :: read: 0, write: 1, in-init: 0
-    breaker-state-is-closed_breaker_x26_x27: :: read: 0, write: 1, in-init: 0
-    breaker-state-is-closed_breaker_x28_x29: :: read: 0, write: 1, in-init: 0
     breaker-ar-status-is-unknown_breaker_x11_x12: :: read: 1, write: 1, in-init: 1
     breaker-ar-status-is-auto_breaker_x11_x12: :: read: 1, write: 1, in-init: 0
     breaker-ar-status-is-unknown_breaker_x17_x18: :: read: 1, write: 1, in-init: 1
@@ -65,13 +62,9 @@ Predicate[163]:
     observed_obs1410: :: read: 1, write: 1, in-init: 0
     fault-count-2_count-as-fault_breaker_x11_x12_n1: :: read: 1, write: 1, in-init: 0
     line-iso-state-may-have-changed_line_x13_x14_obs1410: :: read: 1, write: 1, in-init: 0
-    dominates-2_hyp3_count-as-fault_breaker_x11_x12: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp2_count-as-fault_breaker_x11_x12: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp1_count-as-fault_breaker_x11_x12: :: read: 0, write: 1, in-init: 1
     pending_obs1407: :: read: 1, write: 1, in-init: 0
     fault-count-2_count-as-fault_breaker_x17_x18_n0: :: read: 1, write: 1, in-init: 1
     observed_obs1407: :: read: 1, write: 1, in-init: 0
-    fault-count-2_count-as-fault_breaker_x17_x18_n1: :: read: 0, write: 1, in-init: 0
     line-iso-state-may-have-changed_line_x15_x16_obs1407: :: read: 1, write: 1, in-init: 0
     dominates-2_hyp2_count-as-fault_breaker_x17_x18: :: read: 1, write: 1, in-init: 1
     dominates-2_hyp1_count-as-fault_breaker_x17_x18: :: read: 1, write: 1, in-init: 1
@@ -86,15 +79,10 @@ Predicate[163]:
     pending_obs1415: :: read: 1, write: 1, in-init: 0
     fault-count-2_count-as-fault_breaker_x5_x6_n0: :: read: 1, write: 1, in-init: 1
     observed_obs1415: :: read: 1, write: 1, in-init: 0
-    fault-count-2_count-as-fault_breaker_x5_x6_n1: :: read: 0, write: 1, in-init: 0
     line-iso-state-may-have-changed_line_x15_x16_obs1415: :: read: 1, write: 1, in-init: 0
-    dominates-2_hyp3_count-as-fault_breaker_x5_x6: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp2_count-as-fault_breaker_x5_x6: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp1_count-as-fault_breaker_x5_x6: :: read: 0, write: 1, in-init: 1
     pending_obs1416: :: read: 1, write: 1, in-init: 0
     observed_obs1416: :: read: 1, write: 1, in-init: 0
     line-iso-state-may-have-changed_line_x13_x14_obs1416: :: read: 1, write: 1, in-init: 0
-    breaker-auto-reopen-wait_breaker_x19_x20_obs1416: :: read: 0, write: 1, in-init: 0
     pending_obs1405: :: read: 1, write: 1, in-init: 0
     observed_obs1405: :: read: 1, write: 1, in-init: 0
     pending_obs1414: :: read: 1, write: 1, in-init: 0
@@ -114,7 +102,6 @@ Predicate[163]:
     breaker-commanded-ar-non-auto_breaker_x9_x10_obs1402: :: read: 1, write: 1, in-init: 0
     observed_obs1402: :: read: 1, write: 1, in-init: 0
     pending_obs1411: :: read: 1, write: 1, in-init: 0
-    breaker-commanded-ar-non-auto_breaker_x11_x12_obs1411: :: read: 0, write: 1, in-init: 0
     observed_obs1411: :: read: 1, write: 1, in-init: 0
     pending_obs1408: :: read: 1, write: 1, in-init: 0
     observed_obs1408: :: read: 1, write: 1, in-init: 0
@@ -125,28 +112,16 @@ Predicate[163]:
     pending_obs1400: :: read: 1, write: 1, in-init: 0
     observed_obs1400: :: read: 1, write: 1, in-init: 0
     fault-count-2_count-as-fault_breaker_x3_x4_n0: :: read: 1, write: 1, in-init: 1
-    fault-count-2_count-as-fault_breaker_x3_x4_n1: :: read: 0, write: 1, in-init: 0
-    dominates-2_hyp3_count-as-fault_breaker_x3_x4: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp2_count-as-fault_breaker_x3_x4: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp1_count-as-fault_breaker_x3_x4: :: read: 0, write: 1, in-init: 1
     fault-count-2_count-as-fault_breaker_x7_x8_n0: :: read: 1, write: 1, in-init: 1
-    fault-count-2_count-as-fault_breaker_x7_x8_n1: :: read: 0, write: 1, in-init: 0
     fault-count-2_count-as-fault_breaker_x9_x10_n0: :: read: 1, write: 1, in-init: 1
-    fault-count-2_count-as-fault_breaker_x9_x10_n1: :: read: 0, write: 1, in-init: 0
     pending_obs1413: :: read: 1, write: 1, in-init: 0
     fault-count-2_count-as-fault_bus_x21_n0: :: read: 1, write: 1, in-init: 1
     observed_obs1413: :: read: 1, write: 1, in-init: 0
-    fault-count-2_count-as-fault_bus_x21_n1: :: read: 0, write: 1, in-init: 0
-    dominates-2_hyp3_count-as-fault_bus_x21: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp2_count-as-fault_bus_x21: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp1_count-as-fault_bus_x21: :: read: 0, write: 1, in-init: 1
     fault-count-2_count-as-fault_line_x13_x14_n0: :: read: 1, write: 1, in-init: 1
     not_line-isolated_line_x13_x14: :: read: 1, write: 1, in-init: 1
     line-iso-trip-in-progress_line_x13_x14_obs1410: :: read: 1, write: 1, in-init: 0
     not_line-iso-trip-in-progress_line_x13_x14_obs1410: :: read: 1, write: 1, in-init: 1
     fault-count-2_count-as-fault_line_x13_x14_n1: :: read: 1, write: 1, in-init: 0
-    dominates-2_hyp3_count-as-fault_line_x13_x14: :: read: 0, write: 1, in-init: 1
-    dominates-2_hyp2_count-as-fault_line_x13_x14: :: read: 0, write: 1, in-init: 1
     dominates-2_hyp1_count-as-fault_line_x13_x14: :: read: 1, write: 1, in-init: 1
     line-iso-trip-in-progress_line_x13_x14_obs1412: :: read: 1, write: 1, in-init: 0
     not_line-iso-trip-in-progress_line_x13_x14_obs1412: :: read: 1, write: 1, in-init: 1
@@ -157,12 +132,8 @@ Predicate[163]:
     fault-count-2_count-as-fault_line_x15_x16_n1: :: read: 1, write: 1, in-init: 0
     dominates-2_hyp3_count-as-fault_line_x15_x16: :: read: 1, write: 1, in-init: 1
     line-isolated_line_x13_x14: :: read: 1, write: 1, in-init: 0
-    line-iso-state-changed_line_x13_x14_obs1410: :: read: 0, write: 1, in-init: 0
-    line-iso-state-changed_line_x13_x14_obs1412: :: read: 0, write: 1, in-init: 0
-    line-iso-state-changed_line_x13_x14_obs1416: :: read: 0, write: 1, in-init: 0
     line-isolated_line_x15_x16: :: read: 1, write: 1, in-init: 0
     line-iso-state-changed_line_x15_x16_obs1407: :: read: 1, write: 1, in-init: 0
-    line-iso-state-changed_line_x15_x16_obs1415: :: read: 0, write: 1, in-init: 0
     pending_obs1399: :: read: 1, write: 1, in-init: 1
     observed_obs1399: :: read: 1, write: 1, in-init: 0
     pending_obs1409: :: read: 1, write: 1, in-init: 0
@@ -191,7 +162,6 @@ Predicate[163]:
     achieved_constraint1: :: read: 1, write: 1, in-init: 0
     not_at_end_constraint2: :: read: 1, write: 1, in-init: 1
     achieved_constraint2: :: read: 1, write: 1, in-init: 0
-    static-true: :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[92]:
     breaker-init-state-was-open_breaker_x5_x6: 
@@ -223,13 +193,13 @@ Action[92]:
         eff: (and (N:RW:breaker-state-is-unknown_breaker_x19_x20) (RW:breaker-state-is-closed_breaker_x19_x20))
     breaker-init-state-was-closed_breaker_x22_x23: 
         pre: (and (RW:breaker-state-is-unknown_breaker_x22_x23) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:breaker-state-is-unknown_breaker_x22_x23) (W:breaker-state-is-closed_breaker_x22_x23))
+        eff: (and (N:RW:breaker-state-is-unknown_breaker_x22_x23))
     breaker-init-state-was-closed_breaker_x26_x27: 
         pre: (and (RW:breaker-state-is-unknown_breaker_x26_x27) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:breaker-state-is-unknown_breaker_x26_x27) (W:breaker-state-is-closed_breaker_x26_x27))
+        eff: (and (N:RW:breaker-state-is-unknown_breaker_x26_x27))
     breaker-init-state-was-closed_breaker_x28_x29: 
         pre: (and (RW:breaker-state-is-unknown_breaker_x28_x29) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:breaker-state-is-unknown_breaker_x28_x29) (W:breaker-state-is-closed_breaker_x28_x29))
+        eff: (and (N:RW:breaker-state-is-unknown_breaker_x28_x29))
     breaker-init-ar-status-was-auto_breaker_x11_x12: 
         pre: (and (RW:breaker-ar-status-is-unknown_breaker_x11_x12) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:breaker-ar-status-is-unknown_breaker_x11_x12) (RW:breaker-ar-status-is-auto_breaker_x11_x12))
@@ -253,7 +223,7 @@ Action[92]:
         eff: (and (RW:breaker-state-is-open_breaker_x11_x12) (N:RW:breaker-state-is-closed_breaker_x11_x12) (N:RW:pending_obs1410) (RW:observed_obs1410) (N:RW:fault-count-2_count-as-fault_breaker_x11_x12_n1) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1410))
     breaker-open-unexplained_breaker_x17_x18_obs1407_n0_n1: 
         pre: (and (RW:breaker-state-is-closed_breaker_x17_x18) (RW:pending_obs1407) (RW:fault-count-2_count-as-fault_breaker_x17_x18_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (RW:breaker-state-is-open_breaker_x17_x18) (N:RW:breaker-state-is-closed_breaker_x17_x18) (N:RW:pending_obs1407) (N:RW:fault-count-2_count-as-fault_breaker_x17_x18_n0) (RW:observed_obs1407) (W:fault-count-2_count-as-fault_breaker_x17_x18_n1) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x17_x18) (N:RW:dominates-2_hyp1_count-as-fault_breaker_x17_x18))
+        eff: (and (RW:breaker-state-is-open_breaker_x17_x18) (N:RW:breaker-state-is-closed_breaker_x17_x18) (N:RW:pending_obs1407) (N:RW:fault-count-2_count-as-fault_breaker_x17_x18_n0) (RW:observed_obs1407) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x17_x18) (N:RW:dominates-2_hyp1_count-as-fault_breaker_x17_x18))
     breaker-open-unexplained_breaker_x19_x20_obs1412_n0_n1: 
         pre: (and (RW:breaker-state-is-closed_breaker_x19_x20) (RW:pending_obs1412) (RW:fault-count-2_count-as-fault_breaker_x19_x20_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (RW:breaker-state-is-open_breaker_x19_x20) (N:RW:breaker-state-is-closed_breaker_x19_x20) (N:RW:pending_obs1412) (N:RW:fault-count-2_count-as-fault_breaker_x19_x20_n0) (RW:observed_obs1412) (RW:fault-count-2_count-as-fault_breaker_x19_x20_n1) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1412) (N:RW:dominates-2_hyp3_count-as-fault_breaker_x19_x20) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x19_x20))
@@ -262,13 +232,13 @@ Action[92]:
         eff: (and (RW:breaker-state-is-open_breaker_x11_x12) (N:RW:breaker-state-is-closed_breaker_x11_x12) (N:RW:pending_obs1410) (RW:observed_obs1410) (N:RW:fault-count-2_count-as-fault_breaker_x11_x12_n1) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1410))
     breaker-trip-unexplained_breaker_x17_x18_obs1407_n0_n1: 
         pre: (and (RW:breaker-state-is-closed_breaker_x17_x18) (RW:breaker-ar-status-is-auto_breaker_x17_x18) (RW:pending_obs1407) (RW:fault-count-2_count-as-fault_breaker_x17_x18_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (RW:breaker-state-is-open_breaker_x17_x18) (N:RW:breaker-state-is-closed_breaker_x17_x18) (N:RW:pending_obs1407) (N:RW:fault-count-2_count-as-fault_breaker_x17_x18_n0) (RW:observed_obs1407) (W:fault-count-2_count-as-fault_breaker_x17_x18_n1) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x17_x18) (N:RW:dominates-2_hyp1_count-as-fault_breaker_x17_x18))
+        eff: (and (RW:breaker-state-is-open_breaker_x17_x18) (N:RW:breaker-state-is-closed_breaker_x17_x18) (N:RW:pending_obs1407) (N:RW:fault-count-2_count-as-fault_breaker_x17_x18_n0) (RW:observed_obs1407) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x17_x18) (N:RW:dominates-2_hyp1_count-as-fault_breaker_x17_x18))
     breaker-trip-unexplained_breaker_x19_x20_obs1412_n0_n1: 
         pre: (and (RW:breaker-state-is-closed_breaker_x19_x20) (RW:breaker-ar-status-is-auto_breaker_x19_x20) (RW:pending_obs1412) (RW:fault-count-2_count-as-fault_breaker_x19_x20_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (RW:breaker-state-is-open_breaker_x19_x20) (N:RW:breaker-state-is-closed_breaker_x19_x20) (N:RW:pending_obs1412) (N:RW:fault-count-2_count-as-fault_breaker_x19_x20_n0) (RW:observed_obs1412) (RW:fault-count-2_count-as-fault_breaker_x19_x20_n1) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1412) (N:RW:dominates-2_hyp3_count-as-fault_breaker_x19_x20) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x19_x20) (RW:breaker-auto-reclose-wait_breaker_x19_x20_obs1412))
     breaker-close-unexplained_breaker_x5_x6_obs1415_n0_n1: 
         pre: (and (RW:breaker-state-is-open_breaker_x5_x6) (RW:pending_obs1415) (RW:fault-count-2_count-as-fault_breaker_x5_x6_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:breaker-state-is-open_breaker_x5_x6) (RW:breaker-state-is-closed_breaker_x5_x6) (N:RW:pending_obs1415) (N:RW:fault-count-2_count-as-fault_breaker_x5_x6_n0) (RW:observed_obs1415) (W:fault-count-2_count-as-fault_breaker_x5_x6_n1) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1415) (N:W:dominates-2_hyp3_count-as-fault_breaker_x5_x6) (N:W:dominates-2_hyp2_count-as-fault_breaker_x5_x6) (N:W:dominates-2_hyp1_count-as-fault_breaker_x5_x6))
+        eff: (and (N:RW:breaker-state-is-open_breaker_x5_x6) (RW:breaker-state-is-closed_breaker_x5_x6) (N:RW:pending_obs1415) (N:RW:fault-count-2_count-as-fault_breaker_x5_x6_n0) (RW:observed_obs1415) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1415))
     breaker-close-unexplained_breaker_x19_x20_obs1416_n0_n1: 
         pre: (and (RW:breaker-state-is-open_breaker_x19_x20) (RW:fault-count-2_count-as-fault_breaker_x19_x20_n0) (RW:pending_obs1416) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-closed_breaker_x19_x20) (N:RW:fault-count-2_count-as-fault_breaker_x19_x20_n0) (RW:fault-count-2_count-as-fault_breaker_x19_x20_n1) (N:RW:dominates-2_hyp3_count-as-fault_breaker_x19_x20) (N:RW:dominates-2_hyp2_count-as-fault_breaker_x19_x20) (N:RW:pending_obs1416) (RW:observed_obs1416) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1416))
@@ -277,7 +247,7 @@ Action[92]:
         eff: (and (N:RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-closed_breaker_x19_x20) (N:RW:fault-count-2_count-as-fault_breaker_x19_x20_n1) (N:RW:pending_obs1416) (RW:observed_obs1416) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1416))
     breaker-reclose_breaker_x19_x20_obs1416_obs1412: 
         pre: (and (RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-auto-reclose-wait_breaker_x19_x20_obs1412) (RW:pending_obs1416) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-closed_breaker_x19_x20) (N:RW:pending_obs1416) (RW:observed_obs1416) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1416) (W:breaker-auto-reopen-wait_breaker_x19_x20_obs1416))
+        eff: (and (N:RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-closed_breaker_x19_x20) (N:RW:pending_obs1416) (RW:observed_obs1416) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1416))
     breaker-command-open_breaker_x7_x8_obs1405: 
         pre: (and (RW:pending_obs1405) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:pending_obs1405) (RW:observed_obs1405))
@@ -307,7 +277,7 @@ Action[92]:
         eff: (and (N:RW:pending_obs1402) (RW:breaker-commanded-ar-non-auto_breaker_x9_x10_obs1402) (RW:observed_obs1402))
     breaker-command-ar-non-auto-1_breaker_x11_x12_obs1411: 
         pre: (and (RW:pending_obs1411) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:pending_obs1411) (W:breaker-commanded-ar-non-auto_breaker_x11_x12_obs1411) (RW:observed_obs1411))
+        eff: (and (N:RW:pending_obs1411) (RW:observed_obs1411))
     breaker-ar-status-non-auto-1_breaker_x7_x8_obs1403_obs1401: 
         pre: (and (RW:breaker-commanded-ar-non-auto_breaker_x7_x8_obs1401) (RW:pending_obs1403) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:pending_obs1403) (RW:observed_obs1403))
@@ -316,19 +286,19 @@ Action[92]:
         eff: (and (N:RW:pending_obs1404) (RW:observed_obs1404))
     breaker-ar-status-non-auto-unexplained-1_breaker_x3_x4_obs1408_n0_n1: 
         pre: (and (RW:pending_obs1408) (RW:fault-count-2_count-as-fault_breaker_x3_x4_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:pending_obs1408) (RW:observed_obs1408) (N:RW:fault-count-2_count-as-fault_breaker_x3_x4_n0) (W:fault-count-2_count-as-fault_breaker_x3_x4_n1) (N:W:dominates-2_hyp3_count-as-fault_breaker_x3_x4) (N:W:dominates-2_hyp2_count-as-fault_breaker_x3_x4) (N:W:dominates-2_hyp1_count-as-fault_breaker_x3_x4))
+        eff: (and (N:RW:pending_obs1408) (RW:observed_obs1408) (N:RW:fault-count-2_count-as-fault_breaker_x3_x4_n0))
     breaker-ar-status-non-auto-unexplained-1_breaker_x7_x8_obs1403_n0_n1: 
         pre: (and (RW:pending_obs1403) (RW:fault-count-2_count-as-fault_breaker_x7_x8_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:pending_obs1403) (RW:observed_obs1403) (N:RW:fault-count-2_count-as-fault_breaker_x7_x8_n0) (W:fault-count-2_count-as-fault_breaker_x7_x8_n1))
+        eff: (and (N:RW:pending_obs1403) (RW:observed_obs1403) (N:RW:fault-count-2_count-as-fault_breaker_x7_x8_n0))
     breaker-ar-status-non-auto-unexplained-1_breaker_x9_x10_obs1404_n0_n1: 
         pre: (and (RW:pending_obs1404) (RW:fault-count-2_count-as-fault_breaker_x9_x10_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:pending_obs1404) (RW:observed_obs1404) (N:RW:fault-count-2_count-as-fault_breaker_x9_x10_n0) (W:fault-count-2_count-as-fault_breaker_x9_x10_n1))
+        eff: (and (N:RW:pending_obs1404) (RW:observed_obs1404) (N:RW:fault-count-2_count-as-fault_breaker_x9_x10_n0))
     breaker-ar-status-non-auto-unexplained-1_breaker_x11_x12_obs1400_n0_n1: 
         pre: (and (RW:fault-count-2_count-as-fault_breaker_x11_x12_n0) (RW:pending_obs1400) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:breaker-ar-status-is-auto_breaker_x11_x12) (RW:breaker-ar-status-is-non-auto_breaker_x11_x12) (N:RW:fault-count-2_count-as-fault_breaker_x11_x12_n0) (RW:fault-count-2_count-as-fault_breaker_x11_x12_n1) (N:W:dominates-2_hyp3_count-as-fault_breaker_x11_x12) (N:W:dominates-2_hyp2_count-as-fault_breaker_x11_x12) (N:W:dominates-2_hyp1_count-as-fault_breaker_x11_x12) (N:RW:pending_obs1400) (RW:observed_obs1400))
+        eff: (and (N:RW:breaker-ar-status-is-auto_breaker_x11_x12) (RW:breaker-ar-status-is-non-auto_breaker_x11_x12) (N:RW:fault-count-2_count-as-fault_breaker_x11_x12_n0) (RW:fault-count-2_count-as-fault_breaker_x11_x12_n1) (N:RW:pending_obs1400) (RW:observed_obs1400))
     bus-voltage-goes-normal-unexplained_bus_x21_obs1413_n0_n1: 
         pre: (and (RW:pending_obs1413) (RW:fault-count-2_count-as-fault_bus_x21_n0) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:pending_obs1413) (N:RW:fault-count-2_count-as-fault_bus_x21_n0) (RW:observed_obs1413) (W:fault-count-2_count-as-fault_bus_x21_n1) (N:W:dominates-2_hyp3_count-as-fault_bus_x21) (N:W:dominates-2_hyp2_count-as-fault_bus_x21) (N:W:dominates-2_hyp1_count-as-fault_bus_x21))
+        eff: (and (N:RW:pending_obs1413) (N:RW:fault-count-2_count-as-fault_bus_x21_n0) (RW:observed_obs1413))
     line-iso-trip-first-breaker-simple-trip-1_line_x13_x14_breaker_x11_x12_breaker_x11_x12_obs1410_n1_n2: 
         pre: (and (RW:breaker-state-is-closed_breaker_x11_x12) (RW:breaker-ar-status-is-auto_breaker_x11_x12) (RW:pending_obs1410) (RW:not_line-isolated_line_x13_x14) (RW:fault-count-2_count-as-fault_line_x13_x14_n1) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (RW:breaker-state-is-open_breaker_x11_x12) (N:RW:breaker-state-is-closed_breaker_x11_x12) (N:RW:pending_obs1410) (RW:observed_obs1410) (RW:line-iso-trip-in-progress_line_x13_x14_obs1410) (N:RW:not_line-iso-trip-in-progress_line_x13_x14_obs1410) (N:RW:fault-count-2_count-as-fault_line_x13_x14_n1) (N:RW:dominates-2_hyp1_count-as-fault_line_x13_x14))
@@ -349,37 +319,37 @@ Action[92]:
         eff: (and (RW:breaker-state-is-open_breaker_x17_x18) (N:RW:breaker-state-is-closed_breaker_x17_x18) (N:RW:pending_obs1407) (RW:observed_obs1407) (N:RW:fault-count-2_count-as-fault_line_x15_x16_n0) (RW:line-iso-trip-in-progress_line_x15_x16_obs1407) (N:RW:not_line-iso-trip-in-progress_line_x15_x16_obs1407) (RW:fault-count-2_count-as-fault_line_x15_x16_n1) (N:RW:dominates-2_hyp3_count-as-fault_line_x15_x16))
     line-finish-iso-trip-3_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1410: 
         pre: (and (RW:breaker-state-is-open_breaker_x11_x12) (RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-open_breaker_x22_x23) (RW:line-iso-trip-in-progress_line_x13_x14_obs1410) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:not_line-isolated_line_x13_x14) (N:RW:line-iso-trip-in-progress_line_x13_x14_obs1410) (RW:not_line-iso-trip-in-progress_line_x13_x14_obs1410) (RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1410))
+        eff: (and (N:RW:not_line-isolated_line_x13_x14) (N:RW:line-iso-trip-in-progress_line_x13_x14_obs1410) (RW:not_line-iso-trip-in-progress_line_x13_x14_obs1410) (RW:line-isolated_line_x13_x14))
     line-finish-iso-trip-3_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1412: 
         pre: (and (RW:breaker-state-is-open_breaker_x11_x12) (RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-open_breaker_x22_x23) (RW:line-iso-trip-in-progress_line_x13_x14_obs1412) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:not_line-isolated_line_x13_x14) (N:RW:line-iso-trip-in-progress_line_x13_x14_obs1412) (RW:not_line-iso-trip-in-progress_line_x13_x14_obs1412) (RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1412))
+        eff: (and (N:RW:not_line-isolated_line_x13_x14) (N:RW:line-iso-trip-in-progress_line_x13_x14_obs1412) (RW:not_line-iso-trip-in-progress_line_x13_x14_obs1412) (RW:line-isolated_line_x13_x14))
     line-finish-iso-trip-4_line_x15_x16_breaker_x17_x18_breaker_x26_x27_breaker_x28_x29_breaker_x5_x6_obs1407: 
         pre: (and (RW:breaker-state-is-open_breaker_x5_x6) (RW:breaker-state-is-open_breaker_x17_x18) (RW:breaker-state-is-open_breaker_x26_x27) (RW:breaker-state-is-open_breaker_x28_x29) (RW:line-iso-trip-in-progress_line_x15_x16_obs1407) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:not_line-isolated_line_x15_x16) (N:RW:line-iso-trip-in-progress_line_x15_x16_obs1407) (RW:not_line-iso-trip-in-progress_line_x15_x16_obs1407) (RW:line-isolated_line_x15_x16) (RW:line-iso-state-changed_line_x15_x16_obs1407))
     line-set-state-isolated-3_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1410: 
         pre: (and (RW:breaker-state-is-open_breaker_x11_x12) (RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-open_breaker_x22_x23) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1410) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:not_line-isolated_line_x13_x14) (RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1410))
+        eff: (and (N:RW:not_line-isolated_line_x13_x14) (RW:line-isolated_line_x13_x14))
     line-set-state-isolated-3_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1412: 
         pre: (and (RW:breaker-state-is-open_breaker_x11_x12) (RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-open_breaker_x22_x23) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1412) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:not_line-isolated_line_x13_x14) (RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1412))
+        eff: (and (N:RW:not_line-isolated_line_x13_x14) (RW:line-isolated_line_x13_x14))
     line-set-state-isolated-4_line_x15_x16_breaker_x17_x18_breaker_x26_x27_breaker_x28_x29_breaker_x5_x6_obs1407: 
         pre: (and (RW:breaker-state-is-open_breaker_x5_x6) (RW:breaker-state-is-open_breaker_x17_x18) (RW:breaker-state-is-open_breaker_x26_x27) (RW:breaker-state-is-open_breaker_x28_x29) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:not_line-isolated_line_x15_x16) (RW:line-isolated_line_x15_x16) (RW:line-iso-state-changed_line_x15_x16_obs1407))
     line-re-energise-isolated-3c_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1410: 
         pre: (and (RW:breaker-state-is-closed_breaker_x19_x20) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1410) (RW:line-isolated_line_x13_x14) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (RW:not_line-isolated_line_x13_x14) (N:RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1410))
+        eff: (and (RW:not_line-isolated_line_x13_x14) (N:RW:line-isolated_line_x13_x14))
     line-re-energise-isolated-3c_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1412: 
         pre: (and (RW:breaker-state-is-closed_breaker_x19_x20) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1412) (RW:line-isolated_line_x13_x14) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (RW:not_line-isolated_line_x13_x14) (N:RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1412))
+        eff: (and (RW:not_line-isolated_line_x13_x14) (N:RW:line-isolated_line_x13_x14))
     line-re-energise-isolated-3c_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20_obs1416: 
         pre: (and (RW:breaker-state-is-closed_breaker_x19_x20) (RW:line-iso-state-may-have-changed_line_x13_x14_obs1416) (RW:line-isolated_line_x13_x14) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (RW:not_line-isolated_line_x13_x14) (N:RW:line-isolated_line_x13_x14) (W:line-iso-state-changed_line_x13_x14_obs1416))
+        eff: (and (RW:not_line-isolated_line_x13_x14) (N:RW:line-isolated_line_x13_x14))
     line-re-energise-isolated-4d_line_x15_x16_breaker_x17_x18_breaker_x26_x27_breaker_x28_x29_breaker_x5_x6_obs1407: 
         pre: (and (RW:breaker-state-is-closed_breaker_x5_x6) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (RW:line-isolated_line_x15_x16) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (RW:not_line-isolated_line_x15_x16) (N:RW:line-isolated_line_x15_x16) (RW:line-iso-state-changed_line_x15_x16_obs1407))
     line-re-energise-isolated-4d_line_x15_x16_breaker_x17_x18_breaker_x26_x27_breaker_x28_x29_breaker_x5_x6_obs1415: 
         pre: (and (RW:breaker-state-is-closed_breaker_x5_x6) (RW:line-iso-state-may-have-changed_line_x15_x16_obs1415) (RW:line-isolated_line_x15_x16) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (RW:not_line-isolated_line_x15_x16) (N:RW:line-isolated_line_x15_x16) (W:line-iso-state-changed_line_x15_x16_obs1415))
+        eff: (and (RW:not_line-isolated_line_x15_x16) (N:RW:line-isolated_line_x15_x16))
     line-init-state-isolated-3_line_x13_x14_breaker_x22_x23_breaker_x11_x12_breaker_x19_x20: 
         pre: (and (RW:breaker-state-is-open_breaker_x11_x12) (RW:breaker-state-is-open_breaker_x19_x20) (RW:breaker-state-is-open_breaker_x22_x23) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:not_line-isolated_line_x13_x14) (RW:line-isolated_line_x13_x14))
@@ -388,7 +358,7 @@ Action[92]:
         eff: (and (N:RW:not_line-isolated_line_x15_x16) (RW:line-isolated_line_x15_x16))
     line-voltage-goes-to-zero-unexplained-1_line_x13_x14_obs1399_n0_n1: 
         pre: (and (RW:fault-count-2_count-as-fault_line_x13_x14_n0) (RW:pending_obs1399) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:fault-count-2_count-as-fault_line_x13_x14_n0) (RW:fault-count-2_count-as-fault_line_x13_x14_n1) (N:W:dominates-2_hyp3_count-as-fault_line_x13_x14) (N:W:dominates-2_hyp2_count-as-fault_line_x13_x14) (N:RW:pending_obs1399) (RW:observed_obs1399))
+        eff: (and (N:RW:fault-count-2_count-as-fault_line_x13_x14_n0) (RW:fault-count-2_count-as-fault_line_x13_x14_n1) (N:RW:pending_obs1399) (RW:observed_obs1399))
     line-voltage-goes-to-zero-unexplained-1_line_x15_x16_obs1409_n0_n1: 
         pre: (and (RW:fault-count-2_count-as-fault_line_x15_x16_n0) (RW:pending_obs1409) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:fault-count-2_count-as-fault_line_x15_x16_n0) (RW:fault-count-2_count-as-fault_line_x15_x16_n1) (N:RW:dominates-2_hyp3_count-as-fault_line_x15_x16) (N:RW:pending_obs1409) (RW:observed_obs1409))
@@ -448,10 +418,10 @@ Action[92]:
         eff: (and (N:RW:line-iso-state-may-have-changed_line_x15_x16_obs1407) (RW:pending_obs1415) (N:RW:line-iso-state-changed_line_x15_x16_obs1407) (N:RW:future_obs1415))
     advance-to-obs_obs1416: 
         pre: (and (RW:observed_obs1415) (RW:future_obs1416) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:line-iso-state-may-have-changed_line_x13_x14_obs1410) (RW:pending_obs1416) (N:W:line-iso-state-changed_line_x13_x14_obs1410) (N:RW:future_obs1416))
+        eff: (and (N:RW:line-iso-state-may-have-changed_line_x13_x14_obs1410) (RW:pending_obs1416) (N:RW:future_obs1416))
     advance-to-obs_obs1417: 
         pre: (and (RW:observed_obs1416) (RW:future_obs1417) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
-        eff: (and (N:RW:line-iso-state-may-have-changed_line_x13_x14_obs1412) (N:W:breaker-auto-reopen-wait_breaker_x19_x20_obs1416) (RW:pending_obs1417) (N:W:line-iso-state-changed_line_x13_x14_obs1412) (N:RW:future_obs1417))
+        eff: (and (N:RW:line-iso-state-may-have-changed_line_x13_x14_obs1412) (RW:pending_obs1417) (N:RW:future_obs1417))
     set_goal_1_constraint0: 
         pre: (and (RW:observed_obs1410) (RW:observed_obs1407) (RW:observed_obs1412) (RW:dominates-2_hyp3_count-as-fault_breaker_x19_x20) (RW:observed_obs1415) (RW:observed_obs1416) (RW:observed_obs1405) (RW:observed_obs1414) (RW:observed_obs1406) (RW:observed_obs1398) (RW:observed_obs1417) (RW:observed_obs1401) (RW:observed_obs1402) (RW:observed_obs1411) (RW:observed_obs1408) (RW:observed_obs1403) (RW:observed_obs1404) (RW:observed_obs1400) (RW:observed_obs1413) (RW:observed_obs1399) (RW:observed_obs1409) (RW:not_at_end_constraint0) (RW:not_at_end_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:not_at_end_constraint0) (RW:achieved_constraint0))
@@ -470,8 +440,7 @@ Action[92]:
     set_goal_5_constraint2: 
         pre: (and (RW:observed_obs1410) (RW:observed_obs1407) (RW:observed_obs1412) (RW:observed_obs1415) (RW:observed_obs1416) (RW:observed_obs1405) (RW:observed_obs1414) (RW:observed_obs1406) (RW:observed_obs1398) (RW:observed_obs1417) (RW:observed_obs1401) (RW:observed_obs1402) (RW:observed_obs1411) (RW:observed_obs1408) (RW:observed_obs1403) (RW:observed_obs1404) (RW:observed_obs1400) (RW:observed_obs1413) (RW:dominates-2_hyp1_count-as-fault_line_x13_x14) (RW:observed_obs1399) (RW:observed_obs1409) (RW:achieved_constraint0) (RW:achieved_constraint1) (RW:not_at_end_constraint2))
         eff: (and (N:RW:not_at_end_constraint2) (RW:achieved_constraint2))
-Init[69]:
-  S:(static-true)
+Init[54]:
   (breaker-state-is-unknown_breaker_x5_x6)
   (breaker-state-is-unknown_breaker_x11_x12)
   (breaker-state-is-unknown_breaker_x17_x18)
@@ -483,9 +452,6 @@ Init[69]:
   (breaker-ar-status-is-unknown_breaker_x17_x18)
   (breaker-ar-status-is-unknown_breaker_x19_x20)
   (fault-count-2_count-as-fault_breaker_x11_x12_n0)
-  (dominates-2_hyp3_count-as-fault_breaker_x11_x12)
-  (dominates-2_hyp2_count-as-fault_breaker_x11_x12)
-  (dominates-2_hyp1_count-as-fault_breaker_x11_x12)
   (fault-count-2_count-as-fault_breaker_x17_x18_n0)
   (dominates-2_hyp2_count-as-fault_breaker_x17_x18)
   (dominates-2_hyp1_count-as-fault_breaker_x17_x18)
@@ -493,25 +459,14 @@ Init[69]:
   (dominates-2_hyp3_count-as-fault_breaker_x19_x20)
   (dominates-2_hyp2_count-as-fault_breaker_x19_x20)
   (fault-count-2_count-as-fault_breaker_x5_x6_n0)
-  (dominates-2_hyp3_count-as-fault_breaker_x5_x6)
-  (dominates-2_hyp2_count-as-fault_breaker_x5_x6)
-  (dominates-2_hyp1_count-as-fault_breaker_x5_x6)
   (pending_obs1398)
   (fault-count-2_count-as-fault_breaker_x3_x4_n0)
-  (dominates-2_hyp3_count-as-fault_breaker_x3_x4)
-  (dominates-2_hyp2_count-as-fault_breaker_x3_x4)
-  (dominates-2_hyp1_count-as-fault_breaker_x3_x4)
   (fault-count-2_count-as-fault_breaker_x7_x8_n0)
   (fault-count-2_count-as-fault_breaker_x9_x10_n0)
   (fault-count-2_count-as-fault_bus_x21_n0)
-  (dominates-2_hyp3_count-as-fault_bus_x21)
-  (dominates-2_hyp2_count-as-fault_bus_x21)
-  (dominates-2_hyp1_count-as-fault_bus_x21)
   (fault-count-2_count-as-fault_line_x13_x14_n0)
   (not_line-isolated_line_x13_x14)
   (not_line-iso-trip-in-progress_line_x13_x14_obs1410)
-  (dominates-2_hyp3_count-as-fault_line_x13_x14)
-  (dominates-2_hyp2_count-as-fault_line_x13_x14)
   (dominates-2_hyp1_count-as-fault_line_x13_x14)
   (not_line-iso-trip-in-progress_line_x13_x14_obs1412)
   (fault-count-2_count-as-fault_line_x15_x16_n0)

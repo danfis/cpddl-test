@@ -24,7 +24,7 @@ Compile-in LMG: Precondition of action 'tal-to-home-b' extended with (not (= ?ca
 Compile-in LMG: Found mutex condition for action 'tal-to-home-c' and mgroup {toptalon V0:card, ontalon C1:card V0:card, ontalon C2:card V0:card}: (= ?card ?cardbelow)
 Compile-in LMG: Precondition of action 'tal-to-home-c' extended with (not (= ?card ?cardbelow))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 5, objects: 39, predicates: 19, functions: 0, actions: 21, action-pre-size: [min: 3, max: 4, avg: 7.29, med: 7.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 5, objects: 39, predicates: 17, functions: 0, actions: 21, action-pre-size: [min: 3, max: 4, avg: 7.29, med: 7.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -55,12 +55,12 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action tal-to-
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action tal-to-col-e
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action tal-to-home
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 39, vars: 7, predicates: 24, rules: 202)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 39, vars: 7, predicates: 22, rules: 202)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 39, vars: 7, predicates: 24, rules: 202)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 39, vars: 7, predicates: 22, rules: 202)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 39, vars: 7, predicates: 24, rules: 202)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 39, vars: 7, predicates: 22, rules: 202)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 202
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 202, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
@@ -68,7 +68,7 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 39, predicates: 19, functions: 0, actions: 24, action-pre-size: [min: 11, max: 4, avg: 7.21, med: 6.50]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 39, predicates: 17, functions: 0, actions: 24, action-pre-size: [min: 11, max: 4, avg: 7.21, med: 6.50]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 24
 Compile-in LMG: END
@@ -127,10 +127,9 @@ Obj[39]:
     [36]: d, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [37]: h, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [38]: s, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[19]:
+Predicate[17]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     on: 1 1 :: read: 1, write: 1, in-init: 1
-    ace: 1 :: read: 0, write: 0, in-init: 0
     king: 1 :: read: 1, write: 0, in-init: 1
     clear: 1 :: read: 1, write: 1, in-init: 1
     colspace: 2 :: read: 1, write: 1, in-init: 1
@@ -138,7 +137,6 @@ Predicate[19]:
     toptalon: 1 :: read: 1, write: 1, in-init: 1
     ontalon: 1 1 :: read: 1, write: 1, in-init: 1
     talonplayable: 1 :: read: 1, write: 1, in-init: 1
-    instack: 1 :: read: 0, write: 0, in-init: 0
     home: 1 :: read: 1, write: 1, in-init: 1
     faceup: 1 :: read: 1, write: 1, in-init: 1
     bottomcol: 1 :: read: 1, write: 1, in-init: 1

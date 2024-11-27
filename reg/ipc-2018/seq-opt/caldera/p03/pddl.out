@@ -116,47 +116,35 @@ Obj[80]:
     [77]: str__o, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [78]: str__w, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [79]: str__v, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[32]:
+Predicate[20]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     knows: 3 :: read: 1, write: 1, in-init: 1
-    created: 3 :: read: 0, write: 1, in-init: 0, neg-of: =
     knows_property: 3 2 :: read: 1, write: 1, in-init: 1
-    prop_timedelta: 11 10 :: read: 0, write: 0, in-init: 1
     prop_src_host: 12 11 :: read: 1, write: 1, in-init: 0
-    prop_dns_domain_name: 11 5 :: read: 0, write: 0, in-init: 1
     prop_fqdn: 11 5 :: read: 1, write: 0, in-init: 1
     prop_password: 14 5 :: read: 1, write: 0, in-init: 1
     prop_host: 3 3 :: read: 1, write: 1, in-init: 1
-    prop_share_name: 12 5 :: read: 0, write: 1, in-init: 0
-    prop_dc: 11 4 :: read: 0, write: 0, in-init: 1
     mem_cached_domain_creds: 11 14 :: read: 1, write: 0, in-init: 1
     prop_executable: 15 5 :: read: 1, write: 1, in-init: 1
     prop_user: 14 13 :: read: 1, write: 0, in-init: 1
     prop_cred: 13 14 :: read: 1, write: 1, in-init: 1
     prop_share_path: 12 5 :: read: 1, write: 1, in-init: 0
-    prop_hostname: 11 5 :: read: 0, write: 0, in-init: 1
-    mem_hosts: 8 11 :: read: 0, write: 1, in-init: 1
-    prop_is_group: 13 4 :: read: 0, write: 0, in-init: 1
     mem_domain_user_admins: 11 13 :: read: 1, write: 0, in-init: 1
-    prop_seconds: 10 6 :: read: 0, write: 0, in-init: 1
-    prop_microseconds: 10 6 :: read: 0, write: 0, in-init: 1
     prop_windows_domain: 8 5 :: read: 1, write: 0, in-init: 1
     prop_domain: 3 3 :: read: 1, write: 0, in-init: 1
     prop_dest_host: 12 11 :: read: 1, write: 1, in-init: 0
-    prop_dns_domain: 8 5 :: read: 0, write: 0, in-init: 1
     prop_elevated: 15 4 :: read: 1, write: 1, in-init: 1
     prop_username: 13 5 :: read: 1, write: 0, in-init: 1
     prop_path: 9 5 :: read: 1, write: 1, in-init: 0
-    prop_sid: 13 5 :: read: 0, write: 0, in-init: 1
-    NOT-created: 3 :: read: 1, write: 1, in-init: 1, neg-of: created
+    NOT-created: 3 :: read: 1, write: 1, in-init: 1
 Function[0]:
 Action[8]:
     get_domain: ?v00:15 ?v01:11 ?v02:5
         pre: (and (R:prop_fqdn ?v01 ?v02) (RW:knows ?v00) (RW:knows ?v01) (RW:knows_property ?v00 phost) (RW:knows_property ?v01 pfqdn) (RW:prop_host ?v00 ?v01))
-        eff: (and (when (R:prop_domain ?v01 id_adomain) (and (RW:knows id_adomain) (RW:knows_property ?v01 pdomain) (W:mem_hosts id_adomain ?v01) (RW:knows_property id_adomain phosts) (RW:knows_property id_adomain pwindows_domain) (RW:knows_property id_adomain pdns_domain))))
+        eff: (and (when (R:prop_domain ?v01 id_adomain) (and (RW:knows id_adomain) (RW:knows_property ?v01 pdomain) (RW:knows_property id_adomain phosts) (RW:knows_property id_adomain pwindows_domain) (RW:knows_property id_adomain pdns_domain))))
     get_computers: ?v00:15 ?v02:8
         pre: (and (RW:knows ?v00) (RW:knows ?v02))
-        eff: (and (RW:knows_property ?v02 phosts) (when (R:prop_domain id_khost ?v02) (and (RW:knows id_khost) (RW:knows_property id_khost pdomain) (W:mem_hosts ?v02 id_khost) (RW:knows_property id_khost pfqdn))) (when (R:prop_domain id_rhost ?v02) (and (RW:knows id_rhost) (RW:knows_property id_rhost pdomain) (W:mem_hosts ?v02 id_rhost) (RW:knows_property id_rhost pfqdn))))
+        eff: (and (RW:knows_property ?v02 phosts) (when (R:prop_domain id_khost ?v02) (and (RW:knows id_khost) (RW:knows_property id_khost pdomain) (RW:knows_property id_khost pfqdn))) (when (R:prop_domain id_rhost ?v02) (and (RW:knows id_rhost) (RW:knows_property id_rhost pdomain) (RW:knows_property id_rhost pfqdn))))
     get_admin: ?v00:15 ?v01:11 ?v02:8
         pre: (and (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02))
         eff: (and (RW:knows_property ?v01 pdomain_user_admins) (when (R:mem_domain_user_admins ?v01 id_cdomainuser) (and (RW:knows id_cdomainuser) (RW:knows_property id_cdomainuser pusername) (RW:knows_property id_cdomainuser psid) (RW:knows_property id_cdomainuser pis_group) (RW:knows_property id_cdomainuser pdomain))) (when (R:mem_domain_user_admins ?v01 id_gdomainuser) (and (RW:knows id_gdomainuser) (RW:knows_property id_gdomainuser pusername) (RW:knows_property id_gdomainuser psid) (RW:knows_property id_gdomainuser pis_group) (RW:knows_property id_gdomainuser pdomain))))
@@ -165,45 +153,31 @@ Action[8]:
         eff: (and (when (and (R:mem_cached_domain_creds ?v01 id_hdomaincredential) (RW:prop_cred id_cdomainuser id_hdomaincredential) (RW:prop_elevated ?v00 yes)) (and (RW:knows id_hdomaincredential) (RW:knows_property id_hdomaincredential ppassword) (RW:knows id_cdomainuser) (RW:knows_property id_hdomaincredential puser) (RW:prop_cred id_cdomainuser id_hdomaincredential) (RW:knows_property id_cdomainuser pcred) (RW:knows_property id_cdomainuser pusername) (RW:knows_property id_cdomainuser pis_group) (RW:knows ?v08) (RW:knows_property id_cdomainuser pdomain) (RW:knows_property ?v08 pwindows_domain))) (when (and (R:mem_cached_domain_creds ?v01 id_ddomaincredential) (RW:prop_cred id_cdomainuser id_ddomaincredential) (RW:prop_elevated ?v00 yes)) (and (RW:knows id_ddomaincredential) (RW:knows_property id_ddomaincredential ppassword) (RW:knows id_cdomainuser) (RW:knows_property id_ddomaincredential puser) (RW:prop_cred id_cdomainuser id_ddomaincredential) (RW:knows_property id_cdomainuser pcred) (RW:knows_property id_cdomainuser pusername) (RW:knows_property id_cdomainuser pis_group) (RW:knows ?v08) (RW:knows_property id_cdomainuser pdomain) (RW:knows_property ?v08 pwindows_domain))) (when (and (R:mem_cached_domain_creds ?v01 id_hdomaincredential) (RW:prop_cred id_gdomainuser id_hdomaincredential) (RW:prop_elevated ?v00 yes)) (and (RW:knows id_hdomaincredential) (RW:knows_property id_hdomaincredential ppassword) (RW:knows id_gdomainuser) (RW:knows_property id_hdomaincredential puser) (RW:prop_cred id_gdomainuser id_hdomaincredential) (RW:knows_property id_gdomainuser pcred) (RW:knows_property id_gdomainuser pusername) (RW:knows_property id_gdomainuser pis_group) (RW:knows ?v08) (RW:knows_property id_gdomainuser pdomain) (RW:knows_property ?v08 pwindows_domain))) (when (and (R:mem_cached_domain_creds ?v01 id_ddomaincredential) (RW:prop_cred id_gdomainuser id_ddomaincredential) (RW:prop_elevated ?v00 yes)) (and (RW:knows id_ddomaincredential) (RW:knows_property id_ddomaincredential ppassword) (RW:knows id_gdomainuser) (RW:knows_property id_ddomaincredential puser) (RW:prop_cred id_gdomainuser id_ddomaincredential) (RW:knows_property id_gdomainuser pcred) (RW:knows_property id_gdomainuser pusername) (RW:knows_property id_gdomainuser pis_group) (RW:knows ?v08) (RW:knows_property id_gdomainuser pdomain) (RW:knows_property ?v08 pwindows_domain))))
     net_use: ?v00:15 ?v01:11 ?v02:11 ?v03:5 ?v04:14 ?v05:5 ?v06:13 ?v07:5 ?v08:8 ?v09:5 ?v10:12
         pre: (and (N:R:= ?v01 ?v02) (R:prop_fqdn ?v02 ?v03) (R:prop_password ?v04 ?v05) (R:prop_user ?v04 ?v06) (R:prop_windows_domain ?v08 ?v09) (R:prop_domain ?v06 ?v08) (R:prop_username ?v06 ?v07) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02) (RW:knows ?v04) (RW:knows ?v06) (RW:knows ?v08) (RW:knows_property ?v00 phost) (RW:knows_property ?v02 pfqdn) (RW:knows_property ?v04 puser) (RW:knows_property ?v04 ppassword) (RW:knows_property ?v06 pdomain) (RW:knows_property ?v06 pusername) (RW:knows_property ?v08 pwindows_domain) (RW:prop_host ?v00 ?v01) (RW:NOT-created ?v10))
-        eff: (and (when (R:mem_domain_user_admins ?v02 ?v06) (and (RW:knows ?v10) (RW:knows_property ?v10 psrc_host) (RW:prop_src_host ?v10 ?v01) (RW:knows_property ?v10 pdest_host) (RW:prop_dest_host ?v10 ?v02) (RW:knows_property ?v10 pshare_name) (W:prop_share_name ?v10 c__dollar__) (RW:knows_property ?v10 pshare_path) (RW:prop_share_path ?v10 whatever) (W:created ?v10) (N:RW:NOT-created ?v10))))
+        eff: (and (when (R:mem_domain_user_admins ?v02 ?v06) (and (RW:knows ?v10) (RW:knows_property ?v10 psrc_host) (RW:prop_src_host ?v10 ?v01) (RW:knows_property ?v10 pdest_host) (RW:prop_dest_host ?v10 ?v02) (RW:knows_property ?v10 pshare_name) (RW:knows_property ?v10 pshare_path) (RW:prop_share_path ?v10 whatever) (N:RW:NOT-created ?v10))))
     smb_copy: ?v00:15 ?v01:11 ?v02:5 ?v03:12 ?v04:11 ?v05:11 ?v06:5 ?v07:9
         pre: (and (R:= ?v01 ?v04) (N:R:= ?v01 ?v05) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v03) (RW:knows ?v04) (RW:knows ?v05) (RW:knows_property ?v00 phost) (RW:knows_property ?v00 pexecutable) (RW:knows_property ?v03 psrc_host) (RW:knows_property ?v03 pshare_path) (RW:knows_property ?v03 pdest_host) (RW:prop_src_host ?v03 ?v04) (RW:prop_host ?v00 ?v01) (RW:prop_executable ?v00 ?v02) (RW:prop_share_path ?v03 ?v06) (RW:prop_dest_host ?v03 ?v05) (RW:NOT-created ?v07))
-        eff: (and (when (RW:prop_elevated ?v00 yes) (and (RW:knows ?v07) (RW:knows_property ?v07 ppath) (RW:prop_path ?v07 somepath) (RW:knows_property ?v07 phost) (RW:prop_host ?v07 ?v05) (W:created ?v07) (N:RW:NOT-created ?v07))))
+        eff: (and (when (RW:prop_elevated ?v00 yes) (and (RW:knows ?v07) (RW:knows_property ?v07 ppath) (RW:prop_path ?v07 somepath) (RW:knows_property ?v07 phost) (RW:prop_host ?v07 ?v05) (N:RW:NOT-created ?v07))))
     net_time: ?v00:15 ?v01:11 ?v02:10
         pre: (and (RW:knows ?v00) (RW:knows ?v01))
         eff: (and (RW:knows ?v02) (RW:knows_property ?v01 ptimedelta) (RW:knows_property ?v02 pmicroseconds) (RW:knows_property ?v02 pseconds) (RW:knows_property ?v02 phost) (RW:prop_host ?v02 ?v01))
     wmic: ?v00:15 ?v01:11 ?v02:11 ?v03:9 ?v04:5 ?v06:14 ?v07:13 ?v08:8 ?v09:5 ?v10:5 ?v11:15
         pre: (and (N:R:= ?v01 ?v02) (R:prop_password ?v06 ?v10) (R:prop_user ?v06 ?v07) (R:prop_windows_domain ?v08 ?v09) (R:prop_domain ?v07 ?v08) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02) (RW:knows ?v03) (RW:knows ?v06) (RW:knows ?v07) (RW:knows ?v08) (RW:knows_property ?v00 phost) (RW:knows_property ?v02 pdomain_user_admins) (RW:knows_property ?v03 ppath) (RW:knows_property ?v03 phost) (RW:knows_property ?v06 puser) (RW:knows_property ?v06 ppassword) (RW:knows_property ?v07 pdomain) (RW:knows_property ?v08 pwindows_domain) (RW:prop_host ?v00 ?v01) (RW:prop_host ?v03 ?v02) (RW:prop_path ?v03 ?v04) (RW:NOT-created ?v11))
-        eff: (and (when (R:mem_domain_user_admins ?v02 ?v07) (and (RW:knows ?v11) (RW:knows_property ?v11 phost) (RW:prop_host ?v11 ?v02) (RW:knows_property ?v11 pelevated) (RW:prop_elevated ?v11 yes) (RW:knows_property ?v11 pexecutable) (RW:prop_executable ?v11 ?v04) (W:created ?v11) (N:RW:NOT-created ?v11))))
-Init[61]:
-  S:(prop_timedelta id_khost id_ltimedelta)
-  S:(prop_timedelta id_rhost id_stimedelta)
-  S:(prop_dns_domain_name id_khost str__p)
-  S:(prop_dns_domain_name id_rhost str__w)
+        eff: (and (when (R:mem_domain_user_admins ?v02 ?v07) (and (RW:knows ?v11) (RW:knows_property ?v11 phost) (RW:prop_host ?v11 ?v02) (RW:knows_property ?v11 pelevated) (RW:prop_elevated ?v11 yes) (RW:knows_property ?v11 pexecutable) (RW:prop_executable ?v11 ?v04) (N:RW:NOT-created ?v11))))
+Init[42]:
   S:(prop_fqdn id_khost str__o)
   S:(prop_fqdn id_rhost str__v)
   S:(prop_password id_hdomaincredential str__i)
   S:(prop_password id_ddomaincredential str__e)
-  S:(prop_dc id_khost no)
-  S:(prop_dc id_rhost yes)
   S:(mem_cached_domain_creds id_khost id_hdomaincredential)
   S:(mem_cached_domain_creds id_khost id_ddomaincredential)
   S:(mem_cached_domain_creds id_rhost id_hdomaincredential)
   S:(mem_cached_domain_creds id_rhost id_ddomaincredential)
   S:(prop_user id_hdomaincredential id_gdomainuser)
   S:(prop_user id_ddomaincredential id_cdomainuser)
-  S:(prop_hostname id_khost str__q)
-  S:(prop_hostname id_rhost str__x)
-  S:(prop_is_group id_cdomainuser no)
-  S:(prop_is_group id_gdomainuser no)
   S:(mem_domain_user_admins id_khost id_cdomainuser)
   S:(mem_domain_user_admins id_khost id_gdomainuser)
   S:(mem_domain_user_admins id_rhost id_cdomainuser)
   S:(mem_domain_user_admins id_rhost id_gdomainuser)
-  S:(prop_seconds id_ltimedelta num__13)
-  S:(prop_seconds id_stimedelta num__20)
-  S:(prop_microseconds id_ltimedelta num__12)
-  S:(prop_microseconds id_stimedelta num__19)
   S:(prop_windows_domain id_adomain str__alpha)
   S:(prop_domain id_hdomaincredential id_adomain)
   S:(prop_domain id_ddomaincredential id_adomain)
@@ -211,11 +185,8 @@ Init[61]:
   S:(prop_domain id_rhost id_adomain)
   S:(prop_domain id_cdomainuser id_adomain)
   S:(prop_domain id_gdomainuser id_adomain)
-  S:(prop_dns_domain id_adomain str__b)
   S:(prop_username id_cdomainuser str__james)
   S:(prop_username id_gdomainuser str__mary)
-  S:(prop_sid id_cdomainuser str__f)
-  S:(prop_sid id_gdomainuser str__j)
   (knows id_khost)
   (knows id_yrat)
   (knows_property id_khost pfqdn)
@@ -227,8 +198,6 @@ Init[61]:
   (prop_executable id_yrat str__z)
   (prop_cred id_cdomainuser id_ddomaincredential)
   (prop_cred id_gdomainuser id_hdomaincredential)
-  (mem_hosts id_adomain id_khost)
-  (mem_hosts id_adomain id_rhost)
   (prop_elevated id_yrat yes)
   (NOT-created id_bffile)
   (NOT-created id_befile)

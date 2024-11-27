@@ -50,27 +50,26 @@ Predicate[6]:
     at_square: 1 4 :: read: 1, write: 1, in-init: 1
     at_two: 2 4 4 :: read: 1, write: 1, in-init: 1
     at_right_l: 3 4 4 4 :: read: 1, write: 1, in-init: 1
-Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 0
+Function[0]:
 Action[6]:
     move_square: ?xy_initial:4 ?xy_final:4 ?element:1
         pre: (and (R:connected ?xy_initial ?xy_final) (R:connected ?xy_final ?xy_initial) (RW:clear ?xy_final) (RW:at_square ?element ?xy_initial))
-        eff: (and (RW:clear ?xy_initial) (N:RW:clear ?xy_final) (N:RW:at_square ?element ?xy_initial) (RW:at_square ?element ?xy_final) (increase (total-cost) 1))
+        eff: (and (RW:clear ?xy_initial) (N:RW:clear ?xy_final) (N:RW:at_square ?element ?xy_initial) (RW:at_square ?element ?xy_final))
     move_two: ?xy_initial1:4 ?xy_initial2:4 ?xy_final:4 ?element:2
         pre: (and (R:connected ?xy_initial2 ?xy_final) (RW:clear ?xy_final) (RW:at_two ?element ?xy_initial1 ?xy_initial2))
-        eff: (and (RW:clear ?xy_initial1) (N:RW:clear ?xy_final) (N:RW:at_two ?element ?xy_initial1 ?xy_initial2) (RW:at_two ?element ?xy_initial2 ?xy_final) (increase (total-cost) 2))
+        eff: (and (RW:clear ?xy_initial1) (N:RW:clear ?xy_final) (N:RW:at_two ?element ?xy_initial1 ?xy_initial2) (RW:at_two ?element ?xy_initial2 ?xy_final))
     move_l_right: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?xy_between_final:4 ?element:3
         pre: (and (N:R:= ?xy_initial3 ?xy_between_final) (N:R:= ?xy_final ?xy_final2) (R:connected ?xy_initial1 ?xy_final) (N:R:connected ?xy_initial1 ?xy_final2) (R:connected ?xy_initial3 ?xy_final) (R:connected ?xy_initial3 ?xy_final2) (R:connected ?xy_final ?xy_between_final) (R:connected ?xy_final2 ?xy_between_final) (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3))
-        eff: (and (RW:clear ?xy_initial1) (RW:clear ?xy_initial2) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_initial3 ?xy_final2) (increase (total-cost) 3))
+        eff: (and (RW:clear ?xy_initial1) (RW:clear ?xy_initial2) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_initial3 ?xy_final2))
     move_l_left: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?element:3
         pre: (and (N:R:= ?xy_final ?xy_final2) (R:connected ?xy_initial1 ?xy_final) (R:connected ?xy_initial2 ?xy_final2) (R:connected ?xy_final2 ?xy_final) (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3))
-        eff: (and (RW:clear ?xy_initial1) (RW:clear ?xy_initial3) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_final2 ?xy_initial2) (increase (total-cost) 3))
+        eff: (and (RW:clear ?xy_initial1) (RW:clear ?xy_initial3) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_final2 ?xy_initial2))
     move_l_up: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?xy_between_final:4 ?element:3
         pre: (and (N:R:= ?xy_initial1 ?xy_between_final) (N:R:= ?xy_final ?xy_final2) (R:connected ?xy_initial1 ?xy_final) (R:connected ?xy_initial1 ?xy_final2) (N:R:connected ?xy_initial3 ?xy_final) (R:connected ?xy_initial3 ?xy_final2) (R:connected ?xy_final ?xy_between_final) (R:connected ?xy_final2 ?xy_between_final) (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3))
-        eff: (and (RW:clear ?xy_initial2) (RW:clear ?xy_initial3) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_initial1 ?xy_final2) (increase (total-cost) 3))
+        eff: (and (RW:clear ?xy_initial2) (RW:clear ?xy_initial3) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_final ?xy_initial1 ?xy_final2))
     move_l_down: ?xy_initial1:4 ?xy_initial2:4 ?xy_initial3:4 ?xy_final:4 ?xy_final2:4 ?element:3
         pre: (and (N:R:= ?xy_final ?xy_final2) (R:connected ?xy_initial2 ?xy_final) (R:connected ?xy_initial3 ?xy_final2) (R:connected ?xy_final2 ?xy_final) (RW:clear ?xy_final) (RW:clear ?xy_final2) (RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3))
-        eff: (and (RW:clear ?xy_initial1) (RW:clear ?xy_initial3) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_initial2 ?xy_final ?xy_final2) (increase (total-cost) 3))
+        eff: (and (RW:clear ?xy_initial1) (RW:clear ?xy_initial3) (N:RW:clear ?xy_final) (N:RW:clear ?xy_final2) (N:RW:at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (RW:at_right_l ?element ?xy_initial2 ?xy_final ?xy_final2))
 Init[96]:
   S:(connected f0-0f f0-1f)
   S:(connected f0-0f f1-0f)

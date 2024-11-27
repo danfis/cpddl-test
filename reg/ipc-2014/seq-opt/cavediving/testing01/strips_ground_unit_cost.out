@@ -1,4 +1,4 @@
-Fact[245]:
+Fact[244]:
   (NOT-in-water)
   (at-diver d0 l0)
   (at-diver d0 l1)
@@ -243,24 +243,23 @@ Fact[245]:
   (in-storage t7)
   (in-storage t8)
   (in-storage t9)
-  (in-water)
 Op[4092]:
   (decompress d0 l0), cost: 1
     pre: (at-diver d0 l0)
     add: (NOT-in-water) (decompressing d0)
-    del: (at-diver d0 l0) (in-water)
+    del: (at-diver d0 l0)
   (decompress d1 l0), cost: 1
     pre: (at-diver d1 l0)
     add: (NOT-in-water) (decompressing d1)
-    del: (at-diver d1 l0) (in-water)
+    del: (at-diver d1 l0)
   (decompress d2 l0), cost: 1
     pre: (at-diver d2 l0)
     add: (NOT-in-water) (decompressing d2)
-    del: (at-diver d2 l0) (in-water)
+    del: (at-diver d2 l0)
   (decompress d3 l0), cost: 1
     pre: (at-diver d3 l0)
     add: (NOT-in-water) (decompressing d3)
-    del: (at-diver d3 l0) (in-water)
+    del: (at-diver d3 l0)
   (drop-tank d0 t0 l0 one two), cost: 1
     pre: (at-diver d0 l0) (capacity d0 one) (holding d0 t0)
     add: (at-tank t0 l0) (capacity d0 two)
@@ -6039,19 +6038,19 @@ Op[4092]:
     del: (at-surface d3)
   (hire-diver d0), cost: 1
     pre: (NOT-in-water) (available d0)
-    add: (at-surface d0) (in-water)
+    add: (at-surface d0)
     del: (NOT-in-water) (available d0)
   (hire-diver d1), cost: 1
     pre: (NOT-in-water) (available d1)
-    add: (at-surface d1) (in-water)
+    add: (at-surface d1)
     del: (NOT-in-water) (available d1) (available d3)
   (hire-diver d2), cost: 1
     pre: (NOT-in-water) (available d2)
-    add: (at-surface d2) (in-water)
+    add: (at-surface d2)
     del: (NOT-in-water) (available d2) (available d3)
   (hire-diver d3), cost: 1
     pre: (NOT-in-water) (available d3)
-    add: (at-surface d3) (in-water)
+    add: (at-surface d3)
     del: (NOT-in-water) (available d3)
   (photograph d0 l0 t0), cost: 1
     pre: (at-diver d0 l0) (full t0) (holding d0 t0)

@@ -27,7 +27,7 @@ Compile-in LMG: Found dead-end condition for action 'do-saw-large' and mgroup {u
 Compile-in LMG: Found dead-end condition for action 'do-saw-large' and mgroup {unused V0:part, wood V0:part V1:awood}: (and (not (= ?w teak)) (= ?p p4))
 Compile-in LMG: Precondition of action 'do-saw-large' extended with (or (and (= ?w teak) (not (= ?p p3))) (and (not (= ?p p4)) (not (= ?p p1)) (= ?w mahogany)) (and (not (= ?p p4)) (not (= ?p p1)) (not (= ?p p3))))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 18, objects: 37, predicates: 16, functions: 5, actions: 13, action-pre-size: [min: 17, max: 5, avg: 9.38, med: 1.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 18, objects: 37, predicates: 15, functions: 5, actions: 13, action-pre-size: [min: 17, max: 5, avg: 9.38, med: 1.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -59,12 +59,12 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-large
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action do-saw-large
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 37, vars: 9, predicates: 34, rules: 144)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 37, vars: 9, predicates: 33, rules: 144)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 37, vars: 9, predicates: 34, rules: 144)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 37, vars: 9, predicates: 33, rules: 144)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 37, vars: 9, predicates: 34, rules: 144)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 37, vars: 9, predicates: 33, rules: 144)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 144
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 144, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
@@ -72,7 +72,7 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 18, objects: 37, predicates: 16, functions: 5, actions: 25, action-pre-size: [min: 12, max: 5, avg: 8.72, med: 11.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 18, objects: 37, predicates: 15, functions: 5, actions: 25, action-pre-size: [min: 12, max: 5, avg: 8.72, med: 11.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 25
 Compile-in LMG: END
@@ -155,7 +155,7 @@ Obj[37]:
     [34]: s3, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [35]: s4, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [36]: s5, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[16]:
+Predicate[15]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     unused: 17 :: read: 1, write: 1, in-init: 1
     available: 3 :: read: 1, write: 1, in-init: 1
@@ -169,7 +169,6 @@ Predicate[16]:
     in-highspeed-saw: 16 9 :: read: 1, write: 1, in-init: 0
     empty: 9 :: read: 1, write: 1, in-init: 1
     has-colour: 4 1 :: read: 1, write: 0, in-init: 1
-    contains-part: 16 17 :: read: 0, write: 0, in-init: 0
     grind-treatment-change: 6 6 :: read: 1, write: 0, in-init: 1
     is-smooth: 5 :: read: 1, write: 0, in-init: 1
 Function[5]:

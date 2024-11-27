@@ -5,7 +5,7 @@ Compile-in LMG: actions: 3, lifted mgroups: 3
 Compile-in LMG: Found mutex condition for action 'succumb' and mgroup {craves V0:object C1:object, fears V0:object C2:object, craves V0:object C3:object, fears V0:object C4:object}:=1: (= ?c ?v)
 Compile-in LMG: Precondition of action 'succumb' extended with (not (= ?c ?v))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 77, predicates: 13, functions: 0, actions: 3, action-pre-size: [min: 9, max: 8, avg: 8.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 77, predicates: 12, functions: 0, actions: 3, action-pre-size: [min: 9, max: 8, avg: 8.00, med: 7.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -15,20 +15,20 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action overcom
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action feast
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action succumb
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 77, vars: 5, predicates: 14, rules: 287)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 77, vars: 5, predicates: 13, rules: 281)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 77, vars: 5, predicates: 14, rules: 287)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 77, vars: 5, predicates: 13, rules: 281)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 77, vars: 5, predicates: 14, rules: 287)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 287
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 287, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 77, vars: 5, predicates: 13, rules: 281)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 281
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 281, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 77, predicates: 13, functions: 0, actions: 3, action-pre-size: [min: 9, max: 8, avg: 8.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 77, predicates: 12, functions: 0, actions: 3, action-pre-size: [min: 9, max: 8, avg: 8.00, med: 7.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 3
 Compile-in LMG: END
@@ -117,9 +117,8 @@ Obj[77]:
     [74]: mars, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [75]: neptune, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [76]: pluto, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
+Predicate[12]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
-    province: 0 :: read: 0, write: 0, in-init: 1
     planet: 0 :: read: 1, write: 0, in-init: 1
     food: 0 :: read: 1, write: 0, in-init: 1
     pleasure: 0 :: read: 1, write: 0, in-init: 1
@@ -142,13 +141,7 @@ Action[3]:
     succumb: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
         pre: (and (N:R:= ?c ?v) (R:food ?n) (R:pleasure ?v) (R:pain ?c) (R:orbits ?s1 ?s2) (RW:craves ?v ?n) (RW:fears ?c ?v) (RW:harmony ?v ?s1))
         eff: (and (RW:craves ?c ?n) (N:RW:fears ?c ?v) (N:RW:harmony ?v ?s1) (RW:harmony ?v ?s2))
-Init[209]:
-  S:(province surrey)
-  S:(province moravia)
-  S:(province quebec)
-  S:(province oregon)
-  S:(province alsace)
-  S:(province kentucky)
+Init[203]:
   S:(planet mercury)
   S:(planet mars)
   S:(planet neptune)

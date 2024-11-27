@@ -31,7 +31,7 @@ Obj[17]:
     [14]: vehicle4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: vehicle5, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [16]: vehicle6, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[20]:
+Predicate[19]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     connected-by-land: 2 2 :: read: 1, write: 0, in-init: 1
     connected-by-rail: 2 2 :: read: 1, write: 1, in-init: 0
@@ -47,19 +47,17 @@ Predicate[20]:
     has-sawmill: 2 :: read: 1, write: 1, in-init: 0
     has-ironworks: 2 :: read: 1, write: 1, in-init: 0
     has-docks: 2 :: read: 1, write: 1, in-init: 0
-    has-wharf: 2 :: read: 0, write: 1, in-init: 0
     is-train: 3 :: read: 1, write: 1, in-init: 0
     is-ship: 3 :: read: 1, write: 1, in-init: 0
     is-at: 3 2 :: read: 1, write: 1, in-init: 0
     potential: 3 :: read: 1, write: 1, in-init: 1
-Function[7]:
+Function[6]:
     available: 4 1 :: read: 1, write: 1, in-init: 1
     space-in: 3 :: read: 1, write: 1, in-init: 0
     carts-at: 2 :: read: 1, write: 1, in-init: 1
     labour: :: read: 1, write: 1, in-init: 1
     resource-use: :: read: 1, write: 1, in-init: 1
     pollution: :: read: 1, write: 1, in-init: 1
-    housing: 2 :: read: 0, write: 1, in-init: 1
 Action[25]:
     load: ?v:3 ?p:2 ?r:4
         pre: (and (RW:is-at ?v ?p) (> (available ?r ?p) 0) (> (space-in ?v) 0))
@@ -102,13 +100,13 @@ Action[25]:
         eff: (and (RW:has-docks ?p) (decrease (available stone ?p) 2) (decrease (available wood ?p) 2) (increase (labour) 2))
     build-wharf: ?p:2
         pre: (and (RW:has-docks ?p) (>= (available stone ?p) 2) (>= (available iron ?p) 2))
-        eff: (and (W:has-wharf ?p) (decrease (available stone ?p) 2) (decrease (available iron ?p) 2) (increase (labour) 2))
+        eff: (and (decrease (available stone ?p) 2) (decrease (available iron ?p) 2) (increase (labour) 2))
     build-rail: ?p1:2 ?p2:2
         pre: (and (R:connected-by-land ?p1 ?p2) (>= (available wood ?p1) 1) (>= (available iron ?p1) 1))
         eff: (and (RW:connected-by-rail ?p1 ?p2) (decrease (available wood ?p1) 1) (decrease (available iron ?p1) 1) (increase (labour) 2))
     build-house: ?p:2
         pre: (and (>= (available wood ?p) 1) (>= (available stone ?p) 1))
-        eff: (and (increase (housing ?p) 1) (decrease (available wood ?p) 1) (decrease (available stone ?p) 1))
+        eff: (and (decrease (available wood ?p) 1) (decrease (available stone ?p) 1))
     build-cart: ?p:2
         pre: (and (>= (available timber ?p) 1))
         eff: (and (decrease (available timber ?p) 1) (increase (carts-at ?p) 1) (increase (labour) 1))
@@ -117,7 +115,7 @@ Action[25]:
         eff: (and (RW:is-train ?v) (RW:is-at ?v ?p) (N:RW:potential ?v) (decrease (available iron ?p) 2) (assign (space-in ?v) 5) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (available coal ?v) 0) (assign (available stone ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (increase (labour) 2))
     build-ship: ?p:2 ?v:3
         pre: (and (RW:potential ?v) (>= (available iron ?p) 4))
-        eff: (and (W:has-wharf ?p) (RW:is-ship ?v) (RW:is-at ?v ?p) (N:RW:potential ?v) (decrease (available iron ?p) 4) (assign (space-in ?v) 10) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (available coal ?v) 0) (assign (available stone ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (increase (labour) 3))
+        eff: (and (RW:is-ship ?v) (RW:is-at ?v ?p) (N:RW:potential ?v) (decrease (available iron ?p) 4) (assign (space-in ?v) 10) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (available coal ?v) 0) (assign (available stone ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (increase (labour) 3))
     fell-timber: ?p:2
         pre: (and (RW:has-cabin ?p))
         eff: (and (increase (available timber ?p) 1) (increase (labour) 1))
@@ -157,11 +155,10 @@ Init[20]:
   (potential vehicle4)
   (potential vehicle5)
   (potential vehicle6)
-Init[35]:
+Init[31]:
   (= (resource-use) 0)
   (= (labour) 0)
   (= (pollution) 0)
-  (= (housing location0) 0)
   (= (available wood location0) 0)
   (= (carts-at location0) 0)
   (= (available timber location0) 0)
@@ -169,7 +166,6 @@ Init[35]:
   (= (available stone location0) 0)
   (= (available iron location0) 0)
   (= (available coal location0) 0)
-  (= (housing location2) 0)
   (= (available wood location2) 0)
   (= (carts-at location2) 0)
   (= (available timber location2) 0)
@@ -177,7 +173,6 @@ Init[35]:
   (= (available stone location2) 0)
   (= (available iron location2) 0)
   (= (available coal location2) 0)
-  (= (housing location3) 0)
   (= (available wood location3) 0)
   (= (carts-at location3) 0)
   (= (available timber location3) 0)
@@ -185,7 +180,6 @@ Init[35]:
   (= (available stone location3) 0)
   (= (available iron location3) 0)
   (= (available coal location3) 0)
-  (= (housing location1) 0)
   (= (available wood location1) 0)
   (= (carts-at location1) 0)
   (= (available timber location1) 0)

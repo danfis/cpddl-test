@@ -70,16 +70,13 @@ Obj[56]:
     [53]: airplane_horst, type: 1, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
     [54]: airplane_holgi, type: 1, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
     [55]: airplane_4xekd, type: 1, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
+Predicate[10]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     has-type: 1 4 :: read: 1, write: 0, in-init: 1
     at-segment: 1 2 :: read: 1, write: 1, in-init: 1
     facing: 1 3 :: read: 1, write: 1, in-init: 1
-    occupied: 2 :: read: 0, write: 1, in-init: 1
     not_occupied: 2 :: read: 1, write: 1, in-init: 1
-    blocked: 2 1 :: read: 0, write: 1, in-init: 1
     not_blocked: 2 1 :: read: 1, write: 1, in-init: 1
-    is-start-runway: 2 3 :: read: 0, write: 0, in-init: 0
     airborne: 1 2 :: read: 1, write: 1, in-init: 0
     is-moving: 1 :: read: 1, write: 1, in-init: 1
     is-pushing: 1 :: read: 1, write: 1, in-init: 1
@@ -88,446 +85,446 @@ Function[0]:
 Action[147]:
     move_seg_a01_0_100_seg_c3_c_a01_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_a01_0_100) (RW:facing ?a north) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_blocked seg_c3_c_a01_0_100 airplane_cfbeg) (RW:not_blocked seg_c3_c_a01_0_100 airplane_daewh) (RW:not_blocked seg_c3_c_a01_0_100 airplane_dfboy) (RW:not_blocked seg_c3_c_a01_0_100 airplane_wurst) (RW:not_blocked seg_c3_c_a01_0_100 airplane_horst) (RW:not_blocked seg_c3_c_a01_0_100 airplane_holgi) (RW:not_blocked seg_c3_c_a01_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c_a01_0_100) (N:RW:at-segment ?a seg_a01_0_100) (W:occupied seg_c3_c_a01_0_100) (N:W:occupied seg_a01_0_100) (N:RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_a01_0_100) (W:blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c_a01_0_100) (N:RW:at-segment ?a seg_a01_0_100) (N:RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_a01_0_100) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a))
     move_seg_c3_c_a01_0_100_seg_c3_c4_0_50_north_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c_a01_0_100) (RW:facing ?a north) (RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c3_c4_0_50 airplane_cfbeg) (RW:not_blocked seg_c3_c4_0_50 airplane_daewh) (RW:not_blocked seg_c3_c4_0_50 airplane_dfboy) (RW:not_blocked seg_c3_c4_0_50 airplane_wurst) (RW:not_blocked seg_c3_c4_0_50 airplane_horst) (RW:not_blocked seg_c3_c4_0_50 airplane_holgi) (RW:not_blocked seg_c3_c4_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_a01_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (W:occupied seg_c3_c4_0_50) (N:W:occupied seg_c3_c_a01_0_100) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (W:blocked seg_c2_c3_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (N:W:blocked seg_a01_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_a01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_a01_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_a01_0_100 ?a))
     move_seg_c3_c4_0_50_seg_c4_c5_0_50_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c4_0_50) (RW:facing ?a south) (RW:not_occupied seg_c4_c5_0_50) (RW:not_blocked seg_c4_c5_0_50 airplane_cfbeg) (RW:not_blocked seg_c4_c5_0_50 airplane_daewh) (RW:not_blocked seg_c4_c5_0_50 airplane_dfboy) (RW:not_blocked seg_c4_c5_0_50 airplane_wurst) (RW:not_blocked seg_c4_c5_0_50 airplane_horst) (RW:not_blocked seg_c4_c5_0_50 airplane_holgi) (RW:not_blocked seg_c4_c5_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c3_c4_0_50) (RW:at-segment ?a seg_c4_c5_0_50) (N:W:occupied seg_c3_c4_0_50) (W:occupied seg_c4_c5_0_50) (RW:not_occupied seg_c3_c4_0_50) (N:RW:not_occupied seg_c4_c5_0_50) (N:W:blocked seg_c2_c3_0_100 ?a) (N:W:blocked seg_c3_c_a01_0_100 ?a) (N:W:blocked seg_c3_c_b01_0_100 ?a) (W:blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c3_c4_0_50) (RW:at-segment ?a seg_c4_c5_0_50) (RW:not_occupied seg_c3_c4_0_50) (N:RW:not_occupied seg_c4_c5_0_50) (RW:not_blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a))
     move_seg_c4_c5_0_50_seg_c3_c4_0_50_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c4_c5_0_50) (RW:facing ?a north) (RW:not_occupied seg_c3_c4_0_50) (RW:not_blocked seg_c3_c4_0_50 airplane_cfbeg) (RW:not_blocked seg_c3_c4_0_50 airplane_daewh) (RW:not_blocked seg_c3_c4_0_50 airplane_dfboy) (RW:not_blocked seg_c3_c4_0_50 airplane_wurst) (RW:not_blocked seg_c3_c4_0_50 airplane_horst) (RW:not_blocked seg_c3_c4_0_50 airplane_holgi) (RW:not_blocked seg_c3_c4_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c4_c5_0_50) (W:occupied seg_c3_c4_0_50) (N:W:occupied seg_c4_c5_0_50) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c4_c5_0_50) (W:blocked seg_c3_c4_0_50 ?a) (N:W:blocked seg_c5_c6_0_50 ?a) (N:W:blocked seg_c5_c_a02_0_100 ?a) (N:W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c4_c5_0_50) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c4_c5_0_50) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a))
     move_seg_c3_c4_0_50_seg_c2_c3_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c4_0_50) (RW:facing ?a north) (RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c2_c3_0_100 airplane_cfbeg) (RW:not_blocked seg_c2_c3_0_100 airplane_daewh) (RW:not_blocked seg_c2_c3_0_100 airplane_dfboy) (RW:not_blocked seg_c2_c3_0_100 airplane_wurst) (RW:not_blocked seg_c2_c3_0_100 airplane_horst) (RW:not_blocked seg_c2_c3_0_100 airplane_holgi) (RW:not_blocked seg_c2_c3_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c2_c3_0_100) (N:RW:at-segment ?a seg_c3_c4_0_50) (W:occupied seg_c2_c3_0_100) (N:W:occupied seg_c3_c4_0_50) (N:RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (W:blocked seg_c2_c3_0_100 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (N:W:blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c4_c5_0_50 ?a))
+        eff: (and (RW:at-segment ?a seg_c2_c3_0_100) (N:RW:at-segment ?a seg_c3_c4_0_50) (N:RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c4_c5_0_50 ?a))
     move_seg_c2_c3_0_100_seg_c_c2_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c2_c3_0_100) (RW:facing ?a north) (RW:not_occupied seg_c_c2_0_100) (RW:not_blocked seg_c_c2_0_100 airplane_cfbeg) (RW:not_blocked seg_c_c2_0_100 airplane_daewh) (RW:not_blocked seg_c_c2_0_100 airplane_dfboy) (RW:not_blocked seg_c_c2_0_100 airplane_wurst) (RW:not_blocked seg_c_c2_0_100 airplane_horst) (RW:not_blocked seg_c_c2_0_100 airplane_holgi) (RW:not_blocked seg_c_c2_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c_c2_0_100) (N:RW:at-segment ?a seg_c2_c3_0_100) (W:occupied seg_c_c2_0_100) (N:W:occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c_c2_0_100) (RW:not_occupied seg_c2_c3_0_100) (W:blocked seg_c_c2_0_100 ?a) (N:W:blocked seg_c3_c4_0_50 ?a) (N:W:blocked seg_c3_c_a01_0_100 ?a) (N:W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c_c2_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c_c2_0_100) (N:RW:at-segment ?a seg_c2_c3_0_100) (N:RW:not_occupied seg_c_c2_0_100) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_blocked seg_c_c2_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a))
     move_seg_c_c2_0_100_seg_n_c_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c_c2_0_100) (RW:facing ?a north) (RW:not_occupied seg_n_c_0_100) (RW:not_blocked seg_n_c_0_100 airplane_cfbeg) (RW:not_blocked seg_n_c_0_100 airplane_daewh) (RW:not_blocked seg_n_c_0_100 airplane_dfboy) (RW:not_blocked seg_n_c_0_100 airplane_wurst) (RW:not_blocked seg_n_c_0_100 airplane_horst) (RW:not_blocked seg_n_c_0_100 airplane_holgi) (RW:not_blocked seg_n_c_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n_c_0_100) (N:RW:at-segment ?a seg_c_c2_0_100) (W:occupied seg_n_c_0_100) (N:W:occupied seg_c_c2_0_100) (N:RW:not_occupied seg_n_c_0_100) (RW:not_occupied seg_c_c2_0_100) (W:blocked seg_n_c_0_100 ?a) (N:W:blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:not_blocked seg_c2_c3_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_n_c_0_100) (N:RW:at-segment ?a seg_c_c2_0_100) (N:RW:not_occupied seg_n_c_0_100) (RW:not_occupied seg_c_c2_0_100) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:not_blocked seg_c2_c3_0_100 ?a))
     move_seg_n_c_0_100_seg_n3_n_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n_c_0_100) (RW:facing ?a north) (RW:not_occupied seg_n3_n_0_100) (RW:not_occupied seg_n_n4_0_100) (RW:not_blocked seg_n3_n_0_100 airplane_cfbeg) (RW:not_blocked seg_n3_n_0_100 airplane_daewh) (RW:not_blocked seg_n3_n_0_100 airplane_dfboy) (RW:not_blocked seg_n3_n_0_100 airplane_wurst) (RW:not_blocked seg_n3_n_0_100 airplane_horst) (RW:not_blocked seg_n3_n_0_100 airplane_holgi) (RW:not_blocked seg_n3_n_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n3_n_0_100) (N:RW:at-segment ?a seg_n_c_0_100) (W:occupied seg_n3_n_0_100) (N:W:occupied seg_n_c_0_100) (N:RW:not_occupied seg_n3_n_0_100) (RW:not_occupied seg_n_c_0_100) (W:blocked seg_n3_n_0_100 ?a) (W:blocked seg_n_n4_0_100 ?a) (N:W:blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:not_blocked seg_c_c2_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_n3_n_0_100) (N:RW:at-segment ?a seg_n_c_0_100) (N:RW:not_occupied seg_n3_n_0_100) (RW:not_occupied seg_n_c_0_100) (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:not_blocked seg_c_c2_0_100 ?a))
     move_seg_n3_n_0_100_seg_n2_n3_0_85_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n3_n_0_100) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_0_85) (RW:not_blocked seg_n2_n3_0_85 airplane_cfbeg) (RW:not_blocked seg_n2_n3_0_85 airplane_daewh) (RW:not_blocked seg_n2_n3_0_85 airplane_dfboy) (RW:not_blocked seg_n2_n3_0_85 airplane_wurst) (RW:not_blocked seg_n2_n3_0_85 airplane_horst) (RW:not_blocked seg_n2_n3_0_85 airplane_holgi) (RW:not_blocked seg_n2_n3_0_85 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n2_n3_0_85) (N:RW:at-segment ?a seg_n3_n_0_100) (W:occupied seg_n2_n3_0_85) (N:W:occupied seg_n3_n_0_100) (N:RW:not_occupied seg_n2_n3_0_85) (RW:not_occupied seg_n3_n_0_100) (W:blocked seg_n2_n3_0_85 ?a) (N:W:blocked seg_n_n4_0_100 ?a) (N:W:blocked seg_n_c_0_100 ?a) (N:RW:not_blocked seg_n2_n3_0_85 ?a) (RW:not_blocked seg_n_n4_0_100 ?a) (RW:not_blocked seg_n_c_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_n2_n3_0_85) (N:RW:at-segment ?a seg_n3_n_0_100) (N:RW:not_occupied seg_n2_n3_0_85) (RW:not_occupied seg_n3_n_0_100) (N:RW:not_blocked seg_n2_n3_0_85 ?a) (RW:not_blocked seg_n_n4_0_100 ?a) (RW:not_blocked seg_n_c_0_100 ?a))
     move_seg_n2_n3_0_85_seg_n2_n3_6_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_0_85) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_6_0_86) (RW:not_blocked seg_n2_n3_6_0_86 airplane_cfbeg) (RW:not_blocked seg_n2_n3_6_0_86 airplane_daewh) (RW:not_blocked seg_n2_n3_6_0_86 airplane_dfboy) (RW:not_blocked seg_n2_n3_6_0_86 airplane_wurst) (RW:not_blocked seg_n2_n3_6_0_86 airplane_horst) (RW:not_blocked seg_n2_n3_6_0_86 airplane_holgi) (RW:not_blocked seg_n2_n3_6_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_n2_n3_0_85) (RW:at-segment ?a seg_n2_n3_6_0_86) (N:W:occupied seg_n2_n3_0_85) (W:occupied seg_n2_n3_6_0_86) (RW:not_occupied seg_n2_n3_0_85) (N:RW:not_occupied seg_n2_n3_6_0_86) (N:W:blocked seg_n3_n_0_100 ?a) (W:blocked seg_n2_n3_6_0_86 ?a) (RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n2_n3_6_0_86 ?a))
+        eff: (and (N:RW:at-segment ?a seg_n2_n3_0_85) (RW:at-segment ?a seg_n2_n3_6_0_86) (RW:not_occupied seg_n2_n3_0_85) (N:RW:not_occupied seg_n2_n3_6_0_86) (RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n2_n3_6_0_86 ?a))
     move_seg_n2_n3_6_0_86_seg_n2_n3_5_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_6_0_86) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_5_0_86) (RW:not_blocked seg_n2_n3_5_0_86 airplane_cfbeg) (RW:not_blocked seg_n2_n3_5_0_86 airplane_daewh) (RW:not_blocked seg_n2_n3_5_0_86 airplane_dfboy) (RW:not_blocked seg_n2_n3_5_0_86 airplane_wurst) (RW:not_blocked seg_n2_n3_5_0_86 airplane_horst) (RW:not_blocked seg_n2_n3_5_0_86 airplane_holgi) (RW:not_blocked seg_n2_n3_5_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n2_n3_5_0_86) (N:RW:at-segment ?a seg_n2_n3_6_0_86) (W:occupied seg_n2_n3_5_0_86) (N:W:occupied seg_n2_n3_6_0_86) (N:RW:not_occupied seg_n2_n3_5_0_86) (RW:not_occupied seg_n2_n3_6_0_86) (N:W:blocked seg_n2_n3_0_85 ?a) (W:blocked seg_n2_n3_5_0_86 ?a) (RW:not_blocked seg_n2_n3_0_85 ?a) (N:RW:not_blocked seg_n2_n3_5_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n2_n3_5_0_86) (N:RW:at-segment ?a seg_n2_n3_6_0_86) (N:RW:not_occupied seg_n2_n3_5_0_86) (RW:not_occupied seg_n2_n3_6_0_86) (RW:not_blocked seg_n2_n3_0_85 ?a) (N:RW:not_blocked seg_n2_n3_5_0_86 ?a))
     move_seg_n2_n3_5_0_86_seg_n2_n3_4_0_85_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_5_0_86) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_4_0_85) (RW:not_blocked seg_n2_n3_4_0_85 airplane_cfbeg) (RW:not_blocked seg_n2_n3_4_0_85 airplane_daewh) (RW:not_blocked seg_n2_n3_4_0_85 airplane_dfboy) (RW:not_blocked seg_n2_n3_4_0_85 airplane_wurst) (RW:not_blocked seg_n2_n3_4_0_85 airplane_horst) (RW:not_blocked seg_n2_n3_4_0_85 airplane_holgi) (RW:not_blocked seg_n2_n3_4_0_85 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n2_n3_4_0_85) (N:RW:at-segment ?a seg_n2_n3_5_0_86) (W:occupied seg_n2_n3_4_0_85) (N:W:occupied seg_n2_n3_5_0_86) (N:RW:not_occupied seg_n2_n3_4_0_85) (RW:not_occupied seg_n2_n3_5_0_86) (W:blocked seg_n2_n3_4_0_85 ?a) (N:W:blocked seg_n2_n3_6_0_86 ?a) (N:RW:not_blocked seg_n2_n3_4_0_85 ?a) (RW:not_blocked seg_n2_n3_6_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n2_n3_4_0_85) (N:RW:at-segment ?a seg_n2_n3_5_0_86) (N:RW:not_occupied seg_n2_n3_4_0_85) (RW:not_occupied seg_n2_n3_5_0_86) (N:RW:not_blocked seg_n2_n3_4_0_85 ?a) (RW:not_blocked seg_n2_n3_6_0_86 ?a))
     move_seg_n2_n3_4_0_85_seg_n2_n3_3_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_4_0_85) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_3_0_86) (RW:not_blocked seg_n2_n3_3_0_86 airplane_cfbeg) (RW:not_blocked seg_n2_n3_3_0_86 airplane_daewh) (RW:not_blocked seg_n2_n3_3_0_86 airplane_dfboy) (RW:not_blocked seg_n2_n3_3_0_86 airplane_wurst) (RW:not_blocked seg_n2_n3_3_0_86 airplane_horst) (RW:not_blocked seg_n2_n3_3_0_86 airplane_holgi) (RW:not_blocked seg_n2_n3_3_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n2_n3_3_0_86) (N:RW:at-segment ?a seg_n2_n3_4_0_85) (W:occupied seg_n2_n3_3_0_86) (N:W:occupied seg_n2_n3_4_0_85) (N:RW:not_occupied seg_n2_n3_3_0_86) (RW:not_occupied seg_n2_n3_4_0_85) (W:blocked seg_n2_n3_3_0_86 ?a) (N:W:blocked seg_n2_n3_5_0_86 ?a) (N:RW:not_blocked seg_n2_n3_3_0_86 ?a) (RW:not_blocked seg_n2_n3_5_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n2_n3_3_0_86) (N:RW:at-segment ?a seg_n2_n3_4_0_85) (N:RW:not_occupied seg_n2_n3_3_0_86) (RW:not_occupied seg_n2_n3_4_0_85) (N:RW:not_blocked seg_n2_n3_3_0_86 ?a) (RW:not_blocked seg_n2_n3_5_0_86 ?a))
     move_seg_n2_n3_3_0_86_seg_n2_n3_2_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_3_0_86) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_2_0_86) (RW:not_blocked seg_n2_n3_2_0_86 airplane_cfbeg) (RW:not_blocked seg_n2_n3_2_0_86 airplane_daewh) (RW:not_blocked seg_n2_n3_2_0_86 airplane_dfboy) (RW:not_blocked seg_n2_n3_2_0_86 airplane_wurst) (RW:not_blocked seg_n2_n3_2_0_86 airplane_horst) (RW:not_blocked seg_n2_n3_2_0_86 airplane_holgi) (RW:not_blocked seg_n2_n3_2_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n2_n3_2_0_86) (N:RW:at-segment ?a seg_n2_n3_3_0_86) (W:occupied seg_n2_n3_2_0_86) (N:W:occupied seg_n2_n3_3_0_86) (N:RW:not_occupied seg_n2_n3_2_0_86) (RW:not_occupied seg_n2_n3_3_0_86) (W:blocked seg_n2_n3_2_0_86 ?a) (N:W:blocked seg_n2_n3_4_0_85 ?a) (N:RW:not_blocked seg_n2_n3_2_0_86 ?a) (RW:not_blocked seg_n2_n3_4_0_85 ?a))
+        eff: (and (RW:at-segment ?a seg_n2_n3_2_0_86) (N:RW:at-segment ?a seg_n2_n3_3_0_86) (N:RW:not_occupied seg_n2_n3_2_0_86) (RW:not_occupied seg_n2_n3_3_0_86) (N:RW:not_blocked seg_n2_n3_2_0_86 ?a) (RW:not_blocked seg_n2_n3_4_0_85 ?a))
     move_seg_n2_n3_2_0_86_seg_n2_n3_1_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_2_0_86) (RW:facing ?a north) (RW:not_occupied seg_n2_n3_1_0_86) (RW:not_blocked seg_n2_n3_1_0_86 airplane_cfbeg) (RW:not_blocked seg_n2_n3_1_0_86 airplane_daewh) (RW:not_blocked seg_n2_n3_1_0_86 airplane_dfboy) (RW:not_blocked seg_n2_n3_1_0_86 airplane_wurst) (RW:not_blocked seg_n2_n3_1_0_86 airplane_horst) (RW:not_blocked seg_n2_n3_1_0_86 airplane_holgi) (RW:not_blocked seg_n2_n3_1_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n2_n3_1_0_86) (N:RW:at-segment ?a seg_n2_n3_2_0_86) (W:occupied seg_n2_n3_1_0_86) (N:W:occupied seg_n2_n3_2_0_86) (N:RW:not_occupied seg_n2_n3_1_0_86) (RW:not_occupied seg_n2_n3_2_0_86) (W:blocked seg_n2_n3_1_0_86 ?a) (N:W:blocked seg_n2_n3_3_0_86 ?a) (N:RW:not_blocked seg_n2_n3_1_0_86 ?a) (RW:not_blocked seg_n2_n3_3_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n2_n3_1_0_86) (N:RW:at-segment ?a seg_n2_n3_2_0_86) (N:RW:not_occupied seg_n2_n3_1_0_86) (RW:not_occupied seg_n2_n3_2_0_86) (N:RW:not_blocked seg_n2_n3_1_0_86 ?a) (RW:not_blocked seg_n2_n3_3_0_86 ?a))
     move_seg_n2_n3_1_0_86_seg_n1_n2_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n2_n3_1_0_86) (RW:facing ?a north) (RW:not_occupied seg_n1_n2_0_100) (RW:not_blocked seg_n1_n2_0_100 airplane_cfbeg) (RW:not_blocked seg_n1_n2_0_100 airplane_daewh) (RW:not_blocked seg_n1_n2_0_100 airplane_dfboy) (RW:not_blocked seg_n1_n2_0_100 airplane_wurst) (RW:not_blocked seg_n1_n2_0_100 airplane_horst) (RW:not_blocked seg_n1_n2_0_100 airplane_holgi) (RW:not_blocked seg_n1_n2_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n1_n2_0_100) (N:RW:at-segment ?a seg_n2_n3_1_0_86) (W:occupied seg_n1_n2_0_100) (N:W:occupied seg_n2_n3_1_0_86) (N:RW:not_occupied seg_n1_n2_0_100) (RW:not_occupied seg_n2_n3_1_0_86) (W:blocked seg_n1_n2_0_100 ?a) (N:W:blocked seg_n2_n3_2_0_86 ?a) (N:RW:not_blocked seg_n1_n2_0_100 ?a) (RW:not_blocked seg_n2_n3_2_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n1_n2_0_100) (N:RW:at-segment ?a seg_n2_n3_1_0_86) (N:RW:not_occupied seg_n1_n2_0_100) (RW:not_occupied seg_n2_n3_1_0_86) (N:RW:not_blocked seg_n1_n2_0_100 ?a) (RW:not_blocked seg_n2_n3_2_0_86 ?a))
     move_seg_n1_n2_0_100_seg_n1_a_0_100_north_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n1_n2_0_100) (RW:facing ?a north) (RW:not_occupied seg_n1_a_0_100) (RW:not_blocked seg_n1_a_0_100 airplane_cfbeg) (RW:not_blocked seg_n1_a_0_100 airplane_daewh) (RW:not_blocked seg_n1_a_0_100 airplane_dfboy) (RW:not_blocked seg_n1_a_0_100 airplane_wurst) (RW:not_blocked seg_n1_a_0_100 airplane_horst) (RW:not_blocked seg_n1_a_0_100 airplane_holgi) (RW:not_blocked seg_n1_a_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_n1_n2_0_100) (RW:at-segment ?a seg_n1_a_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (N:W:occupied seg_n1_n2_0_100) (W:occupied seg_n1_a_0_100) (RW:not_occupied seg_n1_n2_0_100) (N:RW:not_occupied seg_n1_a_0_100) (W:blocked seg_n1_a_0_100 ?a) (N:W:blocked seg_n2_n3_1_0_86 ?a) (N:RW:not_blocked seg_n1_a_0_100 ?a) (RW:not_blocked seg_n2_n3_1_0_86 ?a))
+        eff: (and (N:RW:at-segment ?a seg_n1_n2_0_100) (RW:at-segment ?a seg_n1_a_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (RW:not_occupied seg_n1_n2_0_100) (N:RW:not_occupied seg_n1_a_0_100) (N:RW:not_blocked seg_n1_a_0_100 ?a) (RW:not_blocked seg_n2_n3_1_0_86 ?a))
     move_seg_n1_a_0_100_seg_a_09_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n1_a_0_100) (RW:facing ?a south) (RW:not_occupied seg_a_09_0_100) (RW:not_blocked seg_a_09_0_100 airplane_cfbeg) (RW:not_blocked seg_a_09_0_100 airplane_daewh) (RW:not_blocked seg_a_09_0_100 airplane_dfboy) (RW:not_blocked seg_a_09_0_100 airplane_wurst) (RW:not_blocked seg_a_09_0_100 airplane_horst) (RW:not_blocked seg_a_09_0_100 airplane_holgi) (RW:not_blocked seg_a_09_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_a_09_0_100) (N:RW:at-segment ?a seg_n1_a_0_100) (W:occupied seg_a_09_0_100) (N:W:occupied seg_n1_a_0_100) (N:RW:not_occupied seg_a_09_0_100) (RW:not_occupied seg_n1_a_0_100) (W:blocked seg_a_09_0_100 ?a) (N:W:blocked seg_n1_n2_0_100 ?a) (N:RW:not_blocked seg_a_09_0_100 ?a) (RW:not_blocked seg_n1_n2_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_a_09_0_100) (N:RW:at-segment ?a seg_n1_a_0_100) (N:RW:not_occupied seg_a_09_0_100) (RW:not_occupied seg_n1_a_0_100) (N:RW:not_blocked seg_a_09_0_100 ?a) (RW:not_blocked seg_n1_n2_0_100 ?a))
     move_seg_a_09_0_100_seg_09_0_150_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_a_09_0_100) (RW:facing ?a south) (RW:not_occupied seg_09_0_150) (RW:not_blocked seg_09_0_150 airplane_cfbeg) (RW:not_blocked seg_09_0_150 airplane_daewh) (RW:not_blocked seg_09_0_150 airplane_dfboy) (RW:not_blocked seg_09_0_150 airplane_wurst) (RW:not_blocked seg_09_0_150 airplane_horst) (RW:not_blocked seg_09_0_150 airplane_holgi) (RW:not_blocked seg_09_0_150 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_09_0_150) (N:RW:at-segment ?a seg_a_09_0_100) (W:occupied seg_09_0_150) (N:W:occupied seg_a_09_0_100) (N:RW:not_occupied seg_09_0_150) (RW:not_occupied seg_a_09_0_100) (W:blocked seg_09_0_150 ?a) (N:W:blocked seg_n1_a_0_100 ?a) (N:RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_n1_a_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_09_0_150) (N:RW:at-segment ?a seg_a_09_0_100) (N:RW:not_occupied seg_09_0_150) (RW:not_occupied seg_a_09_0_100) (N:RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_n1_a_0_100 ?a))
     move_seg_09_0_150_seg_rwy_0_1300_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_09_0_150) (RW:facing ?a south) (RW:not_occupied seg_rwy_0_1300) (RW:not_blocked seg_rwy_0_1300 airplane_cfbeg) (RW:not_blocked seg_rwy_0_1300 airplane_daewh) (RW:not_blocked seg_rwy_0_1300 airplane_dfboy) (RW:not_blocked seg_rwy_0_1300 airplane_wurst) (RW:not_blocked seg_rwy_0_1300 airplane_horst) (RW:not_blocked seg_rwy_0_1300 airplane_holgi) (RW:not_blocked seg_rwy_0_1300 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_09_0_150) (RW:at-segment ?a seg_rwy_0_1300) (N:W:occupied seg_09_0_150) (W:occupied seg_rwy_0_1300) (RW:not_occupied seg_09_0_150) (N:RW:not_occupied seg_rwy_0_1300) (N:W:blocked seg_a_09_0_100 ?a) (W:blocked seg_rwy_0_1300 ?a) (RW:not_blocked seg_a_09_0_100 ?a) (N:RW:not_blocked seg_rwy_0_1300 ?a))
+        eff: (and (N:RW:at-segment ?a seg_09_0_150) (RW:at-segment ?a seg_rwy_0_1300) (RW:not_occupied seg_09_0_150) (N:RW:not_occupied seg_rwy_0_1300) (RW:not_blocked seg_a_09_0_100 ?a) (N:RW:not_blocked seg_rwy_0_1300 ?a))
     move_seg_rwy_0_1300_seg_27_0_150_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_rwy_0_1300) (RW:facing ?a south) (RW:not_occupied seg_09_0_150) (RW:not_occupied seg_27_0_150) (RW:not_blocked seg_27_0_150 airplane_cfbeg) (RW:not_blocked seg_27_0_150 airplane_daewh) (RW:not_blocked seg_27_0_150 airplane_dfboy) (RW:not_blocked seg_27_0_150 airplane_wurst) (RW:not_blocked seg_27_0_150 airplane_horst) (RW:not_blocked seg_27_0_150 airplane_holgi) (RW:not_blocked seg_27_0_150 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_rwy_0_1300) (RW:at-segment ?a seg_27_0_150) (N:W:occupied seg_rwy_0_1300) (W:occupied seg_27_0_150) (RW:not_occupied seg_rwy_0_1300) (N:RW:not_occupied seg_27_0_150) (W:blocked seg_27_0_150 ?a) (N:RW:not_blocked seg_27_0_150 ?a))
+        eff: (and (N:RW:at-segment ?a seg_rwy_0_1300) (RW:at-segment ?a seg_27_0_150) (RW:not_occupied seg_rwy_0_1300) (N:RW:not_occupied seg_27_0_150) (N:RW:not_blocked seg_27_0_150 ?a))
     move_seg_27_0_150_seg_b_27_0_100_south_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_27_0_150) (RW:facing ?a south) (RW:not_occupied seg_27help_0_100) (RW:not_occupied seg_b_27_0_100) (RW:not_blocked seg_b_27_0_100 airplane_cfbeg) (RW:not_blocked seg_b_27_0_100 airplane_daewh) (RW:not_blocked seg_b_27_0_100 airplane_dfboy) (RW:not_blocked seg_b_27_0_100 airplane_wurst) (RW:not_blocked seg_b_27_0_100 airplane_horst) (RW:not_blocked seg_b_27_0_100 airplane_holgi) (RW:not_blocked seg_b_27_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_27_0_150) (RW:at-segment ?a seg_b_27_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (N:W:occupied seg_27_0_150) (W:occupied seg_b_27_0_100) (RW:not_occupied seg_27_0_150) (N:RW:not_occupied seg_b_27_0_100) (N:W:blocked seg_09_0_150 ?a) (N:W:blocked seg_rwy_0_1300 ?a) (W:blocked seg_27help_0_100 ?a) (W:blocked seg_b_27_0_100 ?a) (RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_rwy_0_1300 ?a) (N:RW:not_blocked seg_27help_0_100 ?a) (N:RW:not_blocked seg_b_27_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_27_0_150) (RW:at-segment ?a seg_b_27_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (RW:not_occupied seg_27_0_150) (N:RW:not_occupied seg_b_27_0_100) (RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_rwy_0_1300 ?a) (N:RW:not_blocked seg_27help_0_100 ?a) (N:RW:not_blocked seg_b_27_0_100 ?a))
     move_seg_b_27_0_100_seg_n6_b_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_b_27_0_100) (RW:facing ?a north) (RW:not_occupied seg_n6_b_0_100) (RW:not_blocked seg_n6_b_0_100 airplane_cfbeg) (RW:not_blocked seg_n6_b_0_100 airplane_daewh) (RW:not_blocked seg_n6_b_0_100 airplane_dfboy) (RW:not_blocked seg_n6_b_0_100 airplane_wurst) (RW:not_blocked seg_n6_b_0_100 airplane_horst) (RW:not_blocked seg_n6_b_0_100 airplane_holgi) (RW:not_blocked seg_n6_b_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_b_27_0_100) (RW:at-segment ?a seg_n6_b_0_100) (N:W:occupied seg_b_27_0_100) (W:occupied seg_n6_b_0_100) (RW:not_occupied seg_b_27_0_100) (N:RW:not_occupied seg_n6_b_0_100) (N:W:blocked seg_27help_0_100 ?a) (N:W:blocked seg_27_0_150 ?a) (W:blocked seg_n6_b_0_100 ?a) (RW:not_blocked seg_27help_0_100 ?a) (RW:not_blocked seg_27_0_150 ?a) (N:RW:not_blocked seg_n6_b_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_b_27_0_100) (RW:at-segment ?a seg_n6_b_0_100) (RW:not_occupied seg_b_27_0_100) (N:RW:not_occupied seg_n6_b_0_100) (RW:not_blocked seg_27help_0_100 ?a) (RW:not_blocked seg_27_0_150 ?a) (N:RW:not_blocked seg_n6_b_0_100 ?a))
     move_seg_n6_b_0_100_seg_n5_n6_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n6_b_0_100) (RW:facing ?a north) (RW:not_occupied seg_n5_n6_0_100) (RW:not_blocked seg_n5_n6_0_100 airplane_cfbeg) (RW:not_blocked seg_n5_n6_0_100 airplane_daewh) (RW:not_blocked seg_n5_n6_0_100 airplane_dfboy) (RW:not_blocked seg_n5_n6_0_100 airplane_wurst) (RW:not_blocked seg_n5_n6_0_100 airplane_horst) (RW:not_blocked seg_n5_n6_0_100 airplane_holgi) (RW:not_blocked seg_n5_n6_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n5_n6_0_100) (N:RW:at-segment ?a seg_n6_b_0_100) (W:occupied seg_n5_n6_0_100) (N:W:occupied seg_n6_b_0_100) (N:RW:not_occupied seg_n5_n6_0_100) (RW:not_occupied seg_n6_b_0_100) (N:W:blocked seg_b_27_0_100 ?a) (W:blocked seg_n5_n6_0_100 ?a) (RW:not_blocked seg_b_27_0_100 ?a) (N:RW:not_blocked seg_n5_n6_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_n5_n6_0_100) (N:RW:at-segment ?a seg_n6_b_0_100) (N:RW:not_occupied seg_n5_n6_0_100) (RW:not_occupied seg_n6_b_0_100) (RW:not_blocked seg_b_27_0_100 ?a) (N:RW:not_blocked seg_n5_n6_0_100 ?a))
     move_seg_n5_n6_0_100_seg_n4_n5_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n5_n6_0_100) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_0_86) (RW:not_blocked seg_n4_n5_0_86 airplane_cfbeg) (RW:not_blocked seg_n4_n5_0_86 airplane_daewh) (RW:not_blocked seg_n4_n5_0_86 airplane_dfboy) (RW:not_blocked seg_n4_n5_0_86 airplane_wurst) (RW:not_blocked seg_n4_n5_0_86 airplane_horst) (RW:not_blocked seg_n4_n5_0_86 airplane_holgi) (RW:not_blocked seg_n4_n5_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n4_n5_0_86) (N:RW:at-segment ?a seg_n5_n6_0_100) (W:occupied seg_n4_n5_0_86) (N:W:occupied seg_n5_n6_0_100) (N:RW:not_occupied seg_n4_n5_0_86) (RW:not_occupied seg_n5_n6_0_100) (W:blocked seg_n4_n5_0_86 ?a) (N:W:blocked seg_n6_b_0_100 ?a) (N:RW:not_blocked seg_n4_n5_0_86 ?a) (RW:not_blocked seg_n6_b_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_n4_n5_0_86) (N:RW:at-segment ?a seg_n5_n6_0_100) (N:RW:not_occupied seg_n4_n5_0_86) (RW:not_occupied seg_n5_n6_0_100) (N:RW:not_blocked seg_n4_n5_0_86 ?a) (RW:not_blocked seg_n6_b_0_100 ?a))
     move_seg_n4_n5_0_86_seg_n4_n5_6_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_0_86) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_6_0_86) (RW:not_blocked seg_n4_n5_6_0_86 airplane_cfbeg) (RW:not_blocked seg_n4_n5_6_0_86 airplane_daewh) (RW:not_blocked seg_n4_n5_6_0_86 airplane_dfboy) (RW:not_blocked seg_n4_n5_6_0_86 airplane_wurst) (RW:not_blocked seg_n4_n5_6_0_86 airplane_horst) (RW:not_blocked seg_n4_n5_6_0_86 airplane_holgi) (RW:not_blocked seg_n4_n5_6_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_n4_n5_0_86) (RW:at-segment ?a seg_n4_n5_6_0_86) (N:W:occupied seg_n4_n5_0_86) (W:occupied seg_n4_n5_6_0_86) (RW:not_occupied seg_n4_n5_0_86) (N:RW:not_occupied seg_n4_n5_6_0_86) (N:W:blocked seg_n5_n6_0_100 ?a) (W:blocked seg_n4_n5_6_0_86 ?a) (RW:not_blocked seg_n5_n6_0_100 ?a) (N:RW:not_blocked seg_n4_n5_6_0_86 ?a))
+        eff: (and (N:RW:at-segment ?a seg_n4_n5_0_86) (RW:at-segment ?a seg_n4_n5_6_0_86) (RW:not_occupied seg_n4_n5_0_86) (N:RW:not_occupied seg_n4_n5_6_0_86) (RW:not_blocked seg_n5_n6_0_100 ?a) (N:RW:not_blocked seg_n4_n5_6_0_86 ?a))
     move_seg_n4_n5_6_0_86_seg_n4_n5_5_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_6_0_86) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_5_0_86) (RW:not_blocked seg_n4_n5_5_0_86 airplane_cfbeg) (RW:not_blocked seg_n4_n5_5_0_86 airplane_daewh) (RW:not_blocked seg_n4_n5_5_0_86 airplane_dfboy) (RW:not_blocked seg_n4_n5_5_0_86 airplane_wurst) (RW:not_blocked seg_n4_n5_5_0_86 airplane_horst) (RW:not_blocked seg_n4_n5_5_0_86 airplane_holgi) (RW:not_blocked seg_n4_n5_5_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n4_n5_5_0_86) (N:RW:at-segment ?a seg_n4_n5_6_0_86) (W:occupied seg_n4_n5_5_0_86) (N:W:occupied seg_n4_n5_6_0_86) (N:RW:not_occupied seg_n4_n5_5_0_86) (RW:not_occupied seg_n4_n5_6_0_86) (N:W:blocked seg_n4_n5_0_86 ?a) (W:blocked seg_n4_n5_5_0_86 ?a) (RW:not_blocked seg_n4_n5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_5_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n4_n5_5_0_86) (N:RW:at-segment ?a seg_n4_n5_6_0_86) (N:RW:not_occupied seg_n4_n5_5_0_86) (RW:not_occupied seg_n4_n5_6_0_86) (RW:not_blocked seg_n4_n5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_5_0_86 ?a))
     move_seg_n4_n5_5_0_86_seg_n4_n5_4_0_85_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_5_0_86) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_4_0_85) (RW:not_blocked seg_n4_n5_4_0_85 airplane_cfbeg) (RW:not_blocked seg_n4_n5_4_0_85 airplane_daewh) (RW:not_blocked seg_n4_n5_4_0_85 airplane_dfboy) (RW:not_blocked seg_n4_n5_4_0_85 airplane_wurst) (RW:not_blocked seg_n4_n5_4_0_85 airplane_horst) (RW:not_blocked seg_n4_n5_4_0_85 airplane_holgi) (RW:not_blocked seg_n4_n5_4_0_85 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n4_n5_4_0_85) (N:RW:at-segment ?a seg_n4_n5_5_0_86) (W:occupied seg_n4_n5_4_0_85) (N:W:occupied seg_n4_n5_5_0_86) (N:RW:not_occupied seg_n4_n5_4_0_85) (RW:not_occupied seg_n4_n5_5_0_86) (W:blocked seg_n4_n5_4_0_85 ?a) (N:W:blocked seg_n4_n5_6_0_86 ?a) (N:RW:not_blocked seg_n4_n5_4_0_85 ?a) (RW:not_blocked seg_n4_n5_6_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n4_n5_4_0_85) (N:RW:at-segment ?a seg_n4_n5_5_0_86) (N:RW:not_occupied seg_n4_n5_4_0_85) (RW:not_occupied seg_n4_n5_5_0_86) (N:RW:not_blocked seg_n4_n5_4_0_85 ?a) (RW:not_blocked seg_n4_n5_6_0_86 ?a))
     move_seg_n4_n5_4_0_85_seg_n4_n5_3_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_4_0_85) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_3_0_86) (RW:not_blocked seg_n4_n5_3_0_86 airplane_cfbeg) (RW:not_blocked seg_n4_n5_3_0_86 airplane_daewh) (RW:not_blocked seg_n4_n5_3_0_86 airplane_dfboy) (RW:not_blocked seg_n4_n5_3_0_86 airplane_wurst) (RW:not_blocked seg_n4_n5_3_0_86 airplane_horst) (RW:not_blocked seg_n4_n5_3_0_86 airplane_holgi) (RW:not_blocked seg_n4_n5_3_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n4_n5_3_0_86) (N:RW:at-segment ?a seg_n4_n5_4_0_85) (W:occupied seg_n4_n5_3_0_86) (N:W:occupied seg_n4_n5_4_0_85) (N:RW:not_occupied seg_n4_n5_3_0_86) (RW:not_occupied seg_n4_n5_4_0_85) (W:blocked seg_n4_n5_3_0_86 ?a) (N:W:blocked seg_n4_n5_5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_3_0_86 ?a) (RW:not_blocked seg_n4_n5_5_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n4_n5_3_0_86) (N:RW:at-segment ?a seg_n4_n5_4_0_85) (N:RW:not_occupied seg_n4_n5_3_0_86) (RW:not_occupied seg_n4_n5_4_0_85) (N:RW:not_blocked seg_n4_n5_3_0_86 ?a) (RW:not_blocked seg_n4_n5_5_0_86 ?a))
     move_seg_n4_n5_3_0_86_seg_n4_n5_2_0_86_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_3_0_86) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_2_0_86) (RW:not_blocked seg_n4_n5_2_0_86 airplane_cfbeg) (RW:not_blocked seg_n4_n5_2_0_86 airplane_daewh) (RW:not_blocked seg_n4_n5_2_0_86 airplane_dfboy) (RW:not_blocked seg_n4_n5_2_0_86 airplane_wurst) (RW:not_blocked seg_n4_n5_2_0_86 airplane_horst) (RW:not_blocked seg_n4_n5_2_0_86 airplane_holgi) (RW:not_blocked seg_n4_n5_2_0_86 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n4_n5_2_0_86) (N:RW:at-segment ?a seg_n4_n5_3_0_86) (W:occupied seg_n4_n5_2_0_86) (N:W:occupied seg_n4_n5_3_0_86) (N:RW:not_occupied seg_n4_n5_2_0_86) (RW:not_occupied seg_n4_n5_3_0_86) (W:blocked seg_n4_n5_2_0_86 ?a) (N:W:blocked seg_n4_n5_4_0_85 ?a) (N:RW:not_blocked seg_n4_n5_2_0_86 ?a) (RW:not_blocked seg_n4_n5_4_0_85 ?a))
+        eff: (and (RW:at-segment ?a seg_n4_n5_2_0_86) (N:RW:at-segment ?a seg_n4_n5_3_0_86) (N:RW:not_occupied seg_n4_n5_2_0_86) (RW:not_occupied seg_n4_n5_3_0_86) (N:RW:not_blocked seg_n4_n5_2_0_86 ?a) (RW:not_blocked seg_n4_n5_4_0_85 ?a))
     move_seg_n4_n5_2_0_86_seg_n4_n5_1_0_85_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_2_0_86) (RW:facing ?a north) (RW:not_occupied seg_n4_n5_1_0_85) (RW:not_blocked seg_n4_n5_1_0_85 airplane_cfbeg) (RW:not_blocked seg_n4_n5_1_0_85 airplane_daewh) (RW:not_blocked seg_n4_n5_1_0_85 airplane_dfboy) (RW:not_blocked seg_n4_n5_1_0_85 airplane_wurst) (RW:not_blocked seg_n4_n5_1_0_85 airplane_horst) (RW:not_blocked seg_n4_n5_1_0_85 airplane_holgi) (RW:not_blocked seg_n4_n5_1_0_85 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n4_n5_1_0_85) (N:RW:at-segment ?a seg_n4_n5_2_0_86) (W:occupied seg_n4_n5_1_0_85) (N:W:occupied seg_n4_n5_2_0_86) (N:RW:not_occupied seg_n4_n5_1_0_85) (RW:not_occupied seg_n4_n5_2_0_86) (W:blocked seg_n4_n5_1_0_85 ?a) (N:W:blocked seg_n4_n5_3_0_86 ?a) (N:RW:not_blocked seg_n4_n5_1_0_85 ?a) (RW:not_blocked seg_n4_n5_3_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n4_n5_1_0_85) (N:RW:at-segment ?a seg_n4_n5_2_0_86) (N:RW:not_occupied seg_n4_n5_1_0_85) (RW:not_occupied seg_n4_n5_2_0_86) (N:RW:not_blocked seg_n4_n5_1_0_85 ?a) (RW:not_blocked seg_n4_n5_3_0_86 ?a))
     move_seg_n4_n5_1_0_85_seg_n_n4_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n4_n5_1_0_85) (RW:facing ?a north) (RW:not_occupied seg_n_n4_0_100) (RW:not_blocked seg_n_n4_0_100 airplane_cfbeg) (RW:not_blocked seg_n_n4_0_100 airplane_daewh) (RW:not_blocked seg_n_n4_0_100 airplane_dfboy) (RW:not_blocked seg_n_n4_0_100 airplane_wurst) (RW:not_blocked seg_n_n4_0_100 airplane_horst) (RW:not_blocked seg_n_n4_0_100 airplane_holgi) (RW:not_blocked seg_n_n4_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_n_n4_0_100) (N:RW:at-segment ?a seg_n4_n5_1_0_85) (W:occupied seg_n_n4_0_100) (N:W:occupied seg_n4_n5_1_0_85) (N:RW:not_occupied seg_n_n4_0_100) (RW:not_occupied seg_n4_n5_1_0_85) (W:blocked seg_n_n4_0_100 ?a) (N:W:blocked seg_n4_n5_2_0_86 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:not_blocked seg_n4_n5_2_0_86 ?a))
+        eff: (and (RW:at-segment ?a seg_n_n4_0_100) (N:RW:at-segment ?a seg_n4_n5_1_0_85) (N:RW:not_occupied seg_n_n4_0_100) (RW:not_occupied seg_n4_n5_1_0_85) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:not_blocked seg_n4_n5_2_0_86 ?a))
     move_seg_n_n4_0_100_seg_n_c_0_100_north_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n_n4_0_100) (RW:facing ?a north) (RW:not_occupied seg_n3_n_0_100) (RW:not_occupied seg_n_c_0_100) (RW:not_blocked seg_n_c_0_100 airplane_cfbeg) (RW:not_blocked seg_n_c_0_100 airplane_daewh) (RW:not_blocked seg_n_c_0_100 airplane_dfboy) (RW:not_blocked seg_n_c_0_100 airplane_wurst) (RW:not_blocked seg_n_c_0_100 airplane_horst) (RW:not_blocked seg_n_c_0_100 airplane_holgi) (RW:not_blocked seg_n_c_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_n_n4_0_100) (RW:at-segment ?a seg_n_c_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (N:W:occupied seg_n_n4_0_100) (W:occupied seg_n_c_0_100) (RW:not_occupied seg_n_n4_0_100) (N:RW:not_occupied seg_n_c_0_100) (W:blocked seg_n3_n_0_100 ?a) (W:blocked seg_n_c_0_100 ?a) (N:W:blocked seg_n4_n5_1_0_85 ?a) (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:not_blocked seg_n4_n5_1_0_85 ?a))
+        eff: (and (N:RW:at-segment ?a seg_n_n4_0_100) (RW:at-segment ?a seg_n_c_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (RW:not_occupied seg_n_n4_0_100) (N:RW:not_occupied seg_n_c_0_100) (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:not_blocked seg_n4_n5_1_0_85 ?a))
     move_seg_n_c_0_100_seg_c_c2_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_n_c_0_100) (RW:facing ?a south) (RW:not_occupied seg_c_c2_0_100) (RW:not_blocked seg_c_c2_0_100 airplane_cfbeg) (RW:not_blocked seg_c_c2_0_100 airplane_daewh) (RW:not_blocked seg_c_c2_0_100 airplane_dfboy) (RW:not_blocked seg_c_c2_0_100 airplane_wurst) (RW:not_blocked seg_c_c2_0_100 airplane_horst) (RW:not_blocked seg_c_c2_0_100 airplane_holgi) (RW:not_blocked seg_c_c2_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_n_c_0_100) (RW:at-segment ?a seg_c_c2_0_100) (N:W:occupied seg_n_c_0_100) (W:occupied seg_c_c2_0_100) (RW:not_occupied seg_n_c_0_100) (N:RW:not_occupied seg_c_c2_0_100) (N:W:blocked seg_n3_n_0_100 ?a) (N:W:blocked seg_n_n4_0_100 ?a) (W:blocked seg_c_c2_0_100 ?a) (RW:not_blocked seg_n3_n_0_100 ?a) (RW:not_blocked seg_n_n4_0_100 ?a) (N:RW:not_blocked seg_c_c2_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_n_c_0_100) (RW:at-segment ?a seg_c_c2_0_100) (RW:not_occupied seg_n_c_0_100) (N:RW:not_occupied seg_c_c2_0_100) (RW:not_blocked seg_n3_n_0_100 ?a) (RW:not_blocked seg_n_n4_0_100 ?a) (N:RW:not_blocked seg_c_c2_0_100 ?a))
     move_seg_c_c2_0_100_seg_c2_c3_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c_c2_0_100) (RW:facing ?a south) (RW:not_occupied seg_c2_c3_0_100) (RW:not_blocked seg_c2_c3_0_100 airplane_cfbeg) (RW:not_blocked seg_c2_c3_0_100 airplane_daewh) (RW:not_blocked seg_c2_c3_0_100 airplane_dfboy) (RW:not_blocked seg_c2_c3_0_100 airplane_wurst) (RW:not_blocked seg_c2_c3_0_100 airplane_horst) (RW:not_blocked seg_c2_c3_0_100 airplane_holgi) (RW:not_blocked seg_c2_c3_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c_c2_0_100) (RW:at-segment ?a seg_c2_c3_0_100) (N:W:occupied seg_c_c2_0_100) (W:occupied seg_c2_c3_0_100) (RW:not_occupied seg_c_c2_0_100) (N:RW:not_occupied seg_c2_c3_0_100) (N:W:blocked seg_n_c_0_100 ?a) (W:blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_n_c_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c_c2_0_100) (RW:at-segment ?a seg_c2_c3_0_100) (RW:not_occupied seg_c_c2_0_100) (N:RW:not_occupied seg_c2_c3_0_100) (RW:not_blocked seg_n_c_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a))
     move_seg_c2_c3_0_100_seg_c3_c_a01_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c2_c3_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c3_c_a01_0_100 airplane_cfbeg) (RW:not_blocked seg_c3_c_a01_0_100 airplane_daewh) (RW:not_blocked seg_c3_c_a01_0_100 airplane_dfboy) (RW:not_blocked seg_c3_c_a01_0_100 airplane_wurst) (RW:not_blocked seg_c3_c_a01_0_100 airplane_horst) (RW:not_blocked seg_c3_c_a01_0_100 airplane_holgi) (RW:not_blocked seg_c3_c_a01_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c2_c3_0_100) (RW:at-segment ?a seg_c3_c_a01_0_100) (N:W:occupied seg_c2_c3_0_100) (W:occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c3_c_a01_0_100) (N:W:blocked seg_c_c2_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c2_c3_0_100) (RW:at-segment ?a seg_c3_c_a01_0_100) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c3_c_a01_0_100) (RW:not_blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
     move_seg_c3_c_a01_0_100_seg_a01_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c_a01_0_100) (RW:facing ?a south) (RW:not_occupied seg_a01_0_100) (RW:not_blocked seg_a01_0_100 airplane_cfbeg) (RW:not_blocked seg_a01_0_100 airplane_daewh) (RW:not_blocked seg_a01_0_100 airplane_dfboy) (RW:not_blocked seg_a01_0_100 airplane_wurst) (RW:not_blocked seg_a01_0_100 airplane_horst) (RW:not_blocked seg_a01_0_100 airplane_holgi) (RW:not_blocked seg_a01_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c3_c_a01_0_100) (RW:at-segment ?a seg_a01_0_100) (N:W:occupied seg_c3_c_a01_0_100) (W:occupied seg_a01_0_100) (RW:not_occupied seg_c3_c_a01_0_100) (N:RW:not_occupied seg_a01_0_100) (N:W:blocked seg_c2_c3_0_100 ?a) (N:W:blocked seg_c3_c4_0_50 ?a) (N:W:blocked seg_c3_c_b01_0_100 ?a) (W:blocked seg_a01_0_100 ?a) (RW:not_blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_a01_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c3_c_a01_0_100) (RW:at-segment ?a seg_a01_0_100) (RW:not_occupied seg_c3_c_a01_0_100) (N:RW:not_occupied seg_a01_0_100) (RW:not_blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_a01_0_100 ?a))
     move_seg_a02_0_100_seg_c5_c_a02_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_a02_0_100) (RW:facing ?a north) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_blocked seg_c5_c_a02_0_100 airplane_cfbeg) (RW:not_blocked seg_c5_c_a02_0_100 airplane_daewh) (RW:not_blocked seg_c5_c_a02_0_100 airplane_dfboy) (RW:not_blocked seg_c5_c_a02_0_100 airplane_wurst) (RW:not_blocked seg_c5_c_a02_0_100 airplane_horst) (RW:not_blocked seg_c5_c_a02_0_100 airplane_holgi) (RW:not_blocked seg_c5_c_a02_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c_a02_0_100) (N:RW:at-segment ?a seg_a02_0_100) (W:occupied seg_c5_c_a02_0_100) (N:W:occupied seg_a02_0_100) (N:RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_a02_0_100) (W:blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c_a02_0_100) (N:RW:at-segment ?a seg_a02_0_100) (N:RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_a02_0_100) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a))
     move_seg_c5_c_a02_0_100_seg_c5_c6_0_50_north_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c_a02_0_100) (RW:facing ?a north) (RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c5_c6_0_50 airplane_cfbeg) (RW:not_blocked seg_c5_c6_0_50 airplane_daewh) (RW:not_blocked seg_c5_c6_0_50 airplane_dfboy) (RW:not_blocked seg_c5_c6_0_50 airplane_wurst) (RW:not_blocked seg_c5_c6_0_50 airplane_horst) (RW:not_blocked seg_c5_c6_0_50 airplane_holgi) (RW:not_blocked seg_c5_c6_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_a02_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (W:occupied seg_c5_c6_0_50) (N:W:occupied seg_c5_c_a02_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (W:blocked seg_c4_c5_0_50 ?a) (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (N:W:blocked seg_a02_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_a02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_a02_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_a02_0_100 ?a))
     move_seg_c5_c6_0_50_seg_c6_c7_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c6_0_50) (RW:facing ?a south) (RW:not_occupied seg_c6_c7_0_100) (RW:not_blocked seg_c6_c7_0_100 airplane_cfbeg) (RW:not_blocked seg_c6_c7_0_100 airplane_daewh) (RW:not_blocked seg_c6_c7_0_100 airplane_dfboy) (RW:not_blocked seg_c6_c7_0_100 airplane_wurst) (RW:not_blocked seg_c6_c7_0_100 airplane_horst) (RW:not_blocked seg_c6_c7_0_100 airplane_holgi) (RW:not_blocked seg_c6_c7_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c5_c6_0_50) (RW:at-segment ?a seg_c6_c7_0_100) (N:W:occupied seg_c5_c6_0_50) (W:occupied seg_c6_c7_0_100) (RW:not_occupied seg_c5_c6_0_50) (N:RW:not_occupied seg_c6_c7_0_100) (N:W:blocked seg_c4_c5_0_50 ?a) (N:W:blocked seg_c5_c_a02_0_100 ?a) (N:W:blocked seg_c5_c_b02_0_100 ?a) (W:blocked seg_c6_c7_0_100 ?a) (RW:not_blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c6_c7_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c5_c6_0_50) (RW:at-segment ?a seg_c6_c7_0_100) (RW:not_occupied seg_c5_c6_0_50) (N:RW:not_occupied seg_c6_c7_0_100) (RW:not_blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c6_c7_0_100 ?a))
     move_seg_c6_c7_0_100_seg_c5_c6_0_50_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c6_c7_0_100) (RW:facing ?a north) (RW:not_occupied seg_c5_c6_0_50) (RW:not_blocked seg_c5_c6_0_50 airplane_cfbeg) (RW:not_blocked seg_c5_c6_0_50 airplane_daewh) (RW:not_blocked seg_c5_c6_0_50 airplane_dfboy) (RW:not_blocked seg_c5_c6_0_50 airplane_wurst) (RW:not_blocked seg_c5_c6_0_50 airplane_horst) (RW:not_blocked seg_c5_c6_0_50 airplane_holgi) (RW:not_blocked seg_c5_c6_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c6_c7_0_100) (W:occupied seg_c5_c6_0_50) (N:W:occupied seg_c6_c7_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c6_c7_0_100) (W:blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c6_c7_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c6_c7_0_100) (N:RW:not_blocked seg_c5_c6_0_50 ?a))
     move_seg_c5_c6_0_50_seg_c4_c5_0_50_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c6_0_50) (RW:facing ?a north) (RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c4_c5_0_50 airplane_cfbeg) (RW:not_blocked seg_c4_c5_0_50 airplane_daewh) (RW:not_blocked seg_c4_c5_0_50 airplane_dfboy) (RW:not_blocked seg_c4_c5_0_50 airplane_wurst) (RW:not_blocked seg_c4_c5_0_50 airplane_horst) (RW:not_blocked seg_c4_c5_0_50 airplane_holgi) (RW:not_blocked seg_c4_c5_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c4_c5_0_50) (N:RW:at-segment ?a seg_c5_c6_0_50) (W:occupied seg_c4_c5_0_50) (N:W:occupied seg_c5_c6_0_50) (N:RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (W:blocked seg_c4_c5_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (N:W:blocked seg_c6_c7_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c6_c7_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c4_c5_0_50) (N:RW:at-segment ?a seg_c5_c6_0_50) (N:RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c6_c7_0_100 ?a))
     move_seg_c2_c3_0_100_seg_c3_c4_0_50_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c2_c3_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c3_c4_0_50 airplane_cfbeg) (RW:not_blocked seg_c3_c4_0_50 airplane_daewh) (RW:not_blocked seg_c3_c4_0_50 airplane_dfboy) (RW:not_blocked seg_c3_c4_0_50 airplane_wurst) (RW:not_blocked seg_c3_c4_0_50 airplane_horst) (RW:not_blocked seg_c3_c4_0_50 airplane_holgi) (RW:not_blocked seg_c3_c4_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c2_c3_0_100) (RW:at-segment ?a seg_c3_c4_0_50) (N:W:occupied seg_c2_c3_0_100) (W:occupied seg_c3_c4_0_50) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c3_c4_0_50) (N:W:blocked seg_c_c2_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c2_c3_0_100) (RW:at-segment ?a seg_c3_c4_0_50) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
     move_seg_c4_c5_0_50_seg_c5_c_a02_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c4_c5_0_50) (RW:facing ?a south) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c5_c_a02_0_100 airplane_cfbeg) (RW:not_blocked seg_c5_c_a02_0_100 airplane_daewh) (RW:not_blocked seg_c5_c_a02_0_100 airplane_dfboy) (RW:not_blocked seg_c5_c_a02_0_100 airplane_wurst) (RW:not_blocked seg_c5_c_a02_0_100 airplane_horst) (RW:not_blocked seg_c5_c_a02_0_100 airplane_holgi) (RW:not_blocked seg_c5_c_a02_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c4_c5_0_50) (RW:at-segment ?a seg_c5_c_a02_0_100) (N:W:occupied seg_c4_c5_0_50) (W:occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_c4_c5_0_50) (N:RW:not_occupied seg_c5_c_a02_0_100) (N:W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c4_c5_0_50) (RW:at-segment ?a seg_c5_c_a02_0_100) (RW:not_occupied seg_c4_c5_0_50) (N:RW:not_occupied seg_c5_c_a02_0_100) (RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a))
     move_seg_c5_c_a02_0_100_seg_a02_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c_a02_0_100) (RW:facing ?a south) (RW:not_occupied seg_a02_0_100) (RW:not_blocked seg_a02_0_100 airplane_cfbeg) (RW:not_blocked seg_a02_0_100 airplane_daewh) (RW:not_blocked seg_a02_0_100 airplane_dfboy) (RW:not_blocked seg_a02_0_100 airplane_wurst) (RW:not_blocked seg_a02_0_100 airplane_horst) (RW:not_blocked seg_a02_0_100 airplane_holgi) (RW:not_blocked seg_a02_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c5_c_a02_0_100) (RW:at-segment ?a seg_a02_0_100) (N:W:occupied seg_c5_c_a02_0_100) (W:occupied seg_a02_0_100) (RW:not_occupied seg_c5_c_a02_0_100) (N:RW:not_occupied seg_a02_0_100) (N:W:blocked seg_c4_c5_0_50 ?a) (N:W:blocked seg_c5_c6_0_50 ?a) (N:W:blocked seg_c5_c_b02_0_100 ?a) (W:blocked seg_a02_0_100 ?a) (RW:not_blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_a02_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c5_c_a02_0_100) (RW:at-segment ?a seg_a02_0_100) (RW:not_occupied seg_c5_c_a02_0_100) (N:RW:not_occupied seg_a02_0_100) (RW:not_blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_a02_0_100 ?a))
     move_seg_b01_0_100_seg_c3_c_b01_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_b01_0_100) (RW:facing ?a north) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c3_c_b01_0_100 airplane_cfbeg) (RW:not_blocked seg_c3_c_b01_0_100 airplane_daewh) (RW:not_blocked seg_c3_c_b01_0_100 airplane_dfboy) (RW:not_blocked seg_c3_c_b01_0_100 airplane_wurst) (RW:not_blocked seg_c3_c_b01_0_100 airplane_horst) (RW:not_blocked seg_c3_c_b01_0_100 airplane_holgi) (RW:not_blocked seg_c3_c_b01_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c_b01_0_100) (N:RW:at-segment ?a seg_b01_0_100) (W:occupied seg_c3_c_b01_0_100) (N:W:occupied seg_b01_0_100) (N:RW:not_occupied seg_c3_c_b01_0_100) (RW:not_occupied seg_b01_0_100) (W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c_b01_0_100) (N:RW:at-segment ?a seg_b01_0_100) (N:RW:not_occupied seg_c3_c_b01_0_100) (RW:not_occupied seg_b01_0_100) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
     move_seg_c3_c_b01_0_100_seg_c3_c4_0_50_north_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c_b01_0_100) (RW:facing ?a north) (RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_blocked seg_c3_c4_0_50 airplane_cfbeg) (RW:not_blocked seg_c3_c4_0_50 airplane_daewh) (RW:not_blocked seg_c3_c4_0_50 airplane_dfboy) (RW:not_blocked seg_c3_c4_0_50 airplane_wurst) (RW:not_blocked seg_c3_c4_0_50 airplane_horst) (RW:not_blocked seg_c3_c4_0_50 airplane_holgi) (RW:not_blocked seg_c3_c4_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_b01_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (W:occupied seg_c3_c4_0_50) (N:W:occupied seg_c3_c_b01_0_100) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_b01_0_100) (W:blocked seg_c2_c3_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (N:W:blocked seg_b01_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_b01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_b01_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_b01_0_100) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_b01_0_100 ?a))
     move_seg_c2_c3_0_100_seg_c3_c_b01_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c2_c3_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c3_c_b01_0_100 airplane_cfbeg) (RW:not_blocked seg_c3_c_b01_0_100 airplane_daewh) (RW:not_blocked seg_c3_c_b01_0_100 airplane_dfboy) (RW:not_blocked seg_c3_c_b01_0_100 airplane_wurst) (RW:not_blocked seg_c3_c_b01_0_100 airplane_horst) (RW:not_blocked seg_c3_c_b01_0_100 airplane_holgi) (RW:not_blocked seg_c3_c_b01_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c2_c3_0_100) (RW:at-segment ?a seg_c3_c_b01_0_100) (N:W:occupied seg_c2_c3_0_100) (W:occupied seg_c3_c_b01_0_100) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c3_c_b01_0_100) (N:W:blocked seg_c_c2_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c2_c3_0_100) (RW:at-segment ?a seg_c3_c_b01_0_100) (RW:not_occupied seg_c2_c3_0_100) (N:RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a))
     move_seg_c3_c_b01_0_100_seg_b01_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c_b01_0_100) (RW:facing ?a south) (RW:not_occupied seg_b01_0_100) (RW:not_blocked seg_b01_0_100 airplane_cfbeg) (RW:not_blocked seg_b01_0_100 airplane_daewh) (RW:not_blocked seg_b01_0_100 airplane_dfboy) (RW:not_blocked seg_b01_0_100 airplane_wurst) (RW:not_blocked seg_b01_0_100 airplane_horst) (RW:not_blocked seg_b01_0_100 airplane_holgi) (RW:not_blocked seg_b01_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c3_c_b01_0_100) (RW:at-segment ?a seg_b01_0_100) (N:W:occupied seg_c3_c_b01_0_100) (W:occupied seg_b01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (N:RW:not_occupied seg_b01_0_100) (N:W:blocked seg_c2_c3_0_100 ?a) (N:W:blocked seg_c3_c4_0_50 ?a) (N:W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_b01_0_100 ?a) (RW:not_blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_b01_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c3_c_b01_0_100) (RW:at-segment ?a seg_b01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (N:RW:not_occupied seg_b01_0_100) (RW:not_blocked seg_c2_c3_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_b01_0_100 ?a))
     move_seg_b02_0_100_seg_c5_c_b02_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_b02_0_100) (RW:facing ?a north) (RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c5_c_b02_0_100 airplane_cfbeg) (RW:not_blocked seg_c5_c_b02_0_100 airplane_daewh) (RW:not_blocked seg_c5_c_b02_0_100 airplane_dfboy) (RW:not_blocked seg_c5_c_b02_0_100 airplane_wurst) (RW:not_blocked seg_c5_c_b02_0_100 airplane_horst) (RW:not_blocked seg_c5_c_b02_0_100 airplane_holgi) (RW:not_blocked seg_c5_c_b02_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c_b02_0_100) (N:RW:at-segment ?a seg_b02_0_100) (W:occupied seg_c5_c_b02_0_100) (N:W:occupied seg_b02_0_100) (N:RW:not_occupied seg_c5_c_b02_0_100) (RW:not_occupied seg_b02_0_100) (W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c_b02_0_100) (N:RW:at-segment ?a seg_b02_0_100) (N:RW:not_occupied seg_c5_c_b02_0_100) (RW:not_occupied seg_b02_0_100) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a))
     move_seg_c5_c_b02_0_100_seg_c5_c6_0_50_north_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c_b02_0_100) (RW:facing ?a north) (RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_blocked seg_c5_c6_0_50 airplane_cfbeg) (RW:not_blocked seg_c5_c6_0_50 airplane_daewh) (RW:not_blocked seg_c5_c6_0_50 airplane_dfboy) (RW:not_blocked seg_c5_c6_0_50 airplane_wurst) (RW:not_blocked seg_c5_c6_0_50 airplane_horst) (RW:not_blocked seg_c5_c6_0_50 airplane_holgi) (RW:not_blocked seg_c5_c6_0_50 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_b02_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (W:occupied seg_c5_c6_0_50) (N:W:occupied seg_c5_c_b02_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (W:blocked seg_c4_c5_0_50 ?a) (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (N:W:blocked seg_b02_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_b02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_b02_0_100) (N:RW:facing ?a north) (RW:facing ?a south) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_b02_0_100 ?a))
     move_seg_c4_c5_0_50_seg_c5_c_b02_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c4_c5_0_50) (RW:facing ?a south) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c5_c_b02_0_100 airplane_cfbeg) (RW:not_blocked seg_c5_c_b02_0_100 airplane_daewh) (RW:not_blocked seg_c5_c_b02_0_100 airplane_dfboy) (RW:not_blocked seg_c5_c_b02_0_100 airplane_wurst) (RW:not_blocked seg_c5_c_b02_0_100 airplane_horst) (RW:not_blocked seg_c5_c_b02_0_100 airplane_holgi) (RW:not_blocked seg_c5_c_b02_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c4_c5_0_50) (RW:at-segment ?a seg_c5_c_b02_0_100) (N:W:occupied seg_c4_c5_0_50) (W:occupied seg_c5_c_b02_0_100) (RW:not_occupied seg_c4_c5_0_50) (N:RW:not_occupied seg_c5_c_b02_0_100) (N:W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c4_c5_0_50) (RW:at-segment ?a seg_c5_c_b02_0_100) (RW:not_occupied seg_c4_c5_0_50) (N:RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a))
     move_seg_c5_c_b02_0_100_seg_b02_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c_b02_0_100) (RW:facing ?a south) (RW:not_occupied seg_b02_0_100) (RW:not_blocked seg_b02_0_100 airplane_cfbeg) (RW:not_blocked seg_b02_0_100 airplane_daewh) (RW:not_blocked seg_b02_0_100 airplane_dfboy) (RW:not_blocked seg_b02_0_100 airplane_wurst) (RW:not_blocked seg_b02_0_100 airplane_horst) (RW:not_blocked seg_b02_0_100 airplane_holgi) (RW:not_blocked seg_b02_0_100 airplane_4xekd) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_c5_c_b02_0_100) (RW:at-segment ?a seg_b02_0_100) (N:W:occupied seg_c5_c_b02_0_100) (W:occupied seg_b02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (N:RW:not_occupied seg_b02_0_100) (N:W:blocked seg_c4_c5_0_50 ?a) (N:W:blocked seg_c5_c6_0_50 ?a) (N:W:blocked seg_c5_c_a02_0_100 ?a) (W:blocked seg_b02_0_100 ?a) (RW:not_blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_b02_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c5_c_b02_0_100) (RW:at-segment ?a seg_b02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (N:RW:not_occupied seg_b02_0_100) (RW:not_blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_b02_0_100 ?a))
     pushback_seg_a01_0_100_seg_c3_c_a01_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_a01_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_blocked seg_c3_c_a01_0_100 airplane_cfbeg) (RW:not_blocked seg_c3_c_a01_0_100 airplane_daewh) (RW:not_blocked seg_c3_c_a01_0_100 airplane_dfboy) (RW:not_blocked seg_c3_c_a01_0_100 airplane_wurst) (RW:not_blocked seg_c3_c_a01_0_100 airplane_horst) (RW:not_blocked seg_c3_c_a01_0_100 airplane_holgi) (RW:not_blocked seg_c3_c_a01_0_100 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c_a01_0_100) (N:RW:at-segment ?a seg_a01_0_100) (W:occupied seg_c3_c_a01_0_100) (N:W:occupied seg_a01_0_100) (N:RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_a01_0_100) (W:blocked seg_c3_c_a01_0_100 ?a) (N:W:blocked seg_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_a01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c_a01_0_100) (N:RW:at-segment ?a seg_a01_0_100) (N:RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_a01_0_100) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_a01_0_100 ?a))
     pushback_seg_c3_c_a01_0_100_seg_c3_c4_0_50_south_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c_a01_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c4_0_50) (RW:not_blocked seg_c3_c4_0_50 airplane_cfbeg) (RW:not_blocked seg_c3_c4_0_50 airplane_daewh) (RW:not_blocked seg_c3_c4_0_50 airplane_dfboy) (RW:not_blocked seg_c3_c4_0_50 airplane_wurst) (RW:not_blocked seg_c3_c4_0_50 airplane_horst) (RW:not_blocked seg_c3_c4_0_50 airplane_holgi) (RW:not_blocked seg_c3_c4_0_50 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_a01_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (W:occupied seg_c3_c4_0_50) (N:W:occupied seg_c3_c_a01_0_100) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (W:blocked seg_c3_c4_0_50 ?a) (N:W:blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_a01_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a))
     pushback_seg_c3_c4_0_50_seg_c4_c5_0_50_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c4_0_50) (RW:facing ?a north) (RW:not_occupied seg_c4_c5_0_50) (RW:not_blocked seg_c4_c5_0_50 airplane_cfbeg) (RW:not_blocked seg_c4_c5_0_50 airplane_daewh) (RW:not_blocked seg_c4_c5_0_50 airplane_dfboy) (RW:not_blocked seg_c4_c5_0_50 airplane_wurst) (RW:not_blocked seg_c4_c5_0_50 airplane_horst) (RW:not_blocked seg_c4_c5_0_50 airplane_holgi) (RW:not_blocked seg_c4_c5_0_50 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (N:RW:at-segment ?a seg_c3_c4_0_50) (RW:at-segment ?a seg_c4_c5_0_50) (N:W:occupied seg_c3_c4_0_50) (W:occupied seg_c4_c5_0_50) (RW:not_occupied seg_c3_c4_0_50) (N:RW:not_occupied seg_c4_c5_0_50) (N:W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c4_c5_0_50 ?a) (RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c3_c4_0_50) (RW:at-segment ?a seg_c4_c5_0_50) (RW:not_occupied seg_c3_c4_0_50) (N:RW:not_occupied seg_c4_c5_0_50) (RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a))
     pushback_seg_a02_0_100_seg_c5_c_a02_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_a02_0_100) (RW:facing ?a south) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_blocked seg_c5_c_a02_0_100 airplane_cfbeg) (RW:not_blocked seg_c5_c_a02_0_100 airplane_daewh) (RW:not_blocked seg_c5_c_a02_0_100 airplane_dfboy) (RW:not_blocked seg_c5_c_a02_0_100 airplane_wurst) (RW:not_blocked seg_c5_c_a02_0_100 airplane_horst) (RW:not_blocked seg_c5_c_a02_0_100 airplane_holgi) (RW:not_blocked seg_c5_c_a02_0_100 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c_a02_0_100) (N:RW:at-segment ?a seg_a02_0_100) (W:occupied seg_c5_c_a02_0_100) (N:W:occupied seg_a02_0_100) (N:RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_a02_0_100) (W:blocked seg_c5_c_a02_0_100 ?a) (N:W:blocked seg_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_a02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c_a02_0_100) (N:RW:at-segment ?a seg_a02_0_100) (N:RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_a02_0_100) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_a02_0_100 ?a))
     pushback_seg_c5_c_a02_0_100_seg_c5_c6_0_50_south_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c_a02_0_100) (RW:facing ?a south) (RW:not_occupied seg_c5_c6_0_50) (RW:not_blocked seg_c5_c6_0_50 airplane_cfbeg) (RW:not_blocked seg_c5_c6_0_50 airplane_daewh) (RW:not_blocked seg_c5_c6_0_50 airplane_dfboy) (RW:not_blocked seg_c5_c6_0_50 airplane_wurst) (RW:not_blocked seg_c5_c6_0_50 airplane_horst) (RW:not_blocked seg_c5_c6_0_50 airplane_holgi) (RW:not_blocked seg_c5_c6_0_50 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_a02_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (W:occupied seg_c5_c6_0_50) (N:W:occupied seg_c5_c_a02_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (W:blocked seg_c5_c6_0_50 ?a) (N:W:blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_a02_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a))
     pushback_seg_c5_c6_0_50_seg_c6_c7_0_100_north_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c6_0_50) (RW:facing ?a north) (RW:not_occupied seg_c6_c7_0_100) (RW:not_blocked seg_c6_c7_0_100 airplane_cfbeg) (RW:not_blocked seg_c6_c7_0_100 airplane_daewh) (RW:not_blocked seg_c6_c7_0_100 airplane_dfboy) (RW:not_blocked seg_c6_c7_0_100 airplane_wurst) (RW:not_blocked seg_c6_c7_0_100 airplane_horst) (RW:not_blocked seg_c6_c7_0_100 airplane_holgi) (RW:not_blocked seg_c6_c7_0_100 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (N:RW:at-segment ?a seg_c5_c6_0_50) (RW:at-segment ?a seg_c6_c7_0_100) (N:W:occupied seg_c5_c6_0_50) (W:occupied seg_c6_c7_0_100) (RW:not_occupied seg_c5_c6_0_50) (N:RW:not_occupied seg_c6_c7_0_100) (N:W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c6_c7_0_100 ?a) (RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c6_c7_0_100 ?a))
+        eff: (and (N:RW:at-segment ?a seg_c5_c6_0_50) (RW:at-segment ?a seg_c6_c7_0_100) (RW:not_occupied seg_c5_c6_0_50) (N:RW:not_occupied seg_c6_c7_0_100) (RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c6_c7_0_100 ?a))
     pushback_seg_b01_0_100_seg_c3_c_b01_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_b01_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c_b01_0_100) (RW:not_blocked seg_c3_c_b01_0_100 airplane_cfbeg) (RW:not_blocked seg_c3_c_b01_0_100 airplane_daewh) (RW:not_blocked seg_c3_c_b01_0_100 airplane_dfboy) (RW:not_blocked seg_c3_c_b01_0_100 airplane_wurst) (RW:not_blocked seg_c3_c_b01_0_100 airplane_horst) (RW:not_blocked seg_c3_c_b01_0_100 airplane_holgi) (RW:not_blocked seg_c3_c_b01_0_100 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c_b01_0_100) (N:RW:at-segment ?a seg_b01_0_100) (W:occupied seg_c3_c_b01_0_100) (N:W:occupied seg_b01_0_100) (N:RW:not_occupied seg_c3_c_b01_0_100) (RW:not_occupied seg_b01_0_100) (W:blocked seg_c3_c_b01_0_100 ?a) (N:W:blocked seg_b01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_b01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c_b01_0_100) (N:RW:at-segment ?a seg_b01_0_100) (N:RW:not_occupied seg_c3_c_b01_0_100) (RW:not_occupied seg_b01_0_100) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_b01_0_100 ?a))
     pushback_seg_c3_c_b01_0_100_seg_c3_c4_0_50_south_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c3_c_b01_0_100) (RW:facing ?a south) (RW:not_occupied seg_c3_c4_0_50) (RW:not_blocked seg_c3_c4_0_50 airplane_cfbeg) (RW:not_blocked seg_c3_c4_0_50 airplane_daewh) (RW:not_blocked seg_c3_c4_0_50 airplane_dfboy) (RW:not_blocked seg_c3_c4_0_50 airplane_wurst) (RW:not_blocked seg_c3_c4_0_50 airplane_horst) (RW:not_blocked seg_c3_c4_0_50 airplane_holgi) (RW:not_blocked seg_c3_c4_0_50 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_b01_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (W:occupied seg_c3_c4_0_50) (N:W:occupied seg_c3_c_b01_0_100) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_b01_0_100) (W:blocked seg_c3_c4_0_50 ?a) (N:W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c3_c4_0_50) (N:RW:at-segment ?a seg_c3_c_b01_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (N:RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_b01_0_100) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a))
     pushback_seg_b02_0_100_seg_c5_c_b02_0_100_south_south_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_b02_0_100) (RW:facing ?a south) (RW:not_occupied seg_c5_c_b02_0_100) (RW:not_blocked seg_c5_c_b02_0_100 airplane_cfbeg) (RW:not_blocked seg_c5_c_b02_0_100 airplane_daewh) (RW:not_blocked seg_c5_c_b02_0_100 airplane_dfboy) (RW:not_blocked seg_c5_c_b02_0_100 airplane_wurst) (RW:not_blocked seg_c5_c_b02_0_100 airplane_horst) (RW:not_blocked seg_c5_c_b02_0_100 airplane_holgi) (RW:not_blocked seg_c5_c_b02_0_100 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c_b02_0_100) (N:RW:at-segment ?a seg_b02_0_100) (W:occupied seg_c5_c_b02_0_100) (N:W:occupied seg_b02_0_100) (N:RW:not_occupied seg_c5_c_b02_0_100) (RW:not_occupied seg_b02_0_100) (W:blocked seg_c5_c_b02_0_100 ?a) (N:W:blocked seg_b02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_b02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c_b02_0_100) (N:RW:at-segment ?a seg_b02_0_100) (N:RW:not_occupied seg_c5_c_b02_0_100) (RW:not_occupied seg_b02_0_100) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_b02_0_100 ?a))
     pushback_seg_c5_c_b02_0_100_seg_c5_c6_0_50_south_north_medium: ?a:1
         pre: (and (R:has-type ?a medium) (RW:at-segment ?a seg_c5_c_b02_0_100) (RW:facing ?a south) (RW:not_occupied seg_c5_c6_0_50) (RW:not_blocked seg_c5_c6_0_50 airplane_cfbeg) (RW:not_blocked seg_c5_c6_0_50 airplane_daewh) (RW:not_blocked seg_c5_c6_0_50 airplane_dfboy) (RW:not_blocked seg_c5_c6_0_50 airplane_wurst) (RW:not_blocked seg_c5_c6_0_50 airplane_horst) (RW:not_blocked seg_c5_c6_0_50 airplane_holgi) (RW:not_blocked seg_c5_c6_0_50 airplane_4xekd) (RW:is-pushing ?a))
-        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_b02_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (W:occupied seg_c5_c6_0_50) (N:W:occupied seg_c5_c_b02_0_100) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (W:blocked seg_c5_c6_0_50 ?a) (N:W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a))
+        eff: (and (RW:at-segment ?a seg_c5_c6_0_50) (N:RW:at-segment ?a seg_c5_c_b02_0_100) (RW:facing ?a north) (N:RW:facing ?a south) (N:RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a))
     takeoff_seg_27_0_150_north: ?a:1
         pre: (and (RW:at-segment ?a seg_27_0_150) (RW:facing ?a north) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_27_0_150) (N:W:occupied seg_27_0_150) (RW:not_occupied seg_27_0_150) (N:W:blocked seg_27_0_150 ?a) (N:W:blocked seg_b_27_0_100 ?a) (RW:not_blocked seg_27_0_150 ?a) (RW:not_blocked seg_b_27_0_100 ?a) (RW:airborne ?a seg_27_0_150) (N:RW:is-moving ?a))
+        eff: (and (N:RW:at-segment ?a seg_27_0_150) (RW:not_occupied seg_27_0_150) (RW:not_blocked seg_27_0_150 ?a) (RW:not_blocked seg_b_27_0_100 ?a) (RW:airborne ?a seg_27_0_150) (N:RW:is-moving ?a))
     takeoff_seg_09_0_150_south: ?a:1
         pre: (and (RW:at-segment ?a seg_09_0_150) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:RW:at-segment ?a seg_09_0_150) (N:W:occupied seg_09_0_150) (RW:not_occupied seg_09_0_150) (N:W:blocked seg_09_0_150 ?a) (N:W:blocked seg_a_09_0_100 ?a) (RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_a_09_0_100 ?a) (RW:airborne ?a seg_09_0_150) (N:RW:is-moving ?a))
+        eff: (and (N:RW:at-segment ?a seg_09_0_150) (RW:not_occupied seg_09_0_150) (RW:not_blocked seg_09_0_150 ?a) (RW:not_blocked seg_a_09_0_100 ?a) (RW:airborne ?a seg_09_0_150) (N:RW:is-moving ?a))
     startup_seg_a_09_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a_09_0_100) (RW:not_occupied seg_09help_0_100) (RW:not_occupied seg_09_0_150) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_09help_0_100 ?a) (W:blocked seg_09_0_150 ?a) (N:RW:not_blocked seg_09help_0_100 ?a) (N:RW:not_blocked seg_09_0_150 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_09help_0_100 ?a) (N:RW:not_blocked seg_09_0_150 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_a_09_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a_09_0_100) (RW:not_occupied seg_n1_a_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n1_a_0_100 ?a) (N:RW:not_blocked seg_n1_a_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n1_a_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_b_27_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b_27_0_100) (RW:not_occupied seg_27help_0_100) (RW:not_occupied seg_27_0_150) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_27help_0_100 ?a) (W:blocked seg_27_0_150 ?a) (N:RW:not_blocked seg_27help_0_100 ?a) (N:RW:not_blocked seg_27_0_150 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_27help_0_100 ?a) (N:RW:not_blocked seg_27_0_150 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_b_27_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b_27_0_100) (RW:not_occupied seg_n6_b_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n6_b_0_100 ?a) (N:RW:not_blocked seg_n6_b_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n6_b_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n1_n2_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n1_n2_0_100) (RW:not_occupied seg_n2_n3_1_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_1_0_86 ?a) (N:RW:not_blocked seg_n2_n3_1_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_1_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n1_n2_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n1_n2_0_100) (RW:not_occupied seg_n1_a_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n1_a_0_100 ?a) (N:RW:not_blocked seg_n1_a_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n1_a_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n1_a_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n1_a_0_100) (RW:not_occupied seg_a_09_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_a_09_0_100 ?a) (N:RW:not_blocked seg_a_09_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_a_09_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n1_a_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n1_a_0_100) (RW:not_occupied seg_n1_n2_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n1_n2_0_100 ?a) (N:RW:not_blocked seg_n1_n2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n1_n2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_1_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_1_0_86) (RW:not_occupied seg_n2_n3_2_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_2_0_86 ?a) (N:RW:not_blocked seg_n2_n3_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_1_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_1_0_86) (RW:not_occupied seg_n1_n2_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n1_n2_0_100 ?a) (N:RW:not_blocked seg_n1_n2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n1_n2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_0_85_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_0_85) (RW:not_occupied seg_n3_n_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n3_n_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n3_n_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_0_85_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_0_85) (RW:not_occupied seg_n2_n3_6_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_6_0_86 ?a) (N:RW:not_blocked seg_n2_n3_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n3_n_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n3_n_0_100) (RW:not_occupied seg_n_n4_0_100) (RW:not_occupied seg_n_c_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n_n4_0_100 ?a) (W:blocked seg_n_c_0_100 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n_n4_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n3_n_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n3_n_0_100) (RW:not_occupied seg_n2_n3_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_0_85 ?a) (N:RW:not_blocked seg_n2_n3_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n_n4_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n_n4_0_100) (RW:not_occupied seg_n4_n5_1_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_1_0_85 ?a) (N:RW:not_blocked seg_n4_n5_1_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_1_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n_n4_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n_n4_0_100) (RW:not_occupied seg_n3_n_0_100) (RW:not_occupied seg_n_c_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n3_n_0_100 ?a) (W:blocked seg_n_c_0_100 ?a) (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n_c_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n_c_0_100) (RW:not_occupied seg_c_c2_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c_c2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c_c2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n_c_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n_c_0_100) (RW:not_occupied seg_n3_n_0_100) (RW:not_occupied seg_n_n4_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n3_n_0_100 ?a) (W:blocked seg_n_n4_0_100 ?a) (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n3_n_0_100 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_1_0_85_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_1_0_85) (RW:not_occupied seg_n4_n5_2_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_2_0_86 ?a) (N:RW:not_blocked seg_n4_n5_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_1_0_85_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_1_0_85) (RW:not_occupied seg_n_n4_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n_n4_0_100 ?a) (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n_n4_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_0_86) (RW:not_occupied seg_n5_n6_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n5_n6_0_100 ?a) (N:RW:not_blocked seg_n5_n6_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n5_n6_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_0_86) (RW:not_occupied seg_n4_n5_6_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_6_0_86 ?a) (N:RW:not_blocked seg_n4_n5_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n5_n6_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n5_n6_0_100) (RW:not_occupied seg_n6_b_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n6_b_0_100 ?a) (N:RW:not_blocked seg_n6_b_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n6_b_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n5_n6_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n5_n6_0_100) (RW:not_occupied seg_n4_n5_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n6_b_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n6_b_0_100) (RW:not_occupied seg_b_27_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_b_27_0_100 ?a) (N:RW:not_blocked seg_b_27_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_b_27_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n6_b_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n6_b_0_100) (RW:not_occupied seg_n5_n6_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n5_n6_0_100 ?a) (N:RW:not_blocked seg_n5_n6_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n5_n6_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c_c2_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c_c2_0_100) (RW:not_occupied seg_c2_c3_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c2_c3_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c_c2_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c_c2_0_100) (RW:not_occupied seg_n_c_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n_c_0_100 ?a) (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n_c_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c2_c3_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c2_c3_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c2_c3_0_100) (RW:not_occupied seg_c_c2_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c_c2_0_100 ?a) (N:RW:not_blocked seg_c_c2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c_c2_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c3_c4_0_50_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c3_c4_0_50) (RW:not_occupied seg_c4_c5_0_50) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c4_c5_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c3_c4_0_50_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c3_c4_0_50) (RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c_a01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c2_c3_0_100 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c3_c_a01_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c3_c_a01_0_100) (RW:not_occupied seg_a01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_a01_0_100 ?a) (N:RW:not_blocked seg_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c3_c_a01_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c3_c_a01_0_100) (RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_b01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c2_c3_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c3_c_b01_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c3_c_b01_0_100) (RW:not_occupied seg_b01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_b01_0_100 ?a) (N:RW:not_blocked seg_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c3_c_b01_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c3_c_b01_0_100) (RW:not_occupied seg_c2_c3_0_100) (RW:not_occupied seg_c3_c4_0_50) (RW:not_occupied seg_c3_c_a01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c2_c3_0_100 ?a) (W:blocked seg_c3_c4_0_50 ?a) (W:blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c2_c3_0_100 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c4_c5_0_50_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c4_c5_0_50_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c4_c5_0_50) (RW:not_occupied seg_c3_c4_0_50) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c3_c4_0_50 ?a) (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c3_c4_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c5_c6_0_50_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c5_c6_0_50) (RW:not_occupied seg_c6_c7_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c6_c7_0_100 ?a) (N:RW:not_blocked seg_c6_c7_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c6_c7_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c5_c6_0_50_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c5_c6_0_50) (RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c4_c5_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c5_c_a02_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c5_c_a02_0_100) (RW:not_occupied seg_a02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_a02_0_100 ?a) (N:RW:not_blocked seg_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c5_c_a02_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c5_c_a02_0_100) (RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_b02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c4_c5_0_50 ?a) (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c5_c_b02_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c5_c_b02_0_100) (RW:not_occupied seg_b02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_b02_0_100 ?a) (N:RW:not_blocked seg_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c5_c_b02_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c5_c_b02_0_100) (RW:not_occupied seg_c4_c5_0_50) (RW:not_occupied seg_c5_c6_0_50) (RW:not_occupied seg_c5_c_a02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c4_c5_0_50 ?a) (W:blocked seg_c5_c6_0_50 ?a) (W:blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c4_c5_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c6_c7_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c6_c7_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_c6_c7_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_c6_c7_0_100) (RW:not_occupied seg_c5_c6_0_50) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c5_c6_0_50 ?a) (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c5_c6_0_50 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_a01_0_100_north: ?a:1
         pre: (and (RW:at-segment ?a seg_a01_0_100) (RW:facing ?a north) (RW:is-moving ?a))
         eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_a01_0_100))
     park_seg_a01_0_100_south: ?a:1
         pre: (and (RW:at-segment ?a seg_a01_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c3_c_a01_0_100 ?a) (RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_a01_0_100))
+        eff: (and (RW:not_blocked seg_c3_c_a01_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_a01_0_100))
     startup_seg_a01_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a01_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_a01_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a01_0_100) (RW:not_occupied seg_c3_c_a01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c3_c_a01_0_100 ?a) (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c3_c_a01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_a02_0_100_north: ?a:1
         pre: (and (RW:at-segment ?a seg_a02_0_100) (RW:facing ?a north) (RW:is-moving ?a))
         eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_a02_0_100))
     park_seg_a02_0_100_south: ?a:1
         pre: (and (RW:at-segment ?a seg_a02_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c5_c_a02_0_100 ?a) (RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_a02_0_100))
+        eff: (and (RW:not_blocked seg_c5_c_a02_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_a02_0_100))
     startup_seg_a02_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a02_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_a02_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_a02_0_100) (RW:not_occupied seg_c5_c_a02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c5_c_a02_0_100 ?a) (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c5_c_a02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_b01_0_100_north: ?a:1
         pre: (and (RW:at-segment ?a seg_b01_0_100) (RW:facing ?a north) (RW:is-moving ?a))
         eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_b01_0_100))
     park_seg_b01_0_100_south: ?a:1
         pre: (and (RW:at-segment ?a seg_b01_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c3_c_b01_0_100 ?a) (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_b01_0_100))
+        eff: (and (RW:not_blocked seg_c3_c_b01_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_b01_0_100))
     startup_seg_b01_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b01_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_b01_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b01_0_100) (RW:not_occupied seg_c3_c_b01_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c3_c_b01_0_100 ?a) (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c3_c_b01_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     park_seg_b02_0_100_north: ?a:1
         pre: (and (RW:at-segment ?a seg_b02_0_100) (RW:facing ?a north) (RW:is-moving ?a))
         eff: (and (N:RW:is-moving ?a) (RW:is-parked ?a seg_b02_0_100))
     park_seg_b02_0_100_south: ?a:1
         pre: (and (RW:at-segment ?a seg_b02_0_100) (RW:facing ?a south) (RW:is-moving ?a))
-        eff: (and (N:W:blocked seg_c5_c_b02_0_100 ?a) (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_b02_0_100))
+        eff: (and (RW:not_blocked seg_c5_c_b02_0_100 ?a) (N:RW:is-moving ?a) (RW:is-parked ?a seg_b02_0_100))
     startup_seg_b02_0_100_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b02_0_100) (RW:is-pushing ?a))
         eff: (and (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_b02_0_100_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_b02_0_100) (RW:not_occupied seg_c5_c_b02_0_100) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_c5_c_b02_0_100 ?a) (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_c5_c_b02_0_100 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_2_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_2_0_86) (RW:not_occupied seg_n2_n3_3_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_3_0_86 ?a) (N:RW:not_blocked seg_n2_n3_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_2_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_2_0_86) (RW:not_occupied seg_n2_n3_1_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_1_0_86 ?a) (N:RW:not_blocked seg_n2_n3_1_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_1_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_3_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_3_0_86) (RW:not_occupied seg_n2_n3_4_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_4_0_85 ?a) (N:RW:not_blocked seg_n2_n3_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_3_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_3_0_86) (RW:not_occupied seg_n2_n3_2_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_2_0_86 ?a) (N:RW:not_blocked seg_n2_n3_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_4_0_85_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_4_0_85) (RW:not_occupied seg_n2_n3_5_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_5_0_86 ?a) (N:RW:not_blocked seg_n2_n3_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_4_0_85_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_4_0_85) (RW:not_occupied seg_n2_n3_3_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_3_0_86 ?a) (N:RW:not_blocked seg_n2_n3_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_5_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_5_0_86) (RW:not_occupied seg_n2_n3_6_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_6_0_86 ?a) (N:RW:not_blocked seg_n2_n3_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_5_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_5_0_86) (RW:not_occupied seg_n2_n3_4_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_4_0_85 ?a) (N:RW:not_blocked seg_n2_n3_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_6_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_6_0_86) (RW:not_occupied seg_n2_n3_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_0_85 ?a) (N:RW:not_blocked seg_n2_n3_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n2_n3_6_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n2_n3_6_0_86) (RW:not_occupied seg_n2_n3_5_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n2_n3_5_0_86 ?a) (N:RW:not_blocked seg_n2_n3_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n2_n3_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_2_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_2_0_86) (RW:not_occupied seg_n4_n5_3_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_3_0_86 ?a) (N:RW:not_blocked seg_n4_n5_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_2_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_2_0_86) (RW:not_occupied seg_n4_n5_1_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_1_0_85 ?a) (N:RW:not_blocked seg_n4_n5_1_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_1_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_3_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_3_0_86) (RW:not_occupied seg_n4_n5_4_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_4_0_85 ?a) (N:RW:not_blocked seg_n4_n5_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_3_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_3_0_86) (RW:not_occupied seg_n4_n5_2_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_2_0_86 ?a) (N:RW:not_blocked seg_n4_n5_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_2_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_4_0_85_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_4_0_85) (RW:not_occupied seg_n4_n5_5_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_4_0_85_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_4_0_85) (RW:not_occupied seg_n4_n5_3_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_3_0_86 ?a) (N:RW:not_blocked seg_n4_n5_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_3_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_5_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_5_0_86) (RW:not_occupied seg_n4_n5_6_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_6_0_86 ?a) (N:RW:not_blocked seg_n4_n5_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_6_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_5_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_5_0_86) (RW:not_occupied seg_n4_n5_4_0_85) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_4_0_85 ?a) (N:RW:not_blocked seg_n4_n5_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_4_0_85 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_6_0_86_north_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_6_0_86) (RW:not_occupied seg_n4_n5_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+        eff: (and (N:RW:not_blocked seg_n4_n5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
     startup_seg_n4_n5_6_0_86_south_medium: ?a:1
         pre: (and (RW:at-segment ?a seg_n4_n5_6_0_86) (RW:not_occupied seg_n4_n5_5_0_86) (RW:is-pushing ?a))
-        eff: (and (W:blocked seg_n4_n5_5_0_86 ?a) (N:RW:not_blocked seg_n4_n5_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
-Init[380]:
+        eff: (and (N:RW:not_blocked seg_n4_n5_5_0_86 ?a) (RW:is-moving ?a) (N:RW:is-pushing ?a))
+Init[363]:
   S:(has-type airplane_cfbeg medium)
   S:(has-type airplane_daewh medium)
   S:(has-type airplane_dfboy medium)
@@ -549,13 +546,6 @@ Init[380]:
   (facing airplane_horst south)
   (facing airplane_holgi north)
   (facing airplane_4xekd south)
-  (occupied seg_rwy_0_1300)
-  (occupied seg_n4_n5_1_0_85)
-  (occupied seg_a01_0_100)
-  (occupied seg_a02_0_100)
-  (occupied seg_b01_0_100)
-  (occupied seg_b02_0_100)
-  (occupied seg_n4_n5_2_0_86)
   (not_occupied seg_09thresh_0_100)
   (not_occupied seg_09help_0_100)
   (not_occupied seg_09_0_150)
@@ -593,16 +583,6 @@ Init[380]:
   (not_occupied seg_n4_n5_4_0_85)
   (not_occupied seg_n4_n5_5_0_86)
   (not_occupied seg_n4_n5_6_0_86)
-  (blocked seg_09_0_150 airplane_4xekd)
-  (blocked seg_rwy_0_1300 airplane_4xekd)
-  (blocked seg_n4_n5_1_0_85 airplane_cfbeg)
-  (blocked seg_a01_0_100 airplane_wurst)
-  (blocked seg_a02_0_100 airplane_daewh)
-  (blocked seg_b01_0_100 airplane_horst)
-  (blocked seg_b02_0_100 airplane_dfboy)
-  (blocked seg_n4_n5_2_0_86 airplane_cfbeg)
-  (blocked seg_n4_n5_2_0_86 airplane_holgi)
-  (blocked seg_n4_n5_3_0_86 airplane_holgi)
   (not_blocked seg_09thresh_0_100 airplane_cfbeg)
   (not_blocked seg_09thresh_0_100 airplane_daewh)
   (not_blocked seg_09thresh_0_100 airplane_dfboy)

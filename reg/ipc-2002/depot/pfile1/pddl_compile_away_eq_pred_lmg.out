@@ -19,7 +19,7 @@ Obj[13]:
     [10]: hoist0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [11]: hoist1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [12]: hoist2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[17]:
+Predicate[13]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     at: 0 0 :: read: 1, write: 1, in-init: 1
     on: 0 0 :: read: 1, write: 1, in-init: 1
@@ -28,13 +28,9 @@ Predicate[17]:
     available: 0 :: read: 1, write: 1, in-init: 1
     clear: 0 :: read: 1, write: 1, in-init: 1
     place: 0 :: read: 1, write: 0, in-init: 1
-    locatable: 0 :: read: 0, write: 0, in-init: 0
-    depot: 0 :: read: 0, write: 0, in-init: 0
-    distributor: 0 :: read: 0, write: 0, in-init: 0
     truck: 0 :: read: 1, write: 0, in-init: 1
     hoist: 0 :: read: 1, write: 0, in-init: 1
     surface: 0 :: read: 1, write: 0, in-init: 1
-    pallet: 0 :: read: 0, write: 0, in-init: 1
     crate: 0 :: read: 1, write: 0, in-init: 1
     equal: 0 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
@@ -54,7 +50,7 @@ Action[5]:
     unload: ?x:0 ?y:0 ?z:0 ?p:0
         pre: (and (R:place ?p) (R:truck ?z) (R:hoist ?x) (R:crate ?y) (N:R:equal ?x ?y) (N:R:equal ?y ?z) (RW:at ?x ?p) (RW:at ?z ?p) (RW:in ?y ?z) (RW:available ?x))
         eff: (and (N:RW:in ?y ?z) (RW:lifting ?x ?y) (N:RW:available ?x))
-Init[49]:
+Init[46]:
   S:(place depot0)
   S:(place distributor0)
   S:(place distributor1)
@@ -68,9 +64,6 @@ Init[49]:
   S:(surface pallet2)
   S:(surface crate0)
   S:(surface crate1)
-  S:(pallet pallet0)
-  S:(pallet pallet1)
-  S:(pallet pallet2)
   S:(crate crate0)
   S:(crate crate1)
   S:(equal depot0 depot0)

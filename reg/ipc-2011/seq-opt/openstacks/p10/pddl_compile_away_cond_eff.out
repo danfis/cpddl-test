@@ -91,9 +91,8 @@ Obj[79]:
     [76]: n24, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [77]: n25, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [78]: n26, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
+Predicate[8]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    includes: 1 2 :: read: 0, write: 0, in-init: 1
     waiting: 1 :: read: 1, write: 1, in-init: 1
     started: 1 :: read: 1, write: 1, in-init: 0
     shipped: 1 :: read: 1, write: 1, in-init: 0
@@ -266,59 +265,7 @@ Action[54]:
     ship-order-o26: ?avail:3 ?new-avail:3
         pre: (and (R:next-count ?avail ?new-avail) (RW:started o26) (RW:made p7) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o26) (RW:shipped o26) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
-Init[131]:
-  S:(includes o1 p11)
-  S:(includes o1 p13)
-  S:(includes o2 p2)
-  S:(includes o3 p8)
-  S:(includes o3 p12)
-  S:(includes o4 p21)
-  S:(includes o5 p10)
-  S:(includes o6 p6)
-  S:(includes o7 p1)
-  S:(includes o7 p21)
-  S:(includes o7 p25)
-  S:(includes o8 p5)
-  S:(includes o8 p6)
-  S:(includes o9 p24)
-  S:(includes o9 p25)
-  S:(includes o10 p14)
-  S:(includes o10 p23)
-  S:(includes o11 p9)
-  S:(includes o12 p4)
-  S:(includes o13 p2)
-  S:(includes o13 p9)
-  S:(includes o13 p12)
-  S:(includes o13 p14)
-  S:(includes o13 p18)
-  S:(includes o13 p21)
-  S:(includes o14 p9)
-  S:(includes o14 p16)
-  S:(includes o14 p19)
-  S:(includes o15 p3)
-  S:(includes o15 p7)
-  S:(includes o16 p13)
-  S:(includes o16 p15)
-  S:(includes o16 p17)
-  S:(includes o16 p20)
-  S:(includes o16 p22)
-  S:(includes o17 p8)
-  S:(includes o17 p17)
-  S:(includes o17 p20)
-  S:(includes o18 p17)
-  S:(includes o18 p19)
-  S:(includes o19 p13)
-  S:(includes o20 p15)
-  S:(includes o21 p19)
-  S:(includes o21 p26)
-  S:(includes o22 p16)
-  S:(includes o23 p4)
-  S:(includes o24 p22)
-  S:(includes o25 p4)
-  S:(includes o25 p12)
-  S:(includes o25 p14)
-  S:(includes o25 p15)
-  S:(includes o26 p7)
+Init[79]:
   S:(next-count n0 n1)
   S:(next-count n1 n2)
   S:(next-count n2 n3)

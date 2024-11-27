@@ -9,7 +9,7 @@ Compile-in LMG: Precondition of action 'drop' extended with (or (not (= ?a1 ?a2)
 Compile-in LMG: Found mutex condition for action 'move' and mgroup {clear V0:storearea, at hoist0 V0:storearea, on crate0 V0:storearea}:=1: (and (= ?from ?to) (= ?h hoist0))
 Compile-in LMG: Precondition of action 'move' extended with (or (not (= ?from ?to)) (not (= ?h hoist0)))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 11, objects: 7, predicates: 9, functions: 0, actions: 5, action-pre-size: [min: 10, max: 3, avg: 5.80, med: 5.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 11, objects: 7, predicates: 8, functions: 0, actions: 5, action-pre-size: [min: 10, max: 3, avg: 5.80, med: 5.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -27,12 +27,12 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drop
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drop
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 7, vars: 5, predicates: 20, rules: 37)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 7, vars: 5, predicates: 19, rules: 37)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 7, vars: 5, predicates: 20, rules: 37)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 7, vars: 5, predicates: 19, rules: 37)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 7, vars: 5, predicates: 20, rules: 37)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 7, vars: 5, predicates: 19, rules: 37)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 37
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 37, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
@@ -40,11 +40,11 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: Detected unreachable action: 5:lift
-Compile-in LMG: PDDL-Norm: Detected unreachable action: 6:lift
-Compile-in LMG: PDDL-Norm: Detected unreachable action: 8:drop
-Compile-in LMG: PDDL-Norm: Detected unreachable action: 10:move
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 11, objects: 7, predicates: 9, functions: 0, actions: 7, action-pre-size: [min: 2, max: 7, avg: 5.00, med: 6.00]
+Compile-in LMG: PDDL-Norm: Detected unreachable action: lift
+Compile-in LMG: PDDL-Norm: Detected unreachable action: lift
+Compile-in LMG: PDDL-Norm: Detected unreachable action: drop
+Compile-in LMG: PDDL-Norm: Detected unreachable action: move
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 11, objects: 7, predicates: 8, functions: 0, actions: 7, action-pre-size: [min: 2, max: 7, avg: 5.00, med: 6.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 7
 Compile-in LMG: END
@@ -83,7 +83,7 @@ Obj[7]:
     [4]: container0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [5]: depot0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [6]: loadarea, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
+Predicate[8]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     clear: 8 :: read: 1, write: 1, in-init: 0
     in: 10 3 :: read: 1, write: 1, in-init: 1
@@ -92,7 +92,6 @@ Predicate[9]:
     at: 1 6 :: read: 1, write: 1, in-init: 1
     on: 7 8 :: read: 1, write: 1, in-init: 1
     connected: 6 6 :: read: 1, write: 0, in-init: 1
-    compatible: 7 7 :: read: 0, write: 0, in-init: 0
 Function[0]:
 Action[7]:
     lift: ?h:1 ?c:7 ?a1:8 ?a2:6 ?p:3

@@ -83,9 +83,8 @@ Obj[77]:
     [74]: mars, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [75]: neptune, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [76]: pluto, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
+Predicate[12]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    province: 0 :: read: 0, write: 0, in-init: 1
     planet: 0 :: read: 1, write: 0, in-init: 1
     food: 0 :: read: 1, write: 0, in-init: 1
     pleasure: 0 :: read: 1, write: 0, in-init: 1
@@ -108,13 +107,7 @@ Action[3]:
     succumb: ?c:0 ?v:0 ?n:0 ?s1:0 ?s2:0
         pre: (and (R:food ?n) (R:pleasure ?v) (R:pain ?c) (R:orbits ?s1 ?s2) (RW:craves ?v ?n) (RW:fears ?c ?v) (RW:harmony ?v ?s1))
         eff: (and (RW:craves ?c ?n) (N:RW:fears ?c ?v) (N:RW:harmony ?v ?s1) (RW:harmony ?v ?s2))
-Init[209]:
-  S:(province surrey)
-  S:(province moravia)
-  S:(province quebec)
-  S:(province oregon)
-  S:(province alsace)
-  S:(province kentucky)
+Init[203]:
   S:(planet mercury)
   S:(planet mars)
   S:(planet neptune)

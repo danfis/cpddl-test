@@ -35,7 +35,7 @@ Obj[21]:
     [18]: vehicle4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [19]: vehicle5, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [20]: vehicle6, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[20]:
+Predicate[19]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     connected-by-land: 2 2 :: read: 1, write: 0, in-init: 1
     connected-by-rail: 2 2 :: read: 1, write: 1, in-init: 0
@@ -51,7 +51,6 @@ Predicate[20]:
     has-sawmill: 2 :: read: 1, write: 1, in-init: 0
     has-ironworks: 2 :: read: 1, write: 1, in-init: 0
     has-docks: 2 :: read: 1, write: 1, in-init: 0
-    has-wharf: 2 :: read: 0, write: 1, in-init: 0
     is-train: 3 :: read: 1, write: 1, in-init: 0
     is-ship: 3 :: read: 1, write: 1, in-init: 0
     is-at: 3 2 :: read: 1, write: 1, in-init: 0
@@ -106,7 +105,7 @@ Action[25]:
         eff: (and (RW:has-docks ?p) (decrease (available stone ?p) 2) (decrease (available wood ?p) 2) (increase (labour) 2))
     build-wharf: ?p:2
         pre: (and (RW:has-docks ?p) (>= (available stone ?p) 2) (>= (available iron ?p) 2))
-        eff: (and (W:has-wharf ?p) (decrease (available stone ?p) 2) (decrease (available iron ?p) 2) (increase (labour) 2))
+        eff: (and (decrease (available stone ?p) 2) (decrease (available iron ?p) 2) (increase (labour) 2))
     build-rail: ?p1:2 ?p2:2
         pre: (and (R:connected-by-land ?p1 ?p2) (>= (available wood ?p1) 1) (>= (available iron ?p1) 1))
         eff: (and (RW:connected-by-rail ?p1 ?p2) (decrease (available wood ?p1) 1) (decrease (available iron ?p1) 1) (increase (labour) 2))
@@ -121,7 +120,7 @@ Action[25]:
         eff: (and (RW:is-train ?v) (RW:is-at ?v ?p) (N:RW:potential ?v) (decrease (available iron ?p) 2) (assign (space-in ?v) 5) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (available coal ?v) 0) (assign (available stone ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (increase (labour) 2))
     build-ship: ?p:2 ?v:3
         pre: (and (RW:potential ?v) (>= (available iron ?p) 4))
-        eff: (and (W:has-wharf ?p) (RW:is-ship ?v) (RW:is-at ?v ?p) (N:RW:potential ?v) (decrease (available iron ?p) 4) (assign (space-in ?v) 10) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (available coal ?v) 0) (assign (available stone ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (increase (labour) 3))
+        eff: (and (RW:is-ship ?v) (RW:is-at ?v ?p) (N:RW:potential ?v) (decrease (available iron ?p) 4) (assign (space-in ?v) 10) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (available coal ?v) 0) (assign (available stone ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (increase (labour) 3))
     fell-timber: ?p:2
         pre: (and (RW:has-cabin ?p))
         eff: (and (increase (available timber ?p) 1) (increase (labour) 1))

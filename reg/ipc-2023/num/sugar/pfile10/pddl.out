@@ -40,48 +40,36 @@ Obj[16]:
     [13]: crane1, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [14]: crane2, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: crane3, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
+Predicate[11]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     available: 6 :: read: 1, write: 1, in-init: 1
-    has-resource: 5 6 :: read: 0, write: 0, in-init: 0
     produce: 6 4 :: read: 1, write: 0, in-init: 1
     current-process: 6 4 :: read: 1, write: 1, in-init: 1
     change-process: 4 4 :: read: 1, write: 0, in-init: 1
     place-order: 5 6 :: read: 1, write: 1, in-init: 0
-    transport-to: 5 6 :: read: 0, write: 0, in-init: 0
     at-location: 3 2 :: read: 1, write: 1, in-init: 1
     connected: 2 2 :: read: 1, write: 0, in-init: 1
     busy: 6 :: read: 1, write: 1, in-init: 0
     ready-crane: 9 :: read: 1, write: 1, in-init: 1
     service-crane: 9 :: read: 1, write: 1, in-init: 0
-Function[20]:
-    mill-cost: :: read: 0, write: 1, in-init: 1
-    cost-process: 6 :: read: 1, write: 0, in-init: 1
-    process-cost: 6 :: read: 0, write: 0, in-init: 0
-    resource-use: :: read: 0, write: 0, in-init: 0
+Function[10]:
     unharvest-field: :: read: 1, write: 1, in-init: 1
     truck-cap: 8 :: read: 1, write: 1, in-init: 1
     in-truck-sugar: 4 8 :: read: 1, write: 1, in-init: 1
     in-storage: 2 4 :: read: 1, write: 1, in-init: 1
-    total-distance: :: read: 0, write: 0, in-init: 0
-    distance: 2 2 :: read: 0, write: 0, in-init: 0
     has-resource: 5 6 :: read: 1, write: 1, in-init: 1
     max-changing: 6 :: read: 1, write: 1, in-init: 1
-    inventory-cost: :: read: 0, write: 1, in-init: 1
-    changing-product: :: read: 0, write: 0, in-init: 0
     capacity: 9 :: read: 1, write: 0, in-init: 1
     max-service-time: 9 :: read: 1, write: 0, in-init: 1
     service-time: 9 :: read: 1, write: 1, in-init: 1
-    handling-cost: :: read: 0, write: 1, in-init: 1
     max-produce: 6 :: read: 1, write: 0, in-init: 1
-    labour-cost: :: read: 0, write: 0, in-init: 0
 Action[13]:
     produce_sugar: ?r:5 ?m:6 ?b:4
         pre: (and (R:produce ?m ?b) (RW:available ?m) (RW:current-process ?m ?b) (> (has-resource ?r ?m) 0) (> (max-changing ?m) 0))
-        eff: (and (N:RW:available ?m) (RW:busy ?m) (increase (in-storage ?m ?b) 1) (decrease (has-resource ?r ?m) 1) (increase (mill-cost) (cost-process ?m)))
+        eff: (and (N:RW:available ?m) (RW:busy ?m) (increase (in-storage ?m ?b) 1) (decrease (has-resource ?r ?m) 1))
     produce_sugar_max: ?r:5 ?m:6 ?b:4
         pre: (and (R:produce ?m ?b) (RW:available ?m) (RW:current-process ?m ?b) (>= (has-resource ?r ?m) (max-produce ?m)) (> (max-changing ?m) 0))
-        eff: (and (N:RW:available ?m) (RW:busy ?m) (increase (in-storage ?m ?b) (max-produce ?m)) (decrease (has-resource ?r ?m) (max-produce ?m)) (increase (mill-cost) (* 5 (cost-process ?m))))
+        eff: (and (N:RW:available ?m) (RW:busy ?m) (increase (in-storage ?m ?b) (max-produce ?m)) (decrease (has-resource ?r ?m) (max-produce ?m)))
     order-sugar-cane: ?r:5 ?m:6
         pre: (and (>= (has-resource ?r ?m) 0) (<= (has-resource ?r ?m) 0))
         eff: (and (RW:place-order ?r ?m))
@@ -93,13 +81,13 @@ Action[13]:
         eff: (and (N:RW:current-process ?m ?b1) (RW:current-process ?m ?b2) (decrease (max-changing ?m) 1))
     sugar-cane-farm: ?r:5 ?m:6
         pre: (and (RW:place-order ?r ?m) (> (unharvest-field) 0))
-        eff: (and (N:RW:place-order ?r ?m) (decrease (unharvest-field) 1) (increase (has-resource ?r ?m) 5) (increase (inventory-cost) 10))
+        eff: (and (N:RW:place-order ?r ?m) (decrease (unharvest-field) 1) (increase (has-resource ?r ?m) 5))
     sugar-cane-mills: ?r:5 ?m1:6 ?m2:6
         pre: (and (RW:place-order ?r ?m1) (> (has-resource ?r ?m2) 0))
-        eff: (and (N:RW:place-order ?r ?m1) (increase (has-resource ?r ?m1) 1) (decrease (has-resource ?r ?m2) 1) (decrease (inventory-cost) 1))
+        eff: (and (N:RW:place-order ?r ?m1) (increase (has-resource ?r ?m1) 1) (decrease (has-resource ?r ?m2) 1))
     load_truck_crane: ?b:4 ?t:8 ?l:2 ?c:9
         pre: (and (RW:at-location ?t ?l) (RW:at-location ?c ?l) (RW:ready-crane ?c) (>= (in-storage ?l ?b) (capacity ?c)) (>= (truck-cap ?t) (capacity ?c)))
-        eff: (and (decrease (in-storage ?l ?b) (capacity ?c)) (decrease (truck-cap ?t) (capacity ?c)) (increase (in-truck-sugar ?b ?t) (capacity ?c)) (increase (handling-cost) 10))
+        eff: (and (decrease (in-storage ?l ?b) (capacity ?c)) (decrease (truck-cap ?t) (capacity ?c)) (increase (in-truck-sugar ?b ?t) (capacity ?c)))
     check-service: ?c:9 ?l:2
         pre: (and (RW:at-location ?c ?l) (>= (service-time ?c) 0) (<= (service-time ?c) 0))
         eff: (and (N:RW:ready-crane ?c) (RW:service-crane ?c) (increase (service-time ?c) (max-service-time ?c)))
@@ -108,7 +96,7 @@ Action[13]:
         eff: (and (RW:ready-crane ?c))
     load-truck-manual: ?b:4 ?t:8 ?l:2
         pre: (and (RW:at-location ?t ?l) (> (in-storage ?l ?b) 0) (> (truck-cap ?t) 0))
-        eff: (and (decrease (in-storage ?l ?b) 1) (decrease (truck-cap ?t) 1) (increase (in-truck-sugar ?b ?t) 1) (increase (handling-cost) 1))
+        eff: (and (decrease (in-storage ?l ?b) 1) (decrease (truck-cap ?t) 1) (increase (in-truck-sugar ?b ?t) 1))
     drive_truck: ?t:8 ?y1:2 ?y2:2
         pre: (and (R:connected ?y1 ?y2) (RW:at-location ?t ?y1))
         eff: (and (N:RW:at-location ?t ?y1) (RW:at-location ?t ?y2))
@@ -180,14 +168,8 @@ Init[64]:
   (ready-crane crane1)
   (ready-crane crane2)
   (ready-crane crane3)
-Init[56]:
+Init[50]:
   (= (unharvest-field) 3)
-  (= (mill-cost) 0)
-  (= (inventory-cost) 0)
-  (= (handling-cost) 0)
-  (= (cost-process mill1) 1)
-  (= (cost-process mill2) 3)
-  (= (cost-process mill3) 6)
   (= (has-resource sugar-cane mill1) 10)
   (= (has-resource sugar-cane mill2) 10)
   (= (has-resource sugar-cane mill3) 10)

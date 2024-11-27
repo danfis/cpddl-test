@@ -136,7 +136,7 @@ Obj[94]:
     [91]: room3, type: 11, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [92]: room4, type: 11, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [93]: room5, type: 11, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[35]:
+Predicate[34]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     next_stage: 3 3 :: read: 1, write: 0, in-init: 1
     current_stage: 3 :: read: 1, write: 1, in-init: 1
@@ -168,7 +168,6 @@ Predicate[35]:
     supply_resource: 13 10 :: read: 1, write: 0, in-init: 1
     space_rooms: 11 :: read: 1, write: 1, in-init: 1
     built_rooms: 11 5 :: read: 1, write: 1, in-init: 1
-    ok: :: read: 0, write: 1, in-init: 0
     home_improvement: 6 :: read: 1, write: 1, in-init: 0
     NOT-newborn: :: read: 1, write: 1, in-init: 1, neg-of: newborn
     NOT-plowed_fields: :: read: 1, write: 1, in-init: 1, neg-of: plowed_fields
@@ -226,7 +225,7 @@ Action[22]:
         eff: (and (N:RW:current_worker ?w1) (RW:current_worker ?w2) (RW:owned_animals ?a) (N:RW:available_action ?act))
     collect_cook_animal: ?a:17 ?act:14 ?w1:5 ?w2:5 ?wmax:5 ?r:4 ?i1:12 ?i2:12
         pre: (and (R:next_worker ?w1 ?w2) (R:next2_num ?i1 ?i2) (RW:current_round ?r) (RW:current_worker ?w1) (RW:max_worker ?wmax) (RW:open_action ?act) (RW:available_action ?act) (RW:num_food ?i1) (RW:home_improvement fireplace))
-        eff: (and (N:RW:current_worker ?w1) (RW:current_worker ?w2) (N:RW:available_action ?act) (N:RW:num_food ?i1) (RW:num_food ?i2) (W:ok))
+        eff: (and (N:RW:current_worker ?w1) (RW:current_worker ?w2) (N:RW:available_action ?act) (N:RW:num_food ?i1) (RW:num_food ?i2))
     collect_resource: ?w1:5 ?w2:5 ?wmax:5 ?r:4 ?act:13 ?res:10
         pre: (and (R:next_worker ?w1 ?w2) (R:supply_resource ?act ?res) (RW:current_round ?r) (RW:current_worker ?w1) (RW:max_worker ?wmax) (RW:open_action ?act) (RW:available_action ?act))
         eff: (and (N:RW:current_worker ?w1) (RW:current_worker ?w2) (N:RW:available_action ?act) (RW:stored_resource ?res))

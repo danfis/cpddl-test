@@ -5,7 +5,7 @@ Compile-in LMG: actions: 4, lifted mgroups: 3
 Compile-in LMG: Found mutex condition for action 'succumb' and mgroup {craves V0:object C1:object, fears V0:object C2:object, craves V0:object C3:object, fears V0:object C4:object}:=1: (= ?c ?v)
 Compile-in LMG: Precondition of action 'succumb' extended with (not (= ?c ?v))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 21, predicates: 13, functions: 0, actions: 4, action-pre-size: [min: 9, max: 6, avg: 7.50, med: 7.50]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 21, predicates: 12, functions: 0, actions: 4, action-pre-size: [min: 9, max: 6, avg: 7.50, med: 7.50]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -16,20 +16,20 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action feast
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action succumb
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drink
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 21, vars: 7, predicates: 14, rules: 85)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 21, vars: 7, predicates: 13, rules: 78)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 21, vars: 7, predicates: 14, rules: 85)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 21, vars: 7, predicates: 13, rules: 78)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 21, vars: 7, predicates: 14, rules: 85)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 85
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 85, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 21, vars: 7, predicates: 13, rules: 78)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 78
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 78, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 21, predicates: 13, functions: 0, actions: 4, action-pre-size: [min: 9, max: 6, avg: 7.50, med: 7.50]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 21, predicates: 12, functions: 0, actions: 4, action-pre-size: [min: 9, max: 6, avg: 7.50, med: 7.50]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 4
 Compile-in LMG: END
@@ -62,9 +62,8 @@ Obj[21]:
     [18]: earth, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [19]: uranus, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [20]: venus, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
+Predicate[12]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
-    province: 0 :: read: 0, write: 0, in-init: 1
     planet: 0 :: read: 1, write: 0, in-init: 1
     food: 0 :: read: 1, write: 0, in-init: 1
     pleasure: 0 :: read: 1, write: 0, in-init: 1
@@ -90,14 +89,7 @@ Action[4]:
     drink: ?n1:0 ?n2:0 ?l11:0 ?l12:0 ?l13:0 ?l21:0 ?l22:0
         pre: (and (N:R:= ?n1 ?n2) (R:attacks ?l12 ?l11) (R:attacks ?l13 ?l12) (R:attacks ?l21 ?l22) (RW:locale ?n1 ?l11) (RW:locale ?n2 ?l21))
         eff: (and (N:RW:locale ?n1 ?l11) (RW:locale ?n1 ?l12) (N:RW:locale ?n2 ?l21) (RW:locale ?n2 ?l22))
-Init[54]:
-  S:(province kentucky)
-  S:(province bosnia)
-  S:(province surrey)
-  S:(province pennsylvania)
-  S:(province alsace)
-  S:(province quebec)
-  S:(province guanabara)
+Init[47]:
   S:(planet mars)
   S:(planet earth)
   S:(planet uranus)

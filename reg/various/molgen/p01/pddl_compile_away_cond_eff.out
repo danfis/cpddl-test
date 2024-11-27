@@ -13,10 +13,9 @@ Obj[7]:
     [4]: e-coli, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [5]: junk, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [6]: antibiotic-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[16]:
+Predicate[15]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     mrna: 0 :: read: 1, write: 0, in-init: 1
-    molecule: 0 :: read: 0, write: 0, in-init: 1
     connected-cdna-mrna: 0 :: read: 1, write: 1, in-init: 0
     single-strand: 0 :: read: 1, write: 1, in-init: 0
     hair-pin: 0 :: read: 1, write: 1, in-init: 0
@@ -62,12 +61,8 @@ Action[10]:
     ligate: ?x:0 ?y:0
         pre: (and (N:R:= ?x linker) (N:R:= ?x ?y) (RW:cleaved ?x) (RW:cleaved ?y))
         eff: (and (RW:cleavable ?y) (N:RW:cleaved ?x) (N:RW:cleaved ?y) (RW:contains ?x ?y))
-Init[20]:
+Init[16]:
   S:(mrna insulin-gene)
-  S:(molecule linker)
-  S:(molecule insulin-gene)
-  S:(molecule e-coli-exosome)
-  S:(molecule junk-exosome)
   S:(bacterium e-coli)
   S:(bacterium junk)
   S:(accepts e-coli-exosome e-coli)

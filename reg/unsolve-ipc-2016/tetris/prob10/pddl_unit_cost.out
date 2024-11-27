@@ -50,8 +50,7 @@ Predicate[6]:
     at_square: 1 4 :: read: 1, write: 1, in-init: 1
     at_two: 2 4 4 :: read: 1, write: 1, in-init: 1
     at_right_l: 3 4 4 4 :: read: 1, write: 1, in-init: 1
-Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 0
+Function[0]:
 Action[6]:
     move_square: ?xy_initial:4 ?xy_final:4 ?element:1
         pre: (and (R:connected ?xy_initial ?xy_final) (R:connected ?xy_final ?xy_initial) (RW:clear ?xy_final) (RW:at_square ?element ?xy_initial))

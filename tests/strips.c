@@ -255,6 +255,15 @@ static void checkGroundingEqual(int (*ground)(pddl_strips_t *strips,
     if (ret != 0)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
+
+    PDDL_ISET(rm_fact);
+    PDDL_ISET(rm_op);
+    pddlIrrelevanceAnalysis(&strips, &rm_fact, &rm_op, NULL, NULL);
+    if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0)
+        pddlStripsReduce(&strips, &rm_fact, &rm_op);
+    pddlISetFree(&rm_fact);
+    pddlISetFree(&rm_op);
+
     assert(strips.op.op_size == base->op.op_size);
     for (int i = 0; i < strips.op.op_size; ++i){
         assert(strcmp(strips.op.op[i]->name, base->op.op[i]->name) == 0);
@@ -275,6 +284,14 @@ static void testCompileInLMG(int mutex, int dead_end)
     pddl_strips_t base;
     int ret = pddlStripsGroundTrie(&base, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+
+    PDDL_ISET(rm_fact);
+    PDDL_ISET(rm_op);
+    pddlIrrelevanceAnalysis(&base, &rm_fact, &rm_op, NULL, NULL);
+    if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0)
+        pddlStripsReduce(&base, &rm_fact, &rm_op);
+    pddlISetFree(&rm_fact);
+    pddlISetFree(&rm_op);
 
     ground_cfg.lifted_mgroups = NULL;
     ground_cfg.prune_op_pre_mutex = 0;
@@ -325,6 +342,14 @@ TEST(strips_grounding, pddl)
     pddl_strips_t base;
     int ret = pddlStripsGroundTrie(&base, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+
+    PDDL_ISET(rm_fact);
+    PDDL_ISET(rm_op);
+    pddlIrrelevanceAnalysis(&base, &rm_fact, &rm_op, NULL, NULL);
+    if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0)
+        pddlStripsReduce(&base, &rm_fact, &rm_op);
+    pddlISetFree(&rm_fact);
+    pddlISetFree(&rm_op);
 
     checkGroundingEqual(pddlStripsGroundDatalog, &C.pddl, &ground_cfg, &base);
 #ifdef PDDL_SQL

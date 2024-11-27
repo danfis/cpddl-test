@@ -43,9 +43,8 @@ Obj[31]:
     [28]: n8, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [29]: n9, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [30]: n10, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
+Predicate[8]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    includes: 1 2 :: read: 0, write: 0, in-init: 1
     waiting: 1 :: read: 1, write: 1, in-init: 1
     started: 1 :: read: 1, write: 1, in-init: 0
     shipped: 1 :: read: 1, write: 1, in-init: 0
@@ -122,22 +121,7 @@ Action[22]:
     ship-order-o10: ?avail:3 ?new-avail:3
         pre: (and (R:next-count ?avail ?new-avail) (RW:started o10) (RW:made p9) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o10) (RW:shipped o10) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
-Init[46]:
-  S:(includes o1 p6)
-  S:(includes o1 p9)
-  S:(includes o1 p10)
-  S:(includes o2 p2)
-  S:(includes o2 p10)
-  S:(includes o3 p1)
-  S:(includes o3 p7)
-  S:(includes o3 p8)
-  S:(includes o4 p4)
-  S:(includes o5 p3)
-  S:(includes o6 p5)
-  S:(includes o7 p5)
-  S:(includes o8 p3)
-  S:(includes o9 p1)
-  S:(includes o10 p9)
+Init[31]:
   S:(next-count n0 n1)
   S:(next-count n1 n2)
   S:(next-count n2 n3)

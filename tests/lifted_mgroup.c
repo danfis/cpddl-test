@@ -685,6 +685,14 @@ static void lmgCompileInCheckPruning(const pddl_t *pddl,
     int ret = ground(&strips, pddl, &ground_cfg, &C.err);
     assert(ret == 0);
 
+    PDDL_ISET(rm_fact);
+    PDDL_ISET(rm_op);
+    pddlIrrelevanceAnalysis(&strips, &rm_fact, &rm_op, NULL, NULL);
+    if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0)
+        pddlStripsReduce(&strips, &rm_fact, &rm_op);
+    pddlISetFree(&rm_fact);
+    pddlISetFree(&rm_op);
+
     for (int j = 0; j < strips.op.op_size; ++j){
         int found = 0;
         for (int i = 0; i < strips_ref->op.op_size; ++i){
@@ -708,6 +716,19 @@ static void lmgCompileInCheckPruning(const pddl_t *pddl,
         }
         if (!found)
             fprintf(stderr, "(%s)\n", strips.fact.fact[j]->name);
+        assert(found);
+    }
+
+    for (int i = 0; i < strips_ref->fact.fact_size; ++i){
+        int found = 0;
+        for (int j = 0; j < strips.fact.fact_size; ++j){
+            if (strcmp(strips.fact.fact[j]->name, strips_ref->fact.fact[i]->name) == 0){
+                found = 1;
+                break;
+            }
+        }
+        if (!found)
+            fprintf(stderr, "(%s)\n", strips_ref->fact.fact[i]->name);
         assert(found);
     }
 
@@ -738,6 +759,14 @@ TEST(lmg_compile_in, lmg)
     ground_cfg.prune_op_dead_end = 1;
     int ret = pddlStripsGroundTrie(&strips_ref, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
+
+    PDDL_ISET(rm_fact);
+    PDDL_ISET(rm_op);
+    pddlIrrelevanceAnalysis(&strips_ref, &rm_fact, &rm_op, NULL, NULL);
+    if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0)
+        pddlStripsReduce(&strips_ref, &rm_fact, &rm_op);
+    pddlISetFree(&rm_fact);
+    pddlISetFree(&rm_op);
 
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundTrie);
     lmgCompileInCheckPruning(&pddl, &strips_ref, pddlStripsGroundDatalog);

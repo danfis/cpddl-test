@@ -73,9 +73,8 @@ Obj[61]:
     [58]: n18, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [59]: n19, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [60]: n20, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
+Predicate[8]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
-    includes: 1 2 :: read: 0, write: 0, in-init: 1
     waiting: 1 :: read: 1, write: 1, in-init: 1
     started: 1 :: read: 1, write: 1, in-init: 0
     shipped: 1 :: read: 1, write: 1, in-init: 0
@@ -212,35 +211,7 @@ Action[42]:
     ship-order-o20: ?avail:3 ?new-avail:3
         pre: (and (R:next-count ?avail ?new-avail) (RW:started o20) (RW:made p6) (RW:stacks-avail ?avail))
         eff: (and (N:RW:started o20) (RW:shipped o20) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
-Init[89]:
-  S:(includes o1 p15)
-  S:(includes o2 p5)
-  S:(includes o2 p15)
-  S:(includes o3 p3)
-  S:(includes o4 p5)
-  S:(includes o4 p8)
-  S:(includes o5 p9)
-  S:(includes o5 p10)
-  S:(includes o6 p4)
-  S:(includes o6 p12)
-  S:(includes o7 p7)
-  S:(includes o8 p13)
-  S:(includes o9 p3)
-  S:(includes o10 p12)
-  S:(includes o11 p18)
-  S:(includes o11 p19)
-  S:(includes o12 p1)
-  S:(includes o13 p20)
-  S:(includes o14 p2)
-  S:(includes o15 p11)
-  S:(includes o15 p16)
-  S:(includes o16 p2)
-  S:(includes o16 p17)
-  S:(includes o17 p14)
-  S:(includes o17 p15)
-  S:(includes o18 p13)
-  S:(includes o19 p11)
-  S:(includes o20 p6)
+Init[61]:
   S:(next-count n0 n1)
   S:(next-count n1 n2)
   S:(next-count n2 n3)

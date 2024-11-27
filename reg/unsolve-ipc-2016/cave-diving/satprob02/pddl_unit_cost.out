@@ -44,7 +44,7 @@ Obj[30]:
     [27]: two, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [28]: three, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [29]: four, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[16]:
+Predicate[15]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     at-tank: 3 1 :: read: 1, write: 1, in-init: 0
     in-storage: 3 :: read: 1, write: 1, in-init: 1
@@ -60,7 +60,6 @@ Predicate[16]:
     holding: 2 3 :: read: 1, write: 1, in-init: 0
     capacity: 2 4 :: read: 1, write: 1, in-init: 1
     have-photo: 1 :: read: 1, write: 1, in-init: 0
-    in-water: :: read: 0, write: 1, in-init: 0
 Function[0]:
 Action[11]:
     hire-diver-d2: 
@@ -95,7 +94,7 @@ Action[11]:
         eff: (and (N:RW:full ?t) (RW:have-photo ?l))
     decompress: ?d:2 ?l:1
         pre: (and (R:cave-entrance ?l) (RW:at-diver ?d ?l))
-        eff: (and (N:RW:at-diver ?d ?l) (RW:decompressing ?d) (N:W:in-water))
+        eff: (and (N:RW:at-diver ?d ?l) (RW:decompressing ?d))
 Init[37]:
   S:(next-tank t0 t1)
   S:(next-tank t1 t2)

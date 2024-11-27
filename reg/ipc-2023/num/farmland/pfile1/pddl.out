@@ -13,22 +13,20 @@ Obj[2]:
 Predicate[2]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     adj: 1 1 :: read: 1, write: 0, in-init: 1
-Function[2]:
+Function[1]:
     x: 1 :: read: 1, write: 1, in-init: 1
-    cost: :: read: 0, write: 1, in-init: 1
 Action[2]:
     move-fast: ?f1:1 ?f2:1
         pre: (and (N:R:= ?f1 ?f2) (R:adj ?f1 ?f2) (>= (x ?f1) 4))
-        eff: (and (decrease (x ?f1) 4) (increase (x ?f2) 2) (increase (cost) 1))
+        eff: (and (decrease (x ?f1) 4) (increase (x ?f2) 2))
     move-slow: ?f1:1 ?f2:1
         pre: (and (N:R:= ?f1 ?f2) (R:adj ?f1 ?f2) (>= (x ?f1) 1))
         eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
 Init[2]:
   S:(adj farm0 farm1)
   S:(adj farm1 farm0)
-Init[3]:
+Init[2]:
   (= (x farm0) 600)
   (= (x farm1) 1)
-  (= (cost) 0)
 Goal: (and (>= (x farm0) 1) (>= (x farm1) 1) (>= (+ (x farm0) (* 1.700000 (x farm1))) 840))
 Metric: no-metric

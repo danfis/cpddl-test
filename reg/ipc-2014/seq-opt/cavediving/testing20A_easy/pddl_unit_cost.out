@@ -34,7 +34,7 @@ Obj[20]:
     [17]: two, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [18]: three, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [19]: four, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[18]:
+Predicate[17]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     at-tank: 3 1 :: read: 1, write: 1, in-init: 0
     in-storage: 3 :: read: 1, write: 1, in-init: 1
@@ -51,8 +51,7 @@ Predicate[18]:
     holding: 2 3 :: read: 1, write: 1, in-init: 0
     capacity: 2 4 :: read: 1, write: 1, in-init: 1
     have-photo: 1 :: read: 1, write: 1, in-init: 0
-    in-water: :: read: 0, write: 1, in-init: 0, neg-of: NOT-in-water
-    NOT-in-water: :: read: 1, write: 1, in-init: 1, neg-of: in-water
+    NOT-in-water: :: read: 1, write: 1, in-init: 1
 Function[3]:
     hiring-cost: 2 :: read: 1, write: 0, in-init: 1
     other-cost: :: read: 1, write: 0, in-init: 1
@@ -60,7 +59,7 @@ Function[3]:
 Action[8]:
     hire-diver: ?d1:2
         pre: (and (RW:available ?d1) (RW:NOT-in-water))
-        eff: (and (N:RW:available ?d1) (RW:at-surface ?d1) (W:in-water) (N:RW:NOT-in-water) (when (R:precludes ?d1 d0) (N:RW:available d0)) (when (R:precludes ?d1 d1) (N:RW:available d1)))
+        eff: (and (N:RW:available ?d1) (RW:at-surface ?d1) (N:RW:NOT-in-water) (when (R:precludes ?d1 d0) (N:RW:available d0)) (when (R:precludes ?d1 d1) (N:RW:available d1)))
     prepare-tank: ?d:2 ?t1:3 ?t2:3 ?q1:4 ?q2:4
         pre: (and (R:next-tank ?t1 ?t2) (R:next-quantity ?q1 ?q2) (RW:in-storage ?t1) (RW:at-surface ?d) (RW:capacity ?d ?q2))
         eff: (and (N:RW:in-storage ?t1) (RW:in-storage ?t2) (RW:full ?t1) (RW:holding ?d ?t1) (RW:capacity ?d ?q1) (N:RW:capacity ?d ?q2))
@@ -81,7 +80,7 @@ Action[8]:
         eff: (and (N:RW:full ?t) (RW:have-photo ?l))
     decompress: ?d:2 ?l:1
         pre: (and (R:cave-entrance ?l) (RW:at-diver ?d ?l))
-        eff: (and (N:RW:at-diver ?d ?l) (RW:decompressing ?d) (N:W:in-water) (RW:NOT-in-water))
+        eff: (and (N:RW:at-diver ?d ?l) (RW:decompressing ?d) (RW:NOT-in-water))
 Init[27]:
   S:(next-tank t0 t1)
   S:(next-tank t1 t2)

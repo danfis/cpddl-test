@@ -30,20 +30,15 @@ Obj[16]:
     [13]: a3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [14]: s12, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: s13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
+Predicate[8]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     connect: 2 2 1 :: read: 1, write: 0, in-init: 1
     unitary: 1 :: read: 1, write: 0, in-init: 1
-    not-unitary: 1 :: read: 0, write: 0, in-init: 0
     last: 4 1 :: read: 1, write: 1, in-init: 1
     first: 4 1 :: read: 1, write: 1, in-init: 1
-    follow: 4 4 :: read: 0, write: 0, in-init: 0
     is-product: 4 3 :: read: 1, write: 0, in-init: 1
     on: 4 2 :: read: 1, write: 1, in-init: 1
     may-interface: 3 3 :: read: 1, write: 0, in-init: 1
-    normal: 1 :: read: 0, write: 0, in-init: 1
-    push-updating: 1 :: read: 0, write: 0, in-init: 0
-    pop-updating: 1 :: read: 0, write: 0, in-init: 0
 Function[0]:
 Action[2]:
     push-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?first-batch-atom:4 ?product-batch-atom-in:3 ?product-first-batch:3
@@ -52,7 +47,7 @@ Action[2]:
     pop-unitarypipe: ?pipe:1 ?batch-atom-in:4 ?from-area:2 ?to-area:2 ?last-batch-atom:4 ?product-batch-atom-in:3 ?product-last-batch:3
         pre: (and (R:connect ?from-area ?to-area ?pipe) (R:unitary ?pipe) (R:is-product ?batch-atom-in ?product-batch-atom-in) (R:is-product ?last-batch-atom ?product-last-batch) (R:may-interface ?product-batch-atom-in ?product-last-batch) (RW:last ?last-batch-atom ?pipe) (RW:on ?batch-atom-in ?to-area))
         eff: (and (RW:last ?batch-atom-in ?pipe) (N:RW:last ?last-batch-atom ?pipe) (RW:first ?batch-atom-in ?pipe) (N:RW:first ?last-batch-atom ?pipe) (N:RW:on ?batch-atom-in ?to-area) (RW:on ?last-batch-atom ?from-area))
-Init[41]:
+Init[39]:
   S:(connect a1 a2 s12)
   S:(connect a1 a3 s13)
   S:(unitary s12)
@@ -84,8 +79,6 @@ Init[41]:
   S:(may-interface oc1b gasoleo)
   S:(may-interface oc1b oca1)
   S:(may-interface oc1b oc1b)
-  S:(normal s12)
-  S:(normal s13)
   (last b4 s12)
   (last b5 s13)
   (first b4 s12)

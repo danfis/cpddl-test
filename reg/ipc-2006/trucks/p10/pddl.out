@@ -48,7 +48,7 @@ Obj[30]:
     [27]: a1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [28]: a2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [29]: a3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[11]:
+Predicate[10]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     at: 4 3 :: read: 1, write: 1, in-init: 1
     in: 6 5 1 :: read: 1, write: 1, in-init: 0
@@ -59,7 +59,6 @@ Predicate[11]:
     le: 2 2 :: read: 1, write: 0, in-init: 1
     delivered: 6 3 2 :: read: 1, write: 1, in-init: 0
     at-destination: 6 3 :: read: 1, write: 1, in-init: 0
-    closer: 1 1 :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[8]:
     load: ?p:6 ?t:5 ?a1:1 ?l:3
@@ -86,7 +85,7 @@ Action[8]:
     unload: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (R:= ?a1 a3) (RW:at ?t ?l) (RW:in ?p ?t a3) (RW:free a1 ?t) (RW:free a2 ?t))
         eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t a3) (RW:free a3 ?t))
-Init[119]:
+Init[116]:
   S:(connected l1 l2)
   S:(connected l1 l3)
   S:(connected l1 l4)
@@ -189,9 +188,6 @@ Init[119]:
   S:(le t11 t11)
   S:(le t11 t12)
   S:(le t12 t12)
-  S:(closer a1 a2)
-  S:(closer a1 a3)
-  S:(closer a2 a3)
   (at truck1 l3)
   (at package1 l2)
   (at package2 l2)

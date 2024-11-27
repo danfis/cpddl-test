@@ -157,21 +157,20 @@ Predicate[8]:
     fuelcost: 4 3 3 :: read: 1, write: 0, in-init: 1
     sum: 4 4 4 :: read: 1, write: 0, in-init: 1
     equal: 0 0 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    total-cost: :: read: 0, write: 1, in-init: 0
+Function[0]:
 Action[4]:
     load: ?p:1 ?t:2 ?l:3
         pre: (and (R:equal ?t t0) (RW:at t0 ?l) (RW:at ?p ?l))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p t0) (increase (total-cost) 1))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p t0))
     unload: ?p:1 ?t:2 ?l:3
         pre: (and (RW:at ?t ?l) (RW:in ?p ?t))
-        eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t) (increase (total-cost) 1))
+        eff: (and (RW:at ?p ?l) (N:RW:in ?p ?t))
     drive: ?t:2 ?l1:3 ?l2:3 ?fuelpost:4 ?fueldelta:4 ?fuelpre:4
         pre: (and (R:connected ?l1 ?l2) (R:fuelcost ?fueldelta ?l1 ?l2) (R:sum ?fuelpost ?fueldelta ?fuelpre) (RW:at ?t ?l1) (RW:fuel ?t ?fuelpre))
-        eff: (and (N:RW:at ?t ?l1) (RW:at ?t ?l2) (RW:fuel ?t ?fuelpost) (N:RW:fuel ?t ?fuelpre) (increase (total-cost) 1))
+        eff: (and (N:RW:at ?t ?l1) (RW:at ?t ?l2) (RW:fuel ?t ?fuelpost) (N:RW:fuel ?t ?fuelpre))
     load: ?p:1 ?t:2 ?l:3
         pre: (and (N:R:equal ?p p0) (N:R:equal ?p p1) (N:R:equal ?p p2) (N:R:equal ?p p3) (N:R:equal ?p p4) (N:R:equal ?p p5) (N:R:equal ?p p6) (RW:at ?p ?l) (RW:at ?t ?l))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t) (increase (total-cost) 1))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t))
 Init[7197]:
   S:(connected l0 l1)
   S:(connected l0 l4)

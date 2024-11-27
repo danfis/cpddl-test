@@ -1,19 +1,11 @@
 Monotonicity invariants:
 < {NOT-created V0:object_type}
 , {NOT-created C0:object_type}
-, {created V0:object_type, NOT-created V0:object_type}
-, {created V0:object_type, NOT-created C1:object_type}
-, {created C0:object_type, NOT-created C1:object_type}
 , {prop_src_host V0:observedshare V1:observedhost, NOT-created V0:observedshare}
 , {prop_src_host V0:observedshare C1:observedhost, NOT-created V0:observedshare}
 , {prop_src_host V0:observedshare V1:observedhost, NOT-created C2:object_type}
 , {prop_src_host V0:observedshare C1:observedhost, NOT-created C2:object_type}
 , {prop_src_host C1:observedshare V0:observedhost, NOT-created C2:object_type}
-, {prop_share_name V0:observedshare V1:string, NOT-created V0:observedshare}
-, {prop_share_name V0:observedshare C1:string, NOT-created V0:observedshare}
-, {prop_share_name V0:observedshare V1:string, NOT-created C2:object_type}
-, {prop_share_name V0:observedshare C1:string, NOT-created C2:object_type}
-, {prop_share_name C1:observedshare V0:string, NOT-created C2:object_type}
 , {prop_executable V0:observedrat V1:string, NOT-created V0:observedrat}
 , {prop_executable V0:observedrat C1:string, NOT-created V0:observedrat}
 , {prop_executable V0:observedrat V1:string, NOT-created C2:object_type}
@@ -42,11 +34,8 @@ Monotonicity invariants:
 >
 FD Mutex Groups:
 < {NOT-created V0:object_type}
-, {created V0:object_type, NOT-created V0:object_type}:=1
 , {prop_src_host V0:observedshare V1:observedhost, NOT-created V0:observedshare}
 , {prop_src_host V0:observedshare C1:observedhost, NOT-created V0:observedshare}:=1
-, {prop_share_name V0:observedshare V1:string, NOT-created V0:observedshare}
-, {prop_share_name V0:observedshare C1:string, NOT-created V0:observedshare}:=1
 , {prop_executable id_bbrat V0:string, NOT-created id_bbrat}
 , {prop_executable id_bbrat C0:string, NOT-created id_bbrat}:=1
 , {prop_executable id_barat V0:string, NOT-created id_barat}

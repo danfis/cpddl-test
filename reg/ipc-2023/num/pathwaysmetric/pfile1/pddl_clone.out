@@ -38,33 +38,22 @@ Obj[26]:
     [23]: raf1-p130-e2f5p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [24]: raf1-prb-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [25]: sp1-e2f13, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[7]:
+Predicate[5]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     association-reaction: 1 1 3 :: read: 1, write: 0, in-init: 1
     catalyzed-association-reaction: 1 1 3 :: read: 1, write: 0, in-init: 1
-    catalyzed-self-association-reaction: 1 3 :: read: 0, write: 0, in-init: 0
-    synthesis-reaction: 1 1 :: read: 0, write: 0, in-init: 0
     possible: 1 :: read: 1, write: 1, in-init: 1
     chosen: 2 :: read: 1, write: 1, in-init: 0
-Function[14]:
+Function[5]:
     available: 1 :: read: 1, write: 1, in-init: 1
-    duration-association-reaction: 1 1 3 :: read: 0, write: 0, in-init: 1
-    duration-catalyzed-association-reaction: 1 1 3 :: read: 0, write: 0, in-init: 1
-    duration-catalyzed-self-association-reaction: 1 3 :: read: 0, write: 0, in-init: 0
-    duration-synthesis-reaction: 1 1 :: read: 0, write: 0, in-init: 0
     need-for-association: 1 1 3 :: read: 1, write: 0, in-init: 1
     need-for-catalyzed-association: 1 1 3 :: read: 1, write: 0, in-init: 1
-    need-for-catalyzed-self-association: 1 3 :: read: 0, write: 0, in-init: 0
-    need-for-synthesis: 1 1 :: read: 0, write: 0, in-init: 0
     prod-by-association: 1 1 3 :: read: 1, write: 0, in-init: 1
     prod-by-catalyzed-association: 1 1 3 :: read: 1, write: 0, in-init: 1
-    prod-by-catalyzed-self-association: 1 3 :: read: 0, write: 0, in-init: 0
-    prod-by-synthesis: 1 1 :: read: 0, write: 0, in-init: 0
-    num-subs: :: read: 0, write: 1, in-init: 1
 Action[4]:
     choose: ?x:2
         pre: (and (RW:possible ?x))
-        eff: (and (N:RW:possible ?x) (RW:chosen ?x) (increase (num-subs) 1))
+        eff: (and (N:RW:possible ?x) (RW:chosen ?x))
     initialize: ?x:2
         pre: (and (RW:chosen ?x))
         eff: (and (increase (available ?x) 1))
@@ -103,7 +92,7 @@ Init[28]:
   (possible cdk46p3-cycd)
   (possible cdc25c)
   (possible ap2)
-Init[75]:
+Init[62]:
   (= (available sp1) 0)
   (= (available raf1) 0)
   (= (available prbp2) 0)
@@ -166,18 +155,5 @@ Init[75]:
   (= (need-for-association sp1 e2f13 sp1-e2f13) 4)
   (= (need-for-association e2f13 sp1 sp1-e2f13) 3)
   (= (prod-by-association sp1 e2f13 sp1-e2f13) 1)
-  (= (num-subs) 0)
-  (= (duration-catalyzed-association-reaction cdc25c chk1 cdc25cp2) 1.900000)
-  (= (duration-catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1) 2)
-  (= (duration-catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1) 2.300000)
-  (= (duration-association-reaction p16 cdk7 p16-cdk7) 0.800000)
-  (= (duration-association-reaction pcaf p300 pcaf-p300) 1)
-  (= (duration-association-reaction prbp1p2 ap2 prbp1p2-ap2) 1)
-  (= (duration-association-reaction prbp2 ap2 prbp2-ap2) 1)
-  (= (duration-catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2) 1.700000)
-  (= (duration-catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2) 2.200000)
-  (= (duration-association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 1.100000)
-  (= (duration-association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 1.100000)
-  (= (duration-association-reaction sp1 e2f13 sp1-e2f13) 1.100000)
 Goal: (>= (+ (available prbp1p2-ap2) (available pcaf-p300)) 4)
 Metric: no-metric

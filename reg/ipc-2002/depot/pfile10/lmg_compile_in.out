@@ -14,7 +14,7 @@ Compile-in LMG: Found mutex condition for action 'unload' and mgroup {at V0:obje
 Compile-in LMG: Found mutex condition for action 'unload' and mgroup {at V0:object C1:object, in V0:object C2:object, lifting C3:object V0:object, at V0:object C4:object, in V0:object C5:object, lifting C6:object V0:object}:=1: (= ?y ?z)
 Compile-in LMG: Precondition of action 'unload' extended with (and (not (= ?x ?y)) (not (= ?y ?z)))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 26, predicates: 16, functions: 0, actions: 5, action-pre-size: [min: 4, max: 10, avg: 8.60, med: 10.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 26, predicates: 12, functions: 0, actions: 5, action-pre-size: [min: 4, max: 10, avg: 8.60, med: 10.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -26,20 +26,20 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action drop
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action unload
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 26, vars: 4, predicates: 17, rules: 90)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 26, vars: 4, predicates: 13, rules: 84)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 26, vars: 4, predicates: 17, rules: 90)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 26, vars: 4, predicates: 13, rules: 84)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 26, vars: 4, predicates: 17, rules: 90)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 90
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 90, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 26, vars: 4, predicates: 13, rules: 84)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 84
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 84, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 26, predicates: 16, functions: 0, actions: 5, action-pre-size: [min: 4, max: 10, avg: 8.60, med: 10.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 26, predicates: 12, functions: 0, actions: 5, action-pre-size: [min: 4, max: 10, avg: 8.60, med: 10.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 5
 Compile-in LMG: END
@@ -77,7 +77,7 @@ Obj[26]:
     [23]: hoist3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [24]: hoist4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [25]: hoist5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[16]:
+Predicate[12]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     at: 0 0 :: read: 1, write: 1, in-init: 1
     on: 0 0 :: read: 1, write: 1, in-init: 1
@@ -86,13 +86,9 @@ Predicate[16]:
     available: 0 :: read: 1, write: 1, in-init: 1
     clear: 0 :: read: 1, write: 1, in-init: 1
     place: 0 :: read: 1, write: 0, in-init: 1
-    locatable: 0 :: read: 0, write: 0, in-init: 0
-    depot: 0 :: read: 0, write: 0, in-init: 0
-    distributor: 0 :: read: 0, write: 0, in-init: 0
     truck: 0 :: read: 1, write: 0, in-init: 1
     hoist: 0 :: read: 1, write: 0, in-init: 1
     surface: 0 :: read: 1, write: 0, in-init: 1
-    pallet: 0 :: read: 0, write: 0, in-init: 1
     crate: 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[5]:
@@ -111,7 +107,7 @@ Action[5]:
     unload: ?x:0 ?y:0 ?z:0 ?p:0
         pre: (and (N:R:= ?x ?y) (N:R:= ?y ?z) (R:place ?p) (R:truck ?z) (R:hoist ?x) (R:crate ?y) (RW:at ?x ?p) (RW:at ?z ?p) (RW:in ?y ?z) (RW:available ?x))
         eff: (and (N:RW:in ?y ?z) (RW:lifting ?x ?y) (N:RW:available ?x))
-Init[76]:
+Init[70]:
   S:(place depot0)
   S:(place depot1)
   S:(place depot2)
@@ -138,12 +134,6 @@ Init[76]:
   S:(surface crate3)
   S:(surface crate4)
   S:(surface crate5)
-  S:(pallet pallet0)
-  S:(pallet pallet1)
-  S:(pallet pallet2)
-  S:(pallet pallet3)
-  S:(pallet pallet4)
-  S:(pallet pallet5)
   S:(crate crate0)
   S:(crate crate1)
   S:(crate crate2)

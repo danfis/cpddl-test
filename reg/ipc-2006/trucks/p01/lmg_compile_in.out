@@ -19,7 +19,7 @@ Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:pac
 Compile-in LMG: Found dead-end condition for action 'load' and mgroup {at V0:package C1:location, in V0:package truck1 C2:truckarea, at-destination V0:package C3:location, at V0:package C4:location, in V0:package truck1 C5:truckarea, at-destination V0:package C6:location}:=1: (and (not (= ?t truck1)) (= ?p package2))
 Compile-in LMG: Precondition of action 'load' extended with (or (= ?t truck1) (and (not (= ?p package2)) (not (= ?p package1)) (not (= ?p package3))))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 7, objects: 16, predicates: 11, functions: 0, actions: 6, action-pre-size: [min: 8, max: 4, avg: 7.33, med: 10.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 7, objects: 16, predicates: 10, functions: 0, actions: 6, action-pre-size: [min: 8, max: 4, avg: 7.33, med: 10.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -37,20 +37,20 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deliver
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deliver
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action load
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 16, vars: 5, predicates: 18, rules: 86)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 16, vars: 5, predicates: 17, rules: 85)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 16, vars: 5, predicates: 18, rules: 86)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 16, vars: 5, predicates: 17, rules: 85)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 16, vars: 5, predicates: 18, rules: 86)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 86
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 86, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 16, vars: 5, predicates: 17, rules: 85)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 85
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 85, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 7, objects: 16, predicates: 11, functions: 0, actions: 11, action-pre-size: [min: 8, max: 5, avg: 5.64, med: 4.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 7, objects: 16, predicates: 10, functions: 0, actions: 11, action-pre-size: [min: 8, max: 5, avg: 5.64, med: 4.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 11
 Compile-in LMG: END
@@ -90,7 +90,7 @@ Obj[16]:
     [13]: t6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [14]: a1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: a2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[11]:
+Predicate[10]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     at: 4 3 :: read: 1, write: 1, in-init: 1
     in: 6 5 1 :: read: 1, write: 1, in-init: 0
@@ -101,7 +101,6 @@ Predicate[11]:
     le: 2 2 :: read: 1, write: 0, in-init: 1
     delivered: 6 3 2 :: read: 1, write: 1, in-init: 0
     at-destination: 6 3 :: read: 1, write: 1, in-init: 0
-    closer: 1 1 :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[11]:
     load: ?p:6 ?t:5 ?a1:1 ?l:3
@@ -137,7 +136,7 @@ Action[11]:
     load: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (N:R:= ?p package1) (N:R:= ?p package2) (N:R:= ?p package3) (R:= ?a1 a2) (RW:at ?p ?l) (RW:at ?t ?l) (RW:free a1 ?t) (RW:free a2 ?t))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t a2) (N:RW:free a2 ?t))
-Init[41]:
+Init[40]:
   S:(connected l1 l2)
   S:(connected l1 l3)
   S:(connected l2 l1)
@@ -171,7 +170,6 @@ Init[41]:
   S:(le t5 t5)
   S:(le t5 t6)
   S:(le t6 t6)
-  S:(closer a1 a2)
   (at truck1 l3)
   (at package1 l2)
   (at package2 l2)

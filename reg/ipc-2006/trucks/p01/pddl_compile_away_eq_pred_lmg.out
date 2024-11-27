@@ -34,7 +34,7 @@ Obj[16]:
     [13]: t6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [14]: a1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [15]: a2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[12]:
+Predicate[11]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     at: 4 3 :: read: 1, write: 1, in-init: 1
     in: 6 5 1 :: read: 1, write: 1, in-init: 0
@@ -45,7 +45,6 @@ Predicate[12]:
     le: 2 2 :: read: 1, write: 0, in-init: 1
     delivered: 6 3 2 :: read: 1, write: 1, in-init: 0
     at-destination: 6 3 :: read: 1, write: 1, in-init: 0
-    closer: 1 1 :: read: 0, write: 0, in-init: 1
     equal: 0 0 :: read: 1, write: 0, in-init: 1
 Function[0]:
 Action[11]:
@@ -82,7 +81,7 @@ Action[11]:
     load: ?p:6 ?t:5 ?a1:1 ?l:3
         pre: (and (N:R:equal ?p package1) (N:R:equal ?p package2) (N:R:equal ?p package3) (R:equal ?a1 a2) (RW:at ?p ?l) (RW:at ?t ?l) (RW:free a1 ?t) (RW:free a2 ?t))
         eff: (and (N:RW:at ?p ?l) (RW:in ?p ?t a2) (N:RW:free a2 ?t))
-Init[57]:
+Init[56]:
   S:(connected l1 l2)
   S:(connected l1 l3)
   S:(connected l2 l1)
@@ -116,7 +115,6 @@ Init[57]:
   S:(le t5 t5)
   S:(le t5 t6)
   S:(le t6 t6)
-  S:(closer a1 a2)
   S:(equal truck1 truck1)
   S:(equal package1 package1)
   S:(equal package2 package2)

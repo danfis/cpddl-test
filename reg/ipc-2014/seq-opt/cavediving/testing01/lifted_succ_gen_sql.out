@@ -1,18 +1,18 @@
 Step 0 (available d0) (available d1) (available d2) (available d3) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (NOT-in-water)
 size: 4
 hire-diver d0 :: cost: 60
-    add: (at-surface d0) (in-water)
+    add: (at-surface d0)
     del: (available d0) (NOT-in-water)
 hire-diver d1 :: cost: 10
-    add: (in-water) (at-surface d1)
+    add: (at-surface d1)
     del: (available d1) (available d3) (NOT-in-water)
 hire-diver d2 :: cost: 10
-    add: (in-water) (at-surface d2)
+    add: (at-surface d2)
     del: (available d2) (available d3) (NOT-in-water)
 hire-diver d3 :: cost: 58
-    add: (in-water) (at-surface d3)
+    add: (at-surface d3)
     del: (available d3) (NOT-in-water)
-Step 1 (available d1) (available d2) (available d3) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (at-surface d0) (in-water)
+Step 1 (available d1) (available d2) (available d3) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (at-surface d0)
 size: 2
 prepare-tank d0 t0 t1 three four :: cost: 1
     add: (in-storage t1) (full t0) (capacity d0 three) (holding d0 t0)
@@ -20,23 +20,23 @@ prepare-tank d0 t0 t1 three four :: cost: 1
 enter-water d0 l0 :: cost: 1
     add: (at-diver d0 l0)
     del: (at-surface d0)
-Step 2 (available d1) (available d2) (available d3) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (in-water) (at-diver d0 l0)
+Step 2 (available d1) (available d2) (available d3) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (at-diver d0 l0)
 size: 1
 decompress d0 l0 :: cost: 1
     add: (NOT-in-water) (decompressing d0)
-    del: (in-water) (at-diver d0 l0)
+    del: (at-diver d0 l0)
 Step 3 (available d1) (available d2) (available d3) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (NOT-in-water) (decompressing d0)
 size: 3
 hire-diver d1 :: cost: 10
-    add: (in-water) (at-surface d1)
+    add: (at-surface d1)
     del: (available d1) (available d3) (NOT-in-water)
 hire-diver d2 :: cost: 10
-    add: (in-water) (at-surface d2)
+    add: (at-surface d2)
     del: (available d2) (available d3) (NOT-in-water)
 hire-diver d3 :: cost: 58
-    add: (in-water) (at-surface d3)
+    add: (at-surface d3)
     del: (available d3) (NOT-in-water)
-Step 4 (available d2) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (in-water) (at-surface d1) (decompressing d0)
+Step 4 (available d2) (capacity d0 four) (capacity d1 four) (capacity d2 four) (capacity d3 four) (in-storage t0) (at-surface d1) (decompressing d0)
 size: 2
 prepare-tank d1 t0 t1 three four :: cost: 1
     add: (in-storage t1) (full t0) (capacity d1 three) (holding d1 t0)
@@ -44,7 +44,7 @@ prepare-tank d1 t0 t1 three four :: cost: 1
 enter-water d1 l0 :: cost: 1
     add: (at-diver d1 l0)
     del: (at-surface d1)
-Step 5 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (in-water) (at-surface d1) (in-storage t1) (full t0) (decompressing d0) (capacity d1 three) (holding d1 t0)
+Step 5 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (at-surface d1) (in-storage t1) (full t0) (decompressing d0) (capacity d1 three) (holding d1 t0)
 size: 2
 prepare-tank d1 t1 t2 two three :: cost: 1
     add: (in-storage t2) (full t1) (capacity d1 two) (holding d1 t1)
@@ -52,7 +52,7 @@ prepare-tank d1 t1 t2 two three :: cost: 1
 enter-water d1 l0 :: cost: 1
     add: (at-diver d1 l0)
     del: (at-surface d1)
-Step 6 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (in-water) (in-storage t1) (full t0) (decompressing d0) (capacity d1 three) (holding d1 t0) (at-diver d1 l0)
+Step 6 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (in-storage t1) (full t0) (decompressing d0) (capacity d1 three) (holding d1 t0) (at-diver d1 l0)
 size: 4
 drop-tank d1 t0 l0 three four :: cost: 1
     add: (capacity d1 four) (at-tank t0 l0)
@@ -65,21 +65,21 @@ photograph d1 l0 t0 :: cost: 1
     del: (full t0)
 decompress d1 l0 :: cost: 1
     add: (NOT-in-water) (decompressing d1)
-    del: (in-water) (at-diver d1 l0)
-Step 7 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (in-water) (in-storage t1) (decompressing d0) (capacity d1 three) (holding d1 t0) (at-diver d1 l0) (have-photo l0)
+    del: (at-diver d1 l0)
+Step 7 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (in-storage t1) (decompressing d0) (capacity d1 three) (holding d1 t0) (at-diver d1 l0) (have-photo l0)
 size: 2
 drop-tank d1 t0 l0 three four :: cost: 1
     add: (capacity d1 four) (at-tank t0 l0)
     del: (capacity d1 three) (holding d1 t0)
 decompress d1 l0 :: cost: 1
     add: (NOT-in-water) (decompressing d1)
-    del: (in-water) (at-diver d1 l0)
+    del: (at-diver d1 l0)
 Step 8 (available d2) (capacity d0 four) (capacity d2 four) (capacity d3 four) (NOT-in-water) (in-storage t1) (decompressing d0) (capacity d1 three) (holding d1 t0) (have-photo l0) (decompressing d1)
 size: 1
 hire-diver d2 :: cost: 10
-    add: (in-water) (at-surface d2)
+    add: (at-surface d2)
     del: (available d2) (NOT-in-water)
-Step 9 (capacity d0 four) (capacity d2 four) (capacity d3 four) (in-water) (at-surface d2) (in-storage t1) (decompressing d0) (capacity d1 three) (holding d1 t0) (have-photo l0) (decompressing d1)
+Step 9 (capacity d0 four) (capacity d2 four) (capacity d3 four) (at-surface d2) (in-storage t1) (decompressing d0) (capacity d1 three) (holding d1 t0) (have-photo l0) (decompressing d1)
 size: 2
 prepare-tank d2 t1 t2 three four :: cost: 1
     add: (in-storage t2) (full t1) (capacity d2 three) (holding d2 t1)

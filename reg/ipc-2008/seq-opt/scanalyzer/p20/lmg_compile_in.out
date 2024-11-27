@@ -9,7 +9,7 @@ Compile-in LMG: Found mutex condition for action 'rotate-2' and mgroup {on V0:ca
 Compile-in LMG: Found mutex condition for action 'rotate-2' and mgroup {on C1:car V0:segment, on C2:car V0:segment}:=1: (and (= ?s1 ?s2) (not (= ?c1 ?c2)))
 Compile-in LMG: Precondition of action 'rotate-2' extended with (or (and (not (= ?c1 ?c2)) (not (= ?s1 ?s2))) (and (= ?s1 ?s2) (= ?c1 ?c2)))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 3, objects: 36, predicates: 7, functions: 1, actions: 2, action-pre-size: [min: 7, max: 7, avg: 7.00, med: 7.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 3, objects: 36, predicates: 5, functions: 1, actions: 2, action-pre-size: [min: 7, max: 7, avg: 7.00, med: 7.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -20,12 +20,12 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action analyze-2
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-2
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 36, vars: 4, predicates: 10, rules: 198)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 36, vars: 4, predicates: 8, rules: 198)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 36, vars: 4, predicates: 10, rules: 198)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 36, vars: 4, predicates: 8, rules: 198)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 36, vars: 4, predicates: 10, rules: 198)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 36, vars: 4, predicates: 8, rules: 198)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 198
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 198, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
@@ -33,7 +33,7 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 3, objects: 36, predicates: 7, functions: 1, actions: 4, action-pre-size: [min: 5, max: 5, avg: 5.00, med: 5.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 3, objects: 36, predicates: 5, functions: 1, actions: 4, action-pre-size: [min: 5, max: 5, avg: 5.00, med: 5.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 4
 Compile-in LMG: END
@@ -85,14 +85,12 @@ Obj[36]:
     [33]: seg-out-7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [34]: seg-out-8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [35]: seg-out-9, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[7]:
+Predicate[5]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
     on: 2 1 :: read: 1, write: 1, in-init: 1
     analyzed: 2 :: read: 1, write: 1, in-init: 0
     cycle-2: 1 1 :: read: 1, write: 0, in-init: 1
-    cycle-4: 1 1 1 1 :: read: 0, write: 0, in-init: 0
     cycle-2-with-analysis: 1 1 :: read: 1, write: 0, in-init: 1
-    cycle-4-with-analysis: 1 1 1 1 :: read: 0, write: 0, in-init: 0
 Function[1]:
     total-cost: :: read: 1, write: 1, in-init: 1
 Action[4]:

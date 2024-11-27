@@ -6,7 +6,7 @@ Type[1]:
 Obj-by-Type:
     [0]:
 Obj[0]:
-Predicate[191]:
+Predicate[188]:
     =: 0 0 :: read: 0, write: 0, in-init: 0
     pending_obs4: :: read: 1, write: 1, in-init: 0
     observed_obs4: :: read: 1, write: 1, in-init: 0
@@ -66,7 +66,6 @@ Predicate[191]:
     autotakeoff-in_start_call-is-yes_ato-0-0-275: :: read: 1, write: 1, in-init: 0
     fault-count-3_lost_ato-0-0-275_checkpoint1_n0: :: read: 1, write: 1, in-init: 1
     autotakeoff-fsm_exec-is-action2_ato-0-0-275: :: read: 1, write: 1, in-init: 0
-    dominates-3_hyp1_lost_ato-0-0-275_checkpoint1: :: read: 0, write: 1, in-init: 1
     autotakeoff-fsm_exec-is-nothing_ato-0-0-275: :: read: 1, write: 1, in-init: 0
     autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275: :: read: 1, write: 1, in-init: 0
     pending_obs5: :: read: 1, write: 1, in-init: 0
@@ -163,7 +162,6 @@ Predicate[191]:
     missionexec-mission-running_heli0: :: read: 1, write: 1, in-init: 0
     fault-count-3_lost_ato-0-0-275_task-done_n0: :: read: 1, write: 1, in-init: 1
     autotakeoff-mode-is-done_ato-0-0-275: :: read: 1, write: 1, in-init: 0
-    dominates-3_hyp1_lost_ato-0-0-275_task-done: :: read: 0, write: 1, in-init: 1
     fault-count-3_lost_nav-0-0-275_task-done_n0: :: read: 1, write: 1, in-init: 1
     navtopoint-mode-is-done_nav-0-0-275: :: read: 1, write: 1, in-init: 0
     fault-count-3_lost_ato-0-0-275_fail-specific-210_n0: :: read: 1, write: 1, in-init: 1
@@ -197,7 +195,6 @@ Predicate[191]:
     future_obs14: :: read: 1, write: 1, in-init: 1
     not_at_end_constraint0: :: read: 1, write: 1, in-init: 1
     achieved_constraint0: :: read: 1, write: 1, in-init: 0
-    static-true: :: read: 0, write: 0, in-init: 1
 Function[0]:
 Action[216]:
     flightcontrol-fcl-event-finished-0_heli0_obs4: 
@@ -352,7 +349,7 @@ Action[216]:
         eff: (and (N:RW:autotakeoff-fsm_exec-is-start_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275))
     autotakeoff-takeoff_action1-1_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (RW:autotakeoff-in_start_call-is-yes_ato-0-0-275) (RW:fault-count-3_lost_ato-0-0-275_checkpoint1_n0) (RW:not_at_end_constraint0))
-        eff: (and (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:fault-count-3_lost_ato-0-0-275_checkpoint1_n0) (RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_checkpoint1))
+        eff: (and (N:RW:autotakeoff-fsm_exec-is-action1_ato-0-0-275) (N:RW:fault-count-3_lost_ato-0-0-275_checkpoint1_n0) (RW:autotakeoff-fsm_exec-is-action2_ato-0-0-275))
     autotakeoff-takeoff_fcl_finished-flightcontrol-fcl-event-finished-0_ato-0-0-275_heli0_heli0_obs4: 
         pre: (and (RW:pending_obs4) (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:not_at_end_constraint0))
         eff: (and (N:RW:pending_obs4) (RW:observed_obs4) (N:RW:autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275))
@@ -676,16 +673,16 @@ Action[216]:
         eff: (and (N:RW:fly3d-mode-is-running_f3d-0-0-346) (RW:fly3d-mode-is-done_f3d-0-0-346) (N:RW:fault-count-3_lost_f3d-0-0-346_task-done_n0) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0))
     missionexec-mission-done-autotakeoff-takeoff_fcl_cancel_reaction1-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_cancel_1_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_task-done))
+        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275))
     missionexec-mission-done-autotakeoff-go_to_final_altitude_action2_exit-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-in_start_call-is-no_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-action2-exit_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_task-done))
+        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275))
     missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_task-done))
+        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275))
     missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_cancel_reaction1-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1: 
         pre: (and (RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (RW:autotakeoff-fsm_exec-is-reaction_cancel_1_ato-0-0-275) (RW:missionexec-active-mission_heli0_ato-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
-        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275) (N:W:dominates-3_hyp1_lost_ato-0-0-275_task-done))
+        eff: (and (N:RW:autotakeoff-mode-is-running_ato-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_ato-0-0-275_task-done_n0) (RW:autotakeoff-mode-is-done_ato-0-0-275))
     missionexec-mission-done-navtopoint-wait_for_go_exit-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1: 
         pre: (and (RW:navtopoint-mode-is-running_nav-0-0-275) (RW:navtopoint-fsm_exec-is-nothing_nav-0-0-275) (RW:navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (RW:missionexec-active-mission_heli0_nav-0-0-275) (RW:missionexec-mission-running_heli0) (RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:not_at_end_constraint0))
         eff: (and (N:RW:navtopoint-mode-is-running_nav-0-0-275) (RW:missionexec-mission-over_heli0) (N:RW:missionexec-mission-running_heli0) (N:RW:fault-count-3_lost_nav-0-0-275_task-done_n0) (RW:navtopoint-mode-is-done_nav-0-0-275))
@@ -848,8 +845,7 @@ Action[216]:
     set_goal_0_constraint0: 
         pre: (and (RW:observed_obs4) (RW:dominates-3_hyp1_lost_heli0_fcl-event-finished) (RW:observed_obs2) (RW:observed_obs13) (RW:observed_obs14) (RW:observed_obs5) (RW:observed_obs1) (RW:observed_obs3) (RW:observed_obs6) (RW:observed_obs7) (RW:observed_obs10) (RW:observed_obs11) (RW:observed_obs12) (RW:observed_obs0) (RW:observed_obs9) (RW:observed_obs8) (RW:not_at_end_constraint0))
         eff: (and (N:RW:not_at_end_constraint0) (RW:achieved_constraint0))
-Init[80]:
-  S:(static-true)
+Init[77]:
   (fault-count-3_lost_heli0_fcl-event-finished_n0)
   (dominates-3_hyp1_lost_heli0_fcl-event-finished)
   (fault-count-3_lost_heli0_fcl-event-canceled_n0)
@@ -871,7 +867,6 @@ Init[80]:
   (fault-count-3_lost_f3d-0-0-346_checkpoint31_n0)
   (fault-count-3_lost_f3d-0-0-346_checkpoint40_n0)
   (fault-count-3_lost_ato-0-0-275_checkpoint1_n0)
-  (dominates-3_hyp1_lost_ato-0-0-275_checkpoint1)
   (fault-count-3_lost_ato-0-0-275_checkpoint2_n0)
   (fault-count-3_lost_ato-0-0-275_checkpoint7_n0)
   (fault-count-3_lost_ato-0-0-275_checkpoint5_n0)
@@ -899,7 +894,6 @@ Init[80]:
   (fault-count-4_lost_ato-0-0-275_created_missionexecutor_n0)
   (fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0)
   (fault-count-3_lost_ato-0-0-275_task-done_n0)
-  (dominates-3_hyp1_lost_ato-0-0-275_task-done)
   (fault-count-3_lost_nav-0-0-275_task-done_n0)
   (fault-count-3_lost_ato-0-0-275_fail-specific-210_n0)
   (fault-count-3_lost_ato-0-0-275_fail-service_n0)

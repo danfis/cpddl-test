@@ -15,14 +15,9 @@ Obj[9]:
     [6]: sub1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [7]: g84, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [8]: g11, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[27]:
+Predicate[22]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
-    duplicate: 0 0 :: read: 0, write: 0, in-init: 0
-    swappable: 0 0 :: read: 0, write: 0, in-init: 0
     cw: 0 0 :: read: 1, write: 1, in-init: 1
-    free: 0 :: read: 0, write: 0, in-init: 0
-    gone: 0 :: read: 0, write: 0, in-init: 0
-    present: 0 :: read: 0, write: 0, in-init: 1
     normal: 0 :: read: 1, write: 1, in-init: 1
     inverted: 0 :: read: 1, write: 1, in-init: 1
     idle: :: read: 1, write: 1, in-init: 1
@@ -109,16 +104,7 @@ Action[21]:
     reset-1: ?x:0
         pre: (and (RW:finished) (RW:last-cut-point ?x))
         eff: (and (RW:idle) (N:RW:finished) (N:RW:last-cut-point ?x))
-Init[28]:
-  S:(present sub7)
-  S:(present sub6)
-  S:(present sub5)
-  S:(present sub4)
-  S:(present sub3)
-  S:(present sub2)
-  S:(present sub1)
-  S:(present g84)
-  S:(present g11)
+Init[19]:
   (cw sub7 sub3)
   (cw sub6 sub7)
   (cw sub5 sub2)

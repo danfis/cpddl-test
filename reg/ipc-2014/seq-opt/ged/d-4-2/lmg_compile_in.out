@@ -9,7 +9,7 @@ Compile-in LMG: Precondition of action 'continue-inverse-splice-1a' extended wit
 Compile-in LMG: Found mutex condition for action 'continue-inverse-splice-1b' and mgroup {cw C1:object V0:object, splice-next V0:object, inverse-splice-next V0:object, cut-point-2 V0:object, splice-point-2 V0:object, s-next V0:object C2:object, s-last V0:object, cw C3:object V0:object, s-next V0:object C4:object}:=1: (= ?x ?y)
 Compile-in LMG: Precondition of action 'continue-inverse-splice-1b' extended with (not (= ?x ?y))
 Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 4, predicates: 27, functions: 1, actions: 21, action-pre-size: [min: 2, max: 3, avg: 3.38, med: 4.00]
+Compile-in LMG: PDDL-Norm: Before normalization: types: 1, objects: 4, predicates: 22, functions: 1, actions: 21, action-pre-size: [min: 2, max: 3, avg: 3.38, med: 4.00]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -37,20 +37,20 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action invert-
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action invert-single-gene-b
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action reset-1
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 4, vars: 2, predicates: 28, rules: 12)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 4, vars: 2, predicates: 23, rules: 8)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 4, vars: 2, predicates: 28, rules: 12)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 4, vars: 2, predicates: 23, rules: 8)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 4, vars: 2, predicates: 28, rules: 12)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 12
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 12, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 4, vars: 2, predicates: 23, rules: 8)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 8
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 8, db-mem: 0MB)
 Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
 Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 4, predicates: 27, functions: 1, actions: 21, action-pre-size: [min: 2, max: 3, avg: 3.38, med: 4.00]
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 1, objects: 4, predicates: 22, functions: 1, actions: 21, action-pre-size: [min: 2, max: 3, avg: 3.38, med: 4.00]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 21
 Compile-in LMG: END
@@ -66,14 +66,9 @@ Obj[4]:
     [1]: sub3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [2]: sub2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [3]: sub1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[27]:
+Predicate[22]:
     =: 0 0 :: read: 1, write: 0, in-init: 0
-    duplicate: 0 0 :: read: 0, write: 0, in-init: 0
-    swappable: 0 0 :: read: 0, write: 0, in-init: 0
     cw: 0 0 :: read: 1, write: 1, in-init: 1
-    free: 0 :: read: 0, write: 0, in-init: 0
-    gone: 0 :: read: 0, write: 0, in-init: 0
-    present: 0 :: read: 0, write: 0, in-init: 1
     normal: 0 :: read: 1, write: 1, in-init: 1
     inverted: 0 :: read: 1, write: 1, in-init: 0
     idle: :: read: 1, write: 1, in-init: 1
@@ -160,11 +155,7 @@ Action[21]:
     reset-1: ?x:0
         pre: (and (RW:finished) (RW:last-cut-point ?x))
         eff: (and (RW:idle) (N:RW:finished) (N:RW:last-cut-point ?x))
-Init[13]:
-  S:(present sub4)
-  S:(present sub3)
-  S:(present sub2)
-  S:(present sub1)
+Init[9]:
   (cw sub4 sub3)
   (cw sub3 sub1)
   (cw sub2 sub4)
