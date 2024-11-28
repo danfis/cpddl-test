@@ -1,6 +1,6 @@
 Domain: civ
 Problem: settlers
-Require: 3ff
+Require: 103
 Type[5]:
     [0]: object, parent: -1
     [1]: store, parent: 0
@@ -55,13 +55,11 @@ Predicate[19]:
     is-ship: 3 :: read: 1, write: 1, in-init: 0
     is-at: 3 2 :: read: 1, write: 1, in-init: 0
     potential: 3 :: read: 1, write: 1, in-init: 1
-Function[7]:
+Function[5]:
     available: 4 1 :: read: 1, write: 1, in-init: 1
     space-in: 3 :: read: 1, write: 1, in-init: 0
     carts-at: 2 :: read: 1, write: 1, in-init: 1
     labour: :: read: 1, write: 1, in-init: 1
-    resource-use: :: read: 1, write: 1, in-init: 1
-    pollution: :: read: 1, write: 1, in-init: 1
     housing: 2 :: read: 1, write: 1, in-init: 1
 Action[25]:
     load: ?v:3 ?p:2 ?r:4
@@ -78,10 +76,10 @@ Action[25]:
         eff: (and (decrease (carts-at ?p1) 1) (increase (carts-at ?p2) 1) (decrease (available ?r ?p1) 1) (increase (available ?r ?p2) 1) (increase (labour) 2))
     move-train: ?v:3 ?p1:2 ?p2:2
         pre: (and (RW:connected-by-rail ?p1 ?p2) (RW:is-train ?v) (RW:is-at ?v ?p1) (>= (available coal ?v) 1))
-        eff: (and (N:RW:is-at ?v ?p1) (RW:is-at ?v ?p2) (decrease (available coal ?v) 1) (increase (pollution) 1))
+        eff: (and (N:RW:is-at ?v ?p1) (RW:is-at ?v ?p2) (decrease (available coal ?v) 1))
     move-ship: ?v:3 ?p1:2 ?p2:2
         pre: (and (R:connected-by-sea ?p1 ?p2) (RW:is-ship ?v) (RW:is-at ?v ?p1) (>= (available coal ?v) 2))
-        eff: (and (N:RW:is-at ?v ?p1) (RW:is-at ?v ?p2) (decrease (available coal ?v) 2) (increase (pollution) 2))
+        eff: (and (N:RW:is-at ?v ?p1) (RW:is-at ?v ?p2) (decrease (available coal ?v) 2))
     build-cabin: ?p:2
         pre: (and (R:woodland ?p))
         eff: (and (RW:has-cabin ?p) (increase (labour) 1))
@@ -126,19 +124,19 @@ Action[25]:
         eff: (and (increase (available timber ?p) 1) (increase (labour) 1))
     break-stone: ?p:2
         pre: (and (RW:has-quarry ?p))
-        eff: (and (increase (available stone ?p) 1) (increase (labour) 1) (increase (resource-use) 1))
+        eff: (and (increase (available stone ?p) 1) (increase (labour) 1))
     mine-ore: ?p:2
         pre: (and (RW:has-mine ?p))
-        eff: (and (increase (available ore ?p) 1) (increase (resource-use) 2))
+        eff: (and (increase (available ore ?p) 1))
     burn-coal: ?p:2
         pre: (and (RW:has-coal-stack ?p) (>= (available timber ?p) 1))
-        eff: (and (decrease (available timber ?p) 1) (increase (available coal ?p) 1) (increase (pollution) 1))
+        eff: (and (decrease (available timber ?p) 1) (increase (available coal ?p) 1))
     saw-wood: ?p:2
         pre: (and (RW:has-sawmill ?p) (>= (available timber ?p) 1))
         eff: (and (decrease (available timber ?p) 1) (increase (available wood ?p) 1))
     make-iron: ?p:2
         pre: (and (RW:has-ironworks ?p) (>= (available ore ?p) 1) (>= (available coal ?p) 2))
-        eff: (and (decrease (available ore ?p) 1) (decrease (available coal ?p) 2) (increase (available iron ?p) 1) (increase (pollution) 2))
+        eff: (and (decrease (available ore ?p) 1) (decrease (available coal ?p) 2) (increase (available iron ?p) 1))
 Init[65]:
   S:(connected-by-land location0 location1)
   S:(connected-by-land location0 location3)
@@ -205,10 +203,8 @@ Init[65]:
   (potential vehicle4)
   (potential vehicle5)
   (potential vehicle6)
-Init[67]:
-  (= (resource-use) 0)
+Init[65]:
   (= (labour) 0)
-  (= (pollution) 0)
   (= (housing location0) 0)
   (= (available wood location0) 0)
   (= (carts-at location0) 0)
@@ -274,4 +270,4 @@ Init[67]:
   (= (available iron location7) 0)
   (= (available coal location7) 0)
 Goal: (and (RW:connected-by-rail location0 location5) (RW:connected-by-rail location5 location4) (RW:connected-by-rail location7 location5) (RW:has-coal-stack location0) (RW:has-sawmill location6) (RW:has-ironworks location6) (RW:has-ironworks location7) (>= (housing location6) 1) (>= (housing location0) 1) (>= (housing location4) 2) (>= (housing location5) 2))
-Metric: (+ (+ (* 0 (pollution)) (* 0 (resource-use))) (* 2 (labour)))
+Metric: (* 2 (labour))
