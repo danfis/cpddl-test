@@ -1,0 +1,380 @@
+Step 0 (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube8 blue orange white) (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (edge68 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (cube2 white red blue) (cube1 red green white) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (edge48 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube7 orange green yellow) (cube3 orange green white) (cube1 blue yellow red) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube6 white red green) (cube5 white blue orange) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge56 red white) (edge26 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (cube7 blue orange yellow) (cube8 blue white red) (edge34 red yellow) (edge37 white green) (edge78 blue red) (edge48 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (cube4 blue orange yellow) (cube3 blue white red) (edge78 red yellow) (edge48 white green) (edge34 blue red) (edge37 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+Step 1 (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+size: 12
+r :: cost: 1
+    add: (cube7 orange blue white) (cube8 orange yellow green) (cube6 orange white green) (cube5 yellow orange blue) (edge78 red green) (edge68 green yellow) (edge56 green white) (edge57 green orange)
+    del: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+rrev :: cost: 1
+    add: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+    del: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (cube2 white red blue) (cube1 red green white) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube2 red blue white) (edge68 white red) (edge24 red blue) (edge26 yellow blue) (cube8 orange blue yellow) (cube4 white green orange) (edge48 green white)
+    del: (cube2 green red white) (cube4 red white blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (cube8 white orange green) (cube6 orange yellow blue) (edge68 green white)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (edge24 white red) (edge68 red blue) (edge48 yellow blue) (cube6 white green orange) (cube2 orange blue yellow) (edge26 green white)
+    del: (cube2 green red white) (cube4 red white blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (cube8 white orange green) (cube6 orange yellow blue) (edge68 green white)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube7 blue yellow red) (edge13 white orange) (edge57 yellow red) (edge37 blue orange) (cube1 blue white orange) (cube5 yellow green orange) (edge15 red green)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (cube7 yellow orange green) (cube5 blue orange white) (edge57 red green)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube1 blue yellow red) (edge57 white orange) (edge13 yellow red) (edge15 blue orange) (cube7 blue white orange) (cube3 yellow green orange) (edge37 red green)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (cube7 yellow orange green) (cube5 blue orange white) (edge57 red green)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube1 white red green) (edge56 orange white) (edge12 red white) (edge15 white blue) (cube6 white orange blue) (cube2 blue yellow orange) (edge26 orange green)
+    del: (cube1 red yellow green) (cube2 green red white) (edge12 blue white) (edge15 white orange) (edge26 white red) (cube6 orange yellow blue) (cube5 blue orange white) (edge56 green orange)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube6 white red green) (edge12 orange white) (edge56 red white) (edge26 white blue) (cube5 blue yellow orange) (cube1 white orange blue) (edge15 orange green)
+    del: (cube1 red yellow green) (cube2 green red white) (edge12 blue white) (edge15 white orange) (edge26 white red) (cube6 orange yellow blue) (cube5 blue orange white) (edge56 green orange)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube8 blue white red) (edge34 red yellow) (edge78 blue red) (edge48 yellow orange) (cube3 green orange yellow) (cube7 green orange white) (edge37 yellow green)
+    del: (cube3 blue red yellow) (cube4 red white blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (cube7 yellow orange green) (cube8 white orange green) (edge78 green yellow)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube3 blue white red) (edge78 red yellow) (edge34 blue red) (edge37 yellow orange) (cube8 green orange yellow) (cube4 green orange white) (edge48 yellow green)
+    del: (cube3 blue red yellow) (cube4 red white blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (cube7 yellow orange green) (cube8 white orange green) (edge78 green yellow)
+Step 2 (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube8 blue orange white) (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (edge68 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (cube2 white red blue) (cube1 red green white) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (edge48 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube7 orange green yellow) (cube3 orange green white) (cube1 blue yellow red) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube6 white red green) (cube5 white blue orange) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge56 red white) (edge26 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (cube7 blue orange yellow) (cube8 blue white red) (edge34 red yellow) (edge37 white green) (edge78 blue red) (edge48 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (cube4 blue orange yellow) (cube3 blue white red) (edge78 red yellow) (edge48 white green) (edge34 blue red) (edge37 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+Step 3 (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow) (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube8 blue orange white) (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (edge68 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+l :: cost: 1
+    add: (cube2 blue red yellow) (cube1 red white blue) (cube3 green red white) (cube4 red yellow green) (edge12 orange yellow) (edge13 yellow blue) (edge34 blue white) (edge24 blue orange)
+    del: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+lrev :: cost: 1
+    add: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+    del: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+d :: cost: 1
+    add: (cube8 orange white blue) (cube4 yellow blue orange) (edge68 white red) (edge48 green orange) (edge24 red blue) (cube6 yellow green red) (cube2 red white green) (edge26 blue white)
+    del: (cube6 orange blue white) (cube8 yellow orange blue) (edge26 white red) (edge48 red blue) (edge68 green orange) (cube2 yellow red green) (cube4 red green white) (edge24 blue white)
+drev :: cost: 1
+    add: (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (cube4 yellow green red) (cube8 red white green) (edge48 blue white)
+    del: (cube6 orange blue white) (cube8 yellow orange blue) (edge26 white red) (edge48 red blue) (edge68 green orange) (cube2 yellow red green) (cube4 red green white) (edge24 blue white)
+u :: cost: 1
+    add: (cube1 orange green yellow) (cube5 orange green white) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (cube3 red yellow blue) (cube7 white blue red) (edge37 orange yellow)
+    del: (cube5 orange yellow green) (cube7 orange white green) (edge15 white orange) (edge37 yellow red) (edge57 green yellow) (cube1 red blue yellow) (cube3 white red blue) (edge13 orange yellow)
+urev :: cost: 1
+    add: (cube7 orange green yellow) (cube3 orange green white) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (cube5 red yellow blue) (cube1 white blue red) (edge15 orange yellow)
+    del: (cube5 orange yellow green) (cube7 orange white green) (edge15 white orange) (edge37 yellow red) (edge57 green yellow) (cube1 red blue yellow) (cube3 white red blue) (edge13 orange yellow)
+f :: cost: 1
+    add: (cube6 green yellow orange) (cube2 white blue orange) (edge56 orange white) (edge26 green red) (edge12 red white) (cube5 yellow blue red) (cube1 green red yellow) (edge15 orange blue)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (edge15 white orange) (edge26 white red) (edge56 red green) (cube2 yellow red green) (cube1 red blue yellow) (edge12 blue orange)
+frev :: cost: 1
+    add: (cube5 white blue orange) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge56 red white) (cube2 yellow blue red) (cube6 green red yellow) (edge26 orange blue)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (edge15 white orange) (edge26 white red) (edge56 red green) (cube2 yellow red green) (cube1 red blue yellow) (edge12 blue orange)
+b :: cost: 1
+    add: (cube3 green white orange) (cube7 blue orange yellow) (edge34 red yellow) (edge37 white green) (edge78 blue red) (cube4 blue red white) (cube8 white green red) (edge48 blue yellow)
+    del: (cube7 orange white green) (cube8 yellow orange blue) (edge48 red blue) (edge37 yellow red) (edge78 green white) (cube3 white red blue) (cube4 red green white) (edge34 yellow blue)
+brev :: cost: 1
+    add: (cube8 green white orange) (cube4 blue orange yellow) (edge78 red yellow) (edge48 white green) (edge34 blue red) (cube7 blue red white) (cube3 white green red) (edge37 blue yellow)
+    del: (cube7 orange white green) (cube8 yellow orange blue) (edge48 red blue) (edge37 yellow red) (edge78 green white) (cube3 white red blue) (cube4 red green white) (edge34 yellow blue)
+Step 4 (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube8 blue orange white) (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (edge68 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (cube2 white red blue) (cube1 red green white) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (edge48 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube7 orange green yellow) (cube3 orange green white) (cube1 blue yellow red) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube6 white red green) (cube5 white blue orange) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge56 red white) (edge26 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (cube7 blue orange yellow) (cube8 blue white red) (edge34 red yellow) (edge37 white green) (edge78 blue red) (edge48 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (cube4 blue orange yellow) (cube3 blue white red) (edge78 red yellow) (edge48 white green) (edge34 blue red) (edge37 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+Step 5 (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge12 blue white) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge56 red green) (edge78 green white) (edge57 green yellow) (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (edge78 green yellow) (edge68 green white) (edge57 red green) (cube6 white orange blue) (cube5 white green red) (edge56 white red)
+    del: (cube5 orange yellow green) (cube7 orange white green) (edge56 red green) (edge78 green white) (edge57 green yellow) (cube6 green white red) (cube8 orange white blue) (edge68 white red)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge68 red green) (cube8 white green red) (cube7 white orange blue) (edge78 white red)
+    del: (cube5 orange yellow green) (cube7 orange white green) (edge56 red green) (edge78 green white) (edge57 green yellow) (cube6 green white red) (cube8 orange white blue) (edge68 white red)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (edge12 blue orange) (edge13 orange yellow) (edge24 blue white) (cube4 blue red white) (cube3 blue yellow orange) (edge34 red blue)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (edge12 blue white) (edge34 orange yellow) (edge13 blue orange) (cube4 yellow blue orange) (cube2 red blue white) (edge24 red blue)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (edge34 blue orange) (edge24 orange yellow) (edge13 blue white) (cube2 blue yellow orange) (cube1 blue red white) (edge12 red blue)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (edge12 blue white) (edge34 orange yellow) (edge13 blue orange) (cube4 yellow blue orange) (cube2 red blue white) (edge24 red blue)
+d :: cost: 1
+    add: (cube6 red white blue) (cube8 green red white) (cube4 orange blue white) (cube2 yellow orange blue) (edge68 yellow blue) (edge48 white red) (edge24 green orange) (edge26 red blue)
+    del: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+drev :: cost: 1
+    add: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+    del: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube7 orange green yellow) (cube3 orange green white) (cube1 blue yellow red) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube6 green yellow orange) (edge56 orange white) (edge26 green red) (edge15 white blue) (cube2 red white green) (cube1 white blue red) (edge12 blue yellow)
+    del: (cube1 red yellow green) (cube5 orange yellow green) (edge12 blue white) (edge15 white orange) (edge56 red green) (cube6 green white red) (cube2 red blue white) (edge26 yellow blue)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge26 white blue) (cube6 white blue red) (cube5 red white green) (edge56 blue yellow)
+    del: (cube1 red yellow green) (cube5 orange yellow green) (edge12 blue white) (edge15 white orange) (edge56 red green) (cube6 green white red) (cube2 red blue white) (edge26 yellow blue)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (edge34 red yellow) (edge37 white green) (edge48 yellow orange) (cube8 orange blue yellow) (cube7 blue white orange) (edge78 orange green)
+    del: (cube3 blue red yellow) (cube7 orange white green) (edge34 orange yellow) (edge37 yellow red) (edge78 green white) (cube8 orange white blue) (cube4 yellow blue orange) (edge48 green orange)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (edge78 red yellow) (edge48 white green) (edge37 yellow orange) (cube4 blue white orange) (cube3 orange blue yellow) (edge34 orange green)
+    del: (cube3 blue red yellow) (cube7 orange white green) (edge34 orange yellow) (edge37 yellow red) (edge78 green white) (cube8 orange white blue) (cube4 yellow blue orange) (edge48 green orange)
+Step 6 (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube8 blue orange white) (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (edge68 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (cube2 white red blue) (cube1 red green white) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (edge48 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube7 orange green yellow) (cube3 orange green white) (cube1 blue yellow red) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube6 white red green) (cube5 white blue orange) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge56 red white) (edge26 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (cube7 blue orange yellow) (cube8 blue white red) (edge34 red yellow) (edge37 white green) (edge78 blue red) (edge48 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (cube4 blue orange yellow) (cube3 blue white red) (edge78 red yellow) (edge48 white green) (edge34 blue red) (edge37 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+Step 7 (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge26 white red) (edge48 red blue) (edge56 red green) (edge68 green orange) (edge78 green white) (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+size: 12
+r :: cost: 1
+    add: (cube6 orange yellow blue) (cube5 blue orange white) (edge68 green white) (edge56 green orange) (edge57 red green) (cube7 green orange white) (cube8 yellow blue red) (edge78 yellow red)
+    del: (cube6 orange blue white) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (cube5 orange green white) (cube7 blue yellow red) (edge57 yellow red)
+rrev :: cost: 1
+    add: (cube8 blue orange white) (cube7 orange yellow blue) (edge57 green white) (edge78 green orange) (edge68 red green) (cube5 yellow blue red) (cube6 green orange white) (edge56 yellow red)
+    del: (cube6 orange blue white) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (cube5 orange green white) (cube7 blue yellow red) (edge57 yellow red)
+l :: cost: 1
+    add: (cube3 white red blue) (cube4 red green white) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white) (cube1 green red yellow) (cube2 green orange yellow) (edge12 white orange)
+    del: (cube2 green red white) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (cube3 red green yellow) (cube1 orange green yellow) (edge13 white orange)
+lrev :: cost: 1
+    add: (cube2 white red blue) (cube1 red green white) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white) (cube3 green orange yellow) (cube4 green red yellow) (edge34 white orange)
+    del: (cube2 green red white) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (cube3 red green yellow) (cube1 orange green yellow) (edge13 white orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (edge48 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+u :: cost: 1
+    add: (cube3 orange yellow green) (cube1 orange white green) (cube5 blue red yellow) (cube7 red yellow green) (edge13 green yellow) (edge15 yellow red) (edge57 blue orange) (edge37 white orange)
+    del: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+urev :: cost: 1
+    add: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+    del: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+f :: cost: 1
+    add: (cube2 white blue orange) (cube1 white red green) (edge26 green red) (edge12 red white) (edge15 white blue) (cube6 white green orange) (cube5 yellow green orange) (edge56 yellow green)
+    del: (cube2 green red white) (cube6 orange blue white) (edge12 blue white) (edge26 white red) (edge56 red green) (cube1 orange green yellow) (cube5 orange green white) (edge15 green yellow)
+frev :: cost: 1
+    add: (cube6 white red green) (cube5 white blue orange) (edge15 green red) (edge56 red white) (edge26 white blue) (cube2 yellow green orange) (cube1 white green orange) (edge12 yellow green)
+    del: (cube2 green red white) (cube6 orange blue white) (edge12 blue white) (edge26 white red) (edge56 red green) (cube1 orange green yellow) (cube5 orange green white) (edge15 green yellow)
+b :: cost: 1
+    add: (cube7 blue orange yellow) (cube8 blue white red) (edge37 white green) (edge78 blue red) (edge48 yellow orange) (cube4 yellow green red) (cube3 red yellow blue) (edge34 orange blue)
+    del: (cube4 red white blue) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge78 green white) (cube3 red green yellow) (cube7 blue yellow red) (edge37 blue orange)
+brev :: cost: 1
+    add: (cube4 blue orange yellow) (cube3 blue white red) (edge48 white green) (edge34 blue red) (edge37 yellow orange) (cube7 yellow green red) (cube8 red yellow blue) (edge78 orange blue)
+    del: (cube4 red white blue) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge78 green white) (cube3 red green yellow) (cube7 blue yellow red) (edge37 blue orange)
+Step 8 (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge15 white orange) (edge26 white red) (edge48 red blue) (edge37 yellow red) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+size: 12
+r :: cost: 1
+    add: (cube7 yellow orange green) (cube8 white orange green) (cube6 orange yellow blue) (cube5 blue orange white) (edge78 green yellow) (edge68 green white) (edge56 green orange) (edge57 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+rrev :: cost: 1
+    add: (cube6 yellow orange green) (cube8 blue orange white) (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (edge68 red green)
+    del: (cube5 orange yellow green) (cube6 orange blue white) (cube7 orange white green) (cube8 yellow orange blue) (edge56 red green) (edge68 green orange) (edge78 green white) (edge57 green yellow)
+l :: cost: 1
+    add: (cube2 yellow red green) (cube1 red blue yellow) (cube3 white red blue) (cube4 red green white) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (edge24 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+lrev :: cost: 1
+    add: (cube3 yellow red green) (cube4 red blue yellow) (cube2 white red blue) (cube1 red green white) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (edge13 blue white)
+    del: (cube1 red yellow green) (cube2 green red white) (cube3 blue red yellow) (cube4 red white blue) (edge12 blue white) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange)
+d :: cost: 1
+    add: (cube6 green white red) (cube8 orange white blue) (cube4 yellow blue orange) (cube2 red blue white) (edge68 white red) (edge48 green orange) (edge24 red blue) (edge26 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+drev :: cost: 1
+    add: (cube4 green white red) (cube8 red blue white) (cube6 yellow blue orange) (cube2 orange white blue) (edge24 white red) (edge26 green orange) (edge68 red blue) (edge48 yellow blue)
+    del: (cube2 green red white) (cube4 red white blue) (cube6 orange blue white) (cube8 yellow orange blue) (edge24 yellow blue) (edge26 white red) (edge48 red blue) (edge68 green orange)
+u :: cost: 1
+    add: (cube3 red green yellow) (cube1 orange green yellow) (cube5 orange green white) (cube7 blue yellow red) (edge13 white orange) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+urev :: cost: 1
+    add: (cube5 red green yellow) (cube7 orange green yellow) (cube3 orange green white) (cube1 blue yellow red) (edge57 white orange) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange)
+    del: (cube1 red yellow green) (cube3 blue red yellow) (cube5 orange yellow green) (cube7 orange white green) (edge13 blue orange) (edge15 white orange) (edge37 yellow red) (edge57 green yellow)
+f :: cost: 1
+    add: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+frev :: cost: 1
+    add: (cube2 green yellow red) (cube6 white red green) (cube5 white blue orange) (cube1 green yellow orange) (edge12 orange white) (edge15 green red) (edge56 red white) (edge26 white blue)
+    del: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (cube7 blue orange yellow) (cube8 blue white red) (edge34 red yellow) (edge37 white green) (edge78 blue red) (edge48 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (cube4 blue orange yellow) (cube3 blue white red) (edge78 red yellow) (edge48 white green) (edge34 blue red) (edge37 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+Step 9 (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (edge48 red blue) (edge37 yellow red) (edge68 green orange) (edge78 green white) (edge57 green yellow) (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+size: 12
+r :: cost: 1
+    add: (cube8 white orange green) (cube6 orange yellow blue) (edge78 green yellow) (edge68 green white) (edge56 green orange) (cube5 yellow green orange) (cube7 yellow green red) (edge57 orange white)
+    del: (cube7 orange white green) (cube8 yellow orange blue) (edge68 green orange) (edge78 green white) (edge57 green yellow) (cube5 green yellow red) (cube6 green yellow orange) (edge56 orange white)
+rrev :: cost: 1
+    add: (cube7 orange yellow blue) (cube5 white orange green) (edge56 green yellow) (edge57 green white) (edge78 green orange) (cube6 yellow green red) (cube8 yellow green orange) (edge68 orange white)
+    del: (cube7 orange white green) (cube8 yellow orange blue) (edge68 green orange) (edge78 green white) (edge57 green yellow) (cube5 green yellow red) (cube6 green yellow orange) (edge56 orange white)
+l :: cost: 1
+    add: (cube1 red blue yellow) (cube3 white red blue) (edge12 blue orange) (edge13 orange yellow) (edge34 yellow blue) (cube2 red white green) (cube4 blue white orange) (edge24 red white)
+    del: (cube3 blue red yellow) (cube4 red white blue) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (cube2 white blue orange) (cube1 white red green) (edge12 red white)
+lrev :: cost: 1
+    add: (cube4 red blue yellow) (cube2 white red blue) (edge34 blue orange) (edge24 orange yellow) (edge12 yellow blue) (cube1 blue white orange) (cube3 red white green) (edge13 red white)
+    del: (cube3 blue red yellow) (cube4 red white blue) (edge24 yellow blue) (edge34 orange yellow) (edge13 blue orange) (cube2 white blue orange) (cube1 white red green) (edge12 red white)
+d :: cost: 1
+    add: (cube4 yellow blue orange) (cube2 red blue white) (edge48 green orange) (edge24 red blue) (edge26 yellow blue) (cube6 white orange blue) (cube8 green orange yellow) (edge68 green red)
+    del: (cube4 red white blue) (cube8 yellow orange blue) (edge24 yellow blue) (edge48 red blue) (edge68 green orange) (cube6 green yellow orange) (cube2 white blue orange) (edge26 green red)
+drev :: cost: 1
+    add: (cube8 red blue white) (cube6 yellow blue orange) (edge26 green orange) (edge68 red blue) (edge48 yellow blue) (cube2 green orange yellow) (cube4 white orange blue) (edge24 green red)
+    del: (cube4 red white blue) (cube8 yellow orange blue) (edge24 yellow blue) (edge48 red blue) (edge68 green orange) (cube6 green yellow orange) (cube2 white blue orange) (edge26 green red)
+u :: cost: 1
+    add: (cube5 orange green white) (cube7 blue yellow red) (edge15 green yellow) (edge57 yellow red) (edge37 blue orange) (cube1 green red yellow) (cube3 white green red) (edge13 white blue)
+    del: (cube3 blue red yellow) (cube7 orange white green) (edge13 blue orange) (edge37 yellow red) (edge57 green yellow) (cube5 green yellow red) (cube1 white red green) (edge15 white blue)
+urev :: cost: 1
+    add: (cube3 orange green white) (cube1 blue yellow red) (edge37 green yellow) (edge13 yellow red) (edge15 blue orange) (cube5 white green red) (cube7 green red yellow) (edge57 white blue)
+    del: (cube3 blue red yellow) (cube7 orange white green) (edge13 blue orange) (edge37 yellow red) (edge57 green yellow) (cube5 green yellow red) (cube1 white red green) (edge15 white blue)
+f :: cost: 1
+    add: (cube5 green red white) (cube6 red yellow green) (cube2 orange yellow green) (cube1 orange blue white) (edge56 blue white) (edge26 white orange) (edge12 red green) (edge15 white red)
+    del: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+frev :: cost: 1
+    add: (cube1 red yellow green) (cube2 green red white) (cube5 orange yellow green) (cube6 orange blue white) (edge12 blue white) (edge15 white orange) (edge26 white red) (edge56 red green)
+    del: (cube5 green yellow red) (cube6 green yellow orange) (cube2 white blue orange) (cube1 white red green) (edge56 orange white) (edge26 green red) (edge12 red white) (edge15 white blue)
+b :: cost: 1
+    add: (cube4 yellow red blue) (cube3 green white orange) (cube7 blue orange yellow) (cube8 blue white red) (edge34 red yellow) (edge37 white green) (edge78 blue red) (edge48 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)
+brev :: cost: 1
+    add: (cube7 yellow red blue) (cube8 green white orange) (cube4 blue orange yellow) (cube3 blue white red) (edge78 red yellow) (edge48 white green) (edge34 blue red) (edge37 yellow orange)
+    del: (cube3 blue red yellow) (cube4 red white blue) (cube7 orange white green) (cube8 yellow orange blue) (edge34 orange yellow) (edge48 red blue) (edge37 yellow red) (edge78 green white)

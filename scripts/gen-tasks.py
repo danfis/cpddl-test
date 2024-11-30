@@ -52,6 +52,8 @@ Disabled = {}
 def parseDisabled(fin = sys.stdin):
     global Disabled
     for line in fin:
+        if len(line.strip()) == 0 or line.startswith('#'):
+            continue
         task, test = [x for x in line.strip().split() if len(x) > 0]
         if task not in Disabled:
             Disabled[task] = {}

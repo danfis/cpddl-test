@@ -1,0 +1,50 @@
+Step 0 (at robot-00 location-0027) (battery robot-00 battery-0005) (at robot-01 location-0027) (battery robot-01 battery-0000) (NOT-stopped robot-00) (NOT-stopped robot-01)
+size: 7
+move robot-00 location-0027 location-0028 battery-0005 battery-0004 :: cost: 1
+    add: (at robot-00 location-0028) (battery robot-00 battery-0004)
+    del: (at robot-00 location-0027) (battery robot-00 battery-0005)
+recharge robot-00 robot-01 location-0027 battery-0005 battery-0004 battery-0000 battery-0001 :: cost: 1
+    add: (battery robot-00 battery-0004) (battery robot-01 battery-0001)
+    del: (battery robot-00 battery-0005) (battery robot-01 battery-0000)
+stop-and-guard robot-00 location-0027 :: cost: 0
+    add:
+    del: (NOT-stopped robot-00)
+stop-and-guard robot-01 location-0027 :: cost: 0
+    add:
+    del: (NOT-stopped robot-01)
+move robot-00 location-0027 location-0014 battery-0005 battery-0004 :: cost: 1
+    add: (battery robot-00 battery-0004) (at robot-00 location-0014)
+    del: (at robot-00 location-0027) (battery robot-00 battery-0005)
+move robot-00 location-0027 location-0015 battery-0005 battery-0004 :: cost: 1
+    add: (battery robot-00 battery-0004) (at robot-00 location-0015)
+    del: (at robot-00 location-0027) (battery robot-00 battery-0005)
+move robot-00 location-0027 location-0026 battery-0005 battery-0004 :: cost: 1
+    add: (battery robot-00 battery-0004) (at robot-00 location-0026)
+    del: (at robot-00 location-0027) (battery robot-00 battery-0005)
+Step 1 (at robot-01 location-0027) (battery robot-01 battery-0000) (NOT-stopped robot-00) (NOT-stopped robot-01) (at robot-00 location-0028) (battery robot-00 battery-0004)
+size: 6
+move robot-00 location-0028 location-0029 battery-0004 battery-0003 :: cost: 1
+    add: (at robot-00 location-0029) (battery robot-00 battery-0003)
+    del: (at robot-00 location-0028) (battery robot-00 battery-0004)
+stop-and-guard robot-00 location-0028 :: cost: 0
+    add:
+    del: (NOT-stopped robot-00)
+stop-and-guard robot-01 location-0027 :: cost: 0
+    add:
+    del: (NOT-stopped robot-01)
+move robot-00 location-0028 location-0014 battery-0004 battery-0003 :: cost: 1
+    add: (at robot-00 location-0014) (battery robot-00 battery-0003)
+    del: (at robot-00 location-0028) (battery robot-00 battery-0004)
+move robot-00 location-0028 location-0017 battery-0004 battery-0003 :: cost: 1
+    add: (battery robot-00 battery-0003) (at robot-00 location-0017)
+    del: (at robot-00 location-0028) (battery robot-00 battery-0004)
+move robot-00 location-0028 location-0027 battery-0004 battery-0003 :: cost: 1
+    add: (at robot-00 location-0027) (battery robot-00 battery-0003)
+    del: (at robot-00 location-0028) (battery robot-00 battery-0004)
+Step 2 (at robot-01 location-0027) (battery robot-01 battery-0000) (NOT-stopped robot-01) (at robot-00 location-0028) (battery robot-00 battery-0004)
+size: 1
+stop-and-guard robot-01 location-0027 :: cost: 0
+    add:
+    del: (NOT-stopped robot-01)
+Step 3 (at robot-01 location-0027) (battery robot-01 battery-0000) (at robot-00 location-0028) (battery robot-00 battery-0004)
+size: 0

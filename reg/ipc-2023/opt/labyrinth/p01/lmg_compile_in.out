@@ -1,0 +1,291 @@
+Compile-in LMG: BEGIN
+Compile-in LMG: Cfg: prune_mutex = true
+Compile-in LMG: Cfg: prune_dead_end = true
+Compile-in LMG: actions: 17, lifted mgroups: 4
+Compile-in LMG: Found mutex condition for action 'move-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?xfrom ?xto)) (= ?cfrom ?cto) (= ?yfrom ?yto) (= ?dfrom w))
+Compile-in LMG: Precondition of action 'move-west' extended with (or (= ?xfrom ?xto) (not (= ?cfrom ?cto)) (not (= ?yfrom ?yto)) (not (= ?dfrom w)))
+Compile-in LMG: Found mutex condition for action 'move-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?xfrom ?xto)) (= ?cfrom ?cto) (= ?yfrom ?yto) (= ?dfrom e))
+Compile-in LMG: Precondition of action 'move-east' extended with (or (= ?xfrom ?xto) (not (= ?cfrom ?cto)) (not (= ?yfrom ?yto)) (not (= ?dfrom e)))
+Compile-in LMG: Found mutex condition for action 'move-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?yfrom ?yto)) (= ?cfrom ?cto) (= ?xfrom ?xto) (= ?dfrom n))
+Compile-in LMG: Precondition of action 'move-north' extended with (or (= ?yfrom ?yto) (not (= ?cfrom ?cto)) (not (= ?xfrom ?xto)) (not (= ?dfrom n)))
+Compile-in LMG: Found mutex condition for action 'move-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?yfrom ?yto)) (= ?cfrom ?cto) (= ?xfrom ?xto) (= ?dfrom s))
+Compile-in LMG: Precondition of action 'move-south' extended with (or (= ?yfrom ?yto) (not (= ?cfrom ?cto)) (not (= ?xfrom ?xto)) (not (= ?dfrom s)))
+Compile-in LMG: Found mutex condition for action 'start-move-card-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
+Compile-in LMG: Precondition of action 'start-move-card-west' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
+Compile-in LMG: Found mutex condition for action 'move-card-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
+Compile-in LMG: Precondition of action 'move-card-west' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
+Compile-in LMG: Found mutex condition for action 'stop-move-card-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
+Compile-in LMG: Precondition of action 'stop-move-card-west' extended with (not (= ?cm ?newtc))
+Compile-in LMG: Found mutex condition for action 'start-move-card-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
+Compile-in LMG: Precondition of action 'start-move-card-east' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
+Compile-in LMG: Found mutex condition for action 'move-card-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
+Compile-in LMG: Precondition of action 'move-card-east' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
+Compile-in LMG: Found mutex condition for action 'stop-move-card-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
+Compile-in LMG: Precondition of action 'stop-move-card-east' extended with (not (= ?cm ?newtc))
+Compile-in LMG: Found mutex condition for action 'start-move-card-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
+Compile-in LMG: Precondition of action 'start-move-card-north' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
+Compile-in LMG: Found mutex condition for action 'move-card-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
+Compile-in LMG: Precondition of action 'move-card-north' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
+Compile-in LMG: Found mutex condition for action 'stop-move-card-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
+Compile-in LMG: Precondition of action 'stop-move-card-north' extended with (not (= ?cm ?newtc))
+Compile-in LMG: Found mutex condition for action 'start-move-card-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
+Compile-in LMG: Precondition of action 'start-move-card-south' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
+Compile-in LMG: Found mutex condition for action 'move-card-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
+Compile-in LMG: Precondition of action 'move-card-south' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
+Compile-in LMG: Found mutex condition for action 'stop-move-card-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
+Compile-in LMG: Precondition of action 'stop-move-card-south' extended with (not (= ?cm ?newtc))
+Compile-in LMG: PDDL-Norm: BEGIN
+Compile-in LMG: PDDL-Norm: Before normalization: types: 6, objects: 16, predicates: 21, functions: 3, actions: 17, action-pre-size: [min: 6, max: 14, avg: 10.71, med: 11.00]
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-west
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-west
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-east
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-east
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-north
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-north
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-south
+Compile-in LMG: PDDL-Norm: Detected irrelevant action: move-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
+Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
+Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action leave
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-west
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-east
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-north
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-south
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 16, vars: 8, predicates: 27, rules: 67)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 16, vars: 8, predicates: 27, rules: 67)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 16, vars: 8, predicates: 27, rules: 67)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 67
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 67, db-mem: 0MB)
+Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
+Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
+Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
+Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
+Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 6, objects: 16, predicates: 21, functions: 3, actions: 29, action-pre-size: [min: 10, max: 11, avg: 9.45, med: 9.00]
+Compile-in LMG: PDDL-Norm: END
+Compile-in LMG: DONE. actions: 29
+Compile-in LMG: END
+Domain: labyrinth
+Problem: labyrinth-size-3-rotations-1-seed-1229
+Require: 20017
+Type[6]:
+    [0]: object, parent: -1
+    [1]: card, parent: 0
+    [2]: direction, parent: 0
+    [3]: directionv, parent: 2
+    [4]: directionh, parent: 2
+    [5]: gridpos, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+    [1]: 7 8 9 10 11 12 13 14 15
+    [2]: 0 1 2 3
+    [3]: 0 1
+    [4]: 2 3
+    [5]: 4 5 6
+Obj[16]:
+    [0]: s, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: n, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [2]: w, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [3]: e, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [4]: pos0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: pos1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: pos2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: card0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: card1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: card2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: card3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: card4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: card5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: card6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: card7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: card8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[21]:
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    next: 5 5 :: read: 1, write: 0, in-init: 1
+    max-pos: 5 :: read: 1, write: 0, in-init: 1
+    min-pos: 5 :: read: 1, write: 0, in-init: 1
+    blocked: 1 2 :: read: 1, write: 0, in-init: 1
+    robot-at: 1 :: read: 1, write: 1, in-init: 1, neg-of: NOT-robot-at
+    card-at: 1 5 5 :: read: 1, write: 1, in-init: 1
+    left: :: read: 1, write: 1, in-init: 0
+    cards-moving: :: read: 1, write: 1, in-init: 0, neg-of: NOT-cards-moving
+    cards-moving-west: :: read: 1, write: 1, in-init: 0, neg-of: NOT-cards-moving-west
+    cards-moving-east: :: read: 1, write: 1, in-init: 0, neg-of: NOT-cards-moving-east
+    cards-moving-south: :: read: 1, write: 1, in-init: 0, neg-of: NOT-cards-moving-south
+    cards-moving-north: :: read: 1, write: 1, in-init: 0, neg-of: NOT-cards-moving-north
+    next-moving-card: 1 :: read: 1, write: 1, in-init: 0
+    new-headtail-card: 1 :: read: 1, write: 1, in-init: 0
+    NOT-robot-at: 1 :: read: 1, write: 1, in-init: 1, neg-of: robot-at
+    NOT-cards-moving: :: read: 1, write: 1, in-init: 1, neg-of: cards-moving
+    NOT-cards-moving-west: :: read: 1, write: 1, in-init: 1, neg-of: cards-moving-west
+    NOT-cards-moving-east: :: read: 1, write: 1, in-init: 1, neg-of: cards-moving-east
+    NOT-cards-moving-south: :: read: 1, write: 1, in-init: 1, neg-of: cards-moving-south
+    NOT-cards-moving-north: :: read: 1, write: 1, in-init: 1, neg-of: cards-moving-north
+Function[3]:
+    total-cost: :: read: 1, write: 1, in-init: 1
+    move-robot-cost: :: read: 1, write: 0, in-init: 1
+    move-card: :: read: 1, write: 0, in-init: 1
+Action[29]:
+    move-west: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
+        pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom w) (N:R:= ?dto w) (R:next ?xfrom ?xto) (N:R:blocked ?cfrom w) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    move-east: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
+        pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom e) (N:R:= ?dto e) (R:next ?xto ?xfrom) (N:R:blocked ?cfrom e) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    move-north: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
+        pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom n) (N:R:= ?dto n) (R:next ?yfrom ?yto) (N:R:blocked ?cfrom n) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    move-south: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
+        pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom s) (N:R:= ?dto s) (R:next ?yto ?yfrom) (N:R:blocked ?cfrom s) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    start-move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?nextx ?x) (R:min-pos ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-west))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-west) (increase (total-cost) (move-card)))
+    move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5 ?prevx:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?x ?prevx) (R:next ?nextx ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:cards-moving) (RW:cards-moving-west) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-west))
+    stop-move-card-west: ?cm:1 ?x:5 ?y:5 ?prevx:5 ?newtc:1
+        pre: (and (N:R:= ?cm ?newtc) (R:next ?x ?prevx) (R:max-pos ?x) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-west) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc) (RW:NOT-cards-moving) (RW:NOT-cards-moving-west))
+    start-move-card-east: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?x ?nextx) (R:max-pos ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-east))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-east) (increase (total-cost) (move-card)))
+    move-card-east: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5 ?prevx:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?x ?nextx) (R:next ?prevx ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:cards-moving) (RW:cards-moving-east) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-east))
+    stop-move-card-east: ?cm:1 ?x:5 ?y:5 ?prevx:5 ?newtc:1
+        pre: (and (N:R:= ?cm ?newtc) (R:next ?prevx ?x) (R:min-pos ?x) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-east) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc) (RW:NOT-cards-moving) (RW:NOT-cards-moving-east))
+    start-move-card-north: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?nexty ?y) (R:min-pos ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-north))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-north) (increase (total-cost) (move-card)))
+    move-card-north: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5 ?prevy:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?y ?prevy) (R:next ?nexty ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:cards-moving) (RW:cards-moving-north) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-north))
+    stop-move-card-north: ?cm:1 ?x:5 ?y:5 ?prevy:5 ?newtc:1
+        pre: (and (N:R:= ?cm ?newtc) (R:next ?y ?prevy) (R:max-pos ?y) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-north) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc) (RW:NOT-cards-moving) (RW:NOT-cards-moving-north))
+    start-move-card-south: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?y ?nexty) (R:max-pos ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-south))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-south) (increase (total-cost) (move-card)))
+    move-card-south: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5 ?prevy:5
+        pre: (and (N:R:= ?cm ?cnext) (R:next ?y ?nexty) (R:next ?prevy ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:cards-moving) (RW:cards-moving-south) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-south))
+    stop-move-card-south: ?cm:1 ?x:5 ?y:5 ?prevy:5 ?newtc:1
+        pre: (and (N:R:= ?cm ?newtc) (R:next ?prevy ?y) (R:min-pos ?y) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-south) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc) (RW:NOT-cards-moving) (RW:NOT-cards-moving-south))
+    leave: ?c:1 ?prow:5 ?pcolumn:5
+        pre: (and (R:max-pos ?prow) (R:max-pos ?pcolumn) (N:R:blocked ?c s) (RW:robot-at ?c) (RW:card-at ?c ?prow ?pcolumn) (RW:NOT-cards-moving))
+        eff: (and (RW:left))
+    move-west: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
+        pre: (and (N:R:= ?cfrom ?cto) (R:= ?yfrom ?yto) (R:= ?dfrom w) (N:R:= ?dto w) (R:next ?xfrom ?xto) (N:R:blocked ?cfrom w) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    move-east: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
+        pre: (and (N:R:= ?cfrom ?cto) (R:= ?yfrom ?yto) (R:= ?dfrom e) (N:R:= ?dto e) (R:next ?xto ?xfrom) (N:R:blocked ?cfrom e) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    move-north: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
+        pre: (and (N:R:= ?cfrom ?cto) (R:= ?xfrom ?xto) (R:= ?dfrom n) (N:R:= ?dto n) (R:next ?yfrom ?yto) (N:R:blocked ?cfrom n) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    move-south: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
+        pre: (and (N:R:= ?cfrom ?cto) (R:= ?xfrom ?xto) (R:= ?dfrom s) (N:R:= ?dto s) (R:next ?yto ?yfrom) (N:R:blocked ?cfrom s) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+    start-move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
+        pre: (and (R:= ?x ?nextx) (R:= ?y ?y) (R:next ?nextx ?x) (R:min-pos ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-west))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-west) (increase (total-cost) (move-card)))
+    move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5 ?prevx:5
+        pre: (and (R:= ?x ?nextx) (R:= ?y ?y) (R:next ?x ?prevx) (R:next ?nextx ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:cards-moving) (RW:cards-moving-west) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-west))
+    start-move-card-east: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
+        pre: (and (R:= ?x ?nextx) (R:= ?y ?y) (R:next ?x ?nextx) (R:max-pos ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-east))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-east) (increase (total-cost) (move-card)))
+    move-card-east: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5 ?prevx:5
+        pre: (and (R:= ?x ?nextx) (R:= ?y ?y) (R:next ?x ?nextx) (R:next ?prevx ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:cards-moving) (RW:cards-moving-east) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-east))
+    start-move-card-north: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5
+        pre: (and (R:= ?x ?x) (R:= ?y ?nexty) (R:next ?nexty ?y) (R:min-pos ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-north))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-north) (increase (total-cost) (move-card)))
+    move-card-north: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5 ?prevy:5
+        pre: (and (R:= ?x ?x) (R:= ?y ?nexty) (R:next ?y ?prevy) (R:next ?nexty ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:cards-moving) (RW:cards-moving-north) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-north))
+    start-move-card-south: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5
+        pre: (and (R:= ?x ?x) (R:= ?y ?nexty) (R:next ?y ?nexty) (R:max-pos ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-south))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-south) (increase (total-cost) (move-card)))
+    move-card-south: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5 ?prevy:5
+        pre: (and (R:= ?x ?x) (R:= ?y ?nexty) (R:next ?y ?nexty) (R:next ?prevy ?y) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cm) (RW:NOT-robot-at ?cm))
+        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:cards-moving) (RW:cards-moving-south) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-south))
+Init[38]:
+  S:(next pos1 pos0)
+  S:(next pos2 pos1)
+  S:(max-pos pos2)
+  S:(min-pos pos0)
+  S:(blocked card0 n)
+  S:(blocked card1 n)
+  S:(blocked card2 n)
+  S:(blocked card3 n)
+  S:(blocked card4 w)
+  S:(blocked card5 e)
+  S:(blocked card6 s)
+  S:(blocked card6 e)
+  S:(blocked card7 s)
+  S:(blocked card7 w)
+  S:(blocked card8 e)
+  (robot-at card0)
+  (card-at card0 pos0 pos0)
+  (card-at card1 pos1 pos2)
+  (card-at card2 pos2 pos0)
+  (card-at card3 pos0 pos1)
+  (card-at card4 pos1 pos0)
+  (card-at card5 pos2 pos1)
+  (card-at card6 pos0 pos2)
+  (card-at card7 pos1 pos1)
+  (card-at card8 pos2 pos2)
+  (NOT-robot-at card1)
+  (NOT-robot-at card2)
+  (NOT-robot-at card3)
+  (NOT-robot-at card4)
+  (NOT-robot-at card5)
+  (NOT-robot-at card6)
+  (NOT-robot-at card7)
+  (NOT-robot-at card8)
+  (NOT-cards-moving)
+  (NOT-cards-moving-west)
+  (NOT-cards-moving-east)
+  (NOT-cards-moving-south)
+  (NOT-cards-moving-north)
+Init[3]:
+  (= (total-cost) 0)
+  (= (move-robot-cost) 1)
+  (= (move-card) 1)
+Goal: (RW:left)
+Metric: (total-cost)

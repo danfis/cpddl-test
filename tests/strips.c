@@ -317,7 +317,8 @@ static void testCompileInLMG(int mutex, int dead_end)
     if (strcmp(TEST_TASK, "ipc-2006/pathways/p20") != 0
             && strcmp(TEST_TASK, "unsolve-ipc-2016/pegsol-row5/satprob05") != 0
             && strcmp(TEST_TASK, "ipc-2008/seq-sat/sokoban/p10") != 0
-            && strcmp(TEST_TASK, "unsolve-ipc-2016/bottleneck/prob01") != 0){
+            && strcmp(TEST_TASK, "unsolve-ipc-2016/bottleneck/prob01") != 0
+            && strcmp(TEST_TASK, "ipc-2023/opt/slitherlink/p10") != 0){
         checkGroundingEqual(pddlStripsGroundClingo, &pddl, &ground_cfg, &base);
     }
 #endif /* PDDL_CLINGO */
@@ -362,7 +363,8 @@ TEST(strips_grounding, pddl)
     // Skip these tasks because clingo tends to run out of memory there
     if (strcmp(TEST_TASK, "ipc-2006/pathways/p20") != 0
             && strcmp(TEST_TASK, "ipc-2008/seq-sat/sokoban/p10") != 0
-            && strcmp(TEST_TASK, "unsolve-ipc-2016/pegsol-row5/satprob05") != 0){
+            && strcmp(TEST_TASK, "unsolve-ipc-2016/pegsol-row5/satprob05") != 0
+            && strcmp(TEST_TASK, "ipc-2023/opt/slitherlink/p10") != 0){
         checkGroundingEqual(pddlStripsGroundClingo, &C.pddl, &ground_cfg, &base);
     }
 #endif /* PDDL_CLINGO */

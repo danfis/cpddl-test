@@ -1,0 +1,12 @@
+Monotonicity invariants:
+< {robot-at C0:card}
+, {next-moving-card C0:card, NOT-cards-moving}
+, {new-headtail-card C0:card, NOT-cards-moving}
+, {next-moving-card C0:card, NOT-cards-moving-west, NOT-cards-moving-east, NOT-cards-moving-south, NOT-cards-moving-north}
+, {new-headtail-card C0:card, NOT-cards-moving-west, NOT-cards-moving-east, NOT-cards-moving-south, NOT-cards-moving-north}
+>
+FD Mutex Groups:
+< {robot-at C0:card}:=1
+, {next-moving-card C0:card, NOT-cards-moving}:=1
+, {new-headtail-card C0:card, NOT-cards-moving}
+>

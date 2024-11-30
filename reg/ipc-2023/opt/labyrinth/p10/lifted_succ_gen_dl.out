@@ -1,0 +1,150 @@
+Step 0 (card-at card0 pos0 pos0) (card-at card1 pos1 pos0) (card-at card2 pos2 pos0) (card-at card3 pos3 pos0) (card-at card4 pos4 pos0) (card-at card5 pos5 pos0) (card-at card6 pos0 pos1) (card-at card7 pos1 pos1) (card-at card8 pos2 pos1) (card-at card9 pos3 pos1) (card-at card10 pos4 pos1) (card-at card11 pos5 pos1) (card-at card12 pos0 pos2) (card-at card13 pos1 pos2) (card-at card14 pos2 pos2) (card-at card15 pos3 pos2) (card-at card16 pos4 pos2) (card-at card17 pos5 pos2) (card-at card23 pos0 pos3) (card-at card18 pos1 pos3) (card-at card19 pos2 pos3) (card-at card20 pos3 pos3) (card-at card21 pos4 pos3) (card-at card22 pos5 pos3) (card-at card24 pos0 pos4) (card-at card25 pos1 pos4) (card-at card26 pos2 pos4) (card-at card27 pos3 pos4) (card-at card28 pos4 pos4) (card-at card29 pos5 pos4) (card-at card30 pos0 pos5) (card-at card31 pos1 pos5) (card-at card32 pos2 pos5) (card-at card33 pos3 pos5) (card-at card34 pos4 pos5) (card-at card35 pos5 pos5) (robot-at card0) (NOT-robot-at card1) (NOT-robot-at card2) (NOT-robot-at card3) (NOT-robot-at card4) (NOT-robot-at card5) (NOT-robot-at card6) (NOT-robot-at card7) (NOT-robot-at card8) (NOT-robot-at card9) (NOT-robot-at card10) (NOT-robot-at card11) (NOT-robot-at card12) (NOT-robot-at card13) (NOT-robot-at card14) (NOT-robot-at card15) (NOT-robot-at card16) (NOT-robot-at card17) (NOT-robot-at card18) (NOT-robot-at card19) (NOT-robot-at card20) (NOT-robot-at card21) (NOT-robot-at card22) (NOT-robot-at card23) (NOT-robot-at card24) (NOT-robot-at card25) (NOT-robot-at card26) (NOT-robot-at card27) (NOT-robot-at card28) (NOT-robot-at card29) (NOT-robot-at card30) (NOT-robot-at card31) (NOT-robot-at card32) (NOT-robot-at card33) (NOT-robot-at card34) (NOT-robot-at card35) (NOT-cards-moving) (NOT-cards-moving-west) (NOT-cards-moving-east) (NOT-cards-moving-south) (NOT-cards-moving-north)
+size: 24
+move-east card0 pos0 pos0 e card1 pos1 pos0 w :: cost: 1
+    add: (NOT-robot-at card0) (robot-at card1)
+    del: (robot-at card0) (NOT-robot-at card1)
+move-south card0 pos0 pos0 s card6 pos0 pos1 n :: cost: 1
+    add: (NOT-robot-at card0) (robot-at card6)
+    del: (robot-at card0) (NOT-robot-at card6)
+start-move-card-west card6 pos0 pos1 card7 pos1 :: cost: 1
+    add: (new-headtail-card card6) (next-moving-card card7) (cards-moving) (cards-moving-west)
+    del: (card-at card6 pos0 pos1) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card12 pos0 pos2 card13 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card12) (next-moving-card card13)
+    del: (card-at card12 pos0 pos2) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card23 pos0 pos3 card18 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card23) (next-moving-card card18)
+    del: (card-at card23 pos0 pos3) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card24 pos0 pos4 card25 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card24) (next-moving-card card25)
+    del: (card-at card24 pos0 pos4) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card30 pos0 pos5 card31 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card30) (next-moving-card card31)
+    del: (card-at card30 pos0 pos5) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-east card5 pos5 pos0 card4 pos4 :: cost: 1
+    add: (cards-moving) (new-headtail-card card5) (next-moving-card card4) (cards-moving-east)
+    del: (card-at card5 pos5 pos0) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card11 pos5 pos1 card10 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card11) (next-moving-card card10)
+    del: (card-at card11 pos5 pos1) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card17 pos5 pos2 card16 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card17) (next-moving-card card16)
+    del: (card-at card17 pos5 pos2) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card22 pos5 pos3 card21 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card22) (next-moving-card card21)
+    del: (card-at card22 pos5 pos3) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card29 pos5 pos4 card28 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card29) (next-moving-card card28)
+    del: (card-at card29 pos5 pos4) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card35 pos5 pos5 card34 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card35) (next-moving-card card34)
+    del: (card-at card35 pos5 pos5) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-north card1 pos1 pos0 card7 pos1 :: cost: 1
+    add: (next-moving-card card7) (cards-moving) (new-headtail-card card1) (cards-moving-north)
+    del: (card-at card1 pos1 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card2 pos2 pos0 card8 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-north) (new-headtail-card card2) (next-moving-card card8)
+    del: (card-at card2 pos2 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card3 pos3 pos0 card9 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-north) (new-headtail-card card3) (next-moving-card card9)
+    del: (card-at card3 pos3 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card4 pos4 pos0 card10 pos1 :: cost: 1
+    add: (cards-moving) (next-moving-card card10) (cards-moving-north) (new-headtail-card card4)
+    del: (card-at card4 pos4 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card5 pos5 pos0 card11 pos1 :: cost: 1
+    add: (cards-moving) (new-headtail-card card5) (cards-moving-north) (next-moving-card card11)
+    del: (card-at card5 pos5 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-south card30 pos0 pos5 card24 pos4 :: cost: 1
+    add: (cards-moving) (new-headtail-card card30) (next-moving-card card24) (cards-moving-south)
+    del: (card-at card30 pos0 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card31 pos1 pos5 card25 pos4 :: cost: 1
+    add: (cards-moving) (next-moving-card card25) (cards-moving-south) (new-headtail-card card31)
+    del: (card-at card31 pos1 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card32 pos2 pos5 card26 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-south) (new-headtail-card card32) (next-moving-card card26)
+    del: (card-at card32 pos2 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card33 pos3 pos5 card27 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-south) (new-headtail-card card33) (next-moving-card card27)
+    del: (card-at card33 pos3 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card34 pos4 pos5 card28 pos4 :: cost: 1
+    add: (cards-moving) (next-moving-card card28) (cards-moving-south) (new-headtail-card card34)
+    del: (card-at card34 pos4 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card35 pos5 pos5 card29 pos4 :: cost: 1
+    add: (cards-moving) (new-headtail-card card35) (cards-moving-south) (next-moving-card card29)
+    del: (card-at card35 pos5 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+Step 1 (card-at card0 pos0 pos0) (card-at card1 pos1 pos0) (card-at card2 pos2 pos0) (card-at card3 pos3 pos0) (card-at card4 pos4 pos0) (card-at card5 pos5 pos0) (card-at card6 pos0 pos1) (card-at card7 pos1 pos1) (card-at card8 pos2 pos1) (card-at card9 pos3 pos1) (card-at card10 pos4 pos1) (card-at card11 pos5 pos1) (card-at card12 pos0 pos2) (card-at card13 pos1 pos2) (card-at card14 pos2 pos2) (card-at card15 pos3 pos2) (card-at card16 pos4 pos2) (card-at card17 pos5 pos2) (card-at card23 pos0 pos3) (card-at card18 pos1 pos3) (card-at card19 pos2 pos3) (card-at card20 pos3 pos3) (card-at card21 pos4 pos3) (card-at card22 pos5 pos3) (card-at card24 pos0 pos4) (card-at card25 pos1 pos4) (card-at card26 pos2 pos4) (card-at card27 pos3 pos4) (card-at card28 pos4 pos4) (card-at card29 pos5 pos4) (card-at card30 pos0 pos5) (card-at card31 pos1 pos5) (card-at card32 pos2 pos5) (card-at card33 pos3 pos5) (card-at card34 pos4 pos5) (card-at card35 pos5 pos5) (NOT-robot-at card2) (NOT-robot-at card3) (NOT-robot-at card4) (NOT-robot-at card5) (NOT-robot-at card6) (NOT-robot-at card7) (NOT-robot-at card8) (NOT-robot-at card9) (NOT-robot-at card10) (NOT-robot-at card11) (NOT-robot-at card12) (NOT-robot-at card13) (NOT-robot-at card14) (NOT-robot-at card15) (NOT-robot-at card16) (NOT-robot-at card17) (NOT-robot-at card18) (NOT-robot-at card19) (NOT-robot-at card20) (NOT-robot-at card21) (NOT-robot-at card22) (NOT-robot-at card23) (NOT-robot-at card24) (NOT-robot-at card25) (NOT-robot-at card26) (NOT-robot-at card27) (NOT-robot-at card28) (NOT-robot-at card29) (NOT-robot-at card30) (NOT-robot-at card31) (NOT-robot-at card32) (NOT-robot-at card33) (NOT-robot-at card34) (NOT-robot-at card35) (NOT-cards-moving) (NOT-cards-moving-west) (NOT-cards-moving-east) (NOT-cards-moving-south) (NOT-cards-moving-north) (NOT-robot-at card0) (robot-at card1)
+size: 24
+move-west card1 pos1 pos0 w card0 pos0 pos0 e :: cost: 1
+    add: (robot-at card0) (NOT-robot-at card1)
+    del: (NOT-robot-at card0) (robot-at card1)
+start-move-card-west card0 pos0 pos0 card1 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card0) (next-moving-card card1)
+    del: (card-at card0 pos0 pos0) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card6 pos0 pos1 card7 pos1 :: cost: 1
+    add: (new-headtail-card card6) (next-moving-card card7) (cards-moving) (cards-moving-west)
+    del: (card-at card6 pos0 pos1) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card12 pos0 pos2 card13 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card12) (next-moving-card card13)
+    del: (card-at card12 pos0 pos2) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card23 pos0 pos3 card18 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card23) (next-moving-card card18)
+    del: (card-at card23 pos0 pos3) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card24 pos0 pos4 card25 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card24) (next-moving-card card25)
+    del: (card-at card24 pos0 pos4) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-west card30 pos0 pos5 card31 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-west) (new-headtail-card card30) (next-moving-card card31)
+    del: (card-at card30 pos0 pos5) (NOT-cards-moving) (NOT-cards-moving-west)
+start-move-card-east card5 pos5 pos0 card4 pos4 :: cost: 1
+    add: (cards-moving) (new-headtail-card card5) (next-moving-card card4) (cards-moving-east)
+    del: (card-at card5 pos5 pos0) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card11 pos5 pos1 card10 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card11) (next-moving-card card10)
+    del: (card-at card11 pos5 pos1) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card17 pos5 pos2 card16 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card17) (next-moving-card card16)
+    del: (card-at card17 pos5 pos2) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card22 pos5 pos3 card21 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card22) (next-moving-card card21)
+    del: (card-at card22 pos5 pos3) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card29 pos5 pos4 card28 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card29) (next-moving-card card28)
+    del: (card-at card29 pos5 pos4) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-east card35 pos5 pos5 card34 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-east) (new-headtail-card card35) (next-moving-card card34)
+    del: (card-at card35 pos5 pos5) (NOT-cards-moving) (NOT-cards-moving-east)
+start-move-card-north card0 pos0 pos0 card6 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-north) (new-headtail-card card0) (next-moving-card card6)
+    del: (card-at card0 pos0 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card2 pos2 pos0 card8 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-north) (new-headtail-card card2) (next-moving-card card8)
+    del: (card-at card2 pos2 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card3 pos3 pos0 card9 pos1 :: cost: 1
+    add: (cards-moving) (cards-moving-north) (new-headtail-card card3) (next-moving-card card9)
+    del: (card-at card3 pos3 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card4 pos4 pos0 card10 pos1 :: cost: 1
+    add: (cards-moving) (next-moving-card card10) (cards-moving-north) (new-headtail-card card4)
+    del: (card-at card4 pos4 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-north card5 pos5 pos0 card11 pos1 :: cost: 1
+    add: (cards-moving) (new-headtail-card card5) (cards-moving-north) (next-moving-card card11)
+    del: (card-at card5 pos5 pos0) (NOT-cards-moving) (NOT-cards-moving-north)
+start-move-card-south card30 pos0 pos5 card24 pos4 :: cost: 1
+    add: (cards-moving) (new-headtail-card card30) (next-moving-card card24) (cards-moving-south)
+    del: (card-at card30 pos0 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card31 pos1 pos5 card25 pos4 :: cost: 1
+    add: (cards-moving) (next-moving-card card25) (cards-moving-south) (new-headtail-card card31)
+    del: (card-at card31 pos1 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card32 pos2 pos5 card26 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-south) (new-headtail-card card32) (next-moving-card card26)
+    del: (card-at card32 pos2 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card33 pos3 pos5 card27 pos4 :: cost: 1
+    add: (cards-moving) (cards-moving-south) (new-headtail-card card33) (next-moving-card card27)
+    del: (card-at card33 pos3 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card34 pos4 pos5 card28 pos4 :: cost: 1
+    add: (cards-moving) (next-moving-card card28) (cards-moving-south) (new-headtail-card card34)
+    del: (card-at card34 pos4 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+start-move-card-south card35 pos5 pos5 card29 pos4 :: cost: 1
+    add: (cards-moving) (new-headtail-card card35) (cards-moving-south) (next-moving-card card29)
+    del: (card-at card35 pos5 pos5) (NOT-cards-moving) (NOT-cards-moving-south)
+Step 2 (card-at card1 pos1 pos0) (card-at card2 pos2 pos0) (card-at card3 pos3 pos0) (card-at card4 pos4 pos0) (card-at card5 pos5 pos0) (card-at card6 pos0 pos1) (card-at card7 pos1 pos1) (card-at card8 pos2 pos1) (card-at card9 pos3 pos1) (card-at card10 pos4 pos1) (card-at card11 pos5 pos1) (card-at card12 pos0 pos2) (card-at card13 pos1 pos2) (card-at card14 pos2 pos2) (card-at card15 pos3 pos2) (card-at card16 pos4 pos2) (card-at card17 pos5 pos2) (card-at card23 pos0 pos3) (card-at card18 pos1 pos3) (card-at card19 pos2 pos3) (card-at card20 pos3 pos3) (card-at card21 pos4 pos3) (card-at card22 pos5 pos3) (card-at card24 pos0 pos4) (card-at card25 pos1 pos4) (card-at card26 pos2 pos4) (card-at card27 pos3 pos4) (card-at card28 pos4 pos4) (card-at card29 pos5 pos4) (card-at card30 pos0 pos5) (card-at card31 pos1 pos5) (card-at card32 pos2 pos5) (card-at card33 pos3 pos5) (card-at card34 pos4 pos5) (card-at card35 pos5 pos5) (NOT-robot-at card2) (NOT-robot-at card3) (NOT-robot-at card4) (NOT-robot-at card5) (NOT-robot-at card6) (NOT-robot-at card7) (NOT-robot-at card8) (NOT-robot-at card9) (NOT-robot-at card10) (NOT-robot-at card11) (NOT-robot-at card12) (NOT-robot-at card13) (NOT-robot-at card14) (NOT-robot-at card15) (NOT-robot-at card16) (NOT-robot-at card17) (NOT-robot-at card18) (NOT-robot-at card19) (NOT-robot-at card20) (NOT-robot-at card21) (NOT-robot-at card22) (NOT-robot-at card23) (NOT-robot-at card24) (NOT-robot-at card25) (NOT-robot-at card26) (NOT-robot-at card27) (NOT-robot-at card28) (NOT-robot-at card29) (NOT-robot-at card30) (NOT-robot-at card31) (NOT-robot-at card32) (NOT-robot-at card33) (NOT-robot-at card34) (NOT-robot-at card35) (NOT-cards-moving-east) (NOT-cards-moving-south) (NOT-cards-moving-north) (NOT-robot-at card0) (robot-at card1) (cards-moving) (cards-moving-west) (new-headtail-card card0) (next-moving-card card1)
+size: 0

@@ -497,6 +497,13 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         updateTestStatTime(test->id, pddlTimerElapsedInSF(&timer));
 
         restoreStdOutErr(fd_stdout, fd_stderr);
+        if (verbose > 3){
+            sem_wait(&shared->lock);
+            fprintf(stderr, "Time of test %s on task %s: %.2fs\n",
+                    test->name, TEST_TASK, pddlTimerElapsedInSF(&timer));
+            fflush(stderr);
+            sem_post(&shared->lock);
+        }
 
         sem_wait(&shared->lock);
         shared->jobs_done += 1;
