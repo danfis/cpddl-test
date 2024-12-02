@@ -12,14 +12,9 @@ Compile-in LMG: Found mutex condition for action 'rotate-second-pass' and mgroup
 Compile-in LMG: Precondition of action 'rotate-second-pass' extended with (or (not (= ?n1x ?n2x)) (not (= ?n1y ?n2y)) (not (= ?n1dir right)))
 Compile-in LMG: PDDL-Norm: BEGIN
 Compile-in LMG: PDDL-Norm: Before normalization: types: 5, objects: 47, predicates: 11, functions: 3, actions: 8, action-pre-size: [min: 11, max: 3, avg: 7.25, med: 6.50]
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
-Compile-in LMG: PDDL-Norm: Detected irrelevant action: rotate-second-pass
+Compile-in LMG: PDDL-Norm: Removed actions with unsatisfiable parameters: types: 5, objects: 47, predicates: 11, functions: 3, actions: 8, action-pre-size: [min: 11, max: 3, avg: 7.25, med: 6.50]
+Compile-in LMG: PDDL-Norm: Actions normalized: types: 5, objects: 47, predicates: 11, functions: 3, actions: 8, action-pre-size: [min: 9, max: 3, avg: 6.25, med: 5.50]
+Compile-in LMG: PDDL-Norm: Actions split: types: 5, objects: 47, predicates: 11, functions: 3, actions: 8, action-pre-size: [min: 9, max: 3, avg: 6.25, med: 5.50]
 Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
 Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
@@ -28,8 +23,8 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-first-pass
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-first-pass-end
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-second-pass-end
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-second-pass
+Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-second-pass-end
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-second-pass
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-second-pass
 Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action rotate-second-pass
@@ -47,6 +42,7 @@ Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
 Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
 Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
 Compile-in LMG: PDDL-Norm: Neg-Cond: END
+Compile-in LMG: PDDL-Norm: Removed irrelevant/unreachable predicates/functions/actions: types: 5, objects: 47, predicates: 11, functions: 3, actions: 8, action-pre-size: [min: 9, max: 3, avg: 6.25, med: 5.50]
 Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 5, objects: 47, predicates: 11, functions: 3, actions: 8, action-pre-size: [min: 9, max: 3, avg: 6.25, med: 5.50]
 Compile-in LMG: PDDL-Norm: END
 Compile-in LMG: DONE. actions: 8
@@ -140,20 +136,20 @@ Action[8]:
     rotate-first-pass-end: ?nstart:1 ?r:4 ?n1:1 ?n2:1 ?n2x:2 ?n2y:2
         pre: (and (R:end-node ?n2) (R:connected ?n1 ?n2) (RW:at ?n2 ?n2x ?n2y) (RW:node-first-pass-next ?nstart ?r ?n1))
         eff: (and (N:RW:at ?n2 ?n2x ?n2y) (RW:free ?n2x ?n2y) (N:RW:node-first-pass-next ?nstart ?r ?n1) (RW:node-second-pass-next ?nstart) (increase (total-cost) (update-cost)))
+    rotate-second-pass: ?n1:1 ?n1x:2 ?n1y:2 ?n1dir:3 ?n2:1 ?n2x:2 ?n2y:2
+        pre: (and (R:= ?n1x ?n2x) (N:R:= ?n1y ?n2y) (R:= ?n1dir up) (R:coord-inc ?n1y ?n2y) (R:connected ?n1 ?n2) (RW:at ?n1 ?n1x ?n1y) (RW:heading ?n1 up) (RW:free ?n2x ?n2y) (RW:node-second-pass-next ?n1))
+        eff: (and (RW:at ?n2 ?n2x ?n2y) (N:RW:free ?n2x ?n2y) (N:RW:node-second-pass-next ?n1) (RW:node-second-pass-next ?n2) (increase (total-cost) (update-cost)))
     rotate-second-pass-end: ?n:1
         pre: (and (R:end-node ?n) (RW:node-second-pass-next ?n))
         eff: (and (N:RW:node-second-pass-next ?n) (RW:NOT-rotating) (increase (total-cost) (update-cost)))
+    rotate-second-pass: ?n1:1 ?n1x:2 ?n1y:2 ?n1dir:3 ?n2:1 ?n2x:2 ?n2y:2
+        pre: (and (R:= ?n1x ?n2x) (N:R:= ?n1y ?n2y) (R:= ?n1dir down) (R:coord-inc ?n2y ?n1y) (R:connected ?n1 ?n2) (RW:at ?n1 ?n1x ?n1y) (RW:heading ?n1 down) (RW:free ?n2x ?n2y) (RW:node-second-pass-next ?n1))
+        eff: (and (RW:at ?n2 ?n2x ?n2y) (N:RW:free ?n2x ?n2y) (N:RW:node-second-pass-next ?n1) (RW:node-second-pass-next ?n2) (increase (total-cost) (update-cost)))
     rotate-second-pass: ?n1:1 ?n1x:2 ?n1y:2 ?n1dir:3 ?n2:1 ?n2x:2 ?n2y:2
         pre: (and (N:R:= ?n1x ?n2x) (R:= ?n1y ?n2y) (R:= ?n1dir left) (R:coord-inc ?n2x ?n1x) (R:connected ?n1 ?n2) (RW:at ?n1 ?n1x ?n1y) (RW:heading ?n1 left) (RW:free ?n2x ?n2y) (RW:node-second-pass-next ?n1))
         eff: (and (RW:at ?n2 ?n2x ?n2y) (N:RW:free ?n2x ?n2y) (N:RW:node-second-pass-next ?n1) (RW:node-second-pass-next ?n2) (increase (total-cost) (update-cost)))
     rotate-second-pass: ?n1:1 ?n1x:2 ?n1y:2 ?n1dir:3 ?n2:1 ?n2x:2 ?n2y:2
         pre: (and (N:R:= ?n1x ?n2x) (R:= ?n1y ?n2y) (R:= ?n1dir right) (R:coord-inc ?n1x ?n2x) (R:connected ?n1 ?n2) (RW:at ?n1 ?n1x ?n1y) (RW:heading ?n1 right) (RW:free ?n2x ?n2y) (RW:node-second-pass-next ?n1))
-        eff: (and (RW:at ?n2 ?n2x ?n2y) (N:RW:free ?n2x ?n2y) (N:RW:node-second-pass-next ?n1) (RW:node-second-pass-next ?n2) (increase (total-cost) (update-cost)))
-    rotate-second-pass: ?n1:1 ?n1x:2 ?n1y:2 ?n1dir:3 ?n2:1 ?n2x:2 ?n2y:2
-        pre: (and (R:= ?n1x ?n2x) (N:R:= ?n1y ?n2y) (R:= ?n1dir up) (R:coord-inc ?n1y ?n2y) (R:connected ?n1 ?n2) (RW:at ?n1 ?n1x ?n1y) (RW:heading ?n1 up) (RW:free ?n2x ?n2y) (RW:node-second-pass-next ?n1))
-        eff: (and (RW:at ?n2 ?n2x ?n2y) (N:RW:free ?n2x ?n2y) (N:RW:node-second-pass-next ?n1) (RW:node-second-pass-next ?n2) (increase (total-cost) (update-cost)))
-    rotate-second-pass: ?n1:1 ?n1x:2 ?n1y:2 ?n1dir:3 ?n2:1 ?n2x:2 ?n2y:2
-        pre: (and (R:= ?n1x ?n2x) (N:R:= ?n1y ?n2y) (R:= ?n1dir down) (R:coord-inc ?n2y ?n1y) (R:connected ?n1 ?n2) (RW:at ?n1 ?n1x ?n1y) (RW:heading ?n1 down) (RW:free ?n2x ?n2y) (RW:node-second-pass-next ?n1))
         eff: (and (RW:at ?n2 ?n2x ?n2y) (N:RW:free ?n2x ?n2y) (N:RW:node-second-pass-next ?n1) (RW:node-second-pass-next ?n2) (increase (total-cost) (update-cost)))
 Init[791]:
   S:(next-direction left clockwise up)

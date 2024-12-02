@@ -459,8 +459,6 @@ static void *thTimeout(void *_)
 
 static void runTest(worker_t *worker, int task_id, const test_def_t *test)
 {
-    if (verbose == 0 && !no_progress)
-        progress();
     fflush(stdout);
     fflush(stderr);
     int pid = fork();
@@ -770,6 +768,18 @@ static void cleanRegDir(void)
     printf("\n");
 }
 
+static int th_progress_end = 0;
+static void *thProgress(void *_)
+{
+    while (1){
+        if (th_progress_end)
+            return NULL;
+        sleep(1);
+        progress();
+    }
+    return NULL;
+}
+
 int main(int argc, char *argv[])
 {
     tasksTestsInit();
@@ -815,6 +825,11 @@ int main(int argc, char *argv[])
         worker[w].pid = -1;
     }
 
+    pthread_t th_progress;
+    if (verbose == 0 && !no_progress){
+        pthread_create(&th_progress, NULL, thProgress, NULL);
+    }
+
     int num_active_workers = 0;
     for (int task_id = 0; task_id < num_tasks; ++task_id){
         if (!tasksTestsTaskIsEnabled(task_id))
@@ -834,6 +849,11 @@ int main(int argc, char *argv[])
     while (num_active_workers > 0){
         waitForWorker(worker);
         --num_active_workers;
+    }
+
+    if (verbose == 0 && !no_progress){
+        th_progress_end = 1;
+        pthread_join(th_progress, NULL);
     }
 
     printReport();
