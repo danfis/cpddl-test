@@ -20,7 +20,6 @@ function run_test(){
     echo "$apptainer_args" | grep -q -- '--no-bliss' || have_bliss=yes
     echo "$apptainer_args" | grep -q -- '--highs' && have_lp=yes
     echo "$apptainer_args" | grep -q -- '--cplex' && have_lp=yes
-    echo "$apptainer_args" | grep -q -- '--coin-or' && have_lp=yes
     echo "$apptainer_args" | grep -q -- '--minizinc' && have_minizinc=yes
     echo "$apptainer_args" | grep -q -- '--clingo' && have_clingo=yes
 
@@ -149,12 +148,10 @@ run_test $@ --werror --clang-ver 16 debian-bullseye
 run_test $@ --highs --werror debian-bullseye
 run_test $@ --highs --minizinc --werror debian-bullseye
 run_test $@ --highs --minizinc --clingo --werror debian-bullseye
-run_test $@ --coin-or --werror debian-bullseye
 run_test "$@" --werror debian-buster
 
 run_test $@ --werror ubuntu-mantic
 run_test $@ --highs --werror ubuntu-mantic
-run_test $@ --coin-or --werror ubuntu-mantic
 run_test $@ --werror ubuntu-jammy
 run_test $@ --highs --werror ubuntu-jammy
 run_test $@ --werror ubuntu-focal
