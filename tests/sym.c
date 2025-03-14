@@ -4,8 +4,8 @@
 
 TEST_COND(symmetry, strips_pruned, BLISS)
 {
-    int *fact_used = PDDL_CALLOC_ARR(int, C.strips.fact.fact_size);
-    int *op_used = PDDL_CALLOC_ARR(int, C.strips.op.op_size);
+    int *fact_used = PDDL_ZALLOC_ARR(int, C.strips.fact.fact_size);
+    int *op_used = PDDL_ZALLOC_ARR(int, C.strips.op.op_size);
     pddl_strips_sym_t sym;
     pddlStripsSymInitPDG(&sym, &C.strips);
 

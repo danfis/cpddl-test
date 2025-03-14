@@ -126,7 +126,7 @@ TEST(h2fwbw, h2)
     }
 
     if (pddlISetSize(&h2fwbw_unreachable_fact) > 0){
-        int *remap = PDDL_CALLOC_ARR(int, C.strips.fact.fact_size);
+        int *remap = PDDL_ZALLOC_ARR(int, C.strips.fact.fact_size);
         int new_size = pddlFactsDelFactsGenRemap(C.strips.fact.fact_size,
                                                  &h2fwbw_unreachable_fact, remap);
         pddlMutexPairsRemapFacts(&mutex2, new_size, remap);

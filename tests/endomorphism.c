@@ -10,7 +10,7 @@ static void tEndomorphismLifted(int relaxed, int ignore_costs)
     cfg.run_in_subprocess = pddl_false;
 
     PDDL_ISET(redundant);
-    int *map = PDDL_CALLOC_ARR(int, C.pddl.obj.obj_size);
+    int *map = PDDL_ZALLOC_ARR(int, C.pddl.obj.obj_size);
     int ret;
     if (relaxed){
         ret = pddlEndomorphismRelaxedLifted(&C.pddl, &cfg,
@@ -53,7 +53,7 @@ static void tEndomorphismLifted(int relaxed, int ignore_costs)
     assert(pddlISetSize(&redundant) == pddlISetSize(&redundant2));
     pddlISetFree(&redundant2);
 
-    int *map2 = PDDL_CALLOC_ARR(int, C.pddl.obj.obj_size);
+    int *map2 = PDDL_ZALLOC_ARR(int, C.pddl.obj.obj_size);
     if (relaxed){
         ret = pddlEndomorphismRelaxedLifted(&C.pddl, &cfg, NULL, map2, &C.err);
     }else{
