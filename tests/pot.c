@@ -50,12 +50,14 @@ TEST(pot_init, pot)
 
     pddl_pot_t pot;
     pddlPotInitFDR(&pot, &C.fdr);
-    pddlPotEnableOpPot(&pot, 1, 0);
     pddlPotSetObjFDRState(&pot, &C.fdr.var, C.fdr.init);
+
+    pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
+    sol_cfg.op_pot = pddl_true;
 
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    int ret = pddlPotSolve(&pot, &sol, &C.err);
+    int ret = pddlPotSolve(&pot, &sol_cfg, &sol, &C.err);
     assert(ret == 0);
     assert(sol.found);
     assert(!sol.suboptimal);
@@ -79,12 +81,14 @@ TEST(pot_all_states, pot_init)
 
     pddl_pot_t pot;
     pddlPotInitFDR(&pot, &C.fdr);
-    pddlPotEnableOpPot(&pot, 1, 0);
     pddlPotSetObjFDRAllSyntacticStates(&pot, &C.fdr.var);
+
+    pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
+    sol_cfg.op_pot = pddl_true;
 
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    int ret = pddlPotSolve(&pot, &sol, &C.err);
+    int ret = pddlPotSolve(&pot, &sol_cfg, &sol, &C.err);
     assert(ret == 0);
     assert(sol.found);
     assert(!sol.suboptimal);
@@ -115,12 +119,14 @@ TEST(pot_mg_strips_init, pot_init)
     pddlStripsPrintDebug(&mg_strips.strips, stdout);
 
     pddl_pot_t pot;
-    pddlPotInitMGStrips(&pot, &mg_strips, &mutex);
+    pddlPotInit(&pot, &mg_strips, &mutex);
     pddlPotSetObjStripsState(&pot, &mg_strips.strips.init);
+
+    pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
 
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    pddlPotSolve(&pot, &sol, &C.err);
+    pddlPotSolve(&pot, &sol_cfg, &sol, &C.err);
     assert(sol.found);
     assert(!sol.suboptimal);
     assert(!sol.timed_out);
@@ -151,12 +157,14 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddlH2(&mg_strips.strips, &mutex, NULL, NULL, 0., &C.err);
 
     pddl_pot_t pot;
-    pddlPotInitMGStrips(&pot, &mg_strips, &mutex);
+    pddlPotInit(&pot, &mg_strips, &mutex);
     pddlPotSetObjStripsState(&pot, &mg_strips.strips.init);
+
+    pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
 
     pddl_pot_solution_t sol;
     pddlPotSolutionInit(&sol);
-    pddlPotSolve(&pot, &sol, &C.err);
+    pddlPotSolve(&pot, &sol_cfg, &sol, &C.err);
     assert(sol.found);
     assert(!sol.suboptimal);
     assert(!sol.timed_out);
@@ -242,26 +250,21 @@ TEST_TEAR_DOWN(hpot)
 
 TEST(hpot_init, hpot)
 {
-    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    cfg_init.fdr_state = C.fdr.init;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_init);
+    hcfg.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hcfg.opt_state.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg, task);
 }
 
 TEST(hpot_all_states, hpot)
 {
-    pddl_hpot_config_opt_all_syntactic_states_t cfg_all
-            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all);
+    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     _test_hpot1(&hcfg, task);
 }
 
 TEST(hpot_all_states_cinit, hpot)
 {
-    pddl_hpot_config_opt_all_syntactic_states_t cfg_all_cinit
-            = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
-    cfg_all_cinit.add_fdr_state_constr = C.fdr.init;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_all_cinit);
+    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt_all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg, task);
 }
 
@@ -283,8 +286,7 @@ TEST(pot_conj, hpot)
         cfg.max_num_conjs = 50;
 
     pddl_hpot_config_t pot_cfg = PDDL_HPOT_CONFIG_INIT;
-    pddl_hpot_config_opt_state_t cfginit = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    PDDL_HPOT_CONFIG_ADD(&pot_cfg, &cfginit);
+    pot_cfg.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     int ret = pddlPotConjFind(&conjs, &conjs_best_h_value, NULL,
                               &hcfg.mg_strips->strips, hcfg.mutex,
@@ -331,8 +333,7 @@ TEST(pot_conj_init, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    pddl_hpot_config_opt_state_t cfg_init = PDDL_HPOT_CONFIG_OPT_STATE_INIT;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg_init);
+    hcfg.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
@@ -352,10 +353,8 @@ TEST(pot_conj_all, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    pddl_hpot_config_opt_all_syntactic_states_t cfg
-                = PDDL_HPOT_CONFIG_OPT_ALL_SYNTACTIC_STATES_INIT;
-    cfg.add_init_state_constr = pddl_true;
-    PDDL_HPOT_CONFIG_ADD(&hcfg, &cfg);
+    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
