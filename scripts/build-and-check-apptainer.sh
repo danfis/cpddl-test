@@ -29,6 +29,5 @@ run_test "$@" --run-all-tests --werror --cplex /opt/cplex/cplex_studio2211.linux
 run_test "$@" --run-all-tests --werror alpine
 run_test "$@" --run-all-tests --werror photon
 run_test "$@" --run-all-tests --werror debian-bullseye
-run_test "$@" --run-all-tests --werror --cplex /opt/cplex/cplex_studio2211.linux_x86_64.bin ubuntu-mantic
 run_test "$@" --run-all-tests --werror --cplex /opt/cplex/cplex_studio2211.linux_x86_64.bin ubuntu-jammy
 run_test "$@" --run-all-tests --werror --cplex /opt/cplex/cplex_studio2211.linux_x86_64.bin fedora
