@@ -48,8 +48,11 @@ TEST(pot_init, pot)
     if (C.fdr.goal_is_unreachable)
         return;
 
+    pddl_pot_config_t cfg = PDDL_POT_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+
     pddl_pot_t pot;
-    pddlPotInitFDR(&pot, &C.fdr);
+    pddlPotInit(&pot, &cfg);
     pddlPotSetObjFDRState(&pot, &C.fdr.var, C.fdr.init);
 
     pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
@@ -79,8 +82,11 @@ TEST(pot_all_states, pot_init)
     if (C.fdr.goal_is_unreachable)
         return;
 
+    pddl_pot_config_t cfg = PDDL_POT_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+
     pddl_pot_t pot;
-    pddlPotInitFDR(&pot, &C.fdr);
+    pddlPotInit(&pot, &cfg);
     pddlPotSetObjFDRAllSyntacticStates(&pot, &C.fdr.var);
 
     pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
@@ -118,8 +124,12 @@ TEST(pot_mg_strips_init, pot_init)
     pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
     pddlStripsPrintDebug(&mg_strips.strips, stdout);
 
+    pddl_pot_config_t cfg = PDDL_POT_CONFIG_INIT;
+    cfg.mg_strips = &mg_strips;
+    cfg.mutex = &mutex;
+
     pddl_pot_t pot;
-    pddlPotInit(&pot, &mg_strips, &mutex);
+    pddlPotInit(&pot, &cfg);
     pddlPotSetObjStripsState(&pot, &mg_strips.strips.init);
 
     pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
@@ -156,8 +166,12 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
     pddlH2(&mg_strips.strips, &mutex, NULL, NULL, 0., &C.err);
 
+    pddl_pot_config_t cfg = PDDL_POT_CONFIG_INIT;
+    cfg.mg_strips = &mg_strips;
+    cfg.mutex = &mutex;
+
     pddl_pot_t pot;
-    pddlPotInit(&pot, &mg_strips, &mutex);
+    pddlPotInit(&pot, &cfg);
     pddlPotSetObjStripsState(&pot, &mg_strips.strips.init);
 
     pddl_pot_solve_config_t sol_cfg = PDDL_POT_SOLVE_CONFIG_INIT;
