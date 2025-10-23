@@ -202,7 +202,7 @@ enum pddl_req_attr { E_EQUALITY              =    1,
   Functions relating to error handling
   ---------------------------------------------------------------------------*/
 
-void requires(pddl_req_flag);
+void xrequires(pddl_req_flag);
 extern bool types_defined;
 extern bool types_used;
 //string pddl_req_flags_string(pddl_req_flag flags);

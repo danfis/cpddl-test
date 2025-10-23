@@ -820,7 +820,7 @@ namespace VAL {
 bool types_defined = false;
 bool types_used = false;
 
-void requires(pddl_req_flag flags)
+void xrequires(pddl_req_flag flags)
 {
     if (!(flags & current_analysis->req))
 	current_analysis->error_list.add(

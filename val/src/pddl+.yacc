@@ -351,7 +351,7 @@ c_new_pred_symbol :
 
 c_pred_symbol :
     EQ   { $$=current_analysis->pred_tab.symbol_ref("=");
-	      requires(E_EQUALITY); }
+	      xrequires(E_EQUALITY); }
 |   NAME { $$=current_analysis->pred_tab.symbol_get($1); delete [] $1; }
 ;
 
@@ -402,7 +402,7 @@ c_typed_var_list :        /* Type specified */
       $$->set_types($3);           /* Set types for variables */
       $$->splice($$->end(),*$4);   /* Join lists */
       delete $4;                   /* Delete (now empty) list */
-      requires(E_TYPING);
+      xrequires(E_TYPING);
       types_used = true;
    }
 |  c_var_symbol_list HYPHEN c_either_type c_typed_var_list
@@ -411,7 +411,7 @@ c_typed_var_list :        /* Type specified */
       $$->set_either_types($3);    /* Set types for variables */
       $$->splice($$->end(),*$4);   /* Join lists */
       delete $4;                   /* Delete (now empty) list */
-      requires(E_TYPING);
+      xrequires(E_TYPING);
       types_used = true;
    }
 |  c_var_symbol_list                /* No type specified */
@@ -440,7 +440,7 @@ c_typed_consts :
       $1->set_types($3);           /* Set types for constants */
       $1->splice($1->end(),*$4); /* Join lists */
       delete $4;                   /* Delete (now empty) list */
-      requires(E_TYPING);
+      xrequires(E_TYPING);
       types_used = true;
    }
 |  c_new_const_symbols HYPHEN c_either_type c_typed_consts
@@ -449,7 +449,7 @@ c_typed_consts :
       $1->set_either_types($3);
       $1->splice($1->end(),*$4);
       delete $4;
-      requires(E_TYPING);
+      xrequires(E_TYPING);
       types_used = true;
    }
 | /* No type specified */
@@ -557,12 +557,12 @@ c_init_els :
 	  $$->assign_effects.push_back(new assignment($4,E_ASSIGN,$5));
           if($4->getFunction()->getName()=="total-cost")
           {
-          	requires(E_ACTIONCOSTS);
+          	xrequires(E_ACTIONCOSTS);
           	// Should also check that $5 is 0...
 		  }
           else
           {
-          	requires(E_NFLUENTS);
+          	xrequires(E_NFLUENTS);
           }
 	}
 |   c_init_els c_init_pos_simple_effect
@@ -577,16 +577,16 @@ c_init_els :
 
 c_timed_initial_literal :
    OPEN_BRAC AT_TIME c_init_els CLOSE_BRAC
-   { requires(E_TIMED_INITIAL_LITERALS);
+   { xrequires(E_TIMED_INITIAL_LITERALS);
    		$$=new timed_initial_literal($3,$2);}
 ;
 
 c_effects :
     c_a_effect    c_effects       {$$=$2; $$->append_effects($1); delete $1;}
 |   c_cond_effect c_effects       {$$=$2; $$->cond_effects.push_front($1);
-                                      requires(E_COND_EFFS);}
+                                      xrequires(E_COND_EFFS);}
 |   c_forall_effect c_effects     {$$=$2; $$->forall_effects.push_front($1);
-                                      requires(E_COND_EFFS);}
+                                      xrequires(E_COND_EFFS);}
 |   /* nothing */                 {$$=new effect_lists(); }
 ;
 
@@ -615,7 +615,7 @@ c_p_effect :
         {$$=new effect_lists; $$->add_effects.push_front($1);}
 |   c_assignment
         {$$=new effect_lists; $$->assign_effects.push_front($1);
-         requires(E_NFLUENTS);}
+         xrequires(E_NFLUENTS);}
 ;
 
 
@@ -623,7 +623,7 @@ c_p_effects :
     c_p_effects c_neg_simple_effect {$$= $1; $$->del_effects.push_back($2);}
 |   c_p_effects c_pos_simple_effect {$$= $1; $$->add_effects.push_back($2);}
 |   c_p_effects c_assignment        {$$= $1; $$->assign_effects.push_back($2);
-                                     requires(E_NFLUENTS); }
+                                     xrequires(E_NFLUENTS); }
 |   /* empty */  { $$= new effect_lists; }
 ;
 
@@ -647,24 +647,24 @@ c_da_effect :
         { $$= new effect_lists;
           $$->forall_effects.push_back(
 	       new forall_effect($6, $4, current_analysis->var_tab_stack.pop()));
-          requires(E_COND_EFFS);}
+          xrequires(E_COND_EFFS);}
 |   OPEN_BRAC WHEN c_da_gd c_da_effect CLOSE_BRAC
         { $$= new effect_lists;
 	  $$->cond_effects.push_back(
 	       new cond_effect($3,$4));
-          requires(E_COND_EFFS); }
+          xrequires(E_COND_EFFS); }
 |   OPEN_BRAC WHENEVER c_goal_descriptor c_da_cts_only_effect CLOSE_BRAC
         { $$= new effect_lists;
 	  $$->cond_assign_effects.push_back(
 	       new cond_effect($3,$4));
-          requires(E_COND_EFFS); }
+          xrequires(E_COND_EFFS); }
 |   c_timed_effect
         { $$=new effect_lists;
           $$->timed_effects.push_back($1); }
 |   c_assignment
         { $$= new effect_lists;
 	  $$->assign_effects.push_front($1);
-          requires(E_NFLUENTS); }
+          xrequires(E_NFLUENTS); }
 ;
 
 c_da_effects :
@@ -714,12 +714,12 @@ c_da_cts_only_effect :
         { $$= new effect_lists;
           $$->forall_effects.push_back(
 	       new forall_effect($6, $4, current_analysis->var_tab_stack.pop()));
-          requires(E_COND_EFFS);}
+          xrequires(E_COND_EFFS);}
 |   OPEN_BRAC WHENEVER c_goal_descriptor c_da_cts_only_effect CLOSE_BRAC
         { $$= new effect_lists;
 	  $$->cond_assign_effects.push_back(
 	       new cond_effect($3,$4));
-          requires(E_COND_EFFS); }
+          xrequires(E_COND_EFFS); }
 |   c_cts_only_timed_effect
         { $$=new effect_lists;
           $$->timed_effects.push_back($1); }
@@ -742,7 +742,7 @@ c_p_effect_da :
         {$$=new effect_lists; $$->add_effects.push_front($1);}
 |   c_f_assign_da
         {$$=new effect_lists; $$->assign_effects.push_front($1);
-         requires(E_NFLUENTS);}
+         xrequires(E_NFLUENTS);}
 ;
 
 
@@ -750,7 +750,7 @@ c_p_effects_da :
     c_p_effects_da c_neg_simple_effect {$$= $1; $$->del_effects.push_back($2);}
 |   c_p_effects_da c_pos_simple_effect {$$= $1; $$->add_effects.push_back($2);}
 |   c_p_effects_da c_f_assign_da       {$$= $1; $$->assign_effects.push_back($2);
-                                     requires(E_NFLUENTS); }
+                                     xrequires(E_NFLUENTS); }
 |   /* empty */  { $$= new effect_lists; }
 ;
 
@@ -793,7 +793,7 @@ c_proc_effects :
 c_f_exp_da :
     c_binary_expr_da {$$= $1;}
 |   Q DURATION_VAR {$$= new special_val_expr(E_DURATION_VAR);
-                    requires( E_DURATION_INEQUALITIES );}
+                    xrequires( E_DURATION_INEQUALITIES );}
 |   c_number { $$=$1; }
 |   c_f_head  { $$= $1; }
 ;
@@ -824,8 +824,8 @@ c_duration_constraint :
 ;
 
 c_d_op :
-    LESSEQ   {$$= E_LESSEQ; requires(E_DURATION_INEQUALITIES);}
-|   GREATEQ  {$$= E_GREATEQ; requires(E_DURATION_INEQUALITIES);}
+    LESSEQ   {$$= E_LESSEQ; xrequires(E_DURATION_INEQUALITIES);}
+|   GREATEQ  {$$= E_GREATEQ; xrequires(E_DURATION_INEQUALITIES);}
 |   EQ       {$$= E_EQUALS; }
 ;
 
@@ -891,17 +891,17 @@ c_assignment :
 
 c_f_exp :
     OPEN_BRAC HYPHEN c_f_exp CLOSE_BRAC %prec UMINUS
-        { $$= new uminus_expression($3); requires(E_NFLUENTS); }
+        { $$= new uminus_expression($3); xrequires(E_NFLUENTS); }
 |   OPEN_BRAC PLUS c_f_exp c_f_exp CLOSE_BRAC
-        { $$= new plus_expression($3,$4); requires(E_NFLUENTS); }
+        { $$= new plus_expression($3,$4); xrequires(E_NFLUENTS); }
 |   OPEN_BRAC HYPHEN c_f_exp c_f_exp CLOSE_BRAC
-        { $$= new minus_expression($3,$4); requires(E_NFLUENTS); }
+        { $$= new minus_expression($3,$4); xrequires(E_NFLUENTS); }
 |   OPEN_BRAC MUL c_f_exp c_f_exp CLOSE_BRAC
-        { $$= new mul_expression($3,$4); requires(E_NFLUENTS); }
+        { $$= new mul_expression($3,$4); xrequires(E_NFLUENTS); }
 |   OPEN_BRAC DIV c_f_exp c_f_exp CLOSE_BRAC
-        { $$= new div_expression($3,$4); requires(E_NFLUENTS); }
+        { $$= new div_expression($3,$4); xrequires(E_NFLUENTS); }
 |   c_number { $$=$1; }
-|   c_f_head  { $$= $1; requires(E_NFLUENTS); }
+|   c_f_head  { $$= $1; xrequires(E_NFLUENTS); }
 ;
 
 c_f_exp_t :
@@ -982,37 +982,37 @@ c_pre_goal_descriptor :
 |   OPEN_BRAC c_forall OPEN_BRAC c_typed_var_list CLOSE_BRAC
         c_pre_goal_descriptor CLOSE_BRAC
         {$$= new qfied_goal(E_FORALL,$4,$6,current_analysis->var_tab_stack.pop());
-        requires(E_UNIV_PRECS);}
+        xrequires(E_UNIV_PRECS);}
  | OPEN_BRAC AND CLOSE_BRAC {$$ = new conj_goal(new goal_list);}
  | OPEN_BRAC CLOSE_BRAC {$$ = new conj_goal(new goal_list);}
 ;
 
 c_pref_con_goal :
 	OPEN_BRAC PREFERENCE c_constraint_goal CLOSE_BRAC
-		{$$ = new preference($3);requires(E_PREFERENCES);}
+		{$$ = new preference($3);xrequires(E_PREFERENCES);}
 |   OPEN_BRAC PREFERENCE NAME c_constraint_goal CLOSE_BRAC
-		{$$ = new preference($3,$4);requires(E_PREFERENCES);}
+		{$$ = new preference($3,$4);xrequires(E_PREFERENCES);}
 |   OPEN_BRAC AND c_pref_con_goal_list CLOSE_BRAC
 		{$$ = new conj_goal($3);}
 |   OPEN_BRAC c_forall OPEN_BRAC c_typed_var_list CLOSE_BRAC
         c_pref_goal CLOSE_BRAC
         {$$= new qfied_goal(E_FORALL,$4,$6,current_analysis->var_tab_stack.pop());
-                requires(E_UNIV_PRECS);}
+                xrequires(E_UNIV_PRECS);}
 |   c_constraint_goal
 	{$$ = $1;}
 ;
 
 c_pref_goal :
 	OPEN_BRAC PREFERENCE c_constraint_goal CLOSE_BRAC
-		{$$ = new preference($3);requires(E_PREFERENCES);}
+		{$$ = new preference($3);xrequires(E_PREFERENCES);}
 |   OPEN_BRAC PREFERENCE NAME c_constraint_goal CLOSE_BRAC
-		{$$ = new preference($3,$4);requires(E_PREFERENCES);}
+		{$$ = new preference($3,$4);xrequires(E_PREFERENCES);}
 |   OPEN_BRAC AND c_pref_con_goal_list CLOSE_BRAC
 		{$$ = new conj_goal($3);}
 |   OPEN_BRAC c_forall OPEN_BRAC c_typed_var_list CLOSE_BRAC
         c_pref_goal CLOSE_BRAC
         {$$= new qfied_goal(E_FORALL,$4,$6,current_analysis->var_tab_stack.pop());
-                requires(E_UNIV_PRECS);}
+                xrequires(E_UNIV_PRECS);}
 ;
 
 c_pref_con_goal_list :
@@ -1024,9 +1024,9 @@ c_pref_con_goal_list :
 
 c_pref_goal_descriptor :
 	OPEN_BRAC PREFERENCE c_goal_descriptor CLOSE_BRAC
-	{$$= new preference($3); requires(E_PREFERENCES);}
+	{$$= new preference($3); xrequires(E_PREFERENCES);}
 |   OPEN_BRAC PREFERENCE NAME c_goal_descriptor CLOSE_BRAC
-	{$$= new preference($3,$4); requires(E_PREFERENCES);}
+	{$$= new preference($3,$4); xrequires(E_PREFERENCES);}
 // Restored...
 
 |	c_goal_descriptor
@@ -1045,7 +1045,7 @@ c_constraint_goal :
 		{$$= new conj_goal($3);}
 |	OPEN_BRAC c_forall OPEN_BRAC c_typed_var_list CLOSE_BRAC c_constraint_goal CLOSE_BRAC
 		{$$ = new qfied_goal(E_FORALL,$4,$6,current_analysis->var_tab_stack.pop());
-        requires(E_UNIV_PRECS);}
+        xrequires(E_UNIV_PRECS);}
 |	OPEN_BRAC AT_END c_goal_descriptor CLOSE_BRAC
 		{$$ = new constraint_goal(E_ATEND,$3);}
 |   OPEN_BRAC ALWAYS c_goal_descriptor CLOSE_BRAC
@@ -1073,16 +1073,16 @@ c_goal_descriptor :
        {$$= new simple_goal($1,E_POS);}
 |  OPEN_BRAC NOT c_goal_descriptor CLOSE_BRAC
        {$$= new neg_goal($3);simple_goal * s = dynamic_cast<simple_goal *>($3);
-       if(s && s->getProp()->head->getName()=="=") {requires(E_EQUALITY);}
-       else{requires(E_NEGATIVE_PRECONDITIONS);};}
+       if(s && s->getProp()->head->getName()=="=") {xrequires(E_EQUALITY);}
+       else{xrequires(E_NEGATIVE_PRECONDITIONS);};}
 |  OPEN_BRAC AND c_goal_list CLOSE_BRAC
        {$$= new conj_goal($3);}
 |  OPEN_BRAC OR c_goal_list CLOSE_BRAC
        {$$= new disj_goal($3);
-        requires(E_DISJUNCTIVE_PRECONDS);}
+        xrequires(E_DISJUNCTIVE_PRECONDS);}
 |  OPEN_BRAC IMPLY c_goal_descriptor c_goal_descriptor CLOSE_BRAC
        {$$= new imply_goal($3,$4);
-        requires(E_DISJUNCTIVE_PRECONDS);}
+        xrequires(E_DISJUNCTIVE_PRECONDS);}
 |  OPEN_BRAC c_forall OPEN_BRAC c_typed_var_list CLOSE_BRAC
        c_goal_descriptor CLOSE_BRAC
        {$$= new qfied_goal($2,$4,$6,current_analysis->var_tab_stack.pop());}
@@ -1091,7 +1091,7 @@ c_goal_descriptor :
        {$$= new qfied_goal($2,$4,$6,current_analysis->var_tab_stack.pop());}
 |  OPEN_BRAC c_comparison_op c_f_exp c_f_exp CLOSE_BRAC
        {$$= new comparison($2,$3,$4);
-        requires(E_NFLUENTS);}
+        xrequires(E_NFLUENTS);}
 ;
 
 c_pre_goal_descriptor_list :
@@ -1185,11 +1185,11 @@ c_structure_defs :
 
 c_structure_def :
     c_action_def          { $$= $1; }
-|   c_event_def           { $$= $1; requires(E_TIME); }
-|   c_process_def         { $$= $1; requires(E_TIME); }
-|   c_durative_action_def { $$= $1; requires(E_DURATIVE_ACTIONS); }
-|   c_derivation_rule     { $$= $1; requires(E_DERIVED_PREDICATES);}
-|   c_class_def           { $$ = $1; requires(E_MODULES);}
+|   c_event_def           { $$= $1; xrequires(E_TIME); }
+|   c_process_def         { $$= $1; xrequires(E_TIME); }
+|   c_durative_action_def { $$= $1; xrequires(E_DURATIVE_ACTIONS); }
+|   c_derivation_rule     { $$= $1; xrequires(E_DERIVED_PREDICATES);}
+|   c_class_def           { $$ = $1; xrequires(E_MODULES);}
 ;
 
 c_class_def : OPEN_BRAC CLASS c_class
@@ -1321,9 +1321,9 @@ c_timed_gd :
 		{timed_goal * tg = dynamic_cast<timed_goal *>($4);
 		$$ = new timed_goal(new preference($3,tg->clearGoal()),tg->getTime());
 			delete tg;
-			requires(E_PREFERENCES);}
+			xrequires(E_PREFERENCES);}
 |   OPEN_BRAC PREFERENCE c_timed_gd CLOSE_BRAC
-        {$$ = new preference($3);requires(E_PREFERENCES);}
+        {$$ = new preference($3);xrequires(E_PREFERENCES);}
 ;
 
 c_args_head :
@@ -1392,7 +1392,7 @@ c_domain_constants : OPEN_BRAC CONSTANTS c_typed_consts CLOSE_BRAC
 ;
 
 c_type_names : OPEN_BRAC TYPES c_typed_types CLOSE_BRAC
-    {$$=$3; requires(E_TYPING);}
+    {$$=$3; xrequires(E_TYPING);}
 ;
 
 
