@@ -260,6 +260,118 @@ TEST(h2fwbw, h2)
     pddlISetFree(&h2fwbw_unreachable_op);
 }
 
+TEST(h2fwbw_bitset, h2)
+{
+    PDDL_ISET(h2fwbw_unreachable_op);
+    PDDL_ISET(h2fwbw_unreachable_fact);
+    pddl_mutex_pairs_t h2fwbw;
+    pddlMutexPairsInitStrips(&h2fwbw, &C.strips);
+    pddlISetInit(&h2fwbw_unreachable_fact);
+    pddlISetInit(&h2fwbw_unreachable_op);
+
+    PDDL_ISET(bs_h2fwbw_unreachable_op);
+    PDDL_ISET(bs_h2fwbw_unreachable_fact);
+    pddl_mutex_pairs_t bs_h2fwbw;
+    pddlMutexPairsInitStrips(&bs_h2fwbw, &C.strips);
+    pddlISetInit(&bs_h2fwbw_unreachable_fact);
+    pddlISetInit(&bs_h2fwbw_unreachable_op);
+
+    //pddlErrInfoEnable(&err, stdout);
+    int ret = pddlH2FwBw(&C.strips, &C.mg, &h2fwbw,
+                         &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+                         0., &C.err);
+    assert(ret == 0);
+
+    ret = pddlH2BitsetFwBw(&C.strips, &C.mg, &bs_h2fwbw,
+                           &bs_h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_op,
+                           0., &C.err);
+    assert(ret == 0);
+
+    assert(pddlISetEq(&h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_fact));
+    assert(pddlISetEq(&h2fwbw_unreachable_op, &bs_h2fwbw_unreachable_op));
+
+
+    for (int f1 = 0; f1 < C.strips.fact.fact_size; ++f1){
+        for (int f2 = 0; f2 < C.strips.fact.fact_size; ++f2){
+            assert(!!pddlMutexPairsIsMutex(&h2fwbw, f1, f2)
+                    == !!pddlMutexPairsIsMutex(&bs_h2fwbw, f1, f2));
+            assert(!!pddlMutexPairsIsFwMutex(&h2fwbw, f1, f2)
+                    == !!pddlMutexPairsIsFwMutex(&bs_h2fwbw, f1, f2));
+            assert(!!pddlMutexPairsIsBwMutex(&h2fwbw, f1, f2)
+                    == !!pddlMutexPairsIsBwMutex(&bs_h2fwbw, f1, f2));
+        }
+    }
+    assert(h2fwbw.num_mutex_pairs == bs_h2fwbw.num_mutex_pairs);
+
+
+    pddlMutexPairsFree(&h2fwbw);
+    pddlISetFree(&h2fwbw_unreachable_fact);
+    pddlISetFree(&h2fwbw_unreachable_op);
+
+    pddlMutexPairsFree(&bs_h2fwbw);
+    pddlISetFree(&bs_h2fwbw_unreachable_fact);
+    pddlISetFree(&bs_h2fwbw_unreachable_op);
+}
+
+TEST(h2fwbw_bitset_mgstrips, h2)
+{
+    pddlErrLogEnable(&C.err, stderr);
+    pddl_mg_strips_t mg_strips;
+    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
+
+    PDDL_ISET(h2fwbw_unreachable_op);
+    PDDL_ISET(h2fwbw_unreachable_fact);
+    pddl_mutex_pairs_t h2fwbw;
+    pddlMutexPairsInitStrips(&h2fwbw, &mg_strips.strips);
+    pddlISetInit(&h2fwbw_unreachable_fact);
+    pddlISetInit(&h2fwbw_unreachable_op);
+
+    PDDL_ISET(bs_h2fwbw_unreachable_op);
+    PDDL_ISET(bs_h2fwbw_unreachable_fact);
+    pddl_mutex_pairs_t bs_h2fwbw;
+    pddlMutexPairsInitStrips(&bs_h2fwbw, &mg_strips.strips);
+    pddlISetInit(&bs_h2fwbw_unreachable_fact);
+    pddlISetInit(&bs_h2fwbw_unreachable_op);
+
+    //pddlErrInfoEnable(&err, stdout);
+    int ret = pddlH2FwBw(&mg_strips.strips, &mg_strips.mg, &h2fwbw,
+                         &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+                         0., &C.err);
+    assert(ret == 0);
+
+    ret = pddlH2BitsetFwBw(&mg_strips.strips, &mg_strips.mg, &bs_h2fwbw,
+                           &bs_h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_op,
+                           0., &C.err);
+    assert(ret == 0);
+
+    assert(pddlISetEq(&h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_fact));
+    assert(pddlISetEq(&h2fwbw_unreachable_op, &bs_h2fwbw_unreachable_op));
+
+
+    for (int f1 = 0; f1 < mg_strips.strips.fact.fact_size; ++f1){
+        for (int f2 = 0; f2 < mg_strips.strips.fact.fact_size; ++f2){
+            assert(!!pddlMutexPairsIsMutex(&h2fwbw, f1, f2)
+                    == !!pddlMutexPairsIsMutex(&bs_h2fwbw, f1, f2));
+            assert(!!pddlMutexPairsIsFwMutex(&h2fwbw, f1, f2)
+                    == !!pddlMutexPairsIsFwMutex(&bs_h2fwbw, f1, f2));
+            assert(!!pddlMutexPairsIsBwMutex(&h2fwbw, f1, f2)
+                    == !!pddlMutexPairsIsBwMutex(&bs_h2fwbw, f1, f2));
+        }
+    }
+    assert(h2fwbw.num_mutex_pairs == bs_h2fwbw.num_mutex_pairs);
+
+
+    pddlMutexPairsFree(&h2fwbw);
+    pddlISetFree(&h2fwbw_unreachable_fact);
+    pddlISetFree(&h2fwbw_unreachable_op);
+
+    pddlMutexPairsFree(&bs_h2fwbw);
+    pddlISetFree(&bs_h2fwbw_unreachable_fact);
+    pddlISetFree(&bs_h2fwbw_unreachable_op);
+
+    pddlMGStripsFree(&mg_strips);
+}
+
 TEST(h3, h2)
 {
     pddl_mutex_pairs_t h3;
