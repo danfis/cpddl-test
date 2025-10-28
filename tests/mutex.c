@@ -133,10 +133,10 @@ TEST(h2_bitset_inoutargs, strips_pruned)
     assert(h2.num_mutex_pairs == h2bs.num_mutex_pairs);
     for (int f1 = 0; f1 < C.strips.fact.fact_size; ++f1){
         for (int f2 = 0; f2 < C.strips.fact.fact_size; ++f2){
-            assert(pddlMutexPairsIsMutex(&h2, f1, f2)
-                    == pddlMutexPairsIsMutex(&h2bs, f1, f2));
-            assert(pddlMutexPairsIsFwMutex(&h2, f1, f2)
-                    == pddlMutexPairsIsFwMutex(&h2bs, f1, f2));
+            assert(!!pddlMutexPairsIsMutex(&h2, f1, f2)
+                    == !!pddlMutexPairsIsMutex(&h2bs, f1, f2));
+            assert(!!pddlMutexPairsIsFwMutex(&h2, f1, f2)
+                    == !!pddlMutexPairsIsFwMutex(&h2bs, f1, f2));
             assert(pddlMutexPairsIsBwMutex(&h2, f1, f2)
                     == pddlMutexPairsIsBwMutex(&h2bs, f1, f2));
         }
