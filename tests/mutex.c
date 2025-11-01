@@ -77,7 +77,40 @@ TEST(h2_bitset, h2)
     pddlISetFree(&h2bs_unreachable_fact);
 }
 
-TEST(h2_bitset_inoutargs, strips_pruned)
+TEST(h2_arr, h2)
+{
+    pddl_mutex_pairs_t h2bs;
+    pddl_iset_t h2bs_unreachable_op;
+    pddl_iset_t h2bs_unreachable_fact;
+    pddlMutexPairsInitStrips(&h2bs, &C.strips);
+    pddlISetInit(&h2bs_unreachable_op);
+    pddlISetInit(&h2bs_unreachable_fact);
+
+    int ret = pddlH2Arr(&C.strips, &h2bs, &h2bs_unreachable_fact, &h2bs_unreachable_op,
+                        0., &C.err);
+    assert(ret == 0);
+
+    assert(pddlISetEq(&h2_unreachable_fact, &h2bs_unreachable_fact));
+    assert(pddlISetEq(&h2_unreachable_op, &h2bs_unreachable_op));
+
+    assert(h2.num_mutex_pairs == h2bs.num_mutex_pairs);
+    for (int f1 = 0; f1 < C.strips.fact.fact_size; ++f1){
+        for (int f2 = 0; f2 < C.strips.fact.fact_size; ++f2){
+            assert(pddlMutexPairsIsMutex(&h2, f1, f2)
+                    == pddlMutexPairsIsMutex(&h2bs, f1, f2));
+            assert(pddlMutexPairsIsFwMutex(&h2, f1, f2)
+                    == pddlMutexPairsIsFwMutex(&h2bs, f1, f2));
+            assert(pddlMutexPairsIsBwMutex(&h2, f1, f2)
+                    == pddlMutexPairsIsBwMutex(&h2bs, f1, f2));
+        }
+    }
+
+    pddlMutexPairsFree(&h2bs);
+    pddlISetFree(&h2bs_unreachable_op);
+    pddlISetFree(&h2bs_unreachable_fact);
+}
+
+TEST(h2_cmp_inoutargs, strips_pruned)
 {
     int rnd_ops[5], rnd_facts[9];
     pddl_rand_t rnd;
@@ -104,8 +137,8 @@ TEST(h2_bitset_inoutargs, strips_pruned)
     }
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2(&C.strips, &h2, &h2_unreachable_fact, &h2_unreachable_op,
-                     0., &C.err);
+    int ret = pddlH2Arr(&C.strips, &h2, &h2_unreachable_fact, &h2_unreachable_op,
+                        0., &C.err);
     assert(ret == 0);
 
     pddl_mutex_pairs_t h2bs;
@@ -260,7 +293,7 @@ TEST(h2fwbw, h2)
     pddlISetFree(&h2fwbw_unreachable_op);
 }
 
-TEST(h2fwbw_bitset, h2)
+TEST(h2fwbw_cmp, h2)
 {
     PDDL_ISET(h2fwbw_unreachable_op);
     PDDL_ISET(h2fwbw_unreachable_fact);
@@ -277,9 +310,9 @@ TEST(h2fwbw_bitset, h2)
     pddlISetInit(&bs_h2fwbw_unreachable_op);
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2FwBw(&C.strips, &C.mg, &h2fwbw,
-                         &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
-                         0., &C.err);
+    int ret = pddlH2ArrFwBw(&C.strips, &C.mg, &h2fwbw,
+                            &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+                            0., &C.err);
     assert(ret == 0);
 
     ret = pddlH2BitsetFwBw(&C.strips, &C.mg, &bs_h2fwbw,
@@ -313,7 +346,7 @@ TEST(h2fwbw_bitset, h2)
     pddlISetFree(&bs_h2fwbw_unreachable_op);
 }
 
-TEST(h2fwbw_bitset_mgstrips, h2)
+TEST(h2fwbw_cmp_mgstrips, h2)
 {
     pddlErrLogEnable(&C.err, stderr);
     pddl_mg_strips_t mg_strips;
@@ -334,9 +367,9 @@ TEST(h2fwbw_bitset_mgstrips, h2)
     pddlISetInit(&bs_h2fwbw_unreachable_op);
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2FwBw(&mg_strips.strips, &mg_strips.mg, &h2fwbw,
-                         &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
-                         0., &C.err);
+    int ret = pddlH2ArrFwBw(&mg_strips.strips, &mg_strips.mg, &h2fwbw,
+                            &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+                            0., &C.err);
     assert(ret == 0);
 
     ret = pddlH2BitsetFwBw(&mg_strips.strips, &mg_strips.mg, &bs_h2fwbw,
