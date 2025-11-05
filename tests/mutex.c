@@ -129,11 +129,16 @@ TEST(h2_cmp_inoutargs, strips_pruned)
     pddlISetInit(&h2_unreachable_fact);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&h2_unreachable_op, rnd_ops[i]);
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 3; ++i){
         pddlISetAdd(&h2_unreachable_fact, rnd_facts[i]);
+        pddlMutexPairsAdd(&h2, rnd_facts[i], rnd_facts[i]);
+        pddlMutexPairsSetFwMutex(&h2, rnd_facts[i], rnd_facts[i]);
+    }
     for (int i = 3; i < 6; ++i){
-        for (int j = 6; j < 9; ++j)
+        for (int j = 6; j < 9; ++j){
             pddlMutexPairsAdd(&h2, rnd_facts[i], rnd_facts[j]);
+            pddlMutexPairsSetFwMutex(&h2, rnd_facts[i], rnd_facts[j]);
+        }
     }
 
     //pddlErrInfoEnable(&err, stdout);
@@ -149,11 +154,16 @@ TEST(h2_cmp_inoutargs, strips_pruned)
     pddlISetInit(&h2bs_unreachable_fact);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&h2bs_unreachable_op, rnd_ops[i]);
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 3; ++i){
         pddlISetAdd(&h2bs_unreachable_fact, rnd_facts[i]);
+        pddlMutexPairsAdd(&h2bs, rnd_facts[i], rnd_facts[i]);
+        pddlMutexPairsSetFwMutex(&h2bs, rnd_facts[i], rnd_facts[i]);
+    }
     for (int i = 3; i < 6; ++i){
-        for (int j = 6; j < 9; ++j)
+        for (int j = 6; j < 9; ++j){
             pddlMutexPairsAdd(&h2bs, rnd_facts[i], rnd_facts[j]);
+            pddlMutexPairsSetFwMutex(&h2bs, rnd_facts[i], rnd_facts[j]);
+        }
     }
 
     ret = pddlH2Bitset(&C.strips, &h2bs, &h2bs_unreachable_fact, &h2bs_unreachable_op,
