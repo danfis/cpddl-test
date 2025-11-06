@@ -13,8 +13,16 @@ TEST(h1, strips_pruned)
     PDDL_ISET(unreachable_fact);
     PDDL_ISET(unreachable_op);
 
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 1;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW;
+    cfg.strips = &strips;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.unreachable_facts = &unreachable_fact;
+    res.unreachable_ops = &unreachable_op;
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH1(&strips, &unreachable_fact, &unreachable_op, &C.err);
+    int ret = pddlHm(&cfg, &res, &C.err);
     //pddlStripsPrintDebug(&strips, stdout);
     assert(ret == 0);
 

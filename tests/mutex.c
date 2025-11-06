@@ -13,8 +13,8 @@ TEST(h2, strips_pruned)
     pddlISetInit(&h2_unreachable_fact);
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2(&C.strips, &h2, &h2_unreachable_fact, &h2_unreachable_op,
-                     0., &C.err);
+    int ret = pddlH2FwMutexFactsOps(&C.strips, &h2, &h2_unreachable_fact,
+                                    &h2_unreachable_op, &C.err);
     assert(ret == 0);
 
     if (h2.num_mutex_pairs > 0)
@@ -53,8 +53,21 @@ TEST(h2_bitset, h2)
     pddlISetInit(&h2bs_unreachable_op);
     pddlISetInit(&h2bs_unreachable_fact);
 
-    int ret = pddlH2Bitset(&C.strips, &h2bs, &h2bs_unreachable_fact, &h2bs_unreachable_op,
-                           0., &C.err);
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.alg = PDDL_HM_MUTEX_ALG_BITSET;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW;
+    cfg.strips = &C.strips;
+    cfg.mutex_pairs = &h2bs;
+    cfg.unreachable_facts = &h2bs_unreachable_fact;
+    cfg.unreachable_ops = &h2bs_unreachable_op;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h2bs;
+    res.unreachable_facts = &h2bs_unreachable_fact;
+    res.unreachable_ops = &h2bs_unreachable_op;
+
+    int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
     assert(pddlISetEq(&h2_unreachable_fact, &h2bs_unreachable_fact));
@@ -86,8 +99,21 @@ TEST(h2_arr, h2)
     pddlISetInit(&h2bs_unreachable_op);
     pddlISetInit(&h2bs_unreachable_fact);
 
-    int ret = pddlH2Arr(&C.strips, &h2bs, &h2bs_unreachable_fact, &h2bs_unreachable_op,
-                        0., &C.err);
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.alg = PDDL_HM_MUTEX_ALG_ARR;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW;
+    cfg.strips = &C.strips;
+    cfg.mutex_pairs = &h2bs;
+    cfg.unreachable_facts = &h2bs_unreachable_fact;
+    cfg.unreachable_ops = &h2bs_unreachable_op;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h2bs;
+    res.unreachable_facts = &h2bs_unreachable_fact;
+    res.unreachable_ops = &h2bs_unreachable_op;
+
+    int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
     assert(pddlISetEq(&h2_unreachable_fact, &h2bs_unreachable_fact));
@@ -141,9 +167,22 @@ TEST(h2_cmp_inoutargs, strips_pruned)
         }
     }
 
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.alg = PDDL_HM_MUTEX_ALG_ARR;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW;
+    cfg.strips = &C.strips;
+    cfg.mutex_pairs = &h2;
+    cfg.unreachable_facts = &h2_unreachable_fact;
+    cfg.unreachable_ops = &h2_unreachable_op;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h2;
+    res.unreachable_facts = &h2_unreachable_fact;
+    res.unreachable_ops = &h2_unreachable_op;
+
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2Arr(&C.strips, &h2, &h2_unreachable_fact, &h2_unreachable_op,
-                        0., &C.err);
+    int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
     pddl_mutex_pairs_t h2bs;
@@ -166,8 +205,21 @@ TEST(h2_cmp_inoutargs, strips_pruned)
         }
     }
 
-    ret = pddlH2Bitset(&C.strips, &h2bs, &h2bs_unreachable_fact, &h2bs_unreachable_op,
-                       0., &C.err);
+    pddl_hm_mutex_config_t cfgbs = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfgbs.m = 2;
+    cfgbs.alg = PDDL_HM_MUTEX_ALG_ARR;
+    cfgbs.dir = PDDL_HM_MUTEX_DIR_FW;
+    cfgbs.strips = &C.strips;
+    cfgbs.mutex_pairs = &h2bs;
+    cfgbs.unreachable_facts = &h2bs_unreachable_fact;
+    cfgbs.unreachable_ops = &h2bs_unreachable_op;
+
+    pddl_hm_mutex_result_t resbs = PDDL_HM_MUTEX_RESULT_INIT;
+    resbs.mutex_pairs = &h2bs;
+    resbs.unreachable_facts = &h2bs_unreachable_fact;
+    resbs.unreachable_ops = &h2bs_unreachable_op;
+
+    ret = pddlHm(&cfgbs, &resbs, &C.err);
     assert(ret == 0);
 
     assert(pddlISetEq(&h2_unreachable_fact, &h2bs_unreachable_fact));
@@ -204,9 +256,10 @@ TEST(h2fwbw, h2)
     pddlISetInit(&h2fwbw_unreachable_op);
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2FwBw(&C.strips, &C.mg, &h2fwbw,
-                         &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
-                         0., &C.err);
+    int ret = pddlH2FwBwMutexFactsOps(&C.strips, &C.mg, &h2fwbw,
+                                      &h2fwbw_unreachable_fact,
+                                      &h2fwbw_unreachable_op,
+                                      &C.err);
     assert(ret == 0);
 
     assert(pddlISetIsSubset(&h2_unreachable_fact, &h2fwbw_unreachable_fact));
@@ -319,15 +372,45 @@ TEST(h2fwbw_cmp, h2)
     pddlISetInit(&bs_h2fwbw_unreachable_fact);
     pddlISetInit(&bs_h2fwbw_unreachable_op);
 
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.alg = PDDL_HM_MUTEX_ALG_ARR;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW_BW;
+    cfg.strips = &C.strips;
+    cfg.mgroups = &C.mg;
+    cfg.disamb = PDDL_HM_MUTEX_DISAMB_STRONG;
+    cfg.task = PDDL_HM_MUTEX_TASK_STRIPS;
+    cfg.mutex_pairs = &h2fwbw;
+    cfg.unreachable_facts = &h2fwbw_unreachable_fact;
+    cfg.unreachable_ops = &h2fwbw_unreachable_op;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h2fwbw;
+    res.unreachable_facts = &h2fwbw_unreachable_fact;
+    res.unreachable_ops = &h2fwbw_unreachable_op;
+
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2ArrFwBw(&C.strips, &C.mg, &h2fwbw,
-                            &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
-                            0., &C.err);
+    int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
-    ret = pddlH2BitsetFwBw(&C.strips, &C.mg, &bs_h2fwbw,
-                           &bs_h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_op,
-                           0., &C.err);
+    pddl_hm_mutex_config_t cfgbs = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfgbs.m = 2;
+    cfgbs.alg = PDDL_HM_MUTEX_ALG_BITSET;
+    cfgbs.dir = PDDL_HM_MUTEX_DIR_FW_BW;
+    cfgbs.strips = &C.strips;
+    cfgbs.mgroups = &C.mg;
+    cfgbs.disamb = PDDL_HM_MUTEX_DISAMB_STRONG;
+    cfgbs.task = PDDL_HM_MUTEX_TASK_STRIPS;
+    cfgbs.mutex_pairs = &bs_h2fwbw;
+    cfgbs.unreachable_facts = &bs_h2fwbw_unreachable_fact;
+    cfgbs.unreachable_ops = &bs_h2fwbw_unreachable_op;
+
+    pddl_hm_mutex_result_t resbs = PDDL_HM_MUTEX_RESULT_INIT;
+    resbs.mutex_pairs = &bs_h2fwbw;
+    resbs.unreachable_facts = &bs_h2fwbw_unreachable_fact;
+    resbs.unreachable_ops = &bs_h2fwbw_unreachable_op;
+
+    ret = pddlHm(&cfgbs, &resbs, &C.err);
     assert(ret == 0);
 
     assert(pddlISetEq(&h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_fact));
@@ -376,15 +459,45 @@ TEST(h2fwbw_cmp_mgstrips, h2)
     pddlISetInit(&bs_h2fwbw_unreachable_fact);
     pddlISetInit(&bs_h2fwbw_unreachable_op);
 
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.alg = PDDL_HM_MUTEX_ALG_ARR;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW_BW;
+    cfg.strips = &C.strips;
+    cfg.mgroups = &C.mg;
+    cfg.disamb = PDDL_HM_MUTEX_DISAMB_STRONG;
+    cfg.task = PDDL_HM_MUTEX_TASK_STRIPS;
+    cfg.mutex_pairs = &h2fwbw;
+    cfg.unreachable_facts = &h2fwbw_unreachable_fact;
+    cfg.unreachable_ops = &h2fwbw_unreachable_op;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h2fwbw;
+    res.unreachable_facts = &h2fwbw_unreachable_fact;
+    res.unreachable_ops = &h2fwbw_unreachable_op;
+
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2ArrFwBw(&mg_strips.strips, &mg_strips.mg, &h2fwbw,
-                            &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
-                            0., &C.err);
+    int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
-    ret = pddlH2BitsetFwBw(&mg_strips.strips, &mg_strips.mg, &bs_h2fwbw,
-                           &bs_h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_op,
-                           0., &C.err);
+    pddl_hm_mutex_config_t cfgbs = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfgbs.m = 2;
+    cfgbs.alg = PDDL_HM_MUTEX_ALG_BITSET;
+    cfgbs.dir = PDDL_HM_MUTEX_DIR_FW_BW;
+    cfgbs.strips = &C.strips;
+    cfgbs.mgroups = &C.mg;
+    cfgbs.disamb = PDDL_HM_MUTEX_DISAMB_STRONG;
+    cfgbs.task = PDDL_HM_MUTEX_TASK_STRIPS;
+    cfgbs.mutex_pairs = &bs_h2fwbw;
+    cfgbs.unreachable_facts = &bs_h2fwbw_unreachable_fact;
+    cfgbs.unreachable_ops = &bs_h2fwbw_unreachable_op;
+
+    pddl_hm_mutex_result_t resbs = PDDL_HM_MUTEX_RESULT_INIT;
+    resbs.mutex_pairs = &bs_h2fwbw;
+    resbs.unreachable_facts = &bs_h2fwbw_unreachable_fact;
+    resbs.unreachable_ops = &bs_h2fwbw_unreachable_op;
+
+    ret = pddlHm(&cfgbs, &resbs, &C.err);
     assert(ret == 0);
 
     assert(pddlISetEq(&h2fwbw_unreachable_fact, &bs_h2fwbw_unreachable_fact));
@@ -423,8 +536,20 @@ TEST(h3, h2)
 
     pddlMutexPairsInitStrips(&h3, &C.strips);
 
-    int ret = pddlH3(&C.strips, &h3, &unreachable_fact, &unreachable_op,
-                     -1., 0, &C.err);
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 3;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW;
+    cfg.strips = &C.strips;
+    cfg.mutex_pairs = &h3;
+    cfg.unreachable_facts = &unreachable_fact;
+    cfg.unreachable_ops = &unreachable_op;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h3;
+    res.unreachable_facts = &unreachable_fact;
+    res.unreachable_ops = &unreachable_op;
+
+    int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
     assert(pddlISetIsSubset(&h2_unreachable_fact, &unreachable_fact));

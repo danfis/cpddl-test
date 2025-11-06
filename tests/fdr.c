@@ -54,7 +54,8 @@ TEST(fdr_h2, strips_pruned)
     pddlMutexPairsFree(&C.mutex);
     pddlMutexPairsInitStrips(&C.mutex, &mg_strips.strips);
     pddlMutexPairsAddMGroups(&C.mutex, &mg_strips.mg);
-    pddlH2(&mg_strips.strips, &C.mutex, &unreach_fact, &unreach_op, 0., &C.err);
+    pddlH2FwMutexFactsOps(&mg_strips.strips, &C.mutex, &unreach_fact,
+                          &unreach_op, &C.err);
     pddlMGStripsFree(&mg_strips);
 
     pddlFDRReduce(&C.fdr, NULL, &unreach_fact, &unreach_op);
@@ -64,7 +65,7 @@ TEST(fdr_h2, strips_pruned)
         pddlMutexPairsFree(&C.mutex);
         pddlMutexPairsInitStrips(&C.mutex, &mg_strips.strips);
         pddlMutexPairsAddMGroups(&C.mutex, &mg_strips.mg);
-        pddlH2(&mg_strips.strips, &C.mutex, NULL, NULL, 0., &C.err);
+        pddlH2FwMutex(&mg_strips.strips, &C.mutex, &C.err);
         pddlMGStripsFree(&mg_strips);
     }
 

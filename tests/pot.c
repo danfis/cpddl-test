@@ -154,7 +154,7 @@ TEST(pot_mg_strips_mutex_init, pot_mg_strips_init)
     pddl_mutex_pairs_t mutex;
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
     pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
-    pddlH2(&mg_strips.strips, &mutex, NULL, NULL, 0., &C.err);
+    pddlH2FwMutex(&mg_strips.strips, &mutex, &C.err);
 
     pddl_pot_t pot;
     pddlPotInit(&pot, &mg_strips, &mutex);
@@ -226,7 +226,7 @@ TEST_COND(hpot, fdr, LP)
     pddlMGStripsInitFDR(&mg_strips, &C.fdr);
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
     pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
-    pddlH2(&mg_strips.strips, &mutex, NULL, NULL, -1, &C.err);
+    pddlH2FwMutex(&mg_strips.strips, &mutex, &C.err);
     pddlStripsDisambiguatePres(&mg_strips.strips, &mutex, &mg_strips.mg,
                                NULL, NULL, &C.err);
     pddlStripsRemoveUselessDelEffs(&mg_strips.strips, &mutex, NULL, &C.err);
