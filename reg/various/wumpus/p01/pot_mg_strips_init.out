@@ -1,4 +1,4 @@
-Fact[20]:
+Fact[16]:
   (at agent-1 s-1-1 0-0-0)
   (at agent-1 s-1-3 0-1-1)
   (at agent-1 s-2-1 0-2-2)
@@ -9,31 +9,27 @@ Fact[20]:
   (have agent-1 gold-1 1-1-7)
   (alive agent-1 2-0-8)
   (none-of-those 2-1-9)
-  (alive wumpus-1 3-0-10)
-  (none-of-those 3-1-11)
-  (at wumpus-1 s-2-3 4-0-12)
-  (none-of-those 4-1-13)
+  (NOT-alive wumpus-1 3-0-10)
+  (alive wumpus-1 3-1-11)
+  (NOT-at wumpus-1 s-2-3 4-0-12)
+  (at wumpus-1 s-2-3 4-1-13)
   (have agent-1 arrow-1 5-0-14)
   (none-of-those 5-1-15)
-  (NOT-alive wumpus-1 6-0-16)
-  (none-of-those 6-1-17)
-  (NOT-at wumpus-1 s-2-3 7-0-18)
-  (none-of-those 7-1-19)
 Op[21]:
   (move agent-1 s-1-1 s-2-1), cost: 1
     pre: (at agent-1 s-1-1 0-0-0) (alive agent-1 2-0-8)
     add: (at agent-1 s-2-1 0-2-2)
     del: (at agent-1 s-1-1 0-0-0)
   (move agent-1 s-1-3 s-2-3), cost: 1
-    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (NOT-alive wumpus-1 6-0-16)
+    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (NOT-alive wumpus-1 3-0-10)
     add: (at agent-1 s-2-3 0-4-4)
     del: (at agent-1 s-1-3 0-1-1)
   (move agent-1 s-1-3 s-2-3), cost: 1
-    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (NOT-at wumpus-1 s-2-3 7-0-18)
+    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (NOT-at wumpus-1 s-2-3 4-0-12)
     add: (at agent-1 s-2-3 0-4-4)
     del: (at agent-1 s-1-3 0-1-1)
   (move agent-1 s-1-3 s-2-3), cost: 1
-    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12)
+    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13)
     add: (at agent-1 s-2-3 0-4-4) (none-of-those 2-1-9)
     del: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8)
   (move agent-1 s-2-1 s-1-1), cost: 1
@@ -49,15 +45,15 @@ Op[21]:
     add: (at agent-1 s-2-1 0-2-2)
     del: (at agent-1 s-2-2 0-3-3)
   (move agent-1 s-2-2 s-2-3), cost: 1
-    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (NOT-alive wumpus-1 6-0-16)
+    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (NOT-alive wumpus-1 3-0-10)
     add: (at agent-1 s-2-3 0-4-4)
     del: (at agent-1 s-2-2 0-3-3)
   (move agent-1 s-2-2 s-2-3), cost: 1
-    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (NOT-at wumpus-1 s-2-3 7-0-18)
+    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (NOT-at wumpus-1 s-2-3 4-0-12)
     add: (at agent-1 s-2-3 0-4-4)
     del: (at agent-1 s-2-2 0-3-3)
   (move agent-1 s-2-2 s-2-3), cost: 1
-    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12)
+    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13)
     add: (at agent-1 s-2-3 0-4-4) (none-of-those 2-1-9)
     del: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8)
   (move agent-1 s-2-3 s-1-3), cost: 1
@@ -69,13 +65,13 @@ Op[21]:
     add: (at agent-1 s-2-2 0-3-3)
     del: (at agent-1 s-2-3 0-4-4)
   (shoot agent-1 s-1-3 arrow-1 wumpus-1 s-2-3), cost: 1
-    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12) (have agent-1 arrow-1 5-0-14)
-    add: (none-of-those 3-1-11) (none-of-those 4-1-13) (none-of-those 5-1-15) (NOT-alive wumpus-1 6-0-16) (NOT-at wumpus-1 s-2-3 7-0-18)
-    del: (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12) (have agent-1 arrow-1 5-0-14) (none-of-those 6-1-17) (none-of-those 7-1-19)
+    pre: (at agent-1 s-1-3 0-1-1) (alive agent-1 2-0-8) (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13) (have agent-1 arrow-1 5-0-14)
+    add: (NOT-alive wumpus-1 3-0-10) (NOT-at wumpus-1 s-2-3 4-0-12) (none-of-those 5-1-15)
+    del: (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13) (have agent-1 arrow-1 5-0-14)
   (shoot agent-1 s-2-2 arrow-1 wumpus-1 s-2-3), cost: 1
-    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12) (have agent-1 arrow-1 5-0-14)
-    add: (none-of-those 3-1-11) (none-of-those 4-1-13) (none-of-those 5-1-15) (NOT-alive wumpus-1 6-0-16) (NOT-at wumpus-1 s-2-3 7-0-18)
-    del: (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12) (have agent-1 arrow-1 5-0-14) (none-of-those 6-1-17) (none-of-those 7-1-19)
+    pre: (at agent-1 s-2-2 0-3-3) (alive agent-1 2-0-8) (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13) (have agent-1 arrow-1 5-0-14)
+    add: (NOT-alive wumpus-1 3-0-10) (NOT-at wumpus-1 s-2-3 4-0-12) (none-of-those 5-1-15)
+    del: (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13) (have agent-1 arrow-1 5-0-14)
   (take agent-1 s-1-1 agent-1), cost: 1
     pre: (at agent-1 s-1-1 0-0-0) (alive agent-1 2-0-8)
     add: (none-of-those 0-5-5)
@@ -101,9 +97,9 @@ Op[21]:
     add: (none-of-those 0-5-5)
     del: (at agent-1 s-2-3 0-4-4)
   (take agent-1 s-2-3 wumpus-1), cost: 1
-    pre: (at agent-1 s-2-3 0-4-4) (alive agent-1 2-0-8) (at wumpus-1 s-2-3 4-0-12)
-    add: (none-of-those 4-1-13) (NOT-at wumpus-1 s-2-3 7-0-18)
-    del: (at wumpus-1 s-2-3 4-0-12) (none-of-those 7-1-19)
-Init State: (at agent-1 s-1-1 0-0-0) (at gold-1 s-1-3 1-0-6) (alive agent-1 2-0-8) (alive wumpus-1 3-0-10) (at wumpus-1 s-2-3 4-0-12) (have agent-1 arrow-1 5-0-14) (none-of-those 6-1-17) (none-of-those 7-1-19)
+    pre: (at agent-1 s-2-3 0-4-4) (alive agent-1 2-0-8) (at wumpus-1 s-2-3 4-1-13)
+    add: (NOT-at wumpus-1 s-2-3 4-0-12)
+    del: (at wumpus-1 s-2-3 4-1-13)
+Init State: (at agent-1 s-1-1 0-0-0) (at gold-1 s-1-3 1-0-6) (alive agent-1 2-0-8) (alive wumpus-1 3-1-11) (at wumpus-1 s-2-3 4-1-13) (have agent-1 arrow-1 5-0-14)
 Goal: (at agent-1 s-1-1 0-0-0) (have agent-1 gold-1 1-1-7) (alive agent-1 2-0-8)
 Value: 1
