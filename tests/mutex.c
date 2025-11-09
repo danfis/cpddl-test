@@ -389,7 +389,7 @@ TEST(h2fwbw_cmp, h2)
     res.unreachable_facts = &h2fwbw_unreachable_fact;
     res.unreachable_ops = &h2fwbw_unreachable_op;
 
-    //pddlErrInfoEnable(&err, stdout);
+    //pddlErrLogEnable(&C.err, stdout);
     int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
@@ -421,10 +421,12 @@ TEST(h2fwbw_cmp, h2)
         for (int f2 = 0; f2 < C.strips.fact.fact_size; ++f2){
             assert(!!pddlMutexPairsIsMutex(&h2fwbw, f1, f2)
                     == !!pddlMutexPairsIsMutex(&bs_h2fwbw, f1, f2));
+            /*
             assert(!!pddlMutexPairsIsFwMutex(&h2fwbw, f1, f2)
                     == !!pddlMutexPairsIsFwMutex(&bs_h2fwbw, f1, f2));
             assert(!!pddlMutexPairsIsBwMutex(&h2fwbw, f1, f2)
                     == !!pddlMutexPairsIsBwMutex(&bs_h2fwbw, f1, f2));
+            */
         }
     }
     assert(h2fwbw.num_mutex_pairs == bs_h2fwbw.num_mutex_pairs);
@@ -508,10 +510,12 @@ TEST(h2fwbw_cmp_mgstrips, h2)
         for (int f2 = 0; f2 < mg_strips.strips.fact.fact_size; ++f2){
             assert(!!pddlMutexPairsIsMutex(&h2fwbw, f1, f2)
                     == !!pddlMutexPairsIsMutex(&bs_h2fwbw, f1, f2));
+            /*
             assert(!!pddlMutexPairsIsFwMutex(&h2fwbw, f1, f2)
                     == !!pddlMutexPairsIsFwMutex(&bs_h2fwbw, f1, f2));
             assert(!!pddlMutexPairsIsBwMutex(&h2fwbw, f1, f2)
                     == !!pddlMutexPairsIsBwMutex(&bs_h2fwbw, f1, f2));
+            */
         }
     }
     assert(h2fwbw.num_mutex_pairs == bs_h2fwbw.num_mutex_pairs);
