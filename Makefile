@@ -57,20 +57,19 @@ TESTS += search
 TESTS += gaifman
 #TESTS += asnets
 
-
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
 TESTS_C := $(foreach test,$(TESTS),src/$(test).c)
 
-C_IN  = test.in.c
-C_IN += tasks.in.c
+C_IN  = src/test.in.c
+C_IN += src/tasks.in.c
 
 all: $(TARGETS)
 
-test: test.c tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
-	$(CC) $(CFLAGS) -o $@ $< tasks_tests.c $(OBJS) $(LDFLAGS)
-test.in.c: scripts/gen-tests.py $(TESTS_C)
+test: src/test.c src/tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
+	$(CC) $(CFLAGS) -o $@ $< src/tasks_tests.c $(OBJS) $(LDFLAGS)
+src/test.in.c: scripts/gen-tests.py $(TESTS_C)
 	python3 scripts/gen-tests.py $(TESTS_C) >$@
-tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
+src/tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
 	python3 scripts/gen-tasks.py tasks-disable.txt tasks-base.txt tasks-all.txt >$@
 
 .objs/%.o: src/%.c src/%.h ../libpddl.a
@@ -108,7 +107,7 @@ clean:
 	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o
-	rm -f *.in.c
+	rm -f src/*.in.c
 	rm -f $(TARGETS)
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
