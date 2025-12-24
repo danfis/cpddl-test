@@ -80,15 +80,10 @@ src/tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks
 val/validate: val/Makefile val/src/*.cpp
 	$(MAKE) -C val
 
-check: all submodule
+check: all
 	./test $(T)
-check-all: all submodule
+check-all: all
 	./test -A $(T)
-
-submodule: pddl-data/test-seq/test/domain.pddl
-pddl-data/test-seq/test/domain.pddl:
-	git submodule init -- pddl-data
-	git submodule update -- pddl-data
 
 check-valgrind: all clean-reg
 	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
@@ -114,5 +109,6 @@ clean:
 clean-reg:
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
-.PHONY: all clean check check-valgrind submodule test-strips-mem \
-        check-bin check-bin-search-opt check-bin-search-sat
+.PHONY: all clean check check-all \
+        check-valgrind check-gdb check-segfault \
+        check-bin check-bin-all
