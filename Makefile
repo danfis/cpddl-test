@@ -59,7 +59,7 @@ TESTS += gaifman
 
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
-TESTS_C := $(foreach test,$(TESTS),tests/$(test).c)
+TESTS_C := $(foreach test,$(TESTS),src/$(test).c)
 
 C_IN  = test.in.c
 C_IN += tasks.in.c
@@ -73,9 +73,9 @@ test.in.c: scripts/gen-tests.py $(TESTS_C)
 tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
 	python3 scripts/gen-tasks.py tasks-disable.txt tasks-base.txt tasks-all.txt >$@
 
-.objs/%.o: tests/%.c tests/%.h ../libpddl.a
+.objs/%.o: src/%.c src/%.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
-.objs/%.o: tests/%.c ../libpddl.a
+.objs/%.o: src/%.c ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 val/validate: val/Makefile val/src/*.cpp
