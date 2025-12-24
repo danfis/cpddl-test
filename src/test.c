@@ -69,11 +69,63 @@ static int parallel = DEFAULT_PARALLEL;
 static int timeout_s = DEFAULT_TIMEOUT;
 static int supress_fail = 0;
 
+static FILE *log_fout = NULL;
+
 static void setMemLimit(void)
 {
     struct rlimit mem_limit;
     mem_limit.rlim_cur = mem_limit.rlim_max = 4096ul * 1024ul * 1024ul;
     setrlimit(RLIMIT_AS, &mem_limit);
+}
+
+static void openLogFile(const char *logfile)
+{
+    if (log_fout != NULL)
+        fclose(log_fout);
+
+    if (logfile == NULL)
+        logfile = "check.log";
+
+    log_fout = fopen(logfile, "w");
+    if (log_fout == NULL){
+        perror("Opening log file failed");
+        exit(-1);
+    }
+}
+
+#define __VPRINT(OUT) \
+    do { \
+        va_list args; \
+        va_start(args, fmt); \
+        vfprintf(OUT, fmt, args); \
+        fflush(OUT); \
+        va_end(args); \
+    } while(0)
+
+static void printLog(const char *fmt, ...)
+{
+    sem_wait(&shared->lock);
+    __VPRINT(stdout);
+    if (log_fout != NULL){
+        __VPRINT(log_fout);
+    }
+    sem_post(&shared->lock);
+}
+
+static void printLogFailed(const char *task_name,
+                           const char *test_name,
+                           const char *fmt, ...)
+{
+    sem_wait(&shared->lock);
+    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: ", task_name, test_name);
+    fflush(stdout);
+    __VPRINT(stdout);
+    if (log_fout != NULL){
+        fprintf(log_fout, "%s / %s FAILED: ", task_name, test_name);
+        fflush(log_fout);
+        __VPRINT(log_fout);
+    }
+    sem_post(&shared->lock);
 }
 
 static void usage(const char *progname)
@@ -101,6 +153,7 @@ static void usage(const char *progname)
     fprintf(stderr, "  -m  int  Timeout in seconds (default: %d)\n",
             DEFAULT_TIMEOUT);
     fprintf(stderr, "  -f       Suppress printing failures\n");
+    fprintf(stderr, "  -l  str  Log filename (default: check.log)\n");
     exit(-1);
 }
 
@@ -110,7 +163,7 @@ static void parseOptions(int argc, char *argv[])
     int print_tasks = 0;
     int print_tests = 0;
     int opt;
-    while ((opt = getopt(argc, argv, "haBAvxS:T:s:t:p:DLKm:f")) != -1) {
+    while ((opt = getopt(argc, argv, "haBAvxS:T:s:t:p:DLKm:fl:")) != -1) {
         switch (opt) {
             case 'a':
                 tasksTestsEnableAllTests();
@@ -156,6 +209,9 @@ static void parseOptions(int argc, char *argv[])
                 break;
             case 'f':
                 supress_fail = 1;
+                break;
+            case 'l':
+                openLogFile(optarg);
                 break;
             default:
                 usage(argv[0]);
@@ -249,47 +305,36 @@ static void reportSignal(const char *task_name,
                          const char *test_name,
                          int status)
 {
-    sem_wait(&shared->lock);
-    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated by signal %d (%s).\n",
-            task_name, test_name,
-            WTERMSIG(status), strsignal(WTERMSIG(status)));
-    fflush(stdout);
-    sem_post(&shared->lock);
+    printLogFailed(task_name, test_name,
+                   "terminated by signal %d (%s).\n",
+                   WTERMSIG(status), strsignal(WTERMSIG(status)));
 }
 
 static void reportAbnormal(const char *task_name, const char *test_name)
 {
-    sem_wait(&shared->lock);
-    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated abnormaly!\n", task_name, test_name);
-    fflush(stdout);
-    sem_post(&shared->lock);
+    printLogFailed(task_name, test_name, "terminated abnormaly!\n");
 }
 
 static void reportExitStatus(const char *task_name, const char *test_name,
                              int exit_status)
 {
-    sem_wait(&shared->lock);
-    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: terminated with exit status %d.\n",
-            task_name, test_name, exit_status);
-    fflush(stdout);
-    sem_post(&shared->lock);
+    printLogFailed(task_name, test_name,
+                  "terminated with exit status %d.\n",
+                  exit_status);
 }
 
 static void reportNonEmptyOut(const char *task_name, const char *test_name)
 {
-    sem_wait(&shared->lock);
-    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: non-empty *.out.tmp file.\n",
-            task_name, test_name);
-    fflush(stdout);
-    sem_post(&shared->lock);
+    printLogFailed(task_name, test_name, "non-empty *.out file.\n");
 }
 
-static void reportDiffOut(const char *task_name, const char *test_name)
+static void reportDiffOut(const char *task_name,
+                          const char *test_name,
+                          const char *base_fn,
+                          const char *out_fn)
 {
-    sem_wait(&shared->lock);
-    fprintf(stdout, "%s / %s \x1b[31mFAILED\x1b[0m: diff on .out files.\n", task_name, test_name);
-    fflush(stdout);
-    sem_post(&shared->lock);
+    printLogFailed(task_name, test_name, "diff on .out files: %s %s\n",
+                   base_fn, out_fn);
 }
 
 static int fmtFilename(const char *task_name,
@@ -572,10 +617,10 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         fmtBaseFilename(task_name, test->name, "out", base);
         if (access(base, F_OK) == 0){
             char cmd[2048];
-            sprintf(cmd, "diff -q %s %s", base, fn);
+            sprintf(cmd, "diff -q %s %s >/dev/null", base, fn);
             int ret = system(cmd);
             if (ret > 0){
-                reportDiffOut(task_name, test->name);
+                reportDiffOut(task_name, test->name, base, fn);
                 failed = 1;
             }
 
@@ -667,7 +712,23 @@ static int waitForWorker(worker_t *worker)
 
 static void printReportFailures(void)
 {
-    system("find reg/ -name '*.fail.tmp' | sort | xargs -n1 cat");
+    static const char *cmd
+        = "find reg/ -name '*.fail.tmp' | sort | xargs -n1 cat";
+
+    FILE *fin = popen(cmd, "r");
+    if (fin == NULL){
+        perror("Printing failures failed");
+        exit(-1);
+    }
+
+    char buf[4096];
+    while (fgets(buf, sizeof(buf), fin) != NULL){
+        fputs(buf, stdout);
+        if (log_fout != NULL)
+            fputs(buf, log_fout);
+    }
+
+    pclose(fin);
 }
 
 static void printReportTest(const char *test_name,
@@ -676,20 +737,20 @@ static void printReportTest(const char *test_name,
                             int succ_len,
                             int fail_len)
 {
-    printf("%s", test_name);
+    printLog("%s", test_name);
     for (int i = strlen(test_name); i < name_len; ++i)
-        printf(" ");
+        printLog(" ");
 
-    printf(" | ");
-    printf("%*i", succ_len, stat->succeeded);
+    printLog(" | ");
+    printLog("%*i", succ_len, stat->succeeded);
 
-    printf(" | ");
-    printf("%*i", fail_len, stat->failed);
+    printLog(" | ");
+    printLog("%*i", fail_len, stat->failed);
 
-    printf(" | ");
-    printf("%7.2fs", stat->time);
+    printLog(" | ");
+    printLog("%7.2fs", stat->time);
 
-    printf("\n");
+    printLog("\n");
 }
 
 static void printReport(void)
@@ -725,13 +786,13 @@ static void printReport(void)
     if (s > fail_len)
         fail_len = s;
 
-    printf("\n");
+    printLog("\n");
     for (int i = 0; i < name_len; ++i)
-        printf(" ");
-    printf(" | succ | fail | time\n");
+        printLog(" ");
+    printLog(" | succ | fail | time\n");
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
-        printf("-");
-    printf("------------------\n");
+        printLog("-");
+    printLog("------------------\n");
 
     for (int i = 0; i < num_tests; ++i){
         if (!test_stat[i].run)
@@ -741,19 +802,19 @@ static void printReport(void)
     }
 
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
-        printf("-");
-    printf("------------------\n");
-    printf("sum");
+        printLog("-");
+    printLog("------------------\n");
+    printLog("sum");
     for (int i = 3; i < name_len; ++i)
-        printf(" ");
+        printLog(" ");
 
-    printf(" | ");
-    printf("%*i", succ_len, num_succeeded);
+    printLog(" | ");
+    printLog("%*i", succ_len, num_succeeded);
 
-    printf(" | ");
-    printf("%*i", fail_len, num_failed);
-    printf(" | %7.2fs", time);
-    printf("\n");
+    printLog(" | ");
+    printLog("%*i", fail_len, num_failed);
+    printLog(" | %7.2fs", time);
+    printLog("\n");
 
     fflush(stdout);
     fflush(stderr);
@@ -785,6 +846,8 @@ int main(int argc, char *argv[])
     tasksTestsInit();
     setMemLimit();
     parseOptions(argc, argv);
+    if (log_fout == NULL)
+        openLogFile("check.log");
 
     cleanRegDir();
     global_tear_down = tasksTestsGlobalTearDown();
@@ -870,6 +933,9 @@ int main(int argc, char *argv[])
     assert(ret == 0);
     ret = munmap(shared_mem, shared_size);
     assert(ret == 0);
+
+    if (log_fout != NULL)
+        fclose(log_fout);
 
     return exit_code;
 }
