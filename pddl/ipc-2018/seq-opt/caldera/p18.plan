@@ -1,0 +1,27 @@
+;; Optimal cost: 25
+;; Length: 25
+(get_domain id_cerat id_vhost str__ba) ;; cost: 1
+(get_computers id_cerat id_adomain) ;; cost: 1
+(creds id_cerat id_vhost id_adomain) ;; cost: 1
+(net_use id_cerat id_vhost id_bxhost str__cc id_ddomaincredential str__e id_cdomainuser str__james id_adomain str__alpha id_dcshare) ;; cost: 1
+(smb_copy id_cerat id_vhost str__cf id_dcshare id_vhost id_bxhost whatever id_ckfile) ;; cost: 1
+(get_admin id_cerat id_bxhost id_adomain) ;; cost: 1
+(wmic id_cerat id_vhost id_bxhost id_ckfile somepath id_ddomaincredential id_cdomainuser id_adomain str__alpha str__e id_curat) ;; cost: 1
+(creds id_curat id_bxhost id_adomain) ;; cost: 1
+(net_use id_curat id_bxhost id_bqhost str__bv id_hdomaincredential str__i id_gdomainuser str__mary id_adomain str__alpha id_dbshare) ;; cost: 1
+(get_admin id_cerat id_bqhost id_adomain) ;; cost: 1
+(smb_copy id_curat id_bxhost somepath id_dbshare id_bxhost id_bqhost whatever id_chfile) ;; cost: 1
+(wmic id_cerat id_vhost id_bqhost id_chfile somepath id_hdomaincredential id_gdomainuser id_adomain str__alpha str__i id_cvrat) ;; cost: 1
+(get_admin id_cerat id_bjhost id_adomain) ;; cost: 1
+(creds id_cvrat id_bqhost id_adomain) ;; cost: 1
+(get_admin id_cerat id_bchost id_adomain) ;; cost: 1
+(net_use id_cvrat id_bqhost id_bjhost str__bo id_ldomaincredential str__m id_kdomainuser str__john id_adomain str__alpha id_dashare) ;; cost: 1
+(smb_copy id_cvrat id_bqhost somepath id_dashare id_bqhost id_bjhost whatever id_clfile) ;; cost: 1
+(net_use id_cvrat id_bqhost id_bchost str__bh id_hdomaincredential str__i id_gdomainuser str__mary id_adomain str__alpha id_ddshare) ;; cost: 1
+(get_admin id_cerat id_ohost id_adomain) ;; cost: 1
+(smb_copy id_cvrat id_bqhost somepath id_ddshare id_bqhost id_bchost whatever id_cgfile) ;; cost: 1
+(net_use id_curat id_bxhost id_ohost str__t id_ldomaincredential str__m id_kdomainuser str__john id_adomain str__alpha id_czshare) ;; cost: 1
+(smb_copy id_curat id_bxhost somepath id_czshare id_bxhost id_ohost whatever id_cjfile) ;; cost: 1
+(wmic id_cerat id_vhost id_bchost id_cgfile somepath id_hdomaincredential id_gdomainuser id_adomain str__alpha str__i id_cwrat) ;; cost: 1
+(wmic id_cerat id_vhost id_bjhost id_clfile somepath id_ldomaincredential id_kdomainuser id_adomain str__alpha str__m id_ctrat) ;; cost: 1
+(wmic id_cerat id_vhost id_ohost id_cjfile somepath id_ldomaincredential id_kdomainuser id_adomain str__alpha str__m id_cxrat) ;; cost: 1

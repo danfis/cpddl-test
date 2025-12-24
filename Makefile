@@ -57,39 +57,33 @@ TESTS += search
 TESTS += gaifman
 #TESTS += asnets
 
-
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
-TESTS_C := $(foreach test,$(TESTS),tests/$(test).c)
+TESTS_C := $(foreach test,$(TESTS),src/$(test).c)
 
-C_IN  = test.in.c
-C_IN += tasks.in.c
+C_IN  = src/test.in.c
+C_IN += src/tasks.in.c
 
 all: $(TARGETS)
 
-test: test.c tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
-	$(CC) $(CFLAGS) -o $@ $< tasks_tests.c $(OBJS) $(LDFLAGS)
-test.in.c: scripts/gen-tests.py $(TESTS_C)
+test: src/test.c src/tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
+	$(CC) $(CFLAGS) -o $@ $< src/tasks_tests.c $(OBJS) $(LDFLAGS)
+src/test.in.c: scripts/gen-tests.py $(TESTS_C)
 	python3 scripts/gen-tests.py $(TESTS_C) >$@
-tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
+src/tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
 	python3 scripts/gen-tasks.py tasks-disable.txt tasks-base.txt tasks-all.txt >$@
 
-.objs/%.o: tests/%.c tests/%.h ../libpddl.a
+.objs/%.o: src/%.c src/%.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
-.objs/%.o: tests/%.c ../libpddl.a
+.objs/%.o: src/%.c ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 val/validate: val/Makefile val/src/*.cpp
 	$(MAKE) -C val
 
-check: all submodule
+check: all
 	./test $(T)
-check-all: all submodule
+check-all: all
 	./test -A $(T)
-
-submodule: pddl-data/test-seq/test/domain.pddl
-pddl-data/test-seq/test/domain.pddl:
-	git submodule init -- pddl-data
-	git submodule update -- pddl-data
 
 check-valgrind: all clean-reg
 	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
@@ -108,12 +102,13 @@ clean:
 	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o
-	rm -f *.in.c
+	rm -f src/*.in.c
 	rm -f $(TARGETS)
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
 clean-reg:
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
-.PHONY: all clean check check-valgrind submodule test-strips-mem \
-        check-bin check-bin-search-opt check-bin-search-sat
+.PHONY: all clean check check-all \
+        check-valgrind check-gdb check-segfault \
+        check-bin check-bin-all
