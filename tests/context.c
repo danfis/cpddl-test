@@ -93,7 +93,7 @@ TEST(r, _)
     pddlErrInit(&C.err);
     //pddlErrWarnEnable(&C.err, stderr);
     //pddlErrInfoEnable(&C.err, stderr);
-    if (pddlFiles(&C.files, "pddl-data/", TEST_TASK, &C.err) != 0){
+    if (pddlFiles(&C.files, "pddl/", TEST_TASK, &C.err) != 0){
         pddlErrPrint(&C.err, 1, stderr);
         assert(0);
     }
