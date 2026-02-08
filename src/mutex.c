@@ -638,6 +638,105 @@ TEST(disambiguation, h2)
     pddlStripsFree(&strips2);
 }
 
+static int disambTestMin(pddl_disambiguate_t *dis,
+                         const pddl_strips_t *strips,
+                         const pddl_iset_t *F,
+                         const char *header)
+{
+    PDDL_ISET(sarc);
+    PDDL_ISET(smin);
+    pddlISetUnion(&sarc, F);
+    pddlISetUnion(&smin, F);
+
+    int st1 = pddlDisambiguateSet(dis, &sarc);
+    int st2 = pddlDisambiguateSetMinimal(dis, &smin);
+    if (st2 >= 0){
+        assert(st1 >= 0);
+        assert(pddlISetIsSubset(&sarc, &smin));
+    }
+    if (st1 < 0){
+        assert(st2 < 0);
+    }
+    if (st2 == 0){
+        assert(st1 == 0);
+    }
+    if (st1 > 0){
+        assert(st2 != 0);
+    }
+
+    if (F == &strips->goal && C.optimal_cost >= 0){
+        assert(st1 >= 0);
+        assert(st2 >= 0);
+    }
+
+    if (st1 >= 0 && st2 < 0){
+        fprintf(stdout, "%s ::", header);
+        pddlFactsPrintSet(F, &strips->fact, " ", "", stdout);
+        fprintf(stdout, "\n");
+        fprintf(stdout, "   Dead by minimum disambiguation, but not arc consistency\n");
+
+    }else if (!pddlISetEq(&sarc, &smin) && st2 > 0){
+        fprintf(stdout, "%s ::", header);
+        pddlFactsPrintSet(F, &strips->fact, " ", "", stdout);
+        fprintf(stdout, "\n");
+        fprintf(stdout, "   +");
+        PDDL_ISET(add);
+        pddlISetMinus2(&add, &sarc, F);
+        pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
+        fprintf(stdout, "\n");
+
+        fprintf(stdout, "      +");
+        pddlISetMinus2(&add, &smin, &sarc);
+        pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
+        fprintf(stdout, "\n");
+        pddlISetFree(&add);
+    }
+
+    pddlISetFree(&sarc);
+    pddlISetFree(&smin);
+
+    return st1 || st2;
+}
+
+TEST_COND(disambiguation_min, disambiguation, CADICAL)
+{
+    pddl_mg_strips_t mg_strips;
+    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
+
+    pddl_mutex_pairs_t mutex;
+    pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
+    pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
+
+    pddl_hm_mutex_config_t hmcfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    hmcfg.strips = &mg_strips.strips;
+    hmcfg.mgroups = &mg_strips.mg;
+    hmcfg.mutex_pairs = &mutex;
+
+    pddl_hm_mutex_result_t hm_res = PDDL_HM_MUTEX_RESULT_INIT;
+    hm_res.mutex_pairs = &mutex;
+    int ret = pddlHm(&hmcfg, &hm_res, &C.err);
+    assert(ret == 0);
+
+    pddl_disambiguate_t dis;
+    pddlDisambiguateInit(&dis, mg_strips.strips.fact.fact_size,
+                         &mutex, &mg_strips.mg);
+
+    disambTestMin(&dis, &mg_strips.strips, &mg_strips.strips.goal, "Goal:");
+
+    for (int op_id = 0; op_id < C.strips.op.op_size && op_id < 300; ++op_id){
+        const pddl_strips_op_t *op = mg_strips.strips.op.op[op_id];
+        char header[1024];
+        snprintf(header, 1024, "(%s)", op->name);
+        header[1023] = 0;
+        disambTestMin(&dis, &mg_strips.strips, &op->pre, header);
+    }
+
+
+    pddlDisambiguateFree(&dis);
+    pddlMutexPairsFree(&mutex);
+    pddlMGStripsFree(&mg_strips);
+}
+
 TEST(mutex_pair_copy_fdr, fdr)
 {
     pddl_mutex_pairs_t fdr_mutex;
