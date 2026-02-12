@@ -237,7 +237,6 @@ TEST_COND(hpot, fdr, LP)
     hcfg.mg_strips = &mg_strips;
     hcfg.mutex = &mutex;
     hcfg.disambiguation = 1;
-    hcfg.weak_disambiguation = 0;
     hcfg.op_pot = 0;
     hcfg.op_pot_real = 0;
 }
@@ -551,7 +550,6 @@ TEST(hpot_ensemble_sampled_states, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_sampled_states_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_SAMPLED_STATES_INIT;
@@ -581,7 +579,6 @@ TEST(hpot_ensemble_diversification, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_diversification_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_DIVERSIFICATION_INIT;
@@ -611,7 +608,6 @@ TEST(hpot_ensemble_mutex_rand, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_all_states_mutex_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_ALL_STATES_MUTEX_INIT;
@@ -643,7 +639,6 @@ TEST(hpot_ensemble_mutex1, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_all_states_mutex_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_ALL_STATES_MUTEX_INIT;
