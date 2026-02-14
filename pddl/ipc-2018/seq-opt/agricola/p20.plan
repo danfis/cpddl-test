@@ -1,0 +1,158 @@
+;; Optimal cost: 1170
+;; Length: 156
+(collect_resource worker2 worker1 worker2 round1 act_wood wood) ;; cost: 60
+(collect_resource worker1 noworker worker2 round1 act_reed reed) ;; cost: 60
+(ag__finish_round_backhome round1 worker2) ;; cost: 1
+(ag__finish_round_renew round1 noworker) ;; cost: 1
+(ag__advance_round_normal round1 round2 act_sheep) ;; cost: 1
+(build_room worker2 worker1 worker2 worker3 round2 room3) ;; cost: 60
+(take_grain worker1 noworker worker2 round2 grain) ;; cost: 60
+(ag__finish_round_backhome round2 worker2) ;; cost: 1
+(ag__finish_round_renew round2 noworker) ;; cost: 1
+(ag__advance_round_normal round2 round3 act_sow) ;; cost: 1
+(plow_field worker2 worker1 worker2 round3) ;; cost: 60
+(sow worker1 noworker worker2 round3 grain) ;; cost: 60
+(ag__finish_round_backhome round3 worker2) ;; cost: 1
+(ag__finish_round_renew round3 noworker) ;; cost: 1
+(ag__advance_round_normal round3 round4 act_family) ;; cost: 1
+(collect_resource worker2 worker1 worker2 round4 act_wood wood) ;; cost: 60
+(family_growth worker1 noworker worker2 worker3 round4 clay room3) ;; cost: 60
+(ag__finish_round_backhome_withchild round4 worker2 worker3) ;; cost: 1
+(ag__finish_round_renew round4 noworker) ;; cost: 1
+(ag__harvest_collecting_veg round4 stage1 grain num3 num5 num6) ;; cost: 1
+(ag__harvest_collect_end round4 stage1) ;; cost: 1
+(ag__harvest_feed round4 stage1 worker3 num6 num6 num0) ;; cost: 1
+(ag__harvest_breed_end round4 stage1) ;; cost: 1
+(ag__finish_stage stage1 stage2 round4 round5 act_boar) ;; cost: 1
+(collect_resource worker3 worker2 worker3 round5 act_reed reed) ;; cost: 30
+(build_room worker2 worker1 worker3 worker4 round5 room5) ;; cost: 30
+(family_growth worker1 noworker worker3 worker4 round5 clay room5) ;; cost: 30
+(ag__finish_round_backhome_withchild round5 worker3 worker4) ;; cost: 1
+(ag__finish_round_renew round5 noworker) ;; cost: 1
+(ag__advance_round_normal round5 round6 act_carrot) ;; cost: 1
+(collect_resource worker4 worker3 worker4 round6 act_stone stone) ;; cost: 15
+(take_grain worker3 worker2 worker4 round6 carrot) ;; cost: 15
+(collect_resource worker2 worker1 worker4 round6 act_clay clay) ;; cost: 15
+(sow worker1 noworker worker4 round6 carrot) ;; cost: 15
+(ag__finish_round_backhome round6 worker4) ;; cost: 1
+(ag__finish_round_renew round6 noworker) ;; cost: 1
+(ag__advance_round_normal round6 round7 act_improve) ;; cost: 1
+(improve_home worker4 worker3 worker4 round7 oven) ;; cost: 15
+(take_grain worker3 worker2 worker4 round7 grain) ;; cost: 15
+(collect_resource worker2 worker1 worker4 round7 act_clay clay) ;; cost: 15
+(sow worker1 noworker worker4 round7 grain) ;; cost: 15
+(ag__finish_round_backhome round7 worker4) ;; cost: 1
+(ag__finish_round_renew round7 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round7 stage2 carrot num0 num2 num4) ;; cost: 1
+(ag__harvest_collecting_fromoven round7 stage2 grain num4 num6 num8) ;; cost: 1
+(ag__harvest_collect_end round7 stage2) ;; cost: 1
+(ag__harvest_feed round7 stage2 worker4 num8 num8 num0) ;; cost: 1
+(ag__harvest_breed_end round7 stage2) ;; cost: 1
+(ag__finish_stage stage2 stage3 round7 round8 act_cattle) ;; cost: 1
+(collect_resource worker4 worker3 worker4 round8 act_stone stone) ;; cost: 15
+(improve_home worker3 worker2 worker4 round8 fireplace) ;; cost: 15
+(collect_cook_animal boar act_sheep worker2 worker1 worker4 round8 num0 num2) ;; cost: 15
+(take_grain worker1 noworker worker4 round8 carrot) ;; cost: 15
+(ag__finish_round_backhome round8 worker4) ;; cost: 1
+(ag__finish_round_renew round8 noworker) ;; cost: 1
+(ag__advance_round_normal round8 round9 void) ;; cost: 1
+(sow worker4 worker3 worker4 round9 carrot) ;; cost: 15
+(take_grain worker3 worker2 worker4 round9 carrot) ;; cost: 15
+(collect_resource worker2 worker1 worker4 round9 act_reed reed) ;; cost: 15
+(collect_cook_animal boar act_sheep worker1 noworker worker4 round9 num2 num4) ;; cost: 15
+(ag__finish_round_backhome round9 worker4) ;; cost: 1
+(ag__finish_round_renew round9 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round9 stage3 carrot num4 num6 num8) ;; cost: 1
+(ag__harvest_collect_end round9 stage3) ;; cost: 1
+(ag__harvest_feed round9 stage3 worker4 num8 num8 num0) ;; cost: 1
+(ag__harvest_breed_end round9 stage3) ;; cost: 1
+(ag__finish_stage stage3 stage4 round9 round10 void) ;; cost: 1
+(take_grain worker4 worker3 worker4 round10 grain) ;; cost: 15
+(collect_resource worker3 worker2 worker4 round10 act_wood wood) ;; cost: 15
+(build_room worker2 worker1 worker4 worker5 round10 room4) ;; cost: 15
+(family_growth worker1 noworker worker4 worker5 round10 clay room4) ;; cost: 15
+(ag__finish_round_backhome_withchild round10 worker4 worker5) ;; cost: 1
+(ag__finish_round_renew round10 noworker) ;; cost: 1
+(ag__advance_round_normal round10 round11 void) ;; cost: 1
+(sow worker5 worker4 worker5 round11 carrot) ;; cost: 6
+(sow worker4 worker3 worker5 round11 grain) ;; cost: 6
+(take_grain worker3 worker2 worker5 round11 grain) ;; cost: 6
+(collect_cook_animal boar act_sheep worker2 worker1 worker5 round11 num0 num2) ;; cost: 6
+(take_food worker1 noworker worker5 round11 num2 num3) ;; cost: 6
+(ag__finish_round_backhome round11 worker5) ;; cost: 1
+(ag__finish_round_renew round11 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round11 stage4 grain num3 num5 num7) ;; cost: 1
+(ag__harvest_collecting_fromoven round11 stage4 carrot num7 num9 num11) ;; cost: 1
+(ag__harvest_collect_end round11 stage4) ;; cost: 1
+(ag__harvest_feed round11 stage4 worker5 num11 num10 num1) ;; cost: 1
+(ag__harvest_breed_end round11 stage4) ;; cost: 1
+(ag__finish_stage stage4 stage5 round11 round12 void) ;; cost: 1
+(collect_resource worker5 worker4 worker5 round12 act_stone stone) ;; cost: 6
+(collect_resource worker4 worker3 worker5 round12 act_reed reed) ;; cost: 6
+(take_food worker3 worker2 worker5 round12 num1 num2) ;; cost: 6
+(take_grain worker2 worker1 worker5 round12 carrot) ;; cost: 6
+(collect_cook_animal boar act_sheep worker1 noworker worker5 round12 num2 num4) ;; cost: 6
+(ag__finish_round_backhome round12 worker5) ;; cost: 1
+(ag__finish_round_renew round12 noworker) ;; cost: 1
+(ag__advance_round_normal round12 round13 void) ;; cost: 1
+(sow worker5 worker4 worker5 round13 grain) ;; cost: 6
+(sow worker4 worker3 worker5 round13 carrot) ;; cost: 6
+(take_grain worker3 worker2 worker5 round13 carrot) ;; cost: 6
+(collect_cook_animal boar act_sheep worker2 worker1 worker5 round13 num4 num6) ;; cost: 6
+(take_food worker1 noworker worker5 round13 num6 num7) ;; cost: 6
+(ag__finish_round_backhome round13 worker5) ;; cost: 1
+(ag__finish_round_renew round13 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round13 stage5 grain num7 num9 num11) ;; cost: 1
+(ag__harvest_collecting_fromoven round13 stage5 carrot num11 num13 num15) ;; cost: 1
+(ag__harvest_collect_end round13 stage5) ;; cost: 1
+(ag__harvest_feed round13 stage5 worker5 num15 num10 num5) ;; cost: 1
+(ag__harvest_breed_end round13 stage5) ;; cost: 1
+(ag__finish_stage stage5 stage6 round13 round14 void) ;; cost: 1
+(take_grain worker5 worker4 worker5 round14 grain) ;; cost: 6
+(sow worker4 worker3 worker5 round14 carrot) ;; cost: 6
+(take_food worker3 worker2 worker5 round14 num5 num6) ;; cost: 6
+(collect_cook_animal boar act_sheep worker2 worker1 worker5 round14 num6 num8) ;; cost: 6
+(sow worker1 noworker worker5 round14 grain) ;; cost: 6
+(ag__finish_round_backhome round14 worker5) ;; cost: 1
+(ag__finish_round_renew round14 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round14 stage6 grain num8 num10 num12) ;; cost: 1
+(ag__harvest_collecting_fromoven round14 stage6 carrot num12 num14 num16) ;; cost: 1
+(ag__harvest_collect_end round14 stage6) ;; cost: 1
+(ag__harvest_feed round14 stage6 worker5 num16 num10 num6) ;; cost: 1
+(ag__harvest_breed_end round14 stage6) ;; cost: 1
+(ag__finish_stage stage6 stage7 round14 round15 void) ;; cost: 1
+(collect_resource worker5 worker4 worker5 round15 act_wood wood) ;; cost: 6
+(collect_cook_animal boar act_sheep worker4 worker3 worker5 round15 num6 num8) ;; cost: 6
+(take_grain worker3 worker2 worker5 round15 grain) ;; cost: 6
+(sow worker2 worker1 worker5 round15 grain) ;; cost: 6
+(take_food worker1 noworker worker5 round15 num8 num9) ;; cost: 6
+(ag__finish_round_backhome round15 worker5) ;; cost: 1
+(ag__finish_round_renew round15 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round15 stage7 grain num9 num11 num13) ;; cost: 1
+(ag__harvest_collect_end round15 stage7) ;; cost: 1
+(ag__harvest_feed round15 stage7 worker5 num13 num10 num3) ;; cost: 1
+(ag__harvest_breed_end round15 stage7) ;; cost: 1
+(ag__finish_stage stage7 stage8 round15 round16 void) ;; cost: 1
+(take_grain worker5 worker4 worker5 round16 grain) ;; cost: 6
+(collect_cook_animal boar act_sheep worker4 worker3 worker5 round16 num3 num5) ;; cost: 6
+(collect_resource worker3 worker2 worker5 round16 act_clay clay) ;; cost: 6
+(collect_cook_animal boar act_boar worker2 worker1 worker5 round16 num5 num7) ;; cost: 6
+(sow worker1 noworker worker5 round16 grain) ;; cost: 6
+(ag__finish_round_backhome round16 worker5) ;; cost: 1
+(ag__finish_round_renew round16 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round16 stage8 grain num7 num9 num11) ;; cost: 1
+(ag__harvest_collect_end round16 stage8) ;; cost: 1
+(ag__harvest_feed round16 stage8 worker5 num11 num10 num1) ;; cost: 1
+(ag__harvest_breed_end round16 stage8) ;; cost: 1
+(ag__finish_stage stage8 stage9 round16 round17 void) ;; cost: 1
+(take_grain worker5 worker4 worker5 round17 carrot) ;; cost: 6
+(take_food worker4 worker3 worker5 round17 num1 num2) ;; cost: 6
+(collect_cook_animal boar act_sheep worker3 worker2 worker5 round17 num2 num4) ;; cost: 6
+(sow worker2 worker1 worker5 round17 carrot) ;; cost: 6
+(collect_cook_animal boar act_cattle worker1 noworker worker5 round17 num4 num6) ;; cost: 6
+(ag__finish_round_backhome round17 worker5) ;; cost: 1
+(ag__finish_round_renew round17 noworker) ;; cost: 1
+(ag__harvest_collecting_fromoven round17 stage9 carrot num6 num8 num10) ;; cost: 1
+(ag__harvest_collect_end round17 stage9) ;; cost: 1
+(ag__harvest_feed round17 stage9 worker5 num10 num10 num0) ;; cost: 1
+(ag__harvest_breed_end round17 stage9) ;; cost: 1

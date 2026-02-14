@@ -1,0 +1,16 @@
+;; Optimal cost: 48
+
+(car_start junction0-2 car0 garage2)
+(build_straight_oneway junction0-2 junction1-2 road0)
+(move_car_in_road junction0-2 junction1-2 car0 road0)
+(car_start junction0-2 car1 garage2)
+(move_car_in_road junction0-2 junction1-2 car1 road0)
+(move_car_out_road junction0-2 junction1-2 car0 road0)
+(build_straight_oneway junction1-2 junction2-2 road1)
+(move_car_in_road junction1-2 junction2-2 car0 road1)
+(move_car_out_road junction1-2 junction2-2 car0 road1)
+(move_car_out_road junction0-2 junction1-2 car1 road0)
+(move_car_in_road junction1-2 junction2-2 car1 road1)
+(car_arrived junction2-2 car0)
+(move_car_out_road junction1-2 junction2-2 car1 road1)
+(car_arrived junction2-2 car1)
