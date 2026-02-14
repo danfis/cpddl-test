@@ -645,7 +645,7 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &fdr_cfg, &C.err);
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
-    cfg.type = PDDL_HPOT_OPT_STATE_TYPE;
+    cfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     pddl_pot_solutions_t sol, solc;
     pddlPotSolutionsInit(&sol);

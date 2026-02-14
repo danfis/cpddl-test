@@ -251,7 +251,6 @@ TEST_COND(hpot, fdr, LP)
     hcfg.mg_strips = &mg_strips;
     hcfg.mutex = &mutex;
     hcfg.disambiguation = 1;
-    hcfg.weak_disambiguation = 0;
     hcfg.op_pot = 0;
     hcfg.op_pot_real = 0;
 }
@@ -264,21 +263,21 @@ TEST_TEAR_DOWN(hpot)
 
 TEST(hpot_init, hpot)
 {
-    hcfg.type = PDDL_HPOT_OPT_STATE_TYPE;
-    hcfg.opt_state.fdr_state = C.fdr.init;
+    hcfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hcfg.opt.state.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg, task);
 }
 
 TEST(hpot_all_states, hpot)
 {
-    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     _test_hpot1(&hcfg, task);
 }
 
 TEST(hpot_all_states_cinit, hpot)
 {
-    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    hcfg.opt_all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
+    hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt.all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg, task);
 }
 
@@ -300,7 +299,7 @@ TEST(pot_conj, hpot)
         cfg.max_num_conjs = 50;
 
     pddl_hpot_config_t pot_cfg = PDDL_HPOT_CONFIG_INIT;
-    pot_cfg.type = PDDL_HPOT_OPT_STATE_TYPE;
+    pot_cfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     int ret = pddlPotConjFind(&conjs, &conjs_best_h_value, NULL,
                               &hcfg.mg_strips->strips, hcfg.mutex,
@@ -347,7 +346,7 @@ TEST(pot_conj_init, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    hcfg.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hcfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
@@ -367,8 +366,8 @@ TEST(pot_conj_all, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    hcfg.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    hcfg.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hcfg.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
@@ -565,7 +564,6 @@ TEST(hpot_ensemble_sampled_states, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_sampled_states_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_SAMPLED_STATES_INIT;
@@ -595,7 +593,6 @@ TEST(hpot_ensemble_diversification, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_diversification_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_DIVERSIFICATION_INIT;
@@ -625,7 +622,6 @@ TEST(hpot_ensemble_mutex_rand, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_all_states_mutex_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_ALL_STATES_MUTEX_INIT;
@@ -657,7 +653,6 @@ TEST(hpot_ensemble_mutex1, hpot_all)
 
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.disambiguation = 1;
-    cfg.weak_disambiguation = 0;
 
     pddl_hpot_config_opt_ensemble_all_states_mutex_t cfg_opt
             = PDDL_HPOT_CONFIG_OPT_ENSEMBLE_ALL_STATES_MUTEX_INIT;

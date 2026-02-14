@@ -162,8 +162,8 @@ TEST_COND(symbolic_fw_pot, symbolic, LP)
     symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_NONE;
 
-    symb_cfg.fw.pot_heur_config.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
     if (fdrHasTNFOps(&C.fdr)){
         symb_cfg.fw.use_pot_heur = pddl_true;
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_false;
@@ -183,8 +183,8 @@ TEST_COND(symbolic_fw_gbfs_pot, symbolic, LP)
     symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_NONE;
 
-    symb_cfg.fw.pot_heur_config.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
     if (fdrHasTNFOps(&C.fdr)){
         symb_cfg.fw.use_pot_heur = pddl_true;
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_false;
@@ -226,8 +226,8 @@ TEST_COND(symbolic_fwbw_pot, symbolic, LP)
     symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
 
-    symb_cfg.fw.pot_heur_config.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
     if (fdrHasTNFOps(&C.fdr)){
         symb_cfg.fw.use_pot_heur = pddl_true;
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_false;
@@ -247,8 +247,8 @@ TEST_COND(symbolic_fwbw_gbfs_pot, symbolic, LP)
     symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
 
-    symb_cfg.fw.pot_heur_config.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
     if (fdrHasTNFOps(&C.fdr)){
         symb_cfg.fw.use_pot_heur = pddl_true;
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_false;
@@ -272,8 +272,8 @@ TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.log_every_step = 0;
 
-    symb_cfg.fw.pot_heur_config.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
     if (is_tnf){
         symb_cfg.fw.use_pot_heur = pddl_true;
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_false;
@@ -282,7 +282,7 @@ TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_true;
     }
 
-    symb_cfg.bw.pot_heur_config.type = PDDL_HPOT_OPT_STATE_TYPE;
+    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
@@ -309,8 +309,8 @@ TEST_COND(symbolic_fwbw_gbfs_pot_pot, symbolic, LP)
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.log_every_step = 0;
 
-    symb_cfg.fw.pot_heur_config.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt_all_syntactic_states.add_state_constr.init_state = pddl_true;
+    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
     if (is_tnf){
         symb_cfg.fw.use_pot_heur = pddl_true;
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_false;
@@ -319,7 +319,7 @@ TEST_COND(symbolic_fwbw_gbfs_pot_pot, symbolic, LP)
         symb_cfg.fw.use_pot_heur_inconsistent = pddl_true;
     }
 
-    symb_cfg.bw.pot_heur_config.type = PDDL_HPOT_OPT_STATE_TYPE;
+    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
@@ -366,7 +366,7 @@ TEST_COND(symbolic_bw_pot, symbolic, LP)
     symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
 
-    symb_cfg.bw.pot_heur_config.type = PDDL_HPOT_OPT_STATE_TYPE;
+    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
@@ -390,7 +390,7 @@ TEST_COND(symbolic_bw_gbfs_pot, symbolic, LP)
     symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
 
-    symb_cfg.bw.pot_heur_config.type = PDDL_HPOT_OPT_STATE_TYPE;
+    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
