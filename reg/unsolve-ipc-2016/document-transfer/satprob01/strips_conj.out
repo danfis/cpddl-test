@@ -155,7 +155,7 @@ Fact[156]:
   (at document1 depot+at document2 depot+train-at office9)
   (at document1 office+at document2 depot)
   (at document1 depot+at document1 office+at document2 depot+train-at office9)
-Op[646]:
+Op[644]:
   (deposit-documents depot document1), cost: 1
     pre: (in-train document1) (train-at depot)
     add: (at document1 depot)
@@ -1096,14 +1096,6 @@ Op[646]:
     pre: (in-train document4) (train-at office2)
     add: (train-at office)
     del: (in-train document4) (train-at office2)
-  (drive office2 office document5), cost: 1
-    pre: (in-train document5) (train-at office2)
-    add: (train-at office)
-    del: (in-train document5) (train-at office2)
-  (drive office2 office document6), cost: 1
-    pre: (in-train document6) (train-at office2)
-    add: (train-at office)
-    del: (in-train document6) (train-at office2)
   (drive office2 office document7), cost: 1
     pre: (in-train document7) (train-at office2)
     add: (train-at office)

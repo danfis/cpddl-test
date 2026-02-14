@@ -183,7 +183,7 @@ Fact[184]:
   (achieved_constraint0+autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+observed_obs9)
   (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
   (achieved_constraint0+autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275+observed_obs9)
-Op[125]:
+Op[115]:
   (advance-to-obs-1_obs10_obs9), cost: 1
     pre: (future_obs10) (not_at_end_constraint0) (observed_obs9)
     add: (pending_obs10)
@@ -260,10 +260,6 @@ Op[125]:
     pre: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (not_at_end_constraint0) (pending_obs7)
     add: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (observed_obs7) (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
     del: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (pending_obs7)
-  (autotakeoff-go_to_final_altitude_fcl_finished_reaction1-1_ato-0-0-275_n0_n1), cost: 1
-    pre: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_checkpoint6_n0) (not_at_end_constraint0)
-    add: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
-    del: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_checkpoint6_n0)
   (autotakeoff-start_ok_ato-0-0-275), cost: 1
     pre: (autotakeoff-fsm_exec-is-start_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (not_at_end_constraint0)
     add: (autotakeoff-fsm_exec-is-action1_ato-0-0-275) (autotakeoff-fsm_state-is-takeoff_ato-0-0-275)
@@ -284,10 +280,6 @@ Op[125]:
     pre: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (not_at_end_constraint0) (pending_obs5)
     add: (autotakeoff-fsm_exec-is-action1_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (observed_obs5)
     del: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (pending_obs5)
-  (autotakeoff-takeoff_fcl_finished_reaction1-1_ato-0-0-275_n0_n1), cost: 1
-    pre: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_checkpoint2_n0) (not_at_end_constraint0)
-    add: (autotakeoff-fsm_exec-is-action1_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
-    del: (autotakeoff-fsm_exec-is-reaction_finished_1_ato-0-0-275) (autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_checkpoint2_n0)
   (autotakeoff-takeoff_idle-0_ato-0-0-275_obs1), cost: 1
     pre: (autotakeoff-fsm_exec-is-nothing_ato-0-0-275) (autotakeoff-fsm_state-is-takeoff_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (not_at_end_constraint0) (pending_obs1)
     add: (observed_obs1)
@@ -452,10 +444,6 @@ Op[125]:
     pre: (autotakeoff-mode-is-done_ato-0-0-275) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-over_heli0) (not_at_end_constraint0) (pending_obs8)
     add: (missionexec-mission-idle_heli0) (observed_obs8)
     del: (autotakeoff-mode-is-done_ato-0-0-275) (missionexec-mission-over_heli0) (pending_obs8)
-  (missionexec-destroy-mission-autotakeoff-call_destroy_when_done-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1), cost: 1
-    pre: (autotakeoff-mode-is-done_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_destroyed_n0) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-over_heli0) (not_at_end_constraint0)
-    add: (missionexec-mission-idle_heli0)
-    del: (autotakeoff-mode-is-done_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_destroyed_n0) (missionexec-mission-over_heli0)
   (missionexec-destroy-mission-navtopoint-call_destroy_when_done-1_heli0_nav-0-0-275_nav-0-0-275_n0_n1), cost: 1
     pre: (fault-count-3_lost_nav-0-0-275_destroyed_n0) (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-over_heli0) (navtopoint-mode-is-done_nav-0-0-275) (not_at_end_constraint0)
     add: (missionexec-mission-idle_heli0)
@@ -468,10 +456,6 @@ Op[125]:
     pre: (autotakeoff-mode-is-pre_init_ato-0-0-275) (missionexec-mission-idle_heli0) (not_at_end_constraint0)
     add: (autotakeoff-mode-is-processing_ato-0-0-275) (called-by_ato-0-0-275_missionexecutor) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-init-call_heli0)
     del: (autotakeoff-mode-is-pre_init_ato-0-0-275) (missionexec-mission-idle_heli0)
-  (missionexec-init-mission-fail-navtopoint-init_fail_heli0_nav-0-0-275_nav-0-0-275), cost: 1
-    pre: (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275) (not_at_end_constraint0)
-    add: (missionexec-mission-over_heli0) (navtopoint-mode-is-failed_nav-0-0-275)
-    del: (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
   (missionexec-init-mission-navtopoint-call_set_args_heli0_nav-0-0-275_nav-0-0-275_missionexecutor), cost: 1
     pre: (missionexec-mission-idle_heli0) (navtopoint-mode-is-pre_init_nav-0-0-275) (not_at_end_constraint0)
     add: (called-by_nav-0-0-275_missionexecutor) (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
@@ -480,18 +464,10 @@ Op[125]:
     pre: (autotakeoff-mode-is-processing_ato-0-0-275) (called-by_ato-0-0-275_missionexecutor) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-init-call_heli0) (not_at_end_constraint0) (pending_obs0)
     add: (autotakeoff-mode-is-ready_ato-0-0-275) (missionexec-mission-ready_heli0) (observed_obs0)
     del: (autotakeoff-mode-is-processing_ato-0-0-275) (missionexec-mission-init-call_heli0) (pending_obs0)
-  (missionexec-init-mission-ok-autotakeoff-init_ok-1_heli0_ato-0-0-275_ato-0-0-275_missionexecutor_n0_n1), cost: 1
-    pre: (autotakeoff-mode-is-processing_ato-0-0-275) (called-by_ato-0-0-275_missionexecutor) (fault-count-4_lost_ato-0-0-275_created_missionexecutor_n0) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-init-call_heli0) (not_at_end_constraint0)
-    add: (autotakeoff-mode-is-ready_ato-0-0-275) (missionexec-mission-ready_heli0)
-    del: (autotakeoff-mode-is-processing_ato-0-0-275) (fault-count-4_lost_ato-0-0-275_created_missionexecutor_n0) (missionexec-mission-init-call_heli0)
   (missionexec-init-mission-ok-navtopoint-init_ok-0_heli0_nav-0-0-275_nav-0-0-275_missionexecutor_obs9), cost: 1
     pre: (called-by_nav-0-0-275_missionexecutor) (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275) (not_at_end_constraint0) (pending_obs9)
     add: (missionexec-mission-ready_heli0) (navtopoint-mode-is-ready_nav-0-0-275) (observed_obs9)
     del: (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275) (pending_obs9)
-  (missionexec-init-mission-ok-navtopoint-init_ok-1_heli0_nav-0-0-275_nav-0-0-275_missionexecutor_n0_n1), cost: 1
-    pre: (called-by_nav-0-0-275_missionexecutor) (fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0) (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275) (not_at_end_constraint0)
-    add: (missionexec-mission-ready_heli0) (navtopoint-mode-is-ready_nav-0-0-275)
-    del: (fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
   (missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1_heli0_ato-0-0-275_ato-0-0-275_n0_n1), cost: 1
     pre: (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275) (autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275) (autotakeoff-mode-is-running_ato-0-0-275) (fault-count-3_lost_ato-0-0-275_task-done_n0) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-running_heli0) (not_at_end_constraint0) (autotakeoff-fsm_exec-is-reaction_finished_2_ato-0-0-275+autotakeoff-fsm_state-is-go_to_final_altitude_ato-0-0-275)
     add: (autotakeoff-mode-is-done_ato-0-0-275) (missionexec-mission-over_heli0)
@@ -620,10 +596,6 @@ Op[125]:
     pre: (called-by_f3d-0-0-346_nav-0-0-275) (fly3d-mode-is-processing_f3d-0-0-346) (navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0) (pending_obs12)
     add: (fly3d-mode-is-ready_f3d-0-0-346) (navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (observed_obs12)
     del: (fly3d-mode-is-processing_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (pending_obs12)
-  (navtopoint-fly_path_fly3d_ready-fly3d-init_ok-1_nav-0-0-275_f3d-0-0-346_f3d-0-0-346_nav-0-0-275_n0_n1), cost: 1
-    pre: (called-by_f3d-0-0-346_nav-0-0-275) (fault-count-4_lost_f3d-0-0-346_created_nav-0-0-275_n0) (fly3d-mode-is-processing_f3d-0-0-346) (navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
-    add: (fly3d-mode-is-ready_f3d-0-0-346) (navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275)
-    del: (fault-count-4_lost_f3d-0-0-346_created_nav-0-0-275_n0) (fly3d-mode-is-processing_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275)
   (navtopoint-fly_path_fly3d_ready_call_start-fly3d-call_start_nav-0-0-275_f3d-0-0-346_f3d-0-0-346), cost: 1
     pre: (fly3d-mode-is-ready_f3d-0-0-346) (navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (navtopoint-fsm_exec-is-reaction_f3d_ready_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
     add: (fly3d-fsm_exec-is-start_f3d-0-0-346) (fly3d-in_start_call-is-yes_f3d-0-0-346) (fly3d-mode-is-running_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275)
@@ -632,10 +604,6 @@ Op[125]:
     pre: (fault-count-3_lost_f3d-0-0-346_destroyed_n0) (fly3d-mode-is-failed_f3d-0-0-346) (navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
     add: (navtopoint-fsm_exec-is-reaction_f3d_fail_2_nav-0-0-275)
     del: (fault-count-3_lost_f3d-0-0-346_destroyed_n0) (fly3d-mode-is-failed_f3d-0-0-346) (navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275)
-  (navtopoint-fly_path_fly3d_sync_fail-fly3d-init_fail_nav-0-0-275_f3d-0-0-346_f3d-0-0-346), cost: 1
-    pre: (fly3d-mode-is-processing_f3d-0-0-346) (navtopoint-fly_trajectory_task_nav-0-0-275_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
-    add: (fly3d-mode-is-failed_f3d-0-0-346) (navtopoint-fsm_exec-is-reaction_f3d_fail_1_nav-0-0-275)
-    del: (fly3d-mode-is-processing_f3d-0-0-346) (navtopoint-fsm_exec-is-nothing_nav-0-0-275)
   (navtopoint-plan_path_action1_checkpoint1-0_nav-0-0-275_obs10), cost: 1
     pre: (navtopoint-fsm_exec-is-action1_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0) (pending_obs10)
     add: (navtopoint-fsm_exec-is-action2_nav-0-0-275) (observed_obs10)
@@ -648,18 +616,10 @@ Op[125]:
     pre: (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (navtopoint-in_start_call-is-no_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0) (pending_obs11)
     add: (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (navtopoint-fsm_state-is-wait_for_go_nav-0-0-275) (observed_obs11)
     del: (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (pending_obs11)
-  (navtopoint-plan_path_action2_checkpoint4a-1_nav-0-0-275_n0_n1), cost: 1
-    pre: (fault-count-3_lost_nav-0-0-275_checkpoint4_n0) (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (navtopoint-in_start_call-is-no_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
-    add: (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (navtopoint-fsm_state-is-wait_for_go_nav-0-0-275)
-    del: (fault-count-3_lost_nav-0-0-275_checkpoint4_n0) (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275)
   (navtopoint-plan_path_action2_checkpoint4b-0_nav-0-0-275_obs11), cost: 1
     pre: (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0) (pending_obs11)
     add: (navtopoint-fsm_exec-is-action1_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275) (observed_obs11)
     del: (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (pending_obs11)
-  (navtopoint-plan_path_action2_checkpoint4b-1_nav-0-0-275_n0_n1), cost: 1
-    pre: (fault-count-3_lost_nav-0-0-275_checkpoint4_n0) (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
-    add: (navtopoint-fsm_exec-is-action1_nav-0-0-275) (navtopoint-fsm_state-is-fly_path_nav-0-0-275)
-    del: (fault-count-3_lost_nav-0-0-275_checkpoint4_n0) (navtopoint-fsm_exec-is-action2_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275)
   (navtopoint-start_decouple_idle_time_out_nav-0-0-275), cost: 1
     pre: (navtopoint-fsm_exec-is-nothing_nav-0-0-275) (navtopoint-fsm_state-is-start_decouple_nav-0-0-275) (navtopoint-mode-is-running_nav-0-0-275) (not_at_end_constraint0)
     add: (navtopoint-fsm_exec-is-action1_nav-0-0-275) (navtopoint-fsm_state-is-plan_path_nav-0-0-275)

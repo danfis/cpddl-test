@@ -158,7 +158,8 @@ TEST(strips_pruned, strips)
 
     PDDL_ISET(rm_fact);
     PDDL_ISET(rm_op);
-    int ret = pddlH2FwBw(&C.strips, &C.mg, &C.mutex, &rm_fact, &rm_op, 0., &C.err);
+    int ret = pddlH2FwBwMutexFactsOps(&C.strips, &C.mg, &C.mutex, &rm_fact,
+                                      &rm_op, &C.err);
     assert(ret == 0);
 
     if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0){
@@ -209,7 +210,8 @@ TEST(strips_useless_del_effs, strips)
 
     PDDL_ISET(rm_fact);
     PDDL_ISET(rm_op);
-    int ret = pddlH2FwBw(&strips, &C.mg, &mutex, &rm_fact, &rm_op, 0., &C.err);
+    int ret = pddlH2FwBwMutexFactsOps(&strips, &C.mg, &mutex, &rm_fact,
+                                      &rm_op, &C.err);
     assert(ret == 0);
 
     if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0)

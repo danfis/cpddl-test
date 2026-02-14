@@ -179,7 +179,7 @@ static void tEndomorphismTS(int ignore_costs)
 
     pddl_mutex_pairs_t mutex;
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
-    pddlH2(&mg_strips.strips, &mutex, NULL, NULL, -1, &C.err);
+    pddlH2FwMutex(&mg_strips.strips, &mutex, &C.err);
 
     pddl_trans_systems_t tss;
     pddlTransSystemsInit(&tss, &mg_strips, &mutex);

@@ -98,7 +98,6 @@ check-bin-all: val/validate
 	$(SH) bin-tests/run.sh --all
 
 clean:
-	$(MAKE) -C val clean
 	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o
@@ -106,9 +105,12 @@ clean:
 	rm -f $(TARGETS)
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
+mrproper: clean
+	$(MAKE) -C val clean
+
 clean-reg:
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
-.PHONY: all clean check check-all \
+.PHONY: all clean mrproper check check-all \
         check-valgrind check-gdb check-segfault \
         check-bin check-bin-all

@@ -62,7 +62,7 @@ TEST(b_mgroup, strips_pruned)
 {
     pddlMutexPairsFree(&C.mutex);
     pddlMutexPairsInitStrips(&C.mutex, &C.strips);
-    int ret = pddlH2(&C.strips, &C.mutex, NULL, NULL, 0., &C.err);
+    int ret = pddlH2FwMutex(&C.strips, &C.mutex, &C.err);
     assert(ret == 0);
 
     pddlMGroupsGround(&mg_fd, &C.pddl, &C.lmg_fd, &C.strips);
@@ -236,7 +236,7 @@ TEST(h2mgroup, famgroup_all)
     pddlMutexPairsInitStrips(&h2, &C.strips);
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2(&C.strips, &h2, NULL, NULL, 0., &C.err);
+    int ret = pddlH2FwMutex(&C.strips, &h2, &C.err);
     assert(ret == 0);
 
     pddlMGroupsInitEmpty(&mg_h2);
@@ -263,7 +263,7 @@ TEST(h3mgroup, h2mgroup)
     pddlMutexPairsInitStrips(&h3, &C.strips);
 
     //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH3(&C.strips, &h3, NULL, NULL, -1., 0., &C.err);
+    int ret = pddlH3FwMutex(&C.strips, &h3, &C.err);
     assert(ret == 0);
 
     pddl_mgroups_t mgs;
