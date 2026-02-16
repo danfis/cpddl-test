@@ -111,7 +111,6 @@ static void findOps(const pddl_fdr_app_op_t *app_op,
 
     if (depth > 0){
         int *next_state = PDDL_ALLOC_ARR(int, app_op->var_size);
-        int op_id;
         PDDL_ISET_FOR_EACH(&app, op_id){
             memcpy(next_state, state, sizeof(int) * app_op->var_size);
 

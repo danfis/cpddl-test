@@ -11,7 +11,6 @@ TEST(irrelevance, strips_pruned)
     int ret = pddlIrrelevanceAnalysis(&C.strips, &irr_fact, &irr_op,
                                       &static_fact, &C.err);
     assert(ret == 0);
-    int fact, op;
     if (pddlISetSize(&irr_fact) > 0){
         fprintf(stdout, "Irrelevant facts [%d/%d, static: %d]:\n",
                 pddlISetSize(&irr_fact), C.strips.fact.fact_size,

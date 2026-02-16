@@ -93,7 +93,6 @@ static void addBiclique(const pddl_iset_t *left,
     PDDL_ISET(biclique);
     //if (pddlISetCmp(left, right) < 0){
         pddlISetUnion(&biclique, left);
-        int n;
         PDDL_ISET_FOR_EACH(right, n)
             pddlISetAdd(&biclique, 1000 + n);
         /*

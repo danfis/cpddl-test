@@ -23,7 +23,6 @@ TEST(h2, strips_pruned)
     if (pddlISetSize(&h2_unreachable_fact) > 0){
         fprintf(stdout, "Unreachable facts [%d/%d]:\n",
                 pddlISetSize(&h2_unreachable_fact), C.strips.fact.fact_size);
-        int fact;
         PDDL_ISET_FOR_EACH(&h2_unreachable_fact, fact){
             fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
         }
@@ -31,7 +30,6 @@ TEST(h2, strips_pruned)
     if (pddlISetSize(&h2_unreachable_op) > 0){
         fprintf(stdout, "Unreachable ops [%d/%d]:\n",
                 pddlISetSize(&h2_unreachable_op), C.strips.op.op_size);
-        int op;
         PDDL_ISET_FOR_EACH(&h2_unreachable_op, op)
             fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
     }
@@ -229,7 +227,6 @@ TEST(h2fwbw, h2)
         fprintf(stdout, "Unreachable facts [%d + %d/%d]:\n",
                 pddlISetSize(&h2_unreachable_fact),
                 pddlISetSize(&rm), C.strips.fact.fact_size);
-        int fact;
         PDDL_ISET_FOR_EACH(&rm, fact){
             fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
         }
@@ -240,7 +237,6 @@ TEST(h2fwbw, h2)
         fprintf(stdout, "Unreachable ops [%d + %d/%d]:\n",
                 pddlISetSize(&h2_unreachable_op),
                 pddlISetSize(&rm), C.strips.op.op_size);
-        int op;
         PDDL_ISET_FOR_EACH(&rm, op)
             fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
     }
@@ -311,7 +307,6 @@ TEST(h3, h2)
     if (pddlISetSize(&unreachable_fact) > 0){
         fprintf(stdout, "Unreachable facts [%d/%d]:\n",
                 pddlISetSize(&unreachable_fact), C.strips.fact.fact_size);
-        int fact;
         PDDL_ISET_FOR_EACH(&unreachable_fact, fact){
             fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
         }
@@ -319,7 +314,6 @@ TEST(h3, h2)
     if (pddlISetSize(&unreachable_op) > 0){
         fprintf(stdout, "Unreachable ops [%d/%d]:\n",
                 pddlISetSize(&unreachable_op), C.strips.op.op_size);
-        int op;
         PDDL_ISET_FOR_EACH(&unreachable_op, op)
             fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
     }
@@ -529,9 +523,7 @@ static void disambTestMinFull(pddl_disamb_t *dis,
     assert(pddlISetEq(&dead_ac, &bs_dead_ac));
     assert(pddlBitsetEq(&dead_ac_bs, &bs_dead_ac_bs));
     assert(pddlSetISetSize(&dset_ac) == pddlSetISetSize(&bs_dset_ac));
-    const pddl_iset_t *s1;
     PDDL_SET_ISET_FOR_EACH(&dset_ac, s1){
-        const pddl_iset_t *s2;
         pddl_bool_t found = pddl_false;
         PDDL_SET_ISET_FOR_EACH(&bs_dset_ac, s2){
             if (pddlISetEq(s1, s2)){
@@ -553,7 +545,6 @@ static void disambTestMinFull(pddl_disamb_t *dis,
     assert(pddlBitsetEq(&dead_min_bs, &bs_dead_min_bs));
     assert(pddlSetISetSize(&dset_min) == pddlSetISetSize(&bs_dset_min));
     PDDL_SET_ISET_FOR_EACH(&dset_min, s1){
-        const pddl_iset_t *s2;
         pddl_bool_t found = pddl_false;
         PDDL_SET_ISET_FOR_EACH(&bs_dset_min, s2){
             if (pddlISetEq(s1, s2)){
@@ -580,9 +571,7 @@ static void disambTestMinFull(pddl_disamb_t *dis,
         assert(pddlBitsetIsSubset(&imp_ac_bs, &imp_min_bs));
         assert(pddlISetIsSubset(&dead_ac, &dead_min));
         assert(pddlBitsetIsSubset(&dead_ac_bs, &dead_min_bs));
-        const pddl_iset_t *smin;
         PDDL_SET_ISET_FOR_EACH(&dset_min, smin){
-            const pddl_iset_t *sac;
             pddl_bool_t found = pddl_false;
             PDDL_SET_ISET_FOR_EACH(&dset_ac, sac){
                 if (pddlISetIsSubset(smin, sac)){
@@ -593,9 +582,7 @@ static void disambTestMinFull(pddl_disamb_t *dis,
             assert(found);
         }
 
-        const pddl_iset_t *sac;
         PDDL_SET_ISET_FOR_EACH(&dset_ac, sac){
-            const pddl_iset_t *smin;
             pddl_bool_t found = pddl_false;
             PDDL_SET_ISET_FOR_EACH(&dset_min, smin){
                 if (pddlISetIsSubset(smin, sac)){
@@ -749,7 +736,6 @@ TEST(mutex_pair_copy_fdr, fdr)
 
     for (int f1 = 0; f1 < C.mutex.fact_size; ++f1){
         for (int f2 = f1 + 1; f2 < C.mutex.fact_size; ++f2){
-            int x1, x2;
             PDDL_ISET_FOR_EACH(&C.fdr.var.strips_id_to_val[f1], x1){
                 PDDL_ISET_FOR_EACH(&C.fdr.var.strips_id_to_val[f2], x2){
                     if (pddlMutexPairsIsMutex(&C.mutex, f1, f2)){

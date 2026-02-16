@@ -72,7 +72,6 @@ int validateGroundPlan(const pddl_fdr_t *fdr, const pddl_plan_t *plan)
     int fd = mkstemp(fn);
     FILE *fplan = fdopen(fd, "w");
     assert(fplan != NULL);
-    int op_id;
     PDDL_IARR_FOR_EACH(&plan->op, op_id){
         fprintf(fplan, "(%s)\n", fdr->op.op[op_id]->name);
     }
