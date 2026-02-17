@@ -93,6 +93,16 @@
    fun:(below main)
 }
 {
+   cplex4
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znwm
+   fun:_Z31IlcThreadGetOrCreateGlobalMutexv
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
+   fun:(below main)
+}
+{
    diff
    Memcheck:Leak
    match-leak-kinds: reachable
