@@ -576,6 +576,9 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         sem_wait(&shared->lock);
         shared->jobs_tear_down_done += 1;
         sem_post(&shared->lock);
+
+        if (log_fout != NULL)
+            fclose(log_fout);
         exit(0);
 
     }else{
@@ -656,6 +659,8 @@ static int _runWorker(worker_t *worker, int task_id)
             }
         }
 
+        if (log_fout != NULL)
+            fclose(log_fout);
         exit(0);
 
     }else{ // pid > 0

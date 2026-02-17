@@ -617,6 +617,10 @@ static void disambTestMinFull(pddl_disamb_t *dis,
     pddlISetFree(&bs_dead_ac);
     pddlBitsetFree(&bs_dead_ac_bs);
     pddlSetISetFree(&bs_dset_ac);
+
+    pddlBitsetFree(&Fbs);
+    pddlISetFree(&sarc);
+    pddlISetFree(&smin);
 }
 
 TEST_COND(disambiguation_min, disambiguation, CADICAL)
