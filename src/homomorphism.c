@@ -165,12 +165,15 @@ TEST_COND(homomorphism_reduce, homomorphism, CPOPTIMIZER)
     //pddlErrLogEnable(&C.err, stdout);
     int before = h.task.obj.obj_size;
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
+    // Running in subprocess messes up valgrind reporting
+    cfg.run_in_subprocess = pddl_false;
     pddl_homomorphic_task_reduce_t r;
     pddlHomomorphicTaskReduceInit(&r, C.pddl.obj.obj_size / 2);
     pddlHomomorphicTaskReduceAddRandomPair(&r, 1);
     pddlHomomorphicTaskReduceAddGaifman(&r, 1);
     pddlHomomorphicTaskReduceAddRelaxedEndomorphism(&r, &cfg);
     if (pddlHomomorphicTaskReduce(&r, &h, &C.err) < 0){
+        pddlHomomorphicTaskReduceFree(&r);
         pddlErrPrint(&C.err, 1, stderr);
         return;
     }

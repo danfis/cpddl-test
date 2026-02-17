@@ -8,25 +8,21 @@ TEST_EXPLICIT(lifted_mgroup_tests)
 
 static int actionHasAddEff(const pddl_action_t *a, int pred)
 {
-    pddl_list_t *item;
-    const pddl_fm_t *c;
-    const pddl_fm_junc_t *and;
-    const pddl_fm_atom_t *atom;
 
     if (a->eff == NULL)
         return 0;
     if (a->eff->type == PDDL_FM_ATOM){
-        atom = pddlFmToAtomConst(a->eff);
+        const pddl_fm_atom_t *atom = pddlFmToAtomConst(a->eff);
         return atom->pred == pred;
     }
 
     if (a->eff->type == PDDL_FM_AND){
-        and = pddlFmToJunc(a->eff);
+        const pddl_fm_junc_t *and = pddlFmToJunc(a->eff);
         PDDL_LIST_FOR_EACH(&and->part, item){
-            c = PDDL_LIST_ENTRY(item, pddl_fm_t, conn);
+            const pddl_fm_t *c = PDDL_LIST_ENTRY(item, pddl_fm_t, conn);
             if (c->type != PDDL_FM_ATOM)
                 continue;
-            atom = pddlFmToAtomConst(c);
+            const pddl_fm_atom_t *atom = pddlFmToAtomConst(c);
             if (!atom->neg && atom->pred == pred)
                 return 1;
         }

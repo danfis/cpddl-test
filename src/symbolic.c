@@ -38,7 +38,6 @@ static void checkPlan(const pddl_strips_t *strips,
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips->init);
     int plan_cost = 0;
-    int op_id;
     PDDL_IARR_FOR_EACH(plan, op_id){
         const pddl_strips_op_t *op = strips->op.op[op_id];
         plan_cost += op->cost;
@@ -111,7 +110,6 @@ static void run(pddl_symbolic_task_config_t *symb_cfg,
         checkPlanStates(&C.fdr, task);
 
         int plan_cost = 0;
-        int op_id;
         PDDL_IARR_FOR_EACH(&plan, op_id){
             const pddl_fdr_op_t *op = C.fdr.op.op[op_id];
             plan_cost += op->cost;

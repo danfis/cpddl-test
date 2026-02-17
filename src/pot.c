@@ -327,7 +327,6 @@ TEST(pot_conj, hpot)
     printf("conjs: %d\n", pddlSetISetSize(&conjs));
     for (int i = 0; i < pddlSetISetSize(&conjs); ++i){
         const pddl_iset_t *c = pddlSetISetGet(&conjs, i);
-        int fact;
         printf("Conj %d:", i);
         PDDL_ISET_FOR_EACH(c, fact){
             printf(" (%s)", C.fdr.var.global_id_to_val[fact]->name);

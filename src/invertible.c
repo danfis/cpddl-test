@@ -18,7 +18,6 @@ TEST(rse_invertible, strips_pruned)
 
     if (pddlISetSize(&invertible) > 0)
         printf("RSE-Invertible facts:\n");
-    int fact;
     PDDL_ISET_FOR_EACH(&invertible, fact){
         printf("%d:(%s)", fact, C.strips.fact.fact[fact]->name);
         if (isInMGroup(fact, &C.mg))

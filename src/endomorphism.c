@@ -27,7 +27,6 @@ static void tEndomorphismLifted(int relaxed, int ignore_costs)
     }else{
         printf("num redundant objects: %d\n", pddlISetSize(&redundant));
 
-        int obj;
         PDDL_ISET_FOR_EACH(&redundant, obj){
             assert(map[obj] != obj);
             assert(map[map[obj]] == map[obj]);
@@ -125,7 +124,6 @@ static void tEndomorphismFDR(int ignore_costs)
         if (sol.is_optimal)
             printf("num redundant ops: %d\n", pddlISetSize(&sol.redundant_ops));
 
-        int opi;
         PDDL_ISET_FOR_EACH(&sol.redundant_ops, opi){
             assert(sol.op_map[opi] != opi);
             assert(sol.op_map[sol.op_map[opi]] == sol.op_map[opi]);
@@ -201,7 +199,6 @@ static void tEndomorphismTS(int ignore_costs)
             assert(pddlISetSize(&sol.redundant_ops) >= pddlISetSize(&redundant));
         }
 
-        int opi;
         PDDL_ISET_FOR_EACH(&sol.redundant_ops, opi){
             assert(sol.op_map[opi] != opi);
             assert(sol.op_map[sol.op_map[opi]] == sol.op_map[opi]);

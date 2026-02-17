@@ -30,7 +30,6 @@ TEST(gaifman, pddl_compile_away_cond_eff)
     pddlGaifmanInit(&ggoal2, C.pddl.obj.obj_size);
     pddlGaifmanAddRelationsFromFm(&ggoal2, C.pddl.goal);
     pddl_fm_const_it_atom_t ait;
-    const pddl_fm_atom_t *atom;
     PDDL_FM_FOR_EACH_ATOM(&C.pddl.init->fm, &ait, atom){
         if (pddlPredIsStatic(&C.pddl.pred.pred[atom->pred]))
             pddlGaifmanAddRelationsFromAtom(&ggoal2, atom);

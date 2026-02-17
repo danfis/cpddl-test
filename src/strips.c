@@ -222,7 +222,6 @@ TEST(strips_useless_del_effs, strips)
     PDDL_ISET(changed_op);
     pddlStripsRemoveUselessDelEffs(&strips, &mutex, NULL, &C.err);
 
-    int op;
     PDDL_ISET_FOR_EACH(&changed_op, op)
         printf("(%s)\n", strips.op.op[op]->name);
     pddlISetFree(&changed_op);

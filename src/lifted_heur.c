@@ -38,7 +38,6 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
         if (pddlISetSize(&app_ops) == 0)
             break;
 
-        int op_id;
         PDDL_ISET(next_state);
         PDDL_ISET_FOR_EACH(&app_ops, op_id){
             pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);
@@ -97,7 +96,6 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
         if (pddlISetSize(&app_ops) == 0)
             break;
 
-        int op_id;
         PDDL_ISET(next_state);
         PDDL_ISET_FOR_EACH(&app_ops, op_id){
             pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);
@@ -151,7 +149,6 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
         if (pddlISetSize(&app_ops) == 0)
             break;
 
-        int op_id;
         PDDL_ISET(next_state);
         PDDL_ISET_FOR_EACH(&app_ops, op_id){
             pddlStripsOpApplyOnState(strips.op.op[op_id], &state, &next_state);

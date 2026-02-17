@@ -29,7 +29,6 @@ TEST(h1, strips_pruned)
     if (pddlISetSize(&unreachable_fact) > 0
             || pddlISetSize(&unreachable_op) > 0){
         fprintf(stdout, "Init:");
-        int fact;
         PDDL_ISET_FOR_EACH(&strips.init, fact)
             fprintf(stdout, " (%s)", strips.fact.fact[fact]->name);
         fprintf(stdout, "\n");
@@ -38,7 +37,6 @@ TEST(h1, strips_pruned)
     if (pddlISetSize(&unreachable_fact) > 0){
         fprintf(stdout, "Unreachable facts [%d/%d]:\n",
                 pddlISetSize(&unreachable_fact), strips.fact.fact_size);
-        int fact;
         PDDL_ISET_FOR_EACH(&unreachable_fact, fact){
             fprintf(stdout, "  (%s)\n", strips.fact.fact[fact]->name);
         }
@@ -46,7 +44,6 @@ TEST(h1, strips_pruned)
     if (pddlISetSize(&unreachable_op) > 0){
         fprintf(stdout, "Unreachable ops [%d/%d]:\n",
                 pddlISetSize(&unreachable_op), strips.op.op_size);
-        int op;
         PDDL_ISET_FOR_EACH(&unreachable_op, op)
             fprintf(stdout, "  (%s)\n", strips.op.op[op]->name);
     }

@@ -7,7 +7,6 @@ static void printState(const char *prefix,
                        const pddl_strips_maker_t *smaker)
 {
     printf("%s", prefix);
-    int fact;
     PDDL_ISET_FOR_EACH(state, fact){
         const pddl_ground_atom_t *ga;
         ga = pddlStripsMakerGroundAtomConst(smaker, fact);

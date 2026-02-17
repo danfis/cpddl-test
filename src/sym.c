@@ -22,13 +22,11 @@ TEST_COND(symmetry, strips_pruned, BLISS)
         pddlStripsSymAllFactSetSymmetries(&sym, &fset);
 
         PDDL_ISET(sym_set);
-        const pddl_iset_t *s;
         PDDL_SET_ISET_FOR_EACH(&fset, s){
             assert(pddlISetSize(s) == 1);
             pddlISetUnion(&sym_set, s);
         }
         if (pddlISetSize(&sym_set) > 1){
-            int fact_id;
             PDDL_ISET_FOR_EACH(&sym_set, fact_id){
                 fact_used[fact_id] = 1;
                 fprintf(stdout, " (%s)", C.strips.fact.fact[fact_id]->name);
@@ -54,13 +52,11 @@ TEST_COND(symmetry, strips_pruned, BLISS)
         pddlStripsSymAllOpSetSymmetries(&sym, &fset);
 
         PDDL_ISET(sym_set);
-        const pddl_iset_t *s;
         PDDL_SET_ISET_FOR_EACH(&fset, s){
             assert(pddlISetSize(s) == 1);
             pddlISetUnion(&sym_set, s);
         }
         if (pddlISetSize(&sym_set) > 1){
-            int op_id;
             PDDL_ISET_FOR_EACH(&sym_set, op_id){
                 op_used[op_id] = 1;
                 fprintf(stdout, " (%s)", C.strips.op.op[op_id]->name);

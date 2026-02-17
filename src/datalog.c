@@ -137,7 +137,6 @@ static void annotation(pddl_datalog_t *dl,
 
     printf(" :-");
 
-    int fact_id;
     PDDL_ISET_FOR_EACH(body_fact_ids, fact_id){
         int st = pddlDatalogFact(dl, fact_id, &pred, &arity, arg, NULL);
         assert(st == 0);
