@@ -38,6 +38,7 @@ TESTS += mgroup
 TESTS += mutex
 TESTS += h1
 TESTS += hm
+TESTS += disamb
 TESTS += sym
 TESTS += irrelevance
 TESTS += invertible
