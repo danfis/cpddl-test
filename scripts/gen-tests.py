@@ -93,6 +93,7 @@ def removeUnreachable():
         for k in Test.keys():
             dep = Test[k]['dep']
             if dep is not None and dep != '_' and dep not in Test:
+                #print(k, 'depends on', dep, 'which is not defined')
                 change = True
                 del Test[k]
                 break

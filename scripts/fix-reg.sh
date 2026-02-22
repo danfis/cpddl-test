@@ -16,20 +16,26 @@ for tmp in $(find reg/ -name '*.out.tmp' -size +0); do
     # Get file size in bytes (works on both Linux and macOS)
     tmp_size=$(stat -f%z "$tmp" 2>/dev/null || stat -c%s "$tmp" 2>/dev/null)
     
-    # Skip files that exceed size limit
-    if [ "$tmp_size" -gt "$MAX_SIZE_BYTES" ]; then
-        skipped_files+=("$tmp")
-        continue
-    fi
-    
     # Create new baseline if doesn't exist
     if [ ! -f $f ]; then
+        # Skip files that exceed size limit
+        if [ "$tmp_size" -gt "$MAX_SIZE_BYTES" ]; then
+            skipped_files+=("$tmp")
+            continue
+        fi
+
         echo Copy: $tmp $f
         cp $tmp $f
     fi
     
     # Update baseline if contents differ
     if ! diff -q $tmp $f >/dev/null 2>&1; then
+        # Skip files that exceed size limit
+        if [ "$tmp_size" -gt "$MAX_SIZE_BYTES" ]; then
+            skipped_files+=("$tmp")
+            continue
+        fi
+
         echo Fix: $tmp $f
         cp $tmp $f
     fi
