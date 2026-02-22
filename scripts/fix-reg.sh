@@ -1,4 +1,7 @@
 #!/bin/bash
+# Non-interactively updates golden regression baselines by copying each
+# non-empty .out.tmp to its corresponding .out file.  Files larger than
+# MAX_SIZE_BYTES (default 5 MB) are skipped and reported.
 
 # Configurable size limit (5MB by default, can be overridden with MAX_SIZE_BYTES env var)
 MAX_SIZE_BYTES=${MAX_SIZE_BYTES:-$((5 * 1024 * 1024))}

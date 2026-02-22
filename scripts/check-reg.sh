@@ -1,4 +1,7 @@
 #!/bin/bash
+# Interactive review of regression-output diffs: for each .out.tmp file that
+# differs from its golden baseline (.out), prompts to show a short diff, page
+# through it, open vimdiff, or accept the new output as the new baseline.
 
 for tmp in $(find reg/ -name *.out.tmp); do
     f=${tmp%%.tmp}

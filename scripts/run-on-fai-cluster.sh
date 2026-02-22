@@ -1,4 +1,7 @@
 #!/bin/bash
+# Clones cpddl and the experiment-runner (exp) repos at the given commit,
+# builds both, and submits planning-experiment jobs for various
+# grounder/heuristic/search combinations to the FAI cluster.
 
 set -e
 

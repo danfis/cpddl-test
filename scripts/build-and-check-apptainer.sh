@@ -1,5 +1,8 @@
 #!/bin/bash
-# This script is supposed to be run from the top cpddl directory
+# Builds an Apptainer image and runs the full test suite across several
+# optional-dependency combinations (no-cudd, no-bliss, HiGHS, Clingo, MiniZinc,
+# CPLEX) and Linux distributions.
+# Must be run from the top cpddl directory.
 
 set -e
 

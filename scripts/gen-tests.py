@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Generates the C test-registry source (test.in.c) for the test runner by
+# scanning tests/src/*.c for TEST/TEST_COND/TEST_ONCE macros and
+# pddl/config.h for feature flags, then emitting test_set[] and
+# forward-declaration stubs.
+# Usage: gen-tests.py <src-file> [<src-file> ...] >test.in.c
 
 import sys
 import re

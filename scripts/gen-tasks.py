@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Generates the C task-registry source (tasks.in.c) for the test runner by
+# parsing tasks-disable.txt, tasks-base.txt, and tasks-all.txt, and emitting
+# tasksInit() with per-task test enable/disable tables.
+# Usage: gen-tasks.py tasks-disable.txt tasks-base.txt tasks-all.txt >tasks.in.c
 
 import sys
 import re

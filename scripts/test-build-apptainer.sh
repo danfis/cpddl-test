@@ -1,5 +1,8 @@
 #!/bin/bash
-# This script is supposed to be run from the top cpddl directory
+# Builds an Apptainer image for a given configuration and runs functional
+# smoke tests (plan-cost checks on known benchmarks) for every supported
+# OS/compiler/dependency combination.
+# Must be run from the top cpddl directory.
 
 set -e
 
