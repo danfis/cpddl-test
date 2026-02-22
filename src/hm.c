@@ -23,7 +23,7 @@ static pddl_iset_t h2fwbw_unreachable_op;
  * is also unreachable in A.  NULL arguments for the mutex or unreachable
  * sets are silently skipped.
  */
-static void assert_stronger(const pddl_mutex_pairs_t *a_mutex,
+static void assertStronger(const pddl_mutex_pairs_t *a_mutex,
                             const pddl_iset_t *a_fact,
                             const pddl_iset_t *a_op,
                             const pddl_mutex_pairs_t *b_mutex,
@@ -38,6 +38,67 @@ static void assert_stronger(const pddl_mutex_pairs_t *a_mutex,
         assert(pddlISetIsSubset(b_fact, a_fact));
     if (b_op != NULL && a_op != NULL)
         assert(pddlISetIsSubset(b_op, a_op));
+}
+
+static void printUnreachableFacts(const char *label, const pddl_iset_t *set)
+{
+    if (pddlISetSize(set) > 0){
+        fprintf(stdout, "%s unreachable facts [%d/%d]:\n",
+                label, pddlISetSize(set), C.strips.fact.fact_size);
+        PDDL_ISET_FOR_EACH(set, fact)
+            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
+    }
+}
+
+static void printUnreachableOps(const char *label, const pddl_iset_t *set)
+{
+    if (pddlISetSize(set) > 0){
+        fprintf(stdout, "%s unreachable ops [%d/%d]:\n",
+                label, pddlISetSize(set), C.strips.op.op_size);
+        PDDL_ISET_FOR_EACH(set, op)
+            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
+    }
+}
+
+static void printExtraFacts(const char *label,
+                            const pddl_iset_t *new_set,
+                            const pddl_iset_t *ref_set)
+{
+    PDDL_ISET(extra);
+    pddlISetMinus2(&extra, new_set, ref_set);
+    if (pddlISetSize(&extra) > 0){
+        fprintf(stdout, "%s extra unreachable facts [%d]:\n",
+                label, pddlISetSize(&extra));
+        PDDL_ISET_FOR_EACH(&extra, fact)
+            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
+    }
+    pddlISetFree(&extra);
+}
+
+static void printExtraOps(const char *label,
+                          const pddl_iset_t *new_set,
+                          const pddl_iset_t *ref_set)
+{
+    PDDL_ISET(extra);
+    pddlISetMinus2(&extra, new_set, ref_set);
+    if (pddlISetSize(&extra) > 0){
+        fprintf(stdout, "%s extra unreachable ops [%d]:\n",
+                label, pddlISetSize(&extra));
+        PDDL_ISET_FOR_EACH(&extra, op)
+            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
+    }
+    pddlISetFree(&extra);
+}
+
+static void printMutexCmp(const char *label,
+                          unsigned long new_cnt,
+                          unsigned long ref_cnt)
+{
+    if (new_cnt > ref_cnt){
+        fprintf(stdout, "%s mutex pairs: %lu -> %lu\n", label, ref_cnt, new_cnt);
+    }else{
+        fprintf(stdout, "%s mutex pairs: %lu\n", label, new_cnt);
+    }
 }
 
 /*
@@ -65,20 +126,8 @@ TEST(hm_h1, strips)
     int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
-    if (pddlISetSize(&h1_unreachable_fact) > 0){
-        fprintf(stdout, "h1 unreachable facts [%d/%d]:\n",
-                pddlISetSize(&h1_unreachable_fact),
-                C.strips.fact.fact_size);
-        PDDL_ISET_FOR_EACH(&h1_unreachable_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    if (pddlISetSize(&h1_unreachable_op) > 0){
-        fprintf(stdout, "h1 unreachable ops [%d/%d]:\n",
-                pddlISetSize(&h1_unreachable_op),
-                C.strips.op.op_size);
-        PDDL_ISET_FOR_EACH(&h1_unreachable_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
+    printUnreachableFacts("h1", &h1_unreachable_fact);
+    printUnreachableOps("h1", &h1_unreachable_op);
 }
 
 TEST_TEAR_DOWN(hm_h1)
@@ -116,26 +165,14 @@ TEST(hm_h2_fw, hm_h1)
     assert(ret == 0);
 
     /* h^2 must be at least as strong as h^1 */
-    assert_stronger(&h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op,
+    assertStronger(&h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op,
                     &h1_mutex, &h1_unreachable_fact, &h1_unreachable_op);
 
     if (h2fw_mutex.num_mutex_pairs > 0)
         fprintf(stdout, "h2fw mutex pairs: %lu\n",
                 (unsigned long)h2fw_mutex.num_mutex_pairs);
-    if (pddlISetSize(&h2fw_unreachable_fact) > 0){
-        fprintf(stdout, "h2fw unreachable facts [%d/%d]:\n",
-                pddlISetSize(&h2fw_unreachable_fact),
-                C.strips.fact.fact_size);
-        PDDL_ISET_FOR_EACH(&h2fw_unreachable_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    if (pddlISetSize(&h2fw_unreachable_op) > 0){
-        fprintf(stdout, "h2fw unreachable ops [%d/%d]:\n",
-                pddlISetSize(&h2fw_unreachable_op),
-                C.strips.op.op_size);
-        PDDL_ISET_FOR_EACH(&h2fw_unreachable_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
+    printUnreachableFacts("h2fw", &h2fw_unreachable_fact);
+    printUnreachableOps("h2fw", &h2fw_unreachable_op);
 }
 
 TEST_TEAR_DOWN(hm_h2_fw)
@@ -196,11 +233,11 @@ TEST(hm_h2_fw_inout, hm_h2_fw)
     assert(ret == 0);
 
     /* All seeded pairs must be preserved in the result */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &seeded_mutex, NULL, &seeded_op);
 
     /* Result must also contain the clean h2fw results */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
     pddlMutexPairsFree(&seeded_mutex);
@@ -239,7 +276,7 @@ TEST(hm_h2_fwbw, hm_h2_fw)
     assert(ret == 0);
 
     /* fwbw must be at least as strong as forward-only */
-    assert_stronger(&h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+    assertStronger(&h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
                     &h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
     /* Self-mutex pairs must correspond to unreachable facts */
@@ -248,34 +285,11 @@ TEST(hm_h2_fwbw, hm_h2_fw)
             assert(pddlISetIn(f1, &h2fwbw_unreachable_fact));
     }
 
-    if (h2fwbw_mutex.num_mutex_pairs > h2fw_mutex.num_mutex_pairs){
-        fprintf(stdout, "h2fwbw mutex pairs: %lu -> %lu\n",
-                (unsigned long)h2fw_mutex.num_mutex_pairs,
-                (unsigned long)h2fwbw_mutex.num_mutex_pairs);
-    }else{
-        fprintf(stdout, "h2fwbw mutex pairs: %lu\n",
-                (unsigned long)h2fwbw_mutex.num_mutex_pairs);
-    }
-
-    PDDL_ISET(extra_fact);
-    pddlISetMinus2(&extra_fact, &h2fwbw_unreachable_fact, &h2fw_unreachable_fact);
-    if (pddlISetSize(&extra_fact) > 0){
-        fprintf(stdout, "h2fwbw extra unreachable facts [%d]:\n",
-                pddlISetSize(&extra_fact));
-        PDDL_ISET_FOR_EACH(&extra_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    pddlISetFree(&extra_fact);
-
-    PDDL_ISET(extra_op);
-    pddlISetMinus2(&extra_op, &h2fwbw_unreachable_op, &h2fw_unreachable_op);
-    if (pddlISetSize(&extra_op) > 0){
-        fprintf(stdout, "h2fwbw extra unreachable ops [%d]:\n",
-                pddlISetSize(&extra_op));
-        PDDL_ISET_FOR_EACH(&extra_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
-    pddlISetFree(&extra_op);
+    printMutexCmp("h2fwbw",
+                  (unsigned long)h2fwbw_mutex.num_mutex_pairs,
+                  (unsigned long)h2fw_mutex.num_mutex_pairs);
+    printExtraFacts("h2fwbw", &h2fwbw_unreachable_fact, &h2fw_unreachable_fact);
+    printExtraOps("h2fwbw", &h2fwbw_unreachable_op, &h2fw_unreachable_op);
 }
 
 TEST_TEAR_DOWN(hm_h2_fwbw)
@@ -316,11 +330,11 @@ TEST(hm_h2_fwbw_no_disamb, hm_h2_fwbw)
     assert(ret == 0);
 
     /* no-disamb must be at least as strong as forward-only h^2 */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
     /* Strong disambiguation must be at least as strong as no-disamb */
-    assert_stronger(&h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+    assertStronger(&h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
                     &mutex, &unreachable_fact, &unreachable_op);
 
     pddlMutexPairsFree(&mutex);
@@ -360,34 +374,14 @@ TEST(hm_h2_fwbw_mg_strips, hm_h2_fwbw)
     assert(ret == 0);
 
     /* MG_STRIPS encoding must be at least as strong as plain fwbw */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op);
 
-    if (mutex.num_mutex_pairs > h2fwbw_mutex.num_mutex_pairs){
-        fprintf(stdout, "h2fwbw mg_strips extra mutex pairs: %lu -> %lu\n",
-                (unsigned long)h2fwbw_mutex.num_mutex_pairs,
-                (unsigned long)mutex.num_mutex_pairs);
-    }
-
-    PDDL_ISET(extra_fact);
-    pddlISetMinus2(&extra_fact, &unreachable_fact, &h2fwbw_unreachable_fact);
-    if (pddlISetSize(&extra_fact) > 0){
-        fprintf(stdout, "h2fwbw mg_strips extra unreachable facts [%d]:\n",
-                pddlISetSize(&extra_fact));
-        PDDL_ISET_FOR_EACH(&extra_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    pddlISetFree(&extra_fact);
-
-    PDDL_ISET(extra_op);
-    pddlISetMinus2(&extra_op, &unreachable_op, &h2fwbw_unreachable_op);
-    if (pddlISetSize(&extra_op) > 0){
-        fprintf(stdout, "h2fwbw mg_strips extra unreachable ops [%d]:\n",
-                pddlISetSize(&extra_op));
-        PDDL_ISET_FOR_EACH(&extra_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
-    pddlISetFree(&extra_op);
+    printMutexCmp("h2fwbw mg_strips",
+                  (unsigned long)mutex.num_mutex_pairs,
+                  (unsigned long)h2fwbw_mutex.num_mutex_pairs);
+    printExtraFacts("h2fwbw mg_strips", &unreachable_fact, &h2fwbw_unreachable_fact);
+    printExtraOps("h2fwbw mg_strips", &unreachable_op, &h2fwbw_unreachable_op);
 
     pddlMutexPairsFree(&mutex);
     pddlISetFree(&unreachable_fact);
@@ -420,7 +414,7 @@ TEST(hm_h2_fw_null_mutex, hm_h2_fw)
     assert(ret == 0);
 
     /* Must still detect all unreachable facts/ops found by h2fw */
-    assert_stronger(NULL, &unreachable_fact, &unreachable_op,
+    assertStronger(NULL, &unreachable_fact, &unreachable_op,
                     NULL, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
     pddlISetFree(&unreachable_fact);
@@ -452,7 +446,7 @@ TEST(hm_h2_fw_null_unreachable, hm_h2_fw)
     assert(ret == 0);
 
     /* Must still detect all mutex pairs found by h2fw */
-    assert_stronger(&mutex, NULL, NULL, &h2fw_mutex, NULL, NULL);
+    assertStronger(&mutex, NULL, NULL, &h2fw_mutex, NULL, NULL);
 
     pddlMutexPairsFree(&mutex);
 }
@@ -488,34 +482,16 @@ TEST(hm_h2_fwbw_disamb_fw_op_pre, hm_h2_fwbw)
     assert(ret == 0);
 
     /* Enabling fw_op_pre disambiguation must produce >= h2fwbw results */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op);
 
-    if (mutex.num_mutex_pairs > h2fwbw_mutex.num_mutex_pairs){
-        fprintf(stdout, "h2fwbw disamb_fw_op_pre extra mutex pairs: %lu -> %lu\n",
-                (unsigned long)h2fwbw_mutex.num_mutex_pairs,
-                (unsigned long)mutex.num_mutex_pairs);
-    }
-
-    PDDL_ISET(extra_fact);
-    pddlISetMinus2(&extra_fact, &unreachable_fact, &h2fwbw_unreachable_fact);
-    if (pddlISetSize(&extra_fact) > 0){
-        fprintf(stdout, "h2fwbw disamb_fw_op_pre extra unreachable facts [%d]:\n",
-                pddlISetSize(&extra_fact));
-        PDDL_ISET_FOR_EACH(&extra_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    pddlISetFree(&extra_fact);
-
-    PDDL_ISET(extra_op);
-    pddlISetMinus2(&extra_op, &unreachable_op, &h2fwbw_unreachable_op);
-    if (pddlISetSize(&extra_op) > 0){
-        fprintf(stdout, "h2fwbw disamb_fw_op_pre extra unreachable ops [%d]:\n",
-                pddlISetSize(&extra_op));
-        PDDL_ISET_FOR_EACH(&extra_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
-    pddlISetFree(&extra_op);
+    printMutexCmp("h2fwbw disamb_fw_op_pre",
+                  (unsigned long)mutex.num_mutex_pairs,
+                  (unsigned long)h2fwbw_mutex.num_mutex_pairs);
+    printExtraFacts("h2fwbw disamb_fw_op_pre",
+                    &unreachable_fact, &h2fwbw_unreachable_fact);
+    printExtraOps("h2fwbw disamb_fw_op_pre",
+                  &unreachable_op, &h2fwbw_unreachable_op);
 
     pddlMutexPairsFree(&mutex);
     pddlISetFree(&unreachable_fact);
@@ -553,34 +529,16 @@ TEST(hm_h2_fwbw_disamb_bw_op_pre, hm_h2_fwbw)
     assert(ret == 0);
 
     /* Enabling bw_op_pre disambiguation must produce >= h2fwbw results */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op);
 
-    if (mutex.num_mutex_pairs > h2fwbw_mutex.num_mutex_pairs){
-        fprintf(stdout, "h2fwbw disamb_bw_op_pre extra mutex pairs: %lu -> %lu\n",
-                (unsigned long)h2fwbw_mutex.num_mutex_pairs,
-                (unsigned long)mutex.num_mutex_pairs);
-    }
-
-    PDDL_ISET(extra_fact);
-    pddlISetMinus2(&extra_fact, &unreachable_fact, &h2fwbw_unreachable_fact);
-    if (pddlISetSize(&extra_fact) > 0){
-        fprintf(stdout, "h2fwbw disamb_bw_op_pre extra unreachable facts [%d]:\n",
-                pddlISetSize(&extra_fact));
-        PDDL_ISET_FOR_EACH(&extra_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    pddlISetFree(&extra_fact);
-
-    PDDL_ISET(extra_op);
-    pddlISetMinus2(&extra_op, &unreachable_op, &h2fwbw_unreachable_op);
-    if (pddlISetSize(&extra_op) > 0){
-        fprintf(stdout, "h2fwbw disamb_bw_op_pre extra unreachable ops [%d]:\n",
-                pddlISetSize(&extra_op));
-        PDDL_ISET_FOR_EACH(&extra_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
-    pddlISetFree(&extra_op);
+    printMutexCmp("h2fwbw disamb_bw_op_pre",
+                  (unsigned long)mutex.num_mutex_pairs,
+                  (unsigned long)h2fwbw_mutex.num_mutex_pairs);
+    printExtraFacts("h2fwbw disamb_bw_op_pre",
+                    &unreachable_fact, &h2fwbw_unreachable_fact);
+    printExtraOps("h2fwbw disamb_bw_op_pre",
+                  &unreachable_op, &h2fwbw_unreachable_op);
 
     pddlMutexPairsFree(&mutex);
     pddlISetFree(&unreachable_fact);
@@ -621,11 +579,11 @@ TEST(hm_h2_fwbw_no_dead, hm_h2_fwbw)
     assert(ret == 0);
 
     /* no_dead must be at least as strong as forward-only h^2 */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
     /* full h2fwbw must be at least as strong as no_dead */
-    assert_stronger(&h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
+    assertStronger(&h2fwbw_mutex, &h2fwbw_unreachable_fact, &h2fwbw_unreachable_op,
                     &mutex, &unreachable_fact, &unreachable_op);
 
     pddlMutexPairsFree(&mutex);
@@ -666,37 +624,14 @@ TEST(hm_h2_fwbw_task_fdr, hm_h2_fwbw)
     assert(ret == 0);
 
     /* FDR task must produce results at least as strong as forward-only h^2 */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
-    if (mutex.num_mutex_pairs > h2fw_mutex.num_mutex_pairs){
-        fprintf(stdout, "h2fwbw task_fdr extra mutex pairs: %lu -> %lu\n",
-                (unsigned long)h2fw_mutex.num_mutex_pairs,
-                (unsigned long)mutex.num_mutex_pairs);
-    }else{
-        fprintf(stdout, "h2fwbw task_fdr mutex pairs: %lu\n",
-                (unsigned long)mutex.num_mutex_pairs);
-    }
-
-    PDDL_ISET(extra_fact);
-    pddlISetMinus2(&extra_fact, &unreachable_fact, &h2fw_unreachable_fact);
-    if (pddlISetSize(&extra_fact) > 0){
-        fprintf(stdout, "h2fwbw task_fdr extra unreachable facts [%d]:\n",
-                pddlISetSize(&extra_fact));
-        PDDL_ISET_FOR_EACH(&extra_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    pddlISetFree(&extra_fact);
-
-    PDDL_ISET(extra_op);
-    pddlISetMinus2(&extra_op, &unreachable_op, &h2fw_unreachable_op);
-    if (pddlISetSize(&extra_op) > 0){
-        fprintf(stdout, "h2fwbw task_fdr extra unreachable ops [%d]:\n",
-                pddlISetSize(&extra_op));
-        PDDL_ISET_FOR_EACH(&extra_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
-    pddlISetFree(&extra_op);
+    printMutexCmp("h2fwbw task_fdr",
+                  (unsigned long)mutex.num_mutex_pairs,
+                  (unsigned long)h2fw_mutex.num_mutex_pairs);
+    printExtraFacts("h2fwbw task_fdr", &unreachable_fact, &h2fw_unreachable_fact);
+    printExtraOps("h2fwbw task_fdr", &unreachable_op, &h2fw_unreachable_op);
 
     pddlMutexPairsFree(&mutex);
     pddlISetFree(&unreachable_fact);
@@ -731,37 +666,14 @@ TEST(hm_h3, hm_h2_fw)
     assert(ret == 0);
 
     /* h^3 must be at least as strong as h^2 forward */
-    assert_stronger(&mutex, &unreachable_fact, &unreachable_op,
+    assertStronger(&mutex, &unreachable_fact, &unreachable_op,
                     &h2fw_mutex, &h2fw_unreachable_fact, &h2fw_unreachable_op);
 
-    if (mutex.num_mutex_pairs > h2fw_mutex.num_mutex_pairs){
-        fprintf(stdout, "h3 mutex pairs: %lu -> %lu\n",
-                (unsigned long)h2fw_mutex.num_mutex_pairs,
-                (unsigned long)mutex.num_mutex_pairs);
-    }else{
-        fprintf(stdout, "h3 mutex pairs: %lu\n",
-                (unsigned long)mutex.num_mutex_pairs);
-    }
-
-    PDDL_ISET(extra_fact);
-    pddlISetMinus2(&extra_fact, &unreachable_fact, &h2fw_unreachable_fact);
-    if (pddlISetSize(&extra_fact) > 0){
-        fprintf(stdout, "h3 extra unreachable facts [%d]:\n",
-                pddlISetSize(&extra_fact));
-        PDDL_ISET_FOR_EACH(&extra_fact, fact)
-            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
-    }
-    pddlISetFree(&extra_fact);
-
-    PDDL_ISET(extra_op);
-    pddlISetMinus2(&extra_op, &unreachable_op, &h2fw_unreachable_op);
-    if (pddlISetSize(&extra_op) > 0){
-        fprintf(stdout, "h3 extra unreachable ops [%d]:\n",
-                pddlISetSize(&extra_op));
-        PDDL_ISET_FOR_EACH(&extra_op, op)
-            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
-    }
-    pddlISetFree(&extra_op);
+    printMutexCmp("h3",
+                  (unsigned long)mutex.num_mutex_pairs,
+                  (unsigned long)h2fw_mutex.num_mutex_pairs);
+    printExtraFacts("h3", &unreachable_fact, &h2fw_unreachable_fact);
+    printExtraOps("h3", &unreachable_op, &h2fw_unreachable_op);
 
     pddlMutexPairsFree(&mutex);
     pddlISetFree(&unreachable_fact);
