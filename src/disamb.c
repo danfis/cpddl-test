@@ -2,28 +2,32 @@
 #include "context.h"
 #include <assert.h>
 
-static pddl_mutex_pairs_t h2;
-static pddl_iset_t h2_unreachable_op;
-static pddl_iset_t h2_unreachable_fact;
+static pddl_mg_strips_t mg_strips;
+static pddl_mutex_pairs_t mutex;
 
 
 TEST(disamb_root, strips_pruned)
 {
-    pddlMutexPairsInitStrips(&h2, &C.strips);
-    pddlISetInit(&h2_unreachable_op);
-    pddlISetInit(&h2_unreachable_fact);
+    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
 
-    //pddlErrInfoEnable(&err, stdout);
-    int ret = pddlH2FwMutexFactsOps(&C.strips, &h2, &h2_unreachable_fact,
-                                    &h2_unreachable_op, &C.err);
+    pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
+    pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
+
+    pddl_hm_mutex_config_t hmcfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    hmcfg.strips = &mg_strips.strips;
+    hmcfg.mgroups = &mg_strips.mg;
+    hmcfg.mutex_pairs = &mutex;
+
+    pddl_hm_mutex_result_t hm_res = PDDL_HM_MUTEX_RESULT_INIT;
+    hm_res.mutex_pairs = &mutex;
+    int ret = pddlHm(&hmcfg, &hm_res, &C.err);
     assert(ret == 0);
 }
 
 TEST_TEAR_DOWN(disamb_root)
 {
-    pddlMutexPairsFree(&h2);
-    pddlISetFree(&h2_unreachable_op);
-    pddlISetFree(&h2_unreachable_fact);
+    pddlMutexPairsFree(&mutex);
+    pddlMGStripsFree(&mg_strips);
 }
 
 static int disamb(pddl_disamb_t *dis,
@@ -49,24 +53,26 @@ static int disamb(pddl_disamb_t *dis,
     return st;
 }
 
-TEST(disambiguation, h2)
+TEST(disambiguation, disamb_root)
 {
     pddl_strips_t strips2;
 
-    pddlStripsInitCopy(&strips2, &C.strips);
+    pddlStripsInitCopy(&strips2, &mg_strips.strips);
 
     pddl_disamb_t dis;
-    pddlDisambInit(&dis, C.strips.fact.fact_size, &h2, &C.mg);
-    if (disamb(&dis, &C.strips, &C.strips.goal, &strips2.goal, "Goal:") < 0){
+    pddlDisambInit(&dis, mg_strips.strips.fact.fact_size, &mutex,
+                   &mg_strips.mg);
+    if (disamb(&dis, &mg_strips.strips, &mg_strips.strips.goal,
+               &strips2.goal, "Goal:") < 0){
         fprintf(stdout, "Unsolvable\n");
     }else{
-        for (int op_id = 0; op_id < C.strips.op.op_size && op_id < 500; ++op_id){
-            const pddl_strips_op_t *op = C.strips.op.op[op_id];
+        for (int op_id = 0; op_id < mg_strips.strips.op.op_size && op_id < 500; ++op_id){
+            const pddl_strips_op_t *op = mg_strips.strips.op.op[op_id];
             pddl_strips_op_t *op2 = strips2.op.op[op_id];
             char header[128];
             snprintf(header, 128, "(%s)", op->name);
             header[127] = 0;
-            if (disamb(&dis, &C.strips, &op->pre, &op2->pre, header) < 0)
+            if (disamb(&dis, &mg_strips.strips, &op->pre, &op2->pre, header) < 0)
                 fprintf(stdout, "Unreachable: (%s)\n", op->name);
         }
     }
@@ -327,30 +333,13 @@ static void disambTestMinFull(pddl_disamb_t *dis,
 
 TEST_COND(disambiguation_min, disambiguation, CADICAL)
 {
-    pddl_mg_strips_t mg_strips;
-    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
-
-    pddl_mutex_pairs_t mutex;
-    pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
-    pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
-
-    pddl_hm_mutex_config_t hmcfg = PDDL_HM_MUTEX_CONFIG_INIT;
-    hmcfg.strips = &mg_strips.strips;
-    hmcfg.mgroups = &mg_strips.mg;
-    hmcfg.mutex_pairs = &mutex;
-
-    pddl_hm_mutex_result_t hm_res = PDDL_HM_MUTEX_RESULT_INIT;
-    hm_res.mutex_pairs = &mutex;
-    int ret = pddlHm(&hmcfg, &hm_res, &C.err);
-    assert(ret == 0);
-
     pddl_disamb_t dis;
     pddlDisambInit(&dis, mg_strips.strips.fact.fact_size,
                    &mutex, &mg_strips.mg);
 
     disambTestMin(&dis, &mg_strips.strips, &mg_strips.strips.goal, "Goal:");
 
-    for (int op_id = 0; op_id < C.strips.op.op_size && op_id < 300; ++op_id){
+    for (int op_id = 0; op_id < mg_strips.strips.op.op_size && op_id < 300; ++op_id){
         const pddl_strips_op_t *op = mg_strips.strips.op.op[op_id];
         char header[1024];
         snprintf(header, 1024, "(%s)", op->name);
@@ -360,28 +349,10 @@ TEST_COND(disambiguation_min, disambiguation, CADICAL)
 
 
     pddlDisambFree(&dis);
-    pddlMutexPairsFree(&mutex);
-    pddlMGStripsFree(&mg_strips);
 }
 
 TEST_COND(disambiguation_min_full, disambiguation, CADICAL)
 {
-    pddl_mg_strips_t mg_strips;
-    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
-
-    pddl_mutex_pairs_t mutex;
-    pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
-    pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
-
-    pddl_hm_mutex_config_t hmcfg = PDDL_HM_MUTEX_CONFIG_INIT;
-    hmcfg.strips = &mg_strips.strips;
-    hmcfg.mgroups = &mg_strips.mg;
-    hmcfg.mutex_pairs = &mutex;
-
-    pddl_hm_mutex_result_t hm_res = PDDL_HM_MUTEX_RESULT_INIT;
-    hm_res.mutex_pairs = &mutex;
-    int ret = pddlHm(&hmcfg, &hm_res, &C.err);
-    assert(ret == 0);
 
     pddl_disamb_t dis;
     pddlDisambInit(&dis, mg_strips.strips.fact.fact_size,
@@ -389,7 +360,7 @@ TEST_COND(disambiguation_min_full, disambiguation, CADICAL)
 
     disambTestMinFull(&dis, &mg_strips.strips, &mg_strips.strips.goal, "Goal:");
 
-    for (int op_id = 0; op_id < C.strips.op.op_size && op_id < 300; op_id += 3){
+    for (int op_id = 0; op_id < mg_strips.strips.op.op_size && op_id < 300; op_id += 3){
         const pddl_strips_op_t *op = mg_strips.strips.op.op[op_id];
         char header[1024];
         snprintf(header, 1024, "(%s)", op->name);
@@ -399,6 +370,4 @@ TEST_COND(disambiguation_min_full, disambiguation, CADICAL)
 
 
     pddlDisambFree(&dis);
-    pddlMutexPairsFree(&mutex);
-    pddlMGStripsFree(&mg_strips);
 }
