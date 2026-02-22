@@ -14,7 +14,7 @@ static void printFact(int pred_user_id,
     printf(")\n");
 }
 
-TEST_EXPLICIT(datalog)
+TEST_ONCE(datalog)
 {
     pddl_datalog_t *dl;
 
@@ -149,7 +149,7 @@ static void annotation(pddl_datalog_t *dl,
     printf(".\n");
 }
 
-TEST_EXPLICIT(datalog_annotated)
+TEST_ONCE(datalog_annotated)
 {
     pddl_datalog_t *dl;
 

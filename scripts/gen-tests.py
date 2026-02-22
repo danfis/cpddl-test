@@ -10,7 +10,7 @@ GlobalTearDown = False
 pat_test = re.compile(r'^\s*TEST\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+)\).*$')
 pat_test_cond = re.compile(r'^\s*TEST_COND\(([a-zA-Z0-9_]+) *, *([a-zA-Z0-9_]+), *([a-zA-Z0-9_ ]+)\).*$')
 pat_test_tear_down = re.compile(r'^\s*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
-pat_test_explicit = re.compile(r'^\s*TEST_EXPLICIT\(([a-zA-Z0-9_]+) *\).*$')
+pat_test_explicit = re.compile(r'^\s*TEST_ONCE\(([a-zA-Z0-9_]+) *\).*$')
 pat_global_tear_down = re.compile(r'^\s*TEST_GLOBAL_TEAR_DOWN.*$')
 pat_define = re.compile(r'^ *# *define +PDDL_([A-Z_0-9]+).*$')
 

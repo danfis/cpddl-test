@@ -2,7 +2,7 @@
 #include "context.h"
 #include <assert.h>
 
-TEST_EXPLICIT(lifted_mgroup_tests)
+TEST_ONCE(lifted_mgroup_tests)
 {
 }
 

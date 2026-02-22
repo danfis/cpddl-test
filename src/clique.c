@@ -26,7 +26,7 @@ static void addClique(const pddl_iset_t *clique, void *ud)
     pddlSetISetAdd(sset, clique);
 }
 
-TEST_EXPLICIT(clique_rand)
+TEST_ONCE(clique_rand)
 {
     pddl_rand_t rnd;
     pddlRandInitAuto(&rnd);
@@ -108,7 +108,7 @@ static void addBiclique(const pddl_iset_t *left,
     pddlISetFree(&biclique);
 }
 
-TEST_EXPLICIT(clique_biclique_rand)
+TEST_ONCE(clique_biclique_rand)
 {
     pddl_rand_t rnd;
     pddlRandInitAuto(&rnd);

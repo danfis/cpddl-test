@@ -3,7 +3,7 @@
 #include "context.h"
 #include <assert.h>
 
-TEST_EXPLICIT(subprocess_execvp)
+TEST_ONCE(subprocess_execvp)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddlErrLogEnable(&err, stderr);
