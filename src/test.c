@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <strings.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <semaphore.h>
@@ -828,9 +829,50 @@ static void printReport(void)
         printReportFailures();
 }
 
+static void cleanRegDirRecursive(const char *dirpath, size_t dirpath_len)
+{
+    DIR *dir = opendir(dirpath);
+    if (dir == NULL)
+        return;
+
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL){
+        if (entry->d_name[0] == '.')
+            continue;
+
+        char fullpath[4096];
+        size_t entry_len = strlen(entry->d_name);
+        if (dirpath_len + 1 + entry_len >= sizeof(fullpath)){
+            continue;
+        }
+
+        memcpy(fullpath, dirpath, dirpath_len);
+        fullpath[dirpath_len] = '/';
+        memcpy(fullpath + dirpath_len + 1, entry->d_name, entry_len + 1);
+
+        if (entry->d_type == DT_DIR){
+            cleanRegDirRecursive(fullpath, dirpath_len + 1 + entry_len);
+        }else if (entry->d_type == DT_REG){
+            if (entry_len >= 4 &&
+                entry->d_name[entry_len - 4] == '.' &&
+                entry->d_name[entry_len - 3] == 't' &&
+                entry->d_name[entry_len - 2] == 'm' &&
+                entry->d_name[entry_len - 1] == 'p'){
+                printf("Cleaning reg/: %-100s\r", fullpath);
+                fflush(stdout);
+                unlink(fullpath);
+            }
+        }
+    }
+
+    closedir(dir);
+    printf("Cleaning reg/: %-100s\r", "DONE");
+    fflush(stdout);
+}
+
 static void cleanRegDir(void)
 {
-    system("find reg/ -name '*.tmp' -printf 'Cleaning reg/: %-100p\r' -exec rm '{}' ';'");
+    cleanRegDirRecursive("reg", 3);
     printf("\n");
 }
 

@@ -87,9 +87,9 @@ check: all
 check-all: all
 	./test -A $(T)
 
-check-valgrind: all clean-reg
+check-valgrind: all
 	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
-check-segfault: all clean-reg
+check-segfault: all
 	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
 check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test $(T)
