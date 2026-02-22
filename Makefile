@@ -37,6 +37,7 @@ TESTS += strips
 TESTS += mgroup
 TESTS += mutex
 TESTS += h1
+TESTS += hm
 TESTS += sym
 TESTS += irrelevance
 TESTS += invertible
