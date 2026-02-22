@@ -270,6 +270,105 @@ TEST(h2fwbw, h2)
     pddlISetFree(&h2fwbw_unreachable_op);
 }
 
+TEST(h2fwbw_no_dead_from_disambiguation, h2)
+{
+    PDDL_ISET(h2fwbw_unreachable_op);
+    PDDL_ISET(h2fwbw_unreachable_fact);
+    pddl_mutex_pairs_t h2fwbw;
+    pddlMutexPairsInitStrips(&h2fwbw, &C.strips);
+    pddlISetInit(&h2fwbw_unreachable_fact);
+    pddlISetInit(&h2fwbw_unreachable_op);
+
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW_BW;
+    cfg.strips = &C.strips;
+    cfg.mgroups = &C.mg;
+    cfg.mutex_pairs = &h2fwbw;
+    cfg.disambiguate_fw_op_pre_use_dead = pddl_false;
+    cfg.disambiguate_fw_op_prevail_add_use_dead = pddl_false;
+    cfg.disambiguate_bw_op_pre_use_dead = pddl_false;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = &h2fwbw;
+    res.unreachable_facts = &h2fwbw_unreachable_fact;
+    res.unreachable_ops = &h2fwbw_unreachable_op;
+
+    //pddlErrInfoEnable(&err, stdout);
+    int ret = pddlHm(&cfg, &res, &C.err);
+    assert(ret == 0);
+
+    assert(pddlISetIsSubset(&h2_unreachable_fact, &h2fwbw_unreachable_fact));
+    assert(pddlISetIsSubset(&h2_unreachable_op, &h2fwbw_unreachable_op));
+
+    if (h2fwbw.num_mutex_pairs - h2.num_mutex_pairs > 0){
+        unsigned long num = 0;
+        PDDL_MUTEX_PAIRS_FOR_EACH(&h2fwbw, f1, f2){
+            if (f1 == f2)
+                continue;
+            ++num;
+        }
+        assert(num == h2fwbw.num_mutex_pairs);
+        fprintf(stdout, "Mutex pairs: %lu -> %lu\n",
+                (unsigned long)h2.num_mutex_pairs,
+                (unsigned long)h2fwbw.num_mutex_pairs);
+    }
+
+    PDDL_MUTEX_PAIRS_FOR_EACH(&h2fwbw, f1, f2){
+        if (f1 == f2){
+            assert(pddlISetIn(f1, &h2fwbw_unreachable_fact));
+        }
+    }
+
+    PDDL_ISET(rm);
+    pddlISetMinus2(&rm, &h2fwbw_unreachable_fact, &h2_unreachable_fact);
+    if (pddlISetSize(&rm) > 0){
+        fprintf(stdout, "Unreachable facts [%d + %d/%d]:\n",
+                pddlISetSize(&h2_unreachable_fact),
+                pddlISetSize(&rm), C.strips.fact.fact_size);
+        PDDL_ISET_FOR_EACH(&rm, fact){
+            fprintf(stdout, "  (%s)\n", C.strips.fact.fact[fact]->name);
+        }
+    }
+
+    pddlISetMinus2(&rm, &h2fwbw_unreachable_op, &h2_unreachable_op);
+    if (pddlISetSize(&rm) > 0){
+        fprintf(stdout, "Unreachable ops [%d + %d/%d]:\n",
+                pddlISetSize(&h2_unreachable_op),
+                pddlISetSize(&rm), C.strips.op.op_size);
+        PDDL_ISET_FOR_EACH(&rm, op)
+            fprintf(stdout, "  (%s)\n", C.strips.op.op[op]->name);
+    }
+    pddlISetFree(&rm);
+
+    pddl_mutex_pairs_t mutex2;
+    pddlMutexPairsInitCopy(&mutex2, &h2fwbw);
+    PDDL_MUTEX_PAIRS_FOR_EACH(&h2fwbw, f1, f2){
+        assert(pddlMutexPairsIsMutex(&mutex2, f1, f2));
+    }
+
+    if (pddlISetSize(&h2fwbw_unreachable_fact) > 0){
+        int *remap = PDDL_ZALLOC_ARR(int, C.strips.fact.fact_size);
+        int new_size = pddlFactsDelFactsGenRemap(C.strips.fact.fact_size,
+                                                 &h2fwbw_unreachable_fact, remap);
+        pddlMutexPairsRemapFacts(&mutex2, new_size, remap);
+        PDDL_MUTEX_PAIRS_FOR_EACH(&h2fwbw, f1, f2){
+            if (remap[f1] < 0 || remap[f2] < 0)
+                continue;
+            if (pddlMutexPairsIsMutex(&h2fwbw, f1, f2)){
+                assert(pddlMutexPairsIsMutex(&mutex2, remap[f1], remap[f2]));
+            }
+        }
+        PDDL_FREE(remap);
+    }
+    pddlMutexPairsFree(&mutex2);
+    
+
+    pddlMutexPairsFree(&h2fwbw);
+    pddlISetFree(&h2fwbw_unreachable_fact);
+    pddlISetFree(&h2fwbw_unreachable_op);
+}
+
 TEST(h3, h2)
 {
     pddl_mutex_pairs_t h3;
