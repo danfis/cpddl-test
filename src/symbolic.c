@@ -31,37 +31,33 @@ static void checkPlanStates(const pddl_fdr_t *fdr, pddl_symbolic_task_t *ss)
     pddlPlanFileFDRFree(&planf);
 }
 
-static void checkPlan(const pddl_strips_t *strips,
+static void checkPlan(const pddl_fdr_t *fdr,
                       const pddl_iarr_t *plan,
                       pddl_bool_t check_optimality)
 {
-    PDDL_ISET(state);
-    pddlISetUnion(&state, &strips->init);
+    int *state = PDDL_ALLOC_ARR(int, fdr->var.var_size);
+    memcpy(state, fdr->init, sizeof(int) * fdr->var.var_size);
     int plan_cost = 0;
     PDDL_IARR_FOR_EACH(plan, op_id){
-        const pddl_strips_op_t *op = strips->op.op[op_id];
+        const pddl_fdr_op_t *op = fdr->op.op[op_id];
         plan_cost += op->cost;
-        assert(pddlISetIsSubset(&op->pre, &state));
-        if (!pddlISetIsSubset(&op->pre, &state)){
+        if (!pddlFDRPartStateIsConsistentWithState(&op->pre, state))
             fprintf(stderr, "Failed on operator %d\n", op_id);
-            return;
-        }
-        PDDL_ISET(state2);
-        pddlISetMinus2(&state2, &state, &op->del_eff);
-        pddlISetUnion(&state2, &op->add_eff);
+        assert(pddlFDRPartStateIsConsistentWithState(&op->pre, state));
+
+        int *state2 = PDDL_ALLOC_ARR(int, fdr->var.var_size);
+        memcpy(state2, state, sizeof(int) * fdr->var.var_size);
+        pddlFDRPartStateApplyToState(&op->eff, state2);
         for (int cei = 0; cei < op->cond_eff_size; ++cei){
-            const pddl_strips_op_cond_eff_t *ce = &op->cond_eff[cei];
-            if (pddlISetIsSubset(&ce->pre, &state)){
-                pddlISetMinus(&state2, &ce->del_eff);
-                pddlISetUnion(&state2, &ce->add_eff);
-            }
+            const pddl_fdr_op_cond_eff_t *ce = &op->cond_eff[cei];
+            if (pddlFDRPartStateIsConsistentWithState(&ce->pre, state))
+                pddlFDRPartStateApplyToState(&ce->eff, state2);
         }
-        pddlISetEmpty(&state);
-        pddlISetUnion(&state, &state2);
-        pddlISetFree(&state2);
+        PDDL_FREE(state);
+        state = state2;
     }
-    assert(pddlISetIsSubset(&strips->goal, &state));
-    pddlISetFree(&state);
+    assert(pddlFDRPartStateIsConsistentWithState(&fdr->goal, state));
+    PDDL_FREE(state);
 
     if (check_optimality){
         if (C.optimal_cost >= 0)
@@ -96,6 +92,7 @@ static void run(pddl_symbolic_task_config_t *symb_cfg,
     symb_cfg->goal_constr_max_time = 1000.;
     symb_cfg->bw.step_time_limit = 30.;
 
+    pddlErrLogEnable(&C.err, stderr);
     pddl_symbolic_task_t *task = pddlSymbolicTaskNew(&C.fdr, symb_cfg, &C.err);
     if (task == NULL){
         pddlErrPrint(&C.err, 0, stdout);
@@ -106,7 +103,7 @@ static void run(pddl_symbolic_task_config_t *symb_cfg,
     int res = pddlSymbolicTaskSearch(task, &plan, &C.err);
     assert(res == PDDL_SYMBOLIC_PLAN_FOUND || res == PDDL_SYMBOLIC_PLAN_NOT_EXIST);
     if (res == PDDL_SYMBOLIC_PLAN_FOUND){
-        checkPlan(&C.strips, &plan, check_optimality);
+        checkPlan(&C.fdr, &plan, check_optimality);
         checkPlanStates(&C.fdr, task);
 
         int plan_cost = 0;
