@@ -156,11 +156,8 @@ def parseTasks(cfg):
     quick_set = set(task_set_cfg.get('quick', []))
 
     def expand(items, context):
-        """Expand test-set:name references into their constituent test names.
-        Returns (expanded_list, is_numeric) where is_numeric is True when
-        test-set:numeric appeared in an enable list."""
+        """Expand test-set:name references into their constituent test names."""
         result = []
-        is_numeric = False
         for item in items:
             if item.startswith('test-set:'):
                 set_name = item[len('test-set:'):]
@@ -168,11 +165,9 @@ def parseTasks(cfg):
                     raise ValueError(
                         f'Unknown test-set {set_name!r} referenced in {context}')
                 result += test_sets[set_name]
-                if context == 'enable' and set_name == 'numeric':
-                    is_numeric = True
             else:
                 result.append(item)
-        return result, is_numeric
+        return result
 
     # Auto-generate the special "_" task from all TEST_ONCE tests.
     once_tests = sorted(name for name, t in Test.items() if t['explicit'])
@@ -181,7 +176,6 @@ def parseTasks(cfg):
         'enabled': once_tests,
         'is-base': True,
         'is-quick': True,
-        'is-numeric': False,
     }
 
     for entry in cfg.get('tasks', []):
@@ -196,15 +190,14 @@ def parseTasks(cfg):
         raw_disable = entry.get('disable', [])
         raw_enable  = entry.get('enable',  [])
 
-        disabled, _ = expand(raw_disable, 'disable')
-        enabled, is_numeric = expand(raw_enable, 'enable')
+        disabled = expand(raw_disable, 'disable')
+        enabled  = expand(raw_enable,  'enable')
 
         Task[name] = {
             'disabled': sorted(set(disabled)),
             'enabled': sorted(set(enabled)),
             'is-base': name in base_set,
             'is-quick': name in quick_set,
-            'is-numeric': is_numeric,
         }
 
 
@@ -334,13 +327,6 @@ def genTaskDefs():
             print(f'        int test_id = testIdFromName("{d}");')
             print(f'        if (test_id >= 0){{')
             print(f'            tasks[{idx}].default_enabled_tests[test_id] = 1;')
-            print(f'        }}')
-            print(f'    }}')
-        if task['is-numeric']:
-            print(f'    {{')
-            print(f'        for (int test_id = 0; test_id < test_set_size; ++test_id){{')
-            print(f'            if (!tasks[{idx}].default_enabled_tests[test_id])')
-            print(f'                tasks[{idx}].default_disabled_tests[test_id] = 1;')
             print(f'        }}')
             print(f'    }}')
     print('}')
