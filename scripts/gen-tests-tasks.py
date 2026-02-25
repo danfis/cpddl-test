@@ -151,6 +151,10 @@ def parseTasks(cfg):
             'Top-level [disable] table is no longer supported; '
             'move disable lists into each [[tasks]] entry.')
 
+    task_set_cfg = cfg.get('task-set', {})
+    base_set = set(task_set_cfg.get('base', []))
+    quick_set = set(task_set_cfg.get('quick', []))
+
     def expand(items, context):
         """Expand test-set:name references into their constituent test names.
         Returns (expanded_list, is_numeric) where is_numeric is True when
@@ -176,6 +180,7 @@ def parseTasks(cfg):
         'disabled': [],
         'enabled': once_tests,
         'is-base': True,
+        'is-quick': True,
         'is-numeric': False,
     }
 
@@ -197,7 +202,8 @@ def parseTasks(cfg):
         Task[name] = {
             'disabled': sorted(set(disabled)),
             'enabled': sorted(set(enabled)),
-            'is-base': entry.get('base', False),
+            'is-base': name in base_set,
+            'is-quick': name in quick_set,
             'is-numeric': is_numeric,
         }
 
@@ -215,6 +221,7 @@ struct task_def {
     int default_disabled_tests[test_set_size];
     int default_enabled_tests[test_set_size];
     int is_base;
+    int is_quick;
 };
 typedef struct task_def task_def_t;
 
@@ -297,6 +304,7 @@ def genTaskDefs():
     print('static task_def_t tasks[] = {')
     for idx, name in enumerate(task_names):
         is_base = 1 if Task[name]['is-base'] else 0
+        is_quick = 1 if Task[name]['is-quick'] else 0
         print(f'    {{')
         print(f'        .id = {idx},')
         print(f'        .name = "{name}",')
@@ -304,7 +312,8 @@ def genTaskDefs():
         print(f'        .enabled_tests = {{ 0 }},')
         print(f'        .default_disabled_tests = {{ 0 }},')
         print(f'        .default_enabled_tests = {{ 0 }},')
-        print(f'        .is_base = {is_base}')
+        print(f'        .is_base = {is_base},')
+        print(f'        .is_quick = {is_quick}')
         print(f'    }},')
     print('};')
     print(f'static const int tasks_size = {len(task_names)};')

@@ -1,6 +1,10 @@
 #ifndef TASKS_TESTS_H
 #define TASKS_TESTS_H
 
+#define PDDL_TASK_SET_ALL   0
+#define PDDL_TASK_SET_QUICK 1
+#define PDDL_TASK_SET_BASE  2
+
 struct test_def {
     int id;
     char *name;
@@ -20,7 +24,7 @@ void tasksTestsEnableTestMatch(const char *pat);
 void tasksTestsEnableTestEq(const char *pat);
 void tasksTestsEnableTaskMatch(const char *pat);
 void tasksTestsEnableTaskEq(const char *pat);
-void tasksTestsEnableAllTasks(int only_base);
+void tasksTestsEnableAllTasks(int task_set);
 void tasksTestsEnableAllTests(void);
 
 

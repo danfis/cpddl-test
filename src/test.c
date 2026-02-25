@@ -139,6 +139,7 @@ static void usage(const char *progname)
                     progname);
     fprintf(stderr, "  -a       Enable all tests\n");
     fprintf(stderr, "  -B       Enable base tasks\n");
+    fprintf(stderr, "  -Q       Enable quick tasks\n");
     fprintf(stderr, "  -A       Enable all tasks\n");
     fprintf(stderr, "  -v       Increase logging (e.g., -vvv)\n");
     fprintf(stderr, "  -x       Turn off progress\n");
@@ -164,16 +165,19 @@ static void parseOptions(int argc, char *argv[])
     int print_tasks = 0;
     int print_tests = 0;
     int opt;
-    while ((opt = getopt(argc, argv, "haBAvxS:T:s:t:p:DLKm:fl:")) != -1) {
+    while ((opt = getopt(argc, argv, "haBQAvxS:T:s:t:p:DLKm:fl:")) != -1) {
         switch (opt) {
             case 'a':
                 tasksTestsEnableAllTests();
                 break;
             case 'B':
-                tasksTestsEnableAllTasks(1);
+                tasksTestsEnableAllTasks(PDDL_TASK_SET_BASE);
+                break;
+            case 'Q':
+                tasksTestsEnableAllTasks(PDDL_TASK_SET_QUICK);
                 break;
             case 'A':
-                tasksTestsEnableAllTasks(0);
+                tasksTestsEnableAllTasks(PDDL_TASK_SET_ALL);
                 break;
             case 'S':
                 tasksTestsEnableTaskMatch(optarg);

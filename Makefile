@@ -82,6 +82,8 @@ val/validate: val/Makefile val/src/*.cpp
 
 check: all
 	./test $(T)
+check-quick: all
+	./test -Q $(T)
 check-all: all
 	./test -A $(T)
 
@@ -111,6 +113,6 @@ mrproper: clean
 clean-reg:
 	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
-.PHONY: all clean mrproper check check-all \
+.PHONY: all clean mrproper check check-quick check-all \
         check-valgrind check-gdb check-segfault \
         check-bin check-bin-all

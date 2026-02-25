@@ -92,10 +92,12 @@ void tasksTestsEnableTaskEq(const char *pat)
     _tasksTestsEnableTask(pat, cmpEq);
 }
 
-void tasksTestsEnableAllTasks(int only_base)
+void tasksTestsEnableAllTasks(int task_set)
 {
     for (int taski = 0; taski < tasks_size; ++taski){
-        if (only_base && !tasks[taski].is_base)
+        if (task_set == PDDL_TASK_SET_BASE && !tasks[taski].is_base)
+            continue;
+        if (task_set == PDDL_TASK_SET_QUICK && !tasks[taski].is_quick)
             continue;
         tasksEnableTask(taski);
     }
