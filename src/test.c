@@ -306,6 +306,14 @@ static void progress(void)
     sem_post(&shared->lock);
 }
 
+static void progressEnd(void)
+{
+    sem_wait(&shared->lock);
+    printf("\033[%dB", parallel + 1);
+    fflush(stdout);
+    sem_post(&shared->lock);
+}
+
 static void reportSignal(const char *task_name,
                          const char *test_name,
                          int status)
@@ -471,6 +479,19 @@ static void writeRet(const char *task_name, const char *test_name, int ret)
     fclose(retout);
 }
 
+static void writeTime(const char *task_name, const char *test_name, float elapsed)
+{
+    char time_fn[256];
+    fmtOutputFilename(task_name, test_name, "time", time_fn);
+    FILE *timeout = fopen(time_fn, "w");
+    if (timeout == NULL){
+        perror("Opening .time file failed");
+        exit(-1);
+    }
+    fprintf(timeout, "%.6f", elapsed);
+    fclose(timeout);
+}
+
 static void addFail(const char *task_name, const char *test_name, int status)
 {
     char fail_fn[256];
@@ -572,7 +593,9 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         pthread_join(thtimeout, NULL);
 
         pddlTimerStop(&timer);
-        updateTestStatTime(test->id, pddlTimerElapsedInSF(&timer));
+        float time_elapsed = pddlTimerElapsedInSF(&timer);
+        updateTestStatTime(test->id, time_elapsed);
+        writeTime(TEST_TASK, test->name, time_elapsed);
 
         restoreStdOutErr(fd_stdout, fd_stderr);
         if (verbose > 3){
@@ -824,7 +847,8 @@ static void printReport(void)
         fail_len = s;
 
     printLog("\n");
-    for (int i = 0; i < name_len; ++i)
+    printLog("test");
+    for (int i = 0; i < name_len - 4; ++i)
         printLog(" ");
     printLog(" | succ | fail | time\n");
     for (int i = 0; i < name_len + succ_len + fail_len; ++i)
@@ -911,8 +935,10 @@ static int th_progress_end = 0;
 static void *thProgress(void *_)
 {
     while (1){
-        if (th_progress_end)
+        if (th_progress_end){
+            progressEnd();
             return NULL;
+        }
         sleep(1);
         progress();
     }
