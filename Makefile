@@ -22,6 +22,8 @@ VALGRIND_SEGFAULT_OPTS += --trace-children=yes --error-limit=no
 VALGRIND_SEGFAULT_OPTS += --suppressions=test.supp
 
 T ?= -a -B -p6
+T_QUICK ?= -Q -a -p6
+T_ALL ?= -A -a -p6
 
 CFLAGS += -I./
 
@@ -83,9 +85,9 @@ val/validate: val/Makefile val/src/*.cpp
 check: all
 	./test $(T)
 check-quick: all
-	./test -Q $(T)
+	./test $(T_QUICK)
 check-all: all
-	./test -A $(T)
+	./test $(T_ALL)
 
 check-valgrind: all
 	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
