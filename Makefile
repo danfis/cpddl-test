@@ -63,17 +63,14 @@ TESTS += set
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
 TESTS_C := $(foreach test,$(TESTS),src/$(test).c)
 
-C_IN  = src/test.in.c
-C_IN += src/tasks.in.c
+C_IN = src/tests_tasks.in.c
 
 all: $(TARGETS)
 
 test: src/test.c src/tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
 	$(CC) $(CFLAGS) -o $@ $< src/tasks_tests.c $(OBJS) $(LDFLAGS)
-src/test.in.c: scripts/gen-tests.py $(TESTS_C)
-	python3 scripts/gen-tests.py $(TESTS_C) >$@
-src/tasks.in.c: tasks-disable.txt tasks-base.txt tasks-all.txt scripts/gen-tasks.py
-	python3 scripts/gen-tasks.py tasks-disable.txt tasks-base.txt tasks-all.txt >$@
+src/tests_tasks.in.c: scripts/gen-tests-tasks.py config.toml $(TESTS_C) ../pddl/config.h
+	python3 scripts/gen-tests-tasks.py config.toml $(TESTS_C) >$@
 
 .objs/%.o: src/%.c src/%.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<

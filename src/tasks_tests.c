@@ -5,18 +5,7 @@
 #include "tasks_tests.h"
 
 
-#include "test.in.c"
-
-static int testIdFromName(const char *name)
-{
-    for (int test_id = 0; test_id < test_set_size; ++test_id){
-        if (strcmp(test_set[test_id].name, name) == 0)
-            return test_id;
-    }
-    return -1;
-}
-
-#include "tasks.in.c"
+#include "tests_tasks.in.c"
 
 static void taskEnableTestAndChildren(int task_id, int test_id)
 {
