@@ -57,6 +57,7 @@ TESTS += subprocess
 TESTS += lifted_search
 TESTS += search
 TESTS += gaifman
+TESTS += set
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
