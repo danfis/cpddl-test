@@ -5,7 +5,7 @@
 # task configuration.
 #
 # Usage:
-#   gen-tests-tasks.py [--config-header PATH] config.toml src/file1.c ...
+#   gen-tests-tasks.py [--config-header PATH] config.toml src/file1.c ... \
 #       > src/tests_tasks.in.c
 #
 
@@ -54,7 +54,11 @@ def addTest(name, tags):
             return False
     global Test
     if name not in Test:
-        Test[name] = {'dep': None, 'tear-down': False, 'explicit': False}
+        Test[name] = {
+            'dep': None,
+            'tear-down': False,
+            'explicit': False
+        }
     return True
 
 
@@ -277,19 +281,6 @@ def genTestSet():
         print('void __test_global_tear_down(void);')
 
 
-def genTestIdFromName():
-    print('')
-    print('static int testIdFromName(const char *name)')
-    print('{')
-    print('    for (int test_id = 0; test_id < test_set_size; ++test_id){')
-    print('        if (strcmp(test_set[test_id].name, name) == 0)')
-    print('            return test_id;')
-    print('    }')
-    print('    return -1;')
-    print('}')
-    print('')
-
-
 def genTaskDefs():
     print(TASK_DEF_HEADER)
 
@@ -316,19 +307,18 @@ def genTaskDefs():
     for idx, name in enumerate(task_names):
         task = Task[name]
         for d in task['disabled']:
-            print(f'    {{')
-            print(f'        int test_id = testIdFromName("{d}");')
-            print(f'        if (test_id >= 0){{')
-            print(f'            tasks[{idx}].default_disabled_tests[test_id] = 1;')
-            print(f'        }}')
-            print(f'    }}')
+            if d not in Test:
+                print(f'Warning: task {name!r} disables unknown test {d!r}',
+                      file=sys.stderr)
+                continue
+            print(f'    tasks[{idx}].default_disabled_tests[{Test[d]["id"]}] = 1;')
+
         for d in task['enabled']:
-            print(f'    {{')
-            print(f'        int test_id = testIdFromName("{d}");')
-            print(f'        if (test_id >= 0){{')
-            print(f'            tasks[{idx}].default_enabled_tests[test_id] = 1;')
-            print(f'        }}')
-            print(f'    }}')
+            if d not in Test:
+                print(f'Warning: task {name!r} enables unknown test {d!r}',
+                      file=sys.stderr)
+                continue
+            print(f'    tasks[{idx}].default_enabled_tests[{Test[d]["id"]}] = 1;')
     print('}')
 
 
@@ -361,7 +351,6 @@ def main():
 
     genTestDeclarations()
     genTestSet()
-    genTestIdFromName()
     genTaskDefs()
 
 
