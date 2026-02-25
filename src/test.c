@@ -389,6 +389,36 @@ static size_t filesize(const char *fn)
     return sz;
 }
 
+/* Returns 1 if the two files have identical contents, 0 otherwise. */
+static int filesEqual(const char *fn1, const char *fn2)
+{
+    FILE *f1 = fopen(fn1, "rb");
+    if (f1 == NULL)
+        return 0;
+    FILE *f2 = fopen(fn2, "rb");
+    if (f2 == NULL){
+        fclose(f1);
+        return 0;
+    }
+
+    int equal = 1;
+    char buf1[4096], buf2[4096];
+    while (1){
+        size_t n1 = fread(buf1, 1, sizeof(buf1), f1);
+        size_t n2 = fread(buf2, 1, sizeof(buf2), f2);
+        if (n1 != n2 || memcmp(buf1, buf2, n1) != 0){
+            equal = 0;
+            break;
+        }
+        if (n1 == 0)
+            break;
+    }
+
+    fclose(f1);
+    fclose(f2);
+    return equal;
+}
+
 static void redirectStdOutErr(const char *task_name,
                               const char *test_name,
                               int *fd_stdout,
@@ -624,10 +654,7 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         char base[512];
         fmtBaseFilename(task_name, test->name, "out", base);
         if (access(base, F_OK) == 0){
-            char cmd[2048];
-            sprintf(cmd, "diff -q %s %s >/dev/null", base, fn);
-            int ret = system(cmd);
-            if (ret > 0){
+            if (!filesEqual(base, fn)){
                 reportDiffOut(task_name, test->name, base, fn);
                 failed = 1;
             }
