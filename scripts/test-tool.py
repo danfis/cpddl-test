@@ -52,6 +52,9 @@ def parse_args():
     p.add_argument(
         "--gen-golden", action="store_true",
         help="Write outputs directly to golden baseline files instead of .tmp")
+    p.add_argument(
+        "--dry-run", action="store_true",
+        help="Print commands that would be run without executing them")
     return p.parse_args()
 
 
@@ -129,7 +132,8 @@ def check_valgrind_errors(err_tmp, full_leak_check):
 
 def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
             use_valgrind=False, full_leak_check=False,
-            use_bwrap=False, bwrap_base_opts=(), use_gdb=False):
+            use_bwrap=False, bwrap_base_opts=(), use_gdb=False,
+            dry_run=False):
     """Run a single (task, test) combination. Returns (task, test_name, ok, msg)."""
     max_mem = cfg.get("max-mem", 8192)
     max_time = cfg.get("max-time", "5m")
@@ -199,6 +203,10 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
     if max_time and not tool_prefix and not bwrap_prefix:
         cmd = ["timeout", str(max_time)] + cmd
 
+    if dry_run:
+        import shlex
+        return task, test_name, True, shlex.join(cmd)
+
     failures = []
 
     t_start = time.monotonic()
@@ -217,6 +225,17 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
 
     with open(time_tmp, "w") as fh:
         fh.write(f"{elapsed:.3f}\n")
+
+    # If killed by a signal (negative returncode on Unix), record it in err.tmp
+    if result.returncode < 0:
+        import signal as _signal
+        signum = -result.returncode
+        try:
+            signame = _signal.Signals(signum).name
+        except ValueError:
+            signame = f"signal {signum}"
+        with open(err_tmp, "a") as fh:
+            fh.write(f"Process killed by {signame} ({signum})\n")
 
     if gen_golden:
         return task, test_name, True, f"golden written ({elapsed:.2f}s)"
@@ -296,6 +315,16 @@ def main():
     with open(args.config, "rb") as fh:
         cfg = tomllib.load(fh)
 
+    # Remove all stale tool-*.tmp files from previous runs
+    if os.path.isdir("reg"):
+        for dirpath, _dirnames, filenames in os.walk("reg"):
+            for fname in filenames:
+                if fname.startswith("tool-") and fname.endswith(".tmp"):
+                    try:
+                        os.remove(os.path.join(dirpath, fname))
+                    except OSError:
+                        pass
+
     all_tasks = cfg.get("tasks", [])
     all_tests = cfg.get("tests", {})
 
@@ -334,21 +363,25 @@ def main():
         task, test_name, test_opts = item
         return run_one(task, test_name, test_opts, cfg, tool_prefix,
                        args.gen_golden, use_valgrind, args.valgrind_full,
-                       args.bwrap, bwrap_base_opts, args.gdb)
+                       args.bwrap, bwrap_base_opts, args.gdb, args.dry_run)
 
     with ThreadPoolExecutor(max_workers=args.parallel) as executor:
         futures = {executor.submit(job, item): item for item in work}
         for future in as_completed(futures):
             task, test_name, ok, msg = future.result()
-            if ok:
+            if args.dry_run:
+                print(f"{task:<{task_w}}  {test_name:<{test_w}}  {msg}")
+            elif ok:
                 status = f"{GREEN}[PASS]{RESET}"
                 passed += 1
+                print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
             else:
                 status = f"{RED}[FAIL]{RESET}"
                 failed += 1
-            print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
+                print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
 
-    print(f"\n{total} test(s): {passed} passed, {failed} failed.")
+    if not args.dry_run:
+        print(f"\n{total} test(s): {passed} passed, {failed} failed.")
     sys.exit(0 if failed == 0 else 1)
 
 

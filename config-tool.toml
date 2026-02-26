@@ -7,7 +7,7 @@ max-mem = 4096
 max-time = "5m"
 
 # Options common to ALL test calls (appended after --max-mem)
-common-options = ["--lp-solver", "none"]
+common-options = []
 
 # Maximum allowed size of .out.tmp and .output.*.tmp files in bytes (default 5 MB)
 max-output-size = 5242880
@@ -32,5 +32,67 @@ tasks = [
 # Each key is the <test-name>; the value is a list of OPTIONS tokens.
 # Use <OUT> as a placeholder that expands to reg/<task>/tool-<test-name>.output.
 [tests]
-translate-x = ["translate", "--fdr-var-alg", "essential-first", "<OUT>output.sas"]
+# --- pddl ---
 pddl = ["pddl", "--force-adl", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-default = ["pddl", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-ce = ["pddl", "--pddl-ce", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-unit-cost = ["pddl", "--pddl-unit-cost", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-disj-goal = ["pddl", "--pddl-disj-goal", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-neg-cond-all = ["pddl", "--pddl-neg-cond", "all", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-neg-cond-none = ["pddl", "--pddl-neg-cond", "none", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-lmg-fd = ["pddl", "--lmg", "fd", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-lmg-none = ["pddl", "--lmg", "none", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-lendo = ["pddl", "--lendo", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+
+# --- translate ---
+translate-x = ["translate", "--fdr-var-alg", "essential-first", "<OUT>output.sas"]
+translate = ["translate", "<OUT>output.sas"]
+translate-no-tp = ["translate", "--no-tp", "<OUT>output.sas"]
+translate-h2 = ["translate", "--h2", "<OUT>output.sas"]
+translate-tp-hm-h2fw = ["translate", "--tp-hm", "h2fw", "<OUT>output.sas"]
+translate-tp-hm-h2fwbw = ["translate", "--tp-hm", "h2fwbw", "<OUT>output.sas"]
+translate-ground-sql = ["translate", "-G", "sql", "<OUT>output.sas"]
+translate-ground-trie = ["translate", "-G", "trie", "<OUT>output.sas"]
+translate-fdr-h2fwbw = ["translate", "--fdr-h2fwbw", "<OUT>output.sas"]
+translate-lmg-fd = ["translate", "--lmg", "fd", "<OUT>output.sas"]
+translate-lmg-none = ["translate", "--lmg", "none", "<OUT>output.sas"]
+translate-lendo = ["translate", "--lendo", "<OUT>output.sas"]
+translate-no-tp-irr = ["translate", "--no-tp-irr", "<OUT>output.sas"]
+translate-tp-sort-ops = ["translate", "--tp-sort-ops-by-name", "<OUT>output.sas"]
+translate-mg-h2 = ["translate", "--mg", "h2", "<OUT>output.sas"]
+
+# --- lmg ---
+lmg = ["lmg", "<OUT>out.txt"]
+lmg-fd = ["lmg", "--lmg", "fd", "<OUT>out.txt"]
+lmg-none = ["lmg", "--lmg", "none", "<OUT>out.txt"]
+
+# --- strips-as-py ---
+strips-as-py = ["strips-as-py", "<OUT>output.py"]
+
+# --- mutex-group-cover-number ---
+mutex-group-cover-number-h2 = ["mutex-group-cover-number", "h2"]
+
+# --- lplan ---
+lplan-gbfs-ff = ["lplan", "gbfs", "ff", "<OUT>plan"]
+lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "<OUT>plan"]
+lplan-lazy-ff = ["lplan", "lazy", "ff", "<OUT>plan"]
+lplan-lazy-hadd = ["lplan", "lazy", "hadd", "<OUT>plan"]
+lplan-astar-hmax = ["lplan", "astar", "hmax", "<OUT>plan"]
+
+# --- gplan ---
+gplan-gbfs-ff = ["gplan", "gbfs", "ff", "<OUT>plan"]
+gplan-gbfs-hadd = ["gplan", "gbfs", "hadd", "<OUT>plan"]
+gplan-lazy-ff = ["gplan", "lazy", "ff", "<OUT>plan"]
+gplan-lazy-hadd = ["gplan", "lazy", "hadd", "<OUT>plan"]
+gplan-astar-lmc = ["gplan", "astar", "lmc", "<OUT>plan"]
+
+# --- reversibility ---
+reversibility-simple-1 = ["reversibility-simple", "1", "<OUT>out.txt"]
+reversibility-simple-2 = ["reversibility-simple", "2", "<OUT>out.txt"]
+reversibility-iterative-2 = ["reversibility-iterative", "2", "<OUT>out.txt"]
+
+# --- symba ---
+symba-astar-fw = ["symba", "astar", "fw", "<OUT>plan"]
+symba-astar-bw = ["symba", "astar", "bw", "<OUT>plan"]
+symba-gbfs-fw = ["symba", "gbfs", "fw", "<OUT>plan"]
+symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "<OUT>plan"]
