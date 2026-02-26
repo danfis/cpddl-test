@@ -26,6 +26,18 @@ bwrap_options = [
 tasks = [
     "ipc-1998/gripper/prob01",
     "ipc-2002/depot/pfile1",
+    "ipc-1998/movie/prob01",
+    "ipc-1998/mystery/prob01",
+    "ipc-2002/depot/pfile1",
+    "ipc-2002/driverlog/pfile1",
+    "ipc-2002/rovers/pfile1",
+    "ipc-2002/zenotravel/pfile1",
+    "ipc-2008/seq-opt/openstacks/p01",
+    "ipc-2008/seq-opt/pegsol/p01",
+    "ipc-2008/seq-opt/scanalyzer/p01",
+    "ipc-2008/seq-opt/sokoban/p01",
+    "ipc-2011/seq-opt/visitall/problem02-full",
+    "ipc-2014/seq-opt/transport/p01",
 ]
 
 # Named test configurations.
@@ -46,53 +58,52 @@ pddl-lendo = ["pddl", "--lendo", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 
 # --- translate ---
 translate-x = ["translate", "--fdr-var-alg", "essential-first", "<OUT>output.sas"]
-translate = ["translate", "<OUT>output.sas"]
-translate-no-tp = ["translate", "--no-tp", "<OUT>output.sas"]
-translate-h2 = ["translate", "--h2", "<OUT>output.sas"]
-translate-tp-hm-h2fw = ["translate", "--tp-hm", "h2fw", "<OUT>output.sas"]
-translate-tp-hm-h2fwbw = ["translate", "--tp-hm", "h2fwbw", "<OUT>output.sas"]
-translate-ground-sql = ["translate", "-G", "sql", "<OUT>output.sas"]
-translate-ground-trie = ["translate", "-G", "trie", "<OUT>output.sas"]
-translate-fdr-h2fwbw = ["translate", "--fdr-h2fwbw", "<OUT>output.sas"]
-translate-lmg-fd = ["translate", "--lmg", "fd", "<OUT>output.sas"]
-translate-lmg-none = ["translate", "--lmg", "none", "<OUT>output.sas"]
-translate-lendo = ["translate", "--lendo", "<OUT>output.sas"]
-translate-no-tp-irr = ["translate", "--no-tp-irr", "<OUT>output.sas"]
-translate-tp-sort-ops = ["translate", "--tp-sort-ops-by-name", "<OUT>output.sas"]
-translate-mg-h2 = ["translate", "--mg", "h2", "<OUT>output.sas"]
+translate = ["translate", "stdout"]
+translate-h2 = ["translate", "--h2", "stdout"]
+translate-ground-sql = ["translate", "-G", "sql", "stdout"]
+translate-ground-trie = ["translate", "-G", "trie", "stdout"]
+translate-fdr-h2fwbw = ["translate", "--fdr-h2fwbw", "stdout"]
+translate-lmg-fd = ["translate", "--lmg", "fd", "stdout"]
+translate-lmg-none = ["translate", "--lmg", "none", "stdout"]
+translate-lendo = ["translate", "--lendo", "stdout"]
+translate-mg-h2 = ["translate", "--mg", "h2", "stdout"]
 
 # --- lmg ---
-lmg = ["lmg", "<OUT>out.txt"]
-lmg-fd = ["lmg", "--lmg", "fd", "<OUT>out.txt"]
-lmg-none = ["lmg", "--lmg", "none", "<OUT>out.txt"]
+mg = ["lmg", "stdout"]
+lmg-fd = ["lmg", "--lmg", "fd", "stdout"]
+lmg-none = ["lmg", "--lmg", "none", "stdout"]
 
 # --- strips-as-py ---
-strips-as-py = ["strips-as-py", "<OUT>output.py"]
+strips-as-py = ["strips-as-py", "stdout"]
 
 # --- mutex-group-cover-number ---
 mutex-group-cover-number-h2 = ["mutex-group-cover-number", "h2"]
 
 # --- lplan ---
-lplan-gbfs-ff = ["lplan", "gbfs", "ff", "<OUT>plan"]
-lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "<OUT>plan"]
-lplan-lazy-ff = ["lplan", "lazy", "ff", "<OUT>plan"]
-lplan-lazy-hadd = ["lplan", "lazy", "hadd", "<OUT>plan"]
-lplan-astar-hmax = ["lplan", "astar", "hmax", "<OUT>plan"]
+lplan-gbfs-ff = ["lplan", "gbfs", "ff", "/dev/null"]
+lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "/dev/null"]
+lplan-lazy-ff = ["lplan", "lazy", "ff", "/dev/null"]
+lplan-lazy-hadd = ["lplan", "lazy", "hadd", "/dev/null"]
+lplan-astar-hmax = ["lplan", "astar", "hmax", "/dev/null"]
 
 # --- gplan ---
-gplan-gbfs-ff = ["gplan", "gbfs", "ff", "<OUT>plan"]
-gplan-gbfs-hadd = ["gplan", "gbfs", "hadd", "<OUT>plan"]
-gplan-lazy-ff = ["gplan", "lazy", "ff", "<OUT>plan"]
-gplan-lazy-hadd = ["gplan", "lazy", "hadd", "<OUT>plan"]
-gplan-astar-lmc = ["gplan", "astar", "lmc", "<OUT>plan"]
+gplan-gbfs-ff = ["gplan", "gbfs", "ff", "/dev/null"]
+gplan-gbfs-hadd = ["gplan", "gbfs", "hadd", "/dev/null"]
+gplan-lazy-ff = ["gplan", "lazy", "ff", "/dev/null"]
+gplan-lazy-hadd = ["gplan", "lazy", "hadd", "/dev/null"]
+gplan-astar-lmc = ["gplan", "astar", "lmc", "/dev/null"]
+
+# --- pot-conj-find ---
+# --- pot-conj-exact-find ---
+# --- red-black-fdr ---
 
 # --- reversibility ---
-reversibility-simple-1 = ["reversibility-simple", "1", "<OUT>out.txt"]
-reversibility-simple-2 = ["reversibility-simple", "2", "<OUT>out.txt"]
-reversibility-iterative-2 = ["reversibility-iterative", "2", "<OUT>out.txt"]
+reversibility-simple-1 = ["reversibility-simple", "1", "stdout"]
+reversibility-simple-2 = ["reversibility-simple", "2", "stdout"]
+reversibility-iterative-2 = ["reversibility-iterative", "2", "stdout"]
 
 # --- symba ---
-symba-astar-fw = ["symba", "astar", "fw", "<OUT>plan"]
-symba-astar-bw = ["symba", "astar", "bw", "<OUT>plan"]
-symba-gbfs-fw = ["symba", "gbfs", "fw", "<OUT>plan"]
-symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "<OUT>plan"]
+symba-astar-fw = ["symba", "astar", "fw", "/dev/null"]
+symba-astar-bw = ["symba", "astar", "bw", "/dev/null"]
+symba-gbfs-fw = ["symba", "gbfs", "fw", "/dev/null"]
+symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "/dev/null"]
