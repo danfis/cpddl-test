@@ -1,13 +1,16 @@
 # Configuration for tests/scripts/test-tool.py
 
-# Maximum memory passed as --max-mem MEM (first option to pddl-tool)
-max-mem = "4096"
+# Maximum memory in MB passed as --max-mem MEM (first option to pddl-tool)
+max-mem = 4096
 
 # Maximum time enforced with `timeout TIME` (e.g., "5m", "30s")
 max-time = "5m"
 
 # Options common to ALL test calls (appended after --max-mem)
 common-options = ["--lp-solver", "none"]
+
+# Maximum allowed size of .out.tmp and .output.*.tmp files in bytes (default 5 MB)
+max-output-size = 5242880
 
 # Base bwrap (bubblewrap) options used when --bwrap is passed to the script.
 # Per-test writable output files are added automatically as --bind pairs.

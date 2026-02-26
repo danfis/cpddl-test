@@ -131,9 +131,10 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
             use_valgrind=False, full_leak_check=False,
             use_bwrap=False, bwrap_base_opts=(), use_gdb=False):
     """Run a single (task, test) combination. Returns (task, test_name, ok, msg)."""
-    max_mem = cfg.get("max-mem", None)
-    max_time = cfg.get("max-time", None)
+    max_mem = cfg.get("max-mem", 8192)
+    max_time = cfg.get("max-time", "5m")
     common_opts = cfg.get("common-options", [])
+    max_output_size = cfg.get("max-output-size", 5 * 1024 * 1024)
 
     reg_dir = os.path.join("reg", task)
     os.makedirs(reg_dir, exist_ok=True)
@@ -168,7 +169,7 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
     # Build the pddl-tool command
     pddl_cmd = (
         ["../bin/pddl-tool"]
-        + (["--max-mem", max_mem] if max_mem else [])
+        + (["--max-mem", str(max_mem)] if max_mem else [])
         + list(common_opts)
         + ["--log-out", log_arg]
         + expanded_opts
@@ -237,7 +238,10 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
         failures.append("non-empty stderr")
 
     # Check stdout
-    if os.path.exists(out_gold):
+    out_size = os.path.getsize(out_file)
+    if out_size > max_output_size:
+        failures.append(f"stdout too large ({out_size} bytes > {max_output_size})")
+    elif os.path.exists(out_gold):
         diff = subprocess.run(
             ["diff", out_gold, out_file],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -256,14 +260,18 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
             continue
         gold = full[:-len(".tmp")]
         suffix = entry[len(f"tool-{test_name}.output."):-len(".tmp")]
-        if os.path.exists(gold):
+        file_size = os.path.getsize(full)
+        if file_size > max_output_size:
+            failures.append(
+                f"output.{suffix} too large ({file_size} bytes > {max_output_size})")
+        elif os.path.exists(gold):
             diff = subprocess.run(
                 ["diff", gold, full],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if diff.returncode != 0:
                 failures.append(f"output.{suffix} differs from golden baseline")
         else:
-            if os.path.getsize(full) > 0:
+            if file_size > 0:
                 failures.append(f"non-empty output.{suffix} but no golden baseline")
 
     if failures:
