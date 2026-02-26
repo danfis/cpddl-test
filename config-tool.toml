@@ -1,0 +1,35 @@
+# Configuration for tests/scripts/test-tool.py
+
+# Maximum memory passed as --max-mem MEM (first option to pddl-tool)
+max-mem = "4096"
+
+# Maximum time enforced with `timeout TIME` (e.g., "5m", "30s")
+max-time = "5m"
+
+# Options common to ALL test calls (appended after --max-mem)
+common-options = ["--lp-solver", "none"]
+
+# Base bwrap (bubblewrap) options used when --bwrap is passed to the script.
+# Per-test writable output files are added automatically as --bind pairs.
+bwrap_options = [
+    "--ro-bind", "/", "/",
+    "--proc", "/proc",
+    "--dev", "/dev",
+    "--tmpfs", "/tmp",
+    "--die-with-parent",
+    "--setenv", "HOME", "$HOME",
+    "--setenv", "PATH", "$PATH",
+]
+
+# Tasks to test (relative to tests/pddl/)
+tasks = [
+    "ipc-1998/gripper/prob01",
+    "ipc-2002/depot/pfile1",
+]
+
+# Named test configurations.
+# Each key is the <test-name>; the value is a list of OPTIONS tokens.
+# Use <OUT> as a placeholder that expands to reg/<task>/tool-<test-name>.output.
+[tests]
+translate-x = ["translate", "--fdr-var-alg", "essential-first", "<OUT>output.sas"]
+pddl = ["pddl", "--force-adl", "<OUT>domain.pddl", "<OUT>problem.pddl"]
