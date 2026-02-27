@@ -16,6 +16,7 @@ import re
 import subprocess
 import sys
 import argparse
+import shutil
 
 
 # Maximum diff lines shown when expanded
@@ -166,7 +167,7 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
     # Status bar
     status = (f" {selected + 1}/{len(failures)}"
               f"  |  UP/DOWN/j/k: navigate"
-              f"  SPACE/o: toggle diff  e: toggle err  E: nvim err  d: details"
+              f"  SPACE/o: toggle diff  e: toggle err  E: nvim err  d: details  F: fix"
               f"  ENTER/O: vimdiff"
               f"  q/ESC: quit")
     try:
@@ -402,6 +403,13 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
             task, test, dirpath = failures[selected]
             details_submenu(stdscr, task, test, dirpath, max_preview_lines)
             stdscr.refresh()
+
+        elif key == ord('F'):
+            task, test, dirpath = failures[selected]
+            out_path     = os.path.join(dirpath, test + '.out')
+            out_tmp_path = os.path.join(dirpath, test + '.out.tmp')
+            if os.path.exists(out_tmp_path):
+                shutil.copy2(out_tmp_path, out_path)
 
         elif key in (curses.KEY_ENTER, 10, 13, ord('O')):
             task, test, dirpath = failures[selected]
