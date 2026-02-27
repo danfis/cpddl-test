@@ -65,6 +65,9 @@ def parse_args():
     p.add_argument(
         "--plan", action="store_true",
         help="Print the test plan (task x test pairs with depends_on flags) and exit")
+    p.add_argument(
+        "-X", "--fail-fast", action="store_true",
+        help="Stop execution after the first failed test")
     return p.parse_args()
 
 
@@ -498,6 +501,10 @@ def main():
                 status = f"{RED}[FAIL]{RESET}"
                 failed += 1
                 print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
+                if args.fail_fast:
+                    for f in futures:
+                        f.cancel()
+                    break
 
     if not args.dry_run:
         print(f"\n{total} test(s): {passed} passed, {failed} failed.  "
