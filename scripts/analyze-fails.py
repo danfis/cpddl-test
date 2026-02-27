@@ -5,6 +5,7 @@ Navigation:
   UP/DOWN  - move selection
   SPACE    - toggle side-by-side diff view below selected item
   ENTER    - open vimdiff for selected item
+  d        - open details submenu (list reg/ files, ENTER opens in nvim)
   q / ESC  - quit
 """
 
@@ -164,9 +165,9 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
 
     # Status bar
     status = (f" {selected + 1}/{len(failures)}"
-              f"  |  UP/DOWN: navigate"
-              f"  SPACE: toggle diff  e: toggle err  E: nvim err"
-              f"  ENTER: vimdiff"
+              f"  |  UP/DOWN/j/k: navigate"
+              f"  SPACE/o: toggle diff  e: toggle err  E: nvim err  d: details"
+              f"  ENTER/O: vimdiff"
               f"  q/ESC: quit")
     try:
         stdscr.addstr(height - 1, 0, status[:width - 1].ljust(width - 1), curses.A_REVERSE)
@@ -177,7 +178,156 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
     return item_rows
 
 
-def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=MAX_DIFF_LINES):
+def list_detail_files(dirpath, test):
+    """Return files in dirpath starting with test+'.' sorted: .tmp first, then rest."""
+    prefix = test + '.'
+    try:
+        entries = [f for f in os.listdir(dirpath) if f.startswith(prefix)]
+    except OSError:
+        return []
+    tmp_files  = sorted(f for f in entries if f.endswith('.tmp'))
+    rest_files = sorted(f for f in entries if not f.endswith('.tmp'))
+    return tmp_files + rest_files
+
+
+def _item_logical_row(idx, files, expanded, max_preview_lines, dirpath):
+    """Return the logical (pre-scroll) row index of item idx."""
+    row = 0
+    for i in range(idx):
+        row += 1
+        if i in expanded:
+            row += min(max_preview_lines,
+                       len(read_lines(os.path.join(dirpath, files[i]))))
+    return row
+
+
+def details_submenu(stdscr, task, test, dirpath, max_preview_lines=20):
+    """Show a floating popup of reg/ files for the given (task, test).
+    SPACE toggles an inline preview; ENTER opens the file in nvim."""
+    files = list_detail_files(dirpath, test)
+    if not files:
+        return
+
+    selected = 0
+    scroll_top = 0
+    expanded = set()
+
+    while True:
+        scr_h, scr_w = stdscr.getmaxyx()
+
+        # Popup size: use most of the screen, leaving a margin
+        pop_h = max(6, scr_h - 4)
+        pop_w = max(40, min(scr_w - 8, 120))
+        pop_y = (scr_h - pop_h) // 2
+        pop_x = (scr_w - pop_w) // 2
+        inner_h = pop_h - 2   # rows inside the border (row 1 .. pop_h-2)
+        inner_w = pop_w - 2   # cols inside the border
+
+        try:
+            win = curses.newwin(pop_h, pop_w, pop_y, pop_x)
+            win.keypad(True)
+        except curses.error:
+            return
+
+        win.erase()
+        win.box()
+
+        # Title bar
+        title = f" {task} / {test} "
+        try:
+            win.addstr(0, 2, clip(title, pop_w - 4), curses.A_BOLD)
+        except curses.error:
+            pass
+
+        # Status bar inside popup bottom border
+        status = " UP/DOWN/j/k: navigate  SPACE: preview  ENTER: nvim  q/ESC: back "
+        try:
+            win.addstr(pop_h - 1, 2,
+                       clip(status, pop_w - 4), curses.A_REVERSE)
+        except curses.error:
+            pass
+
+        # Render file list with optional previews
+        row = 0
+        for i, fname in enumerate(files):
+            screen_row = row - scroll_top
+            if screen_row >= inner_h:
+                break
+            if screen_row >= 0:
+                label = f" {fname}"
+                attr = (curses.color_pair(1) | curses.A_BOLD
+                        if i == selected else curses.A_NORMAL)
+                try:
+                    win.addstr(1 + screen_row, 1,
+                               clip(label, inner_w - 1).ljust(inner_w - 1), attr)
+                except curses.error:
+                    pass
+            row += 1
+
+            if i in expanded:
+                lines = read_lines(os.path.join(dirpath, fname))
+                for line in lines[:max_preview_lines]:
+                    screen_row = row - scroll_top
+                    if screen_row >= inner_h:
+                        break
+                    if screen_row >= 0:
+                        try:
+                            win.addstr(1 + screen_row, 1,
+                                       clip("  " + line.rstrip(), inner_w - 1),
+                                       curses.color_pair(5))
+                        except curses.error:
+                            pass
+                    row += 1
+
+        win.refresh()
+        key = win.getch()
+        del win
+        # Restore the background so the main list shows again
+        stdscr.touchwin()
+        stdscr.refresh()
+
+        if key in (ord('q'), 27):
+            break
+
+        elif key in (curses.KEY_DOWN, ord('j')):
+            if selected < len(files) - 1:
+                selected += 1
+                sel_row = _item_logical_row(selected, files, expanded,
+                                            max_preview_lines, dirpath)
+                if sel_row - scroll_top >= inner_h:
+                    scroll_top = sel_row - inner_h + 1
+
+        elif key in (curses.KEY_UP, ord('k')):
+            if selected > 0:
+                selected -= 1
+                sel_row = _item_logical_row(selected, files, expanded,
+                                            max_preview_lines, dirpath)
+                if sel_row < scroll_top:
+                    scroll_top = sel_row
+
+        elif key == ord(' '):
+            if selected in expanded:
+                expanded.discard(selected)
+            else:
+                expanded.add(selected)
+            # Recompute scroll to keep selected visible after height change
+            sel_row = _item_logical_row(selected, files, expanded,
+                                        max_preview_lines, dirpath)
+            if sel_row < scroll_top:
+                scroll_top = sel_row
+
+        elif key in (curses.KEY_ENTER, 10, 13):
+            fpath = os.path.join(dirpath, files[selected])
+            curses.def_prog_mode()
+            curses.endwin()
+            subprocess.call(['nvim', fpath])
+            curses.reset_prog_mode()
+            stdscr.touchwin()
+            stdscr.refresh()
+
+
+def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=MAX_DIFF_LINES,
+         max_preview_lines=20):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     reg_dir = os.path.normpath(os.path.join(script_dir, '..', 'reg'))
 
@@ -227,7 +377,7 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
                 if selected < scroll_top:
                     scroll_top = selected
 
-        elif key == ord(' '):
+        elif key in (ord(' '), ord('o')):
             if selected in expanded:
                 expanded.discard(selected)
             else:
@@ -248,7 +398,12 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
             curses.reset_prog_mode()
             stdscr.refresh()
 
-        elif key in (curses.KEY_ENTER, 10, 13):
+        elif key == ord('d'):
+            task, test, dirpath = failures[selected]
+            details_submenu(stdscr, task, test, dirpath, max_preview_lines)
+            stdscr.refresh()
+
+        elif key in (curses.KEY_ENTER, 10, 13, ord('O')):
             task, test, dirpath = failures[selected]
             out_path     = os.path.join(dirpath, test + '.out')
             out_tmp_path = os.path.join(dirpath, test + '.out.tmp')
@@ -268,6 +423,8 @@ if __name__ == '__main__':
                         help=f'Number of diff lines shown on SPACE (default: {MAX_DIFF_LINES})')
     parser.add_argument('-m', '--err-lines', metavar='M', type=int, default=MAX_DIFF_LINES,
                         help=f'Number of .err.tmp lines shown on e (default: {MAX_DIFF_LINES})')
+    parser.add_argument('-P', '--preview-lines', metavar='P', type=int, default=20,
+                        help='Number of lines shown in details submenu preview on SPACE (default: 20)')
     parser.add_argument('-t', '--test', metavar='REGEX',
                         help='Show only tests matching this regex (substring match)')
     args = parser.parse_args()
@@ -288,4 +445,5 @@ if __name__ == '__main__':
 
     curses.wrapper(lambda scr: main(scr, task_filter=_filter,
                                     max_diff_lines=args.lines,
-                                    max_err_lines=args.err_lines))
+                                    max_err_lines=args.err_lines,
+                                    max_preview_lines=args.preview_lines))
