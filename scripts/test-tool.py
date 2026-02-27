@@ -262,9 +262,6 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
         with open(err_tmp, "a") as fh:
             fh.write(f"Process killed by {signame} ({signum})\n")
 
-    if gen_golden:
-        return task, test_name, True, f"golden written ({elapsed:.2f}s)", elapsed
-
     # Check exit code
     if result.returncode != 0:
         failures.append(f"exit code {result.returncode}")
@@ -273,13 +270,12 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
     if result.returncode == 0 and post_processing_code:
         # Build outputs dict: suffix -> path for each .output.*.tmp
         outputs = {}
-        for entry in os.listdir(reg_dir):
-            if (entry.startswith(f"tool-{test_name}.output.")
-                    and entry.endswith(".tmp")):
-                suffix = entry[len(f"tool-{test_name}.output."):-len(".tmp")]
-                outputs[suffix] = os.path.join(reg_dir, entry)
+        for entry in out_paths:
+            out_name = re.sub(rf"^.*tool-{test_name}\.output\.", "", entry)
+            out_name = out_name.removesuffix(".tmp");
+            outputs[out_name] = entry
         try:
-            exec(post_processing_code, {"out": out_file, "outputs": outputs})
+            exec(post_processing_code, {"out": out_file, "outputs": outputs, "log": log_tmp})
         except Exception as exc:
             failures.append(f"post-processing error: {exc}")
 
@@ -331,6 +327,13 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
         else:
             if file_size > 0:
                 failures.append(f"non-empty output.{suffix} but no golden baseline")
+
+    if gen_golden:
+        # Remove empty files
+        for path in out_paths + [out_file]:
+            if os.path.getsize(path) == 0:
+                os.remove(path)
+        return task, test_name, True, f"golden written ({elapsed:.2f}s)", elapsed
 
     if failures:
         reason = "; ".join(failures)
@@ -414,8 +417,11 @@ def main():
     if args.plan:
         task_w = max((len(t) for t in all_tasks), default=4)
         test_w = max((len(n) for n in all_tests), default=4)
+        disabled_tasks = cfg.get("disabled-tasks", {})
         for task in all_tasks:
             for test_name in all_tests:
+                if task in disabled_tasks.get(test_name, []):
+                    continue
                 flags = depends_on.get(test_name, [])
                 flags_str = ("  [" + ", ".join(flags) + "]") if flags else ""
                 print(f"{task:<{task_w}}  {test_name:<{test_w}}{flags_str}")
@@ -457,6 +463,7 @@ def main():
         (task, test_name, test_opts)
         for task in all_tasks
         for test_name, test_opts in all_tests.items()
+        if task not in cfg.get("disabled-tasks", {}).get(test_name, [])
     ]
 
     total = len(work)

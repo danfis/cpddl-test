@@ -75,16 +75,17 @@ tasks_all = [
 # Use <OUT> as a placeholder that expands to reg/<task>/tool-<test-name>.output.
 [tests]
 # --- pddl ---
-pddl = ["pddl", "--force-adl", "<OUT>domain.pddl", "<OUT>problem.pddl"]
-pddl-default = ["pddl", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl = ["pddl", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 pddl-ce = ["pddl", "--pddl-ce", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 pddl-unit-cost = ["pddl", "--pddl-unit-cost", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 pddl-disj-goal = ["pddl", "--pddl-disj-goal", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 pddl-neg-cond-all = ["pddl", "--pddl-neg-cond", "all", "<OUT>domain.pddl", "<OUT>problem.pddl"]
-pddl-neg-cond-none = ["pddl", "--pddl-neg-cond", "none", "<OUT>domain.pddl", "<OUT>problem.pddl"]
-pddl-lmg-fd = ["pddl", "--lmg", "fd", "<OUT>domain.pddl", "<OUT>problem.pddl"]
-pddl-lmg-none = ["pddl", "--lmg", "none", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-compile-in-lmg = ["pddl", "--pddl-compile-in-lmg", "both", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-compile-in-lmg-mutex = ["pddl", "--pddl-compile-in-lmg", "mutex", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-compile-in-lmg-dead-end = ["pddl", "--pddl-compile-in-lmg", "dead-end", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-compile-in-lmg-fd = ["pddl", "--pddl-compile-in-lmg", "both", "--lmg", "fd", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 pddl-lendo = ["pddl", "--lendo", "<OUT>domain.pddl", "<OUT>problem.pddl"]
+pddl-lendo-nocost = ["pddl", "--lendo", "--lendo-ignore-costs", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 
 # --- translate ---
 translate = ["translate", "stdout"]
@@ -114,6 +115,7 @@ lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "stdout"]
 lplan-lazy-ff = ["lplan", "lazy", "ff", "stdout"]
 lplan-lazy-hadd = ["lplan", "lazy", "hadd", "stdout"]
 lplan-astar-hmax = ["lplan", "astar", "hmax", "stdout"]
+lplan-astar-homo-lmc = ["lplan", "astar", "homo-lmc", "stdout"]
 
 # --- gplan ---
 gplan-gbfs-ff = ["gplan", "gbfs", "ff", "stdout"]
@@ -138,6 +140,7 @@ reversibility-iterative-2 = ["reversibility-iterative", "2", "stdout"]
 # --- symba ---
 symba-astar-fw = ["symba", "astar", "fw", "stdout"]
 symba-astar-bw = ["symba", "astar", "bw", "stdout"]
+symba-astar-fwbw = ["symba", "astar", "fwbw", "stdout"]
 symba-gbfs-fw = ["symba", "gbfs", "fw", "stdout"]
 symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "stdout"]
 
@@ -147,6 +150,7 @@ symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "stdout"]
 [depends_on]
 pddl-lendo                = ["CPOPTIMIZER"]
 translate-ground-sql      = ["SQLITE"]
+lplan-astar-homo-lmc      = ["CPOPTIMIZER"]
 gplan-astar-flow          = ["CPLEX"]
 gplan-astar-pot-AI        = ["CPLEX"]
 gplan-astar-pot-I         = ["CPLEX"]
@@ -157,10 +161,23 @@ symba-gbfs-fw             = ["CUDD"]
 symba-gbfs-fwbw           = ["CUDD"]
 
 
+# Disabled tasks: map test name -> list of tasks that will be skipped for
+# that test. Useful for known failures or unsupported combinations.
+[disabled-tasks]
+# example:
+# some-test = ["ipc-1998/gripper/prob01"]
+lplan-gbfs-ff = ["ipc-2014/seq-opt/transport/p01"]
+lplan-gbfs-hadd = ["ipc-2014/seq-opt/transport/p01"]
+lplan-lazy-ff = ["ipc-2014/seq-opt/transport/p01"]
+lplan-lazy-hadd = ["ipc-2014/seq-opt/transport/p01"]
+lplan-astar-hmax = ["ipc-2014/seq-opt/transport/p01"]
+gplan-astar-flow = ["ipc-2014/seq-opt/transport/p01"] # takes too long
+
 
 # Named reusable Python scripts for post-processing.
 # Reference them in [post-processing] as "script:<name>".
-# Variables available: out (path to .out.tmp), outputs (dict suffix -> path).
+# Variables available: out (path to .out.tmp), outputs (dict suffix -> path),
+# log (path to .log.tmp)
 [scripts]
 # strip-trailing-whitespace = """
 # with open(out) as f: data = f.read()
@@ -189,15 +206,57 @@ with open(out, 'w') as f:
         f.write('Plan found.\\n')
 """
 
+symba-optimal = """
+cost = ''
+with open(out, 'r') as f:
+    for line in f:
+        if 'Cost:' in line:
+            cost = line.strip()
+            break
+
+construct_tnfm = False
+with open(log, 'r') as f:
+    for line in f:
+        if 'Constructing TNF by multiplication' in line:
+            construct_tnfm = True
+
+with open(out, 'w') as f:
+    print(cost, file = f)
+    if construct_tnfm:
+        print('FDR is in transition normal form constructed by multiplication', file = f)
+"""
+
+merge-into-out = """
+with open(out, 'a') as f:
+    for key in sorted(outputs.keys()):
+        print(f'\\n-------- {key} --------\\n', file = f)
+        print(open(outputs[key], 'r').read(), file = f)
+        with open(outputs[key], 'w'):
+            pass
+"""
+
 
 # Post-processing: map test name -> Python code string (or "script:<name>")
 # executed after a *successful* run.
 [post-processing]
+pddl = "script:merge-into-out"
+pddl-ce = "script:merge-into-out"
+pddl-unit-cost = "script:merge-into-out"
+pddl-disj-goal = "script:merge-into-out"
+pddl-neg-cond-all = "script:merge-into-out"
+pddl-compile-in-lmg = "script:merge-into-out"
+pddl-compile-in-lmg-mutex = "script:merge-into-out"
+pddl-compile-in-lmg-dead-end = "script:merge-into-out"
+pddl-compile-in-lmg-fd = "script:merge-into-out"
+pddl-lendo = "script:merge-into-out"
+pddl-lendo-nocost = "script:merge-into-out"
+
 lplan-gbfs-ff = "script:plan-out-reduce-to-plan-found"
 lplan-gbfs-hadd = "script:plan-out-reduce-to-plan-found"
 lplan-lazy-ff = "script:plan-out-reduce-to-plan-found"
 lplan-lazy-hadd = "script:plan-out-reduce-to-plan-found"
 lplan-astar-hmax = "script:plan-out-reduce-to-plan-cost"
+lplan-astar-homo-lmc = "script:plan-out-reduce-to-plan-cost"
 
 gplan-gbfs-ff = "script:plan-out-reduce-to-plan-found"
 gplan-gbfs-hadd = "script:plan-out-reduce-to-plan-found"
@@ -209,8 +268,9 @@ gplan-astar-pot-AI = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-pot-I = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-pot-A = "script:plan-out-reduce-to-plan-cost"
 
-symba-astar-fw = "script:plan-out-reduce-to-plan-cost"
-symba-astar-bw = "script:plan-out-reduce-to-plan-cost"
+symba-astar-fw = "script:symba-optimal"
+symba-astar-bw = "script:symba-optimal"
+symba-astar-fwbw = "script:symba-optimal"
 symba-gbfs-fw = "script:plan-out-reduce-to-plan-found"
 symba-gbfs-fwbw = "script:plan-out-reduce-to-plan-found"
 
