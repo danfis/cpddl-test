@@ -1,0 +1,179 @@
+
+-------- domain.pddl --------
+
+(define (domain rover)
+(:requirements
+    :strips
+)
+(:predicates
+    (at ?x0 - object ?x1 - object)
+    (at_lander ?x0 - object ?x1 - object)
+    (can_traverse ?x0 - object ?x1 - object ?x2 - object)
+    (equipped_for_soil_analysis ?x0 - object)
+    (equipped_for_rock_analysis ?x0 - object)
+    (equipped_for_imaging ?x0 - object)
+    (empty ?x0 - object)
+    (have_rock_analysis ?x0 - object ?x1 - object)
+    (have_soil_analysis ?x0 - object ?x1 - object)
+    (full ?x0 - object)
+    (calibrated ?x0 - object ?x1 - object)
+    (supports ?x0 - object ?x1 - object)
+    (available ?x0 - object)
+    (visible ?x0 - object ?x1 - object)
+    (have_image ?x0 - object ?x1 - object ?x2 - object)
+    (communicated_soil_data ?x0 - object)
+    (communicated_rock_data ?x0 - object)
+    (communicated_image_data ?x0 - object ?x1 - object)
+    (at_soil_sample ?x0 - object)
+    (at_rock_sample ?x0 - object)
+    (visible_from ?x0 - object ?x1 - object)
+    (store_of ?x0 - object ?x1 - object)
+    (calibration_target ?x0 - object ?x1 - object)
+    (on_board ?x0 - object ?x1 - object)
+    (channel_free ?x0 - object)
+    (rover ?x0 - object)
+    (waypoint ?x0 - object)
+    (store ?x0 - object)
+    (camera ?x0 - object)
+    (mode ?x0 - object)
+    (lander ?x0 - object)
+    (objective ?x0 - object)
+)
+(:action navigate
+    :parameters (?x - object ?y - object ?z - object)
+    :precondition (and (rover ?x) (waypoint ?y) (waypoint ?z) (can_traverse ?x ?y ?z) (available ?x) (at ?x ?y) (visible ?y ?z))
+    :effect (and (at ?x ?z) (not (at ?x ?y)))
+)
+
+(:action sample_soil
+    :parameters (?x - object ?s - object ?p - object)
+    :precondition (and (rover ?x) (store ?s) (waypoint ?p) (at ?x ?p) (at_soil_sample ?p) (equipped_for_soil_analysis ?x) (store_of ?s ?x) (empty ?s))
+    :effect (and (full ?s) (have_soil_analysis ?x ?p) (not (empty ?s)) (not (at_soil_sample ?p)))
+)
+
+(:action sample_rock
+    :parameters (?x - object ?s - object ?p - object)
+    :precondition (and (rover ?x) (store ?s) (waypoint ?p) (at ?x ?p) (at_rock_sample ?p) (equipped_for_rock_analysis ?x) (store_of ?s ?x) (empty ?s))
+    :effect (and (full ?s) (have_rock_analysis ?x ?p) (not (empty ?s)) (not (at_rock_sample ?p)))
+)
+
+(:action drop
+    :parameters (?x - object ?y - object)
+    :precondition (and (rover ?x) (store ?y) (store_of ?y ?x) (full ?y))
+    :effect (and (empty ?y) (not (full ?y)))
+)
+
+(:action calibrate
+    :parameters (?r - object ?i - object ?t - object ?w - object)
+    :precondition (and (rover ?r) (camera ?i) (objective ?t) (waypoint ?w) (equipped_for_imaging ?r) (calibration_target ?i ?t) (at ?r ?w) (visible_from ?t ?w) (on_board ?i ?r))
+    :effect (and (calibrated ?i ?r))
+)
+
+(:action take_image
+    :parameters (?r - object ?p - object ?o - object ?i - object ?m - object)
+    :precondition (and (rover ?r) (waypoint ?p) (objective ?o) (camera ?i) (mode ?m) (calibrated ?i ?r) (on_board ?i ?r) (equipped_for_imaging ?r) (supports ?i ?m) (visible_from ?o ?p) (at ?r ?p))
+    :effect (and (have_image ?r ?o ?m) (not (calibrated ?i ?r)))
+)
+
+(:action communicate_soil_data
+    :parameters (?r - object ?l - object ?p - object ?x - object ?y - object)
+    :precondition (and (rover ?r) (lander ?l) (waypoint ?p) (waypoint ?x) (waypoint ?y) (at ?r ?x) (at_lander ?l ?y) (have_soil_analysis ?r ?p) (visible ?x ?y) (available ?r) (channel_free ?l))
+    :effect (and (channel_free ?l) (communicated_soil_data ?p) (available ?r))
+)
+
+(:action communicate_rock_data
+    :parameters (?r - object ?l - object ?p - object ?x - object ?y - object)
+    :precondition (and (rover ?r) (lander ?l) (waypoint ?p) (waypoint ?x) (waypoint ?y) (at ?r ?x) (at_lander ?l ?y) (have_rock_analysis ?r ?p) (visible ?x ?y) (available ?r) (channel_free ?l))
+    :effect (and (channel_free ?l) (communicated_rock_data ?p) (available ?r))
+)
+
+(:action communicate_image_data
+    :parameters (?r - object ?l - object ?o - object ?m - object ?x - object ?y - object)
+    :precondition (and (rover ?r) (lander ?l) (objective ?o) (mode ?m) (waypoint ?x) (waypoint ?y) (at ?r ?x) (at_lander ?l ?y) (have_image ?r ?o ?m) (visible ?x ?y) (available ?r) (channel_free ?l))
+    :effect (and (channel_free ?l) (communicated_image_data ?o ?m) (available ?r))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem roverprob1234) (:domain rover)
+(:objects
+    general - object
+    colour - object
+    high_res - object
+    low_res - object
+    rover0 - object
+    rover0store - object
+    waypoint0 - object
+    waypoint1 - object
+    waypoint2 - object
+    waypoint3 - object
+    camera0 - object
+    objective0 - object
+    objective1 - object
+)
+(:init
+  (visible waypoint1 waypoint0)
+  (visible waypoint0 waypoint1)
+  (visible waypoint2 waypoint0)
+  (visible waypoint0 waypoint2)
+  (visible waypoint2 waypoint1)
+  (visible waypoint1 waypoint2)
+  (visible waypoint3 waypoint0)
+  (visible waypoint0 waypoint3)
+  (visible waypoint3 waypoint1)
+  (visible waypoint1 waypoint3)
+  (visible waypoint3 waypoint2)
+  (visible waypoint2 waypoint3)
+  (lander general)
+  (mode colour)
+  (mode high_res)
+  (mode low_res)
+  (waypoint waypoint0)
+  (at_soil_sample waypoint0)
+  (waypoint waypoint1)
+  (at_rock_sample waypoint1)
+  (waypoint waypoint2)
+  (at_soil_sample waypoint2)
+  (at_rock_sample waypoint2)
+  (waypoint waypoint3)
+  (at_soil_sample waypoint3)
+  (at_rock_sample waypoint3)
+  (at_lander general waypoint0)
+  (channel_free general)
+  (rover rover0)
+  (store rover0store)
+  (at rover0 waypoint3)
+  (available rover0)
+  (store_of rover0store rover0)
+  (empty rover0store)
+  (equipped_for_soil_analysis rover0)
+  (equipped_for_rock_analysis rover0)
+  (equipped_for_imaging rover0)
+  (can_traverse rover0 waypoint3 waypoint0)
+  (can_traverse rover0 waypoint0 waypoint3)
+  (can_traverse rover0 waypoint3 waypoint1)
+  (can_traverse rover0 waypoint1 waypoint3)
+  (can_traverse rover0 waypoint1 waypoint2)
+  (can_traverse rover0 waypoint2 waypoint1)
+  (camera camera0)
+  (on_board camera0 rover0)
+  (calibration_target camera0 objective1)
+  (supports camera0 colour)
+  (supports camera0 high_res)
+  (objective objective0)
+  (visible_from objective0 waypoint0)
+  (visible_from objective0 waypoint1)
+  (visible_from objective0 waypoint2)
+  (visible_from objective0 waypoint3)
+  (objective objective1)
+  (visible_from objective1 waypoint0)
+  (visible_from objective1 waypoint1)
+  (visible_from objective1 waypoint2)
+  (visible_from objective1 waypoint3)
+)
+(:goal (and (communicated_soil_data waypoint2) (communicated_rock_data waypoint3) (communicated_image_data objective1 high_res)))
+)
+

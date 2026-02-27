@@ -1,0 +1,79 @@
+
+-------- domain.pddl --------
+
+(define (domain scanalyzer3d)
+(:requirements
+    :strips
+    :typing
+)
+(:types
+    segment - object
+    car - object
+)
+(:predicates
+    (on ?x0 - car ?x1 - segment)
+    (analyzed ?x0 - car)
+    (cycle-2 ?x0 - segment ?x1 - segment)
+    (cycle-2-with-analysis ?x0 - segment ?x1 - segment)
+)
+(:action analyze-2
+    :parameters (?s1 - segment ?s2 - segment ?c1 - car ?c2 - car)
+    :precondition (and (cycle-2-with-analysis ?s1 ?s2) (on ?c1 ?s1) (on ?c2 ?s2))
+    :effect (and (not (on ?c1 ?s1)) (not (on ?c2 ?s2)) (on ?c1 ?s2) (on ?c2 ?s1) (analyzed ?c1))
+)
+
+(:action rotate-2
+    :parameters (?s1 - segment ?s2 - segment ?c1 - car ?c2 - car)
+    :precondition (and (cycle-2 ?s1 ?s2) (on ?c1 ?s1) (on ?c2 ?s2))
+    :effect (and (not (on ?c1 ?s1)) (not (on ?c2 ?s2)) (on ?c1 ?s2) (on ?c2 ?s1))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem scanalyzer3d-14) (:domain scanalyzer3d)
+(:objects
+    car-in-1 - car
+    car-in-2 - car
+    car-in-3 - car
+    car-out-1 - car
+    car-out-2 - car
+    car-out-3 - car
+    seg-in-1 - segment
+    seg-in-2 - segment
+    seg-in-3 - segment
+    seg-out-1 - segment
+    seg-out-2 - segment
+    seg-out-3 - segment
+)
+(:init
+  (cycle-2 seg-in-1 seg-out-1)
+  (cycle-2 seg-in-1 seg-out-2)
+  (cycle-2 seg-in-1 seg-out-3)
+  (cycle-2 seg-in-2 seg-out-1)
+  (cycle-2 seg-in-2 seg-out-2)
+  (cycle-2 seg-in-2 seg-out-3)
+  (cycle-2 seg-in-3 seg-out-1)
+  (cycle-2 seg-in-3 seg-out-2)
+  (cycle-2 seg-in-3 seg-out-3)
+  (cycle-2-with-analysis seg-in-1 seg-out-1)
+  (cycle-2-with-analysis seg-in-1 seg-out-2)
+  (cycle-2-with-analysis seg-in-1 seg-out-3)
+  (cycle-2-with-analysis seg-in-2 seg-out-1)
+  (cycle-2-with-analysis seg-in-2 seg-out-2)
+  (cycle-2-with-analysis seg-in-2 seg-out-3)
+  (cycle-2-with-analysis seg-in-3 seg-out-1)
+  (cycle-2-with-analysis seg-in-3 seg-out-2)
+  (cycle-2-with-analysis seg-in-3 seg-out-3)
+  (on car-in-1 seg-in-1)
+  (on car-in-2 seg-in-2)
+  (on car-in-3 seg-in-3)
+  (on car-out-1 seg-out-1)
+  (on car-out-2 seg-out-2)
+  (on car-out-3 seg-out-3)
+)
+(:goal (and (analyzed car-in-1) (analyzed car-in-2) (analyzed car-in-3) (analyzed car-out-1) (analyzed car-out-2) (analyzed car-out-3) (on car-in-1 seg-in-1) (on car-in-2 seg-in-2) (on car-in-3 seg-in-3) (on car-out-1 seg-out-1) (on car-out-2 seg-out-2) (on car-out-3 seg-out-3)))
+)
+

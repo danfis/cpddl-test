@@ -1,0 +1,70 @@
+
+-------- domain.pddl --------
+
+(define (domain gripper-strips)
+(:requirements
+    :strips
+)
+(:predicates
+    (room ?x0 - object)
+    (ball ?x0 - object)
+    (gripper ?x0 - object)
+    (at-robby ?x0 - object)
+    (at ?x0 - object ?x1 - object)
+    (free ?x0 - object)
+    (carry ?x0 - object ?x1 - object)
+)
+(:action move
+    :parameters (?from - object ?to - object)
+    :precondition (and (room ?from) (room ?to) (at-robby ?from))
+    :effect (and (at-robby ?to) (not (at-robby ?from)))
+)
+
+(:action pick
+    :parameters (?obj - object ?room - object ?gripper - object)
+    :precondition (and (ball ?obj) (room ?room) (gripper ?gripper) (at ?obj ?room) (at-robby ?room) (free ?gripper))
+    :effect (and (carry ?obj ?gripper) (not (at ?obj ?room)) (not (free ?gripper)))
+)
+
+(:action drop
+    :parameters (?obj - object ?room - object ?gripper - object)
+    :precondition (and (ball ?obj) (room ?room) (gripper ?gripper) (carry ?obj ?gripper) (at-robby ?room))
+    :effect (and (at ?obj ?room) (free ?gripper) (not (carry ?obj ?gripper)))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem strips-gripper-x-1) (:domain gripper-strips)
+(:objects
+    rooma - object
+    roomb - object
+    ball4 - object
+    ball3 - object
+    ball2 - object
+    ball1 - object
+    left - object
+    right - object
+)
+(:init
+  (room rooma)
+  (room roomb)
+  (ball ball4)
+  (ball ball3)
+  (ball ball2)
+  (ball ball1)
+  (at-robby rooma)
+  (free left)
+  (free right)
+  (at ball4 rooma)
+  (at ball3 rooma)
+  (at ball2 rooma)
+  (at ball1 rooma)
+  (gripper left)
+  (gripper right)
+)
+(:goal (and (at ball4 roomb) (at ball3 roomb) (at ball2 roomb) (at ball1 roomb)))
+)
+

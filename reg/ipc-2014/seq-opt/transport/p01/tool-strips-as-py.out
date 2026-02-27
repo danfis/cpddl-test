@@ -1,0 +1,3158 @@
+{
+'domain_file' : 'pddl/ipc-2014/seq-opt/transport/domain.pddl',
+'problem_file' : 'pddl/ipc-2014/seq-opt/transport/p01.pddl',
+'domain_name' : 'transport',
+'problem_name' : 'transport-city-sequential-5nodes-1000size-2degree-100mindistance-2trucks-4packages-2014seed',
+'fact' : [
+    '(at package-1 city-loc-1)',
+    '(at package-1 city-loc-2)',
+    '(at package-1 city-loc-3)',
+    '(at package-1 city-loc-4)',
+    '(at package-1 city-loc-5)',
+    '(at package-2 city-loc-1)',
+    '(at package-2 city-loc-2)',
+    '(at package-2 city-loc-3)',
+    '(at package-2 city-loc-4)',
+    '(at package-2 city-loc-5)',
+    '(at package-3 city-loc-1)',
+    '(at package-3 city-loc-2)',
+    '(at package-3 city-loc-3)',
+    '(at package-3 city-loc-4)',
+    '(at package-3 city-loc-5)',
+    '(at package-4 city-loc-1)',
+    '(at package-4 city-loc-2)',
+    '(at package-4 city-loc-3)',
+    '(at package-4 city-loc-4)',
+    '(at package-4 city-loc-5)',
+    '(at truck-1 city-loc-1)',
+    '(at truck-1 city-loc-2)',
+    '(at truck-1 city-loc-3)',
+    '(at truck-1 city-loc-4)',
+    '(at truck-1 city-loc-5)',
+    '(at truck-2 city-loc-1)',
+    '(at truck-2 city-loc-2)',
+    '(at truck-2 city-loc-3)',
+    '(at truck-2 city-loc-4)',
+    '(at truck-2 city-loc-5)',
+    '(capacity truck-1 capacity-0)',
+    '(capacity truck-1 capacity-1)',
+    '(capacity truck-1 capacity-2)',
+    '(capacity truck-1 capacity-3)',
+    '(capacity truck-1 capacity-4)',
+    '(capacity truck-2 capacity-0)',
+    '(capacity truck-2 capacity-1)',
+    '(capacity truck-2 capacity-2)',
+    '(capacity truck-2 capacity-3)',
+    '(capacity truck-2 capacity-4)',
+    '(in package-1 truck-1)',
+    '(in package-1 truck-2)',
+    '(in package-2 truck-1)',
+    '(in package-2 truck-2)',
+    '(in package-3 truck-1)',
+    '(in package-3 truck-2)',
+    '(in package-4 truck-1)',
+    '(in package-4 truck-2)',
+],
+'op' : [
+    {
+        'name' : 'drive truck-1 city-loc-1 city-loc-3',
+        'cost' : '40',
+        'pre' : set([ 20,]),
+        'add' : set([ 22,]),
+        'del' : set([ 20,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-1 city-loc-4',
+        'cost' : '36',
+        'pre' : set([ 20,]),
+        'add' : set([ 23,]),
+        'del' : set([ 20,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-2 city-loc-3',
+        'cost' : '18',
+        'pre' : set([ 21,]),
+        'add' : set([ 22,]),
+        'del' : set([ 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-2 city-loc-5',
+        'cost' : '24',
+        'pre' : set([ 21,]),
+        'add' : set([ 24,]),
+        'del' : set([ 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-3 city-loc-1',
+        'cost' : '40',
+        'pre' : set([ 22,]),
+        'add' : set([ 20,]),
+        'del' : set([ 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-3 city-loc-2',
+        'cost' : '18',
+        'pre' : set([ 22,]),
+        'add' : set([ 21,]),
+        'del' : set([ 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-3 city-loc-4',
+        'cost' : '37',
+        'pre' : set([ 22,]),
+        'add' : set([ 23,]),
+        'del' : set([ 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-3 city-loc-5',
+        'cost' : '26',
+        'pre' : set([ 22,]),
+        'add' : set([ 24,]),
+        'del' : set([ 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-4 city-loc-1',
+        'cost' : '36',
+        'pre' : set([ 23,]),
+        'add' : set([ 20,]),
+        'del' : set([ 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-4 city-loc-3',
+        'cost' : '37',
+        'pre' : set([ 23,]),
+        'add' : set([ 22,]),
+        'del' : set([ 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-5 city-loc-2',
+        'cost' : '24',
+        'pre' : set([ 24,]),
+        'add' : set([ 21,]),
+        'del' : set([ 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-1 city-loc-5 city-loc-3',
+        'cost' : '26',
+        'pre' : set([ 24,]),
+        'add' : set([ 22,]),
+        'del' : set([ 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-1 city-loc-3',
+        'cost' : '40',
+        'pre' : set([ 25,]),
+        'add' : set([ 27,]),
+        'del' : set([ 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-1 city-loc-4',
+        'cost' : '36',
+        'pre' : set([ 25,]),
+        'add' : set([ 28,]),
+        'del' : set([ 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-2 city-loc-3',
+        'cost' : '18',
+        'pre' : set([ 26,]),
+        'add' : set([ 27,]),
+        'del' : set([ 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-2 city-loc-5',
+        'cost' : '24',
+        'pre' : set([ 26,]),
+        'add' : set([ 29,]),
+        'del' : set([ 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-3 city-loc-1',
+        'cost' : '40',
+        'pre' : set([ 27,]),
+        'add' : set([ 25,]),
+        'del' : set([ 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-3 city-loc-2',
+        'cost' : '18',
+        'pre' : set([ 27,]),
+        'add' : set([ 26,]),
+        'del' : set([ 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-3 city-loc-4',
+        'cost' : '37',
+        'pre' : set([ 27,]),
+        'add' : set([ 28,]),
+        'del' : set([ 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-3 city-loc-5',
+        'cost' : '26',
+        'pre' : set([ 27,]),
+        'add' : set([ 29,]),
+        'del' : set([ 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-4 city-loc-1',
+        'cost' : '36',
+        'pre' : set([ 28,]),
+        'add' : set([ 25,]),
+        'del' : set([ 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-4 city-loc-3',
+        'cost' : '37',
+        'pre' : set([ 28,]),
+        'add' : set([ 27,]),
+        'del' : set([ 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-5 city-loc-2',
+        'cost' : '24',
+        'pre' : set([ 29,]),
+        'add' : set([ 26,]),
+        'del' : set([ 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drive truck-2 city-loc-5 city-loc-3',
+        'cost' : '26',
+        'pre' : set([ 29,]),
+        'add' : set([ 27,]),
+        'del' : set([ 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 20, 30, 40,]),
+        'add' : set([ 0, 31,]),
+        'del' : set([ 30, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 20, 31, 40,]),
+        'add' : set([ 0, 32,]),
+        'del' : set([ 31, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 20, 32, 40,]),
+        'add' : set([ 0, 33,]),
+        'del' : set([ 32, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 20, 33, 40,]),
+        'add' : set([ 0, 34,]),
+        'del' : set([ 33, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 20, 30, 42,]),
+        'add' : set([ 5, 31,]),
+        'del' : set([ 30, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 20, 31, 42,]),
+        'add' : set([ 5, 32,]),
+        'del' : set([ 31, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 20, 32, 42,]),
+        'add' : set([ 5, 33,]),
+        'del' : set([ 32, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 20, 33, 42,]),
+        'add' : set([ 5, 34,]),
+        'del' : set([ 33, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 20, 30, 44,]),
+        'add' : set([ 10, 31,]),
+        'del' : set([ 30, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 20, 31, 44,]),
+        'add' : set([ 10, 32,]),
+        'del' : set([ 31, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 20, 32, 44,]),
+        'add' : set([ 10, 33,]),
+        'del' : set([ 32, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 20, 33, 44,]),
+        'add' : set([ 10, 34,]),
+        'del' : set([ 33, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 20, 30, 46,]),
+        'add' : set([ 15, 31,]),
+        'del' : set([ 30, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 20, 31, 46,]),
+        'add' : set([ 15, 32,]),
+        'del' : set([ 31, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 20, 32, 46,]),
+        'add' : set([ 15, 33,]),
+        'del' : set([ 32, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-1 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 20, 33, 46,]),
+        'add' : set([ 15, 34,]),
+        'del' : set([ 33, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 21, 30, 40,]),
+        'add' : set([ 1, 31,]),
+        'del' : set([ 30, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 21, 31, 40,]),
+        'add' : set([ 1, 32,]),
+        'del' : set([ 31, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 21, 32, 40,]),
+        'add' : set([ 1, 33,]),
+        'del' : set([ 32, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 21, 33, 40,]),
+        'add' : set([ 1, 34,]),
+        'del' : set([ 33, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 21, 30, 42,]),
+        'add' : set([ 6, 31,]),
+        'del' : set([ 30, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 21, 31, 42,]),
+        'add' : set([ 6, 32,]),
+        'del' : set([ 31, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 21, 32, 42,]),
+        'add' : set([ 6, 33,]),
+        'del' : set([ 32, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 21, 33, 42,]),
+        'add' : set([ 6, 34,]),
+        'del' : set([ 33, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 21, 30, 44,]),
+        'add' : set([ 11, 31,]),
+        'del' : set([ 30, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 21, 31, 44,]),
+        'add' : set([ 11, 32,]),
+        'del' : set([ 31, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 21, 32, 44,]),
+        'add' : set([ 11, 33,]),
+        'del' : set([ 32, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 21, 33, 44,]),
+        'add' : set([ 11, 34,]),
+        'del' : set([ 33, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 21, 30, 46,]),
+        'add' : set([ 16, 31,]),
+        'del' : set([ 30, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 21, 31, 46,]),
+        'add' : set([ 16, 32,]),
+        'del' : set([ 31, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 21, 32, 46,]),
+        'add' : set([ 16, 33,]),
+        'del' : set([ 32, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-2 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 21, 33, 46,]),
+        'add' : set([ 16, 34,]),
+        'del' : set([ 33, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 22, 30, 40,]),
+        'add' : set([ 2, 31,]),
+        'del' : set([ 30, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 22, 31, 40,]),
+        'add' : set([ 2, 32,]),
+        'del' : set([ 31, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 22, 32, 40,]),
+        'add' : set([ 2, 33,]),
+        'del' : set([ 32, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 22, 33, 40,]),
+        'add' : set([ 2, 34,]),
+        'del' : set([ 33, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 22, 30, 42,]),
+        'add' : set([ 7, 31,]),
+        'del' : set([ 30, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 22, 31, 42,]),
+        'add' : set([ 7, 32,]),
+        'del' : set([ 31, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 22, 32, 42,]),
+        'add' : set([ 7, 33,]),
+        'del' : set([ 32, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 22, 33, 42,]),
+        'add' : set([ 7, 34,]),
+        'del' : set([ 33, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 22, 30, 44,]),
+        'add' : set([ 12, 31,]),
+        'del' : set([ 30, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 22, 31, 44,]),
+        'add' : set([ 12, 32,]),
+        'del' : set([ 31, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 22, 32, 44,]),
+        'add' : set([ 12, 33,]),
+        'del' : set([ 32, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 22, 33, 44,]),
+        'add' : set([ 12, 34,]),
+        'del' : set([ 33, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 22, 30, 46,]),
+        'add' : set([ 17, 31,]),
+        'del' : set([ 30, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 22, 31, 46,]),
+        'add' : set([ 17, 32,]),
+        'del' : set([ 31, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 22, 32, 46,]),
+        'add' : set([ 17, 33,]),
+        'del' : set([ 32, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-3 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 22, 33, 46,]),
+        'add' : set([ 17, 34,]),
+        'del' : set([ 33, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 23, 30, 40,]),
+        'add' : set([ 3, 31,]),
+        'del' : set([ 30, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 23, 31, 40,]),
+        'add' : set([ 3, 32,]),
+        'del' : set([ 31, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 23, 32, 40,]),
+        'add' : set([ 3, 33,]),
+        'del' : set([ 32, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 23, 33, 40,]),
+        'add' : set([ 3, 34,]),
+        'del' : set([ 33, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 23, 30, 42,]),
+        'add' : set([ 8, 31,]),
+        'del' : set([ 30, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 23, 31, 42,]),
+        'add' : set([ 8, 32,]),
+        'del' : set([ 31, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 23, 32, 42,]),
+        'add' : set([ 8, 33,]),
+        'del' : set([ 32, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 23, 33, 42,]),
+        'add' : set([ 8, 34,]),
+        'del' : set([ 33, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 23, 30, 44,]),
+        'add' : set([ 13, 31,]),
+        'del' : set([ 30, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 23, 31, 44,]),
+        'add' : set([ 13, 32,]),
+        'del' : set([ 31, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 23, 32, 44,]),
+        'add' : set([ 13, 33,]),
+        'del' : set([ 32, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 23, 33, 44,]),
+        'add' : set([ 13, 34,]),
+        'del' : set([ 33, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 23, 30, 46,]),
+        'add' : set([ 18, 31,]),
+        'del' : set([ 30, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 23, 31, 46,]),
+        'add' : set([ 18, 32,]),
+        'del' : set([ 31, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 23, 32, 46,]),
+        'add' : set([ 18, 33,]),
+        'del' : set([ 32, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-4 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 23, 33, 46,]),
+        'add' : set([ 18, 34,]),
+        'del' : set([ 33, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 24, 30, 40,]),
+        'add' : set([ 4, 31,]),
+        'del' : set([ 30, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 24, 31, 40,]),
+        'add' : set([ 4, 32,]),
+        'del' : set([ 31, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 24, 32, 40,]),
+        'add' : set([ 4, 33,]),
+        'del' : set([ 32, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 24, 33, 40,]),
+        'add' : set([ 4, 34,]),
+        'del' : set([ 33, 40,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 24, 30, 42,]),
+        'add' : set([ 9, 31,]),
+        'del' : set([ 30, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 24, 31, 42,]),
+        'add' : set([ 9, 32,]),
+        'del' : set([ 31, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 24, 32, 42,]),
+        'add' : set([ 9, 33,]),
+        'del' : set([ 32, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 24, 33, 42,]),
+        'add' : set([ 9, 34,]),
+        'del' : set([ 33, 42,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 24, 30, 44,]),
+        'add' : set([ 14, 31,]),
+        'del' : set([ 30, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 24, 31, 44,]),
+        'add' : set([ 14, 32,]),
+        'del' : set([ 31, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 24, 32, 44,]),
+        'add' : set([ 14, 33,]),
+        'del' : set([ 32, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 24, 33, 44,]),
+        'add' : set([ 14, 34,]),
+        'del' : set([ 33, 44,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 24, 30, 46,]),
+        'add' : set([ 19, 31,]),
+        'del' : set([ 30, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 24, 31, 46,]),
+        'add' : set([ 19, 32,]),
+        'del' : set([ 31, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 24, 32, 46,]),
+        'add' : set([ 19, 33,]),
+        'del' : set([ 32, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-1 city-loc-5 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 24, 33, 46,]),
+        'add' : set([ 19, 34,]),
+        'del' : set([ 33, 46,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 25, 35, 41,]),
+        'add' : set([ 0, 36,]),
+        'del' : set([ 35, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 25, 36, 41,]),
+        'add' : set([ 0, 37,]),
+        'del' : set([ 36, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 25, 37, 41,]),
+        'add' : set([ 0, 38,]),
+        'del' : set([ 37, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 25, 38, 41,]),
+        'add' : set([ 0, 39,]),
+        'del' : set([ 38, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 25, 35, 43,]),
+        'add' : set([ 5, 36,]),
+        'del' : set([ 35, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 25, 36, 43,]),
+        'add' : set([ 5, 37,]),
+        'del' : set([ 36, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 25, 37, 43,]),
+        'add' : set([ 5, 38,]),
+        'del' : set([ 37, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 25, 38, 43,]),
+        'add' : set([ 5, 39,]),
+        'del' : set([ 38, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 25, 35, 45,]),
+        'add' : set([ 10, 36,]),
+        'del' : set([ 35, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 25, 36, 45,]),
+        'add' : set([ 10, 37,]),
+        'del' : set([ 36, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 25, 37, 45,]),
+        'add' : set([ 10, 38,]),
+        'del' : set([ 37, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 25, 38, 45,]),
+        'add' : set([ 10, 39,]),
+        'del' : set([ 38, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 25, 35, 47,]),
+        'add' : set([ 15, 36,]),
+        'del' : set([ 35, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 25, 36, 47,]),
+        'add' : set([ 15, 37,]),
+        'del' : set([ 36, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 25, 37, 47,]),
+        'add' : set([ 15, 38,]),
+        'del' : set([ 37, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-1 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 25, 38, 47,]),
+        'add' : set([ 15, 39,]),
+        'del' : set([ 38, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 26, 35, 41,]),
+        'add' : set([ 1, 36,]),
+        'del' : set([ 35, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 26, 36, 41,]),
+        'add' : set([ 1, 37,]),
+        'del' : set([ 36, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 26, 37, 41,]),
+        'add' : set([ 1, 38,]),
+        'del' : set([ 37, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 26, 38, 41,]),
+        'add' : set([ 1, 39,]),
+        'del' : set([ 38, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 26, 35, 43,]),
+        'add' : set([ 6, 36,]),
+        'del' : set([ 35, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 26, 36, 43,]),
+        'add' : set([ 6, 37,]),
+        'del' : set([ 36, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 26, 37, 43,]),
+        'add' : set([ 6, 38,]),
+        'del' : set([ 37, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 26, 38, 43,]),
+        'add' : set([ 6, 39,]),
+        'del' : set([ 38, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 26, 35, 45,]),
+        'add' : set([ 11, 36,]),
+        'del' : set([ 35, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 26, 36, 45,]),
+        'add' : set([ 11, 37,]),
+        'del' : set([ 36, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 26, 37, 45,]),
+        'add' : set([ 11, 38,]),
+        'del' : set([ 37, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 26, 38, 45,]),
+        'add' : set([ 11, 39,]),
+        'del' : set([ 38, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 26, 35, 47,]),
+        'add' : set([ 16, 36,]),
+        'del' : set([ 35, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 26, 36, 47,]),
+        'add' : set([ 16, 37,]),
+        'del' : set([ 36, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 26, 37, 47,]),
+        'add' : set([ 16, 38,]),
+        'del' : set([ 37, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-2 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 26, 38, 47,]),
+        'add' : set([ 16, 39,]),
+        'del' : set([ 38, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 27, 35, 41,]),
+        'add' : set([ 2, 36,]),
+        'del' : set([ 35, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 27, 36, 41,]),
+        'add' : set([ 2, 37,]),
+        'del' : set([ 36, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 27, 37, 41,]),
+        'add' : set([ 2, 38,]),
+        'del' : set([ 37, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 27, 38, 41,]),
+        'add' : set([ 2, 39,]),
+        'del' : set([ 38, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 27, 35, 43,]),
+        'add' : set([ 7, 36,]),
+        'del' : set([ 35, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 27, 36, 43,]),
+        'add' : set([ 7, 37,]),
+        'del' : set([ 36, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 27, 37, 43,]),
+        'add' : set([ 7, 38,]),
+        'del' : set([ 37, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 27, 38, 43,]),
+        'add' : set([ 7, 39,]),
+        'del' : set([ 38, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 27, 35, 45,]),
+        'add' : set([ 12, 36,]),
+        'del' : set([ 35, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 27, 36, 45,]),
+        'add' : set([ 12, 37,]),
+        'del' : set([ 36, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 27, 37, 45,]),
+        'add' : set([ 12, 38,]),
+        'del' : set([ 37, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 27, 38, 45,]),
+        'add' : set([ 12, 39,]),
+        'del' : set([ 38, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 27, 35, 47,]),
+        'add' : set([ 17, 36,]),
+        'del' : set([ 35, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 27, 36, 47,]),
+        'add' : set([ 17, 37,]),
+        'del' : set([ 36, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 27, 37, 47,]),
+        'add' : set([ 17, 38,]),
+        'del' : set([ 37, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-3 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 27, 38, 47,]),
+        'add' : set([ 17, 39,]),
+        'del' : set([ 38, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 28, 35, 41,]),
+        'add' : set([ 3, 36,]),
+        'del' : set([ 35, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 28, 36, 41,]),
+        'add' : set([ 3, 37,]),
+        'del' : set([ 36, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 28, 37, 41,]),
+        'add' : set([ 3, 38,]),
+        'del' : set([ 37, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 28, 38, 41,]),
+        'add' : set([ 3, 39,]),
+        'del' : set([ 38, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 28, 35, 43,]),
+        'add' : set([ 8, 36,]),
+        'del' : set([ 35, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 28, 36, 43,]),
+        'add' : set([ 8, 37,]),
+        'del' : set([ 36, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 28, 37, 43,]),
+        'add' : set([ 8, 38,]),
+        'del' : set([ 37, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 28, 38, 43,]),
+        'add' : set([ 8, 39,]),
+        'del' : set([ 38, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 28, 35, 45,]),
+        'add' : set([ 13, 36,]),
+        'del' : set([ 35, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 28, 36, 45,]),
+        'add' : set([ 13, 37,]),
+        'del' : set([ 36, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 28, 37, 45,]),
+        'add' : set([ 13, 38,]),
+        'del' : set([ 37, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 28, 38, 45,]),
+        'add' : set([ 13, 39,]),
+        'del' : set([ 38, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 28, 35, 47,]),
+        'add' : set([ 18, 36,]),
+        'del' : set([ 35, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 28, 36, 47,]),
+        'add' : set([ 18, 37,]),
+        'del' : set([ 36, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 28, 37, 47,]),
+        'add' : set([ 18, 38,]),
+        'del' : set([ 37, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-4 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 28, 38, 47,]),
+        'add' : set([ 18, 39,]),
+        'del' : set([ 38, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 29, 35, 41,]),
+        'add' : set([ 4, 36,]),
+        'del' : set([ 35, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 29, 36, 41,]),
+        'add' : set([ 4, 37,]),
+        'del' : set([ 36, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 29, 37, 41,]),
+        'add' : set([ 4, 38,]),
+        'del' : set([ 37, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 29, 38, 41,]),
+        'add' : set([ 4, 39,]),
+        'del' : set([ 38, 41,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 29, 35, 43,]),
+        'add' : set([ 9, 36,]),
+        'del' : set([ 35, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 29, 36, 43,]),
+        'add' : set([ 9, 37,]),
+        'del' : set([ 36, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 29, 37, 43,]),
+        'add' : set([ 9, 38,]),
+        'del' : set([ 37, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 29, 38, 43,]),
+        'add' : set([ 9, 39,]),
+        'del' : set([ 38, 43,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 29, 35, 45,]),
+        'add' : set([ 14, 36,]),
+        'del' : set([ 35, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 29, 36, 45,]),
+        'add' : set([ 14, 37,]),
+        'del' : set([ 36, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 29, 37, 45,]),
+        'add' : set([ 14, 38,]),
+        'del' : set([ 37, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 29, 38, 45,]),
+        'add' : set([ 14, 39,]),
+        'del' : set([ 38, 45,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 29, 35, 47,]),
+        'add' : set([ 19, 36,]),
+        'del' : set([ 35, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 29, 36, 47,]),
+        'add' : set([ 19, 37,]),
+        'del' : set([ 36, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 29, 37, 47,]),
+        'add' : set([ 19, 38,]),
+        'del' : set([ 37, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop truck-2 city-loc-5 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 29, 38, 47,]),
+        'add' : set([ 19, 39,]),
+        'del' : set([ 38, 47,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 0, 20, 31,]),
+        'add' : set([ 30, 40,]),
+        'del' : set([ 0, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 0, 20, 32,]),
+        'add' : set([ 31, 40,]),
+        'del' : set([ 0, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 0, 20, 33,]),
+        'add' : set([ 32, 40,]),
+        'del' : set([ 0, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 0, 20, 34,]),
+        'add' : set([ 33, 40,]),
+        'del' : set([ 0, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 5, 20, 31,]),
+        'add' : set([ 30, 42,]),
+        'del' : set([ 5, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 5, 20, 32,]),
+        'add' : set([ 31, 42,]),
+        'del' : set([ 5, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 5, 20, 33,]),
+        'add' : set([ 32, 42,]),
+        'del' : set([ 5, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 5, 20, 34,]),
+        'add' : set([ 33, 42,]),
+        'del' : set([ 5, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 10, 20, 31,]),
+        'add' : set([ 30, 44,]),
+        'del' : set([ 10, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 10, 20, 32,]),
+        'add' : set([ 31, 44,]),
+        'del' : set([ 10, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 10, 20, 33,]),
+        'add' : set([ 32, 44,]),
+        'del' : set([ 10, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 10, 20, 34,]),
+        'add' : set([ 33, 44,]),
+        'del' : set([ 10, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 15, 20, 31,]),
+        'add' : set([ 30, 46,]),
+        'del' : set([ 15, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 15, 20, 32,]),
+        'add' : set([ 31, 46,]),
+        'del' : set([ 15, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 15, 20, 33,]),
+        'add' : set([ 32, 46,]),
+        'del' : set([ 15, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-1 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 15, 20, 34,]),
+        'add' : set([ 33, 46,]),
+        'del' : set([ 15, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 1, 21, 31,]),
+        'add' : set([ 30, 40,]),
+        'del' : set([ 1, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 1, 21, 32,]),
+        'add' : set([ 31, 40,]),
+        'del' : set([ 1, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 1, 21, 33,]),
+        'add' : set([ 32, 40,]),
+        'del' : set([ 1, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 1, 21, 34,]),
+        'add' : set([ 33, 40,]),
+        'del' : set([ 1, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 6, 21, 31,]),
+        'add' : set([ 30, 42,]),
+        'del' : set([ 6, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 6, 21, 32,]),
+        'add' : set([ 31, 42,]),
+        'del' : set([ 6, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 6, 21, 33,]),
+        'add' : set([ 32, 42,]),
+        'del' : set([ 6, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 6, 21, 34,]),
+        'add' : set([ 33, 42,]),
+        'del' : set([ 6, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 11, 21, 31,]),
+        'add' : set([ 30, 44,]),
+        'del' : set([ 11, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 11, 21, 32,]),
+        'add' : set([ 31, 44,]),
+        'del' : set([ 11, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 11, 21, 33,]),
+        'add' : set([ 32, 44,]),
+        'del' : set([ 11, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 11, 21, 34,]),
+        'add' : set([ 33, 44,]),
+        'del' : set([ 11, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 16, 21, 31,]),
+        'add' : set([ 30, 46,]),
+        'del' : set([ 16, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 16, 21, 32,]),
+        'add' : set([ 31, 46,]),
+        'del' : set([ 16, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 16, 21, 33,]),
+        'add' : set([ 32, 46,]),
+        'del' : set([ 16, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-2 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 16, 21, 34,]),
+        'add' : set([ 33, 46,]),
+        'del' : set([ 16, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 2, 22, 31,]),
+        'add' : set([ 30, 40,]),
+        'del' : set([ 2, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 2, 22, 32,]),
+        'add' : set([ 31, 40,]),
+        'del' : set([ 2, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 2, 22, 33,]),
+        'add' : set([ 32, 40,]),
+        'del' : set([ 2, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 2, 22, 34,]),
+        'add' : set([ 33, 40,]),
+        'del' : set([ 2, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 7, 22, 31,]),
+        'add' : set([ 30, 42,]),
+        'del' : set([ 7, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 7, 22, 32,]),
+        'add' : set([ 31, 42,]),
+        'del' : set([ 7, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 7, 22, 33,]),
+        'add' : set([ 32, 42,]),
+        'del' : set([ 7, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 7, 22, 34,]),
+        'add' : set([ 33, 42,]),
+        'del' : set([ 7, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 12, 22, 31,]),
+        'add' : set([ 30, 44,]),
+        'del' : set([ 12, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 12, 22, 32,]),
+        'add' : set([ 31, 44,]),
+        'del' : set([ 12, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 12, 22, 33,]),
+        'add' : set([ 32, 44,]),
+        'del' : set([ 12, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 12, 22, 34,]),
+        'add' : set([ 33, 44,]),
+        'del' : set([ 12, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 17, 22, 31,]),
+        'add' : set([ 30, 46,]),
+        'del' : set([ 17, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 17, 22, 32,]),
+        'add' : set([ 31, 46,]),
+        'del' : set([ 17, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 17, 22, 33,]),
+        'add' : set([ 32, 46,]),
+        'del' : set([ 17, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-3 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 17, 22, 34,]),
+        'add' : set([ 33, 46,]),
+        'del' : set([ 17, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 3, 23, 31,]),
+        'add' : set([ 30, 40,]),
+        'del' : set([ 3, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 3, 23, 32,]),
+        'add' : set([ 31, 40,]),
+        'del' : set([ 3, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 3, 23, 33,]),
+        'add' : set([ 32, 40,]),
+        'del' : set([ 3, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 3, 23, 34,]),
+        'add' : set([ 33, 40,]),
+        'del' : set([ 3, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 8, 23, 31,]),
+        'add' : set([ 30, 42,]),
+        'del' : set([ 8, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 8, 23, 32,]),
+        'add' : set([ 31, 42,]),
+        'del' : set([ 8, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 8, 23, 33,]),
+        'add' : set([ 32, 42,]),
+        'del' : set([ 8, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 8, 23, 34,]),
+        'add' : set([ 33, 42,]),
+        'del' : set([ 8, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 13, 23, 31,]),
+        'add' : set([ 30, 44,]),
+        'del' : set([ 13, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 13, 23, 32,]),
+        'add' : set([ 31, 44,]),
+        'del' : set([ 13, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 13, 23, 33,]),
+        'add' : set([ 32, 44,]),
+        'del' : set([ 13, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 13, 23, 34,]),
+        'add' : set([ 33, 44,]),
+        'del' : set([ 13, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 18, 23, 31,]),
+        'add' : set([ 30, 46,]),
+        'del' : set([ 18, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 18, 23, 32,]),
+        'add' : set([ 31, 46,]),
+        'del' : set([ 18, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 18, 23, 33,]),
+        'add' : set([ 32, 46,]),
+        'del' : set([ 18, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-4 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 18, 23, 34,]),
+        'add' : set([ 33, 46,]),
+        'del' : set([ 18, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 4, 24, 31,]),
+        'add' : set([ 30, 40,]),
+        'del' : set([ 4, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 4, 24, 32,]),
+        'add' : set([ 31, 40,]),
+        'del' : set([ 4, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 4, 24, 33,]),
+        'add' : set([ 32, 40,]),
+        'del' : set([ 4, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 4, 24, 34,]),
+        'add' : set([ 33, 40,]),
+        'del' : set([ 4, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 9, 24, 31,]),
+        'add' : set([ 30, 42,]),
+        'del' : set([ 9, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 9, 24, 32,]),
+        'add' : set([ 31, 42,]),
+        'del' : set([ 9, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 9, 24, 33,]),
+        'add' : set([ 32, 42,]),
+        'del' : set([ 9, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 9, 24, 34,]),
+        'add' : set([ 33, 42,]),
+        'del' : set([ 9, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 14, 24, 31,]),
+        'add' : set([ 30, 44,]),
+        'del' : set([ 14, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 14, 24, 32,]),
+        'add' : set([ 31, 44,]),
+        'del' : set([ 14, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 14, 24, 33,]),
+        'add' : set([ 32, 44,]),
+        'del' : set([ 14, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 14, 24, 34,]),
+        'add' : set([ 33, 44,]),
+        'del' : set([ 14, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 19, 24, 31,]),
+        'add' : set([ 30, 46,]),
+        'del' : set([ 19, 31,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 19, 24, 32,]),
+        'add' : set([ 31, 46,]),
+        'del' : set([ 19, 32,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 19, 24, 33,]),
+        'add' : set([ 32, 46,]),
+        'del' : set([ 19, 33,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-1 city-loc-5 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 19, 24, 34,]),
+        'add' : set([ 33, 46,]),
+        'del' : set([ 19, 34,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 0, 25, 36,]),
+        'add' : set([ 35, 41,]),
+        'del' : set([ 0, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 0, 25, 37,]),
+        'add' : set([ 36, 41,]),
+        'del' : set([ 0, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 0, 25, 38,]),
+        'add' : set([ 37, 41,]),
+        'del' : set([ 0, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 0, 25, 39,]),
+        'add' : set([ 38, 41,]),
+        'del' : set([ 0, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 5, 25, 36,]),
+        'add' : set([ 35, 43,]),
+        'del' : set([ 5, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 5, 25, 37,]),
+        'add' : set([ 36, 43,]),
+        'del' : set([ 5, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 5, 25, 38,]),
+        'add' : set([ 37, 43,]),
+        'del' : set([ 5, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 5, 25, 39,]),
+        'add' : set([ 38, 43,]),
+        'del' : set([ 5, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 10, 25, 36,]),
+        'add' : set([ 35, 45,]),
+        'del' : set([ 10, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 10, 25, 37,]),
+        'add' : set([ 36, 45,]),
+        'del' : set([ 10, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 10, 25, 38,]),
+        'add' : set([ 37, 45,]),
+        'del' : set([ 10, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 10, 25, 39,]),
+        'add' : set([ 38, 45,]),
+        'del' : set([ 10, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 15, 25, 36,]),
+        'add' : set([ 35, 47,]),
+        'del' : set([ 15, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 15, 25, 37,]),
+        'add' : set([ 36, 47,]),
+        'del' : set([ 15, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 15, 25, 38,]),
+        'add' : set([ 37, 47,]),
+        'del' : set([ 15, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-1 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 15, 25, 39,]),
+        'add' : set([ 38, 47,]),
+        'del' : set([ 15, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 1, 26, 36,]),
+        'add' : set([ 35, 41,]),
+        'del' : set([ 1, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 1, 26, 37,]),
+        'add' : set([ 36, 41,]),
+        'del' : set([ 1, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 1, 26, 38,]),
+        'add' : set([ 37, 41,]),
+        'del' : set([ 1, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 1, 26, 39,]),
+        'add' : set([ 38, 41,]),
+        'del' : set([ 1, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 6, 26, 36,]),
+        'add' : set([ 35, 43,]),
+        'del' : set([ 6, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 6, 26, 37,]),
+        'add' : set([ 36, 43,]),
+        'del' : set([ 6, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 6, 26, 38,]),
+        'add' : set([ 37, 43,]),
+        'del' : set([ 6, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 6, 26, 39,]),
+        'add' : set([ 38, 43,]),
+        'del' : set([ 6, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 11, 26, 36,]),
+        'add' : set([ 35, 45,]),
+        'del' : set([ 11, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 11, 26, 37,]),
+        'add' : set([ 36, 45,]),
+        'del' : set([ 11, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 11, 26, 38,]),
+        'add' : set([ 37, 45,]),
+        'del' : set([ 11, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 11, 26, 39,]),
+        'add' : set([ 38, 45,]),
+        'del' : set([ 11, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 16, 26, 36,]),
+        'add' : set([ 35, 47,]),
+        'del' : set([ 16, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 16, 26, 37,]),
+        'add' : set([ 36, 47,]),
+        'del' : set([ 16, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 16, 26, 38,]),
+        'add' : set([ 37, 47,]),
+        'del' : set([ 16, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-2 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 16, 26, 39,]),
+        'add' : set([ 38, 47,]),
+        'del' : set([ 16, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 2, 27, 36,]),
+        'add' : set([ 35, 41,]),
+        'del' : set([ 2, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 2, 27, 37,]),
+        'add' : set([ 36, 41,]),
+        'del' : set([ 2, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 2, 27, 38,]),
+        'add' : set([ 37, 41,]),
+        'del' : set([ 2, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 2, 27, 39,]),
+        'add' : set([ 38, 41,]),
+        'del' : set([ 2, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 7, 27, 36,]),
+        'add' : set([ 35, 43,]),
+        'del' : set([ 7, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 7, 27, 37,]),
+        'add' : set([ 36, 43,]),
+        'del' : set([ 7, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 7, 27, 38,]),
+        'add' : set([ 37, 43,]),
+        'del' : set([ 7, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 7, 27, 39,]),
+        'add' : set([ 38, 43,]),
+        'del' : set([ 7, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 12, 27, 36,]),
+        'add' : set([ 35, 45,]),
+        'del' : set([ 12, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 12, 27, 37,]),
+        'add' : set([ 36, 45,]),
+        'del' : set([ 12, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 12, 27, 38,]),
+        'add' : set([ 37, 45,]),
+        'del' : set([ 12, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 12, 27, 39,]),
+        'add' : set([ 38, 45,]),
+        'del' : set([ 12, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 17, 27, 36,]),
+        'add' : set([ 35, 47,]),
+        'del' : set([ 17, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 17, 27, 37,]),
+        'add' : set([ 36, 47,]),
+        'del' : set([ 17, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 17, 27, 38,]),
+        'add' : set([ 37, 47,]),
+        'del' : set([ 17, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-3 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 17, 27, 39,]),
+        'add' : set([ 38, 47,]),
+        'del' : set([ 17, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 3, 28, 36,]),
+        'add' : set([ 35, 41,]),
+        'del' : set([ 3, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 3, 28, 37,]),
+        'add' : set([ 36, 41,]),
+        'del' : set([ 3, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 3, 28, 38,]),
+        'add' : set([ 37, 41,]),
+        'del' : set([ 3, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 3, 28, 39,]),
+        'add' : set([ 38, 41,]),
+        'del' : set([ 3, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 8, 28, 36,]),
+        'add' : set([ 35, 43,]),
+        'del' : set([ 8, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 8, 28, 37,]),
+        'add' : set([ 36, 43,]),
+        'del' : set([ 8, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 8, 28, 38,]),
+        'add' : set([ 37, 43,]),
+        'del' : set([ 8, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 8, 28, 39,]),
+        'add' : set([ 38, 43,]),
+        'del' : set([ 8, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 13, 28, 36,]),
+        'add' : set([ 35, 45,]),
+        'del' : set([ 13, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 13, 28, 37,]),
+        'add' : set([ 36, 45,]),
+        'del' : set([ 13, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 13, 28, 38,]),
+        'add' : set([ 37, 45,]),
+        'del' : set([ 13, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 13, 28, 39,]),
+        'add' : set([ 38, 45,]),
+        'del' : set([ 13, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 18, 28, 36,]),
+        'add' : set([ 35, 47,]),
+        'del' : set([ 18, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 18, 28, 37,]),
+        'add' : set([ 36, 47,]),
+        'del' : set([ 18, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 18, 28, 38,]),
+        'add' : set([ 37, 47,]),
+        'del' : set([ 18, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-4 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 18, 28, 39,]),
+        'add' : set([ 38, 47,]),
+        'del' : set([ 18, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-1 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 4, 29, 36,]),
+        'add' : set([ 35, 41,]),
+        'del' : set([ 4, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-1 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 4, 29, 37,]),
+        'add' : set([ 36, 41,]),
+        'del' : set([ 4, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-1 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 4, 29, 38,]),
+        'add' : set([ 37, 41,]),
+        'del' : set([ 4, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-1 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 4, 29, 39,]),
+        'add' : set([ 38, 41,]),
+        'del' : set([ 4, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-2 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 9, 29, 36,]),
+        'add' : set([ 35, 43,]),
+        'del' : set([ 9, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-2 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 9, 29, 37,]),
+        'add' : set([ 36, 43,]),
+        'del' : set([ 9, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-2 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 9, 29, 38,]),
+        'add' : set([ 37, 43,]),
+        'del' : set([ 9, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-2 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 9, 29, 39,]),
+        'add' : set([ 38, 43,]),
+        'del' : set([ 9, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-3 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 14, 29, 36,]),
+        'add' : set([ 35, 45,]),
+        'del' : set([ 14, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-3 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 14, 29, 37,]),
+        'add' : set([ 36, 45,]),
+        'del' : set([ 14, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-3 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 14, 29, 38,]),
+        'add' : set([ 37, 45,]),
+        'del' : set([ 14, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-3 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 14, 29, 39,]),
+        'add' : set([ 38, 45,]),
+        'del' : set([ 14, 39,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-4 capacity-0 capacity-1',
+        'cost' : '1',
+        'pre' : set([ 19, 29, 36,]),
+        'add' : set([ 35, 47,]),
+        'del' : set([ 19, 36,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-4 capacity-1 capacity-2',
+        'cost' : '1',
+        'pre' : set([ 19, 29, 37,]),
+        'add' : set([ 36, 47,]),
+        'del' : set([ 19, 37,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-4 capacity-2 capacity-3',
+        'cost' : '1',
+        'pre' : set([ 19, 29, 38,]),
+        'add' : set([ 37, 47,]),
+        'del' : set([ 19, 38,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick-up truck-2 city-loc-5 package-4 capacity-3 capacity-4',
+        'cost' : '1',
+        'pre' : set([ 19, 29, 39,]),
+        'add' : set([ 38, 47,]),
+        'del' : set([ 19, 39,]),
+        'cond_eff' : [
+        ]
+    },
+],
+'init' : [0, 5, 12, 16, 21, 25, 33, 37, ],
+'goal' : [1, 6, 10, 19, ],
+'goal_is_unreachable' : False,
+'has_cond_eff' : False,
+}

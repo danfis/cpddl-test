@@ -1,0 +1,84 @@
+{
+'domain_file' : 'pddl/ipc-1998/movie/domain.pddl',
+'problem_file' : 'pddl/ipc-1998/movie/prob01.pddl',
+'domain_name' : 'movie-strips',
+'problem_name' : 'strips-movie-x-1',
+'fact' : [
+    '(counter-at-zero)',
+    '(have-cheese)',
+    '(have-chips)',
+    '(have-crackers)',
+    '(have-dip)',
+    '(have-pop)',
+    '(movie-rewound)',
+],
+'op' : [
+    {
+        'name' : 'get-cheese z1',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 1,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'get-chips c1',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 2,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'get-crackers k1',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 3,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'get-dip d1',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 4,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'get-pop p1',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 5,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'reset-counter',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 0,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'rewind-movie',
+        'cost' : '1',
+        'pre' : set([]),
+        'add' : set([ 6,]),
+        'del' : set([ 0,]),
+        'cond_eff' : [
+        ]
+    },
+],
+'init' : [],
+'goal' : [0, 1, 2, 3, 4, 5, 6, ],
+'goal_is_unreachable' : False,
+'has_cond_eff' : False,
+}

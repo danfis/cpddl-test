@@ -1,0 +1,112 @@
+
+-------- domain.pddl --------
+
+(define (domain driverlog)
+(:requirements
+    :strips
+)
+(:predicates
+    (obj ?x0 - object)
+    (truck ?x0 - object)
+    (location ?x0 - object)
+    (driver ?x0 - object)
+    (at ?x0 - object ?x1 - object)
+    (in ?x0 - object ?x1 - object)
+    (driving ?x0 - object ?x1 - object)
+    (link ?x0 - object ?x1 - object)
+    (path ?x0 - object ?x1 - object)
+    (empty ?x0 - object)
+)
+(:action load-truck
+    :parameters (?obj - object ?truck - object ?loc - object)
+    :precondition (and (obj ?obj) (truck ?truck) (location ?loc) (at ?truck ?loc) (at ?obj ?loc))
+    :effect (and (not (at ?obj ?loc)) (in ?obj ?truck))
+)
+
+(:action unload-truck
+    :parameters (?obj - object ?truck - object ?loc - object)
+    :precondition (and (obj ?obj) (truck ?truck) (location ?loc) (at ?truck ?loc) (in ?obj ?truck))
+    :effect (and (not (in ?obj ?truck)) (at ?obj ?loc))
+)
+
+(:action board-truck
+    :parameters (?driver - object ?truck - object ?loc - object)
+    :precondition (and (driver ?driver) (truck ?truck) (location ?loc) (at ?truck ?loc) (at ?driver ?loc) (empty ?truck))
+    :effect (and (not (at ?driver ?loc)) (driving ?driver ?truck) (not (empty ?truck)))
+)
+
+(:action disembark-truck
+    :parameters (?driver - object ?truck - object ?loc - object)
+    :precondition (and (driver ?driver) (truck ?truck) (location ?loc) (at ?truck ?loc) (driving ?driver ?truck))
+    :effect (and (not (driving ?driver ?truck)) (at ?driver ?loc) (empty ?truck))
+)
+
+(:action drive-truck
+    :parameters (?truck - object ?loc-from - object ?loc-to - object ?driver - object)
+    :precondition (and (truck ?truck) (location ?loc-from) (location ?loc-to) (driver ?driver) (at ?truck ?loc-from) (driving ?driver ?truck) (link ?loc-from ?loc-to))
+    :effect (and (not (at ?truck ?loc-from)) (at ?truck ?loc-to))
+)
+
+(:action walk
+    :parameters (?driver - object ?loc-from - object ?loc-to - object)
+    :precondition (and (driver ?driver) (location ?loc-from) (location ?loc-to) (at ?driver ?loc-from) (path ?loc-from ?loc-to))
+    :effect (and (not (at ?driver ?loc-from)) (at ?driver ?loc-to))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem dlog-2-2-2) (:domain driverlog)
+(:objects
+    driver1 - object
+    driver2 - object
+    truck1 - object
+    truck2 - object
+    package1 - object
+    package2 - object
+    s0 - object
+    s1 - object
+    s2 - object
+    p1-0 - object
+    p1-2 - object
+)
+(:init
+  (at driver1 s2)
+  (driver driver1)
+  (at driver2 s2)
+  (driver driver2)
+  (at truck1 s0)
+  (empty truck1)
+  (truck truck1)
+  (at truck2 s0)
+  (empty truck2)
+  (truck truck2)
+  (at package1 s0)
+  (obj package1)
+  (at package2 s0)
+  (obj package2)
+  (location s0)
+  (location s1)
+  (location s2)
+  (location p1-0)
+  (location p1-2)
+  (path s1 p1-0)
+  (path p1-0 s1)
+  (path s0 p1-0)
+  (path p1-0 s0)
+  (path s1 p1-2)
+  (path p1-2 s1)
+  (path s2 p1-2)
+  (path p1-2 s2)
+  (link s0 s1)
+  (link s1 s0)
+  (link s0 s2)
+  (link s2 s0)
+  (link s2 s1)
+  (link s1 s2)
+)
+(:goal (and (at driver1 s1) (at truck1 s1) (at package1 s0) (at package2 s0)))
+)
+

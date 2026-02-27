@@ -1,0 +1,119 @@
+
+-------- domain.pddl --------
+
+(define (domain mystery-strips)
+(:requirements
+    :strips
+)
+(:predicates
+    (planet ?x0 - object)
+    (food ?x0 - object)
+    (pleasure ?x0 - object)
+    (pain ?x0 - object)
+    (eats ?x0 - object ?x1 - object)
+    (craves ?x0 - object ?x1 - object)
+    (fears ?x0 - object ?x1 - object)
+    (locale ?x0 - object ?x1 - object)
+    (harmony ?x0 - object ?x1 - object)
+    (attacks ?x0 - object ?x1 - object)
+    (orbits ?x0 - object ?x1 - object)
+)
+(:action overcome
+    :parameters (?c - object ?v - object ?n - object ?s1 - object ?s2 - object)
+    :precondition (and (pain ?c) (pleasure ?v) (craves ?c ?n) (craves ?v ?n) (food ?n) (harmony ?v ?s2) (planet ?s2) (orbits ?s1 ?s2) (planet ?s1))
+    :effect (and (not (craves ?c ?n)) (fears ?c ?v) (not (harmony ?v ?s2)) (harmony ?v ?s1))
+)
+
+(:action feast
+    :parameters (?v - object ?n1 - object ?n2 - object ?l1 - object ?l2 - object)
+    :precondition (and (craves ?v ?n1) (food ?n1) (pleasure ?v) (eats ?n1 ?n2) (food ?n2) (locale ?n1 ?l2) (attacks ?l1 ?l2))
+    :effect (and (not (craves ?v ?n1)) (craves ?v ?n2) (not (locale ?n1 ?l2)) (locale ?n1 ?l1))
+)
+
+(:action succumb
+    :parameters (?c - object ?v - object ?n - object ?s1 - object ?s2 - object)
+    :precondition (and (fears ?c ?v) (pain ?c) (pleasure ?v) (craves ?v ?n) (food ?n) (harmony ?v ?s1) (orbits ?s1 ?s2))
+    :effect (and (not (fears ?c ?v)) (craves ?c ?n) (not (harmony ?v ?s1)) (harmony ?v ?s2))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem strips-mysty-x-1) (:domain mystery-strips)
+(:objects
+    rice - object
+    pear - object
+    flounder - object
+    okra - object
+    pork - object
+    lamb - object
+    rest - object
+    hangover - object
+    depression - object
+    abrasion - object
+    kentucky - object
+    bosnia - object
+    surrey - object
+    pennsylvania - object
+    alsace - object
+    quebec - object
+    guanabara - object
+    mars - object
+    earth - object
+    uranus - object
+    venus - object
+)
+(:init
+  (food rice)
+  (food pear)
+  (food flounder)
+  (food okra)
+  (food pork)
+  (food lamb)
+  (pleasure rest)
+  (pain hangover)
+  (pain depression)
+  (pain abrasion)
+  (planet mars)
+  (planet earth)
+  (planet uranus)
+  (planet venus)
+  (eats lamb pork)
+  (eats pork okra)
+  (locale okra guanabara)
+  (locale pork quebec)
+  (eats pork lamb)
+  (harmony rest venus)
+  (eats lamb flounder)
+  (craves depression flounder)
+  (eats okra pear)
+  (eats rice rice)
+  (eats rice flounder)
+  (attacks kentucky bosnia)
+  (attacks pennsylvania alsace)
+  (attacks alsace quebec)
+  (craves abrasion pork)
+  (locale rice bosnia)
+  (orbits mars earth)
+  (eats flounder lamb)
+  (craves rest pork)
+  (orbits earth uranus)
+  (locale pear surrey)
+  (craves hangover rice)
+  (attacks bosnia surrey)
+  (attacks surrey pennsylvania)
+  (locale lamb pennsylvania)
+  (eats flounder rice)
+  (eats rice pear)
+  (attacks quebec guanabara)
+  (eats pear okra)
+  (eats pear rice)
+  (eats okra pork)
+  (orbits uranus venus)
+  (locale flounder alsace)
+)
+(:goal (craves abrasion rice))
+)
+

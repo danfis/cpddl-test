@@ -1,0 +1,126 @@
+
+-------- domain.pddl --------
+
+(define (domain movie-strips)
+(:requirements
+    :strips
+)
+(:predicates
+    (movie-rewound)
+    (counter-at-zero)
+    (have-chips)
+    (have-dip)
+    (have-pop)
+    (have-cheese)
+    (have-crackers)
+    (chips ?x0 - object)
+    (dip ?x0 - object)
+    (pop ?x0 - object)
+    (cheese ?x0 - object)
+    (crackers ?x0 - object)
+)
+(:action rewind-movie
+    :parameters ()
+    :precondition (and)
+    :effect (and (movie-rewound) (not (counter-at-zero)))
+)
+
+(:action reset-counter
+    :parameters ()
+    :precondition (and)
+    :effect (and (counter-at-zero))
+)
+
+(:action get-chips
+    :parameters (?x - object)
+    :precondition (and (chips ?x))
+    :effect (and (have-chips))
+)
+
+(:action get-dip
+    :parameters (?x - object)
+    :precondition (and (dip ?x))
+    :effect (and (have-dip))
+)
+
+(:action get-pop
+    :parameters (?x - object)
+    :precondition (and (pop ?x))
+    :effect (and (have-pop))
+)
+
+(:action get-cheese
+    :parameters (?x - object)
+    :precondition (and (cheese ?x))
+    :effect (and (have-cheese))
+)
+
+(:action get-crackers
+    :parameters (?x - object)
+    :precondition (and (crackers ?x))
+    :effect (and (have-crackers))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem strips-movie-x-1) (:domain movie-strips)
+(:objects
+    c5 - object
+    c4 - object
+    c3 - object
+    c2 - object
+    c1 - object
+    d5 - object
+    d4 - object
+    d3 - object
+    d2 - object
+    d1 - object
+    p5 - object
+    p4 - object
+    p3 - object
+    p2 - object
+    p1 - object
+    z5 - object
+    z4 - object
+    z3 - object
+    z2 - object
+    z1 - object
+    k5 - object
+    k4 - object
+    k3 - object
+    k2 - object
+    k1 - object
+)
+(:init
+  (chips c5)
+  (chips c4)
+  (chips c3)
+  (chips c2)
+  (chips c1)
+  (dip d5)
+  (dip d4)
+  (dip d3)
+  (dip d2)
+  (dip d1)
+  (pop p5)
+  (pop p4)
+  (pop p3)
+  (pop p2)
+  (pop p1)
+  (cheese z5)
+  (cheese z4)
+  (cheese z3)
+  (cheese z2)
+  (cheese z1)
+  (crackers k5)
+  (crackers k4)
+  (crackers k3)
+  (crackers k2)
+  (crackers k1)
+)
+(:goal (and (movie-rewound) (counter-at-zero) (have-chips) (have-dip) (have-pop) (have-cheese) (have-crackers)))
+)
+

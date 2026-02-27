@@ -1,0 +1,109 @@
+
+-------- domain.pddl --------
+
+(define (domain depot)
+(:requirements
+    :strips
+)
+(:predicates
+    (at ?x0 - object ?x1 - object)
+    (on ?x0 - object ?x1 - object)
+    (in ?x0 - object ?x1 - object)
+    (lifting ?x0 - object ?x1 - object)
+    (available ?x0 - object)
+    (clear ?x0 - object)
+    (place ?x0 - object)
+    (truck ?x0 - object)
+    (hoist ?x0 - object)
+    (surface ?x0 - object)
+    (crate ?x0 - object)
+)
+(:action drive
+    :parameters (?x - object ?y - object ?z - object)
+    :precondition (and (truck ?x) (place ?y) (place ?z) (at ?x ?y))
+    :effect (and (at ?x ?z) (not (at ?x ?y)))
+)
+
+(:action lift
+    :parameters (?x - object ?y - object ?z - object ?p - object)
+    :precondition (and (hoist ?x) (crate ?y) (surface ?z) (place ?p) (at ?x ?p) (available ?x) (at ?y ?p) (on ?y ?z) (clear ?y))
+    :effect (and (lifting ?x ?y) (clear ?z) (not (at ?y ?p)) (not (clear ?y)) (not (available ?x)) (not (on ?y ?z)))
+)
+
+(:action drop
+    :parameters (?x - object ?y - object ?z - object ?p - object)
+    :precondition (and (hoist ?x) (crate ?y) (surface ?z) (place ?p) (at ?x ?p) (at ?z ?p) (clear ?z) (lifting ?x ?y))
+    :effect (and (available ?x) (at ?y ?p) (clear ?y) (on ?y ?z) (not (lifting ?x ?y)) (not (clear ?z)))
+)
+
+(:action load
+    :parameters (?x - object ?y - object ?z - object ?p - object)
+    :precondition (and (hoist ?x) (crate ?y) (truck ?z) (place ?p) (at ?x ?p) (at ?z ?p) (lifting ?x ?y))
+    :effect (and (in ?y ?z) (available ?x) (not (lifting ?x ?y)))
+)
+
+(:action unload
+    :parameters (?x - object ?y - object ?z - object ?p - object)
+    :precondition (and (hoist ?x) (crate ?y) (truck ?z) (place ?p) (at ?x ?p) (at ?z ?p) (available ?x) (in ?y ?z))
+    :effect (and (lifting ?x ?y) (not (in ?y ?z)) (not (available ?x)))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem depotprob1818) (:domain depot)
+(:objects
+    depot0 - object
+    distributor0 - object
+    distributor1 - object
+    truck0 - object
+    truck1 - object
+    pallet0 - object
+    pallet1 - object
+    pallet2 - object
+    crate0 - object
+    crate1 - object
+    hoist0 - object
+    hoist1 - object
+    hoist2 - object
+)
+(:init
+  (surface pallet0)
+  (at pallet0 depot0)
+  (clear crate1)
+  (surface pallet1)
+  (at pallet1 distributor0)
+  (clear crate0)
+  (surface pallet2)
+  (at pallet2 distributor1)
+  (clear pallet2)
+  (truck truck0)
+  (at truck0 distributor1)
+  (truck truck1)
+  (at truck1 depot0)
+  (hoist hoist0)
+  (at hoist0 depot0)
+  (available hoist0)
+  (hoist hoist1)
+  (at hoist1 distributor0)
+  (available hoist1)
+  (hoist hoist2)
+  (at hoist2 distributor1)
+  (available hoist2)
+  (crate crate0)
+  (surface crate0)
+  (at crate0 distributor0)
+  (on crate0 pallet1)
+  (crate crate1)
+  (surface crate1)
+  (at crate1 depot0)
+  (on crate1 pallet0)
+  (place depot0)
+  (place distributor0)
+  (place distributor1)
+)
+(:goal (and (on crate0 pallet2) (on crate1 pallet1)))
+)
+

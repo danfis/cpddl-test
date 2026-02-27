@@ -1,0 +1,340 @@
+{
+'domain_file' : 'pddl/ipc-1998/gripper/domain.pddl',
+'problem_file' : 'pddl/ipc-1998/gripper/prob01.pddl',
+'domain_name' : 'gripper-strips',
+'problem_name' : 'strips-gripper-x-1',
+'fact' : [
+    '(at ball1 rooma)',
+    '(at ball1 roomb)',
+    '(at ball2 rooma)',
+    '(at ball2 roomb)',
+    '(at ball3 rooma)',
+    '(at ball3 roomb)',
+    '(at ball4 rooma)',
+    '(at ball4 roomb)',
+    '(at-robby rooma)',
+    '(at-robby roomb)',
+    '(carry ball1 left)',
+    '(carry ball1 right)',
+    '(carry ball2 left)',
+    '(carry ball2 right)',
+    '(carry ball3 left)',
+    '(carry ball3 right)',
+    '(carry ball4 left)',
+    '(carry ball4 right)',
+    '(free left)',
+    '(free right)',
+],
+'op' : [
+    {
+        'name' : 'drop ball1 rooma left',
+        'cost' : '1',
+        'pre' : set([ 8, 10,]),
+        'add' : set([ 0, 18,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball1 rooma right',
+        'cost' : '1',
+        'pre' : set([ 8, 11,]),
+        'add' : set([ 0, 19,]),
+        'del' : set([ 11,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball1 roomb left',
+        'cost' : '1',
+        'pre' : set([ 9, 10,]),
+        'add' : set([ 1, 18,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball1 roomb right',
+        'cost' : '1',
+        'pre' : set([ 9, 11,]),
+        'add' : set([ 1, 19,]),
+        'del' : set([ 11,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball2 rooma left',
+        'cost' : '1',
+        'pre' : set([ 8, 12,]),
+        'add' : set([ 2, 18,]),
+        'del' : set([ 12,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball2 rooma right',
+        'cost' : '1',
+        'pre' : set([ 8, 13,]),
+        'add' : set([ 2, 19,]),
+        'del' : set([ 13,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball2 roomb left',
+        'cost' : '1',
+        'pre' : set([ 9, 12,]),
+        'add' : set([ 3, 18,]),
+        'del' : set([ 12,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball2 roomb right',
+        'cost' : '1',
+        'pre' : set([ 9, 13,]),
+        'add' : set([ 3, 19,]),
+        'del' : set([ 13,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball3 rooma left',
+        'cost' : '1',
+        'pre' : set([ 8, 14,]),
+        'add' : set([ 4, 18,]),
+        'del' : set([ 14,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball3 rooma right',
+        'cost' : '1',
+        'pre' : set([ 8, 15,]),
+        'add' : set([ 4, 19,]),
+        'del' : set([ 15,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball3 roomb left',
+        'cost' : '1',
+        'pre' : set([ 9, 14,]),
+        'add' : set([ 5, 18,]),
+        'del' : set([ 14,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball3 roomb right',
+        'cost' : '1',
+        'pre' : set([ 9, 15,]),
+        'add' : set([ 5, 19,]),
+        'del' : set([ 15,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball4 rooma left',
+        'cost' : '1',
+        'pre' : set([ 8, 16,]),
+        'add' : set([ 6, 18,]),
+        'del' : set([ 16,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball4 rooma right',
+        'cost' : '1',
+        'pre' : set([ 8, 17,]),
+        'add' : set([ 6, 19,]),
+        'del' : set([ 17,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball4 roomb left',
+        'cost' : '1',
+        'pre' : set([ 9, 16,]),
+        'add' : set([ 7, 18,]),
+        'del' : set([ 16,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop ball4 roomb right',
+        'cost' : '1',
+        'pre' : set([ 9, 17,]),
+        'add' : set([ 7, 19,]),
+        'del' : set([ 17,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move rooma roomb',
+        'cost' : '1',
+        'pre' : set([ 8,]),
+        'add' : set([ 9,]),
+        'del' : set([ 8,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move roomb rooma',
+        'cost' : '1',
+        'pre' : set([ 9,]),
+        'add' : set([ 8,]),
+        'del' : set([ 9,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball1 rooma left',
+        'cost' : '1',
+        'pre' : set([ 0, 8, 18,]),
+        'add' : set([ 10,]),
+        'del' : set([ 0, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball1 rooma right',
+        'cost' : '1',
+        'pre' : set([ 0, 8, 19,]),
+        'add' : set([ 11,]),
+        'del' : set([ 0, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball1 roomb left',
+        'cost' : '1',
+        'pre' : set([ 1, 9, 18,]),
+        'add' : set([ 10,]),
+        'del' : set([ 1, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball1 roomb right',
+        'cost' : '1',
+        'pre' : set([ 1, 9, 19,]),
+        'add' : set([ 11,]),
+        'del' : set([ 1, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball2 rooma left',
+        'cost' : '1',
+        'pre' : set([ 2, 8, 18,]),
+        'add' : set([ 12,]),
+        'del' : set([ 2, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball2 rooma right',
+        'cost' : '1',
+        'pre' : set([ 2, 8, 19,]),
+        'add' : set([ 13,]),
+        'del' : set([ 2, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball2 roomb left',
+        'cost' : '1',
+        'pre' : set([ 3, 9, 18,]),
+        'add' : set([ 12,]),
+        'del' : set([ 3, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball2 roomb right',
+        'cost' : '1',
+        'pre' : set([ 3, 9, 19,]),
+        'add' : set([ 13,]),
+        'del' : set([ 3, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball3 rooma left',
+        'cost' : '1',
+        'pre' : set([ 4, 8, 18,]),
+        'add' : set([ 14,]),
+        'del' : set([ 4, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball3 rooma right',
+        'cost' : '1',
+        'pre' : set([ 4, 8, 19,]),
+        'add' : set([ 15,]),
+        'del' : set([ 4, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball3 roomb left',
+        'cost' : '1',
+        'pre' : set([ 5, 9, 18,]),
+        'add' : set([ 14,]),
+        'del' : set([ 5, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball3 roomb right',
+        'cost' : '1',
+        'pre' : set([ 5, 9, 19,]),
+        'add' : set([ 15,]),
+        'del' : set([ 5, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball4 rooma left',
+        'cost' : '1',
+        'pre' : set([ 6, 8, 18,]),
+        'add' : set([ 16,]),
+        'del' : set([ 6, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball4 rooma right',
+        'cost' : '1',
+        'pre' : set([ 6, 8, 19,]),
+        'add' : set([ 17,]),
+        'del' : set([ 6, 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball4 roomb left',
+        'cost' : '1',
+        'pre' : set([ 7, 9, 18,]),
+        'add' : set([ 16,]),
+        'del' : set([ 7, 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'pick ball4 roomb right',
+        'cost' : '1',
+        'pre' : set([ 7, 9, 19,]),
+        'add' : set([ 17,]),
+        'del' : set([ 7, 19,]),
+        'cond_eff' : [
+        ]
+    },
+],
+'init' : [0, 2, 4, 6, 8, 18, 19, ],
+'goal' : [1, 3, 5, 7, ],
+'goal_is_unreachable' : False,
+'has_cond_eff' : False,
+}

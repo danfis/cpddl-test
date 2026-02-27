@@ -1,0 +1,585 @@
+{
+'domain_file' : 'pddl/ipc-2008/seq-opt/openstacks/domain.pddl',
+'problem_file' : 'pddl/ipc-2008/seq-opt/openstacks/p01.pddl',
+'domain_name' : 'openstacks-sequencedstrips-adl',
+'problem_name' : 'os-sequencedstrips-p5_1',
+'fact' : [
+    '(NOT-made p1)',
+    '(NOT-made p2)',
+    '(NOT-made p3)',
+    '(NOT-made p4)',
+    '(NOT-made p5)',
+    '(made p1)',
+    '(made p2)',
+    '(made p3)',
+    '(made p4)',
+    '(made p5)',
+    '(shipped o1)',
+    '(shipped o2)',
+    '(shipped o3)',
+    '(shipped o4)',
+    '(shipped o5)',
+    '(stacks-avail n0)',
+    '(stacks-avail n1)',
+    '(stacks-avail n2)',
+    '(stacks-avail n3)',
+    '(stacks-avail n4)',
+    '(stacks-avail n5)',
+    '(started o1)',
+    '(started o2)',
+    '(started o3)',
+    '(started o4)',
+    '(started o5)',
+    '(waiting o1)',
+    '(waiting o2)',
+    '(waiting o3)',
+    '(waiting o4)',
+    '(waiting o5)',
+],
+'op' : [
+    {
+        'name' : 'make-product p1',
+        'cost' : '0',
+        'pre' : set([ 0, 22,]),
+        'add' : set([ 5,]),
+        'del' : set([ 0,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'make-product p2',
+        'cost' : '0',
+        'pre' : set([ 1, 21, 22,]),
+        'add' : set([ 6,]),
+        'del' : set([ 1,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'make-product p3',
+        'cost' : '0',
+        'pre' : set([ 2, 23, 24,]),
+        'add' : set([ 7,]),
+        'del' : set([ 2,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'make-product p4',
+        'cost' : '0',
+        'pre' : set([ 3, 24,]),
+        'add' : set([ 8,]),
+        'del' : set([ 3,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'make-product p5',
+        'cost' : '0',
+        'pre' : set([ 4, 25,]),
+        'add' : set([ 9,]),
+        'del' : set([ 4,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'open-new-stack n0 n1',
+        'cost' : '1',
+        'pre' : set([ 15,]),
+        'add' : set([ 16,]),
+        'del' : set([ 15,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'open-new-stack n1 n2',
+        'cost' : '1',
+        'pre' : set([ 16,]),
+        'add' : set([ 17,]),
+        'del' : set([ 16,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'open-new-stack n2 n3',
+        'cost' : '1',
+        'pre' : set([ 17,]),
+        'add' : set([ 18,]),
+        'del' : set([ 17,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'open-new-stack n3 n4',
+        'cost' : '1',
+        'pre' : set([ 18,]),
+        'add' : set([ 19,]),
+        'del' : set([ 18,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'open-new-stack n4 n5',
+        'cost' : '1',
+        'pre' : set([ 19,]),
+        'add' : set([ 20,]),
+        'del' : set([ 19,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o1 n0 n1',
+        'cost' : '0',
+        'pre' : set([ 6, 15, 21,]),
+        'add' : set([ 10, 16,]),
+        'del' : set([ 15, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o1 n1 n2',
+        'cost' : '0',
+        'pre' : set([ 6, 16, 21,]),
+        'add' : set([ 10, 17,]),
+        'del' : set([ 16, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o1 n2 n3',
+        'cost' : '0',
+        'pre' : set([ 6, 17, 21,]),
+        'add' : set([ 10, 18,]),
+        'del' : set([ 17, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o1 n3 n4',
+        'cost' : '0',
+        'pre' : set([ 6, 18, 21,]),
+        'add' : set([ 10, 19,]),
+        'del' : set([ 18, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o1 n4 n5',
+        'cost' : '0',
+        'pre' : set([ 6, 19, 21,]),
+        'add' : set([ 10, 20,]),
+        'del' : set([ 19, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o2 n0 n1',
+        'cost' : '0',
+        'pre' : set([ 5, 6, 15, 22,]),
+        'add' : set([ 11, 16,]),
+        'del' : set([ 15, 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o2 n1 n2',
+        'cost' : '0',
+        'pre' : set([ 5, 6, 16, 22,]),
+        'add' : set([ 11, 17,]),
+        'del' : set([ 16, 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o2 n2 n3',
+        'cost' : '0',
+        'pre' : set([ 5, 6, 17, 22,]),
+        'add' : set([ 11, 18,]),
+        'del' : set([ 17, 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o2 n3 n4',
+        'cost' : '0',
+        'pre' : set([ 5, 6, 18, 22,]),
+        'add' : set([ 11, 19,]),
+        'del' : set([ 18, 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o2 n4 n5',
+        'cost' : '0',
+        'pre' : set([ 5, 6, 19, 22,]),
+        'add' : set([ 11, 20,]),
+        'del' : set([ 19, 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o3 n0 n1',
+        'cost' : '0',
+        'pre' : set([ 7, 15, 23,]),
+        'add' : set([ 12, 16,]),
+        'del' : set([ 15, 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o3 n1 n2',
+        'cost' : '0',
+        'pre' : set([ 7, 16, 23,]),
+        'add' : set([ 12, 17,]),
+        'del' : set([ 16, 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o3 n2 n3',
+        'cost' : '0',
+        'pre' : set([ 7, 17, 23,]),
+        'add' : set([ 12, 18,]),
+        'del' : set([ 17, 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o3 n3 n4',
+        'cost' : '0',
+        'pre' : set([ 7, 18, 23,]),
+        'add' : set([ 12, 19,]),
+        'del' : set([ 18, 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o3 n4 n5',
+        'cost' : '0',
+        'pre' : set([ 7, 19, 23,]),
+        'add' : set([ 12, 20,]),
+        'del' : set([ 19, 23,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o4 n0 n1',
+        'cost' : '0',
+        'pre' : set([ 7, 8, 15, 24,]),
+        'add' : set([ 13, 16,]),
+        'del' : set([ 15, 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o4 n1 n2',
+        'cost' : '0',
+        'pre' : set([ 7, 8, 16, 24,]),
+        'add' : set([ 13, 17,]),
+        'del' : set([ 16, 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o4 n2 n3',
+        'cost' : '0',
+        'pre' : set([ 7, 8, 17, 24,]),
+        'add' : set([ 13, 18,]),
+        'del' : set([ 17, 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o4 n3 n4',
+        'cost' : '0',
+        'pre' : set([ 7, 8, 18, 24,]),
+        'add' : set([ 13, 19,]),
+        'del' : set([ 18, 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o4 n4 n5',
+        'cost' : '0',
+        'pre' : set([ 7, 8, 19, 24,]),
+        'add' : set([ 13, 20,]),
+        'del' : set([ 19, 24,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o5 n0 n1',
+        'cost' : '0',
+        'pre' : set([ 9, 15, 25,]),
+        'add' : set([ 14, 16,]),
+        'del' : set([ 15, 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o5 n1 n2',
+        'cost' : '0',
+        'pre' : set([ 9, 16, 25,]),
+        'add' : set([ 14, 17,]),
+        'del' : set([ 16, 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o5 n2 n3',
+        'cost' : '0',
+        'pre' : set([ 9, 17, 25,]),
+        'add' : set([ 14, 18,]),
+        'del' : set([ 17, 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o5 n3 n4',
+        'cost' : '0',
+        'pre' : set([ 9, 18, 25,]),
+        'add' : set([ 14, 19,]),
+        'del' : set([ 18, 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'ship-order o5 n4 n5',
+        'cost' : '0',
+        'pre' : set([ 9, 19, 25,]),
+        'add' : set([ 14, 20,]),
+        'del' : set([ 19, 25,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o1 n1 n0',
+        'cost' : '0',
+        'pre' : set([ 16, 26,]),
+        'add' : set([ 15, 21,]),
+        'del' : set([ 16, 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o1 n2 n1',
+        'cost' : '0',
+        'pre' : set([ 17, 26,]),
+        'add' : set([ 16, 21,]),
+        'del' : set([ 17, 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o1 n3 n2',
+        'cost' : '0',
+        'pre' : set([ 18, 26,]),
+        'add' : set([ 17, 21,]),
+        'del' : set([ 18, 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o1 n4 n3',
+        'cost' : '0',
+        'pre' : set([ 19, 26,]),
+        'add' : set([ 18, 21,]),
+        'del' : set([ 19, 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o1 n5 n4',
+        'cost' : '0',
+        'pre' : set([ 20, 26,]),
+        'add' : set([ 19, 21,]),
+        'del' : set([ 20, 26,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o2 n1 n0',
+        'cost' : '0',
+        'pre' : set([ 16, 27,]),
+        'add' : set([ 15, 22,]),
+        'del' : set([ 16, 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o2 n2 n1',
+        'cost' : '0',
+        'pre' : set([ 17, 27,]),
+        'add' : set([ 16, 22,]),
+        'del' : set([ 17, 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o2 n3 n2',
+        'cost' : '0',
+        'pre' : set([ 18, 27,]),
+        'add' : set([ 17, 22,]),
+        'del' : set([ 18, 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o2 n4 n3',
+        'cost' : '0',
+        'pre' : set([ 19, 27,]),
+        'add' : set([ 18, 22,]),
+        'del' : set([ 19, 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o2 n5 n4',
+        'cost' : '0',
+        'pre' : set([ 20, 27,]),
+        'add' : set([ 19, 22,]),
+        'del' : set([ 20, 27,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o3 n1 n0',
+        'cost' : '0',
+        'pre' : set([ 16, 28,]),
+        'add' : set([ 15, 23,]),
+        'del' : set([ 16, 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o3 n2 n1',
+        'cost' : '0',
+        'pre' : set([ 17, 28,]),
+        'add' : set([ 16, 23,]),
+        'del' : set([ 17, 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o3 n3 n2',
+        'cost' : '0',
+        'pre' : set([ 18, 28,]),
+        'add' : set([ 17, 23,]),
+        'del' : set([ 18, 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o3 n4 n3',
+        'cost' : '0',
+        'pre' : set([ 19, 28,]),
+        'add' : set([ 18, 23,]),
+        'del' : set([ 19, 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o3 n5 n4',
+        'cost' : '0',
+        'pre' : set([ 20, 28,]),
+        'add' : set([ 19, 23,]),
+        'del' : set([ 20, 28,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o4 n1 n0',
+        'cost' : '0',
+        'pre' : set([ 16, 29,]),
+        'add' : set([ 15, 24,]),
+        'del' : set([ 16, 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o4 n2 n1',
+        'cost' : '0',
+        'pre' : set([ 17, 29,]),
+        'add' : set([ 16, 24,]),
+        'del' : set([ 17, 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o4 n3 n2',
+        'cost' : '0',
+        'pre' : set([ 18, 29,]),
+        'add' : set([ 17, 24,]),
+        'del' : set([ 18, 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o4 n4 n3',
+        'cost' : '0',
+        'pre' : set([ 19, 29,]),
+        'add' : set([ 18, 24,]),
+        'del' : set([ 19, 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o4 n5 n4',
+        'cost' : '0',
+        'pre' : set([ 20, 29,]),
+        'add' : set([ 19, 24,]),
+        'del' : set([ 20, 29,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o5 n1 n0',
+        'cost' : '0',
+        'pre' : set([ 16, 30,]),
+        'add' : set([ 15, 25,]),
+        'del' : set([ 16, 30,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o5 n2 n1',
+        'cost' : '0',
+        'pre' : set([ 17, 30,]),
+        'add' : set([ 16, 25,]),
+        'del' : set([ 17, 30,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o5 n3 n2',
+        'cost' : '0',
+        'pre' : set([ 18, 30,]),
+        'add' : set([ 17, 25,]),
+        'del' : set([ 18, 30,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o5 n4 n3',
+        'cost' : '0',
+        'pre' : set([ 19, 30,]),
+        'add' : set([ 18, 25,]),
+        'del' : set([ 19, 30,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'start-order o5 n5 n4',
+        'cost' : '0',
+        'pre' : set([ 20, 30,]),
+        'add' : set([ 19, 25,]),
+        'del' : set([ 20, 30,]),
+        'cond_eff' : [
+        ]
+    },
+],
+'init' : [0, 1, 2, 3, 4, 15, 26, 27, 28, 29, 30, ],
+'goal' : [10, 11, 12, 13, 14, ],
+'goal_is_unreachable' : False,
+'has_cond_eff' : False,
+}

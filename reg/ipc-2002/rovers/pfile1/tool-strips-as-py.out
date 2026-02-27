@@ -1,0 +1,614 @@
+{
+'domain_file' : 'pddl/ipc-2002/rovers/domain.pddl',
+'problem_file' : 'pddl/ipc-2002/rovers/pfile1.pddl',
+'domain_name' : 'rover',
+'problem_name' : 'roverprob1234',
+'fact' : [
+    '(at rover0 waypoint0)',
+    '(at rover0 waypoint1)',
+    '(at rover0 waypoint2)',
+    '(at rover0 waypoint3)',
+    '(at_rock_sample waypoint1)',
+    '(at_rock_sample waypoint2)',
+    '(at_rock_sample waypoint3)',
+    '(at_soil_sample waypoint0)',
+    '(at_soil_sample waypoint2)',
+    '(at_soil_sample waypoint3)',
+    '(calibrated camera0 rover0)',
+    '(communicated_image_data objective0 colour)',
+    '(communicated_image_data objective0 high_res)',
+    '(communicated_image_data objective1 colour)',
+    '(communicated_image_data objective1 high_res)',
+    '(communicated_rock_data waypoint1)',
+    '(communicated_rock_data waypoint2)',
+    '(communicated_rock_data waypoint3)',
+    '(communicated_soil_data waypoint0)',
+    '(communicated_soil_data waypoint2)',
+    '(communicated_soil_data waypoint3)',
+    '(empty rover0store)',
+    '(full rover0store)',
+    '(have_image rover0 objective0 colour)',
+    '(have_image rover0 objective0 high_res)',
+    '(have_image rover0 objective1 colour)',
+    '(have_image rover0 objective1 high_res)',
+    '(have_rock_analysis rover0 waypoint1)',
+    '(have_rock_analysis rover0 waypoint2)',
+    '(have_rock_analysis rover0 waypoint3)',
+    '(have_soil_analysis rover0 waypoint0)',
+    '(have_soil_analysis rover0 waypoint2)',
+    '(have_soil_analysis rover0 waypoint3)',
+],
+'op' : [
+    {
+        'name' : 'calibrate rover0 camera0 objective1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 0,]),
+        'add' : set([ 10,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'calibrate rover0 camera0 objective1 waypoint1',
+        'cost' : '1',
+        'pre' : set([ 1,]),
+        'add' : set([ 10,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'calibrate rover0 camera0 objective1 waypoint2',
+        'cost' : '1',
+        'pre' : set([ 2,]),
+        'add' : set([ 10,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'calibrate rover0 camera0 objective1 waypoint3',
+        'cost' : '1',
+        'pre' : set([ 3,]),
+        'add' : set([ 10,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective0 colour waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 23,]),
+        'add' : set([ 11,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective0 colour waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 23,]),
+        'add' : set([ 11,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective0 colour waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 23,]),
+        'add' : set([ 11,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective0 high_res waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 24,]),
+        'add' : set([ 12,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective0 high_res waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 24,]),
+        'add' : set([ 12,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective0 high_res waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 24,]),
+        'add' : set([ 12,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective1 colour waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 25,]),
+        'add' : set([ 13,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective1 colour waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 25,]),
+        'add' : set([ 13,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective1 colour waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 25,]),
+        'add' : set([ 13,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective1 high_res waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 26,]),
+        'add' : set([ 14,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective1 high_res waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 26,]),
+        'add' : set([ 14,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_image_data rover0 general objective1 high_res waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 26,]),
+        'add' : set([ 14,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint1 waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 27,]),
+        'add' : set([ 15,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint1 waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 27,]),
+        'add' : set([ 15,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint1 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 27,]),
+        'add' : set([ 15,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint2 waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 28,]),
+        'add' : set([ 16,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint2 waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 28,]),
+        'add' : set([ 16,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint2 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 28,]),
+        'add' : set([ 16,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint3 waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 29,]),
+        'add' : set([ 17,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint3 waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 29,]),
+        'add' : set([ 17,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_rock_data rover0 general waypoint3 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 29,]),
+        'add' : set([ 17,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint0 waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 30,]),
+        'add' : set([ 18,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint0 waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 30,]),
+        'add' : set([ 18,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint0 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 30,]),
+        'add' : set([ 18,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint2 waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 31,]),
+        'add' : set([ 19,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint2 waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 31,]),
+        'add' : set([ 19,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint2 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 31,]),
+        'add' : set([ 19,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint3 waypoint1 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 1, 32,]),
+        'add' : set([ 20,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint3 waypoint2 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 2, 32,]),
+        'add' : set([ 20,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'communicate_soil_data rover0 general waypoint3 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3, 32,]),
+        'add' : set([ 20,]),
+        'del' : set([]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'drop rover0 rover0store',
+        'cost' : '1',
+        'pre' : set([ 22,]),
+        'add' : set([ 21,]),
+        'del' : set([ 22,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'navigate rover0 waypoint0 waypoint3',
+        'cost' : '1',
+        'pre' : set([ 0,]),
+        'add' : set([ 3,]),
+        'del' : set([ 0,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'navigate rover0 waypoint1 waypoint2',
+        'cost' : '1',
+        'pre' : set([ 1,]),
+        'add' : set([ 2,]),
+        'del' : set([ 1,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'navigate rover0 waypoint1 waypoint3',
+        'cost' : '1',
+        'pre' : set([ 1,]),
+        'add' : set([ 3,]),
+        'del' : set([ 1,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'navigate rover0 waypoint2 waypoint1',
+        'cost' : '1',
+        'pre' : set([ 2,]),
+        'add' : set([ 1,]),
+        'del' : set([ 2,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'navigate rover0 waypoint3 waypoint0',
+        'cost' : '1',
+        'pre' : set([ 3,]),
+        'add' : set([ 0,]),
+        'del' : set([ 3,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'navigate rover0 waypoint3 waypoint1',
+        'cost' : '1',
+        'pre' : set([ 3,]),
+        'add' : set([ 1,]),
+        'del' : set([ 3,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'sample_rock rover0 rover0store waypoint1',
+        'cost' : '1',
+        'pre' : set([ 1, 4, 21,]),
+        'add' : set([ 22, 27,]),
+        'del' : set([ 4, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'sample_rock rover0 rover0store waypoint2',
+        'cost' : '1',
+        'pre' : set([ 2, 5, 21,]),
+        'add' : set([ 22, 28,]),
+        'del' : set([ 5, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'sample_rock rover0 rover0store waypoint3',
+        'cost' : '1',
+        'pre' : set([ 3, 6, 21,]),
+        'add' : set([ 22, 29,]),
+        'del' : set([ 6, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'sample_soil rover0 rover0store waypoint0',
+        'cost' : '1',
+        'pre' : set([ 0, 7, 21,]),
+        'add' : set([ 22, 30,]),
+        'del' : set([ 7, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'sample_soil rover0 rover0store waypoint2',
+        'cost' : '1',
+        'pre' : set([ 2, 8, 21,]),
+        'add' : set([ 22, 31,]),
+        'del' : set([ 8, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'sample_soil rover0 rover0store waypoint3',
+        'cost' : '1',
+        'pre' : set([ 3, 9, 21,]),
+        'add' : set([ 22, 32,]),
+        'del' : set([ 9, 21,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint0 objective0 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 0, 10,]),
+        'add' : set([ 23,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint0 objective0 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 0, 10,]),
+        'add' : set([ 24,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint0 objective1 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 0, 10,]),
+        'add' : set([ 25,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint0 objective1 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 0, 10,]),
+        'add' : set([ 26,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint1 objective0 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 1, 10,]),
+        'add' : set([ 23,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint1 objective0 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 1, 10,]),
+        'add' : set([ 24,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint1 objective1 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 1, 10,]),
+        'add' : set([ 25,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint1 objective1 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 1, 10,]),
+        'add' : set([ 26,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint2 objective0 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 2, 10,]),
+        'add' : set([ 23,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint2 objective0 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 2, 10,]),
+        'add' : set([ 24,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint2 objective1 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 2, 10,]),
+        'add' : set([ 25,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint2 objective1 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 2, 10,]),
+        'add' : set([ 26,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint3 objective0 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 3, 10,]),
+        'add' : set([ 23,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint3 objective0 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 3, 10,]),
+        'add' : set([ 24,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint3 objective1 camera0 colour',
+        'cost' : '1',
+        'pre' : set([ 3, 10,]),
+        'add' : set([ 25,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'take_image rover0 waypoint3 objective1 camera0 high_res',
+        'cost' : '1',
+        'pre' : set([ 3, 10,]),
+        'add' : set([ 26,]),
+        'del' : set([ 10,]),
+        'cond_eff' : [
+        ]
+    },
+],
+'init' : [3, 4, 5, 6, 7, 8, 9, 21, ],
+'goal' : [14, 17, 19, ],
+'goal_is_unreachable' : False,
+'has_cond_eff' : False,
+}

@@ -1,0 +1,1126 @@
+{
+'domain_file' : 'pddl/ipc-2008/seq-opt/sokoban/domain.pddl',
+'problem_file' : 'pddl/ipc-2008/seq-opt/sokoban/p01.pddl',
+'domain_name' : 'sokoban-sequential',
+'problem_name' : 'p012-microban-sequential',
+'fact' : [
+    '(at player-01 pos-2-2)',
+    '(at player-01 pos-2-3)',
+    '(at player-01 pos-3-2)',
+    '(at player-01 pos-3-3)',
+    '(at player-01 pos-3-4)',
+    '(at player-01 pos-4-2)',
+    '(at player-01 pos-4-3)',
+    '(at player-01 pos-4-4)',
+    '(at player-01 pos-4-6)',
+    '(at player-01 pos-4-7)',
+    '(at player-01 pos-5-3)',
+    '(at player-01 pos-5-4)',
+    '(at player-01 pos-5-5)',
+    '(at player-01 pos-5-6)',
+    '(at player-01 pos-5-7)',
+    '(at player-01 pos-6-5)',
+    '(at player-01 pos-6-6)',
+    '(at player-01 pos-6-7)',
+    '(at player-01 pos-7-5)',
+    '(at player-01 pos-7-7)',
+    '(at player-01 pos-8-5)',
+    '(at player-01 pos-8-6)',
+    '(at player-01 pos-8-7)',
+    '(at stone-01 pos-2-2)',
+    '(at stone-01 pos-2-3)',
+    '(at stone-01 pos-3-2)',
+    '(at stone-01 pos-3-3)',
+    '(at stone-01 pos-3-4)',
+    '(at stone-01 pos-4-2)',
+    '(at stone-01 pos-4-3)',
+    '(at stone-01 pos-4-4)',
+    '(at stone-01 pos-4-6)',
+    '(at stone-01 pos-4-7)',
+    '(at stone-01 pos-5-3)',
+    '(at stone-01 pos-5-4)',
+    '(at stone-01 pos-5-5)',
+    '(at stone-01 pos-5-6)',
+    '(at stone-01 pos-5-7)',
+    '(at stone-01 pos-6-5)',
+    '(at stone-01 pos-6-6)',
+    '(at stone-01 pos-6-7)',
+    '(at stone-01 pos-7-5)',
+    '(at stone-01 pos-7-7)',
+    '(at stone-01 pos-8-5)',
+    '(at stone-01 pos-8-7)',
+    '(at stone-02 pos-3-4)',
+    '(at stone-02 pos-4-4)',
+    '(at stone-02 pos-4-6)',
+    '(at stone-02 pos-4-7)',
+    '(at stone-02 pos-5-3)',
+    '(at stone-02 pos-5-4)',
+    '(at stone-02 pos-5-5)',
+    '(at stone-02 pos-5-6)',
+    '(at stone-02 pos-5-7)',
+    '(at stone-02 pos-6-5)',
+    '(at stone-02 pos-6-6)',
+    '(at stone-02 pos-6-7)',
+    '(at stone-02 pos-7-5)',
+    '(at stone-02 pos-7-7)',
+    '(at stone-02 pos-8-5)',
+    '(at stone-02 pos-8-7)',
+    '(at-goal stone-01)',
+    '(at-goal stone-02)',
+    '(clear pos-2-2)',
+    '(clear pos-2-3)',
+    '(clear pos-3-2)',
+    '(clear pos-3-3)',
+    '(clear pos-3-4)',
+    '(clear pos-4-2)',
+    '(clear pos-4-3)',
+    '(clear pos-4-4)',
+    '(clear pos-4-6)',
+    '(clear pos-4-7)',
+    '(clear pos-5-3)',
+    '(clear pos-5-4)',
+    '(clear pos-5-5)',
+    '(clear pos-5-6)',
+    '(clear pos-5-7)',
+    '(clear pos-6-5)',
+    '(clear pos-6-6)',
+    '(clear pos-6-7)',
+    '(clear pos-7-5)',
+    '(clear pos-7-7)',
+    '(clear pos-8-5)',
+    '(clear pos-8-6)',
+    '(clear pos-8-7)',
+],
+'op' : [
+    {
+        'name' : 'move player-01 pos-2-2 pos-2-3 dir-down',
+        'cost' : '0',
+        'pre' : set([ 0, 64,]),
+        'add' : set([ 1, 63,]),
+        'del' : set([ 0, 64,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-2-2 pos-3-2 dir-right',
+        'cost' : '0',
+        'pre' : set([ 0, 65,]),
+        'add' : set([ 2, 63,]),
+        'del' : set([ 0, 65,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-2-3 pos-2-2 dir-up',
+        'cost' : '0',
+        'pre' : set([ 1, 63,]),
+        'add' : set([ 0, 64,]),
+        'del' : set([ 1, 63,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-2-3 pos-3-3 dir-right',
+        'cost' : '0',
+        'pre' : set([ 1, 66,]),
+        'add' : set([ 3, 64,]),
+        'del' : set([ 1, 66,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-2 pos-2-2 dir-left',
+        'cost' : '0',
+        'pre' : set([ 2, 63,]),
+        'add' : set([ 0, 65,]),
+        'del' : set([ 2, 63,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-2 pos-3-3 dir-down',
+        'cost' : '0',
+        'pre' : set([ 2, 66,]),
+        'add' : set([ 3, 65,]),
+        'del' : set([ 2, 66,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-2 pos-4-2 dir-right',
+        'cost' : '0',
+        'pre' : set([ 2, 68,]),
+        'add' : set([ 5, 65,]),
+        'del' : set([ 2, 68,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-3 pos-2-3 dir-left',
+        'cost' : '0',
+        'pre' : set([ 3, 64,]),
+        'add' : set([ 1, 66,]),
+        'del' : set([ 3, 64,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-3 pos-3-2 dir-up',
+        'cost' : '0',
+        'pre' : set([ 3, 65,]),
+        'add' : set([ 2, 66,]),
+        'del' : set([ 3, 65,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-3 pos-3-4 dir-down',
+        'cost' : '0',
+        'pre' : set([ 3, 67,]),
+        'add' : set([ 4, 66,]),
+        'del' : set([ 3, 67,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-3 pos-4-3 dir-right',
+        'cost' : '0',
+        'pre' : set([ 3, 69,]),
+        'add' : set([ 6, 66,]),
+        'del' : set([ 3, 69,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-4 pos-3-3 dir-up',
+        'cost' : '0',
+        'pre' : set([ 4, 66,]),
+        'add' : set([ 3, 67,]),
+        'del' : set([ 4, 66,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-3-4 pos-4-4 dir-right',
+        'cost' : '0',
+        'pre' : set([ 4, 70,]),
+        'add' : set([ 7, 67,]),
+        'del' : set([ 4, 70,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-2 pos-3-2 dir-left',
+        'cost' : '0',
+        'pre' : set([ 5, 65,]),
+        'add' : set([ 2, 68,]),
+        'del' : set([ 5, 65,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-2 pos-4-3 dir-down',
+        'cost' : '0',
+        'pre' : set([ 5, 69,]),
+        'add' : set([ 6, 68,]),
+        'del' : set([ 5, 69,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-3 pos-3-3 dir-left',
+        'cost' : '0',
+        'pre' : set([ 6, 66,]),
+        'add' : set([ 3, 69,]),
+        'del' : set([ 6, 66,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-3 pos-4-2 dir-up',
+        'cost' : '0',
+        'pre' : set([ 6, 68,]),
+        'add' : set([ 5, 69,]),
+        'del' : set([ 6, 68,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-3 pos-4-4 dir-down',
+        'cost' : '0',
+        'pre' : set([ 6, 70,]),
+        'add' : set([ 7, 69,]),
+        'del' : set([ 6, 70,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-3 pos-5-3 dir-right',
+        'cost' : '0',
+        'pre' : set([ 6, 73,]),
+        'add' : set([ 10, 69,]),
+        'del' : set([ 6, 73,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-4 pos-3-4 dir-left',
+        'cost' : '0',
+        'pre' : set([ 7, 67,]),
+        'add' : set([ 4, 70,]),
+        'del' : set([ 7, 67,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-4 pos-4-3 dir-up',
+        'cost' : '0',
+        'pre' : set([ 7, 69,]),
+        'add' : set([ 6, 70,]),
+        'del' : set([ 7, 69,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-4 pos-5-4 dir-right',
+        'cost' : '0',
+        'pre' : set([ 7, 74,]),
+        'add' : set([ 11, 70,]),
+        'del' : set([ 7, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-6 pos-4-7 dir-down',
+        'cost' : '0',
+        'pre' : set([ 8, 72,]),
+        'add' : set([ 9, 71,]),
+        'del' : set([ 8, 72,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-6 pos-5-6 dir-right',
+        'cost' : '0',
+        'pre' : set([ 8, 76,]),
+        'add' : set([ 13, 71,]),
+        'del' : set([ 8, 76,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-7 pos-4-6 dir-up',
+        'cost' : '0',
+        'pre' : set([ 9, 71,]),
+        'add' : set([ 8, 72,]),
+        'del' : set([ 9, 71,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-4-7 pos-5-7 dir-right',
+        'cost' : '0',
+        'pre' : set([ 9, 77,]),
+        'add' : set([ 14, 72,]),
+        'del' : set([ 9, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-3 pos-4-3 dir-left',
+        'cost' : '0',
+        'pre' : set([ 10, 69,]),
+        'add' : set([ 6, 73,]),
+        'del' : set([ 10, 69,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-3 pos-5-4 dir-down',
+        'cost' : '0',
+        'pre' : set([ 10, 74,]),
+        'add' : set([ 11, 73,]),
+        'del' : set([ 10, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-4 pos-4-4 dir-left',
+        'cost' : '0',
+        'pre' : set([ 11, 70,]),
+        'add' : set([ 7, 74,]),
+        'del' : set([ 11, 70,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-4 pos-5-3 dir-up',
+        'cost' : '0',
+        'pre' : set([ 11, 73,]),
+        'add' : set([ 10, 74,]),
+        'del' : set([ 11, 73,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-4 pos-5-5 dir-down',
+        'cost' : '0',
+        'pre' : set([ 11, 75,]),
+        'add' : set([ 12, 74,]),
+        'del' : set([ 11, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-5 pos-5-4 dir-up',
+        'cost' : '0',
+        'pre' : set([ 12, 74,]),
+        'add' : set([ 11, 75,]),
+        'del' : set([ 12, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-5 pos-5-6 dir-down',
+        'cost' : '0',
+        'pre' : set([ 12, 76,]),
+        'add' : set([ 13, 75,]),
+        'del' : set([ 12, 76,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-5 pos-6-5 dir-right',
+        'cost' : '0',
+        'pre' : set([ 12, 78,]),
+        'add' : set([ 15, 75,]),
+        'del' : set([ 12, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-6 pos-4-6 dir-left',
+        'cost' : '0',
+        'pre' : set([ 13, 71,]),
+        'add' : set([ 8, 76,]),
+        'del' : set([ 13, 71,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-6 pos-5-5 dir-up',
+        'cost' : '0',
+        'pre' : set([ 13, 75,]),
+        'add' : set([ 12, 76,]),
+        'del' : set([ 13, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-6 pos-5-7 dir-down',
+        'cost' : '0',
+        'pre' : set([ 13, 77,]),
+        'add' : set([ 14, 76,]),
+        'del' : set([ 13, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-6 pos-6-6 dir-right',
+        'cost' : '0',
+        'pre' : set([ 13, 79,]),
+        'add' : set([ 16, 76,]),
+        'del' : set([ 13, 79,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-7 pos-4-7 dir-left',
+        'cost' : '0',
+        'pre' : set([ 14, 72,]),
+        'add' : set([ 9, 77,]),
+        'del' : set([ 14, 72,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-7 pos-5-6 dir-up',
+        'cost' : '0',
+        'pre' : set([ 14, 76,]),
+        'add' : set([ 13, 77,]),
+        'del' : set([ 14, 76,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-5-7 pos-6-7 dir-right',
+        'cost' : '0',
+        'pre' : set([ 14, 80,]),
+        'add' : set([ 17, 77,]),
+        'del' : set([ 14, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-5 pos-5-5 dir-left',
+        'cost' : '0',
+        'pre' : set([ 15, 75,]),
+        'add' : set([ 12, 78,]),
+        'del' : set([ 15, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-5 pos-6-6 dir-down',
+        'cost' : '0',
+        'pre' : set([ 15, 79,]),
+        'add' : set([ 16, 78,]),
+        'del' : set([ 15, 79,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-5 pos-7-5 dir-right',
+        'cost' : '0',
+        'pre' : set([ 15, 81,]),
+        'add' : set([ 18, 78,]),
+        'del' : set([ 15, 81,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-6 pos-5-6 dir-left',
+        'cost' : '0',
+        'pre' : set([ 16, 76,]),
+        'add' : set([ 13, 79,]),
+        'del' : set([ 16, 76,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-6 pos-6-5 dir-up',
+        'cost' : '0',
+        'pre' : set([ 16, 78,]),
+        'add' : set([ 15, 79,]),
+        'del' : set([ 16, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-6 pos-6-7 dir-down',
+        'cost' : '0',
+        'pre' : set([ 16, 80,]),
+        'add' : set([ 17, 79,]),
+        'del' : set([ 16, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-7 pos-5-7 dir-left',
+        'cost' : '0',
+        'pre' : set([ 17, 77,]),
+        'add' : set([ 14, 80,]),
+        'del' : set([ 17, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-7 pos-6-6 dir-up',
+        'cost' : '0',
+        'pre' : set([ 17, 79,]),
+        'add' : set([ 16, 80,]),
+        'del' : set([ 17, 79,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-6-7 pos-7-7 dir-right',
+        'cost' : '0',
+        'pre' : set([ 17, 82,]),
+        'add' : set([ 19, 80,]),
+        'del' : set([ 17, 82,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-7-5 pos-6-5 dir-left',
+        'cost' : '0',
+        'pre' : set([ 18, 78,]),
+        'add' : set([ 15, 81,]),
+        'del' : set([ 18, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-7-5 pos-8-5 dir-right',
+        'cost' : '0',
+        'pre' : set([ 18, 83,]),
+        'add' : set([ 20, 81,]),
+        'del' : set([ 18, 83,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-7-7 pos-6-7 dir-left',
+        'cost' : '0',
+        'pre' : set([ 19, 80,]),
+        'add' : set([ 17, 82,]),
+        'del' : set([ 19, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-7-7 pos-8-7 dir-right',
+        'cost' : '0',
+        'pre' : set([ 19, 85,]),
+        'add' : set([ 22, 82,]),
+        'del' : set([ 19, 85,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-8-5 pos-7-5 dir-left',
+        'cost' : '0',
+        'pre' : set([ 20, 81,]),
+        'add' : set([ 18, 83,]),
+        'del' : set([ 20, 81,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-8-5 pos-8-6 dir-down',
+        'cost' : '0',
+        'pre' : set([ 20, 84,]),
+        'add' : set([ 21, 83,]),
+        'del' : set([ 20, 84,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-8-6 pos-8-5 dir-up',
+        'cost' : '0',
+        'pre' : set([ 21, 83,]),
+        'add' : set([ 20, 84,]),
+        'del' : set([ 21, 83,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-8-6 pos-8-7 dir-down',
+        'cost' : '0',
+        'pre' : set([ 21, 85,]),
+        'add' : set([ 22, 84,]),
+        'del' : set([ 21, 85,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-8-7 pos-7-7 dir-left',
+        'cost' : '0',
+        'pre' : set([ 22, 82,]),
+        'add' : set([ 19, 85,]),
+        'del' : set([ 22, 82,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'move player-01 pos-8-7 pos-8-6 dir-up',
+        'cost' : '0',
+        'pre' : set([ 22, 84,]),
+        'add' : set([ 21, 85,]),
+        'del' : set([ 22, 84,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-goal player-01 stone-01 pos-4-6 pos-5-6 pos-6-6 dir-right',
+        'cost' : '1',
+        'pre' : set([ 8, 36, 79,]),
+        'add' : set([ 13, 39, 61, 71,]),
+        'del' : set([ 8, 36, 79,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-goal player-01 stone-01 pos-6-7 pos-6-6 pos-6-5 dir-up',
+        'cost' : '1',
+        'pre' : set([ 17, 39, 78,]),
+        'add' : set([ 16, 38, 61, 80,]),
+        'del' : set([ 17, 39, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-goal player-01 stone-01 pos-8-5 pos-7-5 pos-6-5 dir-left',
+        'cost' : '1',
+        'pre' : set([ 20, 41, 78,]),
+        'add' : set([ 18, 38, 61, 83,]),
+        'del' : set([ 20, 41, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-goal player-01 stone-02 pos-4-6 pos-5-6 pos-6-6 dir-right',
+        'cost' : '1',
+        'pre' : set([ 8, 52, 79,]),
+        'add' : set([ 13, 55, 62, 71,]),
+        'del' : set([ 8, 52, 79,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-goal player-01 stone-02 pos-6-7 pos-6-6 pos-6-5 dir-up',
+        'cost' : '1',
+        'pre' : set([ 17, 55, 78,]),
+        'add' : set([ 16, 54, 62, 80,]),
+        'del' : set([ 17, 55, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-goal player-01 stone-02 pos-8-5 pos-7-5 pos-6-5 dir-left',
+        'cost' : '1',
+        'pre' : set([ 20, 57, 78,]),
+        'add' : set([ 18, 54, 62, 83,]),
+        'del' : set([ 20, 57, 78,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-2-2 pos-3-2 pos-4-2 dir-right',
+        'cost' : '1',
+        'pre' : set([ 0, 25, 68,]),
+        'add' : set([ 2, 28, 63,]),
+        'del' : set([ 0, 25, 61, 68,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-2-3 pos-3-3 pos-4-3 dir-right',
+        'cost' : '1',
+        'pre' : set([ 1, 26, 69,]),
+        'add' : set([ 3, 29, 64,]),
+        'del' : set([ 1, 26, 61, 69,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-3-2 pos-3-3 pos-3-4 dir-down',
+        'cost' : '1',
+        'pre' : set([ 2, 26, 67,]),
+        'add' : set([ 3, 27, 65,]),
+        'del' : set([ 2, 26, 61, 67,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-3-3 pos-4-3 pos-5-3 dir-right',
+        'cost' : '1',
+        'pre' : set([ 3, 29, 73,]),
+        'add' : set([ 6, 33, 66,]),
+        'del' : set([ 3, 29, 61, 73,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-3-4 pos-3-3 pos-3-2 dir-up',
+        'cost' : '1',
+        'pre' : set([ 4, 26, 65,]),
+        'add' : set([ 3, 25, 67,]),
+        'del' : set([ 4, 26, 61, 65,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-3-4 pos-4-4 pos-5-4 dir-right',
+        'cost' : '1',
+        'pre' : set([ 4, 30, 74,]),
+        'add' : set([ 7, 34, 67,]),
+        'del' : set([ 4, 30, 61, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-4-2 pos-3-2 pos-2-2 dir-left',
+        'cost' : '1',
+        'pre' : set([ 5, 25, 63,]),
+        'add' : set([ 2, 23, 68,]),
+        'del' : set([ 5, 25, 61, 63,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-4-2 pos-4-3 pos-4-4 dir-down',
+        'cost' : '1',
+        'pre' : set([ 5, 29, 70,]),
+        'add' : set([ 6, 30, 68,]),
+        'del' : set([ 5, 29, 61, 70,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-4-3 pos-3-3 pos-2-3 dir-left',
+        'cost' : '1',
+        'pre' : set([ 6, 26, 64,]),
+        'add' : set([ 3, 24, 69,]),
+        'del' : set([ 6, 26, 61, 64,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-4-4 pos-4-3 pos-4-2 dir-up',
+        'cost' : '1',
+        'pre' : set([ 7, 29, 68,]),
+        'add' : set([ 6, 28, 70,]),
+        'del' : set([ 7, 29, 61, 68,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-4-7 pos-5-7 pos-6-7 dir-right',
+        'cost' : '1',
+        'pre' : set([ 9, 37, 80,]),
+        'add' : set([ 14, 40, 72,]),
+        'del' : set([ 9, 37, 61, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-3 pos-4-3 pos-3-3 dir-left',
+        'cost' : '1',
+        'pre' : set([ 10, 29, 66,]),
+        'add' : set([ 6, 26, 73,]),
+        'del' : set([ 10, 29, 61, 66,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-3 pos-5-4 pos-5-5 dir-down',
+        'cost' : '1',
+        'pre' : set([ 10, 34, 75,]),
+        'add' : set([ 11, 35, 73,]),
+        'del' : set([ 10, 34, 61, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-4 pos-4-4 pos-3-4 dir-left',
+        'cost' : '1',
+        'pre' : set([ 11, 30, 67,]),
+        'add' : set([ 7, 27, 74,]),
+        'del' : set([ 11, 30, 61, 67,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-4 pos-5-5 pos-5-6 dir-down',
+        'cost' : '1',
+        'pre' : set([ 11, 35, 76,]),
+        'add' : set([ 12, 36, 74,]),
+        'del' : set([ 11, 35, 61, 76,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-5 pos-5-4 pos-5-3 dir-up',
+        'cost' : '1',
+        'pre' : set([ 12, 34, 73,]),
+        'add' : set([ 11, 33, 75,]),
+        'del' : set([ 12, 34, 61, 73,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-5 pos-5-6 pos-5-7 dir-down',
+        'cost' : '1',
+        'pre' : set([ 12, 36, 77,]),
+        'add' : set([ 13, 37, 75,]),
+        'del' : set([ 12, 36, 61, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-5 pos-6-5 pos-7-5 dir-right',
+        'cost' : '1',
+        'pre' : set([ 12, 38, 81,]),
+        'add' : set([ 15, 41, 75,]),
+        'del' : set([ 12, 38, 61, 81,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-6 pos-5-5 pos-5-4 dir-up',
+        'cost' : '1',
+        'pre' : set([ 13, 35, 74,]),
+        'add' : set([ 12, 34, 76,]),
+        'del' : set([ 13, 35, 61, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-7 pos-5-6 pos-5-5 dir-up',
+        'cost' : '1',
+        'pre' : set([ 14, 36, 75,]),
+        'add' : set([ 13, 35, 77,]),
+        'del' : set([ 14, 36, 61, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-5-7 pos-6-7 pos-7-7 dir-right',
+        'cost' : '1',
+        'pre' : set([ 14, 40, 82,]),
+        'add' : set([ 17, 42, 77,]),
+        'del' : set([ 14, 40, 61, 82,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-6-5 pos-6-6 pos-6-7 dir-down',
+        'cost' : '1',
+        'pre' : set([ 15, 39, 80,]),
+        'add' : set([ 16, 40, 78,]),
+        'del' : set([ 15, 39, 61, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-6-5 pos-7-5 pos-8-5 dir-right',
+        'cost' : '1',
+        'pre' : set([ 15, 41, 83,]),
+        'add' : set([ 18, 43, 78,]),
+        'del' : set([ 15, 41, 61, 83,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-6-6 pos-5-6 pos-4-6 dir-left',
+        'cost' : '1',
+        'pre' : set([ 16, 36, 71,]),
+        'add' : set([ 13, 31, 79,]),
+        'del' : set([ 16, 36, 61, 71,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-6-7 pos-5-7 pos-4-7 dir-left',
+        'cost' : '1',
+        'pre' : set([ 17, 37, 72,]),
+        'add' : set([ 14, 32, 80,]),
+        'del' : set([ 17, 37, 61, 72,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-6-7 pos-7-7 pos-8-7 dir-right',
+        'cost' : '1',
+        'pre' : set([ 17, 42, 85,]),
+        'add' : set([ 19, 44, 80,]),
+        'del' : set([ 17, 42, 61, 85,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-7-5 pos-6-5 pos-5-5 dir-left',
+        'cost' : '1',
+        'pre' : set([ 18, 38, 75,]),
+        'add' : set([ 15, 35, 81,]),
+        'del' : set([ 18, 38, 61, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-7-7 pos-6-7 pos-5-7 dir-left',
+        'cost' : '1',
+        'pre' : set([ 19, 40, 77,]),
+        'add' : set([ 17, 37, 82,]),
+        'del' : set([ 19, 40, 61, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-01 pos-8-7 pos-7-7 pos-6-7 dir-left',
+        'cost' : '1',
+        'pre' : set([ 22, 42, 80,]),
+        'add' : set([ 19, 40, 85,]),
+        'del' : set([ 22, 42, 61, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-3-4 pos-4-4 pos-5-4 dir-right',
+        'cost' : '1',
+        'pre' : set([ 4, 46, 74,]),
+        'add' : set([ 7, 50, 67,]),
+        'del' : set([ 4, 46, 62, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-4-7 pos-5-7 pos-6-7 dir-right',
+        'cost' : '1',
+        'pre' : set([ 9, 53, 80,]),
+        'add' : set([ 14, 56, 72,]),
+        'del' : set([ 9, 53, 62, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-3 pos-5-4 pos-5-5 dir-down',
+        'cost' : '1',
+        'pre' : set([ 10, 50, 75,]),
+        'add' : set([ 11, 51, 73,]),
+        'del' : set([ 10, 50, 62, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-4 pos-4-4 pos-3-4 dir-left',
+        'cost' : '1',
+        'pre' : set([ 11, 46, 67,]),
+        'add' : set([ 7, 45, 74,]),
+        'del' : set([ 11, 46, 62, 67,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-4 pos-5-5 pos-5-6 dir-down',
+        'cost' : '1',
+        'pre' : set([ 11, 51, 76,]),
+        'add' : set([ 12, 52, 74,]),
+        'del' : set([ 11, 51, 62, 76,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-5 pos-5-4 pos-5-3 dir-up',
+        'cost' : '1',
+        'pre' : set([ 12, 50, 73,]),
+        'add' : set([ 11, 49, 75,]),
+        'del' : set([ 12, 50, 62, 73,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-5 pos-5-6 pos-5-7 dir-down',
+        'cost' : '1',
+        'pre' : set([ 12, 52, 77,]),
+        'add' : set([ 13, 53, 75,]),
+        'del' : set([ 12, 52, 62, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-5 pos-6-5 pos-7-5 dir-right',
+        'cost' : '1',
+        'pre' : set([ 12, 54, 81,]),
+        'add' : set([ 15, 57, 75,]),
+        'del' : set([ 12, 54, 62, 81,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-6 pos-5-5 pos-5-4 dir-up',
+        'cost' : '1',
+        'pre' : set([ 13, 51, 74,]),
+        'add' : set([ 12, 50, 76,]),
+        'del' : set([ 13, 51, 62, 74,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-7 pos-5-6 pos-5-5 dir-up',
+        'cost' : '1',
+        'pre' : set([ 14, 52, 75,]),
+        'add' : set([ 13, 51, 77,]),
+        'del' : set([ 14, 52, 62, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-5-7 pos-6-7 pos-7-7 dir-right',
+        'cost' : '1',
+        'pre' : set([ 14, 56, 82,]),
+        'add' : set([ 17, 58, 77,]),
+        'del' : set([ 14, 56, 62, 82,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-6-5 pos-6-6 pos-6-7 dir-down',
+        'cost' : '1',
+        'pre' : set([ 15, 55, 80,]),
+        'add' : set([ 16, 56, 78,]),
+        'del' : set([ 15, 55, 62, 80,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-6-5 pos-7-5 pos-8-5 dir-right',
+        'cost' : '1',
+        'pre' : set([ 15, 57, 83,]),
+        'add' : set([ 18, 59, 78,]),
+        'del' : set([ 15, 57, 62, 83,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-6-6 pos-5-6 pos-4-6 dir-left',
+        'cost' : '1',
+        'pre' : set([ 16, 52, 71,]),
+        'add' : set([ 13, 47, 79,]),
+        'del' : set([ 16, 52, 62, 71,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-6-7 pos-5-7 pos-4-7 dir-left',
+        'cost' : '1',
+        'pre' : set([ 17, 53, 72,]),
+        'add' : set([ 14, 48, 80,]),
+        'del' : set([ 17, 53, 62, 72,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-6-7 pos-7-7 pos-8-7 dir-right',
+        'cost' : '1',
+        'pre' : set([ 17, 58, 85,]),
+        'add' : set([ 19, 60, 80,]),
+        'del' : set([ 17, 58, 62, 85,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-7-5 pos-6-5 pos-5-5 dir-left',
+        'cost' : '1',
+        'pre' : set([ 18, 54, 75,]),
+        'add' : set([ 15, 51, 81,]),
+        'del' : set([ 18, 54, 62, 75,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-7-7 pos-6-7 pos-5-7 dir-left',
+        'cost' : '1',
+        'pre' : set([ 19, 56, 77,]),
+        'add' : set([ 17, 53, 82,]),
+        'del' : set([ 19, 56, 62, 77,]),
+        'cond_eff' : [
+        ]
+    },
+    {
+        'name' : 'push-to-nongoal player-01 stone-02 pos-8-7 pos-7-7 pos-6-7 dir-left',
+        'cost' : '1',
+        'pre' : set([ 22, 58, 80,]),
+        'add' : set([ 19, 56, 85,]),
+        'del' : set([ 22, 58, 62, 80,]),
+        'cond_eff' : [
+        ]
+    },
+],
+'init' : [12, 26, 46, 63, 64, 65, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, ],
+'goal' : [61, 62, ],
+'goal_is_unreachable' : False,
+'has_cond_eff' : False,
+}
