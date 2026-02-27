@@ -500,7 +500,7 @@ def main():
             else:
                 status = f"{RED}[FAIL]{RESET}"
                 failed += 1
-                print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
+                print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}  ({elapsed:.2f}s)")
                 if args.fail_fast:
                     for f in futures:
                         f.cancel()
