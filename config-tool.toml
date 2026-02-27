@@ -1,5 +1,11 @@
 # Configuration for tests/scripts/test-tool.py
 
+# Path to the pddl-tool binary (relative to the tests/ directory)
+binary = "../bin/pddl-tool"
+
+# Path to pddl/config.h used to determine available features for requirements filtering
+config-header = "../pddl/config.h"
+
 # Maximum memory in MB passed as --max-mem MEM (first option to pddl-tool)
 max-mem = 4096
 
@@ -40,6 +46,30 @@ tasks = [
     "ipc-2014/seq-opt/transport/p01",
 ]
 
+# Additional task suites selectable with -S <name>.
+tasks_small = [
+    "ipc-1998/gripper/prob01",
+    "ipc-2002/depot/pfile1",
+]
+
+tasks_all = [
+    "ipc-1998/gripper/prob01",
+    "ipc-1998/logistics/prob01",
+    "ipc-1998/movie/prob01",
+    "ipc-1998/mystery/prob01",
+    "ipc-2002/depot/pfile1",
+    "ipc-2002/driverlog/pfile1",
+    "ipc-2002/rovers/pfile1",
+    "ipc-2002/zenotravel/pfile1",
+    "ipc-2008/seq-opt/openstacks/p01",
+    "ipc-2008/seq-opt/pegsol/p01",
+    "ipc-2008/seq-opt/scanalyzer/p01",
+    "ipc-2008/seq-opt/sokoban/p01",
+    "ipc-2011/seq-opt/visitall/problem02-full",
+    "ipc-2014/seq-opt/transport/p01",
+]
+
+
 # Named test configurations.
 # Each key is the <test-name>; the value is a list of OPTIONS tokens.
 # Use <OUT> as a placeholder that expands to reg/<task>/tool-<test-name>.output.
@@ -57,8 +87,8 @@ pddl-lmg-none = ["pddl", "--lmg", "none", "<OUT>domain.pddl", "<OUT>problem.pddl
 pddl-lendo = ["pddl", "--lendo", "<OUT>domain.pddl", "<OUT>problem.pddl"]
 
 # --- translate ---
-translate-x = ["translate", "--fdr-var-alg", "essential-first", "<OUT>output.sas"]
 translate = ["translate", "stdout"]
+translate-essential = ["translate", "--fdr-var-alg", "essential-first", "stdout"]
 translate-h2 = ["translate", "--h2", "stdout"]
 translate-ground-sql = ["translate", "-G", "sql", "stdout"]
 translate-ground-trie = ["translate", "-G", "trie", "stdout"]
@@ -69,9 +99,8 @@ translate-lendo = ["translate", "--lendo", "stdout"]
 translate-mg-h2 = ["translate", "--mg", "h2", "stdout"]
 
 # --- lmg ---
-mg = ["lmg", "stdout"]
+lmg = ["lmg", "stdout"]
 lmg-fd = ["lmg", "--lmg", "fd", "stdout"]
-lmg-none = ["lmg", "--lmg", "none", "stdout"]
 
 # --- strips-as-py ---
 strips-as-py = ["strips-as-py", "stdout"]
@@ -80,18 +109,22 @@ strips-as-py = ["strips-as-py", "stdout"]
 mutex-group-cover-number-h2 = ["mutex-group-cover-number", "h2"]
 
 # --- lplan ---
-lplan-gbfs-ff = ["lplan", "gbfs", "ff", "/dev/null"]
-lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "/dev/null"]
-lplan-lazy-ff = ["lplan", "lazy", "ff", "/dev/null"]
-lplan-lazy-hadd = ["lplan", "lazy", "hadd", "/dev/null"]
-lplan-astar-hmax = ["lplan", "astar", "hmax", "/dev/null"]
+lplan-gbfs-ff = ["lplan", "gbfs", "ff", "stdout"]
+lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "stdout"]
+lplan-lazy-ff = ["lplan", "lazy", "ff", "stdout"]
+lplan-lazy-hadd = ["lplan", "lazy", "hadd", "stdout"]
+lplan-astar-hmax = ["lplan", "astar", "hmax", "stdout"]
 
 # --- gplan ---
-gplan-gbfs-ff = ["gplan", "gbfs", "ff", "/dev/null"]
-gplan-gbfs-hadd = ["gplan", "gbfs", "hadd", "/dev/null"]
-gplan-lazy-ff = ["gplan", "lazy", "ff", "/dev/null"]
-gplan-lazy-hadd = ["gplan", "lazy", "hadd", "/dev/null"]
-gplan-astar-lmc = ["gplan", "astar", "lmc", "/dev/null"]
+gplan-gbfs-ff = ["gplan", "gbfs", "ff", "stdout"]
+gplan-gbfs-hadd = ["gplan", "gbfs", "hadd", "stdout"]
+gplan-lazy-ff = ["gplan", "lazy", "ff", "stdout"]
+gplan-lazy-hadd = ["gplan", "lazy", "hadd", "stdout"]
+gplan-astar-lmc = ["gplan", "astar", "lmc", "stdout"]
+gplan-astar-flow = ["gplan", "astar", "flow", "stdout"]
+gplan-astar-pot-AI = ["gplan", "astar", "pot", "stdout", "--pot-A+I"]
+gplan-astar-pot-I = ["gplan", "astar", "pot", "stdout", "--pot-I"]
+gplan-astar-pot-A = ["gplan", "astar", "pot", "stdout", "--pot-A"]
 
 # --- pot-conj-find ---
 # --- pot-conj-exact-find ---
@@ -103,7 +136,81 @@ reversibility-simple-2 = ["reversibility-simple", "2", "stdout"]
 reversibility-iterative-2 = ["reversibility-iterative", "2", "stdout"]
 
 # --- symba ---
-symba-astar-fw = ["symba", "astar", "fw", "/dev/null"]
-symba-astar-bw = ["symba", "astar", "bw", "/dev/null"]
-symba-gbfs-fw = ["symba", "gbfs", "fw", "/dev/null"]
-symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "/dev/null"]
+symba-astar-fw = ["symba", "astar", "fw", "stdout"]
+symba-astar-bw = ["symba", "astar", "bw", "stdout"]
+symba-gbfs-fw = ["symba", "gbfs", "fw", "stdout"]
+symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "stdout"]
+
+
+# Requirements: map test name -> list of PDDL_{NAME} features that must be
+# present in pddl/config.h for the test to be run.
+[depends_on]
+pddl-lendo                = ["CPOPTIMIZER"]
+translate-ground-sql      = ["SQLITE"]
+gplan-astar-flow          = ["CPLEX"]
+gplan-astar-pot-AI        = ["CPLEX"]
+gplan-astar-pot-I         = ["CPLEX"]
+gplan-astar-pot-A         = ["CPLEX"]
+symba-astar-fw            = ["CUDD"]
+symba-astar-bw            = ["CUDD"]
+symba-gbfs-fw             = ["CUDD"]
+symba-gbfs-fwbw           = ["CUDD"]
+
+
+
+# Named reusable Python scripts for post-processing.
+# Reference them in [post-processing] as "script:<name>".
+# Variables available: out (path to .out.tmp), outputs (dict suffix -> path).
+[scripts]
+# strip-trailing-whitespace = """
+# with open(out) as f: data = f.read()
+# with open(out, 'w') as f: f.write(data.rstrip() + '\n')
+# """
+plan-out-reduce-to-plan-cost = """
+cost = ''
+with open(out, 'r') as f:
+    for line in f:
+        if 'Cost:' in line:
+            cost = line.strip()
+            break
+with open(out, 'w') as f:
+    f.write(cost + '\\n')
+"""
+
+plan-out-reduce-to-plan-found = """
+cost = ''
+with open(out, 'r') as f:
+    for line in f:
+        if 'Cost:' in line:
+            cost = line.strip()
+            break
+with open(out, 'w') as f:
+    if cost != '':
+        f.write('Plan found.\\n')
+"""
+
+
+# Post-processing: map test name -> Python code string (or "script:<name>")
+# executed after a *successful* run.
+[post-processing]
+lplan-gbfs-ff = "script:plan-out-reduce-to-plan-found"
+lplan-gbfs-hadd = "script:plan-out-reduce-to-plan-found"
+lplan-lazy-ff = "script:plan-out-reduce-to-plan-found"
+lplan-lazy-hadd = "script:plan-out-reduce-to-plan-found"
+lplan-astar-hmax = "script:plan-out-reduce-to-plan-cost"
+
+gplan-gbfs-ff = "script:plan-out-reduce-to-plan-found"
+gplan-gbfs-hadd = "script:plan-out-reduce-to-plan-found"
+gplan-lazy-ff = "script:plan-out-reduce-to-plan-found"
+gplan-lazy-hadd = "script:plan-out-reduce-to-plan-found"
+gplan-astar-lmc = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-flow = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-pot-AI = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-pot-I = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-pot-A = "script:plan-out-reduce-to-plan-cost"
+
+symba-astar-fw = "script:plan-out-reduce-to-plan-cost"
+symba-astar-bw = "script:plan-out-reduce-to-plan-cost"
+symba-gbfs-fw = "script:plan-out-reduce-to-plan-found"
+symba-gbfs-fwbw = "script:plan-out-reduce-to-plan-found"
+

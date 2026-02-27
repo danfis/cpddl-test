@@ -55,12 +55,36 @@ def parse_args():
     p.add_argument(
         "--dry-run", action="store_true",
         help="Print commands that would be run without executing them")
+    p.add_argument(
+        "-S", "--suite", dest="suite", default=None,
+        metavar="SUITE",
+        help="Run tasks from tasks_SUITE instead of the default tasks list")
+    p.add_argument(
+        "--list-flags", action="store_true",
+        help="Print all depends_on flags currently set in config.h and exit")
+    p.add_argument(
+        "--plan", action="store_true",
+        help="Print the test plan (task x test pairs with depends_on flags) and exit")
     return p.parse_args()
 
 
 def matches_any(name, patterns):
     """Return True if name matches at least one regex pattern."""
     return any(re.search(pat, name) for pat in patterns)
+
+
+def read_pddl_features(config_header):
+    """Parse config.h and return the set of defined PDDL_{NAME} feature names."""
+    features = set()
+    try:
+        with open(config_header) as fh:
+            for line in fh:
+                m = re.match(r'^\s*#\s*define\s+PDDL_([A-Z0-9_]+)', line)
+                if m:
+                    features.add(m.group(1))
+    except OSError:
+        pass
+    return features
 
 
 def expand_out(tokens, task, test_name, gen_golden=False):
@@ -133,7 +157,8 @@ def check_valgrind_errors(err_tmp, full_leak_check):
 def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
             use_valgrind=False, full_leak_check=False,
             use_bwrap=False, bwrap_base_opts=(), use_gdb=False,
-            dry_run=False):
+            dry_run=False, binary="../bin/pddl-tool",
+            post_processing_code=None):
     """Run a single (task, test) combination. Returns (task, test_name, ok, msg)."""
     max_mem = cfg.get("max-mem", 8192)
     max_time = cfg.get("max-time", "5m")
@@ -172,7 +197,7 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
 
     # Build the pddl-tool command
     pddl_cmd = (
-        ["../bin/pddl-tool"]
+        [binary]
         + (["--max-mem", str(max_mem)] if max_mem else [])
         + list(common_opts)
         + ["--log-out", log_arg]
@@ -205,7 +230,7 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
 
     if dry_run:
         import shlex
-        return task, test_name, True, shlex.join(cmd)
+        return task, test_name, True, shlex.join(cmd), 0.0
 
     failures = []
 
@@ -220,7 +245,7 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
     except Exception as exc:
         with open(fail_tmp, "w") as fh:
             fh.write(f"Exception running command: {exc}\n")
-        return task, test_name, False, f"EXCEPTION: {exc}"
+        return task, test_name, False, f"EXCEPTION: {exc}", 0.0
     elapsed = time.monotonic() - t_start
 
     with open(time_tmp, "w") as fh:
@@ -238,11 +263,25 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
             fh.write(f"Process killed by {signame} ({signum})\n")
 
     if gen_golden:
-        return task, test_name, True, f"golden written ({elapsed:.2f}s)"
+        return task, test_name, True, f"golden written ({elapsed:.2f}s)", elapsed
 
     # Check exit code
     if result.returncode != 0:
         failures.append(f"exit code {result.returncode}")
+
+    # Run post-processing on output files if the process exited successfully
+    if result.returncode == 0 and post_processing_code:
+        # Build outputs dict: suffix -> path for each .output.*.tmp
+        outputs = {}
+        for entry in os.listdir(reg_dir):
+            if (entry.startswith(f"tool-{test_name}.output.")
+                    and entry.endswith(".tmp")):
+                suffix = entry[len(f"tool-{test_name}.output."):-len(".tmp")]
+                outputs[suffix] = os.path.join(reg_dir, entry)
+        try:
+            exec(post_processing_code, {"out": out_file, "outputs": outputs})
+        except Exception as exc:
+            failures.append(f"post-processing error: {exc}")
 
     # Check stderr / valgrind errors
     if use_valgrind:
@@ -297,9 +336,9 @@ def run_one(task, test_name, test_opts, cfg, tool_prefix, gen_golden=False,
         reason = "; ".join(failures)
         with open(fail_tmp, "w") as fh:
             fh.write(reason + "\n")
-        return task, test_name, False, reason
+        return task, test_name, False, reason, elapsed
 
-    return task, test_name, True, f"OK ({elapsed:.2f}s)"
+    return task, test_name, True, f"OK ({elapsed:.2f}s)", elapsed
 
 
 def main():
@@ -325,8 +364,77 @@ def main():
                     except OSError:
                         pass
 
-    all_tasks = cfg.get("tasks", [])
+    binary = cfg.get("binary", "../bin/pddl-tool")
+
+    # Read available features from config.h for depends_on filtering
+    config_header = cfg.get("config-header", "../pddl/config.h")
+    features = read_pddl_features(config_header)
+    depends_on = cfg.get("depends_on", {})
+
+    # --list-flags: print all currently set depends_on flags and exit
+    if args.list_flags:
+        for flag in sorted(features):
+            print(flag)
+        sys.exit(0)
+
+    # Select task suite
+    if args.suite:
+        suite_key = f"tasks_{args.suite}"
+        if suite_key not in cfg:
+            print(f"error: task suite '{args.suite}' not found in config "
+                  f"(expected key '{suite_key}')", file=sys.stderr)
+            sys.exit(1)
+        all_tasks = cfg[suite_key]
+    else:
+        all_tasks = cfg.get("tasks", [])
     all_tests = cfg.get("tests", {})
+
+    # Filter tests that lack required depends_on features
+    def has_requirements(test_name):
+        reqs = depends_on.get(test_name, [])
+        return all(r in features for r in reqs)
+
+    all_tests = {k: v for k, v in all_tests.items() if has_requirements(k)}
+
+    # Apply regex filters
+    if args.tasks:
+        all_tasks = [t for t in all_tasks if matches_any(t, args.tasks)]
+    if args.tests:
+        all_tests = {k: v for k, v in all_tests.items()
+                     if matches_any(k, args.tests)}
+
+    if not all_tasks:
+        print("No tasks to run.", file=sys.stderr)
+        sys.exit(1)
+    if not all_tests:
+        print("No tests to run.", file=sys.stderr)
+        sys.exit(1)
+
+    # --plan: print the task x test matrix with depends_on flags and exit
+    if args.plan:
+        task_w = max((len(t) for t in all_tasks), default=4)
+        test_w = max((len(n) for n in all_tests), default=4)
+        for task in all_tasks:
+            for test_name in all_tests:
+                flags = depends_on.get(test_name, [])
+                flags_str = ("  [" + ", ".join(flags) + "]") if flags else ""
+                print(f"{task:<{task_w}}  {test_name:<{test_w}}{flags_str}")
+        sys.exit(0)
+
+    # Resolve post-processing: "script:<name>" references -> code from [scripts]
+    scripts = cfg.get("scripts", {})
+    post_processing_raw = cfg.get("post-processing", {})
+    post_processing = {}
+    for test_name, code_or_ref in post_processing_raw.items():
+        if isinstance(code_or_ref, str) and code_or_ref.startswith("script:"):
+            script_name = code_or_ref[len("script:"):]
+            if script_name not in scripts:
+                print(f"error: post-processing for '{test_name}' references "
+                      f"unknown script '{script_name}'", file=sys.stderr)
+                sys.exit(1)
+            post_processing[test_name] = scripts[script_name]
+        else:
+            post_processing[test_name] = code_or_ref
 
     # Apply regex filters
     if args.tasks:
@@ -354,6 +462,7 @@ def main():
     total = len(work)
     passed = 0
     failed = 0
+    total_elapsed = 0.0
 
     # Pre-compute column widths for aligned output
     task_w = max((len(t) for t, _, _ in work), default=4)
@@ -361,14 +470,17 @@ def main():
 
     def job(item):
         task, test_name, test_opts = item
+        post_code = post_processing.get(test_name)
         return run_one(task, test_name, test_opts, cfg, tool_prefix,
                        args.gen_golden, use_valgrind, args.valgrind_full,
-                       args.bwrap, bwrap_base_opts, args.gdb, args.dry_run)
+                       args.bwrap, bwrap_base_opts, args.gdb, args.dry_run,
+                       binary, post_code)
 
     with ThreadPoolExecutor(max_workers=args.parallel) as executor:
         futures = {executor.submit(job, item): item for item in work}
         for future in as_completed(futures):
-            task, test_name, ok, msg = future.result()
+            task, test_name, ok, msg, elapsed = future.result()
+            total_elapsed += elapsed
             if args.dry_run:
                 print(f"{task:<{task_w}}  {test_name:<{test_w}}  {msg}")
             elif ok:
@@ -381,7 +493,8 @@ def main():
                 print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
 
     if not args.dry_run:
-        print(f"\n{total} test(s): {passed} passed, {failed} failed.")
+        print(f"\n{total} test(s): {passed} passed, {failed} failed.  "
+              f"Total runtime: {total_elapsed:.2f}s")
     sys.exit(0 if failed == 0 else 1)
 
 
