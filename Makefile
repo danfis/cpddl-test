@@ -96,11 +96,6 @@ check-segfault: all
 check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test $(T)
 
-check-bin: val/validate
-	$(SH) bin-tests/run.sh
-check-bin-all: val/validate
-	$(SH) bin-tests/run.sh --all
-
 clean:
 	rm -f check.log
 	rm -f *.o
