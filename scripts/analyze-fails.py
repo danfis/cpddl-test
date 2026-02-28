@@ -96,7 +96,15 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
 
     while idx < len(failures) and row < body_height:
         task, test, dirpath = failures[idx]
-        label = f" {task:<{task_col_w}}  {test:<{test_col_w}}"
+        fail_line = ""
+        fail_path = os.path.join(dirpath, test + '.fail.tmp')
+        try:
+            with open(fail_path) as fh:
+                fail_line = fh.readline().rstrip()
+        except OSError:
+            pass
+        reason = f"  {fail_line}" if fail_line else ""
+        label = f" {task:<{task_col_w}}  {test:<{test_col_w}}{reason}"
         item_rows[idx] = row
 
         attr = curses.color_pair(1) | curses.A_BOLD if idx == selected else curses.A_NORMAL
@@ -377,6 +385,18 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
                 selected -= 1
                 if selected < scroll_top:
                     scroll_top = selected
+
+        elif key == curses.KEY_NPAGE:  # page down
+            half = max(1, (stdscr.getmaxyx()[0] - 1) // 2)
+            selected = min(len(failures) - 1, selected + half)
+            if selected not in item_rows:
+                scroll_top = selected
+
+        elif key == curses.KEY_PPAGE:  # page up
+            half = max(1, (stdscr.getmaxyx()[0] - 1) // 2)
+            selected = max(0, selected - half)
+            if selected < scroll_top:
+                scroll_top = selected
 
         elif key in (ord(' '), ord('o')):
             if selected in expanded:
