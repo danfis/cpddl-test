@@ -1,0 +1,10 @@
+;; Cost: 8
+;; Length: 8
+(walk driver1 s2 p1-2) ;; cost: 1
+(walk driver1 p1-2 s1) ;; cost: 1
+(walk driver2 s2 p1-2) ;; cost: 1
+(walk driver2 p1-2 s1) ;; cost: 1
+(walk driver2 s1 p1-0) ;; cost: 1
+(walk driver2 p1-0 s0) ;; cost: 1
+(board-truck driver2 truck1 s0) ;; cost: 1
+(drive-truck truck1 s0 s1 driver2) ;; cost: 1

@@ -2766,12 +2766,12 @@ reversibility-simple-1 = ["reversibility-simple", "1", "stdout"]
 reversibility-simple-2 = ["reversibility-simple", "2", "stdout"]
 reversibility-iterative-2 = ["reversibility-iterative", "2", "stdout"]
 
-# --- symba ---
-symba-astar-fw = ["symba", "astar", "fw", "stdout"]
-symba-astar-bw = ["symba", "astar", "bw", "stdout"]
-symba-astar-fwbw = ["symba", "astar", "fwbw", "stdout"]
-symba-gbfs-fw = ["symba", "gbfs", "fw", "stdout"]
-symba-gbfs-fwbw = ["symba", "gbfs", "fwbw", "stdout"]
+# --- symb ---
+symb-astar-fw = ["symb-blind", "fw", "stdout"]
+symb-astar-bw = ["symb-blind", "bw", "stdout"]
+symb-astar-fwbw = ["symb-blind", "fwbw", "stdout"]
+symb-gbfs-fw = ["symb-pot", "gbfs", "fw", "--fw-pot-A+I", "stdout"]
+symb-gbfs-fwbw = ["symb-pot", "gbfs", "fwbw", "--fw-pot-A+I", "stdout"]
 
 
 # Requirements: map test name -> list of PDDL_{NAME} features that must be
@@ -2784,10 +2784,10 @@ gplan-astar-flow          = ["CPLEX"]
 gplan-astar-pot-AI        = ["CPLEX"]
 gplan-astar-pot-I         = ["CPLEX"]
 gplan-astar-pot-A         = ["CPLEX"]
-symba-astar-fw            = ["CUDD"]
-symba-astar-bw            = ["CUDD"]
-symba-gbfs-fw             = ["CUDD"]
-symba-gbfs-fwbw           = ["CUDD"]
+symb-astar-fw             = ["CUDD"]
+symb-astar-bw             = ["CUDD"]
+symb-gbfs-fw-AI           = ["CUDD", "CPLEX"]
+symb-gbfs-fwbw-AI         = ["CUDD", "CPLEX"]
 
 
 # Disabled tasks: map test name -> list of tasks that will be skipped for
@@ -2835,7 +2835,7 @@ with open(out, 'w') as f:
         f.write('Plan found.\\n')
 """
 
-symba-optimal = """
+symb-optimal = """
 cost = ''
 with open(out, 'r') as f:
     for line in f:
@@ -2897,9 +2897,9 @@ gplan-astar-pot-AI = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-pot-I = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-pot-A = "script:plan-out-reduce-to-plan-cost"
 
-symba-astar-fw = "script:symba-optimal"
-symba-astar-bw = "script:symba-optimal"
-symba-astar-fwbw = "script:symba-optimal"
-symba-gbfs-fw = "script:plan-out-reduce-to-plan-found"
-symba-gbfs-fwbw = "script:plan-out-reduce-to-plan-found"
+symb-astar-fw = "script:symb-optimal"
+symb-astar-bw = "script:symb-optimal"
+symb-astar-fwbw = "script:symb-optimal"
+symb-gbfs-fw-AI = "script:plan-out-reduce-to-plan-found"
+symb-gbfs-fwbw-AI = "script:plan-out-reduce-to-plan-found"
 
