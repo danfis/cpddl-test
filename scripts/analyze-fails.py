@@ -82,10 +82,11 @@ def init_colors():
     curses.init_pair(3, curses.COLOR_GREEN,  -1)                  # inserted
     curses.init_pair(4, curses.COLOR_YELLOW, -1)                  # replaced
     curses.init_pair(5, curses.COLOR_CYAN,   -1)                  # diff header
+    curses.init_pair(6, curses.COLOR_GREEN,  -1)                  # fixed row
 
 
 def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
-         task_col_w, test_col_w, max_diff_lines, max_err_lines):
+         task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed=None):
     stdscr.erase()
     height, width = stdscr.getmaxyx()
     body_height = height - 1  # last line reserved for status bar
@@ -107,7 +108,12 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
         label = f" {task:<{task_col_w}}  {test:<{test_col_w}}{reason}"
         item_rows[idx] = row
 
-        attr = curses.color_pair(1) | curses.A_BOLD if idx == selected else curses.A_NORMAL
+        if idx == selected:
+            attr = curses.color_pair(1) | curses.A_BOLD
+        elif fixed and idx in fixed:
+            attr = curses.color_pair(6)
+        else:
+            attr = curses.A_NORMAL
         try:
             stdscr.addstr(row, 0, clip(label, width).ljust(min(width - 1, width)), attr)
         except curses.error:
@@ -360,6 +366,7 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
     scroll_top = 0
     expanded     = set()
     err_expanded = set()
+    fixed        = set()
     item_rows  = {}
 
     task_col_w = max(len(t) for t, _, _ in failures)
@@ -367,7 +374,7 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
 
     while True:
         item_rows = draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
-                         task_col_w, test_col_w, max_diff_lines, max_err_lines)
+                         task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed)
 
         key = stdscr.getch()
 
@@ -430,6 +437,7 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
             out_tmp_path = os.path.join(dirpath, test + '.out.tmp')
             if os.path.exists(out_tmp_path):
                 shutil.copy2(out_tmp_path, out_path)
+                fixed.add(selected)
 
         elif key in (curses.KEY_ENTER, 10, 13, ord('O')):
             task, test, dirpath = failures[selected]
