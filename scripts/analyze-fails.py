@@ -18,6 +18,9 @@ import sys
 import argparse
 import shutil
 
+# Change to the tests/ directory (parent of the scripts/ directory this file lives in)
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+
 
 # Maximum diff lines shown when expanded
 MAX_DIFF_LINES = 20
@@ -343,8 +346,7 @@ def details_submenu(stdscr, task, test, dirpath, max_preview_lines=20):
 
 def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=MAX_DIFF_LINES,
          max_preview_lines=20):
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    reg_dir = os.path.normpath(os.path.join(script_dir, '..', 'reg'))
+    reg_dir = "reg"
 
     all_failures = find_failures(reg_dir)
     if task_filter is not None:
@@ -438,6 +440,10 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
             if os.path.exists(out_tmp_path):
                 shutil.copy2(out_tmp_path, out_path)
                 fixed.add(selected)
+            if selected < len(failures) - 1:
+                selected += 1
+                if selected not in item_rows:
+                    scroll_top += 1
 
         elif key in (curses.KEY_ENTER, 10, 13, ord('O')):
             task, test, dirpath = failures[selected]
