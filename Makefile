@@ -60,6 +60,7 @@ TESTS += lifted_search
 TESTS += search
 TESTS += gaifman
 TESTS += set
+TESTS += open_list
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
