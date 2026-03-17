@@ -90,7 +90,7 @@ static void run(pddl_symbolic_task_config_t *symb_cfg,
 {
     symb_cfg->constr_max_time = 1000.;
     symb_cfg->goal_constr_max_time = 1000.;
-    symb_cfg->bw.step_time_limit = 30.;
+    symb_cfg->bw.bw_step_time_limit = 30.;
 
     pddlErrLogEnable(&C.err, stderr);
     pddl_symbolic_task_t *task = pddlSymbolicTaskNew(&C.fdr, symb_cfg, &C.err);
@@ -281,11 +281,11 @@ TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }
 
     run(&symb_cfg, pddl_true);
@@ -318,11 +318,11 @@ TEST_COND(symbolic_fwbw_gbfs_pot_pot, symbolic, LP)
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }
 
     run(&symb_cfg, pddl_false);
@@ -365,11 +365,11 @@ TEST_COND(symbolic_bw_pot, symbolic, LP)
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_false;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_false;
     }
     run(&symb_cfg, pddl_true);
 }
@@ -389,11 +389,11 @@ TEST_COND(symbolic_bw_gbfs_pot, symbolic, LP)
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_false;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_false;
     }
     run(&symb_cfg, pddl_false);
 }
