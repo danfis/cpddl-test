@@ -281,6 +281,65 @@ TEST(hpot_all_states_cinit, hpot)
     _test_hpot1(&hcfg, task);
 }
 
+static void _test_hpot_goal_count(const pddl_hpot_config_t *cfg)
+{
+    pddl_pot_solutions_t sols;
+    pddlPotSolutionsInit(&sols);
+
+    int ret = pddlHPot(&sols, cfg, &C.err);
+    if (ret < 0){
+        pddlErrPrint(&C.err, 1, stderr);
+        pddlPotSolutionsFree(&sols);
+    }
+    assert(ret == 0);
+
+    if (sols.unsolvable){
+        fprintf(stdout, "unsolvable\n");
+        pddlPotSolutionsFree(&sols);
+        return;
+    }
+
+    // Disambiguation may detect the goal is unreachable and not produce a
+    // solution.
+    if (sols.sol_size == 0){
+        fprintf(stdout, "no solution\n");
+        pddlPotSolutionsFree(&sols);
+        return;
+    }
+
+    assert(sols.sol_size == 1);
+    const pddl_pot_solution_t *sol = sols.sol;
+    // Goal-count is an inadmissible potential heuristic computed without LP.
+    assert(sol->inadmissible);
+    if (cfg->op_pot){
+        assert(sol->op_pot_size == C.fdr.op.op_size);
+    }
+    assert(sol->pot_size == C.fdr.var.global_id_size);
+
+    int hval = pddlPotSolutionEvalFDRState(sol, &C.fdr.var, C.fdr.init);
+    assert(hval >= 0);
+    fprintf(stdout, "h(init): %d\n", hval);
+
+    pddlPotSolutionsFree(&sols);
+}
+
+TEST(hpot_goal_count, hpot)
+{
+    // Goal-count requires operator potentials.
+    hcfg.op_pot = pddl_true;
+    hcfg.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    hcfg.opt.goal_count.disambiguation = pddl_true;
+    _test_hpot_goal_count(&hcfg);
+}
+
+TEST(hpot_goal_count_no_disamb, hpot)
+{
+    hcfg.op_pot = pddl_true;
+    hcfg.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    hcfg.opt.goal_count.disambiguation = pddl_false;
+    _test_hpot_goal_count(&hcfg);
+}
+
 static pddl_set_iset_t conjs;
 static int conjs_best_h_value;
 TEST(pot_conj, hpot)
