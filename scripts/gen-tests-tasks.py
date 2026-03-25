@@ -29,7 +29,7 @@ pat_test_cond = re.compile(
     r', *([a-zA-Z0-9_ ]+)\).*$')
 pat_test_tear_down = re.compile(
     r'^\s*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
-pat_test_explicit = re.compile(
+pat_test_once = re.compile(
     r'^\s*TEST_ONCE\(([a-zA-Z0-9_]+) *\).*$')
 pat_global_tear_down = re.compile(r'^\s*TEST_GLOBAL_TEAR_DOWN.*$')
 pat_define = re.compile(r'^ *# *define +PDDL_([A-Z_0-9]+).*$')
@@ -57,7 +57,7 @@ def addTest(name, tags):
         Test[name] = {
             'dep': None,
             'tear-down': False,
-            'explicit': False
+            'once': False
         }
     return True
 
@@ -95,11 +95,11 @@ def parseFile(filename):
                 if name in Test:
                     Test[name]['tear-down'] = True
 
-            m = pat_test_explicit.match(line)
+            m = pat_test_once.match(line)
             if m is not None:
                 name = m.group(1)
                 if addTest(name, []):
-                    Test[name]['explicit'] = True
+                    Test[name]['once'] = True
 
             m = pat_global_tear_down.match(line)
             if m is not None:
@@ -118,9 +118,10 @@ def removeUnreachable():
                 break
 
 
-def constructTree():
+def constructTestTree():
     keys = sorted(Test.keys())
     for idx, key in enumerate(keys):
+        Test[key]['name'] = key
         Test[key]['id'] = idx
         Test[key]['child'] = []
         Test[key]['is_root'] = False
@@ -173,8 +174,17 @@ def parseTasks(cfg):
                 result.append(item)
         return result
 
-    # Auto-generate the special "_" task from all TEST_ONCE tests.
-    once_tests = sorted(name for name, t in Test.items() if t['explicit'])
+    # Auto-generate the special "_" task from all TEST_ONCE tests and their
+    # children.
+    once_tests = sorted(name for name, t in Test.items() if t['once'])
+    tests_by_id = {t['id']: t for t in Test.values()}
+    def add_childrent_to_once_tests(test_name):
+        for child_id in Test[test_name]['child']:
+            once_tests.append(tests_by_id[child_id]['name'])
+            add_childrent_to_once_tests(tests_by_id[child_id]['name'])
+    for test_name in once_tests[:]:
+        add_childrent_to_once_tests(test_name)
+    once_tests = sorted(set(once_tests))
     Task['_'] = {
         'disabled': [],
         'enabled': once_tests,
@@ -195,6 +205,7 @@ def parseTasks(cfg):
         raw_enable  = entry.get('enable',  [])
 
         disabled = expand(raw_disable, 'disable')
+        disabled += once_tests
         enabled  = expand(raw_enable,  'enable')
 
         Task[name] = {
@@ -215,8 +226,7 @@ struct task_def {
     char *name;
     int enabled;
     int enabled_tests[test_set_size];
-    int default_disabled_tests[test_set_size];
-    int default_enabled_tests[test_set_size];
+    int allowed_tests[test_set_size];
     int is_base;
     int is_quick;
 };
@@ -242,33 +252,38 @@ def genTestChildArrays():
 
 
 def genTestDef(idx, name, test):
-    parts = [str(idx), f'"{name}", test_{name}']
-
+    tear_down = 'NULL'
     if test['tear-down']:
-        parts.append(f'test_tear_down_{name}')
-    else:
-        parts.append('NULL')
+        tear_down = f'test_tear_down_{name}'
 
-    dep = test['dep']
-    if dep is not None and dep != '_':
-        parts.append(str(Test[dep]['id']))
-    else:
-        parts.append('-1')
+    parent = -1
+    if test['dep'] is not None and test['dep'] != '_':
+        parent = Test[test['dep']]['id']
 
+    once = '0'
+    if test['once']:
+        once = '1'
+
+    print(f'    {{')
+    print(f'        .id = {idx},')
+    print(f'        .name = "{name}",')
+    print(f'        .fn = test_{name},')
+    print(f'        .fn_tear_down = {tear_down},')
+    print(f'        .parent = {parent},')
     ch = test['child']
     if ch:
-        parts.append(f'_test_{name}__child, {len(ch)}')
+        print(f'        .children = _test_{name}__child,')
+        print(f'        .children_size = {len(ch)},')
     else:
-        parts.append('NULL, 0')
+        print(f'        .children = NULL,')
+        print(f'        .children_size = 0,')
 
-    parts.append('1' if test['explicit'] else '0')
-    parts.append('0')
-
-    print('    {' + ', '.join(parts) + '},')
+    print(f'        .is_once = {once},')
+    print(f'        .enabled = 0,')
+    print(f'    }},')
 
 
 def genTestSet():
-    constructTree()
     genTestChildArrays()
     keys = sorted(Test.keys())
     print('static test_def_t test_set[] = {')
@@ -284,42 +299,59 @@ def genTestSet():
 def genTaskDefs():
     print(TASK_DEF_HEADER)
 
+    tests_by_id = {t['id']: t for t in Test.values()}
+    assert(len(tests_by_id.keys()) == max(tests_by_id.keys()) + 1)
+    assert(0 in tests_by_id)
+
     task_names = sorted(Task.keys())
     print('static task_def_t tasks[] = {')
     for idx, name in enumerate(task_names):
         is_base = 1 if Task[name]['is-base'] else 0
         is_quick = 1 if Task[name]['is-quick'] else 0
+
+        enabled_tests = [0] * len(Test.keys())
+
+        def disableChildren(test_id):
+            enabled_tests[test_id] = 0
+            for child_id in tests_by_id[test_id]['child']:
+                disableChildren(child_id)
+
+        def enableParents(test_id):
+            enabled_tests[test_id] = 1
+            parent = tests_by_id[test_id]['dep']
+            if parent is not None and parent != '_':
+                enableParents(Test[parent]['id'])
+
+        if len(Task[name]['enabled']) > 0:
+            for idx in tests_by_id.keys():
+                enabled_tests[idx] = 0
+            for d in Task[name]['enabled']:
+                if d in Test:
+                    enableParents(Test[d]['id'])
+        else:
+            for idx in tests_by_id.keys():
+                enabled_tests[idx] = 1
+
+        for d in Task[name]['disabled']:
+            if d in Test:
+                enabled_tests[Test[d]['id']] = 0
+
+        for idx, enabled in enumerate(enabled_tests):
+            if not enabled:
+                disableChildren(idx)
+
+        enabled_list = ', '.join(str(x) for x in enabled_tests)
         print(f'    {{')
         print(f'        .id = {idx},')
         print(f'        .name = "{name}",')
         print(f'        .enabled = 0,')
         print(f'        .enabled_tests = {{ 0 }},')
-        print(f'        .default_disabled_tests = {{ 0 }},')
-        print(f'        .default_enabled_tests = {{ 0 }},')
+        print(f'        .allowed_tests = {{ {enabled_list} }},')
         print(f'        .is_base = {is_base},')
         print(f'        .is_quick = {is_quick}')
         print(f'    }},')
     print('};')
     print(f'static const int tasks_size = {len(task_names)};')
-
-    print('static void tasksInit(void)')
-    print('{')
-    for idx, name in enumerate(task_names):
-        task = Task[name]
-        for d in task['disabled']:
-            if d not in Test:
-                print(f'Warning: task {name!r} disables unknown test {d!r}',
-                      file=sys.stderr)
-                continue
-            print(f'    tasks[{idx}].default_disabled_tests[{Test[d]["id"]}] = 1;')
-
-        for d in task['enabled']:
-            if d not in Test:
-                print(f'Warning: task {name!r} enables unknown test {d!r}',
-                      file=sys.stderr)
-                continue
-            print(f'    tasks[{idx}].default_enabled_tests[{Test[d]["id"]}] = 1;')
-    print('}')
 
 
 # ---------------------------------------------------------------------------
@@ -344,6 +376,7 @@ def main():
     for fn in args.src_files:
         parseFile(fn)
     removeUnreachable()
+    constructTestTree()
 
     with open(args.config_toml, 'rb') as f:
         cfg = tomllib.load(f)
