@@ -36,5 +36,6 @@ extern context_t C;
 
 int validateLiftedPlan(const pddl_lifted_plan_t *plan);
 int validateGroundPlan(const pddl_fdr_t *fdr, const pddl_plan_t *plan);
+int validatePlanSeq(const pddl_fdr_t *fdr, const pddl_iarr_t *plan);
 
 #endif /* __TEST_CONTEXT_H__ */
