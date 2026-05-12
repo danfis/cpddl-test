@@ -46,6 +46,7 @@ TESTS += irrelevance
 TESTS += invertible
 TESTS += fdr
 TESTS += hff
+TESTS += hm_heur
 TESTS += pot
 TESTS += lmc
 TESTS += flow

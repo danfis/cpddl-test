@@ -97,6 +97,12 @@ TEST(r, _)
         assert(0);
     }
     C.optimal_cost = optimalCost(C.files.problem_pddl);
+
+    strcpy(C.plan_file_path, C.files.problem_pddl);
+    if (strcmp(C.plan_file_path + strlen(C.plan_file_path) - 5, ".pddl") == 0)
+        sprintf(C.plan_file_path + strlen(C.plan_file_path) - 4, "plan");
+    if (!pddlIsFile(C.plan_file_path))
+        C.plan_file_path[0] = '\x0';
 }
 
 TEST_GLOBAL_TEAR_DOWN()

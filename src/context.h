@@ -7,6 +7,7 @@ struct context {
     pddl_err_t err;
     pddl_files_t files;
     int optimal_cost;
+    char plan_file_path[PDDL_FILE_MAX_PATH_LEN];
 
     pddl_t pddl;
     int pddl_set;
