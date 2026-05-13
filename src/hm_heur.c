@@ -132,23 +132,25 @@ TEST(h2_heur_dyn_prog_mutex, fdr)
  */
 TEST(h2_heur_bitset_cmp_init_state, h2_heur_dyn_prog_init_state)
 {
-    pddl_h2_heur_t h;
-    pddlH2HeurInit(&h, &C.strips, NULL, &C.err);
-    int h2 = pddlH2Heur(&h, &C.strips.init);
+    pddl_h2_heur_bitset_t h;
+    int ret = pddlH2HeurBitsetInit(&h, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    int h2 = pddlH2HeurBitset(&h, &C.strips.init);
     int ref = pddlHMHeurDynProg(2, &C.strips, &C.strips.init, NULL, &C.err);
     assert(h2 == ref);
-    pddlH2HeurFree(&h);
+    pddlH2HeurBitsetFree(&h);
 }
 
 TEST(h2_heur_bitset_init_state, strips)
 {
-    pddl_h2_heur_t h;
-    pddlH2HeurInit(&h, &C.strips, NULL, &C.err);
-    int h2 = pddlH2Heur(&h, &C.strips.init);
+    pddl_h2_heur_bitset_t h;
+    int ret = pddlH2HeurBitsetInit(&h, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    int h2 = pddlH2HeurBitset(&h, &C.strips.init);
     if (C.optimal_cost >= 0)
         assert(h2 <= C.optimal_cost);
     fprintf(stdout, "h^2(I) = %d\n", h2);
-    pddlH2HeurFree(&h);
+    pddlH2HeurBitsetFree(&h);
 }
 
 TEST(h2_heur_bitset_init_state_mutex, strips)
@@ -170,18 +172,20 @@ TEST(h2_heur_bitset_init_state_mutex, strips)
     int ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
-    pddl_h2_heur_t h;
-    pddlH2HeurInit(&h, &C.strips, &mutex, &C.err);
-    pddl_h2_heur_t h_no_mutex;
-    pddlH2HeurInit(&h_no_mutex, &C.strips, NULL, &C.err);
-    int h2 = pddlH2Heur(&h, &C.strips.init);
-    int h2_no_mutex = pddlH2Heur(&h_no_mutex, &C.strips.init);
+    pddl_h2_heur_bitset_t h;
+    ret = pddlH2HeurBitsetInit(&h, &C.strips, &mutex, &C.err);
+    assert(ret == 0);
+    pddl_h2_heur_bitset_t h_no_mutex;
+    ret = pddlH2HeurBitsetInit(&h_no_mutex, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    int h2 = pddlH2HeurBitset(&h, &C.strips.init);
+    int h2_no_mutex = pddlH2HeurBitset(&h_no_mutex, &C.strips.init);
     if (C.optimal_cost >= 0)
         assert(h2 <= C.optimal_cost);
     fprintf(stdout, "h^2(I) = %d | no-mutex: %d\n", h2, h2_no_mutex);
     assert(h2 >= h2_no_mutex);
-    pddlH2HeurFree(&h);
-    pddlH2HeurFree(&h_no_mutex);
+    pddlH2HeurBitsetFree(&h);
+    pddlH2HeurBitsetFree(&h_no_mutex);
     pddlMutexPairsFree(&mutex);
 }
 
@@ -200,16 +204,17 @@ TEST(h2_heur_bitset_cmp_plan_states, h2_heur_dyn_prog_plan_states)
     if (ret < 0)
         return;
 
-    pddl_h2_heur_t h;
-    pddlH2HeurInit(&h, &C.strips, NULL, &C.err);
+    pddl_h2_heur_bitset_t h;
+    ret = pddlH2HeurBitsetInit(&h, &C.strips, NULL, &C.err);
+    assert(ret == 0);
 
     for (int i = 0; i < plan.state_size; ++i){
-        int h2 = pddlH2Heur(&h, &plan.state[i]);
+        int h2 = pddlH2HeurBitset(&h, &plan.state[i]);
         int ref = pddlHMHeurDynProg(2, &C.strips, &plan.state[i], NULL, &C.err);
         assert(h2 == ref);
     }
 
-    pddlH2HeurFree(&h);
+    pddlH2HeurBitsetFree(&h);
     pddlPlanFileStripsFree(&plan);
 }
 
@@ -223,18 +228,19 @@ TEST(h2_heur_bitset_plan_states, fdr)
     if (ret < 0)
         return;
 
-    pddl_h2_heur_t h;
-    pddlH2HeurInit(&h, &C.strips, NULL, &C.err);
+    pddl_h2_heur_bitset_t h;
+    ret = pddlH2HeurBitsetInit(&h, &C.strips, NULL, &C.err);
+    assert(ret == 0);
 
     int cost = plan.cost;
     for (int i = 0; i < plan.state_size; ++i){
-        int h2 = pddlH2Heur(&h, &plan.state[i]);
+        int h2 = pddlH2HeurBitset(&h, &plan.state[i]);
         assert(h2 <= cost);
         if (i < pddlIArrSize(&plan.op))
             cost -= C.strips.op.op[pddlIArrGet(&plan.op, i)]->cost;
     }
 
-    pddlH2HeurFree(&h);
+    pddlH2HeurBitsetFree(&h);
     pddlPlanFileStripsFree(&plan);
 }
 
@@ -265,23 +271,26 @@ TEST(h2_heur_bitset_plan_states_mutex, fdr)
     ret = pddlHm(&cfg, &res, &C.err);
     assert(ret == 0);
 
-    pddl_h2_heur_t h;
-    pddlH2HeurInit(&h, &C.strips, &mutex, &C.err);
-    pddl_h2_heur_t h_no_mutex;
-    pddlH2HeurInit(&h_no_mutex, &C.strips, NULL, &C.err);
+    pddl_h2_heur_bitset_t h;
+    ret = pddlH2HeurBitsetInit(&h, &C.strips, &mutex, &C.err);
+    assert(ret == 0);
+    pddl_h2_heur_bitset_t h_no_mutex;
+    ret = pddlH2HeurBitsetInit(&h_no_mutex, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    pddlMutexPairsFree(&mutex);
 
     int cost = plan.cost;
     for (int i = 0; i < plan.state_size; ++i){
-        int h2 = pddlH2Heur(&h, &plan.state[i]);
-        int h2_no_mutex = pddlH2Heur(&h_no_mutex, &plan.state[i]);
+        int h2 = pddlH2HeurBitset(&h, &plan.state[i]);
+        int h2_no_mutex = pddlH2HeurBitset(&h_no_mutex, &plan.state[i]);
         assert(h2 <= cost);
         assert(h2_no_mutex <= h2);
         if (i < pddlIArrSize(&plan.op))
             cost -= C.strips.op.op[pddlIArrGet(&plan.op, i)]->cost;
     }
 
-    pddlH2HeurFree(&h);
-    pddlH2HeurFree(&h_no_mutex);
+    pddlH2HeurBitsetFree(&h);
+    pddlH2HeurBitsetFree(&h_no_mutex);
     pddlPlanFileStripsFree(&plan);
 }
 
@@ -308,15 +317,17 @@ TEST(h2_heur_bitset_cmp_mutex, h2_heur_dyn_prog_mutex)
     int hm_ret = pddlHm(&cfg, &res, &C.err);
     assert(hm_ret == 0);
 
-    pddl_h2_heur_t h_mutex, h_no_mutex;
-    pddlH2HeurInit(&h_mutex, &C.strips, &mutex, &C.err);
-    pddlH2HeurInit(&h_no_mutex, &C.strips, NULL, &C.err);
+    pddl_h2_heur_bitset_t h_mutex, h_no_mutex;
+    int ret = pddlH2HeurBitsetInit(&h_mutex, &C.strips, &mutex, &C.err);
+    assert(ret == 0);
+    ret = pddlH2HeurBitsetInit(&h_no_mutex, &C.strips, NULL, &C.err);
+    assert(ret == 0);
 
-    int h2 = pddlH2Heur(&h_mutex, &C.strips.init);
+    int h2 = pddlH2HeurBitset(&h_mutex, &C.strips.init);
     int ref = pddlHMHeurDynProg(2, &C.strips, &C.strips.init, &mutex, &C.err);
     assert(h2 == ref);
 
-    int h2_no_m = pddlH2Heur(&h_no_mutex, &C.strips.init);
+    int h2_no_m = pddlH2HeurBitset(&h_no_mutex, &C.strips.init);
     int ref_no_m = pddlHMHeurDynProg(2, &C.strips, &C.strips.init, NULL, &C.err);
     assert(h2_no_m == ref_no_m);
     assert(h2 >= h2_no_m);
@@ -326,7 +337,7 @@ TEST(h2_heur_bitset_cmp_mutex, h2_heur_dyn_prog_mutex)
         int ret = pddlPlanFileStripsInit(&plan, &C.strips, C.plan_file_path, &C.err);
         if (ret == 0){
             for (int i = 0; i < plan.state_size; ++i){
-                int h2_p = pddlH2Heur(&h_mutex, &plan.state[i]);
+                int h2_p = pddlH2HeurBitset(&h_mutex, &plan.state[i]);
                 int ref_p = pddlHMHeurDynProg(2, &C.strips, &plan.state[i],
                                               &mutex, &C.err);
                 assert(h2_p == ref_p);
@@ -335,7 +346,7 @@ TEST(h2_heur_bitset_cmp_mutex, h2_heur_dyn_prog_mutex)
         }
     }
 
-    pddlH2HeurFree(&h_mutex);
-    pddlH2HeurFree(&h_no_mutex);
+    pddlH2HeurBitsetFree(&h_mutex);
+    pddlH2HeurBitsetFree(&h_no_mutex);
     pddlMutexPairsFree(&mutex);
 }
