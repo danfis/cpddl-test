@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Regression test runner for bin/pddl-tool.
-
-Run from the tests/ directory:
-    python3 scripts/test-tool.py [options]
-"""
+"""Regression test runner for bin/pddl-tool."""
 
 import argparse
 import os
@@ -13,6 +9,9 @@ import sys
 import time
 import tomllib
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# Change to the tests/ directory (parent of the scripts/ directory this file lives in)
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 # ANSI color codes
 RED   = "\033[31m"

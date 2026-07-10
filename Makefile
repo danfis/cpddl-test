@@ -51,6 +51,7 @@ TESTS += lmc
 TESTS += flow
 TESTS += clique
 TESTS += symbolic
+TESTS += symbolic_search
 TESTS += datalog
 TESTS += homomorphism
 TESTS += endomorphism
@@ -60,6 +61,8 @@ TESTS += lifted_search
 TESTS += search
 TESTS += gaifman
 TESTS += set
+TESTS += open_list
+TESTS += opts
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)

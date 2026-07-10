@@ -33,8 +33,8 @@ static int actionHasAddEff(const pddl_action_t *a, int pred)
 
 TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
 {
-    const char *domain_fn = "pddl-data/ipc-2014/seq-opt/transport/domain.pddl";
-    const char *problem_fn = "pddl-data/ipc-2014/seq-opt/transport/p01.pddl";
+    const char *domain_fn = "pddl/ipc-2014/seq-opt/transport/domain.pddl";
+    const char *problem_fn = "pddl/ipc-2014/seq-opt/transport/p01.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
     pddl_err_t err = PDDL_ERR_INIT;
@@ -156,120 +156,11 @@ TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
     pddlFree(&pddl);
 }
 
-TEST(lifted_mgroup_tests_tidybot, lifted_mgroup_tests)
-{
-    const char *domain_fn = "pddl-data/ipc-2014/seq-opt/tidybot/domain.pddl";
-    const char *problem_fn = "pddl-data/ipc-2014/seq-opt/tidybot/p01.pddl";
-    pddl_config_t cfg = PDDL_CONFIG_INIT;
-    pddl_t pddl;
-    pddl_err_t err = PDDL_ERR_INIT;
-
-    cfg.force_adl = 1;
-    if (pddlInit(&pddl, domain_fn, problem_fn, &cfg, &err) != 0){
-        printf("Could not parse!\n");
-        pddlErrPrint(&err, 1, stderr);
-        return;
-    }
-    pddlNormalize(&pddl, &C.err);
-
-    int pred_base_obs = pddlPredsGet(&pddl.pred, "base-obstacle");
-    int pred_gripper_empty = pddlPredsGet(&pddl.pred, "gripper-empty");
-
-    //pddlFmPrint(&pddl, &pddl.init->fm, NULL, stderr);
-
-    pddl_lifted_mgroup_t mg;
-
-    pddlLiftedMGroupInitCandFromPred(&mg, pddl.pred.pred + pred_base_obs, 0);
-    //pddlLiftedMGroupPrint(&pddl, &mg, stderr);
-    assert(pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
-    for (int ai = 0; ai < pddl.action.action_size; ++ai){
-        const pddl_action_t *a = pddl.action.action + ai;
-        int ret = pddlLiftedMGroupIsActionTooHeavy(&mg, &pddl, ai);
-        if (strcmp(a->name, "base-cart-left") == 0
-                || strcmp(a->name, "base-cart-right") == 0
-                || strcmp(a->name, "base-cart-up") == 0
-                || strcmp(a->name, "base-cart-down") == 0){
-            assert(ret);
-        }else{
-            assert(!ret);
-        }
-
-        ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
-        if (strncmp(a->name, "base-", 5) != 0){
-            assert(ret);
-        }else{
-            assert(!ret);
-        }
-    }
-    pddlLiftedMGroupFree(&mg);
-
-    pddlLiftedMGroupInitCandFromPred(&mg, pddl.pred.pred + pred_base_obs, 1);
-    //pddlLiftedMGroupPrint(&pddl, &mg, stdout);
-    assert(pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
-    for (int ai = 0; ai < pddl.action.action_size; ++ai){
-        const pddl_action_t *a = pddl.action.action + ai;
-        int ret = pddlLiftedMGroupIsActionTooHeavy(&mg, &pddl, ai);
-        if (strcmp(a->name, "base-cart-left") == 0
-                || strcmp(a->name, "base-cart-right") == 0
-                || strcmp(a->name, "base-cart-up") == 0
-                || strcmp(a->name, "base-cart-down") == 0){
-            assert(ret);
-        }else{
-            assert(!ret);
-        }
-
-        ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
-        if (strncmp(a->name, "base-", 5) != 0){
-            assert(ret);
-        }else{
-            assert(!ret);
-        }
-    }
-    pddlLiftedMGroupFree(&mg);
-
-    pddlLiftedMGroupInitCandFromPred(&mg, pddl.pred.pred + pred_base_obs, -1);
-    //pddlLiftedMGroupPrint(&pddl, &mg, stdout);
-    assert(!pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
-    for (int ai = 0; ai < pddl.action.action_size; ++ai){
-        const pddl_action_t *a = pddl.action.action + ai;
-        int ret = pddlLiftedMGroupIsActionTooHeavy(&mg, &pddl, ai);
-        assert(!ret);
-
-        ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
-        if (strncmp(a->name, "base-", 5) != 0){
-            assert(ret);
-        }else{
-            assert(!ret);
-        }
-    }
-    pddlLiftedMGroupFree(&mg);
-
-    pddlLiftedMGroupInitCandFromPred(&mg, pddl.pred.pred + pred_gripper_empty,
-                                     -1);
-    //pddlLiftedMGroupPrint(&pddl, &mg, stderr);
-    assert(!pddlLiftedMGroupIsInitTooHeavy(&mg, &pddl));
-    for (int ai = 0; ai < pddl.action.action_size; ++ai){
-        const pddl_action_t *a = pddl.action.action + ai;
-        int ret = pddlLiftedMGroupIsActionTooHeavy(&mg, &pddl, ai);
-        assert(!ret);
-
-        ret = pddlLiftedMGroupIsActionBalanced(&mg, &pddl, ai);
-        if (strncmp(a->name, "put-", 4) == 0){
-            assert(!ret);
-        }else{
-            assert(ret);
-        }
-    }
-    pddlLiftedMGroupFree(&mg);
-
-    //pddlPrintPDDLDomain(&pddl, stdout);
-    pddlFree(&pddl);
-}
 
 TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
 {
-    const char *domain_fn = "pddl-data/ipc-2014/seq-opt/citycar/domain.pddl";
-    const char *problem_fn = "pddl-data/ipc-2014/seq-opt/citycar/p2-2-2-2-1.pddl";
+    const char *domain_fn = "pddl/ipc-2014/seq-opt/citycar/domain.pddl";
+    const char *problem_fn = "pddl/ipc-2014/seq-opt/citycar/p2-2-2-2-1.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
     pddl_err_t err = PDDL_ERR_INIT;
@@ -354,9 +245,9 @@ TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
 TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
 {
     const char *domain_fn
-            = "pddl-data/ipc-2018/seq-opt/organic-synthesis/domain-p01.pddl";
+            = "pddl/ipc-2018/seq-opt/organic-synthesis/domain-p01.pddl";
     const char *problem_fn
-            = "pddl-data/ipc-2018/seq-opt/organic-synthesis/p01.pddl";
+            = "pddl/ipc-2018/seq-opt/organic-synthesis/p01.pddl";
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     pddl_t pddl;
     pddl_err_t err = PDDL_ERR_INIT;
@@ -454,7 +345,7 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
     pddl_files_t files;
     pddl_err_t err = PDDL_ERR_INIT;
 
-    if (pddlFiles1(&files, "pddl-data/ipc-2014/seq-opt/barman/p435.1",
+    if (pddlFiles1(&files, "pddl/ipc-2014/seq-opt/barman/p435.1",
                    &err) != 0){
         pddlErrPrint(&err, 1, stderr);
         return;

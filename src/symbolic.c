@@ -90,7 +90,7 @@ static void run(pddl_symbolic_task_config_t *symb_cfg,
 {
     symb_cfg->constr_max_time = 1000.;
     symb_cfg->goal_constr_max_time = 1000.;
-    symb_cfg->bw.step_time_limit = 30.;
+    symb_cfg->bw.bw_step_time_limit = 30.;
 
     pddlErrLogEnable(&C.err, stderr);
     pddl_symbolic_task_t *task = pddlSymbolicTaskNew(&C.fdr, symb_cfg, &C.err);
@@ -101,8 +101,8 @@ static void run(pddl_symbolic_task_config_t *symb_cfg,
 
     PDDL_IARR(plan);
     int res = pddlSymbolicTaskSearch(task, &plan, &C.err);
-    assert(res == PDDL_SYMBOLIC_PLAN_FOUND || res == PDDL_SYMBOLIC_PLAN_NOT_EXIST);
-    if (res == PDDL_SYMBOLIC_PLAN_FOUND){
+    assert(res == _PDDL_SYMBOLIC_PLAN_FOUND || res == _PDDL_SYMBOLIC_PLAN_NOT_EXIST);
+    if (res == _PDDL_SYMBOLIC_PLAN_FOUND){
         checkPlan(&C.fdr, &plan, check_optimality);
         checkPlanStates(&C.fdr, task);
 
@@ -131,9 +131,9 @@ TEST(symbolic_fw, symbolic)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_NONE;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
     run(&symb_cfg, pddl_true);
 }
 
@@ -142,9 +142,9 @@ TEST(symbolic_fw_gbfs, symbolic)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_NONE;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
     run(&symb_cfg, pddl_false);
 }
 
@@ -153,9 +153,9 @@ TEST_COND(symbolic_fw_pot, symbolic, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_NONE;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
 
     symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
@@ -174,9 +174,9 @@ TEST_COND(symbolic_fw_gbfs_pot, symbolic, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_NONE;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
 
     symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
@@ -195,9 +195,9 @@ TEST(symbolic_fwbw, symbolic)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
     run(&symb_cfg, pddl_true);
 }
 
@@ -206,9 +206,9 @@ TEST(symbolic_fwbw_gbfs, symbolic)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
     run(&symb_cfg, pddl_false);
 }
 
@@ -217,9 +217,9 @@ TEST_COND(symbolic_fwbw_pot, symbolic, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
 
     symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
@@ -238,9 +238,9 @@ TEST_COND(symbolic_fwbw_gbfs_pot, symbolic, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
 
     symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
@@ -262,9 +262,9 @@ TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
     pddlErrLogEnable(&C.err, stderr);
     pddl_bool_t is_tnf = fdrHasTNFOps(&C.fdr);
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.log_every_step = 0;
 
     symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
@@ -281,11 +281,11 @@ TEST_COND(symbolic_fwbw_pot_pot, symbolic, LP)
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }
 
     run(&symb_cfg, pddl_true);
@@ -299,9 +299,9 @@ TEST_COND(symbolic_fwbw_gbfs_pot_pot, symbolic, LP)
     pddlErrLogEnable(&C.err, stderr);
     pddl_bool_t is_tnf = fdrHasTNFOps(&C.fdr);
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.log_every_step = 0;
 
     symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
@@ -318,11 +318,11 @@ TEST_COND(symbolic_fwbw_gbfs_pot_pot, symbolic, LP)
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }
 
     run(&symb_cfg, pddl_false);
@@ -333,9 +333,9 @@ TEST(symbolic_bw, symbolic)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_NONE;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
     run(&symb_cfg, pddl_true);
 }
 
@@ -344,9 +344,9 @@ TEST(symbolic_bw_gbfs, symbolic)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_NONE;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
     run(&symb_cfg, pddl_false);
 }
 
@@ -357,19 +357,19 @@ TEST_COND(symbolic_bw_pot, symbolic, LP)
 
     pddl_bool_t is_tnf = fdrHasTNFOps(&C.fdr);
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_NONE;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_ASTAR;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_ASTAR;
 
     symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_false;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_false;
     }
     run(&symb_cfg, pddl_true);
 }
@@ -381,19 +381,19 @@ TEST_COND(symbolic_bw_gbfs_pot, symbolic, LP)
 
     pddl_bool_t is_tnf = fdrHasTNFOps(&C.fdr);
 
-    pddl_symbolic_task_config_t symb_cfg = PDDL_SYMBOLIC_TASK_CONFIG_INIT;
-    symb_cfg.fw.type = PDDL_SYMBOLIC_SEARCH_NONE;
-    symb_cfg.bw.type = PDDL_SYMBOLIC_SEARCH_GBFS;
+    pddl_symbolic_task_config_t symb_cfg = _PDDL_SYMBOLIC_TASK_CONFIG_INIT;
+    symb_cfg.fw.type = _PDDL_SYMBOLIC_SEARCH_NONE;
+    symb_cfg.bw.type = _PDDL_SYMBOLIC_SEARCH_GBFS;
 
     symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     if (is_tnf){
         symb_cfg.bw.use_pot_heur = pddl_true;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_false;
-        symb_cfg.bw.use_goal_splitting = pddl_true;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_true;
     }else{
         symb_cfg.bw.use_pot_heur = pddl_false;
         symb_cfg.bw.use_pot_heur_inconsistent = pddl_true;
-        symb_cfg.bw.use_goal_splitting = pddl_false;
+        symb_cfg.bw.bw_use_goal_splitting = pddl_false;
     }
     run(&symb_cfg, pddl_false);
 }

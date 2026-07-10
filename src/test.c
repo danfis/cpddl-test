@@ -69,6 +69,9 @@ static int no_progress = 0;
 static int parallel = DEFAULT_PARALLEL;
 static int timeout_s = DEFAULT_TIMEOUT;
 static int supress_fail = 0;
+static int print_plan = 0;
+static int print_tasks = 0;
+static int print_tests = 0;
 
 static FILE *log_fout = NULL;
 
@@ -161,9 +164,6 @@ static void usage(const char *progname)
 
 static void parseOptions(int argc, char *argv[])
 {
-    int print_plan = 0;
-    int print_tasks = 0;
-    int print_tests = 0;
     int opt;
     while ((opt = getopt(argc, argv, "haBQAvxS:T:s:t:p:DLKm:fl:")) != -1) {
         switch (opt) {
@@ -224,28 +224,6 @@ static void parseOptions(int argc, char *argv[])
     }
     if (optind != argc)
         usage(argv[0]);
-
-    if (print_plan){
-        printf("Enabled Tasks: %d / %d\n",
-               tasksTestsNumEnabledTasks(),
-               tasksTestsNumTasks());
-        printf("Enabled Tests: %d / %d\n",
-               tasksTestsNumEnabledTests(),
-               tasksTestsNumTests());
-        printf("Num jobs: %d\n", tasksTestsNumEnabledJobs());
-        tasksTestsPrintPlan();
-        exit(0);
-    }
-
-    if (print_tasks){
-        tasksTestsPrintTasks();
-        exit(0);
-    }
-
-    if (print_tests){
-        tasksTestsPrintTests();
-        exit(0);
-    }
 
     if (parallel < 1)
         parallel = DEFAULT_PARALLEL;
@@ -947,11 +925,35 @@ static void *thProgress(void *_)
 
 int main(int argc, char *argv[])
 {
-    tasksTestsInit();
     setMemLimit();
     parseOptions(argc, argv);
     if (log_fout == NULL)
         openLogFile("check.log");
+
+    tasksTestsSetEnableMatrix();
+
+    if (print_plan){
+        printf("Enabled Tasks: %d / %d\n",
+               tasksTestsNumEnabledTasks(),
+               tasksTestsNumTasks());
+        printf("Enabled Tests: %d / %d\n",
+               tasksTestsNumEnabledTests(),
+               tasksTestsNumTests());
+        printf("Num jobs: %d\n", tasksTestsNumEnabledJobs());
+        tasksTestsPrintPlan();
+        exit(0);
+    }
+
+    if (print_tasks){
+        tasksTestsPrintTasks();
+        exit(0);
+    }
+
+    if (print_tests){
+        tasksTestsPrintTests();
+        exit(0);
+    }
+
 
     cleanRegDir();
     global_tear_down = tasksTestsGlobalTearDown();
@@ -962,11 +964,9 @@ int main(int argc, char *argv[])
     num_enabled_jobs = tasksTestsNumEnabledJobs();
 
     printf("tasks: %d/%d, tests: %d/%d, jobs: %d, parallel: %d, timeout: %ds\n",
-           tasksTestsNumEnabledTasks(),
-           tasksTestsNumTasks(),
-           tasksTestsNumEnabledTests(),
-           tasksTestsNumTests(),
-           tasksTestsNumEnabledJobs(),
+           num_enabled_tasks, num_tasks,
+           tasksTestsNumEnabledTests(), num_tests,
+           num_enabled_jobs,
            parallel, timeout_s);
     fflush(stdout);
 

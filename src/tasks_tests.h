@@ -13,19 +13,20 @@ struct test_def {
     int parent;
     const int *children;
     int children_size;
-    int is_explicit;
+    int is_once;
     int enabled;
 };
 typedef struct test_def test_def_t;
 
 
-void tasksTestsInit(void);
 void tasksTestsEnableTestMatch(const char *pat);
 void tasksTestsEnableTestEq(const char *pat);
 void tasksTestsEnableTaskMatch(const char *pat);
 void tasksTestsEnableTaskEq(const char *pat);
 void tasksTestsEnableAllTasks(int task_set);
 void tasksTestsEnableAllTests(void);
+
+void tasksTestsSetEnableMatrix(void);
 
 
 void tasksTestsPrintPlan(void);
