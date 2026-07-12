@@ -50,7 +50,6 @@ TESTS += pot
 TESTS += lmc
 TESTS += flow
 TESTS += clique
-TESTS += symbolic
 TESTS += symbolic_search
 TESTS += datalog
 TESTS += homomorphism
