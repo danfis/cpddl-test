@@ -4,25 +4,25 @@
 large = [
     "hm_h3",
     "h3mgroup",
-    "symbolic",
     "endomorphism_tss",
     "endomorphism_tss_nocost",
     "lifted_search",
     "lifted_search_unit_cost",
     "search",
     "pot_conj",
+    "symbolic_search",
 ]
 
 very_large = [
     "hm_h3",
     "h3mgroup",
-    "symbolic",
     "endomorphism_tss",
     "endomorphism_tss_nocost",
     "lifted_search",
     "lifted_search_unit_cost",
     "search",
     "pot_conj",
+    "symbolic_search",
     "famgroup_maximal",
     "fdr_app_op_search",
     "fdr_app_op_search_essential",
@@ -129,7 +129,10 @@ disable = [
     "lifted_search_unit_cost",
     "search_astar_hmax",
     "search_blind",
-    "symbolic",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_blind",
+    "symbolic_search_fw_blind",
+    "symbolic_search_fwbw_astar_blind_I",
 ]
 
 [[tasks]]
@@ -209,7 +212,6 @@ disable = [
     "lifted_search_gbfs_hff_max_dl",
     "lifted_search_lazy_hadd_dl",
     "lifted_search_lazy_hff_add_dl",
-    "symbolic",
 ]
 
 [[tasks]]
@@ -226,6 +228,8 @@ name = "ipc-2008/seq-opt/scanalyzer/p01"
 
 [[tasks]]
 name = "ipc-2008/seq-opt/sokoban/p01"
+disable = [
+]
 
 [[tasks]]
 name = "ipc-2008/seq-opt/transport/p01"
@@ -259,7 +263,7 @@ disable = [
     "lifted_search",
     "lifted_search_unit_cost",
     "search",
-    "symbolic",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -268,9 +272,7 @@ disable = [
     "lifted_search",
     "lifted_search_unit_cost",
     "search_astar_lmc",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fwbw_pot_pot",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -326,6 +328,8 @@ name = "ipc-2011/seq-opt/scanalyzer/p01"
 
 [[tasks]]
 name = "ipc-2011/seq-opt/sokoban/p01"
+disable = [
+]
 
 [[tasks]]
 name = "ipc-2011/seq-opt/tidybot/p01"
@@ -340,7 +344,7 @@ disable = [
     "lifted_search_gbfs_hff_max_dl",
     "lifted_search_lazy_hadd_dl",
     "lifted_search_lazy_hff_add_dl",
-    "symbolic_bw_gbfs_pot",
+    "symbolic_search_bw_astar_I",
 ]
 
 [[tasks]]
@@ -359,7 +363,7 @@ disable = [
     "lifted_search",
     "lifted_search_unit_cost",
     "search",
-    "symbolic",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -368,7 +372,7 @@ disable = [
     "lifted_search",
     "lifted_search_unit_cost",
     "search",
-    "symbolic",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -377,7 +381,6 @@ disable = [
     "lifted_search",
     "lifted_search_unit_cost",
     "search_blind",
-    "symbolic",
 ]
 
 [[tasks]]
@@ -469,7 +472,7 @@ disable = [
     "lifted_search_unit_cost",
     "search_astar_hmax",
     "search_blind",
-    "symbolic",
+    "symbolic_search",
     "h2_heur_dyn_prog_plan_states",
 ]
 
@@ -481,7 +484,7 @@ disable = [
     "search_astar_hmax",
     "search_astar_lmc",
     "search_blind",
-    "symbolic",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -491,7 +494,8 @@ disable = [
     "lifted_search_unit_cost",
     "search_astar_hmax",
     "search_blind",
-    "symbolic",
+    "symbolic_search_bw_blind",
+    "symbolic_search_fw_blind",
 ]
 
 [[tasks]]
@@ -553,6 +557,10 @@ disable = [
 
 [[tasks]]
 name = "ipc-2006/storage/p10"
+disable = [
+    "symbolic_search_bw_gbfs_I_gc",
+    "symbolic_search_bw_gbfs_I_gc_anyplan",
+]
 
 [[tasks]]
 name = "ipc-2006/tpp/p10"
@@ -562,7 +570,7 @@ disable = [
     "search_astar_hmax",
     "search_astar_lmc",
     "search_blind",
-    "symbolic",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -625,8 +633,7 @@ name = "ipc-2008/seq-opt/sokoban/p10"
 disable = [
     "lifted_search",
     "lifted_search_unit_cost",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot",
+    "symbolic_search",
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_mutex",
 ]
@@ -772,9 +779,8 @@ disable = [
     "lifted_search_unit_cost",
     "search_astar_hmax",
     "search_blind",
-    "symbolic_bw_pot",
-    "symbolic_fw_pot",
-    "symbolic_fwbw_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_fwbw_astar_blind_I",
 ]
 
 [[tasks]]
@@ -942,10 +948,10 @@ disable = [
     "search_gbfs_ff",
     "search_lazy_add",
     "search_lazy_ff",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_gbfs_I_gc",
+    "symbolic_search_bw_gbfs_I_gc_anyplan",
+    "symbolic_search_fwbw_astar_blind_I",
 ]
 
 [[tasks]]
@@ -1168,9 +1174,9 @@ disable = [
     "search_astar_hmax",
     "search_astar_lmc",
     "search_blind",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_blind",
+    "symbolic_search_fwbw_astar_blind_I",
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
@@ -1207,8 +1213,7 @@ disable = [
     "search_gbfs_ff",
     "search_lazy_add",
     "search_lazy_ff",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
+    "symbolic_search_bw_astar_I",
 ]
 
 [[tasks]]
@@ -1310,10 +1315,7 @@ disable = [
     "lifted_search_lazy_hadd_dl",
     "lifted_search_lazy_hff_add_dl",
     "pot_conj",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
+    "symbolic_search",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
 ]
@@ -1354,10 +1356,10 @@ disable = [
     "lifted_search_gbfs_hff_max_dl",
     "lifted_search_lazy_hadd_dl",
     "lifted_search_lazy_hff_add_dl",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_blind",
+    "symbolic_search_bw_gbfs_I_gc",
+    "symbolic_search_bw_gbfs_I_gc_anyplan",
 ]
 
 [[tasks]]
@@ -1403,12 +1405,11 @@ disable = [
     "lifted_blind_search_unit_cost_sql",
     "pot_conj",
     "search_blind",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_fw",
-    "symbolic_fw_gbfs",
-    "symbolic_fwbw",
-    "symbolic_fwbw_gbfs",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_blind",
+    "symbolic_search_fw_blind",
+    "symbolic_search_fwbw_astar_blind_I",
+    "symbolic_search_fwbw_blind",
 ]
 
 [[tasks]]
@@ -1423,11 +1424,6 @@ disable = [
     "lifted_search_gbfs_hff_max_dl",
     "lifted_search_lazy_hadd_dl",
     "lifted_search_lazy_hff_add_dl",
-    "symbolic_fw_gbfs",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
 ]
 
 [[tasks]]
@@ -1448,13 +1444,6 @@ disable = [
     "strips_ground_prune",
     "strips_ground_unit_cost",
     "strips_pruned",
-    "symbolic_bw",
-    "symbolic_bw_pot",
-    "symbolic_fw_gbfs",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
 ]
 
 [[tasks]]
@@ -1486,20 +1475,7 @@ disable = [
     "search_blind",
     "search_gbfs_add",
     "search_lazy_add",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_gbfs",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fw_pot",
-    "symbolic_fwbw",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
-    "symbolic_fwbw_pot",
-    "symbolic_fwbw_pot_pot",
+    "symbolic_search",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
 ]
@@ -1535,20 +1511,7 @@ disable = [
     "search_gbfs_ff",
     "search_lazy_add",
     "search_lazy_ff",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_gbfs",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fw_pot",
-    "symbolic_fwbw",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
-    "symbolic_fwbw_pot",
-    "symbolic_fwbw_pot_pot",
+    "symbolic_search",
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
@@ -1586,10 +1549,10 @@ disable = [
 [[tasks]]
 name = "ipc-2023/opt/slitherlink/p01"
 disable = [
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_blind",
+    "symbolic_search_bw_gbfs_I_gc",
+    "symbolic_search_bw_gbfs_I_gc_anyplan",
 ]
 
 [[tasks]]
@@ -1620,20 +1583,7 @@ disable = [
     "search_gbfs_ff",
     "search_lazy_add",
     "search_lazy_ff",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_gbfs",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fw_pot",
-    "symbolic_fwbw",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
-    "symbolic_fwbw_pot",
-    "symbolic_fwbw_pot_pot",
+    "symbolic_search",
     "h2_heur_dyn_prog_init_state",
 ]
 
@@ -1668,13 +1618,6 @@ disable = [
     "strips_ground_unit_cost",
     "strips_pruned",
     "strips_useless_del_effs",
-    "symbolic_bw",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_pot",
-    "symbolic_fwbw",
-    "symbolic_fwbw_pot",
-    "symbolic_fwbw_pot_pot",
     "h2_heur_dyn_prog_init_state",
 ]
 
@@ -1711,13 +1654,6 @@ disable = [
     "strips_ground_prune",
     "strips_ground_unit_cost",
     "strips_pruned",
-    "symbolic_bw",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_pot",
-    "symbolic_fwbw",
-    "symbolic_fwbw_pot",
-    "symbolic_fwbw_pot_pot",
 ]
 
 [[tasks]]
@@ -1735,14 +1671,14 @@ disable = [
     "search_astar_hmax",
     "search_astar_lmc",
     "search_blind",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_gbfs",
-    "symbolic_fwbw",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_blind",
+    "symbolic_search_fw_blind",
+    "symbolic_search_fwbw_astar_AI_I",
+    "symbolic_search_fwbw_astar_AI_I_no_goal_split",
+    "symbolic_search_fwbw_astar_AI_blind",
+    "symbolic_search_fwbw_astar_blind_I",
+    "symbolic_search_fwbw_blind",
 ]
 
 [[tasks]]
@@ -1798,20 +1734,7 @@ disable = [
     "search_blind",
     "search_gbfs_add",
     "search_lazy_add",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fw",
-    "symbolic_fw_gbfs",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fw_pot",
-    "symbolic_fwbw",
-    "symbolic_fwbw_gbfs",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
-    "symbolic_fwbw_pot",
-    "symbolic_fwbw_pot_pot",
+    "symbolic_search",
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
@@ -1824,10 +1747,7 @@ disable = [
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
-    "symbolic_bw",
-    "symbolic_bw_gbfs",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -1879,10 +1799,11 @@ disable = [
     "search_gbfs_ff",
     "search_lazy_add",
     "search_lazy_ff",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_bw_pot",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
+    "symbolic_search_bw_astar_I",
+    "symbolic_search_bw_gbfs_I_gc",
+    "symbolic_search_bw_gbfs_I_gc_anyplan",
+    "symbolic_search_fwbw_gbfs_gc_I_gc",
+    "symbolic_search_fwbw_gbfs_gc_I_gc_anyplan",
 ]
 
 [[tasks]]
@@ -1898,6 +1819,7 @@ disable = [
     "hpot",
     "lifted_search",
     "lifted_search_unit_cost",
+    "symbolic_search",
 ]
 
 [[tasks]]
@@ -1915,10 +1837,7 @@ disable = [
     "hpot",
     "lifted_search",
     "lifted_search_unit_cost",
-    "symbolic_bw_gbfs_pot",
-    "symbolic_fw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot",
-    "symbolic_fwbw_gbfs_pot_pot",
+    "symbolic_search",
 ]
 
 [[tasks]]

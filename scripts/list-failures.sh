@@ -4,21 +4,30 @@
 # Scans reg/ for *.fail.tmp files written by the test runner.
 # Exit code: 0 if no failures, 1 if at least one failure found.
 #
-# Usage: list-failures.sh [-c|-m]
+# Usage: list-failures.sh [-c|-m|-x]
 #   -c   Print ./test command to re-run each failed pair
 #   -m   Print make check command to re-run each failed pair
+#   -t   Print only those where the .fail.tmp file contains "Alarm clock" (i.e.,
+#        those that timed-out)
 
 mode=plain
-while getopts "cm" opt; do
+regex=
+while getopts "cmt" opt; do
     case $opt in
         c) mode=cmd ;;
         m) mode=make ;;
-        *) echo "Usage: $0 [-c|-m]" >&2; exit 2 ;;
+        t) regex="Alarm clock" ;;
+        *) echo "Usage: $0 [-c|-m|-t]" >&2; exit 2 ;;
     esac
 done
 
 found=0
 while IFS= read -r f; do
+    if [ "$regex" != "" ]; then
+        if ! grep -q "$regex" "${f}"; then
+            continue
+        fi
+    fi
     rel="${f#reg/}"
     tname="${rel##*/}"
     tname="${tname%.fail.tmp}"
