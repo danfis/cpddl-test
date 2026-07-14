@@ -1,0 +1,151 @@
+Fact[19]:
+  (NOT-alive wumpus-1)
+  (NOT-at wumpus-1 s-2-3)
+  (alive agent-1)
+  (alive wumpus-1)
+  (at agent-1 s-1-1)
+  (at agent-1 s-1-2)
+  (at agent-1 s-1-3)
+  (at agent-1 s-2-1)
+  (at agent-1 s-2-2)
+  (at agent-1 s-2-3)
+  (at gold-1 s-1-3)
+  (at wumpus-1 s-2-3)
+  (cocoa-d0 move agent-1 s-1-3 s-2-3)
+  (cocoa-d0 move agent-1 s-2-2 s-2-3)
+  (cocoa-d1 move agent-1 s-1-3 s-2-3)
+  (cocoa-d1 move agent-1 s-2-2 s-2-3)
+  (cocoa-free)
+  (have agent-1 arrow-1)
+  (have agent-1 gold-1)
+Op[32]:
+  (move agent-1 s-1-1 s-1-2), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-1) (cocoa-free)
+    add: (at agent-1 s-1-2)
+    del: (alive agent-1) (at agent-1 s-1-1)
+  (move agent-1 s-1-1 s-2-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-1) (cocoa-free)
+    add: (at agent-1 s-2-1)
+    del: (at agent-1 s-1-1)
+  (move agent-1 s-1-2 s-1-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-2) (cocoa-free)
+    add: (at agent-1 s-1-1)
+    del: (at agent-1 s-1-2)
+  (move agent-1 s-1-2 s-1-3), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-2) (cocoa-free)
+    add: (at agent-1 s-1-3)
+    del: (at agent-1 s-1-2)
+  (move agent-1 s-1-2 s-2-2), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-2) (cocoa-free)
+    add: (at agent-1 s-2-2)
+    del: (at agent-1 s-1-2)
+  (move agent-1 s-1-3 s-1-2), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-3) (cocoa-free)
+    add: (at agent-1 s-1-2)
+    del: (alive agent-1) (at agent-1 s-1-3)
+  (move agent-1 s-1-3 s-2-3), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-3) (cocoa-free)
+    add: (cocoa-d0 move agent-1 s-1-3 s-2-3)
+    del: (cocoa-free)
+  (move agent-1 s-1-3 s-2-3 cocoa-ce0-act), cost: 0
+    pre: (alive wumpus-1) (at wumpus-1 s-2-3) (cocoa-d0 move agent-1 s-1-3 s-2-3)
+    add: (cocoa-d1 move agent-1 s-1-3 s-2-3)
+    del: (alive agent-1) (cocoa-d0 move agent-1 s-1-3 s-2-3)
+  (move agent-1 s-1-3 s-2-3 cocoa-ce0-blk11), cost: 0
+    pre: (NOT-at wumpus-1 s-2-3) (cocoa-d0 move agent-1 s-1-3 s-2-3)
+    add: (cocoa-d1 move agent-1 s-1-3 s-2-3)
+    del: (cocoa-d0 move agent-1 s-1-3 s-2-3)
+  (move agent-1 s-1-3 s-2-3 cocoa-ce0-blk3), cost: 0
+    pre: (NOT-alive wumpus-1) (cocoa-d0 move agent-1 s-1-3 s-2-3)
+    add: (cocoa-d1 move agent-1 s-1-3 s-2-3)
+    del: (cocoa-d0 move agent-1 s-1-3 s-2-3)
+  (move agent-1 s-1-3 s-2-3 cocoa-end), cost: 0
+    pre: (cocoa-d1 move agent-1 s-1-3 s-2-3)
+    add: (at agent-1 s-2-3) (cocoa-free)
+    del: (at agent-1 s-1-3) (cocoa-d1 move agent-1 s-1-3 s-2-3)
+  (move agent-1 s-2-1 s-1-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-1) (cocoa-free)
+    add: (at agent-1 s-1-1)
+    del: (at agent-1 s-2-1)
+  (move agent-1 s-2-1 s-2-2), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-1) (cocoa-free)
+    add: (at agent-1 s-2-2)
+    del: (at agent-1 s-2-1)
+  (move agent-1 s-2-2 s-1-2), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-2) (cocoa-free)
+    add: (at agent-1 s-1-2)
+    del: (alive agent-1) (at agent-1 s-2-2)
+  (move agent-1 s-2-2 s-2-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-2) (cocoa-free)
+    add: (at agent-1 s-2-1)
+    del: (at agent-1 s-2-2)
+  (move agent-1 s-2-2 s-2-3), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-2) (cocoa-free)
+    add: (cocoa-d0 move agent-1 s-2-2 s-2-3)
+    del: (cocoa-free)
+  (move agent-1 s-2-2 s-2-3 cocoa-ce0-act), cost: 0
+    pre: (alive wumpus-1) (at wumpus-1 s-2-3) (cocoa-d0 move agent-1 s-2-2 s-2-3)
+    add: (cocoa-d1 move agent-1 s-2-2 s-2-3)
+    del: (alive agent-1) (cocoa-d0 move agent-1 s-2-2 s-2-3)
+  (move agent-1 s-2-2 s-2-3 cocoa-ce0-blk11), cost: 0
+    pre: (NOT-at wumpus-1 s-2-3) (cocoa-d0 move agent-1 s-2-2 s-2-3)
+    add: (cocoa-d1 move agent-1 s-2-2 s-2-3)
+    del: (cocoa-d0 move agent-1 s-2-2 s-2-3)
+  (move agent-1 s-2-2 s-2-3 cocoa-ce0-blk3), cost: 0
+    pre: (NOT-alive wumpus-1) (cocoa-d0 move agent-1 s-2-2 s-2-3)
+    add: (cocoa-d1 move agent-1 s-2-2 s-2-3)
+    del: (cocoa-d0 move agent-1 s-2-2 s-2-3)
+  (move agent-1 s-2-2 s-2-3 cocoa-end), cost: 0
+    pre: (cocoa-d1 move agent-1 s-2-2 s-2-3)
+    add: (at agent-1 s-2-3) (cocoa-free)
+    del: (at agent-1 s-2-2) (cocoa-d1 move agent-1 s-2-2 s-2-3)
+  (move agent-1 s-2-3 s-1-3), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-3) (cocoa-free)
+    add: (at agent-1 s-1-3)
+    del: (at agent-1 s-2-3)
+  (move agent-1 s-2-3 s-2-2), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-3) (cocoa-free)
+    add: (at agent-1 s-2-2)
+    del: (at agent-1 s-2-3)
+  (shoot agent-1 s-1-3 arrow-1 wumpus-1 s-2-3), cost: 1
+    pre: (alive agent-1) (alive wumpus-1) (at agent-1 s-1-3) (at wumpus-1 s-2-3) (cocoa-free) (have agent-1 arrow-1)
+    add: (NOT-alive wumpus-1) (NOT-at wumpus-1 s-2-3)
+    del: (alive wumpus-1) (at wumpus-1 s-2-3) (have agent-1 arrow-1)
+  (shoot agent-1 s-2-2 arrow-1 wumpus-1 s-2-3), cost: 1
+    pre: (alive agent-1) (alive wumpus-1) (at agent-1 s-2-2) (at wumpus-1 s-2-3) (cocoa-free) (have agent-1 arrow-1)
+    add: (NOT-alive wumpus-1) (NOT-at wumpus-1 s-2-3)
+    del: (alive wumpus-1) (at wumpus-1 s-2-3) (have agent-1 arrow-1)
+  (take agent-1 s-1-1 agent-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-1) (cocoa-free)
+    add:
+    del: (at agent-1 s-1-1)
+  (take agent-1 s-1-2 agent-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-2) (cocoa-free)
+    add:
+    del: (at agent-1 s-1-2)
+  (take agent-1 s-1-3 agent-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-3) (cocoa-free)
+    add:
+    del: (at agent-1 s-1-3)
+  (take agent-1 s-1-3 gold-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-1-3) (at gold-1 s-1-3) (cocoa-free)
+    add: (have agent-1 gold-1)
+    del: (at gold-1 s-1-3)
+  (take agent-1 s-2-1 agent-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-1) (cocoa-free)
+    add:
+    del: (at agent-1 s-2-1)
+  (take agent-1 s-2-2 agent-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-2) (cocoa-free)
+    add:
+    del: (at agent-1 s-2-2)
+  (take agent-1 s-2-3 agent-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-3) (cocoa-free)
+    add:
+    del: (at agent-1 s-2-3)
+  (take agent-1 s-2-3 wumpus-1), cost: 1
+    pre: (alive agent-1) (at agent-1 s-2-3) (at wumpus-1 s-2-3) (cocoa-free)
+    add: (NOT-at wumpus-1 s-2-3)
+    del: (at wumpus-1 s-2-3)
+Init State: (alive agent-1) (alive wumpus-1) (at agent-1 s-1-1) (at gold-1 s-1-3) (at wumpus-1 s-2-3) (cocoa-free) (have agent-1 arrow-1)
+Goal: (alive agent-1) (at agent-1 s-1-1) (cocoa-free) (have agent-1 gold-1)

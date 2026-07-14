@@ -1,0 +1,99 @@
+Fact[15]:
+  (NOT-boarded p1)
+  (NOT-served p0)
+  (NOT-served p1)
+  (boarded p0)
+  (boarded p1)
+  (cocoa-d0 stop f3)
+  (cocoa-d1 stop f3)
+  (cocoa-d2 stop f3)
+  (cocoa-free)
+  (lift-at f0)
+  (lift-at f1)
+  (lift-at f2)
+  (lift-at f3)
+  (served p0)
+  (served p1)
+Op[20]:
+  (down f1 f0), cost: 1
+    pre: (cocoa-free) (lift-at f1)
+    add: (lift-at f0)
+    del: (lift-at f1)
+  (down f2 f0), cost: 1
+    pre: (cocoa-free) (lift-at f2)
+    add: (lift-at f0)
+    del: (lift-at f2)
+  (down f2 f1), cost: 1
+    pre: (cocoa-free) (lift-at f2)
+    add: (lift-at f1)
+    del: (lift-at f2)
+  (down f3 f0), cost: 1
+    pre: (cocoa-free) (lift-at f3)
+    add: (lift-at f0)
+    del: (lift-at f3)
+  (down f3 f1), cost: 1
+    pre: (cocoa-free) (lift-at f3)
+    add: (lift-at f1)
+    del: (lift-at f3)
+  (down f3 f2), cost: 1
+    pre: (cocoa-free) (lift-at f3)
+    add: (lift-at f2)
+    del: (lift-at f3)
+  (stop f1), cost: 1
+    pre: (NOT-served p1) (cocoa-free) (lift-at f1)
+    add: (boarded p1)
+    del: (NOT-boarded p1)
+  (stop f2), cost: 1
+    pre: (boarded p0) (cocoa-free) (lift-at f2)
+    add: (served p0)
+    del: (NOT-served p0) (boarded p0)
+  (stop f3), cost: 1
+    pre: (cocoa-free) (lift-at f3)
+    add: (cocoa-d0 stop f3)
+    del: (cocoa-free)
+  (stop f3 cocoa-ce0-act), cost: 0
+    pre: (boarded p1) (cocoa-d0 stop f3)
+    add: (NOT-boarded p1) (cocoa-d1 stop f3) (served p1)
+    del: (NOT-served p1) (boarded p1) (cocoa-d0 stop f3)
+  (stop f3 cocoa-ce0-blk4), cost: 0
+    pre: (NOT-boarded p1) (cocoa-d0 stop f3)
+    add: (cocoa-d1 stop f3)
+    del: (cocoa-d0 stop f3)
+  (stop f3 cocoa-ce1-act), cost: 0
+    pre: (NOT-served p0) (cocoa-d1 stop f3)
+    add: (boarded p0) (cocoa-d2 stop f3)
+    del: (cocoa-d1 stop f3)
+  (stop f3 cocoa-ce1-blk1), cost: 0
+    pre: (cocoa-d1 stop f3) (served p0)
+    add: (cocoa-d2 stop f3)
+    del: (cocoa-d1 stop f3)
+  (stop f3 cocoa-end), cost: 0
+    pre: (cocoa-d2 stop f3)
+    add: (cocoa-free)
+    del: (cocoa-d2 stop f3)
+  (up f0 f1), cost: 1
+    pre: (cocoa-free) (lift-at f0)
+    add: (lift-at f1)
+    del: (lift-at f0)
+  (up f0 f2), cost: 1
+    pre: (cocoa-free) (lift-at f0)
+    add: (lift-at f2)
+    del: (lift-at f0)
+  (up f0 f3), cost: 1
+    pre: (cocoa-free) (lift-at f0)
+    add: (lift-at f3)
+    del: (lift-at f0)
+  (up f1 f2), cost: 1
+    pre: (cocoa-free) (lift-at f1)
+    add: (lift-at f2)
+    del: (lift-at f1)
+  (up f1 f3), cost: 1
+    pre: (cocoa-free) (lift-at f1)
+    add: (lift-at f3)
+    del: (lift-at f1)
+  (up f2 f3), cost: 1
+    pre: (cocoa-free) (lift-at f2)
+    add: (lift-at f3)
+    del: (lift-at f2)
+Init State: (NOT-boarded p1) (NOT-served p0) (NOT-served p1) (cocoa-free) (lift-at f0)
+Goal: (cocoa-free) (served p0) (served p1)
