@@ -151,6 +151,56 @@ TEST(strips_ce, lmg)
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
+TEST(strips_nebel, lmg)
+{
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
+    assert(ret == 0);
+    C.strips_set = 1;
+
+    pddl_bool_t had_ce = C.strips.has_cond_eff;
+
+    pddlStripsCompileAwayCondEffNebel(&C.strips);
+    assert(!C.strips.has_cond_eff);
+
+    pddlMGroupsGround(&C.mg, &C.pddl, &C.lmg, &C.strips);
+    C.mg_set = 1;
+    pddlMGroupsSetExactlyOne(&C.mg, &C.strips);
+    pddlMGroupsSetGoal(&C.mg, &C.strips);
+    //pddlMGroupsPrint(&C.pddl, &C.strips, &C.mg, stdout);
+
+    PDDL_ISET(rm_fact);
+    PDDL_ISET(rm_op);
+    if (pddlIrrelevanceAnalysis(&C.strips, &rm_fact, &rm_op, NULL, &C.err) != 0){
+        PDDL_LOG(&C.err, "Irrelevance analysis failed.");
+        fprintf(stderr, "Error: ");
+        pddlErrPrint(&C.err, 1, stderr);
+        return;
+    }
+    if (pddlISetSize(&rm_fact) > 0 || pddlISetSize(&rm_op) > 0){
+        pddlStripsReduce(&C.strips, &rm_fact, &rm_op);
+        if (pddlISetSize(&rm_fact) > 0){
+            pddlMGroupsReduce(&C.mg, &rm_fact);
+            pddlMGroupsSetExactlyOne(&C.mg, &C.strips);
+            pddlMGroupsSetGoal(&C.mg, &C.strips);
+            //fprintf(stdout, "---\n");
+            //pddlMGroupsPrint(&C.pddl, &C.strips, &C.mg, stdout);
+        }
+    }
+    pddlISetFree(&rm_fact);
+    pddlISetFree(&rm_op);
+
+    if (C.strips.op.op_size == 0){
+        pddlStripsMakeUnsolvable(&C.strips);
+        pddlMutexPairsFree(&C.mutex);
+        pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+        pddlMGroupsFree(&C.mg);
+        pddlMGroupsInitEmpty(&C.mg);
+    }
+    if (had_ce)
+        pddlStripsPrintDebug(&C.strips, stdout);
+}
+
 TEST(strips_pruned, strips)
 {
     pddlMutexPairsInitStrips(&C.mutex, &C.strips);

@@ -1,0 +1,164 @@
+Fact[36]:
+  (NOT-boarded p1)
+  (NOT-served p0)
+  (NOT-served p1)
+  (boarded p0)
+  (boarded p1)
+  (lift-at f0)
+  (lift-at f1)
+  (lift-at f2)
+  (lift-at f3)
+  (nebel-add NOT-boarded p1)
+  (nebel-add NOT-served p1)
+  (nebel-add boarded p0)
+  (nebel-add boarded p1)
+  (nebel-add served p1)
+  (nebel-ce stop f3 ce-0)
+  (nebel-ce stop f3 ce-1)
+  (nebel-copy)
+  (nebel-del NOT-boarded p1)
+  (nebel-del NOT-served p1)
+  (nebel-del boarded p0)
+  (nebel-del boarded p1)
+  (nebel-del served p1)
+  (nebel-free)
+  (nebel-nopending NOT-boarded p1)
+  (nebel-nopending NOT-served p1)
+  (nebel-nopending boarded p0)
+  (nebel-nopending boarded p1)
+  (nebel-nopending served p1)
+  (nebel-op stop f3)
+  (nebel-pending NOT-boarded p1)
+  (nebel-pending NOT-served p1)
+  (nebel-pending boarded p0)
+  (nebel-pending boarded p1)
+  (nebel-pending served p1)
+  (served p0)
+  (served p1)
+Op[31]:
+  (down f1 f0), cost: 1
+    pre: (lift-at f1) (nebel-free)
+    add: (lift-at f0)
+    del: (lift-at f1)
+  (down f2 f0), cost: 1
+    pre: (lift-at f2) (nebel-free)
+    add: (lift-at f0)
+    del: (lift-at f2)
+  (down f2 f1), cost: 1
+    pre: (lift-at f2) (nebel-free)
+    add: (lift-at f1)
+    del: (lift-at f2)
+  (down f3 f0), cost: 1
+    pre: (lift-at f3) (nebel-free)
+    add: (lift-at f0)
+    del: (lift-at f3)
+  (down f3 f1), cost: 1
+    pre: (lift-at f3) (nebel-free)
+    add: (lift-at f1)
+    del: (lift-at f3)
+  (down f3 f2), cost: 1
+    pre: (lift-at f3) (nebel-free)
+    add: (lift-at f2)
+    del: (lift-at f3)
+  (nebel-close), cost: 0
+    pre: (nebel-copy) (nebel-nopending NOT-boarded p1) (nebel-nopending NOT-served p1) (nebel-nopending boarded p0) (nebel-nopending boarded p1) (nebel-nopending served p1)
+    add: (nebel-free)
+    del: (nebel-copy)
+  (nebel-copy-add NOT-boarded p1), cost: 0
+    pre: (nebel-add NOT-boarded p1) (nebel-copy) (nebel-pending NOT-boarded p1)
+    add: (NOT-boarded p1) (nebel-nopending NOT-boarded p1)
+    del: (nebel-add NOT-boarded p1) (nebel-pending NOT-boarded p1)
+  (nebel-copy-add NOT-served p1), cost: 0
+    pre: (nebel-add NOT-served p1) (nebel-copy) (nebel-pending NOT-served p1)
+    add: (NOT-served p1) (nebel-nopending NOT-served p1)
+    del: (nebel-add NOT-served p1) (nebel-pending NOT-served p1)
+  (nebel-copy-add boarded p0), cost: 0
+    pre: (nebel-add boarded p0) (nebel-copy) (nebel-pending boarded p0)
+    add: (boarded p0) (nebel-nopending boarded p0)
+    del: (nebel-add boarded p0) (nebel-pending boarded p0)
+  (nebel-copy-add boarded p1), cost: 0
+    pre: (nebel-add boarded p1) (nebel-copy) (nebel-pending boarded p1)
+    add: (boarded p1) (nebel-nopending boarded p1)
+    del: (nebel-add boarded p1) (nebel-pending boarded p1)
+  (nebel-copy-add served p1), cost: 0
+    pre: (nebel-add served p1) (nebel-copy) (nebel-pending served p1)
+    add: (nebel-nopending served p1) (served p1)
+    del: (nebel-add served p1) (nebel-pending served p1)
+  (nebel-copy-del NOT-boarded p1), cost: 0
+    pre: (nebel-copy) (nebel-del NOT-boarded p1) (nebel-pending NOT-boarded p1)
+    add: (nebel-nopending NOT-boarded p1)
+    del: (NOT-boarded p1) (nebel-del NOT-boarded p1) (nebel-pending NOT-boarded p1)
+  (nebel-copy-del NOT-served p1), cost: 0
+    pre: (nebel-copy) (nebel-del NOT-served p1) (nebel-pending NOT-served p1)
+    add: (nebel-nopending NOT-served p1)
+    del: (NOT-served p1) (nebel-del NOT-served p1) (nebel-pending NOT-served p1)
+  (nebel-copy-del boarded p0), cost: 0
+    pre: (nebel-copy) (nebel-del boarded p0) (nebel-pending boarded p0)
+    add: (nebel-nopending boarded p0)
+    del: (boarded p0) (nebel-del boarded p0) (nebel-pending boarded p0)
+  (nebel-copy-del boarded p1), cost: 0
+    pre: (nebel-copy) (nebel-del boarded p1) (nebel-pending boarded p1)
+    add: (nebel-nopending boarded p1)
+    del: (boarded p1) (nebel-del boarded p1) (nebel-pending boarded p1)
+  (nebel-copy-del served p1), cost: 0
+    pre: (nebel-copy) (nebel-del served p1) (nebel-pending served p1)
+    add: (nebel-nopending served p1)
+    del: (nebel-del served p1) (nebel-pending served p1) (served p1)
+  (stop f1), cost: 1
+    pre: (NOT-served p1) (lift-at f1) (nebel-free)
+    add: (boarded p1)
+    del: (NOT-boarded p1)
+  (stop f2), cost: 1
+    pre: (boarded p0) (lift-at f2) (nebel-free)
+    add: (served p0)
+    del: (NOT-served p0) (boarded p0)
+  (stop f3), cost: 1
+    pre: (lift-at f3) (nebel-free)
+    add: (nebel-op stop f3)
+    del: (nebel-free)
+  (stop f3 nebel-ce0-act), cost: 0
+    pre: (boarded p1) (nebel-op stop f3)
+    add: (nebel-add NOT-boarded p1) (nebel-add served p1) (nebel-ce stop f3 ce-0) (nebel-del NOT-served p1) (nebel-del boarded p1) (nebel-pending NOT-boarded p1) (nebel-pending NOT-served p1) (nebel-pending boarded p1) (nebel-pending served p1)
+    del: (nebel-nopending NOT-boarded p1) (nebel-nopending NOT-served p1) (nebel-nopending boarded p1) (nebel-nopending served p1)
+  (stop f3 nebel-ce0-blk4), cost: 0
+    pre: (NOT-boarded p1) (nebel-op stop f3)
+    add: (nebel-ce stop f3 ce-0)
+    del:
+  (stop f3 nebel-ce1-act), cost: 0
+    pre: (NOT-served p0) (nebel-op stop f3)
+    add: (nebel-add boarded p0) (nebel-ce stop f3 ce-1) (nebel-pending boarded p0)
+    del: (nebel-nopending boarded p0)
+  (stop f3 nebel-ce1-blk1), cost: 0
+    pre: (nebel-op stop f3) (served p0)
+    add: (nebel-ce stop f3 ce-1)
+    del:
+  (stop f3 nebel-end), cost: 0
+    pre: (nebel-ce stop f3 ce-0) (nebel-ce stop f3 ce-1) (nebel-op stop f3)
+    add: (nebel-copy)
+    del: (nebel-ce stop f3 ce-0) (nebel-ce stop f3 ce-1) (nebel-op stop f3)
+  (up f0 f1), cost: 1
+    pre: (lift-at f0) (nebel-free)
+    add: (lift-at f1)
+    del: (lift-at f0)
+  (up f0 f2), cost: 1
+    pre: (lift-at f0) (nebel-free)
+    add: (lift-at f2)
+    del: (lift-at f0)
+  (up f0 f3), cost: 1
+    pre: (lift-at f0) (nebel-free)
+    add: (lift-at f3)
+    del: (lift-at f0)
+  (up f1 f2), cost: 1
+    pre: (lift-at f1) (nebel-free)
+    add: (lift-at f2)
+    del: (lift-at f1)
+  (up f1 f3), cost: 1
+    pre: (lift-at f1) (nebel-free)
+    add: (lift-at f3)
+    del: (lift-at f1)
+  (up f2 f3), cost: 1
+    pre: (lift-at f2) (nebel-free)
+    add: (lift-at f3)
+    del: (lift-at f2)
+Init State: (NOT-boarded p1) (NOT-served p0) (NOT-served p1) (lift-at f0) (nebel-free) (nebel-nopending NOT-boarded p1) (nebel-nopending NOT-served p1) (nebel-nopending boarded p0) (nebel-nopending boarded p1) (nebel-nopending served p1)
+Goal: (nebel-free) (served p0) (served p1)
