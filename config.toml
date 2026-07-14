@@ -148,6 +148,18 @@ disable = [
 ]
 
 [[tasks]]
+name = "ipc-2000/elevators-adl/s2-0"
+
+[[tasks]]
+name = "ipc-2000/elevators-adl/s10-0"
+disable = [
+    "pddl_compile_away_cond_eff",
+    "lifted_search",
+    "lifted_search_unit_cost",
+]
+
+
+[[tasks]]
 name = "ipc-2000/elevators-strips/s10-0"
 disable = [
     "endomorphism_tss",
@@ -1223,6 +1235,28 @@ disable = [
 ]
 
 [[tasks]]
+name = "ipc-2018/seq-opt/nurikabe/p01"
+disable = [
+    "pddl_compile_away_cond_eff",
+]
+
+[[tasks]]
+name = "ipc-2018/seq-opt/nurikabe/p10"
+disable = [
+    "pddl_compile_away_cond_eff",
+    "lifted_search",
+    "lifted_search_unit_cost",
+    "h2_heur_dyn_prog_init_state",
+    "h2_heur_dyn_prog_mutex",
+    "h2_heur_dyn_prog_plan_states",
+    "hm_h3",
+    "search",
+    "strips_ground_unit_cost", # too large output
+    "strips", # too large output
+]
+
+
+[[tasks]]
 name = "ipc-2018/seq-opt/organic-synthesis/p01"
 
 [[tasks]]
@@ -1244,6 +1278,26 @@ disable = [
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
+]
+
+[[tasks]]
+name = "ipc-2018/seq-opt/settlers/p01"
+disable = [
+    "strips",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_astar_hmax_sql",
+    "pddl_compile_away_cond_eff",
+    "strips_ground_unit_cost",
+]
+
+[[tasks]]
+name = "ipc-2018/seq-opt/settlers/p10"
+disable = [
+    "strips",
+    "lifted_search",
+    "lifted_search_unit_cost",
+    "strips_ground_unit_cost",
+    "pddl_compile_away_cond_eff",
 ]
 
 [[tasks]]

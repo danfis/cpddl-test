@@ -1,0 +1,12 @@
+Goal:
+   (served p0) (served p1)
+   + (NOT-boarded p1) (NOT:boarded p0)
+(stop f2)
+   (boarded p0) (lift-at f2)
+   + (NOT-served p0)
+(stop f3)
+   (NOT-served p0) (boarded p1) (lift-at f3)
+   + (NOT-served p1)
+(stop f3)
+   (boarded p1) (lift-at f3) (served p0)
+   + (NOT-served p1) (NOT:boarded p0)

@@ -1,0 +1,263 @@
+Step 0 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-timber p0 tl18) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (potential v0) (available-stone v0 sl0) (available-timber v0 tl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (potential v1) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p0) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2)
+size: 5
+build-coal-stack p0 :: cost: 10
+    add: (available-timber p0 tl17) (has-coal-stack p0)
+    del: (available-timber p0 tl18) (NOT-has-coal-stack p0)
+build-sawmill p0 :: cost: 10
+    add: (available-timber p0 tl16) (has-sawmill p0)
+    del: (available-timber p0 tl18) (NOT-has-sawmill p0)
+build-cart p0 v0 :: cost: 5
+    add: (available-timber p0 tl17) (is-at v0 p0) (is-cart v0) (space-in v0 spl1) (has-space v0)
+    del: (available-timber p0 tl18) (potential v0)
+build-cart p0 v1 :: cost: 5
+    add: (available-timber p0 tl17) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1)
+    del: (available-timber p0 tl18) (potential v1)
+build-cart p0 v2 :: cost: 5
+    add: (available-timber p0 tl17) (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2)
+    del: (available-timber p0 tl18) (potential v2)
+Step 1 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (potential v0) (available-stone v0 sl0) (available-timber v0 tl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (potential v1) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (available-timber p0 tl17) (has-coal-stack p0)
+size: 5
+build-sawmill p0 :: cost: 10
+    add: (has-sawmill p0) (available-timber p0 tl15)
+    del: (NOT-has-sawmill p0) (available-timber p0 tl17)
+build-cart p0 v0 :: cost: 5
+    add: (available-timber p0 tl16) (is-at v0 p0) (is-cart v0) (space-in v0 spl1) (has-space v0)
+    del: (potential v0) (available-timber p0 tl17)
+build-cart p0 v1 :: cost: 5
+    add: (available-timber p0 tl16) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1)
+    del: (potential v1) (available-timber p0 tl17)
+build-cart p0 v2 :: cost: 5
+    add: (available-timber p0 tl16) (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2)
+    del: (potential v2) (available-timber p0 tl17)
+burn-coal p0 :: cost: 10
+    add: (available-timber p0 tl16) (available-coal p0 cl1) (available-atleast-coal p0 cl1)
+    del: (available-coal p0 cl0) (available-timber p0 tl17)
+Step 2 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-timber v0 tl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (potential v1) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (available-timber p0 tl16) (is-at v0 p0) (is-cart v0) (space-in v0 spl1) (has-space v0)
+size: 8
+load-stone v0 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v0 sl1) (available-atleast-stone v0 sl1) (space-in v0 spl0)
+    del: (available-stone p0 sl8) (available-stone v0 sl0) (space-in v0 spl1) (has-space v0)
+load-ore v0 p0 :: cost: 5
+    add: (space-in v0 spl0) (available-ore p0 ol4) (available-ore v0 ol1) (available-atleast-ore v0 ol1)
+    del: (available-ore p0 ol5) (available-ore v0 ol0) (space-in v0 spl1) (has-space v0)
+load-timber v0 p0 :: cost: 5
+    add: (available-timber p0 tl15) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+    del: (available-timber v0 tl0) (available-timber p0 tl16) (space-in v0 spl1) (has-space v0)
+move-cart v0 p0 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p0)
+build-sawmill p0 :: cost: 10
+    add: (has-sawmill p0) (available-timber p0 tl14)
+    del: (NOT-has-sawmill p0) (available-timber p0 tl16)
+build-cart p0 v1 :: cost: 5
+    add: (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (available-timber p0 tl15)
+    del: (potential v1) (available-timber p0 tl16)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl15)
+    del: (potential v2) (available-timber p0 tl16)
+burn-coal p0 :: cost: 10
+    add: (available-timber p0 tl15) (available-coal p0 cl1) (available-atleast-coal p0 cl1)
+    del: (available-coal p0 cl0) (available-timber p0 tl16)
+Step 3 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (potential v1) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (is-at v0 p0) (is-cart v0) (available-timber p0 tl15) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+size: 6
+unload-timber v0 p0 :: cost: 5
+    add: (available-timber v0 tl0) (available-timber p0 tl16) (space-in v0 spl1) (has-space v0)
+    del: (available-timber p0 tl15) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+move-cart v0 p0 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p0)
+build-sawmill p0 :: cost: 10
+    add: (has-sawmill p0) (available-timber p0 tl13)
+    del: (NOT-has-sawmill p0) (available-timber p0 tl15)
+build-cart p0 v1 :: cost: 5
+    add: (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (available-timber p0 tl14)
+    del: (potential v1) (available-timber p0 tl15)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl14)
+    del: (potential v2) (available-timber p0 tl15)
+burn-coal p0 :: cost: 10
+    add: (available-coal p0 cl1) (available-atleast-coal p0 cl1) (available-timber p0 tl14)
+    del: (available-coal p0 cl0) (available-timber p0 tl15)
+Step 4 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (is-at v0 p0) (is-cart v0) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (available-timber p0 tl14)
+size: 9
+load-stone v1 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v1 sl1) (available-atleast-stone v1 sl1) (space-in v1 spl0)
+    del: (available-stone p0 sl8) (available-stone v1 sl0) (space-in v1 spl1) (has-space v1)
+load-ore v1 p0 :: cost: 5
+    add: (available-ore p0 ol4) (space-in v1 spl0) (available-ore v1 ol1) (available-atleast-ore v1 ol1)
+    del: (available-ore p0 ol5) (available-ore v1 ol0) (space-in v1 spl1) (has-space v1)
+load-timber v1 p0 :: cost: 5
+    add: (available-timber p0 tl13) (space-in v1 spl0) (available-timber v1 tl1) (available-atleast-timber v1 tl1)
+    del: (available-timber v1 tl0) (space-in v1 spl1) (has-space v1) (available-timber p0 tl14)
+unload-timber v0 p0 :: cost: 5
+    add: (available-timber v0 tl0) (space-in v0 spl1) (has-space v0) (available-timber p0 tl15)
+    del: (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (available-timber p0 tl14)
+move-cart v0 p0 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p0)
+move-cart v1 p0 p2 :: cost: 10
+    add: (is-at v1 p2)
+    del: (is-at v1 p0)
+build-sawmill p0 :: cost: 10
+    add: (has-sawmill p0) (available-timber p0 tl12)
+    del: (NOT-has-sawmill p0) (available-timber p0 tl14)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl13)
+    del: (potential v2) (available-timber p0 tl14)
+burn-coal p0 :: cost: 10
+    add: (available-coal p0 cl1) (available-atleast-coal p0 cl1) (available-timber p0 tl13)
+    del: (available-coal p0 cl0) (available-timber p0 tl14)
+Step 5 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (is-cart v0) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (is-at v0 p2) (available-timber p0 tl14)
+size: 10
+load-stone v1 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v1 sl1) (available-atleast-stone v1 sl1) (space-in v1 spl0)
+    del: (available-stone p0 sl8) (available-stone v1 sl0) (space-in v1 spl1) (has-space v1)
+load-ore v1 p0 :: cost: 5
+    add: (available-ore p0 ol4) (space-in v1 spl0) (available-ore v1 ol1) (available-atleast-ore v1 ol1)
+    del: (available-ore p0 ol5) (available-ore v1 ol0) (space-in v1 spl1) (has-space v1)
+load-timber v1 p0 :: cost: 5
+    add: (available-timber p0 tl13) (space-in v1 spl0) (available-timber v1 tl1) (available-atleast-timber v1 tl1)
+    del: (available-timber v1 tl0) (space-in v1 spl1) (has-space v1) (available-timber p0 tl14)
+unload-timber v0 p2 :: cost: 5
+    add: (available-timber v0 tl0) (space-in v0 spl1) (has-space v0) (available-timber p2 tl1) (available-atleast-timber p2 tl1)
+    del: (available-timber p2 tl0) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+move-cart v0 p2 p0 :: cost: 10
+    add: (is-at v0 p0)
+    del: (is-at v0 p2)
+move-cart v0 p2 p1 :: cost: 10
+    add: (is-at v0 p1)
+    del: (is-at v0 p2)
+move-cart v1 p0 p2 :: cost: 10
+    add: (is-at v1 p2)
+    del: (is-at v1 p0)
+build-sawmill p0 :: cost: 10
+    add: (has-sawmill p0) (available-timber p0 tl12)
+    del: (NOT-has-sawmill p0) (available-timber p0 tl14)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl13)
+    del: (potential v2) (available-timber p0 tl14)
+burn-coal p0 :: cost: 10
+    add: (available-coal p0 cl1) (available-atleast-coal p0 cl1) (available-timber p0 tl13)
+    del: (available-coal p0 cl0) (available-timber p0 tl14)
+Step 6 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p0) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (is-cart v0) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (available-timber p0 tl14) (is-at v0 p1)
+size: 9
+load-stone v1 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v1 sl1) (available-atleast-stone v1 sl1) (space-in v1 spl0)
+    del: (available-stone p0 sl8) (available-stone v1 sl0) (space-in v1 spl1) (has-space v1)
+load-ore v1 p0 :: cost: 5
+    add: (available-ore p0 ol4) (space-in v1 spl0) (available-ore v1 ol1) (available-atleast-ore v1 ol1)
+    del: (available-ore p0 ol5) (available-ore v1 ol0) (space-in v1 spl1) (has-space v1)
+load-timber v1 p0 :: cost: 5
+    add: (available-timber p0 tl13) (space-in v1 spl0) (available-timber v1 tl1) (available-atleast-timber v1 tl1)
+    del: (available-timber v1 tl0) (space-in v1 spl1) (has-space v1) (available-timber p0 tl14)
+unload-timber v0 p1 :: cost: 5
+    add: (available-timber v0 tl0) (space-in v0 spl1) (has-space v0) (available-timber p1 tl1) (available-atleast-timber p1 tl1)
+    del: (available-timber p1 tl0) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+move-cart v0 p1 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p1)
+move-cart v1 p0 p2 :: cost: 10
+    add: (is-at v1 p2)
+    del: (is-at v1 p0)
+build-sawmill p0 :: cost: 10
+    add: (has-sawmill p0) (available-timber p0 tl12)
+    del: (NOT-has-sawmill p0) (available-timber p0 tl14)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl13)
+    del: (potential v2) (available-timber p0 tl14)
+burn-coal p0 :: cost: 10
+    add: (available-coal p0 cl1) (available-atleast-coal p0 cl1) (available-timber p0 tl13)
+    del: (available-coal p0 cl0) (available-timber p0 tl14)
+Step 7 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-coal p0 cl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (has-sawmill p0) (is-cart v0) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (available-timber p0 tl12) (is-at v0 p1)
+size: 9
+load-stone v1 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v1 sl1) (available-atleast-stone v1 sl1) (space-in v1 spl0)
+    del: (available-stone p0 sl8) (available-stone v1 sl0) (space-in v1 spl1) (has-space v1)
+load-ore v1 p0 :: cost: 5
+    add: (available-ore p0 ol4) (space-in v1 spl0) (available-ore v1 ol1) (available-atleast-ore v1 ol1)
+    del: (available-ore p0 ol5) (available-ore v1 ol0) (space-in v1 spl1) (has-space v1)
+load-timber v1 p0 :: cost: 5
+    add: (space-in v1 spl0) (available-timber v1 tl1) (available-atleast-timber v1 tl1) (available-timber p0 tl11)
+    del: (available-timber v1 tl0) (space-in v1 spl1) (has-space v1) (available-timber p0 tl12)
+unload-timber v0 p1 :: cost: 5
+    add: (available-timber v0 tl0) (space-in v0 spl1) (has-space v0) (available-timber p1 tl1) (available-atleast-timber p1 tl1)
+    del: (available-timber p1 tl0) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+move-cart v0 p1 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p1)
+move-cart v1 p0 p2 :: cost: 10
+    add: (is-at v1 p2)
+    del: (is-at v1 p0)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl11)
+    del: (potential v2) (available-timber p0 tl12)
+burn-coal p0 :: cost: 10
+    add: (available-coal p0 cl1) (available-atleast-coal p0 cl1) (available-timber p0 tl11)
+    del: (available-coal p0 cl0) (available-timber p0 tl12)
+saw-wood p0 :: cost: 0
+    add: (available-timber p0 tl11) (available-wood p0 wl1) (available-atleast-wood p0 wl1)
+    del: (available-wood p0 wl0) (available-timber p0 tl12)
+Step 8 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (has-sawmill p0) (is-cart v0) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (available-coal p0 cl1) (available-atleast-coal p0 cl1) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (is-at v0 p1) (available-timber p0 tl11)
+size: 10
+load-stone v1 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v1 sl1) (available-atleast-stone v1 sl1) (space-in v1 spl0)
+    del: (available-stone p0 sl8) (available-stone v1 sl0) (space-in v1 spl1) (has-space v1)
+load-ore v1 p0 :: cost: 5
+    add: (available-ore p0 ol4) (space-in v1 spl0) (available-ore v1 ol1) (available-atleast-ore v1 ol1)
+    del: (available-ore p0 ol5) (available-ore v1 ol0) (space-in v1 spl1) (has-space v1)
+load-timber v1 p0 :: cost: 5
+    add: (space-in v1 spl0) (available-timber v1 tl1) (available-atleast-timber v1 tl1) (available-timber p0 tl10)
+    del: (available-timber v1 tl0) (space-in v1 spl1) (has-space v1) (available-timber p0 tl11)
+load-coal v1 p0 :: cost: 5
+    add: (available-coal p0 cl0) (space-in v1 spl0) (available-coal v1 cl1) (available-atleast-coal v1 cl1)
+    del: (available-coal v1 cl0) (space-in v1 spl1) (has-space v1) (available-coal p0 cl1) (available-atleast-coal p0 cl1)
+unload-timber v0 p1 :: cost: 5
+    add: (available-timber v0 tl0) (space-in v0 spl1) (has-space v0) (available-timber p1 tl1) (available-atleast-timber p1 tl1)
+    del: (available-timber p1 tl0) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+move-cart v0 p1 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p1)
+move-cart v1 p0 p2 :: cost: 10
+    add: (is-at v1 p2)
+    del: (is-at v1 p0)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl10)
+    del: (potential v2) (available-timber p0 tl11)
+burn-coal p0 :: cost: 10
+    add: (available-timber p0 tl10) (available-coal p0 cl2) (available-atleast-coal p0 cl2)
+    del: (available-coal p0 cl1) (available-timber p0 tl11)
+saw-wood p0 :: cost: 0
+    add: (available-wood p0 wl1) (available-atleast-wood p0 wl1) (available-timber p0 tl10)
+    del: (available-wood p0 wl0) (available-timber p0 tl11)
+Step 9 (housing p0 hl0) (housing p1 hl0) (housing p2 hl0) (available-stone p0 sl8) (available-atleast-stone p0 sl1) (available-atleast-stone p0 sl2) (available-atleast-stone p0 sl4) (available-atleast-timber p0 tl1) (available-atleast-timber p0 tl2) (available-atleast-timber p0 tl4) (available-ore p0 ol5) (available-atleast-ore p0 ol1) (available-atleast-ore p0 ol2) (available-atleast-ore p0 ol4) (available-wood p0 wl0) (available-iron p0 il0) (available-stone p1 sl0) (available-timber p1 tl0) (available-ore p1 ol0) (available-wood p1 wl0) (available-coal p1 cl0) (available-iron p1 il0) (available-stone p2 sl0) (available-timber p2 tl0) (available-ore p2 ol0) (available-wood p2 wl0) (available-coal p2 cl0) (available-iron p2 il0) (available-stone v0 sl0) (available-ore v0 ol0) (available-wood v0 wl0) (available-coal v0 cl0) (available-iron v0 il0) (available-stone v1 sl0) (available-timber v1 tl0) (available-ore v1 ol0) (available-wood v1 wl0) (available-coal v1 cl0) (available-iron v1 il0) (potential v2) (available-stone v2 sl0) (available-timber v2 tl0) (available-ore v2 ol0) (available-wood v2 wl0) (available-coal v2 cl0) (available-iron v2 il0) (NOT-connected-by-rail p0 p0) (NOT-connected-by-rail p1 p0) (NOT-connected-by-rail p0 p1) (NOT-connected-by-rail p1 p1) (NOT-connected-by-rail p2 p0) (NOT-connected-by-rail p2 p1) (NOT-connected-by-rail p0 p2) (NOT-connected-by-rail p1 p2) (NOT-connected-by-rail p2 p2) (NOT-has-coal-stack p1) (NOT-has-coal-stack p2) (NOT-has-sawmill p1) (NOT-has-sawmill p2) (NOT-has-ironworks p0) (NOT-has-ironworks p1) (NOT-has-ironworks p2) (has-coal-stack p0) (has-sawmill p0) (is-cart v0) (is-at v1 p0) (is-cart v1) (space-in v1 spl1) (has-space v1) (available-atleast-coal p0 cl1) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1) (is-at v0 p1) (available-timber p0 tl10) (available-coal p0 cl2) (available-atleast-coal p0 cl2)
+size: 10
+load-stone v1 p0 :: cost: 5
+    add: (available-stone p0 sl7) (available-stone v1 sl1) (available-atleast-stone v1 sl1) (space-in v1 spl0)
+    del: (available-stone p0 sl8) (available-stone v1 sl0) (space-in v1 spl1) (has-space v1)
+load-ore v1 p0 :: cost: 5
+    add: (available-ore p0 ol4) (space-in v1 spl0) (available-ore v1 ol1) (available-atleast-ore v1 ol1)
+    del: (available-ore p0 ol5) (available-ore v1 ol0) (space-in v1 spl1) (has-space v1)
+load-timber v1 p0 :: cost: 5
+    add: (space-in v1 spl0) (available-timber v1 tl1) (available-atleast-timber v1 tl1) (available-timber p0 tl9)
+    del: (available-timber v1 tl0) (space-in v1 spl1) (has-space v1) (available-timber p0 tl10)
+load-coal v1 p0 :: cost: 5
+    add: (available-coal p0 cl1) (space-in v1 spl0) (available-coal v1 cl1) (available-atleast-coal v1 cl1)
+    del: (available-coal v1 cl0) (space-in v1 spl1) (has-space v1) (available-coal p0 cl2) (available-atleast-coal p0 cl2)
+unload-timber v0 p1 :: cost: 5
+    add: (available-timber v0 tl0) (space-in v0 spl1) (has-space v0) (available-timber p1 tl1) (available-atleast-timber p1 tl1)
+    del: (available-timber p1 tl0) (space-in v0 spl0) (available-timber v0 tl1) (available-atleast-timber v0 tl1)
+move-cart v0 p1 p2 :: cost: 10
+    add: (is-at v0 p2)
+    del: (is-at v0 p1)
+move-cart v1 p0 p2 :: cost: 10
+    add: (is-at v1 p2)
+    del: (is-at v1 p0)
+build-cart p0 v2 :: cost: 5
+    add: (is-at v2 p0) (is-cart v2) (space-in v2 spl1) (has-space v2) (available-timber p0 tl9)
+    del: (potential v2) (available-timber p0 tl10)
+burn-coal p0 :: cost: 10
+    add: (available-timber p0 tl9) (available-coal p0 cl3)
+    del: (available-timber p0 tl10) (available-coal p0 cl2)
+saw-wood p0 :: cost: 0
+    add: (available-wood p0 wl1) (available-atleast-wood p0 wl1) (available-timber p0 tl9)
+    del: (available-wood p0 wl0) (available-timber p0 tl10)

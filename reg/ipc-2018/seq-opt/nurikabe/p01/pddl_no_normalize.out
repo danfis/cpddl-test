@@ -1,0 +1,99 @@
+Domain: nurikabe
+Problem: random-3x3-2
+Require: ff
+Type[4]:
+    [0]: object, parent: -1
+    [1]: cell, parent: 0
+    [2]: num, parent: 0
+    [3]: group, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13
+    [1]: 1 2 3 4 5 6 7 8 9
+    [2]: 0 10 11
+    [3]: 12 13
+Obj[14]:
+    [0]: n0, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
+    [1]: pos-0-0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: pos-0-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: pos-0-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: pos-1-0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: pos-1-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: pos-1-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: pos-2-0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: pos-2-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: pos-2-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: n1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: n2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: g0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: g1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[13]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    next: 2 2 :: read: 1, write: 0, in-init: 1
+    connected: 1 1 :: read: 1, write: 0, in-init: 1
+    source: 1 3 :: read: 1, write: 0, in-init: 1
+    painted: 1 :: read: 1, write: 1, in-init: 0
+    available: 1 :: read: 1, write: 1, in-init: 1
+    part-of: 1 3 :: read: 1, write: 1, in-init: 1
+    blocked: 1 :: read: 1, write: 1, in-init: 0
+    remaining-cells: 3 2 :: read: 1, write: 1, in-init: 1
+    robot-pos: 1 :: read: 1, write: 1, in-init: 1
+    moving: :: read: 1, write: 1, in-init: 1
+    painting: 3 :: read: 1, write: 1, in-init: 0
+    group-painted: 3 :: read: 1, write: 1, in-init: 0
+Function[0]:
+Action[4]:
+    move: ?from:1 ?to:1
+        pre: (and (R:connected ?from ?to) (N:RW:painted ?to) (RW:robot-pos ?from) (RW:moving))
+        eff: (and (N:RW:robot-pos ?from) (RW:robot-pos ?to))
+    start-painting: ?c:1 ?g:3 ?n1:2 ?n2:2
+        pre: (and (R:next ?n2 ?n1) (R:source ?c ?g) (RW:remaining-cells ?g ?n1) (RW:robot-pos ?c) (RW:moving))
+        eff: (and (RW:painted ?c) (N:RW:remaining-cells ?g ?n1) (RW:remaining-cells ?g ?n2) (N:RW:moving) (RW:painting ?g))
+    move-painting: ?from:1 ?to:1 ?g:3 ?n1:2 ?n2:2
+        pre: (and (R:next ?n2 ?n1) (R:connected ?from ?to) (N:RW:painted ?to) (N:RW:blocked ?to) (RW:remaining-cells ?g ?n1) (RW:robot-pos ?from) (RW:painting ?g))
+        eff: (and (RW:painted ?to) (N:RW:remaining-cells ?g ?n1) (RW:remaining-cells ?g ?n2) (N:RW:robot-pos ?from) (RW:robot-pos ?to) (forall (?cadj:1 I[0]:?from:1 I[1]:?to:1 I[2]:?g:3 I[3]:?n1:2 I[4]:?n2:2) (when (and (R:connected ?to ?cadj) (RW:available ?cadj)) (and (N:RW:available ?cadj) (RW:part-of ?cadj ?g)))) (forall (?cadj:1 I[0]:?from:1 I[1]:?to:1 I[2]:?g:3 I[3]:?n1:2 I[4]:?n2:2) (when (and (R:connected ?to ?cadj) (N:RW:available ?cadj) (N:RW:part-of ?cadj ?g)) (RW:blocked ?cadj))))
+    end-painting: ?g:3
+        pre: (and (RW:remaining-cells ?g n0) (RW:painting ?g))
+        eff: (and (RW:moving) (N:RW:painting ?g) (RW:group-painted ?g))
+Init[39]:
+  S:(next n0 n1)
+  S:(next n1 n2)
+  S:(connected pos-0-0 pos-0-1)
+  S:(connected pos-0-0 pos-1-0)
+  S:(connected pos-0-1 pos-0-0)
+  S:(connected pos-0-1 pos-0-2)
+  S:(connected pos-0-1 pos-1-1)
+  S:(connected pos-0-2 pos-0-1)
+  S:(connected pos-0-2 pos-1-2)
+  S:(connected pos-1-0 pos-0-0)
+  S:(connected pos-1-0 pos-1-1)
+  S:(connected pos-1-0 pos-2-0)
+  S:(connected pos-1-1 pos-0-1)
+  S:(connected pos-1-1 pos-1-0)
+  S:(connected pos-1-1 pos-1-2)
+  S:(connected pos-1-1 pos-2-1)
+  S:(connected pos-1-2 pos-0-2)
+  S:(connected pos-1-2 pos-1-1)
+  S:(connected pos-1-2 pos-2-2)
+  S:(connected pos-2-0 pos-1-0)
+  S:(connected pos-2-0 pos-2-1)
+  S:(connected pos-2-1 pos-1-1)
+  S:(connected pos-2-1 pos-2-0)
+  S:(connected pos-2-1 pos-2-2)
+  S:(connected pos-2-2 pos-1-2)
+  S:(connected pos-2-2 pos-2-1)
+  S:(source pos-0-0 g0)
+  S:(source pos-2-1 g1)
+  (available pos-0-2)
+  (available pos-1-2)
+  (part-of pos-0-1 g0)
+  (part-of pos-1-0 g0)
+  (part-of pos-1-1 g1)
+  (part-of pos-2-0 g1)
+  (part-of pos-2-2 g1)
+  (remaining-cells g0 n2)
+  (remaining-cells g1 n1)
+  (robot-pos pos-0-0)
+  (moving)
+Init[0]:
+Goal: (and (RW:group-painted g0) (RW:group-painted g1))
+Metric: no-metric

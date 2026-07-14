@@ -1,0 +1,88 @@
+Fact[16]:
+  (NOT-boarded p1)
+  (NOT-served p0)
+  (NOT-served p1)
+  (boarded p0)
+  (boarded p1)
+  (lift-at f0)
+  (lift-at f1)
+  (lift-at f2)
+  (lift-at f3)
+  (served p0)
+  (served p1)
+  (NOT-boarded p1+NOT-served p0)
+  (NOT-boarded p1+served p1)
+  (NOT-boarded p1+NOT-served p0+served p1)
+  (NOT-served p0+NOT-served p1)
+  (NOT-boarded p1+NOT-served p0+NOT-served p1+served p1)
+Op[17]:
+  (down f1 f0), cost: 1
+    pre: (lift-at f1)
+    add: (lift-at f0)
+    del: (lift-at f1)
+  (down f2 f0), cost: 1
+    pre: (lift-at f2)
+    add: (lift-at f0)
+    del: (lift-at f2)
+  (down f2 f1), cost: 1
+    pre: (lift-at f2)
+    add: (lift-at f1)
+    del: (lift-at f2)
+  (down f3 f0), cost: 1
+    pre: (lift-at f3)
+    add: (lift-at f0)
+    del: (lift-at f3)
+  (down f3 f1), cost: 1
+    pre: (lift-at f3)
+    add: (lift-at f1)
+    del: (lift-at f3)
+  (down f3 f2), cost: 1
+    pre: (lift-at f3)
+    add: (lift-at f2)
+    del: (lift-at f3)
+  (stop f1), cost: 1
+    pre: (NOT-served p1) (lift-at f1)
+    add: (boarded p1)
+    del: (NOT-boarded p1) (NOT-boarded p1+NOT-served p0) (NOT-boarded p1+served p1) (NOT-boarded p1+NOT-served p0+served p1) (NOT-boarded p1+NOT-served p0+NOT-served p1+served p1)
+  (stop f2), cost: 1
+    pre: (boarded p0) (lift-at f2)
+    add: (served p0)
+    del: (NOT-served p0) (boarded p0) (NOT-boarded p1+NOT-served p0) (NOT-boarded p1+NOT-served p0+served p1) (NOT-served p0+NOT-served p1) (NOT-boarded p1+NOT-served p0+NOT-served p1+served p1)
+  (stop f3), cost: 1
+    pre: (NOT-boarded p1) (NOT-served p0) (lift-at f3) (NOT-boarded p1+NOT-served p0)
+    add: (boarded p0)
+    del:
+  (stop f3), cost: 1
+    pre: (NOT-served p0) (boarded p1) (lift-at f3)
+    add: (NOT-boarded p1) (boarded p0) (served p1) (NOT-boarded p1+NOT-served p0) (NOT-boarded p1+served p1) (NOT-boarded p1+NOT-served p0+served p1)
+    del: (NOT-served p1) (boarded p1) (NOT-served p0+NOT-served p1) (NOT-boarded p1+NOT-served p0+NOT-served p1+served p1)
+  (stop f3), cost: 1
+    pre: (boarded p1) (lift-at f3) (served p0)
+    add: (NOT-boarded p1) (served p1) (NOT-boarded p1+served p1)
+    del: (NOT-served p1) (boarded p1) (NOT-served p0+NOT-served p1) (NOT-boarded p1+NOT-served p0+NOT-served p1+served p1)
+  (up f0 f1), cost: 1
+    pre: (lift-at f0)
+    add: (lift-at f1)
+    del: (lift-at f0)
+  (up f0 f2), cost: 1
+    pre: (lift-at f0)
+    add: (lift-at f2)
+    del: (lift-at f0)
+  (up f0 f3), cost: 1
+    pre: (lift-at f0)
+    add: (lift-at f3)
+    del: (lift-at f0)
+  (up f1 f2), cost: 1
+    pre: (lift-at f1)
+    add: (lift-at f2)
+    del: (lift-at f1)
+  (up f1 f3), cost: 1
+    pre: (lift-at f1)
+    add: (lift-at f3)
+    del: (lift-at f1)
+  (up f2 f3), cost: 1
+    pre: (lift-at f2)
+    add: (lift-at f3)
+    del: (lift-at f2)
+Init State: (NOT-boarded p1) (NOT-served p0) (NOT-served p1) (lift-at f0) (NOT-boarded p1+NOT-served p0) (NOT-served p0+NOT-served p1)
+Goal: (served p0) (served p1)
