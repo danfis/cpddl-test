@@ -89,7 +89,7 @@ static void addBiclique(const pddl_iset_t *left,
                         void *ud)
 {
     pddl_set_iset_t *sset = ud;
-    assert(pddlISetIsDisjunct(left, right));
+    assert(pddlISetIsDisjoint(left, right));
     PDDL_ISET(biclique);
     //if (pddlISetCmp(left, right) < 0){
         pddlISetUnion(&biclique, left);
