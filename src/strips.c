@@ -151,6 +151,93 @@ TEST(strips_ce, lmg)
     pddlStripsPrintDebug(&C.strips, stdout);
 }
 
+static int condEffCheckAtom(int fact_id)
+{
+    const pddl_fact_t *fact = C.strips.fact.fact[fact_id];
+    if (fact->neg_of >= 0 && fact->neg_of < fact_id)
+        return fact->neg_of;
+    return fact_id;
+}
+
+static int condEffCheckAtomsOverlap(const pddl_iset_t *eff,
+                                    const pddl_iset_t *cond_atoms)
+{
+    PDDL_ISET_FOR_EACH(eff, fact_id){
+        if (pddlISetIn(condEffCheckAtom(fact_id), cond_atoms))
+            return 1;
+    }
+    return 0;
+}
+
+// Returns true if no effect of op shares an atom with the condition of
+// another conditional effect of op, i.e., the interference cannot be
+// detected even syntactically
+static int condEffCheckSyntaxNonInterfering(const pddl_strips_op_t *op)
+{
+    for (int ti = 0; ti < op->cond_eff_size; ++ti){
+        PDDL_ISET(cond_atoms);
+        PDDL_ISET_FOR_EACH(&op->cond_eff[ti].pre, fact_id)
+            pddlISetAdd(&cond_atoms, condEffCheckAtom(fact_id));
+
+        for (int si = -1; si < op->cond_eff_size; ++si){
+            if (si == ti)
+                continue;
+            const pddl_iset_t *add = &op->add_eff;
+            const pddl_iset_t *del = &op->del_eff;
+            if (si >= 0){
+                add = &op->cond_eff[si].add_eff;
+                del = &op->cond_eff[si].del_eff;
+            }
+            if (condEffCheckAtomsOverlap(add, &cond_atoms)
+                    || condEffCheckAtomsOverlap(del, &cond_atoms)){
+                pddlISetFree(&cond_atoms);
+                return 0;
+            }
+        }
+        pddlISetFree(&cond_atoms);
+    }
+    return 1;
+}
+
+TEST(strips_cond_eff_check, strips_ce)
+{
+    if (!C.strips.has_cond_eff)
+        return;
+
+    // h^2 does not support conditional effects, so the mutexes are
+    // derived from the fact negations and the grounded mutex groups
+    pddl_mutex_pairs_t mutex;
+    pddlMutexPairsInitStrips(&mutex, &C.strips);
+    pddlMutexPairsAddNegFacts(&mutex, &C.strips.fact);
+    pddlMutexPairsAddMGroups(&mutex, &C.mg);
+
+    printf("non-interfering: %d\n",
+           pddlStripsOpsCondEffsAreNonInterfering(&C.strips.op, NULL));
+    printf("consistent: %d\n",
+           pddlStripsOpsCondEffsAreConsistent(&C.strips.op, NULL));
+    printf("non-interfering mutex: %d\n",
+           pddlStripsOpsCondEffsAreNonInterfering(&C.strips.op, &mutex));
+    printf("consistent mutex: %d\n",
+           pddlStripsOpsCondEffsAreConsistent(&C.strips.op, &mutex));
+
+    for (int op_id = 0; op_id < C.strips.op.op_size; ++op_id){
+        const pddl_strips_op_t *op = C.strips.op.op[op_id];
+        if (op->cond_eff_size == 0)
+            continue;
+        pddl_bool_t noninf = pddlStripsOpCondEffsAreNonInterfering(op, NULL);
+        pddl_bool_t consist = pddlStripsOpCondEffsAreConsistent(op, NULL);
+        // The semantic test refines the syntactic one
+        if (condEffCheckSyntaxNonInterfering(op))
+            assert(noninf);
+        // Adding mutexes can only prove more, never less
+        if (noninf)
+            assert(pddlStripsOpCondEffsAreNonInterfering(op, &mutex));
+        if (consist)
+            assert(pddlStripsOpCondEffsAreConsistent(op, &mutex));
+    }
+    pddlMutexPairsFree(&mutex);
+}
+
 TEST(strips_nebel, lmg)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
