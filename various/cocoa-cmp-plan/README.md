@@ -9,8 +9,8 @@ AAAI 2024) on the level of optimal planning.
 For every task the optimal plan cost (A*/LM-cut via `bin/pddl-tool gplan`)
 is computed for
 
-- the task compiled with `--ce` (exponential compilation, baseline),
-- the task compiled with `--ce-cocoa`,
+- the task compiled with `--ce exp` (exponential compilation, baseline),
+- the task compiled with `--ce cocoa`,
 - the output of the reference compiler (`cocoa2.0.py --translation COCOA`),
 
 and compared with each other and with the optimal cost recorded in the
@@ -26,13 +26,13 @@ Compile the project first (the test needs `bin/pddl-tool`), then:
 
     ./run.sh
 
-The script first fetches the reference implementation into `../cocoa-ref`
+The script first fetches the reference implementation into `./cocoa-ref`
 and prepares a python virtual environment with its dependencies (bidict,
 sympy, networkx, matplotlib, click), so the reference project does not
 need to be stored in this repository; override the location with the
 `COCOA_REF` environment variable. A completed preparation is marked with
 a stamp file and skipped on subsequent runs; an interrupted preparation
-is repaired automatically, and deleting `../cocoa-ref` forces a fresh
+is repaired automatically, and deleting `./cocoa-ref` forces a fresh
 one. The preparation requires network access and python3-venv. All
 artifacts (compiled tasks, plans, logs) are written to `./out`.
 

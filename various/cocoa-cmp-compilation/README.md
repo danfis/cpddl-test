@@ -9,7 +9,7 @@ For every task, `run.sh` exports three ground tasks with
 `bin/pddl-tool strips-as-py`:
 
 - the original grounded task with conditional effects preserved,
-- the task compiled with `--ce-cocoa`,
+- the task compiled with `--ce cocoa`,
 - the reference's compiled PDDL, grounded by cpddl,
 
 and `compare.py` then runs seeded random walks on the original task.
@@ -34,13 +34,13 @@ Compile the project first (the test needs `bin/pddl-tool`), then:
 
     ./run.sh
 
-The script first fetches the reference implementation into `../cocoa-ref`
+The script first fetches the reference implementation into `./cocoa-ref`
 and prepares a python virtual environment with its dependencies, so the
 reference project does not need to be stored in this repository; override
 the location with the `COCOA_REF` environment variable. A completed
 preparation is marked with a stamp file and skipped on subsequent runs;
 an interrupted preparation is repaired automatically, and deleting
-`../cocoa-ref` forces a fresh one. The preparation requires network
+`./cocoa-ref` forces a fresh one. The preparation requires network
 access and python3-venv. All artifacts are written to `./out`.
 
 ## Exit code and known deviation of the reference implementation

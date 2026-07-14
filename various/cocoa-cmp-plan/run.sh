@@ -5,16 +5,16 @@
 # planning.
 #
 # For every task the following optimal-plan costs are compared:
-#   ce     -- bin/pddl-tool gplan astar/lmcut with --ce (exponential
+#   exp    -- bin/pddl-tool gplan astar/lmcut with --ce exp (exponential
 #             compilation, long-established baseline)
-#   cocoa  -- bin/pddl-tool gplan astar/lmcut with --ce-cocoa
+#   cocoa  -- bin/pddl-tool gplan astar/lmcut with --ce cocoa
 #   ref    -- reference cocoa2.0.py COCOA compilation of the PDDL input,
 #             then bin/pddl-tool gplan astar/lmcut on the compiled task
 #             (no compilation flags needed; the compiled task is simple)
 #   known  -- optimal cost recorded in the task's .plan file (or UNSOLV
 #             for a .unsolvable marker), if present
 #
-# The reference implementation is cloned and set up in ../cocoa-ref on the
+# The reference implementation is cloned and set up in ./cocoa-ref on the
 # first run (override the location with the COCOA_REF environment
 # variable). All artifacts are written to ./out.
 #
@@ -121,9 +121,9 @@ run_task() {
         ref_cost=$(plan_cost $cdom $cprob $dir/ref-plan.log)
     fi
 
-    local ce_cost cocoa_cost
-    ce_cost=$(plan_cost $dom $prob $dir/ce.log --ce)
-    cocoa_cost=$(plan_cost $dom $prob $dir/cocoa.log --ce-cocoa)
+    local exp_cost cocoa_cost
+    exp_cost=$(plan_cost $dom $prob $dir/exp.log --ce exp)
+    cocoa_cost=$(plan_cost $dom $prob $dir/cocoa.log --ce cocoa)
 
     # Optimal cost recorded in the tests repository, if available
     local plan_file=${prob%.pddl}.plan
@@ -134,15 +134,15 @@ run_task() {
         known="UNSOLV"
     fi
 
-    # Verdict: ce, cocoa and ref must agree; known cost checked when
+    # Verdict: exp, cocoa and ref must agree; known cost checked when
     # present. The known unsoundness of the reference implementation
-    # (ce == cocoa == known, only ref deviates by being solvable) is
+    # (exp == cocoa == known, only ref deviates by being solvable) is
     # reported as REF-BUG and does not fail the test.
     local verdict="PASS"
-    if [ "$ce_cost" != "$cocoa_cost" ] || \
-            { [ "$known" != "-" ] && [ "$known" != "$ce_cost" ]; }; then
+    if [ "$exp_cost" != "$cocoa_cost" ] || \
+            { [ "$known" != "-" ] && [ "$known" != "$exp_cost" ]; }; then
         verdict="FAIL"
-    elif [ "$ce_cost" != "$ref_cost" ]; then
+    elif [ "$exp_cost" != "$ref_cost" ]; then
         verdict="REF-BUG"
     fi
     if [ "$verdict" = "FAIL" ]; then
@@ -150,7 +150,7 @@ run_task() {
     fi
 
     RESULTS+=("$(printf '%-22s %10s %10s %10s %10s   %s' \
-                 $name "$ce_cost" "$cocoa_cost" "$ref_cost" "$known" $verdict)")
+                 $name "$exp_cost" "$cocoa_cost" "$ref_cost" "$known" $verdict)")
 }
 
 run_task wumpus-p01 $TESTS/pddl/various/wumpus/domain.pddl \
@@ -168,7 +168,7 @@ run_task nurikabe-p01 $TESTS/pddl/ipc-2018/seq-opt/nurikabe/domain.pddl \
                       $TESTS/pddl/ipc-2018/seq-opt/nurikabe/p01.pddl
 
 echo
-printf '%-22s %10s %10s %10s %10s   %s\n' task ce cocoa ref known verdict
+printf '%-22s %10s %10s %10s %10s   %s\n' task exp cocoa ref known verdict
 for r in "${RESULTS[@]}"; do
     echo "$r"
 done

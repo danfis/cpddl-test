@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Ad-hoc semantic + structural comparison of conditional-effect
-compilations: cpddl's --ce-cocoa vs the reference implementation
+compilations: cpddl's --ce cocoa vs the reference implementation
 (https://gitlab.com/EdmondDantes/cocoa2.0).
 
 Inputs (per task): three strips-as-py exports produced by bin/pddl-tool:

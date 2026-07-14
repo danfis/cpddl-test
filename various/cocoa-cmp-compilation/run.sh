@@ -7,14 +7,14 @@
 # For every task three ground tasks are exported with
 # "bin/pddl-tool strips-as-py":
 #   *-orig.py -- the original grounded task, conditional effects preserved
-#   *-ours.py -- the task compiled with --ce-cocoa
+#   *-ours.py -- the task compiled with --ce cocoa
 #   *-ref.py  -- the reference's compiled PDDL, grounded by cpddl
 # and compare.py then simulates seeded random walks on the original task,
 # replaying every operator application through the compiled operator
 # chains of both compilations and comparing the projected states with the
 # ground-truth conditional-effect semantics. See compare.py for details.
 #
-# The reference implementation is cloned and set up in ../cocoa-ref on the
+# The reference implementation is cloned and set up in ./cocoa-ref on the
 # first run (override the location with the COCOA_REF environment
 # variable). All artifacts are written to ./out.
 #
@@ -93,9 +93,9 @@ prep() {
 
     $TOOL strips-as-py $dir/orig.py $dom $prob >$dir/orig.log 2>&1 \
         || { echo "$name: export of the original task failed"; exit 1; }
-    $TOOL strips-as-py --ce-cocoa $dir/ours.py $dom $prob \
+    $TOOL strips-as-py --ce cocoa $dir/ours.py $dom $prob \
         >$dir/ours.log 2>&1 \
-        || { echo "$name: export of the --ce-cocoa task failed"; exit 1; }
+        || { echo "$name: export of the --ce cocoa task failed"; exit 1; }
     $TOOL strips-as-py $dir/ref.py $cdom $cprob >$dir/ref.log 2>&1 \
         || { echo "$name: export of the reference task failed"; exit 1; }
 
