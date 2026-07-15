@@ -355,6 +355,169 @@ TEST(prune_strips_apply_each_h2fwbw, prune_strips)
     pddlStripsFree(&strips2);
 }
 
+static void condEffAddFact(pddl_facts_t *fs, const char *name)
+{
+    pddl_fact_t f;
+    pddlFactInit(&f);
+    f.name = (char *)name;
+    pddlFactsAdd(fs, &f);
+}
+
+static void condEffAddCE(pddl_strips_op_t *op,
+                         int pre_fact,
+                         int add_fact)
+{
+    pddl_strips_op_t ce;
+    pddlStripsOpInit(&ce);
+    pddlISetAdd(&ce.pre, pre_fact);
+    pddlISetAdd(&ce.add_eff, add_fact);
+    pddlStripsOpAddCondEff(op, &ce);
+    pddlStripsOpFree(&ce);
+}
+
+TEST_ONCE(prune_strips_cond_eff)
+{
+    pddl_err_t err;
+    pddlErrInit(&err);
+
+    // The op-id invariant of the set: at most one element per op_id
+    pddl_strips_op_ce_ids_set_t set;
+    pddlStripsOpCEIdsSetInit(&set);
+    pddlStripsOpCEIdsSetAdd(&set, 5, 1);
+    pddlStripsOpCEIdsSetAdd(&set, 5, 2);
+    pddlStripsOpCEIdsSetAdd(&set, 5, 1);
+    pddlStripsOpCEIdsSetAdd(&set, 7, 0);
+    assert(pddlStripsOpCEIdsSetSize(&set) == 2);
+    assert(pddlStripsOpCEIdsSetNumCEIds(&set) == 3);
+    pddlStripsOpCEIdsSetFree(&set);
+
+    // Synthetic task with facts f0..f4 and mutex (f1,f2)
+    pddl_strips_t strips;
+    pddlStripsInit(&strips);
+    condEffAddFact(&strips.fact, "f0");
+    condEffAddFact(&strips.fact, "f1");
+    condEffAddFact(&strips.fact, "f2");
+    condEffAddFact(&strips.fact, "f3");
+    condEffAddFact(&strips.fact, "f4");
+    pddlISetAdd(&strips.init, 0);
+    pddlISetAdd(&strips.goal, 4);
+
+    // op0: pre={f1}, add={f0,f3};
+    //      ce0: pre={f2}, add={f3} -> {f1,f2} is mutex -> unreachable
+    //      ce1: pre={f3}, add={f4} -> {f1,f3} is not mutex -> stays
+    pddl_strips_op_t op;
+    pddlStripsOpInit(&op);
+    op.name = PDDL_STRDUP("op-keep-ce");
+    pddlISetAdd(&op.pre, 1);
+    pddlISetAdd(&op.add_eff, 0);
+    pddlISetAdd(&op.add_eff, 3);
+    condEffAddCE(&op, 2, 3);
+    condEffAddCE(&op, 3, 4);
+    pddlStripsOpsAdd(&strips.op, &op);
+    pddlStripsOpFree(&op);
+
+    // op1: pre={f1}, no unconditional effects;
+    //      ce0: pre={f2}, add={f4} -> unreachable -> op1 becomes useless
+    pddlStripsOpInit(&op);
+    op.name = PDDL_STRDUP("op-useless");
+    pddlISetAdd(&op.pre, 1);
+    condEffAddCE(&op, 2, 4);
+    pddlStripsOpsAdd(&strips.op, &op);
+    pddlStripsOpFree(&op);
+
+    // op2: pre={f0}, add={f1}, no conditional effects
+    pddlStripsOpInit(&op);
+    op.name = PDDL_STRDUP("op-no-ce");
+    pddlISetAdd(&op.pre, 0);
+    pddlISetAdd(&op.add_eff, 1);
+    pddlStripsOpsAdd(&strips.op, &op);
+    pddlStripsOpFree(&op);
+
+    strips.has_cond_eff = pddl_true;
+
+    pddl_mutex_pairs_t mutex;
+    pddlMutexPairsInitStrips(&mutex, &strips);
+    pddlMutexPairsAdd(&mutex, 1, 2);
+
+    // Direct check of pddlStripsFindUnreachableCondEffs()
+    pddl_strips_op_ce_ids_set_t unreach;
+    pddlStripsOpCEIdsSetInit(&unreach);
+    int ret = pddlStripsFindUnreachableCondEffs(&strips, &mutex,
+                                                &unreach, &err);
+    assert(ret == 0);
+    assert(pddlStripsOpCEIdsSetSize(&unreach) == 2);
+    assert(pddlStripsOpCEIdsSetNumCEIds(&unreach) == 2);
+    const pddl_strips_op_ce_ids_t *e = pddlStripsOpCEIdsSetGet(&unreach, 0);
+    assert(e->op_id == 0);
+    assert(pddlISetSize(&e->ce_id) == 1);
+    assert(pddlISetGet(&e->ce_id, 0) == 0);
+    e = pddlStripsOpCEIdsSetGet(&unreach, 1);
+    assert(e->op_id == 1);
+    assert(pddlISetSize(&e->ce_id) == 1);
+    assert(pddlISetGet(&e->ce_id, 0) == 0);
+    pddlStripsOpCEIdsSetFree(&unreach);
+
+    // The same through the pruning pipeline
+    pddl_prune_strips_t prune;
+    pddlPruneStripsInit(&prune);
+    pddlPruneStripsAddUnreachOps(&prune);
+    ret = pddlPruneStripsExecute(&prune, &strips, NULL, &mutex, &err);
+    assert(ret == 0);
+    pddlPruneStripsFree(&prune);
+
+    assert(strips.op.op_size == 2);
+    assert(strcmp(strips.op.op[0]->name, "op-keep-ce") == 0);
+    assert(strips.op.op[0]->cond_eff_size == 1);
+    assert(pddlISetGet(&strips.op.op[0]->cond_eff[0].pre, 0) == 3);
+    assert(strcmp(strips.op.op[1]->name, "op-no-ce") == 0);
+    assert(strips.op.op[1]->cond_eff_size == 0);
+    assert(strips.has_cond_eff);
+
+    printf("ops: %d\n", strips.op.op_size);
+    for (int i = 0; i < strips.op.op_size; ++i){
+        printf("  (%s) cond-effs: %d\n",
+               strips.op.op[i]->name, strips.op.op[i]->cond_eff_size);
+    }
+    fflush(stdout);
+
+    pddlMutexPairsFree(&mutex);
+    pddlStripsFree(&strips);
+}
+
+TEST(prune_strips_ce_unreach, strips_ce)
+{
+    // Skip tasks without conditional effects
+    if (!C.strips.has_cond_eff)
+        return;
+
+    pddlMutexPairsFree(&C.mutex);
+    pddlMutexPairsInitStrips(&C.mutex, &C.strips);
+    C.mutex_set = 1;
+    pddlMutexPairsAddMGroups(&C.mutex, &C.mg);
+
+    int ces_before = 0;
+    for (int i = 0; i < C.strips.op.op_size; ++i)
+        ces_before += C.strips.op.op[i]->cond_eff_size;
+
+    pddl_prune_strips_t prune;
+    pddlPruneStripsInit(&prune);
+    pddlPruneStripsAddUnreachOps(&prune);
+    int ret = pddlPruneStripsExecute(&prune, &C.strips, &C.mg, &C.mutex,
+                                     &C.err);
+    assert(ret == 0);
+    pddlPruneStripsFree(&prune);
+
+    int ces_after = 0;
+    for (int i = 0; i < C.strips.op.op_size; ++i)
+        ces_after += C.strips.op.op[i]->cond_eff_size;
+    assert(ces_after <= ces_before);
+
+    printf("facts: %d, ops: %d, cond-effs: %d -> %d\n",
+           C.strips.fact.fact_size, C.strips.op.op_size,
+           ces_before, ces_after);
+    fflush(stdout);
+}
+
 TEST_COND(prune_strips_op_mutex, prune_strips, BLISS)
 {
     names_t facts_before, ops_before;
