@@ -84,6 +84,38 @@ static void printSummary(const char *prefix,
     fflush(stdout);
 }
 
+static void assertSameStrips(const pddl_strips_t *a, const pddl_strips_t *b)
+{
+    assert(a->fact.fact_size == b->fact.fact_size);
+    assert(a->op.op_size == b->op.op_size);
+    assert(a->goal_is_unreachable == b->goal_is_unreachable);
+
+    for (int i = 0; i < a->fact.fact_size; ++i)
+        assert(strcmp(a->fact.fact[i]->name, b->fact.fact[i]->name) == 0);
+
+    assert(pddlISetEq(&a->init, &b->init));
+    assert(pddlISetEq(&a->goal, &b->goal));
+
+    for (int i = 0; i < a->op.op_size; ++i){
+        const pddl_strips_op_t *op1 = a->op.op[i];
+        const pddl_strips_op_t *op2 = b->op.op[i];
+        assert(strcmp(op1->name, op2->name) == 0);
+        assert(op1->cost == op2->cost);
+        assert(pddlISetEq(&op1->pre, &op2->pre));
+        assert(pddlISetEq(&op1->add_eff, &op2->add_eff));
+        assert(pddlISetEq(&op1->del_eff, &op2->del_eff));
+
+        assert(op1->cond_eff_size == op2->cond_eff_size);
+        for (int ci = 0; ci < op1->cond_eff_size; ++ci){
+            const pddl_strips_op_cond_eff_t *ce1 = op1->cond_eff + ci;
+            const pddl_strips_op_cond_eff_t *ce2 = op2->cond_eff + ci;
+            assert(pddlISetEq(&ce1->pre, &ce2->pre));
+            assert(pddlISetEq(&ce1->add_eff, &ce2->add_eff));
+            assert(pddlISetEq(&ce1->del_eff, &ce2->del_eff));
+        }
+    }
+}
+
 TEST(prune_strips, lmg)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
@@ -246,6 +278,81 @@ TEST(prune_strips_h3fw, prune_strips)
     assert(ret == 0);
     pddlPruneStripsFree(&prune);
     printSummary("h3fw:", &facts_before, &ops_before);
+}
+
+TEST(prune_strips_apply_each_h2fw, prune_strips)
+{
+    pddl_strips_t strips2;
+    pddlStripsInitCopy(&strips2, &C.strips);
+
+    pddl_prune_strips_t prune;
+    pddlPruneStripsInit(&prune);
+    pddlPruneStripsSetAlwaysApply(&prune, pddl_false);
+    pddlPruneStripsAddIrr(&prune);
+    pddlPruneStripsAddH2Fw(&prune, -1);
+    int ret = pddlPruneStripsExecute(&prune, &C.strips, NULL, NULL, &C.err);
+    assert(ret == 0);
+    pddlPruneStripsFree(&prune);
+
+    pddlPruneStripsInit(&prune);
+    pddlPruneStripsSetAlwaysApply(&prune, pddl_true);
+    pddlPruneStripsAddIrr(&prune);
+    pddlPruneStripsAddH2Fw(&prune, -1);
+    ret = pddlPruneStripsExecute(&prune, &strips2, NULL, NULL, &C.err);
+    assert(ret == 0);
+    pddlPruneStripsFree(&prune);
+
+    assertSameStrips(&C.strips, &strips2);
+    pddlStripsFree(&strips2);
+}
+
+static void addH2FwBwPipeline(pddl_prune_strips_t *prune)
+{
+    pddlPruneStripsAddUnreachOps(prune);
+    pddlPruneStripsAddIrrPreHm(prune);
+    pddlPruneStripsAddFAMGroupDeadEnd(prune);
+    pddlPruneStripsAddH2FwBw(prune, PDDL_HM_MUTEX_TASK_MG_STRIPS,
+                             pddl_true, -1);
+    pddlPruneStripsAddIrr(prune);
+    pddlPruneStripsAddRmUselessDelEffs(prune);
+    pddlPruneStripsAddDedup(prune);
+}
+
+TEST(prune_strips_apply_each_h2fwbw, prune_strips)
+{
+    pddl_strips_t strips2;
+    pddlStripsInitCopy(&strips2, &C.strips);
+    pddl_mgroups_t mg2;
+    pddlMGroupsInitCopy(&mg2, &C.mg);
+    pddl_mutex_pairs_t mutex2;
+    pddlMutexPairsInitStrips(&mutex2, &strips2);
+
+    pddlMutexPairsAddMGroups(&C.mutex, &C.mg);
+    pddlMutexPairsAddMGroups(&mutex2, &mg2);
+
+    pddl_prune_strips_t prune;
+    pddlPruneStripsInit(&prune);
+    pddlPruneStripsSetAlwaysApply(&prune, pddl_false);
+    addH2FwBwPipeline(&prune);
+    int ret = pddlPruneStripsExecute(&prune, &C.strips, &C.mg, &C.mutex,
+                                     &C.err);
+    assert(ret == 0);
+    pddlPruneStripsFree(&prune);
+
+    pddlPruneStripsInit(&prune);
+    pddlPruneStripsSetAlwaysApply(&prune, pddl_true);
+    addH2FwBwPipeline(&prune);
+    ret = pddlPruneStripsExecute(&prune, &strips2, &mg2, &mutex2, &C.err);
+    assert(ret == 0);
+    pddlPruneStripsFree(&prune);
+
+    assertSameStrips(&C.strips, &strips2);
+    assert(C.mutex.fact_size == mutex2.fact_size);
+    assert(C.mutex.num_mutex_pairs == mutex2.num_mutex_pairs);
+
+    pddlMutexPairsFree(&mutex2);
+    pddlMGroupsFree(&mg2);
+    pddlStripsFree(&strips2);
 }
 
 TEST_COND(prune_strips_op_mutex, prune_strips, BLISS)
