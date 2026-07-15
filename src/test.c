@@ -2,6 +2,8 @@
 #include <sys/resource.h>
 #include <sys/mman.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <strings.h>
@@ -354,6 +356,21 @@ static void fmtBaseFilename(const char *task,
     sprintf(filename + siz, ".%s", suff);
 }
 
+static void makeDirsForFile(const char *filename)
+{
+    char path[512];
+    for (int i = 0; filename[i] != 0x0; ++i){
+        if (filename[i] == '/' && i > 0){
+            path[i] = 0x0;
+            if (mkdir(path, 0755) != 0 && errno != EEXIST){
+                perror("Creating output directory failed");
+                exit(-1);
+            }
+        }
+        path[i] = filename[i];
+    }
+}
+
 static void fmtOutputFilename(const char *task,
                               const char *test_name,
                               const char *suff,
@@ -362,6 +379,7 @@ static void fmtOutputFilename(const char *task,
     int siz = sprintf(filename, "reg/");
     siz += fmtFilename(task, test_name, filename + siz);
     sprintf(filename + siz, ".%s.tmp", suff);
+    makeDirsForFile(filename);
 }
 
 static size_t filesize(const char *fn)
