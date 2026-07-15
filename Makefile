@@ -44,6 +44,7 @@ TESTS += disamb
 TESTS += sym
 TESTS += irrelevance
 TESTS += invertible
+TESTS += prune_strips
 TESTS += fdr
 TESTS += hff
 TESTS += hm_heur
