@@ -204,9 +204,8 @@ static double roundFlt(double v)
 }
 
 static pddl_hpot_config_t hcfg = PDDL_HPOT_CONFIG_INIT;
-static pddl_task_t *task = NULL;
 
-static void _test_hpot1(const pddl_hpot_config_t *cfg, pddl_task_t *task)
+static void _test_hpot1(const pddl_hpot_config_t *cfg)
 {
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
@@ -265,20 +264,20 @@ TEST(hpot_init, hpot)
 {
     hcfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     hcfg.opt.state.fdr_state = C.fdr.init;
-    _test_hpot1(&hcfg, task);
+    _test_hpot1(&hcfg);
 }
 
 TEST(hpot_all_states, hpot)
 {
     hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    _test_hpot1(&hcfg, task);
+    _test_hpot1(&hcfg);
 }
 
 TEST(hpot_all_states_cinit, hpot)
 {
     hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     hcfg.opt.all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
-    _test_hpot1(&hcfg, task);
+    _test_hpot1(&hcfg);
 }
 
 static void _test_hpot_goal_count(const pddl_hpot_config_t *cfg)
