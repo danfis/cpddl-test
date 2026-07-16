@@ -64,6 +64,7 @@ TESTS += gaifman
 TESTS += set
 TESTS += open_list
 TESTS += opts
+TESTS += unify
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
