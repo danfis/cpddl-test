@@ -1,100 +1,6 @@
-Compile-in LMG: BEGIN
-Compile-in LMG: Cfg: prune_mutex = true
-Compile-in LMG: Cfg: prune_dead_end = true
-Compile-in LMG: actions: 17, lifted mgroups: 4
-Compile-in LMG: Found mutex condition for action 'move-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?xfrom ?xto)) (= ?cfrom ?cto) (= ?yfrom ?yto) (= ?dfrom w))
-Compile-in LMG: Precondition of action 'move-west' extended with (or (= ?xfrom ?xto) (not (= ?cfrom ?cto)) (not (= ?yfrom ?yto)) (not (= ?dfrom w)))
-Compile-in LMG: Found mutex condition for action 'move-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?xfrom ?xto)) (= ?cfrom ?cto) (= ?yfrom ?yto) (= ?dfrom e))
-Compile-in LMG: Precondition of action 'move-east' extended with (or (= ?xfrom ?xto) (not (= ?cfrom ?cto)) (not (= ?yfrom ?yto)) (not (= ?dfrom e)))
-Compile-in LMG: Found mutex condition for action 'move-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?yfrom ?yto)) (= ?cfrom ?cto) (= ?xfrom ?xto) (= ?dfrom n))
-Compile-in LMG: Precondition of action 'move-north' extended with (or (= ?yfrom ?yto) (not (= ?cfrom ?cto)) (not (= ?xfrom ?xto)) (not (= ?dfrom n)))
-Compile-in LMG: Found mutex condition for action 'move-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (not (= ?yfrom ?yto)) (= ?cfrom ?cto) (= ?xfrom ?xto) (= ?dfrom s))
-Compile-in LMG: Precondition of action 'move-south' extended with (or (= ?yfrom ?yto) (not (= ?cfrom ?cto)) (not (= ?xfrom ?xto)) (not (= ?dfrom s)))
-Compile-in LMG: Found mutex condition for action 'start-move-card-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
-Compile-in LMG: Precondition of action 'start-move-card-west' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
-Compile-in LMG: Found mutex condition for action 'move-card-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
-Compile-in LMG: Precondition of action 'move-card-west' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
-Compile-in LMG: Found mutex condition for action 'stop-move-card-west' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
-Compile-in LMG: Precondition of action 'stop-move-card-west' extended with (not (= ?cm ?newtc))
-Compile-in LMG: Found mutex condition for action 'start-move-card-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
-Compile-in LMG: Precondition of action 'start-move-card-east' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
-Compile-in LMG: Found mutex condition for action 'move-card-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?nextx)) (not (= ?y ?y))))
-Compile-in LMG: Precondition of action 'move-card-east' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?nextx) (= ?y ?y)))
-Compile-in LMG: Found mutex condition for action 'stop-move-card-east' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
-Compile-in LMG: Precondition of action 'stop-move-card-east' extended with (not (= ?cm ?newtc))
-Compile-in LMG: Found mutex condition for action 'start-move-card-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
-Compile-in LMG: Precondition of action 'start-move-card-north' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
-Compile-in LMG: Found mutex condition for action 'move-card-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
-Compile-in LMG: Precondition of action 'move-card-north' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
-Compile-in LMG: Found mutex condition for action 'stop-move-card-north' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
-Compile-in LMG: Precondition of action 'stop-move-card-north' extended with (not (= ?cm ?newtc))
-Compile-in LMG: Found mutex condition for action 'start-move-card-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
-Compile-in LMG: Precondition of action 'start-move-card-south' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
-Compile-in LMG: Found mutex condition for action 'move-card-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (and (= ?cm ?cnext) (or (not (= ?x ?x)) (not (= ?y ?nexty))))
-Compile-in LMG: Precondition of action 'move-card-south' extended with (or (not (= ?cm ?cnext)) (and (= ?x ?x) (= ?y ?nexty)))
-Compile-in LMG: Found mutex condition for action 'stop-move-card-south' and mgroup {card-at V0:card C1:gridpos C2:gridpos, new-headtail-card V0:card, card-at V0:card C3:gridpos C4:gridpos}:=1: (= ?cm ?newtc)
-Compile-in LMG: Precondition of action 'stop-move-card-south' extended with (not (= ?cm ?newtc))
-Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 6, objects: 16, predicates: 21, functions: 3, actions: 17, action-pre-size: [min: 6, max: 14, avg: 10.71, med: 11.00]
-Compile-in LMG: PDDL-Norm: Removed actions with unsatisfiable parameters: types: 6, objects: 16, predicates: 21, functions: 3, actions: 17, action-pre-size: [min: 6, max: 14, avg: 10.71, med: 11.00]
-Compile-in LMG: PDDL-Norm: Actions normalized: types: 6, objects: 16, predicates: 21, functions: 3, actions: 17, action-pre-size: [min: 6, max: 22, avg: 16.12, med: 19.00]
-Compile-in LMG: PDDL-Norm: Actions split: types: 6, objects: 16, predicates: 21, functions: 3, actions: 29, action-pre-size: [min: 10, max: 11, avg: 9.45, med: 9.00]
-Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
-Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
-Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
-Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action stop-move-card-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action leave
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-west
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-east
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-north
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-move-card-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-card-south
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 16, vars: 8, predicates: 27, rules: 67)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 16, vars: 8, predicates: 27, rules: 67)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 16, vars: 8, predicates: 27, rules: 67)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 67
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 67, db-mem: 0MB)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
-Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
-Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
-Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
-Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: Removed irrelevant/unreachable predicates/functions/actions: types: 6, objects: 16, predicates: 21, functions: 3, actions: 29, action-pre-size: [min: 10, max: 11, avg: 9.45, med: 9.00]
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 6, objects: 16, predicates: 21, functions: 3, actions: 29, action-pre-size: [min: 10, max: 11, avg: 9.45, med: 9.00]
-Compile-in LMG: PDDL-Norm: END
-Compile-in LMG: DONE. actions: 29
-Compile-in LMG: END
 Domain: labyrinth
 Problem: labyrinth-size-3-rotations-1-seed-1229
-Require: 20017
+Require: 20097
 Type[6]:
     [0]: object, parent: -1
     [1]: card, parent: 0
@@ -155,16 +61,16 @@ Function[3]:
 Action[29]:
     move-west: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
         pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom w) (N:R:= ?dto w) (R:next ?xfrom ?xto) (N:R:blocked ?cfrom w) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     move-east: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
         pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom e) (N:R:= ?dto e) (R:next ?xto ?xfrom) (N:R:blocked ?cfrom e) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     move-north: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
         pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom n) (N:R:= ?dto n) (R:next ?yfrom ?yto) (N:R:blocked ?cfrom n) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     move-south: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
         pre: (and (R:= ?xfrom ?xto) (R:= ?yfrom ?yto) (R:= ?dfrom s) (N:R:= ?dto s) (R:next ?yto ?yfrom) (N:R:blocked ?cfrom s) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     start-move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
         pre: (and (N:R:= ?cm ?cnext) (R:next ?nextx ?x) (R:min-pos ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-west))
         eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-west) (increase (total-cost) (move-card)))

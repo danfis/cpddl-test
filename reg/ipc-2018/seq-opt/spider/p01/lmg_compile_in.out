@@ -1,62 +1,3 @@
-Compile-in LMG: BEGIN
-Compile-in LMG: Cfg: prune_mutex = true
-Compile-in LMG: Cfg: prune_dead_end = true
-Compile-in LMG: actions: 16, lifted mgroups: 40
-Compile-in LMG: Found mutex condition for action 'deal-card' and mgroup {on C1:card V0:card_or_tableau, clear V0:card_or_tableau, on C2:card V0:card_or_tableau}:=1: (and (= ?c ?from) (or (= ?from card-d0-s0-v0) (= ?from card-d0-s0-v1) (= ?from card-d0-s0-v2) (= ?from card-d0-s1-v0) (= ?from card-d0-s1-v1) (= ?from card-d0-s1-v2) (= ?from card-d0-s2-v0) (= ?from card-d0-s2-v1) (= ?from card-d0-s2-v2) (= ?from card-d0-s3-v0) (= ?from card-d0-s3-v1) (= ?from card-d0-s3-v2)))
-Compile-in LMG: Found mutex condition for action 'deal-card' and mgroup {on C1:card V0:card_or_tableau, clear V0:card_or_tableau, on C2:card V0:card_or_tableau}:=1: (and (= ?from ?to) (or (= ?from card-d0-s0-v0) (= ?from card-d0-s0-v1) (= ?from card-d0-s0-v2) (= ?from card-d0-s1-v0) (= ?from card-d0-s1-v1) (= ?from card-d0-s1-v2) (= ?from card-d0-s2-v0) (= ?from card-d0-s2-v1) (= ?from card-d0-s2-v2) (= ?from card-d0-s3-v0) (= ?from card-d0-s3-v1) (= ?from card-d0-s3-v2)))
-Compile-in LMG: Precondition of action 'deal-card' extended with (or (and (not (= ?c ?from)) (not (= ?from ?to))) (and (not (= ?from card-d0-s0-v0)) (not (= ?from card-d0-s0-v1)) (not (= ?from card-d0-s0-v2)) (not (= ?from card-d0-s1-v0)) (not (= ?from card-d0-s1-v1)) (not (= ?from card-d0-s1-v2)) (not (= ?from card-d0-s2-v0)) (not (= ?from card-d0-s2-v1)) (not (= ?from card-d0-s2-v2)) (not (= ?from card-d0-s3-v0)) (not (= ?from card-d0-s3-v1)) (not (= ?from card-d0-s3-v2))))
-Compile-in LMG: Found mutex condition for action 'move-to-card' and mgroup {on C1:card V0:card_or_tableau, clear V0:card_or_tableau, on C2:card V0:card_or_tableau}:=1: (and (= ?from ?to) (or (= ?from card-d0-s0-v0) (= ?from card-d0-s0-v1) (= ?from card-d0-s0-v2) (= ?from card-d0-s1-v0) (= ?from card-d0-s1-v1) (= ?from card-d0-s1-v2) (= ?from card-d0-s2-v0) (= ?from card-d0-s2-v1) (= ?from card-d0-s2-v2) (= ?from card-d0-s3-v0) (= ?from card-d0-s3-v1) (= ?from card-d0-s3-v2)))
-Compile-in LMG: Precondition of action 'move-to-card' extended with (or (not (= ?from ?to)) (and (not (= ?from card-d0-s0-v0)) (not (= ?from card-d0-s0-v1)) (not (= ?from card-d0-s0-v2)) (not (= ?from card-d0-s1-v0)) (not (= ?from card-d0-s1-v1)) (not (= ?from card-d0-s1-v2)) (not (= ?from card-d0-s2-v0)) (not (= ?from card-d0-s2-v1)) (not (= ?from card-d0-s2-v2)) (not (= ?from card-d0-s3-v0)) (not (= ?from card-d0-s3-v1)) (not (= ?from card-d0-s3-v2))))
-Compile-in LMG: Found mutex condition for action 'move-to-tableau' and mgroup {on C1:card V0:card_or_tableau, clear V0:card_or_tableau, on C2:card V0:card_or_tableau}:=1: (and (= ?from ?to) (or (= ?from pile-0) (= ?from pile-1) (= ?from pile-2)))
-Compile-in LMG: Precondition of action 'move-to-tableau' extended with (or (not (= ?from ?to)) (and (not (= ?from pile-0)) (not (= ?from pile-1)) (not (= ?from pile-2))))
-Compile-in LMG: PDDL-Norm: BEGIN
-Compile-in LMG: PDDL-Norm: Before normalization: types: 6, objects: 19, predicates: 28, functions: 1, actions: 16, action-pre-size: [min: 10, max: 5, avg: 9.44, med: 6.00]
-Compile-in LMG: PDDL-Norm: Removed actions with unsatisfiable parameters: types: 6, objects: 19, predicates: 28, functions: 1, actions: 16, action-pre-size: [min: 10, max: 5, avg: 9.44, med: 6.00]
-Compile-in LMG: PDDL-Norm: Actions normalized: types: 6, objects: 19, predicates: 28, functions: 1, actions: 16, action-pre-size: [min: 10, max: 5, avg: 11.44, med: 6.00]
-Compile-in LMG: PDDL-Norm: Actions split: types: 6, objects: 19, predicates: 28, functions: 1, actions: 19, action-pre-size: [min: 12, max: 5, avg: 9.63, med: 6.00]
-Compile-in LMG: PDDL-Norm: Neg-Cond: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_dynamic: true
-Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_goal: false
-Compile-in LMG: PDDL-Norm: Neg-Cond: Cfg: only_relevant_facts_in_init: true
-Compile-in LMG: PDDL-Norm: Neg-Cond: Extending initial state...
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-dealing
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deal-card
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action finish-dealing
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-to-card
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-to-tableau
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action change-tableau-and-continue
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action change-tableau-and-stop
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action make-unmovable-and-continue
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action make-unmovable-and-stop-at-tableau
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action make-unmovable-and-stop-at-unmovable
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action make-movable-and-continue
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action make-movable-ignore-pile
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action make-movable-and-stop
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action start-collecting-deck
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action collect-card
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action finish-collecting-deck
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action deal-card
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-to-card
-Compile-in LMG: PDDL-Norm: Neg-Cond: Looking for datalog rules in action move-to-tableau
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program start (consts: 19, vars: 5, predicates: 34, rules: 146)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: reduce-rule-set: Nothing to reduce
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: Normal form of the datalog program DONE (consts: 19, vars: 5, predicates: 34, rules: 146)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Normal form: END
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: BEGIN
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: start (consts: 19, vars: 5, predicates: 34, rules: 146)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: Added initial facts: 146
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: DONE (facts: 146, db-mem: 0MB)
-Compile-in LMG: PDDL-Norm: Neg-Cond: DL Canonical Model: END
-Compile-in LMG: PDDL-Norm: Neg-Cond: Number of added NOT- predicates: 0
-Compile-in LMG: PDDL-Norm: Neg-Cond: Initial state extended.
-Compile-in LMG: PDDL-Norm: Neg-Cond: Compiled away negative conditions of 0 predicates
-Compile-in LMG: PDDL-Norm: Neg-Cond: END
-Compile-in LMG: PDDL-Norm: Removed irrelevant/unreachable predicates/functions/actions: types: 6, objects: 19, predicates: 28, functions: 1, actions: 19, action-pre-size: [min: 12, max: 5, avg: 9.63, med: 6.00]
-Compile-in LMG: PDDL-Norm: PDDL task normalized. types: 6, objects: 19, predicates: 28, functions: 1, actions: 19, action-pre-size: [min: 12, max: 5, avg: 9.63, med: 6.00]
-Compile-in LMG: PDDL-Norm: END
-Compile-in LMG: DONE. actions: 19
-Compile-in LMG: END
 Domain: spider
 Problem: spider-1-4-3-3-2-1400
 Require: 20097
@@ -131,16 +72,16 @@ Action[19]:
         eff: (and (RW:currently-dealing) (N:RW:NOT-currently-dealing) (increase (total-cost) 1))
     deal-card: ?c:3 ?from:1 ?fromdeal:5 ?to:3 ?totableau:4
         pre: (and (N:R:= ?c ?from) (N:R:= ?from ?to) (R:to-deal ?c ?totableau ?fromdeal ?from) (RW:on ?c ?from) (RW:clear ?c) (RW:clear ?to) (RW:current-deal ?fromdeal) (RW:currently-dealing) (RW:part-of-tableau ?to ?totableau) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
-        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:in-play ?c) (RW:part-of-tableau ?c ?totableau) (RW:movable ?c) (N:RW:NOT-movable ?c) (when (N:R:can-continue-group ?c ?to) (and (RW:make-unmovable ?to) (RW:currently-updating-unmovable) (N:RW:NOT-currently-updating-unmovable))))
+        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:in-play ?c) (RW:part-of-tableau ?c ?totableau) (RW:movable ?c) (N:RW:NOT-movable ?c) (when (N:R:can-continue-group ?c ?to) (and (RW:currently-updating-unmovable) (RW:make-unmovable ?to) (N:RW:NOT-currently-updating-unmovable))))
     finish-dealing: ?d:5 ?nd:5
         pre: (and (R:next-deal ?d ?nd) (RW:clear ?d) (RW:current-deal ?d) (RW:currently-dealing) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
         eff: (and (N:RW:current-deal ?d) (RW:current-deal ?nd) (N:RW:currently-dealing) (RW:NOT-currently-dealing))
     move-to-card: ?c:3 ?from:2 ?to:3 ?totableau:4
         pre: (and (N:R:= ?from ?to) (R:can-be-placed-on ?c ?to) (RW:on ?c ?from) (RW:clear ?to) (RW:in-play ?c) (RW:in-play ?to) (RW:part-of-tableau ?to ?totableau) (RW:movable ?c) (RW:NOT-currently-dealing) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
-        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?totableau) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:make-movable ?from) (RW:currently-updating-movable) (N:RW:NOT-currently-updating-movable))) (when (N:R:can-continue-group ?c ?to) (and (RW:make-unmovable ?to) (RW:currently-updating-unmovable) (N:RW:NOT-currently-updating-unmovable))) (increase (total-cost) 1))
+        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?totableau) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:currently-updating-movable) (RW:make-movable ?from) (N:RW:NOT-currently-updating-movable))) (when (N:R:can-continue-group ?c ?to) (and (RW:currently-updating-unmovable) (RW:make-unmovable ?to) (N:RW:NOT-currently-updating-unmovable))) (increase (total-cost) 1))
     move-to-tableau: ?c:3 ?from:2 ?to:4
         pre: (and (N:R:= ?from ?to) (RW:on ?c ?from) (RW:clear ?to) (RW:in-play ?c) (RW:movable ?c) (RW:NOT-currently-dealing) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
-        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?to) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:make-movable ?from) (RW:currently-updating-movable) (N:RW:NOT-currently-updating-movable))) (increase (total-cost) 1))
+        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?to) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:currently-updating-movable) (RW:make-movable ?from) (N:RW:NOT-currently-updating-movable))) (increase (total-cost) 1))
     change-tableau-and-continue: ?c:3 ?tbefore:4 ?t:4 ?next:3
         pre: (and (RW:on ?next ?c) (RW:part-of-tableau ?c ?tbefore) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?t) (RW:NOT-currently-collecting-deck))
         eff: (and (N:RW:part-of-tableau ?c ?tbefore) (RW:part-of-tableau ?c ?t) (N:RW:make-part-of-tableau ?c ?t) (RW:make-part-of-tableau ?next ?t))
@@ -176,13 +117,13 @@ Action[19]:
         eff: (and (RW:on ?c discard) (N:RW:on ?c ?nextcard) (RW:clear ?nextcard) (N:RW:in-play ?c) (N:RW:currently-collecting-deck) (N:RW:collect-card ?c) (N:RW:part-of-tableau ?c ?p) (N:RW:movable ?c) (RW:currently-updating-movable) (RW:make-movable ?nextcard) (RW:NOT-currently-collecting-deck) (RW:NOT-movable ?c) (N:RW:NOT-currently-updating-movable))
     deal-card: ?c:3 ?from:1 ?fromdeal:5 ?to:3 ?totableau:4
         pre: (and (N:R:= ?from card-d0-s0-v0) (N:R:= ?from card-d0-s0-v1) (N:R:= ?from card-d0-s0-v2) (N:R:= ?from card-d0-s1-v0) (N:R:= ?from card-d0-s1-v1) (N:R:= ?from card-d0-s1-v2) (N:R:= ?from card-d0-s2-v0) (N:R:= ?from card-d0-s2-v1) (N:R:= ?from card-d0-s2-v2) (N:R:= ?from card-d0-s3-v0) (N:R:= ?from card-d0-s3-v1) (N:R:= ?from card-d0-s3-v2) (R:to-deal ?c ?totableau ?fromdeal ?from) (RW:on ?c ?from) (RW:clear ?c) (RW:clear ?to) (RW:current-deal ?fromdeal) (RW:currently-dealing) (RW:part-of-tableau ?to ?totableau) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
-        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:in-play ?c) (RW:part-of-tableau ?c ?totableau) (RW:movable ?c) (N:RW:NOT-movable ?c) (when (N:R:can-continue-group ?c ?to) (and (RW:make-unmovable ?to) (RW:currently-updating-unmovable) (N:RW:NOT-currently-updating-unmovable))))
+        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:in-play ?c) (RW:part-of-tableau ?c ?totableau) (RW:movable ?c) (N:RW:NOT-movable ?c) (when (N:R:can-continue-group ?c ?to) (and (RW:currently-updating-unmovable) (RW:make-unmovable ?to) (N:RW:NOT-currently-updating-unmovable))))
     move-to-card: ?c:3 ?from:2 ?to:3 ?totableau:4
         pre: (and (N:R:= ?from card-d0-s0-v0) (N:R:= ?from card-d0-s0-v1) (N:R:= ?from card-d0-s0-v2) (N:R:= ?from card-d0-s1-v0) (N:R:= ?from card-d0-s1-v1) (N:R:= ?from card-d0-s1-v2) (N:R:= ?from card-d0-s2-v0) (N:R:= ?from card-d0-s2-v1) (N:R:= ?from card-d0-s2-v2) (N:R:= ?from card-d0-s3-v0) (N:R:= ?from card-d0-s3-v1) (N:R:= ?from card-d0-s3-v2) (R:can-be-placed-on ?c ?to) (RW:on ?c ?from) (RW:clear ?to) (RW:in-play ?c) (RW:in-play ?to) (RW:part-of-tableau ?to ?totableau) (RW:movable ?c) (RW:NOT-currently-dealing) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
-        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?totableau) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:make-movable ?from) (RW:currently-updating-movable) (N:RW:NOT-currently-updating-movable))) (when (N:R:can-continue-group ?c ?to) (and (RW:make-unmovable ?to) (RW:currently-updating-unmovable) (N:RW:NOT-currently-updating-unmovable))) (increase (total-cost) 1))
+        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?totableau) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:currently-updating-movable) (RW:make-movable ?from) (N:RW:NOT-currently-updating-movable))) (when (N:R:can-continue-group ?c ?to) (and (RW:currently-updating-unmovable) (RW:make-unmovable ?to) (N:RW:NOT-currently-updating-unmovable))) (increase (total-cost) 1))
     move-to-tableau: ?c:3 ?from:2 ?to:4
         pre: (and (N:R:= ?from pile-0) (N:R:= ?from pile-1) (N:R:= ?from pile-2) (RW:on ?c ?from) (RW:clear ?to) (RW:in-play ?c) (RW:movable ?c) (RW:NOT-currently-dealing) (RW:NOT-currently-collecting-deck) (RW:NOT-currently-updating-unmovable) (RW:NOT-currently-updating-movable) (RW:NOT-currently-updating-part-of-tableau))
-        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?to) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:make-movable ?from) (RW:currently-updating-movable) (N:RW:NOT-currently-updating-movable))) (increase (total-cost) 1))
+        eff: (and (N:RW:on ?c ?from) (RW:on ?c ?to) (RW:clear ?from) (N:RW:clear ?to) (RW:currently-updating-part-of-tableau) (RW:make-part-of-tableau ?c ?to) (N:RW:NOT-currently-updating-part-of-tableau) (when (N:R:can-continue-group ?c ?from) (and (RW:currently-updating-movable) (RW:make-movable ?from) (N:RW:NOT-currently-updating-movable))) (increase (total-cost) 1))
 Init[106]:
   S:(can-continue-group card-d0-s0-v0 card-d0-s0-v1)
   S:(can-continue-group card-d0-s0-v1 card-d0-s0-v2)

@@ -1,6 +1,6 @@
 Domain: labyrinth
 Problem: labyrinth-size-5-rotations-1-seed-1229
-Require: 20017
+Require: 20097
 Type[6]:
     [0]: object, parent: -1
     [1]: card, parent: 0
@@ -79,16 +79,16 @@ Function[3]:
 Action[17]:
     move-west: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
         pre: (and (R:= ?yfrom ?yto) (R:= ?dfrom w) (N:R:= ?dto w) (R:next ?xfrom ?xto) (N:R:blocked ?cfrom w) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     move-east: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
         pre: (and (R:= ?yfrom ?yto) (R:= ?dfrom e) (N:R:= ?dto e) (R:next ?xto ?xfrom) (N:R:blocked ?cfrom e) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     move-north: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
         pre: (and (R:= ?xfrom ?xto) (R:= ?dfrom n) (N:R:= ?dto n) (R:next ?yfrom ?yto) (N:R:blocked ?cfrom n) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     move-south: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
         pre: (and (R:= ?xfrom ?xto) (R:= ?dfrom s) (N:R:= ?dto s) (R:next ?yto ?yfrom) (N:R:blocked ?cfrom s) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (RW:NOT-cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (RW:NOT-robot-at ?cfrom) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)))
+        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (N:RW:NOT-robot-at ?cto) (increase (total-cost) (move-robot-cost)) (when (N:R:= ?cfrom ?cto) (RW:NOT-robot-at ?cfrom)))
     start-move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
         pre: (and (R:next ?nextx ?x) (R:min-pos ?x) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:NOT-robot-at ?cm) (RW:NOT-cards-moving) (RW:NOT-cards-moving-west))
         eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (N:RW:NOT-cards-moving) (N:RW:NOT-cards-moving-west) (increase (total-cost) (move-card)))

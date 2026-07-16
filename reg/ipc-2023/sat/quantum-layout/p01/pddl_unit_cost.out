@@ -1,6 +1,6 @@
 Domain: quantum
 Problem: test
-Require: 3
+Require: 97
 Type[4]:
     [0]: object, parent: -1
     [1]: pqubit, parent: 0
@@ -68,7 +68,7 @@ Obj[55]:
     [53]: p12, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [54]: p13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[7]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
     mapped: 2 1 :: read: 1, write: 1, in-init: 0
     connected: 1 1 :: read: 1, write: 0, in-init: 1
     rcnot: 3 :: read: 1, write: 1, in-init: 1, neg-of: NOT-rcnot
@@ -82,7 +82,7 @@ Action[36]:
         eff: (and (N:RW:mapped ?l1 ?p1) (RW:mapped ?l1 ?p2) (RW:mapped ?l2 ?p1) (N:RW:mapped ?l2 ?p2))
     swap-ancilary: ?l1:2 ?p1:1 ?p2:1
         pre: (and (R:connected ?p1 ?p2) (RW:mapped ?l1 ?p1) (RW:NOT-occupied_pqubit ?p2))
-        eff: (and (N:RW:mapped ?l1 ?p1) (RW:mapped ?l1 ?p2) (RW:NOT-occupied_pqubit ?p1) (N:RW:NOT-occupied_pqubit ?p2) (N:RW:NOT-initialized ?p2))
+        eff: (and (N:RW:mapped ?l1 ?p1) (RW:mapped ?l1 ?p2) (N:RW:NOT-occupied_pqubit ?p2) (N:RW:NOT-initialized ?p2) (when (N:R:= ?p1 ?p2) (RW:NOT-occupied_pqubit ?p1)))
     apply_cnot_l5_l6_i3: ?p1:1 ?p2:1
         pre: (and (R:connected ?p1 ?p2) (RW:rcnot l5_l6_i3) (RW:NOT-initialized ?p1) (RW:NOT-initialized ?p2))
         eff: (and (RW:mapped l5 ?p1) (RW:mapped l6 ?p2) (N:RW:rcnot l5_l6_i3) (N:RW:NOT-occupied_pqubit ?p1) (N:RW:NOT-occupied_pqubit ?p2) (N:RW:NOT-initialized ?p1) (N:RW:NOT-initialized ?p2) (RW:NOT-rcnot l5_l6_i3))

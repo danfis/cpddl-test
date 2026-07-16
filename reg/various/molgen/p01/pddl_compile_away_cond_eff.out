@@ -58,10 +58,10 @@ Action[11]:
         eff: (and (when (R:= ?x linker) (RW:cleavable ?y)))
     ligate: ?x:0 ?y:0
         pre: (and (N:R:= ?x ?y) (RW:cleaved ?x) (RW:cleaved ?y) (RW:NOT-double-strand ?y))
-        eff: (and (when (N:R:= ?x linker) (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (RW:NOT-cleaved ?x) (N:RW:cleaved ?y) (RW:NOT-cleaved ?y))))
+        eff: (and (when (N:R:= ?x linker) (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (N:RW:cleaved ?y) (RW:NOT-cleaved ?x) (RW:NOT-cleaved ?y))))
     ligate: ?x:0 ?y:0
         pre: (and (N:R:= ?x ?y) (RW:double-strand ?y) (RW:cleaved ?x) (RW:cleaved ?y))
-        eff: (and (when (R:= ?x linker) (RW:cleavable ?y)) (when (N:R:= ?x linker) (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (RW:NOT-cleaved ?x) (N:RW:cleaved ?y) (RW:NOT-cleaved ?y))))
+        eff: (and (when (R:= ?x linker) (RW:cleavable ?y)) (when (N:R:= ?x linker) (and (RW:contains ?x ?y) (RW:cleavable ?y) (N:RW:cleaved ?x) (N:RW:cleaved ?y) (RW:NOT-cleaved ?x) (RW:NOT-cleaved ?y))))
     ligate: ?x:0 ?y:0
         pre: (and (N:R:= ?x ?y) (RW:double-strand ?y) (RW:NOT-cleaved ?y))
         eff: (and (when (R:= ?x linker) (RW:cleavable ?y)))

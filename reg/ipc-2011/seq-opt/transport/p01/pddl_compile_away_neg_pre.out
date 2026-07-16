@@ -1,0 +1,115 @@
+Domain: transport
+Problem: transport-three-cities-sequential-3nodes-1000size-2degree-100mindistance-2trucks-4packages-2008seed
+Require: 20003
+Type[6]:
+    [0]: object, parent: -1
+    [1]: location, parent: 0
+    [2]: locatable, parent: 0
+    [3]: vehicle, parent: 2
+    [4]: package, parent: 2
+    [5]: capacity-number, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+    [1]: 0 1 2 3 4 5 6 7 8
+    [2]: 9 10 11 12 13 14
+    [3]: 9 10
+    [4]: 11 12 13 14
+    [5]: 15 16 17 18 19
+Obj[20]:
+    [0]: city-1-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: city-2-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: city-3-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: city-1-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: city-2-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: city-3-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: city-1-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: city-2-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: city-3-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: truck-1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: truck-2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: package-1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: package-2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: package-3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: package-4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: capacity-0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: capacity-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: capacity-2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: capacity-3, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: capacity-4, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[6]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    road: 1 1 :: read: 1, write: 0, in-init: 1
+    at: 2 1 :: read: 1, write: 1, in-init: 1
+    in: 4 3 :: read: 1, write: 1, in-init: 0
+    capacity: 3 5 :: read: 1, write: 1, in-init: 1
+    capacity-predecessor: 5 5 :: read: 1, write: 0, in-init: 1
+Function[2]:
+    road-length: 1 1 :: read: 1, write: 0, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
+Action[3]:
+    drive: ?v:3 ?l1:1 ?l2:1
+        pre: (and (R:road ?l1 ?l2) (RW:at ?v ?l1))
+        eff: (and (N:RW:at ?v ?l1) (RW:at ?v ?l2) (increase (total-cost) (road-length ?l1 ?l2)))
+    pick-up: ?v:3 ?l:1 ?p:4 ?s1:5 ?s2:5
+        pre: (and (R:capacity-predecessor ?s1 ?s2) (RW:at ?v ?l) (RW:at ?p ?l) (RW:capacity ?v ?s2))
+        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?v) (RW:capacity ?v ?s1) (N:RW:capacity ?v ?s2) (increase (total-cost) 1))
+    drop: ?v:3 ?l:1 ?p:4 ?s1:5 ?s2:5
+        pre: (and (R:capacity-predecessor ?s1 ?s2) (RW:at ?v ?l) (RW:in ?p ?v) (RW:capacity ?v ?s1))
+        eff: (and (RW:at ?p ?l) (N:RW:in ?p ?v) (N:RW:capacity ?v ?s1) (RW:capacity ?v ?s2) (increase (total-cost) 1))
+Init[32]:
+  S:(road city-1-loc-1 city-3-loc-1)
+  S:(road city-1-loc-1 city-1-loc-3)
+  S:(road city-1-loc-1 city-2-loc-3)
+  S:(road city-2-loc-1 city-2-loc-2)
+  S:(road city-2-loc-1 city-2-loc-3)
+  S:(road city-3-loc-1 city-1-loc-1)
+  S:(road city-3-loc-1 city-3-loc-2)
+  S:(road city-3-loc-1 city-3-loc-3)
+  S:(road city-1-loc-2 city-1-loc-3)
+  S:(road city-2-loc-2 city-2-loc-1)
+  S:(road city-2-loc-2 city-2-loc-3)
+  S:(road city-3-loc-2 city-3-loc-1)
+  S:(road city-3-loc-2 city-2-loc-3)
+  S:(road city-1-loc-3 city-1-loc-1)
+  S:(road city-1-loc-3 city-1-loc-2)
+  S:(road city-2-loc-3 city-1-loc-1)
+  S:(road city-2-loc-3 city-2-loc-1)
+  S:(road city-2-loc-3 city-2-loc-2)
+  S:(road city-2-loc-3 city-3-loc-2)
+  S:(road city-3-loc-3 city-3-loc-1)
+  S:(capacity-predecessor capacity-0 capacity-1)
+  S:(capacity-predecessor capacity-1 capacity-2)
+  S:(capacity-predecessor capacity-2 capacity-3)
+  S:(capacity-predecessor capacity-3 capacity-4)
+  (at truck-1 city-1-loc-3)
+  (at truck-2 city-3-loc-1)
+  (at package-1 city-3-loc-1)
+  (at package-2 city-1-loc-2)
+  (at package-3 city-3-loc-3)
+  (at package-4 city-1-loc-2)
+  (capacity truck-1 capacity-3)
+  (capacity truck-2 capacity-3)
+Init[21]:
+  (= (total-cost) 0)
+  (= (road-length city-1-loc-3 city-1-loc-1) 22)
+  (= (road-length city-1-loc-1 city-1-loc-3) 22)
+  (= (road-length city-1-loc-3 city-1-loc-2) 50)
+  (= (road-length city-1-loc-2 city-1-loc-3) 50)
+  (= (road-length city-2-loc-2 city-2-loc-1) 30)
+  (= (road-length city-2-loc-1 city-2-loc-2) 30)
+  (= (road-length city-2-loc-3 city-2-loc-1) 49)
+  (= (road-length city-2-loc-1 city-2-loc-3) 49)
+  (= (road-length city-2-loc-3 city-2-loc-2) 47)
+  (= (road-length city-2-loc-2 city-2-loc-3) 47)
+  (= (road-length city-3-loc-2 city-3-loc-1) 41)
+  (= (road-length city-3-loc-1 city-3-loc-2) 41)
+  (= (road-length city-3-loc-3 city-3-loc-1) 53)
+  (= (road-length city-3-loc-1 city-3-loc-3) 53)
+  (= (road-length city-1-loc-1 city-2-loc-3) 139)
+  (= (road-length city-2-loc-3 city-1-loc-1) 139)
+  (= (road-length city-1-loc-1 city-3-loc-1) 186)
+  (= (road-length city-3-loc-1 city-1-loc-1) 186)
+  (= (road-length city-2-loc-3 city-3-loc-2) 186)
+  (= (road-length city-3-loc-2 city-2-loc-3) 186)
+Goal: (and (RW:at package-1 city-1-loc-1) (RW:at package-2 city-2-loc-2) (RW:at package-3 city-1-loc-3) (RW:at package-4 city-1-loc-3))
+Metric: (total-cost)

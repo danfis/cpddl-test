@@ -1,6 +1,6 @@
 Domain: ricochet-robots
 Problem: ricochet-robots-16x16-25-77136
-Require: 7
+Require: 97
 Type[4]:
     [0]: object, parent: -1
     [1]: robot, parent: 0
@@ -277,7 +277,7 @@ Obj[264]:
     [262]: north, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [263]: south, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[8]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
     next: 2 2 3 :: read: 1, write: 0, in-init: 1
     blocked: 2 3 :: read: 1, write: 0, in-init: 1
     at: 1 2 :: read: 1, write: 1, in-init: 1
@@ -292,7 +292,7 @@ Action[4]:
         eff: (and (N:RW:nothing-is-moving) (RW:is-moving ?r ?dir))
     step: ?r:1 ?cfrom:2 ?cto:2 ?dir:3
         pre: (and (R:next ?cfrom ?cto ?dir) (N:R:blocked ?cfrom ?dir) (RW:at ?r ?cfrom) (RW:free ?cto) (RW:is-moving ?r ?dir))
-        eff: (and (N:RW:at ?r ?cfrom) (RW:at ?r ?cto) (RW:free ?cfrom) (N:RW:free ?cto) (N:RW:NOT-free ?cfrom) (RW:NOT-free ?cto))
+        eff: (and (N:RW:at ?r ?cfrom) (RW:at ?r ?cto) (RW:free ?cfrom) (N:RW:free ?cto) (N:RW:NOT-free ?cfrom) (when (N:R:= ?cfrom ?cto) (RW:NOT-free ?cto)))
     stop-at-barrier: ?r:1 ?cat:2 ?dir:3
         pre: (and (R:blocked ?cat ?dir) (RW:at ?r ?cat) (RW:is-moving ?r ?dir))
         eff: (and (RW:nothing-is-moving) (N:RW:is-moving ?r ?dir))

@@ -1,0 +1,288 @@
+Fact[48]:
+  (NOT-p o1)
+  (NOT-p o2)
+  (NOT-q o1)
+  (NOT-q o2)
+  (nebel-add NOT-p o1)
+  (nebel-add NOT-p o2)
+  (nebel-add p o1)
+  (nebel-add p o2)
+  (nebel-ce cond-add o1 o1 ce-0)
+  (nebel-ce cond-add o1 o1 ce-1)
+  (nebel-ce cond-add o1 o2 ce-0)
+  (nebel-ce cond-add o1 o2 ce-1)
+  (nebel-ce cond-add o2 o1 ce-0)
+  (nebel-ce cond-add o2 o1 ce-1)
+  (nebel-ce cond-add o2 o2 ce-0)
+  (nebel-ce cond-add o2 o2 ce-1)
+  (nebel-ce cond-add-diff o1 o2 ce-0)
+  (nebel-ce cond-add-diff o2 o1 ce-0)
+  (nebel-ce refresh o1 ce-0)
+  (nebel-ce refresh o2 ce-0)
+  (nebel-copy)
+  (nebel-del NOT-p o1)
+  (nebel-del NOT-p o2)
+  (nebel-del p o1)
+  (nebel-del p o2)
+  (nebel-free)
+  (nebel-nopending NOT-p o1)
+  (nebel-nopending NOT-p o2)
+  (nebel-nopending p o1)
+  (nebel-nopending p o2)
+  (nebel-op cond-add o1 o1)
+  (nebel-op cond-add o1 o2)
+  (nebel-op cond-add o2 o1)
+  (nebel-op cond-add o2 o2)
+  (nebel-op cond-add-diff o1 o2)
+  (nebel-op cond-add-diff o2 o1)
+  (nebel-op refresh o1)
+  (nebel-op refresh o2)
+  (nebel-pending NOT-p o1)
+  (nebel-pending NOT-p o2)
+  (nebel-pending p o1)
+  (nebel-pending p o2)
+  (p o1)
+  (p o2)
+  (q o1)
+  (q o2)
+  (r o1)
+  (r o2)
+Op[59]:
+  (check o1), cost: 1
+    pre: (NOT-p o1) (nebel-free)
+    add: (r o1)
+    del:
+  (check o2), cost: 1
+    pre: (NOT-p o2) (nebel-free)
+    add: (r o2)
+    del:
+  (cond-add o1 o1), cost: 1
+    pre: (nebel-free) (p o1)
+    add: (nebel-del p o1) (nebel-op cond-add o1 o1) (nebel-pending p o1)
+    del: (nebel-free) (nebel-nopending p o1)
+  (cond-add o1 o1 nebel-ce0-act), cost: 0
+    pre: (nebel-op cond-add o1 o1) (q o1)
+    add: (nebel-ce cond-add o1 o1 ce-0) (nebel-del NOT-p o1) (nebel-pending NOT-p o1)
+    del: (nebel-nopending NOT-p o1)
+  (cond-add o1 o1 nebel-ce0-blk6), cost: 0
+    pre: (NOT-q o1) (nebel-op cond-add o1 o1)
+    add: (nebel-ce cond-add o1 o1 ce-0)
+    del:
+  (cond-add o1 o1 nebel-ce1-act), cost: 0
+    pre: (NOT-q o1) (nebel-op cond-add o1 o1)
+    add: (nebel-add NOT-p o1) (nebel-ce cond-add o1 o1 ce-1) (nebel-pending NOT-p o1)
+    del: (nebel-nopending NOT-p o1)
+  (cond-add o1 o1 nebel-ce1-blk2), cost: 0
+    pre: (nebel-op cond-add o1 o1) (q o1)
+    add: (nebel-ce cond-add o1 o1 ce-1)
+    del:
+  (cond-add o1 o1 nebel-end), cost: 0
+    pre: (nebel-ce cond-add o1 o1 ce-0) (nebel-ce cond-add o1 o1 ce-1) (nebel-op cond-add o1 o1)
+    add: (nebel-copy)
+    del: (nebel-ce cond-add o1 o1 ce-0) (nebel-ce cond-add o1 o1 ce-1) (nebel-op cond-add o1 o1)
+  (cond-add o1 o2), cost: 1
+    pre: (nebel-free) (p o1)
+    add: (nebel-add NOT-p o1) (nebel-del p o1) (nebel-op cond-add o1 o2) (nebel-pending NOT-p o1) (nebel-pending p o1)
+    del: (nebel-free) (nebel-nopending NOT-p o1) (nebel-nopending p o1)
+  (cond-add o1 o2 nebel-ce0-act), cost: 0
+    pre: (nebel-op cond-add o1 o2) (q o2)
+    add: (nebel-add p o2) (nebel-ce cond-add o1 o2 ce-0) (nebel-del NOT-p o2) (nebel-pending NOT-p o2) (nebel-pending p o2)
+    del: (nebel-nopending NOT-p o2) (nebel-nopending p o2)
+  (cond-add o1 o2 nebel-ce0-blk7), cost: 0
+    pre: (NOT-q o2) (nebel-op cond-add o1 o2)
+    add: (nebel-ce cond-add o1 o2 ce-0)
+    del:
+  (cond-add o1 o2 nebel-ce1-act), cost: 0
+    pre: (NOT-q o2) (nebel-op cond-add o1 o2)
+    add: (nebel-add NOT-p o1) (nebel-ce cond-add o1 o2 ce-1) (nebel-pending NOT-p o1)
+    del: (nebel-nopending NOT-p o1)
+  (cond-add o1 o2 nebel-ce1-blk3), cost: 0
+    pre: (nebel-op cond-add o1 o2) (q o2)
+    add: (nebel-ce cond-add o1 o2 ce-1)
+    del:
+  (cond-add o1 o2 nebel-end), cost: 0
+    pre: (nebel-ce cond-add o1 o2 ce-0) (nebel-ce cond-add o1 o2 ce-1) (nebel-op cond-add o1 o2)
+    add: (nebel-copy)
+    del: (nebel-ce cond-add o1 o2 ce-0) (nebel-ce cond-add o1 o2 ce-1) (nebel-op cond-add o1 o2)
+  (cond-add o2 o1), cost: 1
+    pre: (nebel-free) (p o2)
+    add: (nebel-add NOT-p o2) (nebel-del p o2) (nebel-op cond-add o2 o1) (nebel-pending NOT-p o2) (nebel-pending p o2)
+    del: (nebel-free) (nebel-nopending NOT-p o2) (nebel-nopending p o2)
+  (cond-add o2 o1 nebel-ce0-act), cost: 0
+    pre: (nebel-op cond-add o2 o1) (q o1)
+    add: (nebel-add p o1) (nebel-ce cond-add o2 o1 ce-0) (nebel-del NOT-p o1) (nebel-pending NOT-p o1) (nebel-pending p o1)
+    del: (nebel-nopending NOT-p o1) (nebel-nopending p o1)
+  (cond-add o2 o1 nebel-ce0-blk6), cost: 0
+    pre: (NOT-q o1) (nebel-op cond-add o2 o1)
+    add: (nebel-ce cond-add o2 o1 ce-0)
+    del:
+  (cond-add o2 o1 nebel-ce1-act), cost: 0
+    pre: (NOT-q o1) (nebel-op cond-add o2 o1)
+    add: (nebel-add NOT-p o2) (nebel-ce cond-add o2 o1 ce-1) (nebel-pending NOT-p o2)
+    del: (nebel-nopending NOT-p o2)
+  (cond-add o2 o1 nebel-ce1-blk2), cost: 0
+    pre: (nebel-op cond-add o2 o1) (q o1)
+    add: (nebel-ce cond-add o2 o1 ce-1)
+    del:
+  (cond-add o2 o1 nebel-end), cost: 0
+    pre: (nebel-ce cond-add o2 o1 ce-0) (nebel-ce cond-add o2 o1 ce-1) (nebel-op cond-add o2 o1)
+    add: (nebel-copy)
+    del: (nebel-ce cond-add o2 o1 ce-0) (nebel-ce cond-add o2 o1 ce-1) (nebel-op cond-add o2 o1)
+  (cond-add o2 o2), cost: 1
+    pre: (nebel-free) (p o2)
+    add: (nebel-del p o2) (nebel-op cond-add o2 o2) (nebel-pending p o2)
+    del: (nebel-free) (nebel-nopending p o2)
+  (cond-add o2 o2 nebel-ce0-act), cost: 0
+    pre: (nebel-op cond-add o2 o2) (q o2)
+    add: (nebel-ce cond-add o2 o2 ce-0) (nebel-del NOT-p o2) (nebel-pending NOT-p o2)
+    del: (nebel-nopending NOT-p o2)
+  (cond-add o2 o2 nebel-ce0-blk7), cost: 0
+    pre: (NOT-q o2) (nebel-op cond-add o2 o2)
+    add: (nebel-ce cond-add o2 o2 ce-0)
+    del:
+  (cond-add o2 o2 nebel-ce1-act), cost: 0
+    pre: (NOT-q o2) (nebel-op cond-add o2 o2)
+    add: (nebel-add NOT-p o2) (nebel-ce cond-add o2 o2 ce-1) (nebel-pending NOT-p o2)
+    del: (nebel-nopending NOT-p o2)
+  (cond-add o2 o2 nebel-ce1-blk3), cost: 0
+    pre: (nebel-op cond-add o2 o2) (q o2)
+    add: (nebel-ce cond-add o2 o2 ce-1)
+    del:
+  (cond-add o2 o2 nebel-end), cost: 0
+    pre: (nebel-ce cond-add o2 o2 ce-0) (nebel-ce cond-add o2 o2 ce-1) (nebel-op cond-add o2 o2)
+    add: (nebel-copy)
+    del: (nebel-ce cond-add o2 o2 ce-0) (nebel-ce cond-add o2 o2 ce-1) (nebel-op cond-add o2 o2)
+  (cond-add-diff o1 o1), cost: 1
+    pre: (nebel-free) (p o1)
+    add: (NOT-p o1)
+    del: (p o1)
+  (cond-add-diff o1 o2), cost: 1
+    pre: (nebel-free) (p o1)
+    add: (nebel-add NOT-p o1) (nebel-del p o1) (nebel-op cond-add-diff o1 o2) (nebel-pending NOT-p o1) (nebel-pending p o1)
+    del: (nebel-free) (nebel-nopending NOT-p o1) (nebel-nopending p o1)
+  (cond-add-diff o1 o2 nebel-ce0-act), cost: 0
+    pre: (nebel-op cond-add-diff o1 o2) (q o2)
+    add: (nebel-add p o2) (nebel-ce cond-add-diff o1 o2 ce-0) (nebel-del NOT-p o2) (nebel-pending NOT-p o2) (nebel-pending p o2)
+    del: (nebel-nopending NOT-p o2) (nebel-nopending p o2)
+  (cond-add-diff o1 o2 nebel-ce0-blk7), cost: 0
+    pre: (NOT-q o2) (nebel-op cond-add-diff o1 o2)
+    add: (nebel-ce cond-add-diff o1 o2 ce-0)
+    del:
+  (cond-add-diff o1 o2 nebel-end), cost: 0
+    pre: (nebel-ce cond-add-diff o1 o2 ce-0) (nebel-op cond-add-diff o1 o2)
+    add: (nebel-copy)
+    del: (nebel-ce cond-add-diff o1 o2 ce-0) (nebel-op cond-add-diff o1 o2)
+  (cond-add-diff o2 o1), cost: 1
+    pre: (nebel-free) (p o2)
+    add: (nebel-add NOT-p o2) (nebel-del p o2) (nebel-op cond-add-diff o2 o1) (nebel-pending NOT-p o2) (nebel-pending p o2)
+    del: (nebel-free) (nebel-nopending NOT-p o2) (nebel-nopending p o2)
+  (cond-add-diff o2 o1 nebel-ce0-act), cost: 0
+    pre: (nebel-op cond-add-diff o2 o1) (q o1)
+    add: (nebel-add p o1) (nebel-ce cond-add-diff o2 o1 ce-0) (nebel-del NOT-p o1) (nebel-pending NOT-p o1) (nebel-pending p o1)
+    del: (nebel-nopending NOT-p o1) (nebel-nopending p o1)
+  (cond-add-diff o2 o1 nebel-ce0-blk6), cost: 0
+    pre: (NOT-q o1) (nebel-op cond-add-diff o2 o1)
+    add: (nebel-ce cond-add-diff o2 o1 ce-0)
+    del:
+  (cond-add-diff o2 o1 nebel-end), cost: 0
+    pre: (nebel-ce cond-add-diff o2 o1 ce-0) (nebel-op cond-add-diff o2 o1)
+    add: (nebel-copy)
+    del: (nebel-ce cond-add-diff o2 o1 ce-0) (nebel-op cond-add-diff o2 o1)
+  (cond-add-diff o2 o2), cost: 1
+    pre: (nebel-free) (p o2)
+    add: (NOT-p o2)
+    del: (p o2)
+  (move o1 o1), cost: 1
+    pre: (nebel-free) (p o1)
+    add:
+    del: (NOT-p o1)
+  (move o1 o2), cost: 1
+    pre: (nebel-free) (p o1)
+    add: (NOT-p o1) (p o2)
+    del: (NOT-p o2) (p o1)
+  (move o2 o1), cost: 1
+    pre: (nebel-free) (p o2)
+    add: (NOT-p o2) (p o1)
+    del: (NOT-p o1) (p o2)
+  (move o2 o2), cost: 1
+    pre: (nebel-free) (p o2)
+    add:
+    del: (NOT-p o2)
+  (nebel-close), cost: 0
+    pre: (nebel-copy) (nebel-nopending NOT-p o1) (nebel-nopending NOT-p o2) (nebel-nopending p o1) (nebel-nopending p o2)
+    add: (nebel-free)
+    del: (nebel-copy)
+  (nebel-copy-add NOT-p o1), cost: 0
+    pre: (nebel-add NOT-p o1) (nebel-copy) (nebel-pending NOT-p o1)
+    add: (NOT-p o1) (nebel-nopending NOT-p o1)
+    del: (nebel-add NOT-p o1) (nebel-pending NOT-p o1)
+  (nebel-copy-add NOT-p o2), cost: 0
+    pre: (nebel-add NOT-p o2) (nebel-copy) (nebel-pending NOT-p o2)
+    add: (NOT-p o2) (nebel-nopending NOT-p o2)
+    del: (nebel-add NOT-p o2) (nebel-pending NOT-p o2)
+  (nebel-copy-add p o1), cost: 0
+    pre: (nebel-add p o1) (nebel-copy) (nebel-pending p o1)
+    add: (nebel-nopending p o1) (p o1)
+    del: (nebel-add p o1) (nebel-pending p o1)
+  (nebel-copy-add p o2), cost: 0
+    pre: (nebel-add p o2) (nebel-copy) (nebel-pending p o2)
+    add: (nebel-nopending p o2) (p o2)
+    del: (nebel-add p o2) (nebel-pending p o2)
+  (nebel-copy-del NOT-p o1), cost: 0
+    pre: (nebel-copy) (nebel-del NOT-p o1) (nebel-pending NOT-p o1)
+    add: (nebel-nopending NOT-p o1)
+    del: (NOT-p o1) (nebel-del NOT-p o1) (nebel-pending NOT-p o1)
+  (nebel-copy-del NOT-p o2), cost: 0
+    pre: (nebel-copy) (nebel-del NOT-p o2) (nebel-pending NOT-p o2)
+    add: (nebel-nopending NOT-p o2)
+    del: (NOT-p o2) (nebel-del NOT-p o2) (nebel-pending NOT-p o2)
+  (nebel-copy-del p o1), cost: 0
+    pre: (nebel-copy) (nebel-del p o1) (nebel-pending p o1)
+    add: (nebel-nopending p o1)
+    del: (nebel-del p o1) (nebel-pending p o1) (p o1)
+  (nebel-copy-del p o2), cost: 0
+    pre: (nebel-copy) (nebel-del p o2) (nebel-pending p o2)
+    add: (nebel-nopending p o2)
+    del: (nebel-del p o2) (nebel-pending p o2) (p o2)
+  (refresh o1), cost: 1
+    pre: (nebel-free) (p o1)
+    add: (nebel-del NOT-p o1) (nebel-op refresh o1) (nebel-pending NOT-p o1)
+    del: (nebel-free) (nebel-nopending NOT-p o1)
+  (refresh o1 nebel-ce0-act), cost: 0
+    pre: (nebel-op refresh o1) (q o1)
+    add: (nebel-ce refresh o1 ce-0) (nebel-del p o1) (nebel-pending p o1)
+    del: (nebel-nopending p o1)
+  (refresh o1 nebel-ce0-blk6), cost: 0
+    pre: (NOT-q o1) (nebel-op refresh o1)
+    add: (nebel-ce refresh o1 ce-0)
+    del:
+  (refresh o1 nebel-end), cost: 0
+    pre: (nebel-ce refresh o1 ce-0) (nebel-op refresh o1)
+    add: (nebel-copy)
+    del: (nebel-ce refresh o1 ce-0) (nebel-op refresh o1)
+  (refresh o2), cost: 1
+    pre: (nebel-free) (p o2)
+    add: (nebel-del NOT-p o2) (nebel-op refresh o2) (nebel-pending NOT-p o2)
+    del: (nebel-free) (nebel-nopending NOT-p o2)
+  (refresh o2 nebel-ce0-act), cost: 0
+    pre: (nebel-op refresh o2) (q o2)
+    add: (nebel-ce refresh o2 ce-0) (nebel-del p o2) (nebel-pending p o2)
+    del: (nebel-nopending p o2)
+  (refresh o2 nebel-ce0-blk7), cost: 0
+    pre: (NOT-q o2) (nebel-op refresh o2)
+    add: (nebel-ce refresh o2 ce-0)
+    del:
+  (refresh o2 nebel-end), cost: 0
+    pre: (nebel-ce refresh o2 ce-0) (nebel-op refresh o2)
+    add: (nebel-copy)
+    del: (nebel-ce refresh o2 ce-0) (nebel-op refresh o2)
+  (set-q o1), cost: 1
+    pre: (nebel-free) (r o1)
+    add: (q o1)
+    del: (NOT-q o1)
+  (set-q o2), cost: 1
+    pre: (nebel-free) (r o2)
+    add: (q o2)
+    del: (NOT-q o2)
+Init State: (NOT-q o1) (NOT-q o2) (nebel-free) (nebel-nopending NOT-p o1) (nebel-nopending NOT-p o2) (nebel-nopending p o1) (nebel-nopending p o2) (p o1) (p o2)
+Goal: (nebel-free) (p o1) (p o2) (r o1)

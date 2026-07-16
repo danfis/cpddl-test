@@ -1,6 +1,6 @@
 Domain: wumpus-adl
 Problem: wumpus-adl-1
-Require: 83
+Require: 97
 Type[6]:
     [0]: object, parent: -1
     [1]: agent, parent: 0
@@ -27,7 +27,7 @@ Obj[10]:
     [8]: agent-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [9]: wumpus-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[8]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
     at: 0 0 :: read: 1, write: 1, in-init: 1, neg-of: NOT-at
     adj: 0 0 :: read: 1, write: 0, in-init: 1
     pit: 0 :: read: 1, write: 0, in-init: 1
@@ -39,7 +39,7 @@ Function[0]:
 Action[5]:
     move: ?who:1 ?from:5 ?to:5
         pre: (and (R:adj ?from ?to) (RW:at ?who ?from) (RW:alive ?who) (RW:NOT-at wumpus-1 ?to))
-        eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (RW:NOT-at ?who ?from) (N:RW:NOT-at ?who ?to) (when (R:pit ?to) (and (N:RW:alive ?who) (RW:NOT-alive ?who))))
+        eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (N:RW:NOT-at ?who ?to) (when (R:pit ?to) (and (N:RW:alive ?who) (RW:NOT-alive ?who))) (when (N:R:= ?from ?to) (RW:NOT-at ?who ?from)))
     take: ?who:1 ?where:5 ?what:0
         pre: (and (RW:at ?who ?where) (RW:at ?what ?where) (RW:alive ?who))
         eff: (and (N:RW:at ?what ?where) (RW:have ?who ?what) (RW:NOT-at ?what ?where))
@@ -48,10 +48,10 @@ Action[5]:
         eff: (and (N:RW:at ?victim ?where-victim) (N:RW:have ?who ?with-arrow) (N:RW:alive ?victim) (RW:NOT-at ?victim ?where-victim) (RW:NOT-alive ?victim))
     move: ?who:1 ?from:5 ?to:5
         pre: (and (R:adj ?from ?to) (RW:at wumpus-1 ?to) (RW:at ?who ?from) (RW:alive wumpus-1) (RW:alive ?who))
-        eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (N:RW:alive ?who) (RW:NOT-at ?who ?from) (N:RW:NOT-at ?who ?to) (RW:NOT-alive ?who) (when (R:pit ?to) (and (N:RW:alive ?who) (RW:NOT-alive ?who))))
+        eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (N:RW:alive ?who) (N:RW:NOT-at ?who ?to) (RW:NOT-alive ?who) (when (R:pit ?to) (and (N:RW:alive ?who) (RW:NOT-alive ?who))) (when (N:R:= ?from ?to) (RW:NOT-at ?who ?from)))
     move: ?who:1 ?from:5 ?to:5
         pre: (and (R:adj ?from ?to) (RW:at ?who ?from) (RW:alive ?who) (RW:NOT-alive wumpus-1))
-        eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (RW:NOT-at ?who ?from) (N:RW:NOT-at ?who ?to) (when (R:pit ?to) (and (N:RW:alive ?who) (RW:NOT-alive ?who))))
+        eff: (and (N:RW:at ?who ?from) (RW:at ?who ?to) (N:RW:NOT-at ?who ?to) (when (R:pit ?to) (and (N:RW:alive ?who) (RW:NOT-alive ?who))) (when (N:R:= ?from ?to) (RW:NOT-at ?who ?from)))
 Init[78]:
   S:(adj s-1-1 s-1-2)
   S:(adj s-1-1 s-2-1)

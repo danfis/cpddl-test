@@ -1,7 +1,6 @@
 Monotonicity invariants:
 < {rcnot V0:gateid}
 , {rcnot C0:gateid}
-, {NOT-occupied_pqubit C0:pqubit}
 , {NOT-initialized V0:pqubit}
 , {NOT-initialized C0:pqubit}
 , {mapped V0:lqubit C1:pqubit, rcnot C2:gateid}
@@ -9,9 +8,6 @@ Monotonicity invariants:
 , {rcnot V0:gateid, NOT-rcnot V0:gateid}
 , {rcnot C0:gateid, NOT-rcnot C1:gateid}
 , {rcnot C1:gateid, NOT-rcnot V0:gateid}
-, {mapped C1:lqubit V0:pqubit, rcnot C2:gateid, NOT-occupied_pqubit V0:pqubit}
-, {mapped C1:lqubit V0:pqubit, NOT-occupied_pqubit V0:pqubit, NOT-initialized V0:pqubit}
-, {mapped C1:lqubit V0:pqubit, NOT-occupied_pqubit V0:pqubit, NOT-initialized C2:pqubit}
 , {rcnot V0:gateid, NOT-initialized C1:pqubit, NOT-rcnot V0:gateid}
 , {rcnot C0:gateid, NOT-initialized C1:pqubit, NOT-rcnot C2:gateid}
 , {rcnot C1:gateid, NOT-initialized C2:pqubit, NOT-rcnot V0:gateid}
@@ -20,10 +16,6 @@ FD Mutex Groups:
 < {rcnot V0:gateid}
 , {NOT-initialized V0:pqubit}
 , {rcnot V0:gateid, NOT-rcnot V0:gateid}:=1
-, {mapped C0:lqubit p5, NOT-occupied_pqubit p5, NOT-initialized p5}:=1
-, {mapped C0:lqubit p7, NOT-occupied_pqubit p7, NOT-initialized p7}:=1
-, {mapped C0:lqubit p11, NOT-occupied_pqubit p11, NOT-initialized p11}:=1
-, {mapped C0:lqubit p13, NOT-occupied_pqubit p13, NOT-initialized p13}:=1
 >
 FD Goal aware:
 < {rcnot l1_l4_i1, NOT-rcnot l1_l4_i1}:=1

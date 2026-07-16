@@ -207,15 +207,15 @@ Op[6928]:
   (move pos0-0 pos0-1 pos0-1 pos0-0), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
-    del: (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
   (move pos0-0 pos0-1 pos0-1 pos0-2), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-0) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos0-2)
-    del: (headsnake pos0-0) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos0-0) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
   (move pos0-0 pos0-1 pos0-1 pos1-1), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-0) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos1-1)
-    del: (headsnake pos0-0) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos0-0) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
   (move pos0-0 pos0-1 pos0-2 pos0-1), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-0) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
     add: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos0-1)
@@ -571,15 +571,15 @@ Op[6928]:
   (move pos0-0 pos1-0 pos1-0 pos0-0), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
-    del: (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
   (move pos0-0 pos1-0 pos1-0 pos1-1), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos0-0) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos1-1)
-    del: (headsnake pos0-0) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos0-0) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
   (move pos0-0 pos1-0 pos1-0 pos2-0), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos0-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos2-0)
-    del: (headsnake pos0-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos0-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
   (move pos0-0 pos1-0 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos0-0) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos0-1)
@@ -839,11 +839,11 @@ Op[6928]:
   (move pos0-1 pos0-0 pos0-0 pos0-1), cost: 1
     pre: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
     add: (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
-    del: (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
+    del: (NOT-blocked pos0-0) (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
   (move pos0-1 pos0-0 pos0-0 pos1-0), cost: 1
     pre: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos0-1) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
     add: (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (tailsnake pos1-0)
-    del: (headsnake pos0-1) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
+    del: (NOT-blocked pos0-0) (headsnake pos0-1) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
   (move pos0-1 pos0-0 pos0-1 pos0-0), cost: 1
     pre: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos0-1) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
     add: (NOT-blocked pos0-1) (headsnake pos0-0) (tailsnake pos0-0)
@@ -1179,15 +1179,15 @@ Op[6928]:
   (move pos0-1 pos0-2 pos0-2 pos0-1), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
-    del: (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
   (move pos0-1 pos0-2 pos0-2 pos0-3), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos0-3)
-    del: (headsnake pos0-1) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
   (move pos0-1 pos0-2 pos0-2 pos1-2), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos1-2)
-    del: (headsnake pos0-1) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
   (move pos0-1 pos0-2 pos0-3 pos0-2), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
     add: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos0-2)
@@ -1543,19 +1543,19 @@ Op[6928]:
   (move pos0-1 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
-    del: (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
   (move pos0-1 pos1-1 pos1-1 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos0-1) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos1-0)
-    del: (headsnake pos0-1) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos0-1) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
   (move pos0-1 pos1-1 pos1-1 pos1-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos0-1) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos1-2)
-    del: (headsnake pos0-1) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos0-1) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
   (move pos0-1 pos1-1 pos1-1 pos2-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos0-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos2-1)
-    del: (headsnake pos0-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos0-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
   (move pos0-1 pos1-1 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos0-1) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos0-2)
@@ -1807,15 +1807,15 @@ Op[6928]:
   (move pos0-2 pos0-1 pos0-1 pos0-0), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-2) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (tailsnake pos0-0)
-    del: (headsnake pos0-2) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos0-2) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
   (move pos0-2 pos0-1 pos0-1 pos0-2), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
-    del: (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos0-2) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
   (move pos0-2 pos0-1 pos0-1 pos1-1), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-2) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (tailsnake pos1-1)
-    del: (headsnake pos0-2) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos0-2) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
   (move pos0-2 pos0-1 pos0-2 pos0-1), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-2) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
     add: (NOT-blocked pos0-2) (headsnake pos0-1) (tailsnake pos0-1)
@@ -2151,15 +2151,15 @@ Op[6928]:
   (move pos0-2 pos0-3 pos0-3 pos0-2), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
-    del: (headsnake pos0-2) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
   (move pos0-2 pos0-3 pos0-3 pos0-4), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos0-4)
-    del: (headsnake pos0-2) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
   (move pos0-2 pos0-3 pos0-3 pos1-3), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos1-3)
-    del: (headsnake pos0-2) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
   (move pos0-2 pos0-3 pos0-4 pos0-3), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
     add: (NOT-blocked pos0-4) (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos0-3)
@@ -2519,19 +2519,19 @@ Op[6928]:
   (move pos0-2 pos1-2 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
-    del: (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
   (move pos0-2 pos1-2 pos1-2 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos0-2) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos1-1)
-    del: (headsnake pos0-2) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos0-2) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
   (move pos0-2 pos1-2 pos1-2 pos1-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos0-2) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos1-3)
-    del: (headsnake pos0-2) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos0-2) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
   (move pos0-2 pos1-2 pos1-2 pos2-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos0-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos2-2)
-    del: (headsnake pos0-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos0-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
   (move pos0-2 pos1-2 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos0-2) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos0-3)
@@ -2779,15 +2779,15 @@ Op[6928]:
   (move pos0-3 pos0-2 pos0-2 pos0-1), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos0-3) (tailsnake pos0-1)
-    del: (headsnake pos0-3) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
   (move pos0-3 pos0-2 pos0-2 pos0-3), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
-    del: (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
   (move pos0-3 pos0-2 pos0-2 pos1-2), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos0-3) (tailsnake pos1-2)
-    del: (headsnake pos0-3) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
   (move pos0-3 pos0-2 pos0-3 pos0-2), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos0-3) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
     add: (NOT-blocked pos0-3) (headsnake pos0-2) (tailsnake pos0-2)
@@ -3123,11 +3123,11 @@ Op[6928]:
   (move pos0-3 pos0-4 pos0-4 pos0-3), cost: 1
     pre: (NOT-blocked pos0-4) (NOT-ispoint pos0-4) (headsnake pos0-3) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
     add: (headsnake pos0-4) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
-    del: (headsnake pos0-3) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
+    del: (NOT-blocked pos0-4) (headsnake pos0-3) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
   (move pos0-3 pos0-4 pos0-4 pos1-4), cost: 1
     pre: (NOT-blocked pos0-4) (NOT-ispoint pos0-4) (headsnake pos0-3) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
     add: (headsnake pos0-4) (nextsnake pos0-4 pos0-3) (tailsnake pos1-4)
-    del: (headsnake pos0-3) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
+    del: (NOT-blocked pos0-4) (headsnake pos0-3) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
   (move pos0-3 pos0-4 pos1-0 pos0-0), cost: 1
     pre: (NOT-blocked pos0-4) (NOT-ispoint pos0-4) (headsnake pos0-3) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
     add: (NOT-blocked pos1-0) (headsnake pos0-4) (nextsnake pos0-4 pos0-3) (tailsnake pos0-0)
@@ -3495,19 +3495,19 @@ Op[6928]:
   (move pos0-3 pos1-3 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
-    del: (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
   (move pos0-3 pos1-3 pos1-3 pos1-2), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos0-3) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos1-2)
-    del: (headsnake pos0-3) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos0-3) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
   (move pos0-3 pos1-3 pos1-3 pos1-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos0-3) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos1-4)
-    del: (headsnake pos0-3) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos0-3) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
   (move pos0-3 pos1-3 pos1-3 pos2-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos0-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos2-3)
-    del: (headsnake pos0-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos0-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
   (move pos0-3 pos1-3 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos0-3) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos0-4)
@@ -3751,15 +3751,15 @@ Op[6928]:
   (move pos0-4 pos0-3 pos0-3 pos0-2), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos0-4) (tailsnake pos0-2)
-    del: (headsnake pos0-4) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
   (move pos0-4 pos0-3 pos0-3 pos0-4), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
-    del: (headsnake pos0-4) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
   (move pos0-4 pos0-3 pos0-3 pos1-3), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos0-4) (tailsnake pos1-3)
-    del: (headsnake pos0-4) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
   (move pos0-4 pos0-3 pos0-4 pos0-3), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos0-4) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
     add: (NOT-blocked pos0-4) (headsnake pos0-3) (tailsnake pos0-3)
@@ -4151,15 +4151,15 @@ Op[6928]:
   (move pos0-4 pos1-4 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos0-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
-    del: (headsnake pos0-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos0-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
   (move pos0-4 pos1-4 pos1-4 pos1-3), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos0-4) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos1-3)
-    del: (headsnake pos0-4) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos0-4) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
   (move pos0-4 pos1-4 pos1-4 pos2-4), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos0-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos2-4)
-    del: (headsnake pos0-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos0-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
   (move pos0-4 pos1-4 pos2-0 pos1-0), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos0-4) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
     add: (NOT-blocked pos2-0) (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos1-0)
@@ -4359,11 +4359,11 @@ Op[6928]:
   (move pos1-0 pos0-0 pos0-0 pos0-1), cost: 1
     pre: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos1-0) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
     add: (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (tailsnake pos0-1)
-    del: (headsnake pos1-0) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
+    del: (NOT-blocked pos0-0) (headsnake pos1-0) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
   (move pos1-0 pos0-0 pos0-0 pos1-0), cost: 1
     pre: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
     add: (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
-    del: (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
+    del: (NOT-blocked pos0-0) (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (tailsnake pos0-0)
   (move pos1-0 pos0-0 pos0-1 pos0-0), cost: 1
     pre: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos1-0) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
     add: (NOT-blocked pos0-1) (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (tailsnake pos0-0)
@@ -4743,19 +4743,19 @@ Op[6928]:
   (move pos1-0 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-0) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos0-1)
-    del: (headsnake pos1-0) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
   (move pos1-0 pos1-1 pos1-1 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
-    del: (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
   (move pos1-0 pos1-1 pos1-1 pos1-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-0) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos1-2)
-    del: (headsnake pos1-0) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
   (move pos1-0 pos1-1 pos1-1 pos2-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-0) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos2-1)
-    del: (headsnake pos1-0) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
   (move pos1-0 pos1-1 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-0) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos0-2)
@@ -5123,15 +5123,15 @@ Op[6928]:
   (move pos1-0 pos2-0 pos2-0 pos1-0), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
-    del: (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
   (move pos1-0 pos2-0 pos2-0 pos2-1), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos1-0) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos2-1)
-    del: (headsnake pos1-0) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos1-0) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
   (move pos1-0 pos2-0 pos2-0 pos3-0), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos1-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos3-0)
-    del: (headsnake pos1-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos1-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
   (move pos1-0 pos2-0 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos1-0) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-1)
@@ -5327,15 +5327,15 @@ Op[6928]:
   (move pos1-1 pos0-1 pos0-1 pos0-0), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos1-1) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos0-0)
-    del: (headsnake pos1-1) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos1-1) (nextsnake pos0-0 pos0-1) (tailsnake pos0-1)
   (move pos1-1 pos0-1 pos0-1 pos0-2), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos1-1) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos0-2)
-    del: (headsnake pos1-1) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos1-1) (nextsnake pos0-2 pos0-1) (tailsnake pos0-1)
   (move pos1-1 pos0-1 pos0-1 pos1-1), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
     add: (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
-    del: (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
+    del: (NOT-blocked pos0-1) (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (tailsnake pos0-1)
   (move pos1-1 pos0-1 pos0-2 pos0-1), cost: 1
     pre: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos1-1) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
     add: (NOT-blocked pos0-2) (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos0-1)
@@ -5691,15 +5691,15 @@ Op[6928]:
   (move pos1-1 pos1-0 pos1-0 pos0-0), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos1-1) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos0-0)
-    del: (headsnake pos1-1) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos1-1) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
   (move pos1-1 pos1-0 pos1-0 pos1-1), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
-    del: (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
   (move pos1-1 pos1-0 pos1-0 pos2-0), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos1-1) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos2-0)
-    del: (headsnake pos1-1) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos1-1) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
   (move pos1-1 pos1-0 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos1-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos0-1)
@@ -6039,19 +6039,19 @@ Op[6928]:
   (move pos1-1 pos1-2 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-1) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos0-2)
-    del: (headsnake pos1-1) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
   (move pos1-1 pos1-2 pos1-2 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
-    del: (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
   (move pos1-1 pos1-2 pos1-2 pos1-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-1) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos1-3)
-    del: (headsnake pos1-1) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
   (move pos1-1 pos1-2 pos1-2 pos2-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-1) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos2-2)
-    del: (headsnake pos1-1) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
   (move pos1-1 pos1-2 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-1) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos0-3)
@@ -6415,19 +6415,19 @@ Op[6928]:
   (move pos1-1 pos2-1 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
-    del: (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
   (move pos1-1 pos2-1 pos2-1 pos2-0), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos2-0)
-    del: (headsnake pos1-1) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
   (move pos1-1 pos2-1 pos2-1 pos2-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos2-2)
-    del: (headsnake pos1-1) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
   (move pos1-1 pos2-1 pos2-1 pos3-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos3-1)
-    del: (headsnake pos1-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
   (move pos1-1 pos2-1 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos1-1) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-2)
@@ -6619,15 +6619,15 @@ Op[6928]:
   (move pos1-2 pos0-2 pos0-2 pos0-1), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos0-1)
-    del: (headsnake pos1-2) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos0-1 pos0-2) (tailsnake pos0-2)
   (move pos1-2 pos0-2 pos0-2 pos0-3), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos0-3)
-    del: (headsnake pos1-2) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos0-3 pos0-2) (tailsnake pos0-2)
   (move pos1-2 pos0-2 pos0-2 pos1-2), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
     add: (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
-    del: (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
+    del: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (tailsnake pos0-2)
   (move pos1-2 pos0-2 pos0-3 pos0-2), cost: 1
     pre: (NOT-blocked pos0-2) (headsnake pos1-2) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
     add: (NOT-blocked pos0-3) (headsnake pos0-2) (nextsnake pos0-2 pos1-2) (tailsnake pos0-2)
@@ -6983,19 +6983,19 @@ Op[6928]:
   (move pos1-2 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-2) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos0-1)
-    del: (headsnake pos1-2) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-2) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
   (move pos1-2 pos1-1 pos1-1 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-2) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos1-0)
-    del: (headsnake pos1-2) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-2) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
   (move pos1-2 pos1-1 pos1-1 pos1-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
-    del: (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
   (move pos1-2 pos1-1 pos1-1 pos2-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-2) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos2-1)
-    del: (headsnake pos1-2) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos1-2) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
   (move pos1-2 pos1-1 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (tailsnake pos0-2)
@@ -7335,19 +7335,19 @@ Op[6928]:
   (move pos1-2 pos1-3 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-2) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos0-3)
-    del: (headsnake pos1-2) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
   (move pos1-2 pos1-3 pos1-3 pos1-2), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
-    del: (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
   (move pos1-2 pos1-3 pos1-3 pos1-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-2) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos1-4)
-    del: (headsnake pos1-2) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
   (move pos1-2 pos1-3 pos1-3 pos2-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-2) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos2-3)
-    del: (headsnake pos1-2) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
   (move pos1-2 pos1-3 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-2) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos0-4)
@@ -7711,19 +7711,19 @@ Op[6928]:
   (move pos1-2 pos2-2 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
-    del: (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
   (move pos1-2 pos2-2 pos2-2 pos2-1), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos2-1)
-    del: (headsnake pos1-2) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
   (move pos1-2 pos2-2 pos2-2 pos2-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos2-3)
-    del: (headsnake pos1-2) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
   (move pos1-2 pos2-2 pos2-2 pos3-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos3-2)
-    del: (headsnake pos1-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
   (move pos1-2 pos2-2 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos1-2) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-3)
@@ -7911,15 +7911,15 @@ Op[6928]:
   (move pos1-3 pos0-3 pos0-3 pos0-2), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos0-2)
-    del: (headsnake pos1-3) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos0-2 pos0-3) (tailsnake pos0-3)
   (move pos1-3 pos0-3 pos0-3 pos0-4), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos0-4)
-    del: (headsnake pos1-3) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos0-4 pos0-3) (tailsnake pos0-3)
   (move pos1-3 pos0-3 pos0-3 pos1-3), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
     add: (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
-    del: (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
+    del: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos1-3 pos0-3) (tailsnake pos0-3)
   (move pos1-3 pos0-3 pos0-4 pos0-3), cost: 1
     pre: (NOT-blocked pos0-3) (headsnake pos1-3) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
     add: (NOT-blocked pos0-4) (headsnake pos0-3) (nextsnake pos0-3 pos1-3) (tailsnake pos0-3)
@@ -8279,19 +8279,19 @@ Op[6928]:
   (move pos1-3 pos1-2 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-3) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos0-2)
-    del: (headsnake pos1-3) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-3) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
   (move pos1-3 pos1-2 pos1-2 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-3) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos1-1)
-    del: (headsnake pos1-3) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-3) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
   (move pos1-3 pos1-2 pos1-2 pos1-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
-    del: (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-3) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
   (move pos1-3 pos1-2 pos1-2 pos2-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-3) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos2-2)
-    del: (headsnake pos1-3) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos1-3) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
   (move pos1-3 pos1-2 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (tailsnake pos0-3)
@@ -8631,15 +8631,15 @@ Op[6928]:
   (move pos1-3 pos1-4 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos1-3) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos0-4)
-    del: (headsnake pos1-3) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
   (move pos1-3 pos1-4 pos1-4 pos1-3), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
-    del: (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
   (move pos1-3 pos1-4 pos1-4 pos2-4), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos1-3) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos2-4)
-    del: (headsnake pos1-3) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
   (move pos1-3 pos1-4 pos2-0 pos1-0), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos1-3) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
     add: (NOT-blocked pos2-0) (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos1-0)
@@ -9007,19 +9007,19 @@ Op[6928]:
   (move pos1-3 pos2-3 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
-    del: (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
   (move pos1-3 pos2-3 pos2-3 pos2-2), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos2-2)
-    del: (headsnake pos1-3) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
   (move pos1-3 pos2-3 pos2-3 pos2-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos2-4)
-    del: (headsnake pos1-3) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
   (move pos1-3 pos2-3 pos2-3 pos3-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos3-3)
-    del: (headsnake pos1-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
   (move pos1-3 pos2-3 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos1-3) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-4)
@@ -9203,11 +9203,11 @@ Op[6928]:
   (move pos1-4 pos0-4 pos0-4 pos0-3), cost: 1
     pre: (NOT-blocked pos0-4) (NOT-ispoint pos0-4) (headsnake pos1-4) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
     add: (headsnake pos0-4) (nextsnake pos0-4 pos1-4) (tailsnake pos0-3)
-    del: (headsnake pos1-4) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
+    del: (NOT-blocked pos0-4) (headsnake pos1-4) (nextsnake pos0-3 pos0-4) (tailsnake pos0-4)
   (move pos1-4 pos0-4 pos0-4 pos1-4), cost: 1
     pre: (NOT-blocked pos0-4) (NOT-ispoint pos0-4) (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
     add: (headsnake pos0-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
-    del: (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
+    del: (NOT-blocked pos0-4) (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (tailsnake pos0-4)
   (move pos1-4 pos0-4 pos1-0 pos0-0), cost: 1
     pre: (NOT-blocked pos0-4) (NOT-ispoint pos0-4) (headsnake pos1-4) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
     add: (NOT-blocked pos1-0) (headsnake pos0-4) (nextsnake pos0-4 pos1-4) (tailsnake pos0-0)
@@ -9575,19 +9575,19 @@ Op[6928]:
   (move pos1-4 pos1-3 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-4) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos0-3)
-    del: (headsnake pos1-4) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-4) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
   (move pos1-4 pos1-3 pos1-3 pos1-2), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-4) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos1-2)
-    del: (headsnake pos1-4) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-4) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
   (move pos1-4 pos1-3 pos1-3 pos1-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
-    del: (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
   (move pos1-4 pos1-3 pos1-3 pos2-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-4) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos2-3)
-    del: (headsnake pos1-4) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos1-4) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
   (move pos1-4 pos1-3 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos1-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos1-3 pos1-4) (tailsnake pos0-4)
@@ -9983,15 +9983,15 @@ Op[6928]:
   (move pos1-4 pos2-4 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
-    del: (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
   (move pos1-4 pos2-4 pos2-4 pos2-3), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos1-4) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos2-3)
-    del: (headsnake pos1-4) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos1-4) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
   (move pos1-4 pos2-4 pos2-4 pos3-4), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos1-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos3-4)
-    del: (headsnake pos1-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos1-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
   (move pos1-4 pos2-4 pos3-0 pos2-0), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos1-4) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
     add: (NOT-blocked pos3-0) (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos2-0)
@@ -10171,15 +10171,15 @@ Op[6928]:
   (move pos2-0 pos1-0 pos1-0 pos0-0), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos2-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos0-0)
-    del: (headsnake pos2-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos2-0) (nextsnake pos0-0 pos1-0) (tailsnake pos1-0)
   (move pos2-0 pos1-0 pos1-0 pos1-1), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos2-0) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos1-1)
-    del: (headsnake pos2-0) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos2-0) (nextsnake pos1-1 pos1-0) (tailsnake pos1-0)
   (move pos2-0 pos1-0 pos1-0 pos2-0), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
     add: (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
-    del: (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
+    del: (NOT-blocked pos1-0) (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (tailsnake pos1-0)
   (move pos2-0 pos1-0 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos2-0) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (NOT-blocked pos1-1) (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (tailsnake pos0-1)
@@ -10575,19 +10575,19 @@ Op[6928]:
   (move pos2-0 pos2-1 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos1-1)
-    del: (headsnake pos2-0) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
   (move pos2-0 pos2-1 pos2-1 pos2-0), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
-    del: (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
   (move pos2-0 pos2-1 pos2-1 pos2-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos2-2)
-    del: (headsnake pos2-0) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
   (move pos2-0 pos2-1 pos2-1 pos3-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos3-1)
-    del: (headsnake pos2-0) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
   (move pos2-0 pos2-1 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos1-2)
@@ -10955,15 +10955,15 @@ Op[6928]:
   (move pos2-0 pos3-0 pos3-0 pos2-0), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
-    del: (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
   (move pos2-0 pos3-0 pos3-0 pos3-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos3-1)
-    del: (headsnake pos2-0) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
   (move pos2-0 pos3-0 pos3-0 pos4-0), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos4-0)
-    del: (headsnake pos2-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
   (move pos2-0 pos3-0 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos2-0) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-1)
@@ -11143,19 +11143,19 @@ Op[6928]:
   (move pos2-1 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos2-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos0-1)
-    del: (headsnake pos2-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos2-1) (nextsnake pos0-1 pos1-1) (tailsnake pos1-1)
   (move pos2-1 pos1-1 pos1-1 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos2-1) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos1-0)
-    del: (headsnake pos2-1) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos2-1) (nextsnake pos1-0 pos1-1) (tailsnake pos1-1)
   (move pos2-1 pos1-1 pos1-1 pos1-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos2-1) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos1-2)
-    del: (headsnake pos2-1) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos2-1) (nextsnake pos1-2 pos1-1) (tailsnake pos1-1)
   (move pos2-1 pos1-1 pos1-1 pos2-1), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
     add: (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
-    del: (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
+    del: (NOT-blocked pos1-1) (headsnake pos2-1) (nextsnake pos2-1 pos1-1) (tailsnake pos1-1)
   (move pos2-1 pos1-1 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos2-1) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos0-2)
@@ -11523,15 +11523,15 @@ Op[6928]:
   (move pos2-1 pos2-0 pos2-0 pos1-0), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos2-1) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos1-0)
-    del: (headsnake pos2-1) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos2-1) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
   (move pos2-1 pos2-0 pos2-0 pos2-1), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
-    del: (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos2-1) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
   (move pos2-1 pos2-0 pos2-0 pos3-0), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos2-1) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos3-0)
-    del: (headsnake pos2-1) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos2-1) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
   (move pos2-1 pos2-0 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos2-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (tailsnake pos1-1)
@@ -11871,19 +11871,19 @@ Op[6928]:
   (move pos2-1 pos2-2 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos1-2)
-    del: (headsnake pos2-1) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
   (move pos2-1 pos2-2 pos2-2 pos2-1), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
-    del: (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
   (move pos2-1 pos2-2 pos2-2 pos2-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos2-3)
-    del: (headsnake pos2-1) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
   (move pos2-1 pos2-2 pos2-2 pos3-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos3-2)
-    del: (headsnake pos2-1) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
   (move pos2-1 pos2-2 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos1-3)
@@ -12247,19 +12247,19 @@ Op[6928]:
   (move pos2-1 pos3-1 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
-    del: (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
   (move pos2-1 pos3-1 pos3-1 pos3-0), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos2-1) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos3-0)
-    del: (headsnake pos2-1) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos2-1) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
   (move pos2-1 pos3-1 pos3-1 pos3-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos2-1) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos3-2)
-    del: (headsnake pos2-1) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos2-1) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
   (move pos2-1 pos3-1 pos3-1 pos4-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos2-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos4-1)
-    del: (headsnake pos2-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos2-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
   (move pos2-1 pos3-1 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos2-1) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-2)
@@ -12439,19 +12439,19 @@ Op[6928]:
   (move pos2-2 pos1-2 pos1-2 pos0-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos2-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos0-2)
-    del: (headsnake pos2-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos2-2) (nextsnake pos0-2 pos1-2) (tailsnake pos1-2)
   (move pos2-2 pos1-2 pos1-2 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos2-2) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos1-1)
-    del: (headsnake pos2-2) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos2-2) (nextsnake pos1-1 pos1-2) (tailsnake pos1-2)
   (move pos2-2 pos1-2 pos1-2 pos1-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos2-2) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos1-3)
-    del: (headsnake pos2-2) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos2-2) (nextsnake pos1-3 pos1-2) (tailsnake pos1-2)
   (move pos2-2 pos1-2 pos1-2 pos2-2), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
     add: (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
-    del: (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
+    del: (NOT-blocked pos1-2) (headsnake pos2-2) (nextsnake pos2-2 pos1-2) (tailsnake pos1-2)
   (move pos2-2 pos1-2 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos2-2) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (NOT-blocked pos1-3) (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (tailsnake pos0-3)
@@ -12815,19 +12815,19 @@ Op[6928]:
   (move pos2-2 pos2-1 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos1-1)
-    del: (headsnake pos2-2) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
   (move pos2-2 pos2-1 pos2-1 pos2-0), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos2-0)
-    del: (headsnake pos2-2) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
   (move pos2-2 pos2-1 pos2-1 pos2-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
-    del: (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
   (move pos2-2 pos2-1 pos2-1 pos3-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos3-1)
-    del: (headsnake pos2-2) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
   (move pos2-2 pos2-1 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos2-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-1 pos2-2) (tailsnake pos1-2)
@@ -13167,19 +13167,19 @@ Op[6928]:
   (move pos2-2 pos2-3 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos1-3)
-    del: (headsnake pos2-2) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
   (move pos2-2 pos2-3 pos2-3 pos2-2), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
-    del: (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
   (move pos2-2 pos2-3 pos2-3 pos2-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos2-4)
-    del: (headsnake pos2-2) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
   (move pos2-2 pos2-3 pos2-3 pos3-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos3-3)
-    del: (headsnake pos2-2) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
   (move pos2-2 pos2-3 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos1-4)
@@ -13543,19 +13543,19 @@ Op[6928]:
   (move pos2-2 pos3-2 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
-    del: (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
   (move pos2-2 pos3-2 pos3-2 pos3-1), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos3-1)
-    del: (headsnake pos2-2) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
   (move pos2-2 pos3-2 pos3-2 pos3-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos3-3)
-    del: (headsnake pos2-2) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
   (move pos2-2 pos3-2 pos3-2 pos4-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos4-2)
-    del: (headsnake pos2-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
   (move pos2-2 pos3-2 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos2-2) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-3)
@@ -13735,19 +13735,19 @@ Op[6928]:
   (move pos2-3 pos1-3 pos1-3 pos0-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos2-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos0-3)
-    del: (headsnake pos2-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos2-3) (nextsnake pos0-3 pos1-3) (tailsnake pos1-3)
   (move pos2-3 pos1-3 pos1-3 pos1-2), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos2-3) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos1-2)
-    del: (headsnake pos2-3) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos2-3) (nextsnake pos1-2 pos1-3) (tailsnake pos1-3)
   (move pos2-3 pos1-3 pos1-3 pos1-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos2-3) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos1-4)
-    del: (headsnake pos2-3) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos2-3) (nextsnake pos1-4 pos1-3) (tailsnake pos1-3)
   (move pos2-3 pos1-3 pos1-3 pos2-3), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
     add: (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
-    del: (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
+    del: (NOT-blocked pos1-3) (headsnake pos2-3) (nextsnake pos2-3 pos1-3) (tailsnake pos1-3)
   (move pos2-3 pos1-3 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-3) (NOT-ispoint pos1-3) (headsnake pos2-3) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (NOT-blocked pos1-4) (headsnake pos1-3) (nextsnake pos1-3 pos2-3) (tailsnake pos0-4)
@@ -14111,19 +14111,19 @@ Op[6928]:
   (move pos2-3 pos2-2 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos1-2)
-    del: (headsnake pos2-3) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
   (move pos2-3 pos2-2 pos2-2 pos2-1), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos2-1)
-    del: (headsnake pos2-3) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
   (move pos2-3 pos2-2 pos2-2 pos2-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
-    del: (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
   (move pos2-3 pos2-2 pos2-2 pos3-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos3-2)
-    del: (headsnake pos2-3) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
   (move pos2-3 pos2-2 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos2-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-2 pos2-3) (tailsnake pos1-3)
@@ -14463,15 +14463,15 @@ Op[6928]:
   (move pos2-3 pos2-4 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos2-3) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos1-4)
-    del: (headsnake pos2-3) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
   (move pos2-3 pos2-4 pos2-4 pos2-3), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
-    del: (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
   (move pos2-3 pos2-4 pos2-4 pos3-4), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos2-3) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos3-4)
-    del: (headsnake pos2-3) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
   (move pos2-3 pos2-4 pos3-0 pos2-0), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos2-3) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
     add: (NOT-blocked pos3-0) (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos2-0)
@@ -14839,19 +14839,19 @@ Op[6928]:
   (move pos2-3 pos3-3 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
-    del: (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
   (move pos2-3 pos3-3 pos3-3 pos3-2), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos2-3) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos3-2)
-    del: (headsnake pos2-3) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos2-3) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
   (move pos2-3 pos3-3 pos3-3 pos3-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos2-3) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos3-4)
-    del: (headsnake pos2-3) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos2-3) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
   (move pos2-3 pos3-3 pos3-3 pos4-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos2-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos4-3)
-    del: (headsnake pos2-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos2-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
   (move pos2-3 pos3-3 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos2-3) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-4)
@@ -15031,15 +15031,15 @@ Op[6928]:
   (move pos2-4 pos1-4 pos1-4 pos0-4), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos2-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos0-4)
-    del: (headsnake pos2-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos2-4) (nextsnake pos0-4 pos1-4) (tailsnake pos1-4)
   (move pos2-4 pos1-4 pos1-4 pos1-3), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos2-4) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos1-3)
-    del: (headsnake pos2-4) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos2-4) (nextsnake pos1-3 pos1-4) (tailsnake pos1-4)
   (move pos2-4 pos1-4 pos1-4 pos2-4), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
     add: (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
-    del: (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
+    del: (NOT-blocked pos1-4) (headsnake pos2-4) (nextsnake pos2-4 pos1-4) (tailsnake pos1-4)
   (move pos2-4 pos1-4 pos2-0 pos1-0), cost: 1
     pre: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos2-4) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
     add: (NOT-blocked pos2-0) (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (tailsnake pos1-0)
@@ -15407,19 +15407,19 @@ Op[6928]:
   (move pos2-4 pos2-3 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos1-3)
-    del: (headsnake pos2-4) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
   (move pos2-4 pos2-3 pos2-3 pos2-2), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos2-2)
-    del: (headsnake pos2-4) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
   (move pos2-4 pos2-3 pos2-3 pos2-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
-    del: (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
   (move pos2-4 pos2-3 pos2-3 pos3-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos3-3)
-    del: (headsnake pos2-4) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
   (move pos2-4 pos2-3 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos2-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos2-3 pos2-4) (tailsnake pos1-4)
@@ -15815,15 +15815,15 @@ Op[6928]:
   (move pos2-4 pos3-4 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
-    del: (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
   (move pos2-4 pos3-4 pos3-4 pos3-3), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos2-4) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos3-3)
-    del: (headsnake pos2-4) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos2-4) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
   (move pos2-4 pos3-4 pos3-4 pos4-4), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos2-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos4-4)
-    del: (headsnake pos2-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos2-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
   (move pos2-4 pos3-4 pos4-0 pos3-0), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos2-4) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
     add: (NOT-blocked pos4-0) (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos3-0)
@@ -16003,15 +16003,15 @@ Op[6928]:
   (move pos3-0 pos2-0 pos2-0 pos1-0), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos3-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos1-0)
-    del: (headsnake pos3-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos3-0) (nextsnake pos1-0 pos2-0) (tailsnake pos2-0)
   (move pos3-0 pos2-0 pos2-0 pos2-1), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos3-0) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos2-1)
-    del: (headsnake pos3-0) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos3-0) (nextsnake pos2-1 pos2-0) (tailsnake pos2-0)
   (move pos3-0 pos2-0 pos2-0 pos3-0), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
     add: (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
-    del: (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
+    del: (NOT-blocked pos2-0) (headsnake pos3-0) (nextsnake pos3-0 pos2-0) (tailsnake pos2-0)
   (move pos3-0 pos2-0 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos3-0) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (NOT-blocked pos2-1) (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (tailsnake pos1-1)
@@ -16407,19 +16407,19 @@ Op[6928]:
   (move pos3-0 pos3-1 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-0) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos2-1)
-    del: (headsnake pos3-0) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
   (move pos3-0 pos3-1 pos3-1 pos3-0), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
-    del: (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
   (move pos3-0 pos3-1 pos3-1 pos3-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-0) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos3-2)
-    del: (headsnake pos3-0) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
   (move pos3-0 pos3-1 pos3-1 pos4-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-0) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos4-1)
-    del: (headsnake pos3-0) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
   (move pos3-0 pos3-1 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-0) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos2-2)
@@ -16787,11 +16787,11 @@ Op[6928]:
   (move pos3-0 pos4-0 pos4-0 pos3-0), cost: 1
     pre: (NOT-blocked pos4-0) (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
     add: (headsnake pos4-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
-    del: (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
+    del: (NOT-blocked pos4-0) (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
   (move pos3-0 pos4-0 pos4-0 pos4-1), cost: 1
     pre: (NOT-blocked pos4-0) (headsnake pos3-0) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
     add: (headsnake pos4-0) (nextsnake pos4-0 pos3-0) (tailsnake pos4-1)
-    del: (headsnake pos3-0) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
+    del: (NOT-blocked pos4-0) (headsnake pos3-0) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
   (move pos3-0 pos4-0 pos4-1 pos3-1), cost: 1
     pre: (NOT-blocked pos4-0) (headsnake pos3-0) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
     add: (NOT-blocked pos4-1) (headsnake pos4-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-1)
@@ -16975,19 +16975,19 @@ Op[6928]:
   (move pos3-1 pos2-1 pos2-1 pos1-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos1-1)
-    del: (headsnake pos3-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos1-1 pos2-1) (tailsnake pos2-1)
   (move pos3-1 pos2-1 pos2-1 pos2-0), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos2-0)
-    del: (headsnake pos3-1) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos2-0 pos2-1) (tailsnake pos2-1)
   (move pos3-1 pos2-1 pos2-1 pos2-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos2-2)
-    del: (headsnake pos3-1) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos2-2 pos2-1) (tailsnake pos2-1)
   (move pos3-1 pos2-1 pos2-1 pos3-1), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
     add: (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
-    del: (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
+    del: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos3-1 pos2-1) (tailsnake pos2-1)
   (move pos3-1 pos2-1 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos1-2)
@@ -17355,15 +17355,15 @@ Op[6928]:
   (move pos3-1 pos3-0 pos3-0 pos2-0), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos2-0)
-    del: (headsnake pos3-1) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
   (move pos3-1 pos3-0 pos3-0 pos3-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
-    del: (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
   (move pos3-1 pos3-0 pos3-0 pos4-0), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos4-0)
-    del: (headsnake pos3-1) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
   (move pos3-1 pos3-0 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos3-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos3-0 pos3-1) (tailsnake pos2-1)
@@ -17703,19 +17703,19 @@ Op[6928]:
   (move pos3-1 pos3-2 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos2-2)
-    del: (headsnake pos3-1) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
   (move pos3-1 pos3-2 pos3-2 pos3-1), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
-    del: (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
   (move pos3-1 pos3-2 pos3-2 pos3-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos3-3)
-    del: (headsnake pos3-1) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
   (move pos3-1 pos3-2 pos3-2 pos4-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos4-2)
-    del: (headsnake pos3-1) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
   (move pos3-1 pos3-2 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos2-3)
@@ -18075,15 +18075,15 @@ Op[6928]:
   (move pos3-1 pos4-1 pos4-1 pos3-1), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
-    del: (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
   (move pos3-1 pos4-1 pos4-1 pos4-0), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos3-1) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos4-0)
-    del: (headsnake pos3-1) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos3-1) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
   (move pos3-1 pos4-1 pos4-1 pos4-2), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos3-1) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos4-2)
-    del: (headsnake pos3-1) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos3-1) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
   (move pos3-1 pos4-1 pos4-2 pos3-2), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos3-1) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
     add: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-2)
@@ -18271,19 +18271,19 @@ Op[6928]:
   (move pos3-2 pos2-2 pos2-2 pos1-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos1-2)
-    del: (headsnake pos3-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos1-2 pos2-2) (tailsnake pos2-2)
   (move pos3-2 pos2-2 pos2-2 pos2-1), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos2-1)
-    del: (headsnake pos3-2) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos2-1 pos2-2) (tailsnake pos2-2)
   (move pos3-2 pos2-2 pos2-2 pos2-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos2-3)
-    del: (headsnake pos3-2) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos2-3 pos2-2) (tailsnake pos2-2)
   (move pos3-2 pos2-2 pos2-2 pos3-2), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
     add: (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
-    del: (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
+    del: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos3-2 pos2-2) (tailsnake pos2-2)
   (move pos3-2 pos2-2 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-2) (headsnake pos3-2) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (NOT-blocked pos2-3) (headsnake pos2-2) (nextsnake pos2-2 pos3-2) (tailsnake pos1-3)
@@ -18647,19 +18647,19 @@ Op[6928]:
   (move pos3-2 pos3-1 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-2) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos2-1)
-    del: (headsnake pos3-2) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-2) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
   (move pos3-2 pos3-1 pos3-1 pos3-0), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-2) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos3-0)
-    del: (headsnake pos3-2) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-2) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
   (move pos3-2 pos3-1 pos3-1 pos3-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
-    del: (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
   (move pos3-2 pos3-1 pos3-1 pos4-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-2) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos4-1)
-    del: (headsnake pos3-2) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos3-2) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
   (move pos3-2 pos3-1 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos3-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-1 pos3-2) (tailsnake pos2-2)
@@ -18999,19 +18999,19 @@ Op[6928]:
   (move pos3-2 pos3-3 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-2) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos2-3)
-    del: (headsnake pos3-2) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
   (move pos3-2 pos3-3 pos3-3 pos3-2), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
-    del: (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
   (move pos3-2 pos3-3 pos3-3 pos3-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-2) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos3-4)
-    del: (headsnake pos3-2) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
   (move pos3-2 pos3-3 pos3-3 pos4-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-2) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos4-3)
-    del: (headsnake pos3-2) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
   (move pos3-2 pos3-3 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-2) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos2-4)
@@ -19367,15 +19367,15 @@ Op[6928]:
   (move pos3-2 pos4-2 pos4-2 pos3-2), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
-    del: (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
   (move pos3-2 pos4-2 pos4-2 pos4-1), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos3-2) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos4-1)
-    del: (headsnake pos3-2) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos3-2) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
   (move pos3-2 pos4-2 pos4-2 pos4-3), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos3-2) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos4-3)
-    del: (headsnake pos3-2) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos3-2) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
   (move pos3-2 pos4-2 pos4-3 pos3-3), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos3-2) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
     add: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-3)
@@ -19567,19 +19567,19 @@ Op[6928]:
   (move pos3-3 pos2-3 pos2-3 pos1-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos1-3)
-    del: (headsnake pos3-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos1-3 pos2-3) (tailsnake pos2-3)
   (move pos3-3 pos2-3 pos2-3 pos2-2), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos2-2)
-    del: (headsnake pos3-3) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos2-2 pos2-3) (tailsnake pos2-3)
   (move pos3-3 pos2-3 pos2-3 pos2-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos2-4)
-    del: (headsnake pos3-3) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos2-4 pos2-3) (tailsnake pos2-3)
   (move pos3-3 pos2-3 pos2-3 pos3-3), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
     add: (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
-    del: (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
+    del: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (tailsnake pos2-3)
   (move pos3-3 pos2-3 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-3) (headsnake pos3-3) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (NOT-blocked pos2-4) (headsnake pos2-3) (nextsnake pos2-3 pos3-3) (tailsnake pos1-4)
@@ -19943,19 +19943,19 @@ Op[6928]:
   (move pos3-3 pos3-2 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos2-2)
-    del: (headsnake pos3-3) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
   (move pos3-3 pos3-2 pos3-2 pos3-1), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos3-1)
-    del: (headsnake pos3-3) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
   (move pos3-3 pos3-2 pos3-2 pos3-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
-    del: (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
   (move pos3-3 pos3-2 pos3-2 pos4-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos4-2)
-    del: (headsnake pos3-3) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
   (move pos3-3 pos3-2 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos3-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos3-2 pos3-3) (tailsnake pos2-3)
@@ -20295,15 +20295,15 @@ Op[6928]:
   (move pos3-3 pos3-4 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos3-3) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos2-4)
-    del: (headsnake pos3-3) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
   (move pos3-3 pos3-4 pos3-4 pos3-3), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
-    del: (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
   (move pos3-3 pos3-4 pos3-4 pos4-4), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos3-3) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos4-4)
-    del: (headsnake pos3-3) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
   (move pos3-3 pos3-4 pos4-0 pos3-0), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos3-3) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
     add: (NOT-blocked pos4-0) (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos3-0)
@@ -20659,15 +20659,15 @@ Op[6928]:
   (move pos3-3 pos4-3 pos4-3 pos3-3), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
-    del: (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
   (move pos3-3 pos4-3 pos4-3 pos4-2), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos4-2)
-    del: (headsnake pos3-3) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
   (move pos3-3 pos4-3 pos4-3 pos4-4), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos4-4)
-    del: (headsnake pos3-3) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
   (move pos3-3 pos4-3 pos4-4 pos3-4), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos3-3) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
     add: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-4)
@@ -20863,15 +20863,15 @@ Op[6928]:
   (move pos3-4 pos2-4 pos2-4 pos1-4), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos3-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos1-4)
-    del: (headsnake pos3-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos3-4) (nextsnake pos1-4 pos2-4) (tailsnake pos2-4)
   (move pos3-4 pos2-4 pos2-4 pos2-3), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos3-4) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos2-3)
-    del: (headsnake pos3-4) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos3-4) (nextsnake pos2-3 pos2-4) (tailsnake pos2-4)
   (move pos3-4 pos2-4 pos2-4 pos3-4), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
     add: (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
-    del: (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
+    del: (NOT-blocked pos2-4) (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (tailsnake pos2-4)
   (move pos3-4 pos2-4 pos3-0 pos2-0), cost: 1
     pre: (NOT-blocked pos2-4) (NOT-ispoint pos2-4) (headsnake pos3-4) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
     add: (NOT-blocked pos3-0) (headsnake pos2-4) (nextsnake pos2-4 pos3-4) (tailsnake pos2-0)
@@ -21239,19 +21239,19 @@ Op[6928]:
   (move pos3-4 pos3-3 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-4) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos2-3)
-    del: (headsnake pos3-4) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-4) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
   (move pos3-4 pos3-3 pos3-3 pos3-2), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-4) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos3-2)
-    del: (headsnake pos3-4) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-4) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
   (move pos3-4 pos3-3 pos3-3 pos3-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
-    del: (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
   (move pos3-4 pos3-3 pos3-3 pos4-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-4) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos4-3)
-    del: (headsnake pos3-4) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos3-4) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
   (move pos3-4 pos3-3 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (tailsnake pos2-4)
@@ -21631,11 +21631,11 @@ Op[6928]:
   (move pos3-4 pos4-4 pos4-4 pos3-4), cost: 1
     pre: (NOT-blocked pos4-4) (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
     add: (headsnake pos4-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
-    del: (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
+    del: (NOT-blocked pos4-4) (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
   (move pos3-4 pos4-4 pos4-4 pos4-3), cost: 1
     pre: (NOT-blocked pos4-4) (headsnake pos3-4) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
     add: (headsnake pos4-4) (nextsnake pos4-4 pos3-4) (tailsnake pos4-3)
-    del: (headsnake pos3-4) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
+    del: (NOT-blocked pos4-4) (headsnake pos3-4) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
   (move pos4-0 pos3-0 pos0-0 pos0-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
     add: (NOT-blocked pos0-0) (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos0-1)
@@ -21835,15 +21835,15 @@ Op[6928]:
   (move pos4-0 pos3-0 pos3-0 pos2-0), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos2-0)
-    del: (headsnake pos4-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos2-0 pos3-0) (tailsnake pos3-0)
   (move pos4-0 pos3-0 pos3-0 pos3-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos3-1)
-    del: (headsnake pos4-0) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos3-1 pos3-0) (tailsnake pos3-0)
   (move pos4-0 pos3-0 pos3-0 pos4-0), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
     add: (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
-    del: (headsnake pos4-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
+    del: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
   (move pos4-0 pos3-0 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-0) (headsnake pos4-0) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (NOT-blocked pos3-1) (headsnake pos3-0) (nextsnake pos3-0 pos4-0) (tailsnake pos2-1)
@@ -22235,15 +22235,15 @@ Op[6928]:
   (move pos4-0 pos4-1 pos4-1 pos3-1), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-0) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos3-1)
-    del: (headsnake pos4-0) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos4-0) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
   (move pos4-0 pos4-1 pos4-1 pos4-0), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-0) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
-    del: (headsnake pos4-0) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos4-0) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
   (move pos4-0 pos4-1 pos4-1 pos4-2), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-0) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-2)
-    del: (headsnake pos4-0) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos4-0) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
   (move pos4-0 pos4-1 pos4-2 pos3-2), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-0) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
     add: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos3-2)
@@ -22487,19 +22487,19 @@ Op[6928]:
   (move pos4-1 pos3-1 pos3-1 pos2-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos4-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos2-1)
-    del: (headsnake pos4-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos4-1) (nextsnake pos2-1 pos3-1) (tailsnake pos3-1)
   (move pos4-1 pos3-1 pos3-1 pos3-0), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos4-1) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos3-0)
-    del: (headsnake pos4-1) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos4-1) (nextsnake pos3-0 pos3-1) (tailsnake pos3-1)
   (move pos4-1 pos3-1 pos3-1 pos3-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos4-1) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos3-2)
-    del: (headsnake pos4-1) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos4-1) (nextsnake pos3-2 pos3-1) (tailsnake pos3-1)
   (move pos4-1 pos3-1 pos3-1 pos4-1), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
     add: (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
-    del: (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos3-1) (headsnake pos4-1) (nextsnake pos4-1 pos3-1) (tailsnake pos3-1)
   (move pos4-1 pos3-1 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-1) (NOT-ispoint pos3-1) (headsnake pos4-1) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos3-1 pos4-1) (tailsnake pos2-2)
@@ -22867,11 +22867,11 @@ Op[6928]:
   (move pos4-1 pos4-0 pos4-0 pos3-0), cost: 1
     pre: (NOT-blocked pos4-0) (headsnake pos4-1) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
     add: (headsnake pos4-0) (nextsnake pos4-0 pos4-1) (tailsnake pos3-0)
-    del: (headsnake pos4-1) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
+    del: (NOT-blocked pos4-0) (headsnake pos4-1) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
   (move pos4-1 pos4-0 pos4-0 pos4-1), cost: 1
     pre: (NOT-blocked pos4-0) (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
     add: (headsnake pos4-0) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
-    del: (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
+    del: (NOT-blocked pos4-0) (headsnake pos4-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
   (move pos4-1 pos4-0 pos4-1 pos3-1), cost: 1
     pre: (NOT-blocked pos4-0) (headsnake pos4-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
     add: (NOT-blocked pos4-1) (headsnake pos4-0) (nextsnake pos4-0 pos4-1) (tailsnake pos3-1)
@@ -23207,15 +23207,15 @@ Op[6928]:
   (move pos4-1 pos4-2 pos4-2 pos3-2), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-1) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos3-2)
-    del: (headsnake pos4-1) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
   (move pos4-1 pos4-2 pos4-2 pos4-1), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
-    del: (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
   (move pos4-1 pos4-2 pos4-2 pos4-3), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-1) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos4-3)
-    del: (headsnake pos4-1) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
   (move pos4-1 pos4-2 pos4-3 pos3-3), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-1) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
     add: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos3-3)
@@ -23463,19 +23463,19 @@ Op[6928]:
   (move pos4-2 pos3-2 pos3-2 pos2-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos2-2)
-    del: (headsnake pos4-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos2-2 pos3-2) (tailsnake pos3-2)
   (move pos4-2 pos3-2 pos3-2 pos3-1), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos3-1)
-    del: (headsnake pos4-2) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos3-1 pos3-2) (tailsnake pos3-2)
   (move pos4-2 pos3-2 pos3-2 pos3-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos3-3)
-    del: (headsnake pos4-2) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos3-3 pos3-2) (tailsnake pos3-2)
   (move pos4-2 pos3-2 pos3-2 pos4-2), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
     add: (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
-    del: (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
+    del: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (tailsnake pos3-2)
   (move pos4-2 pos3-2 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-2) (headsnake pos4-2) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (NOT-blocked pos3-3) (headsnake pos3-2) (nextsnake pos3-2 pos4-2) (tailsnake pos2-3)
@@ -23835,15 +23835,15 @@ Op[6928]:
   (move pos4-2 pos4-1 pos4-1 pos3-1), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-2) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos3-1)
-    del: (headsnake pos4-2) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos4-2) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
   (move pos4-2 pos4-1 pos4-1 pos4-0), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-2) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos4-0)
-    del: (headsnake pos4-2) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos4-2) (nextsnake pos4-0 pos4-1) (tailsnake pos4-1)
   (move pos4-2 pos4-1 pos4-1 pos4-2), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
     add: (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
-    del: (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos4-1) (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos4-1)
   (move pos4-2 pos4-1 pos4-2 pos3-2), cost: 1
     pre: (NOT-blocked pos4-1) (NOT-ispoint pos4-1) (headsnake pos4-2) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
     add: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos4-1 pos4-2) (tailsnake pos3-2)
@@ -24179,15 +24179,15 @@ Op[6928]:
   (move pos4-2 pos4-3 pos4-3 pos3-3), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos3-3)
-    del: (headsnake pos4-2) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
   (move pos4-2 pos4-3 pos4-3 pos4-2), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
-    del: (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
   (move pos4-2 pos4-3 pos4-3 pos4-4), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos4-4)
-    del: (headsnake pos4-2) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
   (move pos4-2 pos4-3 pos4-4 pos3-4), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
     add: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos3-4)
@@ -24439,19 +24439,19 @@ Op[6928]:
   (move pos4-3 pos3-3 pos3-3 pos2-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos4-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos2-3)
-    del: (headsnake pos4-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos4-3) (nextsnake pos2-3 pos3-3) (tailsnake pos3-3)
   (move pos4-3 pos3-3 pos3-3 pos3-2), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos4-3) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos3-2)
-    del: (headsnake pos4-3) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos4-3) (nextsnake pos3-2 pos3-3) (tailsnake pos3-3)
   (move pos4-3 pos3-3 pos3-3 pos3-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos4-3) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos3-4)
-    del: (headsnake pos4-3) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos4-3) (nextsnake pos3-4 pos3-3) (tailsnake pos3-3)
   (move pos4-3 pos3-3 pos3-3 pos4-3), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
     add: (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
-    del: (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
+    del: (NOT-blocked pos3-3) (headsnake pos4-3) (nextsnake pos4-3 pos3-3) (tailsnake pos3-3)
   (move pos4-3 pos3-3 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos4-3) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (NOT-blocked pos3-4) (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (tailsnake pos2-4)
@@ -24807,15 +24807,15 @@ Op[6928]:
   (move pos4-3 pos4-2 pos4-2 pos3-2), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-3) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos3-2)
-    del: (headsnake pos4-3) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos4-3) (nextsnake pos3-2 pos4-2) (tailsnake pos4-2)
   (move pos4-3 pos4-2 pos4-2 pos4-1), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-3) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos4-1)
-    del: (headsnake pos4-3) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos4-3) (nextsnake pos4-1 pos4-2) (tailsnake pos4-2)
   (move pos4-3 pos4-2 pos4-2 pos4-3), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
     add: (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
-    del: (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
+    del: (NOT-blocked pos4-2) (headsnake pos4-3) (nextsnake pos4-3 pos4-2) (tailsnake pos4-2)
   (move pos4-3 pos4-2 pos4-3 pos3-3), cost: 1
     pre: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-3) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
     add: (NOT-blocked pos4-3) (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (tailsnake pos3-3)
@@ -25151,11 +25151,11 @@ Op[6928]:
   (move pos4-3 pos4-4 pos4-4 pos3-4), cost: 1
     pre: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
     add: (headsnake pos4-4) (nextsnake pos4-4 pos4-3) (tailsnake pos3-4)
-    del: (headsnake pos4-3) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
+    del: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
   (move pos4-3 pos4-4 pos4-4 pos4-3), cost: 1
     pre: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
     add: (headsnake pos4-4) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
-    del: (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
+    del: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
   (move pos4-4 pos3-4 pos0-0 pos0-1), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos4-4) (nextsnake pos0-1 pos0-0) (tailsnake pos0-0)
     add: (NOT-blocked pos0-0) (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos0-1)
@@ -25415,15 +25415,15 @@ Op[6928]:
   (move pos4-4 pos3-4 pos3-4 pos2-4), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos4-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos2-4)
-    del: (headsnake pos4-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos4-4) (nextsnake pos2-4 pos3-4) (tailsnake pos3-4)
   (move pos4-4 pos3-4 pos3-4 pos3-3), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos4-4) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos3-3)
-    del: (headsnake pos4-4) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos4-4) (nextsnake pos3-3 pos3-4) (tailsnake pos3-4)
   (move pos4-4 pos3-4 pos3-4 pos4-4), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos4-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
     add: (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
-    del: (headsnake pos4-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
+    del: (NOT-blocked pos3-4) (headsnake pos4-4) (nextsnake pos4-4 pos3-4) (tailsnake pos3-4)
   (move pos4-4 pos3-4 pos4-0 pos3-0), cost: 1
     pre: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos4-4) (nextsnake pos3-0 pos4-0) (tailsnake pos4-0)
     add: (NOT-blocked pos4-0) (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (tailsnake pos3-0)
@@ -25779,15 +25779,15 @@ Op[6928]:
   (move pos4-4 pos4-3 pos4-3 pos3-3), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos3-3)
-    del: (headsnake pos4-4) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos3-3 pos4-3) (tailsnake pos4-3)
   (move pos4-4 pos4-3 pos4-3 pos4-2), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos4-2)
-    del: (headsnake pos4-4) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos4-2 pos4-3) (tailsnake pos4-3)
   (move pos4-4 pos4-3 pos4-3 pos4-4), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
     add: (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos4-4)
-    del: (headsnake pos4-4) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
+    del: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos4-4 pos4-3) (tailsnake pos4-3)
   (move pos4-4 pos4-3 pos4-4 pos3-4), cost: 1
     pre: (NOT-blocked pos4-3) (headsnake pos4-4) (nextsnake pos3-4 pos4-4) (tailsnake pos4-4)
     add: (NOT-blocked pos4-4) (headsnake pos4-3) (nextsnake pos4-3 pos4-4) (tailsnake pos3-4)
@@ -25994,8 +25994,8 @@ Op[6928]:
     del: (NOT-blocked pos0-1) (NOT-ispoint pos0-0) (headsnake pos0-0) (ispoint pos0-1) (spawn pos0-0)
   (move-and-eat-spawn pos0-0 pos0-1 pos0-1 pos3-3), cost: 1
     pre: (NOT-blocked pos0-1) (headsnake pos0-0) (ispoint pos0-1) (spawn pos0-1)
-    add: (NOT-ispoint pos0-1) (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (spawn pos3-3)
-    del: (NOT-blocked pos0-1) (headsnake pos0-0) (spawn pos0-1)
+    add: (headsnake pos0-1) (nextsnake pos0-1 pos0-0) (spawn pos3-3)
+    del: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-0) (spawn pos0-1)
   (move-and-eat-spawn pos0-0 pos0-1 pos1-0 dummypoint), cost: 1
     pre: (NOT-blocked pos0-1) (headsnake pos0-0) (ispoint pos0-1) (spawn pos1-0)
     add: (NOT-ispoint pos0-1) (headsnake pos0-1) (ispoint pos1-0) (nextsnake pos0-1 pos0-0) (spawn dummypoint)
@@ -26038,8 +26038,8 @@ Op[6928]:
     del: (NOT-blocked pos1-0) (NOT-ispoint pos0-1) (headsnake pos0-0) (ispoint pos1-0) (spawn pos0-1)
   (move-and-eat-spawn pos0-0 pos1-0 pos1-0 dummypoint), cost: 1
     pre: (NOT-blocked pos1-0) (headsnake pos0-0) (ispoint pos1-0) (spawn pos1-0)
-    add: (NOT-ispoint pos1-0) (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (spawn dummypoint)
-    del: (NOT-blocked pos1-0) (headsnake pos0-0) (spawn pos1-0)
+    add: (headsnake pos1-0) (nextsnake pos1-0 pos0-0) (spawn dummypoint)
+    del: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos0-0) (spawn pos1-0)
   (move-and-eat-spawn pos0-0 pos1-0 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-0) (headsnake pos0-0) (ispoint pos1-0) (spawn pos1-1)
     add: (NOT-ispoint pos1-0) (headsnake pos1-0) (ispoint pos1-1) (nextsnake pos1-0 pos0-0) (spawn pos0-1)
@@ -26070,8 +26070,8 @@ Op[6928]:
     del: (NOT-blocked pos1-0) (NOT-ispoint pos4-2) (headsnake pos0-0) (ispoint pos1-0) (spawn pos4-2)
   (move-and-eat-spawn pos0-1 pos0-0 pos0-0 pos1-2), cost: 1
     pre: (NOT-blocked pos0-0) (headsnake pos0-1) (ispoint pos0-0) (spawn pos0-0)
-    add: (NOT-ispoint pos0-0) (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (spawn pos1-2)
-    del: (NOT-blocked pos0-0) (headsnake pos0-1) (spawn pos0-0)
+    add: (headsnake pos0-0) (nextsnake pos0-0 pos0-1) (spawn pos1-2)
+    del: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos0-1) (spawn pos0-0)
   (move-and-eat-spawn pos0-1 pos0-0 pos0-1 pos3-3), cost: 1
     pre: (NOT-blocked pos0-0) (headsnake pos0-1) (ispoint pos0-0) (spawn pos0-1)
     add: (NOT-ispoint pos0-0) (headsnake pos0-0) (ispoint pos0-1) (nextsnake pos0-0 pos0-1) (spawn pos3-3)
@@ -26122,8 +26122,8 @@ Op[6928]:
     del: (NOT-blocked pos1-1) (NOT-ispoint pos1-0) (headsnake pos0-1) (ispoint pos1-1) (spawn pos1-0)
   (move-and-eat-spawn pos0-1 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos0-1) (ispoint pos1-1) (spawn pos1-1)
-    add: (NOT-ispoint pos1-1) (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (spawn pos0-1)
-    del: (NOT-blocked pos1-1) (headsnake pos0-1) (spawn pos1-1)
+    add: (headsnake pos1-1) (nextsnake pos1-1 pos0-1) (spawn pos0-1)
+    del: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos0-1) (spawn pos1-1)
   (move-and-eat-spawn pos0-1 pos1-1 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos0-1) (ispoint pos1-1) (spawn pos1-2)
     add: (NOT-ispoint pos1-1) (headsnake pos1-1) (ispoint pos1-2) (nextsnake pos1-1 pos0-1) (spawn pos1-0)
@@ -26154,8 +26154,8 @@ Op[6928]:
     del: (NOT-blocked pos0-1) (NOT-ispoint pos0-0) (headsnake pos0-2) (ispoint pos0-1) (spawn pos0-0)
   (move-and-eat-spawn pos0-2 pos0-1 pos0-1 pos3-3), cost: 1
     pre: (NOT-blocked pos0-1) (headsnake pos0-2) (ispoint pos0-1) (spawn pos0-1)
-    add: (NOT-ispoint pos0-1) (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (spawn pos3-3)
-    del: (NOT-blocked pos0-1) (headsnake pos0-2) (spawn pos0-1)
+    add: (headsnake pos0-1) (nextsnake pos0-1 pos0-2) (spawn pos3-3)
+    del: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos0-2) (spawn pos0-1)
   (move-and-eat-spawn pos0-2 pos0-1 pos1-0 dummypoint), cost: 1
     pre: (NOT-blocked pos0-1) (headsnake pos0-2) (ispoint pos0-1) (spawn pos1-0)
     add: (NOT-ispoint pos0-1) (headsnake pos0-1) (ispoint pos1-0) (nextsnake pos0-1 pos0-2) (spawn dummypoint)
@@ -26206,8 +26206,8 @@ Op[6928]:
     del: (NOT-blocked pos1-2) (NOT-ispoint pos1-1) (headsnake pos0-2) (ispoint pos1-2) (spawn pos1-1)
   (move-and-eat-spawn pos0-2 pos1-2 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos0-2) (ispoint pos1-2) (spawn pos1-2)
-    add: (NOT-ispoint pos1-2) (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (spawn pos1-0)
-    del: (NOT-blocked pos1-2) (headsnake pos0-2) (spawn pos1-2)
+    add: (headsnake pos1-2) (nextsnake pos1-2 pos0-2) (spawn pos1-0)
+    del: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos0-2) (spawn pos1-2)
   (move-and-eat-spawn pos0-2 pos1-2 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos0-2) (ispoint pos1-2) (spawn pos1-4)
     add: (NOT-ispoint pos1-2) (headsnake pos1-2) (ispoint pos1-4) (nextsnake pos1-2 pos0-2) (spawn pos1-1)
@@ -26330,8 +26330,8 @@ Op[6928]:
     del: (NOT-blocked pos1-4) (NOT-ispoint pos1-2) (headsnake pos0-4) (ispoint pos1-4) (spawn pos1-2)
   (move-and-eat-spawn pos0-4 pos1-4 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-4) (headsnake pos0-4) (ispoint pos1-4) (spawn pos1-4)
-    add: (NOT-ispoint pos1-4) (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (spawn pos1-1)
-    del: (NOT-blocked pos1-4) (headsnake pos0-4) (spawn pos1-4)
+    add: (headsnake pos1-4) (nextsnake pos1-4 pos0-4) (spawn pos1-1)
+    del: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos0-4) (spawn pos1-4)
   (move-and-eat-spawn pos0-4 pos1-4 pos2-0 pos1-4), cost: 1
     pre: (NOT-blocked pos1-4) (headsnake pos0-4) (ispoint pos1-4) (spawn pos2-0)
     add: (NOT-ispoint pos1-4) (headsnake pos1-4) (ispoint pos2-0) (nextsnake pos1-4 pos0-4) (spawn pos1-4)
@@ -26350,8 +26350,8 @@ Op[6928]:
     del: (NOT-blocked pos1-4) (NOT-ispoint pos4-2) (headsnake pos0-4) (ispoint pos1-4) (spawn pos4-2)
   (move-and-eat-spawn pos1-0 pos0-0 pos0-0 pos1-2), cost: 1
     pre: (NOT-blocked pos0-0) (headsnake pos1-0) (ispoint pos0-0) (spawn pos0-0)
-    add: (NOT-ispoint pos0-0) (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (spawn pos1-2)
-    del: (NOT-blocked pos0-0) (headsnake pos1-0) (spawn pos0-0)
+    add: (headsnake pos0-0) (nextsnake pos0-0 pos1-0) (spawn pos1-2)
+    del: (NOT-blocked pos0-0) (NOT-ispoint pos0-0) (headsnake pos1-0) (spawn pos0-0)
   (move-and-eat-spawn pos1-0 pos0-0 pos0-1 pos3-3), cost: 1
     pre: (NOT-blocked pos0-0) (headsnake pos1-0) (ispoint pos0-0) (spawn pos0-1)
     add: (NOT-ispoint pos0-0) (headsnake pos0-0) (ispoint pos0-1) (nextsnake pos0-0 pos1-0) (spawn pos3-3)
@@ -26402,8 +26402,8 @@ Op[6928]:
     del: (NOT-blocked pos1-1) (NOT-ispoint pos1-0) (headsnake pos1-0) (ispoint pos1-1) (spawn pos1-0)
   (move-and-eat-spawn pos1-0 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos1-0) (ispoint pos1-1) (spawn pos1-1)
-    add: (NOT-ispoint pos1-1) (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (spawn pos0-1)
-    del: (NOT-blocked pos1-1) (headsnake pos1-0) (spawn pos1-1)
+    add: (headsnake pos1-1) (nextsnake pos1-1 pos1-0) (spawn pos0-1)
+    del: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-0) (spawn pos1-1)
   (move-and-eat-spawn pos1-0 pos1-1 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos1-0) (ispoint pos1-1) (spawn pos1-2)
     add: (NOT-ispoint pos1-1) (headsnake pos1-1) (ispoint pos1-2) (nextsnake pos1-1 pos1-0) (spawn pos1-0)
@@ -26454,8 +26454,8 @@ Op[6928]:
     del: (NOT-blocked pos2-0) (NOT-ispoint pos1-4) (headsnake pos1-0) (ispoint pos2-0) (spawn pos1-4)
   (move-and-eat-spawn pos1-0 pos2-0 pos2-0 pos1-4), cost: 1
     pre: (NOT-blocked pos2-0) (headsnake pos1-0) (ispoint pos2-0) (spawn pos2-0)
-    add: (NOT-ispoint pos2-0) (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (spawn pos1-4)
-    del: (NOT-blocked pos2-0) (headsnake pos1-0) (spawn pos2-0)
+    add: (headsnake pos2-0) (nextsnake pos2-0 pos1-0) (spawn pos1-4)
+    del: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos1-0) (spawn pos2-0)
   (move-and-eat-spawn pos1-0 pos2-0 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos2-0) (headsnake pos1-0) (ispoint pos2-0) (spawn pos3-3)
     add: (NOT-ispoint pos2-0) (headsnake pos2-0) (ispoint pos3-3) (nextsnake pos2-0 pos1-0) (spawn pos4-2)
@@ -26474,8 +26474,8 @@ Op[6928]:
     del: (NOT-blocked pos0-1) (NOT-ispoint pos0-0) (headsnake pos1-1) (ispoint pos0-1) (spawn pos0-0)
   (move-and-eat-spawn pos1-1 pos0-1 pos0-1 pos3-3), cost: 1
     pre: (NOT-blocked pos0-1) (headsnake pos1-1) (ispoint pos0-1) (spawn pos0-1)
-    add: (NOT-ispoint pos0-1) (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (spawn pos3-3)
-    del: (NOT-blocked pos0-1) (headsnake pos1-1) (spawn pos0-1)
+    add: (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (spawn pos3-3)
+    del: (NOT-blocked pos0-1) (NOT-ispoint pos0-1) (headsnake pos1-1) (spawn pos0-1)
   (move-and-eat-spawn pos1-1 pos0-1 pos1-0 dummypoint), cost: 1
     pre: (NOT-blocked pos0-1) (headsnake pos1-1) (ispoint pos0-1) (spawn pos1-0)
     add: (NOT-ispoint pos0-1) (headsnake pos0-1) (ispoint pos1-0) (nextsnake pos0-1 pos1-1) (spawn dummypoint)
@@ -26518,8 +26518,8 @@ Op[6928]:
     del: (NOT-blocked pos1-0) (NOT-ispoint pos0-1) (headsnake pos1-1) (ispoint pos1-0) (spawn pos0-1)
   (move-and-eat-spawn pos1-1 pos1-0 pos1-0 dummypoint), cost: 1
     pre: (NOT-blocked pos1-0) (headsnake pos1-1) (ispoint pos1-0) (spawn pos1-0)
-    add: (NOT-ispoint pos1-0) (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (spawn dummypoint)
-    del: (NOT-blocked pos1-0) (headsnake pos1-1) (spawn pos1-0)
+    add: (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (spawn dummypoint)
+    del: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos1-1) (spawn pos1-0)
   (move-and-eat-spawn pos1-1 pos1-0 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-0) (headsnake pos1-1) (ispoint pos1-0) (spawn pos1-1)
     add: (NOT-ispoint pos1-0) (headsnake pos1-0) (ispoint pos1-1) (nextsnake pos1-0 pos1-1) (spawn pos0-1)
@@ -26566,8 +26566,8 @@ Op[6928]:
     del: (NOT-blocked pos1-2) (NOT-ispoint pos1-1) (headsnake pos1-1) (ispoint pos1-2) (spawn pos1-1)
   (move-and-eat-spawn pos1-1 pos1-2 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos1-1) (ispoint pos1-2) (spawn pos1-2)
-    add: (NOT-ispoint pos1-2) (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (spawn pos1-0)
-    del: (NOT-blocked pos1-2) (headsnake pos1-1) (spawn pos1-2)
+    add: (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (spawn pos1-0)
+    del: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-1) (spawn pos1-2)
   (move-and-eat-spawn pos1-1 pos1-2 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos1-1) (ispoint pos1-2) (spawn pos1-4)
     add: (NOT-ispoint pos1-2) (headsnake pos1-2) (ispoint pos1-4) (nextsnake pos1-2 pos1-1) (spawn pos1-1)
@@ -26602,8 +26602,8 @@ Op[6928]:
     del: (NOT-blocked pos1-1) (NOT-ispoint pos1-0) (headsnake pos1-2) (ispoint pos1-1) (spawn pos1-0)
   (move-and-eat-spawn pos1-2 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos1-2) (ispoint pos1-1) (spawn pos1-1)
-    add: (NOT-ispoint pos1-1) (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (spawn pos0-1)
-    del: (NOT-blocked pos1-1) (headsnake pos1-2) (spawn pos1-1)
+    add: (headsnake pos1-1) (nextsnake pos1-1 pos1-2) (spawn pos0-1)
+    del: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos1-2) (spawn pos1-1)
   (move-and-eat-spawn pos1-2 pos1-1 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos1-2) (ispoint pos1-1) (spawn pos1-2)
     add: (NOT-ispoint pos1-1) (headsnake pos1-1) (ispoint pos1-2) (nextsnake pos1-1 pos1-2) (spawn pos1-0)
@@ -26686,8 +26686,8 @@ Op[6928]:
     del: (NOT-blocked pos1-2) (NOT-ispoint pos1-1) (headsnake pos1-3) (ispoint pos1-2) (spawn pos1-1)
   (move-and-eat-spawn pos1-3 pos1-2 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos1-3) (ispoint pos1-2) (spawn pos1-2)
-    add: (NOT-ispoint pos1-2) (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (spawn pos1-0)
-    del: (NOT-blocked pos1-2) (headsnake pos1-3) (spawn pos1-2)
+    add: (headsnake pos1-2) (nextsnake pos1-2 pos1-3) (spawn pos1-0)
+    del: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos1-3) (spawn pos1-2)
   (move-and-eat-spawn pos1-3 pos1-2 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos1-3) (ispoint pos1-2) (spawn pos1-4)
     add: (NOT-ispoint pos1-2) (headsnake pos1-2) (ispoint pos1-4) (nextsnake pos1-2 pos1-3) (spawn pos1-1)
@@ -26730,8 +26730,8 @@ Op[6928]:
     del: (NOT-blocked pos1-4) (NOT-ispoint pos1-2) (headsnake pos1-3) (ispoint pos1-4) (spawn pos1-2)
   (move-and-eat-spawn pos1-3 pos1-4 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-4) (headsnake pos1-3) (ispoint pos1-4) (spawn pos1-4)
-    add: (NOT-ispoint pos1-4) (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (spawn pos1-1)
-    del: (NOT-blocked pos1-4) (headsnake pos1-3) (spawn pos1-4)
+    add: (headsnake pos1-4) (nextsnake pos1-4 pos1-3) (spawn pos1-1)
+    del: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos1-3) (spawn pos1-4)
   (move-and-eat-spawn pos1-3 pos1-4 pos2-0 pos1-4), cost: 1
     pre: (NOT-blocked pos1-4) (headsnake pos1-3) (ispoint pos1-4) (spawn pos2-0)
     add: (NOT-ispoint pos1-4) (headsnake pos1-4) (ispoint pos2-0) (nextsnake pos1-4 pos1-3) (spawn pos1-4)
@@ -26878,8 +26878,8 @@ Op[6928]:
     del: (NOT-blocked pos1-0) (NOT-ispoint pos0-1) (headsnake pos2-0) (ispoint pos1-0) (spawn pos0-1)
   (move-and-eat-spawn pos2-0 pos1-0 pos1-0 dummypoint), cost: 1
     pre: (NOT-blocked pos1-0) (headsnake pos2-0) (ispoint pos1-0) (spawn pos1-0)
-    add: (NOT-ispoint pos1-0) (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (spawn dummypoint)
-    del: (NOT-blocked pos1-0) (headsnake pos2-0) (spawn pos1-0)
+    add: (headsnake pos1-0) (nextsnake pos1-0 pos2-0) (spawn dummypoint)
+    del: (NOT-blocked pos1-0) (NOT-ispoint pos1-0) (headsnake pos2-0) (spawn pos1-0)
   (move-and-eat-spawn pos2-0 pos1-0 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-0) (headsnake pos2-0) (ispoint pos1-0) (spawn pos1-1)
     add: (NOT-ispoint pos1-0) (headsnake pos1-0) (ispoint pos1-1) (nextsnake pos1-0 pos2-0) (spawn pos0-1)
@@ -26922,8 +26922,8 @@ Op[6928]:
     del: (NOT-blocked pos1-1) (NOT-ispoint pos1-0) (headsnake pos2-1) (ispoint pos1-1) (spawn pos1-0)
   (move-and-eat-spawn pos2-1 pos1-1 pos1-1 pos0-1), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos2-1) (ispoint pos1-1) (spawn pos1-1)
-    add: (NOT-ispoint pos1-1) (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (spawn pos0-1)
-    del: (NOT-blocked pos1-1) (headsnake pos2-1) (spawn pos1-1)
+    add: (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (spawn pos0-1)
+    del: (NOT-blocked pos1-1) (NOT-ispoint pos1-1) (headsnake pos2-1) (spawn pos1-1)
   (move-and-eat-spawn pos2-1 pos1-1 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-1) (headsnake pos2-1) (ispoint pos1-1) (spawn pos1-2)
     add: (NOT-ispoint pos1-1) (headsnake pos1-1) (ispoint pos1-2) (nextsnake pos1-1 pos2-1) (spawn pos1-0)
@@ -26974,8 +26974,8 @@ Op[6928]:
     del: (NOT-blocked pos2-0) (NOT-ispoint pos1-4) (headsnake pos2-1) (ispoint pos2-0) (spawn pos1-4)
   (move-and-eat-spawn pos2-1 pos2-0 pos2-0 pos1-4), cost: 1
     pre: (NOT-blocked pos2-0) (headsnake pos2-1) (ispoint pos2-0) (spawn pos2-0)
-    add: (NOT-ispoint pos2-0) (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (spawn pos1-4)
-    del: (NOT-blocked pos2-0) (headsnake pos2-1) (spawn pos2-0)
+    add: (headsnake pos2-0) (nextsnake pos2-0 pos2-1) (spawn pos1-4)
+    del: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos2-1) (spawn pos2-0)
   (move-and-eat-spawn pos2-1 pos2-0 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos2-0) (headsnake pos2-1) (ispoint pos2-0) (spawn pos3-3)
     add: (NOT-ispoint pos2-0) (headsnake pos2-0) (ispoint pos3-3) (nextsnake pos2-0 pos2-1) (spawn pos4-2)
@@ -27046,8 +27046,8 @@ Op[6928]:
     del: (NOT-blocked pos1-2) (NOT-ispoint pos1-1) (headsnake pos2-2) (ispoint pos1-2) (spawn pos1-1)
   (move-and-eat-spawn pos2-2 pos1-2 pos1-2 pos1-0), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos2-2) (ispoint pos1-2) (spawn pos1-2)
-    add: (NOT-ispoint pos1-2) (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (spawn pos1-0)
-    del: (NOT-blocked pos1-2) (headsnake pos2-2) (spawn pos1-2)
+    add: (headsnake pos1-2) (nextsnake pos1-2 pos2-2) (spawn pos1-0)
+    del: (NOT-blocked pos1-2) (NOT-ispoint pos1-2) (headsnake pos2-2) (spawn pos1-2)
   (move-and-eat-spawn pos2-2 pos1-2 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-2) (headsnake pos2-2) (ispoint pos1-2) (spawn pos1-4)
     add: (NOT-ispoint pos1-2) (headsnake pos1-2) (ispoint pos1-4) (nextsnake pos1-2 pos2-2) (spawn pos1-1)
@@ -27178,8 +27178,8 @@ Op[6928]:
     del: (NOT-blocked pos3-3) (NOT-ispoint pos2-0) (headsnake pos2-3) (ispoint pos3-3) (spawn pos2-0)
   (move-and-eat-spawn pos2-3 pos3-3 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos2-3) (ispoint pos3-3) (spawn pos3-3)
-    add: (NOT-ispoint pos3-3) (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (spawn pos4-2)
-    del: (NOT-blocked pos3-3) (headsnake pos2-3) (spawn pos3-3)
+    add: (headsnake pos3-3) (nextsnake pos3-3 pos2-3) (spawn pos4-2)
+    del: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos2-3) (spawn pos3-3)
   (move-and-eat-spawn pos2-3 pos3-3 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos2-3) (ispoint pos3-3) (spawn pos3-4)
     add: (NOT-ispoint pos3-3) (headsnake pos3-3) (ispoint pos3-4) (nextsnake pos3-3 pos2-3) (spawn pos0-0)
@@ -27210,8 +27210,8 @@ Op[6928]:
     del: (NOT-blocked pos1-4) (NOT-ispoint pos1-2) (headsnake pos2-4) (ispoint pos1-4) (spawn pos1-2)
   (move-and-eat-spawn pos2-4 pos1-4 pos1-4 pos1-1), cost: 1
     pre: (NOT-blocked pos1-4) (headsnake pos2-4) (ispoint pos1-4) (spawn pos1-4)
-    add: (NOT-ispoint pos1-4) (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (spawn pos1-1)
-    del: (NOT-blocked pos1-4) (headsnake pos2-4) (spawn pos1-4)
+    add: (headsnake pos1-4) (nextsnake pos1-4 pos2-4) (spawn pos1-1)
+    del: (NOT-blocked pos1-4) (NOT-ispoint pos1-4) (headsnake pos2-4) (spawn pos1-4)
   (move-and-eat-spawn pos2-4 pos1-4 pos2-0 pos1-4), cost: 1
     pre: (NOT-blocked pos1-4) (headsnake pos2-4) (ispoint pos1-4) (spawn pos2-0)
     add: (NOT-ispoint pos1-4) (headsnake pos1-4) (ispoint pos2-0) (nextsnake pos1-4 pos2-4) (spawn pos1-4)
@@ -27262,8 +27262,8 @@ Op[6928]:
     del: (NOT-blocked pos3-4) (NOT-ispoint pos3-3) (headsnake pos2-4) (ispoint pos3-4) (spawn pos3-3)
   (move-and-eat-spawn pos2-4 pos3-4 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos2-4) (ispoint pos3-4) (spawn pos3-4)
-    add: (NOT-ispoint pos3-4) (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (spawn pos0-0)
-    del: (NOT-blocked pos3-4) (headsnake pos2-4) (spawn pos3-4)
+    add: (headsnake pos3-4) (nextsnake pos3-4 pos2-4) (spawn pos0-0)
+    del: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos2-4) (spawn pos3-4)
   (move-and-eat-spawn pos2-4 pos3-4 pos4-2 pos3-4), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos2-4) (ispoint pos3-4) (spawn pos4-2)
     add: (NOT-ispoint pos3-4) (headsnake pos3-4) (ispoint pos4-2) (nextsnake pos3-4 pos2-4) (spawn pos3-4)
@@ -27294,8 +27294,8 @@ Op[6928]:
     del: (NOT-blocked pos2-0) (NOT-ispoint pos1-4) (headsnake pos3-0) (ispoint pos2-0) (spawn pos1-4)
   (move-and-eat-spawn pos3-0 pos2-0 pos2-0 pos1-4), cost: 1
     pre: (NOT-blocked pos2-0) (headsnake pos3-0) (ispoint pos2-0) (spawn pos2-0)
-    add: (NOT-ispoint pos2-0) (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (spawn pos1-4)
-    del: (NOT-blocked pos2-0) (headsnake pos3-0) (spawn pos2-0)
+    add: (headsnake pos2-0) (nextsnake pos2-0 pos3-0) (spawn pos1-4)
+    del: (NOT-blocked pos2-0) (NOT-ispoint pos2-0) (headsnake pos3-0) (spawn pos2-0)
   (move-and-eat-spawn pos3-0 pos2-0 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos2-0) (headsnake pos3-0) (ispoint pos2-0) (spawn pos3-3)
     add: (NOT-ispoint pos2-0) (headsnake pos2-0) (ispoint pos3-3) (nextsnake pos2-0 pos3-0) (spawn pos4-2)
@@ -27458,8 +27458,8 @@ Op[6928]:
     del: (NOT-blocked pos3-3) (NOT-ispoint pos2-0) (headsnake pos3-2) (ispoint pos3-3) (spawn pos2-0)
   (move-and-eat-spawn pos3-2 pos3-3 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos3-2) (ispoint pos3-3) (spawn pos3-3)
-    add: (NOT-ispoint pos3-3) (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (spawn pos4-2)
-    del: (NOT-blocked pos3-3) (headsnake pos3-2) (spawn pos3-3)
+    add: (headsnake pos3-3) (nextsnake pos3-3 pos3-2) (spawn pos4-2)
+    del: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-2) (spawn pos3-3)
   (move-and-eat-spawn pos3-2 pos3-3 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos3-2) (ispoint pos3-3) (spawn pos3-4)
     add: (NOT-ispoint pos3-3) (headsnake pos3-3) (ispoint pos3-4) (nextsnake pos3-3 pos3-2) (spawn pos0-0)
@@ -27506,8 +27506,8 @@ Op[6928]:
     del: (NOT-blocked pos4-2) (NOT-ispoint pos3-4) (headsnake pos3-2) (ispoint pos4-2) (spawn pos3-4)
   (move-and-eat-spawn pos3-2 pos4-2 pos4-2 pos3-4), cost: 1
     pre: (NOT-blocked pos4-2) (headsnake pos3-2) (ispoint pos4-2) (spawn pos4-2)
-    add: (NOT-ispoint pos4-2) (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (spawn pos3-4)
-    del: (NOT-blocked pos4-2) (headsnake pos3-2) (spawn pos4-2)
+    add: (headsnake pos4-2) (nextsnake pos4-2 pos3-2) (spawn pos3-4)
+    del: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos3-2) (spawn pos4-2)
   (move-and-eat-spawn pos3-3 pos3-4 pos0-0 pos1-2), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos3-3) (ispoint pos3-4) (spawn pos0-0)
     add: (NOT-ispoint pos3-4) (headsnake pos3-4) (ispoint pos0-0) (nextsnake pos3-4 pos3-3) (spawn pos1-2)
@@ -27542,8 +27542,8 @@ Op[6928]:
     del: (NOT-blocked pos3-4) (NOT-ispoint pos3-3) (headsnake pos3-3) (ispoint pos3-4) (spawn pos3-3)
   (move-and-eat-spawn pos3-3 pos3-4 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos3-3) (ispoint pos3-4) (spawn pos3-4)
-    add: (NOT-ispoint pos3-4) (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (spawn pos0-0)
-    del: (NOT-blocked pos3-4) (headsnake pos3-3) (spawn pos3-4)
+    add: (headsnake pos3-4) (nextsnake pos3-4 pos3-3) (spawn pos0-0)
+    del: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos3-3) (spawn pos3-4)
   (move-and-eat-spawn pos3-3 pos3-4 pos4-2 pos3-4), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos3-3) (ispoint pos3-4) (spawn pos4-2)
     add: (NOT-ispoint pos3-4) (headsnake pos3-4) (ispoint pos4-2) (nextsnake pos3-4 pos3-3) (spawn pos3-4)
@@ -27618,8 +27618,8 @@ Op[6928]:
     del: (NOT-blocked pos3-3) (NOT-ispoint pos2-0) (headsnake pos3-4) (ispoint pos3-3) (spawn pos2-0)
   (move-and-eat-spawn pos3-4 pos3-3 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos3-4) (ispoint pos3-3) (spawn pos3-3)
-    add: (NOT-ispoint pos3-3) (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (spawn pos4-2)
-    del: (NOT-blocked pos3-3) (headsnake pos3-4) (spawn pos3-3)
+    add: (headsnake pos3-3) (nextsnake pos3-3 pos3-4) (spawn pos4-2)
+    del: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos3-4) (spawn pos3-3)
   (move-and-eat-spawn pos3-4 pos3-3 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos3-4) (ispoint pos3-3) (spawn pos3-4)
     add: (NOT-ispoint pos3-3) (headsnake pos3-3) (ispoint pos3-4) (nextsnake pos3-3 pos3-4) (spawn pos0-0)
@@ -27746,8 +27746,8 @@ Op[6928]:
     del: (NOT-blocked pos4-2) (NOT-ispoint pos3-4) (headsnake pos4-1) (ispoint pos4-2) (spawn pos3-4)
   (move-and-eat-spawn pos4-1 pos4-2 pos4-2 pos3-4), cost: 1
     pre: (NOT-blocked pos4-2) (headsnake pos4-1) (ispoint pos4-2) (spawn pos4-2)
-    add: (NOT-ispoint pos4-2) (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (spawn pos3-4)
-    del: (NOT-blocked pos4-2) (headsnake pos4-1) (spawn pos4-2)
+    add: (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (spawn pos3-4)
+    del: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-1) (spawn pos4-2)
   (move-and-eat-spawn pos4-2 pos4-1 pos0-0 pos1-2), cost: 1
     pre: (NOT-blocked pos4-1) (headsnake pos4-2) (ispoint pos4-1) (spawn pos0-0)
     add: (NOT-ispoint pos4-1) (headsnake pos4-1) (ispoint pos0-0) (nextsnake pos4-1 pos4-2) (spawn pos1-2)
@@ -27818,8 +27818,8 @@ Op[6928]:
     del: (NOT-blocked pos3-3) (NOT-ispoint pos2-0) (headsnake pos4-3) (ispoint pos3-3) (spawn pos2-0)
   (move-and-eat-spawn pos4-3 pos3-3 pos3-3 pos4-2), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos4-3) (ispoint pos3-3) (spawn pos3-3)
-    add: (NOT-ispoint pos3-3) (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (spawn pos4-2)
-    del: (NOT-blocked pos3-3) (headsnake pos4-3) (spawn pos3-3)
+    add: (headsnake pos3-3) (nextsnake pos3-3 pos4-3) (spawn pos4-2)
+    del: (NOT-blocked pos3-3) (NOT-ispoint pos3-3) (headsnake pos4-3) (spawn pos3-3)
   (move-and-eat-spawn pos4-3 pos3-3 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-3) (headsnake pos4-3) (ispoint pos3-3) (spawn pos3-4)
     add: (NOT-ispoint pos3-3) (headsnake pos3-3) (ispoint pos3-4) (nextsnake pos3-3 pos4-3) (spawn pos0-0)
@@ -27866,8 +27866,8 @@ Op[6928]:
     del: (NOT-blocked pos4-2) (NOT-ispoint pos3-4) (headsnake pos4-3) (ispoint pos4-2) (spawn pos3-4)
   (move-and-eat-spawn pos4-3 pos4-2 pos4-2 pos3-4), cost: 1
     pre: (NOT-blocked pos4-2) (headsnake pos4-3) (ispoint pos4-2) (spawn pos4-2)
-    add: (NOT-ispoint pos4-2) (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (spawn pos3-4)
-    del: (NOT-blocked pos4-2) (headsnake pos4-3) (spawn pos4-2)
+    add: (headsnake pos4-2) (nextsnake pos4-2 pos4-3) (spawn pos3-4)
+    del: (NOT-blocked pos4-2) (NOT-ispoint pos4-2) (headsnake pos4-3) (spawn pos4-2)
   (move-and-eat-spawn pos4-4 pos3-4 pos0-0 pos1-2), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos4-4) (ispoint pos3-4) (spawn pos0-0)
     add: (NOT-ispoint pos3-4) (headsnake pos3-4) (ispoint pos0-0) (nextsnake pos3-4 pos4-4) (spawn pos1-2)
@@ -27902,8 +27902,8 @@ Op[6928]:
     del: (NOT-blocked pos3-4) (NOT-ispoint pos3-3) (headsnake pos4-4) (ispoint pos3-4) (spawn pos3-3)
   (move-and-eat-spawn pos4-4 pos3-4 pos3-4 pos0-0), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos4-4) (ispoint pos3-4) (spawn pos3-4)
-    add: (NOT-ispoint pos3-4) (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (spawn pos0-0)
-    del: (NOT-blocked pos3-4) (headsnake pos4-4) (spawn pos3-4)
+    add: (headsnake pos3-4) (nextsnake pos3-4 pos4-4) (spawn pos0-0)
+    del: (NOT-blocked pos3-4) (NOT-ispoint pos3-4) (headsnake pos4-4) (spawn pos3-4)
   (move-and-eat-spawn pos4-4 pos3-4 pos4-2 pos3-4), cost: 1
     pre: (NOT-blocked pos3-4) (headsnake pos4-4) (ispoint pos3-4) (spawn pos4-2)
     add: (NOT-ispoint pos3-4) (headsnake pos3-4) (ispoint pos4-2) (nextsnake pos3-4 pos4-4) (spawn pos3-4)

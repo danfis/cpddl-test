@@ -68,6 +68,26 @@ TEST(pddl_action_simplify_cond_effs, r)
     pddlFree(&pddl);
 }
 
+TEST(pddl_compile_away_neg_pre, r)
+{
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 1;
+    cfg.force_adl = 1;
+    cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    pddl_t pddl;
+    int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    ret = pddlCompileAwayNegativeConditions(&pddl, pddl_false, pddl_false,
+                                            pddl_true, &C.err);
+    assert(ret == 0);
+    pddlPrintDebug(&pddl, stdout);
+    pddlFree(&pddl);
+}
+
 TEST(pddl_no_normalize, r)
 {
     pddl_config_t cfg = PDDL_CONFIG_INIT;

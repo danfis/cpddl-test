@@ -1,6 +1,6 @@
 Domain: snake
 Problem: snake-empty-6x7-1-5-9-11440
-Require: 15
+Require: 95
 Type[1]:
     [0]: object, parent: -1
 Obj-by-Type:
@@ -65,10 +65,10 @@ Function[0]:
 Action[3]:
     move: ?head:0 ?newhead:0 ?tail:0 ?newtail:0
         pre: (and (R:isadjacent ?head ?newhead) (RW:tailsnake ?tail) (RW:headsnake ?head) (RW:nextsnake ?newtail ?tail) (RW:NOT-blocked ?newhead) (RW:NOT-ispoint ?newhead))
-        eff: (and (N:RW:tailsnake ?tail) (RW:tailsnake ?newtail) (N:RW:headsnake ?head) (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (N:RW:nextsnake ?newtail ?tail) (N:RW:NOT-blocked ?newhead) (RW:NOT-blocked ?tail))
+        eff: (and (N:RW:tailsnake ?tail) (RW:tailsnake ?newtail) (N:RW:headsnake ?head) (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (N:RW:nextsnake ?newtail ?tail) (N:RW:NOT-blocked ?newhead) (when (N:R:equal ?newhead ?tail) (RW:NOT-blocked ?tail)))
     move-and-eat-spawn: ?head:0 ?newhead:0 ?spawnpoint:0 ?nextspawnpoint:0
         pre: (and (R:isadjacent ?head ?newhead) (R:nextspawn ?spawnpoint ?nextspawnpoint) (N:R:equal ?spawnpoint dummypoint) (RW:headsnake ?head) (RW:spawn ?spawnpoint) (RW:ispoint ?newhead) (RW:NOT-blocked ?newhead))
-        eff: (and (N:RW:headsnake ?head) (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (N:RW:spawn ?spawnpoint) (RW:spawn ?nextspawnpoint) (N:RW:ispoint ?newhead) (RW:ispoint ?spawnpoint) (N:RW:NOT-blocked ?newhead) (RW:NOT-ispoint ?newhead) (N:RW:NOT-ispoint ?spawnpoint))
+        eff: (and (N:RW:headsnake ?head) (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (N:RW:spawn ?spawnpoint) (RW:spawn ?nextspawnpoint) (N:RW:ispoint ?newhead) (RW:ispoint ?spawnpoint) (N:RW:NOT-blocked ?newhead) (N:RW:NOT-ispoint ?spawnpoint) (when (N:R:equal ?newhead ?spawnpoint) (RW:NOT-ispoint ?newhead)))
     move-and-eat-no-spawn: ?head:0 ?newhead:0
         pre: (and (R:isadjacent ?head ?newhead) (RW:headsnake ?head) (RW:spawn dummypoint) (RW:ispoint ?newhead) (RW:NOT-blocked ?newhead))
         eff: (and (N:RW:headsnake ?head) (RW:headsnake ?newhead) (RW:nextsnake ?newhead ?head) (N:RW:ispoint ?newhead) (N:RW:NOT-blocked ?newhead) (RW:NOT-ispoint ?newhead))

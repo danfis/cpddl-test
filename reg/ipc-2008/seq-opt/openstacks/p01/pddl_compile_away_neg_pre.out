@@ -1,0 +1,99 @@
+Domain: openstacks-sequencedstrips-adl
+Problem: os-sequencedstrips-p5_1
+Require: 20013
+Type[4]:
+    [0]: object, parent: -1
+    [1]: order, parent: 0
+    [2]: product, parent: 0
+    [3]: count, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+    [1]: 6 7 8 9 10
+    [2]: 11 12 13 14 15
+    [3]: 0 1 2 3 4 5
+Obj[16]:
+    [0]: n0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: n1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: n2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: n3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: n4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: n5, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: o1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: o2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: o3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: o4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: o5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: p1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: p2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: p3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: p4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: p5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: read: 1, write: 0, in-init: 0
+    waiting: 1 :: read: 1, write: 1, in-init: 1
+    started: 1 :: read: 1, write: 1, in-init: 0
+    shipped: 1 :: read: 1, write: 1, in-init: 0
+    made: 2 :: read: 1, write: 1, in-init: 0, neg-of: NOT-made
+    stacks-avail: 3 :: read: 1, write: 1, in-init: 1
+    next-count: 3 3 :: read: 1, write: 0, in-init: 1
+    NOT-made: 2 :: read: 1, write: 1, in-init: 1, neg-of: made
+Function[1]:
+    total-cost: :: read: 1, write: 1, in-init: 1
+Action[12]:
+    make-product: ?p:2
+        pre: (and (R:= ?p p1) (RW:started o2) (RW:NOT-made p1))
+        eff: (and (RW:made p1) (N:RW:NOT-made p1))
+    start-order: ?o:1 ?avail:3 ?new-avail:3
+        pre: (and (R:next-count ?new-avail ?avail) (RW:waiting ?o) (RW:stacks-avail ?avail))
+        eff: (and (N:RW:waiting ?o) (RW:started ?o) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
+    ship-order: ?o:1 ?avail:3 ?new-avail:3
+        pre: (and (R:= ?o o1) (R:next-count ?avail ?new-avail) (RW:started o1) (RW:made p2) (RW:stacks-avail ?avail))
+        eff: (and (N:RW:started o1) (RW:shipped o1) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
+    open-new-stack: ?open:3 ?new-open:3
+        pre: (and (R:next-count ?open ?new-open) (RW:stacks-avail ?open))
+        eff: (and (N:RW:stacks-avail ?open) (RW:stacks-avail ?new-open) (increase (total-cost) 1))
+    make-product: ?p:2
+        pre: (and (R:= ?p p2) (RW:started o1) (RW:started o2) (RW:NOT-made p2))
+        eff: (and (RW:made p2) (N:RW:NOT-made p2))
+    make-product: ?p:2
+        pre: (and (R:= ?p p3) (RW:started o3) (RW:started o4) (RW:NOT-made p3))
+        eff: (and (RW:made p3) (N:RW:NOT-made p3))
+    make-product: ?p:2
+        pre: (and (R:= ?p p4) (RW:started o4) (RW:NOT-made p4))
+        eff: (and (RW:made p4) (N:RW:NOT-made p4))
+    make-product: ?p:2
+        pre: (and (R:= ?p p5) (RW:started o5) (RW:NOT-made p5))
+        eff: (and (RW:made p5) (N:RW:NOT-made p5))
+    ship-order: ?o:1 ?avail:3 ?new-avail:3
+        pre: (and (R:= ?o o2) (R:next-count ?avail ?new-avail) (RW:started o2) (RW:made p1) (RW:made p2) (RW:stacks-avail ?avail))
+        eff: (and (N:RW:started o2) (RW:shipped o2) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
+    ship-order: ?o:1 ?avail:3 ?new-avail:3
+        pre: (and (R:= ?o o3) (R:next-count ?avail ?new-avail) (RW:started o3) (RW:made p3) (RW:stacks-avail ?avail))
+        eff: (and (N:RW:started o3) (RW:shipped o3) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
+    ship-order: ?o:1 ?avail:3 ?new-avail:3
+        pre: (and (R:= ?o o4) (R:next-count ?avail ?new-avail) (RW:started o4) (RW:made p3) (RW:made p4) (RW:stacks-avail ?avail))
+        eff: (and (N:RW:started o4) (RW:shipped o4) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
+    ship-order: ?o:1 ?avail:3 ?new-avail:3
+        pre: (and (R:= ?o o5) (R:next-count ?avail ?new-avail) (RW:started o5) (RW:made p5) (RW:stacks-avail ?avail))
+        eff: (and (N:RW:started o5) (RW:shipped o5) (N:RW:stacks-avail ?avail) (RW:stacks-avail ?new-avail))
+Init[16]:
+  S:(next-count n0 n1)
+  S:(next-count n1 n2)
+  S:(next-count n2 n3)
+  S:(next-count n3 n4)
+  S:(next-count n4 n5)
+  (waiting o1)
+  (waiting o2)
+  (waiting o3)
+  (waiting o4)
+  (waiting o5)
+  (stacks-avail n0)
+  (NOT-made p1)
+  (NOT-made p2)
+  (NOT-made p3)
+  (NOT-made p4)
+  (NOT-made p5)
+Init[1]:
+  (= (total-cost) 0)
+Goal: (and (RW:shipped o1) (RW:shipped o2) (RW:shipped o3) (RW:shipped o4) (RW:shipped o5))
+Metric: (total-cost)

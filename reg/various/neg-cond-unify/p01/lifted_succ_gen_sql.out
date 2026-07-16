@@ -1,0 +1,218 @@
+Step 0 (p o1) (p o2) (NOT-q o1) (NOT-q o2)
+size: 16
+move o1 o1 :: cost: 1
+    add:
+    del:
+move o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+move o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+move o2 o2 :: cost: 1
+    add:
+    del:
+cond-add o1 o1 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+move-diff o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+move-diff o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add-diff o1 o1 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add-diff o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add-diff o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add-diff o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+refresh o1 :: cost: 1
+    add:
+    del:
+refresh o2 :: cost: 1
+    add:
+    del:
+Step 1 (p o1) (p o2) (NOT-q o1) (NOT-q o2)
+size: 16
+move o1 o1 :: cost: 1
+    add:
+    del:
+move o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+move o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+move o2 o2 :: cost: 1
+    add:
+    del:
+cond-add o1 o1 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+move-diff o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+move-diff o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add-diff o1 o1 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add-diff o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add-diff o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add-diff o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+refresh o1 :: cost: 1
+    add:
+    del:
+refresh o2 :: cost: 1
+    add:
+    del:
+Step 2 (p o2) (NOT-q o1) (NOT-q o2) (NOT-p o1)
+size: 9
+move o2 o1 :: cost: 1
+    add: (p o1) (NOT-p o2)
+    del: (p o2) (NOT-p o1)
+move o2 o2 :: cost: 1
+    add:
+    del:
+cond-add o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+move-diff o2 o1 :: cost: 1
+    add: (p o1) (NOT-p o2)
+    del: (p o2) (NOT-p o1)
+cond-add-diff o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add-diff o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+refresh o2 :: cost: 1
+    add:
+    del:
+check o1 :: cost: 1
+    add: (r o1)
+    del:
+Step 3 (NOT-q o1) (NOT-q o2) (NOT-p o1) (NOT-p o2)
+size: 2
+check o1 :: cost: 1
+    add: (r o1)
+    del:
+check o2 :: cost: 1
+    add: (r o2)
+    del:
+Step 4 (NOT-q o1) (NOT-q o2) (NOT-p o1) (NOT-p o2) (r o2)
+size: 3
+set-q o2 :: cost: 1
+    add: (q o2)
+    del: (NOT-q o2)
+check o1 :: cost: 1
+    add: (r o1)
+    del:
+check o2 :: cost: 1
+    add:
+    del:
+Step 5 (NOT-q o1) (NOT-q o2) (NOT-p o1) (NOT-p o2) (r o1) (r o2)
+size: 4
+set-q o1 :: cost: 1
+    add: (q o1)
+    del: (NOT-q o1)
+set-q o2 :: cost: 1
+    add: (q o2)
+    del: (NOT-q o2)
+check o1 :: cost: 1
+    add:
+    del:
+check o2 :: cost: 1
+    add:
+    del:
+Step 6 (NOT-q o1) (NOT-p o1) (NOT-p o2) (r o1) (r o2) (q o2)
+size: 4
+set-q o1 :: cost: 1
+    add: (q o1)
+    del: (NOT-q o1)
+set-q o2 :: cost: 1
+    add:
+    del:
+check o1 :: cost: 1
+    add:
+    del:
+check o2 :: cost: 1
+    add:
+    del:
+Step 7 (NOT-q o1) (NOT-p o1) (NOT-p o2) (r o1) (r o2) (q o2)
+size: 4
+set-q o1 :: cost: 1
+    add: (q o1)
+    del: (NOT-q o1)
+set-q o2 :: cost: 1
+    add:
+    del:
+check o1 :: cost: 1
+    add:
+    del:
+check o2 :: cost: 1
+    add:
+    del:
+Step 8 (NOT-q o1) (NOT-p o1) (NOT-p o2) (r o1) (r o2) (q o2)
+size: 4
+set-q o1 :: cost: 1
+    add: (q o1)
+    del: (NOT-q o1)
+set-q o2 :: cost: 1
+    add:
+    del:
+check o1 :: cost: 1
+    add:
+    del:
+check o2 :: cost: 1
+    add:
+    del:
+Step 9 (NOT-p o1) (NOT-p o2) (r o1) (r o2) (q o2) (q o1)
+size: 4
+set-q o1 :: cost: 1
+    add:
+    del:
+set-q o2 :: cost: 1
+    add:
+    del:
+check o1 :: cost: 1
+    add:
+    del:
+check o2 :: cost: 1
+    add:
+    del:

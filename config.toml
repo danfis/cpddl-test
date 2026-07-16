@@ -124,6 +124,7 @@ quick = [
     "ipc-2014/seq-opt/barman/p435.1",
     "ipc-2014/seq-opt/transport/p01",
     "various/cond-eff-simplify/p01",
+    "various/neg-cond-unify/p01",
 ]
 
 [[tasks]]
@@ -470,6 +471,7 @@ disable = [
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
+    "lmg_compile_in",
 ]
 
 [[tasks]]
@@ -620,6 +622,7 @@ disable = [
     "search_gbfs_ff",
     "search_lazy_add",
     "search_lazy_ff",
+    "lifted_search_astar_hmax_sql",
 ]
 
 [[tasks]]
@@ -1265,6 +1268,7 @@ disable = [
     "strips_nebel", # too large output
     "strips_cocoa", # too large output
     "prune_strips_op_mutex",
+    "prune_strips_endo",
 ]
 
 
@@ -1413,6 +1417,8 @@ disable = [
     "strips_pruned",
     "strips_useless_del_effs",
     "prune_strips_h3fw",
+    "prune_strips_endo",
+    "lmg_compile_in",
 ]
 
 [[tasks]]
@@ -1457,6 +1463,8 @@ disable = [
     "strips_pruned",
     "strips_useless_del_effs",
     "prune_strips_h3fw",
+    "prune_strips_endo",
+    "prune_strips_op_mutex",
 ]
 
 [[tasks]]
@@ -1516,6 +1524,7 @@ disable = [
     "strips_ground_prune",
     "strips_ground_unit_cost",
     "strips_pruned",
+    "prune_strips_endo",
 ]
 
 [[tasks]]
@@ -1697,6 +1706,7 @@ disable = [
     "strips_useless_del_effs",
     "h2_heur_dyn_prog_init_state",
     "prune_strips_h3fw",
+    "prune_strips_endo",
 ]
 
 [[tasks]]
@@ -1733,6 +1743,9 @@ disable = [
     "strips_ground_unit_cost",
     "strips_pruned",
     "prune_strips_h3fw",
+    "prune_strips_endo",
+    "lmg_compile_in",
+    "prune_strips_op_mutex",
 ]
 
 [[tasks]]
@@ -1758,6 +1771,7 @@ disable = [
     "symbolic_search_fwbw_astar_AI_blind",
     "symbolic_search_fwbw_astar_blind_I",
     "symbolic_search_fwbw_blind",
+    "lifted_search_gbfs_hff_max_dl",
 ]
 
 [[tasks]]
@@ -1851,6 +1865,7 @@ disable = [
     "strips_pruned",
     "strips_useless_del_effs",
     "h2_heur_dyn_prog_init_state",
+    "prune_strips_endo",
 ]
 
 [[tasks]]
@@ -2053,6 +2068,9 @@ name = "various/flip/p01"
 
 [[tasks]]
 name = "various/molgen/p01"
+
+[[tasks]]
+name = "various/neg-cond-unify/p01"
 
 [[tasks]]
 name = "various/wumpus/p01"

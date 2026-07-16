@@ -1,6 +1,6 @@
 Domain: slitherlink
 Problem: sliterlink-999868
-Require: 3
+Require: 97
 Type[4]:
     [0]: object, parent: -1
     [1]: node, parent: 0
@@ -64,7 +64,7 @@ Obj[51]:
     [49]: cell-outside-3-up, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
     [50]: cell-outside-3-down, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
 Predicate[9]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
+    =: 0 0 :: read: 1, write: 0, in-init: 0
     cell-capacity-inc: 3 3 :: read: 1, write: 0, in-init: 1
     cell-capacity: 2 3 :: read: 1, write: 1, in-init: 1
     cell-edge: 2 2 1 1 :: read: 1, write: 0, in-init: 1
@@ -80,10 +80,10 @@ Action[4]:
         eff: (and (N:RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c1 ?c1capto) (N:RW:cell-capacity ?c2 ?c2capfrom) (RW:cell-capacity ?c2 ?c2capto) (N:RW:node-degree0 ?n1) (N:RW:node-degree0 ?n2) (RW:node-degree1 ?n1) (RW:node-degree1 ?n2) (N:RW:NOT-node-degree1 ?n1) (N:RW:NOT-node-degree1 ?n2) (N:RW:NOT-linked ?n1 ?n2) (N:RW:NOT-disable-link-0-0))
     link-0-1: ?n1:1 ?n2:1 ?c1:2 ?c1capfrom:3 ?c1capto:3 ?c2:2 ?c2capfrom:3 ?c2capto:3
         pre: (and (R:cell-capacity-inc ?c1capto ?c1capfrom) (R:cell-capacity-inc ?c2capto ?c2capfrom) (R:cell-edge ?c1 ?c2 ?n1 ?n2) (RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c2 ?c2capfrom) (RW:node-degree0 ?n1) (RW:node-degree1 ?n2) (RW:NOT-linked ?n1 ?n2))
-        eff: (and (N:RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c1 ?c1capto) (N:RW:cell-capacity ?c2 ?c2capfrom) (RW:cell-capacity ?c2 ?c2capto) (N:RW:node-degree0 ?n1) (RW:node-degree1 ?n1) (N:RW:node-degree1 ?n2) (N:RW:NOT-node-degree1 ?n1) (RW:NOT-node-degree1 ?n2) (N:RW:NOT-linked ?n1 ?n2))
+        eff: (and (N:RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c1 ?c1capto) (N:RW:cell-capacity ?c2 ?c2capfrom) (RW:cell-capacity ?c2 ?c2capto) (N:RW:node-degree0 ?n1) (RW:node-degree1 ?n1) (N:RW:node-degree1 ?n2) (N:RW:NOT-node-degree1 ?n1) (N:RW:NOT-linked ?n1 ?n2) (when (N:R:= ?n1 ?n2) (RW:NOT-node-degree1 ?n2)))
     link-1-0: ?n1:1 ?n2:1 ?c1:2 ?c1capfrom:3 ?c1capto:3 ?c2:2 ?c2capfrom:3 ?c2capto:3
         pre: (and (R:cell-capacity-inc ?c1capto ?c1capfrom) (R:cell-capacity-inc ?c2capto ?c2capfrom) (R:cell-edge ?c1 ?c2 ?n1 ?n2) (RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c2 ?c2capfrom) (RW:node-degree0 ?n2) (RW:node-degree1 ?n1) (RW:NOT-linked ?n1 ?n2))
-        eff: (and (N:RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c1 ?c1capto) (N:RW:cell-capacity ?c2 ?c2capfrom) (RW:cell-capacity ?c2 ?c2capto) (N:RW:node-degree0 ?n2) (N:RW:node-degree1 ?n1) (RW:node-degree1 ?n2) (RW:NOT-node-degree1 ?n1) (N:RW:NOT-node-degree1 ?n2) (N:RW:NOT-linked ?n1 ?n2))
+        eff: (and (N:RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c1 ?c1capto) (N:RW:cell-capacity ?c2 ?c2capfrom) (RW:cell-capacity ?c2 ?c2capto) (N:RW:node-degree0 ?n2) (N:RW:node-degree1 ?n1) (RW:node-degree1 ?n2) (N:RW:NOT-node-degree1 ?n2) (N:RW:NOT-linked ?n1 ?n2) (when (N:R:= ?n1 ?n2) (RW:NOT-node-degree1 ?n1)))
     link-1-1: ?n1:1 ?n2:1 ?c1:2 ?c1capfrom:3 ?c1capto:3 ?c2:2 ?c2capfrom:3 ?c2capto:3
         pre: (and (R:cell-capacity-inc ?c1capto ?c1capfrom) (R:cell-capacity-inc ?c2capto ?c2capfrom) (R:cell-edge ?c1 ?c2 ?n1 ?n2) (RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c2 ?c2capfrom) (RW:node-degree1 ?n1) (RW:node-degree1 ?n2) (RW:NOT-linked ?n1 ?n2))
         eff: (and (N:RW:cell-capacity ?c1 ?c1capfrom) (RW:cell-capacity ?c1 ?c1capto) (N:RW:cell-capacity ?c2 ?c2capfrom) (RW:cell-capacity ?c2 ?c2capto) (N:RW:node-degree1 ?n1) (N:RW:node-degree1 ?n2) (RW:NOT-node-degree1 ?n1) (RW:NOT-node-degree1 ?n2) (N:RW:NOT-linked ?n1 ?n2))

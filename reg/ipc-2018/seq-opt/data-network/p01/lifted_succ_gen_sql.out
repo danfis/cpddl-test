@@ -1,47 +1,47 @@
 Step 0 (saved data-0-3 server3) (saved data-0-5 server1) (usage server1 number0) (usage server2 number0) (usage server3 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-3 server3) (NOT-cached data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3)
 size: 2
 load data-0-3 server3 number4 number8 number0 number4 :: cost: 4
-    add: (usage server3 number4) (cached data-0-3 server3)
+    add: (cached data-0-3 server3) (usage server3 number4)
     del: (usage server3 number0) (NOT-cached data-0-3 server3)
 load data-0-5 server1 number5 number16 number0 number5 :: cost: 25
-    add: (usage server1 number5) (cached data-0-5 server1)
+    add: (cached data-0-5 server1) (usage server1 number5)
     del: (usage server1 number0) (NOT-cached data-0-5 server1)
-Step 1 (saved data-0-3 server3) (saved data-0-5 server1) (usage server1 number0) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3)
+Step 1 (saved data-0-3 server3) (saved data-0-5 server1) (usage server1 number0) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4)
 size: 4
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 save data-0-3 number4 server3 :: cost: 4
     add:
     del:
 load data-0-5 server1 number5 number16 number0 number5 :: cost: 25
-    add: (usage server1 number5) (cached data-0-5 server1)
+    add: (cached data-0-5 server1) (usage server1 number5)
     del: (usage server1 number0) (NOT-cached data-0-5 server1)
 send data-0-3 server3 server1 number4 number16 number0 number4 :: cost: 24
-    add: (usage server1 number4) (cached data-0-3 server1)
+    add: (cached data-0-3 server1) (usage server1 number4)
     del: (usage server1 number0) (NOT-cached data-0-3 server1)
-Step 2 (saved data-0-3 server3) (saved data-0-5 server1) (usage server1 number0) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3)
+Step 2 (saved data-0-3 server3) (saved data-0-5 server1) (usage server1 number0) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4)
 size: 4
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 save data-0-3 number4 server3 :: cost: 4
     add:
     del:
 load data-0-5 server1 number5 number16 number0 number5 :: cost: 25
-    add: (usage server1 number5) (cached data-0-5 server1)
+    add: (cached data-0-5 server1) (usage server1 number5)
     del: (usage server1 number0) (NOT-cached data-0-5 server1)
 send data-0-3 server3 server1 number4 number16 number0 number4 :: cost: 24
-    add: (usage server1 number4) (cached data-0-3 server1)
+    add: (cached data-0-3 server1) (usage server1 number4)
     del: (usage server1 number0) (NOT-cached data-0-3 server1)
-Step 3 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (usage server1 number5) (cached data-0-5 server1)
+Step 3 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (usage server1 number5)
 size: 6
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number5 number0 :: cost: 0
     add: (usage server1 number0) (NOT-cached data-0-5 server1)
-    del: (usage server1 number5) (cached data-0-5 server1)
+    del: (cached data-0-5 server1) (usage server1 number5)
 save data-0-3 number4 server3 :: cost: 4
     add:
     del:
@@ -52,16 +52,16 @@ send data-0-3 server3 server1 number4 number16 number5 number9 :: cost: 24
     add: (cached data-0-3 server1) (usage server1 number9)
     del: (NOT-cached data-0-3 server1) (usage server1 number5)
 send data-0-5 server1 server2 number5 number8 number0 number5 :: cost: 20
-    add: (usage server2 number5) (cached data-0-5 server2)
+    add: (cached data-0-5 server2) (usage server2 number5)
     del: (usage server2 number0) (NOT-cached data-0-5 server2)
-Step 4 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (usage server1 number5) (cached data-0-5 server1)
+Step 4 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server1) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (usage server1 number5)
 size: 6
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number5 number0 :: cost: 0
     add: (usage server1 number0) (NOT-cached data-0-5 server1)
-    del: (usage server1 number5) (cached data-0-5 server1)
+    del: (cached data-0-5 server1) (usage server1 number5)
 save data-0-3 number4 server3 :: cost: 4
     add:
     del:
@@ -72,16 +72,16 @@ send data-0-3 server3 server1 number4 number16 number5 number9 :: cost: 24
     add: (cached data-0-3 server1) (usage server1 number9)
     del: (NOT-cached data-0-3 server1) (usage server1 number5)
 send data-0-5 server1 server2 number5 number8 number0 number5 :: cost: 20
-    add: (usage server2 number5) (cached data-0-5 server2)
+    add: (cached data-0-5 server2) (usage server2 number5)
     del: (usage server2 number0) (NOT-cached data-0-5 server2)
-Step 5 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9)
+Step 5 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9)
 size: 13
 release data-0-3 server1 number4 number9 number5 :: cost: 0
     add: (NOT-cached data-0-3 server1) (usage server1 number5)
     del: (cached data-0-3 server1) (usage server1 number9)
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number9 number4 :: cost: 0
     add: (NOT-cached data-0-5 server1) (usage server1 number4)
     del: (cached data-0-5 server1) (usage server1 number9)
@@ -95,34 +95,34 @@ save data-0-5 number5 server1 :: cost: 25
     add:
     del:
 send data-0-3 server1 server2 number4 number8 number0 number4 :: cost: 16
-    add: (usage server2 number4) (cached data-0-3 server2)
+    add: (cached data-0-3 server2) (usage server2 number4)
     del: (usage server2 number0) (NOT-cached data-0-3 server2)
 send data-0-5 server1 server2 number5 number8 number0 number5 :: cost: 20
-    add: (usage server2 number5) (cached data-0-5 server2)
+    add: (cached data-0-5 server2) (usage server2 number5)
     del: (usage server2 number0) (NOT-cached data-0-5 server2)
 process data-0-3 data-0-5 data-1-4 script1 server1 number1 number16 number9 number10 :: cost: 16
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script4 server1 number1 number16 number9 number10 :: cost: 26
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script9 server1 number1 number16 number9 number10 :: cost: 18
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script2 server1 number4 number16 number9 number13 :: cost: 22
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script7 server1 number4 number16 number9 number13 :: cost: 19
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
-Step 6 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9)
+Step 6 (saved data-0-3 server3) (saved data-0-5 server1) (usage server2 number0) (NOT-cached data-0-3 server2) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9)
 size: 13
 release data-0-3 server1 number4 number9 number5 :: cost: 0
     add: (NOT-cached data-0-3 server1) (usage server1 number5)
     del: (cached data-0-3 server1) (usage server1 number9)
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number9 number4 :: cost: 0
     add: (NOT-cached data-0-5 server1) (usage server1 number4)
     del: (cached data-0-5 server1) (usage server1 number9)
@@ -136,37 +136,37 @@ save data-0-5 number5 server1 :: cost: 25
     add:
     del:
 send data-0-3 server1 server2 number4 number8 number0 number4 :: cost: 16
-    add: (usage server2 number4) (cached data-0-3 server2)
+    add: (cached data-0-3 server2) (usage server2 number4)
     del: (usage server2 number0) (NOT-cached data-0-3 server2)
 send data-0-5 server1 server2 number5 number8 number0 number5 :: cost: 20
-    add: (usage server2 number5) (cached data-0-5 server2)
+    add: (cached data-0-5 server2) (usage server2 number5)
     del: (usage server2 number0) (NOT-cached data-0-5 server2)
 process data-0-3 data-0-5 data-1-4 script1 server1 number1 number16 number9 number10 :: cost: 16
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script4 server1 number1 number16 number9 number10 :: cost: 26
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script9 server1 number1 number16 number9 number10 :: cost: 18
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script2 server1 number4 number16 number9 number13 :: cost: 22
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script7 server1 number4 number16 number9 number13 :: cost: 19
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
-Step 7 (saved data-0-3 server3) (saved data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9) (usage server2 number4) (cached data-0-3 server2)
+Step 7 (saved data-0-3 server3) (saved data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9) (cached data-0-3 server2) (usage server2 number4)
 size: 13
 release data-0-3 server1 number4 number9 number5 :: cost: 0
     add: (NOT-cached data-0-3 server1) (usage server1 number5)
     del: (cached data-0-3 server1) (usage server1 number9)
 release data-0-3 server2 number4 number4 number0 :: cost: 0
     add: (usage server2 number0) (NOT-cached data-0-3 server2)
-    del: (usage server2 number4) (cached data-0-3 server2)
+    del: (cached data-0-3 server2) (usage server2 number4)
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number9 number4 :: cost: 0
     add: (NOT-cached data-0-5 server1) (usage server1 number4)
     del: (cached data-0-5 server1) (usage server1 number9)
@@ -183,31 +183,31 @@ save data-0-5 number5 server1 :: cost: 25
     add:
     del:
 process data-0-3 data-0-5 data-1-4 script1 server1 number1 number16 number9 number10 :: cost: 16
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script4 server1 number1 number16 number9 number10 :: cost: 26
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script9 server1 number1 number16 number9 number10 :: cost: 18
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script2 server1 number4 number16 number9 number13 :: cost: 22
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script7 server1 number4 number16 number9 number13 :: cost: 19
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
-Step 8 (saved data-0-3 server3) (saved data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9) (usage server2 number4) (cached data-0-3 server2)
+Step 8 (saved data-0-3 server3) (saved data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server1) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (cached data-0-3 server1) (usage server1 number9) (cached data-0-3 server2) (usage server2 number4)
 size: 13
 release data-0-3 server1 number4 number9 number5 :: cost: 0
     add: (NOT-cached data-0-3 server1) (usage server1 number5)
     del: (cached data-0-3 server1) (usage server1 number9)
 release data-0-3 server2 number4 number4 number0 :: cost: 0
     add: (usage server2 number0) (NOT-cached data-0-3 server2)
-    del: (usage server2 number4) (cached data-0-3 server2)
+    del: (cached data-0-3 server2) (usage server2 number4)
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number9 number4 :: cost: 0
     add: (NOT-cached data-0-5 server1) (usage server1 number4)
     del: (cached data-0-5 server1) (usage server1 number9)
@@ -224,37 +224,37 @@ save data-0-5 number5 server1 :: cost: 25
     add:
     del:
 process data-0-3 data-0-5 data-1-4 script1 server1 number1 number16 number9 number10 :: cost: 16
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script4 server1 number1 number16 number9 number10 :: cost: 26
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-3 data-0-5 data-1-4 script9 server1 number1 number16 number9 number10 :: cost: 18
-    add: (usage server1 number10) (cached data-1-4 server1)
+    add: (cached data-1-4 server1) (usage server1 number10)
     del: (NOT-cached data-1-4 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script2 server1 number4 number16 number9 number13 :: cost: 22
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
 process data-0-5 data-0-3 data-1-2 script7 server1 number4 number16 number9 number13 :: cost: 19
-    add: (usage server1 number13) (cached data-1-2 server1)
+    add: (cached data-1-2 server1) (usage server1 number13)
     del: (NOT-cached data-1-2 server1) (usage server1 number9)
-Step 9 (saved data-0-3 server3) (saved data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (usage server3 number4) (cached data-0-3 server3) (cached data-0-5 server1) (cached data-0-3 server1) (usage server2 number4) (cached data-0-3 server2) (usage server1 number10) (cached data-1-4 server1)
+Step 9 (saved data-0-3 server3) (saved data-0-5 server1) (NOT-cached data-0-5 server2) (NOT-cached data-0-5 server3) (NOT-cached data-1-2 server1) (NOT-cached data-1-2 server2) (NOT-cached data-1-2 server3) (NOT-cached data-1-4 server2) (NOT-cached data-1-4 server3) (NOT-cached data-2-1 server1) (NOT-cached data-2-1 server2) (NOT-cached data-2-1 server3) (cached data-0-3 server3) (usage server3 number4) (cached data-0-5 server1) (cached data-0-3 server1) (cached data-0-3 server2) (usage server2 number4) (cached data-1-4 server1) (usage server1 number10)
 size: 15
 release data-0-3 server1 number4 number10 number6 :: cost: 0
     add: (NOT-cached data-0-3 server1) (usage server1 number6)
     del: (cached data-0-3 server1) (usage server1 number10)
 release data-0-3 server2 number4 number4 number0 :: cost: 0
     add: (usage server2 number0) (NOT-cached data-0-3 server2)
-    del: (usage server2 number4) (cached data-0-3 server2)
+    del: (cached data-0-3 server2) (usage server2 number4)
 release data-0-3 server3 number4 number4 number0 :: cost: 0
     add: (usage server3 number0) (NOT-cached data-0-3 server3)
-    del: (usage server3 number4) (cached data-0-3 server3)
+    del: (cached data-0-3 server3) (usage server3 number4)
 release data-0-5 server1 number5 number10 number5 :: cost: 0
     add: (NOT-cached data-0-5 server1) (usage server1 number5)
     del: (cached data-0-5 server1) (usage server1 number10)
 release data-1-4 server1 number1 number10 number9 :: cost: 0
     add: (NOT-cached data-1-4 server1) (usage server1 number9)
-    del: (usage server1 number10) (cached data-1-4 server1)
+    del: (cached data-1-4 server1) (usage server1 number10)
 save data-0-3 number4 server1 :: cost: 20
     add: (saved data-0-3 server1)
     del:
@@ -274,7 +274,7 @@ send data-1-4 server1 server2 number1 number8 number4 number5 :: cost: 4
     add: (usage server2 number5) (cached data-1-4 server2)
     del: (NOT-cached data-1-4 server2) (usage server2 number4)
 send data-1-4 server1 server3 number1 number8 number4 number5 :: cost: 6
-    add: (usage server3 number5) (cached data-1-4 server3)
+    add: (cached data-1-4 server3) (usage server3 number5)
     del: (NOT-cached data-1-4 server3) (usage server3 number4)
 process data-0-5 data-0-3 data-1-2 script2 server1 number4 number16 number10 number14 :: cost: 22
     add: (cached data-1-2 server1) (usage server1 number14)

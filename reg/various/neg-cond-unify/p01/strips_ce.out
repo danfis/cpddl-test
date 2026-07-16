@@ -1,0 +1,131 @@
+Fact[10]:
+  (NOT-p o1)
+  (NOT-p o2)
+  (NOT-q o1)
+  (NOT-q o2)
+  (p o1)
+  (p o2)
+  (q o1)
+  (q o2)
+  (r o1)
+  (r o2)
+Op[18]:
+  (check o1), cost: 1
+    pre: (NOT-p o1)
+    add: (r o1)
+    del:
+  (check o2), cost: 1
+    pre: (NOT-p o2)
+    add: (r o2)
+    del:
+  (cond-add o1 o1), cost: 1
+    pre: (p o1)
+    add:
+    del: (p o1)
+    cond-eff[2]:
+      pre: (q o1)
+      add:
+      del: (NOT-p o1)
+      pre: (NOT-q o1)
+      add: (NOT-p o1)
+      del:
+  (cond-add o1 o2), cost: 1
+    pre: (p o1)
+    add: (NOT-p o1)
+    del: (p o1)
+    cond-eff[2]:
+      pre: (q o2)
+      add: (p o2)
+      del: (NOT-p o2)
+      pre: (NOT-q o2)
+      add: (NOT-p o1)
+      del:
+  (cond-add o2 o1), cost: 1
+    pre: (p o2)
+    add: (NOT-p o2)
+    del: (p o2)
+    cond-eff[2]:
+      pre: (q o1)
+      add: (p o1)
+      del: (NOT-p o1)
+      pre: (NOT-q o1)
+      add: (NOT-p o2)
+      del:
+  (cond-add o2 o2), cost: 1
+    pre: (p o2)
+    add:
+    del: (p o2)
+    cond-eff[2]:
+      pre: (q o2)
+      add:
+      del: (NOT-p o2)
+      pre: (NOT-q o2)
+      add: (NOT-p o2)
+      del:
+  (cond-add-diff o1 o1), cost: 1
+    pre: (p o1)
+    add: (NOT-p o1)
+    del: (p o1)
+  (cond-add-diff o1 o2), cost: 1
+    pre: (p o1)
+    add: (NOT-p o1)
+    del: (p o1)
+    cond-eff[1]:
+      pre: (q o2)
+      add: (p o2)
+      del: (NOT-p o2)
+  (cond-add-diff o2 o1), cost: 1
+    pre: (p o2)
+    add: (NOT-p o2)
+    del: (p o2)
+    cond-eff[1]:
+      pre: (q o1)
+      add: (p o1)
+      del: (NOT-p o1)
+  (cond-add-diff o2 o2), cost: 1
+    pre: (p o2)
+    add: (NOT-p o2)
+    del: (p o2)
+  (move o1 o1), cost: 1
+    pre: (p o1)
+    add:
+    del: (NOT-p o1)
+  (move o1 o2), cost: 1
+    pre: (p o1)
+    add: (NOT-p o1) (p o2)
+    del: (NOT-p o2) (p o1)
+  (move o2 o1), cost: 1
+    pre: (p o2)
+    add: (NOT-p o2) (p o1)
+    del: (NOT-p o1) (p o2)
+  (move o2 o2), cost: 1
+    pre: (p o2)
+    add:
+    del: (NOT-p o2)
+  (refresh o1), cost: 1
+    pre: (p o1)
+    add:
+    del: (NOT-p o1)
+    cond-eff[1]:
+      pre: (q o1)
+      add:
+      del: (p o1)
+  (refresh o2), cost: 1
+    pre: (p o2)
+    add:
+    del: (NOT-p o2)
+    cond-eff[1]:
+      pre: (q o2)
+      add:
+      del: (p o2)
+  (set-q o1), cost: 1
+    pre: (r o1)
+    add: (q o1)
+    del: (NOT-q o1)
+  (set-q o2), cost: 1
+    pre: (r o2)
+    add: (q o2)
+    del: (NOT-q o2)
+Init State: (NOT-q o1) (NOT-q o2) (p o1) (p o2)
+Goal: (p o1) (p o2) (r o1)
+Has conditional effects

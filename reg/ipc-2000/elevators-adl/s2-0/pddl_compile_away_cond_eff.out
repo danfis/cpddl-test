@@ -1,6 +1,6 @@
 Domain: miconic
 Problem: mixed-f4-p2-u0-v0-g0-a0-n0-a0-b0-n0-f0-r0
-Require: 83
+Require: 87
 Type[3]:
     [0]: object, parent: -1
     [1]: passenger, parent: 0
@@ -36,49 +36,49 @@ Action[17]:
         eff: (and (N:RW:lift-at ?f1) (RW:lift-at ?f2))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:served p0) (RW:served p1) (RW:lift-at ?f) (RW:NOT-boarded p1))
-        eff: (and (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)) (when (R:destin p0 ?f) (RW:NOT-boarded p0)))
     stop: ?f:2
         pre: (and (RW:boarded p1) (RW:served p0) (RW:served p1) (RW:lift-at ?f) (RW:NOT-boarded p0))
-        eff: (and (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))))
+        eff: (and (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)) (when (R:destin p1 ?f) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:boarded p1) (RW:served p0) (RW:served p1) (RW:lift-at ?f))
-        eff: (and (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))) (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)) (when (R:destin p0 ?f) (RW:NOT-boarded p0)) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)) (when (R:destin p1 ?f) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:served p1) (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-boarded p0) (RW:NOT-boarded p1))
         eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:served p1) (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-boarded p1))
-        eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)))
     stop: ?f:2
         pre: (and (RW:boarded p1) (RW:served p1) (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-boarded p0))
-        eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))))
+        eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)) (when (R:destin p1 ?f) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:boarded p1) (RW:served p1) (RW:lift-at ?f) (RW:NOT-served p0))
-        eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))) (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)) (when (R:destin p1 ?f) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:served p0) (RW:lift-at ?f) (RW:NOT-served p1) (RW:NOT-boarded p0) (RW:NOT-boarded p1))
         eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:served p0) (RW:lift-at ?f) (RW:NOT-served p1) (RW:NOT-boarded p1))
-        eff: (and (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))) (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))))
+        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)) (when (R:destin p0 ?f) (RW:NOT-boarded p0)))
     stop: ?f:2
         pre: (and (RW:boarded p1) (RW:served p0) (RW:lift-at ?f) (RW:NOT-served p1) (RW:NOT-boarded p0))
-        eff: (and (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))) (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))))
+        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:boarded p1) (RW:served p0) (RW:lift-at ?f) (RW:NOT-served p1))
-        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))) (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)) (when (R:destin p0 ?f) (RW:NOT-boarded p0)) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-served p1) (RW:NOT-boarded p0) (RW:NOT-boarded p1))
         eff: (and (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-served p1) (RW:NOT-boarded p1))
-        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)))
     stop: ?f:2
         pre: (and (RW:boarded p1) (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-served p1) (RW:NOT-boarded p0))
-        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))))
+        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)))
     stop: ?f:2
         pre: (and (RW:boarded p0) (RW:boarded p1) (RW:lift-at ?f) (RW:NOT-served p0) (RW:NOT-served p1))
-        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (RW:served p1) (N:RW:NOT-served p1) (N:RW:boarded p1) (RW:NOT-boarded p1))) (when (R:destin p0 ?f) (and (RW:served p0) (N:RW:NOT-served p0) (N:RW:boarded p0) (RW:NOT-boarded p0))))
+        eff: (and (when (R:origin p1 ?f) (and (RW:boarded p1) (N:RW:NOT-boarded p1))) (when (R:origin p0 ?f) (and (RW:boarded p0) (N:RW:NOT-boarded p0))) (when (R:destin p1 ?f) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (R:destin p0 ?f) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (R:destin p0 ?f) (N:R:origin p0 ?f)) (RW:NOT-boarded p0)) (when (and (R:destin p1 ?f) (N:R:origin p1 ?f)) (RW:NOT-boarded p1)))
 Init[15]:
   S:(origin p0 f3)
   S:(origin p1 f1)
