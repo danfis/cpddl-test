@@ -12,8 +12,12 @@
 import sys
 import re
 import argparse
-import tomllib
 from pprint import pprint
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:
+    import tomli as tomllib
 
 # ---------------------------------------------------------------------------
 # Test-registry state

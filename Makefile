@@ -8,6 +8,8 @@ TOPDIR ?= ..
 -include $(TOPDIR)/Makefile.config
 include $(TOPDIR)/Makefile.include
 
+PYTHON ?= python3
+
 VALGRIND ?= valgrind
 VALGRIND_MEMLEAK_OPTS  = --quiet
 VALGRIND_MEMLEAK_OPTS += --leak-check=full --show-reachable=yes --show-leak-kinds=all
@@ -77,7 +79,7 @@ all: $(TARGETS)
 test: src/test.c src/tasks_tests.c $(C_IN) ../libpddl.a $(OBJS) val/validate
 	$(CC) $(CFLAGS) -o $@ $< src/tasks_tests.c $(OBJS) $(LDFLAGS)
 src/tests_tasks.in.c: scripts/gen-tests-tasks.py config.toml $(TESTS_C) ../pddl/config.h
-	python3 scripts/gen-tests-tasks.py config.toml $(TESTS_C) >$@
+	$(PYTHON) scripts/gen-tests-tasks.py config.toml $(TESTS_C) >$@
 
 .objs/%.o: src/%.c src/%.h ../libpddl.a
 	$(CC) $(CFLAGS) -c -o $@ $<
