@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <semaphore.h>
 #include <dirent.h>
+#include <getopt.h>
 #include <pthread.h>
 #include <assert.h>
 #include "pddl/pddl.h"
@@ -75,6 +76,8 @@ static int supress_fail = 0;
 static int print_plan = 0;
 static int print_tasks = 0;
 static int print_tests = 0;
+static int clean_reg_all = 0;
+static int clean_reg_exit = 0;
 
 static FILE *log_fout = NULL;
 
@@ -169,13 +172,22 @@ static void usage(const char *progname)
             DEFAULT_TIMEOUT);
     fprintf(stderr, "  -f       Suppress printing failures\n");
     fprintf(stderr, "  -l  str  Log filename (default: check.log)\n");
+    fprintf(stderr, "  -c       Clean *.tmp of ALL tasks in reg/ before running"
+            " (default cleans only enabled tasks)\n");
+    fprintf(stderr, "  --clean-reg-and-exit"
+            "  Clean *.tmp of ALL tasks in reg/ and exit\n");
     exit(-1);
 }
 
 static void parseOptions(int argc, char *argv[])
 {
+    static struct option long_options[] = {
+        {"clean-reg-and-exit", no_argument, 0, 'C'},
+        {0, 0, 0, 0}
+    };
     int opt;
-    while ((opt = getopt(argc, argv, "haBQAvxS:T:s:t:p:DLKm:fl:")) != -1) {
+    while ((opt = getopt_long(argc, argv, "haBQAvxS:T:s:t:p:DLKm:fl:cC",
+                              long_options, NULL)) != -1) {
         switch (opt) {
             case 'a':
                 tasksTestsEnableAllTests();
@@ -227,6 +239,12 @@ static void parseOptions(int argc, char *argv[])
                 break;
             case 'l':
                 openLogFile(optarg);
+                break;
+            case 'c':
+                clean_reg_all = 1;
+                break;
+            case 'C':
+                clean_reg_exit = 1;
                 break;
             default:
                 usage(argv[0]);
@@ -943,22 +961,49 @@ static void cleanRegDirRecursive(const char *dirpath, size_t dirpath_len)
                 entry->d_name[entry_len - 3] == 't' &&
                 entry->d_name[entry_len - 2] == 'm' &&
                 entry->d_name[entry_len - 1] == 'p'){
-                printf("Cleaning reg/: %-100s\r", fullpath);
-                fflush(stdout);
+                if (!no_progress){
+                    printf("Cleaning reg/: %-100s\r", fullpath);
+                    fflush(stdout);
+                }
                 unlink(fullpath);
             }
         }
     }
 
     closedir(dir);
-    printf("Cleaning reg/: %-100s\r", "DONE");
+    if (!no_progress)
+        printf("Cleaning reg/: %-100s\r", "DONE");
     fflush(stdout);
 }
 
-static void cleanRegDir(void)
+static void cleanRegDirAll(void)
 {
+    if (no_progress){
+        printf("Cleaning reg/ (all tasks) ... ");
+        fflush(stdout);
+    }
     cleanRegDirRecursive("reg", 3);
-    printf("\n");
+    if (no_progress)
+        printf("done\n");
+}
+
+static void cleanRegDirEnabled(void)
+{
+    if (no_progress){
+        printf("Cleaning reg/ (enabled tasks) ... ");
+        fflush(stdout);
+    }
+    int n = tasksTestsNumTasks();
+    for (int task_id = 0; task_id < n; ++task_id){
+        if (!tasksTestsTaskIsEnabled(task_id))
+            continue;
+        char dirpath[4096];
+        snprintf(dirpath, sizeof(dirpath), "reg/%s",
+                 tasksTestsGetTaskName(task_id));
+        cleanRegDirRecursive(dirpath, strlen(dirpath));
+    }
+    if (no_progress)
+        printf("done\n");
 }
 
 static int th_progress_end = 0;
@@ -1007,8 +1052,16 @@ int main(int argc, char *argv[])
         exit(0);
     }
 
+    if (clean_reg_exit){
+        cleanRegDirAll();
+        exit(0);
+    }
 
-    cleanRegDir();
+    if (clean_reg_all){
+        cleanRegDirAll();
+    }else{
+        cleanRegDirEnabled();
+    }
     global_tear_down = tasksTestsGlobalTearDown();
 
     num_tasks = tasksTestsNumTasks();

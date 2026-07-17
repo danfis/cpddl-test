@@ -90,32 +90,32 @@ val/validate: val/Makefile val/src/*.cpp
 	$(MAKE) -C val
 
 check: all
-	./test $(T)
+	./test -c $(T)
 check-quick: all
-	./test $(T_QUICK)
+	./test -c $(T_QUICK)
 check-all: all
-	./test $(T_ALL)
+	./test -c $(T_ALL)
 
 check-valgrind: all
-	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
+	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test -c $(T) -vvv -p 1 2>&1 | tee check.log
 check-segfault: all
-	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test $(T) -vvv -p 1 2>&1 | tee check.log
+	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test -c $(T) -vvv -p 1 2>&1 | tee check.log
 check-gdb: all
-	gdb --ex 'set follow-fork-mode child' --ex run --args ./test $(T)
+	gdb --ex 'set follow-fork-mode child' --ex run --args ./test -c $(T)
 
 clean:
 	rm -f check.log
 	rm -f *.o
 	rm -f .objs/*.o
 	rm -f src/*.in.c
+	if [ -x ./test ]; then ./test --clean-reg-and-exit; else find reg/ -name '*.tmp' -exec rm '{}' ';'; fi
 	rm -f $(TARGETS)
-	find reg/ -name '*.tmp' -exec rm '{}' ';'
 
 mrproper: clean
 	$(MAKE) -C val clean
 
 clean-reg:
-	find reg/ -name '*.tmp' -exec rm '{}' ';'
+	if [ -x ./test ]; then ./test --clean-reg-and-exit; else find reg/ -name '*.tmp' -exec rm '{}' ';'; fi
 
 .PHONY: all clean mrproper check check-quick check-all \
         check-valgrind check-gdb check-segfault \
