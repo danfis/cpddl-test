@@ -39,6 +39,26 @@ TEST(pddl_compile_away_cond_eff, pddl)
     pddlPrintDebug(&C.pddl, stdout);
 }
 
+TEST(pddl_action_simplify_cond_effs, pddl)
+{
+    pddl_t pddl;
+    pddlInitCopy(&pddl, &C.pddl);
+    for (int i = 0; i < pddl.action.action_size; ++i){
+        pddl_action_t *a = pddl.action.action + i;
+        pddl_fm_t *pre = pddlFmClone(a->pre);
+        pddl_fm_t *eff = pddlFmClone(a->eff);
+        if (pddlActionSimplifyCondEffs(a, &pddl)){
+            pddlActionPrint(&pddl, a, stdout);
+        }else{
+            // Returning false means the action was not changed
+            assert(pddlFmEq(pre, a->pre) && pddlFmEq(eff, a->eff));
+        }
+        pddlFmDel(pre);
+        pddlFmDel(eff);
+    }
+    pddlFree(&pddl);
+}
+
 TEST(pddl_no_normalize, r)
 {
     pddl_config_t cfg = PDDL_CONFIG_INIT;

@@ -1,0 +1,3 @@
+    process: ?x:1
+        pre: (and (R:pre-a ?x) (R:pre-b ?x))
+        eff: (and (RW:done ?x) (RW:eff-fully-entailed ?x) (when (R:extra ?x) (RW:eff-entailed-atom ?x)) (when (R:extra ?x) (RW:eff-untouched ?x)))
