@@ -36,6 +36,7 @@ struct worker {
     int id;
     pid_t pid;
     int task_id;
+    pddl_timer_t timer;
 };
 typedef struct worker worker_t;
 
@@ -76,6 +77,13 @@ static int print_tasks = 0;
 static int print_tests = 0;
 
 static FILE *log_fout = NULL;
+
+/** Wall-clock time of the whole program */
+static pddl_timer_t overall_timer;
+/** Wall-clock time of running the tests only */
+static pddl_timer_t tests_timer;
+/** Accumulated wall-clock time of all task workers */
+static double tasks_total_time = 0.;
 
 static void setMemLimit(void)
 {
@@ -695,6 +703,7 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
 static int _runWorker(worker_t *worker, int task_id)
 {
     worker->task_id = task_id;
+    pddlTimerStart(&worker->timer);
     pid_t pid = fork();
 
     if (pid < 0){
@@ -740,6 +749,8 @@ static int _waitForWorker(worker_t *worker, int status)
 {
     assert(worker->task_id >= 0);
     assert(worker->pid >= 0);
+    pddlTimerStop(&worker->timer);
+    tasks_total_time += pddlTimerElapsedInSF(&worker->timer);
     if (verbose >= 1){
         sem_wait(&shared->lock);
         printf("Task %s | worker: %d, pid: %d | DONE\n",
@@ -880,6 +891,29 @@ static void printReport(void)
         printReportFailures();
 }
 
+static void printStatusLine(void)
+{
+    int num_succeeded = 0;
+    int num_failed = 0;
+    for (int i = 0; i < num_tests; ++i){
+        if (!test_stat[i].run)
+            continue;
+        num_succeeded += test_stat[i].succeeded;
+        num_failed += test_stat[i].failed;
+    }
+
+    pddlTimerStop(&overall_timer);
+
+    printLog("==> tasks: %d | jobs: %d | succ: %d | fail: %d%s\n",
+             num_enabled_tasks, num_enabled_jobs, num_succeeded, num_failed,
+             (num_failed == 0 ? " | OK" : ""));
+    printLog("==> time: overall %.2fs | overall tests %.2fs"
+             " | accumulative %.2fs\n",
+             pddlTimerElapsedInSF(&overall_timer),
+             pddlTimerElapsedInSF(&tests_timer),
+             tasks_total_time);
+}
+
 static void cleanRegDirRecursive(const char *dirpath, size_t dirpath_len)
 {
     DIR *dir = opendir(dirpath);
@@ -944,6 +978,7 @@ static void *thProgress(void *_)
 int main(int argc, char *argv[])
 {
     setMemLimit();
+    pddlTimerStart(&overall_timer);
     parseOptions(argc, argv);
     if (log_fout == NULL)
         openLogFile("check.log");
@@ -1015,6 +1050,7 @@ int main(int argc, char *argv[])
         pthread_create(&th_progress, NULL, thProgress, NULL);
     }
 
+    pddlTimerStart(&tests_timer);
     int num_active_workers = 0;
     for (int task_id = 0; task_id < num_tasks; ++task_id){
         if (!tasksTestsTaskIsEnabled(task_id))
@@ -1035,6 +1071,7 @@ int main(int argc, char *argv[])
         waitForWorker(worker);
         --num_active_workers;
     }
+    pddlTimerStop(&tests_timer);
 
     if (verbose == 0 && !no_progress){
         th_progress_end = 1;
@@ -1042,6 +1079,7 @@ int main(int argc, char *argv[])
     }
 
     printReport();
+    printStatusLine();
 
     int exit_code = 0;
     for (int i = 0; i < num_tests; ++i){
