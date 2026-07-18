@@ -39,12 +39,21 @@ TEST(pddl_compile_away_cond_eff, pddl)
     pddlPrintDebug(&C.pddl, stdout);
 }
 
-TEST(pddl_action_simplify_cond_effs, pddl)
+TEST(pddl_action_simplify_cond_effs, r)
 {
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 0;
+    cfg.force_adl = 1;
     pddl_t pddl;
-    pddlInitCopy(&pddl, &C.pddl);
+    int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
     for (int i = 0; i < pddl.action.action_size; ++i){
         pddl_action_t *a = pddl.action.action + i;
+        pddlActionNormalize(a, &pddl);
         pddl_fm_t *pre = pddlFmClone(a->pre);
         pddl_fm_t *eff = pddlFmClone(a->eff);
         if (pddlActionSimplifyCondEffs(a, &pddl)){
