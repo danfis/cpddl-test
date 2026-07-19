@@ -2767,11 +2767,11 @@ reversibility-simple-2 = ["reversibility-simple", "2", "stdout"]
 reversibility-iterative-2 = ["reversibility-iterative", "2", "stdout"]
 
 # --- symb ---
-symb-astar-fw = ["symb-blind", "fw", "stdout"]
-symb-astar-bw = ["symb-blind", "bw", "stdout"]
-symb-astar-fwbw = ["symb-blind", "fwbw", "stdout"]
-symb-gbfs-fw-AI = ["symb-pot", "gbfs", "fw", "--fw-pot-A+I", "stdout"]
-symb-gbfs-fwbw-AI = ["symb-pot", "gbfs", "fwbw", "--fw-pot-A+I", "stdout"]
+symb-astar-fw = ["symb-astar", "blind", "none", "stdout"]
+symb-astar-bw = ["symb-astar", "none", "blind", "stdout"]
+symb-astar-fwbw = ["symb-astar", "blind", "blind", "stdout"]
+symb-gbfs-fw-AI = ["symb-gbfs", "A+I", "none", "stdout"]
+symb-gbfs-fwbw-AI = ["symb-gbfs", "A+I", "blind", "stdout"]
 
 
 # Requirements: map test name -> list of PDDL_{NAME} features that must be
@@ -2786,6 +2786,7 @@ gplan-astar-pot-I         = ["CPLEX"]
 gplan-astar-pot-A         = ["CPLEX"]
 symb-astar-fw             = ["CUDD"]
 symb-astar-bw             = ["CUDD"]
+symb-astar-fwbw           = ["CUDD"]
 symb-gbfs-fw-AI           = ["CUDD", "CPLEX"]
 symb-gbfs-fwbw-AI         = ["CUDD", "CPLEX"]
 

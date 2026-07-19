@@ -4,6 +4,8 @@
 Navigation:
   UP/DOWN  - move selection
   SPACE    - toggle side-by-side diff view below selected item
+  x        - toggle side-by-side diff view for all items
+  X        - toggle .err.tmp view for all items
   ENTER    - open vimdiff for selected item
   d        - open details submenu (list reg/ files, ENTER opens in nvim)
   q / ESC  - quit
@@ -88,18 +90,19 @@ def init_colors():
     curses.init_pair(6, curses.COLOR_GREEN,  -1)                  # fixed row
 
 
-def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
-         task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed=None):
-    stdscr.erase()
-    height, width = stdscr.getmaxyx()
-    body_height = height - 1  # last line reserved for status bar
+def build_rows(failures, selected, expanded, err_expanded, width,
+               task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed):
+    """Render every item into a flat list of screen lines.
 
-    item_rows = {}   # item_idx -> screen row
-    row = 0
-    idx = scroll_top
+    Returns (rows, blocks) where rows is a list of (text, attr) and blocks maps
+    item_idx -> (start_row, height).
+    """
+    rows = []
+    blocks = {}
 
-    while idx < len(failures) and row < body_height:
-        task, test, dirpath = failures[idx]
+    for idx, (task, test, dirpath) in enumerate(failures):
+        start_row = len(rows)
+
         fail_line = ""
         fail_path = os.path.join(dirpath, test + '.fail.tmp')
         try:
@@ -109,7 +112,6 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
             pass
         reason = f"  {fail_line}" if fail_line else ""
         label = f" {task:<{task_col_w}}  {test:<{test_col_w}}{reason}"
-        item_rows[idx] = row
 
         if idx == selected:
             attr = curses.color_pair(1) | curses.A_BOLD
@@ -117,13 +119,9 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
             attr = curses.color_pair(6)
         else:
             attr = curses.A_NORMAL
-        try:
-            stdscr.addstr(row, 0, clip(label, width).ljust(min(width - 1, width)), attr)
-        except curses.error:
-            pass
-        row += 1
+        rows.append((clip(label, width).ljust(min(width - 1, width)), attr))
 
-        if idx in expanded and row < body_height:
+        if idx in expanded:
             out_path     = os.path.join(dirpath, test + '.out')
             out_tmp_path = os.path.join(dirpath, test + '.out.tmp')
             left_lines  = read_lines(out_path)
@@ -131,15 +129,11 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
 
             half = max(1, (width - 3) // 2)
             hdr = clip('.out', half).ljust(half) + ' | ' + clip('.out.tmp', half)
-            try:
-                stdscr.addstr(row, 0, hdr[:width - 1], curses.color_pair(5) | curses.A_BOLD)
-            except curses.error:
-                pass
-            row += 1
+            rows.append((hdr[:width - 1], curses.color_pair(5) | curses.A_BOLD))
 
             shown = 0
             for tag, left, right in side_by_side_diff(left_lines, right_lines, half):
-                if row >= body_height or shown >= max_diff_lines:
+                if shown >= max_diff_lines:
                     break
                 lstr = clip(left,  half).ljust(half)
                 rstr = clip(right, half)
@@ -152,40 +146,62 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
                     attr = curses.color_pair(4)
                 else:
                     attr = curses.A_NORMAL
-                try:
-                    stdscr.addstr(row, 0, line, attr)
-                except curses.error:
-                    pass
-                row += 1
+                rows.append((line, attr))
                 shown += 1
 
-        if idx in err_expanded and row < body_height:
+        if idx in err_expanded:
             err_tmp_path = os.path.join(dirpath, test + '.err.tmp')
             err_lines = read_lines(err_tmp_path)
             hdr = f" -- {test}.err.tmp --"
-            try:
-                stdscr.addstr(row, 0, hdr[:width - 1], curses.color_pair(5) | curses.A_BOLD)
-            except curses.error:
-                pass
-            row += 1
-            shown = 0
-            for line in err_lines:
-                if row >= body_height or shown >= max_err_lines:
-                    break
-                try:
-                    stdscr.addstr(row, 0, clip(line.rstrip(), width - 1))
-                except curses.error:
-                    pass
-                row += 1
-                shown += 1
+            rows.append((hdr[:width - 1], curses.color_pair(5) | curses.A_BOLD))
+            for line in err_lines[:max_err_lines]:
+                rows.append((clip(line.rstrip(), width - 1), curses.A_NORMAL))
 
-        idx += 1
+        blocks[idx] = (start_row, len(rows) - start_row)
+
+    return rows, blocks
+
+
+def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
+         task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed=None):
+    """Draw the list and return the (possibly adjusted) scroll offset.
+
+    scroll_top is a logical row offset, so the view can stop at any line -- the
+    tail of the last item's expanded block is always reachable.
+    """
+    stdscr.erase()
+    height, width = stdscr.getmaxyx()
+    body_height = height - 1  # last line reserved for status bar
+
+    rows, blocks = build_rows(failures, selected, expanded, err_expanded, width,
+                              task_col_w, test_col_w, max_diff_lines,
+                              max_err_lines, fixed)
+
+    # Keep the selected item's block visible: show all of it when it fits,
+    # otherwise anchor its top.
+    start, block_h = blocks[selected]
+    if start < scroll_top:
+        scroll_top = start
+    elif start + block_h > scroll_top + body_height:
+        scroll_top = min(start, start + block_h - body_height)
+    # Clamp so the last row can sit right above the status bar
+    scroll_top = max(0, min(scroll_top, max(0, len(rows) - body_height)))
+
+    for i in range(body_height):
+        if scroll_top + i >= len(rows):
+            break
+        text, attr = rows[scroll_top + i]
+        try:
+            stdscr.addstr(i, 0, text, attr)
+        except curses.error:
+            pass
 
     # Status bar
     status = (f" {selected + 1}/{len(failures)}"
               f"  |  UP/DOWN/j/k: navigate"
-              f"  SPACE/o: toggle diff  e: toggle err  E: nvim err  d: details  F: fix"
-              f"  ENTER/O: vimdiff"
+              f"  SPACE/o: toggle diff  x: all diffs  ENTER/O: vimdiff"
+              f"  e: toggle err  X: all err  E: nvim err"
+              f"  d: details  F: fix"
               f"  q/ESC: quit")
     try:
         stdscr.addstr(height - 1, 0, status[:width - 1].ljust(width - 1), curses.A_REVERSE)
@@ -193,7 +209,7 @@ def draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
         pass
 
     stdscr.refresh()
-    return item_rows
+    return scroll_top
 
 
 def list_detail_files(dirpath, test):
@@ -369,14 +385,13 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
     expanded     = set()
     err_expanded = set()
     fixed        = set()
-    item_rows  = {}
 
     task_col_w = max(len(t) for t, _, _ in failures)
     test_col_w = max(len(t) for _, t, _ in failures)
 
     while True:
-        item_rows = draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
-                         task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed)
+        scroll_top = draw(stdscr, failures, selected, scroll_top, expanded, err_expanded,
+                          task_col_w, test_col_w, max_diff_lines, max_err_lines, fixed)
 
         key = stdscr.getch()
 
@@ -386,26 +401,18 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
         elif key in (curses.KEY_DOWN, ord('j')):
             if selected < len(failures) - 1:
                 selected += 1
-                if selected not in item_rows:
-                    scroll_top += 1
 
         elif key in (curses.KEY_UP, ord('k')):
             if selected > 0:
                 selected -= 1
-                if selected < scroll_top:
-                    scroll_top = selected
 
         elif key == curses.KEY_NPAGE:  # page down
             half = max(1, (stdscr.getmaxyx()[0] - 1) // 2)
             selected = min(len(failures) - 1, selected + half)
-            if selected not in item_rows:
-                scroll_top = selected
 
         elif key == curses.KEY_PPAGE:  # page up
             half = max(1, (stdscr.getmaxyx()[0] - 1) // 2)
             selected = max(0, selected - half)
-            if selected < scroll_top:
-                scroll_top = selected
 
         elif key in (ord(' '), ord('o')):
             if selected in expanded:
@@ -418,6 +425,18 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
                 err_expanded.discard(selected)
             else:
                 err_expanded.add(selected)
+
+        elif key == ord('x'):
+            if expanded:
+                expanded.clear()
+            else:
+                expanded.update(range(len(failures)))
+
+        elif key == ord('X'):
+            if err_expanded:
+                err_expanded.clear()
+            else:
+                err_expanded.update(range(len(failures)))
 
         elif key == ord('E'):
             task, test, dirpath = failures[selected]
@@ -442,8 +461,6 @@ def main(stdscr, task_filter=None, max_diff_lines=MAX_DIFF_LINES, max_err_lines=
                 fixed.add(selected)
             if selected < len(failures) - 1:
                 selected += 1
-                if selected not in item_rows:
-                    scroll_top += 1
 
         elif key in (curses.KEY_ENTER, 10, 13, ord('O')):
             task, test, dirpath = failures[selected]

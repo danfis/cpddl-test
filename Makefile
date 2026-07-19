@@ -27,6 +27,8 @@ T ?= -a -B -p6
 T_QUICK ?= -Q -a -p6
 T_ALL ?= -A -a -p6
 
+TOOL ?=
+
 CFLAGS += -I./
 
 CHECK_REG=cu/cu-check-regressions
@@ -95,6 +97,8 @@ check-quick: all
 	./test -c $(T_QUICK)
 check-all: all
 	./test -c $(T_ALL)
+check-tool: ./scripts/test-tool.py config-tool.toml ../bin/pddl-tool
+	$(PYTHON) ./scripts/test-tool.py $(TOOL)
 
 check-valgrind: all
 	$(VALGRIND) $(VALGRIND_MEMLEAK_OPTS) ./test -c $(T) -vvv -p 1 2>&1 | tee check.log
@@ -119,4 +123,4 @@ clean-reg:
 
 .PHONY: all clean mrproper check check-quick check-all \
         check-valgrind check-gdb check-segfault \
-        check-bin check-bin-all
+        check-tool
