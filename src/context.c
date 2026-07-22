@@ -1,6 +1,8 @@
 #include "test.h"
 #include "context.h"
+#include <pddl/subprocess.h>
 #include <assert.h>
+#include <unistd.h>
 
 context_t C = { 0 };
 
@@ -107,6 +109,38 @@ int validatePlanSeq(const pddl_fdr_t *fdr, const pddl_iarr_t *plan)
 
     unlink(fn);
     return sret;
+}
+
+struct test_panic_ctx {
+    void (*fn)(void *userdata);
+    void *userdata;
+};
+
+static int test_panic_run(int fdout, void *userdata)
+{
+    struct test_panic_ctx *ctx = userdata;
+    // Swallow the PANIC message and any other output of the callback so
+    // that it does not end up in the test's captured stdout/stderr
+    dup2(fdout, STDOUT_FILENO);
+    dup2(fdout, STDERR_FILENO);
+    ctx->fn(ctx->userdata);
+    return 0;
+}
+
+int testPanic(void (*fn)(void *userdata), void *userdata)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    struct test_panic_ctx ctx = { fn, userdata };
+    void *out = NULL;
+    int out_size = 0;
+    pddl_exec_status_t status;
+    int ret = pddlForkPipe(test_panic_run, &ctx, &out, &out_size,
+                           &status, &err);
+    assert(ret == 0);
+    if (out != NULL)
+        PDDL_FREE(out);
+    // PANIC terminates the process with exit(-1), i.e., exit status 255
+    return status.exited && status.exit_status == 255;
 }
 
 TEST(r, _)

@@ -39,4 +39,11 @@ int validateLiftedPlan(const pddl_lifted_plan_t *plan);
 int validateGroundPlan(const pddl_fdr_t *fdr, const pddl_plan_t *plan);
 int validatePlanSeq(const pddl_fdr_t *fdr, const pddl_iarr_t *plan);
 
+/**
+ * Runs FN(USERDATA) in a forked subprocess and returns true if it
+ * terminated with PANIC. The subprocess' stdout and stderr (including
+ * the PANIC message) are discarded.
+ */
+int testPanic(void (*fn)(void *userdata), void *userdata);
+
 #endif /* __TEST_CONTEXT_H__ */
