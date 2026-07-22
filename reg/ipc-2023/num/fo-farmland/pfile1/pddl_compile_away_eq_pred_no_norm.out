@@ -22,7 +22,7 @@ Function[3]:
 Action[3]:
     move-by-car: ?f1:1 ?f2:1
         pre: (and (R:adj ?f1 ?f2) (N:R:equal ?f1 ?f2) (>= (x ?f1) (* 4 (num-of-cars))))
-        eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))) (increase (cost) (* 0.100000 (* 4 (num-of-cars)))))
+        eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))) (increase (cost) (* 0.1 (* 4 (num-of-cars)))))
     move-slow: ?f1:1 ?f2:1
         pre: (and (R:adj ?f1 ?f2) (N:R:equal ?f1 ?f2) (>= (x ?f1) 1))
         eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
@@ -39,5 +39,5 @@ Init[4]:
   (= (x farm0) 400)
   (= (x farm1) 1)
   (= (cost) 0)
-Goal: (and (>= (x farm0) 1) (>= (x farm1) 1) (>= (- (+ (* 1 (x farm0)) (+ (* 1.700000 (x farm1)) 0)) (cost)) 560))
+Goal: (and (>= (x farm0) 1) (>= (x farm1) 1) (>= (- (+ (* 1 (x farm0)) (+ (* 1.7 (x farm1)) 0)) (cost)) 560))
 Metric: no-metric

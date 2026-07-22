@@ -103,8 +103,8 @@ Action[3]:
         pre: (and (R:before ?t1 ?t2) (RW:timenow ?t1))
         eff: (and (N:RW:timenow ?t1) (RW:timenow ?t2))
     pump_water_up: ?t1:1 ?n1:2
-        pre: (and (R:demand ?t1 ?n1) (RW:timenow ?t1) (>= (funds) (* 1.050000 (value ?n1))) (>= (stored_capacity) 1))
-        eff: (and (increase (stored_units) 1) (decrease (stored_capacity) 1) (decrease (funds) (* 1.050000 (value ?n1))))
+        pre: (and (R:demand ?t1 ?n1) (RW:timenow ?t1) (>= (funds) (* 1.05 (value ?n1))) (>= (stored_capacity) 1))
+        eff: (and (increase (stored_units) 1) (decrease (stored_capacity) 1) (decrease (funds) (* 1.05 (value ?n1))))
     generate: ?t1:1 ?n1:2
         pre: (and (R:demand ?t1 ?n1) (RW:timenow ?t1) (>= (stored_units) 1))
         eff: (and (decrease (stored_units) 1) (increase (stored_capacity) 1) (increase (funds) (value ?n1)))

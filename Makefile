@@ -70,6 +70,7 @@ TESTS += open_list
 TESTS += opts
 TESTS += unify
 TESTS += num_val
+TESTS += fm_num_exp
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)

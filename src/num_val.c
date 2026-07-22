@@ -59,6 +59,47 @@ TEST_ONCE(num_val_basic)
     assert(pddlNumValIsFlt(&nz));
     assert(pddlNumValEq(&nz, &pz));
 
+    // Zero/one predicates (value-based, both variants)
+    pddl_num_val_t zi = mk_int(0);
+    pddl_num_val_t zf = mk_flt(0.0);
+    pddl_num_val_t oi = mk_int(1);
+    pddl_num_val_t of = mk_flt(1.0);
+    assert(pddlNumValIsZero(&zi));
+    assert(pddlNumValIsZero(&zf));
+    assert(!pddlNumValIsZero(&oi));
+    assert(!pddlNumValIsZero(&f));
+    assert(pddlNumValIsOne(&oi));
+    assert(pddlNumValIsOne(&of));
+    assert(!pddlNumValIsOne(&zi));
+    assert(!pddlNumValIsOne(&f));
+
+    // Integer-in-range predicate (closed range, ints only)
+    assert(pddlNumValIsIntInRange(&v, 0, 42));
+    assert(pddlNumValIsIntInRange(&v, 42, 100));
+    assert(!pddlNumValIsIntInRange(&v, 0, 41));
+    assert(!pddlNumValIsIntInRange(&v, 43, 100));
+    assert(pddlNumValIsIntInRange(&zi, INT64_MIN, INT64_MAX));
+    assert(!pddlNumValIsIntInRange(&of, 0, 100));
+
+    // Recast of an integral float value to an integer value
+    pddl_num_val_t rc = mk_flt(2.0);
+    assert(pddlNumValCanRecastFltToInt(&rc));
+    pddlNumValRecastFltToInt(&rc);
+    assert(pddlNumValIsInt(&rc) && rc.v.i == 2);
+    rc = mk_flt(-3.0);
+    assert(pddlNumValCanRecastFltToInt(&rc));
+    pddlNumValRecastFltToInt(&rc);
+    assert(pddlNumValIsInt(&rc) && rc.v.i == -3);
+    // Non-integral, out-of-range, and integer values cannot be recast
+    rc = mk_flt(0.5);
+    assert(!pddlNumValCanRecastFltToInt(&rc));
+    rc = mk_flt(1e300);
+    assert(!pddlNumValCanRecastFltToInt(&rc));
+    rc = mk_flt(1. / 0.);
+    assert(!pddlNumValCanRecastFltToInt(&rc));
+    rc = mk_int(2);
+    assert(!pddlNumValCanRecastFltToInt(&rc));
+
     // Copy of both variants
     pddl_num_val_t cp;
     pddlNumValInitCopy(&cp, &v);
