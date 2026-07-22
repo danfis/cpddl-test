@@ -131,3 +131,10 @@
    obj:/usr/bin/diff
    fun:(below main)
 }
+{
+   testPanic
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:testPanic
+}
