@@ -1,6 +1,7 @@
 #include "test.h"
 #include "context.h"
 #include <assert.h>
+#include <string.h>
 
 TEST(pddl, r)
 {
@@ -15,6 +16,17 @@ TEST(pddl, r)
     C.pddl_set = 1;
 
     pddlPrintDebug(&C.pddl, stdout);
+}
+
+TEST(pddl_has_numeric_fluents, pddl)
+{
+    // All numeric tasks live under ipc-2023/num/; everything else,
+    // including plain :action-costs tasks, is classified as non-numeric
+    if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0){
+        assert(pddlHasNumericFluents(&C.pddl));
+    }else{
+        assert(!pddlHasNumericFluents(&C.pddl));
+    }
 }
 
 TEST(pddl_unit_cost, r)
