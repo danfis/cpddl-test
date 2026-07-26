@@ -48,6 +48,7 @@ numeric = [
     "pddl_compile_away_cond_eff",
     "pddl_compile_away_eq_pred_no_norm",
     "pddl_compile_away_eq_pred_lmg",
+    "pddl_compile_metric_into_action_costs",
 ]
 
 [task-set]
@@ -2080,6 +2081,24 @@ name = "various/wumpus/p01"
 name = "various/cond-eff-simplify/p01"
 
 [[tasks]]
+name = "various/num-metric-nonlinear/p01"
+enable = [
+    "test-set:numeric",
+]
+
+[[tasks]]
+name = "various/num-metric-negdelta/p01"
+enable = [
+    "test-set:numeric",
+]
+
+[[tasks]]
+name = "various/num-metric-negcoef/p01"
+enable = [
+    "test-set:numeric",
+]
+
+[[tasks]]
 name = "ipc-2023/num/block-grouping/pfile1"
 enable = [
     "test-set:numeric",
@@ -2273,6 +2292,12 @@ enable = [
 
 [[tasks]]
 name = "ipc-2023/num/settlersnumeric/pfile1"
+enable = [
+    "test-set:numeric",
+]
+
+[[tasks]]
+name = "ipc-2023/num/settlersnumeric/pfile2"
 enable = [
     "test-set:numeric",
 ]
