@@ -106,6 +106,11 @@ static int eval_bin_op(const pddl_fm_num_exp_t *e, const void *left,
     }
 }
 
+static void eval_free(void *val, void *ud)
+{
+    pddlNumValFree(val);
+}
+
 static pddl_fm_num_eval_status_t eval_fluent_fn(const pddl_fm_atom_t *fluent,
                                                 const int *args,
                                                 void *ud,
@@ -124,7 +129,7 @@ static void assert_fold_eval_eq(pddl_fm_num_exp_t *e,
 {
     pddl_num_val_t fold_val, eval_val;
     int st = pddlFmNumExpFold(e, sizeof(pddl_num_val_t),
-                              eval_leaf, eval_bin_op,
+                              eval_leaf, eval_bin_op, eval_free,
                               (void *)fv, &fold_val);
     pddl_fm_num_eval_status_t est;
     est = pddlFmNumExpEval(e, NULL, eval_fluent_fn, (void *)fv, &eval_val);
@@ -246,7 +251,7 @@ TEST_ONCE(fm_num_exp_fold)
                 pddlFmNewNumExpNumInt(3));
     int trace = 0;
     assert(pddlFmNumExpFold(e, sizeof(int), trace_leaf, trace_bin_op,
-                            NULL, &trace) == 0);
+                            NULL, NULL, &trace) == 0);
     assert(trace == 10203);
     pddlFmDel(&e->fm);
 
@@ -256,7 +261,7 @@ TEST_ONCE(fm_num_exp_fold)
         e = deep_sum(150, right);
         struct sum_count sc = { 0, 0 };
         assert(pddlFmNumExpFold(e, sizeof(sc), sum_count_leaf,
-                                sum_count_bin_op, NULL, &sc) == 0);
+                                sum_count_bin_op, NULL, NULL, &sc) == 0);
         assert(sc.sum == 150 * 151 / 2);
         assert(sc.count == 150);
         pddlFmDel(&e->fm);
@@ -310,7 +315,7 @@ TEST_ONCE(fm_num_exp_fold_abort)
     struct abort_ctx ctx = { 1, 0, 0 };
     int out = -123;
     assert(pddlFmNumExpFold(e, sizeof(int), abort_leaf, abort_bin_op,
-                            &ctx, &out) == ABORT_CODE);
+                            NULL, &ctx, &out) == ABORT_CODE);
     assert(ctx.leaf_calls == 2);
     assert(ctx.bin_op_calls == 0);
     assert(out == -123);
@@ -324,8 +329,141 @@ TEST_ONCE(fm_num_exp_fold_abort)
                 pddlFmNewNumExpNumInt(1),
                 pddlFmNewNumExpNumInt(0));
     assert(pddlFmNumExpFold(e, sizeof(val), eval_leaf, eval_bin_op,
-                            (void *)&fv, &val) == EVAL_DIV_BY_ZERO);
+                            eval_free, (void *)&fv, &val) == EVAL_DIV_BY_ZERO);
     pddl_num_val_t expect = mk_int(-1);
     assert(pddlNumValEq(&val, &expect));
+    pddlFmDel(&e->fm);
+}
+
+
+// --- Destructor callback: values owning external resources ---
+
+#define RES_MAX 64
+
+struct res_pool {
+    /** True for every resource slot currently owned by some value */
+    pddl_bool_t alive[RES_MAX];
+    int allocs;
+    int frees;
+    /** The leaf callback fails when acquiring this slot, -1 to disable */
+    int fail_leaf;
+};
+
+/** A value owning one resource slot of the pool */
+struct res_val {
+    int slot;
+};
+
+#define RES_FAIL_CODE -3
+
+static int res_acquire(struct res_pool *pool)
+{
+    assert(pool->allocs < RES_MAX);
+    int slot = pool->allocs++;
+    pool->alive[slot] = pddl_true;
+    return slot;
+}
+
+static int res_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
+{
+    struct res_pool *pool = ud;
+    if (pool->allocs == pool->fail_leaf)
+        return RES_FAIL_CODE;
+    ((struct res_val *)val)->slot = res_acquire(pool);
+    return 0;
+}
+
+static int res_bin_op(const pddl_fm_num_exp_t *e, const void *left,
+                      const void *right, void *ud, void *val)
+{
+    struct res_pool *pool = ud;
+    // The operands must still be alive when they are combined
+    assert(pool->alive[((const struct res_val *)left)->slot]);
+    assert(pool->alive[((const struct res_val *)right)->slot]);
+    ((struct res_val *)val)->slot = res_acquire(pool);
+    return 0;
+}
+
+static int res_bin_op_fail(const pddl_fm_num_exp_t *e, const void *left,
+                           const void *right, void *ud, void *val)
+{
+    return RES_FAIL_CODE;
+}
+
+static void res_free(void *val, void *ud)
+{
+    struct res_pool *pool = ud;
+    int slot = ((struct res_val *)val)->slot;
+    // A slot that is not alive means a double free
+    assert(pool->alive[slot]);
+    pool->alive[slot] = pddl_false;
+    ++pool->frees;
+}
+
+static void res_pool_init(struct res_pool *pool)
+{
+    memset(pool, 0, sizeof(*pool));
+    pool->fail_leaf = -1;
+}
+
+/** Asserts that no resource slot of the pool is alive */
+static void res_pool_assert_all_dead(const struct res_pool *pool)
+{
+    for (int i = 0; i < RES_MAX; ++i)
+        assert(!pool->alive[i]);
+}
+
+// (+ (* 1 2) 3) -- 3 leaves and 2 binary operations
+static pddl_fm_num_exp_t *res_exp(void)
+{
+    return exp_bin(PDDL_FM_NUM_EXP_PLUS,
+                   exp_bin(PDDL_FM_NUM_EXP_MULT,
+                           pddlFmNewNumExpNumInt(1),
+                           pddlFmNewNumExpNumInt(2)),
+                   pddlFmNewNumExpNumInt(3));
+}
+
+TEST_ONCE(fm_num_exp_fold_free)
+{
+    pddl_fm_num_exp_t *e = res_exp();
+    struct res_pool pool;
+    struct res_val out;
+
+    // Successful fold: every intermediate value is destroyed exactly
+    // once and the resulting value is handed over to the caller, who is
+    // responsible for destroying it
+    res_pool_init(&pool);
+    out.slot = -1;
+    assert(pddlFmNumExpFold(e, sizeof(out), res_leaf, res_bin_op,
+                            res_free, &pool, &out) == 0);
+    assert(pool.allocs == 5);
+    assert(pool.frees == 4);
+    assert(pool.alive[out.slot]);
+    res_free(&out, &pool);
+    assert(pool.frees == 5);
+    res_pool_assert_all_dead(&pool);
+
+    // Fold terminated by the bin_op callback: both pending operand
+    // values are destroyed by the fold
+    res_pool_init(&pool);
+    assert(pddlFmNumExpFold(e, sizeof(out), res_leaf, res_bin_op_fail,
+                            res_free, &pool, &out) == RES_FAIL_CODE);
+    assert(pool.allocs == 2);
+    assert(pool.frees == 2);
+    res_pool_assert_all_dead(&pool);
+
+    // Fold terminated by the leaf callback: the values created so far
+    // are destroyed by the fold, the failed value was never created.
+    // When the last leaf is visited, (* 1 2) has already consumed the
+    // first two values and created the third one, so the failure
+    // triggers at three allocations.
+    res_pool_init(&pool);
+    pool.fail_leaf = 3;
+    assert(pddlFmNumExpFold(e, sizeof(out), res_leaf, res_bin_op,
+                            res_free, &pool, &out) == RES_FAIL_CODE);
+    assert(pool.allocs == 3);
+    assert(pool.frees == 3);
+    res_pool_assert_all_dead(&pool);
+
     pddlFmDel(&e->fm);
 }
