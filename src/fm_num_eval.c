@@ -63,7 +63,7 @@ static pddl_fm_num_eval_status_t fluent_lookup(const pddl_fm_atom_t *fluent,
         if (d->pred != fluent->pred || d->arg_size != fluent->arg_size)
             continue;
         if (memcmp(d->args, resolved, sizeof(int) * d->arg_size) == 0){
-            pddlNumValInitCopy(val, &d->val);
+            pddlNumValSet(val, &d->val);
             return PDDL_FM_NUM_EVAL_OK;
         }
     }
@@ -73,14 +73,14 @@ static pddl_fm_num_eval_status_t fluent_lookup(const pddl_fm_atom_t *fluent,
 static pddl_num_val_t mk_int(int64_t val)
 {
     pddl_num_val_t v;
-    pddlNumValInitInt(&v, val);
+    pddlNumValSetInt(&v, val);
     return v;
 }
 
 static pddl_num_val_t mk_flt(double val)
 {
     pddl_num_val_t v;
-    pddlNumValInitFlt(&v, val);
+    pddlNumValSetFlt(&v, val);
     return v;
 }
 
@@ -222,7 +222,7 @@ TEST_ONCE(fm_num_eval)
 
     // fluent missing from the table -> UNDEF, output value untouched
     pddl_num_val_t sentinel = mk_int(-12345);
-    pddlNumValInitCopy(&out, &sentinel);
+    pddlNumValSet(&out, &sentinel);
     e = exp_fluent0(5);
     assert(eval_exp_del(e, NULL, &tbl, &out) == PDDL_FM_NUM_EVAL_UNDEF);
     assert(pddlNumValEq(&out, &sentinel));

@@ -19,14 +19,14 @@
 static pddl_num_val_t mk_int(int64_t val)
 {
     pddl_num_val_t v;
-    pddlNumValInitInt(&v, val);
+    pddlNumValSetInt(&v, val);
     return v;
 }
 
 static pddl_num_val_t mk_flt(double val)
 {
     pddl_num_val_t v;
-    pddlNumValInitFlt(&v, val);
+    pddlNumValSetFlt(&v, val);
     return v;
 }
 
@@ -71,12 +71,12 @@ static int eval_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
     const struct fluent_vals *fv = ud;
     pddl_num_val_t *out = val;
     if (leaf->fm.type == PDDL_FM_NUM_EXP_NUM){
-        pddlNumValInitCopy(out, &leaf->e.num);
+        pddlNumValSet(out, &leaf->e.num);
         return 0;
     }
     assert(leaf->fm.type == PDDL_FM_NUM_EXP_FLUENT);
     assert(leaf->e.fluent->pred < fv->size);
-    pddlNumValInitCopy(out, fv->val + leaf->e.fluent->pred);
+    pddlNumValSet(out, fv->val + leaf->e.fluent->pred);
     return 0;
 }
 
@@ -106,11 +106,6 @@ static int eval_bin_op(const pddl_fm_num_exp_t *e, const void *left,
     }
 }
 
-static void eval_free(void *val, void *ud)
-{
-    pddlNumValFree(val);
-}
-
 static pddl_fm_num_eval_status_t eval_fluent_fn(const pddl_fm_atom_t *fluent,
                                                 const int *args,
                                                 void *ud,
@@ -118,7 +113,7 @@ static pddl_fm_num_eval_status_t eval_fluent_fn(const pddl_fm_atom_t *fluent,
 {
     const struct fluent_vals *fv = ud;
     assert(fluent->pred < fv->size);
-    pddlNumValInitCopy(val, fv->val + fluent->pred);
+    pddlNumValSet(val, fv->val + fluent->pred);
     return PDDL_FM_NUM_EVAL_OK;
 }
 
@@ -129,7 +124,7 @@ static void assert_fold_eval_eq(pddl_fm_num_exp_t *e,
 {
     pddl_num_val_t fold_val, eval_val;
     int st = pddlFmNumExpFold(e, sizeof(pddl_num_val_t),
-                              eval_leaf, eval_bin_op, eval_free,
+                              eval_leaf, eval_bin_op, NULL,
                               (void *)fv, &fold_val);
     pddl_fm_num_eval_status_t est;
     est = pddlFmNumExpEval(e, NULL, eval_fluent_fn, (void *)fv, &eval_val);
@@ -329,7 +324,7 @@ TEST_ONCE(fm_num_exp_fold_abort)
                 pddlFmNewNumExpNumInt(1),
                 pddlFmNewNumExpNumInt(0));
     assert(pddlFmNumExpFold(e, sizeof(val), eval_leaf, eval_bin_op,
-                            eval_free, (void *)&fv, &val) == EVAL_DIV_BY_ZERO);
+                            NULL, (void *)&fv, &val) == EVAL_DIV_BY_ZERO);
     pddl_num_val_t expect = mk_int(-1);
     assert(pddlNumValEq(&val, &expect));
     pddlFmDel(&e->fm);

@@ -32,7 +32,7 @@ TEST_ONCE(fm_num_exp)
     assert(fhalf->e.num.v.f == 0.5);
 
     pddl_num_val_t val;
-    pddlNumValInitInt(&val, -7);
+    pddlNumValSetInt(&val, -7);
     pddl_fm_num_exp_t *im7 = pddlFmNewNumExpNum(&val);
     assert(pddlFmIsNumExpNumInt(&im7->fm));
     assert(im7->e.num.v.i == -7);
