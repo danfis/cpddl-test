@@ -23,14 +23,14 @@
 static pddl_num_val_t mk_int(int64_t val)
 {
     pddl_num_val_t v;
-    pddlNumValInitInt(&v, val);
+    pddlNumValSetInt(&v, val);
     return v;
 }
 
 static pddl_num_val_t mk_flt(double val)
 {
     pddl_num_val_t v;
-    pddlNumValInitFlt(&v, val);
+    pddlNumValSetFlt(&v, val);
     return v;
 }
 
@@ -102,11 +102,11 @@ TEST_ONCE(num_val_basic)
 
     // Copy of both variants
     pddl_num_val_t cp;
-    pddlNumValInitCopy(&cp, &v);
+    pddlNumValSet(&cp, &v);
     assert(pddlNumValIsInt(&cp));
     assert(cp.v.i == 42);
     assert(pddlNumValEq(&cp, &v));
-    pddlNumValInitCopy(&cp, &f);
+    pddlNumValSet(&cp, &f);
     assert(pddlNumValIsFlt(&cp));
     assert(cp.v.f == 0.5);
     assert(pddlNumValEq(&cp, &f));
@@ -123,8 +123,11 @@ TEST_ONCE(num_val_basic)
     pddl_num_val_t big = mk_int(12345);
     assert(strcmp(pddlNumValFmt(&big, small, sizeof(small)), "12") == 0);
 
-    pddlNumValFree(&v);
-    pddlNumValFree(&f);
+    // Predefined constants
+    assert(pddlNumValIsInt(&pddl_num_val_zero));
+    assert(pddlNumValIsZero(&pddl_num_val_zero));
+    assert(pddlNumValIsInt(&pddl_num_val_one));
+    assert(pddlNumValIsOne(&pddl_num_val_one));
 
     // Arrays
     pddl_num_val_t arr[3];
@@ -231,7 +234,7 @@ TEST_ONCE(num_val_arith)
     assert(pddlNumValIsFlt(&r) && r.v.f == 5.0);
     // Division by zero fails and leaves the destination untouched
     pddl_num_val_t saved = mk_int(99);
-    pddlNumValInitCopy(&r, &saved);
+    pddlNumValSet(&r, &saved);
     pddl_num_val_t fzero = mk_flt(0.0);
     assert(pddlNumValDivTo(&r, &six, &zero) == -1);
     assert(pddlNumValEq(&r, &saved));

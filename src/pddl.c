@@ -20,9 +20,11 @@ TEST(pddl, r)
 
 TEST(pddl_has_numeric_fluents, pddl)
 {
-    // All numeric tasks live under ipc-2023/num/; everything else,
-    // including plain :action-costs tasks, is classified as non-numeric
-    if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0){
+    // Numeric tasks live under ipc-2023/num/ and various/num-*;
+    // everything else, including plain :action-costs tasks, is classified
+    // as non-numeric
+    if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
+            || strncmp(TEST_TASK, "various/num-", 12) == 0){
         assert(pddlHasNumericFluents(&C.pddl));
     }else{
         assert(!pddlHasNumericFluents(&C.pddl));
@@ -49,6 +51,46 @@ TEST(pddl_compile_away_cond_eff, pddl)
 {
     pddlCompileAwayNonStaticCondEff(&C.pddl);
     pddlPrintDebug(&C.pddl, stdout);
+}
+
+TEST(pddl_compile_metric_into_action_costs, pddl)
+{
+    pddl_t copy;
+    pddlInitCopy(&copy, &C.pddl);
+
+    pddl_compile_metric_into_action_costs_status_t ret;
+    ret = pddlCompileMetricIntoActionCosts(&C.pddl, &C.err);
+
+    switch (ret){
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_ERR:
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(ret != PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_ERR);
+        break;
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_CHANGED:
+        assert(C.pddl.metric);
+        assert(pddlFmIsNumExpFluent(&C.pddl.minimize->fm));
+        assert(C.pddl.minimize->e.fluent->pred
+                == C.pddl.func.total_cost_func);
+        pddlPrintDebug(&C.pddl, stdout);
+        break;
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_OK:
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_NOT_COMPILABLE:
+        assert(C.pddl.metric == copy.metric);
+        if (C.pddl.minimize != NULL)
+            assert(pddlFmEq(&C.pddl.minimize->fm, &copy.minimize->fm));
+        assert(pddlFmEq(&C.pddl.init->fm, &copy.init->fm));
+        for (int i = 0; i < copy.action.action_size; ++i){
+            assert(pddlFmEq(C.pddl.action.action[i].pre,
+                            copy.action.action[i].pre));
+            assert(pddlFmEq(C.pddl.action.action[i].eff,
+                            copy.action.action[i].eff));
+        }
+        assert(C.pddl.func.pred_size == copy.func.pred_size);
+        break;
+    default:
+        assert(0 && "Unexpected return value");
+    }
+    pddlFree(&copy);
 }
 
 TEST(pddl_action_simplify_cond_effs, r)
