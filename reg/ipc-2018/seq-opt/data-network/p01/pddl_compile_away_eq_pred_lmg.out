@@ -70,7 +70,7 @@ Function[4]:
 Action[5]:
     release: ?d:1 ?s:3 ?size:4 ?before:4 ?after:4
         pre: (and (R:data-size ?d ?size) (R:sum ?after ?size ?before) (RW:cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (RW:NOT-cached ?d ?s) (increase (total-cost) 0))
+        eff: (and (N:RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (RW:NOT-cached ?d ?s))
     save: ?d:1 ?size:4 ?s:3
         pre: (and (R:data-size ?d ?size) (RW:cached ?d ?s))
         eff: (and (RW:saved ?d ?s) (increase (total-cost) (io-cost ?s ?size)))

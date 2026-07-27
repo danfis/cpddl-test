@@ -38,7 +38,7 @@ Function[18]:
 Action[27]:
     move_0: ?b:1
         pre: (and (= (sailing-angle ?b) 345))
-        eff: (and (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0)) (increase (y ?b) (* (v ?b) 1)) (assign (sailing-angle ?b) 0))
+        eff: (and (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (v ?b)) (assign (sailing-angle ?b) 0))
     move_15: ?b:1
         pre: (and (>= (sailing-angle ?b) 0) (<= (sailing-angle ?b) 30))
         eff: (and (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.26)) (increase (y ?b) (* (v ?b) 0.97)) (assign (sailing-angle ?b) 15))
@@ -56,7 +56,7 @@ Action[27]:
         eff: (and (assign (v ?b) (+ (* (vmax_75 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.97)) (increase (y ?b) (* (v ?b) 0.26)) (assign (sailing-angle ?b) 75))
     move_90: ?b:1
         pre: (and (>= (sailing-angle ?b) 75) (<= (sailing-angle ?b) 105))
-        eff: (and (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 1)) (increase (y ?b) (* (v ?b) 0)) (assign (sailing-angle ?b) 90))
+        eff: (and (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (v ?b)) (assign (sailing-angle ?b) 90))
     move_105: ?b:1
         pre: (and (>= (sailing-angle ?b) 90) (<= (sailing-angle ?b) 120))
         eff: (and (assign (v ?b) (+ (* (vmax_105 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.97)) (increase (y ?b) (* (v ?b) -0.26)) (assign (sailing-angle ?b) 105))
@@ -74,7 +74,7 @@ Action[27]:
         eff: (and (assign (v ?b) (+ (* (vmax_165 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.26)) (increase (y ?b) (* (v ?b) -0.97)) (assign (sailing-angle ?b) 165))
     move_180: ?b:1
         pre: (and (>= (sailing-angle ?b) 165) (<= (sailing-angle ?b) 195))
-        eff: (and (assign (v ?b) (+ (* (vmax_180 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0)) (increase (y ?b) (* (v ?b) -1)) (assign (sailing-angle ?b) 180))
+        eff: (and (assign (v ?b) (+ (* (vmax_180 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (* (v ?b) -1)) (assign (sailing-angle ?b) 180))
     move_195: ?b:1
         pre: (and (>= (sailing-angle ?b) 180) (<= (sailing-angle ?b) 210))
         eff: (and (assign (v ?b) (+ (* (vmax_165 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) -0.97)) (assign (sailing-angle ?b) 195))
@@ -92,7 +92,7 @@ Action[27]:
         eff: (and (assign (v ?b) (+ (* (vmax_105 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.97)) (increase (y ?b) (* (v ?b) -0.26)) (assign (sailing-angle ?b) 255))
     move_270: ?b:1
         pre: (and (>= (sailing-angle ?b) 255) (<= (sailing-angle ?b) 285))
-        eff: (and (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -1)) (increase (y ?b) (* (v ?b) 0)) (assign (sailing-angle ?b) 270))
+        eff: (and (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -1)) (assign (sailing-angle ?b) 270))
     move_285: ?b:1
         pre: (and (>= (sailing-angle ?b) 270) (<= (sailing-angle ?b) 300))
         eff: (and (assign (v ?b) (+ (* (vmax_75 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.97)) (increase (y ?b) (* (v ?b) 0.26)) (assign (sailing-angle ?b) 285))
@@ -113,7 +113,7 @@ Action[27]:
         eff: (and (RW:saved ?t))
     move_0: ?b:1
         pre: (and (<= (sailing-angle ?b) 15))
-        eff: (and (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0)) (increase (y ?b) (* (v ?b) 1)) (assign (sailing-angle ?b) 0))
+        eff: (and (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (v ?b)) (assign (sailing-angle ?b) 0))
     move_345: ?b:1
         pre: (and (= (sailing-angle ?b) 0))
         eff: (and (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) 0.97)) (assign (sailing-angle ?b) 345))
