@@ -49,6 +49,7 @@ numeric = [
     "pddl_compile_away_eq_pred_no_norm",
     "pddl_compile_away_eq_pred_lmg",
     "pddl_compile_metric_into_action_costs",
+    "pddl_compile_flt_to_int",
 ]
 
 [task-set]
@@ -2094,6 +2095,18 @@ enable = [
 
 [[tasks]]
 name = "various/num-metric-negcoef/p01"
+enable = [
+    "test-set:numeric",
+]
+
+[[tasks]]
+name = "various/num-float-coef/p01"
+enable = [
+    "test-set:numeric",
+]
+
+[[tasks]]
+name = "various/num-float-div/p01"
 enable = [
     "test-set:numeric",
 ]

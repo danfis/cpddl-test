@@ -93,6 +93,66 @@ TEST(pddl_compile_metric_into_action_costs, pddl)
     pddlFree(&copy);
 }
 
+static int fmFltPre(pddl_fm_t *fm, void *ud)
+{
+    if (pddlFmIsNumExpNumFlt(fm)){
+        *(int *)ud = 1;
+        return -2;
+    }
+    return 0;
+}
+
+static int fmHasFlt(pddl_fm_t *fm)
+{
+    int has = 0;
+    pddlFmTraverseAll(fm, fmFltPre, NULL, &has);
+    return has;
+}
+
+TEST_COND(pddl_compile_flt_to_int, pddl, LP)
+{
+    pddl_t copy;
+    pddlInitCopy(&copy, &C.pddl);
+
+    pddl_compile_flt_to_int_status_t ret;
+    ret = pddlCompileFltToInt(&C.pddl, &C.err);
+
+    switch (ret){
+    case PDDL_COMPILE_FLT_TO_INT_ERR:
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(ret != PDDL_COMPILE_FLT_TO_INT_ERR);
+        break;
+    case PDDL_COMPILE_FLT_TO_INT_CHANGED:
+        // No float constant may survive anywhere in the task
+        assert(!fmHasFlt(&C.pddl.init->fm));
+        if (C.pddl.goal != NULL)
+            assert(!fmHasFlt(C.pddl.goal));
+        for (int i = 0; i < C.pddl.action.action_size; ++i){
+            assert(!fmHasFlt(C.pddl.action.action[i].pre));
+            assert(!fmHasFlt(C.pddl.action.action[i].eff));
+        }
+        if (C.pddl.minimize != NULL)
+            assert(!fmHasFlt(&C.pddl.minimize->fm));
+        pddlPrintDebug(&C.pddl, stdout);
+        break;
+    case PDDL_COMPILE_FLT_TO_INT_OK:
+    case PDDL_COMPILE_FLT_TO_INT_NOT_COMPILABLE:
+        // Task must be completely untouched
+        assert(C.pddl.metric == copy.metric);
+        if (C.pddl.minimize != NULL)
+            assert(pddlFmEq(&C.pddl.minimize->fm, &copy.minimize->fm));
+        assert(pddlFmEq(&C.pddl.init->fm, &copy.init->fm));
+        for (int i = 0; i < copy.action.action_size; ++i){
+            assert(pddlFmEq(C.pddl.action.action[i].pre,
+                            copy.action.action[i].pre));
+            assert(pddlFmEq(C.pddl.action.action[i].eff,
+                            copy.action.action[i].eff));
+        }
+        break;
+    }
+    pddlFree(&copy);
+}
+
 TEST(pddl_action_simplify_cond_effs, r)
 {
     pddl_config_t cfg = PDDL_CONFIG_INIT;

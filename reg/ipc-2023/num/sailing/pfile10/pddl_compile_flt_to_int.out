@@ -1,0 +1,67 @@
+Domain: sailing
+Problem: instance_3_5_1229
+Require: 103
+Type[3]:
+    [0]: object, parent: -1
+    [1]: boat, parent: 0
+    [2]: person, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7
+    [1]: 0 1 2
+    [2]: 3 4 5 6 7
+Obj[8]:
+    [0]: b0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: b1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: b2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: p0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: p1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: p2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: p3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: p4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[2]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    saved: 2 :: read: 1, write: 1, in-init: 0
+Function[3]:
+    x: 1 :: read: 1, write: 1, in-init: 1
+    y: 1 :: read: 1, write: 1, in-init: 1
+    d: 2 :: read: 1, write: 0, in-init: 1
+Action[8]:
+    go_north_east: ?b:1
+        pre: (and)
+        eff: (and (increase (x ?b) 3) (increase (y ?b) 3))
+    go_north_west: ?b:1
+        pre: (and)
+        eff: (and (decrease (x ?b) 3) (increase (y ?b) 3))
+    go_est: ?b:1
+        pre: (and)
+        eff: (and (increase (x ?b) 6))
+    go_west: ?b:1
+        pre: (and)
+        eff: (and (decrease (x ?b) 6))
+    go_south_west: ?b:1
+        pre: (and)
+        eff: (and (increase (x ?b) 4) (decrease (y ?b) 4))
+    go_south_east: ?b:1
+        pre: (and)
+        eff: (and (decrease (x ?b) 4) (decrease (y ?b) 4))
+    go_south: ?b:1
+        pre: (and)
+        eff: (and (decrease (y ?b) 4))
+    save_person: ?b:1 ?t:2
+        pre: (and (>= (+ (x ?b) (y ?b)) (* 2 (d ?t))) (>= (- (y ?b) (x ?b)) (* 2 (d ?t))) (<= (+ (x ?b) (y ?b)) (+ (* 2 (d ?t)) 50)) (<= (- (y ?b) (x ?b)) (+ (* 2 (d ?t)) 50)))
+        eff: (and (RW:saved ?t))
+Init[0]:
+Init[11]:
+  (= (x b0) -14)
+  (= (y b0) 0)
+  (= (x b1) -4)
+  (= (y b1) 0)
+  (= (x b2) 0)
+  (= (y b2) 0)
+  (= (d p0) -370)
+  (= (d p1) -58)
+  (= (d p2) 63)
+  (= (d p3) 483)
+  (= (d p4) 223)
+Goal: (and (RW:saved p0) (RW:saved p1) (RW:saved p2) (RW:saved p3) (RW:saved p4))
+Metric: no-metric

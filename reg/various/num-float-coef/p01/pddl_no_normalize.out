@@ -1,0 +1,29 @@
+Domain: num-float-coef
+Problem: num-float-coef-01
+Require: 1ff
+Type[2]:
+    [0]: object, parent: -1
+    [1]: farm, parent: 0
+Obj-by-Type:
+    [0]: 0 1
+    [1]: 0 1
+Obj[2]:
+    [0]: f0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: f1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[2]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    adj: 1 1 :: read: 1, write: 0, in-init: 1
+Function[1]:
+    x: 1 :: read: 1, write: 1, in-init: 1
+Action[1]:
+    move: ?f1:1 ?f2:1
+        pre: (and (R:adj ?f1 ?f2) (>= (x ?f1) 1))
+        eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))
+Init[2]:
+  S:(adj f0 f1)
+  S:(adj f1 f0)
+Init[2]:
+  (= (x f0) 2.5)
+  (= (x f1) 1)
+Goal: (>= (+ (* 1 (x f0)) (* 1.7 (x f1))) 8.4)
+Metric: no-metric
