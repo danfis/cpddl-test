@@ -1,0 +1,63 @@
+Domain: line-exchange
+Problem: prob01
+Require: 1ff
+Type[2]:
+    [0]: object, parent: -1
+    [1]: robot, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3
+    [1]: 0 1 2 3
+Obj[4]:
+    [0]: r0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: r1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: r2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: r3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[4]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    pd: 1 1 :: read: 1, write: 1, in-init: 0
+    ps: 1 :: read: 1, write: 1, in-init: 0
+    next: 1 1 :: read: 1, write: 0, in-init: 1
+Function[4]:
+    d: :: read: 1, write: 0, in-init: 1
+    i: 1 :: read: 1, write: 0, in-init: 1
+    x: 1 :: read: 1, write: 1, in-init: 1
+    q: 1 :: read: 1, write: 1, in-init: 1
+Action[6]:
+    lft: ?r:1
+        pre: (and (N:RW:ps ?r) (> (x ?r) (* (d) (i ?r))))
+        eff: (and (decrease (x ?r) 1))
+    rgt: ?r:1
+        pre: (and (N:RW:ps ?r) (< (x ?r) (* (d) (+ (i ?r) 1))))
+        eff: (and (increase (x ?r) 1))
+    conn: ?r1:1 ?r2:1
+        pre: (and (R:next ?r1 ?r2) (= (x ?r1) (x ?r2)))
+        eff: (and (RW:pd ?r1 ?r2) (RW:ps ?r1) (RW:ps ?r2))
+    disc: ?r1:1 ?r2:1
+        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2))
+        eff: (and (N:RW:pd ?r1 ?r2) (N:RW:ps ?r1) (N:RW:ps ?r2))
+    exch-lre: ?r1:1 ?r2:1
+        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2) (>= (q ?r1) 1))
+        eff: (and (decrease (q ?r1) 1) (increase (q ?r2) 1))
+    exch-rle: ?r1:1 ?r2:1
+        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2) (>= (q ?r2) 1))
+        eff: (and (decrease (q ?r1) -1) (increase (q ?r2) -1))
+Init[3]:
+  S:(next r0 r1)
+  S:(next r1 r2)
+  S:(next r2 r3)
+Init[13]:
+  (= (d) 50)
+  (= (i r0) 0)
+  (= (i r1) 1)
+  (= (i r2) 2)
+  (= (i r3) 3)
+  (= (x r0) 25)
+  (= (x r1) 75)
+  (= (x r2) 125)
+  (= (x r3) 175)
+  (= (q r0) 13)
+  (= (q r1) 9)
+  (= (q r2) 5)
+  (= (q r3) 13)
+Goal: (and (= (x r0) 25) (= (x r1) 75) (= (x r2) 125) (= (x r3) 175) (= (q r0) (q r1)) (= (q r1) (q r2)) (= (q r2) (q r3)))
+Metric: no-metric

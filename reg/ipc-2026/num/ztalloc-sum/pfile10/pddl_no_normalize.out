@@ -1,0 +1,58 @@
+Domain: ztalloc-sum
+Problem: p10
+Require: 201ff
+Type[2]:
+    [0]: object, parent: -1
+    [1]: register, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3
+    [1]: 0 1 2 3
+Obj[4]:
+    [0]: r1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: r2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: r3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: r4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[5]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    free: :: read: 1, write: 1, in-init: 1
+    normal: 1 :: read: 1, write: 1, in-init: 1
+    m1d3-after-dec: 1 :: read: 1, write: 1, in-init: 0
+    m1d3-dividing: 1 :: read: 1, write: 1, in-init: 0
+Function[3]:
+    value: 1 :: read: 1, write: 1, in-init: 1
+    work-value: 1 :: read: 1, write: 1, in-init: 1
+    total-cost: :: read: 1, write: 1, in-init: 1
+Action[5]:
+    double: ?r:1
+        pre: (and (RW:free) (RW:normal ?r))
+        eff: (and (increase (value ?r) (value ?r)) (increase (total-cost) 1))
+    m1d3-start: ?r:1
+        pre: (and (RW:free) (RW:normal ?r) (>= (value ?r) 1) (= (work-value ?r) 0))
+        eff: (and (N:RW:free) (N:RW:normal ?r) (RW:m1d3-after-dec ?r) (decrease (value ?r) 1) (increase (total-cost) 1))
+    m1d3-copy-reset: ?r:1
+        pre: (and (RW:m1d3-after-dec ?r))
+        eff: (and (N:RW:m1d3-after-dec ?r) (RW:m1d3-dividing ?r) (increase (work-value ?r) (value ?r)) (decrease (value ?r) (value ?r)))
+    m1d3-div-step: ?r:1
+        pre: (and (RW:m1d3-dividing ?r) (>= (work-value ?r) 3))
+        eff: (and (decrease (work-value ?r) 3) (increase (value ?r) 1))
+    m1d3-finish: ?r:1
+        pre: (and (RW:m1d3-dividing ?r) (= (work-value ?r) 0))
+        eff: (and (RW:free) (RW:normal ?r) (N:RW:m1d3-dividing ?r))
+Init[5]:
+  (free)
+  (normal r1)
+  (normal r2)
+  (normal r3)
+  (normal r4)
+Init[9]:
+  (= (value r1) 1)
+  (= (work-value r1) 0)
+  (= (value r2) 1)
+  (= (work-value r2) 0)
+  (= (value r3) 1)
+  (= (work-value r3) 0)
+  (= (value r4) 1)
+  (= (work-value r4) 0)
+  (= (total-cost) 0)
+Goal: (and (RW:free) (RW:normal r1) (RW:normal r2) (RW:normal r3) (RW:normal r4) (= (+ (+ (+ (value r1) (value r2)) (value r3)) (value r4)) 2466) (= (work-value r1) 0) (= (work-value r2) 0) (= (work-value r3) 0) (= (work-value r4) 0))
+Metric: (total-cost)

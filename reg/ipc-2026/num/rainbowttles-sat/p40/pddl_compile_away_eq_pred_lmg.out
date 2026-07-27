@@ -1,0 +1,217 @@
+Domain: rainbowttles-constant-free
+Problem: rainbowttles-40-constant-free
+Require: 117
+Type[3]:
+    [0]: object, parent: -1
+    [1]: bottle, parent: 0
+    [2]: colour, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+    [1]: 0 1 2 3 4 5 6 7 8 9
+    [2]: 10 11 12 13 14 15 16 17
+Obj[18]:
+    [0]: bottle01, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: bottle02, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: bottle03, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: bottle04, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: bottle05, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: bottle06, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: bottle07, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: bottle08, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: bottle09, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: bottle10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: red, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: green, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: blue, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: yellow, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: purple, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: orange, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: cyan, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: empty, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    upper-colour: 1 2 :: read: 1, write: 1, in-init: 1
+    colour-below: 1 2 2 :: read: 1, write: 1, in-init: 1
+    closed: 1 :: read: 1, write: 1, in-init: 0, neg-of: NOT-closed
+    empty-colour: 2 :: read: 1, write: 0, in-init: 1
+    real-colour: 2 :: read: 1, write: 0, in-init: 1
+    NOT-closed: 1 :: read: 1, write: 1, in-init: 1, neg-of: closed
+    equal: 0 0 :: read: 1, write: 0, in-init: 1
+Function[3]:
+    bottle-capacity: 1 :: read: 1, write: 0, in-init: 1
+    segments-filled: 1 :: read: 1, write: 1, in-init: 1
+    colour-segments: 1 2 :: read: 1, write: 1, in-init: 1
+Action[4]:
+    pour: ?b:1 ?c:2 ?c1:2 ?b1:1
+        pre: (and (R:real-colour ?c) (N:R:equal ?b ?b1) (RW:upper-colour ?b ?c) (RW:upper-colour ?b1 ?c) (RW:colour-below ?b ?c ?c1) (RW:NOT-closed ?b) (RW:NOT-closed ?b1) (> (colour-segments ?b ?c) 0) (> (segments-filled ?b) 0) (> (colour-segments ?b1 ?c) 0) (> (segments-filled ?b1) 0) (<= (+ (segments-filled ?b1) (colour-segments ?b ?c)) (bottle-capacity ?b1)))
+        eff: (and (N:RW:upper-colour ?b ?c) (RW:upper-colour ?b ?c1) (decrease (segments-filled ?b) (colour-segments ?b ?c)) (assign (colour-segments ?b ?c) 0) (increase (segments-filled ?b1) (colour-segments ?b ?c)) (increase (colour-segments ?b1 ?c) (colour-segments ?b ?c)))
+    pour-to-empty-bottle: ?b:1 ?c:2 ?c1:2 ?e:2 ?b1:1
+        pre: (and (R:empty-colour ?e) (R:real-colour ?c) (N:R:equal ?b ?b1) (RW:upper-colour ?b ?c) (RW:upper-colour ?b1 ?e) (RW:colour-below ?b ?c ?c1) (RW:NOT-closed ?b) (RW:NOT-closed ?b1) (> (colour-segments ?b ?c) 0) (> (segments-filled ?b) 0) (= (colour-segments ?b1 ?c) 0) (= (segments-filled ?b1) 0) (<= (colour-segments ?b ?c) (bottle-capacity ?b1)))
+        eff: (and (N:RW:upper-colour ?b ?c) (RW:upper-colour ?b ?c1) (RW:upper-colour ?b1 ?c) (N:RW:upper-colour ?b1 ?e) (RW:colour-below ?b1 ?c ?e) (decrease (segments-filled ?b) (colour-segments ?b ?c)) (assign (colour-segments ?b ?c) 0) (increase (segments-filled ?b1) (colour-segments ?b ?c)) (increase (colour-segments ?b1 ?c) (colour-segments ?b ?c)))
+    close-bottle: ?b:1 ?c:2
+        pre: (and (R:real-colour ?c) (= (colour-segments ?b ?c) (bottle-capacity ?b)))
+        eff: (and (RW:closed ?b) (N:RW:NOT-closed ?b))
+    close-empty-bottle: ?b:1
+        pre: (and (= (segments-filled ?b) 0))
+        eff: (and (RW:closed ?b) (N:RW:NOT-closed ?b))
+Init[57]:
+  S:(empty-colour empty)
+  S:(real-colour red)
+  S:(real-colour green)
+  S:(real-colour blue)
+  S:(real-colour yellow)
+  S:(real-colour purple)
+  S:(real-colour orange)
+  S:(real-colour cyan)
+  S:(equal bottle01 bottle01)
+  S:(equal bottle02 bottle02)
+  S:(equal bottle03 bottle03)
+  S:(equal bottle04 bottle04)
+  S:(equal bottle05 bottle05)
+  S:(equal bottle06 bottle06)
+  S:(equal bottle07 bottle07)
+  S:(equal bottle08 bottle08)
+  S:(equal bottle09 bottle09)
+  S:(equal bottle10 bottle10)
+  (upper-colour bottle01 empty)
+  (upper-colour bottle02 empty)
+  (upper-colour bottle03 green)
+  (upper-colour bottle04 red)
+  (upper-colour bottle05 red)
+  (upper-colour bottle06 cyan)
+  (upper-colour bottle07 yellow)
+  (upper-colour bottle08 red)
+  (upper-colour bottle09 cyan)
+  (upper-colour bottle10 red)
+  (colour-below bottle03 green orange)
+  (colour-below bottle03 blue empty)
+  (colour-below bottle03 orange blue)
+  (colour-below bottle04 red yellow)
+  (colour-below bottle04 yellow empty)
+  (colour-below bottle05 red purple)
+  (colour-below bottle05 purple empty)
+  (colour-below bottle06 green empty)
+  (colour-below bottle06 cyan green)
+  (colour-below bottle07 yellow orange)
+  (colour-below bottle07 orange cyan)
+  (colour-below bottle07 cyan empty)
+  (colour-below bottle08 red empty)
+  (colour-below bottle09 yellow orange)
+  (colour-below bottle09 orange empty)
+  (colour-below bottle09 cyan yellow)
+  (colour-below bottle10 red purple)
+  (colour-below bottle10 blue empty)
+  (colour-below bottle10 purple blue)
+  (NOT-closed bottle01)
+  (NOT-closed bottle02)
+  (NOT-closed bottle03)
+  (NOT-closed bottle04)
+  (NOT-closed bottle05)
+  (NOT-closed bottle06)
+  (NOT-closed bottle07)
+  (NOT-closed bottle08)
+  (NOT-closed bottle09)
+  (NOT-closed bottle10)
+Init[100]:
+  (= (bottle-capacity bottle01) 4)
+  (= (bottle-capacity bottle02) 4)
+  (= (bottle-capacity bottle03) 4)
+  (= (bottle-capacity bottle04) 4)
+  (= (bottle-capacity bottle05) 4)
+  (= (bottle-capacity bottle06) 4)
+  (= (bottle-capacity bottle07) 4)
+  (= (bottle-capacity bottle08) 4)
+  (= (bottle-capacity bottle09) 4)
+  (= (bottle-capacity bottle10) 4)
+  (= (colour-segments bottle01 red) 0)
+  (= (colour-segments bottle01 green) 0)
+  (= (colour-segments bottle01 blue) 0)
+  (= (colour-segments bottle01 yellow) 0)
+  (= (colour-segments bottle01 purple) 0)
+  (= (colour-segments bottle01 orange) 0)
+  (= (colour-segments bottle01 cyan) 0)
+  (= (colour-segments bottle01 empty) 0)
+  (= (segments-filled bottle01) 0)
+  (= (colour-segments bottle02 red) 0)
+  (= (colour-segments bottle02 green) 0)
+  (= (colour-segments bottle02 blue) 0)
+  (= (colour-segments bottle02 yellow) 0)
+  (= (colour-segments bottle02 purple) 0)
+  (= (colour-segments bottle02 orange) 0)
+  (= (colour-segments bottle02 cyan) 0)
+  (= (colour-segments bottle02 empty) 0)
+  (= (segments-filled bottle02) 0)
+  (= (colour-segments bottle03 red) 0)
+  (= (colour-segments bottle03 green) 1)
+  (= (colour-segments bottle03 blue) 2)
+  (= (colour-segments bottle03 yellow) 0)
+  (= (colour-segments bottle03 purple) 0)
+  (= (colour-segments bottle03 orange) 1)
+  (= (colour-segments bottle03 cyan) 0)
+  (= (colour-segments bottle03 empty) 0)
+  (= (segments-filled bottle03) 4)
+  (= (colour-segments bottle04 red) 1)
+  (= (colour-segments bottle04 green) 0)
+  (= (colour-segments bottle04 blue) 0)
+  (= (colour-segments bottle04 yellow) 2)
+  (= (colour-segments bottle04 purple) 0)
+  (= (colour-segments bottle04 orange) 0)
+  (= (colour-segments bottle04 cyan) 0)
+  (= (colour-segments bottle04 empty) 0)
+  (= (segments-filled bottle04) 3)
+  (= (colour-segments bottle05 red) 1)
+  (= (colour-segments bottle05 green) 0)
+  (= (colour-segments bottle05 blue) 0)
+  (= (colour-segments bottle05 yellow) 0)
+  (= (colour-segments bottle05 purple) 3)
+  (= (colour-segments bottle05 orange) 0)
+  (= (colour-segments bottle05 cyan) 0)
+  (= (colour-segments bottle05 empty) 0)
+  (= (segments-filled bottle05) 4)
+  (= (colour-segments bottle06 red) 0)
+  (= (colour-segments bottle06 green) 3)
+  (= (colour-segments bottle06 blue) 0)
+  (= (colour-segments bottle06 yellow) 0)
+  (= (colour-segments bottle06 purple) 0)
+  (= (colour-segments bottle06 orange) 0)
+  (= (colour-segments bottle06 cyan) 1)
+  (= (colour-segments bottle06 empty) 0)
+  (= (segments-filled bottle06) 4)
+  (= (colour-segments bottle07 red) 0)
+  (= (colour-segments bottle07 green) 0)
+  (= (colour-segments bottle07 blue) 0)
+  (= (colour-segments bottle07 yellow) 1)
+  (= (colour-segments bottle07 purple) 0)
+  (= (colour-segments bottle07 orange) 1)
+  (= (colour-segments bottle07 cyan) 2)
+  (= (colour-segments bottle07 empty) 0)
+  (= (segments-filled bottle07) 4)
+  (= (colour-segments bottle08 red) 1)
+  (= (colour-segments bottle08 green) 0)
+  (= (colour-segments bottle08 blue) 0)
+  (= (colour-segments bottle08 yellow) 0)
+  (= (colour-segments bottle08 purple) 0)
+  (= (colour-segments bottle08 orange) 0)
+  (= (colour-segments bottle08 cyan) 0)
+  (= (colour-segments bottle08 empty) 0)
+  (= (segments-filled bottle08) 1)
+  (= (colour-segments bottle09 red) 0)
+  (= (colour-segments bottle09 green) 0)
+  (= (colour-segments bottle09 blue) 0)
+  (= (colour-segments bottle09 yellow) 1)
+  (= (colour-segments bottle09 purple) 0)
+  (= (colour-segments bottle09 orange) 2)
+  (= (colour-segments bottle09 cyan) 1)
+  (= (colour-segments bottle09 empty) 0)
+  (= (segments-filled bottle09) 4)
+  (= (colour-segments bottle10 red) 1)
+  (= (colour-segments bottle10 green) 0)
+  (= (colour-segments bottle10 blue) 2)
+  (= (colour-segments bottle10 yellow) 0)
+  (= (colour-segments bottle10 purple) 1)
+  (= (colour-segments bottle10 orange) 0)
+  (= (colour-segments bottle10 cyan) 0)
+  (= (colour-segments bottle10 empty) 0)
+  (= (segments-filled bottle10) 4)
+Goal: (and (RW:closed bottle01) (RW:closed bottle02) (RW:closed bottle03) (RW:closed bottle04) (RW:closed bottle05) (RW:closed bottle06) (RW:closed bottle07) (RW:closed bottle08) (RW:closed bottle09) (RW:closed bottle10))
+Metric: no-metric

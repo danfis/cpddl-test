@@ -20,10 +20,11 @@ TEST(pddl, r)
 
 TEST(pddl_has_numeric_fluents, pddl)
 {
-    // Numeric tasks live under ipc-2023/num/ and various/num-*;
-    // everything else, including plain :action-costs tasks, is classified
-    // as non-numeric
+    // Numeric tasks live under ipc-2023/num/, ipc-2026/num/, and
+    // various/num-*; everything else, including plain :action-costs tasks,
+    // is classified as non-numeric
     if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
+            || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
             || strncmp(TEST_TASK, "various/num-", 12) == 0){
         assert(pddlHasNumericFluents(&C.pddl));
     }else{
