@@ -54,6 +54,22 @@ TEST(pddl_compile_away_cond_eff, pddl)
     pddlPrintDebug(&C.pddl, stdout);
 }
 
+TEST(pddl_is_metric_expressible_as_non_neg_int_action_costs, pddl)
+{
+    pddl_bool_t res;
+    res = pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl);
+
+    if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
+            || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
+            || strncmp(TEST_TASK, "various/num-", 12) == 0){
+        if (!res){
+            printf("Metric not expressible as non-neg int action costs\n");
+        }
+    }else{
+        assert(res);
+    }
+}
+
 TEST(pddl_compile_metric_into_action_costs, pddl)
 {
     pddl_t copy;
