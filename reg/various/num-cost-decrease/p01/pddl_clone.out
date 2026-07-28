@@ -1,0 +1,35 @@
+Domain: num-cost-decrease
+Problem: num-cost-decrease-01
+Require: 103
+Type[2]:
+    [0]: object, parent: -1
+    [1]: loc, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2
+    [1]: 0 1 2
+Obj[3]:
+    [0]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: l3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[3]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    at: 1 :: read: 1, write: 1, in-init: 1
+    conn: 1 1 :: read: 1, write: 0, in-init: 1
+Function[2]:
+    total-cost: :: read: 1, write: 1, in-init: 1
+    h: 1 :: read: 1, write: 0, in-init: 1
+Action[1]:
+    move: ?a:1 ?b:1
+        pre: (and (R:conn ?a ?b) (RW:at ?a))
+        eff: (and (N:RW:at ?a) (RW:at ?b) (decrease (total-cost) (h ?b)))
+Init[3]:
+  S:(conn l1 l2)
+  S:(conn l2 l3)
+  (at l1)
+Init[4]:
+  (= (total-cost) 0)
+  (= (h l1) -1)
+  (= (h l2) -2)
+  (= (h l3) 0)
+Goal: (RW:at l3)
+Metric: (total-cost)
