@@ -165,7 +165,7 @@ Predicate[29]:
     NOT-has-sawmill: 10 :: read: 1, write: 1, in-init: 1, neg-of: has-sawmill
     NOT-has-ironworks: 10 :: read: 1, write: 1, in-init: 1, neg-of: has-ironworks
 Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 0
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[24]:
     load-stone: ?v:11 ?p:10
         pre: (and (RW:is-at ?v ?p) (RW:available-atleast-stone ?p sl1) (RW:has-space ?v))
@@ -313,6 +313,7 @@ Init[73]:
   (NOT-has-ironworks p0)
   (NOT-has-ironworks p1)
   (NOT-has-ironworks p2)
-Init[0]:
+Init[1]:
+  (= (total-cost) 0)
 Goal: (RW:has-sawmill p1)
 Metric: (total-cost)

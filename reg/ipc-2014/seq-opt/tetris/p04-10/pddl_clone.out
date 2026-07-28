@@ -70,7 +70,7 @@ Predicate[5]:
     at_two: 2 4 4 :: read: 1, write: 1, in-init: 1
     at_right_l: 3 4 4 4 :: read: 1, write: 1, in-init: 1
 Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 0
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[5]:
     move_two: ?xy_initial1:4 ?xy_initial2:4 ?xy_final:4 ?element:2
         pre: (and (R:connected ?xy_initial2 ?xy_final) (RW:clear ?xy_final) (RW:at_two ?element ?xy_initial1 ?xy_initial2))
@@ -250,6 +250,7 @@ Init[162]:
   (at_right_l rightl0 f4-0f f5-0f f5-1f)
   (at_right_l rightl1 f4-2f f5-2f f5-3f)
   (at_right_l rightl2 f0-1f f1-1f f1-2f)
-Init[0]:
+Init[1]:
+  (= (total-cost) 0)
 Goal: (and (RW:clear f0-0f) (RW:clear f0-1f) (RW:clear f0-2f) (RW:clear f0-3f) (RW:clear f1-0f) (RW:clear f1-1f) (RW:clear f1-2f) (RW:clear f1-3f) (RW:clear f2-0f) (RW:clear f2-1f) (RW:clear f2-2f) (RW:clear f2-3f) (RW:clear f3-0f) (RW:clear f3-1f) (RW:clear f3-2f) (RW:clear f3-3f) (RW:clear f4-0f) (RW:clear f4-1f) (RW:clear f4-2f) (RW:clear f4-3f))
 Metric: (total-cost)

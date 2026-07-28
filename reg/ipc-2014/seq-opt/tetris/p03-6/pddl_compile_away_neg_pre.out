@@ -54,7 +54,7 @@ Predicate[6]:
     at_two: 3 5 5 :: read: 1, write: 1, in-init: 1
     at_right_l: 4 5 5 5 :: read: 1, write: 1, in-init: 1
 Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 0
+    total-cost: :: read: 1, write: 1, in-init: 1
 Action[4]:
     move_square: ?xy_initial:5 ?xy_final:5 ?element:2
         pre: (and (R:connected ?xy_initial ?xy_final) (R:connected ?xy_final ?xy_initial) (RW:clear ?xy_final) (RW:at_square ?element ?xy_initial))
@@ -166,6 +166,7 @@ Init[97]:
   (at_square square3 f2-0f)
   (at_two straight0 f0-0f f1-0f)
   (at_right_l rightl0 f2-2f f3-2f f3-3f)
-Init[0]:
+Init[1]:
+  (= (total-cost) 0)
 Goal: (and (RW:clear f0-0f) (RW:clear f0-1f) (RW:clear f0-2f) (RW:clear f0-3f) (RW:clear f1-0f) (RW:clear f1-1f) (RW:clear f1-2f) (RW:clear f1-3f) (RW:clear f2-0f) (RW:clear f2-1f) (RW:clear f2-2f) (RW:clear f2-3f))
 Metric: (total-cost)

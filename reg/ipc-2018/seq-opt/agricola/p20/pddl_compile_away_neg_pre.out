@@ -172,7 +172,7 @@ Predicate[34]:
     NOT-newborn: :: read: 1, write: 1, in-init: 1, neg-of: newborn
     NOT-plowed_fields: :: read: 1, write: 1, in-init: 1, neg-of: plowed_fields
 Function[2]:
-    total-cost: :: read: 1, write: 1, in-init: 0
+    total-cost: :: read: 1, write: 1, in-init: 1
     group_worker_cost: 5 :: read: 1, write: 0, in-init: 1
 Action[22]:
     ag__harvest_collect_end: ?r:4 ?s:3
@@ -526,10 +526,11 @@ Init[284]:
   (built_rooms room2 worker2)
   (NOT-newborn)
   (NOT-plowed_fields)
-Init[4]:
+Init[5]:
   (= (group_worker_cost worker2) 60)
   (= (group_worker_cost worker3) 30)
   (= (group_worker_cost worker4) 15)
   (= (group_worker_cost worker5) 6)
+  (= (total-cost) 0)
 Goal: (RW:harvest_phase stage9 harvest_end)
 Metric: (total-cost)
