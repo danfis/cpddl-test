@@ -8,7 +8,7 @@ TEST(func_props, pddl)
     for (int f = 0; f < fp.func_size; ++f){
         const pddl_func_prop_t *p = fp.prop + f;
         printf("(%s)\n", C.pddl.func.pred[f].name);
-        printf("  init-count: %d\n", p->init_count);
+        printf("  init-val-size: %d\n", p->init_val_size);
         printf("  init-all-nonneg: %d\n", p->init_all_nonneg);
         printf("  init-all-nonpos: %d\n", p->init_all_nonpos);
         printf("  init-all-int: %d\n", p->init_all_int);
