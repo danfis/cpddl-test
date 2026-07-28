@@ -57,7 +57,7 @@ TEST(pddl_compile_away_cond_eff, pddl)
 TEST(pddl_is_metric_expressible_as_non_neg_int_action_costs, pddl)
 {
     pddl_bool_t res;
-    res = pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl);
+    res = pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl, NULL);
 
     if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
             || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
