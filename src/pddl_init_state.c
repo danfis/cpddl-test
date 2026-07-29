@@ -589,7 +589,8 @@ TEST_ONCE(pddl_init_state_remap_objs)
 
     // A plain permutation keeps everything
     int perm[3] = { 2, 1, 0 };
-    pddlInitStateRemapObjs(&is, perm);
+    assert(pddlInitStateRemapObjs(&is, perm,
+            PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
     dump("permuted", &is);
     assert(pddlInitStateAtomSize(&is) == 3);
     assert(pddlInitStateFluentSize(&is) == 1);
@@ -597,14 +598,16 @@ TEST_ONCE(pddl_init_state_remap_objs)
 
     // -1 drops every fact and fluent mentioning that object
     int rm[3] = { 0, -1, 1 };
-    pddlInitStateRemapObjs(&is, rm);
+    assert(pddlInitStateRemapObjs(&is, rm,
+            PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
     dump("after-removal", &is);
     assert(pddlInitStateAtomSize(&is) == 2);
     checkCounters(&is, 3);
 
     // A remap that makes two distinct facts identical merges them
     int merge[2] = { 0, 0 };
-    pddlInitStateRemapObjs(&is, merge);
+    assert(pddlInitStateRemapObjs(&is, merge,
+            PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
     dump("after-merge", &is);
     assert(pddlInitStateAtomSize(&is) == 1);
     checkCounters(&is, 3);
@@ -635,7 +638,8 @@ TEST_ONCE(pddl_init_state_remap_preds_funcs)
     // drop_removed: the entries of the removed symbols simply go away
     pddl_init_state_t drop;
     pddlInitStateInitCopy(&drop, &is);
-    pddlInitStateRemapPredsFuncs(&drop, pred_remap, func_remap, pddl_true);
+    assert(pddlInitStateRemapPredsFuncs(&drop, pred_remap, func_remap,
+            pddl_true, PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
     dump("dropped", &drop);
     assert(!pddlInitStateIsUnsolvable(&drop));
     assert(pddlInitStateAtomSize(&drop) == 2);
@@ -651,7 +655,8 @@ TEST_ONCE(pddl_init_state_remap_preds_funcs)
     // Otherwise a removed symbol makes the whole initial state false
     pddl_init_state_t unsolv;
     pddlInitStateInitCopy(&unsolv, &is);
-    pddlInitStateRemapPredsFuncs(&unsolv, pred_remap, func_remap, pddl_false);
+    assert(pddlInitStateRemapPredsFuncs(&unsolv, pred_remap, func_remap,
+            pddl_false, PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
     dump("unsolvable", &unsolv);
     assert(pddlInitStateIsUnsolvable(&unsolv));
     pddlInitStateFree(&unsolv);
@@ -661,7 +666,8 @@ TEST_ONCE(pddl_init_state_remap_preds_funcs)
     int keep_func[2] = { 1, 0 };
     pddl_init_state_t keep;
     pddlInitStateInitCopy(&keep, &is);
-    pddlInitStateRemapPredsFuncs(&keep, keep_pred, keep_func, pddl_false);
+    assert(pddlInitStateRemapPredsFuncs(&keep, keep_pred, keep_func,
+            pddl_false, PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
     dump("kept", &keep);
     assert(!pddlInitStateIsUnsolvable(&keep));
     assert(pddlInitStateAtomSize(&keep) == 3);
@@ -1064,12 +1070,12 @@ TEST_ONCE(pddl_init_state_remap_objs_merge_fluents)
     // Collapsing both objects onto 0 makes f0(0) and f0(1) identical, and
     // likewise g(0,1) and g(0,0) -- the duplicates must be merged away
     int merge[2] = { 0, 0 };
-    pddlInitStateRemapObjs(&is, merge);
+    assert(pddlInitStateRemapObjs(&is, merge,
+            PDDL_INIT_STATE_FLUENT_CONFLICT_MIN) == 0);
     dump("after-merge", &is);
     assert(pddlInitStateFluentSize(&is) == 2);
     checkCounters(&is, 3);
 
-    // The first entry wins, so the surviving values are the first ones
     pddl_num_val_t got;
     assert(pddlInitStateFluentVal(&is, f1, &got) == 0);
     assert(pddlNumValIsInt(&got) && got.v.i == 11);
@@ -1085,5 +1091,197 @@ TEST_ONCE(pddl_init_state_remap_objs_merge_fluents)
     delAtom(f1);
     delAtom(f2);
     delAtom(g);
+    pddlInitStateFree(&is);
+}
+
+/** Builds an initial state with the fluents (f0 o) = VAL[o] for every
+ *  o < SIZE, i.e., SIZE fluents of one function that all collapse onto
+ *  (f0 0) under the all-zero object remapping used below. */
+static void mkCollapsingFluents(pddl_init_state_t *is,
+                                const pddl_num_val_t *val,
+                                int size)
+{
+    pddlInitStateInit(is);
+    for (int i = 0; i < size; ++i){
+        pddl_fm_atom_t *f = mkAtom(0, 1, i);
+        assert(pddlInitStateAddFluent(is, f, val + i) == 0);
+        delAtom(f);
+    }
+    assert(pddlInitStateFluentSize(is) == size);
+}
+
+/** Remaps every object onto 0, so that all the fluents of
+ *  mkCollapsingFluents() merge into a single one. */
+static int collapse(pddl_init_state_t *is,
+                    int size,
+                    pddl_init_state_fluent_conflict_t conflict)
+{
+    int merge[8];
+    assert(size <= 8);
+    for (int i = 0; i < size; ++i)
+        merge[i] = 0;
+    return pddlInitStateRemapObjs(is, merge, conflict);
+}
+
+/** Returns the value of the single surviving fluent (f0 0). */
+static int64_t survivorVal(const pddl_init_state_t *is)
+{
+    pddl_fm_atom_t *f = mkAtom(0, 1, 0);
+    pddl_num_val_t got;
+    assert(pddlInitStateFluentVal(is, f, &got) == 0);
+    delAtom(f);
+    assert(pddlNumValIsInt(&got));
+    return got.v.i;
+}
+
+TEST_ONCE(pddl_init_state_remap_fluent_conflict)
+{
+    pddl_num_val_t diff[2];
+    diff[0] = mkInt(11);
+    diff[1] = mkInt(22);
+    pddl_init_state_t is;
+
+    // KEEP_FIRST: one entry survives, no conflict is reported
+    mkCollapsingFluents(&is, diff, 2);
+    assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_KEEP_FIRST) == 0);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    assert(!pddlInitStateIsUnsolvable(&is));
+    checkCounters(&is, 2);
+    pddlInitStateFree(&is);
+
+    // MIN / MAX pick the value, independently of which entry survived
+    mkCollapsingFluents(&is, diff, 2);
+    assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_MIN) == 0);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    assert(survivorVal(&is) == 11);
+    pddlInitStateFree(&is);
+
+    mkCollapsingFluents(&is, diff, 2);
+    assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_MAX) == 0);
+    assert(survivorVal(&is) == 22);
+    pddlInitStateFree(&is);
+
+    // REPORT keeps an unspecified value but says that it had to choose
+    mkCollapsingFluents(&is, diff, 2);
+    assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_REPORT) == -1);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    assert(!pddlInitStateIsUnsolvable(&is));
+    checkCounters(&is, 2);
+    pddlInitStateFree(&is);
+
+    // SET_UNSOLVABLE discards everything and still returns 0
+    mkCollapsingFluents(&is, diff, 2);
+    assert(collapse(&is, 2,
+                    PDDL_INIT_STATE_FLUENT_CONFLICT_SET_UNSOLVABLE) == 0);
+    assert(pddlInitStateIsUnsolvable(&is));
+    assert(pddlInitStateFluentSize(&is) == 0);
+    assert(pddlInitStateAtomSize(&is) == 0);
+    dump("set-unsolvable", &is);
+    // ... and the initial state is still usable afterwards
+    pddlInitStateClear(&is);
+    assert(!pddlInitStateIsUnsolvable(&is));
+    pddl_fm_atom_t *f = mkAtom(0, 1, 0);
+    assert(pddlInitStateAddFluent(&is, f, diff + 0) == 0);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    delAtom(f);
+    pddlInitStateFree(&is);
+
+    // Equal values are not a conflict at all
+    pddl_num_val_t same[2];
+    same[0] = mkInt(7);
+    same[1] = mkInt(7);
+    mkCollapsingFluents(&is, same, 2);
+    assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_REPORT) == 0);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    assert(survivorVal(&is) == 7);
+    pddlInitStateFree(&is);
+
+    mkCollapsingFluents(&is, same, 2);
+    assert(collapse(&is, 2,
+                    PDDL_INIT_STATE_FLUENT_CONFLICT_SET_UNSOLVABLE) == 0);
+    assert(!pddlInitStateIsUnsolvable(&is));
+    assert(pddlInitStateFluentSize(&is) == 1);
+    pddlInitStateFree(&is);
+
+    // The integer 2 and the float 2.0 are the same value, so they do not
+    // conflict -- this is pddlNumValCmp() and not pddlNumValEq()
+    pddl_num_val_t mixed[2];
+    mixed[0] = mkInt(2);
+    pddlNumValSetFlt(mixed + 1, 2.0);
+    assert(!pddlNumValEq(mixed + 0, mixed + 1));
+    assert(pddlNumValCmp(mixed + 0, mixed + 1) == 0);
+    mkCollapsingFluents(&is, mixed, 2);
+    assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_REPORT) == 0);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    pddlInitStateFree(&is);
+
+    // A three-way collision folds
+    pddl_num_val_t three[3];
+    three[0] = mkInt(5);
+    three[1] = mkInt(-3);
+    three[2] = mkInt(9);
+    mkCollapsingFluents(&is, three, 3);
+    assert(collapse(&is, 3, PDDL_INIT_STATE_FLUENT_CONFLICT_MIN) == 0);
+    assert(pddlInitStateFluentSize(&is) == 1);
+    assert(survivorVal(&is) == -3);
+    pddlInitStateFree(&is);
+
+    mkCollapsingFluents(&is, three, 3);
+    assert(collapse(&is, 3, PDDL_INIT_STATE_FLUENT_CONFLICT_MAX) == 0);
+    assert(survivorVal(&is) == 9);
+    pddlInitStateFree(&is);
+
+    mkCollapsingFluents(&is, three, 3);
+    assert(collapse(&is, 3, PDDL_INIT_STATE_FLUENT_CONFLICT_REPORT) == -1);
+    pddlInitStateFree(&is);
+}
+
+TEST_ONCE(pddl_init_state_remap_preds_funcs_fluent_conflict)
+{
+    // (f0 0) = 11 and (f1 0) = 22 collapse when both functions are mapped
+    // onto the same one, so the conflict policy applies to
+    // pddlInitStateRemapPredsFuncs() as well
+    int pred_remap[1] = { 0 };
+    int func_remap[2] = { 0, 0 };
+    pddl_num_val_t v;
+    pddl_init_state_t is;
+
+    pddlInitStateInit(&is);
+    pddl_fm_atom_t *f0 = mkAtom(0, 1, 0);
+    pddl_fm_atom_t *f1 = mkAtom(1, 1, 0);
+    v = mkInt(11);
+    assert(pddlInitStateAddFluent(&is, f0, &v) == 0);
+    v = mkInt(22);
+    assert(pddlInitStateAddFluent(&is, f1, &v) == 0);
+    assert(pddlInitStateFluentSize(&is) == 2);
+    dump("before", &is);
+
+    pddl_init_state_t work;
+    pddlInitStateInitCopy(&work, &is);
+    assert(pddlInitStateRemapPredsFuncs(&work, pred_remap, func_remap,
+                pddl_true, PDDL_INIT_STATE_FLUENT_CONFLICT_MAX) == 0);
+    assert(pddlInitStateFluentSize(&work) == 1);
+    dump("max", &work);
+    checkCounters(&work, 2);
+    pddlInitStateFree(&work);
+
+    pddlInitStateInitCopy(&work, &is);
+    assert(pddlInitStateRemapPredsFuncs(&work, pred_remap, func_remap,
+                pddl_true, PDDL_INIT_STATE_FLUENT_CONFLICT_REPORT) == -1);
+    assert(pddlInitStateFluentSize(&work) == 1);
+    assert(!pddlInitStateIsUnsolvable(&work));
+    pddlInitStateFree(&work);
+
+    pddlInitStateInitCopy(&work, &is);
+    assert(pddlInitStateRemapPredsFuncs(&work, pred_remap, func_remap,
+                pddl_true,
+                PDDL_INIT_STATE_FLUENT_CONFLICT_SET_UNSOLVABLE) == 0);
+    assert(pddlInitStateIsUnsolvable(&work));
+    assert(pddlInitStateFluentSize(&work) == 0);
+    dump("set-unsolvable", &work);
+    pddlInitStateFree(&work);
+
+    delAtom(f0);
+    delAtom(f1);
     pddlInitStateFree(&is);
 }
