@@ -74,6 +74,7 @@ TESTS += fm_num_exp
 TESTS += fm_num_eval
 TESTS += fm_num_exp_fold
 TESTS += func_props
+TESTS += pddl_init_state
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
