@@ -40,7 +40,6 @@ Action[4]:
         eff: (and (decrease (rate_value ?c) 1))
 Init[0]:
 Init[23]:
-  (= (max_int) 22)
   (= (value c0) 0)
   (= (value c1) 0)
   (= (value c2) 0)
@@ -63,5 +62,6 @@ Init[23]:
   (= (rate_value c8) 0)
   (= (rate_value c9) 0)
   (= (rate_value c10) 0)
+  (= (max_int) 22)
 Goal: (and (<= (+ (value c0) 1) (value c1)) (<= (+ (value c1) 1) (value c2)) (<= (+ (value c2) 1) (value c3)) (<= (+ (value c3) 1) (value c4)) (<= (+ (value c4) 1) (value c5)) (<= (+ (value c5) 1) (value c6)) (<= (+ (value c6) 1) (value c7)) (<= (+ (value c7) 1) (value c8)) (<= (+ (value c8) 1) (value c9)) (<= (+ (value c9) 1) (value c10)))
 Metric: no-metric

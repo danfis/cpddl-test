@@ -438,6 +438,68 @@ TEST_ONCE(pddl_init_state_iter)
     pddlInitStateFree(&is);
 }
 
+TEST_ONCE(pddl_init_state_iter_idx)
+{
+    const int size = 5;
+    pddl_init_state_t is;
+    pddlInitStateInit(&is);
+
+    for (int i = 0; i < size; ++i){
+        pddl_fm_atom_t *a = mkAtom(0, 1, i);
+        pddlInitStateAddAtom(&is, a);
+        delAtom(a);
+    }
+
+    // The index runs from 0 to size - 1 and the atom at each index agrees
+    // with the plain iteration
+    const pddl_fm_atom_t *order[size];
+    int num = 0;
+    PDDL_INIT_STATE_FOR_EACH_ATOM(&is, atom)
+        order[num++] = atom;
+    assert(num == size);
+
+    num = 0;
+    PDDL_INIT_STATE_FOR_EACH_ATOM_IDX(&is, idx, atom){
+        assert(idx == num);
+        assert(atom == order[idx]);
+        ++num;
+    }
+    assert(num == size);
+
+    // Iteration over unordered pairs of facts: every pair is visited
+    // exactly once with i2 > i1
+    num = 0;
+    PDDL_INIT_STATE_FOR_EACH_ATOM_IDX(&is, i1, a1){
+        assert(a1 == order[i1]);
+        PDDL_INIT_STATE_FOR_EACH_ATOM_IDX_FROM(&is, i1 + 1, i2, a2){
+            assert(i2 > i1);
+            assert(a2 == order[i2]);
+            ++num;
+        }
+    }
+    assert(num == size * (size - 1) / 2);
+
+    // Starting at 0 matches the full iteration
+    num = 0;
+    PDDL_INIT_STATE_FOR_EACH_ATOM_IDX_FROM(&is, 0, idx, atom){
+        assert(idx == num);
+        assert(atom == order[idx]);
+        ++num;
+    }
+    assert(num == size);
+
+    // Starting at or beyond the number of facts iterates zero times
+    num = 0;
+    PDDL_INIT_STATE_FOR_EACH_ATOM_IDX_FROM(&is, size, idx, atom){
+        (void)idx;
+        (void)atom;
+        ++num;
+    }
+    assert(num == 0);
+
+    pddlInitStateFree(&is);
+}
+
 TEST_ONCE(pddl_init_state_num_exp)
 {
     pddl_init_state_t is;
@@ -675,49 +737,6 @@ TEST_ONCE(pddl_init_state_remap_preds_funcs)
     pddlInitStateFree(&keep);
 
     pddlInitStateFree(&is);
-}
-
-TEST_ONCE(pddl_init_state_pred_func_flags)
-{
-    pddl_preds_t preds;
-    pddl_preds_t funcs;
-    pddlPredsInitEmpty(&preds);
-    pddlPredsInitEmpty(&funcs);
-    for (int i = 0; i < 3; ++i){
-        pddl_pred_t *p = pddlPredsAdd(&preds);
-        pddlPredSetName(p, "p");
-        // Start from the wrong value so that clearing is tested too
-        p->in_init = pddl_true;
-        pddl_pred_t *f = pddlPredsAdd(&funcs);
-        pddlPredSetName(f, "f");
-        f->in_init = pddl_true;
-    }
-
-    pddl_init_state_t is;
-    pddlInitStateInit(&is);
-    pddl_fm_atom_t *a = mkAtom(1, 1, 0);
-    pddlInitStateAddAtom(&is, a);
-    delAtom(a);
-    pddl_fm_atom_t *fl = mkAtom(2, 0);
-    pddl_num_val_t v = mkInt(0);
-    pddlInitStateSetFluent(&is, fl, &v);
-    delAtom(fl);
-
-    pddlInitStateSetPredFuncFlags(&is, &preds, &funcs);
-    for (int i = 0; i < preds.pred_size; ++i)
-        printf("pred %d: in-init: %d\n", i, preds.pred[i].in_init);
-    for (int i = 0; i < funcs.pred_size; ++i)
-        printf("func %d: in-init: %d\n", i, funcs.pred[i].in_init);
-    assert(!preds.pred[0].in_init);
-    assert(preds.pred[1].in_init);
-    assert(!preds.pred[2].in_init);
-    assert(!funcs.pred[0].in_init);
-    assert(!funcs.pred[1].in_init);
-    assert(funcs.pred[2].in_init);
-
-    pddlInitStateFree(&is);
-    pddlPredsFree(&preds);
-    pddlPredsFree(&funcs);
 }
 
 /** Builds a minimal pddl_t holding only the names needed for printing:

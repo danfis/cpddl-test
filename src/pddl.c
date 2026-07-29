@@ -70,6 +70,38 @@ TEST(pddl_is_metric_expressible_as_non_neg_int_action_costs, pddl)
     }
 }
 
+static int initStateEq(const pddl_init_state_t *a, const pddl_init_state_t *b)
+{
+    if (pddlInitStateIsUnsolvable(a) != pddlInitStateIsUnsolvable(b))
+        return 0;
+    if (pddlInitStateAtomSize(a) != pddlInitStateAtomSize(b)
+            || pddlInitStateFluentSize(a) != pddlInitStateFluentSize(b)){
+        return 0;
+    }
+    PDDL_INIT_STATE_FOR_EACH_ATOM(a, atom){
+        if (!pddlInitStateHasAtom(b, atom))
+            return 0;
+    }
+    PDDL_INIT_STATE_FOR_EACH_ATOM(b, atom){
+        if (!pddlInitStateHasAtom(a, atom))
+            return 0;
+    }
+    pddl_num_val_t va, vb;
+    PDDL_INIT_STATE_FOR_EACH_FLUENT(a, fluent, &va){
+        if (pddlInitStateFluentVal(b, fluent, &vb) != 0
+                || pddlNumValCmp(&va, &vb) != 0){
+            return 0;
+        }
+    }
+    PDDL_INIT_STATE_FOR_EACH_FLUENT(b, fluent, &vb){
+        if (pddlInitStateFluentVal(a, fluent, &va) != 0
+                || pddlNumValCmp(&va, &vb) != 0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 TEST(pddl_compile_metric_into_action_costs, pddl)
 {
     pddl_t copy;
@@ -95,7 +127,7 @@ TEST(pddl_compile_metric_into_action_costs, pddl)
         assert(C.pddl.metric == copy.metric);
         if (C.pddl.minimize != NULL)
             assert(pddlFmEq(&C.pddl.minimize->fm, &copy.minimize->fm));
-        assert(pddlFmEq(&C.pddl.init->fm, &copy.init->fm));
+        assert(initStateEq(&C.pddl.init, &copy.init));
         for (int i = 0; i < copy.action.action_size; ++i){
             assert(pddlFmEq(C.pddl.action.action[i].pre,
                             copy.action.action[i].pre));
@@ -139,9 +171,13 @@ TEST_COND(pddl_compile_flt_to_int, pddl, LP)
         pddlErrPrint(&C.err, 1, stderr);
         assert(ret != PDDL_COMPILE_FLT_TO_INT_ERR);
         break;
-    case PDDL_COMPILE_FLT_TO_INT_CHANGED:
+    case PDDL_COMPILE_FLT_TO_INT_CHANGED:{
         // No float constant may survive anywhere in the task
-        assert(!fmHasFlt(&C.pddl.init->fm));
+        pddl_num_val_t init_val;
+        PDDL_INIT_STATE_FOR_EACH_FLUENT(&C.pddl.init, fluent, &init_val){
+            (void)fluent;
+            assert(!pddlNumValIsFlt(&init_val));
+        }
         if (C.pddl.goal != NULL)
             assert(!fmHasFlt(C.pddl.goal));
         for (int i = 0; i < C.pddl.action.action_size; ++i){
@@ -152,13 +188,14 @@ TEST_COND(pddl_compile_flt_to_int, pddl, LP)
             assert(!fmHasFlt(&C.pddl.minimize->fm));
         pddlPrintDebug(&C.pddl, stdout);
         break;
+    }
     case PDDL_COMPILE_FLT_TO_INT_OK:
     case PDDL_COMPILE_FLT_TO_INT_NOT_COMPILABLE:
         // Task must be completely untouched
         assert(C.pddl.metric == copy.metric);
         if (C.pddl.minimize != NULL)
             assert(pddlFmEq(&C.pddl.minimize->fm, &copy.minimize->fm));
-        assert(pddlFmEq(&C.pddl.init->fm, &copy.init->fm));
+        assert(initStateEq(&C.pddl.init, &copy.init));
         for (int i = 0; i < copy.action.action_size; ++i){
             assert(pddlFmEq(C.pddl.action.action[i].pre,
                             copy.action.action[i].pre));

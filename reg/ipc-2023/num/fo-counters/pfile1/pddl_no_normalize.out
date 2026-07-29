@@ -32,11 +32,11 @@ Action[4]:
         eff: (and (decrease (rate_value ?c) 1) (increase (total-cost) 1))
 Init[0]:
 Init[6]:
-  (= (max_int) 4)
   (= (value c0) 0)
   (= (value c1) 0)
   (= (rate_value c0) 0)
   (= (rate_value c1) 0)
+  (= (max_int) 4)
   (= (total-cost) 0)
 Goal: (and (<= (+ (value c0) 1) (value c1)))
 Metric: (total-cost)

@@ -52,6 +52,8 @@ Init[5]:
   (no-coin-update c4)
   (no-coin-update c5)
 Init[13]:
+  (= (current-value) 0)
+  (= (coin-count) 0)
   (= (denomination c1) 1)
   (= (denomination c2) 2)
   (= (denomination c3) 3)
@@ -62,8 +64,6 @@ Init[13]:
   (= (denomination-penalty c3) 1)
   (= (denomination-penalty c4) 1)
   (= (denomination-penalty c5) 1)
-  (= (current-value) 0)
-  (= (coin-count) 0)
   (= (penalty) 0)
 Goal: (and (= (current-value) 29) (= (penalty) 0))
 Metric: (coin-count)

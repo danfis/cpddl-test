@@ -62,7 +62,7 @@ Action[1]:
     workat: ?day:2 ?airport:3
         pre: (RW:today ?day)
         eff: (and (N:RW:today ?day) (forall (?plane:1 I[0]:?day:2 I[1]:?airport:3) (when (R:at ?plane ?day ?airport) (RW:done ?plane))))
-Init[55]:
+Init[54]:
   S:(at ap1 d15 ber)
   S:(at ap1 d15 ham)
   S:(at ap2 d2 ham)
@@ -81,7 +81,6 @@ Init[55]:
   S:(at ap8 d15 ber)
   S:(at ap9 d1 ber)
   S:(at ap9 d9 ham)
-  S:(at ap10 d4 fra)
   S:(at ap10 d4 fra)
   S:(at ap11 d12 ber)
   S:(at ap11 d14 ber)

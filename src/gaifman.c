@@ -20,7 +20,10 @@ TEST(gaifman, pddl_compile_away_cond_eff)
 
     pddl_gaifman_t ginit;
     pddlGaifmanInit(&ginit, C.pddl.obj.obj_size);
-    pddlGaifmanAddRelationsFromFm(&ginit, &C.pddl.init->fm);
+    PDDL_INIT_STATE_FOR_EACH_ATOM(&C.pddl.init, init_atom)
+        pddlGaifmanAddRelationsFromAtom(&ginit, init_atom);
+    PDDL_INIT_STATE_FOR_EACH_FLUENT(&C.pddl.init, init_fluent, NULL)
+        pddlGaifmanAddRelationsFromAtom(&ginit, init_fluent);
 
     pddl_gaifman_t ggoal;
     pddlGaifmanInit(&ggoal, C.pddl.obj.obj_size);
@@ -29,8 +32,7 @@ TEST(gaifman, pddl_compile_away_cond_eff)
     pddl_gaifman_t ggoal2;
     pddlGaifmanInit(&ggoal2, C.pddl.obj.obj_size);
     pddlGaifmanAddRelationsFromFm(&ggoal2, C.pddl.goal);
-    pddl_fm_const_it_atom_t ait;
-    PDDL_FM_FOR_EACH_ATOM(&C.pddl.init->fm, &ait, atom){
+    PDDL_INIT_STATE_FOR_EACH_ATOM(&C.pddl.init, atom){
         if (pddlPredIsStatic(&C.pddl.pred.pred[atom->pred]))
             pddlGaifmanAddRelationsFromAtom(&ggoal2, atom);
     }

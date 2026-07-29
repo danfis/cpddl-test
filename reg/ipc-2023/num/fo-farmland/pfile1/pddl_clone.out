@@ -31,9 +31,9 @@ Init[2]:
   S:(adj farm0 farm1)
   S:(adj farm1 farm0)
 Init[4]:
-  (= (num-of-cars) 0)
   (= (x farm0) 400)
   (= (x farm1) 1)
   (= (cost) 0)
+  (= (num-of-cars) 0)
 Goal: (and (>= (x farm0) 1) (>= (x farm1) 1) (>= (- (+ (x farm0) (* 1.7 (x farm1))) (cost)) 560))
 Metric: no-metric
