@@ -190,8 +190,7 @@ def parseTasks(cfg):
         add_childrent_to_once_tests(test_name)
     once_tests = sorted(set(once_tests))
     Task['_'] = {
-        'disabled': [],
-        'enabled': once_tests,
+        'disabled': sorted(name for name in Test if name not in once_tests),
         'is-base': True,
         'is-quick': True,
     }
@@ -204,17 +203,18 @@ def parseTasks(cfg):
                 'it is generated automatically from TEST_ONCE macros.')
         if name in Task:
             raise ValueError(f'Task {name!r} defined more than once in config.toml')
+        if 'enable' in entry:
+            raise ValueError(
+                f'Task {name!r}: the "enable" key is no longer supported; '
+                'use TEST_SKIP_CHILDREN in the test code instead.')
 
         raw_disable = entry.get('disable', [])
-        raw_enable  = entry.get('enable',  [])
 
         disabled = expand(raw_disable, 'disable')
         disabled += once_tests
-        enabled  = expand(raw_enable,  'enable')
 
         Task[name] = {
             'disabled': sorted(set(disabled)),
-            'enabled': sorted(set(enabled)),
             'is-base': name in base_set,
             'is-quick': name in quick_set,
         }
@@ -313,28 +313,12 @@ def genTaskDefs():
         is_base = 1 if Task[name]['is-base'] else 0
         is_quick = 1 if Task[name]['is-quick'] else 0
 
-        enabled_tests = [0] * len(Test.keys())
+        enabled_tests = [1] * len(Test.keys())
 
         def disableChildren(test_id):
             enabled_tests[test_id] = 0
             for child_id in tests_by_id[test_id]['child']:
                 disableChildren(child_id)
-
-        def enableParents(test_id):
-            enabled_tests[test_id] = 1
-            parent = tests_by_id[test_id]['dep']
-            if parent is not None and parent != '_':
-                enableParents(Test[parent]['id'])
-
-        if len(Task[name]['enabled']) > 0:
-            for idx in tests_by_id.keys():
-                enabled_tests[idx] = 0
-            for d in Task[name]['enabled']:
-                if d in Test:
-                    enableParents(Test[d]['id'])
-        else:
-            for idx in tests_by_id.keys():
-                enabled_tests[idx] = 1
 
         for d in Task[name]['disabled']:
             if d in Test:
