@@ -48,9 +48,9 @@ static pddl_fm_num_eval_status_t fluent_lookup(const pddl_fm_atom_t *fluent,
     struct fluent_table *tbl = userdata;
     tbl->last_args = args;
 
-    assert(fluent->arg_size <= MAX_FLUENT_ARGS);
+    assert(fluent->arity <= MAX_FLUENT_ARGS);
     int resolved[MAX_FLUENT_ARGS];
-    for (int i = 0; i < fluent->arg_size; ++i){
+    for (int i = 0; i < fluent->arity; ++i){
         if (fluent->arg[i].param >= 0){
             resolved[i] = args[fluent->arg[i].param];
         }else{
@@ -60,7 +60,7 @@ static pddl_fm_num_eval_status_t fluent_lookup(const pddl_fm_atom_t *fluent,
 
     for (int i = 0; i < tbl->size; ++i){
         const struct fluent_def *d = tbl->def + i;
-        if (d->pred != fluent->pred || d->arg_size != fluent->arg_size)
+        if (d->pred != fluent->pred || d->arg_size != fluent->arity)
             continue;
         if (memcmp(d->args, resolved, sizeof(int) * d->arg_size) == 0){
             pddlNumValSet(val, &d->val);

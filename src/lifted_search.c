@@ -11,7 +11,7 @@ static void printState(const char *prefix,
         const pddl_ground_atom_t *ga;
         ga = pddlStripsMakerGroundAtomConst(smaker, fact);
         printf(" (%s", C.pddl.pred.pred[ga->pred].name);
-        for (int i = 0; i < ga->arg_size; ++i){
+        for (int i = 0; i < ga->arity; ++i){
             printf(" %s", C.pddl.obj.obj[ga->arg[i]].name);
         }
         printf(")");

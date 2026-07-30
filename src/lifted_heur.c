@@ -15,7 +15,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
         assert(ga != NULL);
-        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arity);
     }
 
     pddl_hadd_t hadd;
@@ -74,7 +74,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddlGroundAtomsInit(&gatoms);
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
-        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arity);
     }
 
     pddl_hmax_t hmax;
@@ -132,7 +132,7 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
         assert(ga != NULL);
-        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arity);
     }
 
     pddl_lifted_heur_relaxed_t h;

@@ -20,16 +20,16 @@
 
 /** Creates the grounded atom (PRED o1 ... ok) from the ARG_SIZE object IDs
  *  given as varargs. The caller frees it with delAtom(). */
-static pddl_fm_atom_t *mkAtom(int pred, int arg_size, ...)
+static pddl_fm_atom_t *mkAtom(int pred, int arity, ...)
 {
     int arg[8];
     va_list ap;
-    assert(arg_size <= 8);
-    va_start(ap, arg_size);
-    for (int i = 0; i < arg_size; ++i)
+    assert(arity <= 8);
+    va_start(ap, arity);
+    for (int i = 0; i < arity; ++i)
         arg[i] = va_arg(ap, int);
     va_end(ap);
-    return pddlFmCreateFactAtom(pred, arg_size, arg);
+    return pddlFmCreateFactAtom(pred, arity, arg);
 }
 
 static void delAtom(pddl_fm_atom_t *a)
@@ -71,7 +71,7 @@ static void dump(const char *label, const pddl_init_state_t *is)
 
     PDDL_INIT_STATE_FOR_EACH_ATOM(is, atom){
         int w = snprintf(line[li], DUMP_LINE_SIZE, "  atom: p%d(", atom->pred);
-        for (int i = 0; i < atom->arg_size; ++i){
+        for (int i = 0; i < atom->arity; ++i){
             w += snprintf(line[li] + w, DUMP_LINE_SIZE - w, "%s%d",
                           (i > 0 ? "," : ""), atom->arg[i].obj);
         }
@@ -84,7 +84,7 @@ static void dump(const char *label, const pddl_init_state_t *is)
     PDDL_INIT_STATE_FOR_EACH_FLUENT(is, fluent, &val){
         int w = snprintf(line[li], DUMP_LINE_SIZE, "  fluent: f%d(",
                          fluent->pred);
-        for (int i = 0; i < fluent->arg_size; ++i){
+        for (int i = 0; i < fluent->arity; ++i){
             w += snprintf(line[li] + w, DUMP_LINE_SIZE - w, "%s%d",
                           (i > 0 ? "," : ""), fluent->arg[i].obj);
         }
