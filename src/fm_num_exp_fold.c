@@ -82,8 +82,8 @@ static int eval_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
 
 #define EVAL_DIV_BY_ZERO 42
 
-static int eval_bin_op(const pddl_fm_num_exp_t *e, const void *left,
-                       const void *right, void *ud, void *val)
+static int eval_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
+                       void *ud, void *val)
 {
     const pddl_num_val_t *l = left;
     const pddl_num_val_t *r = right;
@@ -151,8 +151,8 @@ static int trace_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
     return 0;
 }
 
-static int trace_bin_op(const pddl_fm_num_exp_t *e, const void *left,
-                        const void *right, void *ud, void *val)
+static int trace_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
+                        void *ud, void *val)
 {
     *(int *)val = *(const int *)left * 100 + *(const int *)right;
     return 0;
@@ -175,8 +175,8 @@ static int sum_count_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
     return 0;
 }
 
-static int sum_count_bin_op(const pddl_fm_num_exp_t *e, const void *left,
-                            const void *right, void *ud, void *val)
+static int sum_count_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
+                            void *ud, void *val)
 {
     const struct sum_count *l = left;
     const struct sum_count *r = right;
@@ -287,8 +287,8 @@ static int abort_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
     return 0;
 }
 
-static int abort_bin_op(const pddl_fm_num_exp_t *e, const void *left,
-                        const void *right, void *ud, void *val)
+static int abort_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
+                        void *ud, void *val)
 {
     struct abort_ctx *ctx = ud;
     ++ctx->bin_op_calls;
@@ -368,8 +368,8 @@ static int res_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
     return 0;
 }
 
-static int res_bin_op(const pddl_fm_num_exp_t *e, const void *left,
-                      const void *right, void *ud, void *val)
+static int res_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
+                      void *ud, void *val)
 {
     struct res_pool *pool = ud;
     // The operands must still be alive when they are combined
@@ -379,8 +379,8 @@ static int res_bin_op(const pddl_fm_num_exp_t *e, const void *left,
     return 0;
 }
 
-static int res_bin_op_fail(const pddl_fm_num_exp_t *e, const void *left,
-                           const void *right, void *ud, void *val)
+static int res_bin_op_fail(const pddl_fm_num_exp_t *e, void *left, void *right,
+                           void *ud, void *val)
 {
     return RES_FAIL_CODE;
 }

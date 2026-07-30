@@ -26,6 +26,7 @@ VALGRIND_SEGFAULT_OPTS += --suppressions=test.supp
 T ?= -a -B -p6
 T_QUICK ?= -Q -a -p6
 T_ALL ?= -A -a -p6
+T_FULL ?= -A -a -p6 -m 300
 
 TOOL ?=
 
@@ -112,6 +113,9 @@ check-segfault: all
 	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test -c $(T) -vvv -p 1 2>&1 | tee check.log
 check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test -c $(T)
+
+full-tests: all ./scripts/test-tool.py config-tool.toml ../bin/pddl-tool
+	./test -c $(T_FULL) ; $(PYTHON) ./scripts/test-tool.py $(TOOL)
 
 clean:
 	rm -f check.log

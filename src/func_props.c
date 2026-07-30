@@ -21,7 +21,6 @@ TEST(func_props, pddl)
         printf("  written-by-assign-or-scale: %d\n",
                p->written_by_assign_or_scale);
         printf("  written-in-cond-eff: %d\n", p->written_in_cond_eff);
-        printf("  write-size: %d\n", p->write_size);
         printf("  write-delta-nonneg: %d\n", p->write_delta_nonneg);
         printf("  write-delta-nonneg-int: %d\n", p->write_delta_nonneg_int);
         printf("  rhs-funcs:");
