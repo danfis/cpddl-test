@@ -33,7 +33,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
         if (c->type == PDDL_FM_ATOM){
             const pddl_fm_atom_t *a = pddlFmToAtomConst(c);
             const pddl_ground_atom_t *ga;
-            if (pddlPredIsStatic(&C.pddl.pred.pred[a->pred])){
+            if (pddlIsPredStatic(&C.pddl, a->pred)){
                 pddlStripsMakerAddStaticAtom(&smaker, a, NULL, NULL);
             }else{
                 ga = pddlStripsMakerAddAtom(&smaker, a, NULL, NULL);
