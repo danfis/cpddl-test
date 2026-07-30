@@ -24,11 +24,13 @@
 #define PROGRESS_STR_MAX_SIZE 50
 
 const char *TEST_TASK = NULL;
+int __test_skip_children = 0;
 
 struct test_stat {
     int run;
     int succeeded;
     int failed;
+    int skipped;
     float time;
 };
 typedef struct test_stat test_stat_t;
@@ -44,6 +46,7 @@ typedef struct worker worker_t;
 struct shared {
     int jobs_done;
     int jobs_tear_down_done;
+    int jobs_skipped;
     int tasks_done;
     sem_t lock;
 };
@@ -287,13 +290,30 @@ static void updateTestStatSucceeded(int test_id)
     sem_post(&shared->lock);
 }
 
+static void skipChildren(int task_id, const test_def_t *test)
+{
+    for (int i = 0; i < test->children_size; ++i){
+        if (!tasksTestsIsEnabled(task_id, test->children[i]))
+            continue;
+        const test_def_t *child = tasksTestsGetTest(test->children[i]);
+        sem_wait(&shared->lock);
+        test_stat[child->id].skipped += 1;
+        shared->jobs_skipped += 1;
+        sem_post(&shared->lock);
+        skipChildren(task_id, child);
+    }
+}
+
 static void progress(void)
 {
     sem_wait(&shared->lock);
-    int cnt = printf("Done: tasks %d / %d, jobs %d / %d, tear-down: %d / %d",
+    int cnt = printf("Done: tasks %d / %d, jobs %d+%d / %d,"
+                     " tear-down: %d+%d / %d",
                      shared->tasks_done, num_enabled_tasks,
-                     shared->jobs_done, num_enabled_jobs,
-                     shared->jobs_tear_down_done, num_enabled_jobs);
+                     shared->jobs_done, shared->jobs_skipped,
+                     num_enabled_jobs,
+                     shared->jobs_tear_down_done, shared->jobs_skipped,
+                     num_enabled_jobs);
     for (; cnt < PROGRESS_COLUMNS; ++cnt)
         printf(" ");
     printf("\n");
@@ -591,6 +611,7 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
 
     }else if (pid == 0){
         TEST_TASK = tasksTestsGetTaskName(task_id);
+        __test_skip_children = 0;
 
         int fd_stdout, fd_stderr;
         redirectStdOutErr(tasksTestsGetTaskName(task_id), test->name,
@@ -634,10 +655,14 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         progress_info[worker->id].in_progress = 0;
         sem_post(&shared->lock);
 
-        for (int i = 0; i < test->children_size; ++i){
-            if (!tasksTestsIsEnabled(task_id, test->children[i]))
-                continue;
-            runTest(worker, task_id, tasksTestsGetTest(test->children[i]));
+        if (__test_skip_children){
+            skipChildren(task_id, test);
+        }else{
+            for (int i = 0; i < test->children_size; ++i){
+                if (!tasksTestsIsEnabled(task_id, test->children[i]))
+                    continue;
+                runTest(worker, task_id, tasksTestsGetTest(test->children[i]));
+            }
         }
 
         if (verbose > 3){
@@ -820,7 +845,8 @@ static void printReportTest(const char *test_name,
                             const test_stat_t *stat,
                             int name_len,
                             int succ_len,
-                            int fail_len)
+                            int fail_len,
+                            int skip_len)
 {
     printLog("%s", test_name);
     for (int i = strlen(test_name); i < name_len; ++i)
@@ -833,6 +859,9 @@ static void printReportTest(const char *test_name,
     printLog("%*i", fail_len, stat->failed);
 
     printLog(" | ");
+    printLog("%*i", skip_len, stat->skipped);
+
+    printLog(" | ");
     printLog("%7.2fs", stat->time);
 
     printLog("\n");
@@ -843,15 +872,17 @@ static void printReport(void)
     int name_len = 5;
     int num_succeeded = 0;
     int num_failed = 0;
+    int num_skipped = 0;
     float time = 0;
     for (int i = 0; i < num_tests; ++i){
         const test_def_t *test = tasksTestsGetTest(i);
-        if (!test_stat[i].run)
+        if (!test_stat[i].run && !test_stat[i].skipped)
             continue;
         if (strlen(test->name) > name_len)
             name_len = strlen(test->name);
         num_succeeded += test_stat[i].succeeded;
         num_failed += test_stat[i].failed;
+        num_skipped += test_stat[i].skipped;
         time += test_stat[i].time;
     }
 
@@ -871,25 +902,34 @@ static void printReport(void)
     if (s > fail_len)
         fail_len = s;
 
+    int skip_len = 4;
+    n = num_skipped;
+    s = 1;
+    while ((n = n / 10))
+        ++s;
+    if (s > skip_len)
+        skip_len = s;
+
     printLog("\n");
     printLog("test");
     for (int i = 0; i < name_len - 4; ++i)
         printLog(" ");
-    printLog(" | succ | fail | time\n");
-    for (int i = 0; i < name_len + succ_len + fail_len; ++i)
+    printLog(" | succ | fail | skip | time\n");
+    for (int i = 0; i < name_len + succ_len + fail_len + skip_len; ++i)
         printLog("-");
-    printLog("------------------\n");
+    printLog("---------------------\n");
 
     for (int i = 0; i < num_tests; ++i){
-        if (!test_stat[i].run)
+        if (!test_stat[i].run && !test_stat[i].skipped)
             continue;
         const test_def_t *test = tasksTestsGetTest(i);
-        printReportTest(test->name, test_stat + i, name_len, succ_len, fail_len);
+        printReportTest(test->name, test_stat + i, name_len, succ_len,
+                        fail_len, skip_len);
     }
 
-    for (int i = 0; i < name_len + succ_len + fail_len; ++i)
+    for (int i = 0; i < name_len + succ_len + fail_len + skip_len; ++i)
         printLog("-");
-    printLog("------------------\n");
+    printLog("---------------------\n");
     printLog("sum");
     for (int i = 3; i < name_len; ++i)
         printLog(" ");
@@ -899,6 +939,9 @@ static void printReport(void)
 
     printLog(" | ");
     printLog("%*i", fail_len, num_failed);
+
+    printLog(" | ");
+    printLog("%*i", skip_len, num_skipped);
     printLog(" | %7.2fs", time);
     printLog("\n");
 
@@ -913,18 +956,20 @@ static void printStatusLine(void)
 {
     int num_succeeded = 0;
     int num_failed = 0;
+    int num_skipped = 0;
     for (int i = 0; i < num_tests; ++i){
-        if (!test_stat[i].run)
+        if (!test_stat[i].run && !test_stat[i].skipped)
             continue;
         num_succeeded += test_stat[i].succeeded;
         num_failed += test_stat[i].failed;
+        num_skipped += test_stat[i].skipped;
     }
 
     pddlTimerStop(&overall_timer);
 
-    printLog("==> tasks: %d | jobs: %d | succ: %d | fail: %d%s\n",
+    printLog("==> tasks: %d | jobs: %d | succ: %d | fail: %d | skip: %d%s\n",
              num_enabled_tasks, num_enabled_jobs, num_succeeded, num_failed,
-             (num_failed == 0 ? " | OK" : ""));
+             num_skipped, (num_failed == 0 ? " | OK" : ""));
     printLog("==> time: overall %.2fs | overall tests %.2fs"
              " | accumulative %.2fs\n",
              pddlTimerElapsedInSF(&overall_timer),
