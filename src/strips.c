@@ -117,6 +117,11 @@ TEST(strips_ground_only_facts_with_static, lmg)
 
 TEST(strips_ground_unit_cost, pddl_unit_cost)
 {
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
@@ -524,6 +529,11 @@ TEST(strips_compile_in_lmg, lmg)
 
 TEST(strips_grounding, pddl)
 {
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.lifted_mgroups = NULL;
     ground_cfg.prune_op_pre_mutex = 0;

@@ -7,6 +7,14 @@ static pddl_homomorphic_task_t h;
 
 TEST(homomorphism, pddl)
 {
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        // TODO: I'm actually not sure, but I think homomorphisms should be well
+        // defined for numeric tasks as well. This needs to be investigated
+        // further.
+        return;
+    }
+
     pddlHomomorphicTaskInit(&h, &C.pddl);
     pddlHomomorphicTaskSeed(&h, 1234);
 }

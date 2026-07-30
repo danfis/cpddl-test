@@ -1,0 +1,79 @@
+Domain: polycraft
+Problem: p01_sat
+Require: 103
+Type[2]:
+    [0]: object, parent: -1
+    [1]: cell, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8
+    [1]: 0 1 2 3 4 5 6 7 8
+Obj[9]:
+    [0]: cell0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: cell1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: cell2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: cell3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: cell4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: cell5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: cell6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: cell7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: cell8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[4]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    tree_cell: 1 :: read: 1, write: 1, in-init: 1
+    low_tree_cell: 1 :: read: 1, write: 1, in-init: 0
+    crafting_table_cell: 1 :: read: 1, write: 0, in-init: 1
+Function[7]:
+    count_log_in_inventory: :: read: 1, write: 1, in-init: 1
+    count_planks_in_inventory: :: read: 1, write: 1, in-init: 1
+    count_stick_in_inventory: :: read: 1, write: 1, in-init: 1
+    count_sack_polyisoprene_pellets_in_inventory: :: read: 1, write: 1, in-init: 1
+    count_tree_tap_in_inventory: :: read: 1, write: 1, in-init: 1
+    count_pogo_stick: :: read: 1, write: 1, in-init: 1
+    toxicity: :: read: 1, write: 1, in-init: 1
+Action[10]:
+    break: ?pos:1
+        pre: (and (RW:tree_cell ?pos))
+        eff: (and (N:RW:tree_cell ?pos) (increase (count_log_in_inventory) 1))
+    break_low: ?pos:1
+        pre: (and (RW:low_tree_cell ?pos))
+        eff: (and (N:RW:low_tree_cell ?pos) (increase (count_log_in_inventory) 0.5))
+    break_brutal: ?pos:1
+        pre: (and (RW:tree_cell ?pos))
+        eff: (and (N:RW:tree_cell ?pos) (increase (count_log_in_inventory) 2))
+    craft_plank: 
+        pre: (and (>= (count_log_in_inventory) 1))
+        eff: (and (decrease (count_log_in_inventory) 1) (increase (count_planks_in_inventory) 4))
+    craft_stick: 
+        pre: (and (>= (count_planks_in_inventory) 2))
+        eff: (and (decrease (count_planks_in_inventory) 2) (increase (count_stick_in_inventory) 4))
+    craft_tree_tap: ?pos:1
+        pre: (and (R:crafting_table_cell ?pos) (>= (count_planks_in_inventory) 5) (>= (count_stick_in_inventory) 1))
+        eff: (and (decrease (count_planks_in_inventory) 5) (decrease (count_stick_in_inventory) 1) (increase (count_tree_tap_in_inventory) 1))
+    place_tree_tap: ?pos:1
+        pre: (and (RW:tree_cell ?pos) (>= (count_tree_tap_in_inventory) 1))
+        eff: (and (N:RW:tree_cell ?pos) (decrease (count_tree_tap_in_inventory) 1) (increase (count_sack_polyisoprene_pellets_in_inventory) 1))
+    smelt_pellets_raw: 
+        pre: (and (>= (count_log_in_inventory) 2))
+        eff: (and (decrease (count_log_in_inventory) 2) (increase (count_sack_polyisoprene_pellets_in_inventory) 0.5))
+    craft_synthetic_pellets: 
+        pre: (and (>= (count_log_in_inventory) 1))
+        eff: (and (decrease (count_log_in_inventory) 1) (increase (count_sack_polyisoprene_pellets_in_inventory) 1) (increase (toxicity) 1))
+    craft_wooden_pogo: ?pos:1
+        pre: (and (R:crafting_table_cell ?pos) (>= (count_planks_in_inventory) 2) (>= (count_stick_in_inventory) 4) (>= (count_sack_polyisoprene_pellets_in_inventory) 1) (<= (toxicity) 1))
+        eff: (and (decrease (count_planks_in_inventory) 2) (decrease (count_stick_in_inventory) 4) (decrease (count_sack_polyisoprene_pellets_in_inventory) 1) (increase (count_pogo_stick) 1))
+Init[5]:
+  S:(crafting_table_cell cell6)
+  (tree_cell cell0)
+  (tree_cell cell6)
+  (tree_cell cell7)
+  (tree_cell cell8)
+Init[7]:
+  (= (count_log_in_inventory) 0)
+  (= (count_planks_in_inventory) 0)
+  (= (count_stick_in_inventory) 0)
+  (= (count_sack_polyisoprene_pellets_in_inventory) 0)
+  (= (count_tree_tap_in_inventory) 0)
+  (= (count_pogo_stick) 0)
+  (= (toxicity) 0)
+Goal: (>= (count_pogo_stick) 1)
+Metric: no-metric

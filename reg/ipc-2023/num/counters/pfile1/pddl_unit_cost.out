@@ -1,0 +1,35 @@
+Domain: fn-counters
+Problem: instance_4
+Require: 103
+Type[2]:
+    [0]: object, parent: -1
+    [1]: counter, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3
+    [1]: 0 1 2 3
+Obj[4]:
+    [0]: c0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: c1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: c2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: c3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[1]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+Function[2]:
+    value: 1 :: read: 1, write: 1, in-init: 1
+    max_int: :: read: 1, write: 0, in-init: 1
+Action[2]:
+    increment: ?c:1
+        pre: (and (<= (+ (value ?c) 1) (max_int)))
+        eff: (and (increase (value ?c) 1))
+    decrement: ?c:1
+        pre: (and (>= (value ?c) 1))
+        eff: (and (decrease (value ?c) 1))
+Init[0]:
+Init[5]:
+  (= (value c0) 6)
+  (= (value c1) 4)
+  (= (value c2) 2)
+  (= (value c3) 0)
+  (= (max_int) 8)
+Goal: (and (<= (+ (value c0) 1) (value c1)) (<= (+ (value c1) 1) (value c2)) (<= (+ (value c2) 1) (value c3)))
+Metric: no-metric

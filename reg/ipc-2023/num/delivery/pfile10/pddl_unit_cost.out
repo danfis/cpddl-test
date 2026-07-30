@@ -1,0 +1,153 @@
+Domain: delivery
+Problem: delivery-x-11-octopus
+Require: 103
+Type[5]:
+    [0]: object, parent: -1
+    [1]: room, parent: 0
+    [2]: item, parent: 0
+    [3]: arm, parent: 0
+    [4]: bot, parent: 0
+Obj-by-Type:
+    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+    [1]: 0 1
+    [2]: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+    [3]: 27 28 29 30 31 32 33 34
+    [4]: 26
+Obj[35]:
+    [0]: rooma, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [1]: roomb, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [2]: item24, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [3]: item23, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [4]: item22, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [5]: item21, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [6]: item20, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [7]: item19, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [8]: item18, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [9]: item17, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [10]: item16, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [11]: item15, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [12]: item14, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [13]: item13, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [14]: item12, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [15]: item11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [16]: item10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [17]: item9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [18]: item8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [19]: item7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [20]: item6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [21]: item5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [22]: item4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [23]: item3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [24]: item2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [25]: item1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [26]: octopus, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [27]: t1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [28]: t2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [29]: t3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [30]: t4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [31]: t5, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [32]: t6, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [33]: t7, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+    [34]: t8, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
+Predicate[8]:
+    =: 0 0 :: read: 0, write: 0, in-init: 0
+    at-bot: 4 1 :: read: 1, write: 1, in-init: 1
+    at: 2 1 :: read: 1, write: 1, in-init: 1
+    door: 1 1 :: read: 1, write: 0, in-init: 1
+    free: 3 :: read: 1, write: 1, in-init: 1
+    in-arm: 2 3 :: read: 1, write: 1, in-init: 0
+    in-tray: 2 4 :: read: 1, write: 1, in-init: 0
+    mount: 3 4 :: read: 1, write: 0, in-init: 1
+Function[3]:
+    load_limit: 4 :: read: 1, write: 0, in-init: 1
+    current_load: 4 :: read: 1, write: 1, in-init: 1
+    weight: 2 :: read: 1, write: 0, in-init: 1
+Action[5]:
+    move: ?b:4 ?x:1 ?y:1
+        pre: (and (R:door ?x ?y) (RW:at-bot ?b ?x))
+        eff: (and (N:RW:at-bot ?b ?x) (RW:at-bot ?b ?y))
+    pick: ?i:2 ?x:1 ?a:3 ?b:4
+        pre: (and (R:mount ?a ?b) (RW:at-bot ?b ?x) (RW:at ?i ?x) (RW:free ?a) (<= (+ (current_load ?b) (weight ?i)) (load_limit ?b)))
+        eff: (and (N:RW:at ?i ?x) (N:RW:free ?a) (RW:in-arm ?i ?a) (increase (current_load ?b) (weight ?i)))
+    drop: ?i:2 ?x:1 ?a:3 ?b:4
+        pre: (and (R:mount ?a ?b) (RW:at-bot ?b ?x) (RW:in-arm ?i ?a))
+        eff: (and (RW:at ?i ?x) (RW:free ?a) (N:RW:in-arm ?i ?a) (decrease (current_load ?b) (weight ?i)))
+    to-tray: ?i:2 ?a:3 ?b:4
+        pre: (and (R:mount ?a ?b) (RW:in-arm ?i ?a))
+        eff: (and (RW:free ?a) (N:RW:in-arm ?i ?a) (RW:in-tray ?i ?b))
+    from-tray: ?i:2 ?a:3 ?b:4
+        pre: (and (R:mount ?a ?b) (RW:free ?a) (RW:in-tray ?i ?b))
+        eff: (and (N:RW:free ?a) (RW:in-arm ?i ?a) (N:RW:in-tray ?i ?b))
+Init[43]:
+  S:(door rooma roomb)
+  S:(door roomb rooma)
+  S:(mount t1 octopus)
+  S:(mount t2 octopus)
+  S:(mount t3 octopus)
+  S:(mount t4 octopus)
+  S:(mount t5 octopus)
+  S:(mount t6 octopus)
+  S:(mount t7 octopus)
+  S:(mount t8 octopus)
+  (at-bot octopus rooma)
+  (at item24 rooma)
+  (at item23 rooma)
+  (at item22 rooma)
+  (at item21 rooma)
+  (at item20 rooma)
+  (at item19 rooma)
+  (at item18 rooma)
+  (at item17 rooma)
+  (at item16 rooma)
+  (at item15 rooma)
+  (at item14 rooma)
+  (at item13 rooma)
+  (at item12 rooma)
+  (at item11 rooma)
+  (at item10 rooma)
+  (at item9 rooma)
+  (at item8 rooma)
+  (at item7 rooma)
+  (at item6 rooma)
+  (at item5 rooma)
+  (at item4 rooma)
+  (at item3 rooma)
+  (at item2 rooma)
+  (at item1 rooma)
+  (free t1)
+  (free t2)
+  (free t3)
+  (free t4)
+  (free t5)
+  (free t6)
+  (free t7)
+  (free t8)
+Init[26]:
+  (= (load_limit octopus) 8)
+  (= (current_load octopus) 0)
+  (= (weight item24) 1)
+  (= (weight item23) 1)
+  (= (weight item22) 1)
+  (= (weight item21) 1)
+  (= (weight item20) 1)
+  (= (weight item19) 1)
+  (= (weight item18) 1)
+  (= (weight item17) 1)
+  (= (weight item16) 1)
+  (= (weight item15) 1)
+  (= (weight item14) 1)
+  (= (weight item13) 1)
+  (= (weight item12) 1)
+  (= (weight item11) 1)
+  (= (weight item10) 1)
+  (= (weight item9) 1)
+  (= (weight item8) 1)
+  (= (weight item7) 1)
+  (= (weight item6) 1)
+  (= (weight item5) 1)
+  (= (weight item4) 1)
+  (= (weight item3) 1)
+  (= (weight item2) 1)
+  (= (weight item1) 1)
+Goal: (and (RW:at item24 roomb) (RW:at item23 roomb) (RW:at item22 roomb) (RW:at item21 roomb) (RW:at item20 roomb) (RW:at item19 roomb) (RW:at item18 roomb) (RW:at item17 roomb) (RW:at item16 roomb) (RW:at item15 roomb) (RW:at item14 roomb) (RW:at item13 roomb) (RW:at item12 roomb) (RW:at item11 roomb) (RW:at item10 roomb) (RW:at item9 roomb) (RW:at item8 roomb) (RW:at item7 roomb) (RW:at item6 roomb) (RW:at item5 roomb) (RW:at item4 roomb) (RW:at item3 roomb) (RW:at item2 roomb) (RW:at item1 roomb))
+Metric: no-metric

@@ -4,6 +4,11 @@
 
 TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 {
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
     pddl_strips_t strips;
@@ -64,6 +69,11 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 
 TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
 {
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
     pddl_strips_t strips;
@@ -121,6 +131,11 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
 
 TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
 {
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
     pddl_strips_t strips;

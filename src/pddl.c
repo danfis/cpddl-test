@@ -18,6 +18,14 @@ TEST(pddl, r)
     pddlPrintDebug(&C.pddl, stdout);
 }
 
+TEST(pddl_classical, pddl)
+{
+    if (pddlHasNumericFluents(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+}
+
 TEST(pddl_has_numeric_fluents, pddl)
 {
     // Numeric tasks live under ipc-2023/num/, ipc-2026/num/, and

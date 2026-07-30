@@ -1,0 +1,10 @@
+< {potential V0:vehicle}
+, {is-cart V0:vehicle, potential V0:vehicle}
+, {is-train V0:vehicle, potential V0:vehicle}
+, {is-ship V0:vehicle, potential V0:vehicle}
+, {is-at V0:vehicle C1:place, potential V0:vehicle, is-at V0:vehicle C2:place}:=1
+, {is-cart V0:vehicle, is-train V0:vehicle, potential V0:vehicle}
+, {is-cart V0:vehicle, is-ship V0:vehicle, potential V0:vehicle}
+, {is-train V0:vehicle, is-ship V0:vehicle, potential V0:vehicle}
+, {is-cart V0:vehicle, is-train V0:vehicle, is-ship V0:vehicle, potential V0:vehicle}:=1
+>
