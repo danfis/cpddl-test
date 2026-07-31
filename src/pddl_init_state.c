@@ -751,14 +751,16 @@ static void mkPddl(pddl_t *pddl)
     pddlPredSetName(pddlPredsAdd(&pddl->pred), "p");
     pddl_pred_t *q = pddlPredsAdd(&pddl->pred);
     pddlPredSetName(q, "q");
-    // A predicate that some action writes is not static
-    q->write = pddl_true;
 
     pddlPredSetName(pddlPredsAdd(&pddl->func), "f");
     pddlPredSetName(pddlPredsAdd(&pddl->func), "g");
 
     pddlObjsAdd(&pddl->obj, "a");
     pddlObjsAdd(&pddl->obj, "b");
+
+    pddlResetPredFuncProps(pddl);
+    // A predicate that some action writes is not static
+    pddl->pred_func_props.pred_prop[q->id].in_eff = pddl_true;
 }
 
 static void freePddl(pddl_t *pddl)
@@ -766,6 +768,7 @@ static void freePddl(pddl_t *pddl)
     pddlPredsFree(&pddl->pred);
     pddlPredsFree(&pddl->func);
     pddlObjsFree(&pddl->obj);
+    pddlPredFuncPropsFree(&pddl->pred_func_props);
 }
 
 TEST_ONCE(pddl_init_state_print)
