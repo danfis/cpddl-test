@@ -1,0 +1,36 @@
+step 0: state 19 applicable 18
+begin-cut g11 sub6 :: cost: 0
+    add: (cut-point-1 g11) (cutting) (last-cut-point g11) (s-first sub6) (s-last sub6)
+    del: (cw g11 sub6) (idle)
+begin-cut g84 sub5 :: cost: 0
+    add: (cut-point-1 g84) (cutting) (last-cut-point g84) (s-first sub5) (s-last sub5)
+    del: (cw g84 sub5) (idle)
+begin-cut sub1 g84 :: cost: 0
+    add: (cut-point-1 sub1) (cutting) (last-cut-point sub1) (s-first g84) (s-last g84)
+    del: (cw sub1 g84) (idle)
+step 1: state 22 applicable 2
+continue-cut sub3 sub1 :: cost: 0
+    add: (s-last sub1) (s-next sub3 sub1)
+    del: (cw sub3 sub1) (s-last sub3)
+end-cut-1 sub3 sub1 :: cost: 0
+    add: (cut-point-2 sub1)
+    del: (cw sub3 sub1)
+step 2: state 22 applicable 1
+end-cut-2 sub7 sub1 :: cost: 0
+    add: (cw sub7 sub1) (have-cut)
+    del: (cut-point-1 sub7) (cut-point-2 sub1) (cutting)
+step 3: state 21 applicable 17
+begin-inverse-splice sub7 sub1 :: cost: 1
+    add: (inverse-splicing) (splice-point-1 sub7) (splice-point-2 sub1)
+    del: (cw sub7 sub1) (have-cut)
+begin-transpose-splice g11 sub6 :: cost: 2
+    add: (splice-point-1 g11) (splice-point-2 sub6) (splicing)
+    del: (cw g11 sub6) (have-cut)
+begin-transpose-splice g84 sub5 :: cost: 2
+    add: (splice-point-1 g84) (splice-point-2 sub5) (splicing)
+    del: (cw g84 sub5) (have-cut)
+step 4: state 22 applicable 1
+end-splice-1 sub3 sub4 :: cost: 0
+    add: (cw sub4 sub3) (splice-point-1 sub3) (splicing-last)
+    del: (s-first sub3) (s-last sub3) (splice-point-1 sub4) (splicing)
+ground atoms: 90 groundings: 39

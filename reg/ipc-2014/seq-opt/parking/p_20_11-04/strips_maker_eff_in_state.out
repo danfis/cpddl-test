@@ -1,0 +1,51 @@
+step 0: state 41 applicable 10
+move-car-to-curb car_00 car_17 curb_10 :: cost: 1
+    add: (at-curb car_00) (at-curb-num car_00 curb_10) (car-clear car_17)
+    del: (behind-car car_00 car_17) (curb-clear curb_10)
+move-car-to-curb car_05 car_16 curb_10 :: cost: 1
+    add: (at-curb car_05) (at-curb-num car_05 curb_10) (car-clear car_16)
+    del: (behind-car car_05 car_16) (curb-clear curb_10)
+move-car-to-curb car_07 car_04 curb_10 :: cost: 1
+    add: (at-curb car_07) (at-curb-num car_07 curb_10) (car-clear car_04)
+    del: (behind-car car_07 car_04) (curb-clear curb_10)
+step 1: state 42 applicable 22
+move-car-to-car car_05 car_16 car_00 :: cost: 1
+    add: (behind-car car_05 car_00) (car-clear car_16)
+    del: (behind-car car_05 car_16) (car-clear car_00)
+move-car-to-car car_05 car_16 car_17 :: cost: 1
+    add: (behind-car car_05 car_17) (car-clear car_16)
+    del: (behind-car car_05 car_16) (car-clear car_17)
+move-car-to-car car_07 car_04 car_00 :: cost: 1
+    add: (behind-car car_07 car_00) (car-clear car_04)
+    del: (behind-car car_07 car_04) (car-clear car_00)
+step 2: state 41 applicable 10
+move-car-to-curb car_00 car_17 curb_10 :: cost: 1
+    add: (at-curb car_00) (at-curb-num car_00 curb_10) (car-clear car_17)
+    del: (behind-car car_00 car_17) (curb-clear curb_10)
+move-car-to-curb car_05 car_16 curb_10 :: cost: 1
+    add: (at-curb car_05) (at-curb-num car_05 curb_10) (car-clear car_16)
+    del: (behind-car car_05 car_16) (curb-clear curb_10)
+move-car-to-curb car_07 car_04 curb_10 :: cost: 1
+    add: (at-curb car_07) (at-curb-num car_07 curb_10) (car-clear car_04)
+    del: (behind-car car_07 car_04) (curb-clear curb_10)
+step 3: state 42 applicable 22
+move-car-to-car car_00 car_17 car_04 :: cost: 1
+    add: (behind-car car_00 car_04) (car-clear car_17)
+    del: (behind-car car_00 car_17) (car-clear car_04)
+move-car-to-car car_00 car_17 car_07 :: cost: 1
+    add: (behind-car car_00 car_07) (car-clear car_17)
+    del: (behind-car car_00 car_17) (car-clear car_07)
+move-car-to-car car_05 car_16 car_04 :: cost: 1
+    add: (behind-car car_05 car_04) (car-clear car_16)
+    del: (behind-car car_05 car_16) (car-clear car_04)
+step 4: state 41 applicable 20
+move-car-to-car car_00 car_17 car_04 :: cost: 1
+    add: (behind-car car_00 car_04) (car-clear car_17)
+    del: (behind-car car_00 car_17) (car-clear car_04)
+move-car-to-car car_05 car_16 car_04 :: cost: 1
+    add: (behind-car car_05 car_04) (car-clear car_16)
+    del: (behind-car car_05 car_16) (car-clear car_04)
+move-car-to-car car_08 car_06 car_04 :: cost: 1
+    add: (behind-car car_08 car_04) (car-clear car_06)
+    del: (behind-car car_08 car_06) (car-clear car_04)
+ground atoms: 116 groundings: 55

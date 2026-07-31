@@ -1,0 +1,42 @@
+step 0: state 268 applicable 3
+moveinthelog-activitya-ev1-ev2 :: cost: 1
+    add: (tracepointer ev2)
+    del: (tracepointer ev1)
+moveinthemodel-activitya :: cost: 1
+    add: (NOT-token t1741) (token t1985)
+    del: (NOT-token t1985) (allowed) (token t1741)
+movesync-activitya-ev1 :: cost: 0
+    add: (NOT-token t1741) (token t1985) (tracepointer ev2)
+    del: (NOT-token t1985) (token t1741) (tracepointer ev1)
+step 1: state 268 applicable 2
+moveinthelog-activityp-ev2-ev3 :: cost: 1
+    add: (tracepointer ev3)
+    del: (tracepointer ev2)
+moveinthemodel-activityc :: cost: 1
+    add: (NOT-token t1985) (token t1988)
+    del: (NOT-token t1988) (allowed) (token t1985)
+step 2: state 268 applicable 3
+moveinthelog-activityc-ev3-ev4 :: cost: 1
+    add: (tracepointer ev4)
+    del: (tracepointer ev3)
+moveinthemodel-activityc :: cost: 1
+    add: (NOT-token t1985) (token t1988)
+    del: (NOT-token t1988) (allowed) (token t1985)
+movesync-activityc-ev3 :: cost: 0
+    add: (NOT-token t1985) (token t1988) (tracepointer ev4)
+    del: (NOT-token t1988) (token t1985) (tracepointer ev3)
+step 3: state 268 applicable 2
+moveinthelog-activityr-ev4-ev5 :: cost: 1
+    add: (tracepointer ev5)
+    del: (tracepointer ev4)
+moveinthemodel-activityc :: cost: 1
+    add: (NOT-token t1985) (token t1988)
+    del: (NOT-token t1988) (allowed) (token t1985)
+step 4: state 268 applicable 2
+moveinthelog-activityu-ev5-ev6 :: cost: 1
+    add: (tracepointer ev6)
+    del: (tracepointer ev5)
+moveinthemodel-activityc :: cost: 1
+    add: (NOT-token t1985) (token t1988)
+    del: (NOT-token t1988) (allowed) (token t1985)
+ground atoms: 276 groundings: 9

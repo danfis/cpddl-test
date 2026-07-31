@@ -1,0 +1,48 @@
+step 0: state 5 applicable 2
+hire-diver-d0 :: cost: 1
+    add: (at-surface d0)
+    del: (available d0)
+hire-diver-d1 :: cost: 1
+    add: (at-surface d1)
+    del: (available d1)
+step 1: state 5 applicable 3
+enter-water d0 l0 :: cost: 1
+    add: (at-diver d0 l0)
+    del: (at-surface d0)
+hire-diver-d1 :: cost: 1
+    add: (at-surface d1)
+    del: (available d1)
+prepare-tank d0 t0 t1 three four :: cost: 1
+    add: (capacity d0 three) (full t0) (holding d0 t0) (in-storage t1)
+    del: (capacity d0 four) (in-storage t0)
+step 2: state 7 applicable 3
+enter-water d0 l0 :: cost: 1
+    add: (at-diver d0 l0)
+    del: (at-surface d0)
+hire-diver-d1 :: cost: 1
+    add: (at-surface d1)
+    del: (available d1)
+prepare-tank d0 t1 t2 two three :: cost: 1
+    add: (capacity d0 two) (full t1) (holding d0 t1) (in-storage t2)
+    del: (capacity d0 three) (in-storage t1)
+step 3: state 7 applicable 5
+decompress d0 l0 :: cost: 1
+    add: (decompressing d0)
+    del: (at-diver d0 l0)
+drop-tank d0 t0 l0 three four :: cost: 1
+    add: (at-tank t0 l0) (capacity d0 four)
+    del: (capacity d0 three) (holding d0 t0)
+hire-diver-d1 :: cost: 1
+    add: (at-surface d1)
+    del: (available d1)
+step 4: state 7 applicable 3
+decompress d0 l0 :: cost: 1
+    add: (decompressing d0)
+    del: (at-diver d0 l0)
+drop-tank d0 t0 l0 three four :: cost: 1
+    add: (at-tank t0 l0) (capacity d0 four)
+    del: (capacity d0 three) (holding d0 t0)
+hire-diver-d1 :: cost: 1
+    add: (at-surface d1)
+    del: (available d1)
+ground atoms: 20 groundings: 9

@@ -1,0 +1,51 @@
+step 0: state 103 applicable 3
+drive truck1 depot1 market2 :: cost: 1
+    add: (at truck1 market2)
+    del: (at truck1 depot1)
+drive truck2 depot1 market2 :: cost: 1
+    add: (at truck2 market2)
+    del: (at truck2 depot1)
+drive truck3 depot1 market2 :: cost: 1
+    add: (at truck3 market2)
+    del: (at truck3 depot1)
+step 1: state 103 applicable 12
+buy truck1 goods1 market2 level0 level1 level0 level1 :: cost: 1
+    add: (on-sale goods1 market2 level0) (ready-to-load goods1 market2 level1)
+    del: (on-sale goods1 market2 level1) (ready-to-load goods1 market2 level0)
+buy truck1 goods10 market2 level0 level1 level0 level1 :: cost: 1
+    add: (on-sale goods10 market2 level0) (ready-to-load goods10 market2 level1)
+    del: (on-sale goods10 market2 level1) (ready-to-load goods10 market2 level0)
+buy truck1 goods2 market2 level1 level2 level0 level1 :: cost: 1
+    add: (on-sale goods2 market2 level1) (ready-to-load goods2 market2 level1)
+    del: (on-sale goods2 market2 level2) (ready-to-load goods2 market2 level0)
+step 2: state 103 applicable 3
+drive truck1 depot1 market2 :: cost: 1
+    add: (at truck1 market2)
+    del: (at truck1 depot1)
+drive truck2 depot1 market2 :: cost: 1
+    add: (at truck2 market2)
+    del: (at truck2 depot1)
+drive truck3 depot1 market2 :: cost: 1
+    add: (at truck3 market2)
+    del: (at truck3 depot1)
+step 3: state 103 applicable 12
+buy truck3 goods1 market2 level0 level1 level0 level1 :: cost: 1
+    add: (on-sale goods1 market2 level0) (ready-to-load goods1 market2 level1)
+    del: (on-sale goods1 market2 level1) (ready-to-load goods1 market2 level0)
+buy truck3 goods10 market2 level0 level1 level0 level1 :: cost: 1
+    add: (on-sale goods10 market2 level0) (ready-to-load goods10 market2 level1)
+    del: (on-sale goods10 market2 level1) (ready-to-load goods10 market2 level0)
+buy truck3 goods2 market2 level1 level2 level0 level1 :: cost: 1
+    add: (on-sale goods2 market2 level1) (ready-to-load goods2 market2 level1)
+    del: (on-sale goods2 market2 level2) (ready-to-load goods2 market2 level0)
+step 4: state 103 applicable 3
+drive truck1 depot1 market2 :: cost: 1
+    add: (at truck1 market2)
+    del: (at truck1 depot1)
+drive truck2 depot1 market2 :: cost: 1
+    add: (at truck2 market2)
+    del: (at truck2 depot1)
+drive truck3 depot1 market2 :: cost: 1
+    add: (at truck3 market2)
+    del: (at truck3 depot1)
+ground atoms: 124 groundings: 23

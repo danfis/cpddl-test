@@ -1,0 +1,12 @@
+step 0: state 6 applicable 3
+move agent-1 s-1-1 s-1-2 :: cost: 1
+    add: (at agent-1 s-1-2)
+    del: (alive agent-1) (at agent-1 s-1-1)
+move agent-1 s-1-1 s-2-1 :: cost: 1
+    add: (at agent-1 s-2-1)
+    del: (at agent-1 s-1-1)
+take agent-1 s-1-1 agent-1 :: cost: 1
+    add: (have agent-1 agent-1)
+    del: (at agent-1 s-1-1)
+step 1: state 5 applicable 0
+ground atoms: 9 groundings: 3

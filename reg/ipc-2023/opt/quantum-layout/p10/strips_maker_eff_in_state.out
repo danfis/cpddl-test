@@ -1,0 +1,23 @@
+step 0: state 46 applicable 18
+apply_cnot_l1_l4_i1 p1 p0 :: cost: 1
+    add: (NOT-rcnot l1_l4_i1) (mapped l1 p1) (mapped l4 p0)
+    del: (NOT-initialized p0) (NOT-initialized p1) (NOT-occupied_pqubit p0) (NOT-occupied_pqubit p1) (rcnot l1_l4_i1)
+apply_cnot_l1_l4_i1 p1 p2 :: cost: 1
+    add: (NOT-rcnot l1_l4_i1) (mapped l1 p1) (mapped l4 p2)
+    del: (NOT-initialized p1) (NOT-initialized p2) (NOT-occupied_pqubit p1) (NOT-occupied_pqubit p2) (rcnot l1_l4_i1)
+apply_cnot_l1_l4_i1 p11 p10 :: cost: 1
+    add: (NOT-rcnot l1_l4_i1) (mapped l1 p11) (mapped l4 p10)
+    del: (NOT-initialized p10) (NOT-initialized p11) (NOT-occupied_pqubit p10) (rcnot l1_l4_i1)
+step 1: state 44 applicable 2
+swap l1 l4 p1 p0 :: cost: 1
+    add: (mapped l1 p0) (mapped l4 p1)
+    del: (mapped l1 p1) (mapped l4 p0)
+swap-ancilary l1 p1 p2 :: cost: 1
+    add: (NOT-occupied_pqubit p1) (mapped l1 p2)
+    del: (NOT-initialized p2) (NOT-occupied_pqubit p2) (mapped l1 p1)
+step 2: state 43 applicable 1
+swap-ancilary l1 p2 p3 :: cost: 1
+    add: (NOT-occupied_pqubit p2) (mapped l1 p3)
+    del: (NOT-initialized p3) (NOT-occupied_pqubit p3) (mapped l1 p2)
+step 3: state 42 applicable 0
+ground atoms: 73 groundings: 21

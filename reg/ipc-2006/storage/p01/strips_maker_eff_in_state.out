@@ -1,0 +1,27 @@
+step 0: state 6 applicable 1
+go-out hoist0 depot0-1-1 loadarea :: cost: 1
+    add: (at hoist0 loadarea) (clear depot0-1-1)
+    del: (at hoist0 depot0-1-1)
+step 1: state 7 applicable 2
+go-in hoist0 loadarea depot0-1-1 :: cost: 1
+    add: (at hoist0 depot0-1-1)
+    del: (at hoist0 loadarea) (clear depot0-1-1)
+lift hoist0 crate0 container-0-0 loadarea container0 :: cost: 1
+    add: (clear container-0-0) (lifting hoist0 crate0)
+    del: (available hoist0) (in crate0 container0) (on crate0 container-0-0)
+step 2: state 6 applicable 1
+go-out hoist0 depot0-1-1 loadarea :: cost: 1
+    add: (at hoist0 loadarea) (clear depot0-1-1)
+    del: (at hoist0 depot0-1-1)
+step 3: state 7 applicable 2
+go-in hoist0 loadarea depot0-1-1 :: cost: 1
+    add: (at hoist0 depot0-1-1)
+    del: (at hoist0 loadarea) (clear depot0-1-1)
+lift hoist0 crate0 container-0-0 loadarea container0 :: cost: 1
+    add: (clear container-0-0) (lifting hoist0 crate0)
+    del: (available hoist0) (in crate0 container0) (on crate0 container-0-0)
+step 4: state 6 applicable 1
+go-out hoist0 depot0-1-1 loadarea :: cost: 1
+    add: (at hoist0 loadarea) (clear depot0-1-1)
+    del: (at hoist0 depot0-1-1)
+ground atoms: 10 groundings: 3

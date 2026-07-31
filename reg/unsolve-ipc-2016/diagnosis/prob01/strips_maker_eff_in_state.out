@@ -1,0 +1,36 @@
+step 0: state 77 applicable 3
+missionexec-init-mission-autotakeoff-call_set_args_heli0_ato-0-0-275_ato-0-0-275_missionexecutor :: cost: 1
+    add: (autotakeoff-mode-is-processing_ato-0-0-275) (called-by_ato-0-0-275_missionexecutor) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-init-call_heli0)
+    del: (autotakeoff-mode-is-pre_init_ato-0-0-275) (missionexec-mission-idle_heli0)
+missionexec-init-mission-fly3d-call_set_args_heli0_f3d-0-0-346_f3d-0-0-346_missionexecutor :: cost: 1
+    add: (called-by_f3d-0-0-346_missionexecutor) (fly3d-mode-is-processing_f3d-0-0-346) (missionexec-active-mission_heli0_f3d-0-0-346) (missionexec-mission-init-call_heli0)
+    del: (fly3d-mode-is-pre_init_f3d-0-0-346) (missionexec-mission-idle_heli0)
+missionexec-init-mission-navtopoint-call_set_args_heli0_nav-0-0-275_nav-0-0-275_missionexecutor :: cost: 1
+    add: (called-by_nav-0-0-275_missionexecutor) (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
+    del: (missionexec-mission-idle_heli0) (navtopoint-mode-is-pre_init_nav-0-0-275)
+step 1: state 79 applicable 2
+missionexec-init-mission-fail-fly3d-init_fail_heli0_f3d-0-0-346_f3d-0-0-346 :: cost: 1
+    add: (fly3d-mode-is-failed_f3d-0-0-346) (missionexec-mission-over_heli0)
+    del: (fly3d-mode-is-processing_f3d-0-0-346) (missionexec-mission-init-call_heli0)
+missionexec-init-mission-ok-fly3d-init_ok-1_heli0_f3d-0-0-346_f3d-0-0-346_missionexecutor_n0_n1 :: cost: 1
+    add: (fly3d-mode-is-ready_f3d-0-0-346) (missionexec-mission-ready_heli0)
+    del: (fault-count-4_lost_f3d-0-0-346_created_missionexecutor_n0) (fly3d-mode-is-processing_f3d-0-0-346) (missionexec-mission-init-call_heli0)
+step 2: state 79 applicable 1
+missionexec-destroy-mission-fly3d-call_destroy_when_failed-1_heli0_f3d-0-0-346_f3d-0-0-346_n0_n1 :: cost: 1
+    add: (missionexec-mission-idle_heli0)
+    del: (fault-count-3_lost_f3d-0-0-346_destroyed_n0) (fly3d-mode-is-failed_f3d-0-0-346) (missionexec-mission-over_heli0)
+step 3: state 77 applicable 2
+missionexec-init-mission-autotakeoff-call_set_args_heli0_ato-0-0-275_ato-0-0-275_missionexecutor :: cost: 1
+    add: (autotakeoff-mode-is-processing_ato-0-0-275) (called-by_ato-0-0-275_missionexecutor) (missionexec-active-mission_heli0_ato-0-0-275) (missionexec-mission-init-call_heli0)
+    del: (autotakeoff-mode-is-pre_init_ato-0-0-275) (missionexec-mission-idle_heli0)
+missionexec-init-mission-navtopoint-call_set_args_heli0_nav-0-0-275_nav-0-0-275_missionexecutor :: cost: 1
+    add: (called-by_nav-0-0-275_missionexecutor) (missionexec-active-mission_heli0_nav-0-0-275) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
+    del: (missionexec-mission-idle_heli0) (navtopoint-mode-is-pre_init_nav-0-0-275)
+step 4: state 79 applicable 2
+missionexec-init-mission-fail-navtopoint-init_fail_heli0_nav-0-0-275_nav-0-0-275 :: cost: 1
+    add: (missionexec-mission-over_heli0) (navtopoint-mode-is-failed_nav-0-0-275)
+    del: (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
+missionexec-init-mission-ok-navtopoint-init_ok-1_heli0_nav-0-0-275_nav-0-0-275_missionexecutor_n0_n1 :: cost: 1
+    add: (missionexec-mission-ready_heli0) (navtopoint-mode-is-ready_nav-0-0-275)
+    del: (fault-count-4_lost_nav-0-0-275_created_missionexecutor_n0) (missionexec-mission-init-call_heli0) (navtopoint-mode-is-processing_nav-0-0-275)
+ground atoms: 93 groundings: 8

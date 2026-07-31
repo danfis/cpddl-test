@@ -1,0 +1,33 @@
+step 0: state 261 applicable 16
+go robot-1 east :: cost: 1
+    add: (is-moving robot-1 east)
+    del: (nothing-is-moving)
+go robot-1 north :: cost: 1
+    add: (is-moving robot-1 north)
+    del: (nothing-is-moving)
+go robot-1 south :: cost: 1
+    add: (is-moving robot-1 south)
+    del: (nothing-is-moving)
+step 1: state 261 applicable 1
+stop-at-barrier robot-2 cell-1-16 west :: cost: 0
+    add: (nothing-is-moving)
+    del: (is-moving robot-2 west)
+step 2: state 261 applicable 16
+go robot-1 east :: cost: 1
+    add: (is-moving robot-1 east)
+    del: (nothing-is-moving)
+go robot-1 north :: cost: 1
+    add: (is-moving robot-1 north)
+    del: (nothing-is-moving)
+go robot-1 south :: cost: 1
+    add: (is-moving robot-1 south)
+    del: (nothing-is-moving)
+step 3: state 261 applicable 1
+step robot-2 cell-1-16 cell-1-15 north :: cost: 0
+    add: (NOT-free cell-1-15) (at robot-2 cell-1-15) (free cell-1-16)
+    del: (NOT-free cell-1-16) (at robot-2 cell-1-16) (free cell-1-15)
+step 4: state 261 applicable 1
+step robot-2 cell-1-15 cell-1-14 north :: cost: 0
+    add: (NOT-free cell-1-14) (at robot-2 cell-1-14) (free cell-1-15)
+    del: (NOT-free cell-1-15) (at robot-2 cell-1-15) (free cell-1-14)
+ground atoms: 282 groundings: 19

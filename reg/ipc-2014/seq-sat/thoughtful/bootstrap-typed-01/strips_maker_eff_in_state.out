@@ -1,0 +1,51 @@
+step 0: state 35 applicable 3
+col-to-home ca sa c n1 c0 n0 :: cost: 1
+    add: (clear sa) (faceup sa) (home ca) (on ca c0)
+    del: (clear ca) (faceup ca) (home c0) (on ca sa)
+col-to-home-b ha h0 h n1 n0 coln0 coln1 :: cost: 1
+    add: (colspace coln1) (home ha)
+    del: (bottomcol ha) (clear ha) (colspace coln0) (faceup ha) (home h0)
+turn-deck d5 h4 :: cost: 1
+    add: (talonplayable h4)
+    del: (talonplayable d5)
+step 1: state 35 applicable 3
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (clear c3) (faceup c3) (home sa) (on sa s0)
+    del: (clear sa) (faceup sa) (home s0) (on sa c3)
+col-to-home-b ha h0 h n1 n0 coln0 coln1 :: cost: 1
+    add: (colspace coln1) (home ha)
+    del: (bottomcol ha) (clear ha) (colspace coln0) (faceup ha) (home h0)
+turn-deck d5 h4 :: cost: 1
+    add: (talonplayable h4)
+    del: (talonplayable d5)
+step 2: state 32 applicable 4
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (clear c3) (faceup c3) (home sa) (on sa s0)
+    del: (clear sa) (faceup sa) (home s0) (on sa c3)
+move-col-to-col-c s5 h3 coln1 coln0 :: cost: 1
+    add: (bottomcol s5) (clear h3) (colspace coln0) (faceup h3)
+    del: (colspace coln1) (on s5 h3)
+tal-to-col-e d5 d3 h4 coln1 coln0 :: cost: 1
+    add: (bottomcol d5) (clear d5) (colspace coln0) (faceup d5) (ontalon h4 d3) (talonplayable d3)
+    del: (colspace coln1) (ontalon d5 d3) (ontalon h4 d5) (talonplayable d5)
+step 3: state 34 applicable 4
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (clear c3) (faceup c3) (home sa) (on sa s0)
+    del: (clear sa) (faceup sa) (home s0) (on sa c3)
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (clear h5) (faceup h5) (on c4 d5)
+    del: (clear d5) (on c4 h5)
+tal-to-col d3 s3 c4 h4 :: cost: 1
+    add: (clear d3) (faceup d3) (on d3 c4) (ontalon h4 s3) (talonplayable s3)
+    del: (clear c4) (ontalon d3 s3) (ontalon h4 d3) (talonplayable d3)
+step 4: state 34 applicable 4
+col-to-home sa c3 s n1 s0 n0 :: cost: 1
+    add: (clear c3) (faceup c3) (home sa) (on sa s0)
+    del: (clear sa) (faceup sa) (home s0) (on sa c3)
+move-col-to-col c4 h5 d5 :: cost: 1
+    add: (clear h5) (faceup h5) (on c4 d5)
+    del: (clear d5) (on c4 h5)
+tal-to-col h4 d3 s5 c2 :: cost: 1
+    add: (clear h4) (faceup h4) (on h4 s5) (ontalon c2 d3) (talonplayable d3)
+    del: (clear s5) (ontalon c2 h4) (ontalon h4 d3) (talonplayable h4)
+ground atoms: 67 groundings: 11

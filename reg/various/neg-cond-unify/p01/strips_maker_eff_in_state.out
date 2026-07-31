@@ -1,0 +1,48 @@
+step 0: state 4 applicable 16
+cond-add o1 o1 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+step 1: state 4 applicable 16
+cond-add o1 o1 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o1 o2 :: cost: 1
+    add: (NOT-p o1)
+    del: (p o1)
+cond-add o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+step 2: state 4 applicable 9
+check o1 :: cost: 1
+    add: (r o1)
+    del:
+cond-add o2 o1 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+cond-add o2 o2 :: cost: 1
+    add: (NOT-p o2)
+    del: (p o2)
+step 3: state 4 applicable 2
+check o1 :: cost: 1
+    add: (r o1)
+    del:
+check o2 :: cost: 1
+    add: (r o2)
+    del:
+step 4: state 5 applicable 3
+check o1 :: cost: 1
+    add: (r o1)
+    del:
+check o2 :: cost: 1
+    add:
+    del:
+set-q o2 :: cost: 1
+    add: (q o2)
+    del: (NOT-q o2)
+ground atoms: 9 groundings: 19

@@ -1,0 +1,48 @@
+step 0: state 20 applicable 2
+load data-0-3 server3 number4 number8 number0 number4 :: cost: 4
+    add: (cached data-0-3 server3) (usage server3 number4)
+    del: (NOT-cached data-0-3 server3) (usage server3 number0)
+load data-0-5 server1 number5 number16 number0 number5 :: cost: 25
+    add: (cached data-0-5 server1) (usage server1 number5)
+    del: (NOT-cached data-0-5 server1) (usage server1 number0)
+step 1: state 20 applicable 4
+load data-0-5 server1 number5 number16 number0 number5 :: cost: 25
+    add: (cached data-0-5 server1) (usage server1 number5)
+    del: (NOT-cached data-0-5 server1) (usage server1 number0)
+release data-0-3 server3 number4 number4 number0 :: cost: 0
+    add: (NOT-cached data-0-3 server3) (usage server3 number0)
+    del: (cached data-0-3 server3) (usage server3 number4)
+save data-0-3 number4 server3 :: cost: 4
+    add:
+    del:
+step 2: state 20 applicable 4
+load data-0-5 server1 number5 number16 number0 number5 :: cost: 25
+    add: (cached data-0-5 server1) (usage server1 number5)
+    del: (NOT-cached data-0-5 server1) (usage server1 number0)
+release data-0-3 server3 number4 number4 number0 :: cost: 0
+    add: (NOT-cached data-0-3 server3) (usage server3 number0)
+    del: (cached data-0-3 server3) (usage server3 number4)
+save data-0-3 number4 server3 :: cost: 4
+    add:
+    del:
+step 3: state 20 applicable 6
+release data-0-3 server3 number4 number4 number0 :: cost: 0
+    add: (NOT-cached data-0-3 server3) (usage server3 number0)
+    del: (cached data-0-3 server3) (usage server3 number4)
+release data-0-5 server1 number5 number5 number0 :: cost: 0
+    add: (NOT-cached data-0-5 server1) (usage server1 number0)
+    del: (cached data-0-5 server1) (usage server1 number5)
+save data-0-3 number4 server3 :: cost: 4
+    add:
+    del:
+step 4: state 20 applicable 6
+release data-0-3 server3 number4 number4 number0 :: cost: 0
+    add: (NOT-cached data-0-3 server3) (usage server3 number0)
+    del: (cached data-0-3 server3) (usage server3 number4)
+release data-0-5 server1 number5 number5 number0 :: cost: 0
+    add: (NOT-cached data-0-5 server1) (usage server1 number0)
+    del: (cached data-0-5 server1) (usage server1 number5)
+save data-0-3 number4 server3 :: cost: 4
+    add:
+    del:
+ground atoms: 29 groundings: 9

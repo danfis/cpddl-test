@@ -1,0 +1,51 @@
+step 0: state 21 applicable 18
+board p11 slow1-0 n7 n0 n1 :: cost: 0
+    add: (boarded p11 slow1-0) (passengers slow1-0 n1)
+    del: (passenger-at p11 n7) (passengers slow1-0 n0)
+board p2 slow1-0 n7 n0 n1 :: cost: 0
+    add: (boarded p2 slow1-0) (passengers slow1-0 n1)
+    del: (passenger-at p2 n7) (passengers slow1-0 n0)
+move-down-fast fast0 n2 n0 :: cost: 7
+    add: (lift-at fast0 n0)
+    del: (lift-at fast0 n2)
+step 1: state 21 applicable 16
+move-down-fast fast0 n2 n0 :: cost: 7
+    add: (lift-at fast0 n0)
+    del: (lift-at fast0 n2)
+move-down-fast fast1 n4 n0 :: cost: 13
+    add: (lift-at fast1 n0)
+    del: (lift-at fast1 n4)
+move-down-fast fast1 n4 n2 :: cost: 7
+    add: (lift-at fast1 n2)
+    del: (lift-at fast1 n4)
+step 2: state 21 applicable 17
+board p9 slow0-0 n1 n0 n1 :: cost: 0
+    add: (boarded p9 slow0-0) (passengers slow0-0 n1)
+    del: (passenger-at p9 n1) (passengers slow0-0 n0)
+move-down-fast fast0 n2 n0 :: cost: 7
+    add: (lift-at fast0 n0)
+    del: (lift-at fast0 n2)
+move-down-fast fast1 n4 n0 :: cost: 13
+    add: (lift-at fast1 n0)
+    del: (lift-at fast1 n4)
+step 3: state 21 applicable 16
+move-down-fast fast0 n2 n0 :: cost: 7
+    add: (lift-at fast0 n0)
+    del: (lift-at fast0 n2)
+move-down-fast fast1 n4 n0 :: cost: 13
+    add: (lift-at fast1 n0)
+    del: (lift-at fast1 n4)
+move-down-fast fast1 n4 n2 :: cost: 7
+    add: (lift-at fast1 n2)
+    del: (lift-at fast1 n4)
+step 4: state 21 applicable 19
+board p10 slow0-0 n3 n0 n1 :: cost: 0
+    add: (boarded p10 slow0-0) (passengers slow0-0 n1)
+    del: (passenger-at p10 n3) (passengers slow0-0 n0)
+board p6 slow0-0 n3 n0 n1 :: cost: 0
+    add: (boarded p6 slow0-0) (passengers slow0-0 n1)
+    del: (passenger-at p6 n3) (passengers slow0-0 n0)
+board p7 slow0-0 n3 n0 n1 :: cost: 0
+    add: (boarded p7 slow0-0) (passengers slow0-0 n1)
+    del: (passenger-at p7 n3) (passengers slow0-0 n0)
+ground atoms: 45 groundings: 34

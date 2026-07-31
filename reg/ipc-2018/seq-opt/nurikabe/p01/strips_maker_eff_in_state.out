@@ -1,0 +1,48 @@
+step 0: state 44 applicable 3
+move pos-0-0 pos-0-1 :: cost: 1
+    add: (robot-pos pos-0-1)
+    del: (robot-pos pos-0-0)
+move pos-0-0 pos-1-0 :: cost: 1
+    add: (robot-pos pos-1-0)
+    del: (robot-pos pos-0-0)
+start-painting pos-0-0 g0 n2 n1 :: cost: 1
+    add: (painting g0) (remaining-cells g0 n1)
+    del: (NOT-painted pos-0-0) (moving) (remaining-cells g0 n2)
+step 1: state 44 applicable 3
+move pos-0-1 pos-0-0 :: cost: 1
+    add: (robot-pos pos-0-0)
+    del: (robot-pos pos-0-1)
+move pos-0-1 pos-0-2 :: cost: 1
+    add: (robot-pos pos-0-2)
+    del: (robot-pos pos-0-1)
+move pos-0-1 pos-1-1 :: cost: 1
+    add: (robot-pos pos-1-1)
+    del: (robot-pos pos-0-1)
+step 2: state 44 applicable 2
+move pos-0-2 pos-0-1 :: cost: 1
+    add: (robot-pos pos-0-1)
+    del: (robot-pos pos-0-2)
+move pos-0-2 pos-1-2 :: cost: 1
+    add: (robot-pos pos-1-2)
+    del: (robot-pos pos-0-2)
+step 3: state 44 applicable 3
+move pos-0-1 pos-0-0 :: cost: 1
+    add: (robot-pos pos-0-0)
+    del: (robot-pos pos-0-1)
+move pos-0-1 pos-0-2 :: cost: 1
+    add: (robot-pos pos-0-2)
+    del: (robot-pos pos-0-1)
+move pos-0-1 pos-1-1 :: cost: 1
+    add: (robot-pos pos-1-1)
+    del: (robot-pos pos-0-1)
+step 4: state 44 applicable 3
+move pos-0-0 pos-0-1 :: cost: 1
+    add: (robot-pos pos-0-1)
+    del: (robot-pos pos-0-0)
+move pos-0-0 pos-1-0 :: cost: 1
+    add: (robot-pos pos-1-0)
+    del: (robot-pos pos-0-0)
+start-painting pos-0-0 g0 n2 n1 :: cost: 1
+    add: (painting g0) (remaining-cells g0 n1)
+    del: (NOT-painted pos-0-0) (moving) (remaining-cells g0 n2)
+ground atoms: 51 groundings: 8

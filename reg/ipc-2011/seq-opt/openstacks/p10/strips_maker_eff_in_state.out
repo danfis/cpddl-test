@@ -1,0 +1,39 @@
+step 0: state 53 applicable 1
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+step 1: state 53 applicable 27
+open-new-stack n1 n2 :: cost: 1
+    add: (stacks-avail n2)
+    del: (stacks-avail n1)
+start-order o1 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o1)
+    del: (stacks-avail n1) (waiting o1)
+start-order o10 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o10)
+    del: (stacks-avail n1) (waiting o10)
+step 2: state 53 applicable 2
+make-product-p11 :: cost: 0
+    add: (made p11)
+    del: (not-made p11)
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+step 3: state 53 applicable 27
+make-product-p11 :: cost: 0
+    add: (made p11)
+    del: (not-made p11)
+open-new-stack n1 n2 :: cost: 1
+    add: (stacks-avail n2)
+    del: (stacks-avail n1)
+start-order o10 n1 n0 :: cost: 0
+    add: (stacks-avail n0) (started o10)
+    del: (stacks-avail n1) (waiting o10)
+step 4: state 53 applicable 2
+make-product-p11 :: cost: 0
+    add: (made p11)
+    del: (not-made p11)
+open-new-stack n0 n1 :: cost: 1
+    add: (stacks-avail n1)
+    del: (stacks-avail n0)
+ground atoms: 82 groundings: 29

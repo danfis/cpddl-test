@@ -1,0 +1,48 @@
+step 0: state 14 applicable 2
+drive t0 l9 l4 level175 level3 level178 :: cost: 1
+    add: (at t0 l4) (fuel t0 level175)
+    del: (at t0 l9) (fuel t0 level178)
+drive t0 l9 l5 level160 level18 level178 :: cost: 1
+    add: (at t0 l5) (fuel t0 level160)
+    del: (at t0 l9) (fuel t0 level178)
+step 1: state 14 applicable 5
+drive t0 l4 l0 level161 level14 level175 :: cost: 1
+    add: (at t0 l0) (fuel t0 level161)
+    del: (at t0 l4) (fuel t0 level175)
+drive t0 l4 l12 level154 level21 level175 :: cost: 1
+    add: (at t0 l12) (fuel t0 level154)
+    del: (at t0 l4) (fuel t0 level175)
+drive t0 l4 l2 level161 level14 level175 :: cost: 1
+    add: (at t0 l2) (fuel t0 level161)
+    del: (at t0 l4) (fuel t0 level175)
+step 2: state 14 applicable 3
+drive t0 l0 l4 level147 level14 level161 :: cost: 1
+    add: (at t0 l4) (fuel t0 level147)
+    del: (at t0 l0) (fuel t0 level161)
+drive t0 l0 l5 level157 level4 level161 :: cost: 1
+    add: (at t0 l5) (fuel t0 level157)
+    del: (at t0 l0) (fuel t0 level161)
+drive t0 l0 l7 level160 level1 level161 :: cost: 1
+    add: (at t0 l7) (fuel t0 level160)
+    del: (at t0 l0) (fuel t0 level161)
+step 3: state 14 applicable 3
+drive t0 l7 l0 level159 level1 level160 :: cost: 1
+    add: (at t0 l0) (fuel t0 level159)
+    del: (at t0 l7) (fuel t0 level160)
+drive t0 l7 l8 level142 level18 level160 :: cost: 1
+    add: (at t0 l8) (fuel t0 level142)
+    del: (at t0 l7) (fuel t0 level160)
+load p9 t0 l7 :: cost: 1
+    add: (in p9 t0)
+    del: (at p9 l7)
+step 4: state 14 applicable 3
+drive t0 l7 l0 level159 level1 level160 :: cost: 1
+    add: (at t0 l0) (fuel t0 level159)
+    del: (at t0 l7) (fuel t0 level160)
+drive t0 l7 l8 level142 level18 level160 :: cost: 1
+    add: (at t0 l8) (fuel t0 level142)
+    del: (at t0 l7) (fuel t0 level160)
+unload p9 t0 l7 :: cost: 1
+    add: (at p9 l7)
+    del: (in p9 t0)
+ground atoms: 32 groundings: 14

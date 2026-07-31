@@ -1,0 +1,51 @@
+step 0: state 50 applicable 12
+move d6 d9 c7 :: cost: 1
+    add: (clear d9) (on d6 c7)
+    del: (clear c7) (on d6 d9)
+move h6 h8 c7 :: cost: 1
+    add: (clear h8) (on h6 c7)
+    del: (clear c7) (on h6 h8)
+sendtofree c6 h5 n4 n3 :: cost: 1
+    add: (cellspace n3) (clear h5) (incell c6)
+    del: (cellspace n4) (clear c6) (on c6 h5)
+step 1: state 50 applicable 11
+move h8 d4 s9 :: cost: 1
+    add: (clear d4) (on h8 s9)
+    del: (clear s9) (on h8 d4)
+sendtofree c6 h5 n4 n3 :: cost: 1
+    add: (cellspace n3) (clear h5) (incell c6)
+    del: (cellspace n4) (clear c6) (on c6 h5)
+sendtofree ca d7 n4 n3 :: cost: 1
+    add: (cellspace n3) (clear d7) (incell ca)
+    del: (cellspace n4) (clear ca) (on ca d7)
+step 2: state 50 applicable 11
+move ca d7 h2 :: cost: 1
+    add: (clear d7) (on ca h2)
+    del: (clear h2) (on ca d7)
+sendtofree c6 h5 n3 n2 :: cost: 1
+    add: (cellspace n2) (clear h5) (incell c6)
+    del: (cellspace n3) (clear c6) (on c6 h5)
+sendtofree ca d7 n3 n2 :: cost: 1
+    add: (cellspace n2) (clear d7) (incell ca)
+    del: (cellspace n3) (clear ca) (on ca d7)
+step 3: state 50 applicable 14
+colfromfreecell h6 c7 n2 n3 :: cost: 1
+    add: (cellspace n3) (clear h6) (on h6 c7)
+    del: (cellspace n2) (clear c7) (incell h6)
+move c7 c8 h8 :: cost: 1
+    add: (clear c8) (on c7 h8)
+    del: (clear h8) (on c7 c8)
+move ca d7 h2 :: cost: 1
+    add: (clear d7) (on ca h2)
+    del: (clear h2) (on ca d7)
+step 4: state 50 applicable 13
+colfromfreecell h6 c7 n1 n2 :: cost: 1
+    add: (cellspace n2) (clear h6) (on h6 c7)
+    del: (cellspace n1) (clear c7) (incell h6)
+move ca d7 h2 :: cost: 1
+    add: (clear d7) (on ca h2)
+    del: (clear h2) (on ca d7)
+move d6 d9 c7 :: cost: 1
+    add: (clear d9) (on d6 c7)
+    del: (clear c7) (on d6 d9)
+ground atoms: 83 groundings: 43

@@ -1,0 +1,51 @@
+step 0: state 18 applicable 11
+do-plane p2 planer0 rough black colourfragments :: cost: 10
+    add: (colour p2 natural) (surface-condition p2 smooth) (treatment p2 untreated)
+    del: (colour p2 black) (surface-condition p2 rough) (treatment p2 colourfragments)
+do-saw-large b0 p3 saw0 teak rough s3 s1 s2 s0 :: cost: 30
+    add: (available p3) (boardsize b0 s0) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
+    del: (unused p3)
+do-saw-large b1 p3 saw0 mahogany rough s5 s3 s4 s2 :: cost: 30
+    add: (available p3) (boardsize b1 s2) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 mahogany)
+    del: (unused p3)
+step 1: state 18 applicable 15
+do-glaze p2 glazer0 green :: cost: 10
+    add: (colour p2 green) (treatment p2 glazed)
+    del: (colour p2 natural) (treatment p2 untreated)
+do-grind p2 grinder0 smooth natural untreated untreated :: cost: 15
+    add: (surface-condition p2 verysmooth)
+    del: (surface-condition p2 smooth)
+do-immersion-varnish p2 immersion-varnisher0 green smooth :: cost: 10
+    add: (colour p2 green) (treatment p2 varnished)
+    del: (colour p2 natural) (treatment p2 untreated)
+step 2: state 18 applicable 12
+do-grind p2 grinder0 smooth green varnished colourfragments :: cost: 15
+    add: (colour p2 natural) (surface-condition p2 verysmooth) (treatment p2 colourfragments)
+    del: (colour p2 green) (surface-condition p2 smooth) (treatment p2 varnished)
+do-plane p2 planer0 smooth green varnished :: cost: 10
+    add: (colour p2 natural) (treatment p2 untreated)
+    del: (colour p2 green) (treatment p2 varnished)
+do-saw-large b0 p3 saw0 teak rough s3 s1 s2 s0 :: cost: 30
+    add: (available p3) (boardsize b0 s0) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
+    del: (unused p3)
+step 3: state 17 applicable 11
+cut-board-large b0 p3 highspeed-saw0 teak rough s3 s1 s2 s0 :: cost: 10
+    add: (available p3) (boardsize b0 s0) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
+    del: (unused p3)
+cut-board-medium b0 p0 highspeed-saw0 teak rough s3 s2 s1 :: cost: 10
+    add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (wood p0 teak)
+    del: (unused p0)
+cut-board-medium b0 p4 highspeed-saw0 teak rough s3 s2 s1 :: cost: 10
+    add: (available p4) (boardsize b0 s1) (colour p4 natural) (surface-condition p4 rough) (treatment p4 untreated) (wood p4 teak)
+    del: (unused p4)
+step 4: state 22 applicable 13
+cut-board-large b0 p3 highspeed-saw0 teak rough s3 s1 s2 s0 :: cost: 10
+    add: (available p3) (boardsize b0 s0) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
+    del: (unused p3)
+cut-board-medium b0 p0 highspeed-saw0 teak rough s2 s1 s0 :: cost: 10
+    add: (available p0) (boardsize b0 s0) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (wood p0 teak)
+    del: (unused p0)
+cut-board-medium b0 p0 highspeed-saw0 teak rough s3 s2 s1 :: cost: 10
+    add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (wood p0 teak)
+    del: (unused p0)
+ground atoms: 60 groundings: 27

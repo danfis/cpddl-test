@@ -1,0 +1,51 @@
+step 0: state 18 applicable 8
+move diamonda hearta club2 :: cost: 1
+    add: (clear hearta) (on diamonda club2)
+    del: (clear club2) (on diamonda hearta)
+move spadea spade2 heart2 :: cost: 1
+    add: (clear spade2) (on spadea heart2)
+    del: (clear heart2) (on spadea spade2)
+sendtofree club2 diamond2 n2 n1 :: cost: 1
+    add: (cellspace n1) (clear diamond2) (incell club2)
+    del: (cellspace n2) (clear club2) (on club2 diamond2)
+step 1: state 18 applicable 8
+move diamonda hearta club2 :: cost: 1
+    add: (clear hearta) (on diamonda club2)
+    del: (clear club2) (on diamonda hearta)
+move diamonda hearta spade2 :: cost: 1
+    add: (clear hearta) (on diamonda spade2)
+    del: (clear spade2) (on diamonda hearta)
+sendtofree club2 diamond2 n2 n1 :: cost: 1
+    add: (cellspace n1) (clear diamond2) (incell club2)
+    del: (cellspace n2) (clear club2) (on club2 diamond2)
+step 2: state 18 applicable 9
+move diamonda spade2 club2 :: cost: 1
+    add: (clear spade2) (on diamonda club2)
+    del: (clear club2) (on diamonda spade2)
+move-b hearta club2 n0 n1 :: cost: 1
+    add: (colspace n1) (on hearta club2)
+    del: (bottomcol hearta) (clear club2) (colspace n0)
+sendtofree club2 diamond2 n2 n1 :: cost: 1
+    add: (cellspace n1) (clear diamond2) (incell club2)
+    del: (cellspace n2) (clear club2) (on club2 diamond2)
+step 3: state 18 applicable 10
+colfromfreecell spadea heart2 n1 n2 :: cost: 1
+    add: (cellspace n2) (clear spadea) (on spadea heart2)
+    del: (cellspace n1) (clear heart2) (incell spadea)
+homefromfreecell spadea spade n1 spade0 n0 n1 n2 :: cost: 1
+    add: (cellspace n2) (home spadea)
+    del: (cellspace n1) (home spade0) (incell spadea)
+move diamonda spade2 club2 :: cost: 1
+    add: (clear spade2) (on diamonda club2)
+    del: (clear club2) (on diamonda spade2)
+step 4: state 18 applicable 5
+colfromfreecell spadea diamond2 n0 n1 :: cost: 1
+    add: (cellspace n1) (clear spadea) (on spadea diamond2)
+    del: (cellspace n0) (clear diamond2) (incell spadea)
+colfromfreecell spadea heart2 n0 n1 :: cost: 1
+    add: (cellspace n1) (clear spadea) (on spadea heart2)
+    del: (cellspace n0) (clear heart2) (incell spadea)
+homefromfreecell spadea spade n1 spade0 n0 n0 n1 :: cost: 1
+    add: (cellspace n1) (home spadea)
+    del: (cellspace n0) (home spade0) (incell spadea)
+ground atoms: 39 groundings: 27

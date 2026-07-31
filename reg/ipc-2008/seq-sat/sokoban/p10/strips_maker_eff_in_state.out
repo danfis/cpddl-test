@@ -1,0 +1,39 @@
+step 0: state 231 applicable 2
+move player-01 pos-04-16 pos-03-16 dir-left :: cost: 0
+    add: (at player-01 pos-03-16) (clear pos-04-16)
+    del: (at player-01 pos-04-16) (clear pos-03-16)
+move player-01 pos-04-16 pos-05-16 dir-right :: cost: 0
+    add: (at player-01 pos-05-16) (clear pos-04-16)
+    del: (at player-01 pos-04-16) (clear pos-05-16)
+step 1: state 231 applicable 3
+move player-01 pos-03-16 pos-02-16 dir-left :: cost: 0
+    add: (at player-01 pos-02-16) (clear pos-03-16)
+    del: (at player-01 pos-03-16) (clear pos-02-16)
+move player-01 pos-03-16 pos-04-16 dir-right :: cost: 0
+    add: (at player-01 pos-04-16) (clear pos-03-16)
+    del: (at player-01 pos-03-16) (clear pos-04-16)
+push-to-nongoal player-01 stone-01 pos-03-16 pos-03-15 pos-03-14 dir-up :: cost: 1
+    add: (at player-01 pos-03-15) (at stone-01 pos-03-14) (clear pos-03-16)
+    del: (at player-01 pos-03-16) (at stone-01 pos-03-15) (clear pos-03-14)
+step 2: state 231 applicable 2
+move player-01 pos-04-16 pos-03-16 dir-left :: cost: 0
+    add: (at player-01 pos-03-16) (clear pos-04-16)
+    del: (at player-01 pos-04-16) (clear pos-03-16)
+move player-01 pos-04-16 pos-05-16 dir-right :: cost: 0
+    add: (at player-01 pos-05-16) (clear pos-04-16)
+    del: (at player-01 pos-04-16) (clear pos-05-16)
+step 3: state 231 applicable 3
+move player-01 pos-03-16 pos-02-16 dir-left :: cost: 0
+    add: (at player-01 pos-02-16) (clear pos-03-16)
+    del: (at player-01 pos-03-16) (clear pos-02-16)
+move player-01 pos-03-16 pos-04-16 dir-right :: cost: 0
+    add: (at player-01 pos-04-16) (clear pos-03-16)
+    del: (at player-01 pos-03-16) (clear pos-04-16)
+push-to-nongoal player-01 stone-01 pos-03-16 pos-03-15 pos-03-14 dir-up :: cost: 1
+    add: (at player-01 pos-03-15) (at stone-01 pos-03-14) (clear pos-03-16)
+    del: (at player-01 pos-03-16) (at stone-01 pos-03-15) (clear pos-03-14)
+step 4: state 231 applicable 1
+move player-01 pos-02-16 pos-03-16 dir-right :: cost: 0
+    add: (at player-01 pos-03-16) (clear pos-02-16)
+    del: (at player-01 pos-02-16) (clear pos-03-16)
+ground atoms: 238 groundings: 6

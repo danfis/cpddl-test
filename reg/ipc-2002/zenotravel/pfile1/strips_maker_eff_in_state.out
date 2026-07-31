@@ -1,0 +1,45 @@
+step 0: state 4 applicable 5
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+fly plane1 city0 city0 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city0 city1 fl1 fl0 :: cost: 1
+    add: (at plane1 city1) (fuel-level plane1 fl0)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+step 1: state 4 applicable 5
+debark person1 plane1 city0 :: cost: 1
+    add: (at person1 city0)
+    del: (in person1 plane1)
+fly plane1 city0 city0 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city0 city1 fl1 fl0 :: cost: 1
+    add: (at plane1 city1) (fuel-level plane1 fl0)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+step 2: state 4 applicable 2
+debark person1 plane1 city0 :: cost: 1
+    add: (at person1 city0)
+    del: (in person1 plane1)
+refuel plane1 city0 fl0 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl0)
+step 3: state 4 applicable 2
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+refuel plane1 city0 fl0 fl1 :: cost: 1
+    add: (fuel-level plane1 fl1)
+    del: (fuel-level plane1 fl0)
+step 4: state 4 applicable 5
+board person1 plane1 city0 :: cost: 1
+    add: (in person1 plane1)
+    del: (at person1 city0)
+fly plane1 city0 city0 fl1 fl0 :: cost: 1
+    add: (fuel-level plane1 fl0)
+    del: (fuel-level plane1 fl1)
+fly plane1 city0 city1 fl1 fl0 :: cost: 1
+    add: (at plane1 city1) (fuel-level plane1 fl0)
+    del: (at plane1 city0) (fuel-level plane1 fl1)
+ground atoms: 9 groundings: 7

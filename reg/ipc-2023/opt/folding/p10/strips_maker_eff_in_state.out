@@ -1,0 +1,27 @@
+step 0: state 743 applicable 26
+rotate n1 clockwise up right :: cost: 1
+    add: (heading n1 right) (node-first-pass-next n1 clockwise n1)
+    del: (NOT-rotating) (heading n1 up)
+rotate n1 counterclockwise up left :: cost: 1
+    add: (heading n1 left) (node-first-pass-next n1 counterclockwise n1)
+    del: (NOT-rotating) (heading n1 up)
+rotate n10 clockwise up right :: cost: 1
+    add: (heading n10 right) (node-first-pass-next n10 clockwise n10)
+    del: (NOT-rotating) (heading n10 up)
+step 1: state 743 applicable 1
+rotate-first-pass n1 clockwise n1 n2 c14 c15 up right :: cost: 0
+    add: (free c14 c15) (heading n2 right) (node-first-pass-next n1 clockwise n2)
+    del: (at n2 c14 c15) (heading n2 up) (node-first-pass-next n1 clockwise n1)
+step 2: state 743 applicable 1
+rotate-first-pass n1 clockwise n2 n3 c14 c16 up right :: cost: 0
+    add: (free c14 c16) (heading n3 right) (node-first-pass-next n1 clockwise n3)
+    del: (at n3 c14 c16) (heading n3 up) (node-first-pass-next n1 clockwise n2)
+step 3: state 743 applicable 1
+rotate-first-pass n1 clockwise n3 n4 c14 c17 up right :: cost: 0
+    add: (free c14 c17) (heading n4 right) (node-first-pass-next n1 clockwise n4)
+    del: (at n4 c14 c17) (heading n4 up) (node-first-pass-next n1 clockwise n3)
+step 4: state 743 applicable 1
+rotate-first-pass n1 clockwise n4 n5 c14 c18 up right :: cost: 0
+    add: (free c14 c18) (heading n5 right) (node-first-pass-next n1 clockwise n5)
+    del: (at n5 c14 c18) (heading n5 up) (node-first-pass-next n1 clockwise n4)
+ground atoms: 803 groundings: 30

@@ -1,0 +1,51 @@
+step 0: state 19 applicable 3
+get_domain id_yrat id_khost str__o :: cost: 1
+    add: (knows id_adomain) (knows_property id_adomain pdns_domain) (knows_property id_adomain phosts) (knows_property id_adomain pwindows_domain) (knows_property id_khost pdomain)
+    del:
+net_time id_yrat id_khost id_ltimedelta :: cost: 1
+    add: (knows id_ltimedelta) (knows_property id_khost ptimedelta) (knows_property id_ltimedelta phost) (knows_property id_ltimedelta pmicroseconds) (knows_property id_ltimedelta pseconds)
+    del:
+net_time id_yrat id_khost id_stimedelta :: cost: 1
+    add: (knows id_stimedelta) (knows_property id_khost ptimedelta) (knows_property id_stimedelta phost) (knows_property id_stimedelta pmicroseconds) (knows_property id_stimedelta pseconds) (prop_host id_stimedelta id_khost)
+    del:
+step 1: state 24 applicable 6
+creds id_yrat id_khost id_adomain :: cost: 1
+    add: (knows id_cdomainuser) (knows id_ddomaincredential) (knows id_gdomainuser) (knows id_hdomaincredential) (knows_property id_cdomainuser pcred) (knows_property id_cdomainuser pdomain) (knows_property id_cdomainuser pis_group) (knows_property id_cdomainuser pusername) (knows_property id_ddomaincredential ppassword) (knows_property id_ddomaincredential puser) (knows_property id_gdomainuser pcred) (knows_property id_gdomainuser pdomain) (knows_property id_gdomainuser pis_group) (knows_property id_gdomainuser pusername) (knows_property id_hdomaincredential ppassword) (knows_property id_hdomaincredential puser)
+    del:
+get_admin id_yrat id_khost id_adomain :: cost: 1
+    add: (knows id_cdomainuser) (knows id_gdomainuser) (knows_property id_cdomainuser pdomain) (knows_property id_cdomainuser pis_group) (knows_property id_cdomainuser psid) (knows_property id_cdomainuser pusername) (knows_property id_gdomainuser pdomain) (knows_property id_gdomainuser pis_group) (knows_property id_gdomainuser psid) (knows_property id_gdomainuser pusername) (knows_property id_khost pdomain_user_admins)
+    del:
+get_computers id_yrat id_adomain :: cost: 1
+    add: (knows id_rhost) (knows_property id_rhost pdomain) (knows_property id_rhost pfqdn)
+    del:
+step 2: state 27 applicable 9
+creds id_yrat id_khost id_adomain :: cost: 1
+    add: (knows id_cdomainuser) (knows id_ddomaincredential) (knows id_gdomainuser) (knows id_hdomaincredential) (knows_property id_cdomainuser pcred) (knows_property id_cdomainuser pdomain) (knows_property id_cdomainuser pis_group) (knows_property id_cdomainuser pusername) (knows_property id_ddomaincredential ppassword) (knows_property id_ddomaincredential puser) (knows_property id_gdomainuser pcred) (knows_property id_gdomainuser pdomain) (knows_property id_gdomainuser pis_group) (knows_property id_gdomainuser pusername) (knows_property id_hdomaincredential ppassword) (knows_property id_hdomaincredential puser)
+    del:
+get_admin id_yrat id_khost id_adomain :: cost: 1
+    add: (knows id_cdomainuser) (knows id_gdomainuser) (knows_property id_cdomainuser pdomain) (knows_property id_cdomainuser pis_group) (knows_property id_cdomainuser psid) (knows_property id_cdomainuser pusername) (knows_property id_gdomainuser pdomain) (knows_property id_gdomainuser pis_group) (knows_property id_gdomainuser psid) (knows_property id_gdomainuser pusername) (knows_property id_khost pdomain_user_admins)
+    del:
+get_admin id_yrat id_rhost id_adomain :: cost: 1
+    add: (knows id_cdomainuser) (knows id_gdomainuser) (knows_property id_cdomainuser pdomain) (knows_property id_cdomainuser pis_group) (knows_property id_cdomainuser psid) (knows_property id_cdomainuser pusername) (knows_property id_gdomainuser pdomain) (knows_property id_gdomainuser pis_group) (knows_property id_gdomainuser psid) (knows_property id_gdomainuser pusername) (knows_property id_rhost pdomain_user_admins)
+    del:
+step 3: state 38 applicable 9
+creds id_yrat id_khost id_adomain :: cost: 1
+    add: (knows id_ddomaincredential) (knows id_hdomaincredential) (knows_property id_cdomainuser pcred) (knows_property id_ddomaincredential ppassword) (knows_property id_ddomaincredential puser) (knows_property id_gdomainuser pcred) (knows_property id_hdomaincredential ppassword) (knows_property id_hdomaincredential puser)
+    del:
+get_admin id_yrat id_khost id_adomain :: cost: 1
+    add:
+    del:
+get_admin id_yrat id_rhost id_adomain :: cost: 1
+    add: (knows_property id_rhost pdomain_user_admins)
+    del:
+step 4: state 39 applicable 9
+creds id_yrat id_khost id_adomain :: cost: 1
+    add: (knows id_ddomaincredential) (knows id_hdomaincredential) (knows_property id_cdomainuser pcred) (knows_property id_ddomaincredential ppassword) (knows_property id_ddomaincredential puser) (knows_property id_gdomainuser pcred) (knows_property id_hdomaincredential ppassword) (knows_property id_hdomaincredential puser)
+    del:
+get_admin id_yrat id_khost id_adomain :: cost: 1
+    add:
+    del:
+get_admin id_yrat id_rhost id_adomain :: cost: 1
+    add:
+    del:
+ground atoms: 59 groundings: 9

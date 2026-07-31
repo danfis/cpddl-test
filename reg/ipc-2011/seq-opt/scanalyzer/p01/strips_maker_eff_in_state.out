@@ -1,0 +1,36 @@
+step 0: state 4 applicable 2
+analyze-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-in-1a car-in-1b car-out-1a car-out-1b :: cost: 3
+    add: (analyzed car-in-1a) (on car-in-1a seg-out-1b) (on car-in-1b seg-in-1a) (on car-out-1a seg-in-1b) (on car-out-1b seg-out-1a)
+    del: (on car-in-1a seg-in-1a) (on car-in-1b seg-in-1b) (on car-out-1a seg-out-1a) (on car-out-1b seg-out-1b)
+rotate-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-in-1a car-in-1b car-out-1a car-out-1b :: cost: 1
+    add: (on car-in-1a seg-out-1b) (on car-in-1b seg-in-1a) (on car-out-1a seg-in-1b) (on car-out-1b seg-out-1a)
+    del: (on car-in-1a seg-in-1a) (on car-in-1b seg-in-1b) (on car-out-1a seg-out-1a) (on car-out-1b seg-out-1b)
+step 1: state 5 applicable 2
+analyze-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-in-1b car-out-1a car-out-1b car-in-1a :: cost: 3
+    add: (analyzed car-in-1b) (on car-in-1a seg-out-1a) (on car-in-1b seg-out-1b) (on car-out-1a seg-in-1a) (on car-out-1b seg-in-1b)
+    del: (on car-in-1a seg-out-1b) (on car-in-1b seg-in-1a) (on car-out-1a seg-in-1b) (on car-out-1b seg-out-1a)
+rotate-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-in-1b car-out-1a car-out-1b car-in-1a :: cost: 1
+    add: (on car-in-1a seg-out-1a) (on car-in-1b seg-out-1b) (on car-out-1a seg-in-1a) (on car-out-1b seg-in-1b)
+    del: (on car-in-1a seg-out-1b) (on car-in-1b seg-in-1a) (on car-out-1a seg-in-1b) (on car-out-1b seg-out-1a)
+step 2: state 5 applicable 2
+analyze-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-out-1a car-out-1b car-in-1a car-in-1b :: cost: 3
+    add: (analyzed car-out-1a) (on car-in-1a seg-in-1b) (on car-in-1b seg-out-1a) (on car-out-1a seg-out-1b) (on car-out-1b seg-in-1a)
+    del: (on car-in-1a seg-out-1a) (on car-in-1b seg-out-1b) (on car-out-1a seg-in-1a) (on car-out-1b seg-in-1b)
+rotate-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-out-1a car-out-1b car-in-1a car-in-1b :: cost: 1
+    add: (on car-in-1a seg-in-1b) (on car-in-1b seg-out-1a) (on car-out-1a seg-out-1b) (on car-out-1b seg-in-1a)
+    del: (on car-in-1a seg-out-1a) (on car-in-1b seg-out-1b) (on car-out-1a seg-in-1a) (on car-out-1b seg-in-1b)
+step 3: state 6 applicable 2
+analyze-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-out-1b car-in-1a car-in-1b car-out-1a :: cost: 3
+    add: (analyzed car-out-1b) (on car-in-1a seg-in-1a) (on car-in-1b seg-in-1b) (on car-out-1a seg-out-1a) (on car-out-1b seg-out-1b)
+    del: (on car-in-1a seg-in-1b) (on car-in-1b seg-out-1a) (on car-out-1a seg-out-1b) (on car-out-1b seg-in-1a)
+rotate-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-out-1b car-in-1a car-in-1b car-out-1a :: cost: 1
+    add: (on car-in-1a seg-in-1a) (on car-in-1b seg-in-1b) (on car-out-1a seg-out-1a) (on car-out-1b seg-out-1b)
+    del: (on car-in-1a seg-in-1b) (on car-in-1b seg-out-1a) (on car-out-1a seg-out-1b) (on car-out-1b seg-in-1a)
+step 4: state 6 applicable 2
+analyze-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-in-1a car-in-1b car-out-1a car-out-1b :: cost: 3
+    add: (on car-in-1a seg-out-1b) (on car-in-1b seg-in-1a) (on car-out-1a seg-in-1b) (on car-out-1b seg-out-1a)
+    del: (on car-in-1a seg-in-1a) (on car-in-1b seg-in-1b) (on car-out-1a seg-out-1a) (on car-out-1b seg-out-1b)
+rotate-4 seg-in-1a seg-in-1b seg-out-1a seg-out-1b car-in-1a car-in-1b car-out-1a car-out-1b :: cost: 1
+    add: (on car-in-1a seg-out-1b) (on car-in-1b seg-in-1a) (on car-out-1a seg-in-1b) (on car-out-1b seg-out-1a)
+    del: (on car-in-1a seg-in-1a) (on car-in-1b seg-in-1b) (on car-out-1a seg-out-1a) (on car-out-1b seg-out-1b)
+ground atoms: 20 groundings: 8

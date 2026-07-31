@@ -1,0 +1,13 @@
+step 0: state 34 applicable 2
+jump-new-move pos-2-4 pos-3-4 pos-4-4 :: cost: 1
+    add: (free pos-2-4) (free pos-3-4) (last-visited pos-4-4) (occupied pos-4-4)
+    del: (free pos-4-4) (move-ended) (occupied pos-2-4) (occupied pos-3-4)
+jump-new-move pos-3-4 pos-2-4 pos-1-4 :: cost: 1
+    add: (free pos-2-4) (free pos-3-4) (last-visited pos-1-4) (occupied pos-1-4)
+    del: (free pos-1-4) (move-ended) (occupied pos-2-4) (occupied pos-3-4)
+step 1: state 34 applicable 1
+end-move pos-4-4 :: cost: 0
+    add: (move-ended)
+    del: (last-visited pos-4-4)
+step 2: state 34 applicable 0
+ground atoms: 40 groundings: 3

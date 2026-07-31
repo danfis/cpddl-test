@@ -1,0 +1,51 @@
+step 0: state 62 applicable 36
+apply_cnot_l5_l6_i3 p0 p1 :: cost: 1
+    add: (NOT-rcnot l5_l6_i3) (mapped l5 p0) (mapped l6 p1)
+    del: (NOT-initialized p0) (NOT-initialized p1) (NOT-occupied_pqubit p0) (NOT-occupied_pqubit p1) (rcnot l5_l6_i3)
+apply_cnot_l5_l6_i3 p1 p0 :: cost: 1
+    add: (NOT-rcnot l5_l6_i3) (mapped l5 p1) (mapped l6 p0)
+    del: (NOT-initialized p0) (NOT-initialized p1) (NOT-occupied_pqubit p0) (NOT-occupied_pqubit p1) (rcnot l5_l6_i3)
+apply_cnot_l5_l6_i3 p1 p13 :: cost: 1
+    add: (NOT-rcnot l5_l6_i3) (mapped l5 p1) (mapped l6 p13)
+    del: (NOT-initialized p1) (NOT-initialized p13) (NOT-occupied_pqubit p1) (NOT-occupied_pqubit p13) (rcnot l5_l6_i3)
+step 1: state 60 applicable 6
+apply_cnot_l3_l6_i5 p13 p1 :: cost: 1
+    add: (NOT-rcnot l3_l6_i5) (mapped l3 p13)
+    del: (NOT-initialized p13) (NOT-occupied_pqubit p13) (rcnot l3_l6_i5)
+apply_cnot_l3_l6_i5 p2 p1 :: cost: 1
+    add: (NOT-rcnot l3_l6_i5) (mapped l3 p2)
+    del: (NOT-initialized p2) (NOT-occupied_pqubit p2) (rcnot l3_l6_i5)
+swap l5 l6 p0 p1 :: cost: 1
+    add: (mapped l5 p1) (mapped l6 p0)
+    del: (mapped l5 p0) (mapped l6 p1)
+step 2: state 60 applicable 4
+swap l5 l6 p1 p0 :: cost: 1
+    add: (mapped l5 p0) (mapped l6 p1)
+    del: (mapped l5 p1) (mapped l6 p0)
+swap l6 l5 p0 p1 :: cost: 1
+    add: (mapped l5 p0) (mapped l6 p1)
+    del: (mapped l5 p1) (mapped l6 p0)
+swap-ancilary l5 p1 p13 :: cost: 1
+    add: (NOT-occupied_pqubit p1) (mapped l5 p13)
+    del: (NOT-initialized p13) (NOT-occupied_pqubit p13) (mapped l5 p1)
+step 3: state 59 applicable 4
+swap-ancilary l5 p2 p1 :: cost: 1
+    add: (NOT-occupied_pqubit p2) (mapped l5 p1)
+    del: (NOT-occupied_pqubit p1) (mapped l5 p2)
+swap-ancilary l5 p2 p12 :: cost: 1
+    add: (NOT-occupied_pqubit p2) (mapped l5 p12)
+    del: (NOT-initialized p12) (NOT-occupied_pqubit p12) (mapped l5 p2)
+swap-ancilary l5 p2 p3 :: cost: 1
+    add: (NOT-occupied_pqubit p2) (mapped l5 p3)
+    del: (NOT-initialized p3) (NOT-occupied_pqubit p3) (mapped l5 p2)
+step 4: state 59 applicable 7
+apply_cnot_l3_l6_i5 p13 p1 :: cost: 1
+    add: (NOT-rcnot l3_l6_i5) (mapped l3 p13)
+    del: (NOT-initialized p13) (NOT-occupied_pqubit p13) (rcnot l3_l6_i5)
+swap l5 l6 p2 p1 :: cost: 1
+    add: (mapped l5 p1) (mapped l6 p2)
+    del: (mapped l5 p2) (mapped l6 p1)
+swap l6 l5 p1 p2 :: cost: 1
+    add: (mapped l5 p1) (mapped l6 p2)
+    del: (mapped l5 p2) (mapped l6 p1)
+ground atoms: 94 groundings: 53

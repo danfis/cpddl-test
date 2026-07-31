@@ -64,6 +64,7 @@ TESTS += endomorphism
 TESTS += lifted_heur
 TESTS += subprocess
 TESTS += lifted_search
+TESTS += strips_maker
 TESTS += search
 TESTS += gaifman
 TESTS += set

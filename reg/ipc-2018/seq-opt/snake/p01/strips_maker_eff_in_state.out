@@ -1,0 +1,39 @@
+step 0: state 52 applicable 1
+move-and-eat-spawn pos4-0 pos4-1 pos2-0 pos1-4 :: cost: 1
+    add: (NOT-ispoint pos4-1) (headsnake pos4-1) (ispoint pos2-0) (nextsnake pos4-1 pos4-0) (spawn pos1-4)
+    del: (NOT-blocked pos4-1) (NOT-ispoint pos2-0) (headsnake pos4-0) (ispoint pos4-1) (spawn pos2-0)
+step 1: state 52 applicable 2
+move pos4-1 pos4-2 pos3-0 pos4-0 :: cost: 1
+    add: (NOT-blocked pos3-0) (headsnake pos4-2) (nextsnake pos4-2 pos4-1) (tailsnake pos4-0)
+    del: (NOT-blocked pos4-2) (headsnake pos4-1) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
+move-and-eat-spawn pos4-1 pos3-1 pos1-4 pos1-1 :: cost: 1
+    add: (NOT-ispoint pos3-1) (headsnake pos3-1) (ispoint pos1-4) (nextsnake pos3-1 pos4-1) (spawn pos1-1)
+    del: (NOT-blocked pos3-1) (NOT-ispoint pos1-4) (headsnake pos4-1) (ispoint pos3-1) (spawn pos1-4)
+step 2: state 52 applicable 2
+move pos3-1 pos2-1 pos3-0 pos4-0 :: cost: 1
+    add: (NOT-blocked pos3-0) (headsnake pos2-1) (nextsnake pos2-1 pos3-1) (tailsnake pos4-0)
+    del: (NOT-blocked pos2-1) (headsnake pos3-1) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
+move pos3-1 pos3-2 pos3-0 pos4-0 :: cost: 1
+    add: (NOT-blocked pos3-0) (headsnake pos3-2) (nextsnake pos3-2 pos3-1) (tailsnake pos4-0)
+    del: (NOT-blocked pos3-2) (headsnake pos3-1) (nextsnake pos4-0 pos3-0) (tailsnake pos3-0)
+step 3: state 52 applicable 3
+move pos2-1 pos1-1 pos4-0 pos4-1 :: cost: 1
+    add: (NOT-blocked pos4-0) (headsnake pos1-1) (nextsnake pos1-1 pos2-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos1-1) (headsnake pos2-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
+move pos2-1 pos2-2 pos4-0 pos4-1 :: cost: 1
+    add: (NOT-blocked pos4-0) (headsnake pos2-2) (nextsnake pos2-2 pos2-1) (tailsnake pos4-1)
+    del: (NOT-blocked pos2-2) (headsnake pos2-1) (nextsnake pos4-1 pos4-0) (tailsnake pos4-0)
+move-and-eat-spawn pos2-1 pos2-0 pos1-1 pos0-1 :: cost: 1
+    add: (NOT-ispoint pos2-0) (headsnake pos2-0) (ispoint pos1-1) (nextsnake pos2-0 pos2-1) (spawn pos0-1)
+    del: (NOT-blocked pos2-0) (NOT-ispoint pos1-1) (headsnake pos2-1) (ispoint pos2-0) (spawn pos1-1)
+step 4: state 52 applicable 3
+move pos1-1 pos0-1 pos4-1 pos3-1 :: cost: 1
+    add: (NOT-blocked pos4-1) (headsnake pos0-1) (nextsnake pos0-1 pos1-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos0-1) (headsnake pos1-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
+move pos1-1 pos1-0 pos4-1 pos3-1 :: cost: 1
+    add: (NOT-blocked pos4-1) (headsnake pos1-0) (nextsnake pos1-0 pos1-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos1-0) (headsnake pos1-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
+move pos1-1 pos1-2 pos4-1 pos3-1 :: cost: 1
+    add: (NOT-blocked pos4-1) (headsnake pos1-2) (nextsnake pos1-2 pos1-1) (tailsnake pos3-1)
+    del: (NOT-blocked pos1-2) (headsnake pos1-1) (nextsnake pos3-1 pos4-1) (tailsnake pos4-1)
+ground atoms: 87 groundings: 11

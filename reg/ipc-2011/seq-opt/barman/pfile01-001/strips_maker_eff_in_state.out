@@ -1,0 +1,45 @@
+step 0: state 18 applicable 10
+grasp left shaker1 :: cost: 1
+    add: (holding left shaker1)
+    del: (handempty left) (ontable shaker1)
+grasp left shot1 :: cost: 1
+    add: (holding left shot1)
+    del: (handempty left) (ontable shot1)
+grasp left shot2 :: cost: 1
+    add: (holding left shot2)
+    del: (handempty left) (ontable shot2)
+step 1: state 17 applicable 6
+clean-shaker left right shaker1 :: cost: 1
+    add:
+    del:
+grasp right shot1 :: cost: 1
+    add: (holding right shot1)
+    del: (handempty right) (ontable shot1)
+grasp right shot2 :: cost: 1
+    add: (holding right shot2)
+    del: (handempty right) (ontable shot2)
+step 2: state 16 applicable 2
+leave left shaker1 :: cost: 1
+    add: (handempty left) (ontable shaker1)
+    del: (holding left shaker1)
+leave right shot2 :: cost: 1
+    add: (handempty right) (ontable shot2)
+    del: (holding right shot2)
+step 3: state 17 applicable 8
+fill-shot shot2 ingredient1 right left dispenser1 :: cost: 10
+    add: (contains shot2 ingredient1) (used shot2 ingredient1)
+    del: (clean shot2) (empty shot2)
+fill-shot shot2 ingredient2 right left dispenser2 :: cost: 10
+    add: (contains shot2 ingredient2) (used shot2 ingredient2)
+    del: (clean shot2) (empty shot2)
+fill-shot shot2 ingredient3 right left dispenser3 :: cost: 10
+    add: (contains shot2 ingredient3) (used shot2 ingredient3)
+    del: (clean shot2) (empty shot2)
+step 4: state 16 applicable 2
+leave left shot4 :: cost: 1
+    add: (handempty left) (ontable shot4)
+    del: (holding left shot4)
+leave right shot2 :: cost: 1
+    add: (handempty right) (ontable shot2)
+    del: (holding right shot2)
+ground atoms: 34 groundings: 17

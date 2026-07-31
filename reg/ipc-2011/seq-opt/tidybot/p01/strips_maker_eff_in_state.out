@@ -1,0 +1,51 @@
+step 0: state 57 applicable 7
+finish-object object0 x2 y2 :: cost: 1
+    add: (object-done object0)
+    del: (NOT-object-done object0)
+finish-object object1 x2 y3 :: cost: 1
+    add: (object-done object1)
+    del: (NOT-object-done object1)
+finish-object object2 x3 y2 :: cost: 1
+    add: (object-done object2)
+    del: (NOT-object-done object2)
+step 1: state 57 applicable 7
+base-right pr2 x0 x1 y0 :: cost: 1
+    add: (NOT-base-obstacle x0 y0) (base-pos pr2 x1 y0)
+    del: (NOT-base-obstacle x1 y0) (base-pos pr2 x0 y0)
+finish-object object0 x2 y2 :: cost: 1
+    add: (object-done object0)
+    del: (NOT-object-done object0)
+finish-object object1 x2 y3 :: cost: 1
+    add: (object-done object1)
+    del: (NOT-object-done object1)
+step 2: state 57 applicable 7
+base-left pr2 x1 x0 y0 :: cost: 1
+    add: (NOT-base-obstacle x1 y0) (base-pos pr2 x0 y0)
+    del: (NOT-base-obstacle x0 y0) (base-pos pr2 x1 y0)
+base-right pr2 x1 x2 y0 :: cost: 1
+    add: (NOT-base-obstacle x1 y0) (base-pos pr2 x2 y0)
+    del: (NOT-base-obstacle x2 y0) (base-pos pr2 x1 y0)
+finish-object object0 x2 y2 :: cost: 1
+    add: (object-done object0)
+    del: (NOT-object-done object0)
+step 3: state 57 applicable 7
+base-left pr2 x2 x1 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x1 y0)
+    del: (NOT-base-obstacle x1 y0) (base-pos pr2 x2 y0)
+base-right pr2 x2 x3 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x3 y0)
+    del: (NOT-base-obstacle x3 y0) (base-pos pr2 x2 y0)
+finish-object object0 x2 y2 :: cost: 1
+    add: (object-done object0)
+    del: (NOT-object-done object0)
+step 4: state 57 applicable 6
+base-left pr2 x2 x1 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x1 y0)
+    del: (NOT-base-obstacle x1 y0) (base-pos pr2 x2 y0)
+base-right pr2 x2 x3 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x3 y0)
+    del: (NOT-base-obstacle x3 y0) (base-pos pr2 x2 y0)
+finish-object object1 x2 y3 :: cost: 1
+    add: (object-done object1)
+    del: (NOT-object-done object1)
+ground atoms: 69 groundings: 14

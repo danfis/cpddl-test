@@ -1,0 +1,51 @@
+step 0: state 38 applicable 20
+move-car-to-car car_00 car_03 car_01 :: cost: 1
+    add: (behind-car car_00 car_01) (car-clear car_03)
+    del: (behind-car car_00 car_03) (car-clear car_01)
+move-car-to-car car_00 car_03 car_07 :: cost: 1
+    add: (behind-car car_00 car_07) (car-clear car_03)
+    del: (behind-car car_00 car_03) (car-clear car_07)
+move-car-to-car car_06 car_16 car_01 :: cost: 1
+    add: (behind-car car_06 car_01) (car-clear car_16)
+    del: (behind-car car_06 car_16) (car-clear car_01)
+step 1: state 37 applicable 18
+move-car-to-car car_00 car_03 car_07 :: cost: 1
+    add: (behind-car car_00 car_07) (car-clear car_03)
+    del: (behind-car car_00 car_03) (car-clear car_07)
+move-car-to-car car_06 car_16 car_07 :: cost: 1
+    add: (behind-car car_06 car_07) (car-clear car_16)
+    del: (behind-car car_06 car_16) (car-clear car_07)
+move-car-to-car car_08 car_05 car_07 :: cost: 1
+    add: (behind-car car_08 car_07) (car-clear car_05)
+    del: (behind-car car_08 car_05) (car-clear car_07)
+step 2: state 36 applicable 16
+move-car-to-curb car_00 car_03 curb_8 :: cost: 1
+    add: (at-curb car_00) (at-curb-num car_00 curb_8) (car-clear car_03)
+    del: (behind-car car_00 car_03) (curb-clear curb_8)
+move-car-to-curb car_00 car_03 curb_9 :: cost: 1
+    add: (at-curb car_00) (at-curb-num car_00 curb_9) (car-clear car_03)
+    del: (behind-car car_00 car_03) (curb-clear curb_9)
+move-car-to-curb car_06 car_16 curb_8 :: cost: 1
+    add: (at-curb car_06) (at-curb-num car_06 curb_8) (car-clear car_16)
+    del: (behind-car car_06 car_16) (curb-clear curb_8)
+step 3: state 37 applicable 27
+move-car-to-car car_00 car_03 car_06 :: cost: 1
+    add: (behind-car car_00 car_06) (car-clear car_03)
+    del: (behind-car car_00 car_03) (car-clear car_06)
+move-car-to-car car_00 car_03 car_16 :: cost: 1
+    add: (behind-car car_00 car_16) (car-clear car_03)
+    del: (behind-car car_00 car_03) (car-clear car_16)
+move-car-to-car car_08 car_05 car_06 :: cost: 1
+    add: (behind-car car_08 car_06) (car-clear car_05)
+    del: (behind-car car_08 car_05) (car-clear car_06)
+step 4: state 36 applicable 16
+move-car-to-curb car_00 car_03 curb_8 :: cost: 1
+    add: (at-curb car_00) (at-curb-num car_00 curb_8) (car-clear car_03)
+    del: (behind-car car_00 car_03) (curb-clear curb_8)
+move-car-to-curb car_00 car_03 curb_9 :: cost: 1
+    add: (at-curb car_00) (at-curb-num car_00 curb_9) (car-clear car_03)
+    del: (behind-car car_00 car_03) (curb-clear curb_9)
+move-car-to-curb car_06 car_16 curb_8 :: cost: 1
+    add: (at-curb car_06) (at-curb-num car_06 curb_8) (car-clear car_16)
+    del: (behind-car car_06 car_16) (curb-clear curb_8)
+ground atoms: 112 groundings: 57

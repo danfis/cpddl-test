@@ -1,0 +1,27 @@
+step 0: state 34 applicable 6
+deposit-documents office1 fuel1 :: cost: 1
+    add: (at fuel1 office1)
+    del: (in-train fuel1)
+deposit-documents office1 fuel2 :: cost: 1
+    add: (at fuel2 office1)
+    del: (in-train fuel2)
+drive office1 office fuel1 :: cost: 1
+    add: (train-at office)
+    del: (in-train fuel1) (train-at office1)
+step 1: state 33 applicable 1
+deposit-documents office fuel2 :: cost: 1
+    add: (at fuel2 office)
+    del: (in-train fuel2)
+step 2: state 33 applicable 1
+pickup-documents office fuel2 :: cost: 1
+    add: (in-train fuel2)
+    del: (at fuel2 office)
+step 3: state 33 applicable 1
+deposit-documents office fuel2 :: cost: 1
+    add: (at fuel2 office)
+    del: (in-train fuel2)
+step 4: state 33 applicable 1
+pickup-documents office fuel2 :: cost: 1
+    add: (in-train fuel2)
+    del: (at fuel2 office)
+ground atoms: 39 groundings: 8

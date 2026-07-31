@@ -1,0 +1,51 @@
+step 0: state 141 applicable 3
+gripper-down pr2 x0 y0 xrel0 x0 yrel0 yrel1 y0 y1 :: cost: 1
+    add: (gripper-rel pr2 xrel0 yrel1)
+    del: (NOT-gripper-obstacle x0 y1) (gripper-rel pr2 xrel0 yrel0)
+gripper-right pr2 x0 y0 xrel0 xrel1 x0 x1 yrel0 y0 :: cost: 1
+    add: (gripper-rel pr2 xrel1 yrel0)
+    del: (NOT-gripper-obstacle x1 y0) (gripper-rel pr2 xrel0 yrel0)
+unpark pr2 xrel0 yrel0 :: cost: 1
+    add: (NOT-parked pr2)
+    del: (parked pr2)
+step 1: state 141 applicable 3
+base-right pr2 x0 x1 y0 :: cost: 1
+    add: (NOT-base-obstacle x0 y0) (base-pos pr2 x1 y0)
+    del: (NOT-base-obstacle x1 y0) (base-pos pr2 x0 y0)
+grasp-cart-below pr2 cart x0 y0 y1 :: cost: 1
+    add: (pushing pr2 cart)
+    del: (not-pushed cart) (not-pushing pr2)
+park pr2 :: cost: 1
+    add: (parked pr2)
+    del: (NOT-parked pr2)
+step 2: state 141 applicable 4
+base-down pr2 x1 y0 y1 :: cost: 1
+    add: (NOT-base-obstacle x1 y0) (base-pos pr2 x1 y1)
+    del: (NOT-base-obstacle x1 y1) (base-pos pr2 x1 y0)
+base-left pr2 x1 x0 y0 :: cost: 1
+    add: (NOT-base-obstacle x1 y0) (base-pos pr2 x0 y0)
+    del: (NOT-base-obstacle x0 y0) (base-pos pr2 x1 y0)
+base-right pr2 x1 x2 y0 :: cost: 1
+    add: (NOT-base-obstacle x1 y0) (base-pos pr2 x2 y0)
+    del: (NOT-base-obstacle x2 y0) (base-pos pr2 x1 y0)
+step 3: state 141 applicable 4
+base-down pr2 x2 y0 y1 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x2 y1)
+    del: (NOT-base-obstacle x2 y1) (base-pos pr2 x2 y0)
+base-left pr2 x2 x1 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x1 y0)
+    del: (NOT-base-obstacle x1 y0) (base-pos pr2 x2 y0)
+base-right pr2 x2 x3 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y0) (base-pos pr2 x3 y0)
+    del: (NOT-base-obstacle x3 y0) (base-pos pr2 x2 y0)
+step 4: state 141 applicable 4
+base-left pr2 x2 x1 y1 :: cost: 1
+    add: (NOT-base-obstacle x2 y1) (base-pos pr2 x1 y1)
+    del: (NOT-base-obstacle x1 y1) (base-pos pr2 x2 y1)
+base-right pr2 x2 x3 y1 :: cost: 1
+    add: (NOT-base-obstacle x2 y1) (base-pos pr2 x3 y1)
+    del: (NOT-base-obstacle x3 y1) (base-pos pr2 x2 y1)
+base-up pr2 x2 y1 y0 :: cost: 1
+    add: (NOT-base-obstacle x2 y1) (base-pos pr2 x2 y0)
+    del: (NOT-base-obstacle x2 y0) (base-pos pr2 x2 y1)
+ground atoms: 152 groundings: 15
