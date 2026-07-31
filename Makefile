@@ -65,6 +65,7 @@ TESTS += lifted_heur
 TESTS += subprocess
 TESTS += lifted_search
 TESTS += strips_maker
+TESTS += strips_state_space
 TESTS += search
 TESTS += gaifman
 TESTS += set
