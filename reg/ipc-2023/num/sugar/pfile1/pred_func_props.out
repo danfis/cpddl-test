@@ -1,0 +1,215 @@
+(=)
+  in-init: 0
+  in-pre: 0
+  in-goal: 0
+  in-eff: 0
+(available)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(produce)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(current-process)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(change-process)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(place-order)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(at-location)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(connected)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(busy)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(ready-crane)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(service-crane)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(unharvest-field)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs:
+(truck-cap)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs: (capacity)
+(in-truck-sugar)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs: (capacity)
+(in-storage)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 1
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs: (capacity) (max-produce)
+(has-resource)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs: (max-produce)
+(max-changing)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs:
+(capacity)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(max-service-time)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(service-time)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs: (max-service-time)
+(max-produce)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:

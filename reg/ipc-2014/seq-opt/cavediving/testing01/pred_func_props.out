@@ -1,0 +1,133 @@
+(=)
+  in-init: 0
+  in-pre: 0
+  in-goal: 0
+  in-eff: 0
+(at-tank)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(in-storage)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(full)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(next-tank)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(at-diver)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(available)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(at-surface)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(decompressing)
+  in-init: 0
+  in-pre: 0
+  in-goal: 1
+  in-eff: 1
+(precludes)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(cave-entrance)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(connected)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(next-quantity)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(holding)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(capacity)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(have-photo)
+  in-init: 0
+  in-pre: 0
+  in-goal: 1
+  in-eff: 1
+(NOT-in-water)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(hiring-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(other-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(total-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 1
+  is-metric-alone: 1
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs: (hiring-cost) (other-cost)

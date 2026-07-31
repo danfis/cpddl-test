@@ -1,0 +1,103 @@
+(=)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(next-direction)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(coord-inc)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(end-node)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(connected)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(at)
+  in-init: 1
+  in-pre: 1
+  in-goal: 1
+  in-eff: 1
+(heading)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(free)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(node-first-pass-next)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(node-second-pass-next)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(NOT-rotating)
+  in-init: 1
+  in-pre: 1
+  in-goal: 1
+  in-eff: 1
+(total-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 1
+  is-metric-alone: 1
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs: (rotate-cost) (update-cost)
+(rotate-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(update-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:

@@ -1,0 +1,184 @@
+(=)
+  in-init: 0
+  in-pre: 0
+  in-goal: 0
+  in-eff: 0
+(at)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(connected)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(has-charger)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(has-calibrator)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 0
+(free)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(calibrated)
+  in-init: 1
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(NOT-calibrated)
+  in-init: 0
+  in-pre: 1
+  in-goal: 0
+  in-eff: 1
+(energy)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 1
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs: (capacity) (work-cost)
+(workload)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 1
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(temperature)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 1
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs: (cooling-power)
+(production)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 1
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 1
+  in-eff-by-assign-or-scale: 1
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 0
+  write-delta-nonneg-int: 0
+  rhs-funcs:
+(capacity)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(work-cost)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(max-temp)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(efficiency)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 1
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 0
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
+(cooling-power)
+  in-init: 1
+  init-all-nonneg: 1
+  init-all-nonpos: 0
+  init-all-int: 1
+  in-pre: 0
+  in-goal: 0
+  in-metric: 0
+  is-metric-alone: 0
+  on-num-op-rhs: 1
+  in-eff: 0
+  in-eff-by-assign-or-scale: 0
+  in-eff-in-cond-eff: 0
+  write-delta-nonneg: 1
+  write-delta-nonneg-int: 1
+  rhs-funcs:
