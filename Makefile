@@ -17,6 +17,7 @@ VALGRIND_MEMLEAK_OPTS += --trace-children=yes --error-limit=no
 VALGRIND_MEMLEAK_OPTS += --trace-children-skip-by-arg=find*,diff*,cat*,head*,*validate*
 VALGRIND_MEMLEAK_OPTS += --trace-children-skip=*minizinc*,/usr/bin/ls
 VALGRIND_MEMLEAK_OPTS += --suppressions=test.supp
+VALGRIND_MEMLEAK_OPTS += --num-callers=50
 #VALGRIND_MEMLEAK_OPTS += --gen-suppressions=yes
 
 VALGRIND_SEGFAULT_OPTS  = --quiet

@@ -137,4 +137,13 @@
    match-leak-kinds: all
    ...
    fun:testPanic
+   ...
+}
+{
+   openLogFile
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:openLogFile
+   fun:main
 }

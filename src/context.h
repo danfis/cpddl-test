@@ -43,6 +43,11 @@ int validatePlanSeq(const pddl_fdr_t *fdr, const pddl_iarr_t *plan);
  * Runs FN(USERDATA) in a forked subprocess and returns true if it
  * terminated with PANIC. The subprocess' stdout and stderr (including
  * the PANIC message) are discarded.
+ *
+ * Note that this may make valgrind report memory leaks in case the PANIC
+ * triggers. The suppression file for valgrind suppresses just leaks originating
+ * from FN(USERDATA). So, this function should be used only in TEST_ONCE tests
+ * and when everything is allocated in the FN function.
  */
 int testPanic(void (*fn)(void *userdata), void *userdata);
 

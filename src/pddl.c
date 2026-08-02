@@ -197,6 +197,7 @@ TEST_COND(pddl_compile_flt_to_int, pddl, LP)
         }
         if (C.pddl.minimize != NULL)
             assert(!fmHasFlt(&C.pddl.minimize->fm));
+        pddlResetPredFuncProps(&C.pddl);
         pddlPrintDiff(&copy, &C.pddl, stdout);
         break;
     }
@@ -222,6 +223,7 @@ TEST(pddl_action_simplify_cond_effs, r)
 {
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     cfg.normalize = 0;
+    cfg.remove_empty_types = 0;
     cfg.force_adl = 1;
     pddl_t pddl;
     int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,

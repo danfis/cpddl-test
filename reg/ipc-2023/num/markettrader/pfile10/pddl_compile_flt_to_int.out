@@ -131,3 +131,8 @@ Init:
 Goal:
   - (>= (cash) 1000)
   + (>= (cash) 10000)
+Func prop:
+  - (drive-cost place place): in_init init_all_nonneg in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  + (drive-cost place place): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  - (price goods market): in_init init_all_nonneg in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  + (price goods market): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int

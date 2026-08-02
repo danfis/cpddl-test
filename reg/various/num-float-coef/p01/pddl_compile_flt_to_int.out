@@ -13,3 +13,6 @@ Init:
 Goal:
   - (>= (+ (x f0) (* 1.7 (x f1))) 8.4)
   + (>= (+ (* 10 (x f0)) (* 17 (x f1))) 840)
+Func prop:
+  - (x farm): in_init init_all_nonneg in_pre in_goal in_eff
+  + (x farm): in_init init_all_nonneg init_all_int in_pre in_goal in_eff

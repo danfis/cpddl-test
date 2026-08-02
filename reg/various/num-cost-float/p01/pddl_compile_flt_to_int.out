@@ -5,3 +5,6 @@ Action:
   + move: ?a - loc ?b - loc
       pre: (and (at ?a) (conn ?a ?b))
       eff: (and (at ?b) (increase (total-cost) 3) (not (at ?a)))
+Func prop:
+  - (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg
+  + (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
