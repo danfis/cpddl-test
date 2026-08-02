@@ -14,6 +14,7 @@ struct test_def {
     const int *children;
     int children_size;
     int is_once;
+    int is_panic;
     int enabled;
 };
 typedef struct test_def test_def_t;

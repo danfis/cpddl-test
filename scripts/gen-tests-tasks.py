@@ -35,6 +35,8 @@ pat_test_tear_down = re.compile(
     r'^\s*TEST_TEAR_DOWN\(([a-zA-Z0-9_]+) *\).*$')
 pat_test_once = re.compile(
     r'^\s*TEST_ONCE\(([a-zA-Z0-9_]+) *\).*$')
+pat_test_panic_once = re.compile(
+    r'^\s*TEST_PANIC_ONCE\(([a-zA-Z0-9_]+) *\).*$')
 pat_global_tear_down = re.compile(r'^\s*TEST_GLOBAL_TEAR_DOWN.*$')
 pat_define = re.compile(r'^ *# *define +PDDL_([A-Z_0-9]+).*$')
 
@@ -51,7 +53,7 @@ def parseConfig(fn):
     CONFIG = sorted(CONFIG)
 
 
-def addTest(name, tags):
+def addTest(name, tags, panic=False):
     global CONFIG
     for tag in tags:
         if tag not in CONFIG:
@@ -61,9 +63,40 @@ def addTest(name, tags):
         Test[name] = {
             'dep': None,
             'tear-down': False,
-            'once': False
+            'once': False,
+            'panic': panic
         }
+    elif Test[name]['panic'] != panic:
+        raise ValueError(
+            f'Test {name!r} is declared both with TEST_PANIC_ONCE and with'
+            ' another TEST* macro; panic tests must have a unique name.')
     return True
+
+
+def testFnName(name):
+    """Name of the C function implementing the test NAME."""
+    if Test[name]['panic']:
+        return f'test_panic_{name}'
+    return f'test_{name}'
+
+
+def checkPanicTests():
+    """TEST_PANIC_ONCE tests must not have children nor a tear-down.
+    Must be called after constructTestTree(), which fills in 'child'."""
+    tests_by_id = {t['id']: t for t in Test.values()}
+    for name in sorted(Test.keys()):
+        if not Test[name]['panic']:
+            continue
+        if Test[name]['tear-down']:
+            raise ValueError(
+                f'TEST_PANIC_ONCE {name!r} must not have a tear-down: its'
+                ' body terminates the process with PANIC.')
+        if Test[name]['child']:
+            child = sorted(tests_by_id[c]['name']
+                           for c in Test[name]['child'])
+            raise ValueError(
+                f'TEST_PANIC_ONCE {name!r} must not have children, but it is'
+                f' used as a parent of {child}.')
 
 
 def parseFile(filename):
@@ -103,6 +136,14 @@ def parseFile(filename):
             if m is not None:
                 name = m.group(1)
                 if addTest(name, []):
+                    Test[name]['once'] = True
+
+            m = pat_test_panic_once.match(line)
+            if m is not None:
+                name = m.group(1)
+                # A panic test has no parent (dep stays None, i.e., it is a
+                # root) and is run only once, i.e., in the "_" task only.
+                if addTest(name, [], panic=True):
                     Test[name]['once'] = True
 
             m = pat_global_tear_down.match(line)
@@ -241,7 +282,7 @@ typedef struct task_def task_def_t;
 
 def genTestDeclarations():
     for key in sorted(Test.keys()):
-        print(f'void test_{key}(void);')
+        print(f'void {testFnName(key)}(void);')
         if Test[key]['tear-down']:
             print(f'void test_tear_down_{key}(void);')
 
@@ -268,10 +309,14 @@ def genTestDef(idx, name, test):
     if test['once']:
         once = '1'
 
+    panic = '0'
+    if test['panic']:
+        panic = '1'
+
     print(f'    {{')
     print(f'        .id = {idx},')
     print(f'        .name = "{name}",')
-    print(f'        .fn = test_{name},')
+    print(f'        .fn = {testFnName(name)},')
     print(f'        .fn_tear_down = {tear_down},')
     print(f'        .parent = {parent},')
     ch = test['child']
@@ -283,6 +328,7 @@ def genTestDef(idx, name, test):
         print(f'        .children_size = 0,')
 
     print(f'        .is_once = {once},')
+    print(f'        .is_panic = {panic},')
     print(f'        .enabled = 0,')
     print(f'    }},')
 
@@ -365,6 +411,7 @@ def main():
         parseFile(fn)
     removeUnreachable()
     constructTestTree()
+    checkPanicTests()
 
     with open(args.config_toml, 'rb') as f:
         cfg = tomllib.load(f)

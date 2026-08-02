@@ -11,7 +11,7 @@
  * Run with:  cd tests && make && ./test -T _ -s num_val
  *
  * Overflow of the integer arithmetic causes PANIC, which is tested via
- * testPanic() running the offending operation in a forked subprocess.
+ * TEST_PANIC_ONCE tests running the offending operation in their own fork.
  */
 
 #include "pddl/num_val.h"
@@ -283,41 +283,34 @@ TEST_ONCE(num_val_cmp_hash)
     assert(pddlNumValHash(&f15) != pddlNumValHash(&f2));
 }
 
-static void panic_add_overflow(void *userdata)
+TEST_PANIC_ONCE(num_val_add_overflow)
 {
     pddl_num_val_t r, a = mk_int(INT64_MAX), b = mk_int(1);
     pddlNumValAddTo(&r, &a, &b);
 }
 
-static void panic_sub_overflow(void *userdata)
+TEST_PANIC_ONCE(num_val_sub_overflow)
 {
     pddl_num_val_t r, a = mk_int(INT64_MIN), b = mk_int(1);
     pddlNumValSubTo(&r, &a, &b);
 }
 
-static void panic_mul_overflow(void *userdata)
+TEST_PANIC_ONCE(num_val_mul_overflow)
 {
     pddl_num_val_t r, a = mk_int(INT64_MAX), b = mk_int(2);
     pddlNumValMulTo(&r, &a, &b);
 }
 
-static void panic_div_overflow(void *userdata)
+TEST_PANIC_ONCE(num_val_div_overflow)
 {
     pddl_num_val_t r, a = mk_int(INT64_MIN), b = mk_int(-1);
     pddlNumValDivTo(&r, &a, &b);
 }
 
-static void no_panic(void *userdata)
+TEST_ONCE(num_val_no_overflow)
 {
+    // Arithmetic that stays in range must not PANIC
     pddl_num_val_t r, a = mk_int(10), b = mk_int(3);
     pddlNumValAddTo(&r, &a, &b);
-}
-
-TEST_ONCE(num_val_panic)
-{
-    assert(testPanic(panic_add_overflow, NULL));
-    assert(testPanic(panic_sub_overflow, NULL));
-    assert(testPanic(panic_mul_overflow, NULL));
-    assert(testPanic(panic_div_overflow, NULL));
-    assert(!testPanic(no_panic, NULL));
+    assert(pddlNumValIsInt(&r) && r.v.i == 13);
 }

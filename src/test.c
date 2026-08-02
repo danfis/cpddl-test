@@ -600,6 +600,38 @@ static void *thTimeout(void *_)
     return NULL;
 }
 
+// Runs FN() in a forked subprocess and returns true if it terminated with
+// PANIC, i.e., with exit(-1) which amounts to the exit status 255.
+// The subprocess inherits the already redirected stdout/stderr, therefore its
+// output (including the PANIC message) is captured in the test's .out.tmp and
+// .err.tmp files exactly as for any other test.
+static int runPanicTest(void (*fn)(void))
+{
+    // Flush all streams, not just stdout/stderr: the subprocess inherits
+    // every open FILE * and its exit() would flush the buffers once more.
+    fflush(NULL);
+    pid_t pid = fork();
+    if (pid < 0){
+        perror("Fork error");
+        exit(-1);
+
+    }else if (pid == 0){
+        // The timeout thread of the parent is not inherited, so arm a plain
+        // alarm to make sure that a hanging fn() cannot survive as an orphan
+        // still holding a write file descriptor of the .out.tmp file.
+        alarm(timeout_s);
+        fn();
+        exit(0);
+    }
+
+    int status = 0;
+    while (waitpid(pid, &status, 0) < 0){
+        if (errno != EINTR)
+            return 0;
+    }
+    return WIFEXITED(status) && WEXITSTATUS(status) == 255;
+}
+
 static void runTest(worker_t *worker, int task_id, const test_def_t *test)
 {
     fflush(stdout);
@@ -630,7 +662,19 @@ static void runTest(worker_t *worker, int task_id, const test_def_t *test)
         pddlTimerStart(&progress_info[worker->id].timer);
         progress_info[worker->id].in_progress = 1;
         sem_post(&shared->lock);
-        test->fn();
+        if (test->is_panic){
+            if (!runPanicTest(test->fn)){
+                fprintf(stderr, "Test %s did not PANIC as expected.\n",
+                        test->name);
+                sem_wait(&shared->lock);
+                progress_info[worker->id].in_progress = 0;
+                sem_post(&shared->lock);
+                exit(1);
+            }
+
+        }else{
+            test->fn();
+        }
 
         pthread_cancel(thtimeout);
         pthread_join(thtimeout, NULL);

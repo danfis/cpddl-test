@@ -12,7 +12,7 @@
  * Run with:  cd tests && make && ./test -T _ -s fm_num_eval
  *
  * Integer overflow during evaluation causes PANIC, which is tested via
- * testPanic() running the offending evaluation in a forked subprocess.
+ * TEST_PANIC_ONCE tests running the offending evaluation in their own fork.
  */
 
 #include "pddl/fm.h"
@@ -421,7 +421,7 @@ TEST_ONCE(fm_num_eval)
     pddlFmDel(&cmp->fm);
 }
 
-static void panic_eval_int_overflow(void *userdata)
+TEST_PANIC_ONCE(fm_num_eval_int_overflow)
 {
     pddl_fm_num_exp_t *e;
     e = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(INT64_MAX),
@@ -430,7 +430,7 @@ static void panic_eval_int_overflow(void *userdata)
     pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out);
 }
 
-static void panic_eval_non_num_exp(void *userdata)
+TEST_PANIC_ONCE(fm_num_eval_non_num_exp)
 {
     // an atom is not a numeric expression
     pddl_fm_atom_t *a = pddlFmNewEmptyAtom(0);
@@ -439,7 +439,7 @@ static void panic_eval_non_num_exp(void *userdata)
                      fluent_lookup, &empty_table, &out);
 }
 
-static void panic_eval_non_num_cmp(void *userdata)
+TEST_PANIC_ONCE(fm_num_eval_non_num_cmp)
 {
     pddl_fm_num_cmp_t *c = pddlFmNewNumCmpEq(pddlFmNewNumExpNumInt(1),
                                              pddlFmNewNumExpNumInt(1));
@@ -447,20 +447,15 @@ static void panic_eval_non_num_cmp(void *userdata)
     pddlFmNumCmpEval(c, NULL, fluent_lookup, &empty_table);
 }
 
-static void no_panic(void *userdata)
+TEST_ONCE(fm_num_eval_no_panic)
 {
+    // A well-formed numeric expression that stays in range must not PANIC
     pddl_fm_num_exp_t *e;
     e = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(1),
                             pddlFmNewNumExpNumInt(2));
     pddl_num_val_t out;
-    pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out);
+    assert(pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out)
+                == PDDL_FM_NUM_EVAL_OK);
+    assert(pddlNumValIsInt(&out) && out.v.i == 3);
     pddlFmDel(&e->fm);
-}
-
-TEST_ONCE(fm_num_eval_panic)
-{
-    assert(testPanic(panic_eval_int_overflow, NULL));
-    assert(testPanic(panic_eval_non_num_exp, NULL));
-    assert(testPanic(panic_eval_non_num_cmp, NULL));
-    assert(!testPanic(no_panic, NULL));
 }

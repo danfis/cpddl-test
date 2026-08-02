@@ -724,28 +724,32 @@ TEST(strips_maker_once_add_func, strips_maker_once)
     pddlFree(&pddl);
 }
 
-static void addInitFn(void *userdata)
+static void addInit(pddl_t *pddl)
 {
-    pddl_t *pddl = userdata;
     pddl_strips_maker_t sm;
     pddlStripsMakerInit(&sm, pddl);
     pddlStripsMakerAddInit(&sm, pddl);
     pddlStripsMakerFree(&sm);
 }
 
-TEST(strips_maker_once_unsolvable_init, strips_maker_once)
+TEST(strips_maker_once_solvable_init, strips_maker_once)
 {
     pddl_t pddl;
     loadPddl(&pddl, "pddl/various/num-cost-renamed/domain.pddl",
              "pddl/various/num-cost-renamed/p01.pddl");
 
     // A solvable initial state does not panic
-    assert(!testPanic(addInitFn, &pddl));
-
-    // AddInit panics on an initial state marked as unsolvable
-    pddlInitStateSetUnsolvable(&pddl.init);
-    assert(testPanic(addInitFn, &pddl));
+    addInit(&pddl);
 
     pddlFree(&pddl);
-    printf("unsolvable init state panics\n");
+}
+
+// AddInit panics on an initial state marked as unsolvable
+TEST_PANIC_ONCE(strips_maker_unsolvable_init)
+{
+    pddl_t pddl;
+    loadPddl(&pddl, "pddl/various/num-cost-renamed/domain.pddl",
+             "pddl/various/num-cost-renamed/p01.pddl");
+    pddlInitStateSetUnsolvable(&pddl.init);
+    addInit(&pddl);
 }

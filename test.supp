@@ -131,12 +131,19 @@
    obj:/usr/bin/diff
    fun:(below main)
 }
+# TEST_PANIC_ONCE(NAME) expands to test_panic_NAME() whose body is expected to
+# terminate the process with PANIC, i.e., with exit(-1), which leaks everything
+# the body allocated. Suppressing all of it is deliberate: it is what makes
+# make check-valgrind report no memory leaks for this kind of test. Keep the
+# wildcard as it is -- the whole test_panic_* subtree must be covered.
+# Do not anchor this on the runPanicTest() frame instead: that function is
+# static with a single call site and gets inlined away.
 {
-   testPanic
+   test_panic
    Memcheck:Leak
    match-leak-kinds: all
    ...
-   fun:testPanic
+   fun:test_panic_*
    ...
 }
 {

@@ -430,65 +430,130 @@ TEST(strips_state_space_once_many, strips_state_space_once)
     pddlStripsStateSpaceFree(&space);
 }
 
-struct invalid_id_test {
-    pddl_strips_state_space_t *space;
-    pddl_state_id_t state_id;
-    int method;
-};
-
-static void invalidIdFn(void *userdata)
+/** Accesses the state STATE_ID in SPACE using pddlStripsStateSpaceGet() for
+ *  METHOD 0, pddlStripsStateSpaceGetNoState() for METHOD 1, and
+ *  pddlStripsStateSpaceSet() for METHOD 2. */
+static void accessState(pddl_strips_state_space_t *space,
+                        int method,
+                        pddl_state_id_t state_id)
 {
-    const struct invalid_id_test *t = userdata;
     pddl_strips_state_space_node_t node;
-    pddlStripsStateSpaceNodeInit(&node, t->space);
-    if (t->method == 0){
-        pddlStripsStateSpaceGet(t->space, t->state_id, &node);
+    pddlStripsStateSpaceNodeInit(&node, space);
+    if (method == 0){
+        pddlStripsStateSpaceGet(space, state_id, &node);
 
-    }else if (t->method == 1){
-        pddlStripsStateSpaceGetNoState(t->space, t->state_id, &node);
+    }else if (method == 1){
+        pddlStripsStateSpaceGetNoState(space, state_id, &node);
 
     }else{
-        node.id = t->state_id;
-        pddlStripsStateSpaceSet(t->space, &node);
+        node.id = state_id;
+        pddlStripsStateSpaceSet(space, &node);
     }
     pddlStripsStateSpaceNodeFree(&node);
 }
 
-TEST(strips_state_space_once_panic, strips_state_space_once)
+/** Initializes SPACE and inserts the states {} and {0} into it, i.e., the
+ *  only valid state IDs afterwards are 0 and 1. */
+static void initSpaceWithTwoStates(pddl_strips_state_space_t *space,
+                                   pddl_err_t *err)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, &err);
-
-    // Get(), GetNoState(), and Set() panic on any ID in an empty space
-    struct invalid_id_test t = { &space, 0, 0 };
-    for (t.method = 0; t.method < 3; ++t.method){
-        t.state_id = 0;
-        assert(testPanic(invalidIdFn, &t));
-    }
+    pddlStripsStateSpaceInit(space, err);
 
     PDDL_ISET(s0);
     PDDL_ISET(s1);
     pddlISetAdd(&s1, 0);
-    pddlStripsStateSpaceInsert(&space, &s0);
-    pddlStripsStateSpaceInsert(&space, &s1);
-
-    for (t.method = 0; t.method < 3; ++t.method){
-        // Valid IDs do not panic
-        t.state_id = 0;
-        assert(!testPanic(invalidIdFn, &t));
-        t.state_id = 1;
-        assert(!testPanic(invalidIdFn, &t));
-        // The first unassigned ID and PDDL_NO_STATE_ID panic
-        t.state_id = space.num_states;
-        assert(testPanic(invalidIdFn, &t));
-        t.state_id = PDDL_NO_STATE_ID;
-        assert(testPanic(invalidIdFn, &t));
-    }
-
-    printf("invalid state id panics\n");
-
+    pddlStripsStateSpaceInsert(space, &s0);
+    pddlStripsStateSpaceInsert(space, &s1);
     pddlISetFree(&s0);
     pddlISetFree(&s1);
+}
+
+TEST(strips_state_space_once_valid_id, strips_state_space_once)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+
+    // Valid IDs do not panic with any of the access methods
+    for (int method = 0; method < 3; ++method){
+        accessState(&space, method, 0);
+        accessState(&space, method, 1);
+    }
+
     pddlStripsStateSpaceFree(&space);
+}
+
+// Get(), GetNoState(), and Set() panic on any ID in an empty space
+TEST_PANIC_ONCE(strips_state_space_get_empty)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    pddlStripsStateSpaceInit(&space, &err);
+    accessState(&space, 0, 0);
+}
+
+TEST_PANIC_ONCE(strips_state_space_get_no_state_empty)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    pddlStripsStateSpaceInit(&space, &err);
+    accessState(&space, 1, 0);
+}
+
+TEST_PANIC_ONCE(strips_state_space_set_empty)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    pddlStripsStateSpaceInit(&space, &err);
+    accessState(&space, 2, 0);
+}
+
+// The first unassigned ID panics with any of the access methods
+TEST_PANIC_ONCE(strips_state_space_get_unassigned)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+    accessState(&space, 0, space.num_states);
+}
+
+TEST_PANIC_ONCE(strips_state_space_get_no_state_unassigned)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+    accessState(&space, 1, space.num_states);
+}
+
+TEST_PANIC_ONCE(strips_state_space_set_unassigned)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+    accessState(&space, 2, space.num_states);
+}
+
+// PDDL_NO_STATE_ID panics with any of the access methods
+TEST_PANIC_ONCE(strips_state_space_get_no_state_id)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+    accessState(&space, 0, PDDL_NO_STATE_ID);
+}
+
+TEST_PANIC_ONCE(strips_state_space_get_no_state_no_state_id)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+    accessState(&space, 1, PDDL_NO_STATE_ID);
+}
+
+TEST_PANIC_ONCE(strips_state_space_set_no_state_id)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_strips_state_space_t space;
+    initSpaceWithTwoStates(&space, &err);
+    accessState(&space, 2, PDDL_NO_STATE_ID);
 }
