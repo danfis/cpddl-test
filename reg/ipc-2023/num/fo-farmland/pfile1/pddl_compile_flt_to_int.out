@@ -1,10 +1,10 @@
 Action:
   - move-by-car: ?f1 - farm ?f2 - farm
       pre: (and (>= (x ?f1) (* 4 (num-of-cars))) (adj ?f1 ?f2) (not (= ?f1 ?f2)))
-      eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (cost) (* 0.1 (* 4 (num-of-cars)))) (increase (x ?f2) (* 4 (num-of-cars))))
+      eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (cost) (* 0.4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))))
   + move-by-car: ?f1 - farm ?f2 - farm
       pre: (and (>= (x ?f1) (* 4 (num-of-cars))) (adj ?f1 ?f2) (not (= ?f1 ?f2)))
-      eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (cost) (* 1 (* 4 (num-of-cars)))) (increase (x ?f2) (* 4 (num-of-cars))))
+      eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (cost) (* 4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))))
 Goal:
   - (and (>= (- (+ (x farm0) (* 1.7 (x farm1))) (cost)) 560) (>= (x farm0) 1) (>= (x farm1) 1))
   + (and (>= (- (+ (* 10 (x farm0)) (* 17 (x farm1))) (cost)) 5600) (>= (x farm0) 1) (>= (x farm1) 1))

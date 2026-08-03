@@ -24,7 +24,7 @@ Function[3]:
 Action[3]:
     move-by-car: ?f1:1 ?f2:1
         pre: (and (N:R:= ?f1 ?f2) (R:adj ?f1 ?f2) (>= (x ?f1) (* 4 (num-of-cars))))
-        eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))) (increase (cost) (* 0.1 (* 4 (num-of-cars)))))
+        eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))) (increase (cost) (* 0.4 (num-of-cars))))
     move-slow: ?f1:1 ?f2:1
         pre: (and (N:R:= ?f1 ?f2) (R:adj ?f1 ?f2) (>= (x ?f1) 1))
         eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
