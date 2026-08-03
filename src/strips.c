@@ -2,6 +2,92 @@
 #include "context.h"
 #include <assert.h>
 
+// Grounding must refuse a task that still has a negative condition over a
+// non-static predicate instead of silently dropping that condition
+static void _groundNegCondGuard(int (*ground)(pddl_strips_t *strips,
+                                              const pddl_t *pddl,
+                                              const pddl_ground_config_t *cfg,
+                                              pddl_err_t *err),
+                                const pddl_t *pddl,
+                                pddl_bool_t has_neg)
+{
+    pddl_strips_t strips;
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    int ret = ground(&strips, pddl, &ground_cfg, &C.err);
+    assert((ret != 0) == (has_neg ? 1 : 0));
+    // The guard fires before the strips maker initializes strips, so there
+    // is something to free only when the grounding succeeded
+    if (ret == 0)
+        pddlStripsFree(&strips);
+}
+
+TEST(strips_ground_neg_cond_guard, r)
+{
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 1;
+    cfg.force_adl = 1;
+    cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    cfg.normalize_compile_away_only_goal_neg_cond = pddl_false;
+    cfg.normalize_compile_away_all_neg_cond = pddl_false;
+    pddl_t pddl;
+    int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    // The grounders reject numeric tasks for an unrelated reason
+    if (pddlHasNumericFluents(&pddl)){
+        pddlFree(&pddl);
+        return;
+    }
+
+    pddl_bool_t has_neg = pddlHasNonStaticNegativeConditions(&pddl);
+    _groundNegCondGuard(pddlStripsGroundDatalog, &pddl, has_neg);
+    _groundNegCondGuard(pddlStripsGroundTrie, &pddl, has_neg);
+#ifdef PDDL_SQLITE
+    _groundNegCondGuard(pddlStripsGroundSql, &pddl, has_neg);
+#endif /* PDDL_SQLITE */
+
+    pddlFree(&pddl);
+}
+
+TEST(strips_ground_not_normalized_guard, r)
+{
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 0;
+    cfg.force_adl = 1;
+    cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    cfg.normalize_compile_away_only_goal_neg_cond = pddl_false;
+    cfg.normalize_compile_away_all_neg_cond = pddl_false;
+    cfg.remove_empty_types = 0;
+    pddl_t pddl;
+    int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    // The grounders reject numeric tasks for an unrelated reason
+    if (pddlHasNumericFluents(&pddl)){
+        pddlFree(&pddl);
+        return;
+    }
+
+    pddl_strips_t strips;
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ret = pddlStripsGroundDatalog(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret != 0);
+    ret = pddlStripsGroundTrie(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret != 0);
+#ifdef PDDL_SQLITE
+    ret = pddlStripsGroundSql(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret != 0);
+#endif /* PDDL_SQLITE */
+
+    pddlFree(&pddl);
+}
+
 TEST(strips, lmg)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
