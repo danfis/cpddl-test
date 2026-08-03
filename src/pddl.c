@@ -197,7 +197,10 @@ TEST_COND(pddl_compile_flt_to_int, pddl, LP)
         }
         if (C.pddl.minimize != NULL)
             assert(!fmHasFlt(&C.pddl.minimize->fm));
-        pddlResetPredFuncProps(&C.pddl);
+        // The parent test normalizes, so the task must still be normalized
+        // with up-to-date properties
+        assert(C.pddl.is_normalized);
+        assert(C.pddl.is_pred_func_props_valid);
         pddlPrintDiff(&copy, &C.pddl, stdout);
         break;
     }

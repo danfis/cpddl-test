@@ -4,7 +4,7 @@ Action:
       eff: (and (increase (x ?b) (* (v ?b) 3)))
   + go_est: ?b - boat
       pre: (and)
-      eff: (and (increase (x ?b) (* (* 2 (v ?b)) 3)))
+      eff: (and (increase (x ?b) (* 6 (v ?b))))
   - go_north_east: ?b - boat
       pre: (and)
       eff: (and (increase (x ?b) (* (v ?b) 1.5)) (increase (y ?b) (* (v ?b) 1.5)))
@@ -28,19 +28,19 @@ Action:
       eff: (and (decrease (x ?b) (* (v ?b) 2)) (decrease (y ?b) (* (v ?b) 2)))
   + go_south_east: ?b - boat
       pre: (and)
-      eff: (and (decrease (x ?b) (* (* 2 (v ?b)) 2)) (decrease (y ?b) (* (v ?b) 4)))
+      eff: (and (decrease (x ?b) (* 4 (v ?b))) (decrease (y ?b) (* (v ?b) 4)))
   - go_south_west: ?b - boat
       pre: (and)
       eff: (and (decrease (y ?b) (* (v ?b) 2)) (increase (x ?b) (* (v ?b) 2)))
   + go_south_west: ?b - boat
       pre: (and)
-      eff: (and (decrease (y ?b) (* (* 2 (v ?b)) 2)) (increase (x ?b) (* (* 2 (v ?b)) 2)))
+      eff: (and (decrease (y ?b) (* 4 (v ?b))) (increase (x ?b) (* 4 (v ?b))))
   - go_west: ?b - boat
       pre: (and)
       eff: (and (decrease (x ?b) (* (v ?b) 3)))
   + go_west: ?b - boat
       pre: (and)
-      eff: (and (decrease (x ?b) (* (* 2 (v ?b)) 3)))
+      eff: (and (decrease (x ?b) (* 6 (v ?b))))
   - save_person: ?b - boat ?t - person
       pre: (and (<= (+ (x ?b) (y ?b)) (+ (d ?t) 25)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 25)) (<= (v ?b) 1) (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)))
       eff: (and (saved ?t))
