@@ -1,61 +1,37 @@
-Domain: line-exchange
-Problem: prob01
-Require: 103
-Type[2]:
-    [0]: object, parent: -1
-    [1]: robot, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2
-    [1]: 0 1 2
-Obj[3]:
-    [0]: r0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: r1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: r2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[4]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    pd: 1 1 :: read: 1, write: 1, in-init: 0
-    next: 1 1 :: read: 1, write: 0, in-init: 1
-    NOT-ps: 1 :: read: 1, write: 1, in-init: 1
-Function[4]:
-    d: :: read: 1, write: 0, in-init: 1
-    i: 1 :: read: 1, write: 0, in-init: 1
-    x: 1 :: read: 1, write: 1, in-init: 1
-    q: 1 :: read: 1, write: 1, in-init: 1
-Action[6]:
-    lft: ?r:1
-        pre: (and (RW:NOT-ps ?r) (> (x ?r) (* (d) (i ?r))))
-        eff: (and (decrease (x ?r) 1))
-    rgt: ?r:1
-        pre: (and (RW:NOT-ps ?r) (< (x ?r) (* (d) (+ (i ?r) 1))))
-        eff: (and (increase (x ?r) 1))
-    conn: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (= (x ?r1) (x ?r2)))
-        eff: (and (RW:pd ?r1 ?r2) (N:RW:NOT-ps ?r1) (N:RW:NOT-ps ?r2))
-    disc: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2))
-        eff: (and (N:RW:pd ?r1 ?r2) (RW:NOT-ps ?r1) (RW:NOT-ps ?r2))
-    exch-lre: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2) (>= (q ?r1) 1))
-        eff: (and (decrease (q ?r1) 1) (increase (q ?r2) 1))
-    exch-rle: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2) (>= (q ?r2) 1))
-        eff: (and (decrease (q ?r1) -1) (increase (q ?r2) -1))
-Init[5]:
-  S:(next r0 r1)
-  S:(next r1 r2)
-  (NOT-ps r0)
-  (NOT-ps r1)
-  (NOT-ps r2)
-Init[10]:
-  (= (d) 50)
-  (= (i r0) 0)
-  (= (i r1) 1)
-  (= (i r2) 2)
-  (= (x r0) 25)
-  (= (x r1) 75)
-  (= (x r2) 125)
-  (= (q r0) 3)
-  (= (q r1) 6)
-  (= (q r2) 6)
-Goal: (and (= (x r0) 25) (= (x r1) 75) (= (x r2) 125) (= (q r0) (q r1)) (= (q r1) (q r2)))
-Metric: no-metric
+Require:
+  - :negative-preconditions
+Predicate:
+  + (NOT-ps robot)
+  - (ps robot)
+Action:
+  - conn: ?r1 - robot ?r2 - robot
+      pre: (and (= (x ?r1) (x ?r2)) (next ?r1 ?r2))
+      eff: (and (pd ?r1 ?r2) (ps ?r1) (ps ?r2))
+  + conn: ?r1 - robot ?r2 - robot
+      pre: (and (= (x ?r1) (x ?r2)) (next ?r1 ?r2))
+      eff: (and (not (NOT-ps ?r1)) (not (NOT-ps ?r2)) (pd ?r1 ?r2))
+  - disc: ?r1 - robot ?r2 - robot
+      pre: (and (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (not (pd ?r1 ?r2)) (not (ps ?r1)) (not (ps ?r2)))
+  + disc: ?r1 - robot ?r2 - robot
+      pre: (and (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (NOT-ps ?r1) (NOT-ps ?r2) (not (pd ?r1 ?r2)))
+  - lft: ?r - robot
+      pre: (and (> (x ?r) (* (d) (i ?r))) (not (ps ?r)))
+      eff: (and (decrease (x ?r) 1))
+  + lft: ?r - robot
+      pre: (and (> (x ?r) (* (d) (i ?r))) (NOT-ps ?r))
+      eff: (and (decrease (x ?r) 1))
+  - rgt: ?r - robot
+      pre: (and (< (x ?r) (* (d) (+ (i ?r) 1))) (not (ps ?r)))
+      eff: (and (increase (x ?r) 1))
+  + rgt: ?r - robot
+      pre: (and (< (x ?r) (* (d) (+ (i ?r) 1))) (NOT-ps ?r))
+      eff: (and (increase (x ?r) 1))
+Init:
+  + (NOT-ps r0)
+  + (NOT-ps r1)
+  + (NOT-ps r2)
+Pred prop:
+  + (NOT-ps robot): in_init in_pre in_eff
+  - (ps robot): in_pre in_eff

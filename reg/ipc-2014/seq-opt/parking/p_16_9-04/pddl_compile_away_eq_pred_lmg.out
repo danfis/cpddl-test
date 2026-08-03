@@ -1,124 +1,50 @@
-Domain: parking
-Problem: parking
-Require: 20017
-Type[3]:
-    [0]: object, parent: -1
-    [1]: car, parent: 0
-    [2]: curb, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-    [1]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-    [2]: 16 17 18 19 20 21 22 23 24
-Obj[25]:
-    [0]: car_00, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: car_01, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: car_02, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: car_03, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: car_04, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: car_05, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: car_06, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: car_07, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: car_08, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: car_09, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: car_10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: car_11, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: car_12, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: car_13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: car_14, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: car_15, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: curb_0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: curb_1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: curb_2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: curb_3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: curb_4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: curb_5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: curb_6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: curb_7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: curb_8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[7]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at-curb: 1 :: read: 1, write: 1, in-init: 1
-    at-curb-num: 1 2 :: read: 1, write: 1, in-init: 1
-    behind-car: 1 1 :: read: 1, write: 1, in-init: 1
-    car-clear: 1 :: read: 1, write: 1, in-init: 1
-    curb-clear: 2 :: read: 1, write: 1, in-init: 0
-    equal: 0 0 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[4]:
-    move-curb-to-curb: ?car:1 ?curbsrc:2 ?curbdest:2
-        pre: (and (N:R:equal ?curbsrc ?curbdest) (RW:at-curb-num ?car ?curbsrc) (RW:car-clear ?car) (RW:curb-clear ?curbdest))
-        eff: (and (N:RW:at-curb-num ?car ?curbsrc) (RW:at-curb-num ?car ?curbdest) (RW:curb-clear ?curbsrc) (N:RW:curb-clear ?curbdest) (increase (total-cost) 1))
-    move-curb-to-car: ?car:1 ?curbsrc:2 ?cardest:1
-        pre: (and (RW:at-curb ?cardest) (RW:at-curb-num ?car ?curbsrc) (RW:car-clear ?car) (RW:car-clear ?cardest))
-        eff: (and (N:RW:at-curb ?car) (N:RW:at-curb-num ?car ?curbsrc) (RW:behind-car ?car ?cardest) (N:RW:car-clear ?cardest) (RW:curb-clear ?curbsrc) (increase (total-cost) 1))
-    move-car-to-curb: ?car:1 ?carsrc:1 ?curbdest:2
-        pre: (and (N:R:equal ?car ?carsrc) (RW:behind-car ?car ?carsrc) (RW:car-clear ?car) (RW:curb-clear ?curbdest))
-        eff: (and (RW:at-curb ?car) (RW:at-curb-num ?car ?curbdest) (N:RW:behind-car ?car ?carsrc) (RW:car-clear ?carsrc) (N:RW:curb-clear ?curbdest) (increase (total-cost) 1))
-    move-car-to-car: ?car:1 ?carsrc:1 ?cardest:1
-        pre: (and (N:R:equal ?car ?carsrc) (N:R:equal ?carsrc ?cardest) (RW:at-curb ?cardest) (RW:behind-car ?car ?carsrc) (RW:car-clear ?car) (RW:car-clear ?cardest))
-        eff: (and (N:RW:behind-car ?car ?carsrc) (RW:behind-car ?car ?cardest) (RW:car-clear ?carsrc) (N:RW:car-clear ?cardest) (increase (total-cost) 1))
-Init[59]:
-  S:(equal car_00 car_00)
-  S:(equal car_01 car_01)
-  S:(equal car_02 car_02)
-  S:(equal car_03 car_03)
-  S:(equal car_04 car_04)
-  S:(equal car_05 car_05)
-  S:(equal car_06 car_06)
-  S:(equal car_07 car_07)
-  S:(equal car_08 car_08)
-  S:(equal car_09 car_09)
-  S:(equal car_10 car_10)
-  S:(equal car_11 car_11)
-  S:(equal car_12 car_12)
-  S:(equal car_13 car_13)
-  S:(equal car_14 car_14)
-  S:(equal car_15 car_15)
-  S:(equal curb_0 curb_0)
-  S:(equal curb_1 curb_1)
-  S:(equal curb_2 curb_2)
-  S:(equal curb_3 curb_3)
-  S:(equal curb_4 curb_4)
-  S:(equal curb_5 curb_5)
-  S:(equal curb_6 curb_6)
-  S:(equal curb_7 curb_7)
-  S:(equal curb_8 curb_8)
-  (at-curb car_00)
-  (at-curb car_01)
-  (at-curb car_03)
-  (at-curb car_04)
-  (at-curb car_07)
-  (at-curb car_08)
-  (at-curb car_10)
-  (at-curb car_11)
-  (at-curb car_12)
-  (at-curb-num car_00 curb_8)
-  (at-curb-num car_01 curb_2)
-  (at-curb-num car_03 curb_1)
-  (at-curb-num car_04 curb_6)
-  (at-curb-num car_07 curb_4)
-  (at-curb-num car_08 curb_3)
-  (at-curb-num car_10 curb_0)
-  (at-curb-num car_11 curb_5)
-  (at-curb-num car_12 curb_7)
-  (behind-car car_02 car_04)
-  (behind-car car_05 car_01)
-  (behind-car car_06 car_10)
-  (behind-car car_09 car_07)
-  (behind-car car_13 car_11)
-  (behind-car car_14 car_08)
-  (behind-car car_15 car_03)
-  (car-clear car_00)
-  (car-clear car_02)
-  (car-clear car_05)
-  (car-clear car_06)
-  (car-clear car_09)
-  (car-clear car_12)
-  (car-clear car_13)
-  (car-clear car_14)
-  (car-clear car_15)
-Init[1]:
-  (= (total-cost) 0)
-Goal: (and (RW:at-curb-num car_00 curb_0) (RW:at-curb-num car_01 curb_1) (RW:at-curb-num car_02 curb_2) (RW:at-curb-num car_03 curb_3) (RW:at-curb-num car_04 curb_4) (RW:at-curb-num car_05 curb_5) (RW:at-curb-num car_06 curb_6) (RW:at-curb-num car_07 curb_7) (RW:at-curb-num car_08 curb_8) (RW:behind-car car_09 car_00) (RW:behind-car car_10 car_01) (RW:behind-car car_11 car_02) (RW:behind-car car_12 car_03) (RW:behind-car car_13 car_04) (RW:behind-car car_14 car_05) (RW:behind-car car_15 car_06))
-Metric: (total-cost)
+Predicate:
+  + (equal object object)
+Action:
+  - move-car-to-car: ?car - car ?carsrc - car ?cardest - car
+      pre: (and (at-curb ?cardest) (behind-car ?car ?carsrc) (car-clear ?car) (car-clear ?cardest) (not (= ?car ?carsrc)) (not (= ?carsrc ?cardest)))
+      eff: (and (behind-car ?car ?cardest) (car-clear ?carsrc) (increase (total-cost) 1) (not (behind-car ?car ?carsrc)) (not (car-clear ?cardest)))
+  + move-car-to-car: ?car - car ?carsrc - car ?cardest - car
+      pre: (and (at-curb ?cardest) (behind-car ?car ?carsrc) (car-clear ?car) (car-clear ?cardest) (not (equal ?car ?carsrc)) (not (equal ?carsrc ?cardest)))
+      eff: (and (behind-car ?car ?cardest) (car-clear ?carsrc) (increase (total-cost) 1) (not (behind-car ?car ?carsrc)) (not (car-clear ?cardest)))
+  - move-car-to-curb: ?car - car ?carsrc - car ?curbdest - curb
+      pre: (and (behind-car ?car ?carsrc) (car-clear ?car) (curb-clear ?curbdest) (not (= ?car ?carsrc)))
+      eff: (and (at-curb ?car) (at-curb-num ?car ?curbdest) (car-clear ?carsrc) (increase (total-cost) 1) (not (behind-car ?car ?carsrc)) (not (curb-clear ?curbdest)))
+  + move-car-to-curb: ?car - car ?carsrc - car ?curbdest - curb
+      pre: (and (behind-car ?car ?carsrc) (car-clear ?car) (curb-clear ?curbdest) (not (equal ?car ?carsrc)))
+      eff: (and (at-curb ?car) (at-curb-num ?car ?curbdest) (car-clear ?carsrc) (increase (total-cost) 1) (not (behind-car ?car ?carsrc)) (not (curb-clear ?curbdest)))
+  - move-curb-to-curb: ?car - car ?curbsrc - curb ?curbdest - curb
+      pre: (and (at-curb-num ?car ?curbsrc) (car-clear ?car) (curb-clear ?curbdest) (not (= ?curbsrc ?curbdest)))
+      eff: (and (at-curb-num ?car ?curbdest) (curb-clear ?curbsrc) (increase (total-cost) 1) (not (at-curb-num ?car ?curbsrc)) (not (curb-clear ?curbdest)))
+  + move-curb-to-curb: ?car - car ?curbsrc - curb ?curbdest - curb
+      pre: (and (at-curb-num ?car ?curbsrc) (car-clear ?car) (curb-clear ?curbdest) (not (equal ?curbsrc ?curbdest)))
+      eff: (and (at-curb-num ?car ?curbdest) (curb-clear ?curbsrc) (increase (total-cost) 1) (not (at-curb-num ?car ?curbsrc)) (not (curb-clear ?curbdest)))
+Init:
+  + (equal car_00 car_00)
+  + (equal car_01 car_01)
+  + (equal car_02 car_02)
+  + (equal car_03 car_03)
+  + (equal car_04 car_04)
+  + (equal car_05 car_05)
+  + (equal car_06 car_06)
+  + (equal car_07 car_07)
+  + (equal car_08 car_08)
+  + (equal car_09 car_09)
+  + (equal car_10 car_10)
+  + (equal car_11 car_11)
+  + (equal car_12 car_12)
+  + (equal car_13 car_13)
+  + (equal car_14 car_14)
+  + (equal car_15 car_15)
+  + (equal curb_0 curb_0)
+  + (equal curb_1 curb_1)
+  + (equal curb_2 curb_2)
+  + (equal curb_3 curb_3)
+  + (equal curb_4 curb_4)
+  + (equal curb_5 curb_5)
+  + (equal curb_6 curb_6)
+  + (equal curb_7 curb_7)
+  + (equal curb_8 curb_8)
+Pred prop:
+  - (= object object): in_pre
+  + (equal object object): in_init in_pre

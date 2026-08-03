@@ -1,59 +1,25 @@
-Domain: farmland
-Problem: instance_6_500_1229_ladder
-Require: 117
-Type[2]:
-    [0]: object, parent: -1
-    [1]: farm, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5
-    [1]: 0 1 2 3 4 5
-Obj[6]:
-    [0]: farm0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: farm1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: farm2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: farm3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: farm4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: farm5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[3]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    adj: 1 1 :: read: 1, write: 0, in-init: 1
-    equal: 0 0 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    x: 1 :: read: 1, write: 1, in-init: 1
-Action[2]:
-    move-fast: ?f1:1 ?f2:1
-        pre: (and (R:adj ?f1 ?f2) (N:R:equal ?f1 ?f2) (>= (x ?f1) 4))
-        eff: (and (decrease (x ?f1) 4) (increase (x ?f2) 2))
-    move-slow: ?f1:1 ?f2:1
-        pre: (and (R:adj ?f1 ?f2) (N:R:equal ?f1 ?f2) (>= (x ?f1) 1))
-        eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
-Init[20]:
-  S:(adj farm0 farm1)
-  S:(adj farm0 farm3)
-  S:(adj farm1 farm0)
-  S:(adj farm1 farm2)
-  S:(adj farm1 farm4)
-  S:(adj farm2 farm1)
-  S:(adj farm2 farm5)
-  S:(adj farm3 farm0)
-  S:(adj farm3 farm4)
-  S:(adj farm4 farm1)
-  S:(adj farm4 farm3)
-  S:(adj farm4 farm5)
-  S:(adj farm5 farm2)
-  S:(adj farm5 farm4)
-  S:(equal farm0 farm0)
-  S:(equal farm1 farm1)
-  S:(equal farm2 farm2)
-  S:(equal farm3 farm3)
-  S:(equal farm4 farm4)
-  S:(equal farm5 farm5)
-Init[6]:
-  (= (x farm0) 500)
-  (= (x farm1) 1)
-  (= (x farm2) 0)
-  (= (x farm3) 0)
-  (= (x farm4) 0)
-  (= (x farm5) 1)
-Goal: (and (>= (x farm0) 1) (>= (x farm1) 1) (>= (x farm2) 1) (>= (x farm3) 1) (>= (x farm4) 1) (>= (x farm5) 1) (>= (+ (x farm0) (+ (* 1.7 (x farm1)) (+ (* 1.3 (x farm2)) (+ (* 1.1 (x farm3)) (+ (* 1.4 (x farm4)) (* 1.9 (x farm5))))))) 700))
-Metric: no-metric
+Predicate:
+  + (equal object object)
+Action:
+  - move-fast: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 4) (adj ?f1 ?f2) (not (= ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) 4) (increase (x ?f2) 2))
+  + move-fast: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 4) (adj ?f1 ?f2) (not (equal ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) 4) (increase (x ?f2) 2))
+  - move-slow: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2) (not (= ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
+  + move-slow: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2) (not (equal ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
+Init:
+  + (equal farm0 farm0)
+  + (equal farm1 farm1)
+  + (equal farm2 farm2)
+  + (equal farm3 farm3)
+  + (equal farm4 farm4)
+  + (equal farm5 farm5)
+Pred prop:
+  - (= object object): in_pre
+  + (equal object object): in_init in_pre

@@ -1,106 +1,74 @@
-Domain: tpp-metric
-Problem: pfile02
-Require: 103
-Type[7]:
-    [0]: object, parent: -1
-    [1]: place, parent: 0
-    [2]: locatable, parent: 0
-    [3]: depot, parent: 1
-    [4]: market, parent: 1
-    [5]: truck, parent: 2
-    [6]: goods, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8
-    [1]: 0 1 2 3 4 5
-    [2]: 6 7 8
-    [3]: 5
-    [4]: 0 1 2 3 4
-    [5]: 6
-    [6]: 7 8
-Obj[9]:
-    [0]: market1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: market2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: market3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: market4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: market5, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: depot0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: truck0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: goods0, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: goods1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    loc: 5 1 :: read: 1, write: 1, in-init: 1
-Function[6]:
-    on-sale: 6 4 :: read: 1, write: 1, in-init: 1
-    drive-cost: 1 1 :: read: 1, write: 0, in-init: 1
-    price: 6 4 :: read: 1, write: 0, in-init: 1
-    bought: 6 :: read: 1, write: 1, in-init: 1
-    request: 6 :: read: 1, write: 0, in-init: 1
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[3]:
-    drive: ?t:5 ?from:1 ?to:1
-        pre: (and (RW:loc ?t ?from))
-        eff: (and (N:RW:loc ?t ?from) (RW:loc ?t ?to) (increase (total-cost) (drive-cost ?from ?to)))
-    buy-allneeded: ?t:5 ?g:6 ?m:4
-        pre: (and (RW:loc ?t ?m) (> (on-sale ?g ?m) 0) (> (on-sale ?g ?m) (- (request ?g) (bought ?g))))
-        eff: (and (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))) (increase (total-cost) (* (- (request ?g) (bought ?g)) (* 100 (price ?g ?m)))) (assign (bought ?g) (request ?g)))
-    buy-all: ?t:5 ?g:6 ?m:4
-        pre: (and (RW:loc ?t ?m) (> (on-sale ?g ?m) 0) (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))))
-        eff: (and (assign (on-sale ?g ?m) 0) (increase (total-cost) (* (* 100 (on-sale ?g ?m)) (price ?g ?m))) (increase (bought ?g) (on-sale ?g ?m)))
-Init[1]:
-  (loc truck0 depot0)
-Init[52]:
-  (= (on-sale goods0 market1) 4)
-  (= (on-sale goods0 market2) 9)
-  (= (on-sale goods0 market3) 17)
-  (= (on-sale goods0 market4) 9)
-  (= (on-sale goods0 market5) 2)
-  (= (on-sale goods1 market1) 0)
-  (= (on-sale goods1 market2) 0)
-  (= (on-sale goods1 market3) 7)
-  (= (on-sale goods1 market4) 20)
-  (= (on-sale goods1 market5) 0)
-  (= (drive-cost market1 market2) 103370)
-  (= (drive-cost market1 market3) 22766)
-  (= (drive-cost market1 market4) 17531)
-  (= (drive-cost market1 market5) 45857)
-  (= (drive-cost market1 depot0) 38120)
-  (= (drive-cost market2 market1) 103370)
-  (= (drive-cost market2 market3) 94403)
-  (= (drive-cost market2 market4) 108073)
-  (= (drive-cost market2 market5) 82628)
-  (= (drive-cost market2 depot0) 73752)
-  (= (drive-cost market3 market1) 22766)
-  (= (drive-cost market3 market2) 94403)
-  (= (drive-cost market3 market4) 14654)
-  (= (drive-cost market3 market5) 23745)
-  (= (drive-cost market3 depot0) 45295)
-  (= (drive-cost market4 market1) 17531)
-  (= (drive-cost market4 market2) 108073)
-  (= (drive-cost market4 market3) 14654)
-  (= (drive-cost market4 market5) 37071)
-  (= (drive-cost market4 depot0) 51644)
-  (= (drive-cost market5 market1) 45857)
-  (= (drive-cost market5 market2) 82628)
-  (= (drive-cost market5 market3) 23745)
-  (= (drive-cost market5 market4) 37071)
-  (= (drive-cost market5 depot0) 55853)
-  (= (drive-cost depot0 market1) 38120)
-  (= (drive-cost depot0 market2) 73752)
-  (= (drive-cost depot0 market3) 45295)
-  (= (drive-cost depot0 market4) 51644)
-  (= (drive-cost depot0 market5) 55853)
-  (= (price goods0 market1) 15)
-  (= (price goods0 market2) 8)
-  (= (price goods0 market3) 35)
-  (= (price goods0 market4) 11)
-  (= (price goods0 market5) 25)
-  (= (price goods1 market3) 11)
-  (= (price goods1 market4) 12)
-  (= (bought goods0) 0)
-  (= (bought goods1) 0)
-  (= (request goods0) 20)
-  (= (request goods1) 23)
-  (= (total-cost) 0)
-Goal: (and (RW:loc truck0 depot0) (>= (bought goods0) (request goods0)) (>= (bought goods1) (request goods1)))
-Metric: (total-cost)
+Action:
+  - buy-all: ?t - truck ?g - goods ?m - market
+      pre: (and (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (on-sale ?g ?m) 0) (increase (bought ?g) (on-sale ?g ?m)) (increase (total-cost) (* (on-sale ?g ?m) (price ?g ?m))))
+  + buy-all: ?t - truck ?g - goods ?m - market
+      pre: (and (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (on-sale ?g ?m) 0) (increase (bought ?g) (on-sale ?g ?m)) (increase (total-cost) (* (* 100 (on-sale ?g ?m)) (price ?g ?m))))
+  - buy-allneeded: ?t - truck ?g - goods ?m - market
+      pre: (and (> (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (bought ?g) (request ?g)) (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))) (increase (total-cost) (* (- (request ?g) (bought ?g)) (price ?g ?m))))
+  + buy-allneeded: ?t - truck ?g - goods ?m - market
+      pre: (and (> (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (bought ?g) (request ?g)) (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))) (increase (total-cost) (* (- (request ?g) (bought ?g)) (* 100 (price ?g ?m)))))
+Init:
+  - (= (drive-cost depot0 market1) 381.2)
+  - (= (drive-cost depot0 market2) 737.52)
+  - (= (drive-cost depot0 market3) 452.95)
+  - (= (drive-cost depot0 market4) 516.44)
+  - (= (drive-cost depot0 market5) 558.53)
+  - (= (drive-cost market1 depot0) 381.2)
+  - (= (drive-cost market1 market2) 1033.7)
+  - (= (drive-cost market1 market3) 227.66)
+  - (= (drive-cost market1 market4) 175.31)
+  - (= (drive-cost market1 market5) 458.57)
+  - (= (drive-cost market2 depot0) 737.52)
+  - (= (drive-cost market2 market1) 1033.7)
+  - (= (drive-cost market2 market3) 944.03)
+  - (= (drive-cost market2 market4) 1080.73)
+  - (= (drive-cost market2 market5) 826.28)
+  - (= (drive-cost market3 depot0) 452.95)
+  - (= (drive-cost market3 market1) 227.66)
+  - (= (drive-cost market3 market2) 944.03)
+  - (= (drive-cost market3 market4) 146.54)
+  - (= (drive-cost market3 market5) 237.45)
+  - (= (drive-cost market4 depot0) 516.44)
+  - (= (drive-cost market4 market1) 175.31)
+  - (= (drive-cost market4 market2) 1080.73)
+  - (= (drive-cost market4 market3) 146.54)
+  - (= (drive-cost market4 market5) 370.71)
+  - (= (drive-cost market5 depot0) 558.53)
+  - (= (drive-cost market5 market1) 458.57)
+  - (= (drive-cost market5 market2) 826.28)
+  - (= (drive-cost market5 market3) 237.45)
+  - (= (drive-cost market5 market4) 370.71)
+  + (= (drive-cost depot0 market1) 38120)
+  + (= (drive-cost depot0 market2) 73752)
+  + (= (drive-cost depot0 market3) 45295)
+  + (= (drive-cost depot0 market4) 51644)
+  + (= (drive-cost depot0 market5) 55853)
+  + (= (drive-cost market1 depot0) 38120)
+  + (= (drive-cost market1 market2) 103370)
+  + (= (drive-cost market1 market3) 22766)
+  + (= (drive-cost market1 market4) 17531)
+  + (= (drive-cost market1 market5) 45857)
+  + (= (drive-cost market2 depot0) 73752)
+  + (= (drive-cost market2 market1) 103370)
+  + (= (drive-cost market2 market3) 94403)
+  + (= (drive-cost market2 market4) 108073)
+  + (= (drive-cost market2 market5) 82628)
+  + (= (drive-cost market3 depot0) 45295)
+  + (= (drive-cost market3 market1) 22766)
+  + (= (drive-cost market3 market2) 94403)
+  + (= (drive-cost market3 market4) 14654)
+  + (= (drive-cost market3 market5) 23745)
+  + (= (drive-cost market4 depot0) 51644)
+  + (= (drive-cost market4 market1) 17531)
+  + (= (drive-cost market4 market2) 108073)
+  + (= (drive-cost market4 market3) 14654)
+  + (= (drive-cost market4 market5) 37071)
+  + (= (drive-cost market5 depot0) 55853)
+  + (= (drive-cost market5 market1) 45857)
+  + (= (drive-cost market5 market2) 82628)
+  + (= (drive-cost market5 market3) 23745)
+  + (= (drive-cost market5 market4) 37071)

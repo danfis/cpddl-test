@@ -1,104 +1,12 @@
-Domain: document
-Problem: solv-problem-1
-Require: 17
-Type[3]:
-    [0]: object, parent: -1
-    [1]: document, parent: 0
-    [2]: location, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22
-    [1]: 1 2 3 4 5 6 7 8 9 10
-    [2]: 0 11 12 13 14 15 16 17 18 19 20 21 22
-Obj[23]:
-    [0]: office, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [1]: fuel1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: fuel2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: document1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: document2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: document3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: document4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: document5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: document6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: document7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: document8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: office1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: office2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: office3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: office4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: office5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: office6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: office7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: office8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: office9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: office10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: office11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: depot, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[5]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    track: 2 2 :: read: 1, write: 0, in-init: 1
-    at: 1 2 :: read: 1, write: 1, in-init: 1
-    in-train: 1 :: read: 1, write: 1, in-init: 1
-    train-at: 2 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[3]:
-    drive: ?l1:2 ?l2:2 ?g:1
-        pre: (and (N:R:= ?g document5) (N:R:= ?g document6) (R:track ?l1 ?l2) (RW:in-train ?g) (RW:train-at ?l1))
-        eff: (and (N:RW:in-train ?g) (N:RW:train-at ?l1) (RW:train-at ?l2))
-    pickup-documents: ?l:2 ?d:1
-        pre: (and (RW:at ?d ?l) (RW:train-at ?l))
-        eff: (and (N:RW:at ?d ?l) (RW:in-train ?d))
-    deposit-documents: ?l:2 ?d:1
-        pre: (and (RW:in-train ?d) (RW:train-at ?l))
-        eff: (and (RW:at ?d ?l) (N:RW:in-train ?d))
-Init[48]:
-  S:(track office1 office1)
-  S:(track office1 office2)
-  S:(track office2 office)
-  S:(track office2 office3)
-  S:(track office3 office1)
-  S:(track office3 office2)
-  S:(track office3 office4)
-  S:(track office4 office3)
-  S:(track office4 office5)
-  S:(track office4 office8)
-  S:(track office5 office2)
-  S:(track office5 office5)
-  S:(track office5 office6)
-  S:(track office5 office7)
-  S:(track office5 office8)
-  S:(track office6 office3)
-  S:(track office6 office4)
-  S:(track office6 office5)
-  S:(track office6 office6)
-  S:(track office6 office7)
-  S:(track office6 office8)
-  S:(track office7 office4)
-  S:(track office7 office8)
-  S:(track office8 office5)
-  S:(track office8 office8)
-  S:(track office8 office9)
-  S:(track office9 office6)
-  S:(track office9 office10)
-  S:(track office9 office11)
-  S:(track office10 office7)
-  S:(track office10 office8)
-  S:(track office10 office11)
-  S:(track office10 depot)
-  S:(track office11 office7)
-  S:(track office11 office8)
-  S:(track office11 depot)
-  S:(track depot office8)
-  (at document1 office3)
-  (at document2 office3)
-  (at document3 office4)
-  (at document4 office4)
-  (at document5 office4)
-  (at document6 office4)
-  (at document7 office8)
-  (at document8 office8)
-  (in-train fuel1)
-  (in-train fuel2)
-  (train-at office1)
-Init[0]:
-Goal: (and (RW:at document5 depot) (RW:at document6 depot))
-Metric: no-metric
+Require:
+  + :equality
+  + :negative-preconditions
+Action:
+  - drive: ?l1 - location ?l2 - location ?g - document
+      pre: (and (in-train ?g) (track ?l1 ?l2) (train-at ?l1))
+      eff: (and (not (in-train ?g)) (not (train-at ?l1)) (train-at ?l2))
+  + drive: ?l1 - location ?l2 - location ?g - document
+      pre: (and (in-train ?g) (not (= ?g document5)) (not (= ?g document6)) (track ?l1 ?l2) (train-at ?l1))
+      eff: (and (not (in-train ?g)) (not (train-at ?l1)) (train-at ?l2))
+Pred prop:
+  + (= object object): in_pre

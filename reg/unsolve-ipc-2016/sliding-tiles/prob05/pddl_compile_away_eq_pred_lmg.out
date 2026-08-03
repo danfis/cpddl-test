@@ -1,85 +1,42 @@
-Domain: strips-sliding-tile
-Problem: p3-3-puzzle-problem-100-1390833173323132671
-Require: 15
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10
-Obj[11]:
-    [0]: t1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: t2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: t3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: t4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: t5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: t6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: t7, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: t8, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: p1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: p2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: p3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    tile: 0 :: read: 1, write: 0, in-init: 1
-    xposition: 0 :: read: 1, write: 0, in-init: 1
-    yposition: 0 :: read: 1, write: 0, in-init: 1
-    at: 0 0 0 :: read: 1, write: 1, in-init: 1
-    blank: 0 0 :: read: 1, write: 1, in-init: 1
-    inc: 0 0 :: read: 1, write: 0, in-init: 1
-    dec: 0 0 :: read: 1, write: 0, in-init: 1
-    equal: 0 0 :: read: 1, write: 0, in-init: 1
-Function[0]:
-Action[4]:
-    move-up: ?t:0 ?px:0 ?py:0 ?by:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:dec ?by ?py) (N:R:equal ?py ?by) (RW:at ?t ?px ?py) (RW:blank ?px ?by))
-        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?px ?by) (RW:blank ?px ?py) (N:RW:blank ?px ?by))
-    move-down: ?t:0 ?px:0 ?py:0 ?by:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:yposition ?py) (R:yposition ?by) (R:inc ?by ?py) (N:R:equal ?py ?by) (RW:at ?t ?px ?py) (RW:blank ?px ?by))
-        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?px ?by) (RW:blank ?px ?py) (N:RW:blank ?px ?by))
-    move-left: ?t:0 ?px:0 ?py:0 ?bx:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:xposition ?bx) (R:yposition ?py) (R:dec ?bx ?px) (N:R:equal ?px ?bx) (RW:at ?t ?px ?py) (RW:blank ?bx ?py))
-        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?bx ?py) (RW:blank ?px ?py) (N:RW:blank ?bx ?py))
-    move-right: ?t:0 ?px:0 ?py:0 ?bx:0
-        pre: (and (R:tile ?t) (R:xposition ?px) (R:xposition ?bx) (R:yposition ?py) (R:inc ?bx ?px) (N:R:equal ?px ?bx) (RW:at ?t ?px ?py) (RW:blank ?bx ?py))
-        eff: (and (N:RW:at ?t ?px ?py) (RW:at ?t ?bx ?py) (RW:blank ?px ?py) (N:RW:blank ?bx ?py))
-Init[38]:
-  S:(tile t1)
-  S:(tile t2)
-  S:(tile t3)
-  S:(tile t4)
-  S:(tile t5)
-  S:(tile t6)
-  S:(tile t7)
-  S:(tile t8)
-  S:(xposition p1)
-  S:(xposition p2)
-  S:(xposition p3)
-  S:(yposition p1)
-  S:(yposition p2)
-  S:(yposition p3)
-  S:(inc p1 p2)
-  S:(inc p2 p3)
-  S:(dec p2 p1)
-  S:(dec p3 p2)
-  S:(equal t1 t1)
-  S:(equal t2 t2)
-  S:(equal t3 t3)
-  S:(equal t4 t4)
-  S:(equal t5 t5)
-  S:(equal t6 t6)
-  S:(equal t7 t7)
-  S:(equal t8 t8)
-  S:(equal p1 p1)
-  S:(equal p2 p2)
-  S:(equal p3 p3)
-  (at t1 p3 p3)
-  (at t2 p1 p1)
-  (at t3 p2 p2)
-  (at t4 p2 p3)
-  (at t5 p1 p3)
-  (at t6 p1 p2)
-  (at t7 p3 p1)
-  (at t8 p3 p2)
-  (blank p2 p1)
-Init[0]:
-Goal: (and (RW:at t1 p2 p1) (RW:at t2 p3 p1) (RW:at t3 p1 p2) (RW:at t4 p2 p2) (RW:at t5 p3 p2) (RW:at t6 p1 p3) (RW:at t7 p2 p3) (RW:at t8 p3 p3))
-Metric: no-metric
+Predicate:
+  + (equal object object)
+Action:
+  - move-down: ?t - object ?px - object ?py - object ?by - object
+      pre: (and (at ?t ?px ?py) (blank ?px ?by) (inc ?by ?py) (not (= ?py ?by)) (tile ?t) (xposition ?px) (yposition ?by) (yposition ?py))
+      eff: (and (at ?t ?px ?by) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?px ?by)))
+  + move-down: ?t - object ?px - object ?py - object ?by - object
+      pre: (and (at ?t ?px ?py) (blank ?px ?by) (inc ?by ?py) (not (equal ?py ?by)) (tile ?t) (xposition ?px) (yposition ?by) (yposition ?py))
+      eff: (and (at ?t ?px ?by) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?px ?by)))
+  - move-left: ?t - object ?px - object ?py - object ?bx - object
+      pre: (and (at ?t ?px ?py) (blank ?bx ?py) (dec ?bx ?px) (not (= ?px ?bx)) (tile ?t) (xposition ?bx) (xposition ?px) (yposition ?py))
+      eff: (and (at ?t ?bx ?py) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?bx ?py)))
+  + move-left: ?t - object ?px - object ?py - object ?bx - object
+      pre: (and (at ?t ?px ?py) (blank ?bx ?py) (dec ?bx ?px) (not (equal ?px ?bx)) (tile ?t) (xposition ?bx) (xposition ?px) (yposition ?py))
+      eff: (and (at ?t ?bx ?py) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?bx ?py)))
+  - move-right: ?t - object ?px - object ?py - object ?bx - object
+      pre: (and (at ?t ?px ?py) (blank ?bx ?py) (inc ?bx ?px) (not (= ?px ?bx)) (tile ?t) (xposition ?bx) (xposition ?px) (yposition ?py))
+      eff: (and (at ?t ?bx ?py) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?bx ?py)))
+  + move-right: ?t - object ?px - object ?py - object ?bx - object
+      pre: (and (at ?t ?px ?py) (blank ?bx ?py) (inc ?bx ?px) (not (equal ?px ?bx)) (tile ?t) (xposition ?bx) (xposition ?px) (yposition ?py))
+      eff: (and (at ?t ?bx ?py) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?bx ?py)))
+  - move-up: ?t - object ?px - object ?py - object ?by - object
+      pre: (and (at ?t ?px ?py) (blank ?px ?by) (dec ?by ?py) (not (= ?py ?by)) (tile ?t) (xposition ?px) (yposition ?by) (yposition ?py))
+      eff: (and (at ?t ?px ?by) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?px ?by)))
+  + move-up: ?t - object ?px - object ?py - object ?by - object
+      pre: (and (at ?t ?px ?py) (blank ?px ?by) (dec ?by ?py) (not (equal ?py ?by)) (tile ?t) (xposition ?px) (yposition ?by) (yposition ?py))
+      eff: (and (at ?t ?px ?by) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?px ?by)))
+Init:
+  + (equal p1 p1)
+  + (equal p2 p2)
+  + (equal p3 p3)
+  + (equal t1 t1)
+  + (equal t2 t2)
+  + (equal t3 t3)
+  + (equal t4 t4)
+  + (equal t5 t5)
+  + (equal t6 t6)
+  + (equal t7 t7)
+  + (equal t8 t8)
+Pred prop:
+  - (= object object): in_pre
+  + (equal object object): in_init in_pre

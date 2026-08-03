@@ -1,165 +1,57 @@
-Domain: depot
-Problem: depotprob7654
-Require: 15
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-Obj[26]:
-    [0]: depot0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: depot1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: depot2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: distributor0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: distributor1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: distributor2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: truck0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: pallet0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: pallet1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: pallet2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: pallet3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: pallet4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: pallet5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: crate0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: crate1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: crate2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: crate3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: crate4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: crate5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: hoist0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: hoist1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: hoist2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: hoist3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: hoist4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: hoist5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at: 0 0 :: read: 1, write: 1, in-init: 1
-    on: 0 0 :: read: 1, write: 1, in-init: 1
-    in: 0 0 :: read: 1, write: 1, in-init: 0
-    lifting: 0 0 :: read: 1, write: 1, in-init: 0
-    available: 0 :: read: 1, write: 1, in-init: 1
-    clear: 0 :: read: 1, write: 1, in-init: 1
-    place: 0 :: read: 1, write: 0, in-init: 1
-    truck: 0 :: read: 1, write: 0, in-init: 1
-    hoist: 0 :: read: 1, write: 0, in-init: 1
-    surface: 0 :: read: 1, write: 0, in-init: 1
-    crate: 0 :: read: 1, write: 0, in-init: 1
-    equal: 0 0 :: read: 1, write: 0, in-init: 1
-Function[0]:
-Action[5]:
-    drive: ?x:0 ?y:0 ?z:0
-        pre: (and (R:place ?y) (R:place ?z) (R:truck ?x) (RW:at ?x ?y))
-        eff: (and (N:RW:at ?x ?y) (RW:at ?x ?z))
-    lift: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:hoist ?x) (R:surface ?z) (R:crate ?y) (N:R:equal ?y ?z) (RW:at ?x ?p) (RW:at ?y ?p) (RW:on ?y ?z) (RW:available ?x) (RW:clear ?y))
-        eff: (and (N:RW:at ?y ?p) (N:RW:on ?y ?z) (RW:lifting ?x ?y) (N:RW:available ?x) (N:RW:clear ?y) (RW:clear ?z))
-    drop: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:hoist ?x) (R:surface ?z) (R:crate ?y) (N:R:equal ?x ?y) (N:R:equal ?y ?z) (RW:at ?x ?p) (RW:at ?z ?p) (RW:lifting ?x ?y) (RW:clear ?z))
-        eff: (and (RW:at ?y ?p) (RW:on ?y ?z) (N:RW:lifting ?x ?y) (RW:available ?x) (RW:clear ?y) (N:RW:clear ?z))
-    load: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:truck ?z) (R:hoist ?x) (R:crate ?y) (N:R:equal ?x ?y) (N:R:equal ?y ?z) (RW:at ?x ?p) (RW:at ?z ?p) (RW:lifting ?x ?y))
-        eff: (and (RW:in ?y ?z) (N:RW:lifting ?x ?y) (RW:available ?x))
-    unload: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:truck ?z) (R:hoist ?x) (R:crate ?y) (N:R:equal ?x ?y) (N:R:equal ?y ?z) (RW:at ?x ?p) (RW:at ?z ?p) (RW:in ?y ?z) (RW:available ?x))
-        eff: (and (N:RW:in ?y ?z) (RW:lifting ?x ?y) (N:RW:available ?x))
-Init[96]:
-  S:(place depot0)
-  S:(place depot1)
-  S:(place depot2)
-  S:(place distributor0)
-  S:(place distributor1)
-  S:(place distributor2)
-  S:(truck truck0)
-  S:(truck truck1)
-  S:(hoist hoist0)
-  S:(hoist hoist1)
-  S:(hoist hoist2)
-  S:(hoist hoist3)
-  S:(hoist hoist4)
-  S:(hoist hoist5)
-  S:(surface pallet0)
-  S:(surface pallet1)
-  S:(surface pallet2)
-  S:(surface pallet3)
-  S:(surface pallet4)
-  S:(surface pallet5)
-  S:(surface crate0)
-  S:(surface crate1)
-  S:(surface crate2)
-  S:(surface crate3)
-  S:(surface crate4)
-  S:(surface crate5)
-  S:(crate crate0)
-  S:(crate crate1)
-  S:(crate crate2)
-  S:(crate crate3)
-  S:(crate crate4)
-  S:(crate crate5)
-  S:(equal depot0 depot0)
-  S:(equal depot1 depot1)
-  S:(equal depot2 depot2)
-  S:(equal distributor0 distributor0)
-  S:(equal distributor1 distributor1)
-  S:(equal distributor2 distributor2)
-  S:(equal truck0 truck0)
-  S:(equal truck1 truck1)
-  S:(equal pallet0 pallet0)
-  S:(equal pallet1 pallet1)
-  S:(equal pallet2 pallet2)
-  S:(equal pallet3 pallet3)
-  S:(equal pallet4 pallet4)
-  S:(equal pallet5 pallet5)
-  S:(equal crate0 crate0)
-  S:(equal crate1 crate1)
-  S:(equal crate2 crate2)
-  S:(equal crate3 crate3)
-  S:(equal crate4 crate4)
-  S:(equal crate5 crate5)
-  S:(equal hoist0 hoist0)
-  S:(equal hoist1 hoist1)
-  S:(equal hoist2 hoist2)
-  S:(equal hoist3 hoist3)
-  S:(equal hoist4 hoist4)
-  S:(equal hoist5 hoist5)
-  (at truck0 depot1)
-  (at truck1 depot2)
-  (at pallet0 depot0)
-  (at pallet1 depot1)
-  (at pallet2 depot2)
-  (at pallet3 distributor0)
-  (at pallet4 distributor1)
-  (at pallet5 distributor2)
-  (at crate0 depot1)
-  (at crate1 depot0)
-  (at crate2 distributor2)
-  (at crate3 distributor2)
-  (at crate4 depot2)
-  (at crate5 distributor0)
-  (at hoist0 depot0)
-  (at hoist1 depot1)
-  (at hoist2 depot2)
-  (at hoist3 distributor0)
-  (at hoist4 distributor1)
-  (at hoist5 distributor2)
-  (on crate0 pallet1)
-  (on crate1 pallet0)
-  (on crate2 pallet5)
-  (on crate3 crate2)
-  (on crate4 pallet2)
-  (on crate5 pallet3)
-  (available hoist0)
-  (available hoist1)
-  (available hoist2)
-  (available hoist3)
-  (available hoist4)
-  (available hoist5)
-  (clear pallet4)
-  (clear crate0)
-  (clear crate1)
-  (clear crate3)
-  (clear crate4)
-  (clear crate5)
-Init[0]:
-Goal: (and (RW:on crate0 crate4) (RW:on crate2 pallet3) (RW:on crate3 pallet0) (RW:on crate4 pallet5))
-Metric: no-metric
+Predicate:
+  + (equal object object)
+Action:
+  - drop: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (clear ?z) (crate ?y) (hoist ?x) (lifting ?x ?y) (not (= ?x ?y)) (not (= ?y ?z)) (place ?p) (surface ?z))
+      eff: (and (at ?y ?p) (available ?x) (clear ?y) (not (clear ?z)) (not (lifting ?x ?y)) (on ?y ?z))
+  + drop: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (clear ?z) (crate ?y) (hoist ?x) (lifting ?x ?y) (not (equal ?x ?y)) (not (equal ?y ?z)) (place ?p) (surface ?z))
+      eff: (and (at ?y ?p) (available ?x) (clear ?y) (not (clear ?z)) (not (lifting ?x ?y)) (on ?y ?z))
+  - lift: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?y ?p) (available ?x) (clear ?y) (crate ?y) (hoist ?x) (not (= ?y ?z)) (on ?y ?z) (place ?p) (surface ?z))
+      eff: (and (clear ?z) (lifting ?x ?y) (not (at ?y ?p)) (not (available ?x)) (not (clear ?y)) (not (on ?y ?z)))
+  + lift: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?y ?p) (available ?x) (clear ?y) (crate ?y) (hoist ?x) (not (equal ?y ?z)) (on ?y ?z) (place ?p) (surface ?z))
+      eff: (and (clear ?z) (lifting ?x ?y) (not (at ?y ?p)) (not (available ?x)) (not (clear ?y)) (not (on ?y ?z)))
+  - load: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (crate ?y) (hoist ?x) (lifting ?x ?y) (not (= ?x ?y)) (not (= ?y ?z)) (place ?p) (truck ?z))
+      eff: (and (available ?x) (in ?y ?z) (not (lifting ?x ?y)))
+  + load: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (crate ?y) (hoist ?x) (lifting ?x ?y) (not (equal ?x ?y)) (not (equal ?y ?z)) (place ?p) (truck ?z))
+      eff: (and (available ?x) (in ?y ?z) (not (lifting ?x ?y)))
+  - unload: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (available ?x) (crate ?y) (hoist ?x) (in ?y ?z) (not (= ?x ?y)) (not (= ?y ?z)) (place ?p) (truck ?z))
+      eff: (and (lifting ?x ?y) (not (available ?x)) (not (in ?y ?z)))
+  + unload: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (available ?x) (crate ?y) (hoist ?x) (in ?y ?z) (not (equal ?x ?y)) (not (equal ?y ?z)) (place ?p) (truck ?z))
+      eff: (and (lifting ?x ?y) (not (available ?x)) (not (in ?y ?z)))
+Init:
+  + (equal crate0 crate0)
+  + (equal crate1 crate1)
+  + (equal crate2 crate2)
+  + (equal crate3 crate3)
+  + (equal crate4 crate4)
+  + (equal crate5 crate5)
+  + (equal depot0 depot0)
+  + (equal depot1 depot1)
+  + (equal depot2 depot2)
+  + (equal distributor0 distributor0)
+  + (equal distributor1 distributor1)
+  + (equal distributor2 distributor2)
+  + (equal hoist0 hoist0)
+  + (equal hoist1 hoist1)
+  + (equal hoist2 hoist2)
+  + (equal hoist3 hoist3)
+  + (equal hoist4 hoist4)
+  + (equal hoist5 hoist5)
+  + (equal pallet0 pallet0)
+  + (equal pallet1 pallet1)
+  + (equal pallet2 pallet2)
+  + (equal pallet3 pallet3)
+  + (equal pallet4 pallet4)
+  + (equal pallet5 pallet5)
+  + (equal truck0 truck0)
+  + (equal truck1 truck1)
+Pred prop:
+  - (= object object): in_pre
+  + (equal object object): in_init in_pre

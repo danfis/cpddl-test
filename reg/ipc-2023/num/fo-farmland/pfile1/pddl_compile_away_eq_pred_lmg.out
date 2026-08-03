@@ -1,42 +1,21 @@
-Domain: farmland_ln
-Problem: instance_2_400_1229_ladder
-Require: 117
-Type[2]:
-    [0]: object, parent: -1
-    [1]: farm, parent: 0
-Obj-by-Type:
-    [0]: 0 1
-    [1]: 0 1
-Obj[2]:
-    [0]: farm0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: farm1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[3]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    adj: 1 1 :: read: 1, write: 0, in-init: 1
-    equal: 0 0 :: read: 1, write: 0, in-init: 1
-Function[3]:
-    x: 1 :: read: 1, write: 1, in-init: 1
-    cost: :: read: 1, write: 1, in-init: 1
-    num-of-cars: :: read: 1, write: 1, in-init: 1
-Action[3]:
-    move-by-car: ?f1:1 ?f2:1
-        pre: (and (R:adj ?f1 ?f2) (N:R:equal ?f1 ?f2) (>= (x ?f1) (* 4 (num-of-cars))))
-        eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (x ?f2) (* 4 (num-of-cars))) (increase (cost) (* 0.1 (* 4 (num-of-cars)))))
-    move-slow: ?f1:1 ?f2:1
-        pre: (and (R:adj ?f1 ?f2) (N:R:equal ?f1 ?f2) (>= (x ?f1) 1))
-        eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
-    hire-car: 
-        pre: (and)
-        eff: (and (increase (num-of-cars) 1))
-Init[4]:
-  S:(adj farm0 farm1)
-  S:(adj farm1 farm0)
-  S:(equal farm0 farm0)
-  S:(equal farm1 farm1)
-Init[4]:
-  (= (x farm0) 400)
-  (= (x farm1) 1)
-  (= (cost) 0)
-  (= (num-of-cars) 0)
-Goal: (and (>= (x farm0) 1) (>= (x farm1) 1) (>= (- (+ (x farm0) (* 1.7 (x farm1))) (cost)) 560))
-Metric: no-metric
+Predicate:
+  + (equal object object)
+Action:
+  - move-by-car: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) (* 4 (num-of-cars))) (adj ?f1 ?f2) (not (= ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (cost) (* 0.1 (* 4 (num-of-cars)))) (increase (x ?f2) (* 4 (num-of-cars))))
+  + move-by-car: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) (* 4 (num-of-cars))) (adj ?f1 ?f2) (not (equal ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) (* 4 (num-of-cars))) (increase (cost) (* 0.1 (* 4 (num-of-cars)))) (increase (x ?f2) (* 4 (num-of-cars))))
+  - move-slow: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2) (not (= ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
+  + move-slow: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2) (not (equal ?f1 ?f2)))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 1))
+Init:
+  + (equal farm0 farm0)
+  + (equal farm1 farm1)
+Pred prop:
+  - (= object object): in_pre
+  + (equal object object): in_init in_pre

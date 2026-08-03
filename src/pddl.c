@@ -58,8 +58,11 @@ TEST(pddl_unit_cost, r)
 
 TEST(pddl_compile_away_cond_eff, pddl)
 {
+    pddl_t base;
+    pddlInitCopy(&base, &C.pddl);
     pddlCompileAwayNonStaticCondEff(&C.pddl);
-    pddlPrintDebug(&C.pddl, stdout);
+    pddlPrintDiff(&base, &C.pddl, stdout);
+    pddlFree(&base);
 }
 
 TEST(pddl_is_metric_expressible_as_non_neg_int_action_costs, pddl)
@@ -128,7 +131,7 @@ TEST(pddl_compile_metric_into_action_costs, pddl)
         assert(pddlFmIsNumExpFluent(&C.pddl.minimize->fm));
         assert(C.pddl.minimize->e.fluent->pred
                 == C.pddl.func.total_cost_func);
-        pddlPrintDebug(&C.pddl, stdout);
+        pddlPrintDiff(&copy, &C.pddl, stdout);
         break;
     case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_OK:
     case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_NOT_COMPILABLE:
@@ -194,7 +197,7 @@ TEST_COND(pddl_compile_flt_to_int, pddl, LP)
         }
         if (C.pddl.minimize != NULL)
             assert(!fmHasFlt(&C.pddl.minimize->fm));
-        pddlPrintDebug(&C.pddl, stdout);
+        pddlPrintDiff(&copy, &C.pddl, stdout);
         break;
     }
     case PDDL_COMPILE_FLT_TO_INT_OK:
@@ -246,10 +249,14 @@ TEST(pddl_action_simplify_cond_effs, r)
 
 TEST(pddl_compile_away_neg_pre, r)
 {
+    // TODO: Split for different variants of the
+    // pddlCompileAwayNegativeConditions function
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     cfg.normalize = 1;
     cfg.force_adl = 1;
     cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    cfg.normalize_compile_away_only_goal_neg_cond = pddl_false;
+    cfg.normalize_compile_away_all_neg_cond = pddl_false;
     pddl_t pddl;
     int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
@@ -257,10 +264,13 @@ TEST(pddl_compile_away_neg_pre, r)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
 
+    pddl_t base;
+    pddlInitCopy(&base, &pddl);
     ret = pddlCompileAwayNegativeConditions(&pddl, pddl_false, pddl_false,
                                             pddl_true, &C.err);
     assert(ret == 0);
-    pddlPrintDebug(&pddl, stdout);
+    pddlPrintDiff(&base, &pddl, stdout);
+    pddlFree(&base);
     pddlFree(&pddl);
 }
 
@@ -285,7 +295,8 @@ TEST(pddl_clone, pddl)
 {
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
-    pddlPrintDebug(&pddl, stdout);
+    int diff = pddlPrintDiff(&C.pddl, &pddl, stdout);
+    assert(diff == 0);
     pddlFree(&pddl);
 }
 
@@ -293,12 +304,8 @@ TEST(pddl_compile_away_eq_pred_no_norm, pddl_no_normalize)
 {
     pddl_t copy;
     pddlInitCopy(&copy, &C.pddl);
-    int ret = pddlCompileAwayEqPred(&C.pddl);
-    if (ret > 0){
-        //pddlPrintDebug(&copy, stdout);
-        //printf("======== AFTER ==========\n");
-        pddlPrintDebug(&C.pddl, stdout);
-    }
+    pddlCompileAwayEqPred(&C.pddl);
+    pddlPrintDiff(&copy, &C.pddl, stdout);
     pddlFree(&copy);
 }
 
@@ -320,12 +327,8 @@ TEST(pddl_compile_away_eq_pred_lmg, pddl)
 
     pddl_t copy;
     pddlInitCopy(&copy, &C.pddl);
-    int ret = pddlCompileAwayEqPred(&C.pddl);
-    if (ret > 0){
-        //pddlPrintDebug(&copy, stdout);
-        //printf("======== AFTER ==========\n");
-        pddlPrintDebug(&C.pddl, stdout);
-    }
+    pddlCompileAwayEqPred(&C.pddl);
+    pddlPrintDiff(&copy, &C.pddl, stdout);
     pddlFree(&copy);
     pddlLiftedMGroupsFree(&lmg);
 }

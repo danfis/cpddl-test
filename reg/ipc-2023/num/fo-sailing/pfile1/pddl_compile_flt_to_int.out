@@ -1,61 +1,54 @@
-Domain: sailing_ln
-Problem: instance_1_1_1229
-Require: 103
-Type[3]:
-    [0]: object, parent: -1
-    [1]: boat, parent: 0
-    [2]: person, parent: 0
-Obj-by-Type:
-    [0]: 0 1
-    [1]: 0
-    [2]: 1
-Obj[2]:
-    [0]: b0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: p0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    saved: 2 :: read: 1, write: 1, in-init: 0
-Function[4]:
-    x: 1 :: read: 1, write: 1, in-init: 1
-    y: 1 :: read: 1, write: 1, in-init: 1
-    v: 1 :: read: 1, write: 1, in-init: 1
-    d: 2 :: read: 1, write: 0, in-init: 1
-Action[10]:
-    go_north_east: ?b:1
-        pre: (and)
-        eff: (and (increase (x ?b) (* (v ?b) 3)) (increase (y ?b) (* (v ?b) 3)))
-    go_north_west: ?b:1
-        pre: (and)
-        eff: (and (decrease (x ?b) (* (v ?b) 3)) (increase (y ?b) (* (v ?b) 3)))
-    go_est: ?b:1
-        pre: (and)
-        eff: (and (increase (x ?b) (* (* 2 (v ?b)) 3)))
-    go_west: ?b:1
-        pre: (and)
-        eff: (and (decrease (x ?b) (* (* 2 (v ?b)) 3)))
-    go_south_west: ?b:1
-        pre: (and)
-        eff: (and (increase (x ?b) (* (* 2 (v ?b)) 2)) (decrease (y ?b) (* (* 2 (v ?b)) 2)))
-    go_south_east: ?b:1
-        pre: (and)
-        eff: (and (decrease (x ?b) (* (* 2 (v ?b)) 2)) (decrease (y ?b) (* (v ?b) 4)))
-    go_south: ?b:1
-        pre: (and)
-        eff: (and (decrease (y ?b) (* (v ?b) 4)))
-    accelerate: ?b:1
-        pre: (and (<= (+ (v ?b) 1) 3))
-        eff: (and (increase (v ?b) 1))
-    decelerate: ?b:1
-        pre: (and (>= (- (v ?b) 1) 1))
-        eff: (and (decrease (v ?b) 1))
-    save_person: ?b:1 ?t:2
-        pre: (and (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)) (<= (+ (x ?b) (y ?b)) (+ (d ?t) 50)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 50)) (<= (v ?b) 1))
-        eff: (and (RW:saved ?t))
-Init[0]:
-Init[4]:
-  (= (x b0) 6)
-  (= (y b0) 0)
-  (= (v b0) 1)
-  (= (d p0) -740)
-Goal: (RW:saved p0)
-Metric: no-metric
+Action:
+  - go_est: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) (* (v ?b) 3)))
+  + go_est: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) (* (* 2 (v ?b)) 3)))
+  - go_north_east: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) (* (v ?b) 1.5)) (increase (y ?b) (* (v ?b) 1.5)))
+  + go_north_east: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) (* (v ?b) 3)) (increase (y ?b) (* (v ?b) 3)))
+  - go_north_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) (* (v ?b) 1.5)) (increase (y ?b) (* (v ?b) 1.5)))
+  + go_north_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) (* (v ?b) 3)) (increase (y ?b) (* (v ?b) 3)))
+  - go_south: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) (* (v ?b) 2)))
+  + go_south: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) (* (v ?b) 4)))
+  - go_south_east: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) (* (v ?b) 2)) (decrease (y ?b) (* (v ?b) 2)))
+  + go_south_east: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) (* (* 2 (v ?b)) 2)) (decrease (y ?b) (* (v ?b) 4)))
+  - go_south_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) (* (v ?b) 2)) (increase (x ?b) (* (v ?b) 2)))
+  + go_south_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) (* (* 2 (v ?b)) 2)) (increase (x ?b) (* (* 2 (v ?b)) 2)))
+  - go_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) (* (v ?b) 3)))
+  + go_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) (* (* 2 (v ?b)) 3)))
+  - save_person: ?b - boat ?t - person
+      pre: (and (<= (+ (x ?b) (y ?b)) (+ (d ?t) 25)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 25)) (<= (v ?b) 1) (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)))
+      eff: (and (saved ?t))
+  + save_person: ?b - boat ?t - person
+      pre: (and (<= (+ (x ?b) (y ?b)) (+ (d ?t) 50)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 50)) (<= (v ?b) 1) (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)))
+      eff: (and (saved ?t))
+Init:
+  - (= (d p0) -370)
+  - (= (x b0) 3)
+  + (= (d p0) -740)
+  + (= (x b0) 6)

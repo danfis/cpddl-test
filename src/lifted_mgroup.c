@@ -639,7 +639,7 @@ TEST(lmg_compile_in, lmg)
     //pddlErrLogDisablePrintResources(&C.err, 1);
     //pddlErrLogEnable(&C.err, stdout);
     if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &cfg, &C.err))
-        pddlPrintDebug(&pddl, stdout);
+        pddlPrintDiff(&C.pddl, &pddl, stdout);
     //pddlErrLogEnable(&C.err, NULL);
     //fflush(stdout);
 

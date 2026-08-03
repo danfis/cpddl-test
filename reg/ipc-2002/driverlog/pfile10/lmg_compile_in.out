@@ -1,172 +1,24 @@
-Domain: driverlog
-Problem: dlog-2-3-6
-Require: 15
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-Obj[26]:
-    [0]: driver1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: driver2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: truck2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: truck3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: package1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: package2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: package3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: package4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: package5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: package6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: s0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: s1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: s2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: s3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: s4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: s5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: p1-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: p1-4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: p1-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: p2-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: p2-3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: p3-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: p3-1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: p3-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: p4-5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[11]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    obj: 0 :: read: 1, write: 0, in-init: 1
-    truck: 0 :: read: 1, write: 0, in-init: 1
-    location: 0 :: read: 1, write: 0, in-init: 1
-    driver: 0 :: read: 1, write: 0, in-init: 1
-    at: 0 0 :: read: 1, write: 1, in-init: 1
-    in: 0 0 :: read: 1, write: 1, in-init: 0
-    driving: 0 0 :: read: 1, write: 1, in-init: 0
-    link: 0 0 :: read: 1, write: 0, in-init: 1
-    path: 0 0 :: read: 1, write: 0, in-init: 1
-    empty: 0 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[6]:
-    load-truck: ?obj:0 ?truck:0 ?loc:0
-        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?obj ?loc) (RW:at ?truck ?loc))
-        eff: (and (N:RW:at ?obj ?loc) (RW:in ?obj ?truck))
-    unload-truck: ?obj:0 ?truck:0 ?loc:0
-        pre: (and (N:R:= ?obj ?truck) (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:in ?obj ?truck))
-        eff: (and (RW:at ?obj ?loc) (N:RW:in ?obj ?truck))
-    board-truck: ?driver:0 ?truck:0 ?loc:0
-        pre: (and (R:truck ?truck) (R:location ?loc) (R:driver ?driver) (RW:at ?driver ?loc) (RW:at ?truck ?loc) (RW:empty ?truck))
-        eff: (and (N:RW:at ?driver ?loc) (RW:driving ?driver ?truck) (N:RW:empty ?truck))
-    disembark-truck: ?driver:0 ?truck:0 ?loc:0
-        pre: (and (N:R:= ?driver ?truck) (R:truck ?truck) (R:location ?loc) (R:driver ?driver) (RW:at ?truck ?loc) (RW:driving ?driver ?truck))
-        eff: (and (RW:at ?driver ?loc) (N:RW:driving ?driver ?truck) (RW:empty ?truck))
-    drive-truck: ?truck:0 ?loc-from:0 ?loc-to:0 ?driver:0
-        pre: (and (N:R:= ?truck ?driver) (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (R:link ?loc-from ?loc-to) (RW:at ?truck ?loc-from) (RW:driving ?driver ?truck))
-        eff: (and (N:RW:at ?truck ?loc-from) (RW:at ?truck ?loc-to))
-    walk: ?driver:0 ?loc-from:0 ?loc-to:0
-        pre: (and (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (R:path ?loc-from ?loc-to) (RW:at ?driver ?loc-from))
-        eff: (and (N:RW:at ?driver ?loc-from) (RW:at ?driver ?loc-to))
-Init[102]:
-  S:(obj package1)
-  S:(obj package2)
-  S:(obj package3)
-  S:(obj package4)
-  S:(obj package5)
-  S:(obj package6)
-  S:(truck truck1)
-  S:(truck truck2)
-  S:(truck truck3)
-  S:(location s0)
-  S:(location s1)
-  S:(location s2)
-  S:(location s3)
-  S:(location s4)
-  S:(location s5)
-  S:(location p1-0)
-  S:(location p1-4)
-  S:(location p1-5)
-  S:(location p2-1)
-  S:(location p2-3)
-  S:(location p3-0)
-  S:(location p3-1)
-  S:(location p3-5)
-  S:(location p4-5)
-  S:(driver driver1)
-  S:(driver driver2)
-  S:(link s0 s1)
-  S:(link s0 s2)
-  S:(link s0 s3)
-  S:(link s0 s4)
-  S:(link s0 s5)
-  S:(link s1 s0)
-  S:(link s1 s2)
-  S:(link s1 s3)
-  S:(link s1 s4)
-  S:(link s1 s5)
-  S:(link s2 s0)
-  S:(link s2 s1)
-  S:(link s2 s3)
-  S:(link s3 s0)
-  S:(link s3 s1)
-  S:(link s3 s2)
-  S:(link s3 s4)
-  S:(link s3 s5)
-  S:(link s4 s0)
-  S:(link s4 s1)
-  S:(link s4 s3)
-  S:(link s4 s5)
-  S:(link s5 s0)
-  S:(link s5 s1)
-  S:(link s5 s3)
-  S:(link s5 s4)
-  S:(path s0 p1-0)
-  S:(path s0 p3-0)
-  S:(path s1 p1-0)
-  S:(path s1 p1-4)
-  S:(path s1 p1-5)
-  S:(path s1 p2-1)
-  S:(path s1 p3-1)
-  S:(path s2 p2-1)
-  S:(path s2 p2-3)
-  S:(path s3 p2-3)
-  S:(path s3 p3-0)
-  S:(path s3 p3-1)
-  S:(path s3 p3-5)
-  S:(path s4 p1-4)
-  S:(path s4 p4-5)
-  S:(path s5 p1-5)
-  S:(path s5 p3-5)
-  S:(path s5 p4-5)
-  S:(path p1-0 s0)
-  S:(path p1-0 s1)
-  S:(path p1-4 s1)
-  S:(path p1-4 s4)
-  S:(path p1-5 s1)
-  S:(path p1-5 s5)
-  S:(path p2-1 s1)
-  S:(path p2-1 s2)
-  S:(path p2-3 s2)
-  S:(path p2-3 s3)
-  S:(path p3-0 s0)
-  S:(path p3-0 s3)
-  S:(path p3-1 s1)
-  S:(path p3-1 s3)
-  S:(path p3-5 s3)
-  S:(path p3-5 s5)
-  S:(path p4-5 s4)
-  S:(path p4-5 s5)
-  (at driver1 s4)
-  (at driver2 s0)
-  (at truck1 s0)
-  (at truck2 s4)
-  (at truck3 s5)
-  (at package1 s1)
-  (at package2 s0)
-  (at package3 s4)
-  (at package4 s4)
-  (at package5 s4)
-  (at package6 s2)
-  (empty truck1)
-  (empty truck2)
-  (empty truck3)
-Init[0]:
-Goal: (and (RW:at driver1 s1) (RW:at driver2 s0) (RW:at package1 s5) (RW:at package2 s1) (RW:at package3 s5) (RW:at package4 s1) (RW:at package5 s3) (RW:at package6 s2))
-Metric: no-metric
+Require:
+  + :equality
+  + :negative-preconditions
+Action:
+  - disembark-truck: ?driver - object ?truck - object ?loc - object
+      pre: (and (at ?truck ?loc) (driver ?driver) (driving ?driver ?truck) (location ?loc) (truck ?truck))
+      eff: (and (at ?driver ?loc) (empty ?truck) (not (driving ?driver ?truck)))
+  + disembark-truck: ?driver - object ?truck - object ?loc - object
+      pre: (and (at ?truck ?loc) (driver ?driver) (driving ?driver ?truck) (location ?loc) (not (= ?driver ?truck)) (truck ?truck))
+      eff: (and (at ?driver ?loc) (empty ?truck) (not (driving ?driver ?truck)))
+  - drive-truck: ?truck - object ?loc-from - object ?loc-to - object ?driver - object
+      pre: (and (at ?truck ?loc-from) (driver ?driver) (driving ?driver ?truck) (link ?loc-from ?loc-to) (location ?loc-from) (location ?loc-to) (truck ?truck))
+      eff: (and (at ?truck ?loc-to) (not (at ?truck ?loc-from)))
+  + drive-truck: ?truck - object ?loc-from - object ?loc-to - object ?driver - object
+      pre: (and (at ?truck ?loc-from) (driver ?driver) (driving ?driver ?truck) (link ?loc-from ?loc-to) (location ?loc-from) (location ?loc-to) (not (= ?truck ?driver)) (truck ?truck))
+      eff: (and (at ?truck ?loc-to) (not (at ?truck ?loc-from)))
+  - unload-truck: ?obj - object ?truck - object ?loc - object
+      pre: (and (at ?truck ?loc) (in ?obj ?truck) (location ?loc) (obj ?obj) (truck ?truck))
+      eff: (and (at ?obj ?loc) (not (in ?obj ?truck)))
+  + unload-truck: ?obj - object ?truck - object ?loc - object
+      pre: (and (at ?truck ?loc) (in ?obj ?truck) (location ?loc) (not (= ?obj ?truck)) (obj ?obj) (truck ?truck))
+      eff: (and (at ?obj ?loc) (not (in ?obj ?truck)))
+Pred prop:
+  + (= object object): in_pre

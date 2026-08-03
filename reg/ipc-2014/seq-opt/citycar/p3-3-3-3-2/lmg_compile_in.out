@@ -1,144 +1,18 @@
-Domain: citycar
-Problem: citycar-3-3-3
-Require: 20097
-Type[5]:
-    [0]: object, parent: -1
-    [1]: car, parent: 0
-    [2]: junction, parent: 0
-    [3]: garage, parent: 0
-    [4]: road, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
-    [1]: 9 10 11
-    [2]: 0 1 2 3 4 5 6 7 8
-    [3]: 12 13 14
-    [4]: 15 16 17 18 19
-Obj[20]:
-    [0]: junction0-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: junction0-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: junction0-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: junction1-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: junction1-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: junction1-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: junction2-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: junction2-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: junction2-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: car0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: car1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: car2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: garage0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: garage1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: garage2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: road0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: road1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: road2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: road3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: road4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[12]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    same_line: 2 2 :: read: 1, write: 0, in-init: 1
-    diagonal: 2 2 :: read: 1, write: 0, in-init: 1
-    at_car_jun: 1 2 :: read: 1, write: 1, in-init: 0
-    at_car_road: 1 4 :: read: 1, write: 1, in-init: 0
-    starting: 1 3 :: read: 1, write: 1, in-init: 1
-    arrived: 1 2 :: read: 1, write: 1, in-init: 0
-    road_connect: 4 2 2 :: read: 1, write: 1, in-init: 0
-    clear: 2 :: read: 1, write: 1, in-init: 1
-    in_place: 4 :: read: 1, write: 1, in-init: 0, neg-of: NOT-in_place
-    at_garage: 3 2 :: read: 1, write: 0, in-init: 1
-    NOT-in_place: 4 :: read: 1, write: 1, in-init: 1, neg-of: in_place
-Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[9]:
-    move_car_in_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
-        pre: (and (RW:at_car_jun ?machine ?xy_initial) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (N:RW:at_car_jun ?machine ?xy_initial) (RW:at_car_road ?machine ?r1) (RW:clear ?xy_initial) (increase (total-cost) 1))
-    move_car_out_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
-        pre: (and (RW:at_car_road ?machine ?r1) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:in_place ?r1))
-        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:at_car_road ?machine ?r1) (N:RW:clear ?xy_final) (increase (total-cost) 1))
-    car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (R:= ?xy_final junction2-1) (N:R:= ?machine car1) (N:R:= ?machine car2) (RW:at_car_jun ?machine junction2-1))
-        eff: (and (N:RW:at_car_jun ?machine junction2-1) (RW:arrived ?machine junction2-1) (RW:clear junction2-1))
-    car_start: ?xy_final:2 ?machine:1 ?g:3
-        pre: (and (R:at_garage ?g ?xy_final) (RW:starting ?machine ?g) (RW:clear ?xy_final))
-        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:starting ?machine ?g) (N:RW:clear ?xy_final))
-    build_diagonal_oneway: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (R:diagonal ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:NOT-in_place ?r1))
-        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1) (N:RW:NOT-in_place ?r1) (increase (total-cost) 30))
-    build_straight_oneway: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (R:same_line ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:NOT-in_place ?r1))
-        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1) (N:RW:NOT-in_place ?r1) (increase (total-cost) 20))
-    destroy_road: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (N:RW:road_connect ?r1 ?xy_initial ?xy_final) (N:RW:in_place ?r1) (RW:NOT-in_place ?r1) (increase (total-cost) 10) (when (RW:at_car_road car0 ?r1) (and (N:RW:at_car_road car0 ?r1) (RW:at_car_jun car0 ?xy_initial))) (when (RW:at_car_road car1 ?r1) (and (N:RW:at_car_road car1 ?r1) (RW:at_car_jun car1 ?xy_initial))) (when (RW:at_car_road car2 ?r1) (and (N:RW:at_car_road car2 ?r1) (RW:at_car_jun car2 ?xy_initial))))
-    car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (R:= ?xy_final junction2-0) (N:R:= ?machine car0) (RW:at_car_jun ?machine junction2-0))
-        eff: (and (N:RW:at_car_jun ?machine junction2-0) (RW:arrived ?machine junction2-0) (RW:clear junction2-0))
-    car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (N:R:= ?machine car0) (N:R:= ?machine car1) (N:R:= ?machine car2) (RW:at_car_jun ?machine ?xy_final))
-        eff: (and (N:RW:at_car_jun ?machine ?xy_final) (RW:arrived ?machine ?xy_final) (RW:clear ?xy_final))
-Init[60]:
-  S:(same_line junction0-0 junction0-1)
-  S:(same_line junction0-0 junction1-0)
-  S:(same_line junction0-1 junction0-0)
-  S:(same_line junction0-1 junction0-2)
-  S:(same_line junction0-1 junction1-1)
-  S:(same_line junction0-2 junction0-1)
-  S:(same_line junction0-2 junction1-2)
-  S:(same_line junction1-0 junction0-0)
-  S:(same_line junction1-0 junction1-1)
-  S:(same_line junction1-0 junction2-0)
-  S:(same_line junction1-1 junction0-1)
-  S:(same_line junction1-1 junction1-0)
-  S:(same_line junction1-1 junction1-2)
-  S:(same_line junction1-1 junction2-1)
-  S:(same_line junction1-2 junction0-2)
-  S:(same_line junction1-2 junction1-1)
-  S:(same_line junction1-2 junction2-2)
-  S:(same_line junction2-0 junction1-0)
-  S:(same_line junction2-0 junction2-1)
-  S:(same_line junction2-1 junction1-1)
-  S:(same_line junction2-1 junction2-0)
-  S:(same_line junction2-1 junction2-2)
-  S:(same_line junction2-2 junction1-2)
-  S:(same_line junction2-2 junction2-1)
-  S:(diagonal junction0-0 junction1-1)
-  S:(diagonal junction0-1 junction1-0)
-  S:(diagonal junction0-1 junction1-2)
-  S:(diagonal junction0-2 junction1-1)
-  S:(diagonal junction1-0 junction0-1)
-  S:(diagonal junction1-0 junction2-1)
-  S:(diagonal junction1-1 junction0-0)
-  S:(diagonal junction1-1 junction0-2)
-  S:(diagonal junction1-1 junction2-0)
-  S:(diagonal junction1-1 junction2-2)
-  S:(diagonal junction1-2 junction0-1)
-  S:(diagonal junction1-2 junction2-1)
-  S:(diagonal junction2-0 junction1-1)
-  S:(diagonal junction2-1 junction1-0)
-  S:(diagonal junction2-1 junction1-2)
-  S:(diagonal junction2-2 junction1-1)
-  S:(at_garage garage0 junction0-1)
-  S:(at_garage garage1 junction0-1)
-  S:(at_garage garage2 junction0-1)
-  (starting car0 garage0)
-  (starting car1 garage0)
-  (starting car2 garage0)
-  (clear junction0-0)
-  (clear junction0-1)
-  (clear junction0-2)
-  (clear junction1-0)
-  (clear junction1-1)
-  (clear junction1-2)
-  (clear junction2-0)
-  (clear junction2-1)
-  (clear junction2-2)
-  (NOT-in_place road0)
-  (NOT-in_place road1)
-  (NOT-in_place road2)
-  (NOT-in_place road3)
-  (NOT-in_place road4)
-Init[1]:
-  (= (total-cost) 0)
-Goal: (and (RW:arrived car0 junction2-1) (RW:arrived car1 junction2-0) (RW:arrived car2 junction2-0))
-Metric: (total-cost)
+Require:
+  + :equality
+  + :negative-preconditions
+Action:
+  - car_arrived: ?xy_final - junction ?machine - car
+      pre: (and (at_car_jun ?machine ?xy_final))
+      eff: (and (arrived ?machine ?xy_final) (clear ?xy_final) (not (at_car_jun ?machine ?xy_final)))
+  + car_arrived: ?xy_final - junction ?machine - car
+      pre: (and (= ?xy_final junction2-0) (at_car_jun ?machine junction2-0) (not (= ?machine car0)))
+      eff: (and (arrived ?machine junction2-0) (clear junction2-0) (not (at_car_jun ?machine junction2-0)))
+  + car_arrived: ?xy_final - junction ?machine - car
+      pre: (and (= ?xy_final junction2-1) (at_car_jun ?machine junction2-1) (not (= ?machine car1)) (not (= ?machine car2)))
+      eff: (and (arrived ?machine junction2-1) (clear junction2-1) (not (at_car_jun ?machine junction2-1)))
+  + car_arrived: ?xy_final - junction ?machine - car
+      pre: (and (at_car_jun ?machine ?xy_final) (not (= ?machine car0)) (not (= ?machine car1)) (not (= ?machine car2)))
+      eff: (and (arrived ?machine ?xy_final) (clear ?xy_final) (not (at_car_jun ?machine ?xy_final)))
+Pred prop:
+  + (= object object): in_pre

@@ -1,125 +1,37 @@
-Domain: petri-net
-Problem: prob08-2
-Require: 103
-Type[2]:
-    [0]: object, parent: -1
-    [1]: place, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-    [1]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-Obj[26]:
-    [0]: s0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: a1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: a2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: a3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: a4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: a5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: a6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: a7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: a8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: b1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: b2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: b3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: b4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: b5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: b6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: b7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: b8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: c1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: c2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: c3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: c4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: c5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: c6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: c7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: c8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: g, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[5]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    source: 1 :: read: 1, write: 0, in-init: 1
-    one-to-one: 1 1 :: read: 1, write: 0, in-init: 1
-    one-to-two: 1 1 1 :: read: 1, write: 0, in-init: 1
-    three-to-one: 1 1 1 1 :: read: 1, write: 0, in-init: 1
-Function[2]:
-    value: 1 :: read: 1, write: 1, in-init: 1
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[4]:
-    create: ?p:1
-        pre: (and (R:source ?p))
-        eff: (and (increase (value ?p) 1) (increase (total-cost) 1))
-    fire-one-to-one: ?p1:1 ?p2:1
-        pre: (and (R:one-to-one ?p1 ?p2) (> (value ?p1) 0))
-        eff: (and (decrease (value ?p1) 1) (increase (value ?p2) 1) (increase (total-cost) 1))
-    fire-one-to-two: ?p1:1 ?p2:1 ?p3:1
-        pre: (and (R:one-to-two ?p1 ?p2 ?p3) (> (value ?p1) 0))
-        eff: (and (decrease (value ?p1) 1) (increase (value ?p2) 1) (increase (value ?p3) 1) (increase (total-cost) 1))
-    fire-three-to-one: ?p1:1 ?p2:1 ?p3:1 ?p4:1
-        pre: (and (R:three-to-one ?p1 ?p2 ?p3 ?p4) (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0))
-        eff: (and (decrease (value ?p1) 1) (decrease (value ?p2) 1) (decrease (value ?p3) 1) (increase (value ?p4) 1) (increase (total-cost) 1))
-Init[36]:
-  S:(source s0)
-  S:(one-to-one s0 a1)
-  S:(one-to-one s0 b1)
-  S:(one-to-one s0 c1)
-  S:(one-to-one a1 a2)
-  S:(one-to-one a2 a3)
-  S:(one-to-one a3 a4)
-  S:(one-to-one a4 a5)
-  S:(one-to-one a4 a6)
-  S:(one-to-one a4 a7)
-  S:(one-to-one b1 b2)
-  S:(one-to-one b2 b3)
-  S:(one-to-one b3 b4)
-  S:(one-to-one b4 b5)
-  S:(one-to-one b4 b6)
-  S:(one-to-one b4 b7)
-  S:(one-to-one c1 c2)
-  S:(one-to-one c2 c3)
-  S:(one-to-one c3 c4)
-  S:(one-to-one c4 c5)
-  S:(one-to-one c4 c6)
-  S:(one-to-one c4 c7)
-  S:(one-to-two a5 a6 a4)
-  S:(one-to-two a6 a7 a4)
-  S:(one-to-two a7 a5 a4)
-  S:(one-to-two b5 b6 b4)
-  S:(one-to-two b6 b7 b4)
-  S:(one-to-two b7 b5 b4)
-  S:(one-to-two c5 c6 c4)
-  S:(one-to-two c6 c7 c4)
-  S:(one-to-two c7 c5 c4)
-  S:(three-to-one a5 a6 a7 a8)
-  S:(three-to-one a7 b7 c7 g)
-  S:(three-to-one a8 b8 c8 g)
-  S:(three-to-one b5 b6 b7 b8)
-  S:(three-to-one c5 c6 c7 c8)
-Init[27]:
-  (= (value s0) 0)
-  (= (value a1) 0)
-  (= (value a2) 0)
-  (= (value a3) 0)
-  (= (value a4) 0)
-  (= (value a5) 0)
-  (= (value a6) 0)
-  (= (value a7) 0)
-  (= (value a8) 0)
-  (= (value b1) 0)
-  (= (value b2) 0)
-  (= (value b3) 0)
-  (= (value b4) 0)
-  (= (value b5) 0)
-  (= (value b6) 0)
-  (= (value b7) 0)
-  (= (value b8) 0)
-  (= (value c1) 0)
-  (= (value c2) 0)
-  (= (value c3) 0)
-  (= (value c4) 0)
-  (= (value c5) 0)
-  (= (value c6) 0)
-  (= (value c7) 0)
-  (= (value c8) 0)
-  (= (value g) 0)
-  (= (total-cost) 0)
-Goal: (and (= 2 (value g)) (<= 3 (+ (+ (value a7) (value b7)) (value c7))))
-Metric: (total-cost)
+Function:
+  - (cost)
+  + (total-cost) :total-cost
+Action:
+  - create: ?p - place
+      pre: (and (source ?p))
+      eff: (and (increase (cost) 1) (increase (value ?p) 1))
+  + create: ?p - place
+      pre: (and (source ?p))
+      eff: (and (increase (total-cost) 1) (increase (value ?p) 1))
+  - fire-one-to-one: ?p1 - place ?p2 - place
+      pre: (and (> (value ?p1) 0) (one-to-one ?p1 ?p2))
+      eff: (and (decrease (value ?p1) 1) (increase (cost) 1) (increase (value ?p2) 1))
+  + fire-one-to-one: ?p1 - place ?p2 - place
+      pre: (and (> (value ?p1) 0) (one-to-one ?p1 ?p2))
+      eff: (and (decrease (value ?p1) 1) (increase (total-cost) 1) (increase (value ?p2) 1))
+  - fire-one-to-two: ?p1 - place ?p2 - place ?p3 - place
+      pre: (and (> (value ?p1) 0) (one-to-two ?p1 ?p2 ?p3))
+      eff: (and (decrease (value ?p1) 1) (increase (cost) 1) (increase (value ?p2) 1) (increase (value ?p3) 1))
+  + fire-one-to-two: ?p1 - place ?p2 - place ?p3 - place
+      pre: (and (> (value ?p1) 0) (one-to-two ?p1 ?p2 ?p3))
+      eff: (and (decrease (value ?p1) 1) (increase (total-cost) 1) (increase (value ?p2) 1) (increase (value ?p3) 1))
+  - fire-three-to-one: ?p1 - place ?p2 - place ?p3 - place ?p4 - place
+      pre: (and (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0) (three-to-one ?p1 ?p2 ?p3 ?p4))
+      eff: (and (decrease (value ?p1) 1) (decrease (value ?p2) 1) (decrease (value ?p3) 1) (increase (cost) 1) (increase (value ?p4) 1))
+  + fire-three-to-one: ?p1 - place ?p2 - place ?p3 - place ?p4 - place
+      pre: (and (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0) (three-to-one ?p1 ?p2 ?p3 ?p4))
+      eff: (and (decrease (value ?p1) 1) (decrease (value ?p2) 1) (decrease (value ?p3) 1) (increase (total-cost) 1) (increase (value ?p4) 1))
+Init:
+  - (= (cost) 0)
+  + (= (total-cost) 0)
+Metric:
+  - (cost)
+  + (total-cost)
+Func prop:
+  - (cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+  + (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
