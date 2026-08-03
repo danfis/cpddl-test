@@ -12,4 +12,4 @@ Action:
       pre: (and (alive ?who) (at ?what ?where) (at ?who ?where) (not (= ?what agent-1)) (not (= ?what arrow-1)) (not (= ?what gold-1)) (not (= ?what s-1-1)) (not (= ?what s-1-2)) (not (= ?what s-1-3)) (not (= ?what s-2-1)) (not (= ?what s-2-2)) (not (= ?what s-2-3)))
       eff: (and (have ?who ?what) (not (at ?what ?where)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

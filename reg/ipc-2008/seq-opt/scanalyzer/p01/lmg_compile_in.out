@@ -21,4 +21,4 @@ Action:
       pre: (and (cycle-2 ?s1 ?s2) (not (= ?c1 ?c2)) (not (= ?s1 ?s2)) (on ?c1 ?s1) (on ?c2 ?s2))
       eff: (and (increase (total-cost) 1) (not (on ?c1 ?s1)) (not (on ?c2 ?s2)) (on ?c1 ?s2) (on ?c2 ?s1))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

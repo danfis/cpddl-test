@@ -109,11 +109,11 @@ Goal:
   - (and (not (rcnot l0_l1_i12)) (not (rcnot l0_l1_i15)) (not (rcnot l0_l1_i4)) (not (rcnot l1_l2_i10)) (not (rcnot l2_l3_i16)) (not (rcnot l2_l3_i19)) (not (rcnot l2_l3_i6)) (not (rcnot l2_l3_i9)) (not (rcnot l3_l0_i11)) (not (rcnot l3_l0_i21)))
   + (and (NOT-rcnot l0_l1_i12) (NOT-rcnot l0_l1_i15) (NOT-rcnot l0_l1_i4) (NOT-rcnot l1_l2_i10) (NOT-rcnot l2_l3_i16) (NOT-rcnot l2_l3_i19) (NOT-rcnot l2_l3_i6) (NOT-rcnot l2_l3_i9) (NOT-rcnot l3_l0_i11) (NOT-rcnot l3_l0_i21))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg
   + (NOT-initialized pqubit): in_init in_pre in_eff
   + (NOT-occupied_pqubit pqubit): in_init in_pre in_eff
   + (NOT-rcnot gateid): in_pre in_goal in_eff
-  - (initialized pqubit): in_pre in_eff
-  - (occupied_pqubit pqubit): in_pre in_eff
-  - (rcnot gateid): in_init in_pre in_goal in_eff
+  - (initialized pqubit): in_pre in_pre_neg in_eff
+  - (occupied_pqubit pqubit): in_pre in_pre_neg in_eff
+  - (rcnot gateid): in_init in_pre in_pre_neg in_goal in_goal_neg in_eff
   + (rcnot gateid): in_init in_pre in_eff

@@ -19,3 +19,5 @@ Action:
       eff: (and (NOT-calibrated ?r) (decrease (energy ?r) 20) (increase (temperature ?r) 5) (increase (workload ?r) 10) (not (calibrated ?r)))
 Pred prop:
   + (NOT-calibrated robot): in_pre in_eff
+  - (calibrated robot): in_init in_pre in_pre_neg in_eff
+  + (calibrated robot): in_init in_pre in_eff

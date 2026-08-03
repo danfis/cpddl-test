@@ -9,4 +9,4 @@ Action:
       pre: (and (free ?to) (in-line ?from ?over ?to) (not (= ?from ?to)) (not (= ?over ?to)) (occupied ?from) (occupied ?over))
       eff: (and (free ?from) (free ?over) (not (free ?to)) (not (occupied ?from)) (not (occupied ?over)) (occupied ?to))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

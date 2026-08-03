@@ -177,11 +177,11 @@ Goal:
   - (and (not (rcnot l0_l4_i3)) (not (rcnot l0_l4_i42)) (not (rcnot l0_l4_i46)) (not (rcnot l0_l4_i7)) (not (rcnot l1_l4_i1)) (not (rcnot l1_l4_i40)) (not (rcnot l1_l4_i44)) (not (rcnot l1_l4_i5)) (not (rcnot l2_l5_i13)) (not (rcnot l2_l5_i17)) (not (rcnot l2_l5_i36)) (not (rcnot l2_l5_i50)) (not (rcnot l3_l5_i28)) (not (rcnot l3_l5_i30)) (not (rcnot l3_l6_i23)) (not (rcnot l3_l6_i27)) (not (rcnot l4_l5_i11)) (not (rcnot l4_l5_i15)) (not (rcnot l4_l5_i34)) (not (rcnot l4_l5_i38)) (not (rcnot l5_l6_i21)) (not (rcnot l5_l6_i25)))
   + (and (NOT-rcnot l0_l4_i3) (NOT-rcnot l0_l4_i42) (NOT-rcnot l0_l4_i46) (NOT-rcnot l0_l4_i7) (NOT-rcnot l1_l4_i1) (NOT-rcnot l1_l4_i40) (NOT-rcnot l1_l4_i44) (NOT-rcnot l1_l4_i5) (NOT-rcnot l2_l5_i13) (NOT-rcnot l2_l5_i17) (NOT-rcnot l2_l5_i36) (NOT-rcnot l2_l5_i50) (NOT-rcnot l3_l5_i28) (NOT-rcnot l3_l5_i30) (NOT-rcnot l3_l6_i23) (NOT-rcnot l3_l6_i27) (NOT-rcnot l4_l5_i11) (NOT-rcnot l4_l5_i15) (NOT-rcnot l4_l5_i34) (NOT-rcnot l4_l5_i38) (NOT-rcnot l5_l6_i21) (NOT-rcnot l5_l6_i25))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg
   + (NOT-initialized pqubit): in_init in_pre in_eff
   + (NOT-occupied_pqubit pqubit): in_init in_pre in_eff
   + (NOT-rcnot gateid): in_pre in_goal in_eff
-  - (initialized pqubit): in_pre in_eff
-  - (occupied_pqubit pqubit): in_pre in_eff
-  - (rcnot gateid): in_init in_pre in_goal in_eff
+  - (initialized pqubit): in_pre in_pre_neg in_eff
+  - (occupied_pqubit pqubit): in_pre in_pre_neg in_eff
+  - (rcnot gateid): in_init in_pre in_pre_neg in_goal in_goal_neg in_eff
   + (rcnot gateid): in_init in_pre in_eff

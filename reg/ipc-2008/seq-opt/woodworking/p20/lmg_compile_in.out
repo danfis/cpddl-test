@@ -93,4 +93,4 @@ Action:
       pre: (and (available ?b) (boardsize ?b ?size_before) (boardsize-successor ?size_after ?size_before) (goalsize ?p small) (not (= ?p p0)) (not (= ?p p1)) (not (= ?p p10)) (not (= ?p p2)) (not (= ?p p3)) (not (= ?p p4)) (not (= ?p p6)) (not (= ?p p7)) (not (= ?p p9)) (surface-condition ?b ?surface) (unused ?p) (wood ?b ?w))
       eff: (and (available ?p) (boardsize ?b ?size_after) (colour ?p natural) (increase (total-cost) 30) (not (unused ?p)) (surface-condition ?p ?surface) (treatment ?p untreated) (wood ?p ?w))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

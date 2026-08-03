@@ -369,12 +369,14 @@ Init:
   - (gripper-obstacle x4 y4)
   - (gripper-obstacle x6 y1)
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg
   + (NOT-base-obstacle xc yc): in_init in_pre in_eff
   + (NOT-gripper-obstacle xc yc): in_init in_pre in_eff
   + (NOT-object-done object): in_init in_pre in_eff
   + (NOT-parked robot): in_pre in_eff
-  - (base-obstacle xc yc): in_init in_pre in_eff
-  - (gripper-obstacle xc yc): in_init in_pre in_eff
-  - (object-done object): in_pre in_goal in_eff
+  - (base-obstacle xc yc): in_init in_pre in_pre_neg in_eff
+  - (gripper-obstacle xc yc): in_init in_pre in_pre_neg in_eff
+  - (object-done object): in_pre in_pre_neg in_goal in_eff
   + (object-done object): in_goal in_eff
+  - (parked robot): in_init in_pre in_pre_neg in_eff
+  + (parked robot): in_init in_pre in_eff

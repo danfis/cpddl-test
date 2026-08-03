@@ -39,4 +39,4 @@ Action:
       pre: (and (available finisher2-rsrc) (location ?prevsheet some_finisher_tray) (location ?sheet finisher2_entry-finisher1_exit) (not (= ?sheet ?prevsheet)) (prevsheet ?sheet ?prevsheet) (sheetsize ?sheet letter))
       eff: (and (available finisher2-rsrc) (increase (total-cost) 8000) (location ?sheet some_finisher_tray) (not (location ?sheet finisher2_entry-finisher1_exit)) (stackedin ?sheet finisher2_tray))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

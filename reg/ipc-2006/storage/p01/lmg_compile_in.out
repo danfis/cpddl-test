@@ -27,4 +27,4 @@ Action:
       pre: (and (at ?h ?from) (clear ?to) (connected ?from ?to) (not (= ?from ?to)))
       eff: (and (at ?h ?to) (clear ?from) (not (at ?h ?from)) (not (clear ?to)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

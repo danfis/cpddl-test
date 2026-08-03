@@ -29,4 +29,4 @@ Action:
       pre: (and (NOT-currently-collecting-deck) (NOT-currently-dealing) (NOT-currently-updating-movable) (NOT-currently-updating-part-of-tableau) (NOT-currently-updating-unmovable) (clear ?to) (in-play ?c) (movable ?c) (not (= ?from pile-0)) (not (= ?from pile-1)) (not (= ?from pile-2)) (not (= ?from pile-3)) (not (= ?from pile-4)) (not (= ?from pile-5)) (on ?c ?from))
       eff: (and (clear ?from) (currently-updating-part-of-tableau) (increase (total-cost) 1) (make-part-of-tableau ?c ?to) (not (NOT-currently-updating-part-of-tableau)) (not (clear ?to)) (not (on ?c ?from)) (on ?c ?to) (when (not (can-continue-group ?c ?from)) (and (currently-updating-movable) (make-movable ?from) (not (NOT-currently-updating-movable)))))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

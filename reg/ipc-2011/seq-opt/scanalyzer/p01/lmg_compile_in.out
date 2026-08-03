@@ -393,4 +393,4 @@ Action:
       pre: (and (cycle-4 ?s1 ?s2 ?s3 ?s4) (not (= ?s1 ?s2)) (not (= ?s1 ?s3)) (not (= ?s1 ?s4)) (not (= ?s2 ?s3)) (not (= ?s2 ?s4)) (not (= ?s3 ?s4)) (on ?c1 ?s1) (on ?c2 ?s2) (on ?c3 ?s3) (on ?c4 ?s4))
       eff: (and (increase (total-cost) 1) (not (on ?c1 ?s1)) (not (on ?c2 ?s2)) (not (on ?c3 ?s3)) (not (on ?c4 ?s4)) (on ?c1 ?s4) (on ?c2 ?s1) (on ?c3 ?s2) (on ?c4 ?s3))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

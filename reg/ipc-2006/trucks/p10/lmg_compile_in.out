@@ -49,3 +49,6 @@ Action:
   + load: ?p - package ?t - truck ?a1 - truckarea ?l - location
       pre: (and (= ?a1 a3) (at ?p ?l) (at ?t ?l) (free a1 ?t) (free a2 ?t) (free a3 ?t) (not (= ?p package1)) (not (= ?p package2)) (not (= ?p package3)) (not (= ?p package4)) (not (= ?p package5)) (not (= ?p package6)) (not (= ?p package7)) (not (= ?p package8)) (not (= ?p package9)))
       eff: (and (in ?p ?t a3) (not (at ?p ?l)) (not (free a3 ?t)))
+Pred prop:
+  - (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

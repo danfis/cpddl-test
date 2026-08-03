@@ -182,4 +182,16 @@ Pred prop:
   + (NOT-cards-moving-south): in_init in_pre in_eff
   + (NOT-cards-moving-west): in_init in_pre in_eff
   + (NOT-robot-at card): in_init in_pre in_eff
-  - (blocked card direction): in_init in_pre
+  - (blocked card direction): in_init in_pre in_pre_neg
+  - (cards-moving): in_pre in_pre_neg in_eff
+  + (cards-moving): in_pre in_eff
+  - (cards-moving-east): in_pre in_pre_neg in_eff
+  + (cards-moving-east): in_pre in_eff
+  - (cards-moving-north): in_pre in_pre_neg in_eff
+  + (cards-moving-north): in_pre in_eff
+  - (cards-moving-south): in_pre in_pre_neg in_eff
+  + (cards-moving-south): in_pre in_eff
+  - (cards-moving-west): in_pre in_pre_neg in_eff
+  + (cards-moving-west): in_pre in_eff
+  - (robot-at card): in_init in_pre in_pre_neg in_eff
+  + (robot-at card): in_init in_pre in_eff

@@ -33,4 +33,4 @@ Action:
       pre: (and (active ?l2) (connected ?l1 ?l2) (location ?l1) (location ?l2) (not (= ?l1 ?l2)) (not (= ?l1 loc-3-0)) (not (= ?l1 loc-3-1)) (not (= ?l1 loc-3-2)) (not (= ?l1 loc-3-3)) (not (= ?l2 loc-3-0)) (not (= ?l2 loc-3-1)) (not (= ?l2 loc-3-2)) (not (= ?l2 loc-3-3)) (person ?p) (person-at ?p ?l1))
       eff: (and (not (active ?l2)) (not (person-at ?p ?l1)) (person-at ?p ?l2))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

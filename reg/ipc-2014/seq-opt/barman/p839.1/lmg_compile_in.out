@@ -72,4 +72,4 @@ Action:
       pre: (and (cocktail-part1 ?b ?d1) (cocktail-part2 ?b ?d2) (contains ?s ?d1) (contains ?s ?d2) (handempty ?h2) (holding ?h1 ?s) (not (= ?h1 ?h2)) (unshaked ?s))
       eff: (and (contains ?s ?b) (not (contains ?s ?d1)) (not (contains ?s ?d2)) (not (unshaked ?s)) (shaked ?s))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

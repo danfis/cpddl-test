@@ -29,4 +29,4 @@ Action:
       pre: (and (NOT-has-block) (at ?rpos) (height ?bpos ?hbefore) (height ?rpos ?hafter) (neighbor ?rpos ?bpos) (not (= ?rpos ?bpos)) (succ ?hbefore ?hafter))
       eff: (and (has-block) (height ?bpos ?hafter) (not (NOT-has-block)) (not (height ?bpos ?hbefore)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

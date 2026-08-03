@@ -21,4 +21,4 @@ Action:
       pre: (and (at-curb-num ?car ?curbsrc) (car-clear ?car) (curb-clear ?curbdest) (not (= ?curbsrc ?curbdest)))
       eff: (and (at-curb-num ?car ?curbdest) (curb-clear ?curbsrc) (increase (total-cost) 1) (not (at-curb-num ?car ?curbsrc)) (not (curb-clear ?curbdest)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

@@ -58,5 +58,7 @@ Init:
   + (NOT-boarded p1)
 Pred prop:
   + (NOT-boarded passenger): in_init in_pre in_eff
+  - (origin passenger floor): in_init in_pre
+  + (origin passenger floor): in_init in_pre in_pre_neg
   - (served passenger): in_goal in_eff
   + (served passenger): in_pre in_goal in_eff

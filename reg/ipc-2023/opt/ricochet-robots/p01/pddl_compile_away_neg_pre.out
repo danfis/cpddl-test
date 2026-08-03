@@ -887,6 +887,10 @@ Init:
   + (NOT-free cell-16-1)
   + (NOT-free cell-16-16)
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg
   + (NOT-blocked cell direction): in_init in_pre
   + (NOT-free cell): in_init in_pre in_eff
+  - (blocked cell direction): in_init in_pre in_pre_neg
+  + (blocked cell direction): in_init in_pre
+  - (free cell): in_init in_pre in_pre_neg in_eff
+  + (free cell): in_init in_pre in_eff

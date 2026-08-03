@@ -66,4 +66,4 @@ Action:
       pre: (and (home ?homecard) (not (= ?card ?cardabove)) (not (= ?card ?cardbelow)) (ontalon ?card ?cardbelow) (ontalon ?cardabove ?card) (successor ?vcard ?vhomecard) (suit ?card ?cardsuit) (suit ?homecard ?cardsuit) (talonplayable ?card) (value ?card ?vcard) (value ?homecard ?vhomecard))
       eff: (and (home ?card) (not (home ?homecard)) (not (ontalon ?card ?cardbelow)) (not (ontalon ?cardabove ?card)) (not (talonplayable ?card)) (ontalon ?cardabove ?cardbelow) (talonplayable ?cardbelow))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

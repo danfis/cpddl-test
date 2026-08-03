@@ -15,4 +15,4 @@ Action:
       pre: (and (at_car_jun ?machine ?xy_final) (not (= ?machine car0)) (not (= ?machine car1)))
       eff: (and (arrived ?machine ?xy_final) (clear ?xy_final) (not (at_car_jun ?machine ?xy_final)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

@@ -51,4 +51,4 @@ Action:
       pre: (and (clear ?y) (not (= ?x ?y)) (robot-at ?r ?x) (up ?y ?x))
       eff: (and (clear ?x) (increase (total-cost) 3) (not (clear ?y)) (not (robot-at ?r ?x)) (robot-at ?r ?y))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

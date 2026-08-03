@@ -559,6 +559,8 @@ Pred prop:
   + (NOT-blocked cell): in_init in_pre in_eff
   + (NOT-painted cell): in_init in_pre in_eff
   + (NOT-part-of cell group): in_init in_pre in_eff
-  - (blocked cell): in_init in_pre in_eff
-  - (painted cell): in_pre in_eff
-  - (part-of cell group): in_init in_pre in_eff
+  - (available cell): in_init in_pre in_pre_neg in_eff
+  + (available cell): in_init in_pre in_eff
+  - (blocked cell): in_init in_pre in_pre_neg in_eff
+  - (painted cell): in_pre in_pre_neg in_eff
+  - (part-of cell group): in_init in_pre in_pre_neg in_eff

@@ -253,11 +253,11 @@ Goal:
   - (and (not (rcnot l0_l4_i23)) (not (rcnot l0_l4_i27)) (not (rcnot l0_l4_i54)) (not (rcnot l0_l4_i58)) (not (rcnot l1_l4_i21)) (not (rcnot l1_l4_i25)) (not (rcnot l1_l4_i52)) (not (rcnot l1_l4_i56)) (not (rcnot l2_l4_i17)) (not (rcnot l2_l4_i19)) (not (rcnot l2_l4_i66)) (not (rcnot l2_l4_i68)) (not (rcnot l2_l5_i14)) (not (rcnot l2_l5_i32)) (not (rcnot l2_l5_i48)) (not (rcnot l2_l5_i63)) (not (rcnot l3_l5_i10)) (not (rcnot l3_l5_i41)) (not (rcnot l3_l5_i43)) (not (rcnot l3_l5_i8)) (not (rcnot l3_l6_i38)) (not (rcnot l3_l6_i5)) (not (rcnot l4_l5_i12)) (not (rcnot l4_l5_i16)) (not (rcnot l4_l5_i30)) (not (rcnot l4_l5_i34)) (not (rcnot l4_l5_i46)) (not (rcnot l4_l5_i50)) (not (rcnot l4_l5_i61)) (not (rcnot l4_l5_i65)) (not (rcnot l5_l6_i3)) (not (rcnot l5_l6_i36)) (not (rcnot l5_l6_i40)) (not (rcnot l5_l6_i7)))
   + (and (NOT-rcnot l0_l4_i23) (NOT-rcnot l0_l4_i27) (NOT-rcnot l0_l4_i54) (NOT-rcnot l0_l4_i58) (NOT-rcnot l1_l4_i21) (NOT-rcnot l1_l4_i25) (NOT-rcnot l1_l4_i52) (NOT-rcnot l1_l4_i56) (NOT-rcnot l2_l4_i17) (NOT-rcnot l2_l4_i19) (NOT-rcnot l2_l4_i66) (NOT-rcnot l2_l4_i68) (NOT-rcnot l2_l5_i14) (NOT-rcnot l2_l5_i32) (NOT-rcnot l2_l5_i48) (NOT-rcnot l2_l5_i63) (NOT-rcnot l3_l5_i10) (NOT-rcnot l3_l5_i41) (NOT-rcnot l3_l5_i43) (NOT-rcnot l3_l5_i8) (NOT-rcnot l3_l6_i38) (NOT-rcnot l3_l6_i5) (NOT-rcnot l4_l5_i12) (NOT-rcnot l4_l5_i16) (NOT-rcnot l4_l5_i30) (NOT-rcnot l4_l5_i34) (NOT-rcnot l4_l5_i46) (NOT-rcnot l4_l5_i50) (NOT-rcnot l4_l5_i61) (NOT-rcnot l4_l5_i65) (NOT-rcnot l5_l6_i3) (NOT-rcnot l5_l6_i36) (NOT-rcnot l5_l6_i40) (NOT-rcnot l5_l6_i7))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg
   + (NOT-initialized pqubit): in_init in_pre in_eff
   + (NOT-occupied_pqubit pqubit): in_init in_pre in_eff
   + (NOT-rcnot gateid): in_pre in_goal in_eff
-  - (initialized pqubit): in_pre in_eff
-  - (occupied_pqubit pqubit): in_pre in_eff
-  - (rcnot gateid): in_init in_pre in_goal in_eff
+  - (initialized pqubit): in_pre in_pre_neg in_eff
+  - (occupied_pqubit pqubit): in_pre in_pre_neg in_eff
+  - (rcnot gateid): in_init in_pre in_pre_neg in_goal in_goal_neg in_eff
   + (rcnot gateid): in_init in_pre in_eff

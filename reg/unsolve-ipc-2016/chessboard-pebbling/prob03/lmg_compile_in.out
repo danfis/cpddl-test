@@ -9,4 +9,4 @@ Action:
       pre: (and (free ?xsucc) (free ?ysucc) (not (= ?from ?xsucc)) (not (= ?from ?ysucc)) (occupied ?from) (x-succ ?from ?xsucc) (y-succ ?from ?ysucc))
       eff: (and (free ?from) (not (free ?xsucc)) (not (free ?ysucc)) (not (occupied ?from)) (occupied ?xsucc) (occupied ?ysucc))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

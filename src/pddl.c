@@ -271,6 +271,8 @@ TEST(pddl_compile_away_neg_pre, r)
     ret = pddlCompileAwayNegativeConditions(&pddl, pddl_false, pddl_false,
                                             pddl_true, &C.err);
     assert(ret == 0);
+    // Compiling away all negative conditions must leave none behind
+    assert(!pddlHasNonStaticNegativeConditions(&pddl));
     pddlPrintDiff(&base, &pddl, stdout);
     pddlFree(&base);
     pddlFree(&pddl);

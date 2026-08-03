@@ -21,4 +21,4 @@ Action:
       pre: (and (at ?p ?ppos) (at ?s ?from) (clear ?to) (is-nongoal ?to) (move-dir ?from ?to ?dir) (move-dir ?ppos ?from ?dir) (not (= ?from ?to)) (not (= ?ppos ?from)) (not (= ?ppos ?to)))
       eff: (and (at ?p ?from) (at ?s ?to) (clear ?ppos) (increase (total-cost) 1) (not (at ?p ?ppos)) (not (at ?s ?from)) (not (at-goal ?s)) (not (clear ?to)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

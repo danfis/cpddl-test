@@ -10,7 +10,9 @@ TEST(pred_func_props, pddl)
         printf("(%s)\n", C.pddl.pred.pred[pi].name);
         printf("  in-init: %d\n", p->in_init);
         printf("  in-pre: %d\n", p->in_pre);
+        printf("  in-pre-neg: %d\n", p->in_pre_neg);
         printf("  in-goal: %d\n", p->in_goal);
+        printf("  in-goal-neg: %d\n", p->in_goal_neg);
         printf("  in-eff: %d\n", p->in_eff);
     }
     for (int f = 0; f < fp.func_size; ++f){

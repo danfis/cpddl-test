@@ -15,4 +15,4 @@ Action:
       pre: (and (connect ?from-area ?to-area ?pipe) (first ?first-batch-atom ?pipe) (is-product ?batch-atom-in ?product-batch-atom-in) (is-product ?first-batch-atom ?product-first-batch) (may-interface ?product-batch-atom-in ?product-first-batch) (not (= ?batch-atom-in ?first-batch-atom)) (not (= ?from-tank-slot ?to-tank-slot)) (not-occupied ?to-tank-slot) (occupied ?from-tank-slot) (on ?batch-atom-in ?from-area) (tank-slot-product-location ?from-tank-slot ?product-batch-atom-in ?from-area) (tank-slot-product-location ?to-tank-slot ?product-first-batch ?to-area) (unitary ?pipe))
       eff: (and (first ?batch-atom-in ?pipe) (not (first ?first-batch-atom ?pipe)) (not (not-occupied ?to-tank-slot)) (not (occupied ?from-tank-slot)) (not (on ?batch-atom-in ?from-area)) (not-occupied ?from-tank-slot) (occupied ?to-tank-slot) (on ?first-batch-atom ?to-area))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

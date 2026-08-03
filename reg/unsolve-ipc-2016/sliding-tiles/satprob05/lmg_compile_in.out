@@ -27,4 +27,4 @@ Action:
       pre: (and (at ?t ?px ?py) (blank ?px ?by) (dec ?by ?py) (not (= ?py ?by)) (tile ?t) (xposition ?px) (yposition ?by) (yposition ?py))
       eff: (and (at ?t ?px ?by) (blank ?px ?py) (not (at ?t ?px ?py)) (not (blank ?px ?by)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

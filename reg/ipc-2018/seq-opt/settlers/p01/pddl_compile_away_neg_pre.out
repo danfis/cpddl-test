@@ -62,3 +62,11 @@ Pred prop:
   + (NOT-has-coal-stack place): in_init in_pre in_eff
   + (NOT-has-ironworks place): in_init in_pre in_eff
   + (NOT-has-sawmill place): in_init in_pre in_eff
+  - (connected-by-rail place place): in_pre in_pre_neg in_eff
+  + (connected-by-rail place place): in_pre in_eff
+  - (has-coal-stack place): in_pre in_pre_neg in_eff
+  + (has-coal-stack place): in_pre in_eff
+  - (has-ironworks place): in_pre in_pre_neg in_eff
+  + (has-ironworks place): in_pre in_eff
+  - (has-sawmill place): in_pre in_pre_neg in_goal in_eff
+  + (has-sawmill place): in_pre in_goal in_eff

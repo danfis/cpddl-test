@@ -45,4 +45,4 @@ Action:
       pre: (and (available uime-rsrc) (imagecolor ?image black) (location ?sheet uc1_exittoime-uime_entry) (not (= ?sheet sheet1)) (not (= ?sheet sheet10)) (not (= ?sheet sheet2)) (not (= ?sheet sheet3)) (not (= ?sheet sheet4)) (not (= ?sheet sheet5)) (not (= ?sheet sheet6)) (not (= ?sheet sheet7)) (not (= ?sheet sheet8)) (not (= ?sheet sheet9)) (notprintedwith ?sheet ?face black) (sheetsize ?sheet letter) (sideup ?sheet ?face))
       eff: (and (available uime-rsrc) (hasimage ?sheet ?face ?image) (increase (total-cost) 127790) (location ?sheet uime_exit-uc1_entryfromime) (not (location ?sheet uc1_exittoime-uime_entry)) (not (notprintedwith ?sheet ?face black)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

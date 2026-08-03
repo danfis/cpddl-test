@@ -25,3 +25,6 @@ Action:
   + rotate-second-pass: ?n1 - node ?n1x - coord ?n1y - coord ?n1dir - direction ?n2 - node ?n2x - coord ?n2y - coord
       pre: (and (= ?n1dir up) (= ?n1x ?n2x) (at ?n1 ?n1x ?n1y) (connected ?n1 ?n2) (coord-inc ?n1y ?n2y) (free ?n2x ?n2y) (heading ?n1 up) (node-second-pass-next ?n1) (not (= ?n1y ?n2y)))
       eff: (and (at ?n2 ?n2x ?n2y) (increase (total-cost) (update-cost)) (node-second-pass-next ?n2) (not (free ?n2x ?n2y)) (not (node-second-pass-next ?n1)))
+Pred prop:
+  - (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

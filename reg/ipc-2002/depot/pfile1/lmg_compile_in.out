@@ -27,4 +27,4 @@ Action:
       pre: (and (at ?x ?p) (at ?z ?p) (available ?x) (crate ?y) (hoist ?x) (in ?y ?z) (not (= ?x ?y)) (not (= ?y ?z)) (place ?p) (truck ?z))
       eff: (and (lifting ?x ?y) (not (available ?x)) (not (in ?y ?z)))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg

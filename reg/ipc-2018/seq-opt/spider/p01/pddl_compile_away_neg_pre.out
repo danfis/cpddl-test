@@ -362,3 +362,17 @@ Pred prop:
   + (NOT-currently-updating-part-of-tableau): in_init in_pre in_eff
   + (NOT-currently-updating-unmovable): in_init in_pre in_eff
   + (NOT-movable card): in_init in_pre in_eff
+  - (can-continue-group card cardposition): in_init in_pre in_pre_neg
+  + (can-continue-group card cardposition): in_init in_pre
+  - (currently-collecting-deck): in_pre in_pre_neg in_eff
+  + (currently-collecting-deck): in_pre in_eff
+  - (currently-dealing): in_pre in_pre_neg in_eff
+  + (currently-dealing): in_pre in_eff
+  - (currently-updating-movable): in_pre in_pre_neg in_eff
+  + (currently-updating-movable): in_pre in_eff
+  - (currently-updating-part-of-tableau): in_pre in_pre_neg in_eff
+  + (currently-updating-part-of-tableau): in_pre in_eff
+  - (currently-updating-unmovable): in_pre in_pre_neg in_eff
+  + (currently-updating-unmovable): in_pre in_eff
+  - (movable card): in_init in_pre in_pre_neg in_eff
+  + (movable card): in_init in_pre in_eff

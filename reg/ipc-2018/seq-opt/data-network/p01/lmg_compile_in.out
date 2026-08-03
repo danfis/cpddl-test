@@ -15,4 +15,4 @@ Action:
       pre: (and (NOT-cached ?d ?to) (cached ?d ?from) (capacity ?to ?limit) (connected ?from ?to) (data-size ?d ?size) (less-equal ?after ?limit) (not (= ?from ?to)) (sum ?before ?size ?after) (usage ?to ?before))
       eff: (and (cached ?d ?to) (increase (total-cost) (send-cost ?from ?to ?size)) (not (NOT-cached ?d ?to)) (not (usage ?to ?before)) (usage ?to ?after))
 Pred prop:
-  + (= object object): in_pre
+  + (= object object): in_pre in_pre_neg
