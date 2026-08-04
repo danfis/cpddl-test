@@ -22,6 +22,7 @@
 #define DEFAULT_TIMEOUT 180
 #define PROGRESS_COLUMNS 180
 #define PROGRESS_STR_MAX_SIZE 50
+#define PANIC_EXIT_STATUS 213
 
 const char *TEST_TASK = NULL;
 int __test_skip_children = 0;
@@ -620,6 +621,7 @@ static int runPanicTest(void (*fn)(void))
         // alarm to make sure that a hanging fn() cannot survive as an orphan
         // still holding a write file descriptor of the .out.tmp file.
         alarm(timeout_s);
+        pddlErrSetPanicExitStatus(PANIC_EXIT_STATUS);
         fn();
         exit(0);
     }
@@ -629,7 +631,7 @@ static int runPanicTest(void (*fn)(void))
         if (errno != EINTR)
             return 0;
     }
-    return WIFEXITED(status) && WEXITSTATUS(status) == 255;
+    return WIFEXITED(status) && WEXITSTATUS(status) == PANIC_EXIT_STATUS;
 }
 
 static void runTest(worker_t *worker, int task_id, const test_def_t *test)
