@@ -68,7 +68,8 @@ TEST(pddl_compile_away_cond_eff, pddl)
 {
     pddl_t base;
     pddlInitCopy(&base, &C.pddl);
-    pddlCompileAwayNonStaticCondEff(&C.pddl);
+    int st = pddlCompileAwayNonStaticCondEff(&C.pddl, &C.err);
+    assert(st == 0);
     pddlPrintDiff(&base, &C.pddl, stdout);
     pddlFree(&base);
 }
