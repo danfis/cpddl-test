@@ -1,12 +1,12 @@
 #include "test.h"
 #include "context.h"
 
-TEST(pred_func_props, pddl)
+TEST(pddl_props, pddl)
 {
-    pddl_pred_func_props_t fp;
-    pddlPredFuncPropsInit(&fp, &C.pddl);
-    for (int pi = 0; pi < fp.pred_size; ++pi){
-        const pddl_pred_prop_t *p = fp.pred_prop + pi;
+    pddl_props_t props;
+    pddlPropsInit(&props, &C.pddl);
+    for (int pi = 0; pi < props.pred_size; ++pi){
+        const pddl_pred_prop_t *p = props.pred_prop + pi;
         printf("(%s)\n", C.pddl.pred.pred[pi].name);
         printf("  in-init: %d\n", p->in_init);
         printf("  in-pre: %d\n", p->in_pre);
@@ -15,8 +15,8 @@ TEST(pred_func_props, pddl)
         printf("  in-goal-neg: %d\n", p->in_goal_neg);
         printf("  in-eff: %d\n", p->in_eff);
     }
-    for (int f = 0; f < fp.func_size; ++f){
-        const pddl_func_prop_t *p = fp.func_prop + f;
+    for (int f = 0; f < props.func_size; ++f){
+        const pddl_func_prop_t *p = props.func_prop + f;
         printf("(%s)\n", C.pddl.func.pred[f].name);
         printf("  in-init: %d\n", p->in_init);
         printf("  init-all-nonneg: %d\n", p->init_all_nonneg);
@@ -38,5 +38,5 @@ TEST(pred_func_props, pddl)
             printf(" (%s)", C.pddl.func.pred[g].name);
         printf("\n");
     }
-    pddlPredFuncPropsFree(&fp);
+    pddlPropsFree(&props);
 }

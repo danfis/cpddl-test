@@ -77,7 +77,7 @@ TESTS += num_val
 TESTS += fm_num_exp
 TESTS += fm_num_eval
 TESTS += fm_num_exp_fold
-TESTS += pred_func_props
+TESTS += pddl_props
 TESTS += pddl_init_state
 #TESTS += asnets
 

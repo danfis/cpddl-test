@@ -759,18 +759,18 @@ static void mkPddl(pddl_t *pddl)
     pddlObjsAdd(&pddl->obj, "a");
     pddlObjsAdd(&pddl->obj, "b");
 
-    pddlResetPredFuncProps(pddl);
-    pddl->pred_func_props.pred_prop[q->id].in_eff = pddl_true;
+    pddlResetProps(pddl);
+    pddl->props.pred_prop[q->id].in_eff = pddl_true;
 }
 
 static void freePddl(pddl_t *pddl)
 {
-    pddlPredFuncPropsFree(&pddl->pred_func_props);
+    pddlPropsFree(&pddl->props);
     pddlInitStateFree(&pddl->init);
     pddlPredsFree(&pddl->pred);
     pddlPredsFree(&pddl->func);
     pddlObjsFree(&pddl->obj);
-    pddlPredFuncPropsFree(&pddl->pred_func_props);
+    pddlPropsFree(&pddl->props);
 }
 
 TEST_ONCE(pddl_init_state_print)
