@@ -30,3 +30,5 @@ Action:
       eff: (and (clear ?from) (currently-updating-part-of-tableau) (increase (total-cost) 1) (make-part-of-tableau ?c ?to) (not (NOT-currently-updating-part-of-tableau)) (not (clear ?to)) (not (on ?c ?from)) (on ?c ?to) (when (not (can-continue-group ?c ?from)) (and (currently-updating-movable) (make-movable ?from) (not (NOT-currently-updating-movable)))))
 Pred prop:
   + (= object object): in_pre in_pre_neg
+Global prop:
+  + has_eq_pred

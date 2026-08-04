@@ -20,23 +20,31 @@ TEST(pddl, r)
 
 TEST(pddl_classical, pddl)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }
 }
 
-TEST(pddl_has_numeric_fluents, pddl)
+TEST(pddl_is_numeric, pddl)
 {
     // Numeric tasks live under ipc-2023/num/, ipc-2026/num/, and
     // various/num-*; everything else, including plain :action-costs tasks,
-    // is classified as non-numeric
-    if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
+    // is classified as non-numeric. Exceptions: the metric of these four
+    // tasks is expressible as non-negative integer action costs, so they
+    // are non-numeric even though the old, purely syntactic classification
+    // treated them as numeric
+    if (strncmp(TEST_TASK, "various/num-cost-renamed/", 25) == 0
+            || strncmp(TEST_TASK, "various/num-cost-expr/", 22) == 0
+            || strncmp(TEST_TASK, "various/num-cost-decrease/", 26) == 0
+            || strncmp(TEST_TASK, "various/num-metric-negcoef/", 27) == 0){
+        assert(!pddlIsNumeric(&C.pddl));
+    }else if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
             || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
             || strncmp(TEST_TASK, "various/num-", 12) == 0){
-        assert(pddlHasNumericFluents(&C.pddl));
+        assert(pddlIsNumeric(&C.pddl));
     }else{
-        assert(!pddlHasNumericFluents(&C.pddl));
+        assert(!pddlIsNumeric(&C.pddl));
     }
 }
 

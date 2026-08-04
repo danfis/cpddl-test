@@ -39,6 +39,53 @@ very_large = [
     "prune_strips_endo",
 ]
 
+# Tests that require the task's action costs already in the
+# grounder-supported form, i.e., (increase (total-cost) atom-or-int)
+# effects on the function named total-cost. Disabled for tasks whose
+# metric is expressible as integer action costs (so they are not numeric)
+# but needs pddlCompileMetricIntoActionCosts() first.
+needs_simple_total_cost = [
+    "endomorphism_lifted",
+    "endomorphism_lifted_nocost",
+    "endomorphism_relaxed_lifted",
+    "endomorphism_relaxed_lifted_nocost",
+    "gaifman",
+    "ground_layered",
+    "homomorphism_endomorph",
+    "homomorphism_endomorph_nocost",
+    "homomorphism_gaifman",
+    "homomorphism_gaifman_goal",
+    "homomorphism_reduce",
+    "homomorphism_type",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_sql",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_astar_hmax_sql",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+    "lifted_succ_gen_sql",
+    "lmg_compile_in",
+    "prune_strips",
+    "strips",
+    "strips_ce",
+    "strips_cocoa",
+    "strips_compile_in_lmg",
+    "strips_grounding",
+    "strips_ground_neg_cond_guard",
+    "strips_ground_only_facts",
+    "strips_ground_only_facts_with_static",
+    "strips_ground_prune",
+    "strips_maker_actions",
+    "strips_maker_atoms",
+    "strips_maker_eff_in_state",
+    "strips_maker_init",
+    "strips_maker_make_strips",
+    "strips_nebel",
+]
+
 [task-set]
 base = [
     "ipc-1998/gripper/prob01",
@@ -2076,18 +2123,22 @@ name = "various/num-metric-negdelta/p01"
 
 [[tasks]]
 name = "various/num-metric-negcoef/p01"
+disable = ["test-set:needs_simple_total_cost"]
 
 [[tasks]]
 name = "various/num-cost-expr/p01"
+disable = ["test-set:needs_simple_total_cost"]
 
 [[tasks]]
 name = "various/num-cost-decrease/p01"
+disable = ["test-set:needs_simple_total_cost"]
 
 [[tasks]]
 name = "various/num-cost-float/p01"
 
 [[tasks]]
 name = "various/num-cost-renamed/p01"
+disable = ["test-set:needs_simple_total_cost"]
 
 [[tasks]]
 name = "various/num-float-coef/p01"

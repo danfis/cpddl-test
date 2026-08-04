@@ -271,7 +271,7 @@ static void closeAtomsUnderEffects(pddl_strips_maker_t *sm)
 
 TEST(strips_maker, pddl)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }

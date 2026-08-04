@@ -16,3 +16,5 @@ Action:
       eff: (and (cached ?d ?to) (increase (total-cost) (send-cost ?from ?to ?size)) (not (NOT-cached ?d ?to)) (not (usage ?to ?before)) (usage ?to ?after))
 Pred prop:
   + (= object object): in_pre in_pre_neg
+Global prop:
+  + has_eq_pred

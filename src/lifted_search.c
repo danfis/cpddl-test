@@ -97,7 +97,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
 
 TEST_COND(lifted_succ_gen_sql, pddl, SQLITE)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         // TODO: This test should not fail but on numeric tasks but it seems to
         // do -- maybe only on tasks without propositional facts. This needs to
         // be investigated further.
@@ -115,7 +115,7 @@ TEST(lifted_succ_gen_dl, pddl)
 
 TEST(lifted_search, pddl)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }
@@ -123,7 +123,7 @@ TEST(lifted_search, pddl)
 
 TEST(lifted_search_unit_cost, pddl_unit_cost)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }

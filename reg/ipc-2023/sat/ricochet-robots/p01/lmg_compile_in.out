@@ -7,3 +7,5 @@ Action:
   + step: ?r - robot ?cfrom - cell ?cto - cell ?dir - direction
       pre: (and (at ?r ?cfrom) (free ?cto) (is-moving ?r ?dir) (next ?cfrom ?cto ?dir) (not (= ?cfrom ?cto)) (not (blocked ?cfrom ?dir)))
       eff: (and (NOT-free ?cto) (at ?r ?cto) (free ?cfrom) (increase (total-cost) (step-cost)) (not (NOT-free ?cfrom)) (not (at ?r ?cfrom)) (not (free ?cto)))
+Global prop:
+  - has_cond_eff

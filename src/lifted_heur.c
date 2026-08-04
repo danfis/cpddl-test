@@ -4,7 +4,7 @@
 
 TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }
@@ -69,7 +69,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 
 TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }
@@ -131,7 +131,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
 
 TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }

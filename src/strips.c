@@ -37,7 +37,7 @@ TEST(strips_ground_neg_cond_guard, r)
     assert(ret == 0);
 
     // The grounders reject numeric tasks for an unrelated reason
-    if (pddlHasNumericFluents(&pddl)){
+    if (pddlIsNumeric(&pddl)){
         pddlFree(&pddl);
         return;
     }
@@ -69,7 +69,7 @@ TEST(strips_ground_not_normalized_guard, r)
     assert(ret == 0);
 
     // The grounders reject numeric tasks for an unrelated reason
-    if (pddlHasNumericFluents(&pddl)){
+    if (pddlIsNumeric(&pddl)){
         pddlFree(&pddl);
         return;
     }
@@ -203,7 +203,7 @@ TEST(strips_ground_only_facts_with_static, lmg)
 
 TEST(strips_ground_unit_cost, pddl_unit_cost)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }
@@ -615,7 +615,7 @@ TEST(strips_compile_in_lmg, lmg)
 
 TEST(strips_grounding, pddl)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }

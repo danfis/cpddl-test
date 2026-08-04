@@ -1,5 +1,6 @@
 #include "test.h"
 #include "context.h"
+#include <assert.h>
 
 TEST(pddl_props, pddl)
 {
@@ -38,5 +39,29 @@ TEST(pddl_props, pddl)
             printf(" (%s)", C.pddl.func.pred[g].name);
         printf("\n");
     }
+    printf("global\n");
+    printf("  has-cond-eff: %d\n", props.has_cond_eff);
+    printf("  has-num-cmp: %d\n", props.has_num_cmp);
+    printf("  has-eq-pred: %d\n", props.has_eq_pred);
+    printf("  has-non-static-neg-cond: %d\n", props.has_non_static_neg_cond);
+    if (props.action_cost_func >= 0){
+        printf("  action-cost-func: (%s)\n",
+               C.pddl.func.pred[props.action_cost_func].name);
+    }else{
+        printf("  action-cost-func: -1\n");
+    }
+    printf("  has-int-action-cost-func: %d\n", props.has_int_action_cost_func);
+    printf("  is-unit-cost: %d\n", props.is_unit_cost);
+    printf("  is-numeric: %d\n", props.is_numeric);
+
+    // The parent test normalizes the task and leaves C.pddl.props valid,
+    // so the query functions must agree with the freshly computed props
+    assert(props.has_cond_eff == pddlHasCondEff(&C.pddl));
+    assert(props.has_eq_pred == pddlHasEqPred(&C.pddl));
+    assert(props.has_non_static_neg_cond
+            == pddlHasNonStaticNegativeConditions(&C.pddl));
+    assert(props.is_numeric == pddlIsNumeric(&C.pddl));
+    if (props.has_int_action_cost_func)
+        assert(pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl, NULL));
     pddlPropsFree(&props);
 }

@@ -37,3 +37,5 @@ Action:
   + link-1-1: ?n1 - node ?n2 - node ?c1 - cell ?c1capfrom - cell-capacity-level ?c1capto - cell-capacity-level ?c2 - cell ?c2capfrom - cell-capacity-level ?c2capto - cell-capacity-level
       pre: (and (NOT-linked ?n1 ?n2) (cell-capacity ?c1 ?c1capfrom) (cell-capacity ?c2 ?c2capfrom) (cell-capacity-inc ?c1capto ?c1capfrom) (cell-capacity-inc ?c2capto ?c2capfrom) (cell-edge ?c1 ?c2 ?n1 ?n2) (node-degree1 ?n1) (node-degree1 ?n2) (not (= ?c1 ?c2)))
       eff: (and (NOT-node-degree1 ?n1) (NOT-node-degree1 ?n2) (cell-capacity ?c1 ?c1capto) (cell-capacity ?c2 ?c2capto) (not (NOT-linked ?n1 ?n2)) (not (cell-capacity ?c1 ?c1capfrom)) (not (cell-capacity ?c2 ?c2capfrom)) (not (node-degree1 ?n1)) (not (node-degree1 ?n2)))
+Global prop:
+  - has_cond_eff

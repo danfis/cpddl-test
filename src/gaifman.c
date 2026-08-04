@@ -4,7 +4,7 @@
 
 TEST(gaifman, pddl_compile_away_cond_eff)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         // TODO: I think gaifma should be well defined for numeric tasks as
         // well. This needs to be investigated further.

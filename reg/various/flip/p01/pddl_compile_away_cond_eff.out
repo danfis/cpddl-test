@@ -55,3 +55,5 @@ Action:
   + flip_row: ?r - row
       pre: (and (white ?r c1) (white ?r c2) (white ?r c3))
       eff: (and (NOT-white ?r c1) (NOT-white ?r c2) (NOT-white ?r c3) (not (white ?r c1)) (not (white ?r c2)) (not (white ?r c3)))
+Global prop:
+  - has_cond_eff

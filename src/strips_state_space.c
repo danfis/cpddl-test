@@ -24,7 +24,7 @@ static void assertDefaults(pddl_strips_state_space_t *space,
 
 TEST(strips_state_space, strips)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }

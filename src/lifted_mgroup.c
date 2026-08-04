@@ -555,7 +555,7 @@ TEST(lmg_fd, lmg_fam)
 
 TEST(lmg, lmg_fd)
 {
-    if (pddlHasNumericFluents(&C.pddl)){
+    if (pddlIsNumeric(&C.pddl)){
         TEST_SKIP_CHILDREN;
         return;
     }
