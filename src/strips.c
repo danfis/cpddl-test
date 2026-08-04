@@ -95,8 +95,10 @@ TEST(strips, lmg)
     assert(ret == 0);
     C.strips_set = 1;
 
-    if (C.strips.has_cond_eff)
-        pddlStripsCompileAwayCondEff(&C.strips);
+    if (C.strips.has_cond_eff){
+        ret = pddlStripsCompileAwayCondEff(&C.strips, &C.err);
+        assert(ret == 0);
+    }
     assert(!C.strips.has_cond_eff);
 
     pddlMGroupsGround(&C.mg, &C.pddl, &C.lmg, &C.strips);
@@ -213,8 +215,10 @@ TEST(strips_ground_unit_cost, pddl_unit_cost)
     assert(ret == 0);
     C.strips_set = 1;
 
-    if (C.strips.has_cond_eff)
-        pddlStripsCompileAwayCondEff(&C.strips);
+    if (C.strips.has_cond_eff){
+        ret = pddlStripsCompileAwayCondEff(&C.strips, &C.err);
+        assert(ret == 0);
+    }
     assert(!C.strips.has_cond_eff);
     pddlStripsPrintDebug(&C.strips, stdout);
 }
@@ -746,7 +750,8 @@ TEST(strips_conj, strips_pruned)
     pddlISetFree(&set);
 
     cfg.mutex = &C.mutex;
-    pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+    int ret = pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+    assert(ret == 0);
     stripsc_set = 1;
 
     for (int fact_id = 0; fact_id < stripsc.strips.fact.fact_size; ++fact_id){
@@ -772,8 +777,10 @@ TEST_TEAR_DOWN(strips_conj)
 static void testStripsConjHMax(const pddl_strips_conj_t *stripsc)
 {
     pddl_hmax_t hmax, hmaxc;
-    pddlHMaxInitStrips(&hmax, &C.strips);
-    pddlHMaxInitStrips(&hmaxc, &stripsc->strips);
+    int ret = pddlHMaxInitStrips(&hmax, &C.strips, &C.err);
+    assert(ret == 0);
+    ret = pddlHMaxInitStrips(&hmaxc, &stripsc->strips, &C.err);
+    assert(ret == 0);
     int h = pddlHMaxStrips(&hmax, &C.strips.init);
     int hc = pddlHMaxStrips(&hmaxc, &stripsc->strips.init);
     assert(h <= hc);
@@ -821,7 +828,8 @@ TEST(strips_conj_hmax_rand, strips_pruned)
 
         pddl_strips_conj_t stripsc;
         cfg.mutex = &C.mutex;
-        pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+        int ret = pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+        assert(ret == 0);
         testStripsConjHMax(&stripsc);
         pddlStripsConjFree(&stripsc);
         pddlStripsConjConfigFree(&cfg);
@@ -853,7 +861,8 @@ TEST(strips_conj_hmax_rand, strips_pruned)
 
             pddl_strips_conj_t stripsc;
             cfg.mutex = &C.mutex;
-            pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+            int ret = pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+            assert(ret == 0);
             testStripsConjHMax(&stripsc);
             pddlStripsConjFree(&stripsc);
             pddlStripsConjConfigFree(&cfg);
@@ -868,8 +877,10 @@ TEST(strips_conj_hadd, strips_conj)
         return;
 
     pddl_hadd_t hadd, haddc;
-    pddlHAddInitStrips(&hadd, &C.strips);
-    pddlHAddInitStrips(&haddc, &stripsc.strips);
+    int ret = pddlHAddInitStrips(&hadd, &C.strips, &C.err);
+    assert(ret == 0);
+    ret = pddlHAddInitStrips(&haddc, &stripsc.strips, &C.err);
+    assert(ret == 0);
     int h = pddlHAddStrips(&hadd, &C.strips.init);
     int hc = pddlHAddStrips(&haddc, &stripsc.strips.init);
     assert(h <= hc);

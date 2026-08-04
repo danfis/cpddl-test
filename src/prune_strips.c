@@ -123,8 +123,10 @@ TEST(prune_strips, lmg)
     assert(ret == 0);
     C.strips_set = 1;
 
-    if (C.strips.has_cond_eff)
-        pddlStripsCompileAwayCondEff(&C.strips);
+    if (C.strips.has_cond_eff){
+        ret = pddlStripsCompileAwayCondEff(&C.strips, &C.err);
+        assert(ret == 0);
+    }
     assert(!C.strips.has_cond_eff);
 
     pddlMGroupsGround(&C.mg, &C.pddl, &C.lmg, &C.strips);

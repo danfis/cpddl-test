@@ -332,7 +332,8 @@ TEST(fdr_conj_exact, fdr_h2)
     pddlISetFree(&set);
 
     cfg.mutex = &C.mutex;
-    pddlFDRConjExactInit(&fdrpc, &C.fdr, &cfg, &C.err);
+    int ret = pddlFDRConjExactInit(&fdrpc, &C.fdr, &cfg, &C.err);
+    assert(ret == 0);
     fdrpc_set = 1;
 
     //pddlFDRPrintFD(&C.fdr, NULL, 0, stdout);

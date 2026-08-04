@@ -180,13 +180,14 @@ static void tEndomorphismTS(int ignore_costs)
     pddlH2FwMutex(&mg_strips.strips, &mutex, &C.err);
 
     pddl_trans_systems_t tss;
-    pddlTransSystemsInit(&tss, &mg_strips, &mutex);
+    int ret = pddlTransSystemsInit(&tss, &mg_strips, &mutex, &C.err);
+    assert(ret == 0);
 
     pddl_endomorphism_config_t cfg = PDDL_ENDOMORPHISM_CONFIG_INIT;
     cfg.ignore_costs = ignore_costs;
     cfg.run_in_subprocess = 1;
     pddl_endomorphism_sol_t sol;
-    int ret = pddlEndomorphismTransSystem(&tss, &cfg, &sol, &C.err);
+    ret = pddlEndomorphismTransSystem(&tss, &cfg, &sol, &C.err);
     assert(ret == 0);
     if (pddlISetSize(&sol.redundant_ops) == 0){
         for (int i = 0; i < C.fdr.op.op_size; ++i)
