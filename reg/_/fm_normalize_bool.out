@@ -1,0 +1,44 @@
+static atom that holds in init:
+  in : (and (W:q a) (:ps a))
+  status: 1
+  out: (W:q a)
+static atom that does not hold in init:
+  in : (and (W:q a) (:ps b))
+  status: 1
+  out: FALSE
+negated static atom that does not hold in init:
+  in : (and (W:q a) (N::ps b))
+  status: 1
+  out: (W:q a)
+ground equality:
+  in : (and (W:q c) (:= a a) (N::= a b))
+  status: 1
+  out: (W:q c)
+when with a statically true condition:
+  in : (and (W:q a) (when (:ps a) (W:q b)))
+  status: 1
+  out: (and (W:q a) (W:q b))
+when with a statically false condition:
+  in : (and (W:q a) (when (:ps b) (W:q b)))
+  status: 1
+  out: (W:q a)
+empty and is true:
+  in : (and)
+  status: 1
+  out: TRUE
+empty or is false:
+  in : (or)
+  status: 1
+  out: FALSE
+negated partially instantiated static atom, no match:
+  in : (and (W:q a) (N::ps2 x0 a))
+  status: 1
+  out: (W:q a)
+negated partially instantiated static atom, with a match:
+  in : (and (W:q a) (N::ps2 x0 b))
+  status: 0
+  out: (and (W:q a) (N::ps2 x0 b))
+flattening + instantiated static atom, with a match:
+  in : (or (and (and (and)) (:ps a)) (W:p a))
+  status: 1
+  out: TRUE

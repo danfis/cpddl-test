@@ -1,0 +1,12 @@
+no change:
+  in : (and (W:p a) (W:q b))
+  status: 0
+  out: (and (W:p a) (W:q b))
+division by zero:
+  in : (/ 1 0)
+  status: -1
+  out: (/ 1 0)
+integer overflow:
+  in : (* 9223372036854775807 2)
+  status: -1
+  out: (* 9223372036854775807 2)

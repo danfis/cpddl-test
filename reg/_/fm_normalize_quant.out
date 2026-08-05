@@ -1,0 +1,16 @@
+forall over t:
+  in : (forall (?x:1) (W:q ?x))
+  status: 1
+  out: (and (W:q a) (W:q b))
+exists over t:
+  in : (exists (?x:1) (W:q ?x))
+  status: 1
+  out: (or (W:q a) (W:q b))
+forall over the empty type:
+  in : (forall (?x:2) (W:q ?x))
+  status: 1
+  out: TRUE
+exists over the empty type:
+  in : (exists (?x:2) (W:q ?x))
+  status: 1
+  out: FALSE

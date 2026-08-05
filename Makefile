@@ -74,6 +74,7 @@ TESTS += open_list
 TESTS += opts
 TESTS += unify
 TESTS += num_val
+TESTS += fm
 TESTS += fm_num_exp
 TESTS += fm_num_eval
 TESTS += fm_num_exp_fold

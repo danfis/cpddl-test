@@ -1,0 +1,20 @@
+(and (and)):
+  in : (and (and))
+  status: 1
+  out: (and)
+(and (or) (p a)):
+  in : (and (or) (W:p a))
+  status: 1
+  out: FALSE
+(or (and) (p a)):
+  in : (or (and) (W:p a))
+  status: 1
+  out: TRUE
+(or (and (and)) (p a)):
+  in : (or (and (and)) (W:p a))
+  status: 1
+  out: TRUE
+(or (and (and) (p a)) (p a)):
+  in : (or (and (and) (W:p a)) (W:p a))
+  status: 1
+  out: (W:p a)

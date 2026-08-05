@@ -1,0 +1,12 @@
+when with a disjunctive condition is split:
+  in : (when (or (W:q a) (W:q b)) (W:p c))
+  status: 1
+  out: (and (when (W:q a) (W:p c)) (when (W:q b) (W:p c)))
+disjunctions are moved up:
+  in : (and (or (W:q a) (W:q b)) (W:q c))
+  status: 1
+  out: (or (and (W:q c) (W:q a)) (and (W:q c) (W:q b)))
+duplicate atoms are removed:
+  in : (and (W:q a) (W:q a))
+  status: 1
+  out: (and (W:q a))
