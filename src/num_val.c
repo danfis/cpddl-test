@@ -10,8 +10,9 @@
  * All tests are TEST_ONCE (not per task).
  * Run with:  cd tests && make && ./test -T _ -s num_val
  *
- * Overflow of the integer arithmetic causes PANIC, which is tested via
- * TEST_PANIC_ONCE tests running the offending operation in their own fork.
+ * Overflow of the integer arithmetic and division by zero are reported
+ * via the pddl_num_val_status_t return value and leave the destination
+ * untouched.
  */
 
 #include "pddl/num_val.h"
@@ -32,6 +33,23 @@ static pddl_num_val_t mk_flt(double val)
     pddl_num_val_t v;
     pddlNumValSetFlt(&v, val);
     return v;
+}
+
+/** Checks that the status of an arithmetic operation is PDDL_NUM_VAL_OK.
+ *  The switch is exhaustive and has no default case so that the
+ *  compiler's -Wswitch warning points here when the enum gains a value. */
+static void assert_ok(pddl_num_val_status_t st)
+{
+    switch (st){
+    case PDDL_NUM_VAL_OK:
+        break;
+    case PDDL_NUM_VAL_DIV_BY_ZERO:
+        assert(st == PDDL_NUM_VAL_OK);
+        break;
+    case PDDL_NUM_VAL_OVERFLOW:
+        assert(st == PDDL_NUM_VAL_OK);
+        break;
+    }
 }
 
 TEST_ONCE(num_val_basic)
@@ -156,11 +174,11 @@ TEST_ONCE(num_val_arith)
     pddl_num_val_t a = mk_int(10);
     pddl_num_val_t b = mk_int(3);
     pddl_num_val_t r;
-    pddlNumValAddTo(&r, &a, &b);
+    assert_ok(pddlNumValAddTo(&r, &a, &b));
     assert(pddlNumValIsInt(&r) && r.v.i == 13);
-    pddlNumValSubTo(&r, &a, &b);
+    assert_ok(pddlNumValSubTo(&r, &a, &b));
     assert(pddlNumValIsInt(&r) && r.v.i == 7);
-    pddlNumValMulTo(&r, &a, &b);
+    assert_ok(pddlNumValMulTo(&r, &a, &b));
     assert(pddlNumValIsInt(&r) && r.v.i == 30);
 
     // Non-overflowing boundary cases
@@ -168,13 +186,13 @@ TEST_ONCE(num_val_arith)
     pddl_num_val_t vmin = mk_int(INT64_MIN);
     pddl_num_val_t zero = mk_int(0);
     pddl_num_val_t one = mk_int(1);
-    pddlNumValAddTo(&r, &vmax, &zero);
+    assert_ok(pddlNumValAddTo(&r, &vmax, &zero));
     assert(pddlNumValIsInt(&r) && r.v.i == INT64_MAX);
-    pddlNumValAddTo(&r, &vmin, &vmax);
+    assert_ok(pddlNumValAddTo(&r, &vmin, &vmax));
     assert(pddlNumValIsInt(&r) && r.v.i == -1);
-    pddlNumValMulTo(&r, &vmax, &one);
+    assert_ok(pddlNumValMulTo(&r, &vmax, &one));
     assert(pddlNumValIsInt(&r) && r.v.i == INT64_MAX);
-    pddlNumValSubTo(&r, &vmax, &vmax);
+    assert_ok(pddlNumValSubTo(&r, &vmax, &vmax));
     assert(pddlNumValIsInt(&r) && r.v.i == 0);
 
     // Float contagion: any float operand makes the result float, and it
@@ -182,65 +200,68 @@ TEST_ONCE(num_val_arith)
     pddl_num_val_t fa = mk_flt(2.5);
     pddl_num_val_t fb = mk_flt(1.5);
     pddl_num_val_t four = mk_int(4);
-    pddlNumValAddTo(&r, &fa, &fb);
+    assert_ok(pddlNumValAddTo(&r, &fa, &fb));
     assert(pddlNumValIsFlt(&r) && r.v.f == 4.0);
     assert(pddlNumValCmp(&r, &four) == 0);
-    pddlNumValAddTo(&r, &a, &fa);
+    assert_ok(pddlNumValAddTo(&r, &a, &fa));
     assert(pddlNumValIsFlt(&r) && r.v.f == 12.5);
-    pddlNumValAddTo(&r, &fa, &a);
+    assert_ok(pddlNumValAddTo(&r, &fa, &a));
     assert(pddlNumValIsFlt(&r) && r.v.f == 12.5);
-    pddlNumValSubTo(&r, &fa, &a);
+    assert_ok(pddlNumValSubTo(&r, &fa, &a));
     assert(pddlNumValIsFlt(&r) && r.v.f == -7.5);
-    pddlNumValMulTo(&r, &fa, &b);
+    assert_ok(pddlNumValMulTo(&r, &fa, &b));
     assert(pddlNumValIsFlt(&r) && r.v.f == 7.5);
 
     // Aliasing of dst with the operands
     pddl_num_val_t x = mk_int(5);
     pddl_num_val_t y = mk_int(2);
-    pddlNumValAddTo(&x, &x, &y);
+    assert_ok(pddlNumValAddTo(&x, &x, &y));
     assert(pddlNumValIsInt(&x) && x.v.i == 7);
-    pddlNumValSubTo(&x, &y, &x);
+    assert_ok(pddlNumValSubTo(&x, &y, &x));
     assert(pddlNumValIsInt(&x) && x.v.i == -5);
-    pddlNumValMulTo(&x, &x, &x);
+    assert_ok(pddlNumValMulTo(&x, &x, &x));
     assert(pddlNumValIsInt(&x) && x.v.i == 25);
 
     // In-place variants
     x = mk_int(5);
-    pddlNumValAdd(&x, &y);
+    assert_ok(pddlNumValAdd(&x, &y));
     assert(pddlNumValIsInt(&x) && x.v.i == 7);
-    pddlNumValSub(&x, &y);
+    assert_ok(pddlNumValSub(&x, &y));
     assert(pddlNumValIsInt(&x) && x.v.i == 5);
-    pddlNumValMul(&x, &y);
+    assert_ok(pddlNumValMul(&x, &y));
     assert(pddlNumValIsInt(&x) && x.v.i == 10);
-    assert(pddlNumValDiv(&x, &y) == 0);
+    assert_ok(pddlNumValDiv(&x, &y));
     assert(pddlNumValIsInt(&x) && x.v.i == 5);
     x = mk_flt(1.5);
-    pddlNumValAdd(&x, &y);
+    assert_ok(pddlNumValAdd(&x, &y));
     assert(pddlNumValIsFlt(&x) && x.v.f == 3.5);
 
     // Division: exact integer division stays integer
     pddl_num_val_t six = mk_int(6);
     pddl_num_val_t three = mk_int(3);
-    assert(pddlNumValDivTo(&r, &six, &three) == 0);
+    assert_ok(pddlNumValDivTo(&r, &six, &three));
     assert(pddlNumValIsInt(&r) && r.v.i == 2);
     // Non-exact integer division becomes float
-    assert(pddlNumValDivTo(&r, &one, &three) == 0);
+    assert_ok(pddlNumValDivTo(&r, &one, &three));
     assert(pddlNumValIsFlt(&r));
     pddl_num_val_t third = mk_flt(1.0 / 3.0);
     assert(pddlNumValCmp(&r, &third) == 0);
     // Float division
     pddl_num_val_t half = mk_flt(0.5);
-    assert(pddlNumValDivTo(&r, &fa, &half) == 0);
+    assert_ok(pddlNumValDivTo(&r, &fa, &half));
     assert(pddlNumValIsFlt(&r) && r.v.f == 5.0);
     // Division by zero fails and leaves the destination untouched
     pddl_num_val_t saved = mk_int(99);
     pddlNumValSet(&r, &saved);
     pddl_num_val_t fzero = mk_flt(0.0);
-    assert(pddlNumValDivTo(&r, &six, &zero) == -1);
+    pddl_num_val_status_t st = pddlNumValDivTo(&r, &six, &zero);
+    assert(st == PDDL_NUM_VAL_DIV_BY_ZERO);
     assert(pddlNumValEq(&r, &saved));
-    assert(pddlNumValDivTo(&r, &fa, &fzero) == -1);
+    st = pddlNumValDivTo(&r, &fa, &fzero);
+    assert(st == PDDL_NUM_VAL_DIV_BY_ZERO);
     assert(pddlNumValEq(&r, &saved));
-    assert(pddlNumValDiv(&r, &zero) == -1);
+    st = pddlNumValDiv(&r, &zero);
+    assert(st == PDDL_NUM_VAL_DIV_BY_ZERO);
     assert(pddlNumValEq(&r, &saved));
 }
 
@@ -283,34 +304,63 @@ TEST_ONCE(num_val_cmp_hash)
     assert(pddlNumValHash(&f15) != pddlNumValHash(&f2));
 }
 
-TEST_PANIC_ONCE(num_val_add_overflow)
+TEST_ONCE(num_val_overflow)
 {
-    pddl_num_val_t r, a = mk_int(INT64_MAX), b = mk_int(1);
-    pddlNumValAddTo(&r, &a, &b);
-}
+    // Overflowing integer arithmetic reports PDDL_NUM_VAL_OVERFLOW and
+    // leaves the destination untouched
+    pddl_num_val_t vmax = mk_int(INT64_MAX);
+    pddl_num_val_t vmin = mk_int(INT64_MIN);
+    pddl_num_val_t one = mk_int(1);
+    pddl_num_val_t two = mk_int(2);
+    pddl_num_val_t neg_one = mk_int(-1);
+    pddl_num_val_t saved = mk_int(99);
+    pddl_num_val_t r;
+    pddlNumValSet(&r, &saved);
 
-TEST_PANIC_ONCE(num_val_sub_overflow)
-{
-    pddl_num_val_t r, a = mk_int(INT64_MIN), b = mk_int(1);
-    pddlNumValSubTo(&r, &a, &b);
-}
+    pddl_num_val_status_t st = pddlNumValAddTo(&r, &vmax, &one);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValEq(&r, &saved));
 
-TEST_PANIC_ONCE(num_val_mul_overflow)
-{
-    pddl_num_val_t r, a = mk_int(INT64_MAX), b = mk_int(2);
-    pddlNumValMulTo(&r, &a, &b);
-}
+    st = pddlNumValSubTo(&r, &vmin, &one);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValEq(&r, &saved));
 
-TEST_PANIC_ONCE(num_val_div_overflow)
-{
-    pddl_num_val_t r, a = mk_int(INT64_MIN), b = mk_int(-1);
-    pddlNumValDivTo(&r, &a, &b);
+    st = pddlNumValMulTo(&r, &vmax, &two);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValEq(&r, &saved));
+
+    st = pddlNumValDivTo(&r, &vmin, &neg_one);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValEq(&r, &saved));
+
+    // In-place variants report the overflow and leave X untouched as well
+    pddl_num_val_t x = mk_int(INT64_MAX);
+    st = pddlNumValAdd(&x, &one);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValIsInt(&x) && x.v.i == INT64_MAX);
+    x = mk_int(INT64_MIN);
+    st = pddlNumValSub(&x, &one);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValIsInt(&x) && x.v.i == INT64_MIN);
+    x = mk_int(INT64_MAX);
+    st = pddlNumValMul(&x, &two);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValIsInt(&x) && x.v.i == INT64_MAX);
+    x = mk_int(INT64_MIN);
+    st = pddlNumValDiv(&x, &neg_one);
+    assert(st == PDDL_NUM_VAL_OVERFLOW);
+    assert(pddlNumValIsInt(&x) && x.v.i == INT64_MIN);
+
+    // Float arithmetic never reports overflow
+    pddl_num_val_t fbig = mk_flt(1e308);
+    assert_ok(pddlNumValAddTo(&r, &fbig, &fbig));
+    assert(pddlNumValIsFlt(&r));
 }
 
 TEST_ONCE(num_val_no_overflow)
 {
-    // Arithmetic that stays in range must not PANIC
+    // Arithmetic that stays in range succeeds
     pddl_num_val_t r, a = mk_int(10), b = mk_int(3);
-    pddlNumValAddTo(&r, &a, &b);
+    assert_ok(pddlNumValAddTo(&r, &a, &b));
     assert(pddlNumValIsInt(&r) && r.v.i == 13);
 }

@@ -246,10 +246,13 @@ TEST(pddl_action_simplify_cond_effs, r)
 
     for (int i = 0; i < pddl.action.action_size; ++i){
         pddl_action_t *a = pddl.action.action + i;
-        pddlActionNormalize(a, &pddl);
+        int st = pddlActionNormalize(a, &pddl, &C.err);
+        assert(st >= 0);
         pddl_fm_t *pre = pddlFmClone(a->pre);
         pddl_fm_t *eff = pddlFmClone(a->eff);
-        if (pddlActionSimplifyCondEffs(a, &pddl)){
+        st = pddlActionSimplifyCondEffs(a, &pddl, &C.err);
+        assert(st >= 0);
+        if (st > 0){
             pddlActionPrint(&pddl, a, stdout);
         }else{
             // Returning false means the action was not changed

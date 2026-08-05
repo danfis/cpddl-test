@@ -88,20 +88,26 @@ static int eval_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
     const pddl_num_val_t *l = left;
     const pddl_num_val_t *r = right;
     pddl_num_val_t *out = val;
+    pddl_num_val_status_t st;
     switch (e->fm.type){
     case PDDL_FM_NUM_EXP_PLUS:
-        pddlNumValAddTo(out, l, r);
+        st = pddlNumValAddTo(out, l, r);
+        assert(st == PDDL_NUM_VAL_OK);
         return 0;
     case PDDL_FM_NUM_EXP_MINUS:
-        pddlNumValSubTo(out, l, r);
+        st = pddlNumValSubTo(out, l, r);
+        assert(st == PDDL_NUM_VAL_OK);
         return 0;
     case PDDL_FM_NUM_EXP_MULT:
-        pddlNumValMulTo(out, l, r);
+        st = pddlNumValMulTo(out, l, r);
+        assert(st == PDDL_NUM_VAL_OK);
         return 0;
     default:
         assert(e->fm.type == PDDL_FM_NUM_EXP_DIV);
-        if (pddlNumValDivTo(out, l, r) != 0)
+        st = pddlNumValDivTo(out, l, r);
+        if (st == PDDL_NUM_VAL_DIV_BY_ZERO)
             return EVAL_DIV_BY_ZERO;
+        assert(st == PDDL_NUM_VAL_OK);
         return 0;
     }
 }

@@ -11,8 +11,8 @@
  * All tests are TEST_ONCE (not per task).
  * Run with:  cd tests && make && ./test -T _ -s fm_num_eval
  *
- * Integer overflow during evaluation causes PANIC, which is tested via
- * TEST_PANIC_ONCE tests running the offending evaluation in their own fork.
+ * Integer overflow during evaluation is reported as
+ * PDDL_FM_NUM_EVAL_OVERFLOW and leaves the output value untouched.
  */
 
 #include "pddl/fm.h"
@@ -421,13 +421,19 @@ TEST_ONCE(fm_num_eval)
     pddlFmDel(&cmp->fm);
 }
 
-TEST_PANIC_ONCE(fm_num_eval_int_overflow)
+TEST_ONCE(fm_num_eval_int_overflow)
 {
+    // Integer overflow is reported and the output value is left untouched
     pddl_fm_num_exp_t *e;
     e = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(INT64_MAX),
                             pddlFmNewNumExpNumInt(1));
     pddl_num_val_t out;
-    pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out);
+    pddlNumValSetInt(&out, 7);
+    pddl_fm_num_eval_status_t st;
+    st = pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out);
+    assert(st == PDDL_FM_NUM_EVAL_OVERFLOW);
+    assert(pddlNumValIsInt(&out) && out.v.i == 7);
+    pddlFmDel(&e->fm);
 }
 
 TEST_PANIC_ONCE(fm_num_eval_non_num_exp)
