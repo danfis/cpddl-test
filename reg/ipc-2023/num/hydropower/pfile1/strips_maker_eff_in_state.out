@@ -1,0 +1,64 @@
+step 0: state 1 applicable 2
+    state: (timenow t0000)
+    num: (stored_units) = 0 (stored_capacity) = 3 (funds) = 1000
+advance_time t0000 t0030 :: cost: 1 [successor]
+    add: (timenow t0030)
+    del: (timenow t0000)
+    num:
+pump_water_up t0000 n7 :: cost: 1
+    add:
+    del:
+    num: (stored_units) 0 -> 1 (stored_capacity) 3 -> 2 (funds) 1000 -> 992.65
+step 1: state 1 applicable 2
+    state: (timenow t0030)
+    num: (stored_units) = 0 (stored_capacity) = 3 (funds) = 1000
+advance_time t0030 t0100 :: cost: 1
+    add: (timenow t0100)
+    del: (timenow t0030)
+    num:
+pump_water_up t0030 n7 :: cost: 1 [successor]
+    add:
+    del:
+    num: (stored_units) 0 -> 1 (stored_capacity) 3 -> 2 (funds) 1000 -> 992.65
+step 2: state 1 applicable 3
+    state: (timenow t0030)
+    num: (stored_units) = 1 (stored_capacity) = 2 (funds) = 992.65
+advance_time t0030 t0100 :: cost: 1
+    add: (timenow t0100)
+    del: (timenow t0030)
+    num:
+generate t0030 n7 :: cost: 1 [successor]
+    add:
+    del:
+    num: (stored_units) 1 -> 0 (stored_capacity) 2 -> 3 (funds) 992.65 -> 999.65
+pump_water_up t0030 n7 :: cost: 1
+    add:
+    del:
+    num: (stored_units) 1 -> 2 (stored_capacity) 2 -> 1 (funds) 992.65 -> 985.3
+step 3: state 1 applicable 2
+    state: (timenow t0030)
+    num: (stored_units) = 0 (stored_capacity) = 3 (funds) = 999.65
+advance_time t0030 t0100 :: cost: 1
+    add: (timenow t0100)
+    del: (timenow t0030)
+    num:
+pump_water_up t0030 n7 :: cost: 1 [successor]
+    add:
+    del:
+    num: (stored_units) 0 -> 1 (stored_capacity) 3 -> 2 (funds) 999.65 -> 992.3
+step 4: state 1 applicable 3
+    state: (timenow t0030)
+    num: (stored_units) = 1 (stored_capacity) = 2 (funds) = 992.3
+advance_time t0030 t0100 :: cost: 1
+    add: (timenow t0100)
+    del: (timenow t0030)
+    num:
+generate t0030 n7 :: cost: 1
+    add:
+    del:
+    num: (stored_units) 1 -> 0 (stored_capacity) 2 -> 3 (funds) 992.3 -> 999.3
+pump_water_up t0030 n7 :: cost: 1 [successor]
+    add:
+    del:
+    num: (stored_units) 1 -> 2 (stored_capacity) 2 -> 1 (funds) 992.3 -> 984.95
+ground atoms: 3 groundings: 5

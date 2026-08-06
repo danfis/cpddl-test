@@ -1,12 +1,14 @@
 step 0: state 14 applicable 2
-drive t0 l9 l4 level127 level3 level130 :: cost: 1
+    state: (at p0 l12) (at p1 l5) (at p10 l3) (at p11 l5) (at p2 l12) (at p3 l5) (at p4 l3) (at p5 l4) (at p6 l5) (at p7 l5) (at p8 l2) (at p9 l7) (at t0 l9) (fuel t0 level130)
+drive t0 l9 l4 level127 level3 level130 :: cost: 1 [successor]
     add: (at t0 l4) (fuel t0 level127)
     del: (at t0 l9) (fuel t0 level130)
 drive t0 l9 l5 level112 level18 level130 :: cost: 1
     add: (at t0 l5) (fuel t0 level112)
     del: (at t0 l9) (fuel t0 level130)
 step 1: state 14 applicable 5
-drive t0 l4 l0 level113 level14 level127 :: cost: 1
+    state: (at p0 l12) (at p1 l5) (at p10 l3) (at p11 l5) (at p2 l12) (at p3 l5) (at p4 l3) (at p5 l4) (at p6 l5) (at p7 l5) (at p8 l2) (at p9 l7) (at t0 l4) (fuel t0 level127)
+drive t0 l4 l0 level113 level14 level127 :: cost: 1 [successor]
     add: (at t0 l0) (fuel t0 level113)
     del: (at t0 l4) (fuel t0 level127)
 drive t0 l4 l12 level106 level21 level127 :: cost: 1
@@ -16,27 +18,30 @@ drive t0 l4 l2 level113 level14 level127 :: cost: 1
     add: (at t0 l2) (fuel t0 level113)
     del: (at t0 l4) (fuel t0 level127)
 step 2: state 14 applicable 3
+    state: (at p0 l12) (at p1 l5) (at p10 l3) (at p11 l5) (at p2 l12) (at p3 l5) (at p4 l3) (at p5 l4) (at p6 l5) (at p7 l5) (at p8 l2) (at p9 l7) (at t0 l0) (fuel t0 level113)
 drive t0 l0 l4 level99 level14 level113 :: cost: 1
     add: (at t0 l4) (fuel t0 level99)
     del: (at t0 l0) (fuel t0 level113)
 drive t0 l0 l5 level109 level4 level113 :: cost: 1
     add: (at t0 l5) (fuel t0 level109)
     del: (at t0 l0) (fuel t0 level113)
-drive t0 l0 l7 level112 level1 level113 :: cost: 1
+drive t0 l0 l7 level112 level1 level113 :: cost: 1 [successor]
     add: (at t0 l7) (fuel t0 level112)
     del: (at t0 l0) (fuel t0 level113)
 step 3: state 14 applicable 3
+    state: (at p0 l12) (at p1 l5) (at p10 l3) (at p11 l5) (at p2 l12) (at p3 l5) (at p4 l3) (at p5 l4) (at p6 l5) (at p7 l5) (at p8 l2) (at p9 l7) (at t0 l7) (fuel t0 level112)
 drive t0 l7 l0 level111 level1 level112 :: cost: 1
     add: (at t0 l0) (fuel t0 level111)
     del: (at t0 l7) (fuel t0 level112)
 drive t0 l7 l8 level94 level18 level112 :: cost: 1
     add: (at t0 l8) (fuel t0 level94)
     del: (at t0 l7) (fuel t0 level112)
-load p9 t0 l7 :: cost: 1
+load p9 t0 l7 :: cost: 1 [successor]
     add: (in p9 t0)
     del: (at p9 l7)
 step 4: state 14 applicable 3
-drive t0 l7 l0 level111 level1 level112 :: cost: 1
+    state: (at p0 l12) (at p1 l5) (at p10 l3) (at p11 l5) (at p2 l12) (at p3 l5) (at p4 l3) (at p5 l4) (at p6 l5) (at p7 l5) (at p8 l2) (at t0 l7) (fuel t0 level112) (in p9 t0)
+drive t0 l7 l0 level111 level1 level112 :: cost: 1 [successor]
     add: (at t0 l0) (fuel t0 level111)
     del: (at t0 l7) (fuel t0 level112)
 drive t0 l7 l8 level94 level18 level112 :: cost: 1

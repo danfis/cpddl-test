@@ -1,14 +1,16 @@
 step 0: state 21 applicable 6
+    state: (first b4 s12) (first b5 s13) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-lco) (not-occupied ta2-1-oc1b) (not-occupied ta2-1-oca1) (not-occupied ta2-1-rat-a) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-oc1b) (not-occupied ta3-1-oca1) (not-occupied ta3-1-rat-a) (occupied ta1-1-gasoleo) (occupied ta1-1-oc1b) (occupied ta1-1-rat-a) (occupied ta3-1-lco) (on b0 a1) (on b1 a3) (on b2 a1) (on b3 a1)
 pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 ta1-1-oca1 ta3-1-lco :: cost: 1
     add: (first b1 s13) (not-occupied ta3-1-lco) (occupied ta1-1-oca1) (on b5 a1)
     del: (first b5 s13) (not-occupied ta1-1-oca1) (occupied ta3-1-lco) (on b1 a3)
-push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco :: cost: 1
+push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco :: cost: 1 [successor]
     add: (first b0 s12) (not-occupied ta1-1-oc1b) (occupied ta2-1-lco) (on b4 a2)
     del: (first b4 s12) (not-occupied ta2-1-lco) (occupied ta1-1-oc1b) (on b0 a1)
 push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-gasoleo ta2-1-lco :: cost: 1
     add: (first b2 s12) (not-occupied ta1-1-gasoleo) (occupied ta2-1-lco) (on b4 a2)
     del: (first b4 s12) (not-occupied ta2-1-lco) (occupied ta1-1-gasoleo) (on b2 a1)
 step 1: state 21 applicable 4
+    state: (first b0 s12) (first b5 s13) (not-occupied ta1-1-lco) (not-occupied ta1-1-oc1b) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-oc1b) (not-occupied ta2-1-oca1) (not-occupied ta2-1-rat-a) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-oc1b) (not-occupied ta3-1-oca1) (not-occupied ta3-1-rat-a) (occupied ta1-1-gasoleo) (occupied ta1-1-rat-a) (occupied ta2-1-lco) (occupied ta3-1-lco) (on b1 a3) (on b2 a1) (on b3 a1) (on b4 a2)
 pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
     add: (first b4 s12) (not-occupied ta2-1-lco) (occupied ta1-1-oc1b) (on b0 a1)
     del: (first b0 s12) (not-occupied ta1-1-oc1b) (occupied ta2-1-lco) (on b4 a2)
@@ -18,18 +20,21 @@ pop-unitarypipe s13 b1 a1 a3 b5 lco oca1 ta1-1-oca1 ta3-1-lco :: cost: 1
 push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-gasoleo ta2-1-oc1b :: cost: 1
     add: (first b2 s12) (not-occupied ta1-1-gasoleo) (occupied ta2-1-oc1b) (on b0 a2)
     del: (first b0 s12) (not-occupied ta2-1-oc1b) (occupied ta1-1-gasoleo) (on b2 a1)
+    successor: push-unitarypipe s13 b2 a1 a3 b5 gasoleo oca1 ta1-1-gasoleo ta3-1-oca1
 step 2: state 21 applicable 4
+    state: (first b0 s12) (first b2 s13) (not-occupied ta1-1-gasoleo) (not-occupied ta1-1-lco) (not-occupied ta1-1-oc1b) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-oc1b) (not-occupied ta2-1-oca1) (not-occupied ta2-1-rat-a) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-oc1b) (not-occupied ta3-1-rat-a) (occupied ta1-1-rat-a) (occupied ta2-1-lco) (occupied ta3-1-lco) (occupied ta3-1-oca1) (on b1 a3) (on b3 a1) (on b4 a2) (on b5 a3)
 pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
     add: (first b4 s12) (not-occupied ta2-1-lco) (occupied ta1-1-oc1b) (on b0 a1)
     del: (first b0 s12) (not-occupied ta1-1-oc1b) (occupied ta2-1-lco) (on b4 a2)
-pop-unitarypipe s13 b1 a1 a3 b2 lco gasoleo ta1-1-gasoleo ta3-1-lco :: cost: 1
+pop-unitarypipe s13 b1 a1 a3 b2 lco gasoleo ta1-1-gasoleo ta3-1-lco :: cost: 1 [successor]
     add: (first b1 s13) (not-occupied ta3-1-lco) (occupied ta1-1-gasoleo) (on b2 a1)
     del: (first b2 s13) (not-occupied ta1-1-gasoleo) (occupied ta3-1-lco) (on b1 a3)
 pop-unitarypipe s13 b5 a1 a3 b2 oca1 gasoleo ta1-1-gasoleo ta3-1-oca1 :: cost: 1
     add: (first b5 s13) (not-occupied ta3-1-oca1) (occupied ta1-1-gasoleo) (on b2 a1)
     del: (first b2 s13) (not-occupied ta1-1-gasoleo) (occupied ta3-1-oca1) (on b5 a3)
 step 3: state 21 applicable 5
-pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1
+    state: (first b0 s12) (first b1 s13) (not-occupied ta1-1-lco) (not-occupied ta1-1-oc1b) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-oc1b) (not-occupied ta2-1-oca1) (not-occupied ta2-1-rat-a) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-lco) (not-occupied ta3-1-oc1b) (not-occupied ta3-1-rat-a) (occupied ta1-1-gasoleo) (occupied ta1-1-rat-a) (occupied ta2-1-lco) (occupied ta3-1-oca1) (on b2 a1) (on b3 a1) (on b4 a2) (on b5 a3)
+pop-unitarypipe s12 b4 a1 a2 b0 lco oc1b ta1-1-oc1b ta2-1-lco :: cost: 1 [successor]
     add: (first b4 s12) (not-occupied ta2-1-lco) (occupied ta1-1-oc1b) (on b0 a1)
     del: (first b0 s12) (not-occupied ta1-1-oc1b) (occupied ta2-1-lco) (on b4 a2)
 pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-lco ta3-1-oca1 :: cost: 1
@@ -39,6 +44,7 @@ push-unitarypipe s12 b2 a1 a2 b0 gasoleo oc1b ta1-1-gasoleo ta2-1-oc1b :: cost: 
     add: (first b2 s12) (not-occupied ta1-1-gasoleo) (occupied ta2-1-oc1b) (on b0 a2)
     del: (first b0 s12) (not-occupied ta2-1-oc1b) (occupied ta1-1-gasoleo) (on b2 a1)
 step 4: state 21 applicable 7
+    state: (first b1 s13) (first b4 s12) (not-occupied ta1-1-lco) (not-occupied ta1-1-oca1) (not-occupied ta2-1-gasoleo) (not-occupied ta2-1-lco) (not-occupied ta2-1-oc1b) (not-occupied ta2-1-oca1) (not-occupied ta2-1-rat-a) (not-occupied ta3-1-gasoleo) (not-occupied ta3-1-lco) (not-occupied ta3-1-oc1b) (not-occupied ta3-1-rat-a) (occupied ta1-1-gasoleo) (occupied ta1-1-oc1b) (occupied ta1-1-rat-a) (occupied ta3-1-oca1) (on b0 a1) (on b2 a1) (on b3 a1) (on b5 a3)
 pop-unitarypipe s13 b5 a1 a3 b1 oca1 lco ta1-1-lco ta3-1-oca1 :: cost: 1
     add: (first b5 s13) (not-occupied ta3-1-oca1) (occupied ta1-1-lco) (on b1 a1)
     del: (first b1 s13) (not-occupied ta1-1-lco) (occupied ta3-1-oca1) (on b5 a3)
@@ -48,4 +54,5 @@ push-unitarypipe s12 b0 a1 a2 b4 oc1b lco ta1-1-oc1b ta2-1-lco :: cost: 1
 push-unitarypipe s12 b2 a1 a2 b4 gasoleo lco ta1-1-gasoleo ta2-1-lco :: cost: 1
     add: (first b2 s12) (not-occupied ta1-1-gasoleo) (occupied ta2-1-lco) (on b4 a2)
     del: (first b4 s12) (not-occupied ta2-1-lco) (occupied ta1-1-gasoleo) (on b2 a1)
+    successor: push-unitarypipe s13 b3 a1 a3 b1 rat-a lco ta1-1-rat-a ta3-1-lco
 ground atoms: 44 groundings: 15

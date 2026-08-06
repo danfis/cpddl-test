@@ -1,0 +1,71 @@
+step 0: state 33 applicable 193
+    state: (at item1 rooma) (at item10 rooma) (at item11 rooma) (at item12 rooma) (at item13 rooma) (at item14 rooma) (at item15 rooma) (at item16 rooma) (at item17 rooma) (at item18 rooma) (at item19 rooma) (at item2 rooma) (at item20 rooma) (at item21 rooma) (at item22 rooma) (at item23 rooma) (at item24 rooma) (at item3 rooma) (at item4 rooma) (at item5 rooma) (at item6 rooma) (at item7 rooma) (at item8 rooma) (at item9 rooma) (at-bot octopus rooma) (free t1) (free t2) (free t3) (free t4) (free t5) (free t6) (free t7) (free t8)
+    num: (current_load octopus) = 0
+move octopus rooma roomb :: cost: 3 [successor]
+    add: (at-bot octopus roomb)
+    del: (at-bot octopus rooma)
+    num:
+pick item1 rooma t1 octopus :: cost: 2
+    add: (in-arm item1 t1)
+    del: (at item1 rooma) (free t1)
+    num: (current_load octopus) 0 -> 1
+pick item1 rooma t2 octopus :: cost: 2
+    add: (in-arm item1 t2)
+    del: (at item1 rooma) (free t2)
+    num: (current_load octopus) 0 -> 1
+step 1: state 33 applicable 1
+    state: (at item1 rooma) (at item10 rooma) (at item11 rooma) (at item12 rooma) (at item13 rooma) (at item14 rooma) (at item15 rooma) (at item16 rooma) (at item17 rooma) (at item18 rooma) (at item19 rooma) (at item2 rooma) (at item20 rooma) (at item21 rooma) (at item22 rooma) (at item23 rooma) (at item24 rooma) (at item3 rooma) (at item4 rooma) (at item5 rooma) (at item6 rooma) (at item7 rooma) (at item8 rooma) (at item9 rooma) (at-bot octopus roomb) (free t1) (free t2) (free t3) (free t4) (free t5) (free t6) (free t7) (free t8)
+    num: (current_load octopus) = 0
+move octopus roomb rooma :: cost: 3 [successor]
+    add: (at-bot octopus rooma)
+    del: (at-bot octopus roomb)
+    num:
+step 2: state 33 applicable 193
+    state: (at item1 rooma) (at item10 rooma) (at item11 rooma) (at item12 rooma) (at item13 rooma) (at item14 rooma) (at item15 rooma) (at item16 rooma) (at item17 rooma) (at item18 rooma) (at item19 rooma) (at item2 rooma) (at item20 rooma) (at item21 rooma) (at item22 rooma) (at item23 rooma) (at item24 rooma) (at item3 rooma) (at item4 rooma) (at item5 rooma) (at item6 rooma) (at item7 rooma) (at item8 rooma) (at item9 rooma) (at-bot octopus rooma) (free t1) (free t2) (free t3) (free t4) (free t5) (free t6) (free t7) (free t8)
+    num: (current_load octopus) = 0
+move octopus rooma roomb :: cost: 3
+    add: (at-bot octopus roomb)
+    del: (at-bot octopus rooma)
+    num:
+pick item1 rooma t1 octopus :: cost: 2
+    add: (in-arm item1 t1)
+    del: (at item1 rooma) (free t1)
+    num: (current_load octopus) 0 -> 1
+pick item1 rooma t2 octopus :: cost: 2
+    add: (in-arm item1 t2)
+    del: (at item1 rooma) (free t2)
+    num: (current_load octopus) 0 -> 1
+    successor: pick item24 rooma t2 octopus
+step 3: state 32 applicable 164
+    state: (at item1 rooma) (at item10 rooma) (at item11 rooma) (at item12 rooma) (at item13 rooma) (at item14 rooma) (at item15 rooma) (at item16 rooma) (at item17 rooma) (at item18 rooma) (at item19 rooma) (at item2 rooma) (at item20 rooma) (at item21 rooma) (at item22 rooma) (at item23 rooma) (at item3 rooma) (at item4 rooma) (at item5 rooma) (at item6 rooma) (at item7 rooma) (at item8 rooma) (at item9 rooma) (at-bot octopus rooma) (free t1) (free t3) (free t4) (free t5) (free t6) (free t7) (free t8) (in-arm item24 t2)
+    num: (current_load octopus) = 1
+drop item24 rooma t2 octopus :: cost: 2
+    add: (at item24 rooma) (free t2)
+    del: (in-arm item24 t2)
+    num: (current_load octopus) 1 -> 0
+move octopus rooma roomb :: cost: 3
+    add: (at-bot octopus roomb)
+    del: (at-bot octopus rooma)
+    num:
+pick item1 rooma t1 octopus :: cost: 2
+    add: (in-arm item1 t1)
+    del: (at item1 rooma) (free t1)
+    num: (current_load octopus) 1 -> 2
+    successor: pick item23 rooma t4 octopus
+step 4: state 31 applicable 137
+    state: (at item1 rooma) (at item10 rooma) (at item11 rooma) (at item12 rooma) (at item13 rooma) (at item14 rooma) (at item15 rooma) (at item16 rooma) (at item17 rooma) (at item18 rooma) (at item19 rooma) (at item2 rooma) (at item20 rooma) (at item21 rooma) (at item22 rooma) (at item3 rooma) (at item4 rooma) (at item5 rooma) (at item6 rooma) (at item7 rooma) (at item8 rooma) (at item9 rooma) (at-bot octopus rooma) (free t1) (free t3) (free t5) (free t6) (free t7) (free t8) (in-arm item23 t4) (in-arm item24 t2)
+    num: (current_load octopus) = 2
+drop item23 rooma t4 octopus :: cost: 2
+    add: (at item23 rooma) (free t4)
+    del: (in-arm item23 t4)
+    num: (current_load octopus) 2 -> 1
+drop item24 rooma t2 octopus :: cost: 2
+    add: (at item24 rooma) (free t2)
+    del: (in-arm item24 t2)
+    num: (current_load octopus) 2 -> 1
+move octopus rooma roomb :: cost: 3
+    add: (at-bot octopus roomb)
+    del: (at-bot octopus rooma)
+    num:
+    successor: pick item22 rooma t6 octopus
+ground atoms: 228 groundings: 198

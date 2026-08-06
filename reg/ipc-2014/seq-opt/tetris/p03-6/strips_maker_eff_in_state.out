@@ -1,14 +1,16 @@
 step 0: state 21 applicable 8
+    state: (at_right_l rightl0 f2-2f f3-2f f3-3f) (at_square square0 f0-1f) (at_square square1 f1-1f) (at_square square2 f1-2f) (at_square square3 f2-0f) (at_two straight0 f0-0f f1-0f) (clear f0-2f) (clear f0-3f) (clear f1-3f) (clear f2-1f) (clear f2-3f) (clear f3-0f) (clear f3-1f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-0f) (clear f5-1f) (clear f5-2f) (clear f5-3f)
 move_l_down f2-2f f3-2f f3-3f f4-2f f4-3f rightl0 :: cost: 3
     add: (at_right_l rightl0 f3-2f f4-2f f4-3f) (clear f2-2f) (clear f3-3f)
     del: (at_right_l rightl0 f2-2f f3-2f f3-3f) (clear f4-2f) (clear f4-3f)
 move_l_left f2-2f f3-2f f3-3f f2-1f f3-1f rightl0 :: cost: 3
     add: (at_right_l rightl0 f2-1f f3-1f f3-2f) (clear f2-2f) (clear f3-3f)
     del: (at_right_l rightl0 f2-2f f3-2f f3-3f) (clear f2-1f) (clear f3-1f)
-move_square f0-1f f0-2f square0 :: cost: 1
+move_square f0-1f f0-2f square0 :: cost: 1 [successor]
     add: (at_square square0 f0-2f) (clear f0-1f)
     del: (at_square square0 f0-1f) (clear f0-2f)
 step 1: state 21 applicable 9
+    state: (at_right_l rightl0 f2-2f f3-2f f3-3f) (at_square square0 f0-2f) (at_square square1 f1-1f) (at_square square2 f1-2f) (at_square square3 f2-0f) (at_two straight0 f0-0f f1-0f) (clear f0-1f) (clear f0-3f) (clear f1-3f) (clear f2-1f) (clear f2-3f) (clear f3-0f) (clear f3-1f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-0f) (clear f5-1f) (clear f5-2f) (clear f5-3f)
 move_l_down f2-2f f3-2f f3-3f f4-2f f4-3f rightl0 :: cost: 3
     add: (at_right_l rightl0 f3-2f f4-2f f4-3f) (clear f2-2f) (clear f3-3f)
     del: (at_right_l rightl0 f2-2f f3-2f f3-3f) (clear f4-2f) (clear f4-3f)
@@ -18,7 +20,9 @@ move_l_left f2-2f f3-2f f3-3f f2-1f f3-1f rightl0 :: cost: 3
 move_square f0-2f f0-1f square0 :: cost: 1
     add: (at_square square0 f0-1f) (clear f0-2f)
     del: (at_square square0 f0-2f) (clear f0-1f)
+    successor: move_square f0-2f f0-3f square0
 step 2: state 21 applicable 10
+    state: (at_right_l rightl0 f2-2f f3-2f f3-3f) (at_square square0 f0-3f) (at_square square1 f1-1f) (at_square square2 f1-2f) (at_square square3 f2-0f) (at_two straight0 f0-0f f1-0f) (clear f0-1f) (clear f0-2f) (clear f1-3f) (clear f2-1f) (clear f2-3f) (clear f3-0f) (clear f3-1f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-0f) (clear f5-1f) (clear f5-2f) (clear f5-3f)
 move_l_down f2-2f f3-2f f3-3f f4-2f f4-3f rightl0 :: cost: 3
     add: (at_right_l rightl0 f3-2f f4-2f f4-3f) (clear f2-2f) (clear f3-3f)
     del: (at_right_l rightl0 f2-2f f3-2f f3-3f) (clear f4-2f) (clear f4-3f)
@@ -28,7 +32,9 @@ move_l_left f2-2f f3-2f f3-3f f2-1f f3-1f rightl0 :: cost: 3
 move_square f0-3f f0-2f square0 :: cost: 1
     add: (at_square square0 f0-2f) (clear f0-3f)
     del: (at_square square0 f0-3f) (clear f0-2f)
+    successor: move_square f1-1f f0-1f square1
 step 3: state 21 applicable 12
+    state: (at_right_l rightl0 f2-2f f3-2f f3-3f) (at_square square0 f0-3f) (at_square square1 f0-1f) (at_square square2 f1-2f) (at_square square3 f2-0f) (at_two straight0 f0-0f f1-0f) (clear f0-2f) (clear f1-1f) (clear f1-3f) (clear f2-1f) (clear f2-3f) (clear f3-0f) (clear f3-1f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-0f) (clear f5-1f) (clear f5-2f) (clear f5-3f)
 move_l_down f2-2f f3-2f f3-3f f4-2f f4-3f rightl0 :: cost: 3
     add: (at_right_l rightl0 f3-2f f4-2f f4-3f) (clear f2-2f) (clear f3-3f)
     del: (at_right_l rightl0 f2-2f f3-2f f3-3f) (clear f4-2f) (clear f4-3f)
@@ -38,7 +44,9 @@ move_l_left f2-2f f3-2f f3-3f f2-1f f3-1f rightl0 :: cost: 3
 move_square f0-1f f0-2f square1 :: cost: 1
     add: (at_square square1 f0-2f) (clear f0-1f)
     del: (at_square square1 f0-1f) (clear f0-2f)
+    successor: move_square f0-3f f1-3f square0
 step 4: state 21 applicable 11
+    state: (at_right_l rightl0 f2-2f f3-2f f3-3f) (at_square square0 f1-3f) (at_square square1 f0-1f) (at_square square2 f1-2f) (at_square square3 f2-0f) (at_two straight0 f0-0f f1-0f) (clear f0-2f) (clear f0-3f) (clear f1-1f) (clear f2-1f) (clear f2-3f) (clear f3-0f) (clear f3-1f) (clear f4-0f) (clear f4-1f) (clear f4-2f) (clear f4-3f) (clear f5-0f) (clear f5-1f) (clear f5-2f) (clear f5-3f)
 move_l_down f2-2f f3-2f f3-3f f4-2f f4-3f rightl0 :: cost: 3
     add: (at_right_l rightl0 f3-2f f4-2f f4-3f) (clear f2-2f) (clear f3-3f)
     del: (at_right_l rightl0 f2-2f f3-2f f3-3f) (clear f4-2f) (clear f4-3f)
@@ -48,4 +56,5 @@ move_l_left f2-2f f3-2f f3-3f f2-1f f3-1f rightl0 :: cost: 3
 move_square f0-1f f0-2f square1 :: cost: 1
     add: (at_square square1 f0-2f) (clear f0-1f)
     del: (at_square square1 f0-1f) (clear f0-2f)
+    successor: move_square f1-3f f0-3f square0
 ground atoms: 43 groundings: 19

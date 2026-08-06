@@ -1,27 +1,32 @@
 step 0: state 7 applicable 1
-initialize :: cost: 0
+    state: (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (uninitialized)
+initialize :: cost: 0 [successor]
     add: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available colorcontainer-rsrc) (available colorfeeder-rsrc) (available colorprinter-rsrc) (available down-rsrc) (available endcap-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (available htmoverblack-rsrc) (available htmovercolor-rsrc) (available up-rsrc)
     del: (uninitialized)
 step 1: state 19 applicable 2
-blackfeeder-feed-letter sheet1 :: cost: 8000
+    state: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available colorcontainer-rsrc) (available colorfeeder-rsrc) (available colorprinter-rsrc) (available down-rsrc) (available endcap-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (available htmoverblack-rsrc) (available htmovercolor-rsrc) (available up-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color)
+blackfeeder-feed-letter sheet1 :: cost: 8000 [successor]
     add: (location sheet1 blackcontainer_entry-blackfeeder_exit) (sideup sheet1 front)
     del: (location sheet1 some_feeder_tray)
 colorfeeder-feed-letter sheet1 :: cost: 8000
     add: (location sheet1 down_bottomentry-colorfeeder_exit) (sideup sheet1 front)
     del: (location sheet1 some_feeder_tray)
 step 2: state 20 applicable 1
-blackcontainer-toime-letter sheet1 :: cost: 2000
+    state: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available colorcontainer-rsrc) (available colorfeeder-rsrc) (available colorprinter-rsrc) (available down-rsrc) (available endcap-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (available htmoverblack-rsrc) (available htmovercolor-rsrc) (available up-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 blackcontainer_entry-blackfeeder_exit) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (sideup sheet1 front)
+blackcontainer-toime-letter sheet1 :: cost: 2000 [successor]
     add: (location sheet1 blackcontainer_exittoime-blackprinter_entry)
     del: (location sheet1 blackcontainer_entry-blackfeeder_exit)
 step 3: state 20 applicable 2
+    state: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available colorcontainer-rsrc) (available colorfeeder-rsrc) (available colorprinter-rsrc) (available down-rsrc) (available endcap-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (available htmoverblack-rsrc) (available htmovercolor-rsrc) (available up-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 blackcontainer_exittoime-blackprinter_entry) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (sideup sheet1 front)
 blackprinter-simplex-letter sheet1 front image-1 :: cost: 113013
     add: (hasimage sheet1 front image-1) (location sheet1 blackprinter_exit-blackcontainer_entryfromime)
     del: (location sheet1 blackcontainer_exittoime-blackprinter_entry) (notprintedwith sheet1 front black)
-blackprinter-simplexandinvert-letter sheet1 front back image-1 :: cost: 123013
+blackprinter-simplexandinvert-letter sheet1 front back image-1 :: cost: 123013 [successor]
     add: (hasimage sheet1 front image-1) (location sheet1 blackprinter_exit-blackcontainer_entryfromime) (sideup sheet1 back)
     del: (location sheet1 blackcontainer_exittoime-blackprinter_entry) (notprintedwith sheet1 front black) (sideup sheet1 front)
 step 4: state 20 applicable 1
-blackcontainer-fromime-letter sheet1 :: cost: 2000
+    state: (available blackcontainer-rsrc) (available blackfeeder-rsrc) (available blackprinter-rsrc) (available colorcontainer-rsrc) (available colorfeeder-rsrc) (available colorprinter-rsrc) (available down-rsrc) (available endcap-rsrc) (available finisher1-rsrc) (available finisher2-rsrc) (available htmoverblack-rsrc) (available htmovercolor-rsrc) (available up-rsrc) (hasimage sheet1 front image-1) (location dummy-sheet some_finisher_tray) (location sheet1 blackprinter_exit-blackcontainer_entryfromime) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front color) (sideup sheet1 back)
+blackcontainer-fromime-letter sheet1 :: cost: 2000 [successor]
     add: (location sheet1 endcap_entry-blackcontainer_exit)
     del: (location sheet1 blackprinter_exit-blackcontainer_entryfromime)
 ground atoms: 28 groundings: 7

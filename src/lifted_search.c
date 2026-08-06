@@ -25,7 +25,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
     pddlStripsMakerInit(&smaker, &C.pddl);
 
     PDDL_ISET(init);
-    pddlStripsMakerAddInitAndCollect(&smaker, &C.pddl, &init, NULL);
+    pddlStripsMakerAddInitAndCollect(&smaker, &init, NULL);
 
     pddl_lifted_app_action_t *aa;
     aa = pddlLiftedAppActionNew(&C.pddl, backend, &C.err);
@@ -53,38 +53,33 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             break;
 
         PDDL_ISET(next_state);
+        pddl_strips_maker_eff_t eff = PDDL_STRIPS_MAKER_EFF_INIT;
         for (int i = 0; i < size; ++i){
             int aid = pddlLiftedAppActionId(aa, i);
             const pddl_action_t *action = C.pddl.action.action + aid;
             const int *args = pddlLiftedAppActionArgs(aa, i);
 
-            PDDL_ISET(add_eff);
-            PDDL_ISET(del_eff);
-            int cost;
-            pddlStripsMakerActionEffInState(&smaker, &C.pddl, action, args,
-                                            &cur_state, &add_eff, &del_eff,
-                                            &cost, &C.err);
-            // TODO: Check return value
-            if (!C.pddl.metric)
-                cost = 1;
-
+            ret = pddlStripsMakerActionEffInState(&smaker, action, args,
+                                                  &cur_state, NULL, &eff,
+                                                  &C.err);
+            assert(ret == 0);
+            assert(eff.cost_type == PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST);
+            int cost = eff.cost.int_action_cost;
 
             printf("%s", action->name);
             for (int j = 0; j < action->param.param_size; ++j){
                 printf(" %s", C.pddl.obj.obj[args[j]].name);
             }
             printf(" :: cost: %d\n", cost);
-            printState("    add:", &add_eff, &smaker);
-            printState("    del:", &del_eff, &smaker);
+            printState("    add:", &eff.add_eff, &smaker);
+            printState("    del:", &eff.del_eff, &smaker);
 
             if (i == step % size){
-                pddlISetMinus2(&next_state, &cur_state, &del_eff);
-                pddlISetUnion(&next_state, &add_eff);
+                pddlISetMinus2(&next_state, &cur_state, &eff.del_eff);
+                pddlISetUnion(&next_state, &eff.add_eff);
             }
-
-            pddlISetFree(&del_eff);
-            pddlISetFree(&add_eff);
         }
+        pddlStripsMakerEffFree(&eff);
         pddlISetEmpty(&cur_state);
         pddlISetUnion(&cur_state, &next_state);
         pddlISetFree(&next_state);

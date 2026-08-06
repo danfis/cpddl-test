@@ -1,5 +1,6 @@
 step 0: state 32 applicable 36
-do-grind p6 grinder0 verysmooth natural varnished colourfragments :: cost: 45
+    state: (available b0) (available b1) (available b2) (available b3) (available p6) (boardsize b0 s9) (boardsize b1 s0) (boardsize b2 s8) (boardsize b3 s4) (colour p6 natural) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition b2 rough) (surface-condition b3 rough) (surface-condition p6 verysmooth) (treatment p6 varnished) (unused p0) (unused p1) (unused p10) (unused p2) (unused p3) (unused p4) (unused p5) (unused p7) (unused p8) (unused p9) (wood b0 teak) (wood b1 teak) (wood b2 pine) (wood b3 walnut) (wood p6 walnut)
+do-grind p6 grinder0 verysmooth natural varnished colourfragments :: cost: 45 [successor]
     add: (treatment p6 colourfragments)
     del: (treatment p6 varnished)
 do-plane p6 planer0 verysmooth natural varnished :: cost: 30
@@ -9,16 +10,18 @@ do-saw-large b0 p3 saw0 teak rough s9 s7 s8 s6 :: cost: 30
     add: (available p3) (boardsize b0 s6) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
     del: (unused p3)
 step 1: state 32 applicable 36
+    state: (available b0) (available b1) (available b2) (available b3) (available p6) (boardsize b0 s9) (boardsize b1 s0) (boardsize b2 s8) (boardsize b3 s4) (colour p6 natural) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition b2 rough) (surface-condition b3 rough) (surface-condition p6 verysmooth) (treatment p6 colourfragments) (unused p0) (unused p1) (unused p10) (unused p2) (unused p3) (unused p4) (unused p5) (unused p7) (unused p8) (unused p9) (wood b0 teak) (wood b1 teak) (wood b2 pine) (wood b3 walnut) (wood p6 walnut)
 do-grind p6 grinder0 verysmooth natural colourfragments untreated :: cost: 45
     add: (treatment p6 untreated)
     del: (treatment p6 colourfragments)
-do-plane p6 planer0 verysmooth natural colourfragments :: cost: 30
+do-plane p6 planer0 verysmooth natural colourfragments :: cost: 30 [successor]
     add: (surface-condition p6 smooth) (treatment p6 untreated)
     del: (surface-condition p6 verysmooth) (treatment p6 colourfragments)
 do-saw-large b0 p3 saw0 teak rough s9 s7 s8 s6 :: cost: 30
     add: (available p3) (boardsize b0 s6) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
     del: (unused p3)
 step 2: state 32 applicable 47
+    state: (available b0) (available b1) (available b2) (available b3) (available p6) (boardsize b0 s9) (boardsize b1 s0) (boardsize b2 s8) (boardsize b3 s4) (colour p6 natural) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition b2 rough) (surface-condition b3 rough) (surface-condition p6 smooth) (treatment p6 untreated) (unused p0) (unused p1) (unused p10) (unused p2) (unused p3) (unused p4) (unused p5) (unused p7) (unused p8) (unused p9) (wood b0 teak) (wood b1 teak) (wood b2 pine) (wood b3 walnut) (wood p6 walnut)
 do-glaze p6 glazer0 black :: cost: 20
     add: (colour p6 black) (treatment p6 glazed)
     del: (colour p6 natural) (treatment p6 untreated)
@@ -28,7 +31,9 @@ do-glaze p6 glazer0 green :: cost: 20
 do-glaze p6 glazer0 mauve :: cost: 20
     add: (colour p6 mauve) (treatment p6 glazed)
     del: (colour p6 natural) (treatment p6 untreated)
+    successor: do-immersion-varnish p6 immersion-varnisher0 white smooth
 step 3: state 32 applicable 36
+    state: (available b0) (available b1) (available b2) (available b3) (available p6) (boardsize b0 s9) (boardsize b1 s0) (boardsize b2 s8) (boardsize b3 s4) (colour p6 white) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition b2 rough) (surface-condition b3 rough) (surface-condition p6 smooth) (treatment p6 varnished) (unused p0) (unused p1) (unused p10) (unused p2) (unused p3) (unused p4) (unused p5) (unused p7) (unused p8) (unused p9) (wood b0 teak) (wood b1 teak) (wood b2 pine) (wood b3 walnut) (wood p6 walnut)
 do-grind p6 grinder0 smooth white varnished colourfragments :: cost: 45
     add: (colour p6 natural) (surface-condition p6 verysmooth) (treatment p6 colourfragments)
     del: (colour p6 white) (surface-condition p6 smooth) (treatment p6 varnished)
@@ -38,7 +43,9 @@ do-plane p6 planer0 smooth white varnished :: cost: 30
 do-saw-large b0 p3 saw0 teak rough s9 s7 s8 s6 :: cost: 30
     add: (available p3) (boardsize b0 s6) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
     del: (unused p3)
+    successor: load-highspeed-saw b1 highspeed-saw0
 step 4: state 31 applicable 33
+    state: (available b0) (available b2) (available b3) (available p6) (boardsize b0 s9) (boardsize b1 s0) (boardsize b2 s8) (boardsize b3 s4) (colour p6 white) (in-highspeed-saw b1 highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition b2 rough) (surface-condition b3 rough) (surface-condition p6 smooth) (treatment p6 varnished) (unused p0) (unused p1) (unused p10) (unused p2) (unused p3) (unused p4) (unused p5) (unused p7) (unused p8) (unused p9) (wood b0 teak) (wood b1 teak) (wood b2 pine) (wood b3 walnut) (wood p6 walnut)
 do-grind p6 grinder0 smooth white varnished colourfragments :: cost: 45
     add: (colour p6 natural) (surface-condition p6 verysmooth) (treatment p6 colourfragments)
     del: (colour p6 white) (surface-condition p6 smooth) (treatment p6 varnished)
@@ -48,4 +55,5 @@ do-plane p6 planer0 smooth white varnished :: cost: 30
 do-saw-large b0 p3 saw0 teak rough s9 s7 s8 s6 :: cost: 30
     add: (available p3) (boardsize b0 s6) (colour p3 natural) (surface-condition p3 rough) (treatment p3 untreated) (wood p3 teak)
     del: (unused p3)
+    successor: do-saw-small b0 p10 saw0 teak rough s9 s8
 ground atoms: 124 groundings: 54

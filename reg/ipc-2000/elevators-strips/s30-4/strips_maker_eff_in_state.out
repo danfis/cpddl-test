@@ -1,15 +1,17 @@
 step 0: state 1 applicable 61
+    state: (lift-at f0)
 board f0 p19 :: cost: 1
     add: (boarded p19)
     del:
-board f0 p2 :: cost: 1
+board f0 p2 :: cost: 1 [successor]
     add: (boarded p2)
     del:
 up f0 f1 :: cost: 1
     add: (lift-at f1)
     del: (lift-at f0)
 step 1: state 2 applicable 61
-board f0 p19 :: cost: 1
+    state: (boarded p2) (lift-at f0)
+board f0 p19 :: cost: 1 [successor]
     add: (boarded p19)
     del:
 board f0 p2 :: cost: 1
@@ -19,16 +21,18 @@ up f0 f1 :: cost: 1
     add: (lift-at f1)
     del: (lift-at f0)
 step 2: state 3 applicable 61
+    state: (boarded p19) (boarded p2) (lift-at f0)
 board f0 p19 :: cost: 1
     add:
     del:
 board f0 p2 :: cost: 1
     add:
     del:
-up f0 f1 :: cost: 1
+up f0 f1 :: cost: 1 [successor]
     add: (lift-at f1)
     del: (lift-at f0)
 step 3: state 3 applicable 59
+    state: (boarded p19) (boarded p2) (lift-at f1)
 down f1 f0 :: cost: 1
     add: (lift-at f0)
     del: (lift-at f1)
@@ -38,7 +42,9 @@ up f1 f10 :: cost: 1
 up f1 f11 :: cost: 1
     add: (lift-at f11)
     del: (lift-at f1)
+    successor: up f1 f5
 step 4: state 3 applicable 59
+    state: (boarded p19) (boarded p2) (lift-at f5)
 down f5 f0 :: cost: 1
     add: (lift-at f0)
     del: (lift-at f5)
@@ -48,4 +54,5 @@ down f5 f1 :: cost: 1
 down f5 f2 :: cost: 1
     add: (lift-at f2)
     del: (lift-at f5)
+    successor: up f5 f10
 ground atoms: 62 groundings: 179

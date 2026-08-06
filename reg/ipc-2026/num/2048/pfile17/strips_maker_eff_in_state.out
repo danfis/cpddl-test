@@ -1,0 +1,45 @@
+step 0: state 2 applicable 4
+    state: (NOT-must-combine) (free-to-play)
+    num: (value p11) = 0 (value p12) = 64 (value p13) = 128 (value p14) = 8 (value p21) = 8 (value p22) = 0 (value p23) = 256 (value p24) = 32 (value p31) = 256 (value p32) = 32 (value p33) = 16 (value p34) = 16 (value p41) = 64 (value p42) = 64 (value p43) = 64 (value p44) = 16
+play d left :: cost: 1
+    add: (must-combine) (shifting d) (shiftstatus left)
+    del: (NOT-must-combine) (free-to-play)
+    num:
+play l top :: cost: 1
+    add: (must-combine) (shifting l) (shiftstatus top)
+    del: (NOT-must-combine) (free-to-play)
+    num:
+play r top :: cost: 1
+    add: (must-combine) (shifting r) (shiftstatus top)
+    del: (NOT-must-combine) (free-to-play)
+    num:
+    successor: play u left
+step 1: state 3 applicable 1
+    state: (must-combine) (shifting u) (shiftstatus left)
+    num: (value p11) = 0 (value p12) = 64 (value p13) = 128 (value p14) = 8 (value p21) = 8 (value p22) = 0 (value p23) = 256 (value p24) = 32 (value p31) = 256 (value p32) = 32 (value p33) = 16 (value p34) = 16 (value p41) = 64 (value p42) = 64 (value p43) = 64 (value p44) = 16
+shift-0111 p11 p21 p31 p41 left midleft u :: cost: 1 [successor]
+    add: (shiftstatus midleft)
+    del: (shiftstatus left)
+    num: (value p11) 0 -> 8 (value p21) 8 -> 256 (value p31) 256 -> 64 (value p41) 64 -> 0
+step 2: state 3 applicable 1
+    state: (must-combine) (shifting u) (shiftstatus midleft)
+    num: (value p11) = 8 (value p12) = 64 (value p13) = 128 (value p14) = 8 (value p21) = 256 (value p22) = 0 (value p23) = 256 (value p24) = 32 (value p31) = 64 (value p32) = 32 (value p33) = 16 (value p34) = 16 (value p41) = 0 (value p42) = 64 (value p43) = 64 (value p44) = 16
+shift-1011 p12 p22 p32 p42 midleft midright u :: cost: 1 [successor]
+    add: (shiftstatus midright)
+    del: (shiftstatus midleft)
+    num: (value p22) 0 -> 32 (value p32) 32 -> 64 (value p42) 64 -> 0
+step 3: state 3 applicable 1
+    state: (must-combine) (shifting u) (shiftstatus midright)
+    num: (value p11) = 8 (value p12) = 64 (value p13) = 128 (value p14) = 8 (value p21) = 256 (value p22) = 32 (value p23) = 256 (value p24) = 32 (value p31) = 64 (value p32) = 64 (value p33) = 16 (value p34) = 16 (value p41) = 0 (value p42) = 0 (value p43) = 64 (value p44) = 16
+shift-1111 p13 p23 p33 p43 midright right u :: cost: 1 [successor]
+    add: (shiftstatus right)
+    del: (shiftstatus midright)
+    num:
+step 4: state 3 applicable 1
+    state: (must-combine) (shifting u) (shiftstatus right)
+    num: (value p11) = 8 (value p12) = 64 (value p13) = 128 (value p14) = 8 (value p21) = 256 (value p22) = 32 (value p23) = 256 (value p24) = 32 (value p31) = 64 (value p32) = 64 (value p33) = 16 (value p34) = 16 (value p41) = 0 (value p42) = 0 (value p43) = 64 (value p44) = 16
+shift-1111 p14 p24 p34 p44 right done u :: cost: 1 [successor]
+    add: (shiftstatus done)
+    del: (shiftstatus right)
+    num:
+ground atoms: 13 groundings: 8

@@ -1,0 +1,80 @@
+step 0: state 14 applicable 25
+    state: (at-location crane1 mill1) (at-location crane2 mill2) (at-location crane3 mill3) (at-location truck1 depot1) (at-location truck2 depot2) (available mill1) (available mill2) (available mill3) (current-process mill1 brand1) (current-process mill2 brand3) (current-process mill3 brand1) (ready-crane crane1) (ready-crane crane2) (ready-crane crane3)
+    num: (unharvest-field) = 3 (has-resource sugar-cane mill1) = 10 (has-resource sugar-cane mill2) = 10 (has-resource sugar-cane mill3) = 10 (max-changing mill1) = 2 (max-changing mill2) = 2 (max-changing mill3) = 2 (in-storage mill1 brand1) = 0 (in-storage mill1 brand3) = 0 (in-storage mill1 brand4) = 0 (in-storage mill2 brand1) = 0 (in-storage mill2 brand2) = 0 (in-storage mill2 brand3) = 0 (in-storage mill3 brand1) = 0 (in-storage mill3 brand2) = 0 (in-storage mill3 brand4) = 2 (truck-cap truck1) = 10 (truck-cap truck2) = 6 (service-time crane1) = 10 (service-time crane2) = 15 (service-time crane3) = 10 (in-truck-sugar brand1 truck1) = 0 (in-truck-sugar brand2 truck1) = 0 (in-truck-sugar brand3 truck1) = 0 (in-truck-sugar brand4 truck1) = 0 (in-truck-sugar brand1 truck2) = 0 (in-truck-sugar brand2 truck2) = 0 (in-truck-sugar brand3 truck2) = 0 (in-truck-sugar brand4 truck2) = 0 (in-storage depot1 brand1) = 0 (in-storage depot1 brand2) = 0 (in-storage depot1 brand3) = 0 (in-storage depot1 brand4) = 0 (in-storage depot2 brand1) = 0 (in-storage depot2 brand2) = 0 (in-storage depot2 brand3) = 0 (in-storage depot2 brand4) = 0 (in-storage depot3 brand1) = 0 (in-storage depot3 brand2) = 0 (in-storage depot3 brand3) = 0 (in-storage depot3 brand4) = 0
+change-product mill1 brand1 brand2 :: cost: 1
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+    successor: produce_sugar sugar-cane mill1 brand1
+step 1: state 14 applicable 24
+    state: (at-location crane1 mill1) (at-location crane2 mill2) (at-location crane3 mill3) (at-location truck1 depot1) (at-location truck2 depot2) (available mill2) (available mill3) (busy mill1) (current-process mill1 brand1) (current-process mill2 brand3) (current-process mill3 brand1) (ready-crane crane1) (ready-crane crane2) (ready-crane crane3)
+    num: (unharvest-field) = 3 (has-resource sugar-cane mill1) = 9 (has-resource sugar-cane mill2) = 10 (has-resource sugar-cane mill3) = 10 (max-changing mill1) = 2 (max-changing mill2) = 2 (max-changing mill3) = 2 (in-storage mill1 brand1) = 1 (in-storage mill1 brand3) = 0 (in-storage mill1 brand4) = 0 (in-storage mill2 brand1) = 0 (in-storage mill2 brand2) = 0 (in-storage mill2 brand3) = 0 (in-storage mill3 brand1) = 0 (in-storage mill3 brand2) = 0 (in-storage mill3 brand4) = 2 (truck-cap truck1) = 10 (truck-cap truck2) = 6 (service-time crane1) = 10 (service-time crane2) = 15 (service-time crane3) = 10 (in-truck-sugar brand1 truck1) = 0 (in-truck-sugar brand2 truck1) = 0 (in-truck-sugar brand3 truck1) = 0 (in-truck-sugar brand4 truck1) = 0 (in-truck-sugar brand1 truck2) = 0 (in-truck-sugar brand2 truck2) = 0 (in-truck-sugar brand3 truck2) = 0 (in-truck-sugar brand4 truck2) = 0 (in-storage depot1 brand1) = 0 (in-storage depot1 brand2) = 0 (in-storage depot1 brand3) = 0 (in-storage depot1 brand4) = 0 (in-storage depot2 brand1) = 0 (in-storage depot2 brand2) = 0 (in-storage depot2 brand3) = 0 (in-storage depot2 brand4) = 0 (in-storage depot3 brand1) = 0 (in-storage depot3 brand2) = 0 (in-storage depot3 brand3) = 0 (in-storage depot3 brand4) = 0
+change-product mill1 brand1 brand2 :: cost: 1
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+    successor: produce_sugar sugar-cane mill3 brand1
+step 2: state 14 applicable 23
+    state: (at-location crane1 mill1) (at-location crane2 mill2) (at-location crane3 mill3) (at-location truck1 depot1) (at-location truck2 depot2) (available mill2) (busy mill1) (busy mill3) (current-process mill1 brand1) (current-process mill2 brand3) (current-process mill3 brand1) (ready-crane crane1) (ready-crane crane2) (ready-crane crane3)
+    num: (unharvest-field) = 3 (has-resource sugar-cane mill1) = 9 (has-resource sugar-cane mill2) = 10 (has-resource sugar-cane mill3) = 9 (max-changing mill1) = 2 (max-changing mill2) = 2 (max-changing mill3) = 2 (in-storage mill1 brand1) = 1 (in-storage mill1 brand3) = 0 (in-storage mill1 brand4) = 0 (in-storage mill2 brand1) = 0 (in-storage mill2 brand2) = 0 (in-storage mill2 brand3) = 0 (in-storage mill3 brand1) = 1 (in-storage mill3 brand2) = 0 (in-storage mill3 brand4) = 2 (truck-cap truck1) = 10 (truck-cap truck2) = 6 (service-time crane1) = 10 (service-time crane2) = 15 (service-time crane3) = 10 (in-truck-sugar brand1 truck1) = 0 (in-truck-sugar brand2 truck1) = 0 (in-truck-sugar brand3 truck1) = 0 (in-truck-sugar brand4 truck1) = 0 (in-truck-sugar brand1 truck2) = 0 (in-truck-sugar brand2 truck2) = 0 (in-truck-sugar brand3 truck2) = 0 (in-truck-sugar brand4 truck2) = 0 (in-storage depot1 brand1) = 0 (in-storage depot1 brand2) = 0 (in-storage depot1 brand3) = 0 (in-storage depot1 brand4) = 0 (in-storage depot2 brand1) = 0 (in-storage depot2 brand2) = 0 (in-storage depot2 brand3) = 0 (in-storage depot2 brand4) = 0 (in-storage depot3 brand1) = 0 (in-storage depot3 brand2) = 0 (in-storage depot3 brand3) = 0 (in-storage depot3 brand4) = 0
+change-product mill1 brand1 brand2 :: cost: 1
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+    successor: setting-machine mill1
+step 3: state 14 applicable 24
+    state: (at-location crane1 mill1) (at-location crane2 mill2) (at-location crane3 mill3) (at-location truck1 depot1) (at-location truck2 depot2) (available mill1) (available mill2) (busy mill3) (current-process mill1 brand1) (current-process mill2 brand3) (current-process mill3 brand1) (ready-crane crane1) (ready-crane crane2) (ready-crane crane3)
+    num: (unharvest-field) = 3 (has-resource sugar-cane mill1) = 9 (has-resource sugar-cane mill2) = 10 (has-resource sugar-cane mill3) = 9 (max-changing mill1) = 2 (max-changing mill2) = 2 (max-changing mill3) = 2 (in-storage mill1 brand1) = 1 (in-storage mill1 brand3) = 0 (in-storage mill1 brand4) = 0 (in-storage mill2 brand1) = 0 (in-storage mill2 brand2) = 0 (in-storage mill2 brand3) = 0 (in-storage mill3 brand1) = 1 (in-storage mill3 brand2) = 0 (in-storage mill3 brand4) = 2 (truck-cap truck1) = 10 (truck-cap truck2) = 6 (service-time crane1) = 10 (service-time crane2) = 15 (service-time crane3) = 10 (in-truck-sugar brand1 truck1) = 0 (in-truck-sugar brand2 truck1) = 0 (in-truck-sugar brand3 truck1) = 0 (in-truck-sugar brand4 truck1) = 0 (in-truck-sugar brand1 truck2) = 0 (in-truck-sugar brand2 truck2) = 0 (in-truck-sugar brand3 truck2) = 0 (in-truck-sugar brand4 truck2) = 0 (in-storage depot1 brand1) = 0 (in-storage depot1 brand2) = 0 (in-storage depot1 brand3) = 0 (in-storage depot1 brand4) = 0 (in-storage depot2 brand1) = 0 (in-storage depot2 brand2) = 0 (in-storage depot2 brand3) = 0 (in-storage depot2 brand4) = 0 (in-storage depot3 brand1) = 0 (in-storage depot3 brand2) = 0 (in-storage depot3 brand3) = 0 (in-storage depot3 brand4) = 0
+change-product mill1 brand1 brand2 :: cost: 1
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+    successor: produce_sugar_max sugar-cane mill2 brand3
+step 4: state 14 applicable 23
+    state: (at-location crane1 mill1) (at-location crane2 mill2) (at-location crane3 mill3) (at-location truck1 depot1) (at-location truck2 depot2) (available mill1) (busy mill2) (busy mill3) (current-process mill1 brand1) (current-process mill2 brand3) (current-process mill3 brand1) (ready-crane crane1) (ready-crane crane2) (ready-crane crane3)
+    num: (unharvest-field) = 3 (has-resource sugar-cane mill1) = 9 (has-resource sugar-cane mill2) = 2 (has-resource sugar-cane mill3) = 9 (max-changing mill1) = 2 (max-changing mill2) = 2 (max-changing mill3) = 2 (in-storage mill1 brand1) = 1 (in-storage mill1 brand3) = 0 (in-storage mill1 brand4) = 0 (in-storage mill2 brand1) = 0 (in-storage mill2 brand2) = 0 (in-storage mill2 brand3) = 8 (in-storage mill3 brand1) = 1 (in-storage mill3 brand2) = 0 (in-storage mill3 brand4) = 2 (truck-cap truck1) = 10 (truck-cap truck2) = 6 (service-time crane1) = 10 (service-time crane2) = 15 (service-time crane3) = 10 (in-truck-sugar brand1 truck1) = 0 (in-truck-sugar brand2 truck1) = 0 (in-truck-sugar brand3 truck1) = 0 (in-truck-sugar brand4 truck1) = 0 (in-truck-sugar brand1 truck2) = 0 (in-truck-sugar brand2 truck2) = 0 (in-truck-sugar brand3 truck2) = 0 (in-truck-sugar brand4 truck2) = 0 (in-storage depot1 brand1) = 0 (in-storage depot1 brand2) = 0 (in-storage depot1 brand3) = 0 (in-storage depot1 brand4) = 0 (in-storage depot2 brand1) = 0 (in-storage depot2 brand2) = 0 (in-storage depot2 brand3) = 0 (in-storage depot2 brand4) = 0 (in-storage depot3 brand1) = 0 (in-storage depot3 brand2) = 0 (in-storage depot3 brand3) = 0 (in-storage depot3 brand4) = 0
+change-product mill1 brand1 brand2 :: cost: 1 [successor]
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: (max-changing mill1) 2 -> 1
+ground atoms: 36 groundings: 28

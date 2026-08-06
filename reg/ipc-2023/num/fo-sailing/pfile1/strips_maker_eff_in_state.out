@@ -1,0 +1,79 @@
+step 0: state 0 applicable 8
+    state:
+    num: (x b0) = 3 (y b0) = 0 (v b0) = 1
+accelerate b0 :: cost: 1
+    add:
+    del:
+    num: (v b0) 1 -> 2
+go_est b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 3 -> 6
+go_north_east b0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x b0) 3 -> 4.5 (y b0) 0 -> 1.5
+step 1: state 0 applicable 8
+    state:
+    num: (x b0) = 4.5 (y b0) = 1.5 (v b0) = 1
+accelerate b0 :: cost: 1
+    add:
+    del:
+    num: (v b0) 1 -> 2
+go_est b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 4.5 -> 7.5
+go_north_east b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 4.5 -> 6 (y b0) 1.5 -> 3
+    successor: go_north_west b0
+step 2: state 0 applicable 8
+    state:
+    num: (x b0) = 3 (y b0) = 3 (v b0) = 1
+accelerate b0 :: cost: 1
+    add:
+    del:
+    num: (v b0) 1 -> 2
+go_est b0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x b0) 3 -> 6
+go_north_east b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 3 -> 4.5 (y b0) 3 -> 4.5
+step 3: state 0 applicable 8
+    state:
+    num: (x b0) = 6 (y b0) = 3 (v b0) = 1
+accelerate b0 :: cost: 1
+    add:
+    del:
+    num: (v b0) 1 -> 2
+go_est b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 6 -> 9
+go_north_east b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 6 -> 7.5 (y b0) 3 -> 4.5
+    successor: go_west b0
+step 4: state 0 applicable 8
+    state:
+    num: (x b0) = 3 (y b0) = 3 (v b0) = 1
+accelerate b0 :: cost: 1
+    add:
+    del:
+    num: (v b0) 1 -> 2
+go_est b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 3 -> 6
+go_north_east b0 :: cost: 1
+    add:
+    del:
+    num: (x b0) 3 -> 4.5 (y b0) 3 -> 4.5
+    successor: go_south_west b0
+ground atoms: 0 groundings: 8

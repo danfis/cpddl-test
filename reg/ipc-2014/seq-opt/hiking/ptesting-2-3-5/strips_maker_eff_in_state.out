@@ -1,4 +1,5 @@
 step 0: state 13 applicable 248
+    state: (at_car car0 place0) (at_car car1 place0) (at_car car2 place0) (at_person girl0 place0) (at_person girl1 place0) (at_person guy0 place0) (at_person guy1 place0) (at_tent tent0 place0) (at_tent tent1 place0) (up tent0) (up tent1) (walked couple0 place0) (walked couple1 place0)
 drive girl0 place0 place0 car0 :: cost: 1
     add:
     del:
@@ -8,7 +9,9 @@ drive girl0 place0 place0 car1 :: cost: 1
 drive girl0 place0 place0 car2 :: cost: 1
     add:
     del:
+    successor: put_down guy0 place0 tent0
 step 1: state 13 applicable 488
+    state: (at_car car0 place0) (at_car car1 place0) (at_car car2 place0) (at_person girl0 place0) (at_person girl1 place0) (at_person guy0 place0) (at_person guy1 place0) (at_tent tent0 place0) (at_tent tent1 place0) (down tent0) (up tent1) (walked couple0 place0) (walked couple1 place0)
 drive girl0 place0 place0 car0 :: cost: 1
     add:
     del:
@@ -18,7 +21,9 @@ drive girl0 place0 place0 car1 :: cost: 1
 drive girl0 place0 place0 car2 :: cost: 1
     add:
     del:
+    successor: put_down girl0 place0 tent1
 step 2: state 13 applicable 728
+    state: (at_car car0 place0) (at_car car1 place0) (at_car car2 place0) (at_person girl0 place0) (at_person girl1 place0) (at_person guy0 place0) (at_person guy1 place0) (at_tent tent0 place0) (at_tent tent1 place0) (down tent0) (down tent1) (walked couple0 place0) (walked couple1 place0)
 drive girl0 place0 place0 car0 :: cost: 1
     add:
     del:
@@ -28,7 +33,9 @@ drive girl0 place0 place0 car1 :: cost: 1
 drive girl0 place0 place0 car2 :: cost: 1
     add:
     del:
+    successor: put_up girl0 place0 tent0
 step 3: state 13 applicable 488
+    state: (at_car car0 place0) (at_car car1 place0) (at_car car2 place0) (at_person girl0 place0) (at_person girl1 place0) (at_person guy0 place0) (at_person guy1 place0) (at_tent tent0 place0) (at_tent tent1 place0) (down tent1) (up tent0) (walked couple0 place0) (walked couple1 place0)
 drive girl0 place0 place0 car0 :: cost: 1
     add:
     del:
@@ -38,7 +45,9 @@ drive girl0 place0 place0 car1 :: cost: 1
 drive girl0 place0 place0 car2 :: cost: 1
     add:
     del:
+    successor: put_down girl1 place0 tent0
 step 4: state 13 applicable 728
+    state: (at_car car0 place0) (at_car car1 place0) (at_car car2 place0) (at_person girl0 place0) (at_person girl1 place0) (at_person guy0 place0) (at_person guy1 place0) (at_tent tent0 place0) (at_tent tent1 place0) (down tent0) (down tent1) (walked couple0 place0) (walked couple1 place0)
 drive girl0 place0 place0 car0 :: cost: 1
     add:
     del:
@@ -48,4 +57,5 @@ drive girl0 place0 place0 car1 :: cost: 1
 drive girl0 place0 place0 car2 :: cost: 1
     add:
     del:
+    successor: put_up guy1 place0 tent0
 ground atoms: 51 groundings: 736

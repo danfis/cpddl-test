@@ -1,4 +1,5 @@
 step 0: state 53 applicable 52
+    state: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (NOT-chosen cdk1p1p2) (NOT-chosen cdk2) (NOT-chosen cdk2-cycb) (NOT-chosen cdk2p1) (NOT-chosen cdk46p1) (NOT-chosen cdk46p3-cycdp1) (NOT-chosen cdk7) (NOT-chosen cebp) (NOT-chosen chk1) (NOT-chosen cks1) (NOT-chosen cycb) (NOT-chosen cych) (NOT-chosen dp12) (NOT-chosen e2f1) (NOT-chosen e2f13) (NOT-chosen e2f13-dp12) (NOT-chosen e2f13p1-dp12p1) (NOT-chosen e2f3) (NOT-chosen e2f4) (NOT-chosen e2f4-dp12p1) (NOT-chosen e2f6) (NOT-chosen ge-c) (NOT-chosen ge2) (NOT-chosen hbp1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (NOT-chosen hdac1-p130-e2f4p1-dp12) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (NOT-chosen hdac1-prbp1-e2f4-dp12) (NOT-chosen m1433) (NOT-chosen p130) (NOT-chosen p16) (NOT-chosen p27) (NOT-chosen p300) (NOT-chosen p53) (NOT-chosen p53p1) (NOT-chosen p57) (NOT-chosen p57p1) (NOT-chosen pcaf) (NOT-chosen plk1) (NOT-chosen prb) (NOT-chosen prb-e2f4p1-dp12) (NOT-chosen prbp1-e2f4p1-dp12) (NOT-chosen prbp2) (NOT-chosen rpa) (NOT-chosen skp1) (NOT-chosen skp2) (NOT-chosen sp1) (NOT-chosen wee1) (num-subs l0)
 choose ap2 l1 l0 :: cost: 1
     add: (chosen ap2) (num-subs l1)
     del: (NOT-chosen ap2) (num-subs l0)
@@ -8,7 +9,9 @@ choose c-abl l1 l0 :: cost: 1
 choose c-tak1 l1 l0 :: cost: 1
     add: (chosen c-tak1) (num-subs l1)
     del: (NOT-chosen c-tak1) (num-subs l0)
+    successor: choose wee1 l1 l0
 step 1: state 53 applicable 52
+    state: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (NOT-chosen cdk1p1p2) (NOT-chosen cdk2) (NOT-chosen cdk2-cycb) (NOT-chosen cdk2p1) (NOT-chosen cdk46p1) (NOT-chosen cdk46p3-cycdp1) (NOT-chosen cdk7) (NOT-chosen cebp) (NOT-chosen chk1) (NOT-chosen cks1) (NOT-chosen cycb) (NOT-chosen cych) (NOT-chosen dp12) (NOT-chosen e2f1) (NOT-chosen e2f13) (NOT-chosen e2f13-dp12) (NOT-chosen e2f13p1-dp12p1) (NOT-chosen e2f3) (NOT-chosen e2f4) (NOT-chosen e2f4-dp12p1) (NOT-chosen e2f6) (NOT-chosen ge-c) (NOT-chosen ge2) (NOT-chosen hbp1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (NOT-chosen hdac1-p130-e2f4p1-dp12) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (NOT-chosen hdac1-prbp1-e2f4-dp12) (NOT-chosen m1433) (NOT-chosen p130) (NOT-chosen p16) (NOT-chosen p27) (NOT-chosen p300) (NOT-chosen p53) (NOT-chosen p53p1) (NOT-chosen p57) (NOT-chosen p57p1) (NOT-chosen pcaf) (NOT-chosen plk1) (NOT-chosen prb) (NOT-chosen prb-e2f4p1-dp12) (NOT-chosen prbp1-e2f4p1-dp12) (NOT-chosen prbp2) (NOT-chosen rpa) (NOT-chosen skp1) (NOT-chosen skp2) (NOT-chosen sp1) (chosen wee1) (num-subs l1)
 choose ap2 l2 l1 :: cost: 1
     add: (chosen ap2) (num-subs l2)
     del: (NOT-chosen ap2) (num-subs l1)
@@ -18,7 +21,9 @@ choose c-abl l2 l1 :: cost: 1
 choose c-tak1 l2 l1 :: cost: 1
     add: (chosen c-tak1) (num-subs l2)
     del: (NOT-chosen c-tak1) (num-subs l1)
+    successor: choose skp2 l2 l1
 step 2: state 53 applicable 52
+    state: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (NOT-chosen cdk1p1p2) (NOT-chosen cdk2) (NOT-chosen cdk2-cycb) (NOT-chosen cdk2p1) (NOT-chosen cdk46p1) (NOT-chosen cdk46p3-cycdp1) (NOT-chosen cdk7) (NOT-chosen cebp) (NOT-chosen chk1) (NOT-chosen cks1) (NOT-chosen cycb) (NOT-chosen cych) (NOT-chosen dp12) (NOT-chosen e2f1) (NOT-chosen e2f13) (NOT-chosen e2f13-dp12) (NOT-chosen e2f13p1-dp12p1) (NOT-chosen e2f3) (NOT-chosen e2f4) (NOT-chosen e2f4-dp12p1) (NOT-chosen e2f6) (NOT-chosen ge-c) (NOT-chosen ge2) (NOT-chosen hbp1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (NOT-chosen hdac1-p130-e2f4p1-dp12) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (NOT-chosen hdac1-prbp1-e2f4-dp12) (NOT-chosen m1433) (NOT-chosen p130) (NOT-chosen p16) (NOT-chosen p27) (NOT-chosen p300) (NOT-chosen p53) (NOT-chosen p53p1) (NOT-chosen p57) (NOT-chosen p57p1) (NOT-chosen pcaf) (NOT-chosen plk1) (NOT-chosen prb) (NOT-chosen prb-e2f4p1-dp12) (NOT-chosen prbp1-e2f4p1-dp12) (NOT-chosen prbp2) (NOT-chosen rpa) (NOT-chosen skp1) (NOT-chosen sp1) (chosen skp2) (chosen wee1) (num-subs l2)
 choose ap2 l3 l2 :: cost: 1
     add: (chosen ap2) (num-subs l3)
     del: (NOT-chosen ap2) (num-subs l2)
@@ -28,7 +33,9 @@ choose c-abl l3 l2 :: cost: 1
 choose c-tak1 l3 l2 :: cost: 1
     add: (chosen c-tak1) (num-subs l3)
     del: (NOT-chosen c-tak1) (num-subs l2)
+    successor: choose rpa l3 l2
 step 3: state 53 applicable 52
+    state: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (NOT-chosen cdk1p1p2) (NOT-chosen cdk2) (NOT-chosen cdk2-cycb) (NOT-chosen cdk2p1) (NOT-chosen cdk46p1) (NOT-chosen cdk46p3-cycdp1) (NOT-chosen cdk7) (NOT-chosen cebp) (NOT-chosen chk1) (NOT-chosen cks1) (NOT-chosen cycb) (NOT-chosen cych) (NOT-chosen dp12) (NOT-chosen e2f1) (NOT-chosen e2f13) (NOT-chosen e2f13-dp12) (NOT-chosen e2f13p1-dp12p1) (NOT-chosen e2f3) (NOT-chosen e2f4) (NOT-chosen e2f4-dp12p1) (NOT-chosen e2f6) (NOT-chosen ge-c) (NOT-chosen ge2) (NOT-chosen hbp1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (NOT-chosen hdac1-p130-e2f4p1-dp12) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (NOT-chosen hdac1-prbp1-e2f4-dp12) (NOT-chosen m1433) (NOT-chosen p130) (NOT-chosen p16) (NOT-chosen p27) (NOT-chosen p300) (NOT-chosen p53) (NOT-chosen p53p1) (NOT-chosen p57) (NOT-chosen p57p1) (NOT-chosen pcaf) (NOT-chosen plk1) (NOT-chosen prb) (NOT-chosen prb-e2f4p1-dp12) (NOT-chosen prbp1-e2f4p1-dp12) (NOT-chosen prbp2) (NOT-chosen skp1) (NOT-chosen sp1) (chosen rpa) (chosen skp2) (chosen wee1) (num-subs l3)
 choose ap2 l4 l3 :: cost: 1
     add: (chosen ap2) (num-subs l4)
     del: (NOT-chosen ap2) (num-subs l3)
@@ -38,7 +45,9 @@ choose c-abl l4 l3 :: cost: 1
 choose c-tak1 l4 l3 :: cost: 1
     add: (chosen c-tak1) (num-subs l4)
     del: (NOT-chosen c-tak1) (num-subs l3)
+    successor: choose prbp1-e2f4p1-dp12 l4 l3
 step 4: state 53 applicable 52
+    state: (NOT-chosen ap2) (NOT-chosen c-abl) (NOT-chosen c-tak1) (NOT-chosen cdc25c) (NOT-chosen cdk1p1p2) (NOT-chosen cdk2) (NOT-chosen cdk2-cycb) (NOT-chosen cdk2p1) (NOT-chosen cdk46p1) (NOT-chosen cdk46p3-cycdp1) (NOT-chosen cdk7) (NOT-chosen cebp) (NOT-chosen chk1) (NOT-chosen cks1) (NOT-chosen cycb) (NOT-chosen cych) (NOT-chosen dp12) (NOT-chosen e2f1) (NOT-chosen e2f13) (NOT-chosen e2f13-dp12) (NOT-chosen e2f13p1-dp12p1) (NOT-chosen e2f3) (NOT-chosen e2f4) (NOT-chosen e2f4-dp12p1) (NOT-chosen e2f6) (NOT-chosen ge-c) (NOT-chosen ge2) (NOT-chosen hbp1) (NOT-chosen hdac1-p107-e2f4p1-dp12) (NOT-chosen hdac1-p130-e2f4p1-dp12) (NOT-chosen hdac1-prbp1-e2f13p1-dp12) (NOT-chosen hdac1-prbp1-e2f4-dp12) (NOT-chosen m1433) (NOT-chosen p130) (NOT-chosen p16) (NOT-chosen p27) (NOT-chosen p300) (NOT-chosen p53) (NOT-chosen p53p1) (NOT-chosen p57) (NOT-chosen p57p1) (NOT-chosen pcaf) (NOT-chosen plk1) (NOT-chosen prb) (NOT-chosen prb-e2f4p1-dp12) (NOT-chosen prbp2) (NOT-chosen skp1) (NOT-chosen sp1) (chosen prbp1-e2f4p1-dp12) (chosen rpa) (chosen skp2) (chosen wee1) (num-subs l4)
 choose ap2 l5 l4 :: cost: 1
     add: (chosen ap2) (num-subs l5)
     del: (NOT-chosen ap2) (num-subs l4)
@@ -48,4 +57,5 @@ choose c-abl l5 l4 :: cost: 1
 choose c-tak1 l5 l4 :: cost: 1
     add: (chosen c-tak1) (num-subs l5)
     del: (NOT-chosen c-tak1) (num-subs l4)
+    successor: choose prb l5 l4
 ground atoms: 114 groundings: 254

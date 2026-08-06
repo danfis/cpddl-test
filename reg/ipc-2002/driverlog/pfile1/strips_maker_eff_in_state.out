@@ -1,5 +1,6 @@
 step 0: state 8 applicable 6
-load-truck package1 truck1 s0 :: cost: 1
+    state: (at driver1 s2) (at driver2 s2) (at package1 s0) (at package2 s0) (at truck1 s0) (at truck2 s0) (empty truck1) (empty truck2)
+load-truck package1 truck1 s0 :: cost: 1 [successor]
     add: (in package1 truck1)
     del: (at package1 s0)
 load-truck package1 truck2 s0 :: cost: 1
@@ -9,26 +10,29 @@ load-truck package2 truck1 s0 :: cost: 1
     add: (in package2 truck1)
     del: (at package2 s0)
 step 1: state 8 applicable 5
+    state: (at driver1 s2) (at driver2 s2) (at package2 s0) (at truck1 s0) (at truck2 s0) (empty truck1) (empty truck2) (in package1 truck1)
 load-truck package2 truck1 s0 :: cost: 1
     add: (in package2 truck1)
     del: (at package2 s0)
-load-truck package2 truck2 s0 :: cost: 1
+load-truck package2 truck2 s0 :: cost: 1 [successor]
     add: (in package2 truck2)
     del: (at package2 s0)
 unload-truck package1 truck1 s0 :: cost: 1
     add: (at package1 s0)
     del: (in package1 truck1)
 step 2: state 8 applicable 4
+    state: (at driver1 s2) (at driver2 s2) (at truck1 s0) (at truck2 s0) (empty truck1) (empty truck2) (in package1 truck1) (in package2 truck2)
 unload-truck package1 truck1 s0 :: cost: 1
     add: (at package1 s0)
     del: (in package1 truck1)
 unload-truck package2 truck2 s0 :: cost: 1
     add: (at package2 s0)
     del: (in package2 truck2)
-walk driver1 s2 p1-2 :: cost: 1
+walk driver1 s2 p1-2 :: cost: 1 [successor]
     add: (at driver1 p1-2)
     del: (at driver1 s2)
 step 3: state 8 applicable 5
+    state: (at driver1 p1-2) (at driver2 s2) (at truck1 s0) (at truck2 s0) (empty truck1) (empty truck2) (in package1 truck1) (in package2 truck2)
 unload-truck package1 truck1 s0 :: cost: 1
     add: (at package1 s0)
     del: (in package1 truck1)
@@ -38,8 +42,10 @@ unload-truck package2 truck2 s0 :: cost: 1
 walk driver1 p1-2 s1 :: cost: 1
     add: (at driver1 s1)
     del: (at driver1 p1-2)
+    successor: walk driver1 p1-2 s2
 step 4: state 8 applicable 4
-unload-truck package1 truck1 s0 :: cost: 1
+    state: (at driver1 s2) (at driver2 s2) (at truck1 s0) (at truck2 s0) (empty truck1) (empty truck2) (in package1 truck1) (in package2 truck2)
+unload-truck package1 truck1 s0 :: cost: 1 [successor]
     add: (at package1 s0)
     del: (in package1 truck1)
 unload-truck package2 truck2 s0 :: cost: 1

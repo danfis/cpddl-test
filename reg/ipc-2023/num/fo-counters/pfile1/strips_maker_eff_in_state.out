@@ -1,0 +1,78 @@
+step 0: state 0 applicable 6
+    state:
+    num: (value c0) = 0 (value c1) = 0 (rate_value c0) = 0 (rate_value c1) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num:
+decrement c1 :: cost: 1
+    add:
+    del:
+    num:
+increase_rate c0 :: cost: 1
+    add:
+    del:
+    num: (rate_value c0) 0 -> 1
+    successor: increment c0
+step 1: state 0 applicable 6
+    state:
+    num: (value c0) = 0 (value c1) = 0 (rate_value c0) = 0 (rate_value c1) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num:
+decrement c1 :: cost: 1
+    add:
+    del:
+    num:
+increase_rate c0 :: cost: 1
+    add:
+    del:
+    num: (rate_value c0) 0 -> 1
+    successor: increment c1
+step 2: state 0 applicable 6
+    state:
+    num: (value c0) = 0 (value c1) = 0 (rate_value c0) = 0 (rate_value c1) = 0
+decrement c0 :: cost: 1 [successor]
+    add:
+    del:
+    num:
+decrement c1 :: cost: 1
+    add:
+    del:
+    num:
+increase_rate c0 :: cost: 1
+    add:
+    del:
+    num: (rate_value c0) 0 -> 1
+step 3: state 0 applicable 6
+    state:
+    num: (value c0) = 0 (value c1) = 0 (rate_value c0) = 0 (rate_value c1) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num:
+decrement c1 :: cost: 1 [successor]
+    add:
+    del:
+    num:
+increase_rate c0 :: cost: 1
+    add:
+    del:
+    num: (rate_value c0) 0 -> 1
+step 4: state 0 applicable 6
+    state:
+    num: (value c0) = 0 (value c1) = 0 (rate_value c0) = 0 (rate_value c1) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num:
+decrement c1 :: cost: 1
+    add:
+    del:
+    num:
+increase_rate c0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (rate_value c0) 0 -> 1
+ground atoms: 0 groundings: 6

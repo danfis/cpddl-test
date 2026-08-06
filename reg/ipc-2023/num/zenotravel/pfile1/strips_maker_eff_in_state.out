@@ -1,0 +1,78 @@
+step 0: state 4 applicable 7
+    state: (located person1 city0) (located person2 city0) (located person3 city1) (located plane1 city0)
+    num: (fuel plane1) = 4000 (onboard plane1) = 0
+board person1 plane1 city0 :: cost: 0 [successor]
+    add: (in person1 plane1)
+    del: (located person1 city0)
+    num: (onboard plane1) 0 -> 1
+board person2 plane1 city0 :: cost: 0
+    add: (in person2 plane1)
+    del: (located person2 city0)
+    num: (onboard plane1) 0 -> 1
+fly-fast plane1 city0 city0 :: cost: 0
+    add:
+    del:
+    num:
+step 1: state 4 applicable 7
+    state: (in person1 plane1) (located person2 city0) (located person3 city1) (located plane1 city0)
+    num: (fuel plane1) = 4000 (onboard plane1) = 1
+board person2 plane1 city0 :: cost: 0
+    add: (in person2 plane1)
+    del: (located person2 city0)
+    num: (onboard plane1) 1 -> 2
+debark person1 plane1 city0 :: cost: 0 [successor]
+    add: (located person1 city0)
+    del: (in person1 plane1)
+    num: (onboard plane1) 1 -> 0
+fly-fast plane1 city0 city0 :: cost: 0
+    add:
+    del:
+    num:
+step 2: state 4 applicable 7
+    state: (located person1 city0) (located person2 city0) (located person3 city1) (located plane1 city0)
+    num: (fuel plane1) = 4000 (onboard plane1) = 0
+board person1 plane1 city0 :: cost: 0
+    add: (in person1 plane1)
+    del: (located person1 city0)
+    num: (onboard plane1) 0 -> 1
+board person2 plane1 city0 :: cost: 0
+    add: (in person2 plane1)
+    del: (located person2 city0)
+    num: (onboard plane1) 0 -> 1
+fly-fast plane1 city0 city0 :: cost: 0
+    add:
+    del:
+    num:
+    successor: fly-slow plane1 city0 city0
+step 3: state 4 applicable 7
+    state: (located person1 city0) (located person2 city0) (located person3 city1) (located plane1 city0)
+    num: (fuel plane1) = 4000 (onboard plane1) = 0
+board person1 plane1 city0 :: cost: 0
+    add: (in person1 plane1)
+    del: (located person1 city0)
+    num: (onboard plane1) 0 -> 1
+board person2 plane1 city0 :: cost: 0
+    add: (in person2 plane1)
+    del: (located person2 city0)
+    num: (onboard plane1) 0 -> 1
+fly-fast plane1 city0 city0 :: cost: 0
+    add:
+    del:
+    num:
+    successor: fly-slow plane1 city0 city1
+step 4: state 4 applicable 4
+    state: (located person1 city0) (located person2 city0) (located person3 city1) (located plane1 city1)
+    num: (fuel plane1) = 1288 (onboard plane1) = 0
+board person3 plane1 city1 :: cost: 0 [successor]
+    add: (in person3 plane1)
+    del: (located person3 city1)
+    num: (onboard plane1) 0 -> 1
+fly-fast plane1 city1 city1 :: cost: 0
+    add:
+    del:
+    num:
+fly-slow plane1 city1 city1 :: cost: 0
+    add:
+    del:
+    num:
+ground atoms: 9 groundings: 11

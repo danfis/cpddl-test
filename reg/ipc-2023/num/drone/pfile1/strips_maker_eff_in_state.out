@@ -1,0 +1,76 @@
+step 0: state 0 applicable 5
+    state:
+    num: (x) = 0 (y) = 0 (z) = 0 (battery-level) = 9
+increase_x :: cost: 1 [successor]
+    add:
+    del:
+    num: (x) 0 -> 1 (battery-level) 9 -> 8
+increase_y :: cost: 1
+    add:
+    del:
+    num: (y) 0 -> 1 (battery-level) 9 -> 8
+increase_z :: cost: 1
+    add:
+    del:
+    num: (z) 0 -> 1 (battery-level) 9 -> 8
+step 1: state 0 applicable 3
+    state:
+    num: (x) = 1 (y) = 0 (z) = 0 (battery-level) = 8
+decrease_x :: cost: 1
+    add:
+    del:
+    num: (x) 1 -> 0 (battery-level) 8 -> 7
+increase_y :: cost: 1 [successor]
+    add:
+    del:
+    num: (y) 0 -> 1 (battery-level) 8 -> 7
+increase_z :: cost: 1
+    add:
+    del:
+    num: (z) 0 -> 1 (battery-level) 8 -> 7
+step 2: state 0 applicable 3
+    state:
+    num: (x) = 1 (y) = 1 (z) = 0 (battery-level) = 7
+decrease_x :: cost: 1
+    add:
+    del:
+    num: (x) 1 -> 0 (battery-level) 7 -> 6
+decrease_y :: cost: 1
+    add:
+    del:
+    num: (y) 1 -> 0 (battery-level) 7 -> 6
+increase_z :: cost: 1 [successor]
+    add:
+    del:
+    num: (z) 0 -> 1 (battery-level) 7 -> 6
+step 3: state 0 applicable 4
+    state:
+    num: (x) = 1 (y) = 1 (z) = 1 (battery-level) = 6
+decrease_x :: cost: 1
+    add:
+    del:
+    num: (x) 1 -> 0 (battery-level) 6 -> 5
+decrease_y :: cost: 1
+    add:
+    del:
+    num: (y) 1 -> 0 (battery-level) 6 -> 5
+decrease_z :: cost: 1 [successor]
+    add:
+    del:
+    num: (z) 1 -> 0 (battery-level) 6 -> 5
+step 4: state 0 applicable 3
+    state:
+    num: (x) = 1 (y) = 1 (z) = 0 (battery-level) = 5
+decrease_x :: cost: 1
+    add:
+    del:
+    num: (x) 1 -> 0 (battery-level) 5 -> 4
+decrease_y :: cost: 1 [successor]
+    add:
+    del:
+    num: (y) 1 -> 0 (battery-level) 5 -> 4
+increase_z :: cost: 1
+    add:
+    del:
+    num: (z) 0 -> 1 (battery-level) 5 -> 4
+ground atoms: 1 groundings: 8

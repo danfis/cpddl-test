@@ -1,4 +1,5 @@
 step 0: state 9 applicable 15
+    state: (NOT-stopped robot-00) (NOT-stopped robot-01) (NOT-stopped robot-02) (at robot-00 location-0013) (at robot-01 location-0000) (at robot-02 location-0028) (battery robot-00 battery-0002) (battery robot-01 battery-0002) (battery robot-02 battery-0010)
 move robot-00 location-0013 location-0004 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0004) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
@@ -8,7 +9,9 @@ move robot-00 location-0013 location-0007 battery-0002 battery-0001 :: cost: 1
 move robot-00 location-0013 location-0009 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0009) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
+    successor: move robot-01 location-0000 location-0019 battery-0002 battery-0001
 step 1: state 9 applicable 18
+    state: (NOT-stopped robot-00) (NOT-stopped robot-01) (NOT-stopped robot-02) (at robot-00 location-0013) (at robot-01 location-0019) (at robot-02 location-0028) (battery robot-00 battery-0002) (battery robot-01 battery-0001) (battery robot-02 battery-0010)
 move robot-00 location-0013 location-0004 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0004) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
@@ -18,7 +21,9 @@ move robot-00 location-0013 location-0007 battery-0002 battery-0001 :: cost: 1
 move robot-00 location-0013 location-0009 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0009) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
+    successor: move robot-02 location-0028 location-0029 battery-0010 battery-0009
 step 2: state 9 applicable 17
+    state: (NOT-stopped robot-00) (NOT-stopped robot-01) (NOT-stopped robot-02) (at robot-00 location-0013) (at robot-01 location-0019) (at robot-02 location-0029) (battery robot-00 battery-0002) (battery robot-01 battery-0001) (battery robot-02 battery-0009)
 move robot-00 location-0013 location-0004 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0004) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
@@ -28,18 +33,21 @@ move robot-00 location-0013 location-0007 battery-0002 battery-0001 :: cost: 1
 move robot-00 location-0013 location-0009 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0009) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
+    successor: stop-and-guard robot-01 location-0019
 step 3: state 14 applicable 11
+    state: (NOT-stopped robot-00) (NOT-stopped robot-02) (at robot-00 location-0013) (at robot-01 location-0019) (at robot-02 location-0029) (battery robot-00 battery-0002) (battery robot-01 battery-0001) (battery robot-02 battery-0009) (guarded location-0000) (guarded location-0015) (guarded location-0016) (guarded location-0018) (guarded location-0019) (guarded location-0020)
 move robot-00 location-0013 location-0004 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0004) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
-move robot-00 location-0013 location-0007 battery-0002 battery-0001 :: cost: 1
+move robot-00 location-0013 location-0007 battery-0002 battery-0001 :: cost: 1 [successor]
     add: (at robot-00 location-0007) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
 move robot-00 location-0013 location-0009 battery-0002 battery-0001 :: cost: 1
     add: (at robot-00 location-0009) (battery robot-00 battery-0001)
     del: (at robot-00 location-0013) (battery robot-00 battery-0002)
 step 4: state 14 applicable 9
-move robot-00 location-0007 location-0004 battery-0001 battery-0000 :: cost: 1
+    state: (NOT-stopped robot-00) (NOT-stopped robot-02) (at robot-00 location-0007) (at robot-01 location-0019) (at robot-02 location-0029) (battery robot-00 battery-0001) (battery robot-01 battery-0001) (battery robot-02 battery-0009) (guarded location-0000) (guarded location-0015) (guarded location-0016) (guarded location-0018) (guarded location-0019) (guarded location-0020)
+move robot-00 location-0007 location-0004 battery-0001 battery-0000 :: cost: 1 [successor]
     add: (at robot-00 location-0004) (battery robot-00 battery-0000)
     del: (at robot-00 location-0007) (battery robot-00 battery-0001)
 move robot-00 location-0007 location-0009 battery-0001 battery-0000 :: cost: 1

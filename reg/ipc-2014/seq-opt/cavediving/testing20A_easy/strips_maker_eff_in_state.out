@@ -1,20 +1,24 @@
 step 0: state 6 applicable 2
-hire-diver d0 :: cost: 10
+    state: (NOT-in-water) (available d0) (available d1) (capacity d0 four) (capacity d1 four) (in-storage t0)
+hire-diver d0 :: cost: 10 [successor]
     add: (at-surface d0)
     del: (NOT-in-water) (available d0) (available d1)
 hire-diver d1 :: cost: 67
     add: (at-surface d1)
     del: (NOT-in-water) (available d1)
 step 1: state 4 applicable 2
-enter-water d0 l0 :: cost: 1
+    state: (at-surface d0) (capacity d0 four) (capacity d1 four) (in-storage t0)
+enter-water d0 l0 :: cost: 1 [successor]
     add: (at-diver d0 l0)
     del: (at-surface d0)
 prepare-tank d0 t0 t1 three four :: cost: 1
     add: (capacity d0 three) (full t0) (holding d0 t0) (in-storage t1)
     del: (capacity d0 four) (in-storage t0)
 step 2: state 4 applicable 1
-decompress d0 l0 :: cost: 1
+    state: (at-diver d0 l0) (capacity d0 four) (capacity d1 four) (in-storage t0)
+decompress d0 l0 :: cost: 1 [successor]
     add: (NOT-in-water) (decompressing d0)
     del: (at-diver d0 l0)
 step 3: state 5 applicable 0
+    state: (NOT-in-water) (capacity d0 four) (capacity d1 four) (decompressing d0) (in-storage t0)
 ground atoms: 14 groundings: 5

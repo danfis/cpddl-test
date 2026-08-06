@@ -1,4 +1,5 @@
 step 0: state 8 applicable 10
+    state: (at truck0 depot0) (money level33) (on-sale goods0 market4) (on-sale goods0 market5) (on-sale goods0 market6) (on-sale goods1 market1) (on-sale goods2 market3) (on-sale goods2 market6)
 buy truck0 goods0 market4 level33 level18 level15 :: cost: 1
     add: (available goods0 market4) (money level15)
     del: (money level33) (on-sale goods0 market4)
@@ -8,7 +9,9 @@ buy truck0 goods0 market5 level33 level9 level24 :: cost: 1
 buy truck0 goods0 market6 level33 level8 level25 :: cost: 1
     add: (available goods0 market6) (money level25)
     del: (money level33) (on-sale goods0 market6)
+    successor: drive truck0 depot0 market3 level33 level2 level31
 step 1: state 8 applicable 8
+    state: (at truck0 market3) (money level31) (on-sale goods0 market4) (on-sale goods0 market5) (on-sale goods0 market6) (on-sale goods1 market1) (on-sale goods2 market3) (on-sale goods2 market6)
 buy truck0 goods0 market4 level31 level18 level13 :: cost: 1
     add: (available goods0 market4) (money level13)
     del: (money level31) (on-sale goods0 market4)
@@ -18,7 +21,9 @@ buy truck0 goods0 market5 level31 level9 level22 :: cost: 1
 buy truck0 goods0 market6 level31 level8 level23 :: cost: 1
     add: (available goods0 market6) (money level23)
     del: (money level31) (on-sale goods0 market6)
+    successor: drive truck0 market3 depot0 level31 level2 level29
 step 2: state 8 applicable 10
+    state: (at truck0 depot0) (money level29) (on-sale goods0 market4) (on-sale goods0 market5) (on-sale goods0 market6) (on-sale goods1 market1) (on-sale goods2 market3) (on-sale goods2 market6)
 buy truck0 goods0 market4 level29 level18 level11 :: cost: 1
     add: (available goods0 market4) (money level11)
     del: (money level29) (on-sale goods0 market4)
@@ -28,7 +33,9 @@ buy truck0 goods0 market5 level29 level9 level20 :: cost: 1
 buy truck0 goods0 market6 level29 level8 level21 :: cost: 1
     add: (available goods0 market6) (money level21)
     del: (money level29) (on-sale goods0 market6)
+    successor: drive truck0 depot0 market5 level29 level18 level11
 step 3: state 8 applicable 4
+    state: (at truck0 market5) (money level11) (on-sale goods0 market4) (on-sale goods0 market5) (on-sale goods0 market6) (on-sale goods1 market1) (on-sale goods2 market3) (on-sale goods2 market6)
 buy truck0 goods0 market5 level11 level9 level2 :: cost: 1
     add: (available goods0 market5) (money level2)
     del: (money level11) (on-sale goods0 market5)
@@ -38,8 +45,10 @@ buy truck0 goods0 market6 level11 level8 level3 :: cost: 1
 buy truck0 goods1 market1 level11 level5 level6 :: cost: 1
     add: (available goods1 market1) (money level6)
     del: (money level11) (on-sale goods1 market1)
+    successor: buy truck0 goods2 market3 level11 level6 level5
 step 4: state 8 applicable 1
-buy truck0 goods1 market1 level5 level5 level0 :: cost: 1
+    state: (at truck0 market5) (available goods2 market3) (money level5) (on-sale goods0 market4) (on-sale goods0 market5) (on-sale goods0 market6) (on-sale goods1 market1) (on-sale goods2 market6)
+buy truck0 goods1 market1 level5 level5 level0 :: cost: 1 [successor]
     add: (available goods1 market1) (money level0)
     del: (money level5) (on-sale goods1 market1)
 ground atoms: 38 groundings: 33

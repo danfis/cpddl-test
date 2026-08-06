@@ -1,0 +1,79 @@
+step 0: state 0 applicable 16
+    state:
+    num: (total_poured) = 0 (total_loaded) = 0 (water_reserve) = 83 (carrying agent1) = 0 (carrying agent2) = 0 (poured plant1) = 0 (poured plant2) = 0 (poured plant3) = 0 (poured plant4) = 0 (poured plant5) = 0 (poured plant6) = 0 (poured plant7) = 0 (poured plant8) = 0 (poured plant9) = 0 (poured plant10) = 0 (poured plant11) = 0 (poured plant12) = 0 (poured plant13) = 0 (poured plant14) = 0 (poured plant15) = 0 (x plant1) = 10 (y plant1) = 8 (x plant2) = 6 (y plant2) = 2 (x plant3) = 2 (y plant3) = 6 (x plant4) = 3 (y plant4) = 5 (x plant5) = 8 (y plant5) = 3 (x plant6) = 1 (y plant6) = 1 (x plant7) = 5 (y plant7) = 8 (x plant8) = 4 (y plant8) = 1 (x plant9) = 12 (y plant9) = 4 (x plant10) = 12 (y plant10) = 7 (x plant11) = 8 (y plant11) = 6 (x plant12) = 1 (y plant12) = 10 (x plant13) = 8 (y plant13) = 12 (x plant14) = 1 (y plant14) = 12 (x plant15) = 11 (y plant15) = 1 (x tap1) = 7 (y tap1) = 8 (x agent1) = 3 (y agent1) = 4 (x agent2) = 7 (y agent2) = 7
+move_down agent1 :: cost: 1
+    add:
+    del:
+    num: (y agent1) 4 -> 3
+move_down agent2 :: cost: 1
+    add:
+    del:
+    num: (y agent2) 7 -> 6
+move_down_left agent1 :: cost: 1
+    add:
+    del:
+    num: (x agent1) 3 -> 2 (y agent1) 4 -> 3
+    successor: move_up agent1
+step 1: state 0 applicable 16
+    state:
+    num: (total_poured) = 0 (total_loaded) = 0 (water_reserve) = 83 (carrying agent1) = 0 (carrying agent2) = 0 (poured plant1) = 0 (poured plant2) = 0 (poured plant3) = 0 (poured plant4) = 0 (poured plant5) = 0 (poured plant6) = 0 (poured plant7) = 0 (poured plant8) = 0 (poured plant9) = 0 (poured plant10) = 0 (poured plant11) = 0 (poured plant12) = 0 (poured plant13) = 0 (poured plant14) = 0 (poured plant15) = 0 (x plant1) = 10 (y plant1) = 8 (x plant2) = 6 (y plant2) = 2 (x plant3) = 2 (y plant3) = 6 (x plant4) = 3 (y plant4) = 5 (x plant5) = 8 (y plant5) = 3 (x plant6) = 1 (y plant6) = 1 (x plant7) = 5 (y plant7) = 8 (x plant8) = 4 (y plant8) = 1 (x plant9) = 12 (y plant9) = 4 (x plant10) = 12 (y plant10) = 7 (x plant11) = 8 (y plant11) = 6 (x plant12) = 1 (y plant12) = 10 (x plant13) = 8 (y plant13) = 12 (x plant14) = 1 (y plant14) = 12 (x plant15) = 11 (y plant15) = 1 (x tap1) = 7 (y tap1) = 8 (x agent1) = 3 (y agent1) = 5 (x agent2) = 7 (y agent2) = 7
+move_down agent1 :: cost: 1
+    add:
+    del:
+    num: (y agent1) 5 -> 4
+move_down agent2 :: cost: 1
+    add:
+    del:
+    num: (y agent2) 7 -> 6
+move_down_left agent1 :: cost: 1
+    add:
+    del:
+    num: (x agent1) 3 -> 2 (y agent1) 5 -> 4
+    successor: move_up agent2
+step 2: state 0 applicable 17
+    state:
+    num: (total_poured) = 0 (total_loaded) = 0 (water_reserve) = 83 (carrying agent1) = 0 (carrying agent2) = 0 (poured plant1) = 0 (poured plant2) = 0 (poured plant3) = 0 (poured plant4) = 0 (poured plant5) = 0 (poured plant6) = 0 (poured plant7) = 0 (poured plant8) = 0 (poured plant9) = 0 (poured plant10) = 0 (poured plant11) = 0 (poured plant12) = 0 (poured plant13) = 0 (poured plant14) = 0 (poured plant15) = 0 (x plant1) = 10 (y plant1) = 8 (x plant2) = 6 (y plant2) = 2 (x plant3) = 2 (y plant3) = 6 (x plant4) = 3 (y plant4) = 5 (x plant5) = 8 (y plant5) = 3 (x plant6) = 1 (y plant6) = 1 (x plant7) = 5 (y plant7) = 8 (x plant8) = 4 (y plant8) = 1 (x plant9) = 12 (y plant9) = 4 (x plant10) = 12 (y plant10) = 7 (x plant11) = 8 (y plant11) = 6 (x plant12) = 1 (y plant12) = 10 (x plant13) = 8 (y plant13) = 12 (x plant14) = 1 (y plant14) = 12 (x plant15) = 11 (y plant15) = 1 (x tap1) = 7 (y tap1) = 8 (x agent1) = 3 (y agent1) = 5 (x agent2) = 7 (y agent2) = 8
+load agent2 tap1 :: cost: 1
+    add:
+    del:
+    num: (total_loaded) 0 -> 1 (water_reserve) 83 -> 82 (carrying agent2) 0 -> 1
+move_down agent1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (y agent1) 5 -> 4
+move_down agent2 :: cost: 1
+    add:
+    del:
+    num: (y agent2) 8 -> 7
+step 3: state 0 applicable 17
+    state:
+    num: (total_poured) = 0 (total_loaded) = 0 (water_reserve) = 83 (carrying agent1) = 0 (carrying agent2) = 0 (poured plant1) = 0 (poured plant2) = 0 (poured plant3) = 0 (poured plant4) = 0 (poured plant5) = 0 (poured plant6) = 0 (poured plant7) = 0 (poured plant8) = 0 (poured plant9) = 0 (poured plant10) = 0 (poured plant11) = 0 (poured plant12) = 0 (poured plant13) = 0 (poured plant14) = 0 (poured plant15) = 0 (x plant1) = 10 (y plant1) = 8 (x plant2) = 6 (y plant2) = 2 (x plant3) = 2 (y plant3) = 6 (x plant4) = 3 (y plant4) = 5 (x plant5) = 8 (y plant5) = 3 (x plant6) = 1 (y plant6) = 1 (x plant7) = 5 (y plant7) = 8 (x plant8) = 4 (y plant8) = 1 (x plant9) = 12 (y plant9) = 4 (x plant10) = 12 (y plant10) = 7 (x plant11) = 8 (y plant11) = 6 (x plant12) = 1 (y plant12) = 10 (x plant13) = 8 (y plant13) = 12 (x plant14) = 1 (y plant14) = 12 (x plant15) = 11 (y plant15) = 1 (x tap1) = 7 (y tap1) = 8 (x agent1) = 3 (y agent1) = 4 (x agent2) = 7 (y agent2) = 8
+load agent2 tap1 :: cost: 1
+    add:
+    del:
+    num: (total_loaded) 0 -> 1 (water_reserve) 83 -> 82 (carrying agent2) 0 -> 1
+move_down agent1 :: cost: 1
+    add:
+    del:
+    num: (y agent1) 4 -> 3
+move_down agent2 :: cost: 1 [successor]
+    add:
+    del:
+    num: (y agent2) 8 -> 7
+step 4: state 0 applicable 16
+    state:
+    num: (total_poured) = 0 (total_loaded) = 0 (water_reserve) = 83 (carrying agent1) = 0 (carrying agent2) = 0 (poured plant1) = 0 (poured plant2) = 0 (poured plant3) = 0 (poured plant4) = 0 (poured plant5) = 0 (poured plant6) = 0 (poured plant7) = 0 (poured plant8) = 0 (poured plant9) = 0 (poured plant10) = 0 (poured plant11) = 0 (poured plant12) = 0 (poured plant13) = 0 (poured plant14) = 0 (poured plant15) = 0 (x plant1) = 10 (y plant1) = 8 (x plant2) = 6 (y plant2) = 2 (x plant3) = 2 (y plant3) = 6 (x plant4) = 3 (y plant4) = 5 (x plant5) = 8 (y plant5) = 3 (x plant6) = 1 (y plant6) = 1 (x plant7) = 5 (y plant7) = 8 (x plant8) = 4 (y plant8) = 1 (x plant9) = 12 (y plant9) = 4 (x plant10) = 12 (y plant10) = 7 (x plant11) = 8 (y plant11) = 6 (x plant12) = 1 (y plant12) = 10 (x plant13) = 8 (y plant13) = 12 (x plant14) = 1 (y plant14) = 12 (x plant15) = 11 (y plant15) = 1 (x tap1) = 7 (y tap1) = 8 (x agent1) = 3 (y agent1) = 4 (x agent2) = 7 (y agent2) = 7
+move_down agent1 :: cost: 1
+    add:
+    del:
+    num: (y agent1) 4 -> 3
+move_down agent2 :: cost: 1
+    add:
+    del:
+    num: (y agent2) 7 -> 6
+move_down_left agent1 :: cost: 1
+    add:
+    del:
+    num: (x agent1) 3 -> 2 (y agent1) 4 -> 3
+    successor: move_right agent1
+ground atoms: 0 groundings: 17

@@ -1,5 +1,6 @@
 step 0: state 16 applicable 8
-do-grind p2 grinder0 verysmooth natural colourfragments untreated :: cost: 15
+    state: (available b0) (available b1) (available p2) (boardsize b0 s3) (boardsize b1 s3) (colour p2 natural) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition p2 verysmooth) (treatment p2 colourfragments) (unused p0) (unused p1) (wood b0 beech) (wood b1 cherry) (wood p2 beech)
+do-grind p2 grinder0 verysmooth natural colourfragments untreated :: cost: 15 [successor]
     add: (treatment p2 untreated)
     del: (treatment p2 colourfragments)
 do-plane p2 planer0 verysmooth natural colourfragments :: cost: 10
@@ -9,6 +10,7 @@ do-saw-medium b0 p0 saw0 beech rough s3 s2 s1 :: cost: 30
     add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (wood p0 beech)
     del: (unused p0)
 step 1: state 16 applicable 12
+    state: (available b0) (available b1) (available p2) (boardsize b0 s3) (boardsize b1 s3) (colour p2 natural) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition p2 verysmooth) (treatment p2 untreated) (unused p0) (unused p1) (wood b0 beech) (wood b1 cherry) (wood p2 beech)
 do-glaze p2 glazer0 green :: cost: 10
     add: (colour p2 green) (treatment p2 glazed)
     del: (colour p2 natural) (treatment p2 untreated)
@@ -18,7 +20,9 @@ do-glaze p2 glazer0 mauve :: cost: 10
 do-grind p2 grinder0 verysmooth natural untreated untreated :: cost: 15
     add:
     del:
+    successor: do-spray-varnish p2 spray-varnisher0 mauve verysmooth
 step 2: state 16 applicable 8
+    state: (available b0) (available b1) (available p2) (boardsize b0 s3) (boardsize b1 s3) (colour p2 mauve) (empty highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition p2 verysmooth) (treatment p2 varnished) (unused p0) (unused p1) (wood b0 beech) (wood b1 cherry) (wood p2 beech)
 do-grind p2 grinder0 verysmooth mauve varnished colourfragments :: cost: 15
     add: (colour p2 natural) (treatment p2 colourfragments)
     del: (colour p2 mauve) (treatment p2 varnished)
@@ -28,8 +32,10 @@ do-plane p2 planer0 verysmooth mauve varnished :: cost: 10
 do-saw-medium b0 p0 saw0 beech rough s3 s2 s1 :: cost: 30
     add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (wood p0 beech)
     del: (unused p0)
+    successor: load-highspeed-saw b0 highspeed-saw0
 step 3: state 15 applicable 7
-cut-board-medium b0 p0 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
+    state: (available b1) (available p2) (boardsize b0 s3) (boardsize b1 s3) (colour p2 mauve) (in-highspeed-saw b0 highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition p2 verysmooth) (treatment p2 varnished) (unused p0) (unused p1) (wood b0 beech) (wood b1 cherry) (wood p2 beech)
+cut-board-medium b0 p0 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10 [successor]
     add: (available p0) (boardsize b0 s1) (colour p0 natural) (surface-condition p0 rough) (treatment p0 untreated) (wood p0 beech)
     del: (unused p0)
 cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
@@ -39,6 +45,7 @@ do-grind p2 grinder0 verysmooth mauve varnished colourfragments :: cost: 15
     add: (colour p2 natural) (treatment p2 colourfragments)
     del: (colour p2 mauve) (treatment p2 varnished)
 step 4: state 20 applicable 8
+    state: (available b1) (available p0) (available p2) (boardsize b0 s1) (boardsize b0 s3) (boardsize b1 s3) (colour p0 natural) (colour p2 mauve) (in-highspeed-saw b0 highspeed-saw0) (surface-condition b0 rough) (surface-condition b1 rough) (surface-condition p0 rough) (surface-condition p2 verysmooth) (treatment p0 untreated) (treatment p2 varnished) (unused p1) (wood b0 beech) (wood b1 cherry) (wood p0 beech) (wood p2 beech)
 cut-board-medium b0 p1 highspeed-saw0 beech rough s3 s2 s1 :: cost: 10
     add: (available p1) (colour p1 natural) (surface-condition p1 rough) (treatment p1 untreated) (wood p1 beech)
     del: (unused p1)
@@ -48,4 +55,5 @@ do-glaze p0 glazer0 green :: cost: 15
 do-glaze p0 glazer0 mauve :: cost: 15
     add: (colour p0 mauve) (treatment p0 glazed)
     del: (colour p0 natural) (treatment p0 untreated)
+    successor: do-plane p2 planer0 verysmooth mauve varnished
 ground atoms: 42 groundings: 22

@@ -1,25 +1,29 @@
 step 0: state 53 applicable 1
-open-new-stack n0 n1 :: cost: 1
+    state: (not-made p1) (not-made p10) (not-made p11) (not-made p12) (not-made p13) (not-made p14) (not-made p15) (not-made p16) (not-made p17) (not-made p18) (not-made p19) (not-made p2) (not-made p20) (not-made p21) (not-made p22) (not-made p23) (not-made p24) (not-made p25) (not-made p26) (not-made p3) (not-made p4) (not-made p5) (not-made p6) (not-made p7) (not-made p8) (not-made p9) (stacks-avail n0) (waiting o1) (waiting o10) (waiting o11) (waiting o12) (waiting o13) (waiting o14) (waiting o15) (waiting o16) (waiting o17) (waiting o18) (waiting o19) (waiting o2) (waiting o20) (waiting o21) (waiting o22) (waiting o23) (waiting o24) (waiting o25) (waiting o26) (waiting o3) (waiting o4) (waiting o5) (waiting o6) (waiting o7) (waiting o8) (waiting o9)
+open-new-stack n0 n1 :: cost: 1 [successor]
     add: (stacks-avail n1)
     del: (stacks-avail n0)
 step 1: state 53 applicable 27
+    state: (not-made p1) (not-made p10) (not-made p11) (not-made p12) (not-made p13) (not-made p14) (not-made p15) (not-made p16) (not-made p17) (not-made p18) (not-made p19) (not-made p2) (not-made p20) (not-made p21) (not-made p22) (not-made p23) (not-made p24) (not-made p25) (not-made p26) (not-made p3) (not-made p4) (not-made p5) (not-made p6) (not-made p7) (not-made p8) (not-made p9) (stacks-avail n1) (waiting o1) (waiting o10) (waiting o11) (waiting o12) (waiting o13) (waiting o14) (waiting o15) (waiting o16) (waiting o17) (waiting o18) (waiting o19) (waiting o2) (waiting o20) (waiting o21) (waiting o22) (waiting o23) (waiting o24) (waiting o25) (waiting o26) (waiting o3) (waiting o4) (waiting o5) (waiting o6) (waiting o7) (waiting o8) (waiting o9)
 open-new-stack n1 n2 :: cost: 1
     add: (stacks-avail n2)
     del: (stacks-avail n1)
-start-order o1 n1 n0 :: cost: 0
+start-order o1 n1 n0 :: cost: 0 [successor]
     add: (stacks-avail n0) (started o1)
     del: (stacks-avail n1) (waiting o1)
 start-order o10 n1 n0 :: cost: 0
     add: (stacks-avail n0) (started o10)
     del: (stacks-avail n1) (waiting o10)
 step 2: state 53 applicable 2
+    state: (not-made p1) (not-made p10) (not-made p11) (not-made p12) (not-made p13) (not-made p14) (not-made p15) (not-made p16) (not-made p17) (not-made p18) (not-made p19) (not-made p2) (not-made p20) (not-made p21) (not-made p22) (not-made p23) (not-made p24) (not-made p25) (not-made p26) (not-made p3) (not-made p4) (not-made p5) (not-made p6) (not-made p7) (not-made p8) (not-made p9) (stacks-avail n0) (started o1) (waiting o10) (waiting o11) (waiting o12) (waiting o13) (waiting o14) (waiting o15) (waiting o16) (waiting o17) (waiting o18) (waiting o19) (waiting o2) (waiting o20) (waiting o21) (waiting o22) (waiting o23) (waiting o24) (waiting o25) (waiting o26) (waiting o3) (waiting o4) (waiting o5) (waiting o6) (waiting o7) (waiting o8) (waiting o9)
 make-product-p11 :: cost: 0
     add: (made p11)
     del: (not-made p11)
-open-new-stack n0 n1 :: cost: 1
+open-new-stack n0 n1 :: cost: 1 [successor]
     add: (stacks-avail n1)
     del: (stacks-avail n0)
 step 3: state 53 applicable 27
+    state: (not-made p1) (not-made p10) (not-made p11) (not-made p12) (not-made p13) (not-made p14) (not-made p15) (not-made p16) (not-made p17) (not-made p18) (not-made p19) (not-made p2) (not-made p20) (not-made p21) (not-made p22) (not-made p23) (not-made p24) (not-made p25) (not-made p26) (not-made p3) (not-made p4) (not-made p5) (not-made p6) (not-made p7) (not-made p8) (not-made p9) (stacks-avail n1) (started o1) (waiting o10) (waiting o11) (waiting o12) (waiting o13) (waiting o14) (waiting o15) (waiting o16) (waiting o17) (waiting o18) (waiting o19) (waiting o2) (waiting o20) (waiting o21) (waiting o22) (waiting o23) (waiting o24) (waiting o25) (waiting o26) (waiting o3) (waiting o4) (waiting o5) (waiting o6) (waiting o7) (waiting o8) (waiting o9)
 make-product-p11 :: cost: 0
     add: (made p11)
     del: (not-made p11)
@@ -29,11 +33,13 @@ open-new-stack n1 n2 :: cost: 1
 start-order o10 n1 n0 :: cost: 0
     add: (stacks-avail n0) (started o10)
     del: (stacks-avail n1) (waiting o10)
+    successor: start-order o4 n1 n0
 step 4: state 53 applicable 2
+    state: (not-made p1) (not-made p10) (not-made p11) (not-made p12) (not-made p13) (not-made p14) (not-made p15) (not-made p16) (not-made p17) (not-made p18) (not-made p19) (not-made p2) (not-made p20) (not-made p21) (not-made p22) (not-made p23) (not-made p24) (not-made p25) (not-made p26) (not-made p3) (not-made p4) (not-made p5) (not-made p6) (not-made p7) (not-made p8) (not-made p9) (stacks-avail n0) (started o1) (started o4) (waiting o10) (waiting o11) (waiting o12) (waiting o13) (waiting o14) (waiting o15) (waiting o16) (waiting o17) (waiting o18) (waiting o19) (waiting o2) (waiting o20) (waiting o21) (waiting o22) (waiting o23) (waiting o24) (waiting o25) (waiting o26) (waiting o3) (waiting o5) (waiting o6) (waiting o7) (waiting o8) (waiting o9)
 make-product-p11 :: cost: 0
     add: (made p11)
     del: (not-made p11)
-open-new-stack n0 n1 :: cost: 1
+open-new-stack n0 n1 :: cost: 1 [successor]
     add: (stacks-avail n1)
     del: (stacks-avail n0)
 ground atoms: 82 groundings: 29
