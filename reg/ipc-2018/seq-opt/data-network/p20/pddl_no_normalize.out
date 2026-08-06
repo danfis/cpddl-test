@@ -2,14 +2,9 @@ Domain: data-network
 Problem: p10-3-20-ring-network-19
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   data - object
   numbers - object
@@ -86,7 +81,7 @@ Function:
   (io-cost server numbers)
   (process-cost script server)
   (send-cost server server numbers)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   load: ?d - data ?s - server ?size - numbers ?limit - numbers ?before - numbers ?after - numbers
       pre: (and (capacity ?s ?limit) (data-size ?d ?size) (less-equal ?after ?limit) (not (cached ?d ?s)) (saved ?d ?s) (sum ?before ?size ?after) (usage ?s ?before))

@@ -1,15 +1,9 @@
 Domain: num-cost-decrease
 Problem: num-cost-decrease-01
 Require:
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :numeric-fluents
   :strips
   :typing
-  :universal-preconditions
 Type:
   loc - object
   object
@@ -23,7 +17,7 @@ Predicate:
   (conn loc loc)
 Function:
   (h loc)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   move: ?a - loc ?b - loc
       pre: (and (at ?a) (conn ?a ?b))

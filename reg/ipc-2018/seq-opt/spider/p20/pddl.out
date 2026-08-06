@@ -90,7 +90,7 @@ Predicate:
   (part-of-tableau cardposition tableau)
   (to-deal card tableau deal cardposition)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   change-tableau-and-continue: ?c - card ?tbefore - tableau ?t - tableau ?next - card
       pre: (and (NOT-currently-collecting-deck) (currently-updating-part-of-tableau) (make-part-of-tableau ?c ?t) (on ?next ?c) (part-of-tableau ?c ?tbefore))

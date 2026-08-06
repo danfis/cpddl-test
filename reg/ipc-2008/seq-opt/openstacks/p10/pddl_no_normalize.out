@@ -2,10 +2,6 @@ Domain: openstacks-sequencedstrips-adl
 Problem: os-sequencedstrips-p14_1
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
@@ -69,7 +65,7 @@ Predicate:
   (started order)
   (waiting order)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   make-product: ?p - product
       pre: (and (forall (?o - order) (imply (includes ?o ?p) (started ?o))) (not (made ?p)))

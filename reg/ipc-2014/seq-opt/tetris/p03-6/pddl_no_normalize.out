@@ -2,14 +2,10 @@ Domain: tetris
 Problem: tetris-6-4-5911272
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
   :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   object
   one_square - pieces
@@ -56,7 +52,7 @@ Predicate:
   (clear position)
   (connected position position)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   move_l_down: ?xy_initial1 - position ?xy_initial2 - position ?xy_initial3 - position ?xy_final - position ?xy_final2 - position ?element - right_l
       pre: (and (at_right_l ?element ?xy_initial1 ?xy_initial2 ?xy_initial3) (clear ?xy_final) (clear ?xy_final2) (connected ?xy_final2 ?xy_final) (connected ?xy_initial2 ?xy_final) (connected ?xy_initial3 ?xy_final2) (not (= ?xy_final ?xy_final2)))

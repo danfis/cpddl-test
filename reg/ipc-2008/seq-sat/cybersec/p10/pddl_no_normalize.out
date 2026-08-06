@@ -2,14 +2,7 @@ Domain: grounded-strips-dms
 Problem: grounded-strips-demo
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
-  :typing
-  :universal-preconditions
 Type:
   object
 Obj:
@@ -550,7 +543,7 @@ Predicate:
   (wtmp-bob_uid-yeti)
   (wtmp-greg_uid-sherpa)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   auth_to_dms-everest-bob_dms_pwd-bob_uid-dmss1:
       pre: (and (connected-dmss1) (dms_session_pwd-dmss1-bob_dms_pwd) (not-dms_established-dmss1) (pmode-m_dms_auth))

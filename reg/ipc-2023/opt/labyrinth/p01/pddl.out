@@ -56,7 +56,7 @@ Predicate:
 Function:
   (move-card)
   (move-robot-cost)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   leave: ?c - card ?prow - gridpos ?pcolumn - gridpos
       pre: (and (NOT-cards-moving) (card-at ?c ?prow ?pcolumn) (max-pos ?pcolumn) (max-pos ?prow) (not (blocked ?c s)) (robot-at ?c))

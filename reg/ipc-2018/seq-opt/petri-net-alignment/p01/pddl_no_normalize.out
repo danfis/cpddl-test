@@ -1,14 +1,10 @@
 Domain: petri-net-alignment
 Problem: align
 Require:
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
+  :action-costs
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   event - object
   object
@@ -413,7 +409,7 @@ Predicate:
   (token place)
   (tracepointer event)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   moveinthelog-activitya-ev1-ev2:
       pre: (and (allowed) (tracepointer ev1))

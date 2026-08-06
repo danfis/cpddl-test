@@ -91,7 +91,7 @@ Function:
   (grind-cost part)
   (plane-cost part)
   (spray-varnish-cost part)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   cut-board-large: ?b - board ?p - part ?m - highspeed-saw ?w - awood ?surface - surface ?size_before - aboardsize ?s1 - aboardsize ?s2 - aboardsize ?size_after - aboardsize
       pre: (and (boardsize ?b ?size_before) (boardsize-successor ?s1 ?s2) (boardsize-successor ?s2 ?size_before) (boardsize-successor ?size_after ?s1) (goalsize ?p large) (in-highspeed-saw ?b ?m) (surface-condition ?b ?surface) (unused ?p) (wood ?b ?w))

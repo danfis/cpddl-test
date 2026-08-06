@@ -62,6 +62,6 @@ TEST(pddl_props, pddl)
             == pddlHasNonStaticNegativeConditions(&C.pddl));
     assert(props.is_numeric == pddlIsNumeric(&C.pddl));
     if (props.has_int_action_cost_func)
-        assert(pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl, NULL));
+        assert(pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl));
     pddlPropsFree(&props);
 }

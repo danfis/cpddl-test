@@ -2,14 +2,8 @@ Domain: transport-strips
 Problem: transport-l13-t1-p12---int100n150-m25---int100c150---s1---e0
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   fuellevel - object
   locatable - object
@@ -232,7 +226,7 @@ Predicate:
   (in package truck)
   (sum fuellevel fuellevel fuellevel)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   drive: ?t - truck ?l1 - location ?l2 - location ?fuelpost - fuellevel ?fueldelta - fuellevel ?fuelpre - fuellevel
       pre: (and (at ?t ?l1) (connected ?l1 ?l2) (fuel ?t ?fuelpre) (fuelcost ?fueldelta ?l1 ?l2) (sum ?fuelpost ?fueldelta ?fuelpre))

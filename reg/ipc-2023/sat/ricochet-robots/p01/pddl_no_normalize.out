@@ -2,14 +2,9 @@ Domain: ricochet-robots
 Problem: ricochet-robots-16x16-13-241179
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   cell - object
   direction - object
@@ -292,7 +287,7 @@ Function:
   (go-cost)
   (step-cost)
   (stop-cost)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   go: ?r - robot ?dir - direction
       pre: (and (nothing-is-moving))

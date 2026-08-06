@@ -2,14 +2,8 @@ Domain: barman
 Problem: prob
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   beverage - object
   cocktail - beverage
@@ -59,7 +53,7 @@ Predicate:
   (unshaked shaker)
   (used container beverage)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   clean-shaker: ?h1 - hand ?h2 - hand ?s - shaker
       pre: (and (empty ?s) (handempty ?h2) (holding ?h1 ?s))

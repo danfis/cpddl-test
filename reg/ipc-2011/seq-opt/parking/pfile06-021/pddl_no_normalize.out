@@ -2,14 +2,8 @@ Domain: parking
 Problem: parking
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   car - object
   curb - object
@@ -51,7 +45,7 @@ Predicate:
   (car-clear car)
   (curb-clear curb)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   move-car-to-car: ?car - car ?carsrc - car ?cardest - car
       pre: (and (at-curb ?cardest) (behind-car ?car ?carsrc) (car-clear ?car) (car-clear ?cardest))

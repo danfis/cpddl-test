@@ -2,14 +2,8 @@ Domain: sokoban-sequential
 Problem: p064-microban-sequential
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   direction - object
   location - object
@@ -126,7 +120,7 @@ Predicate:
   (is-nongoal location)
   (move-dir location location direction)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   move: ?p - player ?from - location ?to - location ?dir - direction
       pre: (and (at ?p ?from) (clear ?to) (move-dir ?from ?to ?dir))

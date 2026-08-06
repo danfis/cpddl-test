@@ -1,14 +1,12 @@
 Domain: settlers
 Problem: popt-tiny-06-veryeasy
 Require:
+  :action-costs
   :conditional-effects
-  :disjunctive-preconditions
   :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   coal_atleastlevel - coal_level
   coal_level - object
@@ -200,7 +198,7 @@ Predicate:
   (potential vehicle)
   (space-in vehicle space_level)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   build-cart: ?p - place ?v - vehicle
       pre: (and (available-atleast-timber ?p tl1) (potential ?v))

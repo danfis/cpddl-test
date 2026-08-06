@@ -2,14 +2,9 @@ Domain: openstacks-sequencedstrips-nonadl
 Problem: os-sequencedstrips-p50_3
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   count - object
   object
@@ -177,7 +172,7 @@ Predicate:
   (started order)
   (waiting order)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   make-product-p10:
       pre: (and (not (made p10)) (started o25) (started o46) (started o6) (started o8))

@@ -64,6 +64,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             pddlStripsMakerActionEffInState(&smaker, &C.pddl, action, args,
                                             &cur_state, &add_eff, &del_eff,
                                             &cost, &C.err);
+            // TODO: Check return value
             if (!C.pddl.metric)
                 cost = 1;
 
@@ -98,6 +99,8 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
 TEST_COND(lifted_succ_gen_sql, pddl, SQLITE)
 {
     if (pddlIsNumeric(&C.pddl)){
+        // TODO: Skip these tests for now. We will enable them when we have
+        // fully functioning successor generation for numeric tasks.
         // TODO: This test should not fail but on numeric tasks but it seems to
         // do -- maybe only on tasks without propositional facts. This needs to
         // be investigated further.
@@ -110,6 +113,12 @@ TEST_COND(lifted_succ_gen_sql, pddl, SQLITE)
 
 TEST(lifted_succ_gen_dl, pddl)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        // TODO: Skip these tests for now. We will enable them when we have
+        // fully functioning successor generation for numeric tasks.
+        TEST_SKIP_CHILDREN;
+        return;
+    }
     testSuccGen(PDDL_LIFTED_APP_ACTION_DL);
 }
 

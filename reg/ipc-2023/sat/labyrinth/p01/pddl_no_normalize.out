@@ -2,14 +2,10 @@ Domain: labyrinth
 Problem: labyrinth-size-5-rotations-1-seed-1229
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
   :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   card - object
   direction - object
@@ -71,7 +67,7 @@ Predicate:
 Function:
   (move-card)
   (move-robot-cost)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   leave: ?c - card ?prow - gridpos ?pcolumn - gridpos
       pre: (and (card-at ?c ?prow ?pcolumn) (max-pos ?pcolumn) (max-pos ?prow) (not (blocked ?c s)) (not (cards-moving)) (robot-at ?c))

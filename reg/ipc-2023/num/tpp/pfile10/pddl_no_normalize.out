@@ -1,16 +1,9 @@
 Domain: tpp-metric
 Problem: pfile24
 Require:
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :numeric-fluents
-  :object-fluents
   :strips
   :typing
-  :universal-preconditions
 Type:
   depot - place
   goods - locatable
@@ -80,7 +73,7 @@ Function:
   (on-sale goods market)
   (price goods market)
   (request goods)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   buy-all: ?t - truck ?g - goods ?m - market
       pre: (and (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))

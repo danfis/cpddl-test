@@ -2,14 +2,8 @@ Domain: pegsolitaire-sequential
 Problem: pegsolitaire-sequential-080
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   location - object
   object
@@ -55,7 +49,7 @@ Predicate:
   (move-ended)
   (occupied location)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   end-move: ?loc - location
       pre: (last-visited ?loc)

@@ -81,7 +81,7 @@ Function:
   (io-cost server numbers)
   (process-cost script server)
   (send-cost server server numbers)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   load: ?d - data ?s - server ?size - numbers ?limit - numbers ?before - numbers ?after - numbers
       pre: (and (NOT-cached ?d ?s) (capacity ?s ?limit) (data-size ?d ?size) (less-equal ?after ?limit) (saved ?d ?s) (sum ?before ?size ?after) (usage ?s ?before))

@@ -2,14 +2,8 @@ Domain: upp
 Problem: printjob
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   color_t - object
   image_t - object
@@ -75,7 +69,7 @@ Predicate:
   (stackedin sheet_t location_t)
   (uninitialized)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   blackcontainer-fromime-letter: ?sheet - sheet_t
       pre: (and (available blackcontainer-rsrc) (location ?sheet blackprinter_exit-blackcontainer_entryfromime) (sheetsize ?sheet letter))

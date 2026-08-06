@@ -2,14 +2,11 @@ Domain: folding
 Problem: folding-zigzag-8-7-449788
 Require:
   :action-costs
-  :conditional-effects
   :disjunctive-preconditions
   :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   coord - object
   direction - object
@@ -60,7 +57,7 @@ Predicate:
   (rotating)
 Function:
   (rotate-cost)
-  (total-cost) :total-cost
+  (total-cost)
   (update-cost)
 Action:
   rotate-first-pass-end: ?nstart - node ?r - rotation ?n1 - node ?n2 - node ?n2x - coord ?n2y - coord

@@ -1,14 +1,9 @@
 Domain: floor-tile
 Problem: prob020
 Require:
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
+  :action-costs
   :strips
   :typing
-  :universal-preconditions
 Type:
   color - object
   object
@@ -75,7 +70,7 @@ Predicate:
   (robot-has robot color)
   (up tile tile)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   change-color: ?r - robot ?c - color ?c2 - color
       pre: (and (available-color ?c2) (robot-has ?r ?c))

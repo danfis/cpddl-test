@@ -3,13 +3,9 @@ Problem: citycar-3-3-3
 Require:
   :action-costs
   :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
   :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   car - object
   garage - object
@@ -50,7 +46,7 @@ Predicate:
   (same_line junction junction)
   (starting car garage)
 Function:
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   build_diagonal_oneway: ?xy_initial - junction ?xy_final - junction ?r1 - road
       pre: (and (clear ?xy_final) (diagonal ?xy_initial ?xy_final) (not (in_place ?r1)))

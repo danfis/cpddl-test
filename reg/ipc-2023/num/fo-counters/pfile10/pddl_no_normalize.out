@@ -1,15 +1,9 @@
 Domain: fn-counters
 Problem: instance_11
 Require:
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :numeric-fluents
   :strips
   :typing
-  :universal-preconditions
 Type:
   counter - object
   object
@@ -30,7 +24,7 @@ Predicate:
 Function:
   (max_int)
   (rate_value counter)
-  (total-cost) :total-cost
+  (total-cost)
   (value counter)
 Action:
   decrement: ?c - counter

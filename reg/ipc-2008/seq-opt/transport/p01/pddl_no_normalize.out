@@ -2,14 +2,8 @@ Domain: transport
 Problem: transport-city-sequential-3nodes-1000size-2degree-100mindistance-2trucks-2packages-2008seed
 Require:
   :action-costs
-  :conditional-effects
-  :disjunctive-preconditions
-  :equality
-  :existential-preconditions
-  :negative-preconditions
   :strips
   :typing
-  :universal-preconditions
 Type:
   capacity-number - object
   locatable - object
@@ -40,7 +34,7 @@ Predicate:
   (road location location)
 Function:
   (road-length location location)
-  (total-cost) :total-cost
+  (total-cost)
 Action:
   drive: ?v - vehicle ?l1 - location ?l2 - location
       pre: (and (at ?v ?l1) (road ?l1 ?l2))

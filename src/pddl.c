@@ -77,7 +77,7 @@ TEST(pddl_compile_away_cond_eff, pddl)
 TEST(pddl_is_metric_expressible_as_non_neg_int_action_costs, pddl)
 {
     pddl_bool_t res;
-    res = pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl, NULL);
+    res = pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl);
 
     if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
             || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
@@ -139,7 +139,7 @@ TEST(pddl_compile_metric_into_action_costs, pddl)
         assert(C.pddl.metric);
         assert(pddlFmIsNumExpFluent(&C.pddl.minimize->fm));
         assert(C.pddl.minimize->e.fluent->pred
-                == C.pddl.func.total_cost_func);
+                    == pddlActionCostFuncId(&C.pddl));
         pddlPrintDiff(&copy, &C.pddl, stdout);
         break;
     case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_OK:
@@ -301,6 +301,7 @@ TEST(pddl_no_normalize, r)
     cfg.force_adl = 1;
     int ret = pddlInit(&C.pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
+    pddlSetMinimalRequirements(&C.pddl);
     if (ret != 0)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
