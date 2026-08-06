@@ -1,34 +1,52 @@
 Domain: cond-eff-simplify
 Problem: p01
-Require: ff
-Type[2]:
-    [0]: object, parent: -1
-    [1]: item, parent: 0
-Obj-by-Type:
-    [0]: 0
-    [1]: 0
-Obj[1]:
-    [0]: o, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    pre-a: 1 :: read: 1, write: 0, in-init: 1
-    pre-b: 1 :: read: 1, write: 0, in-init: 1
-    extra: 1 :: read: 1, write: 0, in-init: 1
-    done: 1 :: read: 1, write: 1, in-init: 0
-    eff-entailed-atom: 1 :: read: 1, write: 1, in-init: 0
-    eff-fully-entailed: 1 :: read: 1, write: 1, in-init: 0
-    eff-conflict: 1 :: read: 1, write: 1, in-init: 1
-    eff-untouched: 1 :: read: 1, write: 1, in-init: 0
-Function[0]:
-Action[1]:
-    process: ?x:1
-        pre: (and (R:pre-a ?x) (R:pre-b ?x))
-        eff: (and (RW:done ?x) (when (and (R:pre-a ?x) (R:extra ?x)) (RW:eff-entailed-atom ?x)) (when (and (R:pre-a ?x) (R:pre-b ?x)) (RW:eff-fully-entailed ?x)) (when (N:R:pre-a ?x) (RW:eff-conflict ?x)) (when (R:extra ?x) (RW:eff-untouched ?x)))
-Init[4]:
-  S:(pre-a o)
-  S:(pre-b o)
-  S:(extra o)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  item - object
+  object
+Obj:
+  o - item
+Predicate:
+  (= object object) :eq
+  (done item)
+  (eff-conflict item)
+  (eff-entailed-atom item)
+  (eff-fully-entailed item)
+  (eff-untouched item)
+  (extra item)
+  (pre-a item)
+  (pre-b item)
+Function:
+Action:
+  process: ?x - item
+      pre: (and (pre-a ?x) (pre-b ?x))
+      eff: (and (done ?x) (when (and (extra ?x) (pre-a ?x)) (eff-entailed-atom ?x)) (when (and (pre-a ?x) (pre-b ?x)) (eff-fully-entailed ?x)) (when (extra ?x) (eff-untouched ?x)) (when (not (pre-a ?x)) (eff-conflict ?x)))
+Init:
   (eff-conflict o)
-Init[0]:
-Goal: (and (RW:done o) (RW:eff-entailed-atom o) (RW:eff-fully-entailed o) (RW:eff-conflict o) (RW:eff-untouched o))
-Metric: no-metric
+  (extra o)
+  (pre-a o)
+  (pre-b o)
+Goal:
+  (and (done o) (eff-conflict o) (eff-entailed-atom o) (eff-fully-entailed o) (eff-untouched o))
+Metric:
+Pred prop:
+  (done item): in_goal in_eff
+  (eff-conflict item): in_init in_goal in_eff
+  (eff-entailed-atom item): in_goal in_eff
+  (eff-fully-entailed item): in_goal in_eff
+  (eff-untouched item): in_goal in_eff
+  (extra item): in_init in_pre
+  (pre-a item): in_init in_pre in_pre_neg
+  (pre-b item): in_init in_pre
+Func prop:
+Global prop:
+  has_cond_eff
+  is_unit_cost

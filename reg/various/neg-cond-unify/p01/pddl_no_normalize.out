@@ -1,46 +1,62 @@
 Domain: neg-cond-unify
 Problem: neg-cond-unify-p01
-Require: ff
-Type[2]:
-    [0]: object, parent: -1
-    [1]: obj, parent: 0
-Obj-by-Type:
-    [0]: 0 1
-    [1]: 0 1
-Obj[2]:
-    [0]: o1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: o2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[4]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    p: 1 :: read: 1, write: 1, in-init: 1
-    q: 1 :: read: 1, write: 1, in-init: 0
-    r: 1 :: read: 1, write: 1, in-init: 0
-Function[0]:
-Action[7]:
-    move: ?x:1 ?y:1
-        pre: (RW:p ?x)
-        eff: (and (N:RW:p ?x) (RW:p ?y))
-    cond-add: ?x:1 ?y:1
-        pre: (RW:p ?x)
-        eff: (and (N:RW:p ?x) (when (RW:q ?y) (RW:p ?y)))
-    move-diff: ?x:1 ?y:1
-        pre: (and (N:R:= ?x ?y) (RW:p ?x))
-        eff: (and (N:RW:p ?x) (RW:p ?y))
-    cond-add-diff: ?x:1 ?y:1
-        pre: (RW:p ?x)
-        eff: (and (N:RW:p ?x) (when (and (RW:q ?y) (N:R:= ?x ?y)) (RW:p ?y)))
-    refresh: ?x:1
-        pre: (RW:p ?x)
-        eff: (and (RW:p ?x) (when (RW:q ?x) (N:RW:p ?x)))
-    set-q: ?x:1
-        pre: (RW:r ?x)
-        eff: (RW:q ?x)
-    check: ?x:1
-        pre: (N:RW:p ?x)
-        eff: (RW:r ?x)
-Init[2]:
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  obj - object
+  object
+Obj:
+  o1 - obj
+  o2 - obj
+Predicate:
+  (= object object) :eq
+  (p obj)
+  (q obj)
+  (r obj)
+Function:
+Action:
+  check: ?x - obj
+      pre: (not (p ?x))
+      eff: (r ?x)
+  cond-add-diff: ?x - obj ?y - obj
+      pre: (p ?x)
+      eff: (and (not (p ?x)) (when (and (not (= ?x ?y)) (q ?y)) (p ?y)))
+  cond-add: ?x - obj ?y - obj
+      pre: (p ?x)
+      eff: (and (not (p ?x)) (when (q ?y) (p ?y)))
+  move-diff: ?x - obj ?y - obj
+      pre: (and (not (= ?x ?y)) (p ?x))
+      eff: (and (not (p ?x)) (p ?y))
+  move: ?x - obj ?y - obj
+      pre: (p ?x)
+      eff: (and (not (p ?x)) (p ?y))
+  refresh: ?x - obj
+      pre: (p ?x)
+      eff: (and (p ?x) (when (q ?x) (not (p ?x))))
+  set-q: ?x - obj
+      pre: (r ?x)
+      eff: (q ?x)
+Init:
   (p o1)
   (p o2)
-Init[0]:
-Goal: (and (RW:p o1) (RW:p o2) (RW:r o1))
-Metric: no-metric
+Goal:
+  (and (p o1) (p o2) (r o1))
+Metric:
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (p obj): in_init in_pre in_pre_neg in_goal in_eff
+  (q obj): in_pre in_eff
+  (r obj): in_pre in_goal in_eff
+Func prop:
+Global prop:
+  has_cond_eff
+  has_eq_pred
+  has_non_static_neg_cond
+  is_unit_cost

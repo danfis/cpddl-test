@@ -1,121 +1,132 @@
 Domain: forestfire
 Problem: foresfire01
-Require: 103
-Type[7]:
-    [0]: object, parent: -1
-    [1]: location, parent: 0
-    [2]: locatable, parent: 0
-    [3]: bushes, parent: 1
-    [4]: grass, parent: 1
-    [5]: bot, parent: 2
-    [6]: axe, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10
-    [1]: 2 3 4 5 6 7 8 9 10
-    [2]: 0 1
-    [3]: 9 10
-    [4]: 2 3 4 5 6 7 8
-    [5]: 0
-    [6]: 1
-Obj[11]:
-    [0]: bot1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: axe1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: grass1_1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: grass2_1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: grass3_1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: grass2_2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: grass1_3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: grass2_3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: grass3_3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: bushes1_2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: bushes3_2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[5]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at: 2 1 :: read: 1, write: 1, in-init: 1
-    connected: 1 1 :: read: 1, write: 0, in-init: 1
-    has: 5 6 :: read: 1, write: 1, in-init: 0
-    pond: 4 :: read: 1, write: 0, in-init: 1
-Function[6]:
-    durability: 6 :: read: 1, write: 1, in-init: 1
-    water-capacity: 5 :: read: 1, write: 0, in-init: 1
-    has-water: 5 :: read: 1, write: 1, in-init: 1
-    tree: 1 :: read: 1, write: 1, in-init: 1
-    max-water: 3 :: read: 1, write: 0, in-init: 1
-    fire: 1 :: read: 1, write: 1, in-init: 1
-Action[7]:
-    move-grass: ?r:5 ?x:4 ?y:1
-        pre: (and (R:connected ?x ?y) (RW:at ?r ?x) (<= (tree ?x) 0))
-        eff: (and (N:RW:at ?r ?x) (RW:at ?r ?y))
-    move-bushes: ?r:5 ?x:3 ?y:1
-        pre: (and (R:connected ?x ?y) (RW:at ?r ?x) (<= (tree ?x) 0) (<= (has-water ?r) (max-water ?x)))
-        eff: (and (N:RW:at ?r ?x) (RW:at ?r ?y))
-    drop-water: ?r:5
-        pre: (and (>= (has-water ?r) 1))
-        eff: (and (decrease (has-water ?r) 1))
-    chop-tree: ?r:5 ?ax:6 ?l:1
-        pre: (and (RW:at ?r ?l) (RW:has ?r ?ax) (>= (tree ?l) 1) (>= (durability ?ax) 1))
-        eff: (and (decrease (tree ?l) 1) (decrease (durability ?ax) 1))
-    fill-water: ?r:5 ?x:4
-        pre: (and (R:pond ?x) (RW:at ?r ?x) (< (has-water ?r) (water-capacity ?r)))
-        eff: (and (increase (has-water ?r) 1))
-    pick-ax: ?r:5 ?ax:6 ?l:1
-        pre: (and (RW:at ?r ?l) (RW:at ?ax ?l))
-        eff: (and (N:RW:at ?ax ?l) (RW:has ?r ?ax))
-    put-out-fire: ?r:5 ?l:1
-        pre: (and (RW:at ?r ?l) (>= (fire ?l) 1) (>= (has-water ?r) 1))
-        eff: (and (decrease (fire ?l) 1) (decrease (has-water ?r) 1))
-Init[28]:
-  S:(connected grass1_1 grass2_1)
-  S:(connected grass1_1 bushes1_2)
-  S:(connected grass2_1 grass1_1)
-  S:(connected grass2_1 grass3_1)
-  S:(connected grass2_1 grass2_2)
-  S:(connected grass3_1 grass2_1)
-  S:(connected grass3_1 bushes3_2)
-  S:(connected grass2_2 grass2_1)
-  S:(connected grass2_2 grass2_3)
-  S:(connected grass2_2 bushes1_2)
-  S:(connected grass2_2 bushes3_2)
-  S:(connected grass1_3 grass2_3)
-  S:(connected grass1_3 bushes1_2)
-  S:(connected grass2_3 grass2_2)
-  S:(connected grass2_3 grass1_3)
-  S:(connected grass2_3 grass3_3)
-  S:(connected grass3_3 grass2_3)
-  S:(connected grass3_3 bushes3_2)
-  S:(connected bushes1_2 grass1_1)
-  S:(connected bushes1_2 grass2_2)
-  S:(connected bushes1_2 grass1_3)
-  S:(connected bushes3_2 grass3_1)
-  S:(connected bushes3_2 grass2_2)
-  S:(connected bushes3_2 grass3_3)
-  S:(pond grass1_1)
-  S:(pond grass3_1)
-  (at bot1 grass1_1)
-  (at axe1 grass1_1)
-Init[23]:
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  axe - locatable
+  bot - locatable
+  bushes - location
+  grass - location
+  locatable - object
+  location - object
+  object
+Obj:
+  axe1 - axe
+  bot1 - bot
+  bushes1_2 - bushes
+  bushes3_2 - bushes
+  grass1_1 - grass
+  grass1_3 - grass
+  grass2_1 - grass
+  grass2_2 - grass
+  grass2_3 - grass
+  grass3_1 - grass
+  grass3_3 - grass
+Predicate:
+  (= object object) :eq
+  (at locatable location)
+  (connected location location)
+  (has bot axe)
+  (pond grass)
+Function:
+  (durability axe)
+  (fire location)
+  (has-water bot)
+  (max-water bushes)
+  (tree location)
+  (water-capacity bot)
+Action:
+  chop-tree: ?r - bot ?ax - axe ?l - location
+      pre: (and (>= (durability ?ax) 1) (>= (tree ?l) 1) (at ?r ?l) (has ?r ?ax))
+      eff: (and (decrease (durability ?ax) 1) (decrease (tree ?l) 1))
+  drop-water: ?r - bot
+      pre: (and (>= (has-water ?r) 1))
+      eff: (and (decrease (has-water ?r) 1))
+  fill-water: ?r - bot ?x - grass
+      pre: (and (< (has-water ?r) (water-capacity ?r)) (at ?r ?x) (pond ?x))
+      eff: (and (increase (has-water ?r) 1))
+  move-bushes: ?r - bot ?x - bushes ?y - location
+      pre: (and (<= (has-water ?r) (max-water ?x)) (<= (tree ?x) 0) (at ?r ?x) (connected ?x ?y))
+      eff: (and (at ?r ?y) (not (at ?r ?x)))
+  move-grass: ?r - bot ?x - grass ?y - location
+      pre: (and (<= (tree ?x) 0) (at ?r ?x) (connected ?x ?y))
+      eff: (and (at ?r ?y) (not (at ?r ?x)))
+  pick-ax: ?r - bot ?ax - axe ?l - location
+      pre: (and (at ?ax ?l) (at ?r ?l))
+      eff: (and (has ?r ?ax) (not (at ?ax ?l)))
+  put-out-fire: ?r - bot ?l - location
+      pre: (and (>= (fire ?l) 1) (>= (has-water ?r) 1) (at ?r ?l))
+      eff: (and (decrease (fire ?l) 1) (decrease (has-water ?r) 1))
+Init:
   (= (durability axe1) 3)
-  (= (water-capacity bot1) 3)
-  (= (has-water bot1) 0)
-  (= (tree grass1_1) 0)
-  (= (tree grass2_1) 0)
-  (= (tree grass3_1) 0)
-  (= (tree grass2_2) 3)
-  (= (tree grass1_3) 0)
-  (= (tree grass2_3) 0)
-  (= (tree grass3_3) 0)
-  (= (tree bushes1_2) 0)
-  (= (tree bushes3_2) 0)
-  (= (max-water bushes1_2) 1)
-  (= (max-water bushes3_2) 1)
-  (= (fire grass1_1) 0)
-  (= (fire grass2_1) 0)
-  (= (fire grass3_1) 0)
-  (= (fire grass2_2) 0)
-  (= (fire grass1_3) 0)
-  (= (fire grass2_3) 0)
-  (= (fire grass3_3) 5)
   (= (fire bushes1_2) 0)
   (= (fire bushes3_2) 0)
-Goal: (= (fire grass3_3) 0)
-Metric: no-metric
+  (= (fire grass1_1) 0)
+  (= (fire grass1_3) 0)
+  (= (fire grass2_1) 0)
+  (= (fire grass2_2) 0)
+  (= (fire grass2_3) 0)
+  (= (fire grass3_1) 0)
+  (= (fire grass3_3) 5)
+  (= (has-water bot1) 0)
+  (= (max-water bushes1_2) 1)
+  (= (max-water bushes3_2) 1)
+  (= (tree bushes1_2) 0)
+  (= (tree bushes3_2) 0)
+  (= (tree grass1_1) 0)
+  (= (tree grass1_3) 0)
+  (= (tree grass2_1) 0)
+  (= (tree grass2_2) 3)
+  (= (tree grass2_3) 0)
+  (= (tree grass3_1) 0)
+  (= (tree grass3_3) 0)
+  (= (water-capacity bot1) 3)
+  (at axe1 grass1_1)
+  (at bot1 grass1_1)
+  (connected bushes1_2 grass1_1)
+  (connected bushes1_2 grass1_3)
+  (connected bushes1_2 grass2_2)
+  (connected bushes3_2 grass2_2)
+  (connected bushes3_2 grass3_1)
+  (connected bushes3_2 grass3_3)
+  (connected grass1_1 bushes1_2)
+  (connected grass1_1 grass2_1)
+  (connected grass1_3 bushes1_2)
+  (connected grass1_3 grass2_3)
+  (connected grass2_1 grass1_1)
+  (connected grass2_1 grass2_2)
+  (connected grass2_1 grass3_1)
+  (connected grass2_2 bushes1_2)
+  (connected grass2_2 bushes3_2)
+  (connected grass2_2 grass2_1)
+  (connected grass2_2 grass2_3)
+  (connected grass2_3 grass1_3)
+  (connected grass2_3 grass2_2)
+  (connected grass2_3 grass3_3)
+  (connected grass3_1 bushes3_2)
+  (connected grass3_1 grass2_1)
+  (connected grass3_3 bushes3_2)
+  (connected grass3_3 grass2_3)
+  (pond grass1_1)
+  (pond grass3_1)
+Goal:
+  (= (fire grass3_3) 0)
+Metric:
+Pred prop:
+  (at locatable location): in_init in_pre in_eff
+  (connected location location): in_init in_pre
+  (has bot axe): in_pre in_eff
+  (pond grass): in_init in_pre
+Func prop:
+  (durability axe): in_init init_all_nonneg init_all_int in_pre in_eff
+  (fire location): in_init init_all_nonneg init_all_int in_pre in_goal in_eff
+  (has-water bot): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (max-water bushes): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (tree location): in_init init_all_nonneg init_all_int in_pre in_eff
+  (water-capacity bot): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

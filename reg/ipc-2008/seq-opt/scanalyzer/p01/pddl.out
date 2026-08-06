@@ -1,68 +1,78 @@
 Domain: scanalyzer3d
 Problem: scanalyzer3d-14
-Require: 20003
-Type[3]:
-    [0]: object, parent: -1
-    [1]: segment, parent: 0
-    [2]: car, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11
-    [1]: 6 7 8 9 10 11
-    [2]: 0 1 2 3 4 5
-Obj[12]:
-    [0]: car-in-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: car-in-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: car-in-3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: car-out-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: car-out-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: car-out-3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: seg-in-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: seg-in-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: seg-in-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: seg-out-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: seg-out-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: seg-out-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[5]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    on: 2 1 :: read: 1, write: 1, in-init: 1
-    analyzed: 2 :: read: 1, write: 1, in-init: 0
-    cycle-2: 1 1 :: read: 1, write: 0, in-init: 1
-    cycle-2-with-analysis: 1 1 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[2]:
-    analyze-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2-with-analysis ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (RW:analyzed ?c1) (increase (total-cost) 3))
-    rotate-2: ?s1:1 ?s2:1 ?c1:2 ?c2:2
-        pre: (and (R:cycle-2 ?s1 ?s2) (RW:on ?c1 ?s1) (RW:on ?c2 ?s2))
-        eff: (and (N:RW:on ?c1 ?s1) (RW:on ?c1 ?s2) (RW:on ?c2 ?s1) (N:RW:on ?c2 ?s2) (increase (total-cost) 1))
-Init[24]:
-  S:(cycle-2 seg-in-1 seg-out-1)
-  S:(cycle-2 seg-in-1 seg-out-2)
-  S:(cycle-2 seg-in-1 seg-out-3)
-  S:(cycle-2 seg-in-2 seg-out-1)
-  S:(cycle-2 seg-in-2 seg-out-2)
-  S:(cycle-2 seg-in-2 seg-out-3)
-  S:(cycle-2 seg-in-3 seg-out-1)
-  S:(cycle-2 seg-in-3 seg-out-2)
-  S:(cycle-2 seg-in-3 seg-out-3)
-  S:(cycle-2-with-analysis seg-in-1 seg-out-1)
-  S:(cycle-2-with-analysis seg-in-1 seg-out-2)
-  S:(cycle-2-with-analysis seg-in-1 seg-out-3)
-  S:(cycle-2-with-analysis seg-in-2 seg-out-1)
-  S:(cycle-2-with-analysis seg-in-2 seg-out-2)
-  S:(cycle-2-with-analysis seg-in-2 seg-out-3)
-  S:(cycle-2-with-analysis seg-in-3 seg-out-1)
-  S:(cycle-2-with-analysis seg-in-3 seg-out-2)
-  S:(cycle-2-with-analysis seg-in-3 seg-out-3)
+Require:
+  :action-costs
+  :strips
+  :typing
+Type:
+  car - object
+  object
+  segment - object
+Obj:
+  car-in-1 - car
+  car-in-2 - car
+  car-in-3 - car
+  car-out-1 - car
+  car-out-2 - car
+  car-out-3 - car
+  seg-in-1 - segment
+  seg-in-2 - segment
+  seg-in-3 - segment
+  seg-out-1 - segment
+  seg-out-2 - segment
+  seg-out-3 - segment
+Predicate:
+  (= object object) :eq
+  (analyzed car)
+  (cycle-2 segment segment)
+  (cycle-2-with-analysis segment segment)
+  (on car segment)
+Function:
+  (total-cost) :total-cost
+Action:
+  analyze-2: ?s1 - segment ?s2 - segment ?c1 - car ?c2 - car
+      pre: (and (cycle-2-with-analysis ?s1 ?s2) (on ?c1 ?s1) (on ?c2 ?s2))
+      eff: (and (analyzed ?c1) (increase (total-cost) 3) (not (on ?c1 ?s1)) (not (on ?c2 ?s2)) (on ?c1 ?s2) (on ?c2 ?s1))
+  rotate-2: ?s1 - segment ?s2 - segment ?c1 - car ?c2 - car
+      pre: (and (cycle-2 ?s1 ?s2) (on ?c1 ?s1) (on ?c2 ?s2))
+      eff: (and (increase (total-cost) 1) (not (on ?c1 ?s1)) (not (on ?c2 ?s2)) (on ?c1 ?s2) (on ?c2 ?s1))
+Init:
+  (= (total-cost) 0)
+  (cycle-2 seg-in-1 seg-out-1)
+  (cycle-2 seg-in-1 seg-out-2)
+  (cycle-2 seg-in-1 seg-out-3)
+  (cycle-2 seg-in-2 seg-out-1)
+  (cycle-2 seg-in-2 seg-out-2)
+  (cycle-2 seg-in-2 seg-out-3)
+  (cycle-2 seg-in-3 seg-out-1)
+  (cycle-2 seg-in-3 seg-out-2)
+  (cycle-2 seg-in-3 seg-out-3)
+  (cycle-2-with-analysis seg-in-1 seg-out-1)
+  (cycle-2-with-analysis seg-in-1 seg-out-2)
+  (cycle-2-with-analysis seg-in-1 seg-out-3)
+  (cycle-2-with-analysis seg-in-2 seg-out-1)
+  (cycle-2-with-analysis seg-in-2 seg-out-2)
+  (cycle-2-with-analysis seg-in-2 seg-out-3)
+  (cycle-2-with-analysis seg-in-3 seg-out-1)
+  (cycle-2-with-analysis seg-in-3 seg-out-2)
+  (cycle-2-with-analysis seg-in-3 seg-out-3)
   (on car-in-1 seg-in-1)
   (on car-in-2 seg-in-2)
   (on car-in-3 seg-in-3)
   (on car-out-1 seg-out-1)
   (on car-out-2 seg-out-2)
   (on car-out-3 seg-out-3)
-Init[1]:
-  (= (total-cost) 0)
-Goal: (and (RW:on car-in-1 seg-in-1) (RW:on car-in-2 seg-in-2) (RW:on car-in-3 seg-in-3) (RW:on car-out-1 seg-out-1) (RW:on car-out-2 seg-out-2) (RW:on car-out-3 seg-out-3) (RW:analyzed car-in-1) (RW:analyzed car-in-2) (RW:analyzed car-in-3) (RW:analyzed car-out-1) (RW:analyzed car-out-2) (RW:analyzed car-out-3))
-Metric: (total-cost)
+Goal:
+  (and (analyzed car-in-1) (analyzed car-in-2) (analyzed car-in-3) (analyzed car-out-1) (analyzed car-out-2) (analyzed car-out-3) (on car-in-1 seg-in-1) (on car-in-2 seg-in-2) (on car-in-3 seg-in-3) (on car-out-1 seg-out-1) (on car-out-2 seg-out-2) (on car-out-3 seg-out-3))
+Metric:
+  (total-cost)
+Pred prop:
+  (analyzed car): in_goal in_eff
+  (cycle-2 segment segment): in_init in_pre
+  (cycle-2-with-analysis segment segment): in_init in_pre
+  (on car segment): in_init in_pre in_goal in_eff
+Func prop:
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func

@@ -1,29 +1,37 @@
 Domain: num-float-coef
 Problem: num-float-coef-01
-Require: 103
-Type[2]:
-    [0]: object, parent: -1
-    [1]: farm, parent: 0
-Obj-by-Type:
-    [0]: 0 1
-    [1]: 0 1
-Obj[2]:
-    [0]: f0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: f1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    adj: 1 1 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    x: 1 :: read: 1, write: 1, in-init: 1
-Action[1]:
-    move: ?f1:1 ?f2:1
-        pre: (and (R:adj ?f1 ?f2) (>= (x ?f1) 1))
-        eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))
-Init[2]:
-  S:(adj f0 f1)
-  S:(adj f1 f0)
-Init[2]:
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  farm - object
+  object
+Obj:
+  f0 - farm
+  f1 - farm
+Predicate:
+  (= object object) :eq
+  (adj farm farm)
+Function:
+  (x farm)
+Action:
+  move: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))
+Init:
   (= (x f0) 2.5)
   (= (x f1) 1)
-Goal: (>= (+ (x f0) (* 1.7 (x f1))) 8.4)
-Metric: no-metric
+  (adj f0 f1)
+  (adj f1 f0)
+Goal:
+  (>= (+ (x f0) (* 1.7 (x f1))) 8.4)
+Metric:
+Pred prop:
+  (adj farm farm): in_init in_pre
+Func prop:
+  (x farm): in_init init_all_nonneg in_pre in_goal in_eff
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

@@ -1,32 +1,46 @@
 Domain: num-float-div
 Problem: num-float-div-01
-Require: 1ff
-Type[2]:
-    [0]: object, parent: -1
-    [1]: farm, parent: 0
-Obj-by-Type:
-    [0]: 0 1
-    [1]: 0 1
-Obj[2]:
-    [0]: f0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: f1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    adj: 1 1 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    x: 1 :: read: 1, write: 1, in-init: 1
-Action[2]:
-    move: ?f1:1 ?f2:1
-        pre: (and (R:adj ?f1 ?f2) (>= (x ?f1) 1))
-        eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))
-    halve: ?f:1
-        pre: (>= (x ?f) 1)
-        eff: (assign (x ?f) (/ (x ?f) 2))
-Init[2]:
-  S:(adj f0 f1)
-  S:(adj f1 f0)
-Init[2]:
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :numeric-fluents
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  farm - object
+  object
+Obj:
+  f0 - farm
+  f1 - farm
+Predicate:
+  (= object object) :eq
+  (adj farm farm)
+Function:
+  (x farm)
+Action:
+  halve: ?f - farm
+      pre: (>= (x ?f) 1)
+      eff: (assign (x ?f) (/ (x ?f) 2))
+  move: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))
+Init:
   (= (x f0) 2.5)
   (= (x f1) 1)
-Goal: (>= (x f1) 3)
-Metric: no-metric
+  (adj f0 f1)
+  (adj f1 f0)
+Goal:
+  (>= (x f1) 3)
+Metric:
+Pred prop:
+  (adj farm farm): in_init in_pre
+Func prop:
+  (x farm): in_init init_all_nonneg in_pre in_goal on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(x)
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

@@ -1,80 +1,65 @@
 Domain: zenotravel
 Problem: ztravel-3-8
-Require: 103
-Type[5]:
-    [0]: object, parent: -1
-    [1]: locatable, parent: 0
-    [2]: city, parent: 0
-    [3]: aircraft, parent: 1
-    [4]: person, parent: 1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-    [1]: 0 1 2 3 4 5 6 7 8 9 10
-    [2]: 11 12 13 14 15 16
-    [3]: 0 1 2
-    [4]: 3 4 5 6 7 8 9 10
-Obj[17]:
-    [0]: plane1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: plane2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: plane3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: person1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: person2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: person3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: person4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: person5, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: person6, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: person7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: person8, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: city0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: city1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: city2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: city3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: city4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: city5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[3]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    located: 1 2 :: read: 1, write: 1, in-init: 1
-    in: 4 3 :: read: 1, write: 1, in-init: 0
-Function[7]:
-    fuel: 3 :: read: 1, write: 1, in-init: 1
-    distance: 2 2 :: read: 1, write: 0, in-init: 1
-    slow-burn: 3 :: read: 1, write: 0, in-init: 1
-    fast-burn: 3 :: read: 1, write: 0, in-init: 1
-    capacity: 3 :: read: 1, write: 0, in-init: 1
-    onboard: 3 :: read: 1, write: 1, in-init: 1
-    zoom-limit: 3 :: read: 1, write: 0, in-init: 1
-Action[5]:
-    board: ?p:4 ?a:3 ?c:2
-        pre: (and (RW:located ?p ?c) (RW:located ?a ?c))
-        eff: (and (N:RW:located ?p ?c) (RW:in ?p ?a) (increase (onboard ?a) 1))
-    debark: ?p:4 ?a:3 ?c:2
-        pre: (and (RW:located ?a ?c) (RW:in ?p ?a))
-        eff: (and (RW:located ?p ?c) (N:RW:in ?p ?a) (decrease (onboard ?a) 1))
-    fly-slow: ?a:3 ?c1:2 ?c2:2
-        pre: (and (RW:located ?a ?c1) (>= (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))))
-        eff: (and (N:RW:located ?a ?c1) (RW:located ?a ?c2) (decrease (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))))
-    fly-fast: ?a:3 ?c1:2 ?c2:2
-        pre: (and (RW:located ?a ?c1) (>= (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))) (<= (onboard ?a) (zoom-limit ?a)))
-        eff: (and (N:RW:located ?a ?c1) (RW:located ?a ?c2) (decrease (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))))
-    refuel: ?a:3
-        pre: (and (> (capacity ?a) (fuel ?a)))
-        eff: (and (assign (fuel ?a) (capacity ?a)))
-Init[11]:
-  (located plane1 city2)
-  (located plane2 city3)
-  (located plane3 city5)
-  (located person1 city4)
-  (located person2 city4)
-  (located person3 city0)
-  (located person4 city4)
-  (located person5 city1)
-  (located person6 city2)
-  (located person7 city5)
-  (located person8 city5)
-Init[54]:
-  (= (fuel plane1) 255)
-  (= (fuel plane2) 1966)
-  (= (fuel plane3) 569)
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  aircraft - locatable
+  city - object
+  locatable - object
+  object
+  person - locatable
+Obj:
+  city0 - city
+  city1 - city
+  city2 - city
+  city3 - city
+  city4 - city
+  city5 - city
+  person1 - person
+  person2 - person
+  person3 - person
+  person4 - person
+  person5 - person
+  person6 - person
+  person7 - person
+  person8 - person
+  plane1 - aircraft
+  plane2 - aircraft
+  plane3 - aircraft
+Predicate:
+  (= object object) :eq
+  (in person aircraft)
+  (located locatable city)
+Function:
+  (capacity aircraft)
+  (distance city city)
+  (fast-burn aircraft)
+  (fuel aircraft)
+  (onboard aircraft)
+  (slow-burn aircraft)
+  (zoom-limit aircraft)
+Action:
+  board: ?p - person ?a - aircraft ?c - city
+      pre: (and (located ?a ?c) (located ?p ?c))
+      eff: (and (in ?p ?a) (increase (onboard ?a) 1) (not (located ?p ?c)))
+  debark: ?p - person ?a - aircraft ?c - city
+      pre: (and (in ?p ?a) (located ?a ?c))
+      eff: (and (decrease (onboard ?a) 1) (located ?p ?c) (not (in ?p ?a)))
+  fly-fast: ?a - aircraft ?c1 - city ?c2 - city
+      pre: (and (<= (onboard ?a) (zoom-limit ?a)) (>= (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))) (located ?a ?c1))
+      eff: (and (decrease (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))) (located ?a ?c2) (not (located ?a ?c1)))
+  fly-slow: ?a - aircraft ?c1 - city ?c2 - city
+      pre: (and (>= (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))) (located ?a ?c1))
+      eff: (and (decrease (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))) (located ?a ?c2) (not (located ?a ?c1)))
+  refuel: ?a - aircraft
+      pre: (and (> (capacity ?a) (fuel ?a)))
+      eff: (and (assign (fuel ?a) (capacity ?a)))
+Init:
+  (= (capacity plane1) 6193)
+  (= (capacity plane2) 4406)
+  (= (capacity plane3) 2938)
   (= (distance city0 city0) 0)
   (= (distance city0 city1) 861)
   (= (distance city0 city2) 851)
@@ -111,20 +96,47 @@ Init[54]:
   (= (distance city5 city3) 738)
   (= (distance city5 city4) 853)
   (= (distance city5 city5) 0)
-  (= (slow-burn plane1) 2)
-  (= (slow-burn plane2) 2)
-  (= (slow-burn plane3) 1)
   (= (fast-burn plane1) 7)
   (= (fast-burn plane2) 5)
   (= (fast-burn plane3) 2)
-  (= (capacity plane1) 6193)
-  (= (capacity plane2) 4406)
-  (= (capacity plane3) 2938)
+  (= (fuel plane1) 255)
+  (= (fuel plane2) 1966)
+  (= (fuel plane3) 569)
   (= (onboard plane1) 0)
   (= (onboard plane2) 0)
   (= (onboard plane3) 0)
+  (= (slow-burn plane1) 2)
+  (= (slow-burn plane2) 2)
+  (= (slow-burn plane3) 1)
   (= (zoom-limit plane1) 10)
   (= (zoom-limit plane2) 6)
   (= (zoom-limit plane3) 5)
-Goal: (and (RW:located person1 city2) (RW:located person2 city1) (RW:located person3 city1) (RW:located person4 city4) (RW:located person5 city4) (RW:located person6 city1) (RW:located person7 city3) (RW:located person8 city4))
-Metric: no-metric
+  (located person1 city4)
+  (located person2 city4)
+  (located person3 city0)
+  (located person4 city4)
+  (located person5 city1)
+  (located person6 city2)
+  (located person7 city5)
+  (located person8 city5)
+  (located plane1 city2)
+  (located plane2 city3)
+  (located plane3 city5)
+Goal:
+  (and (located person1 city2) (located person2 city1) (located person3 city1) (located person4 city4) (located person5 city4) (located person6 city1) (located person7 city3) (located person8 city4))
+Metric:
+Pred prop:
+  (in person aircraft): in_pre in_eff
+  (located locatable city): in_init in_pre in_goal in_eff
+Func prop:
+  (capacity aircraft): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (distance city city): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (fast-burn aircraft): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (fuel aircraft): in_init init_all_nonneg init_all_int in_pre in_eff in_eff_by_assign_or_scale rhs_funcs:(capacity distance fast-burn slow-burn)
+  (onboard aircraft): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (slow-burn aircraft): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (zoom-limit aircraft): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

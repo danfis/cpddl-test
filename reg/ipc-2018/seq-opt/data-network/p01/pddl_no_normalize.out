@@ -1,184 +1,105 @@
 Domain: data-network
 Problem: p5-3-10-tiny-network-0
-Require: 200ff
-Type[5]:
-    [0]: object, parent: -1
-    [1]: data, parent: 0
-    [2]: script, parent: 0
-    [3]: server, parent: 0
-    [4]: numbers, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
-    [1]: 0 1 2 3 4
-    [2]: 5 6 7 8 9 10 11 12 13 14
-    [3]: 15 16 17
-    [4]: 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
-Obj[35]:
-    [0]: data-0-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: data-0-5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: data-1-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: data-1-4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: data-2-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: script1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: script2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: script3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: script4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: script5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: script6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: script7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: script8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: script9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: script10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: server1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: server2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: server3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: number0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: number1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: number2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: number3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: number4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: number5, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: number6, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: number7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [26]: number8, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [27]: number9, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [28]: number10, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [29]: number11, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [30]: number12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [31]: number13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [32]: number14, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [33]: number15, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [34]: number16, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[10]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    script-io: 2 1 1 1 :: read: 1, write: 0, in-init: 1
-    connected: 3 3 :: read: 1, write: 0, in-init: 1
-    data-size: 1 4 :: read: 1, write: 0, in-init: 1
-    capacity: 3 4 :: read: 1, write: 0, in-init: 1
-    sum: 4 4 4 :: read: 1, write: 0, in-init: 1
-    less-equal: 4 4 :: read: 1, write: 0, in-init: 1
-    saved: 1 3 :: read: 1, write: 1, in-init: 1
-    cached: 1 3 :: read: 1, write: 1, in-init: 0
-    usage: 3 4 :: read: 1, write: 1, in-init: 1
-Function[4]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-    process-cost: 2 3 :: read: 1, write: 0, in-init: 1
-    send-cost: 3 3 4 :: read: 1, write: 0, in-init: 1
-    io-cost: 3 4 :: read: 1, write: 0, in-init: 1
-Action[5]:
-    release: ?d:1 ?s:3 ?size:4 ?before:4 ?after:4
-        pre: (and (R:data-size ?d ?size) (R:sum ?after ?size ?before) (RW:cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (N:RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) 0))
-    save: ?d:1 ?size:4 ?s:3
-        pre: (and (R:data-size ?d ?size) (RW:cached ?d ?s))
-        eff: (and (RW:saved ?d ?s) (increase (total-cost) (io-cost ?s ?size)))
-    load: ?d:1 ?s:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:data-size ?d ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:saved ?d ?s) (N:RW:cached ?d ?s) (RW:usage ?s ?before))
-        eff: (and (RW:cached ?d ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) (io-cost ?s ?size)))
-    send: ?d:1 ?from:3 ?to:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:connected ?from ?to) (R:data-size ?d ?size) (R:capacity ?to ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?d ?from) (N:RW:cached ?d ?to) (RW:usage ?to ?before))
-        eff: (and (RW:cached ?d ?to) (N:RW:usage ?to ?before) (RW:usage ?to ?after) (increase (total-cost) (send-cost ?from ?to ?size)))
-    process: ?in1:1 ?in2:1 ?out:1 ?sc:2 ?s:3 ?size:4 ?limit:4 ?before:4 ?after:4
-        pre: (and (R:script-io ?sc ?in1 ?in2 ?out) (R:data-size ?out ?size) (R:capacity ?s ?limit) (R:sum ?before ?size ?after) (R:less-equal ?after ?limit) (RW:cached ?in1 ?s) (RW:cached ?in2 ?s) (N:RW:cached ?out ?s) (RW:usage ?s ?before))
-        eff: (and (RW:cached ?out ?s) (N:RW:usage ?s ?before) (RW:usage ?s ?after) (increase (total-cost) (process-cost ?sc ?s)))
-Init[92]:
-  S:(script-io script1 data-0-3 data-0-5 data-1-4)
-  S:(script-io script2 data-0-5 data-0-3 data-1-2)
-  S:(script-io script3 data-1-4 data-0-5 data-2-1)
-  S:(script-io script4 data-0-3 data-0-5 data-1-4)
-  S:(script-io script5 data-1-2 data-0-5 data-2-1)
-  S:(script-io script6 data-1-2 data-0-3 data-2-1)
-  S:(script-io script7 data-0-5 data-0-3 data-1-2)
-  S:(script-io script8 data-1-4 data-1-2 data-2-1)
-  S:(script-io script9 data-0-3 data-0-5 data-1-4)
-  S:(script-io script10 data-1-2 data-1-4 data-2-1)
-  S:(connected server1 server2)
-  S:(connected server1 server3)
-  S:(connected server2 server1)
-  S:(connected server3 server1)
-  S:(data-size data-0-3 number4)
-  S:(data-size data-0-5 number5)
-  S:(data-size data-1-2 number4)
-  S:(data-size data-1-4 number1)
-  S:(data-size data-2-1 number4)
-  S:(capacity server1 number16)
-  S:(capacity server2 number8)
-  S:(capacity server3 number8)
-  S:(sum number0 number1 number1)
-  S:(sum number0 number4 number4)
-  S:(sum number0 number5 number5)
-  S:(sum number1 number1 number2)
-  S:(sum number1 number4 number5)
-  S:(sum number1 number5 number6)
-  S:(sum number2 number1 number3)
-  S:(sum number2 number4 number6)
-  S:(sum number2 number5 number7)
-  S:(sum number3 number1 number4)
-  S:(sum number3 number4 number7)
-  S:(sum number3 number5 number8)
-  S:(sum number4 number1 number5)
-  S:(sum number4 number4 number8)
-  S:(sum number4 number5 number9)
-  S:(sum number5 number1 number6)
-  S:(sum number5 number4 number9)
-  S:(sum number5 number5 number10)
-  S:(sum number6 number1 number7)
-  S:(sum number6 number4 number10)
-  S:(sum number6 number5 number11)
-  S:(sum number7 number1 number8)
-  S:(sum number7 number4 number11)
-  S:(sum number7 number5 number12)
-  S:(sum number8 number1 number9)
-  S:(sum number8 number4 number12)
-  S:(sum number8 number5 number13)
-  S:(sum number9 number1 number10)
-  S:(sum number9 number4 number13)
-  S:(sum number9 number5 number14)
-  S:(sum number10 number1 number11)
-  S:(sum number10 number4 number14)
-  S:(sum number10 number5 number15)
-  S:(sum number11 number1 number12)
-  S:(sum number11 number4 number15)
-  S:(sum number11 number5 number16)
-  S:(sum number12 number1 number13)
-  S:(sum number12 number4 number16)
-  S:(sum number13 number1 number14)
-  S:(sum number14 number1 number15)
-  S:(sum number15 number1 number16)
-  S:(less-equal number1 number8)
-  S:(less-equal number1 number16)
-  S:(less-equal number2 number8)
-  S:(less-equal number2 number16)
-  S:(less-equal number3 number8)
-  S:(less-equal number3 number16)
-  S:(less-equal number4 number8)
-  S:(less-equal number4 number16)
-  S:(less-equal number5 number8)
-  S:(less-equal number5 number16)
-  S:(less-equal number6 number8)
-  S:(less-equal number6 number16)
-  S:(less-equal number7 number8)
-  S:(less-equal number7 number16)
-  S:(less-equal number8 number8)
-  S:(less-equal number8 number16)
-  S:(less-equal number9 number16)
-  S:(less-equal number10 number16)
-  S:(less-equal number11 number16)
-  S:(less-equal number12 number16)
-  S:(less-equal number13 number16)
-  S:(less-equal number14 number16)
-  S:(less-equal number15 number16)
-  S:(less-equal number16 number16)
-  (saved data-0-3 server3)
-  (saved data-0-5 server1)
-  (usage server1 number0)
-  (usage server2 number0)
-  (usage server3 number0)
-Init[52]:
-  (= (total-cost) 0)
+Require:
+  :action-costs
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  data - object
+  numbers - object
+  object
+  script - object
+  server - object
+Obj:
+  data-0-3 - data
+  data-0-5 - data
+  data-1-2 - data
+  data-1-4 - data
+  data-2-1 - data
+  number0 - numbers
+  number1 - numbers
+  number10 - numbers
+  number11 - numbers
+  number12 - numbers
+  number13 - numbers
+  number14 - numbers
+  number15 - numbers
+  number16 - numbers
+  number2 - numbers
+  number3 - numbers
+  number4 - numbers
+  number5 - numbers
+  number6 - numbers
+  number7 - numbers
+  number8 - numbers
+  number9 - numbers
+  script1 - script
+  script10 - script
+  script2 - script
+  script3 - script
+  script4 - script
+  script5 - script
+  script6 - script
+  script7 - script
+  script8 - script
+  script9 - script
+  server1 - server
+  server2 - server
+  server3 - server
+Predicate:
+  (= object object) :eq
+  (cached data server)
+  (capacity server numbers)
+  (connected server server)
+  (data-size data numbers)
+  (less-equal numbers numbers)
+  (saved data server)
+  (script-io script data data data)
+  (sum numbers numbers numbers)
+  (usage server numbers)
+Function:
+  (io-cost server numbers)
+  (process-cost script server)
+  (send-cost server server numbers)
+  (total-cost) :total-cost
+Action:
+  load: ?d - data ?s - server ?size - numbers ?limit - numbers ?before - numbers ?after - numbers
+      pre: (and (capacity ?s ?limit) (data-size ?d ?size) (less-equal ?after ?limit) (not (cached ?d ?s)) (saved ?d ?s) (sum ?before ?size ?after) (usage ?s ?before))
+      eff: (and (cached ?d ?s) (increase (total-cost) (io-cost ?s ?size)) (not (usage ?s ?before)) (usage ?s ?after))
+  process: ?in1 - data ?in2 - data ?out - data ?sc - script ?s - server ?size - numbers ?limit - numbers ?before - numbers ?after - numbers
+      pre: (and (cached ?in1 ?s) (cached ?in2 ?s) (capacity ?s ?limit) (data-size ?out ?size) (less-equal ?after ?limit) (not (cached ?out ?s)) (script-io ?sc ?in1 ?in2 ?out) (sum ?before ?size ?after) (usage ?s ?before))
+      eff: (and (cached ?out ?s) (increase (total-cost) (process-cost ?sc ?s)) (not (usage ?s ?before)) (usage ?s ?after))
+  release: ?d - data ?s - server ?size - numbers ?before - numbers ?after - numbers
+      pre: (and (cached ?d ?s) (data-size ?d ?size) (sum ?after ?size ?before) (usage ?s ?before))
+      eff: (and (increase (total-cost) 0) (not (cached ?d ?s)) (not (usage ?s ?before)) (usage ?s ?after))
+  save: ?d - data ?size - numbers ?s - server
+      pre: (and (cached ?d ?s) (data-size ?d ?size))
+      eff: (and (increase (total-cost) (io-cost ?s ?size)) (saved ?d ?s))
+  send: ?d - data ?from - server ?to - server ?size - numbers ?limit - numbers ?before - numbers ?after - numbers
+      pre: (and (cached ?d ?from) (capacity ?to ?limit) (connected ?from ?to) (data-size ?d ?size) (less-equal ?after ?limit) (not (cached ?d ?to)) (sum ?before ?size ?after) (usage ?to ?before))
+      eff: (and (cached ?d ?to) (increase (total-cost) (send-cost ?from ?to ?size)) (not (usage ?to ?before)) (usage ?to ?after))
+Init:
+  (= (io-cost server1 number1) 5)
+  (= (io-cost server1 number4) 20)
+  (= (io-cost server1 number5) 25)
+  (= (io-cost server2 number1) 1)
+  (= (io-cost server2 number4) 4)
+  (= (io-cost server2 number5) 5)
+  (= (io-cost server3 number1) 1)
+  (= (io-cost server3 number4) 4)
+  (= (io-cost server3 number5) 5)
   (= (process-cost script1 server1) 16)
   (= (process-cost script1 server2) 11)
   (= (process-cost script1 server3) 9)
+  (= (process-cost script10 server1) 22)
+  (= (process-cost script10 server2) 8)
+  (= (process-cost script10 server3) 12)
   (= (process-cost script2 server1) 22)
   (= (process-cost script2 server2) 11)
   (= (process-cost script2 server3) 10)
@@ -203,9 +124,6 @@ Init[52]:
   (= (process-cost script9 server1) 18)
   (= (process-cost script9 server2) 10)
   (= (process-cost script9 server3) 13)
-  (= (process-cost script10 server1) 22)
-  (= (process-cost script10 server2) 8)
-  (= (process-cost script10 server3) 12)
   (= (send-cost server1 server2 number1) 4)
   (= (send-cost server1 server2 number4) 16)
   (= (send-cost server1 server2 number5) 20)
@@ -218,14 +136,119 @@ Init[52]:
   (= (send-cost server3 server1 number1) 6)
   (= (send-cost server3 server1 number4) 24)
   (= (send-cost server3 server1 number5) 30)
-  (= (io-cost server1 number1) 5)
-  (= (io-cost server1 number4) 20)
-  (= (io-cost server1 number5) 25)
-  (= (io-cost server2 number1) 1)
-  (= (io-cost server2 number4) 4)
-  (= (io-cost server2 number5) 5)
-  (= (io-cost server3 number1) 1)
-  (= (io-cost server3 number4) 4)
-  (= (io-cost server3 number5) 5)
-Goal: (and (RW:saved data-2-1 server2))
-Metric: (total-cost)
+  (= (total-cost) 0)
+  (capacity server1 number16)
+  (capacity server2 number8)
+  (capacity server3 number8)
+  (connected server1 server2)
+  (connected server1 server3)
+  (connected server2 server1)
+  (connected server3 server1)
+  (data-size data-0-3 number4)
+  (data-size data-0-5 number5)
+  (data-size data-1-2 number4)
+  (data-size data-1-4 number1)
+  (data-size data-2-1 number4)
+  (less-equal number1 number16)
+  (less-equal number1 number8)
+  (less-equal number10 number16)
+  (less-equal number11 number16)
+  (less-equal number12 number16)
+  (less-equal number13 number16)
+  (less-equal number14 number16)
+  (less-equal number15 number16)
+  (less-equal number16 number16)
+  (less-equal number2 number16)
+  (less-equal number2 number8)
+  (less-equal number3 number16)
+  (less-equal number3 number8)
+  (less-equal number4 number16)
+  (less-equal number4 number8)
+  (less-equal number5 number16)
+  (less-equal number5 number8)
+  (less-equal number6 number16)
+  (less-equal number6 number8)
+  (less-equal number7 number16)
+  (less-equal number7 number8)
+  (less-equal number8 number16)
+  (less-equal number8 number8)
+  (less-equal number9 number16)
+  (saved data-0-3 server3)
+  (saved data-0-5 server1)
+  (script-io script1 data-0-3 data-0-5 data-1-4)
+  (script-io script10 data-1-2 data-1-4 data-2-1)
+  (script-io script2 data-0-5 data-0-3 data-1-2)
+  (script-io script3 data-1-4 data-0-5 data-2-1)
+  (script-io script4 data-0-3 data-0-5 data-1-4)
+  (script-io script5 data-1-2 data-0-5 data-2-1)
+  (script-io script6 data-1-2 data-0-3 data-2-1)
+  (script-io script7 data-0-5 data-0-3 data-1-2)
+  (script-io script8 data-1-4 data-1-2 data-2-1)
+  (script-io script9 data-0-3 data-0-5 data-1-4)
+  (sum number0 number1 number1)
+  (sum number0 number4 number4)
+  (sum number0 number5 number5)
+  (sum number1 number1 number2)
+  (sum number1 number4 number5)
+  (sum number1 number5 number6)
+  (sum number10 number1 number11)
+  (sum number10 number4 number14)
+  (sum number10 number5 number15)
+  (sum number11 number1 number12)
+  (sum number11 number4 number15)
+  (sum number11 number5 number16)
+  (sum number12 number1 number13)
+  (sum number12 number4 number16)
+  (sum number13 number1 number14)
+  (sum number14 number1 number15)
+  (sum number15 number1 number16)
+  (sum number2 number1 number3)
+  (sum number2 number4 number6)
+  (sum number2 number5 number7)
+  (sum number3 number1 number4)
+  (sum number3 number4 number7)
+  (sum number3 number5 number8)
+  (sum number4 number1 number5)
+  (sum number4 number4 number8)
+  (sum number4 number5 number9)
+  (sum number5 number1 number6)
+  (sum number5 number4 number9)
+  (sum number5 number5 number10)
+  (sum number6 number1 number7)
+  (sum number6 number4 number10)
+  (sum number6 number5 number11)
+  (sum number7 number1 number8)
+  (sum number7 number4 number11)
+  (sum number7 number5 number12)
+  (sum number8 number1 number9)
+  (sum number8 number4 number12)
+  (sum number8 number5 number13)
+  (sum number9 number1 number10)
+  (sum number9 number4 number13)
+  (sum number9 number5 number14)
+  (usage server1 number0)
+  (usage server2 number0)
+  (usage server3 number0)
+Goal:
+  (and (saved data-2-1 server2))
+Metric:
+  (total-cost)
+Pred prop:
+  (cached data server): in_pre in_pre_neg in_eff
+  (capacity server numbers): in_init in_pre
+  (connected server server): in_init in_pre
+  (data-size data numbers): in_init in_pre
+  (less-equal numbers numbers): in_init in_pre
+  (saved data server): in_init in_pre in_goal in_eff
+  (script-io script data data data): in_init in_pre
+  (sum numbers numbers numbers): in_init in_pre
+  (usage server numbers): in_init in_pre in_eff
+Func prop:
+  (io-cost server numbers): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (process-cost script server): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (send-cost server server numbers): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(io-cost process-cost send-cost) write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func
+  has_non_static_neg_cond

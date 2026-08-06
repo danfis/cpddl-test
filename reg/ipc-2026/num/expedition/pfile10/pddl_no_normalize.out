@@ -1,72 +1,63 @@
 Domain: expedition
 Problem: instance_2_sled_2
-Require: 3ff
-Type[3]:
-    [0]: object, parent: -1
-    [1]: sled, parent: 0
-    [2]: waypoint, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-    [1]: 0 1
-    [2]: 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-Obj[16]:
-    [0]: s0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: s1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: wa0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: wa1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: wa2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: wa3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: wa4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: wa5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: wa6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: wb0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: wb1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: wb2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: wb3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: wb4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: wb5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: wb6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[3]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at: 1 2 :: read: 1, write: 1, in-init: 1
-    is_next: 2 2 :: read: 1, write: 0, in-init: 1
-Function[3]:
-    sled_supplies: 1 :: read: 1, write: 1, in-init: 1
-    sled_capacity: 1 :: read: 1, write: 0, in-init: 1
-    waypoint_supplies: 2 :: read: 1, write: 1, in-init: 1
-Action[4]:
-    move_forwards: ?s:1 ?w1:2 ?w2:2
-        pre: (and (R:is_next ?w1 ?w2) (RW:at ?s ?w1) (>= (sled_supplies ?s) 1))
-        eff: (and (N:RW:at ?s ?w1) (RW:at ?s ?w2) (decrease (sled_supplies ?s) 1))
-    move_backwards: ?s:1 ?w1:2 ?w2:2
-        pre: (and (R:is_next ?w2 ?w1) (RW:at ?s ?w1) (>= (sled_supplies ?s) 1))
-        eff: (and (N:RW:at ?s ?w1) (RW:at ?s ?w2) (decrease (sled_supplies ?s) 1))
-    store_supplies: ?s:1 ?w:2
-        pre: (and (RW:at ?s ?w) (>= (sled_supplies ?s) 1))
-        eff: (and (increase (waypoint_supplies ?w) 1) (decrease (sled_supplies ?s) 1))
-    retrieve_supplies: ?s:1 ?w:2
-        pre: (and (RW:at ?s ?w) (>= (waypoint_supplies ?w) 1) (> (sled_capacity ?s) (sled_supplies ?s)))
-        eff: (and (decrease (waypoint_supplies ?w) 1) (increase (sled_supplies ?s) 1))
-Init[14]:
-  S:(is_next wa0 wa1)
-  S:(is_next wa1 wa2)
-  S:(is_next wa2 wa3)
-  S:(is_next wa3 wa4)
-  S:(is_next wa4 wa5)
-  S:(is_next wa5 wa6)
-  S:(is_next wb0 wb1)
-  S:(is_next wb1 wb2)
-  S:(is_next wb2 wb3)
-  S:(is_next wb3 wb4)
-  S:(is_next wb4 wb5)
-  S:(is_next wb5 wb6)
-  (at s0 wa0)
-  (at s1 wb0)
-Init[18]:
-  (= (sled_supplies s0) 1)
-  (= (sled_supplies s1) 1)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :numeric-fluents
+  :object-fluents
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  object
+  sled - object
+  waypoint - object
+Obj:
+  s0 - sled
+  s1 - sled
+  wa0 - waypoint
+  wa1 - waypoint
+  wa2 - waypoint
+  wa3 - waypoint
+  wa4 - waypoint
+  wa5 - waypoint
+  wa6 - waypoint
+  wb0 - waypoint
+  wb1 - waypoint
+  wb2 - waypoint
+  wb3 - waypoint
+  wb4 - waypoint
+  wb5 - waypoint
+  wb6 - waypoint
+Predicate:
+  (= object object) :eq
+  (at sled waypoint)
+  (is_next waypoint waypoint)
+Function:
+  (sled_capacity sled)
+  (sled_supplies sled)
+  (waypoint_supplies waypoint)
+Action:
+  move_backwards: ?s - sled ?w1 - waypoint ?w2 - waypoint
+      pre: (and (>= (sled_supplies ?s) 1) (at ?s ?w1) (is_next ?w2 ?w1))
+      eff: (and (at ?s ?w2) (decrease (sled_supplies ?s) 1) (not (at ?s ?w1)))
+  move_forwards: ?s - sled ?w1 - waypoint ?w2 - waypoint
+      pre: (and (>= (sled_supplies ?s) 1) (at ?s ?w1) (is_next ?w1 ?w2))
+      eff: (and (at ?s ?w2) (decrease (sled_supplies ?s) 1) (not (at ?s ?w1)))
+  retrieve_supplies: ?s - sled ?w - waypoint
+      pre: (and (> (sled_capacity ?s) (sled_supplies ?s)) (>= (waypoint_supplies ?w) 1) (at ?s ?w))
+      eff: (and (decrease (waypoint_supplies ?w) 1) (increase (sled_supplies ?s) 1))
+  store_supplies: ?s - sled ?w - waypoint
+      pre: (and (>= (sled_supplies ?s) 1) (at ?s ?w))
+      eff: (and (decrease (sled_supplies ?s) 1) (increase (waypoint_supplies ?w) 1))
+Init:
   (= (sled_capacity s0) 4)
   (= (sled_capacity s1) 4)
+  (= (sled_supplies s0) 1)
+  (= (sled_supplies s1) 1)
   (= (waypoint_supplies wa0) 1000)
   (= (waypoint_supplies wa1) 0)
   (= (waypoint_supplies wa2) 0)
@@ -81,5 +72,31 @@ Init[18]:
   (= (waypoint_supplies wb4) 0)
   (= (waypoint_supplies wb5) 0)
   (= (waypoint_supplies wb6) 0)
-Goal: (and (RW:at s0 wa6) (RW:at s1 wb6))
-Metric: no-metric
+  (at s0 wa0)
+  (at s1 wb0)
+  (is_next wa0 wa1)
+  (is_next wa1 wa2)
+  (is_next wa2 wa3)
+  (is_next wa3 wa4)
+  (is_next wa4 wa5)
+  (is_next wa5 wa6)
+  (is_next wb0 wb1)
+  (is_next wb1 wb2)
+  (is_next wb2 wb3)
+  (is_next wb3 wb4)
+  (is_next wb4 wb5)
+  (is_next wb5 wb6)
+Goal:
+  (and (at s0 wa6) (at s1 wb6))
+Metric:
+Pred prop:
+  (at sled waypoint): in_init in_pre in_goal in_eff
+  (is_next waypoint waypoint): in_init in_pre
+Func prop:
+  (sled_capacity sled): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (sled_supplies sled): in_init init_all_nonneg init_all_int in_pre in_eff
+  (waypoint_supplies waypoint): in_init init_all_nonneg init_all_int in_pre in_eff
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

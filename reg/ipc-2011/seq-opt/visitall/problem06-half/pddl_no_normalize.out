@@ -1,182 +1,194 @@
 Domain: grid-visit-all
 Problem: grid-6
-Require: ff
-Type[2]:
-    [0]: object, parent: -1
-    [1]: place, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
-    [1]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
-Obj[36]:
-    [0]: loc-x0-y0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: loc-x0-y1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: loc-x0-y2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: loc-x0-y3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: loc-x0-y4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: loc-x0-y5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: loc-x1-y0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: loc-x1-y1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: loc-x1-y2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: loc-x1-y3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: loc-x1-y4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: loc-x1-y5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: loc-x2-y0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: loc-x2-y1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: loc-x2-y2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: loc-x2-y3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: loc-x2-y4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: loc-x2-y5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: loc-x3-y0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: loc-x3-y1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: loc-x3-y2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: loc-x3-y3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: loc-x3-y4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: loc-x3-y5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: loc-x4-y0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: loc-x4-y1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [26]: loc-x4-y2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [27]: loc-x4-y3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [28]: loc-x4-y4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [29]: loc-x4-y5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [30]: loc-x5-y0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [31]: loc-x5-y1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [32]: loc-x5-y2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [33]: loc-x5-y3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [34]: loc-x5-y4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [35]: loc-x5-y5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[4]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    connected: 1 1 :: read: 1, write: 0, in-init: 1
-    at-robot: 1 :: read: 1, write: 1, in-init: 1
-    visited: 1 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[1]:
-    move: ?curpos:1 ?nextpos:1
-        pre: (and (R:connected ?curpos ?nextpos) (RW:at-robot ?curpos))
-        eff: (and (N:RW:at-robot ?curpos) (RW:at-robot ?nextpos) (RW:visited ?nextpos))
-Init[122]:
-  S:(connected loc-x0-y0 loc-x0-y1)
-  S:(connected loc-x0-y0 loc-x1-y0)
-  S:(connected loc-x0-y1 loc-x0-y0)
-  S:(connected loc-x0-y1 loc-x0-y2)
-  S:(connected loc-x0-y1 loc-x1-y1)
-  S:(connected loc-x0-y2 loc-x0-y1)
-  S:(connected loc-x0-y2 loc-x0-y3)
-  S:(connected loc-x0-y2 loc-x1-y2)
-  S:(connected loc-x0-y3 loc-x0-y2)
-  S:(connected loc-x0-y3 loc-x0-y4)
-  S:(connected loc-x0-y3 loc-x1-y3)
-  S:(connected loc-x0-y4 loc-x0-y3)
-  S:(connected loc-x0-y4 loc-x0-y5)
-  S:(connected loc-x0-y4 loc-x1-y4)
-  S:(connected loc-x0-y5 loc-x0-y4)
-  S:(connected loc-x0-y5 loc-x1-y5)
-  S:(connected loc-x1-y0 loc-x0-y0)
-  S:(connected loc-x1-y0 loc-x1-y1)
-  S:(connected loc-x1-y0 loc-x2-y0)
-  S:(connected loc-x1-y1 loc-x0-y1)
-  S:(connected loc-x1-y1 loc-x1-y0)
-  S:(connected loc-x1-y1 loc-x1-y2)
-  S:(connected loc-x1-y1 loc-x2-y1)
-  S:(connected loc-x1-y2 loc-x0-y2)
-  S:(connected loc-x1-y2 loc-x1-y1)
-  S:(connected loc-x1-y2 loc-x1-y3)
-  S:(connected loc-x1-y2 loc-x2-y2)
-  S:(connected loc-x1-y3 loc-x0-y3)
-  S:(connected loc-x1-y3 loc-x1-y2)
-  S:(connected loc-x1-y3 loc-x1-y4)
-  S:(connected loc-x1-y3 loc-x2-y3)
-  S:(connected loc-x1-y4 loc-x0-y4)
-  S:(connected loc-x1-y4 loc-x1-y3)
-  S:(connected loc-x1-y4 loc-x1-y5)
-  S:(connected loc-x1-y4 loc-x2-y4)
-  S:(connected loc-x1-y5 loc-x0-y5)
-  S:(connected loc-x1-y5 loc-x1-y4)
-  S:(connected loc-x1-y5 loc-x2-y5)
-  S:(connected loc-x2-y0 loc-x1-y0)
-  S:(connected loc-x2-y0 loc-x2-y1)
-  S:(connected loc-x2-y0 loc-x3-y0)
-  S:(connected loc-x2-y1 loc-x1-y1)
-  S:(connected loc-x2-y1 loc-x2-y0)
-  S:(connected loc-x2-y1 loc-x2-y2)
-  S:(connected loc-x2-y1 loc-x3-y1)
-  S:(connected loc-x2-y2 loc-x1-y2)
-  S:(connected loc-x2-y2 loc-x2-y1)
-  S:(connected loc-x2-y2 loc-x2-y3)
-  S:(connected loc-x2-y2 loc-x3-y2)
-  S:(connected loc-x2-y3 loc-x1-y3)
-  S:(connected loc-x2-y3 loc-x2-y2)
-  S:(connected loc-x2-y3 loc-x2-y4)
-  S:(connected loc-x2-y3 loc-x3-y3)
-  S:(connected loc-x2-y4 loc-x1-y4)
-  S:(connected loc-x2-y4 loc-x2-y3)
-  S:(connected loc-x2-y4 loc-x2-y5)
-  S:(connected loc-x2-y4 loc-x3-y4)
-  S:(connected loc-x2-y5 loc-x1-y5)
-  S:(connected loc-x2-y5 loc-x2-y4)
-  S:(connected loc-x2-y5 loc-x3-y5)
-  S:(connected loc-x3-y0 loc-x2-y0)
-  S:(connected loc-x3-y0 loc-x3-y1)
-  S:(connected loc-x3-y0 loc-x4-y0)
-  S:(connected loc-x3-y1 loc-x2-y1)
-  S:(connected loc-x3-y1 loc-x3-y0)
-  S:(connected loc-x3-y1 loc-x3-y2)
-  S:(connected loc-x3-y1 loc-x4-y1)
-  S:(connected loc-x3-y2 loc-x2-y2)
-  S:(connected loc-x3-y2 loc-x3-y1)
-  S:(connected loc-x3-y2 loc-x3-y3)
-  S:(connected loc-x3-y2 loc-x4-y2)
-  S:(connected loc-x3-y3 loc-x2-y3)
-  S:(connected loc-x3-y3 loc-x3-y2)
-  S:(connected loc-x3-y3 loc-x3-y4)
-  S:(connected loc-x3-y3 loc-x4-y3)
-  S:(connected loc-x3-y4 loc-x2-y4)
-  S:(connected loc-x3-y4 loc-x3-y3)
-  S:(connected loc-x3-y4 loc-x3-y5)
-  S:(connected loc-x3-y4 loc-x4-y4)
-  S:(connected loc-x3-y5 loc-x2-y5)
-  S:(connected loc-x3-y5 loc-x3-y4)
-  S:(connected loc-x3-y5 loc-x4-y5)
-  S:(connected loc-x4-y0 loc-x3-y0)
-  S:(connected loc-x4-y0 loc-x4-y1)
-  S:(connected loc-x4-y0 loc-x5-y0)
-  S:(connected loc-x4-y1 loc-x3-y1)
-  S:(connected loc-x4-y1 loc-x4-y0)
-  S:(connected loc-x4-y1 loc-x4-y2)
-  S:(connected loc-x4-y1 loc-x5-y1)
-  S:(connected loc-x4-y2 loc-x3-y2)
-  S:(connected loc-x4-y2 loc-x4-y1)
-  S:(connected loc-x4-y2 loc-x4-y3)
-  S:(connected loc-x4-y2 loc-x5-y2)
-  S:(connected loc-x4-y3 loc-x3-y3)
-  S:(connected loc-x4-y3 loc-x4-y2)
-  S:(connected loc-x4-y3 loc-x4-y4)
-  S:(connected loc-x4-y3 loc-x5-y3)
-  S:(connected loc-x4-y4 loc-x3-y4)
-  S:(connected loc-x4-y4 loc-x4-y3)
-  S:(connected loc-x4-y4 loc-x4-y5)
-  S:(connected loc-x4-y4 loc-x5-y4)
-  S:(connected loc-x4-y5 loc-x3-y5)
-  S:(connected loc-x4-y5 loc-x4-y4)
-  S:(connected loc-x4-y5 loc-x5-y5)
-  S:(connected loc-x5-y0 loc-x4-y0)
-  S:(connected loc-x5-y0 loc-x5-y1)
-  S:(connected loc-x5-y1 loc-x4-y1)
-  S:(connected loc-x5-y1 loc-x5-y0)
-  S:(connected loc-x5-y1 loc-x5-y2)
-  S:(connected loc-x5-y2 loc-x4-y2)
-  S:(connected loc-x5-y2 loc-x5-y1)
-  S:(connected loc-x5-y2 loc-x5-y3)
-  S:(connected loc-x5-y3 loc-x4-y3)
-  S:(connected loc-x5-y3 loc-x5-y2)
-  S:(connected loc-x5-y3 loc-x5-y4)
-  S:(connected loc-x5-y4 loc-x4-y4)
-  S:(connected loc-x5-y4 loc-x5-y3)
-  S:(connected loc-x5-y4 loc-x5-y5)
-  S:(connected loc-x5-y5 loc-x4-y5)
-  S:(connected loc-x5-y5 loc-x5-y4)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  object
+  place - object
+Obj:
+  loc-x0-y0 - place
+  loc-x0-y1 - place
+  loc-x0-y2 - place
+  loc-x0-y3 - place
+  loc-x0-y4 - place
+  loc-x0-y5 - place
+  loc-x1-y0 - place
+  loc-x1-y1 - place
+  loc-x1-y2 - place
+  loc-x1-y3 - place
+  loc-x1-y4 - place
+  loc-x1-y5 - place
+  loc-x2-y0 - place
+  loc-x2-y1 - place
+  loc-x2-y2 - place
+  loc-x2-y3 - place
+  loc-x2-y4 - place
+  loc-x2-y5 - place
+  loc-x3-y0 - place
+  loc-x3-y1 - place
+  loc-x3-y2 - place
+  loc-x3-y3 - place
+  loc-x3-y4 - place
+  loc-x3-y5 - place
+  loc-x4-y0 - place
+  loc-x4-y1 - place
+  loc-x4-y2 - place
+  loc-x4-y3 - place
+  loc-x4-y4 - place
+  loc-x4-y5 - place
+  loc-x5-y0 - place
+  loc-x5-y1 - place
+  loc-x5-y2 - place
+  loc-x5-y3 - place
+  loc-x5-y4 - place
+  loc-x5-y5 - place
+Predicate:
+  (= object object) :eq
+  (at-robot place)
+  (connected place place)
+  (visited place)
+Function:
+Action:
+  move: ?curpos - place ?nextpos - place
+      pre: (and (at-robot ?curpos) (connected ?curpos ?nextpos))
+      eff: (and (at-robot ?nextpos) (not (at-robot ?curpos)) (visited ?nextpos))
+Init:
   (at-robot loc-x3-y3)
+  (connected loc-x0-y0 loc-x0-y1)
+  (connected loc-x0-y0 loc-x1-y0)
+  (connected loc-x0-y1 loc-x0-y0)
+  (connected loc-x0-y1 loc-x0-y2)
+  (connected loc-x0-y1 loc-x1-y1)
+  (connected loc-x0-y2 loc-x0-y1)
+  (connected loc-x0-y2 loc-x0-y3)
+  (connected loc-x0-y2 loc-x1-y2)
+  (connected loc-x0-y3 loc-x0-y2)
+  (connected loc-x0-y3 loc-x0-y4)
+  (connected loc-x0-y3 loc-x1-y3)
+  (connected loc-x0-y4 loc-x0-y3)
+  (connected loc-x0-y4 loc-x0-y5)
+  (connected loc-x0-y4 loc-x1-y4)
+  (connected loc-x0-y5 loc-x0-y4)
+  (connected loc-x0-y5 loc-x1-y5)
+  (connected loc-x1-y0 loc-x0-y0)
+  (connected loc-x1-y0 loc-x1-y1)
+  (connected loc-x1-y0 loc-x2-y0)
+  (connected loc-x1-y1 loc-x0-y1)
+  (connected loc-x1-y1 loc-x1-y0)
+  (connected loc-x1-y1 loc-x1-y2)
+  (connected loc-x1-y1 loc-x2-y1)
+  (connected loc-x1-y2 loc-x0-y2)
+  (connected loc-x1-y2 loc-x1-y1)
+  (connected loc-x1-y2 loc-x1-y3)
+  (connected loc-x1-y2 loc-x2-y2)
+  (connected loc-x1-y3 loc-x0-y3)
+  (connected loc-x1-y3 loc-x1-y2)
+  (connected loc-x1-y3 loc-x1-y4)
+  (connected loc-x1-y3 loc-x2-y3)
+  (connected loc-x1-y4 loc-x0-y4)
+  (connected loc-x1-y4 loc-x1-y3)
+  (connected loc-x1-y4 loc-x1-y5)
+  (connected loc-x1-y4 loc-x2-y4)
+  (connected loc-x1-y5 loc-x0-y5)
+  (connected loc-x1-y5 loc-x1-y4)
+  (connected loc-x1-y5 loc-x2-y5)
+  (connected loc-x2-y0 loc-x1-y0)
+  (connected loc-x2-y0 loc-x2-y1)
+  (connected loc-x2-y0 loc-x3-y0)
+  (connected loc-x2-y1 loc-x1-y1)
+  (connected loc-x2-y1 loc-x2-y0)
+  (connected loc-x2-y1 loc-x2-y2)
+  (connected loc-x2-y1 loc-x3-y1)
+  (connected loc-x2-y2 loc-x1-y2)
+  (connected loc-x2-y2 loc-x2-y1)
+  (connected loc-x2-y2 loc-x2-y3)
+  (connected loc-x2-y2 loc-x3-y2)
+  (connected loc-x2-y3 loc-x1-y3)
+  (connected loc-x2-y3 loc-x2-y2)
+  (connected loc-x2-y3 loc-x2-y4)
+  (connected loc-x2-y3 loc-x3-y3)
+  (connected loc-x2-y4 loc-x1-y4)
+  (connected loc-x2-y4 loc-x2-y3)
+  (connected loc-x2-y4 loc-x2-y5)
+  (connected loc-x2-y4 loc-x3-y4)
+  (connected loc-x2-y5 loc-x1-y5)
+  (connected loc-x2-y5 loc-x2-y4)
+  (connected loc-x2-y5 loc-x3-y5)
+  (connected loc-x3-y0 loc-x2-y0)
+  (connected loc-x3-y0 loc-x3-y1)
+  (connected loc-x3-y0 loc-x4-y0)
+  (connected loc-x3-y1 loc-x2-y1)
+  (connected loc-x3-y1 loc-x3-y0)
+  (connected loc-x3-y1 loc-x3-y2)
+  (connected loc-x3-y1 loc-x4-y1)
+  (connected loc-x3-y2 loc-x2-y2)
+  (connected loc-x3-y2 loc-x3-y1)
+  (connected loc-x3-y2 loc-x3-y3)
+  (connected loc-x3-y2 loc-x4-y2)
+  (connected loc-x3-y3 loc-x2-y3)
+  (connected loc-x3-y3 loc-x3-y2)
+  (connected loc-x3-y3 loc-x3-y4)
+  (connected loc-x3-y3 loc-x4-y3)
+  (connected loc-x3-y4 loc-x2-y4)
+  (connected loc-x3-y4 loc-x3-y3)
+  (connected loc-x3-y4 loc-x3-y5)
+  (connected loc-x3-y4 loc-x4-y4)
+  (connected loc-x3-y5 loc-x2-y5)
+  (connected loc-x3-y5 loc-x3-y4)
+  (connected loc-x3-y5 loc-x4-y5)
+  (connected loc-x4-y0 loc-x3-y0)
+  (connected loc-x4-y0 loc-x4-y1)
+  (connected loc-x4-y0 loc-x5-y0)
+  (connected loc-x4-y1 loc-x3-y1)
+  (connected loc-x4-y1 loc-x4-y0)
+  (connected loc-x4-y1 loc-x4-y2)
+  (connected loc-x4-y1 loc-x5-y1)
+  (connected loc-x4-y2 loc-x3-y2)
+  (connected loc-x4-y2 loc-x4-y1)
+  (connected loc-x4-y2 loc-x4-y3)
+  (connected loc-x4-y2 loc-x5-y2)
+  (connected loc-x4-y3 loc-x3-y3)
+  (connected loc-x4-y3 loc-x4-y2)
+  (connected loc-x4-y3 loc-x4-y4)
+  (connected loc-x4-y3 loc-x5-y3)
+  (connected loc-x4-y4 loc-x3-y4)
+  (connected loc-x4-y4 loc-x4-y3)
+  (connected loc-x4-y4 loc-x4-y5)
+  (connected loc-x4-y4 loc-x5-y4)
+  (connected loc-x4-y5 loc-x3-y5)
+  (connected loc-x4-y5 loc-x4-y4)
+  (connected loc-x4-y5 loc-x5-y5)
+  (connected loc-x5-y0 loc-x4-y0)
+  (connected loc-x5-y0 loc-x5-y1)
+  (connected loc-x5-y1 loc-x4-y1)
+  (connected loc-x5-y1 loc-x5-y0)
+  (connected loc-x5-y1 loc-x5-y2)
+  (connected loc-x5-y2 loc-x4-y2)
+  (connected loc-x5-y2 loc-x5-y1)
+  (connected loc-x5-y2 loc-x5-y3)
+  (connected loc-x5-y3 loc-x4-y3)
+  (connected loc-x5-y3 loc-x5-y2)
+  (connected loc-x5-y3 loc-x5-y4)
+  (connected loc-x5-y4 loc-x4-y4)
+  (connected loc-x5-y4 loc-x5-y3)
+  (connected loc-x5-y4 loc-x5-y5)
+  (connected loc-x5-y5 loc-x4-y5)
+  (connected loc-x5-y5 loc-x5-y4)
   (visited loc-x3-y3)
-Init[0]:
-Goal: (and (RW:visited loc-x0-y2) (RW:visited loc-x0-y3) (RW:visited loc-x0-y4) (RW:visited loc-x0-y5) (RW:visited loc-x1-y0) (RW:visited loc-x1-y1) (RW:visited loc-x1-y3) (RW:visited loc-x1-y4) (RW:visited loc-x2-y0) (RW:visited loc-x2-y1) (RW:visited loc-x3-y0) (RW:visited loc-x3-y3) (RW:visited loc-x3-y4) (RW:visited loc-x5-y0) (RW:visited loc-x5-y4) (RW:visited loc-x5-y5))
-Metric: no-metric
+Goal:
+  (and (visited loc-x0-y2) (visited loc-x0-y3) (visited loc-x0-y4) (visited loc-x0-y5) (visited loc-x1-y0) (visited loc-x1-y1) (visited loc-x1-y3) (visited loc-x1-y4) (visited loc-x2-y0) (visited loc-x2-y1) (visited loc-x3-y0) (visited loc-x3-y3) (visited loc-x3-y4) (visited loc-x5-y0) (visited loc-x5-y4) (visited loc-x5-y5))
+Metric:
+Pred prop:
+  (at-robot place): in_init in_pre in_eff
+  (connected place place): in_init in_pre
+  (visited place): in_init in_goal in_eff
+Func prop:
+Global prop:
+  is_unit_cost

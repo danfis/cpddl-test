@@ -1,95 +1,117 @@
 Domain: depot
 Problem: depotprob1818
-Require: ff
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12
-Obj[13]:
-    [0]: depot0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: distributor0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: distributor1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: truck0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: pallet0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: pallet1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: pallet2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: crate0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: crate1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: hoist0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: hoist1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: hoist2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[16]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at: 0 0 :: read: 1, write: 1, in-init: 1
-    on: 0 0 :: read: 1, write: 1, in-init: 1
-    in: 0 0 :: read: 1, write: 1, in-init: 0
-    lifting: 0 0 :: read: 1, write: 1, in-init: 0
-    available: 0 :: read: 1, write: 1, in-init: 1
-    clear: 0 :: read: 1, write: 1, in-init: 1
-    place: 0 :: read: 1, write: 0, in-init: 1
-    locatable: 0 :: read: 0, write: 0, in-init: 0
-    depot: 0 :: read: 0, write: 0, in-init: 0
-    distributor: 0 :: read: 0, write: 0, in-init: 0
-    truck: 0 :: read: 1, write: 0, in-init: 1
-    hoist: 0 :: read: 1, write: 0, in-init: 1
-    surface: 0 :: read: 1, write: 0, in-init: 1
-    pallet: 0 :: read: 0, write: 0, in-init: 1
-    crate: 0 :: read: 1, write: 0, in-init: 1
-Function[0]:
-Action[5]:
-    drive: ?x:0 ?y:0 ?z:0
-        pre: (and (R:place ?y) (R:place ?z) (R:truck ?x) (RW:at ?x ?y))
-        eff: (and (N:RW:at ?x ?y) (RW:at ?x ?z))
-    lift: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:hoist ?x) (R:surface ?z) (R:crate ?y) (RW:at ?x ?p) (RW:at ?y ?p) (RW:on ?y ?z) (RW:available ?x) (RW:clear ?y))
-        eff: (and (N:RW:at ?y ?p) (N:RW:on ?y ?z) (RW:lifting ?x ?y) (N:RW:available ?x) (N:RW:clear ?y) (RW:clear ?z))
-    drop: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:hoist ?x) (R:surface ?z) (R:crate ?y) (RW:at ?x ?p) (RW:at ?z ?p) (RW:lifting ?x ?y) (RW:clear ?z))
-        eff: (and (RW:at ?y ?p) (RW:on ?y ?z) (N:RW:lifting ?x ?y) (RW:available ?x) (RW:clear ?y) (N:RW:clear ?z))
-    load: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:truck ?z) (R:hoist ?x) (R:crate ?y) (RW:at ?x ?p) (RW:at ?z ?p) (RW:lifting ?x ?y))
-        eff: (and (RW:in ?y ?z) (N:RW:lifting ?x ?y) (RW:available ?x))
-    unload: ?x:0 ?y:0 ?z:0 ?p:0
-        pre: (and (R:place ?p) (R:truck ?z) (R:hoist ?x) (R:crate ?y) (RW:at ?x ?p) (RW:at ?z ?p) (RW:in ?y ?z) (RW:available ?x))
-        eff: (and (N:RW:in ?y ?z) (RW:lifting ?x ?y) (N:RW:available ?x))
-Init[36]:
-  S:(place depot0)
-  S:(place distributor0)
-  S:(place distributor1)
-  S:(truck truck0)
-  S:(truck truck1)
-  S:(hoist hoist0)
-  S:(hoist hoist1)
-  S:(hoist hoist2)
-  S:(surface pallet0)
-  S:(surface pallet1)
-  S:(surface pallet2)
-  S:(surface crate0)
-  S:(surface crate1)
-  S:(pallet pallet0)
-  S:(pallet pallet1)
-  S:(pallet pallet2)
-  S:(crate crate0)
-  S:(crate crate1)
-  (at truck0 distributor1)
-  (at truck1 depot0)
-  (at pallet0 depot0)
-  (at pallet1 distributor0)
-  (at pallet2 distributor1)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  object
+Obj:
+  crate0 - object
+  crate1 - object
+  depot0 - object
+  distributor0 - object
+  distributor1 - object
+  hoist0 - object
+  hoist1 - object
+  hoist2 - object
+  pallet0 - object
+  pallet1 - object
+  pallet2 - object
+  truck0 - object
+  truck1 - object
+Predicate:
+  (= object object) :eq
+  (at object object)
+  (available object)
+  (clear object)
+  (crate object)
+  (depot object)
+  (distributor object)
+  (hoist object)
+  (in object object)
+  (lifting object object)
+  (locatable object)
+  (on object object)
+  (pallet object)
+  (place object)
+  (surface object)
+  (truck object)
+Function:
+Action:
+  drive: ?x - object ?y - object ?z - object
+      pre: (and (at ?x ?y) (place ?y) (place ?z) (truck ?x))
+      eff: (and (at ?x ?z) (not (at ?x ?y)))
+  drop: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (clear ?z) (crate ?y) (hoist ?x) (lifting ?x ?y) (place ?p) (surface ?z))
+      eff: (and (at ?y ?p) (available ?x) (clear ?y) (not (clear ?z)) (not (lifting ?x ?y)) (on ?y ?z))
+  lift: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?y ?p) (available ?x) (clear ?y) (crate ?y) (hoist ?x) (on ?y ?z) (place ?p) (surface ?z))
+      eff: (and (clear ?z) (lifting ?x ?y) (not (at ?y ?p)) (not (available ?x)) (not (clear ?y)) (not (on ?y ?z)))
+  load: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (crate ?y) (hoist ?x) (lifting ?x ?y) (place ?p) (truck ?z))
+      eff: (and (available ?x) (in ?y ?z) (not (lifting ?x ?y)))
+  unload: ?x - object ?y - object ?z - object ?p - object
+      pre: (and (at ?x ?p) (at ?z ?p) (available ?x) (crate ?y) (hoist ?x) (in ?y ?z) (place ?p) (truck ?z))
+      eff: (and (lifting ?x ?y) (not (available ?x)) (not (in ?y ?z)))
+Init:
   (at crate0 distributor0)
   (at crate1 depot0)
   (at hoist0 depot0)
   (at hoist1 distributor0)
   (at hoist2 distributor1)
-  (on crate0 pallet1)
-  (on crate1 pallet0)
+  (at pallet0 depot0)
+  (at pallet1 distributor0)
+  (at pallet2 distributor1)
+  (at truck0 distributor1)
+  (at truck1 depot0)
   (available hoist0)
   (available hoist1)
   (available hoist2)
-  (clear pallet2)
   (clear crate0)
   (clear crate1)
-Init[0]:
-Goal: (and (RW:on crate0 pallet2) (RW:on crate1 pallet1))
-Metric: no-metric
+  (clear pallet2)
+  (crate crate0)
+  (crate crate1)
+  (hoist hoist0)
+  (hoist hoist1)
+  (hoist hoist2)
+  (on crate0 pallet1)
+  (on crate1 pallet0)
+  (pallet pallet0)
+  (pallet pallet1)
+  (pallet pallet2)
+  (place depot0)
+  (place distributor0)
+  (place distributor1)
+  (surface crate0)
+  (surface crate1)
+  (surface pallet0)
+  (surface pallet1)
+  (surface pallet2)
+  (truck truck0)
+  (truck truck1)
+Goal:
+  (and (on crate0 pallet2) (on crate1 pallet1))
+Metric:
+Pred prop:
+  (at object object): in_init in_pre in_eff
+  (available object): in_init in_pre in_eff
+  (clear object): in_init in_pre in_eff
+  (crate object): in_init in_pre
+  (hoist object): in_init in_pre
+  (in object object): in_pre in_eff
+  (lifting object object): in_pre in_eff
+  (on object object): in_init in_pre in_goal in_eff
+  (pallet object): in_init
+  (place object): in_init in_pre
+  (surface object): in_init in_pre
+  (truck object): in_init in_pre
+Func prop:
+Global prop:
+  is_unit_cost

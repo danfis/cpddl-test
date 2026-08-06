@@ -1,34 +1,45 @@
 Domain: flip
 Problem: flip1
-Require: ff
-Type[3]:
-    [0]: object, parent: -1
-    [1]: row, parent: 0
-    [2]: column, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5
-    [1]: 0 1 2
-    [2]: 3 4 5
-Obj[6]:
-    [0]: r1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: r2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: r3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: c1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: c2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: c3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    white: 1 2 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[2]:
-    flip_row: ?r:1
-        pre: (and)
-        eff: (forall (?c:2 I[0]:?r:1) (and (when (RW:white ?r ?c) (N:RW:white ?r ?c)) (when (N:RW:white ?r ?c) (RW:white ?r ?c))))
-    flip_column: ?c:2
-        pre: (and)
-        eff: (forall (?r:1 I[0]:?c:2) (and (when (RW:white ?r ?c) (N:RW:white ?r ?c)) (when (N:RW:white ?r ?c) (RW:white ?r ?c))))
-Init[1]:
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  column - object
+  object
+  row - object
+Obj:
+  c1 - column
+  c2 - column
+  c3 - column
+  r1 - row
+  r2 - row
+  r3 - row
+Predicate:
+  (= object object) :eq
+  (white row column)
+Function:
+Action:
+  flip_column: ?c - column
+      pre: (and)
+      eff: (forall (?r - row) (and (when (not (white ?r ?c)) (white ?r ?c)) (when (white ?r ?c) (not (white ?r ?c)))))
+  flip_row: ?r - row
+      pre: (and)
+      eff: (forall (?c - column) (and (when (not (white ?r ?c)) (white ?r ?c)) (when (white ?r ?c) (not (white ?r ?c)))))
+Init:
   (white r2 c1)
-Init[0]:
-Goal: (forall (?r:1 ?c:2) (RW:white ?r ?c))
-Metric: no-metric
+Goal:
+  (forall (?r - row ?c - column) (white ?r ?c))
+Metric:
+Pred prop:
+  (white row column): in_init in_pre in_pre_neg in_goal in_eff
+Func prop:
+Global prop:
+  has_cond_eff
+  has_non_static_neg_cond
+  is_unit_cost

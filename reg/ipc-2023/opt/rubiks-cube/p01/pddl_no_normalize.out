@@ -1,78 +1,84 @@
 Domain: rubiks-cube
 Problem: rubiks-cube-shuffle-1
-Require: ff
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5
-Obj[6]:
-    [0]: yellow, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: white, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: blue, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: green, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: orange, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: red, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[21]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    cube1: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube2: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube3: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube4: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube5: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube6: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube7: 0 0 0 :: read: 1, write: 1, in-init: 1
-    cube8: 0 0 0 :: read: 1, write: 1, in-init: 1
-    edge12: 0 0 :: read: 1, write: 1, in-init: 1
-    edge13: 0 0 :: read: 1, write: 1, in-init: 1
-    edge15: 0 0 :: read: 1, write: 1, in-init: 1
-    edge26: 0 0 :: read: 1, write: 1, in-init: 1
-    edge24: 0 0 :: read: 1, write: 1, in-init: 1
-    edge48: 0 0 :: read: 1, write: 1, in-init: 1
-    edge34: 0 0 :: read: 1, write: 1, in-init: 1
-    edge37: 0 0 :: read: 1, write: 1, in-init: 1
-    edge56: 0 0 :: read: 1, write: 1, in-init: 1
-    edge57: 0 0 :: read: 1, write: 1, in-init: 1
-    edge68: 0 0 :: read: 1, write: 1, in-init: 1
-    edge78: 0 0 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[12]:
-    r: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube5 ?x ?y ?z) (and (N:RW:cube5 ?x ?y ?z) (RW:cube7 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube7 ?x ?y ?z) (and (N:RW:cube7 ?x ?y ?z) (RW:cube8 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube8 ?x ?y ?z) (and (N:RW:cube8 ?x ?y ?z) (RW:cube6 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube6 ?x ?y ?z) (and (N:RW:cube6 ?x ?y ?z) (RW:cube5 ?y ?x ?z)))) (forall (?x:0 ?z:0) (when (RW:edge57 ?x ?z) (and (N:RW:edge57 ?x ?z) (RW:edge78 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge78 ?y ?z) (and (N:RW:edge78 ?y ?z) (RW:edge68 ?y ?z)))) (forall (?x:0 ?z:0) (when (RW:edge68 ?x ?z) (and (N:RW:edge68 ?x ?z) (RW:edge56 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge56 ?y ?z) (and (N:RW:edge56 ?y ?z) (RW:edge57 ?y ?z)))))
-    rrev: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube5 ?x ?y ?z) (and (N:RW:cube5 ?x ?y ?z) (RW:cube6 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube6 ?x ?y ?z) (and (N:RW:cube6 ?x ?y ?z) (RW:cube8 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube8 ?x ?y ?z) (and (N:RW:cube8 ?x ?y ?z) (RW:cube7 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube7 ?x ?y ?z) (and (N:RW:cube7 ?x ?y ?z) (RW:cube5 ?y ?x ?z)))) (forall (?x:0 ?z:0) (when (RW:edge57 ?x ?z) (and (N:RW:edge57 ?x ?z) (RW:edge56 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge78 ?y ?z) (and (N:RW:edge78 ?y ?z) (RW:edge57 ?y ?z)))) (forall (?x:0 ?z:0) (when (RW:edge68 ?x ?z) (and (N:RW:edge68 ?x ?z) (RW:edge78 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge56 ?y ?z) (and (N:RW:edge56 ?y ?z) (RW:edge68 ?y ?z)))))
-    l: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube1 ?x ?y ?z) (and (N:RW:cube1 ?x ?y ?z) (RW:cube2 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube3 ?x ?y ?z) (and (N:RW:cube3 ?x ?y ?z) (RW:cube1 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube4 ?x ?y ?z) (and (N:RW:cube4 ?x ?y ?z) (RW:cube3 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube2 ?x ?y ?z) (and (N:RW:cube2 ?x ?y ?z) (RW:cube4 ?y ?x ?z)))) (forall (?x:0 ?z:0) (when (RW:edge13 ?x ?z) (and (N:RW:edge13 ?x ?z) (RW:edge12 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge34 ?y ?z) (and (N:RW:edge34 ?y ?z) (RW:edge13 ?y ?z)))) (forall (?x:0 ?z:0) (when (RW:edge24 ?x ?z) (and (N:RW:edge24 ?x ?z) (RW:edge34 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge12 ?y ?z) (and (N:RW:edge12 ?y ?z) (RW:edge24 ?y ?z)))))
-    lrev: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube1 ?x ?y ?z) (and (N:RW:cube1 ?x ?y ?z) (RW:cube3 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube3 ?x ?y ?z) (and (N:RW:cube3 ?x ?y ?z) (RW:cube4 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube4 ?x ?y ?z) (and (N:RW:cube4 ?x ?y ?z) (RW:cube2 ?y ?x ?z)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube2 ?x ?y ?z) (and (N:RW:cube2 ?x ?y ?z) (RW:cube1 ?y ?x ?z)))) (forall (?x:0 ?z:0) (when (RW:edge13 ?x ?z) (and (N:RW:edge13 ?x ?z) (RW:edge34 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge34 ?y ?z) (and (N:RW:edge34 ?y ?z) (RW:edge24 ?y ?z)))) (forall (?x:0 ?z:0) (when (RW:edge24 ?x ?z) (and (N:RW:edge24 ?x ?z) (RW:edge12 ?x ?z)))) (forall (?y:0 ?z:0) (when (RW:edge12 ?y ?z) (and (N:RW:edge12 ?y ?z) (RW:edge13 ?y ?z)))))
-    d: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube2 ?x ?y ?z) (and (N:RW:cube2 ?x ?y ?z) (RW:cube6 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube6 ?x ?y ?z) (and (N:RW:cube6 ?x ?y ?z) (RW:cube8 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube8 ?x ?y ?z) (and (N:RW:cube8 ?x ?y ?z) (RW:cube4 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube4 ?x ?y ?z) (and (N:RW:cube4 ?x ?y ?z) (RW:cube2 ?x ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge26 ?x ?y) (and (N:RW:edge26 ?x ?y) (RW:edge68 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge68 ?x ?z) (and (N:RW:edge68 ?x ?z) (RW:edge48 ?x ?z)))) (forall (?x:0 ?y:0) (when (RW:edge48 ?x ?y) (and (N:RW:edge48 ?x ?y) (RW:edge24 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge24 ?x ?z) (and (N:RW:edge24 ?x ?z) (RW:edge26 ?x ?z)))))
-    drev: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube2 ?x ?y ?z) (and (N:RW:cube2 ?x ?y ?z) (RW:cube4 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube4 ?x ?y ?z) (and (N:RW:cube4 ?x ?y ?z) (RW:cube8 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube8 ?x ?y ?z) (and (N:RW:cube8 ?x ?y ?z) (RW:cube6 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube6 ?x ?y ?z) (and (N:RW:cube6 ?x ?y ?z) (RW:cube2 ?x ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge26 ?x ?y) (and (N:RW:edge26 ?x ?y) (RW:edge24 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge68 ?x ?z) (and (N:RW:edge68 ?x ?z) (RW:edge26 ?x ?z)))) (forall (?x:0 ?y:0) (when (RW:edge48 ?x ?y) (and (N:RW:edge48 ?x ?y) (RW:edge68 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge24 ?x ?z) (and (N:RW:edge24 ?x ?z) (RW:edge48 ?x ?z)))))
-    u: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube1 ?x ?y ?z) (and (N:RW:cube1 ?x ?y ?z) (RW:cube3 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube5 ?x ?y ?z) (and (N:RW:cube5 ?x ?y ?z) (RW:cube1 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube7 ?x ?y ?z) (and (N:RW:cube7 ?x ?y ?z) (RW:cube5 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube3 ?x ?y ?z) (and (N:RW:cube3 ?x ?y ?z) (RW:cube7 ?x ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge15 ?x ?y) (and (N:RW:edge15 ?x ?y) (RW:edge13 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge57 ?x ?z) (and (N:RW:edge57 ?x ?z) (RW:edge15 ?x ?z)))) (forall (?x:0 ?y:0) (when (RW:edge37 ?x ?y) (and (N:RW:edge37 ?x ?y) (RW:edge57 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge13 ?x ?z) (and (N:RW:edge13 ?x ?z) (RW:edge37 ?x ?z)))))
-    urev: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube1 ?x ?y ?z) (and (N:RW:cube1 ?x ?y ?z) (RW:cube5 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube5 ?x ?y ?z) (and (N:RW:cube5 ?x ?y ?z) (RW:cube7 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube7 ?x ?y ?z) (and (N:RW:cube7 ?x ?y ?z) (RW:cube3 ?x ?z ?y)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube3 ?x ?y ?z) (and (N:RW:cube3 ?x ?y ?z) (RW:cube1 ?x ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge15 ?x ?y) (and (N:RW:edge15 ?x ?y) (RW:edge57 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge57 ?x ?z) (and (N:RW:edge57 ?x ?z) (RW:edge37 ?x ?z)))) (forall (?x:0 ?y:0) (when (RW:edge37 ?x ?y) (and (N:RW:edge37 ?x ?y) (RW:edge13 ?x ?y)))) (forall (?x:0 ?z:0) (when (RW:edge13 ?x ?z) (and (N:RW:edge13 ?x ?z) (RW:edge15 ?x ?z)))))
-    f: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube1 ?x ?y ?z) (and (N:RW:cube1 ?x ?y ?z) (RW:cube5 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube5 ?x ?y ?z) (and (N:RW:cube5 ?x ?y ?z) (RW:cube6 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube6 ?x ?y ?z) (and (N:RW:cube6 ?x ?y ?z) (RW:cube2 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube2 ?x ?y ?z) (and (N:RW:cube2 ?x ?y ?z) (RW:cube1 ?z ?y ?x)))) (forall (?x:0 ?y:0) (when (RW:edge15 ?x ?y) (and (N:RW:edge15 ?x ?y) (RW:edge56 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge56 ?y ?z) (and (N:RW:edge56 ?y ?z) (RW:edge26 ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge26 ?x ?y) (and (N:RW:edge26 ?x ?y) (RW:edge12 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge12 ?y ?z) (and (N:RW:edge12 ?y ?z) (RW:edge15 ?z ?y)))))
-    frev: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube1 ?x ?y ?z) (and (N:RW:cube1 ?x ?y ?z) (RW:cube2 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube2 ?x ?y ?z) (and (N:RW:cube2 ?x ?y ?z) (RW:cube6 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube6 ?x ?y ?z) (and (N:RW:cube6 ?x ?y ?z) (RW:cube5 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube5 ?x ?y ?z) (and (N:RW:cube5 ?x ?y ?z) (RW:cube1 ?z ?y ?x)))) (forall (?x:0 ?y:0) (when (RW:edge15 ?x ?y) (and (N:RW:edge15 ?x ?y) (RW:edge12 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge56 ?y ?z) (and (N:RW:edge56 ?y ?z) (RW:edge15 ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge26 ?x ?y) (and (N:RW:edge26 ?x ?y) (RW:edge56 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge12 ?y ?z) (and (N:RW:edge12 ?y ?z) (RW:edge26 ?z ?y)))))
-    b: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube3 ?x ?y ?z) (and (N:RW:cube3 ?x ?y ?z) (RW:cube4 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube7 ?x ?y ?z) (and (N:RW:cube7 ?x ?y ?z) (RW:cube3 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube8 ?x ?y ?z) (and (N:RW:cube8 ?x ?y ?z) (RW:cube7 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube4 ?x ?y ?z) (and (N:RW:cube4 ?x ?y ?z) (RW:cube8 ?z ?y ?x)))) (forall (?x:0 ?y:0) (when (RW:edge37 ?x ?y) (and (N:RW:edge37 ?x ?y) (RW:edge34 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge78 ?y ?z) (and (N:RW:edge78 ?y ?z) (RW:edge37 ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge48 ?x ?y) (and (N:RW:edge48 ?x ?y) (RW:edge78 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge34 ?y ?z) (and (N:RW:edge34 ?y ?z) (RW:edge48 ?z ?y)))))
-    brev: 
-        pre: (and)
-        eff: (and (forall (?x:0 ?y:0 ?z:0) (when (RW:cube3 ?x ?y ?z) (and (N:RW:cube3 ?x ?y ?z) (RW:cube7 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube7 ?x ?y ?z) (and (N:RW:cube7 ?x ?y ?z) (RW:cube8 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube8 ?x ?y ?z) (and (N:RW:cube8 ?x ?y ?z) (RW:cube4 ?z ?y ?x)))) (forall (?x:0 ?y:0 ?z:0) (when (RW:cube4 ?x ?y ?z) (and (N:RW:cube4 ?x ?y ?z) (RW:cube3 ?z ?y ?x)))) (forall (?x:0 ?y:0) (when (RW:edge37 ?x ?y) (and (N:RW:edge37 ?x ?y) (RW:edge78 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge78 ?y ?z) (and (N:RW:edge78 ?y ?z) (RW:edge48 ?z ?y)))) (forall (?x:0 ?y:0) (when (RW:edge48 ?x ?y) (and (N:RW:edge48 ?x ?y) (RW:edge34 ?y ?x)))) (forall (?y:0 ?z:0) (when (RW:edge34 ?y ?z) (and (N:RW:edge34 ?y ?z) (RW:edge37 ?z ?y)))))
-Init[20]:
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  object
+Obj:
+  blue - object
+  green - object
+  orange - object
+  red - object
+  white - object
+  yellow - object
+Predicate:
+  (= object object) :eq
+  (cube1 object object object)
+  (cube2 object object object)
+  (cube3 object object object)
+  (cube4 object object object)
+  (cube5 object object object)
+  (cube6 object object object)
+  (cube7 object object object)
+  (cube8 object object object)
+  (edge12 object object)
+  (edge13 object object)
+  (edge15 object object)
+  (edge24 object object)
+  (edge26 object object)
+  (edge34 object object)
+  (edge37 object object)
+  (edge48 object object)
+  (edge56 object object)
+  (edge57 object object)
+  (edge68 object object)
+  (edge78 object object)
+Function:
+Action:
+  b:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube3 ?x ?y ?z) (and (cube4 ?z ?y ?x) (not (cube3 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube4 ?x ?y ?z) (and (cube8 ?z ?y ?x) (not (cube4 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube7 ?x ?y ?z) (and (cube3 ?z ?y ?x) (not (cube7 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube8 ?x ?y ?z) (and (cube7 ?z ?y ?x) (not (cube8 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge37 ?x ?y) (and (edge34 ?y ?x) (not (edge37 ?x ?y))))) (forall (?x - object ?y - object) (when (edge48 ?x ?y) (and (edge78 ?y ?x) (not (edge48 ?x ?y))))) (forall (?y - object ?z - object) (when (edge34 ?y ?z) (and (edge48 ?z ?y) (not (edge34 ?y ?z))))) (forall (?y - object ?z - object) (when (edge78 ?y ?z) (and (edge37 ?z ?y) (not (edge78 ?y ?z))))))
+  brev:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube3 ?x ?y ?z) (and (cube7 ?z ?y ?x) (not (cube3 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube4 ?x ?y ?z) (and (cube3 ?z ?y ?x) (not (cube4 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube7 ?x ?y ?z) (and (cube8 ?z ?y ?x) (not (cube7 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube8 ?x ?y ?z) (and (cube4 ?z ?y ?x) (not (cube8 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge37 ?x ?y) (and (edge78 ?y ?x) (not (edge37 ?x ?y))))) (forall (?x - object ?y - object) (when (edge48 ?x ?y) (and (edge34 ?y ?x) (not (edge48 ?x ?y))))) (forall (?y - object ?z - object) (when (edge34 ?y ?z) (and (edge37 ?z ?y) (not (edge34 ?y ?z))))) (forall (?y - object ?z - object) (when (edge78 ?y ?z) (and (edge48 ?z ?y) (not (edge78 ?y ?z))))))
+  d:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube2 ?x ?y ?z) (and (cube6 ?x ?z ?y) (not (cube2 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube4 ?x ?y ?z) (and (cube2 ?x ?z ?y) (not (cube4 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube6 ?x ?y ?z) (and (cube8 ?x ?z ?y) (not (cube6 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube8 ?x ?y ?z) (and (cube4 ?x ?z ?y) (not (cube8 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge26 ?x ?y) (and (edge68 ?x ?y) (not (edge26 ?x ?y))))) (forall (?x - object ?y - object) (when (edge48 ?x ?y) (and (edge24 ?x ?y) (not (edge48 ?x ?y))))) (forall (?x - object ?z - object) (when (edge24 ?x ?z) (and (edge26 ?x ?z) (not (edge24 ?x ?z))))) (forall (?x - object ?z - object) (when (edge68 ?x ?z) (and (edge48 ?x ?z) (not (edge68 ?x ?z))))))
+  drev:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube2 ?x ?y ?z) (and (cube4 ?x ?z ?y) (not (cube2 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube4 ?x ?y ?z) (and (cube8 ?x ?z ?y) (not (cube4 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube6 ?x ?y ?z) (and (cube2 ?x ?z ?y) (not (cube6 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube8 ?x ?y ?z) (and (cube6 ?x ?z ?y) (not (cube8 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge26 ?x ?y) (and (edge24 ?x ?y) (not (edge26 ?x ?y))))) (forall (?x - object ?y - object) (when (edge48 ?x ?y) (and (edge68 ?x ?y) (not (edge48 ?x ?y))))) (forall (?x - object ?z - object) (when (edge24 ?x ?z) (and (edge48 ?x ?z) (not (edge24 ?x ?z))))) (forall (?x - object ?z - object) (when (edge68 ?x ?z) (and (edge26 ?x ?z) (not (edge68 ?x ?z))))))
+  f:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube1 ?x ?y ?z) (and (cube5 ?z ?y ?x) (not (cube1 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube2 ?x ?y ?z) (and (cube1 ?z ?y ?x) (not (cube2 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube5 ?x ?y ?z) (and (cube6 ?z ?y ?x) (not (cube5 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube6 ?x ?y ?z) (and (cube2 ?z ?y ?x) (not (cube6 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge15 ?x ?y) (and (edge56 ?y ?x) (not (edge15 ?x ?y))))) (forall (?x - object ?y - object) (when (edge26 ?x ?y) (and (edge12 ?y ?x) (not (edge26 ?x ?y))))) (forall (?y - object ?z - object) (when (edge12 ?y ?z) (and (edge15 ?z ?y) (not (edge12 ?y ?z))))) (forall (?y - object ?z - object) (when (edge56 ?y ?z) (and (edge26 ?z ?y) (not (edge56 ?y ?z))))))
+  frev:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube1 ?x ?y ?z) (and (cube2 ?z ?y ?x) (not (cube1 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube2 ?x ?y ?z) (and (cube6 ?z ?y ?x) (not (cube2 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube5 ?x ?y ?z) (and (cube1 ?z ?y ?x) (not (cube5 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube6 ?x ?y ?z) (and (cube5 ?z ?y ?x) (not (cube6 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge15 ?x ?y) (and (edge12 ?y ?x) (not (edge15 ?x ?y))))) (forall (?x - object ?y - object) (when (edge26 ?x ?y) (and (edge56 ?y ?x) (not (edge26 ?x ?y))))) (forall (?y - object ?z - object) (when (edge12 ?y ?z) (and (edge26 ?z ?y) (not (edge12 ?y ?z))))) (forall (?y - object ?z - object) (when (edge56 ?y ?z) (and (edge15 ?z ?y) (not (edge56 ?y ?z))))))
+  l:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube1 ?x ?y ?z) (and (cube2 ?y ?x ?z) (not (cube1 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube2 ?x ?y ?z) (and (cube4 ?y ?x ?z) (not (cube2 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube3 ?x ?y ?z) (and (cube1 ?y ?x ?z) (not (cube3 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube4 ?x ?y ?z) (and (cube3 ?y ?x ?z) (not (cube4 ?x ?y ?z))))) (forall (?x - object ?z - object) (when (edge13 ?x ?z) (and (edge12 ?x ?z) (not (edge13 ?x ?z))))) (forall (?x - object ?z - object) (when (edge24 ?x ?z) (and (edge34 ?x ?z) (not (edge24 ?x ?z))))) (forall (?y - object ?z - object) (when (edge12 ?y ?z) (and (edge24 ?y ?z) (not (edge12 ?y ?z))))) (forall (?y - object ?z - object) (when (edge34 ?y ?z) (and (edge13 ?y ?z) (not (edge34 ?y ?z))))))
+  lrev:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube1 ?x ?y ?z) (and (cube3 ?y ?x ?z) (not (cube1 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube2 ?x ?y ?z) (and (cube1 ?y ?x ?z) (not (cube2 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube3 ?x ?y ?z) (and (cube4 ?y ?x ?z) (not (cube3 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube4 ?x ?y ?z) (and (cube2 ?y ?x ?z) (not (cube4 ?x ?y ?z))))) (forall (?x - object ?z - object) (when (edge13 ?x ?z) (and (edge34 ?x ?z) (not (edge13 ?x ?z))))) (forall (?x - object ?z - object) (when (edge24 ?x ?z) (and (edge12 ?x ?z) (not (edge24 ?x ?z))))) (forall (?y - object ?z - object) (when (edge12 ?y ?z) (and (edge13 ?y ?z) (not (edge12 ?y ?z))))) (forall (?y - object ?z - object) (when (edge34 ?y ?z) (and (edge24 ?y ?z) (not (edge34 ?y ?z))))))
+  r:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube5 ?x ?y ?z) (and (cube7 ?y ?x ?z) (not (cube5 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube6 ?x ?y ?z) (and (cube5 ?y ?x ?z) (not (cube6 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube7 ?x ?y ?z) (and (cube8 ?y ?x ?z) (not (cube7 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube8 ?x ?y ?z) (and (cube6 ?y ?x ?z) (not (cube8 ?x ?y ?z))))) (forall (?x - object ?z - object) (when (edge57 ?x ?z) (and (edge78 ?x ?z) (not (edge57 ?x ?z))))) (forall (?x - object ?z - object) (when (edge68 ?x ?z) (and (edge56 ?x ?z) (not (edge68 ?x ?z))))) (forall (?y - object ?z - object) (when (edge56 ?y ?z) (and (edge57 ?y ?z) (not (edge56 ?y ?z))))) (forall (?y - object ?z - object) (when (edge78 ?y ?z) (and (edge68 ?y ?z) (not (edge78 ?y ?z))))))
+  rrev:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube5 ?x ?y ?z) (and (cube6 ?y ?x ?z) (not (cube5 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube6 ?x ?y ?z) (and (cube8 ?y ?x ?z) (not (cube6 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube7 ?x ?y ?z) (and (cube5 ?y ?x ?z) (not (cube7 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube8 ?x ?y ?z) (and (cube7 ?y ?x ?z) (not (cube8 ?x ?y ?z))))) (forall (?x - object ?z - object) (when (edge57 ?x ?z) (and (edge56 ?x ?z) (not (edge57 ?x ?z))))) (forall (?x - object ?z - object) (when (edge68 ?x ?z) (and (edge78 ?x ?z) (not (edge68 ?x ?z))))) (forall (?y - object ?z - object) (when (edge56 ?y ?z) (and (edge68 ?y ?z) (not (edge56 ?y ?z))))) (forall (?y - object ?z - object) (when (edge78 ?y ?z) (and (edge57 ?y ?z) (not (edge78 ?y ?z))))))
+  u:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube1 ?x ?y ?z) (and (cube3 ?x ?z ?y) (not (cube1 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube3 ?x ?y ?z) (and (cube7 ?x ?z ?y) (not (cube3 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube5 ?x ?y ?z) (and (cube1 ?x ?z ?y) (not (cube5 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube7 ?x ?y ?z) (and (cube5 ?x ?z ?y) (not (cube7 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge15 ?x ?y) (and (edge13 ?x ?y) (not (edge15 ?x ?y))))) (forall (?x - object ?y - object) (when (edge37 ?x ?y) (and (edge57 ?x ?y) (not (edge37 ?x ?y))))) (forall (?x - object ?z - object) (when (edge13 ?x ?z) (and (edge37 ?x ?z) (not (edge13 ?x ?z))))) (forall (?x - object ?z - object) (when (edge57 ?x ?z) (and (edge15 ?x ?z) (not (edge57 ?x ?z))))))
+  urev:
+      pre: (and)
+      eff: (and (forall (?x - object ?y - object ?z - object) (when (cube1 ?x ?y ?z) (and (cube5 ?x ?z ?y) (not (cube1 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube3 ?x ?y ?z) (and (cube1 ?x ?z ?y) (not (cube3 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube5 ?x ?y ?z) (and (cube7 ?x ?z ?y) (not (cube5 ?x ?y ?z))))) (forall (?x - object ?y - object ?z - object) (when (cube7 ?x ?y ?z) (and (cube3 ?x ?z ?y) (not (cube7 ?x ?y ?z))))) (forall (?x - object ?y - object) (when (edge15 ?x ?y) (and (edge57 ?x ?y) (not (edge15 ?x ?y))))) (forall (?x - object ?y - object) (when (edge37 ?x ?y) (and (edge13 ?x ?y) (not (edge37 ?x ?y))))) (forall (?x - object ?z - object) (when (edge13 ?x ?z) (and (edge15 ?x ?z) (not (edge13 ?x ?z))))) (forall (?x - object ?z - object) (when (edge57 ?x ?z) (and (edge37 ?x ?z) (not (edge57 ?x ?z))))))
+Init:
   (cube1 red white blue)
   (cube2 orange blue yellow)
   (cube3 red yellow blue)
@@ -84,15 +90,40 @@ Init[20]:
   (edge12 white blue)
   (edge13 red blue)
   (edge15 red white)
-  (edge26 orange blue)
   (edge24 orange yellow)
-  (edge48 orange green)
+  (edge26 orange blue)
   (edge34 yellow blue)
   (edge37 red yellow)
+  (edge48 orange green)
   (edge56 white green)
   (edge57 red green)
   (edge68 orange white)
   (edge78 yellow green)
-Init[0]:
-Goal: (and (RW:cube1 red white blue) (RW:cube2 orange white blue) (RW:cube3 red yellow blue) (RW:cube4 orange yellow blue) (RW:cube5 red white green) (RW:cube6 orange white green) (RW:cube7 red yellow green) (RW:cube8 orange yellow green) (RW:edge12 white blue) (RW:edge13 red blue) (RW:edge15 red white) (RW:edge26 orange white) (RW:edge24 orange blue) (RW:edge48 orange yellow) (RW:edge34 yellow blue) (RW:edge37 red yellow) (RW:edge56 white green) (RW:edge57 red green) (RW:edge68 orange green) (RW:edge78 yellow green))
-Metric: no-metric
+Goal:
+  (and (cube1 red white blue) (cube2 orange white blue) (cube3 red yellow blue) (cube4 orange yellow blue) (cube5 red white green) (cube6 orange white green) (cube7 red yellow green) (cube8 orange yellow green) (edge12 white blue) (edge13 red blue) (edge15 red white) (edge24 orange blue) (edge26 orange white) (edge34 yellow blue) (edge37 red yellow) (edge48 orange yellow) (edge56 white green) (edge57 red green) (edge68 orange green) (edge78 yellow green))
+Metric:
+Pred prop:
+  (cube1 object object object): in_init in_pre in_goal in_eff
+  (cube2 object object object): in_init in_pre in_goal in_eff
+  (cube3 object object object): in_init in_pre in_goal in_eff
+  (cube4 object object object): in_init in_pre in_goal in_eff
+  (cube5 object object object): in_init in_pre in_goal in_eff
+  (cube6 object object object): in_init in_pre in_goal in_eff
+  (cube7 object object object): in_init in_pre in_goal in_eff
+  (cube8 object object object): in_init in_pre in_goal in_eff
+  (edge12 object object): in_init in_pre in_goal in_eff
+  (edge13 object object): in_init in_pre in_goal in_eff
+  (edge15 object object): in_init in_pre in_goal in_eff
+  (edge24 object object): in_init in_pre in_goal in_eff
+  (edge26 object object): in_init in_pre in_goal in_eff
+  (edge34 object object): in_init in_pre in_goal in_eff
+  (edge37 object object): in_init in_pre in_goal in_eff
+  (edge48 object object): in_init in_pre in_goal in_eff
+  (edge56 object object): in_init in_pre in_goal in_eff
+  (edge57 object object): in_init in_pre in_goal in_eff
+  (edge68 object object): in_init in_pre in_goal in_eff
+  (edge78 object object): in_init in_pre in_goal in_eff
+Func prop:
+Global prop:
+  has_cond_eff
+  is_unit_cost

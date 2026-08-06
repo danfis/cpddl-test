@@ -1,113 +1,129 @@
 Domain: pathways-propositional
 Problem: pathways-01
-Require: ff
-Type[5]:
-    [0]: object, parent: -1
-    [1]: level, parent: 0
-    [2]: molecule, parent: 0
-    [3]: simple, parent: 2
-    [4]: complex, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
-    [1]: 26 27 28 29
-    [2]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-    [3]: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
-    [4]: 0 1 18 19 20 21 22 23 24 25
-Obj[30]:
-    [0]: pcaf-p300, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [1]: prbp1p2-ap2, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [2]: sp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: raf1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: prbp2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: prb-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: pcaf, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: p300, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: p16, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: p130-e2f5p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: e2f13, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: dmp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: chk1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: cdk7, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: cdk46p3-cycdp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: cdk46p3-cycd, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: cdc25c, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: ap2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: dmp1p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: cdc25cp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: p16-cdk7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: prbp2-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: prbp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: raf1-p130-e2f5p1-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: raf1-prb-e2f4p1-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: sp1-e2f13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [26]: l0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [27]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [28]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [29]: l3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[10]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
-    catalyzed-association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
-    synthesis-reaction: 2 2 :: read: 1, write: 0, in-init: 0
-    possible: 2 :: read: 1, write: 0, in-init: 1
-    available: 2 :: read: 1, write: 1, in-init: 0
-    chosen: 3 :: read: 1, write: 1, in-init: 0
-    next: 1 1 :: read: 1, write: 0, in-init: 1
-    num-subs: 1 :: read: 1, write: 1, in-init: 1
-    goal1: :: read: 1, write: 1, in-init: 0
-Function[0]:
-Action[6]:
-    choose: ?x:3 ?l1:1 ?l2:1
-        pre: (and (R:possible ?x) (R:next ?l1 ?l2) (N:RW:chosen ?x) (RW:num-subs ?l2))
-        eff: (and (RW:chosen ?x) (RW:num-subs ?l1) (N:RW:num-subs ?l2))
-    initialize: ?x:3
-        pre: (and (RW:chosen ?x))
-        eff: (and (RW:available ?x))
-    associate: ?x1:2 ?x2:2 ?x3:4
-        pre: (and (R:association-reaction ?x1 ?x2 ?x3) (RW:available ?x1) (RW:available ?x2))
-        eff: (and (N:RW:available ?x1) (N:RW:available ?x2) (RW:available ?x3))
-    associate-with-catalyze: ?x1:2 ?x2:2 ?x3:4
-        pre: (and (R:catalyzed-association-reaction ?x1 ?x2 ?x3) (RW:available ?x1) (RW:available ?x2))
-        eff: (and (N:RW:available ?x1) (RW:available ?x3))
-    synthesize: ?x1:2 ?x2:2
-        pre: (and (R:synthesis-reaction ?x1 ?x2) (RW:available ?x1))
-        eff: (and (RW:available ?x2))
-    dummy-action-1: 
-        pre: (or (RW:available pcaf-p300) (RW:available prbp1p2-ap2))
-        eff: (and (RW:goal1))
-Init[32]:
-  S:(association-reaction sp1 e2f13 sp1-e2f13)
-  S:(association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
-  S:(association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12)
-  S:(association-reaction prbp2 ap2 prbp2-ap2)
-  S:(association-reaction pcaf p300 pcaf-p300)
-  S:(association-reaction p16 cdk7 p16-cdk7)
-  S:(association-reaction prbp1p2 ap2 prbp1p2-ap2)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2)
-  S:(catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1)
-  S:(catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1)
-  S:(catalyzed-association-reaction cdc25c chk1 cdc25cp2)
-  S:(possible sp1)
-  S:(possible raf1)
-  S:(possible prbp2)
-  S:(possible prb-e2f4p1-dp12)
-  S:(possible pcaf)
-  S:(possible p300)
-  S:(possible p16)
-  S:(possible p130-e2f5p1-dp12)
-  S:(possible e2f13)
-  S:(possible dmp1)
-  S:(possible chk1)
-  S:(possible cdk7)
-  S:(possible cdk46p3-cycdp1)
-  S:(possible cdk46p3-cycd)
-  S:(possible cdc25c)
-  S:(possible ap2)
-  S:(next l1 l0)
-  S:(next l2 l1)
-  S:(next l3 l2)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  complex - molecule
+  level - object
+  molecule - object
+  object
+  simple - molecule
+Obj:
+  ap2 - simple
+  cdc25c - simple
+  cdc25cp2 - complex
+  cdk46p3-cycd - simple
+  cdk46p3-cycdp1 - simple
+  cdk7 - simple
+  chk1 - simple
+  dmp1 - simple
+  dmp1p1 - complex
+  e2f13 - simple
+  l0 - level
+  l1 - level
+  l2 - level
+  l3 - level
+  p130-e2f5p1-dp12 - simple
+  p16 - simple
+  p16-cdk7 - complex
+  p300 - simple
+  pcaf - simple
+  pcaf-p300 - complex :constant
+  prb-e2f4p1-dp12 - simple
+  prbp1p2 - complex
+  prbp1p2-ap2 - complex :constant
+  prbp2 - simple
+  prbp2-ap2 - complex
+  raf1 - simple
+  raf1-p130-e2f5p1-dp12 - complex
+  raf1-prb-e2f4p1-dp12 - complex
+  sp1 - simple
+  sp1-e2f13 - complex
+Predicate:
+  (= object object) :eq
+  (association-reaction molecule molecule complex)
+  (available molecule)
+  (catalyzed-association-reaction molecule molecule complex)
+  (chosen simple)
+  (goal1)
+  (next level level)
+  (num-subs level)
+  (possible molecule)
+  (synthesis-reaction molecule molecule)
+Function:
+Action:
+  associate-with-catalyze: ?x1 - molecule ?x2 - molecule ?x3 - complex
+      pre: (and (available ?x1) (available ?x2) (catalyzed-association-reaction ?x1 ?x2 ?x3))
+      eff: (and (available ?x3) (not (available ?x1)))
+  associate: ?x1 - molecule ?x2 - molecule ?x3 - complex
+      pre: (and (association-reaction ?x1 ?x2 ?x3) (available ?x1) (available ?x2))
+      eff: (and (available ?x3) (not (available ?x1)) (not (available ?x2)))
+  choose: ?x - simple ?l1 - level ?l2 - level
+      pre: (and (next ?l1 ?l2) (not (chosen ?x)) (num-subs ?l2) (possible ?x))
+      eff: (and (chosen ?x) (not (num-subs ?l2)) (num-subs ?l1))
+  dummy-action-1:
+      pre: (or (available pcaf-p300) (available prbp1p2-ap2))
+      eff: (and (goal1))
+  initialize: ?x - simple
+      pre: (and (chosen ?x))
+      eff: (and (available ?x))
+  synthesize: ?x1 - molecule ?x2 - molecule
+      pre: (and (available ?x1) (synthesis-reaction ?x1 ?x2))
+      eff: (and (available ?x2))
+Init:
+  (association-reaction p16 cdk7 p16-cdk7)
+  (association-reaction pcaf p300 pcaf-p300)
+  (association-reaction prbp1p2 ap2 prbp1p2-ap2)
+  (association-reaction prbp2 ap2 prbp2-ap2)
+  (association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12)
+  (association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
+  (association-reaction sp1 e2f13 sp1-e2f13)
+  (catalyzed-association-reaction cdc25c chk1 cdc25cp2)
+  (catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1)
+  (catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1)
+  (catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2)
+  (catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
+  (next l1 l0)
+  (next l2 l1)
+  (next l3 l2)
   (num-subs l0)
-Init[0]:
-Goal: (and (RW:goal1))
-Metric: no-metric
+  (possible ap2)
+  (possible cdc25c)
+  (possible cdk46p3-cycd)
+  (possible cdk46p3-cycdp1)
+  (possible cdk7)
+  (possible chk1)
+  (possible dmp1)
+  (possible e2f13)
+  (possible p130-e2f5p1-dp12)
+  (possible p16)
+  (possible p300)
+  (possible pcaf)
+  (possible prb-e2f4p1-dp12)
+  (possible prbp2)
+  (possible raf1)
+  (possible sp1)
+Goal:
+  (and (goal1))
+Metric:
+Pred prop:
+  (association-reaction molecule molecule complex): in_init in_pre
+  (available molecule): in_pre in_eff
+  (catalyzed-association-reaction molecule molecule complex): in_init in_pre
+  (chosen simple): in_pre in_pre_neg in_eff
+  (goal1): in_goal in_eff
+  (next level level): in_init in_pre
+  (num-subs level): in_init in_pre in_eff
+  (possible molecule): in_init in_pre
+  (synthesis-reaction molecule molecule): in_pre
+Func prop:
+Global prop:
+  has_non_static_neg_cond
+  is_unit_cost

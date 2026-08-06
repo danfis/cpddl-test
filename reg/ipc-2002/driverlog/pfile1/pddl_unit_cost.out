@@ -1,88 +1,101 @@
 Domain: driverlog
 Problem: dlog-2-2-2
-Require: 1
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10
-Obj[11]:
-    [0]: driver1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: driver2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: truck1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: truck2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: package1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: package2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: s0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: s1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: s2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: p1-0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: p1-2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[11]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    obj: 0 :: read: 1, write: 0, in-init: 1
-    truck: 0 :: read: 1, write: 0, in-init: 1
-    location: 0 :: read: 1, write: 0, in-init: 1
-    driver: 0 :: read: 1, write: 0, in-init: 1
-    at: 0 0 :: read: 1, write: 1, in-init: 1
-    in: 0 0 :: read: 1, write: 1, in-init: 0
-    driving: 0 0 :: read: 1, write: 1, in-init: 0
-    link: 0 0 :: read: 1, write: 0, in-init: 1
-    path: 0 0 :: read: 1, write: 0, in-init: 1
-    empty: 0 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[6]:
-    load-truck: ?obj:0 ?truck:0 ?loc:0
-        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?obj ?loc) (RW:at ?truck ?loc))
-        eff: (and (N:RW:at ?obj ?loc) (RW:in ?obj ?truck))
-    unload-truck: ?obj:0 ?truck:0 ?loc:0
-        pre: (and (R:obj ?obj) (R:truck ?truck) (R:location ?loc) (RW:at ?truck ?loc) (RW:in ?obj ?truck))
-        eff: (and (RW:at ?obj ?loc) (N:RW:in ?obj ?truck))
-    board-truck: ?driver:0 ?truck:0 ?loc:0
-        pre: (and (R:truck ?truck) (R:location ?loc) (R:driver ?driver) (RW:at ?driver ?loc) (RW:at ?truck ?loc) (RW:empty ?truck))
-        eff: (and (N:RW:at ?driver ?loc) (RW:driving ?driver ?truck) (N:RW:empty ?truck))
-    disembark-truck: ?driver:0 ?truck:0 ?loc:0
-        pre: (and (R:truck ?truck) (R:location ?loc) (R:driver ?driver) (RW:at ?truck ?loc) (RW:driving ?driver ?truck))
-        eff: (and (RW:at ?driver ?loc) (N:RW:driving ?driver ?truck) (RW:empty ?truck))
-    drive-truck: ?truck:0 ?loc-from:0 ?loc-to:0 ?driver:0
-        pre: (and (R:truck ?truck) (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (R:link ?loc-from ?loc-to) (RW:at ?truck ?loc-from) (RW:driving ?driver ?truck))
-        eff: (and (N:RW:at ?truck ?loc-from) (RW:at ?truck ?loc-to))
-    walk: ?driver:0 ?loc-from:0 ?loc-to:0
-        pre: (and (R:location ?loc-from) (R:location ?loc-to) (R:driver ?driver) (R:path ?loc-from ?loc-to) (RW:at ?driver ?loc-from))
-        eff: (and (N:RW:at ?driver ?loc-from) (RW:at ?driver ?loc-to))
-Init[33]:
-  S:(obj package1)
-  S:(obj package2)
-  S:(truck truck1)
-  S:(truck truck2)
-  S:(location s0)
-  S:(location s1)
-  S:(location s2)
-  S:(location p1-0)
-  S:(location p1-2)
-  S:(driver driver1)
-  S:(driver driver2)
-  S:(link s0 s1)
-  S:(link s0 s2)
-  S:(link s1 s0)
-  S:(link s1 s2)
-  S:(link s2 s0)
-  S:(link s2 s1)
-  S:(path s0 p1-0)
-  S:(path s1 p1-0)
-  S:(path s1 p1-2)
-  S:(path s2 p1-2)
-  S:(path p1-0 s0)
-  S:(path p1-0 s1)
-  S:(path p1-2 s1)
-  S:(path p1-2 s2)
+Require:
+  :strips
+Type:
+  object
+Obj:
+  driver1 - object
+  driver2 - object
+  p1-0 - object
+  p1-2 - object
+  package1 - object
+  package2 - object
+  s0 - object
+  s1 - object
+  s2 - object
+  truck1 - object
+  truck2 - object
+Predicate:
+  (= object object) :eq
+  (at object object)
+  (driver object)
+  (driving object object)
+  (empty object)
+  (in object object)
+  (link object object)
+  (location object)
+  (obj object)
+  (path object object)
+  (truck object)
+Function:
+Action:
+  board-truck: ?driver - object ?truck - object ?loc - object
+      pre: (and (at ?driver ?loc) (at ?truck ?loc) (driver ?driver) (empty ?truck) (location ?loc) (truck ?truck))
+      eff: (and (driving ?driver ?truck) (not (at ?driver ?loc)) (not (empty ?truck)))
+  disembark-truck: ?driver - object ?truck - object ?loc - object
+      pre: (and (at ?truck ?loc) (driver ?driver) (driving ?driver ?truck) (location ?loc) (truck ?truck))
+      eff: (and (at ?driver ?loc) (empty ?truck) (not (driving ?driver ?truck)))
+  drive-truck: ?truck - object ?loc-from - object ?loc-to - object ?driver - object
+      pre: (and (at ?truck ?loc-from) (driver ?driver) (driving ?driver ?truck) (link ?loc-from ?loc-to) (location ?loc-from) (location ?loc-to) (truck ?truck))
+      eff: (and (at ?truck ?loc-to) (not (at ?truck ?loc-from)))
+  load-truck: ?obj - object ?truck - object ?loc - object
+      pre: (and (at ?obj ?loc) (at ?truck ?loc) (location ?loc) (obj ?obj) (truck ?truck))
+      eff: (and (in ?obj ?truck) (not (at ?obj ?loc)))
+  unload-truck: ?obj - object ?truck - object ?loc - object
+      pre: (and (at ?truck ?loc) (in ?obj ?truck) (location ?loc) (obj ?obj) (truck ?truck))
+      eff: (and (at ?obj ?loc) (not (in ?obj ?truck)))
+  walk: ?driver - object ?loc-from - object ?loc-to - object
+      pre: (and (at ?driver ?loc-from) (driver ?driver) (location ?loc-from) (location ?loc-to) (path ?loc-from ?loc-to))
+      eff: (and (at ?driver ?loc-to) (not (at ?driver ?loc-from)))
+Init:
   (at driver1 s2)
   (at driver2 s2)
-  (at truck1 s0)
-  (at truck2 s0)
   (at package1 s0)
   (at package2 s0)
+  (at truck1 s0)
+  (at truck2 s0)
+  (driver driver1)
+  (driver driver2)
   (empty truck1)
   (empty truck2)
-Init[0]:
-Goal: (and (RW:at driver1 s1) (RW:at truck1 s1) (RW:at package1 s0) (RW:at package2 s0))
-Metric: no-metric
+  (link s0 s1)
+  (link s0 s2)
+  (link s1 s0)
+  (link s1 s2)
+  (link s2 s0)
+  (link s2 s1)
+  (location p1-0)
+  (location p1-2)
+  (location s0)
+  (location s1)
+  (location s2)
+  (obj package1)
+  (obj package2)
+  (path p1-0 s0)
+  (path p1-0 s1)
+  (path p1-2 s1)
+  (path p1-2 s2)
+  (path s0 p1-0)
+  (path s1 p1-0)
+  (path s1 p1-2)
+  (path s2 p1-2)
+  (truck truck1)
+  (truck truck2)
+Goal:
+  (and (at driver1 s1) (at package1 s0) (at package2 s0) (at truck1 s1))
+Metric:
+Pred prop:
+  (at object object): in_init in_pre in_goal in_eff
+  (driver object): in_init in_pre
+  (driving object object): in_pre in_eff
+  (empty object): in_init in_pre in_eff
+  (in object object): in_pre in_eff
+  (link object object): in_init in_pre
+  (location object): in_init in_pre
+  (obj object): in_init in_pre
+  (path object object): in_init in_pre
+  (truck object): in_init in_pre
+Func prop:
+Global prop:
+  is_unit_cost

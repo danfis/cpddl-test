@@ -1,73 +1,82 @@
 Domain: transport
 Problem: transport-city-sequential-3nodes-1000size-2degree-100mindistance-2trucks-2packages-2008seed
-Require: 20003
-Type[6]:
-    [0]: object, parent: -1
-    [1]: location, parent: 0
-    [2]: locatable, parent: 0
-    [3]: vehicle, parent: 2
-    [4]: package, parent: 2
-    [5]: capacity-number, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11
-    [1]: 0 1 2
-    [2]: 3 4 5 6
-    [3]: 3 4
-    [4]: 5 6
-    [5]: 7 8 9 10 11
-Obj[12]:
-    [0]: city-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: city-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: city-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: truck-1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: truck-2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: package-1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: package-2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: capacity-0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: capacity-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: capacity-2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: capacity-3, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: capacity-4, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[6]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    road: 1 1 :: read: 1, write: 0, in-init: 1
-    at: 2 1 :: read: 1, write: 1, in-init: 1
-    in: 4 3 :: read: 1, write: 1, in-init: 0
-    capacity: 3 5 :: read: 1, write: 1, in-init: 1
-    capacity-predecessor: 5 5 :: read: 1, write: 0, in-init: 1
-Function[2]:
-    road-length: 1 1 :: read: 1, write: 0, in-init: 1
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[3]:
-    drive: ?v:3 ?l1:1 ?l2:1
-        pre: (and (R:road ?l1 ?l2) (RW:at ?v ?l1))
-        eff: (and (N:RW:at ?v ?l1) (RW:at ?v ?l2) (increase (total-cost) (road-length ?l1 ?l2)))
-    pick-up: ?v:3 ?l:1 ?p:4 ?s1:5 ?s2:5
-        pre: (and (R:capacity-predecessor ?s1 ?s2) (RW:at ?v ?l) (RW:at ?p ?l) (RW:capacity ?v ?s2))
-        eff: (and (N:RW:at ?p ?l) (RW:in ?p ?v) (RW:capacity ?v ?s1) (N:RW:capacity ?v ?s2) (increase (total-cost) 1))
-    drop: ?v:3 ?l:1 ?p:4 ?s1:5 ?s2:5
-        pre: (and (R:capacity-predecessor ?s1 ?s2) (RW:at ?v ?l) (RW:in ?p ?v) (RW:capacity ?v ?s1))
-        eff: (and (RW:at ?p ?l) (N:RW:in ?p ?v) (N:RW:capacity ?v ?s1) (RW:capacity ?v ?s2) (increase (total-cost) 1))
-Init[14]:
-  S:(road city-loc-1 city-loc-3)
-  S:(road city-loc-2 city-loc-3)
-  S:(road city-loc-3 city-loc-1)
-  S:(road city-loc-3 city-loc-2)
-  S:(capacity-predecessor capacity-0 capacity-1)
-  S:(capacity-predecessor capacity-1 capacity-2)
-  S:(capacity-predecessor capacity-2 capacity-3)
-  S:(capacity-predecessor capacity-3 capacity-4)
-  (at truck-1 city-loc-3)
-  (at truck-2 city-loc-1)
-  (at package-1 city-loc-3)
-  (at package-2 city-loc-3)
-  (capacity truck-1 capacity-4)
-  (capacity truck-2 capacity-3)
-Init[5]:
+Require:
+  :action-costs
+  :strips
+  :typing
+Type:
+  capacity-number - object
+  locatable - object
+  location - object
+  object
+  package - locatable
+  vehicle - locatable
+Obj:
+  capacity-0 - capacity-number
+  capacity-1 - capacity-number
+  capacity-2 - capacity-number
+  capacity-3 - capacity-number
+  capacity-4 - capacity-number
+  city-loc-1 - location
+  city-loc-2 - location
+  city-loc-3 - location
+  package-1 - package
+  package-2 - package
+  truck-1 - vehicle
+  truck-2 - vehicle
+Predicate:
+  (= object object) :eq
+  (at locatable location)
+  (capacity vehicle capacity-number)
+  (capacity-predecessor capacity-number capacity-number)
+  (in package vehicle)
+  (road location location)
+Function:
+  (road-length location location)
+  (total-cost) :total-cost
+Action:
+  drive: ?v - vehicle ?l1 - location ?l2 - location
+      pre: (and (at ?v ?l1) (road ?l1 ?l2))
+      eff: (and (at ?v ?l2) (increase (total-cost) (road-length ?l1 ?l2)) (not (at ?v ?l1)))
+  drop: ?v - vehicle ?l - location ?p - package ?s1 - capacity-number ?s2 - capacity-number
+      pre: (and (at ?v ?l) (capacity ?v ?s1) (capacity-predecessor ?s1 ?s2) (in ?p ?v))
+      eff: (and (at ?p ?l) (capacity ?v ?s2) (increase (total-cost) 1) (not (capacity ?v ?s1)) (not (in ?p ?v)))
+  pick-up: ?v - vehicle ?l - location ?p - package ?s1 - capacity-number ?s2 - capacity-number
+      pre: (and (at ?p ?l) (at ?v ?l) (capacity ?v ?s2) (capacity-predecessor ?s1 ?s2))
+      eff: (and (capacity ?v ?s1) (in ?p ?v) (increase (total-cost) 1) (not (at ?p ?l)) (not (capacity ?v ?s2)))
+Init:
   (= (road-length city-loc-1 city-loc-3) 22)
   (= (road-length city-loc-2 city-loc-3) 50)
   (= (road-length city-loc-3 city-loc-1) 22)
   (= (road-length city-loc-3 city-loc-2) 50)
   (= (total-cost) 0)
-Goal: (and (RW:at package-1 city-loc-2) (RW:at package-2 city-loc-2))
-Metric: (total-cost)
+  (at package-1 city-loc-3)
+  (at package-2 city-loc-3)
+  (at truck-1 city-loc-3)
+  (at truck-2 city-loc-1)
+  (capacity truck-1 capacity-4)
+  (capacity truck-2 capacity-3)
+  (capacity-predecessor capacity-0 capacity-1)
+  (capacity-predecessor capacity-1 capacity-2)
+  (capacity-predecessor capacity-2 capacity-3)
+  (capacity-predecessor capacity-3 capacity-4)
+  (road city-loc-1 city-loc-3)
+  (road city-loc-2 city-loc-3)
+  (road city-loc-3 city-loc-1)
+  (road city-loc-3 city-loc-2)
+Goal:
+  (and (at package-1 city-loc-2) (at package-2 city-loc-2))
+Metric:
+  (total-cost)
+Pred prop:
+  (at locatable location): in_init in_pre in_goal in_eff
+  (capacity vehicle capacity-number): in_init in_pre in_eff
+  (capacity-predecessor capacity-number capacity-number): in_init in_pre
+  (in package vehicle): in_pre in_eff
+  (road location location): in_init in_pre
+Func prop:
+  (road-length location location): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(road-length) write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func

@@ -1,95 +1,118 @@
 Domain: rainbowttles-constant-free
 Problem: rainbowttles-11-constant-free
-Require: 201ff
-Type[3]:
-    [0]: object, parent: -1
-    [1]: bottle, parent: 0
-    [2]: colour, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8
-    [1]: 0 1 2 3 4
-    [2]: 5 6 7 8
-Obj[9]:
-    [0]: bottle01, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: bottle02, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: bottle03, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: bottle04, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: bottle05, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: red, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: green, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: blue, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: empty, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[6]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    upper-colour: 1 2 :: read: 1, write: 1, in-init: 1
-    colour-below: 1 2 2 :: read: 1, write: 1, in-init: 1
-    closed: 1 :: read: 1, write: 1, in-init: 0
-    empty-colour: 2 :: read: 1, write: 0, in-init: 1
-    real-colour: 2 :: read: 1, write: 0, in-init: 1
-Function[3]:
-    bottle-capacity: 1 :: read: 1, write: 0, in-init: 1
-    segments-filled: 1 :: read: 1, write: 1, in-init: 1
-    colour-segments: 1 2 :: read: 1, write: 1, in-init: 1
-Action[4]:
-    pour: ?b:1 ?c:2 ?c1:2 ?b1:1
-        pre: (and (N:R:= ?b ?b1) (R:real-colour ?c) (RW:upper-colour ?b ?c) (RW:upper-colour ?b1 ?c) (RW:colour-below ?b ?c ?c1) (N:RW:closed ?b) (N:RW:closed ?b1) (> (colour-segments ?b ?c) 0) (> (segments-filled ?b) 0) (> (colour-segments ?b1 ?c) 0) (> (segments-filled ?b1) 0) (<= (+ (segments-filled ?b1) (colour-segments ?b ?c)) (bottle-capacity ?b1)))
-        eff: (and (N:RW:upper-colour ?b ?c) (RW:upper-colour ?b ?c1) (decrease (segments-filled ?b) (colour-segments ?b ?c)) (assign (colour-segments ?b ?c) 0) (increase (segments-filled ?b1) (colour-segments ?b ?c)) (increase (colour-segments ?b1 ?c) (colour-segments ?b ?c)))
-    pour-to-empty-bottle: ?b:1 ?c:2 ?c1:2 ?e:2 ?b1:1
-        pre: (and (N:R:= ?b ?b1) (R:empty-colour ?e) (R:real-colour ?c) (RW:upper-colour ?b ?c) (RW:upper-colour ?b1 ?e) (RW:colour-below ?b ?c ?c1) (N:RW:closed ?b) (N:RW:closed ?b1) (> (colour-segments ?b ?c) 0) (> (segments-filled ?b) 0) (= (colour-segments ?b1 ?c) 0) (= (segments-filled ?b1) 0) (<= (colour-segments ?b ?c) (bottle-capacity ?b1)))
-        eff: (and (N:RW:upper-colour ?b ?c) (RW:upper-colour ?b ?c1) (RW:upper-colour ?b1 ?c) (N:RW:upper-colour ?b1 ?e) (RW:colour-below ?b1 ?c ?e) (decrease (segments-filled ?b) (colour-segments ?b ?c)) (assign (colour-segments ?b ?c) 0) (increase (segments-filled ?b1) (colour-segments ?b ?c)) (increase (colour-segments ?b1 ?c) (colour-segments ?b ?c)))
-    close-bottle: ?b:1 ?c:2
-        pre: (and (R:real-colour ?c) (= (colour-segments ?b ?c) (bottle-capacity ?b)))
-        eff: (and (RW:closed ?b))
-    close-empty-bottle: ?b:1
-        pre: (and (= (segments-filled ?b) 0))
-        eff: (and (RW:closed ?b))
-Init[16]:
-  S:(empty-colour empty)
-  S:(real-colour red)
-  S:(real-colour green)
-  S:(real-colour blue)
-  (upper-colour bottle01 green)
-  (upper-colour bottle02 blue)
-  (upper-colour bottle03 blue)
-  (upper-colour bottle04 green)
-  (upper-colour bottle05 red)
-  (colour-below bottle01 green empty)
-  (colour-below bottle02 red green)
-  (colour-below bottle02 green empty)
-  (colour-below bottle02 blue red)
-  (colour-below bottle03 blue empty)
-  (colour-below bottle04 green empty)
-  (colour-below bottle05 red empty)
-Init[30]:
+Require:
+  :action-costs
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :numeric-fluents
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  bottle - object
+  colour - object
+  object
+Obj:
+  blue - colour
+  bottle01 - bottle
+  bottle02 - bottle
+  bottle03 - bottle
+  bottle04 - bottle
+  bottle05 - bottle
+  empty - colour
+  green - colour
+  red - colour
+Predicate:
+  (= object object) :eq
+  (closed bottle)
+  (colour-below bottle colour colour)
+  (empty-colour colour)
+  (real-colour colour)
+  (upper-colour bottle colour)
+Function:
+  (bottle-capacity bottle)
+  (colour-segments bottle colour)
+  (segments-filled bottle)
+Action:
+  close-bottle: ?b - bottle ?c - colour
+      pre: (and (= (colour-segments ?b ?c) (bottle-capacity ?b)) (real-colour ?c))
+      eff: (and (closed ?b))
+  close-empty-bottle: ?b - bottle
+      pre: (and (= (segments-filled ?b) 0))
+      eff: (and (closed ?b))
+  pour-to-empty-bottle: ?b - bottle ?c - colour ?c1 - colour ?e - colour ?b1 - bottle
+      pre: (and (<= (colour-segments ?b ?c) (bottle-capacity ?b1)) (= (colour-segments ?b1 ?c) 0) (= (segments-filled ?b1) 0) (> (colour-segments ?b ?c) 0) (> (segments-filled ?b) 0) (colour-below ?b ?c ?c1) (empty-colour ?e) (not (= ?b ?b1)) (not (closed ?b)) (not (closed ?b1)) (real-colour ?c) (upper-colour ?b ?c) (upper-colour ?b1 ?e))
+      eff: (and (assign (colour-segments ?b ?c) 0) (colour-below ?b1 ?c ?e) (decrease (segments-filled ?b) (colour-segments ?b ?c)) (increase (colour-segments ?b1 ?c) (colour-segments ?b ?c)) (increase (segments-filled ?b1) (colour-segments ?b ?c)) (not (upper-colour ?b ?c)) (not (upper-colour ?b1 ?e)) (upper-colour ?b ?c1) (upper-colour ?b1 ?c))
+  pour: ?b - bottle ?c - colour ?c1 - colour ?b1 - bottle
+      pre: (and (<= (+ (segments-filled ?b1) (colour-segments ?b ?c)) (bottle-capacity ?b1)) (> (colour-segments ?b ?c) 0) (> (colour-segments ?b1 ?c) 0) (> (segments-filled ?b) 0) (> (segments-filled ?b1) 0) (colour-below ?b ?c ?c1) (not (= ?b ?b1)) (not (closed ?b)) (not (closed ?b1)) (real-colour ?c) (upper-colour ?b ?c) (upper-colour ?b1 ?c))
+      eff: (and (assign (colour-segments ?b ?c) 0) (decrease (segments-filled ?b) (colour-segments ?b ?c)) (increase (colour-segments ?b1 ?c) (colour-segments ?b ?c)) (increase (segments-filled ?b1) (colour-segments ?b ?c)) (not (upper-colour ?b ?c)) (upper-colour ?b ?c1))
+Init:
   (= (bottle-capacity bottle01) 4)
   (= (bottle-capacity bottle02) 4)
   (= (bottle-capacity bottle03) 4)
   (= (bottle-capacity bottle04) 4)
   (= (bottle-capacity bottle05) 4)
+  (= (colour-segments bottle01 blue) 0)
+  (= (colour-segments bottle01 empty) 0)
+  (= (colour-segments bottle01 green) 1)
+  (= (colour-segments bottle01 red) 0)
+  (= (colour-segments bottle02 blue) 1)
+  (= (colour-segments bottle02 empty) 0)
+  (= (colour-segments bottle02 green) 2)
+  (= (colour-segments bottle02 red) 1)
+  (= (colour-segments bottle03 blue) 3)
+  (= (colour-segments bottle03 empty) 0)
+  (= (colour-segments bottle03 green) 0)
+  (= (colour-segments bottle03 red) 0)
+  (= (colour-segments bottle04 blue) 0)
+  (= (colour-segments bottle04 empty) 0)
+  (= (colour-segments bottle04 green) 1)
+  (= (colour-segments bottle04 red) 0)
+  (= (colour-segments bottle05 blue) 0)
+  (= (colour-segments bottle05 empty) 0)
+  (= (colour-segments bottle05 green) 0)
+  (= (colour-segments bottle05 red) 3)
   (= (segments-filled bottle01) 1)
   (= (segments-filled bottle02) 4)
   (= (segments-filled bottle03) 3)
   (= (segments-filled bottle04) 1)
   (= (segments-filled bottle05) 3)
-  (= (colour-segments bottle01 red) 0)
-  (= (colour-segments bottle01 green) 1)
-  (= (colour-segments bottle01 blue) 0)
-  (= (colour-segments bottle01 empty) 0)
-  (= (colour-segments bottle02 red) 1)
-  (= (colour-segments bottle02 green) 2)
-  (= (colour-segments bottle02 blue) 1)
-  (= (colour-segments bottle02 empty) 0)
-  (= (colour-segments bottle03 red) 0)
-  (= (colour-segments bottle03 green) 0)
-  (= (colour-segments bottle03 blue) 3)
-  (= (colour-segments bottle03 empty) 0)
-  (= (colour-segments bottle04 red) 0)
-  (= (colour-segments bottle04 green) 1)
-  (= (colour-segments bottle04 blue) 0)
-  (= (colour-segments bottle04 empty) 0)
-  (= (colour-segments bottle05 red) 3)
-  (= (colour-segments bottle05 green) 0)
-  (= (colour-segments bottle05 blue) 0)
-  (= (colour-segments bottle05 empty) 0)
-Goal: (and (RW:closed bottle01) (RW:closed bottle02) (RW:closed bottle03) (RW:closed bottle04) (RW:closed bottle05))
-Metric: no-metric
+  (colour-below bottle01 green empty)
+  (colour-below bottle02 blue red)
+  (colour-below bottle02 green empty)
+  (colour-below bottle02 red green)
+  (colour-below bottle03 blue empty)
+  (colour-below bottle04 green empty)
+  (colour-below bottle05 red empty)
+  (empty-colour empty)
+  (real-colour blue)
+  (real-colour green)
+  (real-colour red)
+  (upper-colour bottle01 green)
+  (upper-colour bottle02 blue)
+  (upper-colour bottle03 blue)
+  (upper-colour bottle04 green)
+  (upper-colour bottle05 red)
+Goal:
+  (and (closed bottle01) (closed bottle02) (closed bottle03) (closed bottle04) (closed bottle05))
+Metric:
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (closed bottle): in_pre in_pre_neg in_goal in_eff
+  (colour-below bottle colour colour): in_init in_pre in_eff
+  (empty-colour colour): in_init in_pre
+  (real-colour colour): in_init in_pre
+  (upper-colour bottle colour): in_init in_pre in_eff
+Func prop:
+  (bottle-capacity bottle): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (colour-segments bottle colour): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(colour-segments)
+  (segments-filled bottle): in_init init_all_nonneg init_all_int in_pre in_eff rhs_funcs:(colour-segments)
+Global prop:
+  has_eq_pred
+  has_non_static_neg_cond
+  has_num_cmp
+  is_numeric
+  is_unit_cost

@@ -1,888 +1,930 @@
 Domain: pathways-propositional
 Problem: pathways-20
-Require: ff
-Type[5]:
-    [0]: object, parent: -1
-    [1]: level, parent: 0
-    [2]: molecule, parent: 0
-    [3]: simple, parent: 2
-    [4]: complex, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326
-    [1]: 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326
-    [2]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304
-    [3]: 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105
-    [4]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304
-Obj[327]:
-    [0]: cdk1p2p3-cks1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [1]: cdk1p3-cks1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [2]: cdk1p3-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [3]: cdk1p3-cycb, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [4]: cdk1p3-gadd45, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [5]: cdk2-cyca-e2f13p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [6]: cdk2p1-cyca-e2f13p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [7]: cdk2p1p2-cyca-e2f13, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [8]: cdk2p1p2-cyca-e2f13p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [9]: cdk2p2-cyca-e2f13p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [10]: cdk46p1-cycdp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [11]: cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [12]: cyce, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [13]: mdm2-prbp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [14]: p16-cdk7p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [15]: p21-cdk2-cycep1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [16]: p21-cdk2p1-cyce, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [17]: p21-cdk2p1p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [18]: p21-cdk2p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [19]: p27-cdk2p1-cycep1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [20]: p27-cdk2p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [21]: p27-cdk46p1-cycdp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [22]: p27p1-cdk2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [23]: p27p1-cdk2-cyce, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [24]: p27p1-cdk2-cycep1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [25]: p27p1-cdk2p1-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [26]: p27p1-cdk2p1-cyce, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [27]: p27p1-cdk2p1-cycep1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [28]: p27p1-cdk2p1p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [29]: p27p1-cdk2p1p2-cyce, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [30]: p27p1-cdk2p1p2-cycep1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [31]: p27p1-cdk2p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [32]: p27p1-cdk2p2-cyce, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [33]: p27p1-cdk2p2-cycep1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [34]: p27p1-cdk46p1-cycd, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [35]: p27p1-cdk46p1-cycdp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [36]: p27p1-cdk46p1p2-cycd, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [37]: p27p1-cdk46p1p2-cycdp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [38]: p53p1-dp12p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [39]: p57p1-cdk46p1p2-cycdp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [40]: prbp1-ap2-ge-c, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [41]: prbp1-e2f13p1-dp12p1-ge2, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [42]: skp2-cdk2p1p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [43]: skp2-cdk2p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [44]: skp2p1-skp1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [45]: skp2-skp1-cdk2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [46]: skp2-skp1p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [47]: skp2-skp1p1-cdk2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [48]: skp2-skp1p1-cdk2p1-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [49]: skp2-skp1p1-cdk2p1p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [50]: skp2-skp1p1-cdk2p2-cyca, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [51]: sp1-e2f13p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [52]: sp1-p107, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [53]: wee1p1, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [54]: wee1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [55]: sp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [56]: skp2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [57]: skp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [58]: rpa, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [59]: prbp2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [60]: prbp1-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [61]: prb-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [62]: prb, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [63]: plk1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [64]: pcaf, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [65]: p57p1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [66]: p57, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [67]: p53p1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [68]: p53, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [69]: p300, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [70]: p27, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [71]: p16, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [72]: p130, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [73]: m1433, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [74]: hdac1-prbp1-e2f4-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [75]: hdac1-prbp1-e2f13p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [76]: hdac1-p130-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [77]: hdac1-p107-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [78]: hbp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [79]: ge-c, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [80]: ge2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [81]: e2f6, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [82]: e2f4-dp12p1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [83]: e2f4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [84]: e2f3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [85]: e2f13p1-dp12p1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [86]: e2f13-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [87]: e2f13, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [88]: e2f1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [89]: dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [90]: cych, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [91]: cycb, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [92]: c-tak1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [93]: cks1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [94]: chk1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [95]: cebp, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [96]: cdk7, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [97]: cdk46p3-cycdp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [98]: cdk46p1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [99]: cdk2p1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [100]: cdk2-cycb, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [101]: cdk2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [102]: cdk1p1p2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [103]: cdc25c, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [104]: c-abl, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [105]: ap2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [106]: ap2-ge-c, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [107]: c-abl-prb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [108]: c-abl-prbp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [109]: c-abl-prbp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [110]: c-abl-prbp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [111]: cdk1-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [112]: cdk1-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [113]: cdk1p1-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [114]: cdk1p1-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [115]: cdk1p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [116]: cdk1p1p2-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [117]: cdk1p1p2-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [118]: cdk1p1p2p3-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [119]: cdk1p1p2p3-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [120]: cdk1p1p2p3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [121]: cdk1p1p3-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [122]: cdk1p1p3-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [123]: cdk1p1p3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [124]: cdk1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [125]: cdk1p2-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [126]: cdk1p2-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [127]: cdk1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [128]: cdk1p1p2p3-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [129]: cdc25cp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [130]: cdk1p1p2p3-cycb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [131]: cdk1p2p3-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [132]: cdk1p2p3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [133]: cdk1p1p3-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [134]: cdk1p2p3-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [135]: cdk1p1p3-cycb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [136]: cdk1p2p3-cycb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [137]: cdk1p3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [138]: cdk2-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [139]: cdk2-cyca-e2f13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [140]: cdk2p1-cycb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [141]: cdk2p1-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [142]: cdk2p1-cyca-e2f13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [143]: cdk2p1p2-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [144]: cdk2p1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [145]: cdk2p2-cks1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [146]: cdk2p2-cyca-e2f13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [147]: cdk2p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [148]: cdk7-cych, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [149]: cdk7p1-cych, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [150]: cebp-prb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [151]: cebp-prbp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [152]: cebp-prbp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [153]: cebp-prbp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [154]: c-myc-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [155]: e2f13-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [156]: e2f1-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [157]: e2f3-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [158]: e2f4-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [159]: e2f6-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [160]: e2f6-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [161]: hbp1-p130, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [162]: hdac1-p107-e2f4p1-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [163]: hdac1-p130-e2f4p1-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [164]: hdac1-prbp1-e2f13p1-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [165]: hdac1-prbp1-e2f4-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [166]: m1433-cdc25cp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [167]: cdc25cp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [168]: m1433-cdc25cp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [169]: cdc25cp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [170]: mdm2-e2f13-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [171]: mdm2-e2f13p1-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [172]: mdm2-prb, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [173]: mdm2-prbp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [174]: mdm2-prbp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [175]: p107-e2f4-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [176]: p107-e2f4-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [177]: p107-e2f4-dp12p1-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [178]: p107-e2f4-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [179]: p130-e2f4-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [180]: p130-e2f4-dp12p1-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [181]: p130-e2f4-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [182]: p16-cdk46p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [183]: p16-cdk46p1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [184]: cdk46p1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [185]: p16-cdk7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [186]: cdk7p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [187]: p21-cdk2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [188]: p21-cdk2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [189]: p21-cdk2p1-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [190]: p21-cdk2p1-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [191]: p21-cdk2p1p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [192]: p21-cdk2p1p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [193]: p21-cdk2p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [194]: p21-cdk2p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [195]: p21-cdk46p1-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [196]: p21-cdk46p1-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [197]: p21-cdk46p1p2-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [198]: p21-cdk46p1p2-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [199]: p21-gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [200]: p27-cdk2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [201]: p27-cdk2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [202]: p27-cdk2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [203]: p27-cdk2p1-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [204]: p27-cdk2p1-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [205]: p27-cdk2p1p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [206]: p27-cdk2p1p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [207]: p27-cdk2p1p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [208]: p27-cdk2p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [209]: p27-cdk2p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [210]: p27-cdk46p1-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [211]: p27-cdk46p1p2-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [212]: p27-cdk46p1p2-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [213]: p27p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [214]: p53-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [215]: p53-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [216]: dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [217]: p53p1-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [218]: mdm2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [219]: p57-cdk2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [220]: p57-cdk2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [221]: p57-cdk2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [222]: p57-cdk2p1-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [223]: p57-cdk2p1-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [224]: p57-cdk2p1-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [225]: p57-cdk2p1p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [226]: p57-cdk2p1p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [227]: p57-cdk2p1p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [228]: p57-cdk2p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [229]: p57-cdk2p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [230]: p57-cdk2p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [231]: p57-cdk46p1-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [232]: p57-cdk46p1-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [233]: p57-cdk46p1p2-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [234]: p57-cdk46p1p2-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [235]: p57p1-cdk46p1-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [236]: p57p1-cdk46p1-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [237]: p57p1-cdk46p1p2-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [238]: pcaf-p300, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [239]: gadd45, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [240]: cdk2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [241]: cdk2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [242]: cdk2p1-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [243]: cdk2p1-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [244]: cdk2p1p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [245]: cdk2p1p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [246]: cdk46p1-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [247]: cdk46p1p2-cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [248]: cdk46p1p2-cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [249]: p21, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [250]: prb-ap2-ge-c, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [251]: prb-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [252]: prb-e2f13-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [253]: prb-e2f13p1-dp12p1-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [254]: prb-e2f4-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [255]: prb-e2f4-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [256]: prb-e2f4p1-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [257]: prbp1-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [258]: cdk2p2-cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [259]: cdk2p2-cyce, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [260]: prbp1-e2f13-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [261]: prbp1-e2f4-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [262]: prbp1-e2f4-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [263]: e2f4-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [264]: prbp1-e2f4p1-dp12-ge2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [265]: prbp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [266]: prbp1p2-ap2-ge-c, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [267]: prbp1p2-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [268]: ecadherin, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [269]: prbp2-ap2-ge-c, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [270]: prbp2-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [271]: prbp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [272]: c-fos, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [273]: p130-e2f4-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [274]: prb-e2f13-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [275]: prb-e2f13p1-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [276]: prb-e2f4-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [277]: prbp1-e2f13-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [278]: prbp1-e2f13p1-dp12p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [279]: prbp1-e2f4-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [280]: rpa-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [281]: skp2-cdk2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [282]: skp2-cdk2p1-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [283]: skp2p1-skp1p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [284]: skp2p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [285]: skp2-skp1-cdk2p1-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [286]: skp2-skp1-cdk2p1p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [287]: skp2-skp1-cdk2p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [288]: cdk2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [289]: cdk2p1-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [290]: cdk2p1p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [291]: cdk2p2-cyca, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [292]: skp1p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [293]: skp2-skp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [294]: e2f13p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [295]: sp1-e2f13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [296]: c-myc, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [297]: cycd, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [298]: cycdp1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [299]: cycep1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [300]: p19arf, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [301]: pol, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [302]: sp1-p107p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [303]: p107p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [304]: p107, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [305]: l0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [306]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [307]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [308]: l3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [309]: l4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [310]: l5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [311]: l6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [312]: l7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [313]: l8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [314]: l9, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [315]: l10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [316]: l11, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [317]: l12, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [318]: l13, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [319]: l14, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [320]: l15, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [321]: l16, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [322]: l17, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [323]: l18, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [324]: l19, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [325]: l20, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [326]: l21, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[36]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
-    catalyzed-association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
-    synthesis-reaction: 2 2 :: read: 1, write: 0, in-init: 1
-    possible: 2 :: read: 1, write: 0, in-init: 1
-    available: 2 :: read: 1, write: 1, in-init: 0
-    chosen: 3 :: read: 1, write: 1, in-init: 0
-    next: 1 1 :: read: 1, write: 0, in-init: 1
-    num-subs: 1 :: read: 1, write: 1, in-init: 1
-    goal1: :: read: 1, write: 1, in-init: 0
-    goal2: :: read: 1, write: 1, in-init: 0
-    goal3: :: read: 1, write: 1, in-init: 0
-    goal4: :: read: 1, write: 1, in-init: 0
-    goal5: :: read: 1, write: 1, in-init: 0
-    goal6: :: read: 1, write: 1, in-init: 0
-    goal7: :: read: 1, write: 1, in-init: 0
-    goal8: :: read: 1, write: 1, in-init: 0
-    goal9: :: read: 1, write: 1, in-init: 0
-    goal10: :: read: 1, write: 1, in-init: 0
-    goal11: :: read: 1, write: 1, in-init: 0
-    goal12: :: read: 1, write: 1, in-init: 0
-    goal13: :: read: 1, write: 1, in-init: 0
-    goal14: :: read: 1, write: 1, in-init: 0
-    goal15: :: read: 1, write: 1, in-init: 0
-    goal16: :: read: 1, write: 1, in-init: 0
-    goal17: :: read: 1, write: 1, in-init: 0
-    goal18: :: read: 1, write: 1, in-init: 0
-    goal19: :: read: 1, write: 1, in-init: 0
-    goal20: :: read: 1, write: 1, in-init: 0
-    goal21: :: read: 1, write: 1, in-init: 0
-    goal22: :: read: 1, write: 1, in-init: 0
-    goal23: :: read: 1, write: 1, in-init: 0
-    goal24: :: read: 1, write: 1, in-init: 0
-    goal25: :: read: 1, write: 1, in-init: 0
-    goal26: :: read: 1, write: 1, in-init: 0
-    goal27: :: read: 1, write: 1, in-init: 0
-Function[0]:
-Action[32]:
-    choose: ?x:3 ?l1:1 ?l2:1
-        pre: (and (R:possible ?x) (R:next ?l1 ?l2) (N:RW:chosen ?x) (RW:num-subs ?l2))
-        eff: (and (RW:chosen ?x) (RW:num-subs ?l1) (N:RW:num-subs ?l2))
-    initialize: ?x:3
-        pre: (and (RW:chosen ?x))
-        eff: (and (RW:available ?x))
-    associate: ?x1:2 ?x2:2 ?x3:4
-        pre: (and (R:association-reaction ?x1 ?x2 ?x3) (RW:available ?x1) (RW:available ?x2))
-        eff: (and (N:RW:available ?x1) (N:RW:available ?x2) (RW:available ?x3))
-    associate-with-catalyze: ?x1:2 ?x2:2 ?x3:4
-        pre: (and (R:catalyzed-association-reaction ?x1 ?x2 ?x3) (RW:available ?x1) (RW:available ?x2))
-        eff: (and (N:RW:available ?x1) (RW:available ?x3))
-    synthesize: ?x1:2 ?x2:2
-        pre: (and (R:synthesis-reaction ?x1 ?x2) (RW:available ?x1))
-        eff: (and (RW:available ?x2))
-    dummy-action-1: 
-        pre: (or (RW:available p27p1-cdk46p1-cycdp1) (RW:available skp2-skp1p1-cdk2-cyca))
-        eff: (and (RW:goal1))
-    dummy-action-2: 
-        pre: (or (RW:available p21-cdk2p1p2-cyca) (RW:available skp2p1-skp1))
-        eff: (and (RW:goal2))
-    dummy-action-3: 
-        pre: (or (RW:available cdk46p1-cycdp1) (RW:available skp2-skp1p1-cdk2p1-cyca))
-        eff: (and (RW:goal3))
-    dummy-action-4: 
-        pre: (or (RW:available skp2-skp1p1-cdk2p1p2-cyca) (RW:available skp2-skp1p1-cdk2p2-cyca))
-        eff: (and (RW:goal4))
-    dummy-action-5: 
-        pre: (or (RW:available cdk2p2-cyca-e2f13p1) (RW:available p27p1-cdk2p1p2-cyce))
-        eff: (and (RW:goal5))
-    dummy-action-6: 
-        pre: (or (RW:available p27p1-cdk2-cyce) (RW:available sp1-p107))
-        eff: (and (RW:goal6))
-    dummy-action-7: 
-        pre: (or (RW:available p27p1-cdk2-cyca) (RW:available wee1p1))
-        eff: (and (RW:goal7))
-    dummy-action-8: 
-        pre: (or (RW:available cyca) (RW:available sp1-e2f13p1))
-        eff: (and (RW:goal8))
-    dummy-action-9: 
-        pre: (or (RW:available p53p1-dp12p1) (RW:available prbp1-e2f13p1-dp12p1-ge2))
-        eff: (and (RW:goal9))
-    dummy-action-10: 
-        pre: (or (RW:available cdk2-cyca-e2f13p1) (RW:available p27p1-cdk2p1-cyca))
-        eff: (and (RW:goal10))
-    dummy-action-11: 
-        pre: (or (RW:available p27-cdk2p2-cyca) (RW:available p27-cdk46p1-cycdp1))
-        eff: (and (RW:goal11))
-    dummy-action-12: 
-        pre: (or (RW:available cdk2p1-cyca-e2f13p1) (RW:available mdm2-prbp1))
-        eff: (and (RW:goal12))
-    dummy-action-13: 
-        pre: (or (RW:available p27p1-cdk2p1p2-cyca) (RW:available skp2-cdk2p2-cyca))
-        eff: (and (RW:goal13))
-    dummy-action-14: 
-        pre: (or (RW:available cdk1p3-cks1) (RW:available p27p1-cdk2p2-cyca))
-        eff: (and (RW:goal14))
-    dummy-action-15: 
-        pre: (or (RW:available cyce) (RW:available skp2-cdk2p1p2-cyca))
-        eff: (and (RW:goal15))
-    dummy-action-16: 
-        pre: (or (RW:available cdk1p2p3-cks1) (RW:available skp2-skp1p1))
-        eff: (and (RW:goal16))
-    dummy-action-17: 
-        pre: (or (RW:available p27p1-cdk2-cycep1) (RW:available p27p1-cdk2p2-cycep1))
-        eff: (and (RW:goal17))
-    dummy-action-18: 
-        pre: (or (RW:available cdk2p1p2-cyca-e2f13p1) (RW:available p27p1-cdk2p1-cyce))
-        eff: (and (RW:goal18))
-    dummy-action-19: 
-        pre: (or (RW:available cdk2p1p2-cyca-e2f13) (RW:available p21-cdk2-cycep1))
-        eff: (and (RW:goal19))
-    dummy-action-20: 
-        pre: (or (RW:available p27p1-cdk2p2-cyce) (RW:available prbp1-ap2-ge-c))
-        eff: (and (RW:goal20))
-    dummy-action-21: 
-        pre: (or (RW:available cdk1p3-gadd45) (RW:available skp2-skp1-cdk2-cyca))
-        eff: (and (RW:goal21))
-    dummy-action-22: 
-        pre: (or (RW:available p27p1-cdk46p1p2-cycd) (RW:available p57p1-cdk46p1p2-cycdp1))
-        eff: (and (RW:goal22))
-    dummy-action-23: 
-        pre: (or (RW:available p27p1-cdk2p1p2-cycep1) (RW:available p27p1-cdk46p1p2-cycdp1))
-        eff: (and (RW:goal23))
-    dummy-action-24: 
-        pre: (or (RW:available p27-cdk2p1-cycep1) (RW:available p27p1-cdk46p1-cycd))
-        eff: (and (RW:goal24))
-    dummy-action-25: 
-        pre: (or (RW:available cdk1p3-cycb) (RW:available p27p1-cdk2p1-cycep1))
-        eff: (and (RW:goal25))
-    dummy-action-26: 
-        pre: (or (RW:available cdk1p3-cyca) (RW:available p21-cdk2p1-cyce))
-        eff: (and (RW:goal26))
-    dummy-action-27: 
-        pre: (or (RW:available p16-cdk7p1) (RW:available p21-cdk2p2-cyca))
-        eff: (and (RW:goal27))
-Init[406]:
-  S:(association-reaction skp2-skp1p1 cdk2-cyca skp2-skp1p1-cdk2-cyca)
-  S:(association-reaction skp2-skp1p1 cdk2p1-cyca skp2-skp1p1-cdk2p1-cyca)
-  S:(association-reaction skp2-skp1p1 cdk2p1p2-cyca skp2-skp1p1-cdk2p1p2-cyca)
-  S:(association-reaction skp2-skp1p1 cdk2p2-cyca skp2-skp1p1-cdk2p2-cyca)
-  S:(association-reaction sp1 e2f13 sp1-e2f13)
-  S:(association-reaction sp1 e2f13p1 sp1-e2f13p1)
-  S:(association-reaction sp1 p107p1 sp1-p107p1)
-  S:(association-reaction sp1 p107 sp1-p107)
-  S:(association-reaction skp2 skp1 skp2-skp1)
-  S:(association-reaction skp2 cdk2-cyca skp2-cdk2-cyca)
-  S:(association-reaction skp2 cdk2p1-cyca skp2-cdk2p1-cyca)
-  S:(association-reaction skp2 cdk2p1p2-cyca skp2-cdk2p1p2-cyca)
-  S:(association-reaction skp2 cdk2p2-cyca skp2-cdk2p2-cyca)
-  S:(association-reaction skp2 skp1p1 skp2-skp1p1)
-  S:(association-reaction rpa cyca rpa-cyca)
-  S:(association-reaction prbp2 ap2 prbp2-ap2)
-  S:(association-reaction prbp1-e2f4p1-dp12 ge2 prbp1-e2f4p1-dp12-ge2)
-  S:(association-reaction prb-e2f4p1-dp12 ge2 prb-e2f4p1-dp12-ge2)
-  S:(association-reaction prb e2f4-dp12p1 prb-e2f4-dp12p1)
-  S:(association-reaction prb e2f13p1-dp12p1 prb-e2f13p1-dp12p1)
-  S:(association-reaction prb e2f13-dp12 prb-e2f13-dp12)
-  S:(association-reaction prb ap2 prb-ap2)
-  S:(association-reaction prb e2f4-dp12 prb-e2f4-dp12)
-  S:(association-reaction pcaf p300 pcaf-p300)
-  S:(association-reaction p57p1 cdk46p1-cycdp1 p57p1-cdk46p1-cycdp1)
-  S:(association-reaction p57p1 cdk46p1-cycd p57p1-cdk46p1-cycd)
-  S:(association-reaction p57p1 cdk46p1p2-cycdp1 p57p1-cdk46p1p2-cycdp1)
-  S:(association-reaction p57p1 cdk46p1p2-cycd p57p1-cdk46p1p2-cycd)
-  S:(association-reaction p57 cdk46p1-cycdp1 p57-cdk46p1-cycdp1)
-  S:(association-reaction p57 cdk2-cycep1 p57-cdk2-cycep1)
-  S:(association-reaction p57 cdk2-cyce p57-cdk2-cyce)
-  S:(association-reaction p57 cdk2p1-cycep1 p57-cdk2p1-cycep1)
-  S:(association-reaction p57 cdk2p1-cyce p57-cdk2p1-cyce)
-  S:(association-reaction p57 cdk2p1p2-cycep1 p57-cdk2p1p2-cycep1)
-  S:(association-reaction p57 cdk2p1p2-cyce p57-cdk2p1p2-cyce)
-  S:(association-reaction p57 cdk46p1-cycd p57-cdk46p1-cycd)
-  S:(association-reaction p57 cdk46p1p2-cycdp1 p57-cdk46p1p2-cycdp1)
-  S:(association-reaction p57 cdk46p1p2-cycd p57-cdk46p1p2-cycd)
-  S:(association-reaction p57 cdk2p2-cycep1 p57-cdk2p2-cycep1)
-  S:(association-reaction p57 cdk2p2-cyce p57-cdk2p2-cyce)
-  S:(association-reaction p57 cdk2-cyca p57-cdk2-cyca)
-  S:(association-reaction p57 cdk2p1-cyca p57-cdk2p1-cyca)
-  S:(association-reaction p57 cdk2p1p2-cyca p57-cdk2p1p2-cyca)
-  S:(association-reaction p57 cdk2p2-cyca p57-cdk2p2-cyca)
-  S:(association-reaction p53p1 dp12 p53p1-dp12)
-  S:(association-reaction p53p1 dp12p1 p53p1-dp12p1)
-  S:(association-reaction p53 dp12 p53-dp12)
-  S:(association-reaction p53 dp12p1 p53-dp12p1)
-  S:(association-reaction p27 cdk46p1-cycdp1 p27-cdk46p1-cycdp1)
-  S:(association-reaction p27 cdk2-cycep1 p27-cdk2-cycep1)
-  S:(association-reaction p27 cdk2-cyce p27-cdk2-cyce)
-  S:(association-reaction p27 cdk2p1-cycep1 p27-cdk2p1-cycep1)
-  S:(association-reaction p27 cdk2p1-cyce p27-cdk2p1-cyce)
-  S:(association-reaction p27 cdk2p1p2-cycep1 p27-cdk2p1p2-cycep1)
-  S:(association-reaction p27 cdk2p1p2-cyce p27-cdk2p1p2-cyce)
-  S:(association-reaction p27 cdk46p1-cycd p27-cdk46p1-cycd)
-  S:(association-reaction p27 cdk46p1p2-cycdp1 p27-cdk46p1p2-cycdp1)
-  S:(association-reaction p27 cdk46p1p2-cycd p27-cdk46p1p2-cycd)
-  S:(association-reaction p27 cdk2p2-cycep1 p27-cdk2p2-cycep1)
-  S:(association-reaction p27 cdk2p2-cyce p27-cdk2p2-cyce)
-  S:(association-reaction p27 cdk2-cyca p27-cdk2-cyca)
-  S:(association-reaction p27 cdk2p1-cyca p27-cdk2p1-cyca)
-  S:(association-reaction p27 cdk2p1p2-cyca p27-cdk2p1p2-cyca)
-  S:(association-reaction p27 cdk2p2-cyca p27-cdk2p2-cyca)
-  S:(association-reaction p16 cdk7 p16-cdk7)
-  S:(association-reaction p16 cdk46p1 p16-cdk46p1)
-  S:(association-reaction p16 cdk46p1p2 p16-cdk46p1p2)
-  S:(association-reaction p16 cdk7p1 p16-cdk7p1)
-  S:(association-reaction p130 e2f4-dp12p1 p130-e2f4-dp12p1)
-  S:(association-reaction p130 e2f4-dp12 p130-e2f4-dp12)
-  S:(association-reaction m1433 cdc25cp1p2 m1433-cdc25cp1p2)
-  S:(association-reaction m1433 cdc25cp2 m1433-cdc25cp2)
-  S:(association-reaction hdac1-prbp1-e2f4-dp12 ge2 hdac1-prbp1-e2f4-dp12-ge2)
-  S:(association-reaction hdac1-prbp1-e2f13p1-dp12 ge2 hdac1-prbp1-e2f13p1-dp12-ge2)
-  S:(association-reaction hdac1-p130-e2f4p1-dp12 ge2 hdac1-p130-e2f4p1-dp12-ge2)
-  S:(association-reaction hdac1-p107-e2f4p1-dp12 ge2 hdac1-p107-e2f4p1-dp12-ge2)
-  S:(association-reaction hbp1 p130 hbp1-p130)
-  S:(association-reaction e2f6 dp12 e2f6-dp12)
-  S:(association-reaction e2f4 dp12 e2f4-dp12)
-  S:(association-reaction e2f3 dp12 e2f3-dp12)
-  S:(association-reaction e2f13-dp12 ge2 e2f13-dp12-ge2)
-  S:(association-reaction e2f1 dp12 e2f1-dp12)
-  S:(association-reaction cebp prbp2 cebp-prbp2)
-  S:(association-reaction cebp prb cebp-prb)
-  S:(association-reaction cebp prbp1 cebp-prbp1)
-  S:(association-reaction cebp prbp1p2 cebp-prbp1p2)
-  S:(association-reaction cdk7 cych cdk7-cych)
-  S:(association-reaction cdk46p1 cycd cdk46p1-cycd)
-  S:(association-reaction cdk46p1 cycdp1 cdk46p1-cycdp1)
-  S:(association-reaction cdk2p1 cyca cdk2p1-cyca)
-  S:(association-reaction cdk2p1 cyce cdk2p1-cyce)
-  S:(association-reaction cdk2p1 cks1 cdk2p1-cks1)
-  S:(association-reaction cdk2p1 cycep1 cdk2p1-cycep1)
-  S:(association-reaction cdk2 cyca cdk2-cyca)
-  S:(association-reaction cdk2 cyce cdk2-cyce)
-  S:(association-reaction cdk2 cks1 cdk2-cks1)
-  S:(association-reaction cdk2 cycep1 cdk2-cycep1)
-  S:(association-reaction cdk1p1p2 cks1 cdk1p1p2-cks1)
-  S:(association-reaction cdk1p1p2 gadd45 cdk1p1p2-gadd45)
-  S:(association-reaction c-abl prbp2 c-abl-prbp2)
-  S:(association-reaction c-abl prb c-abl-prb)
-  S:(association-reaction c-abl prbp1 c-abl-prbp1)
-  S:(association-reaction c-abl prbp1p2 c-abl-prbp1p2)
-  S:(association-reaction ap2 ge-c ap2-ge-c)
-  S:(association-reaction cdk1p1 cks1 cdk1p1-cks1)
-  S:(association-reaction cdk1p1 gadd45 cdk1p1-gadd45)
-  S:(association-reaction cdk1p1p2p3 cyca cdk1p1p2p3-cyca)
-  S:(association-reaction cdk1p1p2p3 cycb cdk1p1p2p3-cycb)
-  S:(association-reaction cdk1p1p2p3 cks1 cdk1p1p2p3-cks1)
-  S:(association-reaction cdk1p1p2p3 gadd45 cdk1p1p2p3-gadd45)
-  S:(association-reaction cdk1p1p3 cyca cdk1p1p3-cyca)
-  S:(association-reaction cdk1p1p3 cycb cdk1p1p3-cycb)
-  S:(association-reaction cdk1p1p3 cks1 cdk1p1p3-cks1)
-  S:(association-reaction cdk1p1p3 gadd45 cdk1p1p3-gadd45)
-  S:(association-reaction cdk1 cks1 cdk1-cks1)
-  S:(association-reaction cdk1 gadd45 cdk1-gadd45)
-  S:(association-reaction cdk1p2 cks1 cdk1p2-cks1)
-  S:(association-reaction cdk1p2 gadd45 cdk1p2-gadd45)
-  S:(association-reaction cdk1p2p3 cyca cdk1p2p3-cyca)
-  S:(association-reaction cdk1p2p3 cycb cdk1p2p3-cycb)
-  S:(association-reaction cdk1p2p3 cks1 cdk1p2p3-cks1)
-  S:(association-reaction cdk1p2p3 gadd45 cdk1p2p3-gadd45)
-  S:(association-reaction cdk1p3 cyca cdk1p3-cyca)
-  S:(association-reaction cdk1p3 cycb cdk1p3-cycb)
-  S:(association-reaction cdk1p3 cks1 cdk1p3-cks1)
-  S:(association-reaction cdk1p3 gadd45 cdk1p3-gadd45)
-  S:(association-reaction cdk2p1p2 cyca cdk2p1p2-cyca)
-  S:(association-reaction cdk2p1p2 cyce cdk2p1p2-cyce)
-  S:(association-reaction cdk2p1p2 cks1 cdk2p1p2-cks1)
-  S:(association-reaction cdk2p1p2 cycep1 cdk2p1p2-cycep1)
-  S:(association-reaction cdk2p2 cyca cdk2p2-cyca)
-  S:(association-reaction cdk2p2 cyce cdk2p2-cyce)
-  S:(association-reaction cdk2p2 cks1 cdk2p2-cks1)
-  S:(association-reaction cdk2p2 cycep1 cdk2p2-cycep1)
-  S:(association-reaction e2f6-dp12 ge2 e2f6-dp12-ge2)
-  S:(association-reaction p107-e2f4-dp12 ge2 p107-e2f4-dp12-ge2)
-  S:(association-reaction p107-e2f4-dp12p1 ge2 p107-e2f4-dp12p1-ge2)
-  S:(association-reaction p130-e2f4-dp12p1 ge2 p130-e2f4-dp12p1-ge2)
-  S:(association-reaction cdk46p1p2 cycd cdk46p1p2-cycd)
-  S:(association-reaction cdk46p1p2 cycdp1 cdk46p1p2-cycdp1)
-  S:(association-reaction cdk7p1 cych cdk7p1-cych)
-  S:(association-reaction p27p1 cdk46p1-cycdp1 p27p1-cdk46p1-cycdp1)
-  S:(association-reaction p27p1 cdk2-cycep1 p27p1-cdk2-cycep1)
-  S:(association-reaction p27p1 cdk2-cyce p27p1-cdk2-cyce)
-  S:(association-reaction p27p1 cdk2p1-cycep1 p27p1-cdk2p1-cycep1)
-  S:(association-reaction p27p1 cdk2p1-cyce p27p1-cdk2p1-cyce)
-  S:(association-reaction p27p1 cdk2p1p2-cycep1 p27p1-cdk2p1p2-cycep1)
-  S:(association-reaction p27p1 cdk2p1p2-cyce p27p1-cdk2p1p2-cyce)
-  S:(association-reaction p27p1 cdk46p1-cycd p27p1-cdk46p1-cycd)
-  S:(association-reaction p27p1 cdk46p1p2-cycdp1 p27p1-cdk46p1p2-cycdp1)
-  S:(association-reaction p27p1 cdk46p1p2-cycd p27p1-cdk46p1p2-cycd)
-  S:(association-reaction p27p1 cdk2p2-cycep1 p27p1-cdk2p2-cycep1)
-  S:(association-reaction p27p1 cdk2p2-cyce p27p1-cdk2p2-cyce)
-  S:(association-reaction p27p1 cdk2-cyca p27p1-cdk2-cyca)
-  S:(association-reaction p27p1 cdk2p1-cyca p27p1-cdk2p1-cyca)
-  S:(association-reaction p27p1 cdk2p1p2-cyca p27p1-cdk2p1p2-cyca)
-  S:(association-reaction p27p1 cdk2p2-cyca p27p1-cdk2p2-cyca)
-  S:(association-reaction mdm2 prbp2 mdm2-prbp2)
-  S:(association-reaction mdm2 prb mdm2-prb)
-  S:(association-reaction mdm2 e2f13p1-dp12p1 mdm2-e2f13p1-dp12p1)
-  S:(association-reaction mdm2 e2f13-dp12 mdm2-e2f13-dp12)
-  S:(association-reaction mdm2 prbp1 mdm2-prbp1)
-  S:(association-reaction mdm2 prbp1p2 mdm2-prbp1p2)
-  S:(association-reaction p21 cdk46p1-cycdp1 p21-cdk46p1-cycdp1)
-  S:(association-reaction p21 gadd45 p21-gadd45)
-  S:(association-reaction p21 cdk2-cycep1 p21-cdk2-cycep1)
-  S:(association-reaction p21 cdk2-cyce p21-cdk2-cyce)
-  S:(association-reaction p21 cdk2p1-cycep1 p21-cdk2p1-cycep1)
-  S:(association-reaction p21 cdk2p1-cyce p21-cdk2p1-cyce)
-  S:(association-reaction p21 cdk2p1p2-cycep1 p21-cdk2p1p2-cycep1)
-  S:(association-reaction p21 cdk2p1p2-cyce p21-cdk2p1p2-cyce)
-  S:(association-reaction p21 cdk46p1-cycd p21-cdk46p1-cycd)
-  S:(association-reaction p21 cdk46p1p2-cycdp1 p21-cdk46p1p2-cycdp1)
-  S:(association-reaction p21 cdk46p1p2-cycd p21-cdk46p1p2-cycd)
-  S:(association-reaction p21 cdk2p2-cycep1 p21-cdk2p2-cycep1)
-  S:(association-reaction p21 cdk2p2-cyce p21-cdk2p2-cyce)
-  S:(association-reaction p21 cdk2-cyca p21-cdk2-cyca)
-  S:(association-reaction p21 cdk2p1-cyca p21-cdk2p1-cyca)
-  S:(association-reaction p21 cdk2p1p2-cyca p21-cdk2p1p2-cyca)
-  S:(association-reaction p21 cdk2p2-cyca p21-cdk2p2-cyca)
-  S:(association-reaction prb-ap2 ge-c prb-ap2-ge-c)
-  S:(association-reaction prbp1-ap2 ge-c prbp1-ap2-ge-c)
-  S:(association-reaction e2f4-dp12 ge2 e2f4-dp12-ge2)
-  S:(association-reaction prbp1 e2f4-dp12p1 prbp1-e2f4-dp12p1)
-  S:(association-reaction prbp1 e2f13p1-dp12p1 prbp1-e2f13p1-dp12p1)
-  S:(association-reaction prbp1 e2f13-dp12 prbp1-e2f13-dp12)
-  S:(association-reaction prbp1 ap2 prbp1-ap2)
-  S:(association-reaction prbp1 e2f4-dp12 prbp1-e2f4-dp12)
-  S:(association-reaction prbp1p2-ap2 ge-c prbp1p2-ap2-ge-c)
-  S:(association-reaction prbp2-ap2 ge-c prbp2-ap2-ge-c)
-  S:(association-reaction prbp1p2 ap2 prbp1p2-ap2)
-  S:(association-reaction p130-e2f4-dp12 ge2 p130-e2f4-dp12-ge2)
-  S:(association-reaction prb-e2f13-dp12 ge2 prb-e2f13-dp12-ge2)
-  S:(association-reaction prb-e2f13p1-dp12p1 ge2 prb-e2f13p1-dp12p1-ge2)
-  S:(association-reaction prb-e2f4-dp12 ge2 prb-e2f4-dp12-ge2)
-  S:(association-reaction prbp1-e2f13-dp12 ge2 prbp1-e2f13-dp12-ge2)
-  S:(association-reaction prbp1-e2f13p1-dp12p1 ge2 prbp1-e2f13p1-dp12p1-ge2)
-  S:(association-reaction prbp1-e2f4-dp12 ge2 prbp1-e2f4-dp12-ge2)
-  S:(association-reaction skp2p1 skp1 skp2p1-skp1)
-  S:(association-reaction skp2p1 skp1p1 skp2p1-skp1p1)
-  S:(association-reaction cdk2-cyca e2f13 cdk2-cyca-e2f13)
-  S:(association-reaction cdk2-cyca e2f13p1 cdk2-cyca-e2f13p1)
-  S:(association-reaction cdk2p1-cyca e2f13 cdk2p1-cyca-e2f13)
-  S:(association-reaction cdk2p1-cyca e2f13p1 cdk2p1-cyca-e2f13p1)
-  S:(association-reaction cdk2p1p2-cyca e2f13 cdk2p1p2-cyca-e2f13)
-  S:(association-reaction cdk2p1p2-cyca e2f13p1 cdk2p1p2-cyca-e2f13p1)
-  S:(association-reaction cdk2p2-cyca e2f13 cdk2p2-cyca-e2f13)
-  S:(association-reaction cdk2p2-cyca e2f13p1 cdk2p2-cyca-e2f13p1)
-  S:(association-reaction skp2-skp1 cdk2-cyca skp2-skp1-cdk2-cyca)
-  S:(association-reaction skp2-skp1 cdk2p1-cyca skp2-skp1-cdk2p1-cyca)
-  S:(association-reaction skp2-skp1 cdk2p1p2-cyca skp2-skp1-cdk2p1p2-cyca)
-  S:(association-reaction skp2-skp1 cdk2p2-cyca skp2-skp1-cdk2p2-cyca)
-  S:(association-reaction c-myc ap2 c-myc-ap2)
-  S:(association-reaction p107 e2f4-dp12p1 p107-e2f4-dp12p1)
-  S:(association-reaction p107 e2f4-dp12 p107-e2f4-dp12)
-  S:(catalyzed-association-reaction cdk1p3-cyca wee1 cdk1p2p3-cyca)
-  S:(catalyzed-association-reaction cdk1p3-cycb wee1 cdk1p2p3-cycb)
-  S:(catalyzed-association-reaction cdk46p1-cycdp1 cdk7-cych cdk46p1p2-cycdp1)
-  S:(catalyzed-association-reaction cyca skp2p1-skp1 skp2p1-skp1)
-  S:(catalyzed-association-reaction cyca skp2-skp1p1 skp2-skp1p1)
-  S:(catalyzed-association-reaction cyca skp2p1-skp1p1 skp2p1-skp1p1)
-  S:(catalyzed-association-reaction cyca skp2-skp1 skp2-skp1)
-  S:(catalyzed-association-reaction cyce cdk2p2-cycep1 cycep1)
-  S:(catalyzed-association-reaction cyce cdk2p2-cyce cycep1)
-  S:(catalyzed-association-reaction wee1 cdk1p3-cyca wee1p1)
-  S:(catalyzed-association-reaction wee1 cdk1p3-cycb wee1p1)
-  S:(catalyzed-association-reaction skp2 cdk2p2-cyca skp2p1)
-  S:(catalyzed-association-reaction skp1 cdk2p2-cyca skp1p1)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
-  S:(catalyzed-association-reaction prb cdk46p3-cycdp1 prbp1)
-  S:(catalyzed-association-reaction p27 cdk2p2-cycep1 p27p1)
-  S:(catalyzed-association-reaction p27 cdk2p2-cyce p27p1)
-  S:(catalyzed-association-reaction e2f13 cdk2p2-cyca e2f13p1)
-  S:(catalyzed-association-reaction dp12 cdk2p2-cyca dp12p1)
-  S:(catalyzed-association-reaction cdk7 cdk7-cych cdk7p1)
-  S:(catalyzed-association-reaction cdk46p1 cdk7-cych cdk46p1p2)
-  S:(catalyzed-association-reaction cdk2p1 cdk7-cych cdk2p1p2)
-  S:(catalyzed-association-reaction cdk2-cycb wee1 cdk2p1-cycb)
-  S:(catalyzed-association-reaction cdk2 cdk7-cych cdk2p2)
-  S:(catalyzed-association-reaction cdk1p1p2 cdc25cp1 cdk1p1)
-  S:(catalyzed-association-reaction cdk1p1p2 cdc25cp1 cdk1p2)
-  S:(catalyzed-association-reaction cdk1p1p2 cdk7-cych cdk1p1p2p3)
-  S:(catalyzed-association-reaction cdk1p1p2 cdc25cp1p2 cdk1p1)
-  S:(catalyzed-association-reaction cdk1p1p2 cdc25cp1p2 cdk1p2)
-  S:(catalyzed-association-reaction cdc25c cdk1p3-cyca cdc25cp1)
-  S:(catalyzed-association-reaction cdc25c cdk1p3-cycb cdc25cp1)
-  S:(catalyzed-association-reaction cdc25c plk1 cdc25cp1)
-  S:(catalyzed-association-reaction cdc25c c-tak1 cdc25cp2)
-  S:(catalyzed-association-reaction cdc25c chk1 cdc25cp2)
-  S:(catalyzed-association-reaction cdk1p1 cdc25cp1 cdk1)
-  S:(catalyzed-association-reaction cdk1p1 cdk7-cych cdk1p1p3)
-  S:(catalyzed-association-reaction cdk1p1 cdc25cp1p2 cdk1)
-  S:(catalyzed-association-reaction cdk1p1p2p3 cdc25cp1 cdk1p1p3)
-  S:(catalyzed-association-reaction cdk1p1p2p3 cdc25cp1 cdk1p2p3)
-  S:(catalyzed-association-reaction cdk1p1p2p3 cdc25cp1p2 cdk1p1p3)
-  S:(catalyzed-association-reaction cdk1p1p2p3 cdc25cp1p2 cdk1p2p3)
-  S:(catalyzed-association-reaction cdk1p1p3 cdc25cp1 cdk1p3)
-  S:(catalyzed-association-reaction cdk1p1p3 cdc25cp1p2 cdk1p3)
-  S:(catalyzed-association-reaction cdk1 cdk7-cych cdk1p3)
-  S:(catalyzed-association-reaction cdk1p2 cdc25cp1 cdk1)
-  S:(catalyzed-association-reaction cdk1p2 cdk7-cych cdk1p2p3)
-  S:(catalyzed-association-reaction cdk1p2 cdc25cp1p2 cdk1)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1 cdk1p1p3-cyca)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1 cdk1p2p3-cyca)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1p2 cdk1p1p3-cyca)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1p2 cdk1p2p3-cyca)
-  S:(catalyzed-association-reaction cdc25cp1 c-tak1 cdc25cp1p2)
-  S:(catalyzed-association-reaction cdc25cp1 chk1 cdc25cp1p2)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1 cdk1p1p3-cycb)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1 cdk1p2p3-cycb)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1p2 cdk1p1p3-cycb)
-  S:(catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1p2 cdk1p2p3-cycb)
-  S:(catalyzed-association-reaction cdk1p2p3 cdc25cp1 cdk1p3)
-  S:(catalyzed-association-reaction cdk1p2p3 cdc25cp1p2 cdk1p3)
-  S:(catalyzed-association-reaction cdk1p1p3-cyca wee1 cdk1p1p2p3-cyca)
-  S:(catalyzed-association-reaction cdk1p1p3-cyca cdc25cp1 cdk1p3-cyca)
-  S:(catalyzed-association-reaction cdk1p1p3-cyca cdc25cp1p2 cdk1p3-cyca)
-  S:(catalyzed-association-reaction cdk1p2p3-cyca cdc25cp1 cdk1p3-cyca)
-  S:(catalyzed-association-reaction cdk1p2p3-cyca cdc25cp1p2 cdk1p3-cyca)
-  S:(catalyzed-association-reaction cdk1p1p3-cycb wee1 cdk1p1p2p3-cycb)
-  S:(catalyzed-association-reaction cdk1p1p3-cycb cdc25cp1 cdk1p3-cycb)
-  S:(catalyzed-association-reaction cdk1p1p3-cycb cdc25cp1p2 cdk1p3-cycb)
-  S:(catalyzed-association-reaction cdk1p2p3-cycb cdc25cp1 cdk1p3-cycb)
-  S:(catalyzed-association-reaction cdk1p2p3-cycb cdc25cp1p2 cdk1p3-cycb)
-  S:(catalyzed-association-reaction cdk7-cych cdk7-cych cdk7p1-cych)
-  S:(catalyzed-association-reaction cdc25cp2 cdk1p3-cyca cdc25cp1p2)
-  S:(catalyzed-association-reaction cdc25cp2 cdk1p3-cycb cdc25cp1p2)
-  S:(catalyzed-association-reaction cdc25cp2 plk1 cdc25cp1p2)
-  S:(catalyzed-association-reaction cdk2-cycep1 cdk7-cych cdk2p2-cycep1)
-  S:(catalyzed-association-reaction cdk2-cyce cdk7-cych cdk2p2-cyce)
-  S:(catalyzed-association-reaction cdk2p1-cycep1 cdk7-cych cdk2p1p2-cycep1)
-  S:(catalyzed-association-reaction cdk2p1-cyce cdk7-cych cdk2p1p2-cyce)
-  S:(catalyzed-association-reaction cdk46p1-cycd cdk7-cych cdk46p1p2-cycd)
-  S:(catalyzed-association-reaction prbp1 cdk2p2-cycep1 prbp1p2)
-  S:(catalyzed-association-reaction prbp1 cdk2p2-cyce prbp1p2)
-  S:(catalyzed-association-reaction cdk2-cyca wee1 cdk2p1-cyca)
-  S:(catalyzed-association-reaction cdk2-cyca cdk7-cych cdk2p2-cyca)
-  S:(catalyzed-association-reaction cdk2p1-cyca cdk7-cych cdk2p1p2-cyca)
-  S:(catalyzed-association-reaction cdk2p2-cyca wee1 cdk2p1p2-cyca)
-  S:(synthesis-reaction prbp1-ap2-ge-c ecadherin)
-  S:(synthesis-reaction p53p1 mdm2)
-  S:(synthesis-reaction p53p1 gadd45)
-  S:(synthesis-reaction p53p1 p21)
-  S:(synthesis-reaction p53p1 c-fos)
-  S:(synthesis-reaction p53 mdm2)
-  S:(synthesis-reaction p53 gadd45)
-  S:(synthesis-reaction p53 p21)
-  S:(synthesis-reaction p53 c-fos)
-  S:(synthesis-reaction ap2-ge-c ecadherin)
-  S:(synthesis-reaction e2f13-dp12-ge2 cyca)
-  S:(synthesis-reaction e2f13-dp12-ge2 cyce)
-  S:(synthesis-reaction e2f13-dp12-ge2 c-myc)
-  S:(synthesis-reaction e2f13-dp12-ge2 cycd)
-  S:(synthesis-reaction e2f13-dp12-ge2 cycdp1)
-  S:(synthesis-reaction e2f13-dp12-ge2 cycep1)
-  S:(synthesis-reaction e2f13-dp12-ge2 p19arf)
-  S:(synthesis-reaction e2f13-dp12-ge2 pol)
-  S:(synthesis-reaction e2f13-dp12-ge2 p107p1)
-  S:(synthesis-reaction e2f13-dp12-ge2 p107)
-  S:(synthesis-reaction e2f4-dp12-ge2 cyca)
-  S:(synthesis-reaction e2f4-dp12-ge2 cyce)
-  S:(synthesis-reaction e2f4-dp12-ge2 c-myc)
-  S:(synthesis-reaction e2f4-dp12-ge2 cycd)
-  S:(synthesis-reaction e2f4-dp12-ge2 cycdp1)
-  S:(synthesis-reaction e2f4-dp12-ge2 cycep1)
-  S:(synthesis-reaction e2f4-dp12-ge2 p19arf)
-  S:(synthesis-reaction e2f4-dp12-ge2 pol)
-  S:(synthesis-reaction e2f4-dp12-ge2 p107p1)
-  S:(synthesis-reaction e2f4-dp12-ge2 p107)
-  S:(synthesis-reaction prb-ap2-ge-c ecadherin)
-  S:(synthesis-reaction prbp1p2-ap2-ge-c ecadherin)
-  S:(synthesis-reaction prbp2-ap2-ge-c ecadherin)
-  S:(possible wee1)
-  S:(possible sp1)
-  S:(possible skp2)
-  S:(possible skp1)
-  S:(possible rpa)
-  S:(possible prbp2)
-  S:(possible prbp1-e2f4p1-dp12)
-  S:(possible prb-e2f4p1-dp12)
-  S:(possible prb)
-  S:(possible plk1)
-  S:(possible pcaf)
-  S:(possible p57p1)
-  S:(possible p57)
-  S:(possible p53p1)
-  S:(possible p53)
-  S:(possible p300)
-  S:(possible p27)
-  S:(possible p16)
-  S:(possible p130)
-  S:(possible m1433)
-  S:(possible hdac1-prbp1-e2f4-dp12)
-  S:(possible hdac1-prbp1-e2f13p1-dp12)
-  S:(possible hdac1-p130-e2f4p1-dp12)
-  S:(possible hdac1-p107-e2f4p1-dp12)
-  S:(possible hbp1)
-  S:(possible ge-c)
-  S:(possible ge2)
-  S:(possible e2f6)
-  S:(possible e2f4-dp12p1)
-  S:(possible e2f4)
-  S:(possible e2f3)
-  S:(possible e2f13p1-dp12p1)
-  S:(possible e2f13-dp12)
-  S:(possible e2f13)
-  S:(possible e2f1)
-  S:(possible dp12)
-  S:(possible cych)
-  S:(possible cycb)
-  S:(possible c-tak1)
-  S:(possible cks1)
-  S:(possible chk1)
-  S:(possible cebp)
-  S:(possible cdk7)
-  S:(possible cdk46p3-cycdp1)
-  S:(possible cdk46p1)
-  S:(possible cdk2p1)
-  S:(possible cdk2-cycb)
-  S:(possible cdk2)
-  S:(possible cdk1p1p2)
-  S:(possible cdc25c)
-  S:(possible c-abl)
-  S:(possible ap2)
-  S:(next l1 l0)
-  S:(next l2 l1)
-  S:(next l3 l2)
-  S:(next l4 l3)
-  S:(next l5 l4)
-  S:(next l6 l5)
-  S:(next l7 l6)
-  S:(next l8 l7)
-  S:(next l9 l8)
-  S:(next l10 l9)
-  S:(next l11 l10)
-  S:(next l12 l11)
-  S:(next l13 l12)
-  S:(next l14 l13)
-  S:(next l15 l14)
-  S:(next l16 l15)
-  S:(next l17 l16)
-  S:(next l18 l17)
-  S:(next l19 l18)
-  S:(next l20 l19)
-  S:(next l21 l20)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  complex - molecule
+  level - object
+  molecule - object
+  object
+  simple - molecule
+Obj:
+  ap2 - simple
+  ap2-ge-c - complex
+  c-abl - simple
+  c-abl-prb - complex
+  c-abl-prbp1 - complex
+  c-abl-prbp1p2 - complex
+  c-abl-prbp2 - complex
+  c-fos - complex
+  c-myc - complex
+  c-myc-ap2 - complex
+  c-tak1 - simple
+  cdc25c - simple
+  cdc25cp1 - complex
+  cdc25cp1p2 - complex
+  cdc25cp2 - complex
+  cdk1 - complex
+  cdk1-cks1 - complex
+  cdk1-gadd45 - complex
+  cdk1p1 - complex
+  cdk1p1-cks1 - complex
+  cdk1p1-gadd45 - complex
+  cdk1p1p2 - simple
+  cdk1p1p2-cks1 - complex
+  cdk1p1p2-gadd45 - complex
+  cdk1p1p2p3 - complex
+  cdk1p1p2p3-cks1 - complex
+  cdk1p1p2p3-cyca - complex
+  cdk1p1p2p3-cycb - complex
+  cdk1p1p2p3-gadd45 - complex
+  cdk1p1p3 - complex
+  cdk1p1p3-cks1 - complex
+  cdk1p1p3-cyca - complex
+  cdk1p1p3-cycb - complex
+  cdk1p1p3-gadd45 - complex
+  cdk1p2 - complex
+  cdk1p2-cks1 - complex
+  cdk1p2-gadd45 - complex
+  cdk1p2p3 - complex
+  cdk1p2p3-cks1 - complex :constant
+  cdk1p2p3-cyca - complex
+  cdk1p2p3-cycb - complex
+  cdk1p2p3-gadd45 - complex
+  cdk1p3 - complex
+  cdk1p3-cks1 - complex :constant
+  cdk1p3-cyca - complex :constant
+  cdk1p3-cycb - complex :constant
+  cdk1p3-gadd45 - complex :constant
+  cdk2 - simple
+  cdk2-cks1 - complex
+  cdk2-cyca - complex
+  cdk2-cyca-e2f13 - complex
+  cdk2-cyca-e2f13p1 - complex :constant
+  cdk2-cycb - simple
+  cdk2-cyce - complex
+  cdk2-cycep1 - complex
+  cdk2p1 - simple
+  cdk2p1-cks1 - complex
+  cdk2p1-cyca - complex
+  cdk2p1-cyca-e2f13 - complex
+  cdk2p1-cyca-e2f13p1 - complex :constant
+  cdk2p1-cycb - complex
+  cdk2p1-cyce - complex
+  cdk2p1-cycep1 - complex
+  cdk2p1p2 - complex
+  cdk2p1p2-cks1 - complex
+  cdk2p1p2-cyca - complex
+  cdk2p1p2-cyca-e2f13 - complex :constant
+  cdk2p1p2-cyca-e2f13p1 - complex :constant
+  cdk2p1p2-cyce - complex
+  cdk2p1p2-cycep1 - complex
+  cdk2p2 - complex
+  cdk2p2-cks1 - complex
+  cdk2p2-cyca - complex
+  cdk2p2-cyca-e2f13 - complex
+  cdk2p2-cyca-e2f13p1 - complex :constant
+  cdk2p2-cyce - complex
+  cdk2p2-cycep1 - complex
+  cdk46p1 - simple
+  cdk46p1-cycd - complex
+  cdk46p1-cycdp1 - complex :constant
+  cdk46p1p2 - complex
+  cdk46p1p2-cycd - complex
+  cdk46p1p2-cycdp1 - complex
+  cdk46p3-cycdp1 - simple
+  cdk7 - simple
+  cdk7-cych - complex
+  cdk7p1 - complex
+  cdk7p1-cych - complex
+  cebp - simple
+  cebp-prb - complex
+  cebp-prbp1 - complex
+  cebp-prbp1p2 - complex
+  cebp-prbp2 - complex
+  chk1 - simple
+  cks1 - simple
+  cyca - complex :constant
+  cycb - simple
+  cycd - complex
+  cycdp1 - complex
+  cyce - complex :constant
+  cycep1 - complex
+  cych - simple
+  dp12 - simple
+  dp12p1 - complex
+  e2f1 - simple
+  e2f1-dp12 - complex
+  e2f13 - simple
+  e2f13-dp12 - simple
+  e2f13-dp12-ge2 - complex
+  e2f13p1 - complex
+  e2f13p1-dp12p1 - simple
+  e2f3 - simple
+  e2f3-dp12 - complex
+  e2f4 - simple
+  e2f4-dp12 - complex
+  e2f4-dp12-ge2 - complex
+  e2f4-dp12p1 - simple
+  e2f6 - simple
+  e2f6-dp12 - complex
+  e2f6-dp12-ge2 - complex
+  ecadherin - complex
+  gadd45 - complex
+  ge-c - simple
+  ge2 - simple
+  hbp1 - simple
+  hbp1-p130 - complex
+  hdac1-p107-e2f4p1-dp12 - simple
+  hdac1-p107-e2f4p1-dp12-ge2 - complex
+  hdac1-p130-e2f4p1-dp12 - simple
+  hdac1-p130-e2f4p1-dp12-ge2 - complex
+  hdac1-prbp1-e2f13p1-dp12 - simple
+  hdac1-prbp1-e2f13p1-dp12-ge2 - complex
+  hdac1-prbp1-e2f4-dp12 - simple
+  hdac1-prbp1-e2f4-dp12-ge2 - complex
+  l0 - level
+  l1 - level
+  l10 - level
+  l11 - level
+  l12 - level
+  l13 - level
+  l14 - level
+  l15 - level
+  l16 - level
+  l17 - level
+  l18 - level
+  l19 - level
+  l2 - level
+  l20 - level
+  l21 - level
+  l3 - level
+  l4 - level
+  l5 - level
+  l6 - level
+  l7 - level
+  l8 - level
+  l9 - level
+  m1433 - simple
+  m1433-cdc25cp1p2 - complex
+  m1433-cdc25cp2 - complex
+  mdm2 - complex
+  mdm2-e2f13-dp12 - complex
+  mdm2-e2f13p1-dp12p1 - complex
+  mdm2-prb - complex
+  mdm2-prbp1 - complex :constant
+  mdm2-prbp1p2 - complex
+  mdm2-prbp2 - complex
+  p107 - complex
+  p107-e2f4-dp12 - complex
+  p107-e2f4-dp12-ge2 - complex
+  p107-e2f4-dp12p1 - complex
+  p107-e2f4-dp12p1-ge2 - complex
+  p107p1 - complex
+  p130 - simple
+  p130-e2f4-dp12 - complex
+  p130-e2f4-dp12-ge2 - complex
+  p130-e2f4-dp12p1 - complex
+  p130-e2f4-dp12p1-ge2 - complex
+  p16 - simple
+  p16-cdk46p1 - complex
+  p16-cdk46p1p2 - complex
+  p16-cdk7 - complex
+  p16-cdk7p1 - complex :constant
+  p19arf - complex
+  p21 - complex
+  p21-cdk2-cyca - complex
+  p21-cdk2-cyce - complex
+  p21-cdk2-cycep1 - complex :constant
+  p21-cdk2p1-cyca - complex
+  p21-cdk2p1-cyce - complex :constant
+  p21-cdk2p1-cycep1 - complex
+  p21-cdk2p1p2-cyca - complex :constant
+  p21-cdk2p1p2-cyce - complex
+  p21-cdk2p1p2-cycep1 - complex
+  p21-cdk2p2-cyca - complex :constant
+  p21-cdk2p2-cyce - complex
+  p21-cdk2p2-cycep1 - complex
+  p21-cdk46p1-cycd - complex
+  p21-cdk46p1-cycdp1 - complex
+  p21-cdk46p1p2-cycd - complex
+  p21-cdk46p1p2-cycdp1 - complex
+  p21-gadd45 - complex
+  p27 - simple
+  p27-cdk2-cyca - complex
+  p27-cdk2-cyce - complex
+  p27-cdk2-cycep1 - complex
+  p27-cdk2p1-cyca - complex
+  p27-cdk2p1-cyce - complex
+  p27-cdk2p1-cycep1 - complex :constant
+  p27-cdk2p1p2-cyca - complex
+  p27-cdk2p1p2-cyce - complex
+  p27-cdk2p1p2-cycep1 - complex
+  p27-cdk2p2-cyca - complex :constant
+  p27-cdk2p2-cyce - complex
+  p27-cdk2p2-cycep1 - complex
+  p27-cdk46p1-cycd - complex
+  p27-cdk46p1-cycdp1 - complex :constant
+  p27-cdk46p1p2-cycd - complex
+  p27-cdk46p1p2-cycdp1 - complex
+  p27p1 - complex
+  p27p1-cdk2-cyca - complex :constant
+  p27p1-cdk2-cyce - complex :constant
+  p27p1-cdk2-cycep1 - complex :constant
+  p27p1-cdk2p1-cyca - complex :constant
+  p27p1-cdk2p1-cyce - complex :constant
+  p27p1-cdk2p1-cycep1 - complex :constant
+  p27p1-cdk2p1p2-cyca - complex :constant
+  p27p1-cdk2p1p2-cyce - complex :constant
+  p27p1-cdk2p1p2-cycep1 - complex :constant
+  p27p1-cdk2p2-cyca - complex :constant
+  p27p1-cdk2p2-cyce - complex :constant
+  p27p1-cdk2p2-cycep1 - complex :constant
+  p27p1-cdk46p1-cycd - complex :constant
+  p27p1-cdk46p1-cycdp1 - complex :constant
+  p27p1-cdk46p1p2-cycd - complex :constant
+  p27p1-cdk46p1p2-cycdp1 - complex :constant
+  p300 - simple
+  p53 - simple
+  p53-dp12 - complex
+  p53-dp12p1 - complex
+  p53p1 - simple
+  p53p1-dp12 - complex
+  p53p1-dp12p1 - complex :constant
+  p57 - simple
+  p57-cdk2-cyca - complex
+  p57-cdk2-cyce - complex
+  p57-cdk2-cycep1 - complex
+  p57-cdk2p1-cyca - complex
+  p57-cdk2p1-cyce - complex
+  p57-cdk2p1-cycep1 - complex
+  p57-cdk2p1p2-cyca - complex
+  p57-cdk2p1p2-cyce - complex
+  p57-cdk2p1p2-cycep1 - complex
+  p57-cdk2p2-cyca - complex
+  p57-cdk2p2-cyce - complex
+  p57-cdk2p2-cycep1 - complex
+  p57-cdk46p1-cycd - complex
+  p57-cdk46p1-cycdp1 - complex
+  p57-cdk46p1p2-cycd - complex
+  p57-cdk46p1p2-cycdp1 - complex
+  p57p1 - simple
+  p57p1-cdk46p1-cycd - complex
+  p57p1-cdk46p1-cycdp1 - complex
+  p57p1-cdk46p1p2-cycd - complex
+  p57p1-cdk46p1p2-cycdp1 - complex :constant
+  pcaf - simple
+  pcaf-p300 - complex
+  plk1 - simple
+  pol - complex
+  prb - simple
+  prb-ap2 - complex
+  prb-ap2-ge-c - complex
+  prb-e2f13-dp12 - complex
+  prb-e2f13-dp12-ge2 - complex
+  prb-e2f13p1-dp12p1 - complex
+  prb-e2f13p1-dp12p1-ge2 - complex
+  prb-e2f4-dp12 - complex
+  prb-e2f4-dp12-ge2 - complex
+  prb-e2f4-dp12p1 - complex
+  prb-e2f4p1-dp12 - simple
+  prb-e2f4p1-dp12-ge2 - complex
+  prbp1 - complex
+  prbp1-ap2 - complex
+  prbp1-ap2-ge-c - complex :constant
+  prbp1-e2f13-dp12 - complex
+  prbp1-e2f13-dp12-ge2 - complex
+  prbp1-e2f13p1-dp12p1 - complex
+  prbp1-e2f13p1-dp12p1-ge2 - complex :constant
+  prbp1-e2f4-dp12 - complex
+  prbp1-e2f4-dp12-ge2 - complex
+  prbp1-e2f4-dp12p1 - complex
+  prbp1-e2f4p1-dp12 - simple
+  prbp1-e2f4p1-dp12-ge2 - complex
+  prbp1p2 - complex
+  prbp1p2-ap2 - complex
+  prbp1p2-ap2-ge-c - complex
+  prbp2 - simple
+  prbp2-ap2 - complex
+  prbp2-ap2-ge-c - complex
+  rpa - simple
+  rpa-cyca - complex
+  skp1 - simple
+  skp1p1 - complex
+  skp2 - simple
+  skp2-cdk2-cyca - complex
+  skp2-cdk2p1-cyca - complex
+  skp2-cdk2p1p2-cyca - complex :constant
+  skp2-cdk2p2-cyca - complex :constant
+  skp2-skp1 - complex
+  skp2-skp1-cdk2-cyca - complex :constant
+  skp2-skp1-cdk2p1-cyca - complex
+  skp2-skp1-cdk2p1p2-cyca - complex
+  skp2-skp1-cdk2p2-cyca - complex
+  skp2-skp1p1 - complex :constant
+  skp2-skp1p1-cdk2-cyca - complex :constant
+  skp2-skp1p1-cdk2p1-cyca - complex :constant
+  skp2-skp1p1-cdk2p1p2-cyca - complex :constant
+  skp2-skp1p1-cdk2p2-cyca - complex :constant
+  skp2p1 - complex
+  skp2p1-skp1 - complex :constant
+  skp2p1-skp1p1 - complex
+  sp1 - simple
+  sp1-e2f13 - complex
+  sp1-e2f13p1 - complex :constant
+  sp1-p107 - complex :constant
+  sp1-p107p1 - complex
+  wee1 - simple
+  wee1p1 - complex :constant
+Predicate:
+  (= object object) :eq
+  (association-reaction molecule molecule complex)
+  (available molecule)
+  (catalyzed-association-reaction molecule molecule complex)
+  (chosen simple)
+  (goal1)
+  (goal10)
+  (goal11)
+  (goal12)
+  (goal13)
+  (goal14)
+  (goal15)
+  (goal16)
+  (goal17)
+  (goal18)
+  (goal19)
+  (goal2)
+  (goal20)
+  (goal21)
+  (goal22)
+  (goal23)
+  (goal24)
+  (goal25)
+  (goal26)
+  (goal27)
+  (goal3)
+  (goal4)
+  (goal5)
+  (goal6)
+  (goal7)
+  (goal8)
+  (goal9)
+  (next level level)
+  (num-subs level)
+  (possible molecule)
+  (synthesis-reaction molecule molecule)
+Function:
+Action:
+  associate-with-catalyze: ?x1 - molecule ?x2 - molecule ?x3 - complex
+      pre: (and (available ?x1) (available ?x2) (catalyzed-association-reaction ?x1 ?x2 ?x3))
+      eff: (and (available ?x3) (not (available ?x1)))
+  associate: ?x1 - molecule ?x2 - molecule ?x3 - complex
+      pre: (and (association-reaction ?x1 ?x2 ?x3) (available ?x1) (available ?x2))
+      eff: (and (available ?x3) (not (available ?x1)) (not (available ?x2)))
+  choose: ?x - simple ?l1 - level ?l2 - level
+      pre: (and (next ?l1 ?l2) (not (chosen ?x)) (num-subs ?l2) (possible ?x))
+      eff: (and (chosen ?x) (not (num-subs ?l2)) (num-subs ?l1))
+  dummy-action-10:
+      pre: (or (available cdk2-cyca-e2f13p1) (available p27p1-cdk2p1-cyca))
+      eff: (and (goal10))
+  dummy-action-11:
+      pre: (or (available p27-cdk2p2-cyca) (available p27-cdk46p1-cycdp1))
+      eff: (and (goal11))
+  dummy-action-12:
+      pre: (or (available cdk2p1-cyca-e2f13p1) (available mdm2-prbp1))
+      eff: (and (goal12))
+  dummy-action-13:
+      pre: (or (available p27p1-cdk2p1p2-cyca) (available skp2-cdk2p2-cyca))
+      eff: (and (goal13))
+  dummy-action-14:
+      pre: (or (available cdk1p3-cks1) (available p27p1-cdk2p2-cyca))
+      eff: (and (goal14))
+  dummy-action-15:
+      pre: (or (available cyce) (available skp2-cdk2p1p2-cyca))
+      eff: (and (goal15))
+  dummy-action-16:
+      pre: (or (available cdk1p2p3-cks1) (available skp2-skp1p1))
+      eff: (and (goal16))
+  dummy-action-17:
+      pre: (or (available p27p1-cdk2-cycep1) (available p27p1-cdk2p2-cycep1))
+      eff: (and (goal17))
+  dummy-action-18:
+      pre: (or (available cdk2p1p2-cyca-e2f13p1) (available p27p1-cdk2p1-cyce))
+      eff: (and (goal18))
+  dummy-action-19:
+      pre: (or (available cdk2p1p2-cyca-e2f13) (available p21-cdk2-cycep1))
+      eff: (and (goal19))
+  dummy-action-1:
+      pre: (or (available p27p1-cdk46p1-cycdp1) (available skp2-skp1p1-cdk2-cyca))
+      eff: (and (goal1))
+  dummy-action-20:
+      pre: (or (available p27p1-cdk2p2-cyce) (available prbp1-ap2-ge-c))
+      eff: (and (goal20))
+  dummy-action-21:
+      pre: (or (available cdk1p3-gadd45) (available skp2-skp1-cdk2-cyca))
+      eff: (and (goal21))
+  dummy-action-22:
+      pre: (or (available p27p1-cdk46p1p2-cycd) (available p57p1-cdk46p1p2-cycdp1))
+      eff: (and (goal22))
+  dummy-action-23:
+      pre: (or (available p27p1-cdk2p1p2-cycep1) (available p27p1-cdk46p1p2-cycdp1))
+      eff: (and (goal23))
+  dummy-action-24:
+      pre: (or (available p27-cdk2p1-cycep1) (available p27p1-cdk46p1-cycd))
+      eff: (and (goal24))
+  dummy-action-25:
+      pre: (or (available cdk1p3-cycb) (available p27p1-cdk2p1-cycep1))
+      eff: (and (goal25))
+  dummy-action-26:
+      pre: (or (available cdk1p3-cyca) (available p21-cdk2p1-cyce))
+      eff: (and (goal26))
+  dummy-action-27:
+      pre: (or (available p16-cdk7p1) (available p21-cdk2p2-cyca))
+      eff: (and (goal27))
+  dummy-action-2:
+      pre: (or (available p21-cdk2p1p2-cyca) (available skp2p1-skp1))
+      eff: (and (goal2))
+  dummy-action-3:
+      pre: (or (available cdk46p1-cycdp1) (available skp2-skp1p1-cdk2p1-cyca))
+      eff: (and (goal3))
+  dummy-action-4:
+      pre: (or (available skp2-skp1p1-cdk2p1p2-cyca) (available skp2-skp1p1-cdk2p2-cyca))
+      eff: (and (goal4))
+  dummy-action-5:
+      pre: (or (available cdk2p2-cyca-e2f13p1) (available p27p1-cdk2p1p2-cyce))
+      eff: (and (goal5))
+  dummy-action-6:
+      pre: (or (available p27p1-cdk2-cyce) (available sp1-p107))
+      eff: (and (goal6))
+  dummy-action-7:
+      pre: (or (available p27p1-cdk2-cyca) (available wee1p1))
+      eff: (and (goal7))
+  dummy-action-8:
+      pre: (or (available cyca) (available sp1-e2f13p1))
+      eff: (and (goal8))
+  dummy-action-9:
+      pre: (or (available p53p1-dp12p1) (available prbp1-e2f13p1-dp12p1-ge2))
+      eff: (and (goal9))
+  initialize: ?x - simple
+      pre: (and (chosen ?x))
+      eff: (and (available ?x))
+  synthesize: ?x1 - molecule ?x2 - molecule
+      pre: (and (available ?x1) (synthesis-reaction ?x1 ?x2))
+      eff: (and (available ?x2))
+Init:
+  (association-reaction ap2 ge-c ap2-ge-c)
+  (association-reaction c-abl prb c-abl-prb)
+  (association-reaction c-abl prbp1 c-abl-prbp1)
+  (association-reaction c-abl prbp1p2 c-abl-prbp1p2)
+  (association-reaction c-abl prbp2 c-abl-prbp2)
+  (association-reaction c-myc ap2 c-myc-ap2)
+  (association-reaction cdk1 cks1 cdk1-cks1)
+  (association-reaction cdk1 gadd45 cdk1-gadd45)
+  (association-reaction cdk1p1 cks1 cdk1p1-cks1)
+  (association-reaction cdk1p1 gadd45 cdk1p1-gadd45)
+  (association-reaction cdk1p1p2 cks1 cdk1p1p2-cks1)
+  (association-reaction cdk1p1p2 gadd45 cdk1p1p2-gadd45)
+  (association-reaction cdk1p1p2p3 cks1 cdk1p1p2p3-cks1)
+  (association-reaction cdk1p1p2p3 cyca cdk1p1p2p3-cyca)
+  (association-reaction cdk1p1p2p3 cycb cdk1p1p2p3-cycb)
+  (association-reaction cdk1p1p2p3 gadd45 cdk1p1p2p3-gadd45)
+  (association-reaction cdk1p1p3 cks1 cdk1p1p3-cks1)
+  (association-reaction cdk1p1p3 cyca cdk1p1p3-cyca)
+  (association-reaction cdk1p1p3 cycb cdk1p1p3-cycb)
+  (association-reaction cdk1p1p3 gadd45 cdk1p1p3-gadd45)
+  (association-reaction cdk1p2 cks1 cdk1p2-cks1)
+  (association-reaction cdk1p2 gadd45 cdk1p2-gadd45)
+  (association-reaction cdk1p2p3 cks1 cdk1p2p3-cks1)
+  (association-reaction cdk1p2p3 cyca cdk1p2p3-cyca)
+  (association-reaction cdk1p2p3 cycb cdk1p2p3-cycb)
+  (association-reaction cdk1p2p3 gadd45 cdk1p2p3-gadd45)
+  (association-reaction cdk1p3 cks1 cdk1p3-cks1)
+  (association-reaction cdk1p3 cyca cdk1p3-cyca)
+  (association-reaction cdk1p3 cycb cdk1p3-cycb)
+  (association-reaction cdk1p3 gadd45 cdk1p3-gadd45)
+  (association-reaction cdk2 cks1 cdk2-cks1)
+  (association-reaction cdk2 cyca cdk2-cyca)
+  (association-reaction cdk2 cyce cdk2-cyce)
+  (association-reaction cdk2 cycep1 cdk2-cycep1)
+  (association-reaction cdk2-cyca e2f13 cdk2-cyca-e2f13)
+  (association-reaction cdk2-cyca e2f13p1 cdk2-cyca-e2f13p1)
+  (association-reaction cdk2p1 cks1 cdk2p1-cks1)
+  (association-reaction cdk2p1 cyca cdk2p1-cyca)
+  (association-reaction cdk2p1 cyce cdk2p1-cyce)
+  (association-reaction cdk2p1 cycep1 cdk2p1-cycep1)
+  (association-reaction cdk2p1-cyca e2f13 cdk2p1-cyca-e2f13)
+  (association-reaction cdk2p1-cyca e2f13p1 cdk2p1-cyca-e2f13p1)
+  (association-reaction cdk2p1p2 cks1 cdk2p1p2-cks1)
+  (association-reaction cdk2p1p2 cyca cdk2p1p2-cyca)
+  (association-reaction cdk2p1p2 cyce cdk2p1p2-cyce)
+  (association-reaction cdk2p1p2 cycep1 cdk2p1p2-cycep1)
+  (association-reaction cdk2p1p2-cyca e2f13 cdk2p1p2-cyca-e2f13)
+  (association-reaction cdk2p1p2-cyca e2f13p1 cdk2p1p2-cyca-e2f13p1)
+  (association-reaction cdk2p2 cks1 cdk2p2-cks1)
+  (association-reaction cdk2p2 cyca cdk2p2-cyca)
+  (association-reaction cdk2p2 cyce cdk2p2-cyce)
+  (association-reaction cdk2p2 cycep1 cdk2p2-cycep1)
+  (association-reaction cdk2p2-cyca e2f13 cdk2p2-cyca-e2f13)
+  (association-reaction cdk2p2-cyca e2f13p1 cdk2p2-cyca-e2f13p1)
+  (association-reaction cdk46p1 cycd cdk46p1-cycd)
+  (association-reaction cdk46p1 cycdp1 cdk46p1-cycdp1)
+  (association-reaction cdk46p1p2 cycd cdk46p1p2-cycd)
+  (association-reaction cdk46p1p2 cycdp1 cdk46p1p2-cycdp1)
+  (association-reaction cdk7 cych cdk7-cych)
+  (association-reaction cdk7p1 cych cdk7p1-cych)
+  (association-reaction cebp prb cebp-prb)
+  (association-reaction cebp prbp1 cebp-prbp1)
+  (association-reaction cebp prbp1p2 cebp-prbp1p2)
+  (association-reaction cebp prbp2 cebp-prbp2)
+  (association-reaction e2f1 dp12 e2f1-dp12)
+  (association-reaction e2f13-dp12 ge2 e2f13-dp12-ge2)
+  (association-reaction e2f3 dp12 e2f3-dp12)
+  (association-reaction e2f4 dp12 e2f4-dp12)
+  (association-reaction e2f4-dp12 ge2 e2f4-dp12-ge2)
+  (association-reaction e2f6 dp12 e2f6-dp12)
+  (association-reaction e2f6-dp12 ge2 e2f6-dp12-ge2)
+  (association-reaction hbp1 p130 hbp1-p130)
+  (association-reaction hdac1-p107-e2f4p1-dp12 ge2 hdac1-p107-e2f4p1-dp12-ge2)
+  (association-reaction hdac1-p130-e2f4p1-dp12 ge2 hdac1-p130-e2f4p1-dp12-ge2)
+  (association-reaction hdac1-prbp1-e2f13p1-dp12 ge2 hdac1-prbp1-e2f13p1-dp12-ge2)
+  (association-reaction hdac1-prbp1-e2f4-dp12 ge2 hdac1-prbp1-e2f4-dp12-ge2)
+  (association-reaction m1433 cdc25cp1p2 m1433-cdc25cp1p2)
+  (association-reaction m1433 cdc25cp2 m1433-cdc25cp2)
+  (association-reaction mdm2 e2f13-dp12 mdm2-e2f13-dp12)
+  (association-reaction mdm2 e2f13p1-dp12p1 mdm2-e2f13p1-dp12p1)
+  (association-reaction mdm2 prb mdm2-prb)
+  (association-reaction mdm2 prbp1 mdm2-prbp1)
+  (association-reaction mdm2 prbp1p2 mdm2-prbp1p2)
+  (association-reaction mdm2 prbp2 mdm2-prbp2)
+  (association-reaction p107 e2f4-dp12 p107-e2f4-dp12)
+  (association-reaction p107 e2f4-dp12p1 p107-e2f4-dp12p1)
+  (association-reaction p107-e2f4-dp12 ge2 p107-e2f4-dp12-ge2)
+  (association-reaction p107-e2f4-dp12p1 ge2 p107-e2f4-dp12p1-ge2)
+  (association-reaction p130 e2f4-dp12 p130-e2f4-dp12)
+  (association-reaction p130 e2f4-dp12p1 p130-e2f4-dp12p1)
+  (association-reaction p130-e2f4-dp12 ge2 p130-e2f4-dp12-ge2)
+  (association-reaction p130-e2f4-dp12p1 ge2 p130-e2f4-dp12p1-ge2)
+  (association-reaction p16 cdk46p1 p16-cdk46p1)
+  (association-reaction p16 cdk46p1p2 p16-cdk46p1p2)
+  (association-reaction p16 cdk7 p16-cdk7)
+  (association-reaction p16 cdk7p1 p16-cdk7p1)
+  (association-reaction p21 cdk2-cyca p21-cdk2-cyca)
+  (association-reaction p21 cdk2-cyce p21-cdk2-cyce)
+  (association-reaction p21 cdk2-cycep1 p21-cdk2-cycep1)
+  (association-reaction p21 cdk2p1-cyca p21-cdk2p1-cyca)
+  (association-reaction p21 cdk2p1-cyce p21-cdk2p1-cyce)
+  (association-reaction p21 cdk2p1-cycep1 p21-cdk2p1-cycep1)
+  (association-reaction p21 cdk2p1p2-cyca p21-cdk2p1p2-cyca)
+  (association-reaction p21 cdk2p1p2-cyce p21-cdk2p1p2-cyce)
+  (association-reaction p21 cdk2p1p2-cycep1 p21-cdk2p1p2-cycep1)
+  (association-reaction p21 cdk2p2-cyca p21-cdk2p2-cyca)
+  (association-reaction p21 cdk2p2-cyce p21-cdk2p2-cyce)
+  (association-reaction p21 cdk2p2-cycep1 p21-cdk2p2-cycep1)
+  (association-reaction p21 cdk46p1-cycd p21-cdk46p1-cycd)
+  (association-reaction p21 cdk46p1-cycdp1 p21-cdk46p1-cycdp1)
+  (association-reaction p21 cdk46p1p2-cycd p21-cdk46p1p2-cycd)
+  (association-reaction p21 cdk46p1p2-cycdp1 p21-cdk46p1p2-cycdp1)
+  (association-reaction p21 gadd45 p21-gadd45)
+  (association-reaction p27 cdk2-cyca p27-cdk2-cyca)
+  (association-reaction p27 cdk2-cyce p27-cdk2-cyce)
+  (association-reaction p27 cdk2-cycep1 p27-cdk2-cycep1)
+  (association-reaction p27 cdk2p1-cyca p27-cdk2p1-cyca)
+  (association-reaction p27 cdk2p1-cyce p27-cdk2p1-cyce)
+  (association-reaction p27 cdk2p1-cycep1 p27-cdk2p1-cycep1)
+  (association-reaction p27 cdk2p1p2-cyca p27-cdk2p1p2-cyca)
+  (association-reaction p27 cdk2p1p2-cyce p27-cdk2p1p2-cyce)
+  (association-reaction p27 cdk2p1p2-cycep1 p27-cdk2p1p2-cycep1)
+  (association-reaction p27 cdk2p2-cyca p27-cdk2p2-cyca)
+  (association-reaction p27 cdk2p2-cyce p27-cdk2p2-cyce)
+  (association-reaction p27 cdk2p2-cycep1 p27-cdk2p2-cycep1)
+  (association-reaction p27 cdk46p1-cycd p27-cdk46p1-cycd)
+  (association-reaction p27 cdk46p1-cycdp1 p27-cdk46p1-cycdp1)
+  (association-reaction p27 cdk46p1p2-cycd p27-cdk46p1p2-cycd)
+  (association-reaction p27 cdk46p1p2-cycdp1 p27-cdk46p1p2-cycdp1)
+  (association-reaction p27p1 cdk2-cyca p27p1-cdk2-cyca)
+  (association-reaction p27p1 cdk2-cyce p27p1-cdk2-cyce)
+  (association-reaction p27p1 cdk2-cycep1 p27p1-cdk2-cycep1)
+  (association-reaction p27p1 cdk2p1-cyca p27p1-cdk2p1-cyca)
+  (association-reaction p27p1 cdk2p1-cyce p27p1-cdk2p1-cyce)
+  (association-reaction p27p1 cdk2p1-cycep1 p27p1-cdk2p1-cycep1)
+  (association-reaction p27p1 cdk2p1p2-cyca p27p1-cdk2p1p2-cyca)
+  (association-reaction p27p1 cdk2p1p2-cyce p27p1-cdk2p1p2-cyce)
+  (association-reaction p27p1 cdk2p1p2-cycep1 p27p1-cdk2p1p2-cycep1)
+  (association-reaction p27p1 cdk2p2-cyca p27p1-cdk2p2-cyca)
+  (association-reaction p27p1 cdk2p2-cyce p27p1-cdk2p2-cyce)
+  (association-reaction p27p1 cdk2p2-cycep1 p27p1-cdk2p2-cycep1)
+  (association-reaction p27p1 cdk46p1-cycd p27p1-cdk46p1-cycd)
+  (association-reaction p27p1 cdk46p1-cycdp1 p27p1-cdk46p1-cycdp1)
+  (association-reaction p27p1 cdk46p1p2-cycd p27p1-cdk46p1p2-cycd)
+  (association-reaction p27p1 cdk46p1p2-cycdp1 p27p1-cdk46p1p2-cycdp1)
+  (association-reaction p53 dp12 p53-dp12)
+  (association-reaction p53 dp12p1 p53-dp12p1)
+  (association-reaction p53p1 dp12 p53p1-dp12)
+  (association-reaction p53p1 dp12p1 p53p1-dp12p1)
+  (association-reaction p57 cdk2-cyca p57-cdk2-cyca)
+  (association-reaction p57 cdk2-cyce p57-cdk2-cyce)
+  (association-reaction p57 cdk2-cycep1 p57-cdk2-cycep1)
+  (association-reaction p57 cdk2p1-cyca p57-cdk2p1-cyca)
+  (association-reaction p57 cdk2p1-cyce p57-cdk2p1-cyce)
+  (association-reaction p57 cdk2p1-cycep1 p57-cdk2p1-cycep1)
+  (association-reaction p57 cdk2p1p2-cyca p57-cdk2p1p2-cyca)
+  (association-reaction p57 cdk2p1p2-cyce p57-cdk2p1p2-cyce)
+  (association-reaction p57 cdk2p1p2-cycep1 p57-cdk2p1p2-cycep1)
+  (association-reaction p57 cdk2p2-cyca p57-cdk2p2-cyca)
+  (association-reaction p57 cdk2p2-cyce p57-cdk2p2-cyce)
+  (association-reaction p57 cdk2p2-cycep1 p57-cdk2p2-cycep1)
+  (association-reaction p57 cdk46p1-cycd p57-cdk46p1-cycd)
+  (association-reaction p57 cdk46p1-cycdp1 p57-cdk46p1-cycdp1)
+  (association-reaction p57 cdk46p1p2-cycd p57-cdk46p1p2-cycd)
+  (association-reaction p57 cdk46p1p2-cycdp1 p57-cdk46p1p2-cycdp1)
+  (association-reaction p57p1 cdk46p1-cycd p57p1-cdk46p1-cycd)
+  (association-reaction p57p1 cdk46p1-cycdp1 p57p1-cdk46p1-cycdp1)
+  (association-reaction p57p1 cdk46p1p2-cycd p57p1-cdk46p1p2-cycd)
+  (association-reaction p57p1 cdk46p1p2-cycdp1 p57p1-cdk46p1p2-cycdp1)
+  (association-reaction pcaf p300 pcaf-p300)
+  (association-reaction prb ap2 prb-ap2)
+  (association-reaction prb e2f13-dp12 prb-e2f13-dp12)
+  (association-reaction prb e2f13p1-dp12p1 prb-e2f13p1-dp12p1)
+  (association-reaction prb e2f4-dp12 prb-e2f4-dp12)
+  (association-reaction prb e2f4-dp12p1 prb-e2f4-dp12p1)
+  (association-reaction prb-ap2 ge-c prb-ap2-ge-c)
+  (association-reaction prb-e2f13-dp12 ge2 prb-e2f13-dp12-ge2)
+  (association-reaction prb-e2f13p1-dp12p1 ge2 prb-e2f13p1-dp12p1-ge2)
+  (association-reaction prb-e2f4-dp12 ge2 prb-e2f4-dp12-ge2)
+  (association-reaction prb-e2f4p1-dp12 ge2 prb-e2f4p1-dp12-ge2)
+  (association-reaction prbp1 ap2 prbp1-ap2)
+  (association-reaction prbp1 e2f13-dp12 prbp1-e2f13-dp12)
+  (association-reaction prbp1 e2f13p1-dp12p1 prbp1-e2f13p1-dp12p1)
+  (association-reaction prbp1 e2f4-dp12 prbp1-e2f4-dp12)
+  (association-reaction prbp1 e2f4-dp12p1 prbp1-e2f4-dp12p1)
+  (association-reaction prbp1-ap2 ge-c prbp1-ap2-ge-c)
+  (association-reaction prbp1-e2f13-dp12 ge2 prbp1-e2f13-dp12-ge2)
+  (association-reaction prbp1-e2f13p1-dp12p1 ge2 prbp1-e2f13p1-dp12p1-ge2)
+  (association-reaction prbp1-e2f4-dp12 ge2 prbp1-e2f4-dp12-ge2)
+  (association-reaction prbp1-e2f4p1-dp12 ge2 prbp1-e2f4p1-dp12-ge2)
+  (association-reaction prbp1p2 ap2 prbp1p2-ap2)
+  (association-reaction prbp1p2-ap2 ge-c prbp1p2-ap2-ge-c)
+  (association-reaction prbp2 ap2 prbp2-ap2)
+  (association-reaction prbp2-ap2 ge-c prbp2-ap2-ge-c)
+  (association-reaction rpa cyca rpa-cyca)
+  (association-reaction skp2 cdk2-cyca skp2-cdk2-cyca)
+  (association-reaction skp2 cdk2p1-cyca skp2-cdk2p1-cyca)
+  (association-reaction skp2 cdk2p1p2-cyca skp2-cdk2p1p2-cyca)
+  (association-reaction skp2 cdk2p2-cyca skp2-cdk2p2-cyca)
+  (association-reaction skp2 skp1 skp2-skp1)
+  (association-reaction skp2 skp1p1 skp2-skp1p1)
+  (association-reaction skp2-skp1 cdk2-cyca skp2-skp1-cdk2-cyca)
+  (association-reaction skp2-skp1 cdk2p1-cyca skp2-skp1-cdk2p1-cyca)
+  (association-reaction skp2-skp1 cdk2p1p2-cyca skp2-skp1-cdk2p1p2-cyca)
+  (association-reaction skp2-skp1 cdk2p2-cyca skp2-skp1-cdk2p2-cyca)
+  (association-reaction skp2-skp1p1 cdk2-cyca skp2-skp1p1-cdk2-cyca)
+  (association-reaction skp2-skp1p1 cdk2p1-cyca skp2-skp1p1-cdk2p1-cyca)
+  (association-reaction skp2-skp1p1 cdk2p1p2-cyca skp2-skp1p1-cdk2p1p2-cyca)
+  (association-reaction skp2-skp1p1 cdk2p2-cyca skp2-skp1p1-cdk2p2-cyca)
+  (association-reaction skp2p1 skp1 skp2p1-skp1)
+  (association-reaction skp2p1 skp1p1 skp2p1-skp1p1)
+  (association-reaction sp1 e2f13 sp1-e2f13)
+  (association-reaction sp1 e2f13p1 sp1-e2f13p1)
+  (association-reaction sp1 p107 sp1-p107)
+  (association-reaction sp1 p107p1 sp1-p107p1)
+  (catalyzed-association-reaction cdc25c c-tak1 cdc25cp2)
+  (catalyzed-association-reaction cdc25c cdk1p3-cyca cdc25cp1)
+  (catalyzed-association-reaction cdc25c cdk1p3-cycb cdc25cp1)
+  (catalyzed-association-reaction cdc25c chk1 cdc25cp2)
+  (catalyzed-association-reaction cdc25c plk1 cdc25cp1)
+  (catalyzed-association-reaction cdc25cp1 c-tak1 cdc25cp1p2)
+  (catalyzed-association-reaction cdc25cp1 chk1 cdc25cp1p2)
+  (catalyzed-association-reaction cdc25cp2 cdk1p3-cyca cdc25cp1p2)
+  (catalyzed-association-reaction cdc25cp2 cdk1p3-cycb cdc25cp1p2)
+  (catalyzed-association-reaction cdc25cp2 plk1 cdc25cp1p2)
+  (catalyzed-association-reaction cdk1 cdk7-cych cdk1p3)
+  (catalyzed-association-reaction cdk1p1 cdc25cp1 cdk1)
+  (catalyzed-association-reaction cdk1p1 cdc25cp1p2 cdk1)
+  (catalyzed-association-reaction cdk1p1 cdk7-cych cdk1p1p3)
+  (catalyzed-association-reaction cdk1p1p2 cdc25cp1 cdk1p1)
+  (catalyzed-association-reaction cdk1p1p2 cdc25cp1 cdk1p2)
+  (catalyzed-association-reaction cdk1p1p2 cdc25cp1p2 cdk1p1)
+  (catalyzed-association-reaction cdk1p1p2 cdc25cp1p2 cdk1p2)
+  (catalyzed-association-reaction cdk1p1p2 cdk7-cych cdk1p1p2p3)
+  (catalyzed-association-reaction cdk1p1p2p3 cdc25cp1 cdk1p1p3)
+  (catalyzed-association-reaction cdk1p1p2p3 cdc25cp1 cdk1p2p3)
+  (catalyzed-association-reaction cdk1p1p2p3 cdc25cp1p2 cdk1p1p3)
+  (catalyzed-association-reaction cdk1p1p2p3 cdc25cp1p2 cdk1p2p3)
+  (catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1 cdk1p1p3-cyca)
+  (catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1 cdk1p2p3-cyca)
+  (catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1p2 cdk1p1p3-cyca)
+  (catalyzed-association-reaction cdk1p1p2p3-cyca cdc25cp1p2 cdk1p2p3-cyca)
+  (catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1 cdk1p1p3-cycb)
+  (catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1 cdk1p2p3-cycb)
+  (catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1p2 cdk1p1p3-cycb)
+  (catalyzed-association-reaction cdk1p1p2p3-cycb cdc25cp1p2 cdk1p2p3-cycb)
+  (catalyzed-association-reaction cdk1p1p3 cdc25cp1 cdk1p3)
+  (catalyzed-association-reaction cdk1p1p3 cdc25cp1p2 cdk1p3)
+  (catalyzed-association-reaction cdk1p1p3-cyca cdc25cp1 cdk1p3-cyca)
+  (catalyzed-association-reaction cdk1p1p3-cyca cdc25cp1p2 cdk1p3-cyca)
+  (catalyzed-association-reaction cdk1p1p3-cyca wee1 cdk1p1p2p3-cyca)
+  (catalyzed-association-reaction cdk1p1p3-cycb cdc25cp1 cdk1p3-cycb)
+  (catalyzed-association-reaction cdk1p1p3-cycb cdc25cp1p2 cdk1p3-cycb)
+  (catalyzed-association-reaction cdk1p1p3-cycb wee1 cdk1p1p2p3-cycb)
+  (catalyzed-association-reaction cdk1p2 cdc25cp1 cdk1)
+  (catalyzed-association-reaction cdk1p2 cdc25cp1p2 cdk1)
+  (catalyzed-association-reaction cdk1p2 cdk7-cych cdk1p2p3)
+  (catalyzed-association-reaction cdk1p2p3 cdc25cp1 cdk1p3)
+  (catalyzed-association-reaction cdk1p2p3 cdc25cp1p2 cdk1p3)
+  (catalyzed-association-reaction cdk1p2p3-cyca cdc25cp1 cdk1p3-cyca)
+  (catalyzed-association-reaction cdk1p2p3-cyca cdc25cp1p2 cdk1p3-cyca)
+  (catalyzed-association-reaction cdk1p2p3-cycb cdc25cp1 cdk1p3-cycb)
+  (catalyzed-association-reaction cdk1p2p3-cycb cdc25cp1p2 cdk1p3-cycb)
+  (catalyzed-association-reaction cdk1p3-cyca wee1 cdk1p2p3-cyca)
+  (catalyzed-association-reaction cdk1p3-cycb wee1 cdk1p2p3-cycb)
+  (catalyzed-association-reaction cdk2 cdk7-cych cdk2p2)
+  (catalyzed-association-reaction cdk2-cyca cdk7-cych cdk2p2-cyca)
+  (catalyzed-association-reaction cdk2-cyca wee1 cdk2p1-cyca)
+  (catalyzed-association-reaction cdk2-cycb wee1 cdk2p1-cycb)
+  (catalyzed-association-reaction cdk2-cyce cdk7-cych cdk2p2-cyce)
+  (catalyzed-association-reaction cdk2-cycep1 cdk7-cych cdk2p2-cycep1)
+  (catalyzed-association-reaction cdk2p1 cdk7-cych cdk2p1p2)
+  (catalyzed-association-reaction cdk2p1-cyca cdk7-cych cdk2p1p2-cyca)
+  (catalyzed-association-reaction cdk2p1-cyce cdk7-cych cdk2p1p2-cyce)
+  (catalyzed-association-reaction cdk2p1-cycep1 cdk7-cych cdk2p1p2-cycep1)
+  (catalyzed-association-reaction cdk2p2-cyca wee1 cdk2p1p2-cyca)
+  (catalyzed-association-reaction cdk46p1 cdk7-cych cdk46p1p2)
+  (catalyzed-association-reaction cdk46p1-cycd cdk7-cych cdk46p1p2-cycd)
+  (catalyzed-association-reaction cdk46p1-cycdp1 cdk7-cych cdk46p1p2-cycdp1)
+  (catalyzed-association-reaction cdk7 cdk7-cych cdk7p1)
+  (catalyzed-association-reaction cdk7-cych cdk7-cych cdk7p1-cych)
+  (catalyzed-association-reaction cyca skp2-skp1 skp2-skp1)
+  (catalyzed-association-reaction cyca skp2-skp1p1 skp2-skp1p1)
+  (catalyzed-association-reaction cyca skp2p1-skp1 skp2p1-skp1)
+  (catalyzed-association-reaction cyca skp2p1-skp1p1 skp2p1-skp1p1)
+  (catalyzed-association-reaction cyce cdk2p2-cyce cycep1)
+  (catalyzed-association-reaction cyce cdk2p2-cycep1 cycep1)
+  (catalyzed-association-reaction dp12 cdk2p2-cyca dp12p1)
+  (catalyzed-association-reaction e2f13 cdk2p2-cyca e2f13p1)
+  (catalyzed-association-reaction p27 cdk2p2-cyce p27p1)
+  (catalyzed-association-reaction p27 cdk2p2-cycep1 p27p1)
+  (catalyzed-association-reaction prb cdk46p3-cycdp1 prbp1)
+  (catalyzed-association-reaction prbp1 cdk2p2-cyce prbp1p2)
+  (catalyzed-association-reaction prbp1 cdk2p2-cycep1 prbp1p2)
+  (catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
+  (catalyzed-association-reaction skp1 cdk2p2-cyca skp1p1)
+  (catalyzed-association-reaction skp2 cdk2p2-cyca skp2p1)
+  (catalyzed-association-reaction wee1 cdk1p3-cyca wee1p1)
+  (catalyzed-association-reaction wee1 cdk1p3-cycb wee1p1)
+  (next l1 l0)
+  (next l10 l9)
+  (next l11 l10)
+  (next l12 l11)
+  (next l13 l12)
+  (next l14 l13)
+  (next l15 l14)
+  (next l16 l15)
+  (next l17 l16)
+  (next l18 l17)
+  (next l19 l18)
+  (next l2 l1)
+  (next l20 l19)
+  (next l21 l20)
+  (next l3 l2)
+  (next l4 l3)
+  (next l5 l4)
+  (next l6 l5)
+  (next l7 l6)
+  (next l8 l7)
+  (next l9 l8)
   (num-subs l0)
-Init[0]:
-Goal: (and (RW:goal1) (RW:goal2) (RW:goal3) (RW:goal4) (RW:goal5) (RW:goal6) (RW:goal7) (RW:goal8) (RW:goal9) (RW:goal10) (RW:goal11) (RW:goal12) (RW:goal13) (RW:goal14) (RW:goal15) (RW:goal16) (RW:goal17) (RW:goal18) (RW:goal19) (RW:goal20) (RW:goal21) (RW:goal22) (RW:goal23) (RW:goal24) (RW:goal25) (RW:goal26) (RW:goal27))
-Metric: no-metric
+  (possible ap2)
+  (possible c-abl)
+  (possible c-tak1)
+  (possible cdc25c)
+  (possible cdk1p1p2)
+  (possible cdk2)
+  (possible cdk2-cycb)
+  (possible cdk2p1)
+  (possible cdk46p1)
+  (possible cdk46p3-cycdp1)
+  (possible cdk7)
+  (possible cebp)
+  (possible chk1)
+  (possible cks1)
+  (possible cycb)
+  (possible cych)
+  (possible dp12)
+  (possible e2f1)
+  (possible e2f13)
+  (possible e2f13-dp12)
+  (possible e2f13p1-dp12p1)
+  (possible e2f3)
+  (possible e2f4)
+  (possible e2f4-dp12p1)
+  (possible e2f6)
+  (possible ge-c)
+  (possible ge2)
+  (possible hbp1)
+  (possible hdac1-p107-e2f4p1-dp12)
+  (possible hdac1-p130-e2f4p1-dp12)
+  (possible hdac1-prbp1-e2f13p1-dp12)
+  (possible hdac1-prbp1-e2f4-dp12)
+  (possible m1433)
+  (possible p130)
+  (possible p16)
+  (possible p27)
+  (possible p300)
+  (possible p53)
+  (possible p53p1)
+  (possible p57)
+  (possible p57p1)
+  (possible pcaf)
+  (possible plk1)
+  (possible prb)
+  (possible prb-e2f4p1-dp12)
+  (possible prbp1-e2f4p1-dp12)
+  (possible prbp2)
+  (possible rpa)
+  (possible skp1)
+  (possible skp2)
+  (possible sp1)
+  (possible wee1)
+  (synthesis-reaction ap2-ge-c ecadherin)
+  (synthesis-reaction e2f13-dp12-ge2 c-myc)
+  (synthesis-reaction e2f13-dp12-ge2 cyca)
+  (synthesis-reaction e2f13-dp12-ge2 cycd)
+  (synthesis-reaction e2f13-dp12-ge2 cycdp1)
+  (synthesis-reaction e2f13-dp12-ge2 cyce)
+  (synthesis-reaction e2f13-dp12-ge2 cycep1)
+  (synthesis-reaction e2f13-dp12-ge2 p107)
+  (synthesis-reaction e2f13-dp12-ge2 p107p1)
+  (synthesis-reaction e2f13-dp12-ge2 p19arf)
+  (synthesis-reaction e2f13-dp12-ge2 pol)
+  (synthesis-reaction e2f4-dp12-ge2 c-myc)
+  (synthesis-reaction e2f4-dp12-ge2 cyca)
+  (synthesis-reaction e2f4-dp12-ge2 cycd)
+  (synthesis-reaction e2f4-dp12-ge2 cycdp1)
+  (synthesis-reaction e2f4-dp12-ge2 cyce)
+  (synthesis-reaction e2f4-dp12-ge2 cycep1)
+  (synthesis-reaction e2f4-dp12-ge2 p107)
+  (synthesis-reaction e2f4-dp12-ge2 p107p1)
+  (synthesis-reaction e2f4-dp12-ge2 p19arf)
+  (synthesis-reaction e2f4-dp12-ge2 pol)
+  (synthesis-reaction p53 c-fos)
+  (synthesis-reaction p53 gadd45)
+  (synthesis-reaction p53 mdm2)
+  (synthesis-reaction p53 p21)
+  (synthesis-reaction p53p1 c-fos)
+  (synthesis-reaction p53p1 gadd45)
+  (synthesis-reaction p53p1 mdm2)
+  (synthesis-reaction p53p1 p21)
+  (synthesis-reaction prb-ap2-ge-c ecadherin)
+  (synthesis-reaction prbp1-ap2-ge-c ecadherin)
+  (synthesis-reaction prbp1p2-ap2-ge-c ecadherin)
+  (synthesis-reaction prbp2-ap2-ge-c ecadherin)
+Goal:
+  (and (goal1) (goal10) (goal11) (goal12) (goal13) (goal14) (goal15) (goal16) (goal17) (goal18) (goal19) (goal2) (goal20) (goal21) (goal22) (goal23) (goal24) (goal25) (goal26) (goal27) (goal3) (goal4) (goal5) (goal6) (goal7) (goal8) (goal9))
+Metric:
+Pred prop:
+  (association-reaction molecule molecule complex): in_init in_pre
+  (available molecule): in_pre in_eff
+  (catalyzed-association-reaction molecule molecule complex): in_init in_pre
+  (chosen simple): in_pre in_pre_neg in_eff
+  (goal1): in_goal in_eff
+  (goal10): in_goal in_eff
+  (goal11): in_goal in_eff
+  (goal12): in_goal in_eff
+  (goal13): in_goal in_eff
+  (goal14): in_goal in_eff
+  (goal15): in_goal in_eff
+  (goal16): in_goal in_eff
+  (goal17): in_goal in_eff
+  (goal18): in_goal in_eff
+  (goal19): in_goal in_eff
+  (goal2): in_goal in_eff
+  (goal20): in_goal in_eff
+  (goal21): in_goal in_eff
+  (goal22): in_goal in_eff
+  (goal23): in_goal in_eff
+  (goal24): in_goal in_eff
+  (goal25): in_goal in_eff
+  (goal26): in_goal in_eff
+  (goal27): in_goal in_eff
+  (goal3): in_goal in_eff
+  (goal4): in_goal in_eff
+  (goal5): in_goal in_eff
+  (goal6): in_goal in_eff
+  (goal7): in_goal in_eff
+  (goal8): in_goal in_eff
+  (goal9): in_goal in_eff
+  (next level level): in_init in_pre
+  (num-subs level): in_init in_pre in_eff
+  (possible molecule): in_init in_pre
+  (synthesis-reaction molecule molecule): in_init in_pre
+Func prop:
+Global prop:
+  has_non_static_neg_cond
+  is_unit_cost

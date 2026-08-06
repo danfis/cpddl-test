@@ -1,52 +1,47 @@
 Domain: tpp-metric
 Problem: pfile02
-Require: 103
-Type[7]:
-    [0]: object, parent: -1
-    [1]: place, parent: 0
-    [2]: locatable, parent: 0
-    [3]: depot, parent: 1
-    [4]: market, parent: 1
-    [5]: truck, parent: 2
-    [6]: goods, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8
-    [1]: 0 1 2 3 4 5
-    [2]: 6 7 8
-    [3]: 5
-    [4]: 0 1 2 3 4
-    [5]: 6
-    [6]: 7 8
-Obj[9]:
-    [0]: market1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: market2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: market3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: market4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: market5, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: depot0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: truck0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: goods0, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: goods1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    loc: 5 1 :: read: 1, write: 1, in-init: 1
-Function[3]:
-    on-sale: 6 4 :: read: 1, write: 1, in-init: 1
-    bought: 6 :: read: 1, write: 1, in-init: 1
-    request: 6 :: read: 1, write: 0, in-init: 1
-Action[3]:
-    drive: ?t:5 ?from:1 ?to:1
-        pre: (and (RW:loc ?t ?from))
-        eff: (and (N:RW:loc ?t ?from) (RW:loc ?t ?to))
-    buy-allneeded: ?t:5 ?g:6 ?m:4
-        pre: (and (RW:loc ?t ?m) (> (on-sale ?g ?m) 0) (> (on-sale ?g ?m) (- (request ?g) (bought ?g))))
-        eff: (and (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))) (assign (bought ?g) (request ?g)))
-    buy-all: ?t:5 ?g:6 ?m:4
-        pre: (and (RW:loc ?t ?m) (> (on-sale ?g ?m) 0) (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))))
-        eff: (and (assign (on-sale ?g ?m) 0) (increase (bought ?g) (on-sale ?g ?m)))
-Init[1]:
-  (loc truck0 depot0)
-Init[14]:
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  depot - place
+  goods - locatable
+  locatable - object
+  market - place
+  object
+  place - object
+  truck - locatable
+Obj:
+  depot0 - depot
+  goods0 - goods
+  goods1 - goods
+  market1 - market
+  market2 - market
+  market3 - market
+  market4 - market
+  market5 - market
+  truck0 - truck
+Predicate:
+  (= object object) :eq
+  (loc truck place)
+Function:
+  (bought goods)
+  (on-sale goods market)
+  (request goods)
+Action:
+  buy-all: ?t - truck ?g - goods ?m - market
+      pre: (and (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (on-sale ?g ?m) 0) (increase (bought ?g) (on-sale ?g ?m)))
+  buy-allneeded: ?t - truck ?g - goods ?m - market
+      pre: (and (> (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (bought ?g) (request ?g)) (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))))
+  drive: ?t - truck ?from - place ?to - place
+      pre: (and (loc ?t ?from))
+      eff: (and (loc ?t ?to) (not (loc ?t ?from)))
+Init:
+  (= (bought goods0) 0)
+  (= (bought goods1) 0)
   (= (on-sale goods0 market1) 4)
   (= (on-sale goods0 market2) 9)
   (= (on-sale goods0 market3) 17)
@@ -57,9 +52,19 @@ Init[14]:
   (= (on-sale goods1 market3) 7)
   (= (on-sale goods1 market4) 20)
   (= (on-sale goods1 market5) 0)
-  (= (bought goods0) 0)
-  (= (bought goods1) 0)
   (= (request goods0) 20)
   (= (request goods1) 23)
-Goal: (and (RW:loc truck0 depot0) (>= (bought goods0) (request goods0)) (>= (bought goods1) (request goods1)))
-Metric: no-metric
+  (loc truck0 depot0)
+Goal:
+  (and (>= (bought goods0) (request goods0)) (>= (bought goods1) (request goods1)) (loc truck0 depot0))
+Metric:
+Pred prop:
+  (loc truck place): in_init in_pre in_goal in_eff
+Func prop:
+  (bought goods): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(on-sale request)
+  (on-sale goods market): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(bought request)
+  (request goods): in_init init_all_nonneg init_all_int in_pre in_goal on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

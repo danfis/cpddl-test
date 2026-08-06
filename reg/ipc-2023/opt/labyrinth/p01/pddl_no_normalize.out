@@ -1,126 +1,126 @@
 Domain: labyrinth
 Problem: labyrinth-size-3-rotations-1-seed-1229
-Require: 200ff
-Type[6]:
-    [0]: object, parent: -1
-    [1]: card, parent: 0
-    [2]: direction, parent: 0
-    [3]: directionv, parent: 2
-    [4]: directionh, parent: 2
-    [5]: gridpos, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-    [1]: 7 8 9 10 11 12 13 14 15
-    [2]: 0 1 2 3
-    [3]: 0 1
-    [4]: 2 3
-    [5]: 4 5 6
-Obj[16]:
-    [0]: s, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [1]: n, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [2]: w, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [3]: e, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [4]: pos0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: pos1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: pos2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: card0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: card1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: card2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: card3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: card4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: card5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: card6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: card7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: card8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[15]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    next: 5 5 :: read: 1, write: 0, in-init: 1
-    max-pos: 5 :: read: 1, write: 0, in-init: 1
-    min-pos: 5 :: read: 1, write: 0, in-init: 1
-    blocked: 1 2 :: read: 1, write: 0, in-init: 1
-    robot-at: 1 :: read: 1, write: 1, in-init: 1
-    card-at: 1 5 5 :: read: 1, write: 1, in-init: 1
-    left: :: read: 1, write: 1, in-init: 0
-    cards-moving: :: read: 1, write: 1, in-init: 0
-    cards-moving-west: :: read: 1, write: 1, in-init: 0
-    cards-moving-east: :: read: 1, write: 1, in-init: 0
-    cards-moving-south: :: read: 1, write: 1, in-init: 0
-    cards-moving-north: :: read: 1, write: 1, in-init: 0
-    next-moving-card: 1 :: read: 1, write: 1, in-init: 0
-    new-headtail-card: 1 :: read: 1, write: 1, in-init: 0
-Function[3]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-    move-robot-cost: :: read: 1, write: 0, in-init: 1
-    move-card: :: read: 1, write: 0, in-init: 1
-Action[17]:
-    move-west: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
-        pre: (and (R:= ?yfrom ?yto) (R:= ?dfrom w) (N:R:= ?dfrom ?dto) (R:next ?xfrom ?xto) (N:R:blocked ?cfrom ?dfrom) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (N:RW:cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (increase (total-cost) (move-robot-cost)))
-    move-east: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:4 ?cto:1 ?xto:5 ?yto:5 ?dto:4
-        pre: (and (R:= ?yfrom ?yto) (R:= ?dfrom e) (N:R:= ?dfrom ?dto) (R:next ?xto ?xfrom) (N:R:blocked ?cfrom ?dfrom) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (N:RW:cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (increase (total-cost) (move-robot-cost)))
-    move-north: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
-        pre: (and (R:= ?xfrom ?xto) (R:= ?dfrom n) (N:R:= ?dfrom ?dto) (R:next ?yfrom ?yto) (N:R:blocked ?cfrom ?dfrom) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (N:RW:cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (increase (total-cost) (move-robot-cost)))
-    move-south: ?cfrom:1 ?xfrom:5 ?yfrom:5 ?dfrom:3 ?cto:1 ?xto:5 ?yto:5 ?dto:3
-        pre: (and (R:= ?xfrom ?xto) (R:= ?dfrom s) (N:R:= ?dfrom ?dto) (R:next ?yto ?yfrom) (N:R:blocked ?cfrom ?dfrom) (N:R:blocked ?cto ?dto) (RW:robot-at ?cfrom) (RW:card-at ?cfrom ?xfrom ?yfrom) (RW:card-at ?cto ?xto ?yto) (N:RW:cards-moving))
-        eff: (and (N:RW:robot-at ?cfrom) (RW:robot-at ?cto) (increase (total-cost) (move-robot-cost)))
-    start-move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
-        pre: (and (R:next ?nextx ?x) (R:min-pos ?x) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (N:RW:cards-moving) (N:RW:cards-moving-west))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (increase (total-cost) (move-card)))
-    move-card-west: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5 ?prevx:5
-        pre: (and (R:next ?x ?prevx) (R:next ?nextx ?x) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cm))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:cards-moving) (RW:cards-moving-west) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext))
-    stop-move-card-west: ?cm:1 ?x:5 ?y:5 ?prevx:5 ?newtc:1
-        pre: (and (R:next ?x ?prevx) (R:max-pos ?x) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-west) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-west) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc))
-    start-move-card-east: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5
-        pre: (and (R:next ?x ?nextx) (R:max-pos ?x) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (N:RW:cards-moving) (N:RW:cards-moving-east))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (increase (total-cost) (move-card)))
-    move-card-east: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nextx:5 ?prevx:5
-        pre: (and (R:next ?x ?nextx) (R:next ?prevx ?x) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?nextx ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cm))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:cards-moving) (RW:cards-moving-east) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext))
-    stop-move-card-east: ?cm:1 ?x:5 ?y:5 ?prevx:5 ?newtc:1
-        pre: (and (R:next ?prevx ?x) (R:min-pos ?x) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-east) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?prevx ?y) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-east) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc))
-    start-move-card-north: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5
-        pre: (and (R:next ?nexty ?y) (R:min-pos ?y) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (N:RW:cards-moving) (N:RW:cards-moving-north))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (increase (total-cost) (move-card)))
-    move-card-north: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5 ?prevy:5
-        pre: (and (R:next ?y ?prevy) (R:next ?nexty ?y) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cm))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:cards-moving) (RW:cards-moving-north) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext))
-    stop-move-card-north: ?cm:1 ?x:5 ?y:5 ?prevy:5 ?newtc:1
-        pre: (and (R:next ?y ?prevy) (R:max-pos ?y) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-north) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-north) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc))
-    start-move-card-south: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5
-        pre: (and (R:next ?y ?nexty) (R:max-pos ?y) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (N:RW:cards-moving) (N:RW:cards-moving-south))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cnext) (RW:new-headtail-card ?cm) (increase (total-cost) (move-card)))
-    move-card-south: ?cm:1 ?x:5 ?y:5 ?cnext:1 ?nexty:5 ?prevy:5
-        pre: (and (R:next ?y ?nexty) (R:next ?prevy ?y) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:card-at ?cnext ?x ?nexty) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cm))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:cards-moving) (RW:cards-moving-south) (N:RW:next-moving-card ?cm) (RW:next-moving-card ?cnext))
-    stop-move-card-south: ?cm:1 ?x:5 ?y:5 ?prevy:5 ?newtc:1
-        pre: (and (R:next ?prevy ?y) (R:min-pos ?y) (N:RW:robot-at ?cm) (RW:card-at ?cm ?x ?y) (RW:cards-moving) (RW:cards-moving-south) (RW:next-moving-card ?cm) (RW:new-headtail-card ?newtc))
-        eff: (and (N:RW:card-at ?cm ?x ?y) (RW:card-at ?cm ?x ?prevy) (RW:card-at ?newtc ?x ?y) (N:RW:cards-moving) (N:RW:cards-moving-south) (N:RW:next-moving-card ?cm) (N:RW:new-headtail-card ?newtc))
-    leave: ?c:1 ?prow:5 ?pcolumn:5
-        pre: (and (R:max-pos ?prow) (R:max-pos ?pcolumn) (N:R:blocked ?c s) (RW:robot-at ?c) (RW:card-at ?c ?prow ?pcolumn) (N:RW:cards-moving))
-        eff: (and (RW:left))
-Init[25]:
-  S:(next pos1 pos0)
-  S:(next pos2 pos1)
-  S:(max-pos pos2)
-  S:(min-pos pos0)
-  S:(blocked card0 n)
-  S:(blocked card1 n)
-  S:(blocked card2 n)
-  S:(blocked card3 n)
-  S:(blocked card4 w)
-  S:(blocked card5 e)
-  S:(blocked card6 s)
-  S:(blocked card6 e)
-  S:(blocked card7 s)
-  S:(blocked card7 w)
-  S:(blocked card8 e)
-  (robot-at card0)
+Require:
+  :action-costs
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  card - object
+  direction - object
+  directionh - direction
+  directionv - direction
+  gridpos - object
+  object
+Obj:
+  card0 - card
+  card1 - card
+  card2 - card
+  card3 - card
+  card4 - card
+  card5 - card
+  card6 - card
+  card7 - card
+  card8 - card
+  e - directionh :constant
+  n - directionv :constant
+  pos0 - gridpos
+  pos1 - gridpos
+  pos2 - gridpos
+  s - directionv :constant
+  w - directionh :constant
+Predicate:
+  (= object object) :eq
+  (blocked card direction)
+  (card-at card gridpos gridpos)
+  (cards-moving)
+  (cards-moving-east)
+  (cards-moving-north)
+  (cards-moving-south)
+  (cards-moving-west)
+  (left)
+  (max-pos gridpos)
+  (min-pos gridpos)
+  (new-headtail-card card)
+  (next gridpos gridpos)
+  (next-moving-card card)
+  (robot-at card)
+Function:
+  (move-card)
+  (move-robot-cost)
+  (total-cost) :total-cost
+Action:
+  leave: ?c - card ?prow - gridpos ?pcolumn - gridpos
+      pre: (and (card-at ?c ?prow ?pcolumn) (max-pos ?pcolumn) (max-pos ?prow) (not (blocked ?c s)) (not (cards-moving)) (robot-at ?c))
+      eff: (and (left))
+  move-card-east: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nextx - gridpos ?prevx - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?nextx ?y) (cards-moving) (cards-moving-east) (next ?prevx ?x) (next ?x ?nextx) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?prevx ?y) (cards-moving) (cards-moving-east) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)) (not (next-moving-card ?cm)))
+  move-card-north: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nexty - gridpos ?prevy - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?x ?nexty) (cards-moving) (cards-moving-north) (next ?nexty ?y) (next ?y ?prevy) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?x ?prevy) (cards-moving) (cards-moving-north) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)) (not (next-moving-card ?cm)))
+  move-card-south: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nexty - gridpos ?prevy - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?x ?nexty) (cards-moving) (cards-moving-south) (next ?prevy ?y) (next ?y ?nexty) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?x ?prevy) (cards-moving) (cards-moving-south) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)) (not (next-moving-card ?cm)))
+  move-card-west: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nextx - gridpos ?prevx - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?nextx ?y) (cards-moving) (cards-moving-west) (next ?nextx ?x) (next ?x ?prevx) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?prevx ?y) (cards-moving) (cards-moving-west) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)) (not (next-moving-card ?cm)))
+  move-east: ?cfrom - card ?xfrom - gridpos ?yfrom - gridpos ?dfrom - directionh ?cto - card ?xto - gridpos ?yto - gridpos ?dto - directionh
+      pre: (and (= ?dfrom e) (= ?yfrom ?yto) (card-at ?cfrom ?xfrom ?yfrom) (card-at ?cto ?xto ?yto) (next ?xto ?xfrom) (not (= ?dfrom ?dto)) (not (blocked ?cfrom ?dfrom)) (not (blocked ?cto ?dto)) (not (cards-moving)) (robot-at ?cfrom))
+      eff: (and (increase (total-cost) (move-robot-cost)) (not (robot-at ?cfrom)) (robot-at ?cto))
+  move-north: ?cfrom - card ?xfrom - gridpos ?yfrom - gridpos ?dfrom - directionv ?cto - card ?xto - gridpos ?yto - gridpos ?dto - directionv
+      pre: (and (= ?dfrom n) (= ?xfrom ?xto) (card-at ?cfrom ?xfrom ?yfrom) (card-at ?cto ?xto ?yto) (next ?yfrom ?yto) (not (= ?dfrom ?dto)) (not (blocked ?cfrom ?dfrom)) (not (blocked ?cto ?dto)) (not (cards-moving)) (robot-at ?cfrom))
+      eff: (and (increase (total-cost) (move-robot-cost)) (not (robot-at ?cfrom)) (robot-at ?cto))
+  move-south: ?cfrom - card ?xfrom - gridpos ?yfrom - gridpos ?dfrom - directionv ?cto - card ?xto - gridpos ?yto - gridpos ?dto - directionv
+      pre: (and (= ?dfrom s) (= ?xfrom ?xto) (card-at ?cfrom ?xfrom ?yfrom) (card-at ?cto ?xto ?yto) (next ?yto ?yfrom) (not (= ?dfrom ?dto)) (not (blocked ?cfrom ?dfrom)) (not (blocked ?cto ?dto)) (not (cards-moving)) (robot-at ?cfrom))
+      eff: (and (increase (total-cost) (move-robot-cost)) (not (robot-at ?cfrom)) (robot-at ?cto))
+  move-west: ?cfrom - card ?xfrom - gridpos ?yfrom - gridpos ?dfrom - directionh ?cto - card ?xto - gridpos ?yto - gridpos ?dto - directionh
+      pre: (and (= ?dfrom w) (= ?yfrom ?yto) (card-at ?cfrom ?xfrom ?yfrom) (card-at ?cto ?xto ?yto) (next ?xfrom ?xto) (not (= ?dfrom ?dto)) (not (blocked ?cfrom ?dfrom)) (not (blocked ?cto ?dto)) (not (cards-moving)) (robot-at ?cfrom))
+      eff: (and (increase (total-cost) (move-robot-cost)) (not (robot-at ?cfrom)) (robot-at ?cto))
+  start-move-card-east: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nextx - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?nextx ?y) (max-pos ?x) (next ?x ?nextx) (not (cards-moving)) (not (cards-moving-east)) (not (robot-at ?cm)))
+      eff: (and (cards-moving) (cards-moving-east) (increase (total-cost) (move-card)) (new-headtail-card ?cm) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)))
+  start-move-card-north: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nexty - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?x ?nexty) (min-pos ?y) (next ?nexty ?y) (not (cards-moving)) (not (cards-moving-north)) (not (robot-at ?cm)))
+      eff: (and (cards-moving) (cards-moving-north) (increase (total-cost) (move-card)) (new-headtail-card ?cm) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)))
+  start-move-card-south: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nexty - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?x ?nexty) (max-pos ?y) (next ?y ?nexty) (not (cards-moving)) (not (cards-moving-south)) (not (robot-at ?cm)))
+      eff: (and (cards-moving) (cards-moving-south) (increase (total-cost) (move-card)) (new-headtail-card ?cm) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)))
+  start-move-card-west: ?cm - card ?x - gridpos ?y - gridpos ?cnext - card ?nextx - gridpos
+      pre: (and (card-at ?cm ?x ?y) (card-at ?cnext ?nextx ?y) (min-pos ?x) (next ?nextx ?x) (not (cards-moving)) (not (cards-moving-west)) (not (robot-at ?cm)))
+      eff: (and (cards-moving) (cards-moving-west) (increase (total-cost) (move-card)) (new-headtail-card ?cm) (next-moving-card ?cnext) (not (card-at ?cm ?x ?y)))
+  stop-move-card-east: ?cm - card ?x - gridpos ?y - gridpos ?prevx - gridpos ?newtc - card
+      pre: (and (card-at ?cm ?x ?y) (cards-moving) (cards-moving-east) (min-pos ?x) (new-headtail-card ?newtc) (next ?prevx ?x) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?prevx ?y) (card-at ?newtc ?x ?y) (not (card-at ?cm ?x ?y)) (not (cards-moving)) (not (cards-moving-east)) (not (new-headtail-card ?newtc)) (not (next-moving-card ?cm)))
+  stop-move-card-north: ?cm - card ?x - gridpos ?y - gridpos ?prevy - gridpos ?newtc - card
+      pre: (and (card-at ?cm ?x ?y) (cards-moving) (cards-moving-north) (max-pos ?y) (new-headtail-card ?newtc) (next ?y ?prevy) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?x ?prevy) (card-at ?newtc ?x ?y) (not (card-at ?cm ?x ?y)) (not (cards-moving)) (not (cards-moving-north)) (not (new-headtail-card ?newtc)) (not (next-moving-card ?cm)))
+  stop-move-card-south: ?cm - card ?x - gridpos ?y - gridpos ?prevy - gridpos ?newtc - card
+      pre: (and (card-at ?cm ?x ?y) (cards-moving) (cards-moving-south) (min-pos ?y) (new-headtail-card ?newtc) (next ?prevy ?y) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?x ?prevy) (card-at ?newtc ?x ?y) (not (card-at ?cm ?x ?y)) (not (cards-moving)) (not (cards-moving-south)) (not (new-headtail-card ?newtc)) (not (next-moving-card ?cm)))
+  stop-move-card-west: ?cm - card ?x - gridpos ?y - gridpos ?prevx - gridpos ?newtc - card
+      pre: (and (card-at ?cm ?x ?y) (cards-moving) (cards-moving-west) (max-pos ?x) (new-headtail-card ?newtc) (next ?x ?prevx) (next-moving-card ?cm) (not (robot-at ?cm)))
+      eff: (and (card-at ?cm ?prevx ?y) (card-at ?newtc ?x ?y) (not (card-at ?cm ?x ?y)) (not (cards-moving)) (not (cards-moving-west)) (not (new-headtail-card ?newtc)) (not (next-moving-card ?cm)))
+Init:
+  (= (move-card) 1)
+  (= (move-robot-cost) 1)
+  (= (total-cost) 0)
+  (blocked card0 n)
+  (blocked card1 n)
+  (blocked card2 n)
+  (blocked card3 n)
+  (blocked card4 w)
+  (blocked card5 e)
+  (blocked card6 e)
+  (blocked card6 s)
+  (blocked card7 s)
+  (blocked card7 w)
+  (blocked card8 e)
   (card-at card0 pos0 pos0)
   (card-at card1 pos1 pos2)
   (card-at card2 pos2 pos0)
@@ -130,9 +130,37 @@ Init[25]:
   (card-at card6 pos0 pos2)
   (card-at card7 pos1 pos1)
   (card-at card8 pos2 pos2)
-Init[3]:
-  (= (total-cost) 0)
-  (= (move-robot-cost) 1)
-  (= (move-card) 1)
-Goal: (and (RW:left))
-Metric: (total-cost)
+  (max-pos pos2)
+  (min-pos pos0)
+  (next pos1 pos0)
+  (next pos2 pos1)
+  (robot-at card0)
+Goal:
+  (and (left))
+Metric:
+  (total-cost)
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (blocked card direction): in_init in_pre in_pre_neg
+  (card-at card gridpos gridpos): in_init in_pre in_eff
+  (cards-moving): in_pre in_pre_neg in_eff
+  (cards-moving-east): in_pre in_pre_neg in_eff
+  (cards-moving-north): in_pre in_pre_neg in_eff
+  (cards-moving-south): in_pre in_pre_neg in_eff
+  (cards-moving-west): in_pre in_pre_neg in_eff
+  (left): in_goal in_eff
+  (max-pos gridpos): in_init in_pre
+  (min-pos gridpos): in_init in_pre
+  (new-headtail-card card): in_pre in_eff
+  (next gridpos gridpos): in_init in_pre
+  (next-moving-card card): in_pre in_eff
+  (robot-at card): in_init in_pre in_pre_neg in_eff
+Func prop:
+  (move-card): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (move-robot-cost): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(move-card move-robot-cost) write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_eq_pred
+  has_int_action_cost_func
+  has_non_static_neg_cond

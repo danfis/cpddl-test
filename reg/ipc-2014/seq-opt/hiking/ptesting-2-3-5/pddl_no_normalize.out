@@ -1,90 +1,105 @@
 Domain: hiking
 Problem: hiking-2-3
-Require: ff
-Type[6]:
-    [0]: object, parent: -1
-    [1]: car, parent: 0
-    [2]: tent, parent: 0
-    [3]: person, parent: 0
-    [4]: couple, parent: 0
-    [5]: place, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-    [1]: 0 1 2
-    [2]: 3 4
-    [3]: 12 13 14 15
-    [4]: 5 6
-    [5]: 7 8 9 10 11
-Obj[16]:
-    [0]: car0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: car1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: car2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: tent0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: tent1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: couple0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: couple1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: place0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: place1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: place2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: place3, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: place4, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: guy0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: girl0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: guy1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: girl1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    at_tent: 2 5 :: read: 1, write: 1, in-init: 1
-    at_person: 3 5 :: read: 1, write: 1, in-init: 1
-    at_car: 1 5 :: read: 1, write: 1, in-init: 1
-    partners: 4 3 3 :: read: 1, write: 0, in-init: 1
-    up: 2 :: read: 1, write: 1, in-init: 1
-    down: 2 :: read: 1, write: 1, in-init: 0
-    walked: 4 5 :: read: 1, write: 1, in-init: 1
-    next: 5 5 :: read: 1, write: 0, in-init: 1
-Function[0]:
-Action[7]:
-    put_down: ?x1:3 ?x2:5 ?x3:2
-        pre: (and (RW:at_tent ?x3 ?x2) (RW:at_person ?x1 ?x2) (RW:up ?x3))
-        eff: (and (N:RW:up ?x3) (RW:down ?x3))
-    put_up: ?x1:3 ?x2:5 ?x3:2
-        pre: (and (RW:at_tent ?x3 ?x2) (RW:at_person ?x1 ?x2) (RW:down ?x3))
-        eff: (and (RW:up ?x3) (N:RW:down ?x3))
-    drive_passenger: ?x1:3 ?x2:5 ?x3:5 ?x4:1 ?x5:3
-        pre: (and (N:R:= ?x1 ?x5) (RW:at_person ?x1 ?x2) (RW:at_person ?x5 ?x2) (RW:at_car ?x4 ?x2))
-        eff: (and (N:RW:at_person ?x1 ?x2) (RW:at_person ?x1 ?x3) (N:RW:at_person ?x5 ?x2) (RW:at_person ?x5 ?x3) (N:RW:at_car ?x4 ?x2) (RW:at_car ?x4 ?x3))
-    drive: ?x1:3 ?x2:5 ?x3:5 ?x4:1
-        pre: (and (RW:at_person ?x1 ?x2) (RW:at_car ?x4 ?x2))
-        eff: (and (N:RW:at_person ?x1 ?x2) (RW:at_person ?x1 ?x3) (N:RW:at_car ?x4 ?x2) (RW:at_car ?x4 ?x3))
-    drive_tent: ?x1:3 ?x2:5 ?x3:5 ?x4:1 ?x5:2
-        pre: (and (RW:at_tent ?x5 ?x2) (RW:at_person ?x1 ?x2) (RW:at_car ?x4 ?x2) (RW:down ?x5))
-        eff: (and (N:RW:at_tent ?x5 ?x2) (RW:at_tent ?x5 ?x3) (N:RW:at_person ?x1 ?x2) (RW:at_person ?x1 ?x3) (N:RW:at_car ?x4 ?x2) (RW:at_car ?x4 ?x3))
-    drive_tent_passenger: ?x1:3 ?x2:5 ?x3:5 ?x4:1 ?x5:2 ?x6:3
-        pre: (and (N:R:= ?x1 ?x6) (RW:at_tent ?x5 ?x2) (RW:at_person ?x1 ?x2) (RW:at_person ?x6 ?x2) (RW:at_car ?x4 ?x2) (RW:down ?x5))
-        eff: (and (N:RW:at_tent ?x5 ?x2) (RW:at_tent ?x5 ?x3) (N:RW:at_person ?x1 ?x2) (RW:at_person ?x1 ?x3) (N:RW:at_person ?x6 ?x2) (RW:at_person ?x6 ?x3) (N:RW:at_car ?x4 ?x2) (RW:at_car ?x4 ?x3))
-    walk_together: ?x1:2 ?x2:5 ?x3:3 ?x4:5 ?x5:3 ?x6:4
-        pre: (and (N:R:= ?x3 ?x5) (R:partners ?x6 ?x3 ?x5) (R:next ?x4 ?x2) (RW:at_tent ?x1 ?x2) (RW:at_person ?x3 ?x4) (RW:at_person ?x5 ?x4) (RW:up ?x1) (RW:walked ?x6 ?x4))
-        eff: (and (RW:at_person ?x3 ?x2) (N:RW:at_person ?x3 ?x4) (RW:at_person ?x5 ?x2) (N:RW:at_person ?x5 ?x4) (RW:walked ?x6 ?x2) (N:RW:walked ?x6 ?x4))
-Init[19]:
-  S:(partners couple0 guy0 girl0)
-  S:(partners couple1 guy1 girl1)
-  S:(next place0 place1)
-  S:(next place1 place2)
-  S:(next place2 place3)
-  S:(next place3 place4)
-  (at_tent tent0 place0)
-  (at_tent tent1 place0)
-  (at_person guy0 place0)
-  (at_person girl0 place0)
-  (at_person guy1 place0)
-  (at_person girl1 place0)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  car - object
+  couple - object
+  object
+  person - object
+  place - object
+  tent - object
+Obj:
+  car0 - car
+  car1 - car
+  car2 - car
+  couple0 - couple
+  couple1 - couple
+  girl0 - person
+  girl1 - person
+  guy0 - person
+  guy1 - person
+  place0 - place
+  place1 - place
+  place2 - place
+  place3 - place
+  place4 - place
+  tent0 - tent
+  tent1 - tent
+Predicate:
+  (= object object) :eq
+  (at_car car place)
+  (at_person person place)
+  (at_tent tent place)
+  (down tent)
+  (next place place)
+  (partners couple person person)
+  (up tent)
+  (walked couple place)
+Function:
+Action:
+  drive: ?x1 - person ?x2 - place ?x3 - place ?x4 - car
+      pre: (and (at_car ?x4 ?x2) (at_person ?x1 ?x2))
+      eff: (and (at_car ?x4 ?x3) (at_person ?x1 ?x3) (not (at_car ?x4 ?x2)) (not (at_person ?x1 ?x2)))
+  drive_passenger: ?x1 - person ?x2 - place ?x3 - place ?x4 - car ?x5 - person
+      pre: (and (at_car ?x4 ?x2) (at_person ?x1 ?x2) (at_person ?x5 ?x2) (not (= ?x1 ?x5)))
+      eff: (and (at_car ?x4 ?x3) (at_person ?x1 ?x3) (at_person ?x5 ?x3) (not (at_car ?x4 ?x2)) (not (at_person ?x1 ?x2)) (not (at_person ?x5 ?x2)))
+  drive_tent: ?x1 - person ?x2 - place ?x3 - place ?x4 - car ?x5 - tent
+      pre: (and (at_car ?x4 ?x2) (at_person ?x1 ?x2) (at_tent ?x5 ?x2) (down ?x5))
+      eff: (and (at_car ?x4 ?x3) (at_person ?x1 ?x3) (at_tent ?x5 ?x3) (not (at_car ?x4 ?x2)) (not (at_person ?x1 ?x2)) (not (at_tent ?x5 ?x2)))
+  drive_tent_passenger: ?x1 - person ?x2 - place ?x3 - place ?x4 - car ?x5 - tent ?x6 - person
+      pre: (and (at_car ?x4 ?x2) (at_person ?x1 ?x2) (at_person ?x6 ?x2) (at_tent ?x5 ?x2) (down ?x5) (not (= ?x1 ?x6)))
+      eff: (and (at_car ?x4 ?x3) (at_person ?x1 ?x3) (at_person ?x6 ?x3) (at_tent ?x5 ?x3) (not (at_car ?x4 ?x2)) (not (at_person ?x1 ?x2)) (not (at_person ?x6 ?x2)) (not (at_tent ?x5 ?x2)))
+  put_down: ?x1 - person ?x2 - place ?x3 - tent
+      pre: (and (at_person ?x1 ?x2) (at_tent ?x3 ?x2) (up ?x3))
+      eff: (and (down ?x3) (not (up ?x3)))
+  put_up: ?x1 - person ?x2 - place ?x3 - tent
+      pre: (and (at_person ?x1 ?x2) (at_tent ?x3 ?x2) (down ?x3))
+      eff: (and (not (down ?x3)) (up ?x3))
+  walk_together: ?x1 - tent ?x2 - place ?x3 - person ?x4 - place ?x5 - person ?x6 - couple
+      pre: (and (at_person ?x3 ?x4) (at_person ?x5 ?x4) (at_tent ?x1 ?x2) (next ?x4 ?x2) (not (= ?x3 ?x5)) (partners ?x6 ?x3 ?x5) (up ?x1) (walked ?x6 ?x4))
+      eff: (and (at_person ?x3 ?x2) (at_person ?x5 ?x2) (not (at_person ?x3 ?x4)) (not (at_person ?x5 ?x4)) (not (walked ?x6 ?x4)) (walked ?x6 ?x2))
+Init:
   (at_car car0 place0)
   (at_car car1 place0)
   (at_car car2 place0)
+  (at_person girl0 place0)
+  (at_person girl1 place0)
+  (at_person guy0 place0)
+  (at_person guy1 place0)
+  (at_tent tent0 place0)
+  (at_tent tent1 place0)
+  (next place0 place1)
+  (next place1 place2)
+  (next place2 place3)
+  (next place3 place4)
+  (partners couple0 guy0 girl0)
+  (partners couple1 guy1 girl1)
   (up tent0)
   (up tent1)
   (walked couple0 place0)
   (walked couple1 place0)
-Init[0]:
-Goal: (and (RW:walked couple0 place4) (RW:walked couple1 place4))
-Metric: no-metric
+Goal:
+  (and (walked couple0 place4) (walked couple1 place4))
+Metric:
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (at_car car place): in_init in_pre in_eff
+  (at_person person place): in_init in_pre in_eff
+  (at_tent tent place): in_init in_pre in_eff
+  (down tent): in_pre in_eff
+  (next place place): in_init in_pre
+  (partners couple person person): in_init in_pre
+  (up tent): in_init in_pre in_eff
+  (walked couple place): in_init in_pre in_goal in_eff
+Func prop:
+Global prop:
+  has_eq_pred
+  is_unit_cost

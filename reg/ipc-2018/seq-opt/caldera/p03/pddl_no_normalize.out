@@ -1,240 +1,266 @@
 Domain: caldera
 Problem: p2_hosts_trial_5
-Require: ff
-Type[19]:
-    [0]: object, parent: -1
-    [1]: value, parent: 0
-    [2]: property, parent: 0
-    [3]: object_type, parent: 1
-    [4]: boolean, parent: 1
-    [5]: string, parent: 1
-    [6]: num, parent: 1
-    [7]: observedschtask, parent: 3
-    [8]: observedconnection, parent: 3
-    [9]: observeddomain, parent: 3
-    [10]: observedfile, parent: 3
-    [11]: observedlocalcredential, parent: 3
-    [12]: observedtimedelta, parent: 3
-    [13]: observedhost, parent: 3
-    [14]: observedshare, parent: 3
-    [15]: observeddomainuser, parent: 3
-    [16]: observeddomaincredential, parent: 3
-    [17]: observedlocaluser, parent: 3
-    [18]: observedrat, parent: 3
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79
-    [1]: 3 21 29 39 40 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79
-    [2]: 0 1 2 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24 25 26 27 28 30 31 32 33 34 35 36 37 38 41 42
-    [3]: 43 44 45 46 47 52 53 54 55 56 57 58 59 60 61 62 63 64
-    [4]: 29 39
-    [5]: 3 21 40 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79
-    [6]: 48 49 50 51
-    [7]: 59 60
-    [8]:
-    [9]: 43
-    [10]: 52 53
-    [11]:
-    [12]: 61 62
-    [13]: 46 47
-    [14]: 54 55
-    [15]: 63 64
-    [16]: 44 45
-    [17]:
-    [18]: 56 57 58
-Obj[80]:
-    [0]: pdns_domain, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [1]: psrc_host, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [2]: pstart_time, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [3]: c__dollar__, type: 5, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [4]: puser, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [5]: pshare_name, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [6]: plocal_user_admins, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [7]: pstatus, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [8]: pdns_domain_name, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [9]: pis_group, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [10]: pdc, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [11]: pmicroseconds, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [12]: pexe_path, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [13]: pdomain, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [14]: pwindows_domain, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [15]: premote_host, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [16]: ptimedelta, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [17]: pcred, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [18]: phostname, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [19]: parguments, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [20]: ppassword, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [21]: whatever, type: 5, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [22]: pelevated, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [23]: pcached_local_creds, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [24]: phosts, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [25]: ppath, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [26]: pcached_domain_creds, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [27]: pseconds, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [28]: psid, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [29]: yes, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [30]: phost, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [31]: pname, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [32]: pdest, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [33]: pdomain_user_admins, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [34]: psrc, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [35]: pshare_path, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [36]: pexecutable, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [37]: pusername, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [38]: pfqdn, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [39]: no, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [40]: somepath, type: 5, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [41]: pdest_host, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [42]: psrc_path, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [43]: id_adomain, type: 9, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [44]: id_hdomaincredential, type: 16, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [45]: id_ddomaincredential, type: 16, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [46]: id_khost, type: 13, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [47]: id_rhost, type: 13, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [48]: num__13, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [49]: num__20, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [50]: num__19, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [51]: num__12, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [52]: id_bffile, type: 10, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [53]: id_befile, type: 10, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [54]: id_bhshare, type: 14, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [55]: id_bgshare, type: 14, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [56]: id_bbrat, type: 18, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [57]: id_barat, type: 18, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [58]: id_yrat, type: 18, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [59]: id_bcschtask, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [60]: id_bdschtask, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [61]: id_ltimedelta, type: 12, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [62]: id_stimedelta, type: 12, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [63]: id_cdomainuser, type: 15, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [64]: id_gdomainuser, type: 15, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [65]: str__q, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [66]: str__z, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [67]: str__j, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [68]: str__e, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [69]: str__alpha, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [70]: str__mary, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [71]: str__i, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [72]: str__james, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [73]: str__x, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [74]: str__p, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [75]: str__b, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [76]: str__f, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [77]: str__o, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [78]: str__w, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [79]: str__v, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[31]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    knows: 3 :: read: 1, write: 1, in-init: 1
-    created: 3 :: read: 1, write: 1, in-init: 0
-    knows_property: 3 2 :: read: 1, write: 1, in-init: 1
-    prop_timedelta: 13 12 :: read: 0, write: 0, in-init: 1
-    prop_src_host: 14 13 :: read: 1, write: 1, in-init: 0
-    prop_dns_domain_name: 13 5 :: read: 0, write: 0, in-init: 1
-    prop_fqdn: 13 5 :: read: 1, write: 0, in-init: 1
-    prop_password: 16 5 :: read: 1, write: 0, in-init: 1
-    prop_host: 3 3 :: read: 1, write: 1, in-init: 1
-    prop_share_name: 14 5 :: read: 0, write: 1, in-init: 0
-    prop_dc: 13 4 :: read: 0, write: 0, in-init: 1
-    mem_cached_domain_creds: 13 16 :: read: 1, write: 0, in-init: 1
-    prop_executable: 18 5 :: read: 1, write: 1, in-init: 1
-    prop_user: 16 15 :: read: 1, write: 0, in-init: 1
-    prop_cred: 15 16 :: read: 1, write: 1, in-init: 1
-    prop_share_path: 14 5 :: read: 1, write: 1, in-init: 0
-    prop_hostname: 13 5 :: read: 0, write: 0, in-init: 1
-    mem_hosts: 9 13 :: read: 0, write: 1, in-init: 1
-    prop_is_group: 15 4 :: read: 0, write: 0, in-init: 1
-    mem_domain_user_admins: 13 15 :: read: 1, write: 0, in-init: 1
-    prop_seconds: 12 6 :: read: 0, write: 0, in-init: 1
-    prop_microseconds: 12 6 :: read: 0, write: 0, in-init: 1
-    prop_windows_domain: 9 5 :: read: 1, write: 0, in-init: 1
-    prop_domain: 3 3 :: read: 1, write: 0, in-init: 1
-    prop_dest_host: 14 13 :: read: 1, write: 1, in-init: 0
-    prop_dns_domain: 9 5 :: read: 0, write: 0, in-init: 1
-    prop_elevated: 18 4 :: read: 1, write: 1, in-init: 1
-    prop_username: 15 5 :: read: 1, write: 0, in-init: 1
-    prop_path: 10 5 :: read: 1, write: 1, in-init: 0
-    prop_sid: 15 5 :: read: 0, write: 0, in-init: 1
-Function[0]:
-Action[8]:
-    get_domain: ?v00:18 ?v01:13 ?v02:5
-        pre: (and (R:prop_fqdn ?v01 ?v02) (RW:knows ?v00) (RW:knows ?v01) (RW:knows_property ?v00 phost) (RW:knows_property ?v01 pfqdn) (RW:prop_host ?v00 ?v01))
-        eff: (forall (?v03:9 I[0]:?v00:18 I[1]:?v01:13 I[2]:?v02:5) (when (R:prop_domain ?v01 ?v03) (and (RW:knows ?v03) (RW:knows_property ?v01 pdomain) (W:mem_hosts ?v03 ?v01) (RW:knows_property ?v03 phosts) (RW:knows_property ?v03 pwindows_domain) (RW:knows_property ?v03 pdns_domain))))
-    get_computers: ?v00:18 ?v02:9
-        pre: (and (RW:knows ?v00) (RW:knows ?v02))
-        eff: (and (RW:knows_property ?v02 phosts) (forall (?v01:13 I[0]:?v00:18 I[1]:?v02:9) (when (R:prop_domain ?v01 ?v02) (and (RW:knows ?v01) (RW:knows_property ?v01 pdomain) (W:mem_hosts ?v02 ?v01) (RW:knows_property ?v01 pfqdn)))))
-    get_admin: ?v00:18 ?v01:13 ?v02:9
-        pre: (and (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02))
-        eff: (and (RW:knows_property ?v01 pdomain_user_admins) (forall (?v04:15 I[0]:?v00:18 I[1]:?v01:13 I[2]:?v02:9) (when (R:mem_domain_user_admins ?v01 ?v04) (and (RW:knows ?v04) (RW:knows_property ?v04 pusername) (RW:knows_property ?v04 psid) (RW:knows_property ?v04 pis_group) (RW:knows_property ?v04 pdomain)))))
-    creds: ?v00:18 ?v01:13 ?v08:9
-        pre: (and (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v08) (RW:knows_property ?v00 phost) (RW:prop_host ?v00 ?v01))
-        eff: (and (forall (?v03:16 ?v05:15 I[0]:?v00:18 I[1]:?v01:13 I[2]:?v08:9) (when (and (R:mem_cached_domain_creds ?v01 ?v03) (RW:prop_cred ?v05 ?v03) (RW:prop_elevated ?v00 yes)) (and (RW:knows ?v03) (RW:knows_property ?v03 ppassword) (RW:knows ?v05) (RW:knows_property ?v03 puser) (RW:prop_cred ?v05 ?v03) (RW:knows_property ?v05 pcred) (RW:knows_property ?v05 pusername) (RW:knows_property ?v05 pis_group) (RW:knows ?v08) (RW:knows_property ?v05 pdomain) (RW:knows_property ?v08 pwindows_domain)))))
-    net_use: ?v00:18 ?v01:13 ?v02:13 ?v03:5 ?v04:16 ?v05:5 ?v06:15 ?v07:5 ?v08:9 ?v09:5 ?v10:14
-        pre: (and (N:R:= ?v01 ?v02) (R:prop_fqdn ?v02 ?v03) (R:prop_password ?v04 ?v05) (R:prop_user ?v04 ?v06) (R:prop_windows_domain ?v08 ?v09) (R:prop_domain ?v06 ?v08) (R:prop_username ?v06 ?v07) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02) (RW:knows ?v04) (RW:knows ?v06) (RW:knows ?v08) (N:RW:created ?v10) (RW:knows_property ?v00 phost) (RW:knows_property ?v02 pfqdn) (RW:knows_property ?v04 puser) (RW:knows_property ?v04 ppassword) (RW:knows_property ?v06 pdomain) (RW:knows_property ?v06 pusername) (RW:knows_property ?v08 pwindows_domain) (RW:prop_host ?v00 ?v01))
-        eff: (when (R:mem_domain_user_admins ?v02 ?v06) (and (RW:knows ?v10) (RW:created ?v10) (RW:knows_property ?v10 psrc_host) (RW:prop_src_host ?v10 ?v01) (RW:knows_property ?v10 pdest_host) (RW:prop_dest_host ?v10 ?v02) (RW:knows_property ?v10 pshare_name) (W:prop_share_name ?v10 c__dollar__) (RW:knows_property ?v10 pshare_path) (RW:prop_share_path ?v10 whatever)))
-    smb_copy: ?v00:18 ?v01:13 ?v02:5 ?v03:14 ?v04:13 ?v05:13 ?v06:5 ?v07:10
-        pre: (and (R:= ?v01 ?v04) (N:R:= ?v01 ?v05) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v03) (RW:knows ?v04) (RW:knows ?v05) (N:RW:created ?v07) (RW:knows_property ?v00 phost) (RW:knows_property ?v00 pexecutable) (RW:knows_property ?v03 psrc_host) (RW:knows_property ?v03 pshare_path) (RW:knows_property ?v03 pdest_host) (RW:prop_src_host ?v03 ?v04) (RW:prop_host ?v00 ?v01) (RW:prop_executable ?v00 ?v02) (RW:prop_share_path ?v03 ?v06) (RW:prop_dest_host ?v03 ?v05))
-        eff: (when (RW:prop_elevated ?v00 yes) (and (RW:knows ?v07) (RW:created ?v07) (RW:knows_property ?v07 ppath) (RW:prop_path ?v07 somepath) (RW:knows_property ?v07 phost) (RW:prop_host ?v07 ?v05)))
-    net_time: ?v00:18 ?v01:13 ?v02:12
-        pre: (and (RW:knows ?v00) (RW:knows ?v01))
-        eff: (and (RW:knows ?v02) (RW:knows_property ?v01 ptimedelta) (RW:knows_property ?v02 pmicroseconds) (RW:knows_property ?v02 pseconds) (RW:knows_property ?v02 phost) (RW:prop_host ?v02 ?v01))
-    wmic: ?v00:18 ?v01:13 ?v02:13 ?v03:10 ?v04:5 ?v06:16 ?v07:15 ?v08:9 ?v09:5 ?v10:5 ?v11:18
-        pre: (and (N:R:= ?v01 ?v02) (R:prop_password ?v06 ?v10) (R:prop_user ?v06 ?v07) (R:prop_windows_domain ?v08 ?v09) (R:prop_domain ?v07 ?v08) (RW:knows ?v00) (RW:knows ?v01) (RW:knows ?v02) (RW:knows ?v03) (RW:knows ?v06) (RW:knows ?v07) (RW:knows ?v08) (N:RW:created ?v11) (RW:knows_property ?v00 phost) (RW:knows_property ?v02 pdomain_user_admins) (RW:knows_property ?v03 ppath) (RW:knows_property ?v03 phost) (RW:knows_property ?v06 puser) (RW:knows_property ?v06 ppassword) (RW:knows_property ?v07 pdomain) (RW:knows_property ?v08 pwindows_domain) (RW:prop_host ?v00 ?v01) (RW:prop_host ?v03 ?v02) (RW:prop_path ?v03 ?v04))
-        eff: (when (R:mem_domain_user_admins ?v02 ?v07) (and (RW:knows ?v11) (RW:created ?v11) (RW:knows_property ?v11 phost) (RW:prop_host ?v11 ?v02) (RW:knows_property ?v11 pelevated) (RW:prop_elevated ?v11 yes) (RW:knows_property ?v11 pexecutable) (RW:prop_executable ?v11 ?v04)))
-Init[54]:
-  S:(prop_timedelta id_khost id_ltimedelta)
-  S:(prop_timedelta id_rhost id_stimedelta)
-  S:(prop_dns_domain_name id_khost str__p)
-  S:(prop_dns_domain_name id_rhost str__w)
-  S:(prop_fqdn id_khost str__o)
-  S:(prop_fqdn id_rhost str__v)
-  S:(prop_password id_hdomaincredential str__i)
-  S:(prop_password id_ddomaincredential str__e)
-  S:(prop_dc id_khost no)
-  S:(prop_dc id_rhost yes)
-  S:(mem_cached_domain_creds id_khost id_hdomaincredential)
-  S:(mem_cached_domain_creds id_khost id_ddomaincredential)
-  S:(mem_cached_domain_creds id_rhost id_hdomaincredential)
-  S:(mem_cached_domain_creds id_rhost id_ddomaincredential)
-  S:(prop_user id_hdomaincredential id_gdomainuser)
-  S:(prop_user id_ddomaincredential id_cdomainuser)
-  S:(prop_hostname id_khost str__q)
-  S:(prop_hostname id_rhost str__x)
-  S:(prop_is_group id_cdomainuser no)
-  S:(prop_is_group id_gdomainuser no)
-  S:(mem_domain_user_admins id_khost id_cdomainuser)
-  S:(mem_domain_user_admins id_khost id_gdomainuser)
-  S:(mem_domain_user_admins id_rhost id_cdomainuser)
-  S:(mem_domain_user_admins id_rhost id_gdomainuser)
-  S:(prop_seconds id_ltimedelta num__13)
-  S:(prop_seconds id_stimedelta num__20)
-  S:(prop_microseconds id_ltimedelta num__12)
-  S:(prop_microseconds id_stimedelta num__19)
-  S:(prop_windows_domain id_adomain str__alpha)
-  S:(prop_domain id_hdomaincredential id_adomain)
-  S:(prop_domain id_ddomaincredential id_adomain)
-  S:(prop_domain id_khost id_adomain)
-  S:(prop_domain id_rhost id_adomain)
-  S:(prop_domain id_cdomainuser id_adomain)
-  S:(prop_domain id_gdomainuser id_adomain)
-  S:(prop_dns_domain id_adomain str__b)
-  S:(prop_username id_cdomainuser str__james)
-  S:(prop_username id_gdomainuser str__mary)
-  S:(prop_sid id_cdomainuser str__f)
-  S:(prop_sid id_gdomainuser str__j)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  boolean - value
+  num - value
+  object
+  object_type - value
+  observedconnection - object_type
+  observeddomain - object_type
+  observeddomaincredential - object_type
+  observeddomainuser - object_type
+  observedfile - object_type
+  observedhost - object_type
+  observedlocalcredential - object_type
+  observedlocaluser - object_type
+  observedrat - object_type
+  observedschtask - object_type
+  observedshare - object_type
+  observedtimedelta - object_type
+  property - object
+  string - value
+  value - object
+Obj:
+  c__dollar__ - string :constant
+  id_adomain - observeddomain
+  id_barat - observedrat
+  id_bbrat - observedrat
+  id_bcschtask - observedschtask
+  id_bdschtask - observedschtask
+  id_befile - observedfile
+  id_bffile - observedfile
+  id_bgshare - observedshare
+  id_bhshare - observedshare
+  id_cdomainuser - observeddomainuser
+  id_ddomaincredential - observeddomaincredential
+  id_gdomainuser - observeddomainuser
+  id_hdomaincredential - observeddomaincredential
+  id_khost - observedhost
+  id_ltimedelta - observedtimedelta
+  id_rhost - observedhost
+  id_stimedelta - observedtimedelta
+  id_yrat - observedrat
+  no - boolean :constant
+  num__12 - num
+  num__13 - num
+  num__19 - num
+  num__20 - num
+  parguments - property :constant
+  pcached_domain_creds - property :constant
+  pcached_local_creds - property :constant
+  pcred - property :constant
+  pdc - property :constant
+  pdest - property :constant
+  pdest_host - property :constant
+  pdns_domain - property :constant
+  pdns_domain_name - property :constant
+  pdomain - property :constant
+  pdomain_user_admins - property :constant
+  pelevated - property :constant
+  pexe_path - property :constant
+  pexecutable - property :constant
+  pfqdn - property :constant
+  phost - property :constant
+  phostname - property :constant
+  phosts - property :constant
+  pis_group - property :constant
+  plocal_user_admins - property :constant
+  pmicroseconds - property :constant
+  pname - property :constant
+  ppassword - property :constant
+  ppath - property :constant
+  premote_host - property :constant
+  pseconds - property :constant
+  pshare_name - property :constant
+  pshare_path - property :constant
+  psid - property :constant
+  psrc - property :constant
+  psrc_host - property :constant
+  psrc_path - property :constant
+  pstart_time - property :constant
+  pstatus - property :constant
+  ptimedelta - property :constant
+  puser - property :constant
+  pusername - property :constant
+  pwindows_domain - property :constant
+  somepath - string :constant
+  str__alpha - string
+  str__b - string
+  str__e - string
+  str__f - string
+  str__i - string
+  str__j - string
+  str__james - string
+  str__mary - string
+  str__o - string
+  str__p - string
+  str__q - string
+  str__v - string
+  str__w - string
+  str__x - string
+  str__z - string
+  whatever - string :constant
+  yes - boolean :constant
+Predicate:
+  (= object object) :eq
+  (created object_type)
+  (knows object_type)
+  (knows_property object_type property)
+  (mem_cached_domain_creds observedhost observeddomaincredential)
+  (mem_domain_user_admins observedhost observeddomainuser)
+  (mem_hosts observeddomain observedhost)
+  (prop_cred observeddomainuser observeddomaincredential)
+  (prop_dc observedhost boolean)
+  (prop_dest_host observedshare observedhost)
+  (prop_dns_domain observeddomain string)
+  (prop_dns_domain_name observedhost string)
+  (prop_domain object_type object_type)
+  (prop_elevated observedrat boolean)
+  (prop_executable observedrat string)
+  (prop_fqdn observedhost string)
+  (prop_host object_type object_type)
+  (prop_hostname observedhost string)
+  (prop_is_group observeddomainuser boolean)
+  (prop_microseconds observedtimedelta num)
+  (prop_password observeddomaincredential string)
+  (prop_path observedfile string)
+  (prop_seconds observedtimedelta num)
+  (prop_share_name observedshare string)
+  (prop_share_path observedshare string)
+  (prop_sid observeddomainuser string)
+  (prop_src_host observedshare observedhost)
+  (prop_timedelta observedhost observedtimedelta)
+  (prop_user observeddomaincredential observeddomainuser)
+  (prop_username observeddomainuser string)
+  (prop_windows_domain observeddomain string)
+Function:
+Action:
+  creds: ?v00 - observedrat ?v01 - observedhost ?v08 - observeddomain
+      pre: (and (knows ?v00) (knows ?v01) (knows ?v08) (knows_property ?v00 phost) (prop_host ?v00 ?v01))
+      eff: (and (forall (?v03 - observeddomaincredential ?v05 - observeddomainuser) (when (and (mem_cached_domain_creds ?v01 ?v03) (prop_cred ?v05 ?v03) (prop_elevated ?v00 yes)) (and (knows ?v03) (knows ?v05) (knows ?v08) (knows_property ?v03 ppassword) (knows_property ?v03 puser) (knows_property ?v05 pcred) (knows_property ?v05 pdomain) (knows_property ?v05 pis_group) (knows_property ?v05 pusername) (knows_property ?v08 pwindows_domain) (prop_cred ?v05 ?v03)))))
+  get_admin: ?v00 - observedrat ?v01 - observedhost ?v02 - observeddomain
+      pre: (and (knows ?v00) (knows ?v01) (knows ?v02))
+      eff: (and (forall (?v04 - observeddomainuser) (when (mem_domain_user_admins ?v01 ?v04) (and (knows ?v04) (knows_property ?v04 pdomain) (knows_property ?v04 pis_group) (knows_property ?v04 psid) (knows_property ?v04 pusername)))) (knows_property ?v01 pdomain_user_admins))
+  get_computers: ?v00 - observedrat ?v02 - observeddomain
+      pre: (and (knows ?v00) (knows ?v02))
+      eff: (and (forall (?v01 - observedhost) (when (prop_domain ?v01 ?v02) (and (knows ?v01) (knows_property ?v01 pdomain) (knows_property ?v01 pfqdn) (mem_hosts ?v02 ?v01)))) (knows_property ?v02 phosts))
+  get_domain: ?v00 - observedrat ?v01 - observedhost ?v02 - string
+      pre: (and (knows ?v00) (knows ?v01) (knows_property ?v00 phost) (knows_property ?v01 pfqdn) (prop_fqdn ?v01 ?v02) (prop_host ?v00 ?v01))
+      eff: (forall (?v03 - observeddomain) (when (prop_domain ?v01 ?v03) (and (knows ?v03) (knows_property ?v01 pdomain) (knows_property ?v03 pdns_domain) (knows_property ?v03 phosts) (knows_property ?v03 pwindows_domain) (mem_hosts ?v03 ?v01))))
+  net_time: ?v00 - observedrat ?v01 - observedhost ?v02 - observedtimedelta
+      pre: (and (knows ?v00) (knows ?v01))
+      eff: (and (knows ?v02) (knows_property ?v01 ptimedelta) (knows_property ?v02 phost) (knows_property ?v02 pmicroseconds) (knows_property ?v02 pseconds) (prop_host ?v02 ?v01))
+  net_use: ?v00 - observedrat ?v01 - observedhost ?v02 - observedhost ?v03 - string ?v04 - observeddomaincredential ?v05 - string ?v06 - observeddomainuser ?v07 - string ?v08 - observeddomain ?v09 - string ?v10 - observedshare
+      pre: (and (knows ?v00) (knows ?v01) (knows ?v02) (knows ?v04) (knows ?v06) (knows ?v08) (knows_property ?v00 phost) (knows_property ?v02 pfqdn) (knows_property ?v04 ppassword) (knows_property ?v04 puser) (knows_property ?v06 pdomain) (knows_property ?v06 pusername) (knows_property ?v08 pwindows_domain) (not (= ?v01 ?v02)) (not (created ?v10)) (prop_domain ?v06 ?v08) (prop_fqdn ?v02 ?v03) (prop_host ?v00 ?v01) (prop_password ?v04 ?v05) (prop_user ?v04 ?v06) (prop_username ?v06 ?v07) (prop_windows_domain ?v08 ?v09))
+      eff: (when (mem_domain_user_admins ?v02 ?v06) (and (created ?v10) (knows ?v10) (knows_property ?v10 pdest_host) (knows_property ?v10 pshare_name) (knows_property ?v10 pshare_path) (knows_property ?v10 psrc_host) (prop_dest_host ?v10 ?v02) (prop_share_name ?v10 c__dollar__) (prop_share_path ?v10 whatever) (prop_src_host ?v10 ?v01)))
+  smb_copy: ?v00 - observedrat ?v01 - observedhost ?v02 - string ?v03 - observedshare ?v04 - observedhost ?v05 - observedhost ?v06 - string ?v07 - observedfile
+      pre: (and (= ?v01 ?v04) (knows ?v00) (knows ?v01) (knows ?v03) (knows ?v04) (knows ?v05) (knows_property ?v00 pexecutable) (knows_property ?v00 phost) (knows_property ?v03 pdest_host) (knows_property ?v03 pshare_path) (knows_property ?v03 psrc_host) (not (= ?v01 ?v05)) (not (created ?v07)) (prop_dest_host ?v03 ?v05) (prop_executable ?v00 ?v02) (prop_host ?v00 ?v01) (prop_share_path ?v03 ?v06) (prop_src_host ?v03 ?v04))
+      eff: (when (prop_elevated ?v00 yes) (and (created ?v07) (knows ?v07) (knows_property ?v07 phost) (knows_property ?v07 ppath) (prop_host ?v07 ?v05) (prop_path ?v07 somepath)))
+  wmic: ?v00 - observedrat ?v01 - observedhost ?v02 - observedhost ?v03 - observedfile ?v04 - string ?v06 - observeddomaincredential ?v07 - observeddomainuser ?v08 - observeddomain ?v09 - string ?v10 - string ?v11 - observedrat
+      pre: (and (knows ?v00) (knows ?v01) (knows ?v02) (knows ?v03) (knows ?v06) (knows ?v07) (knows ?v08) (knows_property ?v00 phost) (knows_property ?v02 pdomain_user_admins) (knows_property ?v03 phost) (knows_property ?v03 ppath) (knows_property ?v06 ppassword) (knows_property ?v06 puser) (knows_property ?v07 pdomain) (knows_property ?v08 pwindows_domain) (not (= ?v01 ?v02)) (not (created ?v11)) (prop_domain ?v07 ?v08) (prop_host ?v00 ?v01) (prop_host ?v03 ?v02) (prop_password ?v06 ?v10) (prop_path ?v03 ?v04) (prop_user ?v06 ?v07) (prop_windows_domain ?v08 ?v09))
+      eff: (when (mem_domain_user_admins ?v02 ?v07) (and (created ?v11) (knows ?v11) (knows_property ?v11 pelevated) (knows_property ?v11 pexecutable) (knows_property ?v11 phost) (prop_elevated ?v11 yes) (prop_executable ?v11 ?v04) (prop_host ?v11 ?v02)))
+Init:
   (knows id_khost)
   (knows id_yrat)
   (knows_property id_khost pfqdn)
-  (knows_property id_yrat phost)
   (knows_property id_yrat pexecutable)
-  (prop_host id_yrat id_khost)
-  (prop_host id_ltimedelta id_khost)
-  (prop_host id_stimedelta id_rhost)
-  (prop_executable id_yrat str__z)
-  (prop_cred id_cdomainuser id_ddomaincredential)
-  (prop_cred id_gdomainuser id_hdomaincredential)
+  (knows_property id_yrat phost)
+  (mem_cached_domain_creds id_khost id_ddomaincredential)
+  (mem_cached_domain_creds id_khost id_hdomaincredential)
+  (mem_cached_domain_creds id_rhost id_ddomaincredential)
+  (mem_cached_domain_creds id_rhost id_hdomaincredential)
+  (mem_domain_user_admins id_khost id_cdomainuser)
+  (mem_domain_user_admins id_khost id_gdomainuser)
+  (mem_domain_user_admins id_rhost id_cdomainuser)
+  (mem_domain_user_admins id_rhost id_gdomainuser)
   (mem_hosts id_adomain id_khost)
   (mem_hosts id_adomain id_rhost)
+  (prop_cred id_cdomainuser id_ddomaincredential)
+  (prop_cred id_gdomainuser id_hdomaincredential)
+  (prop_dc id_khost no)
+  (prop_dc id_rhost yes)
+  (prop_dns_domain id_adomain str__b)
+  (prop_dns_domain_name id_khost str__p)
+  (prop_dns_domain_name id_rhost str__w)
+  (prop_domain id_cdomainuser id_adomain)
+  (prop_domain id_ddomaincredential id_adomain)
+  (prop_domain id_gdomainuser id_adomain)
+  (prop_domain id_hdomaincredential id_adomain)
+  (prop_domain id_khost id_adomain)
+  (prop_domain id_rhost id_adomain)
   (prop_elevated id_yrat yes)
-Init[0]:
-Goal: (and (RW:prop_host id_bbrat id_rhost))
-Metric: no-metric
+  (prop_executable id_yrat str__z)
+  (prop_fqdn id_khost str__o)
+  (prop_fqdn id_rhost str__v)
+  (prop_host id_ltimedelta id_khost)
+  (prop_host id_stimedelta id_rhost)
+  (prop_host id_yrat id_khost)
+  (prop_hostname id_khost str__q)
+  (prop_hostname id_rhost str__x)
+  (prop_is_group id_cdomainuser no)
+  (prop_is_group id_gdomainuser no)
+  (prop_microseconds id_ltimedelta num__12)
+  (prop_microseconds id_stimedelta num__19)
+  (prop_password id_ddomaincredential str__e)
+  (prop_password id_hdomaincredential str__i)
+  (prop_seconds id_ltimedelta num__13)
+  (prop_seconds id_stimedelta num__20)
+  (prop_sid id_cdomainuser str__f)
+  (prop_sid id_gdomainuser str__j)
+  (prop_timedelta id_khost id_ltimedelta)
+  (prop_timedelta id_rhost id_stimedelta)
+  (prop_user id_ddomaincredential id_cdomainuser)
+  (prop_user id_hdomaincredential id_gdomainuser)
+  (prop_username id_cdomainuser str__james)
+  (prop_username id_gdomainuser str__mary)
+  (prop_windows_domain id_adomain str__alpha)
+Goal:
+  (and (prop_host id_bbrat id_rhost))
+Metric:
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (created object_type): in_pre in_pre_neg in_eff
+  (knows object_type): in_init in_pre in_eff
+  (knows_property object_type property): in_init in_pre in_eff
+  (mem_cached_domain_creds observedhost observeddomaincredential): in_init in_pre
+  (mem_domain_user_admins observedhost observeddomainuser): in_init in_pre
+  (mem_hosts observeddomain observedhost): in_init in_eff
+  (prop_cred observeddomainuser observeddomaincredential): in_init in_pre in_eff
+  (prop_dc observedhost boolean): in_init
+  (prop_dest_host observedshare observedhost): in_pre in_eff
+  (prop_dns_domain observeddomain string): in_init
+  (prop_dns_domain_name observedhost string): in_init
+  (prop_domain object_type object_type): in_init in_pre
+  (prop_elevated observedrat boolean): in_init in_pre in_eff
+  (prop_executable observedrat string): in_init in_pre in_eff
+  (prop_fqdn observedhost string): in_init in_pre
+  (prop_host object_type object_type): in_init in_pre in_goal in_eff
+  (prop_hostname observedhost string): in_init
+  (prop_is_group observeddomainuser boolean): in_init
+  (prop_microseconds observedtimedelta num): in_init
+  (prop_password observeddomaincredential string): in_init in_pre
+  (prop_path observedfile string): in_pre in_eff
+  (prop_seconds observedtimedelta num): in_init
+  (prop_share_name observedshare string): in_eff
+  (prop_share_path observedshare string): in_pre in_eff
+  (prop_sid observeddomainuser string): in_init
+  (prop_src_host observedshare observedhost): in_pre in_eff
+  (prop_timedelta observedhost observedtimedelta): in_init
+  (prop_user observeddomaincredential observeddomainuser): in_init in_pre
+  (prop_username observeddomainuser string): in_init in_pre
+  (prop_windows_domain observeddomain string): in_init in_pre
+Func prop:
+Global prop:
+  has_cond_eff
+  has_eq_pred
+  has_non_static_neg_cond
+  is_unit_cost

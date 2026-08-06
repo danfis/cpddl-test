@@ -1,56 +1,50 @@
 Domain: coins
 Problem: p1
-Require: 103
-Type[2]:
-    [0]: object, parent: -1
-    [1]: coin, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4
-    [1]: 0 1 2 3 4
-Obj[5]:
-    [0]: c1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: c2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: c3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: c4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: c5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[3]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    coin-update: 1 :: read: 1, write: 1, in-init: 0
-    no-coin-update: 1 :: read: 1, write: 1, in-init: 1
-Function[4]:
-    current-value: :: read: 1, write: 1, in-init: 1
-    denomination: 1 :: read: 1, write: 0, in-init: 1
-    denomination-penalty: 1 :: read: 1, write: 1, in-init: 1
-    penalty: :: read: 1, write: 1, in-init: 1
-Action[7]:
-    addcoin: ?c:1
-        pre: (and (RW:no-coin-update ?c) (= (penalty) 0))
-        eff: (and (RW:coin-update ?c) (N:RW:no-coin-update ?c) (increase (current-value) (denomination ?c)) (increase (penalty) (denomination-penalty ?c)))
-    update-penalty: ?c:1
-        pre: (and (RW:coin-update ?c))
-        eff: (and (N:RW:coin-update ?c) (RW:no-coin-update ?c) (increase (denomination-penalty ?c) 1))
-    apply-penalty-one: 
-        pre: (and (>= (penalty) 1))
-        eff: (and (decrease (penalty) 1))
-    apply-penalty-ten: 
-        pre: (and (>= (penalty) 10))
-        eff: (and (decrease (penalty) 10))
-    apply-penalty-hundred: 
-        pre: (and (>= (penalty) 100))
-        eff: (and (decrease (penalty) 100))
-    apply-penalty-thousand: 
-        pre: (and (>= (penalty) 1000))
-        eff: (and (decrease (penalty) 1000))
-    apply-penalty-ten-thousand: 
-        pre: (and (>= (penalty) 10000))
-        eff: (and (decrease (penalty) 10000))
-Init[5]:
-  (no-coin-update c1)
-  (no-coin-update c2)
-  (no-coin-update c3)
-  (no-coin-update c4)
-  (no-coin-update c5)
-Init[12]:
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  coin - object
+  object
+Obj:
+  c1 - coin
+  c2 - coin
+  c3 - coin
+  c4 - coin
+  c5 - coin
+Predicate:
+  (= object object) :eq
+  (coin-update coin)
+  (no-coin-update coin)
+Function:
+  (current-value)
+  (denomination coin)
+  (denomination-penalty coin)
+  (penalty)
+Action:
+  addcoin: ?c - coin
+      pre: (and (= (penalty) 0) (no-coin-update ?c))
+      eff: (and (coin-update ?c) (increase (current-value) (denomination ?c)) (increase (penalty) (denomination-penalty ?c)) (not (no-coin-update ?c)))
+  apply-penalty-hundred:
+      pre: (and (>= (penalty) 100))
+      eff: (and (decrease (penalty) 100))
+  apply-penalty-one:
+      pre: (and (>= (penalty) 1))
+      eff: (and (decrease (penalty) 1))
+  apply-penalty-ten-thousand:
+      pre: (and (>= (penalty) 10000))
+      eff: (and (decrease (penalty) 10000))
+  apply-penalty-ten:
+      pre: (and (>= (penalty) 10))
+      eff: (and (decrease (penalty) 10))
+  apply-penalty-thousand:
+      pre: (and (>= (penalty) 1000))
+      eff: (and (decrease (penalty) 1000))
+  update-penalty: ?c - coin
+      pre: (and (coin-update ?c))
+      eff: (and (increase (denomination-penalty ?c) 1) (no-coin-update ?c) (not (coin-update ?c)))
+Init:
   (= (current-value) 0)
   (= (denomination c1) 1)
   (= (denomination c2) 2)
@@ -63,5 +57,23 @@ Init[12]:
   (= (denomination-penalty c4) 1)
   (= (denomination-penalty c5) 1)
   (= (penalty) 0)
-Goal: (and (= (current-value) 29) (= (penalty) 0))
-Metric: no-metric
+  (no-coin-update c1)
+  (no-coin-update c2)
+  (no-coin-update c3)
+  (no-coin-update c4)
+  (no-coin-update c5)
+Goal:
+  (and (= (current-value) 29) (= (penalty) 0))
+Metric:
+Pred prop:
+  (coin-update coin): in_pre in_eff
+  (no-coin-update coin): in_init in_pre in_eff
+Func prop:
+  (current-value): in_init init_all_nonneg init_all_nonpos init_all_int in_goal in_eff rhs_funcs:(denomination) write_delta_nonneg write_delta_nonneg_int
+  (denomination coin): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (denomination-penalty coin): in_init init_all_nonneg init_all_int on_num_op_rhs in_eff write_delta_nonneg write_delta_nonneg_int
+  (penalty): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff rhs_funcs:(denomination-penalty)
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

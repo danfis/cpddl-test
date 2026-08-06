@@ -1,107 +1,129 @@
 Domain: citycar
 Problem: citycar-2-3-3
-Require: 200ff
-Type[5]:
-    [0]: object, parent: -1
-    [1]: car, parent: 0
-    [2]: junction, parent: 0
-    [3]: garage, parent: 0
-    [4]: road, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-    [1]: 6 7 8
-    [2]: 0 1 2 3 4 5
-    [3]: 9 10 11
-    [4]: 12 13 14 15
-Obj[16]:
-    [0]: junction0-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: junction0-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: junction0-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: junction1-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: junction1-1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: junction1-2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: car0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: car1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: car2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: garage0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: garage1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: garage2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: road0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: road1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: road2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: road3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[11]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    same_line: 2 2 :: read: 1, write: 0, in-init: 1
-    diagonal: 2 2 :: read: 1, write: 0, in-init: 1
-    at_car_jun: 1 2 :: read: 1, write: 1, in-init: 0
-    at_car_road: 1 4 :: read: 1, write: 1, in-init: 0
-    starting: 1 3 :: read: 1, write: 1, in-init: 1
-    arrived: 1 2 :: read: 1, write: 1, in-init: 0
-    road_connect: 4 2 2 :: read: 1, write: 1, in-init: 0
-    clear: 2 :: read: 1, write: 1, in-init: 1
-    in_place: 4 :: read: 1, write: 1, in-init: 0
-    at_garage: 3 2 :: read: 1, write: 0, in-init: 1
-Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[7]:
-    move_car_in_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
-        pre: (and (RW:at_car_jun ?machine ?xy_initial) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (N:RW:at_car_jun ?machine ?xy_initial) (RW:at_car_road ?machine ?r1) (RW:clear ?xy_initial) (increase (total-cost) 1))
-    move_car_out_road: ?xy_initial:2 ?xy_final:2 ?machine:1 ?r1:4
-        pre: (and (RW:at_car_road ?machine ?r1) (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:clear ?xy_final) (RW:in_place ?r1))
-        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:at_car_road ?machine ?r1) (N:RW:clear ?xy_final) (increase (total-cost) 1))
-    car_arrived: ?xy_final:2 ?machine:1
-        pre: (and (RW:at_car_jun ?machine ?xy_final))
-        eff: (and (N:RW:at_car_jun ?machine ?xy_final) (RW:arrived ?machine ?xy_final) (RW:clear ?xy_final))
-    car_start: ?xy_final:2 ?machine:1 ?g:3
-        pre: (and (R:at_garage ?g ?xy_final) (RW:starting ?machine ?g) (RW:clear ?xy_final))
-        eff: (and (RW:at_car_jun ?machine ?xy_final) (N:RW:starting ?machine ?g) (N:RW:clear ?xy_final))
-    build_diagonal_oneway: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (R:diagonal ?xy_initial ?xy_final) (RW:clear ?xy_final) (N:RW:in_place ?r1))
-        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1) (increase (total-cost) 30))
-    build_straight_oneway: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (R:same_line ?xy_initial ?xy_final) (RW:clear ?xy_final) (N:RW:in_place ?r1))
-        eff: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1) (increase (total-cost) 20))
-    destroy_road: ?xy_initial:2 ?xy_final:2 ?r1:4
-        pre: (and (RW:road_connect ?r1 ?xy_initial ?xy_final) (RW:in_place ?r1))
-        eff: (and (N:RW:road_connect ?r1 ?xy_initial ?xy_final) (N:RW:in_place ?r1) (increase (total-cost) 10) (forall (?c1:1 I[0]:?xy_initial:2 I[1]:?xy_final:2 I[2]:?r1:4) (when (RW:at_car_road ?c1 ?r1) (and (N:RW:at_car_road ?c1 ?r1) (RW:at_car_jun ?c1 ?xy_initial)))))
-Init[34]:
-  S:(same_line junction0-0 junction0-1)
-  S:(same_line junction0-0 junction1-0)
-  S:(same_line junction0-1 junction0-0)
-  S:(same_line junction0-1 junction0-2)
-  S:(same_line junction0-1 junction1-1)
-  S:(same_line junction0-2 junction0-1)
-  S:(same_line junction0-2 junction1-2)
-  S:(same_line junction1-0 junction0-0)
-  S:(same_line junction1-0 junction1-1)
-  S:(same_line junction1-1 junction0-1)
-  S:(same_line junction1-1 junction1-0)
-  S:(same_line junction1-1 junction1-2)
-  S:(same_line junction1-2 junction0-2)
-  S:(same_line junction1-2 junction1-1)
-  S:(diagonal junction0-0 junction1-1)
-  S:(diagonal junction0-1 junction1-0)
-  S:(diagonal junction0-1 junction1-2)
-  S:(diagonal junction0-2 junction1-1)
-  S:(diagonal junction1-0 junction0-1)
-  S:(diagonal junction1-1 junction0-0)
-  S:(diagonal junction1-1 junction0-2)
-  S:(diagonal junction1-2 junction0-1)
-  S:(at_garage garage0 junction0-2)
-  S:(at_garage garage1 junction0-0)
-  S:(at_garage garage2 junction0-2)
-  (starting car0 garage2)
-  (starting car1 garage1)
-  (starting car2 garage1)
+Require:
+  :action-costs
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  car - object
+  garage - object
+  junction - object
+  object
+  road - object
+Obj:
+  car0 - car
+  car1 - car
+  car2 - car
+  garage0 - garage
+  garage1 - garage
+  garage2 - garage
+  junction0-0 - junction
+  junction0-1 - junction
+  junction0-2 - junction
+  junction1-0 - junction
+  junction1-1 - junction
+  junction1-2 - junction
+  road0 - road
+  road1 - road
+  road2 - road
+  road3 - road
+Predicate:
+  (= object object) :eq
+  (arrived car junction)
+  (at_car_jun car junction)
+  (at_car_road car road)
+  (at_garage garage junction)
+  (clear junction)
+  (diagonal junction junction)
+  (in_place road)
+  (road_connect road junction junction)
+  (same_line junction junction)
+  (starting car garage)
+Function:
+  (total-cost) :total-cost
+Action:
+  build_diagonal_oneway: ?xy_initial - junction ?xy_final - junction ?r1 - road
+      pre: (and (clear ?xy_final) (diagonal ?xy_initial ?xy_final) (not (in_place ?r1)))
+      eff: (and (in_place ?r1) (increase (total-cost) 30) (road_connect ?r1 ?xy_initial ?xy_final))
+  build_straight_oneway: ?xy_initial - junction ?xy_final - junction ?r1 - road
+      pre: (and (clear ?xy_final) (not (in_place ?r1)) (same_line ?xy_initial ?xy_final))
+      eff: (and (in_place ?r1) (increase (total-cost) 20) (road_connect ?r1 ?xy_initial ?xy_final))
+  car_arrived: ?xy_final - junction ?machine - car
+      pre: (and (at_car_jun ?machine ?xy_final))
+      eff: (and (arrived ?machine ?xy_final) (clear ?xy_final) (not (at_car_jun ?machine ?xy_final)))
+  car_start: ?xy_final - junction ?machine - car ?g - garage
+      pre: (and (at_garage ?g ?xy_final) (clear ?xy_final) (starting ?machine ?g))
+      eff: (and (at_car_jun ?machine ?xy_final) (not (clear ?xy_final)) (not (starting ?machine ?g)))
+  destroy_road: ?xy_initial - junction ?xy_final - junction ?r1 - road
+      pre: (and (in_place ?r1) (road_connect ?r1 ?xy_initial ?xy_final))
+      eff: (and (forall (?c1 - car) (when (at_car_road ?c1 ?r1) (and (at_car_jun ?c1 ?xy_initial) (not (at_car_road ?c1 ?r1))))) (increase (total-cost) 10) (not (in_place ?r1)) (not (road_connect ?r1 ?xy_initial ?xy_final)))
+  move_car_in_road: ?xy_initial - junction ?xy_final - junction ?machine - car ?r1 - road
+      pre: (and (at_car_jun ?machine ?xy_initial) (in_place ?r1) (road_connect ?r1 ?xy_initial ?xy_final))
+      eff: (and (at_car_road ?machine ?r1) (clear ?xy_initial) (increase (total-cost) 1) (not (at_car_jun ?machine ?xy_initial)))
+  move_car_out_road: ?xy_initial - junction ?xy_final - junction ?machine - car ?r1 - road
+      pre: (and (at_car_road ?machine ?r1) (clear ?xy_final) (in_place ?r1) (road_connect ?r1 ?xy_initial ?xy_final))
+      eff: (and (at_car_jun ?machine ?xy_final) (increase (total-cost) 1) (not (at_car_road ?machine ?r1)) (not (clear ?xy_final)))
+Init:
+  (= (total-cost) 0)
+  (at_garage garage0 junction0-2)
+  (at_garage garage1 junction0-0)
+  (at_garage garage2 junction0-2)
   (clear junction0-0)
   (clear junction0-1)
   (clear junction0-2)
   (clear junction1-0)
   (clear junction1-1)
   (clear junction1-2)
-Init[1]:
-  (= (total-cost) 0)
-Goal: (and (RW:arrived car0 junction1-1) (RW:arrived car1 junction1-1) (RW:arrived car2 junction1-0))
-Metric: (total-cost)
+  (diagonal junction0-0 junction1-1)
+  (diagonal junction0-1 junction1-0)
+  (diagonal junction0-1 junction1-2)
+  (diagonal junction0-2 junction1-1)
+  (diagonal junction1-0 junction0-1)
+  (diagonal junction1-1 junction0-0)
+  (diagonal junction1-1 junction0-2)
+  (diagonal junction1-2 junction0-1)
+  (same_line junction0-0 junction0-1)
+  (same_line junction0-0 junction1-0)
+  (same_line junction0-1 junction0-0)
+  (same_line junction0-1 junction0-2)
+  (same_line junction0-1 junction1-1)
+  (same_line junction0-2 junction0-1)
+  (same_line junction0-2 junction1-2)
+  (same_line junction1-0 junction0-0)
+  (same_line junction1-0 junction1-1)
+  (same_line junction1-1 junction0-1)
+  (same_line junction1-1 junction1-0)
+  (same_line junction1-1 junction1-2)
+  (same_line junction1-2 junction0-2)
+  (same_line junction1-2 junction1-1)
+  (starting car0 garage2)
+  (starting car1 garage1)
+  (starting car2 garage1)
+Goal:
+  (and (arrived car0 junction1-1) (arrived car1 junction1-1) (arrived car2 junction1-0))
+Metric:
+  (total-cost)
+Pred prop:
+  (arrived car junction): in_goal in_eff
+  (at_car_jun car junction): in_pre in_eff
+  (at_car_road car road): in_pre in_eff
+  (at_garage garage junction): in_init in_pre
+  (clear junction): in_init in_pre in_eff
+  (diagonal junction junction): in_init in_pre
+  (in_place road): in_pre in_pre_neg in_eff
+  (road_connect road junction junction): in_pre in_eff
+  (same_line junction junction): in_init in_pre
+  (starting car garage): in_init in_pre in_eff
+Func prop:
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_cond_eff
+  has_int_action_cost_func
+  has_non_static_neg_cond

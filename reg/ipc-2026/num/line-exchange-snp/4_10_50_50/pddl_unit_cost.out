@@ -1,67 +1,80 @@
 Domain: line-exchange
 Problem: prob01
-Require: 103
-Type[2]:
-    [0]: object, parent: -1
-    [1]: robot, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3
-    [1]: 0 1 2 3
-Obj[4]:
-    [0]: r0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: r1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: r2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: r3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[4]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    pd: 1 1 :: read: 1, write: 1, in-init: 0
-    next: 1 1 :: read: 1, write: 0, in-init: 1
-    NOT-ps: 1 :: read: 1, write: 1, in-init: 1
-Function[4]:
-    d: :: read: 1, write: 0, in-init: 1
-    i: 1 :: read: 1, write: 0, in-init: 1
-    x: 1 :: read: 1, write: 1, in-init: 1
-    q: 1 :: read: 1, write: 1, in-init: 1
-Action[6]:
-    lft: ?r:1
-        pre: (and (RW:NOT-ps ?r) (> (x ?r) (* (d) (i ?r))))
-        eff: (and (decrease (x ?r) 1))
-    rgt: ?r:1
-        pre: (and (RW:NOT-ps ?r) (< (x ?r) (* (d) (+ (i ?r) 1))))
-        eff: (and (increase (x ?r) 1))
-    conn: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (= (x ?r1) (x ?r2)))
-        eff: (and (RW:pd ?r1 ?r2) (N:RW:NOT-ps ?r1) (N:RW:NOT-ps ?r2))
-    disc: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2))
-        eff: (and (N:RW:pd ?r1 ?r2) (RW:NOT-ps ?r1) (RW:NOT-ps ?r2))
-    exch-lre: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2) (>= (q ?r1) 1))
-        eff: (and (decrease (q ?r1) 1) (increase (q ?r2) 1))
-    exch-rle: ?r1:1 ?r2:1
-        pre: (and (R:next ?r1 ?r2) (RW:pd ?r1 ?r2) (>= (q ?r2) 1))
-        eff: (and (decrease (q ?r1) -1) (increase (q ?r2) -1))
-Init[7]:
-  S:(next r0 r1)
-  S:(next r1 r2)
-  S:(next r2 r3)
-  (NOT-ps r0)
-  (NOT-ps r1)
-  (NOT-ps r2)
-  (NOT-ps r3)
-Init[13]:
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  object
+  robot - object
+Obj:
+  r0 - robot
+  r1 - robot
+  r2 - robot
+  r3 - robot
+Predicate:
+  (= object object) :eq
+  (NOT-ps robot)
+  (next robot robot)
+  (pd robot robot)
+Function:
+  (d)
+  (i robot)
+  (q robot)
+  (x robot)
+Action:
+  conn: ?r1 - robot ?r2 - robot
+      pre: (and (= (x ?r1) (x ?r2)) (next ?r1 ?r2))
+      eff: (and (not (NOT-ps ?r1)) (not (NOT-ps ?r2)) (pd ?r1 ?r2))
+  disc: ?r1 - robot ?r2 - robot
+      pre: (and (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (NOT-ps ?r1) (NOT-ps ?r2) (not (pd ?r1 ?r2)))
+  exch-lre: ?r1 - robot ?r2 - robot
+      pre: (and (>= (q ?r1) 1) (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (decrease (q ?r1) 1) (increase (q ?r2) 1))
+  exch-rle: ?r1 - robot ?r2 - robot
+      pre: (and (>= (q ?r2) 1) (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (decrease (q ?r1) -1) (increase (q ?r2) -1))
+  lft: ?r - robot
+      pre: (and (> (x ?r) (* (d) (i ?r))) (NOT-ps ?r))
+      eff: (and (decrease (x ?r) 1))
+  rgt: ?r - robot
+      pre: (and (< (x ?r) (* (d) (+ (i ?r) 1))) (NOT-ps ?r))
+      eff: (and (increase (x ?r) 1))
+Init:
   (= (d) 50)
   (= (i r0) 0)
   (= (i r1) 1)
   (= (i r2) 2)
   (= (i r3) 3)
-  (= (x r0) 25)
-  (= (x r1) 75)
-  (= (x r2) 125)
-  (= (x r3) 175)
   (= (q r0) 13)
   (= (q r1) 9)
   (= (q r2) 5)
   (= (q r3) 13)
-Goal: (and (= (x r0) 25) (= (x r1) 75) (= (x r2) 125) (= (x r3) 175) (= (q r0) (q r1)) (= (q r1) (q r2)) (= (q r2) (q r3)))
-Metric: no-metric
+  (= (x r0) 25)
+  (= (x r1) 75)
+  (= (x r2) 125)
+  (= (x r3) 175)
+  (NOT-ps r0)
+  (NOT-ps r1)
+  (NOT-ps r2)
+  (NOT-ps r3)
+  (next r0 r1)
+  (next r1 r2)
+  (next r2 r3)
+Goal:
+  (and (= (q r0) (q r1)) (= (q r1) (q r2)) (= (q r2) (q r3)) (= (x r0) 25) (= (x r1) 75) (= (x r2) 125) (= (x r3) 175))
+Metric:
+Pred prop:
+  (NOT-ps robot): in_init in_pre in_eff
+  (next robot robot): in_init in_pre
+  (pd robot robot): in_pre in_eff
+Func prop:
+  (d): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (i robot): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (q robot): in_init init_all_nonneg init_all_int in_pre in_goal in_eff
+  (x robot): in_init init_all_nonneg init_all_int in_pre in_goal in_eff
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

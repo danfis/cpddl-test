@@ -1,57 +1,57 @@
 Domain: parking
 Problem: parking
-Require: 20003
-Type[3]:
-    [0]: object, parent: -1
-    [1]: car, parent: 0
-    [2]: curb, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
-    [1]: 0 1 2 3 4 5 6 7 8 9 10 11
-    [2]: 12 13 14 15 16 17 18
-Obj[19]:
-    [0]: car_00, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: car_01, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: car_02, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: car_03, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: car_04, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: car_05, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: car_06, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: car_07, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: car_08, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: car_09, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: car_10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: car_11, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: curb_0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: curb_1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: curb_2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: curb_3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: curb_4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: curb_5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: curb_6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[6]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at-curb: 1 :: read: 1, write: 1, in-init: 1
-    at-curb-num: 1 2 :: read: 1, write: 1, in-init: 1
-    behind-car: 1 1 :: read: 1, write: 1, in-init: 1
-    car-clear: 1 :: read: 1, write: 1, in-init: 1
-    curb-clear: 2 :: read: 1, write: 1, in-init: 0
-Function[1]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[4]:
-    move-curb-to-curb: ?car:1 ?curbsrc:2 ?curbdest:2
-        pre: (and (RW:at-curb-num ?car ?curbsrc) (RW:car-clear ?car) (RW:curb-clear ?curbdest))
-        eff: (and (N:RW:at-curb-num ?car ?curbsrc) (RW:at-curb-num ?car ?curbdest) (RW:curb-clear ?curbsrc) (N:RW:curb-clear ?curbdest) (increase (total-cost) 1))
-    move-curb-to-car: ?car:1 ?curbsrc:2 ?cardest:1
-        pre: (and (RW:at-curb ?cardest) (RW:at-curb-num ?car ?curbsrc) (RW:car-clear ?car) (RW:car-clear ?cardest))
-        eff: (and (N:RW:at-curb ?car) (N:RW:at-curb-num ?car ?curbsrc) (RW:behind-car ?car ?cardest) (N:RW:car-clear ?cardest) (RW:curb-clear ?curbsrc) (increase (total-cost) 1))
-    move-car-to-curb: ?car:1 ?carsrc:1 ?curbdest:2
-        pre: (and (RW:behind-car ?car ?carsrc) (RW:car-clear ?car) (RW:curb-clear ?curbdest))
-        eff: (and (RW:at-curb ?car) (RW:at-curb-num ?car ?curbdest) (N:RW:behind-car ?car ?carsrc) (RW:car-clear ?carsrc) (N:RW:curb-clear ?curbdest) (increase (total-cost) 1))
-    move-car-to-car: ?car:1 ?carsrc:1 ?cardest:1
-        pre: (and (RW:at-curb ?cardest) (RW:behind-car ?car ?carsrc) (RW:car-clear ?car) (RW:car-clear ?cardest))
-        eff: (and (N:RW:behind-car ?car ?carsrc) (RW:behind-car ?car ?cardest) (RW:car-clear ?carsrc) (N:RW:car-clear ?cardest) (increase (total-cost) 1))
-Init[26]:
+Require:
+  :action-costs
+  :strips
+  :typing
+Type:
+  car - object
+  curb - object
+  object
+Obj:
+  car_00 - car
+  car_01 - car
+  car_02 - car
+  car_03 - car
+  car_04 - car
+  car_05 - car
+  car_06 - car
+  car_07 - car
+  car_08 - car
+  car_09 - car
+  car_10 - car
+  car_11 - car
+  curb_0 - curb
+  curb_1 - curb
+  curb_2 - curb
+  curb_3 - curb
+  curb_4 - curb
+  curb_5 - curb
+  curb_6 - curb
+Predicate:
+  (= object object) :eq
+  (at-curb car)
+  (at-curb-num car curb)
+  (behind-car car car)
+  (car-clear car)
+  (curb-clear curb)
+Function:
+  (total-cost) :total-cost
+Action:
+  move-car-to-car: ?car - car ?carsrc - car ?cardest - car
+      pre: (and (at-curb ?cardest) (behind-car ?car ?carsrc) (car-clear ?car) (car-clear ?cardest))
+      eff: (and (behind-car ?car ?cardest) (car-clear ?carsrc) (increase (total-cost) 1) (not (behind-car ?car ?carsrc)) (not (car-clear ?cardest)))
+  move-car-to-curb: ?car - car ?carsrc - car ?curbdest - curb
+      pre: (and (behind-car ?car ?carsrc) (car-clear ?car) (curb-clear ?curbdest))
+      eff: (and (at-curb ?car) (at-curb-num ?car ?curbdest) (car-clear ?carsrc) (increase (total-cost) 1) (not (behind-car ?car ?carsrc)) (not (curb-clear ?curbdest)))
+  move-curb-to-car: ?car - car ?curbsrc - curb ?cardest - car
+      pre: (and (at-curb ?cardest) (at-curb-num ?car ?curbsrc) (car-clear ?car) (car-clear ?cardest))
+      eff: (and (behind-car ?car ?cardest) (curb-clear ?curbsrc) (increase (total-cost) 1) (not (at-curb ?car)) (not (at-curb-num ?car ?curbsrc)) (not (car-clear ?cardest)))
+  move-curb-to-curb: ?car - car ?curbsrc - curb ?curbdest - curb
+      pre: (and (at-curb-num ?car ?curbsrc) (car-clear ?car) (curb-clear ?curbdest))
+      eff: (and (at-curb-num ?car ?curbdest) (curb-clear ?curbsrc) (increase (total-cost) 1) (not (at-curb-num ?car ?curbsrc)) (not (curb-clear ?curbdest)))
+Init:
+  (= (total-cost) 0)
   (at-curb car_00)
   (at-curb car_01)
   (at-curb car_03)
@@ -78,7 +78,18 @@ Init[26]:
   (car-clear car_07)
   (car-clear car_10)
   (car-clear car_11)
-Init[1]:
-  (= (total-cost) 0)
-Goal: (and (RW:at-curb-num car_00 curb_0) (RW:at-curb-num car_01 curb_1) (RW:at-curb-num car_02 curb_2) (RW:at-curb-num car_03 curb_3) (RW:at-curb-num car_04 curb_4) (RW:at-curb-num car_05 curb_5) (RW:at-curb-num car_06 curb_6) (RW:behind-car car_07 car_00) (RW:behind-car car_08 car_01) (RW:behind-car car_09 car_02) (RW:behind-car car_10 car_03) (RW:behind-car car_11 car_04))
-Metric: (total-cost)
+Goal:
+  (and (at-curb-num car_00 curb_0) (at-curb-num car_01 curb_1) (at-curb-num car_02 curb_2) (at-curb-num car_03 curb_3) (at-curb-num car_04 curb_4) (at-curb-num car_05 curb_5) (at-curb-num car_06 curb_6) (behind-car car_07 car_00) (behind-car car_08 car_01) (behind-car car_09 car_02) (behind-car car_10 car_03) (behind-car car_11 car_04))
+Metric:
+  (total-cost)
+Pred prop:
+  (at-curb car): in_init in_pre in_eff
+  (at-curb-num car curb): in_init in_pre in_goal in_eff
+  (behind-car car car): in_init in_pre in_goal in_eff
+  (car-clear car): in_init in_pre in_eff
+  (curb-clear curb): in_pre in_eff
+Func prop:
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func

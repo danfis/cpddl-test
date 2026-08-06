@@ -1,169 +1,184 @@
 Domain: transport
 Problem: transport-three-cities-sequential-3nodes-1000size-2degree-100mindistance-2trucks-4packages-2008seed
-Require: 200ff
-Type[9]:
-    [0]: object, parent: -1
-    [1]: location, parent: 0
-    [2]: target, parent: 0
-    [3]: locatable, parent: 0
-    [4]: capacity-number, parent: 0
-    [5]: package-property1, parent: 0
-    [6]: pnum, parent: 0
-    [7]: vehicle, parent: 3
-    [8]: package, parent: 3
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
-    [1]: 0 1 2 3 4 5 6 7 8
-    [2]:
-    [3]: 17 18 19 20 21
-    [4]: 12 13 14 15 16
-    [5]:
-    [6]: 9 10 11
-    [7]: 17 18
-    [8]: 19 20 21
-Obj[22]:
-    [0]: city-1-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: city-2-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: city-3-loc-1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: city-1-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: city-2-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: city-3-loc-2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: city-1-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: city-2-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: city-3-loc-3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: pnum1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: pnum2, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: pnum0, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: capacity-0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: capacity-1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: capacity-2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: capacity-3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: capacity-4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: truck-1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: truck-2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: package-bag1, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: package-bag2, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: package-bag3, type: 8, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    road: 1 1 :: read: 1, write: 0, in-init: 1
-    capacity: 7 4 :: read: 1, write: 1, in-init: 1
-    capacity-predecessor: 4 4 :: read: 1, write: 0, in-init: 1
-    at-vehicle: 7 1 :: read: 1, write: 1, in-init: 1
-    package-less: 6 6 :: read: 1, write: 0, in-init: 1
-    count-package: 8 0 6 :: read: 1, write: 1, in-init: 1
-    package-lte-sum: 6 6 6 :: read: 1, write: 0, in-init: 1
-    package-bag-size: 8 6 :: read: 1, write: 0, in-init: 1
-Function[2]:
-    road-length: 1 1 :: read: 1, write: 0, in-init: 1
-    total-cost: :: read: 1, write: 1, in-init: 1
-Action[3]:
-    drive: ?v:7 ?l1:1 ?l2:1
-        pre: (and (R:road ?l1 ?l2) (RW:at-vehicle ?v ?l1))
-        eff: (and (N:RW:at-vehicle ?v ?l1) (RW:at-vehicle ?v ?l2) (increase (total-cost) (road-length ?l1 ?l2)))
-    pick-up: ?v:7 ?l:1 ?p:8 ?s1:4 ?s2:4 ?n1:6 ?n0:6 ?n2:6 ?n3:6 ?p-size:6
-        pre: (and (R:capacity-predecessor ?s1 ?s2) (R:package-less ?n0 ?n1) (R:package-less ?n2 ?n3) (R:package-lte-sum ?n1 ?n2 ?p-size) (R:package-bag-size ?p ?p-size) (RW:capacity ?v ?s2) (RW:at-vehicle ?v ?l) (RW:count-package ?p ?v ?n2) (RW:count-package ?p ?l ?n1))
-        eff: (and (RW:capacity ?v ?s1) (N:RW:capacity ?v ?s2) (N:RW:count-package ?p ?v ?n2) (RW:count-package ?p ?v ?n3) (N:RW:count-package ?p ?l ?n1) (RW:count-package ?p ?l ?n0) (increase (total-cost) 1))
-    drop: ?v:7 ?l:1 ?p:8 ?s1:4 ?s2:4 ?n1:6 ?n0:6 ?n2:6 ?n3:6 ?p-size:6
-        pre: (and (R:capacity-predecessor ?s1 ?s2) (R:package-less ?n0 ?n1) (R:package-less ?n2 ?n3) (R:package-lte-sum ?n1 ?n2 ?p-size) (R:package-bag-size ?p ?p-size) (RW:capacity ?v ?s1) (RW:at-vehicle ?v ?l) (RW:count-package ?p ?v ?n1) (RW:count-package ?p ?l ?n2))
-        eff: (and (N:RW:capacity ?v ?s1) (RW:capacity ?v ?s2) (N:RW:count-package ?p ?v ?n1) (RW:count-package ?p ?v ?n0) (N:RW:count-package ?p ?l ?n2) (RW:count-package ?p ?l ?n3) (increase (total-cost) 1))
-Init[75]:
-  S:(road city-1-loc-1 city-3-loc-1)
-  S:(road city-1-loc-1 city-1-loc-3)
-  S:(road city-1-loc-1 city-2-loc-3)
-  S:(road city-2-loc-1 city-2-loc-2)
-  S:(road city-2-loc-1 city-2-loc-3)
-  S:(road city-3-loc-1 city-1-loc-1)
-  S:(road city-3-loc-1 city-3-loc-2)
-  S:(road city-3-loc-1 city-3-loc-3)
-  S:(road city-1-loc-2 city-1-loc-3)
-  S:(road city-2-loc-2 city-2-loc-1)
-  S:(road city-2-loc-2 city-2-loc-3)
-  S:(road city-3-loc-2 city-3-loc-1)
-  S:(road city-3-loc-2 city-2-loc-3)
-  S:(road city-1-loc-3 city-1-loc-1)
-  S:(road city-1-loc-3 city-1-loc-2)
-  S:(road city-2-loc-3 city-1-loc-1)
-  S:(road city-2-loc-3 city-2-loc-1)
-  S:(road city-2-loc-3 city-2-loc-2)
-  S:(road city-2-loc-3 city-3-loc-2)
-  S:(road city-3-loc-3 city-3-loc-1)
-  S:(capacity-predecessor capacity-0 capacity-1)
-  S:(capacity-predecessor capacity-1 capacity-2)
-  S:(capacity-predecessor capacity-2 capacity-3)
-  S:(capacity-predecessor capacity-3 capacity-4)
-  S:(package-less pnum1 pnum2)
-  S:(package-less pnum0 pnum1)
-  S:(package-lte-sum pnum1 pnum1 pnum2)
-  S:(package-lte-sum pnum1 pnum0 pnum1)
-  S:(package-lte-sum pnum1 pnum0 pnum2)
-  S:(package-lte-sum pnum2 pnum0 pnum2)
-  S:(package-lte-sum pnum0 pnum1 pnum1)
-  S:(package-lte-sum pnum0 pnum1 pnum2)
-  S:(package-lte-sum pnum0 pnum2 pnum2)
-  S:(package-lte-sum pnum0 pnum0 pnum1)
-  S:(package-lte-sum pnum0 pnum0 pnum2)
-  S:(package-bag-size package-bag1 pnum2)
-  S:(package-bag-size package-bag2 pnum1)
-  S:(package-bag-size package-bag3 pnum1)
-  (capacity truck-1 capacity-3)
-  (capacity truck-2 capacity-3)
-  (at-vehicle truck-1 city-1-loc-3)
-  (at-vehicle truck-2 city-3-loc-1)
-  (count-package package-bag1 city-1-loc-1 pnum0)
-  (count-package package-bag1 city-2-loc-1 pnum0)
-  (count-package package-bag1 city-3-loc-1 pnum0)
-  (count-package package-bag1 city-1-loc-2 pnum1)
-  (count-package package-bag1 city-2-loc-2 pnum0)
-  (count-package package-bag1 city-3-loc-2 pnum0)
-  (count-package package-bag1 city-1-loc-3 pnum0)
-  (count-package package-bag1 city-2-loc-3 pnum0)
-  (count-package package-bag1 city-3-loc-3 pnum0)
-  (count-package package-bag1 truck-1 pnum0)
-  (count-package package-bag1 truck-2 pnum0)
-  (count-package package-bag2 city-1-loc-1 pnum0)
-  (count-package package-bag2 city-2-loc-1 pnum0)
-  (count-package package-bag2 city-3-loc-1 pnum1)
-  (count-package package-bag2 city-1-loc-2 pnum0)
-  (count-package package-bag2 city-2-loc-2 pnum0)
-  (count-package package-bag2 city-3-loc-2 pnum0)
-  (count-package package-bag2 city-1-loc-3 pnum0)
-  (count-package package-bag2 city-2-loc-3 pnum0)
-  (count-package package-bag2 city-3-loc-3 pnum0)
-  (count-package package-bag2 truck-1 pnum0)
-  (count-package package-bag2 truck-2 pnum0)
-  (count-package package-bag3 city-1-loc-1 pnum0)
-  (count-package package-bag3 city-2-loc-1 pnum0)
-  (count-package package-bag3 city-3-loc-1 pnum0)
-  (count-package package-bag3 city-1-loc-2 pnum1)
-  (count-package package-bag3 city-2-loc-2 pnum0)
-  (count-package package-bag3 city-3-loc-2 pnum0)
-  (count-package package-bag3 city-1-loc-3 pnum0)
-  (count-package package-bag3 city-2-loc-3 pnum0)
-  (count-package package-bag3 city-3-loc-3 pnum0)
-  (count-package package-bag3 truck-1 pnum0)
-  (count-package package-bag3 truck-2 pnum0)
-Init[21]:
-  (= (road-length city-1-loc-1 city-3-loc-1) 186)
+Require:
+  :action-costs
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  capacity-number - object
+  locatable - object
+  location - object
+  object
+  package - locatable
+  package-property1 - object
+  pnum - object
+  target - object
+  vehicle - locatable
+Obj:
+  capacity-0 - capacity-number
+  capacity-1 - capacity-number
+  capacity-2 - capacity-number
+  capacity-3 - capacity-number
+  capacity-4 - capacity-number
+  city-1-loc-1 - location
+  city-1-loc-2 - location
+  city-1-loc-3 - location
+  city-2-loc-1 - location
+  city-2-loc-2 - location
+  city-2-loc-3 - location
+  city-3-loc-1 - location
+  city-3-loc-2 - location
+  city-3-loc-3 - location
+  package-bag1 - package
+  package-bag2 - package
+  package-bag3 - package
+  pnum0 - pnum
+  pnum1 - pnum
+  pnum2 - pnum
+  truck-1 - vehicle
+  truck-2 - vehicle
+Predicate:
+  (= object object) :eq
+  (at-vehicle vehicle location)
+  (capacity vehicle capacity-number)
+  (capacity-predecessor capacity-number capacity-number)
+  (count-package package object pnum)
+  (package-bag-size package pnum)
+  (package-less pnum pnum)
+  (package-lte-sum pnum pnum pnum)
+  (road location location)
+Function:
+  (road-length location location)
+  (total-cost) :total-cost
+Action:
+  drive: ?v - vehicle ?l1 - location ?l2 - location
+      pre: (and (at-vehicle ?v ?l1) (road ?l1 ?l2))
+      eff: (and (at-vehicle ?v ?l2) (increase (total-cost) (road-length ?l1 ?l2)) (not (at-vehicle ?v ?l1)))
+  drop: ?v - vehicle ?l - location ?p - package ?s1 - capacity-number ?s2 - capacity-number ?n1 - pnum ?n0 - pnum ?n2 - pnum ?n3 - pnum ?p-size - pnum
+      pre: (and (at-vehicle ?v ?l) (capacity ?v ?s1) (capacity-predecessor ?s1 ?s2) (count-package ?p ?l ?n2) (count-package ?p ?v ?n1) (package-bag-size ?p ?p-size) (package-less ?n0 ?n1) (package-less ?n2 ?n3) (package-lte-sum ?n1 ?n2 ?p-size))
+      eff: (and (capacity ?v ?s2) (count-package ?p ?l ?n3) (count-package ?p ?v ?n0) (increase (total-cost) 1) (not (capacity ?v ?s1)) (not (count-package ?p ?l ?n2)) (not (count-package ?p ?v ?n1)))
+  pick-up: ?v - vehicle ?l - location ?p - package ?s1 - capacity-number ?s2 - capacity-number ?n1 - pnum ?n0 - pnum ?n2 - pnum ?n3 - pnum ?p-size - pnum
+      pre: (and (at-vehicle ?v ?l) (capacity ?v ?s2) (capacity-predecessor ?s1 ?s2) (count-package ?p ?l ?n1) (count-package ?p ?v ?n2) (package-bag-size ?p ?p-size) (package-less ?n0 ?n1) (package-less ?n2 ?n3) (package-lte-sum ?n1 ?n2 ?p-size))
+      eff: (and (capacity ?v ?s1) (count-package ?p ?l ?n0) (count-package ?p ?v ?n3) (increase (total-cost) 1) (not (capacity ?v ?s2)) (not (count-package ?p ?l ?n1)) (not (count-package ?p ?v ?n2)))
+Init:
   (= (road-length city-1-loc-1 city-1-loc-3) 22)
   (= (road-length city-1-loc-1 city-2-loc-3) 139)
-  (= (road-length city-2-loc-1 city-2-loc-2) 30)
-  (= (road-length city-2-loc-1 city-2-loc-3) 49)
-  (= (road-length city-3-loc-1 city-1-loc-1) 186)
-  (= (road-length city-3-loc-1 city-3-loc-2) 41)
-  (= (road-length city-3-loc-1 city-3-loc-3) 53)
+  (= (road-length city-1-loc-1 city-3-loc-1) 186)
   (= (road-length city-1-loc-2 city-1-loc-3) 50)
-  (= (road-length city-2-loc-2 city-2-loc-1) 30)
-  (= (road-length city-2-loc-2 city-2-loc-3) 47)
-  (= (road-length city-3-loc-2 city-3-loc-1) 41)
-  (= (road-length city-3-loc-2 city-2-loc-3) 186)
   (= (road-length city-1-loc-3 city-1-loc-1) 22)
   (= (road-length city-1-loc-3 city-1-loc-2) 50)
+  (= (road-length city-2-loc-1 city-2-loc-2) 30)
+  (= (road-length city-2-loc-1 city-2-loc-3) 49)
+  (= (road-length city-2-loc-2 city-2-loc-1) 30)
+  (= (road-length city-2-loc-2 city-2-loc-3) 47)
   (= (road-length city-2-loc-3 city-1-loc-1) 139)
   (= (road-length city-2-loc-3 city-2-loc-1) 49)
   (= (road-length city-2-loc-3 city-2-loc-2) 47)
   (= (road-length city-2-loc-3 city-3-loc-2) 186)
+  (= (road-length city-3-loc-1 city-1-loc-1) 186)
+  (= (road-length city-3-loc-1 city-3-loc-2) 41)
+  (= (road-length city-3-loc-1 city-3-loc-3) 53)
+  (= (road-length city-3-loc-2 city-2-loc-3) 186)
+  (= (road-length city-3-loc-2 city-3-loc-1) 41)
   (= (road-length city-3-loc-3 city-3-loc-1) 53)
   (= (total-cost) 0)
-Goal: (and (RW:count-package package-bag1 city-1-loc-3 pnum2) (RW:count-package package-bag2 city-1-loc-1 pnum1) (RW:count-package package-bag3 city-2-loc-2 pnum1))
-Metric: (total-cost)
+  (at-vehicle truck-1 city-1-loc-3)
+  (at-vehicle truck-2 city-3-loc-1)
+  (capacity truck-1 capacity-3)
+  (capacity truck-2 capacity-3)
+  (capacity-predecessor capacity-0 capacity-1)
+  (capacity-predecessor capacity-1 capacity-2)
+  (capacity-predecessor capacity-2 capacity-3)
+  (capacity-predecessor capacity-3 capacity-4)
+  (count-package package-bag1 city-1-loc-1 pnum0)
+  (count-package package-bag1 city-1-loc-2 pnum1)
+  (count-package package-bag1 city-1-loc-3 pnum0)
+  (count-package package-bag1 city-2-loc-1 pnum0)
+  (count-package package-bag1 city-2-loc-2 pnum0)
+  (count-package package-bag1 city-2-loc-3 pnum0)
+  (count-package package-bag1 city-3-loc-1 pnum0)
+  (count-package package-bag1 city-3-loc-2 pnum0)
+  (count-package package-bag1 city-3-loc-3 pnum0)
+  (count-package package-bag1 truck-1 pnum0)
+  (count-package package-bag1 truck-2 pnum0)
+  (count-package package-bag2 city-1-loc-1 pnum0)
+  (count-package package-bag2 city-1-loc-2 pnum0)
+  (count-package package-bag2 city-1-loc-3 pnum0)
+  (count-package package-bag2 city-2-loc-1 pnum0)
+  (count-package package-bag2 city-2-loc-2 pnum0)
+  (count-package package-bag2 city-2-loc-3 pnum0)
+  (count-package package-bag2 city-3-loc-1 pnum1)
+  (count-package package-bag2 city-3-loc-2 pnum0)
+  (count-package package-bag2 city-3-loc-3 pnum0)
+  (count-package package-bag2 truck-1 pnum0)
+  (count-package package-bag2 truck-2 pnum0)
+  (count-package package-bag3 city-1-loc-1 pnum0)
+  (count-package package-bag3 city-1-loc-2 pnum1)
+  (count-package package-bag3 city-1-loc-3 pnum0)
+  (count-package package-bag3 city-2-loc-1 pnum0)
+  (count-package package-bag3 city-2-loc-2 pnum0)
+  (count-package package-bag3 city-2-loc-3 pnum0)
+  (count-package package-bag3 city-3-loc-1 pnum0)
+  (count-package package-bag3 city-3-loc-2 pnum0)
+  (count-package package-bag3 city-3-loc-3 pnum0)
+  (count-package package-bag3 truck-1 pnum0)
+  (count-package package-bag3 truck-2 pnum0)
+  (package-bag-size package-bag1 pnum2)
+  (package-bag-size package-bag2 pnum1)
+  (package-bag-size package-bag3 pnum1)
+  (package-less pnum0 pnum1)
+  (package-less pnum1 pnum2)
+  (package-lte-sum pnum0 pnum0 pnum1)
+  (package-lte-sum pnum0 pnum0 pnum2)
+  (package-lte-sum pnum0 pnum1 pnum1)
+  (package-lte-sum pnum0 pnum1 pnum2)
+  (package-lte-sum pnum0 pnum2 pnum2)
+  (package-lte-sum pnum1 pnum0 pnum1)
+  (package-lte-sum pnum1 pnum0 pnum2)
+  (package-lte-sum pnum1 pnum1 pnum2)
+  (package-lte-sum pnum2 pnum0 pnum2)
+  (road city-1-loc-1 city-1-loc-3)
+  (road city-1-loc-1 city-2-loc-3)
+  (road city-1-loc-1 city-3-loc-1)
+  (road city-1-loc-2 city-1-loc-3)
+  (road city-1-loc-3 city-1-loc-1)
+  (road city-1-loc-3 city-1-loc-2)
+  (road city-2-loc-1 city-2-loc-2)
+  (road city-2-loc-1 city-2-loc-3)
+  (road city-2-loc-2 city-2-loc-1)
+  (road city-2-loc-2 city-2-loc-3)
+  (road city-2-loc-3 city-1-loc-1)
+  (road city-2-loc-3 city-2-loc-1)
+  (road city-2-loc-3 city-2-loc-2)
+  (road city-2-loc-3 city-3-loc-2)
+  (road city-3-loc-1 city-1-loc-1)
+  (road city-3-loc-1 city-3-loc-2)
+  (road city-3-loc-1 city-3-loc-3)
+  (road city-3-loc-2 city-2-loc-3)
+  (road city-3-loc-2 city-3-loc-1)
+  (road city-3-loc-3 city-3-loc-1)
+Goal:
+  (and (count-package package-bag1 city-1-loc-3 pnum2) (count-package package-bag2 city-1-loc-1 pnum1) (count-package package-bag3 city-2-loc-2 pnum1))
+Metric:
+  (total-cost)
+Pred prop:
+  (at-vehicle vehicle location): in_init in_pre in_eff
+  (capacity vehicle capacity-number): in_init in_pre in_eff
+  (capacity-predecessor capacity-number capacity-number): in_init in_pre
+  (count-package package object pnum): in_init in_pre in_goal in_eff
+  (package-bag-size package pnum): in_init in_pre
+  (package-less pnum pnum): in_init in_pre
+  (package-lte-sum pnum pnum pnum): in_init in_pre
+  (road location location): in_init in_pre
+Func prop:
+  (road-length location location): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(road-length) write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func

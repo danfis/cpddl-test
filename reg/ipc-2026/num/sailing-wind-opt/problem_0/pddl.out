@@ -1,142 +1,166 @@
 Domain: sailing-wind
 Problem: test
-Require: 103
-Type[3]:
-    [0]: object, parent: -1
-    [1]: boat, parent: 0
-    [2]: person, parent: 0
-Obj-by-Type:
-    [0]: 0 1
-    [1]: 0
-    [2]: 1
-Obj[2]:
-    [0]: b0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: p0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[2]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    saved: 2 :: read: 1, write: 1, in-init: 0
-Function[18]:
-    v: 1 :: read: 1, write: 1, in-init: 1
-    x: 0 :: read: 1, write: 1, in-init: 1
-    y: 0 :: read: 1, write: 1, in-init: 1
-    r: 1 :: read: 1, write: 0, in-init: 1
-    vmax_0: 1 :: read: 1, write: 0, in-init: 1
-    vmax_15: 1 :: read: 1, write: 0, in-init: 1
-    vmax_30: 1 :: read: 1, write: 0, in-init: 1
-    vmax_45: 1 :: read: 1, write: 0, in-init: 1
-    vmax_60: 1 :: read: 1, write: 0, in-init: 1
-    vmax_75: 1 :: read: 1, write: 0, in-init: 1
-    vmax_90: 1 :: read: 1, write: 0, in-init: 1
-    vmax_105: 1 :: read: 1, write: 0, in-init: 1
-    vmax_120: 1 :: read: 1, write: 0, in-init: 1
-    vmax_135: 1 :: read: 1, write: 0, in-init: 1
-    vmax_150: 1 :: read: 1, write: 0, in-init: 1
-    vmax_165: 1 :: read: 1, write: 0, in-init: 1
-    vmax_180: 1 :: read: 1, write: 0, in-init: 1
-    sailing-angle: 1 :: read: 1, write: 1, in-init: 1
-Action[27]:
-    move_0: ?b:1
-        pre: (and (= (sailing-angle ?b) 345))
-        eff: (and (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (v ?b)) (assign (sailing-angle ?b) 0))
-    move_15: ?b:1
-        pre: (and (>= (sailing-angle ?b) 0) (<= (sailing-angle ?b) 30))
-        eff: (and (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.26)) (increase (y ?b) (* (v ?b) 0.97)) (assign (sailing-angle ?b) 15))
-    move_30: ?b:1
-        pre: (and (>= (sailing-angle ?b) 15) (<= (sailing-angle ?b) 45))
-        eff: (and (assign (v ?b) (+ (* (vmax_30 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.5)) (increase (y ?b) (* (v ?b) 0.87)) (assign (sailing-angle ?b) 30))
-    move_45: ?b:1
-        pre: (and (>= (sailing-angle ?b) 30) (<= (sailing-angle ?b) 60))
-        eff: (and (assign (v ?b) (+ (* (vmax_45 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.71)) (increase (y ?b) (* (v ?b) 0.71)) (assign (sailing-angle ?b) 45))
-    move_60: ?b:1
-        pre: (and (>= (sailing-angle ?b) 45) (<= (sailing-angle ?b) 75))
-        eff: (and (assign (v ?b) (+ (* (vmax_60 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.87)) (increase (y ?b) (* (v ?b) 0.5)) (assign (sailing-angle ?b) 60))
-    move_75: ?b:1
-        pre: (and (>= (sailing-angle ?b) 60) (<= (sailing-angle ?b) 90))
-        eff: (and (assign (v ?b) (+ (* (vmax_75 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.97)) (increase (y ?b) (* (v ?b) 0.26)) (assign (sailing-angle ?b) 75))
-    move_90: ?b:1
-        pre: (and (>= (sailing-angle ?b) 75) (<= (sailing-angle ?b) 105))
-        eff: (and (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (v ?b)) (assign (sailing-angle ?b) 90))
-    move_105: ?b:1
-        pre: (and (>= (sailing-angle ?b) 90) (<= (sailing-angle ?b) 120))
-        eff: (and (assign (v ?b) (+ (* (vmax_105 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.97)) (increase (y ?b) (* (v ?b) -0.26)) (assign (sailing-angle ?b) 105))
-    move_120: ?b:1
-        pre: (and (>= (sailing-angle ?b) 105) (<= (sailing-angle ?b) 135))
-        eff: (and (assign (v ?b) (+ (* (vmax_120 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.87)) (increase (y ?b) (* (v ?b) -0.5)) (assign (sailing-angle ?b) 120))
-    move_135: ?b:1
-        pre: (and (>= (sailing-angle ?b) 120) (<= (sailing-angle ?b) 150))
-        eff: (and (assign (v ?b) (+ (* (vmax_135 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.71)) (increase (y ?b) (* (v ?b) -0.71)) (assign (sailing-angle ?b) 135))
-    move_150: ?b:1
-        pre: (and (>= (sailing-angle ?b) 135) (<= (sailing-angle ?b) 165))
-        eff: (and (assign (v ?b) (+ (* (vmax_150 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.5)) (increase (y ?b) (* (v ?b) -0.87)) (assign (sailing-angle ?b) 150))
-    move_165: ?b:1
-        pre: (and (>= (sailing-angle ?b) 150) (<= (sailing-angle ?b) 180))
-        eff: (and (assign (v ?b) (+ (* (vmax_165 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.26)) (increase (y ?b) (* (v ?b) -0.97)) (assign (sailing-angle ?b) 165))
-    move_180: ?b:1
-        pre: (and (>= (sailing-angle ?b) 165) (<= (sailing-angle ?b) 195))
-        eff: (and (assign (v ?b) (+ (* (vmax_180 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (* (v ?b) -1)) (assign (sailing-angle ?b) 180))
-    move_195: ?b:1
-        pre: (and (>= (sailing-angle ?b) 180) (<= (sailing-angle ?b) 210))
-        eff: (and (assign (v ?b) (+ (* (vmax_165 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) -0.97)) (assign (sailing-angle ?b) 195))
-    move_210: ?b:1
-        pre: (and (>= (sailing-angle ?b) 195) (<= (sailing-angle ?b) 225))
-        eff: (and (assign (v ?b) (+ (* (vmax_150 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.5)) (increase (y ?b) (* (v ?b) -0.87)) (assign (sailing-angle ?b) 210))
-    move_225: ?b:1
-        pre: (and (>= (sailing-angle ?b) 210) (<= (sailing-angle ?b) 240))
-        eff: (and (assign (v ?b) (+ (* (vmax_135 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.71)) (increase (y ?b) (* (v ?b) -0.71)) (assign (sailing-angle ?b) 225))
-    move_240: ?b:1
-        pre: (and (>= (sailing-angle ?b) 225) (<= (sailing-angle ?b) 255))
-        eff: (and (assign (v ?b) (+ (* (vmax_120 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.87)) (increase (y ?b) (* (v ?b) -0.5)) (assign (sailing-angle ?b) 240))
-    move_255: ?b:1
-        pre: (and (>= (sailing-angle ?b) 240) (<= (sailing-angle ?b) 270))
-        eff: (and (assign (v ?b) (+ (* (vmax_105 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.97)) (increase (y ?b) (* (v ?b) -0.26)) (assign (sailing-angle ?b) 255))
-    move_270: ?b:1
-        pre: (and (>= (sailing-angle ?b) 255) (<= (sailing-angle ?b) 285))
-        eff: (and (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -1)) (assign (sailing-angle ?b) 270))
-    move_285: ?b:1
-        pre: (and (>= (sailing-angle ?b) 270) (<= (sailing-angle ?b) 300))
-        eff: (and (assign (v ?b) (+ (* (vmax_75 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.97)) (increase (y ?b) (* (v ?b) 0.26)) (assign (sailing-angle ?b) 285))
-    move_300: ?b:1
-        pre: (and (>= (sailing-angle ?b) 285) (<= (sailing-angle ?b) 315))
-        eff: (and (assign (v ?b) (+ (* (vmax_60 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.87)) (increase (y ?b) (* (v ?b) 0.5)) (assign (sailing-angle ?b) 300))
-    move_315: ?b:1
-        pre: (and (>= (sailing-angle ?b) 300) (<= (sailing-angle ?b) 330))
-        eff: (and (assign (v ?b) (+ (* (vmax_45 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.71)) (increase (y ?b) (* (v ?b) 0.71)) (assign (sailing-angle ?b) 315))
-    move_330: ?b:1
-        pre: (and (>= (sailing-angle ?b) 315) (<= (sailing-angle ?b) 345))
-        eff: (and (assign (v ?b) (+ (* (vmax_30 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.5)) (increase (y ?b) (* (v ?b) 0.87)) (assign (sailing-angle ?b) 330))
-    move_345: ?b:1
-        pre: (and (>= (sailing-angle ?b) 330))
-        eff: (and (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) 0.97)) (assign (sailing-angle ?b) 345))
-    save_person: ?b:1 ?t:2
-        pre: (and (>= (x ?b) (- (x ?t) 15)) (<= (x ?b) (+ (x ?t) 15)) (>= (y ?b) (- (y ?t) 15)) (<= (y ?b) (+ (y ?t) 15)) (<= (v ?b) 0.1))
-        eff: (and (RW:saved ?t))
-    move_0: ?b:1
-        pre: (and (<= (sailing-angle ?b) 15))
-        eff: (and (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (v ?b)) (assign (sailing-angle ?b) 0))
-    move_345: ?b:1
-        pre: (and (= (sailing-angle ?b) 0))
-        eff: (and (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) 0.97)) (assign (sailing-angle ?b) 345))
-Init[0]:
-Init[20]:
-  (= (v b0) 0)
-  (= (x b0) 0)
-  (= (x p0) 5)
-  (= (y b0) 0)
-  (= (y p0) 15.5)
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  boat - object
+  object
+  person - object
+Obj:
+  b0 - boat
+  p0 - person
+Predicate:
+  (= object object) :eq
+  (saved person)
+Function:
+  (r boat)
+  (sailing-angle boat)
+  (v boat)
+  (vmax_0 boat)
+  (vmax_105 boat)
+  (vmax_120 boat)
+  (vmax_135 boat)
+  (vmax_15 boat)
+  (vmax_150 boat)
+  (vmax_165 boat)
+  (vmax_180 boat)
+  (vmax_30 boat)
+  (vmax_45 boat)
+  (vmax_60 boat)
+  (vmax_75 boat)
+  (vmax_90 boat)
+  (x object)
+  (y object)
+Action:
+  move_0: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 15))
+      eff: (and (assign (sailing-angle ?b) 0) (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (v ?b)))
+  move_0: ?b - boat
+      pre: (and (= (sailing-angle ?b) 345))
+      eff: (and (assign (sailing-angle ?b) 0) (assign (v ?b) (+ (* (vmax_0 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (v ?b)))
+  move_105: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 120) (>= (sailing-angle ?b) 90))
+      eff: (and (assign (sailing-angle ?b) 105) (assign (v ?b) (+ (* (vmax_105 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.97)) (increase (y ?b) (* (v ?b) -0.26)))
+  move_120: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 135) (>= (sailing-angle ?b) 105))
+      eff: (and (assign (sailing-angle ?b) 120) (assign (v ?b) (+ (* (vmax_120 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.87)) (increase (y ?b) (* (v ?b) -0.5)))
+  move_135: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 150) (>= (sailing-angle ?b) 120))
+      eff: (and (assign (sailing-angle ?b) 135) (assign (v ?b) (+ (* (vmax_135 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.71)) (increase (y ?b) (* (v ?b) -0.71)))
+  move_150: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 165) (>= (sailing-angle ?b) 135))
+      eff: (and (assign (sailing-angle ?b) 150) (assign (v ?b) (+ (* (vmax_150 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.5)) (increase (y ?b) (* (v ?b) -0.87)))
+  move_15: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 30) (>= (sailing-angle ?b) 0))
+      eff: (and (assign (sailing-angle ?b) 15) (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.26)) (increase (y ?b) (* (v ?b) 0.97)))
+  move_165: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 180) (>= (sailing-angle ?b) 150))
+      eff: (and (assign (sailing-angle ?b) 165) (assign (v ?b) (+ (* (vmax_165 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.26)) (increase (y ?b) (* (v ?b) -0.97)))
+  move_180: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 195) (>= (sailing-angle ?b) 165))
+      eff: (and (assign (sailing-angle ?b) 180) (assign (v ?b) (+ (* (vmax_180 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (y ?b) (* (v ?b) -1)))
+  move_195: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 210) (>= (sailing-angle ?b) 180))
+      eff: (and (assign (sailing-angle ?b) 195) (assign (v ?b) (+ (* (vmax_165 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) -0.97)))
+  move_210: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 225) (>= (sailing-angle ?b) 195))
+      eff: (and (assign (sailing-angle ?b) 210) (assign (v ?b) (+ (* (vmax_150 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.5)) (increase (y ?b) (* (v ?b) -0.87)))
+  move_225: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 240) (>= (sailing-angle ?b) 210))
+      eff: (and (assign (sailing-angle ?b) 225) (assign (v ?b) (+ (* (vmax_135 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.71)) (increase (y ?b) (* (v ?b) -0.71)))
+  move_240: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 255) (>= (sailing-angle ?b) 225))
+      eff: (and (assign (sailing-angle ?b) 240) (assign (v ?b) (+ (* (vmax_120 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.87)) (increase (y ?b) (* (v ?b) -0.5)))
+  move_255: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 270) (>= (sailing-angle ?b) 240))
+      eff: (and (assign (sailing-angle ?b) 255) (assign (v ?b) (+ (* (vmax_105 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.97)) (increase (y ?b) (* (v ?b) -0.26)))
+  move_270: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 285) (>= (sailing-angle ?b) 255))
+      eff: (and (assign (sailing-angle ?b) 270) (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -1)))
+  move_285: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 300) (>= (sailing-angle ?b) 270))
+      eff: (and (assign (sailing-angle ?b) 285) (assign (v ?b) (+ (* (vmax_75 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.97)) (increase (y ?b) (* (v ?b) 0.26)))
+  move_300: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 315) (>= (sailing-angle ?b) 285))
+      eff: (and (assign (sailing-angle ?b) 300) (assign (v ?b) (+ (* (vmax_60 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.87)) (increase (y ?b) (* (v ?b) 0.5)))
+  move_30: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 45) (>= (sailing-angle ?b) 15))
+      eff: (and (assign (sailing-angle ?b) 30) (assign (v ?b) (+ (* (vmax_30 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.5)) (increase (y ?b) (* (v ?b) 0.87)))
+  move_315: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 330) (>= (sailing-angle ?b) 300))
+      eff: (and (assign (sailing-angle ?b) 315) (assign (v ?b) (+ (* (vmax_45 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.71)) (increase (y ?b) (* (v ?b) 0.71)))
+  move_330: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 345) (>= (sailing-angle ?b) 315))
+      eff: (and (assign (sailing-angle ?b) 330) (assign (v ?b) (+ (* (vmax_30 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.5)) (increase (y ?b) (* (v ?b) 0.87)))
+  move_345: ?b - boat
+      pre: (and (= (sailing-angle ?b) 0))
+      eff: (and (assign (sailing-angle ?b) 345) (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) 0.97)))
+  move_345: ?b - boat
+      pre: (and (>= (sailing-angle ?b) 330))
+      eff: (and (assign (sailing-angle ?b) 345) (assign (v ?b) (+ (* (vmax_15 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) -0.26)) (increase (y ?b) (* (v ?b) 0.97)))
+  move_45: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 60) (>= (sailing-angle ?b) 30))
+      eff: (and (assign (sailing-angle ?b) 45) (assign (v ?b) (+ (* (vmax_45 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.71)) (increase (y ?b) (* (v ?b) 0.71)))
+  move_60: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 75) (>= (sailing-angle ?b) 45))
+      eff: (and (assign (sailing-angle ?b) 60) (assign (v ?b) (+ (* (vmax_60 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.87)) (increase (y ?b) (* (v ?b) 0.5)))
+  move_75: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 90) (>= (sailing-angle ?b) 60))
+      eff: (and (assign (sailing-angle ?b) 75) (assign (v ?b) (+ (* (vmax_75 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (* (v ?b) 0.97)) (increase (y ?b) (* (v ?b) 0.26)))
+  move_90: ?b - boat
+      pre: (and (<= (sailing-angle ?b) 105) (>= (sailing-angle ?b) 75))
+      eff: (and (assign (sailing-angle ?b) 90) (assign (v ?b) (+ (* (vmax_90 ?b) (- 1 (r ?b))) (* (r ?b) (v ?b)))) (increase (x ?b) (v ?b)))
+  save_person: ?b - boat ?t - person
+      pre: (and (<= (v ?b) 0.1) (<= (x ?b) (+ (x ?t) 15)) (<= (y ?b) (+ (y ?t) 15)) (>= (x ?b) (- (x ?t) 15)) (>= (y ?b) (- (y ?t) 15)))
+      eff: (and (saved ?t))
+Init:
   (= (r b0) 0.5)
+  (= (sailing-angle b0) 0)
+  (= (v b0) 0)
   (= (vmax_0 b0) 0)
+  (= (vmax_105 b0) 1.44)
+  (= (vmax_120 b0) 1.37)
+  (= (vmax_135 b0) 1.26)
   (= (vmax_15 b0) 0.17)
+  (= (vmax_150 b0) 1.12)
+  (= (vmax_165 b0) 0.96)
+  (= (vmax_180 b0) 0.8)
   (= (vmax_30 b0) 0.3)
   (= (vmax_45 b0) 0.45)
   (= (vmax_60 b0) 0.65)
   (= (vmax_75 b0) 1)
   (= (vmax_90 b0) 1.49)
-  (= (vmax_105 b0) 1.44)
-  (= (vmax_120 b0) 1.37)
-  (= (vmax_135 b0) 1.26)
-  (= (vmax_150 b0) 1.12)
-  (= (vmax_165 b0) 0.96)
-  (= (vmax_180 b0) 0.8)
-  (= (sailing-angle b0) 0)
-Goal: (RW:saved p0)
-Metric: no-metric
+  (= (x b0) 0)
+  (= (x p0) 5)
+  (= (y b0) 0)
+  (= (y p0) 15.5)
+Goal:
+  (saved p0)
+Metric:
+Pred prop:
+  (saved person): in_goal in_eff
+Func prop:
+  (r boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (sailing-angle boat): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff in_eff_by_assign_or_scale
+  (v boat): in_init init_all_nonneg init_all_nonpos init_all_int in_pre on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(r v vmax_0 vmax_105 vmax_120 vmax_135 vmax_15 vmax_150 vmax_165 vmax_180 vmax_30 vmax_45 vmax_60 vmax_75 vmax_90)
+  (vmax_0 boat): in_init init_all_nonneg init_all_nonpos init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_105 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_120 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_135 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_15 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_150 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_165 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_180 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_30 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_45 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_60 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_75 boat): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (vmax_90 boat): in_init init_all_nonneg on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (x object): in_init init_all_nonneg init_all_int in_pre in_eff rhs_funcs:(v)
+  (y object): in_init init_all_nonneg in_pre in_eff rhs_funcs:(v)
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

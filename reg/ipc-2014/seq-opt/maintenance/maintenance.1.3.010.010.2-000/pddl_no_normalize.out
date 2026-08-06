@@ -1,74 +1,78 @@
 Domain: maintenance-scheduling-domain
 Problem: maintenance-scheduling-1-3-10-10-2-0
-Require: ff
-Type[4]:
-    [0]: object, parent: -1
-    [1]: plane, parent: 0
-    [2]: day, parent: 0
-    [3]: airport, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
-    [1]: 14 15 16 17 18 19 20 21 22 23
-    [2]: 0 1 2 3 4 5 6 7 8 9 10
-    [3]: 11 12 13
-Obj[24]:
-    [0]: d1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: d2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: d3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: d4, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: d5, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: d6, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: d7, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: d8, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: d9, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: d10, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: d11, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: fra, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: ber, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: ham, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: ap1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: ap2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: ap3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: ap4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: ap5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: ap6, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: ap7, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: ap8, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: ap9, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: ap10, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[5]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    done: 1 :: read: 1, write: 1, in-init: 0
-    today: 2 :: read: 1, write: 1, in-init: 1
-    at: 1 2 3 :: read: 1, write: 0, in-init: 1
-    next: 2 2 :: read: 0, write: 0, in-init: 0
-Function[0]:
-Action[1]:
-    workat: ?day:2 ?airport:3
-        pre: (RW:today ?day)
-        eff: (and (N:RW:today ?day) (forall (?plane:1 I[0]:?day:2 I[1]:?airport:3) (when (R:at ?plane ?day ?airport) (RW:done ?plane))))
-Init[30]:
-  S:(at ap1 d4 ber)
-  S:(at ap1 d8 ber)
-  S:(at ap2 d4 ber)
-  S:(at ap2 d7 fra)
-  S:(at ap3 d3 ber)
-  S:(at ap3 d10 ber)
-  S:(at ap4 d1 ber)
-  S:(at ap4 d4 ber)
-  S:(at ap5 d1 fra)
-  S:(at ap5 d3 ber)
-  S:(at ap6 d2 ham)
-  S:(at ap6 d8 fra)
-  S:(at ap7 d3 ber)
-  S:(at ap7 d3 ham)
-  S:(at ap8 d8 ber)
-  S:(at ap8 d10 fra)
-  S:(at ap9 d3 fra)
-  S:(at ap9 d10 fra)
-  S:(at ap10 d2 ber)
-  S:(at ap10 d4 ber)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  airport - object
+  day - object
+  object
+  plane - object
+Obj:
+  ap1 - plane
+  ap10 - plane
+  ap2 - plane
+  ap3 - plane
+  ap4 - plane
+  ap5 - plane
+  ap6 - plane
+  ap7 - plane
+  ap8 - plane
+  ap9 - plane
+  ber - airport
+  d1 - day
+  d10 - day
+  d11 - day
+  d2 - day
+  d3 - day
+  d4 - day
+  d5 - day
+  d6 - day
+  d7 - day
+  d8 - day
+  d9 - day
+  fra - airport
+  ham - airport
+Predicate:
+  (= object object) :eq
+  (at plane day airport)
+  (done plane)
+  (next day day)
+  (today day)
+Function:
+Action:
+  workat: ?day - day ?airport - airport
+      pre: (today ?day)
+      eff: (and (forall (?plane - plane) (when (at ?plane ?day ?airport) (done ?plane))) (not (today ?day)))
+Init:
+  (at ap1 d4 ber)
+  (at ap1 d8 ber)
+  (at ap10 d2 ber)
+  (at ap10 d4 ber)
+  (at ap2 d4 ber)
+  (at ap2 d7 fra)
+  (at ap3 d10 ber)
+  (at ap3 d3 ber)
+  (at ap4 d1 ber)
+  (at ap4 d4 ber)
+  (at ap5 d1 fra)
+  (at ap5 d3 ber)
+  (at ap6 d2 ham)
+  (at ap6 d8 fra)
+  (at ap7 d3 ber)
+  (at ap7 d3 ham)
+  (at ap8 d10 fra)
+  (at ap8 d8 ber)
+  (at ap9 d10 fra)
+  (at ap9 d3 fra)
   (today d1)
+  (today d10)
   (today d2)
   (today d3)
   (today d4)
@@ -77,7 +81,14 @@ Init[30]:
   (today d7)
   (today d8)
   (today d9)
-  (today d10)
-Init[0]:
-Goal: (and (RW:done ap1) (RW:done ap2) (RW:done ap3) (RW:done ap4) (RW:done ap5) (RW:done ap6) (RW:done ap7) (RW:done ap8) (RW:done ap9) (RW:done ap10))
-Metric: no-metric
+Goal:
+  (and (done ap1) (done ap10) (done ap2) (done ap3) (done ap4) (done ap5) (done ap6) (done ap7) (done ap8) (done ap9))
+Metric:
+Pred prop:
+  (at plane day airport): in_init in_pre
+  (done plane): in_goal in_eff
+  (today day): in_init in_pre in_eff
+Func prop:
+Global prop:
+  has_cond_eff
+  is_unit_cost

@@ -1,132 +1,153 @@
 Domain: factory-robot
 Problem: factory-2r-5s
-Require: 103
-Type[3]:
-    [0]: object, parent: -1
-    [1]: robot, parent: 0
-    [2]: station, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6
-    [1]: 0 1
-    [2]: 2 3 4 5 6
-Obj[7]:
-    [0]: r0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: r1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: charging, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: cooling, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: assembly0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: assembly1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: assembly2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[8]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at: 1 2 :: read: 1, write: 1, in-init: 1
-    connected: 2 2 :: read: 1, write: 0, in-init: 1
-    has-charger: 2 :: read: 1, write: 0, in-init: 1
-    has-calibrator: 2 :: read: 1, write: 0, in-init: 1
-    free: 2 :: read: 1, write: 1, in-init: 1
-    calibrated: 1 :: read: 1, write: 1, in-init: 1, neg-of: NOT-calibrated
-    NOT-calibrated: 1 :: read: 1, write: 1, in-init: 0, neg-of: calibrated
-Function[9]:
-    energy: 1 :: read: 1, write: 1, in-init: 1
-    workload: 1 :: read: 1, write: 1, in-init: 1
-    temperature: 1 :: read: 1, write: 1, in-init: 1
-    production: 1 :: read: 1, write: 1, in-init: 1
-    capacity: 1 :: read: 1, write: 0, in-init: 1
-    work-cost: 1 :: read: 1, write: 0, in-init: 1
-    max-temp: 1 :: read: 1, write: 0, in-init: 1
-    efficiency: 1 :: read: 1, write: 0, in-init: 1
-    cooling-power: 2 :: read: 1, write: 0, in-init: 1
-Action[13]:
-    recharge: ?r:1 ?s:2
-        pre: (and (R:has-charger ?s) (RW:at ?r ?s))
-        eff: (and (assign (energy ?r) (capacity ?r)))
-    work: ?r:1 ?s:2
-        pre: (and (RW:at ?r ?s) (RW:calibrated ?r) (>= (energy ?r) (work-cost ?r)) (<= (temperature ?r) (max-temp ?r)))
-        eff: (and (decrease (energy ?r) (work-cost ?r)) (increase (workload ?r) 1) (increase (temperature ?r) 3))
-    cool-down: ?r:1 ?s:2
-        pre: (and (RW:at ?r ?s) (>= (temperature ?r) 1))
-        eff: (and (decrease (temperature ?r) (cooling-power ?s)))
-    set-low-power: ?r:1
-        pre: (and)
-        eff: (and (assign (production ?r) 10))
-    set-medium-power: ?r:1
-        pre: (and)
-        eff: (and (assign (production ?r) 50))
-    set-high-power: ?r:1
-        pre: (and)
-        eff: (and (assign (production ?r) 100))
-    set-turbo: ?r:1
-        pre: (and)
-        eff: (and (assign (production ?r) 200))
-    overdrive: ?r:1
-        pre: (and (>= (production ?r) 250))
-        eff: (and (increase (workload ?r) 100))
-    overcharge: ?r:1
-        pre: (and (>= (energy ?r) 200))
-        eff: (and (increase (workload ?r) 50))
-    precision-work: ?r:1 ?s:2
-        pre: (and (RW:at ?r ?s) (RW:calibrated ?r) (>= (energy ?r) (* (workload ?r) (efficiency ?r))) (<= (temperature ?r) (max-temp ?r)))
-        eff: (and (decrease (energy ?r) (work-cost ?r)) (increase (workload ?r) 5) (increase (temperature ?r) 1))
-    move: ?r:1 ?s1:2 ?s2:2
-        pre: (and (R:connected ?s1 ?s2) (RW:at ?r ?s1) (RW:free ?s2) (>= (energy ?r) 5))
-        eff: (and (N:RW:at ?r ?s1) (RW:at ?r ?s2) (RW:free ?s1) (N:RW:free ?s2) (decrease (energy ?r) 5))
-    turbo-work: ?r:1 ?s:2
-        pre: (and (RW:at ?r ?s) (>= (production ?r) 150) (>= (energy ?r) 20))
-        eff: (and (N:RW:calibrated ?r) (RW:NOT-calibrated ?r) (decrease (energy ?r) 20) (increase (workload ?r) 10) (increase (temperature ?r) 5))
-    calibrate: ?r:1 ?s:2
-        pre: (and (R:has-calibrator ?s) (RW:at ?r ?s) (RW:NOT-calibrated ?r))
-        eff: (and (RW:calibrated ?r) (N:RW:NOT-calibrated ?r))
-Init[29]:
-  S:(connected charging cooling)
-  S:(connected charging assembly0)
-  S:(connected charging assembly1)
-  S:(connected charging assembly2)
-  S:(connected cooling charging)
-  S:(connected cooling assembly0)
-  S:(connected cooling assembly1)
-  S:(connected cooling assembly2)
-  S:(connected assembly0 charging)
-  S:(connected assembly0 cooling)
-  S:(connected assembly0 assembly1)
-  S:(connected assembly0 assembly2)
-  S:(connected assembly1 charging)
-  S:(connected assembly1 cooling)
-  S:(connected assembly1 assembly0)
-  S:(connected assembly1 assembly2)
-  S:(connected assembly2 charging)
-  S:(connected assembly2 cooling)
-  S:(connected assembly2 assembly0)
-  S:(connected assembly2 assembly1)
-  S:(has-charger charging)
-  S:(has-calibrator cooling)
-  (at r0 assembly1)
-  (at r1 cooling)
-  (free charging)
-  (free assembly0)
-  (free assembly2)
-  (calibrated r0)
-  (calibrated r1)
-Init[21]:
-  (= (energy r0) 79)
-  (= (energy r1) 80)
-  (= (workload r0) 0)
-  (= (workload r1) 0)
-  (= (temperature r0) 0)
-  (= (temperature r1) 0)
-  (= (production r0) 0)
-  (= (production r1) 0)
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  object
+  robot - object
+  station - object
+Obj:
+  assembly0 - station
+  assembly1 - station
+  assembly2 - station
+  charging - station
+  cooling - station
+  r0 - robot
+  r1 - robot
+Predicate:
+  (= object object) :eq
+  (NOT-calibrated robot) neg-of (calibrated)
+  (at robot station)
+  (calibrated robot) neg-of (NOT-calibrated)
+  (connected station station)
+  (free station)
+  (has-calibrator station)
+  (has-charger station)
+Function:
+  (capacity robot)
+  (cooling-power station)
+  (efficiency robot)
+  (energy robot)
+  (max-temp robot)
+  (production robot)
+  (temperature robot)
+  (work-cost robot)
+  (workload robot)
+Action:
+  calibrate: ?r - robot ?s - station
+      pre: (and (NOT-calibrated ?r) (at ?r ?s) (has-calibrator ?s))
+      eff: (and (calibrated ?r) (not (NOT-calibrated ?r)))
+  cool-down: ?r - robot ?s - station
+      pre: (and (>= (temperature ?r) 1) (at ?r ?s))
+      eff: (and (decrease (temperature ?r) (cooling-power ?s)))
+  move: ?r - robot ?s1 - station ?s2 - station
+      pre: (and (>= (energy ?r) 5) (at ?r ?s1) (connected ?s1 ?s2) (free ?s2))
+      eff: (and (at ?r ?s2) (decrease (energy ?r) 5) (free ?s1) (not (at ?r ?s1)) (not (free ?s2)))
+  overcharge: ?r - robot
+      pre: (and (>= (energy ?r) 200))
+      eff: (and (increase (workload ?r) 50))
+  overdrive: ?r - robot
+      pre: (and (>= (production ?r) 250))
+      eff: (and (increase (workload ?r) 100))
+  precision-work: ?r - robot ?s - station
+      pre: (and (<= (temperature ?r) (max-temp ?r)) (>= (energy ?r) (* (workload ?r) (efficiency ?r))) (at ?r ?s) (calibrated ?r))
+      eff: (and (decrease (energy ?r) (work-cost ?r)) (increase (temperature ?r) 1) (increase (workload ?r) 5))
+  recharge: ?r - robot ?s - station
+      pre: (and (at ?r ?s) (has-charger ?s))
+      eff: (and (assign (energy ?r) (capacity ?r)))
+  set-high-power: ?r - robot
+      pre: (and)
+      eff: (and (assign (production ?r) 100))
+  set-low-power: ?r - robot
+      pre: (and)
+      eff: (and (assign (production ?r) 10))
+  set-medium-power: ?r - robot
+      pre: (and)
+      eff: (and (assign (production ?r) 50))
+  set-turbo: ?r - robot
+      pre: (and)
+      eff: (and (assign (production ?r) 200))
+  turbo-work: ?r - robot ?s - station
+      pre: (and (>= (energy ?r) 20) (>= (production ?r) 150) (at ?r ?s))
+      eff: (and (NOT-calibrated ?r) (decrease (energy ?r) 20) (increase (temperature ?r) 5) (increase (workload ?r) 10) (not (calibrated ?r)))
+  work: ?r - robot ?s - station
+      pre: (and (<= (temperature ?r) (max-temp ?r)) (>= (energy ?r) (work-cost ?r)) (at ?r ?s) (calibrated ?r))
+      eff: (and (decrease (energy ?r) (work-cost ?r)) (increase (temperature ?r) 3) (increase (workload ?r) 1))
+Init:
   (= (capacity r0) 80)
   (= (capacity r1) 80)
-  (= (work-cost r0) 12)
-  (= (work-cost r1) 10)
-  (= (max-temp r0) 21)
-  (= (max-temp r1) 21)
-  (= (efficiency r0) 4)
-  (= (efficiency r1) 2)
-  (= (cooling-power charging) 0)
-  (= (cooling-power cooling) 6)
   (= (cooling-power assembly0) 0)
   (= (cooling-power assembly1) 0)
   (= (cooling-power assembly2) 0)
-Goal: (and (>= (workload r0) 38) (>= (workload r1) 39) (<= (temperature r0) 20))
-Metric: no-metric
+  (= (cooling-power charging) 0)
+  (= (cooling-power cooling) 6)
+  (= (efficiency r0) 4)
+  (= (efficiency r1) 2)
+  (= (energy r0) 79)
+  (= (energy r1) 80)
+  (= (max-temp r0) 21)
+  (= (max-temp r1) 21)
+  (= (production r0) 0)
+  (= (production r1) 0)
+  (= (temperature r0) 0)
+  (= (temperature r1) 0)
+  (= (work-cost r0) 12)
+  (= (work-cost r1) 10)
+  (= (workload r0) 0)
+  (= (workload r1) 0)
+  (at r0 assembly1)
+  (at r1 cooling)
+  (calibrated r0)
+  (calibrated r1)
+  (connected assembly0 assembly1)
+  (connected assembly0 assembly2)
+  (connected assembly0 charging)
+  (connected assembly0 cooling)
+  (connected assembly1 assembly0)
+  (connected assembly1 assembly2)
+  (connected assembly1 charging)
+  (connected assembly1 cooling)
+  (connected assembly2 assembly0)
+  (connected assembly2 assembly1)
+  (connected assembly2 charging)
+  (connected assembly2 cooling)
+  (connected charging assembly0)
+  (connected charging assembly1)
+  (connected charging assembly2)
+  (connected charging cooling)
+  (connected cooling assembly0)
+  (connected cooling assembly1)
+  (connected cooling assembly2)
+  (connected cooling charging)
+  (free assembly0)
+  (free assembly2)
+  (free charging)
+  (has-calibrator cooling)
+  (has-charger charging)
+Goal:
+  (and (<= (temperature r0) 20) (>= (workload r0) 38) (>= (workload r1) 39))
+Metric:
+Pred prop:
+  (NOT-calibrated robot): in_pre in_eff
+  (at robot station): in_init in_pre in_eff
+  (calibrated robot): in_init in_pre in_eff
+  (connected station station): in_init in_pre
+  (free station): in_init in_pre in_eff
+  (has-calibrator station): in_init in_pre
+  (has-charger station): in_init in_pre
+Func prop:
+  (capacity robot): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (cooling-power station): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (efficiency robot): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (energy robot): in_init init_all_nonneg init_all_int in_pre in_eff in_eff_by_assign_or_scale rhs_funcs:(capacity work-cost)
+  (max-temp robot): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (production robot): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff in_eff_by_assign_or_scale
+  (temperature robot): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff rhs_funcs:(cooling-power)
+  (work-cost robot): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (workload robot): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

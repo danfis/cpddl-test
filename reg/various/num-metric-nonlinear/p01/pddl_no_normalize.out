@@ -1,33 +1,48 @@
 Domain: num-metric-nonlinear
 Problem: num-metric-nonlinear-01
-Require: 1ff
-Type[2]:
-    [0]: object, parent: -1
-    [1]: loc, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2
-    [1]: 0 1 2
-Obj[3]:
-    [0]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: l3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[3]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at: 1 :: read: 1, write: 1, in-init: 1
-    conn: 1 1 :: read: 1, write: 0, in-init: 1
-Function[2]:
-    f1: :: read: 1, write: 1, in-init: 1
-    f2: :: read: 1, write: 1, in-init: 1
-Action[1]:
-    move: ?a:1 ?b:1
-        pre: (and (R:conn ?a ?b) (RW:at ?a))
-        eff: (and (N:RW:at ?a) (RW:at ?b) (increase (f1) 1) (increase (f2) 2))
-Init[3]:
-  S:(conn l1 l2)
-  S:(conn l2 l3)
-  (at l1)
-Init[2]:
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :numeric-fluents
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  loc - object
+  object
+Obj:
+  l1 - loc
+  l2 - loc
+  l3 - loc
+Predicate:
+  (= object object) :eq
+  (at loc)
+  (conn loc loc)
+Function:
+  (f1)
+  (f2)
+Action:
+  move: ?a - loc ?b - loc
+      pre: (and (at ?a) (conn ?a ?b))
+      eff: (and (at ?b) (increase (f1) 1) (increase (f2) 2) (not (at ?a)))
+Init:
   (= (f1) 0)
   (= (f2) 0)
-Goal: (RW:at l3)
-Metric: (* (f1) (f2))
+  (at l1)
+  (conn l1 l2)
+  (conn l2 l3)
+Goal:
+  (at l3)
+Metric:
+  (* (f1) (f2))
+Pred prop:
+  (at loc): in_init in_pre in_goal in_eff
+  (conn loc loc): in_init in_pre
+Func prop:
+  (f1): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+  (f2): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  is_numeric

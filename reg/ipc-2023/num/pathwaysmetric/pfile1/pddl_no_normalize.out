@@ -1,191 +1,221 @@
 Domain: pathways-metric
 Problem: pathways-01
-Require: 3ff
-Type[5]:
-    [0]: object, parent: -1
-    [1]: level, parent: 0
-    [2]: molecule, parent: 0
-    [3]: simple, parent: 2
-    [4]: complex, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-    [1]:
-    [2]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-    [3]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-    [4]: 16 17 18 19 20 21 22 23 24 25
-Obj[26]:
-    [0]: sp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: raf1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: prbp2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: prb-e2f4p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: pcaf, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: p300, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: p16, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: p130-e2f5p1-dp12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: e2f13, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: dmp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: chk1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: cdk7, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: cdk46p3-cycdp1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: cdk46p3-cycd, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: cdc25c, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: ap2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: dmp1p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: cdc25cp2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: p16-cdk7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: pcaf-p300, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: prbp1p2-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: prbp2-ap2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: prbp1p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: raf1-p130-e2f5p1-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: raf1-prb-e2f4p1-dp12, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: sp1-e2f13, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[7]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
-    catalyzed-association-reaction: 2 2 4 :: read: 1, write: 0, in-init: 1
-    catalyzed-self-association-reaction: 2 4 :: read: 1, write: 0, in-init: 0
-    synthesis-reaction: 2 2 :: read: 1, write: 0, in-init: 0
-    possible: 2 :: read: 1, write: 1, in-init: 1
-    chosen: 3 :: read: 1, write: 1, in-init: 0
-Function[14]:
-    available: 2 :: read: 1, write: 1, in-init: 1
-    duration-association-reaction: 2 2 4 :: read: 0, write: 0, in-init: 1
-    duration-catalyzed-association-reaction: 2 2 4 :: read: 0, write: 0, in-init: 1
-    duration-catalyzed-self-association-reaction: 2 4 :: read: 0, write: 0, in-init: 0
-    duration-synthesis-reaction: 2 2 :: read: 0, write: 0, in-init: 0
-    need-for-association: 2 2 4 :: read: 1, write: 0, in-init: 1
-    need-for-catalyzed-association: 2 2 4 :: read: 1, write: 0, in-init: 1
-    need-for-catalyzed-self-association: 2 4 :: read: 1, write: 0, in-init: 0
-    need-for-synthesis: 2 2 :: read: 1, write: 0, in-init: 0
-    prod-by-association: 2 2 4 :: read: 1, write: 0, in-init: 1
-    prod-by-catalyzed-association: 2 2 4 :: read: 1, write: 0, in-init: 1
-    prod-by-catalyzed-self-association: 2 4 :: read: 1, write: 0, in-init: 0
-    prod-by-synthesis: 2 2 :: read: 1, write: 0, in-init: 0
-    num-subs: :: read: 0, write: 1, in-init: 1
-Action[6]:
-    choose: ?x:3
-        pre: (and (RW:possible ?x))
-        eff: (and (N:RW:possible ?x) (RW:chosen ?x) (increase (num-subs) 1))
-    initialize: ?x:3
-        pre: (and (RW:chosen ?x))
-        eff: (and (increase (available ?x) 1))
-    associate: ?x1:2 ?x2:2 ?x3:4
-        pre: (and (R:association-reaction ?x1 ?x2 ?x3) (>= (available ?x1) (need-for-association ?x1 ?x2 ?x3)) (>= (available ?x2) (need-for-association ?x2 ?x1 ?x3)))
-        eff: (and (decrease (available ?x1) (need-for-association ?x1 ?x2 ?x3)) (decrease (available ?x2) (need-for-association ?x2 ?x1 ?x3)) (increase (available ?x3) (prod-by-association ?x1 ?x2 ?x3)))
-    associate-with-catalyze: ?x1:2 ?x2:2 ?x3:4
-        pre: (and (R:catalyzed-association-reaction ?x1 ?x2 ?x3) (>= (available ?x1) (need-for-catalyzed-association ?x1 ?x2 ?x3)) (>= (available ?x2) (need-for-catalyzed-association ?x2 ?x1 ?x3)))
-        eff: (and (decrease (available ?x1) (need-for-catalyzed-association ?x1 ?x2 ?x3)) (increase (available ?x3) (prod-by-catalyzed-association ?x1 ?x2 ?x3)))
-    self-associate-with-catalyze: ?x1:2 ?x3:4
-        pre: (and (R:catalyzed-self-association-reaction ?x1 ?x3) (>= (available ?x1) (need-for-catalyzed-self-association ?x1 ?x3)))
-        eff: (and (decrease (available ?x1) (need-for-catalyzed-self-association ?x1 ?x3)) (increase (available ?x3) (prod-by-catalyzed-self-association ?x1 ?x3)))
-    synthesize: ?x1:2 ?x2:2
-        pre: (and (R:synthesis-reaction ?x1 ?x2) (>= (available ?x1) (need-for-synthesis ?x1 ?x2)))
-        eff: (and (increase (available ?x2) (prod-by-synthesis ?x1 ?x2)))
-Init[28]:
-  S:(association-reaction sp1 e2f13 sp1-e2f13)
-  S:(association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
-  S:(association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12)
-  S:(association-reaction prbp2 ap2 prbp2-ap2)
-  S:(association-reaction pcaf p300 pcaf-p300)
-  S:(association-reaction p16 cdk7 p16-cdk7)
-  S:(association-reaction prbp1p2 ap2 prbp1p2-ap2)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
-  S:(catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2)
-  S:(catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1)
-  S:(catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1)
-  S:(catalyzed-association-reaction cdc25c chk1 cdc25cp2)
-  (possible sp1)
-  (possible raf1)
-  (possible prbp2)
-  (possible prb-e2f4p1-dp12)
-  (possible pcaf)
-  (possible p300)
-  (possible p16)
-  (possible p130-e2f5p1-dp12)
-  (possible e2f13)
-  (possible dmp1)
-  (possible chk1)
-  (possible cdk7)
-  (possible cdk46p3-cycdp1)
-  (possible cdk46p3-cycd)
-  (possible cdc25c)
-  (possible ap2)
-Init[75]:
-  (= (available sp1) 0)
-  (= (available raf1) 0)
-  (= (available prbp2) 0)
-  (= (available prb-e2f4p1-dp12) 0)
-  (= (available pcaf) 0)
-  (= (available p300) 0)
-  (= (available p16) 0)
-  (= (available p130-e2f5p1-dp12) 0)
-  (= (available e2f13) 0)
-  (= (available dmp1) 0)
-  (= (available chk1) 0)
-  (= (available cdk7) 0)
-  (= (available cdk46p3-cycdp1) 0)
-  (= (available cdk46p3-cycd) 0)
-  (= (available cdc25c) 0)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :numeric-fluents
+  :object-fluents
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  complex - molecule
+  level - object
+  molecule - object
+  object
+  simple - molecule
+Obj:
+  ap2 - simple
+  cdc25c - simple
+  cdc25cp2 - complex
+  cdk46p3-cycd - simple
+  cdk46p3-cycdp1 - simple
+  cdk7 - simple
+  chk1 - simple
+  dmp1 - simple
+  dmp1p1 - complex
+  e2f13 - simple
+  p130-e2f5p1-dp12 - simple
+  p16 - simple
+  p16-cdk7 - complex
+  p300 - simple
+  pcaf - simple
+  pcaf-p300 - complex
+  prb-e2f4p1-dp12 - simple
+  prbp1p2 - complex
+  prbp1p2-ap2 - complex
+  prbp2 - simple
+  prbp2-ap2 - complex
+  raf1 - simple
+  raf1-p130-e2f5p1-dp12 - complex
+  raf1-prb-e2f4p1-dp12 - complex
+  sp1 - simple
+  sp1-e2f13 - complex
+Predicate:
+  (= object object) :eq
+  (association-reaction molecule molecule complex)
+  (catalyzed-association-reaction molecule molecule complex)
+  (catalyzed-self-association-reaction molecule complex)
+  (chosen simple)
+  (possible molecule)
+  (synthesis-reaction molecule molecule)
+Function:
+  (available molecule)
+  (duration-association-reaction molecule molecule complex)
+  (duration-catalyzed-association-reaction molecule molecule complex)
+  (duration-catalyzed-self-association-reaction molecule complex)
+  (duration-synthesis-reaction molecule molecule)
+  (need-for-association molecule molecule complex)
+  (need-for-catalyzed-association molecule molecule complex)
+  (need-for-catalyzed-self-association molecule complex)
+  (need-for-synthesis molecule molecule)
+  (num-subs)
+  (prod-by-association molecule molecule complex)
+  (prod-by-catalyzed-association molecule molecule complex)
+  (prod-by-catalyzed-self-association molecule complex)
+  (prod-by-synthesis molecule molecule)
+Action:
+  associate-with-catalyze: ?x1 - molecule ?x2 - molecule ?x3 - complex
+      pre: (and (>= (available ?x1) (need-for-catalyzed-association ?x1 ?x2 ?x3)) (>= (available ?x2) (need-for-catalyzed-association ?x2 ?x1 ?x3)) (catalyzed-association-reaction ?x1 ?x2 ?x3))
+      eff: (and (decrease (available ?x1) (need-for-catalyzed-association ?x1 ?x2 ?x3)) (increase (available ?x3) (prod-by-catalyzed-association ?x1 ?x2 ?x3)))
+  associate: ?x1 - molecule ?x2 - molecule ?x3 - complex
+      pre: (and (>= (available ?x1) (need-for-association ?x1 ?x2 ?x3)) (>= (available ?x2) (need-for-association ?x2 ?x1 ?x3)) (association-reaction ?x1 ?x2 ?x3))
+      eff: (and (decrease (available ?x1) (need-for-association ?x1 ?x2 ?x3)) (decrease (available ?x2) (need-for-association ?x2 ?x1 ?x3)) (increase (available ?x3) (prod-by-association ?x1 ?x2 ?x3)))
+  choose: ?x - simple
+      pre: (and (possible ?x))
+      eff: (and (chosen ?x) (increase (num-subs) 1) (not (possible ?x)))
+  initialize: ?x - simple
+      pre: (and (chosen ?x))
+      eff: (and (increase (available ?x) 1))
+  self-associate-with-catalyze: ?x1 - molecule ?x3 - complex
+      pre: (and (>= (available ?x1) (need-for-catalyzed-self-association ?x1 ?x3)) (catalyzed-self-association-reaction ?x1 ?x3))
+      eff: (and (decrease (available ?x1) (need-for-catalyzed-self-association ?x1 ?x3)) (increase (available ?x3) (prod-by-catalyzed-self-association ?x1 ?x3)))
+  synthesize: ?x1 - molecule ?x2 - molecule
+      pre: (and (>= (available ?x1) (need-for-synthesis ?x1 ?x2)) (synthesis-reaction ?x1 ?x2))
+      eff: (and (increase (available ?x2) (prod-by-synthesis ?x1 ?x2)))
+Init:
   (= (available ap2) 0)
-  (= (available dmp1p1) 0)
+  (= (available cdc25c) 0)
   (= (available cdc25cp2) 0)
+  (= (available cdk46p3-cycd) 0)
+  (= (available cdk46p3-cycdp1) 0)
+  (= (available cdk7) 0)
+  (= (available chk1) 0)
+  (= (available dmp1) 0)
+  (= (available dmp1p1) 0)
+  (= (available e2f13) 0)
+  (= (available p130-e2f5p1-dp12) 0)
+  (= (available p16) 0)
   (= (available p16-cdk7) 0)
+  (= (available p300) 0)
+  (= (available pcaf) 0)
   (= (available pcaf-p300) 0)
-  (= (available prbp1p2-ap2) 0)
-  (= (available prbp2-ap2) 0)
+  (= (available prb-e2f4p1-dp12) 0)
   (= (available prbp1p2) 0)
+  (= (available prbp1p2-ap2) 0)
+  (= (available prbp2) 0)
+  (= (available prbp2-ap2) 0)
+  (= (available raf1) 0)
   (= (available raf1-p130-e2f5p1-dp12) 0)
   (= (available raf1-prb-e2f4p1-dp12) 0)
+  (= (available sp1) 0)
   (= (available sp1-e2f13) 0)
-  (= (duration-association-reaction sp1 e2f13 sp1-e2f13) 1.1)
-  (= (duration-association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 1.1)
-  (= (duration-association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 1.1)
-  (= (duration-association-reaction prbp2 ap2 prbp2-ap2) 1)
-  (= (duration-association-reaction pcaf p300 pcaf-p300) 1)
   (= (duration-association-reaction p16 cdk7 p16-cdk7) 0.8)
+  (= (duration-association-reaction pcaf p300 pcaf-p300) 1)
   (= (duration-association-reaction prbp1p2 ap2 prbp1p2-ap2) 1)
-  (= (duration-catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2) 1.7)
-  (= (duration-catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2) 2.2)
-  (= (duration-catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1) 2.3)
-  (= (duration-catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1) 2)
+  (= (duration-association-reaction prbp2 ap2 prbp2-ap2) 1)
+  (= (duration-association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 1.1)
+  (= (duration-association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 1.1)
+  (= (duration-association-reaction sp1 e2f13 sp1-e2f13) 1.1)
   (= (duration-catalyzed-association-reaction cdc25c chk1 cdc25cp2) 1.9)
-  (= (need-for-association sp1 e2f13 sp1-e2f13) 4)
-  (= (need-for-association raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 4)
-  (= (need-for-association raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 2)
-  (= (need-for-association prbp2 ap2 prbp2-ap2) 2)
-  (= (need-for-association prb-e2f4p1-dp12 raf1 raf1-prb-e2f4p1-dp12) 2)
-  (= (need-for-association pcaf p300 pcaf-p300) 3)
-  (= (need-for-association p300 pcaf pcaf-p300) 1)
-  (= (need-for-association p16 cdk7 p16-cdk7) 4)
-  (= (need-for-association p130-e2f5p1-dp12 raf1 raf1-p130-e2f5p1-dp12) 3)
-  (= (need-for-association e2f13 sp1 sp1-e2f13) 3)
-  (= (need-for-association cdk7 p16 p16-cdk7) 3)
-  (= (need-for-association ap2 prbp2 prbp2-ap2) 1)
+  (= (duration-catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1) 2)
+  (= (duration-catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1) 2.3)
+  (= (duration-catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2) 2.2)
+  (= (duration-catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2) 1.7)
   (= (need-for-association ap2 prbp1p2 prbp1p2-ap2) 4)
+  (= (need-for-association ap2 prbp2 prbp2-ap2) 1)
+  (= (need-for-association cdk7 p16 p16-cdk7) 3)
+  (= (need-for-association e2f13 sp1 sp1-e2f13) 3)
+  (= (need-for-association p130-e2f5p1-dp12 raf1 raf1-p130-e2f5p1-dp12) 3)
+  (= (need-for-association p16 cdk7 p16-cdk7) 4)
+  (= (need-for-association p300 pcaf pcaf-p300) 1)
+  (= (need-for-association pcaf p300 pcaf-p300) 3)
+  (= (need-for-association prb-e2f4p1-dp12 raf1 raf1-prb-e2f4p1-dp12) 2)
   (= (need-for-association prbp1p2 ap2 prbp1p2-ap2) 4)
-  (= (need-for-catalyzed-association prbp2 cdk46p3-cycdp1 prbp1p2) 3)
-  (= (need-for-catalyzed-association prbp2 cdk46p3-cycd prbp1p2) 3)
-  (= (need-for-catalyzed-association dmp1 cdk46p3-cycdp1 dmp1p1) 4)
-  (= (need-for-catalyzed-association dmp1 cdk46p3-cycd dmp1p1) 2)
-  (= (need-for-catalyzed-association chk1 cdc25c cdc25cp2) 3)
-  (= (need-for-catalyzed-association cdk46p3-cycdp1 prbp2 prbp1p2) 3)
-  (= (need-for-catalyzed-association cdk46p3-cycdp1 dmp1 dmp1p1) 4)
-  (= (need-for-catalyzed-association cdk46p3-cycd prbp2 prbp1p2) 2)
-  (= (need-for-catalyzed-association cdk46p3-cycd dmp1 dmp1p1) 4)
+  (= (need-for-association prbp2 ap2 prbp2-ap2) 2)
+  (= (need-for-association raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 2)
+  (= (need-for-association raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 4)
+  (= (need-for-association sp1 e2f13 sp1-e2f13) 4)
   (= (need-for-catalyzed-association cdc25c chk1 cdc25cp2) 4)
-  (= (prod-by-association sp1 e2f13 sp1-e2f13) 1)
-  (= (prod-by-association raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 2)
-  (= (prod-by-association raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 3)
-  (= (prod-by-association prbp2 ap2 prbp2-ap2) 2)
-  (= (prod-by-association pcaf p300 pcaf-p300) 3)
-  (= (prod-by-association p16 cdk7 p16-cdk7) 4)
-  (= (prod-by-association prbp1p2 ap2 prbp1p2-ap2) 4)
-  (= (prod-by-catalyzed-association prbp2 cdk46p3-cycdp1 prbp1p2) 1)
-  (= (prod-by-catalyzed-association prbp2 cdk46p3-cycd prbp1p2) 3)
-  (= (prod-by-catalyzed-association dmp1 cdk46p3-cycdp1 dmp1p1) 1)
-  (= (prod-by-catalyzed-association dmp1 cdk46p3-cycd dmp1p1) 2)
-  (= (prod-by-catalyzed-association cdc25c chk1 cdc25cp2) 1)
+  (= (need-for-catalyzed-association cdk46p3-cycd dmp1 dmp1p1) 4)
+  (= (need-for-catalyzed-association cdk46p3-cycd prbp2 prbp1p2) 2)
+  (= (need-for-catalyzed-association cdk46p3-cycdp1 dmp1 dmp1p1) 4)
+  (= (need-for-catalyzed-association cdk46p3-cycdp1 prbp2 prbp1p2) 3)
+  (= (need-for-catalyzed-association chk1 cdc25c cdc25cp2) 3)
+  (= (need-for-catalyzed-association dmp1 cdk46p3-cycd dmp1p1) 2)
+  (= (need-for-catalyzed-association dmp1 cdk46p3-cycdp1 dmp1p1) 4)
+  (= (need-for-catalyzed-association prbp2 cdk46p3-cycd prbp1p2) 3)
+  (= (need-for-catalyzed-association prbp2 cdk46p3-cycdp1 prbp1p2) 3)
   (= (num-subs) 0)
-Goal: (and (>= (+ (available prbp1p2-ap2) (available pcaf-p300)) 4))
-Metric: no-metric
+  (= (prod-by-association p16 cdk7 p16-cdk7) 4)
+  (= (prod-by-association pcaf p300 pcaf-p300) 3)
+  (= (prod-by-association prbp1p2 ap2 prbp1p2-ap2) 4)
+  (= (prod-by-association prbp2 ap2 prbp2-ap2) 2)
+  (= (prod-by-association raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12) 3)
+  (= (prod-by-association raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12) 2)
+  (= (prod-by-association sp1 e2f13 sp1-e2f13) 1)
+  (= (prod-by-catalyzed-association cdc25c chk1 cdc25cp2) 1)
+  (= (prod-by-catalyzed-association dmp1 cdk46p3-cycd dmp1p1) 2)
+  (= (prod-by-catalyzed-association dmp1 cdk46p3-cycdp1 dmp1p1) 1)
+  (= (prod-by-catalyzed-association prbp2 cdk46p3-cycd prbp1p2) 3)
+  (= (prod-by-catalyzed-association prbp2 cdk46p3-cycdp1 prbp1p2) 1)
+  (association-reaction p16 cdk7 p16-cdk7)
+  (association-reaction pcaf p300 pcaf-p300)
+  (association-reaction prbp1p2 ap2 prbp1p2-ap2)
+  (association-reaction prbp2 ap2 prbp2-ap2)
+  (association-reaction raf1 p130-e2f5p1-dp12 raf1-p130-e2f5p1-dp12)
+  (association-reaction raf1 prb-e2f4p1-dp12 raf1-prb-e2f4p1-dp12)
+  (association-reaction sp1 e2f13 sp1-e2f13)
+  (catalyzed-association-reaction cdc25c chk1 cdc25cp2)
+  (catalyzed-association-reaction dmp1 cdk46p3-cycd dmp1p1)
+  (catalyzed-association-reaction dmp1 cdk46p3-cycdp1 dmp1p1)
+  (catalyzed-association-reaction prbp2 cdk46p3-cycd prbp1p2)
+  (catalyzed-association-reaction prbp2 cdk46p3-cycdp1 prbp1p2)
+  (possible ap2)
+  (possible cdc25c)
+  (possible cdk46p3-cycd)
+  (possible cdk46p3-cycdp1)
+  (possible cdk7)
+  (possible chk1)
+  (possible dmp1)
+  (possible e2f13)
+  (possible p130-e2f5p1-dp12)
+  (possible p16)
+  (possible p300)
+  (possible pcaf)
+  (possible prb-e2f4p1-dp12)
+  (possible prbp2)
+  (possible raf1)
+  (possible sp1)
+Goal:
+  (and (>= (+ (available prbp1p2-ap2) (available pcaf-p300)) 4))
+Metric:
+Pred prop:
+  (association-reaction molecule molecule complex): in_init in_pre
+  (catalyzed-association-reaction molecule molecule complex): in_init in_pre
+  (catalyzed-self-association-reaction molecule complex): in_pre
+  (chosen simple): in_pre in_eff
+  (possible molecule): in_init in_pre in_eff
+  (synthesis-reaction molecule molecule): in_pre
+Func prop:
+  (available molecule): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff rhs_funcs:(need-for-association need-for-catalyzed-association need-for-catalyzed-self-association prod-by-association prod-by-catalyzed-association prod-by-catalyzed-self-association prod-by-synthesis)
+  (duration-association-reaction molecule molecule complex): in_init init_all_nonneg write_delta_nonneg write_delta_nonneg_int
+  (duration-catalyzed-association-reaction molecule molecule complex): in_init init_all_nonneg write_delta_nonneg write_delta_nonneg_int
+  (duration-catalyzed-self-association-reaction molecule complex): init_all_nonneg init_all_nonpos init_all_int write_delta_nonneg write_delta_nonneg_int
+  (duration-synthesis-reaction molecule molecule): init_all_nonneg init_all_nonpos init_all_int write_delta_nonneg write_delta_nonneg_int
+  (need-for-association molecule molecule complex): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (need-for-catalyzed-association molecule molecule complex): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (need-for-catalyzed-self-association molecule complex): init_all_nonneg init_all_nonpos init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (need-for-synthesis molecule molecule): init_all_nonneg init_all_nonpos init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (num-subs): in_init init_all_nonneg init_all_nonpos init_all_int in_eff write_delta_nonneg write_delta_nonneg_int
+  (prod-by-association molecule molecule complex): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (prod-by-catalyzed-association molecule molecule complex): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (prod-by-catalyzed-self-association molecule complex): init_all_nonneg init_all_nonpos init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (prod-by-synthesis molecule molecule): init_all_nonneg init_all_nonpos init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

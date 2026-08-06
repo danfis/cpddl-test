@@ -1,72 +1,94 @@
 Domain: satellite
 Problem: strips-sat-x-1
-Require: ff
-Type[1]:
-    [0]: object, parent: -1
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11
-Obj[12]:
-    [0]: satellite0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: instrument0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: image1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: spectrograph2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: thermograph0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: star0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: groundstation1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: groundstation2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: phenomenon3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: phenomenon4, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: star5, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: phenomenon6, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[13]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    on_board: 0 0 :: read: 1, write: 0, in-init: 1
-    supports: 0 0 :: read: 1, write: 0, in-init: 1
-    pointing: 0 0 :: read: 1, write: 1, in-init: 1
-    power_avail: 0 :: read: 1, write: 1, in-init: 1
-    power_on: 0 :: read: 1, write: 1, in-init: 0
-    calibrated: 0 :: read: 1, write: 1, in-init: 0
-    have_image: 0 0 :: read: 1, write: 1, in-init: 0
-    calibration_target: 0 0 :: read: 1, write: 0, in-init: 1
-    satellite: 0 :: read: 1, write: 0, in-init: 1
-    direction: 0 :: read: 1, write: 0, in-init: 1
-    instrument: 0 :: read: 1, write: 0, in-init: 1
-    mode: 0 :: read: 1, write: 0, in-init: 1
-Function[0]:
-Action[5]:
-    turn_to: ?s:0 ?d_new:0 ?d_prev:0
-        pre: (and (R:satellite ?s) (R:direction ?d_new) (R:direction ?d_prev) (RW:pointing ?s ?d_prev))
-        eff: (and (RW:pointing ?s ?d_new) (N:RW:pointing ?s ?d_prev))
-    switch_on: ?i:0 ?s:0
-        pre: (and (R:on_board ?i ?s) (R:satellite ?s) (R:instrument ?i) (RW:power_avail ?s))
-        eff: (and (N:RW:power_avail ?s) (RW:power_on ?i) (N:RW:calibrated ?i))
-    switch_off: ?i:0 ?s:0
-        pre: (and (R:on_board ?i ?s) (R:satellite ?s) (R:instrument ?i) (RW:power_on ?i))
-        eff: (and (RW:power_avail ?s) (N:RW:power_on ?i))
-    calibrate: ?s:0 ?i:0 ?d:0
-        pre: (and (R:on_board ?i ?s) (R:calibration_target ?i ?d) (R:satellite ?s) (R:direction ?d) (R:instrument ?i) (RW:pointing ?s ?d) (RW:power_on ?i))
-        eff: (RW:calibrated ?i)
-    take_image: ?s:0 ?d:0 ?i:0 ?m:0
-        pre: (and (R:on_board ?i ?s) (R:supports ?i ?m) (R:satellite ?s) (R:direction ?d) (R:instrument ?i) (R:mode ?m) (RW:pointing ?s ?d) (RW:power_on ?i) (RW:power_on ?i) (RW:calibrated ?i))
-        eff: (RW:have_image ?d ?m)
-Init[17]:
-  S:(on_board instrument0 satellite0)
-  S:(supports instrument0 thermograph0)
-  S:(calibration_target instrument0 groundstation2)
-  S:(satellite satellite0)
-  S:(direction star0)
-  S:(direction groundstation1)
-  S:(direction groundstation2)
-  S:(direction phenomenon3)
-  S:(direction phenomenon4)
-  S:(direction star5)
-  S:(direction phenomenon6)
-  S:(instrument instrument0)
-  S:(mode image1)
-  S:(mode spectrograph2)
-  S:(mode thermograph0)
+Require:
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  object
+Obj:
+  groundstation1 - object
+  groundstation2 - object
+  image1 - object
+  instrument0 - object
+  phenomenon3 - object
+  phenomenon4 - object
+  phenomenon6 - object
+  satellite0 - object
+  spectrograph2 - object
+  star0 - object
+  star5 - object
+  thermograph0 - object
+Predicate:
+  (= object object) :eq
+  (calibrated object)
+  (calibration_target object object)
+  (direction object)
+  (have_image object object)
+  (instrument object)
+  (mode object)
+  (on_board object object)
+  (pointing object object)
+  (power_avail object)
+  (power_on object)
+  (satellite object)
+  (supports object object)
+Function:
+Action:
+  calibrate: ?s - object ?i - object ?d - object
+      pre: (and (calibration_target ?i ?d) (direction ?d) (instrument ?i) (on_board ?i ?s) (pointing ?s ?d) (power_on ?i) (satellite ?s))
+      eff: (calibrated ?i)
+  switch_off: ?i - object ?s - object
+      pre: (and (instrument ?i) (on_board ?i ?s) (power_on ?i) (satellite ?s))
+      eff: (and (not (power_on ?i)) (power_avail ?s))
+  switch_on: ?i - object ?s - object
+      pre: (and (instrument ?i) (on_board ?i ?s) (power_avail ?s) (satellite ?s))
+      eff: (and (not (calibrated ?i)) (not (power_avail ?s)) (power_on ?i))
+  take_image: ?s - object ?d - object ?i - object ?m - object
+      pre: (and (calibrated ?i) (direction ?d) (instrument ?i) (mode ?m) (on_board ?i ?s) (pointing ?s ?d) (power_on ?i) (power_on ?i) (satellite ?s) (supports ?i ?m))
+      eff: (have_image ?d ?m)
+  turn_to: ?s - object ?d_new - object ?d_prev - object
+      pre: (and (direction ?d_new) (direction ?d_prev) (pointing ?s ?d_prev) (satellite ?s))
+      eff: (and (not (pointing ?s ?d_prev)) (pointing ?s ?d_new))
+Init:
+  (calibration_target instrument0 groundstation2)
+  (direction groundstation1)
+  (direction groundstation2)
+  (direction phenomenon3)
+  (direction phenomenon4)
+  (direction phenomenon6)
+  (direction star0)
+  (direction star5)
+  (instrument instrument0)
+  (mode image1)
+  (mode spectrograph2)
+  (mode thermograph0)
+  (on_board instrument0 satellite0)
   (pointing satellite0 phenomenon6)
   (power_avail satellite0)
-Init[0]:
-Goal: (and (RW:have_image phenomenon4 thermograph0) (RW:have_image star5 thermograph0) (RW:have_image phenomenon6 thermograph0))
-Metric: no-metric
+  (satellite satellite0)
+  (supports instrument0 thermograph0)
+Goal:
+  (and (have_image phenomenon4 thermograph0) (have_image phenomenon6 thermograph0) (have_image star5 thermograph0))
+Metric:
+Pred prop:
+  (calibrated object): in_pre in_eff
+  (calibration_target object object): in_init in_pre
+  (direction object): in_init in_pre
+  (have_image object object): in_goal in_eff
+  (instrument object): in_init in_pre
+  (mode object): in_init in_pre
+  (on_board object object): in_init in_pre
+  (pointing object object): in_init in_pre in_eff
+  (power_avail object): in_init in_pre in_eff
+  (power_on object): in_pre in_eff
+  (satellite object): in_init in_pre
+  (supports object object): in_init in_pre
+Func prop:
+Global prop:
+  is_unit_cost

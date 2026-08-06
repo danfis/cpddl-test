@@ -1,147 +1,83 @@
 Domain: elevators-sequencedstrips
 Problem: elevators-sequencedstrips-p8_3_1
-Require: 200ff
-Type[6]:
-    [0]: object, parent: -1
-    [1]: elevator, parent: 0
-    [2]: slow-elevator, parent: 1
-    [3]: fast-elevator, parent: 1
-    [4]: passenger, parent: 0
-    [5]: count, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
-    [1]: 12 13 14
-    [2]: 13 14
-    [3]: 12
-    [4]: 9 10 11
-    [5]: 0 1 2 3 4 5 6 7 8
-Obj[15]:
-    [0]: n0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: n1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: n2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: n3, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: n4, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: n5, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: n6, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: n7, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: n8, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: p0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: p1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: p2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: fast0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: slow0-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: slow1-0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[9]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    passenger-at: 4 5 :: read: 1, write: 1, in-init: 1
-    boarded: 4 1 :: read: 1, write: 1, in-init: 0
-    lift-at: 1 5 :: read: 1, write: 1, in-init: 1
-    reachable-floor: 1 5 :: read: 1, write: 0, in-init: 1
-    above: 5 5 :: read: 1, write: 0, in-init: 1
-    passengers: 1 5 :: read: 1, write: 1, in-init: 1
-    can-hold: 1 5 :: read: 1, write: 0, in-init: 1
-    next: 5 5 :: read: 1, write: 0, in-init: 1
-Function[3]:
-    total-cost: :: read: 1, write: 1, in-init: 1
-    travel-slow: 5 5 :: read: 1, write: 0, in-init: 1
-    travel-fast: 5 5 :: read: 1, write: 0, in-init: 1
-Action[6]:
-    move-up-slow: ?lift:2 ?f1:5 ?f2:5
-        pre: (and (R:reachable-floor ?lift ?f2) (R:above ?f1 ?f2) (RW:lift-at ?lift ?f1))
-        eff: (and (N:RW:lift-at ?lift ?f1) (RW:lift-at ?lift ?f2) (increase (total-cost) (travel-slow ?f1 ?f2)))
-    move-down-slow: ?lift:2 ?f1:5 ?f2:5
-        pre: (and (R:reachable-floor ?lift ?f2) (R:above ?f2 ?f1) (RW:lift-at ?lift ?f1))
-        eff: (and (N:RW:lift-at ?lift ?f1) (RW:lift-at ?lift ?f2) (increase (total-cost) (travel-slow ?f2 ?f1)))
-    move-up-fast: ?lift:3 ?f1:5 ?f2:5
-        pre: (and (R:reachable-floor ?lift ?f2) (R:above ?f1 ?f2) (RW:lift-at ?lift ?f1))
-        eff: (and (N:RW:lift-at ?lift ?f1) (RW:lift-at ?lift ?f2) (increase (total-cost) (travel-fast ?f1 ?f2)))
-    move-down-fast: ?lift:3 ?f1:5 ?f2:5
-        pre: (and (R:reachable-floor ?lift ?f2) (R:above ?f2 ?f1) (RW:lift-at ?lift ?f1))
-        eff: (and (N:RW:lift-at ?lift ?f1) (RW:lift-at ?lift ?f2) (increase (total-cost) (travel-fast ?f2 ?f1)))
-    board: ?p:4 ?lift:1 ?f:5 ?n1:5 ?n2:5
-        pre: (and (R:can-hold ?lift ?n2) (R:next ?n1 ?n2) (RW:passenger-at ?p ?f) (RW:lift-at ?lift ?f) (RW:passengers ?lift ?n1))
-        eff: (and (N:RW:passenger-at ?p ?f) (RW:boarded ?p ?lift) (N:RW:passengers ?lift ?n1) (RW:passengers ?lift ?n2))
-    leave: ?p:4 ?lift:1 ?f:5 ?n1:5 ?n2:5
-        pre: (and (R:next ?n2 ?n1) (RW:boarded ?p ?lift) (RW:lift-at ?lift ?f) (RW:passengers ?lift ?n1))
-        eff: (and (RW:passenger-at ?p ?f) (N:RW:boarded ?p ?lift) (N:RW:passengers ?lift ?n1) (RW:passengers ?lift ?n2))
-Init[75]:
-  S:(reachable-floor fast0 n0)
-  S:(reachable-floor fast0 n2)
-  S:(reachable-floor fast0 n4)
-  S:(reachable-floor fast0 n6)
-  S:(reachable-floor fast0 n8)
-  S:(reachable-floor slow0-0 n0)
-  S:(reachable-floor slow0-0 n1)
-  S:(reachable-floor slow0-0 n2)
-  S:(reachable-floor slow0-0 n3)
-  S:(reachable-floor slow0-0 n4)
-  S:(reachable-floor slow1-0 n4)
-  S:(reachable-floor slow1-0 n5)
-  S:(reachable-floor slow1-0 n6)
-  S:(reachable-floor slow1-0 n7)
-  S:(reachable-floor slow1-0 n8)
-  S:(above n0 n1)
-  S:(above n0 n2)
-  S:(above n0 n3)
-  S:(above n0 n4)
-  S:(above n0 n5)
-  S:(above n0 n6)
-  S:(above n0 n7)
-  S:(above n0 n8)
-  S:(above n1 n2)
-  S:(above n1 n3)
-  S:(above n1 n4)
-  S:(above n1 n5)
-  S:(above n1 n6)
-  S:(above n1 n7)
-  S:(above n1 n8)
-  S:(above n2 n3)
-  S:(above n2 n4)
-  S:(above n2 n5)
-  S:(above n2 n6)
-  S:(above n2 n7)
-  S:(above n2 n8)
-  S:(above n3 n4)
-  S:(above n3 n5)
-  S:(above n3 n6)
-  S:(above n3 n7)
-  S:(above n3 n8)
-  S:(above n4 n5)
-  S:(above n4 n6)
-  S:(above n4 n7)
-  S:(above n4 n8)
-  S:(above n5 n6)
-  S:(above n5 n7)
-  S:(above n5 n8)
-  S:(above n6 n7)
-  S:(above n6 n8)
-  S:(above n7 n8)
-  S:(can-hold fast0 n1)
-  S:(can-hold fast0 n2)
-  S:(can-hold fast0 n3)
-  S:(can-hold slow0-0 n1)
-  S:(can-hold slow0-0 n2)
-  S:(can-hold slow1-0 n1)
-  S:(can-hold slow1-0 n2)
-  S:(next n0 n1)
-  S:(next n1 n2)
-  S:(next n2 n3)
-  S:(next n3 n4)
-  S:(next n4 n5)
-  S:(next n5 n6)
-  S:(next n6 n7)
-  S:(next n7 n8)
-  (passenger-at p0 n8)
-  (passenger-at p1 n3)
-  (passenger-at p2 n2)
-  (lift-at fast0 n0)
-  (lift-at slow0-0 n2)
-  (lift-at slow1-0 n4)
-  (passengers fast0 n0)
-  (passengers slow0-0 n0)
-  (passengers slow1-0 n0)
-Init[31]:
+Require:
+  :action-costs
+  :conditional-effects
+  :disjunctive-preconditions
+  :equality
+  :existential-preconditions
+  :negative-preconditions
+  :strips
+  :typing
+  :universal-preconditions
+Type:
+  count - object
+  elevator - object
+  fast-elevator - elevator
+  object
+  passenger - object
+  slow-elevator - elevator
+Obj:
+  fast0 - fast-elevator
+  n0 - count
+  n1 - count
+  n2 - count
+  n3 - count
+  n4 - count
+  n5 - count
+  n6 - count
+  n7 - count
+  n8 - count
+  p0 - passenger
+  p1 - passenger
+  p2 - passenger
+  slow0-0 - slow-elevator
+  slow1-0 - slow-elevator
+Predicate:
+  (= object object) :eq
+  (above count count)
+  (boarded passenger elevator)
+  (can-hold elevator count)
+  (lift-at elevator count)
+  (next count count)
+  (passenger-at passenger count)
+  (passengers elevator count)
+  (reachable-floor elevator count)
+Function:
+  (total-cost) :total-cost
+  (travel-fast count count)
+  (travel-slow count count)
+Action:
+  board: ?p - passenger ?lift - elevator ?f - count ?n1 - count ?n2 - count
+      pre: (and (can-hold ?lift ?n2) (lift-at ?lift ?f) (next ?n1 ?n2) (passenger-at ?p ?f) (passengers ?lift ?n1))
+      eff: (and (boarded ?p ?lift) (not (passenger-at ?p ?f)) (not (passengers ?lift ?n1)) (passengers ?lift ?n2))
+  leave: ?p - passenger ?lift - elevator ?f - count ?n1 - count ?n2 - count
+      pre: (and (boarded ?p ?lift) (lift-at ?lift ?f) (next ?n2 ?n1) (passengers ?lift ?n1))
+      eff: (and (not (boarded ?p ?lift)) (not (passengers ?lift ?n1)) (passenger-at ?p ?f) (passengers ?lift ?n2))
+  move-down-fast: ?lift - fast-elevator ?f1 - count ?f2 - count
+      pre: (and (above ?f2 ?f1) (lift-at ?lift ?f1) (reachable-floor ?lift ?f2))
+      eff: (and (increase (total-cost) (travel-fast ?f2 ?f1)) (lift-at ?lift ?f2) (not (lift-at ?lift ?f1)))
+  move-down-slow: ?lift - slow-elevator ?f1 - count ?f2 - count
+      pre: (and (above ?f2 ?f1) (lift-at ?lift ?f1) (reachable-floor ?lift ?f2))
+      eff: (and (increase (total-cost) (travel-slow ?f2 ?f1)) (lift-at ?lift ?f2) (not (lift-at ?lift ?f1)))
+  move-up-fast: ?lift - fast-elevator ?f1 - count ?f2 - count
+      pre: (and (above ?f1 ?f2) (lift-at ?lift ?f1) (reachable-floor ?lift ?f2))
+      eff: (and (increase (total-cost) (travel-fast ?f1 ?f2)) (lift-at ?lift ?f2) (not (lift-at ?lift ?f1)))
+  move-up-slow: ?lift - slow-elevator ?f1 - count ?f2 - count
+      pre: (and (above ?f1 ?f2) (lift-at ?lift ?f1) (reachable-floor ?lift ?f2))
+      eff: (and (increase (total-cost) (travel-slow ?f1 ?f2)) (lift-at ?lift ?f2) (not (lift-at ?lift ?f1)))
+Init:
   (= (total-cost) 0)
+  (= (travel-fast n0 n2) 7)
+  (= (travel-fast n0 n4) 13)
+  (= (travel-fast n0 n6) 19)
+  (= (travel-fast n0 n8) 25)
+  (= (travel-fast n2 n4) 7)
+  (= (travel-fast n2 n6) 13)
+  (= (travel-fast n2 n8) 19)
+  (= (travel-fast n4 n6) 7)
+  (= (travel-fast n4 n8) 13)
+  (= (travel-fast n6 n8) 7)
   (= (travel-slow n0 n1) 6)
   (= (travel-slow n0 n2) 7)
   (= (travel-slow n0 n3) 8)
@@ -162,15 +98,98 @@ Init[31]:
   (= (travel-slow n6 n7) 6)
   (= (travel-slow n6 n8) 7)
   (= (travel-slow n7 n8) 6)
-  (= (travel-fast n0 n2) 7)
-  (= (travel-fast n0 n4) 13)
-  (= (travel-fast n0 n6) 19)
-  (= (travel-fast n0 n8) 25)
-  (= (travel-fast n2 n4) 7)
-  (= (travel-fast n2 n6) 13)
-  (= (travel-fast n2 n8) 19)
-  (= (travel-fast n4 n6) 7)
-  (= (travel-fast n4 n8) 13)
-  (= (travel-fast n6 n8) 7)
-Goal: (and (RW:passenger-at p0 n4) (RW:passenger-at p1 n6) (RW:passenger-at p2 n1))
-Metric: (total-cost)
+  (above n0 n1)
+  (above n0 n2)
+  (above n0 n3)
+  (above n0 n4)
+  (above n0 n5)
+  (above n0 n6)
+  (above n0 n7)
+  (above n0 n8)
+  (above n1 n2)
+  (above n1 n3)
+  (above n1 n4)
+  (above n1 n5)
+  (above n1 n6)
+  (above n1 n7)
+  (above n1 n8)
+  (above n2 n3)
+  (above n2 n4)
+  (above n2 n5)
+  (above n2 n6)
+  (above n2 n7)
+  (above n2 n8)
+  (above n3 n4)
+  (above n3 n5)
+  (above n3 n6)
+  (above n3 n7)
+  (above n3 n8)
+  (above n4 n5)
+  (above n4 n6)
+  (above n4 n7)
+  (above n4 n8)
+  (above n5 n6)
+  (above n5 n7)
+  (above n5 n8)
+  (above n6 n7)
+  (above n6 n8)
+  (above n7 n8)
+  (can-hold fast0 n1)
+  (can-hold fast0 n2)
+  (can-hold fast0 n3)
+  (can-hold slow0-0 n1)
+  (can-hold slow0-0 n2)
+  (can-hold slow1-0 n1)
+  (can-hold slow1-0 n2)
+  (lift-at fast0 n0)
+  (lift-at slow0-0 n2)
+  (lift-at slow1-0 n4)
+  (next n0 n1)
+  (next n1 n2)
+  (next n2 n3)
+  (next n3 n4)
+  (next n4 n5)
+  (next n5 n6)
+  (next n6 n7)
+  (next n7 n8)
+  (passenger-at p0 n8)
+  (passenger-at p1 n3)
+  (passenger-at p2 n2)
+  (passengers fast0 n0)
+  (passengers slow0-0 n0)
+  (passengers slow1-0 n0)
+  (reachable-floor fast0 n0)
+  (reachable-floor fast0 n2)
+  (reachable-floor fast0 n4)
+  (reachable-floor fast0 n6)
+  (reachable-floor fast0 n8)
+  (reachable-floor slow0-0 n0)
+  (reachable-floor slow0-0 n1)
+  (reachable-floor slow0-0 n2)
+  (reachable-floor slow0-0 n3)
+  (reachable-floor slow0-0 n4)
+  (reachable-floor slow1-0 n4)
+  (reachable-floor slow1-0 n5)
+  (reachable-floor slow1-0 n6)
+  (reachable-floor slow1-0 n7)
+  (reachable-floor slow1-0 n8)
+Goal:
+  (and (passenger-at p0 n4) (passenger-at p1 n6) (passenger-at p2 n1))
+Metric:
+  (total-cost)
+Pred prop:
+  (above count count): in_init in_pre
+  (boarded passenger elevator): in_pre in_eff
+  (can-hold elevator count): in_init in_pre
+  (lift-at elevator count): in_init in_pre in_eff
+  (next count count): in_init in_pre
+  (passenger-at passenger count): in_init in_pre in_goal in_eff
+  (passengers elevator count): in_init in_pre in_eff
+  (reachable-floor elevator count): in_init in_pre
+Func prop:
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(travel-fast travel-slow) write_delta_nonneg write_delta_nonneg_int
+  (travel-fast count count): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (travel-slow count count): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func
