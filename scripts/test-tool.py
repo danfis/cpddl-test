@@ -67,6 +67,9 @@ def parse_args():
     p.add_argument(
         "-X", "--fail-fast", action="store_true",
         help="Stop execution after the first failed test")
+    p.add_argument(
+        "-q", "--quiet", action="store_true",
+        help="Do not print PASSed tests, only failures and the final summary")
     return p.parse_args()
 
 
@@ -493,9 +496,10 @@ def main():
             if args.dry_run:
                 print(f"{task:<{task_w}}  {test_name:<{test_w}}  {msg}")
             elif ok:
-                status = f"{GREEN}[PASS]{RESET}"
                 passed += 1
-                print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
+                if not args.quiet:
+                    status = f"{GREEN}[PASS]{RESET}"
+                    print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
             else:
                 status = f"{RED}[FAIL]{RESET}"
                 failed += 1

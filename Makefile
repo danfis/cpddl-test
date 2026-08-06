@@ -119,7 +119,7 @@ check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test -c $(T)
 
 full-tests: all ./scripts/test-tool.py config-tool.toml ../bin/pddl-tool
-	./test -c $(T_FULL) ; $(PYTHON) ./scripts/test-tool.py $(TOOL)
+	./test -c $(T_FULL) ; $(PYTHON) ./scripts/test-tool.py -q $(TOOL)
 
 clean:
 	rm -f check.log
