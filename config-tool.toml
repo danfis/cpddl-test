@@ -43,6 +43,8 @@ tasks = [
     "ipc-2008/seq-opt/sokoban/p01",
     "ipc-2011/seq-opt/visitall/problem02-full",
     "ipc-2014/seq-opt/transport/p01",
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
 ]
 
 # Additional task suites selectable with -S <name>.
@@ -2743,6 +2745,7 @@ lplan-gbfs-ff = ["lplan", "gbfs", "ff", "stdout"]
 lplan-gbfs-hadd = ["lplan", "gbfs", "hadd", "stdout"]
 lplan-lazy-ff = ["lplan", "lazy", "ff", "stdout"]
 lplan-lazy-hadd = ["lplan", "lazy", "hadd", "stdout"]
+lplan-astar-blind = ["lplan", "astar", "blind", "stdout"]
 lplan-astar-hmax = ["lplan", "astar", "hmax", "stdout"]
 lplan-astar-homo-lmc = ["lplan", "astar", "homo-lmc", "stdout"]
 
@@ -2803,8 +2806,37 @@ lplan-gbfs-ff = ["ipc-2014/seq-opt/transport/p01"]
 lplan-gbfs-hadd = ["ipc-2014/seq-opt/transport/p01"]
 lplan-lazy-ff = ["ipc-2014/seq-opt/transport/p01"]
 lplan-lazy-hadd = ["ipc-2014/seq-opt/transport/p01"]
+lplan-astar-blind = ["ipc-2014/seq-opt/transport/p01"]
 lplan-astar-hmax = ["ipc-2014/seq-opt/transport/p01"]
 gplan-astar-flow = ["ipc-2014/seq-opt/transport/p01"]
+"regex:^translate.*$" = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
+"regex:^lplan-.*(hadd|hmax|lmc|ff).*$" = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
+"regex:^gplan.*$" = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
+"regex:^symb.*$" = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
+"regex:^reversibility.*$" = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
+strips-as-py = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
+mutex-group-cover-number-h2 = [
+    "ipc-2023/num/counters/pfile1",
+    "ipc-2023/num/delivery/pfile1",
+]
 
 
 # Named reusable Python scripts for post-processing.
@@ -2888,6 +2920,7 @@ lplan-gbfs-ff = "script:plan-out-reduce-to-plan-found"
 lplan-gbfs-hadd = "script:plan-out-reduce-to-plan-found"
 lplan-lazy-ff = "script:plan-out-reduce-to-plan-found"
 lplan-lazy-hadd = "script:plan-out-reduce-to-plan-found"
+lplan-astar-blind = "script:plan-out-reduce-to-plan-cost"
 lplan-astar-hmax = "script:plan-out-reduce-to-plan-cost"
 lplan-astar-homo-lmc = "script:plan-out-reduce-to-plan-cost"
 

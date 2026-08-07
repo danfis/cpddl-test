@@ -1,0 +1,10 @@
+(define (problem num-float-div-02)
+  (:domain num-float-div)
+  (:objects f0 f1 - farm)
+  (:init (adj f0 f1)
+         (adj f1 f0)
+         (= (x f0) 2.5)
+         (= (x f1) 3))
+  (:goal (<= (x f1) 1.5))
+)
+
