@@ -133,10 +133,6 @@ TEST(lifted_search, pddl)
 
 TEST(lifted_search_heur, lifted_search)
 {
-    if (pddlIsNumeric(&C.pddl)){
-        TEST_SKIP_CHILDREN;
-        return;
-    }
 }
 
 TEST(lifted_search_unit_cost, pddl_unit_cost)
@@ -150,6 +146,13 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
                            pddl_lifted_app_action_backend_t app_action,
                            int compare_to_optimal_cost)
 {
+    if (heur == NULL){
+        if (pddlErrIsSet(&C.err))
+            pddlErrPrint(&C.err, 1, stderr);
+        assert(heur != NULL && "Could not create a lifted heuristic");
+        return;
+    }
+
     pddl_lifted_search_config_t cfg = PDDL_LIFTED_SEARCH_CONFIG_INIT;
     cfg.pddl = &C.pddl;
     cfg.alg = search_alg;
@@ -158,7 +161,10 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
     //pddlErrLogEnable(&C.err, stdout);
 
     pddl_lifted_search_t *search = pddlLiftedSearchNew(&cfg, &C.err);
-    assert(search != NULL);
+    if (search == NULL){
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(0 && "pddlLiftedSearchNew failed");
+    }
     pddl_lifted_search_status_t st = pddlLiftedSearchInitStep(search);
     while (st == PDDL_LIFTED_SEARCH_CONT)
         st = pddlLiftedSearchStep(search);
@@ -225,6 +231,10 @@ TEST(lifted_blind_search_dl, lifted_search)
 
 TEST_COND(lifted_search_astar_hmax_sql, lifted_search_heur, SQLITE)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,
                    PDDL_LIFTED_APP_ACTION_SQL, 1);

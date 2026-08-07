@@ -28,7 +28,8 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     assert(ret == 0);
 
     pddl_lifted_heur_relaxed_t h;
-    pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
+    ret = pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
+    assert(ret == 0);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
@@ -93,7 +94,8 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     assert(ret == 0);
 
     pddl_lifted_heur_relaxed_t h;
-    pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
+    ret = pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
+    assert(ret == 0);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
@@ -153,7 +155,8 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
     }
 
     pddl_lifted_heur_relaxed_t h;
-    pddlLiftedHFFAddInit(&h, &C.pddl, &C.err);
+    ret = pddlLiftedHFFAddInit(&h, &C.pddl, &C.err);
+    assert(ret == 0);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
