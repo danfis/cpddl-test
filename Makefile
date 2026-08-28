@@ -70,6 +70,7 @@ TESTS += strips_state_space
 TESTS += search
 TESTS += gaifman
 TESTS += set
+TESTS += splaytree
 TESTS += open_list
 TESTS += opts
 TESTS += unify
