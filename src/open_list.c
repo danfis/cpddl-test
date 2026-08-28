@@ -63,6 +63,19 @@ static void checkEmpty(pddl_open_list_t *list)
     assert(ret == -1);
     ret = pddlOpenListPop(list, &id, key);
     assert(ret == -1);
+    int num_buckets = pddlOpenListNumBuckets(list);
+    assert(num_buckets == 0);
+}
+
+/*
+ * Assert that the list holds exactly exp buckets, i.e., exp distinct keys.
+ * Elements with equal keys must share a bucket, so this catches duplicate
+ * buckets created for the same key.
+ */
+static void checkNumBuckets(pddl_open_list_t *list, int exp)
+{
+    int num_buckets = pddlOpenListNumBuckets(list);
+    assert(num_buckets == exp);
 }
 
 /*
@@ -108,6 +121,7 @@ TEST_ONCE(open_list_int_1d)
     /* single push then pop */
     int c5[] = {5};
     pddlOpenListPush(list, c5, 42);
+    checkNumBuckets(list, 1);
     checkTop(list, 1, c5, 42);  /* top does not remove */
     checkTop(list, 1, c5, 42);  /* still there */
     checkPop(list, 1, c5, 42);
@@ -119,6 +133,7 @@ TEST_ONCE(open_list_int_1d)
         int c[] = {keys[i]};
         pddlOpenListPush(list, c, (pddl_state_id_t)i);
     }
+    checkNumBuckets(list, 5);
     int n = popAllCheckOrder(list, 1);
     assert(n == 5);
     checkEmpty(list);
@@ -128,14 +143,18 @@ TEST_ONCE(open_list_int_1d)
     pddlOpenListPush(list, csame, 10);
     pddlOpenListPush(list, csame, 20);
     pddlOpenListPush(list, csame, 30);
+    checkNumBuckets(list, 1);
     checkPop(list, 1, csame, 10);
+    checkNumBuckets(list, 1);
     checkPop(list, 1, csame, 20);
+    checkNumBuckets(list, 1);
     checkPop(list, 1, csame, 30);
     checkEmpty(list);
 
     /* clear: push a few elements, clear, list must be empty */
     pddlOpenListPush(list, c5, 1);
     pddlOpenListPush(list, c5, 2);
+    checkNumBuckets(list, 1);
     pddlOpenListClear(list);
     checkEmpty(list);
 
@@ -152,6 +171,7 @@ TEST_ONCE(open_list_int_1d)
     pddlOpenListPush(list, cmax, 1);
     pddlOpenListPush(list, czero, 2);
     pddlOpenListPush(list, cmin, 3);
+    checkNumBuckets(list, 3);
     checkPop(list, 1, cmin, 3);
     checkPop(list, 1, czero, 2);
     checkPop(list, 1, cmax, 1);
@@ -164,14 +184,17 @@ TEST_ONCE(open_list_int_1d)
             int c[] = {(i * 37) % 101};
             pddlOpenListPush(list, c, (pddl_state_id_t)i);
         }
+        /* 37 and 101 are coprime, so all 100 keys are distinct */
+        checkNumBuckets(list, 100);
         n = popAllCheckOrder(list, 1);
         assert(n == 100);
         checkEmpty(list);
     }
     for (int i = 0; i < 100; ++i){
-        int c[] = {i};
+        int c[] = {i % 10};
         pddlOpenListPush(list, c, (pddl_state_id_t)i);
     }
+    checkNumBuckets(list, 10);
     pddlOpenListClear(list);
     checkEmpty(list);
 
@@ -194,6 +217,7 @@ TEST_ONCE(open_list_int_2d)
     int cb[] = {3, 9};
     pddlOpenListPush(list, ca, 1);
     pddlOpenListPush(list, cb, 2);
+    checkNumBuckets(list, 2);
     checkPop(list, 2, cb, 2);  /* (3,...) < (5,...) */
     checkPop(list, 2, ca, 1);
     checkEmpty(list);
@@ -205,6 +229,7 @@ TEST_ONCE(open_list_int_2d)
     pddlOpenListPush(list, c2, 20);
     pddlOpenListPush(list, c3, 30);
     pddlOpenListPush(list, c1, 10);
+    checkNumBuckets(list, 3);
     checkPop(list, 2, c1, 10);  /* (4,1) */
     checkPop(list, 2, c3, 30);  /* (4,2) */
     checkPop(list, 2, c2, 20);  /* (4,5) */
@@ -215,6 +240,7 @@ TEST_ONCE(open_list_int_2d)
     pddlOpenListPush(list, csame, 100);
     pddlOpenListPush(list, csame, 101);
     pddlOpenListPush(list, csame, 102);
+    checkNumBuckets(list, 1);
     checkPop(list, 2, csame, 100);
     checkPop(list, 2, csame, 101);
     checkPop(list, 2, csame, 102);
@@ -233,6 +259,7 @@ TEST_ONCE(open_list_int_2d)
     int n_entries = 7;
     for (int i = 0; i < n_entries; ++i)
         pddlOpenListPush(list, entries[i], (pddl_state_id_t)i);
+    checkNumBuckets(list, 5);  /* (1,3) and (2,2) are repeated */
     int n = popAllCheckOrder(list, 2);
     assert(n == n_entries);
     checkEmpty(list);
@@ -262,6 +289,7 @@ TEST_ONCE(open_list_int_3d)
     int cb[] = {1, 0, 0};
     pddlOpenListPush(list, ca, 1);
     pddlOpenListPush(list, cb, 2);
+    checkNumBuckets(list, 2);
     checkPop(list, 3, cb, 2);
     checkPop(list, 3, ca, 1);
     checkEmpty(list);
@@ -289,6 +317,7 @@ TEST_ONCE(open_list_int_3d)
     pddlOpenListPush(list, csame, 100);
     pddlOpenListPush(list, csame, 101);
     pddlOpenListPush(list, csame, 102);
+    checkNumBuckets(list, 1);
     checkPop(list, 3, csame, 100);
     checkPop(list, 3, csame, 101);
     checkPop(list, 3, csame, 102);
@@ -311,6 +340,7 @@ TEST_ONCE(open_list_int_3d)
     int n_entries = 12;
     for (int i = 0; i < n_entries; ++i)
         pddlOpenListPush(list, entries[i], (pddl_state_id_t)i);
+    checkNumBuckets(list, 10);  /* (3,1,2) and (1,5,0) are repeated */
     int n = popAllCheckOrder(list, 3);
     assert(n == n_entries);
     checkEmpty(list);
@@ -368,6 +398,7 @@ TEST_ONCE(open_list_cost_1d)
     pddlOpenListPush(list, &c31, 2);
     pddlOpenListPush(list, &c30, 3);
     pddlOpenListPush(list, &c02, 4);
+    checkNumBuckets(list, 4);
     checkTopCost(list, 1, &c02, 4);
     checkTopCost(list, 1, &c02, 4);
     checkPopCost(list, 1, &c02, 4);
@@ -387,6 +418,7 @@ TEST_ONCE(open_list_cost_1d)
     pddlOpenListPush(list, &czero, 1);
     pddlOpenListPush(list, &czero, 2);
     pddlOpenListPush(list, &cop0, 12);
+    checkNumBuckets(list, 3);  /* (0,0), (0,1), (5,0) */
     checkPopCost(list, 1, &czero, 1);   /* (0,0) */
     checkPopCost(list, 1, &czero, 2);
     checkPopCost(list, 1, &cop0, 10);   /* (0,1) */
@@ -399,6 +431,7 @@ TEST_ONCE(open_list_cost_1d)
     pddlOpenListPush(list, &pddl_cost_dead_end, 1);
     pddlOpenListPush(list, &pddl_cost_max, 2);
     pddlOpenListPush(list, &cop5, 3);
+    checkNumBuckets(list, 3);
     checkPopCost(list, 1, &cop5, 3);
     if (pddlCostCmp(&pddl_cost_dead_end, &pddl_cost_max) < 0){
         checkPopCost(list, 1, &pddl_cost_dead_end, 1);
@@ -431,6 +464,7 @@ TEST_ONCE(open_list_cost_2d)
                           { .cost = 9, .zero_cost = 9 } };
     pddlOpenListPush(list, ka, 1);
     pddlOpenListPush(list, kb, 2);
+    checkNumBuckets(list, 2);
     checkPopCost(list, 2, kb, 2);
     checkPopCost(list, 2, ka, 1);
     checkEmpty(list);
@@ -454,6 +488,7 @@ TEST_ONCE(open_list_cost_2d)
     pddlOpenListPush(list, k4, 40);
     pddlOpenListPush(list, k2, 20);
     pddlOpenListPush(list, k3, 30);
+    checkNumBuckets(list, 3);
     checkPopCost(list, 2, k3, 30);
     checkPopCost(list, 2, k4, 40);
     checkPopCost(list, 2, k2, 20);
@@ -463,6 +498,7 @@ TEST_ONCE(open_list_cost_2d)
     pddlOpenListPush(list, k3, 100);
     pddlOpenListPush(list, k3, 101);
     pddlOpenListPush(list, k3, 102);
+    checkNumBuckets(list, 1);
     checkTopCost(list, 2, k3, 100);
     checkPopCost(list, 2, k3, 100);
     checkPopCost(list, 2, k3, 101);
@@ -527,6 +563,7 @@ TEST_ONCE(open_list_num_val_1d)
     pddlOpenListPush(list, &v2f, 3);  /* same bucket as v2i: FIFO after 2 */
     pddlOpenListPush(list, &v15, 4);
     pddlOpenListPush(list, &vneg, 5);
+    checkNumBuckets(list, 4);  /* int 2 and float 2.0 share a bucket */
     checkTopNumVal(list, 1, &vneg, 5);
     checkTopNumVal(list, 1, &vneg, 5);
     checkPopNumVal(list, 1, &vneg, 5);
@@ -540,6 +577,7 @@ TEST_ONCE(open_list_num_val_1d)
     pddlOpenListPush(list, &v15, 10);
     pddlOpenListPush(list, &v15, 11);
     pddlOpenListPush(list, &v15, 12);
+    checkNumBuckets(list, 1);
     checkPopNumVal(list, 1, &v15, 10);
     checkPopNumVal(list, 1, &v15, 11);
     checkPopNumVal(list, 1, &v15, 12);
@@ -555,6 +593,9 @@ TEST_ONCE(open_list_num_val_1d)
         }
         pddlOpenListPush(list, &v, (pddl_state_id_t)i);
     }
+    /* 17 and 53 are coprime, so the 25 integers are distinct, and so are
+     * the 25 floats which never coincide with an integer */
+    checkNumBuckets(list, 50);
     pddl_num_val_t prev, cur;
     pddl_state_id_t id;
     int count = 0;
@@ -590,6 +631,7 @@ TEST_ONCE(open_list_num_val_2d)
     pddlNumValSetInt(&kb[1], 100);
     pddlOpenListPush(list, ka, 1);
     pddlOpenListPush(list, kb, 2);
+    checkNumBuckets(list, 2);
     checkPopNumVal(list, 2, kb, 2);
     checkPopNumVal(list, 2, ka, 1);
     checkEmpty(list);
@@ -602,6 +644,7 @@ TEST_ONCE(open_list_num_val_2d)
     pddlNumValSetInt(&k2[1], 1);
     pddlOpenListPush(list, k2, 20);
     pddlOpenListPush(list, k1, 10);
+    checkNumBuckets(list, 2);
     checkTopNumVal(list, 2, k1, 10);
     checkPopNumVal(list, 2, k1, 10);
     checkPopNumVal(list, 2, k2, 20);
@@ -611,6 +654,7 @@ TEST_ONCE(open_list_num_val_2d)
     pddlOpenListPush(list, k1, 100);
     pddlOpenListPush(list, k1, 101);
     pddlOpenListPush(list, k1, 102);
+    checkNumBuckets(list, 1);
     checkPopNumVal(list, 2, k1, 100);
     checkPopNumVal(list, 2, k1, 101);
     checkPopNumVal(list, 2, k1, 102);
