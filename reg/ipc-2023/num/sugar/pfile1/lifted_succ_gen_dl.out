@@ -1,0 +1,148 @@
+Step 0 (available mill1) (available mill2) (current-process mill1 brand1) (current-process mill2 brand3) (at-location truck1 depot1) (at-location truck2 depot2) (at-location crane1 mill1) (at-location crane2 mill2) (ready-crane crane1) (ready-crane crane2)
+size: 38
+produce_sugar sugar-cane mill1 brand1 :: cost: 1
+    add: (busy mill1)
+    del: (available mill1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+produce_sugar sugar-cane mill2 brand3 :: cost: 1
+    add: (busy mill2)
+    del: (available mill2)
+    num: 3 2 4 2 2 1 0 0 0 0 0 1 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill1 brand1 brand2 :: cost: 1
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: 3 2 5 1 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: 3 2 5 1 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: 3 2 5 1 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill2 brand3 brand1 :: cost: 1
+    add: (current-process mill2 brand1)
+    del: (current-process mill2 brand3)
+    num: 3 2 5 2 1 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill2 brand3 brand2 :: cost: 1
+    add: (current-process mill2 brand2)
+    del: (current-process mill2 brand3)
+    num: 3 2 5 2 1 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill2 brand3 brand4 :: cost: 1
+    add: (current-process mill2 brand4)
+    del: (current-process mill2 brand3)
+    num: 3 2 5 2 1 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 depot2 :: cost: 1
+    add: (at-location truck1 depot2)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 depot3 :: cost: 1
+    add: (at-location truck1 depot3)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 mill1 :: cost: 1
+    add: (at-location truck1 mill1)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 mill2 :: cost: 1
+    add: (at-location truck1 mill2)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 depot1 :: cost: 1
+    add: (at-location truck2 depot1)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 depot3 :: cost: 1
+    add: (at-location truck2 depot3)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 mill1 :: cost: 1
+    add: (at-location truck2 mill1)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 mill2 :: cost: 1
+    add: (at-location truck2 mill2)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Step 1 (available mill2) (current-process mill1 brand1) (current-process mill2 brand3) (at-location truck1 depot1) (at-location truck2 depot2) (at-location crane1 mill1) (at-location crane2 mill2) (ready-crane crane1) (ready-crane crane2) (busy mill1)
+size: 37
+produce_sugar sugar-cane mill2 brand3 :: cost: 1
+    add: (busy mill2)
+    del: (available mill2)
+    num: 3 2 4 2 2 1 0 0 0 0 0 1 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+setting-machine mill1 :: cost: 1
+    add: (available mill1)
+    del: (busy mill1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill1 brand1 brand2 :: cost: 1
+    add: (current-process mill1 brand2)
+    del: (current-process mill1 brand1)
+    num: 3 2 5 1 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill1 brand1 brand3 :: cost: 1
+    add: (current-process mill1 brand3)
+    del: (current-process mill1 brand1)
+    num: 3 2 5 1 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill1 brand1 brand4 :: cost: 1
+    add: (current-process mill1 brand4)
+    del: (current-process mill1 brand1)
+    num: 3 2 5 1 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill2 brand3 brand1 :: cost: 1
+    add: (current-process mill2 brand1)
+    del: (current-process mill2 brand3)
+    num: 3 2 5 2 1 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill2 brand3 brand2 :: cost: 1
+    add: (current-process mill2 brand2)
+    del: (current-process mill2 brand3)
+    num: 3 2 5 2 1 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+change-product mill2 brand3 brand4 :: cost: 1
+    add: (current-process mill2 brand4)
+    del: (current-process mill2 brand3)
+    num: 3 2 5 2 1 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 depot2 :: cost: 1
+    add: (at-location truck1 depot2)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 depot3 :: cost: 1
+    add: (at-location truck1 depot3)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 mill1 :: cost: 1
+    add: (at-location truck1 mill1)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck1 depot1 mill2 :: cost: 1
+    add: (at-location truck1 mill2)
+    del: (at-location truck1 depot1)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 depot1 :: cost: 1
+    add: (at-location truck2 depot1)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 depot3 :: cost: 1
+    add: (at-location truck2 depot3)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 mill1 :: cost: 1
+    add: (at-location truck2 mill1)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+drive_truck truck2 depot2 mill2 :: cost: 1
+    add: (at-location truck2 mill2)
+    del: (at-location truck2 depot2)
+    num: 3 2 5 2 2 1 0 0 0 0 0 0 0 10 6 10 15 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Step 2
+size: 2
+Step 3
+size: 2
+Step 4
+size: 2
+Step 5
+size: 2
+Step 6
+size: 2
+Step 7
+size: 2
+Step 8
+size: 2
+Step 9
+size: 2

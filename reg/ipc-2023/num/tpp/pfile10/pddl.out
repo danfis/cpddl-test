@@ -1,6 +1,8 @@
 Domain: tpp-metric
 Problem: pfile24
 Require:
+  :equality
+  :negative-preconditions
   :numeric-fluents
   :strips
   :typing
@@ -82,7 +84,7 @@ Action:
       pre: (and (> (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
       eff: (and (assign (bought ?g) (request ?g)) (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))) (increase (total-cost) (* (- (request ?g) (bought ?g)) (price ?g ?m))))
   drive: ?t - truck ?from - place ?to - place
-      pre: (and (loc ?t ?from))
+      pre: (and (loc ?t ?from) (not (= ?from ?to)))
       eff: (and (increase (total-cost) (drive-cost ?from ?to)) (loc ?t ?to) (not (loc ?t ?from)))
 Init:
   (= (bought goods0) 0)
@@ -1715,6 +1717,7 @@ Goal:
 Metric:
   (total-cost)
 Pred prop:
+  (= object object): in_pre in_pre_neg
   (loc truck place): in_init in_pre in_goal in_eff
 Func prop:
   (bought goods): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(on-sale request)
@@ -1724,5 +1727,6 @@ Func prop:
   (request goods): in_init init_all_nonneg init_all_int in_pre in_goal on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
   (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(bought drive-cost on-sale price request)
 Global prop:
+  has_eq_pred
   has_num_cmp
   is_numeric

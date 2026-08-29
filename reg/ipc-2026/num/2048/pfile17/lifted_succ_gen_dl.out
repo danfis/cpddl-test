@@ -1,0 +1,26 @@
+Step 0 (free-to-play) (NOT-must-combine)
+size: 4
+play u left :: cost: 1
+    add: (shifting u) (must-combine) (shiftstatus left)
+    del: (free-to-play) (NOT-must-combine)
+    num: 0 64 128 8 8 0 256 32 256 32 16 16 64 64 64 16
+play d left :: cost: 1
+    add: (must-combine) (shiftstatus left) (shifting d)
+    del: (free-to-play) (NOT-must-combine)
+    num: 0 64 128 8 8 0 256 32 256 32 16 16 64 64 64 16
+play l top :: cost: 1
+    add: (must-combine) (shifting l) (shiftstatus top)
+    del: (free-to-play) (NOT-must-combine)
+    num: 0 64 128 8 8 0 256 32 256 32 16 16 64 64 64 16
+play r top :: cost: 1
+    add: (must-combine) (shiftstatus top) (shifting r)
+    del: (free-to-play) (NOT-must-combine)
+    num: 0 64 128 8 8 0 256 32 256 32 16 16 64 64 64 16
+Step 1 (shifting u) (must-combine) (shiftstatus left)
+size: 16
+shift-0111 p11 p21 p31 p41 left midleft u :: cost: 1
+    add: (shiftstatus midleft)
+    del: (shiftstatus left)
+    num: 8 64 128 8 256 0 256 32 64 32 16 16 0 64 64 16
+Step 2
+size: 0

@@ -1,0 +1,36 @@
+Step 0 (at s0 wa0) (at s1 wb0)
+size: 6
+move_forwards s0 wa0 wa1 :: cost: 1
+    add: (at s0 wa1)
+    del: (at s0 wa0)
+    num: 0 1000 0 0 0 0 0 0 1 1000 0 0 0 0 0 0
+move_forwards s1 wb0 wb1 :: cost: 1
+    add: (at s1 wb1)
+    del: (at s1 wb0)
+    num: 0 1000 0 0 0 0 0 0 0 1000 0 0 0 0 0 0
+store_supplies s1 wb0 :: cost: 1
+    add:
+    del:
+    num: 0 1000 0 0 0 0 0 0 0 1001 0 0 0 0 0 0
+retrieve_supplies s0 wa0 :: cost: 1
+    add:
+    del:
+    num: 1 999 0 0 0 0 0 0 1 1000 0 0 0 0 0 0
+retrieve_supplies s1 wb0 :: cost: 1
+    add:
+    del:
+    num: 0 1000 0 0 0 0 0 0 2 999 0 0 0 0 0 0
+Step 1 (at s1 wb0) (at s0 wa1)
+size: 7
+move_forwards s1 wb0 wb1 :: cost: 1
+    add: (at s1 wb1)
+    del: (at s1 wb0)
+    num: 0 1000 0 0 0 0 0 0 0 1000 0 0 0 0 0 0
+retrieve_supplies s1 wb0 :: cost: 1
+    add:
+    del:
+    num: 0 1000 0 0 0 0 0 0 1 999 0 0 0 0 0 0
+Step 2 (at s0 wa1) (at s1 wb1)
+size: 8
+Step 3
+size: 0

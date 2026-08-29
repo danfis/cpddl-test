@@ -30,6 +30,10 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
 
     pddl_lifted_app_action_t *aa;
     aa = pddlLiftedAppActionNew(&C.pddl, backend, &C.err);
+    if (aa == NULL){
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(0 && "pddlLiftedAppActionNew failed");
+    }
     assert(pddlLiftedAppActionSize(aa) == 0);
 
     int ret;
@@ -37,6 +41,12 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
 
     PDDL_ISET(cur_state);
     pddlISetUnion(&cur_state, &init);
+    int num_state_size = pddlStripsMakerNonStaticFluentSize(&smaker);
+    pddl_num_val_t *cur_num_state = NULL;
+    if (num_state_size > 0){
+        cur_num_state = PDDL_ZALLOC_ARR(pddl_num_val_t, num_state_size);
+        pddlStripsMakerInitNumState(&smaker, cur_num_state);
+    }
     for (int step = 0; step < 10; ++step){
         char prefix[32];
         sprintf(prefix, "Step %d", step);
@@ -60,24 +70,64 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             const pddl_action_t *action = C.pddl.action.action + aid;
             const int *args = pddlLiftedAppActionArgs(aa, i);
 
+            if (num_state_size > 0){
+                int sat = pddlStripsMakerIsNumCondSatisfied(&smaker,
+                                                            action->pre,
+                                                            cur_num_state,
+                                                            args, &C.err);
+                if (sat < 0){
+                    pddlErrPrint(&C.err, 1, stderr);
+                    assert(0 && "Error checking numeric precondition");
+                }
+                if (!sat)
+                    continue;
+            }
+
             ret = pddlStripsMakerActionEffInState(&smaker, action, args,
-                                                  &cur_state, NULL, &eff,
-                                                  &C.err);
+                                                  &cur_state, cur_num_state,
+                                                  &eff, &C.err);
+            if (ret < 0)
+                pddlErrPrint(&C.err, 1, stderr);
             assert(ret == 0);
-            assert(eff.cost_type == PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST);
-            int cost = eff.cost.int_action_cost;
 
             printf("%s", action->name);
             for (int j = 0; j < action->param.param_size; ++j){
                 printf(" %s", C.pddl.obj.obj[args[j]].name);
             }
-            printf(" :: cost: %d\n", cost);
+            printf(" :: cost:");
+            char num_val_buf[32];
+            switch (eff.cost_type){
+            case PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST:
+                printf(" %d", eff.cost.int_action_cost);
+                break;
+            case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
+                printf(" %s", pddlNumValFmt(&eff.cost.general_action_cost,
+                                            num_val_buf, 32));
+                break;
+            case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
+                printf(" metric:%s", pddlNumValFmt(&eff.cost.state_metric,
+                                            num_val_buf, 32));
+                break;
+            }
+            printf("\n");
             printState("    add:", &eff.add_eff, &smaker);
             printState("    del:", &eff.del_eff, &smaker);
+            if (num_state_size > 0){
+                printf("    num:");
+                for (int j = 0; j < num_state_size; ++j){
+                    char buf[32];
+                    printf(" %s", pddlNumValFmt(&eff.num_eff[j], buf, 32));
+                }
+                printf("\n");
+            }
 
             if (i == step % size){
                 pddlISetMinus2(&next_state, &cur_state, &eff.del_eff);
                 pddlISetUnion(&next_state, &eff.add_eff);
+                if (num_state_size > 0){
+                    memcpy(cur_num_state, eff.num_eff,
+                           sizeof(pddl_num_val_t) * num_state_size);
+                }
             }
         }
         pddlStripsMakerEffFree(&eff);
@@ -109,12 +159,6 @@ TEST_COND(lifted_succ_gen_sql, pddl, SQLITE)
 
 TEST(lifted_succ_gen_dl, pddl)
 {
-    if (pddlIsNumeric(&C.pddl)){
-        // TODO: Skip these tests for now. We will enable them when we have
-        // fully functioning successor generation for numeric tasks.
-        TEST_SKIP_CHILDREN;
-        return;
-    }
     testSuccGen(PDDL_LIFTED_APP_ACTION_DL);
 }
 
