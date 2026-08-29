@@ -162,12 +162,12 @@ TEST(lifted_search, pddl)
     int st = pddlCompileAwayDisjunctiveGoalsWithAuxActions(&C.pddl, &C.err);
     assert(st == 0);
 
-    if (!pddlIsUnitCost(&C.pddl) && pddlIntActionCostFuncId(&C.pddl) < 0){
-        // For now, lifted search supports only integer action costs.
-        TEST_SKIP_CHILDREN;
-        return;
+    pddl_compile_metric_into_action_costs_status_t st2;
+    st2 = pddlCompileMetricIntoActionCosts(&C.pddl, &C.err);
+    if (st2 == PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_ERR){
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(0 && "pddlCompileMetricIntoActionCosts failed");
     }
- 
 }
 
 TEST(lifted_search_heur, lifted_search)

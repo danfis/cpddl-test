@@ -2118,9 +2118,35 @@ name = "various/cond-eff-simplify/p01"
 
 [[tasks]]
 name = "various/num-metric-nonlinear/p01"
+disable = [
+    # Lifted search supports only integer action costs.
+    "lifted_blind_search_dl",
+
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
 
 [[tasks]]
 name = "various/num-metric-negdelta/p01"
+disable = [
+    # Lifted search supports only integer action costs.
+    "lifted_blind_search_dl",
+
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
 
 [[tasks]]
 name = "various/num-metric-negcoef/p01"
@@ -2136,6 +2162,19 @@ disable = ["test-set:needs_simple_total_cost"]
 
 [[tasks]]
 name = "various/num-cost-float/p01"
+disable = [
+    # Lifted search supports only integer action costs.
+    "lifted_blind_search_dl",
+
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
 
 [[tasks]]
 name = "various/num-cost-renamed/p01"
@@ -2452,18 +2491,39 @@ disable = [
 name = "ipc-2023/num/settlersnumeric/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/settlersnumeric/pfile2"
 disable = [
     "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/settlersnumeric/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
@@ -2494,11 +2554,36 @@ disable = [
 
 [[tasks]]
 name = "ipc-2023/num/tpp/pfile1"
+disable = [
+    # Lifted search supports only integer action costs.
+    "lifted_blind_search_dl",
+
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
 
 [[tasks]]
 name = "ipc-2023/num/tpp/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
+
+    # Lifted search supports only integer action costs.
+    "lifted_blind_search_dl",
+
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
@@ -2786,12 +2871,26 @@ disable = [
 name = "ipc-2026/num/settlers-snp/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2026/num/settlers-snp/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
