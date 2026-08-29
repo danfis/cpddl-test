@@ -1,0 +1,79 @@
+step 0: state 1 applicable 5
+    state: (loc truck0 depot0)
+    num: (on-sale goods0 market1) = 4 (on-sale goods1 market1) = 0 (on-sale goods0 market2) = 9 (on-sale goods1 market2) = 0 (on-sale goods0 market3) = 17 (on-sale goods1 market3) = 7 (on-sale goods0 market4) = 9 (on-sale goods1 market4) = 20 (on-sale goods0 market5) = 2 (on-sale goods1 market5) = 0 (bought goods0) = 0 (bought goods1) = 0 (total-cost) = 0
+drive truck0 depot0 market1 :: cost: 381.2 [successor]
+    add: (loc truck0 market1)
+    del: (loc truck0 depot0)
+    num: (total-cost) 0 -> 381.2
+drive truck0 depot0 market2 :: cost: 737.52
+    add: (loc truck0 market2)
+    del: (loc truck0 depot0)
+    num: (total-cost) 0 -> 737.52
+drive truck0 depot0 market3 :: cost: 452.95
+    add: (loc truck0 market3)
+    del: (loc truck0 depot0)
+    num: (total-cost) 0 -> 452.95
+step 1: state 1 applicable 6
+    state: (loc truck0 market1)
+    num: (on-sale goods0 market1) = 4 (on-sale goods1 market1) = 0 (on-sale goods0 market2) = 9 (on-sale goods1 market2) = 0 (on-sale goods0 market3) = 17 (on-sale goods1 market3) = 7 (on-sale goods0 market4) = 9 (on-sale goods1 market4) = 20 (on-sale goods0 market5) = 2 (on-sale goods1 market5) = 0 (bought goods0) = 0 (bought goods1) = 0 (total-cost) = 381.2
+buy-all truck0 goods0 market1 :: cost: 441.2
+    add:
+    del:
+    num: (on-sale goods0 market1) 4 -> 0 (bought goods0) 0 -> 4 (total-cost) 381.2 -> 441.2
+drive truck0 market1 depot0 :: cost: 762.4
+    add: (loc truck0 depot0)
+    del: (loc truck0 market1)
+    num: (total-cost) 381.2 -> 762.4
+drive truck0 market1 market2 :: cost: 1414.9
+    add: (loc truck0 market2)
+    del: (loc truck0 market1)
+    num: (total-cost) 381.2 -> 1414.9
+    successor: drive truck0 market1 market3
+step 2: state 1 applicable 7
+    state: (loc truck0 market3)
+    num: (on-sale goods0 market1) = 4 (on-sale goods1 market1) = 0 (on-sale goods0 market2) = 9 (on-sale goods1 market2) = 0 (on-sale goods0 market3) = 17 (on-sale goods1 market3) = 7 (on-sale goods0 market4) = 9 (on-sale goods1 market4) = 20 (on-sale goods0 market5) = 2 (on-sale goods1 market5) = 0 (bought goods0) = 0 (bought goods1) = 0 (total-cost) = 608.86
+buy-all truck0 goods0 market3 :: cost: 1203.86
+    add:
+    del:
+    num: (on-sale goods0 market3) 17 -> 0 (bought goods0) 0 -> 17 (total-cost) 608.86 -> 1203.86
+buy-all truck0 goods1 market3 :: cost: 685.86
+    add:
+    del:
+    num: (on-sale goods1 market3) 7 -> 0 (bought goods1) 0 -> 7 (total-cost) 608.86 -> 685.86
+drive truck0 market3 depot0 :: cost: 1061.81
+    add: (loc truck0 depot0)
+    del: (loc truck0 market3)
+    num: (total-cost) 608.86 -> 1061.81
+    successor: drive truck0 market3 market4
+step 3: state 1 applicable 7
+    state: (loc truck0 market4)
+    num: (on-sale goods0 market1) = 4 (on-sale goods1 market1) = 0 (on-sale goods0 market2) = 9 (on-sale goods1 market2) = 0 (on-sale goods0 market3) = 17 (on-sale goods1 market3) = 7 (on-sale goods0 market4) = 9 (on-sale goods1 market4) = 20 (on-sale goods0 market5) = 2 (on-sale goods1 market5) = 0 (bought goods0) = 0 (bought goods1) = 0 (total-cost) = 755.4
+buy-all truck0 goods0 market4 :: cost: 854.4
+    add:
+    del:
+    num: (on-sale goods0 market4) 9 -> 0 (bought goods0) 0 -> 9 (total-cost) 755.4 -> 854.4
+buy-all truck0 goods1 market4 :: cost: 995.4
+    add:
+    del:
+    num: (on-sale goods1 market4) 20 -> 0 (bought goods1) 0 -> 20 (total-cost) 755.4 -> 995.4
+drive truck0 market4 depot0 :: cost: 1271.84
+    add: (loc truck0 depot0)
+    del: (loc truck0 market4)
+    num: (total-cost) 755.4 -> 1271.84
+    successor: drive truck0 market4 market5
+step 4: state 1 applicable 6
+    state: (loc truck0 market5)
+    num: (on-sale goods0 market1) = 4 (on-sale goods1 market1) = 0 (on-sale goods0 market2) = 9 (on-sale goods1 market2) = 0 (on-sale goods0 market3) = 17 (on-sale goods1 market3) = 7 (on-sale goods0 market4) = 9 (on-sale goods1 market4) = 20 (on-sale goods0 market5) = 2 (on-sale goods1 market5) = 0 (bought goods0) = 0 (bought goods1) = 0 (total-cost) = 1126.11
+buy-all truck0 goods0 market5 :: cost: 1176.11
+    add:
+    del:
+    num: (on-sale goods0 market5) 2 -> 0 (bought goods0) 0 -> 2 (total-cost) 1126.11 -> 1176.11
+drive truck0 market5 depot0 :: cost: 1684.64 [successor]
+    add: (loc truck0 depot0)
+    del: (loc truck0 market5)
+    num: (total-cost) 1126.11 -> 1684.64
+drive truck0 market5 market1 :: cost: 1584.68
+    add: (loc truck0 market1)
+    del: (loc truck0 market5)
+    num: (total-cost) 1126.11 -> 1584.68
+ground atoms: 6 groundings: 31
