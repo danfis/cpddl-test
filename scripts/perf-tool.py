@@ -17,11 +17,22 @@ Tests are not re-run unless the PDDL files changed (only the affected tests
 are re-run), TOOL_ARGS / limits changed, bin/pddl-tool changed, or -f is
 given.
 
-Each run is pinned to its own core (taskset); with -p N the first N (physical)
-cores of the process' affinity mask are used. Two instances of this script
-running at the same time would therefore share the same cores -- run them
-sequentially, or restrict each one with `taskset -c ...` up front (the script
-only picks cores from its own affinity mask).
+Each run is pinned to its own core (taskset). With -p N the N least loaded
+(physical) cores of the process' affinity mask are used, or the cores given
+with --cores. Two instances of this script running at the same time may pick
+the same cores -- run them sequentially or give each one distinct --cores.
+
+Pinning alone does not stop other processes from using the same cores. To
+keep the cores for the tests only, use --isolate: it restricts everything
+else (init.scope, system.slice, user.slice, machine.slice) to the remaining
+cores with `sudo systemctl set-property --runtime ... AllowedCPUs=` and
+re-executes this script inside a dedicated top-level perf-tool.slice scope
+restricted to the selected cores; the restrictions are removed when the
+script finishes (they are runtime-only anyway, i.e. gone after a reboot).
+This requires systemd on a cgroup v2 host with the cpuset controller, sudo,
+and runuser. Kernel threads and interrupt handlers can still run on the
+selected cores; for that level of isolation boot with isolcpus=/nohz_full=
+and pass those cores with --cores (no --isolate needed then).
 """
 
 import argparse
@@ -52,13 +63,150 @@ PDDL_DIR = "~/dev/pddl-data"
 # passed to pddl-tool as is; pddl-tool appends .pddl and finds the domain file
 # itself.
 PDDL_FILES = [
-    "test-seq/depot/pfile1",
-    "test-seq/depot/pfile2",
-    "test-seq/driverlog/pfile1",
-    "test-seq/driverlog/pfile2",
-    "test-seq/blocksworld/probBLOCKS-10-0",
-    "ipc-1998/gripper/prob03",
-    "ipc-1998/gripper/prob05",
+    "bench/ipc-opt-noce/agricola18/p01",
+    "bench/ipc-opt-noce/agricola18/p06",
+    "bench/ipc-opt-noce/airport04/p01-airport1-p1",
+    "bench/ipc-opt-noce/airport04/p17-airport3-p5",
+    "bench/ipc-opt-noce/barman11/pfile01-001",
+    "bench/ipc-opt-noce/barman11/pfile02-007",
+    "bench/ipc-opt-noce/barman14/p435.1",
+    "bench/ipc-opt-noce/barman14/p536.2",
+    "bench/ipc-opt-noce/blocks00/probBLOCKS-4-1",
+    "bench/ipc-opt-noce/blocks00/probBLOCKS-6-1",
+    "bench/ipc-opt-noce/caldera18/p03",
+    "bench/ipc-opt-noce/caldera18/p20",
+    "bench/ipc-opt-noce/cavediving14/testing07_easy",
+    "bench/ipc-opt-noce/cavediving14/testing18_easy",
+    "bench/ipc-opt-noce/childsnack14/child-snack_pfile01",
+    "bench/ipc-opt-noce/childsnack14/child-snack_pfile04",
+    "bench/ipc-opt-noce/data-network18/p01",
+    "bench/ipc-opt-noce/data-network18/p06",
+    "bench/ipc-opt-noce/depot02/pfile1",
+    "bench/ipc-opt-noce/depot02/pfile8",
+    "bench/ipc-opt-noce/driverlog02/pfile1",
+    "bench/ipc-opt-noce/driverlog02/pfile7",
+    "bench/ipc-opt-noce/elevators08/p01",
+    "bench/ipc-opt-noce/elevators08/p11",
+    "bench/ipc-opt-noce/elevators11/p04",
+    "bench/ipc-opt-noce/elevators11/p14",
+    "bench/ipc-opt-noce/floortile11/opt-p01-001",
+    "bench/ipc-opt-noce/floortile11/opt-p04-007",
+    "bench/ipc-opt-noce/floortile14/p01-4-3-2",
+    "bench/ipc-opt-noce/floortile14/p02-4-4-2",
+    "bench/ipc-opt-noce/folding23/p01",
+    "bench/ipc-opt-noce/folding23/p15",
+    "bench/ipc-opt-noce/freecell00/pfile1",
+    "bench/ipc-opt-noce/freecell00/probfreecell-6-3",
+    "bench/ipc-opt-noce/ged14/d-1-4",
+    "bench/ipc-opt-noce/ged14/d-2-3",
+    "bench/ipc-opt-noce/gripper98/prob01",
+    "bench/ipc-opt-noce/gripper98/prob07",
+    "bench/ipc-opt-noce/hiking14/ptesting-1-2-3",
+    "bench/ipc-opt-noce/hiking14/ptesting-2-2-4",
+    "bench/ipc-opt-noce/labyrinth23/p01",
+    "bench/ipc-opt-noce/labyrinth23/p06",
+    "bench/ipc-opt-noce/logistics00/problogistics-4-0",
+    "bench/ipc-opt-noce/logistics00/problogistics-6-9",
+    "bench/ipc-opt-noce/logistics98/prob32",
+    "bench/ipc-opt-noce/logistics98/prob17",
+    "bench/ipc-opt-noce/maintenance14/maintenance.1.3.010.010.2-001",
+    "bench/ipc-opt-noce/maintenance14/maintenance.1.3.010.010.2-002",
+    "bench/ipc-opt-noce/miconic00/s1-0",
+    "bench/ipc-opt-noce/miconic00/s11-0",
+    "bench/ipc-opt-noce/movie98/prob01",
+    "bench/ipc-opt-noce/movie98/prob11",
+    "bench/ipc-opt-noce/mprime98/prob25",
+    "bench/ipc-opt-noce/mprime98/prob03",
+    "bench/ipc-opt-noce/mystery98/prob25",
+    "bench/ipc-opt-noce/mystery98/prob29",
+    "bench/ipc-opt-noce/nomystery11/p11",
+    "bench/ipc-opt-noce/nomystery11/p04",
+    "bench/ipc-opt-noce/openstacks06/p01",
+    "bench/ipc-opt-noce/openstacks06/p12",
+    "bench/ipc-opt-noce/openstacks08/p01",
+    "bench/ipc-opt-noce/openstacks08/p11",
+    "bench/ipc-opt-noce/openstacks11/p01",
+    "bench/ipc-opt-noce/openstacks11/p07",
+    "bench/ipc-opt-noce/openstacks14/p20_1",
+    "bench/ipc-opt-noce/openstacks14/p25_3",
+    "bench/ipc-opt-noce/organic-synthesis18/p04",
+    "bench/ipc-opt-noce/organic-synthesis18/p08",
+    "bench/ipc-opt-noce/parcprinter08/p01",
+    "bench/ipc-opt-noce/parcprinter08/p14",
+    "bench/ipc-opt-noce/parcprinter11/p02",
+    "bench/ipc-opt-noce/parcprinter11/p08",
+    "bench/ipc-opt-noce/parking11/pfile03-012",
+    "bench/ipc-opt-noce/parking11/pfile05-017",
+    "bench/ipc-opt-noce/parking14/p_12_7-01",
+    "bench/ipc-opt-noce/parking14/p_14_8-03",
+    "bench/ipc-opt-noce/pathways06/p01",
+    "bench/ipc-opt-noce/pathways06/p10",
+    "bench/ipc-opt-noce/pegsol08/p01",
+    "bench/ipc-opt-noce/pegsol08/p11",
+    "bench/ipc-opt-noce/pegsol11/p01",
+    "bench/ipc-opt-noce/pegsol11/p11",
+    "bench/ipc-opt-noce/petri-net-alignment18/p01",
+    "bench/ipc-opt-noce/petri-net-alignment18/p07",
+    "bench/ipc-opt-noce/pipesworld-notankage04/p01-net1-b6-g2",
+    "bench/ipc-opt-noce/pipesworld-notankage04/p16-net2-b14-g6",
+    "bench/ipc-opt-noce/pipesworld-tankage04/p11-net2-b10-g2-t30",
+    "bench/ipc-opt-noce/pipesworld-tankage04/p08-net1-b12-g7-t80",
+    "bench/ipc-opt-noce/psr-small04/p01-s2-n1-l2-f50",
+    "bench/ipc-opt-noce/psr-small04/p42-s82-n3-l4-f50",
+    "bench/ipc-opt-noce/quantum-layout23/p07",
+    "bench/ipc-opt-noce/quantum-layout23/p11",
+    "bench/ipc-opt-noce/recharging-robots23/p01",
+    "bench/ipc-opt-noce/recharging-robots23/p04",
+    "bench/ipc-opt-noce/ricochet-robots23/p11",
+    "bench/ipc-opt-noce/ricochet-robots23/p08",
+    "bench/ipc-opt-noce/rovers06/p02",
+    "bench/ipc-opt-noce/rovers06/p14",
+    "bench/ipc-opt-noce/satellite02/p01-pfile1",
+    "bench/ipc-opt-noce/satellite02/p13-pfile13",
+    "bench/ipc-opt-noce/scanalyzer08/p22",
+    "bench/ipc-opt-noce/scanalyzer08/p05",
+    "bench/ipc-opt-noce/scanalyzer11/p01",
+    "bench/ipc-opt-noce/scanalyzer11/p12",
+    "bench/ipc-opt-noce/slitherlink23/p01",
+    "bench/ipc-opt-noce/slitherlink23/p07",
+    "bench/ipc-opt-noce/snake18/p04",
+    "bench/ipc-opt-noce/snake18/p10",
+    "bench/ipc-opt-noce/sokoban08/p03",
+    "bench/ipc-opt-noce/sokoban08/p08",
+    "bench/ipc-opt-noce/sokoban11/p01",
+    "bench/ipc-opt-noce/sokoban11/p13",
+    "bench/ipc-opt-noce/spider18/p01",
+    "bench/ipc-opt-noce/spider18/p15",
+    "bench/ipc-opt-noce/storage06/p01",
+    "bench/ipc-opt-noce/storage06/p11",
+    "bench/ipc-opt-noce/termes18/p01",
+    "bench/ipc-opt-noce/termes18/p03",
+    "bench/ipc-opt-noce/tetris14/p02-4",
+    "bench/ipc-opt-noce/tetris14/p04-6",
+    "bench/ipc-opt-noce/tidybot11/p01",
+    "bench/ipc-opt-noce/tidybot11/p07",
+    "bench/ipc-opt-noce/tidybot14/p11",
+    "bench/ipc-opt-noce/tidybot14/p08",
+    "bench/ipc-opt-noce/tpp06/p01",
+    "bench/ipc-opt-noce/tpp06/p09",
+    "bench/ipc-opt-noce/transport08/p01",
+    "bench/ipc-opt-noce/transport08/p13",
+    "bench/ipc-opt-noce/transport11/p03",
+    "bench/ipc-opt-noce/transport11/p13",
+    "bench/ipc-opt-noce/transport14/p01",
+    "bench/ipc-opt-noce/transport14/p06",
+    "bench/ipc-opt-noce/trucks06/p01",
+    "bench/ipc-opt-noce/trucks06/p13",
+    "bench/ipc-opt-noce/visitall11/problem02-half",
+    "bench/ipc-opt-noce/visitall11/problem05-half",
+    "bench/ipc-opt-noce/visitall14/p-05-5",
+    "bench/ipc-opt-noce/visitall14/p-05-8",
+    "bench/ipc-opt-noce/woodworking08/p21",
+    "bench/ipc-opt-noce/woodworking08/p24",
+    "bench/ipc-opt-noce/woodworking11/p02",
+    "bench/ipc-opt-noce/woodworking11/p06",
+    "bench/ipc-opt-noce/zenotravel02/pfile1",
+    "bench/ipc-opt-noce/zenotravel02/pfile7",
 ]
 
 # Name of the plan file the tool writes; a test counts as solved if any file
@@ -68,10 +216,10 @@ PLAN_FILE = "plan.out"
 # Arguments passed to bin/pddl-tool (after --max-mem and --log-out log.out).
 # Placeholders: {plan} -> PLAN_FILE, {problem} -> absolute problem path
 # (without .pddl). {problem} is appended if missing.
-TOOL_ARGS = ["gplan", "astar", "lmc", "{plan}", "{problem}"]
+TOOL_ARGS = ["gplan", "astar", "blind", "{plan}", "{problem}"]
 
 # Wall-clock limit per run in seconds (enforced by this script; 0 disables it).
-MAX_TIME = 60
+MAX_TIME = 10
 
 # Memory limit per run in MB (passed as --max-mem; 0 disables it).
 MAX_MEM = 4096
@@ -141,7 +289,15 @@ def parse_args():
                         "(may be repeated; default: all)")
     p.add_argument("--no-pin", action="store_true",
                    help="Do not pin runs to cores")
+    p.add_argument("--cores", metavar="LIST", type=parse_cores,
+                   help="Cores to pin the runs to, e.g. 2,4-5 (default: the "
+                        "least loaded physical cores)")
+    p.add_argument("--isolate", action="store_true",
+                   help="Move all other processes off the selected cores for "
+                        "the duration of the run (uses sudo + systemd)")
     args = p.parse_args()
+    if args.no_pin and (args.cores or args.isolate):
+        p.error("--no-pin cannot be combined with --cores or --isolate")
     if args.parallel < 1:
         p.error("--parallel must be >= 1")
     if args.runs < 1:
@@ -260,8 +416,88 @@ def physical_cores(cpus):
     return out
 
 
-def select_cores(n):
+def parse_cores(s):
+    """Parse a cpu list such as "0,2-3" into a sorted list of ints."""
+    cores = set()
+    for part in s.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        try:
+            if "-" in part:
+                lo, hi = part.split("-", 1)
+                lo, hi = int(lo), int(hi)
+                if lo > hi:
+                    raise ValueError
+                cores.update(range(lo, hi + 1))
+            else:
+                cores.add(int(part))
+        except ValueError:
+            raise argparse.ArgumentTypeError(f"invalid cpu list: {s!r}")
+    if not cores or min(cores) < 0:
+        raise argparse.ArgumentTypeError(f"invalid cpu list: {s!r}")
+    ncpu = os.cpu_count() or 0
+    if ncpu and max(cores) >= ncpu:
+        raise argparse.ArgumentTypeError(
+            f"cpu list {s!r} exceeds the {ncpu} cpus of this machine")
+    return sorted(cores)
+
+
+def format_cores(cores):
+    """Format a list of cpu ids as a compact cpu list, e.g. "0,2-3"."""
+    out = []
+    cores = sorted(cores)
+    i = 0
+    while i < len(cores):
+        j = i
+        while j + 1 < len(cores) and cores[j + 1] == cores[j] + 1:
+            j += 1
+        out.append(str(cores[i]) if i == j else f"{cores[i]}-{cores[j]}")
+        i = j + 1
+    return ",".join(out)
+
+
+def read_proc_stat():
+    """Return {cpu_id: (busy_ticks, total_ticks)} from /proc/stat."""
+    res = {}
+    try:
+        with open("/proc/stat") as fh:
+            for line in fh:
+                if not line.startswith("cpu") or line.startswith("cpu "):
+                    continue
+                f = line.split()
+                cpu = int(f[0][3:])
+                vals = [int(x) for x in f[1:]]
+                idle = vals[3] + (vals[4] if len(vals) > 4 else 0)
+                res[cpu] = (sum(vals) - idle, sum(vals))
+    except (OSError, ValueError, IndexError):
+        pass
+    return res
+
+
+def cpu_busy(cpus, interval=0.5):
+    """Return {cpu: busy fraction} measured over INTERVAL seconds."""
+    a = read_proc_stat()
+    if not a:
+        return {}
+    time.sleep(interval)
+    b = read_proc_stat()
+    res = {}
+    for cpu in cpus:
+        if cpu in a and cpu in b:
+            db = b[cpu][0] - a[cpu][0]
+            dt = b[cpu][1] - a[cpu][1]
+            res[cpu] = db / dt if dt > 0 else 0.0
+    return res
+
+
+def select_cores(n, explicit=None):
     """Return a list of N cpu ids to pin runs to, or None if not possible."""
+    if explicit is not None:
+        if len(explicit) < n:
+            die(f"--cores lists {len(explicit)} cores but {n} are needed for -p {n}")
+        return explicit[:n]
+
     try:
         cpus = sorted(os.sched_getaffinity(0))
     except (AttributeError, OSError):
@@ -274,7 +510,24 @@ def select_cores(n):
     if len(cores) < n:
         warn(f"only {len(cores)} cpus available for {n} parallel runs")
         return None
-    return cores[:n]
+
+    # prefer idle cores
+    busy = cpu_busy(cores)
+    cores.sort(key=lambda c: (round(busy.get(c, 0.0), 2), c))
+    chosen = cores[:n]
+    loaded = [c for c in chosen if busy.get(c, 0.0) > 0.05]
+    if loaded:
+        warn("selected cores are not idle: "
+             + ", ".join(f"cpu{c} {busy[c] * 100:.0f}%" for c in loaded)
+             + " -- consider --isolate or --cores")
+    return chosen
+
+
+def current_affinity():
+    try:
+        return sorted(os.sched_getaffinity(0))
+    except (AttributeError, OSError):
+        return None
 
 
 ###############################################################################
@@ -282,25 +535,20 @@ def select_cores(n):
 ###############################################################################
 
 class Runner:
-    def __init__(self, parallel, pin):
+    def __init__(self, parallel, cores):
+        """CORES is the list of cpu ids to pin the runs to (one per parallel
+        worker), or None to run unpinned."""
         self.parallel = parallel
         self.cores = queue.Queue()
-        self.pin = False
+        self.pin = cores is not None
         self.stop = threading.Event()
         self.active = set()
         self.active_lock = threading.Lock()
 
-        if pin:
-            cores = select_cores(parallel)
-            if cores is None:
-                warn("cannot determine cpu affinity, runs are not pinned")
-            elif shutil.which("taskset") is None:
-                warn("taskset not found, runs are not pinned")
-            else:
-                self.pin = True
-                for c in cores:
-                    self.cores.put(c)
-        if not self.pin:
+        if self.pin:
+            for c in cores[:parallel]:
+                self.cores.put(c)
+        else:
             for i in range(parallel):
                 self.cores.put(None)
 
@@ -591,7 +839,7 @@ def select_tests_to_run(name, tests, tool_sha, fingerprint, runs, force):
     return to_run, "PDDL files changed or results missing", old
 
 
-def run_configuration(args, tests):
+def run_configuration(args, tests, cores):
     name = args.name
     cdir = config_dir(name)
     if not os.path.isfile(TOOL_BIN):
@@ -643,7 +891,8 @@ def run_configuration(args, tests):
     log(f"  tool: {TOOL_BIN} ({git_describe()})")
     log(f"  args: {shlex.join(build_cmd(to_run[0])[1:])}")
     log(f"  runs: {args.runs}, parallel: {args.parallel}, "
-        f"max-time: {MAX_TIME}s, max-mem: {MAX_MEM}MB")
+        f"max-time: {MAX_TIME}s, max-mem: {MAX_MEM}MB, "
+        f"cores: {format_cores(cores) if cores else 'not pinned'}")
 
     # Remove stale results of the tests that are re-run so that an
     # interrupted run never leaves a mix of old and new runs behind.
@@ -653,9 +902,7 @@ def run_configuration(args, tests):
             shutil.rmtree(tdir)
         os.makedirs(tdir)
 
-    runner = Runner(args.parallel, not args.no_pin)
-    if not runner.pin and not args.no_pin:
-        warn("runs are not pinned to cores")
+    runner = Runner(args.parallel, cores)
 
     jobs = [(t, k) for t in to_run for k in range(1, args.runs + 1)]
     total = len(jobs)
@@ -849,6 +1096,116 @@ def print_summary(names):
 
 ###############################################################################
 
+###############################################################################
+# Core isolation (--isolate)
+###############################################################################
+
+ISOLATED_ENV = "PERF_TOOL_ISOLATED"
+ISOLATE_UNITS = ["init.scope", "system.slice", "user.slice", "machine.slice"]
+ISOLATE_SLICE = "perf-tool.slice"
+
+
+def sudo_run(cmd, check=True):
+    """Run CMD via sudo; return the exit code (die on failure if CHECK)."""
+    full = ["sudo"] + cmd
+    try:
+        ret = subprocess.run(full).returncode
+    except OSError as exc:
+        die(f"cannot run {shlex.join(full)}: {exc}")
+    if check and ret != 0:
+        die(f"command failed (exit code {ret}): {shlex.join(full)}")
+    return ret
+
+
+def isolate_check_prerequisites():
+    for tool in ("sudo", "systemctl", "systemd-run", "runuser"):
+        if shutil.which(tool) is None:
+            die(f"--isolate requires {tool}, which was not found")
+    controllers = ""
+    try:
+        with open("/sys/fs/cgroup/cgroup.controllers") as fh:
+            controllers = fh.read().split()
+    except OSError:
+        die("--isolate requires the cgroup v2 unified hierarchy mounted "
+            "at /sys/fs/cgroup")
+    if "cpuset" not in controllers:
+        die("--isolate requires the cpuset cgroup controller")
+
+
+def run_isolated(args, cores):
+    """Restrict all other processes to the cores not in CORES, re-execute
+    this script in a scope restricted to CORES, then lift the restrictions.
+    Returns the exit code of the re-executed script."""
+    isolate_check_prerequisites()
+    all_cpus = list(range(os.cpu_count()))
+    others = [c for c in all_cpus if c not in cores]
+    if not others:
+        die("--isolate needs at least one core left for the rest of the system")
+
+    log(f"isolating cores {format_cores(cores)}: restricting "
+        f"{', '.join(ISOLATE_UNITS)} to cores {format_cores(others)} (sudo)")
+    child_args = [a for a in sys.argv[1:] if a != "--isolate"]
+    child_args += ["--cores", format_cores(cores)]
+    env = {k: v for k, v in os.environ.items()
+           if k in ("HOME", "PATH", "USER", "LOGNAME", "LANG", "LC_ALL", "TERM",
+                    "PYTHONPATH")}
+    env[ISOLATED_ENV] = "1"
+    user = os.environ.get("USER") or str(os.getuid())
+    cmd = ["systemd-run", "--quiet", "--scope", f"--slice={ISOLATE_SLICE}",
+           f"--property=AllowedCPUs={format_cores(cores)}",
+           "--", "runuser", "-u", user, "--",
+           "env"] + [f"{k}={v}" for k, v in env.items()] + \
+          [sys.executable, os.path.abspath(__file__)] + child_args
+
+    restricted = []
+    ret = 1
+    try:
+        for unit in ISOLATE_UNITS:
+            # a missing unit (e.g. machine.slice) only yields a drop-in that
+            # takes effect if the unit ever starts, so failures are fatal
+            sudo_run(["systemctl", "set-property", "--runtime", unit,
+                      f"AllowedCPUs={format_cores(others)}"])
+            restricted.append(unit)
+        proc = subprocess.Popen(["sudo"] + cmd)
+        while True:
+            try:
+                ret = proc.wait()
+                break
+            except KeyboardInterrupt:
+                # the child got the SIGINT as well and is shutting down; sudo
+                # runs as root so we cannot kill it -- just keep waiting
+                continue
+    finally:
+        if restricted:
+            log("removing the core restrictions (sudo)")
+            for unit in restricted:
+                sudo_run(["systemctl", "set-property", "--runtime", unit,
+                          "AllowedCPUs="], check=False)
+    return ret
+
+
+def verify_isolation(cores):
+    """Inside the isolated scope: check that this process is restricted to
+    CORES and that the other units are kept off them."""
+    aff = current_affinity()
+    if aff is None or set(aff) != set(cores):
+        warn(f"expected affinity {format_cores(cores)}, but got "
+             f"{format_cores(aff) if aff else '?'}")
+    for unit in ISOLATE_UNITS:
+        path = os.path.join("/sys/fs/cgroup", unit, "cpuset.cpus.effective")
+        try:
+            with open(path) as fh:
+                eff = parse_cores(fh.read().strip() or "")
+        except (OSError, argparse.ArgumentTypeError):
+            continue
+        overlap = sorted(set(eff) & set(cores))
+        if overlap:
+            warn(f"{unit} still allowed on cores {format_cores(overlap)}")
+    log(f"isolated: running on cores {format_cores(cores)}")
+
+
+###############################################################################
+
 def main():
     args = parse_args()
     ok = True
@@ -856,7 +1213,23 @@ def main():
         tests = resolve_tests()
         if not tests:
             die("PDDL_FILES is empty")
-        ok = run_configuration(args, tests)
+
+        cores = None
+        if not args.no_pin:
+            if shutil.which("taskset") is None:
+                warn("taskset not found, runs are not pinned")
+            else:
+                cores = select_cores(args.parallel, args.cores)
+                if cores is None:
+                    warn("cannot determine cpu affinity, runs are not pinned")
+        if args.isolate:
+            if cores is None:
+                die("--isolate needs pinning, which is not available")
+            if os.environ.get(ISOLATED_ENV) != "1":
+                sys.exit(run_isolated(args, cores))
+            verify_isolation(cores)
+
+        ok = run_configuration(args, tests, cores)
 
     if args.compare:
         names = [n for n in args.compare if n != args.name]
