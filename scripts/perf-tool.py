@@ -1,38 +1,31 @@
 #!/usr/bin/env python3
 """Performance comparison runner for bin/pddl-tool.
 
-Runs bin/pddl-tool on a fixed list of PDDL problems (see the configuration
-block below), records runtime, peak memory and the "solved" flag of every
-run, caches the results under tests/<RESULTS_DIR>/<NAME>/ and prints a
-summary comparing all configurations found there.
+Usage:
+    tests/scripts/perf-tool.py [-f] [-s] NAME
+
+All settings (PDDL problems, pddl-tool arguments, limits, number of runs,
+parallelism, core pinning, ...) are read from tests/config-perf-tool.toml.
+If that file does not exist, the script generates it with default values
+(fully commented) and exits so that it can be inspected and edited first;
+the same happens when the script is run without NAME. The only command line
+options are -f/--force (re-run all tests even if results exist) and
+-s/--summary-only (print the summary of the existing results, run nothing).
+
+NAME is the name of the configuration being measured: the results are stored
+in tests/<results-dir>/NAME/ and the summary printed at the end compares
+NAME with all other configurations found in tests/<results-dir>/.
 
 Typical use:
-    1. Edit PDDL_FILES / TOOL_ARGS / MAX_TIME / MAX_MEM below.
-    2. python3 tests/scripts/perf-tool.py base      # baseline
-    3. Modify the source, rebuild bin/pddl-tool.
-    4. python3 tests/scripts/perf-tool.py v1        # compares v1 with base
-    5. ... v2, v3, ...
+    1. tests/scripts/perf-tool.py                  # generates the config file
+    2. edit tests/config-perf-tool.toml
+    3. tests/scripts/perf-tool.py base             # baseline
+    4. modify the source, rebuild bin/pddl-tool
+    5. tests/scripts/perf-tool.py v1               # runs v1, compares to base
+    6. ... v2, v3, ...
 
-Tests are not re-run unless the PDDL files changed (only the affected tests
-are re-run), TOOL_ARGS / limits changed, bin/pddl-tool changed, or -f is
-given.
-
-Each run is pinned to its own core (taskset). With -p N the N least loaded
-(physical) cores of the process' affinity mask are used, or the cores given
-with --cores. Two instances of this script running at the same time may pick
-the same cores -- run them sequentially or give each one distinct --cores.
-
-Pinning alone does not stop other processes from using the same cores. To
-keep the cores for the tests only, use --isolate: it restricts everything
-else (init.scope, system.slice, user.slice, machine.slice) to the remaining
-cores with `sudo systemctl set-property --runtime ... AllowedCPUs=` and
-re-executes this script inside a dedicated top-level perf-tool.slice scope
-restricted to the selected cores; the restrictions are removed when the
-script finishes (they are runtime-only anyway, i.e. gone after a reboot).
-This requires systemd on a cgroup v2 host with the cpuset controller, sudo,
-and runuser. Kernel threads and interrupt handlers can still run on the
-selected cores; for that level of isolation boot with isolcpus=/nohz_full=
-and pass those cores with --cores (no --isolate needed then).
+See the comments in the generated configuration file for the description of
+all options.
 """
 
 import argparse
@@ -46,202 +39,31 @@ import shlex
 import shutil
 import signal
 import statistics
+import string
 import subprocess
 import sys
 import threading
 import time
+import tomllib
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
-###############################################################################
-# Configuration -- edit this block
-###############################################################################
-
-# Base directory of the PDDL files listed in PDDL_FILES.
-PDDL_DIR = "~/dev/pddl-data"
-
-# Problems to run, relative to PDDL_DIR, without the .pddl suffix. The path is
-# passed to pddl-tool as is; pddl-tool appends .pddl and finds the domain file
-# itself.
-PDDL_FILES = [
-    "bench/ipc-opt-noce/agricola18/p01",
-    "bench/ipc-opt-noce/agricola18/p06",
-    "bench/ipc-opt-noce/airport04/p01-airport1-p1",
-    "bench/ipc-opt-noce/airport04/p17-airport3-p5",
-    "bench/ipc-opt-noce/barman11/pfile01-001",
-    "bench/ipc-opt-noce/barman11/pfile02-007",
-    "bench/ipc-opt-noce/barman14/p435.1",
-    "bench/ipc-opt-noce/barman14/p536.2",
-    "bench/ipc-opt-noce/blocks00/probBLOCKS-4-1",
-    "bench/ipc-opt-noce/blocks00/probBLOCKS-6-1",
-    "bench/ipc-opt-noce/caldera18/p03",
-    "bench/ipc-opt-noce/caldera18/p20",
-    "bench/ipc-opt-noce/cavediving14/testing07_easy",
-    "bench/ipc-opt-noce/cavediving14/testing18_easy",
-    "bench/ipc-opt-noce/childsnack14/child-snack_pfile01",
-    "bench/ipc-opt-noce/childsnack14/child-snack_pfile04",
-    "bench/ipc-opt-noce/data-network18/p01",
-    "bench/ipc-opt-noce/data-network18/p06",
-    "bench/ipc-opt-noce/depot02/pfile1",
-    "bench/ipc-opt-noce/depot02/pfile8",
-    "bench/ipc-opt-noce/driverlog02/pfile1",
-    "bench/ipc-opt-noce/driverlog02/pfile7",
-    "bench/ipc-opt-noce/elevators08/p01",
-    "bench/ipc-opt-noce/elevators08/p11",
-    "bench/ipc-opt-noce/elevators11/p04",
-    "bench/ipc-opt-noce/elevators11/p14",
-    "bench/ipc-opt-noce/floortile11/opt-p01-001",
-    "bench/ipc-opt-noce/floortile11/opt-p04-007",
-    "bench/ipc-opt-noce/floortile14/p01-4-3-2",
-    "bench/ipc-opt-noce/floortile14/p02-4-4-2",
-    "bench/ipc-opt-noce/folding23/p01",
-    "bench/ipc-opt-noce/folding23/p15",
-    "bench/ipc-opt-noce/freecell00/pfile1",
-    "bench/ipc-opt-noce/freecell00/probfreecell-6-3",
-    "bench/ipc-opt-noce/ged14/d-1-4",
-    "bench/ipc-opt-noce/ged14/d-2-3",
-    "bench/ipc-opt-noce/gripper98/prob01",
-    "bench/ipc-opt-noce/gripper98/prob07",
-    "bench/ipc-opt-noce/hiking14/ptesting-1-2-3",
-    "bench/ipc-opt-noce/hiking14/ptesting-2-2-4",
-    "bench/ipc-opt-noce/labyrinth23/p01",
-    "bench/ipc-opt-noce/labyrinth23/p06",
-    "bench/ipc-opt-noce/logistics00/problogistics-4-0",
-    "bench/ipc-opt-noce/logistics00/problogistics-6-9",
-    "bench/ipc-opt-noce/logistics98/prob32",
-    "bench/ipc-opt-noce/logistics98/prob17",
-    "bench/ipc-opt-noce/maintenance14/maintenance.1.3.010.010.2-001",
-    "bench/ipc-opt-noce/maintenance14/maintenance.1.3.010.010.2-002",
-    "bench/ipc-opt-noce/miconic00/s1-0",
-    "bench/ipc-opt-noce/miconic00/s11-0",
-    "bench/ipc-opt-noce/movie98/prob01",
-    "bench/ipc-opt-noce/movie98/prob11",
-    "bench/ipc-opt-noce/mprime98/prob25",
-    "bench/ipc-opt-noce/mprime98/prob03",
-    "bench/ipc-opt-noce/mystery98/prob25",
-    "bench/ipc-opt-noce/mystery98/prob29",
-    "bench/ipc-opt-noce/nomystery11/p11",
-    "bench/ipc-opt-noce/nomystery11/p04",
-    "bench/ipc-opt-noce/openstacks06/p01",
-    "bench/ipc-opt-noce/openstacks06/p12",
-    "bench/ipc-opt-noce/openstacks08/p01",
-    "bench/ipc-opt-noce/openstacks08/p11",
-    "bench/ipc-opt-noce/openstacks11/p01",
-    "bench/ipc-opt-noce/openstacks11/p07",
-    "bench/ipc-opt-noce/openstacks14/p20_1",
-    "bench/ipc-opt-noce/openstacks14/p25_3",
-    "bench/ipc-opt-noce/organic-synthesis18/p04",
-    "bench/ipc-opt-noce/organic-synthesis18/p08",
-    "bench/ipc-opt-noce/parcprinter08/p01",
-    "bench/ipc-opt-noce/parcprinter08/p14",
-    "bench/ipc-opt-noce/parcprinter11/p02",
-    "bench/ipc-opt-noce/parcprinter11/p08",
-    "bench/ipc-opt-noce/parking11/pfile03-012",
-    "bench/ipc-opt-noce/parking11/pfile05-017",
-    "bench/ipc-opt-noce/parking14/p_12_7-01",
-    "bench/ipc-opt-noce/parking14/p_14_8-03",
-    "bench/ipc-opt-noce/pathways06/p01",
-    "bench/ipc-opt-noce/pathways06/p10",
-    "bench/ipc-opt-noce/pegsol08/p01",
-    "bench/ipc-opt-noce/pegsol08/p11",
-    "bench/ipc-opt-noce/pegsol11/p01",
-    "bench/ipc-opt-noce/pegsol11/p11",
-    "bench/ipc-opt-noce/petri-net-alignment18/p01",
-    "bench/ipc-opt-noce/petri-net-alignment18/p07",
-    "bench/ipc-opt-noce/pipesworld-notankage04/p01-net1-b6-g2",
-    "bench/ipc-opt-noce/pipesworld-notankage04/p16-net2-b14-g6",
-    "bench/ipc-opt-noce/pipesworld-tankage04/p11-net2-b10-g2-t30",
-    "bench/ipc-opt-noce/pipesworld-tankage04/p08-net1-b12-g7-t80",
-    "bench/ipc-opt-noce/psr-small04/p01-s2-n1-l2-f50",
-    "bench/ipc-opt-noce/psr-small04/p42-s82-n3-l4-f50",
-    "bench/ipc-opt-noce/quantum-layout23/p07",
-    "bench/ipc-opt-noce/quantum-layout23/p11",
-    "bench/ipc-opt-noce/recharging-robots23/p01",
-    "bench/ipc-opt-noce/recharging-robots23/p04",
-    "bench/ipc-opt-noce/ricochet-robots23/p11",
-    "bench/ipc-opt-noce/ricochet-robots23/p08",
-    "bench/ipc-opt-noce/rovers06/p02",
-    "bench/ipc-opt-noce/rovers06/p14",
-    "bench/ipc-opt-noce/satellite02/p01-pfile1",
-    "bench/ipc-opt-noce/satellite02/p13-pfile13",
-    "bench/ipc-opt-noce/scanalyzer08/p22",
-    "bench/ipc-opt-noce/scanalyzer08/p05",
-    "bench/ipc-opt-noce/scanalyzer11/p01",
-    "bench/ipc-opt-noce/scanalyzer11/p12",
-    "bench/ipc-opt-noce/slitherlink23/p01",
-    "bench/ipc-opt-noce/slitherlink23/p07",
-    "bench/ipc-opt-noce/snake18/p04",
-    "bench/ipc-opt-noce/snake18/p10",
-    "bench/ipc-opt-noce/sokoban08/p03",
-    "bench/ipc-opt-noce/sokoban08/p08",
-    "bench/ipc-opt-noce/sokoban11/p01",
-    "bench/ipc-opt-noce/sokoban11/p13",
-    "bench/ipc-opt-noce/spider18/p01",
-    "bench/ipc-opt-noce/spider18/p15",
-    "bench/ipc-opt-noce/storage06/p01",
-    "bench/ipc-opt-noce/storage06/p11",
-    "bench/ipc-opt-noce/termes18/p01",
-    "bench/ipc-opt-noce/termes18/p03",
-    "bench/ipc-opt-noce/tetris14/p02-4",
-    "bench/ipc-opt-noce/tetris14/p04-6",
-    "bench/ipc-opt-noce/tidybot11/p01",
-    "bench/ipc-opt-noce/tidybot11/p07",
-    "bench/ipc-opt-noce/tidybot14/p11",
-    "bench/ipc-opt-noce/tidybot14/p08",
-    "bench/ipc-opt-noce/tpp06/p01",
-    "bench/ipc-opt-noce/tpp06/p09",
-    "bench/ipc-opt-noce/transport08/p01",
-    "bench/ipc-opt-noce/transport08/p13",
-    "bench/ipc-opt-noce/transport11/p03",
-    "bench/ipc-opt-noce/transport11/p13",
-    "bench/ipc-opt-noce/transport14/p01",
-    "bench/ipc-opt-noce/transport14/p06",
-    "bench/ipc-opt-noce/trucks06/p01",
-    "bench/ipc-opt-noce/trucks06/p13",
-    "bench/ipc-opt-noce/visitall11/problem02-half",
-    "bench/ipc-opt-noce/visitall11/problem05-half",
-    "bench/ipc-opt-noce/visitall14/p-05-5",
-    "bench/ipc-opt-noce/visitall14/p-05-8",
-    "bench/ipc-opt-noce/woodworking08/p21",
-    "bench/ipc-opt-noce/woodworking08/p24",
-    "bench/ipc-opt-noce/woodworking11/p02",
-    "bench/ipc-opt-noce/woodworking11/p06",
-    "bench/ipc-opt-noce/zenotravel02/pfile1",
-    "bench/ipc-opt-noce/zenotravel02/pfile7",
-]
-
-# Name of the plan file the tool writes; a test counts as solved if any file
-# matching PLAN_FILE + "*" exists in its run directory after the run.
-PLAN_FILE = "plan.out"
-
-# Arguments passed to bin/pddl-tool (after --max-mem and --log-out log.out).
-# Placeholders: {plan} -> PLAN_FILE, {problem} -> absolute problem path
-# (without .pddl). {problem} is appended if missing.
-TOOL_ARGS = ["gplan", "astar", "blind", "{plan}", "{problem}"]
-
-# Wall-clock limit per run in seconds (enforced by this script; 0 disables it).
-MAX_TIME = 10
-
-# Memory limit per run in MB (passed as --max-mem; 0 disables it).
-MAX_MEM = 4096
-
-# Directory with the results, relative to the tests/ directory:
-# tests/<RESULTS_DIR>/<NAME>/<test-id>/run-<k>/
-RESULTS_DIR = "perf"
-
-###############################################################################
-# End of configuration
-###############################################################################
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
 ROOT_DIR = os.path.abspath(os.path.join(TESTS_DIR, ".."))
 TOOL_BIN = os.path.join(ROOT_DIR, "bin", "pddl-tool")
+CONFIG_PATH = os.path.join(TESTS_DIR, "config-perf-tool.toml")
 
 STATUS_ORDER = ["solved", "unsolved", "timeout", "memout", "error"]
 LOG_PREFIX_RE = re.compile(r"^\[([0-9]+\.[0-9]+)s ([0-9]+)MB\] ?(.*)$")
 LOG_PROCESSING_RE = re.compile(r"^PDDL: Processing (.+) and (.+)\.$")
 MEMOUT_PATTERNS = ["Allocation of memory failed", "Memory allocation failed"]
 KILL_GRACE = 5.0
+
+# environment variables used when re-executing the script under `isolate`
+ISOLATED_ENV = "PERF_TOOL_ISOLATED"
+CORES_ENV = "PERF_TOOL_CORES"
+ISOLATE_UNITS = ["init.scope", "system.slice", "user.slice", "machine.slice"]
+ISOLATE_SLICE = "perf-tool.slice"
 
 RED = "\033[31m"
 GREEN = "\033[32m"
@@ -266,43 +88,454 @@ def die(msg):
 
 
 ###############################################################################
+# Configuration file
+###############################################################################
+
+DEFAULTS = {
+    "pddl-dir": "~/dev/pddl-data",
+    "plan-file": "plan.out",
+    "tool-args": ["gplan", "astar", "blind", "{plan}", "{problem}"],
+    "max-time": 10,
+    "max-mem": 4096,
+    "results-dir": "perf",
+    "runs": 3,
+    "parallel": 1,
+    "pin": True,
+    "cores": "",
+    "isolate": False,
+    "compare": [],
+    "pddl-files": [
+        "bench/ipc-opt-noce/agricola18/p01",
+        "bench/ipc-opt-noce/agricola18/p06",
+        "bench/ipc-opt-noce/airport04/p01-airport1-p1",
+        "bench/ipc-opt-noce/airport04/p17-airport3-p5",
+        "bench/ipc-opt-noce/barman11/pfile01-001",
+        "bench/ipc-opt-noce/barman11/pfile02-007",
+        "bench/ipc-opt-noce/barman14/p435.1",
+        "bench/ipc-opt-noce/barman14/p536.2",
+        "bench/ipc-opt-noce/blocks00/probBLOCKS-4-1",
+        "bench/ipc-opt-noce/blocks00/probBLOCKS-6-1",
+        "bench/ipc-opt-noce/caldera18/p03",
+        "bench/ipc-opt-noce/caldera18/p20",
+        "bench/ipc-opt-noce/cavediving14/testing07_easy",
+        "bench/ipc-opt-noce/cavediving14/testing18_easy",
+        "bench/ipc-opt-noce/childsnack14/child-snack_pfile01",
+        "bench/ipc-opt-noce/childsnack14/child-snack_pfile04",
+        "bench/ipc-opt-noce/data-network18/p01",
+        "bench/ipc-opt-noce/data-network18/p06",
+        "bench/ipc-opt-noce/depot02/pfile1",
+        "bench/ipc-opt-noce/depot02/pfile8",
+        "bench/ipc-opt-noce/driverlog02/pfile1",
+        "bench/ipc-opt-noce/driverlog02/pfile7",
+        "bench/ipc-opt-noce/elevators08/p01",
+        "bench/ipc-opt-noce/elevators08/p11",
+        "bench/ipc-opt-noce/elevators11/p04",
+        "bench/ipc-opt-noce/elevators11/p14",
+        "bench/ipc-opt-noce/floortile11/opt-p01-001",
+        "bench/ipc-opt-noce/floortile11/opt-p04-007",
+        "bench/ipc-opt-noce/floortile14/p01-4-3-2",
+        "bench/ipc-opt-noce/floortile14/p02-4-4-2",
+        "bench/ipc-opt-noce/folding23/p01",
+        "bench/ipc-opt-noce/folding23/p15",
+        "bench/ipc-opt-noce/freecell00/pfile1",
+        "bench/ipc-opt-noce/freecell00/probfreecell-6-3",
+        "bench/ipc-opt-noce/ged14/d-1-4",
+        "bench/ipc-opt-noce/ged14/d-2-3",
+        "bench/ipc-opt-noce/gripper98/prob01",
+        "bench/ipc-opt-noce/gripper98/prob07",
+        "bench/ipc-opt-noce/hiking14/ptesting-1-2-3",
+        "bench/ipc-opt-noce/hiking14/ptesting-2-2-4",
+        "bench/ipc-opt-noce/labyrinth23/p01",
+        "bench/ipc-opt-noce/labyrinth23/p06",
+        "bench/ipc-opt-noce/logistics00/problogistics-4-0",
+        "bench/ipc-opt-noce/logistics00/problogistics-6-9",
+        "bench/ipc-opt-noce/logistics98/prob32",
+        "bench/ipc-opt-noce/logistics98/prob17",
+        "bench/ipc-opt-noce/maintenance14/maintenance.1.3.010.010.2-001",
+        "bench/ipc-opt-noce/maintenance14/maintenance.1.3.010.010.2-002",
+        "bench/ipc-opt-noce/miconic00/s1-0",
+        "bench/ipc-opt-noce/miconic00/s11-0",
+        "bench/ipc-opt-noce/movie98/prob01",
+        "bench/ipc-opt-noce/movie98/prob11",
+        "bench/ipc-opt-noce/mprime98/prob25",
+        "bench/ipc-opt-noce/mprime98/prob03",
+        "bench/ipc-opt-noce/mystery98/prob25",
+        "bench/ipc-opt-noce/mystery98/prob29",
+        "bench/ipc-opt-noce/nomystery11/p11",
+        "bench/ipc-opt-noce/nomystery11/p04",
+        "bench/ipc-opt-noce/openstacks06/p01",
+        "bench/ipc-opt-noce/openstacks06/p12",
+        "bench/ipc-opt-noce/openstacks08/p01",
+        "bench/ipc-opt-noce/openstacks08/p11",
+        "bench/ipc-opt-noce/openstacks11/p01",
+        "bench/ipc-opt-noce/openstacks11/p07",
+        "bench/ipc-opt-noce/openstacks14/p20_1",
+        "bench/ipc-opt-noce/openstacks14/p25_3",
+        "bench/ipc-opt-noce/organic-synthesis18/p04",
+        "bench/ipc-opt-noce/organic-synthesis18/p08",
+        "bench/ipc-opt-noce/parcprinter08/p01",
+        "bench/ipc-opt-noce/parcprinter08/p14",
+        "bench/ipc-opt-noce/parcprinter11/p02",
+        "bench/ipc-opt-noce/parcprinter11/p08",
+        "bench/ipc-opt-noce/parking11/pfile03-012",
+        "bench/ipc-opt-noce/parking11/pfile05-017",
+        "bench/ipc-opt-noce/parking14/p_12_7-01",
+        "bench/ipc-opt-noce/parking14/p_14_8-03",
+        "bench/ipc-opt-noce/pathways06/p01",
+        "bench/ipc-opt-noce/pathways06/p10",
+        "bench/ipc-opt-noce/pegsol08/p01",
+        "bench/ipc-opt-noce/pegsol08/p11",
+        "bench/ipc-opt-noce/pegsol11/p01",
+        "bench/ipc-opt-noce/pegsol11/p11",
+        "bench/ipc-opt-noce/petri-net-alignment18/p01",
+        "bench/ipc-opt-noce/petri-net-alignment18/p07",
+        "bench/ipc-opt-noce/pipesworld-notankage04/p01-net1-b6-g2",
+        "bench/ipc-opt-noce/pipesworld-notankage04/p16-net2-b14-g6",
+        "bench/ipc-opt-noce/pipesworld-tankage04/p11-net2-b10-g2-t30",
+        "bench/ipc-opt-noce/pipesworld-tankage04/p08-net1-b12-g7-t80",
+        "bench/ipc-opt-noce/psr-small04/p01-s2-n1-l2-f50",
+        "bench/ipc-opt-noce/psr-small04/p42-s82-n3-l4-f50",
+        "bench/ipc-opt-noce/quantum-layout23/p07",
+        "bench/ipc-opt-noce/quantum-layout23/p11",
+        "bench/ipc-opt-noce/recharging-robots23/p01",
+        "bench/ipc-opt-noce/recharging-robots23/p04",
+        "bench/ipc-opt-noce/ricochet-robots23/p11",
+        "bench/ipc-opt-noce/ricochet-robots23/p08",
+        "bench/ipc-opt-noce/rovers06/p02",
+        "bench/ipc-opt-noce/rovers06/p14",
+        "bench/ipc-opt-noce/satellite02/p01-pfile1",
+        "bench/ipc-opt-noce/satellite02/p13-pfile13",
+        "bench/ipc-opt-noce/scanalyzer08/p22",
+        "bench/ipc-opt-noce/scanalyzer08/p05",
+        "bench/ipc-opt-noce/scanalyzer11/p01",
+        "bench/ipc-opt-noce/scanalyzer11/p12",
+        "bench/ipc-opt-noce/slitherlink23/p01",
+        "bench/ipc-opt-noce/slitherlink23/p07",
+        "bench/ipc-opt-noce/snake18/p04",
+        "bench/ipc-opt-noce/snake18/p10",
+        "bench/ipc-opt-noce/sokoban08/p03",
+        "bench/ipc-opt-noce/sokoban08/p08",
+        "bench/ipc-opt-noce/sokoban11/p01",
+        "bench/ipc-opt-noce/sokoban11/p13",
+        "bench/ipc-opt-noce/spider18/p01",
+        "bench/ipc-opt-noce/spider18/p15",
+        "bench/ipc-opt-noce/storage06/p01",
+        "bench/ipc-opt-noce/storage06/p11",
+        "bench/ipc-opt-noce/termes18/p01",
+        "bench/ipc-opt-noce/termes18/p03",
+        "bench/ipc-opt-noce/tetris14/p02-4",
+        "bench/ipc-opt-noce/tetris14/p04-6",
+        "bench/ipc-opt-noce/tidybot11/p01",
+        "bench/ipc-opt-noce/tidybot11/p07",
+        "bench/ipc-opt-noce/tidybot14/p11",
+        "bench/ipc-opt-noce/tidybot14/p08",
+        "bench/ipc-opt-noce/tpp06/p01",
+        "bench/ipc-opt-noce/tpp06/p09",
+        "bench/ipc-opt-noce/transport08/p01",
+        "bench/ipc-opt-noce/transport08/p13",
+        "bench/ipc-opt-noce/transport11/p03",
+        "bench/ipc-opt-noce/transport11/p13",
+        "bench/ipc-opt-noce/transport14/p01",
+        "bench/ipc-opt-noce/transport14/p06",
+        "bench/ipc-opt-noce/trucks06/p01",
+        "bench/ipc-opt-noce/trucks06/p13",
+        "bench/ipc-opt-noce/visitall11/problem02-half",
+        "bench/ipc-opt-noce/visitall11/problem05-half",
+        "bench/ipc-opt-noce/visitall14/p-05-5",
+        "bench/ipc-opt-noce/visitall14/p-05-8",
+        "bench/ipc-opt-noce/woodworking08/p21",
+        "bench/ipc-opt-noce/woodworking08/p24",
+        "bench/ipc-opt-noce/woodworking11/p02",
+        "bench/ipc-opt-noce/woodworking11/p06",
+        "bench/ipc-opt-noce/zenotravel02/pfile1",
+        "bench/ipc-opt-noce/zenotravel02/pfile7",
+    ],
+}
+
+# Template of the generated configuration file. Values are substituted for
+# the $key placeholders (string.Template), so braces can be used freely.
+CONFIG_TEMPLATE = """\
+# Configuration for tests/scripts/perf-tool.py -- the performance comparison
+# runner for bin/pddl-tool.
+#
+#     tests/scripts/perf-tool.py NAME
+#
+# runs bin/pddl-tool (from the top directory of this repository) on every
+# problem listed in `pddl-files`, records the runtime, the peak memory and
+# whether a plan was found, stores the results in tests/<results-dir>/NAME/
+# and prints a summary comparing NAME with all other configurations found in
+# tests/<results-dir>/ (coverage, sums of runtime and memory over the solved
+# and over the commonly solved tests, numbers of timeouts, memouts and
+# errors, plus a per-test table with ratios relative to the oldest
+# configuration).
+#
+# Typical workflow:
+#   1. Edit this file (pddl-files, tool-args, limits, ...).
+#   2. tests/scripts/perf-tool.py base      -- baseline results
+#   3. Change the source code, rebuild bin/pddl-tool.
+#   4. tests/scripts/perf-tool.py v1        -- runs v1, prints v1 vs. base
+#   5. ... v2, v3, ...
+#
+# Tests that already have results are not re-run, unless
+#   - the PDDL files of the test changed (only the affected tests are re-run),
+#   - `tool-args`, `plan-file`, `max-time`, `max-mem` or `runs` changed,
+#   - bin/pddl-tool changed (its sha256 is recorded), or
+#   - the -f/--force option is given.
+# With -s/--summary-only nothing is run and only the summary of the existing
+# results is printed.
+# An interrupted run (Ctrl-C) keeps the finished tests; the next run
+# continues with the unfinished ones.
+#
+# Layout of the results: tests/<results-dir>/NAME/<test-id>/run-<k>/ holds
+# the output of the k-th run of a test (log.out, stdout.log, stderr.log,
+# cmd, plan file(s)), <test-id>/result.json the per-run measurements and
+# their aggregation, and NAME/meta.json the fingerprint of the configuration
+# (tool sha256, arguments, PDDL file hashes) used to decide what to re-run.
+#
+# All keys below are required; unknown keys are rejected.
+
+
+# Base directory of the PDDL files listed in `pddl-files`. A leading "~" is
+# expanded to the home directory.
+pddl-dir = $pddl_dir
+
+# Name of the plan file pddl-tool writes into the run directory; it is
+# substituted for the {plan} placeholder in `tool-args`. A run counts as
+# solved if any file matching "<plan-file>*" exists in the run directory
+# afterwards (e.g. symb-gbfs --anytime writes <plan-file>.00001, ... in
+# addition to <plan-file>).
+plan-file = $plan_file
+
+# Arguments passed to bin/pddl-tool. The script always prepends
+# "--max-mem <max-mem> --log-out log.out" (the --max-mem part only if
+# `max-mem` is positive). Placeholders:
+#   {plan}    -> the value of `plan-file`
+#   {problem} -> absolute path of the problem file without the .pddl suffix
+#                (pddl-tool appends .pddl itself and finds the corresponding
+#                domain file in the same directory)
+# {problem} is appended automatically if it does not appear in the list.
+# Examples:
+#   ["gplan", "astar", "lmc", "{plan}", "{problem}"]
+#   ["gplan", "--h2", "--pot-A+I", "astar", "pot", "{plan}", "{problem}"]
+#   ["symb-astar", "A+I", "blind", "{plan}", "{problem}"]
+#   ["symb-gbfs", "--anytime", "A+I,gc", "none", "{plan}", "{problem}"]
+tool-args = $tool_args
+
+# Wall-clock time limit of one run in seconds, enforced by this script
+# (SIGTERM, then SIGKILL after a few seconds). Runs killed by the limit are
+# reported as "timeout". 0 = no limit.
+max-time = $max_time
+
+# Memory limit of one run in MB, passed to pddl-tool as --max-mem (which
+# sets an address-space rlimit, so allocations fail instead of the process
+# being killed). Runs that fail with an allocation error are reported as
+# "memout". 0 = no limit.
+max-mem = $max_mem
+
+# Directory with the results, relative to the tests/ directory (an absolute
+# path is used as is): tests/<results-dir>/NAME/<test-id>/run-<k>/. Every
+# subdirectory with a meta.json file is treated as a configuration in the
+# summary.
+results-dir = $results_dir
+
+# How many times every test is run. The summary reports the mean over the
+# runs; a test counts as solved only if all its runs found a plan. Changing
+# this value re-runs everything.
+runs = $runs
+
+# How many tests are run at the same time. Each of them runs on its own core
+# (see `pin`), so this should not exceed the number of (physical) cores
+# available to the tests.
+parallel = $parallel
+
+# Pin every run to one core with taskset (recommended for stable
+# measurements). With false, the runs are not pinned; `cores` must then be
+# empty and `isolate` false.
+pin = $pin
+
+# Which cores to use for the runs, as a cpu list such as "2,4-5" (at least
+# `parallel` cores; the first `parallel` of them are used). The empty string
+# selects the `parallel` least loaded physical cores automatically (one
+# hyper-thread sibling per physical core, chosen by sampling /proc/stat
+# briefly before the run; a warning is printed if the chosen cores are not
+# idle). Set this explicitly when using cores isolated by the kernel
+# (isolcpus=/nohz_full= boot options), which are not in the default
+# affinity mask and therefore never selected automatically. Two instances
+# of the script running at the same time must be given distinct cores.
+cores = $cores
+
+# Keep the selected cores for the tests only. With true, the script uses
+# sudo to restrict all other processes -- the init.scope, system.slice,
+# user.slice and machine.slice systemd units -- to the remaining cores
+# (systemctl set-property --runtime ... AllowedCPUs=), re-executes itself
+# inside a dedicated top-level perf-tool.slice scope restricted to the
+# selected cores (systemd-run, dropping back to the current user with
+# runuser), and lifts the restrictions when it finishes (they are
+# runtime-only, i.e. a reboot clears them in any case). Requires systemd
+# on a cgroup v2 host with the cpuset controller, sudo, and runuser, and
+# at least one core left for the rest of the system. Kernel threads and
+# interrupt handlers can still run on the selected cores; for that level
+# of isolation boot with isolcpus=/nohz_full= and use `cores` instead.
+isolate = $isolate
+
+# Names of the configurations to compare with in the summary (NAME itself
+# is always included). The empty list compares with all configurations
+# found in tests/<results-dir>/. The configurations are ordered by their
+# creation time, NAME last; ratios are relative to the first one.
+compare = $compare
+
+# Problems to run: paths relative to `pddl-dir` without the .pddl suffix
+# (pddl-tool appends .pddl and finds the domain file itself). The path is
+# also the test id used in the result directories and in the summary. The
+# domain file actually used by pddl-tool is recorded from its log and its
+# changes are detected as well.
+pddl-files = $pddl_files
+"""
+
+
+def toml_value(val, multiline=False):
+    """Render VAL as a TOML value. Lists are rendered one item per line if
+    MULTILINE."""
+    if isinstance(val, bool):
+        return "true" if val else "false"
+    if isinstance(val, (int, float)):
+        return str(val)
+    if isinstance(val, str):
+        return json.dumps(val)
+    if isinstance(val, list):
+        if not val:
+            return "[]"
+        if multiline:
+            return "[\n" + "".join(f"    {toml_value(v)},\n" for v in val) + "]"
+        return "[" + ", ".join(toml_value(v) for v in val) + "]"
+    raise TypeError(f"cannot render {val!r} as TOML")
+
+
+def write_default_config(path):
+    subst = {}
+    for key, val in DEFAULTS.items():
+        subst[key.replace("-", "_")] = toml_value(val, multiline=(key == "pddl-files"))
+    text = string.Template(CONFIG_TEMPLATE).substitute(subst)
+    with open(path, "w") as fh:
+        fh.write(text)
+
+
+class Config:
+    """Validated content of the configuration file, with attributes named
+    after the keys (hyphens replaced by underscores)."""
+
+    def __init__(self, path, data):
+        self.path = path
+        unknown = sorted(set(data) - set(DEFAULTS))
+        if unknown:
+            hint = ""
+            if set(unknown) & {"force", "summary-only"}:
+                hint = (" (force and summary-only are the command line options "
+                        "-f/--force and -s/--summary-only now; remove them "
+                        "from the file)")
+            self.error(f"unknown key(s): {', '.join(unknown)}{hint}")
+        missing = [k for k in DEFAULTS if k not in data]
+        if missing:
+            self.error(f"missing key(s): {', '.join(missing)} (all keys are "
+                       "required; delete the file to regenerate the defaults)")
+
+        self.pddl_dir = self.expect(data, "pddl-dir", str, nonempty=True)
+        self.plan_file = self.expect(data, "plan-file", str, nonempty=True)
+        if "/" in self.plan_file:
+            self.error("plan-file must be a plain file name")
+        self.tool_args = self.expect(data, "tool-args", list, item_type=str)
+        self.max_time = self.expect(data, "max-time", (int, float), minimum=0)
+        self.max_mem = self.expect(data, "max-mem", int, minimum=0)
+        self.results_dir = self.expect(data, "results-dir", str, nonempty=True)
+        self.runs = self.expect(data, "runs", int, minimum=1)
+        self.parallel = self.expect(data, "parallel", int, minimum=1)
+        self.pin = self.expect(data, "pin", bool)
+        cores = self.expect(data, "cores", str)
+        self.isolate = self.expect(data, "isolate", bool)
+        self.compare = self.expect(data, "compare", list, item_type=str)
+        self.pddl_files = self.expect(data, "pddl-files", list, item_type=str)
+
+        self.cores = None
+        if cores.strip():
+            try:
+                self.cores = parse_cores(cores)
+            except ValueError as exc:
+                self.error(f"cores: {exc}")
+            if len(self.cores) < self.parallel:
+                self.error(f"cores lists {len(self.cores)} cores but parallel = "
+                           f"{self.parallel}")
+        if not self.pin and (self.cores is not None or self.isolate):
+            self.error("pin = false cannot be combined with cores or isolate")
+        for n in self.compare:
+            if not n or "/" in n or n in (".", ".."):
+                self.error(f"compare: invalid configuration name {n!r}")
+
+    def error(self, msg):
+        die(f"{self.path}: {msg}")
+
+    def expect(self, data, key, typ, nonempty=False, minimum=None, item_type=None):
+        val = data[key]
+        # bool is a subclass of int -- keep the types apart
+        if isinstance(val, bool) and typ is not bool:
+            self.error(f"{key}: expected {self.type_name(typ)}, got a boolean")
+        if not isinstance(val, typ):
+            self.error(f"{key}: expected {self.type_name(typ)}, got {type(val).__name__}")
+        if nonempty and not val:
+            self.error(f"{key}: must not be empty")
+        if minimum is not None and val < minimum:
+            self.error(f"{key}: must be >= {minimum}")
+        if item_type is not None:
+            for i, item in enumerate(val):
+                if not isinstance(item, item_type):
+                    self.error(f"{key}[{i}]: expected {self.type_name(item_type)}, "
+                               f"got {type(item).__name__}")
+        return val
+
+    @staticmethod
+    def type_name(typ):
+        if isinstance(typ, tuple):
+            return " or ".join(t.__name__ for t in typ)
+        if typ is str:
+            return "a string"
+        if typ is bool:
+            return "true or false"
+        if typ is list:
+            return "an array"
+        return typ.__name__
+
+
+def load_config(path):
+    try:
+        with open(path, "rb") as fh:
+            data = tomllib.load(fh)
+    except OSError as exc:
+        die(f"cannot read {path}: {exc}")
+    except tomllib.TOMLDecodeError as exc:
+        die(f"{path}: {exc}")
+    return Config(path, data)
+
+
+###############################################################################
 # Command line
 ###############################################################################
 
 def parse_args():
     p = argparse.ArgumentParser(
-        description="Performance comparison runner for bin/pddl-tool")
-    p.add_argument("name", metavar="NAME",
-                   help="Name of the configuration (results go to "
-                        f"tests/{RESULTS_DIR}/NAME/)")
-    p.add_argument("-p", "--parallel", type=int, default=1,
-                   help="Number of tests run in parallel, each pinned to its "
-                        "own core (default: 1)")
-    p.add_argument("-n", "--runs", type=int, default=3,
-                   help="Number of runs of each test (default: 3)")
+        description="Performance comparison runner for bin/pddl-tool. All "
+                    f"settings are read from {CONFIG_PATH}; the file is "
+                    "generated with defaults if it does not exist.")
+    p.add_argument("name", metavar="NAME", nargs="?",
+                   help="Name of the configuration being measured (results "
+                        "go to tests/<results-dir>/NAME/)")
     p.add_argument("-f", "--force", action="store_true",
-                   help="Re-run all tests even if results exist")
+                   help="Re-run all tests even if up-to-date results exist")
     p.add_argument("-s", "--summary-only", action="store_true",
-                   help="Do not run anything, only print the summary")
-    p.add_argument("-c", "--compare", action="append", metavar="NAME",
-                   help="Compare only with the given configuration(s) "
-                        "(may be repeated; default: all)")
-    p.add_argument("--no-pin", action="store_true",
-                   help="Do not pin runs to cores")
-    p.add_argument("--cores", metavar="LIST", type=parse_cores,
-                   help="Cores to pin the runs to, e.g. 2,4-5 (default: the "
-                        "least loaded physical cores)")
-    p.add_argument("--isolate", action="store_true",
-                   help="Move all other processes off the selected cores for "
-                        "the duration of the run (uses sudo + systemd)")
+                   help="Do not run anything, only print the summary of the "
+                        "existing results")
     args = p.parse_args()
-    if args.no_pin and (args.cores or args.isolate):
-        p.error("--no-pin cannot be combined with --cores or --isolate")
-    if args.parallel < 1:
-        p.error("--parallel must be >= 1")
-    if args.runs < 1:
-        p.error("--runs must be >= 1")
-    if "/" in args.name or args.name in (".", ".."):
+    if args.force and args.summary_only:
+        p.error("--force and --summary-only cannot be combined")
+    if args.name is not None and ("/" in args.name or args.name in (".", "..")):
         p.error("NAME must be a plain directory name")
     return args
 
@@ -319,19 +552,19 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def resolve_tests():
-    """Turn PDDL_FILES into a list of test dicts, sorted by test id."""
-    pddl_dir = os.path.abspath(os.path.expanduser(PDDL_DIR))
+def resolve_tests(cfg):
+    """Turn pddl-files into a list of test dicts, sorted by test id."""
+    pddl_dir = os.path.abspath(os.path.expanduser(cfg.pddl_dir))
     if not os.path.isdir(pddl_dir):
-        die(f"PDDL_DIR does not exist: {pddl_dir}")
+        die(f"pddl-dir does not exist: {pddl_dir}")
 
     tests = {}
-    for entry in PDDL_FILES:
+    for entry in cfg.pddl_files:
         test_id = os.path.normpath(entry)
         if test_id.endswith(".pddl"):
             test_id = test_id[:-5]
         if test_id.startswith("..") or os.path.isabs(test_id):
-            die(f"PDDL_FILES entry must be relative to PDDL_DIR: {entry}")
+            die(f"pddl-files entry must be relative to pddl-dir: {entry}")
         if test_id in tests:
             die(f"duplicate test: {test_id}")
 
@@ -357,22 +590,22 @@ def domain_sha256(domain):
         return None
 
 
-def tool_args_fingerprint():
+def tool_args_fingerprint(cfg):
     return {
-        "tool_args": list(TOOL_ARGS),
-        "plan_file": PLAN_FILE,
-        "max_time": MAX_TIME,
-        "max_mem": MAX_MEM,
+        "tool_args": list(cfg.tool_args),
+        "plan_file": cfg.plan_file,
+        "max_time": cfg.max_time,
+        "max_mem": cfg.max_mem,
     }
 
 
-def build_cmd(test):
+def build_cmd(cfg, test):
     cmd = [TOOL_BIN]
-    if MAX_MEM > 0:
-        cmd += ["--max-mem", str(MAX_MEM)]
+    if cfg.max_mem > 0:
+        cmd += ["--max-mem", str(cfg.max_mem)]
     cmd += ["--log-out", "log.out"]
-    subst = {"plan": PLAN_FILE, "problem": test["problem"]}
-    args = list(TOOL_ARGS)
+    subst = {"plan": cfg.plan_file, "problem": test["problem"]}
+    args = list(cfg.tool_args)
     if not any("{problem}" in a for a in args):
         args.append("{problem}")
     for a in args:
@@ -433,13 +666,12 @@ def parse_cores(s):
             else:
                 cores.add(int(part))
         except ValueError:
-            raise argparse.ArgumentTypeError(f"invalid cpu list: {s!r}")
+            raise ValueError(f"invalid cpu list: {s!r}")
     if not cores or min(cores) < 0:
-        raise argparse.ArgumentTypeError(f"invalid cpu list: {s!r}")
+        raise ValueError(f"invalid cpu list: {s!r}")
     ncpu = os.cpu_count() or 0
     if ncpu and max(cores) >= ncpu:
-        raise argparse.ArgumentTypeError(
-            f"cpu list {s!r} exceeds the {ncpu} cpus of this machine")
+        raise ValueError(f"cpu list {s!r} exceeds the {ncpu} cpus of this machine")
     return sorted(cores)
 
 
@@ -495,7 +727,7 @@ def select_cores(n, explicit=None):
     """Return a list of N cpu ids to pin runs to, or None if not possible."""
     if explicit is not None:
         if len(explicit) < n:
-            die(f"--cores lists {len(explicit)} cores but {n} are needed for -p {n}")
+            die(f"cores lists {len(explicit)} cores but {n} are needed for parallel = {n}")
         return explicit[:n]
 
     try:
@@ -519,7 +751,7 @@ def select_cores(n, explicit=None):
     if loaded:
         warn("selected cores are not idle: "
              + ", ".join(f"cpu{c} {busy[c] * 100:.0f}%" for c in loaded)
-             + " -- consider --isolate or --cores")
+             + " -- consider setting isolate or cores in the configuration")
     return chosen
 
 
@@ -535,10 +767,10 @@ def current_affinity():
 ###############################################################################
 
 class Runner:
-    def __init__(self, parallel, cores):
+    def __init__(self, cfg, cores):
         """CORES is the list of cpu ids to pin the runs to (one per parallel
         worker), or None to run unpinned."""
-        self.parallel = parallel
+        self.cfg = cfg
         self.cores = queue.Queue()
         self.pin = cores is not None
         self.stop = threading.Event()
@@ -546,10 +778,10 @@ class Runner:
         self.active_lock = threading.Lock()
 
         if self.pin:
-            for c in cores[:parallel]:
+            for c in cores[:cfg.parallel]:
                 self.cores.put(c)
         else:
-            for i in range(parallel):
+            for i in range(cfg.parallel):
                 self.cores.put(None)
 
     def run(self, test, run_dir):
@@ -565,7 +797,7 @@ class Runner:
             shutil.rmtree(run_dir)
         os.makedirs(run_dir)
 
-        cmd = build_cmd(test)
+        cmd = build_cmd(self.cfg, test)
         if core is not None:
             cmd = ["taskset", "-c", str(core)] + cmd
         with open(os.path.join(run_dir, "cmd"), "w") as fh:
@@ -593,8 +825,8 @@ class Runner:
             self._kill(proc)
 
         timer = None
-        if MAX_TIME > 0:
-            timer = threading.Timer(MAX_TIME, kill)
+        if self.cfg.max_time > 0:
+            timer = threading.Timer(self.cfg.max_time, kill)
             timer.daemon = True
             timer.start()
         try:
@@ -618,7 +850,7 @@ class Runner:
             "timed_out": timed_out.is_set(),
         }
         res.update(parse_log(os.path.join(run_dir, "log.out")))
-        res.update(parse_plans(run_dir))
+        res.update(parse_plans(self.cfg, run_dir))
         res["status"] = classify(res, run_dir)
         return res
 
@@ -677,9 +909,9 @@ def parse_log(path):
     return res
 
 
-def parse_plans(run_dir):
-    files = sorted(os.path.basename(f)
-                   for f in glob.glob(os.path.join(run_dir, glob.escape(PLAN_FILE) + "*")))
+def parse_plans(cfg, run_dir):
+    pattern = os.path.join(run_dir, glob.escape(cfg.plan_file) + "*")
+    files = sorted(os.path.basename(f) for f in glob.glob(pattern))
     cost = None
     for fn in files:
         try:
@@ -758,12 +990,16 @@ def aggregate(test, runs):
 # Results directory, meta.json, change detection
 ###############################################################################
 
-def config_dir(name):
-    return os.path.join(TESTS_DIR, RESULTS_DIR, name)
+def results_root(cfg):
+    return os.path.join(TESTS_DIR, cfg.results_dir)
 
 
-def meta_path(name):
-    return os.path.join(config_dir(name), "meta.json")
+def config_dir(cfg, name):
+    return os.path.join(results_root(cfg), name)
+
+
+def meta_path(cfg, name):
+    return os.path.join(config_dir(cfg, name), "meta.json")
 
 
 def load_json(path):
@@ -782,32 +1018,31 @@ def save_json(path, data):
     os.replace(tmp, path)
 
 
-def load_config(name):
+def load_results(cfg, name):
     """Load meta.json and all result.json files of a configuration."""
-    meta = load_json(meta_path(name))
+    meta = load_json(meta_path(cfg, name))
     if meta is None:
         return None
     results = {}
     for test_id in meta.get("tests", {}):
-        res = load_json(os.path.join(config_dir(name), test_id, "result.json"))
+        res = load_json(os.path.join(config_dir(cfg, name), test_id, "result.json"))
         if res is not None:
             results[test_id] = res
     return {"name": name, "meta": meta, "results": results}
 
 
-def list_configs():
-    base = os.path.join(TESTS_DIR, RESULTS_DIR)
+def list_configs(cfg):
+    base = results_root(cfg)
     if not os.path.isdir(base):
         return []
-    names = [n for n in sorted(os.listdir(base))
-             if os.path.isfile(meta_path(n))]
-    return names
+    return [n for n in sorted(os.listdir(base))
+            if os.path.isfile(meta_path(cfg, n))]
 
 
-def select_tests_to_run(name, tests, tool_sha, fingerprint, runs, force):
+def select_tests_to_run(cfg, name, tests, tool_sha, fingerprint, force):
     """Return (tests_to_run, reason, old_meta)."""
-    cdir = config_dir(name)
-    old = load_json(meta_path(name))
+    cdir = config_dir(cfg, name)
+    old = load_json(meta_path(cfg, name))
     if force:
         return tests, "--force given", old
     if old is None:
@@ -816,8 +1051,8 @@ def select_tests_to_run(name, tests, tool_sha, fingerprint, runs, force):
         return tests, "bin/pddl-tool changed", old
     if old.get("tool_args") != fingerprint:
         return tests, "tool arguments or limits changed", old
-    if old.get("runs") != runs:
-        return tests, f"number of runs changed ({old.get('runs')} -> {runs})", old
+    if old.get("runs") != cfg.runs:
+        return tests, f"number of runs changed ({old.get('runs')} -> {cfg.runs})", old
 
     old_tests = old.get("tests", {})
     to_run = []
@@ -834,27 +1069,26 @@ def select_tests_to_run(name, tests, tool_sha, fingerprint, runs, force):
             to_run.append(t)
             continue
         res = load_json(os.path.join(cdir, t["id"], "result.json"))
-        if res is None or res.get("num_runs", 0) < runs:
+        if res is None or res.get("num_runs", 0) < cfg.runs:
             to_run.append(t)
     return to_run, "PDDL files changed or results missing", old
 
 
-def run_configuration(args, tests, cores):
-    name = args.name
-    cdir = config_dir(name)
+def run_configuration(cfg, name, tests, cores, force):
+    cdir = config_dir(cfg, name)
     if not os.path.isfile(TOOL_BIN):
         die(f"binary not found: {TOOL_BIN}")
     tool_sha = sha256_file(TOOL_BIN)
-    fingerprint = tool_args_fingerprint()
+    fingerprint = tool_args_fingerprint(cfg)
 
-    to_run, reason, old = select_tests_to_run(name, tests, tool_sha, fingerprint,
-                                              args.runs, args.force)
+    to_run, reason, old = select_tests_to_run(cfg, name, tests, tool_sha,
+                                              fingerprint, force)
     os.makedirs(cdir, exist_ok=True)
 
     ids = {t["id"] for t in tests}
     dropped = [k for k in (old or {}).get("tests", {}) if k not in ids]
     for k in dropped:
-        log(f"note: {k} is no longer in PDDL_FILES; {os.path.join(cdir, k)} is left on disk")
+        log(f"note: {k} is no longer in pddl-files; {os.path.join(cdir, k)} is left on disk")
 
     def make_meta():
         # The domain file (and its hash) is taken from result.json, where it
@@ -875,13 +1109,13 @@ def run_configuration(args, tests, cores):
             "git": git_describe(),
             "tool_sha256": tool_sha,
             "tool_args": fingerprint,
-            "runs": args.runs,
+            "runs": cfg.runs,
             "tests": entries,
         }
 
     if not to_run:
         log(f"{name}: all {len(tests)} tests are up to date, nothing to run")
-        save_json(meta_path(name), make_meta())
+        save_json(meta_path(cfg, name), make_meta())
         return True
 
     if len(to_run) == len(tests):
@@ -889,9 +1123,9 @@ def run_configuration(args, tests, cores):
     else:
         log(f"{name}: running {len(to_run)} of {len(tests)} tests ({reason})")
     log(f"  tool: {TOOL_BIN} ({git_describe()})")
-    log(f"  args: {shlex.join(build_cmd(to_run[0])[1:])}")
-    log(f"  runs: {args.runs}, parallel: {args.parallel}, "
-        f"max-time: {MAX_TIME}s, max-mem: {MAX_MEM}MB, "
+    log(f"  args: {shlex.join(build_cmd(cfg, to_run[0])[1:])}")
+    log(f"  runs: {cfg.runs}, parallel: {cfg.parallel}, "
+        f"max-time: {cfg.max_time}s, max-mem: {cfg.max_mem}MB, "
         f"cores: {format_cores(cores) if cores else 'not pinned'}")
 
     # Remove stale results of the tests that are re-run so that an
@@ -902,9 +1136,9 @@ def run_configuration(args, tests, cores):
             shutil.rmtree(tdir)
         os.makedirs(tdir)
 
-    runner = Runner(args.parallel, cores)
+    runner = Runner(cfg, cores)
 
-    jobs = [(t, k) for t in to_run for k in range(1, args.runs + 1)]
+    jobs = [(t, k) for t in to_run for k in range(1, cfg.runs + 1)]
     total = len(jobs)
     id_w = max(len(t["id"]) for t in to_run)
     done_runs = {t["id"]: {} for t in to_run}
@@ -916,7 +1150,7 @@ def run_configuration(args, tests, cores):
         run_dir = os.path.join(cdir, t["id"], f"run-{k}")
         return t, k, runner.run(t, run_dir)
 
-    executor = ThreadPoolExecutor(max_workers=args.parallel)
+    executor = ThreadPoolExecutor(max_workers=cfg.parallel)
     try:
         futures = [executor.submit(job, item) for item in jobs]
         for i, fut in enumerate(as_completed(futures), 1):
@@ -929,7 +1163,7 @@ def run_configuration(args, tests, cores):
                 f"{res['max_rss_mb']:8.1f}MB")
             with done_lock:
                 done_runs[t["id"]][k] = res
-                if len(done_runs[t["id"]]) == args.runs:
+                if len(done_runs[t["id"]]) == cfg.runs:
                     runs = [done_runs[t["id"]][j] for j in sorted(done_runs[t["id"]])]
                     save_json(os.path.join(cdir, t["id"], "result.json"),
                               aggregate(t, runs))
@@ -945,7 +1179,7 @@ def run_configuration(args, tests, cores):
     # Also written after an interrupt: the finished tests are kept and the
     # unfinished ones are re-run next time because their result.json is
     # missing.
-    save_json(meta_path(name), make_meta())
+    save_json(meta_path(cfg, name), make_meta())
     return ok
 
 
@@ -979,8 +1213,8 @@ def print_table(rows, aligns=None):
         log("  ".join(cells).rstrip())
 
 
-def print_summary(names):
-    configs = [c for c in (load_config(n) for n in names) if c is not None]
+def print_summary(cfg, names):
+    configs = [c for c in (load_results(cfg, n) for n in names) if c is not None]
     if not configs:
         log("no results found")
         return
@@ -1095,15 +1329,8 @@ def print_summary(names):
 
 
 ###############################################################################
-
+# Core isolation (isolate = true)
 ###############################################################################
-# Core isolation (--isolate)
-###############################################################################
-
-ISOLATED_ENV = "PERF_TOOL_ISOLATED"
-ISOLATE_UNITS = ["init.scope", "system.slice", "user.slice", "machine.slice"]
-ISOLATE_SLICE = "perf-tool.slice"
-
 
 def sudo_run(cmd, check=True):
     """Run CMD via sudo; return the exit code (die on failure if CHECK)."""
@@ -1120,19 +1347,19 @@ def sudo_run(cmd, check=True):
 def isolate_check_prerequisites():
     for tool in ("sudo", "systemctl", "systemd-run", "runuser"):
         if shutil.which(tool) is None:
-            die(f"--isolate requires {tool}, which was not found")
+            die(f"isolate = true requires {tool}, which was not found")
     controllers = ""
     try:
         with open("/sys/fs/cgroup/cgroup.controllers") as fh:
             controllers = fh.read().split()
     except OSError:
-        die("--isolate requires the cgroup v2 unified hierarchy mounted "
+        die("isolate = true requires the cgroup v2 unified hierarchy mounted "
             "at /sys/fs/cgroup")
     if "cpuset" not in controllers:
-        die("--isolate requires the cpuset cgroup controller")
+        die("isolate = true requires the cpuset cgroup controller")
 
 
-def run_isolated(args, cores):
+def run_isolated(name, cores, force):
     """Restrict all other processes to the cores not in CORES, re-execute
     this script in a scope restricted to CORES, then lift the restrictions.
     Returns the exit code of the re-executed script."""
@@ -1140,22 +1367,22 @@ def run_isolated(args, cores):
     all_cpus = list(range(os.cpu_count()))
     others = [c for c in all_cpus if c not in cores]
     if not others:
-        die("--isolate needs at least one core left for the rest of the system")
+        die("isolate = true needs at least one core left for the rest of the system")
 
     log(f"isolating cores {format_cores(cores)}: restricting "
         f"{', '.join(ISOLATE_UNITS)} to cores {format_cores(others)} (sudo)")
-    child_args = [a for a in sys.argv[1:] if a != "--isolate"]
-    child_args += ["--cores", format_cores(cores)]
     env = {k: v for k, v in os.environ.items()
            if k in ("HOME", "PATH", "USER", "LOGNAME", "LANG", "LC_ALL", "TERM",
                     "PYTHONPATH")}
     env[ISOLATED_ENV] = "1"
+    env[CORES_ENV] = format_cores(cores)
     user = os.environ.get("USER") or str(os.getuid())
     cmd = ["systemd-run", "--quiet", "--scope", f"--slice={ISOLATE_SLICE}",
            f"--property=AllowedCPUs={format_cores(cores)}",
            "--", "runuser", "-u", user, "--",
            "env"] + [f"{k}={v}" for k, v in env.items()] + \
-          [sys.executable, os.path.abspath(__file__)] + child_args
+          [sys.executable, os.path.abspath(__file__)] + \
+          (["--force"] if force else []) + [name]
 
     restricted = []
     ret = 1
@@ -1196,7 +1423,7 @@ def verify_isolation(cores):
         try:
             with open(path) as fh:
                 eff = parse_cores(fh.read().strip() or "")
-        except (OSError, argparse.ArgumentTypeError):
+        except (OSError, ValueError):
             continue
         overlap = sorted(set(eff) & set(cores))
         if overlap:
@@ -1208,41 +1435,67 @@ def verify_isolation(cores):
 
 def main():
     args = parse_args()
+    script = os.path.relpath(os.path.abspath(__file__))
+
+    if not os.path.isfile(CONFIG_PATH):
+        write_default_config(CONFIG_PATH)
+        log(f"Generated the configuration file {CONFIG_PATH} with default settings.")
+        log("Nothing was run. Inspect the file, change it to your liking, and run")
+        log(f"    {script} NAME")
+        log("where NAME is the name of the configuration to measure (e.g. base).")
+        sys.exit(1)
+
+    if args.name is None:
+        log(f"usage: {script} [-f] [-s] NAME")
+        log("")
+        log("The configuration name NAME is required (e.g. base, v1, ...); all other")
+        log(f"settings are read from {CONFIG_PATH}.")
+        sys.exit(1)
+
+    cfg = load_config(CONFIG_PATH)
+    name = args.name
     ok = True
     if not args.summary_only:
-        tests = resolve_tests()
+        tests = resolve_tests(cfg)
         if not tests:
-            die("PDDL_FILES is empty")
+            die(f"{CONFIG_PATH}: pddl-files is empty")
 
         cores = None
-        if not args.no_pin:
+        if cfg.pin:
             if shutil.which("taskset") is None:
                 warn("taskset not found, runs are not pinned")
             else:
-                cores = select_cores(args.parallel, args.cores)
+                explicit = cfg.cores
+                if os.environ.get(CORES_ENV):
+                    # set by run_isolated() for the re-executed script
+                    try:
+                        explicit = parse_cores(os.environ[CORES_ENV])
+                    except ValueError as exc:
+                        die(f"{CORES_ENV}: {exc}")
+                cores = select_cores(cfg.parallel, explicit)
                 if cores is None:
                     warn("cannot determine cpu affinity, runs are not pinned")
-        if args.isolate:
+        if cfg.isolate:
             if cores is None:
-                die("--isolate needs pinning, which is not available")
+                die("isolate = true needs pinning, which is not available")
             if os.environ.get(ISOLATED_ENV) != "1":
-                sys.exit(run_isolated(args, cores))
+                sys.exit(run_isolated(name, cores, args.force))
             verify_isolation(cores)
 
-        ok = run_configuration(args, tests, cores)
+        ok = run_configuration(cfg, name, tests, cores, args.force)
 
-    if args.compare:
-        names = [n for n in args.compare if n != args.name]
+    if cfg.compare:
+        names = [n for n in cfg.compare if n != name]
         for n in names:
-            if not os.path.isfile(meta_path(n)):
+            if not os.path.isfile(meta_path(cfg, n)):
                 die(f"configuration not found: {n}")
     else:
-        names = [n for n in list_configs() if n != args.name]
+        names = [n for n in list_configs(cfg) if n != name]
     # oldest first, the current configuration last
-    names.sort(key=lambda n: (load_json(meta_path(n)) or {}).get("created", ""))
-    if os.path.isfile(meta_path(args.name)):
-        names.append(args.name)
-    print_summary(names)
+    names.sort(key=lambda n: (load_json(meta_path(cfg, n)) or {}).get("created", ""))
+    if os.path.isfile(meta_path(cfg, name)):
+        names.append(name)
+    print_summary(cfg, names)
     sys.exit(0 if ok else 1)
 
 
