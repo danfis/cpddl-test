@@ -1,14 +1,16 @@
 step 0: state 14 applicable 10
+    state: (at driver1 s4) (at driver2 s0) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (at truck1 s0) (at truck2 s4) (at truck3 s5) (empty truck1) (empty truck2) (empty truck3)
 board-truck driver1 truck2 s4 :: cost: 1
     add: (driving driver1 truck2)
     del: (at driver1 s4) (empty truck2)
 board-truck driver2 truck1 s0 :: cost: 1
     add: (driving driver2 truck1)
     del: (at driver2 s0) (empty truck1)
-load-truck package2 truck1 s0 :: cost: 1
+load-truck package2 truck1 s0 :: cost: 1 [successor]
     add: (in package2 truck1)
     del: (at package2 s0)
 step 1: state 14 applicable 10
+    state: (at driver1 s4) (at driver2 s0) (at package1 s1) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (at truck1 s0) (at truck2 s4) (at truck3 s5) (empty truck1) (empty truck2) (empty truck3) (in package2 truck1)
 board-truck driver1 truck2 s4 :: cost: 1
     add: (driving driver1 truck2)
     del: (at driver1 s4) (empty truck2)
@@ -18,7 +20,9 @@ board-truck driver2 truck1 s0 :: cost: 1
 load-truck package3 truck2 s4 :: cost: 1
     add: (in package3 truck2)
     del: (at package3 s4)
+    successor: load-truck package4 truck2 s4
 step 2: state 14 applicable 10
+    state: (at driver1 s4) (at driver2 s0) (at package1 s1) (at package3 s4) (at package5 s4) (at package6 s2) (at truck1 s0) (at truck2 s4) (at truck3 s5) (empty truck1) (empty truck2) (empty truck3) (in package2 truck1) (in package4 truck2)
 board-truck driver1 truck2 s4 :: cost: 1
     add: (driving driver1 truck2)
     del: (at driver1 s4) (empty truck2)
@@ -28,7 +32,9 @@ board-truck driver2 truck1 s0 :: cost: 1
 load-truck package3 truck2 s4 :: cost: 1
     add: (in package3 truck2)
     del: (at package3 s4)
+    successor: unload-truck package2 truck1 s0
 step 3: state 14 applicable 10
+    state: (at driver1 s4) (at driver2 s0) (at package1 s1) (at package2 s0) (at package3 s4) (at package5 s4) (at package6 s2) (at truck1 s0) (at truck2 s4) (at truck3 s5) (empty truck1) (empty truck2) (empty truck3) (in package4 truck2)
 board-truck driver1 truck2 s4 :: cost: 1
     add: (driving driver1 truck2)
     del: (at driver1 s4) (empty truck2)
@@ -38,8 +44,10 @@ board-truck driver2 truck1 s0 :: cost: 1
 load-truck package2 truck1 s0 :: cost: 1
     add: (in package2 truck1)
     del: (at package2 s0)
+    successor: unload-truck package4 truck2 s4
 step 4: state 14 applicable 10
-board-truck driver1 truck2 s4 :: cost: 1
+    state: (at driver1 s4) (at driver2 s0) (at package1 s1) (at package2 s0) (at package3 s4) (at package4 s4) (at package5 s4) (at package6 s2) (at truck1 s0) (at truck2 s4) (at truck3 s5) (empty truck1) (empty truck2) (empty truck3)
+board-truck driver1 truck2 s4 :: cost: 1 [successor]
     add: (driving driver1 truck2)
     del: (at driver1 s4) (empty truck2)
 board-truck driver2 truck1 s0 :: cost: 1

@@ -1,4 +1,5 @@
 step 0: state 22 applicable 20
+    state: (at rover0 waypoint4) (at rover1 waypoint0) (at rover2 waypoint3) (at rover3 waypoint1) (at_rock_sample waypoint0) (at_rock_sample waypoint1) (at_rock_sample waypoint3) (at_rock_sample waypoint4) (at_rock_sample waypoint6) (at_soil_sample waypoint0) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (available rover0) (available rover1) (available rover2) (available rover3) (channel_free general) (empty rover0store) (empty rover1store) (empty rover2store) (empty rover3store)
 calibrate rover1 camera0 objective2 waypoint0 :: cost: 1
     add: (calibrated camera0 rover1)
     del:
@@ -8,7 +9,9 @@ calibrate rover1 camera1 objective3 waypoint0 :: cost: 1
 calibrate rover1 camera2 objective1 waypoint0 :: cost: 1
     add: (calibrated camera2 rover1)
     del:
+    successor: navigate rover0 waypoint4 waypoint0
 step 1: state 22 applicable 16
+    state: (at rover0 waypoint0) (at rover1 waypoint0) (at rover2 waypoint3) (at rover3 waypoint1) (at_rock_sample waypoint0) (at_rock_sample waypoint1) (at_rock_sample waypoint3) (at_rock_sample waypoint4) (at_rock_sample waypoint6) (at_soil_sample waypoint0) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (available rover0) (available rover1) (available rover2) (available rover3) (channel_free general) (empty rover0store) (empty rover1store) (empty rover2store) (empty rover3store)
 calibrate rover1 camera0 objective2 waypoint0 :: cost: 1
     add: (calibrated camera0 rover1)
     del:
@@ -18,7 +21,9 @@ calibrate rover1 camera1 objective3 waypoint0 :: cost: 1
 calibrate rover1 camera2 objective1 waypoint0 :: cost: 1
     add: (calibrated camera2 rover1)
     del:
+    successor: navigate rover1 waypoint0 waypoint1
 step 2: state 22 applicable 13
+    state: (at rover0 waypoint0) (at rover1 waypoint1) (at rover2 waypoint3) (at rover3 waypoint1) (at_rock_sample waypoint0) (at_rock_sample waypoint1) (at_rock_sample waypoint3) (at_rock_sample waypoint4) (at_rock_sample waypoint6) (at_soil_sample waypoint0) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (available rover0) (available rover1) (available rover2) (available rover3) (channel_free general) (empty rover0store) (empty rover1store) (empty rover2store) (empty rover3store)
 calibrate rover1 camera0 objective2 waypoint1 :: cost: 1
     add: (calibrated camera0 rover1)
     del:
@@ -28,7 +33,9 @@ calibrate rover1 camera1 objective3 waypoint1 :: cost: 1
 calibrate rover1 camera2 objective1 waypoint1 :: cost: 1
     add: (calibrated camera2 rover1)
     del:
+    successor: navigate rover2 waypoint3 waypoint4
 step 3: state 22 applicable 15
+    state: (at rover0 waypoint0) (at rover1 waypoint1) (at rover2 waypoint4) (at rover3 waypoint1) (at_rock_sample waypoint0) (at_rock_sample waypoint1) (at_rock_sample waypoint3) (at_rock_sample waypoint4) (at_rock_sample waypoint6) (at_soil_sample waypoint0) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (available rover0) (available rover1) (available rover2) (available rover3) (channel_free general) (empty rover0store) (empty rover1store) (empty rover2store) (empty rover3store)
 calibrate rover1 camera0 objective2 waypoint1 :: cost: 1
     add: (calibrated camera0 rover1)
     del:
@@ -38,7 +45,9 @@ calibrate rover1 camera1 objective3 waypoint1 :: cost: 1
 calibrate rover1 camera2 objective1 waypoint1 :: cost: 1
     add: (calibrated camera2 rover1)
     del:
+    successor: navigate rover2 waypoint4 waypoint1
 step 4: state 22 applicable 12
+    state: (at rover0 waypoint0) (at rover1 waypoint1) (at rover2 waypoint1) (at rover3 waypoint1) (at_rock_sample waypoint0) (at_rock_sample waypoint1) (at_rock_sample waypoint3) (at_rock_sample waypoint4) (at_rock_sample waypoint6) (at_soil_sample waypoint0) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (available rover0) (available rover1) (available rover2) (available rover3) (channel_free general) (empty rover0store) (empty rover1store) (empty rover2store) (empty rover3store)
 calibrate rover1 camera0 objective2 waypoint1 :: cost: 1
     add: (calibrated camera0 rover1)
     del:
@@ -48,4 +57,5 @@ calibrate rover1 camera1 objective3 waypoint1 :: cost: 1
 calibrate rover1 camera2 objective1 waypoint1 :: cost: 1
     add: (calibrated camera2 rover1)
     del:
+    successor: sample_soil rover0 rover0store waypoint0
 ground atoms: 53 groundings: 35

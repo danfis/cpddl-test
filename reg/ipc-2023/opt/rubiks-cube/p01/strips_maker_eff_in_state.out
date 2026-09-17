@@ -1,4 +1,5 @@
 step 0: state 20 applicable 12
+    state: (cube1 red white blue) (cube2 orange blue yellow) (cube3 red yellow blue) (cube4 orange green yellow) (cube5 red white green) (cube6 orange blue white) (cube7 red yellow green) (cube8 orange green white) (edge12 white blue) (edge13 red blue) (edge15 red white) (edge24 orange yellow) (edge26 orange blue) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge56 white green) (edge57 red green) (edge68 orange white) (edge78 yellow green)
 b :: cost: 1
     add: (cube3 green yellow red) (cube4 blue yellow red) (cube7 white green orange) (cube8 yellow green orange) (edge34 yellow red) (edge37 green yellow) (edge48 blue yellow) (edge78 green orange)
     del: (cube3 red yellow blue) (cube4 orange green yellow) (cube7 red yellow green) (cube8 orange green white) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge78 yellow green)
@@ -8,7 +9,9 @@ brev :: cost: 1
 d :: cost: 1
     add: (cube2 orange yellow green) (cube4 orange white green) (cube6 orange yellow blue) (cube8 orange white blue) (edge24 orange green) (edge26 orange yellow) (edge48 orange white) (edge68 orange blue)
     del: (cube2 orange blue yellow) (cube4 orange green yellow) (cube6 orange blue white) (cube8 orange green white) (edge24 orange yellow) (edge26 orange blue) (edge48 orange green) (edge68 orange white)
+    successor: r
 step 1: state 20 applicable 12
+    state: (cube1 red white blue) (cube2 orange blue yellow) (cube3 red yellow blue) (cube4 orange green yellow) (cube5 blue orange white) (cube6 green orange white) (cube7 white red green) (cube8 yellow red green) (edge12 white blue) (edge13 red blue) (edge15 red white) (edge24 orange yellow) (edge26 orange blue) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge56 orange white) (edge57 white green) (edge68 yellow green) (edge78 red green)
 b :: cost: 1
     add: (cube3 green red white) (cube4 blue yellow red) (cube7 green red yellow) (cube8 yellow green orange) (edge34 yellow red) (edge37 green red) (edge48 blue yellow) (edge78 green orange)
     del: (cube3 red yellow blue) (cube4 orange green yellow) (cube7 white red green) (cube8 yellow red green) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge78 red green)
@@ -18,7 +21,9 @@ brev :: cost: 1
 d :: cost: 1
     add: (cube2 orange yellow green) (cube4 yellow green red) (cube6 orange yellow blue) (cube8 green white orange) (edge24 orange green) (edge26 orange yellow) (edge48 yellow green) (edge68 orange blue)
     del: (cube2 orange blue yellow) (cube4 orange green yellow) (cube6 green orange white) (cube8 yellow red green) (edge24 orange yellow) (edge26 orange blue) (edge48 orange green) (edge68 yellow green)
+    successor: rrev
 step 2: state 20 applicable 12
+    state: (cube1 red white blue) (cube2 orange blue yellow) (cube3 red yellow blue) (cube4 orange green yellow) (cube5 red white green) (cube6 orange blue white) (cube7 red yellow green) (cube8 orange green white) (edge12 white blue) (edge13 red blue) (edge15 red white) (edge24 orange yellow) (edge26 orange blue) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge56 white green) (edge57 red green) (edge68 orange white) (edge78 yellow green)
 b :: cost: 1
     add: (cube3 green yellow red) (cube4 blue yellow red) (cube7 white green orange) (cube8 yellow green orange) (edge34 yellow red) (edge37 green yellow) (edge48 blue yellow) (edge78 green orange)
     del: (cube3 red yellow blue) (cube4 orange green yellow) (cube7 red yellow green) (cube8 orange green white) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge78 yellow green)
@@ -28,7 +33,9 @@ brev :: cost: 1
 d :: cost: 1
     add: (cube2 orange yellow green) (cube4 orange white green) (cube6 orange yellow blue) (cube8 orange white blue) (edge24 orange green) (edge26 orange yellow) (edge48 orange white) (edge68 orange blue)
     del: (cube2 orange blue yellow) (cube4 orange green yellow) (cube6 orange blue white) (cube8 orange green white) (edge24 orange yellow) (edge26 orange blue) (edge48 orange green) (edge68 orange white)
+    successor: l
 step 3: state 20 applicable 12
+    state: (cube1 yellow red blue) (cube2 white red blue) (cube3 green orange yellow) (cube4 blue orange yellow) (cube5 red white green) (cube6 orange blue white) (cube7 red yellow green) (cube8 orange green white) (edge12 red blue) (edge13 yellow blue) (edge15 red white) (edge24 white blue) (edge26 orange blue) (edge34 orange yellow) (edge37 red yellow) (edge48 orange green) (edge56 white green) (edge57 red green) (edge68 orange white) (edge78 yellow green)
 b :: cost: 1
     add: (cube3 green yellow red) (cube4 yellow orange green) (cube7 white green orange) (cube8 yellow orange blue) (edge34 yellow red) (edge37 green yellow) (edge48 yellow orange) (edge78 green orange)
     del: (cube3 green orange yellow) (cube4 blue orange yellow) (cube7 red yellow green) (cube8 orange green white) (edge34 orange yellow) (edge37 red yellow) (edge48 orange green) (edge78 yellow green)
@@ -38,14 +45,16 @@ brev :: cost: 1
 d :: cost: 1
     add: (cube2 blue yellow orange) (cube4 orange white green) (cube6 white blue red) (cube8 orange white blue) (edge24 orange green) (edge26 white blue) (edge48 orange white) (edge68 orange blue)
     del: (cube2 white red blue) (cube4 blue orange yellow) (cube6 orange blue white) (cube8 orange green white) (edge24 white blue) (edge26 orange blue) (edge48 orange green) (edge68 orange white)
+    successor: lrev
 step 4: state 20 applicable 12
+    state: (cube1 red white blue) (cube2 orange blue yellow) (cube3 red yellow blue) (cube4 orange green yellow) (cube5 red white green) (cube6 orange blue white) (cube7 red yellow green) (cube8 orange green white) (edge12 white blue) (edge13 red blue) (edge15 red white) (edge24 orange yellow) (edge26 orange blue) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge56 white green) (edge57 red green) (edge68 orange white) (edge78 yellow green)
 b :: cost: 1
     add: (cube3 green yellow red) (cube4 blue yellow red) (cube7 white green orange) (cube8 yellow green orange) (edge34 yellow red) (edge37 green yellow) (edge48 blue yellow) (edge78 green orange)
     del: (cube3 red yellow blue) (cube4 orange green yellow) (cube7 red yellow green) (cube8 orange green white) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge78 yellow green)
 brev :: cost: 1
     add: (cube3 yellow green orange) (cube4 white green orange) (cube7 blue yellow red) (cube8 green yellow red) (edge34 green orange) (edge37 blue yellow) (edge48 green yellow) (edge78 yellow red)
     del: (cube3 red yellow blue) (cube4 orange green yellow) (cube7 red yellow green) (cube8 orange green white) (edge34 yellow blue) (edge37 red yellow) (edge48 orange green) (edge78 yellow green)
-d :: cost: 1
+d :: cost: 1 [successor]
     add: (cube2 orange yellow green) (cube4 orange white green) (cube6 orange yellow blue) (cube8 orange white blue) (edge24 orange green) (edge26 orange yellow) (edge48 orange white) (edge68 orange blue)
     del: (cube2 orange blue yellow) (cube4 orange green yellow) (cube6 orange blue white) (cube8 orange green white) (edge24 orange yellow) (edge26 orange blue) (edge48 orange green) (edge68 orange white)
 ground atoms: 180 groundings: 12

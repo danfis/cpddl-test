@@ -1,22 +1,25 @@
 step 0: state 11 applicable 6
+    state: (at document1 office3) (at document2 office3) (at document3 office4) (at document4 office4) (at document5 office4) (at document6 office4) (at document7 office8) (at document8 office8) (in-train fuel1) (in-train fuel2) (train-at office1)
 deposit-documents office1 fuel1 :: cost: 1
     add: (at fuel1 office1)
     del: (in-train fuel1)
 deposit-documents office1 fuel2 :: cost: 1
     add: (at fuel2 office1)
     del: (in-train fuel2)
-drive office1 office1 fuel1 :: cost: 1
+drive office1 office1 fuel1 :: cost: 1 [successor]
     add:
     del: (in-train fuel1)
 step 1: state 10 applicable 3
+    state: (at document1 office3) (at document2 office3) (at document3 office4) (at document4 office4) (at document5 office4) (at document6 office4) (at document7 office8) (at document8 office8) (in-train fuel2) (train-at office1)
 deposit-documents office1 fuel2 :: cost: 1
     add: (at fuel2 office1)
     del: (in-train fuel2)
 drive office1 office1 fuel2 :: cost: 1
     add:
     del: (in-train fuel2)
-drive office1 office2 fuel2 :: cost: 1
+drive office1 office2 fuel2 :: cost: 1 [successor]
     add: (train-at office2)
     del: (in-train fuel2) (train-at office1)
 step 2: state 9 applicable 0
+    state: (at document1 office3) (at document2 office3) (at document3 office4) (at document4 office4) (at document5 office4) (at document6 office4) (at document7 office8) (at document8 office8) (train-at office2)
 ground atoms: 14 groundings: 6

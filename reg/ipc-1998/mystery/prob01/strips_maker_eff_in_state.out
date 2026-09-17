@@ -1,15 +1,17 @@
 step 0: state 11 applicable 3
+    state: (craves abrasion pork) (craves depression flounder) (craves hangover rice) (craves rest pork) (harmony rest venus) (locale flounder alsace) (locale lamb pennsylvania) (locale okra guanabara) (locale pear surrey) (locale pork quebec) (locale rice bosnia)
 feast rest pork lamb alsace quebec :: cost: 1
     add: (craves rest lamb) (locale pork alsace)
     del: (craves rest pork) (locale pork quebec)
 feast rest pork okra alsace quebec :: cost: 1
     add: (craves rest okra) (locale pork alsace)
     del: (craves rest pork) (locale pork quebec)
-overcome abrasion rest pork uranus venus :: cost: 1
+overcome abrasion rest pork uranus venus :: cost: 1 [successor]
     add: (fears abrasion rest) (harmony rest uranus)
     del: (craves abrasion pork) (harmony rest venus)
 step 1: state 11 applicable 3
-feast rest pork lamb alsace quebec :: cost: 1
+    state: (craves depression flounder) (craves hangover rice) (craves rest pork) (fears abrasion rest) (harmony rest uranus) (locale flounder alsace) (locale lamb pennsylvania) (locale okra guanabara) (locale pear surrey) (locale pork quebec) (locale rice bosnia)
+feast rest pork lamb alsace quebec :: cost: 1 [successor]
     add: (craves rest lamb) (locale pork alsace)
     del: (craves rest pork) (locale pork quebec)
 feast rest pork okra alsace quebec :: cost: 1
@@ -19,30 +21,33 @@ succumb abrasion rest pork uranus venus :: cost: 1
     add: (craves abrasion pork) (harmony rest venus)
     del: (fears abrasion rest) (harmony rest uranus)
 step 2: state 11 applicable 3
+    state: (craves depression flounder) (craves hangover rice) (craves rest lamb) (fears abrasion rest) (harmony rest uranus) (locale flounder alsace) (locale lamb pennsylvania) (locale okra guanabara) (locale pear surrey) (locale pork alsace) (locale rice bosnia)
 feast rest lamb flounder surrey pennsylvania :: cost: 1
     add: (craves rest flounder) (locale lamb surrey)
     del: (craves rest lamb) (locale lamb pennsylvania)
 feast rest lamb pork surrey pennsylvania :: cost: 1
     add: (craves rest pork) (locale lamb surrey)
     del: (craves rest lamb) (locale lamb pennsylvania)
-succumb abrasion rest lamb uranus venus :: cost: 1
+succumb abrasion rest lamb uranus venus :: cost: 1 [successor]
     add: (craves abrasion lamb) (harmony rest venus)
     del: (fears abrasion rest) (harmony rest uranus)
 step 3: state 11 applicable 3
+    state: (craves abrasion lamb) (craves depression flounder) (craves hangover rice) (craves rest lamb) (harmony rest venus) (locale flounder alsace) (locale lamb pennsylvania) (locale okra guanabara) (locale pear surrey) (locale pork alsace) (locale rice bosnia)
 feast rest lamb flounder surrey pennsylvania :: cost: 1
     add: (craves rest flounder) (locale lamb surrey)
     del: (craves rest lamb) (locale lamb pennsylvania)
 feast rest lamb pork surrey pennsylvania :: cost: 1
     add: (craves rest pork) (locale lamb surrey)
     del: (craves rest lamb) (locale lamb pennsylvania)
-overcome abrasion rest lamb uranus venus :: cost: 1
+overcome abrasion rest lamb uranus venus :: cost: 1 [successor]
     add: (fears abrasion rest) (harmony rest uranus)
     del: (craves abrasion lamb) (harmony rest venus)
 step 4: state 11 applicable 3
+    state: (craves depression flounder) (craves hangover rice) (craves rest lamb) (fears abrasion rest) (harmony rest uranus) (locale flounder alsace) (locale lamb pennsylvania) (locale okra guanabara) (locale pear surrey) (locale pork alsace) (locale rice bosnia)
 feast rest lamb flounder surrey pennsylvania :: cost: 1
     add: (craves rest flounder) (locale lamb surrey)
     del: (craves rest lamb) (locale lamb pennsylvania)
-feast rest lamb pork surrey pennsylvania :: cost: 1
+feast rest lamb pork surrey pennsylvania :: cost: 1 [successor]
     add: (craves rest pork) (locale lamb surrey)
     del: (craves rest lamb) (locale lamb pennsylvania)
 succumb abrasion rest lamb uranus venus :: cost: 1

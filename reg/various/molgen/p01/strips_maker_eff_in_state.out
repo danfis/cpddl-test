@@ -1,4 +1,5 @@
 step 0: state 2 applicable 47
+    state: (cleavable e-coli-exosome) (cleavable junk-exosome)
 cleave e-coli-exosome :: cost: 1
     add: (cleaved e-coli-exosome)
     del: (cleavable e-coli-exosome)
@@ -8,7 +9,9 @@ cleave junk-exosome :: cost: 1
 ligate antibiotic-1 e-coli :: cost: 1
     add:
     del:
+    successor: reverse-transcribe insulin-gene
 step 1: state 3 applicable 48
+    state: (cleavable e-coli-exosome) (cleavable junk-exosome) (connected-cdna-mrna insulin-gene)
 cleave e-coli-exosome :: cost: 1
     add: (cleaved e-coli-exosome)
     del: (cleavable e-coli-exosome)
@@ -18,7 +21,9 @@ cleave junk-exosome :: cost: 1
 ligate antibiotic-1 e-coli :: cost: 1
     add:
     del:
+    successor: separate insulin-gene
 step 2: state 3 applicable 48
+    state: (cleavable e-coli-exosome) (cleavable junk-exosome) (single-strand insulin-gene)
 cleave e-coli-exosome :: cost: 1
     add: (cleaved e-coli-exosome)
     del: (cleavable e-coli-exosome)
@@ -28,7 +33,9 @@ cleave junk-exosome :: cost: 1
 ligate antibiotic-1 e-coli :: cost: 1
     add:
     del:
+    successor: ligate linker insulin-gene
 step 3: state 3 applicable 48
+    state: (cleavable e-coli-exosome) (cleavable junk-exosome) (single-strand insulin-gene)
 cleave e-coli-exosome :: cost: 1
     add: (cleaved e-coli-exosome)
     del: (cleavable e-coli-exosome)
@@ -38,7 +45,9 @@ cleave junk-exosome :: cost: 1
 ligate antibiotic-1 e-coli :: cost: 1
     add:
     del:
+    successor: ligate linker e-coli-exosome
 step 4: state 3 applicable 48
+    state: (cleavable e-coli-exosome) (cleavable junk-exosome) (single-strand insulin-gene)
 cleave e-coli-exosome :: cost: 1
     add: (cleaved e-coli-exosome)
     del: (cleavable e-coli-exosome)
@@ -48,4 +57,5 @@ cleave junk-exosome :: cost: 1
 ligate antibiotic-1 e-coli :: cost: 1
     add:
     del:
+    successor: ligate linker junk-exosome
 ground atoms: 9 groundings: 49

@@ -18,7 +18,7 @@ Function:
 Action:
   halve: ?f - farm
       pre: (>= (x ?f) 1)
-      eff: (assign (x ?f) (/ (x ?f) 2))
+      eff: (and (assign (x ?f) (/ (x ?f) 2)))
   move: ?f1 - farm ?f2 - farm
       pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2))
       eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))

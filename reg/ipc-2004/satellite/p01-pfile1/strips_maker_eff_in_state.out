@@ -1,4 +1,5 @@
 step 0: state 2 applicable 8
+    state: (pointing satellite0 phenomenon6) (power_avail satellite0)
 switch_on instrument0 satellite0 :: cost: 1
     add: (power_on instrument0)
     del: (power_avail satellite0)
@@ -8,27 +9,31 @@ turn_to satellite0 groundstation1 phenomenon6 :: cost: 1
 turn_to satellite0 groundstation2 phenomenon6 :: cost: 1
     add: (pointing satellite0 groundstation2)
     del: (pointing satellite0 phenomenon6)
+    successor: turn_to satellite0 star0 phenomenon6
 step 1: state 2 applicable 8
+    state: (pointing satellite0 star0) (power_avail satellite0)
 switch_on instrument0 satellite0 :: cost: 1
     add: (power_on instrument0)
     del: (power_avail satellite0)
-turn_to satellite0 groundstation1 star0 :: cost: 1
+turn_to satellite0 groundstation1 star0 :: cost: 1 [successor]
     add: (pointing satellite0 groundstation1)
     del: (pointing satellite0 star0)
 turn_to satellite0 groundstation2 star0 :: cost: 1
     add: (pointing satellite0 groundstation2)
     del: (pointing satellite0 star0)
 step 2: state 2 applicable 8
+    state: (pointing satellite0 groundstation1) (power_avail satellite0)
 switch_on instrument0 satellite0 :: cost: 1
     add: (power_on instrument0)
     del: (power_avail satellite0)
 turn_to satellite0 groundstation1 groundstation1 :: cost: 1
     add:
     del:
-turn_to satellite0 groundstation2 groundstation1 :: cost: 1
+turn_to satellite0 groundstation2 groundstation1 :: cost: 1 [successor]
     add: (pointing satellite0 groundstation2)
     del: (pointing satellite0 groundstation1)
 step 3: state 2 applicable 8
+    state: (pointing satellite0 groundstation2) (power_avail satellite0)
 switch_on instrument0 satellite0 :: cost: 1
     add: (power_on instrument0)
     del: (power_avail satellite0)
@@ -38,7 +43,9 @@ turn_to satellite0 groundstation1 groundstation2 :: cost: 1
 turn_to satellite0 groundstation2 groundstation2 :: cost: 1
     add:
     del:
+    successor: turn_to satellite0 phenomenon3 groundstation2
 step 4: state 2 applicable 8
+    state: (pointing satellite0 phenomenon3) (power_avail satellite0)
 switch_on instrument0 satellite0 :: cost: 1
     add: (power_on instrument0)
     del: (power_avail satellite0)
@@ -48,4 +55,5 @@ turn_to satellite0 groundstation1 phenomenon3 :: cost: 1
 turn_to satellite0 groundstation2 phenomenon3 :: cost: 1
     add: (pointing satellite0 groundstation2)
     del: (pointing satellite0 phenomenon3)
+    successor: turn_to satellite0 phenomenon4 phenomenon3
 ground atoms: 10 groundings: 36

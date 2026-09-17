@@ -1,8 +1,10 @@
 step 0: state 12 applicable 1
-initialize :: cost: 0
+    state: (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 some_feeder_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (notprintedwith sheet2 back black) (notprintedwith sheet2 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 front color) (uninitialized)
+initialize :: cost: 0 [successor]
     add: (available fe1-rsrc) (available hw1-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (available uc1-rsrc) (available uime-rsrc)
     del: (uninitialized)
 step 1: state 18 applicable 4
+    state: (available fe1-rsrc) (available hw1-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (available uc1-rsrc) (available uime-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 some_feeder_tray) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (notprintedwith sheet2 back black) (notprintedwith sheet2 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 front color)
 fe1-feed-letter sheet1 :: cost: 224
     add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
     del: (location sheet1 some_feeder_tray)
@@ -12,7 +14,9 @@ fe1-feed-letter sheet2 :: cost: 224
 fe1-feedmsi-letter sheet1 :: cost: 125
     add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
     del: (location sheet1 some_feeder_tray)
+    successor: fe1-feedmsi-letter sheet2
 step 2: state 19 applicable 4
+    state: (available fe1-rsrc) (available hw1-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (available uc1-rsrc) (available uime-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 fe1_exit-hw1_leftentry) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (notprintedwith sheet2 back black) (notprintedwith sheet2 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 front color) (sideup sheet2 back)
 fe1-feed-letter sheet1 :: cost: 224
     add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
     del: (location sheet1 some_feeder_tray)
@@ -22,18 +26,21 @@ fe1-feedmsi-letter sheet1 :: cost: 125
 hw1-leftentrytobottomleftexit-letter sheet2 :: cost: 1499
     add: (location sheet2 lc1_entry-hw1_bottomleftexit)
     del: (location sheet2 fe1_exit-hw1_leftentry)
+    successor: hw1-leftentrytotopleftexit-letter sheet2
 step 3: state 19 applicable 4
+    state: (available fe1-rsrc) (available hw1-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (available uc1-rsrc) (available uime-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 uc1_entry-hw1_topleftexit) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (notprintedwith sheet2 back black) (notprintedwith sheet2 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 front color) (sideup sheet2 back)
 fe1-feed-letter sheet1 :: cost: 224
     add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
     del: (location sheet1 some_feeder_tray)
 fe1-feedmsi-letter sheet1 :: cost: 125
     add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
     del: (location sheet1 some_feeder_tray)
-uc1-inverttoime-letter sheet2 back front :: cost: 8000
+uc1-inverttoime-letter sheet2 back front :: cost: 8000 [successor]
     add: (location sheet2 uc1_exittoime-uime_entry) (sideup sheet2 front)
     del: (location sheet2 uc1_entry-hw1_topleftexit) (sideup sheet2 back)
 step 4: state 19 applicable 3
-fe1-feed-letter sheet1 :: cost: 224
+    state: (available fe1-rsrc) (available hw1-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (available uc1-rsrc) (available uime-rsrc) (location dummy-sheet some_finisher_tray) (location sheet1 some_feeder_tray) (location sheet2 uc1_exittoime-uime_entry) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front black) (notprintedwith sheet1 front color) (notprintedwith sheet2 back black) (notprintedwith sheet2 back color) (notprintedwith sheet2 front black) (notprintedwith sheet2 front color) (sideup sheet2 front)
+fe1-feed-letter sheet1 :: cost: 224 [successor]
     add: (location sheet1 fe1_exit-hw1_leftentry) (sideup sheet1 back)
     del: (location sheet1 some_feeder_tray)
 fe1-feedmsi-letter sheet1 :: cost: 125

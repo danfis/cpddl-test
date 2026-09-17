@@ -1,5 +1,6 @@
 step 0: state 40 applicable 3
-move player-01 pos-5-5 pos-5-4 dir-up :: cost: 0
+    state: (at player-01 pos-5-5) (at stone-01 pos-3-3) (at stone-02 pos-4-4) (clear pos-1-5) (clear pos-1-6) (clear pos-1-7) (clear pos-1-8) (clear pos-2-2) (clear pos-2-3) (clear pos-2-6) (clear pos-2-7) (clear pos-2-8) (clear pos-3-2) (clear pos-3-4) (clear pos-4-2) (clear pos-4-3) (clear pos-4-6) (clear pos-4-7) (clear pos-5-3) (clear pos-5-4) (clear pos-5-6) (clear pos-5-7) (clear pos-6-1) (clear pos-6-5) (clear pos-6-6) (clear pos-6-7) (clear pos-7-1) (clear pos-7-2) (clear pos-7-3) (clear pos-7-5) (clear pos-7-7) (clear pos-8-1) (clear pos-8-2) (clear pos-8-3) (clear pos-8-5) (clear pos-8-6) (clear pos-8-7) (clear pos-9-1) (clear pos-9-2) (clear pos-9-3)
+move player-01 pos-5-5 pos-5-4 dir-up :: cost: 0 [successor]
     add: (at player-01 pos-5-4) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-5-4)
 move player-01 pos-5-5 pos-5-6 dir-down :: cost: 0
@@ -9,27 +10,30 @@ move player-01 pos-5-5 pos-6-5 dir-right :: cost: 0
     add: (at player-01 pos-6-5) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-6-5)
 step 1: state 40 applicable 3
+    state: (at player-01 pos-5-4) (at stone-01 pos-3-3) (at stone-02 pos-4-4) (clear pos-1-5) (clear pos-1-6) (clear pos-1-7) (clear pos-1-8) (clear pos-2-2) (clear pos-2-3) (clear pos-2-6) (clear pos-2-7) (clear pos-2-8) (clear pos-3-2) (clear pos-3-4) (clear pos-4-2) (clear pos-4-3) (clear pos-4-6) (clear pos-4-7) (clear pos-5-3) (clear pos-5-5) (clear pos-5-6) (clear pos-5-7) (clear pos-6-1) (clear pos-6-5) (clear pos-6-6) (clear pos-6-7) (clear pos-7-1) (clear pos-7-2) (clear pos-7-3) (clear pos-7-5) (clear pos-7-7) (clear pos-8-1) (clear pos-8-2) (clear pos-8-3) (clear pos-8-5) (clear pos-8-6) (clear pos-8-7) (clear pos-9-1) (clear pos-9-2) (clear pos-9-3)
 move player-01 pos-5-4 pos-5-3 dir-up :: cost: 0
     add: (at player-01 pos-5-3) (clear pos-5-4)
     del: (at player-01 pos-5-4) (clear pos-5-3)
-move player-01 pos-5-4 pos-5-5 dir-down :: cost: 0
+move player-01 pos-5-4 pos-5-5 dir-down :: cost: 0 [successor]
     add: (at player-01 pos-5-5) (clear pos-5-4)
     del: (at player-01 pos-5-4) (clear pos-5-5)
 push-to-nongoal player-01 stone-02 pos-5-4 pos-4-4 pos-3-4 dir-left :: cost: 1
     add: (at player-01 pos-4-4) (at stone-02 pos-3-4) (clear pos-5-4)
     del: (at player-01 pos-5-4) (at stone-02 pos-4-4) (clear pos-3-4)
 step 2: state 40 applicable 3
+    state: (at player-01 pos-5-5) (at stone-01 pos-3-3) (at stone-02 pos-4-4) (clear pos-1-5) (clear pos-1-6) (clear pos-1-7) (clear pos-1-8) (clear pos-2-2) (clear pos-2-3) (clear pos-2-6) (clear pos-2-7) (clear pos-2-8) (clear pos-3-2) (clear pos-3-4) (clear pos-4-2) (clear pos-4-3) (clear pos-4-6) (clear pos-4-7) (clear pos-5-3) (clear pos-5-4) (clear pos-5-6) (clear pos-5-7) (clear pos-6-1) (clear pos-6-5) (clear pos-6-6) (clear pos-6-7) (clear pos-7-1) (clear pos-7-2) (clear pos-7-3) (clear pos-7-5) (clear pos-7-7) (clear pos-8-1) (clear pos-8-2) (clear pos-8-3) (clear pos-8-5) (clear pos-8-6) (clear pos-8-7) (clear pos-9-1) (clear pos-9-2) (clear pos-9-3)
 move player-01 pos-5-5 pos-5-4 dir-up :: cost: 0
     add: (at player-01 pos-5-4) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-5-4)
 move player-01 pos-5-5 pos-5-6 dir-down :: cost: 0
     add: (at player-01 pos-5-6) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-5-6)
-move player-01 pos-5-5 pos-6-5 dir-right :: cost: 0
+move player-01 pos-5-5 pos-6-5 dir-right :: cost: 0 [successor]
     add: (at player-01 pos-6-5) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-6-5)
 step 3: state 40 applicable 3
-move player-01 pos-6-5 pos-5-5 dir-left :: cost: 0
+    state: (at player-01 pos-6-5) (at stone-01 pos-3-3) (at stone-02 pos-4-4) (clear pos-1-5) (clear pos-1-6) (clear pos-1-7) (clear pos-1-8) (clear pos-2-2) (clear pos-2-3) (clear pos-2-6) (clear pos-2-7) (clear pos-2-8) (clear pos-3-2) (clear pos-3-4) (clear pos-4-2) (clear pos-4-3) (clear pos-4-6) (clear pos-4-7) (clear pos-5-3) (clear pos-5-4) (clear pos-5-5) (clear pos-5-6) (clear pos-5-7) (clear pos-6-1) (clear pos-6-6) (clear pos-6-7) (clear pos-7-1) (clear pos-7-2) (clear pos-7-3) (clear pos-7-5) (clear pos-7-7) (clear pos-8-1) (clear pos-8-2) (clear pos-8-3) (clear pos-8-5) (clear pos-8-6) (clear pos-8-7) (clear pos-9-1) (clear pos-9-2) (clear pos-9-3)
+move player-01 pos-6-5 pos-5-5 dir-left :: cost: 0 [successor]
     add: (at player-01 pos-5-5) (clear pos-6-5)
     del: (at player-01 pos-6-5) (clear pos-5-5)
 move player-01 pos-6-5 pos-6-6 dir-down :: cost: 0
@@ -39,10 +43,11 @@ move player-01 pos-6-5 pos-7-5 dir-right :: cost: 0
     add: (at player-01 pos-7-5) (clear pos-6-5)
     del: (at player-01 pos-6-5) (clear pos-7-5)
 step 4: state 40 applicable 3
+    state: (at player-01 pos-5-5) (at stone-01 pos-3-3) (at stone-02 pos-4-4) (clear pos-1-5) (clear pos-1-6) (clear pos-1-7) (clear pos-1-8) (clear pos-2-2) (clear pos-2-3) (clear pos-2-6) (clear pos-2-7) (clear pos-2-8) (clear pos-3-2) (clear pos-3-4) (clear pos-4-2) (clear pos-4-3) (clear pos-4-6) (clear pos-4-7) (clear pos-5-3) (clear pos-5-4) (clear pos-5-6) (clear pos-5-7) (clear pos-6-1) (clear pos-6-5) (clear pos-6-6) (clear pos-6-7) (clear pos-7-1) (clear pos-7-2) (clear pos-7-3) (clear pos-7-5) (clear pos-7-7) (clear pos-8-1) (clear pos-8-2) (clear pos-8-3) (clear pos-8-5) (clear pos-8-6) (clear pos-8-7) (clear pos-9-1) (clear pos-9-2) (clear pos-9-3)
 move player-01 pos-5-5 pos-5-4 dir-up :: cost: 0
     add: (at player-01 pos-5-4) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-5-4)
-move player-01 pos-5-5 pos-5-6 dir-down :: cost: 0
+move player-01 pos-5-5 pos-5-6 dir-down :: cost: 0 [successor]
     add: (at player-01 pos-5-6) (clear pos-5-5)
     del: (at player-01 pos-5-5) (clear pos-5-6)
 move player-01 pos-5-5 pos-6-5 dir-right :: cost: 0

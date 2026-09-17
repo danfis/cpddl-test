@@ -1,4 +1,5 @@
 step 0: state 39 applicable 435
+    state: (at_host-nobody-bigfoot) (at_host-nobody-everest) (at_host-nobody-sherpa) (at_host-nobody-yeti) (console_user-nobody-nouid-bigfoot) (console_user-nobody-nouid-sherpa) (console_user-nobody-nouid-yeti) (in_room-key_0-adams_office) (inst_by-greg_inst-nobody) (inst_by-mandatory_update-nobody) (not-authenticated-adam_uid-bigfoot) (not-authenticated-bob_uid-yeti) (not-authenticated-greg_uid-sherpa) (not-connected-dmss1) (not-connected-dmss2) (not-connecting-dmss1) (not-connecting-dmss2) (not-dms_established-dmss1) (not-dms_established-dmss2) (not-has_process-bigfoot-proc_0) (not-has_process-bigfoot-proc_1) (not-has_process-bigfoot-proc_2) (not-has_process-bigfoot-proc_3) (not-has_process-sherpa-proc_0) (not-has_process-sherpa-proc_1) (not-has_process-sherpa-proc_2) (not-has_process-sherpa-proc_3) (not-has_process-yeti-proc_0) (not-has_process-yeti-proc_1) (not-has_process-yeti-proc_2) (not-has_process-yeti-proc_3) (not-host_locked-bigfoot) (not-host_locked-sherpa) (not-host_locked-yeti) (not-mandatory_step-adam) (not-mandatory_step-bob) (not-mandatory_step-greg) (not-mandatory_step-nobody) (pmode-m_free)
 dms_begin_session-dmss1 :: cost: 0
     add: (connecting-dmss1) (pmode-m_dms_sess)
     del: (not-connecting-dmss1) (pmode-m_free)
@@ -8,7 +9,9 @@ dms_begin_session-dmss2 :: cost: 0
 grab_key-adam-key_0-adams_office :: cost: 0
     add: (has_key-adam-key_0)
     del: (in_room-key_0-adams_office)
+    successor: leave_host-greg-everest
 step 1: state 39 applicable 435
+    state: (at_host-nobody-bigfoot) (at_host-nobody-everest) (at_host-nobody-sherpa) (at_host-nobody-yeti) (console_user-nobody-nouid-bigfoot) (console_user-nobody-nouid-sherpa) (console_user-nobody-nouid-yeti) (in_room-key_0-adams_office) (inst_by-greg_inst-nobody) (inst_by-mandatory_update-nobody) (not-authenticated-adam_uid-bigfoot) (not-authenticated-bob_uid-yeti) (not-authenticated-greg_uid-sherpa) (not-connected-dmss1) (not-connected-dmss2) (not-connecting-dmss1) (not-connecting-dmss2) (not-dms_established-dmss1) (not-dms_established-dmss2) (not-has_process-bigfoot-proc_0) (not-has_process-bigfoot-proc_1) (not-has_process-bigfoot-proc_2) (not-has_process-bigfoot-proc_3) (not-has_process-sherpa-proc_0) (not-has_process-sherpa-proc_1) (not-has_process-sherpa-proc_2) (not-has_process-sherpa-proc_3) (not-has_process-yeti-proc_0) (not-has_process-yeti-proc_1) (not-has_process-yeti-proc_2) (not-has_process-yeti-proc_3) (not-host_locked-bigfoot) (not-host_locked-sherpa) (not-host_locked-yeti) (not-mandatory_step-adam) (not-mandatory_step-bob) (not-mandatory_step-greg) (not-mandatory_step-nobody) (pmode-m_free)
 dms_begin_session-dmss1 :: cost: 0
     add: (connecting-dmss1) (pmode-m_dms_sess)
     del: (not-connecting-dmss1) (pmode-m_free)
@@ -18,7 +21,9 @@ dms_begin_session-dmss2 :: cost: 0
 grab_key-adam-key_0-adams_office :: cost: 0
     add: (has_key-adam-key_0)
     del: (in_room-key_0-adams_office)
+    successor: leave_host-greg-sherpa
 step 2: state 39 applicable 435
+    state: (at_host-nobody-bigfoot) (at_host-nobody-everest) (at_host-nobody-sherpa) (at_host-nobody-yeti) (console_user-nobody-nouid-bigfoot) (console_user-nobody-nouid-sherpa) (console_user-nobody-nouid-yeti) (in_room-key_0-adams_office) (inst_by-greg_inst-nobody) (inst_by-mandatory_update-nobody) (not-authenticated-adam_uid-bigfoot) (not-authenticated-bob_uid-yeti) (not-authenticated-greg_uid-sherpa) (not-connected-dmss1) (not-connected-dmss2) (not-connecting-dmss1) (not-connecting-dmss2) (not-dms_established-dmss1) (not-dms_established-dmss2) (not-has_process-bigfoot-proc_0) (not-has_process-bigfoot-proc_1) (not-has_process-bigfoot-proc_2) (not-has_process-bigfoot-proc_3) (not-has_process-sherpa-proc_0) (not-has_process-sherpa-proc_1) (not-has_process-sherpa-proc_2) (not-has_process-sherpa-proc_3) (not-has_process-yeti-proc_0) (not-has_process-yeti-proc_1) (not-has_process-yeti-proc_2) (not-has_process-yeti-proc_3) (not-host_locked-bigfoot) (not-host_locked-sherpa) (not-host_locked-yeti) (not-mandatory_step-adam) (not-mandatory_step-bob) (not-mandatory_step-greg) (not-mandatory_step-nobody) (pmode-m_free)
 dms_begin_session-dmss1 :: cost: 0
     add: (connecting-dmss1) (pmode-m_dms_sess)
     del: (not-connecting-dmss1) (pmode-m_free)
@@ -28,7 +33,9 @@ dms_begin_session-dmss2 :: cost: 0
 grab_key-adam-key_0-adams_office :: cost: 0
     add: (has_key-adam-key_0)
     del: (in_room-key_0-adams_office)
+    successor: leave_host-greg-bigfoot
 step 3: state 39 applicable 435
+    state: (at_host-nobody-bigfoot) (at_host-nobody-everest) (at_host-nobody-sherpa) (at_host-nobody-yeti) (console_user-nobody-nouid-bigfoot) (console_user-nobody-nouid-sherpa) (console_user-nobody-nouid-yeti) (in_room-key_0-adams_office) (inst_by-greg_inst-nobody) (inst_by-mandatory_update-nobody) (not-authenticated-adam_uid-bigfoot) (not-authenticated-bob_uid-yeti) (not-authenticated-greg_uid-sherpa) (not-connected-dmss1) (not-connected-dmss2) (not-connecting-dmss1) (not-connecting-dmss2) (not-dms_established-dmss1) (not-dms_established-dmss2) (not-has_process-bigfoot-proc_0) (not-has_process-bigfoot-proc_1) (not-has_process-bigfoot-proc_2) (not-has_process-bigfoot-proc_3) (not-has_process-sherpa-proc_0) (not-has_process-sherpa-proc_1) (not-has_process-sherpa-proc_2) (not-has_process-sherpa-proc_3) (not-has_process-yeti-proc_0) (not-has_process-yeti-proc_1) (not-has_process-yeti-proc_2) (not-has_process-yeti-proc_3) (not-host_locked-bigfoot) (not-host_locked-sherpa) (not-host_locked-yeti) (not-mandatory_step-adam) (not-mandatory_step-bob) (not-mandatory_step-greg) (not-mandatory_step-nobody) (pmode-m_free)
 dms_begin_session-dmss1 :: cost: 0
     add: (connecting-dmss1) (pmode-m_dms_sess)
     del: (not-connecting-dmss1) (pmode-m_free)
@@ -38,7 +45,9 @@ dms_begin_session-dmss2 :: cost: 0
 grab_key-adam-key_0-adams_office :: cost: 0
     add: (has_key-adam-key_0)
     del: (in_room-key_0-adams_office)
+    successor: leave_host-greg-yeti
 step 4: state 39 applicable 435
+    state: (at_host-nobody-bigfoot) (at_host-nobody-everest) (at_host-nobody-sherpa) (at_host-nobody-yeti) (console_user-nobody-nouid-bigfoot) (console_user-nobody-nouid-sherpa) (console_user-nobody-nouid-yeti) (in_room-key_0-adams_office) (inst_by-greg_inst-nobody) (inst_by-mandatory_update-nobody) (not-authenticated-adam_uid-bigfoot) (not-authenticated-bob_uid-yeti) (not-authenticated-greg_uid-sherpa) (not-connected-dmss1) (not-connected-dmss2) (not-connecting-dmss1) (not-connecting-dmss2) (not-dms_established-dmss1) (not-dms_established-dmss2) (not-has_process-bigfoot-proc_0) (not-has_process-bigfoot-proc_1) (not-has_process-bigfoot-proc_2) (not-has_process-bigfoot-proc_3) (not-has_process-sherpa-proc_0) (not-has_process-sherpa-proc_1) (not-has_process-sherpa-proc_2) (not-has_process-sherpa-proc_3) (not-has_process-yeti-proc_0) (not-has_process-yeti-proc_1) (not-has_process-yeti-proc_2) (not-has_process-yeti-proc_3) (not-host_locked-bigfoot) (not-host_locked-sherpa) (not-host_locked-yeti) (not-mandatory_step-adam) (not-mandatory_step-bob) (not-mandatory_step-greg) (not-mandatory_step-nobody) (pmode-m_free)
 dms_begin_session-dmss1 :: cost: 0
     add: (connecting-dmss1) (pmode-m_dms_sess)
     del: (not-connecting-dmss1) (pmode-m_free)
@@ -48,4 +57,5 @@ dms_begin_session-dmss2 :: cost: 0
 grab_key-adam-key_0-adams_office :: cost: 0
     add: (has_key-adam-key_0)
     del: (in_room-key_0-adams_office)
+    successor: leave_host-adam-everest
 ground atoms: 47 groundings: 435

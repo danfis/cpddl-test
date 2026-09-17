@@ -1,0 +1,66 @@
+Step 0 (current_gear g1)
+size: 6
+accelerate g1 :: cost: 0
+    add:
+    del:
+    num: 0 0 1 200 0
+decelerate g1 :: cost: 0
+    add:
+    del:
+    num: 0 0 0 200 0
+drive_aligned_gear g1 :: cost: 20064
+    add:
+    del:
+    num: 1 1 1 189 11
+Step 1 (current_gear g1)
+size: 6
+accelerate g1 :: cost: 0
+    add:
+    del:
+    num: 0 0 2 200 0
+decelerate g1 :: cost: 0
+    add:
+    del:
+    num: 0 0 0 200 0
+gear_up g1 g2 :: cost: 1
+    add: (current_gear g2)
+    del: (current_gear g1)
+    num: 0 0 0 200 0
+drive_aligned_gear g1 :: cost: 20064
+    add:
+    del:
+    num: 0 0 0 189 11
+Step 2 (current_gear g1)
+size: 6
+accelerate g1 :: cost: 0
+    add:
+    del:
+    num: 0 0 1 200 0
+decelerate g1 :: cost: 0
+    add:
+    del:
+    num: 0 0 -1 200 0
+gear_up g1 g2 :: cost: 1
+    add: (current_gear g2)
+    del: (current_gear g1)
+    num: 0 0 0 200 0
+drive_aligned_gear g1 :: cost: 20064
+    add:
+    del:
+    num: 0 0 0 189 11
+Step 3 (current_gear g2)
+size: 6
+decelerate g2 :: cost: 0
+    add:
+    del:
+    num: 0 0 -1 200 0
+gear_down g2 g1 :: cost: 1
+    add: (current_gear g1)
+    del: (current_gear g2)
+    num: 0 0 0 200 0
+drive_under_gear g2 :: cost: 20352
+    add:
+    del:
+    num: 0 0 0 183 17
+Step 4
+size: 0

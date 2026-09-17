@@ -1,5 +1,6 @@
 step 0: state 14 applicable 3
-drive truck1 l3 l1 t0 t1 :: cost: 1
+    state: (at package1 l2) (at package2 l2) (at package3 l2) (at package4 l4) (at package5 l4) (at package6 l4) (at package7 l2) (at package8 l2) (at package9 l2) (at truck1 l3) (free a1 truck1) (free a2 truck1) (free a3 truck1) (time-now t0)
+drive truck1 l3 l1 t0 t1 :: cost: 1 [successor]
     add: (at truck1 l1) (time-now t1)
     del: (at truck1 l3) (time-now t0)
 drive truck1 l3 l2 t0 t1 :: cost: 1
@@ -9,6 +10,7 @@ drive truck1 l3 l4 t0 t1 :: cost: 1
     add: (at truck1 l4) (time-now t1)
     del: (at truck1 l3) (time-now t0)
 step 1: state 14 applicable 111
+    state: (at package1 l2) (at package2 l2) (at package3 l2) (at package4 l4) (at package5 l4) (at package6 l4) (at package7 l2) (at package8 l2) (at package9 l2) (at truck1 l1) (free a1 truck1) (free a2 truck1) (free a3 truck1) (time-now t1)
 deliver package1 l2 t1 t1 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t1)
     del: (at package1 l2)
@@ -18,7 +20,9 @@ deliver package1 l2 t1 t10 :: cost: 1
 deliver package1 l2 t1 t11 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t11)
     del: (at package1 l2)
+    successor: drive truck1 l1 l3 t1 t2
 step 2: state 14 applicable 102
+    state: (at package1 l2) (at package2 l2) (at package3 l2) (at package4 l4) (at package5 l4) (at package6 l4) (at package7 l2) (at package8 l2) (at package9 l2) (at truck1 l3) (free a1 truck1) (free a2 truck1) (free a3 truck1) (time-now t2)
 deliver package1 l2 t2 t10 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t10)
     del: (at package1 l2)
@@ -28,7 +32,9 @@ deliver package1 l2 t2 t11 :: cost: 1
 deliver package1 l2 t2 t12 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t12)
     del: (at package1 l2)
+    successor: drive truck1 l3 l4 t2 t3
 step 3: state 14 applicable 102
+    state: (at package1 l2) (at package2 l2) (at package3 l2) (at package4 l4) (at package5 l4) (at package6 l4) (at package7 l2) (at package8 l2) (at package9 l2) (at truck1 l4) (free a1 truck1) (free a2 truck1) (free a3 truck1) (time-now t3)
 deliver package1 l2 t3 t10 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t10)
     del: (at package1 l2)
@@ -38,7 +44,9 @@ deliver package1 l2 t3 t11 :: cost: 1
 deliver package1 l2 t3 t12 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t12)
     del: (at package1 l2)
+    successor: drive truck1 l4 l1 t3 t4
 step 4: state 14 applicable 84
+    state: (at package1 l2) (at package2 l2) (at package3 l2) (at package4 l4) (at package5 l4) (at package6 l4) (at package7 l2) (at package8 l2) (at package9 l2) (at truck1 l1) (free a1 truck1) (free a2 truck1) (free a3 truck1) (time-now t4)
 deliver package1 l2 t4 t10 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t10)
     del: (at package1 l2)
@@ -48,4 +56,5 @@ deliver package1 l2 t4 t11 :: cost: 1
 deliver package1 l2 t4 t12 :: cost: 1
     add: (at-destination package1 l2) (delivered package1 l2 t12)
     del: (at package1 l2)
+    successor: deliver package1 l2 t4 t5
 ground atoms: 148 groundings: 402

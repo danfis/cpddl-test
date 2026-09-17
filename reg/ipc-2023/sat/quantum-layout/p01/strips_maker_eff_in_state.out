@@ -1,5 +1,6 @@
 step 0: state 62 applicable 36
-apply_cnot_l5_l6_i3 p0 p1 :: cost: 1
+    state: (NOT-initialized p0) (NOT-initialized p1) (NOT-initialized p10) (NOT-initialized p11) (NOT-initialized p12) (NOT-initialized p13) (NOT-initialized p2) (NOT-initialized p3) (NOT-initialized p4) (NOT-initialized p5) (NOT-initialized p6) (NOT-initialized p7) (NOT-initialized p8) (NOT-initialized p9) (NOT-occupied_pqubit p0) (NOT-occupied_pqubit p1) (NOT-occupied_pqubit p10) (NOT-occupied_pqubit p11) (NOT-occupied_pqubit p12) (NOT-occupied_pqubit p13) (NOT-occupied_pqubit p2) (NOT-occupied_pqubit p3) (NOT-occupied_pqubit p4) (NOT-occupied_pqubit p5) (NOT-occupied_pqubit p6) (NOT-occupied_pqubit p7) (NOT-occupied_pqubit p8) (NOT-occupied_pqubit p9) (rcnot l0_l4_i23) (rcnot l0_l4_i27) (rcnot l0_l4_i54) (rcnot l0_l4_i58) (rcnot l1_l4_i21) (rcnot l1_l4_i25) (rcnot l1_l4_i52) (rcnot l1_l4_i56) (rcnot l2_l4_i17) (rcnot l2_l4_i19) (rcnot l2_l4_i66) (rcnot l2_l4_i68) (rcnot l2_l5_i14) (rcnot l2_l5_i32) (rcnot l2_l5_i48) (rcnot l2_l5_i63) (rcnot l3_l5_i10) (rcnot l3_l5_i41) (rcnot l3_l5_i43) (rcnot l3_l5_i8) (rcnot l3_l6_i38) (rcnot l3_l6_i5) (rcnot l4_l5_i12) (rcnot l4_l5_i16) (rcnot l4_l5_i30) (rcnot l4_l5_i34) (rcnot l4_l5_i46) (rcnot l4_l5_i50) (rcnot l4_l5_i61) (rcnot l4_l5_i65) (rcnot l5_l6_i3) (rcnot l5_l6_i36) (rcnot l5_l6_i40) (rcnot l5_l6_i7)
+apply_cnot_l5_l6_i3 p0 p1 :: cost: 1 [successor]
     add: (NOT-rcnot l5_l6_i3) (mapped l5 p0) (mapped l6 p1)
     del: (NOT-initialized p0) (NOT-initialized p1) (NOT-occupied_pqubit p0) (NOT-occupied_pqubit p1) (rcnot l5_l6_i3)
 apply_cnot_l5_l6_i3 p1 p0 :: cost: 1
@@ -9,6 +10,7 @@ apply_cnot_l5_l6_i3 p1 p13 :: cost: 1
     add: (NOT-rcnot l5_l6_i3) (mapped l5 p1) (mapped l6 p13)
     del: (NOT-initialized p1) (NOT-initialized p13) (NOT-occupied_pqubit p1) (NOT-occupied_pqubit p13) (rcnot l5_l6_i3)
 step 1: state 60 applicable 6
+    state: (NOT-initialized p10) (NOT-initialized p11) (NOT-initialized p12) (NOT-initialized p13) (NOT-initialized p2) (NOT-initialized p3) (NOT-initialized p4) (NOT-initialized p5) (NOT-initialized p6) (NOT-initialized p7) (NOT-initialized p8) (NOT-initialized p9) (NOT-occupied_pqubit p10) (NOT-occupied_pqubit p11) (NOT-occupied_pqubit p12) (NOT-occupied_pqubit p13) (NOT-occupied_pqubit p2) (NOT-occupied_pqubit p3) (NOT-occupied_pqubit p4) (NOT-occupied_pqubit p5) (NOT-occupied_pqubit p6) (NOT-occupied_pqubit p7) (NOT-occupied_pqubit p8) (NOT-occupied_pqubit p9) (NOT-rcnot l5_l6_i3) (mapped l5 p0) (mapped l6 p1) (rcnot l0_l4_i23) (rcnot l0_l4_i27) (rcnot l0_l4_i54) (rcnot l0_l4_i58) (rcnot l1_l4_i21) (rcnot l1_l4_i25) (rcnot l1_l4_i52) (rcnot l1_l4_i56) (rcnot l2_l4_i17) (rcnot l2_l4_i19) (rcnot l2_l4_i66) (rcnot l2_l4_i68) (rcnot l2_l5_i14) (rcnot l2_l5_i32) (rcnot l2_l5_i48) (rcnot l2_l5_i63) (rcnot l3_l5_i10) (rcnot l3_l5_i41) (rcnot l3_l5_i43) (rcnot l3_l5_i8) (rcnot l3_l6_i38) (rcnot l3_l6_i5) (rcnot l4_l5_i12) (rcnot l4_l5_i16) (rcnot l4_l5_i30) (rcnot l4_l5_i34) (rcnot l4_l5_i46) (rcnot l4_l5_i50) (rcnot l4_l5_i61) (rcnot l4_l5_i65) (rcnot l5_l6_i36) (rcnot l5_l6_i40) (rcnot l5_l6_i7)
 apply_cnot_l3_l6_i5 p13 p1 :: cost: 1
     add: (NOT-rcnot l3_l6_i5) (mapped l3 p13)
     del: (NOT-initialized p13) (NOT-occupied_pqubit p13) (rcnot l3_l6_i5)
@@ -18,7 +20,9 @@ apply_cnot_l3_l6_i5 p2 p1 :: cost: 1
 swap l5 l6 p0 p1 :: cost: 1
     add: (mapped l5 p1) (mapped l6 p0)
     del: (mapped l5 p0) (mapped l6 p1)
+    successor: swap l6 l5 p1 p0
 step 2: state 60 applicable 4
+    state: (NOT-initialized p10) (NOT-initialized p11) (NOT-initialized p12) (NOT-initialized p13) (NOT-initialized p2) (NOT-initialized p3) (NOT-initialized p4) (NOT-initialized p5) (NOT-initialized p6) (NOT-initialized p7) (NOT-initialized p8) (NOT-initialized p9) (NOT-occupied_pqubit p10) (NOT-occupied_pqubit p11) (NOT-occupied_pqubit p12) (NOT-occupied_pqubit p13) (NOT-occupied_pqubit p2) (NOT-occupied_pqubit p3) (NOT-occupied_pqubit p4) (NOT-occupied_pqubit p5) (NOT-occupied_pqubit p6) (NOT-occupied_pqubit p7) (NOT-occupied_pqubit p8) (NOT-occupied_pqubit p9) (NOT-rcnot l5_l6_i3) (mapped l5 p1) (mapped l6 p0) (rcnot l0_l4_i23) (rcnot l0_l4_i27) (rcnot l0_l4_i54) (rcnot l0_l4_i58) (rcnot l1_l4_i21) (rcnot l1_l4_i25) (rcnot l1_l4_i52) (rcnot l1_l4_i56) (rcnot l2_l4_i17) (rcnot l2_l4_i19) (rcnot l2_l4_i66) (rcnot l2_l4_i68) (rcnot l2_l5_i14) (rcnot l2_l5_i32) (rcnot l2_l5_i48) (rcnot l2_l5_i63) (rcnot l3_l5_i10) (rcnot l3_l5_i41) (rcnot l3_l5_i43) (rcnot l3_l5_i8) (rcnot l3_l6_i38) (rcnot l3_l6_i5) (rcnot l4_l5_i12) (rcnot l4_l5_i16) (rcnot l4_l5_i30) (rcnot l4_l5_i34) (rcnot l4_l5_i46) (rcnot l4_l5_i50) (rcnot l4_l5_i61) (rcnot l4_l5_i65) (rcnot l5_l6_i36) (rcnot l5_l6_i40) (rcnot l5_l6_i7)
 swap l5 l6 p1 p0 :: cost: 1
     add: (mapped l5 p0) (mapped l6 p1)
     del: (mapped l5 p1) (mapped l6 p0)
@@ -28,7 +32,9 @@ swap l6 l5 p0 p1 :: cost: 1
 swap-ancilary l5 p1 p13 :: cost: 1
     add: (NOT-occupied_pqubit p1) (mapped l5 p13)
     del: (NOT-initialized p13) (NOT-occupied_pqubit p13) (mapped l5 p1)
+    successor: swap-ancilary l5 p1 p2
 step 3: state 59 applicable 4
+    state: (NOT-initialized p10) (NOT-initialized p11) (NOT-initialized p12) (NOT-initialized p13) (NOT-initialized p3) (NOT-initialized p4) (NOT-initialized p5) (NOT-initialized p6) (NOT-initialized p7) (NOT-initialized p8) (NOT-initialized p9) (NOT-occupied_pqubit p1) (NOT-occupied_pqubit p10) (NOT-occupied_pqubit p11) (NOT-occupied_pqubit p12) (NOT-occupied_pqubit p13) (NOT-occupied_pqubit p3) (NOT-occupied_pqubit p4) (NOT-occupied_pqubit p5) (NOT-occupied_pqubit p6) (NOT-occupied_pqubit p7) (NOT-occupied_pqubit p8) (NOT-occupied_pqubit p9) (NOT-rcnot l5_l6_i3) (mapped l5 p2) (mapped l6 p0) (rcnot l0_l4_i23) (rcnot l0_l4_i27) (rcnot l0_l4_i54) (rcnot l0_l4_i58) (rcnot l1_l4_i21) (rcnot l1_l4_i25) (rcnot l1_l4_i52) (rcnot l1_l4_i56) (rcnot l2_l4_i17) (rcnot l2_l4_i19) (rcnot l2_l4_i66) (rcnot l2_l4_i68) (rcnot l2_l5_i14) (rcnot l2_l5_i32) (rcnot l2_l5_i48) (rcnot l2_l5_i63) (rcnot l3_l5_i10) (rcnot l3_l5_i41) (rcnot l3_l5_i43) (rcnot l3_l5_i8) (rcnot l3_l6_i38) (rcnot l3_l6_i5) (rcnot l4_l5_i12) (rcnot l4_l5_i16) (rcnot l4_l5_i30) (rcnot l4_l5_i34) (rcnot l4_l5_i46) (rcnot l4_l5_i50) (rcnot l4_l5_i61) (rcnot l4_l5_i65) (rcnot l5_l6_i36) (rcnot l5_l6_i40) (rcnot l5_l6_i7)
 swap-ancilary l5 p2 p1 :: cost: 1
     add: (NOT-occupied_pqubit p2) (mapped l5 p1)
     del: (NOT-occupied_pqubit p1) (mapped l5 p2)
@@ -38,7 +44,9 @@ swap-ancilary l5 p2 p12 :: cost: 1
 swap-ancilary l5 p2 p3 :: cost: 1
     add: (NOT-occupied_pqubit p2) (mapped l5 p3)
     del: (NOT-initialized p3) (NOT-occupied_pqubit p3) (mapped l5 p2)
+    successor: swap-ancilary l6 p0 p1
 step 4: state 59 applicable 7
+    state: (NOT-initialized p10) (NOT-initialized p11) (NOT-initialized p12) (NOT-initialized p13) (NOT-initialized p3) (NOT-initialized p4) (NOT-initialized p5) (NOT-initialized p6) (NOT-initialized p7) (NOT-initialized p8) (NOT-initialized p9) (NOT-occupied_pqubit p0) (NOT-occupied_pqubit p10) (NOT-occupied_pqubit p11) (NOT-occupied_pqubit p12) (NOT-occupied_pqubit p13) (NOT-occupied_pqubit p3) (NOT-occupied_pqubit p4) (NOT-occupied_pqubit p5) (NOT-occupied_pqubit p6) (NOT-occupied_pqubit p7) (NOT-occupied_pqubit p8) (NOT-occupied_pqubit p9) (NOT-rcnot l5_l6_i3) (mapped l5 p2) (mapped l6 p1) (rcnot l0_l4_i23) (rcnot l0_l4_i27) (rcnot l0_l4_i54) (rcnot l0_l4_i58) (rcnot l1_l4_i21) (rcnot l1_l4_i25) (rcnot l1_l4_i52) (rcnot l1_l4_i56) (rcnot l2_l4_i17) (rcnot l2_l4_i19) (rcnot l2_l4_i66) (rcnot l2_l4_i68) (rcnot l2_l5_i14) (rcnot l2_l5_i32) (rcnot l2_l5_i48) (rcnot l2_l5_i63) (rcnot l3_l5_i10) (rcnot l3_l5_i41) (rcnot l3_l5_i43) (rcnot l3_l5_i8) (rcnot l3_l6_i38) (rcnot l3_l6_i5) (rcnot l4_l5_i12) (rcnot l4_l5_i16) (rcnot l4_l5_i30) (rcnot l4_l5_i34) (rcnot l4_l5_i46) (rcnot l4_l5_i50) (rcnot l4_l5_i61) (rcnot l4_l5_i65) (rcnot l5_l6_i36) (rcnot l5_l6_i40) (rcnot l5_l6_i7)
 apply_cnot_l3_l6_i5 p13 p1 :: cost: 1
     add: (NOT-rcnot l3_l6_i5) (mapped l3 p13)
     del: (NOT-initialized p13) (NOT-occupied_pqubit p13) (rcnot l3_l6_i5)
@@ -48,4 +56,5 @@ swap l5 l6 p2 p1 :: cost: 1
 swap l6 l5 p1 p2 :: cost: 1
     add: (mapped l5 p1) (mapped l6 p2)
     del: (mapped l5 p2) (mapped l6 p1)
+    successor: swap-ancilary l6 p1 p0
 ground atoms: 94 groundings: 53

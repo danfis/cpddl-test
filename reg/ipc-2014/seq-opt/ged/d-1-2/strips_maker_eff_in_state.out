@@ -1,25 +1,29 @@
 step 0: state 7 applicable 6
+    state: (cw sub1 sub2) (cw sub2 sub3) (cw sub3 sub1) (idle) (normal sub1) (normal sub2) (normal sub3)
 begin-cut sub1 sub2 :: cost: 0
     add: (cut-point-1 sub1) (cutting) (last-cut-point sub1) (s-first sub2) (s-last sub2)
     del: (cw sub1 sub2) (idle)
 begin-cut sub2 sub3 :: cost: 0
     add: (cut-point-1 sub2) (cutting) (last-cut-point sub2) (s-first sub3) (s-last sub3)
     del: (cw sub2 sub3) (idle)
-begin-cut sub3 sub1 :: cost: 0
+begin-cut sub3 sub1 :: cost: 0 [successor]
     add: (cut-point-1 sub3) (cutting) (last-cut-point sub3) (s-first sub1) (s-last sub1)
     del: (cw sub3 sub1) (idle)
 step 1: state 10 applicable 2
+    state: (cut-point-1 sub3) (cutting) (cw sub1 sub2) (cw sub2 sub3) (last-cut-point sub3) (normal sub1) (normal sub2) (normal sub3) (s-first sub1) (s-last sub1)
 continue-cut sub1 sub2 :: cost: 0
     add: (s-last sub2) (s-next sub1 sub2)
     del: (cw sub1 sub2) (s-last sub1)
-end-cut-1 sub1 sub2 :: cost: 0
+end-cut-1 sub1 sub2 :: cost: 0 [successor]
     add: (cut-point-2 sub2)
     del: (cw sub1 sub2)
 step 2: state 10 applicable 1
-end-cut-2 sub3 sub2 :: cost: 0
+    state: (cut-point-1 sub3) (cut-point-2 sub2) (cutting) (cw sub2 sub3) (last-cut-point sub3) (normal sub1) (normal sub2) (normal sub3) (s-first sub1) (s-last sub1)
+end-cut-2 sub3 sub2 :: cost: 0 [successor]
     add: (cw sub3 sub2) (have-cut)
     del: (cut-point-1 sub3) (cut-point-2 sub2) (cutting)
 step 3: state 9 applicable 5
+    state: (cw sub2 sub3) (cw sub3 sub2) (have-cut) (last-cut-point sub3) (normal sub1) (normal sub2) (normal sub3) (s-first sub1) (s-last sub1)
 begin-inverse-splice sub3 sub2 :: cost: 1
     add: (inverse-splicing) (splice-point-1 sub3) (splice-point-2 sub2)
     del: (cw sub3 sub2) (have-cut)
@@ -29,8 +33,10 @@ begin-transpose-splice sub2 sub3 :: cost: 2
 begin-transpose-splice sub3 sub2 :: cost: 2
     add: (splice-point-1 sub3) (splice-point-2 sub2) (splicing)
     del: (cw sub3 sub2) (have-cut)
+    successor: begin-transverse-splice sub2 sub3
 step 4: state 10 applicable 1
-end-inverse-splice-1a sub1 sub2 :: cost: 0
+    state: (cw sub3 sub2) (inverse-splicing) (last-cut-point sub3) (normal sub1) (normal sub2) (normal sub3) (s-first sub1) (s-last sub1) (splice-point-1 sub2) (splice-point-2 sub3)
+end-inverse-splice-1a sub1 sub2 :: cost: 0 [successor]
     add: (cw sub2 sub1) (inverse-splicing-last) (inverted sub1) (splice-point-1 sub1)
     del: (inverse-splicing) (normal sub1) (s-first sub1) (s-last sub1) (splice-point-1 sub2)
 ground atoms: 36 groundings: 15

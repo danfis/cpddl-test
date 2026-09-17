@@ -1,0 +1,18 @@
+step 0: state 1 applicable 1
+    state: (at l1)
+    num: (f) = 0
+move l1 l2 :: cost: -1 [successor]
+    add: (at l2)
+    del: (at l1)
+    num: (f) 0 -> -1
+step 1: state 1 applicable 1
+    state: (at l2)
+    num: (f) = -1
+move l2 l3 :: cost: -2 [successor]
+    add: (at l3)
+    del: (at l2)
+    num: (f) -1 -> -2
+step 2: state 1 applicable 0
+    state: (at l3)
+    num: (f) = -2
+ground atoms: 3 groundings: 2

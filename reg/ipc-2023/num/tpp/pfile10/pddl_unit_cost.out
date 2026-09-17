@@ -1,6 +1,8 @@
 Domain: tpp-metric
 Problem: pfile24
 Require:
+  :equality
+  :negative-preconditions
   :numeric-fluents
   :strips
   :typing
@@ -79,7 +81,7 @@ Action:
       pre: (and (> (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
       eff: (and (assign (bought ?g) (request ?g)) (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))))
   drive: ?t - truck ?from - place ?to - place
-      pre: (and (loc ?t ?from))
+      pre: (and (loc ?t ?from) (not (= ?from ?to)))
       eff: (and (loc ?t ?to) (not (loc ?t ?from)))
 Init:
   (= (bought goods0) 0)
@@ -735,12 +737,14 @@ Goal:
   (and (>= (bought goods0) (request goods0)) (>= (bought goods1) (request goods1)) (>= (bought goods10) (request goods10)) (>= (bought goods11) (request goods11)) (>= (bought goods12) (request goods12)) (>= (bought goods13) (request goods13)) (>= (bought goods14) (request goods14)) (>= (bought goods15) (request goods15)) (>= (bought goods16) (request goods16)) (>= (bought goods17) (request goods17)) (>= (bought goods18) (request goods18)) (>= (bought goods19) (request goods19)) (>= (bought goods2) (request goods2)) (>= (bought goods20) (request goods20)) (>= (bought goods21) (request goods21)) (>= (bought goods22) (request goods22)) (>= (bought goods23) (request goods23)) (>= (bought goods3) (request goods3)) (>= (bought goods4) (request goods4)) (>= (bought goods5) (request goods5)) (>= (bought goods6) (request goods6)) (>= (bought goods7) (request goods7)) (>= (bought goods8) (request goods8)) (>= (bought goods9) (request goods9)) (loc truck0 depot0))
 Metric:
 Pred prop:
+  (= object object): in_pre in_pre_neg
   (loc truck place): in_init in_pre in_goal in_eff
 Func prop:
   (bought goods): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(on-sale request)
   (on-sale goods market): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(bought request)
   (request goods): in_init init_all_nonneg init_all_int in_pre in_goal on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
 Global prop:
+  has_eq_pred
   has_num_cmp
   is_numeric
   is_unit_cost

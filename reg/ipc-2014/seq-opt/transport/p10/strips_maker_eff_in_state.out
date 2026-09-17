@@ -1,4 +1,5 @@
 step 0: state 11 applicable 11
+    state: (at package-1 city-1-loc-9) (at package-2 city-1-loc-11) (at package-3 city-1-loc-12) (at package-4 city-1-loc-8) (at package-5 city-1-loc-11) (at truck-1 city-2-loc-7) (at truck-2 city-2-loc-9) (at truck-3 city-2-loc-5) (capacity truck-1 capacity-3) (capacity truck-2 capacity-4) (capacity truck-3 capacity-3)
 drive truck-1 city-2-loc-7 city-2-loc-10 :: cost: 29
     add: (at truck-1 city-2-loc-10)
     del: (at truck-1 city-2-loc-7)
@@ -8,7 +9,9 @@ drive truck-1 city-2-loc-7 city-2-loc-11 :: cost: 25
 drive truck-1 city-2-loc-7 city-2-loc-12 :: cost: 27
     add: (at truck-1 city-2-loc-12)
     del: (at truck-1 city-2-loc-7)
+    successor: drive truck-1 city-2-loc-7 city-2-loc-9
 step 1: state 11 applicable 10
+    state: (at package-1 city-1-loc-9) (at package-2 city-1-loc-11) (at package-3 city-1-loc-12) (at package-4 city-1-loc-8) (at package-5 city-1-loc-11) (at truck-1 city-2-loc-9) (at truck-2 city-2-loc-9) (at truck-3 city-2-loc-5) (capacity truck-1 capacity-3) (capacity truck-2 capacity-4) (capacity truck-3 capacity-3)
 drive truck-1 city-2-loc-9 city-2-loc-10 :: cost: 19
     add: (at truck-1 city-2-loc-10)
     del: (at truck-1 city-2-loc-9)
@@ -18,18 +21,21 @@ drive truck-1 city-2-loc-9 city-2-loc-12 :: cost: 12
 drive truck-1 city-2-loc-9 city-2-loc-2 :: cost: 19
     add: (at truck-1 city-2-loc-2)
     del: (at truck-1 city-2-loc-9)
+    successor: drive truck-1 city-2-loc-9 city-2-loc-7
 step 2: state 11 applicable 11
+    state: (at package-1 city-1-loc-9) (at package-2 city-1-loc-11) (at package-3 city-1-loc-12) (at package-4 city-1-loc-8) (at package-5 city-1-loc-11) (at truck-1 city-2-loc-7) (at truck-2 city-2-loc-9) (at truck-3 city-2-loc-5) (capacity truck-1 capacity-3) (capacity truck-2 capacity-4) (capacity truck-3 capacity-3)
 drive truck-1 city-2-loc-7 city-2-loc-10 :: cost: 29
     add: (at truck-1 city-2-loc-10)
     del: (at truck-1 city-2-loc-7)
-drive truck-1 city-2-loc-7 city-2-loc-11 :: cost: 25
+drive truck-1 city-2-loc-7 city-2-loc-11 :: cost: 25 [successor]
     add: (at truck-1 city-2-loc-11)
     del: (at truck-1 city-2-loc-7)
 drive truck-1 city-2-loc-7 city-2-loc-12 :: cost: 27
     add: (at truck-1 city-2-loc-12)
     del: (at truck-1 city-2-loc-7)
 step 3: state 11 applicable 10
-drive truck-1 city-2-loc-11 city-2-loc-14 :: cost: 15
+    state: (at package-1 city-1-loc-9) (at package-2 city-1-loc-11) (at package-3 city-1-loc-12) (at package-4 city-1-loc-8) (at package-5 city-1-loc-11) (at truck-1 city-2-loc-11) (at truck-2 city-2-loc-9) (at truck-3 city-2-loc-5) (capacity truck-1 capacity-3) (capacity truck-2 capacity-4) (capacity truck-3 capacity-3)
+drive truck-1 city-2-loc-11 city-2-loc-14 :: cost: 15 [successor]
     add: (at truck-1 city-2-loc-14)
     del: (at truck-1 city-2-loc-11)
 drive truck-1 city-2-loc-11 city-2-loc-6 :: cost: 17
@@ -39,6 +45,7 @@ drive truck-1 city-2-loc-11 city-2-loc-7 :: cost: 25
     add: (at truck-1 city-2-loc-7)
     del: (at truck-1 city-2-loc-11)
 step 4: state 11 applicable 9
+    state: (at package-1 city-1-loc-9) (at package-2 city-1-loc-11) (at package-3 city-1-loc-12) (at package-4 city-1-loc-8) (at package-5 city-1-loc-11) (at truck-1 city-2-loc-14) (at truck-2 city-2-loc-9) (at truck-3 city-2-loc-5) (capacity truck-1 capacity-3) (capacity truck-2 capacity-4) (capacity truck-3 capacity-3)
 drive truck-1 city-2-loc-14 city-2-loc-11 :: cost: 15
     add: (at truck-1 city-2-loc-11)
     del: (at truck-1 city-2-loc-14)
@@ -48,4 +55,5 @@ drive truck-1 city-2-loc-14 city-2-loc-6 :: cost: 15
 drive truck-1 city-2-loc-14 city-2-loc-8 :: cost: 13
     add: (at truck-1 city-2-loc-8)
     del: (at truck-1 city-2-loc-14)
+    successor: drive truck-2 city-2-loc-9 city-2-loc-7
 ground atoms: 26 groundings: 22

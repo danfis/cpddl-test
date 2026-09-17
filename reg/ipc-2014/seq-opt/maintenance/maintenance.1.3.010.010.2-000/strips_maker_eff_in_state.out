@@ -1,14 +1,16 @@
 step 0: state 10 applicable 30
+    state: (today d1) (today d10) (today d2) (today d3) (today d4) (today d5) (today d6) (today d7) (today d8) (today d9)
 workat d1 ber :: cost: 1
     add: (done ap4)
     del: (today d1)
-workat d1 fra :: cost: 1
+workat d1 fra :: cost: 1 [successor]
     add: (done ap5)
     del: (today d1)
 workat d1 ham :: cost: 1
     add:
     del: (today d1)
 step 1: state 10 applicable 27
+    state: (done ap5) (today d10) (today d2) (today d3) (today d4) (today d5) (today d6) (today d7) (today d8) (today d9)
 workat d10 ber :: cost: 1
     add: (done ap3)
     del: (today d10)
@@ -18,7 +20,9 @@ workat d10 fra :: cost: 1
 workat d10 ham :: cost: 1
     add:
     del: (today d10)
+    successor: workat d2 ber
 step 2: state 10 applicable 24
+    state: (done ap10) (done ap5) (today d10) (today d3) (today d4) (today d5) (today d6) (today d7) (today d8) (today d9)
 workat d10 ber :: cost: 1
     add: (done ap3)
     del: (today d10)
@@ -28,7 +32,9 @@ workat d10 fra :: cost: 1
 workat d10 ham :: cost: 1
     add:
     del: (today d10)
+    successor: workat d3 ham
 step 3: state 10 applicable 21
+    state: (done ap10) (done ap5) (done ap7) (today d10) (today d4) (today d5) (today d6) (today d7) (today d8) (today d9)
 workat d10 ber :: cost: 1
     add: (done ap3)
     del: (today d10)
@@ -38,7 +44,9 @@ workat d10 fra :: cost: 1
 workat d10 ham :: cost: 1
     add:
     del: (today d10)
+    successor: workat d5 fra
 step 4: state 9 applicable 18
+    state: (done ap10) (done ap5) (done ap7) (today d10) (today d4) (today d6) (today d7) (today d8) (today d9)
 workat d10 ber :: cost: 1
     add: (done ap3)
     del: (today d10)
@@ -48,4 +56,5 @@ workat d10 fra :: cost: 1
 workat d10 ham :: cost: 1
     add:
     del: (today d10)
+    successor: workat d6 ber
 ground atoms: 20 groundings: 30

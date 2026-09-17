@@ -1,0 +1,78 @@
+step 0: state 0 applicable 5
+    state:
+    num: (num-of-cars) = 0 (x farm0) = 400 (x farm1) = 1 (cost) = 0
+hire-car :: cost: 1
+    add:
+    del:
+    num: (num-of-cars) 0 -> 1
+move-by-car farm0 farm1 :: cost: 1 [successor]
+    add:
+    del:
+    num:
+move-by-car farm1 farm0 :: cost: 1
+    add:
+    del:
+    num:
+step 1: state 0 applicable 5
+    state:
+    num: (num-of-cars) = 0 (x farm0) = 400 (x farm1) = 1 (cost) = 0
+hire-car :: cost: 1
+    add:
+    del:
+    num: (num-of-cars) 0 -> 1
+move-by-car farm0 farm1 :: cost: 1
+    add:
+    del:
+    num:
+move-by-car farm1 farm0 :: cost: 1 [successor]
+    add:
+    del:
+    num:
+step 2: state 0 applicable 5
+    state:
+    num: (num-of-cars) = 0 (x farm0) = 400 (x farm1) = 1 (cost) = 0
+hire-car :: cost: 1
+    add:
+    del:
+    num: (num-of-cars) 0 -> 1
+move-by-car farm0 farm1 :: cost: 1
+    add:
+    del:
+    num:
+move-by-car farm1 farm0 :: cost: 1
+    add:
+    del:
+    num:
+    successor: move-slow farm0 farm1
+step 3: state 0 applicable 5
+    state:
+    num: (num-of-cars) = 0 (x farm0) = 399 (x farm1) = 2 (cost) = 0
+hire-car :: cost: 1
+    add:
+    del:
+    num: (num-of-cars) 0 -> 1
+move-by-car farm0 farm1 :: cost: 1
+    add:
+    del:
+    num:
+move-by-car farm1 farm0 :: cost: 1
+    add:
+    del:
+    num:
+    successor: move-slow farm1 farm0
+step 4: state 0 applicable 5
+    state:
+    num: (num-of-cars) = 0 (x farm0) = 400 (x farm1) = 1 (cost) = 0
+hire-car :: cost: 1 [successor]
+    add:
+    del:
+    num: (num-of-cars) 0 -> 1
+move-by-car farm0 farm1 :: cost: 1
+    add:
+    del:
+    num:
+move-by-car farm1 farm0 :: cost: 1
+    add:
+    del:
+    num:
+ground atoms: 0 groundings: 5

@@ -1,5 +1,6 @@
 step 0: state 50 applicable 5
-jump pos-0-3 pos-0-4 pos-0-5 :: cost: 1
+    state: (free pos-0-5) (free pos-0-6) (free pos-0-7) (free pos-0-8) (free pos-0-9) (free pos-1-5) (free pos-1-6) (free pos-1-7) (free pos-1-8) (free pos-1-9) (free pos-2-5) (free pos-2-6) (free pos-2-7) (free pos-2-8) (free pos-2-9) (free pos-3-5) (free pos-3-6) (free pos-3-7) (free pos-3-8) (free pos-3-9) (free pos-4-5) (free pos-4-6) (free pos-4-7) (free pos-4-8) (free pos-4-9) (occupied pos-0-0) (occupied pos-0-1) (occupied pos-0-2) (occupied pos-0-3) (occupied pos-0-4) (occupied pos-1-0) (occupied pos-1-1) (occupied pos-1-2) (occupied pos-1-3) (occupied pos-1-4) (occupied pos-2-0) (occupied pos-2-1) (occupied pos-2-2) (occupied pos-2-3) (occupied pos-2-4) (occupied pos-3-0) (occupied pos-3-1) (occupied pos-3-2) (occupied pos-3-3) (occupied pos-3-4) (occupied pos-4-0) (occupied pos-4-1) (occupied pos-4-2) (occupied pos-4-3) (occupied pos-4-4)
+jump pos-0-3 pos-0-4 pos-0-5 :: cost: 1 [successor]
     add: (free pos-0-3) (free pos-0-4) (occupied pos-0-5)
     del: (free pos-0-5) (occupied pos-0-3) (occupied pos-0-4)
 jump pos-1-3 pos-1-4 pos-1-5 :: cost: 1
@@ -9,26 +10,29 @@ jump pos-2-3 pos-2-4 pos-2-5 :: cost: 1
     add: (free pos-2-3) (free pos-2-4) (occupied pos-2-5)
     del: (free pos-2-5) (occupied pos-2-3) (occupied pos-2-4)
 step 1: state 50 applicable 7
+    state: (free pos-0-3) (free pos-0-4) (free pos-0-6) (free pos-0-7) (free pos-0-8) (free pos-0-9) (free pos-1-5) (free pos-1-6) (free pos-1-7) (free pos-1-8) (free pos-1-9) (free pos-2-5) (free pos-2-6) (free pos-2-7) (free pos-2-8) (free pos-2-9) (free pos-3-5) (free pos-3-6) (free pos-3-7) (free pos-3-8) (free pos-3-9) (free pos-4-5) (free pos-4-6) (free pos-4-7) (free pos-4-8) (free pos-4-9) (occupied pos-0-0) (occupied pos-0-1) (occupied pos-0-2) (occupied pos-0-5) (occupied pos-1-0) (occupied pos-1-1) (occupied pos-1-2) (occupied pos-1-3) (occupied pos-1-4) (occupied pos-2-0) (occupied pos-2-1) (occupied pos-2-2) (occupied pos-2-3) (occupied pos-2-4) (occupied pos-3-0) (occupied pos-3-1) (occupied pos-3-2) (occupied pos-3-3) (occupied pos-3-4) (occupied pos-4-0) (occupied pos-4-1) (occupied pos-4-2) (occupied pos-4-3) (occupied pos-4-4)
 jump pos-0-1 pos-0-2 pos-0-3 :: cost: 1
     add: (free pos-0-1) (free pos-0-2) (occupied pos-0-3)
     del: (free pos-0-3) (occupied pos-0-1) (occupied pos-0-2)
-jump pos-1-3 pos-1-4 pos-1-5 :: cost: 1
+jump pos-1-3 pos-1-4 pos-1-5 :: cost: 1 [successor]
     add: (free pos-1-3) (free pos-1-4) (occupied pos-1-5)
     del: (free pos-1-5) (occupied pos-1-3) (occupied pos-1-4)
 jump pos-2-3 pos-1-3 pos-0-3 :: cost: 1
     add: (free pos-1-3) (free pos-2-3) (occupied pos-0-3)
     del: (free pos-0-3) (occupied pos-1-3) (occupied pos-2-3)
 step 2: state 50 applicable 8
+    state: (free pos-0-3) (free pos-0-4) (free pos-0-6) (free pos-0-7) (free pos-0-8) (free pos-0-9) (free pos-1-3) (free pos-1-4) (free pos-1-6) (free pos-1-7) (free pos-1-8) (free pos-1-9) (free pos-2-5) (free pos-2-6) (free pos-2-7) (free pos-2-8) (free pos-2-9) (free pos-3-5) (free pos-3-6) (free pos-3-7) (free pos-3-8) (free pos-3-9) (free pos-4-5) (free pos-4-6) (free pos-4-7) (free pos-4-8) (free pos-4-9) (occupied pos-0-0) (occupied pos-0-1) (occupied pos-0-2) (occupied pos-0-5) (occupied pos-1-0) (occupied pos-1-1) (occupied pos-1-2) (occupied pos-1-5) (occupied pos-2-0) (occupied pos-2-1) (occupied pos-2-2) (occupied pos-2-3) (occupied pos-2-4) (occupied pos-3-0) (occupied pos-3-1) (occupied pos-3-2) (occupied pos-3-3) (occupied pos-3-4) (occupied pos-4-0) (occupied pos-4-1) (occupied pos-4-2) (occupied pos-4-3) (occupied pos-4-4)
 jump pos-0-1 pos-0-2 pos-0-3 :: cost: 1
     add: (free pos-0-1) (free pos-0-2) (occupied pos-0-3)
     del: (free pos-0-3) (occupied pos-0-1) (occupied pos-0-2)
 jump pos-0-5 pos-1-5 pos-2-5 :: cost: 1
     add: (free pos-0-5) (free pos-1-5) (occupied pos-2-5)
     del: (free pos-2-5) (occupied pos-0-5) (occupied pos-1-5)
-jump pos-1-1 pos-1-2 pos-1-3 :: cost: 1
+jump pos-1-1 pos-1-2 pos-1-3 :: cost: 1 [successor]
     add: (free pos-1-1) (free pos-1-2) (occupied pos-1-3)
     del: (free pos-1-3) (occupied pos-1-1) (occupied pos-1-2)
 step 3: state 50 applicable 9
+    state: (free pos-0-3) (free pos-0-4) (free pos-0-6) (free pos-0-7) (free pos-0-8) (free pos-0-9) (free pos-1-1) (free pos-1-2) (free pos-1-4) (free pos-1-6) (free pos-1-7) (free pos-1-8) (free pos-1-9) (free pos-2-5) (free pos-2-6) (free pos-2-7) (free pos-2-8) (free pos-2-9) (free pos-3-5) (free pos-3-6) (free pos-3-7) (free pos-3-8) (free pos-3-9) (free pos-4-5) (free pos-4-6) (free pos-4-7) (free pos-4-8) (free pos-4-9) (occupied pos-0-0) (occupied pos-0-1) (occupied pos-0-2) (occupied pos-0-5) (occupied pos-1-0) (occupied pos-1-3) (occupied pos-1-5) (occupied pos-2-0) (occupied pos-2-1) (occupied pos-2-2) (occupied pos-2-3) (occupied pos-2-4) (occupied pos-3-0) (occupied pos-3-1) (occupied pos-3-2) (occupied pos-3-3) (occupied pos-3-4) (occupied pos-4-0) (occupied pos-4-1) (occupied pos-4-2) (occupied pos-4-3) (occupied pos-4-4)
 jump pos-0-1 pos-0-2 pos-0-3 :: cost: 1
     add: (free pos-0-1) (free pos-0-2) (occupied pos-0-3)
     del: (free pos-0-3) (occupied pos-0-1) (occupied pos-0-2)
@@ -38,7 +42,9 @@ jump pos-0-5 pos-1-5 pos-2-5 :: cost: 1
 jump pos-2-3 pos-1-3 pos-0-3 :: cost: 1
     add: (free pos-1-3) (free pos-2-3) (occupied pos-0-3)
     del: (free pos-0-3) (occupied pos-1-3) (occupied pos-2-3)
+    successor: jump pos-2-3 pos-2-4 pos-2-5
 step 4: state 50 applicable 9
+    state: (free pos-0-3) (free pos-0-4) (free pos-0-6) (free pos-0-7) (free pos-0-8) (free pos-0-9) (free pos-1-1) (free pos-1-2) (free pos-1-4) (free pos-1-6) (free pos-1-7) (free pos-1-8) (free pos-1-9) (free pos-2-3) (free pos-2-4) (free pos-2-6) (free pos-2-7) (free pos-2-8) (free pos-2-9) (free pos-3-5) (free pos-3-6) (free pos-3-7) (free pos-3-8) (free pos-3-9) (free pos-4-5) (free pos-4-6) (free pos-4-7) (free pos-4-8) (free pos-4-9) (occupied pos-0-0) (occupied pos-0-1) (occupied pos-0-2) (occupied pos-0-5) (occupied pos-1-0) (occupied pos-1-3) (occupied pos-1-5) (occupied pos-2-0) (occupied pos-2-1) (occupied pos-2-2) (occupied pos-2-5) (occupied pos-3-0) (occupied pos-3-1) (occupied pos-3-2) (occupied pos-3-3) (occupied pos-3-4) (occupied pos-4-0) (occupied pos-4-1) (occupied pos-4-2) (occupied pos-4-3) (occupied pos-4-4)
 jump pos-0-1 pos-0-2 pos-0-3 :: cost: 1
     add: (free pos-0-1) (free pos-0-2) (occupied pos-0-3)
     del: (free pos-0-3) (occupied pos-0-1) (occupied pos-0-2)
@@ -48,4 +54,5 @@ jump pos-1-5 pos-2-5 pos-3-5 :: cost: 1
 jump pos-2-1 pos-2-2 pos-2-3 :: cost: 1
     add: (free pos-2-1) (free pos-2-2) (occupied pos-2-3)
     del: (free pos-2-3) (occupied pos-2-1) (occupied pos-2-2)
+    successor: jump pos-3-2 pos-2-2 pos-1-2
 ground atoms: 73 groundings: 18

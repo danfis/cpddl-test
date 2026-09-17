@@ -1,27 +1,32 @@
 step 0: state 5 applicable 1
-drive truck1 depot1 market1 :: cost: 1
+    state: (at truck1 depot1) (loaded goods1 truck1 level0) (on-sale goods1 market1 level1) (ready-to-load goods1 market1 level0) (stored goods1 level0)
+drive truck1 depot1 market1 :: cost: 1 [successor]
     add: (at truck1 market1)
     del: (at truck1 depot1)
 step 1: state 5 applicable 2
-buy truck1 goods1 market1 level0 level1 level0 level1 :: cost: 1
+    state: (at truck1 market1) (loaded goods1 truck1 level0) (on-sale goods1 market1 level1) (ready-to-load goods1 market1 level0) (stored goods1 level0)
+buy truck1 goods1 market1 level0 level1 level0 level1 :: cost: 1 [successor]
     add: (on-sale goods1 market1 level0) (ready-to-load goods1 market1 level1)
     del: (on-sale goods1 market1 level1) (ready-to-load goods1 market1 level0)
 drive truck1 market1 depot1 :: cost: 1
     add: (at truck1 depot1)
     del: (at truck1 market1)
 step 2: state 5 applicable 2
-drive truck1 market1 depot1 :: cost: 1
+    state: (at truck1 market1) (loaded goods1 truck1 level0) (on-sale goods1 market1 level0) (ready-to-load goods1 market1 level1) (stored goods1 level0)
+drive truck1 market1 depot1 :: cost: 1 [successor]
     add: (at truck1 depot1)
     del: (at truck1 market1)
 load goods1 truck1 market1 level0 level1 level0 level1 :: cost: 1
     add: (loaded goods1 truck1 level1) (ready-to-load goods1 market1 level0)
     del: (loaded goods1 truck1 level0) (ready-to-load goods1 market1 level1)
 step 3: state 5 applicable 1
-drive truck1 depot1 market1 :: cost: 1
+    state: (at truck1 depot1) (loaded goods1 truck1 level0) (on-sale goods1 market1 level0) (ready-to-load goods1 market1 level1) (stored goods1 level0)
+drive truck1 depot1 market1 :: cost: 1 [successor]
     add: (at truck1 market1)
     del: (at truck1 depot1)
 step 4: state 5 applicable 2
-drive truck1 market1 depot1 :: cost: 1
+    state: (at truck1 market1) (loaded goods1 truck1 level0) (on-sale goods1 market1 level0) (ready-to-load goods1 market1 level1) (stored goods1 level0)
+drive truck1 market1 depot1 :: cost: 1 [successor]
     add: (at truck1 depot1)
     del: (at truck1 market1)
 load goods1 truck1 market1 level0 level1 level0 level1 :: cost: 1

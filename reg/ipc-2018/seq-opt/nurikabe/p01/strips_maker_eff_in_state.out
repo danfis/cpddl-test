@@ -1,5 +1,6 @@
 step 0: state 44 applicable 3
-move pos-0-0 pos-0-1 :: cost: 1
+    state: (NOT-available pos-0-0) (NOT-available pos-0-1) (NOT-available pos-1-0) (NOT-available pos-1-1) (NOT-available pos-2-0) (NOT-available pos-2-1) (NOT-available pos-2-2) (NOT-blocked pos-0-0) (NOT-blocked pos-0-1) (NOT-blocked pos-0-2) (NOT-blocked pos-1-0) (NOT-blocked pos-1-1) (NOT-blocked pos-1-2) (NOT-blocked pos-2-0) (NOT-blocked pos-2-1) (NOT-blocked pos-2-2) (NOT-painted pos-0-0) (NOT-painted pos-0-1) (NOT-painted pos-0-2) (NOT-painted pos-1-0) (NOT-painted pos-1-1) (NOT-painted pos-1-2) (NOT-painted pos-2-0) (NOT-painted pos-2-1) (NOT-painted pos-2-2) (NOT-part-of pos-0-0 g0) (NOT-part-of pos-0-0 g1) (NOT-part-of pos-0-1 g1) (NOT-part-of pos-0-2 g0) (NOT-part-of pos-0-2 g1) (NOT-part-of pos-1-0 g1) (NOT-part-of pos-1-1 g0) (NOT-part-of pos-1-2 g0) (NOT-part-of pos-1-2 g1) (NOT-part-of pos-2-0 g0) (NOT-part-of pos-2-1 g0) (NOT-part-of pos-2-1 g1) (NOT-part-of pos-2-2 g0) (available pos-0-2) (available pos-1-2) (moving) (remaining-cells g0 n2) (remaining-cells g1 n1) (robot-pos pos-0-0)
+move pos-0-0 pos-0-1 :: cost: 1 [successor]
     add: (robot-pos pos-0-1)
     del: (robot-pos pos-0-0)
 move pos-0-0 pos-1-0 :: cost: 1
@@ -9,24 +10,27 @@ start-painting pos-0-0 g0 n2 n1 :: cost: 1
     add: (painting g0) (remaining-cells g0 n1)
     del: (NOT-painted pos-0-0) (moving) (remaining-cells g0 n2)
 step 1: state 44 applicable 3
+    state: (NOT-available pos-0-0) (NOT-available pos-0-1) (NOT-available pos-1-0) (NOT-available pos-1-1) (NOT-available pos-2-0) (NOT-available pos-2-1) (NOT-available pos-2-2) (NOT-blocked pos-0-0) (NOT-blocked pos-0-1) (NOT-blocked pos-0-2) (NOT-blocked pos-1-0) (NOT-blocked pos-1-1) (NOT-blocked pos-1-2) (NOT-blocked pos-2-0) (NOT-blocked pos-2-1) (NOT-blocked pos-2-2) (NOT-painted pos-0-0) (NOT-painted pos-0-1) (NOT-painted pos-0-2) (NOT-painted pos-1-0) (NOT-painted pos-1-1) (NOT-painted pos-1-2) (NOT-painted pos-2-0) (NOT-painted pos-2-1) (NOT-painted pos-2-2) (NOT-part-of pos-0-0 g0) (NOT-part-of pos-0-0 g1) (NOT-part-of pos-0-1 g1) (NOT-part-of pos-0-2 g0) (NOT-part-of pos-0-2 g1) (NOT-part-of pos-1-0 g1) (NOT-part-of pos-1-1 g0) (NOT-part-of pos-1-2 g0) (NOT-part-of pos-1-2 g1) (NOT-part-of pos-2-0 g0) (NOT-part-of pos-2-1 g0) (NOT-part-of pos-2-1 g1) (NOT-part-of pos-2-2 g0) (available pos-0-2) (available pos-1-2) (moving) (remaining-cells g0 n2) (remaining-cells g1 n1) (robot-pos pos-0-1)
 move pos-0-1 pos-0-0 :: cost: 1
     add: (robot-pos pos-0-0)
     del: (robot-pos pos-0-1)
-move pos-0-1 pos-0-2 :: cost: 1
+move pos-0-1 pos-0-2 :: cost: 1 [successor]
     add: (robot-pos pos-0-2)
     del: (robot-pos pos-0-1)
 move pos-0-1 pos-1-1 :: cost: 1
     add: (robot-pos pos-1-1)
     del: (robot-pos pos-0-1)
 step 2: state 44 applicable 2
-move pos-0-2 pos-0-1 :: cost: 1
+    state: (NOT-available pos-0-0) (NOT-available pos-0-1) (NOT-available pos-1-0) (NOT-available pos-1-1) (NOT-available pos-2-0) (NOT-available pos-2-1) (NOT-available pos-2-2) (NOT-blocked pos-0-0) (NOT-blocked pos-0-1) (NOT-blocked pos-0-2) (NOT-blocked pos-1-0) (NOT-blocked pos-1-1) (NOT-blocked pos-1-2) (NOT-blocked pos-2-0) (NOT-blocked pos-2-1) (NOT-blocked pos-2-2) (NOT-painted pos-0-0) (NOT-painted pos-0-1) (NOT-painted pos-0-2) (NOT-painted pos-1-0) (NOT-painted pos-1-1) (NOT-painted pos-1-2) (NOT-painted pos-2-0) (NOT-painted pos-2-1) (NOT-painted pos-2-2) (NOT-part-of pos-0-0 g0) (NOT-part-of pos-0-0 g1) (NOT-part-of pos-0-1 g1) (NOT-part-of pos-0-2 g0) (NOT-part-of pos-0-2 g1) (NOT-part-of pos-1-0 g1) (NOT-part-of pos-1-1 g0) (NOT-part-of pos-1-2 g0) (NOT-part-of pos-1-2 g1) (NOT-part-of pos-2-0 g0) (NOT-part-of pos-2-1 g0) (NOT-part-of pos-2-1 g1) (NOT-part-of pos-2-2 g0) (available pos-0-2) (available pos-1-2) (moving) (remaining-cells g0 n2) (remaining-cells g1 n1) (robot-pos pos-0-2)
+move pos-0-2 pos-0-1 :: cost: 1 [successor]
     add: (robot-pos pos-0-1)
     del: (robot-pos pos-0-2)
 move pos-0-2 pos-1-2 :: cost: 1
     add: (robot-pos pos-1-2)
     del: (robot-pos pos-0-2)
 step 3: state 44 applicable 3
-move pos-0-1 pos-0-0 :: cost: 1
+    state: (NOT-available pos-0-0) (NOT-available pos-0-1) (NOT-available pos-1-0) (NOT-available pos-1-1) (NOT-available pos-2-0) (NOT-available pos-2-1) (NOT-available pos-2-2) (NOT-blocked pos-0-0) (NOT-blocked pos-0-1) (NOT-blocked pos-0-2) (NOT-blocked pos-1-0) (NOT-blocked pos-1-1) (NOT-blocked pos-1-2) (NOT-blocked pos-2-0) (NOT-blocked pos-2-1) (NOT-blocked pos-2-2) (NOT-painted pos-0-0) (NOT-painted pos-0-1) (NOT-painted pos-0-2) (NOT-painted pos-1-0) (NOT-painted pos-1-1) (NOT-painted pos-1-2) (NOT-painted pos-2-0) (NOT-painted pos-2-1) (NOT-painted pos-2-2) (NOT-part-of pos-0-0 g0) (NOT-part-of pos-0-0 g1) (NOT-part-of pos-0-1 g1) (NOT-part-of pos-0-2 g0) (NOT-part-of pos-0-2 g1) (NOT-part-of pos-1-0 g1) (NOT-part-of pos-1-1 g0) (NOT-part-of pos-1-2 g0) (NOT-part-of pos-1-2 g1) (NOT-part-of pos-2-0 g0) (NOT-part-of pos-2-1 g0) (NOT-part-of pos-2-1 g1) (NOT-part-of pos-2-2 g0) (available pos-0-2) (available pos-1-2) (moving) (remaining-cells g0 n2) (remaining-cells g1 n1) (robot-pos pos-0-1)
+move pos-0-1 pos-0-0 :: cost: 1 [successor]
     add: (robot-pos pos-0-0)
     del: (robot-pos pos-0-1)
 move pos-0-1 pos-0-2 :: cost: 1
@@ -36,10 +40,11 @@ move pos-0-1 pos-1-1 :: cost: 1
     add: (robot-pos pos-1-1)
     del: (robot-pos pos-0-1)
 step 4: state 44 applicable 3
+    state: (NOT-available pos-0-0) (NOT-available pos-0-1) (NOT-available pos-1-0) (NOT-available pos-1-1) (NOT-available pos-2-0) (NOT-available pos-2-1) (NOT-available pos-2-2) (NOT-blocked pos-0-0) (NOT-blocked pos-0-1) (NOT-blocked pos-0-2) (NOT-blocked pos-1-0) (NOT-blocked pos-1-1) (NOT-blocked pos-1-2) (NOT-blocked pos-2-0) (NOT-blocked pos-2-1) (NOT-blocked pos-2-2) (NOT-painted pos-0-0) (NOT-painted pos-0-1) (NOT-painted pos-0-2) (NOT-painted pos-1-0) (NOT-painted pos-1-1) (NOT-painted pos-1-2) (NOT-painted pos-2-0) (NOT-painted pos-2-1) (NOT-painted pos-2-2) (NOT-part-of pos-0-0 g0) (NOT-part-of pos-0-0 g1) (NOT-part-of pos-0-1 g1) (NOT-part-of pos-0-2 g0) (NOT-part-of pos-0-2 g1) (NOT-part-of pos-1-0 g1) (NOT-part-of pos-1-1 g0) (NOT-part-of pos-1-2 g0) (NOT-part-of pos-1-2 g1) (NOT-part-of pos-2-0 g0) (NOT-part-of pos-2-1 g0) (NOT-part-of pos-2-1 g1) (NOT-part-of pos-2-2 g0) (available pos-0-2) (available pos-1-2) (moving) (remaining-cells g0 n2) (remaining-cells g1 n1) (robot-pos pos-0-0)
 move pos-0-0 pos-0-1 :: cost: 1
     add: (robot-pos pos-0-1)
     del: (robot-pos pos-0-0)
-move pos-0-0 pos-1-0 :: cost: 1
+move pos-0-0 pos-1-0 :: cost: 1 [successor]
     add: (robot-pos pos-1-0)
     del: (robot-pos pos-0-0)
 start-painting pos-0-0 g0 n2 n1 :: cost: 1

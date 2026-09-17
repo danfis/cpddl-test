@@ -1,0 +1,74 @@
+step 0: state 10 applicable 20
+    state: (at item1 rooma) (at item2 rooma) (at item3 rooma) (at item4 rooma) (at-bot bot1 rooma) (at-bot bot2 rooma) (free left1) (free left2) (free right1) (free right2)
+    num: (current_load bot1) = 0 (current_load bot2) = 0
+move bot1 rooma roomb :: cost: 3 [successor]
+    add: (at-bot bot1 roomb)
+    del: (at-bot bot1 rooma)
+    num:
+move bot1 rooma roomc :: cost: 3
+    add: (at-bot bot1 roomc)
+    del: (at-bot bot1 rooma)
+    num:
+move bot2 rooma roomb :: cost: 3
+    add: (at-bot bot2 roomb)
+    del: (at-bot bot2 rooma)
+    num:
+step 1: state 10 applicable 11
+    state: (at item1 rooma) (at item2 rooma) (at item3 rooma) (at item4 rooma) (at-bot bot1 roomb) (at-bot bot2 rooma) (free left1) (free left2) (free right1) (free right2)
+    num: (current_load bot1) = 0 (current_load bot2) = 0
+move bot1 roomb rooma :: cost: 3
+    add: (at-bot bot1 rooma)
+    del: (at-bot bot1 roomb)
+    num:
+move bot2 rooma roomb :: cost: 3 [successor]
+    add: (at-bot bot2 roomb)
+    del: (at-bot bot2 rooma)
+    num:
+move bot2 rooma roomc :: cost: 3
+    add: (at-bot bot2 roomc)
+    del: (at-bot bot2 rooma)
+    num:
+step 2: state 10 applicable 2
+    state: (at item1 rooma) (at item2 rooma) (at item3 rooma) (at item4 rooma) (at-bot bot1 roomb) (at-bot bot2 roomb) (free left1) (free left2) (free right1) (free right2)
+    num: (current_load bot1) = 0 (current_load bot2) = 0
+move bot1 roomb rooma :: cost: 3 [successor]
+    add: (at-bot bot1 rooma)
+    del: (at-bot bot1 roomb)
+    num:
+move bot2 roomb rooma :: cost: 3
+    add: (at-bot bot2 rooma)
+    del: (at-bot bot2 roomb)
+    num:
+step 3: state 10 applicable 11
+    state: (at item1 rooma) (at item2 rooma) (at item3 rooma) (at item4 rooma) (at-bot bot1 rooma) (at-bot bot2 roomb) (free left1) (free left2) (free right1) (free right2)
+    num: (current_load bot1) = 0 (current_load bot2) = 0
+move bot1 rooma roomb :: cost: 3
+    add: (at-bot bot1 roomb)
+    del: (at-bot bot1 rooma)
+    num:
+move bot1 rooma roomc :: cost: 3
+    add: (at-bot bot1 roomc)
+    del: (at-bot bot1 rooma)
+    num:
+move bot2 roomb rooma :: cost: 3
+    add: (at-bot bot2 rooma)
+    del: (at-bot bot2 roomb)
+    num:
+    successor: pick item4 rooma left1 bot1
+step 4: state 9 applicable 8
+    state: (at item1 rooma) (at item2 rooma) (at item3 rooma) (at-bot bot1 rooma) (at-bot bot2 roomb) (free left2) (free right1) (free right2) (in-arm item4 left1)
+    num: (current_load bot1) = 1 (current_load bot2) = 0
+drop item4 rooma left1 bot1 :: cost: 2
+    add: (at item4 rooma) (free left1)
+    del: (in-arm item4 left1)
+    num: (current_load bot1) 1 -> 0
+move bot1 rooma roomb :: cost: 3
+    add: (at-bot bot1 roomb)
+    del: (at-bot bot1 rooma)
+    num:
+move bot1 rooma roomc :: cost: 3
+    add: (at-bot bot1 roomc)
+    del: (at-bot bot1 rooma)
+    num:
+    successor: pick item2 rooma right1 bot1
+ground atoms: 31 groundings: 24

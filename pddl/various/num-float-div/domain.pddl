@@ -16,6 +16,6 @@
   (:action halve
     :parameters (?f - farm)
     :precondition (>= (x ?f) 1)
-    :effect (assign (x ?f) (/ (x ?f) 2))
+    :effect (and (assign (x ?f) (/ (x ?f) 2)))
   )
 )

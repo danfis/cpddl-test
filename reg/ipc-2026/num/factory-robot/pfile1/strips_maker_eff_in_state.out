@@ -1,0 +1,79 @@
+step 0: state 7 applicable 18
+    state: (at r0 assembly1) (at r1 cooling) (calibrated r0) (calibrated r1) (free assembly0) (free assembly2) (free charging)
+    num: (energy r0) = 79 (energy r1) = 80 (workload r0) = 0 (workload r1) = 0 (temperature r0) = 0 (temperature r1) = 0 (production r0) = 0 (production r1) = 0
+move r0 assembly1 assembly0 :: cost: 1
+    add: (at r0 assembly0) (free assembly1)
+    del: (at r0 assembly1) (free assembly0)
+    num: (energy r0) 79 -> 74
+move r0 assembly1 assembly2 :: cost: 1
+    add: (at r0 assembly2) (free assembly1)
+    del: (at r0 assembly1) (free assembly2)
+    num: (energy r0) 79 -> 74
+move r0 assembly1 charging :: cost: 1
+    add: (at r0 charging) (free assembly1)
+    del: (at r0 assembly1) (free charging)
+    num: (energy r0) 79 -> 74
+    successor: work r0 assembly1
+step 1: state 7 applicable 19
+    state: (at r0 assembly1) (at r1 cooling) (calibrated r0) (calibrated r1) (free assembly0) (free assembly2) (free charging)
+    num: (energy r0) = 67 (energy r1) = 80 (workload r0) = 1 (workload r1) = 0 (temperature r0) = 3 (temperature r1) = 0 (production r0) = 0 (production r1) = 0
+cool-down r0 assembly1 :: cost: 1
+    add:
+    del:
+    num:
+move r0 assembly1 assembly0 :: cost: 1
+    add: (at r0 assembly0) (free assembly1)
+    del: (at r0 assembly1) (free assembly0)
+    num: (energy r0) 67 -> 62
+move r0 assembly1 assembly2 :: cost: 1
+    add: (at r0 assembly2) (free assembly1)
+    del: (at r0 assembly1) (free assembly2)
+    num: (energy r0) 67 -> 62
+    successor: work r1 cooling
+step 2: state 7 applicable 20
+    state: (at r0 assembly1) (at r1 cooling) (calibrated r0) (calibrated r1) (free assembly0) (free assembly2) (free charging)
+    num: (energy r0) = 67 (energy r1) = 70 (workload r0) = 1 (workload r1) = 1 (temperature r0) = 3 (temperature r1) = 3 (production r0) = 0 (production r1) = 0
+cool-down r0 assembly1 :: cost: 1 [successor]
+    add:
+    del:
+    num:
+cool-down r1 cooling :: cost: 1
+    add:
+    del:
+    num: (temperature r1) 3 -> -3
+move r0 assembly1 assembly0 :: cost: 1
+    add: (at r0 assembly0) (free assembly1)
+    del: (at r0 assembly1) (free assembly0)
+    num: (energy r0) 67 -> 62
+step 3: state 7 applicable 20
+    state: (at r0 assembly1) (at r1 cooling) (calibrated r0) (calibrated r1) (free assembly0) (free assembly2) (free charging)
+    num: (energy r0) = 67 (energy r1) = 70 (workload r0) = 1 (workload r1) = 1 (temperature r0) = 3 (temperature r1) = 3 (production r0) = 0 (production r1) = 0
+cool-down r0 assembly1 :: cost: 1
+    add:
+    del:
+    num:
+cool-down r1 cooling :: cost: 1 [successor]
+    add:
+    del:
+    num: (temperature r1) 3 -> -3
+move r0 assembly1 assembly0 :: cost: 1
+    add: (at r0 assembly0) (free assembly1)
+    del: (at r0 assembly1) (free assembly0)
+    num: (energy r0) 67 -> 62
+step 4: state 7 applicable 19
+    state: (at r0 assembly1) (at r1 cooling) (calibrated r0) (calibrated r1) (free assembly0) (free assembly2) (free charging)
+    num: (energy r0) = 67 (energy r1) = 70 (workload r0) = 1 (workload r1) = 1 (temperature r0) = 3 (temperature r1) = -3 (production r0) = 0 (production r1) = 0
+cool-down r0 assembly1 :: cost: 1
+    add:
+    del:
+    num:
+move r0 assembly1 assembly0 :: cost: 1
+    add: (at r0 assembly0) (free assembly1)
+    del: (at r0 assembly1) (free assembly0)
+    num: (energy r0) 67 -> 62
+move r0 assembly1 assembly2 :: cost: 1
+    add: (at r0 assembly2) (free assembly1)
+    del: (at r0 assembly1) (free assembly2)
+    num: (energy r0) 67 -> 62
+    successor: set-low-power r1
+ground atoms: 15 groundings: 20

@@ -1,0 +1,80 @@
+step 0: state 0 applicable 7
+    state:
+    num: (value c0) = 6 (value c1) = 4 (value c2) = 2 (value c3) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num: (value c0) 6 -> 5
+decrement c1 :: cost: 1
+    add:
+    del:
+    num: (value c1) 4 -> 3
+decrement c2 :: cost: 1
+    add:
+    del:
+    num: (value c2) 2 -> 1
+    successor: increment c0
+step 1: state 0 applicable 7
+    state:
+    num: (value c0) = 7 (value c1) = 4 (value c2) = 2 (value c3) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num: (value c0) 7 -> 6
+decrement c1 :: cost: 1
+    add:
+    del:
+    num: (value c1) 4 -> 3
+decrement c2 :: cost: 1
+    add:
+    del:
+    num: (value c2) 2 -> 1
+    successor: increment c1
+step 2: state 0 applicable 7
+    state:
+    num: (value c0) = 7 (value c1) = 5 (value c2) = 2 (value c3) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num: (value c0) 7 -> 6
+decrement c1 :: cost: 1
+    add:
+    del:
+    num: (value c1) 5 -> 4
+decrement c2 :: cost: 1
+    add:
+    del:
+    num: (value c2) 2 -> 1
+    successor: increment c2
+step 3: state 0 applicable 7
+    state:
+    num: (value c0) = 7 (value c1) = 5 (value c2) = 3 (value c3) = 0
+decrement c0 :: cost: 1
+    add:
+    del:
+    num: (value c0) 7 -> 6
+decrement c1 :: cost: 1
+    add:
+    del:
+    num: (value c1) 5 -> 4
+decrement c2 :: cost: 1
+    add:
+    del:
+    num: (value c2) 3 -> 2
+    successor: increment c3
+step 4: state 0 applicable 8
+    state:
+    num: (value c0) = 7 (value c1) = 5 (value c2) = 3 (value c3) = 1
+decrement c0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (value c0) 7 -> 6
+decrement c1 :: cost: 1
+    add:
+    del:
+    num: (value c1) 5 -> 4
+decrement c2 :: cost: 1
+    add:
+    del:
+    num: (value c2) 3 -> 2
+ground atoms: 0 groundings: 8

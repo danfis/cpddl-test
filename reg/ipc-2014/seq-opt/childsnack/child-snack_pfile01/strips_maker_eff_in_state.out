@@ -1,4 +1,5 @@
 step 0: state 22 applicable 328
+    state: (at tray1 kitchen) (at tray2 kitchen) (at_kitchen_bread bread1) (at_kitchen_bread bread2) (at_kitchen_bread bread3) (at_kitchen_bread bread4) (at_kitchen_bread bread5) (at_kitchen_bread bread6) (at_kitchen_content content1) (at_kitchen_content content2) (at_kitchen_content content3) (at_kitchen_content content4) (at_kitchen_content content5) (at_kitchen_content content6) (notexist sandw1) (notexist sandw2) (notexist sandw3) (notexist sandw4) (notexist sandw5) (notexist sandw6) (notexist sandw7) (notexist sandw8)
 make_sandwich sandw1 bread1 content1 :: cost: 1
     add: (at_kitchen_sandwich sandw1)
     del: (at_kitchen_bread bread1) (at_kitchen_content content1) (notexist sandw1)
@@ -8,7 +9,9 @@ make_sandwich sandw1 bread1 content2 :: cost: 1
 make_sandwich sandw1 bread1 content3 :: cost: 1
     add: (at_kitchen_sandwich sandw1)
     del: (at_kitchen_bread bread1) (at_kitchen_content content3) (notexist sandw1)
+    successor: make_sandwich_no_gluten sandw1 bread1 content5
 step 1: state 21 applicable 192
+    state: (at tray1 kitchen) (at tray2 kitchen) (at_kitchen_bread bread2) (at_kitchen_bread bread3) (at_kitchen_bread bread4) (at_kitchen_bread bread5) (at_kitchen_bread bread6) (at_kitchen_content content1) (at_kitchen_content content2) (at_kitchen_content content3) (at_kitchen_content content4) (at_kitchen_content content6) (at_kitchen_sandwich sandw1) (no_gluten_sandwich sandw1) (notexist sandw2) (notexist sandw3) (notexist sandw4) (notexist sandw5) (notexist sandw6) (notexist sandw7) (notexist sandw8)
 make_sandwich sandw2 bread2 content1 :: cost: 1
     add: (at_kitchen_sandwich sandw2)
     del: (at_kitchen_bread bread2) (at_kitchen_content content1) (notexist sandw2)
@@ -18,17 +21,20 @@ make_sandwich sandw2 bread2 content2 :: cost: 1
 make_sandwich sandw2 bread2 content3 :: cost: 1
     add: (at_kitchen_sandwich sandw2)
     del: (at_kitchen_bread bread2) (at_kitchen_content content3) (notexist sandw2)
+    successor: make_sandwich_no_gluten sandw3 bread4 content6
 step 2: state 20 applicable 108
+    state: (at tray1 kitchen) (at tray2 kitchen) (at_kitchen_bread bread2) (at_kitchen_bread bread3) (at_kitchen_bread bread5) (at_kitchen_bread bread6) (at_kitchen_content content1) (at_kitchen_content content2) (at_kitchen_content content3) (at_kitchen_content content4) (at_kitchen_sandwich sandw1) (at_kitchen_sandwich sandw3) (no_gluten_sandwich sandw1) (no_gluten_sandwich sandw3) (notexist sandw2) (notexist sandw4) (notexist sandw5) (notexist sandw6) (notexist sandw7) (notexist sandw8)
 make_sandwich sandw2 bread2 content1 :: cost: 1
     add: (at_kitchen_sandwich sandw2)
     del: (at_kitchen_bread bread2) (at_kitchen_content content1) (notexist sandw2)
 make_sandwich sandw2 bread2 content2 :: cost: 1
     add: (at_kitchen_sandwich sandw2)
     del: (at_kitchen_bread bread2) (at_kitchen_content content2) (notexist sandw2)
-make_sandwich sandw2 bread2 content3 :: cost: 1
+make_sandwich sandw2 bread2 content3 :: cost: 1 [successor]
     add: (at_kitchen_sandwich sandw2)
     del: (at_kitchen_bread bread2) (at_kitchen_content content3) (notexist sandw2)
 step 3: state 18 applicable 59
+    state: (at tray1 kitchen) (at tray2 kitchen) (at_kitchen_bread bread3) (at_kitchen_bread bread5) (at_kitchen_bread bread6) (at_kitchen_content content1) (at_kitchen_content content2) (at_kitchen_content content4) (at_kitchen_sandwich sandw1) (at_kitchen_sandwich sandw2) (at_kitchen_sandwich sandw3) (no_gluten_sandwich sandw1) (no_gluten_sandwich sandw3) (notexist sandw4) (notexist sandw5) (notexist sandw6) (notexist sandw7) (notexist sandw8)
 make_sandwich sandw4 bread3 content1 :: cost: 1
     add: (at_kitchen_sandwich sandw4)
     del: (at_kitchen_bread bread3) (at_kitchen_content content1) (notexist sandw4)
@@ -38,7 +44,9 @@ make_sandwich sandw4 bread3 content2 :: cost: 1
 make_sandwich sandw4 bread3 content4 :: cost: 1
     add: (at_kitchen_sandwich sandw4)
     del: (at_kitchen_bread bread3) (at_kitchen_content content4) (notexist sandw4)
+    successor: make_sandwich sandw4 bread5 content1
 step 4: state 16 applicable 32
+    state: (at tray1 kitchen) (at tray2 kitchen) (at_kitchen_bread bread3) (at_kitchen_bread bread6) (at_kitchen_content content2) (at_kitchen_content content4) (at_kitchen_sandwich sandw1) (at_kitchen_sandwich sandw2) (at_kitchen_sandwich sandw3) (at_kitchen_sandwich sandw4) (no_gluten_sandwich sandw1) (no_gluten_sandwich sandw3) (notexist sandw5) (notexist sandw6) (notexist sandw7) (notexist sandw8)
 make_sandwich sandw5 bread3 content2 :: cost: 1
     add: (at_kitchen_sandwich sandw5)
     del: (at_kitchen_bread bread3) (at_kitchen_content content2) (notexist sandw5)
@@ -48,4 +56,5 @@ make_sandwich sandw5 bread3 content4 :: cost: 1
 make_sandwich sandw5 bread6 content2 :: cost: 1
     add: (at_kitchen_sandwich sandw5)
     del: (at_kitchen_bread bread6) (at_kitchen_content content2) (notexist sandw5)
+    successor: make_sandwich sandw6 bread3 content2
 ground atoms: 52 groundings: 336

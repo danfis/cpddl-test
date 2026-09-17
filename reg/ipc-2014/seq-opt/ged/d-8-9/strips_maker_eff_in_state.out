@@ -1,4 +1,5 @@
 step 0: state 19 applicable 18
+    state: (cw g11 sub6) (cw g84 sub5) (cw sub1 g84) (cw sub2 sub4) (cw sub3 sub1) (cw sub4 g11) (cw sub5 sub2) (cw sub6 sub7) (cw sub7 sub3) (idle) (inverted g84) (normal g11) (normal sub1) (normal sub2) (normal sub3) (normal sub4) (normal sub5) (normal sub6) (normal sub7)
 begin-cut g11 sub6 :: cost: 0
     add: (cut-point-1 g11) (cutting) (last-cut-point g11) (s-first sub6) (s-last sub6)
     del: (cw g11 sub6) (idle)
@@ -8,18 +9,22 @@ begin-cut g84 sub5 :: cost: 0
 begin-cut sub1 g84 :: cost: 0
     add: (cut-point-1 sub1) (cutting) (last-cut-point sub1) (s-first g84) (s-last g84)
     del: (cw sub1 g84) (idle)
+    successor: begin-cut sub7 sub3
 step 1: state 22 applicable 2
+    state: (cut-point-1 sub7) (cutting) (cw g11 sub6) (cw g84 sub5) (cw sub1 g84) (cw sub2 sub4) (cw sub3 sub1) (cw sub4 g11) (cw sub5 sub2) (cw sub6 sub7) (inverted g84) (last-cut-point sub7) (normal g11) (normal sub1) (normal sub2) (normal sub3) (normal sub4) (normal sub5) (normal sub6) (normal sub7) (s-first sub3) (s-last sub3)
 continue-cut sub3 sub1 :: cost: 0
     add: (s-last sub1) (s-next sub3 sub1)
     del: (cw sub3 sub1) (s-last sub3)
-end-cut-1 sub3 sub1 :: cost: 0
+end-cut-1 sub3 sub1 :: cost: 0 [successor]
     add: (cut-point-2 sub1)
     del: (cw sub3 sub1)
 step 2: state 22 applicable 1
-end-cut-2 sub7 sub1 :: cost: 0
+    state: (cut-point-1 sub7) (cut-point-2 sub1) (cutting) (cw g11 sub6) (cw g84 sub5) (cw sub1 g84) (cw sub2 sub4) (cw sub4 g11) (cw sub5 sub2) (cw sub6 sub7) (inverted g84) (last-cut-point sub7) (normal g11) (normal sub1) (normal sub2) (normal sub3) (normal sub4) (normal sub5) (normal sub6) (normal sub7) (s-first sub3) (s-last sub3)
+end-cut-2 sub7 sub1 :: cost: 0 [successor]
     add: (cw sub7 sub1) (have-cut)
     del: (cut-point-1 sub7) (cut-point-2 sub1) (cutting)
 step 3: state 21 applicable 17
+    state: (cw g11 sub6) (cw g84 sub5) (cw sub1 g84) (cw sub2 sub4) (cw sub4 g11) (cw sub5 sub2) (cw sub6 sub7) (cw sub7 sub1) (have-cut) (inverted g84) (last-cut-point sub7) (normal g11) (normal sub1) (normal sub2) (normal sub3) (normal sub4) (normal sub5) (normal sub6) (normal sub7) (s-first sub3) (s-last sub3)
 begin-inverse-splice sub7 sub1 :: cost: 1
     add: (inverse-splicing) (splice-point-1 sub7) (splice-point-2 sub1)
     del: (cw sub7 sub1) (have-cut)
@@ -29,8 +34,10 @@ begin-transpose-splice g11 sub6 :: cost: 2
 begin-transpose-splice g84 sub5 :: cost: 2
     add: (splice-point-1 g84) (splice-point-2 sub5) (splicing)
     del: (cw g84 sub5) (have-cut)
+    successor: begin-transpose-splice sub4 g11
 step 4: state 22 applicable 1
-end-splice-1 sub3 sub4 :: cost: 0
+    state: (cw g11 sub6) (cw g84 sub5) (cw sub1 g84) (cw sub2 sub4) (cw sub5 sub2) (cw sub6 sub7) (cw sub7 sub1) (inverted g84) (last-cut-point sub7) (normal g11) (normal sub1) (normal sub2) (normal sub3) (normal sub4) (normal sub5) (normal sub6) (normal sub7) (s-first sub3) (s-last sub3) (splice-point-1 sub4) (splice-point-2 g11) (splicing)
+end-splice-1 sub3 sub4 :: cost: 0 [successor]
     add: (cw sub4 sub3) (splice-point-1 sub3) (splicing-last)
     del: (s-first sub3) (s-last sub3) (splice-point-1 sub4) (splicing)
 ground atoms: 90 groundings: 39

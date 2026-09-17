@@ -1,4 +1,5 @@
 step 0: state 13 applicable 30
+    state: (at rover0 waypoint7) (at_rock_sample waypoint5) (at_rock_sample waypoint7) (at_rock_sample waypoint8) (at_rock_sample waypoint9) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (at_soil_sample waypoint7) (available rover0) (channel_free general) (empty rover0store) (energy rover0 level50)
 calibrate rover0 camera0 objective0 waypoint7 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
@@ -8,7 +9,9 @@ calibrate rover0 camera0 objective4 waypoint7 :: cost: 1
 calibrate rover0 camera0 objective5 waypoint7 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
+    successor: navigate rover0 waypoint7 waypoint0 level47 level3 level50
 step 1: state 13 applicable 26
+    state: (at rover0 waypoint0) (at_rock_sample waypoint5) (at_rock_sample waypoint7) (at_rock_sample waypoint8) (at_rock_sample waypoint9) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (at_soil_sample waypoint7) (available rover0) (channel_free general) (empty rover0store) (energy rover0 level47)
 calibrate rover0 camera0 objective0 waypoint0 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
@@ -18,7 +21,9 @@ calibrate rover0 camera0 objective4 waypoint0 :: cost: 1
 calibrate rover0 camera0 objective5 waypoint0 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
+    successor: navigate rover0 waypoint0 waypoint7 level44 level3 level47
 step 2: state 13 applicable 30
+    state: (at rover0 waypoint7) (at_rock_sample waypoint5) (at_rock_sample waypoint7) (at_rock_sample waypoint8) (at_rock_sample waypoint9) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (at_soil_sample waypoint7) (available rover0) (channel_free general) (empty rover0store) (energy rover0 level44)
 calibrate rover0 camera0 objective0 waypoint7 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
@@ -28,7 +33,9 @@ calibrate rover0 camera0 objective4 waypoint7 :: cost: 1
 calibrate rover0 camera0 objective5 waypoint7 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
+    successor: navigate rover0 waypoint7 waypoint4 level27 level17 level44
 step 3: state 13 applicable 40
+    state: (at rover0 waypoint4) (at_rock_sample waypoint5) (at_rock_sample waypoint7) (at_rock_sample waypoint8) (at_rock_sample waypoint9) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (at_soil_sample waypoint7) (available rover0) (channel_free general) (empty rover0store) (energy rover0 level27)
 calibrate rover0 camera0 objective0 waypoint4 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
@@ -38,14 +45,16 @@ calibrate rover0 camera0 objective1 waypoint4 :: cost: 1
 calibrate rover0 camera0 objective2 waypoint4 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
+    successor: navigate rover0 waypoint4 waypoint11 level8 level19 level27
 step 4: state 13 applicable 23
+    state: (at rover0 waypoint11) (at_rock_sample waypoint5) (at_rock_sample waypoint7) (at_rock_sample waypoint8) (at_rock_sample waypoint9) (at_soil_sample waypoint3) (at_soil_sample waypoint4) (at_soil_sample waypoint6) (at_soil_sample waypoint7) (available rover0) (channel_free general) (empty rover0store) (energy rover0 level8)
 calibrate rover0 camera0 objective0 waypoint11 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
 calibrate rover0 camera0 objective1 waypoint11 :: cost: 1
     add: (calibrated camera0 rover0)
     del:
-calibrate rover0 camera0 objective4 waypoint11 :: cost: 1
+calibrate rover0 camera0 objective4 waypoint11 :: cost: 1 [successor]
     add: (calibrated camera0 rover0)
     del:
 ground atoms: 55 groundings: 126

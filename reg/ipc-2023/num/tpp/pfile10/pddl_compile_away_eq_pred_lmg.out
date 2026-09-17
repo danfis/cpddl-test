@@ -1,0 +1,43 @@
+Require:
+  - :equality
+Predicate:
+  + (equal object object)
+Action:
+  - drive: ?t - truck ?from - place ?to - place
+      pre: (and (loc ?t ?from) (not (= ?from ?to)))
+      eff: (and (increase (total-cost) (drive-cost ?from ?to)) (loc ?t ?to) (not (loc ?t ?from)))
+  + drive: ?t - truck ?from - place ?to - place
+      pre: (and (loc ?t ?from) (not (equal ?from ?to)))
+      eff: (and (increase (total-cost) (drive-cost ?from ?to)) (loc ?t ?to) (not (loc ?t ?from)))
+Init:
+  + (equal depot0 depot0)
+  + (equal market1 market1)
+  + (equal market10 market10)
+  + (equal market11 market11)
+  + (equal market12 market12)
+  + (equal market13 market13)
+  + (equal market14 market14)
+  + (equal market15 market15)
+  + (equal market16 market16)
+  + (equal market17 market17)
+  + (equal market18 market18)
+  + (equal market19 market19)
+  + (equal market2 market2)
+  + (equal market20 market20)
+  + (equal market21 market21)
+  + (equal market22 market22)
+  + (equal market23 market23)
+  + (equal market24 market24)
+  + (equal market25 market25)
+  + (equal market3 market3)
+  + (equal market4 market4)
+  + (equal market5 market5)
+  + (equal market6 market6)
+  + (equal market7 market7)
+  + (equal market8 market8)
+  + (equal market9 market9)
+Pred prop:
+  - (= object object): in_pre in_pre_neg
+  + (equal object object): in_init in_pre in_pre_neg
+Global prop:
+  - has_eq_pred
