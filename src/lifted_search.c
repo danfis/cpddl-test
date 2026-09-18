@@ -183,7 +183,8 @@ TEST(lifted_search_unit_cost, pddl_unit_cost)
 static void _lifted_search(pddl_lifted_heur_t *heur,
                            pddl_lifted_search_alg_t search_alg,
                            pddl_lifted_app_action_backend_t app_action,
-                           int compare_to_optimal_cost)
+                           int compare_to_optimal_cost,
+                           pddl_bool_t enforce_non_decreasing_state_metric)
 {
     if (heur == NULL){
         if (pddlErrIsSet(&C.err))
@@ -197,6 +198,8 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
     cfg.alg = search_alg;
     cfg.heur = heur;
     cfg.succ_gen = app_action;
+    cfg.enforce_non_decreasing_state_metric
+        = enforce_non_decreasing_state_metric;
     //pddlErrLogEnable(&C.err, stdout);
 
     pddl_lifted_search_t *search = pddlLiftedSearchNew(&cfg, &C.err);
@@ -218,17 +221,22 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
     switch (st){
         case PDDL_LIFTED_SEARCH_FOUND: {
             const pddl_lifted_plan_t *plan = pddlLiftedSearchPlan(search);
-            if (search_alg == PDDL_LIFTED_SEARCH_ASTAR)
-                printf("Cost: %d\n", plan->plan_cost);
+            char cost[64];
+            if (search_alg == PDDL_LIFTED_SEARCH_ASTAR){
+                printf("Cost: %s\n",
+                       pddlNumValFmt(&plan->plan_cost, cost, sizeof(cost)));
+            }
             fflush(stdout);
             int val = validateLiftedPlan(plan);
             assert(val == 0);
-            if (search_alg == PDDL_LIFTED_SEARCH_ASTAR
-                    && compare_to_optimal_cost && C.optimal_cost >= 0){
-                assert(plan->plan_cost == C.optimal_cost);
-            }
             if (compare_to_optimal_cost && C.optimal_cost >= 0){
-                assert(plan->plan_cost >= C.optimal_cost);
+                // Compared by value, so a float cost can match as well
+                pddl_num_val_t opt;
+                pddlNumValSetInt(&opt, C.optimal_cost);
+                int cmp = pddlNumValCmp(&plan->plan_cost, &opt);
+                if (search_alg == PDDL_LIFTED_SEARCH_ASTAR)
+                    assert(cmp == 0);
+                assert(cmp >= 0);
             }
             break;
         }
@@ -239,6 +247,11 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
         case PDDL_LIFTED_SEARCH_ABORT:
             if (pddlErrIsSet(&C.err))
                 pddlErrPrint(&C.err, 1, stderr);
+            // Aborting is the expected outcome of a violated enforcement
+            if (enforce_non_decreasing_state_metric){
+                printf("Aborted\n");
+                break;
+            }
             assert(0 && "ABORT status");
             break;
         case PDDL_LIFTED_SEARCH_CONT:
@@ -258,14 +271,31 @@ TEST_COND(lifted_blind_search_sql, lifted_search, SQLITE)
     }
     _lifted_search(pddlLiftedHeurBlind(),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_SQL, 1);
+                   PDDL_LIFTED_APP_ACTION_SQL, 1, pddl_false);
 }
 
 TEST(lifted_blind_search_dl, lifted_search)
 {
     _lifted_search(pddlLiftedHeurBlind(),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
+}
+
+TEST(lifted_blind_search_enforce_metric_dl, lifted_search)
+{
+    // The enforcement matters only if the costs are given by the state
+    // metric; all other tasks finish immediately without any output
+    pddl_strips_maker_t smaker;
+    pddlStripsMakerInit(&smaker, &C.pddl);
+    pddl_strips_maker_eff_cost_type_t cost_type;
+    cost_type = pddlStripsMakerEffCostType(&smaker);
+    pddlStripsMakerFree(&smaker);
+    if (cost_type != PDDL_STRIPS_MAKER_EFF_STATE_METRIC)
+        return;
+
+    _lifted_search(pddlLiftedHeurBlind(),
+                   PDDL_LIFTED_SEARCH_ASTAR,
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_true);
 }
 
 TEST_COND(lifted_search_astar_hmax_sql, lifted_search_heur, SQLITE)
@@ -276,49 +306,49 @@ TEST_COND(lifted_search_astar_hmax_sql, lifted_search_heur, SQLITE)
     }
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_SQL, 1);
+                   PDDL_LIFTED_APP_ACTION_SQL, 1, pddl_false);
 }
 
 TEST(lifted_search_astar_hmax_dl, lifted_search_heur)
 {
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
 }
 
 TEST(lifted_search_gbfs_hadd_dl, lifted_search_heur)
 {
     _lifted_search(pddlLiftedHeurHAdd(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_GBFS,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
 }
 
 TEST(lifted_search_gbfs_hff_add_dl, lifted_search_heur)
 {
     _lifted_search(pddlLiftedHeurHFFAdd(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_GBFS,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
 }
 
 TEST(lifted_search_gbfs_hff_max_dl, lifted_search_heur)
 {
     _lifted_search(pddlLiftedHeurHFFMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_GBFS,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
 }
 
 TEST(lifted_search_lazy_hadd_dl, lifted_search_heur)
 {
     _lifted_search(pddlLiftedHeurHAdd(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_LAZY,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
 }
 
 TEST(lifted_search_lazy_hff_add_dl, lifted_search_heur)
 {
     _lifted_search(pddlLiftedHeurHFFAdd(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_LAZY,
-                   PDDL_LIFTED_APP_ACTION_DL, 1);
+                   PDDL_LIFTED_APP_ACTION_DL, 1, pddl_false);
 }
 
 TEST_COND(lifted_blind_search_unit_cost_sql, lifted_search_unit_cost, SQLITE)
@@ -329,14 +359,14 @@ TEST_COND(lifted_blind_search_unit_cost_sql, lifted_search_unit_cost, SQLITE)
     }
     _lifted_search(pddlLiftedHeurBlind(),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_SQL, 0);
+                   PDDL_LIFTED_APP_ACTION_SQL, 0, pddl_false);
 }
 
 TEST(lifted_blind_search_unit_cost_dl, lifted_search_unit_cost)
 {
     _lifted_search(pddlLiftedHeurBlind(),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_DL, 0);
+                   PDDL_LIFTED_APP_ACTION_DL, 0, pddl_false);
 }
 
 TEST_COND(lifted_search_astar_unit_cost_hmax_sql, lifted_search_unit_cost, SQLITE)
@@ -347,7 +377,7 @@ TEST_COND(lifted_search_astar_unit_cost_hmax_sql, lifted_search_unit_cost, SQLIT
     }
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_SQL, 0);
+                   PDDL_LIFTED_APP_ACTION_SQL, 0, pddl_false);
 }
 
 TEST(lifted_search_astar_unit_cost_hmax_dl, lifted_search_unit_cost)
@@ -358,5 +388,5 @@ TEST(lifted_search_astar_unit_cost_hmax_dl, lifted_search_unit_cost)
     }
     _lifted_search(pddlLiftedHeurHMax(&C.pddl, &C.err),
                    PDDL_LIFTED_SEARCH_ASTAR,
-                   PDDL_LIFTED_APP_ACTION_DL, 0);
+                   PDDL_LIFTED_APP_ACTION_DL, 0, pddl_false);
 }

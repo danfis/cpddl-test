@@ -58,6 +58,7 @@ needs_simple_total_cost = [
     "homomorphism_reduce",
     "homomorphism_type",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_search_astar_hmax_dl",
     "lifted_search_astar_hmax_sql",
@@ -1416,6 +1417,7 @@ disable = [
     "endomorphism_tss_nocost",
     "h2mgroup",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_astar_hmax_sql",
@@ -1436,6 +1438,7 @@ disable = [
 name = "ipc-2023/opt/folding/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1481,6 +1484,7 @@ disable = [
 name = "ipc-2023/opt/labyrinth/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1509,6 +1513,7 @@ disable = [
 name = "ipc-2023/opt/quantum-layout/p01"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1518,6 +1523,7 @@ disable = [
 name = "ipc-2023/opt/quantum-layout/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1576,6 +1582,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1611,6 +1618,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1651,6 +1659,7 @@ disable = [
 name = "ipc-2023/opt/rubiks-cube/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1686,6 +1695,7 @@ disable = [
     "famgroup_all",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1717,6 +1727,7 @@ disable = [
     "famgroup_maximal",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1755,6 +1766,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_search_astar_hmax_dl",
     "lifted_search_astar_hmax_sql",
@@ -1790,6 +1802,7 @@ disable = [
 name = "ipc-2023/sat/quantum-layout/p01"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1847,6 +1860,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -2119,9 +2133,6 @@ name = "various/cond-eff-simplify/p01"
 [[tasks]]
 name = "various/num-metric-nonlinear/p01"
 disable = [
-    # Lifted search supports only integer action costs.
-    "lifted_blind_search_dl",
-
     # Lifted relaxed heuristics support only tasks with non-negative integer
     # action costs.
     "lifted_search_astar_hmax_dl",
@@ -2135,9 +2146,6 @@ disable = [
 [[tasks]]
 name = "various/num-metric-negdelta/p01"
 disable = [
-    # Lifted search supports only integer action costs.
-    "lifted_blind_search_dl",
-
     # Lifted relaxed heuristics support only tasks with non-negative integer
     # action costs.
     "lifted_search_astar_hmax_dl",
@@ -2163,9 +2171,6 @@ disable = ["test-set:needs_simple_total_cost"]
 [[tasks]]
 name = "various/num-cost-float/p01"
 disable = [
-    # Lifted search supports only integer action costs.
-    "lifted_blind_search_dl",
-
     # Lifted relaxed heuristics support only tasks with non-negative integer
     # action costs.
     "lifted_search_astar_hmax_dl",
@@ -2191,6 +2196,7 @@ name = "ipc-2023/num/block-grouping/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2204,6 +2210,7 @@ name = "ipc-2023/num/block-grouping/pfile2"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2220,6 +2227,7 @@ name = "ipc-2023/num/counters/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2236,6 +2244,7 @@ name = "ipc-2023/num/delivery/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
 ]
 
@@ -2247,6 +2256,7 @@ name = "ipc-2023/num/drone/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
 ]
 
@@ -2258,6 +2268,7 @@ name = "ipc-2023/num/expedition/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2271,6 +2282,7 @@ name = "ipc-2023/num/ext-plant-watering/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2284,6 +2296,7 @@ name = "ipc-2023/num/ext-plant-watering/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2300,6 +2313,7 @@ name = "ipc-2023/num/farmland/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2316,6 +2330,7 @@ name = "ipc-2023/num/fo-counters/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2332,6 +2347,7 @@ name = "ipc-2023/num/fo-farmland/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2345,6 +2361,7 @@ name = "ipc-2023/num/fo-sailing/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2358,6 +2375,7 @@ name = "ipc-2023/num/fo-sailing/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2374,6 +2392,7 @@ name = "ipc-2023/num/hydropower/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2387,6 +2406,7 @@ name = "ipc-2023/num/markettrader/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2400,6 +2420,7 @@ name = "ipc-2023/num/markettrader/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2416,6 +2437,7 @@ name = "ipc-2023/num/mprime/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
 ]
 
@@ -2424,6 +2446,7 @@ name = "ipc-2023/num/pathwaysmetric/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2437,6 +2460,7 @@ name = "ipc-2023/num/pathwaysmetric/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2453,6 +2477,7 @@ name = "ipc-2023/num/rover/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2466,6 +2491,7 @@ name = "ipc-2023/num/sailing/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2479,6 +2505,7 @@ name = "ipc-2023/num/sailing/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2492,6 +2519,7 @@ name = "ipc-2023/num/settlersnumeric/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2505,6 +2533,7 @@ name = "ipc-2023/num/settlersnumeric/pfile2"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2518,6 +2547,7 @@ name = "ipc-2023/num/settlersnumeric/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2530,6 +2560,7 @@ disable = [
 name = "ipc-2023/num/sugar/pfile1"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
@@ -2543,6 +2574,7 @@ disable = [
 name = "ipc-2023/num/sugar/pfile10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
@@ -2555,9 +2587,6 @@ disable = [
 [[tasks]]
 name = "ipc-2023/num/tpp/pfile1"
 disable = [
-    # Lifted search supports only integer action costs.
-    "lifted_blind_search_dl",
-
     # Lifted relaxed heuristics support only tasks with non-negative integer
     # action costs.
     "lifted_search_astar_hmax_dl",
@@ -2573,8 +2602,9 @@ name = "ipc-2023/num/tpp/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
 
-    # Lifted search supports only integer action costs.
+    # Too large for the blind lifted search (runs out of memory).
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
 
     # Lifted relaxed heuristics support only tasks with non-negative integer
     # action costs.
@@ -2602,6 +2632,7 @@ name = "ipc-2023/num/zenotravel/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2624,6 +2655,7 @@ name = "ipc-2026/num/coins/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2640,6 +2672,7 @@ name = "ipc-2026/num/expedition/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2653,6 +2686,7 @@ name = "ipc-2026/num/factory-robot/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2666,6 +2700,7 @@ name = "ipc-2026/num/factory-robot/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2682,6 +2717,7 @@ name = "ipc-2026/num/forestfire/prob10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2706,6 +2742,7 @@ name = "ipc-2026/num/gear-car/p10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2719,6 +2756,7 @@ name = "ipc-2026/num/line-exchange-snp/3_5_50_50"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2732,6 +2770,7 @@ name = "ipc-2026/num/line-exchange-snp/4_10_50_50"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2748,6 +2787,7 @@ name = "ipc-2026/num/onlycraft-opt/P10_opt"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2764,6 +2804,7 @@ name = "ipc-2026/num/onlycraft-sat/P10_sat"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2777,6 +2818,7 @@ name = "ipc-2026/num/petri-net/prob06-1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2790,6 +2832,7 @@ name = "ipc-2026/num/petri-net/prob08-2"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2806,6 +2849,7 @@ name = "ipc-2026/num/rainbowttles-opt/p20"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
 ]
 
@@ -2814,6 +2858,7 @@ name = "ipc-2026/num/rainbowttles-sat/p31"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
 ]
 
@@ -2822,6 +2867,7 @@ name = "ipc-2026/num/rainbowttles-sat/p40"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
 ]
 
@@ -2833,6 +2879,7 @@ name = "ipc-2026/num/sailing-wind-opt/problem_10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2846,6 +2893,7 @@ name = "ipc-2026/num/sailing-wind-sat/problem_0"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2859,6 +2907,7 @@ name = "ipc-2026/num/sailing-wind-sat/problem_10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2872,6 +2921,7 @@ name = "ipc-2026/num/settlers-snp/pfile1"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2885,6 +2935,7 @@ name = "ipc-2026/num/settlers-snp/pfile10"
 disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
@@ -2904,6 +2955,7 @@ disable = [
 name = "ipc-2026/num/ztalloc-sum/pfile10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
