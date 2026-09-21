@@ -635,7 +635,7 @@ TEST_ONCE(fm_simplify_status)
 
     printf("integer overflow:\n");
     st = runDel(pddlFmSimplify,
-                &pddlFmNewNumExpMult(pddlFmNewNumExpNumInt(INT64_MAX),
+                &pddlFmNewNumExpMult(pddlFmNewNumExpNumInt(INT_MAX),
                                      pddlFmNewNumExpNumInt(2))->fm,
                 &pddl, NULL, &err);
     assert(st == -1);

@@ -42,9 +42,9 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
     PDDL_ISET(cur_state);
     pddlISetUnion(&cur_state, &init);
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&smaker);
-    pddl_num_val_t *cur_num_state = NULL;
+    pddl_num_t *cur_num_state = NULL;
     if (num_state_size > 0){
-        cur_num_state = PDDL_ZALLOC_ARR(pddl_num_val_t, num_state_size);
+        cur_num_state = PDDL_ZALLOC_ARR(pddl_num_t, num_state_size);
         pddlStripsMakerInitNumState(&smaker, cur_num_state);
     }
     for (int step = 0; step < 10; ++step){
@@ -95,18 +95,18 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
                 printf(" %s", C.pddl.obj.obj[args[j]].name);
             }
             printf(" :: cost:");
-            char num_val_buf[32];
+            char num_buf[32];
             switch (eff.cost_type){
             case PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST:
                 printf(" %d", eff.cost.int_action_cost);
                 break;
             case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
-                printf(" %s", pddlNumValFmt(&eff.cost.general_action_cost,
-                                            num_val_buf, 32));
+                printf(" %s", pddlNumFmt(&eff.cost.general_action_cost,
+                                            num_buf, 32));
                 break;
             case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
-                printf(" metric:%s", pddlNumValFmt(&eff.cost.state_metric,
-                                            num_val_buf, 32));
+                printf(" metric:%s", pddlNumFmt(&eff.cost.state_metric,
+                                            num_buf, 32));
                 break;
             }
             printf("\n");
@@ -116,7 +116,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
                 printf("    num:");
                 for (int j = 0; j < num_state_size; ++j){
                     char buf[32];
-                    printf(" %s", pddlNumValFmt(&eff.num_eff[j], buf, 32));
+                    printf(" %s", pddlNumFmt(&eff.num_eff[j], buf, 32));
                 }
                 printf("\n");
             }
@@ -126,7 +126,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
                 pddlISetUnion(&next_state, &eff.add_eff);
                 if (num_state_size > 0){
                     memcpy(cur_num_state, eff.num_eff,
-                           sizeof(pddl_num_val_t) * num_state_size);
+                           sizeof(pddl_num_t) * num_state_size);
                 }
             }
         }
@@ -224,16 +224,16 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
             char cost[64];
             if (search_alg == PDDL_LIFTED_SEARCH_ASTAR){
                 printf("Cost: %s\n",
-                       pddlNumValFmt(&plan->plan_cost, cost, sizeof(cost)));
+                       pddlNumFmt(&plan->plan_cost, cost, sizeof(cost)));
             }
             fflush(stdout);
             int val = validateLiftedPlan(plan);
             assert(val == 0);
             if (compare_to_optimal_cost && C.optimal_cost >= 0){
                 // Compared by value, so a float cost can match as well
-                pddl_num_val_t opt;
-                pddlNumValSetInt(&opt, C.optimal_cost);
-                int cmp = pddlNumValCmp(&plan->plan_cost, &opt);
+                pddl_num_t opt;
+                pddlNumSetInt(&opt, C.optimal_cost);
+                int cmp = pddlNumCmp(&plan->plan_cost, &opt);
                 if (search_alg == PDDL_LIFTED_SEARCH_ASTAR)
                     assert(cmp == 0);
                 assert(cmp >= 0);

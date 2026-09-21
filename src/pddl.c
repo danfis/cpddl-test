@@ -106,16 +106,16 @@ static int initStateEq(const pddl_init_state_t *a, const pddl_init_state_t *b)
         if (!pddlInitStateHasAtom(a, atom))
             return 0;
     }
-    pddl_num_val_t va, vb;
+    pddl_num_t va, vb;
     PDDL_INIT_STATE_FOR_EACH_FLUENT(a, fluent, &va){
         if (pddlInitStateFluentVal(b, fluent, &vb) != 0
-                || pddlNumValCmp(&va, &vb) != 0){
+                || pddlNumCmp(&va, &vb) != 0){
             return 0;
         }
     }
     PDDL_INIT_STATE_FOR_EACH_FLUENT(b, fluent, &vb){
         if (pddlInitStateFluentVal(a, fluent, &va) != 0
-                || pddlNumValCmp(&va, &vb) != 0){
+                || pddlNumCmp(&va, &vb) != 0){
             return 0;
         }
     }
@@ -193,10 +193,10 @@ TEST_COND(pddl_compile_flt_to_int, pddl, LP)
         break;
     case PDDL_COMPILE_FLT_TO_INT_CHANGED:{
         // No float constant may survive anywhere in the task
-        pddl_num_val_t init_val;
+        pddl_num_t init_val;
         PDDL_INIT_STATE_FOR_EACH_FLUENT(&C.pddl.init, fluent, &init_val){
             (void)fluent;
-            assert(!pddlNumValIsFlt(&init_val));
+            assert(!pddlNumIsFlt(&init_val));
         }
         if (C.pddl.goal != NULL)
             assert(!fmHasFlt(C.pddl.goal));

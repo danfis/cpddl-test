@@ -8,7 +8,7 @@
  * Tests of the open list (pddl/open_list.h) with all key types:
  *   PDDL_OPEN_LIST_KEY_INT      -- int keys of size 1, 2 and 3
  *   PDDL_OPEN_LIST_KEY_COST     -- pddl_cost_t keys of size 1 and 2
- *   PDDL_OPEN_LIST_KEY_NUM_VAL  -- pddl_num_val_t keys of size 1 and 2
+ *   PDDL_OPEN_LIST_KEY_NUM  -- pddl_num_t keys of size 1 and 2
  *
  * All tests are TEST_ONCE (not per task).
  * Run with:  cd tests && make && ./test -T _ -s open_list
@@ -16,7 +16,7 @@
 
 #include "pddl/open_list.h"
 #include "pddl/cost.h"
-#include "pddl/num_val.h"
+#include "pddl/num.h"
 #include "test.h"
 #include <assert.h>
 
@@ -57,7 +57,7 @@ static void checkTop(pddl_open_list_t *list, int key_size,
  */
 static void checkEmpty(pddl_open_list_t *list)
 {
-    pddl_num_val_t key[3];
+    pddl_num_t key[3];
     pddl_state_id_t id;
     int ret = pddlOpenListTop(list, &id, key);
     assert(ret == -1);
@@ -516,61 +516,61 @@ TEST_ONCE(open_list_cost_2d)
 
 
 /* ---------------------------------------------------------------------- */
-/* NUM_VAL keys                                                            */
+/* NUM keys                                                                */
 /* ---------------------------------------------------------------------- */
 
-static void checkPopNumVal(pddl_open_list_t *list, int key_size,
-                           const pddl_num_val_t *exp_key,
+static void checkPopNum(pddl_open_list_t *list, int key_size,
+                           const pddl_num_t *exp_key,
                            pddl_state_id_t exp_id)
 {
-    pddl_num_val_t got_key[2];
+    pddl_num_t got_key[2];
     pddl_state_id_t got_id;
     int ret = pddlOpenListPop(list, &got_id, got_key);
     assert(ret == 0);
     for (int i = 0; i < key_size; ++i)
-        assert(pddlNumValCmp(got_key + i, exp_key + i) == 0);
+        assert(pddlNumCmp(got_key + i, exp_key + i) == 0);
     assert(got_id == exp_id);
 }
 
-static void checkTopNumVal(pddl_open_list_t *list, int key_size,
-                           const pddl_num_val_t *exp_key,
+static void checkTopNum(pddl_open_list_t *list, int key_size,
+                           const pddl_num_t *exp_key,
                            pddl_state_id_t exp_id)
 {
-    pddl_num_val_t got_key[2];
+    pddl_num_t got_key[2];
     pddl_state_id_t got_id;
     int ret = pddlOpenListTop(list, &got_id, got_key);
     assert(ret == 0);
     for (int i = 0; i < key_size; ++i)
-        assert(pddlNumValCmp(got_key + i, exp_key + i) == 0);
+        assert(pddlNumCmp(got_key + i, exp_key + i) == 0);
     assert(got_id == exp_id);
 }
 
-TEST_ONCE(open_list_num_val_1d)
+TEST_ONCE(open_list_num_1d)
 {
-    pddl_open_list_t *list = pddlOpenListNew(PDDL_OPEN_LIST_KEY_NUM_VAL, 1);
+    pddl_open_list_t *list = pddlOpenListNew(PDDL_OPEN_LIST_KEY_NUM, 1);
 
     checkEmpty(list);
 
     /* mixed integers and floats are ordered by value: -1 < 1.5 < 2 < 2.5 */
-    pddl_num_val_t vneg, v15, v2i, v2f, v25;
-    pddlNumValSetInt(&vneg, -1);
-    pddlNumValSetFlt(&v15, 1.5);
-    pddlNumValSetInt(&v2i, 2);
-    pddlNumValSetFlt(&v2f, 2.0);
-    pddlNumValSetFlt(&v25, 2.5);
+    pddl_num_t vneg, v15, v2i, v2f, v25;
+    pddlNumSetInt(&vneg, -1);
+    pddlNumSetFlt(&v15, 1.5);
+    pddlNumSetInt(&v2i, 2);
+    pddlNumSetFlt(&v2f, 2.0);
+    pddlNumSetFlt(&v25, 2.5);
     pddlOpenListPush(list, &v25, 1);
     pddlOpenListPush(list, &v2i, 2);
     pddlOpenListPush(list, &v2f, 3);  /* same bucket as v2i: FIFO after 2 */
     pddlOpenListPush(list, &v15, 4);
     pddlOpenListPush(list, &vneg, 5);
     checkNumBuckets(list, 4);  /* int 2 and float 2.0 share a bucket */
-    checkTopNumVal(list, 1, &vneg, 5);
-    checkTopNumVal(list, 1, &vneg, 5);
-    checkPopNumVal(list, 1, &vneg, 5);
-    checkPopNumVal(list, 1, &v15, 4);
-    checkPopNumVal(list, 1, &v2i, 2);
-    checkPopNumVal(list, 1, &v2f, 3);  /* 2 == 2.0 under pddlNumValCmp() */
-    checkPopNumVal(list, 1, &v25, 1);
+    checkTopNum(list, 1, &vneg, 5);
+    checkTopNum(list, 1, &vneg, 5);
+    checkPopNum(list, 1, &vneg, 5);
+    checkPopNum(list, 1, &v15, 4);
+    checkPopNum(list, 1, &v2i, 2);
+    checkPopNum(list, 1, &v2f, 3);  /* 2 == 2.0 under pddlNumCmp() */
+    checkPopNum(list, 1, &v25, 1);
     checkEmpty(list);
 
     /* FIFO within the same value */
@@ -578,30 +578,30 @@ TEST_ONCE(open_list_num_val_1d)
     pddlOpenListPush(list, &v15, 11);
     pddlOpenListPush(list, &v15, 12);
     checkNumBuckets(list, 1);
-    checkPopNumVal(list, 1, &v15, 10);
-    checkPopNumVal(list, 1, &v15, 11);
-    checkPopNumVal(list, 1, &v15, 12);
+    checkPopNum(list, 1, &v15, 10);
+    checkPopNum(list, 1, &v15, 11);
+    checkPopNum(list, 1, &v15, 12);
     checkEmpty(list);
 
     /* many distinct values, verify ascending order */
     for (int i = 0; i < 50; ++i){
-        pddl_num_val_t v;
+        pddl_num_t v;
         if (i % 2 == 0){
-            pddlNumValSetInt(&v, (i * 17) % 53 - 20);
+            pddlNumSetInt(&v, (i * 17) % 53 - 20);
         }else{
-            pddlNumValSetFlt(&v, ((i * 17) % 53 - 20) + 0.25);
+            pddlNumSetFlt(&v, ((i * 17) % 53 - 20) + 0.25);
         }
         pddlOpenListPush(list, &v, (pddl_state_id_t)i);
     }
     /* 17 and 53 are coprime, so the 25 integers are distinct, and so are
      * the 25 floats which never coincide with an integer */
     checkNumBuckets(list, 50);
-    pddl_num_val_t prev, cur;
+    pddl_num_t prev, cur;
     pddl_state_id_t id;
     int count = 0;
     while (pddlOpenListPop(list, &id, &cur) == 0){
         if (count > 0)
-            assert(pddlNumValCmp(&prev, &cur) <= 0);
+            assert(pddlNumCmp(&prev, &cur) <= 0);
         prev = cur;
         ++count;
     }
@@ -617,37 +617,37 @@ TEST_ONCE(open_list_num_val_1d)
     pddlOpenListDel(list);
 }
 
-TEST_ONCE(open_list_num_val_2d)
+TEST_ONCE(open_list_num_2d)
 {
-    pddl_open_list_t *list = pddlOpenListNew(PDDL_OPEN_LIST_KEY_NUM_VAL, 2);
+    pddl_open_list_t *list = pddlOpenListNew(PDDL_OPEN_LIST_KEY_NUM, 2);
 
     checkEmpty(list);
 
     /* primary key dominates: (1.5, 100) < (2, -100) */
-    pddl_num_val_t ka[2], kb[2];
-    pddlNumValSetInt(&ka[0], 2);
-    pddlNumValSetInt(&ka[1], -100);
-    pddlNumValSetFlt(&kb[0], 1.5);
-    pddlNumValSetInt(&kb[1], 100);
+    pddl_num_t ka[2], kb[2];
+    pddlNumSetInt(&ka[0], 2);
+    pddlNumSetInt(&ka[1], -100);
+    pddlNumSetFlt(&kb[0], 1.5);
+    pddlNumSetInt(&kb[1], 100);
     pddlOpenListPush(list, ka, 1);
     pddlOpenListPush(list, kb, 2);
     checkNumBuckets(list, 2);
-    checkPopNumVal(list, 2, kb, 2);
-    checkPopNumVal(list, 2, ka, 1);
+    checkPopNum(list, 2, kb, 2);
+    checkPopNum(list, 2, ka, 1);
     checkEmpty(list);
 
     /* secondary tiebreaker on equal primary (int 2 vs float 2.0) */
-    pddl_num_val_t k1[2], k2[2];
-    pddlNumValSetInt(&k1[0], 2);
-    pddlNumValSetFlt(&k1[1], 0.5);
-    pddlNumValSetFlt(&k2[0], 2.0);
-    pddlNumValSetInt(&k2[1], 1);
+    pddl_num_t k1[2], k2[2];
+    pddlNumSetInt(&k1[0], 2);
+    pddlNumSetFlt(&k1[1], 0.5);
+    pddlNumSetFlt(&k2[0], 2.0);
+    pddlNumSetInt(&k2[1], 1);
     pddlOpenListPush(list, k2, 20);
     pddlOpenListPush(list, k1, 10);
     checkNumBuckets(list, 2);
-    checkTopNumVal(list, 2, k1, 10);
-    checkPopNumVal(list, 2, k1, 10);
-    checkPopNumVal(list, 2, k2, 20);
+    checkTopNum(list, 2, k1, 10);
+    checkPopNum(list, 2, k1, 10);
+    checkPopNum(list, 2, k2, 20);
     checkEmpty(list);
 
     /* FIFO within identical keys */
@@ -655,9 +655,9 @@ TEST_ONCE(open_list_num_val_2d)
     pddlOpenListPush(list, k1, 101);
     pddlOpenListPush(list, k1, 102);
     checkNumBuckets(list, 1);
-    checkPopNumVal(list, 2, k1, 100);
-    checkPopNumVal(list, 2, k1, 101);
-    checkPopNumVal(list, 2, k1, 102);
+    checkPopNum(list, 2, k1, 100);
+    checkPopNum(list, 2, k1, 101);
+    checkPopNum(list, 2, k1, 102);
     checkEmpty(list);
 
     /* clear */

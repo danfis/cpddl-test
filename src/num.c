@@ -666,6 +666,34 @@ TEST_ONCE(num_hash_fmt)
     pddlNumArrFree(NULL, 0);
 }
 
+TEST_ONCE(num_representable)
+{
+    assert(pddlNumIsInt64Representable(0));
+    assert(pddlNumIsInt64Representable(-1));
+    assert(pddlNumIsInt64Representable(INT_MAX));
+    assert(pddlNumIsInt64Representable(INT_MIN));
+    assert(!pddlNumIsInt64Representable((int64_t)INT_MAX + 1));
+    assert(!pddlNumIsInt64Representable((int64_t)INT_MIN - 1));
+    assert(!pddlNumIsInt64Representable(INT64_MAX));
+    assert(!pddlNumIsInt64Representable(INT64_MIN));
+
+    assert(pddlNumIsDblRepresentable(0.));
+    assert(pddlNumIsDblRepresentable(-0.));
+    assert(pddlNumIsDblRepresentable(0.1));
+    assert(pddlNumIsDblRepresentable(-1e30));
+    assert(pddlNumIsDblRepresentable(FLT_MAX));
+    assert(pddlNumIsDblRepresentable(-FLT_MAX));
+    assert(!pddlNumIsDblRepresentable(DBL_MIN));
+    assert(pddlNumIsDblRepresentable(FLT_MIN * 2.));
+    assert(!pddlNumIsDblRepresentable(2. * FLT_MAX));
+    assert(!pddlNumIsDblRepresentable(-2. * FLT_MAX));
+    assert(!pddlNumIsDblRepresentable(1e300));
+    assert(!pddlNumIsDblRepresentable(DBL_MAX));
+    assert(!pddlNumIsDblRepresentable(HUGE_VAL));
+    assert(!pddlNumIsDblRepresentable(-HUGE_VAL));
+    assert(!pddlNumIsDblRepresentable(NAN));
+}
+
 TEST_PANIC_ONCE(num_panic_addsat_huge_opposite)
 {
     pddl_num_t a = mk_huge(1, 0);
@@ -704,4 +732,84 @@ TEST_PANIC_ONCE(num_panic_addsat_flt_overflow)
     pddl_num_t a = mk_flt(FLT_MAX);
     pddl_num_t b = mk_flt(FLT_MAX);
     pddlNumAddSat(&a, &b);
+}
+
+typedef int (*op_to_err_fn)(pddl_num_t *,
+                            const pddl_num_t *,
+                            const pddl_num_t *,
+                            pddl_err_t *);
+typedef int (*op_err_fn)(pddl_num_t *, const pddl_num_t *, pddl_err_t *);
+
+/** Checks that A op B == EXPECTED via both the *ToErr() and the in-place
+ *  *Err() variant, and that no error is set */
+static void assert_err_ok(op_to_err_fn op_to, op_err_fn op,
+                          pddl_num_t a, pddl_num_t b, pddl_num_t expected)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_num_t dst;
+    int ret = op_to(&dst, &a, &b, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &expected));
+
+    dst = a;
+    ret = op(&dst, &b, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &expected));
+}
+
+/** Checks that A op B fails via both the *ToErr() and the in-place *Err()
+ *  variant with DST untouched, and prints the error message */
+static void assert_err_fail(op_to_err_fn op_to, op_err_fn op,
+                            pddl_num_t a, pddl_num_t b)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_num_t dst = mk_int_d(1234, 5);
+    pddl_num_t orig = dst;
+    int ret = op_to(&dst, &a, &b, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &orig));
+    pddlErrPrint(&err, 0, stdout);
+
+    pddlErrInit(&err);
+    dst = a;
+    ret = op(&dst, &b, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &a));
+    pddlErrPrint(&err, 0, stdout);
+}
+
+TEST_ONCE(num_err)
+{
+    assert_err_ok(pddlNumAddToErr, pddlNumAddErr,
+                  mk_int(2), mk_int_d(3, 1), mk_int_d(5, 1));
+    assert_err_ok(pddlNumSubToErr, pddlNumSubErr,
+                  mk_int(2), mk_int(3), mk_int(-1));
+    assert_err_ok(pddlNumMulToErr, pddlNumMulErr,
+                  mk_int(2), mk_flt(1.5f), mk_flt(3.f));
+    assert_err_ok(pddlNumDivToErr, pddlNumDivErr,
+                  mk_int(6), mk_int(3), mk_int(2));
+
+    // PDDL_NUM_DIV_BY_ZERO
+    assert_err_fail(pddlNumDivToErr, pddlNumDivErr, mk_int(1), mk_int(0));
+    // PDDL_NUM_OVERFLOW
+    assert_err_fail(pddlNumAddToErr, pddlNumAddErr, mk_int(INT_MAX),
+                    mk_int(1));
+    assert_err_fail(pddlNumMulToErr, pddlNumMulErr, mk_flt(1e30f),
+                    mk_flt(1e30f));
+    // PDDL_NUM_DELTA_OVERFLOW
+    assert_err_fail(pddlNumAddToErr, pddlNumAddErr,
+                    mk_int_d(0, PDDL_NUM_DELTA_MAX), mk_int_d(0, 1));
+    // PDDL_NUM_HUGE_OPERAND
+    assert_err_fail(pddlNumSubToErr, pddlNumSubErr, mk_huge(1, 0),
+                    mk_int(5));
+    // PDDL_NUM_NONZERO_DELTA
+    assert_err_fail(pddlNumMulToErr, pddlNumMulErr, mk_int_d(2, 1),
+                    mk_int(3));
+    // PDDL_NUM_UNDEFINED
+    assert_err_fail(pddlNumSubToErr, pddlNumSubErr, pddl_num_inf,
+                    pddl_num_inf);
 }

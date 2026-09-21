@@ -11,8 +11,11 @@
  * All tests are TEST_ONCE (not per task).
  * Run with:  cd tests && make && ./test -T _ -s fm_num_eval
  *
- * Integer overflow during evaluation is reported as
- * PDDL_FM_NUM_EVAL_OVERFLOW and leaves the output value untouched.
+ * A failed numeric operation (division by zero, overflow, ...) is
+ * reported as PDDL_FM_NUM_EVAL_NUM_ERR with the reason set in the error
+ * structure, and it leaves the output value untouched. That is the only
+ * status setting a message: an undefined fluent yields
+ * PDDL_FM_NUM_EVAL_UNDEF (UNSAT for a comparator) and says nothing.
  */
 
 #include "pddl/fm.h"
@@ -28,7 +31,7 @@ struct fluent_def {
     int pred;
     int arg_size;
     int args[MAX_FLUENT_ARGS];
-    pddl_num_val_t val;
+    pddl_num_t val;
 };
 
 struct fluent_table {
@@ -43,7 +46,7 @@ static struct fluent_table empty_table = { NULL, 0, NULL };
 static pddl_fm_num_eval_status_t fluent_lookup(const pddl_fm_atom_t *fluent,
                                                const int *args,
                                                void *userdata,
-                                               pddl_num_val_t *val)
+                                               pddl_num_t *val)
 {
     struct fluent_table *tbl = userdata;
     tbl->last_args = args;
@@ -63,24 +66,24 @@ static pddl_fm_num_eval_status_t fluent_lookup(const pddl_fm_atom_t *fluent,
         if (d->pred != fluent->pred || d->arg_size != fluent->arity)
             continue;
         if (memcmp(d->args, resolved, sizeof(int) * d->arg_size) == 0){
-            pddlNumValSet(val, &d->val);
+            pddlNumSet(val, &d->val);
             return PDDL_FM_NUM_EVAL_OK;
         }
     }
     return PDDL_FM_NUM_EVAL_UNDEF;
 }
 
-static pddl_num_val_t mk_int(int64_t val)
+static pddl_num_t mk_int(int val)
 {
-    pddl_num_val_t v;
-    pddlNumValSetInt(&v, val);
+    pddl_num_t v;
+    pddlNumSetInt(&v, val);
     return v;
 }
 
-static pddl_num_val_t mk_flt(double val)
+static pddl_num_t mk_flt(float val)
 {
-    pddl_num_val_t v;
-    pddlNumValSetFlt(&v, val);
+    pddl_num_t v;
+    pddlNumSetFlt(&v, val);
     return v;
 }
 
@@ -129,14 +132,27 @@ static pddl_fm_num_exp_t *exp_fluent_obj(int pred, int obj)
     return pddlFmNewNumExpFluent(a);
 }
 
+/** Sink for numeric-operation errors passed to the evaluator */
+static pddl_err_t num_err;
+
+/** Returns true if ST is PDDL_FM_NUM_EVAL_NUM_ERR and the error message
+ *  contains SUBSTR */
+static int is_num_err(pddl_fm_num_eval_status_t st, const char *substr)
+{
+    return st == PDDL_FM_NUM_EVAL_NUM_ERR
+            && pddlErrIsSet(&num_err)
+            && strstr(num_err.msg, substr) != NULL;
+}
+
 /** Evaluates E and deletes it; returns the status */
 static pddl_fm_num_eval_status_t eval_exp_del(pddl_fm_num_exp_t *e,
                                               const int *args,
                                               struct fluent_table *tbl,
-                                              pddl_num_val_t *val)
+                                              pddl_num_t *val)
 {
     pddl_fm_num_eval_status_t st;
-    st = pddlFmNumExpEval(e, args, fluent_lookup, tbl, val);
+    pddlErrInit(&num_err);
+    st = pddlFmNumExpEval(e, args, fluent_lookup, tbl, val, &num_err);
     pddlFmDel(&e->fm);
     return st;
 }
@@ -150,45 +166,46 @@ static pddl_fm_num_eval_status_t eval_cmp_del(pddl_fm_type_t type,
 {
     pddl_fm_num_cmp_t *c = pddlFmNewNumCmp(type, left, right);
     pddl_fm_num_eval_status_t st;
-    st = pddlFmNumCmpEval(c, args, fluent_lookup, tbl);
+    pddlErrInit(&num_err);
+    st = pddlFmNumCmpEval(c, args, fluent_lookup, tbl, &num_err);
     pddlFmDel(&c->fm);
     return st;
 }
 
 /** Evaluates (TYPE L R) on constants and asserts OK; returns the value */
-static pddl_num_val_t eval_bin_ok(pddl_fm_type_t type,
-                                  pddl_num_val_t l,
-                                  pddl_num_val_t r)
+static pddl_num_t eval_bin_ok(pddl_fm_type_t type,
+                                  pddl_num_t l,
+                                  pddl_num_t r)
 {
     pddl_fm_num_exp_t *e = exp_bin(type, pddlFmNewNumExpNum(&l),
                                    pddlFmNewNumExpNum(&r));
-    pddl_num_val_t out;
+    pddl_num_t out;
     assert(eval_exp_del(e, NULL, &empty_table, &out) == PDDL_FM_NUM_EVAL_OK);
     return out;
 }
 
 static void assert_bin(pddl_fm_type_t type,
-                       pddl_num_val_t l,
-                       pddl_num_val_t r,
-                       pddl_num_val_t expect)
+                       pddl_num_t l,
+                       pddl_num_t r,
+                       pddl_num_t expect)
 {
-    pddl_num_val_t out = eval_bin_ok(type, l, r);
-    assert(pddlNumValEq(&out, &expect));
+    pddl_num_t out = eval_bin_ok(type, l, r);
+    assert(pddlNumExactEq(&out, &expect));
 }
 
 TEST_ONCE(fm_num_eval)
 {
-    pddl_num_val_t out, expect;
+    pddl_num_t out, expect;
 
     // 1. Constants: evaluate to exactly the stored value (type included)
     pddl_fm_num_exp_t *e = pddlFmNewNumExpNumInt(42);
     assert(eval_exp_del(e, NULL, &empty_table, &out) == PDDL_FM_NUM_EVAL_OK);
     expect = mk_int(42);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
     e = pddlFmNewNumExpNumFlt(0.5);
     assert(eval_exp_del(e, NULL, &empty_table, &out) == PDDL_FM_NUM_EVAL_OK);
     expect = mk_flt(0.5);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
 
     // 2. Fluent resolution
     struct fluent_def defs[3] = {
@@ -202,7 +219,7 @@ TEST_ONCE(fm_num_eval)
     e = exp_fluent0(0);
     assert(eval_exp_del(e, NULL, &tbl, &out) == PDDL_FM_NUM_EVAL_OK);
     expect = mk_int(7);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
     assert(tbl.last_args == NULL);
 
     // parametrized fluent: parameter 1 resolves to 3 through args
@@ -210,7 +227,7 @@ TEST_ONCE(fm_num_eval)
     e = exp_fluent_param(1, 1);
     assert(eval_exp_del(e, args, &tbl, &out) == PDDL_FM_NUM_EVAL_OK);
     expect = mk_flt(2.5);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
     // the callback must have received exactly the caller's args pointer
     assert(tbl.last_args == args);
 
@@ -218,14 +235,14 @@ TEST_ONCE(fm_num_eval)
     e = exp_fluent_obj(1, 4);
     assert(eval_exp_del(e, NULL, &tbl, &out) == PDDL_FM_NUM_EVAL_OK);
     expect = mk_int(-2);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
 
     // fluent missing from the table -> UNDEF, output value untouched
-    pddl_num_val_t sentinel = mk_int(-12345);
-    pddlNumValSet(&out, &sentinel);
+    pddl_num_t sentinel = mk_int(-12345);
+    pddlNumSet(&out, &sentinel);
     e = exp_fluent0(5);
     assert(eval_exp_del(e, NULL, &tbl, &out) == PDDL_FM_NUM_EVAL_UNDEF);
-    assert(pddlNumValEq(&out, &sentinel));
+    assert(pddlNumExactEq(&out, &sentinel));
 
     // 3. Arithmetic: value and sticky-float type discipline
     // INT op INT
@@ -270,10 +287,11 @@ TEST_ONCE(fm_num_eval)
         { 2, 0, { 0, 0 }, mk_int(3) },
     };
     struct fluent_table nested_tbl1 = { nested_defs1, 3, NULL };
-    assert(pddlFmNumExpEval(nested, NULL, fluent_lookup, &nested_tbl1, &out)
+    assert(pddlFmNumExpEval(nested, NULL, fluent_lookup, &nested_tbl1, &out,
+                            &num_err)
                 == PDDL_FM_NUM_EVAL_OK);
     expect = mk_int(3);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
 
     // a = 2.5, b = 2, c = 5: ((2.5 + 2) * 2 - 6) / (5 - 1) = 0.75 (FLT,
     // the float propagates through the whole expression)
@@ -283,16 +301,18 @@ TEST_ONCE(fm_num_eval)
         { 2, 0, { 0, 0 }, mk_int(5) },
     };
     struct fluent_table nested_tbl2 = { nested_defs2, 3, NULL };
-    assert(pddlFmNumExpEval(nested, NULL, fluent_lookup, &nested_tbl2, &out)
+    assert(pddlFmNumExpEval(nested, NULL, fluent_lookup, &nested_tbl2, &out,
+                            &num_err)
                 == PDDL_FM_NUM_EVAL_OK);
     expect = mk_flt(0.75);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
 
     // 8. Purity: re-evaluating the same tree yields the same result
-    assert(pddlFmNumExpEval(nested, NULL, fluent_lookup, &nested_tbl1, &out)
+    assert(pddlFmNumExpEval(nested, NULL, fluent_lookup, &nested_tbl1, &out,
+                            &num_err)
                 == PDDL_FM_NUM_EVAL_OK);
     expect = mk_int(3);
-    assert(pddlNumValEq(&out, &expect));
+    assert(pddlNumExactEq(&out, &expect));
     pddlFmDel(&nested->fm);
 
     // 4. UNDEF propagation from an undefined fluent (u = (9))
@@ -312,24 +332,24 @@ TEST_ONCE(fm_num_eval)
     // 5. Division by zero
     e = pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                            pddlFmNewNumExpNumInt(0));
-    assert(eval_exp_del(e, NULL, &empty_table, &out)
-                == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+    assert(is_num_err(eval_exp_del(e, NULL, &empty_table, &out),
+                  "division by zero"));
     e = pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                            pddlFmNewNumExpNumFlt(0.));
-    assert(eval_exp_del(e, NULL, &empty_table, &out)
-                == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+    assert(is_num_err(eval_exp_del(e, NULL, &empty_table, &out),
+                  "division by zero"));
     e = pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(0),
                            pddlFmNewNumExpNumInt(0));
-    assert(eval_exp_del(e, NULL, &empty_table, &out)
-                == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+    assert(is_num_err(eval_exp_del(e, NULL, &empty_table, &out),
+                  "division by zero"));
     // fluent-valued zero denominator (z = (3) with value 0)
     struct fluent_def zero_defs[1] = {
         { 3, 0, { 0, 0 }, mk_int(0) },
     };
     struct fluent_table zero_tbl = { zero_defs, 1, NULL };
     e = pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1), exp_fluent0(3));
-    assert(eval_exp_del(e, NULL, &zero_tbl, &out)
-                == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+    assert(is_num_err(eval_exp_del(e, NULL, &zero_tbl, &out),
+                  "division by zero"));
     // nested inside a larger expression: (2 + (3 / (1 - 1)))
     e = pddlFmNewNumExpPlus(
             pddlFmNewNumExpNumInt(2),
@@ -337,8 +357,8 @@ TEST_ONCE(fm_num_eval)
                 pddlFmNewNumExpNumInt(3),
                 pddlFmNewNumExpMinus(pddlFmNewNumExpNumInt(1),
                                      pddlFmNewNumExpNumInt(1))));
-    assert(eval_exp_del(e, NULL, &empty_table, &out)
-                == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+    assert(is_num_err(eval_exp_del(e, NULL, &empty_table, &out),
+                  "division by zero"));
 
     // 6. Comparators: full SAT/UNSAT matrix over left <, ==, > right
     struct {
@@ -387,36 +407,40 @@ TEST_ONCE(fm_num_eval)
                             pddlFmNewNumExpNumInt(1), exp_fluent0(9),
                             NULL, &tbl) == PDDL_FM_NUM_EVAL_UNSAT);
     }
-    // division by zero on either side -> DIV_BY_ZERO
-    assert(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
+    // division by zero on either side -> ERR
+    assert(is_num_err(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
                         pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                                            pddlFmNewNumExpNumInt(0)),
                         pddlFmNewNumExpNumInt(1),
-                        NULL, &tbl) == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
-    assert(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
+                        NULL, &tbl),
+                  "division by zero"));
+    assert(is_num_err(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
                         pddlFmNewNumExpNumInt(1),
                         pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                                            pddlFmNewNumExpNumInt(0)),
-                        NULL, &tbl) == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+                        NULL, &tbl),
+                  "division by zero"));
     // division by zero takes precedence over an undefined fluent on the
     // other side (both orders)
-    assert(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
+    assert(is_num_err(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
                         pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                                            pddlFmNewNumExpNumInt(0)),
                         exp_fluent0(9),
-                        NULL, &tbl) == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
-    assert(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
+                        NULL, &tbl),
+                  "division by zero"));
+    assert(is_num_err(eval_cmp_del(PDDL_FM_NUM_CMP_EQ,
                         exp_fluent0(9),
                         pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                                            pddlFmNewNumExpNumInt(0)),
-                        NULL, &tbl) == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+                        NULL, &tbl),
+                  "division by zero"));
 
     // 8. Purity of comparators: same comparator evaluated twice
     pddl_fm_num_cmp_t *cmp = pddlFmNewNumCmpLE(exp_fluent0(0),
                                                pddlFmNewNumExpNumInt(7));
-    assert(pddlFmNumCmpEval(cmp, NULL, fluent_lookup, &tbl)
+    assert(pddlFmNumCmpEval(cmp, NULL, fluent_lookup, &tbl, &num_err)
                 == PDDL_FM_NUM_EVAL_SAT);
-    assert(pddlFmNumCmpEval(cmp, NULL, fluent_lookup, &tbl)
+    assert(pddlFmNumCmpEval(cmp, NULL, fluent_lookup, &tbl, &num_err)
                 == PDDL_FM_NUM_EVAL_SAT);
     pddlFmDel(&cmp->fm);
 }
@@ -425,24 +449,38 @@ TEST_ONCE(fm_num_eval_int_overflow)
 {
     // Integer overflow is reported and the output value is left untouched
     pddl_fm_num_exp_t *e;
-    e = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(INT64_MAX),
+    e = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(INT_MAX),
                             pddlFmNewNumExpNumInt(1));
-    pddl_num_val_t out;
-    pddlNumValSetInt(&out, 7);
+    pddl_num_t out;
+    pddlNumSetInt(&out, 7);
     pddl_fm_num_eval_status_t st;
-    st = pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out);
-    assert(st == PDDL_FM_NUM_EVAL_OVERFLOW);
-    assert(pddlNumValIsInt(&out) && out.v.i == 7);
+    pddlErrInit(&num_err);
+    st = pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out,
+                          &num_err);
+    assert(is_num_err(st, "Numeric operation 2147483647 + 1 failed: overflow"));
+    assert(pddlNumIsInt(&out) && out.val.i == 7);
     pddlFmDel(&e->fm);
+
+    // An overflow in a comparator is an error, not UNSAT
+    pddl_fm_num_cmp_t *c;
+    c = pddlFmNewNumCmpLE(pddlFmNewNumExpNumInt(1),
+                          pddlFmNewNumExpMult(pddlFmNewNumExpNumInt(INT_MAX),
+                                              pddlFmNewNumExpNumInt(2)));
+    pddlErrInit(&num_err);
+    st = pddlFmNumCmpEval(c, NULL, fluent_lookup, &empty_table, &num_err);
+    assert(is_num_err(st, "Numeric operation 2147483647 * 2 failed: overflow"));
+    pddlFmDel(&c->fm);
 }
 
 TEST_PANIC_ONCE(fm_num_eval_non_num_exp)
 {
     // an atom is not a numeric expression
     pddl_fm_atom_t *a = pddlFmNewEmptyAtom(0);
-    pddl_num_val_t out;
-    pddlFmNumExpEval((const pddl_fm_num_exp_t *)a, NULL,
-                     fluent_lookup, &empty_table, &out);
+    pddl_num_t out;
+    pddl_fm_num_eval_status_t st;
+    st = pddlFmNumExpEval((const pddl_fm_num_exp_t *)a, NULL,
+                          fluent_lookup, &empty_table, &out, NULL);
+    (void)st;
 }
 
 TEST_PANIC_ONCE(fm_num_eval_non_num_cmp)
@@ -450,7 +488,9 @@ TEST_PANIC_ONCE(fm_num_eval_non_num_cmp)
     pddl_fm_num_cmp_t *c = pddlFmNewNumCmpEq(pddlFmNewNumExpNumInt(1),
                                              pddlFmNewNumExpNumInt(1));
     c->fm.type = PDDL_FM_AND;
-    pddlFmNumCmpEval(c, NULL, fluent_lookup, &empty_table);
+    pddl_fm_num_eval_status_t st;
+    st = pddlFmNumCmpEval(c, NULL, fluent_lookup, &empty_table, NULL);
+    (void)st;
 }
 
 TEST_ONCE(fm_num_eval_no_panic)
@@ -459,9 +499,9 @@ TEST_ONCE(fm_num_eval_no_panic)
     pddl_fm_num_exp_t *e;
     e = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(1),
                             pddlFmNewNumExpNumInt(2));
-    pddl_num_val_t out;
-    assert(pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out)
-                == PDDL_FM_NUM_EVAL_OK);
-    assert(pddlNumValIsInt(&out) && out.v.i == 3);
+    pddl_num_t out;
+    assert(pddlFmNumExpEval(e, NULL, fluent_lookup, &empty_table, &out,
+                            &num_err) == PDDL_FM_NUM_EVAL_OK);
+    assert(pddlNumIsInt(&out) && out.val.i == 3);
     pddlFmDel(&e->fm);
 }

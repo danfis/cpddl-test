@@ -37,10 +37,10 @@ static void delAtom(pddl_fm_atom_t *a)
     pddlFmDel(&a->fm);
 }
 
-static pddl_num_val_t mkInt(int64_t v)
+static pddl_num_t mkInt(int v)
 {
-    pddl_num_val_t val;
-    pddlNumValSetInt(&val, v);
+    pddl_num_t val;
+    pddlNumSetInt(&val, v);
     return val;
 }
 
@@ -79,7 +79,7 @@ static void dump(const char *label, const pddl_init_state_t *is)
         ++li;
     }
 
-    pddl_num_val_t val;
+    pddl_num_t val;
     char s[128];
     PDDL_INIT_STATE_FOR_EACH_FLUENT(is, fluent, &val){
         int w = snprintf(line[li], DUMP_LINE_SIZE, "  fluent: f%d(",
@@ -89,7 +89,7 @@ static void dump(const char *label, const pddl_init_state_t *is)
                           (i > 0 ? "," : ""), fluent->arg[i].obj);
         }
         snprintf(line[li] + w, DUMP_LINE_SIZE - w, ") = %s",
-                 pddlNumValFmt(&val, s, sizeof(s)));
+                 pddlNumFmt(&val, s, sizeof(s)));
         ++li;
     }
     assert(li == line_size);
@@ -147,7 +147,7 @@ TEST_ONCE(pddl_init_state_basic)
 
     int arg[2] = { 0, 1 };
     pddlInitStateAddAtomByPredArgs(&is, 0, 2, arg);
-    pddl_num_val_t v = mkInt(7);
+    pddl_num_t v = mkInt(7);
     pddl_fm_atom_t *f = mkAtom(1, 1, 3);
     pddlInitStateSetFluent(&is, f, &v);
     delAtom(f);
@@ -268,7 +268,7 @@ TEST_ONCE(pddl_init_state_fluents)
     pddl_fm_atom_t *f1 = mkAtom(0, 1, 5);
     pddl_fm_atom_t *f2 = mkAtom(1, 0);
 
-    pddl_num_val_t v = mkInt(3);
+    pddl_num_t v = mkInt(3);
     pddlInitStateSetFluent(&is, f1, &v);
     v = mkInt(-2);
     pddlInitStateSetFluent(&is, f2, &v);
@@ -280,10 +280,10 @@ TEST_ONCE(pddl_init_state_fluents)
     pddlInitStateSetFluent(&is, f1, &v);
     assert(pddlInitStateFluentSize(&is) == 2);
 
-    pddl_num_val_t got;
+    pddl_num_t got;
     assert(pddlInitStateHasFluent(&is, f1));
     assert(pddlInitStateFluentVal(&is, f1, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 11);
+    assert(pddlNumIsInt(&got) && got.val.i == 11);
 
     // AddNumCmp adds rather than replaces, so it reports the duplicate and
     // leaves the stored value alone
@@ -316,7 +316,7 @@ TEST_ONCE(pddl_init_state_fluents)
     pddlFmDel(&cmp->fm);
     assert(pddlInitStateFluentSize(&is) == 2);
     assert(pddlInitStateFluentVal(&is, f1, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 11);
+    assert(pddlNumIsInt(&got) && got.val.i == 11);
     dump("after-replace", &is);
 
     // A fluent that is not there
@@ -366,7 +366,7 @@ TEST_ONCE(pddl_init_state_pred_func_cnt)
     pddl_fm_atom_t *f1 = mkAtom(3, 1, 0);
     pddl_fm_atom_t *f2 = mkAtom(3, 1, 1);
     pddl_fm_atom_t *f3 = mkAtom(4, 0);
-    pddl_num_val_t v = mkInt(1);
+    pddl_num_t v = mkInt(1);
     pddlInitStateSetFluent(&is, f1, &v);
     pddlInitStateSetFluent(&is, f2, &v);
     pddlInitStateSetFluent(&is, f3, &v);
@@ -407,7 +407,7 @@ TEST_ONCE(pddl_init_state_iter)
     }
     for (int i = 0; i < 3; ++i){
         pddl_fm_atom_t *f = mkAtom(i % 2, 1, i);
-        pddl_num_val_t v = mkInt(i * 10);
+        pddl_num_t v = mkInt(i * 10);
         pddlInitStateSetFluent(&is, f, &v);
         delAtom(f);
     }
@@ -437,19 +437,19 @@ TEST_ONCE(pddl_init_state_iter)
     }
     assert(num == 3);
 
-    pddl_num_val_t val;
+    pddl_num_t val;
     char s[128];
     printf("fluents:");
     PDDL_INIT_STATE_FOR_EACH_FLUENT(&is, fluent, &val){
         printf(" f%d(%d)=%s", fluent->pred, fluent->arg[0].obj,
-               pddlNumValFmt(&val, s, sizeof(s)));
+               pddlNumFmt(&val, s, sizeof(s)));
     }
     printf("\n");
 
     printf("func 1:");
     PDDL_INIT_STATE_FOR_EACH_FUNC_FLUENT(&is, 1, fluent, &val){
         printf(" f%d(%d)=%s", fluent->pred, fluent->arg[0].obj,
-               pddlNumValFmt(&val, s, sizeof(s)));
+               pddlNumFmt(&val, s, sizeof(s)));
     }
     printf("\n");
     assert(countFuncFluents(&is, 0) == 2);
@@ -525,36 +525,37 @@ TEST_ONCE(pddl_init_state_num_exp)
 {
     pddl_init_state_t is;
     pddlInitStateInit(&is);
+    pddl_err_t err = PDDL_ERR_INIT;
 
     pddl_fm_atom_t *f = mkAtom(0, 1, 1);
-    pddl_num_val_t v = mkInt(5);
+    pddl_num_t v = mkInt(5);
     pddlInitStateSetFluent(&is, f, &v);
     delAtom(f);
 
     char s[128];
-    pddl_num_val_t val;
+    pddl_num_t val;
 
     // (+ 2 (f 1)) is fully defined
     pddl_fm_num_exp_t *e
             = pddlFmNewNumExpPlus(pddlFmNewNumExpNumInt(2),
                                   pddlFmNewNumExpFluent(mkAtom(0, 1, 1)));
-    pddl_fm_num_eval_status_t st = pddlInitStateCheckNumExpValue(&is, e, &val);
+    pddl_fm_num_eval_status_t st = pddlInitStateCheckNumExpValue(&is, e, &val, &err);
     printf("eval (+ 2 (f 1)): status: %d, val: %s\n",
            st, (st == PDDL_FM_NUM_EVAL_OK
-                    ? pddlNumValFmt(&val, s, sizeof(s)) : "-"));
+                    ? pddlNumFmt(&val, s, sizeof(s)) : "-"));
     assert(st == PDDL_FM_NUM_EVAL_OK);
     int num = pddlInitStateNumExpSubstFluents(&is, &e);
     printf("subst: %d replacements\n", num);
     assert(num == 1);
-    st = pddlInitStateCheckNumExpValue(&is, e, &val);
+    st = pddlInitStateCheckNumExpValue(&is, e, &val, &err);
     assert(st == PDDL_FM_NUM_EVAL_OK);
-    printf("after subst: %s\n", pddlNumValFmt(&val, s, sizeof(s)));
+    printf("after subst: %s\n", pddlNumFmt(&val, s, sizeof(s)));
     pddlFmDel(&e->fm);
 
     // (* (g 1) 3) references an undefined fluent
     e = pddlFmNewNumExpMult(pddlFmNewNumExpFluent(mkAtom(1, 1, 1)),
                             pddlFmNewNumExpNumInt(3));
-    st = pddlInitStateCheckNumExpValue(&is, e, &val);
+    st = pddlInitStateCheckNumExpValue(&is, e, &val, &err);
     printf("eval (* (g 1) 3): status: %d\n", st);
     assert(st == PDDL_FM_NUM_EVAL_UNDEF);
     num = pddlInitStateNumExpSubstFluents(&is, &e);
@@ -565,9 +566,11 @@ TEST_ONCE(pddl_init_state_num_exp)
     // Division by zero is reported as such
     e = pddlFmNewNumExpDiv(pddlFmNewNumExpNumInt(1),
                            pddlFmNewNumExpNumInt(0));
-    st = pddlInitStateCheckNumExpValue(&is, e, &val);
+    st = pddlInitStateCheckNumExpValue(&is, e, &val, &err);
     printf("eval (/ 1 0): status: %d\n", st);
-    assert(st == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+    assert(st == PDDL_FM_NUM_EVAL_NUM_ERR);
+    pddlErrPrint(&err, 0, stdout);
+    pddlErrInit(&err);
     pddlFmDel(&e->fm);
 
     // A fluent that is the whole expression
@@ -576,7 +579,7 @@ TEST_ONCE(pddl_init_state_num_exp)
     assert(num == 1);
     assert(e->fm.type == PDDL_FM_NUM_EXP_NUM);
     printf("whole-expression subst: %s\n",
-           pddlNumValFmt(&e->e.num, s, sizeof(s)));
+           pddlNumFmt(&e->e.num, s, sizeof(s)));
     pddlFmDel(&e->fm);
 
     pddlInitStateFree(&is);
@@ -589,7 +592,7 @@ TEST_ONCE(pddl_init_state_copy)
 
     pddl_fm_atom_t *a = mkAtom(0, 2, 1, 2);
     pddl_fm_atom_t *f = mkAtom(1, 0);
-    pddl_num_val_t v = mkInt(4);
+    pddl_num_t v = mkInt(4);
     pddlInitStateAddAtom(&is, a);
     pddlInitStateSetFluent(&is, f, &v);
 
@@ -632,7 +635,7 @@ TEST_ONCE(pddl_init_state_unsolvable)
 
     pddl_fm_atom_t *a = mkAtom(0, 1, 1);
     pddl_fm_atom_t *f = mkAtom(1, 0);
-    pddl_num_val_t v = mkInt(4);
+    pddl_num_t v = mkInt(4);
     pddlInitStateAddAtom(&is, a);
     pddlInitStateSetFluent(&is, f, &v);
 
@@ -665,7 +668,7 @@ TEST_ONCE(pddl_init_state_remap_objs)
         delAtom(a);
     }
     pddl_fm_atom_t *f = mkAtom(1, 1, 2);
-    pddl_num_val_t v = mkInt(8);
+    pddl_num_t v = mkInt(8);
     pddlInitStateSetFluent(&is, f, &v);
     delAtom(f);
     dump("before", &is);
@@ -712,7 +715,7 @@ TEST_ONCE(pddl_init_state_remap_preds_funcs)
     }
     for (int f = 0; f < 2; ++f){
         pddl_fm_atom_t *fl = mkAtom(f, 1, 1);
-        pddl_num_val_t v = mkInt(f);
+        pddl_num_t v = mkInt(f);
         pddlInitStateSetFluent(&is, fl, &v);
         delAtom(fl);
     }
@@ -815,7 +818,7 @@ TEST_ONCE(pddl_init_state_print)
     delAtom(a);
 
     pddl_fm_atom_t *f = mkAtom(1, 0);
-    pddl_num_val_t v = mkInt(2);
+    pddl_num_t v = mkInt(2);
     pddlInitStateSetFluent(&is, f, &v);
     delAtom(f);
     f = mkAtom(0, 1, 0);
@@ -859,7 +862,7 @@ TEST_ONCE(pddl_init_state_bulk)
         delAtom(a);
 
         pddl_fm_atom_t *f = mkAtom(i % 3, 1, i);
-        pddl_num_val_t v = mkInt(i);
+        pddl_num_t v = mkInt(i);
         pddlInitStateSetFluent(&is, f, &v);
         delAtom(f);
     }
@@ -874,9 +877,9 @@ TEST_ONCE(pddl_init_state_bulk)
         delAtom(a);
 
         pddl_fm_atom_t *f = mkAtom(i % 3, 1, i);
-        pddl_num_val_t got;
+        pddl_num_t got;
         assert(pddlInitStateFluentVal(&is, f, &got) == 0);
-        assert(pddlNumValIsInt(&got) && got.v.i == i);
+        assert(pddlNumIsInt(&got) && got.val.i == i);
         delAtom(f);
     }
 
@@ -1027,8 +1030,8 @@ TEST_ONCE(pddl_init_state_return_codes)
 
     int arg[2] = { 7, 8 };
     pddl_fm_atom_t *a = mkAtom(0, 2, 7, 8);
-    pddl_num_val_t v1 = mkInt(1);
-    pddl_num_val_t v2 = mkInt(2);
+    pddl_num_t v1 = mkInt(1);
+    pddl_num_t v2 = mkInt(2);
     pddl_fm_atom_t *f = mkAtom(0, 1, 9);
 
     // Removing from an empty initial state fails
@@ -1046,9 +1049,9 @@ TEST_ONCE(pddl_init_state_return_codes)
     assert(pddlInitStateFluentSize(&is) == 1);
 
     // A failed AddFluent must not have touched the stored value
-    pddl_num_val_t got;
+    pddl_num_t got;
     assert(pddlInitStateFluentVal(&is, f, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 1);
+    assert(pddlNumIsInt(&got) && got.val.i == 1);
 
     // SetFluent replaces instead, reporting 1 because the fluent was
     // already there; inserting a fresh one reports 0
@@ -1062,7 +1065,7 @@ TEST_ONCE(pddl_init_state_return_codes)
     delAtom(f2);
     assert(pddlInitStateFluentSize(&is) == 1);
     assert(pddlInitStateFluentVal(&is, f, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 2);
+    assert(pddlNumIsInt(&got) && got.val.i == 2);
 
     // AddNumCmp is AddFluent with the fluent and the value packaged as a
     // comparator, so it reports the duplicate the same way
@@ -1079,7 +1082,7 @@ TEST_ONCE(pddl_init_state_return_codes)
     }
     pddlFmDel(&cmp->fm);
     assert(pddlInitStateFluentVal(&is, f, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 2);
+    assert(pddlNumIsInt(&got) && got.val.i == 2);
 
     cmp = pddlFmNewNumCmpEq(pddlFmNewNumExpFluent(mkAtom(1, 0)),
                             pddlFmNewNumExpNumInt(4));
@@ -1117,7 +1120,7 @@ TEST_ONCE(pddl_init_state_remap_objs_merge_fluents)
     pddl_fm_atom_t *f1 = mkAtom(0, 1, 0);
     pddl_fm_atom_t *f2 = mkAtom(0, 1, 1);
     pddl_fm_atom_t *g = mkAtom(1, 2, 0, 1);
-    pddl_num_val_t v = mkInt(11);
+    pddl_num_t v = mkInt(11);
     assert(pddlInitStateAddFluent(&is, f1, &v) == 0);
     v = mkInt(22);
     assert(pddlInitStateAddFluent(&is, f2, &v) == 0);
@@ -1135,13 +1138,13 @@ TEST_ONCE(pddl_init_state_remap_objs_merge_fluents)
     assert(pddlInitStateFluentSize(&is) == 2);
     checkCounters(&is, 3);
 
-    pddl_num_val_t got;
+    pddl_num_t got;
     assert(pddlInitStateFluentVal(&is, f1, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 11);
+    assert(pddlNumIsInt(&got) && got.val.i == 11);
 
     pddl_fm_atom_t *g00 = mkAtom(1, 2, 0, 0);
     assert(pddlInitStateFluentVal(&is, g00, &got) == 0);
-    assert(pddlNumValIsInt(&got) && got.v.i == 33);
+    assert(pddlNumIsInt(&got) && got.val.i == 33);
     delAtom(g00);
 
     // The merged-away entry must be gone from the table, not just the array
@@ -1157,7 +1160,7 @@ TEST_ONCE(pddl_init_state_remap_objs_merge_fluents)
  *  o < SIZE, i.e., SIZE fluents of one function that all collapse onto
  *  (f0 0) under the all-zero object remapping used below. */
 static void mkCollapsingFluents(pddl_init_state_t *is,
-                                const pddl_num_val_t *val,
+                                const pddl_num_t *val,
                                 int size)
 {
     pddlInitStateInit(is);
@@ -1186,16 +1189,16 @@ static int collapse(pddl_init_state_t *is,
 static int64_t survivorVal(const pddl_init_state_t *is)
 {
     pddl_fm_atom_t *f = mkAtom(0, 1, 0);
-    pddl_num_val_t got;
+    pddl_num_t got;
     assert(pddlInitStateFluentVal(is, f, &got) == 0);
     delAtom(f);
-    assert(pddlNumValIsInt(&got));
-    return got.v.i;
+    assert(pddlNumIsInt(&got));
+    return got.val.i;
 }
 
 TEST_ONCE(pddl_init_state_remap_fluent_conflict)
 {
-    pddl_num_val_t diff[2];
+    pddl_num_t diff[2];
     diff[0] = mkInt(11);
     diff[1] = mkInt(22);
     pddl_init_state_t is;
@@ -1246,7 +1249,7 @@ TEST_ONCE(pddl_init_state_remap_fluent_conflict)
     pddlInitStateFree(&is);
 
     // Equal values are not a conflict at all
-    pddl_num_val_t same[2];
+    pddl_num_t same[2];
     same[0] = mkInt(7);
     same[1] = mkInt(7);
     mkCollapsingFluents(&is, same, 2);
@@ -1263,19 +1266,19 @@ TEST_ONCE(pddl_init_state_remap_fluent_conflict)
     pddlInitStateFree(&is);
 
     // The integer 2 and the float 2.0 are the same value, so they do not
-    // conflict -- this is pddlNumValCmp() and not pddlNumValEq()
-    pddl_num_val_t mixed[2];
+    // conflict -- this is pddlNumCmp() and not pddlNumExactEq()
+    pddl_num_t mixed[2];
     mixed[0] = mkInt(2);
-    pddlNumValSetFlt(mixed + 1, 2.0);
-    assert(!pddlNumValEq(mixed + 0, mixed + 1));
-    assert(pddlNumValCmp(mixed + 0, mixed + 1) == 0);
+    pddlNumSetFlt(mixed + 1, 2.0);
+    assert(!pddlNumExactEq(mixed + 0, mixed + 1));
+    assert(pddlNumCmp(mixed + 0, mixed + 1) == 0);
     mkCollapsingFluents(&is, mixed, 2);
     assert(collapse(&is, 2, PDDL_INIT_STATE_FLUENT_CONFLICT_REPORT) == 0);
     assert(pddlInitStateFluentSize(&is) == 1);
     pddlInitStateFree(&is);
 
     // A three-way collision folds
-    pddl_num_val_t three[3];
+    pddl_num_t three[3];
     three[0] = mkInt(5);
     three[1] = mkInt(-3);
     three[2] = mkInt(9);
@@ -1302,7 +1305,7 @@ TEST_ONCE(pddl_init_state_remap_preds_funcs_fluent_conflict)
     // pddlInitStateRemapPredsFuncs() as well
     int pred_remap[1] = { 0 };
     int func_remap[2] = { 0, 0 };
-    pddl_num_val_t v;
+    pddl_num_t v;
     pddl_init_state_t is;
 
     pddlInitStateInit(&is);

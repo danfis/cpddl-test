@@ -442,10 +442,10 @@ TEST(strips_state_space_once_many, strips_state_space_once)
 }
 
 /** Fills VAL with SIZE consecutive integer values starting at BASE. */
-static void setNumStateInt(pddl_num_val_t *val, int size, int base)
+static void setNumStateInt(pddl_num_t *val, int size, int base)
 {
     for (int i = 0; i < size; ++i)
-        pddlNumValSetInt(&val[i], base + i);
+        pddlNumSetInt(&val[i], base + i);
 }
 
 TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
@@ -464,7 +464,7 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
 
     PDDL_ISET(set);
     pddlISetAdd(&set, 0);
-    pddl_num_val_t num[3];
+    pddl_num_t num[3];
     setNumStateInt(num, fluent_size, 1);
 
     // The first inserted state gets ID 0, the numeric state ID 0, and
@@ -483,9 +483,9 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     assert(space.num_numeric_states == 1);
 
     // The same fact set with a different numeric state is a new state
-    pddl_num_val_t num2[3];
+    pddl_num_t num2[3];
     setNumStateInt(num2, fluent_size, 1);
-    pddlNumValSetInt(&num2[2], 100);
+    pddlNumSetInt(&num2[2], 100);
     pddl_state_id_t sid2 = pddlStripsStateSpaceInsert(&space, &set, num2);
     assert(sid2 == 1);
     assert(space.num_states == 2);
@@ -514,11 +514,11 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     assert(node.numeric_state_id == 1);
 
     // GetNumState() returns a copy of every stored numeric state
-    pddl_num_val_t out[3];
+    pddl_num_t out[3];
     pddlStripsStateSpaceGetNumState(&space, 0, out);
-    assert(pddlNumValArrEq(out, num, fluent_size));
+    assert(pddlNumArrExactEq(out, num, fluent_size));
     pddlStripsStateSpaceGetNumState(&space, 1, out);
-    assert(pddlNumValArrEq(out, num2, fluent_size));
+    assert(pddlNumArrExactEq(out, num2, fluent_size));
 
     // The node is only a snapshot: mutating node.numeric_state_id and
     // writing it back with Set() does not change the stored numeric
@@ -553,10 +553,10 @@ TEST(strips_state_space_once_numeric_int_flt, strips_state_space_once)
 
     // The integer 2 and the float 2.0 compare as the same number, but
     // they are different numeric states
-    pddl_num_val_t vint, vflt;
-    pddlNumValSetInt(&vint, 2);
-    pddlNumValSetFlt(&vflt, 2.);
-    assert(pddlNumValCmp(&vint, &vflt) == 0);
+    pddl_num_t vint, vflt;
+    pddlNumSetInt(&vint, 2);
+    pddlNumSetFlt(&vflt, 2.);
+    assert(pddlNumCmp(&vint, &vflt) == 0);
 
     pddl_state_id_t sid_int = pddlStripsStateSpaceInsert(&space, &set, &vint);
     pddl_state_id_t sid_flt = pddlStripsStateSpaceInsert(&space, &set, &vflt);
@@ -566,20 +566,20 @@ TEST(strips_state_space_once_numeric_int_flt, strips_state_space_once)
     assert(space.num_numeric_states == 2);
 
     // Both variants round-trip with their type preserved
-    pddl_num_val_t out;
+    pddl_num_t out;
     pddlStripsStateSpaceGetNoState(&space, sid_int, &node);
     pddlStripsStateSpaceGetNumState(&space, node.numeric_state_id, &out);
-    assert(out.type == PDDL_NUM_VAL_INT);
-    assert(pddlNumValEq(&out, &vint));
+    assert(pddlNumIsInt(&out));
+    assert(pddlNumExactEq(&out, &vint));
     pddlStripsStateSpaceGetNoState(&space, sid_flt, &node);
     pddlStripsStateSpaceGetNumState(&space, node.numeric_state_id, &out);
-    assert(out.type == PDDL_NUM_VAL_FLT);
-    assert(pddlNumValEq(&out, &vflt));
+    assert(pddlNumIsFlt(&out));
+    assert(pddlNumExactEq(&out, &vflt));
 
     // The float -0.0 is normalized to 0.0, so both denote the same state
-    pddl_num_val_t vzero, vnegzero;
-    pddlNumValSetFlt(&vzero, 0.);
-    pddlNumValSetFlt(&vnegzero, -0.);
+    pddl_num_t vzero, vnegzero;
+    pddlNumSetFlt(&vzero, 0.);
+    pddlNumSetFlt(&vnegzero, -0.);
     pddl_state_id_t sid_zero = pddlStripsStateSpaceInsert(&space, &set, &vzero);
     assert(sid_zero == 2);
     assert(pddlStripsStateSpaceInsert(&space, &set, &vnegzero) == sid_zero);
@@ -609,7 +609,7 @@ TEST(strips_state_space_once_numeric_many, strips_state_space_once)
     pddlISetAdd(&set, 0);
     pddlISetAdd(&set, 1);
 
-    pddl_num_val_t num[2];
+    pddl_num_t num[2];
     for (int i = 0; i < num_states; ++i){
         setNumStateInt(num, fluent_size, i);
         pddl_state_id_t sid = pddlStripsStateSpaceInsert(&space, &set, num);
@@ -625,9 +625,9 @@ TEST(strips_state_space_once_numeric_many, strips_state_space_once)
         assert(pddlStripsStateSpaceInsert(&space, &set, num)
                     == (pddl_state_id_t)i);
         if (i % 100 == 0){
-            pddl_num_val_t out[2];
+            pddl_num_t out[2];
             pddlStripsStateSpaceGetNumState(&space, i, out);
-            assert(pddlNumValArrEq(out, num, fluent_size));
+            assert(pddlNumArrExactEq(out, num, fluent_size));
         }
     }
     assert(space.num_states == num_states);
@@ -777,10 +777,10 @@ TEST_PANIC_ONCE(strips_state_space_get_num_state_unassigned)
     pddlStripsStateSpaceInit(&space, 2, pddl_false, &err);
     PDDL_ISET(set);
     pddlISetAdd(&set, 0);
-    pddl_num_val_t num[2];
+    pddl_num_t num[2];
     setNumStateInt(num, 2, 0);
     pddlStripsStateSpaceInsert(&space, &set, num);
-    pddl_num_val_t out[2];
+    pddl_num_t out[2];
     pddlStripsStateSpaceGetNumState(&space, 1, out);
 }
 
@@ -792,10 +792,10 @@ TEST_PANIC_ONCE(strips_state_space_get_num_state_neg_id)
     pddlStripsStateSpaceInit(&space, 2, pddl_false, &err);
     PDDL_ISET(set);
     pddlISetAdd(&set, 0);
-    pddl_num_val_t num[2];
+    pddl_num_t num[2];
     setNumStateInt(num, 2, 0);
     pddlStripsStateSpaceInsert(&space, &set, num);
-    pddl_num_val_t out[2];
+    pddl_num_t out[2];
     pddlStripsStateSpaceGetNumState(&space, -1, out);
 }
 
@@ -806,7 +806,7 @@ TEST_PANIC_ONCE(strips_state_space_get_num_state_zero_fluents)
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
     initSpaceWithTwoStates(&space, &err);
-    pddl_num_val_t out[1];
+    pddl_num_t out[1];
     pddlStripsStateSpaceGetNumState(&space, 0, out);
 }
 
@@ -829,7 +829,7 @@ TEST_PANIC_ONCE(strips_state_space_init_neg_fluent_size)
     pddlStripsStateSpaceInit(&space, -1, pddl_false, &err);
 }
 
-TEST(strips_state_space_once_num_val_g_value, strips_state_space_once)
+TEST(strips_state_space_once_num_g_value, strips_state_space_once)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
@@ -847,16 +847,16 @@ TEST(strips_state_space_once_num_val_g_value, strips_state_space_once)
     pddlStripsStateSpaceNodeInit(&node, &space);
 
     // A new state has the "not set" value -1 stored as a numeric value
-    pddl_num_val_t v;
-    pddlNumValSetInt(&v, -1);
+    pddl_num_t v;
+    pddlNumSetInt(&v, -1);
     pddlStripsStateSpaceGetNoState(&space, id0, &node);
-    assert(pddlNumValEq(&node.g_value.num_val, &v));
+    assert(pddlNumExactEq(&node.g_value.num, &v));
 
     // Store a float and an int g-value
-    pddlNumValSetFlt(&node.g_value.num_val, 1.5);
+    pddlNumSetFlt(&node.g_value.num, 1.5);
     pddlStripsStateSpaceSet(&space, &node);
     pddlStripsStateSpaceGetNoState(&space, id1, &node);
-    pddlNumValSetInt(&node.g_value.num_val, 2);
+    pddlNumSetInt(&node.g_value.num, 2);
     pddlStripsStateSpaceSet(&space, &node);
 
     // Re-inserting an existing state must not reset its g-value
@@ -864,12 +864,12 @@ TEST(strips_state_space_once_num_val_g_value, strips_state_space_once)
     assert(id == id1);
 
     // Both values are read back with their types intact
-    pddlNumValSetFlt(&v, 1.5);
+    pddlNumSetFlt(&v, 1.5);
     pddlStripsStateSpaceGetNoState(&space, id0, &node);
-    assert(pddlNumValEq(&node.g_value.num_val, &v));
-    pddlNumValSetInt(&v, 2);
+    assert(pddlNumExactEq(&node.g_value.num, &v));
+    pddlNumSetInt(&v, 2);
     pddlStripsStateSpaceGet(&space, id1, &node);
-    assert(pddlNumValEq(&node.g_value.num_val, &v));
+    assert(pddlNumExactEq(&node.g_value.num, &v));
 
     pddlISetFree(&s0);
     pddlISetFree(&s1);

@@ -75,7 +75,7 @@ static void printState(const char *prefix,
  *  terminating newline. */
 static void printNumState(const char *prefix,
                           const pddl_strips_maker_t *sm,
-                          const pddl_num_val_t *num_state)
+                          const pddl_num_t *num_state)
 {
     printf("%s", prefix);
     int size = pddlStripsMakerNonStaticFluentSize(sm);
@@ -86,7 +86,7 @@ static void printNumState(const char *prefix,
         printf(" (%s", C.pddl.func.pred[ga->pred].name);
         for (int j = 0; j < ga->arity; ++j)
             printf(" %s", C.pddl.obj.obj[ga->arg[j]].name);
-        printf(") = %s", pddlNumValFmt(num_state + i, buf, sizeof(buf)));
+        printf(") = %s", pddlNumFmt(num_state + i, buf, sizeof(buf)));
     }
     printf("\n");
 }
@@ -97,15 +97,15 @@ static void printNumState(const char *prefix,
  *  newline. */
 static void sformatNumEff(char *buf, int buf_size, const char *prefix,
                           const pddl_strips_maker_t *sm,
-                          const pddl_num_val_t *num_state,
-                          const pddl_num_val_t *num_eff)
+                          const pddl_num_t *num_state,
+                          const pddl_num_t *num_eff)
 {
     int w = snprintf(buf, buf_size, "%s", prefix);
     int size = pddlStripsMakerNonStaticFluentSize(sm);
     int offset = pddlStripsMakerNonStaticFluentOffset(sm);
     char buf1[128], buf2[128];
     for (int i = 0; i < size; ++i){
-        if (pddlNumValCmp(num_state + i, num_eff + i) == 0)
+        if (pddlNumCmp(num_state + i, num_eff + i) == 0)
             continue;
         const pddl_ground_atom_t *ga = sm->fluent.atom[offset + i];
         w += snprintf(buf + w, buf_size - w, " (%s",
@@ -115,8 +115,8 @@ static void sformatNumEff(char *buf, int buf_size, const char *prefix,
                           C.pddl.obj.obj[ga->arg[j]].name);
         }
         w += snprintf(buf + w, buf_size - w, ") %s -> %s",
-                      pddlNumValFmt(num_state + i, buf1, sizeof(buf1)),
-                      pddlNumValFmt(num_eff + i, buf2, sizeof(buf2)));
+                      pddlNumFmt(num_state + i, buf1, sizeof(buf1)),
+                      pddlNumFmt(num_eff + i, buf2, sizeof(buf2)));
     }
     snprintf(buf + w, buf_size - w, "\n");
 }
@@ -151,14 +151,14 @@ static void walk(pddl_strips_maker_t *sm,
     // Numeric state of the walk -- NULL if the task has no non-static
     // fluents
     int num_state_size = pddlStripsMakerNonStaticFluentSize(sm);
-    pddl_num_val_t *num_state = NULL;
-    pddl_num_val_t *next_num_state = NULL;
+    pddl_num_t *num_state = NULL;
+    pddl_num_t *next_num_state = NULL;
     if (num_state_size > 0){
-        num_state = calloc(num_state_size, sizeof(pddl_num_val_t));
+        num_state = calloc(num_state_size, sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(sm, num_state);
-        next_num_state = calloc(num_state_size, sizeof(pddl_num_val_t));
+        next_num_state = calloc(num_state_size, sizeof(pddl_num_t));
         memcpy(next_num_state, num_state,
-               sizeof(pddl_num_val_t) * num_state_size);
+               sizeof(pddl_num_t) * num_state_size);
     }
 
     pddl_lifted_app_action_t *aa;
@@ -270,11 +270,11 @@ static void walk(pddl_strips_maker_t *sm,
                              eff.cost.int_action_cost);
                     break;
                 case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
-                    pddlNumValFmt(&eff.cost.general_action_cost,
+                    pddlNumFmt(&eff.cost.general_action_cost,
                                   cost_s, sizeof(cost_s));
                     break;
                 case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
-                    pddlNumValFmt(&eff.cost.state_metric,
+                    pddlNumFmt(&eff.cost.state_metric,
                                   cost_s, sizeof(cost_s));
                     break;
             }
@@ -301,7 +301,7 @@ static void walk(pddl_strips_maker_t *sm,
                 pddlISetUnion(&next_state, &eff.add_eff);
                 if (num_state_size > 0){
                     memcpy(next_num_state, eff.num_eff,
-                           sizeof(pddl_num_val_t) * num_state_size);
+                           sizeof(pddl_num_t) * num_state_size);
                 }
             }
         }
@@ -323,7 +323,7 @@ static void walk(pddl_strips_maker_t *sm,
         pddlISetFree(&next_state);
         if (num_state_size > 0){
             memcpy(num_state, next_num_state,
-                   sizeof(pddl_num_val_t) * num_state_size);
+                   sizeof(pddl_num_t) * num_state_size);
         }
     }
     pddlISetFree(&state);
@@ -382,9 +382,9 @@ static void closeAtomsUnderEffects(pddl_strips_maker_t *sm)
     // The numeric part plays no role in the closure -- the initial
     // numeric state is used throughout
     int num_state_size = pddlStripsMakerNonStaticFluentSize(sm);
-    pddl_num_val_t *num_state = NULL;
+    pddl_num_t *num_state = NULL;
     if (num_state_size > 0){
-        num_state = calloc(num_state_size, sizeof(pddl_num_val_t));
+        num_state = calloc(num_state_size, sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(sm, num_state);
     }
 
@@ -530,14 +530,14 @@ TEST(strips_maker_init, strips_maker)
 
     // Every init fluent is stored with its initial value
     int num_fluents = 0;
-    pddl_num_val_t val;
+    pddl_num_t val;
     PDDL_INIT_STATE_FOR_EACH_FLUENT(&C.pddl.init, fluent, &val){
         const pddl_ground_atom_t *ga
                 = pddlGroundAtomsFindAtom(&sm.fluent, fluent, NULL);
         assert(ga != NULL);
         const pddl_fluent_data_t *fd
                 = pddlExtArrGet(sm.fluent_data, ga->id);
-        assert(pddlNumValCmp(&fd->init_val, &val) == 0);
+        assert(pddlNumCmp(&fd->init_val, &val) == 0);
         ++num_fluents;
     }
     assert(num_fluents == sm.fluent.atom_size);
@@ -564,14 +564,14 @@ TEST(strips_maker_init, strips_maker)
     // non-static fluents
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
     if (num_state_size > 0){
-        pddl_num_val_t *num_state = calloc(num_state_size,
-                                           sizeof(pddl_num_val_t));
+        pddl_num_t *num_state = calloc(num_state_size,
+                                           sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(&sm, num_state);
         int offset = pddlStripsMakerNonStaticFluentOffset(&sm);
         for (int i = 0; i < num_state_size; ++i){
             const pddl_fluent_data_t *fd
                     = pddlExtArrGet(sm.fluent_data, offset + i);
-            assert(pddlNumValCmp(num_state + i, &fd->init_val) == 0);
+            assert(pddlNumCmp(num_state + i, &fd->init_val) == 0);
         }
         free(num_state);
     }
@@ -833,14 +833,14 @@ TEST(strips_maker_numeric, pddl)
            sm.fluent.atom_size, sm.num_static_fluent,
            sm.has_action_cost_fluent, num_state_size);
 
-    pddl_num_val_t *num_state = NULL;
+    pddl_num_t *num_state = NULL;
     if (num_state_size > 0){
-        num_state = calloc(num_state_size, sizeof(pddl_num_val_t));
+        num_state = calloc(num_state_size, sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(&sm, num_state);
         for (int i = 0; i < num_state_size; ++i){
             const pddl_fluent_data_t *fd
                     = pddlExtArrGet(sm.fluent_data, offset + i);
-            assert(pddlNumValCmp(num_state + i, &fd->init_val) == 0);
+            assert(pddlNumCmp(num_state + i, &fd->init_val) == 0);
         }
     }
 
@@ -848,12 +848,12 @@ TEST(strips_maker_numeric, pddl)
     // unless the metric is the action-cost fluent, which must not be read
     // in a numeric expression
     if (!pddlIsUnitCost(&C.pddl) && pddlActionCostFuncId(&C.pddl) < 0){
-        pddl_num_val_t val;
+        pddl_num_t val;
         ret = pddlStripsMakerEvalNumExp(&sm, C.pddl.minimize, num_state,
                                         NULL, &val, &C.err);
         assert(ret == 0);
         char buf[128];
-        printf("init metric: %s\n", pddlNumValFmt(&val, buf, sizeof(buf)));
+        printf("init metric: %s\n", pddlNumFmt(&val, buf, sizeof(buf)));
     }
 
     if (num_state != NULL)
@@ -918,7 +918,7 @@ static void dumpInitFluents(const char *header,
                               pddl.obj.obj[ga->arg[j]].name);
             }
             snprintf(line[i] + w, LINE_SIZE - w, ") = %s [%c]",
-                     pddlNumValFmt(&fd->init_val, buf, sizeof(buf)), type);
+                     pddlNumFmt(&fd->init_val, buf, sizeof(buf)), type);
         }
         pddlSort(line, num, LINE_SIZE, cmpLine, NULL);
         for (int i = 0; i < num; ++i)
@@ -967,13 +967,13 @@ TEST(strips_maker_once_fluents, strips_maker_once)
     int offset = pddlStripsMakerNonStaticFluentOffset(&sm);
     assert(offset + num_state_size == sm.fluent.atom_size);
     if (num_state_size > 0){
-        pddl_num_val_t *num_state = calloc(num_state_size,
-                                           sizeof(pddl_num_val_t));
+        pddl_num_t *num_state = calloc(num_state_size,
+                                           sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(&sm, num_state);
         for (int i = 0; i < num_state_size; ++i){
             const pddl_fluent_data_t *fd
                     = pddlExtArrGet(sm.fluent_data, offset + i);
-            assert(pddlNumValCmp(num_state + i, &fd->init_val) == 0);
+            assert(pddlNumCmp(num_state + i, &fd->init_val) == 0);
         }
         free(num_state);
     }
@@ -1040,28 +1040,29 @@ static void evalMinimize(const char *header,
     assert(ret == 0);
 
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
-    pddl_num_val_t *num_state = NULL;
+    pddl_num_t *num_state = NULL;
     if (num_state_size > 0){
-        num_state = calloc(num_state_size, sizeof(pddl_num_val_t));
+        num_state = calloc(num_state_size, sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(&sm, num_state);
     }
 
-    pddl_num_val_t val;
+    pddl_num_t val;
     ret = pddlStripsMakerEvalNumExp(&sm, pddl.minimize, num_state, NULL,
                                     &val, &C.err);
     assert(ret == 0);
 
     // Cross-check against the init-state evaluator -- the numeric state
     // holds the initial values, so both must agree
-    pddl_num_val_t chk;
+    pddl_num_t chk;
     pddl_fm_num_eval_status_t st
-            = pddlInitStateCheckNumExpValue(&pddl.init, pddl.minimize, &chk);
+            = pddlInitStateCheckNumExpValue(&pddl.init, pddl.minimize, &chk,
+                                            &C.err);
     assert(st == PDDL_FM_NUM_EVAL_OK);
-    assert(pddlNumValCmp(&val, &chk) == 0);
+    assert(pddlNumCmp(&val, &chk) == 0);
 
     char buf[128];
     printf("%s minimize = %s\n", header,
-           pddlNumValFmt(&val, buf, sizeof(buf)));
+           pddlNumFmt(&val, buf, sizeof(buf)));
 
     if (num_state != NULL)
         free(num_state);
@@ -1084,7 +1085,7 @@ TEST(strips_maker_once_eval_num_exp, strips_maker_once)
 static void evalCountersPre(pddl_strips_maker_t *sm,
                             const pddl_t *pddl,
                             const char *header,
-                            const pddl_num_val_t *num_state)
+                            const pddl_num_t *num_state)
 {
     printf("%s\n", header);
     for (int ai = 0; ai < pddl->action.action_size; ++ai){
@@ -1119,20 +1120,20 @@ TEST(strips_maker_once_eval_num_cmp, strips_maker_once)
 
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
     assert(num_state_size > 0);
-    pddl_num_val_t *num_state = calloc(num_state_size,
-                                       sizeof(pddl_num_val_t));
+    pddl_num_t *num_state = calloc(num_state_size,
+                                       sizeof(pddl_num_t));
     pddlStripsMakerInitNumState(&sm, num_state);
     evalCountersPre(&sm, &pddl, "counters/pfile1 init:", num_state);
 
     // All counters at 0: (decrement) is inapplicable everywhere
     for (int i = 0; i < num_state_size; ++i)
-        pddlNumValSetInt(num_state + i, 0);
+        pddlNumSetInt(num_state + i, 0);
     evalCountersPre(&sm, &pddl, "counters/pfile1 all-zero:", num_state);
 
     // All counters at (max_int) = 40: (increment) is inapplicable
     // everywhere
     for (int i = 0; i < num_state_size; ++i)
-        pddlNumValSetInt(num_state + i, 40);
+        pddlNumSetInt(num_state + i, 40);
     evalCountersPre(&sm, &pddl, "counters/pfile1 all-max:", num_state);
 
     free(num_state);
@@ -1154,8 +1155,8 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
     int offset = pddlStripsMakerNonStaticFluentOffset(&sm);
     assert(num_state_size > 0);
-    pddl_num_val_t *num_state = calloc(num_state_size,
-                                       sizeof(pddl_num_val_t));
+    pddl_num_t *num_state = calloc(num_state_size,
+                                       sizeof(pddl_num_t));
     pddlStripsMakerInitNumState(&sm, num_state);
 
     // Evaluate the numeric-op effects of every action grounded with the
@@ -1171,7 +1172,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
                 if (!pddlFmIsNumOp(fm))
                     continue;
                 int fluent_id;
-                pddl_num_val_t val;
+                pddl_num_t val;
                 ret = pddlStripsMakerEvalNumOp(&sm, pddlFmToNumOpConst(fm),
                                                num_state, args,
                                                &fluent_id, &val, &C.err);
@@ -1182,8 +1183,8 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
                 printf("(%s %s): (value %s) %s -> %s\n",
                        a->name, pddl.obj.obj[obj].name,
                        pddl.obj.obj[obj].name,
-                       pddlNumValFmt(num_state + idx, buf1, sizeof(buf1)),
-                       pddlNumValFmt(&val, buf2, sizeof(buf2)));
+                       pddlNumFmt(num_state + idx, buf1, sizeof(buf1)),
+                       pddlNumFmt(&val, buf2, sizeof(buf2)));
             }
         }
     }
@@ -1209,7 +1210,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
         }
         assert(op != NULL);
         int fluent_id;
-        pddl_num_val_t val;
+        pddl_num_t val;
         ret = pddlStripsMakerEvalNumOp(&sm, op, num_state, args,
                                        &fluent_id, &val, &C.err);
         assert(ret == 0);
@@ -1229,15 +1230,15 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
         int touched_idx = pddlStripsMakerNumStateIndex(&sm, fluent_id);
         for (int i = 0; i < num_state_size; ++i){
             if (i == touched_idx){
-                assert(pddlNumValCmp(eff.num_eff + i, &val) == 0);
-                assert(pddlNumValCmp(eff.num_eff + i, num_state + i) != 0);
+                assert(pddlNumCmp(eff.num_eff + i, &val) == 0);
+                assert(pddlNumCmp(eff.num_eff + i, num_state + i) != 0);
             }else{
-                assert(pddlNumValCmp(eff.num_eff + i, num_state + i) == 0);
+                assert(pddlNumCmp(eff.num_eff + i, num_state + i) == 0);
             }
         }
         printf("eff(increment c0): cost %d (value c0) -> %s\n",
                eff.cost.int_action_cost,
-               pddlNumValFmt(eff.num_eff + touched_idx,
+               pddlNumFmt(eff.num_eff + touched_idx,
                              buf1, sizeof(buf1)));
 
         // Multiple increases of the same fluent accumulate: extend the
@@ -1256,20 +1257,20 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
         assert(ret == 0);
         assert(eff.cost_type == PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST);
         assert(eff.cost.int_action_cost == 1);
-        pddl_num_val_t exp_val;
-        pddlNumValSet(&exp_val, num_state + touched_idx);
-        pddl_num_val_t delta;
-        pddlNumValSetInt(&delta, 3);
-        pddl_num_val_status_t vst = pddlNumValAdd(&exp_val, &delta);
-        assert(vst == PDDL_NUM_VAL_OK);
-        assert(pddlNumValCmp(eff.num_eff + touched_idx, &exp_val) == 0);
+        pddl_num_t exp_val;
+        pddlNumSet(&exp_val, num_state + touched_idx);
+        pddl_num_t delta;
+        pddlNumSetInt(&delta, 3);
+        pddl_num_status_t vst = pddlNumAdd(&exp_val, &delta);
+        assert(vst == PDDL_NUM_OK);
+        assert(pddlNumCmp(eff.num_eff + touched_idx, &exp_val) == 0);
         for (int i = 0; i < num_state_size; ++i){
             if (i != touched_idx)
-                assert(pddlNumValCmp(eff.num_eff + i, num_state + i) == 0);
+                assert(pddlNumCmp(eff.num_eff + i, num_state + i) == 0);
         }
         printf("eff(increment+2 c0): cost %d (value c0) -> %s\n",
                eff.cost.int_action_cost,
-               pddlNumValFmt(eff.num_eff + touched_idx,
+               pddlNumFmt(eff.num_eff + touched_idx,
                              buf1, sizeof(buf1)));
 
         pddlStripsMakerEffFree(&eff);
@@ -1303,14 +1304,14 @@ TEST(strips_maker_once_eval_err, strips_maker_once)
         ret = pddlStripsMakerAddInit(&sm);
         assert(ret == 0);
         int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
-        pddl_num_val_t *num_state = calloc(num_state_size,
-                                           sizeof(pddl_num_val_t));
+        pddl_num_t *num_state = calloc(num_state_size,
+                                           sizeof(pddl_num_t));
         pddlStripsMakerInitNumState(&sm, num_state);
 
         pddl_err_t err = PDDL_ERR_INIT;
         pddl_fm_num_exp_t *e
                 = pddlFmNewNumExpFluent(fluentAtom(value_func, c0));
-        pddl_num_val_t val;
+        pddl_num_t val;
         ret = pddlStripsMakerEvalNumExp(&sm, e, num_state, NULL,
                                         &val, &err);
         assert(ret == -1);
@@ -1350,7 +1351,7 @@ TEST(strips_maker_once_eval_err, strips_maker_once)
         pddl_err_t err = PDDL_ERR_INIT;
         pddl_fm_num_exp_t *e
                 = pddlFmNewNumExpFluent(fluentAtom(cost_func, -1));
-        pddl_num_val_t val;
+        pddl_num_t val;
         ret = pddlStripsMakerEvalNumExp(&sm, e, NULL, NULL, &val, &err);
         assert(ret == -1);
         pddlFmDel(&e->fm);

@@ -16,17 +16,17 @@
 #include <stdint.h>
 #include <string.h>
 
-static pddl_num_val_t mk_int(int64_t val)
+static pddl_num_t mk_int(int val)
 {
-    pddl_num_val_t v;
-    pddlNumValSetInt(&v, val);
+    pddl_num_t v;
+    pddlNumSetInt(&v, val);
     return v;
 }
 
-static pddl_num_val_t mk_flt(double val)
+static pddl_num_t mk_flt(float val)
 {
-    pddl_num_val_t v;
-    pddlNumValSetFlt(&v, val);
+    pddl_num_t v;
+    pddlNumSetFlt(&v, val);
     return v;
 }
 
@@ -58,25 +58,25 @@ static pddl_fm_num_exp_t *exp_fluent0(int pred)
 }
 
 
-// --- Fold as an exact evaluator over pddl_num_val_t values ---
+// --- Fold as an exact evaluator over pddl_num_t values ---
 
 /** Values of 0-ary fluents indexed by the predicate ID */
 struct fluent_vals {
-    const pddl_num_val_t *val;
+    const pddl_num_t *val;
     int size;
 };
 
 static int eval_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
 {
     const struct fluent_vals *fv = ud;
-    pddl_num_val_t *out = val;
+    pddl_num_t *out = val;
     if (leaf->fm.type == PDDL_FM_NUM_EXP_NUM){
-        pddlNumValSet(out, &leaf->e.num);
+        pddlNumSet(out, &leaf->e.num);
         return 0;
     }
     assert(leaf->fm.type == PDDL_FM_NUM_EXP_FLUENT);
     assert(leaf->e.fluent->pred < fv->size);
-    pddlNumValSet(out, fv->val + leaf->e.fluent->pred);
+    pddlNumSet(out, fv->val + leaf->e.fluent->pred);
     return 0;
 }
 
@@ -85,29 +85,29 @@ static int eval_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
 static int eval_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
                        void *ud, void *val)
 {
-    const pddl_num_val_t *l = left;
-    const pddl_num_val_t *r = right;
-    pddl_num_val_t *out = val;
-    pddl_num_val_status_t st;
+    const pddl_num_t *l = left;
+    const pddl_num_t *r = right;
+    pddl_num_t *out = val;
+    pddl_num_status_t st;
     switch (e->fm.type){
     case PDDL_FM_NUM_EXP_PLUS:
-        st = pddlNumValAddTo(out, l, r);
-        assert(st == PDDL_NUM_VAL_OK);
+        st = pddlNumAddTo(out, l, r);
+        assert(st == PDDL_NUM_OK);
         return 0;
     case PDDL_FM_NUM_EXP_MINUS:
-        st = pddlNumValSubTo(out, l, r);
-        assert(st == PDDL_NUM_VAL_OK);
+        st = pddlNumSubTo(out, l, r);
+        assert(st == PDDL_NUM_OK);
         return 0;
     case PDDL_FM_NUM_EXP_MULT:
-        st = pddlNumValMulTo(out, l, r);
-        assert(st == PDDL_NUM_VAL_OK);
+        st = pddlNumMulTo(out, l, r);
+        assert(st == PDDL_NUM_OK);
         return 0;
     default:
         assert(e->fm.type == PDDL_FM_NUM_EXP_DIV);
-        st = pddlNumValDivTo(out, l, r);
-        if (st == PDDL_NUM_VAL_DIV_BY_ZERO)
+        st = pddlNumDivTo(out, l, r);
+        if (st == PDDL_NUM_DIV_BY_ZERO)
             return EVAL_DIV_BY_ZERO;
-        assert(st == PDDL_NUM_VAL_OK);
+        assert(st == PDDL_NUM_OK);
         return 0;
     }
 }
@@ -115,11 +115,11 @@ static int eval_bin_op(const pddl_fm_num_exp_t *e, void *left, void *right,
 static pddl_fm_num_eval_status_t eval_fluent_fn(const pddl_fm_atom_t *fluent,
                                                 const int *args,
                                                 void *ud,
-                                                pddl_num_val_t *val)
+                                                pddl_num_t *val)
 {
     const struct fluent_vals *fv = ud;
     assert(fluent->pred < fv->size);
-    pddlNumValSet(val, fv->val + fluent->pred);
+    pddlNumSet(val, fv->val + fluent->pred);
     return PDDL_FM_NUM_EVAL_OK;
 }
 
@@ -128,18 +128,21 @@ static pddl_fm_num_eval_status_t eval_fluent_fn(const pddl_fm_atom_t *fluent,
 static void assert_fold_eval_eq(pddl_fm_num_exp_t *e,
                                 const struct fluent_vals *fv)
 {
-    pddl_num_val_t fold_val, eval_val;
-    int st = pddlFmNumExpFold(e, sizeof(pddl_num_val_t),
+    pddl_num_t fold_val, eval_val;
+    int st = pddlFmNumExpFold(e, sizeof(pddl_num_t),
                               eval_leaf, eval_bin_op, NULL,
                               (void *)fv, &fold_val);
+    pddl_err_t err = PDDL_ERR_INIT;
     pddl_fm_num_eval_status_t est;
-    est = pddlFmNumExpEval(e, NULL, eval_fluent_fn, (void *)fv, &eval_val);
+    est = pddlFmNumExpEval(e, NULL, eval_fluent_fn, (void *)fv, &eval_val,
+                           &err);
     if (st == 0){
         assert(est == PDDL_FM_NUM_EVAL_OK);
-        assert(pddlNumValEq(&fold_val, &eval_val));
+        assert(pddlNumExactEq(&fold_val, &eval_val));
     }else{
         assert(st == EVAL_DIV_BY_ZERO);
-        assert(est == PDDL_FM_NUM_EVAL_DIV_BY_ZERO);
+        assert(est == PDDL_FM_NUM_EVAL_NUM_ERR);
+        assert(strstr(err.msg, "division by zero") != NULL);
     }
     pddlFmDel(&e->fm);
 }
@@ -153,7 +156,7 @@ static void assert_fold_eval_eq(pddl_fm_num_exp_t *e,
 static int trace_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
 {
     assert(leaf->fm.type == PDDL_FM_NUM_EXP_NUM);
-    *(int *)val = (int)leaf->e.num.v.i;
+    *(int *)val = (int)leaf->e.num.val.i;
     return 0;
 }
 
@@ -176,7 +179,7 @@ static int sum_count_leaf(const pddl_fm_num_exp_t *leaf, void *ud, void *val)
 {
     struct sum_count *out = val;
     assert(leaf->fm.type == PDDL_FM_NUM_EXP_NUM);
-    out->sum = leaf->e.num.v.i;
+    out->sum = leaf->e.num.val.i;
     out->count = 1;
     return 0;
 }
@@ -212,7 +215,7 @@ static pddl_fm_num_exp_t *deep_sum(int n, int right)
 
 TEST_ONCE(fm_num_exp_fold)
 {
-    const pddl_num_val_t fvals[3] = { mk_int(7), mk_flt(2.5), mk_int(0) };
+    const pddl_num_t fvals[3] = { mk_int(7), mk_flt(2.5), mk_int(0) };
     const struct fluent_vals fv = { fvals, 3 };
 
     // 1. Single-node expressions: no bin_op callback involved
@@ -325,14 +328,14 @@ TEST_ONCE(fm_num_exp_fold_abort)
     // A failure in the bin_op callback (division by zero in the exact
     // evaluator) is propagated too
     const struct fluent_vals fv = { NULL, 0 };
-    pddl_num_val_t val = mk_int(-1);
+    pddl_num_t val = mk_int(-1);
     e = exp_bin(PDDL_FM_NUM_EXP_DIV,
                 pddlFmNewNumExpNumInt(1),
                 pddlFmNewNumExpNumInt(0));
     assert(pddlFmNumExpFold(e, sizeof(val), eval_leaf, eval_bin_op,
                             NULL, (void *)&fv, &val) == EVAL_DIV_BY_ZERO);
-    pddl_num_val_t expect = mk_int(-1);
-    assert(pddlNumValEq(&val, &expect));
+    pddl_num_t expect = mk_int(-1);
+    assert(pddlNumExactEq(&val, &expect));
     pddlFmDel(&e->fm);
 }
 
