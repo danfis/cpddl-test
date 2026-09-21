@@ -8,6 +8,13 @@
 /** Maximum number of states expanded by the BFS test */
 #define BFS_MAX_EXPANSIONS 100
 
+/** Returns the g-value G that must be a plain integer. */
+static int gValueInt(const pddl_num_t *g)
+{
+    assert(pddlNumIsPlainInt(g));
+    return g->val.i;
+}
+
 /** Asserts that the state with SID carries the default search data set by
  *  pddlStripsStateSpaceInsert() for newly inserted states. */
 static void assertDefaults(pddl_strips_state_space_t *space,
@@ -18,7 +25,7 @@ static void assertDefaults(pddl_strips_state_space_t *space,
     assert(node->id == sid);
     assert(node->parent_id == PDDL_NO_STATE_ID);
     assert(node->op_id == -1);
-    assert(node->g_value.i == -1);
+    assert(gValueInt(&node->g_value) == -1);
     assert(node->status == PDDL_STRIPS_STATE_SPACE_STATUS_NEW);
 }
 
@@ -33,7 +40,7 @@ TEST(strips_state_space, strips)
 TEST(strips_state_space_insert, strips_state_space)
 {
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &C.err);
+    pddlStripsStateSpaceInit(&space, 0, &C.err);
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
 
@@ -111,7 +118,7 @@ TEST(strips_state_space_insert, strips_state_space)
 TEST(strips_state_space_node, strips_state_space)
 {
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &C.err);
+    pddlStripsStateSpaceInit(&space, 0, &C.err);
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
 
@@ -121,13 +128,13 @@ TEST(strips_state_space_node, strips_state_space)
 
     // Set() and GetNoState() round-trip all four search-data fields
     pddlStripsStateSpaceGetNoState(&space, init_id, &node);
-    node.g_value.i = 0;
+    pddlNumSetInt(&node.g_value, 0);
     node.status = PDDL_STRIPS_STATE_SPACE_STATUS_OPEN;
     pddlStripsStateSpaceSet(&space, &node);
     pddlStripsStateSpaceGetNoState(&space, init_id, &node);
     assert(node.parent_id == PDDL_NO_STATE_ID);
     assert(node.op_id == -1);
-    assert(node.g_value.i == 0);
+    assert(gValueInt(&node.g_value) == 0);
     assert(node.status == PDDL_STRIPS_STATE_SPACE_STATUS_OPEN);
 
     node.status = PDDL_STRIPS_STATE_SPACE_STATUS_CLOSED;
@@ -153,7 +160,7 @@ TEST(strips_state_space_node, strips_state_space)
         ++num_succ;
         node.parent_id = init_id;
         node.op_id = opi;
-        node.g_value.i = op->cost;
+        pddlNumSetInt(&node.g_value, op->cost);
         node.status = PDDL_STRIPS_STATE_SPACE_STATUS_OPEN;
         pddlStripsStateSpaceSet(&space, &node);
 
@@ -161,7 +168,7 @@ TEST(strips_state_space_node, strips_state_space)
         assert(node.id == sid);
         assert(node.parent_id == init_id);
         assert(node.op_id == opi);
-        assert(node.g_value.i == op->cost);
+        assert(gValueInt(&node.g_value) == op->cost);
         assert(node.status == PDDL_STRIPS_STATE_SPACE_STATUS_OPEN);
         assert(pddlISetEq(&node.state, &succ));
 
@@ -170,7 +177,7 @@ TEST(strips_state_space_node, strips_state_space)
         pddlStripsStateSpaceGetNoState(&space, sid, &node);
         assert(node.parent_id == init_id);
         assert(node.op_id == opi);
-        assert(node.g_value.i == op->cost);
+        assert(gValueInt(&node.g_value) == op->cost);
         assert(node.status == PDDL_STRIPS_STATE_SPACE_STATUS_OPEN);
     }
 
@@ -195,7 +202,7 @@ TEST(strips_state_space_node, strips_state_space)
 TEST(strips_state_space_bfs, strips_state_space)
 {
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &C.err);
+    pddlStripsStateSpaceInit(&space, 0, &C.err);
     pddl_strips_state_space_node_t cur, next;
     pddlStripsStateSpaceNodeInit(&cur, &space);
     pddlStripsStateSpaceNodeInit(&next, &space);
@@ -204,7 +211,7 @@ TEST(strips_state_space_bfs, strips_state_space)
             = pddlStripsStateSpaceInsert(&space, &C.strips.init, NULL);
     assert(init_id == 0);
     pddlStripsStateSpaceGetNoState(&space, init_id, &cur);
-    cur.g_value.i = 0;
+    pddlNumSetInt(&cur.g_value, 0);
     cur.status = PDDL_STRIPS_STATE_SPACE_STATUS_OPEN;
     pddlStripsStateSpaceSet(&space, &cur);
 
@@ -239,7 +246,8 @@ TEST(strips_state_space_bfs, strips_state_space)
                 assert(next.parent_id == PDDL_NO_STATE_ID);
                 next.parent_id = sid;
                 next.op_id = opi;
-                next.g_value.i = cur.g_value.i + op->cost;
+                pddlNumSetInt(&next.g_value,
+                              gValueInt(&cur.g_value) + op->cost);
                 next.status = PDDL_STRIPS_STATE_SPACE_STATUS_OPEN;
                 pddlStripsStateSpaceSet(&space, &next);
             }
@@ -274,7 +282,7 @@ TEST(strips_state_space_bfs, strips_state_space)
         int plan_len = 0;
         int plan_cost = 0;
         pddlStripsStateSpaceGetNoState(&space, goal_id, &next);
-        int goal_g = next.g_value.i;
+        int goal_g = gValueInt(&next.g_value);
         pddl_state_id_t sid = goal_id;
         while (sid != 0){
             pddlStripsStateSpaceGet(&space, sid, &next);
@@ -284,7 +292,8 @@ TEST(strips_state_space_bfs, strips_state_space)
             assert(pddlISetIsSubset(&op->pre, &cur.state));
             pddlStripsOpApplyOnState(op, &cur.state, &succ);
             assert(pddlISetEq(&succ, &next.state));
-            assert(next.g_value.i == cur.g_value.i + op->cost);
+            assert(gValueInt(&next.g_value)
+                    == gValueInt(&cur.g_value) + op->cost);
             plan_op[plan_len++] = next.op_id;
             plan_cost += op->cost;
             sid = next.parent_id;
@@ -313,12 +322,12 @@ TEST(strips_state_space_once_basic, strips_state_space_once)
     pddl_strips_state_space_t space;
 
     // Init/Free round-trip of an empty state space
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
     assert(space.num_states == 0);
     assert(pddlStripsStateSpaceFluentSize(&space) == 0);
     pddlStripsStateSpaceFree(&space);
 
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
     assert(node.numeric_state_id == -1);
@@ -355,24 +364,24 @@ TEST(strips_state_space_once_basic, strips_state_space_once)
     pddlStripsStateSpaceGetNoState(&space, 3, &node);
     node.parent_id = 0;
     node.op_id = (1 << 29) - 1;
-    node.g_value.i = 1 << 30;
+    pddlNumSetInt(&node.g_value, 1 << 30);
     node.status = PDDL_STRIPS_STATE_SPACE_STATUS_CLOSED;
     pddlStripsStateSpaceSet(&space, &node);
     pddlStripsStateSpaceGetNoState(&space, 3, &node);
     assert(node.parent_id == 0);
     assert(node.op_id == (1 << 29) - 1);
-    assert(node.g_value.i == 1 << 30);
+    assert(gValueInt(&node.g_value) == 1 << 30);
     assert(node.status == PDDL_STRIPS_STATE_SPACE_STATUS_CLOSED);
 
     node.parent_id = PDDL_NO_STATE_ID;
     node.op_id = -1;
-    node.g_value.i = -1;
+    pddlNumSetInt(&node.g_value, -1);
     node.status = PDDL_STRIPS_STATE_SPACE_STATUS_OPEN;
     pddlStripsStateSpaceSet(&space, &node);
     pddlStripsStateSpaceGetNoState(&space, 3, &node);
     assert(node.parent_id == PDDL_NO_STATE_ID);
     assert(node.op_id == -1);
-    assert(node.g_value.i == -1);
+    assert(gValueInt(&node.g_value) == -1);
     assert(node.status == PDDL_STRIPS_STATE_SPACE_STATUS_OPEN);
 
     node.status = PDDL_STRIPS_STATE_SPACE_STATUS_NEW;
@@ -403,7 +412,7 @@ TEST(strips_state_space_once_many, strips_state_space_once)
     const int num_states = 1000;
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
 
@@ -453,7 +462,7 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     const int fluent_size = 3;
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, fluent_size, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, fluent_size, &err);
     assert(pddlStripsStateSpaceFluentSize(&space) == fluent_size);
     assert(space.num_states == 0);
     assert(space.num_numeric_states == 0);
@@ -544,7 +553,7 @@ TEST(strips_state_space_once_numeric_int_flt, strips_state_space_once)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 1, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 1, &err);
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
 
@@ -600,7 +609,7 @@ TEST(strips_state_space_once_numeric_many, strips_state_space_once)
     const int fluent_size = 2;
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, fluent_size, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, fluent_size, &err);
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
 
@@ -668,7 +677,7 @@ static void accessState(pddl_strips_state_space_t *space,
 static void initSpaceWithTwoStates(pddl_strips_state_space_t *space,
                                    pddl_err_t *err)
 {
-    pddlStripsStateSpaceInit(space, 0, pddl_false, err);
+    pddlStripsStateSpaceInit(space, 0, err);
 
     PDDL_ISET(s0);
     PDDL_ISET(s1);
@@ -699,7 +708,7 @@ TEST_PANIC_ONCE(strips_state_space_get_empty)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
     accessState(&space, 0, 0);
 }
 
@@ -707,7 +716,7 @@ TEST_PANIC_ONCE(strips_state_space_get_no_state_empty)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
     accessState(&space, 1, 0);
 }
 
@@ -715,7 +724,7 @@ TEST_PANIC_ONCE(strips_state_space_set_empty)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
     accessState(&space, 2, 0);
 }
 
@@ -774,7 +783,7 @@ TEST_PANIC_ONCE(strips_state_space_get_num_state_unassigned)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 2, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 2, &err);
     PDDL_ISET(set);
     pddlISetAdd(&set, 0);
     pddl_num_t num[2];
@@ -789,7 +798,7 @@ TEST_PANIC_ONCE(strips_state_space_get_num_state_neg_id)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 2, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 2, &err);
     PDDL_ISET(set);
     pddlISetAdd(&set, 0);
     pddl_num_t num[2];
@@ -815,7 +824,7 @@ TEST_PANIC_ONCE(strips_state_space_insert_null_numeric_state)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 1, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, 1, &err);
     PDDL_ISET(set);
     pddlISetAdd(&set, 0);
     pddlStripsStateSpaceInsert(&space, &set, NULL);
@@ -826,14 +835,14 @@ TEST_PANIC_ONCE(strips_state_space_init_neg_fluent_size)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, -1, pddl_false, &err);
+    pddlStripsStateSpaceInit(&space, -1, &err);
 }
 
 TEST(strips_state_space_once_num_g_value, strips_state_space_once)
 {
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
-    pddlStripsStateSpaceInit(&space, 0, pddl_true, &err);
+    pddlStripsStateSpaceInit(&space, 0, &err);
 
     PDDL_ISET(s0);
     PDDL_ISET(s1);
@@ -850,13 +859,13 @@ TEST(strips_state_space_once_num_g_value, strips_state_space_once)
     pddl_num_t v;
     pddlNumSetInt(&v, -1);
     pddlStripsStateSpaceGetNoState(&space, id0, &node);
-    assert(pddlNumExactEq(&node.g_value.num, &v));
+    assert(pddlNumExactEq(&node.g_value, &v));
 
     // Store a float and an int g-value
-    pddlNumSetFlt(&node.g_value.num, 1.5);
+    pddlNumSetFlt(&node.g_value, 1.5);
     pddlStripsStateSpaceSet(&space, &node);
     pddlStripsStateSpaceGetNoState(&space, id1, &node);
-    pddlNumSetInt(&node.g_value.num, 2);
+    pddlNumSetInt(&node.g_value, 2);
     pddlStripsStateSpaceSet(&space, &node);
 
     // Re-inserting an existing state must not reset its g-value
@@ -866,10 +875,10 @@ TEST(strips_state_space_once_num_g_value, strips_state_space_once)
     // Both values are read back with their types intact
     pddlNumSetFlt(&v, 1.5);
     pddlStripsStateSpaceGetNoState(&space, id0, &node);
-    assert(pddlNumExactEq(&node.g_value.num, &v));
+    assert(pddlNumExactEq(&node.g_value, &v));
     pddlNumSetInt(&v, 2);
     pddlStripsStateSpaceGet(&space, id1, &node);
-    assert(pddlNumExactEq(&node.g_value.num, &v));
+    assert(pddlNumExactEq(&node.g_value, &v));
 
     pddlISetFree(&s0);
     pddlISetFree(&s1);
