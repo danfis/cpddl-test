@@ -98,15 +98,13 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             char num_buf[32];
             switch (eff.cost_type){
             case PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST:
-                printf(" %d", eff.cost.int_action_cost);
+                printf(" %d", eff.cost.val.i);
                 break;
             case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
-                printf(" %s", pddlNumFmt(&eff.cost.general_action_cost,
-                                            num_buf, 32));
+                printf(" %s", pddlNumFmt(&eff.cost, num_buf, 32));
                 break;
             case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
-                printf(" metric:%s", pddlNumFmt(&eff.cost.state_metric,
-                                            num_buf, 32));
+                printf(" metric:%s", pddlNumFmt(&eff.cost, num_buf, 32));
                 break;
             }
             printf("\n");

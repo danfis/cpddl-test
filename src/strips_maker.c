@@ -265,17 +265,14 @@ static void walk(pddl_strips_maker_t *sm,
             char cost_s[128];
             switch (eff.cost_type){
                 case PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST:
-                    assert(eff.cost.int_action_cost >= 0);
-                    snprintf(cost_s, sizeof(cost_s), "%d",
-                             eff.cost.int_action_cost);
+                    assert(eff.cost.val.i >= 0);
+                    snprintf(cost_s, sizeof(cost_s), "%d", eff.cost.val.i);
                     break;
                 case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
-                    pddlNumFmt(&eff.cost.general_action_cost,
-                                  cost_s, sizeof(cost_s));
+                    pddlNumFmt(&eff.cost, cost_s, sizeof(cost_s));
                     break;
                 case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
-                    pddlNumFmt(&eff.cost.state_metric,
-                                  cost_s, sizeof(cost_s));
+                    pddlNumFmt(&eff.cost, cost_s, sizeof(cost_s));
                     break;
             }
 
@@ -1221,7 +1218,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
                                               num_state, &eff, &C.err);
         assert(ret == 0);
         assert(eff.cost_type == PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST);
-        assert(eff.cost.int_action_cost == 1);
+        assert(eff.cost.val.i == 1);
         assert(eff.num_eff_size == num_state_size);
         assert(pddlISetSize(&eff.add_eff) == 0);
         assert(pddlISetSize(&eff.del_eff) == 0);
@@ -1237,7 +1234,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
             }
         }
         printf("eff(increment c0): cost %d (value c0) -> %s\n",
-               eff.cost.int_action_cost,
+               eff.cost.val.i,
                pddlNumFmt(eff.num_eff + touched_idx,
                              buf1, sizeof(buf1)));
 
@@ -1256,7 +1253,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
                                               num_state, &eff, &C.err);
         assert(ret == 0);
         assert(eff.cost_type == PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST);
-        assert(eff.cost.int_action_cost == 1);
+        assert(eff.cost.val.i == 1);
         pddl_num_t exp_val;
         pddlNumSet(&exp_val, num_state + touched_idx);
         pddl_num_t delta;
@@ -1269,7 +1266,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
                 assert(pddlNumCmp(eff.num_eff + i, num_state + i) == 0);
         }
         printf("eff(increment+2 c0): cost %d (value c0) -> %s\n",
-               eff.cost.int_action_cost,
+               eff.cost.val.i,
                pddlNumFmt(eff.num_eff + touched_idx,
                              buf1, sizeof(buf1)));
 
