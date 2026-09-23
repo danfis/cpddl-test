@@ -68,6 +68,7 @@ TESTS += lifted_search
 TESTS += strips_maker
 TESTS += strips_state_space
 TESTS += search
+TESTS += plan
 TESTS += gaifman
 TESTS += set
 TESTS += segmarr
