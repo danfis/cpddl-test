@@ -18,7 +18,8 @@ static void testOptimalSearch(const pddl_search_config_t *cfg)
     if (ret == PDDL_SEARCH_FOUND){
         pddl_plan_t plan;
         pddlPlanInit(&plan);
-        pddlSearchExtractPlan(search, &plan);
+        int eret = pddlSearchExtractPlan(search, &plan);
+        assert(eret == 0);
         printf("Cost: %d\n", plan.cost);
         fflush(stdout);
 
@@ -47,7 +48,8 @@ static void testGreedySearch(const pddl_search_config_t *cfg)
     if (ret == PDDL_SEARCH_FOUND){
         pddl_plan_t plan;
         pddlPlanInit(&plan);
-        pddlSearchExtractPlan(search, &plan);
+        int eret = pddlSearchExtractPlan(search, &plan);
+        assert(eret == 0);
         //printf("Cost: %d\n", plan.cost);
         //fflush(stdout);
 
@@ -64,12 +66,13 @@ static void testGreedySearch(const pddl_search_config_t *cfg)
     pddlSearchDel(search);
 }
 
-static void _search(pddl_heur_t *heur, pddl_search_alg_t search)
+static void _search(pddl_heur_t *heur, pddl_search_alg_t search, int h_weight)
 {
     pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
     cfg.fdr = &C.fdr;
     cfg.alg = search;
     cfg.heur = heur;
+    cfg.h_weight = h_weight;
     if (search == PDDL_SEARCH_ASTAR){
         testOptimalSearch(&cfg);
     }else{
@@ -80,35 +83,40 @@ static void _search(pddl_heur_t *heur, pddl_search_alg_t search)
 
 TEST(search_blind, search)
 {
-    _search(pddlHeurBlind(), PDDL_SEARCH_ASTAR);
+    _search(pddlHeurBlind(), PDDL_SEARCH_ASTAR, 1);
 }
 
 TEST(search_astar_hmax, search)
 {
-    _search(pddlHeurHMax(&C.fdr, &C.err), PDDL_SEARCH_ASTAR);
+    _search(pddlHeurHMax(&C.fdr, &C.err), PDDL_SEARCH_ASTAR, 1);
 }
 
 TEST(search_astar_lmc, search)
 {
-    _search(pddlHeurLMCut(&C.fdr, &C.err), PDDL_SEARCH_ASTAR);
+    _search(pddlHeurLMCut(&C.fdr, &C.err), PDDL_SEARCH_ASTAR, 1);
 }
 
 TEST(search_gbfs_ff, search)
 {
-    _search(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_GBFS);
+    _search(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_GBFS, 1);
 }
 
 TEST(search_lazy_ff, search)
 {
-    _search(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_LAZY);
+    _search(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_LAZY, 1);
 }
 
 TEST(search_gbfs_add, search)
 {
-    _search(pddlHeurHAdd(&C.fdr, &C.err), PDDL_SEARCH_GBFS);
+    _search(pddlHeurHAdd(&C.fdr, &C.err), PDDL_SEARCH_GBFS, 1);
 }
 
 TEST(search_lazy_add, search)
 {
-    _search(pddlHeurHAdd(&C.fdr, &C.err), PDDL_SEARCH_LAZY);
+    _search(pddlHeurHAdd(&C.fdr, &C.err), PDDL_SEARCH_LAZY, 1);
+}
+
+TEST(search_wastar_ff, search)
+{
+    _search(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_WEIGHTED_ASTAR, 2);
 }
