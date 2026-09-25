@@ -113,7 +113,7 @@ static pddl_state_id_t taskAddState(task_t *t,
     assert(is_new);
     pddlFDRStateSpaceGetNoState(&t->space, id, &t->node);
     t->node.parent_id = parent_id;
-    t->node.g_value = g;
+    pddlNumSetInt(&t->node.g_value, g);
     pddlFDRStateSpaceSet(&t->space, &t->node);
     return id;
 }
@@ -245,9 +245,9 @@ TEST_ONCE(plan_backtrack_cost_from_ops)
     assertPlanOps(&plan, (int[]){ 0, 1 }, 2);
     assert(plan.cost == 7);
 
-    // The same with an unset goal g-value
+    // The same with a negative goal g-value
     pddlFDRStateSpaceGetNoState(&t.space, s2, &t.node);
-    t.node.g_value = -1;
+    pddlNumSetInt(&t.node.g_value, -1);
     pddlFDRStateSpaceSet(&t.space, &t.node);
     pddlPlanLoadBacktrack(&plan, s2, &t.space, &t.app_op);
     assertPlanOps(&plan, (int[]){ 0, 1 }, 2);
