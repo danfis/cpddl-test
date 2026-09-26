@@ -368,7 +368,7 @@ TEST_ONCE(fdr_state_pool_stat)
     assert(stat.segments >= 1);
     assert(stat.states_bytes == stat.segments * sp->pool->arr.segm_size);
     assert(stat.states_bytes >= stat.num_states * stat.packed_state_size);
-    assert(stat.htable_buckets == 786433);
+    assert(stat.htable_buckets == 1024);
     assert(stat.htable_max_bucket_size >= 1);
     assert(stat.htable_bytes >= stat.htable_buckets);
 
@@ -377,6 +377,52 @@ TEST_ONCE(fdr_state_pool_stat)
     pddl_state_id_t id = pddlFDRStateSpaceInsert(&s.space, state, &is_new);
     assert(!is_new);
     assert(id == 1);
+    pddl_fdr_state_pool_stat_t stat2;
+    pddlFDRStatePoolStat(sp, &stat2);
+    assertStatePoolStatEq(&stat, &stat2);
+
+    spaceFree(&s);
+}
+
+/*
+ * The hash table of the state pool starts with 1024 buckets and doubles its
+ * size whenever the load exceeds 2; the resizing neither loses nor
+ * duplicates any state, and the stored states are unchanged.
+ */
+TEST_ONCE(fdr_state_pool_resize)
+{
+    space_t s;
+    spaceInit(&s);
+    const pddl_fdr_state_pool_t *sp = &s.space.state_pool;
+    const int num = 10000;
+
+    pddl_fdr_state_pool_stat_t stat;
+    spaceInsertN(&s, 2048);
+    pddlFDRStatePoolStat(sp, &stat);
+    assert(stat.htable_buckets == 1024);
+    spaceInsert(&s, 2048);
+    pddlFDRStatePoolStat(sp, &stat);
+    assert(stat.htable_buckets == 2048);
+
+    for (int i = 2049; i < num; ++i)
+        spaceInsert(&s, i);
+    pddlFDRStatePoolStat(sp, &stat);
+    assert(stat.num_states == (size_t)num);
+    assert(stat.htable_buckets == 8192);
+    assert(stat.htable_max_bucket_size >= 1);
+    assert(stat.htable_bytes >= stat.htable_buckets);
+
+    for (int i = 0; i < num; ++i){
+        int state[2] = { i % VAL_SIZE, i / VAL_SIZE };
+        pddl_bool_t is_new;
+        pddl_state_id_t id = pddlFDRStateSpaceInsert(&s.space, state, &is_new);
+        assert(!is_new);
+        assert(id == (pddl_state_id_t)i);
+
+        pddlFDRStateSpaceGet(&s.space, id, &s.node);
+        assert(s.node.state[0] == state[0] && s.node.state[1] == state[1]);
+    }
+
     pddl_fdr_state_pool_stat_t stat2;
     pddlFDRStatePoolStat(sp, &stat2);
     assertStatePoolStatEq(&stat, &stat2);
