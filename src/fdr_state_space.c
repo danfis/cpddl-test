@@ -368,7 +368,7 @@ TEST_ONCE(fdr_state_pool_stat)
     assert(stat.segments >= 1);
     assert(stat.states_bytes == stat.segments * sp->pool->arr.segm_size);
     assert(stat.states_bytes >= stat.num_states * stat.packed_state_size);
-    assert(stat.htable_buckets == 1024);
+    assert(stat.htable_buckets == 4096);
     assert(stat.htable_max_bucket_size >= 1);
     assert(stat.htable_bytes >= stat.htable_buckets);
 
@@ -385,7 +385,7 @@ TEST_ONCE(fdr_state_pool_stat)
 }
 
 /*
- * The hash table of the state pool starts with 1024 buckets and doubles its
+ * The hash table of the state pool starts with 4096 buckets and doubles its
  * size whenever the load exceeds 2; the resizing neither loses nor
  * duplicates any state, and the stored states are unchanged.
  */
@@ -394,21 +394,21 @@ TEST_ONCE(fdr_state_pool_resize)
     space_t s;
     spaceInit(&s);
     const pddl_fdr_state_pool_t *sp = &s.space.state_pool;
-    const int num = 10000;
+    const int num = 40000;
 
     pddl_fdr_state_pool_stat_t stat;
-    spaceInsertN(&s, 2048);
+    spaceInsertN(&s, 8192);
     pddlFDRStatePoolStat(sp, &stat);
-    assert(stat.htable_buckets == 1024);
-    spaceInsert(&s, 2048);
+    assert(stat.htable_buckets == 4096);
+    spaceInsert(&s, 8192);
     pddlFDRStatePoolStat(sp, &stat);
-    assert(stat.htable_buckets == 2048);
+    assert(stat.htable_buckets == 8192);
 
-    for (int i = 2049; i < num; ++i)
+    for (int i = 8193; i < num; ++i)
         spaceInsert(&s, i);
     pddlFDRStatePoolStat(sp, &stat);
     assert(stat.num_states == (size_t)num);
-    assert(stat.htable_buckets == 8192);
+    assert(stat.htable_buckets == 32768);
     assert(stat.htable_max_bucket_size >= 1);
     assert(stat.htable_bytes >= stat.htable_buckets);
 
