@@ -329,36 +329,57 @@ TEST_ONCE(fdr_state_space_node_segm_inherit)
     spaceFree(&s);
 }
 
+/** Asserts that the two state pool statistics are equal */
+static void assertStatePoolStatEq(const pddl_fdr_state_pool_stat_t *a,
+                                  const pddl_fdr_state_pool_stat_t *b)
+{
+    assert(a->num_states == b->num_states);
+    assert(a->packed_state_size == b->packed_state_size);
+    assert(a->segments == b->segments);
+    assert(a->states_bytes == b->states_bytes);
+    assert(a->htable_buckets == b->htable_buckets);
+    assert(a->htable_overflow_buckets == b->htable_overflow_buckets);
+    assert(a->htable_max_bucket_size == b->htable_max_bucket_size);
+    assert(a->htable_bytes == b->htable_bytes);
+}
+
 /*
- * Statistics of the node pool report the number of nodes, the number of
- * segments of each type, and the memory allocated for the segments.
+ * Statistics of the state pool count the stored states and the memory
+ * allocated for them and for the hash table, and re-inserting an already
+ * stored state does not change them.
  */
-TEST_ONCE(fdr_state_space_log_stats)
+TEST_ONCE(fdr_state_pool_stat)
 {
     space_t s;
     spaceInit(&s);
-    setKeptNodes(&s);
-    nodeSetInt(&s, 3, pddl_false, 1, 1000);
-    assert(segmType(&s, 0) == INT);
+    const pddl_fdr_state_pool_t *sp = &s.space.state_pool;
 
-    FILE *fout = tmpfile();
-    assert(fout != NULL);
-    pddlErrLogEnable(&s.err, fout);
-    pddlFDRStateSpaceLogStats(&s.space, &s.err);
-    pddlErrFlush(&s.err);
+    pddl_fdr_state_pool_stat_t stat;
+    pddlFDRStatePoolStat(sp, &stat);
+    assert(stat.num_states == 0);
+    assert(stat.htable_overflow_buckets == 0);
+    assert(stat.htable_max_bucket_size == 0);
 
-    char buf[1024];
-    rewind(fout);
-    size_t len = fread(buf, 1, sizeof(buf) - 1, fout);
-    buf[len] = 0;
-    fclose(fout);
+    spaceInsertN(&s, 1000);
+    pddlFDRStatePoolStat(sp, &stat);
+    assert(stat.num_states == 1000);
+    assert(stat.packed_state_size
+            == (size_t)pddlFDRStatePackerBufSize(&sp->packer));
+    assert(stat.segments >= 1);
+    assert(stat.states_bytes == stat.segments * sp->pool->arr.segm_size);
+    assert(stat.states_bytes >= stat.num_states * stat.packed_state_size);
+    assert(stat.htable_buckets == 786433);
+    assert(stat.htable_max_bucket_size >= 1);
+    assert(stat.htable_bytes >= stat.htable_buckets);
 
-    size_t alloc = pddlFDRStateSpaceNodesPerSegment(&s.space) * 8;
-    char expected[128];
-    snprintf(expected, sizeof(expected), "allocated: %lu bytes",
-             (unsigned long)alloc);
-    assert(strstr(buf, "Node pool: nodes: 4,") != NULL);
-    assert(strstr(buf, "segments: 1 (small: 0, int: 1, num: 0)") != NULL);
-    assert(strstr(buf, expected) != NULL);
+    int state[2] = { 1, 0 };
+    pddl_bool_t is_new;
+    pddl_state_id_t id = pddlFDRStateSpaceInsert(&s.space, state, &is_new);
+    assert(!is_new);
+    assert(id == 1);
+    pddl_fdr_state_pool_stat_t stat2;
+    pddlFDRStatePoolStat(sp, &stat2);
+    assertStatePoolStatEq(&stat, &stat2);
+
     spaceFree(&s);
 }

@@ -10,15 +10,16 @@ static void testOptimalSearch(const pddl_search_config_t *cfg)
 {
     pddl_search_t *search;
     search = pddlSearchNew(cfg, &C.err);
-    int ret = pddlSearchInitStep(search);
+    int ret = pddlSearchInitStep(search, &C.err);
     assert(ret != PDDL_SEARCH_ABORT);
     while (ret == PDDL_SEARCH_CONT){
-        ret = pddlSearchStep(search);
+        ret = pddlSearchStep(search, &C.err);
     }
+    pddlSearchLogFullStats(search, &C.err);
     if (ret == PDDL_SEARCH_FOUND){
         pddl_plan_t plan;
         pddlPlanInit(&plan);
-        int eret = pddlSearchExtractPlan(search, &plan);
+        int eret = pddlSearchExtractPlan(search, &plan, &C.err);
         assert(eret == 0);
         printf("Cost: %d\n", plan.cost);
         fflush(stdout);
@@ -40,15 +41,16 @@ static void testGreedySearch(const pddl_search_config_t *cfg)
 {
     pddl_search_t *search;
     search = pddlSearchNew(cfg, &C.err);
-    int ret = pddlSearchInitStep(search);
+    int ret = pddlSearchInitStep(search, &C.err);
     assert(ret != PDDL_SEARCH_ABORT);
     while (ret == PDDL_SEARCH_CONT){
-        ret = pddlSearchStep(search);
+        ret = pddlSearchStep(search, &C.err);
     }
+    pddlSearchLogFullStats(search, &C.err);
     if (ret == PDDL_SEARCH_FOUND){
         pddl_plan_t plan;
         pddlPlanInit(&plan);
-        int eret = pddlSearchExtractPlan(search, &plan);
+        int eret = pddlSearchExtractPlan(search, &plan, &C.err);
         assert(eret == 0);
         //printf("Cost: %d\n", plan.cost);
         //fflush(stdout);
