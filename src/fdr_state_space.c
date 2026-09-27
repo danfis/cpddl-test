@@ -386,7 +386,7 @@ TEST_ONCE(fdr_state_pool_stat)
 
 /*
  * The hash table of the state pool starts with 4096 buckets and doubles its
- * size whenever the load exceeds 2; the resizing neither loses nor
+ * size whenever the load would reach 2; the resizing neither loses nor
  * duplicates any state, and the stored states are unchanged.
  */
 TEST_ONCE(fdr_state_pool_resize)
@@ -397,14 +397,14 @@ TEST_ONCE(fdr_state_pool_resize)
     const int num = 40000;
 
     pddl_fdr_state_pool_stat_t stat;
-    spaceInsertN(&s, 8192);
+    spaceInsertN(&s, 8191);
     pddlFDRStatePoolStat(sp, &stat);
     assert(stat.htable_buckets == 4096);
-    spaceInsert(&s, 8192);
+    spaceInsert(&s, 8191);
     pddlFDRStatePoolStat(sp, &stat);
     assert(stat.htable_buckets == 8192);
 
-    for (int i = 8193; i < num; ++i)
+    for (int i = 8192; i < num; ++i)
         spaceInsert(&s, i);
     pddlFDRStatePoolStat(sp, &stat);
     assert(stat.num_states == (size_t)num);
