@@ -17,6 +17,7 @@
 #include "test.h"
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 /** Segment types; these must mirror NODE_*_TYPE in src/fdr_state_space.c */
@@ -366,7 +367,8 @@ TEST_ONCE(fdr_state_pool_stat)
     assert(stat.packed_state_size
             == (size_t)pddlFDRStatePackerBufSize(&sp->packer));
     assert(stat.segments >= 1);
-    assert(stat.states_bytes == stat.segments * sp->pool->arr.segm_size);
+    assert(stat.states_bytes
+            == stat.segments * (sp->states.state_size << sp->states.segm_shift));
     assert(stat.states_bytes >= stat.num_states * stat.packed_state_size);
     assert(stat.htable_buckets == 4096);
     assert(stat.htable_max_bucket_size >= 1);
@@ -382,6 +384,76 @@ TEST_ONCE(fdr_state_pool_stat)
     assertStatePoolStatEq(&stat, &stat2);
 
     spaceFree(&s);
+}
+
+/** Sets STATE to the I-th state of fdr_state_pool_segments: the first 8
+ *  variables encode I, the others are derived from I and the variable */
+static void segmState(int *state, int num_vars, int i)
+{
+    for (int var = 0; var < num_vars; ++var){
+        if (var < 8){
+            state[var] = (i >> (4 * var)) & 15;
+        }else{
+            state[var] = (i * 7 + var) % 16;
+        }
+    }
+}
+
+/*
+ * Packed states are stored in segments of 2^K states: states of 4096 bytes
+ * are stored 1024 per segment (4 MB), segments are allocated only as
+ * needed, and the states on the segment boundaries are stored and
+ * retrieved correctly.
+ */
+TEST_ONCE(fdr_state_pool_segments)
+{
+    // 8 variables with 16 values are packed in each 32-bit word
+    const int num_vars = 8192;
+    const int num = 2 * 1024 + 500;
+    pddl_err_t err;
+    pddlErrInit(&err);
+    pddl_fdr_vars_t vars;
+    memset(&vars, 0, sizeof(vars));
+    for (int var = 0; var < num_vars; ++var)
+        pddlFDRVarsAdd(&vars, 16);
+
+    pddl_fdr_state_pool_t sp;
+    pddlFDRStatePoolInit(&sp, &vars, &err);
+    assert(sp.states.state_size == 4096);
+    assert(sp.states.segm_shift == 10);
+    assert(sp.states.segm_mask == 1023);
+    assert(sp.states.num_segm == 0);
+
+    int *state = calloc(num_vars, sizeof(int));
+    int *state2 = calloc(num_vars, sizeof(int));
+    pddl_fdr_state_pool_stat_t stat;
+    for (int i = 0; i < num; ++i){
+        segmState(state, num_vars, i);
+        pddl_state_id_t id = pddlFDRStatePoolInsert(&sp, state);
+        assert(id == (pddl_state_id_t)i);
+        pddlFDRStatePoolStat(&sp, &stat);
+        assert(stat.segments == (size_t)(i / 1024 + 1));
+        assert(stat.states_bytes == stat.segments * (4096ul << 10));
+    }
+
+    for (int i = 0; i < num; ++i){
+        segmState(state, num_vars, i);
+        pddl_state_id_t id = pddlFDRStatePoolInsert(&sp, state);
+        assert(id == (pddl_state_id_t)i);
+        pddlFDRStatePoolGet(&sp, id, state2);
+        assert(memcmp(state, state2, sizeof(int) * num_vars) == 0);
+    }
+
+    pddl_fdr_state_pool_stat_t stat2;
+    pddlFDRStatePoolStat(&sp, &stat2);
+    assert(stat2.num_states == (size_t)num);
+    assert(stat2.segments == 3);
+    assertStatePoolStatEq(&stat, &stat2);
+
+    free(state);
+    free(state2);
+    pddlFDRStatePoolFree(&sp);
+    pddlFDRVarsFree(&vars);
 }
 
 /*
