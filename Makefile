@@ -74,6 +74,7 @@ TESTS += gaifman
 TESTS += set
 TESTS += segmarr
 TESTS += extarr
+TESTS += segvec
 TESTS += splaytree
 TESTS += open_list
 TESTS += opts
