@@ -257,6 +257,72 @@ TEST_ONCE(segvec_push_pop_top)
     }
 }
 
+/* Checks pddlSegVecPopN() for one layout. */
+static void checkPopN(pddl_bool_t exp, int first_segm_size)
+{
+    int init = -1;
+    pddl_segvec_t sv;
+    pddlSegVecInitDefault(&sv, sizeof(int), exp, first_segm_size,
+                          &init, NULL, NULL);
+
+    // popping nothing from an empty vector is fine
+    assert(pddlSegVecPopN(&sv, 0) == 0);
+
+    const int size = 3000;
+    fillInts(&sv, size);
+    size_t capacity = pddlSegVecCapacity(&sv);
+    int num_segm = pddlSegVecNumSegments(&sv);
+
+    assert(pddlSegVecPopN(&sv, 0) == size);
+    assert(pddlSegVecSize(&sv) == size);
+
+    // pop across segment boundaries
+    int cur = size;
+    const int steps[] = { 1, 7, 100, 1000 };
+    for (int si = 0; si < (int)(sizeof(steps) / sizeof(steps[0])); ++si){
+        cur -= steps[si];
+        int new_size = pddlSegVecPopN(&sv, steps[si]);
+        assert(new_size == cur);
+        assert(pddlSegVecSize(&sv) == cur);
+        assert(pddlSegVecGetConst(&sv, cur) == NULL);
+        assert(*(const int *)pddlSegVecTop(&sv) == cur - 1);
+        checkInts(&sv, cur);
+    }
+    // the memory is kept
+    assert(pddlSegVecCapacity(&sv) == capacity);
+    assert(pddlSegVecNumSegments(&sv) == num_segm);
+
+    // the removed elements are initialized again
+    int *el = pddlSegVecPush(&sv, NULL);
+    assert(*el == -1);
+    el = pddlSegVecGet(&sv, cur + 10);
+    assert(*el == -1);
+    for (int i = cur; i <= cur + 10; ++i)
+        assert(*(const int *)pddlSegVecGetConst(&sv, i) == -1);
+    checkInts(&sv, cur);
+
+    // pop everything
+    assert(pddlSegVecPopN(&sv, pddlSegVecSize(&sv)) == 0);
+    assert(pddlSegVecSize(&sv) == 0);
+    assert(pddlSegVecTop(&sv) == NULL);
+    assert(pddlSegVecCapacity(&sv) == capacity);
+
+    pddlSegVecFree(&sv);
+}
+
+/*
+ * PopN removes the given number of elements from the end (zero does
+ * nothing), keeps the memory, and the removed elements are initialized
+ * again when they become part of the vector again.
+ */
+TEST_ONCE(segvec_pop_n)
+{
+    for (int bi = 0; bi < NUM_FIRST_SEGM_SIZES; ++bi){
+        checkPopN(pddl_false, first_segm_sizes[bi]);
+        checkPopN(pddl_true, first_segm_sizes[bi]);
+    }
+}
+
 /*
  * pddlSegVecGet() past the end extends the vector, pddlSegVecGetConst()
  * returns NULL past the end and the same pointer as pddlSegVecGet() within.
@@ -628,4 +694,23 @@ TEST_PANIC_ONCE(segvec_panic_negative_idx)
     pddlSegVecInit(&sv, sizeof(int), pddl_true, 8);
     (void)pddlSegVecGet(&sv, 3);
     (void)pddlSegVecGet(&sv, -1);
+}
+
+/* Popping more elements than the vector holds panics. */
+TEST_PANIC_ONCE(segvec_panic_pop_n_too_many)
+{
+    pddl_segvec_t sv;
+    pddlSegVecInit(&sv, sizeof(int), pddl_false, 8);
+    (void)pddlSegVecPush(&sv, NULL);
+    (void)pddlSegVecPush(&sv, NULL);
+    pddlSegVecPopN(&sv, 3);
+}
+
+/* Popping a negative number of elements panics. */
+TEST_PANIC_ONCE(segvec_panic_pop_n_negative)
+{
+    pddl_segvec_t sv;
+    pddlSegVecInit(&sv, sizeof(int), pddl_true, 8);
+    (void)pddlSegVecPush(&sv, NULL);
+    pddlSegVecPopN(&sv, -1);
 }
