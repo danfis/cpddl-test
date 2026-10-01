@@ -533,7 +533,7 @@ TEST(strips_maker_init, strips_maker)
                 = pddlGroundAtomsFindAtom(&sm.fluent, fluent, NULL);
         assert(ga != NULL);
         const pddl_fluent_data_t *fd
-                = pddlExtArrGet(sm.fluent_data, ga->id);
+                = pddlSegVecGetConst(&sm.fluent_data, ga->id);
         assert(pddlNumCmp(&fd->init_val, &val) == 0);
         ++num_fluents;
     }
@@ -542,7 +542,7 @@ TEST(strips_maker_init, strips_maker)
     // The fluents are ordered by their types: static fluents first, then
     // the action-cost fluent, then the non-static fluents
     for (int i = 0; i < sm.fluent.atom_size; ++i){
-        const pddl_fluent_data_t *fd = pddlExtArrGet(sm.fluent_data, i);
+        const pddl_fluent_data_t *fd = pddlSegVecGetConst(&sm.fluent_data, i);
         if (i < sm.num_static_fluent){
             assert(fd->type == PDDL_STRIPS_MAKER_FLUENT_STATIC);
         }else if (sm.has_action_cost_fluent && i == sm.num_static_fluent){
@@ -567,7 +567,7 @@ TEST(strips_maker_init, strips_maker)
         int offset = pddlStripsMakerNonStaticFluentOffset(&sm);
         for (int i = 0; i < num_state_size; ++i){
             const pddl_fluent_data_t *fd
-                    = pddlExtArrGet(sm.fluent_data, offset + i);
+                    = pddlSegVecGetConst(&sm.fluent_data, offset + i);
             assert(pddlNumCmp(num_state + i, &fd->init_val) == 0);
         }
         free(num_state);
@@ -813,7 +813,7 @@ TEST(strips_maker_numeric, pddl)
 
     // The fluents are ordered by their types
     for (int i = 0; i < sm.fluent.atom_size; ++i){
-        const pddl_fluent_data_t *fd = pddlExtArrGet(sm.fluent_data, i);
+        const pddl_fluent_data_t *fd = pddlSegVecGetConst(&sm.fluent_data, i);
         if (i < sm.num_static_fluent){
             assert(fd->type == PDDL_STRIPS_MAKER_FLUENT_STATIC);
         }else if (sm.has_action_cost_fluent && i == sm.num_static_fluent){
@@ -836,7 +836,7 @@ TEST(strips_maker_numeric, pddl)
         pddlStripsMakerInitNumState(&sm, num_state);
         for (int i = 0; i < num_state_size; ++i){
             const pddl_fluent_data_t *fd
-                    = pddlExtArrGet(sm.fluent_data, offset + i);
+                    = pddlSegVecGetConst(&sm.fluent_data, offset + i);
             assert(pddlNumCmp(num_state + i, &fd->init_val) == 0);
         }
     }
@@ -895,7 +895,7 @@ static void dumpInitFluents(const char *header,
         for (int i = 0; i < num; ++i){
             const pddl_ground_atom_t *ga = sm.fluent.atom[i];
             const pddl_fluent_data_t *fd
-                    = pddlExtArrGet(sm.fluent_data, ga->id);
+                    = pddlSegVecGetConst(&sm.fluent_data, ga->id);
             char type = '?';
             switch (fd->type){
                 case PDDL_STRIPS_MAKER_FLUENT_STATIC:
@@ -949,7 +949,7 @@ TEST(strips_maker_once_fluents, strips_maker_once)
 
     // The fluents are stored in the order of their types
     for (int i = 0; i < sm.fluent.atom_size; ++i){
-        const pddl_fluent_data_t *fd = pddlExtArrGet(sm.fluent_data, i);
+        const pddl_fluent_data_t *fd = pddlSegVecGetConst(&sm.fluent_data, i);
         if (i < sm.num_static_fluent){
             assert(fd->type == PDDL_STRIPS_MAKER_FLUENT_STATIC);
         }else if (sm.has_action_cost_fluent && i == sm.num_static_fluent){
@@ -969,7 +969,7 @@ TEST(strips_maker_once_fluents, strips_maker_once)
         pddlStripsMakerInitNumState(&sm, num_state);
         for (int i = 0; i < num_state_size; ++i){
             const pddl_fluent_data_t *fd
-                    = pddlExtArrGet(sm.fluent_data, offset + i);
+                    = pddlSegVecGetConst(&sm.fluent_data, offset + i);
             assert(pddlNumCmp(num_state + i, &fd->init_val) == 0);
         }
         free(num_state);
