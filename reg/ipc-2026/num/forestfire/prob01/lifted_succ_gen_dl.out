@@ -1,0 +1,60 @@
+Step 0 (at bot1 grass1_1) (at axe1 grass1_1)
+size: 6
+move-grass bot1 grass1_1 grass2_1 :: cost: 1
+    add: (at bot1 grass2_1)
+    del: (at bot1 grass1_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+move-grass bot1 grass1_1 bushes1_2 :: cost: 1
+    add: (at bot1 bushes1_2)
+    del: (at bot1 grass1_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+fill-water bot1 grass1_1 :: cost: 1
+    add:
+    del:
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 1 3
+pick-ax bot1 axe1 grass1_1 :: cost: 1
+    add: (has bot1 axe1)
+    del: (at axe1 grass1_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+Step 1 (at axe1 grass1_1) (at bot1 grass2_1)
+size: 5
+move-grass bot1 grass2_1 grass1_1 :: cost: 1
+    add: (at bot1 grass1_1)
+    del: (at bot1 grass2_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+move-grass bot1 grass2_1 grass3_1 :: cost: 1
+    add: (at bot1 grass3_1)
+    del: (at bot1 grass2_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+move-grass bot1 grass2_1 grass2_2 :: cost: 1
+    add: (at bot1 grass2_2)
+    del: (at bot1 grass2_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+Step 2 (at axe1 grass1_1) (at bot1 grass3_1)
+size: 5
+move-grass bot1 grass3_1 grass2_1 :: cost: 1
+    add: (at bot1 grass2_1)
+    del: (at bot1 grass3_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+move-grass bot1 grass3_1 bushes3_2 :: cost: 1
+    add: (at bot1 bushes3_2)
+    del: (at bot1 grass3_1)
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 0 3
+fill-water bot1 grass3_1 :: cost: 1
+    add:
+    del:
+    num: 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 5 1 3
+Step 3
+size: 1
+Step 4
+size: 1
+Step 5
+size: 1
+Step 6
+size: 1
+Step 7
+size: 1
+Step 8
+size: 1
+Step 9
+size: 1

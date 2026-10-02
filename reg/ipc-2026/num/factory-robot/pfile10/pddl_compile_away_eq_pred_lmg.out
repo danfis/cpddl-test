@@ -1,0 +1,26 @@
+Require:
+  - :equality
+Predicate:
+  + (equal object object)
+Action:
+  - move: ?r - robot ?s1 - station ?s2 - station
+      pre: (and (>= (energy ?r) 5) (at ?r ?s1) (connected ?s1 ?s2) (free ?s2) (not (= ?s1 ?s2)))
+      eff: (and (at ?r ?s2) (decrease (energy ?r) 5) (free ?s1) (not (at ?r ?s1)) (not (free ?s2)))
+  + move: ?r - robot ?s1 - station ?s2 - station
+      pre: (and (>= (energy ?r) 5) (at ?r ?s1) (connected ?s1 ?s2) (free ?s2) (not (equal ?s1 ?s2)))
+      eff: (and (at ?r ?s2) (decrease (energy ?r) 5) (free ?s1) (not (at ?r ?s1)) (not (free ?s2)))
+Init:
+  + (equal assembly0 assembly0)
+  + (equal assembly1 assembly1)
+  + (equal assembly2 assembly2)
+  + (equal assembly3 assembly3)
+  + (equal assembly4 assembly4)
+  + (equal assembly5 assembly5)
+  + (equal assembly6 assembly6)
+  + (equal charging charging)
+  + (equal cooling cooling)
+Pred prop:
+  - (= object object): in_pre in_pre_neg
+  + (equal object object): in_init in_pre in_pre_neg
+Global prop:
+  - has_eq_pred

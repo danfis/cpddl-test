@@ -1,0 +1,37 @@
+Domain: num-float-coef
+Problem: num-float-coef-01
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  farm - object
+  object
+Obj:
+  f0 - farm
+  f1 - farm
+Predicate:
+  (= object object) :eq
+  (adj farm farm)
+Function:
+  (x farm)
+Action:
+  move: ?f1 - farm ?f2 - farm
+      pre: (and (>= (x ?f1) 1) (adj ?f1 ?f2))
+      eff: (and (decrease (x ?f1) 1) (increase (x ?f2) 4))
+Init:
+  (= (x f0) 2.5)
+  (= (x f1) 1)
+  (adj f0 f1)
+  (adj f1 f0)
+Goal:
+  (>= (+ (* 1 (x f0)) (* 1.7 (x f1))) 8.4)
+Metric:
+Pred prop:
+  (adj farm farm): in_init in_pre
+Func prop:
+  (x farm): in_init init_all_nonneg in_pre in_goal in_eff
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

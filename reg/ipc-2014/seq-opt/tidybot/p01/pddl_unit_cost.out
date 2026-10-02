@@ -1,272 +1,171 @@
 Domain: tidybot
 Problem: test
-Require: 97
-Type[7]:
-    [0]: object, parent: -1
-    [1]: robot, parent: 0
-    [2]: cart, parent: 0
-    [3]: xc, parent: 0
-    [4]: yc, parent: 0
-    [5]: xrel, parent: 0
-    [6]: yrel, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
-    [1]: 0
-    [2]: 1
-    [3]: 6 7 8 9 10 11 12 13 14
-    [4]: 15 16 17 18 19 20 21 22 23
-    [5]: 24 25 26
-    [6]: 27 28 29
-Obj[30]:
-    [0]: pr2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: cart, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: object0, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: object1, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: object2, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: object3, type: 0, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: x0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: x1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: x2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: x3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: x4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: x5, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: x6, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: x7, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: x8, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: y0, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: y1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: y2, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: y3, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: y4, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: y5, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: y6, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: y7, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: y8, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: xrel-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: xrel0, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [26]: xrel1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [27]: yrel-1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [28]: yrel0, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [29]: yrel1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[27]:
-    =: 0 0 :: read: 1, write: 0, in-init: 0
-    leftof: 3 3 :: read: 1, write: 0, in-init: 1
-    above: 4 4 :: read: 1, write: 0, in-init: 1
-    leftof-rel: 5 5 :: read: 1, write: 0, in-init: 1
-    above-rel: 6 6 :: read: 1, write: 0, in-init: 1
-    sum-x: 3 5 3 :: read: 1, write: 0, in-init: 1
-    sum-y: 4 6 4 :: read: 1, write: 0, in-init: 1
-    zerox-rel: 5 :: read: 1, write: 0, in-init: 1
-    zeroy-rel: 6 :: read: 1, write: 0, in-init: 1
-    object-goal: 0 3 4 :: read: 1, write: 0, in-init: 1
-    parked: 1 :: read: 1, write: 1, in-init: 1, neg-of: NOT-parked
-    base-pos: 1 3 4 :: read: 1, write: 1, in-init: 1
-    object-pos: 0 3 4 :: read: 1, write: 1, in-init: 1
-    object-done: 0 :: read: 1, write: 1, in-init: 0, neg-of: NOT-object-done
-    surface: 3 4 :: read: 1, write: 0, in-init: 1
-    holding: 1 0 :: read: 1, write: 1, in-init: 0
-    gripper-empty: 1 :: read: 1, write: 1, in-init: 1
-    gripper-rel: 1 5 6 :: read: 1, write: 1, in-init: 1
-    pushing: 1 2 :: read: 1, write: 1, in-init: 0
-    not-pushing: 1 :: read: 1, write: 1, in-init: 1
-    not-pushed: 2 :: read: 1, write: 1, in-init: 1
-    cart-pos: 2 3 4 :: read: 1, write: 1, in-init: 1
-    on-cart: 0 2 :: read: 1, write: 1, in-init: 0
-    NOT-parked: 1 :: read: 1, write: 1, in-init: 0, neg-of: parked
-    NOT-base-obstacle: 3 4 :: read: 1, write: 1, in-init: 1
-    NOT-object-done: 0 :: read: 1, write: 1, in-init: 1, neg-of: object-done
-    NOT-gripper-obstacle: 3 4 :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[30]:
-    unpark: ?r:1 ?x:5 ?y:6
-        pre: (and (R:zerox-rel ?x) (R:zeroy-rel ?y) (RW:parked ?r) (RW:gripper-rel ?r ?x ?y))
-        eff: (and (N:RW:parked ?r) (RW:NOT-parked ?r))
-    park: ?r:1
-        pre: (and (RW:not-pushing ?r) (RW:NOT-parked ?r))
-        eff: (and (RW:parked ?r) (N:RW:NOT-parked ?r))
-    base-left: ?r:1 ?cx:3 ?dx:3 ?y:4
-        pre: (and (R:leftof ?dx ?cx) (RW:base-pos ?r ?cx ?y) (RW:not-pushing ?r) (RW:NOT-parked ?r) (RW:NOT-base-obstacle ?dx ?y))
-        eff: (and (N:RW:base-pos ?r ?cx ?y) (RW:base-pos ?r ?dx ?y) (N:RW:NOT-base-obstacle ?dx ?y) (when (N:R:= ?cx ?dx) (RW:NOT-base-obstacle ?cx ?y)))
-    base-right: ?r:1 ?cx:3 ?dx:3 ?y:4
-        pre: (and (R:leftof ?cx ?dx) (RW:base-pos ?r ?cx ?y) (RW:not-pushing ?r) (RW:NOT-parked ?r) (RW:NOT-base-obstacle ?dx ?y))
-        eff: (and (N:RW:base-pos ?r ?cx ?y) (RW:base-pos ?r ?dx ?y) (N:RW:NOT-base-obstacle ?dx ?y) (when (N:R:= ?cx ?dx) (RW:NOT-base-obstacle ?cx ?y)))
-    base-up: ?r:1 ?x:3 ?cy:4 ?dy:4
-        pre: (and (R:above ?dy ?cy) (RW:base-pos ?r ?x ?cy) (RW:not-pushing ?r) (RW:NOT-parked ?r) (RW:NOT-base-obstacle ?x ?dy))
-        eff: (and (N:RW:base-pos ?r ?x ?cy) (RW:base-pos ?r ?x ?dy) (N:RW:NOT-base-obstacle ?x ?dy) (when (N:R:= ?cy ?dy) (RW:NOT-base-obstacle ?x ?cy)))
-    base-down: ?r:1 ?x:3 ?cy:4 ?dy:4
-        pre: (and (R:above ?cy ?dy) (RW:base-pos ?r ?x ?cy) (RW:not-pushing ?r) (RW:NOT-parked ?r) (RW:NOT-base-obstacle ?x ?dy))
-        eff: (and (N:RW:base-pos ?r ?x ?cy) (RW:base-pos ?r ?x ?dy) (N:RW:NOT-base-obstacle ?x ?dy) (when (N:R:= ?cy ?dy) (RW:NOT-base-obstacle ?x ?cy)))
-    base-cart-left: ?r:1 ?c:2 ?x1:3 ?x2:3 ?y:4 ?cx1:3 ?cx2:3 ?cy:4
-        pre: (and (R:leftof ?x2 ?x1) (R:leftof ?cx2 ?cx1) (RW:base-pos ?r ?x1 ?y) (RW:pushing ?r ?c) (RW:cart-pos ?c ?cx1 ?cy) (RW:NOT-base-obstacle ?x2 ?y) (RW:NOT-base-obstacle ?cx2 ?cy))
-        eff: (and (N:RW:base-pos ?r ?x1 ?y) (RW:base-pos ?r ?x2 ?y) (N:RW:cart-pos ?c ?cx1 ?cy) (RW:cart-pos ?c ?cx2 ?cy) (N:RW:NOT-base-obstacle ?x2 ?y) (N:RW:NOT-base-obstacle ?cx2 ?cy) (when (and (N:R:= ?x1 ?x2) (N:R:= ?x1 ?cx2)) (RW:NOT-base-obstacle ?x1 ?y)) (when (and (N:R:= ?x1 ?x2) (N:R:= ?y ?cy)) (RW:NOT-base-obstacle ?x1 ?y)) (when (and (N:R:= ?cx1 ?cx2) (N:R:= ?x2 ?cx1)) (RW:NOT-base-obstacle ?cx1 ?cy)) (when (and (N:R:= ?cx1 ?cx2) (N:R:= ?y ?cy)) (RW:NOT-base-obstacle ?cx1 ?cy)))
-    base-cart-right: ?r:1 ?c:2 ?x1:3 ?x2:3 ?y:4 ?cx1:3 ?cx2:3 ?cy:4
-        pre: (and (R:leftof ?x1 ?x2) (R:leftof ?cx1 ?cx2) (RW:base-pos ?r ?x1 ?y) (RW:pushing ?r ?c) (RW:cart-pos ?c ?cx1 ?cy) (RW:NOT-base-obstacle ?x2 ?y) (RW:NOT-base-obstacle ?cx2 ?cy))
-        eff: (and (N:RW:base-pos ?r ?x1 ?y) (RW:base-pos ?r ?x2 ?y) (N:RW:cart-pos ?c ?cx1 ?cy) (RW:cart-pos ?c ?cx2 ?cy) (N:RW:NOT-base-obstacle ?x2 ?y) (N:RW:NOT-base-obstacle ?cx2 ?cy) (when (and (N:R:= ?x1 ?x2) (N:R:= ?x1 ?cx2)) (RW:NOT-base-obstacle ?x1 ?y)) (when (and (N:R:= ?x1 ?x2) (N:R:= ?y ?cy)) (RW:NOT-base-obstacle ?x1 ?y)) (when (and (N:R:= ?cx1 ?cx2) (N:R:= ?x2 ?cx1)) (RW:NOT-base-obstacle ?cx1 ?cy)) (when (and (N:R:= ?cx1 ?cx2) (N:R:= ?y ?cy)) (RW:NOT-base-obstacle ?cx1 ?cy)))
-    base-cart-up: ?r:1 ?c:2 ?x:3 ?y1:4 ?y2:4 ?cx:3 ?cy1:4 ?cy2:4
-        pre: (and (R:above ?y2 ?y1) (R:above ?cy2 ?cy1) (RW:base-pos ?r ?x ?y1) (RW:pushing ?r ?c) (RW:cart-pos ?c ?cx ?cy1) (RW:NOT-base-obstacle ?x ?y2) (RW:NOT-base-obstacle ?cx ?cy2))
-        eff: (and (N:RW:base-pos ?r ?x ?y1) (RW:base-pos ?r ?x ?y2) (N:RW:cart-pos ?c ?cx ?cy1) (RW:cart-pos ?c ?cx ?cy2) (N:RW:NOT-base-obstacle ?x ?y2) (N:RW:NOT-base-obstacle ?cx ?cy2) (when (and (N:R:= ?y1 ?y2) (N:R:= ?x ?cx)) (RW:NOT-base-obstacle ?x ?y1)) (when (and (N:R:= ?y1 ?y2) (N:R:= ?y1 ?cy2)) (RW:NOT-base-obstacle ?x ?y1)))
-    base-cart-down: ?r:1 ?c:2 ?x:3 ?y1:4 ?y2:4 ?cx:3 ?cy1:4 ?cy2:4
-        pre: (and (R:above ?y1 ?y2) (R:above ?cy1 ?cy2) (RW:base-pos ?r ?x ?y1) (RW:pushing ?r ?c) (RW:cart-pos ?c ?cx ?cy1) (RW:NOT-base-obstacle ?x ?y2) (RW:NOT-base-obstacle ?cx ?cy2))
-        eff: (and (N:RW:base-pos ?r ?x ?y1) (RW:base-pos ?r ?x ?y2) (N:RW:cart-pos ?c ?cx ?cy1) (RW:cart-pos ?c ?cx ?cy2) (N:RW:NOT-base-obstacle ?x ?y2) (N:RW:NOT-base-obstacle ?cx ?cy2) (when (and (N:R:= ?y1 ?y2) (N:R:= ?x ?cx)) (RW:NOT-base-obstacle ?x ?y1)) (when (and (N:R:= ?y1 ?y2) (N:R:= ?y1 ?cy2)) (RW:NOT-base-obstacle ?x ?y1)))
-    gripper-left: ?r:1 ?basex:3 ?basey:4 ?cgxrel:5 ?dgxrel:5 ?cgxabs:3 ?dgxabs:3 ?gyrel:6 ?gyabs:4
-        pre: (and (R:leftof-rel ?dgxrel ?cgxrel) (R:sum-x ?basex ?cgxrel ?cgxabs) (R:sum-x ?basex ?dgxrel ?dgxabs) (R:sum-y ?basey ?gyrel ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:gripper-rel ?r ?cgxrel ?gyrel) (RW:NOT-gripper-obstacle ?dgxabs ?gyabs))
-        eff: (and (N:RW:gripper-rel ?r ?cgxrel ?gyrel) (RW:gripper-rel ?r ?dgxrel ?gyrel) (N:RW:NOT-gripper-obstacle ?dgxabs ?gyabs) (when (N:R:= ?cgxabs ?dgxabs) (RW:NOT-gripper-obstacle ?cgxabs ?gyabs)))
-    gripper-right: ?r:1 ?basex:3 ?basey:4 ?cgxrel:5 ?dgxrel:5 ?cgxabs:3 ?dgxabs:3 ?gyrel:6 ?gyabs:4
-        pre: (and (R:leftof-rel ?cgxrel ?dgxrel) (R:sum-x ?basex ?cgxrel ?cgxabs) (R:sum-x ?basex ?dgxrel ?dgxabs) (R:sum-y ?basey ?gyrel ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:gripper-rel ?r ?cgxrel ?gyrel) (RW:NOT-gripper-obstacle ?dgxabs ?gyabs))
-        eff: (and (N:RW:gripper-rel ?r ?cgxrel ?gyrel) (RW:gripper-rel ?r ?dgxrel ?gyrel) (N:RW:NOT-gripper-obstacle ?dgxabs ?gyabs) (when (N:R:= ?cgxabs ?dgxabs) (RW:NOT-gripper-obstacle ?cgxabs ?gyabs)))
-    gripper-up: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?cgyrel:6 ?dgyrel:6 ?cgyabs:4 ?dgyabs:4
-        pre: (and (R:above-rel ?dgyrel ?cgyrel) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?cgyrel ?cgyabs) (R:sum-y ?basey ?dgyrel ?dgyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:gripper-rel ?r ?gxrel ?cgyrel) (RW:NOT-gripper-obstacle ?gxabs ?dgyabs))
-        eff: (and (N:RW:gripper-rel ?r ?gxrel ?cgyrel) (RW:gripper-rel ?r ?gxrel ?dgyrel) (N:RW:NOT-gripper-obstacle ?gxabs ?dgyabs) (when (N:R:= ?cgyabs ?dgyabs) (RW:NOT-gripper-obstacle ?gxabs ?cgyabs)))
-    gripper-down: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?cgyrel:6 ?dgyrel:6 ?cgyabs:4 ?dgyabs:4
-        pre: (and (R:above-rel ?cgyrel ?dgyrel) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?cgyrel ?cgyabs) (R:sum-y ?basey ?dgyrel ?dgyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:gripper-rel ?r ?gxrel ?cgyrel) (RW:NOT-gripper-obstacle ?gxabs ?dgyabs))
-        eff: (and (N:RW:gripper-rel ?r ?gxrel ?cgyrel) (RW:gripper-rel ?r ?gxrel ?dgyrel) (N:RW:NOT-gripper-obstacle ?gxabs ?dgyabs) (when (N:R:= ?cgyabs ?dgyabs) (RW:NOT-gripper-obstacle ?gxabs ?cgyabs)))
-    grasp-cart-left: ?r:1 ?c:2 ?x:3 ?y:4 ?cx:3
-        pre: (and (R:leftof ?cx ?x) (RW:base-pos ?r ?x ?y) (RW:not-pushing ?r) (RW:not-pushed ?c) (RW:cart-pos ?c ?cx ?y) (RW:NOT-parked ?r))
-        eff: (and (RW:pushing ?r ?c) (N:RW:not-pushing ?r) (N:RW:not-pushed ?c))
-    grasp-cart-right: ?r:1 ?c:2 ?x:3 ?y:4 ?cx:3
-        pre: (and (R:leftof ?x ?cx) (RW:base-pos ?r ?x ?y) (RW:not-pushing ?r) (RW:not-pushed ?c) (RW:cart-pos ?c ?cx ?y) (RW:NOT-parked ?r))
-        eff: (and (RW:pushing ?r ?c) (N:RW:not-pushing ?r) (N:RW:not-pushed ?c))
-    grasp-cart-above: ?r:1 ?c:2 ?x:3 ?y:4 ?cy:4
-        pre: (and (R:above ?cy ?y) (RW:base-pos ?r ?x ?y) (RW:not-pushing ?r) (RW:not-pushed ?c) (RW:cart-pos ?c ?x ?cy) (RW:NOT-parked ?r))
-        eff: (and (RW:pushing ?r ?c) (N:RW:not-pushing ?r) (N:RW:not-pushed ?c))
-    grasp-cart-below: ?r:1 ?c:2 ?x:3 ?y:4 ?cy:4
-        pre: (and (R:above ?y ?cy) (RW:base-pos ?r ?x ?y) (RW:not-pushing ?r) (RW:not-pushed ?c) (RW:cart-pos ?c ?x ?cy) (RW:NOT-parked ?r))
-        eff: (and (RW:pushing ?r ?c) (N:RW:not-pushing ?r) (N:RW:not-pushed ?c))
-    ungrasp-cart: ?r:1 ?c:2
-        pre: (and (RW:pushing ?r ?c))
-        eff: (and (N:RW:pushing ?r ?c) (RW:not-pushing ?r) (RW:not-pushed ?c))
-    get-left: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?ox:3
-        pre: (and (R:leftof ?ox ?gxabs) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:object-pos ?o ?ox ?gyabs) (RW:gripper-empty ?r) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-object-done ?o))
-        eff: (and (N:RW:object-pos ?o ?ox ?gyabs) (RW:holding ?r ?o) (N:RW:gripper-empty ?r) (RW:NOT-gripper-obstacle ?ox ?gyabs))
-    get-right: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?ox:3
-        pre: (and (R:leftof ?gxabs ?ox) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:object-pos ?o ?ox ?gyabs) (RW:gripper-empty ?r) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-object-done ?o))
-        eff: (and (N:RW:object-pos ?o ?ox ?gyabs) (RW:holding ?r ?o) (N:RW:gripper-empty ?r) (RW:NOT-gripper-obstacle ?ox ?gyabs))
-    get-up: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?oy:4
-        pre: (and (R:above ?oy ?gyabs) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:object-pos ?o ?gxabs ?oy) (RW:gripper-empty ?r) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-object-done ?o))
-        eff: (and (N:RW:object-pos ?o ?gxabs ?oy) (RW:holding ?r ?o) (N:RW:gripper-empty ?r) (RW:NOT-gripper-obstacle ?gxabs ?oy))
-    get-down: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?oy:4
-        pre: (and (R:above ?gyabs ?oy) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:object-pos ?o ?gxabs ?oy) (RW:gripper-empty ?r) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-object-done ?o))
-        eff: (and (N:RW:object-pos ?o ?gxabs ?oy) (RW:holding ?r ?o) (N:RW:gripper-empty ?r) (RW:NOT-gripper-obstacle ?gxabs ?oy))
-    get-from-cart: ?r:1 ?x:3 ?y:4 ?gxrel:5 ?gyrel:6 ?o:0 ?c:2 ?cx:3 ?cy:4
-        pre: (and (R:sum-x ?x ?gxrel ?cx) (R:sum-y ?y ?gyrel ?cy) (RW:parked ?r) (RW:base-pos ?r ?x ?y) (RW:gripper-empty ?r) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:cart-pos ?c ?cx ?cy) (RW:on-cart ?o ?c))
-        eff: (and (RW:holding ?r ?o) (N:RW:gripper-empty ?r) (N:RW:on-cart ?o ?c))
-    put-left: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?ox:3
-        pre: (and (R:leftof ?ox ?gxabs) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (R:surface ?ox ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:holding ?r ?o) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-gripper-obstacle ?ox ?gyabs))
-        eff: (and (RW:object-pos ?o ?ox ?gyabs) (N:RW:holding ?r ?o) (RW:gripper-empty ?r) (N:RW:NOT-gripper-obstacle ?ox ?gyabs))
-    put-right: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?ox:3
-        pre: (and (R:leftof ?gxabs ?ox) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (R:surface ?ox ?gyabs) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:holding ?r ?o) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-gripper-obstacle ?ox ?gyabs))
-        eff: (and (RW:object-pos ?o ?ox ?gyabs) (N:RW:holding ?r ?o) (RW:gripper-empty ?r) (N:RW:NOT-gripper-obstacle ?ox ?gyabs))
-    put-up: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?oy:4
-        pre: (and (R:above ?oy ?gyabs) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (R:surface ?gxabs ?oy) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:holding ?r ?o) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-gripper-obstacle ?gxabs ?oy))
-        eff: (and (RW:object-pos ?o ?gxabs ?oy) (N:RW:holding ?r ?o) (RW:gripper-empty ?r) (N:RW:NOT-gripper-obstacle ?gxabs ?oy))
-    put-down: ?r:1 ?basex:3 ?basey:4 ?gxrel:5 ?gxabs:3 ?gyrel:6 ?gyabs:4 ?o:0 ?oy:4
-        pre: (and (R:above ?gyabs ?oy) (R:sum-x ?basex ?gxrel ?gxabs) (R:sum-y ?basey ?gyrel ?gyabs) (R:surface ?gxabs ?oy) (RW:parked ?r) (RW:base-pos ?r ?basex ?basey) (RW:holding ?r ?o) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:NOT-gripper-obstacle ?gxabs ?oy))
-        eff: (and (RW:object-pos ?o ?gxabs ?oy) (N:RW:holding ?r ?o) (RW:gripper-empty ?r) (N:RW:NOT-gripper-obstacle ?gxabs ?oy))
-    put-on-cart: ?r:1 ?x:3 ?y:4 ?gxrel:5 ?gyrel:6 ?o:0 ?c:2 ?cx:3 ?cy:4
-        pre: (and (R:sum-x ?x ?gxrel ?cx) (R:sum-y ?y ?gyrel ?cy) (RW:parked ?r) (RW:base-pos ?r ?x ?y) (RW:holding ?r ?o) (RW:gripper-rel ?r ?gxrel ?gyrel) (RW:cart-pos ?c ?cx ?cy))
-        eff: (and (N:RW:holding ?r ?o) (RW:gripper-empty ?r) (RW:on-cart ?o ?c))
-    finish-object: ?o:0 ?x:3 ?y:4
-        pre: (and (R:object-goal ?o ?x ?y) (RW:object-pos ?o ?x ?y) (RW:NOT-object-done ?o))
-        eff: (and (RW:object-done ?o) (N:RW:NOT-object-done ?o))
-Init[259]:
-  S:(leftof x0 x1)
-  S:(leftof x1 x2)
-  S:(leftof x2 x3)
-  S:(leftof x3 x4)
-  S:(leftof x4 x5)
-  S:(leftof x5 x6)
-  S:(leftof x6 x7)
-  S:(leftof x7 x8)
-  S:(above y0 y1)
-  S:(above y1 y2)
-  S:(above y2 y3)
-  S:(above y3 y4)
-  S:(above y4 y5)
-  S:(above y5 y6)
-  S:(above y6 y7)
-  S:(above y7 y8)
-  S:(leftof-rel xrel-1 xrel0)
-  S:(leftof-rel xrel0 xrel1)
-  S:(above-rel yrel-1 yrel0)
-  S:(above-rel yrel0 yrel1)
-  S:(sum-x x0 xrel0 x0)
-  S:(sum-x x0 xrel1 x1)
-  S:(sum-x x1 xrel-1 x0)
-  S:(sum-x x1 xrel0 x1)
-  S:(sum-x x1 xrel1 x2)
-  S:(sum-x x2 xrel-1 x1)
-  S:(sum-x x2 xrel0 x2)
-  S:(sum-x x2 xrel1 x3)
-  S:(sum-x x3 xrel-1 x2)
-  S:(sum-x x3 xrel0 x3)
-  S:(sum-x x3 xrel1 x4)
-  S:(sum-x x4 xrel-1 x3)
-  S:(sum-x x4 xrel0 x4)
-  S:(sum-x x4 xrel1 x5)
-  S:(sum-x x5 xrel-1 x4)
-  S:(sum-x x5 xrel0 x5)
-  S:(sum-x x5 xrel1 x6)
-  S:(sum-x x6 xrel-1 x5)
-  S:(sum-x x6 xrel0 x6)
-  S:(sum-x x6 xrel1 x7)
-  S:(sum-x x7 xrel-1 x6)
-  S:(sum-x x7 xrel0 x7)
-  S:(sum-x x7 xrel1 x8)
-  S:(sum-x x8 xrel-1 x7)
-  S:(sum-x x8 xrel0 x8)
-  S:(sum-y y0 yrel0 y0)
-  S:(sum-y y0 yrel1 y1)
-  S:(sum-y y1 yrel-1 y0)
-  S:(sum-y y1 yrel0 y1)
-  S:(sum-y y1 yrel1 y2)
-  S:(sum-y y2 yrel-1 y1)
-  S:(sum-y y2 yrel0 y2)
-  S:(sum-y y2 yrel1 y3)
-  S:(sum-y y3 yrel-1 y2)
-  S:(sum-y y3 yrel0 y3)
-  S:(sum-y y3 yrel1 y4)
-  S:(sum-y y4 yrel-1 y3)
-  S:(sum-y y4 yrel0 y4)
-  S:(sum-y y4 yrel1 y5)
-  S:(sum-y y5 yrel-1 y4)
-  S:(sum-y y5 yrel0 y5)
-  S:(sum-y y5 yrel1 y6)
-  S:(sum-y y6 yrel-1 y5)
-  S:(sum-y y6 yrel0 y6)
-  S:(sum-y y6 yrel1 y7)
-  S:(sum-y y7 yrel-1 y6)
-  S:(sum-y y7 yrel0 y7)
-  S:(sum-y y7 yrel1 y8)
-  S:(sum-y y8 yrel-1 y7)
-  S:(sum-y y8 yrel0 y8)
-  S:(zerox-rel xrel0)
-  S:(zeroy-rel yrel0)
-  S:(object-goal object0 x4 y4)
-  S:(object-goal object1 x1 y3)
-  S:(object-goal object1 x4 y5)
-  S:(object-goal object2 x1 y5)
-  S:(object-goal object2 x5 y4)
-  S:(object-goal object3 x5 y5)
-  S:(surface x1 y3)
-  S:(surface x1 y5)
-  S:(surface x3 y1)
-  S:(surface x4 y4)
-  S:(surface x4 y5)
-  S:(surface x5 y1)
-  S:(surface x5 y4)
-  S:(surface x5 y5)
-  S:(surface x6 y1)
-  (parked pr2)
-  (base-pos pr2 x0 y0)
-  (object-pos object0 x5 y5)
-  (object-pos object1 x5 y1)
-  (object-pos object2 x3 y1)
-  (object-pos object3 x1 y3)
-  (gripper-empty pr2)
-  (gripper-rel pr2 xrel0 yrel0)
-  (not-pushing pr2)
+Require:
+  :conditional-effects
+  :equality
+  :negative-preconditions
+  :strips
+  :typing
+Type:
+  cart - object
+  object
+  robot - object
+  xc - object
+  xrel - object
+  yc - object
+  yrel - object
+Obj:
+  cart - cart
+  object0 - object
+  object1 - object
+  object2 - object
+  object3 - object
+  pr2 - robot
+  x0 - xc
+  x1 - xc
+  x2 - xc
+  x3 - xc
+  x4 - xc
+  x5 - xc
+  x6 - xc
+  x7 - xc
+  x8 - xc
+  xrel-1 - xrel
+  xrel0 - xrel
+  xrel1 - xrel
+  y0 - yc
+  y1 - yc
+  y2 - yc
+  y3 - yc
+  y4 - yc
+  y5 - yc
+  y6 - yc
+  y7 - yc
+  y8 - yc
+  yrel-1 - yrel
+  yrel0 - yrel
+  yrel1 - yrel
+Predicate:
+  (= object object) :eq
+  (NOT-base-obstacle xc yc)
+  (NOT-gripper-obstacle xc yc)
+  (NOT-object-done object) neg-of (object-done)
+  (NOT-parked robot) neg-of (parked)
+  (above yc yc)
+  (above-rel yrel yrel)
+  (base-pos robot xc yc)
+  (cart-pos cart xc yc)
+  (gripper-empty robot)
+  (gripper-rel robot xrel yrel)
+  (holding robot object)
+  (leftof xc xc)
+  (leftof-rel xrel xrel)
   (not-pushed cart)
-  (cart-pos cart x0 y1)
+  (not-pushing robot)
+  (object-done object) neg-of (NOT-object-done)
+  (object-goal object xc yc)
+  (object-pos object xc yc)
+  (on-cart object cart)
+  (parked robot) neg-of (NOT-parked)
+  (pushing robot cart)
+  (sum-x xc xrel xc)
+  (sum-y yc yrel yc)
+  (surface xc yc)
+  (zerox-rel xrel)
+  (zeroy-rel yrel)
+Function:
+Action:
+  base-cart-down: ?r - robot ?c - cart ?x - xc ?y1 - yc ?y2 - yc ?cx - xc ?cy1 - yc ?cy2 - yc
+      pre: (and (NOT-base-obstacle ?cx ?cy2) (NOT-base-obstacle ?x ?y2) (above ?cy1 ?cy2) (above ?y1 ?y2) (base-pos ?r ?x ?y1) (cart-pos ?c ?cx ?cy1) (pushing ?r ?c))
+      eff: (and (base-pos ?r ?x ?y2) (cart-pos ?c ?cx ?cy2) (not (NOT-base-obstacle ?cx ?cy2)) (not (NOT-base-obstacle ?x ?y2)) (not (base-pos ?r ?x ?y1)) (not (cart-pos ?c ?cx ?cy1)) (when (and (not (= ?x ?cx)) (not (= ?y1 ?y2))) (NOT-base-obstacle ?x ?y1)) (when (and (not (= ?y1 ?cy2)) (not (= ?y1 ?y2))) (NOT-base-obstacle ?x ?y1)))
+  base-cart-left: ?r - robot ?c - cart ?x1 - xc ?x2 - xc ?y - yc ?cx1 - xc ?cx2 - xc ?cy - yc
+      pre: (and (NOT-base-obstacle ?cx2 ?cy) (NOT-base-obstacle ?x2 ?y) (base-pos ?r ?x1 ?y) (cart-pos ?c ?cx1 ?cy) (leftof ?cx2 ?cx1) (leftof ?x2 ?x1) (pushing ?r ?c))
+      eff: (and (base-pos ?r ?x2 ?y) (cart-pos ?c ?cx2 ?cy) (not (NOT-base-obstacle ?cx2 ?cy)) (not (NOT-base-obstacle ?x2 ?y)) (not (base-pos ?r ?x1 ?y)) (not (cart-pos ?c ?cx1 ?cy)) (when (and (not (= ?cx1 ?cx2)) (not (= ?x2 ?cx1))) (NOT-base-obstacle ?cx1 ?cy)) (when (and (not (= ?cx1 ?cx2)) (not (= ?y ?cy))) (NOT-base-obstacle ?cx1 ?cy)) (when (and (not (= ?x1 ?cx2)) (not (= ?x1 ?x2))) (NOT-base-obstacle ?x1 ?y)) (when (and (not (= ?x1 ?x2)) (not (= ?y ?cy))) (NOT-base-obstacle ?x1 ?y)))
+  base-cart-right: ?r - robot ?c - cart ?x1 - xc ?x2 - xc ?y - yc ?cx1 - xc ?cx2 - xc ?cy - yc
+      pre: (and (NOT-base-obstacle ?cx2 ?cy) (NOT-base-obstacle ?x2 ?y) (base-pos ?r ?x1 ?y) (cart-pos ?c ?cx1 ?cy) (leftof ?cx1 ?cx2) (leftof ?x1 ?x2) (pushing ?r ?c))
+      eff: (and (base-pos ?r ?x2 ?y) (cart-pos ?c ?cx2 ?cy) (not (NOT-base-obstacle ?cx2 ?cy)) (not (NOT-base-obstacle ?x2 ?y)) (not (base-pos ?r ?x1 ?y)) (not (cart-pos ?c ?cx1 ?cy)) (when (and (not (= ?cx1 ?cx2)) (not (= ?x2 ?cx1))) (NOT-base-obstacle ?cx1 ?cy)) (when (and (not (= ?cx1 ?cx2)) (not (= ?y ?cy))) (NOT-base-obstacle ?cx1 ?cy)) (when (and (not (= ?x1 ?cx2)) (not (= ?x1 ?x2))) (NOT-base-obstacle ?x1 ?y)) (when (and (not (= ?x1 ?x2)) (not (= ?y ?cy))) (NOT-base-obstacle ?x1 ?y)))
+  base-cart-up: ?r - robot ?c - cart ?x - xc ?y1 - yc ?y2 - yc ?cx - xc ?cy1 - yc ?cy2 - yc
+      pre: (and (NOT-base-obstacle ?cx ?cy2) (NOT-base-obstacle ?x ?y2) (above ?cy2 ?cy1) (above ?y2 ?y1) (base-pos ?r ?x ?y1) (cart-pos ?c ?cx ?cy1) (pushing ?r ?c))
+      eff: (and (base-pos ?r ?x ?y2) (cart-pos ?c ?cx ?cy2) (not (NOT-base-obstacle ?cx ?cy2)) (not (NOT-base-obstacle ?x ?y2)) (not (base-pos ?r ?x ?y1)) (not (cart-pos ?c ?cx ?cy1)) (when (and (not (= ?x ?cx)) (not (= ?y1 ?y2))) (NOT-base-obstacle ?x ?y1)) (when (and (not (= ?y1 ?cy2)) (not (= ?y1 ?y2))) (NOT-base-obstacle ?x ?y1)))
+  base-down: ?r - robot ?x - xc ?cy - yc ?dy - yc
+      pre: (and (NOT-base-obstacle ?x ?dy) (NOT-parked ?r) (above ?cy ?dy) (base-pos ?r ?x ?cy) (not-pushing ?r))
+      eff: (and (base-pos ?r ?x ?dy) (not (NOT-base-obstacle ?x ?dy)) (not (base-pos ?r ?x ?cy)) (when (not (= ?cy ?dy)) (NOT-base-obstacle ?x ?cy)))
+  base-left: ?r - robot ?cx - xc ?dx - xc ?y - yc
+      pre: (and (NOT-base-obstacle ?dx ?y) (NOT-parked ?r) (base-pos ?r ?cx ?y) (leftof ?dx ?cx) (not-pushing ?r))
+      eff: (and (base-pos ?r ?dx ?y) (not (NOT-base-obstacle ?dx ?y)) (not (base-pos ?r ?cx ?y)) (when (not (= ?cx ?dx)) (NOT-base-obstacle ?cx ?y)))
+  base-right: ?r - robot ?cx - xc ?dx - xc ?y - yc
+      pre: (and (NOT-base-obstacle ?dx ?y) (NOT-parked ?r) (base-pos ?r ?cx ?y) (leftof ?cx ?dx) (not-pushing ?r))
+      eff: (and (base-pos ?r ?dx ?y) (not (NOT-base-obstacle ?dx ?y)) (not (base-pos ?r ?cx ?y)) (when (not (= ?cx ?dx)) (NOT-base-obstacle ?cx ?y)))
+  base-up: ?r - robot ?x - xc ?cy - yc ?dy - yc
+      pre: (and (NOT-base-obstacle ?x ?dy) (NOT-parked ?r) (above ?dy ?cy) (base-pos ?r ?x ?cy) (not-pushing ?r))
+      eff: (and (base-pos ?r ?x ?dy) (not (NOT-base-obstacle ?x ?dy)) (not (base-pos ?r ?x ?cy)) (when (not (= ?cy ?dy)) (NOT-base-obstacle ?x ?cy)))
+  finish-object: ?o - object ?x - xc ?y - yc
+      pre: (and (NOT-object-done ?o) (object-goal ?o ?x ?y) (object-pos ?o ?x ?y))
+      eff: (and (not (NOT-object-done ?o)) (object-done ?o))
+  get-down: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?oy - yc
+      pre: (and (NOT-object-done ?o) (above ?gyabs ?oy) (base-pos ?r ?basex ?basey) (gripper-empty ?r) (gripper-rel ?r ?gxrel ?gyrel) (object-pos ?o ?gxabs ?oy) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs))
+      eff: (and (NOT-gripper-obstacle ?gxabs ?oy) (holding ?r ?o) (not (gripper-empty ?r)) (not (object-pos ?o ?gxabs ?oy)))
+  get-from-cart: ?r - robot ?x - xc ?y - yc ?gxrel - xrel ?gyrel - yrel ?o - object ?c - cart ?cx - xc ?cy - yc
+      pre: (and (base-pos ?r ?x ?y) (cart-pos ?c ?cx ?cy) (gripper-empty ?r) (gripper-rel ?r ?gxrel ?gyrel) (on-cart ?o ?c) (parked ?r) (sum-x ?x ?gxrel ?cx) (sum-y ?y ?gyrel ?cy))
+      eff: (and (holding ?r ?o) (not (gripper-empty ?r)) (not (on-cart ?o ?c)))
+  get-left: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?ox - xc
+      pre: (and (NOT-object-done ?o) (base-pos ?r ?basex ?basey) (gripper-empty ?r) (gripper-rel ?r ?gxrel ?gyrel) (leftof ?ox ?gxabs) (object-pos ?o ?ox ?gyabs) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs))
+      eff: (and (NOT-gripper-obstacle ?ox ?gyabs) (holding ?r ?o) (not (gripper-empty ?r)) (not (object-pos ?o ?ox ?gyabs)))
+  get-right: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?ox - xc
+      pre: (and (NOT-object-done ?o) (base-pos ?r ?basex ?basey) (gripper-empty ?r) (gripper-rel ?r ?gxrel ?gyrel) (leftof ?gxabs ?ox) (object-pos ?o ?ox ?gyabs) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs))
+      eff: (and (NOT-gripper-obstacle ?ox ?gyabs) (holding ?r ?o) (not (gripper-empty ?r)) (not (object-pos ?o ?ox ?gyabs)))
+  get-up: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?oy - yc
+      pre: (and (NOT-object-done ?o) (above ?oy ?gyabs) (base-pos ?r ?basex ?basey) (gripper-empty ?r) (gripper-rel ?r ?gxrel ?gyrel) (object-pos ?o ?gxabs ?oy) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs))
+      eff: (and (NOT-gripper-obstacle ?gxabs ?oy) (holding ?r ?o) (not (gripper-empty ?r)) (not (object-pos ?o ?gxabs ?oy)))
+  grasp-cart-above: ?r - robot ?c - cart ?x - xc ?y - yc ?cy - yc
+      pre: (and (NOT-parked ?r) (above ?cy ?y) (base-pos ?r ?x ?y) (cart-pos ?c ?x ?cy) (not-pushed ?c) (not-pushing ?r))
+      eff: (and (not (not-pushed ?c)) (not (not-pushing ?r)) (pushing ?r ?c))
+  grasp-cart-below: ?r - robot ?c - cart ?x - xc ?y - yc ?cy - yc
+      pre: (and (NOT-parked ?r) (above ?y ?cy) (base-pos ?r ?x ?y) (cart-pos ?c ?x ?cy) (not-pushed ?c) (not-pushing ?r))
+      eff: (and (not (not-pushed ?c)) (not (not-pushing ?r)) (pushing ?r ?c))
+  grasp-cart-left: ?r - robot ?c - cart ?x - xc ?y - yc ?cx - xc
+      pre: (and (NOT-parked ?r) (base-pos ?r ?x ?y) (cart-pos ?c ?cx ?y) (leftof ?cx ?x) (not-pushed ?c) (not-pushing ?r))
+      eff: (and (not (not-pushed ?c)) (not (not-pushing ?r)) (pushing ?r ?c))
+  grasp-cart-right: ?r - robot ?c - cart ?x - xc ?y - yc ?cx - xc
+      pre: (and (NOT-parked ?r) (base-pos ?r ?x ?y) (cart-pos ?c ?cx ?y) (leftof ?x ?cx) (not-pushed ?c) (not-pushing ?r))
+      eff: (and (not (not-pushed ?c)) (not (not-pushing ?r)) (pushing ?r ?c))
+  gripper-down: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?cgyrel - yrel ?dgyrel - yrel ?cgyabs - yc ?dgyabs - yc
+      pre: (and (NOT-gripper-obstacle ?gxabs ?dgyabs) (above-rel ?cgyrel ?dgyrel) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?gxrel ?cgyrel) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?cgyrel ?cgyabs) (sum-y ?basey ?dgyrel ?dgyabs))
+      eff: (and (gripper-rel ?r ?gxrel ?dgyrel) (not (NOT-gripper-obstacle ?gxabs ?dgyabs)) (not (gripper-rel ?r ?gxrel ?cgyrel)) (when (not (= ?cgyabs ?dgyabs)) (NOT-gripper-obstacle ?gxabs ?cgyabs)))
+  gripper-left: ?r - robot ?basex - xc ?basey - yc ?cgxrel - xrel ?dgxrel - xrel ?cgxabs - xc ?dgxabs - xc ?gyrel - yrel ?gyabs - yc
+      pre: (and (NOT-gripper-obstacle ?dgxabs ?gyabs) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?cgxrel ?gyrel) (leftof-rel ?dgxrel ?cgxrel) (parked ?r) (sum-x ?basex ?cgxrel ?cgxabs) (sum-x ?basex ?dgxrel ?dgxabs) (sum-y ?basey ?gyrel ?gyabs))
+      eff: (and (gripper-rel ?r ?dgxrel ?gyrel) (not (NOT-gripper-obstacle ?dgxabs ?gyabs)) (not (gripper-rel ?r ?cgxrel ?gyrel)) (when (not (= ?cgxabs ?dgxabs)) (NOT-gripper-obstacle ?cgxabs ?gyabs)))
+  gripper-right: ?r - robot ?basex - xc ?basey - yc ?cgxrel - xrel ?dgxrel - xrel ?cgxabs - xc ?dgxabs - xc ?gyrel - yrel ?gyabs - yc
+      pre: (and (NOT-gripper-obstacle ?dgxabs ?gyabs) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?cgxrel ?gyrel) (leftof-rel ?cgxrel ?dgxrel) (parked ?r) (sum-x ?basex ?cgxrel ?cgxabs) (sum-x ?basex ?dgxrel ?dgxabs) (sum-y ?basey ?gyrel ?gyabs))
+      eff: (and (gripper-rel ?r ?dgxrel ?gyrel) (not (NOT-gripper-obstacle ?dgxabs ?gyabs)) (not (gripper-rel ?r ?cgxrel ?gyrel)) (when (not (= ?cgxabs ?dgxabs)) (NOT-gripper-obstacle ?cgxabs ?gyabs)))
+  gripper-up: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?cgyrel - yrel ?dgyrel - yrel ?cgyabs - yc ?dgyabs - yc
+      pre: (and (NOT-gripper-obstacle ?gxabs ?dgyabs) (above-rel ?dgyrel ?cgyrel) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?gxrel ?cgyrel) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?cgyrel ?cgyabs) (sum-y ?basey ?dgyrel ?dgyabs))
+      eff: (and (gripper-rel ?r ?gxrel ?dgyrel) (not (NOT-gripper-obstacle ?gxabs ?dgyabs)) (not (gripper-rel ?r ?gxrel ?cgyrel)) (when (not (= ?cgyabs ?dgyabs)) (NOT-gripper-obstacle ?gxabs ?cgyabs)))
+  park: ?r - robot
+      pre: (and (NOT-parked ?r) (not-pushing ?r))
+      eff: (and (not (NOT-parked ?r)) (parked ?r))
+  put-down: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?oy - yc
+      pre: (and (NOT-gripper-obstacle ?gxabs ?oy) (above ?gyabs ?oy) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?gxrel ?gyrel) (holding ?r ?o) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs) (surface ?gxabs ?oy))
+      eff: (and (gripper-empty ?r) (not (NOT-gripper-obstacle ?gxabs ?oy)) (not (holding ?r ?o)) (object-pos ?o ?gxabs ?oy))
+  put-left: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?ox - xc
+      pre: (and (NOT-gripper-obstacle ?ox ?gyabs) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?gxrel ?gyrel) (holding ?r ?o) (leftof ?ox ?gxabs) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs) (surface ?ox ?gyabs))
+      eff: (and (gripper-empty ?r) (not (NOT-gripper-obstacle ?ox ?gyabs)) (not (holding ?r ?o)) (object-pos ?o ?ox ?gyabs))
+  put-on-cart: ?r - robot ?x - xc ?y - yc ?gxrel - xrel ?gyrel - yrel ?o - object ?c - cart ?cx - xc ?cy - yc
+      pre: (and (base-pos ?r ?x ?y) (cart-pos ?c ?cx ?cy) (gripper-rel ?r ?gxrel ?gyrel) (holding ?r ?o) (parked ?r) (sum-x ?x ?gxrel ?cx) (sum-y ?y ?gyrel ?cy))
+      eff: (and (gripper-empty ?r) (not (holding ?r ?o)) (on-cart ?o ?c))
+  put-right: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?ox - xc
+      pre: (and (NOT-gripper-obstacle ?ox ?gyabs) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?gxrel ?gyrel) (holding ?r ?o) (leftof ?gxabs ?ox) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs) (surface ?ox ?gyabs))
+      eff: (and (gripper-empty ?r) (not (NOT-gripper-obstacle ?ox ?gyabs)) (not (holding ?r ?o)) (object-pos ?o ?ox ?gyabs))
+  put-up: ?r - robot ?basex - xc ?basey - yc ?gxrel - xrel ?gxabs - xc ?gyrel - yrel ?gyabs - yc ?o - object ?oy - yc
+      pre: (and (NOT-gripper-obstacle ?gxabs ?oy) (above ?oy ?gyabs) (base-pos ?r ?basex ?basey) (gripper-rel ?r ?gxrel ?gyrel) (holding ?r ?o) (parked ?r) (sum-x ?basex ?gxrel ?gxabs) (sum-y ?basey ?gyrel ?gyabs) (surface ?gxabs ?oy))
+      eff: (and (gripper-empty ?r) (not (NOT-gripper-obstacle ?gxabs ?oy)) (not (holding ?r ?o)) (object-pos ?o ?gxabs ?oy))
+  ungrasp-cart: ?r - robot ?c - cart
+      pre: (and (pushing ?r ?c))
+      eff: (and (not (pushing ?r ?c)) (not-pushed ?c) (not-pushing ?r))
+  unpark: ?r - robot ?x - xrel ?y - yrel
+      pre: (and (gripper-rel ?r ?x ?y) (parked ?r) (zerox-rel ?x) (zeroy-rel ?y))
+      eff: (and (NOT-parked ?r) (not (parked ?r)))
+Init:
   (NOT-base-obstacle x0 y2)
   (NOT-base-obstacle x0 y3)
   (NOT-base-obstacle x0 y4)
@@ -331,36 +230,6 @@ Init[259]:
   (NOT-base-obstacle x8 y6)
   (NOT-base-obstacle x8 y7)
   (NOT-base-obstacle x8 y8)
-  (NOT-object-done pr2)
-  (NOT-object-done cart)
-  (NOT-object-done object0)
-  (NOT-object-done object1)
-  (NOT-object-done object2)
-  (NOT-object-done object3)
-  (NOT-object-done x0)
-  (NOT-object-done x1)
-  (NOT-object-done x2)
-  (NOT-object-done x3)
-  (NOT-object-done x4)
-  (NOT-object-done x5)
-  (NOT-object-done x6)
-  (NOT-object-done x7)
-  (NOT-object-done x8)
-  (NOT-object-done y0)
-  (NOT-object-done y1)
-  (NOT-object-done y2)
-  (NOT-object-done y3)
-  (NOT-object-done y4)
-  (NOT-object-done y5)
-  (NOT-object-done y6)
-  (NOT-object-done y7)
-  (NOT-object-done y8)
-  (NOT-object-done xrel-1)
-  (NOT-object-done xrel0)
-  (NOT-object-done xrel1)
-  (NOT-object-done yrel-1)
-  (NOT-object-done yrel0)
-  (NOT-object-done yrel1)
   (NOT-gripper-obstacle x0 y0)
   (NOT-gripper-obstacle x0 y1)
   (NOT-gripper-obstacle x0 y2)
@@ -428,6 +297,167 @@ Init[259]:
   (NOT-gripper-obstacle x8 y6)
   (NOT-gripper-obstacle x8 y7)
   (NOT-gripper-obstacle x8 y8)
-Init[0]:
-Goal: (and (RW:object-done object0) (RW:object-done object1) (RW:object-done object2) (RW:object-done object3))
-Metric: no-metric
+  (NOT-object-done cart)
+  (NOT-object-done object0)
+  (NOT-object-done object1)
+  (NOT-object-done object2)
+  (NOT-object-done object3)
+  (NOT-object-done pr2)
+  (NOT-object-done x0)
+  (NOT-object-done x1)
+  (NOT-object-done x2)
+  (NOT-object-done x3)
+  (NOT-object-done x4)
+  (NOT-object-done x5)
+  (NOT-object-done x6)
+  (NOT-object-done x7)
+  (NOT-object-done x8)
+  (NOT-object-done xrel-1)
+  (NOT-object-done xrel0)
+  (NOT-object-done xrel1)
+  (NOT-object-done y0)
+  (NOT-object-done y1)
+  (NOT-object-done y2)
+  (NOT-object-done y3)
+  (NOT-object-done y4)
+  (NOT-object-done y5)
+  (NOT-object-done y6)
+  (NOT-object-done y7)
+  (NOT-object-done y8)
+  (NOT-object-done yrel-1)
+  (NOT-object-done yrel0)
+  (NOT-object-done yrel1)
+  (above y0 y1)
+  (above y1 y2)
+  (above y2 y3)
+  (above y3 y4)
+  (above y4 y5)
+  (above y5 y6)
+  (above y6 y7)
+  (above y7 y8)
+  (above-rel yrel-1 yrel0)
+  (above-rel yrel0 yrel1)
+  (base-pos pr2 x0 y0)
+  (cart-pos cart x0 y1)
+  (gripper-empty pr2)
+  (gripper-rel pr2 xrel0 yrel0)
+  (leftof x0 x1)
+  (leftof x1 x2)
+  (leftof x2 x3)
+  (leftof x3 x4)
+  (leftof x4 x5)
+  (leftof x5 x6)
+  (leftof x6 x7)
+  (leftof x7 x8)
+  (leftof-rel xrel-1 xrel0)
+  (leftof-rel xrel0 xrel1)
+  (not-pushed cart)
+  (not-pushing pr2)
+  (object-goal object0 x4 y4)
+  (object-goal object1 x1 y3)
+  (object-goal object1 x4 y5)
+  (object-goal object2 x1 y5)
+  (object-goal object2 x5 y4)
+  (object-goal object3 x5 y5)
+  (object-pos object0 x5 y5)
+  (object-pos object1 x5 y1)
+  (object-pos object2 x3 y1)
+  (object-pos object3 x1 y3)
+  (parked pr2)
+  (sum-x x0 xrel0 x0)
+  (sum-x x0 xrel1 x1)
+  (sum-x x1 xrel-1 x0)
+  (sum-x x1 xrel0 x1)
+  (sum-x x1 xrel1 x2)
+  (sum-x x2 xrel-1 x1)
+  (sum-x x2 xrel0 x2)
+  (sum-x x2 xrel1 x3)
+  (sum-x x3 xrel-1 x2)
+  (sum-x x3 xrel0 x3)
+  (sum-x x3 xrel1 x4)
+  (sum-x x4 xrel-1 x3)
+  (sum-x x4 xrel0 x4)
+  (sum-x x4 xrel1 x5)
+  (sum-x x5 xrel-1 x4)
+  (sum-x x5 xrel0 x5)
+  (sum-x x5 xrel1 x6)
+  (sum-x x6 xrel-1 x5)
+  (sum-x x6 xrel0 x6)
+  (sum-x x6 xrel1 x7)
+  (sum-x x7 xrel-1 x6)
+  (sum-x x7 xrel0 x7)
+  (sum-x x7 xrel1 x8)
+  (sum-x x8 xrel-1 x7)
+  (sum-x x8 xrel0 x8)
+  (sum-y y0 yrel0 y0)
+  (sum-y y0 yrel1 y1)
+  (sum-y y1 yrel-1 y0)
+  (sum-y y1 yrel0 y1)
+  (sum-y y1 yrel1 y2)
+  (sum-y y2 yrel-1 y1)
+  (sum-y y2 yrel0 y2)
+  (sum-y y2 yrel1 y3)
+  (sum-y y3 yrel-1 y2)
+  (sum-y y3 yrel0 y3)
+  (sum-y y3 yrel1 y4)
+  (sum-y y4 yrel-1 y3)
+  (sum-y y4 yrel0 y4)
+  (sum-y y4 yrel1 y5)
+  (sum-y y5 yrel-1 y4)
+  (sum-y y5 yrel0 y5)
+  (sum-y y5 yrel1 y6)
+  (sum-y y6 yrel-1 y5)
+  (sum-y y6 yrel0 y6)
+  (sum-y y6 yrel1 y7)
+  (sum-y y7 yrel-1 y6)
+  (sum-y y7 yrel0 y7)
+  (sum-y y7 yrel1 y8)
+  (sum-y y8 yrel-1 y7)
+  (sum-y y8 yrel0 y8)
+  (surface x1 y3)
+  (surface x1 y5)
+  (surface x3 y1)
+  (surface x4 y4)
+  (surface x4 y5)
+  (surface x5 y1)
+  (surface x5 y4)
+  (surface x5 y5)
+  (surface x6 y1)
+  (zerox-rel xrel0)
+  (zeroy-rel yrel0)
+Goal:
+  (and (object-done object0) (object-done object1) (object-done object2) (object-done object3))
+Metric:
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (NOT-base-obstacle xc yc): in_init in_pre in_eff
+  (NOT-gripper-obstacle xc yc): in_init in_pre in_eff
+  (NOT-object-done object): in_init in_pre in_eff
+  (NOT-parked robot): in_pre in_eff
+  (above yc yc): in_init in_pre
+  (above-rel yrel yrel): in_init in_pre
+  (base-pos robot xc yc): in_init in_pre in_eff
+  (cart-pos cart xc yc): in_init in_pre in_eff
+  (gripper-empty robot): in_init in_pre in_eff
+  (gripper-rel robot xrel yrel): in_init in_pre in_eff
+  (holding robot object): in_pre in_eff
+  (leftof xc xc): in_init in_pre
+  (leftof-rel xrel xrel): in_init in_pre
+  (not-pushed cart): in_init in_pre in_eff
+  (not-pushing robot): in_init in_pre in_eff
+  (object-done object): in_goal in_eff
+  (object-goal object xc yc): in_init in_pre
+  (object-pos object xc yc): in_init in_pre in_eff
+  (on-cart object cart): in_pre in_eff
+  (parked robot): in_init in_pre in_eff
+  (pushing robot cart): in_pre in_eff
+  (sum-x xc xrel xc): in_init in_pre
+  (sum-y yc yrel yc): in_init in_pre
+  (surface xc yc): in_init in_pre
+  (zerox-rel xrel): in_init in_pre
+  (zeroy-rel yrel): in_init in_pre
+Func prop:
+Global prop:
+  has_cond_eff
+  has_eq_pred
+  is_unit_cost

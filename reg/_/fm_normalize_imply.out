@@ -1,0 +1,8 @@
+non-static imply:
+  in : (imply (W:q a) (W:p b))
+  status: 1
+  out: (or (N:W:q a) (W:p b))
+static imply:
+  in : (imply (:ps x0) (W:q x0))
+  status: 1
+  out: (or (and (:= x0 a) (W:q a)) (:= x0 b))

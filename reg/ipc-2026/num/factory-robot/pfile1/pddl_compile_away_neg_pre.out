@@ -1,0 +1,25 @@
+Require:
+  - :negative-preconditions
+Predicate:
+  + (NOT-calibrated robot) neg-of (calibrated)
+  - (calibrated robot)
+  + (calibrated robot) neg-of (NOT-calibrated)
+Action:
+  - calibrate: ?r - robot ?s - station
+      pre: (and (at ?r ?s) (has-calibrator ?s) (not (calibrated ?r)))
+      eff: (and (calibrated ?r))
+  + calibrate: ?r - robot ?s - station
+      pre: (and (NOT-calibrated ?r) (at ?r ?s) (has-calibrator ?s))
+      eff: (and (calibrated ?r) (not (NOT-calibrated ?r)))
+  - turbo-work: ?r - robot ?s - station
+      pre: (and (>= (energy ?r) 20) (>= (production ?r) 150) (at ?r ?s))
+      eff: (and (decrease (energy ?r) 20) (increase (temperature ?r) 5) (increase (workload ?r) 10) (not (calibrated ?r)))
+  + turbo-work: ?r - robot ?s - station
+      pre: (and (>= (energy ?r) 20) (>= (production ?r) 150) (at ?r ?s))
+      eff: (and (NOT-calibrated ?r) (decrease (energy ?r) 20) (increase (temperature ?r) 5) (increase (workload ?r) 10) (not (calibrated ?r)))
+Pred prop:
+  + (NOT-calibrated robot): in_pre in_eff
+  - (calibrated robot): in_init in_pre in_pre_neg in_eff
+  + (calibrated robot): in_init in_pre in_eff
+Global prop:
+  - has_non_static_neg_cond

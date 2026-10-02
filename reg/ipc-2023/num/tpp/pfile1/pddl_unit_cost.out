@@ -1,0 +1,74 @@
+Domain: tpp-metric
+Problem: pfile02
+Require:
+  :equality
+  :negative-preconditions
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  depot - place
+  goods - locatable
+  locatable - object
+  market - place
+  object
+  place - object
+  truck - locatable
+Obj:
+  depot0 - depot
+  goods0 - goods
+  goods1 - goods
+  market1 - market
+  market2 - market
+  market3 - market
+  market4 - market
+  market5 - market
+  truck0 - truck
+Predicate:
+  (= object object) :eq
+  (loc truck place)
+Function:
+  (bought goods)
+  (on-sale goods market)
+  (request goods)
+Action:
+  buy-all: ?t - truck ?g - goods ?m - market
+      pre: (and (<= (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (on-sale ?g ?m) 0) (increase (bought ?g) (on-sale ?g ?m)))
+  buy-allneeded: ?t - truck ?g - goods ?m - market
+      pre: (and (> (on-sale ?g ?m) (- (request ?g) (bought ?g))) (> (on-sale ?g ?m) 0) (loc ?t ?m))
+      eff: (and (assign (bought ?g) (request ?g)) (decrease (on-sale ?g ?m) (- (request ?g) (bought ?g))))
+  drive: ?t - truck ?from - place ?to - place
+      pre: (and (loc ?t ?from) (not (= ?from ?to)))
+      eff: (and (loc ?t ?to) (not (loc ?t ?from)))
+Init:
+  (= (bought goods0) 0)
+  (= (bought goods1) 0)
+  (= (on-sale goods0 market1) 4)
+  (= (on-sale goods0 market2) 9)
+  (= (on-sale goods0 market3) 17)
+  (= (on-sale goods0 market4) 9)
+  (= (on-sale goods0 market5) 2)
+  (= (on-sale goods1 market1) 0)
+  (= (on-sale goods1 market2) 0)
+  (= (on-sale goods1 market3) 7)
+  (= (on-sale goods1 market4) 20)
+  (= (on-sale goods1 market5) 0)
+  (= (request goods0) 20)
+  (= (request goods1) 23)
+  (loc truck0 depot0)
+Goal:
+  (and (>= (bought goods0) (request goods0)) (>= (bought goods1) (request goods1)) (loc truck0 depot0))
+Metric:
+Pred prop:
+  (= object object): in_pre in_pre_neg
+  (loc truck place): in_init in_pre in_goal in_eff
+Func prop:
+  (bought goods): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(on-sale request)
+  (on-sale goods market): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(bought request)
+  (request goods): in_init init_all_nonneg init_all_int in_pre in_goal on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_eq_pred
+  has_num_cmp
+  is_numeric
+  is_unit_cost

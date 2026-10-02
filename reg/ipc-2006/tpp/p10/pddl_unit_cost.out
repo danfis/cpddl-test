@@ -1,80 +1,77 @@
 Domain: tpp-propositional
 Problem: tpp
-Require: 3
-Type[8]:
-    [0]: object, parent: -1
-    [1]: place, parent: 0
-    [2]: locatable, parent: 0
-    [3]: level, parent: 0
-    [4]: depot, parent: 1
-    [5]: market, parent: 1
-    [6]: truck, parent: 2
-    [7]: goods, parent: 2
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
-    [1]: 13 14 15 16
-    [2]: 0 1 2 3 4 5 6 7 8 9 10 11 12
-    [3]: 17 18 19
-    [4]: 16
-    [5]: 13 14 15
-    [6]: 10 11 12
-    [7]: 0 1 2 3 4 5 6 7 8 9
-Obj[20]:
-    [0]: goods1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: goods2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: goods3, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: goods4, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: goods5, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: goods6, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: goods7, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: goods8, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: goods9, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: goods10, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: truck1, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: truck2, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: truck3, type: 6, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: market1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: market2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: market3, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: depot1, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: level0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: level1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: level2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[8]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    loaded: 7 6 3 :: read: 1, write: 1, in-init: 1
-    ready-to-load: 7 5 3 :: read: 1, write: 1, in-init: 1
-    stored: 7 3 :: read: 1, write: 1, in-init: 1
-    on-sale: 7 5 3 :: read: 1, write: 1, in-init: 1
-    next: 3 3 :: read: 1, write: 0, in-init: 1
-    at: 6 1 :: read: 1, write: 1, in-init: 1
-    connected: 1 1 :: read: 1, write: 0, in-init: 1
-Function[0]:
-Action[4]:
-    drive: ?t:6 ?from:1 ?to:1
-        pre: (and (R:connected ?from ?to) (RW:at ?t ?from))
-        eff: (and (N:RW:at ?t ?from) (RW:at ?t ?to))
-    load: ?g:7 ?t:6 ?m:5 ?l1:3 ?l2:3 ?l3:3 ?l4:3
-        pre: (and (R:next ?l2 ?l1) (R:next ?l4 ?l3) (RW:loaded ?g ?t ?l3) (RW:ready-to-load ?g ?m ?l2) (RW:at ?t ?m))
-        eff: (and (N:RW:loaded ?g ?t ?l3) (RW:loaded ?g ?t ?l4) (RW:ready-to-load ?g ?m ?l1) (N:RW:ready-to-load ?g ?m ?l2))
-    unload: ?g:7 ?t:6 ?d:4 ?l1:3 ?l2:3 ?l3:3 ?l4:3
-        pre: (and (R:next ?l2 ?l1) (R:next ?l4 ?l3) (RW:loaded ?g ?t ?l2) (RW:stored ?g ?l3) (RW:at ?t ?d))
-        eff: (and (RW:loaded ?g ?t ?l1) (N:RW:loaded ?g ?t ?l2) (N:RW:stored ?g ?l3) (RW:stored ?g ?l4))
-    buy: ?t:6 ?g:7 ?m:5 ?l1:3 ?l2:3 ?l3:3 ?l4:3
-        pre: (and (R:next ?l2 ?l1) (R:next ?l4 ?l3) (RW:ready-to-load ?g ?m ?l3) (RW:on-sale ?g ?m ?l2) (RW:at ?t ?m))
-        eff: (and (N:RW:ready-to-load ?g ?m ?l3) (RW:ready-to-load ?g ?m ?l4) (RW:on-sale ?g ?m ?l1) (N:RW:on-sale ?g ?m ?l2))
-Init[111]:
-  S:(next level1 level0)
-  S:(next level2 level1)
-  S:(connected market1 market3)
-  S:(connected market2 market3)
-  S:(connected market2 depot1)
-  S:(connected market3 market1)
-  S:(connected market3 market2)
-  S:(connected depot1 market2)
+Require:
+  :strips
+  :typing
+Type:
+  depot - place
+  goods - locatable
+  level - object
+  locatable - object
+  market - place
+  object
+  place - object
+  truck - locatable
+Obj:
+  depot1 - depot
+  goods1 - goods
+  goods10 - goods
+  goods2 - goods
+  goods3 - goods
+  goods4 - goods
+  goods5 - goods
+  goods6 - goods
+  goods7 - goods
+  goods8 - goods
+  goods9 - goods
+  level0 - level
+  level1 - level
+  level2 - level
+  market1 - market
+  market2 - market
+  market3 - market
+  truck1 - truck
+  truck2 - truck
+  truck3 - truck
+Predicate:
+  (= object object) :eq
+  (at truck place)
+  (connected place place)
+  (loaded goods truck level)
+  (next level level)
+  (on-sale goods market level)
+  (ready-to-load goods market level)
+  (stored goods level)
+Function:
+Action:
+  buy: ?t - truck ?g - goods ?m - market ?l1 - level ?l2 - level ?l3 - level ?l4 - level
+      pre: (and (at ?t ?m) (next ?l2 ?l1) (next ?l4 ?l3) (on-sale ?g ?m ?l2) (ready-to-load ?g ?m ?l3))
+      eff: (and (not (on-sale ?g ?m ?l2)) (not (ready-to-load ?g ?m ?l3)) (on-sale ?g ?m ?l1) (ready-to-load ?g ?m ?l4))
+  drive: ?t - truck ?from - place ?to - place
+      pre: (and (at ?t ?from) (connected ?from ?to))
+      eff: (and (at ?t ?to) (not (at ?t ?from)))
+  load: ?g - goods ?t - truck ?m - market ?l1 - level ?l2 - level ?l3 - level ?l4 - level
+      pre: (and (at ?t ?m) (loaded ?g ?t ?l3) (next ?l2 ?l1) (next ?l4 ?l3) (ready-to-load ?g ?m ?l2))
+      eff: (and (loaded ?g ?t ?l4) (not (loaded ?g ?t ?l3)) (not (ready-to-load ?g ?m ?l2)) (ready-to-load ?g ?m ?l1))
+  unload: ?g - goods ?t - truck ?d - depot ?l1 - level ?l2 - level ?l3 - level ?l4 - level
+      pre: (and (at ?t ?d) (loaded ?g ?t ?l2) (next ?l2 ?l1) (next ?l4 ?l3) (stored ?g ?l3))
+      eff: (and (loaded ?g ?t ?l1) (not (loaded ?g ?t ?l2)) (not (stored ?g ?l3)) (stored ?g ?l4))
+Init:
+  (at truck1 depot1)
+  (at truck2 depot1)
+  (at truck3 depot1)
+  (connected depot1 market2)
+  (connected market1 market3)
+  (connected market2 depot1)
+  (connected market2 market3)
+  (connected market3 market1)
+  (connected market3 market2)
   (loaded goods1 truck1 level0)
   (loaded goods1 truck2 level0)
   (loaded goods1 truck3 level0)
+  (loaded goods10 truck1 level0)
+  (loaded goods10 truck2 level0)
+  (loaded goods10 truck3 level0)
   (loaded goods2 truck1 level0)
   (loaded goods2 truck2 level0)
   (loaded goods2 truck3 level0)
@@ -99,52 +96,14 @@ Init[111]:
   (loaded goods9 truck1 level0)
   (loaded goods9 truck2 level0)
   (loaded goods9 truck3 level0)
-  (loaded goods10 truck1 level0)
-  (loaded goods10 truck2 level0)
-  (loaded goods10 truck3 level0)
-  (ready-to-load goods1 market1 level0)
-  (ready-to-load goods1 market2 level0)
-  (ready-to-load goods1 market3 level0)
-  (ready-to-load goods2 market1 level0)
-  (ready-to-load goods2 market2 level0)
-  (ready-to-load goods2 market3 level0)
-  (ready-to-load goods3 market1 level0)
-  (ready-to-load goods3 market2 level0)
-  (ready-to-load goods3 market3 level0)
-  (ready-to-load goods4 market1 level0)
-  (ready-to-load goods4 market2 level0)
-  (ready-to-load goods4 market3 level0)
-  (ready-to-load goods5 market1 level0)
-  (ready-to-load goods5 market2 level0)
-  (ready-to-load goods5 market3 level0)
-  (ready-to-load goods6 market1 level0)
-  (ready-to-load goods6 market2 level0)
-  (ready-to-load goods6 market3 level0)
-  (ready-to-load goods7 market1 level0)
-  (ready-to-load goods7 market2 level0)
-  (ready-to-load goods7 market3 level0)
-  (ready-to-load goods8 market1 level0)
-  (ready-to-load goods8 market2 level0)
-  (ready-to-load goods8 market3 level0)
-  (ready-to-load goods9 market1 level0)
-  (ready-to-load goods9 market2 level0)
-  (ready-to-load goods9 market3 level0)
-  (ready-to-load goods10 market1 level0)
-  (ready-to-load goods10 market2 level0)
-  (ready-to-load goods10 market3 level0)
-  (stored goods1 level0)
-  (stored goods2 level0)
-  (stored goods3 level0)
-  (stored goods4 level0)
-  (stored goods5 level0)
-  (stored goods6 level0)
-  (stored goods7 level0)
-  (stored goods8 level0)
-  (stored goods9 level0)
-  (stored goods10 level0)
+  (next level1 level0)
+  (next level2 level1)
   (on-sale goods1 market1 level1)
   (on-sale goods1 market2 level1)
   (on-sale goods1 market3 level0)
+  (on-sale goods10 market1 level0)
+  (on-sale goods10 market2 level1)
+  (on-sale goods10 market3 level1)
   (on-sale goods2 market1 level0)
   (on-sale goods2 market2 level2)
   (on-sale goods2 market3 level0)
@@ -169,12 +128,57 @@ Init[111]:
   (on-sale goods9 market1 level0)
   (on-sale goods9 market2 level1)
   (on-sale goods9 market3 level0)
-  (on-sale goods10 market1 level0)
-  (on-sale goods10 market2 level1)
-  (on-sale goods10 market3 level1)
-  (at truck1 depot1)
-  (at truck2 depot1)
-  (at truck3 depot1)
-Init[0]:
-Goal: (and (RW:stored goods1 level2) (RW:stored goods2 level1) (RW:stored goods3 level2) (RW:stored goods4 level2) (RW:stored goods5 level2) (RW:stored goods6 level1) (RW:stored goods7 level2) (RW:stored goods8 level2) (RW:stored goods9 level1) (RW:stored goods10 level1))
-Metric: no-metric
+  (ready-to-load goods1 market1 level0)
+  (ready-to-load goods1 market2 level0)
+  (ready-to-load goods1 market3 level0)
+  (ready-to-load goods10 market1 level0)
+  (ready-to-load goods10 market2 level0)
+  (ready-to-load goods10 market3 level0)
+  (ready-to-load goods2 market1 level0)
+  (ready-to-load goods2 market2 level0)
+  (ready-to-load goods2 market3 level0)
+  (ready-to-load goods3 market1 level0)
+  (ready-to-load goods3 market2 level0)
+  (ready-to-load goods3 market3 level0)
+  (ready-to-load goods4 market1 level0)
+  (ready-to-load goods4 market2 level0)
+  (ready-to-load goods4 market3 level0)
+  (ready-to-load goods5 market1 level0)
+  (ready-to-load goods5 market2 level0)
+  (ready-to-load goods5 market3 level0)
+  (ready-to-load goods6 market1 level0)
+  (ready-to-load goods6 market2 level0)
+  (ready-to-load goods6 market3 level0)
+  (ready-to-load goods7 market1 level0)
+  (ready-to-load goods7 market2 level0)
+  (ready-to-load goods7 market3 level0)
+  (ready-to-load goods8 market1 level0)
+  (ready-to-load goods8 market2 level0)
+  (ready-to-load goods8 market3 level0)
+  (ready-to-load goods9 market1 level0)
+  (ready-to-load goods9 market2 level0)
+  (ready-to-load goods9 market3 level0)
+  (stored goods1 level0)
+  (stored goods10 level0)
+  (stored goods2 level0)
+  (stored goods3 level0)
+  (stored goods4 level0)
+  (stored goods5 level0)
+  (stored goods6 level0)
+  (stored goods7 level0)
+  (stored goods8 level0)
+  (stored goods9 level0)
+Goal:
+  (and (stored goods1 level2) (stored goods10 level1) (stored goods2 level1) (stored goods3 level2) (stored goods4 level2) (stored goods5 level2) (stored goods6 level1) (stored goods7 level2) (stored goods8 level2) (stored goods9 level1))
+Metric:
+Pred prop:
+  (at truck place): in_init in_pre in_eff
+  (connected place place): in_init in_pre
+  (loaded goods truck level): in_init in_pre in_eff
+  (next level level): in_init in_pre
+  (on-sale goods market level): in_init in_pre in_eff
+  (ready-to-load goods market level): in_init in_pre in_eff
+  (stored goods level): in_init in_pre in_goal in_eff
+Func prop:
+Global prop:
+  is_unit_cost

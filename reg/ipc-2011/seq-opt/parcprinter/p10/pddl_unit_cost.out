@@ -1,193 +1,201 @@
 Domain: etipp
 Problem: printjob
-Require: 3
-Type[8]:
-    [0]: object, parent: -1
-    [1]: size_t, parent: 0
-    [2]: location_t, parent: 0
-    [3]: side_t, parent: 0
-    [4]: color_t, parent: 0
-    [5]: image_t, parent: 0
-    [6]: resource_t, parent: 0
-    [7]: sheet_t, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
-    [1]: 0
-    [2]: 5 6 7 8 9 10 11 12 13 14 15 16 17 18
-    [3]: 3 4
-    [4]: 1 2
-    [5]: 32 33 34 35 36 37
-    [6]: 19 20 21 22 23 24 25
-    [7]: 26 27 28 29 30 31
-Obj[38]:
-    [0]: letter, type: 1, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [1]: black, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [2]: color, type: 4, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [3]: front, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [4]: back, type: 3, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [5]: some_feeder_tray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [6]: some_finisher_tray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [7]: some_purge_tray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [8]: fe1_exit-hw1_leftentry, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [9]: hw1_rightexit-sys_entry, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [10]: uc1_entry-hw1_topleftexit, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [11]: lc1_entry-hw1_bottomleftexit, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [12]: hw1_toprightentry-uc1_exit, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [13]: lc1_exit-hw1_bottomrightentry, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [14]: uc1_exittoime-uime_entry, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [15]: uime_exit-uc1_entryfromime, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [16]: lime_entry-lc1_exittoime, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [17]: lc1_entryfromime-lime_exit, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [18]: sys_outputtray, type: 2, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [19]: fe1-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [20]: hw1-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [21]: uc1-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [22]: uime-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [23]: lc1-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [24]: lime-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [25]: sys-rsrc, type: 6, is-constant: 1, is-private: 0, owner: -1, is-agent: 0
-    [26]: dummy-sheet, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [27]: sheet1, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [28]: sheet2, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [29]: sheet3, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [30]: sheet4, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [31]: sheet5, type: 7, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [32]: image-1, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [33]: image-2, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [34]: image-2b, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [35]: image-3, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [36]: image-4, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [37]: image-5, type: 5, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[12]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    sheetsize: 7 1 :: read: 1, write: 0, in-init: 1
-    location: 7 2 :: read: 1, write: 1, in-init: 1
-    hasimage: 7 3 5 :: read: 1, write: 1, in-init: 0
-    sideup: 7 3 :: read: 1, write: 1, in-init: 0
-    stackedin: 7 2 :: read: 1, write: 1, in-init: 0
-    imagecolor: 5 4 :: read: 1, write: 0, in-init: 1
-    notprintedwith: 7 3 4 :: read: 1, write: 1, in-init: 1
-    oppositeside: 3 3 :: read: 1, write: 0, in-init: 1
-    available: 6 :: read: 1, write: 1, in-init: 0
-    prevsheet: 7 7 :: read: 1, write: 0, in-init: 1
-    uninitialized: :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[23]:
-    initialize: 
-        pre: (and (RW:uninitialized))
-        eff: (and (RW:available fe1-rsrc) (RW:available hw1-rsrc) (RW:available uc1-rsrc) (RW:available uime-rsrc) (RW:available lc1-rsrc) (RW:available lime-rsrc) (RW:available sys-rsrc) (N:RW:uninitialized))
-    fe1-feedmsi-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc))
-        eff: (and (N:RW:location ?sheet some_feeder_tray) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:sideup ?sheet back) (RW:available fe1-rsrc))
-    fe1-feed-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet some_feeder_tray) (RW:available fe1-rsrc))
-        eff: (and (N:RW:location ?sheet some_feeder_tray) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:sideup ?sheet back) (RW:available fe1-rsrc))
-    hw1-leftentrytotopleftexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:available hw1-rsrc))
-        eff: (and (N:RW:location ?sheet fe1_exit-hw1_leftentry) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:available hw1-rsrc))
-    hw1-leftentrytobottomleftexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet fe1_exit-hw1_leftentry) (RW:available hw1-rsrc))
-        eff: (and (N:RW:location ?sheet fe1_exit-hw1_leftentry) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:available hw1-rsrc))
-    hw1-toprightentrytotopleftexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
-        eff: (and (RW:location ?sheet uc1_entry-hw1_topleftexit) (N:RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
-    hw1-toprightentrytobottomleftexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
-        eff: (and (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (N:RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
-    hw1-bottomrightentrytotopleftexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
-        eff: (and (RW:location ?sheet uc1_entry-hw1_topleftexit) (N:RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
-    hw1-bottomrightentrytobottomleftexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
-        eff: (and (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (N:RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
-    hw1-toprightentrytorightexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
-        eff: (and (RW:location ?sheet hw1_rightexit-sys_entry) (N:RW:location ?sheet hw1_toprightentry-uc1_exit) (RW:available hw1-rsrc))
-    hw1-bottomrightentrytorightexit-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
-        eff: (and (RW:location ?sheet hw1_rightexit-sys_entry) (N:RW:location ?sheet lc1_exit-hw1_bottomrightentry) (RW:available hw1-rsrc))
-    uc1-toime-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:available uc1-rsrc))
-        eff: (and (N:RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:available uc1-rsrc))
-    uc1-inverttoime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:sideup ?sheet ?face) (RW:available uc1-rsrc))
-        eff: (and (N:RW:location ?sheet uc1_entry-hw1_topleftexit) (RW:location ?sheet uc1_exittoime-uime_entry) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available uc1-rsrc))
-    uc1-fromime-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:available uc1-rsrc))
-        eff: (and (RW:location ?sheet hw1_toprightentry-uc1_exit) (N:RW:location ?sheet uime_exit-uc1_entryfromime) (RW:available uc1-rsrc))
-    uc1-invertfromime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:sideup ?sheet ?face) (RW:available uc1-rsrc))
-        eff: (and (RW:location ?sheet hw1_toprightentry-uc1_exit) (N:RW:location ?sheet uime_exit-uc1_entryfromime) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available uc1-rsrc))
-    uime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet uc1_exittoime-uime_entry) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc))
-        eff: (and (N:RW:location ?sheet uc1_exittoime-uime_entry) (RW:location ?sheet uime_exit-uc1_entryfromime) (RW:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available uime-rsrc))
-    lc1-toime-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:available lc1-rsrc))
-        eff: (and (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:available lc1-rsrc))
-    lc1-inverttoime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:sideup ?sheet ?face) (RW:available lc1-rsrc))
-        eff: (and (N:RW:location ?sheet lc1_entry-hw1_bottomleftexit) (RW:location ?sheet lime_entry-lc1_exittoime) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available lc1-rsrc))
-    lc1-fromime-letter: ?sheet:7
-        pre: (and (R:sheetsize ?sheet letter) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:available lc1-rsrc))
-        eff: (and (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (N:RW:location ?sheet lc1_entryfromime-lime_exit) (RW:available lc1-rsrc))
-    lc1-invertfromime-letter: ?sheet:7 ?face:3 ?otherface:3
-        pre: (and (R:sheetsize ?sheet letter) (R:oppositeside ?face ?otherface) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:sideup ?sheet ?face) (RW:available lc1-rsrc))
-        eff: (and (RW:location ?sheet lc1_exit-hw1_bottomrightentry) (N:RW:location ?sheet lc1_entryfromime-lime_exit) (N:RW:sideup ?sheet ?face) (RW:sideup ?sheet ?otherface) (RW:available lc1-rsrc))
-    lime-simplex-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image color) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc))
-        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face color) (RW:available lime-rsrc))
-    lime-simplexmono-letter: ?sheet:7 ?face:3 ?image:5
-        pre: (and (R:sheetsize ?sheet letter) (R:imagecolor ?image black) (RW:location ?sheet lime_entry-lc1_exittoime) (RW:sideup ?sheet ?face) (RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc))
-        eff: (and (N:RW:location ?sheet lime_entry-lc1_exittoime) (RW:location ?sheet lc1_entryfromime-lime_exit) (RW:hasimage ?sheet ?face ?image) (N:RW:notprintedwith ?sheet ?face black) (RW:available lime-rsrc))
-    sys-stack-letter: ?sheet:7 ?prevsheet:7
-        pre: (and (R:sheetsize ?sheet letter) (R:prevsheet ?sheet ?prevsheet) (RW:location ?sheet hw1_rightexit-sys_entry) (RW:location ?prevsheet some_finisher_tray) (RW:available sys-rsrc))
-        eff: (and (RW:location ?sheet some_finisher_tray) (N:RW:location ?sheet hw1_rightexit-sys_entry) (RW:stackedin ?sheet sys_outputtray) (RW:available sys-rsrc))
-Init[45]:
-  S:(sheetsize sheet1 letter)
-  S:(sheetsize sheet2 letter)
-  S:(sheetsize sheet3 letter)
-  S:(sheetsize sheet4 letter)
-  S:(sheetsize sheet5 letter)
-  S:(imagecolor image-1 black)
-  S:(imagecolor image-2 color)
-  S:(imagecolor image-2b color)
-  S:(imagecolor image-3 black)
-  S:(imagecolor image-4 color)
-  S:(imagecolor image-5 color)
-  S:(oppositeside front back)
-  S:(oppositeside back front)
-  S:(prevsheet sheet1 dummy-sheet)
-  S:(prevsheet sheet2 sheet1)
-  S:(prevsheet sheet3 sheet2)
-  S:(prevsheet sheet4 sheet3)
-  S:(prevsheet sheet5 sheet4)
+Require:
+  :strips
+  :typing
+Type:
+  color_t - object
+  image_t - object
+  location_t - object
+  object
+  resource_t - object
+  sheet_t - object
+  side_t - object
+  size_t - object
+Obj:
+  back - side_t :constant
+  black - color_t :constant
+  color - color_t :constant
+  dummy-sheet - sheet_t
+  fe1-rsrc - resource_t :constant
+  fe1_exit-hw1_leftentry - location_t :constant
+  front - side_t :constant
+  hw1-rsrc - resource_t :constant
+  hw1_rightexit-sys_entry - location_t :constant
+  hw1_toprightentry-uc1_exit - location_t :constant
+  image-1 - image_t
+  image-2 - image_t
+  image-2b - image_t
+  image-3 - image_t
+  image-4 - image_t
+  image-5 - image_t
+  lc1-rsrc - resource_t :constant
+  lc1_entry-hw1_bottomleftexit - location_t :constant
+  lc1_entryfromime-lime_exit - location_t :constant
+  lc1_exit-hw1_bottomrightentry - location_t :constant
+  letter - size_t :constant
+  lime-rsrc - resource_t :constant
+  lime_entry-lc1_exittoime - location_t :constant
+  sheet1 - sheet_t
+  sheet2 - sheet_t
+  sheet3 - sheet_t
+  sheet4 - sheet_t
+  sheet5 - sheet_t
+  some_feeder_tray - location_t :constant
+  some_finisher_tray - location_t :constant
+  some_purge_tray - location_t :constant
+  sys-rsrc - resource_t :constant
+  sys_outputtray - location_t :constant
+  uc1-rsrc - resource_t :constant
+  uc1_entry-hw1_topleftexit - location_t :constant
+  uc1_exittoime-uime_entry - location_t :constant
+  uime-rsrc - resource_t :constant
+  uime_exit-uc1_entryfromime - location_t :constant
+Predicate:
+  (= object object) :eq
+  (available resource_t)
+  (hasimage sheet_t side_t image_t)
+  (imagecolor image_t color_t)
+  (location sheet_t location_t)
+  (notprintedwith sheet_t side_t color_t)
+  (oppositeside side_t side_t)
+  (prevsheet sheet_t sheet_t)
+  (sheetsize sheet_t size_t)
+  (sideup sheet_t side_t)
+  (stackedin sheet_t location_t)
+  (uninitialized)
+Function:
+Action:
+  fe1-feed-letter: ?sheet - sheet_t
+      pre: (and (available fe1-rsrc) (location ?sheet some_feeder_tray) (sheetsize ?sheet letter))
+      eff: (and (available fe1-rsrc) (location ?sheet fe1_exit-hw1_leftentry) (not (location ?sheet some_feeder_tray)) (sideup ?sheet back))
+  fe1-feedmsi-letter: ?sheet - sheet_t
+      pre: (and (available fe1-rsrc) (location ?sheet some_feeder_tray) (sheetsize ?sheet letter))
+      eff: (and (available fe1-rsrc) (location ?sheet fe1_exit-hw1_leftentry) (not (location ?sheet some_feeder_tray)) (sideup ?sheet back))
+  hw1-bottomrightentrytobottomleftexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet lc1_exit-hw1_bottomrightentry) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet lc1_entry-hw1_bottomleftexit) (not (location ?sheet lc1_exit-hw1_bottomrightentry)))
+  hw1-bottomrightentrytorightexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet lc1_exit-hw1_bottomrightentry) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet hw1_rightexit-sys_entry) (not (location ?sheet lc1_exit-hw1_bottomrightentry)))
+  hw1-bottomrightentrytotopleftexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet lc1_exit-hw1_bottomrightentry) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet uc1_entry-hw1_topleftexit) (not (location ?sheet lc1_exit-hw1_bottomrightentry)))
+  hw1-leftentrytobottomleftexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet fe1_exit-hw1_leftentry) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet lc1_entry-hw1_bottomleftexit) (not (location ?sheet fe1_exit-hw1_leftentry)))
+  hw1-leftentrytotopleftexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet fe1_exit-hw1_leftentry) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet uc1_entry-hw1_topleftexit) (not (location ?sheet fe1_exit-hw1_leftentry)))
+  hw1-toprightentrytobottomleftexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet hw1_toprightentry-uc1_exit) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet lc1_entry-hw1_bottomleftexit) (not (location ?sheet hw1_toprightentry-uc1_exit)))
+  hw1-toprightentrytorightexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet hw1_toprightentry-uc1_exit) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet hw1_rightexit-sys_entry) (not (location ?sheet hw1_toprightentry-uc1_exit)))
+  hw1-toprightentrytotopleftexit-letter: ?sheet - sheet_t
+      pre: (and (available hw1-rsrc) (location ?sheet hw1_toprightentry-uc1_exit) (sheetsize ?sheet letter))
+      eff: (and (available hw1-rsrc) (location ?sheet uc1_entry-hw1_topleftexit) (not (location ?sheet hw1_toprightentry-uc1_exit)))
+  initialize:
+      pre: (and (uninitialized))
+      eff: (and (available fe1-rsrc) (available hw1-rsrc) (available lc1-rsrc) (available lime-rsrc) (available sys-rsrc) (available uc1-rsrc) (available uime-rsrc) (not (uninitialized)))
+  lc1-fromime-letter: ?sheet - sheet_t
+      pre: (and (available lc1-rsrc) (location ?sheet lc1_entryfromime-lime_exit) (sheetsize ?sheet letter))
+      eff: (and (available lc1-rsrc) (location ?sheet lc1_exit-hw1_bottomrightentry) (not (location ?sheet lc1_entryfromime-lime_exit)))
+  lc1-invertfromime-letter: ?sheet - sheet_t ?face - side_t ?otherface - side_t
+      pre: (and (available lc1-rsrc) (location ?sheet lc1_entryfromime-lime_exit) (oppositeside ?face ?otherface) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available lc1-rsrc) (location ?sheet lc1_exit-hw1_bottomrightentry) (not (location ?sheet lc1_entryfromime-lime_exit)) (not (sideup ?sheet ?face)) (sideup ?sheet ?otherface))
+  lc1-inverttoime-letter: ?sheet - sheet_t ?face - side_t ?otherface - side_t
+      pre: (and (available lc1-rsrc) (location ?sheet lc1_entry-hw1_bottomleftexit) (oppositeside ?face ?otherface) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available lc1-rsrc) (location ?sheet lime_entry-lc1_exittoime) (not (location ?sheet lc1_entry-hw1_bottomleftexit)) (not (sideup ?sheet ?face)) (sideup ?sheet ?otherface))
+  lc1-toime-letter: ?sheet - sheet_t
+      pre: (and (available lc1-rsrc) (location ?sheet lc1_entry-hw1_bottomleftexit) (sheetsize ?sheet letter))
+      eff: (and (available lc1-rsrc) (location ?sheet lime_entry-lc1_exittoime) (not (location ?sheet lc1_entry-hw1_bottomleftexit)))
+  lime-simplex-letter: ?sheet - sheet_t ?face - side_t ?image - image_t
+      pre: (and (available lime-rsrc) (imagecolor ?image color) (location ?sheet lime_entry-lc1_exittoime) (notprintedwith ?sheet ?face color) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available lime-rsrc) (hasimage ?sheet ?face ?image) (location ?sheet lc1_entryfromime-lime_exit) (not (location ?sheet lime_entry-lc1_exittoime)) (not (notprintedwith ?sheet ?face color)))
+  lime-simplexmono-letter: ?sheet - sheet_t ?face - side_t ?image - image_t
+      pre: (and (available lime-rsrc) (imagecolor ?image black) (location ?sheet lime_entry-lc1_exittoime) (notprintedwith ?sheet ?face black) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available lime-rsrc) (hasimage ?sheet ?face ?image) (location ?sheet lc1_entryfromime-lime_exit) (not (location ?sheet lime_entry-lc1_exittoime)) (not (notprintedwith ?sheet ?face black)))
+  sys-stack-letter: ?sheet - sheet_t ?prevsheet - sheet_t
+      pre: (and (available sys-rsrc) (location ?prevsheet some_finisher_tray) (location ?sheet hw1_rightexit-sys_entry) (prevsheet ?sheet ?prevsheet) (sheetsize ?sheet letter))
+      eff: (and (available sys-rsrc) (location ?sheet some_finisher_tray) (not (location ?sheet hw1_rightexit-sys_entry)) (stackedin ?sheet sys_outputtray))
+  uc1-fromime-letter: ?sheet - sheet_t
+      pre: (and (available uc1-rsrc) (location ?sheet uime_exit-uc1_entryfromime) (sheetsize ?sheet letter))
+      eff: (and (available uc1-rsrc) (location ?sheet hw1_toprightentry-uc1_exit) (not (location ?sheet uime_exit-uc1_entryfromime)))
+  uc1-invertfromime-letter: ?sheet - sheet_t ?face - side_t ?otherface - side_t
+      pre: (and (available uc1-rsrc) (location ?sheet uime_exit-uc1_entryfromime) (oppositeside ?face ?otherface) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available uc1-rsrc) (location ?sheet hw1_toprightentry-uc1_exit) (not (location ?sheet uime_exit-uc1_entryfromime)) (not (sideup ?sheet ?face)) (sideup ?sheet ?otherface))
+  uc1-inverttoime-letter: ?sheet - sheet_t ?face - side_t ?otherface - side_t
+      pre: (and (available uc1-rsrc) (location ?sheet uc1_entry-hw1_topleftexit) (oppositeside ?face ?otherface) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available uc1-rsrc) (location ?sheet uc1_exittoime-uime_entry) (not (location ?sheet uc1_entry-hw1_topleftexit)) (not (sideup ?sheet ?face)) (sideup ?sheet ?otherface))
+  uc1-toime-letter: ?sheet - sheet_t
+      pre: (and (available uc1-rsrc) (location ?sheet uc1_entry-hw1_topleftexit) (sheetsize ?sheet letter))
+      eff: (and (available uc1-rsrc) (location ?sheet uc1_exittoime-uime_entry) (not (location ?sheet uc1_entry-hw1_topleftexit)))
+  uime-simplex-letter: ?sheet - sheet_t ?face - side_t ?image - image_t
+      pre: (and (available uime-rsrc) (imagecolor ?image black) (location ?sheet uc1_exittoime-uime_entry) (notprintedwith ?sheet ?face black) (sheetsize ?sheet letter) (sideup ?sheet ?face))
+      eff: (and (available uime-rsrc) (hasimage ?sheet ?face ?image) (location ?sheet uime_exit-uc1_entryfromime) (not (location ?sheet uc1_exittoime-uime_entry)) (not (notprintedwith ?sheet ?face black)))
+Init:
+  (imagecolor image-1 black)
+  (imagecolor image-2 color)
+  (imagecolor image-2b color)
+  (imagecolor image-3 black)
+  (imagecolor image-4 color)
+  (imagecolor image-5 color)
   (location dummy-sheet some_finisher_tray)
   (location sheet1 some_feeder_tray)
   (location sheet2 some_feeder_tray)
   (location sheet3 some_feeder_tray)
   (location sheet4 some_feeder_tray)
   (location sheet5 some_feeder_tray)
-  (notprintedwith sheet1 front black)
-  (notprintedwith sheet1 front color)
   (notprintedwith sheet1 back black)
   (notprintedwith sheet1 back color)
-  (notprintedwith sheet2 front black)
-  (notprintedwith sheet2 front color)
+  (notprintedwith sheet1 front black)
+  (notprintedwith sheet1 front color)
   (notprintedwith sheet2 back black)
   (notprintedwith sheet2 back color)
-  (notprintedwith sheet3 front black)
-  (notprintedwith sheet3 front color)
+  (notprintedwith sheet2 front black)
+  (notprintedwith sheet2 front color)
   (notprintedwith sheet3 back black)
   (notprintedwith sheet3 back color)
-  (notprintedwith sheet4 front black)
-  (notprintedwith sheet4 front color)
+  (notprintedwith sheet3 front black)
+  (notprintedwith sheet3 front color)
   (notprintedwith sheet4 back black)
   (notprintedwith sheet4 back color)
-  (notprintedwith sheet5 front black)
-  (notprintedwith sheet5 front color)
+  (notprintedwith sheet4 front black)
+  (notprintedwith sheet4 front color)
   (notprintedwith sheet5 back black)
   (notprintedwith sheet5 back color)
+  (notprintedwith sheet5 front black)
+  (notprintedwith sheet5 front color)
+  (oppositeside back front)
+  (oppositeside front back)
+  (prevsheet sheet1 dummy-sheet)
+  (prevsheet sheet2 sheet1)
+  (prevsheet sheet3 sheet2)
+  (prevsheet sheet4 sheet3)
+  (prevsheet sheet5 sheet4)
+  (sheetsize sheet1 letter)
+  (sheetsize sheet2 letter)
+  (sheetsize sheet3 letter)
+  (sheetsize sheet4 letter)
+  (sheetsize sheet5 letter)
   (uninitialized)
-Init[0]:
-Goal: (and (RW:hasimage sheet1 front image-1) (RW:hasimage sheet2 front image-2) (RW:hasimage sheet2 back image-2b) (RW:hasimage sheet3 front image-3) (RW:hasimage sheet4 front image-4) (RW:hasimage sheet5 front image-5) (RW:sideup sheet1 front) (RW:sideup sheet2 front) (RW:sideup sheet3 front) (RW:sideup sheet4 front) (RW:sideup sheet5 front) (RW:stackedin sheet1 sys_outputtray) (RW:stackedin sheet2 sys_outputtray) (RW:stackedin sheet3 sys_outputtray) (RW:stackedin sheet4 sys_outputtray) (RW:stackedin sheet5 sys_outputtray) (RW:notprintedwith sheet1 front color) (RW:notprintedwith sheet1 back black) (RW:notprintedwith sheet1 back color) (RW:notprintedwith sheet2 front black) (RW:notprintedwith sheet2 back black) (RW:notprintedwith sheet3 front color) (RW:notprintedwith sheet3 back black) (RW:notprintedwith sheet3 back color) (RW:notprintedwith sheet4 front black) (RW:notprintedwith sheet4 back black) (RW:notprintedwith sheet4 back color) (RW:notprintedwith sheet5 front black) (RW:notprintedwith sheet5 back black) (RW:notprintedwith sheet5 back color))
-Metric: no-metric
+Goal:
+  (and (hasimage sheet1 front image-1) (hasimage sheet2 back image-2b) (hasimage sheet2 front image-2) (hasimage sheet3 front image-3) (hasimage sheet4 front image-4) (hasimage sheet5 front image-5) (notprintedwith sheet1 back black) (notprintedwith sheet1 back color) (notprintedwith sheet1 front color) (notprintedwith sheet2 back black) (notprintedwith sheet2 front black) (notprintedwith sheet3 back black) (notprintedwith sheet3 back color) (notprintedwith sheet3 front color) (notprintedwith sheet4 back black) (notprintedwith sheet4 back color) (notprintedwith sheet4 front black) (notprintedwith sheet5 back black) (notprintedwith sheet5 back color) (notprintedwith sheet5 front black) (sideup sheet1 front) (sideup sheet2 front) (sideup sheet3 front) (sideup sheet4 front) (sideup sheet5 front) (stackedin sheet1 sys_outputtray) (stackedin sheet2 sys_outputtray) (stackedin sheet3 sys_outputtray) (stackedin sheet4 sys_outputtray) (stackedin sheet5 sys_outputtray))
+Metric:
+Pred prop:
+  (available resource_t): in_pre in_eff
+  (hasimage sheet_t side_t image_t): in_goal in_eff
+  (imagecolor image_t color_t): in_init in_pre
+  (location sheet_t location_t): in_init in_pre in_eff
+  (notprintedwith sheet_t side_t color_t): in_init in_pre in_goal in_eff
+  (oppositeside side_t side_t): in_init in_pre
+  (prevsheet sheet_t sheet_t): in_init in_pre
+  (sheetsize sheet_t size_t): in_init in_pre
+  (sideup sheet_t side_t): in_pre in_goal in_eff
+  (stackedin sheet_t location_t): in_goal in_eff
+  (uninitialized): in_init in_pre in_eff
+Func prop:
+Global prop:
+  is_unit_cost

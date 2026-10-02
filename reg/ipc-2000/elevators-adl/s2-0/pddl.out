@@ -1,55 +1,66 @@
 Domain: miconic
 Problem: mixed-f4-p2-u0-v0-g0-a0-n0-a0-b0-n0-f0-r0
-Require: 83
-Type[3]:
-    [0]: object, parent: -1
-    [1]: passenger, parent: 0
-    [2]: floor, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5
-    [1]: 0 1
-    [2]: 2 3 4 5
-Obj[6]:
-    [0]: p0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: p1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: f0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: f1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: f2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: f3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[8]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    origin: 1 2 :: read: 1, write: 0, in-init: 1
-    destin: 1 2 :: read: 1, write: 0, in-init: 1
-    above: 2 2 :: read: 1, write: 0, in-init: 1
-    boarded: 1 :: read: 1, write: 1, in-init: 0
-    served: 1 :: read: 1, write: 1, in-init: 0, neg-of: NOT-served
-    lift-at: 2 :: read: 1, write: 1, in-init: 1
-    NOT-served: 1 :: read: 1, write: 1, in-init: 1, neg-of: served
-Function[0]:
-Action[3]:
-    stop: ?f:2
-        pre: (and (RW:lift-at ?f))
-        eff: (and (when (and (RW:boarded p0) (R:destin p0 ?f)) (and (N:RW:boarded p0) (RW:served p0) (N:RW:NOT-served p0))) (when (and (RW:boarded p1) (R:destin p1 ?f)) (and (N:RW:boarded p1) (RW:served p1) (N:RW:NOT-served p1))) (when (and (R:origin p0 ?f) (RW:NOT-served p0)) (RW:boarded p0)) (when (and (R:origin p1 ?f) (RW:NOT-served p1)) (RW:boarded p1)))
-    up: ?f1:2 ?f2:2
-        pre: (and (R:above ?f1 ?f2) (RW:lift-at ?f1))
-        eff: (and (N:RW:lift-at ?f1) (RW:lift-at ?f2))
-    down: ?f1:2 ?f2:2
-        pre: (and (R:above ?f2 ?f1) (RW:lift-at ?f1))
-        eff: (and (N:RW:lift-at ?f1) (RW:lift-at ?f2))
-Init[13]:
-  S:(origin p0 f3)
-  S:(origin p1 f1)
-  S:(destin p0 f2)
-  S:(destin p1 f3)
-  S:(above f0 f1)
-  S:(above f0 f2)
-  S:(above f0 f3)
-  S:(above f1 f2)
-  S:(above f1 f3)
-  S:(above f2 f3)
-  (lift-at f0)
+Require:
+  :conditional-effects
+  :strips
+  :typing
+Type:
+  floor - object
+  object
+  passenger - object
+Obj:
+  f0 - floor
+  f1 - floor
+  f2 - floor
+  f3 - floor
+  p0 - passenger
+  p1 - passenger
+Predicate:
+  (= object object) :eq
+  (NOT-served passenger) neg-of (served)
+  (above floor floor)
+  (boarded passenger)
+  (destin passenger floor)
+  (lift-at floor)
+  (origin passenger floor)
+  (served passenger) neg-of (NOT-served)
+Function:
+Action:
+  down: ?f1 - floor ?f2 - floor
+      pre: (and (above ?f2 ?f1) (lift-at ?f1))
+      eff: (and (lift-at ?f2) (not (lift-at ?f1)))
+  stop: ?f - floor
+      pre: (and (lift-at ?f))
+      eff: (and (when (and (NOT-served p0) (origin p0 ?f)) (boarded p0)) (when (and (NOT-served p1) (origin p1 ?f)) (boarded p1)) (when (and (boarded p0) (destin p0 ?f)) (and (not (NOT-served p0)) (not (boarded p0)) (served p0))) (when (and (boarded p1) (destin p1 ?f)) (and (not (NOT-served p1)) (not (boarded p1)) (served p1))))
+  up: ?f1 - floor ?f2 - floor
+      pre: (and (above ?f1 ?f2) (lift-at ?f1))
+      eff: (and (lift-at ?f2) (not (lift-at ?f1)))
+Init:
   (NOT-served p0)
   (NOT-served p1)
-Init[0]:
-Goal: (and (RW:served p0) (RW:served p1))
-Metric: no-metric
+  (above f0 f1)
+  (above f0 f2)
+  (above f0 f3)
+  (above f1 f2)
+  (above f1 f3)
+  (above f2 f3)
+  (destin p0 f2)
+  (destin p1 f3)
+  (lift-at f0)
+  (origin p0 f3)
+  (origin p1 f1)
+Goal:
+  (and (served p0) (served p1))
+Metric:
+Pred prop:
+  (NOT-served passenger): in_init in_pre in_eff
+  (above floor floor): in_init in_pre
+  (boarded passenger): in_pre in_eff
+  (destin passenger floor): in_init in_pre
+  (lift-at floor): in_init in_pre in_eff
+  (origin passenger floor): in_init in_pre
+  (served passenger): in_goal in_eff
+Func prop:
+Global prop:
+  has_cond_eff
+  is_unit_cost

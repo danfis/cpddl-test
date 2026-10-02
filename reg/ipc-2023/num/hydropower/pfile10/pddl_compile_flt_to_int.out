@@ -1,0 +1,19 @@
+Action:
+  - generate: ?t1 - time ?n1 - turnvalue
+      pre: (and (>= (stored_units) 1) (demand ?t1 ?n1) (timenow ?t1))
+      eff: (and (decrease (stored_units) 1) (increase (funds) (value ?n1)) (increase (stored_capacity) 1))
+  + generate: ?t1 - time ?n1 - turnvalue
+      pre: (and (>= (stored_units) 1) (demand ?t1 ?n1) (timenow ?t1))
+      eff: (and (decrease (stored_units) 1) (increase (funds) (* 20 (value ?n1))) (increase (stored_capacity) 1))
+  - pump_water_up: ?t1 - time ?n1 - turnvalue
+      pre: (and (>= (funds) (* 1.05 (value ?n1))) (>= (stored_capacity) 1) (demand ?t1 ?n1) (timenow ?t1))
+      eff: (and (decrease (funds) (* 1.05 (value ?n1))) (decrease (stored_capacity) 1) (increase (stored_units) 1))
+  + pump_water_up: ?t1 - time ?n1 - turnvalue
+      pre: (and (>= (funds) (* 21 (value ?n1))) (>= (stored_capacity) 1) (demand ?t1 ?n1) (timenow ?t1))
+      eff: (and (decrease (funds) (* 21 (value ?n1))) (decrease (stored_capacity) 1) (increase (stored_units) 1))
+Init:
+  - (= (funds) 1000)
+  + (= (funds) 20000)
+Goal:
+  - (>= (funds) 2000)
+  + (>= (funds) 40000)

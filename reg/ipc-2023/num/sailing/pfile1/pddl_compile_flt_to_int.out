@@ -1,0 +1,56 @@
+Action:
+  - go_est: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) 3))
+  + go_est: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) 6))
+  - go_north_east: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) 1.5) (increase (y ?b) 1.5))
+  + go_north_east: ?b - boat
+      pre: (and)
+      eff: (and (increase (x ?b) 3) (increase (y ?b) 3))
+  - go_north_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) 1.5) (increase (y ?b) 1.5))
+  + go_north_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) 3) (increase (y ?b) 3))
+  - go_south: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) 2))
+  + go_south: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) 4))
+  - go_south_east: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) 2) (decrease (y ?b) 2))
+  + go_south_east: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) 4) (decrease (y ?b) 4))
+  - go_south_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) 2) (increase (x ?b) 2))
+  + go_south_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (y ?b) 4) (increase (x ?b) 4))
+  - go_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) 3))
+  + go_west: ?b - boat
+      pre: (and)
+      eff: (and (decrease (x ?b) 6))
+  - save_person: ?b - boat ?t - person
+      pre: (and (<= (+ (x ?b) (y ?b)) (+ (d ?t) 25)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 25)) (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)))
+      eff: (and (saved ?t))
+  + save_person: ?b - boat ?t - person
+      pre: (and (<= (+ (x ?b) (y ?b)) (+ (d ?t) 50)) (<= (- (y ?b) (x ?b)) (+ (d ?t) 50)) (>= (+ (x ?b) (y ?b)) (d ?t)) (>= (- (y ?b) (x ?b)) (d ?t)))
+      eff: (and (saved ?t))
+Init:
+  - (= (d p0) -370)
+  - (= (x b0) 3)
+  - (= (x b1) 7)
+  + (= (d p0) -740)
+  + (= (x b0) 6)
+  + (= (x b1) 14)

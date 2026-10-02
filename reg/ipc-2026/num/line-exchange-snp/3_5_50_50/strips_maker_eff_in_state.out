@@ -1,0 +1,78 @@
+step 0: state 3 applicable 6
+    state: (NOT-ps r0) (NOT-ps r1) (NOT-ps r2)
+    num: (x r0) = 25 (x r1) = 75 (x r2) = 125 (q r0) = 3 (q r1) = 6 (q r2) = 6
+lft r0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x r0) 25 -> 24
+lft r1 :: cost: 1
+    add:
+    del:
+    num: (x r1) 75 -> 74
+lft r2 :: cost: 1
+    add:
+    del:
+    num: (x r2) 125 -> 124
+step 1: state 3 applicable 6
+    state: (NOT-ps r0) (NOT-ps r1) (NOT-ps r2)
+    num: (x r0) = 24 (x r1) = 75 (x r2) = 125 (q r0) = 3 (q r1) = 6 (q r2) = 6
+lft r0 :: cost: 1
+    add:
+    del:
+    num: (x r0) 24 -> 23
+lft r1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x r1) 75 -> 74
+lft r2 :: cost: 1
+    add:
+    del:
+    num: (x r2) 125 -> 124
+step 2: state 3 applicable 6
+    state: (NOT-ps r0) (NOT-ps r1) (NOT-ps r2)
+    num: (x r0) = 24 (x r1) = 74 (x r2) = 125 (q r0) = 3 (q r1) = 6 (q r2) = 6
+lft r0 :: cost: 1
+    add:
+    del:
+    num: (x r0) 24 -> 23
+lft r1 :: cost: 1
+    add:
+    del:
+    num: (x r1) 74 -> 73
+lft r2 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x r2) 125 -> 124
+step 3: state 3 applicable 6
+    state: (NOT-ps r0) (NOT-ps r1) (NOT-ps r2)
+    num: (x r0) = 24 (x r1) = 74 (x r2) = 124 (q r0) = 3 (q r1) = 6 (q r2) = 6
+lft r0 :: cost: 1
+    add:
+    del:
+    num: (x r0) 24 -> 23
+lft r1 :: cost: 1
+    add:
+    del:
+    num: (x r1) 74 -> 73
+lft r2 :: cost: 1
+    add:
+    del:
+    num: (x r2) 124 -> 123
+    successor: rgt r0
+step 4: state 3 applicable 6
+    state: (NOT-ps r0) (NOT-ps r1) (NOT-ps r2)
+    num: (x r0) = 25 (x r1) = 74 (x r2) = 124 (q r0) = 3 (q r1) = 6 (q r2) = 6
+lft r0 :: cost: 1
+    add:
+    del:
+    num: (x r0) 25 -> 24
+lft r1 :: cost: 1
+    add:
+    del:
+    num: (x r1) 74 -> 73
+lft r2 :: cost: 1
+    add:
+    del:
+    num: (x r2) 124 -> 123
+    successor: rgt r1
+ground atoms: 3 groundings: 6

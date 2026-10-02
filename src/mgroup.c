@@ -183,7 +183,8 @@ TEST_TEAR_DOWN(famgroup_all)
 TEST_COND(famgroup_maximal_sym, famgroup_maximal, LP BLISS)
 {
     pddl_strips_sym_t sym;
-    pddlStripsSymInitPDG(&sym, &C.strips);
+    int ret = pddlStripsSymInitPDG(&sym, &C.strips, &C.err);
+    assert(ret == 0);
 
     pddl_famgroup_config_t cfg = PDDL_FAMGROUP_CONFIG_INIT;
     cfg.maximal = 1;
@@ -191,7 +192,7 @@ TEST_COND(famgroup_maximal_sym, famgroup_maximal, LP BLISS)
 
     pddl_mgroups_t mg;
     pddlMGroupsInitEmpty(&mg);
-    int ret = pddlFAMGroupsInfer(&mg, &C.strips, &cfg, &C.err);
+    ret = pddlFAMGroupsInfer(&mg, &C.strips, &cfg, &C.err);
     assert(ret == 0);
     pddlMGroupsSetExactlyOne(&mg, &C.strips);
     pddlMGroupsSetGoal(&mg, &C.strips);
@@ -208,7 +209,8 @@ TEST_COND(famgroup_maximal_sym, famgroup_maximal, LP BLISS)
 TEST_COND(famgroup_all_sym, famgroup_all, LP BLISS)
 {
     pddl_strips_sym_t sym;
-    pddlStripsSymInitPDG(&sym, &C.strips);
+    int ret = pddlStripsSymInitPDG(&sym, &C.strips, &C.err);
+    assert(ret == 0);
 
     pddl_famgroup_config_t cfg = PDDL_FAMGROUP_CONFIG_INIT;
     cfg.maximal = 0;
@@ -216,7 +218,7 @@ TEST_COND(famgroup_all_sym, famgroup_all, LP BLISS)
 
     pddl_mgroups_t mg;
     pddlMGroupsInitEmpty(&mg);
-    int ret = pddlFAMGroupsInfer(&mg, &C.strips, &cfg, &C.err);
+    ret = pddlFAMGroupsInfer(&mg, &C.strips, &cfg, &C.err);
     assert(ret == 0);
     pddlMGroupsSetExactlyOne(&mg, &C.strips);
     pddlMGroupsSetGoal(&mg, &C.strips);

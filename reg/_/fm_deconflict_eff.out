@@ -1,0 +1,16 @@
+conflict in and:
+  in : (and (W:p a) (N:W:p a) (W:q b))
+  status: 1
+  out: (and (W:p a) (W:q b))
+no conflict:
+  in : (and (N:W:p a) (W:q b))
+  status: 0
+  out: (and (N:W:p a) (W:q b))
+neg_of pair is not a conflict:
+  in : (and (W:p a) (W:np a))
+  status: 0
+  out: (and (W:p a) (W:np a))
+conflict inside when effect:
+  in : (and (W:q a) (when (and (W:p c) (N:W:p c)) (and (W:r a b) (N:W:r a b))))
+  status: 1
+  out: (and (W:q a) (when (and (W:p c) (N:W:p c)) (W:r a b)))

@@ -1,0 +1,49 @@
+Domain: fn-counters
+Problem: instance_2
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  counter - object
+  object
+Obj:
+  c0 - counter
+  c1 - counter
+Predicate:
+  (= object object) :eq
+Function:
+  (max_int)
+  (rate_value counter)
+  (value counter)
+Action:
+  decrement: ?c - counter
+      pre: (and (>= (- (value ?c) (rate_value ?c)) 0))
+      eff: (and (decrease (value ?c) (rate_value ?c)))
+  decrement_rate: ?c - counter
+      pre: (and (>= (rate_value ?c) 1))
+      eff: (and (decrease (rate_value ?c) 1))
+  increase_rate: ?c - counter
+      pre: (and (<= (+ (rate_value ?c) 1) 10))
+      eff: (and (increase (rate_value ?c) 1))
+  increment: ?c - counter
+      pre: (and (<= (+ (value ?c) (rate_value ?c)) (max_int)))
+      eff: (and (increase (value ?c) (rate_value ?c)))
+Init:
+  (= (max_int) 4)
+  (= (rate_value c0) 0)
+  (= (rate_value c1) 0)
+  (= (value c0) 0)
+  (= (value c1) 0)
+Goal:
+  (<= (+ (value c0) 1) (value c1))
+Metric:
+Pred prop:
+Func prop:
+  (max_int): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (rate_value counter): in_init init_all_nonneg init_all_nonpos init_all_int in_pre on_num_op_rhs in_eff
+  (value counter): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff rhs_funcs:(rate_value)
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

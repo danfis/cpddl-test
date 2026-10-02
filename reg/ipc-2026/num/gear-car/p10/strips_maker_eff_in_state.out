@@ -1,0 +1,78 @@
+step 0: state 1 applicable 4
+    state: (current_gear g1)
+    num: (d) = 0 (v) = 0 (a) = 0 (fuel) = 727 (fuel_used) = 0
+accelerate g1 :: cost: 0 [successor]
+    add:
+    del:
+    num: (a) 0 -> 1
+decelerate g1 :: cost: 0
+    add:
+    del:
+    num: (a) 0 -> -1
+drive_aligned_gear g1 :: cost: 70205
+    add:
+    del:
+    num: (fuel) 727 -> 716 (fuel_used) 0 -> 11
+step 1: state 1 applicable 3
+    state: (current_gear g1)
+    num: (d) = 0 (v) = 0 (a) = 1 (fuel) = 727 (fuel_used) = 0
+accelerate g1 :: cost: 0
+    add:
+    del:
+    num: (a) 1 -> 2
+decelerate g1 :: cost: 0 [successor]
+    add:
+    del:
+    num: (a) 1 -> 0
+drive_aligned_gear g1 :: cost: 70205
+    add:
+    del:
+    num: (d) 0 -> 1 (v) 0 -> 1 (fuel) 727 -> 716 (fuel_used) 0 -> 11
+step 2: state 1 applicable 4
+    state: (current_gear g1)
+    num: (d) = 0 (v) = 0 (a) = 0 (fuel) = 727 (fuel_used) = 0
+accelerate g1 :: cost: 0
+    add:
+    del:
+    num: (a) 0 -> 1
+decelerate g1 :: cost: 0
+    add:
+    del:
+    num: (a) 0 -> -1
+drive_aligned_gear g1 :: cost: 70205
+    add:
+    del:
+    num: (fuel) 727 -> 716 (fuel_used) 0 -> 11
+    successor: gear_up g1 g2
+step 3: state 1 applicable 5
+    state: (current_gear g2)
+    num: (d) = 0 (v) = 0 (a) = 0 (fuel) = 727 (fuel_used) = 0
+accelerate g2 :: cost: 0
+    add:
+    del:
+    num: (a) 0 -> 1
+decelerate g2 :: cost: 0
+    add:
+    del:
+    num: (a) 0 -> -1
+drive_under_gear g2 :: cost: 70775
+    add:
+    del:
+    num: (fuel) 727 -> 710 (fuel_used) 0 -> 17
+    successor: gear_down g2 g1
+step 4: state 1 applicable 4
+    state: (current_gear g1)
+    num: (d) = 0 (v) = 0 (a) = 0 (fuel) = 727 (fuel_used) = 0
+accelerate g1 :: cost: 0 [successor]
+    add:
+    del:
+    num: (a) 0 -> 1
+decelerate g1 :: cost: 0
+    add:
+    del:
+    num: (a) 0 -> -1
+drive_aligned_gear g1 :: cost: 70205
+    add:
+    del:
+    num: (fuel) 727 -> 716 (fuel_used) 0 -> 11
+ground atoms: 3 groundings: 9

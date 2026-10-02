@@ -22,7 +22,8 @@ TEST(h2_heur_dyn_prog_plan_states, fdr)
         return;
 
     pddl_hmax_t hmax;
-    pddlHMaxInitStrips(&hmax, &C.strips);
+    ret = pddlHMaxInitStrips(&hmax, &C.strips, &C.err);
+    assert(ret == 0);
 
     int cost = plan.cost;
     for (int i = 0; i < plan.state_size; ++i){
@@ -56,7 +57,8 @@ TEST(h2_heur_dyn_prog_init_state, strips)
         assert(h2 <= C.optimal_cost);
 
     pddl_hmax_t hmax;
-    pddlHMaxInitStrips(&hmax, &C.strips);
+    int ret = pddlHMaxInitStrips(&hmax, &C.strips, &C.err);
+    assert(ret == 0);
     int hm = pddlHMaxStrips(&hmax, &C.strips.init);
     assert(h2 == PDDL_COST_DEAD_END || h2 >= hm);
     pddlHMaxFree(&hmax);

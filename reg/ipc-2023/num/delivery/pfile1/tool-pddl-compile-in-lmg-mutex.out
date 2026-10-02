@@ -1,0 +1,114 @@
+
+-------- domain.pddl --------
+
+(define (domain delivery)
+(:requirements
+    :strips
+    :typing
+    :numeric-fluents
+)
+(:types
+    room - object
+    item - object
+    arm - object
+    bot - object
+)
+(:predicates
+    (at-bot ?x0 - bot ?x1 - room)
+    (at ?x0 - item ?x1 - room)
+    (door ?x0 - room ?x1 - room)
+    (free ?x0 - arm)
+    (in-arm ?x0 - item ?x1 - arm)
+    (in-tray ?x0 - item ?x1 - bot)
+    (mount ?x0 - arm ?x1 - bot)
+)
+(:functions
+    (load_limit ?x0 - bot)
+    (current_load ?x0 - bot)
+    (weight ?x0 - item)
+    (cost)
+)
+(:action move
+    :parameters (?b - bot ?x - room ?y - room)
+    :precondition (and (at-bot ?b ?x) (door ?x ?y))
+    :effect (and (at-bot ?b ?y) (not (at-bot ?b ?x)) (increase (cost) 3))
+)
+
+(:action pick
+    :parameters (?i - item ?x - room ?a - arm ?b - bot)
+    :precondition (and (at ?i ?x) (at-bot ?b ?x) (free ?a) (mount ?a ?b) (<= (+ (current_load ?b) (weight ?i)) (load_limit ?b)))
+    :effect (and (in-arm ?i ?a) (not (at ?i ?x)) (not (free ?a)) (increase (current_load ?b) (weight ?i)) (increase (cost) 2))
+)
+
+(:action drop
+    :parameters (?i - item ?x - room ?a - arm ?b - bot)
+    :precondition (and (in-arm ?i ?a) (at-bot ?b ?x) (mount ?a ?b))
+    :effect (and (free ?a) (at ?i ?x) (not (in-arm ?i ?a)) (decrease (current_load ?b) (weight ?i)) (increase (cost) 2))
+)
+
+(:action to-tray
+    :parameters (?i - item ?a - arm ?b - bot)
+    :precondition (and (in-arm ?i ?a) (mount ?a ?b))
+    :effect (and (free ?a) (not (in-arm ?i ?a)) (in-tray ?i ?b) (increase (cost) 1))
+)
+
+(:action from-tray
+    :parameters (?i - item ?a - arm ?b - bot)
+    :precondition (and (in-tray ?i ?b) (mount ?a ?b) (free ?a))
+    :effect (and (not (free ?a)) (in-arm ?i ?a) (not (in-tray ?i ?b)) (increase (cost) 1))
+)
+
+)
+
+
+-------- problem.pddl --------
+
+(define (problem delivery-x-1) (:domain delivery)
+(:objects
+    rooma - room
+    roomb - room
+    roomc - room
+    item4 - item
+    item3 - item
+    item2 - item
+    item1 - item
+    bot1 - bot
+    bot2 - bot
+    left1 - arm
+    right1 - arm
+    left2 - arm
+    right2 - arm
+)
+(:init
+  (at-bot bot1 rooma)
+  (at-bot bot2 rooma)
+  (free left1)
+  (free right1)
+  (free left2)
+  (free right2)
+  (mount left1 bot1)
+  (mount right1 bot1)
+  (mount left2 bot2)
+  (mount right2 bot2)
+  (at item4 rooma)
+  (at item3 rooma)
+  (at item2 rooma)
+  (at item1 rooma)
+  (door rooma roomb)
+  (door roomb rooma)
+  (door rooma roomc)
+  (door roomc rooma)
+  (= (weight item4) 1)
+  (= (weight item3) 1)
+  (= (weight item2) 1)
+  (= (weight item1) 1)
+  (= (current_load bot1) 0)
+  (= (load_limit bot1) 4)
+  (= (current_load bot2) 0)
+  (= (load_limit bot2) 4)
+  (= (cost) 0)
+)
+(:goal (and (at item4 roomb) (at item3 roomb) (at item2 roomc) (at item1 roomc)))
+(:metric minimize (cost))
+)
+

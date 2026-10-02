@@ -1,0 +1,61 @@
+step 0: state 0 applicable 27
+    state:
+get-cheese z1 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z2 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z3 :: cost: 1
+    add: (have-cheese)
+    del:
+    successor: rewind-movie
+step 1: state 1 applicable 27
+    state: (movie-rewound)
+get-cheese z1 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z2 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z3 :: cost: 1
+    add: (have-cheese)
+    del:
+    successor: reset-counter
+step 2: state 2 applicable 27
+    state: (counter-at-zero) (movie-rewound)
+get-cheese z1 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z2 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z3 :: cost: 1
+    add: (have-cheese)
+    del:
+    successor: get-chips c5
+step 3: state 3 applicable 27
+    state: (counter-at-zero) (have-chips) (movie-rewound)
+get-cheese z1 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z2 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z3 :: cost: 1
+    add: (have-cheese)
+    del:
+    successor: get-chips c4
+step 4: state 3 applicable 27
+    state: (counter-at-zero) (have-chips) (movie-rewound)
+get-cheese z1 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z2 :: cost: 1
+    add: (have-cheese)
+    del:
+get-cheese z3 :: cost: 1
+    add: (have-cheese)
+    del:
+    successor: get-chips c3
+ground atoms: 7 groundings: 27

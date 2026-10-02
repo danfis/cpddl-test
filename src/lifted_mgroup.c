@@ -45,8 +45,8 @@ TEST(lifted_mgroup_tests_transport, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl, &C.err);
-
+    int st = pddlNormalize(&pddl, &C.err);
+    assert(st == 0);
 
     int pred_at = pddlPredsGet(&pddl.pred, "at");
     int pred_capacity = pddlPredsGet(&pddl.pred, "capacity");
@@ -172,8 +172,10 @@ TEST(lifted_mgroup_tests_citycar, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl, &C.err);
-    pddlCompileAwayCondEff(&pddl);
+    int st = pddlNormalize(&pddl, &C.err);
+    assert(st == 0);
+    st = pddlCompileAwayCondEff(&pddl, &C.err);
+    assert(st == 0);
 
 
     int pred_at_car_jun = pddlPredsGet(&pddl.pred, "at_car_jun");
@@ -258,8 +260,8 @@ TEST(lifted_mgroup_tests_orgsynth, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl, &C.err);
-
+    int st = pddlNormalize(&pddl, &C.err);
+    assert(st == 0);
 
     int pred_bond = pddlPredsGet(&pddl.pred, "bond");
 
@@ -359,7 +361,8 @@ TEST(lifted_mgroup_tests_barman, lifted_mgroup_tests)
         pddlErrPrint(&err, 1, stderr);
         return;
     }
-    pddlNormalize(&pddl, &C.err);
+    int st = pddlNormalize(&pddl, &C.err);
+    assert(st == 0);
 
     pddl_lifted_mgroup_t mg;
     pddl_fm_atom_t *atom;
@@ -555,6 +558,10 @@ TEST(lmg_fd, lmg_fam)
 
 TEST(lmg, lmg_fd)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
 }
 
 static void lmgCompileInCheckPruning(const pddl_t *pddl,
@@ -635,7 +642,7 @@ TEST(lmg_compile_in, lmg)
     //pddlErrLogDisablePrintResources(&C.err, 1);
     //pddlErrLogEnable(&C.err, stdout);
     if (pddlCompileInLiftedMGroups(&pddl, &C.lmg, &cfg, &C.err))
-        pddlPrintDebug(&pddl, stdout);
+        pddlPrintDiff(&C.pddl, &pddl, stdout);
     //pddlErrLogEnable(&C.err, NULL);
     //fflush(stdout);
 

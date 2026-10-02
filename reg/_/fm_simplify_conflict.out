@@ -1,0 +1,16 @@
+conflict in and:
+  in : (and (W:p a) (N:W:p a))
+  status: 1
+  out: FALSE
+conflict in or:
+  in : (or (W:p a) (N:W:p a))
+  status: 1
+  out: TRUE
+neg_of pair conflict in and:
+  in : (and (W:p a) (W:np a))
+  status: 1
+  out: FALSE
+different args are not in conflict:
+  in : (and (W:p a) (N:W:p b))
+  status: 0
+  out: (and (W:p a) (N:W:p b))

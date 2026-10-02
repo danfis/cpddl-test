@@ -1,128 +1,93 @@
 Domain: cave-diving-adl
 Problem: cave-diving-adl-p01
-Require: 83
-Type[5]:
-    [0]: object, parent: -1
-    [1]: location, parent: 0
-    [2]: diver, parent: 0
-    [3]: tank, parent: 0
-    [4]: quantity, parent: 0
-Obj-by-Type:
-    [0]: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
-    [1]: 0 1 2 3 4 5
-    [2]: 6 7 8 9
-    [3]: 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-    [4]: 26 27 28 29 30
-Obj[31]:
-    [0]: l0, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [1]: l1, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [2]: l2, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [3]: l3, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [4]: l4, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [5]: l5, type: 1, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [6]: d0, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [7]: d1, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [8]: d2, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [9]: d3, type: 2, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [10]: t0, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [11]: t1, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [12]: t2, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [13]: t3, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [14]: t4, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [15]: t5, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [16]: t6, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [17]: t7, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [18]: t8, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [19]: t9, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [20]: t10, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [21]: t11, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [22]: t12, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [23]: t13, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [24]: t14, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [25]: dummy, type: 3, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [26]: zero, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [27]: one, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [28]: two, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [29]: three, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-    [30]: four, type: 4, is-constant: 0, is-private: 0, owner: -1, is-agent: 0
-Predicate[17]:
-    =: 0 0 :: read: 0, write: 0, in-init: 0
-    at-tank: 3 1 :: read: 1, write: 1, in-init: 0
-    in-storage: 3 :: read: 1, write: 1, in-init: 1
-    full: 3 :: read: 1, write: 1, in-init: 0
-    next-tank: 3 3 :: read: 1, write: 0, in-init: 1
-    at-diver: 2 1 :: read: 1, write: 1, in-init: 0
-    available: 2 :: read: 1, write: 1, in-init: 1
-    at-surface: 2 :: read: 1, write: 1, in-init: 0
-    decompressing: 2 :: read: 1, write: 1, in-init: 0
-    precludes: 2 2 :: read: 1, write: 0, in-init: 1
-    cave-entrance: 1 :: read: 1, write: 0, in-init: 1
-    connected: 1 1 :: read: 1, write: 0, in-init: 1
-    next-quantity: 4 4 :: read: 1, write: 0, in-init: 1
-    holding: 2 3 :: read: 1, write: 1, in-init: 0
-    capacity: 2 4 :: read: 1, write: 1, in-init: 1
-    have-photo: 1 :: read: 1, write: 1, in-init: 0
-    NOT-in-water: :: read: 1, write: 1, in-init: 1
-Function[0]:
-Action[8]:
-    hire-diver: ?d1:2
-        pre: (and (RW:available ?d1) (RW:NOT-in-water))
-        eff: (and (N:RW:available ?d1) (RW:at-surface ?d1) (N:RW:NOT-in-water) (when (R:precludes ?d1 d0) (N:RW:available d0)) (when (R:precludes ?d1 d1) (N:RW:available d1)) (when (R:precludes ?d1 d2) (N:RW:available d2)) (when (R:precludes ?d1 d3) (N:RW:available d3)))
-    prepare-tank: ?d:2 ?t1:3 ?t2:3 ?q1:4 ?q2:4
-        pre: (and (R:next-tank ?t1 ?t2) (R:next-quantity ?q1 ?q2) (RW:in-storage ?t1) (RW:at-surface ?d) (RW:capacity ?d ?q2))
-        eff: (and (N:RW:in-storage ?t1) (RW:in-storage ?t2) (RW:full ?t1) (RW:holding ?d ?t1) (RW:capacity ?d ?q1) (N:RW:capacity ?d ?q2))
-    enter-water: ?d:2 ?l:1
-        pre: (and (R:cave-entrance ?l) (RW:at-surface ?d))
-        eff: (and (RW:at-diver ?d ?l) (N:RW:at-surface ?d))
-    pickup-tank: ?d:2 ?t:3 ?l:1 ?q1:4 ?q2:4
-        pre: (and (R:next-quantity ?q1 ?q2) (RW:at-tank ?t ?l) (RW:at-diver ?d ?l) (RW:capacity ?d ?q2))
-        eff: (and (N:RW:at-tank ?t ?l) (RW:holding ?d ?t) (RW:capacity ?d ?q1) (N:RW:capacity ?d ?q2))
-    drop-tank: ?d:2 ?t:3 ?l:1 ?q1:4 ?q2:4
-        pre: (and (R:next-quantity ?q1 ?q2) (RW:at-diver ?d ?l) (RW:holding ?d ?t) (RW:capacity ?d ?q1))
-        eff: (and (RW:at-tank ?t ?l) (N:RW:holding ?d ?t) (N:RW:capacity ?d ?q1) (RW:capacity ?d ?q2))
-    swim: ?d:2 ?t:3 ?l1:1 ?l2:1
-        pre: (and (R:connected ?l1 ?l2) (RW:full ?t) (RW:at-diver ?d ?l1) (RW:holding ?d ?t))
-        eff: (and (N:RW:full ?t) (N:RW:at-diver ?d ?l1) (RW:at-diver ?d ?l2))
-    photograph: ?d:2 ?l:1 ?t:3
-        pre: (and (RW:full ?t) (RW:at-diver ?d ?l) (RW:holding ?d ?t))
-        eff: (and (N:RW:full ?t) (RW:have-photo ?l))
-    decompress: ?d:2 ?l:1
-        pre: (and (R:cave-entrance ?l) (RW:at-diver ?d ?l))
-        eff: (and (N:RW:at-diver ?d ?l) (RW:decompressing ?d) (RW:NOT-in-water))
-Init[42]:
-  S:(next-tank t0 t1)
-  S:(next-tank t1 t2)
-  S:(next-tank t2 t3)
-  S:(next-tank t3 t4)
-  S:(next-tank t4 t5)
-  S:(next-tank t5 t6)
-  S:(next-tank t6 t7)
-  S:(next-tank t7 t8)
-  S:(next-tank t8 t9)
-  S:(next-tank t9 t10)
-  S:(next-tank t10 t11)
-  S:(next-tank t11 t12)
-  S:(next-tank t12 t13)
-  S:(next-tank t13 t14)
-  S:(next-tank t14 dummy)
-  S:(precludes d1 d3)
-  S:(precludes d2 d3)
-  S:(cave-entrance l0)
-  S:(connected l0 l1)
-  S:(connected l1 l0)
-  S:(connected l1 l2)
-  S:(connected l1 l4)
-  S:(connected l1 l5)
-  S:(connected l2 l1)
-  S:(connected l2 l3)
-  S:(connected l3 l2)
-  S:(connected l4 l1)
-  S:(connected l5 l1)
-  S:(next-quantity zero one)
-  S:(next-quantity one two)
-  S:(next-quantity two three)
-  S:(next-quantity three four)
-  (in-storage t0)
+Require:
+  :conditional-effects
+  :strips
+  :typing
+Type:
+  diver - object
+  location - object
+  object
+  quantity - object
+  tank - object
+Obj:
+  d0 - diver
+  d1 - diver
+  d2 - diver
+  d3 - diver
+  dummy - tank
+  four - quantity
+  l0 - location
+  l1 - location
+  l2 - location
+  l3 - location
+  l4 - location
+  l5 - location
+  one - quantity
+  t0 - tank
+  t1 - tank
+  t10 - tank
+  t11 - tank
+  t12 - tank
+  t13 - tank
+  t14 - tank
+  t2 - tank
+  t3 - tank
+  t4 - tank
+  t5 - tank
+  t6 - tank
+  t7 - tank
+  t8 - tank
+  t9 - tank
+  three - quantity
+  two - quantity
+  zero - quantity
+Predicate:
+  (= object object) :eq
+  (NOT-in-water)
+  (at-diver diver location)
+  (at-surface diver)
+  (at-tank tank location)
+  (available diver)
+  (capacity diver quantity)
+  (cave-entrance location)
+  (connected location location)
+  (decompressing diver)
+  (full tank)
+  (have-photo location)
+  (holding diver tank)
+  (in-storage tank)
+  (next-quantity quantity quantity)
+  (next-tank tank tank)
+  (precludes diver diver)
+Function:
+Action:
+  decompress: ?d - diver ?l - location
+      pre: (and (at-diver ?d ?l) (cave-entrance ?l))
+      eff: (and (NOT-in-water) (decompressing ?d) (not (at-diver ?d ?l)))
+  drop-tank: ?d - diver ?t - tank ?l - location ?q1 - quantity ?q2 - quantity
+      pre: (and (at-diver ?d ?l) (capacity ?d ?q1) (holding ?d ?t) (next-quantity ?q1 ?q2))
+      eff: (and (at-tank ?t ?l) (capacity ?d ?q2) (not (capacity ?d ?q1)) (not (holding ?d ?t)))
+  enter-water: ?d - diver ?l - location
+      pre: (and (at-surface ?d) (cave-entrance ?l))
+      eff: (and (at-diver ?d ?l) (not (at-surface ?d)))
+  hire-diver: ?d1 - diver
+      pre: (and (NOT-in-water) (available ?d1))
+      eff: (and (at-surface ?d1) (not (NOT-in-water)) (not (available ?d1)) (when (precludes ?d1 d0) (not (available d0))) (when (precludes ?d1 d1) (not (available d1))) (when (precludes ?d1 d2) (not (available d2))) (when (precludes ?d1 d3) (not (available d3))))
+  photograph: ?d - diver ?l - location ?t - tank
+      pre: (and (at-diver ?d ?l) (full ?t) (holding ?d ?t))
+      eff: (and (have-photo ?l) (not (full ?t)))
+  pickup-tank: ?d - diver ?t - tank ?l - location ?q1 - quantity ?q2 - quantity
+      pre: (and (at-diver ?d ?l) (at-tank ?t ?l) (capacity ?d ?q2) (next-quantity ?q1 ?q2))
+      eff: (and (capacity ?d ?q1) (holding ?d ?t) (not (at-tank ?t ?l)) (not (capacity ?d ?q2)))
+  prepare-tank: ?d - diver ?t1 - tank ?t2 - tank ?q1 - quantity ?q2 - quantity
+      pre: (and (at-surface ?d) (capacity ?d ?q2) (in-storage ?t1) (next-quantity ?q1 ?q2) (next-tank ?t1 ?t2))
+      eff: (and (capacity ?d ?q1) (full ?t1) (holding ?d ?t1) (in-storage ?t2) (not (capacity ?d ?q2)) (not (in-storage ?t1)))
+  swim: ?d - diver ?t - tank ?l1 - location ?l2 - location
+      pre: (and (at-diver ?d ?l1) (connected ?l1 ?l2) (full ?t) (holding ?d ?t))
+      eff: (and (at-diver ?d ?l2) (not (at-diver ?d ?l1)) (not (full ?t)))
+Init:
+  (NOT-in-water)
   (available d0)
   (available d1)
   (available d2)
@@ -131,7 +96,60 @@ Init[42]:
   (capacity d1 four)
   (capacity d2 four)
   (capacity d3 four)
-  (NOT-in-water)
-Init[0]:
-Goal: (and (RW:decompressing d0) (RW:decompressing d1) (RW:decompressing d2) (RW:decompressing d3) (RW:have-photo l4) (RW:have-photo l5))
-Metric: no-metric
+  (cave-entrance l0)
+  (connected l0 l1)
+  (connected l1 l0)
+  (connected l1 l2)
+  (connected l1 l4)
+  (connected l1 l5)
+  (connected l2 l1)
+  (connected l2 l3)
+  (connected l3 l2)
+  (connected l4 l1)
+  (connected l5 l1)
+  (in-storage t0)
+  (next-quantity one two)
+  (next-quantity three four)
+  (next-quantity two three)
+  (next-quantity zero one)
+  (next-tank t0 t1)
+  (next-tank t1 t2)
+  (next-tank t10 t11)
+  (next-tank t11 t12)
+  (next-tank t12 t13)
+  (next-tank t13 t14)
+  (next-tank t14 dummy)
+  (next-tank t2 t3)
+  (next-tank t3 t4)
+  (next-tank t4 t5)
+  (next-tank t5 t6)
+  (next-tank t6 t7)
+  (next-tank t7 t8)
+  (next-tank t8 t9)
+  (next-tank t9 t10)
+  (precludes d1 d3)
+  (precludes d2 d3)
+Goal:
+  (and (decompressing d0) (decompressing d1) (decompressing d2) (decompressing d3) (have-photo l4) (have-photo l5))
+Metric:
+Pred prop:
+  (NOT-in-water): in_init in_pre in_eff
+  (at-diver diver location): in_pre in_eff
+  (at-surface diver): in_pre in_eff
+  (at-tank tank location): in_pre in_eff
+  (available diver): in_init in_pre in_eff
+  (capacity diver quantity): in_init in_pre in_eff
+  (cave-entrance location): in_init in_pre
+  (connected location location): in_init in_pre
+  (decompressing diver): in_goal in_eff
+  (full tank): in_pre in_eff
+  (have-photo location): in_goal in_eff
+  (holding diver tank): in_pre in_eff
+  (in-storage tank): in_init in_pre in_eff
+  (next-quantity quantity quantity): in_init in_pre
+  (next-tank tank tank): in_init in_pre
+  (precludes diver diver): in_init in_pre
+Func prop:
+Global prop:
+  has_cond_eff
+  is_unit_cost

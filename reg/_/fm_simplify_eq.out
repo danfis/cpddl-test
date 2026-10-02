@@ -1,0 +1,24 @@
+(= a a) is true:
+  in : (and (W:p c) (:= a a))
+  status: 1
+  out: (W:p c)
+(= a b) is false:
+  in : (and (W:p c) (:= a b))
+  status: 1
+  out: FALSE
+(not (= a b)) is true:
+  in : (and (W:p c) (N::= a b))
+  status: 1
+  out: (W:p c)
+conflicting (= ?x a) and (= ?x b):
+  in : (and (W:p x0) (:= x0 a) (:= x0 b))
+  status: 1
+  out: FALSE
+redundant duplicate (= ?x a):
+  in : (and (W:p x0) (:= x0 a) (:= x0 a))
+  status: 1
+  out: (and (W:p x0) (:= x0 a))
+(= a ?x) reordered to (= ?x a):
+  in : (and (W:p x0) (:= a x0))
+  status: 1
+  out: (and (W:p x0) (:= x0 a))

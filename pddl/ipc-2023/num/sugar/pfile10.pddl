@@ -21,9 +21,9 @@
 		(produce mill1 brand1) (produce mill1 brand3) (produce mill1 brand4) (current-process mill1 brand1)
 		(produce mill2 brand2) (produce mill2 brand3) (produce mill2 brand4) (current-process mill2 brand3)
 		(produce mill3 brand2) (produce mill3 brand1) (current-process mill3 brand1)
-		(=(in-storage mill1 brand1)0) (=(in-storage mill1 brand3)0) (=(in-storage mill1 brand4)0)
-		(=(in-storage mill2 brand1)0) (=(in-storage mill2 brand2)0) (=(in-storage mill2 brand3)0)
-		(=(in-storage mill3 brand1)0) (=(in-storage mill3 brand2)0) (=(in-storage mill3 brand4)2)
+		(=(in-storage mill1 brand1)0) (=(in-storage mill1 brand2)0) (=(in-storage mill1 brand3)0) (=(in-storage mill1 brand4)0)
+		(=(in-storage mill2 brand1)0) (=(in-storage mill2 brand2)0) (=(in-storage mill2 brand3)0) (=(in-storage mill2 brand4)0)
+		(=(in-storage mill3 brand1)0) (=(in-storage mill3 brand2)0) (=(in-storage mill3 brand3)0) (=(in-storage mill3 brand4)2)
 
 		(change-process brand1 brand2) (change-process brand1 brand3) (change-process brand1 brand4)
 		(change-process brand2 brand1) (change-process brand2 brand3) (change-process brand2 brand4)

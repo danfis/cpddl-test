@@ -2,6 +2,92 @@
 #include "context.h"
 #include <assert.h>
 
+// Grounding must refuse a task that still has a negative condition over a
+// non-static predicate instead of silently dropping that condition
+static void _groundNegCondGuard(int (*ground)(pddl_strips_t *strips,
+                                              const pddl_t *pddl,
+                                              const pddl_ground_config_t *cfg,
+                                              pddl_err_t *err),
+                                const pddl_t *pddl,
+                                pddl_bool_t has_neg)
+{
+    pddl_strips_t strips;
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    int ret = ground(&strips, pddl, &ground_cfg, &C.err);
+    assert((ret != 0) == (has_neg ? 1 : 0));
+    // The guard fires before the strips maker initializes strips, so there
+    // is something to free only when the grounding succeeded
+    if (ret == 0)
+        pddlStripsFree(&strips);
+}
+
+TEST(strips_ground_neg_cond_guard, r)
+{
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 1;
+    cfg.force_adl = 1;
+    cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    cfg.normalize_compile_away_only_goal_neg_cond = pddl_false;
+    cfg.normalize_compile_away_all_neg_cond = pddl_false;
+    pddl_t pddl;
+    int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    // The grounders reject numeric tasks for an unrelated reason
+    if (pddlIsNumeric(&pddl)){
+        pddlFree(&pddl);
+        return;
+    }
+
+    pddl_bool_t has_neg = pddlHasNonStaticNegativeConditions(&pddl);
+    _groundNegCondGuard(pddlStripsGroundDatalog, &pddl, has_neg);
+    _groundNegCondGuard(pddlStripsGroundTrie, &pddl, has_neg);
+#ifdef PDDL_SQLITE
+    _groundNegCondGuard(pddlStripsGroundSql, &pddl, has_neg);
+#endif /* PDDL_SQLITE */
+
+    pddlFree(&pddl);
+}
+
+TEST(strips_ground_not_normalized_guard, r)
+{
+    pddl_config_t cfg = PDDL_CONFIG_INIT;
+    cfg.normalize = 0;
+    cfg.force_adl = 1;
+    cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    cfg.normalize_compile_away_only_goal_neg_cond = pddl_false;
+    cfg.normalize_compile_away_all_neg_cond = pddl_false;
+    cfg.remove_empty_types = 0;
+    pddl_t pddl;
+    int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
+                       &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+
+    // The grounders reject numeric tasks for an unrelated reason
+    if (pddlIsNumeric(&pddl)){
+        pddlFree(&pddl);
+        return;
+    }
+
+    pddl_strips_t strips;
+    pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
+    ret = pddlStripsGroundDatalog(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret != 0);
+    ret = pddlStripsGroundTrie(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret != 0);
+#ifdef PDDL_SQLITE
+    ret = pddlStripsGroundSql(&strips, &pddl, &ground_cfg, &C.err);
+    assert(ret != 0);
+#endif /* PDDL_SQLITE */
+
+    pddlFree(&pddl);
+}
+
 TEST(strips, lmg)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
@@ -9,8 +95,10 @@ TEST(strips, lmg)
     assert(ret == 0);
     C.strips_set = 1;
 
-    if (C.strips.has_cond_eff)
-        pddlStripsCompileAwayCondEff(&C.strips);
+    if (C.strips.has_cond_eff){
+        ret = pddlStripsCompileAwayCondEff(&C.strips, &C.err);
+        assert(ret == 0);
+    }
     assert(!C.strips.has_cond_eff);
 
     pddlMGroupsGround(&C.mg, &C.pddl, &C.lmg, &C.strips);
@@ -117,13 +205,20 @@ TEST(strips_ground_only_facts_with_static, lmg)
 
 TEST(strips_ground_unit_cost, pddl_unit_cost)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     int ret = pddlStripsGroundDatalog(&C.strips, &C.pddl, &ground_cfg, &C.err);
     assert(ret == 0);
     C.strips_set = 1;
 
-    if (C.strips.has_cond_eff)
-        pddlStripsCompileAwayCondEff(&C.strips);
+    if (C.strips.has_cond_eff){
+        ret = pddlStripsCompileAwayCondEff(&C.strips, &C.err);
+        assert(ret == 0);
+    }
     assert(!C.strips.has_cond_eff);
     pddlStripsPrintDebug(&C.strips, stdout);
 }
@@ -524,6 +619,11 @@ TEST(strips_compile_in_lmg, lmg)
 
 TEST(strips_grounding, pddl)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.lifted_mgroups = NULL;
     ground_cfg.prune_op_pre_mutex = 0;
@@ -650,7 +750,8 @@ TEST(strips_conj, strips_pruned)
     pddlISetFree(&set);
 
     cfg.mutex = &C.mutex;
-    pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+    int ret = pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+    assert(ret == 0);
     stripsc_set = 1;
 
     for (int fact_id = 0; fact_id < stripsc.strips.fact.fact_size; ++fact_id){
@@ -676,8 +777,10 @@ TEST_TEAR_DOWN(strips_conj)
 static void testStripsConjHMax(const pddl_strips_conj_t *stripsc)
 {
     pddl_hmax_t hmax, hmaxc;
-    pddlHMaxInitStrips(&hmax, &C.strips);
-    pddlHMaxInitStrips(&hmaxc, &stripsc->strips);
+    int ret = pddlHMaxInitStrips(&hmax, &C.strips, &C.err);
+    assert(ret == 0);
+    ret = pddlHMaxInitStrips(&hmaxc, &stripsc->strips, &C.err);
+    assert(ret == 0);
     int h = pddlHMaxStrips(&hmax, &C.strips.init);
     int hc = pddlHMaxStrips(&hmaxc, &stripsc->strips.init);
     assert(h <= hc);
@@ -725,7 +828,8 @@ TEST(strips_conj_hmax_rand, strips_pruned)
 
         pddl_strips_conj_t stripsc;
         cfg.mutex = &C.mutex;
-        pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+        int ret = pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+        assert(ret == 0);
         testStripsConjHMax(&stripsc);
         pddlStripsConjFree(&stripsc);
         pddlStripsConjConfigFree(&cfg);
@@ -757,7 +861,8 @@ TEST(strips_conj_hmax_rand, strips_pruned)
 
             pddl_strips_conj_t stripsc;
             cfg.mutex = &C.mutex;
-            pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+            int ret = pddlStripsConjInit(&stripsc, &C.strips, &cfg, &C.err);
+            assert(ret == 0);
             testStripsConjHMax(&stripsc);
             pddlStripsConjFree(&stripsc);
             pddlStripsConjConfigFree(&cfg);
@@ -772,8 +877,10 @@ TEST(strips_conj_hadd, strips_conj)
         return;
 
     pddl_hadd_t hadd, haddc;
-    pddlHAddInitStrips(&hadd, &C.strips);
-    pddlHAddInitStrips(&haddc, &stripsc.strips);
+    int ret = pddlHAddInitStrips(&hadd, &C.strips, &C.err);
+    assert(ret == 0);
+    ret = pddlHAddInitStrips(&haddc, &stripsc.strips, &C.err);
+    assert(ret == 0);
     int h = pddlHAddStrips(&hadd, &C.strips.init);
     int hc = pddlHAddStrips(&haddc, &stripsc.strips.init);
     assert(h <= hc);

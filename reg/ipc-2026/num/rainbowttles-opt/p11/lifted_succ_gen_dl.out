@@ -1,0 +1,88 @@
+Step 0 (upper-colour bottle01 green) (colour-below bottle01 green empty) (upper-colour bottle02 blue) (colour-below bottle02 blue red) (colour-below bottle02 red green) (colour-below bottle02 green empty) (upper-colour bottle03 blue) (colour-below bottle03 blue empty) (upper-colour bottle04 green) (colour-below bottle04 green empty) (upper-colour bottle05 red) (colour-below bottle05 red empty) (NOT-closed bottle01) (NOT-closed bottle02) (NOT-closed bottle03) (NOT-closed bottle04) (NOT-closed bottle05)
+size: 24
+pour bottle01 green empty bottle04 :: cost: 1
+    add: (upper-colour bottle01 empty)
+    del: (upper-colour bottle01 green)
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+pour bottle02 blue red bottle03 :: cost: 1
+    add: (upper-colour bottle02 red)
+    del: (upper-colour bottle02 blue)
+    num: 0 0 0 0 0 1 2 0 0 3 0 0 4 0 4 0 2 0 0 2 3 0 0 0 3
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del: (NOT-closed bottle01)
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 1 (colour-below bottle01 green empty) (upper-colour bottle02 blue) (colour-below bottle02 blue red) (colour-below bottle02 red green) (colour-below bottle02 green empty) (upper-colour bottle03 blue) (colour-below bottle03 blue empty) (upper-colour bottle04 green) (colour-below bottle04 green empty) (upper-colour bottle05 red) (colour-below bottle05 red empty) (NOT-closed bottle01) (NOT-closed bottle02) (NOT-closed bottle03) (NOT-closed bottle04) (NOT-closed bottle05) (upper-colour bottle01 empty)
+size: 26
+pour bottle02 blue red bottle03 :: cost: 1
+    add: (upper-colour bottle02 red)
+    del: (upper-colour bottle02 blue)
+    num: 0 0 0 0 0 1 2 0 0 3 0 0 4 0 4 0 2 0 0 2 3 0 0 0 3
+pour-to-empty-bottle bottle02 blue red empty bottle01 :: cost: 1
+    add: (upper-colour bottle02 red) (upper-colour bottle01 blue) (colour-below bottle01 blue empty)
+    del: (upper-colour bottle02 blue) (upper-colour bottle01 empty)
+    num: 0 0 1 0 1 1 2 0 0 3 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+pour-to-empty-bottle bottle03 blue empty empty bottle01 :: cost: 1
+    add: (upper-colour bottle01 blue) (colour-below bottle01 blue empty) (upper-colour bottle03 empty)
+    del: (upper-colour bottle03 blue) (upper-colour bottle01 empty)
+    num: 0 0 3 0 3 1 2 1 0 4 0 0 0 0 0 0 2 0 0 2 3 0 0 0 3
+pour-to-empty-bottle bottle04 green empty empty bottle01 :: cost: 1
+    add: (upper-colour bottle01 green) (upper-colour bottle04 empty)
+    del: (upper-colour bottle04 green) (upper-colour bottle01 empty)
+    num: 0 2 0 0 2 1 2 1 0 4 0 0 3 0 3 0 0 0 0 0 3 0 0 0 3
+pour-to-empty-bottle bottle05 red empty empty bottle01 :: cost: 1
+    add: (upper-colour bottle05 empty) (upper-colour bottle01 red) (colour-below bottle01 red empty)
+    del: (upper-colour bottle05 red) (upper-colour bottle01 empty)
+    num: 3 0 0 0 3 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 0 0 0 0 0
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del: (NOT-closed bottle01)
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 2
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 3
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 4
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 5
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 6
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 7
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 8
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3
+Step 9
+size: 20
+close-empty-bottle bottle01 :: cost: 1
+    add: (closed bottle01)
+    del:
+    num: 0 0 0 0 0 1 2 1 0 4 0 0 3 0 3 0 2 0 0 2 3 0 0 0 3

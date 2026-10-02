@@ -67,12 +67,36 @@ def parse_args():
     p.add_argument(
         "-X", "--fail-fast", action="store_true",
         help="Stop execution after the first failed test")
+    p.add_argument(
+        "-q", "--quiet", action="store_true",
+        help="Do not print PASSed tests, only failures and the final summary")
     return p.parse_args()
 
 
 def matches_any(name, patterns):
     """Return True if name matches at least one regex pattern."""
     return any(re.search(pat, name) for pat in patterns)
+
+
+def resolve_disabled_tasks(cfg, test_names):
+    """Expand [disabled-tasks] into {test_name: set of disabled tasks}.
+    A key of the form "regex:<pattern>" applies to every test whose name
+    matches the regex; any other key is a literal test name."""
+    resolved = {}
+    for key, tasks in cfg.get("disabled-tasks", {}).items():
+        if key.startswith("regex:"):
+            pat = key[len("regex:"):]
+            try:
+                names = [n for n in test_names if re.search(pat, n)]
+            except re.error as exc:
+                print(f"error: invalid regex in [disabled-tasks] key "
+                      f"'{key}': {exc}", file=sys.stderr)
+                sys.exit(1)
+        else:
+            names = [key]
+        for name in names:
+            resolved.setdefault(name, set()).update(tasks)
+    return resolved
 
 
 def read_pddl_features(config_header):
@@ -415,14 +439,15 @@ def main():
         print("No tests to run.", file=sys.stderr)
         sys.exit(1)
 
+    disabled_tasks = resolve_disabled_tasks(cfg, all_tests)
+
     # --plan: print the task x test matrix with depends_on flags and exit
     if args.plan:
         task_w = max((len(t) for t in all_tasks), default=4)
         test_w = max((len(n) for n in all_tests), default=4)
-        disabled_tasks = cfg.get("disabled-tasks", {})
         for task in all_tasks:
             for test_name in all_tests:
-                if task in disabled_tasks.get(test_name, []):
+                if task in disabled_tasks.get(test_name, ()):
                     continue
                 flags = depends_on.get(test_name, [])
                 flags_str = ("  [" + ", ".join(flags) + "]") if flags else ""
@@ -465,7 +490,7 @@ def main():
         (task, test_name, test_opts)
         for task in all_tasks
         for test_name, test_opts in all_tests.items()
-        if task not in cfg.get("disabled-tasks", {}).get(test_name, [])
+        if task not in disabled_tasks.get(test_name, ())
     ]
 
     total = len(work)
@@ -493,9 +518,10 @@ def main():
             if args.dry_run:
                 print(f"{task:<{task_w}}  {test_name:<{test_w}}  {msg}")
             elif ok:
-                status = f"{GREEN}[PASS]{RESET}"
                 passed += 1
-                print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
+                if not args.quiet:
+                    status = f"{GREEN}[PASS]{RESET}"
+                    print(f"{status}  {task:<{task_w}}  {test_name:<{test_w}}  {msg}")
             else:
                 status = f"{RED}[FAIL]{RESET}"
                 failed += 1

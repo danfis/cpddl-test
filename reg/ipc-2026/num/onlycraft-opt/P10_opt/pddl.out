@@ -1,0 +1,166 @@
+Domain: polycraft
+Problem: p10_opt
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  cell - object
+  object
+Obj:
+  cell0 - cell
+  cell1 - cell
+  cell10 - cell
+  cell11 - cell
+  cell12 - cell
+  cell13 - cell
+  cell14 - cell
+  cell15 - cell
+  cell16 - cell
+  cell17 - cell
+  cell18 - cell
+  cell19 - cell
+  cell2 - cell
+  cell20 - cell
+  cell21 - cell
+  cell22 - cell
+  cell23 - cell
+  cell24 - cell
+  cell25 - cell
+  cell26 - cell
+  cell27 - cell
+  cell28 - cell
+  cell29 - cell
+  cell3 - cell
+  cell30 - cell
+  cell31 - cell
+  cell32 - cell
+  cell33 - cell
+  cell34 - cell
+  cell35 - cell
+  cell36 - cell
+  cell37 - cell
+  cell38 - cell
+  cell39 - cell
+  cell4 - cell
+  cell40 - cell
+  cell41 - cell
+  cell42 - cell
+  cell43 - cell
+  cell44 - cell
+  cell45 - cell
+  cell46 - cell
+  cell47 - cell
+  cell48 - cell
+  cell5 - cell
+  cell6 - cell
+  cell7 - cell
+  cell8 - cell
+  cell9 - cell
+Predicate:
+  (= object object) :eq
+  (crafting_table_cell cell)
+  (low_tree_cell cell)
+  (tree_cell cell)
+Function:
+  (count_log_in_inventory)
+  (count_planks_in_inventory)
+  (count_pogo_stick)
+  (count_sack_polyisoprene_pellets_in_inventory)
+  (count_stick_in_inventory)
+  (count_tree_tap_in_inventory)
+  (toxicity)
+Action:
+  break: ?pos - cell
+      pre: (and (tree_cell ?pos))
+      eff: (and (increase (count_log_in_inventory) 1) (not (tree_cell ?pos)))
+  break_brutal: ?pos - cell
+      pre: (and (tree_cell ?pos))
+      eff: (and (increase (count_log_in_inventory) 2) (not (tree_cell ?pos)))
+  break_low: ?pos - cell
+      pre: (and (low_tree_cell ?pos))
+      eff: (and (increase (count_log_in_inventory) 0.5) (not (low_tree_cell ?pos)))
+  craft_plank:
+      pre: (and (>= (count_log_in_inventory) 1))
+      eff: (and (decrease (count_log_in_inventory) 1) (increase (count_planks_in_inventory) 4))
+  craft_stick:
+      pre: (and (>= (count_planks_in_inventory) 2))
+      eff: (and (decrease (count_planks_in_inventory) 2) (increase (count_stick_in_inventory) 4))
+  craft_synthetic_pellets:
+      pre: (and (>= (count_log_in_inventory) 1))
+      eff: (and (decrease (count_log_in_inventory) 1) (increase (count_sack_polyisoprene_pellets_in_inventory) 1) (increase (toxicity) 1))
+  craft_tree_tap: ?pos - cell
+      pre: (and (>= (count_planks_in_inventory) 5) (>= (count_stick_in_inventory) 1) (crafting_table_cell ?pos))
+      eff: (and (decrease (count_planks_in_inventory) 5) (decrease (count_stick_in_inventory) 1) (increase (count_tree_tap_in_inventory) 1))
+  craft_wooden_pogo: ?pos - cell
+      pre: (and (<= (toxicity) 1) (>= (count_planks_in_inventory) 2) (>= (count_sack_polyisoprene_pellets_in_inventory) 1) (>= (count_stick_in_inventory) 4) (crafting_table_cell ?pos))
+      eff: (and (decrease (count_planks_in_inventory) 2) (decrease (count_sack_polyisoprene_pellets_in_inventory) 1) (decrease (count_stick_in_inventory) 4) (increase (count_pogo_stick) 1))
+  place_tree_tap: ?pos - cell
+      pre: (and (>= (count_tree_tap_in_inventory) 1) (tree_cell ?pos))
+      eff: (and (decrease (count_tree_tap_in_inventory) 1) (increase (count_sack_polyisoprene_pellets_in_inventory) 1) (not (tree_cell ?pos)))
+  smelt_pellets_raw:
+      pre: (and (>= (count_log_in_inventory) 2))
+      eff: (and (decrease (count_log_in_inventory) 2) (increase (count_sack_polyisoprene_pellets_in_inventory) 0.5))
+Init:
+  (= (count_log_in_inventory) 0)
+  (= (count_planks_in_inventory) 0)
+  (= (count_pogo_stick) 0)
+  (= (count_sack_polyisoprene_pellets_in_inventory) 0)
+  (= (count_stick_in_inventory) 0)
+  (= (count_tree_tap_in_inventory) 0)
+  (= (toxicity) 0)
+  (crafting_table_cell cell22)
+  (tree_cell cell10)
+  (tree_cell cell11)
+  (tree_cell cell13)
+  (tree_cell cell14)
+  (tree_cell cell16)
+  (tree_cell cell17)
+  (tree_cell cell18)
+  (tree_cell cell19)
+  (tree_cell cell2)
+  (tree_cell cell21)
+  (tree_cell cell25)
+  (tree_cell cell27)
+  (tree_cell cell28)
+  (tree_cell cell29)
+  (tree_cell cell3)
+  (tree_cell cell30)
+  (tree_cell cell34)
+  (tree_cell cell36)
+  (tree_cell cell37)
+  (tree_cell cell38)
+  (tree_cell cell39)
+  (tree_cell cell40)
+  (tree_cell cell41)
+  (tree_cell cell42)
+  (tree_cell cell43)
+  (tree_cell cell44)
+  (tree_cell cell45)
+  (tree_cell cell46)
+  (tree_cell cell47)
+  (tree_cell cell48)
+  (tree_cell cell5)
+  (tree_cell cell6)
+  (tree_cell cell7)
+  (tree_cell cell8)
+  (tree_cell cell9)
+Goal:
+  (>= (count_pogo_stick) 10)
+Metric:
+Pred prop:
+  (crafting_table_cell cell): in_init in_pre
+  (low_tree_cell cell): in_pre in_eff
+  (tree_cell cell): in_init in_pre in_eff
+Func prop:
+  (count_log_in_inventory): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (count_planks_in_inventory): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (count_pogo_stick): in_init init_all_nonneg init_all_nonpos init_all_int in_goal in_eff write_delta_nonneg write_delta_nonneg_int
+  (count_sack_polyisoprene_pellets_in_inventory): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (count_stick_in_inventory): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (count_tree_tap_in_inventory): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (toxicity): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

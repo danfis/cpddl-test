@@ -1,0 +1,296 @@
+Domain: rover
+Problem: roverprob4132
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  camera - object
+  lander - object
+  mode - object
+  object
+  objective - object
+  rover - object
+  store - object
+  waypoint - object
+Obj:
+  camera0 - camera
+  camera1 - camera
+  camera2 - camera
+  camera3 - camera
+  camera4 - camera
+  colour - mode
+  general - lander
+  high_res - mode
+  low_res - mode
+  objective0 - objective
+  objective1 - objective
+  objective2 - objective
+  rover0 - rover
+  rover0store - store
+  rover1 - rover
+  rover1store - store
+  rover2 - rover
+  rover2store - store
+  rover3 - rover
+  rover3store - store
+  waypoint0 - waypoint
+  waypoint1 - waypoint
+  waypoint2 - waypoint
+  waypoint3 - waypoint
+  waypoint4 - waypoint
+  waypoint5 - waypoint
+  waypoint6 - waypoint
+Predicate:
+  (= object object) :eq
+  (at_lander lander waypoint)
+  (at_rock_sample waypoint)
+  (at_soil_sample waypoint)
+  (available rover)
+  (calibrated camera rover)
+  (calibration_target camera objective)
+  (can_traverse rover waypoint waypoint)
+  (channel_free lander)
+  (communicated_image_data objective mode)
+  (communicated_rock_data waypoint)
+  (communicated_soil_data waypoint)
+  (empty store)
+  (equipped_for_imaging rover)
+  (equipped_for_rock_analysis rover)
+  (equipped_for_soil_analysis rover)
+  (full store)
+  (have_image rover objective mode)
+  (have_rock_analysis rover waypoint)
+  (have_soil_analysis rover waypoint)
+  (in rover waypoint)
+  (in_sun waypoint)
+  (on_board camera rover)
+  (store_of store rover)
+  (supports camera mode)
+  (visible waypoint waypoint)
+  (visible_from objective waypoint)
+Function:
+  (energy rover)
+Action:
+  calibrate: ?r - rover ?i - camera ?t - objective ?w - waypoint
+      pre: (and (>= (energy ?r) 2) (calibration_target ?i ?t) (equipped_for_imaging ?r) (in ?r ?w) (on_board ?i ?r) (visible_from ?t ?w))
+      eff: (and (calibrated ?i ?r) (decrease (energy ?r) 2))
+  communicate_image_data: ?r - rover ?l - lander ?o - objective ?m - mode ?x - waypoint ?y - waypoint
+      pre: (and (>= (energy ?r) 6) (at_lander ?l ?y) (available ?r) (channel_free ?l) (have_image ?r ?o ?m) (in ?r ?x) (visible ?x ?y))
+      eff: (and (available ?r) (communicated_image_data ?o ?m) (decrease (energy ?r) 6))
+  communicate_rock_data: ?r - rover ?l - lander ?p - waypoint ?x - waypoint ?y - waypoint
+      pre: (and (>= (energy ?r) 4) (at_lander ?l ?y) (available ?r) (channel_free ?l) (have_rock_analysis ?r ?p) (in ?r ?x) (visible ?x ?y))
+      eff: (and (available ?r) (communicated_rock_data ?p) (decrease (energy ?r) 4))
+  communicate_soil_data: ?r - rover ?l - lander ?p - waypoint ?x - waypoint ?y - waypoint
+      pre: (and (>= (energy ?r) 4) (at_lander ?l ?y) (available ?r) (channel_free ?l) (have_soil_analysis ?r ?p) (in ?r ?x) (visible ?x ?y))
+      eff: (and (available ?r) (communicated_soil_data ?p) (decrease (energy ?r) 4))
+  drop: ?x - rover ?y - store
+      pre: (and (full ?y) (store_of ?y ?x))
+      eff: (and (empty ?y) (not (full ?y)))
+  navigate: ?x - rover ?y - waypoint ?z - waypoint
+      pre: (and (>= (energy ?x) 8) (available ?x) (can_traverse ?x ?y ?z) (in ?x ?y) (visible ?y ?z))
+      eff: (and (decrease (energy ?x) 8) (in ?x ?z) (not (in ?x ?y)))
+  recharge: ?x - rover ?w - waypoint
+      pre: (and (<= (energy ?x) 80) (in ?x ?w) (in_sun ?w))
+      eff: (and (increase (energy ?x) 20))
+  sample_rock: ?x - rover ?s - store ?p - waypoint
+      pre: (and (>= (energy ?x) 5) (at_rock_sample ?p) (empty ?s) (equipped_for_rock_analysis ?x) (in ?x ?p) (store_of ?s ?x))
+      eff: (and (decrease (energy ?x) 5) (full ?s) (have_rock_analysis ?x ?p) (not (at_rock_sample ?p)) (not (empty ?s)))
+  sample_soil: ?x - rover ?s - store ?p - waypoint
+      pre: (and (>= (energy ?x) 3) (at_soil_sample ?p) (empty ?s) (equipped_for_soil_analysis ?x) (in ?x ?p) (store_of ?s ?x))
+      eff: (and (decrease (energy ?x) 3) (full ?s) (have_soil_analysis ?x ?p) (not (at_soil_sample ?p)) (not (empty ?s)))
+  take_image: ?r - rover ?p - waypoint ?o - objective ?i - camera ?m - mode
+      pre: (and (>= (energy ?r) 1) (calibrated ?i ?r) (equipped_for_imaging ?r) (in ?r ?p) (on_board ?i ?r) (supports ?i ?m) (visible_from ?o ?p))
+      eff: (and (decrease (energy ?r) 1) (have_image ?r ?o ?m) (not (calibrated ?i ?r)))
+Init:
+  (= (energy rover0) 50)
+  (= (energy rover1) 50)
+  (= (energy rover2) 50)
+  (= (energy rover3) 50)
+  (at_lander general waypoint4)
+  (at_rock_sample waypoint0)
+  (at_rock_sample waypoint1)
+  (at_rock_sample waypoint3)
+  (at_rock_sample waypoint5)
+  (at_rock_sample waypoint6)
+  (at_soil_sample waypoint0)
+  (at_soil_sample waypoint1)
+  (at_soil_sample waypoint4)
+  (at_soil_sample waypoint5)
+  (at_soil_sample waypoint6)
+  (available rover0)
+  (available rover1)
+  (available rover2)
+  (available rover3)
+  (calibration_target camera0 objective2)
+  (calibration_target camera1 objective2)
+  (calibration_target camera2 objective0)
+  (calibration_target camera3 objective0)
+  (calibration_target camera4 objective1)
+  (can_traverse rover0 waypoint0 waypoint5)
+  (can_traverse rover0 waypoint1 waypoint3)
+  (can_traverse rover0 waypoint1 waypoint4)
+  (can_traverse rover0 waypoint1 waypoint5)
+  (can_traverse rover0 waypoint2 waypoint5)
+  (can_traverse rover0 waypoint3 waypoint1)
+  (can_traverse rover0 waypoint4 waypoint1)
+  (can_traverse rover0 waypoint5 waypoint0)
+  (can_traverse rover0 waypoint5 waypoint1)
+  (can_traverse rover0 waypoint5 waypoint2)
+  (can_traverse rover0 waypoint5 waypoint6)
+  (can_traverse rover0 waypoint6 waypoint5)
+  (can_traverse rover1 waypoint0 waypoint2)
+  (can_traverse rover1 waypoint1 waypoint2)
+  (can_traverse rover1 waypoint1 waypoint3)
+  (can_traverse rover1 waypoint1 waypoint4)
+  (can_traverse rover1 waypoint2 waypoint0)
+  (can_traverse rover1 waypoint2 waypoint1)
+  (can_traverse rover1 waypoint2 waypoint5)
+  (can_traverse rover1 waypoint2 waypoint6)
+  (can_traverse rover1 waypoint3 waypoint1)
+  (can_traverse rover1 waypoint4 waypoint1)
+  (can_traverse rover1 waypoint5 waypoint2)
+  (can_traverse rover1 waypoint6 waypoint2)
+  (can_traverse rover2 waypoint0 waypoint1)
+  (can_traverse rover2 waypoint0 waypoint3)
+  (can_traverse rover2 waypoint0 waypoint6)
+  (can_traverse rover2 waypoint1 waypoint0)
+  (can_traverse rover2 waypoint1 waypoint2)
+  (can_traverse rover2 waypoint1 waypoint5)
+  (can_traverse rover2 waypoint2 waypoint1)
+  (can_traverse rover2 waypoint3 waypoint0)
+  (can_traverse rover2 waypoint3 waypoint4)
+  (can_traverse rover2 waypoint4 waypoint3)
+  (can_traverse rover2 waypoint5 waypoint1)
+  (can_traverse rover2 waypoint6 waypoint0)
+  (can_traverse rover3 waypoint0 waypoint2)
+  (can_traverse rover3 waypoint0 waypoint3)
+  (can_traverse rover3 waypoint0 waypoint5)
+  (can_traverse rover3 waypoint1 waypoint2)
+  (can_traverse rover3 waypoint1 waypoint4)
+  (can_traverse rover3 waypoint2 waypoint0)
+  (can_traverse rover3 waypoint2 waypoint1)
+  (can_traverse rover3 waypoint2 waypoint6)
+  (can_traverse rover3 waypoint3 waypoint0)
+  (can_traverse rover3 waypoint4 waypoint1)
+  (can_traverse rover3 waypoint5 waypoint0)
+  (can_traverse rover3 waypoint6 waypoint2)
+  (channel_free general)
+  (empty rover0store)
+  (empty rover1store)
+  (empty rover2store)
+  (empty rover3store)
+  (equipped_for_imaging rover0)
+  (equipped_for_imaging rover1)
+  (equipped_for_imaging rover2)
+  (equipped_for_imaging rover3)
+  (equipped_for_rock_analysis rover1)
+  (equipped_for_soil_analysis rover2)
+  (equipped_for_soil_analysis rover3)
+  (in rover0 waypoint5)
+  (in rover1 waypoint2)
+  (in rover2 waypoint0)
+  (in rover3 waypoint2)
+  (in_sun waypoint5)
+  (on_board camera0 rover3)
+  (on_board camera1 rover0)
+  (on_board camera2 rover0)
+  (on_board camera3 rover2)
+  (on_board camera4 rover1)
+  (store_of rover0store rover0)
+  (store_of rover1store rover1)
+  (store_of rover2store rover2)
+  (store_of rover3store rover3)
+  (supports camera0 colour)
+  (supports camera0 low_res)
+  (supports camera1 colour)
+  (supports camera2 low_res)
+  (supports camera3 colour)
+  (supports camera3 high_res)
+  (supports camera3 low_res)
+  (supports camera4 colour)
+  (supports camera4 low_res)
+  (visible waypoint0 waypoint1)
+  (visible waypoint0 waypoint2)
+  (visible waypoint0 waypoint3)
+  (visible waypoint0 waypoint5)
+  (visible waypoint0 waypoint6)
+  (visible waypoint1 waypoint0)
+  (visible waypoint1 waypoint2)
+  (visible waypoint1 waypoint3)
+  (visible waypoint1 waypoint4)
+  (visible waypoint1 waypoint5)
+  (visible waypoint1 waypoint6)
+  (visible waypoint2 waypoint0)
+  (visible waypoint2 waypoint1)
+  (visible waypoint2 waypoint5)
+  (visible waypoint2 waypoint6)
+  (visible waypoint3 waypoint0)
+  (visible waypoint3 waypoint1)
+  (visible waypoint3 waypoint4)
+  (visible waypoint3 waypoint6)
+  (visible waypoint4 waypoint1)
+  (visible waypoint4 waypoint3)
+  (visible waypoint4 waypoint6)
+  (visible waypoint5 waypoint0)
+  (visible waypoint5 waypoint1)
+  (visible waypoint5 waypoint2)
+  (visible waypoint5 waypoint6)
+  (visible waypoint6 waypoint0)
+  (visible waypoint6 waypoint1)
+  (visible waypoint6 waypoint2)
+  (visible waypoint6 waypoint3)
+  (visible waypoint6 waypoint4)
+  (visible waypoint6 waypoint5)
+  (visible_from objective0 waypoint0)
+  (visible_from objective0 waypoint1)
+  (visible_from objective0 waypoint2)
+  (visible_from objective1 waypoint0)
+  (visible_from objective1 waypoint1)
+  (visible_from objective1 waypoint2)
+  (visible_from objective1 waypoint3)
+  (visible_from objective1 waypoint4)
+  (visible_from objective1 waypoint5)
+  (visible_from objective2 waypoint0)
+  (visible_from objective2 waypoint1)
+  (visible_from objective2 waypoint2)
+  (visible_from objective2 waypoint3)
+  (visible_from objective2 waypoint4)
+  (visible_from objective2 waypoint5)
+  (visible_from objective2 waypoint6)
+Goal:
+  (and (communicated_image_data objective2 colour) (communicated_image_data objective2 low_res) (communicated_rock_data waypoint0) (communicated_rock_data waypoint3) (communicated_rock_data waypoint6) (communicated_soil_data waypoint0) (communicated_soil_data waypoint4) (communicated_soil_data waypoint6))
+Metric:
+Pred prop:
+  (at_lander lander waypoint): in_init in_pre
+  (at_rock_sample waypoint): in_init in_pre in_eff
+  (at_soil_sample waypoint): in_init in_pre in_eff
+  (available rover): in_init in_pre in_eff
+  (calibrated camera rover): in_pre in_eff
+  (calibration_target camera objective): in_init in_pre
+  (can_traverse rover waypoint waypoint): in_init in_pre
+  (channel_free lander): in_init in_pre
+  (communicated_image_data objective mode): in_goal in_eff
+  (communicated_rock_data waypoint): in_goal in_eff
+  (communicated_soil_data waypoint): in_goal in_eff
+  (empty store): in_init in_pre in_eff
+  (equipped_for_imaging rover): in_init in_pre
+  (equipped_for_rock_analysis rover): in_init in_pre
+  (equipped_for_soil_analysis rover): in_init in_pre
+  (full store): in_pre in_eff
+  (have_image rover objective mode): in_pre in_eff
+  (have_rock_analysis rover waypoint): in_pre in_eff
+  (have_soil_analysis rover waypoint): in_pre in_eff
+  (in rover waypoint): in_init in_pre in_eff
+  (in_sun waypoint): in_init in_pre
+  (on_board camera rover): in_init in_pre
+  (store_of store rover): in_init in_pre
+  (supports camera mode): in_init in_pre
+  (visible waypoint waypoint): in_init in_pre
+  (visible_from objective waypoint): in_init in_pre
+Func prop:
+  (energy rover): in_init init_all_nonneg init_all_int in_pre in_eff
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

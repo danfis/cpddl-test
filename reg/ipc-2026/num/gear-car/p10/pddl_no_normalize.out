@@ -1,0 +1,134 @@
+Domain: car_linear_gears_numeric
+Problem: car_linear_gears_p10
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  gear - object
+  object
+Obj:
+  g1 - gear
+  g2 - gear
+  g3 - gear
+Predicate:
+  (= object object) :eq
+  (current_gear gear)
+  (gear_next gear gear)
+Function:
+  (a)
+  (acc_step)
+  (alpha)
+  (beta)
+  (cost)
+  (d)
+  (elapsed_time)
+  (fuel)
+  (fuel_used)
+  (gear_fuel_aligned gear)
+  (gear_fuel_over gear)
+  (gear_fuel_under gear)
+  (gear_max_acceleration gear)
+  (gear_min_acceleration gear)
+  (gear_v_max gear)
+  (gear_v_min gear)
+  (max_acceleration)
+  (max_speed)
+  (min_acceleration)
+  (shift_count)
+  (v)
+Action:
+  accelerate: ?g - gear
+      pre: (and (<= (+ (a) (acc_step)) (gear_max_acceleration ?g)) (<= (+ (a) (acc_step)) (max_acceleration)) (<= (a) (gear_max_acceleration ?g)) (<= (a) (max_acceleration)) (<= (v) (max_speed)) (>= (a) (gear_min_acceleration ?g)) (>= (a) (min_acceleration)) (>= (fuel) 0) (>= (v) 0) (current_gear ?g))
+      eff: (and (increase (a) (acc_step)))
+  decelerate: ?g - gear
+      pre: (and (<= (a) (gear_max_acceleration ?g)) (<= (a) (max_acceleration)) (<= (v) (max_speed)) (>= (- (a) (acc_step)) (gear_min_acceleration ?g)) (>= (- (a) (acc_step)) (min_acceleration)) (>= (a) (gear_min_acceleration ?g)) (>= (a) (min_acceleration)) (>= (fuel) 0) (>= (v) 0) (current_gear ?g))
+      eff: (and (decrease (a) (acc_step)))
+  drive_aligned_gear: ?g - gear
+      pre: (and (<= (+ (v) (a)) (max_speed)) (<= (a) (gear_max_acceleration ?g)) (<= (a) (max_acceleration)) (<= (v) (gear_v_max ?g)) (<= (v) (max_speed)) (>= (+ (v) (a)) 0) (>= (a) (gear_min_acceleration ?g)) (>= (a) (min_acceleration)) (>= (fuel) (gear_fuel_aligned ?g)) (>= (fuel) 0) (>= (v) (gear_v_min ?g)) (>= (v) 0) (current_gear ?g))
+      eff: (and (decrease (fuel) (gear_fuel_aligned ?g)) (increase (cost) (+ (alpha) (* (beta) (gear_fuel_aligned ?g)))) (increase (d) (+ (* 2 (v)) (a))) (increase (elapsed_time) 1) (increase (fuel_used) (gear_fuel_aligned ?g)) (increase (v) (a)))
+  drive_over_gear: ?g - gear
+      pre: (and (<= (+ (v) (a)) (max_speed)) (<= (a) (gear_max_acceleration ?g)) (<= (a) (max_acceleration)) (<= (v) (max_speed)) (> (v) (gear_v_max ?g)) (>= (+ (v) (a)) 0) (>= (a) (gear_min_acceleration ?g)) (>= (a) (min_acceleration)) (>= (fuel) (gear_fuel_over ?g)) (>= (fuel) 0) (>= (v) 0) (current_gear ?g))
+      eff: (and (decrease (fuel) (gear_fuel_over ?g)) (increase (cost) (+ (alpha) (* (beta) (gear_fuel_over ?g)))) (increase (d) (+ (* 2 (v)) (a))) (increase (elapsed_time) 1) (increase (fuel_used) (gear_fuel_over ?g)) (increase (v) (a)))
+  drive_under_gear: ?g - gear
+      pre: (and (< (v) (gear_v_min ?g)) (<= (+ (v) (a)) (max_speed)) (<= (a) (gear_max_acceleration ?g)) (<= (a) (max_acceleration)) (<= (v) (max_speed)) (>= (+ (v) (a)) 0) (>= (a) (gear_min_acceleration ?g)) (>= (a) (min_acceleration)) (>= (fuel) (gear_fuel_under ?g)) (>= (fuel) 0) (>= (v) 0) (current_gear ?g))
+      eff: (and (decrease (fuel) (gear_fuel_under ?g)) (increase (cost) (+ (alpha) (* (beta) (gear_fuel_under ?g)))) (increase (d) (+ (* 2 (v)) (a))) (increase (elapsed_time) 1) (increase (fuel_used) (gear_fuel_under ?g)) (increase (v) (a)))
+  gear_down: ?from - gear ?to - gear
+      pre: (and (<= (a) (gear_max_acceleration ?to)) (<= (a) (max_acceleration)) (<= (v) (max_speed)) (= (a) 0) (>= (a) (gear_min_acceleration ?to)) (>= (a) (min_acceleration)) (>= (fuel) 0) (>= (v) 0) (current_gear ?from) (gear_next ?to ?from))
+      eff: (and (current_gear ?to) (increase (cost) 1) (increase (shift_count) 1) (not (current_gear ?from)))
+  gear_up: ?from - gear ?to - gear
+      pre: (and (<= (a) (gear_max_acceleration ?to)) (<= (a) (max_acceleration)) (<= (v) (max_speed)) (= (a) 0) (>= (a) (gear_min_acceleration ?to)) (>= (a) (min_acceleration)) (>= (fuel) 0) (>= (v) 0) (current_gear ?from) (gear_next ?from ?to))
+      eff: (and (current_gear ?to) (increase (cost) 1) (increase (shift_count) 1) (not (current_gear ?from)))
+Init:
+  (= (a) 0)
+  (= (acc_step) 1)
+  (= (alpha) 69160)
+  (= (beta) 95)
+  (= (cost) 0)
+  (= (d) 0)
+  (= (elapsed_time) 0)
+  (= (fuel) 727)
+  (= (fuel_used) 0)
+  (= (gear_fuel_aligned g1) 11)
+  (= (gear_fuel_aligned g2) 9)
+  (= (gear_fuel_aligned g3) 8)
+  (= (gear_fuel_over g1) 18)
+  (= (gear_fuel_over g2) 15)
+  (= (gear_fuel_over g3) 13)
+  (= (gear_fuel_under g1) 18)
+  (= (gear_fuel_under g2) 17)
+  (= (gear_fuel_under g3) 17)
+  (= (gear_max_acceleration g1) 2)
+  (= (gear_max_acceleration g2) 1)
+  (= (gear_max_acceleration g3) 0)
+  (= (gear_min_acceleration g1) -1)
+  (= (gear_min_acceleration g2) -1)
+  (= (gear_min_acceleration g3) -1)
+  (= (gear_v_max g1) 2)
+  (= (gear_v_max g2) 4)
+  (= (gear_v_max g3) 6)
+  (= (gear_v_min g1) 0)
+  (= (gear_v_min g2) 2)
+  (= (gear_v_min g3) 4)
+  (= (max_acceleration) 2)
+  (= (max_speed) 6)
+  (= (min_acceleration) -1)
+  (= (shift_count) 0)
+  (= (v) 0)
+  (current_gear g1)
+  (gear_next g1 g2)
+  (gear_next g2 g3)
+Goal:
+  (and (<= (d) 812) (= (a) 0) (= (v) 0) (> (fuel_used) 0) (>= (d) 810) (>= (fuel) 0) (current_gear g1))
+Metric:
+  (cost)
+Pred prop:
+  (current_gear gear): in_init in_pre in_goal in_eff
+  (gear_next gear gear): in_init in_pre
+Func prop:
+  (a): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal on_num_op_rhs in_eff rhs_funcs:(acc_step)
+  (acc_step): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (alpha): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (beta): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(alpha beta gear_fuel_aligned gear_fuel_over gear_fuel_under) write_delta_nonneg write_delta_nonneg_int
+  (d): in_init init_all_nonneg init_all_nonpos init_all_int in_goal in_eff rhs_funcs:(a v)
+  (elapsed_time): in_init init_all_nonneg init_all_nonpos init_all_int in_eff write_delta_nonneg write_delta_nonneg_int
+  (fuel): in_init init_all_nonneg init_all_int in_pre in_goal in_eff rhs_funcs:(gear_fuel_aligned gear_fuel_over gear_fuel_under)
+  (fuel_used): in_init init_all_nonneg init_all_nonpos init_all_int in_goal in_eff rhs_funcs:(gear_fuel_aligned gear_fuel_over gear_fuel_under) write_delta_nonneg write_delta_nonneg_int
+  (gear_fuel_aligned gear): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (gear_fuel_over gear): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (gear_fuel_under gear): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (gear_max_acceleration gear): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (gear_min_acceleration gear): in_init init_all_nonpos init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (gear_v_max gear): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (gear_v_min gear): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (max_acceleration): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (max_speed): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (min_acceleration): in_init init_all_nonpos init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (shift_count): in_init init_all_nonneg init_all_nonpos init_all_int in_eff write_delta_nonneg write_delta_nonneg_int
+  (v): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal on_num_op_rhs in_eff rhs_funcs:(a)
+Global prop:
+  action_cost_func:(cost)
+  has_int_action_cost_func
+  has_num_cmp
+  is_numeric

@@ -1,0 +1,33 @@
+Require:
+  - :negative-preconditions
+Predicate:
+  + (NOT-must-combine) neg-of (must-combine)
+  - (must-combine)
+  + (must-combine) neg-of (NOT-must-combine)
+Action:
+  - combine-finish: ?d - direction ?s - status
+      pre: (and (combine-at i1) (combining ?d) (shiftstatus done) (start-status ?d ?s))
+      eff: (and (not (combine-at i1)) (not (combining ?d)) (not (free-to-play)) (not (must-combine)) (not (shiftstatus done)) (shifting ?d) (shiftstatus ?s))
+  + combine-finish: ?d - direction ?s - status
+      pre: (and (combine-at i1) (combining ?d) (shiftstatus done) (start-status ?d ?s))
+      eff: (and (NOT-must-combine) (not (combine-at i1)) (not (combining ?d)) (not (free-to-play)) (not (must-combine)) (not (shiftstatus done)) (shifting ?d) (shiftstatus ?s))
+  - play: ?d - direction ?s - status
+      pre: (and (free-to-play) (not (must-combine)) (start-status ?d ?s))
+      eff: (and (must-combine) (not (free-to-play)) (shifting ?d) (shiftstatus ?s))
+  + play: ?d - direction ?s - status
+      pre: (and (NOT-must-combine) (free-to-play) (start-status ?d ?s))
+      eff: (and (must-combine) (not (NOT-must-combine)) (not (free-to-play)) (shifting ?d) (shiftstatus ?s))
+  - shift-finish: ?d - direction
+      pre: (and (not (must-combine)) (shifting ?d) (shiftstatus done))
+      eff: (and (free-to-play) (not (shifting ?d)) (not (shiftstatus done)))
+  + shift-finish: ?d - direction
+      pre: (and (NOT-must-combine) (shifting ?d) (shiftstatus done))
+      eff: (and (free-to-play) (not (shifting ?d)) (not (shiftstatus done)))
+Init:
+  + (NOT-must-combine)
+Pred prop:
+  + (NOT-must-combine): in_init in_pre in_eff
+  - (must-combine): in_pre in_pre_neg in_eff
+  + (must-combine): in_pre in_eff
+Global prop:
+  - has_non_static_neg_cond

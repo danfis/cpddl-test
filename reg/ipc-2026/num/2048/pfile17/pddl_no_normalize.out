@@ -1,0 +1,257 @@
+Domain: twenty-forty-eight
+Problem: pfile17
+Require:
+  :negative-preconditions
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  direction - object
+  idx - object
+  object
+  pos - object
+  status - object
+Obj:
+  bot - status :constant
+  d - direction :constant
+  done - status :constant
+  i1 - idx :constant
+  i2 - idx :constant
+  i3 - idx :constant
+  i4 - idx :constant
+  l - direction :constant
+  left - status :constant
+  midbot - status :constant
+  midleft - status :constant
+  midright - status :constant
+  midtop - status :constant
+  p11 - pos :constant
+  p12 - pos :constant
+  p13 - pos :constant
+  p14 - pos :constant
+  p21 - pos :constant
+  p22 - pos :constant
+  p23 - pos :constant
+  p24 - pos :constant
+  p31 - pos :constant
+  p32 - pos :constant
+  p33 - pos :constant
+  p34 - pos :constant
+  p41 - pos :constant
+  p42 - pos :constant
+  p43 - pos :constant
+  p44 - pos :constant
+  r - direction :constant
+  right - status :constant
+  top - status :constant
+  u - direction :constant
+Predicate:
+  (= object object) :eq
+  (combine-at idx)
+  (combining direction)
+  (free-to-play)
+  (must-combine)
+  (next direction status status)
+  (next-idx idx idx)
+  (pos-at direction status idx pos)
+  (shifting direction)
+  (shiftstatus status)
+  (start-status direction status)
+Function:
+  (value pos)
+Action:
+  combine-finish: ?d - direction ?s - status
+      pre: (and (combine-at i1) (combining ?d) (shiftstatus done) (start-status ?d ?s))
+      eff: (and (not (combine-at i1)) (not (combining ?d)) (not (free-to-play)) (not (must-combine)) (not (shiftstatus done)) (shifting ?d) (shiftstatus ?s))
+  combine-match: ?d - direction ?r - status ?ia - idx ?ib - idx ?pa - pos ?pb - pos
+      pre: (and (= (value ?pa) (value ?pb)) (combine-at ?ia) (combining ?d) (next-idx ?ia ?ib) (pos-at ?d ?r ?ia ?pa) (pos-at ?d ?r ?ib ?pb) (shiftstatus ?r))
+      eff: (and (assign (value ?pa) (* 2 (value ?pa))) (assign (value ?pb) 0) (combine-at ?ib) (not (combine-at ?ia)))
+  combine-no-match: ?d - direction ?r - status ?ia - idx ?ib - idx ?pa - pos ?pb - pos
+      pre: (and (combine-at ?ia) (combining ?d) (next-idx ?ia ?ib) (not (= (value ?pa) (value ?pb))) (pos-at ?d ?r ?ia ?pa) (pos-at ?d ?r ?ib ?pb) (shiftstatus ?r))
+      eff: (and (combine-at ?ib) (not (combine-at ?ia)))
+  combine-row-advance: ?d - direction ?r1 - status ?r2 - status
+      pre: (and (combine-at i4) (combining ?d) (next ?d ?r1 ?r2) (shiftstatus ?r1))
+      eff: (and (combine-at i1) (not (combine-at i4)) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  play: ?d - direction ?s - status
+      pre: (and (free-to-play) (not (must-combine)) (start-status ?d ?s))
+      eff: (and (must-combine) (not (free-to-play)) (shifting ?d) (shiftstatus ?s))
+  shift-0000: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p2) 0) (= (value ?p3) 0) (= (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0001: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p2) 0) (= (value ?p3) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p4)) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0010: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p2) 0) (= (value ?p4) 0) (> (value ?p3) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p3)) (assign (value ?p3) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0011: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p2) 0) (> (value ?p3) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p3)) (assign (value ?p2) (value ?p4)) (assign (value ?p3) 0) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0100: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p3) 0) (= (value ?p4) 0) (> (value ?p2) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p2)) (assign (value ?p2) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0101: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p3) 0) (> (value ?p2) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p2)) (assign (value ?p2) (value ?p4)) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0110: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (= (value ?p4) 0) (> (value ?p2) 0) (> (value ?p3) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p2)) (assign (value ?p2) (value ?p3)) (assign (value ?p3) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-0111: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p1) (value ?p2)) (assign (value ?p2) (value ?p3)) (assign (value ?p3) (value ?p4)) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1000: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p2) 0) (= (value ?p3) 0) (= (value ?p4) 0) (> (value ?p1) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1001: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p2) 0) (= (value ?p3) 0) (> (value ?p1) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p2) (value ?p4)) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1010: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p2) 0) (= (value ?p4) 0) (> (value ?p1) 0) (> (value ?p3) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p2) (value ?p3)) (assign (value ?p3) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1011: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p2) 0) (> (value ?p1) 0) (> (value ?p3) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p2) (value ?p3)) (assign (value ?p3) (value ?p4)) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1100: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p3) 0) (= (value ?p4) 0) (> (value ?p1) 0) (> (value ?p2) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1101: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p3) 0) (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (assign (value ?p3) (value ?p4)) (assign (value ?p4) 0) (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1110: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (= (value ?p4) 0) (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-1111: ?p1 - pos ?p2 - pos ?p3 - pos ?p4 - pos ?r1 - status ?r2 - status ?d - direction
+      pre: (and (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0) (> (value ?p4) 0) (next ?d ?r1 ?r2) (pos-at ?d ?r1 i1 ?p1) (pos-at ?d ?r1 i2 ?p2) (pos-at ?d ?r1 i3 ?p3) (pos-at ?d ?r1 i4 ?p4) (shifting ?d) (shiftstatus ?r1))
+      eff: (and (not (shiftstatus ?r1)) (shiftstatus ?r2))
+  shift-finish-to-combine: ?d - direction ?s - status
+      pre: (and (must-combine) (shifting ?d) (shiftstatus done) (start-status ?d ?s))
+      eff: (and (combine-at i1) (combining ?d) (free-to-play) (not (shifting ?d)) (not (shiftstatus done)) (shiftstatus ?s))
+  shift-finish: ?d - direction
+      pre: (and (not (must-combine)) (shifting ?d) (shiftstatus done))
+      eff: (and (free-to-play) (not (shifting ?d)) (not (shiftstatus done)))
+Init:
+  (= (value p11) 0)
+  (= (value p12) 64)
+  (= (value p13) 128)
+  (= (value p14) 8)
+  (= (value p21) 8)
+  (= (value p22) 0)
+  (= (value p23) 256)
+  (= (value p24) 32)
+  (= (value p31) 256)
+  (= (value p32) 32)
+  (= (value p33) 16)
+  (= (value p34) 16)
+  (= (value p41) 64)
+  (= (value p42) 64)
+  (= (value p43) 64)
+  (= (value p44) 16)
+  (free-to-play)
+  (next d left midleft)
+  (next d midleft midright)
+  (next d midright right)
+  (next d right done)
+  (next l bot done)
+  (next l midbot bot)
+  (next l midtop midbot)
+  (next l top midtop)
+  (next r bot done)
+  (next r midbot bot)
+  (next r midtop midbot)
+  (next r top midtop)
+  (next u left midleft)
+  (next u midleft midright)
+  (next u midright right)
+  (next u right done)
+  (next-idx i1 i2)
+  (next-idx i2 i3)
+  (next-idx i3 i4)
+  (pos-at d left i1 p41)
+  (pos-at d left i2 p31)
+  (pos-at d left i3 p21)
+  (pos-at d left i4 p11)
+  (pos-at d midleft i1 p42)
+  (pos-at d midleft i2 p32)
+  (pos-at d midleft i3 p22)
+  (pos-at d midleft i4 p12)
+  (pos-at d midright i1 p43)
+  (pos-at d midright i2 p33)
+  (pos-at d midright i3 p23)
+  (pos-at d midright i4 p13)
+  (pos-at d right i1 p44)
+  (pos-at d right i2 p34)
+  (pos-at d right i3 p24)
+  (pos-at d right i4 p14)
+  (pos-at l bot i1 p41)
+  (pos-at l bot i2 p42)
+  (pos-at l bot i3 p43)
+  (pos-at l bot i4 p44)
+  (pos-at l midbot i1 p31)
+  (pos-at l midbot i2 p32)
+  (pos-at l midbot i3 p33)
+  (pos-at l midbot i4 p34)
+  (pos-at l midtop i1 p21)
+  (pos-at l midtop i2 p22)
+  (pos-at l midtop i3 p23)
+  (pos-at l midtop i4 p24)
+  (pos-at l top i1 p11)
+  (pos-at l top i2 p12)
+  (pos-at l top i3 p13)
+  (pos-at l top i4 p14)
+  (pos-at r bot i1 p44)
+  (pos-at r bot i2 p43)
+  (pos-at r bot i3 p42)
+  (pos-at r bot i4 p41)
+  (pos-at r midbot i1 p34)
+  (pos-at r midbot i2 p33)
+  (pos-at r midbot i3 p32)
+  (pos-at r midbot i4 p31)
+  (pos-at r midtop i1 p24)
+  (pos-at r midtop i2 p23)
+  (pos-at r midtop i3 p22)
+  (pos-at r midtop i4 p21)
+  (pos-at r top i1 p14)
+  (pos-at r top i2 p13)
+  (pos-at r top i3 p12)
+  (pos-at r top i4 p11)
+  (pos-at u left i1 p11)
+  (pos-at u left i2 p21)
+  (pos-at u left i3 p31)
+  (pos-at u left i4 p41)
+  (pos-at u midleft i1 p12)
+  (pos-at u midleft i2 p22)
+  (pos-at u midleft i3 p32)
+  (pos-at u midleft i4 p42)
+  (pos-at u midright i1 p13)
+  (pos-at u midright i2 p23)
+  (pos-at u midright i3 p33)
+  (pos-at u midright i4 p43)
+  (pos-at u right i1 p14)
+  (pos-at u right i2 p24)
+  (pos-at u right i3 p34)
+  (pos-at u right i4 p44)
+  (start-status d left)
+  (start-status l top)
+  (start-status r top)
+  (start-status u left)
+Goal:
+  (and (= (value p11) 1024) (= (value p12) 0) (= (value p13) 0) (= (value p14) 0) (= (value p21) 0) (= (value p22) 0) (= (value p23) 0) (= (value p24) 0) (= (value p31) 0) (= (value p32) 0) (= (value p33) 0) (= (value p34) 0) (= (value p41) 0) (= (value p42) 0) (= (value p43) 0) (= (value p44) 0))
+Metric:
+Pred prop:
+  (combine-at idx): in_pre in_eff
+  (combining direction): in_pre in_eff
+  (free-to-play): in_init in_pre in_eff
+  (must-combine): in_pre in_pre_neg in_eff
+  (next direction status status): in_init in_pre
+  (next-idx idx idx): in_init in_pre
+  (pos-at direction status idx pos): in_init in_pre
+  (shifting direction): in_pre in_eff
+  (shiftstatus status): in_pre in_eff
+  (start-status direction status): in_init in_pre
+Func prop:
+  (value pos): in_init init_all_nonneg init_all_int in_pre in_goal on_num_op_rhs in_eff in_eff_by_assign_or_scale rhs_funcs:(value)
+Global prop:
+  has_non_static_neg_cond
+  has_num_cmp
+  is_numeric
+  is_unit_cost

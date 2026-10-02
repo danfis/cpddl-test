@@ -1,0 +1,101 @@
+Domain: delivery
+Problem: delivery-x-1
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  arm - object
+  bot - object
+  item - object
+  object
+  room - object
+Obj:
+  bot1 - bot
+  bot2 - bot
+  item1 - item
+  item2 - item
+  item3 - item
+  item4 - item
+  left1 - arm
+  left2 - arm
+  right1 - arm
+  right2 - arm
+  rooma - room
+  roomb - room
+  roomc - room
+Predicate:
+  (= object object) :eq
+  (at item room)
+  (at-bot bot room)
+  (door room room)
+  (free arm)
+  (in-arm item arm)
+  (in-tray item bot)
+  (mount arm bot)
+Function:
+  (current_load bot)
+  (load_limit bot)
+  (weight item)
+Action:
+  drop: ?i - item ?x - room ?a - arm ?b - bot
+      pre: (and (at-bot ?b ?x) (in-arm ?i ?a) (mount ?a ?b))
+      eff: (and (at ?i ?x) (decrease (current_load ?b) (weight ?i)) (free ?a) (not (in-arm ?i ?a)))
+  from-tray: ?i - item ?a - arm ?b - bot
+      pre: (and (free ?a) (in-tray ?i ?b) (mount ?a ?b))
+      eff: (and (in-arm ?i ?a) (not (free ?a)) (not (in-tray ?i ?b)))
+  move: ?b - bot ?x - room ?y - room
+      pre: (and (at-bot ?b ?x) (door ?x ?y))
+      eff: (and (at-bot ?b ?y) (not (at-bot ?b ?x)))
+  pick: ?i - item ?x - room ?a - arm ?b - bot
+      pre: (and (<= (+ (current_load ?b) (weight ?i)) (load_limit ?b)) (at ?i ?x) (at-bot ?b ?x) (free ?a) (mount ?a ?b))
+      eff: (and (in-arm ?i ?a) (increase (current_load ?b) (weight ?i)) (not (at ?i ?x)) (not (free ?a)))
+  to-tray: ?i - item ?a - arm ?b - bot
+      pre: (and (in-arm ?i ?a) (mount ?a ?b))
+      eff: (and (free ?a) (in-tray ?i ?b) (not (in-arm ?i ?a)))
+Init:
+  (= (current_load bot1) 0)
+  (= (current_load bot2) 0)
+  (= (load_limit bot1) 4)
+  (= (load_limit bot2) 4)
+  (= (weight item1) 1)
+  (= (weight item2) 1)
+  (= (weight item3) 1)
+  (= (weight item4) 1)
+  (at item1 rooma)
+  (at item2 rooma)
+  (at item3 rooma)
+  (at item4 rooma)
+  (at-bot bot1 rooma)
+  (at-bot bot2 rooma)
+  (door rooma roomb)
+  (door rooma roomc)
+  (door roomb rooma)
+  (door roomc rooma)
+  (free left1)
+  (free left2)
+  (free right1)
+  (free right2)
+  (mount left1 bot1)
+  (mount left2 bot2)
+  (mount right1 bot1)
+  (mount right2 bot2)
+Goal:
+  (and (at item1 roomc) (at item2 roomc) (at item3 roomb) (at item4 roomb))
+Metric:
+Pred prop:
+  (at item room): in_init in_pre in_goal in_eff
+  (at-bot bot room): in_init in_pre in_eff
+  (door room room): in_init in_pre
+  (free arm): in_init in_pre in_eff
+  (in-arm item arm): in_pre in_eff
+  (in-tray item bot): in_pre in_eff
+  (mount arm bot): in_init in_pre
+Func prop:
+  (current_load bot): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff rhs_funcs:(weight)
+  (load_limit bot): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+  (weight item): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

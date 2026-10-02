@@ -1,0 +1,56 @@
+step 0: state 0 applicable 2
+    state:
+    num: (x f0) = 2.5 (x f1) = 1
+move f0 f1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x f0) 2.5 -> 1.5 (x f1) 1 -> 5
+move f1 f0 :: cost: 1
+    add:
+    del:
+    num: (x f0) 2.5 -> 6.5 (x f1) 1 -> 0
+step 1: state 0 applicable 2
+    state:
+    num: (x f0) = 1.5 (x f1) = 5
+move f0 f1 :: cost: 1
+    add:
+    del:
+    num: (x f0) 1.5 -> 0.5 (x f1) 5 -> 9
+move f1 f0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x f0) 1.5 -> 5.5 (x f1) 5 -> 4
+step 2: state 0 applicable 2
+    state:
+    num: (x f0) = 5.5 (x f1) = 4
+move f0 f1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x f0) 5.5 -> 4.5 (x f1) 4 -> 8
+move f1 f0 :: cost: 1
+    add:
+    del:
+    num: (x f0) 5.5 -> 9.5 (x f1) 4 -> 3
+step 3: state 0 applicable 2
+    state:
+    num: (x f0) = 4.5 (x f1) = 8
+move f0 f1 :: cost: 1
+    add:
+    del:
+    num: (x f0) 4.5 -> 3.5 (x f1) 8 -> 12
+move f1 f0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x f0) 4.5 -> 8.5 (x f1) 8 -> 7
+step 4: state 0 applicable 2
+    state:
+    num: (x f0) = 8.5 (x f1) = 7
+move f0 f1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x f0) 8.5 -> 7.5 (x f1) 7 -> 11
+move f1 f0 :: cost: 1
+    add:
+    del:
+    num: (x f0) 8.5 -> 12.5 (x f1) 7 -> 6
+ground atoms: 0 groundings: 2

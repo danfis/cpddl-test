@@ -39,14 +39,52 @@ very_large = [
     "prune_strips_endo",
 ]
 
-numeric = [
-    "r",
-    "pddl",
-    "pddl_no_normalize",
-    "pddl_clone",
-    "pddl_compile_away_cond_eff",
-    "pddl_compile_away_eq_pred_no_norm",
-    "pddl_compile_away_eq_pred_lmg",
+# Tests that require the task's action costs already in the
+# grounder-supported form, i.e., (increase (total-cost) atom-or-int)
+# effects on the function named total-cost. Disabled for tasks whose
+# metric is expressible as integer action costs (so they are not numeric)
+# but needs pddlCompileMetricIntoActionCosts() first.
+needs_simple_total_cost = [
+    "endomorphism_lifted",
+    "endomorphism_lifted_nocost",
+    "endomorphism_relaxed_lifted",
+    "endomorphism_relaxed_lifted_nocost",
+    "gaifman",
+    "ground_layered",
+    "homomorphism_endomorph",
+    "homomorphism_endomorph_nocost",
+    "homomorphism_gaifman",
+    "homomorphism_gaifman_goal",
+    "homomorphism_reduce",
+    "homomorphism_type",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_blind_search_sql",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_astar_hmax_sql",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+    "lifted_succ_gen_sql",
+    "lmg_compile_in",
+    "prune_strips",
+    "strips",
+    "strips_ce",
+    "strips_cocoa",
+    "strips_compile_in_lmg",
+    "strips_grounding",
+    "strips_ground_neg_cond_guard",
+    "strips_ground_only_facts",
+    "strips_ground_only_facts_with_static",
+    "strips_ground_prune",
+    "strips_maker_actions",
+    "strips_maker_atoms",
+    "strips_maker_eff_in_state",
+    "strips_maker_init",
+    "strips_maker_make_strips",
+    "strips_nebel",
 ]
 
 [task-set]
@@ -123,6 +161,7 @@ quick = [
     "ipc-2011/seq-opt/visitall/problem02-full",
     "ipc-2014/seq-opt/barman/p435.1",
     "ipc-2014/seq-opt/transport/p01",
+    "ipc-2023/num/counters/pfile1",
     "various/cond-eff-simplify/p01",
     "various/neg-cond-unify/p01",
 ]
@@ -593,6 +632,7 @@ disable = [
     "search_astar_lmc",
     "search_blind",
     "symbolic_search",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -791,6 +831,7 @@ disable = [
     "search_lazy_ff",
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_mutex",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -1069,6 +1110,7 @@ disable = [
     "search_lazy_ff",
     "h2_heur_dyn_prog_plan_states",
     "h2_heur_dyn_prog_mutex",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -1378,6 +1420,7 @@ disable = [
     "endomorphism_tss_nocost",
     "h2mgroup",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
     "lifted_search_astar_hmax_sql",
@@ -1398,6 +1441,7 @@ disable = [
 name = "ipc-2023/opt/folding/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1443,6 +1487,7 @@ disable = [
 name = "ipc-2023/opt/labyrinth/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1471,6 +1516,7 @@ disable = [
 name = "ipc-2023/opt/quantum-layout/p01"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1480,6 +1526,7 @@ disable = [
 name = "ipc-2023/opt/quantum-layout/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1538,6 +1585,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1560,6 +1608,7 @@ disable = [
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
     "prune_strips_h3fw",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -1573,6 +1622,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1598,6 +1648,7 @@ disable = [
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
     "prune_strips_h3fw",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -1613,6 +1664,7 @@ disable = [
 name = "ipc-2023/opt/rubiks-cube/p10"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1648,6 +1700,7 @@ disable = [
     "famgroup_all",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1671,6 +1724,7 @@ disable = [
     "symbolic_search",
     "h2_heur_dyn_prog_init_state",
     "prune_strips_h3fw",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -1679,6 +1733,7 @@ disable = [
     "famgroup_maximal",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1717,6 +1772,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_search_astar_hmax_dl",
     "lifted_search_astar_hmax_sql",
@@ -1752,6 +1808,7 @@ disable = [
 name = "ipc-2023/sat/quantum-layout/p01"
 disable = [
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1809,6 +1866,7 @@ disable = [
     "fdr_conj_exact",
     "hm_h3",
     "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
@@ -1832,6 +1890,7 @@ disable = [
     "h2_heur_dyn_prog_init_state",
     "h2_heur_dyn_prog_mutex",
     "prune_strips_h3fw",
+    "search_wastar_ff",
 ]
 
 [[tasks]]
@@ -2079,242 +2138,841 @@ name = "various/wumpus/p01"
 name = "various/cond-eff-simplify/p01"
 
 [[tasks]]
+name = "various/num-metric-nonlinear/p01"
+disable = [
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "various/num-metric-negdelta/p01"
+disable = [
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "various/num-metric-negcoef/p01"
+disable = ["test-set:needs_simple_total_cost"]
+
+[[tasks]]
+name = "various/num-cost-expr/p01"
+disable = ["test-set:needs_simple_total_cost"]
+
+[[tasks]]
+name = "various/num-cost-decrease/p01"
+disable = ["test-set:needs_simple_total_cost"]
+
+[[tasks]]
+name = "various/num-cost-float/p01"
+disable = [
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "various/num-cost-renamed/p01"
+disable = ["test-set:needs_simple_total_cost"]
+
+[[tasks]]
+name = "various/num-float-coef/p01"
+
+[[tasks]]
+name = "various/num-float-div/p01"
+
+[[tasks]]
 name = "ipc-2023/num/block-grouping/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/block-grouping/pfile2"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/counters/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/counters/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/delivery/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/delivery/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/drone/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/drone/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/expedition/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/expedition/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/ext-plant-watering/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/ext-plant-watering/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/farmland/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/farmland/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/fo-counters/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/fo-counters/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/fo-farmland/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/fo-farmland/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/fo-sailing/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/fo-sailing/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/hydropower/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/hydropower/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/markettrader/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/markettrader/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/mprime/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/mprime/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/pathwaysmetric/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/pathwaysmetric/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/rover/pfile1"
-enable = [
-    "test-set:numeric",
-]
 
 [[tasks]]
 name = "ipc-2023/num/rover/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/sailing/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/sailing/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/settlersnumeric/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2023/num/settlersnumeric/pfile2"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/settlersnumeric/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/sugar/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/sugar/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/tpp/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/tpp/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+
+    # Too large for the blind lifted search (runs out of memory).
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+
+    # Lifted relaxed heuristics support only tasks with non-negative integer
+    # action costs.
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/zenotravel/pfile1"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/zenotravel/pfile10"
-enable = [
-    "test-set:numeric",
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/2048/pfile8"
+
+[[tasks]]
+name = "ipc-2026/num/2048/pfile17"
+
+[[tasks]]
+name = "ipc-2026/num/coins/pfile01"
+
+[[tasks]]
+name = "ipc-2026/num/coins/pfile10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/expedition/pfile1"
+
+[[tasks]]
+name = "ipc-2026/num/expedition/pfile10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/factory-robot/pfile1"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/factory-robot/pfile10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/forestfire/prob01"
+
+[[tasks]]
+name = "ipc-2026/num/forestfire/prob10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/gear-car/p000"
+disable = [
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/gear-car/p10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/line-exchange-snp/3_5_50_50"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/line-exchange-snp/4_10_50_50"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/onlycraft-opt/P01_opt"
+
+[[tasks]]
+name = "ipc-2026/num/onlycraft-opt/P10_opt"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/onlycraft-sat/P01_sat"
+
+[[tasks]]
+name = "ipc-2026/num/onlycraft-sat/P10_sat"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/petri-net/prob06-1"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/petri-net/prob08-2"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/rainbowttles-opt/p11"
+
+[[tasks]]
+name = "ipc-2026/num/rainbowttles-opt/p20"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/rainbowttles-sat/p31"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/rainbowttles-sat/p40"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/sailing-wind-opt/problem_0"
+
+[[tasks]]
+name = "ipc-2026/num/sailing-wind-opt/problem_10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/sailing-wind-sat/problem_0"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/sailing-wind-sat/problem_10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/settlers-snp/pfile1"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/settlers-snp/pfile10"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/ztalloc-sum/pfile1"
+disable = [
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
+]
+
+[[tasks]]
+name = "ipc-2026/num/ztalloc-sum/pfile10"
+disable = [
+    "lifted_blind_search_dl",
+    "lifted_blind_search_enforce_metric_dl",
+    "lifted_blind_search_unit_cost_dl",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 

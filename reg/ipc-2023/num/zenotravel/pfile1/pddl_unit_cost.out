@@ -1,0 +1,86 @@
+Domain: zenotravel
+Problem: ztravel-1-2
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  aircraft - locatable
+  city - object
+  locatable - object
+  object
+  person - locatable
+Obj:
+  city0 - city
+  city1 - city
+  city2 - city
+  person1 - person
+  person2 - person
+  person3 - person
+  plane1 - aircraft
+Predicate:
+  (= object object) :eq
+  (in person aircraft)
+  (located locatable city)
+Function:
+  (capacity aircraft)
+  (distance city city)
+  (fast-burn aircraft)
+  (fuel aircraft)
+  (onboard aircraft)
+  (slow-burn aircraft)
+  (zoom-limit aircraft)
+Action:
+  board: ?p - person ?a - aircraft ?c - city
+      pre: (and (located ?a ?c) (located ?p ?c))
+      eff: (and (in ?p ?a) (increase (onboard ?a) 1) (not (located ?p ?c)))
+  debark: ?p - person ?a - aircraft ?c - city
+      pre: (and (in ?p ?a) (located ?a ?c))
+      eff: (and (decrease (onboard ?a) 1) (located ?p ?c) (not (in ?p ?a)))
+  fly-fast: ?a - aircraft ?c1 - city ?c2 - city
+      pre: (and (<= (onboard ?a) (zoom-limit ?a)) (>= (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))) (located ?a ?c1))
+      eff: (and (decrease (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))) (located ?a ?c2) (not (located ?a ?c1)))
+  fly-slow: ?a - aircraft ?c1 - city ?c2 - city
+      pre: (and (>= (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))) (located ?a ?c1))
+      eff: (and (decrease (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))) (located ?a ?c2) (not (located ?a ?c1)))
+  refuel: ?a - aircraft
+      pre: (and (> (capacity ?a) (fuel ?a)))
+      eff: (and (assign (fuel ?a) (capacity ?a)))
+Init:
+  (= (capacity plane1) 6000)
+  (= (distance city0 city0) 0)
+  (= (distance city0 city1) 678)
+  (= (distance city0 city2) 775)
+  (= (distance city1 city0) 678)
+  (= (distance city1 city1) 0)
+  (= (distance city1 city2) 810)
+  (= (distance city2 city0) 775)
+  (= (distance city2 city1) 810)
+  (= (distance city2 city2) 0)
+  (= (fast-burn plane1) 15)
+  (= (fuel plane1) 4000)
+  (= (onboard plane1) 0)
+  (= (slow-burn plane1) 4)
+  (= (zoom-limit plane1) 8)
+  (located person1 city0)
+  (located person2 city0)
+  (located person3 city1)
+  (located plane1 city0)
+Goal:
+  (and (located person1 city2) (located person2 city1) (located person3 city2))
+Metric:
+Pred prop:
+  (in person aircraft): in_pre in_eff
+  (located locatable city): in_init in_pre in_goal in_eff
+Func prop:
+  (capacity aircraft): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (distance city city): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (fast-burn aircraft): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (fuel aircraft): in_init init_all_nonneg init_all_int in_pre in_eff in_eff_by_assign_or_scale rhs_funcs:(capacity distance fast-burn slow-burn)
+  (onboard aircraft): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_eff
+  (slow-burn aircraft): in_init init_all_nonneg init_all_int in_pre on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (zoom-limit aircraft): in_init init_all_nonneg init_all_int in_pre write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  has_num_cmp
+  is_numeric
+  is_unit_cost

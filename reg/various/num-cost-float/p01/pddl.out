@@ -1,0 +1,40 @@
+Domain: num-cost-float
+Problem: num-cost-float-01
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  loc - object
+  object
+Obj:
+  l1 - loc
+  l2 - loc
+  l3 - loc
+Predicate:
+  (= object object) :eq
+  (at loc)
+  (conn loc loc)
+Function:
+  (total-cost)
+Action:
+  move: ?a - loc ?b - loc
+      pre: (and (at ?a) (conn ?a ?b))
+      eff: (and (at ?b) (increase (total-cost) 1.5) (not (at ?a)))
+Init:
+  (= (total-cost) 0)
+  (at l1)
+  (conn l1 l2)
+  (conn l2 l3)
+Goal:
+  (at l3)
+Metric:
+  (total-cost)
+Pred prop:
+  (at loc): in_init in_pre in_goal in_eff
+  (conn loc loc): in_init in_pre
+Func prop:
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg
+Global prop:
+  action_cost_func:(total-cost)
+  is_numeric

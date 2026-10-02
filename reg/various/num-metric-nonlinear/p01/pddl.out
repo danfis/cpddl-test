@@ -1,0 +1,42 @@
+Domain: num-metric-nonlinear
+Problem: num-metric-nonlinear-01
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  loc - object
+  object
+Obj:
+  l1 - loc
+  l2 - loc
+  l3 - loc
+Predicate:
+  (= object object) :eq
+  (at loc)
+  (conn loc loc)
+Function:
+  (f1)
+  (f2)
+Action:
+  move: ?a - loc ?b - loc
+      pre: (and (at ?a) (conn ?a ?b))
+      eff: (and (at ?b) (increase (f1) 1) (increase (f2) 2) (not (at ?a)))
+Init:
+  (= (f1) 0)
+  (= (f2) 0)
+  (at l1)
+  (conn l1 l2)
+  (conn l2 l3)
+Goal:
+  (at l3)
+Metric:
+  (* (f1) (f2))
+Pred prop:
+  (at loc): in_init in_pre in_goal in_eff
+  (conn loc loc): in_init in_pre
+Func prop:
+  (f1): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+  (f2): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  is_numeric

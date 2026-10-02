@@ -1,0 +1,77 @@
+step 0: state 5 applicable 7
+    state: (at_rock_sample waypoint0) (at_soil_sample waypoint0) (available rover0) (empty rover0store) (in rover0 waypoint0)
+    num: (energy rover0) = 50
+calibrate rover0 camera0 objective0 waypoint0 :: cost: 0
+    add: (calibrated camera0 rover0)
+    del:
+    num: (energy rover0) 50 -> 48
+calibrate rover0 camera1 objective1 waypoint0 :: cost: 0
+    add: (calibrated camera1 rover0)
+    del:
+    num: (energy rover0) 50 -> 48
+navigate rover0 waypoint0 waypoint1 :: cost: 0 [successor]
+    add: (in rover0 waypoint1)
+    del: (in rover0 waypoint0)
+    num: (energy rover0) 50 -> 42
+step 1: state 5 applicable 3
+    state: (at_rock_sample waypoint0) (at_soil_sample waypoint0) (available rover0) (empty rover0store) (in rover0 waypoint1)
+    num: (energy rover0) = 42
+calibrate rover0 camera1 objective1 waypoint1 :: cost: 0
+    add: (calibrated camera1 rover0)
+    del:
+    num: (energy rover0) 42 -> 40
+navigate rover0 waypoint1 waypoint0 :: cost: 0
+    add: (in rover0 waypoint0)
+    del: (in rover0 waypoint1)
+    num: (energy rover0) 42 -> 34
+recharge rover0 waypoint1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (energy rover0) 42 -> 62
+step 2: state 5 applicable 3
+    state: (at_rock_sample waypoint0) (at_soil_sample waypoint0) (available rover0) (empty rover0store) (in rover0 waypoint1)
+    num: (energy rover0) = 62
+calibrate rover0 camera1 objective1 waypoint1 :: cost: 0 [successor]
+    add: (calibrated camera1 rover0)
+    del:
+    num: (energy rover0) 62 -> 60
+navigate rover0 waypoint1 waypoint0 :: cost: 0
+    add: (in rover0 waypoint0)
+    del: (in rover0 waypoint1)
+    num: (energy rover0) 62 -> 54
+recharge rover0 waypoint1 :: cost: 1
+    add:
+    del:
+    num: (energy rover0) 62 -> 82
+step 3: state 6 applicable 4
+    state: (at_rock_sample waypoint0) (at_soil_sample waypoint0) (available rover0) (calibrated camera1 rover0) (empty rover0store) (in rover0 waypoint1)
+    num: (energy rover0) = 60
+calibrate rover0 camera1 objective1 waypoint1 :: cost: 0
+    add:
+    del:
+    num: (energy rover0) 60 -> 58
+navigate rover0 waypoint1 waypoint0 :: cost: 0
+    add: (in rover0 waypoint0)
+    del: (in rover0 waypoint1)
+    num: (energy rover0) 60 -> 52
+recharge rover0 waypoint1 :: cost: 1
+    add:
+    del:
+    num: (energy rover0) 60 -> 80
+    successor: take_image rover0 waypoint1 objective1 camera1 high_res
+step 4: state 6 applicable 3
+    state: (at_rock_sample waypoint0) (at_soil_sample waypoint0) (available rover0) (empty rover0store) (have_image rover0 objective1 high_res) (in rover0 waypoint1)
+    num: (energy rover0) = 59
+calibrate rover0 camera1 objective1 waypoint1 :: cost: 0
+    add: (calibrated camera1 rover0)
+    del:
+    num: (energy rover0) 59 -> 57
+navigate rover0 waypoint1 waypoint0 :: cost: 0
+    add: (in rover0 waypoint0)
+    del: (in rover0 waypoint1)
+    num: (energy rover0) 59 -> 51
+recharge rover0 waypoint1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (energy rover0) 59 -> 79
+ground atoms: 14 groundings: 11

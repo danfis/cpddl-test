@@ -8,7 +8,8 @@ static pddl_mutex_pairs_t mutex;
 
 TEST(disamb_root, strips_pruned)
 {
-    pddlMGStripsInit(&mg_strips, &C.strips, &C.mg);
+    int ret = pddlMGStripsInit(&mg_strips, &C.strips, &C.mg, &C.err);
+    assert(ret == 0);
 
     pddlMutexPairsInitStrips(&mutex, &mg_strips.strips);
     pddlMutexPairsAddMGroups(&mutex, &mg_strips.mg);
@@ -20,7 +21,7 @@ TEST(disamb_root, strips_pruned)
 
     pddl_hm_mutex_result_t hm_res = PDDL_HM_MUTEX_RESULT_INIT;
     hm_res.mutex_pairs = &mutex;
-    int ret = pddlHm(&hmcfg, &hm_res, &C.err);
+    ret = pddlHm(&hmcfg, &hm_res, &C.err);
     assert(ret == 0);
 }
 

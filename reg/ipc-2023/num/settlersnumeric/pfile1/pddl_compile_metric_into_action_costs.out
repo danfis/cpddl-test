@@ -1,0 +1,133 @@
+Function:
+  - (labour)
+  - (resource-use)
+  + (total-cost)
+Action:
+  - break-stone: ?p - place
+      pre: (and (has-quarry ?p))
+      eff: (and (increase (available stone ?p) 1) (increase (labour) 1) (increase (resource-use) 1))
+  + break-stone: ?p - place
+      pre: (and (has-quarry ?p))
+      eff: (and (increase (available stone ?p) 1) (increase (total-cost) 6))
+  - build-cabin: ?p - place
+      pre: (and (woodland ?p))
+      eff: (and (has-cabin ?p) (increase (labour) 1))
+  + build-cabin: ?p - place
+      pre: (and (woodland ?p))
+      eff: (and (has-cabin ?p) (increase (total-cost) 3))
+  - build-cart: ?p - place
+      pre: (and (>= (available timber ?p) 1))
+      eff: (and (decrease (available timber ?p) 1) (increase (carts-at ?p) 1) (increase (labour) 1))
+  + build-cart: ?p - place
+      pre: (and (>= (available timber ?p) 1))
+      eff: (and (decrease (available timber ?p) 1) (increase (carts-at ?p) 1) (increase (total-cost) 3))
+  - build-coal-stack: ?p - place
+      pre: (and (>= (available timber ?p) 1))
+      eff: (and (decrease (available timber ?p) 1) (has-coal-stack ?p) (increase (labour) 2))
+  + build-coal-stack: ?p - place
+      pre: (and (>= (available timber ?p) 1))
+      eff: (and (decrease (available timber ?p) 1) (has-coal-stack ?p) (increase (total-cost) 6))
+  - build-docks: ?p - place
+      pre: (and (>= (available stone ?p) 2) (>= (available wood ?p) 2) (by-coast ?p))
+      eff: (and (decrease (available stone ?p) 2) (decrease (available wood ?p) 2) (has-docks ?p) (increase (labour) 2))
+  + build-docks: ?p - place
+      pre: (and (>= (available stone ?p) 2) (>= (available wood ?p) 2) (by-coast ?p))
+      eff: (and (decrease (available stone ?p) 2) (decrease (available wood ?p) 2) (has-docks ?p) (increase (total-cost) 6))
+  - build-ironworks: ?p - place
+      pre: (and (>= (available stone ?p) 2) (>= (available wood ?p) 2))
+      eff: (and (decrease (available stone ?p) 2) (decrease (available wood ?p) 2) (has-ironworks ?p) (increase (labour) 3))
+  + build-ironworks: ?p - place
+      pre: (and (>= (available stone ?p) 2) (>= (available wood ?p) 2))
+      eff: (and (decrease (available stone ?p) 2) (decrease (available wood ?p) 2) (has-ironworks ?p) (increase (total-cost) 9))
+  - build-mine: ?p - place
+      pre: (and (>= (available wood ?p) 2) (metalliferous ?p))
+      eff: (and (decrease (available wood ?p) 2) (has-mine ?p) (increase (labour) 3))
+  + build-mine: ?p - place
+      pre: (and (>= (available wood ?p) 2) (metalliferous ?p))
+      eff: (and (decrease (available wood ?p) 2) (has-mine ?p) (increase (total-cost) 9))
+  - build-quarry: ?p - place
+      pre: (and (mountain ?p))
+      eff: (and (has-quarry ?p) (increase (labour) 2))
+  + build-quarry: ?p - place
+      pre: (and (mountain ?p))
+      eff: (and (has-quarry ?p) (increase (total-cost) 6))
+  - build-rail: ?p1 - place ?p2 - place
+      pre: (and (>= (available iron ?p1) 1) (>= (available wood ?p1) 1) (connected-by-land ?p1 ?p2))
+      eff: (and (connected-by-rail ?p1 ?p2) (decrease (available iron ?p1) 1) (decrease (available wood ?p1) 1) (increase (labour) 2))
+  + build-rail: ?p1 - place ?p2 - place
+      pre: (and (>= (available iron ?p1) 1) (>= (available wood ?p1) 1) (connected-by-land ?p1 ?p2))
+      eff: (and (connected-by-rail ?p1 ?p2) (decrease (available iron ?p1) 1) (decrease (available wood ?p1) 1) (increase (total-cost) 6))
+  - build-sawmill: ?p - place
+      pre: (and (>= (available timber ?p) 2))
+      eff: (and (decrease (available timber ?p) 2) (has-sawmill ?p) (increase (labour) 2))
+  + build-sawmill: ?p - place
+      pre: (and (>= (available timber ?p) 2))
+      eff: (and (decrease (available timber ?p) 2) (has-sawmill ?p) (increase (total-cost) 6))
+  - build-ship: ?p - place ?v - vehicle
+      pre: (and (>= (available iron ?p) 4) (potential ?v))
+      eff: (and (assign (available coal ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (assign (available stone ?v) 0) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (space-in ?v) 10) (decrease (available iron ?p) 4) (increase (labour) 3) (is-at ?v ?p) (is-ship ?v) (not (potential ?v)))
+  + build-ship: ?p - place ?v - vehicle
+      pre: (and (>= (available iron ?p) 4) (potential ?v))
+      eff: (and (assign (available coal ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (assign (available stone ?v) 0) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (space-in ?v) 10) (decrease (available iron ?p) 4) (increase (total-cost) 9) (is-at ?v ?p) (is-ship ?v) (not (potential ?v)))
+  - build-train: ?p - place ?v - vehicle
+      pre: (and (>= (available iron ?p) 2) (potential ?v))
+      eff: (and (assign (available coal ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (assign (available stone ?v) 0) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (space-in ?v) 5) (decrease (available iron ?p) 2) (increase (labour) 2) (is-at ?v ?p) (is-train ?v) (not (potential ?v)))
+  + build-train: ?p - place ?v - vehicle
+      pre: (and (>= (available iron ?p) 2) (potential ?v))
+      eff: (and (assign (available coal ?v) 0) (assign (available iron ?v) 0) (assign (available ore ?v) 0) (assign (available stone ?v) 0) (assign (available timber ?v) 0) (assign (available wood ?v) 0) (assign (space-in ?v) 5) (decrease (available iron ?p) 2) (increase (total-cost) 6) (is-at ?v ?p) (is-train ?v) (not (potential ?v)))
+  - build-wharf: ?p - place
+      pre: (and (>= (available iron ?p) 2) (>= (available stone ?p) 2) (has-docks ?p))
+      eff: (and (decrease (available iron ?p) 2) (decrease (available stone ?p) 2) (increase (labour) 2))
+  + build-wharf: ?p - place
+      pre: (and (>= (available iron ?p) 2) (>= (available stone ?p) 2) (has-docks ?p))
+      eff: (and (decrease (available iron ?p) 2) (decrease (available stone ?p) 2) (increase (total-cost) 6))
+  - fell-timber: ?p - place
+      pre: (and (has-cabin ?p))
+      eff: (and (increase (available timber ?p) 1) (increase (labour) 1))
+  + fell-timber: ?p - place
+      pre: (and (has-cabin ?p))
+      eff: (and (increase (available timber ?p) 1) (increase (total-cost) 3))
+  - load: ?v - vehicle ?p - place ?r - resource
+      pre: (and (> (available ?r ?p) 0) (> (space-in ?v) 0) (is-at ?v ?p))
+      eff: (and (decrease (available ?r ?p) 1) (decrease (space-in ?v) 1) (increase (available ?r ?v) 1) (increase (labour) 1))
+  + load: ?v - vehicle ?p - place ?r - resource
+      pre: (and (> (available ?r ?p) 0) (> (space-in ?v) 0) (is-at ?v ?p))
+      eff: (and (decrease (available ?r ?p) 1) (decrease (space-in ?v) 1) (increase (available ?r ?v) 1) (increase (total-cost) 3))
+  - mine-ore: ?p - place
+      pre: (and (has-mine ?p))
+      eff: (and (increase (available ore ?p) 1) (increase (resource-use) 2))
+  + mine-ore: ?p - place
+      pre: (and (has-mine ?p))
+      eff: (and (increase (available ore ?p) 1) (increase (total-cost) 6))
+  - move-empty-cart: ?p1 - place ?p2 - place
+      pre: (and (>= (carts-at ?p1) 1) (connected-by-land ?p1 ?p2))
+      eff: (and (decrease (carts-at ?p1) 1) (increase (carts-at ?p2) 1) (increase (labour) 2))
+  + move-empty-cart: ?p1 - place ?p2 - place
+      pre: (and (>= (carts-at ?p1) 1) (connected-by-land ?p1 ?p2))
+      eff: (and (decrease (carts-at ?p1) 1) (increase (carts-at ?p2) 1) (increase (total-cost) 6))
+  - move-laden-cart: ?p1 - place ?p2 - place ?r - resource
+      pre: (and (>= (available ?r ?p1) 1) (>= (carts-at ?p1) 1) (connected-by-land ?p1 ?p2))
+      eff: (and (decrease (available ?r ?p1) 1) (decrease (carts-at ?p1) 1) (increase (available ?r ?p2) 1) (increase (carts-at ?p2) 1) (increase (labour) 2))
+  + move-laden-cart: ?p1 - place ?p2 - place ?r - resource
+      pre: (and (>= (available ?r ?p1) 1) (>= (carts-at ?p1) 1) (connected-by-land ?p1 ?p2))
+      eff: (and (decrease (available ?r ?p1) 1) (decrease (carts-at ?p1) 1) (increase (available ?r ?p2) 1) (increase (carts-at ?p2) 1) (increase (total-cost) 6))
+  - unload: ?v - vehicle ?p - place ?r - resource
+      pre: (and (> (available ?r ?v) 0) (is-at ?v ?p))
+      eff: (and (decrease (available ?r ?v) 1) (increase (available ?r ?p) 1) (increase (labour) 1) (increase (space-in ?v) 1))
+  + unload: ?v - vehicle ?p - place ?r - resource
+      pre: (and (> (available ?r ?v) 0) (is-at ?v ?p))
+      eff: (and (decrease (available ?r ?v) 1) (increase (available ?r ?p) 1) (increase (space-in ?v) 1) (increase (total-cost) 3))
+Init:
+  - (= (labour) 0)
+  - (= (resource-use) 0)
+  + (= (total-cost) 0)
+Metric:
+  - (+ (* 3 (resource-use)) (* 3 (labour)))
+  + (total-cost)
+Func prop:
+  - (labour): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+  - (resource-use): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+  + (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  + action_cost_func:(total-cost)
+  + has_int_action_cost_func

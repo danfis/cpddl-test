@@ -1,0 +1,55 @@
+Function:
+  - (pollution)
+  - (resource-use)
+  + (total-cost)
+Action:
+  - break-stone: ?p - place
+      pre: (and (has-quarry ?p))
+      eff: (and (increase (available stone ?p) 1) (increase (resource-use) 1))
+  + break-stone: ?p - place
+      pre: (and (has-quarry ?p))
+      eff: (and (increase (available stone ?p) 1) (increase (total-cost) 3))
+  - burn-coal: ?p - place
+      pre: (and (>= (available timber ?p) 1) (has-coal-stack ?p))
+      eff: (and (decrease (available timber ?p) 1) (increase (available coal ?p) 1) (increase (pollution) 1))
+  + burn-coal: ?p - place
+      pre: (and (>= (available timber ?p) 1) (has-coal-stack ?p))
+      eff: (and (decrease (available timber ?p) 1) (increase (available coal ?p) 1) (increase (total-cost) 2))
+  - make-iron: ?p - place
+      pre: (and (>= (available coal ?p) 2) (>= (available ore ?p) 1) (has-ironworks ?p))
+      eff: (and (decrease (available coal ?p) 2) (decrease (available ore ?p) 1) (increase (available iron ?p) 1) (increase (pollution) 2))
+  + make-iron: ?p - place
+      pre: (and (>= (available coal ?p) 2) (>= (available ore ?p) 1) (has-ironworks ?p))
+      eff: (and (decrease (available coal ?p) 2) (decrease (available ore ?p) 1) (increase (available iron ?p) 1) (increase (total-cost) 4))
+  - mine-ore: ?p - place
+      pre: (and (has-mine ?p))
+      eff: (and (increase (available ore ?p) 1) (increase (resource-use) 2))
+  + mine-ore: ?p - place
+      pre: (and (has-mine ?p))
+      eff: (and (increase (available ore ?p) 1) (increase (total-cost) 6))
+  - move-ship: ?v - vehicle ?p1 - place ?p2 - place
+      pre: (and (>= (available coal ?v) 2) (connected-by-sea ?p1 ?p2) (is-at ?v ?p1) (is-ship ?v))
+      eff: (and (decrease (available coal ?v) 2) (increase (pollution) 2) (is-at ?v ?p2) (not (is-at ?v ?p1)))
+  + move-ship: ?v - vehicle ?p1 - place ?p2 - place
+      pre: (and (>= (available coal ?v) 2) (connected-by-sea ?p1 ?p2) (is-at ?v ?p1) (is-ship ?v))
+      eff: (and (decrease (available coal ?v) 2) (increase (total-cost) 4) (is-at ?v ?p2) (not (is-at ?v ?p1)))
+  - move-train: ?v - vehicle ?p1 - place ?p2 - place
+      pre: (and (>= (available coal ?v) 1) (connected-by-rail ?p1 ?p2) (is-at ?v ?p1) (is-train ?v))
+      eff: (and (decrease (available coal ?v) 1) (increase (pollution) 1) (is-at ?v ?p2) (not (is-at ?v ?p1)))
+  + move-train: ?v - vehicle ?p1 - place ?p2 - place
+      pre: (and (>= (available coal ?v) 1) (connected-by-rail ?p1 ?p2) (is-at ?v ?p1) (is-train ?v))
+      eff: (and (decrease (available coal ?v) 1) (increase (total-cost) 2) (is-at ?v ?p2) (not (is-at ?v ?p1)))
+Init:
+  - (= (pollution) 0)
+  - (= (resource-use) 0)
+  + (= (total-cost) 0)
+Metric:
+  - (+ (* 2 (pollution)) (* 3 (resource-use)))
+  + (total-cost)
+Func prop:
+  - (pollution): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+  - (resource-use): in_init init_all_nonneg init_all_nonpos init_all_int in_metric in_eff write_delta_nonneg write_delta_nonneg_int
+  + (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  + action_cost_func:(total-cost)
+  + has_int_action_cost_func

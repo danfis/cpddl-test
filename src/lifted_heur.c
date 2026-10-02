@@ -4,6 +4,11 @@
 
 TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
     pddl_strips_t strips;
@@ -15,14 +20,16 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
         assert(ga != NULL);
-        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arity);
     }
 
     pddl_hadd_t hadd;
-    pddlHAddInitStrips(&hadd, &strips);
+    ret = pddlHAddInitStrips(&hadd, &strips, &C.err);
+    assert(ret == 0);
 
     pddl_lifted_heur_relaxed_t h;
-    pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
+    ret = pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
+    assert(ret == 0);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
@@ -64,6 +71,11 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
 
 TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
     pddl_strips_t strips;
@@ -74,14 +86,16 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     pddlGroundAtomsInit(&gatoms);
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
-        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arity);
     }
 
     pddl_hmax_t hmax;
-    pddlHMaxInitStrips(&hmax, &strips);
+    ret = pddlHMaxInitStrips(&hmax, &strips, &C.err);
+    assert(ret == 0);
 
     pddl_lifted_heur_relaxed_t h;
-    pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
+    ret = pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
+    assert(ret == 0);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);
@@ -121,6 +135,11 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
 
 TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
 {
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
     pddl_strips_t strips;
@@ -132,11 +151,12 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
     for (int fact = 0; fact < strips.fact.fact_size; ++fact){
         const pddl_ground_atom_t *ga = strips.fact.fact[fact]->ground_atom;
         assert(ga != NULL);
-        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arg_size);
+        pddlGroundAtomsAddPred(&gatoms, ga->pred, ga->arg, ga->arity);
     }
 
     pddl_lifted_heur_relaxed_t h;
-    pddlLiftedHFFAddInit(&h, &C.pddl, &C.err);
+    ret = pddlLiftedHFFAddInit(&h, &C.pddl, &C.err);
+    assert(ret == 0);
 
     PDDL_ISET(state);
     pddlISetUnion(&state, &strips.init);

@@ -1,0 +1,78 @@
+step 0: state 0 applicable 9
+    state:
+    num: (x farm0) = 500 (x farm1) = 1 (x farm2) = 0 (x farm3) = 0 (x farm4) = 0 (x farm5) = 1
+move-fast farm0 farm1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x farm0) 500 -> 496 (x farm1) 1 -> 3
+move-fast farm0 farm3 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 500 -> 496 (x farm3) 0 -> 2
+move-slow farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 500 -> 499 (x farm1) 1 -> 2
+step 1: state 0 applicable 9
+    state:
+    num: (x farm0) = 496 (x farm1) = 3 (x farm2) = 0 (x farm3) = 0 (x farm4) = 0 (x farm5) = 1
+move-fast farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 496 -> 492 (x farm1) 3 -> 5
+move-fast farm0 farm3 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x farm0) 496 -> 492 (x farm3) 0 -> 2
+move-slow farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 496 -> 495 (x farm1) 3 -> 4
+step 2: state 0 applicable 11
+    state:
+    num: (x farm0) = 492 (x farm1) = 3 (x farm2) = 0 (x farm3) = 2 (x farm4) = 0 (x farm5) = 1
+move-fast farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 492 -> 488 (x farm1) 3 -> 5
+move-fast farm0 farm3 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 492 -> 488 (x farm3) 2 -> 4
+move-slow farm0 farm1 :: cost: 1 [successor]
+    add:
+    del:
+    num: (x farm0) 492 -> 491 (x farm1) 3 -> 4
+step 3: state 0 applicable 14
+    state:
+    num: (x farm0) = 491 (x farm1) = 4 (x farm2) = 0 (x farm3) = 2 (x farm4) = 0 (x farm5) = 1
+move-fast farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 491 -> 487 (x farm1) 4 -> 6
+move-fast farm0 farm3 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 491 -> 487 (x farm3) 2 -> 4
+move-fast farm1 farm0 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 491 -> 493 (x farm1) 4 -> 0
+    successor: move-fast farm1 farm2
+step 4: state 0 applicable 10
+    state:
+    num: (x farm0) = 491 (x farm1) = 0 (x farm2) = 2 (x farm3) = 2 (x farm4) = 0 (x farm5) = 1
+move-fast farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 491 -> 487 (x farm1) 0 -> 2
+move-fast farm0 farm3 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 491 -> 487 (x farm3) 2 -> 4
+move-slow farm0 farm1 :: cost: 1
+    add:
+    del:
+    num: (x farm0) 491 -> 490 (x farm1) 0 -> 1
+    successor: move-slow farm2 farm1
+ground atoms: 0 groundings: 16

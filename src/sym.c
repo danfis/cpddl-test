@@ -7,7 +7,8 @@ TEST_COND(symmetry, strips_pruned, BLISS)
     int *fact_used = PDDL_ZALLOC_ARR(int, C.strips.fact.fact_size);
     int *op_used = PDDL_ZALLOC_ARR(int, C.strips.op.op_size);
     pddl_strips_sym_t sym;
-    pddlStripsSymInitPDG(&sym, &C.strips);
+    int ret = pddlStripsSymInitPDG(&sym, &C.strips, &C.err);
+    assert(ret == 0);
 
     fprintf(stdout, "Symmetric facts:\n");
     for (int fact_id = 0; fact_id < C.strips.fact.fact_size; ++fact_id){

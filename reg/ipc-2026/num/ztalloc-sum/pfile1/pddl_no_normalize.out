@@ -1,0 +1,69 @@
+Domain: ztalloc-sum
+Problem: p1
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  object
+  register - object
+Obj:
+  r1 - register
+  r2 - register
+  r3 - register
+Predicate:
+  (= object object) :eq
+  (free)
+  (m1d3-after-dec register)
+  (m1d3-dividing register)
+  (normal register)
+Function:
+  (total-cost)
+  (value register)
+  (work-value register)
+Action:
+  double: ?r - register
+      pre: (and (free) (normal ?r))
+      eff: (and (increase (total-cost) 1) (increase (value ?r) (value ?r)))
+  m1d3-copy-reset: ?r - register
+      pre: (and (m1d3-after-dec ?r))
+      eff: (and (decrease (value ?r) (value ?r)) (increase (work-value ?r) (value ?r)) (m1d3-dividing ?r) (not (m1d3-after-dec ?r)))
+  m1d3-div-step: ?r - register
+      pre: (and (>= (work-value ?r) 3) (m1d3-dividing ?r))
+      eff: (and (decrease (work-value ?r) 3) (increase (value ?r) 1))
+  m1d3-finish: ?r - register
+      pre: (and (= (work-value ?r) 0) (m1d3-dividing ?r))
+      eff: (and (free) (normal ?r) (not (m1d3-dividing ?r)))
+  m1d3-start: ?r - register
+      pre: (and (= (work-value ?r) 0) (>= (value ?r) 1) (free) (normal ?r))
+      eff: (and (decrease (value ?r) 1) (increase (total-cost) 1) (m1d3-after-dec ?r) (not (free)) (not (normal ?r)))
+Init:
+  (= (total-cost) 0)
+  (= (value r1) 1)
+  (= (value r2) 1)
+  (= (value r3) 1)
+  (= (work-value r1) 0)
+  (= (work-value r2) 0)
+  (= (work-value r3) 0)
+  (free)
+  (normal r1)
+  (normal r2)
+  (normal r3)
+Goal:
+  (and (= (+ (+ (value r1) (value r2)) (value r3)) 187) (= (work-value r1) 0) (= (work-value r2) 0) (= (work-value r3) 0) (free) (normal r1) (normal r2) (normal r3))
+Metric:
+  (total-cost)
+Pred prop:
+  (free): in_init in_pre in_goal in_eff
+  (m1d3-after-dec register): in_pre in_eff
+  (m1d3-dividing register): in_pre in_eff
+  (normal register): in_init in_pre in_goal in_eff
+Func prop:
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+  (value register): in_init init_all_nonneg init_all_int in_pre in_goal on_num_op_rhs in_eff rhs_funcs:(value)
+  (work-value register): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff rhs_funcs:(value)
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func
+  has_num_cmp
+  is_numeric

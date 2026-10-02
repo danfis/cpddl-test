@@ -17,6 +17,7 @@ VALGRIND_MEMLEAK_OPTS += --trace-children=yes --error-limit=no
 VALGRIND_MEMLEAK_OPTS += --trace-children-skip-by-arg=find*,diff*,cat*,head*,*validate*
 VALGRIND_MEMLEAK_OPTS += --trace-children-skip=*minizinc*,/usr/bin/ls
 VALGRIND_MEMLEAK_OPTS += --suppressions=test.supp
+VALGRIND_MEMLEAK_OPTS += --num-callers=50
 #VALGRIND_MEMLEAK_OPTS += --gen-suppressions=yes
 
 VALGRIND_SEGFAULT_OPTS  = --quiet
@@ -26,6 +27,7 @@ VALGRIND_SEGFAULT_OPTS += --suppressions=test.supp
 T ?= -a -B -p6
 T_QUICK ?= -Q -a -p6
 T_ALL ?= -A -a -p6
+T_FULL ?= -A -a -p6 -m 300
 
 TOOL ?=
 
@@ -63,12 +65,25 @@ TESTS += endomorphism
 TESTS += lifted_heur
 TESTS += subprocess
 TESTS += lifted_search
+TESTS += strips_maker
+TESTS += strips_state_space
+TESTS += fdr_state_space
 TESTS += search
+TESTS += plan
 TESTS += gaifman
 TESTS += set
+TESTS += segvec
+TESTS += splaytree
 TESTS += open_list
 TESTS += opts
 TESTS += unify
+TESTS += num
+TESTS += fm
+TESTS += fm_num_exp
+TESTS += fm_num_eval
+TESTS += fm_num_exp_fold
+TESTS += pddl_props
+TESTS += pddl_init_state
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
@@ -106,6 +121,9 @@ check-segfault: all
 	$(VALGRIND) $(VALGRIND_SEGFAULT_OPTS) ./test -c $(T) -vvv -p 1 2>&1 | tee check.log
 check-gdb: all
 	gdb --ex 'set follow-fork-mode child' --ex run --args ./test -c $(T)
+
+full-tests: all ./scripts/test-tool.py config-tool.toml ../bin/pddl-tool
+	./test -c $(T_FULL) ; $(PYTHON) ./scripts/test-tool.py -q $(TOOL)
 
 clean:
 	rm -f check.log

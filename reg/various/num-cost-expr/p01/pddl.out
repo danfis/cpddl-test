@@ -1,0 +1,45 @@
+Domain: num-cost-expr
+Problem: num-cost-expr-01
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  loc - object
+  object
+Obj:
+  l1 - loc
+  l2 - loc
+  l3 - loc
+Predicate:
+  (= object object) :eq
+  (at loc)
+  (conn loc loc)
+Function:
+  (g loc)
+  (total-cost)
+Action:
+  move: ?a - loc ?b - loc
+      pre: (and (at ?a) (conn ?a ?b))
+      eff: (and (at ?b) (increase (total-cost) (+ 1 (g ?b))) (not (at ?a)))
+Init:
+  (= (g l1) 1)
+  (= (g l2) 2)
+  (= (g l3) 0)
+  (= (total-cost) 0)
+  (at l1)
+  (conn l1 l2)
+  (conn l2 l3)
+Goal:
+  (at l3)
+Metric:
+  (total-cost)
+Pred prop:
+  (at loc): in_init in_pre in_goal in_eff
+  (conn loc loc): in_init in_pre
+Func prop:
+  (g loc): in_init init_all_nonneg init_all_int on_num_op_rhs write_delta_nonneg write_delta_nonneg_int
+  (total-cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff rhs_funcs:(g) write_delta_nonneg write_delta_nonneg_int
+Global prop:
+  action_cost_func:(total-cost)
+  has_int_action_cost_func

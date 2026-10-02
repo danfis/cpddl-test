@@ -1,0 +1,12 @@
+dup in and:
+  in : (and (W:p a) (W:q a) (W:p a))
+  status: 1
+  out: (and (W:p a) (W:q a))
+dup in or (NULL pddl):
+  in : (or (W:p a) (W:p a) (W:q b))
+  status: 1
+  out: (or (W:p a) (W:q b))
+atom vs negated atom:
+  in : (and (W:p a) (N:W:p a))
+  status: 0
+  out: (and (W:p a) (N:W:p a))

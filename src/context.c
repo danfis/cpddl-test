@@ -1,6 +1,7 @@
 #include "test.h"
 #include "context.h"
 #include <assert.h>
+#include <unistd.h>
 
 context_t C = { 0 };
 

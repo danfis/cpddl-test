@@ -6,7 +6,8 @@ TEST(hff_strips, fdr)
 {
     PDDL_IARR(plan);
     pddl_hff_t hff;
-    pddlHFFInitStrips(&hff, &C.strips);
+    int ret = pddlHFFInitStrips(&hff, &C.strips, &C.err);
+    assert(ret == 0);
     int heur = pddlHFFStripsPlan(&hff, &C.strips.init, &plan);
     fprintf(stdout, "heur-ff: %d\n", heur);
     if (heur != PDDL_COST_DEAD_END){
@@ -17,13 +18,15 @@ TEST(hff_strips, fdr)
     pddlIArrFree(&plan);
 
     pddl_hmax_t hmax;
-    pddlHMaxInit(&hmax, &C.fdr);
+    ret = pddlHMaxInit(&hmax, &C.fdr, &C.err);
+    assert(ret == 0);
     int heur_max = pddlHMax(&hmax, C.fdr.init, &C.fdr.var);
     fprintf(stdout, "heur-max: %d\n", heur_max);
     pddlHMaxFree(&hmax);
 
     pddl_hadd_t hadd;
-    pddlHAddInit(&hadd, &C.fdr);
+    ret = pddlHAddInit(&hadd, &C.fdr, &C.err);
+    assert(ret == 0);
     int heur_add = pddlHAdd(&hadd, C.fdr.init, &C.fdr.var);
     fprintf(stdout, "heur-add: %d\n", heur_add);
     pddlHAddFree(&hadd);
@@ -36,7 +39,8 @@ TEST(hff_fdr, fdr)
 {
     PDDL_IARR(plan);
     pddl_hff_t hff;
-    pddlHFFInit(&hff, &C.fdr);
+    int ret = pddlHFFInit(&hff, &C.fdr, &C.err);
+    assert(ret == 0);
     int heur = pddlHFFPlan(&hff, C.fdr.init, &C.fdr.var, &plan);
     fprintf(stdout, "heur-ff: %d\n", heur);
     if (heur != PDDL_COST_DEAD_END){
@@ -46,13 +50,15 @@ TEST(hff_fdr, fdr)
     pddlIArrFree(&plan);
 
     pddl_hmax_t hmax;
-    pddlHMaxInit(&hmax, &C.fdr);
+    ret = pddlHMaxInit(&hmax, &C.fdr, &C.err);
+    assert(ret == 0);
     int heur_max = pddlHMax(&hmax, C.fdr.init, &C.fdr.var);
     fprintf(stdout, "heur-max: %d\n", heur_max);
     pddlHMaxFree(&hmax);
 
     pddl_hadd_t hadd;
-    pddlHAddInit(&hadd, &C.fdr);
+    ret = pddlHAddInit(&hadd, &C.fdr, &C.err);
+    assert(ret == 0);
     int heur_add = pddlHAdd(&hadd, C.fdr.init, &C.fdr.var);
     fprintf(stdout, "heur-add: %d\n", heur_add);
     pddlHAddFree(&hadd);

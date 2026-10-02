@@ -1,0 +1,19 @@
+no-op numeric effects:
+  in : (and (W:q a) (increase (f) 0) (scale-up (f) 1) (scale-up (f) 0) (decrease (f) (- 2 2)) (increase (f) (+ 1 2)))
+  status: 1
+  out: (and (W:q a) (assign (f) 0) (increase (f) 3))
+  in : (and (W:q a) (assign (f) 0) (increase (f) 3))
+  status: 0
+  out: (and (W:q a) (assign (f) 0) (increase (f) 3))
+no-op numeric effect at the root:
+  in : (increase (f) 0)
+  status: 1
+  out: <null>
+division by zero in the right-hand side:
+  in : (increase (f) (/ 1 0))
+  status: -1
+  out: (increase (f) (/ 1 0))
+no numeric operations:
+  in : (and (W:q a) (W:q b))
+  status: 0
+  out: (and (W:q a) (W:q b))

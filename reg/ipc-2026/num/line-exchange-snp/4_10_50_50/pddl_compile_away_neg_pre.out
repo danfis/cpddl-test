@@ -1,0 +1,40 @@
+Require:
+  - :negative-preconditions
+Predicate:
+  + (NOT-ps robot)
+  - (ps robot)
+Action:
+  - conn: ?r1 - robot ?r2 - robot
+      pre: (and (= (x ?r1) (x ?r2)) (next ?r1 ?r2))
+      eff: (and (pd ?r1 ?r2) (ps ?r1) (ps ?r2))
+  + conn: ?r1 - robot ?r2 - robot
+      pre: (and (= (x ?r1) (x ?r2)) (next ?r1 ?r2))
+      eff: (and (not (NOT-ps ?r1)) (not (NOT-ps ?r2)) (pd ?r1 ?r2))
+  - disc: ?r1 - robot ?r2 - robot
+      pre: (and (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (not (pd ?r1 ?r2)) (not (ps ?r1)) (not (ps ?r2)))
+  + disc: ?r1 - robot ?r2 - robot
+      pre: (and (next ?r1 ?r2) (pd ?r1 ?r2))
+      eff: (and (NOT-ps ?r1) (NOT-ps ?r2) (not (pd ?r1 ?r2)))
+  - lft: ?r - robot
+      pre: (and (> (x ?r) (* (d) (i ?r))) (not (ps ?r)))
+      eff: (and (decrease (x ?r) 1))
+  + lft: ?r - robot
+      pre: (and (> (x ?r) (* (d) (i ?r))) (NOT-ps ?r))
+      eff: (and (decrease (x ?r) 1))
+  - rgt: ?r - robot
+      pre: (and (< (x ?r) (* (d) (+ (i ?r) 1))) (not (ps ?r)))
+      eff: (and (increase (x ?r) 1))
+  + rgt: ?r - robot
+      pre: (and (< (x ?r) (* (d) (+ (i ?r) 1))) (NOT-ps ?r))
+      eff: (and (increase (x ?r) 1))
+Init:
+  + (NOT-ps r0)
+  + (NOT-ps r1)
+  + (NOT-ps r2)
+  + (NOT-ps r3)
+Pred prop:
+  + (NOT-ps robot): in_init in_pre in_eff
+  - (ps robot): in_pre in_pre_neg in_eff
+Global prop:
+  - has_non_static_neg_cond

@@ -1,0 +1,56 @@
+step 0: state 2 applicable 6
+    state: (at s0 wa0) (at s1 wa0)
+    num: (sled_supplies s0) = 1 (waypoint_supplies wa0) = 1000 (waypoint_supplies wa1) = 0 (waypoint_supplies wa2) = 0 (waypoint_supplies wa3) = 0 (waypoint_supplies wa4) = 0 (waypoint_supplies wa5) = 0 (sled_supplies s1) = 1
+move_forwards s0 wa0 wa1 :: cost: 1 [successor]
+    add: (at s0 wa1)
+    del: (at s0 wa0)
+    num: (sled_supplies s0) 1 -> 0
+move_forwards s1 wa0 wa1 :: cost: 1
+    add: (at s1 wa1)
+    del: (at s1 wa0)
+    num: (sled_supplies s1) 1 -> 0
+retrieve_supplies s0 wa0 :: cost: 1
+    add:
+    del:
+    num: (sled_supplies s0) 1 -> 2 (waypoint_supplies wa0) 1000 -> 999
+step 1: state 2 applicable 3
+    state: (at s0 wa1) (at s1 wa0)
+    num: (sled_supplies s0) = 0 (waypoint_supplies wa0) = 1000 (waypoint_supplies wa1) = 0 (waypoint_supplies wa2) = 0 (waypoint_supplies wa3) = 0 (waypoint_supplies wa4) = 0 (waypoint_supplies wa5) = 0 (sled_supplies s1) = 1
+move_forwards s1 wa0 wa1 :: cost: 1
+    add: (at s1 wa1)
+    del: (at s1 wa0)
+    num: (sled_supplies s1) 1 -> 0
+retrieve_supplies s1 wa0 :: cost: 1
+    add:
+    del:
+    num: (waypoint_supplies wa0) 1000 -> 999 (sled_supplies s1) 1 -> 2
+store_supplies s1 wa0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (waypoint_supplies wa0) 1000 -> 1001 (sled_supplies s1) 1 -> 0
+step 2: state 2 applicable 1
+    state: (at s0 wa1) (at s1 wa0)
+    num: (sled_supplies s0) = 0 (waypoint_supplies wa0) = 1001 (waypoint_supplies wa1) = 0 (waypoint_supplies wa2) = 0 (waypoint_supplies wa3) = 0 (waypoint_supplies wa4) = 0 (waypoint_supplies wa5) = 0 (sled_supplies s1) = 0
+retrieve_supplies s1 wa0 :: cost: 1 [successor]
+    add:
+    del:
+    num: (waypoint_supplies wa0) 1001 -> 1000 (sled_supplies s1) 0 -> 1
+step 3: state 2 applicable 3
+    state: (at s0 wa1) (at s1 wa0)
+    num: (sled_supplies s0) = 0 (waypoint_supplies wa0) = 1000 (waypoint_supplies wa1) = 0 (waypoint_supplies wa2) = 0 (waypoint_supplies wa3) = 0 (waypoint_supplies wa4) = 0 (waypoint_supplies wa5) = 0 (sled_supplies s1) = 1
+move_forwards s1 wa0 wa1 :: cost: 1 [successor]
+    add: (at s1 wa1)
+    del: (at s1 wa0)
+    num: (sled_supplies s1) 1 -> 0
+retrieve_supplies s1 wa0 :: cost: 1
+    add:
+    del:
+    num: (waypoint_supplies wa0) 1000 -> 999 (sled_supplies s1) 1 -> 2
+store_supplies s1 wa0 :: cost: 1
+    add:
+    del:
+    num: (waypoint_supplies wa0) 1000 -> 1001 (sled_supplies s1) 1 -> 0
+step 4: state 2 applicable 0
+    state: (at s0 wa1) (at s1 wa1)
+    num: (sled_supplies s0) = 0 (waypoint_supplies wa0) = 1000 (waypoint_supplies wa1) = 0 (waypoint_supplies wa2) = 0 (waypoint_supplies wa3) = 0 (waypoint_supplies wa4) = 0 (waypoint_supplies wa5) = 0 (sled_supplies s1) = 0
+ground atoms: 4 groundings: 6

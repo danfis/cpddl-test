@@ -1,0 +1,139 @@
+Domain: petri-net
+Problem: prob08-2
+Require:
+  :numeric-fluents
+  :strips
+  :typing
+Type:
+  object
+  place - object
+Obj:
+  a1 - place
+  a2 - place
+  a3 - place
+  a4 - place
+  a5 - place
+  a6 - place
+  a7 - place
+  a8 - place
+  b1 - place
+  b2 - place
+  b3 - place
+  b4 - place
+  b5 - place
+  b6 - place
+  b7 - place
+  b8 - place
+  c1 - place
+  c2 - place
+  c3 - place
+  c4 - place
+  c5 - place
+  c6 - place
+  c7 - place
+  c8 - place
+  g - place
+  s0 - place
+Predicate:
+  (= object object) :eq
+  (one-to-one place place)
+  (one-to-two place place place)
+  (source place)
+  (three-to-one place place place place)
+Function:
+  (cost)
+  (value place)
+Action:
+  create: ?p - place
+      pre: (and (source ?p))
+      eff: (and (increase (cost) 1) (increase (value ?p) 1))
+  fire-one-to-one: ?p1 - place ?p2 - place
+      pre: (and (> (value ?p1) 0) (one-to-one ?p1 ?p2))
+      eff: (and (decrease (value ?p1) 1) (increase (cost) 1) (increase (value ?p2) 1))
+  fire-one-to-two: ?p1 - place ?p2 - place ?p3 - place
+      pre: (and (> (value ?p1) 0) (one-to-two ?p1 ?p2 ?p3))
+      eff: (and (decrease (value ?p1) 1) (increase (cost) 1) (increase (value ?p2) 1) (increase (value ?p3) 1))
+  fire-three-to-one: ?p1 - place ?p2 - place ?p3 - place ?p4 - place
+      pre: (and (> (value ?p1) 0) (> (value ?p2) 0) (> (value ?p3) 0) (three-to-one ?p1 ?p2 ?p3 ?p4))
+      eff: (and (decrease (value ?p1) 1) (decrease (value ?p2) 1) (decrease (value ?p3) 1) (increase (cost) 1) (increase (value ?p4) 1))
+Init:
+  (= (cost) 0)
+  (= (value a1) 0)
+  (= (value a2) 0)
+  (= (value a3) 0)
+  (= (value a4) 0)
+  (= (value a5) 0)
+  (= (value a6) 0)
+  (= (value a7) 0)
+  (= (value a8) 0)
+  (= (value b1) 0)
+  (= (value b2) 0)
+  (= (value b3) 0)
+  (= (value b4) 0)
+  (= (value b5) 0)
+  (= (value b6) 0)
+  (= (value b7) 0)
+  (= (value b8) 0)
+  (= (value c1) 0)
+  (= (value c2) 0)
+  (= (value c3) 0)
+  (= (value c4) 0)
+  (= (value c5) 0)
+  (= (value c6) 0)
+  (= (value c7) 0)
+  (= (value c8) 0)
+  (= (value g) 0)
+  (= (value s0) 0)
+  (one-to-one a1 a2)
+  (one-to-one a2 a3)
+  (one-to-one a3 a4)
+  (one-to-one a4 a5)
+  (one-to-one a4 a6)
+  (one-to-one a4 a7)
+  (one-to-one b1 b2)
+  (one-to-one b2 b3)
+  (one-to-one b3 b4)
+  (one-to-one b4 b5)
+  (one-to-one b4 b6)
+  (one-to-one b4 b7)
+  (one-to-one c1 c2)
+  (one-to-one c2 c3)
+  (one-to-one c3 c4)
+  (one-to-one c4 c5)
+  (one-to-one c4 c6)
+  (one-to-one c4 c7)
+  (one-to-one s0 a1)
+  (one-to-one s0 b1)
+  (one-to-one s0 c1)
+  (one-to-two a5 a6 a4)
+  (one-to-two a6 a7 a4)
+  (one-to-two a7 a5 a4)
+  (one-to-two b5 b6 b4)
+  (one-to-two b6 b7 b4)
+  (one-to-two b7 b5 b4)
+  (one-to-two c5 c6 c4)
+  (one-to-two c6 c7 c4)
+  (one-to-two c7 c5 c4)
+  (source s0)
+  (three-to-one a5 a6 a7 a8)
+  (three-to-one a7 b7 c7 g)
+  (three-to-one a8 b8 c8 g)
+  (three-to-one b5 b6 b7 b8)
+  (three-to-one c5 c6 c7 c8)
+Goal:
+  (and (<= 3 (+ (+ (value a7) (value b7)) (value c7))) (= 2 (value g)))
+Metric:
+  (cost)
+Pred prop:
+  (one-to-one place place): in_init in_pre
+  (one-to-two place place place): in_init in_pre
+  (source place): in_init in_pre
+  (three-to-one place place place place): in_init in_pre
+Func prop:
+  (cost): in_init init_all_nonneg init_all_nonpos init_all_int in_metric is_metric_alone in_eff write_delta_nonneg write_delta_nonneg_int
+  (value place): in_init init_all_nonneg init_all_nonpos init_all_int in_pre in_goal in_eff
+Global prop:
+  action_cost_func:(cost)
+  has_int_action_cost_func
+  has_num_cmp
+  is_numeric

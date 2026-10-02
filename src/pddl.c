@@ -1,6 +1,7 @@
 #include "test.h"
 #include "context.h"
 #include <assert.h>
+#include <string.h>
 
 TEST(pddl, r)
 {
@@ -15,6 +16,36 @@ TEST(pddl, r)
     C.pddl_set = 1;
 
     pddlPrintDebug(&C.pddl, stdout);
+}
+
+TEST(pddl_classical, pddl)
+{
+    if (pddlIsNumeric(&C.pddl)){
+        TEST_SKIP_CHILDREN;
+        return;
+    }
+}
+
+TEST(pddl_is_numeric, pddl)
+{
+    // Numeric tasks live under ipc-2023/num/, ipc-2026/num/, and
+    // various/num-*; everything else, including plain :action-costs tasks,
+    // is classified as non-numeric. Exceptions: the metric of these four
+    // tasks is expressible as non-negative integer action costs, so they
+    // are non-numeric even though the old, purely syntactic classification
+    // treated them as numeric
+    if (strncmp(TEST_TASK, "various/num-cost-renamed/", 25) == 0
+            || strncmp(TEST_TASK, "various/num-cost-expr/", 22) == 0
+            || strncmp(TEST_TASK, "various/num-cost-decrease/", 26) == 0
+            || strncmp(TEST_TASK, "various/num-metric-negcoef/", 27) == 0){
+        assert(!pddlIsNumeric(&C.pddl));
+    }else if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
+            || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
+            || strncmp(TEST_TASK, "various/num-", 12) == 0){
+        assert(pddlIsNumeric(&C.pddl));
+    }else{
+        assert(!pddlIsNumeric(&C.pddl));
+    }
 }
 
 TEST(pddl_unit_cost, r)
@@ -35,14 +66,176 @@ TEST(pddl_unit_cost, r)
 
 TEST(pddl_compile_away_cond_eff, pddl)
 {
-    pddlCompileAwayNonStaticCondEff(&C.pddl);
-    pddlPrintDebug(&C.pddl, stdout);
+    pddl_t base;
+    pddlInitCopy(&base, &C.pddl);
+    int st = pddlCompileAwayNonStaticCondEff(&C.pddl, &C.err);
+    assert(st == 0);
+    pddlPrintDiff(&base, &C.pddl, stdout);
+    pddlFree(&base);
+}
+
+TEST(pddl_is_metric_expressible_as_non_neg_int_action_costs, pddl)
+{
+    pddl_bool_t res;
+    res = pddlIsMetricExpressibleAsNonNegIntActionCosts(&C.pddl);
+
+    if (strncmp(TEST_TASK, "ipc-2023/num/", 13) == 0
+            || strncmp(TEST_TASK, "ipc-2026/num/", 13) == 0
+            || strncmp(TEST_TASK, "various/num-", 12) == 0){
+        if (!res){
+            printf("Metric not expressible as non-neg int action costs\n");
+        }
+    }else{
+        assert(res);
+    }
+}
+
+static int initStateEq(const pddl_init_state_t *a, const pddl_init_state_t *b)
+{
+    if (pddlInitStateIsUnsolvable(a) != pddlInitStateIsUnsolvable(b))
+        return 0;
+    if (pddlInitStateAtomSize(a) != pddlInitStateAtomSize(b)
+            || pddlInitStateFluentSize(a) != pddlInitStateFluentSize(b)){
+        return 0;
+    }
+    PDDL_INIT_STATE_FOR_EACH_ATOM(a, atom){
+        if (!pddlInitStateHasAtom(b, atom))
+            return 0;
+    }
+    PDDL_INIT_STATE_FOR_EACH_ATOM(b, atom){
+        if (!pddlInitStateHasAtom(a, atom))
+            return 0;
+    }
+    pddl_num_t va, vb;
+    PDDL_INIT_STATE_FOR_EACH_FLUENT(a, fluent, &va){
+        if (pddlInitStateFluentVal(b, fluent, &vb) != 0
+                || pddlNumCmp(&va, &vb) != 0){
+            return 0;
+        }
+    }
+    PDDL_INIT_STATE_FOR_EACH_FLUENT(b, fluent, &vb){
+        if (pddlInitStateFluentVal(a, fluent, &va) != 0
+                || pddlNumCmp(&va, &vb) != 0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+TEST(pddl_compile_metric_into_action_costs, pddl)
+{
+    pddl_t copy;
+    pddlInitCopy(&copy, &C.pddl);
+
+    pddl_compile_metric_into_action_costs_status_t ret;
+    ret = pddlCompileMetricIntoActionCosts(&C.pddl, &C.err);
+
+    switch (ret){
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_ERR:
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(ret != PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_ERR);
+        break;
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_CHANGED:
+        assert(C.pddl.metric);
+        assert(pddlFmIsNumExpFluent(&C.pddl.minimize->fm));
+        assert(C.pddl.minimize->e.fluent->pred
+                    == pddlActionCostFuncId(&C.pddl));
+        pddlPrintDiff(&copy, &C.pddl, stdout);
+        break;
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_OK:
+    case PDDL_COMPILE_METRIC_INTO_ACTION_COSTS_NOT_COMPILABLE:
+        assert(C.pddl.metric == copy.metric);
+        if (C.pddl.minimize != NULL)
+            assert(pddlFmEq(&C.pddl.minimize->fm, &copy.minimize->fm));
+        assert(initStateEq(&C.pddl.init, &copy.init));
+        for (int i = 0; i < copy.action.action_size; ++i){
+            assert(pddlFmEq(C.pddl.action.action[i].pre,
+                            copy.action.action[i].pre));
+            assert(pddlFmEq(C.pddl.action.action[i].eff,
+                            copy.action.action[i].eff));
+        }
+        assert(C.pddl.func.pred_size == copy.func.pred_size);
+        break;
+    default:
+        assert(0 && "Unexpected return value");
+    }
+    pddlFree(&copy);
+}
+
+static int fmFltPre(pddl_fm_t *fm, void *ud)
+{
+    if (pddlFmIsNumExpNumFlt(fm)){
+        *(int *)ud = 1;
+        return -2;
+    }
+    return 0;
+}
+
+static int fmHasFlt(pddl_fm_t *fm)
+{
+    int has = 0;
+    pddlFmTraverseAll(fm, fmFltPre, NULL, &has);
+    return has;
+}
+
+TEST_COND(pddl_compile_flt_to_int, pddl, LP)
+{
+    pddl_t copy;
+    pddlInitCopy(&copy, &C.pddl);
+
+    pddl_compile_flt_to_int_status_t ret;
+    ret = pddlCompileFltToInt(&C.pddl, &C.err);
+
+    switch (ret){
+    case PDDL_COMPILE_FLT_TO_INT_ERR:
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(ret != PDDL_COMPILE_FLT_TO_INT_ERR);
+        break;
+    case PDDL_COMPILE_FLT_TO_INT_CHANGED:{
+        // No float constant may survive anywhere in the task
+        pddl_num_t init_val;
+        PDDL_INIT_STATE_FOR_EACH_FLUENT(&C.pddl.init, fluent, &init_val){
+            (void)fluent;
+            assert(!pddlNumIsFlt(&init_val));
+        }
+        if (C.pddl.goal != NULL)
+            assert(!fmHasFlt(C.pddl.goal));
+        for (int i = 0; i < C.pddl.action.action_size; ++i){
+            assert(!fmHasFlt(C.pddl.action.action[i].pre));
+            assert(!fmHasFlt(C.pddl.action.action[i].eff));
+        }
+        if (C.pddl.minimize != NULL)
+            assert(!fmHasFlt(&C.pddl.minimize->fm));
+        // The parent test normalizes, so the task must still be normalized
+        // with up-to-date properties
+        assert(C.pddl.is_normalized);
+        assert(C.pddl.is_props_valid);
+        pddlPrintDiff(&copy, &C.pddl, stdout);
+        break;
+    }
+    case PDDL_COMPILE_FLT_TO_INT_OK:
+    case PDDL_COMPILE_FLT_TO_INT_NOT_COMPILABLE:
+        // Task must be completely untouched
+        assert(C.pddl.metric == copy.metric);
+        if (C.pddl.minimize != NULL)
+            assert(pddlFmEq(&C.pddl.minimize->fm, &copy.minimize->fm));
+        assert(initStateEq(&C.pddl.init, &copy.init));
+        for (int i = 0; i < copy.action.action_size; ++i){
+            assert(pddlFmEq(C.pddl.action.action[i].pre,
+                            copy.action.action[i].pre));
+            assert(pddlFmEq(C.pddl.action.action[i].eff,
+                            copy.action.action[i].eff));
+        }
+        break;
+    }
+    pddlFree(&copy);
 }
 
 TEST(pddl_action_simplify_cond_effs, r)
 {
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     cfg.normalize = 0;
+    cfg.remove_empty_types = 0;
     cfg.force_adl = 1;
     pddl_t pddl;
     int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
@@ -53,10 +246,13 @@ TEST(pddl_action_simplify_cond_effs, r)
 
     for (int i = 0; i < pddl.action.action_size; ++i){
         pddl_action_t *a = pddl.action.action + i;
-        pddlActionNormalize(a, &pddl);
+        int st = pddlActionNormalize(a, &pddl, &C.err);
+        assert(st >= 0);
         pddl_fm_t *pre = pddlFmClone(a->pre);
         pddl_fm_t *eff = pddlFmClone(a->eff);
-        if (pddlActionSimplifyCondEffs(a, &pddl)){
+        st = pddlActionSimplifyCondEffs(a, &pddl, &C.err);
+        assert(st >= 0);
+        if (st > 0){
             pddlActionPrint(&pddl, a, stdout);
         }else{
             // Returning false means the action was not changed
@@ -70,10 +266,14 @@ TEST(pddl_action_simplify_cond_effs, r)
 
 TEST(pddl_compile_away_neg_pre, r)
 {
+    // TODO: Split for different variants of the
+    // pddlCompileAwayNegativeConditions function
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     cfg.normalize = 1;
     cfg.force_adl = 1;
     cfg.normalize_compile_away_dynamic_neg_cond = pddl_false;
+    cfg.normalize_compile_away_only_goal_neg_cond = pddl_false;
+    cfg.normalize_compile_away_all_neg_cond = pddl_false;
     pddl_t pddl;
     int ret = pddlInit(&pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
@@ -81,10 +281,15 @@ TEST(pddl_compile_away_neg_pre, r)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
 
+    pddl_t base;
+    pddlInitCopy(&base, &pddl);
     ret = pddlCompileAwayNegativeConditions(&pddl, pddl_false, pddl_false,
                                             pddl_true, &C.err);
     assert(ret == 0);
-    pddlPrintDebug(&pddl, stdout);
+    // Compiling away all negative conditions must leave none behind
+    assert(!pddlHasNonStaticNegativeConditions(&pddl));
+    pddlPrintDiff(&base, &pddl, stdout);
+    pddlFree(&base);
     pddlFree(&pddl);
 }
 
@@ -96,6 +301,7 @@ TEST(pddl_no_normalize, r)
     cfg.force_adl = 1;
     int ret = pddlInit(&C.pddl, C.files.domain_pddl, C.files.problem_pddl,
                        &cfg, &C.err);
+    pddlSetMinimalRequirements(&C.pddl);
     if (ret != 0)
         pddlErrPrint(&C.err, 1, stderr);
     assert(ret == 0);
@@ -109,7 +315,8 @@ TEST(pddl_clone, pddl)
 {
     pddl_t pddl;
     pddlInitCopy(&pddl, &C.pddl);
-    pddlPrintDebug(&pddl, stdout);
+    int diff = pddlPrintDiff(&C.pddl, &pddl, stdout);
+    assert(diff == 0);
     pddlFree(&pddl);
 }
 
@@ -117,12 +324,8 @@ TEST(pddl_compile_away_eq_pred_no_norm, pddl_no_normalize)
 {
     pddl_t copy;
     pddlInitCopy(&copy, &C.pddl);
-    int ret = pddlCompileAwayEqPred(&C.pddl);
-    if (ret > 0){
-        //pddlPrintDebug(&copy, stdout);
-        //printf("======== AFTER ==========\n");
-        pddlPrintDebug(&C.pddl, stdout);
-    }
+    pddlCompileAwayEqPred(&C.pddl);
+    pddlPrintDiff(&copy, &C.pddl, stdout);
     pddlFree(&copy);
 }
 
@@ -144,12 +347,8 @@ TEST(pddl_compile_away_eq_pred_lmg, pddl)
 
     pddl_t copy;
     pddlInitCopy(&copy, &C.pddl);
-    int ret = pddlCompileAwayEqPred(&C.pddl);
-    if (ret > 0){
-        //pddlPrintDebug(&copy, stdout);
-        //printf("======== AFTER ==========\n");
-        pddlPrintDebug(&C.pddl, stdout);
-    }
+    pddlCompileAwayEqPred(&C.pddl);
+    pddlPrintDiff(&copy, &C.pddl, stdout);
     pddlFree(&copy);
     pddlLiftedMGroupsFree(&lmg);
 }

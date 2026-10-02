@@ -1,0 +1,22 @@
+Monotonicity invariants:
+< {potential V0:vehicle}
+, {potential C0:vehicle}
+, {is-cart V0:vehicle, potential V0:vehicle}
+, {is-cart V0:vehicle, potential C1:vehicle}
+, {is-cart C0:vehicle, potential C1:vehicle}
+, {is-train V0:vehicle, potential V0:vehicle}
+, {is-train V0:vehicle, potential C1:vehicle}
+, {is-train C0:vehicle, potential C1:vehicle}
+, {is-ship V0:vehicle, potential V0:vehicle}
+, {is-ship V0:vehicle, potential C1:vehicle}
+, {is-ship C0:vehicle, potential C1:vehicle}
+, {is-at V0:vehicle C1:place, potential V0:vehicle}
+, {is-at V0:vehicle C1:place, potential C2:vehicle}
+>
+FD Mutex Groups:
+< {potential V0:vehicle}
+, {is-cart V0:vehicle, potential V0:vehicle}
+, {is-train V0:vehicle, potential V0:vehicle}
+, {is-ship V0:vehicle, potential V0:vehicle}
+, {is-at V0:vehicle C1:place, potential V0:vehicle}:=1
+>
