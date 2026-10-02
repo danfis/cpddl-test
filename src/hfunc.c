@@ -72,7 +72,7 @@ TEST_ONCE(hfunc_xxh3)
         assert(pddlXXH3_32(buf, ref[i].size) == (uint32_t)ref[i].hash);
 
         pddl_xxh3_state_t state;
-        pddlXXH3StateInit(&state, 0);
+        pddlXXH3StateInit(&state);
         xxh3Stream(&state, buf, ref[i].size, &rnd);
         assert(pddlXXH3StateDigest_64(&state) == ref[i].hash);
         assert(pddlXXH3StateDigest_32(&state) == (uint32_t)ref[i].hash);
@@ -81,7 +81,8 @@ TEST_ONCE(hfunc_xxh3)
 
     // Reference values of seeded streaming variant
     pddl_xxh3_state_t state;
-    pddlXXH3StateInit(&state, 0xdeadbeefu);
+    pddlXXH3StateInit(&state);
+    pddlXXH3StateReset(&state, 0xdeadbeefu);
     xxh3Stream(&state, buf, 1000, &rnd);
     assert(pddlXXH3StateDigest_64(&state) == 0x67947038a3a2c612ULL);
     // Digest does not modify the state
@@ -100,7 +101,7 @@ TEST_ONCE(hfunc_xxh3)
     // Streaming equals one-shot for all sizes up to 2100
     for (size_t size = 0; size <= 2100; ++size){
         pddl_xxh3_state_t st;
-        pddlXXH3StateInit(&st, 0);
+        pddlXXH3StateInit(&st);
         xxh3Stream(&st, buf, size, &rnd);
         assert(pddlXXH3StateDigest_64(&st) == pddlXXH3_64(buf, size));
         pddlXXH3StateFree(&st);
@@ -114,10 +115,12 @@ TEST_ONCE(hfunc_xxh3)
     } shifted;
     pddl_xxh3_state_t *arr = PDDL_ALLOC_ARR(pddl_xxh3_state_t, 8);
     for (int i = 0; i < 8; ++i){
-        pddlXXH3StateInit(arr + i, 11);
+        pddlXXH3StateInit(arr + i);
+        pddlXXH3StateReset(arr + i, 11);
         xxh3Stream(arr + i, buf, 3000, &rnd);
     }
-    pddlXXH3StateInit(&shifted.state, 11);
+    pddlXXH3StateInit(&shifted.state);
+    pddlXXH3StateReset(&shifted.state, 11);
     xxh3Stream(&shifted.state, buf, 3000, &rnd);
     uint64_t hash = pddlXXH3StateDigest_64(&shifted.state);
     for (int i = 0; i < 8; ++i)
@@ -136,7 +139,8 @@ TEST_ONCE(hfunc_xxh3)
                 == pddlXXH3StateDigest_64(&shifted.state));
 
         pddl_xxh3_state_t st;
-        pddlXXH3StateInit(&st, 13);
+        pddlXXH3StateInit(&st);
+        pddlXXH3StateReset(&st, 13);
         pddlXXH3StateUpdate(&st, buf, 3500 + i);
         assert(pddlXXH3StateDigest_64(&st)
                 == pddlXXH3StateDigest_64(&shifted.state));
