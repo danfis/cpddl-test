@@ -394,7 +394,7 @@ static void closeAtomsUnderEffects(pddl_strips_maker_t *sm)
             pddlISetAdd(&state, i);
 
         pddl_strips_maker_eff_t eff = PDDL_STRIPS_MAKER_EFF_INIT;
-        for (int i = 0; i < sm->num_action_args; ++i){
+        for (int i = 0; i < pddlStripsMakerNumActionArgs(sm); ++i){
             const pddl_ground_action_args_t *ga;
             ga = pddlStripsMakerActionArgs(sm, i);
             const pddl_action_t *action
@@ -641,7 +641,7 @@ TEST(strips_maker_actions, strips_maker)
         }
     }
 
-    assert(sm.num_action_args == num);
+    assert(pddlStripsMakerNumActionArgs(&sm) == num);
     for (int i = 0; i < num; ++i)
         assert(pddlStripsMakerActionArgs(&sm, i)->id == i);
 
@@ -655,7 +655,7 @@ TEST(strips_maker_eff_in_state, strips_maker)
     PDDL_ISET(init_facts);
     walk(&sm, 5, 3, &init_facts);
     printf("ground atoms: %d groundings: %d\n",
-           sm.ground_atom.atom_size, sm.num_action_args);
+           sm.ground_atom.atom_size, pddlStripsMakerNumActionArgs(&sm));
     pddlISetFree(&init_facts);
     pddlStripsMakerFree(&sm);
 }
@@ -773,7 +773,7 @@ TEST(strips_maker_make_strips, strips_maker)
 
     // A grounding with non-zero action_id2 is skipped whenever the same
     // grounding with action_id2 == 0 exists
-    if (sm.num_action_args > 0){
+    if (pddlStripsMakerNumActionArgs(&sm) > 0){
         const pddl_ground_action_args_t *g0
                 = pddlStripsMakerActionArgs(&sm, 0);
         int is_new;
