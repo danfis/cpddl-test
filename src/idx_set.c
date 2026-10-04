@@ -252,6 +252,8 @@ static void modelCheck(const model_t *m, const pddl_idx_set_t *s)
     assert(st.buckets > 0);
     assert(st.size < 2 * st.buckets);
     assert(st.overflow_buckets <= st.buckets);
+    assert(st.buckets == pddlIdxSetNumBuckets(s));
+    assert(st.el_segments == (size_t)pddlSegVecNumSegments(&s->el));
     assert(pddlIdxSetAllocBytes(s) == st.el_bytes + st.htable_bytes);
 }
 
@@ -692,7 +694,9 @@ TEST_ONCE(idx_set_simple_exp)
     assert(st.size == 0);
     assert(st.el_size == sizeof(struct pair));
     assert(st.buckets == 8);
+    assert(pddlIdxSetNumBuckets(&s) == 8);
     assert(st.el_bytes == 0);
+    assert(st.el_segments == 0);
     assert(st.htable_bytes == 8 * sizeof(uint64_t));
 
     struct pair p = { 1, 2 };
@@ -711,6 +715,7 @@ TEST_ONCE(idx_set_simple_exp)
     pddlIdxSetStat(&s, &st);
     assert(st.size == 2);
     assert(st.buckets == 8);
+    assert(st.el_segments == 1);
     assert(st.htable_bytes == 8 * sizeof(uint64_t));
     assert(st.el_bytes >= (1u << PDDL_IDX_SET_DEFAULT_FIRST_SEGM_SIZE_LOG2)
                                 * sizeof(struct pair));
