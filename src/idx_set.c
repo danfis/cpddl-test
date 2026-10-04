@@ -76,8 +76,39 @@ static void modelAdd(model_t *m, pddl_idx_set_t *s, int v)
     assert(v >= 0 && v < MODEL_RANGE);
     if (v > m->max_val)
         m->max_val = v;
+    // All pddlIdxSetInsert*() variants are used in turns
+    int size = pddlIdxSetSize(s);
     pddl_bool_t is_new = -1;
-    int id = pddlIdxSetAdd(s, &v, &is_new);
+    int id = -1;
+    void *val = NULL;
+    switch ((v + m->size) % 6){
+        case 0:
+            id = pddlIdxSetInsertFull(s, &v, &val, &is_new);
+            break;
+        case 1:
+            id = pddlIdxSetInsertFull(s, &v, NULL, &is_new);
+            break;
+        case 2:
+            is_new = pddlIdxSetInsert(s, &v);
+            id = pddlIdxSetGetIdxOf(s, &v);
+            break;
+        case 3:
+            id = pddlIdxSetInsertIdx(s, &v);
+            is_new = (pddlIdxSetSize(s) > size);
+            break;
+        case 4:
+            val = pddlIdxSetInsertVal(s, &v);
+            is_new = (pddlIdxSetSize(s) > size);
+            id = pddlIdxSetGetIdxOf(s, &v);
+            break;
+        case 5:
+            id = pddlIdxSetInsertIdxVal(s, &v, &val);
+            is_new = (pddlIdxSetSize(s) > size);
+            break;
+    }
+    if (val != NULL)
+        assert(val == pddlIdxSetAtConst(s, id));
+    assert(*(const int *)pddlIdxSetAtConst(s, id) == v);
     if (m->id[v] >= 0){
         assert(!is_new);
         assert(id == m->id[v]);
@@ -88,6 +119,68 @@ static void modelAdd(model_t *m, pddl_idx_set_t *s, int v)
         m->val[id] = v;
         ++m->size;
     }
+    assert(pddlIdxSetSize(s) == m->size);
+}
+
+/* Replaces or inserts V in both S and M and checks the result against M;
+ * VARIANT selects the pddlIdxSetReplace*() function. */
+static void modelReplace(model_t *m, pddl_idx_set_t *s, int v, int variant)
+{
+    assert(v >= 0 && v < MODEL_RANGE);
+    if (v > m->max_val)
+        m->max_val = v;
+    pddl_bool_t is_new = -1;
+    int id = -1;
+    int size = pddlIdxSetSize(s);
+    void *val = NULL;
+    switch (variant % 4){
+        case 0:
+            id = pddlIdxSetReplaceFull(s, &v, &val, &is_new);
+            assert(val == pddlIdxSetAtConst(s, id));
+            break;
+        case 1:
+            is_new = !pddlIdxSetReplace(s, &v);
+            id = pddlIdxSetGetIdxOf(s, &v);
+            break;
+        case 2:
+            id = pddlIdxSetReplaceIdx(s, &v);
+            is_new = (m->id[v] < 0);
+            break;
+        case 3:
+            val = pddlIdxSetReplaceVal(s, &v);
+            is_new = (pddlIdxSetSize(s) > size);
+            id = pddlIdxSetGetIdxOf(s, &v);
+            assert(val == pddlIdxSetAtConst(s, id));
+            break;
+    }
+    assert(*(const int *)pddlIdxSetAtConst(s, id) == v);
+    if (m->id[v] >= 0){
+        assert(!is_new);
+        assert(id == m->id[v]);
+    }else{
+        assert(is_new);
+        assert(id == m->size);
+        m->id[v] = id;
+        m->val[id] = v;
+        ++m->size;
+    }
+    assert(pddlIdxSetSize(s) == m->size);
+}
+
+/* Swaps the IDs ID1 and ID2 in both S and M and checks the result. */
+static void modelSwap(model_t *m, pddl_idx_set_t *s, int id1, int id2)
+{
+    pddlIdxSetSwap(s, id1, id2);
+    int v1 = m->val[id1];
+    int v2 = m->val[id2];
+    m->val[id1] = v2;
+    m->val[id2] = v1;
+    m->id[v1] = id2;
+    m->id[v2] = id1;
+    assert(*(const int *)pddlIdxSetAtConst(s, id1) == v2);
+    assert(*(const int *)pddlIdxSetAtConst(s, id2) == v1);
+    assert(pddlIdxSetGetIdxOf(s, &v1) == id2);
+    assert(pddlIdxSetGetIdxOf(s, &v2) == id1);
     assert(pddlIdxSetSize(s) == m->size);
 }
 
@@ -126,20 +219,26 @@ static void modelCheck(const model_t *m, const pddl_idx_set_t *s)
     assert(pddlIdxSetSize(s) == m->size);
     assert(pddlIdxSetIsEmpty(s) == (m->size == 0));
     for (int id = 0; id < m->size; ++id){
-        const int *el = pddlIdxSetGetConst(s, id);
+        const int *el = pddlIdxSetAtConst(s, id);
         assert(el != NULL);
         assert(*el == m->val[id]);
+        assert(pddlIdxSetEq(s, &m->val[id], el));
+        assert(pddlIdxSetHash(s, el) == pddlIdxSetHash(s, &m->val[id]));
     }
-    assert(pddlIdxSetGetConst(s, m->size) == NULL);
-    assert(pddlIdxSetGetConst(s, -1) == NULL);
+    assert(pddlIdxSetAtConst(s, m->size) == NULL);
+    assert(pddlIdxSetAtConst(s, -1) == NULL);
 
     int max_val = PDDL_MIN(m->max_val + 100, MODEL_RANGE);
     for (int v = 0; v < max_val; ++v){
-        void *found = NULL;
-        int id = pddlIdxSetFindFull(s, &v, &found);
+        void *found = (void *)1;
+        int id = pddlIdxSetGetFull(s, &v, &found);
         assert(id == m->id[v]);
+        assert(pddlIdxSetGetFull(s, &v, NULL) == id);
+        assert(pddlIdxSetGetIdxOf(s, &v) == id);
+        assert(pddlIdxSetContains(s, &v) == (id >= 0));
+        assert(pddlIdxSetGetVal(s, &v) == found);
         if (id >= 0){
-            assert(found == pddlIdxSetGetConst(s, id));
+            assert(found == pddlIdxSetAtConst(s, id));
         }else{
             assert(found == NULL);
         }
@@ -157,9 +256,10 @@ static void modelCheck(const model_t *m, const pddl_idx_set_t *s)
 }
 
 /*
- * Bytewise set of ints: dense IDs in the order of insertion, is_new,
- * Find/FindFull/Get on stored and missing keys and invalid IDs, the
- * iteration macros, and statistics across many resizes of the table.
+ * Bytewise set of ints: dense IDs in the order of insertion, all Insert*
+ * variants, Contains, Get* and At* on stored and missing keys and invalid IDs,
+ * the bytewise Hash/Eq, the iteration macros, and statistics across many
+ * resizes of the table.
  */
 TEST_ONCE(idx_set_ints_default)
 {
@@ -172,8 +272,16 @@ TEST_ONCE(idx_set_ints_default)
     assert(pddlIdxSetIsEmpty(&s));
     assert(pddlIdxSetAllocBytes(&s) == 2 * sizeof(uint64_t));
     int v = 1;
-    assert(pddlIdxSetFind(&s, &v) == -1);
-    assert(pddlIdxSetGet(&s, 0) == NULL);
+    assert(pddlIdxSetGetIdxOf(&s, &v) == -1);
+    assert(!pddlIdxSetContains(&s, &v));
+    assert(pddlIdxSetGetVal(&s, &v) == NULL);
+    assert(pddlIdxSetAt(&s, 0) == NULL);
+
+    // Hash and Eq of bytewise keys
+    int w = 2;
+    assert(pddlIdxSetHash(&s, &v) == pddlHash_32(&v, sizeof(int)));
+    assert(pddlIdxSetEq(&s, &v, &v));
+    assert(!pddlIdxSetEq(&s, &v, &w));
 
     for (int i = 0; i < 200000; ++i)
         modelAdd(m, &s, (int)(((long)i * 7919) % 50000));
@@ -194,7 +302,7 @@ TEST_ONCE(idx_set_ints_default)
 
     num = 0;
     PDDL_IDX_SET_FOR_EACH(&s, int, el){
-        assert(el == pddlIdxSetGet(&s, num));
+        assert(el == pddlIdxSetAt(&s, num));
         assert(*el == m->val[num]);
         ++num;
     }
@@ -203,14 +311,14 @@ TEST_ONCE(idx_set_ints_default)
     const pddl_idx_set_t *cs = &s;
     num = 0;
     PDDL_IDX_SET_FOR_EACH_CONST(cs, int, el){
-        assert(el == pddlIdxSetGetConst(cs, num));
+        assert(el == pddlIdxSetAtConst(cs, num));
         assert(*el == m->val[num]);
         ++num;
     }
     assert(num == 50000);
 
-    // pddlIdxSetGet() returns the same pointer as pddlIdxSetGetConst()
-    assert(pddlIdxSetGet(&s, 123) == pddlIdxSetGetConst(&s, 123));
+    // pddlIdxSetAt() returns the same pointer as pddlIdxSetAtConst()
+    assert(pddlIdxSetAt(&s, 123) == pddlIdxSetAtConst(&s, 123));
 
     pddlIdxSetFree(&s);
     free(m);
@@ -339,7 +447,7 @@ static int addStr(pddl_idx_set_t *s, int i, pddl_bool_t *is_new)
     // the key borrows the buffer, which is overwritten afterwards
     snprintf(buf, sizeof(buf), "s%dXXXX", i);
     str_el_t key = { buf, (int)strlen(buf) - 4 };
-    int id = pddlIdxSetAdd(s, &key, is_new);
+    int id = pddlIdxSetInsertFull(s, &key, NULL, is_new);
     memset(buf, 'Y', sizeof(buf));
     return id;
 }
@@ -349,7 +457,7 @@ static void checkStr(const pddl_idx_set_t *s, int id, int i)
 {
     char buf[32];
     snprintf(buf, sizeof(buf), "s%d", i);
-    const str_el_t *e = pddlIdxSetGetConst(s, id);
+    const str_el_t *e = pddlIdxSetAtConst(s, id);
     assert(e != NULL);
     assert(e->size == (int)strlen(buf));
     assert(strcmp(e->str, buf) == 0);
@@ -381,11 +489,17 @@ TEST_ONCE(idx_set_strings)
 
     char buf[] = "s17";
     str_el_t key = { buf, 3 };
-    assert(pddlIdxSetFind(&s, &key) == 17);
+    assert(pddlIdxSetGetIdxOf(&s, &key) == 17);
     key.size = 2; // "s1"
-    assert(pddlIdxSetFind(&s, &key) == 1);
+    assert(pddlIdxSetGetIdxOf(&s, &key) == 1);
+
+    // Hash and Eq relay to the callbacks
+    assert(pddlIdxSetHash(&s, &key) == strHash(&key, &ud));
+    assert(pddlIdxSetEq(&s, &key, pddlIdxSetAtConst(&s, 1)));
+    assert(!pddlIdxSetEq(&s, &key, pddlIdxSetAtConst(&s, 17)));
+
     key.str = "x1";
-    assert(pddlIdxSetFind(&s, &key) == -1);
+    assert(pddlIdxSetGetIdxOf(&s, &key) == -1);
 
     // SwapRemove without REMOVED frees the element
     int ret = pddlIdxSetSwapRemove(&s, 10, NULL);
@@ -514,8 +628,9 @@ TEST_ONCE(idx_set_truncate)
 }
 
 /*
- * Random sequences of Add, Find, SwapRemove, Truncate and Clear agree with
- * the reference model, both with the default and with a weak hash.
+ * Random sequences of Insert*, Replace*, Get*, Swap, SwapRemove, Truncate
+ * and Clear agree with the reference model, both with the default and with
+ * a weak hash.
  */
 TEST_ONCE(idx_set_random_model)
 {
@@ -529,10 +644,17 @@ TEST_ONCE(idx_set_random_model)
         for (int step = 0; step < 300000; ++step){
             uint32_t op = pddlRandInt(rnd) % 1000;
             int v = pddlRandInt(rnd) % 4000;
-            if (op < 600){
+            if (op < 500){
                 modelAdd(m, &s, v);
+            }else if (op < 600){
+                modelReplace(m, &s, v, (int)op);
+            }else if (op < 700){
+                assert(pddlIdxSetGetIdxOf(&s, &v) == m->id[v]);
             }else if (op < 800){
-                assert(pddlIdxSetFind(&s, &v) == m->id[v]);
+                if (m->size > 0){
+                    modelSwap(m, &s, pddlRandInt(rnd) % m->size,
+                              pddlRandInt(rnd) % m->size);
+                }
             }else if (op < 990){
                 if (m->size > 0)
                     modelSwapRemove(m, &s, pddlRandInt(rnd) % m->size);
@@ -574,13 +696,16 @@ TEST_ONCE(idx_set_simple_exp)
     assert(st.htable_bytes == 8 * sizeof(uint64_t));
 
     struct pair p = { 1, 2 };
-    assert(pddlIdxSetAdd(&s, &p, NULL) == 0);
+    int id = pddlIdxSetInsertIdx(&s, &p);
+    assert(id == 0);
     p.b = 3;
-    assert(pddlIdxSetAdd(&s, &p, NULL) == 1);
+    id = pddlIdxSetInsertIdx(&s, &p);
+    assert(id == 1);
     p.b = 2;
-    assert(pddlIdxSetAdd(&s, &p, NULL) == 0);
+    id = pddlIdxSetInsertIdx(&s, &p);
+    assert(id == 0);
     assert(pddlIdxSetSize(&s) == 2);
-    const struct pair *q = pddlIdxSetGetConst(&s, 1);
+    const struct pair *q = pddlIdxSetAtConst(&s, 1);
     assert(q->a == 1 && q->b == 3);
 
     pddlIdxSetStat(&s, &st);
@@ -619,10 +744,351 @@ TEST_ONCE(idx_set_config_log2)
         assert(st.htable_bytes == (1u << log2) * sizeof(uint64_t));
 
         int v = 7;
-        assert(pddlIdxSetAdd(&s, &v, NULL) == 0);
+        int id = pddlIdxSetInsertIdx(&s, &v);
+        assert(id == 0);
         assert(pddlSegVecCapacity(&s.el) == (1u << segm_log2));
         pddlIdxSetFree(&s);
     }
+}
+
+/* Element with a key and a payload that is not a part of the key. */
+struct kv {
+    int key;
+    int payload;
+};
+typedef struct kv kv_t;
+
+static uint32_t kvHash(const void *key, void *ud)
+{
+    const kv_t *k = key;
+    return pddlHash_32(&k->key, sizeof(int));
+}
+
+static pddl_bool_t kvEq(const void *key, const void *el, void *ud)
+{
+    const kv_t *k = key;
+    const kv_t *e = el;
+    return k->key == e->key;
+}
+
+/* Returns the payload of the element with the ID ID. */
+static int kvPayload(const pddl_idx_set_t *s, int id)
+{
+    const kv_t *e = pddlIdxSetAtConst(s, id);
+    assert(e != NULL);
+    return e->payload;
+}
+
+/*
+ * Replace* replaces a stored equal element in place (the ID is kept and
+ * the payload is updated, unlike with Insert*) and inserts a missing key;
+ * the return values and out-parameters of all variants.
+ */
+TEST_ONCE(idx_set_replace)
+{
+    pddl_idx_set_config_t cfg = PDDL_IDX_SET_CONFIG_INIT;
+    cfg.el_size = sizeof(kv_t);
+    cfg.hash = kvHash;
+    cfg.eq = kvEq;
+    pddl_idx_set_t s;
+    pddlIdxSetInit(&s, &cfg);
+
+    for (int i = 0; i < 100; ++i){
+        kv_t kv = { i, i };
+        int id = pddlIdxSetInsertIdx(&s, &kv);
+        assert(id == i);
+    }
+
+    // Insert keeps the stored element
+    kv_t kv = { 5, 1000 };
+    void *val = NULL;
+    pddl_bool_t is_new = pddl_true;
+    int id = pddlIdxSetInsertFull(&s, &kv, &val, &is_new);
+    assert(id == 5);
+    assert(!is_new);
+    assert(val == pddlIdxSetAt(&s, 5));
+    assert(kvPayload(&s, 5) == 5);
+
+    // Replace of stored keys
+    kv.payload = 1001;
+    pddl_bool_t replaced = pddlIdxSetReplace(&s, &kv);
+    assert(replaced);
+    assert(kvPayload(&s, 5) == 1001);
+
+    kv.key = 7;
+    kv.payload = 1002;
+    id = pddlIdxSetReplaceIdx(&s, &kv);
+    assert(id == 7);
+    assert(kvPayload(&s, 7) == 1002);
+
+    kv.key = 9;
+    kv.payload = 1003;
+    val = NULL;
+    is_new = pddl_true;
+    id = pddlIdxSetReplaceFull(&s, &kv, &val, &is_new);
+    assert(id == 9);
+    assert(!is_new);
+    assert(val == pddlIdxSetAt(&s, 9));
+    assert(kvPayload(&s, 9) == 1003);
+    kv.payload = 1004;
+    id = pddlIdxSetReplaceFull(&s, &kv, NULL, NULL);
+    assert(id == 9);
+    assert(kvPayload(&s, 9) == 1004);
+
+    kv.key = 11;
+    kv.payload = 1005;
+    val = pddlIdxSetReplaceVal(&s, &kv);
+    assert(val == pddlIdxSetAt(&s, 11));
+    assert(kvPayload(&s, 11) == 1005);
+    assert(pddlIdxSetSize(&s) == 100);
+
+    // Replace of missing keys
+    kv.key = 100;
+    kv.payload = 2000;
+    replaced = pddlIdxSetReplace(&s, &kv);
+    assert(!replaced);
+    assert(kvPayload(&s, 100) == 2000);
+
+    kv.key = 101;
+    id = pddlIdxSetReplaceIdx(&s, &kv);
+    assert(id == 101);
+
+    kv.key = 102;
+    val = NULL;
+    is_new = pddl_false;
+    id = pddlIdxSetReplaceFull(&s, &kv, &val, &is_new);
+    assert(id == 102);
+    assert(is_new);
+    assert(val == pddlIdxSetAt(&s, 102));
+
+    kv.key = 103;
+    val = pddlIdxSetReplaceVal(&s, &kv);
+    assert(val == pddlIdxSetAt(&s, 103));
+    assert(kvPayload(&s, 103) == 2000);
+    assert(pddlIdxSetSize(&s) == 104);
+
+    // The hash table is intact
+    for (int i = 0; i < 104; ++i){
+        kv.key = i;
+        assert(pddlIdxSetGetIdxOf(&s, &kv) == i);
+    }
+    pddlIdxSetFree(&s);
+}
+
+/*
+ * Replace* of elements with owned parts: the new element is constructed
+ * by .init_copy and the replaced one is freed by .free, also when the key
+ * borrows the string of the replaced element; inserting a missing key
+ * frees nothing.
+ */
+TEST_ONCE(idx_set_replace_owned)
+{
+    str_ud_t ud;
+    pddl_idx_set_t s;
+    initStrs(&s, &ud);
+    for (int i = 0; i < 100; ++i){
+        pddl_bool_t is_new;
+        int id = addStr(&s, i, &is_new);
+        assert(id == i);
+    }
+    assert(ud.copies == 100 && ud.frees == 0);
+
+    // The key borrows the string of the replaced element
+    const str_el_t *e = pddlIdxSetAtConst(&s, 42);
+    str_el_t key = { e->str, e->size };
+    pddl_bool_t replaced = pddlIdxSetReplace(&s, &key);
+    assert(replaced);
+    assert(ud.copies == 101 && ud.frees == 1);
+    checkStr(&s, 42, 42);
+
+    // ReplaceVal returns the new stored element
+    char buf[] = "s43";
+    key.str = buf;
+    key.size = 3;
+    const str_el_t *val = pddlIdxSetReplaceVal(&s, &key);
+    assert(val == pddlIdxSetAtConst(&s, 43));
+    assert(val->str != buf);
+    assert(ud.copies == 102 && ud.frees == 2);
+    checkStr(&s, 43, 43);
+
+    // A missing key is inserted
+    char buf2[] = "s100";
+    key.str = buf2;
+    key.size = 4;
+    int id = pddlIdxSetReplaceIdx(&s, &key);
+    assert(id == 100);
+    assert(ud.copies == 103 && ud.frees == 2);
+    checkStr(&s, 100, 100);
+
+    pddlIdxSetFree(&s);
+    assert(ud.frees == 103);
+}
+
+/* Element bigger than the stack buffers of Replace and Swap. */
+#define BIG_EL_DATA_SIZE 300
+struct big_el {
+    int key;
+    int payload;
+    char data[BIG_EL_DATA_SIZE];
+};
+typedef struct big_el big_el_t;
+
+static uint32_t bigHash(const void *key, void *ud)
+{
+    const big_el_t *k = key;
+    return pddlHash_32(&k->key, sizeof(int));
+}
+
+static pddl_bool_t bigEq(const void *key, const void *el, void *ud)
+{
+    const big_el_t *k = key;
+    const big_el_t *e = el;
+    return k->key == e->key;
+}
+
+static void bigFree(void *el, void *ud)
+{
+    ++*(int *)ud;
+}
+
+/* Fills B with KEY, PAYLOAD and the data derived from them. */
+static void bigSet(big_el_t *b, int key, int payload)
+{
+    b->key = key;
+    b->payload = payload;
+    for (int i = 0; i < BIG_EL_DATA_SIZE; ++i)
+        b->data[i] = (char)(key + 3 * payload + i);
+}
+
+/* Checks that B was filled by bigSet(B, KEY, PAYLOAD). */
+static void bigCheck(const big_el_t *b, int key, int payload)
+{
+    assert(b != NULL);
+    assert(b->key == key);
+    assert(b->payload == payload);
+    for (int i = 0; i < BIG_EL_DATA_SIZE; ++i)
+        assert(b->data[i] == (char)(key + 3 * payload + i));
+}
+
+/*
+ * Replace and Swap of elements bigger than the stack buffers used by them
+ * keep all bytes of the elements and call .free only on the replaced
+ * elements.
+ */
+TEST_ONCE(idx_set_big_elements)
+{
+    int frees = 0;
+    pddl_idx_set_config_t cfg = PDDL_IDX_SET_CONFIG_INIT;
+    cfg.el_size = sizeof(big_el_t);
+    cfg.hash = bigHash;
+    cfg.eq = bigEq;
+    cfg.free = bigFree;
+    cfg.userdata = &frees;
+    pddl_idx_set_t s;
+    pddlIdxSetInit(&s, &cfg);
+
+    big_el_t b;
+    for (int i = 0; i < 50; ++i){
+        bigSet(&b, i, 0);
+        int id = pddlIdxSetInsertIdx(&s, &b);
+        assert(id == i);
+    }
+
+    bigSet(&b, 7, 1);
+    pddl_bool_t replaced = pddlIdxSetReplace(&s, &b);
+    assert(replaced);
+    assert(frees == 1);
+    bigCheck(pddlIdxSetAtConst(&s, 7), 7, 1);
+
+    bigSet(&b, 8, 2);
+    const big_el_t *val = pddlIdxSetReplaceVal(&s, &b);
+    assert(val == pddlIdxSetAtConst(&s, 8));
+    assert(frees == 2);
+    bigCheck(val, 8, 2);
+
+    pddlIdxSetSwap(&s, 3, 40);
+    bigCheck(pddlIdxSetAtConst(&s, 3), 40, 0);
+    bigCheck(pddlIdxSetAtConst(&s, 40), 3, 0);
+    b.key = 3;
+    assert(pddlIdxSetGetIdxOf(&s, &b) == 40);
+    b.key = 40;
+    assert(pddlIdxSetGetIdxOf(&s, &b) == 3);
+    assert(frees == 2);
+
+    pddlIdxSetFree(&s);
+    assert(frees == 52);
+}
+
+/*
+ * Swap exchanges two elements and their IDs in the hash table with the
+ * default hash, with pairs of keys sharing in-place buckets, with a single
+ * overflowing bucket, and with a few overflowing buckets; swapping an
+ * element with itself does nothing; SwapRemove, Truncate and Insert work
+ * afterwards.
+ */
+TEST_ONCE(idx_set_swap)
+{
+    div_mod_t dms[] = { { 2, 0 }, { 1 << 30, 0 }, { 1, 7 } };
+    model_t *m = malloc(sizeof(*m));
+    for (int di = -1; di < 3; ++di){
+        modelInit(m);
+        pddl_idx_set_t s;
+        initInts(&s, di < 0 ? NULL : &dms[di], 0);
+        int num = 2000;
+        for (int i = 0; i < num; ++i)
+            modelAdd(m, &s, i);
+
+        modelSwap(m, &s, 5, 5);
+        modelCheck(m, &s);
+
+        // Neighbors share in-place buckets with the weak hash { 2, 0 }
+        for (int i = 0; i + 1 < num; i += 2)
+            modelSwap(m, &s, i, i + 1);
+        modelCheck(m, &s);
+
+        modelSwap(m, &s, 0, m->size - 1);
+        modelCheck(m, &s);
+
+        pddl_rand_t *rnd = pddlRandNew(99 + di);
+        for (int i = 0; i < 5000; ++i){
+            modelSwap(m, &s, pddlRandInt(rnd) % m->size,
+                      pddlRandInt(rnd) % m->size);
+        }
+        modelCheck(m, &s);
+
+        for (int i = 0; i < 500; ++i)
+            modelSwapRemove(m, &s, pddlRandInt(rnd) % m->size);
+        modelCheck(m, &s);
+        modelTruncate(m, &s, m->size / 2);
+        modelCheck(m, &s);
+        for (int i = 0; i < num; ++i)
+            modelAdd(m, &s, i);
+        modelCheck(m, &s);
+
+        pddlRandDel(rnd);
+        pddlIdxSetFree(&s);
+    }
+    free(m);
+}
+
+/* Swapping with an ID equal to the size of the set panics. */
+TEST_PANIC_ONCE(idx_set_panic_swap_invalid_id)
+{
+    pddl_idx_set_t s;
+    pddlIdxSetInitSimpleExp(&s, sizeof(int), 0);
+    int v = 5;
+    pddlIdxSetInsertIdx(&s, &v);
+    pddlIdxSetSwap(&s, 0, 1);
+}
+
+/* Swapping with a negative ID panics. */
+TEST_PANIC_ONCE(idx_set_panic_swap_negative_id)
+{
+    pddl_idx_set_t s;
+    pddlIdxSetInitSimpleExp(&s, sizeof(int), 0);
+    int v = 5;
+    pddlIdxSetInsertIdx(&s, &v);
+    pddlIdxSetSwap(&s, -1, 0);
 }
 
 /* Removing an invalid ID panics. */
@@ -631,7 +1097,7 @@ TEST_PANIC_ONCE(idx_set_panic_swap_remove_invalid_id)
     pddl_idx_set_t s;
     pddlIdxSetInitSimpleExp(&s, sizeof(int), 0);
     int v = 5;
-    (void)pddlIdxSetAdd(&s, &v, NULL);
+    pddlIdxSetInsertIdx(&s, &v);
     (void)pddlIdxSetSwapRemove(&s, 1, NULL);
 }
 
@@ -641,7 +1107,7 @@ TEST_PANIC_ONCE(idx_set_panic_truncate_too_big)
     pddl_idx_set_t s;
     pddlIdxSetInitSimpleExp(&s, sizeof(int), 0);
     int v = 5;
-    (void)pddlIdxSetAdd(&s, &v, NULL);
+    pddlIdxSetInsertIdx(&s, &v);
     pddlIdxSetTruncate(&s, 2);
 }
 
