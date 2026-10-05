@@ -14,6 +14,7 @@
  */
 
 #include "pddl/fdr_state_space.h"
+#include "pddl/lp.h"
 #include "test.h"
 #include <assert.h>
 #include <stdio.h>
@@ -50,7 +51,11 @@ static void spaceInit(space_t *s)
         pddl_fdr_var_t *v = pddlFDRVarsAdd(&s->vars, VAL_SIZE);
         assert(v->var_id == var);
     }
-    pddlFDRStateSpaceInit(&s->space, &s->vars, &s->err);
+    pddl_fdr_state_packer_config_t packer_cfg
+            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+    packer_cfg.vars = &s->vars;
+    int ret = pddlFDRStateSpaceInit(&s->space, &packer_cfg, &s->err);
+    assert(ret == 0);
     pddlFDRStateSpaceNodeInit(&s->node, &s->space);
 }
 
@@ -419,7 +424,11 @@ TEST_ONCE(fdr_state_pool_segments)
         pddlFDRVarsAdd(&vars, 16);
 
     pddl_fdr_state_pool_t sp;
-    pddlFDRStatePoolInit(&sp, &vars, &err);
+    pddl_fdr_state_packer_config_t packer_cfg
+            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+    packer_cfg.vars = &vars;
+    int ret = pddlFDRStatePoolInit(&sp, &packer_cfg, &err);
+    assert(ret == 0);
     assert(pddlIdxSetElSize(&sp.states) == 4096);
     assert(pddlSegVecNumSegments(&sp.states.el) == 0);
 
@@ -503,4 +512,80 @@ TEST_ONCE(fdr_state_pool_resize)
     assertStatePoolStatEq(&stat, &stat2);
 
     spaceFree(&s);
+}
+
+/*
+ * The state space uses the packer configured by the given config: with the
+ * ILP layout, it packs states into fewer words than with FFD on variables
+ * of widths {15,13,12,10,7,5}. Skipped without an LP solver.
+ */
+TEST_ONCE(fdr_state_space_packer_cfg)
+{
+    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
+        return;
+
+    static const int width[6] = { 15, 13, 12, 10, 7, 5 };
+    pddl_err_t err;
+    pddlErrInit(&err);
+    pddl_fdr_vars_t vars;
+    memset(&vars, 0, sizeof(vars));
+    for (int i = 0; i < 6; ++i)
+        pddlFDRVarsAdd(&vars, 1 << width[i]);
+
+    pddl_fdr_state_packer_layout_t layouts[2] = {
+        PDDL_FDR_STATE_PACKER_LAYOUT_FFD,
+        PDDL_FDR_STATE_PACKER_LAYOUT_ILP,
+    };
+    const int exp_bufsize[2] = { 12, 8 };
+    for (int li = 0; li < 2; ++li){
+        pddl_fdr_state_packer_config_t packer_cfg
+                = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+        packer_cfg.vars = &vars;
+        packer_cfg.layout = layouts[li];
+        pddl_fdr_state_space_t space;
+        int ret = pddlFDRStateSpaceInit(&space, &packer_cfg, &err);
+        assert(ret == 0);
+        assert(pddlFDRStatePackerBufSize(&space.state_pool.packer)
+                == exp_bufsize[li]);
+
+        int state[6];
+        for (int i = 0; i < 6; ++i)
+            state[i] = (1 << width[i]) - 1 - i;
+        pddl_bool_t is_new;
+        pddl_state_id_t id = pddlFDRStateSpaceInsert(&space, state, &is_new);
+        assert(is_new);
+        assert(id == 0);
+
+        pddl_fdr_state_space_node_t node;
+        pddlFDRStateSpaceNodeInit(&node, &space);
+        pddlFDRStateSpaceGet(&space, id, &node);
+        assert(memcmp(node.state, state, sizeof(state)) == 0);
+        pddlFDRStateSpaceNodeFree(&node);
+        pddlFDRStateSpaceFree(&space);
+    }
+
+    pddlFDRVarsFree(&vars);
+}
+
+/*
+ * Initializing a state space (and its state pool) with an invalid packer
+ * config (no .vars) fails with an error.
+ */
+TEST_ONCE(fdr_state_space_init_err)
+{
+    pddl_fdr_state_packer_config_t packer_cfg
+            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+
+    pddl_err_t err;
+    pddlErrInit(&err);
+    pddl_fdr_state_space_t space;
+    int ret = pddlFDRStateSpaceInit(&space, &packer_cfg, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+
+    pddlErrInit(&err);
+    pddl_fdr_state_pool_t pool;
+    ret = pddlFDRStatePoolInit(&pool, &packer_cfg, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
 }

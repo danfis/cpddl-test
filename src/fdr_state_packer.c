@@ -7,12 +7,13 @@
 /*
  * Tests of the FDR state packer (pddl/fdr_state_packer.h): widths of
  * variables, the FFD assignment of variables to words and their placement
- * within words, and pack/unpack round trips.
+ * within words, the optimal (ILP) layout, and pack/unpack round trips.
  *
  * Run with:  cd tests && make && ./test -a -Q -s fdr_state_packer
  */
 
 #include "pddl/fdr_state_packer.h"
+#include "pddl/lp.h"
 #include "pddl/rand.h"
 #include "test.h"
 #include "context.h"
@@ -61,7 +62,8 @@ static void packerInit(pddl_fdr_state_packer_t *p,
     pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
     cfg.vars = vars;
     cfg.layout = layout;
-    pddlFDRStatePackerInit(p, &cfg);
+    int ret = pddlFDRStatePackerInit(p, &cfg, NULL);
+    assert(ret == 0);
 }
 
 /* Number of words of the packed state of P. */
@@ -421,17 +423,29 @@ TEST_ONCE(fdr_state_packer_no_vars)
     varsFree(&vars);
 }
 
-/* Initializing a packer from a config without variables panics. */
-TEST_PANIC_ONCE(fdr_state_packer_panic_no_vars_in_config)
+/*
+ * Initializing a packer from a config without variables fails with an
+ * error.
+ */
+TEST_ONCE(fdr_state_packer_err_no_vars_in_config)
 {
+    pddl_err_t err;
+    pddlErrInit(&err);
     pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
     pddl_fdr_state_packer_t p;
-    pddlFDRStatePackerInit(&p, &cfg);
+    int ret = pddlFDRStatePackerInit(&p, &cfg, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
 }
 
-/* Initializing a packer with an unknown layout method panics. */
-TEST_PANIC_ONCE(fdr_state_packer_panic_unknown_layout)
+/*
+ * Initializing a packer with an unknown layout method fails with an error
+ * and allocates nothing.
+ */
+TEST_ONCE(fdr_state_packer_err_unknown_layout)
 {
+    pddl_err_t err;
+    pddlErrInit(&err);
     pddl_fdr_vars_t vars;
     int val_size = 2;
     varsInit(&vars, &val_size, 1);
@@ -439,13 +453,15 @@ TEST_PANIC_ONCE(fdr_state_packer_panic_unknown_layout)
     cfg.vars = &vars;
     cfg.layout = (pddl_fdr_state_packer_layout_t)-100;
     pddl_fdr_state_packer_t p;
-    pddlFDRStatePackerInit(&p, &cfg);
+    int ret = pddlFDRStatePackerInit(&p, &cfg, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    varsFree(&vars);
 }
 
 /*
  * The packer over the variables of the task round-trips the initial state
- * and random states; the number of words and the sum of widths of the
- * variables are printed (FFD baseline for the optimal layout).
+ * and random states, and its number of words is within the bounds.
  */
 TEST(fdr_state_packer, fdr)
 {
@@ -467,4 +483,254 @@ TEST(fdr_state_packer, fdr)
     pddlRandFree(&rnd);
 
     pddlFDRStatePackerFree(&p);
+}
+
+/* Recursive step of optWords(): places the I-th of the N widths W (sorted
+ * in decreasing order) into one of the NUM words with loads LOAD or into a
+ * new word, and updates BEST with the least number of words found. */
+static void optWordsRec(const int *w, int n, int i, int *load, int num,
+                        int *best)
+{
+    if (num >= *best)
+        return;
+    if (i == n){
+        *best = num;
+        return;
+    }
+    for (int b = 0; b < num; ++b){
+        if (load[b] + w[i] <= (int)PDDL_FDR_PACKER_WORD_BITS){
+            load[b] += w[i];
+            optWordsRec(w, n, i + 1, load, num, best);
+            load[b] -= w[i];
+        }
+    }
+    load[num] = w[i];
+    optWordsRec(w, n, i + 1, load, num + 1, best);
+}
+
+/* Optimal number of words of VARS computed by an exhaustive search
+ * independently of the packer (use only for a few variables). */
+static int optWords(const pddl_fdr_vars_t *vars)
+{
+    int n = vars->var_size;
+    if (n == 0)
+        return 0;
+    int *w = calloc(n, sizeof(int));
+    int *load = calloc(n, sizeof(int));
+    for (int i = 0; i < n; ++i)
+        w[i] = expWidth(vars->var[i].val_size);
+    // Insertion sort in decreasing order
+    for (int i = 1; i < n; ++i){
+        for (int j = i; j > 0 && w[j - 1] < w[j]; --j){
+            int tmp = w[j];
+            w[j] = w[j - 1];
+            w[j - 1] = tmp;
+        }
+    }
+    int best = n + 1;
+    optWordsRec(w, n, 0, load, 0, &best);
+    free(w);
+    free(load);
+    return best;
+}
+
+/* Asserts that P round-trips the state with the maximal values of all
+ * variables and NUM random states of VARS. */
+static void assertRoundTripRand(const pddl_fdr_state_packer_t *p,
+                                const pddl_fdr_vars_t *vars,
+                                pddl_rand_t *rnd,
+                                int num)
+{
+    int *state = calloc(vars->var_size + 1, sizeof(int));
+    for (int i = 0; i < vars->var_size; ++i)
+        state[i] = vars->var[i].val_size - 1;
+    assertRoundTrip(p, state);
+    for (int si = 0; si < num; ++si){
+        randState(vars, rnd, state);
+        assertRoundTrip(p, state);
+    }
+    free(state);
+}
+
+/* Asserts that the packers P1 and P2 over VARS pack the NUM random states
+ * into the same bytes, i.e., they have the same layout. */
+static void assertSameLayout(const pddl_fdr_state_packer_t *p1,
+                             const pddl_fdr_state_packer_t *p2,
+                             const pddl_fdr_vars_t *vars,
+                             pddl_rand_t *rnd,
+                             int num)
+{
+    int size = pddlFDRStatePackerBufSize(p1);
+    assert(pddlFDRStatePackerBufSize(p2) == size);
+    int *state = calloc(vars->var_size + 1, sizeof(int));
+    char *buf1 = malloc(size + 1);
+    char *buf2 = malloc(size + 1);
+    for (int si = 0; si < num; ++si){
+        randState(vars, rnd, state);
+        pddlFDRStatePackerPack(p1, state, buf1);
+        pddlFDRStatePackerPack(p2, state, buf2);
+        assert(memcmp(buf1, buf2, size) == 0);
+    }
+    free(buf1);
+    free(buf2);
+    free(state);
+}
+
+/* Checks the ILP layout of VARS: it round-trips states, it has the least
+ * number of words if OPT >= 0, it never has more words than FFD, and it is
+ * the FFD layout if it has the same number of words. Returns the number of
+ * words of the ILP layout. */
+static int checkILP(const pddl_fdr_vars_t *vars, int opt, pddl_rand_t *rnd)
+{
+    pddl_fdr_state_packer_t ffd, ilp;
+    packerInit(&ffd, vars, PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
+    packerInit(&ilp, vars, PDDL_FDR_STATE_PACKER_LAYOUT_ILP);
+    assert(ilp.num_vars == vars->var_size);
+    assertNumWordsBounds(&ilp, vars);
+    int words = numWords(&ilp);
+    assert(words <= numWords(&ffd));
+    if (opt >= 0)
+        assert(words == opt);
+    if (words == numWords(&ffd))
+        assertSameLayout(&ffd, &ilp, vars, rnd, 20);
+    assertRoundTripRand(&ilp, vars, rnd, 20);
+    pddlFDRStatePackerFree(&ffd);
+    pddlFDRStatePackerFree(&ilp);
+    return words;
+}
+
+/*
+ * The default configuration has no time limit for the ILP.
+ */
+TEST_ONCE(fdr_state_packer_config_init_ilp)
+{
+    pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+    assert(cfg.ilp_time_limit <= 0.f);
+}
+
+/*
+ * Instances on which FFD needs one word more than the optimum, e.g.,
+ * widths {15,13,12,10,7,5}: FFD needs 3 words, but 2 words suffice
+ * ({15,12,5} and {13,10,7}). The ILP layout finds the optimum. Skipped
+ * without an LP solver.
+ */
+TEST_ONCE(fdr_state_packer_ilp_beats_ffd)
+{
+    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
+        return;
+
+    static const struct {
+        int n;
+        int width[8];
+        int opt;
+    } cases[] = {
+        { 6, { 15, 13, 12, 10, 7, 5 }, 2 },
+        { 6, { 16, 13, 12, 10, 7, 6 }, 2 },
+        { 6, { 5, 16, 9, 19, 7, 5 }, 2 },
+        { 8, { 16, 16, 13, 13, 10, 9, 7, 7 }, 3 },
+        { 8, { 6, 18, 15, 14, 12, 11, 10, 8 }, 3 },
+    };
+    const int num_cases = sizeof(cases) / sizeof(cases[0]);
+
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd, 15);
+    for (int ci = 0; ci < num_cases; ++ci){
+        int val_size[8];
+        for (int i = 0; i < cases[ci].n; ++i)
+            val_size[i] = valSizeOfWidth(cases[ci].width[i]);
+        pddl_fdr_vars_t vars;
+        varsInit(&vars, val_size, cases[ci].n);
+        assert(optWords(&vars) == cases[ci].opt);
+
+        pddl_fdr_state_packer_t ffd;
+        packerInit(&ffd, &vars, PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
+        assert(numWords(&ffd) == cases[ci].opt + 1);
+        pddlFDRStatePackerFree(&ffd);
+
+        checkILP(&vars, cases[ci].opt, &rnd);
+        varsFree(&vars);
+    }
+    pddlRandFree(&rnd);
+}
+
+/*
+ * Random small sets of variables (fixed seed): the ILP layout has the
+ * optimal number of words computed by an exhaustive search, it never has
+ * more words than FFD, it is the FFD layout if FFD is optimal, and it
+ * round-trips states. Larger random sets (up to 64 variables) are checked
+ * the same way, but without the exhaustive search. Skipped without an LP
+ * solver.
+ */
+TEST_ONCE(fdr_state_packer_ilp_random)
+{
+    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
+        return;
+
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd, 2027);
+    int num_better = 0;
+    for (int iter = 0; iter < 300; ++iter){
+        pddl_fdr_vars_t vars;
+        memset(&vars, 0, sizeof(vars));
+        int n = 1 + pddlRandInt(&rnd) % 9;
+        for (int i = 0; i < n; ++i){
+            // Widths 5..20 make FFD suboptimal more often
+            int w;
+            if (iter % 2 == 0){
+                w = 5 + pddlRandInt(&rnd) % 16;
+            }else{
+                w = 1 + pddlRandInt(&rnd) % 31;
+            }
+            varsAdd(&vars, valSizeOfWidth(w));
+        }
+
+        pddl_fdr_state_packer_t ffd;
+        packerInit(&ffd, &vars, PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
+        int opt = optWords(&vars);
+        if (opt < numWords(&ffd))
+            ++num_better;
+        pddlFDRStatePackerFree(&ffd);
+
+        checkILP(&vars, opt, &rnd);
+        varsFree(&vars);
+    }
+    // Make sure the ILP was really needed in some of the instances
+    assert(num_better > 0);
+
+    for (int iter = 0; iter < 30; ++iter){
+        pddl_fdr_vars_t vars;
+        randVars(&vars, &rnd);
+        checkILP(&vars, -1, &rnd);
+        varsFree(&vars);
+    }
+    pddlRandFree(&rnd);
+}
+
+/*
+ * The ILP layout of the variables of the task never has more words than
+ * the FFD layout, and it round-trips the initial state and random states.
+ */
+TEST_COND(fdr_state_packer_ilp, fdr, LP)
+{
+    const pddl_fdr_vars_t *vars = &C.fdr.var;
+    pddl_fdr_state_packer_t ffd, ilp;
+    packerInit(&ffd, vars, PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
+
+    pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+    cfg.vars = vars;
+    cfg.layout = PDDL_FDR_STATE_PACKER_LAYOUT_ILP;
+    cfg.ilp_time_limit = 30.f;
+    int ret = pddlFDRStatePackerInit(&ilp, &cfg, &C.err);
+    assert(ret == 0);
+    assertNumWordsBounds(&ilp, vars);
+    assert(numWords(&ilp) <= numWords(&ffd));
+
+    assertRoundTrip(&ilp, C.fdr.init);
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd, 1);
+    assertRoundTripRand(&ilp, vars, &rnd, 1000);
+    pddlRandFree(&rnd);
+
+    pddlFDRStatePackerFree(&ffd);
+    pddlFDRStatePackerFree(&ilp);
 }
