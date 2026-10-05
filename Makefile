@@ -73,6 +73,7 @@ TESTS += plan
 TESTS += gaifman
 TESTS += set
 TESTS += segvec
+TESTS += slab
 TESTS += idx_set
 TESTS += splaytree
 TESTS += open_list
