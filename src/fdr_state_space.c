@@ -366,9 +366,10 @@ TEST_ONCE(fdr_state_pool_stat)
     assert(stat.num_states == 1000);
     assert(stat.packed_state_size
             == (size_t)pddlFDRStatePackerBufSize(&sp->packer));
-    assert(stat.segments >= 1);
+    // 1000 tiny states fit in a single segment
+    assert(stat.segments == 1);
     assert(stat.states_bytes
-            == stat.segments * (sp->states.state_size << sp->states.segm_shift));
+            >= pddlSegVecCapacity(&sp->states.el) * stat.packed_state_size);
     assert(stat.states_bytes >= stat.num_states * stat.packed_state_size);
     assert(stat.htable_buckets == 4096);
     assert(stat.htable_max_bucket_size >= 1);
@@ -419,10 +420,8 @@ TEST_ONCE(fdr_state_pool_segments)
 
     pddl_fdr_state_pool_t sp;
     pddlFDRStatePoolInit(&sp, &vars, &err);
-    assert(sp.states.state_size == 4096);
-    assert(sp.states.segm_shift == 10);
-    assert(sp.states.segm_mask == 1023);
-    assert(sp.states.num_segm == 0);
+    assert(pddlIdxSetElSize(&sp.states) == 4096);
+    assert(pddlSegVecNumSegments(&sp.states.el) == 0);
 
     int *state = calloc(num_vars, sizeof(int));
     int *state2 = calloc(num_vars, sizeof(int));
@@ -433,7 +432,8 @@ TEST_ONCE(fdr_state_pool_segments)
         assert(id == (pddl_state_id_t)i);
         pddlFDRStatePoolStat(&sp, &stat);
         assert(stat.segments == (size_t)(i / 1024 + 1));
-        assert(stat.states_bytes == stat.segments * (4096ul << 10));
+        assert(pddlSegVecCapacity(&sp.states.el) == stat.segments * 1024);
+        assert(stat.states_bytes >= stat.segments * (4096ul << 10));
     }
 
     for (int i = 0; i < num; ++i){

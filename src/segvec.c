@@ -714,3 +714,49 @@ TEST_PANIC_ONCE(segvec_panic_pop_n_negative)
     (void)pddlSegVecPush(&sv, NULL);
     pddlSegVecPopN(&sv, -1);
 }
+
+/*
+ * Truncate keeps exactly the given number of elements (truncating to the
+ * current size does nothing), keeps the memory, and the removed elements
+ * are initialized again when they become part of the vector again.
+ */
+TEST_ONCE(segvec_truncate)
+{
+    for (int exp = 0; exp <= 1; ++exp){
+        int init = -1;
+        pddl_segvec_t sv;
+        pddlSegVecInitDefault(&sv, sizeof(int), exp, 4, &init, NULL, NULL);
+        fillInts(&sv, 100);
+        size_t capacity = pddlSegVecCapacity(&sv);
+
+        pddlSegVecTruncate(&sv, 100);
+        assert(pddlSegVecSize(&sv) == 100);
+        checkInts(&sv, 100);
+
+        pddlSegVecTruncate(&sv, 40);
+        assert(pddlSegVecSize(&sv) == 40);
+        assert(pddlSegVecCapacity(&sv) == capacity);
+        assert(pddlSegVecGetConst(&sv, 40) == NULL);
+        checkInts(&sv, 40);
+
+        // the removed elements are initialized again
+        int *el = pddlSegVecPush(&sv, NULL);
+        assert(*el == -1);
+        assert(pddlSegVecSize(&sv) == 41);
+
+        pddlSegVecTruncate(&sv, 0);
+        assert(pddlSegVecSize(&sv) == 0);
+        assert(pddlSegVecTop(&sv) == NULL);
+        assert(pddlSegVecCapacity(&sv) == capacity);
+        pddlSegVecFree(&sv);
+    }
+}
+
+/* Truncating to a size greater than the size of the vector panics. */
+TEST_PANIC_ONCE(segvec_panic_truncate_too_big)
+{
+    pddl_segvec_t sv;
+    pddlSegVecInit(&sv, sizeof(int), pddl_true, 8);
+    (void)pddlSegVecPush(&sv, NULL);
+    pddlSegVecTruncate(&sv, 2);
+}

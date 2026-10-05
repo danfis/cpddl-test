@@ -48,7 +48,7 @@ TEST(strips_state_space_insert, strips_state_space)
     pddl_state_id_t init_id
             = pddlStripsStateSpaceInsert(&space, &C.strips.init, NULL);
     assert(init_id == 0);
-    assert(space.num_states == 1);
+    assert(pddlStripsStateSpaceNumStates(&space) == 1);
     assertDefaults(&space, init_id, &node);
 
     // Insert the successor state of every operator applicable in the
@@ -68,35 +68,37 @@ TEST(strips_state_space_insert, strips_state_space)
             continue;
         pddlStripsOpApplyOnState(op, &C.strips.init, &succ);
 
-        int prev_num_states = space.num_states;
+        int prev_num_states = pddlStripsStateSpaceNumStates(&space);
         pddl_state_id_t sid = pddlStripsStateSpaceInsert(&space, &succ, NULL);
         int is_dup = 0;
         for (int i = 0; i < num && !is_dup; ++i){
             if (pddlISetEq(&state[i], &succ)){
                 // Duplicates return the stored ID and do not add a state
                 assert(sid == state_id[i]);
-                assert(space.num_states == prev_num_states);
+                assert(pddlStripsStateSpaceNumStates(&space)
+                            == prev_num_states);
                 is_dup = 1;
             }
         }
         if (!is_dup){
             // New states get consecutive IDs and the default search data
             assert(sid == (pddl_state_id_t)prev_num_states);
-            assert(space.num_states == prev_num_states + 1);
+            assert(pddlStripsStateSpaceNumStates(&space)
+                        == prev_num_states + 1);
             assertDefaults(&space, sid, &node);
             pddlISetInit(&state[num]);
             pddlISetSet(&state[num], &succ);
             state_id[num++] = sid;
         }
     }
-    assert(space.num_states == num);
+    assert(pddlStripsStateSpaceNumStates(&space) == num);
 
     // Re-inserting every state returns the same ID and adds nothing
     for (int i = 0; i < num; ++i){
         assert(pddlStripsStateSpaceInsert(&space, &state[i], NULL)
                     == state_id[i]);
     }
-    assert(space.num_states == num);
+    assert(pddlStripsStateSpaceNumStates(&space) == num);
 
     // Get() returns a copy of the stored state
     for (int i = 0; i < num; ++i){
@@ -104,7 +106,7 @@ TEST(strips_state_space_insert, strips_state_space)
         assert(pddlISetEq(&node.state, &state[i]));
     }
 
-    printf("states: %d\n", space.num_states);
+    printf("states: %d\n", pddlStripsStateSpaceNumStates(&space));
 
     for (int i = 0; i < num; ++i)
         pddlISetFree(&state[i]);
@@ -192,7 +194,8 @@ TEST(strips_state_space_node, strips_state_space)
     assert(pddlStripsStateSpaceInsert(&space, &C.strips.init, NULL)
                 == init_id);
 
-    printf("states: %d successors: %d\n", space.num_states, num_succ);
+    printf("states: %d successors: %d\n",
+           pddlStripsStateSpaceNumStates(&space), num_succ);
 
     pddlISetFree(&succ);
     pddlStripsStateSpaceNodeFree(&node);
@@ -221,7 +224,7 @@ TEST(strips_state_space_bfs, strips_state_space)
     pddl_state_id_t goal_id = PDDL_NO_STATE_ID;
     PDDL_ISET(succ);
     for (pddl_state_id_t sid = 0;
-            sid < (pddl_state_id_t)space.num_states
+            sid < (pddl_state_id_t)pddlStripsStateSpaceNumStates(&space)
                 && expanded < BFS_MAX_EXPANSIONS;
             ++sid){
         pddlStripsStateSpaceGet(&space, sid, &cur);
@@ -259,7 +262,8 @@ TEST(strips_state_space_bfs, strips_state_space)
     // reached from a state with a smaller ID
     int num_closed = 0;
     for (pddl_state_id_t sid = 0;
-            sid < (pddl_state_id_t)space.num_states; ++sid){
+            sid < (pddl_state_id_t)pddlStripsStateSpaceNumStates(&space);
+            ++sid){
         pddlStripsStateSpaceGetNoState(&space, sid, &next);
         assert(next.status != PDDL_STRIPS_STATE_SPACE_STATUS_NEW);
         if (next.status == PDDL_STRIPS_STATE_SPACE_STATUS_CLOSED)
@@ -273,12 +277,13 @@ TEST(strips_state_space_bfs, strips_state_space)
     assert(num_closed == expanded);
 
     printf("states: %d expanded: %d goal: %s\n",
-           space.num_states, expanded,
+           pddlStripsStateSpaceNumStates(&space), expanded,
            goal_id != PDDL_NO_STATE_ID ? "reached" : "not reached");
 
     if (goal_id != PDDL_NO_STATE_ID){
         // Backtrack the plan and verify every step of the path
-        int *plan_op = calloc(space.num_states, sizeof(*plan_op));
+        int *plan_op = calloc(pddlStripsStateSpaceNumStates(&space),
+                              sizeof(*plan_op));
         int plan_len = 0;
         int plan_cost = 0;
         pddlStripsStateSpaceGetNoState(&space, goal_id, &next);
@@ -323,7 +328,7 @@ TEST(strips_state_space_once_basic, strips_state_space_once)
 
     // Init/Free round-trip of an empty state space
     pddlStripsStateSpaceInit(&space, 0, &err);
-    assert(space.num_states == 0);
+    assert(pddlStripsStateSpaceNumStates(&space) == 0);
     assert(pddlStripsStateSpaceFluentSize(&space) == 0);
     pddlStripsStateSpaceFree(&space);
 
@@ -348,7 +353,7 @@ TEST(strips_state_space_once_basic, strips_state_space_once)
         pddl_state_id_t sid
                 = pddlStripsStateSpaceInsert(&space, &set[i], NULL);
         assert(sid == (pddl_state_id_t)i);
-        assert(space.num_states == i + 1);
+        assert(pddlStripsStateSpaceNumStates(&space) == i + 1);
         assertDefaults(&space, sid, &node);
         // With fluent_size == 0 states have no numeric part
         assert(node.numeric_state_id == -1);
@@ -357,7 +362,7 @@ TEST(strips_state_space_once_basic, strips_state_space_once)
         assert(pddlStripsStateSpaceInsert(&space, &set[i], NULL)
                     == (pddl_state_id_t)i);
     }
-    assert(space.num_states == 5);
+    assert(pddlStripsStateSpaceNumStates(&space) == 5);
 
     // Round-trip of the search-data extremes: op_id is stored in a
     // signed 30-bit bitfield and status in a 2-bit bitfield
@@ -399,7 +404,7 @@ TEST(strips_state_space_once_basic, strips_state_space_once)
     assert(pddlISetEq(&node.state, &set[1]));
     assert(pddlStripsStateSpaceInsert(&space, &set[1], NULL) == 1);
 
-    printf("states: %d\n", space.num_states);
+    printf("states: %d\n", pddlStripsStateSpaceNumStates(&space));
 
     for (int i = 0; i < 5; ++i)
         pddlISetFree(&set[i]);
@@ -427,7 +432,7 @@ TEST(strips_state_space_once_many, strips_state_space_once)
         assert(pddlStripsStateSpaceInsert(&space, &state, NULL)
                     == (pddl_state_id_t)i);
     }
-    assert(space.num_states == num_states);
+    assert(pddlStripsStateSpaceNumStates(&space) == num_states);
 
     for (int i = 0; i < num_states; ++i){
         pddlISetEmpty(&state);
@@ -441,9 +446,9 @@ TEST(strips_state_space_once_many, strips_state_space_once)
             assert(pddlISetEq(&node.state, &state));
         }
     }
-    assert(space.num_states == num_states);
+    assert(pddlStripsStateSpaceNumStates(&space) == num_states);
 
-    printf("states: %d\n", space.num_states);
+    printf("states: %d\n", pddlStripsStateSpaceNumStates(&space));
 
     pddlISetFree(&state);
     pddlStripsStateSpaceNodeFree(&node);
@@ -464,8 +469,8 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     pddl_strips_state_space_t space;
     pddlStripsStateSpaceInit(&space, fluent_size, &err);
     assert(pddlStripsStateSpaceFluentSize(&space) == fluent_size);
-    assert(space.num_states == 0);
-    assert(space.num_numeric_states == 0);
+    assert(pddlStripsStateSpaceNumStates(&space) == 0);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 0);
 
     pddl_strips_state_space_node_t node;
     pddlStripsStateSpaceNodeInit(&node, &space);
@@ -480,16 +485,16 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     // the default search data
     pddl_state_id_t sid = pddlStripsStateSpaceInsert(&space, &set, num);
     assert(sid == 0);
-    assert(space.num_states == 1);
-    assert(space.num_numeric_states == 1);
+    assert(pddlStripsStateSpaceNumStates(&space) == 1);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 1);
     assertDefaults(&space, sid, &node);
     assert(node.numeric_state_id == 0);
 
     // Re-inserting the identical state adds neither a state nor a
     // numeric state
     assert(pddlStripsStateSpaceInsert(&space, &set, num) == 0);
-    assert(space.num_states == 1);
-    assert(space.num_numeric_states == 1);
+    assert(pddlStripsStateSpaceNumStates(&space) == 1);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 1);
 
     // The same fact set with a different numeric state is a new state
     pddl_num_t num2[3];
@@ -497,8 +502,8 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     pddlNumSetInt(&num2[2], 100);
     pddl_state_id_t sid2 = pddlStripsStateSpaceInsert(&space, &set, num2);
     assert(sid2 == 1);
-    assert(space.num_states == 2);
-    assert(space.num_numeric_states == 2);
+    assert(pddlStripsStateSpaceNumStates(&space) == 2);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 2);
     pddlStripsStateSpaceGetNoState(&space, sid2, &node);
     assert(node.numeric_state_id == 1);
 
@@ -508,8 +513,8 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     pddlISetAdd(&set2, 1);
     pddl_state_id_t sid3 = pddlStripsStateSpaceInsert(&space, &set2, num);
     assert(sid3 == 2);
-    assert(space.num_states == 3);
-    assert(space.num_numeric_states == 2);
+    assert(pddlStripsStateSpaceNumStates(&space) == 3);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 2);
     pddlStripsStateSpaceGetNoState(&space, sid3, &node);
     assert(node.numeric_state_id == 0);
 
@@ -517,8 +522,8 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     PDDL_ISET(empty);
     pddl_state_id_t sid4 = pddlStripsStateSpaceInsert(&space, &empty, num2);
     assert(sid4 == 3);
-    assert(space.num_states == 4);
-    assert(space.num_numeric_states == 2);
+    assert(pddlStripsStateSpaceNumStates(&space) == 4);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 2);
     pddlStripsStateSpaceGetNoState(&space, sid4, &node);
     assert(node.numeric_state_id == 1);
 
@@ -540,7 +545,8 @@ TEST(strips_state_space_once_numeric_basic, strips_state_space_once)
     assert(pddlStripsStateSpaceInsert(&space, &set, num) == 0);
 
     printf("states: %d numeric states: %d\n",
-           space.num_states, space.num_numeric_states);
+           pddlStripsStateSpaceNumStates(&space),
+           pddlStripsStateSpaceNumNumericStates(&space));
 
     pddlISetFree(&set);
     pddlISetFree(&set2);
@@ -571,8 +577,8 @@ TEST(strips_state_space_once_numeric_int_flt, strips_state_space_once)
     pddl_state_id_t sid_flt = pddlStripsStateSpaceInsert(&space, &set, &vflt);
     assert(sid_int == 0);
     assert(sid_flt == 1);
-    assert(space.num_states == 2);
-    assert(space.num_numeric_states == 2);
+    assert(pddlStripsStateSpaceNumStates(&space) == 2);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 2);
 
     // Both variants round-trip with their type preserved
     pddl_num_t out;
@@ -592,11 +598,12 @@ TEST(strips_state_space_once_numeric_int_flt, strips_state_space_once)
     pddl_state_id_t sid_zero = pddlStripsStateSpaceInsert(&space, &set, &vzero);
     assert(sid_zero == 2);
     assert(pddlStripsStateSpaceInsert(&space, &set, &vnegzero) == sid_zero);
-    assert(space.num_states == 3);
-    assert(space.num_numeric_states == 3);
+    assert(pddlStripsStateSpaceNumStates(&space) == 3);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == 3);
 
     printf("states: %d numeric states: %d\n",
-           space.num_states, space.num_numeric_states);
+           pddlStripsStateSpaceNumStates(&space),
+           pddlStripsStateSpaceNumNumericStates(&space));
 
     pddlISetFree(&set);
     pddlStripsStateSpaceNodeFree(&node);
@@ -626,8 +633,8 @@ TEST(strips_state_space_once_numeric_many, strips_state_space_once)
         pddlStripsStateSpaceGetNoState(&space, sid, &node);
         assert(node.numeric_state_id == i);
     }
-    assert(space.num_states == num_states);
-    assert(space.num_numeric_states == num_states);
+    assert(pddlStripsStateSpaceNumStates(&space) == num_states);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == num_states);
 
     for (int i = 0; i < num_states; ++i){
         setNumStateInt(num, fluent_size, i);
@@ -639,11 +646,12 @@ TEST(strips_state_space_once_numeric_many, strips_state_space_once)
             assert(pddlNumArrExactEq(out, num, fluent_size));
         }
     }
-    assert(space.num_states == num_states);
-    assert(space.num_numeric_states == num_states);
+    assert(pddlStripsStateSpaceNumStates(&space) == num_states);
+    assert(pddlStripsStateSpaceNumNumericStates(&space) == num_states);
 
     printf("states: %d numeric states: %d\n",
-           space.num_states, space.num_numeric_states);
+           pddlStripsStateSpaceNumStates(&space),
+           pddlStripsStateSpaceNumNumericStates(&space));
 
     pddlISetFree(&set);
     pddlStripsStateSpaceNodeFree(&node);
@@ -734,7 +742,7 @@ TEST_PANIC_ONCE(strips_state_space_get_unassigned)
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
     initSpaceWithTwoStates(&space, &err);
-    accessState(&space, 0, space.num_states);
+    accessState(&space, 0, pddlStripsStateSpaceNumStates(&space));
 }
 
 TEST_PANIC_ONCE(strips_state_space_get_no_state_unassigned)
@@ -742,7 +750,7 @@ TEST_PANIC_ONCE(strips_state_space_get_no_state_unassigned)
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
     initSpaceWithTwoStates(&space, &err);
-    accessState(&space, 1, space.num_states);
+    accessState(&space, 1, pddlStripsStateSpaceNumStates(&space));
 }
 
 TEST_PANIC_ONCE(strips_state_space_set_unassigned)
@@ -750,7 +758,7 @@ TEST_PANIC_ONCE(strips_state_space_set_unassigned)
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_strips_state_space_t space;
     initSpaceWithTwoStates(&space, &err);
-    accessState(&space, 2, space.num_states);
+    accessState(&space, 2, pddlStripsStateSpaceNumStates(&space));
 }
 
 // PDDL_NO_STATE_ID panics with any of the access methods

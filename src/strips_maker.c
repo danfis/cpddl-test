@@ -82,7 +82,8 @@ static void printNumState(const char *prefix,
     int offset = pddlStripsMakerNonStaticFluentOffset(sm);
     char buf[128];
     for (int i = 0; i < size; ++i){
-        const pddl_ground_atom_t *ga = sm->fluent.atom[offset + i];
+        const pddl_ground_atom_t *ga
+                = pddlGroundAtomsGetConst(&sm->fluent, offset + i);
         printf(" (%s", C.pddl.func.pred[ga->pred].name);
         for (int j = 0; j < ga->arity; ++j)
             printf(" %s", C.pddl.obj.obj[ga->arg[j]].name);
@@ -107,7 +108,8 @@ static void sformatNumEff(char *buf, int buf_size, const char *prefix,
     for (int i = 0; i < size; ++i){
         if (pddlNumCmp(num_state + i, num_eff + i) == 0)
             continue;
-        const pddl_ground_atom_t *ga = sm->fluent.atom[offset + i];
+        const pddl_ground_atom_t *ga
+                = pddlGroundAtomsGetConst(&sm->fluent, offset + i);
         w += snprintf(buf + w, buf_size - w, " (%s",
                       C.pddl.func.pred[ga->pred].name);
         for (int j = 0; j < ga->arity; ++j){
@@ -386,15 +388,15 @@ static void closeAtomsUnderEffects(pddl_strips_maker_t *sm)
     }
 
     int prev_size = -1;
-    while (prev_size != sm->ground_atom.atom_size){
-        prev_size = sm->ground_atom.atom_size;
+    while (prev_size != pddlGroundAtomsSize(&sm->ground_atom)){
+        prev_size = pddlGroundAtomsSize(&sm->ground_atom);
 
         PDDL_ISET(state);
-        for (int i = 0; i < sm->ground_atom.atom_size; ++i)
+        for (int i = 0; i < pddlGroundAtomsSize(&sm->ground_atom); ++i)
             pddlISetAdd(&state, i);
 
         pddl_strips_maker_eff_t eff = PDDL_STRIPS_MAKER_EFF_INIT;
-        for (int i = 0; i < sm->num_action_args; ++i){
+        for (int i = 0; i < pddlStripsMakerNumActionArgs(sm); ++i){
             const pddl_ground_action_args_t *ga;
             ga = pddlStripsMakerActionArgs(sm, i);
             const pddl_action_t *action
@@ -447,8 +449,8 @@ TEST(strips_maker_atoms, strips_maker)
         assert(ga->pred == a->pred);
         assert(ga->arity == a->arity);
     }
-    assert(sm.ground_atom.atom_size == num_atoms);
-    assert(sm.ground_atom_static.atom_size == num_static);
+    assert(pddlGroundAtomsSize(&sm.ground_atom) == num_atoms);
+    assert(pddlGroundAtomsSize(&sm.ground_atom_static) == num_static);
 
     // The second identical pass must only deduplicate
     PDDL_INIT_STATE_FOR_EACH_ATOM(&C.pddl.init, a){
@@ -460,8 +462,8 @@ TEST(strips_maker_atoms, strips_maker)
         }
         assert(!is_new);
     }
-    assert(sm.ground_atom.atom_size == num_atoms);
-    assert(sm.ground_atom_static.atom_size == num_static);
+    assert(pddlGroundAtomsSize(&sm.ground_atom) == num_atoms);
+    assert(pddlGroundAtomsSize(&sm.ground_atom_static) == num_static);
 
     if (num_atoms > 0){
         // The Pred variant hits the same set as the atom variant
@@ -479,8 +481,8 @@ TEST(strips_maker_atoms, strips_maker)
                                               ga0->arity, &is_new);
         assert(is_new);
         assert(ga->id == num_static);
-        assert(sm.ground_atom.atom_size == num_atoms);
-        assert(sm.ground_atom_static.atom_size == num_static + 1);
+        assert(pddlGroundAtomsSize(&sm.ground_atom) == num_atoms);
+        assert(pddlGroundAtomsSize(&sm.ground_atom_static) == num_static + 1);
     }
 
     printf("atoms: %d static: %d\n", num_atoms, num_static);
@@ -496,8 +498,9 @@ TEST(strips_maker_init, strips_maker)
     PDDL_ISET(static_facts);
     int ret = pddlStripsMakerAddInitAndCollect(&sm, &facts, &static_facts);
     assert(ret == 0);
-    assert(pddlISetSize(&facts) == sm.ground_atom.atom_size);
-    assert(pddlISetSize(&static_facts) == sm.ground_atom_static.atom_size);
+    assert(pddlISetSize(&facts) == pddlGroundAtomsSize(&sm.ground_atom));
+    assert(pddlISetSize(&static_facts)
+                == pddlGroundAtomsSize(&sm.ground_atom_static));
 
     PDDL_ISET_FOR_EACH(&facts, fid){
         const pddl_ground_atom_t *ga
@@ -506,7 +509,8 @@ TEST(strips_maker_init, strips_maker)
         assert(!pddlIsPredStatic(&C.pddl, ga->pred));
     }
     PDDL_ISET_FOR_EACH(&static_facts, fid){
-        const pddl_ground_atom_t *ga = sm.ground_atom_static.atom[fid];
+        const pddl_ground_atom_t *ga
+                = pddlGroundAtomsGetConst(&sm.ground_atom_static, fid);
         assert(ga->id == fid);
         assert(pddlIsPredStatic(&C.pddl, ga->pred));
     }
@@ -537,11 +541,11 @@ TEST(strips_maker_init, strips_maker)
         assert(pddlNumCmp(&fd->init_val, &val) == 0);
         ++num_fluents;
     }
-    assert(num_fluents == sm.fluent.atom_size);
+    assert(num_fluents == pddlGroundAtomsSize(&sm.fluent));
 
     // The fluents are ordered by their types: static fluents first, then
     // the action-cost fluent, then the non-static fluents
-    for (int i = 0; i < sm.fluent.atom_size; ++i){
+    for (int i = 0; i < pddlGroundAtomsSize(&sm.fluent); ++i){
         const pddl_fluent_data_t *fd = pddlSegVecGetConst(&sm.fluent_data, i);
         if (i < sm.num_static_fluent){
             assert(fd->type == PDDL_STRIPS_MAKER_FLUENT_STATIC);
@@ -555,7 +559,7 @@ TEST(strips_maker_init, strips_maker)
                 == sm.num_static_fluent + sm.has_action_cost_fluent);
     assert(pddlStripsMakerNonStaticFluentOffset(&sm)
                     + pddlStripsMakerNonStaticFluentSize(&sm)
-                == sm.fluent.atom_size);
+                == pddlGroundAtomsSize(&sm.fluent));
 
     // The initial numeric state matches the initial values of the
     // non-static fluents
@@ -578,15 +582,17 @@ TEST(strips_maker_init, strips_maker)
     pddlStripsMakerInit(&sm2, &C.pddl);
     ret = pddlStripsMakerAddInit(&sm2);
     assert(ret == 0);
-    assert(sm2.ground_atom.atom_size == sm.ground_atom.atom_size);
-    assert(sm2.ground_atom_static.atom_size
-                == sm.ground_atom_static.atom_size);
-    assert(sm2.fluent.atom_size == sm.fluent.atom_size);
+    assert(pddlGroundAtomsSize(&sm2.ground_atom)
+                == pddlGroundAtomsSize(&sm.ground_atom));
+    assert(pddlGroundAtomsSize(&sm2.ground_atom_static)
+                == pddlGroundAtomsSize(&sm.ground_atom_static));
+    assert(pddlGroundAtomsSize(&sm2.fluent) == pddlGroundAtomsSize(&sm.fluent));
     pddlStripsMakerFree(&sm2);
 
     printf("init atoms: %d static: %d fluents: %d\n",
-           sm.ground_atom.atom_size, sm.ground_atom_static.atom_size,
-           sm.fluent.atom_size);
+           pddlGroundAtomsSize(&sm.ground_atom),
+           pddlGroundAtomsSize(&sm.ground_atom_static),
+           pddlGroundAtomsSize(&sm.fluent));
 
     pddlISetFree(&facts);
     pddlISetFree(&static_facts);
@@ -641,7 +647,7 @@ TEST(strips_maker_actions, strips_maker)
         }
     }
 
-    assert(sm.num_action_args == num);
+    assert(pddlStripsMakerNumActionArgs(&sm) == num);
     for (int i = 0; i < num; ++i)
         assert(pddlStripsMakerActionArgs(&sm, i)->id == i);
 
@@ -655,7 +661,8 @@ TEST(strips_maker_eff_in_state, strips_maker)
     PDDL_ISET(init_facts);
     walk(&sm, 5, 3, &init_facts);
     printf("ground atoms: %d groundings: %d\n",
-           sm.ground_atom.atom_size, sm.num_action_args);
+           pddlGroundAtomsSize(&sm.ground_atom),
+           pddlStripsMakerNumActionArgs(&sm));
     pddlISetFree(&init_facts);
     pddlStripsMakerFree(&sm);
 }
@@ -709,7 +716,7 @@ TEST(strips_maker_make_strips, strips_maker)
 
     // Every non-static ground atom became a fact, and the facts are
     // sorted by name (so fact IDs differ from ground atom IDs in general)
-    assert(s0.fact.fact_size == sm.ground_atom.atom_size);
+    assert(s0.fact.fact_size == pddlGroundAtomsSize(&sm.ground_atom));
     for (int i = 1; i < s0.fact.fact_size; ++i)
         assert(strcmp(s0.fact.fact[i - 1]->name, s0.fact.fact[i]->name) < 0);
     assert(pddlISetSize(&s0.init) == pddlISetSize(&init_facts));
@@ -731,11 +738,12 @@ TEST(strips_maker_make_strips, strips_maker)
     ret = pddlStripsMakerMakeStrips(&sm, &cfg, &s1, &C.err);
     assert(ret == 0);
     assert(s1.fact.fact_size
-                == sm.ground_atom.atom_size
-                        + sm.ground_atom_static.atom_size);
+                == pddlGroundAtomsSize(&sm.ground_atom)
+                        + pddlGroundAtomsSize(&sm.ground_atom_static));
     // All static atoms came from the initial state
     assert(pddlISetSize(&s1.init)
-                == pddlISetSize(&s0.init) + sm.ground_atom_static.atom_size);
+                == pddlISetSize(&s0.init)
+                        + pddlGroundAtomsSize(&sm.ground_atom_static));
     assert(s1.op.op_size >= s0.op.op_size);
     printf("B: facts %d ops %d init %d\n", s1.fact.fact_size,
            s1.op.op_size, pddlISetSize(&s1.init));
@@ -773,7 +781,7 @@ TEST(strips_maker_make_strips, strips_maker)
 
     // A grounding with non-zero action_id2 is skipped whenever the same
     // grounding with action_id2 == 0 exists
-    if (sm.num_action_args > 0){
+    if (pddlStripsMakerNumActionArgs(&sm) > 0){
         const pddl_ground_action_args_t *g0
                 = pddlStripsMakerActionArgs(&sm, 0);
         int is_new;
@@ -812,7 +820,7 @@ TEST(strips_maker_numeric, pddl)
     assert(ret == 0);
 
     // The fluents are ordered by their types
-    for (int i = 0; i < sm.fluent.atom_size; ++i){
+    for (int i = 0; i < pddlGroundAtomsSize(&sm.fluent); ++i){
         const pddl_fluent_data_t *fd = pddlSegVecGetConst(&sm.fluent_data, i);
         if (i < sm.num_static_fluent){
             assert(fd->type == PDDL_STRIPS_MAKER_FLUENT_STATIC);
@@ -825,9 +833,9 @@ TEST(strips_maker_numeric, pddl)
 
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
     int offset = pddlStripsMakerNonStaticFluentOffset(&sm);
-    assert(offset + num_state_size == sm.fluent.atom_size);
+    assert(offset + num_state_size == pddlGroundAtomsSize(&sm.fluent));
     printf("fluents: %d static: %d cost: %d non-static: %d\n",
-           sm.fluent.atom_size, sm.num_static_fluent,
+           pddlGroundAtomsSize(&sm.fluent), sm.num_static_fluent,
            sm.has_action_cost_fluent, num_state_size);
 
     pddl_num_t *num_state = NULL;
@@ -888,12 +896,13 @@ static void dumpInitFluents(const char *header,
     assert(ret == 0);
 
     printf("%s\n", header);
-    int num = sm.fluent.atom_size;
+    int num = pddlGroundAtomsSize(&sm.fluent);
     if (num > 0){
         char (*line)[LINE_SIZE] = calloc(num, LINE_SIZE);
         char buf[128];
         for (int i = 0; i < num; ++i){
-            const pddl_ground_atom_t *ga = sm.fluent.atom[i];
+            const pddl_ground_atom_t *ga
+                    = pddlGroundAtomsGetConst(&sm.fluent, i);
             const pddl_fluent_data_t *fd
                     = pddlSegVecGetConst(&sm.fluent_data, ga->id);
             char type = '?';
@@ -948,7 +957,7 @@ TEST(strips_maker_once_fluents, strips_maker_once)
     assert(ret == 0);
 
     // The fluents are stored in the order of their types
-    for (int i = 0; i < sm.fluent.atom_size; ++i){
+    for (int i = 0; i < pddlGroundAtomsSize(&sm.fluent); ++i){
         const pddl_fluent_data_t *fd = pddlSegVecGetConst(&sm.fluent_data, i);
         if (i < sm.num_static_fluent){
             assert(fd->type == PDDL_STRIPS_MAKER_FLUENT_STATIC);
@@ -962,7 +971,7 @@ TEST(strips_maker_once_fluents, strips_maker_once)
     // The initial numeric state matches the stored initial values
     int num_state_size = pddlStripsMakerNonStaticFluentSize(&sm);
     int offset = pddlStripsMakerNonStaticFluentOffset(&sm);
-    assert(offset + num_state_size == sm.fluent.atom_size);
+    assert(offset + num_state_size == pddlGroundAtomsSize(&sm.fluent));
     if (num_state_size > 0){
         pddl_num_t *num_state = calloc(num_state_size,
                                            sizeof(pddl_num_t));
@@ -976,12 +985,12 @@ TEST(strips_maker_once_fluents, strips_maker_once)
     }
 
     // A repeated AddInit is idempotent
-    int num_fluents = sm.fluent.atom_size;
+    int num_fluents = pddlGroundAtomsSize(&sm.fluent);
     int num_static_fluent = sm.num_static_fluent;
     int has_action_cost_fluent = sm.has_action_cost_fluent;
     ret = pddlStripsMakerAddInit(&sm);
     assert(ret == 0);
-    assert(sm.fluent.atom_size == num_fluents);
+    assert(pddlGroundAtomsSize(&sm.fluent) == num_fluents);
     assert(sm.num_static_fluent == num_static_fluent);
     assert(sm.has_action_cost_fluent == has_action_cost_fluent);
 
@@ -1175,7 +1184,7 @@ TEST(strips_maker_once_eval_num_op, strips_maker_once)
                                                &fluent_id, &val, &C.err);
                 assert(ret == 0);
                 assert(fluent_id >= offset);
-                assert(fluent_id < sm.fluent.atom_size);
+                assert(fluent_id < pddlGroundAtomsSize(&sm.fluent));
                 int idx = pddlStripsMakerNumStateIndex(&sm, fluent_id);
                 printf("(%s %s): (value %s) %s -> %s\n",
                        a->name, pddl.obj.obj[obj].name,

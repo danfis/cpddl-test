@@ -73,6 +73,8 @@ TESTS += plan
 TESTS += gaifman
 TESTS += set
 TESTS += segvec
+TESTS += slab
+TESTS += idx_set
 TESTS += splaytree
 TESTS += open_list
 TESTS += opts
@@ -84,6 +86,7 @@ TESTS += fm_num_eval
 TESTS += fm_num_exp_fold
 TESTS += pddl_props
 TESTS += pddl_init_state
+TESTS += hfunc
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
