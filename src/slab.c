@@ -64,8 +64,8 @@ static unsigned char stampByte(unsigned seed, size_t i)
 /* Fills the slab ID with a pattern given by SEED. */
 static void stamp(pddl_slab_t *s, uint32_t id, unsigned seed)
 {
-    unsigned char *b = pddlSlabAt(s, id);
-    size_t size = pddlSlabBytes(s, id);
+    size_t size;
+    unsigned char *b = pddlSlabPtrSize(s, id, &size);
     for (size_t i = 0; i < size; ++i)
         b[i] = stampByte(seed, i);
 }
@@ -73,8 +73,8 @@ static void stamp(pddl_slab_t *s, uint32_t id, unsigned seed)
 /* Checks the pattern written by stamp(). */
 static void checkStamp(const pddl_slab_t *s, uint32_t id, unsigned seed)
 {
-    const unsigned char *b = pddlSlabAt(s, id);
-    size_t size = pddlSlabBytes(s, id);
+    size_t size;
+    const unsigned char *b = pddlSlabPtrSize(s, id, &size);
     for (size_t i = 0; i < size; ++i)
         assert(b[i] == stampByte(seed, i));
 }
@@ -82,8 +82,8 @@ static void checkStamp(const pddl_slab_t *s, uint32_t id, unsigned seed)
 /* Checks that the slab ID is zeroed. */
 static void checkZero(const pddl_slab_t *s, uint32_t id)
 {
-    const unsigned char *b = pddlSlabAt(s, id);
-    size_t size = pddlSlabBytes(s, id);
+    size_t size;
+    const unsigned char *b = pddlSlabPtrSize(s, id, &size);
     for (size_t i = 0; i < size; ++i)
         assert(b[i] == 0);
 }
@@ -109,6 +109,8 @@ static uint32_t allocCheck(pddl_slab_t *s, int cls, uint32_t idx)
 /* Expected value of pddlSlabAllocBytes() computed from the arenas. */
 static size_t expAllocBytes(const pddl_slab_t *s)
 {
+    if (s->arena == NULL)
+        return 0;
     size_t bytes = sizeof(pddl_slab_arena_t) * (size_t)s->num_classes;
     for (int cls = 0; cls < s->num_classes; ++cls)
         bytes += pddlSegVecAllocBytes(&s->arena[cls].slab);
@@ -117,8 +119,9 @@ static size_t expAllocBytes(const pddl_slab_t *s)
 
 /*
  * IDs encode the class in the top 5 bits and the index within the class in
- * the lower 27 bits; allocated slabs get IDs of their class, and the size
- * of a slab is derived from the class of its ID.
+ * the lower 27 bits; allocated slabs get IDs of their class, the size of a
+ * slab is derived from the class of its ID, and pddlSlabPtrSize() returns
+ * the same pointer and size as pddlSlabPtr() and pddlSlabBytes().
  */
 TEST_ONCE(slab_id_encoding)
 {
@@ -149,7 +152,11 @@ TEST_ONCE(slab_id_encoding)
             assert(id == (((uint32_t)cls << 27) | i));
             assert(pddlSlabBytes(&s, id) == ((size_t)12 << cls));
             assert(pddlSlabBytes(&s, id) == pddlSlabClassBytes(&s, cls));
-            ptr[cls][i] = pddlSlabAt(&s, id);
+            ptr[cls][i] = pddlSlabPtr(&s, id);
+            size_t size = 0;
+            void *p = pddlSlabPtrSize(&s, id, &size);
+            assert(p == ptr[cls][i]);
+            assert(size == pddlSlabBytes(&s, id));
         }
     }
     // Slabs with the same index in different classes are different slabs
@@ -163,10 +170,11 @@ TEST_ONCE(slab_id_encoding)
 }
 
 /*
- * A freshly initialized allocator initializes all arenas, but allocates
- * only the array of arenas (empty segmented vectors allocate nothing), and
- * it reports the configured number of classes and sizes of slabs; Reset and
- * Free work on an untouched allocator.
+ * A freshly initialized allocator allocates nothing and it reports the
+ * configured number of classes and sizes of slabs; Reset and Free work on
+ * an untouched allocator. The first allocation allocates the array of
+ * arenas and initializes all arenas, but the arenas of the other classes
+ * allocate nothing (empty segmented vectors allocate nothing).
  */
 TEST_ONCE(slab_init_empty)
 {
@@ -175,22 +183,12 @@ TEST_ONCE(slab_init_empty)
             pddl_slab_t s;
             pddlSlabInit(&s, cfgs[ci].slab_bytes, NUM_CLASSES, exp,
                          cfgs[ci].first_segm_bytes);
-            // Only the array of arenas is allocated
-            assert(s.arena != NULL);
+            // Nothing is allocated
+            assert(s.arena == NULL);
             assert(s.exp == exp);
             assert(pddlSlabNumClasses(&s) == NUM_CLASSES);
-            assert(pddlSlabAllocBytes(&s)
-                    == sizeof(pddl_slab_arena_t) * NUM_CLASSES);
+            assert(pddlSlabAllocBytes(&s) == 0);
             for (int cls = 0; cls < NUM_CLASSES; ++cls){
-                const pddl_segvec_t *sv = &s.arena[cls].slab;
-                assert(pddlSegVecElSize(sv) == pddlSlabClassBytes(&s, cls));
-                assert(sv->exp == exp);
-                assert(pddlSegVecSegmentSize(sv, 0)
-                        == expFirstSegmSize(pddlSlabClassBytes(&s, cls),
-                                            cfgs[ci].first_segm_bytes));
-                assert(pddlSegVecNumSegments(sv) == 0);
-                assert(pddlSegVecAllocBytes(sv) == 0);
-                assert(s.arena[cls].free_head == 0);
                 assert(pddlSlabClassBytes(&s, cls)
                         == cfgs[ci].slab_bytes << cls);
                 assert(pddlSlabNumSlabs(&s, cls) == 0);
@@ -202,9 +200,41 @@ TEST_ONCE(slab_init_empty)
                 assert(s.first_segm_bytes == cfgs[ci].first_segm_bytes);
             }
 
+            // Reset and Free work on the untouched allocator
             pddlSlabReset(&s);
+            assert(s.arena == NULL);
+            assert(pddlSlabAllocBytes(&s) == 0);
+            pddlSlabFree(&s);
+
+            // The first allocation initializes all arenas
+            pddlSlabInit(&s, cfgs[ci].slab_bytes, NUM_CLASSES, exp,
+                         cfgs[ci].first_segm_bytes);
+            const int last = NUM_CLASSES - 1;
+            (void)allocCheck(&s, last, 0);
+            assert(s.arena != NULL);
+            assert(pddlSlabNumSlabs(&s, last) == 1);
+            assert(pddlSlabAllocBytes(&s) == expAllocBytes(&s));
             assert(pddlSlabAllocBytes(&s)
-                    == sizeof(pddl_slab_arena_t) * NUM_CLASSES);
+                    > sizeof(pddl_slab_arena_t) * NUM_CLASSES);
+            for (int cls = 0; cls < last; ++cls){
+                const pddl_segvec_t *sv = &s.arena[cls].slab;
+                assert(pddlSegVecElSize(sv) == pddlSlabClassBytes(&s, cls));
+                assert(sv->exp == exp);
+                assert(pddlSegVecSegmentSize(sv, 0)
+                        == expFirstSegmSize(pddlSlabClassBytes(&s, cls),
+                                            cfgs[ci].first_segm_bytes));
+                assert(pddlSegVecNumSegments(sv) == 0);
+                assert(pddlSegVecAllocBytes(sv) == 0);
+                assert(s.arena[cls].free_head == 0);
+                assert(pddlSlabNumSlabs(&s, cls) == 0);
+            }
+
+            // Reset keeps the arenas and their memory
+            size_t bytes = pddlSlabAllocBytes(&s);
+            pddlSlabReset(&s);
+            assert(s.arena != NULL);
+            assert(pddlSlabNumSlabs(&s, last) == 0);
+            assert(pddlSlabAllocBytes(&s) == bytes);
             pddlSlabFree(&s);
         }
     }
@@ -416,7 +446,7 @@ TEST_ONCE(slab_pointer_stability)
             for (int cls = 0; cls < 2; ++cls){
                 for (uint32_t i = 0; i < 20; ++i){
                     uint32_t id = allocCheck(&s, cls, i);
-                    ptr[cls][i] = pddlSlabAt(&s, id);
+                    ptr[cls][i] = pddlSlabPtr(&s, id);
                     stamp(&s, id, seedOf(id));
                 }
             }
@@ -433,7 +463,7 @@ TEST_ONCE(slab_pointer_stability)
             for (int cls = 0; cls < 2; ++cls){
                 for (uint32_t i = 0; i < 20; ++i){
                     uint32_t id = mkId(cls, i);
-                    assert(ptr[cls][i] == pddlSlabAt(&s, id));
+                    assert(ptr[cls][i] == pddlSlabPtr(&s, id));
                     checkStamp(&s, id, seedOf(id));
                 }
             }
@@ -463,7 +493,7 @@ TEST_ONCE(slab_reset)
                 pddlSlabRelease(&s, mkId(cls, 17));
             }
             size_t bytes = pddlSlabAllocBytes(&s);
-            void *ptr0 = pddlSlabAt(&s, mkId(0, 0));
+            void *ptr0 = pddlSlabPtr(&s, mkId(0, 0));
 
             pddlSlabReset(&s);
             assert(pddlSlabAllocBytes(&s) == bytes);
@@ -477,7 +507,7 @@ TEST_ONCE(slab_reset)
                     allocCheck(&s, cls, i);
             }
             // The memory is reused
-            assert(pddlSlabAt(&s, mkId(0, 0)) == ptr0);
+            assert(pddlSlabPtr(&s, mkId(0, 0)) == ptr0);
             assert(pddlSlabAllocBytes(&s) == bytes);
 
             pddlSlabFree(&s);
@@ -648,4 +678,15 @@ TEST_PANIC_ONCE(slab_panic_release_bad_index)
     id = pddlSlabAlloc(&s, 2);
     assert(id == mkId(2, 1));
     pddlSlabRelease(&s, mkId(2, 2));
+}
+
+/*
+ * Releasing a slab of an untouched allocator (whose arenas do not exist
+ * yet) panics.
+ */
+TEST_PANIC_ONCE(slab_panic_release_untouched)
+{
+    pddl_slab_t s;
+    pddlSlabInit(&s, 8, 4, pddl_false, 0);
+    pddlSlabRelease(&s, mkId(0, 0));
 }
