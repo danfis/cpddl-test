@@ -154,12 +154,13 @@ static int runSearch(const pddl_search_config_t *cfg, pddl_search_stat_t *stat)
 }
 
 /*
- * A* with LM-cut behaves the same with the ILP state packer as with the
- * default FFD packer: the same plan cost and the same numbers of expanded,
- * evaluated, and generated states (state IDs do not depend on the
- * packing).
+ * Asserts that A* with LM-cut behaves the same with the state packer
+ * LAYOUT (with the ILP time limit TIME_LIMIT) as with the default FFD
+ * packer: the same plan cost and the same numbers of expanded, evaluated,
+ * and generated states (state IDs do not depend on the packing).
  */
-TEST_COND(search_astar_lmc_packer_ilp, search, LP)
+static void searchAStarLMCutPacker(pddl_fdr_state_packer_layout_t layout,
+                                   float time_limit)
 {
     pddl_heur_t *heur = pddlHeurLMCut(&C.fdr, &C.err);
     pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
@@ -170,16 +171,34 @@ TEST_COND(search_astar_lmc_packer_ilp, search, LP)
     pddl_search_stat_t stat_ffd;
     int cost_ffd = runSearch(&cfg, &stat_ffd);
 
-    cfg.state_packer.layout = PDDL_FDR_STATE_PACKER_LAYOUT_ILP;
-    cfg.state_packer.ilp_time_limit = 5.f;
-    pddl_search_stat_t stat_ilp;
-    int cost_ilp = runSearch(&cfg, &stat_ilp);
+    cfg.state_packer.layout = layout;
+    cfg.state_packer.ilp_time_limit = time_limit;
+    pddl_search_stat_t stat;
+    int cost = runSearch(&cfg, &stat);
 
-    assert(cost_ffd == cost_ilp);
+    assert(cost_ffd == cost);
     if (C.optimal_cost >= 0)
-        assert(cost_ilp == C.optimal_cost);
-    assert(stat_ffd.expanded == stat_ilp.expanded);
-    assert(stat_ffd.evaluated == stat_ilp.evaluated);
-    assert(stat_ffd.generated == stat_ilp.generated);
+        assert(cost == C.optimal_cost);
+    assert(stat_ffd.expanded == stat.expanded);
+    assert(stat_ffd.evaluated == stat.evaluated);
+    assert(stat_ffd.generated == stat.generated);
     pddlHeurDel(heur);
+}
+
+/*
+ * A* with LM-cut behaves the same with the ILP state packer as with the
+ * default FFD packer (see searchAStarLMCutPacker()).
+ */
+TEST_COND(search_astar_lmc_packer_ilp, search, LP)
+{
+    searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_ILP, 5.f);
+}
+
+/*
+ * A* with LM-cut behaves the same with the min-cut tree state packer as
+ * with the default FFD packer (see searchAStarLMCutPacker()).
+ */
+TEST_COND(search_astar_lmc_packer_min_cut_tree, search, LP)
+{
+    searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_MIN_CUT_TREE, 1.f);
 }
