@@ -2762,6 +2762,7 @@ gplan-astar-pot-A = ["gplan", "astar", "pot", "stdout", "--pot-A"]
 gplan-astar-lmc-state-packer-ffd = ["gplan", "astar", "lmc", "stdout", "--state-packer", "ffd"]
 gplan-astar-lmc-state-packer-ilp = ["gplan", "astar", "lmc", "stdout", "--state-packer", "ilp", "--state-packer-ilp-time-limit", "10"]
 gplan-astar-lmc-state-packer-min-cut-tree = ["gplan", "astar", "lmc", "stdout", "--state-packer", "min-cut-tree", "--state-packer-ilp-time-limit", "1"]
+gplan-astar-lmc-state-packer-greedy-cut-tree = ["gplan", "astar", "lmc", "stdout", "--state-packer", "greedy-cut-tree", "--state-packer-ilp-time-limit", "1"]
 
 # --- pot-conj-find ---
 # --- pot-conj-exact-find ---
@@ -2795,6 +2796,7 @@ gplan-astar-pot-I         = ["CPLEX"]
 gplan-astar-pot-A         = ["CPLEX"]
 gplan-astar-lmc-state-packer-ilp = ["LP"]
 gplan-astar-lmc-state-packer-min-cut-tree = ["LP"]
+gplan-astar-lmc-state-packer-greedy-cut-tree = ["LP"]
 symb-astar-fw             = ["CUDD"]
 symb-astar-bw             = ["CUDD"]
 symb-astar-fwbw           = ["CUDD"]
@@ -2941,6 +2943,7 @@ gplan-astar-pot-A = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-packer-ffd = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-packer-ilp = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-packer-min-cut-tree = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-lmc-state-packer-greedy-cut-tree = "script:plan-out-reduce-to-plan-cost"
 
 symb-astar-fw = "script:symb-optimal"
 symb-astar-bw = "script:symb-optimal"

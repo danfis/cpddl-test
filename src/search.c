@@ -202,3 +202,12 @@ TEST_COND(search_astar_lmc_packer_min_cut_tree, search, LP)
 {
     searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_MIN_CUT_TREE, 1.f);
 }
+
+/*
+ * A* with LM-cut behaves the same with the greedy cut tree state packer
+ * as with the default FFD packer (see searchAStarLMCutPacker()).
+ */
+TEST_COND(search_astar_lmc_packer_greedy_cut_tree, search, LP)
+{
+    searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_GREEDY_CUT_TREE, 1.f);
+}
