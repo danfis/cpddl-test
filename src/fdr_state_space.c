@@ -586,3 +586,85 @@ TEST_ONCE(fdr_state_space_init_err)
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
 }
+
+/*
+ * The incremental insertion into the state space with the tree of the
+ * state pool (32 variables of 16 values, i.e., 4 words) behaves as the
+ * plain insertion: a new state gets the next ID and the default node and
+ * is_new_state is set to true; a stored state (including a copy of the
+ * base state and a state inserted with the base PDDL_NO_STATE_ID) gets its
+ * ID and is_new_state is set to false, and its node is untouched.
+ */
+TEST_ONCE(fdr_state_space_insert_incremental)
+{
+    pddl_fdr_vars_t vars;
+    memset(&vars, 0, sizeof(vars));
+    for (int var = 0; var < 32; ++var)
+        pddlFDRVarsAdd(&vars, 16);
+    pddl_fdr_state_pool_config_t pool_cfg = PDDL_FDR_STATE_POOL_CONFIG_INIT;
+    pool_cfg.packer_cfg.vars = &vars;
+    pool_cfg.type = PDDL_FDR_STATE_POOL_TREE;
+    pool_cfg.tree_min_state_size = 0;
+    pddl_fdr_state_space_t space;
+    int ret = pddlFDRStateSpaceInit(&space, &pool_cfg, NULL);
+    assert(ret == 0);
+    assert(space.state_pool.is_tree);
+    pddl_fdr_state_space_node_t node;
+    pddlFDRStateSpaceNodeInit(&node, &space);
+    pddl_num_t g0, g7;
+    pddlNumSetInt(&g0, 0);
+    pddlNumSetInt(&g7, 7);
+
+    int state[32] = { 0 };
+    pddl_bool_t is_new;
+    pddl_state_id_t id = pddlFDRStateSpaceInsertIncremental(
+                                &space, state, PDDL_NO_STATE_ID, &is_new);
+    assert(is_new);
+    assert(id == 0);
+    node.id = 0;
+    node.is_closed = pddl_true;
+    node.parent_id = PDDL_NO_STATE_ID;
+    node.g_value = g7;
+    pddlFDRStateSpaceSet(&space, &node);
+
+    // The states 1, ..., 31 differ from the state 0 in one variable
+    for (int var = 1; var < 32; ++var){
+        state[var] = 1;
+        id = pddlFDRStateSpaceInsertIncremental(&space, state, 0, &is_new);
+        assert(is_new);
+        assert(id == (pddl_state_id_t)var);
+        pddlFDRStateSpaceGet(&space, id, &node);
+        assert(!node.is_closed);
+        assert(node.parent_id == PDDL_NO_STATE_ID);
+        assert(pddlNumExactEq(&node.g_value, &g0));
+        assert(memcmp(node.state, state, sizeof(state)) == 0);
+        state[var] = 0;
+    }
+
+    // The copy of the base state 0, and the state 0 without a base
+    id = pddlFDRStateSpaceInsertIncremental(&space, state, 0, &is_new);
+    assert(!is_new);
+    assert(id == 0);
+    id = pddlFDRStateSpaceInsertIncremental(&space, state, PDDL_NO_STATE_ID,
+                                            &is_new);
+    assert(!is_new);
+    assert(id == 0);
+    // The state 5 with the base state 3
+    state[5] = 1;
+    id = pddlFDRStateSpaceInsertIncremental(&space, state, 3, &is_new);
+    assert(!is_new);
+    assert(id == 5);
+    state[5] = 0;
+    // NULL is_new_state
+    id = pddlFDRStateSpaceInsertIncremental(&space, state, 1, NULL);
+    assert(id == 0);
+
+    pddlFDRStateSpaceGetNoState(&space, 0, &node);
+    assert(node.is_closed);
+    assert(pddlNumExactEq(&node.g_value, &g7));
+    assert(pddlFDRStatePoolSize(&space.state_pool) == 32);
+
+    pddlFDRStateSpaceNodeFree(&node);
+    pddlFDRStateSpaceFree(&space);
+    pddlFDRVarsFree(&vars);
+}

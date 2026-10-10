@@ -207,21 +207,24 @@ TEST(search_astar_lmc_packer_eff_affinity, search)
 /*
  * Asserts that A* with the heuristic HEUR behaves the same with the state
  * pool of the type TYPE (the tree used for all states, the check of
- * tree-ffd at CHECK_STATES states with the minimum ratio MIN_RATIO) as with
- * the default array of the state pool: the same plan cost and the same
- * numbers of expanded, evaluated, and generated states (state IDs do not
- * depend on the representation of the pool).
+ * tree-ffd at CHECK_STATES states with the minimum ratio MIN_RATIO, and
+ * the incremental insertion of states if INCREMENTAL_INSERT is true) as
+ * with the default array of the state pool: the same plan cost and the
+ * same numbers of expanded, evaluated, and generated states (state IDs do
+ * not depend on the representation of the pool).
  */
 static void searchAStarPool(pddl_heur_t *heur,
                             pddl_fdr_state_pool_type_t type,
                             int check_states,
-                            float min_ratio)
+                            float min_ratio,
+                            pddl_bool_t incremental_insert)
 {
     pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
     cfg.fdr = &C.fdr;
     cfg.alg = PDDL_SEARCH_ASTAR;
     cfg.heur = heur;
     assert(cfg.state_pool.type == PDDL_FDR_STATE_POOL_ARRAY);
+    assert(!cfg.state_pool_incremental_insert);
     pddl_search_stat_t stat_array;
     int cost_array = runSearch(&cfg, &stat_array);
 
@@ -229,6 +232,7 @@ static void searchAStarPool(pddl_heur_t *heur,
     cfg.state_pool.tree_min_state_size = 0;
     cfg.state_pool.tree_ffd_check_states = check_states;
     cfg.state_pool.tree_ffd_min_ratio = min_ratio;
+    cfg.state_pool_incremental_insert = incremental_insert;
     pddl_search_stat_t stat;
     int cost = runSearch(&cfg, &stat);
 
@@ -247,7 +251,8 @@ static void searchAStarPool(pddl_heur_t *heur,
  */
 TEST(search_blind_pool_tree, search)
 {
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE, 1, 1.f);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE, 1, 1.f,
+                    pddl_false);
 }
 
 /*
@@ -257,7 +262,7 @@ TEST(search_blind_pool_tree, search)
 TEST(search_astar_lmc_pool_tree, search)
 {
     searchAStarPool(pddlHeurLMCut(&C.fdr, &C.err),
-                    PDDL_FDR_STATE_POOL_TREE, 1, 1.f);
+                    PDDL_FDR_STATE_POOL_TREE, 1, 1.f, pddl_false);
 }
 
 /*
@@ -269,8 +274,10 @@ TEST(search_astar_lmc_pool_tree, search)
  */
 TEST(search_blind_pool_tree_ffd, search)
 {
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f);
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 0.f);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f,
+                    pddl_false);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 0.f,
+                    pddl_false);
 }
 
 /*
@@ -280,5 +287,39 @@ TEST(search_blind_pool_tree_ffd, search)
 TEST(search_astar_lmc_pool_tree_ffd, search)
 {
     searchAStarPool(pddlHeurLMCut(&C.fdr, &C.err),
-                    PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f);
+                    PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f, pddl_false);
+}
+
+/*
+ * Blind A* behaves the same with the incremental insertion into the tree
+ * representation of the state pool as with the array (see
+ * searchAStarPool()).
+ */
+TEST(search_blind_pool_tree_incremental, search)
+{
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE, 1, 1.f,
+                    pddl_true);
+}
+
+/*
+ * A* with LM-cut behaves the same with the incremental insertion into the
+ * tree representation of the state pool as with the array (see
+ * searchAStarPool()).
+ */
+TEST(search_astar_lmc_pool_tree_incremental, search)
+{
+    searchAStarPool(pddlHeurLMCut(&C.fdr, &C.err),
+                    PDDL_FDR_STATE_POOL_TREE, 1, 1.f, pddl_true);
+}
+
+/*
+ * Blind A* behaves the same with the incremental insertion into tree-ffd
+ * as with the array (see search_blind_pool_tree_ffd).
+ */
+TEST(search_blind_pool_tree_ffd_incremental, search)
+{
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f,
+                    pddl_true);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 0.f,
+                    pddl_true);
 }

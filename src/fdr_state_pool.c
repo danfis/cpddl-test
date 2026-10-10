@@ -598,12 +598,194 @@ TEST_ONCE(fdr_state_pool_tree_ffd_packer)
     pddlFDRVarsFree(&vars);
 }
 
+/* Fills STATE of NUM_VARS variables (see varsInitWords()) with a copy of
+ * BASE with a few (one to three) random variables set to random values
+ * smaller than MAX_VAL, so that STATE is similar to BASE (and possibly
+ * equal to it). */
+static void similarState(int *state, const int *base, int num_vars,
+                         int max_val, pddl_rand_t *rnd)
+{
+    memcpy(state, base, sizeof(int) * num_vars);
+    int num_changes = 1 + pddlRandInt(rnd) % 3u;
+    for (int i = 0; i < num_changes; ++i){
+        int var = pddlRandInt(rnd) % (uint32_t)num_vars;
+        state[var] = pddlRandInt(rnd) % (uint32_t)max_val;
+    }
+}
+
+/*
+ * The incremental insertion into the tree with 3, 4, 5, 8, and 13 words
+ * gives the same IDs as the array and the plain insertion into the tree,
+ * and it stores the same pairs. Every state is similar to an earlier state
+ * (see similarState()) used as the base state, which is mostly the
+ * previous base state (the cached tree is reused) and sometimes another
+ * state (the tree is reloaded); every 16th state is inserted with the
+ * invalid base PDDL_NO_STATE_ID, and every 17th state with the base equal
+ * to the number of stored states (not a stored state). A copy of the base
+ * state gets the ID of the base state and adds nothing. More than 2 * 4096
+ * distinct states are inserted, so the hash tables are resized.
+ */
+TEST_ONCE(fdr_state_pool_tree_incremental)
+{
+    static const int num_words[] = { 3, 4, 5, 8, 13 };
+    const int num_cases = sizeof(num_words) / sizeof(num_words[0]);
+    const int num = 20000;
+
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd, 2027);
+    for (int ci = 0; ci < num_cases; ++ci){
+        pddl_fdr_vars_t vars;
+        varsInitWords(&vars, num_words[ci]);
+        const int num_vars = vars.var_size;
+        pddl_fdr_state_pool_t inc, tree, array;
+        poolInit(&inc, &vars, PDDL_FDR_STATE_POOL_TREE, 0, 1, 1.f);
+        poolInit(&tree, &vars, PDDL_FDR_STATE_POOL_TREE, 0, 1, 1.f);
+        poolInit(&array, &vars, PDDL_FDR_STATE_POOL_ARRAY, 0, 1, 1.f);
+        assert(inc.is_tree);
+        assert(inc.base_buf != NULL);
+        assert(inc.base_buf_id == PDDL_NO_STATE_ID);
+
+        // States indexed by the IDs
+        int *states = calloc((size_t)(num + 1) * num_vars, sizeof(int));
+        int *state = calloc(num_vars, sizeof(int));
+        randState(state, num_vars, 3, &rnd);
+        pddl_state_id_t id = pddlFDRStatePoolInsertIncremental(
+                                    &inc, state, PDDL_NO_STATE_ID);
+        assert(id == 0);
+        id = pddlFDRStatePoolInsert(&tree, state);
+        assert(id == 0);
+        id = pddlFDRStatePoolInsert(&array, state);
+        assert(id == 0);
+        memcpy(states, state, sizeof(int) * num_vars);
+
+        pddl_state_id_t base = 0;
+        int num_reloads = 0;
+        for (int i = 1; i < num; ++i){
+            pddl_state_id_t size = pddlFDRStatePoolSize(&inc);
+            if (pddlRandInt(&rnd) % 8u == 0)
+                base = pddlRandInt(&rnd) % size;
+            const int *base_state = states + (size_t)base * num_vars;
+            similarState(state, base_state, num_vars, 3, &rnd);
+
+            pddl_state_id_t base_arg = base;
+            if (i % 16 == 0){
+                base_arg = PDDL_NO_STATE_ID;
+            }else if (i % 17 == 0){
+                base_arg = size;
+            }
+            pddl_state_id_t cached_id = inc.base_buf_id;
+            id = pddlFDRStatePoolInsertIncremental(&inc, state, base_arg);
+            if (base_arg < size){
+                assert(inc.base_buf_id == base_arg);
+                if (cached_id != base_arg)
+                    ++num_reloads;
+            }else{
+                assert(inc.base_buf_id == cached_id);
+            }
+            pddl_state_id_t id_tree = pddlFDRStatePoolInsert(&tree, state);
+            pddl_state_id_t id_array = pddlFDRStatePoolInsert(&array, state);
+            assert(id == id_tree);
+            assert(id == id_array);
+            if (memcmp(state, base_state, sizeof(int) * num_vars) == 0)
+                assert(id == base);
+            if (id == size)
+                memcpy(states + (size_t)id * num_vars, state,
+                       sizeof(int) * num_vars);
+            assert(pddlFDRStatePoolSize(&inc) == pddlFDRStatePoolSize(&array));
+            assert(poolStat(&inc).tree_nodes == poolStat(&tree).tree_nodes);
+        }
+        assert(num_reloads > 100);
+
+        pddl_fdr_state_pool_stat_t stat = poolStat(&inc);
+        assert(stat.num_states > 2 * 4096);
+        assert(stat.htable_buckets > 4096);
+
+        // Copies of the base states add nothing
+        const int num_states = pddlFDRStatePoolSize(&inc);
+        for (int b = 0; b < num_states; ++b){
+            const int *base_state = states + (size_t)b * num_vars;
+            id = pddlFDRStatePoolInsertIncremental(&inc, base_state, b);
+            assert(id == (pddl_state_id_t)b);
+            assertGet(&inc, b, base_state, num_vars);
+        }
+        pddl_fdr_state_pool_stat_t stat2 = poolStat(&inc);
+        assert(stat2.num_states == stat.num_states);
+        assert(stat2.tree_nodes == stat.tree_nodes);
+
+        free(state);
+        free(states);
+        pddlFDRStatePoolFree(&inc);
+        pddlFDRStatePoolFree(&tree);
+        pddlFDRStatePoolFree(&array);
+        pddlFDRVarsFree(&vars);
+    }
+    pddlRandFree(&rnd);
+}
+
+/*
+ * The incremental insertion works also in the array representation (where
+ * the base state is ignored), and in tree-ffd switching from the tree to
+ * the array at 100 states: in all cases, the IDs are the same as of the
+ * plain insertion into the array, and the stored states are returned.
+ */
+TEST_ONCE(fdr_state_pool_incremental_array)
+{
+    static const pddl_fdr_state_pool_type_t types[2] = {
+        PDDL_FDR_STATE_POOL_ARRAY,
+        PDDL_FDR_STATE_POOL_TREE_FFD,
+    };
+    const int num = 1000;
+
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd, 5);
+    pddl_fdr_vars_t vars;
+    varsInitWords(&vars, 8);
+    const int num_vars = vars.var_size;
+    for (int ti = 0; ti < 2; ++ti){
+        pddl_fdr_state_pool_t inc, array;
+        poolInit(&inc, &vars, types[ti], 0, 100, 1e9f);
+        poolInit(&array, &vars, PDDL_FDR_STATE_POOL_ARRAY, 0, 1, 1.f);
+        assert(inc.is_tree == (types[ti] == PDDL_FDR_STATE_POOL_TREE_FFD));
+
+        int *states = calloc((size_t)num * num_vars, sizeof(int));
+        int *state = calloc(num_vars, sizeof(int));
+        pddl_state_id_t base = PDDL_NO_STATE_ID;
+        for (int i = 0; i < num; ++i){
+            if (base == PDDL_NO_STATE_ID){
+                randState(state, num_vars, VAL_SIZE, &rnd);
+            }else{
+                similarState(state, states + (size_t)base * num_vars,
+                             num_vars, VAL_SIZE, &rnd);
+            }
+            pddl_state_id_t id = pddlFDRStatePoolInsertIncremental(
+                                        &inc, state, base);
+            pddl_state_id_t id_array = pddlFDRStatePoolInsert(&array, state);
+            assert(id == id_array);
+            memcpy(states + (size_t)id * num_vars, state,
+                   sizeof(int) * num_vars);
+            base = id;
+        }
+        assert(!inc.is_tree);
+        assert(inc.base_buf == NULL);
+        for (int id = 0; id < (int)pddlFDRStatePoolSize(&array); ++id)
+            assertGet(&inc, id, states + (size_t)id * num_vars, num_vars);
+
+        free(state);
+        free(states);
+        pddlFDRStatePoolFree(&inc);
+        pddlFDRStatePoolFree(&array);
+    }
+    pddlFDRVarsFree(&vars);
+    pddlRandFree(&rnd);
+}
+
 /*
  * States of the task reached by random walks from the initial state (with
  * a fixed seed) get the same IDs in the array, in the tree (used if the
- * packed state of the task has at least three words), and in tree-ffd
- * switching to the array at 1000 states, and all pools return the stored
- * states.
+ * packed state of the task has at least three words), in the tree with the
+ * incremental insertion with the previous state of the walk as the base
+ * state, and in tree-ffd switching to the array at 1000 states, and all
+ * pools return the stored states.
  */
 TEST(fdr_state_pool_walk, fdr)
 {
@@ -617,19 +799,21 @@ TEST(fdr_state_pool_walk, fdr)
     cfg.tree_min_state_size = 0;
     cfg.tree_ffd_check_states = 1000;
     cfg.tree_ffd_min_ratio = 1e9f;
-    pddl_fdr_state_pool_t pool[3];
-    static const pddl_fdr_state_pool_type_t types[3] = {
+    pddl_fdr_state_pool_t pool[4];
+    static const pddl_fdr_state_pool_type_t types[4] = {
         PDDL_FDR_STATE_POOL_ARRAY,
         PDDL_FDR_STATE_POOL_TREE,
         PDDL_FDR_STATE_POOL_TREE_FFD,
+        PDDL_FDR_STATE_POOL_TREE,
     };
-    for (int pi = 0; pi < 3; ++pi){
+    for (int pi = 0; pi < 4; ++pi){
         cfg.type = types[pi];
         int ret = pddlFDRStatePoolInit(pool + pi, &cfg, &C.err);
         assert(ret == 0);
     }
     pddl_bool_t is_tree = pool[1].is_tree;
     assert(is_tree == (pddlFDRStatePackerNumWords(&pool[0].packer) >= 3));
+    assert(pool[3].is_tree == is_tree);
 
     pddl_rand_t rnd;
     pddlRandInit(&rnd, 1);
@@ -638,12 +822,17 @@ TEST(fdr_state_pool_walk, fdr)
     pddlISetInit(&app);
     for (int walk = 0; walk < num_walks; ++walk){
         memcpy(state, C.fdr.init, sizeof(int) * num_vars);
+        pddl_state_id_t prev_id = PDDL_NO_STATE_ID;
         for (int step = 0; step < walk_len; ++step){
             pddl_state_id_t id = pddlFDRStatePoolInsert(pool + 0, state);
             for (int pi = 1; pi < 3; ++pi){
                 pddl_state_id_t id2 = pddlFDRStatePoolInsert(pool + pi, state);
                 assert(id2 == id);
             }
+            pddl_state_id_t id3 = pddlFDRStatePoolInsertIncremental(
+                                        pool + 3, state, prev_id);
+            assert(id3 == id);
+            prev_id = id;
 
             pddlISetEmpty(&app);
             pddlFDRAppOpFind(&C.fdr_app_op, state, &app);
@@ -658,8 +847,12 @@ TEST(fdr_state_pool_walk, fdr)
     int num_states = pddlFDRStatePoolSize(pool + 0);
     for (int id = 0; id < num_states; ++id){
         pddlFDRStatePoolGet(pool + 0, id, state);
-        for (int pi = 1; pi < 3; ++pi)
+        for (int pi = 1; pi < 4; ++pi)
             assertGet(pool + pi, id, state, num_vars);
+    }
+    if (is_tree){
+        assert(poolStat(pool + 3).tree_nodes
+                == poolStat(pool + 1).tree_nodes);
     }
     // tree-ffd switches only if it reached the check in the tree
     assert(!pool[2].is_tree || num_states < 1000);
@@ -668,6 +861,6 @@ TEST(fdr_state_pool_walk, fdr)
     pddlISetFree(&app);
     free(state);
     pddlRandFree(&rnd);
-    for (int pi = 0; pi < 3; ++pi)
+    for (int pi = 0; pi < 4; ++pi)
         pddlFDRStatePoolFree(pool + pi);
 }
