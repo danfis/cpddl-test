@@ -69,6 +69,7 @@ TESTS += strips_maker
 TESTS += strips_state_space
 TESTS += fdr_state_packer
 TESTS += fdr_state_space
+TESTS += fdr_state_pool
 TESTS += search
 TESTS += plan
 TESTS += gaifman

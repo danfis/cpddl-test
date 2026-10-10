@@ -89,10 +89,9 @@ static void opAddCondEff(pddl_fdr_op_t *op, const int *pre, const int *eff)
 static void taskFinalize(task_t *t)
 {
     pddlFDRAppOpInit(&t->app_op, &t->fdr.var, &t->fdr.op, &t->fdr.goal);
-    pddl_fdr_state_packer_config_t packer_cfg
-            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
-    packer_cfg.vars = &t->fdr.var;
-    int ret = pddlFDRStateSpaceInit(&t->space, &packer_cfg, &t->err);
+    pddl_fdr_state_pool_config_t pool_cfg = PDDL_FDR_STATE_POOL_CONFIG_INIT;
+    pool_cfg.packer_cfg.vars = &t->fdr.var;
+    int ret = pddlFDRStateSpaceInit(&t->space, &pool_cfg, &t->err);
     assert(ret == 0);
     pddlFDRStateSpaceNodeInit(&t->node, &t->space);
 }

@@ -7,8 +7,8 @@
 /*
  * Tests of the FDR state packer (pddl/fdr_state_packer.h): widths of
  * variables, the FFD assignment of variables to words and their placement
- * within words, the optimal (ILP) layout, the min-cut tree layout, the
- * greedy cut tree layout, and pack/unpack round trips.
+ * within words, the optimal (ILP) layout, the effect affinity layout, and
+ * pack/unpack round trips.
  *
  * Run with:  cd tests && make && ./test -a -Q -s fdr_state_packer
  */
@@ -67,12 +67,15 @@ static void packerInit(pddl_fdr_state_packer_t *p,
     assert(ret == 0);
 }
 
-/* Number of words of the packed state of P. */
+/* Number of words of the packed state of P (also checks that it agrees
+ * with pddlFDRStatePackerNumWords()). */
 static int numWords(const pddl_fdr_state_packer_t *p)
 {
     int size = pddlFDRStatePackerBufSize(p);
     assert(size % sizeof(pddl_fdr_packer_word_t) == 0);
-    return size / sizeof(pddl_fdr_packer_word_t);
+    int words = size / sizeof(pddl_fdr_packer_word_t);
+    assert(pddlFDRStatePackerNumWords(p) == words);
+    return words;
 }
 
 /* Expected width of a variable with VAL_SIZE values computed independently
@@ -215,7 +218,6 @@ TEST_ONCE(fdr_state_packer_config_init)
     pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
     assert(cfg.vars == NULL);
     assert(cfg.ops == NULL);
-    assert(cfg.min_cut_tree_max_imbalance == 1.f);
     assert(cfg.layout == PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
 }
 
@@ -387,6 +389,7 @@ TEST_ONCE(fdr_state_packer_copy)
         assert(p2.num_vars == p.num_vars);
         int size = pddlFDRStatePackerBufSize(&p);
         assert(pddlFDRStatePackerBufSize(&p2) == size);
+        assert(numWords(&p2) == numWords(&p));
 
         int *state = calloc(vars.var_size, sizeof(int));
         int *state2 = calloc(vars.var_size, sizeof(int));
@@ -783,32 +786,6 @@ static void varsInitWidth(pddl_fdr_vars_t *vars, int width, int n)
         varsAdd(vars, valSizeOfWidth(width));
 }
 
-/* Returns the default .min_cut_tree_max_imbalance. */
-static float defMaxImbalance(void)
-{
-    pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
-    return cfg.min_cut_tree_max_imbalance;
-}
-
-/* Initializes P over VARS and OPS with the min-cut tree layout, the time
- * limit TIME_LIMIT, and the maximal imbalance MAX_IMBALANCE, and returns
- * the return value of pddlFDRStatePackerInit(). */
-static int minCutTreeInit(pddl_fdr_state_packer_t *p,
-                          const pddl_fdr_vars_t *vars,
-                          const pddl_fdr_ops_t *ops,
-                          float time_limit,
-                          float max_imbalance,
-                          pddl_err_t *err)
-{
-    pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
-    cfg.vars = vars;
-    cfg.ops = ops;
-    cfg.layout = PDDL_FDR_STATE_PACKER_LAYOUT_MIN_CUT_TREE;
-    cfg.ilp_time_limit = time_limit;
-    cfg.min_cut_tree_max_imbalance = max_imbalance;
-    return pddlFDRStatePackerInit(p, &cfg, err);
-}
-
 /* Returns the word of P storing the variable VAR of VARS (it must have at
  * least two values), found by packing the state with all zeros except VAR
  * set to its maximal value. */
@@ -835,328 +812,6 @@ static int wordOfVar(const pddl_fdr_state_packer_t *p,
     return word;
 }
 
-/* Asserts that the min-cut tree layout of VARS and OPS with the maximal
- * imbalance MAX_IMBALANCE stores the variable v in the word EXP_WORD[v],
- * uses NUM_WORDS words, and round-trips states. */
-static void checkMinCutTreeImbalance(const pddl_fdr_vars_t *vars,
-                                     const pddl_fdr_ops_t *ops,
-                                     float max_imbalance,
-                                     const int *exp_word,
-                                     int num_words)
-{
-    pddl_fdr_state_packer_t p;
-    int ret = minCutTreeInit(&p, vars, ops, -1.f, max_imbalance, NULL);
-    assert(ret == 0);
-    assert(numWords(&p) == num_words);
-    for (int var = 0; var < vars->var_size; ++var)
-        assert(wordOfVar(&p, vars, var) == exp_word[var]);
-    pddl_rand_t rnd;
-    pddlRandInit(&rnd, 7);
-    assertRoundTripRand(&p, vars, &rnd, 100);
-    pddlRandFree(&rnd);
-    pddlFDRStatePackerFree(&p);
-}
-
-/* checkMinCutTreeImbalance() with the default maximal imbalance. */
-static void checkMinCutTree(const pddl_fdr_vars_t *vars,
-                            const pddl_fdr_ops_t *ops,
-                            const int *exp_word,
-                            int num_words)
-{
-    checkMinCutTreeImbalance(vars, ops, defMaxImbalance(), exp_word,
-                             num_words);
-}
-
-/*
- * The min-cut tree layout fails with an error if .ops is not set or the
- * maximal imbalance is negative (both checked before the LP solver).
- */
-TEST_ONCE(fdr_state_packer_err_min_cut_tree)
-{
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 16, 3);
-    pddl_fdr_state_packer_t p;
-
-    pddl_err_t err;
-    pddlErrInit(&err);
-    int ret = minCutTreeInit(&p, &vars, NULL, -1.f, defMaxImbalance(), &err);
-    assert(ret == -1);
-    assert(pddlErrIsSet(&err));
-
-    pddl_fdr_ops_t no_ops;
-    pddlFDROpsInit(&no_ops);
-    pddlErrInit(&err);
-    ret = minCutTreeInit(&p, &vars, &no_ops, -1.f, -1.f, &err);
-    assert(ret == -1);
-    assert(pddlErrIsSet(&err));
-    pddlFDROpsFree(&no_ops);
-
-    varsFree(&vars);
-}
-
-/*
- * Four 16-bit variables changed in pairs along the path 0 - 2 - 1 - 3:
- * every edge is a minimum cut, but only the middle one splits them into
- * two halves of 32 bits, so the words are {0, 2} and {1, 3} (FFD gives
- * {0, 1} and {2, 3}). Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_path)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 16, 4);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    opsAddPair(&ops, 0, 2, 1);
-    opsAddPair(&ops, 2, 1, 1);
-    opsAddPair(&ops, 1, 3, 1);
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 0, 1 }, 2);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * Eight 16-bit variables changed in pairs along the path
- * 0 -10- 4 -3- 1 -10- 5 -1- 2 -10- 6 -3- 3 -10- 7 (the numbers are the
- * numbers of operators): the root is split by the cut 1 into
- * {0, 1, 4, 5} and {2, 3, 6, 7}, and these by the cuts 3, so the words
- * from left to right are {0, 4}, {1, 5}, {2, 6}, {3, 7}. Skipped without
- * an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_clusters)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 16, 8);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    opsAddPair(&ops, 0, 4, 10);
-    opsAddPair(&ops, 4, 1, 3);
-    opsAddPair(&ops, 1, 5, 10);
-    opsAddPair(&ops, 5, 2, 1);
-    opsAddPair(&ops, 2, 6, 10);
-    opsAddPair(&ops, 6, 3, 3);
-    opsAddPair(&ops, 3, 7, 10);
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 2, 3, 0, 1, 2, 3 }, 4);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * Conditional effects count as changes of the operator, and every pair of
- * variables counts at most once per operator:
- *   - the path of fdr_state_packer_min_cut_tree_path created by an
- *     effect and a conditional effect, by two conditional effects, and by
- *     an effect only gives the same layout;
- *   - three 16-bit variables, where one operator changes {0, 1} in its
- *     effect and in two conditional effects and two operators change
- *     {1, 2}: the cheapest cut separates 0 (cut 1, while separating 2
- *     costs 2), so the words are {0} and {1, 2}; counting the pair {0, 1}
- *     per effect would separate 2 instead.
- * Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_cond_eff)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 16, 4);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    pddl_fdr_op_t *op = opsAdd(&ops, (int[]){ 0, 1, END });
-    opAddCondEff(op, (int[]){ 2, 1, END });
-    op = opsAdd(&ops, NULL);
-    opAddCondEff(op, (int[]){ 2, 1, END });
-    opAddCondEff(op, (int[]){ 1, 1, END });
-    opsAdd(&ops, (int[]){ 1, 1, 3, 1, END });
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 0, 1 }, 2);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-
-    varsInitWidth(&vars, 16, 3);
-    pddlFDROpsInit(&ops);
-    op = opsAdd(&ops, (int[]){ 0, 1, 1, 1, END });
-    opAddCondEff(op, (int[]){ 0, 0, 1, 0, END });
-    opAddCondEff(op, (int[]){ 1, 1, 0, 1, END });
-    opsAddPair(&ops, 1, 2, 2);
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 1 }, 2);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * Without operators, all splits have the cut 0, so the splits most
- * balanced by bits are taken: six 16-bit variables are split into
- * {0, 1, 2} and {3, 4, 5} (48 bits each), and these into {0}, {1, 2} and
- * {3}, {4, 5} (16 and 32 bits), i.e., four words (FFD needs three).
- * Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_no_ops)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 16, 6);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 1, 2, 3, 3 }, 4);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * The minimum cuts are balanced by bits, not by the number of variables:
- * the variables of the widths 24, 8, 8, 8 on the path 0 - 1 - 2 - 3 (one
- * operator per edge) have three minimum cuts (cost 1): {0} | {1, 2, 3}
- * (24 / 24 bits), {0, 1} | {2, 3} (32 / 16 bits), and {0, 1, 2} | {3}
- * (40 / 8 bits). The first one is the most balanced by bits, so the words
- * are {0} and {1, 2, 3}; balancing the number of variables would give
- * {0, 1} and {2, 3}. Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_bits)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInit(&vars, (int[]){ valSizeOfWidth(24), valSizeOfWidth(8),
-                             valSizeOfWidth(8), valSizeOfWidth(8) }, 4);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    opsAddPair(&ops, 0, 1, 1);
-    opsAddPair(&ops, 1, 2, 1);
-    opsAddPair(&ops, 2, 3, 1);
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 1, 1 }, 2);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * Without operators, the split most balanced by bits is found without the
- * ILP: the variables of the widths 20, 4, 4, 4, 4, 4 (40 bits) are split
- * into {0} and {1, ..., 5} (20 bits each, 0 is in the left part on the
- * tie), so the words are {0} and {1, ..., 5}; balancing the number of
- * variables would split them 3 / 3. Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_bits_no_ops)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInit(&vars, (int[]){ valSizeOfWidth(20), valSizeOfWidth(4),
-                             valSizeOfWidth(4), valSizeOfWidth(4),
-                             valSizeOfWidth(4), valSizeOfWidth(4) }, 6);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    checkMinCutTree(&vars, &ops, (int[]){ 0, 1, 1, 1, 1, 1 }, 2);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * The maximal imbalance forbids peeling off a cheap variable from a large
- * set: twelve 8-bit variables (96 bits) on the path 0 - 1 - ... - 11 with
- * the numbers of operators 6, 7, 8, 9, 10, 2, 11, 12, 13, 14, 1 on its
- * edges. Without the bound (0), the root is split by the cheapest edge
- * into {11} (left) and the rest, so the variable 11 is in the word 0.
- * With the bound of one word, the lighter part needs at least
- * 48 - 32 = 16 bits, so the root is split by the edge (5, 6) of the cost 2
- * into {0, ..., 5} and {6, ..., 11} (48 bits each), and all words of the
- * variables 0, ..., 5 precede the words of the variables 6, ..., 11.
- * Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_max_imbalance)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    static const int weight[11] = { 6, 7, 8, 9, 10, 2, 11, 12, 13, 14, 1 };
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 8, 12);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    for (int i = 0; i < 11; ++i)
-        opsAddPair(&ops, i, i + 1, weight[i]);
-
-    pddl_fdr_state_packer_t p;
-    int ret = minCutTreeInit(&p, &vars, &ops, -1.f, 0.f, NULL);
-    assert(ret == 0);
-    assert(wordOfVar(&p, &vars, 11) == 0);
-    pddlFDRStatePackerFree(&p);
-
-    ret = minCutTreeInit(&p, &vars, &ops, -1.f, 1.f, NULL);
-    assert(ret == 0);
-    assert(wordOfVar(&p, &vars, 11) != 0);
-    int max_left = -1;
-    for (int var = 0; var < 6; ++var)
-        max_left = PDDL_MAX(max_left, wordOfVar(&p, &vars, var));
-    for (int var = 6; var < 12; ++var)
-        assert(wordOfVar(&p, &vars, var) > max_left);
-    pddl_rand_t rnd;
-    pddlRandInit(&rnd, 7);
-    assertRoundTripRand(&p, &vars, &rnd, 100);
-    pddlRandFree(&rnd);
-    pddlFDRStatePackerFree(&p);
-
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * A set without a split satisfying the lower bound on the bits of the
- * lighter part is laid out by FFD: three 16-bit variables (48 bits) with
- * the maximal imbalance 0.02 words need between 23.36 and 24 bits in the
- * lighter part, but every subset has 16 or 32 bits. With operators
- * changing {0, 1} (the ILP) as well as without operators (the dynamic
- * program), the words are {0, 1} and {2} as by FFD. Skipped without an LP
- * solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_infeasible)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 16, 3);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    checkMinCutTreeImbalance(&vars, &ops, 0.02f, (int[]){ 0, 0, 1 }, 2);
-    opsAddPair(&ops, 0, 1, 1);
-    checkMinCutTreeImbalance(&vars, &ops, 0.02f, (int[]){ 0, 0, 1 }, 2);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * A packer over no variables (and no operators) has a zero-sized buffer
- * also with the min-cut tree layout. Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_no_vars)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInit(&vars, NULL, 0);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    pddl_fdr_state_packer_t p;
-    int ret = minCutTreeInit(&p, &vars, &ops, -1.f, defMaxImbalance(),
-                             NULL);
-    assert(ret == 0);
-    assert(pddlFDRStatePackerBufSize(&p) == 0);
-    pddlFDRStatePackerFree(&p);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
 /* Fills OPS with a random number of operators over N variables, each
  * changing a few random variables in its effect and possibly in
  * conditional effects. */
@@ -1177,66 +832,6 @@ static void randOps(pddl_fdr_ops_t *ops, int n, pddl_rand_t *rnd)
     }
 }
 
-/*
- * The min-cut tree layout of random variables and operators round-trips
- * states, and its number of words is between ceil(sum of widths / B) and
- * the number of variables. Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_min_cut_tree_random)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    const int B = PDDL_FDR_PACKER_WORD_BITS;
-    pddl_rand_t rnd;
-    pddlRandInit(&rnd, 13);
-    for (int iter = 0; iter < 30; ++iter){
-        pddl_fdr_vars_t vars;
-        randVars(&vars, &rnd);
-        pddl_fdr_ops_t ops;
-        randOps(&ops, vars.var_size, &rnd);
-
-        pddl_fdr_state_packer_t p;
-        int ret = minCutTreeInit(&p, &vars, &ops, 10.f, defMaxImbalance(),
-                                 NULL);
-        assert(ret == 0);
-        int words = numWords(&p);
-        assert(words >= (sumBits(&vars) + B - 1) / B);
-        assert(words <= vars.var_size);
-        assertRoundTripRand(&p, &vars, &rnd, 100);
-
-        pddlFDRStatePackerFree(&p);
-        pddlFDROpsFree(&ops);
-        varsFree(&vars);
-    }
-    pddlRandFree(&rnd);
-}
-
-/*
- * The min-cut tree layout of the variables and operators of the task
- * round-trips the initial state and random states, and its number of
- * words is between ceil(sum of widths / B) and the number of variables.
- */
-TEST_COND(fdr_state_packer_min_cut_tree, fdr, LP)
-{
-    const int B = PDDL_FDR_PACKER_WORD_BITS;
-    const pddl_fdr_vars_t *vars = &C.fdr.var;
-    pddl_fdr_state_packer_t p;
-    int ret = minCutTreeInit(&p, vars, &C.fdr.op, 1.f, defMaxImbalance(),
-                             &C.err);
-    assert(ret == 0);
-    int words = numWords(&p);
-    assert(words >= (sumBits(vars) + B - 1) / B);
-    assert(words <= PDDL_MAX(vars->var_size, 1));
-
-    assertRoundTrip(&p, C.fdr.init);
-    pddl_rand_t rnd;
-    pddlRandInit(&rnd, 1);
-    assertRoundTripRand(&p, vars, &rnd, 1000);
-    pddlRandFree(&rnd);
-    pddlFDRStatePackerFree(&p);
-}
-
 /* Appends to OPS NUM operators changing only the variable V. */
 static void opsAddSingle(pddl_fdr_ops_t *ops, int v, int num)
 {
@@ -1244,33 +839,30 @@ static void opsAddSingle(pddl_fdr_ops_t *ops, int v, int num)
         opsAdd(ops, (int[]){ v, 1, END });
 }
 
-/* Initializes P over VARS and OPS with the greedy cut tree layout and the
- * time limit TIME_LIMIT, and returns the return value of
- * pddlFDRStatePackerInit(). */
-static int greedyCutTreeInit(pddl_fdr_state_packer_t *p,
-                             const pddl_fdr_vars_t *vars,
-                             const pddl_fdr_ops_t *ops,
-                             float time_limit,
-                             pddl_err_t *err)
+/* Initializes P over VARS and OPS with the effect affinity layout, and
+ * returns the return value of pddlFDRStatePackerInit(). */
+static int effAffinityInit(pddl_fdr_state_packer_t *p,
+                           const pddl_fdr_vars_t *vars,
+                           const pddl_fdr_ops_t *ops,
+                           pddl_err_t *err)
 {
     pddl_fdr_state_packer_config_t cfg = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
     cfg.vars = vars;
     cfg.ops = ops;
-    cfg.layout = PDDL_FDR_STATE_PACKER_LAYOUT_GREEDY_CUT_TREE;
-    cfg.ilp_time_limit = time_limit;
+    cfg.layout = PDDL_FDR_STATE_PACKER_LAYOUT_EFF_AFFINITY;
     return pddlFDRStatePackerInit(p, &cfg, err);
 }
 
-/* Asserts that the greedy cut tree layout of VARS and OPS stores the
+/* Asserts that the effect affinity layout of VARS and OPS stores the
  * variable v in the word EXP_WORD[v], uses NUM_WORDS words, and
  * round-trips states. */
-static void checkGreedyCutTree(const pddl_fdr_vars_t *vars,
-                               const pddl_fdr_ops_t *ops,
-                               const int *exp_word,
-                               int num_words)
+static void checkEffAffinity(const pddl_fdr_vars_t *vars,
+                             const pddl_fdr_ops_t *ops,
+                             const int *exp_word,
+                             int num_words)
 {
     pddl_fdr_state_packer_t p;
-    int ret = greedyCutTreeInit(&p, vars, ops, -1.f, NULL);
+    int ret = effAffinityInit(&p, vars, ops, NULL);
     assert(ret == 0);
     assert(numWords(&p) == num_words);
     for (int var = 0; var < vars->var_size; ++var)
@@ -1283,10 +875,10 @@ static void checkGreedyCutTree(const pddl_fdr_vars_t *vars,
 }
 
 /*
- * The greedy cut tree layout fails with an error if .ops is not set
- * (checked before the LP solver), and without an LP solver.
+ * The effect affinity layout fails with an error if .ops is not set, and
+ * it does not need an LP solver.
  */
-TEST_ONCE(fdr_state_packer_err_greedy_cut_tree)
+TEST_ONCE(fdr_state_packer_err_eff_affinity)
 {
     pddl_fdr_vars_t vars;
     varsInitWidth(&vars, 16, 3);
@@ -1294,19 +886,17 @@ TEST_ONCE(fdr_state_packer_err_greedy_cut_tree)
 
     pddl_err_t err;
     pddlErrInit(&err);
-    int ret = greedyCutTreeInit(&p, &vars, NULL, -1.f, &err);
+    int ret = effAffinityInit(&p, &vars, NULL, &err);
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
 
     pddl_fdr_ops_t ops;
     pddlFDROpsInit(&ops);
     opsAdd(&ops, (int[]){ 0, 1, 1, 1, END });
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT)){
-        pddlErrClear(&err);
-        ret = greedyCutTreeInit(&p, &vars, &ops, -1.f, &err);
-        assert(ret == -1);
-        assert(pddlErrIsSet(&err));
-    }
+    pddlErrClear(&err);
+    ret = effAffinityInit(&p, &vars, &ops, &err);
+    assert(ret == 0);
+    pddlFDRStatePackerFree(&p);
     pddlFDROpsFree(&ops);
     varsFree(&vars);
 }
@@ -1321,27 +911,23 @@ TEST_ONCE(fdr_state_packer_err_greedy_cut_tree)
  *   operators: 0 is changed by the most operators, so it starts the first
  *   word, and 3 joins it although 1 is changed by more operators, since 3
  *   shares an operator with 0. The words are {0, 3} and {1, 2}.
- * Skipped without an LP solver.
  */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_words)
+TEST_ONCE(fdr_state_packer_eff_affinity_words)
 {
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
     pddl_fdr_vars_t vars;
     varsInitWidth(&vars, 16, 4);
     pddl_fdr_ops_t ops;
     pddlFDROpsInit(&ops);
     opsAddPair(&ops, 0, 2, 3);
     opsAddPair(&ops, 1, 3, 2);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 0, 1, 0, 1 }, 2);
+    checkEffAffinity(&vars, &ops, (int[]){ 0, 1, 0, 1 }, 2);
     pddlFDROpsFree(&ops);
 
     pddlFDROpsInit(&ops);
     opsAddSingle(&ops, 0, 5);
     opsAddPair(&ops, 0, 3, 1);
     opsAddSingle(&ops, 1, 4);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 0, 1, 1, 0 }, 2);
+    checkEffAffinity(&vars, &ops, (int[]){ 0, 1, 1, 0 }, 2);
     pddlFDROpsFree(&ops);
     varsFree(&vars);
 }
@@ -1358,13 +944,9 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_words)
  *   the first word, then 1 (the smaller ID of the 8-bit variables) fills
  *   it; the second word is {0, 3}. Filling by IDs would give {0, 1, 3}
  *   and {2}.
- * Skipped without an LP solver.
  */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_ties)
+TEST_ONCE(fdr_state_packer_eff_affinity_ties)
 {
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
     pddl_fdr_vars_t vars;
     varsInitWidth(&vars, 16, 4);
     pddl_fdr_ops_t ops;
@@ -1372,81 +954,47 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_ties)
     opsAddSingle(&ops, 3, 5);
     opsAddPair(&ops, 0, 1, 1);
     opsAddPair(&ops, 1, 2, 2);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 1, 0, 1, 0 }, 2);
+    checkEffAffinity(&vars, &ops, (int[]){ 1, 0, 1, 0 }, 2);
     pddlFDROpsFree(&ops);
     varsFree(&vars);
 
     varsInit(&vars, (int[]){ valSizeOfWidth(16), valSizeOfWidth(8),
                              valSizeOfWidth(24), valSizeOfWidth(8) }, 4);
     pddlFDROpsInit(&ops);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 1, 0, 0, 1 }, 2);
+    checkEffAffinity(&vars, &ops, (int[]){ 1, 0, 0, 1 }, 2);
     pddlFDROpsFree(&ops);
     varsFree(&vars);
 }
 
 /*
- * Four 17-bit variables (one per word, in the order 0, 1, 2, 3) changed in
- * pairs {0, 2} (5 operators), {1, 3} (5 operators), and {0, 1} (1
- * operator): the minimum cut 1 splits the words into {0, 2} and {1, 3}
- * (both of two words, so the left one is the one with the word 0), so
- * the words from left to right store 0, 2, 1, 3.
- * Skipped without an LP solver.
+ * The words are kept in the order of filling, so the variables changed by
+ * the most operators are in the first words:
+ * - Three 17-bit variables (one per word) changed alone by 1, 3, and 2
+ *   operators are stored in the words 2, 0, and 1.
+ * - Four 17-bit variables changed in pairs {0, 2} (5 operators), {1, 3}
+ *   (5 operators), and {0, 1} (1 operator) are all changed by the same
+ *   number of operators and share no word, so they are stored in the
+ *   order of their IDs.
  */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_split)
+TEST_ONCE(fdr_state_packer_eff_affinity_order)
 {
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
     pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 17, 4);
+    varsInitWidth(&vars, 17, 3);
     pddl_fdr_ops_t ops;
+    pddlFDROpsInit(&ops);
+    opsAddSingle(&ops, 0, 1);
+    opsAddSingle(&ops, 1, 3);
+    opsAddSingle(&ops, 2, 2);
+    checkEffAffinity(&vars, &ops, (int[]){ 2, 0, 1 }, 3);
+    pddlFDROpsFree(&ops);
+    varsFree(&vars);
+
+    varsInitWidth(&vars, 17, 4);
     pddlFDROpsInit(&ops);
     opsAddPair(&ops, 0, 2, 5);
     opsAddPair(&ops, 1, 3, 5);
     opsAddPair(&ops, 0, 1, 1);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 0, 2, 1, 3 }, 4);
-    pddlFDROpsFree(&ops);
-    varsFree(&vars);
-}
-
-/*
- * The hyperedges of a set of words are restricted to the set, so an
- * operator cut above still counts. Six 17-bit variables (one per word, in
- * the order 0, ..., 5, as each is changed by 20 operators, singletons
- * included) with the operators changing {0, 1, 2} (10), {3, 4, 5} (10),
- * {0, 1, 3} (1), and {4, 5} (2):
- * - The root is split into {0, 1, 2} and {3, 4, 5} with the cut 1.
- * - In {0, 1, 2}, the hyperedge {0, 1, 3} becomes {0, 1}, so {2} is split
- *   off (cut 10, while {0} or {1} would cut 11); without the restriction,
- *   all three splits would have the same cut.
- * - In {3, 4, 5}, {0, 1, 3} becomes {3} and is dropped, and {3} is split
- *   off (cut 10, while {4} or {5} would cut 12).
- * So the words from left to right store 2, 0, 1, 3, 4, 5.
- * Skipped without an LP solver.
- */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_restricted)
-{
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
-    pddl_fdr_vars_t vars;
-    varsInitWidth(&vars, 17, 6);
-    pddl_fdr_ops_t ops;
-    pddlFDROpsInit(&ops);
-    for (int i = 0; i < 10; ++i){
-        opsAdd(&ops, (int[]){ 0, 1, 1, 1, 2, 1, END });
-        opsAdd(&ops, (int[]){ 3, 1, 4, 1, 5, 1, END });
-    }
-    opsAdd(&ops, (int[]){ 0, 1, 1, 1, 3, 1, END });
-    opsAddPair(&ops, 4, 5, 2);
-    // Every variable is changed by 20 operators
-    opsAddSingle(&ops, 0, 9);
-    opsAddSingle(&ops, 1, 9);
-    opsAddSingle(&ops, 2, 10);
-    opsAddSingle(&ops, 3, 9);
-    opsAddSingle(&ops, 4, 8);
-    opsAddSingle(&ops, 5, 8);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 1, 2, 0, 3, 4, 5 }, 6);
+    checkEffAffinity(&vars, &ops, (int[]){ 0, 1, 2, 3 }, 4);
     pddlFDROpsFree(&ops);
     varsFree(&vars);
 }
@@ -1457,13 +1005,10 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_restricted)
  * conditional effect, and one changing 1 and 3 only in two conditional
  * effects (and one operator changing nothing). The words are {0, 2} and
  * {1, 3}; without the conditional effects, they would be {0, 1} and
- * {2, 3}. Skipped without an LP solver.
+ * {2, 3}.
  */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_cond_eff)
+TEST_ONCE(fdr_state_packer_eff_affinity_cond_eff)
 {
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
     pddl_fdr_vars_t vars;
     varsInitWidth(&vars, 16, 4);
     pddl_fdr_ops_t ops;
@@ -1474,26 +1019,23 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_cond_eff)
     opAddCondEff(op, (int[]){ 1, 1, END });
     opAddCondEff(op, (int[]){ 3, 1, END });
     opsAdd(&ops, NULL);
-    checkGreedyCutTree(&vars, &ops, (int[]){ 0, 1, 0, 1 }, 2);
+    checkEffAffinity(&vars, &ops, (int[]){ 0, 1, 0, 1 }, 2);
     pddlFDROpsFree(&ops);
     varsFree(&vars);
 }
 
 /*
  * A packer over no variables (and no operators) has a zero-sized buffer
- * also with the greedy cut tree layout. Skipped without an LP solver.
+ * also with the effect affinity layout.
  */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_no_vars)
+TEST_ONCE(fdr_state_packer_eff_affinity_no_vars)
 {
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
     pddl_fdr_vars_t vars;
     varsInit(&vars, NULL, 0);
     pddl_fdr_ops_t ops;
     pddlFDROpsInit(&ops);
     pddl_fdr_state_packer_t p;
-    int ret = greedyCutTreeInit(&p, &vars, &ops, -1.f, NULL);
+    int ret = effAffinityInit(&p, &vars, &ops, NULL);
     assert(ret == 0);
     assert(pddlFDRStatePackerBufSize(&p) == 0);
     pddlFDRStatePackerFree(&p);
@@ -1502,16 +1044,12 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_no_vars)
 }
 
 /*
- * The greedy cut tree layout of random variables and operators
- * round-trips states, and its number of words is between
- * ceil(sum of widths / B) and the number of variables.
- * Skipped without an LP solver.
+ * The effect affinity layout of random variables and operators round-trips
+ * states, and its number of words is between ceil(sum of widths / B) and
+ * the number of variables.
  */
-TEST_ONCE(fdr_state_packer_greedy_cut_tree_random)
+TEST_ONCE(fdr_state_packer_eff_affinity_random)
 {
-    if (!pddlLPSolverAvailable(PDDL_LP_DEFAULT))
-        return;
-
     const int B = PDDL_FDR_PACKER_WORD_BITS;
     pddl_rand_t rnd;
     pddlRandInit(&rnd, 17);
@@ -1522,14 +1060,14 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_random)
         randOps(&ops, vars.var_size, &rnd);
 
         pddl_fdr_state_packer_t p;
-        int ret = greedyCutTreeInit(&p, &vars, &ops, 10.f, NULL);
+        int ret = effAffinityInit(&p, &vars, &ops, NULL);
         assert(ret == 0);
         int words = numWords(&p);
         assert(words >= (sumBits(&vars) + B - 1) / B);
         assert(words <= vars.var_size);
         assertRoundTripRand(&p, &vars, &rnd, 100);
-
         pddlFDRStatePackerFree(&p);
+
         pddlFDROpsFree(&ops);
         varsFree(&vars);
     }
@@ -1537,16 +1075,16 @@ TEST_ONCE(fdr_state_packer_greedy_cut_tree_random)
 }
 
 /*
- * The greedy cut tree layout of the variables and operators of the task
+ * The effect affinity layout of the variables and operators of the task
  * round-trips the initial state and random states, and its number of
  * words is between ceil(sum of widths / B) and the number of variables.
  */
-TEST_COND(fdr_state_packer_greedy_cut_tree, fdr, LP)
+TEST(fdr_state_packer_eff_affinity, fdr)
 {
     const int B = PDDL_FDR_PACKER_WORD_BITS;
     const pddl_fdr_vars_t *vars = &C.fdr.var;
     pddl_fdr_state_packer_t p;
-    int ret = greedyCutTreeInit(&p, vars, &C.fdr.op, 1.f, &C.err);
+    int ret = effAffinityInit(&p, vars, &C.fdr.op, &C.err);
     assert(ret == 0);
     int words = numWords(&p);
     assert(words >= (sumBits(vars) + B - 1) / B);

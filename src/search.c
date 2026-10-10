@@ -167,12 +167,13 @@ static void searchAStarLMCutPacker(pddl_fdr_state_packer_layout_t layout,
     cfg.fdr = &C.fdr;
     cfg.alg = PDDL_SEARCH_ASTAR;
     cfg.heur = heur;
-    assert(cfg.state_packer.layout == PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
+    assert(cfg.state_pool.packer_cfg.layout
+                == PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
     pddl_search_stat_t stat_ffd;
     int cost_ffd = runSearch(&cfg, &stat_ffd);
 
-    cfg.state_packer.layout = layout;
-    cfg.state_packer.ilp_time_limit = time_limit;
+    cfg.state_pool.packer_cfg.layout = layout;
+    cfg.state_pool.packer_cfg.ilp_time_limit = time_limit;
     pddl_search_stat_t stat;
     int cost = runSearch(&cfg, &stat);
 
@@ -195,19 +196,89 @@ TEST_COND(search_astar_lmc_packer_ilp, search, LP)
 }
 
 /*
- * A* with LM-cut behaves the same with the min-cut tree state packer as
- * with the default FFD packer (see searchAStarLMCutPacker()).
+ * A* with LM-cut behaves the same with the effect affinity state packer
+ * as with the default FFD packer (see searchAStarLMCutPacker()).
  */
-TEST_COND(search_astar_lmc_packer_min_cut_tree, search, LP)
+TEST(search_astar_lmc_packer_eff_affinity, search)
 {
-    searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_MIN_CUT_TREE, 1.f);
+    searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_EFF_AFFINITY, 1.f);
 }
 
 /*
- * A* with LM-cut behaves the same with the greedy cut tree state packer
- * as with the default FFD packer (see searchAStarLMCutPacker()).
+ * Asserts that A* with the heuristic HEUR behaves the same with the state
+ * pool of the type TYPE (the tree used for all states, the check of
+ * tree-ffd at CHECK_STATES states with the minimum ratio MIN_RATIO) as with
+ * the default array of the state pool: the same plan cost and the same
+ * numbers of expanded, evaluated, and generated states (state IDs do not
+ * depend on the representation of the pool).
  */
-TEST_COND(search_astar_lmc_packer_greedy_cut_tree, search, LP)
+static void searchAStarPool(pddl_heur_t *heur,
+                            pddl_fdr_state_pool_type_t type,
+                            int check_states,
+                            float min_ratio)
 {
-    searchAStarLMCutPacker(PDDL_FDR_STATE_PACKER_LAYOUT_GREEDY_CUT_TREE, 1.f);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_ASTAR;
+    cfg.heur = heur;
+    assert(cfg.state_pool.type == PDDL_FDR_STATE_POOL_ARRAY);
+    pddl_search_stat_t stat_array;
+    int cost_array = runSearch(&cfg, &stat_array);
+
+    cfg.state_pool.type = type;
+    cfg.state_pool.tree_min_state_size = 0;
+    cfg.state_pool.tree_ffd_check_states = check_states;
+    cfg.state_pool.tree_ffd_min_ratio = min_ratio;
+    pddl_search_stat_t stat;
+    int cost = runSearch(&cfg, &stat);
+
+    assert(cost_array == cost);
+    if (C.optimal_cost >= 0)
+        assert(cost == C.optimal_cost);
+    assert(stat_array.expanded == stat.expanded);
+    assert(stat_array.evaluated == stat.evaluated);
+    assert(stat_array.generated == stat.generated);
+    pddlHeurDel(heur);
+}
+
+/*
+ * Blind A* behaves the same with the tree representation of the state pool
+ * as with the array (see searchAStarPool()).
+ */
+TEST(search_blind_pool_tree, search)
+{
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE, 1, 1.f);
+}
+
+/*
+ * A* with LM-cut behaves the same with the tree representation of the
+ * state pool as with the array (see searchAStarPool()).
+ */
+TEST(search_astar_lmc_pool_tree, search)
+{
+    searchAStarPool(pddlHeurLMCut(&C.fdr, &C.err),
+                    PDDL_FDR_STATE_POOL_TREE, 1, 1.f);
+}
+
+/*
+ * Blind A* behaves the same with tree-ffd as with the array (see
+ * searchAStarPool()): with the check at 10 states and a minimum ratio that
+ * is never reached, so the pool switches from the tree to the array of
+ * FFD-packed states during the search (if it stores at least 10 states),
+ * and with the minimum ratio 0, so it keeps the tree.
+ */
+TEST(search_blind_pool_tree_ffd, search)
+{
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 0.f);
+}
+
+/*
+ * A* with LM-cut behaves the same with tree-ffd switching to the array
+ * during the search as with the array (see search_blind_pool_tree_ffd).
+ */
+TEST(search_astar_lmc_pool_tree_ffd, search)
+{
+    searchAStarPool(pddlHeurLMCut(&C.fdr, &C.err),
+                    PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f);
 }

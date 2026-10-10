@@ -51,10 +51,9 @@ static void spaceInit(space_t *s)
         pddl_fdr_var_t *v = pddlFDRVarsAdd(&s->vars, VAL_SIZE);
         assert(v->var_id == var);
     }
-    pddl_fdr_state_packer_config_t packer_cfg
-            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
-    packer_cfg.vars = &s->vars;
-    int ret = pddlFDRStateSpaceInit(&s->space, &packer_cfg, &s->err);
+    pddl_fdr_state_pool_config_t pool_cfg = PDDL_FDR_STATE_POOL_CONFIG_INIT;
+    pool_cfg.packer_cfg.vars = &s->vars;
+    int ret = pddlFDRStateSpaceInit(&s->space, &pool_cfg, &s->err);
     assert(ret == 0);
     pddlFDRStateSpaceNodeInit(&s->node, &s->space);
 }
@@ -424,10 +423,9 @@ TEST_ONCE(fdr_state_pool_segments)
         pddlFDRVarsAdd(&vars, 16);
 
     pddl_fdr_state_pool_t sp;
-    pddl_fdr_state_packer_config_t packer_cfg
-            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
-    packer_cfg.vars = &vars;
-    int ret = pddlFDRStatePoolInit(&sp, &packer_cfg, &err);
+    pddl_fdr_state_pool_config_t pool_cfg = PDDL_FDR_STATE_POOL_CONFIG_INIT;
+    pool_cfg.packer_cfg.vars = &vars;
+    int ret = pddlFDRStatePoolInit(&sp, &pool_cfg, &err);
     assert(ret == 0);
     assert(pddlIdxSetElSize(&sp.states) == 4096);
     assert(pddlSegVecNumSegments(&sp.states.el) == 0);
@@ -538,12 +536,12 @@ TEST_ONCE(fdr_state_space_packer_cfg)
     };
     const int exp_bufsize[2] = { 12, 8 };
     for (int li = 0; li < 2; ++li){
-        pddl_fdr_state_packer_config_t packer_cfg
-                = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
-        packer_cfg.vars = &vars;
-        packer_cfg.layout = layouts[li];
+        pddl_fdr_state_pool_config_t pool_cfg
+                = PDDL_FDR_STATE_POOL_CONFIG_INIT;
+        pool_cfg.packer_cfg.vars = &vars;
+        pool_cfg.packer_cfg.layout = layouts[li];
         pddl_fdr_state_space_t space;
-        int ret = pddlFDRStateSpaceInit(&space, &packer_cfg, &err);
+        int ret = pddlFDRStateSpaceInit(&space, &pool_cfg, &err);
         assert(ret == 0);
         assert(pddlFDRStatePackerBufSize(&space.state_pool.packer)
                 == exp_bufsize[li]);
@@ -573,19 +571,18 @@ TEST_ONCE(fdr_state_space_packer_cfg)
  */
 TEST_ONCE(fdr_state_space_init_err)
 {
-    pddl_fdr_state_packer_config_t packer_cfg
-            = PDDL_FDR_STATE_PACKER_CONFIG_INIT;
+    pddl_fdr_state_pool_config_t pool_cfg = PDDL_FDR_STATE_POOL_CONFIG_INIT;
 
     pddl_err_t err;
     pddlErrInit(&err);
     pddl_fdr_state_space_t space;
-    int ret = pddlFDRStateSpaceInit(&space, &packer_cfg, &err);
+    int ret = pddlFDRStateSpaceInit(&space, &pool_cfg, &err);
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
 
     pddlErrInit(&err);
     pddl_fdr_state_pool_t pool;
-    ret = pddlFDRStatePoolInit(&pool, &packer_cfg, &err);
+    ret = pddlFDRStatePoolInit(&pool, &pool_cfg, &err);
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
 }

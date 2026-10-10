@@ -2761,8 +2761,10 @@ gplan-astar-pot-I = ["gplan", "astar", "pot", "stdout", "--pot-I"]
 gplan-astar-pot-A = ["gplan", "astar", "pot", "stdout", "--pot-A"]
 gplan-astar-lmc-state-packer-ffd = ["gplan", "astar", "lmc", "stdout", "--state-packer", "ffd"]
 gplan-astar-lmc-state-packer-ilp = ["gplan", "astar", "lmc", "stdout", "--state-packer", "ilp", "--state-packer-ilp-time-limit", "10"]
-gplan-astar-lmc-state-packer-min-cut-tree = ["gplan", "astar", "lmc", "stdout", "--state-packer", "min-cut-tree", "--state-packer-ilp-time-limit", "1"]
-gplan-astar-lmc-state-packer-greedy-cut-tree = ["gplan", "astar", "lmc", "stdout", "--state-packer", "greedy-cut-tree", "--state-packer-ilp-time-limit", "1"]
+gplan-astar-lmc-state-packer-eff-affinity = ["gplan", "astar", "lmc", "stdout", "--state-packer", "eff-affinity"]
+gplan-astar-lmc-state-pool-tree = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree", "--state-pool-tree-min-size", "0"]
+gplan-astar-lmc-state-pool-tree-ffd = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree-ffd", "--state-pool-tree-min-size", "0", "--state-pool-tree-ffd-check-states", "10", "--state-pool-tree-ffd-min-ratio", "1000000"]
+gplan-astar-lmc-state-pool-tree-eff-affinity = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree", "--state-pool-tree-min-size", "0", "--state-packer", "eff-affinity"]
 
 # --- pot-conj-find ---
 # --- pot-conj-exact-find ---
@@ -2795,8 +2797,6 @@ gplan-astar-pot-AI        = ["CPLEX"]
 gplan-astar-pot-I         = ["CPLEX"]
 gplan-astar-pot-A         = ["CPLEX"]
 gplan-astar-lmc-state-packer-ilp = ["LP"]
-gplan-astar-lmc-state-packer-min-cut-tree = ["LP"]
-gplan-astar-lmc-state-packer-greedy-cut-tree = ["LP"]
 symb-astar-fw             = ["CUDD"]
 symb-astar-bw             = ["CUDD"]
 symb-astar-fwbw           = ["CUDD"]
@@ -2942,8 +2942,10 @@ gplan-astar-pot-I = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-pot-A = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-packer-ffd = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-packer-ilp = "script:plan-out-reduce-to-plan-cost"
-gplan-astar-lmc-state-packer-min-cut-tree = "script:plan-out-reduce-to-plan-cost"
-gplan-astar-lmc-state-packer-greedy-cut-tree = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-lmc-state-packer-eff-affinity = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-lmc-state-pool-tree = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-lmc-state-pool-tree-ffd = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-lmc-state-pool-tree-eff-affinity = "script:plan-out-reduce-to-plan-cost"
 
 symb-astar-fw = "script:symb-optimal"
 symb-astar-bw = "script:symb-optimal"
