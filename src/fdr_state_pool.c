@@ -7,8 +7,8 @@
 /*
  * Tests of the representations of the FDR state pool
  * (pddl/fdr_state_pool.h): the tree compression, the fallbacks to the array
- * representation, and the switch of PDDL_FDR_STATE_POOL_TREE_FFD from the
- * tree to the array of FFD-packed states.
+ * representation, and the switch of PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY
+ * from the tree to the array of FFD-packed states.
  *
  * All tests except fdr_state_pool_walk are TEST_ONCE (not per task).
  * Run with:  cd tests && make && ./test -T _ -s fdr_state_pool_
@@ -62,8 +62,8 @@ static void poolInit(pddl_fdr_state_pool_t *pool,
     cfg.type = type;
     cfg.packer_cfg.vars = vars;
     cfg.tree_min_state_size = min_size;
-    cfg.tree_ffd_check_states = check_states;
-    cfg.tree_ffd_min_ratio = min_ratio;
+    cfg.fallback_to_ffd_array_check_states = check_states;
+    cfg.fallback_to_ffd_array_min_ratio = min_ratio;
     int ret = pddlFDRStatePoolInit(pool, &cfg, NULL);
     assert(ret == 0);
 }
@@ -110,8 +110,8 @@ TEST_ONCE(fdr_state_pool_config_init)
     assert(cfg.packer_cfg.vars == NULL);
     assert(cfg.packer_cfg.layout == PDDL_FDR_STATE_PACKER_LAYOUT_FFD);
     assert(cfg.tree_min_state_size == 16);
-    assert(cfg.tree_ffd_check_states == 1000000);
-    assert(cfg.tree_ffd_min_ratio == 1.5f);
+    assert(cfg.fallback_to_ffd_array_check_states == 1000000);
+    assert(cfg.fallback_to_ffd_array_min_ratio == 1.5f);
 }
 
 /*
@@ -287,8 +287,9 @@ TEST_ONCE(fdr_state_pool_tree_shape)
  * FFD-packed state has at least .tree_min_state_size bytes, and only with
  * at least three words:
  *   - array with 4 words is never a tree;
- *   - tree and tree-ffd with 4 words (16 bytes) are trees with the minimum
- *     size 16, but not with 17 (then tree-ffd checks nothing);
+ *   - tree and tree-or-ffd-array with 4 words (16 bytes) are trees with
+ *     the minimum size 16, but not with 17 (then tree-or-ffd-array checks
+ *     nothing);
  *   - tree with 2 words is not a tree even with the minimum size 0.
  * The pools in the array representation store and return states.
  */
@@ -303,10 +304,10 @@ TEST_ONCE(fdr_state_pool_tree_fallback)
         { 4, PDDL_FDR_STATE_POOL_ARRAY, 0, pddl_false },
         { 4, PDDL_FDR_STATE_POOL_TREE, 16, pddl_true },
         { 4, PDDL_FDR_STATE_POOL_TREE, 17, pddl_false },
-        { 4, PDDL_FDR_STATE_POOL_TREE_FFD, 16, pddl_true },
-        { 4, PDDL_FDR_STATE_POOL_TREE_FFD, 17, pddl_false },
+        { 4, PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 16, pddl_true },
+        { 4, PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 17, pddl_false },
         { 2, PDDL_FDR_STATE_POOL_TREE, 0, pddl_false },
-        { 2, PDDL_FDR_STATE_POOL_TREE_FFD, 0, pddl_false },
+        { 2, PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 0, pddl_false },
     };
     const int num_cases = sizeof(cases) / sizeof(cases[0]);
 
@@ -320,7 +321,8 @@ TEST_ONCE(fdr_state_pool_tree_fallback)
         assert(pool.is_tree == cases[ci].is_tree);
         assert(pool.has_ffd_packer
                 == (cases[ci].is_tree
-                        && cases[ci].type == PDDL_FDR_STATE_POOL_TREE_FFD));
+                        && cases[ci].type
+                                == PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY));
         assert(pool.tree_check_num_states == (pool.has_ffd_packer ? 10 : 0));
 
         pddl_fdr_state_pool_stat_t stat = poolStat(&pool);
@@ -350,7 +352,7 @@ TEST_ONCE(fdr_state_pool_tree_fallback)
 
 /*
  * Invalid configurations of the pool fail with an error: an unknown type,
- * and a non-positive number of states of the check of tree-ffd.
+ * and a non-positive number of states of the check of tree-or-ffd-array.
  */
 TEST_ONCE(fdr_state_pool_err_config)
 {
@@ -367,8 +369,8 @@ TEST_ONCE(fdr_state_pool_err_config)
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
 
-    cfg.type = PDDL_FDR_STATE_POOL_TREE_FFD;
-    cfg.tree_ffd_check_states = 0;
+    cfg.type = PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY;
+    cfg.fallback_to_ffd_array_check_states = 0;
     pddlErrInit(&err);
     ret = pddlFDRStatePoolInit(&pool, &cfg, &err);
     assert(ret == -1);
@@ -377,9 +379,9 @@ TEST_ONCE(fdr_state_pool_err_config)
     pddlFDRVarsFree(&vars);
 }
 
-/* Fills STATE of the redundant states of the tree-ffd tests: 64 words, all
- * words zero except the last one, which is given by I (the last eight
- * variables encode I in base VAL_SIZE). */
+/* Fills STATE of the redundant states of the tree-or-ffd-array tests: 64
+ * words, all words zero except the last one, which is given by I (the last
+ * eight variables encode I in base VAL_SIZE). */
 static void redundantState(int *state, int num_vars, int i)
 {
     memset(state, 0, sizeof(int) * num_vars);
@@ -431,9 +433,9 @@ static double treeRatio(const pddl_fdr_vars_t *vars, int num, int seed)
     return r;
 }
 
-/* Runs tree-ffd over VARS with the check at CHECK states and the minimum
- * ratio MIN_RATIO on 2 * CHECK redundant (SEED < 0) or random (with the
- * seed SEED) states, and returns true if the pool switched to the array.
+/* Runs tree-or-ffd-array over VARS with the check at CHECK states and the
+ * minimum ratio MIN_RATIO on 2 * CHECK redundant (SEED < 0) or random (with
+ * the seed SEED) states, and returns true if the pool switched to the array.
  * Asserts that the pool keeps the tree until the check, that it switches
  * or keeps the tree exactly at the check, and that after the switch:
  *   - the pool is the array of FFD-packed states without the tree;
@@ -452,7 +454,8 @@ static pddl_bool_t runTreeFFD(const pddl_fdr_vars_t *vars,
     int *states = calloc((size_t)2 * check * num_vars, sizeof(int));
 
     pddl_fdr_state_pool_t pool;
-    poolInit(&pool, vars, PDDL_FDR_STATE_POOL_TREE_FFD, 0, check, min_ratio);
+    poolInit(&pool, vars, PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 0, check,
+             min_ratio);
     assert(pool.is_tree);
     insertStates(&pool, states, num_vars, 0, check - 1, r);
     assert(pool.is_tree);
@@ -491,14 +494,14 @@ static pddl_bool_t runTreeFFD(const pddl_fdr_vars_t *vars,
 }
 
 /*
- * tree-ffd with 64 words and the check at 1000 states: redundant states
- * (only the last word differs) compress well, so with the minimum ratio
- * 1.2 the tree is kept; random states do not compress at all (the ratio is
- * below 1), so the pool switches to the array. The minimum ratio decides:
- * the redundant states switch with the minimum ratio slightly above their
- * ratio at the check, and keep the tree slightly below it.
+ * tree-or-ffd-array with 64 words and the check at 1000 states: redundant
+ * states (only the last word differs) compress well, so with the minimum
+ * ratio 1.2 the tree is kept; random states do not compress at all (the
+ * ratio is below 1), so the pool switches to the array. The minimum ratio
+ * decides: the redundant states switch with the minimum ratio slightly
+ * above their ratio at the check, and keep the tree slightly below it.
  */
-TEST_ONCE(fdr_state_pool_tree_ffd)
+TEST_ONCE(fdr_state_pool_tree_or_ffd_array)
 {
     const int check = 1000;
     pddl_fdr_vars_t vars;
@@ -520,18 +523,19 @@ TEST_ONCE(fdr_state_pool_tree_ffd)
 }
 
 /*
- * The array of tree-ffd uses the FFD layout, whereas the array of tree uses
- * the configured layout: the variables of the widths 20, 12, 12, 20, with
- * one operator changing both 12-bit variables, are packed into 2 words by
- * FFD and into 3 words by the effect affinity layout ({1, 2}, {0}, {3}).
+ * The array of tree-or-ffd-array uses the FFD layout, whereas the array of
+ * tree uses the configured layout: the variables of the widths 20, 12, 12,
+ * 20, with one operator changing both 12-bit variables, are packed into 2
+ * words by FFD and into 3 words by the effect affinity layout ({1, 2}, {0},
+ * {3}).
  * So:
  *   - tree uses the effect affinity packer (12 bytes) both as a tree and
  *     as an array (minimum size 9 > 8 bytes of FFD);
- *   - tree-ffd that is not a tree uses the FFD packer (8 bytes);
- *   - tree-ffd that switches converts the states from the effect affinity
- *     packer (12 bytes) to the FFD packer (8 bytes).
+ *   - tree-or-ffd-array that is not a tree uses the FFD packer (8 bytes);
+ *   - tree-or-ffd-array that switches converts the states from the effect
+ *     affinity packer (12 bytes) to the FFD packer (8 bytes).
  */
-TEST_ONCE(fdr_state_pool_tree_ffd_packer)
+TEST_ONCE(fdr_state_pool_tree_or_ffd_array_packer)
 {
     static const int val_size[4] = { 1 << 20, 1 << 12, 1 << 12, 1 << 20 };
     pddl_fdr_vars_t vars;
@@ -559,8 +563,8 @@ TEST_ONCE(fdr_state_pool_tree_ffd_packer)
     } cases[] = {
         { PDDL_FDR_STATE_POOL_TREE, 0, pddl_true, 12, 12 },
         { PDDL_FDR_STATE_POOL_TREE, 9, pddl_false, 12, 12 },
-        { PDDL_FDR_STATE_POOL_TREE_FFD, 9, pddl_false, 8, 8 },
-        { PDDL_FDR_STATE_POOL_TREE_FFD, 0, pddl_true, 12, 8 },
+        { PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 9, pddl_false, 8, 8 },
+        { PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 0, pddl_true, 12, 8 },
     };
     const int num_cases = sizeof(cases) / sizeof(cases[0]);
 
@@ -571,9 +575,10 @@ TEST_ONCE(fdr_state_pool_tree_ffd_packer)
     for (int ci = 0; ci < num_cases; ++ci){
         cfg.type = cases[ci].type;
         cfg.tree_min_state_size = cases[ci].min_size;
-        // The ratio is never reached, so tree-ffd switches at the check
-        cfg.tree_ffd_check_states = num / 2;
-        cfg.tree_ffd_min_ratio = 1e9f;
+        // The ratio is never reached, so tree-or-ffd-array switches at the
+        // check
+        cfg.fallback_to_ffd_array_check_states = num / 2;
+        cfg.fallback_to_ffd_array_min_ratio = 1e9f;
         pddl_fdr_state_pool_t pool;
         int ret = pddlFDRStatePoolInit(&pool, &cfg, NULL);
         assert(ret == 0);
@@ -724,15 +729,15 @@ TEST_ONCE(fdr_state_pool_tree_incremental)
 
 /*
  * The incremental insertion works also in the array representation (where
- * the base state is ignored), and in tree-ffd switching from the tree to
- * the array at 100 states: in all cases, the IDs are the same as of the
- * plain insertion into the array, and the stored states are returned.
+ * the base state is ignored), and in tree-or-ffd-array switching from the
+ * tree to the array at 100 states: in all cases, the IDs are the same as of
+ * the plain insertion into the array, and the stored states are returned.
  */
 TEST_ONCE(fdr_state_pool_incremental_array)
 {
     static const pddl_fdr_state_pool_type_t types[2] = {
         PDDL_FDR_STATE_POOL_ARRAY,
-        PDDL_FDR_STATE_POOL_TREE_FFD,
+        PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
     };
     const int num = 1000;
 
@@ -745,7 +750,8 @@ TEST_ONCE(fdr_state_pool_incremental_array)
         pddl_fdr_state_pool_t inc, array;
         poolInit(&inc, &vars, types[ti], 0, 100, 1e9f);
         poolInit(&array, &vars, PDDL_FDR_STATE_POOL_ARRAY, 0, 1, 1.f);
-        assert(inc.is_tree == (types[ti] == PDDL_FDR_STATE_POOL_TREE_FFD));
+        assert(inc.is_tree
+                == (types[ti] == PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY));
 
         int *states = calloc((size_t)num * num_vars, sizeof(int));
         int *state = calloc(num_vars, sizeof(int));
@@ -784,8 +790,8 @@ TEST_ONCE(fdr_state_pool_incremental_array)
  * a fixed seed) get the same IDs in the array, in the tree (used if the
  * packed state of the task has at least three words), in the tree with the
  * incremental insertion with the previous state of the walk as the base
- * state, and in tree-ffd switching to the array at 1000 states, and all
- * pools return the stored states.
+ * state, and in tree-or-ffd-array switching to the array at 1000 states,
+ * and all pools return the stored states.
  */
 TEST(fdr_state_pool_walk, fdr)
 {
@@ -797,13 +803,13 @@ TEST(fdr_state_pool_walk, fdr)
     cfg.packer_cfg.vars = &C.fdr.var;
     cfg.packer_cfg.ops = &C.fdr.op;
     cfg.tree_min_state_size = 0;
-    cfg.tree_ffd_check_states = 1000;
-    cfg.tree_ffd_min_ratio = 1e9f;
+    cfg.fallback_to_ffd_array_check_states = 1000;
+    cfg.fallback_to_ffd_array_min_ratio = 1e9f;
     pddl_fdr_state_pool_t pool[4];
     static const pddl_fdr_state_pool_type_t types[4] = {
         PDDL_FDR_STATE_POOL_ARRAY,
         PDDL_FDR_STATE_POOL_TREE,
-        PDDL_FDR_STATE_POOL_TREE_FFD,
+        PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
         PDDL_FDR_STATE_POOL_TREE,
     };
     for (int pi = 0; pi < 4; ++pi){
@@ -854,7 +860,7 @@ TEST(fdr_state_pool_walk, fdr)
         assert(poolStat(pool + 3).tree_nodes
                 == poolStat(pool + 1).tree_nodes);
     }
-    // tree-ffd switches only if it reached the check in the tree
+    // tree-or-ffd-array switches only if it reached the check in the tree
     assert(!pool[2].is_tree || num_states < 1000);
     assert(pool[1].is_tree == is_tree);
 

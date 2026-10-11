@@ -207,11 +207,11 @@ TEST(search_astar_lmc_packer_eff_affinity, search)
 /*
  * Asserts that A* with the heuristic HEUR behaves the same with the state
  * pool of the type TYPE (the tree used for all states, the check of
- * tree-ffd at CHECK_STATES states with the minimum ratio MIN_RATIO, and
- * the incremental insertion of states if INCREMENTAL_INSERT is true) as
- * with the default array of the state pool: the same plan cost and the
- * same numbers of expanded, evaluated, and generated states (state IDs do
- * not depend on the representation of the pool).
+ * tree-or-ffd-array at CHECK_STATES states with the minimum ratio
+ * MIN_RATIO, and the incremental insertion of states if INCREMENTAL_INSERT
+ * is true) as with the default array of the state pool: the same plan cost
+ * and the same numbers of expanded, evaluated, and generated states (state
+ * IDs do not depend on the representation of the pool).
  */
 static void searchAStarPool(pddl_heur_t *heur,
                             pddl_fdr_state_pool_type_t type,
@@ -230,8 +230,8 @@ static void searchAStarPool(pddl_heur_t *heur,
 
     cfg.state_pool.type = type;
     cfg.state_pool.tree_min_state_size = 0;
-    cfg.state_pool.tree_ffd_check_states = check_states;
-    cfg.state_pool.tree_ffd_min_ratio = min_ratio;
+    cfg.state_pool.fallback_to_ffd_array_check_states = check_states;
+    cfg.state_pool.fallback_to_ffd_array_min_ratio = min_ratio;
     cfg.state_pool_incremental_insert = incremental_insert;
     pddl_search_stat_t stat;
     int cost = runSearch(&cfg, &stat);
@@ -266,28 +266,30 @@ TEST(search_astar_lmc_pool_tree, search)
 }
 
 /*
- * Blind A* behaves the same with tree-ffd as with the array (see
+ * Blind A* behaves the same with tree-or-ffd-array as with the array (see
  * searchAStarPool()): with the check at 10 states and a minimum ratio that
  * is never reached, so the pool switches from the tree to the array of
  * FFD-packed states during the search (if it stores at least 10 states),
  * and with the minimum ratio 0, so it keeps the tree.
  */
-TEST(search_blind_pool_tree_ffd, search)
+TEST(search_blind_pool_tree_or_ffd_array, search)
 {
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f,
-                    pddl_false);
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 0.f,
-                    pddl_false);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
+                    10, 1e9f, pddl_false);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
+                    10, 0.f, pddl_false);
 }
 
 /*
- * A* with LM-cut behaves the same with tree-ffd switching to the array
- * during the search as with the array (see search_blind_pool_tree_ffd).
+ * A* with LM-cut behaves the same with tree-or-ffd-array switching to the
+ * array during the search as with the array (see
+ * search_blind_pool_tree_or_ffd_array).
  */
-TEST(search_astar_lmc_pool_tree_ffd, search)
+TEST(search_astar_lmc_pool_tree_or_ffd_array, search)
 {
     searchAStarPool(pddlHeurLMCut(&C.fdr, &C.err),
-                    PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f, pddl_false);
+                    PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY, 10, 1e9f,
+                    pddl_false);
 }
 
 /*
@@ -313,13 +315,14 @@ TEST(search_astar_lmc_pool_tree_incremental, search)
 }
 
 /*
- * Blind A* behaves the same with the incremental insertion into tree-ffd
- * as with the array (see search_blind_pool_tree_ffd).
+ * Blind A* behaves the same with the incremental insertion into
+ * tree-or-ffd-array as with the array (see
+ * search_blind_pool_tree_or_ffd_array).
  */
-TEST(search_blind_pool_tree_ffd_incremental, search)
+TEST(search_blind_pool_tree_or_ffd_array_incremental, search)
 {
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 1e9f,
-                    pddl_true);
-    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_FFD, 10, 0.f,
-                    pddl_true);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
+                    10, 1e9f, pddl_true);
+    searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
+                    10, 0.f, pddl_true);
 }

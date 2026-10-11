@@ -2764,7 +2764,7 @@ gplan-astar-lmc-state-packer-ilp = ["gplan", "astar", "lmc", "stdout", "--state-
 gplan-astar-lmc-state-packer-eff-affinity = ["gplan", "astar", "lmc", "stdout", "--state-packer", "eff-affinity"]
 gplan-astar-lmc-state-pool-tree = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree", "--state-pool-tree-min-size", "0"]
 gplan-astar-lmc-state-pool-tree-incremental = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree", "--state-pool-tree-min-size", "0", "--state-pool-incremental-insert"]
-gplan-astar-lmc-state-pool-tree-ffd = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree-ffd", "--state-pool-tree-min-size", "0", "--state-pool-tree-ffd-check-states", "10", "--state-pool-tree-ffd-min-ratio", "1000000"]
+gplan-astar-lmc-state-pool-tree-or-ffd-array = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree-or-ffd-array", "--state-pool-tree-min-size", "0", "--state-pool-fallback-to-ffd-array-check-states", "10", "--state-pool-fallback-to-ffd-array-min-ratio", "1000000"]
 gplan-astar-lmc-state-pool-tree-eff-affinity = ["gplan", "astar", "lmc", "stdout", "--state-pool", "tree", "--state-pool-tree-min-size", "0", "--state-packer", "eff-affinity"]
 
 # --- pot-conj-find ---
@@ -2946,7 +2946,7 @@ gplan-astar-lmc-state-packer-ilp = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-packer-eff-affinity = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-pool-tree = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-pool-tree-incremental = "script:plan-out-reduce-to-plan-cost"
-gplan-astar-lmc-state-pool-tree-ffd = "script:plan-out-reduce-to-plan-cost"
+gplan-astar-lmc-state-pool-tree-or-ffd-array = "script:plan-out-reduce-to-plan-cost"
 gplan-astar-lmc-state-pool-tree-eff-affinity = "script:plan-out-reduce-to-plan-cost"
 
 symb-astar-fw = "script:symb-optimal"
