@@ -292,12 +292,12 @@ TEST_ONCE(pddl_init_state_fluents)
             = pddlFmNewNumCmpEq(pddlFmNewNumExpFluent(a),
                                 pddlFmNewNumExpNumInt(42));
     switch (pddlInitStateAddNumCmp(&is, cmp)){
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
-            assert(0);
-            break;
-        case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
-            break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
+        assert(0);
+        break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
+        break;
     }
     pddlFmDel(&cmp->fm);
 
@@ -306,12 +306,12 @@ TEST_ONCE(pddl_init_state_fluents)
     cmp = pddlFmNewNumCmpEq(pddlFmNewNumExpNumInt(1),
                             pddlFmNewNumExpNumInt(2));
     switch (pddlInitStateAddNumCmp(&is, cmp)){
-        case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
-            assert(0);
-            break;
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
-            break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
+        assert(0);
+        break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
+        break;
     }
     pddlFmDel(&cmp->fm);
     assert(pddlInitStateFluentSize(&is) == 2);
@@ -1073,12 +1073,12 @@ TEST_ONCE(pddl_init_state_return_codes)
             = pddlFmNewNumCmpEq(pddlFmNewNumExpFluent(mkAtom(0, 1, 9)),
                                 pddlFmNewNumExpNumInt(3));
     switch (pddlInitStateAddNumCmp(&is, cmp)){
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
-            assert(0);
-            break;
-        case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
-            break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
+        assert(0);
+        break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
+        break;
     }
     pddlFmDel(&cmp->fm);
     assert(pddlInitStateFluentVal(&is, f, &got) == 0);
@@ -1087,12 +1087,12 @@ TEST_ONCE(pddl_init_state_return_codes)
     cmp = pddlFmNewNumCmpEq(pddlFmNewNumExpFluent(mkAtom(1, 0)),
                             pddlFmNewNumExpNumInt(4));
     switch (pddlInitStateAddNumCmp(&is, cmp)){
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
-        case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
-            assert(0);
-            break;
-        case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
-            break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ERR:
+    case PDDL_INIT_STATE_ADD_NUM_CMP_DUPLICATE:
+        assert(0);
+        break;
+    case PDDL_INIT_STATE_ADD_NUM_CMP_ADDED:
+        break;
     }
     pddlFmDel(&cmp->fm);
     assert(pddlInitStateFluentSize(&is) == 2);

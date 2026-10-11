@@ -82,29 +82,29 @@ static void modelAdd(model_t *m, pddl_idx_set_t *s, int v)
     int id = -1;
     void *val = NULL;
     switch ((v + m->size) % 6){
-        case 0:
-            id = pddlIdxSetInsertFull(s, &v, &val, &is_new);
-            break;
-        case 1:
-            id = pddlIdxSetInsertFull(s, &v, NULL, &is_new);
-            break;
-        case 2:
-            is_new = pddlIdxSetInsert(s, &v);
-            id = pddlIdxSetGetIdxOf(s, &v);
-            break;
-        case 3:
-            id = pddlIdxSetInsertIdx(s, &v);
-            is_new = (pddlIdxSetSize(s) > size);
-            break;
-        case 4:
-            val = pddlIdxSetInsertVal(s, &v);
-            is_new = (pddlIdxSetSize(s) > size);
-            id = pddlIdxSetGetIdxOf(s, &v);
-            break;
-        case 5:
-            id = pddlIdxSetInsertIdxVal(s, &v, &val);
-            is_new = (pddlIdxSetSize(s) > size);
-            break;
+    case 0:
+        id = pddlIdxSetInsertFull(s, &v, &val, &is_new);
+        break;
+    case 1:
+        id = pddlIdxSetInsertFull(s, &v, NULL, &is_new);
+        break;
+    case 2:
+        is_new = pddlIdxSetInsert(s, &v);
+        id = pddlIdxSetGetIdxOf(s, &v);
+        break;
+    case 3:
+        id = pddlIdxSetInsertIdx(s, &v);
+        is_new = (pddlIdxSetSize(s) > size);
+        break;
+    case 4:
+        val = pddlIdxSetInsertVal(s, &v);
+        is_new = (pddlIdxSetSize(s) > size);
+        id = pddlIdxSetGetIdxOf(s, &v);
+        break;
+    case 5:
+        id = pddlIdxSetInsertIdxVal(s, &v, &val);
+        is_new = (pddlIdxSetSize(s) > size);
+        break;
     }
     if (val != NULL)
         assert(val == pddlIdxSetAtConst(s, id));
@@ -134,24 +134,24 @@ static void modelReplace(model_t *m, pddl_idx_set_t *s, int v, int variant)
     int size = pddlIdxSetSize(s);
     void *val = NULL;
     switch (variant % 4){
-        case 0:
-            id = pddlIdxSetReplaceFull(s, &v, &val, &is_new);
-            assert(val == pddlIdxSetAtConst(s, id));
-            break;
-        case 1:
-            is_new = !pddlIdxSetReplace(s, &v);
-            id = pddlIdxSetGetIdxOf(s, &v);
-            break;
-        case 2:
-            id = pddlIdxSetReplaceIdx(s, &v);
-            is_new = (m->id[v] < 0);
-            break;
-        case 3:
-            val = pddlIdxSetReplaceVal(s, &v);
-            is_new = (pddlIdxSetSize(s) > size);
-            id = pddlIdxSetGetIdxOf(s, &v);
-            assert(val == pddlIdxSetAtConst(s, id));
-            break;
+    case 0:
+        id = pddlIdxSetReplaceFull(s, &v, &val, &is_new);
+        assert(val == pddlIdxSetAtConst(s, id));
+        break;
+    case 1:
+        is_new = !pddlIdxSetReplace(s, &v);
+        id = pddlIdxSetGetIdxOf(s, &v);
+        break;
+    case 2:
+        id = pddlIdxSetReplaceIdx(s, &v);
+        is_new = (m->id[v] < 0);
+        break;
+    case 3:
+        val = pddlIdxSetReplaceVal(s, &v);
+        is_new = (pddlIdxSetSize(s) > size);
+        id = pddlIdxSetGetIdxOf(s, &v);
+        assert(val == pddlIdxSetAtConst(s, id));
+        break;
     }
     assert(*(const int *)pddlIdxSetAtConst(s, id) == v);
     if (m->id[v] >= 0){

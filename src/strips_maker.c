@@ -266,16 +266,16 @@ static void walk(pddl_strips_maker_t *sm,
             // action cost the output matches the former %d formatting
             char cost_s[128];
             switch (eff.cost_type){
-                case PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST:
-                    assert(eff.cost.val.i >= 0);
-                    snprintf(cost_s, sizeof(cost_s), "%d", eff.cost.val.i);
-                    break;
-                case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
-                    pddlNumFmt(&eff.cost, cost_s, sizeof(cost_s));
-                    break;
-                case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
-                    pddlNumFmt(&eff.cost, cost_s, sizeof(cost_s));
-                    break;
+            case PDDL_STRIPS_MAKER_EFF_INT_ACTION_COST:
+                assert(eff.cost.val.i >= 0);
+                snprintf(cost_s, sizeof(cost_s), "%d", eff.cost.val.i);
+                break;
+            case PDDL_STRIPS_MAKER_EFF_GENERAL_ACTION_COST:
+                pddlNumFmt(&eff.cost, cost_s, sizeof(cost_s));
+                break;
+            case PDDL_STRIPS_MAKER_EFF_STATE_METRIC:
+                pddlNumFmt(&eff.cost, cost_s, sizeof(cost_s));
+                break;
             }
 
             pddlStripsMakerAddAction(sm, aid, 0, args, NULL);
@@ -907,15 +907,15 @@ static void dumpInitFluents(const char *header,
                     = pddlSegVecGetConst(&sm.fluent_data, ga->id);
             char type = '?';
             switch (fd->type){
-                case PDDL_STRIPS_MAKER_FLUENT_STATIC:
-                    type = 'S';
-                    break;
-                case PDDL_STRIPS_MAKER_FLUENT_ACTION_COST:
-                    type = 'C';
-                    break;
-                case PDDL_STRIPS_MAKER_FLUENT_NON_STATIC:
-                    type = 'N';
-                    break;
+            case PDDL_STRIPS_MAKER_FLUENT_STATIC:
+                type = 'S';
+                break;
+            case PDDL_STRIPS_MAKER_FLUENT_ACTION_COST:
+                type = 'C';
+                break;
+            case PDDL_STRIPS_MAKER_FLUENT_NON_STATIC:
+                type = 'N';
+                break;
             }
             int w = snprintf(line[i], LINE_SIZE, "(%s",
                              pddl.func.pred[ga->pred].name);

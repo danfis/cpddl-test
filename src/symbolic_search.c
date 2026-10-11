@@ -42,40 +42,40 @@ static void run(pddl_symbolic_search_config_t *symb_cfg,
     while (st == PDDL_SYMBOLIC_SEARCH_STATUS_CONT){
         st = pddlSymbolicSearchStep(s, &C.err);
         switch (st){
-            case PDDL_SYMBOLIC_SEARCH_STATUS_CONT:
-                pddlSymbolicSearchProgressLog(s, &C.err);
-                break;
-            case PDDL_SYMBOLIC_SEARCH_STATUS_FOUND_PLAN:
-                assert(!check_optimality);
-            case PDDL_SYMBOLIC_SEARCH_STATUS_FOUND_OPTIMAL_PLAN:
-                pddlSymbolicSearchProgressLog(s, &C.err);
-                PDDL_LOG(&C.err, "Plan found.");
+        case PDDL_SYMBOLIC_SEARCH_STATUS_CONT:
+            pddlSymbolicSearchProgressLog(s, &C.err);
+            break;
+        case PDDL_SYMBOLIC_SEARCH_STATUS_FOUND_PLAN:
+            assert(!check_optimality);
+        case PDDL_SYMBOLIC_SEARCH_STATUS_FOUND_OPTIMAL_PLAN:
+            pddlSymbolicSearchProgressLog(s, &C.err);
+            PDDL_LOG(&C.err, "Plan found.");
 
-                PDDL_IARR(plan);
-                ret = pddlSymbolicSearchExtractPlan(s, &plan, &C.err);
-                assert(ret == 0);
-                checkPlan(&C.fdr, &plan, check_optimality);
-                pddlIArrFree(&plan);
-                break;
+            PDDL_IARR(plan);
+            ret = pddlSymbolicSearchExtractPlan(s, &plan, &C.err);
+            assert(ret == 0);
+            checkPlan(&C.fdr, &plan, check_optimality);
+            pddlIArrFree(&plan);
+            break;
 
-            case PDDL_SYMBOLIC_SEARCH_STATUS_UNSOLVABLE:
-                pddlSymbolicSearchProgressLog(s, &C.err);
-                PDDL_LOG(&C.err, "Task unsolvable.");
-                printf("Unsolvable.\n");
-                assert(C.optimal_cost < 0);
-                break;
+        case PDDL_SYMBOLIC_SEARCH_STATUS_UNSOLVABLE:
+            pddlSymbolicSearchProgressLog(s, &C.err);
+            PDDL_LOG(&C.err, "Task unsolvable.");
+            printf("Unsolvable.\n");
+            assert(C.optimal_cost < 0);
+            break;
 
-            case PDDL_SYMBOLIC_SEARCH_STATUS_EXPLORED:
-                pddlSymbolicSearchProgressLog(s, &C.err);
-                PDDL_LOG(&C.err, "State space fully explored.");
-                // We terminate with the first plan, so this should never
-                // happen.
-                assert(0);
-                break;
+        case PDDL_SYMBOLIC_SEARCH_STATUS_EXPLORED:
+            pddlSymbolicSearchProgressLog(s, &C.err);
+            PDDL_LOG(&C.err, "State space fully explored.");
+            // We terminate with the first plan, so this should never
+            // happen.
+            assert(0);
+            break;
 
-            case PDDL_SYMBOLIC_SEARCH_STATUS_ERR:
-                pddlErrPrint(&C.err, 0, stdout);
-                break;
+        case PDDL_SYMBOLIC_SEARCH_STATUS_ERR:
+            pddlErrPrint(&C.err, 0, stdout);
+            break;
         }
     }
     pddlSymbolicSearchStatsLog(s, &C.err);

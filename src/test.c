@@ -192,66 +192,66 @@ static void parseOptions(int argc, char *argv[])
     int opt;
     while ((opt = getopt_long(argc, argv, "haBQAvxS:T:s:t:p:DLKm:fl:cC",
                               long_options, NULL)) != -1) {
-        switch (opt) {
-            case 'a':
-                tasksTestsEnableAllTests();
-                break;
-            case 'B':
-                tasksTestsEnableAllTasks(PDDL_TASK_SET_BASE);
-                break;
-            case 'Q':
-                tasksTestsEnableAllTasks(PDDL_TASK_SET_QUICK);
-                break;
-            case 'A':
-                tasksTestsEnableAllTasks(PDDL_TASK_SET_ALL);
-                break;
-            case 'S':
-                tasksTestsEnableTaskMatch(optarg);
-                break;
-            case 'T':
-                tasksTestsEnableTaskEq(optarg);
-                break;
-            case 's':
-                tasksTestsEnableTestMatch(optarg);
-                break;
-            case 't':
-                tasksTestsEnableTestEq(optarg);
-                break;
-            case 'v':
-                verbose++;
-                break;
-            case 'x':
-                no_progress = 1;
-                break;
-            case 'p':
-                parallel = atoi(optarg);
-                break;
-            case 'D':
-                print_plan = 1;
-                break;
-            case 'L':
-                print_tasks = 1;
-                break;
-            case 'K':
-                print_tests = 1;
-                break;
-            case 'm':
-                timeout_s = atoi(optarg);
-                break;
-            case 'f':
-                supress_fail = 1;
-                break;
-            case 'l':
-                openLogFile(optarg);
-                break;
-            case 'c':
-                clean_reg_all = 1;
-                break;
-            case 'C':
-                clean_reg_exit = 1;
-                break;
-            default:
-                usage(argv[0]);
+        switch (opt){
+        case 'a':
+            tasksTestsEnableAllTests();
+            break;
+        case 'B':
+            tasksTestsEnableAllTasks(PDDL_TASK_SET_BASE);
+            break;
+        case 'Q':
+            tasksTestsEnableAllTasks(PDDL_TASK_SET_QUICK);
+            break;
+        case 'A':
+            tasksTestsEnableAllTasks(PDDL_TASK_SET_ALL);
+            break;
+        case 'S':
+            tasksTestsEnableTaskMatch(optarg);
+            break;
+        case 'T':
+            tasksTestsEnableTaskEq(optarg);
+            break;
+        case 's':
+            tasksTestsEnableTestMatch(optarg);
+            break;
+        case 't':
+            tasksTestsEnableTestEq(optarg);
+            break;
+        case 'v':
+            verbose++;
+            break;
+        case 'x':
+            no_progress = 1;
+            break;
+        case 'p':
+            parallel = atoi(optarg);
+            break;
+        case 'D':
+            print_plan = 1;
+            break;
+        case 'L':
+            print_tasks = 1;
+            break;
+        case 'K':
+            print_tests = 1;
+            break;
+        case 'm':
+            timeout_s = atoi(optarg);
+            break;
+        case 'f':
+            supress_fail = 1;
+            break;
+        case 'l':
+            openLogFile(optarg);
+            break;
+        case 'c':
+            clean_reg_all = 1;
+            break;
+        case 'C':
+            clean_reg_exit = 1;
+            break;
+        default:
+            usage(argv[0]);
         }
     }
     if (optind != argc)

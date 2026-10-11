@@ -217,44 +217,44 @@ static void _lifted_search(pddl_lifted_heur_t *heur,
     }
 
     switch (st){
-        case PDDL_LIFTED_SEARCH_FOUND: {
-            const pddl_lifted_plan_t *plan = pddlLiftedSearchPlan(search);
-            char cost[64];
-            if (search_alg == PDDL_LIFTED_SEARCH_ASTAR){
-                printf("Cost: %s\n",
-                       pddlNumFmt(&plan->plan_cost, cost, sizeof(cost)));
-            }
-            fflush(stdout);
-            int val = validateLiftedPlan(plan);
-            assert(val == 0);
-            if (compare_to_optimal_cost && C.optimal_cost >= 0){
-                // Compared by value, so a float cost can match as well
-                pddl_num_t opt;
-                pddlNumSetInt(&opt, C.optimal_cost);
-                int cmp = pddlNumCmp(&plan->plan_cost, &opt);
-                if (search_alg == PDDL_LIFTED_SEARCH_ASTAR)
-                    assert(cmp == 0);
-                assert(cmp >= 0);
-            }
+    case PDDL_LIFTED_SEARCH_FOUND: {
+        const pddl_lifted_plan_t *plan = pddlLiftedSearchPlan(search);
+        char cost[64];
+        if (search_alg == PDDL_LIFTED_SEARCH_ASTAR){
+            printf("Cost: %s\n",
+                   pddlNumFmt(&plan->plan_cost, cost, sizeof(cost)));
+        }
+        fflush(stdout);
+        int val = validateLiftedPlan(plan);
+        assert(val == 0);
+        if (compare_to_optimal_cost && C.optimal_cost >= 0){
+            // Compared by value, so a float cost can match as well
+            pddl_num_t opt;
+            pddlNumSetInt(&opt, C.optimal_cost);
+            int cmp = pddlNumCmp(&plan->plan_cost, &opt);
+            if (search_alg == PDDL_LIFTED_SEARCH_ASTAR)
+                assert(cmp == 0);
+            assert(cmp >= 0);
+        }
+        break;
+    }
+    case PDDL_LIFTED_SEARCH_UNSOLVABLE:
+        assert(C.optimal_cost < 0);
+        printf("Unsolvable\n");
+        break;
+    case PDDL_LIFTED_SEARCH_ABORT:
+        if (pddlErrIsSet(&C.err))
+            pddlErrPrint(&C.err, 1, stderr);
+        // Aborting is the expected outcome of a violated enforcement
+        if (enforce_non_decreasing_state_metric){
+            printf("Aborted\n");
             break;
         }
-        case PDDL_LIFTED_SEARCH_UNSOLVABLE:
-            assert(C.optimal_cost < 0);
-            printf("Unsolvable\n");
-            break;
-        case PDDL_LIFTED_SEARCH_ABORT:
-            if (pddlErrIsSet(&C.err))
-                pddlErrPrint(&C.err, 1, stderr);
-            // Aborting is the expected outcome of a violated enforcement
-            if (enforce_non_decreasing_state_metric){
-                printf("Aborted\n");
-                break;
-            }
-            assert(0 && "ABORT status");
-            break;
-        case PDDL_LIFTED_SEARCH_CONT:
-            assert(0);
-            break;
+        assert(0 && "ABORT status");
+        break;
+    case PDDL_LIFTED_SEARCH_CONT:
+        assert(0);
+        break;
     }
     fflush(stdout);
     pddlLiftedSearchDel(search);
