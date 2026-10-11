@@ -666,6 +666,80 @@ TEST_ONCE(num_hash_fmt)
     pddlNumArrFree(NULL, 0);
 }
 
+/*
+ * pddlNumParse() parses the output of pddlNumFmt() back to the same value
+ * (except huge values), accepts the other documented forms, and rejects
+ * invalid strings and out-of-range values without touching the
+ * destination.
+ */
+TEST_ONCE(num_parse)
+{
+    char s[64];
+    pddl_num_t v;
+
+    // Round trip of the format
+    pddl_num_t vals[] = {
+        mk_int(5), mk_int(-5), mk_int(0), mk_int(INT_MAX), mk_int(INT_MIN),
+        mk_flt(2.5f), mk_flt(-0.5f), mk_flt(1e-3f), mk_flt(3e20f),
+        mk_int_d(5, 3), mk_int_d(5, -2), mk_int_d(-7, 1),
+        mk_int_d(1, PDDL_NUM_DELTA_MAX), mk_int_d(1, PDDL_NUM_DELTA_MIN),
+        mk_flt_d(-0.5f, 1), mk_flt_d(2.5f, -4), pddl_num_eps,
+        pddl_num_zero, pddl_num_one, pddl_num_inf, pddl_num_neg_inf,
+    };
+    for (size_t i = 0; i < sizeof(vals) / sizeof(vals[0]); ++i){
+        pddlNumFmt(&vals[i], s, sizeof(s));
+        int ret = pddlNumParse(&v, s);
+        if (ret != 0 || !pddlNumExactEq(&v, &vals[i]))
+            fprintf(stderr, "Parse: '%s' failed\n", s);
+        assert(ret == 0);
+        assert(pddlNumExactEq(&v, &vals[i]));
+    }
+
+    // Other accepted forms
+    struct {
+        const char *str;
+        pddl_num_t v;
+    } ok[] = {
+        { "+5", mk_int(5) },
+        { "+inf", pddl_num_inf },
+        { "0-3e", mk_int_d(0, -3) },
+        { "10-1e", mk_int_d(10, -1) },
+        { "-0+0e", mk_int(0) },
+        { "1e5-1e", mk_flt_d(1e5f, -1) },
+        { "2.5+3e", mk_flt_d(2.5f, 3) },
+        { ".5", mk_flt(0.5f) },
+        { "5.", mk_flt(5.f) },
+        { "99999999999", mk_flt(99999999999.f) },
+    };
+    for (size_t i = 0; i < sizeof(ok) / sizeof(ok[0]); ++i){
+        int ret = pddlNumParse(&v, ok[i].str);
+        if (ret != 0 || !pddlNumExactEq(&v, &ok[i].v))
+            fprintf(stderr, "Parse: '%s' failed\n", ok[i].str);
+        assert(ret == 0);
+        assert(pddlNumExactEq(&v, &ok[i].v));
+    }
+
+    // Invalid strings
+    char delta_over[32], delta_under[32];
+    sprintf(delta_over, "1+%de", PDDL_NUM_DELTA_MAX + 1);
+    sprintf(delta_under, "1%de", PDDL_NUM_DELTA_MIN - 1);
+    const char *bad[] = {
+        "", "abc", "5e", "5-2", "5+e", "5+-1e", "5+ 1e", "5+1e ", " 5",
+        "5 ", "2.5e+3e", "inf+1e", "inf-1e", "huge", "-huge", "nan",
+        "infinity", "1e50", "+", "-", "e", "5+1ee", "5+1x",
+        delta_over, delta_under,
+    };
+    for (size_t i = 0; i < sizeof(bad) / sizeof(bad[0]); ++i){
+        pddl_num_t w = mk_int_d(42, 7);
+        int ret = pddlNumParse(&w, bad[i]);
+        if (ret == 0)
+            fprintf(stderr, "Parse: '%s' accepted\n", bad[i]);
+        assert(ret == -1);
+        pddl_num_t orig = mk_int_d(42, 7);
+        assert(pddlNumExactEq(&w, &orig));
+    }
+}
+
 TEST_ONCE(num_representable)
 {
     assert(pddlNumIsInt64Representable(0));

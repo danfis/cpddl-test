@@ -235,6 +235,95 @@ TEST_ONCE(opts_dbl)
     pddlOptsFree(&opts);
 }
 
+/* Parses the pddl_num_t option --val with the value VAL into DST; returns
+ * the return value of pddlOptsParse() and sets *IS_ERR to opts.err. */
+static int parseNumOpt(const char *val, pddl_num_t *dst, pddl_bool_t *is_err)
+{
+    pddl_opts_t opts;
+    pddlOptsInit(&opts);
+    pddlOptsNum(&opts, "val", 0, dst, "A number");
+
+    char arg0[] = "prog";
+    char arg1[] = "--val";
+    char arg2[64];
+    strcpy(arg2, val);
+    char *argv[] = {arg0, arg1, arg2, NULL};
+    int cmd = 0;
+    int ret = pddlOptsParse(&opts, 3, argv, &cmd);
+    *is_err = opts.err;
+    pddlOptsFree(&opts);
+    return ret;
+}
+
+/*
+ * pddlOptsNum() parses integers, floats, and infinities into pddl_num_t.
+ */
+TEST_ONCE(opts_num)
+{
+    pddl_num_t val = pddl_num_zero;
+    pddl_bool_t is_err;
+
+    int ret = parseNumOpt("5", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsPlainInt(&val) && val.val.i == 5 && val.delta == 0);
+
+    ret = parseNumOpt("-3", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsPlainInt(&val) && val.val.i == -3);
+
+    ret = parseNumOpt("2.5", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsFlt(&val) && val.val.f == 2.5f && val.delta == 0);
+
+    ret = parseNumOpt("inf", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsPosInf(&val));
+
+    ret = parseNumOpt("+inf", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsPosInf(&val));
+
+    ret = parseNumOpt("-inf", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsNegInf(&val));
+
+    ret = parseNumOpt("10-1e", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsPlainInt(&val) && val.val.i == 10 && val.delta == -1);
+
+    ret = parseNumOpt("2.5+3e", &val, &is_err);
+    assert(ret == 0 && !is_err);
+    assert(pddlNumIsFlt(&val) && val.val.f == 2.5f && val.delta == 3);
+
+    pddl_num_t inf = PDDL_NUM_INF_INIT;
+    assert(pddlNumExactEq(&inf, &pddl_num_inf));
+}
+
+/*
+ * pddlOptsNum() rejects values that are not numbers (see pddlNumParse()).
+ */
+TEST_ONCE(opts_num_invalid)
+{
+    pddl_num_t val = pddl_num_one;
+    pddl_bool_t is_err;
+
+    int ret = parseNumOpt("abc", &val, &is_err);
+    assert(ret != 0 && is_err);
+    assert(pddlNumIsOne(&val));
+
+    ret = parseNumOpt("2.5x", &val, &is_err);
+    assert(ret != 0 && is_err);
+    assert(pddlNumIsOne(&val));
+
+    ret = parseNumOpt("5e", &val, &is_err);
+    assert(ret != 0 && is_err);
+    assert(pddlNumIsOne(&val));
+
+    ret = parseNumOpt("5-2", &val, &is_err);
+    assert(ret != 0 && is_err);
+    assert(pddlNumIsOne(&val));
+}
+
 /* -----------------------------------------------------------------------
  * String option
  * ----------------------------------------------------------------------- */
