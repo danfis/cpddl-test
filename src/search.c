@@ -541,3 +541,174 @@ TEST(search_gbfs_saturated_cost, search)
     pddlFDRFree(&fdr);
     pddlHeurDel(heur);
 }
+
+/* Runs the search configured by CFG to the end; it fills STAT with its
+ * statistics, sets *COST to the cost of the found (and validated) plan, or
+ * to -1 if no plan was found, and returns the final status. */
+static pddl_search_status_t runSearchPlan(const pddl_search_config_t *cfg,
+                                          pddl_search_stat_t *stat,
+                                          int *cost)
+{
+    pddl_search_t *search = pddlSearchNew(cfg, &C.err);
+    assert(search != NULL);
+    pddl_search_status_t ret = pddlSearchInitStep(search, &C.err);
+    while (ret == PDDL_SEARCH_CONT)
+        ret = pddlSearchStep(search, &C.err);
+    pddlSearchStat(search, stat);
+
+    *cost = -1;
+    if (ret == PDDL_SEARCH_FOUND){
+        pddl_plan_t plan;
+        pddlPlanInit(&plan);
+        int eret = pddlSearchExtractPlan(search, &plan, &C.err);
+        assert(eret == 0);
+        int val = validateGroundPlan(cfg->fdr, &plan);
+        assert(val == 0);
+        *cost = plan.cost;
+        pddlPlanFree(&plan);
+    }
+    pddlSearchDel(search);
+    return ret;
+}
+
+/* Asserts that the search configured by CFG does not find a plan within its
+ * upper bound on the plan cost. */
+static void assertNoPlanWithinUpperBound(const pddl_search_config_t *cfg)
+{
+    pddl_search_stat_t stat;
+    int cost;
+    pddl_search_status_t ret = runSearchPlan(cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_FOUND:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        break;
+    }
+}
+
+/*
+ * A* with LM-cut and an upper bound on the plan cost: it finds an optimal
+ * plan if the bound is the optimal cost, and no plan if the bound is the
+ * strict bound given as optimal - eps.
+ */
+TEST(search_astar_upper_bound, search)
+{
+    pddl_heur_t *heur = pddlHeurLMCut(&C.fdr, &C.err);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_ASTAR;
+    cfg.heur = heur;
+
+    if (C.optimal_cost < 0){
+        pddlNumSetInt(&cfg.plan_cost_upper_bound, 0);
+        assertNoPlanWithinUpperBound(&cfg);
+        pddlHeurDel(heur);
+        return;
+    }
+
+    pddlNumSetInt(&cfg.plan_cost_upper_bound, C.optimal_cost);
+    pddl_search_stat_t stat;
+    int cost;
+    pddl_search_status_t ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_UNSOLVABLE:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(cost == C.optimal_cost);
+        break;
+    }
+
+    pddlNumSetIntDelta(&cfg.plan_cost_upper_bound, C.optimal_cost, -1);
+    ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_FOUND:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        if (C.optimal_cost > 0)
+            assert(stat.pruned_by_upper_bound > 0);
+        break;
+    }
+
+    pddlHeurDel(heur);
+}
+
+/*
+ * GBFS with FF and the optimal cost as the upper bound on the plan cost:
+ * with re-opening of closed states, it always finds a plan within the
+ * bound; without re-opening, any plan it finds is within the bound.
+ */
+TEST(search_gbfs_upper_bound, search)
+{
+    if (C.optimal_cost < 0)
+        return;
+
+    pddl_heur_t *heur = pddlHeurHFF(&C.fdr, &C.err);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_GBFS;
+    cfg.heur = heur;
+    cfg.greedy_reopen_closed_states = pddl_true;
+    pddlNumSetInt(&cfg.plan_cost_upper_bound, C.optimal_cost);
+
+    pddl_search_stat_t stat;
+    int cost;
+    pddl_search_status_t ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_UNSOLVABLE:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(cost == C.optimal_cost);
+        break;
+    }
+
+    cfg.greedy_reopen_closed_states = pddl_false;
+    ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(cost == C.optimal_cost);
+        break;
+    }
+
+    pddlHeurDel(heur);
+}
+
+/*
+ * A negative upper bound on the plan cost prunes the initial state, so the
+ * search terminates already in pddlSearchInitStep().
+ */
+TEST(search_upper_bound_negative, search)
+{
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_ASTAR;
+    pddlNumSetInt(&cfg.plan_cost_upper_bound, -1);
+
+    pddl_search_t *search = pddlSearchNew(&cfg, &C.err);
+    assert(search != NULL);
+    pddl_search_status_t ret = pddlSearchInitStep(search, &C.err);
+    assert(ret == PDDL_SEARCH_UNSOLVABLE);
+    pddl_search_stat_t stat;
+    pddlSearchStat(search, &stat);
+    assert(stat.expanded == 0);
+    assert(stat.evaluated == 0);
+    assert(stat.pruned_by_upper_bound == 1);
+    pddlSearchDel(search);
+}
