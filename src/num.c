@@ -887,3 +887,360 @@ TEST_ONCE(num_err)
     assert_err_fail(pddlNumSubToErr, pddlNumSubErr, pddl_num_inf,
                     pddl_num_inf);
 }
+
+typedef pddl_num_status_t (*op_int_fn)(pddl_num_t *, const pddl_num_t *, int);
+
+/** Checks that DST = A op B fails with EXPECTED and DST is untouched */
+static void assert_int_fail(op_int_fn op, pddl_num_t a, int b,
+                            pddl_num_status_t expected)
+{
+    pddl_num_t dst = mk_int_d(1234, 5);
+    pddl_num_t orig = dst;
+    assert_st(op(&dst, &a, b), expected);
+    assert(pddlNumExactEq(&dst, &orig));
+
+    pddl_num_t x = a;
+    assert_st(op(&x, &x, b), expected);
+    assert(pddlNumExactEq(&x, &a));
+}
+
+/** Checks that A op B == EXPECTED (bytewise), also with DST aliasing A */
+static void assert_int_res(op_int_fn op, pddl_num_t a, int b,
+                           pddl_num_t expected)
+{
+    pddl_num_t dst;
+    assert_ok(op(&dst, &a, b));
+    if (!pddlNumExactEq(&dst, &expected)){
+        char s1[64], s2[64];
+        fprintf(stderr, "Result %s, expected %s\n",
+                pddlNumFmt(&dst, s1, sizeof(s1)),
+                pddlNumFmt(&expected, s2, sizeof(s2)));
+    }
+    assert(pddlNumExactEq(&dst, &expected));
+
+    pddl_num_t x = a;
+    assert_ok(op(&x, &x, b));
+    assert(pddlNumExactEq(&x, &expected));
+}
+
+static pddl_num_status_t add_int_to(pddl_num_t *d, const pddl_num_t *a,
+                                    int b)
+{
+    return pddlNumAddIntTo(d, a, b);
+}
+
+static pddl_num_status_t sub_int_to(pddl_num_t *d, const pddl_num_t *a,
+                                    int b)
+{
+    return pddlNumSubIntTo(d, a, b);
+}
+
+static pddl_num_status_t mul_int_to(pddl_num_t *d, const pddl_num_t *a,
+                                    int b)
+{
+    return pddlNumMulIntTo(d, a, b);
+}
+
+static pddl_num_status_t add_int_sat_to(pddl_num_t *d, const pddl_num_t *a,
+                                        int b)
+{
+    pddlNumAddIntSatTo(d, a, b);
+    return PDDL_NUM_OK;
+}
+
+static pddl_num_status_t sub_int_sat_to(pddl_num_t *d, const pddl_num_t *a,
+                                        int b)
+{
+    pddlNumSubIntSatTo(d, a, b);
+    return PDDL_NUM_OK;
+}
+
+static pddl_num_status_t mul_int_sat_to(pddl_num_t *d, const pddl_num_t *a,
+                                        int b)
+{
+    pddlNumMulIntSatTo(d, a, b);
+    return PDDL_NUM_OK;
+}
+
+/*
+ * Addition, subtraction, and multiplication by an integer: add/sub keep the
+ * delta, mul scales it; overflows, infinities, and huge operands are
+ * reported with the proper status.
+ */
+TEST_ONCE(num_int_arith)
+{
+    // Addition/subtraction keeps the delta
+    assert_int_res(add_int_to, mk_int(2), 3, mk_int(5));
+    assert_int_res(add_int_to, mk_int_d(2, -1), -7, mk_int_d(-5, -1));
+    assert_int_res(add_int_to, mk_flt_d(0.5f, 2), 2, mk_flt_d(2.5f, 2));
+    assert_int_res(add_int_to, mk_flt(-1.5f), 0, mk_flt(-1.5f));
+    assert_int_res(add_int_to, mk_int(INT_MAX - 1), 1, mk_int(INT_MAX));
+    assert_int_res(add_int_to, mk_int(-1), INT_MIN + 1, mk_int(INT_MIN));
+    assert_int_res(sub_int_to, mk_int(2), 3, mk_int(-1));
+    assert_int_res(sub_int_to, mk_int_d(2, 4), -3, mk_int_d(5, 4));
+    assert_int_res(sub_int_to, mk_flt_d(0.5f, -1), 1, mk_flt_d(-0.5f, -1));
+    assert_int_res(sub_int_to, mk_flt(1.f), 1, mk_flt(0.f));
+    assert_int_res(sub_int_to, mk_int(-1), INT_MIN, mk_int(INT_MAX));
+    assert_int_res(sub_int_to, mk_int(-1), INT_MAX, mk_int(INT_MIN));
+    assert_int_res(sub_int_to, mk_flt(0.5f), INT_MIN,
+                   mk_flt(0.5f + 2147483648.f));
+
+    // Multiplication scales the delta
+    assert_int_res(mul_int_to, mk_int(-4), 3, mk_int(-12));
+    assert_int_res(mul_int_to, mk_int_d(-4, 2), 3, mk_int_d(-12, 6));
+    assert_int_res(mul_int_to, mk_int_d(5, 2), 0, mk_int(0));
+    assert_int_res(mul_int_to, pddl_num_eps, -1, mk_int_d(0, -1));
+    assert_int_res(mul_int_to, mk_flt_d(0.5f, 1), -2, mk_flt_d(-1.f, -2));
+    assert_int_res(mul_int_to, mk_flt(-1.f), 0, mk_flt(0.f));
+    assert_int_res(mul_int_to, mk_int(INT_MIN / 2), 2, mk_int(INT_MIN));
+    assert_int_res(mul_int_to, mk_int(INT_MAX), -1, mk_int(-INT_MAX));
+    assert_int_res(mul_int_to, mk_int(-1), INT_MIN + 1, mk_int(INT_MAX));
+    assert_int_res(mul_int_to, mk_int_d(0, PDDL_NUM_DELTA_MAX), -1,
+                   mk_int_d(0, -PDDL_NUM_DELTA_MAX));
+    assert_int_res(mul_int_to, mk_int_d(0, PDDL_NUM_DELTA_MIN / 2), 2,
+                   mk_int_d(0, PDDL_NUM_DELTA_MIN));
+
+    // Value overflow
+    assert_int_fail(add_int_to, mk_int(INT_MAX), 1, PDDL_NUM_OVERFLOW);
+    assert_int_fail(add_int_to, mk_int(INT_MIN), -1, PDDL_NUM_OVERFLOW);
+    assert_int_fail(sub_int_to, mk_int(0), INT_MIN, PDDL_NUM_OVERFLOW);
+    assert_int_fail(sub_int_to, mk_int(INT_MIN), 1, PDDL_NUM_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_int(INT_MAX), 2, PDDL_NUM_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_int(INT_MIN), -1, PDDL_NUM_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_int(65536), -65536, PDDL_NUM_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_flt(1e30f), 1000000000, PDDL_NUM_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_flt(-FLT_MAX), 2, PDDL_NUM_OVERFLOW);
+    // The value overflow is reported before the delta overflow
+    assert_int_fail(mul_int_to, mk_int_d(INT_MAX, PDDL_NUM_DELTA_MAX), 2,
+                    PDDL_NUM_OVERFLOW);
+
+    // Delta overflow
+    assert_int_fail(mul_int_to, mk_int_d(0, PDDL_NUM_DELTA_MAX), 2,
+                    PDDL_NUM_DELTA_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_int_d(1, PDDL_NUM_DELTA_MIN), -1,
+                    PDDL_NUM_DELTA_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_int_d(1, -1), INT_MIN,
+                    PDDL_NUM_DELTA_OVERFLOW);
+    assert_int_fail(mul_int_to, mk_flt_d(0.5f, 2), PDDL_NUM_DELTA_MAX,
+                    PDDL_NUM_DELTA_OVERFLOW);
+
+    // Infinities
+    pddl_num_t inf = pddl_num_inf;
+    pddl_num_t ninf = pddl_num_neg_inf;
+    assert_int_res(add_int_to, inf, INT_MIN, inf);
+    assert_int_res(add_int_to, ninf, INT_MAX, ninf);
+    assert_int_res(sub_int_to, inf, INT_MAX, inf);
+    assert_int_res(sub_int_to, ninf, INT_MIN, ninf);
+    assert_int_res(mul_int_to, inf, 2, inf);
+    assert_int_res(mul_int_to, inf, -2, ninf);
+    assert_int_res(mul_int_to, ninf, INT_MIN, inf);
+    assert_int_fail(mul_int_to, inf, 0, PDDL_NUM_UNDEFINED);
+    assert_int_fail(mul_int_to, ninf, 0, PDDL_NUM_UNDEFINED);
+
+    // Huge operands
+    assert_int_fail(add_int_to, mk_huge(1, 0), 0, PDDL_NUM_HUGE_OPERAND);
+    assert_int_fail(sub_int_to, mk_huge(-1, 1), 1, PDDL_NUM_HUGE_OPERAND);
+    assert_int_fail(mul_int_to, mk_huge(1, 0), 0, PDDL_NUM_HUGE_OPERAND);
+    assert_int_fail(mul_int_to, mk_huge(1, 0), 1, PDDL_NUM_HUGE_OPERAND);
+
+    // In-place variants
+    pddl_num_t x = mk_int_d(10, 1);
+    assert_ok(pddlNumAddInt(&x, 4));
+    assert(pddlNumIsPlainInt(&x) && x.val.i == 14 && x.delta == 1);
+    assert_ok(pddlNumSubInt(&x, 20));
+    assert(pddlNumIsPlainInt(&x) && x.val.i == -6 && x.delta == 1);
+    assert_ok(pddlNumMulInt(&x, -3));
+    assert(pddlNumIsPlainInt(&x) && x.val.i == 18 && x.delta == -3);
+    pddl_num_t orig = x;
+    assert_st(pddlNumMulInt(&x, INT_MAX), PDDL_NUM_OVERFLOW);
+    assert(pddlNumExactEq(&x, &orig));
+}
+
+/*
+ * Saturated addition, subtraction, and multiplication by an integer:
+ * integer overflow results in a huge number of the proper sign, huge and
+ * infinite operands are handled, and non-overflowing results are the same
+ * as for the non-saturating variants.
+ */
+TEST_ONCE(num_int_sat)
+{
+    pddl_num_t inf = pddl_num_inf;
+    pddl_num_t ninf = pddl_num_neg_inf;
+    pddl_num_t h = mk_huge(1, 0);
+    pddl_num_t nh = mk_huge(-1, 0);
+
+    // No saturation if the result fits
+    assert_int_res(add_int_sat_to, mk_int_d(2, 1), 3, mk_int_d(5, 1));
+    assert_int_res(add_int_sat_to, mk_int(INT_MAX - 1), 1, mk_int(INT_MAX));
+    assert_int_res(add_int_sat_to, mk_flt_d(0.5f, 1), 2, mk_flt_d(2.5f, 1));
+    assert_int_res(sub_int_sat_to, mk_int_d(2, -2), 3, mk_int_d(-1, -2));
+    assert_int_res(sub_int_sat_to, mk_int(-1), INT_MIN, mk_int(INT_MAX));
+    assert_int_res(sub_int_sat_to, mk_flt(0.5f), 1, mk_flt(-0.5f));
+    assert_int_res(mul_int_sat_to, mk_int_d(-4, 2), 3, mk_int_d(-12, 6));
+    assert_int_res(mul_int_sat_to, mk_int(INT_MIN / 2), 2, mk_int(INT_MIN));
+    assert_int_res(mul_int_sat_to, mk_flt_d(0.5f, 1), -2, mk_flt_d(-1.f, -2));
+    assert_int_res(mul_int_sat_to, mk_flt(-1.f), 0, mk_flt(0.f));
+
+    // Saturation of addition/subtraction, delta is kept
+    assert_int_res(add_int_sat_to, mk_int_d(INT_MAX, 3), 1, mk_huge(1, 3));
+    assert_int_res(add_int_sat_to, mk_int(INT_MAX), INT_MAX, h);
+    assert_int_res(add_int_sat_to, mk_int_d(INT_MIN, -2), -1,
+                   mk_huge(-1, -2));
+    assert_int_res(sub_int_sat_to, mk_int(0), INT_MIN, h);
+    assert_int_res(sub_int_sat_to, mk_int_d(INT_MAX, 1), INT_MIN,
+                   mk_huge(1, 1));
+    assert_int_res(sub_int_sat_to, mk_int(INT_MIN), 1, nh);
+    assert_int_res(sub_int_sat_to, mk_int(INT_MIN), INT_MAX, nh);
+
+    // Saturation of multiplication, delta is scaled
+    assert_int_res(mul_int_sat_to, mk_int(INT_MAX), 2, h);
+    assert_int_res(mul_int_sat_to, mk_int(INT_MAX), -2, nh);
+    assert_int_res(mul_int_sat_to, mk_int(INT_MIN), -1, h);
+    assert_int_res(mul_int_sat_to, mk_int_d(65536, 3), 65536,
+                   mk_huge(1, 3 * 65536));
+    assert_int_res(mul_int_sat_to, mk_int_d(-65536, 1), 65536,
+                   mk_huge(-1, 65536));
+
+    // Huge operands
+    assert_int_res(add_int_sat_to, mk_huge(1, 2), 5, mk_huge(1, 2));
+    assert_int_res(add_int_sat_to, h, 0, h);
+    assert_int_res(add_int_sat_to, nh, INT_MIN, nh);
+    assert_int_res(sub_int_sat_to, mk_huge(1, 3), INT_MIN, mk_huge(1, 3));
+    assert_int_res(sub_int_sat_to, nh, 5, nh);
+    assert_int_res(sub_int_sat_to, nh, 0, nh);
+    assert_int_res(mul_int_sat_to, mk_huge(1, 2), 3, mk_huge(1, 6));
+    assert_int_res(mul_int_sat_to, mk_huge(1, 2), -3, mk_huge(-1, -6));
+    assert_int_res(mul_int_sat_to, mk_huge(-1, 1), -1, mk_huge(1, -1));
+    assert_int_res(mul_int_sat_to, mk_huge(-1, 2), 0, mk_int(0));
+    assert_int_res(mul_int_sat_to, h, 1, h);
+
+    // Infinities
+    assert_int_res(add_int_sat_to, inf, INT_MIN, inf);
+    assert_int_res(add_int_sat_to, ninf, INT_MAX, ninf);
+    assert_int_res(sub_int_sat_to, inf, INT_MAX, inf);
+    assert_int_res(sub_int_sat_to, ninf, INT_MIN, ninf);
+    assert_int_res(mul_int_sat_to, inf, 3, inf);
+    assert_int_res(mul_int_sat_to, inf, -3, ninf);
+    assert_int_res(mul_int_sat_to, ninf, -1, inf);
+
+    // In-place variants
+    pddl_num_t x = mk_int_d(INT_MAX, 1);
+    pddl_num_t h1 = mk_huge(1, 1);
+    pddl_num_t nh2 = mk_huge(-1, -2);
+    pddlNumAddIntSat(&x, 1);
+    assert(pddlNumExactEq(&x, &h1));
+    pddlNumMulIntSat(&x, -2);
+    assert(pddlNumExactEq(&x, &nh2));
+    pddlNumSubIntSat(&x, 1);
+    assert(pddlNumExactEq(&x, &nh2));
+    x = mk_int(INT_MIN);
+    pddlNumSubIntSat(&x, 1);
+    assert(pddlNumExactEq(&x, &nh));
+}
+
+TEST_PANIC_ONCE(num_panic_addintsat_huge_neg)
+{
+    pddl_num_t a = mk_huge(1, 0);
+    pddlNumAddIntSat(&a, -1);
+}
+
+TEST_PANIC_ONCE(num_panic_subintsat_huge_opposite)
+{
+    pddl_num_t a = mk_huge(-1, 0);
+    pddlNumSubIntSat(&a, INT_MIN);
+}
+
+TEST_PANIC_ONCE(num_panic_mulintsat_inf_zero)
+{
+    pddl_num_t a = pddl_num_inf;
+    pddlNumMulIntSat(&a, 0);
+}
+
+TEST_PANIC_ONCE(num_panic_mulintsat_flt_overflow)
+{
+    pddl_num_t a = mk_flt(1e30f);
+    pddlNumMulIntSat(&a, 1000000000);
+}
+
+TEST_PANIC_ONCE(num_panic_mulintsat_delta)
+{
+    pddl_num_t a = mk_int_d(1, PDDL_NUM_DELTA_MAX);
+    pddlNumMulIntSat(&a, 2);
+}
+
+typedef int (*op_int_to_err_fn)(pddl_num_t *, const pddl_num_t *, int,
+                                pddl_err_t *);
+typedef int (*op_int_err_fn)(pddl_num_t *, int, pddl_err_t *);
+
+/** Checks that A op B == EXPECTED via both the *IntToErr() and the
+ *  in-place *IntErr() variant, and that no error is set */
+static void assert_int_err_ok(op_int_to_err_fn op_to, op_int_err_fn op,
+                              pddl_num_t a, int b, pddl_num_t expected)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_num_t dst;
+    int ret = op_to(&dst, &a, b, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &expected));
+
+    dst = a;
+    ret = op(&dst, b, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &expected));
+}
+
+/** Checks that A op B fails via both the *IntToErr() and the in-place
+ *  *IntErr() variant with DST untouched, and prints the error message */
+static void assert_int_err_fail(op_int_to_err_fn op_to, op_int_err_fn op,
+                                pddl_num_t a, int b)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_num_t dst = mk_int_d(1234, 5);
+    pddl_num_t orig = dst;
+    int ret = op_to(&dst, &a, b, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &orig));
+    pddlErrPrint(&err, 0, stdout);
+
+    pddlErrInit(&err);
+    dst = a;
+    ret = op(&dst, b, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    assert(pddlNumExactEq(&dst, &a));
+    pddlErrPrint(&err, 0, stdout);
+}
+
+/*
+ * The *IntToErr() and *IntErr() variants return 0 without setting an error
+ * on success, and -1 with an error message (printed) on failure.
+ */
+TEST_ONCE(num_int_err)
+{
+    assert_int_err_ok(pddlNumAddIntToErr, pddlNumAddIntErr,
+                      mk_int_d(2, 1), 3, mk_int_d(5, 1));
+    assert_int_err_ok(pddlNumSubIntToErr, pddlNumSubIntErr,
+                      mk_flt(0.5f), 1, mk_flt(-0.5f));
+    assert_int_err_ok(pddlNumMulIntToErr, pddlNumMulIntErr,
+                      mk_int_d(2, 1), -3, mk_int_d(-6, -3));
+
+    // PDDL_NUM_OVERFLOW
+    assert_int_err_fail(pddlNumAddIntToErr, pddlNumAddIntErr,
+                        mk_int(INT_MAX), 1);
+    assert_int_err_fail(pddlNumSubIntToErr, pddlNumSubIntErr,
+                        mk_int(0), INT_MIN);
+    assert_int_err_fail(pddlNumMulIntToErr, pddlNumMulIntErr,
+                        mk_flt(1e30f), 1000000000);
+    // PDDL_NUM_DELTA_OVERFLOW
+    assert_int_err_fail(pddlNumMulIntToErr, pddlNumMulIntErr,
+                        mk_int_d(0, PDDL_NUM_DELTA_MAX), 2);
+    // PDDL_NUM_HUGE_OPERAND
+    assert_int_err_fail(pddlNumSubIntToErr, pddlNumSubIntErr,
+                        mk_huge(1, 0), 5);
+    // PDDL_NUM_UNDEFINED
+    assert_int_err_fail(pddlNumMulIntToErr, pddlNumMulIntErr,
+                        pddl_num_inf, 0);
+}
