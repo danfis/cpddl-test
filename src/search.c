@@ -373,3 +373,171 @@ TEST(search_lazy_ff_reopen, search)
 {
     searchGreedyReopen(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_LAZY);
 }
+
+/* Runs the search configured by CFG to the end; it fills STAT with its
+ * statistics and returns the final status. */
+static pddl_search_status_t runSearchStatus(const pddl_search_config_t *cfg,
+                                            pddl_search_stat_t *stat)
+{
+    pddl_search_t *search = pddlSearchNew(cfg, &C.err);
+    assert(search != NULL);
+    pddl_search_status_t ret = pddlSearchInitStep(search, &C.err);
+    while (ret == PDDL_SEARCH_CONT)
+        ret = pddlSearchStep(search, &C.err);
+    pddlSearchStat(search, stat);
+    pddlSearchDel(search);
+    return ret;
+}
+
+/* Initializes FDR as a copy of C.fdr with the cost of every operator set to
+ * COST. */
+static void initFDRWithOpCost(pddl_fdr_t *fdr, int cost)
+{
+    pddlFDRInitCopy(fdr, &C.fdr);
+    for (int i = 0; i < fdr->op.op_size; ++i)
+        fdr->op.op[i]->cost = cost;
+}
+
+/*
+ * Blind A* on the task with all operator costs set to INT_MAX / 2: the
+ * g-values of states up to the depth 2 fit into int, deeper states have
+ * saturated g-values. A* either finds a plan of length at most 2, or it
+ * terminates with PDDL_SEARCH_ABORT on the first popped state with a
+ * saturated f-value.
+ */
+TEST(search_astar_saturated_cost, search)
+{
+    const int cost = INT_MAX / 2;
+    pddl_fdr_t fdr;
+    initFDRWithOpCost(&fdr, cost);
+
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &fdr;
+    cfg.alg = PDDL_SEARCH_ASTAR;
+    pddl_search_t *search = pddlSearchNew(&cfg, &C.err);
+    assert(search != NULL);
+    pddl_search_status_t ret = pddlSearchInitStep(search, &C.err);
+    while (ret == PDDL_SEARCH_CONT)
+        ret = pddlSearchStep(search, &C.err);
+    pddl_search_stat_t stat;
+    pddlSearchStat(search, &stat);
+
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        assert(C.optimal_cost < 0);
+        assert(pddlNumIsFinite(&stat.last_f_value));
+        break;
+    case PDDL_SEARCH_FOUND:
+        {
+            pddl_plan_t plan;
+            pddlPlanInit(&plan);
+            int eret = pddlSearchExtractPlan(search, &plan, &C.err);
+            assert(eret == 0);
+            assert(plan.length <= 2);
+            assert(plan.cost == plan.length * cost);
+            int val = validateGroundPlan(&fdr, &plan);
+            assert(val == 0);
+            pddlPlanFree(&plan);
+        }
+        break;
+    case PDDL_SEARCH_ABORT:
+        assert(pddlNumIsHuge(&stat.last_f_value));
+        assert(stat.expanded > 0);
+        break;
+    }
+
+    pddlSearchDel(search);
+    pddlFDRFree(&fdr);
+}
+
+/*
+ * Weighted A* with LM-cut and the weight INT_MAX: f = g + w * h saturates
+ * for almost every state, so the search either terminates with
+ * PDDL_SEARCH_ABORT with a saturated last f-value, or it ends regularly
+ * (with a valid plan if found).
+ */
+TEST(search_wastar_saturated_weight, search)
+{
+    pddl_heur_t *heur = pddlHeurLMCut(&C.fdr, &C.err);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_WEIGHTED_ASTAR;
+    cfg.heur = heur;
+    cfg.h_weight = INT_MAX;
+    pddl_search_t *search = pddlSearchNew(&cfg, &C.err);
+    assert(search != NULL);
+    pddl_search_status_t ret = pddlSearchInitStep(search, &C.err);
+    while (ret == PDDL_SEARCH_CONT)
+        ret = pddlSearchStep(search, &C.err);
+    pddl_search_stat_t stat;
+    pddlSearchStat(search, &stat);
+
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        assert(C.optimal_cost < 0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        {
+            pddl_plan_t plan;
+            pddlPlanInit(&plan);
+            int eret = pddlSearchExtractPlan(search, &plan, &C.err);
+            assert(eret == 0);
+            int val = validateGroundPlan(&C.fdr, &plan);
+            assert(val == 0);
+            if (C.optimal_cost >= 0)
+                assert(plan.cost >= C.optimal_cost);
+            pddlPlanFree(&plan);
+        }
+        break;
+    case PDDL_SEARCH_ABORT:
+        assert(pddlNumIsHuge(&stat.last_f_value));
+        break;
+    }
+
+    pddlSearchDel(search);
+    pddlHeurDel(heur);
+}
+
+/*
+ * GBFS (guided by FF computed on the original task) on the task with all
+ * operator costs set to INT_MAX / 2: the saturated g-values do not affect
+ * the greedy search, which never aborts and finds a plan iff it finds one
+ * on the original task.
+ */
+TEST(search_gbfs_saturated_cost, search)
+{
+    pddl_heur_t *heur = pddlHeurHFF(&C.fdr, &C.err);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_GBFS;
+    cfg.heur = heur;
+    pddl_search_stat_t stat;
+    int orig_cost = runSearch(&cfg, &stat);
+
+    pddl_fdr_t fdr;
+    initFDRWithOpCost(&fdr, INT_MAX / 2);
+    cfg.fdr = &fdr;
+    pddl_search_status_t ret = runSearchStatus(&cfg, &stat);
+
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        assert(orig_cost < 0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(orig_cost >= 0);
+        break;
+    }
+
+    pddlFDRFree(&fdr);
+    pddlHeurDel(heur);
+}
