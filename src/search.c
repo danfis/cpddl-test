@@ -224,7 +224,6 @@ static void searchAStarPool(pddl_heur_t *heur,
     cfg.alg = PDDL_SEARCH_ASTAR;
     cfg.heur = heur;
     assert(cfg.state_pool.type == PDDL_FDR_STATE_POOL_ARRAY);
-    assert(!cfg.state_pool_incremental_insert);
     pddl_search_stat_t stat_array;
     int cost_array = runSearch(&cfg, &stat_array);
 
@@ -325,4 +324,52 @@ TEST(search_blind_pool_tree_or_ffd_array_incremental, search)
                     10, 1e9f, pddl_true);
     searchAStarPool(pddlHeurBlind(), PDDL_FDR_STATE_POOL_TREE_OR_FFD_ARRAY,
                     10, 0.f, pddl_true);
+}
+
+/*
+ * Asserts that the greedy search ALG with the heuristic HEUR never re-opens
+ * closed states by default, and that with
+ * pddl_search_config_t.greedy_reopen_closed_states it finds a valid plan
+ * (no cheaper than the optimal one) iff the default configuration does.
+ */
+static void searchGreedyReopen(pddl_heur_t *heur, pddl_search_alg_t alg)
+{
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = alg;
+    cfg.heur = heur;
+    assert(!cfg.greedy_reopen_closed_states);
+    pddl_search_stat_t stat;
+    int cost = runSearch(&cfg, &stat);
+    assert(stat.reopen == 0);
+
+    cfg.greedy_reopen_closed_states = pddl_true;
+    pddl_search_stat_t stat_reopen;
+    int cost_reopen = runSearch(&cfg, &stat_reopen);
+
+    assert((cost < 0) == (cost_reopen < 0));
+    if (cost_reopen < 0){
+        assert(C.optimal_cost < 0);
+    }else if (C.optimal_cost >= 0){
+        assert(cost_reopen >= C.optimal_cost);
+    }
+    pddlHeurDel(heur);
+}
+
+/*
+ * GBFS with FF re-opens closed states only if configured to do so (see
+ * searchGreedyReopen()).
+ */
+TEST(search_gbfs_ff_reopen, search)
+{
+    searchGreedyReopen(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_GBFS);
+}
+
+/*
+ * Lazy GBFS with FF re-opens closed states only if configured to do so (see
+ * searchGreedyReopen()).
+ */
+TEST(search_lazy_ff_reopen, search)
+{
+    searchGreedyReopen(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_LAZY);
 }
