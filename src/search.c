@@ -590,9 +590,9 @@ static void assertNoPlanWithinUpperBound(const pddl_search_config_t *cfg)
 }
 
 /*
- * A* with LM-cut and an upper bound on the plan cost: it finds an optimal
- * plan if the bound is the optimal cost, and no plan if the bound is the
- * strict bound given as optimal - eps.
+ * A* with LM-cut and an upper bound on the plan cost (pruning by g-values
+ * only): it finds an optimal plan if the bound is the optimal cost, and no
+ * plan if the bound is the strict bound given as optimal - eps.
  */
 TEST(search_astar_upper_bound, search)
 {
@@ -601,6 +601,7 @@ TEST(search_astar_upper_bound, search)
     cfg.fdr = &C.fdr;
     cfg.alg = PDDL_SEARCH_ASTAR;
     cfg.heur = heur;
+    cfg.astar_stop_on_f_above_upper_bound = pddl_false;
 
     if (C.optimal_cost < 0){
         pddlNumSetInt(&cfg.plan_cost_upper_bound, 0);
@@ -711,4 +712,111 @@ TEST(search_upper_bound_negative, search)
     assert(stat.evaluated == 0);
     assert(stat.pruned_by_upper_bound == 1);
     pddlSearchDel(search);
+}
+
+/*
+ * A* with LM-cut stopping on f-values above the upper bound on the plan
+ * cost: with the optimal cost as the bound, it never stops before the goal,
+ * so it finds an optimal plan expanding the same states as without the
+ * stop; with the strict bound optimal - eps, it finds no plan.
+ */
+TEST(search_astar_upper_bound_f_stop, search)
+{
+    if (C.optimal_cost < 0)
+        return;
+
+    pddl_heur_t *heur = pddlHeurLMCut(&C.fdr, &C.err);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_ASTAR;
+    cfg.heur = heur;
+    assert(cfg.astar_stop_on_f_above_upper_bound);
+    pddlNumSetInt(&cfg.plan_cost_upper_bound, C.optimal_cost);
+
+    pddl_search_stat_t stat_stop;
+    int cost_stop;
+    pddl_search_status_t ret = runSearchPlan(&cfg, &stat_stop, &cost_stop);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_UNSOLVABLE:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(cost_stop == C.optimal_cost);
+        break;
+    }
+
+    cfg.astar_stop_on_f_above_upper_bound = pddl_false;
+    pddl_search_stat_t stat;
+    int cost;
+    ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_UNSOLVABLE:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(cost == C.optimal_cost);
+        break;
+    }
+    assert(stat.expanded == stat_stop.expanded);
+
+    cfg.astar_stop_on_f_above_upper_bound = pddl_true;
+    pddlNumSetIntDelta(&cfg.plan_cost_upper_bound, C.optimal_cost, -1);
+    ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_FOUND:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_UNSOLVABLE:
+        // Either stopped on the f-value, or the open list was exhausted
+        // because all successors were pruned by their g-values
+        if (C.optimal_cost > 0){
+            assert(pddlNumGT(&stat.last_f_value, &cfg.plan_cost_upper_bound)
+                    || stat.pruned_by_upper_bound > 0);
+        }
+        break;
+    }
+
+    pddlHeurDel(heur);
+}
+
+/*
+ * Weighted A* ignores pddl_search_config_t.astar_stop_on_f_above_upper_bound:
+ * with the optimal cost as the bound, it finds an optimal plan even though
+ * its f-values (g + w * h) may exceed the bound.
+ */
+TEST(search_wastar_upper_bound_no_f_stop, search)
+{
+    if (C.optimal_cost < 0)
+        return;
+
+    pddl_heur_t *heur = pddlHeurHFF(&C.fdr, &C.err);
+    pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
+    cfg.fdr = &C.fdr;
+    cfg.alg = PDDL_SEARCH_WEIGHTED_ASTAR;
+    cfg.heur = heur;
+    cfg.h_weight = 2;
+    assert(cfg.astar_stop_on_f_above_upper_bound);
+    pddlNumSetInt(&cfg.plan_cost_upper_bound, C.optimal_cost);
+
+    pddl_search_stat_t stat;
+    int cost;
+    pddl_search_status_t ret = runSearchPlan(&cfg, &stat, &cost);
+    switch (ret){
+    case PDDL_SEARCH_CONT:
+    case PDDL_SEARCH_UNSOLVABLE:
+    case PDDL_SEARCH_ABORT:
+        assert(0);
+        break;
+    case PDDL_SEARCH_FOUND:
+        assert(cost == C.optimal_cost);
+        break;
+    }
+
+    pddlHeurDel(heur);
 }
