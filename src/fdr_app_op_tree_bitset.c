@@ -249,16 +249,12 @@ static void findOps(const pddl_fdr_app_op_tree_bitset_t *tree,
 }
 
 /** Runs findOps() from the initial state to the depth 2 with the default
- *  configuration */
+ *  configuration (pddlFDRAppOpTreeBitsetInitDefault()) */
 static void findOpsSearch(void)
 {
-    pddl_fdr_app_op_tree_bitset_config_t cfg
-            = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
-    cfg.vars = &C.fdr.var;
-    cfg.ops = &C.fdr.op;
-    cfg.goal = &C.fdr.goal;
     pddl_fdr_app_op_tree_bitset_t tree;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
+    pddlFDRAppOpTreeBitsetInitDefault(&tree, &C.fdr.var, &C.fdr.op,
+                                      &C.fdr.goal);
     appOpTreeBitsetCheckC(&tree);
     findOps(&tree, C.fdr.init, 2);
     pddlFDRAppOpTreeBitsetFree(&tree);
@@ -442,9 +438,11 @@ static void appOpTreeBitsetCmpShape(const pddl_fdr_app_op_tree_bitset_t *tree,
  * pddl_fdr_app_op_tree_bitset_t on small hand-built tasks: a task without
  * operators yields an empty tree; with .max_bitset_leaf_ops = 0 the tree
  * has the same shape as pddl_fdr_app_op_tree_t; INT_MAX gives a single
- * multi-word bitset leaf; 64 gives all three kinds of nodes; the number of
- * values in bitset leaves is bounded by .max_bitset_leaf_vals; and Find
- * agrees with brute force in all states for various configurations.
+ * multi-word bitset leaf; 64 gives all three kinds of nodes;
+ * pddlFDRAppOpTreeBitsetInitDefault() gives the same tree as the default
+ * configuration; the number of values in bitset leaves is bounded by
+ * .max_bitset_leaf_vals; and Find agrees with brute force in all states
+ * for various configurations.
  */
 TEST_ONCE(fdr_app_op_tree_bitset_handmade)
 {
@@ -452,7 +450,7 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
     appOpTreeBitsetTaskInit(&fdr);
     pddl_fdr_app_op_tree_bitset_config_t cfg
             = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
-    assert(cfg.max_bitset_leaf_ops == 64);
+    assert(cfg.max_bitset_leaf_ops == 128);
     assert(cfg.max_bitset_leaf_vals == INT_MAX);
     cfg.vars = &fdr.var;
     cfg.ops = &fdr.op;
@@ -555,6 +553,31 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
     assert(c.num_leaves > 0);
     assert(c.num_bitset_leaves > 0);
     appOpTreeBitsetCmpBrute(&tree, &fdr);
+    pddlFDRAppOpTreeBitsetFree(&tree);
+
+    // pddlFDRAppOpTreeBitsetInitDefault() builds the same tree as the
+    // default configuration
+    pddl_fdr_app_op_tree_bitset_config_t def_cfg
+            = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
+    def_cfg.vars = &fdr.var;
+    def_cfg.ops = &fdr.op;
+    def_cfg.goal = &fdr.goal;
+    pddlFDRAppOpTreeBitsetInit(&tree, &def_cfg);
+    pddl_fdr_app_op_tree_bitset_t def;
+    pddlFDRAppOpTreeBitsetInitDefault(&def, &fdr.var, &fdr.op, &fdr.goal);
+    assert(def.max_bitset_leaf_ops == def_cfg.max_bitset_leaf_ops);
+    assert(def.max_bitset_leaf_vals == def_cfg.max_bitset_leaf_vals);
+    assert(def.ops == &fdr.op);
+    assert(def.node_size == tree.node_size);
+    assert(memcmp(def.node, tree.node,
+                  sizeof(uint32_t) * tree.node_size) == 0);
+    assert(def.bits_size == tree.bits_size);
+    assert(memcmp(def.bits, tree.bits,
+                  sizeof(uint64_t) * tree.bits_size) == 0);
+    assert(memcmp(def.op_id, tree.op_id,
+                  sizeof(int) * fdr.op.op_size) == 0);
+    appOpTreeBitsetCmpBrute(&def, &fdr);
+    pddlFDRAppOpTreeBitsetFree(&def);
     pddlFDRAppOpTreeBitsetFree(&tree);
 
     // Find agrees with brute force for various configurations
