@@ -52,6 +52,7 @@ TESTS += irrelevance
 TESTS += invertible
 TESTS += prune_strips
 TESTS += fdr
+TESTS += fdr_app_op_tree
 TESTS += hff
 TESTS += hm_heur
 TESTS += pot
