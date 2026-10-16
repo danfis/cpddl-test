@@ -17,6 +17,90 @@
 #include <assert.h>
 #include <string.h>
 
+/** Traverses the tree from the offset N, checks the structure of the
+ *  records, stores the offset of the leaf of each operator in LEAF_OF[]
+ *  (which must be initialized to -1), counts internal nodes per variable in
+ *  VAR_NODES[], and returns the number of ints spanned by the subtree */
+static int appOpTreeCheck(const pddl_fdr_app_op_tree_t *tree,
+                          const pddl_fdr_vars_t *vars,
+                          int n,
+                          int *leaf_of,
+                          int *var_nodes)
+{
+    assert(n >= 0 && n + 1 < tree->node_size);
+    const int *node = tree->node + n;
+    if (node[0] < 0){
+        // Leaf: [-len, begin] with sorted operator IDs
+        int len = -node[0];
+        int begin = node[1];
+        assert(begin >= 0 && begin + len <= tree->ops->op_size);
+        for (int i = 0; i < len; ++i){
+            int op_id = tree->op_id[begin + i];
+            assert(i == 0 || tree->op_id[begin + i - 1] < op_id);
+            assert(leaf_of[op_id] == -1);
+            leaf_of[op_id] = n;
+        }
+        return 2;
+    }
+
+    // Internal node: [var, noval, child[0], ..., child[val_size - 1]]
+    int var = node[0];
+    assert(var < vars->var_size);
+    ++var_nodes[var];
+    int val_size = vars->var[var].val_size;
+    assert(n + 2 + val_size <= tree->node_size);
+
+    // Children are stored right after the record in preorder, the "no
+    // value" child first and then the value children in increasing order,
+    // so they tile the rest of the subtree
+    int next = n + 2 + val_size;
+    int num_children = 0;
+    for (int i = 1; i < 2 + val_size; ++i){
+        if (node[i] == -1)
+            continue;
+        assert(node[i] == next);
+        next += appOpTreeCheck(tree, vars, next, leaf_of, var_nodes);
+        ++num_children;
+    }
+    assert(num_children > 0);
+    return next - n;
+}
+
+/** Checks the structure of the whole TREE built from OPS over VARS: every
+ *  operator is in exactly one leaf (stored in LEAF_OF[]), the records tile
+ *  .node[], and VAR_NODES[] holds the number of internal nodes per
+ *  variable */
+static void appOpTreeCheckAll(const pddl_fdr_app_op_tree_t *tree,
+                              const pddl_fdr_vars_t *vars,
+                              const pddl_fdr_ops_t *ops,
+                              int *leaf_of,
+                              int *var_nodes)
+{
+    for (int i = 0; i < ops->op_size; ++i)
+        leaf_of[i] = -1;
+    for (int i = 0; i < vars->var_size; ++i)
+        var_nodes[i] = 0;
+    if (ops->op_size == 0){
+        assert(tree->node_size == 0);
+        return;
+    }
+
+    int size = appOpTreeCheck(tree, vars, 0, leaf_of, var_nodes);
+    assert(size == tree->node_size);
+    for (int i = 0; i < ops->op_size; ++i)
+        assert(leaf_of[i] >= 0);
+}
+
+/** Runs appOpTreeCheckAll() on TREE built from C.fdr */
+static void appOpTreeCheckC(const pddl_fdr_app_op_tree_t *tree)
+{
+    int *leaf_of = PDDL_ALLOC_ARR(int, PDDL_MAX(C.fdr.op.op_size, 1));
+    int *var_nodes = PDDL_ALLOC_ARR(int, PDDL_MAX(C.fdr.var.var_size, 1));
+    appOpTreeCheckAll(tree, &C.fdr.var, &C.fdr.op, leaf_of, var_nodes);
+    PDDL_FREE(leaf_of);
+    PDDL_FREE(var_nodes);
+}
+
 /** Checks that TREE finds the same operators in STATE as brute force and
  *  C.fdr_app_op, and recursively does the same for all successor states up
  *  to the depth DEPTH */
@@ -63,6 +147,7 @@ static void findOpsSearch(void)
 {
     pddl_fdr_app_op_tree_t tree;
     pddlFDRAppOpTreeInit(&tree, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
+    appOpTreeCheckC(&tree);
     findOps(&tree, C.fdr.init, 2);
     pddlFDRAppOpTreeFree(&tree);
 }
@@ -73,6 +158,7 @@ static void findOpsRand(int num_samples)
     const pddl_fdr_vars_t *vars = &C.fdr.var;
     pddl_fdr_app_op_tree_t tree;
     pddlFDRAppOpTreeInit(&tree, vars, &C.fdr.op, &C.fdr.goal);
+    appOpTreeCheckC(&tree);
 
     pddl_rand_t rnd;
     pddlRandInitAuto(&rnd);
@@ -136,21 +222,6 @@ static void appOpTreeAddOp(pddl_fdr_ops_t *ops, const int *pre)
     pddlFDROpsAddSteal(ops, op);
 }
 
-/** Returns the index of the leaf node of TREE containing OP_ID */
-static int appOpTreeLeafOf(const pddl_fdr_app_op_tree_t *tree, int op_id)
-{
-    for (int ni = 0; ni < tree->node_size; ++ni){
-        const pddl_fdr_app_op_tree_node_t *node = tree->node + ni;
-        if (node->var >= 0)
-            continue;
-        for (int i = 0; i < node->child_noval_or_op_len; ++i){
-            if (tree->op_id[node->child_begin_or_op_begin + i] == op_id)
-                return ni;
-        }
-    }
-    return -1;
-}
-
 /*
  * pddl_fdr_app_op_tree_t on a small hand-built task: operators with empty
  * and duplicate preconditions end up in shared leaves sorted by ID, every
@@ -194,27 +265,21 @@ TEST_ONCE(fdr_app_op_tree_handmade)
 
     // Leaves correspond to distinct preconditions and hold operator IDs
     // sorted in ascending order
+    assert(fdr.op.op_size == 8);
+    int leaf_of[8];
+    int var_nodes[4];
+    appOpTreeCheckAll(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes);
     int num_leaves = 0;
-    int num_ops = 0;
-    for (int ni = 0; ni < tree.node_size; ++ni){
-        const pddl_fdr_app_op_tree_node_t *node = tree.node + ni;
-        assert(node->var != 2);
-        if (node->var >= 0)
-            continue;
-        ++num_leaves;
-        num_ops += node->child_noval_or_op_len;
-        assert(node->child_noval_or_op_len > 0);
-        for (int i = 1; i < node->child_noval_or_op_len; ++i){
-            int b = node->child_begin_or_op_begin;
-            assert(tree.op_id[b + i - 1] < tree.op_id[b + i]);
-        }
+    for (int op_id = 0; op_id < fdr.op.op_size; ++op_id){
+        int first = 1;
+        for (int i = 0; i < op_id; ++i)
+            first &= (leaf_of[i] != leaf_of[op_id]);
+        num_leaves += first;
     }
     assert(num_leaves == 6);
-    assert(num_ops == fdr.op.op_size);
-    for (int op_id = 0; op_id < fdr.op.op_size; ++op_id)
-        assert(appOpTreeLeafOf(&tree, op_id) >= 0);
-    assert(appOpTreeLeafOf(&tree, 0) == appOpTreeLeafOf(&tree, 4));
-    assert(appOpTreeLeafOf(&tree, 2) == appOpTreeLeafOf(&tree, 5));
+    assert(leaf_of[0] == leaf_of[4]);
+    assert(leaf_of[2] == leaf_of[5]);
+    assert(var_nodes[2] == 0);
 
     // Compare with brute force in all states
     int state[4];
