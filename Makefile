@@ -74,6 +74,7 @@ TESTS += search
 TESTS += plan
 TESTS += gaifman
 TESTS += set
+TESTS += sort
 TESTS += segvec
 TESTS += slab
 TESTS += idx_set
