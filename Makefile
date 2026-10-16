@@ -54,6 +54,7 @@ TESTS += prune_strips
 TESTS += fdr
 TESTS += fdr_app_op_tree
 TESTS += fdr_app_op_bitset
+TESTS += fdr_app_op_tree_bitset
 TESTS += hff
 TESTS += hm_heur
 TESTS += pot
