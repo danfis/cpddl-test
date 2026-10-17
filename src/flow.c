@@ -24,8 +24,8 @@ TEST_COND(flow, fdr, LP)
             return;
         }
         assert(c <= cost);
-        if (i < pddlIArrSize(&plan.op))
-            cost -= C.fdr.op.op[pddlIArrGet(&plan.op, i)]->cost;
+        if (i < pddlIVecSize(&plan.op))
+            cost -= C.fdr.op.op[pddlIVecGet(&plan.op, i)]->cost;
     }
     pddlHFlowFree(&flw);
     pddlPlanFileFDRFree(&plan);

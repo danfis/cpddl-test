@@ -212,21 +212,21 @@ static void checkFindArr(const pddl_fdr_app_op_t *tree,
                          const pddl_iset_t *exp,
                          int prefix_size)
 {
-    PDDL_IARR(arr);
+    PDDL_IVEC(arr);
     for (int i = 0; i < prefix_size; ++i)
-        pddlIArrAdd(&arr, -1 - i);
+        pddlIVecPush(&arr, -1 - i);
     int ret = pddlFDRAppOpFindArr(tree, state, &arr);
     assert(ret == pddlISetSize(exp));
-    assert(pddlIArrSize(&arr) == prefix_size + ret);
+    assert(pddlIVecSize(&arr) == prefix_size + ret);
     for (int i = 0; i < prefix_size; ++i)
-        assert(pddlIArrGet(&arr, i) == -1 - i);
+        assert(pddlIVecGet(&arr, i) == -1 - i);
 
-    int *found = pddlIArrGetArr(&arr) + prefix_size;
+    int *found = pddlIVecData(&arr) + prefix_size;
     int sret = pddlSortInt(found, ret);
     assert(sret == 0);
     for (int i = 0; i < ret; ++i)
         assert(found[i] == pddlISetGet(exp, i));
-    pddlIArrFree(&arr);
+    pddlIVecFree(&arr);
 }
 
 /** Checks that TREE finds the same operators in STATE as brute force (with
