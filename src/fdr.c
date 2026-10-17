@@ -74,92 +74,10 @@ TEST(fdr_h2, strips_pruned)
 }
 
 
-static void findOps(const pddl_fdr_app_op_t *app_op,
-                    const pddl_fdr_ops_t *ops,
-                    const int *state,
-                    int depth)
-{
-    PDDL_ISET(app);
-    int ret = pddlFDRAppOpFind(app_op, state, &app);
-    assert(ret == pddlISetSize(&app));
-
-    /*
-    printf("Init: %d:", ret);
-    int op_id;
-    PDDL_ISET_FOR_EACH(&app, op_id)
-        printf(" %d", op_id);
-    printf("\n");
-    */
-
-    PDDL_ISET(app2);
-    for (int op_id = 0; op_id < ops->op_size; ++op_id){
-        const pddl_fdr_op_t *op = ops->op[op_id];
-        int applicable = 1;
-        for (int fi = 0; fi < op->pre.fact_size; ++fi){
-            const pddl_fdr_fact_t *fact = op->pre.fact + fi;
-            if (state[fact->var] != fact->val){
-                applicable = 0;
-                break;
-            }
-        }
-
-        if (applicable)
-            pddlISetAdd(&app2, op_id);
-    }
-
-    assert(pddlISetEq(&app, &app2));
-
-    if (depth > 0){
-        int *next_state = PDDL_ALLOC_ARR(int, app_op->var_size);
-        PDDL_ISET_FOR_EACH(&app, op_id){
-            memcpy(next_state, state, sizeof(int) * app_op->var_size);
-
-            const pddl_fdr_op_t *op = ops->op[op_id];
-            for (int fi = 0; fi < op->eff.fact_size; ++fi)
-                next_state[op->eff.fact[fi].var] = op->eff.fact[fi].val;
-            findOps(app_op, ops, next_state, depth - 1);
-        }
-        PDDL_FREE(next_state);
-    }
-
-    pddlISetFree(&app2);
-    pddlISetFree(&app);
-}
-
-static void findOpsRand(const pddl_fdr_app_op_t *app_op,
-                        const pddl_fdr_vars_t *vars,
-                        const pddl_fdr_ops_t *ops,
-                        int num_samples)
-{
-    pddl_rand_t rnd;
-    pddlRandInitAuto(&rnd);
-
-    int *state = PDDL_ALLOC_ARR(int, vars->var_size);
-    for (int sample = 0; sample < num_samples; ++sample){
-        for (int var = 0; var < vars->var_size; ++var){
-            int val = pddlRand(&rnd, 0, vars->var[var].val_size);
-            val = PDDL_MIN(val, vars->var[var].val_size - 1);
-            state[var] = val;
-        }
-        findOps(app_op, ops, state, 0);
-    }
-    PDDL_FREE(state);
-}
-
 TEST(fdr_app_op, fdr_largest)
 {
-    pddlFDRAppOpInit(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
+    pddlFDRAppOpInitDefault(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
     C.fdr_app_op_set = 1;
-}
-
-TEST(fdr_app_op_search, fdr_app_op)
-{
-    findOps(&C.fdr_app_op, &C.fdr.op, C.fdr.init, 2);
-}
-
-TEST(fdr_app_op_rand, fdr_app_op)
-{
-    findOpsRand(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, 5000);
 }
 
 TEST(fdr, fdr_app_op)
@@ -168,18 +86,8 @@ TEST(fdr, fdr_app_op)
 
 TEST(fdr_app_op_essential, fdr_essential)
 {
-    pddlFDRAppOpInit(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
+    pddlFDRAppOpInitDefault(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, &C.fdr.goal);
     C.fdr_app_op_set = 1;
-}
-
-TEST(fdr_app_op_search_essential, fdr_app_op_essential)
-{
-    findOps(&C.fdr_app_op, &C.fdr.op, C.fdr.init, 2);
-}
-
-TEST(fdr_app_op_rand_essential, fdr_app_op_essential)
-{
-    findOpsRand(&C.fdr_app_op, &C.fdr.var, &C.fdr.op, 5000);
 }
 
 

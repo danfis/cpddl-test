@@ -5,13 +5,11 @@
  */
 
 /*
- * Tests of the fdr_app_op_tree_bitset module
- * (pddl/fdr_app_op_tree_bitset.h).
+ * Tests of the fdr_app_op module (pddl/fdr_app_op.h).
  *
- * The per-task tests compare pddlFDRAppOpTreeBitsetFind() with brute force
- * and with pddlFDRAppOpFind() (C.fdr_app_op). The hand-built test is
- * TEST_ONCE.
- * Run with:  cd tests && make && ./test -Q -T _ -s fdr_app_op_tree_bitset
+ * The per-task tests compare pddlFDRAppOpFind() with brute force. The
+ * hand-built test is TEST_ONCE.
+ * Run with:  cd tests && make && ./test -Q -T _ -s fdr_app_op
  */
 
 #include "test.h"
@@ -26,9 +24,9 @@
 #define KIND_BITSET 0xC0000000u
 #define PAYLOAD_MASK 0x3FFFFFFFu
 
-/** Counters and state of appOpTreeBitsetCheck() */
+/** Counters and state of appOpCheck() */
 struct check {
-    const pddl_fdr_app_op_tree_bitset_t *tree;
+    const pddl_fdr_app_op_t *tree;
     const pddl_fdr_vars_t *vars;
     /** Offset of the leaf of each operator, or -1 */
     int *leaf_of;
@@ -46,7 +44,7 @@ typedef struct check check_t;
  *  N: they are sorted and not in any other leaf */
 static void checkLeafOps(check_t *c, int n, int begin, int len)
 {
-    const pddl_fdr_app_op_tree_bitset_t *tree = c->tree;
+    const pddl_fdr_app_op_t *tree = c->tree;
     assert(len > 0);
     assert(begin >= 0 && begin + len <= tree->ops->op_size);
     for (int i = 0; i < len; ++i){
@@ -61,7 +59,7 @@ static void checkLeafOps(check_t *c, int n, int begin, int len)
  *  words in .node[] */
 static int checkBitsetLeaf(check_t *c, int n)
 {
-    const pddl_fdr_app_op_tree_bitset_t *tree = c->tree;
+    const pddl_fdr_app_op_t *tree = c->tree;
     const uint32_t *node = tree->node + n;
     int len = node[0] & PAYLOAD_MASK;
     int begin = node[1];
@@ -122,7 +120,7 @@ static int checkBitsetLeaf(check_t *c, int n)
  *  records and returns the number of words spanned by the subtree */
 static int checkNode(check_t *c, int n)
 {
-    const pddl_fdr_app_op_tree_bitset_t *tree = c->tree;
+    const pddl_fdr_app_op_t *tree = c->tree;
     assert(n >= 0 && n + 1 < tree->node_size);
     const uint32_t *node = tree->node + n;
     uint32_t kind = node[0] & KIND_MASK;
@@ -164,12 +162,12 @@ static int checkNode(check_t *c, int n)
  *  records tile .node[], the words of bitset leaves tile .bits[], every
  *  operator is in exactly one leaf (stored in LEAF_OF[]), and VAR_NODES[]
  *  holds the number of internal nodes per variable */
-static void appOpTreeBitsetCheck(const pddl_fdr_app_op_tree_bitset_t *tree,
-                                 const pddl_fdr_vars_t *vars,
-                                 const pddl_fdr_ops_t *ops,
-                                 int *leaf_of,
-                                 int *var_nodes,
-                                 check_t *c)
+static void appOpCheck(const pddl_fdr_app_op_t *tree,
+                       const pddl_fdr_vars_t *vars,
+                       const pddl_fdr_ops_t *ops,
+                       int *leaf_of,
+                       int *var_nodes,
+                       check_t *c)
 {
     for (int i = 0; i < ops->op_size; ++i)
         leaf_of[i] = -1;
@@ -195,29 +193,28 @@ static void appOpTreeBitsetCheck(const pddl_fdr_app_op_tree_bitset_t *tree,
         assert(c->num_bitset_leaves == 0);
 }
 
-/** Runs appOpTreeBitsetCheck() on TREE built from C.fdr */
-static void appOpTreeBitsetCheckC(const pddl_fdr_app_op_tree_bitset_t *tree)
+/** Runs appOpCheck() on TREE built from C.fdr */
+static void appOpCheckC(const pddl_fdr_app_op_t *tree)
 {
     int *leaf_of = PDDL_ALLOC_ARR(int, PDDL_MAX(C.fdr.op.op_size, 1));
     int *var_nodes = PDDL_ALLOC_ARR(int, PDDL_MAX(C.fdr.var.var_size, 1));
     check_t c;
-    appOpTreeBitsetCheck(tree, &C.fdr.var, &C.fdr.op, leaf_of, var_nodes,
-                         &c);
+    appOpCheck(tree, &C.fdr.var, &C.fdr.op, leaf_of, var_nodes, &c);
     PDDL_FREE(leaf_of);
     PDDL_FREE(var_nodes);
 }
 
-/** Checks that TREE finds the same operators in STATE as brute force and
- *  C.fdr_app_op, and recursively does the same for all successor states up
- *  to the depth DEPTH */
-static void findOps(const pddl_fdr_app_op_tree_bitset_t *tree,
+/** Checks that TREE finds the same operators in STATE as brute force, and
+ *  recursively does the same for all successor states up to the depth
+ *  DEPTH */
+static void findOps(const pddl_fdr_app_op_t *tree,
                     const int *state,
                     int depth)
 {
     const pddl_fdr_ops_t *ops = &C.fdr.op;
 
     PDDL_ISET(app);
-    int ret = pddlFDRAppOpTreeBitsetFind(tree, state, &app);
+    int ret = pddlFDRAppOpFind(tree, state, &app);
     assert(ret == pddlISetSize(&app));
 
     PDDL_ISET(app_brute);
@@ -227,10 +224,6 @@ static void findOps(const pddl_fdr_app_op_tree_bitset_t *tree,
             pddlISetAdd(&app_brute, op_id);
     }
     assert(pddlISetEq(&app, &app_brute));
-
-    PDDL_ISET(app_op);
-    pddlFDRAppOpFind(&C.fdr_app_op, state, &app_op);
-    assert(pddlISetEq(&app, &app_op));
 
     if (depth > 0){
         int var_size = C.fdr.var.var_size;
@@ -243,21 +236,15 @@ static void findOps(const pddl_fdr_app_op_tree_bitset_t *tree,
         PDDL_FREE(next_state);
     }
 
-    pddlISetFree(&app_op);
     pddlISetFree(&app_brute);
     pddlISetFree(&app);
 }
 
-/** Runs findOps() from the initial state to the depth 2 with the default
- *  configuration (pddlFDRAppOpTreeBitsetInitDefault()) */
+/** Runs findOps() on C.fdr_app_op from the initial state to the depth 2 */
 static void findOpsSearch(void)
 {
-    pddl_fdr_app_op_tree_bitset_t tree;
-    pddlFDRAppOpTreeBitsetInitDefault(&tree, &C.fdr.var, &C.fdr.op,
-                                      &C.fdr.goal);
-    appOpTreeBitsetCheckC(&tree);
-    findOps(&tree, C.fdr.init, 2);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    appOpCheckC(&C.fdr_app_op);
+    findOps(&C.fdr_app_op, C.fdr.init, 2);
 }
 
 /** Runs findOps() on NUM_SAMPLES random states for several values of
@@ -277,16 +264,15 @@ static void findOpsRand(int num_samples)
     const pddl_fdr_vars_t *vars = &C.fdr.var;
     int *state = PDDL_ALLOC_ARR(int, vars->var_size);
     for (int ci = 0; ci < num_cfgs; ++ci){
-        pddl_fdr_app_op_tree_bitset_config_t cfg
-                = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
+        pddl_fdr_app_op_config_t cfg = PDDL_FDR_APP_OP_CONFIG_INIT;
         cfg.vars = vars;
         cfg.ops = &C.fdr.op;
         cfg.goal = &C.fdr.goal;
         cfg.max_bitset_leaf_ops = max_ops_vals[ci][0];
         cfg.max_bitset_leaf_vals = max_ops_vals[ci][1];
-        pddl_fdr_app_op_tree_bitset_t tree;
-        pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-        appOpTreeBitsetCheckC(&tree);
+        pddl_fdr_app_op_t tree;
+        pddlFDRAppOpInit(&tree, &cfg);
+        appOpCheckC(&tree);
 
         pddl_rand_t rnd;
         pddlRandInitAuto(&rnd);
@@ -298,48 +284,45 @@ static void findOpsRand(int num_samples)
             }
             findOps(&tree, state, 0);
         }
-        pddlFDRAppOpTreeBitsetFree(&tree);
+        pddlFDRAppOpFree(&tree);
     }
     PDDL_FREE(state);
 }
 
 /*
- * pddl_fdr_app_op_tree_bitset_t with the default configuration has a
- * consistent structure and finds the same applicable operators as brute
- * force and pddl_fdr_app_op_t in all states reachable in two steps from
- * init.
+ * pddl_fdr_app_op_t created by pddlFDRAppOpInitDefault() (C.fdr_app_op) has
+ * a consistent structure and finds the same applicable operators as brute
+ * force in all states reachable in two steps from init.
  */
-TEST(fdr_app_op_tree_bitset_search, fdr_app_op)
+TEST(fdr_app_op_search, fdr_app_op)
 {
     findOpsSearch();
 }
 
 /*
- * pddl_fdr_app_op_tree_bitset_t has a consistent structure and finds the
- * same applicable operators as brute force and pddl_fdr_app_op_t in random
- * states, from the plain decision tree (.max_bitset_leaf_ops = 0) up to a
- * single bitset leaf (INT_MAX), also with limited numbers of values in
- * bitset leaves (.max_bitset_leaf_vals).
+ * pddl_fdr_app_op_t has a consistent structure and finds the same
+ * applicable operators as brute force in random states, from the plain
+ * decision tree (.max_bitset_leaf_ops = 0) up to a single bitset leaf
+ * (INT_MAX), also with limited numbers of values in bitset leaves
+ * (.max_bitset_leaf_vals).
  */
-TEST(fdr_app_op_tree_bitset_rand, fdr_app_op)
+TEST(fdr_app_op_rand, fdr_app_op)
 {
     findOpsRand(1000);
 }
 
 /*
- * Same as fdr_app_op_tree_bitset_search but with essential-first FDR
- * variables.
+ * Same as fdr_app_op_search but with essential-first FDR variables.
  */
-TEST(fdr_app_op_tree_bitset_search_essential, fdr_app_op_essential)
+TEST(fdr_app_op_search_essential, fdr_app_op_essential)
 {
     findOpsSearch();
 }
 
 /*
- * Same as fdr_app_op_tree_bitset_rand but with essential-first FDR
- * variables.
+ * Same as fdr_app_op_rand but with essential-first FDR variables.
  */
-TEST(fdr_app_op_tree_bitset_rand_essential, fdr_app_op_essential)
+TEST(fdr_app_op_rand_essential, fdr_app_op_essential)
 {
     findOpsRand(1000);
 }
@@ -348,7 +331,7 @@ TEST(fdr_app_op_tree_bitset_rand_essential, fdr_app_op_essential)
 
 /** Adds an operator with the precondition given as the END-terminated
  *  array of (var, val) pairs PRE */
-static void appOpTreeBitsetAddOp(pddl_fdr_ops_t *ops, const int *pre)
+static void appOpAddOp(pddl_fdr_ops_t *ops, const int *pre)
 {
     pddl_fdr_op_t *op = pddlFDROpNewEmpty();
     op->name = PDDL_STRDUP("op");
@@ -358,7 +341,7 @@ static void appOpTreeBitsetAddOp(pddl_fdr_ops_t *ops, const int *pre)
 }
 
 /** Creates an empty task with the variables of the sizes 3, 2, 2, 2 */
-static void appOpTreeBitsetTaskInit(pddl_fdr_t *fdr)
+static void appOpTaskInit(pddl_fdr_t *fdr)
 {
     memset(fdr, 0, sizeof(*fdr));
     pddlFDRVarsAdd(&fdr->var, 3);
@@ -372,9 +355,9 @@ static void appOpTreeBitsetTaskInit(pddl_fdr_t *fdr)
 }
 
 /** Compares Find on TREE with brute force in all states of the task FDR
- *  created by appOpTreeBitsetTaskInit() */
-static void appOpTreeBitsetCmpBrute(const pddl_fdr_app_op_tree_bitset_t *tree,
-                                    const pddl_fdr_t *fdr)
+ *  created by appOpTaskInit() */
+static void appOpCmpBrute(const pddl_fdr_app_op_t *tree,
+                          const pddl_fdr_t *fdr)
 {
     PDDL_ISET(found);
     int state[4];
@@ -392,14 +375,14 @@ static void appOpTreeBitsetCmpBrute(const pddl_fdr_app_op_tree_bitset_t *tree,
         }
 
         pddlISetEmpty(&found);
-        int ret = pddlFDRAppOpTreeBitsetFind(tree, state, &found);
+        int ret = pddlFDRAppOpFind(tree, state, &found);
         assert(ret == pddlISetSize(&exp));
         assert(pddlISetEq(&found, &exp));
 
         // Find adds to the existing content of the output set
         pddlISetEmpty(&found);
         pddlISetAdd(&found, 1000);
-        ret = pddlFDRAppOpTreeBitsetFind(tree, state, &found);
+        ret = pddlFDRAppOpFind(tree, state, &found);
         assert(ret == pddlISetSize(&exp));
         pddlISetAdd(&exp, 1000);
         assert(pddlISetEq(&found, &exp));
@@ -408,48 +391,24 @@ static void appOpTreeBitsetCmpBrute(const pddl_fdr_app_op_tree_bitset_t *tree,
     pddlISetFree(&found);
 }
 
-/** Checks that the subtrees at the offset N of TREE and REF have the same
- *  shape, i.e., they differ only in "no child" being 0 instead of -1 and
- *  in the tags of leaves */
-static void appOpTreeBitsetCmpShape(const pddl_fdr_app_op_tree_bitset_t *tree,
-                                    const pddl_fdr_app_op_tree_t *ref,
-                                    const pddl_fdr_vars_t *vars,
-                                    int n)
-{
-    if (ref->node[n] < 0){
-        assert(tree->node[n] == (KIND_LEAF | (uint32_t)-ref->node[n]));
-        assert((int)tree->node[n + 1] == ref->node[n + 1]);
-        return;
-    }
-
-    int var = ref->node[n];
-    assert(tree->node[n] == (uint32_t)var);
-    for (int i = 1; i < 2 + vars->var[var].val_size; ++i){
-        if (ref->node[n + i] == -1){
-            assert(tree->node[n + i] == 0);
-        }else{
-            assert((int)tree->node[n + i] == ref->node[n + i]);
-            appOpTreeBitsetCmpShape(tree, ref, vars, ref->node[n + i]);
-        }
-    }
-}
-
 /*
- * pddl_fdr_app_op_tree_bitset_t on small hand-built tasks: a task without
- * operators yields an empty tree; with .max_bitset_leaf_ops = 0 the tree
- * has the same shape as pddl_fdr_app_op_tree_t; INT_MAX gives a single
- * multi-word bitset leaf; 64 gives all three kinds of nodes;
- * pddlFDRAppOpTreeBitsetInitDefault() gives the same tree as the default
+ * pddl_fdr_app_op_t on small hand-built tasks: a task without operators
+ * yields an empty tree; with .max_bitset_leaf_ops = 0 the tree consists of
+ * internal nodes and leaves of operators with the same precondition sorted
+ * by ID, and variables without any precondition get no node; a small
+ * limit turns only sub-ranges with some facts left to test into bitset
+ * leaves; INT_MAX gives a single multi-word bitset leaf; 64 gives all
+ * three kinds of nodes;
+ * pddlFDRAppOpInitDefault() gives the same tree as the default
  * configuration; the number of values in bitset leaves is bounded by
  * .max_bitset_leaf_vals; and Find agrees with brute force in all states
  * for various configurations.
  */
-TEST_ONCE(fdr_app_op_tree_bitset_handmade)
+TEST_ONCE(fdr_app_op_handmade)
 {
     pddl_fdr_t fdr;
-    appOpTreeBitsetTaskInit(&fdr);
-    pddl_fdr_app_op_tree_bitset_config_t cfg
-            = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
+    appOpTaskInit(&fdr);
+    pddl_fdr_app_op_config_t cfg = PDDL_FDR_APP_OP_CONFIG_INIT;
     assert(cfg.max_bitset_leaf_ops == 128);
     assert(cfg.max_bitset_leaf_vals == INT_MAX);
     cfg.vars = &fdr.var;
@@ -457,42 +416,75 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
     cfg.goal = &fdr.goal;
 
     // Without operators
-    pddl_fdr_app_op_tree_bitset_t tree;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
+    pddl_fdr_app_op_t tree;
+    pddlFDRAppOpInit(&tree, &cfg);
     assert(tree.node_size == 0 && tree.bits_size == 0);
     PDDL_ISET(found);
     pddlISetAdd(&found, 7);
-    int ret = pddlFDRAppOpTreeBitsetFind(&tree, fdr.init, &found);
+    int ret = pddlFDRAppOpFind(&tree, fdr.init, &found);
     assert(ret == 0);
     assert(pddlISetSize(&found) == 1 && pddlISetIn(7, &found));
     pddlISetFree(&found);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    pddlFDRAppOpFree(&tree);
 
-    // The task of fdr_app_op_tree_handmade
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ END });                 // 0
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ 0, 1, END });           // 1
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ 0, 1, 1, 0, END });     // 2
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ 1, 0, END });           // 3
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ END });                 // 4
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ 1, 0, 0, 1, END });     // 5
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ 3, 1, 0, 2, END });     // 6
-    appOpTreeBitsetAddOp(&fdr.op, (int []){ 0, 2, END });           // 7
+    // Operators with empty and duplicate preconditions, the variable 2 is
+    // not used in any precondition
+    appOpAddOp(&fdr.op, (int []){ END });                 // 0
+    appOpAddOp(&fdr.op, (int []){ 0, 1, END });           // 1
+    appOpAddOp(&fdr.op, (int []){ 0, 1, 1, 0, END });     // 2
+    appOpAddOp(&fdr.op, (int []){ 1, 0, END });           // 3
+    appOpAddOp(&fdr.op, (int []){ END });                 // 4
+    appOpAddOp(&fdr.op, (int []){ 1, 0, 0, 1, END });     // 5
+    appOpAddOp(&fdr.op, (int []){ 3, 1, 0, 2, END });     // 6
+    appOpAddOp(&fdr.op, (int []){ 0, 2, END });           // 7
 
-    // Without bitset leaves, the tree has the same shape as
-    // pddl_fdr_app_op_tree_t, only "no child" is 0 instead of -1 and leaves
-    // are tagged differently
-    pddl_fdr_app_op_tree_t ref;
-    pddlFDRAppOpTreeInit(&ref, &fdr.var, &fdr.op, &fdr.goal);
+    // Without bitset leaves (the variable ordering is 0, 1, 2, 3)
+    static const uint32_t exp_node[] = {
+        0, 5, 0, 13, 21,        // 0: var 0
+        1, 9, 11, 0,            // 5: var 1 (no precondition on var 0)
+        KIND_LEAF | 2, 0,       // 9: ops 0, 4
+        KIND_LEAF | 1, 2,       // 11: op 3
+        1, 17, 19, 0,           // 13: var 1 (var 0 = 1)
+        KIND_LEAF | 1, 3,       // 17: op 1
+        KIND_LEAF | 2, 4,       // 19: ops 2, 5
+        3, 25, 0, 27,           // 21: var 3 (var 0 = 2)
+        KIND_LEAF | 1, 6,       // 25: op 7
+        KIND_LEAF | 1, 7,       // 27: op 6
+    };
+    static const int exp_op_id[] = { 0, 4, 3, 1, 2, 5, 7, 6 };
     cfg.max_bitset_leaf_ops = 0;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-    assert(tree.node_size == ref.node_size);
+    pddlFDRAppOpInit(&tree, &cfg);
+    assert(tree.node_size == sizeof(exp_node) / sizeof(exp_node[0]));
+    assert(memcmp(tree.node, exp_node, sizeof(exp_node)) == 0);
+    assert(memcmp(tree.op_id, exp_op_id, sizeof(exp_op_id)) == 0);
     assert(tree.bits_size == 0);
-    appOpTreeBitsetCmpShape(&tree, &ref, &fdr.var, 0);
-    for (int i = 0; i < fdr.op.op_size; ++i)
-        assert(tree.op_id[i] == ref.op_id[i]);
-    appOpTreeBitsetCmpBrute(&tree, &fdr);
-    pddlFDRAppOpTreeBitsetFree(&tree);
-    pddlFDRAppOpTreeFree(&ref);
+    appOpCmpBrute(&tree, &fdr);
+    pddlFDRAppOpFree(&tree);
+
+    // With at most two operators in bitset leaves, only ops 6 and 7 (var 0
+    // = 2) have some facts left to test, so they form the only bitset leaf
+    // over var 3, whose value 0 holds for op 7 and 1 for both
+    static const uint32_t exp_node2[] = {
+        0, 5, 0, 13, 21,        // 0: var 0
+        1, 9, 11, 0,            // 5: var 1 (no precondition on var 0)
+        KIND_LEAF | 2, 0,       // 9: ops 0, 4
+        KIND_LEAF | 1, 2,       // 11: op 3
+        1, 17, 19, 0,           // 13: var 1 (var 0 = 1)
+        KIND_LEAF | 1, 3,       // 17: op 1
+        KIND_LEAF | 2, 4,       // 19: ops 2, 5
+        KIND_BITSET | 2, 6, 1, 0, 2, 3, 0, // 21: ops 6, 7
+    };
+    static const int exp_op_id2[] = { 0, 4, 3, 1, 2, 5, 6, 7 };
+    static const uint64_t exp_bits2[] = { 0x2u, 0x3u };
+    cfg.max_bitset_leaf_ops = 2;
+    pddlFDRAppOpInit(&tree, &cfg);
+    assert(tree.node_size == sizeof(exp_node2) / sizeof(exp_node2[0]));
+    assert(memcmp(tree.node, exp_node2, sizeof(exp_node2)) == 0);
+    assert(memcmp(tree.op_id, exp_op_id2, sizeof(exp_op_id2)) == 0);
+    assert(tree.bits_size == 2);
+    assert(memcmp(tree.bits, exp_bits2, sizeof(exp_bits2)) == 0);
+    appOpCmpBrute(&tree, &fdr);
+    pddlFDRAppOpFree(&tree);
 
     // Extend the task to 150 operators: the odd ones from 9, ..., 149 have
     // empty preconditions (so that there are more than 64 of them and they
@@ -503,7 +495,7 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
         int ins = 0;
         if (i % 2 == 1){
             pre[ins] = END;
-            appOpTreeBitsetAddOp(&fdr.op, pre);
+            appOpAddOp(&fdr.op, pre);
             continue;
         }
         if (i % 4 != 0){
@@ -523,7 +515,7 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
             pre[ins++] = (i / 7) % 2;
         }
         pre[ins] = END;
-        appOpTreeBitsetAddOp(&fdr.op, pre);
+        appOpAddOp(&fdr.op, pre);
     }
     assert(fdr.op.op_size == 150);
 
@@ -533,8 +525,8 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
 
     // A single bitset leaf spanning three words
     cfg.max_bitset_leaf_ops = INT_MAX;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-    appOpTreeBitsetCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
+    pddlFDRAppOpInit(&tree, &cfg);
+    appOpCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
     assert(c.num_internal == 0);
     assert(c.num_leaves == 0);
     assert(c.num_bitset_leaves == 1);
@@ -542,29 +534,28 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
     assert((tree.node[0] & PAYLOAD_MASK) == 150);
     assert(tree.node[2] == 4);
     assert(tree.bits_size == 3 * (3 + 2 + 2 + 2));
-    appOpTreeBitsetCmpBrute(&tree, &fdr);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    appOpCmpBrute(&tree, &fdr);
+    pddlFDRAppOpFree(&tree);
 
     // All kinds of nodes
     cfg.max_bitset_leaf_ops = 64;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-    appOpTreeBitsetCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
+    pddlFDRAppOpInit(&tree, &cfg);
+    appOpCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
     assert(c.num_internal > 0);
     assert(c.num_leaves > 0);
     assert(c.num_bitset_leaves > 0);
-    appOpTreeBitsetCmpBrute(&tree, &fdr);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    appOpCmpBrute(&tree, &fdr);
+    pddlFDRAppOpFree(&tree);
 
-    // pddlFDRAppOpTreeBitsetInitDefault() builds the same tree as the
+    // pddlFDRAppOpInitDefault() builds the same tree as the
     // default configuration
-    pddl_fdr_app_op_tree_bitset_config_t def_cfg
-            = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
+    pddl_fdr_app_op_config_t def_cfg = PDDL_FDR_APP_OP_CONFIG_INIT;
     def_cfg.vars = &fdr.var;
     def_cfg.ops = &fdr.op;
     def_cfg.goal = &fdr.goal;
-    pddlFDRAppOpTreeBitsetInit(&tree, &def_cfg);
-    pddl_fdr_app_op_tree_bitset_t def;
-    pddlFDRAppOpTreeBitsetInitDefault(&def, &fdr.var, &fdr.op, &fdr.goal);
+    pddlFDRAppOpInit(&tree, &def_cfg);
+    pddl_fdr_app_op_t def;
+    pddlFDRAppOpInitDefault(&def, &fdr.var, &fdr.op, &fdr.goal);
     assert(def.max_bitset_leaf_ops == def_cfg.max_bitset_leaf_ops);
     assert(def.max_bitset_leaf_vals == def_cfg.max_bitset_leaf_vals);
     assert(def.ops == &fdr.op);
@@ -576,17 +567,16 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
                   sizeof(uint64_t) * tree.bits_size) == 0);
     assert(memcmp(def.op_id, tree.op_id,
                   sizeof(int) * fdr.op.op_size) == 0);
-    appOpTreeBitsetCmpBrute(&def, &fdr);
-    pddlFDRAppOpTreeBitsetFree(&def);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    appOpCmpBrute(&def, &fdr);
+    pddlFDRAppOpFree(&def);
+    pddlFDRAppOpFree(&tree);
 
     // Find agrees with brute force for various configurations
     static const int max_ops[] = { 0, 1, 2, 3, 200 };
     for (int mi = 0; mi < (int)(sizeof(max_ops) / sizeof(int)); ++mi){
         cfg.max_bitset_leaf_ops = max_ops[mi];
-        pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-        appOpTreeBitsetCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes,
-                             &c);
+        pddlFDRAppOpInit(&tree, &cfg);
+        appOpCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
         // Bitset leaves are guaranteed only for 0 (none) and for a value
         // covering all operators (the root)
         if (max_ops[mi] == 0){
@@ -594,8 +584,8 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
         }else if (max_ops[mi] >= fdr.op.op_size){
             assert(c.num_bitset_leaves == 1 && c.num_internal == 0);
         }
-        appOpTreeBitsetCmpBrute(&tree, &fdr);
-        pddlFDRAppOpTreeBitsetFree(&tree);
+        appOpCmpBrute(&tree, &fdr);
+        pddlFDRAppOpFree(&tree);
     }
 
     // The limit on the number of values in bitset leaves: all 3 + 2 + 2 + 2
@@ -603,41 +593,39 @@ TEST_ONCE(fdr_app_op_tree_bitset_handmade)
     // gives the plain decision tree
     cfg.max_bitset_leaf_ops = INT_MAX;
     cfg.max_bitset_leaf_vals = 9;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-    appOpTreeBitsetCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
+    pddlFDRAppOpInit(&tree, &cfg);
+    appOpCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
     assert(c.num_bitset_leaves == 1 && c.num_internal == 0);
-    appOpTreeBitsetCmpBrute(&tree, &fdr);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    appOpCmpBrute(&tree, &fdr);
+    pddlFDRAppOpFree(&tree);
 
     static const int max_vals[] = { 8, 6, 4, 3, 2, 1 };
     for (int vi = 0; vi < (int)(sizeof(max_vals) / sizeof(int)); ++vi){
         cfg.max_bitset_leaf_vals = max_vals[vi];
-        pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-        appOpTreeBitsetCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes,
-                             &c);
+        pddlFDRAppOpInit(&tree, &cfg);
+        appOpCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
         assert(c.num_internal > 0);
-        appOpTreeBitsetCmpBrute(&tree, &fdr);
-        pddlFDRAppOpTreeBitsetFree(&tree);
+        appOpCmpBrute(&tree, &fdr);
+        pddlFDRAppOpFree(&tree);
     }
 
     cfg.max_bitset_leaf_vals = 0;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
-    appOpTreeBitsetCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
+    pddlFDRAppOpInit(&tree, &cfg);
+    appOpCheck(&tree, &fdr.var, &fdr.op, leaf_of, var_nodes, &c);
     assert(c.num_bitset_leaves == 0);
-    appOpTreeBitsetCmpBrute(&tree, &fdr);
-    pddlFDRAppOpTreeBitsetFree(&tree);
+    appOpCmpBrute(&tree, &fdr);
+    pddlFDRAppOpFree(&tree);
 
     pddlFDRFree(&fdr);
 }
 
 /*
- * pddlFDRAppOpTreeBitsetInit() panics if the configuration does not set
+ * pddlFDRAppOpInit() panics if the configuration does not set
  * the task.
  */
-TEST_PANIC_ONCE(fdr_app_op_tree_bitset_no_task)
+TEST_PANIC_ONCE(fdr_app_op_no_task)
 {
-    pddl_fdr_app_op_tree_bitset_config_t cfg
-            = PDDL_FDR_APP_OP_TREE_BITSET_CONFIG_INIT;
-    pddl_fdr_app_op_tree_bitset_t tree;
-    pddlFDRAppOpTreeBitsetInit(&tree, &cfg);
+    pddl_fdr_app_op_config_t cfg = PDDL_FDR_APP_OP_CONFIG_INIT;
+    pddl_fdr_app_op_t tree;
+    pddlFDRAppOpInit(&tree, &cfg);
 }

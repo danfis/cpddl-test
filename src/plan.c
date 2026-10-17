@@ -88,7 +88,7 @@ static void opAddCondEff(pddl_fdr_op_t *op, const int *pre, const int *eff)
  *  called after all operators are added. */
 static void taskFinalize(task_t *t)
 {
-    pddlFDRAppOpInit(&t->app_op, &t->fdr.var, &t->fdr.op, &t->fdr.goal);
+    pddlFDRAppOpInitDefault(&t->app_op, &t->fdr.var, &t->fdr.op, &t->fdr.goal);
     pddl_fdr_state_pool_config_t pool_cfg = PDDL_FDR_STATE_POOL_CONFIG_INIT;
     pool_cfg.packer_cfg.vars = &t->fdr.var;
     int ret = pddlFDRStateSpaceInit(&t->space, &pool_cfg, &t->err);
