@@ -75,6 +75,7 @@ TESTS += plan
 TESTS += gaifman
 TESTS += set
 TESTS += ivec
+TESTS += svec
 TESTS += segvec
 TESTS += slab
 TESTS += idx_set
