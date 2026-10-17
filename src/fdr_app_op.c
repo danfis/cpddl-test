@@ -7,8 +7,8 @@
 /*
  * Tests of the fdr_app_op module (pddl/fdr_app_op.h).
  *
- * The per-task tests compare pddlFDRAppOpFind() with brute force. The
- * hand-built test is TEST_ONCE.
+ * The per-task tests compare pddlFDRAppOpFindSet() and
+ * pddlFDRAppOpFindArr() with brute force. The hand-built test is TEST_ONCE.
  * Run with:  cd tests && make && ./test -Q -T _ -s fdr_app_op
  */
 
@@ -204,9 +204,34 @@ static void appOpCheckC(const pddl_fdr_app_op_t *tree)
     PDDL_FREE(var_nodes);
 }
 
-/** Checks that TREE finds the same operators in STATE as brute force, and
- *  recursively does the same for all successor states up to the depth
- *  DEPTH */
+/** Checks that pddlFDRAppOpFindArr() on TREE and STATE appends each
+ *  operator of EXP exactly once (in any order) to an array already holding
+ *  PREFIX_SIZE elements, and keeps these elements untouched */
+static void checkFindArr(const pddl_fdr_app_op_t *tree,
+                         const int *state,
+                         const pddl_iset_t *exp,
+                         int prefix_size)
+{
+    PDDL_IARR(arr);
+    for (int i = 0; i < prefix_size; ++i)
+        pddlIArrAdd(&arr, -1 - i);
+    int ret = pddlFDRAppOpFindArr(tree, state, &arr);
+    assert(ret == pddlISetSize(exp));
+    assert(pddlIArrSize(&arr) == prefix_size + ret);
+    for (int i = 0; i < prefix_size; ++i)
+        assert(pddlIArrGet(&arr, i) == -1 - i);
+
+    int *found = pddlIArrGetArr(&arr) + prefix_size;
+    int sret = pddlSortInt(found, ret);
+    assert(sret == 0);
+    for (int i = 0; i < ret; ++i)
+        assert(found[i] == pddlISetGet(exp, i));
+    pddlIArrFree(&arr);
+}
+
+/** Checks that TREE finds the same operators in STATE as brute force (with
+ *  both pddlFDRAppOpFindSet() and pddlFDRAppOpFindArr()), and recursively
+ *  does the same for all successor states up to the depth DEPTH */
 static void findOps(const pddl_fdr_app_op_t *tree,
                     const int *state,
                     int depth)
@@ -214,7 +239,7 @@ static void findOps(const pddl_fdr_app_op_t *tree,
     const pddl_fdr_ops_t *ops = &C.fdr.op;
 
     PDDL_ISET(app);
-    int ret = pddlFDRAppOpFind(tree, state, &app);
+    int ret = pddlFDRAppOpFindSet(tree, state, &app);
     assert(ret == pddlISetSize(&app));
 
     PDDL_ISET(app_brute);
@@ -224,6 +249,7 @@ static void findOps(const pddl_fdr_app_op_t *tree,
             pddlISetAdd(&app_brute, op_id);
     }
     assert(pddlISetEq(&app, &app_brute));
+    checkFindArr(tree, state, &app_brute, 1);
 
     if (depth > 0){
         int var_size = C.fdr.var.var_size;
@@ -291,8 +317,9 @@ static void findOpsRand(int num_samples)
 
 /*
  * pddl_fdr_app_op_t created by pddlFDRAppOpInitDefault() (C.fdr_app_op) has
- * a consistent structure and finds the same applicable operators as brute
- * force in all states reachable in two steps from init.
+ * a consistent structure, and both pddlFDRAppOpFindSet() and
+ * pddlFDRAppOpFindArr() find the same applicable operators as brute force
+ * in all states reachable in two steps from init.
  */
 TEST(fdr_app_op_search, fdr_app_op)
 {
@@ -300,11 +327,11 @@ TEST(fdr_app_op_search, fdr_app_op)
 }
 
 /*
- * pddl_fdr_app_op_t has a consistent structure and finds the same
- * applicable operators as brute force in random states, from the plain
- * decision tree (.max_bitset_leaf_ops = 0) up to a single bitset leaf
- * (INT_MAX), also with limited numbers of values in bitset leaves
- * (.max_bitset_leaf_vals).
+ * pddl_fdr_app_op_t has a consistent structure, and both FindSet and
+ * FindArr find the same applicable operators as brute force in random
+ * states, from the plain decision tree (.max_bitset_leaf_ops = 0) up to a
+ * single bitset leaf (INT_MAX), also with limited numbers of values in
+ * bitset leaves (.max_bitset_leaf_vals).
  */
 TEST(fdr_app_op_rand, fdr_app_op)
 {
@@ -354,8 +381,8 @@ static void appOpTaskInit(pddl_fdr_t *fdr)
     pddlFDRPartStateSet(&fdr->goal, 0, 2);
 }
 
-/** Compares Find on TREE with brute force in all states of the task FDR
- *  created by appOpTaskInit() */
+/** Compares pddlFDRAppOpFindSet() and pddlFDRAppOpFindArr() on TREE with
+ *  brute force in all states of the task FDR created by appOpTaskInit() */
 static void appOpCmpBrute(const pddl_fdr_app_op_t *tree,
                           const pddl_fdr_t *fdr)
 {
@@ -375,17 +402,22 @@ static void appOpCmpBrute(const pddl_fdr_app_op_t *tree,
         }
 
         pddlISetEmpty(&found);
-        int ret = pddlFDRAppOpFind(tree, state, &found);
+        int ret = pddlFDRAppOpFindSet(tree, state, &found);
         assert(ret == pddlISetSize(&exp));
         assert(pddlISetEq(&found, &exp));
 
-        // Find adds to the existing content of the output set
+        // FindSet adds to the existing content of the output set
         pddlISetEmpty(&found);
         pddlISetAdd(&found, 1000);
-        ret = pddlFDRAppOpFind(tree, state, &found);
+        ret = pddlFDRAppOpFindSet(tree, state, &found);
         assert(ret == pddlISetSize(&exp));
         pddlISetAdd(&exp, 1000);
         assert(pddlISetEq(&found, &exp));
+        pddlISetRm(&exp, 1000);
+
+        // FindArr into an empty and a non-empty array
+        checkFindArr(tree, state, &exp, 0);
+        checkFindArr(tree, state, &exp, 3);
         pddlISetFree(&exp);
     }
     pddlISetFree(&found);
@@ -401,8 +433,9 @@ static void appOpCmpBrute(const pddl_fdr_app_op_t *tree,
  * three kinds of nodes;
  * pddlFDRAppOpInitDefault() gives the same tree as the default
  * configuration; the number of values in bitset leaves is bounded by
- * .max_bitset_leaf_vals; and Find agrees with brute force in all states
- * for various configurations.
+ * .max_bitset_leaf_vals; and both FindSet and FindArr (appending to empty
+ * and non-empty outputs) agree with brute force in all states for various
+ * configurations.
  */
 TEST_ONCE(fdr_app_op_handmade)
 {
@@ -421,9 +454,12 @@ TEST_ONCE(fdr_app_op_handmade)
     assert(tree.node_size == 0 && tree.bits_size == 0);
     PDDL_ISET(found);
     pddlISetAdd(&found, 7);
-    int ret = pddlFDRAppOpFind(&tree, fdr.init, &found);
+    int ret = pddlFDRAppOpFindSet(&tree, fdr.init, &found);
     assert(ret == 0);
     assert(pddlISetSize(&found) == 1 && pddlISetIn(7, &found));
+    pddlISetEmpty(&found);
+    checkFindArr(&tree, fdr.init, &found, 0);
+    checkFindArr(&tree, fdr.init, &found, 1);
     pddlISetFree(&found);
     pddlFDRAppOpFree(&tree);
 

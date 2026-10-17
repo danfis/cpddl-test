@@ -75,6 +75,7 @@ TESTS += search
 TESTS += plan
 TESTS += gaifman
 TESTS += set
+TESTS += arr
 TESTS += sort
 TESTS += segvec
 TESTS += slab

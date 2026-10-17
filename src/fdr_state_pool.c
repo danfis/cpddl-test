@@ -841,7 +841,7 @@ TEST(fdr_state_pool_walk, fdr)
             prev_id = id;
 
             pddlISetEmpty(&app);
-            pddlFDRAppOpFind(&C.fdr_app_op, state, &app);
+            pddlFDRAppOpFindSet(&C.fdr_app_op, state, &app);
             if (pddlISetSize(&app) == 0)
                 break;
             int k = pddlRandInt(&rnd) % (uint32_t)pddlISetSize(&app);
