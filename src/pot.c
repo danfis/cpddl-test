@@ -373,7 +373,7 @@ TEST(pot_conj, hpot)
         for (int f2 = f1 + 1; f2 < C.fdr.var.global_id_size; ++f2){
             if (!pddlMutexPairsIsMutex(&mutex, f1, f2)){
                 PDDL_ISET(c);
-                PDDL_ISET_SET(&c, f1, f2);
+                PDDL_ISET_ASSIGN(&c, f1, f2);
                 pddlSetISetAdd(&conjs, &c);
                 pddlISetFree(&c);
                 break;

@@ -296,7 +296,7 @@ static void walk(pddl_strips_maker_t *sm,
             }
 
             if (i == step % size){
-                pddlISetMinus2(&next_state, &state, &eff.del_eff);
+                pddlISetMinusTo(&next_state, &state, &eff.del_eff);
                 pddlISetUnion(&next_state, &eff.add_eff);
                 if (num_state_size > 0){
                     memcpy(next_num_state, eff.num_eff,
@@ -317,7 +317,7 @@ static void walk(pddl_strips_maker_t *sm,
             free(print_rank);
             free(aname);
         }
-        pddlISetEmpty(&state);
+        pddlISetClear(&state);
         pddlISetUnion(&state, &next_state);
         pddlISetFree(&next_state);
         if (num_state_size > 0){

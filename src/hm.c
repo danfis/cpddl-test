@@ -65,7 +65,7 @@ static void printExtraFacts(const char *label,
                             const pddl_iset_t *ref_set)
 {
     PDDL_ISET(extra);
-    pddlISetMinus2(&extra, new_set, ref_set);
+    pddlISetMinusTo(&extra, new_set, ref_set);
     if (pddlISetSize(&extra) > 0){
         fprintf(stdout, "%s extra unreachable facts [%d]:\n",
                 label, pddlISetSize(&extra));
@@ -80,7 +80,7 @@ static void printExtraOps(const char *label,
                           const pddl_iset_t *ref_set)
 {
     PDDL_ISET(extra);
-    pddlISetMinus2(&extra, new_set, ref_set);
+    pddlISetMinusTo(&extra, new_set, ref_set);
     if (pddlISetSize(&extra) > 0){
         fprintf(stdout, "%s extra unreachable ops [%d]:\n",
                 label, pddlISetSize(&extra));

@@ -120,7 +120,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             }
 
             if (i == step % size){
-                pddlISetMinus2(&next_state, &cur_state, &eff.del_eff);
+                pddlISetMinusTo(&next_state, &cur_state, &eff.del_eff);
                 pddlISetUnion(&next_state, &eff.add_eff);
                 if (num_state_size > 0){
                     memcpy(cur_num_state, eff.num_eff,
@@ -129,7 +129,7 @@ static void testSuccGen(pddl_lifted_app_action_backend_t backend)
             }
         }
         pddlStripsMakerEffFree(&eff);
-        pddlISetEmpty(&cur_state);
+        pddlISetClear(&cur_state);
         pddlISetUnion(&cur_state, &next_state);
         pddlISetFree(&next_state);
     }
