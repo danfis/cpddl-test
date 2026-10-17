@@ -350,6 +350,63 @@ TEST_ONCE(ivec_reserve_truncate_clear)
 }
 
 /*
+ * ShrinkToFit reduces the capacity exactly to the size keeping the
+ * elements, frees the memory of an empty vector, and the vector remains
+ * usable afterwards.
+ */
+TEST_ONCE(ivec_shrink_to_fit)
+{
+    // Zero-initialized vector: nothing to do
+    PDDL_IVEC(v);
+    pddlIVecShrinkToFit(&v);
+    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+
+    // Reserved but empty: freed
+    pddlIVecReserve(&v, 100);
+    assert(v.v != NULL && v.cap == 100);
+    pddlIVecShrinkToFit(&v);
+    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    pddlIVecPush(&v, 1);
+    int vals1[] = { 1 };
+    checkVec(&v, vals1, 1);
+    pddlIVecClear(&v);
+
+    // Non-empty: capacity is exactly the size, the elements are kept
+    int vals[11];
+    for (int i = 0; i < 10; ++i){
+        vals[i] = 5 * i - 3;
+        pddlIVecPush(&v, vals[i]);
+    }
+    assert(v.cap == 16);
+    pddlIVecShrinkToFit(&v);
+    assert(v.cap == 10);
+    checkVec(&v, vals, 10);
+
+    // Already tight: no reallocation
+    int *data = pddlIVecData(&v);
+    pddlIVecShrinkToFit(&v);
+    assert(pddlIVecData(&v) == data);
+    assert(v.cap == 10);
+
+    // Growing again doubles from the shrunk capacity
+    vals[10] = 77;
+    pddlIVecPush(&v, vals[10]);
+    assert(v.cap == 20);
+    checkVec(&v, vals, 11);
+
+    // After Truncate and Clear
+    pddlIVecTruncate(&v, 3);
+    pddlIVecShrinkToFit(&v);
+    assert(v.cap == 3);
+    checkVec(&v, vals, 3);
+    pddlIVecClear(&v);
+    pddlIVecShrinkToFit(&v);
+    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+
+    pddlIVecFree(&v);
+}
+
+/*
  * Has and In find exactly the stored elements.
  */
 TEST_ONCE(ivec_has_in)
