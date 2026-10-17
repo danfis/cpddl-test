@@ -3,7 +3,7 @@
 #include <assert.h>
 
 static void checkPlan(const pddl_fdr_t *fdr,
-                      const pddl_iarr_t *plan,
+                      const pddl_ivec_t *plan,
                       pddl_bool_t check_optimality)
 {
     int val = validatePlanSeq(fdr, plan);
@@ -11,7 +11,7 @@ static void checkPlan(const pddl_fdr_t *fdr,
 
     if (check_optimality){
         int plan_cost = 0;
-        PDDL_IARR_FOR_EACH(plan, op_id){
+        PDDL_IVEC_FOR_EACH(plan, op_id){
             const pddl_fdr_op_t *op = fdr->op.op[op_id];
             plan_cost += op->cost;
         }
@@ -51,11 +51,11 @@ static void run(pddl_symbolic_search_config_t *symb_cfg,
             pddlSymbolicSearchProgressLog(s, &C.err);
             PDDL_LOG(&C.err, "Plan found.");
 
-            PDDL_IARR(plan);
+            PDDL_IVEC(plan);
             ret = pddlSymbolicSearchExtractPlan(s, &plan, &C.err);
             assert(ret == 0);
             checkPlan(&C.fdr, &plan, check_optimality);
-            pddlIArrFree(&plan);
+            pddlIVecFree(&plan);
             break;
 
         case PDDL_SYMBOLIC_SEARCH_STATUS_UNSOLVABLE:

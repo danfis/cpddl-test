@@ -36,8 +36,8 @@ TEST(h2_heur_dyn_prog_plan_states, fdr)
         // h^2 dominates h^max.
         assert(h2 >= hm);
 
-        if (i < pddlIArrSize(&plan.op))
-            cost -= C.strips.op.op[pddlIArrGet(&plan.op, i)]->cost;
+        if (i < pddlIVecSize(&plan.op))
+            cost -= C.strips.op.op[pddlIVecGet(&plan.op, i)]->cost;
     }
 
     pddlHMaxFree(&hmax);
@@ -120,8 +120,8 @@ TEST(h2_heur_dyn_prog_mutex, fdr)
             printf("h^2(s[%d]) = %d | without-mutex: %d\n", i, hval, hval_no_mutex);
         */
 
-        if (i < pddlIArrSize(&plan.op))
-            cost -= C.strips.op.op[pddlIArrGet(&plan.op, i)]->cost;
+        if (i < pddlIVecSize(&plan.op))
+            cost -= C.strips.op.op[pddlIVecGet(&plan.op, i)]->cost;
     }
 
     pddlPlanFileStripsFree(&plan);
@@ -238,8 +238,8 @@ TEST(h2_heur_bitset_plan_states, fdr)
     for (int i = 0; i < plan.state_size; ++i){
         int h2 = pddlH2HeurBitset(&h, &plan.state[i]);
         assert(h2 <= cost);
-        if (i < pddlIArrSize(&plan.op))
-            cost -= C.strips.op.op[pddlIArrGet(&plan.op, i)]->cost;
+        if (i < pddlIVecSize(&plan.op))
+            cost -= C.strips.op.op[pddlIVecGet(&plan.op, i)]->cost;
     }
 
     pddlH2HeurBitsetFree(&h);
@@ -287,8 +287,8 @@ TEST(h2_heur_bitset_plan_states_mutex, fdr)
         int h2_no_mutex = pddlH2HeurBitset(&h_no_mutex, &plan.state[i]);
         assert(h2 <= cost);
         assert(h2_no_mutex <= h2);
-        if (i < pddlIArrSize(&plan.op))
-            cost -= C.strips.op.op[pddlIArrGet(&plan.op, i)]->cost;
+        if (i < pddlIVecSize(&plan.op))
+            cost -= C.strips.op.op[pddlIVecGet(&plan.op, i)]->cost;
     }
 
     pddlH2HeurBitsetFree(&h);

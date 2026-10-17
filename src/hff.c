@@ -4,7 +4,7 @@
 
 TEST(hff_strips, fdr)
 {
-    PDDL_IARR(plan);
+    PDDL_IVEC(plan);
     pddl_hff_t hff;
     int ret = pddlHFFInitStrips(&hff, &C.strips, &C.err);
     assert(ret == 0);
@@ -15,7 +15,7 @@ TEST(hff_strips, fdr)
         //assertTrue(pddlFDRIsRelaxedPlan(&fdr, fdr.init, &plan, &err));
     }
     pddlHFFFree(&hff);
-    pddlIArrFree(&plan);
+    pddlIVecFree(&plan);
 
     pddl_hmax_t hmax;
     ret = pddlHMaxInit(&hmax, &C.fdr, &C.err);
@@ -37,7 +37,7 @@ TEST(hff_strips, fdr)
 
 TEST(hff_fdr, fdr)
 {
-    PDDL_IARR(plan);
+    PDDL_IVEC(plan);
     pddl_hff_t hff;
     int ret = pddlHFFInit(&hff, &C.fdr, &C.err);
     assert(ret == 0);
@@ -47,7 +47,7 @@ TEST(hff_fdr, fdr)
         assert(pddlFDRIsRelaxedPlan(&C.fdr, C.fdr.init, &plan, &C.err));
     }
     pddlHFFFree(&hff);
-    pddlIArrFree(&plan);
+    pddlIVecFree(&plan);
 
     pddl_hmax_t hmax;
     ret = pddlHMaxInit(&hmax, &C.fdr, &C.err);

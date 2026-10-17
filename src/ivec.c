@@ -13,9 +13,17 @@
 static void checkVec(const pddl_ivec_t *v, const int *vals, int n)
 {
     assert(pddlIVecSize(v) == n);
-    assert(v->size <= v->cap);
+    assert(pddlIVecSize(v) <= pddlIVecCap(v));
     for (int i = 0; i < n; ++i)
         assert(pddlIVecGet(v, i) == vals[i]);
+}
+
+/* Check that v is empty and has no memory allocated. */
+static void assertUnallocated(const pddl_ivec_t *v)
+{
+    assert(pddlIVecData(v) == NULL);
+    assert(pddlIVecSize(v) == 0);
+    assert(pddlIVecCap(v) == 0);
 }
 
 /* Bounded random integer in [lo, hi]. */
@@ -45,7 +53,7 @@ static void refSort(pddl_ivec_t *v)
 TEST_ONCE(ivec_init_free)
 {
     PDDL_IVEC(a);
-    assert(a.v == NULL && a.size == 0 && a.cap == 0);
+    assertUnallocated(&a);
     assert(pddlIVecIsEmpty(&a));
     assert(pddlIVecSize(&a) == 0);
     assert(pddlIVecData(&a) == NULL);
@@ -54,7 +62,7 @@ TEST_ONCE(ivec_init_free)
     pddl_ivec_t b;
     memset(&b, 0x5a, sizeof(b));
     pddlIVecInit(&b);
-    assert(b.v == NULL && b.size == 0 && b.cap == 0);
+    assertUnallocated(&b);
     pddlIVecFree(&b);
 }
 
@@ -69,16 +77,17 @@ TEST_ONCE(ivec_push_pop)
         pddlIVecPush(&v, 3 * i - 7);
         assert(pddlIVecSize(&v) == i + 1);
         assert(pddlIVecLast(&v) == 3 * i - 7);
-        assert(v.size <= v.cap);
+        assert(pddlIVecSize(&v) <= pddlIVecCap(&v));
         // Capacity grows by doubling from 8
-        assert(v.cap >= 8 && (v.cap & (v.cap - 1)) == 0);
-        assert(v.cap < 2 * v.size || v.cap == 8);
+        int c = pddlIVecCap(&v);
+        assert(c >= 8 && (c & (c - 1)) == 0);
+        assert(pddlIVecCap(&v) < 2 * pddlIVecSize(&v) || pddlIVecCap(&v) == 8);
     }
     assert(!pddlIVecIsEmpty(&v));
     for (int i = 0; i < 1000; ++i)
         assert(pddlIVecData(&v)[i] == 3 * i - 7);
 
-    int cap = v.cap;
+    int cap = pddlIVecCap(&v);
     for (int i = 999; i >= 0; --i){
         assert(pddlIVecLast(&v) == 3 * i - 7);
         int x = pddlIVecPop(&v);
@@ -86,7 +95,7 @@ TEST_ONCE(ivec_push_pop)
         assert(pddlIVecSize(&v) == i);
     }
     assert(pddlIVecIsEmpty(&v));
-    assert(v.cap == cap);
+    assert(pddlIVecCap(&v) == cap);
 
     // The vector is reusable after it was emptied
     pddlIVecPush(&v, 42);
@@ -203,7 +212,7 @@ TEST_ONCE(ivec_append)
     pddlIVecAppendArr(&v, NULL, 0);
     pddlIVecAppendVec(&v, &w);
     assert(pddlIVecIsEmpty(&v));
-    assert(v.v == NULL);
+    assert(pddlIVecData(&v) == NULL);
 
     int arr[] = { 1, 2, 3 };
     pddlIVecAppendArr(&v, arr, 3);
@@ -238,7 +247,7 @@ TEST_ONCE(ivec_append)
     pddlIVecAppendArr(&u, big, 1000);
     checkVec(&u, big, 1000);
     // Bulk append rounds the capacity up by doubling, not to the exact size
-    assert(u.cap == 1024);
+    assert(pddlIVecCap(&u) == 1024);
 
     pddlIVecFree(&u);
     pddlIVecFree(&w);
@@ -257,7 +266,7 @@ TEST_ONCE(ivec_prepend)
     pddlIVecPrependArr(&v, NULL, 0);
     pddlIVecPrependVec(&v, &w);
     assert(pddlIVecIsEmpty(&v));
-    assert(v.v == NULL);
+    assert(pddlIVecData(&v) == NULL);
 
     int arr[] = { 4, 5 };
     pddlIVecPrependArr(&v, arr, 2);
@@ -315,34 +324,34 @@ TEST_ONCE(ivec_reserve_truncate_clear)
 {
     PDDL_IVEC(v);
     pddlIVecReserve(&v, 0);
-    assert(v.v == NULL && v.cap == 0);
+    assert(pddlIVecData(&v) == NULL && pddlIVecCap(&v) == 0);
 
     pddlIVecReserve(&v, 100);
-    assert(v.cap == 100);
+    assert(pddlIVecCap(&v) == 100);
     assert(pddlIVecSize(&v) == 0);
     int *data = pddlIVecData(&v);
     for (int i = 0; i < 100; ++i)
         pddlIVecPush(&v, i);
     assert(pddlIVecData(&v) == data);
-    assert(v.cap == 100);
+    assert(pddlIVecCap(&v) == 100);
 
     pddlIVecReserve(&v, 50);
-    assert(v.cap == 100);
+    assert(pddlIVecCap(&v) == 100);
 
     pddlIVecPush(&v, 100);
-    assert(v.cap >= 101);
-    int cap = v.cap;
+    assert(pddlIVecCap(&v) >= 101);
+    int cap = pddlIVecCap(&v);
 
     pddlIVecTruncate(&v, 101);
     assert(pddlIVecSize(&v) == 101);
     pddlIVecTruncate(&v, 10);
     int vals[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     checkVec(&v, vals, 10);
-    assert(v.cap == cap);
+    assert(pddlIVecCap(&v) == cap);
 
     pddlIVecClear(&v);
     assert(pddlIVecIsEmpty(&v));
-    assert(v.cap == cap);
+    assert(pddlIVecCap(&v) == cap);
     pddlIVecTruncate(&v, 0);
     assert(pddlIVecIsEmpty(&v));
 
@@ -359,13 +368,13 @@ TEST_ONCE(ivec_shrink_to_fit)
     // Zero-initialized vector: nothing to do
     PDDL_IVEC(v);
     pddlIVecShrinkToFit(&v);
-    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    assertUnallocated(&v);
 
     // Reserved but empty: freed
     pddlIVecReserve(&v, 100);
-    assert(v.v != NULL && v.cap == 100);
+    assert(pddlIVecData(&v) != NULL && pddlIVecCap(&v) == 100);
     pddlIVecShrinkToFit(&v);
-    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    assertUnallocated(&v);
     pddlIVecPush(&v, 1);
     int vals1[] = { 1 };
     checkVec(&v, vals1, 1);
@@ -377,31 +386,31 @@ TEST_ONCE(ivec_shrink_to_fit)
         vals[i] = 5 * i - 3;
         pddlIVecPush(&v, vals[i]);
     }
-    assert(v.cap == 16);
+    assert(pddlIVecCap(&v) == 16);
     pddlIVecShrinkToFit(&v);
-    assert(v.cap == 10);
+    assert(pddlIVecCap(&v) == 10);
     checkVec(&v, vals, 10);
 
     // Already tight: no reallocation
     int *data = pddlIVecData(&v);
     pddlIVecShrinkToFit(&v);
     assert(pddlIVecData(&v) == data);
-    assert(v.cap == 10);
+    assert(pddlIVecCap(&v) == 10);
 
     // Growing again doubles from the shrunk capacity
     vals[10] = 77;
     pddlIVecPush(&v, vals[10]);
-    assert(v.cap == 20);
+    assert(pddlIVecCap(&v) == 20);
     checkVec(&v, vals, 11);
 
     // After Truncate and Clear
     pddlIVecTruncate(&v, 3);
     pddlIVecShrinkToFit(&v);
-    assert(v.cap == 3);
+    assert(pddlIVecCap(&v) == 3);
     checkVec(&v, vals, 3);
     pddlIVecClear(&v);
     pddlIVecShrinkToFit(&v);
-    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    assertUnallocated(&v);
 
     pddlIVecFree(&v);
 }
@@ -522,7 +531,7 @@ TEST_ONCE(ivec_eq_cmp)
         for (int i = 0; i < m; ++i)
             pddlIVecPush(&b, randInt(&rnd, -range, range));
 
-        int ref = refCmp(a.v, n, b.v, m);
+        int ref = refCmp(pddlIVecData(&a), n, pddlIVecData(&b), m);
         assert(pddlIVecCmp(&a, &b) == ref);
         assert(pddlIVecCmp(&b, &a) == -ref);
         assert(!pddlIVecEq(&a, &b) == !(ref == 0));

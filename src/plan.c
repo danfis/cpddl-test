@@ -125,9 +125,9 @@ static pddl_state_id_t taskAddState(task_t *t,
 static void assertPlanOps(const pddl_plan_t *plan, const int *ops, int size)
 {
     assert(plan->length == size);
-    assert(pddlIArrSize(&plan->op) == size);
+    assert(pddlIVecSize(&plan->op) == size);
     for (int i = 0; i < size; ++i)
-        assert(pddlIArrGet(&plan->op, i) == ops[i]);
+        assert(pddlIVecGet(&plan->op, i) == ops[i]);
 }
 
 /** Builds the task used by plan_backtrack, plan_copy and plan_print:
@@ -337,7 +337,7 @@ TEST_ONCE(plan_copy)
     assert(copy.state_size == plan.state_size);
     for (int i = 0; i < plan.state_size; ++i)
         assert(copy.state[i] == plan.state[i]);
-    assert(copy.op.arr != plan.op.arr);
+    assert(pddlIVecData(&copy.op) != pddlIVecData(&plan.op));
     assert(copy.cost == plan.cost);
     assertPlanOps(&copy, (int[]){ 0, 1, 2 }, 3);
 

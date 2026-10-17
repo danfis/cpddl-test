@@ -34,9 +34,17 @@ static const char *str(int i)
 static void checkVec(const pddl_svec_t *v, const char *const *vals, int n)
 {
     assert(pddlSVecSize(v) == n);
-    assert(v->size <= v->cap);
+    assert(pddlSVecSize(v) <= pddlSVecCap(v));
     for (int i = 0; i < n; ++i)
         assert(pddlSVecGet(v, i) == vals[i]);
+}
+
+/* Check that v is empty and has no memory allocated. */
+static void assertUnallocated(const pddl_svec_t *v)
+{
+    assert(pddlSVecData(v) == NULL);
+    assert(pddlSVecSize(v) == 0);
+    assert(pddlSVecCap(v) == 0);
 }
 
 /* Bounded random integer in [lo, hi]. */
@@ -91,7 +99,7 @@ static int cmpPtr(const void *a, const void *b)
 TEST_ONCE(svec_init_free)
 {
     PDDL_SVEC(a);
-    assert(a.v == NULL && a.size == 0 && a.cap == 0);
+    assertUnallocated(&a);
     assert(pddlSVecIsEmpty(&a));
     assert(pddlSVecSize(&a) == 0);
     assert(pddlSVecData(&a) == NULL);
@@ -100,7 +108,7 @@ TEST_ONCE(svec_init_free)
     pddl_svec_t b;
     memset(&b, 0x5a, sizeof(b));
     pddlSVecInit(&b);
-    assert(b.v == NULL && b.size == 0 && b.cap == 0);
+    assertUnallocated(&b);
     pddlSVecFreeAll(&b);
 }
 
@@ -115,14 +123,15 @@ TEST_ONCE(svec_push_pop)
         pddlSVecPush(&v, str(i));
         assert(pddlSVecSize(&v) == i + 1);
         assert(pddlSVecLast(&v) == str(i));
-        assert(v.cap >= 8 && (v.cap & (v.cap - 1)) == 0);
-        assert(v.cap < 2 * v.size || v.cap == 8);
+        int c = pddlSVecCap(&v);
+        assert(c >= 8 && (c & (c - 1)) == 0);
+        assert(pddlSVecCap(&v) < 2 * pddlSVecSize(&v) || pddlSVecCap(&v) == 8);
     }
     assert(!pddlSVecIsEmpty(&v));
     for (int i = 0; i < 1000; ++i)
         assert(pddlSVecData(&v)[i] == str(i));
 
-    int cap = v.cap;
+    int cap = pddlSVecCap(&v);
     for (int i = 999; i >= 0; --i){
         assert(pddlSVecLast(&v) == str(i));
         const char *s = pddlSVecPop(&v);
@@ -130,7 +139,7 @@ TEST_ONCE(svec_push_pop)
         assert(pddlSVecSize(&v) == i);
     }
     assert(pddlSVecIsEmpty(&v));
-    assert(v.cap == cap);
+    assert(pddlSVecCap(&v) == cap);
 
     // NULL elements can be stored
     pddlSVecPush(&v, NULL);
@@ -268,7 +277,7 @@ TEST_ONCE(svec_append)
     pddlSVecAppendArr(&v, NULL, 0);
     pddlSVecAppendVec(&v, &w);
     assert(pddlSVecIsEmpty(&v));
-    assert(v.v == NULL);
+    assert(pddlSVecData(&v) == NULL);
 
     const char *arr[] = { str(1), str(2), str(3) };
     pddlSVecAppendArr(&v, arr, 3);
@@ -315,7 +324,7 @@ TEST_ONCE(svec_prepend)
     pddlSVecPrependArr(&v, NULL, 0);
     pddlSVecPrependVec(&v, &w);
     assert(pddlSVecIsEmpty(&v));
-    assert(v.v == NULL);
+    assert(pddlSVecData(&v) == NULL);
 
     const char *arr[] = { str(4), str(5) };
     pddlSVecPrependArr(&v, arr, 2);
@@ -371,23 +380,23 @@ TEST_ONCE(svec_reserve_truncate_clear)
 {
     PDDL_SVEC(v);
     pddlSVecReserve(&v, 0);
-    assert(v.v == NULL && v.cap == 0);
+    assert(pddlSVecData(&v) == NULL && pddlSVecCap(&v) == 0);
 
     pddlSVecReserve(&v, 100);
-    assert(v.cap == 100);
+    assert(pddlSVecCap(&v) == 100);
     assert(pddlSVecSize(&v) == 0);
     const char **data = pddlSVecData(&v);
     for (int i = 0; i < 100; ++i)
         pddlSVecPush(&v, str(i));
     assert(pddlSVecData(&v) == data);
-    assert(v.cap == 100);
+    assert(pddlSVecCap(&v) == 100);
 
     pddlSVecReserve(&v, 50);
-    assert(v.cap == 100);
+    assert(pddlSVecCap(&v) == 100);
 
     pddlSVecPush(&v, str(100));
-    assert(v.cap == 200);
-    int cap = v.cap;
+    assert(pddlSVecCap(&v) == 200);
+    int cap = pddlSVecCap(&v);
 
     pddlSVecTruncate(&v, 101);
     assert(pddlSVecSize(&v) == 101);
@@ -395,11 +404,11 @@ TEST_ONCE(svec_reserve_truncate_clear)
     assert(pddlSVecSize(&v) == 10);
     for (int i = 0; i < 10; ++i)
         assert(pddlSVecGet(&v, i) == str(i));
-    assert(v.cap == cap);
+    assert(pddlSVecCap(&v) == cap);
 
     pddlSVecClear(&v);
     assert(pddlSVecIsEmpty(&v));
-    assert(v.cap == cap);
+    assert(pddlSVecCap(&v) == cap);
     pddlSVecTruncate(&v, 0);
     assert(pddlSVecIsEmpty(&v));
 
@@ -415,20 +424,20 @@ TEST_ONCE(svec_shrink_to_fit)
 {
     PDDL_SVEC(v);
     pddlSVecShrinkToFit(&v);
-    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    assertUnallocated(&v);
 
     pddlSVecReserve(&v, 100);
     pddlSVecShrinkToFit(&v);
-    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    assertUnallocated(&v);
 
     const char *vals[11];
     for (int i = 0; i < 10; ++i){
         vals[i] = str(i);
         pddlSVecPush(&v, vals[i]);
     }
-    assert(v.cap == 16);
+    assert(pddlSVecCap(&v) == 16);
     pddlSVecShrinkToFit(&v);
-    assert(v.cap == 10);
+    assert(pddlSVecCap(&v) == 10);
     checkVec(&v, vals, 10);
 
     const char **data = pddlSVecData(&v);
@@ -437,12 +446,12 @@ TEST_ONCE(svec_shrink_to_fit)
 
     vals[10] = str(10);
     pddlSVecPush(&v, vals[10]);
-    assert(v.cap == 20);
+    assert(pddlSVecCap(&v) == 20);
     checkVec(&v, vals, 11);
 
     pddlSVecClear(&v);
     pddlSVecShrinkToFit(&v);
-    assert(v.v == NULL && v.size == 0 && v.cap == 0);
+    assertUnallocated(&v);
     pddlSVecFree(&v);
 }
 
@@ -602,7 +611,7 @@ TEST_ONCE(svec_eq_cmp)
             pddlSVecPush((i < n ? &a : &b), s);
         }
 
-        int ref = refCmp(a.v, n, b.v, m);
+        int ref = refCmp(pddlSVecData(&a), n, pddlSVecData(&b), m);
         assert(pddlSVecCmp(&a, &b) == ref);
         assert(pddlSVecCmp(&b, &a) == -ref);
         assert(!pddlSVecEq(&a, &b) == !(ref == 0));
@@ -682,17 +691,18 @@ TEST_ONCE(svec_sort)
             pddlSVecSort(&v);
             assert(pddlSVecSize(&v) == n);
             for (int i = 1; i < n; ++i)
-                assert(refStrCmp(v.v[i - 1], v.v[i]) <= 0);
+                assert(refStrCmp(pddlSVecGet(&v, i - 1),
+                                 pddlSVecGet(&v, i)) <= 0);
 
             // The same multiset of pointers
             pddlSVecClear(&sorted);
             pddlSVecAppendVec(&sorted, &v);
             if (n > 0){
-                qsort(orig.v, n, sizeof(const char *), cmpPtr);
-                qsort(sorted.v, n, sizeof(const char *), cmpPtr);
+                qsort(pddlSVecData(&orig), n, sizeof(const char *), cmpPtr);
+                qsort(pddlSVecData(&sorted), n, sizeof(const char *), cmpPtr);
             }
             for (int i = 0; i < n; ++i)
-                assert(orig.v[i] == sorted.v[i]);
+                assert(pddlSVecGet(&orig, i) == pddlSVecGet(&sorted, i));
         }
     }
 
