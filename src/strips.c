@@ -948,17 +948,37 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     pddlPotSolutionsInit(&sol);
     pddlPotSolutionsInit(&solc);
 
+    // Plain pot-I without disambiguation is always feasible, so both
+    // calls must find a potential function.
     cfg.fdr = &fdr;
-    int ret = pddlHPot(&sol, &cfg, &C.err);
-    if (ret != 0)
+    pddl_hpot_status_t st = pddlHPot(&sol, &cfg, &C.err);
+    switch (st){
+    case PDDL_HPOT_ERR:
         pddlErrPrint(&C.err, 1, stderr);
-    assert(ret == 0);
+        assert(0);
+        break;
+    case PDDL_HPOT_NOT_FOUND:
+    case PDDL_HPOT_UNSOLVABLE:
+        assert(0);
+        break;
+    case PDDL_HPOT_FOUND:
+        break;
+    }
 
     cfg.fdr = &fdrc;
-    ret = pddlHPot(&solc, &cfg, &C.err);
-    if (ret != 0)
+    st = pddlHPot(&solc, &cfg, &C.err);
+    switch (st){
+    case PDDL_HPOT_ERR:
         pddlErrPrint(&C.err, 1, stderr);
-    assert(ret == 0);
+        assert(0);
+        break;
+    case PDDL_HPOT_NOT_FOUND:
+    case PDDL_HPOT_UNSOLVABLE:
+        assert(0);
+        break;
+    case PDDL_HPOT_FOUND:
+        break;
+    }
     pddlMutexPairsFree(&mutexc);
 
     int h = pddlPotSolutionsEvalMaxFDRState(&sol, &fdr.var, fdr.init);

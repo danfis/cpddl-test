@@ -39,6 +39,11 @@ static void run(pddl_symbolic_search_config_t *symb_cfg,
     int ret = 0;
     pddl_symbolic_search_status_t st;
     st = pddlSymbolicSearchInitStep(s, &C.err);
+    if (st == PDDL_SYMBOLIC_SEARCH_STATUS_UNSOLVABLE){
+        PDDL_LOG(&C.err, "Task unsolvable.");
+        printf("Unsolvable.\n");
+        assert(C.optimal_cost < 0);
+    }
     while (st == PDDL_SYMBOLIC_SEARCH_STATUS_CONT){
         st = pddlSymbolicSearchStep(s, &C.err);
         switch (st){

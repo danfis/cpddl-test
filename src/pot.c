@@ -211,16 +211,22 @@ static void _test_hpot1(const pddl_hpot_config_t *cfg)
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
-    int ret = pddlHPot(&sols, cfg, &C.err);
-    if (ret < 0){
+    pddl_hpot_status_t st = pddlHPot(&sols, cfg, &C.err);
+    switch (st){
+    case PDDL_HPOT_ERR:
         pddlErrPrint(&C.err, 1, stderr);
-        pddlPotSolutionsFree(&sols);
-    }
-    assert(ret == 0);
-    if (sols.unsolvable){
+        assert(0);
+        break;
+    case PDDL_HPOT_UNSOLVABLE:
         fprintf(stdout, "unsolvable\n");
         pddlPotSolutionsFree(&sols);
         return;
+    case PDDL_HPOT_NOT_FOUND:
+        assert(sols.sol_size == 0);
+        break;
+    case PDDL_HPOT_FOUND:
+        assert(sols.sol_size > 0);
+        break;
     }
 
     for (int i = 0; i < sols.sol_size; ++i){
@@ -288,25 +294,24 @@ static void _test_hpot_goal_count(const pddl_hpot_config_t *cfg)
     pddl_pot_solutions_t sols;
     pddlPotSolutionsInit(&sols);
 
-    int ret = pddlHPot(&sols, cfg, &C.err);
-    if (ret < 0){
+    pddl_hpot_status_t st = pddlHPot(&sols, cfg, &C.err);
+    switch (st){
+    case PDDL_HPOT_ERR:
         pddlErrPrint(&C.err, 1, stderr);
-        pddlPotSolutionsFree(&sols);
-    }
-    assert(ret == 0);
-
-    if (sols.unsolvable){
+        assert(0);
+        break;
+    case PDDL_HPOT_UNSOLVABLE:
+        // Disambiguation may detect the goal is unreachable.
         fprintf(stdout, "unsolvable\n");
         pddlPotSolutionsFree(&sols);
         return;
-    }
-
-    // Disambiguation may detect the goal is unreachable and not produce a
-    // solution.
-    if (sols.sol_size == 0){
-        fprintf(stdout, "no solution\n");
-        pddlPotSolutionsFree(&sols);
-        return;
+    case PDDL_HPOT_NOT_FOUND:
+        // Goal-count always produces a function unless the task is
+        // unsolvable.
+        assert(0);
+        break;
+    case PDDL_HPOT_FOUND:
+        break;
     }
 
     assert(sols.sol_size == 1);
