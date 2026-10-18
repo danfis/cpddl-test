@@ -942,18 +942,23 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
     cfg.opt = &opt;
     cfg.opt_size = 1;
+    cfg.disambiguation = pddl_false;
 
     pddl_pot_solutions_t sol, solc;
     pddlPotSolutionsInit(&sol);
     pddlPotSolutionsInit(&solc);
 
     cfg.fdr = &fdr;
-    cfg.mutex = &C.mutex;
-    pddlHPot(&sol, &cfg, &C.err);
+    int ret = pddlHPot(&sol, &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
 
     cfg.fdr = &fdrc;
-    cfg.mutex = &mutexc;
-    pddlHPot(&solc, &cfg, &C.err);
+    ret = pddlHPot(&solc, &cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
     pddlMutexPairsFree(&mutexc);
 
     int h = pddlPotSolutionsEvalMaxFDRState(&sol, &fdr.var, fdr.init);

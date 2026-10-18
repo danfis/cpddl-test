@@ -342,6 +342,233 @@ TEST(hpot_goal_count_no_disamb, hpot)
     _test_hpot_goal_count(&hcfg);
 }
 
+static void configCheckOk(const pddl_hpot_config_t *cfg)
+{
+    int ret = pddlHPotConfigCheck(cfg, &C.err);
+    if (ret != 0)
+        pddlErrPrint(&C.err, 1, stderr);
+    assert(ret == 0);
+}
+
+static void configCheckFails(const pddl_hpot_config_t *cfg)
+{
+    int ret = pddlHPotConfigCheck(cfg, &C.err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&C.err));
+    pddlErrClear(&C.err);
+}
+
+/*
+ * A valid pot-I configuration passes pddlHPotConfigCheck().
+ */
+TEST(hpot_config_check_valid, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckOk(&cfg);
+}
+
+/*
+ * Negative .opt_size is rejected.
+ */
+TEST(hpot_config_check_neg_opt_size, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    cfg.opt_size = -1;
+    configCheckFails(&cfg);
+}
+
+/*
+ * Non-zero .opt_size with .opt set to NULL is rejected.
+ */
+TEST(hpot_config_check_null_opt, hpot)
+{
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = NULL;
+    cfg.opt_size = 1;
+    configCheckFails(&cfg);
+}
+
+/*
+ * A zeroed optimization criterion (invalid type 0) is rejected.
+ */
+TEST(hpot_config_check_zero_opt_type, hpot)
+{
+    pddl_hpot_config_opt_t opt;
+    memset(&opt, 0, sizeof(opt));
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * .op_pot_real without .op_pot is rejected.
+ */
+TEST(hpot_config_check_op_pot_real, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    cfg.op_pot = pddl_false;
+    cfg.op_pot_real = pddl_true;
+    configCheckFails(&cfg);
+
+    cfg.op_pot = pddl_true;
+    configCheckOk(&cfg);
+}
+
+/*
+ * A task with conditional effects is rejected.
+ */
+TEST(hpot_config_check_cond_eff, hpot)
+{
+    // Shallow copy: only the flag is read by the check and the copy is
+    // never freed.
+    pddl_fdr_t fdr = C.fdr;
+    fdr.has_cond_eff = 1;
+
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    cfg.fdr = &fdr;
+    configCheckFails(&cfg);
+}
+
+/*
+ * all-states-mutex requires .mg_strips even without disambiguation.
+ */
+TEST(hpot_config_check_all_states_mutex_mg_strips, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ALL_STATES_MUTEX_TYPE;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    cfg.disambiguation = pddl_false;
+    assert(pddlHPotConfigNeedMGStrips(&cfg));
+    configCheckOk(&cfg);
+
+    cfg.mg_strips = NULL;
+    configCheckFails(&cfg);
+}
+
+/*
+ * ensemble-all-states-mutex requires .mg_strips even without
+ * disambiguation.
+ */
+TEST(hpot_config_check_ensemble_mutex_mg_strips, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ENSEMBLE_ALL_STATES_MUTEX_TYPE;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    cfg.disambiguation = pddl_false;
+    assert(pddlHPotConfigNeedMGStrips(&cfg));
+    configCheckOk(&cfg);
+
+    cfg.mg_strips = NULL;
+    configCheckFails(&cfg);
+}
+
+/*
+ * ensemble_all_states_mutex.cond_size other than 1 or 2 is rejected.
+ */
+TEST(hpot_config_check_ensemble_mutex_cond_size, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ENSEMBLE_ALL_STATES_MUTEX_TYPE;
+    opt.ensemble_all_states_mutex.cond_size = 3;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * Negative ensemble_all_states_mutex.num_rand_samples is rejected.
+ */
+TEST(hpot_config_check_ensemble_mutex_num_rand_samples, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ENSEMBLE_ALL_STATES_MUTEX_TYPE;
+    opt.ensemble_all_states_mutex.num_rand_samples = -1;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * add_state_constr.coef above 1 is rejected.
+ */
+TEST(hpot_config_check_coef_above_one, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    opt.all_syntactic_states.add_state_constr.coef = 1.5;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * Negative add_state_constr.coef is rejected.
+ */
+TEST(hpot_config_check_coef_negative, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_SAMPLED_STATES_TYPE;
+    opt.sampled_states.add_state_constr.init_state = pddl_true;
+    opt.sampled_states.add_state_constr.coef = -0.5;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * add_state_constr.init_state together with add_state_constr.fdr_state is
+ * rejected.
+ */
+TEST(hpot_config_check_init_and_fdr_state, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ALL_STATES_MUTEX_TYPE;
+    opt.all_states_mutex.add_state_constr.init_state = pddl_true;
+    opt.all_states_mutex.add_state_constr.fdr_state = C.fdr.init;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * sampled_states.num_samples must be positive.
+ */
+TEST(hpot_config_check_sampled_states_num_samples, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_SAMPLED_STATES_TYPE;
+    opt.sampled_states.num_samples = 0;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
+/*
+ * A state sampler without any sampling method selected is rejected.
+ */
+TEST(hpot_config_check_no_sampler, hpot)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ENSEMBLE_DIVERSIFICATION_TYPE;
+    opt.ensemble_diversification.sampler.use_random_walk = pddl_false;
+    opt.ensemble_diversification.sampler.use_syntactic_samples = pddl_false;
+    opt.ensemble_diversification.sampler.use_mutex_samples = pddl_false;
+    pddl_hpot_config_t cfg = hcfg;
+    cfg.opt = &opt;
+    configCheckFails(&cfg);
+}
+
 static pddl_set_iset_t conjs;
 static int conjs_best_h_value;
 TEST(pot_conj, hpot)
