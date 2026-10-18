@@ -937,8 +937,11 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
     pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &fdr_cfg, &C.err);
 
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
-    cfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    cfg.opt = &opt;
+    cfg.opt_size = 1;
 
     pddl_pot_solutions_t sol, solc;
     pddlPotSolutionsInit(&sol);

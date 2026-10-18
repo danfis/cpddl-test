@@ -204,6 +204,7 @@ static double roundFlt(double v)
 }
 
 static pddl_hpot_config_t hcfg = PDDL_HPOT_CONFIG_INIT;
+static pddl_hpot_config_opt_t hopt = PDDL_HPOT_CONFIG_OPT_INIT;
 
 static void _test_hpot1(const pddl_hpot_config_t *cfg)
 {
@@ -252,6 +253,8 @@ TEST_COND(hpot, fdr, LP)
     hcfg.disambiguation = 1;
     hcfg.op_pot = 0;
     hcfg.op_pot_real = 0;
+    hcfg.opt = &hopt;
+    hcfg.opt_size = 1;
 }
 
 TEST_TEAR_DOWN(hpot)
@@ -262,21 +265,21 @@ TEST_TEAR_DOWN(hpot)
 
 TEST(hpot_init, hpot)
 {
-    hcfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    hcfg.opt.state.fdr_state = C.fdr.init;
+    hopt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hopt.state.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg);
 }
 
 TEST(hpot_all_states, hpot)
 {
-    hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hopt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
     _test_hpot1(&hcfg);
 }
 
 TEST(hpot_all_states_cinit, hpot)
 {
-    hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    hcfg.opt.all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
+    hopt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hopt.all_syntactic_states.add_state_constr.fdr_state = C.fdr.init;
     _test_hpot1(&hcfg);
 }
 
@@ -326,16 +329,16 @@ TEST(hpot_goal_count, hpot)
 {
     // Goal-count requires operator potentials.
     hcfg.op_pot = pddl_true;
-    hcfg.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-    hcfg.opt.goal_count.disambiguation = pddl_true;
+    hopt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    hopt.goal_count.disambiguation = pddl_true;
     _test_hpot_goal_count(&hcfg);
 }
 
 TEST(hpot_goal_count_no_disamb, hpot)
 {
     hcfg.op_pot = pddl_true;
-    hcfg.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-    hcfg.opt.goal_count.disambiguation = pddl_false;
+    hopt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    hopt.goal_count.disambiguation = pddl_false;
     _test_hpot_goal_count(&hcfg);
 }
 
@@ -356,8 +359,11 @@ TEST(pot_conj, hpot)
     if (strstr(TEST_TASK, "agricola") != NULL)
         cfg.max_num_conjs = 50;
 
+    pddl_hpot_config_opt_t pot_opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    pot_opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     pddl_hpot_config_t pot_cfg = PDDL_HPOT_CONFIG_INIT;
-    pot_cfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    pot_cfg.opt = &pot_opt;
+    pot_cfg.opt_size = 1;
 
     int ret = pddlPotConjFind(&conjs, &conjs_best_h_value, NULL,
                               &hcfg.mg_strips->strips, hcfg.mutex,
@@ -403,7 +409,7 @@ TEST(pot_conj_init, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    hcfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    hopt.type = PDDL_HPOT_OPT_STATE_TYPE;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
@@ -423,8 +429,8 @@ TEST(pot_conj_all, pot_conj)
     if (pddlSetISetSize(&conjs) == 0)
         return;
 
-    hcfg.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    hcfg.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    hopt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    hopt.all_syntactic_states.add_state_constr.init_state = pddl_true;
 
     pddl_pot_conj_t pot;
     int ret = pddlPotConjInit(&pot, &conjs, &hcfg, &C.err);
