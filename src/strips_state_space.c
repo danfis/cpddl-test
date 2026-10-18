@@ -58,7 +58,7 @@ TEST(strips_state_space_insert, strips_state_space)
             = calloc(C.strips.op.op_size + 1, sizeof(*state_id));
     int num = 0;
     pddlISetInit(&state[num]);
-    pddlISetSet(&state[num], &C.strips.init);
+    pddlISetCopy(&state[num], &C.strips.init);
     state_id[num++] = init_id;
 
     PDDL_ISET(succ);
@@ -87,7 +87,7 @@ TEST(strips_state_space_insert, strips_state_space)
                         == prev_num_states + 1);
             assertDefaults(&space, sid, &node);
             pddlISetInit(&state[num]);
-            pddlISetSet(&state[num], &succ);
+            pddlISetCopy(&state[num], &succ);
             state_id[num++] = sid;
         }
     }
@@ -425,7 +425,7 @@ TEST(strips_state_space_once_many, strips_state_space_once)
     // of the i-th set
     PDDL_ISET(state);
     for (int i = 0; i < num_states; ++i){
-        pddlISetEmpty(&state);
+        pddlISetClear(&state);
         pddlISetAdd(&state, i);
         pddlISetAdd(&state, i + 1);
         pddlISetAdd(&state, 2 * i);
@@ -435,7 +435,7 @@ TEST(strips_state_space_once_many, strips_state_space_once)
     assert(pddlStripsStateSpaceNumStates(&space) == num_states);
 
     for (int i = 0; i < num_states; ++i){
-        pddlISetEmpty(&state);
+        pddlISetClear(&state);
         pddlISetAdd(&state, i);
         pddlISetAdd(&state, i + 1);
         pddlISetAdd(&state, 2 * i);

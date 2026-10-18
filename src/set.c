@@ -90,7 +90,7 @@ TEST_ONCE(iset_has_in)
     pddlISetFree(&s);
 }
 
-TEST_ONCE(iset_rm)
+TEST_ONCE(iset_remove)
 {
     pddl_iset_t s;
     pddlISetInit(&s);
@@ -98,53 +98,53 @@ TEST_ONCE(iset_rm)
     assertSorted(&s);
 
     /* remove existing element */
-    assert(pddlISetRm(&s, 3));
+    assert(pddlISetRemove(&s, 3));
     assert(pddlISetSize(&s) == 4);
     assert(!pddlISetHas(&s, 3));
     assertSorted(&s);
 
     /* remove non-existing element */
-    assert(!pddlISetRm(&s, 99));
+    assert(!pddlISetRemove(&s, 99));
     assert(pddlISetSize(&s) == 4);
 
     /* remove first element */
-    assert(pddlISetRm(&s, 1));
+    assert(pddlISetRemove(&s, 1));
     assert(pddlISetGet(&s, 0) == 2);
     assertSorted(&s);
 
     /* remove last element */
-    assert(pddlISetRm(&s, 5));
+    assert(pddlISetRemove(&s, 5));
     assert(pddlISetGet(&s, pddlISetSize(&s) - 1) == 4);
     assertSorted(&s);
 
     pddlISetFree(&s);
 }
 
-TEST_ONCE(iset_rm_geq_than)
+TEST_ONCE(iset_remove_ge)
 {
     pddl_iset_t s;
     pddlISetInit(&s);
     PDDL_ISET_ADD(&s, 1, 2, 3, 4, 5);
 
-    pddlISetRmGEQThan(&s, 4);
+    pddlISetRemoveGE(&s, 4);
     assert(pddlISetSize(&s) == 3);
     assert(pddlISetGet(&s, 2) == 3);
     assertSorted(&s);
 
-    pddlISetRmGEQThan(&s, 0);
+    pddlISetRemoveGE(&s, 0);
     assert(pddlISetSize(&s) == 0);
 
     pddlISetFree(&s);
 }
 
-TEST_ONCE(iset_empty)
+TEST_ONCE(iset_clear)
 {
     pddl_iset_t s;
     pddlISetInit(&s);
     PDDL_ISET_ADD(&s, 1, 2, 3);
     assert(pddlISetSize(&s) == 3);
 
-    pddlISetEmpty(&s);
+    pddlISetClear(&s);
     assert(pddlISetSize(&s) == 0);
 
     /* re-use after empty */
@@ -156,14 +156,14 @@ TEST_ONCE(iset_empty)
     pddlISetFree(&s);
 }
 
-TEST_ONCE(iset_set)
+TEST_ONCE(iset_copy)
 {
     pddl_iset_t src, dst;
     pddlISetInit(&src);
     pddlISetInit(&dst);
     PDDL_ISET_ADD(&src, 5, 10, 15);
 
-    pddlISetSet(&dst, &src);
+    pddlISetCopy(&dst, &src);
     assert(pddlISetSize(&dst) == 3);
     assert(pddlISetEq(&dst, &src));
     assertSorted(&dst);
@@ -197,8 +197,8 @@ TEST_ONCE(iset_eq_cmp)
     assertSorted(&b);
 
     /* a has a different value */
-    pddlISetEmpty(&a);
-    pddlISetEmpty(&b);
+    pddlISetClear(&a);
+    pddlISetClear(&b);
     PDDL_ISET_ADD(&a, 1, 2, 4);
     PDDL_ISET_ADD(&b, 1, 2, 3);
     assert(!pddlISetEq(&a, &b));
@@ -232,12 +232,12 @@ TEST_ONCE(iset_is_subset)
     /* equal sets are subsets of each other */
     pddl_iset_t c;
     pddlISetInit(&c);
-    pddlISetSet(&c, &b);
+    pddlISetCopy(&c, &b);
     assert(pddlISetIsSubset(&c, &b));
     assert(pddlISetIsSubset(&b, &c));
 
     /* element not in superset */
-    pddlISetEmpty(&a);
+    pddlISetClear(&a);
     PDDL_ISET_ADD(&a, 2, 99);
     assert(!pddlISetIsSubset(&a, &b));
 
@@ -258,7 +258,7 @@ TEST_ONCE(iset_intersection_size)
     assert(pddlISetIntersectionSize(&a, &b) == 3);
 
     /* disjoint */
-    pddlISetEmpty(&b);
+    pddlISetClear(&b);
     PDDL_ISET_ADD(&b, 10, 20);
     assert(pddlISetIntersectionSize(&a, &b) == 0);
 
@@ -326,12 +326,12 @@ TEST_ONCE(iset_union)
     checkSet(&dst, expected, 5);
 
     /* union with empty */
-    pddlISetEmpty(&src);
+    pddlISetClear(&src);
     pddlISetUnion(&dst, &src);
     checkSet(&dst, expected, 5);
 
     /* union into empty */
-    pddlISetEmpty(&dst);
+    pddlISetClear(&dst);
     PDDL_ISET_ADD(&src, 7, 8);
     pddlISetUnion(&dst, &src);
     assert(pddlISetEq(&dst, &src));
@@ -341,7 +341,7 @@ TEST_ONCE(iset_union)
     pddlISetFree(&src);
 }
 
-TEST_ONCE(iset_union2)
+TEST_ONCE(iset_union_to)
 {
     pddl_iset_t dst, a, b;
     pddlISetInit(&dst);
@@ -350,19 +350,63 @@ TEST_ONCE(iset_union2)
 
     PDDL_ISET_ADD(&a, 1, 3, 5);
     PDDL_ISET_ADD(&b, 2, 3, 4);
-    pddlISetUnion2(&dst, &a, &b);
+    pddlISetUnionTo(&dst, &a, &b);
     int expected[] = {1, 2, 3, 4, 5};
     checkSet(&dst, expected, 5);
 
     /* both empty */
-    pddlISetEmpty(&a);
-    pddlISetEmpty(&b);
-    pddlISetUnion2(&dst, &a, &b);
+    pddlISetClear(&a);
+    pddlISetClear(&b);
+    pddlISetUnionTo(&dst, &a, &b);
     assert(pddlISetSize(&dst) == 0);
 
     pddlISetFree(&dst);
     pddlISetFree(&a);
     pddlISetFree(&b);
+}
+
+/*
+ * Union with a sorted array covers all paths: empty set, empty array,
+ * array after / before all elements, interleaved and overlapping values.
+ */
+TEST_ONCE(iset_union_sorted_arr)
+{
+    pddl_iset_t s;
+    pddlISetInit(&s);
+
+    // into empty set
+    int arr1[] = {4, 6};
+    pddlISetUnionSortedArr(&s, arr1, 2);
+    checkSet(&s, arr1, 2);
+
+    // empty array
+    pddlISetUnionSortedArr(&s, NULL, 0);
+    checkSet(&s, arr1, 2);
+
+    // all after the last element
+    int arr2[] = {8, 9};
+    pddlISetUnionSortedArr(&s, arr2, 2);
+    int exp2[] = {4, 6, 8, 9};
+    checkSet(&s, exp2, 4);
+
+    // all before the first element
+    int arr3[] = {1, 2};
+    pddlISetUnionSortedArr(&s, arr3, 2);
+    int exp3[] = {1, 2, 4, 6, 8, 9};
+    checkSet(&s, exp3, 6);
+
+    // interleaved and overlapping
+    int arr4[] = {0, 2, 3, 6, 7, 10};
+    pddlISetUnionSortedArr(&s, arr4, 6);
+    int exp4[] = {0, 1, 2, 3, 4, 6, 7, 8, 9, 10};
+    checkSet(&s, exp4, 10);
+
+    // only existing elements
+    int arr5[] = {1, 4, 10};
+    pddlISetUnionSortedArr(&s, arr5, 3);
+    checkSet(&s, exp4, 10);
+
+    pddlISetFree(&s);
 }
 
 TEST_ONCE(iset_intersect)
@@ -378,7 +422,7 @@ TEST_ONCE(iset_intersect)
     checkSet(&dst, expected, 3);
 
     /* intersect to empty (disjoint) */
-    pddlISetEmpty(&src);
+    pddlISetClear(&src);
     PDDL_ISET_ADD(&src, 10, 20);
     pddlISetIntersect(&dst, &src);
     assert(pddlISetSize(&dst) == 0);
@@ -387,7 +431,7 @@ TEST_ONCE(iset_intersect)
     pddlISetFree(&src);
 }
 
-TEST_ONCE(iset_intersect2)
+TEST_ONCE(iset_intersect_to)
 {
     pddl_iset_t dst, a, b;
     pddlISetInit(&dst);
@@ -396,14 +440,14 @@ TEST_ONCE(iset_intersect2)
 
     PDDL_ISET_ADD(&a, 1, 2, 3, 4, 5);
     PDDL_ISET_ADD(&b, 2, 4, 6);
-    pddlISetIntersect2(&dst, &a, &b);
+    pddlISetIntersectTo(&dst, &a, &b);
     int expected[] = {2, 4};
     checkSet(&dst, expected, 2);
 
     /* disjoint */
-    pddlISetEmpty(&b);
+    pddlISetClear(&b);
     PDDL_ISET_ADD(&b, 10, 20);
-    pddlISetIntersect2(&dst, &a, &b);
+    pddlISetIntersectTo(&dst, &a, &b);
     assert(pddlISetSize(&dst) == 0);
 
     pddlISetFree(&dst);
@@ -424,7 +468,7 @@ TEST_ONCE(iset_minus)
     checkSet(&a, expected, 3);
 
     /* minus with empty set -- no change */
-    pddlISetEmpty(&b);
+    pddlISetClear(&b);
     pddlISetMinus(&a, &b);
     checkSet(&a, expected, 3);
 
@@ -437,7 +481,7 @@ TEST_ONCE(iset_minus)
     pddlISetFree(&b);
 }
 
-TEST_ONCE(iset_minus2)
+TEST_ONCE(iset_minus_to)
 {
     pddl_iset_t dst, a, b;
     pddlISetInit(&dst);
@@ -446,19 +490,19 @@ TEST_ONCE(iset_minus2)
 
     PDDL_ISET_ADD(&a, 1, 2, 3, 4, 5);
     PDDL_ISET_ADD(&b, 2, 4);
-    pddlISetMinus2(&dst, &a, &b);
+    pddlISetMinusTo(&dst, &a, &b);
     int expected[] = {1, 3, 5};
     checkSet(&dst, expected, 3);
 
     /* subtract empty -- result equals a */
-    pddlISetEmpty(&b);
-    pddlISetMinus2(&dst, &a, &b);
+    pddlISetClear(&b);
+    pddlISetMinusTo(&dst, &a, &b);
     assert(pddlISetEq(&dst, &a));
 
     /* a empty -- result empty */
-    pddlISetEmpty(&a);
+    pddlISetClear(&a);
     PDDL_ISET_ADD(&b, 1, 2, 3);
-    pddlISetMinus2(&dst, &a, &b);
+    pddlISetMinusTo(&dst, &a, &b);
     assert(pddlISetSize(&dst) == 0);
 
     pddlISetFree(&dst);
@@ -481,7 +525,7 @@ TEST_ONCE(iset_remap)
     assertSorted(&s);
 
     /* reverse remap: 0->3, 1->2, 2->1, 3->0 */
-    pddlISetEmpty(&s);
+    pddlISetClear(&s);
     PDDL_ISET_ADD(&s, 0, 1, 2, 3);
     int remap_rev[] = {3, 2, 1, 0};
     pddlISetRemap(&s, remap_rev);
@@ -491,7 +535,7 @@ TEST_ONCE(iset_remap)
     assertSorted(&s);
 
     /* collapsing remap: multiple values map to same -- duplicates removed */
-    pddlISetEmpty(&s);
+    pddlISetClear(&s);
     PDDL_ISET_ADD(&s, 0, 1, 2);
     int remap_coll[] = {5, 5, 7};
     pddlISetRemap(&s, remap_coll);
@@ -535,8 +579,8 @@ TEST_ONCE(iset_macros)
     assert(pddlISetGet(&s, 2) == 3);
     assertSorted(&s);
 
-    /* PDDL_ISET_SET resets and fills */
-    PDDL_ISET_SET(&s, 10, 20);
+    /* PDDL_ISET_ASSIGN resets and fills */
+    PDDL_ISET_ASSIGN(&s, 10, 20);
     assert(pddlISetSize(&s) == 2);
     assert(pddlISetGet(&s, 0) == 10);
     assert(pddlISetGet(&s, 1) == 20);
@@ -613,7 +657,7 @@ TEST_ONCE(iset_skew_is_subset)
     assert(!pddlISetIsSubset(&small_s, &big_s));
 
     /* empty small set is always a subset */
-    pddlISetEmpty(&small_s);
+    pddlISetClear(&small_s);
     assert(pddlISetIsSubset(&small_s, &big_s));
 
     pddlISetFree(&small_s);
@@ -640,18 +684,18 @@ TEST_ONCE(iset_skew_intersection_size)
     assert(pddlISetIntersectionSize(&big_s, &small_s) == 5);
 
     /* small with no overlap: {100, 104, 108, 112, 116} */
-    pddlISetEmpty(&small_s);
+    pddlISetClear(&small_s);
     buildStride(&small_s, 5, 4);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&small_s, 100 + i * 4);
-    pddlISetEmpty(&small_s);
+    pddlISetClear(&small_s);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&small_s, 100 + i * 4);
     assert(pddlISetIntersectionSize(&small_s, &big_s) == 0);
     assert(pddlISetIntersectionSize(&big_s, &small_s) == 0);
 
     /* partial overlap: small = {0,4,8,100,104} -- 2 match big */
-    pddlISetEmpty(&small_s);
+    pddlISetClear(&small_s);
     pddlISetAdd(&small_s, 0);
     pddlISetAdd(&small_s, 4);
     pddlISetAdd(&small_s, 8);
@@ -685,7 +729,7 @@ TEST_ONCE(iset_skew_intersection_size_at_least)
     assert(!pddlISetIntersectionSizeAtLeast(&big_s, &small_s, 6));
 
     /* no overlap: none of small's values are in big */
-    pddlISetEmpty(&small_s);
+    pddlISetClear(&small_s);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&small_s, 100 + i * 4);
     assert(!pddlISetIntersectionSizeAtLeast(&small_s, &big_s, 1));
@@ -713,25 +757,25 @@ TEST_ONCE(iset_skew_intersect)
     checkSet(&dst, exp1, 5);
 
     /* Case 2: dst small, src big */
-    pddlISetEmpty(&dst);
+    pddlISetClear(&dst);
     buildStride(&dst, 5, 4);    /* {0,4,8,12,16} */
-    pddlISetEmpty(&src);
+    pddlISetClear(&src);
     buildStride(&src, 25, 1);   /* {0..24} */
     pddlISetIntersect(&dst, &src);
     checkSet(&dst, exp1, 5);
 
     /* Case 3: no overlap -- result empty */
-    pddlISetEmpty(&dst);
+    pddlISetClear(&dst);
     buildStride(&dst, 25, 1);
-    pddlISetEmpty(&src);
+    pddlISetClear(&src);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&src, 100 + i);
     pddlISetIntersect(&dst, &src);
     assert(pddlISetSize(&dst) == 0);
 
-    pddlISetEmpty(&dst);
+    pddlISetClear(&dst);
     buildStride(&dst, 25, 1);
-    pddlISetEmpty(&src);
+    pddlISetClear(&src);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&src, 100 + i);
     pddlISetIntersect(&src, &dst);
@@ -741,9 +785,9 @@ TEST_ONCE(iset_skew_intersect)
     pddlISetFree(&src);
 }
 
-TEST_ONCE(iset_skew_intersect2)
+TEST_ONCE(iset_skew_intersect_to)
 {
-    /* Same as iset_skew_intersect but using pddlISetIntersect2 (result in
+    /* Same as iset_skew_intersect but using pddlISetIntersectTo (result in
      * separate output set). */
     pddl_iset_t dst, small_s, big_s;
     pddlISetInit(&dst);
@@ -756,21 +800,21 @@ TEST_ONCE(iset_skew_intersect2)
     pddlISetAdd(&small_s, 102);
 
     /* small as first argument */
-    pddlISetIntersect2(&dst, &small_s, &big_s);
+    pddlISetIntersectTo(&dst, &small_s, &big_s);
     int exp[] = {0, 4, 8, 12, 16};
     checkSet(&dst, exp, 5);
 
     /* big as first argument */
-    pddlISetIntersect2(&dst, &big_s, &small_s);
+    pddlISetIntersectTo(&dst, &big_s, &small_s);
     checkSet(&dst, exp, 5);
 
     /* no overlap */
-    pddlISetEmpty(&small_s);
+    pddlISetClear(&small_s);
     for (int i = 0; i < 5; ++i)
         pddlISetAdd(&small_s, 100 + i);
-    pddlISetIntersect2(&dst, &small_s, &big_s);
+    pddlISetIntersectTo(&dst, &small_s, &big_s);
     assert(pddlISetSize(&dst) == 0);
-    pddlISetIntersect2(&dst, &big_s, &small_s);
+    pddlISetIntersectTo(&dst, &big_s, &small_s);
     assert(pddlISetSize(&dst) == 0);
 
     pddlISetFree(&dst);
@@ -971,7 +1015,7 @@ TEST_ONCE(iset_rand_add_has)
     }
 }
 
-TEST_ONCE(iset_rand_rm)
+TEST_ONCE(iset_rand_remove)
 {
     pddl_rand_t rnd;
     pddlRandInitAuto(&rnd);
@@ -988,7 +1032,7 @@ TEST_ONCE(iset_rand_rm)
         int rm_count = randInt(&rnd, 1, RAND_RANGE / 2);
         for (int i = 0; i < rm_count; ++i){
             int v = randInt(&rnd, 0, RAND_RANGE - 1);
-            int was_in = pddlISetRm(&s, v) ? 1 : 0;
+            int was_in = pddlISetRemove(&s, v) ? 1 : 0;
             assert(was_in == ref[v]);
             ref[v] = 0;
         }
@@ -1018,16 +1062,16 @@ TEST_ONCE(iset_rand_union)
             refu[i] = refa[i] | refb[i];
 
         /* pddlISetUnion: dst = a; dst |= b */
-        pddlISetSet(&dst, &a);
+        pddlISetCopy(&dst, &a);
         pddlISetUnion(&dst, &b);
         assertMatchesRef(&dst, refu);
 
-        /* pddlISetUnion2 */
-        pddlISetUnion2(&dst, &a, &b);
+        /* pddlISetUnionTo */
+        pddlISetUnionTo(&dst, &a, &b);
         assertMatchesRef(&dst, refu);
 
         /* commutativity */
-        pddlISetUnion2(&dst, &b, &a);
+        pddlISetUnionTo(&dst, &b, &a);
         assertMatchesRef(&dst, refu);
 
         pddlISetFree(&a);
@@ -1057,15 +1101,15 @@ TEST_ONCE(iset_rand_intersect)
             refi[i] = refa[i] & refb[i];
 
         /* pddlISetIntersect */
-        pddlISetSet(&dst, &a);
+        pddlISetCopy(&dst, &a);
         pddlISetIntersect(&dst, &b);
         assertMatchesRef(&dst, refi);
 
-        /* pddlISetIntersect2, both argument orders */
-        pddlISetIntersect2(&dst, &a, &b);
+        /* pddlISetIntersectTo, both argument orders */
+        pddlISetIntersectTo(&dst, &a, &b);
         assertMatchesRef(&dst, refi);
 
-        pddlISetIntersect2(&dst, &b, &a);
+        pddlISetIntersectTo(&dst, &b, &a);
         assertMatchesRef(&dst, refi);
 
         pddlISetFree(&a);
@@ -1095,12 +1139,12 @@ TEST_ONCE(iset_rand_minus)
             refm[i] = refa[i] & !refb[i];
 
         /* pddlISetMinus */
-        pddlISetSet(&dst, &a);
+        pddlISetCopy(&dst, &a);
         pddlISetMinus(&dst, &b);
         assertMatchesRef(&dst, refm);
 
-        /* pddlISetMinus2 */
-        pddlISetMinus2(&dst, &a, &b);
+        /* pddlISetMinusTo */
+        pddlISetMinusTo(&dst, &a, &b);
         assertMatchesRef(&dst, refm);
 
         pddlISetFree(&a);
@@ -1268,18 +1312,18 @@ TEST_ONCE(iset_rand_skew)
         }
 
         /* intersect, all four orientation/function combinations */
-        pddlISetSet(&dst, &small_s);
+        pddlISetCopy(&dst, &small_s);
         pddlISetIntersect(&dst, &big_s);
         assertMatchesRef(&dst, refi);
 
-        pddlISetSet(&dst, &big_s);
+        pddlISetCopy(&dst, &big_s);
         pddlISetIntersect(&dst, &small_s);
         assertMatchesRef(&dst, refi);
 
-        pddlISetIntersect2(&dst, &small_s, &big_s);
+        pddlISetIntersectTo(&dst, &small_s, &big_s);
         assertMatchesRef(&dst, refi);
 
-        pddlISetIntersect2(&dst, &big_s, &small_s);
+        pddlISetIntersectTo(&dst, &big_s, &small_s);
         assertMatchesRef(&dst, refi);
 
         pddlISetFree(&small_s);

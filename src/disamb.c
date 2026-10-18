@@ -45,7 +45,7 @@ static int disamb(pddl_disamb_t *dis,
         fprintf(stdout, "\n");
         fprintf(stdout, "   +");
         PDDL_ISET(add);
-        pddlISetMinus2(&add, s2, s1);
+        pddlISetMinusTo(&add, s2, s1);
         pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
         fprintf(stdout, "\n");
         pddlISetFree(&add);
@@ -122,12 +122,12 @@ static void disambTestMin(pddl_disamb_t *dis,
         fprintf(stdout, "\n");
         fprintf(stdout, "   +");
         PDDL_ISET(add);
-        pddlISetMinus2(&add, &sarc, F);
+        pddlISetMinusTo(&add, &sarc, F);
         pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
         fprintf(stdout, "\n");
 
         fprintf(stdout, "      +");
-        pddlISetMinus2(&add, &smin, &sarc);
+        pddlISetMinusTo(&add, &smin, &sarc);
         pddlFactsPrintSet(&add, &strips->fact, " ", "", stdout);
         fprintf(stdout, "\n");
         pddlISetFree(&add);

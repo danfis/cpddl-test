@@ -401,19 +401,19 @@ static void appOpCmpBrute(const pddl_fdr_app_op_t *tree,
                 pddlISetAdd(&exp, op_id);
         }
 
-        pddlISetEmpty(&found);
+        pddlISetClear(&found);
         int ret = pddlFDRAppOpFindSet(tree, state, &found);
         assert(ret == pddlISetSize(&exp));
         assert(pddlISetEq(&found, &exp));
 
         // FindSet adds to the existing content of the output set
-        pddlISetEmpty(&found);
+        pddlISetClear(&found);
         pddlISetAdd(&found, 1000);
         ret = pddlFDRAppOpFindSet(tree, state, &found);
         assert(ret == pddlISetSize(&exp));
         pddlISetAdd(&exp, 1000);
         assert(pddlISetEq(&found, &exp));
-        pddlISetRm(&exp, 1000);
+        pddlISetRemove(&exp, 1000);
 
         // FindArr into an empty and a non-empty array
         checkFindArr(tree, state, &exp, 0);
@@ -457,7 +457,7 @@ TEST_ONCE(fdr_app_op_handmade)
     int ret = pddlFDRAppOpFindSet(&tree, fdr.init, &found);
     assert(ret == 0);
     assert(pddlISetSize(&found) == 1 && pddlISetIn(7, &found));
-    pddlISetEmpty(&found);
+    pddlISetClear(&found);
     checkFindArr(&tree, fdr.init, &found, 0);
     checkFindArr(&tree, fdr.init, &found, 1);
     pddlISetFree(&found);

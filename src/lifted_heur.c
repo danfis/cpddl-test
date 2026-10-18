@@ -56,7 +56,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
             if (num_tested_states >= 200)
                 break;
         }
-        pddlISetEmpty(&state);
+        pddlISetClear(&state);
         pddlISetUnion(&state, &next_state);
         pddlISetFree(&next_state);
         pddlISetFree(&app_ops);
@@ -120,7 +120,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
             if (num_tested_states >= 200)
                 break;
         }
-        pddlISetEmpty(&state);
+        pddlISetClear(&state);
         pddlISetUnion(&state, &next_state);
         pddlISetFree(&next_state);
         pddlISetFree(&app_ops);
@@ -185,7 +185,7 @@ TEST(lifted_heur_hff_add_unit_cost, pddl_unit_cost)
             if (num_tested_states >= 200)
                 break;
         }
-        pddlISetEmpty(&state);
+        pddlISetClear(&state);
         pddlISetUnion(&state, &next_state);
         pddlISetFree(&next_state);
         pddlISetFree(&app_ops);

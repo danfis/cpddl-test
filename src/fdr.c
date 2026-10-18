@@ -203,7 +203,7 @@ TEST(fdr_conj_exact, fdr_h2)
                 C.fdr.var.global_id_to_val[f0]->name,
                 C.fdr.var.global_id_to_val[f1]->name);
 
-    pddlISetEmpty(&set);
+    pddlISetClear(&set);
     pddlISetAdd(&set, f0);
     pddlISetAdd(&set, f2);
     pddlFDRConjExactConfigAddConj(&cfg, &set);
@@ -212,7 +212,7 @@ TEST(fdr_conj_exact, fdr_h2)
                 C.fdr.var.global_id_to_val[f0]->name,
                 C.fdr.var.global_id_to_val[f2]->name);
 
-    pddlISetEmpty(&set);
+    pddlISetClear(&set);
     pddlISetAdd(&set, f0);
     pddlISetAdd(&set, f1);
     pddlISetAdd(&set, f2);
@@ -220,7 +220,7 @@ TEST(fdr_conj_exact, fdr_h2)
         pddlFDRConjExactConfigAddConj(&cfg, &set);
 
     if (f3 >= 0 && f3 < C.fdr.var.global_id_size){
-        pddlISetEmpty(&set);
+        pddlISetClear(&set);
         pddlISetAdd(&set, f1);
         pddlISetAdd(&set, f3);
         pddlFDRConjExactConfigAddConj(&cfg, &set);
@@ -229,7 +229,7 @@ TEST(fdr_conj_exact, fdr_h2)
                     C.fdr.var.global_id_to_val[f1]->name,
                     C.fdr.var.global_id_to_val[f3]->name);
 
-        pddlISetEmpty(&set);
+        pddlISetClear(&set);
         pddlISetAdd(&set, f0);
         pddlISetAdd(&set, f1);
         pddlISetAdd(&set, f2);

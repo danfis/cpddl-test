@@ -840,7 +840,7 @@ TEST(fdr_state_pool_walk, fdr)
             assert(id3 == id);
             prev_id = id;
 
-            pddlISetEmpty(&app);
+            pddlISetClear(&app);
             pddlFDRAppOpFindSet(&C.fdr_app_op, state, &app);
             if (pddlISetSize(&app) == 0)
                 break;

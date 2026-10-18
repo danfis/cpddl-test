@@ -704,7 +704,7 @@ TEST(strips_conj, strips_pruned)
                 C.strips.fact.fact[f0]->name,
                 C.strips.fact.fact[f1]->name);
 
-    pddlISetEmpty(&set);
+    pddlISetClear(&set);
     pddlISetAdd(&set, f0);
     pddlISetAdd(&set, f2);
     pddlStripsConjConfigAddConj(&cfg, &set);
@@ -713,7 +713,7 @@ TEST(strips_conj, strips_pruned)
                 C.strips.fact.fact[f0]->name,
                 C.strips.fact.fact[f2]->name);
 
-    pddlISetEmpty(&set);
+    pddlISetClear(&set);
     pddlISetAdd(&set, f0);
     pddlISetAdd(&set, f1);
     pddlISetAdd(&set, f2);
@@ -725,7 +725,7 @@ TEST(strips_conj, strips_pruned)
                 C.strips.fact.fact[f2]->name);
 
     if (f3 >= 0 && f3 < C.strips.fact.fact_size){
-        pddlISetEmpty(&set);
+        pddlISetClear(&set);
         pddlISetAdd(&set, f1);
         pddlISetAdd(&set, f3);
         pddlStripsConjConfigAddConj(&cfg, &set);
@@ -734,7 +734,7 @@ TEST(strips_conj, strips_pruned)
                     C.strips.fact.fact[f1]->name,
                     C.strips.fact.fact[f3]->name);
 
-        pddlISetEmpty(&set);
+        pddlISetClear(&set);
         pddlISetAdd(&set, f0);
         pddlISetAdd(&set, f1);
         pddlISetAdd(&set, f2);
@@ -852,7 +852,7 @@ TEST(strips_conj_hmax_rand, strips_pruned)
             pddlISetAdd(&set, f2);
             pddlStripsConjConfigAddConj(&cfg, &set);
 
-            pddlISetEmpty(&set);
+            pddlISetClear(&set);
             pddlISetAdd(&set, f3);
             pddlISetAdd(&set, f4);
             pddlISetAdd(&set, f5);
