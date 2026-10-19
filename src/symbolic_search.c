@@ -136,7 +136,7 @@ static pddl_hpot_config_opt_t potOptAI(void)
 {
     pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
     opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    opt.add_state_constr.state.type = PDDL_HPOT_STATE_INIT;
     return opt;
 }
 
