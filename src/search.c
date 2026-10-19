@@ -68,19 +68,28 @@ static void testGreedySearch(const pddl_search_config_t *cfg)
     pddlSearchDel(search);
 }
 
-static void _search(pddl_heur_t *heur, pddl_search_alg_t search, int h_weight)
+static void _searchCfg(pddl_heur_t *heur,
+                       pddl_search_alg_t search,
+                       int h_weight,
+                       pddl_bool_t succ_gen_tree_order)
 {
     pddl_search_config_t cfg = PDDL_SEARCH_CONFIG_INIT;
     cfg.fdr = &C.fdr;
     cfg.alg = search;
     cfg.heur = heur;
     cfg.h_weight = h_weight;
+    cfg.succ_gen_tree_order = succ_gen_tree_order;
     if (search == PDDL_SEARCH_ASTAR){
         testOptimalSearch(&cfg);
     }else{
         testGreedySearch(&cfg);
     }
     pddlHeurDel(heur);
+}
+
+static void _search(pddl_heur_t *heur, pddl_search_alg_t search, int h_weight)
+{
+    _searchCfg(heur, search, h_weight, pddl_false);
 }
 
 TEST(search_blind, search)
@@ -121,6 +130,25 @@ TEST(search_lazy_add, search)
 TEST(search_wastar_ff, search)
 {
     _search(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_WEIGHTED_ASTAR, 2);
+}
+
+/*
+ * A* with LM-cut generating successors in the order of the successor
+ * generator still finds an optimal plan.
+ */
+TEST(search_astar_lmc_succ_gen_tree_order, search)
+{
+    _searchCfg(pddlHeurLMCut(&C.fdr, &C.err), PDDL_SEARCH_ASTAR, 1,
+               pddl_true);
+}
+
+/*
+ * GBFS with hFF generating successors in the order of the successor
+ * generator finds a valid plan.
+ */
+TEST(search_gbfs_ff_succ_gen_tree_order, search)
+{
+    _searchCfg(pddlHeurHFF(&C.fdr, &C.err), PDDL_SEARCH_GBFS, 1, pddl_true);
 }
 
 /* Runs the search configured by CFG to the end; it fills STAT with its
