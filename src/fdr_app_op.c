@@ -7,8 +7,9 @@
 /*
  * Tests of the fdr_app_op module (pddl/fdr_app_op.h).
  *
- * The per-task tests compare pddlFDRAppOpFindSet() and
- * pddlFDRAppOpFindArr() with brute force. The hand-built test is TEST_ONCE.
+ * The per-task tests compare pddlFDRAppOpFindSet(),
+ * pddlFDRAppOpFindSortedArr(), and pddlFDRAppOpFindArr() with brute force.
+ * The hand-built test is TEST_ONCE.
  * Run with:  cd tests && make && ./test -Q -T _ -s fdr_app_op
  */
 
@@ -229,8 +230,41 @@ static void checkFindArr(const pddl_fdr_app_op_t *tree,
     pddlIVecFree(&arr);
 }
 
+/** Checks that pddlFDRAppOpFindSortedArr() on TREE and STATE produces the
+ *  sorted operators EXP from an empty array, and that it merges them into
+ *  an array already holding a sorted prefix and the first operator of EXP
+ *  (if any) without duplicates */
+static void checkFindSortedArr(const pddl_fdr_app_op_t *tree,
+                               const int *state,
+                               const pddl_iset_t *exp)
+{
+    int exp_size = pddlISetSize(exp);
+
+    PDDL_IVEC(arr);
+    int ret = pddlFDRAppOpFindSortedArr(tree, state, &arr);
+    assert(ret == exp_size);
+    assert(pddlIVecSize(&arr) == exp_size);
+    for (int i = 0; i < exp_size; ++i)
+        assert(pddlIVecGet(&arr, i) == pddlISetGet(exp, i));
+
+    pddlIVecClear(&arr);
+    pddlIVecPush(&arr, -2);
+    pddlIVecPush(&arr, -1);
+    if (exp_size > 0)
+        pddlIVecPush(&arr, pddlISetGet(exp, 0));
+    ret = pddlFDRAppOpFindSortedArr(tree, state, &arr);
+    assert(ret == exp_size);
+    assert(pddlIVecSize(&arr) == 2 + exp_size);
+    assert(pddlIVecGet(&arr, 0) == -2);
+    assert(pddlIVecGet(&arr, 1) == -1);
+    for (int i = 0; i < exp_size; ++i)
+        assert(pddlIVecGet(&arr, 2 + i) == pddlISetGet(exp, i));
+    pddlIVecFree(&arr);
+}
+
 /** Checks that TREE finds the same operators in STATE as brute force (with
- *  both pddlFDRAppOpFindSet() and pddlFDRAppOpFindArr()), and recursively
+ *  pddlFDRAppOpFindSet(), pddlFDRAppOpFindSortedArr(), and
+ *  pddlFDRAppOpFindArr()), and recursively
  *  does the same for all successor states up to the depth DEPTH */
 static void findOps(const pddl_fdr_app_op_t *tree,
                     const int *state,
@@ -250,6 +284,7 @@ static void findOps(const pddl_fdr_app_op_t *tree,
     }
     assert(pddlISetEq(&app, &app_brute));
     checkFindArr(tree, state, &app_brute, 1);
+    checkFindSortedArr(tree, state, &app_brute);
 
     if (depth > 0){
         int var_size = C.fdr.var.var_size;
