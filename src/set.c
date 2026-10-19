@@ -5,6 +5,7 @@
  */
 
 #include "pddl/iset.h"
+#include "pddl/ivec.h"
 #include "pddl/rand.h"
 #include "test.h"
 #include <assert.h>
@@ -1330,4 +1331,222 @@ TEST_ONCE(iset_rand_skew)
         pddlISetFree(&big_s);
         pddlISetFree(&dst);
     }
+}
+
+/*
+ * pddlISetMoveToIVec() hands the buffer of the set over to the vector
+ * (replacing and freeing its previous contents) and leaves the set empty
+ * and unallocated.
+ */
+TEST_ONCE(iset_move_to_ivec)
+{
+    PDDL_ISET(s);
+    PDDL_ISET_ADD(&s, 7, 3, 5, 1);
+    int *buf = s.s;
+    int cap = s.cap;
+
+    PDDL_IVEC(v);
+    pddlIVecPush(&v, 42);
+    pddlIVecPush(&v, 43);
+
+    pddlISetMoveToIVec(&s, &v);
+    int exp[] = { 1, 3, 5, 7 };
+    assert(pddlIVecSize(&v) == 4);
+    for (int i = 0; i < 4; ++i)
+        assert(pddlIVecGet(&v, i) == exp[i]);
+    assert(pddlIVecData(&v) == buf);
+    assert(pddlIVecCap(&v) == cap);
+    assert(s.s == NULL);
+    assert(s.size == 0);
+    assert(s.cap == 0);
+
+    // The vector is fully usable
+    pddlIVecPush(&v, 0);
+    assert(pddlIVecSize(&v) == 5);
+    assert(pddlIVecLast(&v) == 0);
+
+    // An empty, unallocated set results in an empty, unallocated vector
+    pddlISetMoveToIVec(&s, &v);
+    assert(pddlIVecData(&v) == NULL);
+    assert(pddlIVecSize(&v) == 0);
+    assert(pddlIVecCap(&v) == 0);
+
+    pddlIVecFree(&v);
+    pddlISetFree(&s);
+}
+
+/*
+ * pddlIVecMoveToISet() hands the buffer of the vector over to the set
+ * (replacing and freeing its previous contents), sorts it, and removes
+ * duplicates; the vector is left empty and unallocated.
+ */
+TEST_ONCE(ivec_move_to_iset)
+{
+    PDDL_IVEC(v);
+    int vals[] = { 5, 3, 9, 3, 1, 5, 5, 0, 9 };
+    pddlIVecAppendArr(&v, vals, 9);
+    int *buf = pddlIVecData(&v);
+    int cap = pddlIVecCap(&v);
+
+    PDDL_ISET(s);
+    PDDL_ISET_ADD(&s, 100, 200);
+
+    pddlIVecMoveToISet(&v, &s);
+    int exp[] = { 0, 1, 3, 5, 9 };
+    checkSet(&s, exp, 5);
+    assert(s.s == buf);
+    assert(s.cap == cap);
+    assert(pddlIVecData(&v) == NULL);
+    assert(pddlIVecSize(&v) == 0);
+    assert(pddlIVecCap(&v) == 0);
+
+    // The set is fully usable
+    pddlISetAdd(&s, 4);
+    pddlISetAdd(&s, 3);
+    int exp2[] = { 0, 1, 3, 4, 5, 9 };
+    checkSet(&s, exp2, 6);
+    assert(pddlISetHas(&s, 4));
+    assert(!pddlISetHas(&s, 2));
+
+    // A single element
+    pddlIVecPush(&v, 8);
+    pddlIVecMoveToISet(&v, &s);
+    int exp3[] = { 8 };
+    checkSet(&s, exp3, 1);
+
+    // All elements equal
+    for (int i = 0; i < 5; ++i)
+        pddlIVecPush(&v, 2);
+    pddlIVecMoveToISet(&v, &s);
+    int exp4[] = { 2 };
+    checkSet(&s, exp4, 1);
+
+    // An empty, unallocated vector results in an empty, unallocated set
+    pddlIVecMoveToISet(&v, &s);
+    assert(s.s == NULL);
+    assert(s.size == 0);
+    assert(s.cap == 0);
+
+    pddlISetFree(&s);
+    pddlIVecFree(&v);
+}
+
+/*
+ * pddlIVecMoveToISetSorted() hands the buffer of an already sorted vector
+ * over to the set (removing duplicates in place) and leaves the vector
+ * empty and unallocated.
+ */
+TEST_ONCE(ivec_move_to_iset_sorted)
+{
+    PDDL_IVEC(v);
+    pddlIVecReserve(&v, 100);
+    for (int i = 0; i < 50; ++i)
+        pddlIVecPush(&v, 3 * i - 20);
+    int *buf = pddlIVecData(&v);
+
+    PDDL_ISET(s);
+    PDDL_ISET_ADD(&s, 1, 2, 3);
+
+    pddlIVecMoveToISetSorted(&v, &s);
+    assert(pddlISetSize(&s) == 50);
+    for (int i = 0; i < 50; ++i)
+        assert(pddlISetGet(&s, i) == 3 * i - 20);
+    assert(s.s == buf);
+    assert(s.cap == 100);
+    assert(pddlIVecData(&v) == NULL);
+    assert(pddlIVecSize(&v) == 0);
+    assert(pddlIVecCap(&v) == 0);
+
+    // Appending to the set uses the remaining capacity
+    pddlISetAdd(&s, 1000);
+    assert(pddlISetSize(&s) == 51);
+    assert(s.s == buf);
+
+    // Sorted input with duplicates
+    int vals[] = { -3, -3, 0, 2, 2, 2, 7 };
+    pddlIVecAppendArr(&v, vals, 7);
+    buf = pddlIVecData(&v);
+    pddlIVecMoveToISetSorted(&v, &s);
+    int exp[] = { -3, 0, 2, 7 };
+    checkSet(&s, exp, 4);
+    assert(s.s == buf);
+    assert(pddlIVecData(&v) == NULL);
+    assert(pddlIVecSize(&v) == 0);
+    assert(pddlIVecCap(&v) == 0);
+
+    pddlISetFree(&s);
+    pddlIVecFree(&v);
+}
+
+/*
+ * pddlIVecMoveToISetSortedUniq() hands the buffer of an already sorted
+ * unique vector over to the set unchanged (replacing the previous contents
+ * of the set) and leaves the vector empty and unallocated.
+ */
+TEST_ONCE(ivec_move_to_iset_sorted_uniq)
+{
+    PDDL_IVEC(v);
+    pddlIVecReserve(&v, 64);
+    for (int i = 0; i < 30; ++i)
+        pddlIVecPush(&v, 5 * i - 50);
+    int *buf = pddlIVecData(&v);
+
+    PDDL_ISET(s);
+    PDDL_ISET_ADD(&s, 4, 8, 15, 16, 23, 42);
+
+    pddlIVecMoveToISetSortedUniq(&v, &s);
+    assert(pddlISetSize(&s) == 30);
+    for (int i = 0; i < 30; ++i)
+        assert(pddlISetGet(&s, i) == 5 * i - 50);
+    assertSorted(&s);
+    assert(s.s == buf);
+    assert(s.cap == 64);
+    assert(pddlIVecData(&v) == NULL);
+    assert(pddlIVecSize(&v) == 0);
+    assert(pddlIVecCap(&v) == 0);
+
+    // The set is fully usable and appending uses the remaining capacity
+    pddlISetAdd(&s, 1000);
+    pddlISetAdd(&s, -49);
+    assert(pddlISetSize(&s) == 32);
+    assert(pddlISetHas(&s, 1000));
+    assert(pddlISetHas(&s, -49));
+    assertSorted(&s);
+    assert(s.s == buf);
+
+    // An empty, unallocated vector results in an empty, unallocated set
+    pddlIVecMoveToISetSortedUniq(&v, &s);
+    assert(s.s == NULL);
+    assert(s.size == 0);
+    assert(s.cap == 0);
+
+    pddlISetFree(&s);
+    pddlIVecFree(&v);
+}
+
+/*
+ * Moving a set to a vector, modifying the vector, and moving it back
+ * yields the expected set.
+ */
+TEST_ONCE(iset_ivec_move_round_trip)
+{
+    PDDL_ISET(s);
+    for (int i = 0; i < 20; ++i)
+        pddlISetAdd(&s, 2 * i);
+
+    PDDL_IVEC(v);
+    pddlISetMoveToIVec(&s, &v);
+    for (int i = 0; i < 20; ++i)
+        pddlIVecPush(&v, 2 * i + 1);
+    pddlIVecPush(&v, 7);
+    pddlIVecPush(&v, -1);
+
+    pddlIVecMoveToISet(&v, &s);
+    assert(pddlISetSize(&s) == 41);
+    for (int i = 0; i < 41; ++i)
+        assert(pddlISetGet(&s, i) == i - 1);
+    assertSorted(&s);
+
+    pddlISetFree(&s);
+    pddlIVecFree(&v);
 }

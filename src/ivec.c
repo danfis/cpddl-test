@@ -676,3 +676,80 @@ TEST_ONCE(ivec_for_each)
     assert(cnt == 50);
     pddlIVecFree(&v);
 }
+
+/*
+ * pddlIVecUniq() replaces each run of adjacent equal elements by a single
+ * element (keeping non-adjacent duplicates) in place, as the unix uniq.
+ */
+TEST_ONCE(ivec_uniq)
+{
+    PDDL_IVEC(v);
+
+    // Empty vector stays unallocated
+    pddlIVecUniq(&v);
+    assertUnallocated(&v);
+
+    // Single element
+    pddlIVecPush(&v, 5);
+    pddlIVecUniq(&v);
+    int exp1[] = { 5 };
+    checkVec(&v, exp1, 1);
+
+    // No duplicates: unchanged
+    int in2[] = { 3, 1, 2, 5, 4 };
+    pddlIVecClear(&v);
+    pddlIVecAppendArr(&v, in2, 5);
+    pddlIVecUniq(&v);
+    checkVec(&v, in2, 5);
+
+    // Runs at the start, in the middle, and at the end; the data pointer
+    // and the capacity are kept
+    int in3[] = { 1, 1, 2, 3, 3, 3, 4, 4 };
+    pddlIVecClear(&v);
+    pddlIVecAppendArr(&v, in3, 8);
+    int *data = pddlIVecData(&v);
+    int cap = pddlIVecCap(&v);
+    pddlIVecUniq(&v);
+    int exp3[] = { 1, 2, 3, 4 };
+    checkVec(&v, exp3, 4);
+    assert(pddlIVecData(&v) == data);
+    assert(pddlIVecCap(&v) == cap);
+
+    // All elements equal
+    pddlIVecClear(&v);
+    for (int i = 0; i < 10; ++i)
+        pddlIVecPush(&v, -7);
+    pddlIVecUniq(&v);
+    int exp4[] = { -7 };
+    checkVec(&v, exp4, 1);
+
+    // Non-adjacent duplicates are kept
+    int in5[] = { 1, 1, 2, 1, 1 };
+    pddlIVecClear(&v);
+    pddlIVecAppendArr(&v, in5, 5);
+    pddlIVecUniq(&v);
+    int exp5[] = { 1, 2, 1 };
+    checkVec(&v, exp5, 3);
+
+    // Random vectors with many adjacent duplicates against a naive
+    // reference
+    pddl_rand_t rnd;
+    pddlRandInit(&rnd, 4242);
+    PDDL_IVEC(ref);
+    for (int rep = 0; rep < 200; ++rep){
+        int n = randInt(&rnd, 0, 100);
+        pddlIVecClear(&v);
+        pddlIVecClear(&ref);
+        for (int i = 0; i < n; ++i){
+            int x = randInt(&rnd, 0, 3);
+            pddlIVecPush(&v, x);
+            if (pddlIVecIsEmpty(&ref) || pddlIVecLast(&ref) != x)
+                pddlIVecPush(&ref, x);
+        }
+        pddlIVecUniq(&v);
+        assert(pddlIVecEq(&v, &ref));
+    }
+
+    pddlIVecFree(&ref);
+    pddlIVecFree(&v);
+}
