@@ -39,6 +39,11 @@ static void run(pddl_symbolic_search_config_t *symb_cfg,
     int ret = 0;
     pddl_symbolic_search_status_t st;
     st = pddlSymbolicSearchInitStep(s, &C.err);
+    if (st == PDDL_SYMBOLIC_SEARCH_STATUS_UNSOLVABLE){
+        PDDL_LOG(&C.err, "Task unsolvable.");
+        printf("Unsolvable.\n");
+        assert(C.optimal_cost < 0);
+    }
     while (st == PDDL_SYMBOLIC_SEARCH_STATUS_CONT){
         st = pddlSymbolicSearchStep(s, &C.err);
         switch (st){
@@ -126,6 +131,31 @@ TEST(symbolic_search_fwbw_blind, symbolic_search)
     run(&symb_cfg, pddl_true);
 }
 
+/** Returns the pot-A+I optimization criteria */
+static pddl_hpot_config_opt_t potOptAI(void)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
+    opt.add_state_constr.state.type = PDDL_HPOT_STATE_INIT;
+    return opt;
+}
+
+/** Returns the pot-I optimization criteria */
+static pddl_hpot_config_opt_t potOptI(void)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    return opt;
+}
+
+/** Returns the goal-count optimization criteria */
+static pddl_hpot_config_opt_t potOptGC(void)
+{
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    return opt;
+}
+
 TEST_COND(symbolic_search_fw_astar_AI, symbolic_search, LP)
 {
     if (C.fdr.goal_is_unreachable)
@@ -135,8 +165,9 @@ TEST_COND(symbolic_search_fw_astar_AI, symbolic_search, LP)
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_false;
     run(&symb_cfg, pddl_true);
 }
@@ -151,7 +182,9 @@ TEST_COND(symbolic_search_bw_astar_I, symbolic_search, LP)
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.fw.pot_heur = pddl_false;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 1;
     run(&symb_cfg, pddl_true);
 }
 
@@ -164,10 +197,13 @@ TEST_COND(symbolic_search_fwbw_astar_AI_I, symbolic_search, LP)
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 1;
     run(&symb_cfg, pddl_true);
 }
 
@@ -180,10 +216,13 @@ TEST_COND(symbolic_search_fwbw_astar_AI_I_no_goal_split, symbolic_search, LP)
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.bw.use_goal_splitting = pddl_false;
     run(&symb_cfg, pddl_true);
 }
@@ -198,8 +237,9 @@ TEST_COND(symbolic_search_fwbw_astar_AI_blind, symbolic_search, LP)
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_false;
     run(&symb_cfg, pddl_true);
 }
@@ -214,7 +254,9 @@ TEST_COND(symbolic_search_fwbw_astar_blind_I, symbolic_search, LP)
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_ASTAR;
     symb_cfg.fw.pot_heur = pddl_false;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 1;
     run(&symb_cfg, pddl_true);
 }
 
@@ -223,16 +265,13 @@ TEST_COND(symbolic_search_fw_gbfs_AI_gc, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.next = &gc_opt;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI(), potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 2;
     symb_cfg.bw.pot_heur = pddl_false;
     run(&symb_cfg, pddl_false);
 }
@@ -242,16 +281,13 @@ TEST_COND(symbolic_search_fw_gbfs_AI_gc_anyplan, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.next = &gc_opt;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI(), potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 2;
     symb_cfg.bw.pot_heur = pddl_false;
     symb_cfg.extract_cheapest_plan = pddl_false;
     run(&symb_cfg, pddl_false);
@@ -266,7 +302,9 @@ TEST_COND(symbolic_search_fw_gbfs_gc, symbolic_search, LP)
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_false;
     run(&symb_cfg, pddl_false);
 }
@@ -280,7 +318,9 @@ TEST_COND(symbolic_search_fw_gbfs_gc_anyplan, symbolic_search, LP)
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_false;
     symb_cfg.extract_cheapest_plan = pddl_false;
     run(&symb_cfg, pddl_false);
@@ -291,16 +331,14 @@ TEST_COND(symbolic_search_bw_gbfs_I_gc, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.fw.pot_heur = pddl_false;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    symb_cfg.bw.pot_heur_config.opt.next = &gc_opt;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI(), potOptGC() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 2;
     run(&symb_cfg, pddl_false);
 }
 
@@ -309,16 +347,14 @@ TEST_COND(symbolic_search_bw_gbfs_I_gc_anyplan, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_NONE;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.fw.pot_heur = pddl_false;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    symb_cfg.bw.pot_heur_config.opt.next = &gc_opt;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI(), potOptGC() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 2;
     symb_cfg.extract_cheapest_plan = pddl_false;
     run(&symb_cfg, pddl_false);
 }
@@ -328,22 +364,17 @@ TEST_COND(symbolic_search_fwbw_gbfs_AI_gc_I_gc, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t fw_gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    fw_gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
-    pddl_hpot_config_opt_t bw_gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    bw_gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.next = &fw_gc_opt;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI(), potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 2;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    symb_cfg.bw.pot_heur_config.opt.next = &bw_gc_opt;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI(), potOptGC() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 2;
     symb_cfg.extract_cheapest_plan = pddl_true;
     run(&symb_cfg, pddl_false);
 }
@@ -353,22 +384,17 @@ TEST_COND(symbolic_search_fwbw_gbfs_AI_gc_I_gc_anyplan, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t fw_gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    fw_gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
-    pddl_hpot_config_opt_t bw_gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    bw_gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_ALL_SYNTACTIC_STATES_TYPE;
-    symb_cfg.fw.pot_heur_config.opt.all_syntactic_states.add_state_constr.init_state = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.next = &fw_gc_opt;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptAI(), potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 2;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    symb_cfg.bw.pot_heur_config.opt.next = &bw_gc_opt;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI(), potOptGC() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 2;
     symb_cfg.extract_cheapest_plan = pddl_false;
     run(&symb_cfg, pddl_false);
 }
@@ -378,17 +404,17 @@ TEST_COND(symbolic_search_fwbw_gbfs_gc_I_gc, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t bw_gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    bw_gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    symb_cfg.bw.pot_heur_config.opt.next = &bw_gc_opt;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI(), potOptGC() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 2;
     symb_cfg.extract_cheapest_plan = pddl_true;
     run(&symb_cfg, pddl_false);
 }
@@ -398,17 +424,17 @@ TEST_COND(symbolic_search_fwbw_gbfs_gc_I_gc_anyplan, symbolic_search, LP)
     if (C.fdr.goal_is_unreachable)
         return;
 
-    pddl_hpot_config_opt_t bw_gc_opt = PDDL_HPOT_CONFIG_OPT_INIT;
-    bw_gc_opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
-
     pddl_symbolic_search_config_t symb_cfg = PDDL_SYMBOLIC_SEARCH_CONFIG_INIT_GBFS;
     symb_cfg.fw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.bw.alg = PDDL_SYMBOLIC_SEARCH_GBFS;
     symb_cfg.fw.pot_heur = pddl_true;
-    symb_cfg.fw.pot_heur_config.opt.type = PDDL_HPOT_OPT_GOAL_COUNT_TYPE;
+    pddl_hpot_config_opt_t fw_opt[] = { potOptGC() };
+    symb_cfg.fw.pot_heur_config.opt = fw_opt;
+    symb_cfg.fw.pot_heur_config.opt_size = 1;
     symb_cfg.bw.pot_heur = pddl_true;
-    symb_cfg.bw.pot_heur_config.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
-    symb_cfg.bw.pot_heur_config.opt.next = &bw_gc_opt;
+    pddl_hpot_config_opt_t bw_opt[] = { potOptI(), potOptGC() };
+    symb_cfg.bw.pot_heur_config.opt = bw_opt;
+    symb_cfg.bw.pot_heur_config.opt_size = 2;
     symb_cfg.extract_cheapest_plan = pddl_false;
     run(&symb_cfg, pddl_false);
 }

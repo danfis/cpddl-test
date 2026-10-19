@@ -58,6 +58,7 @@ TESTS += fdr_app_op
 TESTS += hff
 TESTS += hm_heur
 TESTS += pot
+TESTS += hpot_fixed
 TESTS += lmc
 TESTS += flow
 TESTS += clique

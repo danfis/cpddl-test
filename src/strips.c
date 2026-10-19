@@ -937,20 +937,48 @@ TEST_COND(strips_conj_hpot, strips_conj, LP)
     pddlStripsConjMutexPairsInitCopy(&mutexc, &C.mutex, &stripsc);
     pddlFDRInitFromStrips(&fdrc, &stripsc.strips, &C.mg, &mutexc, &fdr_cfg, &C.err);
 
+    pddl_hpot_config_opt_t opt = PDDL_HPOT_CONFIG_OPT_INIT;
+    opt.type = PDDL_HPOT_OPT_STATE_TYPE;
     pddl_hpot_config_t cfg = PDDL_HPOT_CONFIG_INIT;
-    cfg.opt.type = PDDL_HPOT_OPT_STATE_TYPE;
+    cfg.opt = &opt;
+    cfg.opt_size = 1;
+    cfg.disambiguation = pddl_false;
 
     pddl_pot_solutions_t sol, solc;
     pddlPotSolutionsInit(&sol);
     pddlPotSolutionsInit(&solc);
 
+    // Plain pot-I without disambiguation is always feasible, so both
+    // calls must find a potential function.
     cfg.fdr = &fdr;
-    cfg.mutex = &C.mutex;
-    pddlHPot(&sol, &cfg, &C.err);
+    pddl_hpot_status_t st = pddlHPot(&sol, &cfg, &C.err);
+    switch (st){
+    case PDDL_HPOT_ERR:
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(0);
+        break;
+    case PDDL_HPOT_NOT_FOUND:
+    case PDDL_HPOT_UNSOLVABLE:
+        assert(0);
+        break;
+    case PDDL_HPOT_FOUND:
+        break;
+    }
 
     cfg.fdr = &fdrc;
-    cfg.mutex = &mutexc;
-    pddlHPot(&solc, &cfg, &C.err);
+    st = pddlHPot(&solc, &cfg, &C.err);
+    switch (st){
+    case PDDL_HPOT_ERR:
+        pddlErrPrint(&C.err, 1, stderr);
+        assert(0);
+        break;
+    case PDDL_HPOT_NOT_FOUND:
+    case PDDL_HPOT_UNSOLVABLE:
+        assert(0);
+        break;
+    case PDDL_HPOT_FOUND:
+        break;
+    }
     pddlMutexPairsFree(&mutexc);
 
     int h = pddlPotSolutionsEvalMaxFDRState(&sol, &fdr.var, fdr.init);
