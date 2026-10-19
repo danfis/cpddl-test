@@ -352,3 +352,164 @@ TEST(h2_heur_bitset_cmp_mutex, h2_heur_dyn_prog_mutex)
     pddlH2HeurBitsetFree(&h_no_mutex);
     pddlMutexPairsFree(&mutex);
 }
+
+/*
+ * Compute h^2 fw/bw mutexes of C.strips (including mutex groups) into
+ * MUTEX.
+ */
+static void gbfInitMutex(pddl_mutex_pairs_t *mutex)
+{
+    pddlMutexPairsInitStrips(mutex, &C.strips);
+    pddlMutexPairsAddMGroups(mutex, &C.mg);
+
+    pddl_hm_mutex_config_t cfg = PDDL_HM_MUTEX_CONFIG_INIT;
+    cfg.m = 2;
+    cfg.dir = PDDL_HM_MUTEX_DIR_FW_BW;
+    cfg.strips = &C.strips;
+    cfg.mgroups = &C.mg;
+    cfg.mutex_pairs = mutex;
+
+    pddl_hm_mutex_result_t res = PDDL_HM_MUTEX_RESULT_INIT;
+    res.mutex_pairs = mutex;
+
+    int ret = pddlHm(&cfg, &res, &C.err);
+    assert(ret == 0);
+}
+
+/*
+ * Compare the GBF-based h^2 heuristic against the reference (dynamic
+ * programming) implementation on the initial state.
+ */
+TEST(h2_heur_gbf_cmp_init_state, h2_heur_dyn_prog_init_state)
+{
+    pddl_h2_heur_gbf_t h;
+    int ret = pddlH2HeurGBFInit(&h, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    int h2 = pddlH2HeurGBF(&h, &C.strips.init);
+    int ref = pddlHMHeurDynProg(2, &C.strips, &C.strips.init, NULL, &C.err);
+    assert(h2 == ref);
+    pddlH2HeurGBFFree(&h);
+}
+
+/*
+ * Compare the GBF-based h^2 heuristic against the reference (dynamic
+ * programming) implementation on every state of the optimal plan.
+ */
+TEST(h2_heur_gbf_cmp_plan_states, h2_heur_dyn_prog_plan_states)
+{
+    if (C.optimal_cost < 0 || C.plan_file_path[0] == '\x0')
+        return;
+
+    pddl_plan_file_strips_t plan;
+    int ret = pddlPlanFileStripsInit(&plan, &C.strips, C.plan_file_path, &C.err);
+    if (ret < 0)
+        return;
+
+    pddl_h2_heur_gbf_t h;
+    ret = pddlH2HeurGBFInit(&h, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+
+    for (int i = 0; i < plan.state_size; ++i){
+        int h2 = pddlH2HeurGBF(&h, &plan.state[i]);
+        int ref = pddlHMHeurDynProg(2, &C.strips, &plan.state[i], NULL, &C.err);
+        assert(h2 == ref);
+    }
+
+    pddlH2HeurGBFFree(&h);
+    pddlPlanFileStripsFree(&plan);
+}
+
+/*
+ * Compare the GBF-based h^2 heuristic against the reference (dynamic
+ * programming) implementation with and without h^2 fw/bw mutexes on the
+ * initial state and on every state of the optimal plan.
+ */
+TEST(h2_heur_gbf_cmp_mutex, h2_heur_dyn_prog_mutex)
+{
+    pddl_mutex_pairs_t mutex;
+    gbfInitMutex(&mutex);
+
+    pddl_h2_heur_gbf_t h_mutex, h_no_mutex;
+    int ret = pddlH2HeurGBFInit(&h_mutex, &C.strips, &mutex, &C.err);
+    assert(ret == 0);
+    ret = pddlH2HeurGBFInit(&h_no_mutex, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+
+    int h2 = pddlH2HeurGBF(&h_mutex, &C.strips.init);
+    int ref = pddlHMHeurDynProg(2, &C.strips, &C.strips.init, &mutex, &C.err);
+    assert(h2 == ref);
+
+    int h2_no_m = pddlH2HeurGBF(&h_no_mutex, &C.strips.init);
+    int ref_no_m = pddlHMHeurDynProg(2, &C.strips, &C.strips.init,
+                                     NULL, &C.err);
+    assert(h2_no_m == ref_no_m);
+    assert(h2 >= h2_no_m);
+
+    if (C.optimal_cost >= 0 && C.plan_file_path[0] != '\x0'){
+        pddl_plan_file_strips_t plan;
+        ret = pddlPlanFileStripsInit(&plan, &C.strips, C.plan_file_path,
+                                     &C.err);
+        if (ret == 0){
+            for (int i = 0; i < plan.state_size; ++i){
+                int h2_p = pddlH2HeurGBF(&h_mutex, &plan.state[i]);
+                int ref_p = pddlHMHeurDynProg(2, &C.strips, &plan.state[i],
+                                              &mutex, &C.err);
+                assert(h2_p == ref_p);
+
+                int h2_p_no_m = pddlH2HeurGBF(&h_no_mutex, &plan.state[i]);
+                int ref_p_no_m = pddlHMHeurDynProg(2, &C.strips,
+                                                   &plan.state[i],
+                                                   NULL, &C.err);
+                assert(h2_p_no_m == ref_p_no_m);
+                assert(h2_p >= h2_p_no_m);
+            }
+            pddlPlanFileStripsFree(&plan);
+        }
+    }
+
+    pddlH2HeurGBFFree(&h_mutex);
+    pddlH2HeurGBFFree(&h_no_mutex);
+    pddlMutexPairsFree(&mutex);
+}
+
+/*
+ * Compare the GBF-based h^2 heuristic against the bitset-based one on the
+ * initial state, with and without h^2 fw/bw mutexes. This is much cheaper
+ * than the comparison with the dynamic programming, so it runs also on
+ * tasks where the reference implementation is disabled.
+ */
+TEST(h2_heur_gbf_cmp_bitset, strips)
+{
+    pddl_mutex_pairs_t mutex;
+    gbfInitMutex(&mutex);
+
+    pddl_h2_heur_gbf_t gbf;
+    pddl_h2_heur_bitset_t bitset;
+
+    int ret = pddlH2HeurGBFInit(&gbf, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    ret = pddlH2HeurBitsetInit(&bitset, &C.strips, NULL, &C.err);
+    assert(ret == 0);
+    int h_gbf = pddlH2HeurGBF(&gbf, &C.strips.init);
+    int h_bitset = pddlH2HeurBitset(&bitset, &C.strips.init);
+    assert(h_gbf == h_bitset);
+    if (C.optimal_cost >= 0)
+        assert(h_gbf <= C.optimal_cost);
+    pddlH2HeurGBFFree(&gbf);
+    pddlH2HeurBitsetFree(&bitset);
+
+    ret = pddlH2HeurGBFInit(&gbf, &C.strips, &mutex, &C.err);
+    assert(ret == 0);
+    ret = pddlH2HeurBitsetInit(&bitset, &C.strips, &mutex, &C.err);
+    assert(ret == 0);
+    int h_gbf_m = pddlH2HeurGBF(&gbf, &C.strips.init);
+    int h_bitset_m = pddlH2HeurBitset(&bitset, &C.strips.init);
+    assert(h_gbf_m == h_bitset_m);
+    assert(h_gbf_m >= h_gbf);
+    if (C.optimal_cost >= 0)
+        assert(h_gbf_m <= C.optimal_cost);
+    pddlH2HeurGBFFree(&gbf);
+    pddlH2HeurBitsetFree(&bitset);
+
+    pddlMutexPairsFree(&mutex);
+}
