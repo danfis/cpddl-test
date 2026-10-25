@@ -96,6 +96,7 @@ TESTS += fm_num_exp_fold
 TESTS += pddl_props
 TESTS += pddl_init_state
 TESTS += hfunc
+TESTS += build_info
 #TESTS += asnets
 
 OBJS := $(foreach test,$(TESTS),.objs/$(test).o)
