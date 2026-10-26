@@ -28,7 +28,7 @@ TEST(lifted_heur_hadd_unit_cost, pddl_unit_cost)
     assert(ret == 0);
 
     pddl_lifted_heur_relaxed_t h;
-    ret = pddlLiftedHAddInit(&h, &C.pddl, 0, &C.err);
+    ret = pddlLiftedHAddInit(&h, &C.pddl, &C.err);
     assert(ret == 0);
 
     PDDL_ISET(state);
@@ -94,7 +94,7 @@ TEST(lifted_heur_hmax_unit_cost, pddl_unit_cost)
     assert(ret == 0);
 
     pddl_lifted_heur_relaxed_t h;
-    ret = pddlLiftedHMaxInit(&h, &C.pddl, 0, &C.err);
+    ret = pddlLiftedHMaxInit(&h, &C.pddl, &C.err);
     assert(ret == 0);
 
     PDDL_ISET(state);

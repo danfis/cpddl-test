@@ -154,6 +154,22 @@ static int arule(pddl_datalog_t *dl,
     return id;
 }
 
+/** Same as rule(), but with the weight WEIGHT and the annotation
+ *  ANN_FN(ANN_DATA) */
+static int awrule(pddl_datalog_t *dl,
+                  int weight,
+                  pddl_datalog_annotation_fn ann_fn,
+                  void *ann_data,
+                  atom_spec_t head,
+                  int body_size, ...)
+{
+    va_list ap;
+    va_start(ap, body_size);
+    int id = addRuleV(dl, weight, ann_fn, ann_data, head, body_size, ap);
+    va_end(ap);
+    return id;
+}
+
 /** Adds body-less rule ATOM */
 static int fact(pddl_datalog_t *dl, atom_spec_t atom)
 {
@@ -164,7 +180,7 @@ static void addFactToDB(pddl_datalog_t *dl,
                         atom_spec_t atom,
                         const pddl_cost_t *weight)
 {
-    pddlDatalogAddFactToDB(dl, atom.pred, atom.arg, weight);
+    pddlDatalogDBAddFact(dl, atom.pred, atom.arg, weight);
 }
 
 static void toNormalForm(pddl_datalog_t *dl)
@@ -172,6 +188,43 @@ static void toNormalForm(pddl_datalog_t *dl)
     pddl_err_t err = PDDL_ERR_INIT;
     int ret = pddlDatalogToNormalForm(dl, &err);
     assert(ret == 0);
+}
+
+/** Computes (or continues computing) the canonical model and asserts that
+ *  it returns EXPECTED */
+static void canonicalModel(pddl_datalog_t *dl,
+                           pddl_datalog_canonical_model_status_t expected)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_datalog_canonical_model_status_t st;
+    st = pddlDatalogCanonicalModel(dl, &err);
+    switch (st){
+    case PDDL_DATALOG_CANONICAL_MODEL_ERR:
+        assert(st == expected);
+        assert(pddlErrIsSet(&err));
+        break;
+    case PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED:
+    case PDDL_DATALOG_CANONICAL_MODEL_OK:
+        assert(st == expected);
+        assert(!pddlErrIsSet(&err));
+        break;
+    }
+}
+
+/** Computes the canonical model and asserts that it returns OK */
+static void canonicalModelOK(pddl_datalog_t *dl)
+{
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_OK);
+}
+
+/** Asserts that the weight of the fact of the goal predicate GOAL is
+ *  EXPECTED */
+static void assertGoalWeight(pddl_datalog_t *dl, int goal, int expected)
+{
+    pddl_cost_t weight;
+    int ret = pddlDatalogDBGoalWeight(dl, goal, &weight);
+    assert(ret == 0);
+    assert(weight.cost == expected && weight.zero_cost == 0);
 }
 
 /** Set of facts represented as strings */
@@ -229,39 +282,22 @@ static void assertStrEq(const char *got, const char *expected)
     assert(strcmp(got, expected) == 0);
 }
 
-static void factCB(int pred, int arity, const int *arg, void *ud)
-{
-    factsAdd(ud, pred, arity, arg, NULL);
-}
-
-static void weightedFactCB(int pred,
-                           int arity,
-                           const int *arg,
-                           const pddl_cost_t *weight,
-                           void *ud)
+static void factCB(int pred,
+                   int arity,
+                   const int *arg,
+                   const pddl_cost_t *weight,
+                   void *ud)
 {
     factsAdd(ud, pred, arity, arg, weight);
 }
 
-/** Asserts that the facts of PRED are EXPECTED */
+/** Asserts that the facts of PRED (with their weights in weighted
+ *  programs) are EXPECTED */
 static void assertFacts(pddl_datalog_t *dl, int pred, const char *expected)
 {
     facts_t fs;
     fs.size = 0;
-    pddlDatalogFactsFromCanonicalModel(dl, pred, factCB, &fs);
-    char out[STR_SIZE];
-    factsJoin(&fs, out);
-    assertStrEq(out, expected);
-}
-
-/** Asserts that the facts of PRED with their weights are EXPECTED */
-static void assertWeightedFacts(pddl_datalog_t *dl,
-                                int pred,
-                                const char *expected)
-{
-    facts_t fs;
-    fs.size = 0;
-    pddlDatalogFactsFromWeightedCanonicalModel(dl, pred, weightedFactCB, &fs);
+    pddlDatalogDBForEachFact(dl, pred, factCB, &fs);
     char out[STR_SIZE];
     factsJoin(&fs, out);
     assertStrEq(out, expected);
@@ -272,7 +308,7 @@ static int dbSize(pddl_datalog_t *dl)
 {
     int pred, arity, arg[MAX_ARITY];
     int size = 0;
-    while (pddlDatalogFact(dl, size, &pred, &arity, arg, NULL) == 0)
+    while (pddlDatalogDBFact(dl, size, &pred, &arity, arg, NULL) == 0)
         ++size;
     return size;
 }
@@ -285,7 +321,7 @@ static void assertDB(pddl_datalog_t *dl, const char *expected)
     int size = dbSize(dl);
     for (int id = 0; id < size; ++id){
         int pred, arity, arg[MAX_ARITY];
-        int ret = pddlDatalogFact(dl, id, &pred, &arity, arg, NULL);
+        int ret = pddlDatalogDBFact(dl, id, &pred, &arity, arg, NULL);
         assert(ret == 0);
         factsAdd(&fs, pred, arity, arg, NULL);
     }
@@ -336,7 +372,7 @@ static void annotation(pddl_datalog_t *dl,
     ann_out_t *out = d->out;
     int pred, arity, arg[MAX_ARITY];
 
-    int st = pddlDatalogFact(dl, head_fact_id, &pred, &arity, arg, NULL);
+    int st = pddlDatalogDBFact(dl, head_fact_id, &pred, &arity, arg, NULL);
     assert(st == 0);
     out->len += snprintf(out->buf + out->len, STR_SIZE - out->len,
                          "%s | (%c", d->label, pred);
@@ -349,7 +385,7 @@ static void annotation(pddl_datalog_t *dl,
     facts_t fs;
     fs.size = 0;
     PDDL_ISET_FOR_EACH(body_fact_ids, fact_id){
-        int st = pddlDatalogFact(dl, fact_id, &pred, &arity, arg, NULL);
+        int st = pddlDatalogDBFact(dl, fact_id, &pred, &arity, arg, NULL);
         assert(st == 0);
         factsAdd(&fs, pred, arity, arg, NULL);
     }
@@ -399,8 +435,7 @@ TEST_ONCE(datalog)
                   "R(X, Y, W) :- P(X, Y), Q(Y, Z), S(Z, W).\n");
 
     toNormalForm(dl);
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertProgram(dl,
                   "P(1, 2).\n"
                   "Q(2, 1).\n"
@@ -461,8 +496,7 @@ TEST_ONCE(datalog_annotated)
                   "G() :- R(1, 2, 2).; ann_size = 1\n");
 
     toNormalForm(dl);
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertProgram(dl,
                   "P(1, 2).\n"
                   "Q(2, 1).\n"
@@ -548,16 +582,15 @@ TEST_ONCE(datalog_canonical_model)
     graph_t g;
     graphProgram(dl, &g);
     toNormalForm(dl);
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertGraphModel(dl, &g);
     pddlDatalogDel(dl);
 }
 
 /*
  * Facts added to the database after the canonical model are processed by
- * pddlDatalogCanonicalModelCont(); continuing without new facts or with
- * already known facts changes nothing.
+ * the next call of pddlDatalogCanonicalModel(); continuing without new
+ * facts or with already known facts changes nothing.
  */
 TEST_ONCE(datalog_canonical_model_cont)
 {
@@ -576,29 +609,28 @@ TEST_ONCE(datalog_canonical_model_cont)
     rule(dl, ATOM(T, X, Z), 2, ATOM(T, X, Y), ATOM(E, Y, Z));
     toNormalForm(dl);
 
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, T, "Tab");
     assert(dbSize(dl) == 2);
 
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, T, "Tab");
     assert(dbSize(dl) == 2);
 
     addFactToDB(dl, ATOM(E, b, c), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, E, "Eab Ebc");
     assertFacts(dl, T, "Tab Tac Tbc");
     assert(dbSize(dl) == 5);
 
     addFactToDB(dl, ATOM(E, a, b), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, T, "Tab Tac Tbc");
     assert(dbSize(dl) == 5);
 
     addFactToDB(dl, ATOM(E, c, d), NULL);
     addFactToDB(dl, ATOM(E, d, a), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, E, "Eab Ebc Ecd Eda");
     assertFacts(dl, T, "Taa Tab Tac Tad Tba Tbb Tbc Tbd"
                        " Tca Tcb Tcc Tcd Tda Tdb Tdc Tdd");
@@ -662,7 +694,7 @@ TEST_ONCE(datalog_normal_form)
                   "_p11(Z) :- A(X, Y), B(Y, Z).\n");
 
     pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, H, "Had Hbd");
     assertFacts(dl, I, "Ia Ib");
     assertFacts(dl, J, "Jc");
@@ -688,15 +720,16 @@ TEST_ONCE(datalog_normal_form)
 
 /** Predicates of the program created by weightedProgram() */
 struct weighted {
-    int At, L, K, G;
+    int At, L, K, P, Q, G;
     int a, b, c, d;
 };
 typedef struct weighted weighted_t;
 
 /** Creates a weighted program: At(a) (unless AT_A_IN_DB is true, then it
  *  must be added to the database), links a -> b -> c, a -> c, moving along
- *  a link costs 1, a key at a reached node costs 2, and the goal requires
- *  At(b), At(c), and K(c) (or At(d) if REACHABLE_GOAL is false) */
+ *  a link costs 1, a key at a reached node costs 2, P costs 10 more than
+ *  K(c), Q follows from P for free, and the goal requires At(b), At(c), and
+ *  K(c) (or At(d) if REACHABLE_GOAL is false) */
 static void weightedProgram(pddl_datalog_t *dl,
                             weighted_t *w,
                             pddl_bool_t at_a_in_db,
@@ -705,6 +738,8 @@ static void weightedProgram(pddl_datalog_t *dl,
     w->At = addPred(dl, 1, "A");
     w->L = addPred(dl, 2, "L");
     w->K = addPred(dl, 1, "K");
+    w->P = addPred(dl, 0, "P");
+    w->Q = addPred(dl, 0, "Q");
     w->G = addGoalPred(dl, "G");
     w->a = addConst(dl, "a");
     w->b = addConst(dl, "b");
@@ -720,6 +755,8 @@ static void weightedProgram(pddl_datalog_t *dl,
     fact(dl, ATOM(w->L, w->a, w->c));
     wrule(dl, 1, ATOM(w->At, Y), 2, ATOM(w->At, X), ATOM(w->L, X, Y));
     wrule(dl, 2, ATOM(w->K, X), 1, ATOM(w->At, X));
+    wrule(dl, 10, ATOM0(w->P), 1, ATOM(w->K, w->c));
+    rule(dl, ATOM0(w->Q), 1, ATOM0(w->P));
     if (reachable_goal){
         rule(dl, ATOM0(w->G), 3,
              ATOM(w->At, w->b), ATOM(w->At, w->c), ATOM(w->K, w->c));
@@ -729,82 +766,83 @@ static void weightedProgram(pddl_datalog_t *dl,
     toNormalForm(dl);
 }
 
-/*
- * Weighted canonical model with the sum of weights: the goal weight is the
- * h^add value; an unreachable goal is reported and all reachable facts get
- * their final weights.
- */
-TEST_ONCE(datalog_weighted_add)
+/** Weighted canonical model of the program from weightedProgram() with
+ *  the aggregation TYPE, GOAL is the expected weight of the goal */
+static void weightedTest(pddl_datalog_weight_type_t type, int goal)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
     weighted_t w;
     pddl_cost_t weight;
 
-    pddl_datalog_t *dl = pddlDatalogNew();
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
     weightedProgram(dl, &w, pddl_false, pddl_true);
-    int ret = pddlDatalogWeightedCanonicalModelAdd(dl, &weight, 0, &err);
-    assert(ret == 0);
-    assert(weight.cost == 5 && weight.zero_cost == 0);
-    pddlDatalogDel(dl);
-
-    // At(a) added to the database with zero weight
-    dl = pddlDatalogNew();
-    weightedProgram(dl, &w, pddl_true, pddl_true);
-    pddlDatalogResetDB(dl);
-    addFactToDB(dl, ATOM(w.At, w.a), &pddl_cost_zero);
-    ret = pddlDatalogWeightedCanonicalModelAdd(dl, &weight, 0, &err);
-    assert(ret == 0);
-    assert(weight.cost == 5 && weight.zero_cost == 0);
-    pddlDatalogDel(dl);
-
-    dl = pddlDatalogNew();
-    weightedProgram(dl, &w, pddl_false, pddl_false);
-    ret = pddlDatalogWeightedCanonicalModelAdd(dl, &weight, 0, &err);
+    int ret = pddlDatalogDBGoalWeight(dl, w.G, &weight);
     assert(ret == -1);
-    assertWeightedFacts(dl, w.At, "Aa:0 Ab:1 Ac:1");
-    assertWeightedFacts(dl, w.L, "Lab:0 Lac:0 Lbc:0");
-    assertWeightedFacts(dl, w.K, "Ka:2 Kb:3 Kc:3");
-    assertWeightedFacts(dl, w.G, "");
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, goal);
+    // The computation stopped at the goal: P is queued, but Q (derived
+    // from P) is not
+    assertFacts(dl, w.P, "P:13");
+    assertFacts(dl, w.Q, "");
+    // The goal was already reached, so nothing more is computed
+    int size = dbSize(dl);
+    canonicalModelOK(dl);
+    assert(dbSize(dl) == size);
+    assertFacts(dl, w.Q, "");
+    assertGoalWeight(dl, w.G, goal);
+    pddlDatalogDel(dl);
+
+    // At(a) added to the database with zero weight, given explicitly or
+    // as NULL, with or without resetting the database first
+    for (int i = 0; i < 2; ++i){
+        dl = pddlDatalogNewWeighted(type);
+        weightedProgram(dl, &w, pddl_true, pddl_true);
+        if (i == 0){
+            pddlDatalogDBReset(dl);
+            addFactToDB(dl, ATOM(w.At, w.a), &pddl_cost_zero);
+        }else{
+            addFactToDB(dl, ATOM(w.At, w.a), NULL);
+        }
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, w.G, goal);
+        pddlDatalogDel(dl);
+    }
+
+    // Unreachable goal: all reachable facts get their final weights
+    dl = pddlDatalogNewWeighted(type);
+    weightedProgram(dl, &w, pddl_false, pddl_false);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    ret = pddlDatalogDBGoalWeight(dl, w.G, &weight);
+    assert(ret == -1);
+    assertFacts(dl, w.At, "Aa:0 Ab:1 Ac:1");
+    assertFacts(dl, w.L, "Lab:0 Lac:0 Lbc:0");
+    assertFacts(dl, w.K, "Ka:2 Kb:3 Kc:3");
+    assertFacts(dl, w.P, "P:13");
+    assertFacts(dl, w.Q, "Q:13");
+    assertFacts(dl, w.G, "");
     pddlDatalogDel(dl);
 }
 
 /*
+ * Weighted canonical model with the sum of weights: the goal weight is the
+ * h^add value, the computation stops at the goal and does not continue
+ * when called again; an unreachable goal is reported and all reachable
+ * facts get their final weights.
+ */
+TEST_ONCE(datalog_weighted_add)
+{
+    weightedTest(PDDL_DATALOG_WEIGHT_ADD, 5);
+}
+
+/*
  * Weighted canonical model with the maximum of weights: the goal weight is
- * the h^max value; an unreachable goal is reported and all reachable facts
- * get their final weights.
+ * the h^max value, the computation stops at the goal and does not continue
+ * when called again; an unreachable goal is reported and all reachable
+ * facts get their final weights.
  */
 TEST_ONCE(datalog_weighted_max)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
-    weighted_t w;
-    pddl_cost_t weight;
-
-    pddl_datalog_t *dl = pddlDatalogNew();
-    weightedProgram(dl, &w, pddl_false, pddl_true);
-    int ret = pddlDatalogWeightedCanonicalModelMax(dl, &weight, 0, &err);
-    assert(ret == 0);
-    assert(weight.cost == 3 && weight.zero_cost == 0);
-    pddlDatalogDel(dl);
-
-    // At(a) added to the database with zero weight
-    dl = pddlDatalogNew();
-    weightedProgram(dl, &w, pddl_true, pddl_true);
-    pddlDatalogResetDB(dl);
-    addFactToDB(dl, ATOM(w.At, w.a), &pddl_cost_zero);
-    ret = pddlDatalogWeightedCanonicalModelMax(dl, &weight, 0, &err);
-    assert(ret == 0);
-    assert(weight.cost == 3 && weight.zero_cost == 0);
-    pddlDatalogDel(dl);
-
-    dl = pddlDatalogNew();
-    weightedProgram(dl, &w, pddl_false, pddl_false);
-    ret = pddlDatalogWeightedCanonicalModelMax(dl, &weight, 0, &err);
-    assert(ret == -1);
-    assertWeightedFacts(dl, w.At, "Aa:0 Ab:1 Ac:1");
-    assertWeightedFacts(dl, w.L, "Lab:0 Lac:0 Lbc:0");
-    assertWeightedFacts(dl, w.K, "Ka:2 Kb:3 Kc:3");
-    assertWeightedFacts(dl, w.G, "");
-    pddlDatalogDel(dl);
+    weightedTest(PDDL_DATALOG_WEIGHT_MAX, 3);
 }
 
 /** Predicates of the program created by negProgram() */
@@ -877,8 +915,7 @@ TEST_ONCE(datalog_neg_static)
     neg_t n;
     negProgram(dl, &n);
     toNormalForm(dl);
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertNegModel(dl, &n);
     pddlDatalogDel(dl);
 }
@@ -889,7 +926,6 @@ TEST_ONCE(datalog_neg_static)
  */
 TEST_ONCE(datalog_rm_rules)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
     pddl_datalog_t *dl = pddlDatalogNew();
     int P = addPred(dl, 1, "P");
     int Q = addPred(dl, 1, "Q");
@@ -904,7 +940,7 @@ TEST_ONCE(datalog_rm_rules)
     assert(rule(dl, ATOM(R, X), 1, ATOM(Q, X)) == 3);
     assert(rule(dl, ATOM(S, X), 1, ATOM(P, X)) == 4);
 
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, P, "Pa Pb");
     assertFacts(dl, Q, "Qa Qb");
     assertFacts(dl, R, "Ra Rb");
@@ -912,7 +948,7 @@ TEST_ONCE(datalog_rm_rules)
 
     // Removes S(X) :- P(X).
     pddlDatalogRmLastRules(dl, 1);
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, P, "Pa Pb");
     assertFacts(dl, Q, "Qa Qb");
     assertFacts(dl, R, "Ra Rb");
@@ -924,33 +960,32 @@ TEST_ONCE(datalog_rm_rules)
     pddlISetAdd(&rm, 2);
     pddlDatalogRmRules(dl, &rm);
     pddlISetFree(&rm);
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, P, "Pb");
     assertFacts(dl, Q, "");
     assertFacts(dl, R, "");
 
     // The remaining rules are P(b) and R(X) :- Q(X)
     assert(rule(dl, ATOM(Q, X), 1, ATOM(P, X)) == 2);
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, P, "Pb");
     assertFacts(dl, Q, "Qb");
     assertFacts(dl, R, "Rb");
 
     // Removing more rules than there are removes all of them
     pddlDatalogRmLastRules(dl, 10);
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assert(dbSize(dl) == 0);
     pddlDatalogDel(dl);
 }
 
 /*
- * Facts added to the database with pddlDatalogAddFactToDB(), reading facts
- * with pddlDatalogFact(), and clearing the database with
- * pddlDatalogResetDB().
+ * Facts added to the database with pddlDatalogDBAddFact() (which
+ * initializes the database if necessary), reading facts with
+ * pddlDatalogDBFact(), and clearing the database with pddlDatalogDBReset().
  */
 TEST_ONCE(datalog_db)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
     pddl_datalog_t *dl = pddlDatalogNew();
     int E = addPred(dl, 2, "E");
     int T = addPred(dl, 2, "T");
@@ -965,29 +1000,28 @@ TEST_ONCE(datalog_db)
     rule(dl, ATOM(T, X, Z), 2, ATOM(T, X, Y), ATOM(E, Y, Z));
     toNormalForm(dl);
 
-    pddlDatalogResetDB(dl);
     assert(dbSize(dl) == 0);
+    assertFacts(dl, E, "");
     addFactToDB(dl, ATOM(E, b, c), NULL);
     assertDB(dl, "Ebc");
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertDB(dl, "Eab Ebc Tab Tac Tbc");
     assert(dbSize(dl) == 5);
 
     int pred, arity, arg[MAX_ARITY];
-    pddl_cost_t weight;
-    assert(pddlDatalogFact(dl, -1, &pred, &arity, arg, NULL) == -1);
-    assert(pddlDatalogFact(dl, 5, &pred, &arity, arg, NULL) == -1);
-    assert(pddlDatalogFact(dl, 0, &pred, &arity, arg, &weight) == 0);
-    assert(pddlDatalogFact(dl, 4, &pred, &arity, arg, NULL) == 0);
+    assert(pddlDatalogDBFact(dl, -1, &pred, &arity, arg, NULL) == -1);
+    assert(pddlDatalogDBFact(dl, 5, &pred, &arity, arg, NULL) == -1);
+    assert(pddlDatalogDBFact(dl, 0, &pred, &arity, arg, NULL) == 0);
+    assert(pddlDatalogDBFact(dl, 4, &pred, &arity, arg, NULL) == 0);
     assert(arity == 2);
 
-    pddlDatalogResetDB(dl);
+    pddlDatalogDBReset(dl);
     assert(dbSize(dl) == 0);
-    assert(pddlDatalogFact(dl, 0, &pred, &arity, arg, NULL) == -1);
+    assert(pddlDatalogDBFact(dl, 0, &pred, &arity, arg, NULL) == -1);
     assertFacts(dl, E, "");
     assertFacts(dl, T, "");
 
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertDB(dl, "Eab Tab");
     pddlDatalogDel(dl);
 }
@@ -1028,9 +1062,8 @@ static void rollbackProgram(pddl_datalog_t *dl, rollback_t *r)
     rule(dl, ATOM(r->K, Z), 1, ATOM(r->H, X, Z));
     toNormalForm(dl);
 
-    pddl_err_t err = PDDL_ERR_INIT;
-    pddlDatalogCanonicalModel(dl, &err);
-    pddlDatalogSaveStateOfDB(dl);
+    canonicalModelOK(dl);
+    pddlDatalogDBCommit(dl);
 }
 
 static void assertRollbackSaved(pddl_datalog_t *dl, const rollback_t *r)
@@ -1048,7 +1081,6 @@ static void assertRollbackSaved(pddl_datalog_t *dl, const rollback_t *r)
  */
 TEST_ONCE(datalog_rollback)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
     pddl_datalog_t *dl = pddlDatalogNew();
     rollback_t r;
     rollbackProgram(dl, &r);
@@ -1056,27 +1088,27 @@ TEST_ONCE(datalog_rollback)
 
     for (int rep = 0; rep < 2; ++rep){
         addFactToDB(dl, ATOM(r.A, r.a, r.c1), NULL);
-        pddlDatalogCanonicalModelCont(dl, &err);
+        canonicalModelOK(dl);
         assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
-        pddlDatalogRollbackDB(dl);
+        pddlDatalogDBRollback(dl);
         assertRollbackSaved(dl, &r);
 
         addFactToDB(dl, ATOM(r.A, r.b, r.c2), NULL);
         addFactToDB(dl, ATOM(r.A, r.c, r.c1), NULL);
         addFactToDB(dl, ATOM(r.A, r.c, r.c5), NULL);
-        pddlDatalogCanonicalModelCont(dl, &err);
+        canonicalModelOK(dl);
         assertDB(dl, "Ab2 Ac1 Ac5 Bb Bc C11 C22 Hb2 Hc1 K1 K2");
-        pddlDatalogRollbackDB(dl);
+        pddlDatalogDBRollback(dl);
         assertRollbackSaved(dl, &r);
 
         // Rollback without any change
-        pddlDatalogRollbackDB(dl);
+        pddlDatalogDBRollback(dl);
         assertRollbackSaved(dl, &r);
 
         // Facts added without the computation of the canonical model
         addFactToDB(dl, ATOM(r.A, r.a, r.c2), NULL);
         assertDB(dl, "Aa2 C11 C22");
-        pddlDatalogRollbackDB(dl);
+        pddlDatalogDBRollback(dl);
         assertRollbackSaved(dl, &r);
     }
     pddlDatalogDel(dl);
@@ -1091,36 +1123,35 @@ TEST_ONCE(datalog_rollback)
  */
 TEST_ONCE(datalog_rollback_reused_ids)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
     pddl_datalog_t *dl = pddlDatalogNew();
     rollback_t r;
     rollbackProgram(dl, &r);
     assertRollbackSaved(dl, &r);
 
     addFactToDB(dl, ATOM(r.C, r.c1, r.c2), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertDB(dl, "C11 C12 C22");
-    pddlDatalogRollbackDB(dl);
+    pddlDatalogDBRollback(dl);
     assertRollbackSaved(dl, &r);
 
     addFactToDB(dl, ATOM(r.D, r.c5, r.c7), NULL);
     addFactToDB(dl, ATOM(r.A, r.b, r.c1), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertDB(dl, "Ab1 Bb C11 C22 D57 Hb1 K1");
-    pddlDatalogRollbackDB(dl);
+    pddlDatalogDBRollback(dl);
     assertRollbackSaved(dl, &r);
 
     addFactToDB(dl, ATOM(r.A, r.a, r.c1), NULL);
     addFactToDB(dl, ATOM(r.C, r.c1, r.c7), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertDB(dl, "Aa1 Ba C11 C17 C22 Ha1 Ha7 K1 K7");
-    pddlDatalogRollbackDB(dl);
+    pddlDatalogDBRollback(dl);
     assertRollbackSaved(dl, &r);
 
     addFactToDB(dl, ATOM(r.D, r.c5, r.c7), NULL);
     addFactToDB(dl, ATOM(r.D, r.c7, r.c5), NULL);
     addFactToDB(dl, ATOM(r.A, r.b, r.c1), NULL);
-    pddlDatalogCanonicalModelCont(dl, &err);
+    canonicalModelOK(dl);
     assertDB(dl, "Ab1 Bb C11 C22 D57 D75 Hb1 K1");
     pddlDatalogDel(dl);
 }
@@ -1172,12 +1203,11 @@ TEST_ONCE(datalog_annotations)
     out.buf[0] = '\x0';
     ann_data_t ann_move = { "move", &out };
     ann_data_t ann_goal = { "goal", &out };
-    pddl_err_t err = PDDL_ERR_INIT;
 
     pddl_datalog_t *dl = pddlDatalogNew();
     chain_t ch;
     chainProgram(dl, &ch, &ann_move, &ann_goal);
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, ch.At, "Aa Ab Ac");
     assertFacts(dl, ch.G, "G");
     pddlDatalogExecuteAnnotations(dl, ch.G);
@@ -1193,9 +1223,9 @@ TEST_ONCE(datalog_annotations)
     out.buf[0] = '\x0';
     dl = pddlDatalogNew();
     chainProgram(dl, &ch, &ann_move, &ann_goal);
-    pddlDatalogResetDB(dl);
+    pddlDatalogDBReset(dl);
     addFactToDB(dl, ATOM(ch.At, ch.d), NULL);
-    pddlDatalogCanonicalModel(dl, &err);
+    canonicalModelOK(dl);
     assertFacts(dl, ch.At, "Aa Ab Ac Ad");
     pddlDatalogExecuteAnnotations(dl, ch.G);
     assertStrEq(out.buf,
@@ -1228,6 +1258,176 @@ TEST_ONCE(datalog_gringo)
     ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
     assert(ret == 0);
     assertNegModel(dl, &n);
+    // The database contains the whole model, nothing is added
+    int size = dbSize(dl);
+    canonicalModelOK(dl);
+    assert(dbSize(dl) == size);
+    assertNegModel(dl, &n);
     pddlDatalogDel(dl);
 #endif /* PDDL_CLINGO */
+}
+
+/*
+ * Gringo supports only unweighted programs.
+ */
+TEST_ONCE(datalog_gringo_weighted)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    graph_t g;
+    graphProgram(dl, &g);
+    int ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    pddlErrClear(&err);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Whether the initial facts were inserted is a part of the committed state:
+ * after a rollback to a commit made before the first computation of the
+ * canonical model, they are inserted again by the next computation; after
+ * a rollback to a commit made after it, they stay in the database.
+ */
+TEST_ONCE(datalog_initial_facts_commit)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int E = addPred(dl, 2, "E");
+    int T = addPred(dl, 2, "T");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(E, a, b));
+    rule(dl, ATOM(T, X, Y), 1, ATOM(E, X, Y));
+    rule(dl, ATOM(T, X, Z), 2, ATOM(T, X, Y), ATOM(E, Y, Z));
+    toNormalForm(dl);
+
+    addFactToDB(dl, ATOM(E, b, c), NULL);
+    pddlDatalogDBCommit(dl);
+    for (int rep = 0; rep < 2; ++rep){
+        assertDB(dl, "Ebc");
+        canonicalModelOK(dl);
+        assertDB(dl, "Eab Ebc Tab Tac Tbc");
+        pddlDatalogDBRollback(dl);
+    }
+    assertDB(dl, "Ebc");
+
+    pddlDatalogDBReset(dl);
+    canonicalModelOK(dl);
+    assertDB(dl, "Eab Tab");
+    pddlDatalogDBCommit(dl);
+    addFactToDB(dl, ATOM(E, b, c), NULL);
+    canonicalModelOK(dl);
+    assertDB(dl, "Eab Ebc Tab Tac Tbc");
+    pddlDatalogDBRollback(dl);
+    assertDB(dl, "Eab Tab");
+    canonicalModelOK(dl);
+    assertDB(dl, "Eab Tab");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * In weighted programs, the derivation tree follows the best weights:
+ * At(c) is first derived by the expensive teleport from At(a), then its
+ * weight is improved by the move from At(b), so the annotations report the
+ * move.
+ */
+TEST_ONCE(datalog_weighted_annotations)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    for (int ti = 0; ti < 2; ++ti){
+        ann_out_t out;
+        out.len = 0;
+        out.buf[0] = '\x0';
+        ann_data_t ann_move = { "move", &out };
+        ann_data_t ann_teleport = { "teleport", &out };
+        ann_data_t ann_goal = { "goal", &out };
+
+        pddl_datalog_t *dl = pddlDatalogNewWeighted(types[ti]);
+        int At = addPred(dl, 1, "A");
+        int L = addPred(dl, 2, "L");
+        int T = addPred(dl, 2, "T");
+        int G = addGoalPred(dl, "G");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        int c = addConst(dl, "c");
+        int X = pddlDatalogAddVar(dl, "X");
+        int Y = pddlDatalogAddVar(dl, "Y");
+        fact(dl, ATOM(At, a));
+        fact(dl, ATOM(L, a, b));
+        fact(dl, ATOM(L, b, c));
+        fact(dl, ATOM(T, a, c));
+        awrule(dl, 1, annotation, &ann_move, ATOM(At, Y), 2,
+               ATOM(At, X), ATOM(L, X, Y));
+        awrule(dl, 5, annotation, &ann_teleport, ATOM(At, Y), 2,
+               ATOM(At, X), ATOM(T, X, Y));
+        arule(dl, annotation, &ann_goal, ATOM0(G), 1, ATOM(At, c));
+        toNormalForm(dl);
+
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, G, 2);
+        pddlDatalogExecuteAnnotations(dl, G);
+        assertStrEq(out.buf,
+                    "move | (A b) :- (A a) (L a b).\n"
+                    "move | (A c) :- (A b) (L b c).\n"
+                    "goal | (G) :- (A c).\n");
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * A rule with a non-zero weight cannot be added to an unweighted program.
+ */
+TEST_PANIC_ONCE(datalog_panic_rule_weight_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    wrule(dl, 1, ATOM(P, a), 0);
+}
+
+/*
+ * Facts with weights cannot be added to the database of an unweighted
+ * program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_fact_weight_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    addFactToDB(dl, ATOM(P, a), &pddl_cost_zero);
+}
+
+/*
+ * Facts of unweighted programs cannot be read with weights.
+ */
+TEST_PANIC_ONCE(datalog_panic_fact_weight_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    canonicalModelOK(dl);
+    int pred, arity, arg[1];
+    pddl_cost_t weight;
+    int ret = pddlDatalogDBFact(dl, 0, &pred, &arity, arg, &weight);
+    assert(ret == 0);
+}
+
+/*
+ * Unweighted programs have no goal weights.
+ */
+TEST_PANIC_ONCE(datalog_panic_goal_weight_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int G = addGoalPred(dl, "G");
+    fact(dl, ATOM0(G));
+    canonicalModelOK(dl);
+    pddl_cost_t weight;
+    int ret = pddlDatalogDBGoalWeight(dl, G, &weight);
+    assert(ret == 0);
 }
