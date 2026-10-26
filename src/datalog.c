@@ -170,6 +170,23 @@ static int awrule(pddl_datalog_t *dl,
     return id;
 }
 
+/** Same as rule(), but with the weight W (including its .zero_cost) */
+static int cwrule(pddl_datalog_t *dl,
+                  const pddl_cost_t *w,
+                  atom_spec_t head,
+                  int body_size, ...)
+{
+    pddl_datalog_rule_t rule;
+    ruleInit(dl, &rule, head);
+    va_list ap;
+    va_start(ap, body_size);
+    for (int i = 0; i < body_size; ++i)
+        ruleAddBody(dl, &rule, va_arg(ap, atom_spec_t));
+    va_end(ap);
+    pddlDatalogRuleSetWeight(dl, &rule, w);
+    return ruleAdd(dl, &rule);
+}
+
 /** Adds body-less rule ATOM */
 static int fact(pddl_datalog_t *dl, atom_spec_t atom)
 {
@@ -906,6 +923,148 @@ TEST_ONCE(datalog_weighted_reset_max)
     weightedResetTest(PDDL_DATALOG_WEIGHT_MAX, 3, 3);
 }
 
+/** Weighted body-less rules with the aggregation TYPE: GOAL is the expected
+ *  weight of the goal */
+static void weightedInitialFactsTest(pddl_datalog_weight_type_t type,
+                                     int goal)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    int A = addPred(dl, 1, "A");
+    int B = addPred(dl, 1, "B");
+    int G = addGoalPred(dl, "G");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+
+    // A(a) is an initial fact with the weight 5, but it is also derived
+    // from B(b) with the weight 2
+    wrule(dl, 5, ATOM(A, a), 0);
+    fact(dl, ATOM(B, b));
+    // B(a) has two body-less rules, the lower weight wins
+    wrule(dl, 4, ATOM(B, a), 0);
+    wrule(dl, 2, ATOM(B, a), 0);
+    wrule(dl, 2, ATOM(A, a), 1, ATOM(B, b));
+    wrule(dl, 1, ATOM(A, X), 1, ATOM(B, X));
+    rule(dl, ATOM0(G), 2, ATOM(A, a), ATOM(A, b));
+    toNormalForm(dl);
+
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, G, goal);
+    assertFacts(dl, A, "Aa:2 Ab:1");
+    assertFacts(dl, B, "Ba:2 Bb:0");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Weighted body-less rules with the sum of weights: an initial fact gets
+ * the weight of its rule (the lowest one if it has more rules), and the
+ * weight decreases if the fact is derived more cheaply.
+ */
+TEST_ONCE(datalog_weighted_initial_facts_add)
+{
+    weightedInitialFactsTest(PDDL_DATALOG_WEIGHT_ADD, 3);
+}
+
+/*
+ * Weighted body-less rules with the maximum of weights: an initial fact
+ * gets the weight of its rule (the lowest one if it has more rules), and
+ * the weight decreases if the fact is derived more cheaply.
+ */
+TEST_ONCE(datalog_weighted_initial_facts_max)
+{
+    weightedInitialFactsTest(PDDL_DATALOG_WEIGHT_MAX, 2);
+}
+
+/** The .zero_cost component of the weights with the aggregation TYPE: T is
+ *  the expected representation of the fact T */
+static void weightedZeroCostTest(pddl_datalog_weight_type_t type,
+                                 const char *t)
+{
+    pddl_cost_t z;
+    pddlCostSetOp(&z, 0);
+    pddl_cost_t one;
+    pddlCostSetOp(&one, 1);
+
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    int S = addPred(dl, 0, "S");
+    int P = addPred(dl, 0, "P");
+    int Q = addPred(dl, 0, "Q");
+    int R = addPred(dl, 0, "R");
+    int G = addPred(dl, 0, "G");
+    int T = addPred(dl, 0, "T");
+    fact(dl, ATOM0(S));
+    cwrule(dl, &z, ATOM0(P), 1, ATOM0(S));
+    cwrule(dl, &z, ATOM0(Q), 1, ATOM0(P));
+    cwrule(dl, &one, ATOM0(R), 1, ATOM0(S));
+    // Three zero-cost actions are cheaper than one action with cost 1
+    cwrule(dl, &z, ATOM0(G), 1, ATOM0(Q));
+    rule(dl, ATOM0(G), 1, ATOM0(R));
+    // Both zero-cost body facts are aggregated
+    cwrule(dl, &z, ATOM0(T), 2, ATOM0(Q), ATOM0(P));
+    toNormalForm(dl);
+
+    // No goal predicate, so the whole model is computed
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    assertFacts(dl, S, "S:0");
+    assertFacts(dl, P, "P:0~1");
+    assertFacts(dl, Q, "Q:0~2");
+    assertFacts(dl, R, "R:1");
+    assertFacts(dl, G, "G:0~3");
+    assertFacts(dl, T, t);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Weights with the .zero_cost component (pddlCostSetOp() with zero cost)
+ * and the sum of weights: .zero_cost is summed, and it is compared only
+ * after .cost.
+ */
+TEST_ONCE(datalog_weighted_zero_cost_add)
+{
+    weightedZeroCostTest(PDDL_DATALOG_WEIGHT_ADD, "T:0~4");
+}
+
+/*
+ * Weights with the .zero_cost component (pddlCostSetOp() with zero cost)
+ * and the maximum of weights: the maximum takes .zero_cost into account,
+ * and it is compared only after .cost.
+ */
+TEST_ONCE(datalog_weighted_zero_cost_max)
+{
+    weightedZeroCostTest(PDDL_DATALOG_WEIGHT_MAX, "T:0~3");
+}
+
+/*
+ * With two goal predicates, the computation stops at the first goal fact
+ * popped from the queue: pddlDatalogDBGoalWeight() returns its weight and
+ * -1 for the other goal, which was not derived yet, and a further call
+ * returns immediately.
+ */
+TEST_ONCE(datalog_weighted_two_goals)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int S = addPred(dl, 0, "S");
+    int P = addPred(dl, 0, "P");
+    int G = addGoalPred(dl, "G");
+    int H = addGoalPred(dl, "H");
+    fact(dl, ATOM0(S));
+    wrule(dl, 1, ATOM0(G), 1, ATOM0(S));
+    wrule(dl, 5, ATOM0(P), 1, ATOM0(S));
+    wrule(dl, 1, ATOM0(H), 1, ATOM0(P));
+    toNormalForm(dl);
+
+    for (int rep = 0; rep < 2; ++rep){
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, G, 1);
+        pddl_cost_t weight;
+        int ret = pddlDatalogDBGoalWeight(dl, H, &weight);
+        assert(ret == -1);
+        assertFacts(dl, P, "P:5");
+        assertFacts(dl, H, "");
+    }
+    pddlDatalogDel(dl);
+}
+
 /** Predicates of the program created by negProgram() */
 struct neg {
     int T, S, R, E, H, N, J;
@@ -979,6 +1138,74 @@ TEST_ONCE(datalog_neg_static)
     canonicalModelOK(dl);
     assertNegModel(dl, &n);
     pddlDatalogDel(dl);
+}
+
+/** Negative static atoms in a weighted program with the aggregation TYPE */
+static void weightedNegStaticTest(pddl_datalog_weight_type_t type)
+{
+    // The model of negProgram() is the same as in the unweighted program
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    neg_t n;
+    negProgram(dl, &n);
+    toNormalForm(dl);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    assertFacts(dl, n.H, "Ha:0 Hc:0");
+    assertFacts(dl, n.N, "Na:0 Nb:0");
+    assertFacts(dl, n.J, "Ja:0 Jb:0");
+    pddlDatalogDel(dl);
+
+    // H(a) is blocked by the negative atom, so the goal is reached only via
+    // the more expensive rule from H(b)
+    dl = pddlDatalogNewWeighted(type);
+    int T = addPred(dl, 1, "T");
+    int S = addPred(dl, 1, "S");
+    int H = addPred(dl, 1, "H");
+    int G = addGoalPred(dl, "G");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(T, a));
+    fact(dl, ATOM(T, b));
+    fact(dl, ATOM(S, a));
+
+    // H(X) :- T(X), !S(X).  with the weight 1
+    pddl_datalog_rule_t r;
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(T, X));
+    ruleAddNeg(dl, &r, ATOM(S, X));
+    pddl_cost_t w = pddl_cost_zero;
+    w.cost = 1;
+    pddlDatalogRuleSetWeight(dl, &r, &w);
+    ruleAdd(dl, &r);
+
+    rule(dl, ATOM0(G), 1, ATOM(H, a));
+    wrule(dl, 3, ATOM0(G), 1, ATOM(H, b));
+    toNormalForm(dl);
+
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, G, 4);
+    assertFacts(dl, H, "Hb:1");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Negative static atoms in a weighted program with the sum of weights: the
+ * model is the same as in the unweighted program, and a rule blocked by a
+ * negative atom does not contribute to the weights.
+ */
+TEST_ONCE(datalog_weighted_neg_static_add)
+{
+    weightedNegStaticTest(PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * Negative static atoms in a weighted program with the maximum of weights:
+ * the model is the same as in the unweighted program, and a rule blocked by
+ * a negative atom does not contribute to the weights.
+ */
+TEST_ONCE(datalog_weighted_neg_static_max)
+{
+    weightedNegStaticTest(PDDL_DATALOG_WEIGHT_MAX);
 }
 
 /*
