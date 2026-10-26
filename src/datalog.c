@@ -845,6 +845,67 @@ TEST_ONCE(datalog_weighted_max)
     weightedTest(PDDL_DATALOG_WEIGHT_MAX, 3);
 }
 
+/** The pattern of src/lifted_heur_relaxed.c on the program from
+ *  weightedProgram() with the aggregation TYPE: GOAL_A and GOAL_B are the
+ *  expected weights of the goal when starting at a and b, respectively */
+static void weightedResetTest(pddl_datalog_weight_type_t type,
+                              int goal_a,
+                              int goal_b)
+{
+    weighted_t w;
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    weightedProgram(dl, &w, pddl_true, pddl_true);
+    for (int rep = 0; rep < 2; ++rep){
+        pddlDatalogDBReset(dl);
+        addFactToDB(dl, ATOM(w.At, w.a), NULL);
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, w.G, goal_a);
+
+        pddlDatalogDBReset(dl);
+        addFactToDB(dl, ATOM(w.At, w.b), NULL);
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, w.G, goal_b);
+
+        pddlDatalogDBReset(dl);
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    }
+
+    // Rollback without a computation since the commit: At(a) is queued and
+    // then dropped, At(b) re-uses its fact ID and weight record
+    pddlDatalogDBReset(dl);
+    pddlDatalogDBCommit(dl);
+    addFactToDB(dl, ATOM(w.At, w.a), NULL);
+    pddlDatalogDBRollback(dl);
+    assert(dbSize(dl) == 0);
+    addFactToDB(dl, ATOM(w.At, w.b), NULL);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, goal_b);
+    assertFacts(dl, w.At, "Ab:0 Ac:1");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Weighted canonical model with the sum of weights computed repeatedly from
+ * different initial states after pddlDatalogDBReset() (as in the lifted
+ * relaxed heuristics), and a rollback dropping the queued facts added
+ * after the commit.
+ */
+TEST_ONCE(datalog_weighted_reset_add)
+{
+    weightedResetTest(PDDL_DATALOG_WEIGHT_ADD, 5, 4);
+}
+
+/*
+ * Weighted canonical model with the maximum of weights computed repeatedly
+ * from different initial states after pddlDatalogDBReset() (as in the
+ * lifted relaxed heuristics), and a rollback dropping the queued facts
+ * added after the commit.
+ */
+TEST_ONCE(datalog_weighted_reset_max)
+{
+    weightedResetTest(PDDL_DATALOG_WEIGHT_MAX, 3, 3);
+}
+
 /** Predicates of the program created by negProgram() */
 struct neg {
     int T, S, R, E, H, N, J;
