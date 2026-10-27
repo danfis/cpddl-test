@@ -330,8 +330,8 @@ static int dbSize(pddl_datalog_t *dl)
     return size;
 }
 
-/** Asserts that all facts in the database are EXPECTED */
-static void assertDB(pddl_datalog_t *dl, const char *expected)
+/** Writes all facts in the database sorted and separated by spaces to OUT */
+static void dbStr(pddl_datalog_t *dl, char *out)
 {
     facts_t fs;
     fs.size = 0;
@@ -342,8 +342,14 @@ static void assertDB(pddl_datalog_t *dl, const char *expected)
         assert(ret == 0);
         factsAdd(&fs, pred, arity, arg, NULL);
     }
-    char out[STR_SIZE];
     factsJoin(&fs, out);
+}
+
+/** Asserts that all facts in the database are EXPECTED */
+static void assertDB(pddl_datalog_t *dl, const char *expected)
+{
+    char out[STR_SIZE];
+    dbStr(dl, out);
     assertStrEq(out, expected);
 }
 
@@ -1444,6 +1450,238 @@ TEST_ONCE(datalog_rollback_reused_ids)
     pddlDatalogDel(dl);
 }
 
+/*
+ * A second commit stores the join index changed since the first commit.
+ * A(a, 1) processed between the commits stays joinable with C(1, 7) added
+ * after any number of rollbacks to the second commit, whereas A(b, 1)
+ * joined into the same part of the index after the second commit is
+ * removed again: its ID is re-used by D(5, 7), which must not be joined
+ * with C(1, 7). Similarly, C(2, 5) added to the part of the index stored by
+ * the first commit is removed again: its ID is re-used by D(5, 7), which
+ * must not be joined with A(b, 2).
+ */
+TEST_ONCE(datalog_commit_twice)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    rollback_t r;
+    rollbackProgram(dl, &r);
+    addFactToDB(dl, ATOM(r.A, r.a, r.c1), NULL);
+    canonicalModelOK(dl);
+    assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
+    pddlDatalogDBCommit(dl);
+
+    for (int rep = 0; rep < 2; ++rep){
+        addFactToDB(dl, ATOM(r.A, r.b, r.c1), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ab1 Ba Bb C11 C22 Ha1 Hb1 K1");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
+
+        addFactToDB(dl, ATOM(r.D, r.c5, r.c7), NULL);
+        addFactToDB(dl, ATOM(r.C, r.c1, r.c7), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ba C11 C17 C22 D57 Ha1 Ha7 K1 K7");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
+
+        addFactToDB(dl, ATOM(r.C, r.c1, r.c7), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ba C11 C17 C22 Ha1 Ha7 K1 K7");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
+
+        addFactToDB(dl, ATOM(r.C, r.c2, r.c5), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ba C11 C22 C25 Ha1 K1");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
+
+        addFactToDB(dl, ATOM(r.D, r.c5, r.c7), NULL);
+        addFactToDB(dl, ATOM(r.A, r.b, r.c2), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ab2 Ba Bb C11 C22 D57 Ha1 Hb2 K1 K2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Parts of the join index created after a commit and emptied by a rollback
+ * are stored by the next commit even if they did not change since: A(a, 5)
+ * and A(b, 7) create the parts for Y = 5 and Y = 7 of H(X, Z) :- A(X, Y),
+ * C(Y, Z), the rollback empties them, and only Y = 5 receives A(c, 5) before
+ * the second commit. A(a, 7) added after the second commit must be removed
+ * from Y = 7 by every rollback: its ID is re-used by D(1, 2), which must not
+ * be joined with C(7, 1).
+ */
+TEST_ONCE(datalog_commit_emptied_projections)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    rollback_t r;
+    rollbackProgram(dl, &r);
+    addFactToDB(dl, ATOM(r.A, r.a, r.c5), NULL);
+    addFactToDB(dl, ATOM(r.A, r.b, r.c7), NULL);
+    canonicalModelOK(dl);
+    assertDB(dl, "Aa5 Ab7 Ba Bb C11 C22");
+    pddlDatalogDBRollback(dl);
+    assertRollbackSaved(dl, &r);
+
+    addFactToDB(dl, ATOM(r.A, r.c, r.c5), NULL);
+    canonicalModelOK(dl);
+    assertDB(dl, "Ac5 Bc C11 C22");
+    pddlDatalogDBCommit(dl);
+
+    for (int rep = 0; rep < 3; ++rep){
+        addFactToDB(dl, ATOM(r.A, r.a, r.c7), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa7 Ac5 Ba Bc C11 C22");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Ac5 Bc C11 C22");
+
+        addFactToDB(dl, ATOM(r.D, r.c1, r.c2), NULL);
+        addFactToDB(dl, ATOM(r.C, r.c7, r.c1), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Ac5 Bc C11 C22 C71 D12");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Ac5 Bc C11 C22");
+
+        addFactToDB(dl, ATOM(r.C, r.c5, r.c2), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Ac5 Bc C11 C22 C52 Hc2 K2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Ac5 Bc C11 C22");
+    }
+    pddlDatalogDel(dl);
+}
+
+/** Maximal number of facts added in datalog_commit_rollback_random */
+#define COMMIT_RANDOM_MAX_ADDED 512
+
+/** Predicates and constants of the program created by commitProgram() */
+struct commit_prog {
+    int E, T, A, H, K;
+    /** Constants 1, 2, 3, 4 */
+    int n[4];
+    /** Constants a, b */
+    int x[2];
+};
+typedef struct commit_prog commit_prog_t;
+
+/** Creates the program with the static fact E(1, 2) and the rules
+ *    T(X, Y) :- E(X, Y).    T(X, Z) :- T(X, Y), E(Y, Z).
+ *    H(X, Z) :- A(X, Y), T(Y, Z).    K(Z) :- H(X, Z).
+ *  Programs created by this function have the same IDs of predicates and
+ *  constants. */
+static void commitProgram(pddl_datalog_t *dl, commit_prog_t *p)
+{
+    p->E = addPred(dl, 2, "E");
+    p->T = addPred(dl, 2, "T");
+    p->A = addPred(dl, 2, "A");
+    p->H = addPred(dl, 2, "H");
+    p->K = addPred(dl, 1, "K");
+    const char *num[4] = { "1", "2", "3", "4" };
+    for (int i = 0; i < 4; ++i)
+        p->n[i] = addConst(dl, num[i]);
+    p->x[0] = addConst(dl, "a");
+    p->x[1] = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+
+    fact(dl, ATOM(p->E, p->n[0], p->n[1]));
+    rule(dl, ATOM(p->T, X, Y), 1, ATOM(p->E, X, Y));
+    rule(dl, ATOM(p->T, X, Z), 2, ATOM(p->T, X, Y), ATOM(p->E, Y, Z));
+    rule(dl, ATOM(p->H, X, Z), 2, ATOM(p->A, X, Y), ATOM(p->T, Y, Z));
+    rule(dl, ATOM(p->K, Z), 1, ATOM(p->H, X, Z));
+    toNormalForm(dl);
+}
+
+/** Writes to OUT the canonical model of the program of commitProgram()
+ *  with the facts ADDED[0], ..., ADDED[NUM_ADDED - 1] computed from
+ *  scratch */
+static void commitReference(const atom_spec_t *added, int num_added, char *out)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    commit_prog_t p;
+    commitProgram(dl, &p);
+    for (int i = 0; i < num_added; ++i)
+        addFactToDB(dl, added[i], NULL);
+    canonicalModelOK(dl);
+    dbStr(dl, out);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A random sequence of added facts E(i, j) and A(x, j), canonical models,
+ * commits, and rollbacks (including commits without the computation of the
+ * canonical model and series of rollbacks to the same commit). Every
+ * canonical model equals the one computed from scratch from the facts
+ * added since the creation of the program and not rolled back, and every
+ * rollback restores the database stored by the last commit.
+ */
+TEST_ONCE(datalog_commit_rollback_random)
+{
+    for (unsigned seed = 1; seed <= 20; ++seed){
+        pddl_rand_t rnd;
+        pddlRandInit(&rnd, seed);
+        pddl_datalog_t *dl = pddlDatalogNew();
+        commit_prog_t p;
+        commitProgram(dl, &p);
+
+        // ADDED[0..NUM_ADDED) are the facts added and not rolled back,
+        // ADDED[0..NUM_COMMITTED) the ones added before the last commit
+        atom_spec_t added[COMMIT_RANDOM_MAX_ADDED];
+        int num_added = 0;
+        int num_committed = -1;
+        int num_commits = 0;
+        int num_rollbacks = 0;
+        char committed_db[STR_SIZE];
+        char db[STR_SIZE];
+        char ref[STR_SIZE];
+        for (int step = 0; step < 400; ++step){
+            int op = pddlRandInt(&rnd) % 20;
+            if (op < 7){
+                int is_edge = (pddlRandInt(&rnd) % 2 == 0);
+                int arg0 = pddlRandInt(&rnd) % (is_edge ? 4 : 2);
+                int arg1 = pddlRandInt(&rnd) % 4;
+                atom_spec_t f;
+                if (is_edge){
+                    f = ATOM(p.E, p.n[arg0], p.n[arg1]);
+                }else{
+                    f = ATOM(p.A, p.x[arg0], p.n[arg1]);
+                }
+                assert(num_added < COMMIT_RANDOM_MAX_ADDED);
+                added[num_added++] = f;
+                addFactToDB(dl, f, NULL);
+
+            }else if (op < 12){
+                canonicalModelOK(dl);
+                commitReference(added, num_added, ref);
+                dbStr(dl, db);
+                assertStrEq(db, ref);
+
+            }else if (op < 15){
+                pddlDatalogDBCommit(dl);
+                num_committed = num_added;
+                dbStr(dl, committed_db);
+                ++num_commits;
+
+            }else if (num_committed >= 0){
+                pddlDatalogDBRollback(dl);
+                num_added = num_committed;
+                dbStr(dl, db);
+                assertStrEq(db, committed_db);
+                ++num_rollbacks;
+            }
+        }
+        assert(num_commits >= 20);
+        assert(num_rollbacks >= 20);
+        pddlDatalogDel(dl);
+        pddlRandFree(&rnd);
+    }
+}
+
 /** Predicates of the program created by chainProgram() */
 struct chain {
     int At, L, G;
@@ -1718,4 +1956,17 @@ TEST_PANIC_ONCE(datalog_panic_goal_weight_unweighted)
     pddl_cost_t weight;
     int ret = pddlDatalogDBGoalWeight(dl, G, &weight);
     assert(ret == 0);
+}
+
+/*
+ * Rollback requires a previous commit since the (re-)initialization of the
+ * database: the commit of rollbackProgram() is dropped by the reset.
+ */
+TEST_PANIC_ONCE(datalog_panic_rollback_no_commit)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    rollback_t r;
+    rollbackProgram(dl, &r);
+    pddlDatalogDBReset(dl);
+    pddlDatalogDBRollback(dl);
 }
