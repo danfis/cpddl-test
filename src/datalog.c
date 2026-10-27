@@ -1906,6 +1906,147 @@ TEST_ONCE(datalog_weighted_annotations)
 }
 
 /*
+ * The goal predicate does not need a user ID (and the auxiliary predicate
+ * created by the normalization has none): the goal fact is found directly
+ * in the database by pddlDatalogDBGoalWeight() and
+ * pddlDatalogExecuteAnnotations(), also across rollbacks to a commit made
+ * before O(c) is added.
+ */
+TEST_ONCE(datalog_goal_without_user_id)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    for (int ti = 0; ti < 2; ++ti){
+        ann_out_t out;
+        ann_data_t ann_move = { "move", &out };
+
+        pddl_datalog_t *dl = pddlDatalogNewWeighted(types[ti]);
+        int At = addPred(dl, 1, "A");
+        int L = addPred(dl, 2, "L");
+        int O = addPred(dl, 1, "O");
+        int G = pddlDatalogAddGoalPred(dl, "G");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        int c = addConst(dl, "c");
+        int X = pddlDatalogAddVar(dl, "X");
+        int Y = pddlDatalogAddVar(dl, "Y");
+        fact(dl, ATOM(At, a));
+        fact(dl, ATOM(L, a, b));
+        fact(dl, ATOM(L, b, c));
+        fact(dl, ATOM(O, b));
+        awrule(dl, 1, annotation, &ann_move, ATOM(At, Y), 3,
+               ATOM(At, X), ATOM(L, X, Y), ATOM(O, Y));
+        rule(dl, ATOM0(G), 1, ATOM(At, c));
+        toNormalForm(dl);
+
+        pddlDatalogDBCommit(dl);
+        for (int rep = 0; rep < 2; ++rep){
+            pddl_cost_t w;
+            out.len = 0;
+            out.buf[0] = '\x0';
+            canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+            int ret = pddlDatalogDBGoalWeight(dl, G, &w);
+            assert(ret == -1);
+            pddlDatalogExecuteAnnotations(dl, G);
+            assertStrEq(out.buf, "");
+            pddlDatalogDBRollback(dl);
+
+            addFactToDB(dl, ATOM(O, c), NULL);
+            canonicalModelOK(dl);
+            assertGoalWeight(dl, G, 2);
+            pddlDatalogExecuteAnnotations(dl, G);
+            assertStrEq(out.buf,
+                        "move | (A b) :- (A a) (L a b) (O b).\n"
+                        "move | (A c) :- (A b) (L b c) (O c).\n");
+            pddlDatalogDBRollback(dl);
+        }
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * The user ID of a predicate added after the database was initialized can
+ * be set, because the change of the program re-initializes the database
+ * (and its facts are then collected).
+ */
+TEST_ONCE(datalog_user_id_extended_program)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    int X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(P, a));
+    canonicalModelOK(dl);
+    assertDB(dl, "Pa");
+
+    int Q = addPred(dl, 1, "Q");
+    rule(dl, ATOM(Q, X), 1, ATOM(P, X));
+    // The database is not re-initialized yet and it has no facts of Q
+    assertFacts(dl, Q, "");
+    canonicalModelOK(dl);
+    assertFacts(dl, Q, "Qa");
+    assertDB(dl, "Pa Qa");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Setting a user ID of a predicate re-initializes the database before its
+ * next use, so the facts of the predicate are then collected; until then,
+ * the database is out of date and no facts of the predicate are returned.
+ */
+TEST_ONCE(datalog_user_id_after_init)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int Q = pddlDatalogAddPred(dl, 1, "Q");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    rule(dl, ATOM(Q, X), 1, ATOM(P, X));
+    fact(dl, ATOM(P, a));
+    fact(dl, ATOM(P, b));
+    canonicalModelOK(dl);
+    assertFacts(dl, P, "Pa Pb");
+
+    pddlDatalogSetPredUserId(dl, Q, 'Q');
+    assertFacts(dl, Q, "");
+    canonicalModelOK(dl);
+    assertFacts(dl, Q, "Qa Qb");
+    assertDB(dl, "Pa Pb Qa Qb");
+
+    // Another user ID returns the same facts
+    pddlDatalogSetPredUserId(dl, Q, 'R');
+    canonicalModelOK(dl);
+    assertFacts(dl, Q, "Ra Rb");
+
+    // Removing the user ID and setting it again
+    pddlDatalogSetPredUserId(dl, Q, -1);
+    canonicalModelOK(dl);
+    assertFacts(dl, P, "Pa Pb");
+    pddlDatalogSetPredUserId(dl, Q, 'Q');
+    canonicalModelOK(dl);
+    assertFacts(dl, Q, "Qa Qb");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Setting a user ID re-initializes the database, which drops the last
+ * commit, so a rollback afterwards PANICs.
+ */
+TEST_PANIC_ONCE(datalog_panic_rollback_after_user_id)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int Q = pddlDatalogAddPred(dl, 1, "Q");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    canonicalModelOK(dl);
+    pddlDatalogDBCommit(dl);
+    pddlDatalogSetPredUserId(dl, Q, 'Q');
+    pddlDatalogDBRollback(dl);
+}
+
+/*
  * A rule with a non-zero weight cannot be added to an unweighted program.
  */
 TEST_PANIC_ONCE(datalog_panic_rule_weight_unweighted)
@@ -1969,4 +2110,54 @@ TEST_PANIC_ONCE(datalog_panic_rollback_no_commit)
     rollbackProgram(dl, &r);
     pddlDatalogDBReset(dl);
     pddlDatalogDBRollback(dl);
+}
+
+/*
+ * Only the facts of the predicates with user IDs can be iterated over.
+ */
+TEST_PANIC_ONCE(datalog_panic_facts_without_user_id)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = pddlDatalogAddPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    canonicalModelOK(dl);
+    facts_t fs;
+    fs.size = 0;
+    pddlDatalogDBForEachFact(dl, P, factCB, &fs);
+}
+
+
+/*
+ * The goal weight can be asked only for goal predicates.
+ */
+TEST_PANIC_ONCE(datalog_panic_goal_weight_not_goal)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    pddl_cost_t weight;
+    int ret = pddlDatalogDBGoalWeight(dl, P, &weight);
+    assert(ret == 0);
+}
+
+/*
+ * Annotations can be executed only from goal predicates.
+ */
+TEST_PANIC_ONCE(datalog_panic_annotations_not_goal)
+{
+    ann_out_t out;
+    out.len = 0;
+    ann_data_t ann = { "ann", &out };
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int Q = addPred(dl, 1, "Q");
+    int a = addConst(dl, "a");
+    int X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(P, a));
+    arule(dl, annotation, &ann, ATOM(Q, X), 1, ATOM(P, X));
+    canonicalModelOK(dl);
+    pddlDatalogExecuteAnnotations(dl, Q);
 }
