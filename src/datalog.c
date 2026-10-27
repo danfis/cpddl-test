@@ -108,8 +108,8 @@ static int addRuleV(pddl_datalog_t *dl,
     for (int i = 0; i < body_size; ++i)
         ruleAddBody(dl, &rule, va_arg(ap, atom_spec_t));
     if (weight != 0){
-        pddl_cost_t w = pddl_cost_zero;
-        w.cost = weight;
+        pddl_num_t w;
+        pddlNumSetInt(&w, weight);
         pddlDatalogRuleSetWeight(dl, &rule, &w);
     }
     if (ann_fn != NULL)
@@ -170,9 +170,10 @@ static int awrule(pddl_datalog_t *dl,
     return id;
 }
 
-/** Same as rule(), but with the weight W (including its .zero_cost) */
+/** Same as rule(), but with the weight W given as a number (e.g., with
+ *  delta != 0 or a float) */
 static int cwrule(pddl_datalog_t *dl,
-                  const pddl_cost_t *w,
+                  const pddl_num_t *w,
                   atom_spec_t head,
                   int body_size, ...)
 {
@@ -195,7 +196,7 @@ static int fact(pddl_datalog_t *dl, atom_spec_t atom)
 
 static void addFactToDB(pddl_datalog_t *dl,
                         atom_spec_t atom,
-                        const pddl_cost_t *weight)
+                        const pddl_num_t *weight)
 {
     pddlDatalogDBAddFact(dl, atom.pred, atom.arg, weight);
 }
@@ -257,10 +258,12 @@ static void dbCommitFail(pddl_datalog_t *dl, const pddl_ivec_t *input_preds)
  *  EXPECTED */
 static void assertGoalWeight(pddl_datalog_t *dl, int goal, int expected)
 {
-    pddl_cost_t weight;
+    pddl_num_t weight;
     int ret = pddlDatalogDBGoalWeight(dl, goal, &weight);
     assert(ret == 0);
-    assert(weight.cost == expected && weight.zero_cost == 0);
+    pddl_num_t exp;
+    pddlNumSetInt(&exp, expected);
+    assert(pddlNumExactEq(&weight, &exp));
 }
 
 /** Set of facts represented as strings */
@@ -277,7 +280,7 @@ static void factsAdd(facts_t *fs,
                      int pred,
                      int arity,
                      const int *arg,
-                     const pddl_cost_t *weight)
+                     const pddl_num_t *weight)
 {
     assert(fs->size < MAX_FACTS);
     char *s = fs->fact[fs->size++];
@@ -287,9 +290,8 @@ static void factsAdd(facts_t *fs,
         s[len++] = arg[i];
     s[len] = '\x0';
     if (weight != NULL){
-        len += snprintf(s + len, 32 - len, ":%d", weight->cost);
-        if (weight->zero_cost != 0)
-            snprintf(s + len, 32 - len, "~%d", weight->zero_cost);
+        char w[32];
+        snprintf(s + len, 32 - len, ":%s", pddlNumFmt(weight, w, 32));
     }
 }
 
@@ -321,7 +323,7 @@ static void assertStrEq(const char *got, const char *expected)
 static void factCB(int pred,
                    int arity,
                    const int *arg,
-                   const pddl_cost_t *weight,
+                   const pddl_num_t *weight,
                    void *ud)
 {
     factsAdd(ud, pred, arity, arg, weight);
@@ -813,7 +815,7 @@ static void weightedProgram(pddl_datalog_t *dl,
 static void weightedTest(pddl_datalog_weight_type_t type, int goal)
 {
     weighted_t w;
-    pddl_cost_t weight;
+    pddl_num_t weight;
 
     pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
     weightedProgram(dl, &w, pddl_false, pddl_true);
@@ -840,7 +842,7 @@ static void weightedTest(pddl_datalog_weight_type_t type, int goal)
         weightedProgram(dl, &w, pddl_true, pddl_true);
         if (i == 0){
             pddlDatalogDBReset(dl);
-            addFactToDB(dl, ATOM(w.At, w.a), &pddl_cost_zero);
+            addFactToDB(dl, ATOM(w.At, w.a), &pddl_num_zero);
         }else{
             addFactToDB(dl, ATOM(w.At, w.a), NULL);
         }
@@ -923,6 +925,19 @@ static void weightedResetTest(pddl_datalog_weight_type_t type,
     canonicalModelOK(dl);
     assertGoalWeight(dl, w.G, goal_b);
     assertFacts(dl, w.At, "Ab:0 Ac:1");
+
+    // Rollback to a commit with a queued fact: At(a) waits in the queue at
+    // the commit, so it is processed after the rollback
+    for (int rep = 0; rep < 2; ++rep){
+        pddlDatalogDBReset(dl);
+        addFactToDB(dl, ATOM(w.At, w.a), NULL);
+        dbCommit(dl, NULL);
+        addFactToDB(dl, ATOM(w.At, w.b), NULL);
+        pddlDatalogDBRollback(dl);
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, w.G, goal_a);
+        assertFacts(dl, w.At, "Aa:0 Ab:1 Ac:1");
+    }
     pddlDatalogDel(dl);
 }
 
@@ -1000,15 +1015,13 @@ TEST_ONCE(datalog_weighted_initial_facts_max)
     weightedInitialFactsTest(PDDL_DATALOG_WEIGHT_MAX, 2);
 }
 
-/** The .zero_cost component of the weights with the aggregation TYPE: T is
- *  the expected representation of the fact T */
-static void weightedZeroCostTest(pddl_datalog_weight_type_t type,
-                                 const char *t)
+/** Weights with delta != 0 (zero-cost actions weighted by eps) with the
+ *  aggregation TYPE: T is the expected representation of the fact T */
+static void weightedDeltaTest(pddl_datalog_weight_type_t type, const char *t)
 {
-    pddl_cost_t z;
-    pddlCostSetOp(&z, 0);
-    pddl_cost_t one;
-    pddlCostSetOp(&one, 1);
+    pddl_num_t z = pddl_num_eps;
+    pddl_num_t one;
+    pddlNumSetInt(&one, 1);
 
     pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
     int S = addPred(dl, 0, "S");
@@ -1031,32 +1044,140 @@ static void weightedZeroCostTest(pddl_datalog_weight_type_t type,
     // No goal predicate, so the whole model is computed
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
     assertFacts(dl, S, "S:0");
-    assertFacts(dl, P, "P:0~1");
-    assertFacts(dl, Q, "Q:0~2");
+    assertFacts(dl, P, "P:0+1e");
+    assertFacts(dl, Q, "Q:0+2e");
     assertFacts(dl, R, "R:1");
-    assertFacts(dl, G, "G:0~3");
+    assertFacts(dl, G, "G:0+3e");
     assertFacts(dl, T, t);
     pddlDatalogDel(dl);
 }
 
 /*
- * Weights with the .zero_cost component (pddlCostSetOp() with zero cost)
- * and the sum of weights: .zero_cost is summed, and it is compared only
- * after .cost.
+ * Weights with delta != 0 and the sum of weights: the deltas are summed,
+ * and they are compared only after the values.
  */
-TEST_ONCE(datalog_weighted_zero_cost_add)
+TEST_ONCE(datalog_weighted_delta_add)
 {
-    weightedZeroCostTest(PDDL_DATALOG_WEIGHT_ADD, "T:0~4");
+    weightedDeltaTest(PDDL_DATALOG_WEIGHT_ADD, "T:0+4e");
 }
 
 /*
- * Weights with the .zero_cost component (pddlCostSetOp() with zero cost)
- * and the maximum of weights: the maximum takes .zero_cost into account,
- * and it is compared only after .cost.
+ * Weights with delta != 0 and the maximum of weights: the maximum takes
+ * the deltas into account, and they are compared only after the values.
  */
-TEST_ONCE(datalog_weighted_zero_cost_max)
+TEST_ONCE(datalog_weighted_delta_max)
 {
-    weightedZeroCostTest(PDDL_DATALOG_WEIGHT_MAX, "T:0~3");
+    weightedDeltaTest(PDDL_DATALOG_WEIGHT_MAX, "T:0+3e");
+}
+
+/** Float weights and integer weights above the array of the queue with the
+ *  aggregation TYPE: D is the expected representation of the fact D */
+static void weightedFloatTest(pddl_datalog_weight_type_t type, const char *d)
+{
+    pddl_num_t half, quarter;
+    pddlNumSetFlt(&half, .5f);
+    pddlNumSetFlt(&quarter, .25f);
+
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    int S = addPred(dl, 0, "S");
+    int P = addPred(dl, 0, "P");
+    int Q = addPred(dl, 0, "Q");
+    int R = addPred(dl, 0, "R");
+    int G = addPred(dl, 0, "G");
+    int B = addPred(dl, 0, "B");
+    int C = addPred(dl, 0, "C");
+    int D = addPred(dl, 0, "D");
+    fact(dl, ATOM0(S));
+    cwrule(dl, &half, ATOM0(P), 1, ATOM0(S));
+    cwrule(dl, &quarter, ATOM0(Q), 1, ATOM0(P));
+    wrule(dl, 1, ATOM0(R), 1, ATOM0(S));
+    // 0.5 + 0.25 is cheaper than 1
+    rule(dl, ATOM0(G), 1, ATOM0(Q));
+    rule(dl, ATOM0(G), 1, ATOM0(R));
+    wrule(dl, 5000, ATOM0(B), 1, ATOM0(S));
+    wrule(dl, 2000, ATOM0(C), 1, ATOM0(B));
+    rule(dl, ATOM0(D), 2, ATOM0(C), ATOM0(Q));
+    toNormalForm(dl);
+
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    assertFacts(dl, S, "S:0");
+    assertFacts(dl, P, "P:0.5");
+    assertFacts(dl, Q, "Q:0.75");
+    assertFacts(dl, R, "R:1");
+    assertFacts(dl, G, "G:0.75");
+    assertFacts(dl, B, "B:5000");
+    assertFacts(dl, C, "C:7000");
+    assertFacts(dl, D, d);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Float weights and integer weights above PDDL_IPQ_ARRAY_SIZE with the
+ * sum of weights: a float is summed with an integer into a float.
+ */
+TEST_ONCE(datalog_weighted_float_add)
+{
+    weightedFloatTest(PDDL_DATALOG_WEIGHT_ADD, "D:7000.75");
+}
+
+/*
+ * Float weights and integer weights above PDDL_IPQ_ARRAY_SIZE with the
+ * maximum of weights.
+ */
+TEST_ONCE(datalog_weighted_float_max)
+{
+    weightedFloatTest(PDDL_DATALOG_WEIGHT_MAX, "D:7000");
+}
+
+/** An overflow of the weight with the aggregation TYPE is an error; the
+ *  database can be rolled back and reset afterwards */
+static void weightedOverflowTest(pddl_datalog_weight_type_t type)
+{
+    pddl_num_t big;
+    pddlNumSetInt(&big, INT_MAX - 1);
+
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    int A = addPred(dl, 1, "A");
+    int P = addPred(dl, 1, "P");
+    int Q = addPred(dl, 1, "Q");
+    int a = addConst(dl, "a");
+    int X = pddlDatalogAddVar(dl, "X");
+    cwrule(dl, &big, ATOM(P, X), 1, ATOM(A, X));
+    // The weight of P(a) plus 2 (aggregated with A(a) of weight 0)
+    wrule(dl, 2, ATOM(Q, X), 2, ATOM(P, X), ATOM(A, X));
+    toNormalForm(dl);
+
+    for (int rep = 0; rep < 2; ++rep){
+        pddlDatalogDBReset(dl);
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+        dbCommit(dl, NULL);
+        addFactToDB(dl, ATOM(A, a), NULL);
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+        assertFacts(dl, Q, "");
+        // The rollback drops A(a) and P(a), the database is usable again
+        pddlDatalogDBRollback(dl);
+        assertFacts(dl, A, "");
+        assertFacts(dl, P, "");
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * An overflow of the sum of weights is an error.
+ */
+TEST_ONCE(datalog_weighted_overflow_add)
+{
+    weightedOverflowTest(PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * An overflow of the maximum of weights plus the weight of the rule is an
+ * error.
+ */
+TEST_ONCE(datalog_weighted_overflow_max)
+{
+    weightedOverflowTest(PDDL_DATALOG_WEIGHT_MAX);
 }
 
 /*
@@ -1081,7 +1202,7 @@ TEST_ONCE(datalog_weighted_two_goals)
     for (int rep = 0; rep < 2; ++rep){
         canonicalModelOK(dl);
         assertGoalWeight(dl, G, 1);
-        pddl_cost_t weight;
+        pddl_num_t weight;
         int ret = pddlDatalogDBGoalWeight(dl, H, &weight);
         assert(ret == -1);
         assertFacts(dl, P, "P:5");
@@ -1198,8 +1319,8 @@ static void weightedNegStaticTest(pddl_datalog_weight_type_t type)
     ruleInit(dl, &r, ATOM(H, X));
     ruleAddBody(dl, &r, ATOM(T, X));
     ruleAddNeg(dl, &r, ATOM(S, X));
-    pddl_cost_t w = pddl_cost_zero;
-    w.cost = 1;
+    pddl_num_t w;
+    pddlNumSetInt(&w, 1);
     pddlDatalogRuleSetWeight(dl, &r, &w);
     ruleAdd(dl, &r);
 
@@ -2249,7 +2370,7 @@ TEST_ONCE(datalog_goal_without_user_id)
 
         dbCommit(dl, NULL);
         for (int rep = 0; rep < 2; ++rep){
-            pddl_cost_t w;
+            pddl_num_t w;
             out.len = 0;
             out.buf[0] = '\x0';
             canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
@@ -2374,7 +2495,7 @@ TEST_PANIC_ONCE(datalog_panic_add_fact_weight_unweighted)
     pddl_datalog_t *dl = pddlDatalogNew();
     int P = addPred(dl, 1, "P");
     int a = addConst(dl, "a");
-    addFactToDB(dl, ATOM(P, a), &pddl_cost_zero);
+    addFactToDB(dl, ATOM(P, a), &pddl_num_zero);
 }
 
 /*
@@ -2388,7 +2509,7 @@ TEST_PANIC_ONCE(datalog_panic_fact_weight_unweighted)
     fact(dl, ATOM(P, a));
     canonicalModelOK(dl);
     int pred, arity, arg[1];
-    pddl_cost_t weight;
+    pddl_num_t weight;
     int ret = pddlDatalogDBFact(dl, 0, &pred, &arity, arg, &weight);
     assert(ret == 0);
 }
@@ -2402,7 +2523,7 @@ TEST_PANIC_ONCE(datalog_panic_goal_weight_unweighted)
     int G = addGoalPred(dl, "G");
     fact(dl, ATOM0(G));
     canonicalModelOK(dl);
-    pddl_cost_t weight;
+    pddl_num_t weight;
     int ret = pddlDatalogDBGoalWeight(dl, G, &weight);
     assert(ret == 0);
 }
@@ -2446,7 +2567,7 @@ TEST_PANIC_ONCE(datalog_panic_goal_weight_not_goal)
     int a = addConst(dl, "a");
     fact(dl, ATOM(P, a));
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
-    pddl_cost_t weight;
+    pddl_num_t weight;
     int ret = pddlDatalogDBGoalWeight(dl, P, &weight);
     assert(ret == 0);
 }
@@ -2499,4 +2620,45 @@ TEST_PANIC_ONCE(datalog_panic_gringo_frozen)
     dbCommit(dl, &input);
     int ret = pddlDatalogCanonicalModelGringo(dl, NULL, NULL);
     assert(ret == 0);
+}
+
+/*
+ * Facts cannot be added with negative weights.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_fact_negative_weight)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    pddl_num_t w;
+    pddlNumSetIntDelta(&w, 0, -1);
+    addFactToDB(dl, ATOM(P, a), &w);
+}
+
+/*
+ * Rules cannot be given negative weights.
+ */
+TEST_PANIC_ONCE(datalog_panic_rule_set_negative_weight)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    pddl_datalog_rule_t rule;
+    pddlDatalogRuleInit(dl, &rule);
+    pddl_num_t w;
+    pddlNumSetIntDelta(&w, 0, -1);
+    pddlDatalogRuleSetWeight(dl, &rule, &w);
+}
+
+/*
+ * A rule with a negative weight assigned directly cannot be added.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_rule_negative_weight)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int S = addPred(dl, 0, "S");
+    int P = addPred(dl, 0, "P");
+    pddl_datalog_rule_t rule;
+    ruleInit(dl, &rule, ATOM0(P));
+    ruleAddBody(dl, &rule, ATOM0(S));
+    pddlNumSetInt(&rule.weight, -1);
+    pddlDatalogAddRule(dl, &rule);
 }

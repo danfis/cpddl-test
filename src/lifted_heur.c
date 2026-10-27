@@ -241,19 +241,33 @@ static void groundCmpFree(ground_cmp_t *cmp)
     }
 }
 
+/** Returns the value of the lifted heuristic H in STATE as an integer
+ *  (PDDL_COST_DEAD_END for a dead end), and asserts that it is +infinity
+ *  or a plain integer */
+static int liftedEval(pddl_lifted_heur_relaxed_t *h,
+                      const pddl_iset_t *state,
+                      const pddl_ground_atoms_t *gatoms)
+{
+    pddl_num_t v = pddlLiftedHeurRelaxedEvalState(h, state, gatoms);
+    if (pddlNumIsPosInf(&v))
+        return PDDL_COST_DEAD_END;
+    assert(pddlNumIsPlainInt(&v) && v.delta == 0);
+    assert(v.val.i >= 0 && v.val.i != PDDL_COST_DEAD_END);
+    return v.val.i;
+}
+
 /** Returns the value of the lifted heuristic of CMP and asserts it is
  *  equal to the ground one (dead ends are PDDL_COST_DEAD_END in both) */
 static int groundCmpState(ground_cmp_t *cmp, const pddl_iset_t *state)
 {
-    pddl_cost_t lc;
-    lc = pddlLiftedHeurRelaxedEvalState(&cmp->lifted, state, &cmp->gatoms);
+    int lc = liftedEval(&cmp->lifted, state, &cmp->gatoms);
     int c;
     if (cmp->max){
         c = pddlHMaxStrips(&cmp->hmax, state);
     }else{
         c = pddlHAddStrips(&cmp->hadd, state);
     }
-    assert(lc.cost == c);
+    assert(lc == c);
     return c;
 }
 
@@ -318,35 +332,34 @@ static int assertHeurProps(lifted_heurs_t *hs,
                            const pddl_ground_atoms_t *gatoms,
                            int goal)
 {
-    pddl_cost_t hmax, hadd, hff_max, hff_add;
-    hmax = pddlLiftedHeurRelaxedEvalState(&hs->hmax, state, gatoms);
-    hadd = pddlLiftedHeurRelaxedEvalState(&hs->hadd, state, gatoms);
-    hff_max = pddlLiftedHeurRelaxedEvalState(&hs->hff_max, state, gatoms);
-    hff_add = pddlLiftedHeurRelaxedEvalState(&hs->hff_add, state, gatoms);
+    int hmax = liftedEval(&hs->hmax, state, gatoms);
+    int hadd = liftedEval(&hs->hadd, state, gatoms);
+    int hff_max = liftedEval(&hs->hff_max, state, gatoms);
+    int hff_add = liftedEval(&hs->hff_add, state, gatoms);
 
-    if (hmax.cost == PDDL_COST_DEAD_END){
-        assert(hadd.cost == PDDL_COST_DEAD_END);
-        assert(hff_max.cost == PDDL_COST_DEAD_END);
-        assert(hff_add.cost == PDDL_COST_DEAD_END);
+    if (hmax == PDDL_COST_DEAD_END){
+        assert(hadd == PDDL_COST_DEAD_END);
+        assert(hff_max == PDDL_COST_DEAD_END);
+        assert(hff_add == PDDL_COST_DEAD_END);
         assert(goal != 1);
-        return hmax.cost;
+        return hmax;
     }
-    assert(hadd.cost != PDDL_COST_DEAD_END);
-    assert(hff_max.cost != PDDL_COST_DEAD_END);
-    assert(hff_add.cost != PDDL_COST_DEAD_END);
+    assert(hadd != PDDL_COST_DEAD_END);
+    assert(hff_max != PDDL_COST_DEAD_END);
+    assert(hff_add != PDDL_COST_DEAD_END);
 
-    assert(hmax.cost <= hadd.cost);
-    assert(hmax.cost <= hff_max.cost);
-    assert(hmax.cost <= hff_add.cost);
-    assert(hff_add.cost <= hadd.cost);
+    assert(hmax <= hadd);
+    assert(hmax <= hff_max);
+    assert(hmax <= hff_add);
+    assert(hff_add <= hadd);
 
     if (goal == 1){
-        assert(hmax.cost == 0);
-        assert(hadd.cost == 0);
-        assert(hff_max.cost == 0);
-        assert(hff_add.cost == 0);
+        assert(hmax == 0);
+        assert(hadd == 0);
+        assert(hff_max == 0);
+        assert(hff_add == 0);
     }
-    return hmax.cost;
+    return hmax;
 }
 
 static void heurPropsWalkState(const pddl_iset_t *state,
