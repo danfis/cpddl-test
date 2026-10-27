@@ -86,6 +86,7 @@ TESTS += slab
 TESTS += idx_set
 TESTS += splaytree
 TESTS += open_list
+TESTS += ipq
 TESTS += opts
 TESTS += unify
 TESTS += num
