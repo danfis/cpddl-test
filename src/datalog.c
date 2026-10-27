@@ -234,6 +234,25 @@ static void canonicalModelOK(pddl_datalog_t *dl)
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_OK);
 }
 
+/** Commits the database with the input predicates INPUT_PREDS (can be
+ *  NULL) and asserts that it succeeds */
+static void dbCommit(pddl_datalog_t *dl, const pddl_ivec_t *input_preds)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogDBCommit(dl, input_preds, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+}
+
+/** Asserts that the commit with the input predicates INPUT_PREDS fails */
+static void dbCommitFail(pddl_datalog_t *dl, const pddl_ivec_t *input_preds)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogDBCommit(dl, input_preds, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+}
+
 /** Asserts that the weight of the fact of the goal predicate GOAL is
  *  EXPECTED */
 static void assertGoalWeight(pddl_datalog_t *dl, int goal, int expected)
@@ -896,7 +915,7 @@ static void weightedResetTest(pddl_datalog_weight_type_t type,
     // Rollback without a computation since the commit: At(a) is queued and
     // then dropped, At(b) re-uses its fact ID and weight record
     pddlDatalogDBReset(dl);
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
     addFactToDB(dl, ATOM(w.At, w.a), NULL);
     pddlDatalogDBRollback(dl);
     assert(dbSize(dl) == 0);
@@ -1357,7 +1376,7 @@ static void rollbackProgram(pddl_datalog_t *dl, rollback_t *r)
     toNormalForm(dl);
 
     canonicalModelOK(dl);
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
 }
 
 static void assertRollbackSaved(pddl_datalog_t *dl, const rollback_t *r)
@@ -1468,7 +1487,7 @@ TEST_ONCE(datalog_commit_twice)
     addFactToDB(dl, ATOM(r.A, r.a, r.c1), NULL);
     canonicalModelOK(dl);
     assertDB(dl, "Aa1 Ba C11 C22 Ha1 K1");
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
 
     for (int rep = 0; rep < 2; ++rep){
         addFactToDB(dl, ATOM(r.A, r.b, r.c1), NULL);
@@ -1530,7 +1549,7 @@ TEST_ONCE(datalog_commit_emptied_projections)
     addFactToDB(dl, ATOM(r.A, r.c, r.c5), NULL);
     canonicalModelOK(dl);
     assertDB(dl, "Ac5 Bc C11 C22");
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
 
     for (int rep = 0; rep < 3; ++rep){
         addFactToDB(dl, ATOM(r.A, r.a, r.c7), NULL);
@@ -1612,6 +1631,79 @@ static void commitReference(const atom_spec_t *added, int num_added, char *out)
     pddlDatalogDel(dl);
 }
 
+/** State of a random sequence of operations over the program of
+ *  commitProgram() */
+struct commit_random {
+    /** ADDED[0..NUM_ADDED) are the facts added and not rolled back,
+     *  ADDED[0..NUM_COMMITTED) the ones added before the last commit (-1
+     *  before the first commit) */
+    atom_spec_t added[COMMIT_RANDOM_MAX_ADDED];
+    int num_added;
+    int num_committed;
+    /** The database stored by the last commit */
+    char committed_db[STR_SIZE];
+    int num_commits;
+    int num_rollbacks;
+};
+typedef struct commit_random commit_random_t;
+
+/** Records the commit made just now */
+static void commitRandomCommitted(pddl_datalog_t *dl, commit_random_t *s)
+{
+    s->num_committed = s->num_added;
+    dbStr(dl, s->committed_db);
+    ++s->num_commits;
+}
+
+/** Runs NUM_STEPS random operations: added facts A(x, j) (and E(i, j) if
+ *  ADD_EDGES is true), canonical models compared with the ones computed
+ *  from scratch, commits without input predicates, and rollbacks compared
+ *  with the database stored by the last commit */
+static void commitRandomSteps(pddl_datalog_t *dl,
+                              const commit_prog_t *p,
+                              pddl_rand_t *rnd,
+                              pddl_bool_t add_edges,
+                              int num_steps,
+                              commit_random_t *s)
+{
+    char db[STR_SIZE];
+    char ref[STR_SIZE];
+    for (int step = 0; step < num_steps; ++step){
+        int op = pddlRandInt(rnd) % 20;
+        if (op < 7){
+            int is_edge = (add_edges && pddlRandInt(rnd) % 2 == 0);
+            int arg0 = pddlRandInt(rnd) % (is_edge ? 4 : 2);
+            int arg1 = pddlRandInt(rnd) % 4;
+            atom_spec_t f;
+            if (is_edge){
+                f = ATOM(p->E, p->n[arg0], p->n[arg1]);
+            }else{
+                f = ATOM(p->A, p->x[arg0], p->n[arg1]);
+            }
+            assert(s->num_added < COMMIT_RANDOM_MAX_ADDED);
+            s->added[s->num_added++] = f;
+            addFactToDB(dl, f, NULL);
+
+        }else if (op < 12){
+            canonicalModelOK(dl);
+            commitReference(s->added, s->num_added, ref);
+            dbStr(dl, db);
+            assertStrEq(db, ref);
+
+        }else if (op < 15){
+            dbCommit(dl, NULL);
+            commitRandomCommitted(dl, s);
+
+        }else if (s->num_committed >= 0){
+            pddlDatalogDBRollback(dl);
+            s->num_added = s->num_committed;
+            dbStr(dl, db);
+            assertStrEq(db, s->committed_db);
+            ++s->num_rollbacks;
+        }
+    }
+}
+
 /*
  * A random sequence of added facts E(i, j) and A(x, j), canonical models,
  * commits, and rollbacks (including commits without the computation of the
@@ -1628,58 +1720,274 @@ TEST_ONCE(datalog_commit_rollback_random)
         pddl_datalog_t *dl = pddlDatalogNew();
         commit_prog_t p;
         commitProgram(dl, &p);
-
-        // ADDED[0..NUM_ADDED) are the facts added and not rolled back,
-        // ADDED[0..NUM_COMMITTED) the ones added before the last commit
-        atom_spec_t added[COMMIT_RANDOM_MAX_ADDED];
-        int num_added = 0;
-        int num_committed = -1;
-        int num_commits = 0;
-        int num_rollbacks = 0;
-        char committed_db[STR_SIZE];
-        char db[STR_SIZE];
-        char ref[STR_SIZE];
-        for (int step = 0; step < 400; ++step){
-            int op = pddlRandInt(&rnd) % 20;
-            if (op < 7){
-                int is_edge = (pddlRandInt(&rnd) % 2 == 0);
-                int arg0 = pddlRandInt(&rnd) % (is_edge ? 4 : 2);
-                int arg1 = pddlRandInt(&rnd) % 4;
-                atom_spec_t f;
-                if (is_edge){
-                    f = ATOM(p.E, p.n[arg0], p.n[arg1]);
-                }else{
-                    f = ATOM(p.A, p.x[arg0], p.n[arg1]);
-                }
-                assert(num_added < COMMIT_RANDOM_MAX_ADDED);
-                added[num_added++] = f;
-                addFactToDB(dl, f, NULL);
-
-            }else if (op < 12){
-                canonicalModelOK(dl);
-                commitReference(added, num_added, ref);
-                dbStr(dl, db);
-                assertStrEq(db, ref);
-
-            }else if (op < 15){
-                pddlDatalogDBCommit(dl);
-                num_committed = num_added;
-                dbStr(dl, committed_db);
-                ++num_commits;
-
-            }else if (num_committed >= 0){
-                pddlDatalogDBRollback(dl);
-                num_added = num_committed;
-                dbStr(dl, db);
-                assertStrEq(db, committed_db);
-                ++num_rollbacks;
-            }
-        }
-        assert(num_commits >= 20);
-        assert(num_rollbacks >= 20);
+        commit_random_t s;
+        s.num_added = 0;
+        s.num_committed = -1;
+        s.num_commits = s.num_rollbacks = 0;
+        commitRandomSteps(dl, &p, &rnd, pddl_true, 400, &s);
+        assert(s.num_commits >= 20);
+        assert(s.num_rollbacks >= 20);
         pddlDatalogDel(dl);
         pddlRandFree(&rnd);
     }
+}
+
+/*
+ * The same random sequences, where after the first part the predicates
+ * not derivable from A are frozen (E and T, so H(X, Z) :- A(X, Y), T(Y, Z)
+ * keeps only the side of T and T(X, Z) :- T(X, Y), E(Y, Z) keeps nothing)
+ * and only facts A(x, j) are added: the canonical models and rollbacks are
+ * the same as without frozen predicates.
+ */
+TEST_ONCE(datalog_commit_frozen_random)
+{
+    for (unsigned seed = 1; seed <= 20; ++seed){
+        pddl_rand_t rnd;
+        pddlRandInit(&rnd, seed);
+        pddl_datalog_t *dl = pddlDatalogNew();
+        commit_prog_t p;
+        commitProgram(dl, &p);
+        commit_random_t s;
+        s.num_added = 0;
+        s.num_committed = -1;
+        s.num_commits = s.num_rollbacks = 0;
+        commitRandomSteps(dl, &p, &rnd, pddl_true, 150, &s);
+
+        PDDL_IVEC(input);
+        pddlIVecPush(&input, p.A);
+        canonicalModelOK(dl);
+        dbCommit(dl, &input);
+        pddlIVecFree(&input);
+        commitRandomCommitted(dl, &s);
+
+        s.num_commits = s.num_rollbacks = 0;
+        commitRandomSteps(dl, &p, &rnd, pddl_false, 300, &s);
+        assert(s.num_commits >= 10);
+        assert(s.num_rollbacks >= 10);
+        pddlDatalogDel(dl);
+        pddlRandFree(&rnd);
+    }
+}
+
+/*
+ * Commit with the input predicates A and D freezes C and W:
+ * H(X, Z) :- A(X, Y), C(Y, Z) keeps only the side of C, J(X, Z) :- A(X, Y),
+ * D(Y, Z) keeps both sides, and W(X) :- C(X, Y), C(Y, X) keeps nothing.
+ * Facts added after the commit are joined correctly over rollbacks (also
+ * when IDs are re-used: D(1, b) and A(a, 1) get the same ID), a commit
+ * without input predicates keeps the frozen predicates and an unprocessed
+ * fact, and a later commit with the input predicate A freezes D as well.
+ */
+TEST_ONCE(datalog_commit_frozen)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int C = addPred(dl, 2, "C");
+    int D = addPred(dl, 2, "D");
+    int H = addPred(dl, 2, "H");
+    int J = addPred(dl, 2, "J");
+    int W = addPred(dl, 1, "W");
+    int K = addPred(dl, 1, "K");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int c1 = addConst(dl, "1");
+    int c2 = addConst(dl, "2");
+    int c5 = addConst(dl, "5");
+    int c7 = addConst(dl, "7");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(C, c1, c1));
+    fact(dl, ATOM(C, c2, c2));
+    rule(dl, ATOM(H, X, Z), 2, ATOM(A, X, Y), ATOM(C, Y, Z));
+    rule(dl, ATOM(J, X, Z), 2, ATOM(A, X, Y), ATOM(D, Y, Z));
+    rule(dl, ATOM(W, X), 2, ATOM(C, X, Y), ATOM(C, Y, X));
+    rule(dl, ATOM(K, Z), 1, ATOM(H, X, Z));
+    toNormalForm(dl);
+    canonicalModelOK(dl);
+    assertDB(dl, "C11 C22 W1 W2");
+
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, A);
+    pddlIVecPush(&input, D);
+    dbCommit(dl, &input);
+    for (int rep = 0; rep < 2; ++rep){
+        addFactToDB(dl, ATOM(A, a, c1), NULL);
+        addFactToDB(dl, ATOM(D, c1, b), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 C11 C22 D1b Ha1 Jab K1 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "C11 C22 W1 W2");
+
+        addFactToDB(dl, ATOM(D, c5, c7), NULL);
+        addFactToDB(dl, ATOM(A, b, c5), NULL);
+        addFactToDB(dl, ATOM(A, c, c2), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Ab5 Ac2 C11 C22 D57 Hc2 Jb7 K2 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "C11 C22 W1 W2");
+
+        addFactToDB(dl, ATOM(D, c1, b), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "C11 C22 D1b W1 W2");
+        pddlDatalogDBRollback(dl);
+        addFactToDB(dl, ATOM(A, a, c1), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 C11 C22 Ha1 K1 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "C11 C22 W1 W2");
+    }
+
+    // A commit without input predicates and with an unprocessed fact
+    addFactToDB(dl, ATOM(A, a, c1), NULL);
+    dbCommit(dl, NULL);
+    for (int rep = 0; rep < 2; ++rep){
+        addFactToDB(dl, ATOM(D, c1, b), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 C11 C22 D1b Ha1 Jab K1 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 C11 C22 W1 W2");
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 C11 C22 Ha1 K1 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 C11 C22 W1 W2");
+    }
+
+    // D is frozen with its fact D(1, b)
+    addFactToDB(dl, ATOM(D, c1, b), NULL);
+    canonicalModelOK(dl);
+    pddlIVecClear(&input);
+    pddlIVecPush(&input, A);
+    dbCommit(dl, &input);
+    for (int rep = 0; rep < 2; ++rep){
+        addFactToDB(dl, ATOM(A, c, c1), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ac1 C11 C22 D1b Ha1 Hc1 Jab Jcb K1 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 C11 C22 D1b Ha1 Jab K1 W1 W2");
+
+        addFactToDB(dl, ATOM(A, b, c2), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ab2 C11 C22 D1b Ha1 Hb2 Jab K1 K2 W1 W2");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 C11 C22 D1b Ha1 Jab K1 W1 W2");
+    }
+    pddlIVecFree(&input);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * The commit freezing C (after a commit without input predicates) rebuilds
+ * the join index, and the parts kept with facts in them are stored by this
+ * commit with their sizes: A(a, 1) is in
+ * the part for Y = 1 of J(X, Z) :- A(X, Y), D(Y, Z), and A(b, 1) added to
+ * the same part after the commit is removed again by every rollback, so
+ * D(1, c) re-using its ID is joined only with A(a, 1).
+ */
+TEST_ONCE(datalog_commit_frozen_kept_sizes)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int C = addPred(dl, 2, "C");
+    int D = addPred(dl, 2, "D");
+    int H = addPred(dl, 2, "H");
+    int J = addPred(dl, 2, "J");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int c1 = addConst(dl, "1");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(C, c1, c1));
+    rule(dl, ATOM(H, X, Z), 2, ATOM(A, X, Y), ATOM(C, Y, Z));
+    rule(dl, ATOM(J, X, Z), 2, ATOM(A, X, Y), ATOM(D, Y, Z));
+    toNormalForm(dl);
+    addFactToDB(dl, ATOM(A, a, c1), NULL);
+    canonicalModelOK(dl);
+    assertDB(dl, "Aa1 C11 Ha1");
+    dbCommit(dl, NULL);
+
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, A);
+    pddlIVecPush(&input, D);
+    dbCommit(dl, &input);
+    pddlIVecFree(&input);
+    for (int rep = 0; rep < 2; ++rep){
+        addFactToDB(dl, ATOM(A, b, c1), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 Ab1 C11 Ha1 Hb1");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 C11 Ha1");
+
+        addFactToDB(dl, ATOM(D, c1, c), NULL);
+        canonicalModelOK(dl);
+        assertDB(dl, "Aa1 C11 D1c Ha1 Jac");
+        pddlDatalogDBRollback(dl);
+        assertDB(dl, "Aa1 C11 Ha1");
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A commit freezing predicates fails without any change if the canonical
+ * model is not computed (before the first one or with a fact added since),
+ * for invalid predicates, if a frozen predicate would become non-frozen,
+ * and in weighted programs. A rollback then returns to the previous
+ * commit.
+ */
+TEST_ONCE(datalog_commit_errors)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    commit_prog_t p;
+    commitProgram(dl, &p);
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, p.A);
+
+    // The initial facts are not inserted yet
+    dbCommitFail(dl, &input);
+    canonicalModelOK(dl);
+    assertDB(dl, "E12 T12");
+    dbCommit(dl, NULL);
+
+    addFactToDB(dl, ATOM(p.A, p.x[0], p.n[0]), NULL);
+    dbCommitFail(dl, &input);
+    pddlDatalogDBRollback(dl);
+    assertDB(dl, "E12 T12");
+
+    PDDL_IVEC(invalid);
+    pddlIVecPush(&invalid, -1);
+    dbCommitFail(dl, &invalid);
+    pddlIVecClear(&invalid);
+    pddlIVecPush(&invalid, p.A);
+    pddlIVecPush(&invalid, 1000);
+    dbCommitFail(dl, &invalid);
+    pddlIVecFree(&invalid);
+
+    // E and T are frozen
+    dbCommit(dl, &input);
+    addFactToDB(dl, ATOM(p.A, p.x[0], p.n[0]), NULL);
+    canonicalModelOK(dl);
+    assertDB(dl, "Aa1 E12 Ha2 K2 T12");
+    PDDL_IVEC(unfreeze);
+    pddlIVecPush(&unfreeze, p.E);
+    dbCommitFail(dl, &unfreeze);
+    pddlIVecClear(&unfreeze);
+    pddlIVecPush(&unfreeze, p.A);
+    pddlIVecPush(&unfreeze, p.T);
+    dbCommitFail(dl, &unfreeze);
+    pddlIVecFree(&unfreeze);
+    pddlDatalogDBRollback(dl);
+    assertDB(dl, "E12 T12");
+    pddlDatalogDel(dl);
+
+    dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    commitProgram(dl, &p);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommitFail(dl, &input);
+    pddlIVecFree(&input);
+    pddlDatalogDel(dl);
 }
 
 /** Predicates of the program created by chainProgram() */
@@ -1832,7 +2140,7 @@ TEST_ONCE(datalog_initial_facts_commit)
     toNormalForm(dl);
 
     addFactToDB(dl, ATOM(E, b, c), NULL);
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
     for (int rep = 0; rep < 2; ++rep){
         assertDB(dl, "Ebc");
         canonicalModelOK(dl);
@@ -1844,7 +2152,7 @@ TEST_ONCE(datalog_initial_facts_commit)
     pddlDatalogDBReset(dl);
     canonicalModelOK(dl);
     assertDB(dl, "Eab Tab");
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
     addFactToDB(dl, ATOM(E, b, c), NULL);
     canonicalModelOK(dl);
     assertDB(dl, "Eab Ebc Tab Tac Tbc");
@@ -1939,7 +2247,7 @@ TEST_ONCE(datalog_goal_without_user_id)
         rule(dl, ATOM0(G), 1, ATOM(At, c));
         toNormalForm(dl);
 
-        pddlDatalogDBCommit(dl);
+        dbCommit(dl, NULL);
         for (int rep = 0; rep < 2; ++rep){
             pddl_cost_t w;
             out.len = 0;
@@ -2041,7 +2349,7 @@ TEST_PANIC_ONCE(datalog_panic_rollback_after_user_id)
     int a = addConst(dl, "a");
     fact(dl, ATOM(P, a));
     canonicalModelOK(dl);
-    pddlDatalogDBCommit(dl);
+    dbCommit(dl, NULL);
     pddlDatalogSetPredUserId(dl, Q, 'Q');
     pddlDatalogDBRollback(dl);
 }
@@ -2160,4 +2468,35 @@ TEST_PANIC_ONCE(datalog_panic_annotations_not_goal)
     arule(dl, annotation, &ann, ATOM(Q, X), 1, ATOM(P, X));
     canonicalModelOK(dl);
     pddlDatalogExecuteAnnotations(dl, Q);
+}
+
+/*
+ * Facts of frozen predicates cannot be added.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_fact_frozen)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    commit_prog_t p;
+    commitProgram(dl, &p);
+    canonicalModelOK(dl);
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, p.A);
+    dbCommit(dl, &input);
+    addFactToDB(dl, ATOM(p.E, p.n[1], p.n[2]), NULL);
+}
+
+/*
+ * Gringo cannot compute the canonical model while any predicate is frozen.
+ */
+TEST_PANIC_ONCE(datalog_panic_gringo_frozen)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    commit_prog_t p;
+    commitProgram(dl, &p);
+    canonicalModelOK(dl);
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, p.A);
+    dbCommit(dl, &input);
+    int ret = pddlDatalogCanonicalModelGringo(dl, NULL, NULL);
+    assert(ret == 0);
 }
