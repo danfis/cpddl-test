@@ -194,11 +194,16 @@ static int fact(pddl_datalog_t *dl, atom_spec_t atom)
     return rule(dl, atom, 0);
 }
 
+/** Adds the fact ATOM with the weight WEIGHT to the database and asserts
+ *  that it succeeds */
 static void addFactToDB(pddl_datalog_t *dl,
                         atom_spec_t atom,
                         const pddl_num_t *weight)
 {
-    pddlDatalogDBAddFact(dl, atom.pred, atom.arg, weight);
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogDBAddFact(dl, atom.pred, atom.arg, weight, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
 }
 
 /** Finalizes the program with TO_NORMAL_FORM and asserts that it
@@ -392,6 +397,20 @@ static int dbSize(pddl_datalog_t *dl)
     while (pddlDatalogDBFact(dl, size, &pred, &arity, arg, NULL) == 0)
         ++size;
     return size;
+}
+
+/** Asserts that adding the fact ATOM with the weight WEIGHT to the
+ *  database fails and changes nothing */
+static void addFactToDBFail(pddl_datalog_t *dl,
+                            atom_spec_t atom,
+                            const pddl_num_t *weight)
+{
+    int size = dbSize(dl);
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogDBAddFact(dl, atom.pred, atom.arg, weight, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    assert(dbSize(dl) == size);
 }
 
 /** Writes all facts in the database sorted and separated by spaces to OUT */
@@ -1454,6 +1473,157 @@ TEST_ONCE(datalog_weighted_with_limit_add)
 TEST_ONCE(datalog_weighted_with_limit_max)
 {
     weightedWithLimitTest(PDDL_DATALOG_WEIGHT_MAX);
+}
+
+/** Predicates of the program created by weightedCommitProgram() */
+struct weighted_commit {
+    int At, L, G;
+    int a, b, c, d;
+};
+typedef struct weighted_commit weighted_commit_t;
+
+/** Creates and finalizes a program with the links a -> b, a -> c, b -> d,
+ *  c -> d (two equally expensive paths to d), moving along a link costs 1
+ *  and it is annotated with ANN_MOVE, and the goal G :- At(d) is annotated
+ *  with ANN_GOAL */
+static void weightedCommitProgram(pddl_datalog_t *dl,
+                                  weighted_commit_t *w,
+                                  ann_data_t *ann_move,
+                                  ann_data_t *ann_goal)
+{
+    w->At = addPred(dl, 1, "A");
+    w->L = addPred(dl, 2, "L");
+    w->G = addGoalPred(dl, "G");
+    w->a = addConst(dl, "a");
+    w->b = addConst(dl, "b");
+    w->c = addConst(dl, "c");
+    w->d = addConst(dl, "d");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(w->L, w->a, w->b));
+    fact(dl, ATOM(w->L, w->a, w->c));
+    fact(dl, ATOM(w->L, w->b, w->d));
+    fact(dl, ATOM(w->L, w->c, w->d));
+    awrule(dl, 1, annotation, ann_move, ATOM(w->At, Y), 2,
+           ATOM(w->At, X), ATOM(w->L, X, Y));
+    arule(dl, annotation, ann_goal, ATOM0(w->G), 1, ATOM(w->At, w->d));
+    finalize(dl);
+}
+
+/** Writes to OUT the facts of At with their weights followed by the output
+ *  of the annotations executed from the goal (written to ANN_OUT) */
+static void weightedCommitResult(pddl_datalog_t *dl,
+                                 const weighted_commit_t *w,
+                                 ann_out_t *ann_out,
+                                 char *out)
+{
+    facts_t fs;
+    fs.size = 0;
+    pddlDatalogDBForEachFact(dl, w->At, factCB, &fs);
+    factsJoin(&fs, out);
+    ann_out->len = 0;
+    ann_out->buf[0] = '\x0';
+    pddlDatalogExecuteAnnotations(dl, w->G);
+    int len = strlen(out);
+    snprintf(out + len, STR_SIZE - len, "\n%s", ann_out->buf);
+}
+
+static void weightedCommitTest(pddl_datalog_weight_type_t type)
+{
+    ann_out_t ann_out;
+    ann_out.len = 0;
+    ann_data_t ann_move = { "move", &ann_out };
+    ann_data_t ann_goal = { "goal", &ann_out };
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    weighted_commit_t w;
+    weightedCommitProgram(dl, &w, &ann_move, &ann_goal);
+    char ref[STR_SIZE], res[STR_SIZE];
+    pddl_num_t one;
+    pddlNumSetInt(&one, 1);
+
+    // The reference computation from At(a)
+    addFactToDB(dl, ATOM(w.At, w.a), NULL);
+    dbCommit(dl, NULL);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, 2);
+    weightedCommitResult(dl, &w, &ann_out, ref);
+
+    // A different computation after a rollback
+    pddlDatalogDBRollback(dl);
+    addFactToDB(dl, ATOM(w.At, w.b), NULL);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, 1);
+    weightedCommitResult(dl, &w, &ann_out, res);
+    assert(strcmp(res, ref) != 0);
+
+    // After another rollback, the same computation as the reference
+    pddlDatalogDBRollback(dl);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, 2);
+    weightedCommitResult(dl, &w, &ann_out, res);
+    assertStrEq(res, ref);
+
+    // A commit in the middle of the computation: the facts with the
+    // weights up to 1 are processed and At(d) waits in the queue
+    pddlDatalogDBReset(dl);
+    addFactToDB(dl, ATOM(w.At, w.a), NULL);
+    canonicalModelWithIntLimit(dl, 1,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommit(dl, NULL);
+    assertFacts(dl, w.At, "Aa:0 Ab:1 Ac:1 Ad:2");
+    canonicalModelOK(dl);
+    weightedCommitResult(dl, &w, &ann_out, res);
+    assertStrEq(res, ref);
+
+    // The processed facts, the weight of At(d), and its derivation change
+    // after the rollback and they are restored by the next rollback
+    pddlDatalogDBRollback(dl);
+    assertFacts(dl, w.At, "Aa:0 Ab:1 Ac:1 Ad:2");
+    addFactToDB(dl, ATOM(w.At, w.d), &one);
+    assertFacts(dl, w.At, "Aa:0 Ab:1 Ac:1 Ad:1");
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, 1);
+    pddlDatalogDBRollback(dl);
+    assertFacts(dl, w.At, "Aa:0 Ab:1 Ac:1 Ad:2");
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, 2);
+    weightedCommitResult(dl, &w, &ann_out, res);
+    assertStrEq(res, ref);
+
+    // A rollback to a commit made before the initial facts were inserted
+    // and after a computation not reaching the goal
+    pddlDatalogDBReset(dl);
+    dbCommit(dl, NULL);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    assertDB(dl, "Lab Lac Lbd Lcd");
+    pddlDatalogDBRollback(dl);
+    assert(dbSize(dl) == 0);
+    addFactToDB(dl, ATOM(w.At, w.c), NULL);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, w.G, 1);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Commit and rollback of a weighted database (sum of the weights) restore
+ * exactly the state at the commit, including the weights, the states, and
+ * the derivations of the facts and the order of the queue, also when the
+ * commit is made in the middle of the computation.
+ */
+TEST_ONCE(datalog_weighted_commit_add)
+{
+    weightedCommitTest(PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * Commit and rollback of a weighted database (maximum of the weights)
+ * restore exactly the state at the commit, including the weights, the
+ * states, and the derivations of the facts and the order of the queue,
+ * also when the commit is made in the middle of the computation.
+ */
+TEST_ONCE(datalog_weighted_commit_max)
+{
+    weightedCommitTest(PDDL_DATALOG_WEIGHT_MAX);
 }
 
 /*
@@ -2627,19 +2797,6 @@ TEST_PANIC_ONCE(datalog_panic_rule_weight_unweighted)
 }
 
 /*
- * Facts with weights cannot be added to the database of an unweighted
- * program.
- */
-TEST_PANIC_ONCE(datalog_panic_add_fact_weight_unweighted)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    int P = addPred(dl, 1, "P");
-    int a = addConst(dl, "a");
-    finalize(dl);
-    addFactToDB(dl, ATOM(P, a), &pddl_num_zero);
-}
-
-/*
  * Facts of unweighted programs cannot be read with weights.
  */
 TEST_PANIC_ONCE(datalog_panic_fact_weight_unweighted)
@@ -2738,21 +2895,6 @@ TEST_PANIC_ONCE(datalog_panic_annotations_not_goal)
 }
 
 /*
- * Facts of frozen predicates cannot be added.
- */
-TEST_PANIC_ONCE(datalog_panic_add_fact_frozen)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    commit_prog_t p;
-    commitProgram(dl, &p);
-    canonicalModelOK(dl);
-    PDDL_IVEC(input);
-    pddlIVecPush(&input, p.A);
-    dbCommit(dl, &input);
-    addFactToDB(dl, ATOM(p.E, p.n[1], p.n[2]), NULL);
-}
-
-/*
  * Gringo cannot compute the canonical model while any predicate is frozen.
  */
 TEST_PANIC_ONCE(datalog_panic_gringo_frozen)
@@ -2766,20 +2908,6 @@ TEST_PANIC_ONCE(datalog_panic_gringo_frozen)
     dbCommit(dl, &input);
     int ret = pddlDatalogCanonicalModelGringo(dl, NULL, NULL);
     assert(ret == 0);
-}
-
-/*
- * Facts cannot be added with negative weights.
- */
-TEST_PANIC_ONCE(datalog_panic_add_fact_negative_weight)
-{
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
-    int P = addPred(dl, 1, "P");
-    int a = addConst(dl, "a");
-    finalize(dl);
-    pddl_num_t w;
-    pddlNumSetIntDelta(&w, 0, -1);
-    addFactToDB(dl, ATOM(P, a), &w);
 }
 
 /*
@@ -2907,17 +3035,6 @@ TEST_PANIC_ONCE(datalog_panic_canonical_model_not_finalized)
 }
 
 /*
- * Facts can be added to the database only of a finalized program.
- */
-TEST_PANIC_ONCE(datalog_panic_add_fact_not_finalized)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    int P = addPred(dl, 1, "P");
-    int a = addConst(dl, "a");
-    addFactToDB(dl, ATOM(P, a), NULL);
-}
-
-/*
  * The database can be committed only in a finalized program.
  */
 TEST_PANIC_ONCE(datalog_panic_commit_not_finalized)
@@ -2977,4 +3094,72 @@ TEST_PANIC_ONCE(datalog_panic_with_limit_unweighted)
     fact(dl, ATOM0(P));
     finalize(dl);
     canonicalModelWithIntLimit(dl, 1, PDDL_DATALOG_CANONICAL_MODEL_OK);
+}
+
+/*
+ * Adding facts to the database fails without changing anything if the
+ * program is not finalized, the arguments are invalid, the predicate is
+ * frozen, or the weight is invalid, i.e., given in an unweighted program,
+ * negative, or lower than the weight of the last processed fact (also
+ * after it was restored by a rollback).
+ */
+TEST_ONCE(datalog_add_fact_errors)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_num_t neg, one;
+    pddlNumSetIntDelta(&neg, 0, -1);
+    pddlNumSetInt(&one, 1);
+
+    // The program is not finalized (the database cannot be read yet)
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    int X = pddlDatalogAddVar(dl, "X");
+    int arg[1] = { a };
+    int ret = pddlDatalogDBAddFact(dl, P, arg, NULL, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    pddlErrClear(&err);
+
+    // Invalid arguments and weights in an unweighted program
+    finalize(dl);
+    addFactToDBFail(dl, ATOM(P, a), &pddl_num_zero);
+    addFactToDBFail(dl, ATOM(-1, a), NULL);
+    addFactToDBFail(dl, ATOM(P + 1, a), NULL);
+    addFactToDBFail(dl, ATOM(P, X), NULL);
+    addFactToDB(dl, ATOM(P, a), NULL);
+    assertDB(dl, "Pa");
+    pddlDatalogDel(dl);
+
+    // A frozen predicate
+    dl = pddlDatalogNew();
+    commit_prog_t cp;
+    commitProgram(dl, &cp);
+    canonicalModelOK(dl);
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, cp.A);
+    dbCommit(dl, &input);
+    pddlIVecFree(&input);
+    addFactToDBFail(dl, ATOM(cp.E, cp.n[1], cp.n[2]), NULL);
+    addFactToDB(dl, ATOM(cp.A, cp.x[0], cp.n[0]), NULL);
+    pddlDatalogDel(dl);
+
+    // Weights in a weighted program: the weights of S, A, B, G are 0, 1, 3,
+    // and 6
+    dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    limit_prog_t lp;
+    limitProgram(dl, &lp);
+    addFactToDBFail(dl, ATOM0(lp.B), &neg);
+    canonicalModelWithIntLimit(dl, 1,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommit(dl, NULL);
+    addFactToDBFail(dl, ATOM0(lp.B), NULL);
+    pddlDatalogDBRollback(dl);
+    // The weight of the last processed fact A is restored by the rollback
+    addFactToDBFail(dl, ATOM0(lp.B), &pddl_num_zero);
+    addFactToDB(dl, ATOM0(lp.B), &one);
+    assertFacts(dl, lp.B, "B:1");
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, lp.G, 4);
+    pddlDatalogDel(dl);
 }
