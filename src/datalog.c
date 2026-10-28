@@ -201,11 +201,20 @@ static void addFactToDB(pddl_datalog_t *dl,
     pddlDatalogDBAddFact(dl, atom.pred, atom.arg, weight);
 }
 
-static void toNormalForm(pddl_datalog_t *dl)
+/** Finalizes the program with TO_NORMAL_FORM and asserts that it
+ *  succeeds */
+static void finalizeProgram(pddl_datalog_t *dl, pddl_bool_t to_normal_form)
 {
     pddl_err_t err = PDDL_ERR_INIT;
-    int ret = pddlDatalogToNormalForm(dl, &err);
+    int ret = pddlDatalogFinalizeProgram(dl, to_normal_form, &err);
     assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+}
+
+/** Finalizes the program and transforms it to the normal form */
+static void finalize(pddl_datalog_t *dl)
+{
+    finalizeProgram(dl, pddl_true);
 }
 
 /** Computes (or continues computing) the canonical model and asserts that
@@ -478,7 +487,7 @@ TEST_ONCE(datalog)
                   "R(2, 1, 1).\n"
                   "R(X, Y, W) :- P(X, Y), Q(Y, Z), S(Z, W).\n");
 
-    toNormalForm(dl);
+    finalize(dl);
     canonicalModelOK(dl);
     assertProgram(dl,
                   "P(1, 2).\n"
@@ -539,7 +548,7 @@ TEST_ONCE(datalog_annotated)
                   "R(X, Y, W) :- P(X, Y), Q(Y, Z), S(Z, W).; ann_size = 1\n"
                   "G() :- R(1, 2, 2).; ann_size = 1\n");
 
-    toNormalForm(dl);
+    finalize(dl);
     canonicalModelOK(dl);
     assertProgram(dl,
                   "P(1, 2).\n"
@@ -625,7 +634,7 @@ TEST_ONCE(datalog_canonical_model)
     pddl_datalog_t *dl = pddlDatalogNew();
     graph_t g;
     graphProgram(dl, &g);
-    toNormalForm(dl);
+    finalize(dl);
     canonicalModelOK(dl);
     assertGraphModel(dl, &g);
     pddlDatalogDel(dl);
@@ -651,7 +660,7 @@ TEST_ONCE(datalog_canonical_model_cont)
     fact(dl, ATOM(E, a, b));
     rule(dl, ATOM(T, X, Y), 1, ATOM(E, X, Y));
     rule(dl, ATOM(T, X, Z), 2, ATOM(T, X, Y), ATOM(E, Y, Z));
-    toNormalForm(dl);
+    finalize(dl);
 
     canonicalModelOK(dl);
     assertFacts(dl, T, "Tab");
@@ -719,7 +728,10 @@ TEST_ONCE(datalog_normal_form)
     rule(dl, ATOM(M, Z), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, Z));
     assert(pddlDatalogIsSafe(dl));
 
-    toNormalForm(dl);
+    finalizeProgram(dl, pddl_false);
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogToNormalForm(dl, &err);
+    assert(ret == 0);
     assert(pddlDatalogIsSafe(dl));
     assertProgram(dl,
                   "A(a, b).\n"
@@ -737,7 +749,6 @@ TEST_ONCE(datalog_normal_form)
                   "_p10(X) :- B(X, Y), D(Y).\n"
                   "_p11(Z) :- A(X, Y), B(Y, Z).\n");
 
-    pddl_err_t err = PDDL_ERR_INIT;
     canonicalModelOK(dl);
     assertFacts(dl, H, "Had Hbd");
     assertFacts(dl, I, "Ia Ib");
@@ -755,7 +766,7 @@ TEST_ONCE(datalog_normal_form)
     fact(dl, ATOM(A, a, a));
     rule(dl, ATOM(H, X, Y), 2, ATOM(A, X, X), ATOM(A, X, a));
     assert(!pddlDatalogIsSafe(dl));
-    int ret = pddlDatalogToNormalForm(dl, &err);
+    ret = pddlDatalogFinalizeProgram(dl, pddl_true, &err);
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
     pddlErrClear(&err);
@@ -807,7 +818,7 @@ static void weightedProgram(pddl_datalog_t *dl,
     }else{
         rule(dl, ATOM0(w->G), 1, ATOM(w->At, w->d));
     }
-    toNormalForm(dl);
+    finalize(dl);
 }
 
 /** Weighted canonical model of the program from weightedProgram() with
@@ -986,7 +997,7 @@ static void weightedInitialFactsTest(pddl_datalog_weight_type_t type,
     wrule(dl, 2, ATOM(A, a), 1, ATOM(B, b));
     wrule(dl, 1, ATOM(A, X), 1, ATOM(B, X));
     rule(dl, ATOM0(G), 2, ATOM(A, a), ATOM(A, b));
-    toNormalForm(dl);
+    finalize(dl);
 
     canonicalModelOK(dl);
     assertGoalWeight(dl, G, goal);
@@ -1039,7 +1050,7 @@ static void weightedDeltaTest(pddl_datalog_weight_type_t type, const char *t)
     rule(dl, ATOM0(G), 1, ATOM0(R));
     // Both zero-cost body facts are aggregated
     cwrule(dl, &z, ATOM0(T), 2, ATOM0(Q), ATOM0(P));
-    toNormalForm(dl);
+    finalize(dl);
 
     // No goal predicate, so the whole model is computed
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
@@ -1097,7 +1108,7 @@ static void weightedFloatTest(pddl_datalog_weight_type_t type, const char *d)
     wrule(dl, 5000, ATOM0(B), 1, ATOM0(S));
     wrule(dl, 2000, ATOM0(C), 1, ATOM0(B));
     rule(dl, ATOM0(D), 2, ATOM0(C), ATOM0(Q));
-    toNormalForm(dl);
+    finalize(dl);
 
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
     assertFacts(dl, S, "S:0");
@@ -1145,7 +1156,7 @@ static void weightedOverflowTest(pddl_datalog_weight_type_t type)
     cwrule(dl, &big, ATOM(P, X), 1, ATOM(A, X));
     // The weight of P(a) plus 2 (aggregated with A(a) of weight 0)
     wrule(dl, 2, ATOM(Q, X), 2, ATOM(P, X), ATOM(A, X));
-    toNormalForm(dl);
+    finalize(dl);
 
     for (int rep = 0; rep < 2; ++rep){
         pddlDatalogDBReset(dl);
@@ -1197,7 +1208,7 @@ TEST_ONCE(datalog_weighted_two_goals)
     wrule(dl, 1, ATOM0(G), 1, ATOM0(S));
     wrule(dl, 5, ATOM0(P), 1, ATOM0(S));
     wrule(dl, 1, ATOM0(H), 1, ATOM0(P));
-    toNormalForm(dl);
+    finalize(dl);
 
     for (int rep = 0; rep < 2; ++rep){
         canonicalModelOK(dl);
@@ -1280,7 +1291,7 @@ TEST_ONCE(datalog_neg_static)
     pddl_datalog_t *dl = pddlDatalogNew();
     neg_t n;
     negProgram(dl, &n);
-    toNormalForm(dl);
+    finalize(dl);
     canonicalModelOK(dl);
     assertNegModel(dl, &n);
     pddlDatalogDel(dl);
@@ -1293,7 +1304,7 @@ static void weightedNegStaticTest(pddl_datalog_weight_type_t type)
     pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
     neg_t n;
     negProgram(dl, &n);
-    toNormalForm(dl);
+    finalize(dl);
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
     assertFacts(dl, n.H, "Ha:0 Hc:0");
     assertFacts(dl, n.N, "Na:0 Nb:0");
@@ -1326,7 +1337,7 @@ static void weightedNegStaticTest(pddl_datalog_weight_type_t type)
 
     rule(dl, ATOM0(G), 1, ATOM(H, a));
     wrule(dl, 3, ATOM0(G), 1, ATOM(H, b));
-    toNormalForm(dl);
+    finalize(dl);
 
     canonicalModelOK(dl);
     assertGoalWeight(dl, G, 4);
@@ -1373,7 +1384,7 @@ TEST_ONCE(datalog_db)
     fact(dl, ATOM(E, a, b));
     rule(dl, ATOM(T, X, Y), 1, ATOM(E, X, Y));
     rule(dl, ATOM(T, X, Z), 2, ATOM(T, X, Y), ATOM(E, Y, Z));
-    toNormalForm(dl);
+    finalize(dl);
 
     assert(dbSize(dl) == 0);
     assertFacts(dl, E, "");
@@ -1435,7 +1446,7 @@ static void rollbackProgram(pddl_datalog_t *dl, rollback_t *r)
     rule(dl, ATOM(r->H, X, Z), 2, ATOM(r->A, X, Y), ATOM(r->C, Y, Z));
     rule(dl, ATOM(r->B, X), 1, ATOM(r->A, X, Y));
     rule(dl, ATOM(r->K, Z), 1, ATOM(r->H, X, Z));
-    toNormalForm(dl);
+    finalize(dl);
 
     canonicalModelOK(dl);
     dbCommit(dl, NULL);
@@ -1675,7 +1686,7 @@ static void commitProgram(pddl_datalog_t *dl, commit_prog_t *p)
     rule(dl, ATOM(p->T, X, Z), 2, ATOM(p->T, X, Y), ATOM(p->E, Y, Z));
     rule(dl, ATOM(p->H, X, Z), 2, ATOM(p->A, X, Y), ATOM(p->T, Y, Z));
     rule(dl, ATOM(p->K, Z), 1, ATOM(p->H, X, Z));
-    toNormalForm(dl);
+    finalize(dl);
 }
 
 /** Writes to OUT the canonical model of the program of commitProgram()
@@ -1866,7 +1877,7 @@ TEST_ONCE(datalog_commit_frozen)
     rule(dl, ATOM(J, X, Z), 2, ATOM(A, X, Y), ATOM(D, Y, Z));
     rule(dl, ATOM(W, X), 2, ATOM(C, X, Y), ATOM(C, Y, X));
     rule(dl, ATOM(K, Z), 1, ATOM(H, X, Z));
-    toNormalForm(dl);
+    finalize(dl);
     canonicalModelOK(dl);
     assertDB(dl, "C11 C22 W1 W2");
 
@@ -1965,7 +1976,7 @@ TEST_ONCE(datalog_commit_frozen_kept_sizes)
     fact(dl, ATOM(C, c1, c1));
     rule(dl, ATOM(H, X, Z), 2, ATOM(A, X, Y), ATOM(C, Y, Z));
     rule(dl, ATOM(J, X, Z), 2, ATOM(A, X, Y), ATOM(D, Y, Z));
-    toNormalForm(dl);
+    finalize(dl);
     addFactToDB(dl, ATOM(A, a, c1), NULL);
     canonicalModelOK(dl);
     assertDB(dl, "Aa1 C11 Ha1");
@@ -2085,7 +2096,7 @@ static void chainProgram(pddl_datalog_t *dl,
           ATOM(ch->At, X), ATOM(ch->L, X, Y));
     arule(dl, annotation, ann_goal, ATOM0(ch->G), 2,
           ATOM(ch->At, ch->c), ATOM(ch->At, ch->b));
-    toNormalForm(dl);
+    finalize(dl);
 }
 
 /*
@@ -2143,6 +2154,7 @@ TEST_ONCE(datalog_gringo)
     pddl_datalog_t *dl = pddlDatalogNew();
     graph_t g;
     graphProgram(dl, &g);
+    finalizeProgram(dl, pddl_false);
     int ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
     assert(ret == 0);
     assertGraphModel(dl, &g);
@@ -2151,6 +2163,7 @@ TEST_ONCE(datalog_gringo)
     dl = pddlDatalogNew();
     neg_t n;
     negProgram(dl, &n);
+    finalizeProgram(dl, pddl_false);
     ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
     assert(ret == 0);
     assertNegModel(dl, &n);
@@ -2172,6 +2185,7 @@ TEST_ONCE(datalog_gringo_weighted)
     pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
     graph_t g;
     graphProgram(dl, &g);
+    finalizeProgram(dl, pddl_false);
     int ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
@@ -2199,7 +2213,7 @@ TEST_ONCE(datalog_initial_facts_commit)
     fact(dl, ATOM(E, a, b));
     rule(dl, ATOM(T, X, Y), 1, ATOM(E, X, Y));
     rule(dl, ATOM(T, X, Z), 2, ATOM(T, X, Y), ATOM(E, Y, Z));
-    toNormalForm(dl);
+    finalize(dl);
 
     addFactToDB(dl, ATOM(E, b, c), NULL);
     dbCommit(dl, NULL);
@@ -2262,7 +2276,7 @@ TEST_ONCE(datalog_weighted_annotations)
         awrule(dl, 5, annotation, &ann_teleport, ATOM(At, Y), 2,
                ATOM(At, X), ATOM(T, X, Y));
         arule(dl, annotation, &ann_goal, ATOM0(G), 1, ATOM(At, c));
-        toNormalForm(dl);
+        finalize(dl);
 
         canonicalModelOK(dl);
         assertGoalWeight(dl, G, 2);
@@ -2307,7 +2321,7 @@ TEST_ONCE(datalog_goal_without_user_id)
         awrule(dl, 1, annotation, &ann_move, ATOM(At, Y), 3,
                ATOM(At, X), ATOM(L, X, Y), ATOM(O, Y));
         rule(dl, ATOM0(G), 1, ATOM(At, c));
-        toNormalForm(dl);
+        finalize(dl);
 
         dbCommit(dl, NULL);
         for (int rep = 0; rep < 2; ++rep){
@@ -2335,88 +2349,6 @@ TEST_ONCE(datalog_goal_without_user_id)
 }
 
 /*
- * The user ID of a predicate added after the database was initialized can
- * be set, because the change of the program re-initializes the database
- * (and its facts are then collected).
- */
-TEST_ONCE(datalog_user_id_extended_program)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    int P = addPred(dl, 1, "P");
-    int a = addConst(dl, "a");
-    int X = pddlDatalogAddVar(dl, "X");
-    fact(dl, ATOM(P, a));
-    canonicalModelOK(dl);
-    assertDB(dl, "Pa");
-
-    int Q = addPred(dl, 1, "Q");
-    rule(dl, ATOM(Q, X), 1, ATOM(P, X));
-    // The database is not re-initialized yet and it has no facts of Q
-    assertFacts(dl, Q, "");
-    canonicalModelOK(dl);
-    assertFacts(dl, Q, "Qa");
-    assertDB(dl, "Pa Qa");
-    pddlDatalogDel(dl);
-}
-
-/*
- * Setting a user ID of a predicate re-initializes the database before its
- * next use, so the facts of the predicate are then collected; until then,
- * the database is out of date and no facts of the predicate are returned.
- */
-TEST_ONCE(datalog_user_id_after_init)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    int P = addPred(dl, 1, "P");
-    int Q = pddlDatalogAddPred(dl, 1, "Q");
-    int a = addConst(dl, "a");
-    int b = addConst(dl, "b");
-    int X = pddlDatalogAddVar(dl, "X");
-    rule(dl, ATOM(Q, X), 1, ATOM(P, X));
-    fact(dl, ATOM(P, a));
-    fact(dl, ATOM(P, b));
-    canonicalModelOK(dl);
-    assertFacts(dl, P, "Pa Pb");
-
-    pddlDatalogSetPredUserId(dl, Q, 'Q');
-    assertFacts(dl, Q, "");
-    canonicalModelOK(dl);
-    assertFacts(dl, Q, "Qa Qb");
-    assertDB(dl, "Pa Pb Qa Qb");
-
-    // Another user ID returns the same facts
-    pddlDatalogSetPredUserId(dl, Q, 'R');
-    canonicalModelOK(dl);
-    assertFacts(dl, Q, "Ra Rb");
-
-    // Removing the user ID and setting it again
-    pddlDatalogSetPredUserId(dl, Q, -1);
-    canonicalModelOK(dl);
-    assertFacts(dl, P, "Pa Pb");
-    pddlDatalogSetPredUserId(dl, Q, 'Q');
-    canonicalModelOK(dl);
-    assertFacts(dl, Q, "Qa Qb");
-    pddlDatalogDel(dl);
-}
-
-/*
- * Setting a user ID re-initializes the database, which drops the last
- * commit, so a rollback afterwards PANICs.
- */
-TEST_PANIC_ONCE(datalog_panic_rollback_after_user_id)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    int P = addPred(dl, 1, "P");
-    int Q = pddlDatalogAddPred(dl, 1, "Q");
-    int a = addConst(dl, "a");
-    fact(dl, ATOM(P, a));
-    canonicalModelOK(dl);
-    dbCommit(dl, NULL);
-    pddlDatalogSetPredUserId(dl, Q, 'Q');
-    pddlDatalogDBRollback(dl);
-}
-
-/*
  * A rule with a non-zero weight cannot be added to an unweighted program.
  */
 TEST_PANIC_ONCE(datalog_panic_rule_weight_unweighted)
@@ -2436,6 +2368,7 @@ TEST_PANIC_ONCE(datalog_panic_add_fact_weight_unweighted)
     pddl_datalog_t *dl = pddlDatalogNew();
     int P = addPred(dl, 1, "P");
     int a = addConst(dl, "a");
+    finalize(dl);
     addFactToDB(dl, ATOM(P, a), &pddl_num_zero);
 }
 
@@ -2448,6 +2381,7 @@ TEST_PANIC_ONCE(datalog_panic_fact_weight_unweighted)
     int P = addPred(dl, 1, "P");
     int a = addConst(dl, "a");
     fact(dl, ATOM(P, a));
+    finalize(dl);
     canonicalModelOK(dl);
     int pred, arity, arg[1];
     pddl_num_t weight;
@@ -2463,6 +2397,7 @@ TEST_PANIC_ONCE(datalog_panic_goal_weight_unweighted)
     pddl_datalog_t *dl = pddlDatalogNew();
     int G = addGoalPred(dl, "G");
     fact(dl, ATOM0(G));
+    finalize(dl);
     canonicalModelOK(dl);
     pddl_num_t weight;
     int ret = pddlDatalogDBGoalWeight(dl, G, &weight);
@@ -2470,7 +2405,7 @@ TEST_PANIC_ONCE(datalog_panic_goal_weight_unweighted)
 }
 
 /*
- * Rollback requires a previous commit since the (re-)initialization of the
+ * Rollback requires a previous commit since the last reset of the
  * database: the commit of rollbackProgram() is dropped by the reset.
  */
 TEST_PANIC_ONCE(datalog_panic_rollback_no_commit)
@@ -2491,6 +2426,7 @@ TEST_PANIC_ONCE(datalog_panic_facts_without_user_id)
     int P = pddlDatalogAddPred(dl, 1, "P");
     int a = addConst(dl, "a");
     fact(dl, ATOM(P, a));
+    finalize(dl);
     canonicalModelOK(dl);
     facts_t fs;
     fs.size = 0;
@@ -2507,6 +2443,7 @@ TEST_PANIC_ONCE(datalog_panic_goal_weight_not_goal)
     int P = addPred(dl, 1, "P");
     int a = addConst(dl, "a");
     fact(dl, ATOM(P, a));
+    finalize(dl);
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
     pddl_num_t weight;
     int ret = pddlDatalogDBGoalWeight(dl, P, &weight);
@@ -2528,6 +2465,7 @@ TEST_PANIC_ONCE(datalog_panic_annotations_not_goal)
     int X = pddlDatalogAddVar(dl, "X");
     fact(dl, ATOM(P, a));
     arule(dl, annotation, &ann, ATOM(Q, X), 1, ATOM(P, X));
+    finalize(dl);
     canonicalModelOK(dl);
     pddlDatalogExecuteAnnotations(dl, Q);
 }
@@ -2571,6 +2509,7 @@ TEST_PANIC_ONCE(datalog_panic_add_fact_negative_weight)
     pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
     int P = addPred(dl, 1, "P");
     int a = addConst(dl, "a");
+    finalize(dl);
     pddl_num_t w;
     pddlNumSetIntDelta(&w, 0, -1);
     addFactToDB(dl, ATOM(P, a), &w);
@@ -2602,4 +2541,151 @@ TEST_PANIC_ONCE(datalog_panic_add_rule_negative_weight)
     ruleAddBody(dl, &rule, ATOM0(S));
     pddlNumSetInt(&rule.weight, -1);
     pddlDatalogAddRule(dl, &rule);
+}
+
+/*
+ * Predicates cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_pred_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    finalize(dl);
+    pddlDatalogAddPred(dl, 1, "P");
+}
+
+/*
+ * Goal predicates cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_goal_pred_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    finalize(dl);
+    pddlDatalogAddGoalPred(dl, "G");
+}
+
+/*
+ * Constants cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_const_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    finalize(dl);
+    pddlDatalogAddConst(dl, "a");
+}
+
+/*
+ * Variables cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_var_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    finalize(dl);
+    pddlDatalogAddVar(dl, "X");
+}
+
+/*
+ * Rules cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_rule_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    finalize(dl);
+    fact(dl, ATOM(P, a));
+}
+
+/*
+ * User IDs of predicates cannot be set in a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_set_pred_user_id_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = pddlDatalogAddPred(dl, 1, "P");
+    finalize(dl);
+    pddlDatalogSetPredUserId(dl, P, 'P');
+}
+
+/*
+ * User IDs of constants cannot be set in a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_set_const_user_id_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int a = pddlDatalogAddConst(dl, "a");
+    finalize(dl);
+    pddlDatalogSetConstUserId(dl, a, 'a');
+}
+
+/*
+ * A program can be finalized only once.
+ */
+TEST_PANIC_ONCE(datalog_panic_finalize_twice)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    finalize(dl);
+    finalizeProgram(dl, pddl_false);
+}
+
+/*
+ * The canonical model requires a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_canonical_model_not_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    canonicalModelOK(dl);
+}
+
+/*
+ * Facts can be added to the database only of a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_fact_not_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    addFactToDB(dl, ATOM(P, a), NULL);
+}
+
+/*
+ * The database can be committed only in a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_commit_not_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    addPred(dl, 1, "P");
+    dbCommit(dl, NULL);
+}
+
+/*
+ * The normal form requires a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_normal_form_not_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogToNormalForm(dl, &err);
+    assert(ret == 0);
+}
+
+/*
+ * The normal form cannot be created once the database was used, because
+ * it changes the program.
+ */
+TEST_PANIC_ONCE(datalog_panic_normal_form_after_db)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    finalizeProgram(dl, pddl_false);
+    addFactToDB(dl, ATOM(P, a), NULL);
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogToNormalForm(dl, &err);
+    assert(ret == 0);
 }
