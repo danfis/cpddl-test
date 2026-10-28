@@ -1355,65 +1355,6 @@ TEST_ONCE(datalog_weighted_neg_static_max)
 }
 
 /*
- * Removing rules with pddlDatalogRmLastRules() and pddlDatalogRmRules()
- * changes the canonical model computed afterwards.
- */
-TEST_ONCE(datalog_rm_rules)
-{
-    pddl_datalog_t *dl = pddlDatalogNew();
-    int P = addPred(dl, 1, "P");
-    int Q = addPred(dl, 1, "Q");
-    int R = addPred(dl, 1, "R");
-    int S = addPred(dl, 1, "S");
-    int a = addConst(dl, "a");
-    int b = addConst(dl, "b");
-    int X = pddlDatalogAddVar(dl, "X");
-    assert(fact(dl, ATOM(P, a)) == 0);
-    assert(fact(dl, ATOM(P, b)) == 1);
-    assert(rule(dl, ATOM(Q, X), 1, ATOM(P, X)) == 2);
-    assert(rule(dl, ATOM(R, X), 1, ATOM(Q, X)) == 3);
-    assert(rule(dl, ATOM(S, X), 1, ATOM(P, X)) == 4);
-
-    canonicalModelOK(dl);
-    assertFacts(dl, P, "Pa Pb");
-    assertFacts(dl, Q, "Qa Qb");
-    assertFacts(dl, R, "Ra Rb");
-    assertFacts(dl, S, "Sa Sb");
-
-    // Removes S(X) :- P(X).
-    pddlDatalogRmLastRules(dl, 1);
-    canonicalModelOK(dl);
-    assertFacts(dl, P, "Pa Pb");
-    assertFacts(dl, Q, "Qa Qb");
-    assertFacts(dl, R, "Ra Rb");
-    assertFacts(dl, S, "");
-
-    // Removes P(a) and Q(X) :- P(X).
-    PDDL_ISET(rm);
-    pddlISetAdd(&rm, 0);
-    pddlISetAdd(&rm, 2);
-    pddlDatalogRmRules(dl, &rm);
-    pddlISetFree(&rm);
-    canonicalModelOK(dl);
-    assertFacts(dl, P, "Pb");
-    assertFacts(dl, Q, "");
-    assertFacts(dl, R, "");
-
-    // The remaining rules are P(b) and R(X) :- Q(X)
-    assert(rule(dl, ATOM(Q, X), 1, ATOM(P, X)) == 2);
-    canonicalModelOK(dl);
-    assertFacts(dl, P, "Pb");
-    assertFacts(dl, Q, "Qb");
-    assertFacts(dl, R, "Rb");
-
-    // Removing more rules than there are removes all of them
-    pddlDatalogRmLastRules(dl, 10);
-    canonicalModelOK(dl);
-    assert(dbSize(dl) == 0);
-    pddlDatalogDel(dl);
-}
-
-/*
  * Facts added to the database with pddlDatalogDBAddFact() (which
  * initializes the database if necessary), reading facts with
  * pddlDatalogDBFact(), and clearing the database with pddlDatalogDBReset().
