@@ -729,10 +729,12 @@ TEST_ONCE(datalog_normal_form)
     assert(pddlDatalogIsSafe(dl));
 
     finalizeProgram(dl, pddl_false);
+    assert(!pddlDatalogIsNormalForm(dl));
     pddl_err_t err = PDDL_ERR_INIT;
     int ret = pddlDatalogToNormalForm(dl, &err);
     assert(ret == 0);
     assert(pddlDatalogIsSafe(dl));
+    assert(pddlDatalogIsNormalForm(dl));
     assertProgram(dl,
                   "A(a, b).\n"
                   "A(b, b).\n"
@@ -770,6 +772,115 @@ TEST_ONCE(datalog_normal_form)
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
     pddlErrClear(&err);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * The normal form required by the canonical model (safe rules with at most
+ * two positive body atoms) is recognized also without the normalization,
+ * and the canonical model of a program that is not in the normal form is
+ * refused without touching the database.
+ */
+TEST_ONCE(datalog_is_normal_form)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+
+    // Safe rules with at most two body atoms
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int B = addPred(dl, 1, "B");
+    int H = addPred(dl, 1, "H");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(A, b, c));
+    fact(dl, ATOM(B, c));
+    rule(dl, ATOM(H, X), 2, ATOM(A, X, Y), ATOM(B, Y));
+    finalizeProgram(dl, pddl_false);
+    assert(pddlDatalogIsNormalForm(dl));
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Hb");
+    pddlDatalogDel(dl);
+
+    // A rule with three body atoms is refused until the normalization
+    dl = pddlDatalogNew();
+    A = addPred(dl, 2, "A");
+    B = addPred(dl, 1, "B");
+    H = addPred(dl, 1, "H");
+    a = addConst(dl, "a");
+    b = addConst(dl, "b");
+    c = addConst(dl, "c");
+    X = pddlDatalogAddVar(dl, "X");
+    Y = pddlDatalogAddVar(dl, "Y");
+    Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(A, b, c));
+    fact(dl, ATOM(B, c));
+    rule(dl, ATOM(H, X), 3, ATOM(A, X, Y), ATOM(A, Y, Z), ATOM(B, Z));
+    finalizeProgram(dl, pddl_false);
+    assert(!pddlDatalogIsNormalForm(dl));
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+    int ret = pddlDatalogToNormalForm(dl, &err);
+    assert(ret == 0);
+    assert(pddlDatalogIsNormalForm(dl));
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    pddlDatalogDel(dl);
+
+    // A variable of the head is not in the body
+    dl = pddlDatalogNew();
+    A = addPred(dl, 1, "A");
+    H = addPred(dl, 2, "H");
+    a = addConst(dl, "a");
+    X = pddlDatalogAddVar(dl, "X");
+    Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(A, a));
+    rule(dl, ATOM(H, X, Y), 1, ATOM(A, X));
+    finalizeProgram(dl, pddl_false);
+    assert(!pddlDatalogIsSafe(dl));
+    assert(!pddlDatalogIsNormalForm(dl));
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+    pddlDatalogDel(dl);
+
+    // A body-less rule with a variable
+    dl = pddlDatalogNew();
+    A = addPred(dl, 1, "A");
+    X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(A, X));
+    finalizeProgram(dl, pddl_false);
+    assert(!pddlDatalogIsNormalForm(dl));
+    ret = pddlDatalogToNormalForm(dl, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    pddlErrClear(&err);
+    assert(!pddlDatalogIsNormalForm(dl));
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+    pddlDatalogDel(dl);
+
+    // A variable of a negative atom is not in the positive body
+    dl = pddlDatalogNew();
+    A = addPred(dl, 1, "A");
+    B = addPred(dl, 1, "B");
+    H = addPred(dl, 1, "H");
+    a = addConst(dl, "a");
+    X = pddlDatalogAddVar(dl, "X");
+    Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(A, a));
+    pddl_datalog_rule_t r;
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(A, X));
+    ruleAddNeg(dl, &r, ATOM(B, Y));
+    ruleAdd(dl, &r);
+    assert(!pddlDatalogIsSafe(dl));
+    ret = pddlDatalogFinalizeProgram(dl, pddl_true, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    pddlErrClear(&err);
+    assert(!pddlDatalogIsNormalForm(dl));
     pddlDatalogDel(dl);
 }
 
@@ -2167,9 +2278,11 @@ TEST_ONCE(datalog_gringo)
     ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
     assert(ret == 0);
     assertNegModel(dl, &n);
-    // The database contains the whole model, nothing is added
+    // The program is not in the normal form, so the canonical model is
+    // refused and the database stays unchanged
     int size = dbSize(dl);
-    canonicalModelOK(dl);
+    assert(!pddlDatalogIsNormalForm(dl));
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
     assert(dbSize(dl) == size);
     assertNegModel(dl, &n);
     pddlDatalogDel(dl);
@@ -2688,4 +2801,14 @@ TEST_PANIC_ONCE(datalog_panic_normal_form_after_db)
     pddl_err_t err = PDDL_ERR_INIT;
     int ret = pddlDatalogToNormalForm(dl, &err);
     assert(ret == 0);
+}
+
+/*
+ * The normal form of a program is determined by its finalization.
+ */
+TEST_PANIC_ONCE(datalog_panic_is_normal_form_not_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int ret = pddlDatalogIsNormalForm(dl);
+    assert(ret);
 }
