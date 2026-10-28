@@ -217,6 +217,26 @@ static void finalize(pddl_datalog_t *dl)
     finalizeProgram(dl, pddl_true);
 }
 
+/** Asserts that the status ST returned by a computation of the canonical
+ *  model is EXPECTED and that ERR is set only on errors */
+static void assertCanonicalModelStatus(
+                    pddl_datalog_canonical_model_status_t st,
+                    pddl_datalog_canonical_model_status_t expected,
+                    const pddl_err_t *err)
+{
+    switch (st){
+    case PDDL_DATALOG_CANONICAL_MODEL_ERR:
+        assert(st == expected);
+        assert(pddlErrIsSet(err));
+        break;
+    case PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED:
+    case PDDL_DATALOG_CANONICAL_MODEL_OK:
+        assert(st == expected);
+        assert(!pddlErrIsSet(err));
+        break;
+    }
+}
+
 /** Computes (or continues computing) the canonical model and asserts that
  *  it returns EXPECTED */
 static void canonicalModel(pddl_datalog_t *dl,
@@ -225,17 +245,31 @@ static void canonicalModel(pddl_datalog_t *dl,
     pddl_err_t err = PDDL_ERR_INIT;
     pddl_datalog_canonical_model_status_t st;
     st = pddlDatalogCanonicalModel(dl, &err);
-    switch (st){
-    case PDDL_DATALOG_CANONICAL_MODEL_ERR:
-        assert(st == expected);
-        assert(pddlErrIsSet(&err));
-        break;
-    case PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED:
-    case PDDL_DATALOG_CANONICAL_MODEL_OK:
-        assert(st == expected);
-        assert(!pddlErrIsSet(&err));
-        break;
-    }
+    assertCanonicalModelStatus(st, expected, &err);
+}
+
+/** Computes (or continues computing) the weighted canonical model up to
+ *  the weight LIMIT and asserts that it returns EXPECTED */
+static void canonicalModelWithLimit(
+                    pddl_datalog_t *dl,
+                    const pddl_num_t *limit,
+                    pddl_datalog_canonical_model_status_t expected)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_datalog_canonical_model_status_t st;
+    st = pddlDatalogWeightedCanonicalModelWithLimit(dl, limit, &err);
+    assertCanonicalModelStatus(st, expected, &err);
+}
+
+/** Same as canonicalModelWithLimit() with an integer limit */
+static void canonicalModelWithIntLimit(
+                    pddl_datalog_t *dl,
+                    int limit,
+                    pddl_datalog_canonical_model_status_t expected)
+{
+    pddl_num_t l;
+    pddlNumSetInt(&l, limit);
+    canonicalModelWithLimit(dl, &l, expected);
 }
 
 /** Computes the canonical model and asserts that it returns OK */
@@ -1300,6 +1334,126 @@ TEST_ONCE(datalog_weighted_overflow_add)
 TEST_ONCE(datalog_weighted_overflow_max)
 {
     weightedOverflowTest(PDDL_DATALOG_WEIGHT_MAX);
+}
+
+/** Predicates of the program created by limitProgram() */
+struct limit_prog {
+    int S, A, B, G;
+};
+typedef struct limit_prog limit_prog_t;
+
+/** Creates and finalizes the chain S, A :- S (w=1), B :- A (w=2), and the
+ *  goal G :- B (w=3), i.e., the weights are S:0, A:1, B:3, G:6 with both
+ *  aggregations */
+static void limitProgram(pddl_datalog_t *dl, limit_prog_t *p)
+{
+    p->S = addPred(dl, 0, "S");
+    p->A = addPred(dl, 0, "A");
+    p->B = addPred(dl, 0, "B");
+    p->G = addGoalPred(dl, "G");
+    fact(dl, ATOM0(p->S));
+    wrule(dl, 1, ATOM0(p->A), 1, ATOM0(p->S));
+    wrule(dl, 2, ATOM0(p->B), 1, ATOM0(p->A));
+    wrule(dl, 3, ATOM0(p->G), 1, ATOM0(p->B));
+    finalize(dl);
+}
+
+static void weightedWithLimitTest(pddl_datalog_weight_type_t type)
+{
+    const pddl_datalog_canonical_model_status_t unreached
+        = PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED;
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    limit_prog_t p;
+    limitProgram(dl, &p);
+
+    // A is derived by S, but it is not popped
+    canonicalModelWithIntLimit(dl, 0, unreached);
+    assertFacts(dl, p.S, "S:0");
+    assertFacts(dl, p.A, "A:1");
+    assertFacts(dl, p.B, "");
+
+    pddl_num_t limit;
+    pddlNumSetFlt(&limit, 2.5f);
+    canonicalModelWithLimit(dl, &limit, unreached);
+    assertFacts(dl, p.B, "B:3");
+    assertFacts(dl, p.G, "");
+
+    // The facts with the weights equal to the limit are processed
+    canonicalModelWithIntLimit(dl, 3, unreached);
+    assertFacts(dl, p.G, "G:6");
+
+    canonicalModelWithIntLimit(dl, 6, PDDL_DATALOG_CANONICAL_MODEL_OK);
+    assertGoalWeight(dl, p.G, 6);
+
+    // The goal was already reached
+    canonicalModelWithIntLimit(dl, 0, PDDL_DATALOG_CANONICAL_MODEL_OK);
+    assertGoalWeight(dl, p.G, 6);
+
+    // Continuing without a limit
+    pddlDatalogDBReset(dl);
+    canonicalModelWithIntLimit(dl, 1, unreached);
+    assertFacts(dl, p.B, "B:3");
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, p.G, 6);
+
+    // Rollback to a commit made before the limited computation
+    pddlDatalogDBReset(dl);
+    dbCommit(dl, NULL);
+    canonicalModelWithIntLimit(dl, 1, unreached);
+    pddlDatalogDBRollback(dl);
+    assert(dbSize(dl) == 0);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, p.G, 6);
+    pddlDatalogDel(dl);
+
+    // Unreachable goal: all facts are derived
+    dl = pddlDatalogNewWeighted(type);
+    int S = addPred(dl, 0, "S");
+    int A = addPred(dl, 0, "A");
+    int B = addPred(dl, 0, "B");
+    int G = addGoalPred(dl, "G");
+    fact(dl, ATOM0(S));
+    wrule(dl, 1, ATOM0(A), 1, ATOM0(S));
+    wrule(dl, 1, ATOM0(G), 1, ATOM0(B));
+    finalize(dl);
+    canonicalModelWithIntLimit(dl, 100, unreached);
+    assertDB(dl, "A S");
+    pddl_num_t w;
+    int ret = pddlDatalogDBGoalWeight(dl, G, &w);
+    assert(ret == -1);
+    pddlDatalogDel(dl);
+
+    // The program must be in the normal form
+    dl = pddlDatalogNewWeighted(type);
+    S = addPred(dl, 0, "S");
+    A = addPred(dl, 0, "A");
+    G = addGoalPred(dl, "G");
+    fact(dl, ATOM0(S));
+    fact(dl, ATOM0(A));
+    rule(dl, ATOM0(G), 3, ATOM0(S), ATOM0(A), ATOM0(S));
+    finalizeProgram(dl, pddl_false);
+    canonicalModelWithIntLimit(dl, 100, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * The weighted canonical model computed up to a limit stops before the
+ * first fact with a greater weight is popped (sum of the weights); the
+ * following calls continue the computation.
+ */
+TEST_ONCE(datalog_weighted_with_limit_add)
+{
+    weightedWithLimitTest(PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * The weighted canonical model computed up to a limit stops before the
+ * first fact with a greater weight is popped (maximum of the weights); the
+ * following calls continue the computation.
+ */
+TEST_ONCE(datalog_weighted_with_limit_max)
+{
+    weightedWithLimitTest(PDDL_DATALOG_WEIGHT_MAX);
 }
 
 /*
@@ -2811,4 +2965,16 @@ TEST_PANIC_ONCE(datalog_panic_is_normal_form_not_finalized)
     pddl_datalog_t *dl = pddlDatalogNew();
     int ret = pddlDatalogIsNormalForm(dl);
     assert(ret);
+}
+
+/*
+ * The canonical model with a limit requires a weighted program.
+ */
+TEST_PANIC_ONCE(datalog_panic_with_limit_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 0, "P");
+    fact(dl, ATOM0(P));
+    finalize(dl);
+    canonicalModelWithIntLimit(dl, 1, PDDL_DATALOG_CANONICAL_MODEL_OK);
 }
