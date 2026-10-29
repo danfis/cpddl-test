@@ -1626,6 +1626,188 @@ TEST_ONCE(datalog_weighted_commit_max)
     weightedCommitTest(PDDL_DATALOG_WEIGHT_MAX);
 }
 
+/** Predicates and constants of the program created by
+ *  weightedFrozenProgram() */
+struct weighted_frozen {
+    int E, T, At, G;
+    int c[4];
+};
+typedef struct weighted_frozen weighted_frozen_t;
+
+/** Creates and finalizes a program with the static links E: 0 -> 1 -> 2 ->
+ *  3 and 0 -> 2, their transitive closure T (weight T_WEIGHT), the moves
+ *  At(Y) :- At(X), T(X, Y) (weight 1), and the goal G :- At(3) */
+static void weightedFrozenProgram(pddl_datalog_t *dl,
+                                  weighted_frozen_t *w,
+                                  int t_weight)
+{
+    w->E = addPred(dl, 2, "E");
+    w->T = addPred(dl, 2, "T");
+    w->At = addPred(dl, 1, "A");
+    w->G = addGoalPred(dl, "G");
+    for (int i = 0; i < 4; ++i){
+        char name[2] = { '0' + i, '\x0' };
+        w->c[i] = addConst(dl, name);
+    }
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(w->E, w->c[0], w->c[1]));
+    fact(dl, ATOM(w->E, w->c[1], w->c[2]));
+    fact(dl, ATOM(w->E, w->c[2], w->c[3]));
+    fact(dl, ATOM(w->E, w->c[0], w->c[2]));
+    wrule(dl, t_weight, ATOM(w->T, X, Y), 1, ATOM(w->E, X, Y));
+    wrule(dl, t_weight, ATOM(w->T, X, Z), 2,
+          ATOM(w->T, X, Y), ATOM(w->E, Y, Z));
+    wrule(dl, 1, ATOM(w->At, Y), 2, ATOM(w->At, X), ATOM(w->T, X, Y));
+    rule(dl, ATOM0(w->G), 1, ATOM(w->At, w->c[3]));
+    finalize(dl);
+}
+
+/** Writes the facts of At with their weights and the status and the weight
+ *  of the goal (computed from At(START)) to OUT */
+static void weightedFrozenResult(pddl_datalog_t *dl,
+                                 const weighted_frozen_t *w,
+                                 pddl_datalog_canonical_model_status_t st,
+                                 char *out)
+{
+    facts_t fs;
+    fs.size = 0;
+    pddlDatalogDBForEachFact(dl, w->At, factCB, &fs);
+    factsJoin(&fs, out);
+    pddl_num_t g;
+    int len = strlen(out);
+    if (st == PDDL_DATALOG_CANONICAL_MODEL_OK
+            && pddlDatalogDBGoalWeight(dl, w->G, &g) == 0){
+        char buf[32];
+        snprintf(out + len, STR_SIZE - len, " | G:%s",
+                 pddlNumFmt(&g, buf, 32));
+    }else{
+        snprintf(out + len, STR_SIZE - len, " | unreached");
+    }
+}
+
+/** Computes the canonical model of a fresh (not frozen) program from
+ *  At(START) and writes the result to OUT */
+static void weightedFrozenReference(pddl_datalog_weight_type_t type,
+                                    int start,
+                                    char *out)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    weighted_frozen_t w;
+    weightedFrozenProgram(dl, &w, 0);
+    addFactToDB(dl, ATOM(w.At, w.c[start]), NULL);
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_datalog_canonical_model_status_t st;
+    st = pddlDatalogCanonicalModel(dl, &err);
+    assert(st != PDDL_DATALOG_CANONICAL_MODEL_ERR);
+    weightedFrozenResult(dl, &w, st, out);
+    pddlDatalogDel(dl);
+}
+
+static void weightedFrozenTest(pddl_datalog_weight_type_t type)
+{
+    // The static part (E, T) is processed with the limit zero and frozen
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    weighted_frozen_t w;
+    weightedFrozenProgram(dl, &w, 0);
+    canonicalModelWithIntLimit(dl, 0,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, w.At);
+    dbCommit(dl, &input);
+    addFactToDBFail(dl, ATOM(w.E, w.c[3], w.c[0]), NULL);
+
+    // Every evaluation from the commit gives the same results as a fresh
+    // program
+    for (int rep = 0; rep < 2; ++rep){
+        for (int start = 0; start < 4; ++start){
+            pddlDatalogDBRollback(dl);
+            addFactToDB(dl, ATOM(w.At, w.c[start]), NULL);
+            pddl_err_t err = PDDL_ERR_INIT;
+            pddl_datalog_canonical_model_status_t st;
+            st = pddlDatalogCanonicalModel(dl, &err);
+            assert(st != PDDL_DATALOG_CANONICAL_MODEL_ERR);
+            char res[STR_SIZE], ref[STR_SIZE];
+            weightedFrozenResult(dl, &w, st, res);
+            weightedFrozenReference(type, start, ref);
+            assertStrEq(res, ref);
+        }
+    }
+    pddlDatalogDel(dl);
+
+    // The facts of T have the weight 1, so they wait in the queue after
+    // the computation with the limit zero and T cannot be frozen
+    dl = pddlDatalogNewWeighted(type);
+    weightedFrozenProgram(dl, &w, 1);
+    dbCommitFail(dl, &input);
+    canonicalModelWithIntLimit(dl, 0,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommitFail(dl, &input);
+    // The highest weight of a fact of T is 2 (T(0, 3) and T(1, 3))
+    canonicalModelWithIntLimit(dl, 2,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommit(dl, &input);
+    assertFacts(dl, w.At, "");
+    pddlDatalogDel(dl);
+    pddlIVecFree(&input);
+
+    // A goal fact reached with the limit zero (the goal has an empty body)
+    // stops the computation before the static facts are processed, but
+    // nothing is processed anymore, so the predicates can be frozen
+    dl = pddlDatalogNewWeighted(type);
+    int E = addPred(dl, 2, "E");
+    int T = addPred(dl, 2, "T");
+    int At = addPred(dl, 1, "A");
+    int G = addGoalPred(dl, "G");
+    int c0 = addConst(dl, "0");
+    int c1 = addConst(dl, "1");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(E, c0, c1));
+    wrule(dl, 1, ATOM(T, X, Y), 1, ATOM(E, X, Y));
+    wrule(dl, 1, ATOM(At, Y), 2, ATOM(At, X), ATOM(T, X, Y));
+    fact(dl, ATOM0(G));
+    finalize(dl);
+    canonicalModelWithIntLimit(dl, 0, PDDL_DATALOG_CANONICAL_MODEL_OK);
+    PDDL_IVEC(input_at);
+    pddlIVecPush(&input_at, At);
+    dbCommit(dl, &input_at);
+    pddlIVecFree(&input_at);
+    for (int rep = 0; rep < 2; ++rep){
+        pddlDatalogDBRollback(dl);
+        addFactToDB(dl, ATOM(At, c0), NULL);
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, G, 0);
+        assertFacts(dl, At, "A0:0");
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Freezing the predicates of a weighted program (sum of the weights) whose
+ * facts are all processed: the evaluations from the commit give the same
+ * results as fresh programs, and freezing fails while a fact of a
+ * predicate to be frozen waits in the queue (unless a goal fact was
+ * reached).
+ */
+TEST_ONCE(datalog_weighted_commit_frozen_add)
+{
+    weightedFrozenTest(PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * Freezing the predicates of a weighted program (maximum of the weights)
+ * whose facts are all processed: the evaluations from the commit give the
+ * same results as fresh programs, and freezing fails while a fact of a
+ * predicate to be frozen waits in the queue (unless a goal fact was
+ * reached).
+ */
+TEST_ONCE(datalog_weighted_commit_frozen_max)
+{
+    weightedFrozenTest(PDDL_DATALOG_WEIGHT_MAX);
+}
+
 /*
  * With two goal predicates, the computation stops at the first goal fact
  * popped from the queue: pddlDatalogDBGoalWeight() returns its weight and
@@ -2441,9 +2623,9 @@ TEST_ONCE(datalog_commit_frozen_kept_sizes)
 /*
  * A commit freezing predicates fails without any change if the canonical
  * model is not computed (before the first one or with a fact added since),
- * for invalid predicates, if a frozen predicate would become non-frozen,
- * and in weighted programs. A rollback then returns to the previous
- * commit.
+ * for invalid predicates, and if a frozen predicate would become
+ * non-frozen. A rollback then returns to the previous commit. In weighted
+ * programs, the facts of the frozen predicates must be processed.
  */
 TEST_ONCE(datalog_commit_errors)
 {
@@ -2490,10 +2672,12 @@ TEST_ONCE(datalog_commit_errors)
     assertDB(dl, "E12 T12");
     pddlDatalogDel(dl);
 
+    // Weighted programs: the initial facts must be inserted first
     dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
     commitProgram(dl, &p);
-    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
     dbCommitFail(dl, &input);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommit(dl, &input);
     pddlIVecFree(&input);
     pddlDatalogDel(dl);
 }
