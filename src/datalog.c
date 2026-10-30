@@ -474,10 +474,12 @@ struct ann_data {
 typedef struct ann_data ann_data_t;
 
 /** Appends "label | (H a b) :- (B1 c) (B2 d).\n" to the output buffer,
- *  the body facts are sorted */
+ *  the body facts are sorted; in weighted programs, the ground weight of
+ *  the rule follows the dot, e.g., "label | (H a) :- (B b). w=3\n" */
 static void annotation(pddl_datalog_t *dl,
                        int head_fact_id,
                        const pddl_iset_t *body_fact_ids,
+                       const pddl_num_t *weight,
                        void *userdata)
 {
     ann_data_t *d = userdata;
@@ -511,7 +513,13 @@ static void annotation(pddl_datalog_t *dl,
         }
         out->len += snprintf(out->buf + out->len, STR_SIZE - out->len, ")");
     }
-    out->len += snprintf(out->buf + out->len, STR_SIZE - out->len, ".\n");
+    out->len += snprintf(out->buf + out->len, STR_SIZE - out->len, ".");
+    if (weight != NULL){
+        char w[32];
+        out->len += snprintf(out->buf + out->len, STR_SIZE - out->len,
+                             " w=%s", pddlNumFmt(weight, w, 32));
+    }
+    out->len += snprintf(out->buf + out->len, STR_SIZE - out->len, "\n");
 }
 
 /*
@@ -3133,9 +3141,9 @@ TEST_ONCE(datalog_weighted_annotations)
         assertGoalWeight(dl, G, 2);
         pddlDatalogExecuteAnnotations(dl, G);
         assertStrEq(out.buf,
-                    "move | (A b) :- (A a) (L a b).\n"
-                    "move | (A c) :- (A b) (L b c).\n"
-                    "goal | (G) :- (A c).\n");
+                    "move | (A b) :- (A a) (L a b). w=1\n"
+                    "move | (A c) :- (A b) (L b c). w=1\n"
+                    "goal | (G) :- (A c). w=0\n");
         pddlDatalogDel(dl);
     }
 }
@@ -3191,8 +3199,66 @@ TEST_ONCE(datalog_goal_without_user_id)
             assertGoalWeight(dl, G, 2);
             pddlDatalogExecuteAnnotations(dl, G);
             assertStrEq(out.buf,
-                        "move | (A b) :- (A a) (L a b) (O b).\n"
-                        "move | (A c) :- (A b) (L b c) (O c).\n");
+                        "move | (A b) :- (A a) (L a b) (O b). w=1\n"
+                        "move | (A c) :- (A b) (L b c) (O c). w=1\n");
+            pddlDatalogDBRollback(dl);
+        }
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * Annotations of weighted programs receive the ground weight of the rule,
+ * not the weight of the derived fact: also for an annotated body-less rule
+ * with a non-zero weight and for a rule with three body atoms (normalized,
+ * the weight stays with the top rule), and also after rollbacks.
+ */
+TEST_ONCE(datalog_annotations_rule_weights)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    int goal_weight[2] = { 17, 12 };
+    for (int ti = 0; ti < 2; ++ti){
+        ann_out_t out;
+        ann_data_t ann_init = { "init", &out };
+        ann_data_t ann_move = { "move", &out };
+        ann_data_t ann_goal = { "goal", &out };
+
+        pddl_datalog_t *dl = pddlDatalogNewWeighted(types[ti]);
+        int At = addPred(dl, 1, "A");
+        int L = addPred(dl, 2, "L");
+        int O = addPred(dl, 1, "O");
+        int G = addGoalPred(dl, "G");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        int c = addConst(dl, "c");
+        int X = pddlDatalogAddVar(dl, "X");
+        int Y = pddlDatalogAddVar(dl, "Y");
+        awrule(dl, 2, annotation, &ann_init, ATOM(At, a), 0);
+        fact(dl, ATOM(L, a, b));
+        fact(dl, ATOM(L, b, c));
+        fact(dl, ATOM(O, b));
+        fact(dl, ATOM(O, c));
+        awrule(dl, 3, annotation, &ann_move, ATOM(At, Y), 3,
+               ATOM(At, X), ATOM(L, X, Y), ATOM(O, Y));
+        awrule(dl, 4, annotation, &ann_goal, ATOM0(G), 2,
+               ATOM(At, c), ATOM(At, b));
+        finalize(dl);
+
+        dbCommit(dl, NULL);
+        for (int rep = 0; rep < 2; ++rep){
+            out.len = 0;
+            out.buf[0] = '\x0';
+            canonicalModelOK(dl);
+            // ADD: A(a) = 2, A(b) = 2 + 3, A(c) = 5 + 3, G = 4 + 8 + 5
+            // MAX: A(a) = 2, A(b) = 3 + 2, A(c) = 3 + 5, G = 4 + max(8, 5)
+            assertGoalWeight(dl, G, goal_weight[ti]);
+            pddlDatalogExecuteAnnotations(dl, G);
+            assertStrEq(out.buf,
+                        "init | (A a) :-. w=2\n"
+                        "move | (A b) :- (A a) (L a b) (O b). w=3\n"
+                        "move | (A c) :- (A b) (L b c) (O c). w=3\n"
+                        "goal | (G) :- (A b) (A c). w=4\n");
             pddlDatalogDBRollback(dl);
         }
         pddlDatalogDel(dl);
