@@ -352,6 +352,58 @@ TEST_ONCE(ipq_clear)
     pddlIPQFree(&q);
 }
 
+/*
+ * The int variants pddlIPQPushInt(), pddlIPQPopInt(), and
+ * pddlIPQPopAllInt() order values by their int keys (also keys outside of
+ * the array mode), pop with a NULL key, and fail on an empty queue.
+ */
+TEST_ONCE(ipq_int)
+{
+    pddl_ipq_t q;
+    pddlIPQInit(&q);
+    int value = -1, key = -1;
+    int ret = pddlIPQPopInt(&q, &value, &key);
+    assert(ret == -1);
+
+    pddlIPQPushInt(&q, 5, 1);
+    pddlIPQPushInt(&q, 2, 2);
+    pddlIPQPushInt(&q, 5, 3);
+    assert(q.mode == PDDL_IPQ_MODE_ARRAY);
+    ret = pddlIPQPopInt(&q, &value, &key);
+    assert(ret == 0 && value == 2 && key == 2);
+    ret = pddlIPQPopInt(&q, &value, NULL);
+    assert(ret == 0 && value == 3);
+    pddlIPQPushInt(&q, PDDL_IPQ_ARRAY_SIZE + 10, 4);
+    pddlIPQPushInt(&q, -7, 5);
+    assert(q.mode == PDDL_IPQ_MODE_SPLAYTREE);
+    ret = pddlIPQPopInt(&q, &value, &key);
+    assert(ret == 0 && value == 5 && key == -7);
+    ret = pddlIPQPopInt(&q, &value, &key);
+    assert(ret == 0 && value == 1 && key == 5);
+    ret = pddlIPQPopInt(&q, &value, &key);
+    assert(ret == 0 && value == 4 && key == PDDL_IPQ_ARRAY_SIZE + 10);
+    ret = pddlIPQPopInt(&q, &value, &key);
+    assert(ret == -1);
+    assertEmpty(&q);
+
+    PDDL_IVEC(out);
+    pddlIPQPushInt(&q, 3, 10);
+    pddlIPQPushInt(&q, 1, 11);
+    pddlIPQPushInt(&q, 3, 12);
+    ret = pddlIPQPopAllInt(&q, &out, &key);
+    assert(ret == 0 && key == 1);
+    assert(pddlIVecSize(&out) == 1 && pddlIVecGet(&out, 0) == 11);
+    ret = pddlIPQPopAllInt(&q, &out, NULL);
+    assert(ret == 0);
+    assert(pddlIVecSize(&out) == 2);
+    assert(pddlIVecGet(&out, 0) == 10 && pddlIVecGet(&out, 1) == 12);
+    ret = pddlIPQPopAllInt(&q, &out, &key);
+    assert(ret == -1 && pddlIVecSize(&out) == 0);
+    assertEmpty(&q);
+    pddlIVecFree(&out);
+    pddlIPQFree(&q);
+}
+
 /** Maximal number of entries of the reference queue of ipq_random */
 #define RANDOM_MAX_SIZE 4096
 
