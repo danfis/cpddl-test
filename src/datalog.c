@@ -436,8 +436,8 @@ static void assertDB(pddl_datalog_t *dl, const char *expected)
     assertStrEq(out, expected);
 }
 
-/** Asserts that the program printed by pddlDatalogPrint() is EXPECTED */
-static void assertProgram(const pddl_datalog_t *dl, const char *expected)
+/** Writes the program printed by pddlDatalogPrint() to OUT */
+static void programStr(const pddl_datalog_t *dl, char *out)
 {
     FILE *fout = tmpfile();
     assert(fout != NULL);
@@ -445,11 +445,17 @@ static void assertProgram(const pddl_datalog_t *dl, const char *expected)
     long size = ftell(fout);
     assert(size >= 0 && size < STR_SIZE);
     rewind(fout);
-    char buf[STR_SIZE];
-    size_t read = fread(buf, 1, size, fout);
+    size_t read = fread(out, 1, size, fout);
     assert(read == (size_t)size);
-    buf[size] = '\x0';
+    out[size] = '\x0';
     fclose(fout);
+}
+
+/** Asserts that the program printed by pddlDatalogPrint() is EXPECTED */
+static void assertProgram(const pddl_datalog_t *dl, const char *expected)
+{
+    char buf[STR_SIZE];
+    programStr(dl, buf);
     assertStrEq(buf, expected);
 }
 
@@ -548,7 +554,7 @@ TEST_ONCE(datalog)
                   "Q(X, Y) :- P(X, Y).\n"
                   "R(2, 1, 1).\n"
                   "R(X, Y, Z) :- P(X, Y), _p4(Y, Z).\n"
-                  "_p4(X, Z) :- Q(X, Y), S(Y, Z).\n");
+                  "_p4(X, Y) :- Q(X, Z), S(Z, Y).\n");
     assertFacts(dl, P, "P12");
     assertFacts(dl, Q, "Q12 Q21");
     assertFacts(dl, R, "R211");
@@ -611,7 +617,7 @@ TEST_ONCE(datalog_annotated)
                   "R(2, 1, 1).; ann_size = 1\n"
                   "R(X, Y, Z) :- P(X, Y), _p5(Y, Z).; ann_size = 1\n"
                   "G() :- R(1, 2, 2).; ann_size = 1\n"
-                  "_p5(X, Z) :- Q(X, Y), S(Y, Z).\n");
+                  "_p5(X, Y) :- Q(X, Z), S(Z, Y).\n");
 
     assertFacts(dl, P, "P12");
     assertFacts(dl, Q, "Q12 Q21");
@@ -799,10 +805,10 @@ TEST_ONCE(datalog_normal_form)
                   "I(X) :- A(X, Y), _p10(Y).\n"
                   "J(X) :- D(X), _p11(X).\n"
                   "M(X) :- D(X), _p11(X).\n"
-                  "_p8(X, Z) :- A(X, Y), B(Y, Z).\n"
-                  "_p9(X, Z) :- C(Y, Z), _p8(X, Y).\n"
+                  "_p8(X, Y) :- A(X, Z), B(Z, Y).\n"
+                  "_p9(X, Y) :- C(Z, Y), _p8(X, Z).\n"
                   "_p10(X) :- B(X, Y), D(Y).\n"
-                  "_p11(Z) :- A(X, Y), B(Y, Z).\n");
+                  "_p11(X) :- A(Y, Z), B(Z, X).\n");
 
     canonicalModelOK(dl);
     assertFacts(dl, H, "Had Hbd");
@@ -825,6 +831,182 @@ TEST_ONCE(datalog_normal_form)
     assert(ret == -1);
     assert(pddlErrIsSet(&err));
     pddlErrClear(&err);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Normalization merges the auxiliary predicates of rules that differ only
+ * in the order of their body atoms.
+ */
+TEST_ONCE(datalog_normal_form_body_order)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int B = addPred(dl, 2, "B");
+    int D = addPred(dl, 1, "D");
+    int H = addPred(dl, 1, "H");
+    int I = addPred(dl, 1, "I");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(B, b, c));
+    fact(dl, ATOM(D, c));
+    rule(dl, ATOM(H, X), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, Z));
+    rule(dl, ATOM(I, X), 3, ATOM(D, Z), ATOM(B, Y, Z), ATOM(A, X, Y));
+
+    finalizeProgram(dl, pddl_true);
+    assertProgram(dl,
+                  "A(a, b).\n"
+                  "B(b, c).\n"
+                  "D(c).\n"
+                  "H(X) :- A(X, Y), _p5(Y).\n"
+                  "I(X) :- A(X, Y), _p5(Y).\n"
+                  "_p5(X) :- B(X, Y), D(Y).\n");
+
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    assertFacts(dl, I, "Ia");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Normalization merges the auxiliary predicates of rules that differ only
+ * in the naming of their variables.
+ */
+TEST_ONCE(datalog_normal_form_var_naming)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int B = addPred(dl, 2, "B");
+    int D = addPred(dl, 1, "D");
+    int H = addPred(dl, 1, "H");
+    int I = addPred(dl, 1, "I");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    int W = pddlDatalogAddVar(dl, "W");
+
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(B, b, c));
+    fact(dl, ATOM(D, c));
+    rule(dl, ATOM(H, X), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, Z));
+    rule(dl, ATOM(I, W), 3, ATOM(A, W, Z), ATOM(B, Z, Y), ATOM(D, Y));
+
+    finalizeProgram(dl, pddl_true);
+    assertProgram(dl,
+                  "A(a, b).\n"
+                  "B(b, c).\n"
+                  "D(c).\n"
+                  "H(X) :- A(X, Y), _p5(Y).\n"
+                  "I(X) :- A(X, Y), _p5(Y).\n"
+                  "_p5(X) :- B(X, Y), D(Y).\n");
+
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    assertFacts(dl, I, "Ia");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Normalization merges the auxiliary predicates of rules whose bodies
+ * consist of atoms of the same predicate in different orders and with
+ * differently named variables.
+ */
+TEST_ONCE(datalog_normal_form_same_pred)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int E = addPred(dl, 2, "E");
+    int J = addPred(dl, 2, "J");
+    int K = addPred(dl, 2, "K");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int d = addConst(dl, "d");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    int W = pddlDatalogAddVar(dl, "W");
+
+    fact(dl, ATOM(E, a, b));
+    fact(dl, ATOM(E, b, c));
+    fact(dl, ATOM(E, c, d));
+    rule(dl, ATOM(J, X, W), 3, ATOM(E, X, Y), ATOM(E, Y, Z), ATOM(E, Z, W));
+    rule(dl, ATOM(K, X, W), 3, ATOM(E, Z, W), ATOM(E, Y, Z), ATOM(E, X, Y));
+
+    finalizeProgram(dl, pddl_true);
+    assertProgram(dl,
+                  "E(a, b).\n"
+                  "E(b, c).\n"
+                  "E(c, d).\n"
+                  "J(X, Y) :- E(Z, Y), _p3(X, Z).\n"
+                  "K(X, Y) :- E(X, Z), _p3(Z, Y).\n"
+                  "_p3(X, Y) :- E(X, Z), E(Z, Y).\n");
+
+    canonicalModelOK(dl);
+    assertFacts(dl, J, "Jad");
+    assertFacts(dl, K, "Kad");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A second normalization of a normalized program does not change it, i.e.,
+ * canonization of the rules is idempotent.
+ */
+TEST_ONCE(datalog_normal_form_twice)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int B = addPred(dl, 2, "B");
+    int D = addPred(dl, 1, "D");
+    int E = addPred(dl, 2, "E");
+    int H = addPred(dl, 1, "H");
+    int I = addPred(dl, 1, "I");
+    int J = addPred(dl, 2, "J");
+    int K = addPred(dl, 2, "K");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    int W = pddlDatalogAddVar(dl, "W");
+
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(B, b, c));
+    fact(dl, ATOM(D, c));
+    fact(dl, ATOM(E, a, b));
+    fact(dl, ATOM(E, b, a));
+    rule(dl, ATOM(H, X), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, Z));
+    rule(dl, ATOM(I, W), 3, ATOM(D, Y), ATOM(B, Z, Y), ATOM(A, W, Z));
+    rule(dl, ATOM(J, X, W), 4,
+         ATOM(E, X, Y), ATOM(E, Y, Z), ATOM(E, Z, W), ATOM(D, Z));
+    rule(dl, ATOM(K, X, Y), 2, ATOM(E, Y, X), ATOM(E, X, Y));
+
+    finalizeProgram(dl, pddl_true);
+    char before[STR_SIZE];
+    programStr(dl, before);
+
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogToNormalForm(dl, &err);
+    assert(ret == 0);
+    assert(pddlDatalogIsNormalForm(dl));
+    char after[STR_SIZE];
+    programStr(dl, after);
+    assertStrEq(after, before);
+
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    assertFacts(dl, I, "Ia");
+    assertFacts(dl, J, "");
+    assertFacts(dl, K, "Kab Kba");
     pddlDatalogDel(dl);
 }
 
