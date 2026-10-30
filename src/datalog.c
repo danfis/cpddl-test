@@ -957,6 +957,54 @@ TEST_ONCE(datalog_normal_form_same_pred)
 }
 
 /*
+ * Normalization merges auxiliary predicates with equal definitions even
+ * if they are interleaved with an auxiliary predicate with the same body
+ * and a head of a different arity.
+ */
+TEST_ONCE(datalog_normal_form_interleaved_arity)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int B = addPred(dl, 2, "B");
+    int D = addPred(dl, 1, "D");
+    int H = addPred(dl, 1, "H");
+    int I = addPred(dl, 2, "I");
+    int J = addPred(dl, 1, "J");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(B, b, c));
+    fact(dl, ATOM(D, a));
+    // Each rule is binarized to aux :- A(X, Y), B(Y, Z) with the head (X)
+    // for H and J, and (X, Y) for I
+    rule(dl, ATOM(H, X), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, X));
+    rule(dl, ATOM(I, X, Y), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, X));
+    rule(dl, ATOM(J, X), 3, ATOM(A, X, Y), ATOM(B, Y, Z), ATOM(D, X));
+
+    finalizeProgram(dl, pddl_true);
+    assertProgram(dl,
+                  "A(a, b).\n"
+                  "B(b, c).\n"
+                  "D(a).\n"
+                  "H(X) :- D(X), _p6(X).\n"
+                  "I(X, Y) :- D(X), _p7(X, Y).\n"
+                  "J(X) :- D(X), _p6(X).\n"
+                  "_p6(X) :- A(X, Y), B(Y, Z).\n"
+                  "_p7(X, Y) :- A(X, Y), B(Y, Z).\n");
+
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    assertFacts(dl, I, "Iab");
+    assertFacts(dl, J, "Ja");
+    pddlDatalogDel(dl);
+}
+
+/*
  * A second normalization of a normalized program does not change it, i.e.,
  * canonization of the rules is idempotent.
  */
