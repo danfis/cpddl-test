@@ -17,13 +17,15 @@ static void assertOK(int ret)
     assert(ret == 0);
 }
 
-/** Grounds C.pddl with the static facts kept and fills GATOMS with the
+/** Grounds PDDL with the static facts kept and fills GATOMS with the
  *  ground atoms of the STRIPS facts (in the order of the facts) */
-static void groundTask(pddl_strips_t *strips, pddl_ground_atoms_t *gatoms)
+static void groundTask(const pddl_t *pddl,
+                       pddl_strips_t *strips,
+                       pddl_ground_atoms_t *gatoms)
 {
     pddl_ground_config_t ground_cfg = PDDL_GROUND_CONFIG_INIT;
     ground_cfg.remove_static_facts = 0;
-    int ret = pddlStripsGroundDatalog(strips, &C.pddl, &ground_cfg, &C.err);
+    int ret = pddlStripsGroundDatalog(strips, pddl, &ground_cfg, &C.err);
     assertOK(ret);
 
     pddlGroundAtomsInit(gatoms);
@@ -213,6 +215,7 @@ struct ground_cmp {
 typedef struct ground_cmp ground_cmp_t;
 
 static void groundCmpInit(ground_cmp_t *cmp,
+                          const pddl_t *pddl,
                           const pddl_strips_t *strips,
                           pddl_bool_t max)
 {
@@ -221,12 +224,12 @@ static void groundCmpInit(ground_cmp_t *cmp,
     if (max){
         ret = pddlHMaxInitStrips(&cmp->hmax, strips, &C.err);
         assertOK(ret);
-        ret = pddlLiftedHMaxInit(&cmp->lifted, &C.pddl, &C.err);
+        ret = pddlLiftedHMaxInit(&cmp->lifted, pddl, &C.err);
         assertOK(ret);
     }else{
         ret = pddlHAddInitStrips(&cmp->hadd, strips, &C.err);
         assertOK(ret);
-        ret = pddlLiftedHAddInit(&cmp->lifted, &C.pddl, &C.err);
+        ret = pddlLiftedHAddInit(&cmp->lifted, pddl, &C.err);
         assertOK(ret);
     }
 }
@@ -276,22 +279,28 @@ static void groundCmpWalkState(const pddl_iset_t *state, void *ud)
     groundCmpState(ud, state);
 }
 
-/** Lifted h^add (MAX false) or h^max (MAX true) equals the ground one on
- *  the states of the walk. Grounding to STRIPS does not support numeric
- *  tasks, so they have no ground reference here. */
-static void compareWithGround(pddl_bool_t max)
+/** Lifted h^add (MAX false) or h^max (MAX true) of PDDL equals the ground
+ *  one on the states of the walk. Grounding to STRIPS does not support
+ *  numeric tasks, so they have no ground reference here. */
+static void compareWithGroundTask(const pddl_t *pddl, pddl_bool_t max)
 {
-    if (pddlIsNumeric(&C.pddl))
+    if (pddlIsNumeric(pddl))
         return;
 
     pddl_strips_t strips;
     ground_cmp_t cmp;
-    groundTask(&strips, &cmp.gatoms);
-    groundCmpInit(&cmp, &strips, max);
+    groundTask(pddl, &strips, &cmp.gatoms);
+    groundCmpInit(&cmp, pddl, &strips, max);
     forEachStripsWalkState(&strips, groundCmpWalkState, &cmp);
     groundCmpFree(&cmp);
     pddlGroundAtomsFree(&cmp.gatoms);
     pddlStripsFree(&strips);
+}
+
+/** compareWithGroundTask() on C.pddl */
+static void compareWithGround(pddl_bool_t max)
+{
+    compareWithGroundTask(&C.pddl, max);
 }
 
 /** All lifted relaxed heuristics */
@@ -462,7 +471,7 @@ TEST(lifted_heur_plan_states, lifted_heur_cost)
 
     pddl_strips_t strips;
     pddl_ground_atoms_t gatoms;
-    groundTask(&strips, &gatoms);
+    groundTask(&C.pddl, &strips, &gatoms);
 
     pddl_plan_file_strips_t plan;
     int ret = pddlPlanFileStripsInit(&plan, &strips, C.plan_file_path,
@@ -477,8 +486,8 @@ TEST(lifted_heur_plan_states, lifted_heur_cost)
     ground_cmp_t cmp_max, cmp_add;
     cmp_max.gatoms = gatoms;
     cmp_add.gatoms = gatoms;
-    groundCmpInit(&cmp_max, &strips, pddl_true);
-    groundCmpInit(&cmp_add, &strips, pddl_false);
+    groundCmpInit(&cmp_max, &C.pddl, &strips, pddl_true);
+    groundCmpInit(&cmp_add, &C.pddl, &strips, pddl_false);
     lifted_heurs_t hs;
     liftedHeursInit(&hs);
 
@@ -506,34 +515,88 @@ TEST(lifted_heur_plan_states, lifted_heur_cost)
     pddlStripsFree(&strips);
 }
 
-/*
- * The lifted relaxed heuristics support only constant integer action costs:
- * the initialization fails with an error on a task with the cost
- * (increase (total-cost) (road-length ?l1 ?l2)).
- */
-TEST_ONCE(lifted_heur_unsupported_cost)
+/** Loads the task NAME (normalized) into PDDL */
+static void loadTask(pddl_t *pddl, const char *name)
 {
-    pddl_err_t err = PDDL_ERR_INIT;
     pddl_files_t files;
-    int ret = pddlFiles(&files, "pddl/", "ipc-2008/seq-opt/transport/p01",
-                        &err);
-    assert(ret == 0);
+    int ret = pddlFiles(&files, "pddl/", name, &C.err);
+    assertOK(ret);
     pddl_config_t cfg = PDDL_CONFIG_INIT;
     cfg.normalize = 1;
     cfg.force_adl = 1;
+    ret = pddlInit(pddl, files.domain_pddl, files.problem_pddl, &cfg,
+                   &C.err);
+    assertOK(ret);
+}
+
+/*
+ * Action costs given by static fluents, e.g.,
+ * (increase (total-cost) (road-length ?l1 ?l2)): lifted h^max and h^add
+ * equal the ground ones on the states of a walk, and hFF is between h^max
+ * and h^add in the initial state.
+ */
+TEST_ONCE(lifted_heur_param_cost)
+{
+    // C.err is not initialized in TEST_ONCE tests, but the helpers use it
+    pddlErrInit(&C.err);
     pddl_t pddl;
-    ret = pddlInit(&pddl, files.domain_pddl, files.problem_pddl, &cfg, &err);
-    assert(ret == 0);
+    loadTask(&pddl, "ipc-2008/seq-opt/transport/p01");
+    assert(!pddlIsUnitCost(&pddl));
+    assert(!pddlIsNumeric(&pddl));
+    compareWithGroundTask(&pddl, pddl_true);
+    compareWithGroundTask(&pddl, pddl_false);
+
+    pddl_strips_t strips;
+    pddl_ground_atoms_t gatoms;
+    groundTask(&pddl, &strips, &gatoms);
+    ground_cmp_t cmp_max, cmp_add;
+    groundCmpInit(&cmp_max, &pddl, &strips, pddl_true);
+    groundCmpInit(&cmp_add, &pddl, &strips, pddl_false);
+    cmp_max.gatoms = gatoms;
+    cmp_add.gatoms = gatoms;
+    int hmax = groundCmpState(&cmp_max, &strips.init);
+    int hadd = groundCmpState(&cmp_add, &strips.init);
+    assert(hmax > 0 && hmax != PDDL_COST_DEAD_END);
+
+    pddl_lifted_heur_relaxed_t hff;
+    int ret = pddlLiftedHFFAddInit(&hff, &pddl, &C.err);
+    assertOK(ret);
+    int h = liftedEval(&hff, &strips.init, &gatoms);
+    assert(hmax <= h && h <= hadd);
+    pddlLiftedHeurRelaxedFree(&hff);
+
+    groundCmpFree(&cmp_max);
+    groundCmpFree(&cmp_add);
+    pddlGroundAtomsFree(&gatoms);
+    pddlStripsFree(&strips);
+    pddlFree(&pddl);
+}
+
+/*
+ * The lifted relaxed heuristics do not support action costs given by
+ * numeric expressions: the initialization fails with an error on a task
+ * with the cost (increase (total-cost) (+ 1 (g ?b))).
+ */
+TEST_ONCE(lifted_heur_unsupported_cost)
+{
+    pddlErrInit(&C.err);
+    pddl_t pddl;
+    loadTask(&pddl, "various/num-cost-expr/p01");
 
     pddl_lifted_heur_relaxed_t h;
-    ret = pddlLiftedHMaxInit(&h, &pddl, &err);
+    int ret = pddlLiftedHMaxInit(&h, &pddl, &C.err);
     assert(ret == -1);
-    assert(pddlErrIsSet(&err));
-    pddlErrClear(&err);
-    ret = pddlLiftedHAddInit(&h, &pddl, &err);
+    assert(pddlErrIsSet(&C.err));
+    assert(strstr(pddlErrMsg(&C.err), "(+ 1 (g ?b))") != NULL);
+    pddlErrClear(&C.err);
+    ret = pddlLiftedHAddInit(&h, &pddl, &C.err);
     assert(ret == -1);
-    assert(pddlErrIsSet(&err));
-    pddlErrClear(&err);
+    assert(pddlErrIsSet(&C.err));
+    pddlErrClear(&C.err);
+    ret = pddlLiftedHFFAddInit(&h, &pddl, &C.err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&C.err));
+    pddlErrClear(&C.err);
 
     pddlFree(&pddl);
 }
