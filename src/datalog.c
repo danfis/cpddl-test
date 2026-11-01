@@ -26,6 +26,12 @@ typedef struct atom_spec atom_spec_t;
                     .arg = { __VA_ARGS__ } })
 #define ATOM0(P) ((atom_spec_t){ .pred = (P), .arity = 0 })
 
+/** Creates a weighted program failing on missing values of fluents */
+static pddl_datalog_t *newWeighted(pddl_datalog_weight_type_t type)
+{
+    return pddlDatalogNewWeighted(type, PDDL_DATALOG_MISSING_FLUENT_ERR);
+}
+
 static int addPred(pddl_datalog_t *dl, int arity, const char *name)
 {
     int pred = pddlDatalogAddPred(dl, arity, name);
@@ -186,6 +192,83 @@ static int cwrule(pddl_datalog_t *dl,
     va_end(ap);
     pddlDatalogRuleSetWeight(dl, &rule, w);
     return ruleAdd(dl, &rule);
+}
+
+/** Weight atoms of a rule (see frule()) */
+struct watoms {
+    int size;
+    atom_spec_t atom[6];
+};
+typedef struct watoms watoms_t;
+
+#define WATOMS(...) \
+    ((watoms_t){ .size = (int)(sizeof((atom_spec_t[]){ __VA_ARGS__ }) \
+                               / sizeof(atom_spec_t)), \
+                 .atom = { __VA_ARGS__ } })
+
+static void ruleAddWeightAtom(pddl_datalog_t *dl,
+                              pddl_datalog_rule_t *rule,
+                              atom_spec_t watom)
+{
+    pddl_datalog_atom_t atom;
+    atomInit(dl, &atom, &watom);
+    pddlDatalogRuleAddWeightAtom(dl, rule, &atom);
+    pddlDatalogAtomFree(dl, &atom);
+}
+
+/** Same as rule(), but with the weight WEIGHT, the weight atoms WATOMS,
+ *  and the annotation ANN_FN(ANN_DATA) if ANN_FN is non-NULL */
+static int frule(pddl_datalog_t *dl,
+                 int weight,
+                 watoms_t watoms,
+                 pddl_datalog_annotation_fn ann_fn,
+                 void *ann_data,
+                 atom_spec_t head,
+                 int body_size, ...)
+{
+    pddl_datalog_rule_t rule;
+    ruleInit(dl, &rule, head);
+    va_list ap;
+    va_start(ap, body_size);
+    for (int i = 0; i < body_size; ++i)
+        ruleAddBody(dl, &rule, va_arg(ap, atom_spec_t));
+    va_end(ap);
+    pddl_num_t w;
+    pddlNumSetInt(&w, weight);
+    pddlDatalogRuleSetWeight(dl, &rule, &w);
+    for (int i = 0; i < watoms.size; ++i)
+        ruleAddWeightAtom(dl, &rule, watoms.atom[i]);
+    if (ann_fn != NULL)
+        pddlDatalogRuleAddAnnotation(dl, &rule, ann_fn, ann_data);
+    return ruleAdd(dl, &rule);
+}
+
+/** Sets the value of the ground numeric fluent ATOM to VALUE and asserts
+ *  that it succeeds */
+static void fluent(pddl_datalog_t *dl, atom_spec_t atom, int value)
+{
+    pddl_num_t v;
+    pddlNumSetInt(&v, value);
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogAddNumericFluent(dl, atom.pred, atom.arg, &v, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+}
+
+/** Asserts that setting the value of the numeric fluent ATOM to VALUE fails
+ *  with an error message containing MSG */
+static void fluentFail(pddl_datalog_t *dl,
+                       atom_spec_t atom,
+                       int value,
+                       const char *msg)
+{
+    pddl_num_t v;
+    pddlNumSetInt(&v, value);
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogAddNumericFluent(dl, atom.pred, atom.arg, &v, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+    assert(strstr(pddlErrMsg(&err), msg) != NULL);
 }
 
 /** Adds body-less rule ATOM */
@@ -1230,7 +1313,7 @@ static void weightedTest(pddl_datalog_weight_type_t type, int goal)
     weighted_t w;
     pddl_num_t weight;
 
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     weightedProgram(dl, &w, pddl_false, pddl_true);
     int ret = pddlDatalogDBGoalWeight(dl, w.G, &weight);
     assert(ret == -1);
@@ -1251,7 +1334,7 @@ static void weightedTest(pddl_datalog_weight_type_t type, int goal)
     // At(a) added to the database with zero weight, given explicitly or
     // as NULL, with or without resetting the database first
     for (int i = 0; i < 2; ++i){
-        dl = pddlDatalogNewWeighted(type);
+        dl = newWeighted(type);
         weightedProgram(dl, &w, pddl_true, pddl_true);
         if (i == 0){
             pddlDatalogDBReset(dl);
@@ -1265,7 +1348,7 @@ static void weightedTest(pddl_datalog_weight_type_t type, int goal)
     }
 
     // Unreachable goal: all reachable facts get their final weights
-    dl = pddlDatalogNewWeighted(type);
+    dl = newWeighted(type);
     weightedProgram(dl, &w, pddl_false, pddl_false);
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
@@ -1310,7 +1393,7 @@ static void weightedResetTest(pddl_datalog_weight_type_t type,
                               int goal_b)
 {
     weighted_t w;
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     weightedProgram(dl, &w, pddl_true, pddl_true);
     for (int rep = 0; rep < 2; ++rep){
         pddlDatalogDBReset(dl);
@@ -1381,7 +1464,7 @@ TEST_ONCE(datalog_weighted_reset_max)
 static void weightedInitialFactsTest(pddl_datalog_weight_type_t type,
                                      int goal)
 {
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     int A = addPred(dl, 1, "A");
     int B = addPred(dl, 1, "B");
     int G = addGoalPred(dl, "G");
@@ -1436,7 +1519,7 @@ static void weightedDeltaTest(pddl_datalog_weight_type_t type, const char *t)
     pddl_num_t one;
     pddlNumSetInt(&one, 1);
 
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     int S = addPred(dl, 0, "S");
     int P = addPred(dl, 0, "P");
     int Q = addPred(dl, 0, "Q");
@@ -1491,7 +1574,7 @@ static void weightedFloatTest(pddl_datalog_weight_type_t type, const char *d)
     pddlNumSetFlt(&half, .5f);
     pddlNumSetFlt(&quarter, .25f);
 
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     int S = addPred(dl, 0, "S");
     int P = addPred(dl, 0, "P");
     int Q = addPred(dl, 0, "Q");
@@ -1549,7 +1632,7 @@ static void weightedOverflowTest(pddl_datalog_weight_type_t type)
     pddl_num_t big;
     pddlNumSetInt(&big, INT_MAX - 1);
 
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     int A = addPred(dl, 1, "A");
     int P = addPred(dl, 1, "P");
     int Q = addPred(dl, 1, "Q");
@@ -1619,7 +1702,7 @@ static void weightedWithLimitTest(pddl_datalog_weight_type_t type)
 {
     const pddl_datalog_canonical_model_status_t unreached
         = PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED;
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     limit_prog_t p;
     limitProgram(dl, &p);
 
@@ -1664,7 +1747,7 @@ static void weightedWithLimitTest(pddl_datalog_weight_type_t type)
     pddlDatalogDel(dl);
 
     // Unreachable goal: all facts are derived
-    dl = pddlDatalogNewWeighted(type);
+    dl = newWeighted(type);
     int S = addPred(dl, 0, "S");
     int A = addPred(dl, 0, "A");
     int B = addPred(dl, 0, "B");
@@ -1681,7 +1764,7 @@ static void weightedWithLimitTest(pddl_datalog_weight_type_t type)
     pddlDatalogDel(dl);
 
     // The program must be in the normal form
-    dl = pddlDatalogNewWeighted(type);
+    dl = newWeighted(type);
     S = addPred(dl, 0, "S");
     A = addPred(dl, 0, "A");
     G = addGoalPred(dl, "G");
@@ -1772,7 +1855,7 @@ static void weightedCommitTest(pddl_datalog_weight_type_t type)
     ann_out.len = 0;
     ann_data_t ann_move = { "move", &ann_out };
     ann_data_t ann_goal = { "goal", &ann_out };
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     weighted_commit_t w;
     weightedCommitProgram(dl, &w, &ann_move, &ann_goal);
     char ref[STR_SIZE], res[STR_SIZE];
@@ -1931,7 +2014,7 @@ static void weightedFrozenReference(pddl_datalog_weight_type_t type,
                                     int start,
                                     char *out)
 {
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     weighted_frozen_t w;
     weightedFrozenProgram(dl, &w, 0);
     addFactToDB(dl, ATOM(w.At, w.c[start]), NULL);
@@ -1946,7 +2029,7 @@ static void weightedFrozenReference(pddl_datalog_weight_type_t type,
 static void weightedFrozenTest(pddl_datalog_weight_type_t type)
 {
     // The static part (E, T) is processed with the limit zero and frozen
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     weighted_frozen_t w;
     weightedFrozenProgram(dl, &w, 0);
     canonicalModelWithIntLimit(dl, 0,
@@ -1976,7 +2059,7 @@ static void weightedFrozenTest(pddl_datalog_weight_type_t type)
 
     // The facts of T have the weight 1, so they wait in the queue after
     // the computation with the limit zero and T cannot be frozen
-    dl = pddlDatalogNewWeighted(type);
+    dl = newWeighted(type);
     weightedFrozenProgram(dl, &w, 1);
     dbCommitFail(dl, &input);
     canonicalModelWithIntLimit(dl, 0,
@@ -1993,7 +2076,7 @@ static void weightedFrozenTest(pddl_datalog_weight_type_t type)
     // A goal fact reached with the limit zero (the goal has an empty body)
     // stops the computation before the static facts are processed, but
     // nothing is processed anymore, so the predicates can be frozen
-    dl = pddlDatalogNewWeighted(type);
+    dl = newWeighted(type);
     int E = addPred(dl, 2, "E");
     int T = addPred(dl, 2, "T");
     int At = addPred(dl, 1, "A");
@@ -2054,7 +2137,7 @@ TEST_ONCE(datalog_weighted_commit_frozen_max)
  */
 TEST_ONCE(datalog_weighted_two_goals)
 {
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     int S = addPred(dl, 0, "S");
     int P = addPred(dl, 0, "P");
     int G = addGoalPred(dl, "G");
@@ -2156,7 +2239,7 @@ TEST_ONCE(datalog_neg_static)
 static void weightedNegStaticTest(pddl_datalog_weight_type_t type)
 {
     // The model of negProgram() is the same as in the unweighted program
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(type);
+    pddl_datalog_t *dl = newWeighted(type);
     neg_t n;
     negProgram(dl, &n);
     finalize(dl);
@@ -2168,7 +2251,7 @@ static void weightedNegStaticTest(pddl_datalog_weight_type_t type)
 
     // H(a) is blocked by the negative atom, so the goal is reached only via
     // the more expensive rule from H(b)
-    dl = pddlDatalogNewWeighted(type);
+    dl = newWeighted(type);
     int T = addPred(dl, 1, "T");
     int S = addPred(dl, 1, "S");
     int H = addPred(dl, 1, "H");
@@ -2911,7 +2994,7 @@ TEST_ONCE(datalog_commit_errors)
     pddlDatalogDel(dl);
 
     // Weighted programs: the initial facts must be inserted first
-    dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     commitProgram(dl, &p);
     dbCommitFail(dl, &input);
     canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
@@ -3041,7 +3124,7 @@ TEST_ONCE(datalog_gringo)
 TEST_ONCE(datalog_gringo_weighted)
 {
     pddl_err_t err = PDDL_ERR_INIT;
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     graph_t g;
     graphProgram(dl, &g);
     finalizeProgram(dl, pddl_false);
@@ -3116,7 +3199,7 @@ TEST_ONCE(datalog_weighted_annotations)
         ann_data_t ann_teleport = { "teleport", &out };
         ann_data_t ann_goal = { "goal", &out };
 
-        pddl_datalog_t *dl = pddlDatalogNewWeighted(types[ti]);
+        pddl_datalog_t *dl = newWeighted(types[ti]);
         int At = addPred(dl, 1, "A");
         int L = addPred(dl, 2, "L");
         int T = addPred(dl, 2, "T");
@@ -3163,7 +3246,7 @@ TEST_ONCE(datalog_goal_without_user_id)
         ann_out_t out;
         ann_data_t ann_move = { "move", &out };
 
-        pddl_datalog_t *dl = pddlDatalogNewWeighted(types[ti]);
+        pddl_datalog_t *dl = newWeighted(types[ti]);
         int At = addPred(dl, 1, "A");
         int L = addPred(dl, 2, "L");
         int O = addPred(dl, 1, "O");
@@ -3224,7 +3307,7 @@ TEST_ONCE(datalog_annotations_rule_weights)
         ann_data_t ann_move = { "move", &out };
         ann_data_t ann_goal = { "goal", &out };
 
-        pddl_datalog_t *dl = pddlDatalogNewWeighted(types[ti]);
+        pddl_datalog_t *dl = newWeighted(types[ti]);
         int At = addPred(dl, 1, "A");
         int L = addPred(dl, 2, "L");
         int O = addPred(dl, 1, "O");
@@ -3263,6 +3346,505 @@ TEST_ONCE(datalog_annotations_rule_weights)
         }
         pddlDatalogDel(dl);
     }
+}
+
+/** Shortest paths A(Y) :- A(X), E(X, Y) with the lengths of the edges
+ *  given by the weight atom D(X, Y) and the goal G :- A(c), A(b) with the
+ *  aggregation TYPE; GOAL is the expected weight of the goal */
+static void weightAtomsTest(pddl_datalog_weight_type_t type, int goal)
+{
+    pddl_datalog_t *dl = newWeighted(type);
+    int At = addPred(dl, 1, "A");
+    int E = addPred(dl, 2, "E");
+    int G = addGoalPred(dl, "G");
+    int D = pddlDatalogAddFunc(dl, 2, "D");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(At, a));
+    fact(dl, ATOM(E, a, b));
+    fact(dl, ATOM(E, b, c));
+    fact(dl, ATOM(E, a, c));
+    fluent(dl, ATOM(D, a, b), 2);
+    fluent(dl, ATOM(D, b, c), 3);
+    fluent(dl, ATOM(D, a, c), 10);
+    frule(dl, 0, WATOMS(ATOM(D, X, Y)), NULL, NULL, ATOM(At, Y), 2,
+          ATOM(At, X), ATOM(E, X, Y));
+    rule(dl, ATOM0(G), 2, ATOM(At, c), ATOM(At, b));
+    assertProgram(dl,
+                  "A(a).\n"
+                  "E(a, b).\n"
+                  "E(b, c).\n"
+                  "E(a, c).\n"
+                  "A(Y) :- A(X), E(X, Y). ; w = D(X, Y)\n"
+                  "G() :- A(c), A(b).\n");
+    finalize(dl);
+
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, G, goal);
+    // A(c) is derived first from A(a) with 10, then improved via A(b)
+    assertFacts(dl, At, "Aa:0 Ab:2 Ac:5");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * The weight of a rule given by a weight atom grounded by the variables of
+ * the rule (shortest paths with the lengths of edges given by a numeric
+ * fluent) with the sum of weights.
+ */
+TEST_ONCE(datalog_weight_atoms_add)
+{
+    weightAtomsTest(PDDL_DATALOG_WEIGHT_ADD, 7);
+}
+
+/*
+ * Same as datalog_weight_atoms_add with the maximum of weights.
+ */
+TEST_ONCE(datalog_weight_atoms_max)
+{
+    weightAtomsTest(PDDL_DATALOG_WEIGHT_MAX, 5);
+}
+
+/*
+ * The ground weight of a rule is the sum of its constant weight and the
+ * values of all its weight atoms: an atom added twice counts twice, the
+ * variables of the atoms come from different body atoms, and a 0-ary
+ * function works as well. Setting the same value of a fluent again does
+ * nothing. The annotations receive the whole ground weight.
+ */
+TEST_ONCE(datalog_weight_atoms_sum)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    for (int ti = 0; ti < 2; ++ti){
+        ann_out_t out;
+        out.len = 0;
+        out.buf[0] = '\x0';
+        ann_data_t ann_r = { "R", &out };
+        ann_data_t ann_s = { "S", &out };
+
+        pddl_datalog_t *dl = newWeighted(types[ti]);
+        int P = addPred(dl, 1, "P");
+        int Q = addPred(dl, 1, "Q");
+        int R = addPred(dl, 2, "R");
+        int S = addPred(dl, 0, "S");
+        int G = addGoalPred(dl, "G");
+        int F = pddlDatalogAddFunc(dl, 1, "F");
+        int H = pddlDatalogAddFunc(dl, 2, "H");
+        int K = pddlDatalogAddFunc(dl, 0, "K");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        int X = pddlDatalogAddVar(dl, "X");
+        int Y = pddlDatalogAddVar(dl, "Y");
+        fact(dl, ATOM(P, a));
+        fact(dl, ATOM(Q, b));
+        fluent(dl, ATOM(F, a), 1);
+        fluent(dl, ATOM(F, b), 2);
+        fluent(dl, ATOM(H, a, b), 4);
+        fluent(dl, ATOM0(K), 8);
+        fluent(dl, ATOM(F, a), 1);
+        frule(dl, 16,
+              WATOMS(ATOM(F, X), ATOM(F, Y), ATOM(H, X, Y), ATOM(F, X)),
+              annotation, &ann_r, ATOM(R, X, Y), 2, ATOM(P, X), ATOM(Q, Y));
+        frule(dl, 0, WATOMS(ATOM0(K)), annotation, &ann_s, ATOM0(S), 1,
+              ATOM(R, X, Y));
+        rule(dl, ATOM0(G), 1, ATOM0(S));
+        assertProgram(dl,
+                      "P(a).\n"
+                      "Q(b).\n"
+                      "R(X, Y) :- P(X), Q(Y). ; w = 16 + F(X) + F(Y)"
+                      " + H(X, Y) + F(X); ann_size = 1\n"
+                      "S() :- R(X, Y). ; w = K(); ann_size = 1\n"
+                      "G() :- S().\n");
+        finalize(dl);
+
+        canonicalModelOK(dl);
+        // R(a, b) = 16 + 1 + 2 + 4 + 1, S() = 24 + 8 (the annotations get
+        // the ground weights of the rules, i.e., 24 and 8)
+        assertFacts(dl, R, "Rab:24");
+        assertGoalWeight(dl, G, 32);
+        pddlDatalogExecuteAnnotations(dl, G);
+        assertStrEq(out.buf,
+                    "R | (R a b) :- (P a) (Q b). w=24\n"
+                    "S | (S) :- (R a b). w=8\n");
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * An overflow of the sum of the values of weight atoms is an error.
+ */
+TEST_ONCE(datalog_weight_atoms_overflow)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    for (int ti = 0; ti < 2; ++ti){
+        pddl_datalog_t *dl = newWeighted(types[ti]);
+        int P = addPred(dl, 1, "P");
+        int Q = addPred(dl, 1, "Q");
+        int F = pddlDatalogAddFunc(dl, 1, "F");
+        int a = addConst(dl, "a");
+        int X = pddlDatalogAddVar(dl, "X");
+        fact(dl, ATOM(P, a));
+        fluent(dl, ATOM(F, a), INT_MAX - 1);
+        frule(dl, 0, WATOMS(ATOM(F, X), ATOM(F, X)), NULL, NULL,
+              ATOM(Q, X), 1, ATOM(P, X));
+        finalize(dl);
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+        assertFacts(dl, Q, "");
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * The normalization keeps the variables of the weight atoms in the
+ * auxiliary predicates: Y occurs only in B(X, Y), C(Y), and the weight
+ * atom F(Y), so without it, joining B and C would project Y away. The
+ * variables of the weight atoms are renamed by the canonization, and the
+ * auxiliary predicates of two rules differing only in their weights are
+ * merged.
+ */
+TEST_ONCE(datalog_weight_atoms_normalization)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    int goal[2] = { 7, 4 };
+    for (int ti = 0; ti < 2; ++ti){
+        pddl_datalog_t *dl = newWeighted(types[ti]);
+        int A = addPred(dl, 1, "A");
+        int B = addPred(dl, 2, "B");
+        int C = addPred(dl, 1, "C");
+        int H = addPred(dl, 1, "H");
+        int I = addPred(dl, 1, "I");
+        int G = addGoalPred(dl, "G");
+        int F = pddlDatalogAddFunc(dl, 1, "F");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        int c = addConst(dl, "c");
+        int X = pddlDatalogAddVar(dl, "X");
+        int Y = pddlDatalogAddVar(dl, "Y");
+        int Z = pddlDatalogAddVar(dl, "Z");
+        int W = pddlDatalogAddVar(dl, "W");
+        fact(dl, ATOM(A, a));
+        fact(dl, ATOM(B, a, b));
+        fact(dl, ATOM(B, a, c));
+        fact(dl, ATOM(C, b));
+        fact(dl, ATOM(C, c));
+        fluent(dl, ATOM(F, b), 5);
+        fluent(dl, ATOM(F, c), 3);
+        frule(dl, 0, WATOMS(ATOM(F, Y)), NULL, NULL, ATOM(H, X), 3,
+              ATOM(A, X), ATOM(B, X, Y), ATOM(C, Y));
+        frule(dl, 1, WATOMS(ATOM(F, W)), NULL, NULL, ATOM(I, Z), 3,
+              ATOM(A, Z), ATOM(B, Z, W), ATOM(C, W));
+        rule(dl, ATOM0(G), 2, ATOM(H, a), ATOM(I, a));
+        finalize(dl);
+        assertProgram(dl,
+                      "A(a).\n"
+                      "B(a, b).\n"
+                      "B(a, c).\n"
+                      "C(b).\n"
+                      "C(c).\n"
+                      "H(X) :- C(Y), _p7(X, Y). ; w = F(Y)\n"
+                      "I(X) :- C(Y), _p7(X, Y). ; w = 1 + F(Y)\n"
+                      "G() :- H(a), I(a).\n"
+                      "_p7(X, Y) :- A(X), B(X, Y).\n");
+
+        canonicalModelOK(dl);
+        // H(a) = min(F(b), F(c)), I(a) = 1 + min(F(b), F(c))
+        assertFacts(dl, H, "Ha:3");
+        assertFacts(dl, I, "Ia:4");
+        assertGoalWeight(dl, G, goal[ti]);
+        pddlDatalogDel(dl);
+    }
+}
+
+/** Paths A(Y) :- A(X), E(X, Y) with the weight D(X, Y) + V(Y), where
+ *  D(a, c) has no value, and the goal G :- A(d), computed with the policy
+ *  MISSING for the missing values */
+static void missingFluentTest(pddl_datalog_weight_type_t type,
+                              pddl_datalog_missing_fluent_t missing)
+{
+    pddl_datalog_t *dl = pddlDatalogNewWeighted(type, missing);
+    int At = addPred(dl, 1, "A");
+    int E = addPred(dl, 2, "E");
+    int G = addGoalPred(dl, "G");
+    int D = pddlDatalogAddFunc(dl, 2, "D");
+    int V = pddlDatalogAddFunc(dl, 1, "V");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int d = addConst(dl, "d");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(At, a));
+    fact(dl, ATOM(E, a, b));
+    fact(dl, ATOM(E, a, c));
+    fact(dl, ATOM(E, b, d));
+    fact(dl, ATOM(E, c, d));
+    fluent(dl, ATOM(D, a, b), 1);
+    fluent(dl, ATOM(D, b, d), 1);
+    fluent(dl, ATOM(D, c, d), 0);
+    fluent(dl, ATOM(V, b), 0);
+    fluent(dl, ATOM(V, c), 0);
+    fluent(dl, ATOM(V, d), 0);
+    frule(dl, 0, WATOMS(ATOM(D, X, Y), ATOM(V, Y)), NULL, NULL,
+          ATOM(At, Y), 2, ATOM(At, X), ATOM(E, X, Y));
+    rule(dl, ATOM0(G), 1, ATOM(At, d));
+    finalize(dl);
+
+    switch (missing){
+    case PDDL_DATALOG_MISSING_FLUENT_ZERO:
+        // A(c) = 0 + 0, A(d) = 0 via A(c)
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, G, 0);
+        assertFacts(dl, At, "Aa:0 Ab:1 Ac:0 Ad:0");
+        break;
+    case PDDL_DATALOG_MISSING_FLUENT_ERR:
+        // A(c) is derived when A(a) is processed, i.e., before the goal
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+        break;
+    case PDDL_DATALOG_MISSING_FLUENT_SKIP_RULE:
+        // A(c) is not derived, A(d) = 2 via A(b)
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, G, 2);
+        assertFacts(dl, At, "Aa:0 Ab:1 Ad:2");
+        break;
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A missing value of one of two weight atoms of a rule counts as zero.
+ */
+TEST_ONCE(datalog_weight_atoms_missing_zero)
+{
+    missingFluentTest(PDDL_DATALOG_WEIGHT_ADD,
+                      PDDL_DATALOG_MISSING_FLUENT_ZERO);
+    missingFluentTest(PDDL_DATALOG_WEIGHT_MAX,
+                      PDDL_DATALOG_MISSING_FLUENT_ZERO);
+}
+
+/*
+ * A missing value of one of two weight atoms of a rule is an error.
+ */
+TEST_ONCE(datalog_weight_atoms_missing_err)
+{
+    missingFluentTest(PDDL_DATALOG_WEIGHT_ADD,
+                      PDDL_DATALOG_MISSING_FLUENT_ERR);
+    missingFluentTest(PDDL_DATALOG_WEIGHT_MAX,
+                      PDDL_DATALOG_MISSING_FLUENT_ERR);
+}
+
+/*
+ * A missing value of one of two weight atoms of a rule skips the ground
+ * rule.
+ */
+TEST_ONCE(datalog_weight_atoms_missing_skip)
+{
+    missingFluentTest(PDDL_DATALOG_WEIGHT_ADD,
+                      PDDL_DATALOG_MISSING_FLUENT_SKIP_RULE);
+    missingFluentTest(PDDL_DATALOG_WEIGHT_MAX,
+                      PDDL_DATALOG_MISSING_FLUENT_SKIP_RULE);
+}
+
+/*
+ * Body-less rules with ground and 0-ary weight atoms; a missing value
+ * (of R(b)) is handled by each policy, with the error repeated by every
+ * computation, because the initial facts are inserted again.
+ */
+TEST_ONCE(datalog_weight_atoms_bodyless)
+{
+    pddl_datalog_missing_fluent_t policies[3] = {
+        PDDL_DATALOG_MISSING_FLUENT_ZERO,
+        PDDL_DATALOG_MISSING_FLUENT_ERR,
+        PDDL_DATALOG_MISSING_FLUENT_SKIP_RULE,
+    };
+    for (int pi = 0; pi < 3; ++pi){
+        pddl_datalog_t *dl;
+        dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD, policies[pi]);
+        int P = addPred(dl, 1, "P");
+        int Q = addPred(dl, 0, "Q");
+        int R = addPred(dl, 1, "R");
+        int G = addGoalPred(dl, "G");
+        int F = pddlDatalogAddFunc(dl, 1, "F");
+        int K = pddlDatalogAddFunc(dl, 0, "K");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        fluent(dl, ATOM(F, a), 2);
+        fluent(dl, ATOM0(K), 3);
+        frule(dl, 0, WATOMS(ATOM(F, a)), NULL, NULL, ATOM(P, a), 0);
+        frule(dl, 1, WATOMS(ATOM0(K)), NULL, NULL, ATOM0(Q), 0);
+        frule(dl, 0, WATOMS(ATOM(F, b)), NULL, NULL, ATOM(R, b), 0);
+        rule(dl, ATOM0(G), 2, ATOM(P, a), ATOM0(Q));
+        finalize(dl);
+
+        switch (policies[pi]){
+        case PDDL_DATALOG_MISSING_FLUENT_ZERO:
+            canonicalModelOK(dl);
+            assertGoalWeight(dl, G, 6);
+            assertFacts(dl, R, "Rb:0");
+            break;
+        case PDDL_DATALOG_MISSING_FLUENT_ERR:
+            canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+            canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+            assertFacts(dl, R, "");
+            break;
+        case PDDL_DATALOG_MISSING_FLUENT_SKIP_RULE:
+            canonicalModelOK(dl);
+            assertGoalWeight(dl, G, 6);
+            assertFacts(dl, R, "");
+            break;
+        }
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * Weight atoms with commit/rollback and frozen predicates: the static part
+ * is computed and frozen once, and every query rolls back, adds its own
+ * fact, and gets the weights given by the fluents.
+ */
+TEST_ONCE(datalog_weight_atoms_commit)
+{
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    for (int ti = 0; ti < 2; ++ti){
+        pddl_datalog_t *dl = newWeighted(types[ti]);
+        int At = addPred(dl, 1, "A");
+        int S = addPred(dl, 2, "S");
+        int G = addGoalPred(dl, "G");
+        int D = pddlDatalogAddFunc(dl, 2, "D");
+        int a = addConst(dl, "a");
+        int b = addConst(dl, "b");
+        int c = addConst(dl, "c");
+        int X = pddlDatalogAddVar(dl, "X");
+        int Y = pddlDatalogAddVar(dl, "Y");
+        fact(dl, ATOM(S, a, b));
+        fact(dl, ATOM(S, b, c));
+        fact(dl, ATOM(S, a, c));
+        fluent(dl, ATOM(D, a, b), 1);
+        fluent(dl, ATOM(D, b, c), 1);
+        fluent(dl, ATOM(D, a, c), 5);
+        frule(dl, 0, WATOMS(ATOM(D, X, Y)), NULL, NULL, ATOM(At, Y), 2,
+              ATOM(At, X), ATOM(S, X, Y));
+        rule(dl, ATOM0(G), 1, ATOM(At, c));
+        finalize(dl);
+
+        canonicalModelWithIntLimit(dl, 0,
+                                   PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+        PDDL_IVEC(input);
+        pddlIVecPush(&input, At);
+        dbCommit(dl, &input);
+        pddlIVecFree(&input);
+        for (int rep = 0; rep < 2; ++rep){
+            addFactToDB(dl, ATOM(At, a), NULL);
+            canonicalModelOK(dl);
+            assertGoalWeight(dl, G, 2);
+            pddlDatalogDBRollback(dl);
+
+            addFactToDB(dl, ATOM(At, b), NULL);
+            canonicalModelOK(dl);
+            assertGoalWeight(dl, G, 1);
+            pddlDatalogDBRollback(dl);
+        }
+        pddlDatalogDel(dl);
+    }
+}
+
+/*
+ * Functions are not predicates: they have no facts in the database and
+ * they cannot be input predicates of a commit.
+ */
+TEST_ONCE(datalog_func_not_pred)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(P, a));
+    fluent(dl, ATOM(F, a), 1);
+    finalize(dl);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    addFactToDBFail(dl, ATOM(F, a), NULL);
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, F);
+    dbCommitFail(dl, &input);
+    pddlIVecFree(&input);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Adding a numeric fluent to an unweighted program is an error.
+ */
+TEST_ONCE(datalog_fluent_err_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fluentFail(dl, ATOM(P, a), 1, "only to weighted");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Setting a different value of a numeric fluent is an error and the
+ * original value is kept.
+ */
+TEST_ONCE(datalog_fluent_err_different_value)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int a = addConst(dl, "a");
+    int G = addGoalPred(dl, "G");
+    fluent(dl, ATOM(F, a), 1);
+    fluentFail(dl, ATOM(F, a), 2, "F(a) already has a different value");
+    fluent(dl, ATOM(F, a), 1);
+    fluentFail(dl, ATOM(F, a), 2, "F(a) already has a different value");
+
+    fact(dl, ATOM(P, a));
+    frule(dl, 3, WATOMS(ATOM(F, a)), NULL, NULL, ATOM0(G), 1, ATOM(P, a));
+    finalize(dl);
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_OK);
+    assertGoalWeight(dl, G, 4);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A negative value of a numeric fluent is an error.
+ */
+TEST_ONCE(datalog_fluent_err_negative)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int a = addConst(dl, "a");
+    fluentFail(dl, ATOM(F, a), -1, "negative values");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Setting a value of an atom of a predicate (not a function) is an error.
+ */
+TEST_ONCE(datalog_fluent_err_not_func)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    fluentFail(dl, ATOM(P, a), 1, "Invalid ID of a function");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A numeric fluent with a variable argument is an error.
+ */
+TEST_ONCE(datalog_fluent_err_not_const)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int X = pddlDatalogAddVar(dl, "X");
+    fluentFail(dl, ATOM(F, X), 1, "Invalid ID of a constant");
+    pddlDatalogDel(dl);
 }
 
 /*
@@ -3343,7 +3925,7 @@ TEST_PANIC_ONCE(datalog_panic_facts_without_user_id)
  */
 TEST_PANIC_ONCE(datalog_panic_goal_weight_not_goal)
 {
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     int P = addPred(dl, 1, "P");
     int a = addConst(dl, "a");
     fact(dl, ATOM(P, a));
@@ -3395,7 +3977,7 @@ TEST_PANIC_ONCE(datalog_panic_gringo_frozen)
  */
 TEST_PANIC_ONCE(datalog_panic_rule_set_negative_weight)
 {
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     pddl_datalog_rule_t rule;
     pddlDatalogRuleInit(dl, &rule);
     pddl_num_t w;
@@ -3408,7 +3990,7 @@ TEST_PANIC_ONCE(datalog_panic_rule_set_negative_weight)
  */
 TEST_PANIC_ONCE(datalog_panic_add_rule_negative_weight)
 {
-    pddl_datalog_t *dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     int S = addPred(dl, 0, "S");
     int P = addPred(dl, 0, "P");
     pddl_datalog_rule_t rule;
@@ -3626,7 +4208,7 @@ TEST_ONCE(datalog_add_fact_errors)
 
     // Weights in a weighted program: the weights of S, A, B, G are 0, 1, 3,
     // and 6
-    dl = pddlDatalogNewWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     limit_prog_t lp;
     limitProgram(dl, &lp);
     addFactToDBFail(dl, ATOM0(lp.B), &neg);
@@ -3642,4 +4224,109 @@ TEST_ONCE(datalog_add_fact_errors)
     canonicalModelOK(dl);
     assertGoalWeight(dl, lp.G, 4);
     pddlDatalogDel(dl);
+}
+
+/*
+ * Functions cannot be added to unweighted programs.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_func_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    (void)F;
+}
+
+/*
+ * A rule with a weight atom cannot be added to an unweighted program.
+ */
+TEST_PANIC_ONCE(datalog_panic_weight_atom_unweighted)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    frule(dl, 0, WATOMS(ATOM(P, a)), NULL, NULL, ATOM(P, a), 0);
+}
+
+/*
+ * The head of a rule cannot be an atom of a function.
+ */
+TEST_PANIC_ONCE(datalog_panic_func_in_head)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int a = addConst(dl, "a");
+    fact(dl, ATOM(F, a));
+}
+
+/*
+ * The positive body of a rule cannot contain an atom of a function.
+ */
+TEST_PANIC_ONCE(datalog_panic_func_in_body)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int X = pddlDatalogAddVar(dl, "X");
+    rule(dl, ATOM(P, X), 1, ATOM(F, X));
+}
+
+/*
+ * The negative body of a rule cannot contain an atom of a function.
+ */
+TEST_PANIC_ONCE(datalog_panic_func_in_neg_body)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int Q = addPred(dl, 1, "Q");
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int X = pddlDatalogAddVar(dl, "X");
+    pddl_datalog_rule_t rule;
+    ruleInit(dl, &rule, ATOM(P, X));
+    ruleAddBody(dl, &rule, ATOM(Q, X));
+    ruleAddNeg(dl, &rule, ATOM(F, X));
+    ruleAdd(dl, &rule);
+}
+
+/*
+ * A weight atom must be an atom of a function.
+ */
+TEST_PANIC_ONCE(datalog_panic_weight_atom_not_func)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int P = addPred(dl, 1, "P");
+    int a = addConst(dl, "a");
+    frule(dl, 0, WATOMS(ATOM(P, a)), NULL, NULL, ATOM(P, a), 0);
+}
+
+/*
+ * Functions cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_func_finalized)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    finalize(dl);
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    (void)F;
+}
+
+/*
+ * Numeric fluents cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_add_fluent_finalized)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    int a = addConst(dl, "a");
+    finalize(dl);
+    fluent(dl, ATOM(F, a), 1);
+}
+
+/*
+ * Functions have no user IDs.
+ */
+TEST_PANIC_ONCE(datalog_panic_set_func_user_id)
+{
+    pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    pddlDatalogSetPredUserId(dl, F, 'F');
 }
