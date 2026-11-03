@@ -244,26 +244,35 @@ static void groundCmpFree(ground_cmp_t *cmp)
     }
 }
 
-/** Returns the value of the lifted heuristic H in STATE as an integer
- *  (PDDL_COST_DEAD_END for a dead end), and asserts that it is +infinity
- *  or a plain integer */
-static int liftedEval(pddl_lifted_heur_relaxed_t *h,
-                      const pddl_iset_t *state,
-                      const pddl_ground_atoms_t *gatoms)
+/** Returns the value of the lifted heuristic H in STATE, and asserts that
+ *  it is +infinity (a dead end) or a non-negative number */
+static pddl_num_t liftedEval(pddl_lifted_heur_relaxed_t *h,
+                             const pddl_iset_t *state,
+                             const pddl_ground_atoms_t *gatoms)
 {
     pddl_num_t v = pddlLiftedHeurRelaxedEvalState(h, state, gatoms);
-    if (pddlNumIsPosInf(&v))
+    assert(v.delta == 0);
+    assert(pddlNumIsPosInf(&v) || !pddlNumIsNeg(&v));
+    return v;
+}
+
+/** Returns the heuristic value V as an integer (PDDL_COST_DEAD_END for
+ *  +infinity), and asserts that it is +infinity or a plain integer */
+static int heurValueToInt(const pddl_num_t *v)
+{
+    if (pddlNumIsPosInf(v))
         return PDDL_COST_DEAD_END;
-    assert(pddlNumIsPlainInt(&v) && v.delta == 0);
-    assert(v.val.i >= 0 && v.val.i != PDDL_COST_DEAD_END);
-    return v.val.i;
+    assert(pddlNumIsPlainInt(v));
+    assert(v->val.i >= 0 && v->val.i != PDDL_COST_DEAD_END);
+    return v->val.i;
 }
 
 /** Returns the value of the lifted heuristic of CMP and asserts it is
  *  equal to the ground one (dead ends are PDDL_COST_DEAD_END in both) */
 static int groundCmpState(ground_cmp_t *cmp, const pddl_iset_t *state)
 {
-    int lc = liftedEval(&cmp->lifted, state, &cmp->gatoms);
+    pddl_num_t lv = liftedEval(&cmp->lifted, state, &cmp->gatoms);
+    int lc = heurValueToInt(&lv);
     int c;
     if (cmp->max){
         c = pddlHMaxStrips(&cmp->hmax, state);
@@ -336,37 +345,37 @@ static void liftedHeursFree(lifted_heurs_t *hs)
  *  h^max <= hFF-max, h^max <= hFF-add <= h^add, all of them are dead ends
  *  iff h^max is, and all of them are 0 if GOAL is 1 (STATE satisfies the
  *  goal). Returns the value of h^max. */
-static int assertHeurProps(lifted_heurs_t *hs,
-                           const pddl_iset_t *state,
-                           const pddl_ground_atoms_t *gatoms,
-                           int goal)
+static pddl_num_t assertHeurProps(lifted_heurs_t *hs,
+                                  const pddl_iset_t *state,
+                                  const pddl_ground_atoms_t *gatoms,
+                                  int goal)
 {
-    int hmax = liftedEval(&hs->hmax, state, gatoms);
-    int hadd = liftedEval(&hs->hadd, state, gatoms);
-    int hff_max = liftedEval(&hs->hff_max, state, gatoms);
-    int hff_add = liftedEval(&hs->hff_add, state, gatoms);
+    pddl_num_t hmax = liftedEval(&hs->hmax, state, gatoms);
+    pddl_num_t hadd = liftedEval(&hs->hadd, state, gatoms);
+    pddl_num_t hff_max = liftedEval(&hs->hff_max, state, gatoms);
+    pddl_num_t hff_add = liftedEval(&hs->hff_add, state, gatoms);
 
-    if (hmax == PDDL_COST_DEAD_END){
-        assert(hadd == PDDL_COST_DEAD_END);
-        assert(hff_max == PDDL_COST_DEAD_END);
-        assert(hff_add == PDDL_COST_DEAD_END);
+    if (pddlNumIsPosInf(&hmax)){
+        assert(pddlNumIsPosInf(&hadd));
+        assert(pddlNumIsPosInf(&hff_max));
+        assert(pddlNumIsPosInf(&hff_add));
         assert(goal != 1);
         return hmax;
     }
-    assert(hadd != PDDL_COST_DEAD_END);
-    assert(hff_max != PDDL_COST_DEAD_END);
-    assert(hff_add != PDDL_COST_DEAD_END);
+    assert(!pddlNumIsPosInf(&hadd));
+    assert(!pddlNumIsPosInf(&hff_max));
+    assert(!pddlNumIsPosInf(&hff_add));
 
-    assert(hmax <= hadd);
-    assert(hmax <= hff_max);
-    assert(hmax <= hff_add);
-    assert(hff_add <= hadd);
+    assert(pddlNumLE(&hmax, &hadd));
+    assert(pddlNumLE(&hmax, &hff_max));
+    assert(pddlNumLE(&hmax, &hff_add));
+    assert(pddlNumLE(&hff_add, &hadd));
 
     if (goal == 1){
-        assert(hmax == 0);
-        assert(hadd == 0);
-        assert(hff_max == 0);
-        assert(hff_add == 0);
+        assert(pddlNumIsZero(&hmax));
+        assert(pddlNumIsZero(&hadd));
+        assert(pddlNumIsZero(&hff_max));
+        assert(pddlNumIsZero(&hff_add));
     }
     return hmax;
 }
@@ -500,8 +509,8 @@ TEST(lifted_heur_plan_states, lifted_heur_cost)
         assert(hmax != PDDL_COST_DEAD_END);
         assert(hadd != PDDL_COST_DEAD_END);
         assert(hmax <= cost);
-        int h = assertHeurProps(&hs, state, &gatoms, goal);
-        assert(h == hmax);
+        pddl_num_t h = assertHeurProps(&hs, state, &gatoms, goal);
+        assert(heurValueToInt(&h) == hmax);
         if (i < pddlIVecSize(&plan.op))
             cost -= strips.op.op[pddlIVecGet(&plan.op, i)]->cost;
     }
@@ -561,7 +570,8 @@ TEST_ONCE(lifted_heur_param_cost)
     pddl_lifted_heur_relaxed_t hff;
     int ret = pddlLiftedHFFAddInit(&hff, &pddl, &C.err);
     assertOK(ret);
-    int h = liftedEval(&hff, &strips.init, &gatoms);
+    pddl_num_t hv = liftedEval(&hff, &strips.init, &gatoms);
+    int h = heurValueToInt(&hv);
     assert(hmax <= h && h <= hadd);
     pddlLiftedHeurRelaxedFree(&hff);
 
@@ -569,6 +579,47 @@ TEST_ONCE(lifted_heur_param_cost)
     groundCmpFree(&cmp_add);
     pddlGroundAtomsFree(&gatoms);
     pddlStripsFree(&strips);
+    pddlFree(&pddl);
+}
+
+/*
+ * Non-integer action costs: with the cost 1.5 of every move, all lifted
+ * relaxed heuristics give 3 (two moves) in the initial state.
+ */
+TEST_ONCE(lifted_heur_float_cost)
+{
+    pddlErrInit(&C.err);
+    pddl_t pddl;
+    loadTask(&pddl, "various/num-cost-float/p01");
+    assert(pddlIntActionCostFuncId(&pddl) < 0);
+    assert(pddlActionCostFuncId(&pddl) >= 0);
+
+    pddl_strips_maker_t smaker;
+    pddlStripsMakerInit(&smaker, &pddl);
+    PDDL_ISET(state);
+    int ret = pddlStripsMakerAddInitAndCollect(&smaker, &state, NULL);
+    assertOK(ret);
+
+    pddl_lifted_heur_relaxed_t h[4];
+    ret = pddlLiftedHMaxInit(h + 0, &pddl, &C.err);
+    assertOK(ret);
+    ret = pddlLiftedHAddInit(h + 1, &pddl, &C.err);
+    assertOK(ret);
+    ret = pddlLiftedHFFMaxInit(h + 2, &pddl, &C.err);
+    assertOK(ret);
+    ret = pddlLiftedHFFAddInit(h + 3, &pddl, &C.err);
+    assertOK(ret);
+
+    pddl_num_t expected;
+    pddlNumSetFlt(&expected, 3.f);
+    for (int i = 0; i < 4; ++i){
+        pddl_num_t v = liftedEval(h + i, &state, &smaker.ground_atom);
+        assert(pddlNumEq(&v, &expected));
+        pddlLiftedHeurRelaxedFree(h + i);
+    }
+
+    pddlISetFree(&state);
+    pddlStripsMakerFree(&smaker);
     pddlFree(&pddl);
 }
 

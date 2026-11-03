@@ -60,14 +60,7 @@ needs_simple_total_cost = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_dl",
     "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
     "lifted_succ_gen_sql",
     "lmg_compile_in",
     "prune_strips",
@@ -86,6 +79,23 @@ needs_simple_total_cost = [
     "strips_maker_init",
     "strips_maker_make_strips",
     "strips_nebel",
+]
+
+# Tests that require unit costs or action costs given by a single
+# action-cost function (pddlActionCostFuncId()) increased only by
+# non-negative constants and fluents of static functions -- the costs
+# supported by the lifted relaxed heuristics (and the lifted searches using
+# them). Disabled for tasks with other costs (e.g., numeric expressions,
+# non-static fluents, decrease effects, or general metrics).
+needs_static_action_costs = [
+    "lifted_heur_cost",
+    "lifted_search_astar_hmax_dl",
+    "lifted_search_astar_hmax_sql",
+    "lifted_search_gbfs_hadd_dl",
+    "lifted_search_gbfs_hff_add_dl",
+    "lifted_search_gbfs_hff_max_dl",
+    "lifted_search_lazy_hadd_dl",
+    "lifted_search_lazy_hff_add_dl",
 ]
 
 [task-set]
@@ -276,16 +286,6 @@ name = "ipc-2006/trucks/p01"
 
 [[tasks]]
 name = "ipc-2008/seq-opt/elevators/p01"
-disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
-]
 
 [[tasks]]
 name = "ipc-2008/seq-opt/openstacks/p01"
@@ -301,34 +301,12 @@ name = "ipc-2008/seq-opt/scanalyzer/p01"
 
 [[tasks]]
 name = "ipc-2008/seq-opt/sokoban/p01"
-disable = [
-]
 
 [[tasks]]
 name = "ipc-2008/seq-opt/transport/p01"
-disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
-]
 
 [[tasks]]
 name = "ipc-2008/seq-opt/woodworking/p01"
-disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
-]
 
 [[tasks]]
 name = "ipc-2008/seq-sat/elevators/p10"
@@ -417,8 +395,6 @@ name = "ipc-2011/seq-opt/scanalyzer/p01"
 
 [[tasks]]
 name = "ipc-2011/seq-opt/sokoban/p01"
-disable = [
-]
 
 [[tasks]]
 name = "ipc-2011/seq-opt/tidybot/p01"
@@ -426,14 +402,6 @@ name = "ipc-2011/seq-opt/tidybot/p01"
 [[tasks]]
 name = "ipc-2011/seq-opt/transport/p01"
 disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
     "symbolic_search_bw_astar_I",
 ]
 
@@ -505,16 +473,6 @@ disable = [
 
 [[tasks]]
 name = "ipc-2014/seq-opt/transport/p01"
-disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
-]
 
 [[tasks]]
 name = "ipc-2014/seq-opt/visitall/p-1-5"
@@ -760,9 +718,6 @@ disable = [
     "search_gbfs_ff_succ_gen_tree_order",
     "search_lazy_add",
     "search_lazy_ff",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "search_gbfs_ff_reopen",
     "search_lazy_ff_reopen",
     "search_gbfs_saturated_cost",
@@ -1201,9 +1156,6 @@ disable = [
 
 [[tasks]]
 name = "ipc-2014/seq-opt/citycar/p2-2-2-1-2"
-disable = [
-    "lifted_search_astar_unit_cost_hmax_dl",
-]
 
 [[tasks]]
 name = "ipc-2014/seq-opt/citycar/p2-3-3-3-1"
@@ -1473,9 +1425,6 @@ disable = [
 [[tasks]]
 name = "ipc-2018/seq-opt/data-network/p01"
 disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -1551,9 +1500,6 @@ disable = [
 name = "ipc-2018/seq-opt/settlers/p01"
 disable = [
     "strips",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
     "pddl_compile_away_cond_eff",
     "strips_ground_unit_cost",
     "prune_strips",
@@ -1635,15 +1581,9 @@ disable = [
     "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
     "pot_conj",
     "symbolic_search",
     "h2_heur_dyn_prog_init_state",
@@ -1659,7 +1599,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -1684,14 +1623,6 @@ name = "ipc-2023/opt/labyrinth/p01"
 disable = [
     "hm_h2_fwbw_mg_strips",
     "hm_h2_fwbw_task_fdr",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
     "symbolic_search_bw_astar_I",
     "symbolic_search_bw_blind",
     "symbolic_search_bw_gbfs_I_gc",
@@ -1707,7 +1638,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -1766,27 +1696,11 @@ name = "ipc-2023/opt/recharging-robots/p01"
 disable = [
     "endomorphism_tss",
     "endomorphism_tss_nocost",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
 name = "ipc-2023/opt/recharging-robots/p10"
 disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_astar_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
     "pot_conj",
     "pot_mg_strips_init",
     "strips",
@@ -1814,7 +1728,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -1865,7 +1778,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -1926,7 +1838,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -1963,7 +1874,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -2011,7 +1921,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -2058,7 +1967,6 @@ disable = [
     "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -2106,7 +2014,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -2130,7 +2037,6 @@ disable = [
     "symbolic_search_fwbw_astar_AI_blind",
     "symbolic_search_fwbw_astar_blind_I",
     "symbolic_search_fwbw_blind",
-    "lifted_search_gbfs_hff_max_dl",
     "search_astar_lmc_packer_ilp",
     "search_astar_lmc_packer_eff_affinity",
 ]
@@ -2143,15 +2049,9 @@ disable = [
     "lifted_blind_search_sql",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
     "pot_conj",
     "search_astar_hmax",
     "search_astar_lmc",
@@ -2189,7 +2089,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_unit_cost_sql",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
     "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
@@ -2232,10 +2131,7 @@ disable = [
 [[tasks]]
 name = "ipc-2023/sat/slitherlink/p01"
 disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_astar_hmax_sql",
-    "lifted_search_astar_unit_cost_hmax_dl",
     "lifted_search_astar_unit_cost_hmax_sql",
     "symbolic_search",
 ]
@@ -2500,56 +2396,38 @@ name = "various/cond-eff-simplify/p01"
 [[tasks]]
 name = "various/num-metric-nonlinear/p01"
 disable = [
-    # Lifted relaxed heuristics support only tasks with non-negative integer
-    # action costs.
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
 name = "various/num-metric-negdelta/p01"
 disable = [
-    # Lifted relaxed heuristics support only tasks with non-negative integer
-    # action costs.
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
 name = "various/num-metric-negcoef/p01"
-disable = ["test-set:needs_simple_total_cost"]
+disable = [
+    "test-set:needs_simple_total_cost",
+    "test-set:needs_static_action_costs",
+]
 
 [[tasks]]
 name = "various/num-cost-expr/p01"
-disable = ["test-set:needs_simple_total_cost"]
+disable = [
+    "test-set:needs_simple_total_cost",
+    "test-set:needs_static_action_costs",
+]
 
 [[tasks]]
 name = "various/num-cost-decrease/p01"
-disable = ["test-set:needs_simple_total_cost"]
+disable = [
+    "test-set:needs_simple_total_cost",
+    "test-set:needs_static_action_costs",
+]
 
 [[tasks]]
 name = "various/num-cost-float/p01"
-disable = [
-    # Lifted relaxed heuristics support only tasks with non-negative integer
-    # action costs.
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
-]
 
 [[tasks]]
 name = "various/num-cost-renamed/p01"
@@ -2568,7 +2446,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2583,7 +2460,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2601,7 +2477,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2619,8 +2494,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hff_max_dl",
 ]
 
 [[tasks]]
@@ -2633,7 +2506,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
 ]
 
 [[tasks]]
@@ -2645,8 +2517,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2661,7 +2531,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2676,7 +2545,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2694,7 +2562,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2712,7 +2579,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2730,7 +2596,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2744,13 +2609,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
 ]
 
 [[tasks]]
@@ -2760,7 +2618,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2778,7 +2635,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2793,7 +2649,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2808,7 +2663,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2826,7 +2680,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
 ]
 
 [[tasks]]
@@ -2836,7 +2689,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2851,7 +2703,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2869,7 +2720,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2884,7 +2734,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2899,7 +2748,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2914,7 +2762,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2929,7 +2776,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2944,7 +2790,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2959,11 +2804,9 @@ disable = [
     "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
     "lifted_search_lazy_hff_add_dl",
 ]
 
@@ -2974,7 +2817,6 @@ disable = [
     "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -2985,15 +2827,7 @@ disable = [
 [[tasks]]
 name = "ipc-2023/num/tpp/pfile1"
 disable = [
-    # Lifted relaxed heuristics support only tasks with non-negative integer
-    # action costs.
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
@@ -3005,27 +2839,13 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
 
-    # Lifted relaxed heuristics support only tasks with non-negative integer
-    # action costs.
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
 name = "ipc-2023/num/zenotravel/pfile1"
 disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
@@ -3034,13 +2854,7 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
@@ -3059,7 +2873,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3076,8 +2889,6 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3092,7 +2903,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3107,7 +2917,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3125,7 +2934,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3136,13 +2944,7 @@ disable = [
 [[tasks]]
 name = "ipc-2026/num/gear-car/p000"
 disable = [
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
@@ -3151,13 +2953,7 @@ disable = [
     "lifted_blind_search_unit_cost_dl",
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
-    "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
-    "lifted_search_gbfs_hadd_dl",
-    "lifted_search_gbfs_hff_add_dl",
-    "lifted_search_gbfs_hff_max_dl",
-    "lifted_search_lazy_hadd_dl",
-    "lifted_search_lazy_hff_add_dl",
+    "test-set:needs_static_action_costs",
 ]
 
 [[tasks]]
@@ -3167,7 +2963,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3182,7 +2977,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3200,7 +2994,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3218,7 +3011,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3233,7 +3025,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3248,7 +3039,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3266,7 +3056,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
 ]
 
 [[tasks]]
@@ -3276,7 +3065,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
 ]
 
 [[tasks]]
@@ -3286,7 +3074,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
 ]
 
 [[tasks]]
@@ -3299,7 +3086,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3314,7 +3100,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3329,7 +3114,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3344,7 +3128,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3359,7 +3142,6 @@ disable = [
     "lifted_blind_search_dl",
     "lifted_blind_search_enforce_metric_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
@@ -3385,7 +3167,6 @@ disable = [
     "lifted_blind_search_enforce_metric_dl",
     "lifted_blind_search_unit_cost_dl",
     "lifted_search_astar_hmax_dl",
-    "lifted_heur_cost",
     "lifted_search_gbfs_hadd_dl",
     "lifted_search_gbfs_hff_add_dl",
     "lifted_search_gbfs_hff_max_dl",
