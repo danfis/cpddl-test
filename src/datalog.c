@@ -2642,6 +2642,376 @@ TEST_ONCE(datalog_neg_pred_errors)
     pddlDatalogDel(dl);
 }
 
+/** Adds the rule HEAD :- B_1, ..., B_n, !N_1, ..., !N_m with the weight
+ *  WEIGHT (not set if zero), where the variadic arguments are the
+ *  n = BODY_SIZE positive atoms followed by the m = NEG_SIZE negative
+ *  atoms; returns the value of pddlDatalogAddRule() */
+static int nrule(pddl_datalog_t *dl,
+                 int weight,
+                 atom_spec_t head,
+                 int body_size,
+                 int neg_size,
+                 ...)
+{
+    pddl_datalog_rule_t rule;
+    ruleInit(dl, &rule, head);
+    va_list ap;
+    va_start(ap, neg_size);
+    for (int i = 0; i < body_size; ++i)
+        ruleAddBody(dl, &rule, va_arg(ap, atom_spec_t));
+    for (int i = 0; i < neg_size; ++i)
+        ruleAddNeg(dl, &rule, va_arg(ap, atom_spec_t));
+    va_end(ap);
+    if (weight != 0){
+        pddl_num_t w;
+        pddlNumSetInt(&w, weight);
+        pddlDatalogRuleSetWeight(dl, &rule, &w);
+    }
+    return ruleAdd(dl, &rule);
+}
+
+/*
+ * pddlDatalogAddRule() eliminates the positive atoms of the built-in
+ * equality predicate by unifying their arguments in the whole rule, removes
+ * the negative atoms of two different constants, and does not add the rules
+ * that can never fire. The rule passed by the caller is not changed.
+ */
+TEST_ONCE(datalog_eq_simplify)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 2, "P");
+    int S = addPred(dl, 1, "S");
+    int H = addPred(dl, 2, "H");
+    int E = pddlDatalogAddEqPred(dl, "=");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+
+    // Positive atoms
+    int ret = nrule(dl, 0, ATOM(H, X, Y), 2, 0, ATOM(P, X, Y), ATOM(E, X, Y));
+    assert(ret == 0);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 0, ATOM(P, X, Y), ATOM(E, X, a));
+    assert(ret == 1);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 0, ATOM(P, X, Y), ATOM(E, a, Y));
+    assert(ret == 2);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 0, ATOM(P, X, Y), ATOM(E, a, a));
+    assert(ret == 3);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 0, ATOM(P, X, Y), ATOM(E, X, X));
+    assert(ret == 4);
+    // A chain of =-atoms
+    ret = nrule(dl, 0, ATOM(H, X, Y), 4, 0, ATOM(P, X, Z), ATOM(E, X, Y),
+                ATOM(E, Y, Z), ATOM(E, Z, c));
+    assert(ret == 5);
+    // The replacement applies also to the negative atoms
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 1, ATOM(P, X, Z), ATOM(E, Y, Z),
+                ATOM(S, Z));
+    assert(ret == 6);
+    // Negative atoms: !=(a, b) is removed, the others are kept
+    ret = nrule(dl, 0, ATOM(H, X, Y), 1, 3, ATOM(P, X, Y), ATOM(E, X, Y),
+                ATOM(E, X, a), ATOM(E, a, b));
+    assert(ret == 7);
+    ret = nrule(dl, 0, ATOM(H, a, b), 0, 1, ATOM(E, a, b));
+    assert(ret == 8);
+
+    // Rules that can never fire
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 0, ATOM(P, X, Y), ATOM(E, a, b));
+    assert(ret == -1);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 3, 0, ATOM(P, X, Y), ATOM(E, X, a),
+                ATOM(E, X, b));
+    assert(ret == -1);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 1, 1, ATOM(P, X, Y), ATOM(E, X, X));
+    assert(ret == -1);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 1, 1, ATOM(P, X, Y), ATOM(E, a, a));
+    assert(ret == -1);
+    ret = nrule(dl, 0, ATOM(H, X, Y), 2, 1, ATOM(P, X, Y), ATOM(E, X, Y),
+                ATOM(E, Y, X));
+    assert(ret == -1);
+    ret = nrule(dl, 0, ATOM(H, a, b), 0, 1, ATOM(E, b, b));
+    assert(ret == -1);
+
+    assertProgram(dl,
+                  "H(X, X) :- P(X, X).\n"
+                  "H(a, Y) :- P(a, Y).\n"
+                  "H(X, a) :- P(X, a).\n"
+                  "H(X, Y) :- P(X, Y).\n"
+                  "H(X, Y) :- P(X, Y).\n"
+                  "H(c, c) :- P(c, c).\n"
+                  "H(X, Y) :- P(X, Y), !S(Y).\n"
+                  "H(X, Y) :- P(X, Y), !=(X, Y), !=(X, a).\n"
+                  "H(a, b).\n");
+
+    // The rule of the caller is not changed
+    pddl_datalog_rule_t r;
+    ruleInit(dl, &r, ATOM(H, X, Y));
+    ruleAddBody(dl, &r, ATOM(P, X, Y));
+    ruleAddBody(dl, &r, ATOM(E, X, Y));
+    ruleAddNeg(dl, &r, ATOM(E, X, a));
+    ret = pddlDatalogAddRule(dl, &r);
+    assert(ret == 9);
+    assert(r.head.arg[0] == X && r.head.arg[1] == Y);
+    assert(r.body_size == 2);
+    assert(r.body[0].pred == P);
+    assert(r.body[0].arg[0] == X && r.body[0].arg[1] == Y);
+    assert(r.body[1].pred == E);
+    assert(r.body[1].arg[0] == X && r.body[1].arg[1] == Y);
+    assert(r.neg_body_size == 1);
+    assert(r.neg_body[0].pred == E);
+    assert(r.neg_body[0].arg[0] == X && r.neg_body[0].arg[1] == a);
+    pddlDatalogRuleFree(dl, &r);
+    pddlDatalogDel(dl);
+
+    // The replacement applies also to the weight atoms
+    dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    P = addPred(dl, 2, "P");
+    H = addPred(dl, 2, "H");
+    int F = pddlDatalogAddFunc(dl, 1, "F");
+    E = pddlDatalogAddEqPred(dl, "=");
+    X = pddlDatalogAddVar(dl, "X");
+    Y = pddlDatalogAddVar(dl, "Y");
+    Z = pddlDatalogAddVar(dl, "Z");
+    ret = frule(dl, 1, WATOMS(ATOM(F, Y)), NULL, NULL, ATOM(H, X, Y), 2,
+                ATOM(P, X, Z), ATOM(E, Z, Y));
+    assert(ret == 0);
+    assertProgram(dl, "H(X, Z) :- P(X, Z). ; w = 1 + F(Z)\n");
+    pddlDatalogDel(dl);
+}
+
+/** Predicates of the program created by eqProgram() */
+struct eq_prog {
+    int H, I, J, K, L, M, N;
+};
+typedef struct eq_prog eq_prog_t;
+
+/** Creates a program with positive and negative atoms of the equality
+ *  predicate, which is the built-in one if BUILTIN is true, otherwise an
+ *  ordinary predicate with the facts =(o, o) for all constants o. The rules
+ *  have non-zero weights if WEIGHTED is true. */
+static void eqProgram(pddl_datalog_t *dl,
+                      pddl_bool_t builtin,
+                      pddl_bool_t weighted,
+                      eq_prog_t *p)
+{
+    int P = addPred(dl, 2, "P");
+    int Q = addPred(dl, 1, "Q");
+    p->H = addPred(dl, 2, "H");
+    p->I = addPred(dl, 1, "I");
+    p->J = addPred(dl, 2, "J");
+    p->K = addPred(dl, 1, "K");
+    p->L = addPred(dl, 2, "L");
+    p->M = addPred(dl, 2, "M");
+    p->N = addPred(dl, 2, "N");
+    int E;
+    if (builtin){
+        E = pddlDatalogAddEqPred(dl, "=");
+    }else{
+        E = pddlDatalogAddPred(dl, 2, "=");
+    }
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    int W = pddlDatalogAddVar(dl, "W");
+    int w = (weighted ? 1 : 0);
+
+    if (!builtin){
+        fact(dl, ATOM(E, a, a));
+        fact(dl, ATOM(E, b, b));
+        fact(dl, ATOM(E, c, c));
+    }
+    fact(dl, ATOM(P, a, a));
+    fact(dl, ATOM(P, a, b));
+    fact(dl, ATOM(P, b, a));
+    fact(dl, ATOM(P, b, c));
+    fact(dl, ATOM(P, c, c));
+    fact(dl, ATOM(Q, a));
+    fact(dl, ATOM(Q, c));
+
+    // H(X, Y) :- P(X, Y), !=(X, Y).
+    nrule(dl, w, ATOM(p->H, X, Y), 1, 1, ATOM(P, X, Y), ATOM(E, X, Y));
+    // I(X) :- P(X, Y), =(Y, c).
+    nrule(dl, 2 * w, ATOM(p->I, X), 2, 0, ATOM(P, X, Y), ATOM(E, Y, c));
+    // J(X, Z) :- P(X, Y), P(Y, Z), !=(X, Z).  (checked after the join)
+    nrule(dl, 3 * w, ATOM(p->J, X, Z), 2, 1, ATOM(P, X, Y), ATOM(P, Y, Z),
+          ATOM(E, X, Z));
+    // K(X) :- P(X, Y), Q(Y), !=(X, a).  (checked at the unification)
+    nrule(dl, 4 * w, ATOM(p->K, X), 2, 1, ATOM(P, X, Y), ATOM(Q, Y),
+          ATOM(E, X, a));
+    // L(X, Y) :- Q(X), Q(Y), =(X, Y).
+    nrule(dl, 5 * w, ATOM(p->L, X, Y), 3, 0, ATOM(Q, X), ATOM(Q, Y),
+          ATOM(E, X, Y));
+    // M(X, Y) :- P(X, Z), P(Z, Y), =(X, Y).
+    nrule(dl, 6 * w, ATOM(p->M, X, Y), 3, 0, ATOM(P, X, Z), ATOM(P, Z, Y),
+          ATOM(E, X, Y));
+    // N(X, W) :- P(X, Y), P(Y, Z), P(Z, W), !=(X, Y), !=(Y, Z), !=(Z, W).
+    nrule(dl, 7 * w, ATOM(p->N, X, W), 3, 3,
+          ATOM(P, X, Y), ATOM(P, Y, Z), ATOM(P, Z, W),
+          ATOM(E, X, Y), ATOM(E, Y, Z), ATOM(E, Z, W));
+}
+
+/** Writes the facts of all head predicates of eqProgram() to OUT */
+static void eqModelStr(pddl_datalog_t *dl, const eq_prog_t *p, char *out)
+{
+    facts_t fs;
+    fs.size = 0;
+    int preds[] = { p->H, p->I, p->J, p->K, p->L, p->M, p->N };
+    for (int i = 0; i < (int)(sizeof(preds) / sizeof(int)); ++i)
+        pddlDatalogDBForEachFact(dl, preds[i], factCB, &fs);
+    factsJoin(&fs, out);
+}
+
+/** The canonical model of eqProgram() in an unweighted program */
+#define EQ_MODEL \
+    "Hab Hba Hbc Ib Ic Jab Jac Jba Jbc Kb Kc Laa Lcc Maa Mbb Mcc" \
+    " Nab Nba Nbc"
+
+/*
+ * The built-in equality predicate gives the same canonical model as an
+ * ordinary predicate with the facts =(o, o), in unweighted and weighted
+ * programs.
+ */
+TEST_ONCE(datalog_eq_model)
+{
+    for (int builtin = 0; builtin < 2; ++builtin){
+        pddl_datalog_t *dl = pddlDatalogNew();
+        eq_prog_t p;
+        eqProgram(dl, builtin, pddl_false, &p);
+        finalize(dl);
+        canonicalModelOK(dl);
+        char out[STR_SIZE];
+        eqModelStr(dl, &p, out);
+        assertStrEq(out, EQ_MODEL);
+        pddlDatalogDel(dl);
+    }
+
+    pddl_datalog_weight_type_t types[2] = { PDDL_DATALOG_WEIGHT_ADD,
+                                            PDDL_DATALOG_WEIGHT_MAX };
+    for (int ti = 0; ti < 2; ++ti){
+        char out[2][STR_SIZE];
+        for (int builtin = 0; builtin < 2; ++builtin){
+            pddl_datalog_t *dl = newWeighted(types[ti]);
+            eq_prog_t p;
+            eqProgram(dl, builtin, pddl_true, &p);
+            finalize(dl);
+            canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+            eqModelStr(dl, &p, out[builtin]);
+            pddlDatalogDel(dl);
+        }
+        assertStrEq(out[1], out[0]);
+    }
+}
+
+/*
+ * Gringo gives the same canonical model of a program with the built-in
+ * equality predicate.
+ */
+TEST_ONCE(datalog_eq_gringo)
+{
+#ifdef PDDL_CLINGO
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_datalog_t *dl = pddlDatalogNew();
+    eq_prog_t p;
+    eqProgram(dl, pddl_true, pddl_false, &p);
+    finalizeProgram(dl, pddl_false);
+    int ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
+    assert(ret == 0);
+    assert(!pddlErrIsSet(&err));
+    char out[STR_SIZE];
+    eqModelStr(dl, &p, out);
+    assertStrEq(out, EQ_MODEL);
+    pddlDatalogDel(dl);
+#endif /* PDDL_CLINGO */
+}
+
+/*
+ * The normalization merges the auxiliary predicates of two rules that
+ * differ only in the order of the arguments of a negative =-atom.
+ */
+TEST_ONCE(datalog_eq_normal_form_merge)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int A = addPred(dl, 2, "A");
+    int B = addPred(dl, 2, "B");
+    int D = addPred(dl, 1, "D");
+    int H = addPred(dl, 1, "H");
+    int I = addPred(dl, 1, "I");
+    int E = pddlDatalogAddEqPred(dl, "=");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+
+    fact(dl, ATOM(A, a, a));
+    fact(dl, ATOM(A, a, b));
+    fact(dl, ATOM(A, b, b));
+    fact(dl, ATOM(B, a, a));
+    fact(dl, ATOM(B, a, b));
+    fact(dl, ATOM(B, b, b));
+    fact(dl, ATOM(D, a));
+    fact(dl, ATOM(D, b));
+    nrule(dl, 0, ATOM(H, X), 3, 1, ATOM(A, X, Y), ATOM(B, X, Y), ATOM(D, X),
+          ATOM(E, X, Y));
+    nrule(dl, 0, ATOM(I, X), 3, 1, ATOM(A, X, Y), ATOM(B, X, Y), ATOM(D, X),
+          ATOM(E, Y, X));
+    finalize(dl);
+    assertProgram(dl,
+                  "A(a, a).\n"
+                  "A(a, b).\n"
+                  "A(b, b).\n"
+                  "B(a, a).\n"
+                  "B(a, b).\n"
+                  "B(b, b).\n"
+                  "D(a).\n"
+                  "D(b).\n"
+                  "H(X) :- D(X), _p6(X).\n"
+                  "I(X) :- D(X), _p6(X).\n"
+                  "_p6(X) :- A(X, Y), B(X, Y), !=(X, Y).\n");
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    assertFacts(dl, I, "Ia");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Facts of the built-in equality predicate cannot be added to the
+ * database, and it cannot be an input predicate of a commit; its negative
+ * atoms do not restrict anything else.
+ */
+TEST_ONCE(datalog_eq_errors)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 1, "P");
+    int H = addPred(dl, 1, "H");
+    int E = pddlDatalogAddEqPred(dl, "=");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(P, a));
+    nrule(dl, 0, ATOM(H, X), 1, 1, ATOM(P, X), ATOM(E, X, a));
+    finalize(dl);
+
+    addFactToDBFail(dl, ATOM(E, a, a), NULL);
+    addFactToDB(dl, ATOM(P, b), NULL);
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Hb");
+    addFactToDBFail(dl, ATOM(E, a, b), NULL);
+
+    PDDL_IVEC(input);
+    pddlIVecPush(&input, E);
+    dbCommitFail(dl, &input);
+    pddlIVecPush(&input, P);
+    dbCommitFail(dl, &input);
+    pddlIVecClear(&input);
+    pddlIVecPush(&input, P);
+    dbCommit(dl, &input);
+    pddlIVecFree(&input);
+    pddlDatalogDel(dl);
+}
+
 /*
  * Facts added to the database with pddlDatalogDBAddFact() (which
  * initializes the database if necessary), reading facts with
@@ -4668,4 +5038,45 @@ TEST_PANIC_ONCE(datalog_panic_set_func_user_id)
     pddl_datalog_t *dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
     int F = pddlDatalogAddFunc(dl, 1, "F");
     pddlDatalogSetPredUserId(dl, F, 'F');
+}
+
+/*
+ * The built-in equality predicate can be added only once.
+ */
+TEST_PANIC_ONCE(datalog_panic_eq_pred_twice)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    pddlDatalogAddEqPred(dl, "=");
+    pddlDatalogAddEqPred(dl, "=");
+}
+
+/*
+ * The built-in equality predicate cannot be added to a finalized program.
+ */
+TEST_PANIC_ONCE(datalog_panic_eq_pred_finalized)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    finalize(dl);
+    pddlDatalogAddEqPred(dl, "=");
+}
+
+/*
+ * The built-in equality predicate cannot be the head of a rule.
+ */
+TEST_PANIC_ONCE(datalog_panic_eq_pred_head)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int E = pddlDatalogAddEqPred(dl, "=");
+    int a = pddlDatalogAddConst(dl, "a");
+    fact(dl, ATOM(E, a, a));
+}
+
+/*
+ * The built-in equality predicate cannot have a user ID.
+ */
+TEST_PANIC_ONCE(datalog_panic_eq_pred_user_id)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int E = pddlDatalogAddEqPred(dl, "=");
+    pddlDatalogSetPredUserId(dl, E, 1);
 }
