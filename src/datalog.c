@@ -2303,6 +2303,345 @@ TEST_ONCE(datalog_weighted_neg_static_max)
     weightedNegStaticTest(PDDL_DATALOG_WEIGHT_MAX);
 }
 
+/** Body-less rules with negative atoms in a program that is unweighted
+ *  (WEIGHTED is false) or weighted with the sum of weights */
+static void negBodylessTest(pddl_bool_t weighted)
+{
+    pddl_datalog_t *dl;
+    if (weighted){
+        dl = newWeighted(PDDL_DATALOG_WEIGHT_ADD);
+    }else{
+        dl = pddlDatalogNew();
+    }
+    int S = addPred(dl, 1, "S");
+    int A = addPred(dl, 0, "A");
+    int B = addPred(dl, 0, "B");
+    int C = addPred(dl, 1, "C");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+
+    // The rules come before the fact S(b) they depend on
+    pddl_datalog_rule_t r;
+    // A() :- !S(b).  with the weight 1
+    ruleInit(dl, &r, ATOM0(A));
+    ruleAddNeg(dl, &r, ATOM(S, b));
+    if (weighted){
+        pddl_num_t w;
+        pddlNumSetInt(&w, 1);
+        pddlDatalogRuleSetWeight(dl, &r, &w);
+    }
+    ruleAdd(dl, &r);
+    // B() :- !S(a).  with the weight 2
+    ruleInit(dl, &r, ATOM0(B));
+    ruleAddNeg(dl, &r, ATOM(S, a));
+    if (weighted){
+        pddl_num_t w;
+        pddlNumSetInt(&w, 2);
+        pddlDatalogRuleSetWeight(dl, &r, &w);
+    }
+    ruleAdd(dl, &r);
+    // C(a) :- !S(a), !S(b).
+    ruleInit(dl, &r, ATOM(C, a));
+    ruleAddNeg(dl, &r, ATOM(S, a));
+    ruleAddNeg(dl, &r, ATOM(S, b));
+    ruleAdd(dl, &r);
+    // C(b) :- !S(a).
+    ruleInit(dl, &r, ATOM(C, b));
+    ruleAddNeg(dl, &r, ATOM(S, a));
+    ruleAdd(dl, &r);
+    fact(dl, ATOM(S, b));
+    finalize(dl);
+
+    if (weighted){
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+        assertFacts(dl, A, "");
+        assertFacts(dl, B, "B:2");
+        assertFacts(dl, C, "Cb:0");
+    }else{
+        canonicalModelOK(dl);
+        assertFacts(dl, A, "");
+        assertFacts(dl, B, "B");
+        assertFacts(dl, C, "Cb");
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Body-less rules with negative atoms: their heads are inserted only if the
+ * negative atoms hold, also if the facts the negative atoms refer to are
+ * added after the rules.
+ */
+TEST_ONCE(datalog_neg_bodyless)
+{
+    negBodylessTest(pddl_false);
+}
+
+/*
+ * Body-less rules with negative atoms in a weighted program: their heads
+ * are inserted (with the weights of the rules) only if the negative atoms
+ * hold.
+ */
+TEST_ONCE(datalog_weighted_neg_bodyless)
+{
+    negBodylessTest(pddl_true);
+}
+
+/** Predicates of the program of negJoinProgram() */
+struct neg_join {
+    int P, Q, S, R, H;
+    int a, b, c;
+};
+typedef struct neg_join neg_join_t;
+
+/** Creates the program with the rule
+ *    H(X, Y, Z) :- P(X, Y), Q(Y, Z), !S(X), !S(Z), !S(Y), !R(X, Z).
+ *  whose negative atoms are covered by the first body atom, by the second
+ *  one, by both, and by neither. The rule has the weight 1 in weighted
+ *  programs. The facts of P are added only if ADD_P is true. */
+static void negJoinProgram(pddl_datalog_t *dl,
+                           neg_join_t *n,
+                           pddl_bool_t weighted,
+                           pddl_bool_t add_p)
+{
+    n->P = addPred(dl, 2, "P");
+    n->Q = addPred(dl, 2, "Q");
+    n->S = addPred(dl, 1, "S");
+    n->R = addPred(dl, 2, "R");
+    n->H = addPred(dl, 3, "H");
+    n->a = addConst(dl, "a");
+    n->b = addConst(dl, "b");
+    n->c = addConst(dl, "c");
+    int a = n->a, b = n->b, c = n->c;
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+
+    if (add_p){
+        fact(dl, ATOM(n->P, a, a));
+        fact(dl, ATOM(n->P, a, b));
+        fact(dl, ATOM(n->P, b, a));
+        fact(dl, ATOM(n->P, b, c));
+        fact(dl, ATOM(n->P, c, a));
+    }
+    fact(dl, ATOM(n->Q, a, a));
+    fact(dl, ATOM(n->Q, a, b));
+    fact(dl, ATOM(n->Q, b, a));
+    fact(dl, ATOM(n->Q, b, c));
+    fact(dl, ATOM(n->Q, c, c));
+    fact(dl, ATOM(n->S, c));
+    fact(dl, ATOM(n->R, a, a));
+
+    pddl_datalog_rule_t r;
+    ruleInit(dl, &r, ATOM(n->H, X, Y, Z));
+    ruleAddBody(dl, &r, ATOM(n->P, X, Y));
+    ruleAddBody(dl, &r, ATOM(n->Q, Y, Z));
+    ruleAddNeg(dl, &r, ATOM(n->S, X));
+    ruleAddNeg(dl, &r, ATOM(n->S, Z));
+    ruleAddNeg(dl, &r, ATOM(n->S, Y));
+    ruleAddNeg(dl, &r, ATOM(n->R, X, Z));
+    if (weighted){
+        pddl_num_t w;
+        pddlNumSetInt(&w, 1);
+        pddlDatalogRuleSetWeight(dl, &r, &w);
+    }
+    ruleAdd(dl, &r);
+}
+
+/** Negative atoms of a two-body rule checked at different points, in an
+ *  unweighted program (WEIGHTED is false) or a weighted program with the
+ *  aggregation TYPE */
+static void negJoinTest(pddl_bool_t weighted, pddl_datalog_weight_type_t type)
+{
+    // P(b, c) and P(c, a) are filtered by !S(Y) and !S(X) on the first
+    // side, Q(b, c) and Q(c, c) by !S(Z) and !S(Y) on the second side, and
+    // the joined H(a, a, a) and H(a, b, a) by !R(X, Z)
+    pddl_datalog_t *dl;
+    if (weighted){
+        dl = newWeighted(type);
+    }else{
+        dl = pddlDatalogNew();
+    }
+    neg_join_t n;
+    negJoinProgram(dl, &n, weighted, pddl_true);
+    finalize(dl);
+    if (weighted){
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+        assertFacts(dl, n.H, "Haab:1 Hbaa:1 Hbab:1");
+    }else{
+        canonicalModelOK(dl);
+        assertFacts(dl, n.H, "Haab Hbaa Hbab");
+    }
+    pddlDatalogDel(dl);
+
+    // The same program with the facts of P added after a commit freezing
+    // all other predicates (the side of Q is kept, the side of P is
+    // dropped), over a series of rollbacks
+    if (weighted){
+        dl = newWeighted(type);
+    }else{
+        dl = pddlDatalogNew();
+    }
+    negJoinProgram(dl, &n, weighted, pddl_false);
+    finalize(dl);
+    if (weighted){
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    }else{
+        canonicalModelOK(dl);
+    }
+    pddl_ivec_t input = PDDL_IVEC_INIT;
+    pddlIVecPush(&input, n.P);
+    dbCommit(dl, &input);
+    pddlIVecFree(&input);
+
+    int a = n.a, b = n.b, c = n.c;
+    const atom_spec_t steps[3][3] = {
+        { ATOM(n.P, a, a), ATOM(n.P, b, c), ATOM(n.P, c, a) },
+        { ATOM(n.P, b, a), ATOM(n.P, a, b), ATOM(n.P, c, a) },
+        { ATOM(n.P, a, a), ATOM(n.P, a, b), ATOM(n.P, b, a) },
+    };
+    const char *expected[2][3] = {
+        { "Haab", "Hbaa Hbab", "Haab Hbaa Hbab" },
+        { "Haab:1", "Hbaa:1 Hbab:1", "Haab:1 Hbaa:1 Hbab:1" },
+    };
+    for (int rep = 0; rep < 2; ++rep){
+        for (int si = 0; si < 3; ++si){
+            pddlDatalogDBRollback(dl);
+            for (int fi = 0; fi < 3; ++fi)
+                addFactToDB(dl, steps[si][fi], NULL);
+            if (weighted){
+                canonicalModel(dl,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+                assertFacts(dl, n.H, expected[1][si]);
+            }else{
+                canonicalModelOK(dl);
+                assertFacts(dl, n.H, expected[0][si]);
+            }
+        }
+    }
+    pddlDatalogDel(dl);
+}
+
+/*
+ * Negative atoms of a rule with two body atoms covered by the first body
+ * atom, by the second one, by both, and by neither give the expected
+ * canonical model, also with a commit freezing predicates and rollbacks.
+ */
+TEST_ONCE(datalog_neg_join)
+{
+    negJoinTest(pddl_false, PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * Negative atoms of a rule with two body atoms checked at different points
+ * in a weighted program with the sum of weights.
+ */
+TEST_ONCE(datalog_weighted_neg_join_add)
+{
+    negJoinTest(pddl_true, PDDL_DATALOG_WEIGHT_ADD);
+}
+
+/*
+ * Negative atoms of a rule with two body atoms checked at different points
+ * in a weighted program with the maximum of weights.
+ */
+TEST_ONCE(datalog_weighted_neg_join_max)
+{
+    negJoinTest(pddl_true, PDDL_DATALOG_WEIGHT_MAX);
+}
+
+/** Asserts that the finalization of DL fails */
+static void finalizeFail(pddl_datalog_t *dl)
+{
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogFinalizeProgram(dl, pddl_true, &err);
+    assert(ret == -1);
+    assert(pddlErrIsSet(&err));
+}
+
+/*
+ * The predicates of negative atoms cannot be derived by rules with
+ * non-empty bodies (the finalization fails), and their facts cannot be
+ * added to the database once the computation of the canonical model has
+ * started.
+ */
+TEST_ONCE(datalog_neg_pred_errors)
+{
+    // S(X) :- T(X).  with S in a negative atom
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int T = addPred(dl, 1, "T");
+    int S = addPred(dl, 1, "S");
+    int H = addPred(dl, 1, "H");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(T, a));
+    rule(dl, ATOM(S, X), 1, ATOM(T, X));
+    pddl_datalog_rule_t r;
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(T, X));
+    ruleAddNeg(dl, &r, ATOM(S, X));
+    ruleAdd(dl, &r);
+    finalizeFail(dl);
+    pddlDatalogDel(dl);
+
+    // S(a) :- !T(b).  with S in a negative atom
+    dl = pddlDatalogNew();
+    T = addPred(dl, 1, "T");
+    S = addPred(dl, 1, "S");
+    H = addPred(dl, 1, "H");
+    a = addConst(dl, "a");
+    b = addConst(dl, "b");
+    X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(T, a));
+    ruleInit(dl, &r, ATOM(S, a));
+    ruleAddNeg(dl, &r, ATOM(T, b));
+    ruleAdd(dl, &r);
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(T, X));
+    ruleAddNeg(dl, &r, ATOM(S, X));
+    ruleAdd(dl, &r);
+    finalizeFail(dl);
+    pddlDatalogDel(dl);
+
+    // Facts of S can be added only before the computation starts
+    dl = pddlDatalogNew();
+    T = addPred(dl, 1, "T");
+    S = addPred(dl, 1, "S");
+    H = addPred(dl, 1, "H");
+    a = addConst(dl, "a");
+    b = addConst(dl, "b");
+    X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(T, a));
+    fact(dl, ATOM(T, b));
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(T, X));
+    ruleAddNeg(dl, &r, ATOM(S, X));
+    ruleAdd(dl, &r);
+    finalize(dl);
+
+    addFactToDB(dl, ATOM(S, a), NULL);
+    dbCommit(dl, NULL);
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Hb");
+    addFactToDBFail(dl, ATOM(S, b), NULL);
+    // T is not a predicate of a negative atom
+    addFactToDB(dl, ATOM(T, a), NULL);
+
+    // The rollback returns before the start of the computation
+    pddlDatalogDBRollback(dl);
+    addFactToDB(dl, ATOM(S, b), NULL);
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "");
+    addFactToDBFail(dl, ATOM(S, b), NULL);
+
+    // So does the reset
+    pddlDatalogDBReset(dl);
+    addFactToDB(dl, ATOM(S, b), NULL);
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Ha");
+    pddlDatalogDel(dl);
+}
+
 /*
  * Facts added to the database with pddlDatalogDBAddFact() (which
  * initializes the database if necessary), reading facts with
