@@ -89,7 +89,7 @@ static void ruleAddNeg(pddl_datalog_t *dl,
 {
     pddl_datalog_atom_t atom;
     atomInit(dl, &atom, &neg);
-    pddlDatalogRuleAddNegStaticBody(dl, rule, &atom);
+    pddlDatalogRuleAddNegBody(dl, rule, &atom);
     pddlDatalogAtomFree(dl, &atom);
 }
 
@@ -2559,32 +2559,44 @@ static void finalizeFail(pddl_datalog_t *dl)
 }
 
 /*
- * The predicates of negative atoms cannot be derived by rules with
- * non-empty bodies (the finalization fails), and their facts cannot be
- * added to the database once the computation of the canonical model has
- * started.
+ * The predicates of negative atoms can be derived by rules with non-empty
+ * bodies or with negative atoms as long as the program is stratifiable
+ * (the finalization fails otherwise), and the facts of the predicates
+ * affecting negative atoms cannot be added to the database once the
+ * computation of the canonical model has started.
  */
 TEST_ONCE(datalog_neg_pred_errors)
 {
-    // S(X) :- T(X).  with S in a negative atom
+    // S(X) :- T(X), K(X).  H(X) :- T(X), !S(X).  with S in the stratum 0
+    // and H in the stratum 1
     pddl_datalog_t *dl = pddlDatalogNew();
     int T = addPred(dl, 1, "T");
     int S = addPred(dl, 1, "S");
     int H = addPred(dl, 1, "H");
+    int K = addPred(dl, 1, "K");
     int a = addConst(dl, "a");
     int b = addConst(dl, "b");
     int X = pddlDatalogAddVar(dl, "X");
     fact(dl, ATOM(T, a));
-    rule(dl, ATOM(S, X), 1, ATOM(T, X));
+    fact(dl, ATOM(T, b));
+    fact(dl, ATOM(K, a));
+    rule(dl, ATOM(S, X), 2, ATOM(T, X), ATOM(K, X));
     pddl_datalog_rule_t r;
     ruleInit(dl, &r, ATOM(H, X));
     ruleAddBody(dl, &r, ATOM(T, X));
     ruleAddNeg(dl, &r, ATOM(S, X));
     ruleAdd(dl, &r);
-    finalizeFail(dl);
+    assert(pddlDatalogIsStratifiable(dl));
+    finalize(dl);
+    assert(pddlDatalogPredStratum(dl, S) == 0);
+    assert(pddlDatalogPredStratum(dl, H) == 1);
+    canonicalModelOK(dl);
+    assertFacts(dl, S, "Sa");
+    assertFacts(dl, H, "Hb");
     pddlDatalogDel(dl);
 
-    // S(a) :- !T(b).  with S in a negative atom
+    // S(a) :- !T(b).  H(X) :- T(X), !S(X).  where T is static, so S is in
+    // the stratum 0 and H in the stratum 1
     dl = pddlDatalogNew();
     T = addPred(dl, 1, "T");
     S = addPred(dl, 1, "S");
@@ -2600,6 +2612,32 @@ TEST_ONCE(datalog_neg_pred_errors)
     ruleAddBody(dl, &r, ATOM(T, X));
     ruleAddNeg(dl, &r, ATOM(S, X));
     ruleAdd(dl, &r);
+    finalize(dl);
+    assert(pddlDatalogPredStratum(dl, T) == 0);
+    assert(pddlDatalogPredStratum(dl, S) == 0);
+    assert(pddlDatalogPredStratum(dl, H) == 1);
+    canonicalModelOK(dl);
+    assertFacts(dl, S, "Sa");
+    assertFacts(dl, H, "");
+    pddlDatalogDel(dl);
+
+    // S(X) :- T(X), !H(X).  H(X) :- T(X), !S(X).  is not stratifiable
+    dl = pddlDatalogNew();
+    T = addPred(dl, 1, "T");
+    S = addPred(dl, 1, "S");
+    H = addPred(dl, 1, "H");
+    a = addConst(dl, "a");
+    X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(T, a));
+    ruleInit(dl, &r, ATOM(S, X));
+    ruleAddBody(dl, &r, ATOM(T, X));
+    ruleAddNeg(dl, &r, ATOM(H, X));
+    ruleAdd(dl, &r);
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(T, X));
+    ruleAddNeg(dl, &r, ATOM(S, X));
+    ruleAdd(dl, &r);
+    assert(!pddlDatalogIsStratifiable(dl));
     finalizeFail(dl);
     pddlDatalogDel(dl);
 
@@ -2639,6 +2677,40 @@ TEST_ONCE(datalog_neg_pred_errors)
     addFactToDB(dl, ATOM(S, b), NULL);
     canonicalModelOK(dl);
     assertFacts(dl, H, "Ha");
+    pddlDatalogDel(dl);
+
+    // Facts of T affect the negative atoms of S through the rule deriving
+    // S, so they can be added only before the computation starts; facts of
+    // K do not affect any negative atom
+    dl = pddlDatalogNew();
+    T = addPred(dl, 1, "T");
+    S = addPred(dl, 1, "S");
+    H = addPred(dl, 1, "H");
+    K = addPred(dl, 1, "K");
+    a = addConst(dl, "a");
+    b = addConst(dl, "b");
+    X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(K, a));
+    fact(dl, ATOM(K, b));
+    rule(dl, ATOM(S, X), 1, ATOM(T, X));
+    ruleInit(dl, &r, ATOM(H, X));
+    ruleAddBody(dl, &r, ATOM(K, X));
+    ruleAddNeg(dl, &r, ATOM(S, X));
+    ruleAdd(dl, &r);
+    finalize(dl);
+
+    addFactToDB(dl, ATOM(T, a), NULL);
+    dbCommit(dl, NULL);
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "Hb");
+    addFactToDBFail(dl, ATOM(T, b), NULL);
+    addFactToDBFail(dl, ATOM(S, b), NULL);
+    addFactToDB(dl, ATOM(K, a), NULL);
+
+    pddlDatalogDBRollback(dl);
+    addFactToDB(dl, ATOM(T, b), NULL);
+    canonicalModelOK(dl);
+    assertFacts(dl, H, "");
     pddlDatalogDel(dl);
 }
 
@@ -5079,4 +5151,766 @@ TEST_PANIC_ONCE(datalog_panic_eq_pred_user_id)
     pddl_datalog_t *dl = pddlDatalogNew();
     int E = pddlDatalogAddEqPred(dl, "=");
     pddlDatalogSetPredUserId(dl, E, 1);
+}
+
+/** Asserts that the stratum of the predicate PRED is STRATUM */
+static void assertStratum(const pddl_datalog_t *dl, int pred, int stratum)
+{
+    int st = pddlDatalogPredStratum(dl, pred);
+    if (st != stratum){
+        fprintf(stderr, "Predicate %d: expected stratum %d, got %d\n",
+                pred, stratum, st);
+    }
+    assert(st == stratum);
+}
+
+/** Predicates of the program created by tcComplementProgram() */
+struct tc_comp {
+    int N, G, T, C;
+};
+typedef struct tc_comp tc_comp_t;
+
+/** Creates the program computing the complement of the transitive closure
+ *  (P_TCcomp from Abiteboul, Hull, Vianu: Foundations of Databases,
+ *  Section 15.1, made safe by the active domain N):
+ *    T(X, Y) :- G(X, Y).
+ *    T(X, Y) :- G(X, Z), T(Z, Y).
+ *    C(X, Y) :- N(X), N(Y), !T(X, Y).
+ *  with the nodes a, b, c, d and the edges a -> b -> c. */
+static void tcComplementProgram(pddl_datalog_t *dl, tc_comp_t *p)
+{
+    p->N = addPred(dl, 1, "N");
+    p->G = addPred(dl, 2, "G");
+    p->T = addPred(dl, 2, "T");
+    p->C = addPred(dl, 2, "C");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int d = addConst(dl, "d");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+
+    fact(dl, ATOM(p->N, a));
+    fact(dl, ATOM(p->N, b));
+    fact(dl, ATOM(p->N, c));
+    fact(dl, ATOM(p->N, d));
+    fact(dl, ATOM(p->G, a, b));
+    fact(dl, ATOM(p->G, b, c));
+
+    rule(dl, ATOM(p->T, X, Y), 1, ATOM(p->G, X, Y));
+    rule(dl, ATOM(p->T, X, Y), 2, ATOM(p->G, X, Z), ATOM(p->T, Z, Y));
+    nrule(dl, 0, ATOM(p->C, X, Y), 2, 1,
+          ATOM(p->N, X), ATOM(p->N, Y), ATOM(p->T, X, Y));
+}
+
+/** Asserts the canonical model of tcComplementProgram() */
+static void assertTCComplementModel(pddl_datalog_t *dl, const tc_comp_t *p)
+{
+    assertFacts(dl, p->T, "Tab Tac Tbc");
+    assertFacts(dl, p->C, "Caa Cad Cba Cbb Cbd Cca Ccb Ccc Ccd"
+                          " Cda Cdb Cdc Cdd");
+}
+
+/*
+ * The complement of the transitive closure (P_TCcomp from Foundations of
+ * Databases, Section 15.1) is computed in two strata: the transitive
+ * closure first, then its complement.
+ */
+TEST_ONCE(datalog_strat_tc_complement)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    tc_comp_t p;
+    tcComplementProgram(dl, &p);
+    assert(pddlDatalogIsStratifiable(dl));
+    finalize(dl);
+    assertStratum(dl, p.N, 0);
+    assertStratum(dl, p.G, 0);
+    assertStratum(dl, p.T, 0);
+    assertStratum(dl, p.C, 1);
+    canonicalModelOK(dl);
+    assertTCComplementModel(dl, &p);
+    // Nothing changes by another call
+    canonicalModelOK(dl);
+    assertTCComplementModel(dl, &p);
+    pddlDatalogDel(dl);
+}
+
+/** Predicates of the program created by p7Program() */
+struct p7 {
+    int R, A, B, C, D, S, T, U, V, Q;
+};
+typedef struct p7 p7_t;
+
+/** Creates the program P7 from Foundations of Databases (Example 15.2.5)
+ *    S(X) :- A(X), !R(X).
+ *    T(X) :- B(X), !R(X).
+ *    U(X) :- C(X), !T(X).
+ *    V(X) :- D(X), !S(X), !U(X).
+ *  where A, B, C, D stand for R1', R2', R3', R4'. If R_DERIVED is true,
+ *  the facts of R are derived by the rule R(X) :- Q(X), otherwise they are
+ *  static. */
+static void p7Program(pddl_datalog_t *dl, p7_t *p, pddl_bool_t r_derived)
+{
+    p->R = addPred(dl, 1, "R");
+    p->A = addPred(dl, 1, "A");
+    p->B = addPred(dl, 1, "B");
+    p->C = addPred(dl, 1, "C");
+    p->D = addPred(dl, 1, "D");
+    p->S = addPred(dl, 1, "S");
+    p->T = addPred(dl, 1, "T");
+    p->U = addPred(dl, 1, "U");
+    p->V = addPred(dl, 1, "V");
+    p->Q = addPred(dl, 1, "Q");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int d = addConst(dl, "d");
+    int e = addConst(dl, "e");
+    int X = pddlDatalogAddVar(dl, "X");
+
+    if (r_derived){
+        fact(dl, ATOM(p->Q, a));
+        rule(dl, ATOM(p->R, X), 1, ATOM(p->Q, X));
+    }else{
+        fact(dl, ATOM(p->R, a));
+    }
+    fact(dl, ATOM(p->A, a));
+    fact(dl, ATOM(p->A, b));
+    fact(dl, ATOM(p->A, c));
+    fact(dl, ATOM(p->B, a));
+    fact(dl, ATOM(p->B, b));
+    fact(dl, ATOM(p->B, d));
+    const int all[] = { a, b, c, d, e };
+    for (int i = 0; i < 5; ++i){
+        fact(dl, ATOM(p->C, all[i]));
+        fact(dl, ATOM(p->D, all[i]));
+    }
+
+    // The rules are added in the reverse order of the strata
+    nrule(dl, 0, ATOM(p->V, X), 1, 2,
+          ATOM(p->D, X), ATOM(p->S, X), ATOM(p->U, X));
+    nrule(dl, 0, ATOM(p->U, X), 1, 1, ATOM(p->C, X), ATOM(p->T, X));
+    nrule(dl, 0, ATOM(p->T, X), 1, 1, ATOM(p->B, X), ATOM(p->R, X));
+    nrule(dl, 0, ATOM(p->S, X), 1, 1, ATOM(p->A, X), ATOM(p->R, X));
+}
+
+/** Asserts the canonical model of p7Program() */
+static void assertP7Model(pddl_datalog_t *dl, const p7_t *p)
+{
+    assertFacts(dl, p->R, "Ra");
+    assertFacts(dl, p->S, "Sb Sc");
+    assertFacts(dl, p->T, "Tb Td");
+    assertFacts(dl, p->U, "Ua Uc Ue");
+    assertFacts(dl, p->V, "Vd");
+}
+
+/*
+ * The program P7 from Foundations of Databases (Example 15.2.5) gets the
+ * minimal strata: the negative atoms of the static predicate R do not
+ * constrain the strata, the negative atoms of the derived predicate R do.
+ */
+TEST_ONCE(datalog_strat_p7)
+{
+    for (int derived = 0; derived < 2; ++derived){
+        pddl_datalog_t *dl = pddlDatalogNew();
+        p7_t p;
+        p7Program(dl, &p, derived);
+        finalize(dl);
+        int r = (derived ? 1 : 0);
+        assertStratum(dl, p.R, 0);
+        assertStratum(dl, p.A, 0);
+        assertStratum(dl, p.D, 0);
+        assertStratum(dl, p.S, r);
+        assertStratum(dl, p.T, r);
+        assertStratum(dl, p.U, r + 1);
+        assertStratum(dl, p.V, r + 2);
+        canonicalModelOK(dl);
+        assertP7Model(dl, &p);
+        pddlDatalogDel(dl);
+    }
+}
+
+/** Asserts that the program DL is not stratifiable, i.e., its finalization
+ *  fails and the canonical model is not computed */
+static void assertNotStratifiable(pddl_datalog_t *dl)
+{
+    assert(!pddlDatalogIsStratifiable(dl));
+    finalizeFail(dl);
+    assert(!pddlDatalogIsStratifiable(dl));
+    canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+    assert(dbSize(dl) == 0);
+}
+
+/*
+ * Programs with recursion through negation are not stratifiable
+ * (Foundations of Databases, Example 15.1.1 and Example 15.3.1).
+ */
+TEST_ONCE(datalog_strat_not_stratifiable)
+{
+    // P1: p :- !p.
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 0, "p");
+    int Q = addPred(dl, 0, "q");
+    nrule(dl, 0, ATOM0(P), 0, 1, ATOM0(P));
+    assertNotStratifiable(dl);
+    pddlDatalogDel(dl);
+
+    // P2: p :- !q.  q :- !p.
+    dl = pddlDatalogNew();
+    P = addPred(dl, 0, "p");
+    Q = addPred(dl, 0, "q");
+    nrule(dl, 0, ATOM0(P), 0, 1, ATOM0(Q));
+    assert(pddlDatalogIsStratifiable(dl));
+    nrule(dl, 0, ATOM0(Q), 0, 1, ATOM0(P));
+    assertNotStratifiable(dl);
+    pddlDatalogDel(dl);
+
+    // Pwin: W(X) :- M(X, Y), !W(Y).
+    dl = pddlDatalogNew();
+    int M = addPred(dl, 2, "M");
+    int W = addPred(dl, 1, "W");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(M, a, b));
+    nrule(dl, 0, ATOM(W, X), 1, 1, ATOM(M, X, Y), ATOM(W, Y));
+    assertNotStratifiable(dl);
+    pddlDatalogDel(dl);
+
+    // Negation in a longer cycle of positive atoms:
+    // A(X) :- B(X).  B(X) :- C(X).  C(X) :- N(X), !A(X).
+    dl = pddlDatalogNew();
+    int A = addPred(dl, 1, "A");
+    int B = addPred(dl, 1, "B");
+    int C = addPred(dl, 1, "C");
+    int N = addPred(dl, 1, "N");
+    a = addConst(dl, "a");
+    X = pddlDatalogAddVar(dl, "X");
+    fact(dl, ATOM(N, a));
+    rule(dl, ATOM(A, X), 1, ATOM(B, X));
+    rule(dl, ATOM(B, X), 1, ATOM(C, X));
+    nrule(dl, 0, ATOM(C, X), 1, 1, ATOM(N, X), ATOM(A, X));
+    assertNotStratifiable(dl);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * The stratum of a predicate cannot be queried in a program that is not
+ * stratifiable.
+ */
+TEST_PANIC_ONCE(datalog_panic_pred_stratum_not_stratifiable)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int P = addPred(dl, 0, "p");
+    nrule(dl, 0, ATOM0(P), 0, 1, ATOM0(P));
+    pddl_err_t err = PDDL_ERR_INIT;
+    int ret = pddlDatalogFinalizeProgram(dl, pddl_true, &err);
+    assert(ret == -1);
+    ret = pddlDatalogPredStratum(dl, P);
+}
+
+/*
+ * A semipositive program (negation of static predicates only) computing the
+ * transitive closure of the complement of a graph (Foundations of
+ * Databases, Section 15.2) has a single stratum, also with a negative atom
+ * moved to an auxiliary predicate by the normalization.
+ */
+TEST_ONCE(datalog_strat_semipositive)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int N = addPred(dl, 1, "N");
+    int G = addPred(dl, 2, "G");
+    int T = addPred(dl, 2, "T");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    const int all[] = { a, b, c };
+    for (int i = 0; i < 3; ++i){
+        fact(dl, ATOM(N, all[i]));
+        for (int j = 0; j < 3; ++j){
+            // The complement of G is { (a, b), (b, c) }
+            if ((i == 0 && j == 1) || (i == 1 && j == 2))
+                continue;
+            fact(dl, ATOM(G, all[i], all[j]));
+        }
+    }
+    // T(X, Y) :- N(X), N(Y), !G(X, Y).
+    nrule(dl, 0, ATOM(T, X, Y), 2, 1, ATOM(N, X), ATOM(N, Y), ATOM(G, X, Y));
+    // T(X, Y) :- N(X), N(Z), T(Z, Y), !G(X, Z).
+    nrule(dl, 0, ATOM(T, X, Y), 3, 1,
+          ATOM(N, X), ATOM(N, Z), ATOM(T, Z, Y), ATOM(G, X, Z));
+    finalize(dl);
+    assertStratum(dl, N, 0);
+    assertStratum(dl, G, 0);
+    assertStratum(dl, T, 0);
+    canonicalModelOK(dl);
+    assertFacts(dl, T, "Tab Tac Tbc");
+    pddlDatalogDel(dl);
+}
+
+/** Predicates of the program created by stratChainProgram() */
+struct strat_chain {
+    int E, P, R, U, Z, Y, W, K, L;
+};
+typedef struct strat_chain strat_chain_t;
+
+/** Creates a program with four strata, body-less rules with negative atoms
+ *  of derived predicates, and a rule with more than two positive body
+ *  atoms and a negative atom of a derived predicate:
+ *    R(a).  R(Y) :- R(X), E(X, Y).             (stratum 0)
+ *    U(X) :- P(X), !R(X).                      (stratum 1)
+ *    Z() :- !U(c).  Y() :- !U(a).              (stratum 2)
+ *    W(X) :- P(X), E(X, Y), P(Y), !U(Y).       (stratum 2)
+ *    K(X) :- W(X), !R(X).                      (stratum 2)
+ *    L() :- !Y().                              (stratum 3)
+ *  with the nodes a, b, c, d and the edges a -> b, c -> d, d -> a. The
+ *  rules with weights have the weight 1 in weighted programs. */
+static void stratChainProgram(pddl_datalog_t *dl,
+                              strat_chain_t *p,
+                              pddl_bool_t weighted)
+{
+    p->E = addPred(dl, 2, "E");
+    p->P = addPred(dl, 1, "P");
+    p->R = addPred(dl, 1, "R");
+    p->U = addPred(dl, 1, "U");
+    p->Z = addPred(dl, 0, "Z");
+    p->Y = addPred(dl, 0, "Y");
+    p->W = addPred(dl, 1, "W");
+    p->K = addPred(dl, 1, "K");
+    p->L = addPred(dl, 0, "L");
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int c = addConst(dl, "c");
+    int d = addConst(dl, "d");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int w = (weighted ? 1 : 0);
+
+    // The rules are added before the facts and in the reverse order of
+    // the strata
+    nrule(dl, w, ATOM0(p->L), 0, 1, ATOM0(p->Y));
+    nrule(dl, w, ATOM(p->K, X), 1, 1, ATOM(p->W, X), ATOM(p->R, X));
+    nrule(dl, w, ATOM(p->W, X), 3, 1,
+          ATOM(p->P, X), ATOM(p->E, X, Y), ATOM(p->P, Y), ATOM(p->U, Y));
+    nrule(dl, w, ATOM0(p->Y), 0, 1, ATOM(p->U, a));
+    nrule(dl, w, ATOM0(p->Z), 0, 1, ATOM(p->U, c));
+    nrule(dl, w, ATOM(p->U, X), 1, 1, ATOM(p->P, X), ATOM(p->R, X));
+    nrule(dl, w, ATOM(p->R, Y), 2, 0, ATOM(p->R, X), ATOM(p->E, X, Y));
+    fact(dl, ATOM(p->R, a));
+
+    fact(dl, ATOM(p->P, a));
+    fact(dl, ATOM(p->P, b));
+    fact(dl, ATOM(p->P, c));
+    fact(dl, ATOM(p->P, d));
+    fact(dl, ATOM(p->E, a, b));
+    fact(dl, ATOM(p->E, c, d));
+    fact(dl, ATOM(p->E, d, a));
+}
+
+/** Asserts the strata of stratChainProgram() */
+static void assertStratChainStrata(const pddl_datalog_t *dl,
+                                   const strat_chain_t *p)
+{
+    assertStratum(dl, p->E, 0);
+    assertStratum(dl, p->P, 0);
+    assertStratum(dl, p->R, 0);
+    assertStratum(dl, p->U, 1);
+    assertStratum(dl, p->Z, 2);
+    assertStratum(dl, p->Y, 2);
+    assertStratum(dl, p->W, 2);
+    assertStratum(dl, p->K, 2);
+    assertStratum(dl, p->L, 3);
+}
+
+/*
+ * A program with four strata, body-less rules with negative atoms of
+ * derived predicates, and a rule split by the normalization with a negative
+ * atom of a derived predicate.
+ */
+TEST_ONCE(datalog_strat_chain)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    strat_chain_t p;
+    stratChainProgram(dl, &p, pddl_false);
+    finalize(dl);
+    assertStratChainStrata(dl, &p);
+    canonicalModelOK(dl);
+    assertFacts(dl, p.R, "Ra Rb");
+    assertFacts(dl, p.U, "Uc Ud");
+    assertFacts(dl, p.Z, "");
+    assertFacts(dl, p.Y, "Y");
+    assertFacts(dl, p.W, "Wa Wd");
+    assertFacts(dl, p.K, "Kd");
+    assertFacts(dl, p.L, "");
+
+    // The same model after a reset
+    pddlDatalogDBReset(dl);
+    canonicalModelOK(dl);
+    assertFacts(dl, p.U, "Uc Ud");
+    assertFacts(dl, p.W, "Wa Wd");
+    assertFacts(dl, p.K, "Kd");
+    assertFacts(dl, p.Y, "Y");
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A weighted program with four strata: the weights of the facts of each
+ * stratum are computed from the final weights of the lower strata.
+ */
+TEST_ONCE(datalog_weighted_strat_chain)
+{
+    for (int t = 0; t < 2; ++t){
+        pddl_datalog_weight_type_t type = PDDL_DATALOG_WEIGHT_ADD;
+        if (t == 1)
+            type = PDDL_DATALOG_WEIGHT_MAX;
+        pddl_datalog_t *dl = newWeighted(type);
+        strat_chain_t p;
+        stratChainProgram(dl, &p, pddl_true);
+        finalize(dl);
+        assertStratChainStrata(dl, &p);
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+        // R(b) :- R(a), E(a, b).
+        assertFacts(dl, p.R, "Ra:0 Rb:1");
+        assertFacts(dl, p.U, "Uc:1 Ud:1");
+        assertFacts(dl, p.Z, "");
+        assertFacts(dl, p.Y, "Y:1");
+        // W(d) :- P(d), E(d, a), P(a).
+        assertFacts(dl, p.W, "Wa:1 Wd:1");
+        assertFacts(dl, p.K, "Kd:2");
+        assertFacts(dl, p.L, "");
+        pddlDatalogDel(dl);
+    }
+}
+
+/** Predicates of the program created by incProgram() */
+struct inc {
+    int P, E, R, U, I, K, O, W;
+    int a, b, c, d;
+};
+typedef struct inc inc_t;
+
+/** Creates the program
+ *    R(a).  R(Y) :- R(X), E(X, Y).        (stratum 0)
+ *    U(X) :- P(X), !R(X).                 (stratum 1)
+ *    K(X) :- I(X), R(X).                  (stratum 0)
+ *    O(X) :- I(X), U(X).                  (stratum 1)
+ *    W(X, Y) :- K(X), U(Y).               (stratum 1)
+ *  with the nodes a, b, c, d and the edges a -> b, b -> d, c -> a, where
+ *  the facts of the input predicate I are added to the database. */
+static void incProgram(pddl_datalog_t *dl, inc_t *p)
+{
+    p->P = addPred(dl, 1, "P");
+    p->E = addPred(dl, 2, "E");
+    p->R = addPred(dl, 1, "R");
+    p->U = addPred(dl, 1, "U");
+    p->I = addPred(dl, 1, "I");
+    p->K = addPred(dl, 1, "K");
+    p->O = addPred(dl, 1, "O");
+    p->W = addPred(dl, 2, "W");
+    int a = p->a = addConst(dl, "a");
+    int b = p->b = addConst(dl, "b");
+    int c = p->c = addConst(dl, "c");
+    int d = p->d = addConst(dl, "d");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    fact(dl, ATOM(p->P, a));
+    fact(dl, ATOM(p->P, b));
+    fact(dl, ATOM(p->P, c));
+    fact(dl, ATOM(p->P, d));
+    fact(dl, ATOM(p->E, a, b));
+    fact(dl, ATOM(p->E, b, d));
+    fact(dl, ATOM(p->E, c, a));
+    fact(dl, ATOM(p->R, a));
+    rule(dl, ATOM(p->R, Y), 2, ATOM(p->R, X), ATOM(p->E, X, Y));
+    nrule(dl, 0, ATOM(p->U, X), 1, 1, ATOM(p->P, X), ATOM(p->R, X));
+    rule(dl, ATOM(p->K, X), 2, ATOM(p->I, X), ATOM(p->R, X));
+    rule(dl, ATOM(p->O, X), 2, ATOM(p->I, X), ATOM(p->U, X));
+    rule(dl, ATOM(p->W, X, Y), 2, ATOM(p->K, X), ATOM(p->U, Y));
+}
+
+/*
+ * The facts of an input predicate feeding the strata 0 and 1 are added
+ * after a commit freezing the other predicates, over a series of
+ * rollbacks; the higher strata are computed again from the new facts of
+ * the lower strata, and the facts of the predicates affecting negative
+ * atoms cannot be added.
+ */
+TEST_ONCE(datalog_strat_commit)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    inc_t p;
+    incProgram(dl, &p);
+    finalize(dl);
+    assertStratum(dl, p.R, 0);
+    assertStratum(dl, p.U, 1);
+    assertStratum(dl, p.I, 0);
+    assertStratum(dl, p.K, 0);
+    assertStratum(dl, p.O, 1);
+    assertStratum(dl, p.W, 1);
+    int a = p.a, b = p.b, c = p.c, d = p.d;
+
+    pddl_ivec_t input = PDDL_IVEC_INIT;
+    pddlIVecPush(&input, p.I);
+    dbCommitFail(dl, &input);
+    canonicalModelOK(dl);
+    assertFacts(dl, p.R, "Ra Rb Rd");
+    assertFacts(dl, p.U, "Uc");
+    dbCommit(dl, &input);
+    pddlIVecFree(&input);
+
+    const atom_spec_t steps[3][2] = {
+        { ATOM(p.I, a), ATOM(p.I, c) },
+        { ATOM(p.I, b), ATOM(p.I, d) },
+        { ATOM(p.I, c), ATOM(p.I, c) },
+    };
+    const char *expected[3][3] = {
+        { "Ka", "Oc", "Wac" },
+        { "Kb Kd", "", "Wbc Wdc" },
+        { "", "Oc", "" },
+    };
+    for (int rep = 0; rep < 2; ++rep){
+        for (int si = 0; si < 3; ++si){
+            pddlDatalogDBRollback(dl);
+            for (int fi = 0; fi < 2; ++fi)
+                addFactToDB(dl, steps[si][fi], NULL);
+            canonicalModelOK(dl);
+            assertFacts(dl, p.K, expected[si][0]);
+            assertFacts(dl, p.O, expected[si][1]);
+            assertFacts(dl, p.W, expected[si][2]);
+            assertFacts(dl, p.U, "Uc");
+            // E and R affect the negative atom !R(X) and they are frozen
+            addFactToDBFail(dl, ATOM(p.E, d, c), NULL);
+            addFactToDBFail(dl, ATOM(p.R, c), NULL);
+        }
+    }
+    pddlDatalogDel(dl);
+}
+
+/** Predicates of the program created by weightedStratProgram() */
+struct wstrat {
+    int A, B, C, D, F, X, E, H, G, I, Q;
+};
+typedef struct wstrat wstrat_t;
+
+/** Creates the weighted program with the goal G:
+ *    A.  B.                                   (static)
+ *    C :- A.  (1)     D :- B.  (5)            (stratum 0)
+ *    F :- X.  (0)     Q :- I.  (10)           (stratum 0, F has no facts)
+ *    E :- !F.  (3)                            (stratum 1)
+ *    H :- D, !C.  (1)                         (stratum 1, blocked)
+ *    G :- E, D.  (1)  G :- C, !F.  (10)       (stratum 1)
+ *  where I is an input predicate without facts. */
+static void weightedStratProgram(pddl_datalog_t *dl, wstrat_t *p)
+{
+    p->A = addPred(dl, 0, "A");
+    p->B = addPred(dl, 0, "B");
+    p->C = addPred(dl, 0, "C");
+    p->D = addPred(dl, 0, "D");
+    p->F = addPred(dl, 0, "F");
+    p->X = addPred(dl, 0, "X");
+    p->E = addPred(dl, 0, "E");
+    p->H = addPred(dl, 0, "H");
+    p->G = addGoalPred(dl, "G");
+    p->I = addPred(dl, 0, "I");
+    p->Q = addPred(dl, 0, "Q");
+    fact(dl, ATOM0(p->A));
+    fact(dl, ATOM0(p->B));
+    wrule(dl, 1, ATOM0(p->C), 1, ATOM0(p->A));
+    wrule(dl, 5, ATOM0(p->D), 1, ATOM0(p->B));
+    rule(dl, ATOM0(p->F), 1, ATOM0(p->X));
+    wrule(dl, 10, ATOM0(p->Q), 1, ATOM0(p->I));
+    nrule(dl, 3, ATOM0(p->E), 0, 1, ATOM0(p->F));
+    nrule(dl, 1, ATOM0(p->H), 1, 1, ATOM0(p->D), ATOM0(p->C));
+    wrule(dl, 1, ATOM0(p->G), 2, ATOM0(p->E), ATOM0(p->D));
+    nrule(dl, 10, ATOM0(p->G), 1, 1, ATOM0(p->C), ATOM0(p->F));
+}
+
+/** Weighted program with two strata and the aggregation TYPE, where
+ *  GOAL_W is the expected weight of the goal */
+static void weightedStratTest(pddl_datalog_weight_type_t type, int goal_w)
+{
+    pddl_datalog_t *dl = newWeighted(type);
+    wstrat_t p;
+    weightedStratProgram(dl, &p);
+    finalize(dl);
+    assertStratum(dl, p.C, 0);
+    assertStratum(dl, p.D, 0);
+    assertStratum(dl, p.F, 0);
+    assertStratum(dl, p.E, 1);
+    assertStratum(dl, p.H, 1);
+    assertStratum(dl, p.G, 1);
+    canonicalModelOK(dl);
+    assertGoalWeight(dl, p.G, goal_w);
+    assertFacts(dl, p.C, "C:1");
+    assertFacts(dl, p.D, "D:5");
+    assertFacts(dl, p.E, "E:3");
+    assertFacts(dl, p.H, "");
+    pddlDatalogDel(dl);
+
+    // The computation with limits stops in the stratum 0 (D waits in the
+    // queue, the stratum 1 is not started), and in the stratum 1 (G waits
+    // in the queue); the commits in between restore the per-stratum state
+    dl = newWeighted(type);
+    weightedStratProgram(dl, &p);
+    finalize(dl);
+    canonicalModelWithIntLimit(dl, 2,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    assertFacts(dl, p.C, "C:1");
+    assertFacts(dl, p.D, "D:5");
+    assertFacts(dl, p.E, "");
+    dbCommit(dl, NULL);
+    for (int rep = 0; rep < 2; ++rep){
+        pddlDatalogDBRollback(dl);
+        canonicalModelWithIntLimit(dl, 5,
+                                   PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+        assertFacts(dl, p.E, "E:3");
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, p.G, goal_w);
+    }
+
+    pddlDatalogDBRollback(dl);
+    canonicalModelWithIntLimit(dl, 5,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    dbCommit(dl, NULL);
+    for (int rep = 0; rep < 2; ++rep){
+        pddlDatalogDBRollback(dl);
+        assertFacts(dl, p.E, "E:3");
+        canonicalModelOK(dl);
+        assertGoalWeight(dl, p.G, goal_w);
+    }
+    pddlDatalogDel(dl);
+
+    // Freezing all predicates but I and Q fails while the stratum 1 (with
+    // rules deriving frozen predicates) is not started, even though all
+    // facts of the predicates to be frozen are processed
+    dl = newWeighted(type);
+    weightedStratProgram(dl, &p);
+    finalize(dl);
+    addFactToDB(dl, ATOM0(p.I), NULL);
+    canonicalModelWithIntLimit(dl, 5,
+                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
+    assertFacts(dl, p.D, "D:5");
+    assertFacts(dl, p.Q, "Q:10");
+    pddl_ivec_t input = PDDL_IVEC_INIT;
+    pddlIVecPush(&input, p.I);
+    dbCommitFail(dl, &input);
+    canonicalModelOK(dl);
+    dbCommit(dl, &input);
+    pddlIVecFree(&input);
+    pddlDatalogDel(dl);
+}
+
+/*
+ * A weighted program with two strata and the sum of weights: the goal of
+ * the stratum 1 is reached through a negative atom of the stratum 0, also
+ * with limits stopping in either stratum and commits in between.
+ */
+TEST_ONCE(datalog_weighted_strat_add)
+{
+    // G :- E, D.  1 + 3 + 5
+    weightedStratTest(PDDL_DATALOG_WEIGHT_ADD, 9);
+}
+
+/*
+ * A weighted program with two strata and the maximum of weights: the goal
+ * of the stratum 1 is reached through a negative atom of the stratum 0,
+ * also with limits stopping in either stratum and commits in between.
+ */
+TEST_ONCE(datalog_weighted_strat_max)
+{
+    // G :- E, D.  1 + max(3, 5)
+    weightedStratTest(PDDL_DATALOG_WEIGHT_MAX, 6);
+}
+
+/*
+ * Gringo gives the same canonical models of stratified programs.
+ */
+TEST_ONCE(datalog_strat_gringo)
+{
+#ifdef PDDL_CLINGO
+    pddl_err_t err = PDDL_ERR_INIT;
+    pddl_datalog_t *dl = pddlDatalogNew();
+    tc_comp_t tc;
+    tcComplementProgram(dl, &tc);
+    finalizeProgram(dl, pddl_false);
+    int ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
+    assert(ret == 0);
+    assertTCComplementModel(dl, &tc);
+    pddlDatalogDel(dl);
+
+    for (int derived = 0; derived < 2; ++derived){
+        dl = pddlDatalogNew();
+        p7_t p;
+        p7Program(dl, &p, derived);
+        finalizeProgram(dl, pddl_false);
+        ret = pddlDatalogCanonicalModelGringo(dl, NULL, &err);
+        assert(ret == 0);
+        assertP7Model(dl, &p);
+        pddlDatalogDel(dl);
+    }
+#endif /* PDDL_CLINGO */
+}
+
+/*
+ * The normalization merges the auxiliary predicates of rules of different
+ * strata: the auxiliary predicate created for a rule of the stratum 1 is
+ * used also by a rule of the stratum 0, so the strata are recomputed for
+ * the normal form rather than carried over from the rules.
+ */
+TEST_ONCE(datalog_strat_normal_form_merge)
+{
+    pddl_datalog_t *dl = pddlDatalogNew();
+    int E = addPred(dl, 2, "E");
+    int U = addPred(dl, 1, "U");
+    int R = addPred(dl, 1, "R");
+    int M = addPred(dl, 2, "M");
+    int H = addPred(dl, 2, "H");
+    int P = addPred(dl, 1, "P");
+    int S = addPred(dl, 1, "S");
+    // The auxiliary predicate created by the normalization
+    int aux = S + 1;
+    int a = addConst(dl, "a");
+    int b = addConst(dl, "b");
+    int W = pddlDatalogAddVar(dl, "W");
+    int X = pddlDatalogAddVar(dl, "X");
+    int Y = pddlDatalogAddVar(dl, "Y");
+    int Z = pddlDatalogAddVar(dl, "Z");
+    fact(dl, ATOM(P, a));
+    fact(dl, ATOM(P, b));
+    fact(dl, ATOM(S, a));
+    fact(dl, ATOM(E, a, b));
+    fact(dl, ATOM(E, b, a));
+    rule(dl, ATOM(R, X), 1, ATOM(S, X));
+    nrule(dl, 0, ATOM(U, X), 1, 1, ATOM(P, X), ATOM(R, X));
+    // H(X, W) :- E(X, Y), E(Y, Z), U(W).  (stratum 1)
+    rule(dl, ATOM(H, X, W), 3, ATOM(E, X, Y), ATOM(E, Y, Z), ATOM(U, W));
+    // M(X, W) :- E(X, Y), E(Y, Z), P(W).  (stratum 0)
+    rule(dl, ATOM(M, X, W), 3, ATOM(E, X, Y), ATOM(E, Y, Z), ATOM(P, W));
+    finalize(dl);
+    assertProgram(dl,
+                  "P(a).\n"
+                  "P(b).\n"
+                  "S(a).\n"
+                  "E(a, b).\n"
+                  "E(b, a).\n"
+                  "R(W) :- S(W).\n"
+                  "U(W) :- P(W), !R(W).\n"
+                  "H(W, X) :- U(X), _p7(W).\n"
+                  "M(W, X) :- P(X), _p7(W).\n"
+                  "_p7(W) :- E(W, X), E(X, Y).\n");
+    assertStratum(dl, R, 0);
+    assertStratum(dl, U, 1);
+    assertStratum(dl, H, 1);
+    assertStratum(dl, M, 0);
+    assertStratum(dl, aux, 0);
+    canonicalModelOK(dl);
+    assertFacts(dl, U, "Ub");
+    assertFacts(dl, H, "Hab Hbb");
+    assertFacts(dl, M, "Maa Mab Mba Mbb");
+    pddlDatalogDel(dl);
 }
