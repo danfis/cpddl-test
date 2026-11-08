@@ -2754,7 +2754,7 @@ TEST_ONCE(datalog_eq_simplify)
     int P = addPred(dl, 2, "P");
     int S = addPred(dl, 1, "S");
     int H = addPred(dl, 2, "H");
-    int E = pddlDatalogAddEqPred(dl, "=");
+    int E = pddlDatalogAddEqPred(dl);
     int a = addConst(dl, "a");
     int b = addConst(dl, "b");
     int c = addConst(dl, "c");
@@ -2840,7 +2840,7 @@ TEST_ONCE(datalog_eq_simplify)
     P = addPred(dl, 2, "P");
     H = addPred(dl, 2, "H");
     int F = pddlDatalogAddFunc(dl, 1, "F");
-    E = pddlDatalogAddEqPred(dl, "=");
+    E = pddlDatalogAddEqPred(dl);
     X = pddlDatalogAddVar(dl, "X");
     Y = pddlDatalogAddVar(dl, "Y");
     Z = pddlDatalogAddVar(dl, "Z");
@@ -2877,7 +2877,7 @@ static void eqProgram(pddl_datalog_t *dl,
     p->N = addPred(dl, 2, "N");
     int E;
     if (builtin){
-        E = pddlDatalogAddEqPred(dl, "=");
+        E = pddlDatalogAddEqPred(dl);
     }else{
         E = pddlDatalogAddPred(dl, 2, "=");
     }
@@ -3011,7 +3011,7 @@ TEST_ONCE(datalog_eq_normal_form_merge)
     int D = addPred(dl, 1, "D");
     int H = addPred(dl, 1, "H");
     int I = addPred(dl, 1, "I");
-    int E = pddlDatalogAddEqPred(dl, "=");
+    int E = pddlDatalogAddEqPred(dl);
     int a = addConst(dl, "a");
     int b = addConst(dl, "b");
     int X = pddlDatalogAddVar(dl, "X");
@@ -3058,7 +3058,7 @@ TEST_ONCE(datalog_eq_errors)
     pddl_datalog_t *dl = pddlDatalogNew();
     int P = addPred(dl, 1, "P");
     int H = addPred(dl, 1, "H");
-    int E = pddlDatalogAddEqPred(dl, "=");
+    int E = pddlDatalogAddEqPred(dl);
     int a = addConst(dl, "a");
     int b = addConst(dl, "b");
     int X = pddlDatalogAddVar(dl, "X");
@@ -5118,8 +5118,8 @@ TEST_PANIC_ONCE(datalog_panic_set_func_user_id)
 TEST_PANIC_ONCE(datalog_panic_eq_pred_twice)
 {
     pddl_datalog_t *dl = pddlDatalogNew();
-    pddlDatalogAddEqPred(dl, "=");
-    pddlDatalogAddEqPred(dl, "=");
+    pddlDatalogAddEqPred(dl);
+    pddlDatalogAddEqPred(dl);
 }
 
 /*
@@ -5129,7 +5129,7 @@ TEST_PANIC_ONCE(datalog_panic_eq_pred_finalized)
 {
     pddl_datalog_t *dl = pddlDatalogNew();
     finalize(dl);
-    pddlDatalogAddEqPred(dl, "=");
+    pddlDatalogAddEqPred(dl);
 }
 
 /*
@@ -5138,7 +5138,7 @@ TEST_PANIC_ONCE(datalog_panic_eq_pred_finalized)
 TEST_PANIC_ONCE(datalog_panic_eq_pred_head)
 {
     pddl_datalog_t *dl = pddlDatalogNew();
-    int E = pddlDatalogAddEqPred(dl, "=");
+    int E = pddlDatalogAddEqPred(dl);
     int a = pddlDatalogAddConst(dl, "a");
     fact(dl, ATOM(E, a, a));
 }
@@ -5149,7 +5149,7 @@ TEST_PANIC_ONCE(datalog_panic_eq_pred_head)
 TEST_PANIC_ONCE(datalog_panic_eq_pred_user_id)
 {
     pddl_datalog_t *dl = pddlDatalogNew();
-    int E = pddlDatalogAddEqPred(dl, "=");
+    int E = pddlDatalogAddEqPred(dl);
     pddlDatalogSetPredUserId(dl, E, 1);
 }
 
