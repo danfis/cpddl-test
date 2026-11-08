@@ -5559,10 +5559,11 @@ TEST_ONCE(datalog_strat_chain)
 }
 
 /*
- * A weighted program with four strata: the weights of the facts of each
- * stratum are computed from the final weights of the lower strata.
+ * The weighted canonical model of a program with more than one stratum
+ * cannot be computed (with or without a limit), although the program is
+ * finalized and stratified, and the database is not changed.
  */
-TEST_ONCE(datalog_weighted_strat_chain)
+TEST_ONCE(datalog_weighted_strat_unsupported)
 {
     for (int t = 0; t < 2; ++t){
         pddl_datalog_weight_type_t type = PDDL_DATALOG_WEIGHT_ADD;
@@ -5573,16 +5574,10 @@ TEST_ONCE(datalog_weighted_strat_chain)
         stratChainProgram(dl, &p, pddl_true);
         finalize(dl);
         assertStratChainStrata(dl, &p);
-        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
-        // R(b) :- R(a), E(a, b).
-        assertFacts(dl, p.R, "Ra:0 Rb:1");
-        assertFacts(dl, p.U, "Uc:1 Ud:1");
-        assertFacts(dl, p.Z, "");
-        assertFacts(dl, p.Y, "Y:1");
-        // W(d) :- P(d), E(d, a), P(a).
-        assertFacts(dl, p.W, "Wa:1 Wd:1");
-        assertFacts(dl, p.K, "Kd:2");
-        assertFacts(dl, p.L, "");
+        canonicalModel(dl, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+        canonicalModelWithIntLimit(dl, 10, PDDL_DATALOG_CANONICAL_MODEL_ERR);
+        assertFacts(dl, p.R, "");
+        assertFacts(dl, p.P, "");
         pddlDatalogDel(dl);
     }
 }
@@ -5689,142 +5684,6 @@ TEST_ONCE(datalog_strat_commit)
         }
     }
     pddlDatalogDel(dl);
-}
-
-/** Predicates of the program created by weightedStratProgram() */
-struct wstrat {
-    int A, B, C, D, F, X, E, H, G, I, Q;
-};
-typedef struct wstrat wstrat_t;
-
-/** Creates the weighted program with the goal G:
- *    A.  B.                                   (static)
- *    C :- A.  (1)     D :- B.  (5)            (stratum 0)
- *    F :- X.  (0)     Q :- I.  (10)           (stratum 0, F has no facts)
- *    E :- !F.  (3)                            (stratum 1)
- *    H :- D, !C.  (1)                         (stratum 1, blocked)
- *    G :- E, D.  (1)  G :- C, !F.  (10)       (stratum 1)
- *  where I is an input predicate without facts. */
-static void weightedStratProgram(pddl_datalog_t *dl, wstrat_t *p)
-{
-    p->A = addPred(dl, 0, "A");
-    p->B = addPred(dl, 0, "B");
-    p->C = addPred(dl, 0, "C");
-    p->D = addPred(dl, 0, "D");
-    p->F = addPred(dl, 0, "F");
-    p->X = addPred(dl, 0, "X");
-    p->E = addPred(dl, 0, "E");
-    p->H = addPred(dl, 0, "H");
-    p->G = addGoalPred(dl, "G");
-    p->I = addPred(dl, 0, "I");
-    p->Q = addPred(dl, 0, "Q");
-    fact(dl, ATOM0(p->A));
-    fact(dl, ATOM0(p->B));
-    wrule(dl, 1, ATOM0(p->C), 1, ATOM0(p->A));
-    wrule(dl, 5, ATOM0(p->D), 1, ATOM0(p->B));
-    rule(dl, ATOM0(p->F), 1, ATOM0(p->X));
-    wrule(dl, 10, ATOM0(p->Q), 1, ATOM0(p->I));
-    nrule(dl, 3, ATOM0(p->E), 0, 1, ATOM0(p->F));
-    nrule(dl, 1, ATOM0(p->H), 1, 1, ATOM0(p->D), ATOM0(p->C));
-    wrule(dl, 1, ATOM0(p->G), 2, ATOM0(p->E), ATOM0(p->D));
-    nrule(dl, 10, ATOM0(p->G), 1, 1, ATOM0(p->C), ATOM0(p->F));
-}
-
-/** Weighted program with two strata and the aggregation TYPE, where
- *  GOAL_W is the expected weight of the goal */
-static void weightedStratTest(pddl_datalog_weight_type_t type, int goal_w)
-{
-    pddl_datalog_t *dl = newWeighted(type);
-    wstrat_t p;
-    weightedStratProgram(dl, &p);
-    finalize(dl);
-    assertStratum(dl, p.C, 0);
-    assertStratum(dl, p.D, 0);
-    assertStratum(dl, p.F, 0);
-    assertStratum(dl, p.E, 1);
-    assertStratum(dl, p.H, 1);
-    assertStratum(dl, p.G, 1);
-    canonicalModelOK(dl);
-    assertGoalWeight(dl, p.G, goal_w);
-    assertFacts(dl, p.C, "C:1");
-    assertFacts(dl, p.D, "D:5");
-    assertFacts(dl, p.E, "E:3");
-    assertFacts(dl, p.H, "");
-    pddlDatalogDel(dl);
-
-    // The computation with limits stops in the stratum 0 (D waits in the
-    // queue, the stratum 1 is not started), and in the stratum 1 (G waits
-    // in the queue); the commits in between restore the per-stratum state
-    dl = newWeighted(type);
-    weightedStratProgram(dl, &p);
-    finalize(dl);
-    canonicalModelWithIntLimit(dl, 2,
-                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
-    assertFacts(dl, p.C, "C:1");
-    assertFacts(dl, p.D, "D:5");
-    assertFacts(dl, p.E, "");
-    dbCommit(dl, NULL);
-    for (int rep = 0; rep < 2; ++rep){
-        pddlDatalogDBRollback(dl);
-        canonicalModelWithIntLimit(dl, 5,
-                                   PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
-        assertFacts(dl, p.E, "E:3");
-        canonicalModelOK(dl);
-        assertGoalWeight(dl, p.G, goal_w);
-    }
-
-    pddlDatalogDBRollback(dl);
-    canonicalModelWithIntLimit(dl, 5,
-                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
-    dbCommit(dl, NULL);
-    for (int rep = 0; rep < 2; ++rep){
-        pddlDatalogDBRollback(dl);
-        assertFacts(dl, p.E, "E:3");
-        canonicalModelOK(dl);
-        assertGoalWeight(dl, p.G, goal_w);
-    }
-    pddlDatalogDel(dl);
-
-    // Freezing all predicates but I and Q fails while the stratum 1 (with
-    // rules deriving frozen predicates) is not started, even though all
-    // facts of the predicates to be frozen are processed
-    dl = newWeighted(type);
-    weightedStratProgram(dl, &p);
-    finalize(dl);
-    addFactToDB(dl, ATOM0(p.I), NULL);
-    canonicalModelWithIntLimit(dl, 5,
-                               PDDL_DATALOG_CANONICAL_MODEL_GOAL_UNREACHED);
-    assertFacts(dl, p.D, "D:5");
-    assertFacts(dl, p.Q, "Q:10");
-    pddl_ivec_t input = PDDL_IVEC_INIT;
-    pddlIVecPush(&input, p.I);
-    dbCommitFail(dl, &input);
-    canonicalModelOK(dl);
-    dbCommit(dl, &input);
-    pddlIVecFree(&input);
-    pddlDatalogDel(dl);
-}
-
-/*
- * A weighted program with two strata and the sum of weights: the goal of
- * the stratum 1 is reached through a negative atom of the stratum 0, also
- * with limits stopping in either stratum and commits in between.
- */
-TEST_ONCE(datalog_weighted_strat_add)
-{
-    // G :- E, D.  1 + 3 + 5
-    weightedStratTest(PDDL_DATALOG_WEIGHT_ADD, 9);
-}
-
-/*
- * A weighted program with two strata and the maximum of weights: the goal
- * of the stratum 1 is reached through a negative atom of the stratum 0,
- * also with limits stopping in either stratum and commits in between.
- */
-TEST_ONCE(datalog_weighted_strat_max)
-{
-    // G :- E, D.  1 + max(3, 5)
-    weightedStratTest(PDDL_DATALOG_WEIGHT_MAX, 6);
 }
 
 /*
